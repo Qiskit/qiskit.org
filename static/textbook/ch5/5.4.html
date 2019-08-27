@@ -13114,7 +13114,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[113]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="o">*</span>
@@ -13147,7 +13147,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="mf">0.01</span>
@@ -13198,16 +13198,16 @@ Probability of a the majority of three replies being garbled: 0.0002980000000000
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Correcting-errors-in-qubits">Correcting errors in qubits<a class="anchor-link" href="#Correcting-errors-in-qubits">&#182;</a></h3><p>Let's just try to store a simple <code>'0'</code> or a <code>'1'</code> in some qubits. Of course, we know that noise exists in our system. This can have the effect of causing us to readout a <code>'1'</code> for a qubit that should be <code>'0'</code>, and vice versa.</p>
+<h3 id="Correcting-errors-in-qubits">Correcting errors in qubits<a class="anchor-link" href="#Correcting-errors-in-qubits">&#182;</a></h3><p>Let's just try to store a simple <code>0</code> or a <code>1</code> in some qubits. Of course, we know that noise exists in our system. This can have the effect of causing us to readout a <code>1</code> for a qubit that should be <code>0</code>, and vice versa.</p>
 <p>Here is some Qiskit code that provides a simple example of such noise. In this we go beyond the simple case of a single noise event which happens with a probability $p$. Instead we consider two forms of error that can occur. One is a gate error: an imperfection in any operation we perform. We model this here in a simple way, using so-called depolarizing noise. The effect of this will be, with probabilty $p_{gate}$ ,to replace the state of any qubit with a completely random state. For two qubit gates, it is applied independently to each qubit.</p>
-<p>The other form of noise is that for measurement. This simply flips between a <code>'0'</code> to a <code>'1'</code> and vice-versa immediately before measurement with probability $p_{meas}$.</p>
+<p>The other form of noise is that for measurement. This simply flips between a <code>0</code> to a <code>1</code> and vice-versa immediately before measurement with probability $p_{meas}$.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[72]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit.providers.aer.noise</span> <span class="k">import</span> <span class="n">NoiseModel</span>
@@ -13242,7 +13242,7 @@ Probability of a the majority of three replies being garbled: 0.0002980000000000
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[73]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">noise_model</span> <span class="o">=</span> <span class="n">get_noise</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span><span class="mf">0.01</span><span class="p">)</span>
@@ -13263,7 +13263,7 @@ Probability of a the majority of three replies being garbled: 0.0002980000000000
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[74]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">qc0</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;0&#39;</span><span class="p">)</span> <span class="c1"># initialize circuit with three qubits in the 0 state</span>
@@ -13290,7 +13290,7 @@ Probability of a the majority of three replies being garbled: 0.0002980000000000
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>{&#39;000&#39;: 9689, &#39;010&#39;: 109, &#39;001&#39;: 101, &#39;100&#39;: 98, &#39;101&#39;: 1, &#39;110&#39;: 2}
+<pre>{&#39;010&#39;: 70, &#39;100&#39;: 100, &#39;011&#39;: 1, &#39;000&#39;: 9731, &#39;001&#39;: 98}
 </pre>
 </div>
 </div>
@@ -13310,7 +13310,7 @@ Probability of a the majority of three replies being garbled: 0.0002980000000000
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[75]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">qc1</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;0&#39;</span><span class="p">)</span> <span class="c1"># initialize circuit with three qubits in the 0 state</span>
@@ -13338,7 +13338,7 @@ Probability of a the majority of three replies being garbled: 0.0002980000000000
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>{&#39;010&#39;: 2, &#39;001&#39;: 1, &#39;100&#39;: 5, &#39;011&#39;: 113, &#39;101&#39;: 154, &#39;111&#39;: 9582, &#39;110&#39;: 143}
+<pre>{&#39;010&#39;: 3, &#39;100&#39;: 5, &#39;101&#39;: 168, &#39;110&#39;: 150, &#39;111&#39;: 9530, &#39;011&#39;: 140, &#39;001&#39;: 4}
 </pre>
 </div>
 </div>
@@ -13350,15 +13350,15 @@ Probability of a the majority of three replies being garbled: 0.0002980000000000
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The number of samples that come out with a majority in the wrong state (<code>0</code> in this case) is again much less than 100, so $P&lt;1\%$. Whether we store a <code>'0'</code> or a <code>'1'</code>, we can retrieve the information with a smaller probability of error than either of our sources of noise.</p>
-<p>This was possible because the noise we considered was relatively low. As we increase $p_{meas}$ and $p_{gate}$, the higher the probability $P$ will be. The extreme case of this is either of them to have a $50/50$ chance of applying the bit flip error, <code>x</code>. For example, let's run the same circuit as before but with $p_{meas}=0.5$ and $p_{gate}=0$.</p>
+<p>The number of samples that come out with a majority in the wrong state (<code>0</code> in this case) is again much less than 100, so $P&lt;1\%$. Whether we store a <code>0</code> or a <code>1</code>, we can retrieve the information with a smaller probability of error than either of our sources of noise.</p>
+<p>This was possible because the noise we considered was relatively weak. As we increase $p_{meas}$ and $p_{gate}$, the higher the probability $P$ will be. The extreme case of this is for either of them to have a $50/50$ chance of applying the bit flip error, <code>x</code>. For example, let's run the same circuit as before but with $p_{meas}=0.5$ and $p_{gate}=0$.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[76]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">noise_model</span> <span class="o">=</span> <span class="n">get_noise</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">0.0</span><span class="p">)</span>
@@ -13380,7 +13380,7 @@ Probability of a the majority of three replies being garbled: 0.0002980000000000
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>{&#39;111&#39;: 1247, &#39;110&#39;: 1226, &#39;000&#39;: 1238, &#39;010&#39;: 1256, &#39;001&#39;: 1266, &#39;100&#39;: 1299, &#39;011&#39;: 1263, &#39;101&#39;: 1205}
+<pre>{&#39;010&#39;: 1215, &#39;100&#39;: 1278, &#39;101&#39;: 1304, &#39;111&#39;: 1173, &#39;011&#39;: 1255, &#39;001&#39;: 1258, &#39;110&#39;: 1310, &#39;000&#39;: 1207}
 </pre>
 </div>
 </div>
@@ -13402,16 +13402,16 @@ Probability of a the majority of three replies being garbled: 0.0002980000000000
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Storing-qubits">Storing qubits<a class="anchor-link" href="#Storing-qubits">&#182;</a></h3><p>So far, we have considered cases where there is no delay between encoding and decoding. For qubits, this means that there is no significant amount of time that passes between initializing the circuit, and making the final measurements.</p>
 <p>However, there are many cases for which there will be a significant delay. As an obvious example, one may wish to encode a quantum state and store it for a long time, like a quantum hard drive. A less obvious but much more important example is performing fault-tolerant quantum computation itself. For this, we need to store quantum states and preserve their integrity during the computation. This must also be done in a way that allows us to manipulate the stored information in any way we need, and which corrects any errors we may introduce when performing the manipulations.</p>
-<p>When considering this delay, we need account for the fact that errors do not only occur when something happens (like a gate or measurement), they also occur when the qubits are idle. Such noise is due to the fact that the qubits interact with each other and their environment. The longer we leave our qubits idle for, the greater the effects of this noise becomes. If we leave them for long enough, we'll encounter a situation like the $p_{meas}=0.5$ case above, where the noise is too strong for errors to be reliably corrected.</p>
+<p>In all cases, we need account for the fact that errors do not only occur when something happens (like a gate or measurement), they also occur when the qubits are idle. Such noise is due to the fact that the qubits interact with each other and their environment. The longer we leave our qubits idle for, the greater the effects of this noise becomes. If we leave them for long enough, we'll encounter a situation like the $p_{meas}=0.5$ case above, where the noise is too strong for errors to be reliably corrected.</p>
 <p>The solution is to keep measuring throughout. Don't leave your qubit idle for too long, but keep extracting information to keep track of the errors that have occurred.</p>
 <p>For the case of classical information, where we simply wish to store a <code>0</code> or <code>1</code>, this can be done by just constantly measuring the value of each qubit. Then we will keep track of when the values change due to noise, and can easily deduce a history of when errors occurred.</p>
 <p>For quantum information, however, it is not so easy. For example, consider the case that we wish to encode the state $\left|+\right\rangle$. Our encoding is such that</p>
 $$\left|0\right\rangle \rightarrow \left|000\right\rangle,~~~ \left|1\right\rangle \rightarrow \left|111\right\rangle.$$<p>To encode the $\left|+\right\rangle$ state we therefore need</p>
 $$\left|+\right\rangle=\frac{1}{\sqrt{2}}\left(\left|0\right\rangle+\left|1\right\rangle\right)\rightarrow \frac{1}{\sqrt{2}}\left(\left|000\right\rangle+\left|111\right\rangle\right).$$<p>It will be convenient to now introduce some terminology. In the expression above, there are two different concepts that we can refer to as a 'qubit'. One is that of the 'physical qubit'. These are the actual physical qubits that exist on a chip. There are three physical qubits in the above expression. The other type of qubit is the 'logical' qubit. This is a qubit state, encoded across multiple physical qubits, with the hope that our physical qubit will experience less noise than the physical qubits they are made up of. In the above expression there is a single logical qubit, which is in the state $\left|+\right\rangle$ and encoded across three physical qubits.</p>
 <p>With the repetition encoding that we are using, a z measurement of the logical qubit is done using a z measurement of each physical qubit. The final result for the logical measurement is decoded from the physical qubit measurement results by simply looking which output is in the majority.</p>
-<p>As mentioned earlier, we can keep track of errors on logical qubits that are stored for a long time by constantly performing z measurements of the physical qubits. However, note that this effectively corresponds to constantly peforming z measurements of the physical qubit. This is fine if we are simply storing a <code>0</code> or <code>1</code>, but it has undesired effects if we are storing a superposition. Specifically: the first time we do such a check for errors, we will collapse the superposition!</p>
+<p>As mentioned earlier, we can keep track of errors on logical qubits that are stored for a long time by constantly performing z measurements of the physical qubits. However, note that this effectively corresponds to constantly peforming z measurements of the physical qubits. This is fine if we are simply storing a <code>0</code> or <code>1</code>, but it has undesired effects if we are storing a superposition. Specifically: the first time we do such a check for errors, we will collapse the superposition!</p>
 <p>This is not ideal. If we wanted to do some computation on our logical qubit, or is we wish to peform a basis change before final measurement, we need to preserve the superposition. Destroying it is an error. But this is not an error caused by imperfections in our devices. It is an error that we have introduced as part of our attempts to correct errors. And since we cannot hope to recreate any arbitrary superposition stored in our quantum computer, it is an error than cannot be corrected.</p>
-<p>For this reason, we must find another way of keeping track of the errors that occur when our logical qubit is stored for long times. This should give us the information we need to correct errors, and to decode the final measurment result with high probability. However, it should not cause uncorrectable errors to occur during the process by collapsing superpositions that we need to preserve.</p>
+<p>For this reason, we must find another way of keeping track of the errors that occur when our logical qubit is stored for long times. This should give us the information we need to detect and correct errors, and to decode the final measurment result with high probability. However, it should not cause uncorrectable errors to occur during the process by collapsing superpositions that we need to preserve.</p>
 <p>The way to do this is with the following circuit element.</p>
 
 </div>
@@ -13419,7 +13419,7 @@ $$\left|+\right\rangle=\frac{1}{\sqrt{2}}\left(\left|0\right\rangle+\left|1\righ
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[114]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="o">*</span>
@@ -13469,14 +13469,14 @@ ancilla_qubit_0: |0&gt;┤ X ├┤ X ├┤M├
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Here we have three physical qubits. Two are called 'code qubits', and the other is called an 'ancilla qubit'. One bit of output is extracted, called the syndrome bit.</p>
 <p>The ancilla qubit will always be initialized in state $\left|0\right\rangle$. The code qubits, however, can be initialized in different states. Let's see what output we get for different initial states of the code qubits. We'll do this by creating a circuit <code>qc_init</code> that prepares the code qubits in some state, and then run the circuit <code>qc_init+qc</code>.</p>
-<p>First, the trivial case. <code>qc_init</code> does nothing, and so the code qubits are initially $\left|00\right\rangle$.</p>
+<p>First, the trivial case: <code>qc_init</code> does nothing, and so the code qubits are initially $\left|00\right\rangle$.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[115]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">qc_init</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">cq</span><span class="p">)</span>
@@ -13484,7 +13484,7 @@ ancilla_qubit_0: |0&gt;┤ X ├┤ X ├┤M├
 <span class="nb">print</span><span class="p">(</span><span class="n">qc_init</span><span class="o">+</span><span class="n">qc</span><span class="p">)</span>
 
 <span class="n">counts</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span> <span class="n">qc_init</span><span class="o">+</span><span class="n">qc</span><span class="p">,</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">),</span><span class="n">shots</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_counts</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Results:&#39;</span><span class="p">,</span><span class="n">counts</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13510,7 +13510,8 @@ ancilla_qubit_0: |0&gt;┤ X ├┤ X ├┤M├
                     └───┘└───┘└╥┘
   syndrome_bit_0: 0 ═══════════╩═
                                  
-{&#39;0&#39;: 10000}
+
+Results: {&#39;0&#39;: 10000}
 </pre>
 </div>
 </div>
@@ -13530,7 +13531,7 @@ ancilla_qubit_0: |0&gt;┤ X ├┤ X ├┤M├
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[116]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">qc_init</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">cq</span><span class="p">)</span>
@@ -13539,7 +13540,7 @@ ancilla_qubit_0: |0&gt;┤ X ├┤ X ├┤M├
 <span class="nb">print</span><span class="p">(</span><span class="n">qc_init</span><span class="o">+</span><span class="n">qc</span><span class="p">)</span>
 
 <span class="n">counts</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span> <span class="n">qc_init</span><span class="o">+</span><span class="n">qc</span><span class="p">,</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">),</span><span class="n">shots</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_counts</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Results:&#39;</span><span class="p">,</span><span class="n">counts</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13565,7 +13566,8 @@ ancilla_qubit_0: |0&gt;─────┤ X ├┤ X ├┤M├
                          └───┘└───┘└╥┘
   syndrome_bit_0: 0 ════════════════╩═
                                       
-{&#39;0&#39;: 10000}
+
+Results: {&#39;0&#39;: 10000}
 </pre>
 </div>
 </div>
@@ -13585,7 +13587,7 @@ ancilla_qubit_0: |0&gt;─────┤ X ├┤ X ├┤M├
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[117]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">qc_init</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">cq</span><span class="p">)</span>
@@ -13596,7 +13598,7 @@ ancilla_qubit_0: |0&gt;─────┤ X ├┤ X ├┤M├
 <span class="nb">print</span><span class="p">(</span><span class="n">qc_init</span><span class="o">+</span><span class="n">qc</span><span class="p">)</span>
 
 <span class="n">counts</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span> <span class="n">qc_init</span><span class="o">+</span><span class="n">qc</span><span class="p">,</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">),</span><span class="n">shots</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_counts</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Results:&#39;</span><span class="p">,</span><span class="n">counts</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13622,7 +13624,8 @@ ancilla_qubit_0: |0&gt;──────────┤ X ├┤ X ├┤M├
                               └───┘└───┘└╥┘
   syndrome_bit_0: 0 ═════════════════════╩═
                                            
-{&#39;0&#39;: 10000}
+
+Results: {&#39;0&#39;: 10000}
 </pre>
 </div>
 </div>
@@ -13642,7 +13645,7 @@ ancilla_qubit_0: |0&gt;──────────┤ X ├┤ X ├┤M├
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[118]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">qc_init</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">cq</span><span class="p">)</span>
@@ -13654,7 +13657,7 @@ ancilla_qubit_0: |0&gt;──────────┤ X ├┤ X ├┤M├
 <span class="nb">print</span><span class="p">(</span><span class="n">qc_init</span><span class="o">+</span><span class="n">qc</span><span class="p">)</span>
 
 <span class="n">counts</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span> <span class="n">qc_init</span><span class="o">+</span><span class="n">qc</span><span class="p">,</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">),</span><span class="n">shots</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_counts</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Results:&#39;</span><span class="p">,</span><span class="n">counts</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13680,7 +13683,8 @@ ancilla_qubit_0: |0&gt;───────────────┤ X ├┤
                                    └───┘└───┘└╥┘
   syndrome_bit_0: 0 ══════════════════════════╩═
                                                 
-{&#39;1&#39;: 10000}
+
+Results: {&#39;1&#39;: 10000}
 </pre>
 </div>
 </div>
@@ -13695,7 +13699,7 @@ ancilla_qubit_0: |0&gt;───────────────┤ X ├┤
 <p>For this the output is always <code>'1'</code>. If you try the input $\left|01\right\rangle$ or $\left|10\right\rangle$ you will find the same.</p>
 <p>This measurement is therefore telling us about a collective property of multiple qubits. Specifically, it looks at the two code qubits and determines whether their state is the same or different in the z basis. For basis states that are the same in the z basis, like $\left|00\right\rangle$ and $\left|11\right\rangle$, the measurement simply returns <code>'0'</code>. It also does so for any superposition of these. Since it does not distinguish between these states in any way, it also does not collapse such a superposition.</p>
 <p>Similarly, For basis states that are different in the z basis it returns a <code>'1'</code>. This occurs for $\left|01\right\rangle$, $\left|10\right\rangle$ or any superposition thereof.</p>
-<p>Now suppose we apply such a 'syndrome measurement' on all pairs of physical qubits in our repetition code. If their state is described by a repeated $\left|0\right\rangle$, a repeated $\left|1\right\rangle$, or any superposition thereof, all the syndrome measurements will return <code>'0'</code>. Given this result, we will know that our states are indeed encoded in the repeated states that we want them to be, and can deduce that no errors have occurred. If some syndrome measurements return <code>'1'</code>, however, it is a signature of an error. We can therefore use these measurement results to determine where the error most likely occurred.</p>
+<p>Now suppose we apply such a 'syndrome measurement' on all pairs of physical qubits in our repetition code. If their state is described by a repeated $\left|0\right\rangle$, a repeated $\left|1\right\rangle$, or any superposition thereof, all the syndrome measurements will return <code>'0'</code>. Given this result, we will know that our states are indeed encoded in the repeated states that we want them to be, and can deduce that no errors have occurred. If some syndrome measurements return <code>'1'</code>, however, it is a signature of an error. We can therefore use these measurement results to determine how to decode the result.</p>
 
 </div>
 </div>
@@ -13711,12 +13715,11 @@ ancilla_qubit_0: |0&gt;───────────────┤ X ├┤
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[119]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit.ignis.verification.topological_codes</span> <span class="k">import</span> <span class="n">RepetitionCode</span>
-<span class="kn">from</span> <span class="nn">qiskit.ignis.verification.topological_codes</span> <span class="k">import</span> <span class="n">GraphDecoder</span>
-<span class="kn">from</span> <span class="nn">qiskit.ignis.verification.topological_codes</span> <span class="k">import</span> <span class="n">lookuptable_decoding</span><span class="p">,</span> <span class="n">postselection_decoding</span>
+<span class="kn">from</span> <span class="nn">qiskit.ignis.verification.topological_codes</span> <span class="k">import</span> <span class="n">lookuptable_decoding</span>
 </pre></div>
 
     </div>
@@ -13734,10 +13737,10 @@ ancilla_qubit_0: |0&gt;───────────────┤ X ├┤
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[120]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="mi">3</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">3</span>
 </pre></div>
 
     </div>
@@ -13755,7 +13758,7 @@ ancilla_qubit_0: |0&gt;───────────────┤ X ├┤
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[121]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">T</span> <span class="o">=</span> <span class="mi">1</span>
@@ -13776,10 +13779,10 @@ ancilla_qubit_0: |0&gt;───────────────┤ X ├┤
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[122]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">code</span> <span class="o">=</span> <span class="n">RepetitionCode</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="n">T</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">code</span> <span class="o">=</span> <span class="n">RepetitionCode</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">T</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13797,7 +13800,7 @@ ancilla_qubit_0: |0&gt;───────────────┤ X ├┤
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[123]:</div>
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">code</span><span class="o">.</span><span class="n">qubit_registers</span>
@@ -13813,7 +13816,7 @@ ancilla_qubit_0: |0&gt;───────────────┤ X ├┤
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[123]:</div>
+    <div class="prompt output_prompt">Out[17]:</div>
 
 
 
@@ -13838,7 +13841,7 @@ ancilla_qubit_0: |0&gt;───────────────┤ X ├┤
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[124]:</div>
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">code</span><span class="o">.</span><span class="n">code_qubit</span>
@@ -13854,7 +13857,7 @@ ancilla_qubit_0: |0&gt;───────────────┤ X ├┤
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[124]:</div>
+    <div class="prompt output_prompt">Out[18]:</div>
 
 
 
@@ -13879,7 +13882,7 @@ ancilla_qubit_0: |0&gt;───────────────┤ X ├┤
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[125]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">log</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;0&#39;</span><span class="p">,</span><span class="s1">&#39;1&#39;</span><span class="p">]:</span>
@@ -13961,7 +13964,7 @@ round_0_link_bit_1: 0 ═══════════════════�
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In these circuits, we have two types of physical qubits. There are the 'code qubits', which are the three physical qubits across which the logical state is encoded. There are also the 'link qubits', which serve as the ancilla qubits for the syndrome measurements.</p>
-<p>Our single round of syndrome measurements in these circuits consist of just two syndrome measurements. One compares code qubits 0 and 1, and the other compares code qubits 1 and 2. One might expect that a further measurement, comparing code qubits 0 and 2, should be required to create a full set. However, these two are sufficient. This is because the information on whether 0 and 2 have the same z basis state can be inferred from the same information about 0 and 1 with that for 1 and 2. Indeed, for $d$ qubits, we can get the required information from just $d-1$ syndrome measurements of neighbouring pairs of qubits.</p>
+<p>Our single round of syndrome measurements in these circuits consist of just two syndrome measurements. One compares code qubits 0 and 1, and the other compares code qubits 1 and 2. One might expect that a further measurement, comparing code qubits 0 and 2, should be required to create a full set. However, these two are sufficient. This is because the information on whether 0 and 2 have the same z basis state can be inferred from the same information about 0 and 1 with that for 1 and 2. Indeed, for $n$ qubits, we can get the required information from just $n-1$ syndrome measurements of neighbouring pairs of qubits.</p>
 <p>Let's now run these circuits without noise and see what happens.</p>
 
 </div>
@@ -13969,11 +13972,194 @@ round_0_link_bit_1: 0 ═══════════════════�
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[126]:</div>
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">circuits</span> <span class="o">=</span> <span class="n">code</span><span class="o">.</span><span class="n">get_circuit_list</span><span class="p">()</span>
 <span class="n">job</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span> <span class="n">circuits</span><span class="p">,</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">)</span> <span class="p">)</span>
+<span class="k">for</span> <span class="n">log</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;0&#39;</span><span class="p">,</span><span class="s1">&#39;1&#39;</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Logical&#39;</span><span class="p">,</span><span class="n">log</span><span class="p">,</span><span class="s1">&#39;:&#39;</span><span class="p">,</span><span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="n">log</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+Logical 0 : {&#39;000 00&#39;: 1024}
+
+Logical 1 : {&#39;111 00&#39;: 1024}
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Here we see that the output comes in two parts. The part on the right holds the outcomes of the two syndrome measurements. That on the left holds the outcomes of the three final measurements of the code qubits.</p>
+<p>For more measurement rounds, $T=4$ for example, we would have the results of more syndrome measurements on the right.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">code</span> <span class="o">=</span> <span class="n">RepetitionCode</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="n">circuits</span> <span class="o">=</span> <span class="n">code</span><span class="o">.</span><span class="n">get_circuit_list</span><span class="p">()</span>
+<span class="n">job</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span> <span class="n">circuits</span><span class="p">,</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">)</span> <span class="p">)</span>
+<span class="k">for</span> <span class="n">log</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;0&#39;</span><span class="p">,</span><span class="s1">&#39;1&#39;</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Logical&#39;</span><span class="p">,</span><span class="n">log</span><span class="p">,</span><span class="s1">&#39;:&#39;</span><span class="p">,</span><span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="n">log</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+Logical 0 : {&#39;000 00 00 00 00&#39;: 1024}
+
+Logical 1 : {&#39;111 00 00 00 00&#39;: 1024}
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>For more repetition, $n=5$ for example, each set of measurements would be larger. The final measurement on the left would be of $n$ qubits. The $T$ syndrome measurements would each be of the $n-1$ possible neighbouring pairs.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">code</span> <span class="o">=</span> <span class="n">RepetitionCode</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="n">circuits</span> <span class="o">=</span> <span class="n">code</span><span class="o">.</span><span class="n">get_circuit_list</span><span class="p">()</span>
+<span class="n">job</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span> <span class="n">circuits</span><span class="p">,</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">)</span> <span class="p">)</span>
+<span class="k">for</span> <span class="n">log</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;0&#39;</span><span class="p">,</span><span class="s1">&#39;1&#39;</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Logical&#39;</span><span class="p">,</span><span class="n">log</span><span class="p">,</span><span class="s1">&#39;:&#39;</span><span class="p">,</span><span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="n">log</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+Logical 0 : {&#39;00000 0000 0000 0000 0000&#39;: 1024}
+
+Logical 1 : {&#39;11111 0000 0000 0000 0000&#39;: 1024}
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">code</span> <span class="o">=</span> <span class="n">RepetitionCode</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="n">circuits</span> <span class="o">=</span> <span class="n">code</span><span class="o">.</span><span class="n">get_circuit_list</span><span class="p">()</span>
+<span class="n">job</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span> <span class="n">circuits</span><span class="p">,</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">)</span> <span class="p">)</span>
+<span class="k">for</span> <span class="n">log</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;0&#39;</span><span class="p">,</span><span class="s1">&#39;1&#39;</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Logical&#39;</span><span class="p">,</span><span class="n">log</span><span class="p">,</span><span class="s1">&#39;:&#39;</span><span class="p">,</span><span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="n">log</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+Logical 0 : {&#39;000 00 00 00 00&#39;: 1024}
+
+Logical 1 : {&#39;111 00 00 00 00&#39;: 1024}
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now let's return to the $n=3$, $T=1$ example and look at a case with some noise.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">code</span> <span class="o">=</span> <span class="n">RepetitionCode</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">noise_model</span> <span class="o">=</span> <span class="n">get_noise</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span><span class="mf">0.2</span><span class="p">)</span>
+
+<span class="n">circuits</span> <span class="o">=</span> <span class="n">code</span><span class="o">.</span><span class="n">get_circuit_list</span><span class="p">()</span>
+<span class="n">job</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span> <span class="n">circuits</span><span class="p">,</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">),</span> <span class="n">noise_model</span><span class="o">=</span><span class="n">noise_model</span> <span class="p">)</span>
 <span class="n">raw_results</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="k">for</span> <span class="n">log</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;0&#39;</span><span class="p">,</span><span class="s1">&#39;1&#39;</span><span class="p">]:</span>
     <span class="n">raw_results</span><span class="p">[</span><span class="n">log</span><span class="p">]</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="n">log</span><span class="p">)</span>
@@ -13998,11 +14184,11 @@ round_0_link_bit_1: 0 ═══════════════════�
 <pre>
 ========= logical 0 =========
 
-{&#39;000 00&#39;: 1024}
+{&#39;000 10&#39;: 80, &#39;001 00&#39;: 68, &#39;010 01&#39;: 45, &#39;110 01&#39;: 14, &#39;111 00&#39;: 13, &#39;111 11&#39;: 2, &#39;010 00&#39;: 88, &#39;011 10&#39;: 8, &#39;101 10&#39;: 9, &#39;010 11&#39;: 18, &#39;001 11&#39;: 11, &#39;011 00&#39;: 28, &#39;111 10&#39;: 4, &#39;011 11&#39;: 8, &#39;100 00&#39;: 56, &#39;011 01&#39;: 16, &#39;100 11&#39;: 11, &#39;101 11&#39;: 1, &#39;100 10&#39;: 16, &#39;000 00&#39;: 174, &#39;010 10&#39;: 33, &#39;111 01&#39;: 7, &#39;110 10&#39;: 14, &#39;110 11&#39;: 11, &#39;100 01&#39;: 30, &#39;110 00&#39;: 22, &#39;001 01&#39;: 30, &#39;000 11&#39;: 36, &#39;000 01&#39;: 102, &#39;001 10&#39;: 35, &#39;101 01&#39;: 11, &#39;101 00&#39;: 23}
 
 ========= logical 1 =========
 
-{&#39;111 00&#39;: 1024}
+{&#39;000 10&#39;: 7, &#39;001 00&#39;: 19, &#39;010 01&#39;: 14, &#39;110 01&#39;: 40, &#39;111 00&#39;: 145, &#39;111 11&#39;: 38, &#39;010 00&#39;: 25, &#39;011 10&#39;: 57, &#39;101 10&#39;: 32, &#39;010 11&#39;: 9, &#39;001 11&#39;: 11, &#39;011 00&#39;: 50, &#39;111 10&#39;: 75, &#39;011 11&#39;: 24, &#39;100 00&#39;: 21, &#39;011 01&#39;: 30, &#39;100 11&#39;: 12, &#39;101 11&#39;: 37, &#39;100 10&#39;: 14, &#39;000 00&#39;: 11, &#39;010 10&#39;: 13, &#39;111 01&#39;: 73, &#39;110 10&#39;: 29, &#39;110 11&#39;: 15, &#39;100 01&#39;: 23, &#39;110 00&#39;: 51, &#39;001 01&#39;: 15, &#39;000 11&#39;: 5, &#39;000 01&#39;: 11, &#39;001 10&#39;: 21, &#39;101 01&#39;: 48, &#39;101 00&#39;: 49}
 </pre>
 </div>
 </div>
@@ -14014,10 +14200,134 @@ round_0_link_bit_1: 0 ═══════════════════�
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Here we see that the output comes in two parts. The part on the right holds the outcomes of the two syndrome measurements. That on the left holds the outcomes of the three final measurements of the code qubits.</p>
-<p>If errors occured, we would see a perturbation of these results. For example, consider the getting the outcome <code>'001 01'</code>. What can we deduce from this?</p>
-<p>Here the <code>01</code> to the right denotes that code qubit 0 and code qubit 1 have been found to be in different z basis states (due to the error on the former), while code qubit 1 and code qubit 2 have been found to be in the same state. This suggests a single error on code qubit 0 before the syndrome measurement occurred. For the final readout of the code qubits on the left we find the result of code qubit 0 to be in the minority, which backs up our suspicion on an error on code qubit 0. We therefore deduce that this result came from an encoded logical <code>0</code>, perturbed by a single error.</p>
-<p>Here it was easy to deduce the error from the measurement results. But this is because $d$ and $T$ here are small, and only a single error occured. In general, the decoding will be more complex. For this we need to develop an algorithm to perform our decoding for us.</p>
+<p>Here we have created <code>raw_results</code>, a dictionary that holds both the results for a circuit encoding a logical <code>0</code> and <code>1</code> encoded for a logical <code>1</code>.</p>
+<p>Our task when confronted with any of the possible outcomes we see here is to determine what the outcome should have been, if there was no noise. For an outcome of <code>'000 00'</code> or <code>'111 00'</code>, the answer is obvious. These are the results we just saw for a logical <code>0</code> and logical <code>1</code>, respectively, when no errors occur. The former is the most common outcome for the logical <code>0</code> even with noise, and the latter is the most common for the logical <code>1</code>. We will therefore conclude that the outcome was indeed that for logical <code>0</code> whenever we encounter <code>'000 00'</code>, and the same for logical <code>1</code> when we encounter <code>'111 00'</code>.</p>
+<p>Though this tactic is optimal, it can nevertheless fail. Note that <code>'111 00'</code> typically occurs in a handful of cases for an encoded <code>0</code>, and <code>'00 00'</code> similarly occurs for an encoded <code>1</code>. In this case, through no fault of our own, we will incorrectly decode the output. In these cases, a large number of errors conspired to make it look like we had a noiseless case of the opposite logical value, and so correction becomes impossible.</p>
+<p>We can employ a similar tactic to decode all other outcomes. The outcome <code>'001 00'</code>, for example, occurs far more for a logical <code>0</code> than a logical <code>1</code>. This is because it could be caused by just a single measurement error in the former case (which incorrectly reports a single <code>0</code> to be <code>1</code>), but would require at least two errors in the latter. So whenever we see <code>'001 00'</code>, we can decode it as a logical <code>0</code>.</p>
+<p>Applying this tactic over all the strings is a form of so-called 'lookup table decoding'. This is where every possible outcome is analyzed, and the most likely value to decode it as is determined. For many qubits, this quickly becomes intractable, as the number of possible outcomes becomes so large. In these cases, more algorithmic decoders are needed. However, lookup table decoding works well for testing out small codes.</p>
+<p>We can use tools in Qiskit to implement lookup table decoding for any code. For this we need two sets of results. One is the set of results that we actually want to decode, and for which we want to calcate the probability of incorrect decoding, $P$. We will use the <code>raw_results</code> we already have for this.</p>
+<p>The other set of results is one to be used as the lookup table. This will need to be run for a large number of samples, to ensure that it gets good statistics for each possible oiutcome. We'll use <code>shots=10000</code>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">job</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span> <span class="n">circuits</span><span class="p">,</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">),</span> <span class="n">noise_model</span><span class="o">=</span><span class="n">noise_model</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">10000</span> <span class="p">)</span>
+<span class="n">table_results</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">log</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;0&#39;</span><span class="p">,</span><span class="s1">&#39;1&#39;</span><span class="p">]:</span>
+    <span class="n">table_results</span><span class="p">[</span><span class="n">log</span><span class="p">]</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="n">log</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>With this data, which we call <code>table_results</code>, we can now use the <code>lookuptable_decoding</code> function from Qiskit. This takes each outcome from <code>raw_results</code> and decodes it with the information in <code>table_results</code>. Then it checks if the decoding was correct, and uses this information to calculate $P$.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">P</span> <span class="o">=</span> <span class="n">lookuptable_decoding</span><span class="p">(</span><span class="n">raw_results</span><span class="p">,</span><span class="n">table_results</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;P =&#39;</span><span class="p">,</span><span class="n">P</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>P = {&#39;0&#39;: 0.201, &#39;1&#39;: 0.2073}
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Here we find $P$ to be similar to $p_{meas}$ and $p_{gate}$. The value of $P$ for an encoded <code>1</code> is higher than that for <code>0</code>. This is because the encoding of <code>1</code> requires the application of <code>x</code> gates, which are an additional source of noise.</p>
+<p>As always with quantum error correction, more impressive results can be found when the noise is not so strong. For example, $p_{meas}=p_{gate}=0.1$</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">code</span> <span class="o">=</span> <span class="n">RepetitionCode</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">noise_model</span> <span class="o">=</span> <span class="n">get_noise</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.1</span><span class="p">)</span>
+
+<span class="n">circuits</span> <span class="o">=</span> <span class="n">code</span><span class="o">.</span><span class="n">get_circuit_list</span><span class="p">()</span>
+
+<span class="n">job</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span> <span class="n">circuits</span><span class="p">,</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">),</span> <span class="n">noise_model</span><span class="o">=</span><span class="n">noise_model</span> <span class="p">)</span>
+<span class="n">raw_results</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">log</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;0&#39;</span><span class="p">,</span><span class="s1">&#39;1&#39;</span><span class="p">]:</span>
+    <span class="n">raw_results</span><span class="p">[</span><span class="n">log</span><span class="p">]</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="n">log</span><span class="p">)</span>
+
+<span class="n">job</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span> <span class="n">circuits</span><span class="p">,</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">),</span> <span class="n">noise_model</span><span class="o">=</span><span class="n">noise_model</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">10000</span> <span class="p">)</span>
+<span class="n">table_results</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">log</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;0&#39;</span><span class="p">,</span><span class="s1">&#39;1&#39;</span><span class="p">]:</span>
+    <span class="n">table_results</span><span class="p">[</span><span class="n">log</span><span class="p">]</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="n">log</span><span class="p">)</span>
+    
+<span class="n">P</span> <span class="o">=</span> <span class="n">lookuptable_decoding</span><span class="p">(</span><span class="n">raw_results</span><span class="p">,</span><span class="n">table_results</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;P =&#39;</span><span class="p">,</span><span class="n">P</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>P = {&#39;0&#39;: 0.0678, &#39;1&#39;: 0.0733}
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Here $P$ is less than either $p_{meas}$ or $p_{gate}$, and much less than the two combined. We therefore have a considerable improvement. If you try it with larger values of $n$ and you'll see even better results. Though note that the value of <code>shots</code> used may need to be increased also.</p>
 
 </div>
 </div>
@@ -14031,18 +14341,32 @@ round_0_link_bit_1: 0 ═══════════════════�
 </li>
 <li><p>Information about errors is extracted constantly through a process of 'syndrome' measurement. These consist of measurements that extract no information about the logical stored information. Instead they assess collective properties of groups of physical qubits, in order to determine when faults arise in the encoding of the logical qubits.</p>
 </li>
-<li><p>The information from syndrome measurements allows the effects of errors to be identified and mitigated for with high probability. This can be moderately complex. The success of a proposal for error correction therefore depends also on how quickly and effectively the decoding can be performed. This neccessitates the design of good decoding algorithms.</p>
+<li><p>The information from syndrome measurements allows the effects of errors to be identified and mitigated for with high probability. This requires a decoding method.</p>
 </li>
 </ol>
 <p>There is another basic principle for which the repetition code is not such a good example.</p>
 <ol>
-<li>Manipulating stored information must require action on an (ideally) large number of physical qubits. The minimum number required is known as the code distance, $d$. Possible manipulations include performing an <code>x</code> operation on the logical qubit (flipping an encoded $\left|0\right\rangle$ to an encoded $\left|1\right\rangle$, and vice-versa), or performing a logical z measurement (distinguishing an encoded $\left|0\right\rangle$ from an encoded $\left|1\right\rangle$).</li>
+<li>Manipulating stored information must require action on multiple physical qubits. The minimum number required for any code is is known as the distance of the code, $d$. Possible manipulations include performing an <code>x</code> operation on the logical qubit (flipping an encoded $\left|0\right\rangle$ to an encoded $\left|1\right\rangle$, and vice-versa), or performing a logical z measurement (distinguishing an encoded $\left|0\right\rangle$ from an encoded $\left|1\right\rangle$).</li>
 </ol>
-<p>In terms of making it hard to peform a logical <code>x</code>, the repetition code cannot be beaten: All code qubits must be flipped to flip the logical value. For a z measurement, however, the repetition code is very poor. In the ideal case of no errors, the logical z basis information is repeated across every code qubit. Measuring any single code qubit is therefore sufficient to deduce the logical value. Overall, therefore, the code distance of the repetition code is $1$. This is also reflected by the fact that the code is unable to detect and correct logical <code>z</code> errors.</p>
+<p>This makes it harder to perform operations on logical qubits when required: both for us, and for errors. The latter is, of course, the reason why this behaviour is required. If logical information could be acessed using only a single physical qubit, it would always be possible for single stray errors to disturb the logical qubit. The aim is usually to make it relatively straightforward for us to perform logical operations, given that we know how to do it, but hard for noise to achieve it by random chance.</p>
+<p>In terms of making it hard for noise to peform a logical <code>x</code>, the repetition code cannot be beaten: All code qubits must be flipped to flip the logical value. From this perspective, $d=n$. For a z measurement, however, the repetition code is very poor. In the ideal case of no errors, the logical z basis information is repeated across every code qubit. Measuring any single code qubit is therefore sufficient to deduce the logical value. For this logical operation, and the overal distance, is therefore $d=1$ for the repetition code. This is also reflected by the fact that the code is unable to detect and correct logical <code>z</code> errors.</p>
 <p>For a better example of quantum error correction, we therefore need to find alternatives to the repetition approach. One of the foremost examples is the surface code, which will be added to this textbook as soon as it is implemented in Ignis.</p>
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
 </div>
     </div>
   </div>
