@@ -13108,34 +13108,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="5.5-Measurement-Error-Mitigation">5.5 Measurement Error Mitigation<a class="anchor-link" href="#5.5-Measurement-Error-Mitigation">&#182;</a></h1>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">&#182;</a></h2><p>The last step of a typical quantum experiment is to perform a measurement on the qubits in the circuit. Although the qubit state $|\Psi\rangle$ (or more generally the density matrix $\rho$) is the general description of the quantum state, in a typical strong projective measurement our measurement <em>projects</em> the general state into a specific computational state $|x\rangle$ (where $x$ is a bitstring, e.g.,  <code>1001010</code>) The probability of measuring bitstring $x$ is given by:
-$$P_x = \mathrm{Trace}(\langle x|\rho|x \rangle)$$
-Therefore, the measurement process is stochastic. The above distribution of $x$ given a state $\rho$ is true only in the absence of measurement errors. There are multiple sources of possible measurement error, all of which are dependent on the physical mechanism of measurement in the system. For superconducting qubits coupled to readout cavities [<a href="#ref1">1</a>,<a href="#ref2">2</a>,<a href="#ref3">3</a>,<a href="#ref4">4</a>,<a href="#ref5">5</a>] the state of the qubit is determined by measurement the response of a microwave tone incident on the readout cavity. The cavity signal is measured for some time where $V(t)$ is the complex amplitude of the signal which is converted to a single complex number based on a measurement kernel 
-$$V = \int_0^{T} V(t) K(t) dt $$
-which is then turned into a <em>bit</em> by a nonlinear discriminator [<a href="#ref6">6</a>]. The simplest example being if $|V|&lt;V_0$ then the qubit was in state 0 and otherwise the qubit was in state 1.</p>
-<p>As discussed in [<a href="#ref6">6</a>] there are classical sources of noise on the signal that lead to misidentification of the qubit state, but it can also happen that the qubit decays due to $T_1$ during the measurement. There are other sources of crosstalk (to numerous to enumerate) such as classical crosstalk on the lines and crosstalk between resonantors on chip. All of these issues lead to a new probability distribution $\tilde{P}_{\rho}$ for a given state. Given certain assumptions about these errors and appropriate calibration we can attempt to correct the skew in the probability distribution <em>on average</em>.</p>
-<h3 id="References">References<a class="anchor-link" href="#References">&#182;</a></h3><p>[1]<a id="ref1"></a> Alexandre Blais, Ren-Shou Huang, Andreas Wallraff, S. M. Girvin, and R. J. Schoelkopf, Cavity quantum electrodynamics for superconducting electrical circuits: An architecture for quantum computation, <a href="https://arxiv.org/abs/cond-mat/0402216">https://arxiv.org/abs/cond-mat/0402216</a></p>
-<p>[2]<a id="ref2"></a> Jay Gambetta, Alexandre Blais, D. I. Schuster, A. Wallraff, L. Frunzio, J. Majer, M. H. Devoret, S. M. Girvin, and R. J. Schoelkopf. Qubit-photon interactions in a cavity: Measurement induced dephasing and number splitting
-<a href="https://arxiv.org/abs/cond-mat/0602322">https://arxiv.org/abs/cond-mat/0602322</a></p>
-<p>[3]<a id="ref3"></a> Alexandre Blais, Jay Gambetta, A. Wallraff, D. I. Schuster, S. M. Girvin, M. H. Devoret, and R. J. Schoelkopf. Quantum information processing with circuit quantum electrodynamics. <a href="https://arxiv.org/abs/cond-mat/0612038">https://arxiv.org/abs/cond-mat/0612038</a></p>
-<p>[4]<a id="ref4"></a> Jay Gambetta, W. A. Braff, A. Wallraff, S. M. Girvin, R. J. Schoelkopf. Protocols for optimal readout of qubits using a continuous quantum nondemolition measurement. <a href="https://arxiv.org/abs/cond-mat/0701078">https://arxiv.org/abs/cond-mat/0701078</a></p>
-<p>[5]<a id="ref5"></a> Jay Gambetta, Alexandre Blais, M. Boissonneault, A. A. Houck, D. I. Schuster and S. M. Girvin. Quantum trajectory approach to circuit QED: Quantum jumps and the Zeno effect. <a href="https://arxiv.org/abs/0709.4264">https://arxiv.org/abs/0709.4264</a></p>
-<p>[6]<a id="ref6"></a> Colm A. Ryan, Blake R. Johnson, Jay M. Gambetta, Jerry M. Chow, Marcus P. da Silva, Oliver E. Dial and Thomas A. Ohki. Tomography via Correlation of Noisy Measurement Records. <a href="https://arxiv.org/abs/1310.6448">https://arxiv.org/abs/1310.6448</a></p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Code-imports">Code imports<a class="anchor-link" href="#Code-imports">&#182;</a></h1>
+<h1 id="Measurement-Error-Mitigation">Measurement Error Mitigation<a class="anchor-link" href="#Measurement-Error-Mitigation">&#182;</a></h1>
 </div>
 </div>
 </div>
@@ -13144,19 +13117,7 @@ which is then turned into a <em>bit</em> by a nonlinear discriminator [<a href="
 <div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Import general libraries (needed for functions)</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">time</span>
-
-<span class="c1"># Import Qiskit classes</span>
-<span class="kn">import</span> <span class="nn">qiskit</span> 
-<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">ClassicalRegister</span><span class="p">,</span> <span class="n">Aer</span>
-<span class="kn">from</span> <span class="nn">qiskit.providers.aer</span> <span class="k">import</span> <span class="n">noise</span>
-<span class="kn">from</span> <span class="nn">qiskit.tools.visualization</span> <span class="k">import</span> <span class="n">plot_histogram</span>
-
-<span class="c1"># Import measurement calibration functions</span>
-<span class="kn">from</span> <span class="nn">qiskit.ignis.mitigation.measurement</span> <span class="k">import</span> <span class="p">(</span><span class="n">complete_meas_cal</span><span class="p">,</span> <span class="n">tensored_meas_cal</span><span class="p">,</span>
-                                                 <span class="n">CompleteMeasFitter</span><span class="p">,</span> <span class="n">TensoredMeasFitter</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="o">*</span>
 </pre></div>
 
     </div>
@@ -13167,37 +13128,559 @@ which is then turned into a <em>bit</em> by a nonlinear discriminator [<a href="
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Constructing-a-Full-Calibration-Matrix">Constructing a Full Calibration Matrix<a class="anchor-link" href="#Constructing-a-Full-Calibration-Matrix">&#182;</a></h1><p>The assumption of the error mitigation technique is that we can prepare each of the basis states with very low error. Given this assumption, in separate experiments we can prepare one of the $2^n$ states and then measure the outputs in all $2^n$ states ($n$ denotes the number of qubits). Normalizing these outputs and making each set of output probabilities for a given prepared state the columns of a matrix we obtain the matrix $\mathbf{A}$ which translates the ideal probability distribution of the state $\rho$ ($P_\rho$) into the experimental probability distribution $\tilde{P}_{\rho}$
-$$\tilde{P}_{\rho} = \mathbf{A} \cdot P_{\rho}$$</p>
-<p><strong>Code</strong></p>
-<p>The code below constructs the calibration matrix for 2 qubits with error artificially put into the Aer simulation.</p>
+<h3 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">&#182;</a></h3><p>The effect of noise is to give us outputs that are not quite correct. The effect of noise that occurs throughout a computation will be quite complex in general, as one would have to consider how each gate transforms the effect of each error.</p>
+<p>A simpler form of noise is that occuring during final measurement. At this point, the only job remaining in the circuit is to extract a bit string as an output. For an $n$ qubit final measurement, this means extracting one of the $2^n$ possible $n$ bit strings. As a simple model of the noise in this process, we can imagine that the measurement first selects one of these outputs in a perfect and noiseless manner, and then noise subsequently causes this perfect output to be randomly perturbed before it is returned to the user.</p>
+<p>Given this model, it is very easy to determine exactly what the effects of measurement errors are. We can simply prepare each of the $2^n$ possible basis states, immediately measure them, and see what probability exists for each outcome.</p>
+<p>As an example, we will first create a simple noise model, which randomly flips each bit in an output with probability $p$.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Generate the calibration circuits</span>
-<span class="n">qr</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">meas_calibs</span><span class="p">,</span> <span class="n">state_labels</span> <span class="o">=</span> <span class="n">complete_meas_cal</span><span class="p">(</span><span class="n">qubit_list</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">qr</span><span class="o">=</span><span class="n">qr</span><span class="p">)</span>
-<span class="c1"># Generate a noise model for the 2 qubits</span>
-<span class="n">noise_model</span> <span class="o">=</span> <span class="n">noise</span><span class="o">.</span><span class="n">NoiseModel</span><span class="p">()</span>
-<span class="k">for</span> <span class="n">qi</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
-    <span class="n">read_err</span> <span class="o">=</span> <span class="n">noise</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">readout_error</span><span class="o">.</span><span class="n">ReadoutError</span><span class="p">([[</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">],[</span><span class="mf">0.25</span><span class="p">,</span><span class="mf">0.75</span><span class="p">]])</span>
-    <span class="n">noise_model</span><span class="o">.</span><span class="n">add_readout_error</span><span class="p">(</span><span class="n">read_err</span><span class="p">,</span> <span class="p">[</span><span class="n">qi</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit.providers.aer.noise</span> <span class="k">import</span> <span class="n">NoiseModel</span>
+<span class="kn">from</span> <span class="nn">qiskit.providers.aer.noise.errors</span> <span class="k">import</span> <span class="n">pauli_error</span><span class="p">,</span> <span class="n">depolarizing_error</span>
+
+<span class="k">def</span> <span class="nf">get_noise</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+
+    <span class="n">error_meas</span> <span class="o">=</span> <span class="n">pauli_error</span><span class="p">([(</span><span class="s1">&#39;X&#39;</span><span class="p">,</span><span class="n">p</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">p</span><span class="p">)])</span>
+
+    <span class="n">noise_model</span> <span class="o">=</span> <span class="n">NoiseModel</span><span class="p">()</span>
+    <span class="n">noise_model</span><span class="o">.</span><span class="n">add_all_qubit_quantum_error</span><span class="p">(</span><span class="n">error_meas</span><span class="p">,</span> <span class="s2">&quot;measure&quot;</span><span class="p">)</span> <span class="c1"># measurement error is applied to measurements</span>
+        
+    <span class="k">return</span> <span class="n">noise_model</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let's start with an instance of this in which each bit is flipped $1\%$ of the time.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">noise_model</span> <span class="o">=</span> <span class="n">get_noise</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now we can test out its effects. Specifically, let's define a two qubit circuit and prepare the states $\left|00\right\rangle$, $\left|01\right\rangle$, $\left|10\right\rangle$ and $\left|11\right\rangle$. Without noise, these would lead to the definite outputs <code>'00'</code>, <code>'01'</code>, <code>'10'</code> and <code>'11'</code>, respectively. Let's see what happens with noise. Here, and in the rest of this section, the number of samples taken for each circuit will be <code>shots=10000</code>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">state</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;00&#39;</span><span class="p">,</span><span class="s1">&#39;01&#39;</span><span class="p">,</span><span class="s1">&#39;10&#39;</span><span class="p">,</span><span class="s1">&#39;11&#39;</span><span class="p">]:</span>
+    <span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">state</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;1&#39;</span><span class="p">:</span>
+        <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">state</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;1&#39;</span><span class="p">:</span>
+        <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  
+    <span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">qc</span><span class="o">.</span><span class="n">qregs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">qc</span><span class="o">.</span><span class="n">cregs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">state</span><span class="o">+</span><span class="s1">&#39; becomes&#39;</span><span class="p">,</span>
+          <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">),</span><span class="n">noise_model</span><span class="o">=</span><span class="n">noise_model</span><span class="p">,</span><span class="n">shots</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_counts</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>00 becomes {&#39;11&#39;: 2, &#39;00&#39;: 9788, &#39;10&#39;: 116, &#39;01&#39;: 94}
+01 becomes {&#39;11&#39;: 92, &#39;00&#39;: 102, &#39;01&#39;: 9806}
+10 becomes {&#39;11&#39;: 102, &#39;00&#39;: 96, &#39;10&#39;: 9802}
+11 becomes {&#39;11&#39;: 9805, &#39;10&#39;: 94, &#39;01&#39;: 101}
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Here we find that the correct output is certainly the most dominant. Ones that differ on only a single bit (such as <code>'01'</code>, <code>'10'</code> in the case that the correct output is <code>'00'</code> or <code>'11'</code>), occur around $1\%$ of the time. Those than differ on two bits occur only a handful of times in 10000 samples, if at all.</p>
+<p>So what about if we ran a circuit with this same noise model, and got an result like the following?</p>
+
+<pre><code>{'10': 98, '11': 4884, '01': 111, '00': 4907}</code></pre>
+<p>Here <code>'01'</code> and <code>'10'</code> occur for around $1\%$ of all samples. We know from our analysis of the basis states that such a result can be expected when these outcomes should in fact never occur, but instead the result should be something that differs from them by only one bit: <code>'00'</code> or <code>'11'</code>. When we look at the results for those two outcomes, we can see that they occur with roughly equal probability. We can therefore conclude that the initial state was not simply $\left|00\right\rangle$, or $\left|11\right\rangle$, but an equal superposition of the two. If true, this means that the result should have been something along the lines of.</p>
+
+<pre><code>{'11': 4977, '00': 5023}</code></pre>
+<p>Here is a circuit that produces results like this (up to statistical fluctuations).</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>  
+<span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">qc</span><span class="o">.</span><span class="n">qregs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">qc</span><span class="o">.</span><span class="n">cregs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">),</span><span class="n">noise_model</span><span class="o">=</span><span class="n">noise_model</span><span class="p">,</span><span class="n">shots</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_counts</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>{&#39;11&#39;: 4946, &#39;00&#39;: 4877, &#39;10&#39;: 101, &#39;01&#39;: 76}
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In this example we first looked at results for each of the definite basis states, and used these results to mitigate the effects of errors for a more general form of state. This is the basic principle behind measurement error mitigation.</p>
+<h3 id="Error-mitigation-in-with-linear-algebra">Error mitigation in with linear algebra<a class="anchor-link" href="#Error-mitigation-in-with-linear-algebra">&#182;</a></h3><p>Now we just need to find a way to perform the mitigation algorithmically rather than manually. We will do this by describing the random process using matrices. For this we need to rewrite our counts dictionaries as column vectors. For example, the dictionary <code>{'10': 96, '11': 1, '01': 95, '00': 9808}</code> describing would be rewritten as</p>
+$$
+C = 
+\begin{pmatrix}
+    9808 \\
+    95 \\
+    96 \\
+    1
+\end{pmatrix}.
+$$<p>Here the first element is that for <code>'00'</code>, the next is that for <code>'01'</code>, and so on.</p>
+<p>The information gathered from the basis states $\left|00\right\rangle$, $\left|01\right\rangle$, $\left|10\right\rangle$ and $\left|11\right\rangle$ can then be used to define a matrix, which rotates from an ideal set of counts to one affected by measurement noise. This is done by simply taking the counts dictionary for $\left|00\right\rangle$, normalizing it it so that all elements sum to one, and then using it as the first column of the matrix. The next column is similarly defined by the counts dictionary obtained for $\left|00\right\rangle$, and so on.</p>
+<p>There will be statistical variations each time the circuit for each basis state is run. In the following, we will use the data obtained when this section was written, which was as follows.</p>
+
+<pre><code>00 becomes {'10': 96, '11': 1, '01': 95, '00': 9808}
+01 becomes {'10': 2, '11': 103, '01': 9788, '00': 107}
+10 becomes {'10': 9814, '11': 90, '01': 1, '00': 95}
+11 becomes {'10': 87, '11': 9805, '01': 107, '00': 1}</code></pre>
+<p>This gives us the following matrix.</p>
+$$
+M = 
+\begin{pmatrix}
+    0.9808&amp;0.0107&amp;0.0095&amp;0.0001 \\
+    0.0095&amp;0.9788&amp;0.0001&amp;0.0107 \\
+    0.0096&amp;0.0002&amp;0.9814&amp;0.0087 \\
+    0.0001&amp;0.0103&amp;0.0090&amp;0.9805
+\end{pmatrix}
+$$<p>If we now take the vector describing the perfect results for a given state, applying this matrix gives us a good approximation of the results when measurement noise is present.</p>
+$$ C_{noisy} = M ~ C_{ideal}$$<p>.</p>
+<p>As an example, let's apply this process for the state $(\left|00\right\rangle+\left|11\right\rangle)/\sqrt{2}$,</p>
+$$
+\begin{pmatrix}
+    0.9808&amp;0.0107&amp;0.0095&amp;0.0001 \\
+    0.0095&amp;0.9788&amp;0.0001&amp;0.0107 \\
+    0.0096&amp;0.0002&amp;0.9814&amp;0.0087 \\
+    0.0001&amp;0.0103&amp;0.0090&amp;0.9805
+\end{pmatrix}
+\begin{pmatrix}
+    0 \\
+    5000 \\
+    5000 \\
+    0
+\end{pmatrix}
+=
+\begin{pmatrix}
+    101 \\
+    4895.5 \\
+    4908 \\
+    96.5
+\end{pmatrix}.
+$$<p>In code, we can express this as follows.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">M</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">0.9808</span><span class="p">,</span><span class="mf">0.0107</span><span class="p">,</span><span class="mf">0.0095</span><span class="p">,</span><span class="mf">0.0001</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">0.0095</span><span class="p">,</span><span class="mf">0.9788</span><span class="p">,</span><span class="mf">0.0001</span><span class="p">,</span><span class="mf">0.0107</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">0.0096</span><span class="p">,</span><span class="mf">0.0002</span><span class="p">,</span><span class="mf">0.9814</span><span class="p">,</span><span class="mf">0.0087</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">0.0001</span><span class="p">,</span><span class="mf">0.0103</span><span class="p">,</span><span class="mf">0.0090</span><span class="p">,</span><span class="mf">0.9805</span><span class="p">]]</span>
+
+<span class="n">Cideal</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">],</span>
+          <span class="p">[</span><span class="mi">5000</span><span class="p">],</span>
+          <span class="p">[</span><span class="mi">5000</span><span class="p">],</span>
+          <span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+
+<span class="n">Cnoisy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span> <span class="n">M</span><span class="p">,</span> <span class="n">Cideal</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;C_noisy =</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">Cnoisy</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>C_noisy =
+ [[ 101. ]
+ [4894.5]
+ [4908. ]
+ [  96.5]]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Either way, the resulting counts found in $C_{noisy}$, for measuring the $(\left|00\right\rangle+\left|11\right\rangle)/\sqrt{2}$ with measurement noise, come out quite close to the actual data we found earlier. So this matrix method is indeed a good way of predicting noisy results given a knowledge of what the results should be.</p>
+<p>Unfortunately, this is the exact opposite of what we need. Instead of a way to transform ideal counts data into noisy data, we need a way to transform noisy data into ideal data. In linear algebra, we do this for a matrix $M$ by finding the inverse matrix $M^{-1}$,</p>
+$$C_{ideal} = M^{-1} C_{noisy}.$$<p>The trouble is, such an inverse does not always exist. To obtain an inverse, we need the colums of the original matrix to be orthogonal to each other. This is not the case for the matrix above. Indeed, it will not hold for any matrix describing measurement noise.</p>
+<p>One possible method is to use the so-called 'pseudo inverse'. In Python, this can be applied using one of the linear algebra tools from Scipy.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">scipy.linalg</span> <span class="k">as</span> <span class="nn">la</span>
+
+
+<span class="n">M</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">0.9808</span><span class="p">,</span><span class="mf">0.0107</span><span class="p">,</span><span class="mf">0.0095</span><span class="p">,</span><span class="mf">0.0001</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">0.0095</span><span class="p">,</span><span class="mf">0.9788</span><span class="p">,</span><span class="mf">0.0001</span><span class="p">,</span><span class="mf">0.0107</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">0.0096</span><span class="p">,</span><span class="mf">0.0002</span><span class="p">,</span><span class="mf">0.9814</span><span class="p">,</span><span class="mf">0.0087</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">0.0001</span><span class="p">,</span><span class="mf">0.0103</span><span class="p">,</span><span class="mf">0.0090</span><span class="p">,</span><span class="mf">0.9805</span><span class="p">]]</span>
+
+<span class="n">Minv</span> <span class="o">=</span> <span class="n">la</span><span class="o">.</span><span class="n">pinv</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">Minv</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[[ 1.01978044e+00 -1.11470783e-02 -9.87135367e-03  1.05228426e-04]
+ [-9.89772783e-03  1.02188470e+00  9.39504466e-05 -1.11514471e-02]
+ [-9.97422955e-03 -4.05845410e-06  1.01913199e+00 -9.04172099e-03]
+ [ 9.15212840e-05 -1.07335657e-02 -9.35458279e-03  1.02008794e+00]]
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/usr/local/lib/python3.7/site-packages/scipy/linalg/basic.py:1321: RuntimeWarning: internal gelsd driver lwork query error, required iwork dimension not returned. This is likely the result of LAPACK bug 0038, fixed in LAPACK 3.2.2 (released July 21, 2010). Falling back to &#39;gelss&#39; driver.
+  x, resids, rank, s = lstsq(a, b, cond=cond, check_finite=False)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Applying this inverse to $C_{noisy}$, we can obtain an approximation of the true counts.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Cmitigated</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span> <span class="n">Minv</span><span class="p">,</span> <span class="n">Cnoisy</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;C_mitigated =</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">Cmitigated</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>C_mitigated =
+ [[ 1.35003120e-13]
+ [ 5.00000000e+03]
+ [ 5.00000000e+03]
+ [-2.00373051e-12]]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Of course, counts should be integers, and so these values need to be rounded. This gives us a very nice result.
+$$
+C_{mitigated} = 
+\begin{pmatrix}
+    0 \\
+    5000 \\
+    5000 \\
+    0
+\end{pmatrix}
+$$</p>
+<p>This is exactly the true result we desire. Our mitigation worked extremely well!</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Error-mitigation-in-Qiskit">Error mitigation in Qiskit<a class="anchor-link" href="#Error-mitigation-in-Qiskit">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit.ignis.mitigation.measurement</span> <span class="k">import</span> <span class="p">(</span><span class="n">complete_meas_cal</span><span class="p">,</span><span class="n">CompleteMeasFitter</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The process of measurement error mitigation can also be done using tools from Qiskit. This handles the collection of data for the basis states, the construction of the matrices and the calculation of the inverse. The latter can be done using the pseudo inverse, as we saw above. However, the default is an even more sophisticated method using least squares fitting.</p>
+<p>As an example, let's stick with doing error mitigation for a pair of qubits. For this we define a two qubit quantum register, and feed it into the function <code>complete_meas_cal</code>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">qr</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">meas_calibs</span><span class="p">,</span> <span class="n">state_labels</span> <span class="o">=</span> <span class="n">complete_meas_cal</span><span class="p">(</span><span class="n">qr</span><span class="o">=</span><span class="n">qr</span><span class="p">,</span> <span class="n">circlabel</span><span class="o">=</span><span class="s1">&#39;mcal&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This creates a set of circuits to take measurements for each of the four basis states for two qubits: $\left|00\right\rangle$, $\left|01\right\rangle$, $\left|10\right\rangle$ and $\left|11\right\rangle$.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">circuit</span> <span class="ow">in</span> <span class="n">meas_calibs</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Circuit&#39;</span><span class="p">,</span><span class="n">circuit</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">circuit</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Circuit mcalcal_00
+          ░ ┌─┐   
+q1_0: |0&gt;─░─┤M├───
+          ░ └╥┘┌─┐
+q1_1: |0&gt;─░──╫─┤M├
+          ░  ║ └╥┘
+ c1_0: 0 ════╩══╬═
+                ║ 
+ c1_1: 0 ═══════╩═
+                  
+
+Circuit mcalcal_01
+         ┌───┐ ░ ┌─┐   
+q1_0: |0&gt;┤ X ├─░─┤M├───
+         └───┘ ░ └╥┘┌─┐
+q1_1: |0&gt;──────░──╫─┤M├
+               ░  ║ └╥┘
+ c1_0: 0 ═════════╩══╬═
+                     ║ 
+ c1_1: 0 ════════════╩═
+                       
+
+Circuit mcalcal_10
+               ░ ┌─┐   
+q1_0: |0&gt;──────░─┤M├───
+         ┌───┐ ░ └╥┘┌─┐
+q1_1: |0&gt;┤ X ├─░──╫─┤M├
+         └───┘ ░  ║ └╥┘
+ c1_0: 0 ═════════╩══╬═
+                     ║ 
+ c1_1: 0 ════════════╩═
+                       
+
+Circuit mcalcal_11
+         ┌───┐ ░ ┌─┐   
+q1_0: |0&gt;┤ X ├─░─┤M├───
+         ├───┤ ░ └╥┘┌─┐
+q1_1: |0&gt;┤ X ├─░──╫─┤M├
+         └───┘ ░  ║ └╥┘
+ c1_0: 0 ═════════╩══╬═
+                     ║ 
+ c1_1: 0 ════════════╩═
+                       
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let's now run these circuits without any noise present.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Execute the calibration circuits without noise</span>
 <span class="n">backend</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">)</span>
-<span class="n">job_no_noise</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">meas_calibs</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
-<span class="n">job_w_noise</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">meas_calibs</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">,</span> <span class="n">noise_model</span><span class="o">=</span><span class="n">noise_model</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
-<span class="n">cal_results</span> <span class="o">=</span> <span class="n">job_no_noise</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
-<span class="n">meas_fitter</span> <span class="o">=</span> <span class="n">CompleteMeasFitter</span><span class="p">(</span><span class="n">cal_results</span><span class="p">,</span> <span class="n">state_labels</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ideal calibration matrix:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">meas_fitter</span><span class="o">.</span><span class="n">cal_matrix</span><span class="p">)</span>
-<span class="n">cal_results</span> <span class="o">=</span> <span class="n">job_w_noise</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
-<span class="n">meas_fitter</span> <span class="o">=</span> <span class="n">CompleteMeasFitter</span><span class="p">(</span><span class="n">cal_results</span><span class="p">,</span> <span class="n">state_labels</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Noisy calibration matrix:&quot;</span><span class="p">)</span>
+<span class="n">job</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">meas_calibs</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">cal_results</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>With the results we can construct the calibration matrix, which we have been calling $M$.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">meas_fitter</span> <span class="o">=</span> <span class="n">CompleteMeasFitter</span><span class="p">(</span><span class="n">cal_results</span><span class="p">,</span> <span class="n">state_labels</span><span class="p">,</span> <span class="n">circlabel</span><span class="o">=</span><span class="s1">&#39;mcal&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">meas_fitter</span><span class="o">.</span><span class="n">cal_matrix</span><span class="p">)</span>
 </pre></div>
 
@@ -13215,16 +13698,10 @@ $$\tilde{P}_{\rho} = \mathbf{A} \cdot P_{\rho}$$</p>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Ideal calibration matrix:
-[[1. 0. 0. 0.]
+<pre>[[1. 0. 0. 0.]
  [0. 1. 0. 0.]
  [0. 0. 1. 0.]
  [0. 0. 0. 1.]]
-Noisy calibration matrix:
-[[0.81  0.244 0.201 0.045]
- [0.087 0.646 0.032 0.192]
- [0.092 0.023 0.693 0.213]
- [0.011 0.087 0.074 0.55 ]]
 </pre>
 </div>
 </div>
@@ -13236,17 +13713,44 @@ Noisy calibration matrix:
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We can see that with noise when we prepare the state $|11\rangle$ and measure we get counts in states other than $|11\rangle$</p>
+<p>With no noise present, this is simply the identity matrix.</p>
+<p>Now let's create a noise model. And to make things interesting, let's have the errors be ten times more likely than before.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">plot_histogram</span><span class="p">([</span><span class="n">cal_results</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="s1">&#39;cal_11&#39;</span><span class="p">)],</span> <span class="n">legend</span><span class="o">=</span><span class="p">[</span><span class="sa">r</span><span class="s1">&#39;Preparing in $|11\rangle$&#39;</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">noise_model</span> <span class="o">=</span> <span class="n">get_noise</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Again we can run the circuits, and look at the calibration matrix, $M$.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">backend</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">)</span>
+<span class="n">job</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">meas_calibs</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">noise_model</span><span class="o">=</span><span class="n">noise_model</span><span class="p">)</span>
+<span class="n">cal_results</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+
+<span class="n">meas_fitter</span> <span class="o">=</span> <span class="n">CompleteMeasFitter</span><span class="p">(</span><span class="n">cal_results</span><span class="p">,</span> <span class="n">state_labels</span><span class="p">,</span> <span class="n">circlabel</span><span class="o">=</span><span class="s1">&#39;mcal&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">meas_fitter</span><span class="o">.</span><span class="n">cal_matrix</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13259,13 +13763,129 @@ Noisy calibration matrix:
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[3]:</div>
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[[0.812 0.107 0.092 0.008]
+ [0.097 0.81  0.01  0.097]
+ [0.078 0.01  0.81  0.101]
+ [0.013 0.073 0.088 0.794]]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This time we find a more interesting matrix, and one that is not invertible. Let's see how well we can mitigate for this noise. Again, let's use the Bell state $(\left|00\right\rangle+\left|11\right\rangle)/\sqrt{2}$ for our test.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>  
+<span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">qc</span><span class="o">.</span><span class="n">qregs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">qc</span><span class="o">.</span><span class="n">cregs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">noise_model</span><span class="o">=</span><span class="n">noise_model</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+
+<span class="n">noisy_counts</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get_counts</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">noisy_counts</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>{&#39;11&#39;: 4086, &#39;00&#39;: 4085, &#39;10&#39;: 908, &#39;01&#39;: 921}
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In Qiskit we mitigate for the noise by creating a measurement filter object. Then, taking the results from above, we use this to calulate a mitigated set of counts. Qiskit returns this as a dictionary, so that the user doesn't need to use vectors themselves to get the result.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Get the filter object</span>
+<span class="n">meas_filter</span> <span class="o">=</span> <span class="n">meas_fitter</span><span class="o">.</span><span class="n">filter</span>
+
+<span class="c1"># Results with mitigation</span>
+<span class="n">mitigated_results</span> <span class="o">=</span> <span class="n">meas_filter</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+<span class="n">mitigated_counts</span> <span class="o">=</span> <span class="n">mitigated_results</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>To see the results most clearly, let's plot both the noisy and mitigated results.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit.tools.visualization</span> <span class="k">import</span> <span class="o">*</span>
+<span class="n">plot_histogram</span><span class="p">([</span><span class="n">noisy_counts</span><span class="p">,</span> <span class="n">mitigated_counts</span><span class="p">],</span> <span class="n">legend</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;noisy&#39;</span><span class="p">,</span> <span class="s1">&#39;mitigated&#39;</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[28]:</div>
 
 
 
 
 <div class="output_png output_subarea output_execute_result">
-<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAmEAAAE6CAYAAABeVIXiAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAADh0RVh0U29mdHdhcmUAbWF0cGxvdGxpYiB2ZXJzaW9uMy4xLjAsIGh0dHA6Ly9tYXRwbG90bGliLm9yZy+17YcXAAAgAElEQVR4nO3deXxV1bn/8c+ThFlAgmlIghAGDWEwBrRXqeKAKKhVC9jaWrVaoWrFAf2p1VbxtmCl2mrVXi3e1ulSh4J1pHIVr4hDbSNGhhjBSBAIGAMCMiUkz++PfZKGkIQcODk7Jt/363VeOWfttdd5NkvMw1prr23ujoiIiIjEV0LYAYiIiIi0RUrCREREREKgJExEREQkBErCREREREKgJExEREQkBErCREREREKQFHYAYerZs6f36dMn7DBERKQF+eCDD75w95Tqz3l5ed9ISkp6GBiKBi+k6aqApbt37750xIgRn9dXoU0nYX369GHBggVhhyEiIi1IcnJyce3PSUlJD/fq1Ss7JSVlU0JCgjbXlCapqqqy0tLSwevXr38YOKu+OsroRUREGjc0JSVlixIwiUZCQoKnpKRsJhhBrb9OHOMRERH5OkpQAib7I/LfTYO5lpIwERERkRAoCRMREREJgZIwERERkRAoCRMREZFmMXDgwCEvvvhi15bU7tSpU9OnTp2aHuuY9keb3qJCRERkf0y6hxHN2f6sa8hrat2MjIxhZWVl7RISErxTp05VJ5544uY//elPq7t3717VnDE2xcqVK5e19HZnzJiRMnv27EM+/vjjTt/+9rc3zpkzZ1VTj2dkZAxbuHDhRwMGDKjYn+/WSJiIiMjX3JNPPrli+/bti//1r38t//DDD7v87Gc/S6tbp6Jiv/KE/RLP7zpQGRkZFTfeeGPJueee+0W0x8eMGfPlM888c/D+freSMBERkVaiX79+FSeffPLmgoKCThCM1Nxyyy29Dj/88MFdunQZXlFRwapVq9qddtppA3r06JGTkZEx7Fe/+tU3qs/PyMgY9rOf/azXgAEDhnTr1u3IiRMnZm7fvt2qj9988829Dj300KFdunTJHTBgwJDHHnvs4Nrn1v2ujIyMYX/729+6Vh+/9dZbUw8//PDBXbt2PfKMM87oX7vtRYsWdc7Ozh7cpUuX3HHjxvU/44wz+l911VX1ThvWbrcpbTfmoosu+vKCCy74smfPnrujPX7OOed8+cILLygJExERaetWrlzZ7rXXXut+xBFHbK8umzNnTvLLL7+8YuPGjYsTEhI444wzBg4bNmx7SUnJh//7v/9b+OCDD6bOmTOnW3X9v/71rz1feeWVj1esWLGkqKio40033VQzqjZw4MBdb775ZuGWLVsW33TTTet+8pOf9CsuLm5X33e1a9eOup599tnk+fPnr1i5cuWSgoKCTvfff/8hADt37rTvfve7A37wgx98sXHjxg/OO++8jfPnz48quWmo7eY0bty4rwoKCjqXlZUl7s/5SsJERES+5n7wgx8M7Nq165GjRo0adMwxx2ydPn16SfWxyy67bMPAgQMrDjroIH/jjTe6bNy4Memuu+4q6dixow8ePLj8ggsuKP3LX/6SXF1/0qRJnw8cOLAiNTW18sYbbyx59tlna45dcsklmzIzMysSExOZNGnSpr59++568803u9T3XfXFefnll2/IzMysSE1NrTz11FM3f/DBB50AXn/99S67d++2W2655fMOHTr4RRdd9OURRxyxLZo/g4babk4dOnTwb33rW1tqJ7HR0MJ8ERGRr7nZs2evPOecc7bWd6xv3741C7SKioral5aWtu/ateuR1WVVVVV21FFH1Zzbp0+f8ur3AwYM2FVaWtq++vP999/f8/77709du3Zte4AdO3YklpaW1uQStb+rPunp6TXHO3fuXFVSUtIO4LPPPmuXmppakZCQULtueT1NRN12cxs6dOiOJUuWdAY2RXuukjAREZFWzMxqRqUyMzPLMzIydhUXFy9tqP7q1atrkq6ioqL2KSkp5QAff/xx+6lTp/Z94YUXPh49evRXSUlJDBo0aLD7vwe9an9XNDIyMio2bNjQrqqqiupEbN26de379eu3a3/ai6cFCxZ0u/XWW9ftz7majhQREWkjTjzxxG1dunSpvOWWW3p99dVXtnv3bv75z392fOONNzpX13n44YdTPvnkk3YbNmxIvPPOO9POPvvsTQBbt25NMDN69epVAXDvvff2XLlyZUym/EaPHr0tMTHR77jjjm9UVFTwxBNPHPzhhx922feZB66iooLt27dbZWWlVVZW2vbt26323Z2NHS8tLU385JNPOp122mlf7c93ayRMREQkStHs49WSJCUl8fLLL6+cMmVK78zM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e3t3z3b3uXG6HBGRNmX48OEUFRVRXFxMeXk5c+fOZezYsXvUWb/+30ty582bx+GHB6tIvvzyy5q7G8vKyvjHP/5BVlYWZsZxxx1XM1r25JNPcvrpp8fpikTCo2dHiohIkyUlJTFz5kwmTpxIZWUl559/PtnZ2cyYMYPc3FzGjRvHH//4R+bNm0dSUhI9evTggQceAKCwsJCpU6eSkJBAVVUVV199dc2C/mnTpnHppZcyY8YMhg0bxg9/+MMwL1MkLuK2RUVLpC0qRESkrrpbVIg0F91qKyIiIhICJWEiIiIiIVASJiIiIhICJWEiIiIiIVASJiIiIhICJWEiIiIiIVASJiIiIhICJWEiIiIiIVASJiIiIhICJWEiIiIiIVASJiIiIhICJWEiIiIiIUgKOwAREQnPDY/2CDuEmJl50aawQxCJikbCREREREKgJExEREQkBErCREREREKgJExEREQkBErCREREREKgJExEREQkBErCREREREKgJExEREQkBErCREREREKgJExEREQkBErCREREREKgJExEREQkBErCREREREKgJExEREQkBErCREREREKgJExEREQkBErCREREREKgJExEREQkBErCREREREKgJExEREQkBErCREREREKgJExEREQkBErCREREREKgJExEREQkBErCREREREKgJExEREQkBErCREREREKgJExEREQkBErCREREREKgJExEREQkBErCREREREKgJExEREQkBErCREREREKgJExEREQkBErCREREREKgJExEREQkBHFPwszsCjP71Mx2mlmemR3fxPOOM7PdZra0TvmPzMzreXVsnisQEREROXBxTcLM7HvAvcAMIBd4G5hnZn32cV4P4DHgtQaqbAfSar/cfWes4hYRERGJtXiPhE0FHnH3We5e4O5TgBLg8n2c99/Ao8A7DRx3d19f+xXDmEVERERiLm5JmJm1B0YA8+scmg+MbOS8K4BU4FeNNN/JzIrNbI2ZvWhmuQccsIiIiEgzSorjdx0CJAIb6pRvAE6p7wQzGwbcBhzj7pVmVl+1QuASIB/oClwNvGVmOe6+op42JwOTAdLS0nj//fcBSE9Pp3PnzqxcuRKA7t27079/fxYvXgxAYmIiOTk5FBYWsm3bNgCys7PZuHEjGzYEl9S7d2/at29PUVERAD169KBPnz7k5+cD0K5dO4YNG0ZBQQE7duwAYPDgwZSWllJaWgpA3759MTNWrVoFQM+ePUlLS2Pp0mApXIcOHRgyZAjLli1j165dAAwdOpSSkhLKysoAyMzMxN0pLi4GICUlhZSUFJYvXw5Ap06dyM7OZsmSJVRUVACQk5PD6tWr2bRpEwD9+/envLycNWvWAJCamkpycjIFBQUAdOnShaysLPLz86msrAQgNzeXoqIiNm/eDMDAgQPZvn0769ato/rPu1u3bhQWFgLQtWtXDjvsMBYvXoy7Y2bk5uayYsUKtm7dCkBWVhZbtmyhpKRE/aR+Uj81Qz9BD1qLsrKymPSTSLyYu8fni8zSgbXACe6+sFb5rcD57p5Vp34HYDFwh7s/HimbBkx096GNfE8i8AHwurtf1VhMubm5vmDBgv28IhGRr78bHm09SdjMizbFpJ3k5OQ8dz8qJo2JNCKeI2FfAJUEU4u1pQL1reFKA7KBP5vZnyNlCYCZ2W7gdHevO7VJZMTsX8BhMYtcREREJMbitibM3cuBPGBMnUNjCO6SrGstMAw4stbrQWBl5H1952DBnOURBAv+RURERFqkeI6EAfwWeNzM3gPeAi4D0gmSK8zsMQB3v9DdK4C6e4J9Duxy96W1ym4D3gVWAN2AqwiSsH3dcSkiIiISmrgmYe7+lJn1BH5OMN24lGBasThSpdH9whpwMPBHoBewmWAd2Sh3fy8GIYuIiIg0i3iPhOHufwD+0MCxE/dx7jRgWp2ya4FrYxOdiIiISHzo2ZEiIiIiIVASJiIiIhICJWEiIiIiIYgqCTOz75rZqbU+3xp5VNArZpYW+/BEREREWqdoR8KmVb8xs+HAzcDvgXbA3bELS0RERKR1i/buyL4Ez2oE+A7wN3efaWbzgVdiGpmIiIhIKxbtSNhOgodkA4wGXo2831yrXERERET2IdqRsDeBu81sEXAUMDFSfjjwWSwDExEREWnNoh0JuxIoJ0i+LnP3dZHycWg6UkRERKTJohoJc/c1wLfrKb8mZhGJiIiItAFR7xNmZh3NbKKZ3WhmB0fKBphZcuzDExEREWmdohoJM7OBBIvxDyJ4cPYzwJfA5ZHPl8Y6QBEREZHWKNqRsHuA+UAqsKNW+fPASbEKSkRERKS1i/buyJHAMe5eaWa1y1cD6TGLSkRERKSV259nR7arp6wPwV5hIiIiItIE0SZh84GptT67mXUDbgdeillUIiIiIq1ctNORU4HXzawQ6Ag8BQwENgDfjXFsIiIiIq1WtPuErTOzI4HvA8MJRtL+CPyPu+9o9GQRERERqRHtSBiRZOtPkZeIiIiI7Id9JmFmNh54wd0rIu8b5O5zYxaZiIiISCvWlJGwvwK9gM8j7xviQGIsghIRERFp7faZhLl7Qn3vRURERGT/RZVUmdkoM9srcTOzRDMbFbuwRERERFq3aEe2Xgfqe1D3wZFjIiIiItIE0SZhRrD2q66ewLYDD0dERESkbWjSFhVm9nzkrQNPmNmuWocTgaHA2zGOTURERKTVauo+YWWRnwZsAmpvzFoOLAJmxTAuERERkVatSUmYu18MYGargLvcXVOPIiIiIgcg2scW3d5cgYiIiIi0JU3ZMf9D4AR332RmS6h/YT4A7n5ELIMTERERaa2aMhI2B6heiN/YjvkiIiIi0kRN2TH/9vrei4iIiMj+02OIRERERELQlDVhja4Dq01rwkRERESapilrwrQOTERERCTGoloTJiIiIiKxoTVhIiIiIiHQPmEiIiIiIdA+YSIiIiIh0D5hIiIiIiGI6tmR1cxsAJAd+Vjg7p/ELiQRERGR1i+qJMzMegL/DZwFVP272F4ELnH3shjHJyIiItIqRXt35MPAQOB4oGPkNQroB8yKbWgiIiIirVe005GnAaPd/Z1aZW+Z2U+AV2MXloiIiEjrFu1IWCmwrZ7y7YCmIkVERESaKNok7D+Be8wso7og8v7uyDERERERaYL9eYB3P2CVma2NfM4AdgLfIFgzJiIiIiL7oAd4i4iIiIRAD/AWERERCYEe4C0iIiISgqiSMDNrb2a3m9nHZrbTzCprv5orSBEREZHWJtqRsF8CFxHcDVkF/D/gAYLtKa5oSgNmdoWZfRpJ4vLM7PhG6p5gZm+bWZmZ7TCzj8zs+nrqTTCz5Wa2K/LzO1Fel4iIiEhcRZuEfRe4zN0fAiqB59z9KuA2YMy+Tjaz7wH3AjOAXOBtYJ6Z9WnglK+A3xPsyj8Y+BVwu5nVJHxmdizwFPA/wJGRn8+Y2X9EeW0iIiIicRNtEpYKLI+8/wo4OPL+78CpTTh/KvCIu89y9wJ3nwKUAJfXV9nd89z9SXdf5u6fuvsTwCsEj02qdg3wurtPj7Q5Hfi/SLmIiIhIixRtErYaSI+8X0nwGCOAY4EdjZ1oZu2BEcD8OofmAyOb8uVmlhup+0at4mPrafOVprYpIiIiEoZonx35LDAaeJdgWvEvZjaJYMPW3+zj3EOARGBDnfINwCmNnWhma4CUSLy3u/uDtQ73aqDNXg20NRmYDJCWlsb7778PQHp6Op07d2blypUAdO/enf79+7N48WIAEhMTycnJobCwkG3bgic3ZWdns3HjRjZsCL6+d+/etG/fnqKiIgB69OhBnz59yM/PB6Bdu3YMGzaMgoICduwIctbBgwdTWlpKaWkpAH379sXMWLVqFQA9e/YkLS2NpUuXAtChQweGDBnCsmXL2LVrFwBDhw6lpKSEsrLgyVGZmZm4O8XFxQCkpKSQkpLC8uXBIGanTp3Izs5myZIlVFRUAJCTk8Pq1avZtGkTAP3796e8vJw1a9YAkJqaSnJyMgUFBQB06dKFrKws8vPzqawM7snIzc2lqKiIzZs3AzBw4EC2b9/OunXrqP7z7tatG4WFhQB07dqVww47jMWLF+PumBm5ubmsWLGCrVu3ApCVlcWWLVsoKSlRP6mf1E/N0E/Qg9airKwsJv0kEi/m7vuu1dDJZscQjDh97O4v7qNuOrAWOMHdF9YqvxU4392zGjm3H3AQcAxwJ3C1uz8eOVYOXOruj9WqfyEwy907NBZTbm6uL1iwYB9XKSLSet3waOtJwmZetCkm7SQnJ+e5+1ExaUykEdGOhO3B3d8lGBVrii8IFvOn1ilPBdbv43s+jbxdYmapwDTg8UjZ+v1pU0RERCRMUW/WambDzewxM/tX5PW4mQ3f13nuXg7ksfddlGMI7pJsqgSg9gjXOzFoU0RERCSuohoJM7PzgceABcDLkeJjgPfM7EeRuxcb81vgcTN7D3gLuIxgof+DkfYfA3D3CyOfpwCfAoWR80cB1wN/qNXmvcBCM7sJ+BvwHeAk4Lhork1EREQknqKdjpwO/MLdZ9QuNLOfEezh1WgS5u5PmVlP4OdAGrAUON3diyNV6u4XlkiwBiwT2A18AtxEJGmLtPm2mZ0X+f7/jNT5nrv/I8prExEREYmbaJOwFODpesqfAX7RlAbc/Q/sOZJV+9iJdT7fA9zThDb/Cvy1Kd8vIiIi0hJEuybsdeDEespPZM+9u0RERESkEfscCTOz8bU+zgPuMLOj+PddkccA4wnuWBQRERGRJmjKdGR903w1G57Wch8NTDOKiIiIyJ72mYS5e9TbWIiIiIhI45RgiYiIiIRgfzZrPcPMFprZF2ZWamZvmNnpzRGciIiISGsVVRJmZpcSPMT7E+BGgj27PgWeNbNLYh+eiIiISOsU7T5hNwJT3f3+WmX/bWZ5BAnZn2IWmYiIiEgrFu10ZB/g7/WUzwP6Hng4IiIiIm1DtEnYavZ+WDbAqUBxPeUiIiIiUo9opyPvAu4zs+HA25GybwEXAFNiGZiIiIhIaxZVEubuD5nZ58B1BLvkAxQA33X352IdnIiIiEhr1eQkzMySCKYdF7r7s80XkoiIiEjr1+Q1Ye6+G5gLdG2+cERERETahmgX5ucDA5sjEBEREZG2JNokbBpwt5mdY2aHmlly7VczxCcibdyrr77KN7/5TUaMGME999yz1/EHHniAY445huOOO45zzjmHzz77rObYxIkTyczM5LzzztvjnClTpnD88cdz3HHHcdFFF/HVV181+3WIiNQVbRL2EjCMYFpyFVAaeX0R+SkiEjOVlZXccMMNPP3007zzzjvMmTOHjz76aI86RxxxBAsWLGDRokWcddZZ3HbbbTXHpkyZwoMPPrhXu9OnT+fNN99k0aJF9O7dm4cffrjZr0VEpK5ot6g4qVmiEBGpR15eHv369SMzMxOA8ePHM2/ePAYNGlRT5/jjj695f9RRR/H000/XfD7hhBNYtGjRXu1269YNAHdn586dmFkzXYGISMOalISZWWfgN8A5QDvgVeAqd/+iGWMTkTaupKSEjIyMms/p6enk5eU1WP+JJ57glFNOaVLbP/3pT3n11VfJysril7/85QHHKiISraZOR94O/IhgOvIvBLvm/1czxSQiErWnn36axYsXM2VK0/aNfuCBB1i+fDmHH344zz6rXXdEJP6amoSNB37s7pPd/WrgDOAcM0tsvtBEpK1LS0tj7dq1NZ/XrVtHWlraXvX+7//+j7vvvpvZs2fToUOHJrefmJjI+PHjeeGFF2ISr4hINJqahB0KvFn9wd3fA3YD6c0RlIgIwPDhwykqKqK4uJjy8nLmzp3L2LFj96jz4YcfMnXqVGbPnk1KSso+23R3ioqKat7PmzePww47rFniFxFpTFMX5icC5XXKdkdxvohI1JKSkpg5cyYTJ06ksrKS888/n+zsbGbMmEFubi7jxo3jtttuY9u2bVx88cUA9O7dm9mzZwNw+umns2LFCrZt28aQIUP4/e9/z0knncQVV1zB1q1bcXeGDh3KXXfdFeZlikgbZe6+70pmVcD/ArtqFY8D3gC2Vxe4+1mxDrA55ebm+oIFC8IOQ0QkNDc82iPsEGJm5kWbYtJOcnJynrsfFZPGRBrR1OnIR4F1QFmt1xPAZ3XKRL629rUp6Ntvv82JJ55ISkoKzz235/Pqp02bxsiRIxk5ciRz586tKZ88eTLf/OY3GTlyJFdeeSUVFRXNfh0iIvL10KTpRHe/uLkDEQlT9aagc+fOJT09ndGjRzN27Ng99qPq3bs3DzzwAPfff5X4gQYAABEiSURBVP8e586fP5/8/HwWLlzIrl27OOusszjllFPo1q0b5557Lg899BAAkyZN4vHHH+eSSy6J67WJiEjLFO2O+SKtUu1NQdu3b1+zKWhtffr0YciQISQk7PnX5qOPPmLkyJEkJSXRpUsXBg8ezGuvvQbAmDFjMDPMjOHDh7Nu3bq4XZOIiLRsSsJEqH9T0JKSkiadO3ToUF577TW2b99OWVkZixYt2mNbBYCKigqefvppRo8eHdO4RUTk60t3N4ocoJNPPpnFixczduxYevbsydFHH01i4p5b6F1//fUce+yxHHvssSFFKSIiLY2SMBGaviloQ6677jquu+46IFj7NXDgwJpjd955J2VlZfzud7+LXcBfU7oTT0Tk3zQdKULTNgVtSGVlJRs3bgRg2bJlLFu2jJNOCp51/9hjj7FgwQJmzZq111oyERFp2zQSJkLTNgV9//33ueCCC9i8eTN///vf+fWvf80777xDRUUFp59+OgBdu3bloYceIikp+Kt13XXXceihh3LaaacBcOaZZ3LDDTeEdp0iItJyKAkTiRgzZgxjxozZo+zmm2+ueT98+HCWLVu213kdO3bk3XffrbfN0tLS2AYpIiKthuZHREREREKgJExEREQkBErCREREREKgJExEREQkBFqYL62S9qMSEZGWTiNhIiIiIiFQEiYiIiISAiVhIiIiIiFQEiYiIiISAiVhIiIiIiFQEiYiIiISAiVhIiIiIiFQEiYiIiISAiVhIiIiIiFQEiYiIiISAiVhIiIiIiFQEiYiIiISAiVhIiIiIiGIexJmZleY2admttPM8szs+EbqppnZbDP7yMwqzeyReur8yMy8nlfHZr0QERERkQMQ1yTMzL4H3AvMAHKBt4F5ZtangVM6AF8Avwb+0UjT24G02i933xmruEVERERiLd4jYVOBR9x9lrsXuPsUoAS4vL7K7r7K3a9y90eAjY206+6+vvYr9qGLiIiIxE7ckjAzaw+MAObXOTQfGHmAzXcys2IzW2NmL5pZ7gG2JyIiItKskuL4XYcAicCGOuUbgFMOoN1C4BIgH+gKXA28ZWY57r6ibmUzmwxMBkhLS+P9998HID09nc6dO7Ny5UoAunfvTv/+/Vm8eDEAiYmJ5OTkUFhYyLZt2wDIzs5m48aNbNgQXFLv3r1p3749RUVFAPTo0YM+ffqQn58PQLt27Rg2bBgFBQXs2LEDgMGDB1NaWkppaSkAffv2xcxYtWoVAD179iQtLY2lS5cC0KFDB4YMGcKyZcvYtWsXAEOHDqWkpISysjIAMjMzcXeKi4sBSElJISUlheXLlwPQqVMnsrOzWbJkCRUVFQDk5OSwevVqNm3aBED//v0pLy9nzZo1AKSmppKcnExBQQEAXbp0ISsri/z8fCorKwHIzc2lqKiIzZs3AzBw4EC2b9/OunXrqP7z7tatG4WFhQB07dqVww47jMWLF+PumBm5ubmsWLGCrVu3ApCVlcWWLVsoKSmJqp9ak9bUT61J9f87vu5/n6BHc/9RxU1ZWVlM/r8nEi/m7vH5IrN0YC1wgrsvrFV+K3C+u2ft4/wXgS/c/Uf7qJcIfAC87u5XNVY3NzfXFyxY0MQrkK+TGx5tPb9YZl60KewQYkb90vKoT/aWnJyc5+5HxaQxkUbEc03YF0AlkFqnPBWI2Roud68E/gUcFqs2RURERGItbkmYu5cDecCYOofGENwlGRNmZsARBAv+RURERFqkeK4JA/gt8LiZvQe8BVwGpAMPApjZYwDufmH1CWZ2ZORtN6Aq8rnc3ZdHjt8GvAusiNS5iiAJq/eOSxEREZGWIK5JmLs/ZWY9gZ8T7Oe1FDjd3YsjVerbL2xxnc/fBoqBzMjng4E/Ar2AzZH6o9z9vdhGLyIiIhI78R4Jw93/APyhgWMn1lNm+2jvWuDamAQnIiIiEid6dqSIiIhICJSEiYiIiIRASZiIiIhICJSEiYiIiIRASZiIiIhICJSEiYiIiIRASZiIiIhICJSEiYiIiIRASZiIiIhICJSEiYiIiIRASZiIiIhICJSEiYiIiIRASZiIiIhICJSEiYiIiIRASZiIiIhICJSEiYiIiIRASZiIiIhICJSEiYiIiIRASZiIiIhICJSEiYiIiIRASZiIiIhICJSEiYiIiIRASZiIiIhICJSEiYiIiIRASZiIiIhICJSEiYiIiIRASVhIXn31Vb75zW8yYsQI7rnnnr2O79q1i0suuYQRI0ZwyimnsHr16j2Or1mzhkMPPZT77ruvpiwnJ4dvfetbjBo1ipNPPrnZr0FERET2X1LYAbRFlZWV3HDDDcydO5f09HRGjx7N2LFjGTRoUE2dJ554goMPPpi8vDzmzJnDtGnT+NOf/lRz/JZbbmH06NF7tf3888/Ts2fPuFyHiIiI7D+NhIUgLy+Pfv36kZmZSfv27Rk/fjzz5s3bo87LL7/MeeedB8DZZ5/NwoULcXcAXnrpJfr27btH0iYiIiJfL0rCQlBSUkJGRkbN5/T0dEpKShqsk5SURLdu3di4cSNfffUV9957LzfccMNe7ZoZEyZM4KSTTuKRRx5p1msQERGRA6PpyK+ZO++8k8svv5yDDjpor2Mvv/wy6enplJaWMn78eA4//HBGjhwZQpQiIiKyL0rCQpCWlsbatWtrPq9bt460tLR662RkZLB79262bNlCcnIyeXl5PP/880ybNo3NmzeTkJBAx44dmTRpEunp6QCkpKRwxhlnkJeXpyRMRESkhdJ0ZAiGDx9OUVERxcXFlJeXM3fuXMaOHbtHnXHjxvHkk08C8Nxzz3H88cdjZrz88svk5+eTn5/PZZddxrXXXsukSZPYtm0bW7duBWDbtm28/vrrZGdnx/3aREREpGk0EhaCpKQkZs6cycSJE6msrOT8888nOzubGTNmkJuby7hx4/jhD3/IZZddxogRI+jRowcPP/xwo22WlpZywQUXALB7924mTpzIKaecEo/LERERkf2gJCwkY8aMYcyYMXuU3XzzzTXvO3bsuM/F9TfddFPN+8zMTN58882YxigiIiLNR9ORIiIiIiHQSFgM3PBoj7BDiJmZF20KOwQREZE2QSNhIiIiIiFQEiYiIiISAiVhIiIiIiFQEiYiIiISAiVhIiIiIiFQEiYiIiISAiVhIiIiIiFQEiYiIiISAiVhIiIiIiFQEiYiIiISAiVhIiIiIiFQEiYiIiISAiVhIiIiIiFQEiYiIiISgrgnYWZ2hZl9amY7zSzPzI7fR/0TIvV2mlmRmV12oG2KiIiIhC2uSZiZfQ+4F5gB5AJvA/PMrE8D9fsBL0fq5QJ3APeZ2YT9bVNERESkJYj3SNhU4BF3n+XuBe4+BSgBLm+g/mXAOnefEqk/C3gUuP4A2hQREREJnbl7fL7IrD2wHfi+uz9Tq/wBYKi7n1DPOQuBJe7+01pl5wKzgc6A7Uebk4HJkY9ZQGEMLi8eDgG+CDsI2Yv6peVRn7RMX6d+6evuKWEHIa1fUhy/6xAgEdhQp3wDcEoD5/QCXq2nflKkPYu2TXf/I/DHJkfdQpjZv9z9qLDjkD2pX1oe9UnLpH4R2ZvujhQREREJQTxHwr4AKoHUOuWpwPoGzlnfQP3dkfZsP9oUERERCV3cRsLcvRzIA8bUOTSG4I7G+rzTQP1/uXvFfrb5dfW1m0JtI9QvLY/6pGVSv4jUEbeF+VCzncTjwBXAWwR3P/4YGOLuxWb2GIC7Xxip3w9YCswCHgK+BfyBYCH+nKa0GbeLExEREYlCPKcjcfenzKwn8HMgjSDBOr1WstSnTv1Pzex04HcEW06sA66qTsCa2KaIiIhIixPXkTARERERCejuSBEREZEQKAkTERERCYGSMBFpNczMav8UEWnJtCasBTOz3sBAgv3QqoBCd9f+ZyJNVJ2Muf5HJyItkJKwFsrMLgcuAXKAbcBKYA3wLvA3dy80swR3rwoxzDbFzDq5+46w45C9mVkCcDaQQvBc2bXAG+7+eaiBiYg0QklYCxTZcmMlcDfwXwS/WE4BTgSyCZKxa919uZmZ/pXf/MysB5APvAQ8Abxd/edeuw/MbBCwzt23hBZsG2NmXYH/Bk4iGDFeAziwE3gDeNzdP9Lflfgxs3ZAP6DY3XeFHY9IS6U1YS3TD4CP3f1X7l7m7h+5+/3uPhH4CcG/9F80s0P0SyVufkjwOKwRwEJgpZn9p5ll1UrADgX+QvBweYmfq4Asgv0BU4HzgXuAJcCpwEwzS9Hflbj6KbAYeNDMvm1mvcwssXYFM+tmZuMiCZtIm6QkrGUqB7qa2VAAM+tgZu0B3H0RwS+ZnQS/YCQ+jgD+DJwJ5AJPA98HlpvZu2Y2mSBRO8zdi8ILs00aCzzq7v8EiPyj5QngSuA6gtHjx0OMry36HvAewZrWvxE8gu43ZnacmXWP1PkBcJu7V4QUo0jolIS1TH8lmFa5xsy6uvsudy+PrHvB3VcDXwK9wwyyrTCzDsBy4DN3/9zdP3T3nwFHAadFjk0DpgN3hhZoG2RmSQRPyZhgZimRssTIeslKd19I8Ciz3maWE2asbUWkHyqAWe5+PNCXYLr4TIJR5AVmdiNwDfCP0AIVaQG0JqyFqXVr/dnAvUAywajLHwiG93sDowjWig1z91UhhNnmRBKxHu6+PjKt4rVvijCzE4EFQB93XxNSmG2SmR0D/A/BP15+6+4b6hw/FCgAstx9bQghtilmlgacByx391fqHMsFLo0c7wEcqj6RtkxJWAtlZgcTPEtzJPAdgoeXA6wn2LLicXefFk50bUv1gm4z6w9sq/1LvtaxW4EfuXv/8CJteyKjwwnAxcAMgufhzgGeAlYTTCOfCQx296PDirOtMbNOBP9Q2Vl7z7Za6yenE6zhyw0rRpGWQElYC2Jm3wAuIFjH8gWwg2DacRHB1hTtCNZY/N3dPw4rzrakVp9MBT4HdgMlwDPAXHffFvklM4ngrsgXQwu2jYv8w+VHBGuNjgS2Eqyd/Cdwh7tr6iuOGrob1cw6A+8Df3Z3Td9Lm6YkrAUxs0eAIcALwEaCqchhwOEECcDP9Yskvhrok1xgEMFWCL9x9/mhBdiGmVk3YGvtX/SRkbGOwEHAUIKRS/2diZP6+qSeOh0JFu7/xd3L4xacSAukJKyFiIymbCUYol9Yq6wP8B8E6yj6A9919/dDC7QNaaRPegPHEIx+9QW+rz6JPzN7iOAOvPcI9qPaa282M+vh7pu0R1h8NLFPDnb3L+MenEgLpLsjW47BwKcE21MAwfoJdy9296eBbxNMTZ4bUnxtUUN98pm7P0Ow1mgr6pO4M7PvEyTBdwPPEWx/MN7MBkbWI2FmBwF/NrNhSsCaXwN98h0zG1CrTzoBj1ZvvyPS1mkkrIWI/M/pRYKNWC8EPqn7SCIzmwL82N2PDCHENkd90nKZ2SygEpgJjAcuAgYAhcDLwGsEG7je6+7tw4qzLVGfiERPI2EtROSZhLcAnYDHgAvN7NDIv+arF7OeQLAnksSB+qRliuwN9inwpbsXuftd7j4MOJrgMUUXEWzrch/apDUu1Cci+0cjYS1MZJj+F8BZBA/ufgcoJXh2ZAlwqbsvCS/Ctkd90vJEnuWZGnkmZHugos4C/e8RPEJquLt/EFacbYn6RCR6SsJaqMjWCGcA5xDcZr8UeMbdPwo1sDZMfdKyRe6MNHevNLNJBNNencOOqy1Tn4g0TknY10DkESxV+64p8aI+adnMbCqQ6O6/CTsWCahPRPamJExEWh0zawdUKlFuOdQnIntTEiYiIiISAt0dKSIiIhICJWEiIiIiIVASJiIiIhICJWEiIiIiIVASJiIiIhICJWEiIiIiIfj/jjwg7z22NVYAAAAASUVORK5CYII=
+<img src="data:image/png;base64,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Y8fQySeffGx5eXlc7dM71113Xc/8/PyjfvKTn6QnJiaGLr300nQAM8tdvHhxO4C1a9fGjR49uv9RRx0VGjx4cPb111+flpubm7Xnc6+44orePXr0OP6oo44KDRo0KPv1118/CuDFF1/s/PDDD/d47bXXkhITE0NZWVkDATZs2BB3wQUX9ElJSTn+mGOOOf76669P23NarKqqiiuvvLJXUlJSTq9evYbk5eV1OZzfiYJNAB3s3PYer7zyCsnJyRQUhHsfKysrueaaazjllFM47bTTeOedd/a2rays5MYbb2T48OF87Wtf45VXXmn2/RCR4Bo7diyLFi3inXfe4YwzzuCaa645YPuPPvqIlStX8q1vfStKFbYer7zyStKbb775ydKlSxfPmTOn69lnnz3gZz/72ery8vJFNTU1/PznPz+mdvuHH354TW5u7raf/exnqyoqKgqefvrpVXW3OXny5D6JiYk1ZWVlhU899dRns2bNOrr28uHDh29ftGjRkk2bNhVMmDBh46RJk/pVVFTYhAkTtlx33XVrv/nNb26qqKgoKCoqWgpw0UUXZcTHx/Ppp58uLigoWPrWW291+d///d+jAR544IGUv//9710WLFiwND8/f+nLL7+cdDi/DwWbgNlzbnvWrFnMnz+fl156iY8//vgr7bZu3cpvf/tbcnP/fZp4z+C9d999l7y8PO68805qamoAuP/++0lJSWHBggXMnz+fU045JTo7JCKtTmpqKmvWrNk7XVpaSmpq6j5tkpOTadeuHQCXXHIJixYtAsI9NHXXTUtLY8GCBSxatIicnBzGjRvHp59+yjnnnBOFvWn5rrrqqi969+5d1bdv393Dhw/fFgqFtp9yyik7EhMT/ZxzzvmysLCwUV1cVVVVvP76613vu+++NZ06darJzc3decEFF+zzzKirr756Y48eParbtm3L3Xffva6ystIKCwvb17e9zz//PH7evHldHn/88VWdO3eu6dmzZ9W111677sUXX0wGyMvLS5oyZcoX/fv33929e/fqH//4x2sP/behYBM4DT23PW3aNG644Qbat//3n8OioiJGjhwJQEpKCl26dNnbmzNjxgxuvPFGANq0aUO3bt2isDci0hoNHTqU4uJiSkpKqKysJC8vj7Fjx+7TZu3af//bNXv2bI499lgARo8ezVtvvcWXX37Jl19+yVtvvcXo0aP53ve+x9KlSyksLGT27Nn069ePv/zlL1Hdr5YqNTV17+VD7du3r+nevfveS586dOhQU1FREdeY7ZWWlsZXV1dbZmbm3u327t27snabu+66q3tmZuagTp06ndCpU6cTtm3bFvfFF1/Ue0HSihUrEqqqqiw1NTVnT/ubb765z4YNG9oCrFu3rm16evre7ffr129XY+qtS8EmYBpybruwsJA1a9Zw1lln7TN/0KBBzJ49m6qqKkpKSli0aBFr1qxh8+bNQDgMjRo1issvv5wvvvii+XdGRFql+Ph4pk+fzoQJEzjxxBM599xzyc7OZtq0aXv/o/X4449z0kkncdppp/H444/zyCOPAJCUlMQtt9zCmWeeyZlnnsmPfvQjkpIO68yE1MPMfH/L0tLSquLi4vyzzz5ru2fe559/vvcy8Ndff/2oX//61z2ee+654i+//HLR1q1bFx111FHV7l7vtjMzM3cnJCT4xo0bF23dunXR1q1bF23btq1gxYoVSwCOOeaY3atWrdq7/eLi4naHs28KNkeYmpoa7rjjDu69996vLJs0aRJpaWmMHj2a22+/nREjRhAXF0dVVRWlpaWMGDGCf/zjHwwfPpy77rorBtWLSGsxZswYFixYwMKFC/dexXT77bczbtw4AO666y7mz5/PP//5T1555ZW9PTYQ/i7Kz88nPz+fiRMnfmXb6enpvPfee9HZkYBKSUmp2l+AiI+P5+yzz/7yv/7rv9K2bt3apqCgoP0LL7ywt5t+8+bNcfHx8d6jR4/du3fvtltuuSV1+/bte3uFunfvXrV69eqE6upqAPr06bP7lFNO2XzllVf23rhxY5vq6mqWLFnS7rXXXjsKYPz48Zt++9vfHvPpp5+2LS8vj5s+fXqPw9k33ccmYA52bnvbtm0sW7Zs77npL774gokTJzJjxgxCoRDTpk3b2/bss8+mX79+JCcnk5iYuHed73znOzz77LNR2iMRkZanqe8zE2033njjusmTJ/d9+umnU8aPH7/hySef/Lz28ieeeGLVxRdfnJGampqTkZGx89xzz924aNGijgDnn3/+5hdffHHLwIEDh3To0KH6P//zP9f16NFj76mkSy+9dOPzzz+fnJSUdEKvXr12LV26dNmsWbNWXn/99T2zs7MHV1RUtOnVq1flD3/4wzKAm266qfyTTz5pn5ubO6hj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/RBwt5l9BjzJAW7OJyIiIhINjbrc291/Uuv9i5GHU54MfOLurzZ1cSIiIiKNcVj3sXH394H3m6gWERERkcPS2FNRmNlQM3vazD6MvJ4xs6HNUZyIiIhIYzT2Bn0TgQWEH4fw18irO/CBmU1q+vJEREREGq6xp6LuA+5092m1Z5rZTwg/q+nZpipMREREpLEaeyoqBZhVz/wXgGMOvxwRERGRQ9fYYPMWMKqe+aOAeYdbjIiIiMjhOOipKDMbX2tyNvAzMxvGv6+GOhEYD0xt8upEREREGqEhY2xerGfelZFXbQ8Djx52RSIiIiKH6KDBxt0bfUm4iIiISCwotIiIiEhgHMoN+r5pZm+b2XozKzezeWb2jeYoTkRERKQxGnuDvsmEH4T5KfBj4DbgM+BPZva9pi9PREREpOEae4O+HwM3ufuva837vZnlEw45/6/JKhMRERFppMaeikoHXq9n/mygz+GXIyIiInLoGhtsVgFj6pl/FlBy+OWIiIiIHLrGnor6JfBw5Gne70XmnQJcAlzXlIWJiIiINFajgo27/9bMvgBuJny3YYBlwAXu/uemLk5ERESkMRocbMwsnvApp7fd/U/NV5KIiIjIoWnwGBt3rwLygE7NV46IiIjIoWvs4OFCoH9zFCIiIiJyuBobbKYC95vZuWbW28ySa7+aoT4RERGRBmvsVVGvRX7mAV5rvkWm45qiKBEREZFD0dhgc0azVCEiIiLSBBoUbMwsEfgFcC7QFpgDXO/u65uxNhEREZFGaegYm7uBywmfivoj4bsP/6aZahIRERE5JA09FTUe+L67PwdgZjOAd80szt2rm606ERERkUZoaI9Nb+Cfeybc/QOgCkhrjqJEREREDkVDg00cUFlnXhWNH3wsIiIi0mwaGkwMeNbMdtWa1x54wswq9sxw9283ZXEiIiIijdHQYPNUPfOebcpCRERERA5Xg4KNu1/R3IWIiIiIHK7GPlJBREREpMVSsBEREZHAULARERGRwFCwERERkcBQsBEREZHAULARERGRwFCwERERkcBQsBEREZHAULARERGRwFCwERERkcBQsBEREZHAULARERGRwFCwERERkcBQsBEREZHAULARERGRwFCwERERkcBQsBEREZHAULARERGRwFCwERERkcCIerAxs6vN7DMz22lm+WZ22gHapprZTDP72MyqzezJ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
 "
 >
 </div>
@@ -13279,176 +13899,10 @@ Noisy calibration matrix:
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Correcting-Using-the-Calibration-Matrix">Correcting Using the Calibration Matrix<a class="anchor-link" href="#Correcting-Using-the-Calibration-Matrix">&#182;</a></h1><p>If we have the calibration matrix $\mathbf{A}$ which gives the transformation between the distributions, 
-$$\tilde{P}_{\rho} = \mathbf{A} \cdot P_{\rho}$$
-then to work back to $P_{\rho}$ we just need to invert $\mathbf{A}$,
-$$P_{\rho} = \mathbf{A}^{-1} \cdot \tilde{P}_{\rho}$$
-However, there are some issues to watch out for.</p>
-<p>Below, we simulate a calibration with 200 shots and then prepare the state $|11\rangle$ and measure with 2000 shots.</p>
+<p>Here we have taken results for which almost $20\%$ of samples are in the wrong state, and turned it into an exact representation of what the true results should be. However, this example does have just two qubits with a simple noise model. For more qubits, and more complex noise models or data from real devices, the mitigation will have more of a challenge. Perhaps you might find methods that are better than those Qiskit uses!</p>
 
 </div>
 </div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Generate the calibration circuits</span>
-<span class="n">qr</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">meas_calibs</span><span class="p">,</span> <span class="n">state_labels</span> <span class="o">=</span> <span class="n">complete_meas_cal</span><span class="p">(</span><span class="n">qubit_list</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">qr</span><span class="o">=</span><span class="n">qr</span><span class="p">)</span>
-<span class="c1"># Generate a noise model for the 2 qubits</span>
-<span class="n">noise_model</span> <span class="o">=</span> <span class="n">noise</span><span class="o">.</span><span class="n">NoiseModel</span><span class="p">()</span>
-<span class="k">for</span> <span class="n">qi</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
-    <span class="n">read_err</span> <span class="o">=</span> <span class="n">noise</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">readout_error</span><span class="o">.</span><span class="n">ReadoutError</span><span class="p">([[</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">],[</span><span class="mf">0.25</span><span class="p">,</span><span class="mf">0.75</span><span class="p">]])</span>
-    <span class="n">noise_model</span><span class="o">.</span><span class="n">add_readout_error</span><span class="p">(</span><span class="n">read_err</span><span class="p">,</span> <span class="p">[</span><span class="n">qi</span><span class="p">])</span>
-<span class="n">backend</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">)</span>
-<span class="n">job_w_noise_cal</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">meas_calibs</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">,</span> <span class="n">noise_model</span><span class="o">=</span><span class="n">noise_model</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
-<span class="n">job_for_correction</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">meas_calibs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">,</span> <span class="n">noise_model</span><span class="o">=</span><span class="n">noise_model</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">2000</span><span class="p">)</span>
-<span class="n">cal_results</span> <span class="o">=</span> <span class="n">job_w_noise_cal</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
-<span class="n">raw_results</span> <span class="o">=</span> <span class="n">job_for_correction</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
-<span class="n">meas_fitter</span> <span class="o">=</span> <span class="n">CompleteMeasFitter</span><span class="p">(</span><span class="n">cal_results</span><span class="p">,</span> <span class="n">state_labels</span><span class="p">)</span>
-<span class="n">meas_filter</span> <span class="o">=</span> <span class="n">meas_fitter</span><span class="o">.</span><span class="n">filter</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Corrected Results using Matrix Inversion:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">meas_filter</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">raw_results</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;pseudo_inverse&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="s1">&#39;cal_11&#39;</span><span class="p">))</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Corrected Results using Matrix Inversion:
-{&#39;00&#39;: 91.36875000000059, &#39;01&#39;: 46.12083333333413, &#39;11&#39;: 2015.9520833333343, &#39;10&#39;: -153.44166666666717}
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>If you run the above code several times, you will likely see some negative counts. This is because there is some statistical noise in the calibration matrix which means that the corrected results will be unphysical. To correct for this we can find the $P_{\rho}$ which is closest to reproducing the measured output,
-$$\text{min}_{P_{\rho}} ||\tilde{P}_{\rho}-\mathbf{A}\cdot P_{\rho}||$$
-but where all elements of $P$ are non-zero.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Corrected Results using Constrained Least Square:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">meas_filter</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">raw_results</span><span class="p">)</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="s1">&#39;cal_11&#39;</span><span class="p">))</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Corrected Results using Constrained Least Square:
-{&#39;00&#39;: 18.683235581467915, &#39;01&#39;: 61.34919107554396, &#39;11&#39;: 1919.9675733425333, &#39;10&#39;: 4.5479099506544676e-10}
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Tensored-Mitigation">Tensored Mitigation<a class="anchor-link" href="#Tensored-Mitigation">&#182;</a></h1><p>Tensored mitigation applies for local errors. In a fully-tensored mitigation all the errors act on a single qubit. In this case, the calibration matrix $\mathbf{A}$ has the form
-$$ \mathbf{A} = \bigotimes_{i=1}^n A_i, $$
-where $A_i$ is a specific calibration matrix of the $i$th qubit.</p>
-<p>Fully-tensored mitigation requires only two calibration circuits, as opposed to $2^n$ circuits in the general case. Moreover, the calculation of the estimate of $P_{\rho}$ does not require construction of the full calibration matrix $\mathbf{A}$, thus saving the need to store an $2^n$ times $2^n$ matrix in memory; this is true for both pseudo-inverse and least-squares methods.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Generate the calibration circuits</span>
-<span class="n">qr</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">mit_pattern</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
-<span class="n">meas_calibs</span><span class="p">,</span> <span class="n">state_labels</span> <span class="o">=</span> <span class="n">tensored_meas_cal</span><span class="p">(</span><span class="n">mit_pattern</span><span class="o">=</span><span class="n">mit_pattern</span><span class="p">,</span> <span class="n">qr</span><span class="o">=</span><span class="n">qr</span><span class="p">)</span>
-<span class="c1"># Generate a noise model for the 2 qubits</span>
-<span class="n">noise_model</span> <span class="o">=</span> <span class="n">noise</span><span class="o">.</span><span class="n">NoiseModel</span><span class="p">()</span>
-<span class="k">for</span> <span class="n">qi</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
-    <span class="n">read_err</span> <span class="o">=</span> <span class="n">noise</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">readout_error</span><span class="o">.</span><span class="n">ReadoutError</span><span class="p">([[</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">],[</span><span class="mf">0.25</span><span class="p">,</span><span class="mf">0.75</span><span class="p">]])</span>
-    <span class="n">noise_model</span><span class="o">.</span><span class="n">add_readout_error</span><span class="p">(</span><span class="n">read_err</span><span class="p">,</span> <span class="p">[</span><span class="n">qi</span><span class="p">])</span>
-<span class="n">backend</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">)</span>
-<span class="n">job_w_noise</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">meas_calibs</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">,</span> <span class="n">noise_model</span><span class="o">=</span><span class="n">noise_model</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
-<span class="n">cal_results</span> <span class="o">=</span> <span class="n">job_w_noise</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
-<span class="n">meas_fitter</span> <span class="o">=</span> <span class="n">TensoredMeasFitter</span><span class="p">(</span><span class="n">cal_results</span><span class="p">,</span> <span class="n">mit_pattern</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Noisy calibration matrices:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">meas_fitter</span><span class="o">.</span><span class="n">cal_matrices</span><span class="p">)</span>
-<span class="n">job_for_correction</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">meas_calibs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">,</span> <span class="n">noise_model</span><span class="o">=</span><span class="n">noise_model</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">2000</span><span class="p">)</span>
-<span class="n">raw_results</span> <span class="o">=</span> <span class="n">job_for_correction</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
-<span class="n">meas_filter</span> <span class="o">=</span> <span class="n">meas_fitter</span><span class="o">.</span><span class="n">filter</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Corrected Results using Matrix Inversion:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">meas_filter</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">raw_results</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;pseudo_inverse&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="s1">&#39;cal_11&#39;</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Corrected Results using Constrained Least Square:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">meas_filter</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">raw_results</span><span class="p">)</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="s1">&#39;cal_11&#39;</span><span class="p">))</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Noisy calibration matrices:
-[array([[0.91 , 0.228],
-       [0.09 , 0.772]]), array([[0.907, 0.253],
-       [0.093, 0.747]])]
-Corrected Results using Matrix Inversion:
-{&#39;00&#39;: -0.41701417848210554, &#39;01&#39;: 21.82374200722836, &#39;11&#39;: 1916.592680280161, &#39;10&#39;: 62.00059189109197}
-Corrected Results using Constrained Least Square:
-{&#39;01&#39;: 21.607661075488608, &#39;11&#39;: 1916.6337878419722, &#39;10&#39;: 61.75855108253915}
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
 </div>
     </div>
   </div>
