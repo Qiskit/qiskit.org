@@ -34,7 +34,7 @@
        </script>
         <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
     
-    <title>qiskit.extensions.quantum_initializer.initializer &#8212; Qiskit 0.11.2 ドキュメント</title>
+    <title>qiskit.extensions.quantum_initializer.initializer &#8212; Qiskit 0.12.0 ドキュメント</title>
 
     <link rel="stylesheet" href="../../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -89,12 +89,12 @@
       </span>
     
 
-<div class="languages" >
+<!-- <div class="languages" >
 	    <select id="language" name="languages">
 	        <option value="en">English</option>
 	        <option value="ja">Japanese</option>
 	    </select>
-</div>
+</div> -->
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../../search.html" method="get">
@@ -134,12 +134,12 @@
       </span>
     
 
-<div class="languages" >
+<!-- <div class="languages" >
 	    <select id="language" name="languages">
 	        <option value="en">English</option>
 	        <option value="ja">Japanese</option>
 	    </select>
-</div>
+</div> -->
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../../search.html" method="get">
@@ -205,7 +205,7 @@
 <span class="n">_EPS</span> <span class="o">=</span> <span class="mf">1e-10</span>  <span class="c1"># global variable used to chop very small numbers to zero</span>
 
 
-<div class="viewcode-block" id="Initialize"><a class="viewcode-back" href="../../../../api/qiskit.extensions.quantum_initializer.initializer.html#qiskit.circuit.Initialize">[ドキュメント]</a><span class="k">class</span> <span class="nc">Initialize</span><span class="p">(</span><span class="n">Instruction</span><span class="p">):</span>
+<div class="viewcode-block" id="Initialize"><a class="viewcode-back" href="../../../../api/qiskit.extensions.Initialize.html#qiskit.circuit.Initialize">[ドキュメント]</a><span class="k">class</span> <span class="nc">Initialize</span><span class="p">(</span><span class="n">Instruction</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Complex amplitude initialization.</span>
 
 <span class="sd">    Class that implements the (complex amplitude) initialization of some</span>
@@ -258,7 +258,7 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">definition</span> <span class="o">=</span> <span class="n">initialize_circuit</span><span class="o">.</span><span class="n">data</span>
 
-<div class="viewcode-block" id="Initialize.gates_to_uncompute"><a class="viewcode-back" href="../../../../api/qiskit.extensions.quantum_initializer.initializer.html#qiskit.circuit.Initialize.gates_to_uncompute">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">gates_to_uncompute</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Initialize.gates_to_uncompute"><a class="viewcode-back" href="../../../../api/qiskit.extensions.Initialize.html#qiskit.circuit.Initialize.gates_to_uncompute">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">gates_to_uncompute</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Call to create a circuit with gates that take the</span>
 <span class="sd">        desired vector to zero.</span>
@@ -411,21 +411,21 @@
 
         <span class="k">return</span> <span class="n">circuit</span>
 
-<div class="viewcode-block" id="Initialize.broadcast_arguments"><a class="viewcode-back" href="../../../../api/qiskit.extensions.quantum_initializer.initializer.html#qiskit.circuit.Initialize.broadcast_arguments">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">broadcast_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">broadcast_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span><span class="p">):</span>
         <span class="n">flat_qargs</span> <span class="o">=</span> <span class="p">[</span><span class="n">qarg</span> <span class="k">for</span> <span class="n">sublist</span> <span class="ow">in</span> <span class="n">qargs</span> <span class="k">for</span> <span class="n">qarg</span> <span class="ow">in</span> <span class="n">sublist</span><span class="p">]</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_qubits</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">flat_qargs</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;Initialize parameter vector has </span><span class="si">%d</span><span class="s2"> elements, therefore expects </span><span class="si">%s</span><span class="s2"> &quot;</span>
                               <span class="s2">&quot;qubits. However, </span><span class="si">%s</span><span class="s2"> were provided.&quot;</span> <span class="o">%</span>
                               <span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">num_qubits</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_qubits</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">flat_qargs</span><span class="p">)))</span>
-        <span class="k">yield</span> <span class="n">flat_qargs</span><span class="p">,</span> <span class="p">[]</span></div></div>
+        <span class="k">yield</span> <span class="n">flat_qargs</span><span class="p">,</span> <span class="p">[]</span></div>
 
 
-<div class="viewcode-block" id="initialize"><a class="viewcode-back" href="../../../../api/qiskit.extensions.quantum_initializer.initializer.html#qiskit.circuit.initialize">[ドキュメント]</a><span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">qubits</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">qubits</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Apply initialize to circuit.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">qubits</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
         <span class="n">qubits</span> <span class="o">=</span> <span class="p">[</span><span class="n">qubits</span><span class="p">]</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Initialize</span><span class="p">(</span><span class="n">params</span><span class="p">),</span> <span class="n">qubits</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Initialize</span><span class="p">(</span><span class="n">params</span><span class="p">),</span> <span class="n">qubits</span><span class="p">)</span>
 
 
 <span class="n">QuantumCircuit</span><span class="o">.</span><span class="n">initialize</span> <span class="o">=</span> <span class="n">initialize</span>
@@ -469,11 +469,11 @@
         link.addEventListener('click', clickExternalLink);
     </script>
     <script>
-      var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
-      var prefix = '/documentation';
-      function getDefaultLanguage() {
-        return 'en';
-      }
+	    var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+	    var prefix = '/documentation';
+	    function getDefaultLanguage() {
+	      return 'en';
+	    }
       var el = document.getElementById('language');
       var optionsToSelect = ['en', 'ja']
       function changeLoc(evt) {

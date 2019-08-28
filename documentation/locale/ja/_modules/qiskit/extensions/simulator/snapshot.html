@@ -34,7 +34,7 @@
        </script>
         <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
     
-    <title>qiskit.extensions.simulator.snapshot &#8212; Qiskit 0.11.2 ドキュメント</title>
+    <title>qiskit.extensions.simulator.snapshot &#8212; Qiskit 0.12.0 ドキュメント</title>
 
     <link rel="stylesheet" href="../../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -89,12 +89,12 @@
       </span>
     
 
-<div class="languages" >
+<!-- <div class="languages" >
 	    <select id="language" name="languages">
 	        <option value="en">English</option>
 	        <option value="ja">Japanese</option>
 	    </select>
-</div>
+</div> -->
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../../search.html" method="get">
@@ -134,12 +134,12 @@
       </span>
     
 
-<div class="languages" >
+<!-- <div class="languages" >
 	    <select id="language" name="languages">
 	        <option value="en">English</option>
 	        <option value="ja">Japanese</option>
 	    </select>
-</div>
+</div> -->
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../../search.html" method="get">
@@ -196,7 +196,7 @@
 <span class="kn">from</span> <span class="nn">qiskit.extensions.exceptions</span> <span class="k">import</span> <span class="n">QiskitError</span><span class="p">,</span> <span class="n">ExtensionError</span>
 
 
-<div class="viewcode-block" id="Snapshot"><a class="viewcode-back" href="../../../../api/qiskit.extensions.simulator.snapshot.html#qiskit.circuit.Snapshot">[ドキュメント]</a><span class="k">class</span> <span class="nc">Snapshot</span><span class="p">(</span><span class="n">Instruction</span><span class="p">):</span>
+<div class="viewcode-block" id="Snapshot"><a class="viewcode-back" href="../../../../api/qiskit.extensions.simulator.Snapshot.html#qiskit.circuit.Snapshot">[ドキュメント]</a><span class="k">class</span> <span class="nc">Snapshot</span><span class="p">(</span><span class="n">Instruction</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Simulator snapshot instruction.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
@@ -225,14 +225,14 @@
             <span class="n">params</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s1">&#39;snapshot&#39;</span><span class="p">,</span> <span class="n">num_qubits</span><span class="p">,</span> <span class="n">num_clbits</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Snapshot.assemble"><a class="viewcode-back" href="../../../../api/qiskit.extensions.simulator.snapshot.html#qiskit.circuit.Snapshot.assemble">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">assemble</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Snapshot.assemble"><a class="viewcode-back" href="../../../../api/qiskit.extensions.simulator.Snapshot.html#qiskit.circuit.Snapshot.assemble">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">assemble</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Assemble a QasmQobjInstruction&quot;&quot;&quot;</span>
         <span class="n">instruction</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">assemble</span><span class="p">()</span>
         <span class="n">instruction</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_label</span>
         <span class="n">instruction</span><span class="o">.</span><span class="n">snapshot_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_snapshot_type</span>
         <span class="k">return</span> <span class="n">instruction</span></div>
 
-<div class="viewcode-block" id="Snapshot.inverse"><a class="viewcode-back" href="../../../../api/qiskit.extensions.simulator.snapshot.html#qiskit.circuit.Snapshot.inverse">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Snapshot.inverse"><a class="viewcode-back" href="../../../../api/qiskit.extensions.simulator.Snapshot.html#qiskit.circuit.Snapshot.inverse">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Special case. Return self.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">Snapshot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_qubits</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_clbits</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span></div>
@@ -262,11 +262,11 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;label expects a string&#39;</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Snapshot.c_if"><a class="viewcode-back" href="../../../../api/qiskit.extensions.simulator.snapshot.html#qiskit.circuit.Snapshot.c_if">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">c_if</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">classical</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+<div class="viewcode-block" id="Snapshot.c_if"><a class="viewcode-back" href="../../../../api/qiskit.extensions.simulator.Snapshot.html#qiskit.circuit.Snapshot.c_if">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">c_if</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">classical</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
         <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s1">&#39;Snapshots are simulator directives and cannot be conditional.&#39;</span><span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="snapshot"><a class="viewcode-back" href="../../../../api/qiskit.extensions.simulator.snapshot.html#qiskit.circuit.snapshot">[ドキュメント]</a><span class="k">def</span> <span class="nf">snapshot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<span class="k">def</span> <span class="nf">snapshot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
              <span class="n">label</span><span class="p">,</span>
              <span class="n">snapshot_type</span><span class="o">=</span><span class="s1">&#39;statevector&#39;</span><span class="p">,</span>
              <span class="n">qubits</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -317,7 +317,7 @@
             <span class="n">label</span><span class="p">,</span>
             <span class="n">snapshot_type</span><span class="o">=</span><span class="n">snapshot_type</span><span class="p">,</span>
             <span class="n">num_qubits</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">qubits</span><span class="p">),</span>
-            <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">),</span> <span class="n">qubits</span><span class="p">)</span></div>
+            <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">),</span> <span class="n">qubits</span><span class="p">)</span>
 
 
 <span class="c1"># Add to QuantumCircuit class</span>
@@ -362,11 +362,11 @@
         link.addEventListener('click', clickExternalLink);
     </script>
     <script>
-      var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
-      var prefix = '/documentation';
-      function getDefaultLanguage() {
-        return 'en';
-      }
+	    var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+	    var prefix = '/documentation';
+	    function getDefaultLanguage() {
+	      return 'en';
+	    }
       var el = document.getElementById('language');
       var optionsToSelect = ['en', 'ja']
       function changeLoc(evt) {
