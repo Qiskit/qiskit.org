@@ -34,7 +34,7 @@
        </script>
         <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
     
-    <title>qiskit.aqua.circuits.piecewise_linear_rotation &#8212; Qiskit 0.11.2 ドキュメント</title>
+    <title>qiskit.aqua.circuits.piecewise_linear_rotation &#8212; Qiskit 0.12.0 ドキュメント</title>
 
     <link rel="stylesheet" href="../../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -89,12 +89,12 @@
       </span>
     
 
-<div class="languages" >
+<!-- <div class="languages" >
 	    <select id="language" name="languages">
 	        <option value="en">English</option>
 	        <option value="ja">Japanese</option>
 	    </select>
-</div>
+</div> -->
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../../search.html" method="get">
@@ -134,12 +134,12 @@
       </span>
     
 
-<div class="languages" >
+<!-- <div class="languages" >
 	    <select id="language" name="languages">
 	        <option value="en">English</option>
 	        <option value="ja">Japanese</option>
 	    </select>
-</div>
+</div> -->
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../../search.html" method="get">
@@ -190,7 +190,7 @@
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 
-<div class="viewcode-block" id="PiecewiseLinearRotation"><a class="viewcode-back" href="../../../../api/qiskit.aqua.circuits.piecewise_linear_rotation.html#qiskit.aqua.circuits.PiecewiseLinearRotation">[ドキュメント]</a><span class="k">class</span> <span class="nc">PiecewiseLinearRotation</span><span class="p">(</span><span class="n">CircuitFactory</span><span class="p">):</span>
+<div class="viewcode-block" id="PiecewiseLinearRotation"><a class="viewcode-back" href="../../../../api/qiskit.aqua.circuits.PiecewiseLinearRotation.html#qiskit.aqua.circuits.PiecewiseLinearRotation">[ドキュメント]</a><span class="k">class</span> <span class="nc">PiecewiseLinearRotation</span><span class="p">(</span><span class="n">CircuitFactory</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Piecewise-linearly-controlled rotation.</span>
 <span class="sd">    For a piecewise linear (not necessarily continuous) function f(x).</span>
@@ -260,7 +260,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">i_target</span> <span class="o">=</span> <span class="n">num_state_qubits</span>
 
-<div class="viewcode-block" id="PiecewiseLinearRotation.evaluate"><a class="viewcode-back" href="../../../../api/qiskit.aqua.circuits.piecewise_linear_rotation.html#qiskit.aqua.circuits.PiecewiseLinearRotation.evaluate">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<div class="viewcode-block" id="PiecewiseLinearRotation.evaluate"><a class="viewcode-back" href="../../../../api/qiskit.aqua.circuits.PiecewiseLinearRotation.html#qiskit.aqua.circuits.PiecewiseLinearRotation.evaluate">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Classically evaluate the piecewise linear rotation</span>
 <span class="sd">        Args:</span>
@@ -274,14 +274,14 @@
 
         <span class="k">return</span> <span class="n">y</span></div>
 
-<div class="viewcode-block" id="PiecewiseLinearRotation.required_ancillas"><a class="viewcode-back" href="../../../../api/qiskit.aqua.circuits.piecewise_linear_rotation.html#qiskit.aqua.circuits.PiecewiseLinearRotation.required_ancillas">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">required_ancillas</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="PiecewiseLinearRotation.required_ancillas"><a class="viewcode-back" href="../../../../api/qiskit.aqua.circuits.PiecewiseLinearRotation.html#qiskit.aqua.circuits.PiecewiseLinearRotation.required_ancillas">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">required_ancillas</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
         <span class="n">num_ancillas</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_state_qubits</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">breakpoints</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">contains_zero_breakpoint</span><span class="p">:</span>
             <span class="n">num_ancillas</span> <span class="o">-=</span> <span class="mi">1</span>
         <span class="k">return</span> <span class="n">num_ancillas</span></div>
 
-<div class="viewcode-block" id="PiecewiseLinearRotation.build"><a class="viewcode-back" href="../../../../api/qiskit.aqua.circuits.piecewise_linear_rotation.html#qiskit.aqua.circuits.PiecewiseLinearRotation.build">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qc</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">q_ancillas</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="PiecewiseLinearRotation.build"><a class="viewcode-back" href="../../../../api/qiskit.aqua.circuits.PiecewiseLinearRotation.html#qiskit.aqua.circuits.PiecewiseLinearRotation.build">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qc</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">q_ancillas</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
         <span class="c1"># get parameters</span>
         <span class="n">i_state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">i_state</span>
@@ -370,11 +370,11 @@
         link.addEventListener('click', clickExternalLink);
     </script>
     <script>
-      var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
-      var prefix = '/documentation';
-      function getDefaultLanguage() {
-        return 'en';
-      }
+	    var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+	    var prefix = '/documentation';
+	    function getDefaultLanguage() {
+	      return 'en';
+	    }
       var el = document.getElementById('language');
       var optionsToSelect = ['en', 'ja']
       function changeLoc(evt) {

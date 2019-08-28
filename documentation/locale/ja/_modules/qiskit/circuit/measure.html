@@ -34,7 +34,7 @@
        </script>
         <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
     
-    <title>qiskit.circuit.measure &#8212; Qiskit 0.11.2 ドキュメント</title>
+    <title>qiskit.circuit.measure &#8212; Qiskit 0.12.0 ドキュメント</title>
 
     <link rel="stylesheet" href="../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -89,12 +89,12 @@
       </span>
     
 
-<div class="languages" >
+<!-- <div class="languages" >
 	    <select id="language" name="languages">
 	        <option value="en">English</option>
 	        <option value="ja">Japanese</option>
 	    </select>
-</div>
+</div> -->
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../search.html" method="get">
@@ -134,12 +134,12 @@
       </span>
     
 
-<div class="languages" >
+<!-- <div class="languages" >
 	    <select id="language" name="languages">
 	        <option value="en">English</option>
 	        <option value="ja">Japanese</option>
 	    </select>
-</div>
+</div> -->
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../search.html" method="get">
@@ -193,14 +193,14 @@
 <span class="kn">from</span> <span class="nn">qiskit.exceptions</span> <span class="k">import</span> <span class="n">QiskitError</span>
 
 
-<div class="viewcode-block" id="Measure"><a class="viewcode-back" href="../../../api/qiskit.circuit.measure.html#qiskit.circuit.Measure">[ドキュメント]</a><span class="k">class</span> <span class="nc">Measure</span><span class="p">(</span><span class="n">Instruction</span><span class="p">):</span>
+<div class="viewcode-block" id="Measure"><a class="viewcode-back" href="../../../api/qiskit.circuit.Measure.html#qiskit.circuit.Measure">[ドキュメント]</a><span class="k">class</span> <span class="nc">Measure</span><span class="p">(</span><span class="n">Instruction</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Quantum measurement in the computational basis.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create new measurement instruction.&quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;measure&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">[])</span>
 
-<div class="viewcode-block" id="Measure.broadcast_arguments"><a class="viewcode-back" href="../../../api/qiskit.circuit.measure.html#qiskit.circuit.Measure.broadcast_arguments">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">broadcast_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">broadcast_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span><span class="p">):</span>
         <span class="n">qarg</span> <span class="o">=</span> <span class="n">qargs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">carg</span> <span class="o">=</span> <span class="n">cargs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
@@ -211,10 +211,10 @@
             <span class="k">for</span> <span class="n">each_carg</span> <span class="ow">in</span> <span class="n">carg</span><span class="p">:</span>
                 <span class="k">yield</span> <span class="n">qarg</span><span class="p">,</span> <span class="p">[</span><span class="n">each_carg</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s1">&#39;register size error&#39;</span><span class="p">)</span></div></div>
+            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s1">&#39;register size error&#39;</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="measure"><a class="viewcode-back" href="../../../api/qiskit.circuit.measure.html#qiskit.circuit.measure">[ドキュメント]</a><span class="k">def</span> <span class="nf">measure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qubit</span><span class="p">,</span> <span class="n">cbit</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">measure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qubit</span><span class="p">,</span> <span class="n">cbit</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Measure quantum bit into classical bit (tuples).</span>
 
 <span class="sd">    Args:</span>
@@ -228,7 +228,7 @@
 <span class="sd">        QiskitError: if qubit is not in this circuit or bad format;</span>
 <span class="sd">            if cbit is not in this circuit or not creg.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Measure</span><span class="p">(),</span> <span class="p">[</span><span class="n">qubit</span><span class="p">],</span> <span class="p">[</span><span class="n">cbit</span><span class="p">])</span></div>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Measure</span><span class="p">(),</span> <span class="p">[</span><span class="n">qubit</span><span class="p">],</span> <span class="p">[</span><span class="n">cbit</span><span class="p">])</span>
 
 
 <span class="n">QuantumCircuit</span><span class="o">.</span><span class="n">measure</span> <span class="o">=</span> <span class="n">measure</span>
@@ -272,11 +272,11 @@
         link.addEventListener('click', clickExternalLink);
     </script>
     <script>
-      var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
-      var prefix = '/documentation';
-      function getDefaultLanguage() {
-        return 'en';
-      }
+	    var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+	    var prefix = '/documentation';
+	    function getDefaultLanguage() {
+	      return 'en';
+	    }
       var el = document.getElementById('language');
       var optionsToSelect = ['en', 'ja']
       function changeLoc(evt) {
