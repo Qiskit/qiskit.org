@@ -18,7 +18,7 @@ tagline: A global program that provides support to the individuals who actively 
   ### Access to Qiskit core members and projects
   Advocates will receive special access to core members of the Qiskit team for questions and brainstorming ideas. They will     also have the opportunity to work on new Qiskit projects. 
 
-* ![](/images/icons/visibility.svg)
+* ![](/images/icons/event.svg)
   ### Invitation to events
   Active Qiskit Advocates will be invited to attend global events created for the quantum computing community. 
 
