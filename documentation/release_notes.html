@@ -1533,15 +1533,13 @@ of all the passes run in the PassManager.</p>
 if specified will be run after each pass is executed. This function gets
 passed a set of kwargs on each call with the state of the pass maanger after
 each pass execution. Currently these kwargs are:</p>
-<blockquote>
-<div><ul class="simple">
+<ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">pass_</span></code> (<code class="docutils literal notranslate"><span class="pre">Pass</span></code>): the pass being run</li>
 <li><code class="docutils literal notranslate"><span class="pre">dag</span></code> (<code class="docutils literal notranslate"><span class="pre">DAGCircuit</span></code>): the dag output of the pass</li>
 <li><code class="docutils literal notranslate"><span class="pre">time</span></code> (<code class="docutils literal notranslate"><span class="pre">float</span></code>): the time to execute the pass</li>
 <li><code class="docutils literal notranslate"><span class="pre">property_set</span></code> (<code class="docutils literal notranslate"><span class="pre">PropertySet</span></code>): the property set</li>
 <li><code class="docutils literal notranslate"><span class="pre">count</span></code> (<code class="docutils literal notranslate"><span class="pre">int</span></code>): the index for the pass execution</li>
 </ul>
-</div></blockquote>
 <p>However, it’s worth noting that while these arguments are set for the 0.9
 release they expose the internals of the pass manager and are subject to
 change in future release.</p>
@@ -1670,9 +1668,8 @@ and <code class="docutils literal notranslate"><span class="pre">qiskit.quantum_
 to check whether a second <code class="docutils literal notranslate"><span class="pre">Operator</span></code> object or <code class="docutils literal notranslate"><span class="pre">Statevector</span></code> is
 equivalent up to global phase.</p>
 </li>
-<li><dl class="first docutils">
-<dt>The user config file has several new options:</dt>
-<dd><ul class="first last simple">
+<li><p class="first">The user config file has several new options:</p>
+<ul class="simple">
 <li>The <code class="docutils literal notranslate"><span class="pre">circuit_drawer</span></code> field now accepts an <cite>auto</cite> value. When set as
 the value for the <code class="docutils literal notranslate"><span class="pre">circuit_drawer</span></code> field the default drawer backend
 will be <cite>mpl</cite> if it is available, otherwise the <cite>text</cite> backend will be
@@ -1686,8 +1683,6 @@ default transpiler optimization level to use for calls to
 <code class="docutils literal notranslate"><span class="pre">qiskit.compiler.transpile()</span></code>. The value can be set to either 0, 1, 2,
 or 3.</li>
 </ul>
-</dd>
-</dl>
 </li>
 <li><p class="first">Introduced a new pulse command <code class="docutils literal notranslate"><span class="pre">Delay</span></code> which may be inserted into a pulse
 <code class="docutils literal notranslate"><span class="pre">Schedule</span></code>. This command accepts a <code class="docutils literal notranslate"><span class="pre">duration</span></code> and may be added to any
@@ -1745,8 +1740,7 @@ been updated to use <code class="docutils literal notranslate"><span class="pre"
 </li>
 <li><p class="first">The following deprecated <code class="docutils literal notranslate"><span class="pre">qiskit.dagcircuit.DAGCircuit</span></code> methods have been
 removed:</p>
-<blockquote>
-<div><ul>
+<ul>
 <li><p class="first"><code class="docutils literal notranslate"><span class="pre">DAGCircuit.get_qubits()</span></code> - Use <code class="docutils literal notranslate"><span class="pre">DAGCircuit.qubits()</span></code> instead</p>
 </li>
 <li><p class="first"><code class="docutils literal notranslate"><span class="pre">DAGCircuit.get_bits()</span></code> - Use <code class="docutils literal notranslate"><span class="pre">DAGCircuit.clbits()</span></code> instead</p>
@@ -1787,13 +1781,11 @@ is a list of <code class="docutils literal notranslate"><span class="pre">DAGNod
 of the list of tuples previously returned by <code class="docutils literal notranslate"><span class="pre">get_3q_or_more_nodes()</span></code>.</p>
 </li>
 </ul>
-</div></blockquote>
 </li>
 <li><p class="first">The following <code class="docutils literal notranslate"><span class="pre">qiskit.dagcircuit.DAGCircuit</span></code> methods had deprecated
 support for accepting a <code class="docutils literal notranslate"><span class="pre">node_id</span></code> as a parameter. This has been removed
 and now only <code class="docutils literal notranslate"><span class="pre">DAGNode</span></code> objects are accepted as input:</p>
-<blockquote>
-<div><ul class="simple">
+<ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">successors()</span></code></li>
 <li><code class="docutils literal notranslate"><span class="pre">predecessors()</span></code></li>
 <li><code class="docutils literal notranslate"><span class="pre">ancestors()</span></code></li>
@@ -1807,7 +1799,6 @@ and now only <code class="docutils literal notranslate"><span class="pre">DAGNod
 <li><code class="docutils literal notranslate"><span class="pre">remove_nondescendants_of()</span></code></li>
 <li><code class="docutils literal notranslate"><span class="pre">substitute_node_with_dag()</span></code></li>
 </ul>
-</div></blockquote>
 </li>
 <li><p class="first">The <code class="docutils literal notranslate"><span class="pre">qiskit.dagcircuit.DAGCircuit</span></code> method <code class="docutils literal notranslate"><span class="pre">rename_register()</span></code> has been
 removed. This was unused by all the qiskit code. If you were relying on it
@@ -1905,8 +1896,7 @@ You can use the <code class="docutils literal notranslate"><span class="pre">ret
 </li>
 <li><p class="first">The deprecated <code class="docutils literal notranslate"><span class="pre">qiskit.mapper</span></code> module has been removed. The list of
 functions and classes with their alternatives are:</p>
-<blockquote>
-<div><ul class="simple">
+<ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">qiskit.mapper.CouplingMap</span></code>: <code class="docutils literal notranslate"><span class="pre">qiskit.transpiler.CouplingMap</span></code> should
 be used instead.</li>
 <li><code class="docutils literal notranslate"><span class="pre">qiskit.mapper.Layout</span></code>: <code class="docutils literal notranslate"><span class="pre">qiskit.transpiler.Layout</span></code> should be used
@@ -1918,7 +1908,6 @@ instead</li>
 <code class="docutils literal notranslate"><span class="pre">qiskit.quantum_info.synthesis.two_qubit_cnot_decompose()</span></code> should be
 used instead.</li>
 </ul>
-</div></blockquote>
 <p>The deprecated exception classes <code class="docutils literal notranslate"><span class="pre">qiskit.mapper.exceptions.CouplingError</span></code>
 and <code class="docutils literal notranslate"><span class="pre">qiskit.mapper.exceptions.LayoutError</span></code> don’t have an alternative
 since they serve no purpose without a <code class="docutils literal notranslate"><span class="pre">qiskit.mapper</span></code> module.</p>
@@ -2048,15 +2037,13 @@ constructor <code class="docutils literal notranslate"><span class="pre">qiskit.
 </li>
 <li><p class="first">The module <code class="docutils literal notranslate"><span class="pre">qiskit.pulse.ops</span></code> has been deprecated. All the functions it
 provided:</p>
-<blockquote>
-<div><ul class="simple">
+<ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">union</span></code></li>
 <li><code class="docutils literal notranslate"><span class="pre">flatten</span></code></li>
 <li><code class="docutils literal notranslate"><span class="pre">shift</span></code></li>
 <li><code class="docutils literal notranslate"><span class="pre">insert</span></code></li>
 <li><code class="docutils literal notranslate"><span class="pre">append</span></code></li>
 </ul>
-</div></blockquote>
 <p>have equivalent methods available directly on the <code class="docutils literal notranslate"><span class="pre">qiskit.pulse.Schedule</span></code>
 and <code class="docutils literal notranslate"><span class="pre">qiskit.pulse.Instruction</span></code> classes. Those methods should be used
 instead.</p>
@@ -2075,31 +2062,28 @@ instead.</p>
 </div>
 <div class="section" id="bug-fixes">
 <span id="release-notes-0-9-0-bug-fixes"></span><h5>Bug Fixes<a class="headerlink" href="#bug-fixes" title="Permalink to this headline">¶</a></h5>
-<ul>
-<li><p class="first">The definition of the <code class="docutils literal notranslate"><span class="pre">CU3Gate</span></code> has been changed to be equivalent to the
-canonical definition of a controlled <code class="docutils literal notranslate"><span class="pre">U3Gate</span></code>.</p>
-</li>
-<li><p class="first">The handling of layout in the pass manager has been standardized. This
+<ul class="simple">
+<li>The definition of the <code class="docutils literal notranslate"><span class="pre">CU3Gate</span></code> has been changed to be equivalent to the
+canonical definition of a controlled <code class="docutils literal notranslate"><span class="pre">U3Gate</span></code>.</li>
+<li>The handling of layout in the pass manager has been standardized. This
 fixes several reported issues with handling layout. The <code class="docutils literal notranslate"><span class="pre">initial_layout</span></code>
 kwarg parameter on <code class="docutils literal notranslate"><span class="pre">qiskit.compiler.transpile()</span></code> and
 <code class="docutils literal notranslate"><span class="pre">qiskit.execute()</span></code> will now lay out your qubits from the circuit onto
-the desired qubits on the device when transpiling circuits.</p>
-</li>
-<li><p class="first">Support for n-qubit unitaries was added to the BasicAer simulator and
+the desired qubits on the device when transpiling circuits.</li>
+<li>Support for n-qubit unitaries was added to the BasicAer simulator and
 <code class="docutils literal notranslate"><span class="pre">unitary</span></code> (arbitrary unitary gates) was added to the set of basis gates
-for the simulators</p>
-</li>
-<li><p class="first">The <code class="docutils literal notranslate"><span class="pre">qiskit.visualization.plost_state_qsphere()</span></code> has been updated to fix
+for the simulators</li>
+<li>The <code class="docutils literal notranslate"><span class="pre">qiskit.visualization.plost_state_qsphere()</span></code> has been updated to fix
 several issues with it. Now output Q Sphere visualization will be correctly
-generated and the following aspects have been updated:</p>
-<blockquote>
-<div><ul class="simple">
+generated and the following aspects have been updated:<ul>
 <li>All complementary basis states are antipodal</li>
 <li>Phase is indicated by color of line and marker on sphere’s surface</li>
-<li>Probability is indicated by translucency of line and volume of marker on
-sphere’s surface</li>
+<li><dl class="first docutils">
+<dt>Probability is indicated by translucency of line and volume of marker on</dt>
+<dd>sphere’s surface</dd>
+</dl>
+</li>
 </ul>
-</div></blockquote>
 </li>
 </ul>
 </div>
@@ -3350,11 +3334,10 @@ want to check the job status, use the identity comparison against
 <p>Please consult the new documentation of the
 <code class="xref py py-class docutils literal notranslate"><span class="pre">IBMQJob</span></code> class to get further insight
 in how to use the simplified API.</p>
-<ul class="simple">
-<li>A number of members of <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseBackend</span></code>
+<ul>
+<li><p class="first">A number of members of <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseBackend</span></code>
 and <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseJob</span></code> are no longer properties,
-but methods, and as a result they need to be invoked as functions.</li>
-</ul>
+but methods, and as a result they need to be invoked as functions.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="43%" />
@@ -3399,6 +3382,8 @@ backend.retrieve_job(job_id)</td>
 </tr>
 </tbody>
 </table>
+</li>
+</ul>
 </div>
 <div class="section" id="better-jupyter-tools">
 <h6>Better Jupyter tools<a class="headerlink" href="#better-jupyter-tools" title="Permalink to this headline">¶</a></h6>
