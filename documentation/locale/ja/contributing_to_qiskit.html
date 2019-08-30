@@ -198,7 +198,11 @@
 <li class="toctree-l2"><a class="reference internal" href="#where-things-are">Where Things Are</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#getting-started">Getting Started</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#contributor-license-agreement">Contributor License Agreement</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#writing-and-building-api-documentation">Writing and Building API Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#contributing-to-documentation">Contributing to Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#translating-documentation">Translating Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#building-from-source">Building from Source</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#installing-from-source">Installing from Source</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#set-up-the-virtual-development-environment">Set up the virtual development environment</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#installing-terra-from-source">Installing Terra from Source</a></li>
@@ -774,7 +778,11 @@
 <li class="toctree-l2"><a class="reference internal" href="#where-things-are">Where Things Are</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#getting-started">Getting Started</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#contributor-license-agreement">Contributor License Agreement</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#writing-and-building-api-documentation">Writing and Building API Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#contributing-to-documentation">Contributing to Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#translating-documentation">Translating Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#building-from-source">Building from Source</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#installing-from-source">Installing from Source</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#set-up-the-virtual-development-environment">Set up the virtual development environment</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#installing-terra-from-source">Installing Terra from Source</a></li>
@@ -1236,10 +1244,11 @@
         
   <div class="section" id="contributing-to-qiskit">
 <h1>Contributing to Qiskit<a class="headerlink" href="#contributing-to-qiskit" title="このヘッドラインへのパーマリンク">¶</a></h1>
-<p>Qiskit is an open-source project committed to bringing quantum computing to people of all
-backgrounds. This page describes how you can join the Qiskit community in this goal.</p>
+<p>Qiskit is an open-source project committed to bringing quantum computing to
+people of all backgrounds. This page describes how you can join the Qiskit
+community in this goal.</p>
 <div class="section" id="where-things-are">
-<h2>Where Things Are<a class="headerlink" href="#where-things-are" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<span id="id1"></span><h2>Where Things Are<a class="headerlink" href="#where-things-are" title="このヘッドラインへのパーマリンク">¶</a></h2>
 <p>The code for Qiskit is located in the <a class="reference external" href="https://github.com/Qiskit">Qiskit GitHub organization</a>,
 where you can find the individual projects that make up Qiskit, including</p>
 <ul class="simple">
@@ -1284,11 +1293,37 @@ is the property of your employer, then you will likely need to sign a
 email it to us at &lt;<a class="reference external" href="mailto:qiskit&#37;&#52;&#48;us&#46;ibm&#46;com">qiskit<span>&#64;</span>us<span>&#46;</span>ibm<span>&#46;</span>com</a>&gt;.</p>
 </div>
 </div>
-<div class="section" id="writing-and-building-api-documentation">
-<h2>Writing and Building API Documentation<a class="headerlink" href="#writing-and-building-api-documentation" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<p>Qiskit documentation is shaped by the <a class="reference external" href="https://www.writethedocs.org/guide/docs-as-code/">docs as code</a> philosophy.</p>
-<p>The <a class="reference external" href="https://qiskit.org/documentation/index.html">Qiskit API documentation</a> (this document) is
-built from the master branch of <a class="reference external" href="https://github.com/Qiskit/qiskit/tree/master/docs">Qiskit/qiskit/docs</a> using <a class="reference external" href="http://www.sphinx-doc.org/en/master/">Sphinx</a>.</p>
+<div class="section" id="contributing-to-documentation">
+<h2>Contributing to Documentation<a class="headerlink" href="#contributing-to-documentation" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>Qiskit documentation is shaped by the <a class="reference external" href="https://www.writethedocs.org/guide/docs-as-code/">docs as code</a> philosophy, primarily
+drawn from Qiskit code comments in the <a class="reference external" href="https://alistapart.com/article/the-ten-essentials-for-good-api-documentation/">style of API documentation</a>.</p>
+<p>The documentation is built from the master branch of <a class="reference external" href="https://github.com/Qiskit/qiskit/tree/master/docs">Qiskit/qiskit/docs</a> using <a class="reference external" href="http://www.sphinx-doc.org/en/master/">Sphinx</a>. The majority of documentation, under
+<a class="reference external" href="https://qiskit.org/documentation/apidoc/qiskit.html">API Reference</a>, is
+drawn from code comments in the repositories listed in <a class="reference internal" href="#where-things-are"><span class="std std-ref">Where Things Are</span></a>.</p>
+<div class="section" id="translating-documentation">
+<h3>Translating Documentation<a class="headerlink" href="#translating-documentation" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>Qiskit documentation is translated (localized) using Crowdin, which allows our
+community of translators to amplify their impact by automatically reusing the
+work invested translating one sentence to translate other, similar sentences.
+Crowdin also makes translations resilient to many types of changes to
+the original material, such as moving sentences around, even across files.</p>
+<p>To join the Qiskit Localization team:</p>
+<ol class="arabic simple">
+<li>Add your name (or ID) to the <a class="reference external" href="https://github.com/Qiskit/qiskit/blob/master/docs/LOCALIZATION_CONTRIBUTORS">LOCALIZATION_CONTRIBUTORS</a> file.</li>
+<li>Create a pull request (PR) to merge your change.</li>
+<li>You will be asked to sign the Qiskit Contributors License Agreement (CLA);
+please do so.</li>
+<li>In the <a class="reference external" href="https://crowdin.com/project/qiskit-docs">Qiskit-Docs</a>
+Crowdin project, choose the language that you want to contribute to.</li>
+<li>Click the <strong>Join</strong> button.</li>
+<li>In the dialog box where you are asked why you want to join the Crowdin
+project, paste the URL of your PR.</li>
+</ol>
+<p>The Qiskit Localization team leads will review your request and give you access
+to the Crowdin project as quickly as we can!</p>
+</div>
+<div class="section" id="building-from-source">
+<h3>Building from Source<a class="headerlink" href="#building-from-source" title="このヘッドラインへのパーマリンク">¶</a></h3>
 <p>You can build a local copy of the documentation from your local clone of the
 <cite>Qiskit/qiskit</cite> repository as follows:</p>
 <ol class="arabic">
@@ -1323,6 +1358,7 @@ window:</p>
 </div>
 <p>This will build a styled, HTML version of your local documentation repository
 in the subdirectory <cite>/docs/_build/html/</cite>.</p>
+</div>
 </div>
 <div class="section" id="installing-from-source">
 <span id="install-install-from-source-label"></span><h2>Installing from Source<a class="headerlink" href="#installing-from-source" title="このヘッドラインへのパーマリンク">¶</a></h2>
