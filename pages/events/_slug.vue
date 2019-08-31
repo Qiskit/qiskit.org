@@ -33,7 +33,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import { Context } from '@nuxt/vue-app'
+import { Context } from '@nuxt/types'
 import Menu from '~/components/Menu.vue'
 import Footer from '~/components/Footer.vue'
 

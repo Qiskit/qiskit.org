@@ -71,7 +71,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import { Context } from '@nuxt/vue-app'
+import { Context } from '@nuxt/types'
 import Button from '~/components/Button.vue'
 import MdContent from '~/components/MdContent.vue'
 
