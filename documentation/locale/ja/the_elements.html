@@ -192,7 +192,11 @@
 <li class="toctree-l2"><a class="reference internal" href="contributing_to_qiskit.html#where-things-are">Where Things Are</a></li>
 <li class="toctree-l2"><a class="reference internal" href="contributing_to_qiskit.html#getting-started">Getting Started</a></li>
 <li class="toctree-l2"><a class="reference internal" href="contributing_to_qiskit.html#contributor-license-agreement">Contributor License Agreement</a></li>
-<li class="toctree-l2"><a class="reference internal" href="contributing_to_qiskit.html#writing-and-building-api-documentation">Writing and Building API Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing_to_qiskit.html#contributing-to-documentation">Contributing to Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="contributing_to_qiskit.html#translating-documentation">Translating Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributing_to_qiskit.html#building-from-source">Building from Source</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="contributing_to_qiskit.html#installing-from-source">Installing from Source</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="contributing_to_qiskit.html#set-up-the-virtual-development-environment">Set up the virtual development environment</a></li>
 <li class="toctree-l3"><a class="reference internal" href="contributing_to_qiskit.html#installing-terra-from-source">Installing Terra from Source</a></li>
@@ -768,7 +772,11 @@
 <li class="toctree-l2"><a class="reference internal" href="contributing_to_qiskit.html#where-things-are">Where Things Are</a></li>
 <li class="toctree-l2"><a class="reference internal" href="contributing_to_qiskit.html#getting-started">Getting Started</a></li>
 <li class="toctree-l2"><a class="reference internal" href="contributing_to_qiskit.html#contributor-license-agreement">Contributor License Agreement</a></li>
-<li class="toctree-l2"><a class="reference internal" href="contributing_to_qiskit.html#writing-and-building-api-documentation">Writing and Building API Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing_to_qiskit.html#contributing-to-documentation">Contributing to Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="contributing_to_qiskit.html#translating-documentation">Translating Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributing_to_qiskit.html#building-from-source">Building from Source</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="contributing_to_qiskit.html#installing-from-source">Installing from Source</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="contributing_to_qiskit.html#set-up-the-virtual-development-environment">Set up the virtual development environment</a></li>
 <li class="toctree-l3"><a class="reference internal" href="contributing_to_qiskit.html#installing-terra-from-source">Installing Terra from Source</a></li>
@@ -1238,70 +1246,73 @@ to optimize them for the constraints of a particular device, and to manage the e
 of batches of experiments on remote-access devices. Terra defines the interfaces
 for a desirable end-user experience, as well as the efficient handling of layers
 of optimization, pulse scheduling and backend communication.</p>
-<p>Qiskit Terra is organized in six main moudles:</p>
-<dl class="docutils">
-<dt><a class="reference internal" href="apidoc/circuit/circuit.html#qiskit-circuit"><span class="std std-ref">Circuit</span></a></dt>
-<dd>A quantum circuit is a model for quantum computing in which a computation is done by performing a
+<p>Qiskit Terra is organized in six main modules:</p>
+<ol class="arabic simple">
+<li><a class="reference external" href="https://qiskit.org/documentation/apidoc/circuit/circuit.html">Circuit</a>
+A quantum circuit is a model for quantum computing in which a computation is done by performing a
 sequence of quantum operations (usually gates) on a register of qubits. A quantum circuit usually
 starts with the qubits in the <span class="math notranslate nohighlight">\(|0,…,0&gt;\)</span> state and these gates evolve the qubits to states
 that cannot be efficiently represented on a
 classical computer. To extract information on the state a quantum circuit must have a measurement
 which maps the outcomes (possible random due to the fundamental nature of quantum systems) to
-classical registers which can be efficiently represented.</dd>
-<dt><a class="reference internal" href="apidoc/pulse/pulse.html#qiskit-pulse"><span class="std std-ref">Pulse</span></a></dt>
-<dd>A pulse schedule is set of pulses which are sent to a quantum experiment that are applied to
+classical registers which can be efficiently represented.</li>
+<li><a class="reference external" href="https://qiskit.org/documentation/apidoc/pulse/pulse.html">Pulse</a>
+A pulse schedule is set of pulses which are sent to a quantum experiment that are applied to
 a channel (experimental input line). This is a lower level than circuits and requires each gate
 in the circuit to be  represented as a set of pulses. At this leavel the experiments can be
-designed to reduce errors (dynamical decoupling, error mitigation, and optimal pulse shapes).</dd>
-<dt><a class="reference internal" href="apidoc/transpiler/transpiler.html#qiskit-transpiler"><span class="std std-ref">Transpiler</span></a></dt>
-<dd>A major part of research on quantum computing is working out how to run a quantum
+designed to reduce errors (dynamical decoupling, error mitigation, and optimal pulse shapes).</li>
+<li><a class="reference external" href="https://qiskit.org/documentation/apidoc/transpiler/transpiler.html">Transpiler</a>
+A major part of research on quantum computing is working out how to run a quantum
 circuits on real devices.  In these devices, experimental errors and decoherence introduce
 errors during computation. Thus, to obtain a robust implementation it is essential
 to reduce the number of gates and the overall running time of the quantum circuit.
 The transpiler introduces the concept of a pass manager to allow users to explore
 optimization and find better quantum circuits for their given algorithm. We call it a
-transpiler as the end result is still a circuit.</dd>
-<dt><a class="reference internal" href="apidoc/providers/providers.html#qiskit-providers"><span class="std std-ref">Providers</span></a></dt>
-<dd><p class="first">Once the user has made the circuits to run on the backend they need to have a convenient way of
-working with it. In Terra we do this using four parts:</p>
-<ol class="last arabic simple">
-<li>A <a class="reference internal" href="api/qiskit.providers.BaseProvider.html#qiskit.providers.BaseProvider" title="qiskit.providers.BaseProvider"><code class="xref py py-class docutils literal notranslate"><span class="pre">Provider</span></code></a> is an entity that
+transpiler as the end result is still a circuit.</li>
+<li><a class="reference external" href="https://qiskit.org/documentation/apidoc/providers/providers.html">Providers</a>
+Once the user has made the circuits to run on the backend they need to have a convenient way of
+working with it. In Terra we do this using four parts:<ol class="arabic">
+<li>A <a class="reference external" href="https://qiskit.org/documentation/api/qiskit.providers.BaseProvider.html">Provider</a>
+is an entity that
 provides access to a group of different backends (for example,
 backends available through the <a class="reference external" href="https://quantum-computing.ibm.com">IBM Q Experience</a>).
 It interacts with those backends to, for example,
 find out which ones are available, or retrieve an instance of a particular backend.</li>
-<li><a class="reference internal" href="api/qiskit.providers.BaseBackend.html#qiskit.providers.BaseBackend" title="qiskit.providers.BaseBackend"><code class="xref py py-class docutils literal notranslate"><span class="pre">Backend</span></code></a> represent either a simulator or a real
+<li><a class="reference external" href="https://qiskit.org/documentation/api/qiskit.providers.BaseBackend.html">Backend</a>
+represent either a simulator or a real
 quantum computer and are responsible for running quantum circuits and returning results.
 They have a run method which takes in a <cite>qobj</cite> as input and returns a <cite>BaseJob</cite> object.
 This object allows asynchronous running of jobs for retrieving results from a backend
 when the job is completed.</li>
-<li><a class="reference internal" href="api/qiskit.providers.BaseJob.html#qiskit.providers.BaseJob" title="qiskit.providers.BaseJob"><code class="xref py py-class docutils literal notranslate"><span class="pre">Job</span></code></a> instances can be thought of as the
+<li><a class="reference external" href="https://qiskit.org/documentation/api/qiskit.providers.BaseJob.html">Job</a>
+instances can be thought of as the
 “ticket” for a submitted job.
 They find out the execution’s state at a given point in time (for example,
 if the job is queued, running, or has failed) and also allow control over the job.</li>
-<li><a class="reference internal" href="api/qiskit.result.Result.html#qiskit.result.Result" title="qiskit.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a>. Once the job has finished Terra allows the
+<li><a class="reference external" href="https://qiskit.org/documentation/api/qiskit.result.Result.html">Result</a>.
+Once the job has finished Terra allows the
 results to be obtained from the remote backends using <cite>result = job.result()</cite>.
 This result object holds the quantum data and the most common way of interacting
 with it is by using <cite>result.get_counts(circuit)</cite>. This method allows the user to get
 the raw counts from the quantum circuit and use them for more analysis with
 quantum information tools provided by Terra.</li>
 </ol>
-</dd>
-<dt><a class="reference internal" href="apidoc/quantum_info/quantum_info.html#qiskit-quantum-info"><span class="std std-ref">Quantum Information</span></a></dt>
-<dd>To perform more advanced algorithms and analysis of the circuits run on the quantum
+</li>
+<li><a class="reference external" href="https://qiskit.org/documentation/apidoc/quantum_info/quantum_info.html">Quantum Information</a>
+To perform more advanced algorithms and analysis of the circuits run on the quantum
 computer, it is
 important to have tools to implement simple quantum information tasks. These include
-methods to both estimate metrics and generate quantum states, operations, and channels.</dd>
-<dt><a class="reference internal" href="apidoc/visualization/visualization.html#qiskit-visualization"><span class="std std-ref">Visualization</span></a></dt>
-<dd>In Terra we have many tools to visualize a quantum circuit. This allows a quick inspection of the
+methods to both estimate metrics and generate quantum states, operations, and channels.</li>
+<li><a class="reference external" href="https://qiskit.org/documentation/apidoc/visualization/visualization.html">Visualization</a>
+In Terra we have many tools to visualize a quantum circuit. This allows a quick inspection of the
 quantum circuit to make sure it is what the user wanted to implement. There is a text, python and
 latex version. Once the circuit has run it is important to be able to view the output. There is a
 simple function (<cite>plot_histogram</cite>) to plot the results from a quantum circuit including an
 interactive version. There is also a function <cite>plot_state</cite> and <cite>plot_bloch_vector</cite> that allow
 the plotting of a quantum state. These functions are usually only used when using the
 <cite>statevector_simulator</cite> backend but can also be used on real data after running state tomography
-experiments (Ignis).</dd>
-</dl>
+experiments (Ignis).</li>
+</ol>
 </div>
 <div class="section" id="aer">
 <span id="id2"></span><h2>Aer<a class="headerlink" href="#aer" title="このヘッドラインへのパーマリンク">¶</a></h2>
@@ -1318,7 +1329,7 @@ configurable noise models for performing realistic noisy simulations of the erro
 occur during execution on real devices.</p>
 <p>Qiskit Aer includes three high performance simulator backends:</p>
 <dl class="docutils">
-<dt><a class="reference external" href="autodoc/qiskit.providers.aer.backends.qasm_simulator.html">Qasm Simulator</a></dt>
+<dt><a class="reference external" href="https://qiskit.org/documentation/api/qiskit.providers.aer.backends.QasmSimulator.html">Qasm Simulator</a></dt>
 <dd><p class="first">Allows ideal and noisy multi-shot execution of qiskit circuits and returns counts or memory.
 There are multiple methods that can be used that simulate different cirucits more efficiently.
 These inlude:</p>
@@ -1332,10 +1343,10 @@ non-Clifford gates.</li>
 <li><em>matrix_product_state</em> - Uses a Matrix Product State (MPS) simulator.</li>
 </ol>
 </dd>
-<dt><a class="reference external" href="autodoc/qiskit.providers.aer.backends.statevector_simulator.html">Statevector Simulator</a></dt>
+<dt><a class="reference external" href="https://qiskit.org/documentation/api/qiskit.providers.aer.backends.StatevectorSimulator.html">Statevector Simulator</a></dt>
 <dd>Allows ideal single-shot execution of qiskit circuits and returns the final
 statevector of the simulator after application.</dd>
-<dt><a class="reference external" href="autodoc/qiskit.providers.aer.backends.unitary_simulator.html">Unitary Simulator</a></dt>
+<dt><a class="reference external" href="https://qiskit.org/documentation/api/qiskit.providers.aer.backends.UnitarySimulator.html">Unitary Simulator</a></dt>
 <dd>Allows ideal single-shot execution of qiskit circuits and
 returns the final unitary matrix of the circuit itself. Note that the circuit
 cannot contain measure or reset operations for this backend.</dd>
@@ -1370,16 +1381,16 @@ calibration results of an Ignis experiment.</dd>
 <p>Qiskit Ignis is organized into three types of experiments that can be
 performed:</p>
 <dl class="docutils">
-<dt><a class="reference external" href="autodoc/qiskit.ignis.characterization.html">Characterization</a></dt>
+<dt><a class="reference external" href="https://qiskit.org/documentation/apidoc/ignis/characterization/characterization.html">Characterization</a></dt>
 <dd>Characterization experiments are designed to measure parameters in the
 system such as noise parameters (T1, T2-star, T2), Hamiltonian parameters such
 as the ZZ interaction rate and control errors in the gates.</dd>
-<dt><a class="reference external" href="autodoc/qiskit.ignis.verification.html">Verification</a></dt>
+<dt><a class="reference external" href="https://qiskit.org/documentation/apidoc/ignis/verification/verification.html">Verification</a></dt>
 <dd>Verification experiments are designed to verify gate and small
 circuit performance. Verification includes state and process tomography,
 quantum volume and randomized benchmarking (RB). These experiments provide
 the information to determine performance metrics such as the gate fidelity.</dd>
-<dt><a class="reference external" href="autodoc/qiskit.ignis.mitigation.html">Mitigation</a></dt>
+<dt><a class="reference external" href="https://qiskit.org/documentation/apidoc/ignis/mitigation/mitigation.html">Mitigation</a></dt>
 <dd>Mitigation experiments run calibration circuits that are analyzed to
 generate mitigation routines that can be applied to arbitrary sets of results
 run on the same backend. Ignis code will generate a list of circuits that
