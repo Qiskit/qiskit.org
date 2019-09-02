@@ -1280,6 +1280,30 @@ environment. Choose a virtual environment in the Anaconda-Navigator from the
 see all of the virtual environments within Anaconda, and you can
 select the environment where you have Qiskit installed to launch Jupyter
 Notebook.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p><strong>Q: Why am I getting a compilation error while installing ``qiskit``?</strong></p>
+<p><strong>A:</strong> Qiskit depends on a number of other open source Python packages, which
+are automatically installed when doing <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">qiskit</span></code>. Depending on
+your system's platform and Python version, is it possible that a particular
+package does not provide a pre-built binary wheel for your system, and in those
+cases <code class="docutils literal notranslate"><span class="pre">pip</span></code> will attempt to compile the package from source, which in turn
+might require some extra dependencies that need to be installed manually.</p>
+<p>If the output of <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">qiskit</span></code> contains similar lines to:</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Failed</span> <span class="n">building</span> <span class="n">wheel</span> <span class="k">for</span> <span class="n">SOME_PACKAGE</span>
+<span class="o">...</span>
+<span class="n">build</span><span class="o">/</span><span class="n">temp</span><span class="o">.</span><span class="n">linux</span><span class="o">-</span><span class="n">x86_64</span><span class="o">-</span><span class="mf">3.5</span><span class="o">/</span><span class="n">_openssl</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">498</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span> <span class="n">fatal</span> <span class="n">error</span>
+<span class="n">compilation</span> <span class="n">terminated</span><span class="o">.</span>
+<span class="n">error</span><span class="p">:</span> <span class="n">command</span> <span class="s1">&#39;x86_64-linux-gnu-gcc&#39;</span> <span class="n">failed</span> <span class="k">with</span> <span class="n">exit</span> <span class="n">status</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>please check the documentation of the package that failed to install (in the
+example code, <code class="docutils literal notranslate"><span class="pre">SOME_PACKAGE</span></code>) for information on how to install the libraries
+needed for compiling from source. For example:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">cryptography</span></code>: <a class="reference external" href="https://cryptography.io/en/latest/installation/#building-cryptography-on-linux">https://cryptography.io/en/latest/installation/#building-cryptography-on-linux</a></li>
+</ul>
 </div>
 
 
