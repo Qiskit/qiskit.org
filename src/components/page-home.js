@@ -251,6 +251,7 @@ class PageHome extends localize(i18next)(LitElement) {
               <div class="actions">
                 <a
                   href="https://www.youtube.com/playlist?list=PLOFEBzvs-Vvp2xg9-POLJhQwtVktlYGbY"
+                  target="_blank"	
                   tabindex="-1"
                   @click=${() => trackClickEvent({
                     action: 'Coding with Qiskit Video Series',
