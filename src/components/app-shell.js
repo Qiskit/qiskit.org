@@ -220,7 +220,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
 
         <!-- This gets hidden on a small screen-->
         <div class="toolbar limited-width">
-          <a href="/" class="home">Qiskit ™</a>
+          <a href="/" class="home">Qiskit</a>
           <nav class="first">
             <a href="/terra" ?selected=${this.page === 'terra'}>Terra</a>
             <a href="/aer" ?selected=${this.page === 'aer'}>Aer</a>
