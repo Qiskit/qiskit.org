@@ -181,31 +181,9 @@ class PageHome extends localize(i18next)(LitElement) {
         <div>
           <h1>
             ${i18next.t('pages.home.headerTitle')}
-            <a
-                href="https://pypi.python.org/pypi/qiskit"
-                target="_blank"
-                rel="noopener">
-              <img
-                  src="https://img.shields.io/pypi/v/qiskit.svg"
-                  alt="Qiskit version badge"
-                  width="78px"
-                  height="20px">
-            </a>
           </h1>
           <h2>${i18next.t('pages.home.headerSubTitle')}</h2>
           <div class="badges">
-            <a
-              href="https://github.com/Qiskit"
-              target="_blank"
-              rel="noopener"
-              tabindex="-1"
-              @click=${() => trackClickEvent({
-                action: 'Qiskit GitHub Repository',
-                objectType: 'Button'
-              })}
-            >
-              <vaadin-button theme="secondary small" >${githubIcon} GitHub</vaadin-button>
-            </a>
             <a
               href="https://join.slack.com/t/qiskit/shared_invite/enQtNjQ5OTc5ODM1ODYyLTBlMWY1ZGJiYmZkNjliZTY4MTViNTQ3NzI2ZmU2MzQxZjlhZDZlYTAzZTNlMDU0ZjVmNzEyMzY3OGE1Y2UyNjk"
               target="_blank"
@@ -272,18 +250,6 @@ class PageHome extends localize(i18next)(LitElement) {
             <h3>${i18next.t('pages.home.ibmQExperienceTitle')}</h3>
             <p>${i18next.t('pages.home.ibmQExperienceDescription')}</p>
             <div class="actions">
-              <a
-                href="https://www.research.ibm.com/ibm-q/technology/experience/"
-                title="IBM Q Experience"
-                target="_blank"
-                rel="noopener"
-                tabindex="-1"
-                @click=${() => trackClickEvent({
-                  action: 'Introducing Qiskit notebooks: Learn More',
-                  objectType: 'Button'
-                })}>
-                <vaadin-button theme="secondary">${i18next.t('pages.home.ibmQExperienceButtonLearnMore')}</vaadin-button>
-              </a>
               <a
                 href="https://quantum-computing.ibm.com/login"
                 title="IBM Q Experience"
