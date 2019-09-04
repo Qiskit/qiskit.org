@@ -90,7 +90,7 @@ class PageIgnis extends localize(i18next)(LitElement) {
             <h3>${i18next.t('pages.ignis.stackTitle')}</h3>
             <div class="stack-list">
               <div class="element">
-                <div class="title">Qiskit Ingis Experiments</div>
+                <div class="title">Qiskit Ignis Experiments</div>
                 <div class="subtitle">List of Quantum Circuits or Pulse Schedules</div>
               </div>
               <div class="element">
