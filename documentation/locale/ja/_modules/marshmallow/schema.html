@@ -959,14 +959,13 @@
 <span class="sd">        specified in ``class Meta``.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">field_name</span><span class="p">,</span> <span class="n">field_obj</span> <span class="ow">in</span> <span class="n">iteritems</span><span class="p">(</span><span class="n">fields_dict</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">field_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_only</span><span class="p">:</span>
+                <span class="n">field_obj</span><span class="o">.</span><span class="n">load_only</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">if</span> <span class="n">field_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dump_only</span><span class="p">:</span>
+                <span class="n">field_obj</span><span class="o">.</span><span class="n">dump_only</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">field_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_only</span><span class="p">:</span>
-                    <span class="n">field_obj</span><span class="o">.</span><span class="n">load_only</span> <span class="o">=</span> <span class="kc">True</span>
-                <span class="k">if</span> <span class="n">field_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dump_only</span><span class="p">:</span>
-                    <span class="n">field_obj</span><span class="o">.</span><span class="n">dump_only</span> <span class="o">=</span> <span class="kc">True</span>
                 <span class="n">field_obj</span><span class="o">.</span><span class="n">_add_to_schema</span><span class="p">(</span><span class="n">field_name</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">on_bind_field</span><span class="p">(</span><span class="n">field_name</span><span class="p">,</span> <span class="n">field_obj</span><span class="p">)</span>
-            <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+            <span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
                 <span class="c1"># field declared as a class, not an instance</span>
                 <span class="k">if</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">field_obj</span><span class="p">,</span> <span class="nb">type</span><span class="p">)</span> <span class="ow">and</span>
                         <span class="nb">issubclass</span><span class="p">(</span><span class="n">field_obj</span><span class="p">,</span> <span class="n">base</span><span class="o">.</span><span class="n">FieldABC</span><span class="p">)):</span>
@@ -975,6 +974,8 @@
                            <span class="s1">&#39;Did you mean &quot;fields.</span><span class="si">{1}</span><span class="s1">()&quot;?&#39;</span>
                            <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">field_name</span><span class="p">,</span> <span class="n">field_obj</span><span class="o">.</span><span class="vm">__name__</span><span class="p">))</span>
                     <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="n">error</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">on_bind_field</span><span class="p">(</span><span class="n">field_name</span><span class="p">,</span> <span class="n">field_obj</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">fields_dict</span>
 
     <span class="k">def</span> <span class="nf">__filter_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field_names</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
