@@ -35,30 +35,32 @@ This is an initial schedule, subject to change.
 
 ### September 12
 
-- Departure from Zürich for Mürren
-- Welcome Reception
-- Dinner
+- 9:30 - 12:00 PM - Zurich Lab Activities (Optional)
+- 12:00 - Departure from Zürich for Mürren
+- 17:30 - Welcome Reception
+- 19:00 - Dinner
 
 ### September 13
 
-- Gondola to Piz Gloria
-- Breakfast and Team Formation
-- Hackathon Begins
-- Gondola to Mürren
+- 8:00 - Gondola to Piz Gloria (Please do not forget your pass or miss your assigned time)
+- 9:00 - Breakfast and Team Formation
+- 10:00 - Hackathon Begins
+- 19:00 - Dinner
+- 19:30 - Gondola rides to Mürren
 
 ### September 14
 
-- Gondola to Piz Gloria
-- Hackathon Continues
-- Project Presentations
-- Award Ceremony
-- Celebration Dinner
-- Gondola to Mürren
+- 7:30 - Gondola to Piz Gloria
+- 9:00 - Hackathon Continues
+- 14:30 - Project Presentations
+- 19:00 - Award Ceremony
+- 20:00 Celebration Dinner
+- 21:00 - 23:00 Gondola to Mürren
 
 ### September 15
 
-- Departure from Mürren
-- Optional Activities Available
+- 10:00 - First Departure from Mürren
+- 19:00 Last Departure from Mürren
 
 ## Have a question?
 
