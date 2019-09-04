@@ -215,7 +215,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
       <header>
         <app-toolbar class="toolbar-top">
           <button class="menu-btn" title="Menu" @click="${this.menuButtonClicked}">${menuIcon}</button>
-          <a href="/" class="home">Qiskit ™</a>
+          <a href="/" class="home">Qiskit</a>
         </app-toolbar>
 
         <!-- This gets hidden on a small screen-->
@@ -228,7 +228,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
             <a href="/ignis" ?selected=${this.page === 'ignis'}>Ignis</a>
           </nav>
           <nav class="second">
-            <a href="/education">${i18next.t('education')}</a>
+            <a href="/education">${i18next.t('community')}</a>
             <a
               href="https://quantum-computing.ibm.com/jupyter/tutorial/1_start_here.ipynb"
               rel="noopener"
@@ -255,7 +255,8 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
           <a href="/aer" ?selected=${this.page === 'aer'}>Aer</a>
           <a href="/aqua" ?selected=${this.page === 'aqua'}>Aqua</a>
           <a href="/ignis" ?selected=${this.page === 'ignis'}>Ignis</a>
-          <span>Tools</span>
+          <span>Learn more</span>
+          <a href="/education">${i18next.t('community')}</a>
           <a
             href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorials/blob/master/qiskit/start_here.ipynb"
             rel="noopener"
@@ -269,7 +270,6 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
             ${i18next.t('tutorials')}
           </a>
           <a href="/documentation">${i18next.t('documentation')}</a>
-          <a href="/vscode" ?selected=${this.page === 'vscode'}>${i18next.t('tools')}</a>
         </nav>
       </app-drawer>
 
