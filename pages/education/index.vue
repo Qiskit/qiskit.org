@@ -1,9 +1,15 @@
 <template>
   <main>
     <header>
-      <section>
-        <div>
+      <GatesHeader
+        id="presentation"
+        main-title="Qiskit for Educators"
+        extra-position="start"
+      >
+        <p>Qiskit makes it easy to start learning quantum software to run on real quantum hardware. Teach your students with the same tools used by scientists and engineers worldwide to accelerate research towards practical applications for quantum computing.</p>
+        <template #extra>
           <iframe
+            class="header-video"
             width="560"
             height="315"
             src="https://www.youtube.com/embed/NHTDqdGfzcc"
@@ -11,216 +17,292 @@
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen
           />
-          <div>
-            <h1>{{ attributes.title }}</h1>
-            <p class="header-subtitle">
-              {{ attributes.tagline }}
-            </p>
-          </div>
-        </div>
-      </section>
+        </template>
+      </GatesHeader>
     </header>
-    <section class="recommendations">
-      <h2
-        v-if="!!sections[0].title"
-        :id="sections[0].anchor"
-        class="section-title"
-      >
-        {{ sections[0].title }}
-      </h2>
-      <div class="card-container">
-        <Card
-          v-for="(card, cardIndex) in sections[0].collections.cards"
-          :key="`card-${cardIndex}`"
-          :title="card.attributes.title"
-          :image="card.attributes.image"
-          :to="card.attributes.to"
-          :info="card.html"
-          major
-          centered-background
-        />
-      </div>
-    </section>
-    <section class="benefits">
-      <h2
-        v-if="!!sections[1].title"
-        :id="sections[1].anchor"
-        class="section-title"
-      >
-        {{ sections[1].title }}
-      </h2>
-      <div class="card-container">
-        <Card
-          v-for="(card, cardIndex) in sections[1].collections.cards"
-          :key="`card-${cardIndex}`"
-          :title="card.attributes.title"
-          :image="card.attributes.image"
-          :to="card.attributes.to"
-          :info="card.html"
-          major
-          centered-background
-        />
-      </div>
-    </section>
+    <div class="inner-navigation-scope">
+      <InnerNavigation
+        class="inner-navigation"
+        :sections="[
+          { anchor: 'video-series', label: 'Coding With Qiskit Series' },
+          { anchor: 'textbook', label: 'Qiskit Textbook' },
+          { anchor: 'host-an-event', label: 'Host Qiskit Events' }
+        ]"
+      />
+      <PageSection id="video-series">
+        <h2>Coding With Qiskit Video Series</h2>
+        <p>
+          Accompany Abraham Asfaw through a series of video tutorials
+          in our YouTube Channel explaining quantum computing through
+          the use of Qiskit.
+        </p>
+        <ul class="actions">
+          <li>
+            <Cta to="https://www.youtube.com/playlist?list=PLOFEBzvs-Vvp2xg9-POLJhQwtVktlYGbY">
+              View all episodes
+            </Cta>
+          </li>
+        </ul>
+        <template #extra>
+          <iframe
+            class="episode"
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/RrUTwq5jKM4"
+            frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          />
+        </template>
+      </PageSection>
+      <PageSection id="textbook" extra-position="start">
+        <h2>Qiskit Textbook</h2>
+        <p>
+          Leverage the power of quantum computing using Qiskit with this
+          university course supplement covering introductory materials,
+          advanced algorithms and hardware. Include problem sets and
+          exercises for students.
+        </p>
+        <ul class="actions">
+          <li>
+            <Cta to="/textbook/">
+              Discover more
+            </Cta>
+          </li>
+        </ul>
+
+        <template #extra>
+          <TextbookPreview>
+            <TextbookTOC />
+          </TextbookPreview>
+        </template>
+      </PageSection>
+      <PageSection id="host-an-event">
+        <h2>Host Qiskit Events</h2>
+        <p>
+          Bring Qiskit experts to your campus for guest lectures, hackathons, and other events. Guest lecture topics can range from quantum basics to advanced algorithms.
+        </p>
+        <ul class="actions">
+          <li>
+            <Cta to="mailto:hello@qiskit.org">
+              Request an event
+            </Cta>
+          </li>
+        </ul>
+      </PageSection>
+    </div>
   </main>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import Card from '~/components/Card.vue'
-import Button from '~/components/Button.vue'
+import InnerNavigation from '~/components/menus/InnerNavigation.vue'
+import GatesHeader from '~/components/headers/GatesHeader.vue'
+import PageSection from '~/components/sections/PageSection.vue'
+import TextbookPreview from '~/components/education/TextbookPreview.vue'
 import MdContent from '~/components/MdContent.vue'
+import Cta from '~/components/ctas/Cta.vue'
+// @ts-ignore: Cannot find module
+import TextbookTOC from '~/content/education/textbook-toc.md'
 
 @Component({
-  layout: 'secondary',
-
-  components: { Card, Button, MdContent },
-
-  head() {
-    const self = this as any
-    const title = self.attributes.title
-    const description = self.attributes.tagline
-    return {
-      title,
-      meta: [
-        { hid: 'description', name: 'description', content: description }
-      ]
-    }
+  components: {
+    InnerNavigation,
+    GatesHeader,
+    PageSection,
+    TextbookPreview,
+    MdContent,
+    Cta,
+    TextbookTOC: TextbookTOC.vue.component
   },
 
-  async asyncData(ctx) {
-    const index = await import(`~/content/education/index/${'master.md'}`)
-    const sections = await ctx.app.deepLoadCardToc('toc.md', {
-      basePath: 'education/index/'
-    })
-
+  head() {
     return {
-      attributes: index.attributes,
-      sections
+      title: 'Qiskit for Educators'
     }
   }
 })
 export default class extends Vue { }
 </script>
 
-<style>
+<style lang="scss">
+@import '~/assets/scss/mixins.scss';
+
 main {
-  position: relative;
-  top: 60px;
+  color: var(--body-color-light);
+  background-color: var(--primary-color-darkmost);
+  background-image: linear-gradient(150deg, var(--primary-color-darkmost) 15%,var(--primary-color-dark) 70%,var(--primary-color) 94%);
 }
 
-header {
-  height: 425px;
-  width: auto;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: #242a2e;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-  color: white;
-}
-
-header > section {
-  position: relative;
-  width: 100%;
-  padding: 1rem;
+#education-benefits {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+
+  & > * {
+    flex: 1;
+  }
 }
 
-header > section > div {
+.feature {
+  padding-right: 1rem;
+
+  &:last-child {
+    padding-right: 0;
+  }
+}
+
+.feature__icon {
+  position: relative;
+  width: 3rem;
+  height: 3rem;
+}
+
+.feature p {
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+.feature h2 {
+  font-size: 1.1rem;
+  margin-top: 0.5rem;
+}
+
+.inner-navigation {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.actions {
+  margin-top: 1rem;
+  list-style: none;
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  align-items: center;
 }
 
-header iframe {
-  margin-right: 2rem;
-}
-
-header img {
-  height: 100vw;
-  position: absolute;
-  width: auto;
-  top: 10px;
-}
-
-header h1 {
-  font-size: 50px;
-}
-
-header .header-subtitle {
-  font-weight: bold;
-  font-size: 1rem;
-  max-width: 30rem;
-  margin: 1.5rem auto 0;
-}
-
-@media (max-width: 800px) {
-  header {
-    height: 700px;
+#presentation {
+  .extra-container {
+    margin-right: 1rem;
   }
 
-  header section {
-    display: block;
-    text-align: center;
+  .copy-container {
+    max-width: 40%;
   }
 
-  header > section > div {
-    display: block;
-  }
-
-  header iframe {
-    margin: 0;
+  .header-video {
     width: 100%;
-  }
-
-  header h1 {
-    margin: 0;
-    margin-top: 2rem;
-  }
-
-}
-
-@media (max-height: 390px) {
-  header h1 {
-    margin: 0;
-    margin-top: 0.5rem;
-  }
-
-  header section {
-    padding: 1rem;
+    max-width: 560px;
+    height: 315px;
+    box-shadow: 0 13px 27px -5px rgba(50,50,93,.25),
+                0 8px 16px -8px rgba(0,0,0,.5),
+                0 -6px 16px -6px rgba(0,0,0,.025);
   }
 }
 
-.card-container {
-  margin: 0 10%;
-  max-width: 60rem;
+#video-series {
+  .page-section {
+    @include framed();
+  }
+
+  .episode {
+    margin-left: 2rem;
+    transform: perspective(1200px) rotateY(-20deg) rotateX(5deg);
+    border-radius: 10px;
+    box-shadow: 25px 35px 30px 0 #000f;
+  }
 }
 
-.benefits .card-container {
-  display: grid;
-  grid-column-gap: 1rem;
-  grid-template-columns: 1fr 1fr 1fr;
+#textbook {
+  color: var(--body-color-dark);
+  background-color: white;
+  padding-bottom: 4rem;
+
+  .page-section {
+    @include framed();
+  }
+
+  .copy-container {
+    position: sticky;
+    top: 120px;
+    align-self: start;
+    width: 50%;
+    background-color: white;
+    padding: 0;
+    padding-left: 4rem;
+  }
+
+  .extra-container {
+    width: 60%;
+    margin-top: -6rem;
+    margin-left: -10%;
+  }
 }
 
-.recommendations .card-container {
-  display: grid;
-  grid-column-gap: 1rem;
-  grid-template-columns: 1fr 1fr;
+#host-an-event {
+  background-image:
+    linear-gradient(#000000a0 0%, #000000a0 100%),
+    url('/images/education/host-an-event-bg.jpg');
+  background-position: 0, top;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  .page-section {
+    @include framed();
+  }
 }
 
-@media (max-width: 800px) {
-  .benefits .card-container,
-  .recommendations .card-container {
+@media (max-width: 600px) {
+  .inner-navigation {
+    position: static;
+  }
+
+  #presentation {
+    .intro {
+      display: block;
+    }
+
+    .copy-container {
+      max-width: 100%;
+    }
+
+    .header-video {
+      display: none;
+    }
+  }
+
+  #textbook {
+    min-height: auto;
+
+    .copy-container {
+      width: 100%;
+      padding-left: 0;
+    }
+  }
+
+  #education-benefits {
     display: block;
+  }
+
+  .feature {
+    padding-right: 0;
+    padding-bottom: 3rem;
+
+    &:last-child {
+      padding-bottom: 0;
+    }
+  }
+}
+
+@media (max-height: 600px) {
+  .inner-navigation {
+    position: static;
+  }
+
+  #textbook {
+    .copy-container {
+      top: 1rem;
+    }
   }
 }
 </style>

@@ -2,5 +2,7 @@
 name: Robert Loredo
 image: robert-loredo.png
 location: Miami, FL
-areas: Tutorials, Educations
+latitude: 25.76
+longitude: -80.19
+areas: Tutorials, Community Building, Open-Source Contribution
 ---
