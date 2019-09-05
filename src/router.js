@@ -54,6 +54,14 @@ export function init(outlet) {
       },
     },
     {
+      path: '/ibmq',
+      name: 'ibmqp',
+      component: 'page-ibmqp',
+      action: () => {
+        import('./components/page-ibmqp.js');
+      },
+    },
+    {
       path: '/education',
       component: 'page-education',
       action: () => {

@@ -42,10 +42,11 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
           --app-secondary-color: #242a2e;
           --app-header-color: #21252b;
 
-          --qiskit-terra-color: #8c8c8c;
-          --qiskit-aqua-color: #30b0ff;
-          --qiskit-aer-color: #b3e6ff;
-          --qiskit-ignis-color: #20d5d2;
+          --qiskit-terra-color: #b69785;
+          --qiskit-aqua-color: #96a7b7;
+          --qiskit-aer-color: #a0b9b3;
+          --qiskit-ignis-color: #be8184;
+          --qiskit-ibmqp-color: #bbbbbb;
 
           --qiskit-vscode-color: #f5f5f5;
 
@@ -226,6 +227,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
             <a href="/aer" ?selected=${this.page === 'aer'}>Aer</a>
             <a href="/aqua" ?selected=${this.page === 'aqua'}>Aqua</a>
             <a href="/ignis" ?selected=${this.page === 'ignis'}>Ignis</a>
+            <a href="/ibmq" ?selected=${this.page === 'ibmq'}>IBM Q</a>
           </nav>
           <nav class="second">
             <a href="/education">${i18next.t('community')}</a>
@@ -255,6 +257,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
           <a href="/aer" ?selected=${this.page === 'aer'}>Aer</a>
           <a href="/aqua" ?selected=${this.page === 'aqua'}>Aqua</a>
           <a href="/ignis" ?selected=${this.page === 'ignis'}>Ignis</a>
+          <a href="/ibmq" ?selected=${this.page === 'ibmq'}>IBM Q</a>
           <span>Learn more</span>
           <a href="/education">${i18next.t('community')}</a>
           <a
