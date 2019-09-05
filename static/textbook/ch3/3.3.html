@@ -13149,13 +13149,13 @@ div#notebook {
 <h3 id="1a.-Simon's-Problem--">1a. Simon's Problem <a id="problem"> </a><a class="anchor-link" href="#1a.-Simon's-Problem--">&#182;</a></h3><p>We are given an unknown blackbox function $f$, which is guaranteed to be either one-to-one or two-to-one, where one-to-one and two-to-one functions have the following properties:</p>
 <ul>
 <li><em>one-to-one</em>: maps exactly one unique output for every input, eg. $f(1) \rightarrow 1$, $f(2) \rightarrow 2$, $f(3) \rightarrow 3$, $f(4) \rightarrow 4$. </li>
-<li>_two_to<em>one</em>: maps exactly two inputs to every unique output, eg. $f(1) \rightarrow 1$, $f(2) \rightarrow 2$, $f(3) \rightarrow 1$, $f(4) \rightarrow 2$, according to a hidden bitstring, $s$, where:
+<li><em>two-to-one</em>: maps exactly two inputs to every unique output, eg. $f(1) \rightarrow 1$, $f(2) \rightarrow 2$, $f(3) \rightarrow 1$, $f(4) \rightarrow 2$, according to a hidden bitstring, $s$
 $$
-\textrm{given }x_1,x_2: \quad f(x_1) = f(x_2) \\
-\textrm{guaranteed }: \quad x_1 \oplus x_2 = s
+\textrm{where:  given }x_1,x_2: \quad f(x_1) = f(x_2) \\
+\textrm{it is guaranteed }: \quad x_1 \oplus x_2 = s
 $$</li>
 </ul>
-<p>Thus, given this blackbox $f$, how quickly can we determine if $f$ is one-to-one or two-to-one? Then, if $f$ turns out to be two-to-one, how quickly can we determine $s$? As it turns out, both cases boil down to the same problem of finding $s$, where a bitstring of $s={0,0,0...}$ represents the one-to-one $f$.</p>
+<p>Thus, given this blackbox $f$, how quickly can we determine if $f$ is one-to-one or two-to-one? Then, if $f$ turns out to be two-to-one, how quickly can we determine $s$? As it turns out, both cases boil down to the same problem of finding $s$, where a bitstring of $s={000...}$ represents the one-to-one $f$.</p>
 
 </div>
 </div>
@@ -13163,7 +13163,7 @@ $$</li>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="1b.-Simon's-Algorithm--">1b. Simon's Algorithm <a id="algorithm"> </a><a class="anchor-link" href="#1b.-Simon's-Algorithm--">&#182;</a></h3><h4 id="Classical-Solution">Classical Solution<a class="anchor-link" href="#Classical-Solution">&#182;</a></h4><p>Classically, if we want to know what $s$ is for a given $f$, with 100% certainty, we have to check up to $2^{N−1}+1$ (just over half the total) inputs until we find two cases of the same output. Although, probabilistically the average number of inputs will be closer to the order of $\mathcal(o)(2)$. Much like the Deutsch-Jozsa problem, if we get lucky, we could solve the problem with our first two tries. But if we happen to get an $f$ that is one-to-one, or get <em>really</em> unlucky with an $f$ that’s two-to-one, then we’re stuck with the full $2^{N−1}+1$.</p>
+<h3 id="1b.-Simon's-Algorithm--">1b. Simon's Algorithm <a id="algorithm"> </a><a class="anchor-link" href="#1b.-Simon's-Algorithm--">&#182;</a></h3><h4 id="Classical-Solution">Classical Solution<a class="anchor-link" href="#Classical-Solution">&#182;</a></h4><p>Classically, if we want to know what $s$ is for a given $f$, with 100% certainty, we have to check up to $2^{N−1}+1$  inputs, where N is the number of bits in the input. This means checking just over half of all the possible inputs until we find two cases of the same output. Although, probabilistically the average number of inputs will be closer to the order of $\mathcal(o)(2)$. Much like the Deutsch-Jozsa problem, if we get lucky, we could solve the problem with our first two tries. But if we happen to get an $f$ that is one-to-one, or get <em>really</em> unlucky with an $f$ that’s two-to-one, then we’re stuck with the full $2^{N−1}+1$.</p>
 
 </div>
 </div>

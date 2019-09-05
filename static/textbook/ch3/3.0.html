@@ -13133,8 +13133,8 @@ div#notebook {
 <p>Alice wants to send quantum information to Bob. Specifically, suppose she wants to send the state
 $\vert\psi\rangle = \alpha\vert0\rangle + \beta\vert1\rangle$
 to Bob. This entails passing on information about $\alpha$ and $\beta$ to Bob.</p>
-<p>The no-cloning theorem [1] tells us that Alice can't simply generate a copy of $\vert\psi\rangle$ and give the copy to Bob. Copying a state is only possible with a classical computation.</p>
-<p>However, by taking advantage of two classical bits and entanglement, Alice can transfer the state $\vert\psi\rangle$ to Bob. Let's see how this works in some detail.</p>
+<p>There exists a theorem in quantum mechanics which states that you cannot simply make an exact copy of an unknown quantum state. This is known as the no-cloning theorem. As a result of this we can see that Alice can't simply generate a copy of $\vert\psi\rangle$ and give the copy to Bob. Copying a state is only possible with a classical computation.</p>
+<p>However, by taking advantage of two classical bits and entanglement, Alice can transfer the state $\vert\psi\rangle$ to Bob. We call this teleportation as at the end Bob will have $\vert\psi\rangle$ and Alice won't anymore. Let's see how this works in some detail.</p>
 
 </div>
 </div>
@@ -13149,16 +13149,17 @@ to Bob. This entails passing on information about $\alpha$ and $\beta$ to Bob.</
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Step 1: Alice and Bob create an entangled Bell pair. Each one of them holds on to one of the two qubits in the Bell pair.</p>
-<p>In quantum circuit language, the way to create a Bell pair between two qubits is to first transfer one of them to the Bell basis ($|+\rangle$ and $|-\rangle$) by using a Hadamard gate, and then to apply a CNOT gate onto the other qubit controlled by the one in the Bell basis. Let's say Alice owns $q_1$ and Bob owns $q_2$ after they part ways.</p>
-<p>Step 2: Alice applies a CNOT gate on $q_1$, controlled by $\vert\psi\rangle$.</p>
-<p>Step 3: Next, Alice applies a Hadamard gate to $|\psi\rangle$, and applies a measurement to both qubits that she owns.</p>
-<p>Step 4: Then, it's time for a phone call to Bob. She tells Bob the outcome of her two qubit measurement. Depending on what she says, Bob does this to his qubit, $q_2$:</p>
+<p><strong>Step 1</strong>: Alice and Bob create an entangled pair of qubits and each one of them holds on to one of the two qubits in the pair.</p>
+<p>The pair they create is a special pair called a Bell pair. In quantum circuit language, the way to create a Bell pair between two qubits is to first transfer one of them to the Bell basis ($|+\rangle$ and $|-\rangle$) by using a Hadamard gate, and then to apply a CNOT gate onto the other qubit controlled by the one in the Bell basis.</p>
+<p>Let's say Alice owns $q_1$ and Bob owns $q_2$ after they part ways.</p>
+<p><strong>Step 2</strong>: Alice applies a CNOT gate on $q_1$, controlled by $\vert\psi\rangle$ (the qubit she is trying to send Bob).</p>
+<p><strong>Step 3</strong>: Next, Alice applies a Hadamard gate to $|\psi\rangle$, and applies a measurement to both qubits that she owns - $q_1$ and $\vert\psi\rangle$.</p>
+<p><strong>Step 4</strong>: Then, it's time for a phone call to Bob. She tells Bob the outcome of her two qubit measurement. Depending on what she says, Bob applies some gates to his qubit, $q_2$. The gates to be applied, based on what Alice says, are as follows :</p>
 <p>00 $\rightarrow$ Do nothing</p>
 <p>01 $\rightarrow$ Apply $X$ gate</p>
 <p>10 $\rightarrow$ Apply $Z$ gate</p>
 <p>11 $\rightarrow$ Apply $ZX$ gate</p>
-<p>Note that this transfer of information is classical.</p>
+<p><em>Note that this transfer of information is classical.</em></p>
 <p>And voila! At the end of this protocol, Alice's qubit has now teleported to Bob.</p>
 
 </div>
@@ -13565,7 +13566,7 @@ to Bob. This entails passing on information about $\alpha$ and $\beta$ to Bob.</
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">error_rate_percent</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">exp_measurement_result</span><span class="p">[</span><span class="n">result</span><span class="p">]</span> <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">exp_measurement_result</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;1&#39;</span><span class="p">])</span> \
                     <span class="o">*</span> <span class="mf">100.</span><span class="o">/</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">exp_measurement_result</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">error_rate_percent</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The experimental error rate : &quot;</span><span class="p">,</span> <span class="n">error_rate_percent</span><span class="p">,</span> <span class="s2">&quot;%&quot;</span><span class="p">)</span>
 </pre></div>
 
     </div>
