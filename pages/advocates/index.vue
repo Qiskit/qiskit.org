@@ -49,8 +49,8 @@
         <h2>Become an Advocate</h2>
         <ol>
           <li>Click on the "Apply now" button below.</li>
-          <li>Complete the test attached to the application form.</li>
-          <li>Upload the test results to the application form and hit submit.</li>
+          <li>Complete the test in the application with at least a 70%.</li>
+          <li>Provide at least 3 contributions to the Qiskit community and complete application by <strong>October 9, 2019</strong>.</li>
         </ol>
         <ul class="actions">
           <li>
