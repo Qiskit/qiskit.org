@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>controller</title>
+<title>standard-gate-set</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13108,66 +13108,112 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Run the cell below to create a controller for the PewPew emulator.</p>
-<p>Note: Your first button press might not be recognized.</p>
+<h1 id="2.3-The-Standard-Gate-Set">2.3 The Standard Gate Set<a class="anchor-link" href="#2.3-The-Standard-Gate-Set">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>For every possible realization of fault-tolerant quantum computing, there is a set of quantum operations that are most straightforward to realize. Often these consist of multiple so-called Clifford gates, combined with a few single-qubit gates that do not belong to the Clifford group. In this section we'll introduce these concepts, in preparation for showing that they are universal.</p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">run</span> <span class="n">controller</span><span class="o">.</span><span class="n">py</span>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Clifford-gates">Clifford gates<a class="anchor-link" href="#Clifford-gates">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Some of the most important quantum operations are the so-called Clifford operations. A prominent example is the Hadamard gate:</p>
+$$
+H = |+\rangle\langle0|~+~ |-\rangle\langle1| = |0\rangle\langle+|~+~ |1\rangle\langle+|.
+$$<p>This gate is expressed above using outer products, as desribed in the last section. When expressed in this form, its famous effect becomes obvious: it takes $|0\rangle$, and rotates it to $|+\rangle$. More generally, we can say it rotates the basis states of the z measurement, $\{ |0\rangle,|1\rangle \}$, to the basis states of the x measurement, $\{ |+\rangle,|-\rangle \}$, and vice versa.</p>
+<p>This effect of the Hadamard is to move information around a qubit. It swaps any information that would previously be accessed by an x measurement with that accessed by a z measurement. Indeed, one of the most important jobs of the Hadamard is to do exactly this. We use it when wanting to make an x measurement, given that we can only physically make z measurements.</p>
+<div class="highlight"><pre><span></span><span class="c1">// x measurement of qubit 0</span>
+<span class="n">h</span> <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+<span class="n">measure</span> <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
 </pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-
- 
- 
-<div id="ebb505a1-b2d7-4ea4-aecf-551f19bf603d"></div>
-<div class="output_subarea output_widget_view ">
-<script type="text/javascript">
-var element = $('#ebb505a1-b2d7-4ea4-aecf-551f19bf603d');
-</script>
-<script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "a0aad66ff194491caa06989e0290344f", "version_major": 2, "version_minor": 0}
-</script>
-</div>
-
-</div>
+<p>The Hadamard can also be used to change how other operations function. For example,</p>
+$$
+H X H = Z,\\\\
+H Z H = X.
+$$<p>By doing a Hadamard before and after an $X$, we cause the action it previously applied to the z basis states to be transferred to the z basis states instead. The combined effect is then identical to that of a $Z$. Similarly, the Hadamards cause a $Z$ to behave as an $X$.</p>
+<p>Similar behavior can be seen for the $S$ gate and its Hermitian conjugate,</p>
+$$
+S X S^{\dagger} = Y,\\\\
+S Y S^{\dagger} = -X,\\\\
+S Z S^{\dagger} = Z.
+$$<p>This has a similar effect to the Hadamard, except that it swaps $X$ and $Y$ instead of $X$ and $Z$. In combination with the Hadamard, we could then make a composite gate that shifts information between y and z. This therefore gives us full control over single-qubit Paulis.</p>
+<p>The property of transforming Paulis into other Paulis is the defining feature of Clifford gates. Stated explicitly for the single-qubit case: if $U$ is a Clifford and $P$ is a Pauli, $U P U^{\dagger}$ will also be a Pauli. For Hermitian gates, like the Hadamard, we can simply use $U P U$.</p>
+<p>Further examples of single-qubit Clifford gates are the Paulis themselves. These do not transform the Pauli they act on. Instead, they simply assign a phase of $-1$ to the two that they anticommute with. For example,</p>
+$$
+Z X Z = -Y,\\\\
+Z Y Z = -X,\\\\
+Z Z Z= ~~~~Z.
+$$<p>You may have noticed that a similar phase also arose in the effect of the $S$ gate. By combining this with a Pauli, we could make a composite gate that would cancel this phase, and swap $X$ and $Y$ in a way more similar to the Hadamard's swap of $X$ and $Z$.</p>
+<p>For multiple-qubit Clifford gates, the defining property is that they transform tensor products of Paulis to other tensor products of Paulis. For example, the most prominent two-qubit Clifford gate is the CNOT. The property of this that we will make use of in this chapter is</p>
+$$
+{ CX}_{j,k}~ (X \otimes 1)~{ CX}_{j,k} = X \otimes X.
+$$<p>This effectively 'copies' an $X$ from the control qubit over to the target.</p>
+<p>The process of sandwiching a matrix between a unitary and its Hermitian conjugate is known as conjugation by that unitary. This process transforms the eigenstates of the matrix, but leaves the eigenvalues unchanged. The reason why conjugation by Cliffords can transform between Paulis is because all Paulis share the same set of eigenvalues.</p>
 
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-
-    </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Non-Clifford-gates">Non-Clifford gates<a class="anchor-link" href="#Non-Clifford-gates">&#182;</a></h3>
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The Clifford gates are very important, but they are not powerful on their own. In order to do any quantum computation, we need gates that are not Cliffords. Three important examples are arbitrary rotations around the three axes of the qubit, $R_x(\theta)$, $R_y(\theta)$ and $R_z(\theta)$.</p>
+<p>Let's focus on $R_x(\theta)$. As we saw in the last section, any unitary can be expressed in an exponential form using a Hermitian matrix. For this gate, we find</p>
+$$
+R_x(\theta) = e^{i \frac{\theta}{2} X}.
+$$<p>The last section also showed us that the unitary and its corresponding Hermitian matrix have the same eigenstates. In this section, we've seen that conjugation by a unitary transforms eigenstates and leaves eigenvalues unchanged. With this in mind, it can be shown that</p>
+$$
+U R_x(\theta)U^\dagger = e^{i \frac{\theta}{2} ~U X U^\dagger}.
+$$<p>By conjugating this rotation by a Clifford, we can therefore transform it to the same rotation around another axis. So even if we didn't have a direct way to perform $R_y(\theta)$ and $R_z(\theta)$, we could do it with $R_x(\theta)$ combined with Clifford gates. This technique of boosting the power of non-Clifford gates by combining them with Clifford gates is one that we make great use of in quantum computing.</p>
+<p>Certain examples of these rotations have specific names. Rotations by $\theta = \pi$ around the x, y and z axes are X, Y and Z, respectively. Rotations by $\theta = \pm \pi/2$ around the z axis are $S$ and $S^†$, and rotations by $\theta = \pm \pi/4$ around the z axis are $T$ and $T^†$.</p>
 
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Composite-gates">Composite gates<a class="anchor-link" href="#Composite-gates">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As another example of combining $R_x(\theta)$ with Cliffords, let's conjugate it with a CNOT.</p>
+$$
+CX_{j,k} ~(R_x(\theta) \otimes 1)~ CX_{j,k} = CX_{j,k} ~ e^{i \frac{\theta}{2} ~ (X\otimes 1)}~ CX_{j,k} = e^{i \frac{\theta}{2} ~CX_{j,k} ~ (X\otimes 1)~ CX_{j,k}} = e^{i \frac{\theta}{2} ~ X\otimes X}
+$$<p>This transforms our simple, single-qubit rotation into a much more powerful two-qubit gate. This is not just equivalent to performing the same rotation independently on both qubits. Instead, it is a gate capable of generating and manipulating entangled states.</p>
+<p>We needn't stop there. We can use the same trick to extend the operation to any number of qubits. All that's needed is more conjugates by the CNOT to keep copying the $X$ over to new qubits.</p>
+<p>Furthermore, we can use single-qubit Cliffords to transform the Pauli on different qubits. For example, in our two-qubit example we could conjugate by $S$ on the qubit on the left to turn the $X$ there into a $Y$:</p>
+$$
+S ~e^{i \frac{\theta}{2} ~ X\otimes X}~S^\dagger = e^{i \frac{\theta}{2} ~ X\otimes Y}.
+$$<p>With these techniques, we can make complex entangling operations that act on any arbitrary number of qubits, of the form</p>
+$$
+U = e^{i\frac{\theta}{2} ~ P_{n-1}\otimes P_{n-2}\otimes...\otimes P_0}, ~~~ P_j \in \{I,X,Y,Z\}.
+$$<p>This all goes to show that combining the single- and two-qubit Clifford gates with rotations around the x axis gives us a powerful set of possibilities. What's left to demonstrate is that we can use them to do anything.</p>
+
+</div>
+</div>
 </div>
     </div>
   </div>
