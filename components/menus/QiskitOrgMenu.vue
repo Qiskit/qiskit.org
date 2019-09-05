@@ -13,6 +13,7 @@
             <a class="vertical-navigation__item" href="https://qiskit.org/aer">Aer</a>
             <a class="vertical-navigation__item" href="https://qiskit.org/aqua">Aqua</a>
             <a class="vertical-navigation__item" href="https://qiskit.org/ignis">Ignis</a>
+            <a class="vertical-navigation__item" href="https://qiskit.org/ibmq">IBM Q</a>
             <h2>Learn more</h2>
             <a class="vertical-navigation__item vertical-navigation__item--active" href="/">Community</a>
             <div class="vertical-community-navigation">
@@ -38,6 +39,7 @@
           <a class="navigation-group__item" href="https://qiskit.org/aer">Aer</a>
           <a class="navigation-group__item" href="https://qiskit.org/aqua">Aqua</a>
           <a class="navigation-group__item" href="https://qiskit.org/ignis">Ignis</a>
+          <a class="navigation-group__item" href="https://qiskit.org/ibmq">IBM Q</a>
         </nav>
         <nav class="navigation-group navigation-group--fixed navigation-group--right-aligned">
           <a class="navigation-group__item navigation-group__item--active" href="/">Community</a>
