@@ -242,4 +242,10 @@ main {
     }
   }
 }
+
+@media (max-height: 600px) {
+  .inner-navigation {
+    position: static;
+  }
+}
 </style>
