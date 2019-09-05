@@ -46,7 +46,7 @@ export default {
     }
   }
   window._analytics = {
-    segment_key: 'zbHWEXPUfXm0K6C7HbegwB5ewDEC8o1H',
+    segment_key: 'ffdYLviQze3kzomaINXNk6NwpY9LlXcw',
     coremetrics: false,
     optimizely: false
   }
