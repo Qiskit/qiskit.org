@@ -1,8 +1,8 @@
 ---
 name: Michele Grossi
 image: michele-grossi.png
-location: Rome, Italy
-latitude: 41.90
-longitude: 12.49
+location: Milan, Italy
+latitude: 45.46
+longitude: 9.19
 areas: Tutorials, QML, Optimization problems
 ---
