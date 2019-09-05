@@ -261,11 +261,11 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
           <span>Learn more</span>
           <a href="/education">${i18next.t('community')}</a>
           <a
-            href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorials/blob/master/qiskit/start_here.ipynb"
+            href="https://quantum-computing.ibm.com/jupyter/tutorial/1_start_here.ipynb"
             rel="noopener"
             target="_blank"
             @click=${() => trackClickEvent({
-              action: 'Tutorials Link in Navbar',
+              action: 'Tutorials',
               objectType: 'Link',
               milestoneName: 'Looked at tutorials'
             })}
