@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>controller</title>
+<title>2.2-checkpoint</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13108,66 +13108,141 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Run the cell below to create a controller for the PewPew emulator.</p>
-<p>Note: Your first button press might not be recognized.</p>
+<h1 id="2.2-Fun-with-Matrices">2.2 Fun with Matrices<a class="anchor-link" href="#2.2-Fun-with-Matrices">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Manipulating matrices is the heart of how we analyze quantum programs. In this section we'll look at some of the most common tools that can be used for this.</p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">run</span> <span class="n">controller</span><span class="o">.</span><span class="n">py</span>
-</pre></div>
-
-    </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Unitary-and-Hermitian-matrices">Unitary and Hermitian matrices<a class="anchor-link" href="#Unitary-and-Hermitian-matrices">&#182;</a></h3>
 </div>
 </div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-
- 
- 
-<div id="ebb505a1-b2d7-4ea4-aecf-551f19bf603d"></div>
-<div class="output_subarea output_widget_view ">
-<script type="text/javascript">
-var element = $('#ebb505a1-b2d7-4ea4-aecf-551f19bf603d');
-</script>
-<script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "a0aad66ff194491caa06989e0290344f", "version_major": 2, "version_minor": 0}
-</script>
 </div>
-
-</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Studying universality is inherently an endeavour that needs math -- so we'll need to get ourselves some mathematical tools.</p>
+<p>Firstly, we need the concept of the Hermitian conjugate. For this we take a matrix $M$ , then we replace every element with its complex conjugate, and finally we transpose them (replace the top left element with the bottom right, and so on). This gives us a new matrix that we call $M^\dagger$.</p>
+<p>Two families of matrices that are very important to quantum computing are defined by their relationship with the Hermitian conjugate. One is the family of unitary matrices, for which</p>
+$$
+U U^\dagger = U^\dagger U = 1.
+$$<p>This means that the Hermitian conjugate of a unitary is its inverse. This is another unitary $U^\dagger$ with the power to undo the effects of $U$. All gates in quantum computing, with the exception of measurement, can be represented by unitary matrices.</p>
+<p>The other important family of matrices are the Hermitian matrices. These are the matrices that are unaffected by the Hermitian conjugate</p>
+$$
+H = H^\dagger.
+$$<p>The matrices $X$, $Y$, $Z$ and $H$ are examples of Hermitian matrices that you've already seen (coincidentally, they are also all unitary since they are their own inverses).</p>
 
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-
-    </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Matrices-as-outer-products">Matrices as outer products<a class="anchor-link" href="#Matrices-as-outer-products">&#182;</a></h3>
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In a previous section, we calculated many inner products, such as $\langle0|0\rangle =1$. These combine a bra and a ket to give us a single number. We can also combine them in a way that gives us a matrix, simply by putting them in the opposite order. This is called an outer product, and works by standard matrix multiplication. For example</p>
+$$
+|0\rangle\langle0|= \begin{pmatrix} 1 \\\\ 0 \end{pmatrix} \begin{pmatrix} 1 &amp; 0 \end{pmatrix} = \begin{pmatrix} 1&amp;0 \\\\ 0&amp;0 \end{pmatrix},\\\\
+|0\rangle\langle1| = \begin{pmatrix} 1 \\\\ 0 \end{pmatrix} \begin{pmatrix} 0 &amp; 1 \end{pmatrix} = \begin{pmatrix} 0&amp;1 \\\\ 0&amp;0 \end{pmatrix},\\\\
+|1\rangle\langle0| = \begin{pmatrix} 0 \\\\ 1 \end{pmatrix} \begin{pmatrix} 1 &amp; 0 \end{pmatrix} = \begin{pmatrix} 0&amp;0 \\\\ 1&amp;0 \end{pmatrix},\\\\
+|1\rangle\langle1| = \begin{pmatrix} 0 \\\\ 1 \end{pmatrix} \begin{pmatrix} 0 &amp; 1 \end{pmatrix} = \begin{pmatrix} 0&amp;0 \\\\ 0&amp;1 \end{pmatrix}.\\\\
+$$<p>This also means that we can write any matrix purely in terms of outer products. In the examples above, we constructed the four matrices that cover each of the single elements in a single-qubit matrix, so we can write any other single-qubit matrix in terms of them.</p>
+$$
+M= \begin{pmatrix} m_{0,0}&amp;m_{0,1} \\\\ m_{1,0}&amp;m_{1,1} \end{pmatrix} = m_{0,0} |0\rangle\langle0|+ m_{0,1} |0\rangle\langle1|+ m_{1,0} |1\rangle\langle0|+ m_{1,1} |1\rangle\langle1|
+$$<p>This property also extends to matrices for any number of qubits, $n$. We simply use the outer products of the corresponding $n$-bit strings.</p>
 
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Spectral-form">Spectral form<a class="anchor-link" href="#Spectral-form">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Outer products provide a very useful way of writing matrices. They are especially useful for unitaries, since we can simply capture the way that states are transformed.</p>
+<p>To do this, we first pick a set of orthogonal states that describe our qubits. For example, for two qubits we could simply choose $\{|00\rangle,|01\rangle,|10\rangle,|11\rangle\}$. Then we determine the state to which the unitary rotates each of these states. Let's call these $\{|u_{00}\rangle,|u_{01}\rangle,|u_{10}\rangle,|u_{11}\rangle\}$. The unitary that performs this can then be written</p>
+$$
+U = |u_{00}\rangle\langle00| + |u_{01}\rangle\langle01| + |u_{10}\rangle\langle10| +|u_{11}\rangle\langle11|
+$$<p>In a form like this, we can directly read out the effect of the unitary on the basis states we have chosen.</p>
+<p>This way of writing a unitary is not unique for each unitary. You can do it for every possible set of orthogonal input states. However, for at least one possible set of states it will take an especially simple form. These are the eigenstates of the matrix, for which</p>
+$$
+U = \sum_j e^{ih_j} |h_j\rangle\langle h_j|
+$$<p>Here the unitary takes each state of this basis, which we've called $|h_j\rangle$, and replaces it with $e^{ih_j}|h_j\rangle$. Since the $e^{ih_j} |h_j\rangle$ must themselves be valid quantum states, the $e^{ih_j}$ must be complex numbers of magnitude 1. In fact, this is exactly why we wrote them as a complex exponential; to ensure that they have magnitude 1, we simply need to ensure that the $h_j$ are real numbers.</p>
+<p>For these states, the unitary simply induces a global phase. The non-trivial effects of this unitary will come for superpositions of these states, for which a relative phase may be induced.</p>
+<p>Hermitian matrices also have well-defined eigenstates and eigenvalues, and can be written in the same form as the unitary matrix above.</p>
+$$
+H = \sum_j h_j |h_j\rangle\langle h_j| .
+$$<p>In order to satisfy the constraint that $H = H^\dagger$, we must determine what properties are required for the eigenstates and eigenvalues.</p>
+<p>For the eigenstates, we can see what happens when we take the inner product of a state with itself. For this we use the fact that the Hermitian conjugate of a product can be evalulated by taking the Hermitian conjugate of each factor, and then reversing the order of the factors. If we also note that the Hermitian conjugate of a ket is the corresponding bra, and vice versa, we find</p>
+$$
+(|h_j\rangle\langle h_j|)^\dagger = \langle (h_j|^\dagger) ~(|h_j\rangle^\dagger) = |h_j\rangle\langle h_j| .
+$$<p>The inner product of a state with itself is therefore inherently Hermitian. To ensure that $H$ is Hermitian as a whole, we only need to require the eigenvalues $h_j$ to be real.</p>
+<p>If you were wondering about the coincidence of notation used above for $U$ and $H$ in spectral form, this should hopefully begin to explain it. Essentially, these two types of matrices differ only in that one must have real numbers for eigenvalues, and the other must have complex exponentials of real numbers. This means that, for every unitary, we can define a corresponding Hermitian matrix. For this we simply reuse the same eigenstates, and use the $h_j$ from each $e^{ih_j}$ as the corresponding eigenvalue.</p>
+<p>Similarly, for each Hermitian matrix there exists a unitary. We simply reuse the same eigenstates, and exponentiate the $h_j$ to create the eigenvalues $e^{ih_j}$. This can be expressed as</p>
+$$
+U = e^{iH}
+$$<p>Here we have used the standard definition of how to exponentiate a matrix. This has exactly the properties we require: preserving the eigenstates and exponentiating the eigenvalues.</p>
+<p>We can also build a whole family of unitaries for each given Hermitian, using</p>
+$$
+U(\theta) = e^{i \theta H},
+$$<p>where $\theta$ is an arbitrary real number. This allows us to interpolate between $\theta=0$, which will be the identity matrix, to $\theta=1$, which is $U$. It also allow us to define a notion of a gate that is the square root of $U$: one that must be done twice to get the full effect of $U$. This would simply have $\theta=1/2$.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Pauli-decomposition">Pauli decomposition<a class="anchor-link" href="#Pauli-decomposition">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As we saw above, it is possible to write matrices entirely in terms of outer products.</p>
+$$
+M= \begin{pmatrix} m_{0,0}&amp;m_{0,1} \\\\ m_{1,0}&amp;m_{1,1} \end{pmatrix} = m_{0,0} |0\rangle\langle0|+ m_{0,1} |0\rangle\langle1|+ m_{1,0} |1\rangle\langle0|+ m_{1,1} |1\rangle\langle1|
+$$<p>Now we will see that it also possible to write them completely in terms of Pauli operators. For this, the key thing to note is that</p>
+$$
+\frac{1+Z}{2} = \frac{1}{2}\left[ \begin{pmatrix} 1&amp;0 \\\\0&amp;1 \end{pmatrix}+\begin{pmatrix} 1&amp;0 \\\\0&amp;-1 \end{pmatrix}\right] = |0\rangle\langle0|,\\\\\frac{1-Z}{2} = \frac{1}{2}\left[ \begin{pmatrix} 1&amp;0 \\\\0&amp;1 \end{pmatrix}-\begin{pmatrix} 1&amp;0 \\\\0&amp;-1 \end{pmatrix}\right] = |1\rangle\langle1|
+$$<p>This shows that $|0\rangle\langle0|$ and $|1\rangle\langle1|$ can be expressed using the identity matrix and $Z$. Now, using the property that $X|0\rangle = |1\rangle$, we can also produce</p>
+$$
+|0\rangle\langle1| = |0\rangle\langle0|X = \frac{1}{2}(1+Z)~X = \frac{X+iY}{2},\\\\
+|1\rangle\langle0| = X|0\rangle\langle0| = X~\frac{1}{2}(1+Z) = \frac{X-iY}{2}.
+$$<p>Since we have all the outer products, we can now use this to write the matrix in terms of Pauli matrices:</p>
+$$
+M = \frac{m_{0,0}+m_{1,1}}{2}~1~+~\frac{m_{0,1}+m_{1,0}}{2}~X~+~i\frac{m_{0,1}-m_{1,0}}{2}~Y~+~\frac{m_{0,0}-m_{1,1}}{2}~Z.
+$$<p>This example was for a general single-qubit matrix, but the a corresponding result is true also for matrices for any number of qubits. We simply start from the observation that</p>
+$$
+\left(\frac{1+Z}{2}\right)\otimes\left(\frac{1+Z}{2}\right)\otimes\ldots\otimes\left(\frac{1+Z}{2}\right) = |00\ldots0\rangle\langle00\ldots0|,
+$$<p>and can then proceed in the same manner as above. In the end it can be shown that any matrix can be expressed in terms of tensor products of Pauli matrices:</p>
+$$
+M = \sum_{P_{n-1},\ldots,P_0 \in \{1,X,Y,Z\}} C_{P_{n-1}\ldots,P_0}~~P_{n-1} \otimes P_{n-2}\otimes\ldots\otimes P_0.
+$$<p>For Hermitian matrices, note that the coefficients $C_{P_{n-1}\ldots,P_0}$ here will all be real.</p>
+<p>Now we have some powerful tools to analyze quantum operations, let's look at the operations we will need to analyze for our study of universality.</p>
+
+</div>
+</div>
 </div>
     </div>
   </div>

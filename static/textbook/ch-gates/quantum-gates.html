@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>controller</title>
+<title>quantum-gates</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13108,9 +13108,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Run the cell below to create a controller for the PewPew emulator.</p>
-<p>Note: Your first button press might not be recognized.</p>
-
+<h1 id="2.1-Quantum-Gates">2.1 Quantum Gates<a class="anchor-link" href="#2.1-Quantum-Gates">&#182;</a></h1>
 </div>
 </div>
 </div>
@@ -13119,7 +13117,169 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">run</span> <span class="n">controller</span><span class="o">.</span><span class="n">py</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="o">*</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>To manipulate an input state we need to apply the basic operations of quantum computing. These are known as quantum gates. Here we'll give an introduction to some of the most fundamental gates in quantum computing. Most of those we'll be looking at act only on a single qubit. This means that their actions can be understood in terms of the Bloch sphere.</p>
+<h3 id="The-Pauli-operators">The Pauli operators<a class="anchor-link" href="#The-Pauli-operators">&#182;</a></h3><p>The simplest quantum gates are the Paulis: $X$, $Y$ and $Z$. Their action is to perform a half rotation of the Bloch sphere around the x, y and z axes. They therefore have effects similar to the classical NOT gate or bit-flip. Specifically, the action of the $X$ gate on the states $|0\rangle$ and $|1\rangle$ is</p>
+$$
+X |0\rangle = |1\rangle,\\\\ X |1\rangle = |0\rangle.
+$$<p>The $Z$ gate has a similar effect on the states $|+\rangle$ and $|-\rangle$:</p>
+$$
+Z |+\rangle = |-\rangle, \\\\ Z |-\rangle = |+\rangle.
+$$<p>These gates are implemented in Qiskit as follows (assuming a circuit named <code>qc</code>).</p>
+<div class="highlight"><pre><span></span><span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># x on qubit 0</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">y</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># y on qubit 0</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">z</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># z on qubit 0</span>
+</pre></div>
+<p>The matrix representations of these gates have already been shown in a previous section.</p>
+$$
+X= \begin{pmatrix} 0&amp;1 \\\\ 1&amp;0 \end{pmatrix}\\\\
+Y= \begin{pmatrix} 0&amp;-i \\\\ i&amp;0 \end{pmatrix}\\\\
+Z= \begin{pmatrix} 1&amp;0 \\\\ 0&amp;-1 \end{pmatrix}
+$$<p>There, their job was to help us make calculations regarding measurements. But since these matrices are unitary, and therefore define a reversible quantum operation, this additional interpretation of them as gates is also possible.</p>
+<p>Note that here we referred to these gates as $X$, $Y$ and $Z$ and <code>x</code>, <code>y</code> and <code>z</code>, depending on whether we were talking about their matrix representation or which the way they are written in Qiskit. Typically we will use the style of $X$, $Y$ and $Z$ when referring to gates in text or equations, and <code>x</code>, <code>y</code> and <code>z</code> when writing Qiskit code.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Hadamard-and-S">Hadamard and S<a class="anchor-link" href="#Hadamard-and-S">&#182;</a></h3><p>The Hadamard gate is one that we've already used. It's a key component in performing an x measurement:</p>
+<div class="highlight"><pre><span></span><span class="n">measure_z</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">measure_z</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+</pre></div>
+<p>Like the Paulis, the Hadamard is also a half rotation of the Bloch sphere. The difference is that it rotates around an axis located halfway between x and z. This gives it the effect of rotating states that point along the z axis to those pointing along x, and vice versa.</p>
+$$
+H |0\rangle = |+\rangle, \, \, \, \, H |1\rangle = |-\rangle,\\\\
+H |+\rangle = |0\rangle, \, \, \, \, H |-\rangle = |1\rangle.
+$$<p>This effect makes it an essential part of making x measurements, since the hardware behind quantum computing typically only allows the z measurement to be performed directly. By moving x basis information to the z basis, it allows an indirect measurement of x.</p>
+<p>The property that $H |0\rangle = |+\rangle $ also makes the Hadamard our primary means of generating superposition states. Its matrix form is</p>
+$$
+H = \frac{1}{\sqrt{2}} \begin{pmatrix} 1&amp;1 \\\\ 1&amp;-1 \end{pmatrix}.
+$$<p>The $S$ and $S^\dagger$ gates have a similar role to play in quantum computation.</p>
+<div class="highlight"><pre><span></span><span class="n">qc</span><span class="o">.</span><span class="n">s</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># s gate on qubit 0</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">sdg</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># s† on qubit 1</span>
+</pre></div>
+<p>They are quarter turns of the Bloch sphere around the z axis, and so can be regarded as the two possible square roots of the $Z$ gate,</p>
+$$
+S = \begin{pmatrix} 1&amp;0 \\\\ 0&amp;i \end{pmatrix}, \, \, \, \, S^\dagger = \begin{pmatrix} 1&amp;0 \\\\ 0&amp;-i \end{pmatrix}.
+$$<p>The effect of these gates is to rotate between the states of the x and y bases.</p>
+$$
+S |+\rangle = |\circlearrowright\rangle, \, \, \, \, S |-\rangle = |\circlearrowleft\rangle,\\\\
+S^\dagger |\circlearrowright\rangle = |+\rangle, \, \, \, \, S^\dagger |\circlearrowleft\rangle = |-\rangle.
+$$<p>They are therefore used as part of y measurements.</p>
+<div class="highlight"><pre><span></span><span class="n">measure_y</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">measure_y</span><span class="o">.</span><span class="n">sdg</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">measure_y</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">measure_y</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+</pre></div>
+<p>The $H$, $S$ and $S^\dagger$ gates, along with the Paulis, form the so-called 'Clifford group' for a single qubit, which will be discussed more in later sections. These gates are extremely useful for many tasks in making and manipulating superpositions, as well as facilitating different kinds of measurements. But to unlock the full potential of qubits, we need the next set of gates.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Other-single-qubit-gates">Other single-qubit gates<a class="anchor-link" href="#Other-single-qubit-gates">&#182;</a></h3><p>We've already seen the $X$, $Y$ and $Z$ gates, which are rotations around the x , y and z axes by a specific angle. More generally we can extend this concept to rotations by an arbitrary angle $\theta$. This gives us the gates $R_x(\theta)$, $R_y(\theta)$ and $R_z(\theta)$. The angle is expressed in radians, so the Pauli gates correspond to $\theta=\pi$ . Their square roots require half this angle, $\theta=\pm \pi/2$, and so on.</p>
+<p>In Qasm, these rotations can be implemented with <code>rx</code>, <code>ry</code>, and <code>rz</code> as follows.</p>
+<div class="highlight"><pre><span></span><span class="n">qc</span><span class="o">.</span><span class="n">rx</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># rx rotation on qubit 0</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">ry</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># ry rotation on qubit 0</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">rz</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># rz rotation on qubit 0</span>
+</pre></div>
+<p>Two specific examples of $R_z(\theta)$ have their own names: those for $\theta=\pm \pi/4$. These are the square roots of $S$, and are known as $T$ and $T^\dagger$.</p>
+<div class="highlight"><pre><span></span><span class="n">qc</span><span class="o">.</span><span class="n">t</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># t gate on qubit 0</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">tdg</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># t† on qubit 1</span>
+</pre></div>
+<p>Their matrix form is</p>
+$$
+T = \begin{pmatrix} 1&amp;0 \\\\ 0&amp;e^{i\pi/4}\end{pmatrix}, \, \, \, \, T^\dagger = \begin{pmatrix} 1&amp;0 \\\\ 0&amp;e^{-i\pi/4} \end{pmatrix}.
+$$<p>All single-qubit operations are compiled down to gates known as $U_1$ , $U_2$ and $U_3$ before running on real IBM quantum hardware. For that reason they are sometimes called the <em>physical gates</em>. Let's have a more detailed look at them. The most general is</p>
+$$
+U_3(\theta,\phi,\lambda) = \begin{pmatrix} \cos(\theta/2) &amp; -e^{i\lambda}\sin(\theta/2) \\\\ e^{i\phi}\sin(\theta/2) 
+&amp; e^{i\lambda+i\phi}\cos(\theta/2) \end{pmatrix}.
+$$<p>This has the effect of rotating a qubit in the initial $|0\rangle$ state to one with an arbitrary superposition and relative phase:</p>
+$$
+U_3|0\rangle = \cos(\theta/2)|0\rangle + \sin(\theta/2)e^{i\phi}|1\rangle.
+$$<p>The $U_1$ gate is known as the phase gate and is essentially the same as $R_z(\lambda)$. Its relationship with $U_3$ and its matrix form are,</p>
+$$
+U_1(\lambda) = U_3(0,0,\lambda) = \begin{pmatrix} 1 &amp; 0 \\\\ 0 &amp; e^{i\lambda} \end{pmatrix}.
+$$<p>In IBM Q hardware, this gate is implemented as a frame change and takes zero time.</p>
+<p>The second gate is $U_2$, and has the form</p>
+$$
+U_2(\phi,\lambda) = U_3(\pi/2,\phi,\lambda) = \frac{1}{\sqrt{2}}\begin{pmatrix} 1 &amp; -e^{i\lambda} \\\\ e^{i\phi} &amp; e^{i\lambda+i\phi} \end{pmatrix}.
+$$<p>From this gate, the Hadamard is done by $H= U_2(0,\pi)$. In IBM Q hardware, this is implemented by a pre- and post-frame change and an $X_{\pi/2}$ pulse.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Multiqubit-gates">Multiqubit gates<a class="anchor-link" href="#Multiqubit-gates">&#182;</a></h3><p>To create quantum algorithms that beat their classical counterparts, we need more than isolated qubits. We need ways for them to interact. This is done by multiqubit gates.</p>
+<p>The most prominent multiqubit gates are the two-qubit CNOT and the three-qubit Toffoli. These have already been introduced in 'The atoms of computation'. They essentially perform reversible versions of the classical XOR and AND gates, respectively.</p>
+<div class="highlight"><pre><span></span><span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># CNOT controlled on qubit 0 with qubit 1 as target</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">ccx</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># Toffoli controlled on qubits 0 and 1 with qubit 2 as target</span>
+</pre></div>
+<p>Note that the CNOT is referred to as <code>cx</code> in Qiskit.</p>
+<p>We can also interpret the CNOT as performing an $X$ on its target qubit, but only when its control qubit is in state $|1\rangle$, and doing nothing when the control is in state $|0\rangle$. With this interpretation in mind, we can similarly define gates that work in the same way, but instead peform a $Y$ or $Z$ on the target qubit depending on the $|0\rangle$ and $|1\rangle$ states of the control.</p>
+<div class="highlight"><pre><span></span><span class="n">qc</span><span class="o">.</span><span class="n">cy</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># controlled-Y, controlled on qubit 0 with qubit 1 as target</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">cz</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># controlled-Z, controlled on qubit 0 with qubit 1 as target</span>
+</pre></div>
+<p>The Toffoli gate can be interpreted in a similar manner, except that it has a pair of control qubits. Only if both are in state $|1\rangle$ is the $X$ applied to the target.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Composite-gates">Composite gates<a class="anchor-link" href="#Composite-gates">&#182;</a></h3><p>When we combine gates, we make new gates. If we want to see the matrix representation of these, we can use the 'unitary simulator' of Qiskit.</p>
+<p>For example, let's try something simple: a two qubit circuit with an <code>x</code> applied to one and a <code>z</code> to the other. Using tensor products, we can expect the result to be,</p>
+$$
+Z \otimes X=  \begin{pmatrix} 1&amp;0 \\\\ 0&amp;-1 \end{pmatrix} \otimes \begin{pmatrix} 0&amp;1 \\\\ 1&amp;0 \end{pmatrix} = \begin{pmatrix} 0&amp;1&amp;0&amp;0 \\\\ 1&amp;0&amp;0&amp;0\\\\0&amp;0&amp;0&amp;-1\\\\0&amp;0&amp;-1&amp;0 \end{pmatrix}.
+$$<p>This is exactly what we find when we analyze the circuit with this tool.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># set up circuit (no measurements required)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># qubits numbered from the right, so qubit 0 is the qubit on the right</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">z</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># and qubit 1 is on the left</span>
+
+<span class="c1"># set up simulator that returns statevectors</span>
+<span class="n">backend</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;unitary_simulator&#39;</span><span class="p">)</span>
+
+<span class="c1"># run the circuit to get the matric</span>
+<span class="n">gate</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">backend</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_unitary</span><span class="p">()</span>
+
+<span class="c1"># now we use some fanciness to display it in latex</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">Markdown</span><span class="p">,</span> <span class="n">Latex</span>
+<span class="n">gate_latex</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">begin</span><span class="si">{pmatrix}</span><span class="s1">&#39;</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">gate</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+        <span class="n">gate_latex</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">element</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;&amp;&#39;</span>
+    <span class="n">gate_latex</span>  <span class="o">=</span> <span class="n">gate_latex</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">gate_latex</span> <span class="o">+=</span>  <span class="s1">&#39;</span><span class="se">\\\\</span><span class="s1">&#39;</span>
+<span class="n">gate_latex</span>  <span class="o">=</span> <span class="n">gate_latex</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span>
+<span class="n">gate_latex</span> <span class="o">+=</span> <span class="s1">&#39;\end</span><span class="si">{pmatrix}</span><span class="s1">&#39;</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Markdown</span><span class="p">(</span><span class="n">gate_latex</span><span class="p">))</span>
 </pre></div>
 
     </div>
@@ -13136,35 +13296,12 @@ div#notebook {
 
 
 
-
-
- 
- 
-<div id="ebb505a1-b2d7-4ea4-aecf-551f19bf603d"></div>
-<div class="output_subarea output_widget_view ">
-<script type="text/javascript">
-var element = $('#ebb505a1-b2d7-4ea4-aecf-551f19bf603d');
-</script>
-<script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "a0aad66ff194491caa06989e0290344f", "version_major": 2, "version_minor": 0}
-</script>
+<div class="output_markdown rendered_html output_subarea ">
+\begin{pmatrix}0j&amp;(1+0j)&amp;0j&amp;0j\\(1+0j)&amp;0j&amp;0j&amp;0j\\0j&amp;0j&amp;0j&amp;(-1+0j)\\0j&amp;0j&amp;(-1+0j)&amp;\end{pmatrix}
 </div>
 
 </div>
 
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-
-    </div>
 </div>
 </div>
 
