@@ -27,7 +27,7 @@
             Qiskit Advocates
           </h2>
           <ul>
-            <li><a class="footer-column__link" href="/advocates#steps-to-apply">Become an advocate</a></li>
+            <li><a class="footer-column__link" href="/advocates#become-an-advocate">Become an Advocate</a></li>
           </ul>
         </section>
         <section class="footer-column">
