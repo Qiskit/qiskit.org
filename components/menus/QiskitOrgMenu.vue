@@ -50,7 +50,7 @@
     </div>
     <div class="community-menu menu-container menu-container--light">
       <section class="menu menu--framed">
-        <nav class="navigation-group navigation-group--right-aligned">
+        <nav class="navigation-group navigation-group--right-aligned navigation-group--fixed">
           <a
             v-for="(link, index) in links"
             :key="index"
@@ -103,6 +103,9 @@ export default class extends Vue {
 }
 
 .menu-container {
+  font-size: 16px;
+  font-weight: 400;
+
   --link-color: white;
 
   &--light {
@@ -143,6 +146,7 @@ export default class extends Vue {
     }
 
     &--active {
+      padding-top: 2px;
       position: relative;
       top: 1px;
       border-bottom: 4px solid var(--secondary-color);
@@ -152,7 +156,7 @@ export default class extends Vue {
   &--with-separator::before {
     content: "";
     background-color: #fff4;
-    width: 1px;
+    width: 2px;
     margin: 12px 10px;
   }
 
@@ -160,16 +164,16 @@ export default class extends Vue {
     margin-left: auto;
   }
 
-  &--fixes {
+  &--fixed {
     /* fixings for mimicing qiskit.org menu */
-    margin-right: 0.2rem;
+    margin-right: -0.4rem;
   }
 }
 
 .link-to-home {
   display: inline-flex;
   align-items: center;
-  margin-left: -1.3rem;
+  margin-left: -1.2rem;
   padding: 0 1em;
   color: var(--link-color);
   text-decoration: none;
