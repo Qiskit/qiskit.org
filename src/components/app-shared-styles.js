@@ -11,7 +11,7 @@ import { css } from 'lit-element';
 
 export const SharedStyles = css`
   a {
-    color: var(--app-primary-color);
+    color: #000;
     text-decoration: none;
   }
 
@@ -49,7 +49,7 @@ export const HeaderStyles = css`
       --app-header-background-color,
       var(--app-secondary-color)
     );
-    color: #ffffff;
+    color: #000000;
   }
 
   header > img {
@@ -100,8 +100,8 @@ export const HeaderStyles = css`
   }
 
   header .badges vaadin-button {
-    --ibmq-button-secondary-color: #ffffff;
-    --ibmq-button-secondary-focus-color: #292c35;
+    --ibmq-button-secondary-color: #000000;
+    --ibmq-button-secondary-focus-color: var(--app-section-background-color);
   }
 
   header .badges vaadin-button svg {
@@ -147,7 +147,7 @@ export const SectionStyles = css`
       --app-section-background-color,
       var(--app-primary-color)
     );
-    color: var(--app-section-color, #ffffff);
+    color: var(--app-section-color, #000000);
   }
 
   section .limited-width {
@@ -219,12 +219,12 @@ export const SectionStyles = css`
   }
 
   section .row .description .actions vaadin-button {
-    --ibmq-button-secondary-color: var(--app-primary-color);
+    --ibmq-button-secondary-color: #000000;
     --ibmq-button-secondary-focus-color: #ffffff;
   }
 
   section.colored .row .description .actions vaadin-button {
-    --ibmq-button-secondary-color: #ffffff;
+    --ibmq-button-secondary-color: #000000;
     --ibmq-button-secondary-focus-color: var(--app-primary-color);
   }
 
