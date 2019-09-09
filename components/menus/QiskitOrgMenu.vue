@@ -115,12 +115,12 @@ export default class extends Vue {
 }
 
 .menu {
-  height: 60px;
+  height: 62px;
   display: flex;
   font-size: 0.80rem;
 
   & > * {
-    height: 100%;
+    height: calc(100% - 2px);
   }
 
   &--framed {
