@@ -70,7 +70,7 @@ class PageIBMQP extends localize(i18next)(LitElement) {
               target="_blank"
               rel="noopener"
               @click=${() => trackClickEvent({
-                action: 'IBM Q Provider: GitHub Repository',
+                action: 'IBM Q Account: GitHub Repository',
                 objectType: 'Button'
               })}
             >
@@ -113,7 +113,7 @@ class PageIBMQP extends localize(i18next)(LitElement) {
               type="python"
               copy-clipboard-button
               @click=${() => trackClickEvent({
-                action: 'IBM Q Provider: Copy Code Sample',
+                action: 'IBM Q Account: Copy Code Sample',
                 objectType: 'Button'
               })}
             >
