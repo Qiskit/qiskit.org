@@ -34,7 +34,7 @@
        </script>
         <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
     
-    <title>Schedule &#8212; Qiskit 0.12.0 ドキュメント</title>
+    <title>qiskit.pulse.schedule module &#8212; Qiskit 0.11.2 ドキュメント</title>
 
     <link rel="stylesheet" href="../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -52,23 +52,20 @@
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="索引" href="../genindex.html" />
-    <link rel="search" title="検索" href="../search.html" />
-    <link rel="next" title="ScheduleComponent" href="qiskit.pulse.ScheduleComponent.html" />
-    <link rel="prev" title="SamplePulse" href="qiskit.pulse.SamplePulse.html" /> 
+    <link rel="search" title="検索" href="../search.html" /> 
   </head>
 <body>
   <header>
     <div class="toolbar limited-width">
-      <a href="/" class="home">Qiskit</a>
+      <a href="/" class="home">Qiskit ™</a>
       <nav class="first">
         <a href="/terra">Terra</a>
         <a href="/aer">Aer</a>
         <a href="/aqua">Aqua</a>
         <a href="/ignis">Ignis</a>
-        <a href="/ibmq">IBM Q</a>
       </nav>
       <nav class="second">
-        <a class="external" id="educationLink" href="https://community.qiskit.org/education">Community</a>
+        <a class="external" id="educationLink" href="https://community.qiskit.org/education" target="_blank">Education</a>
         <a class="external" id="tutorialsLink" href="https://quantum-computing.ibm.com/jupyter/tutorial/1_start_here.ipynb" target="_blank">Tutorials</a>
         <a class="external" href="/documentation" selected>API Documentation</a>
       </nav>
@@ -87,13 +84,10 @@
     
 
 <div class="languages" >
-    <span>Select a language: </span>
-	<span>
 	    <select id="language" name="languages">
 	        <option value="en">English</option>
-	        <option value="ja">日本語</option>
-        </select>
-    </span>
+	        <option value="ja">Japanese</option>
+	    </select>
 </div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
@@ -111,31 +105,31 @@
     </div>
 </div>
 <div class="globaltoc">
-  <span class="mdl-layout-title toc">目次</span>
+  <span class="mdl-layout-title toc">Table Of Contents</span>
   
   
   
       
       <nav class="mdl-navigation">
-          <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../install.html">Qiskitのインストール</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../install.html#requirements">要件</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../install.html#install">インストール</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../install.html#access-ibm-q-systems">IBM Q Systemsへのアクセス</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../install.html#checking-which-version-is-installed">インストールされたバージョンの確認方法</a></li>
+          <ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installing Qiskit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#install">Install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#access-ibm-q-systems">Access IBM Q Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#checking-which-version-is-installed">Checking Which Version is Installed</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Qiskit 入門</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../getting_started.html#workflow-step-by-step">ワークフローの手順</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-1-import-packages">手順1 : パッケージのインポート</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-2-initialize-variables">手順2：変数の初期化</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-3-add-gates">手順3：ゲートの追加</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-4-visualize-the-circuit">手順４：回路の可視化</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-5-simulate-the-experiment">実験のシミュレーション</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-6-visualize-the-results">ステップ6：結果の可視化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started with Qiskit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started.html#workflow-step-by-step">Workflow Step--by--Step</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-1-import-packages">Step 1 : Import Packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-2-initialize-variables">Step 2 : Initialize Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-3-add-gates">Step 3 : Add Gates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-4-visualize-the-circuit">Step 4 : Visualize the Circuit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-5-simulate-the-experiment">Step 5 : Simulate the Experiment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-6-visualize-the-results">Step 6 : Visualize the Results</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../getting_started.html#next-steps">次の手順</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started.html#next-steps">Next Steps</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../the_elements.html">The Qiskit Elements</a><ul>
@@ -196,11 +190,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../contributing_to_qiskit.html#where-things-are">Where Things Are</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../contributing_to_qiskit.html#getting-started">Getting Started</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../contributing_to_qiskit.html#contributor-license-agreement">Contributor License Agreement</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../contributing_to_qiskit.html#contributing-to-documentation">Contributing to Documentation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#translating-documentation">Translating Documentation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#building-from-source">Building from Source</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing_to_qiskit.html#writing-and-building-api-documentation">Writing and Building API Documentation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../contributing_to_qiskit.html#installing-from-source">Installing from Source</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#set-up-the-virtual-development-environment">Set up the virtual development environment</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#installing-terra-from-source">Installing Terra from Source</a></li>
@@ -283,46 +273,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../apidoc/qiskit.html">API References</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../apidoc/aqua/aqua.html">qiskit.aqua</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../apidoc/aqua/aqua.html#functions">Functions</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.refresh_pluggables.html">refresh_pluggables</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.get_aer_backend.html">get_aer_backend</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.get_backends_from_provider.html">get_backends_from_provider</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.get_backend_from_provider.html">get_backend_from_provider</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.get_local_providers.html">get_local_providers</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.register_ibmq_and_get_known_providers.html">register_ibmq_and_get_known_providers</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.get_provider_from_backend.html">get_provider_from_backend</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.local_pluggables_types.html">local_pluggables_types</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.local_pluggables.html">local_pluggables</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.get_pluggable_class.html">get_pluggable_class</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.get_pluggable_configuration.html">get_pluggable_configuration</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.register_pluggable.html">register_pluggable</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.deregister_pluggable.html">deregister_pluggable</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.execute_algorithm.html">execute_algorithm</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.run_algorithm.html">run_algorithm</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.run_algorithm_to_json.html">run_algorithm_to_json</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.get_logging_level.html">get_logging_level</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.build_logging_config.html">build_logging_config</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.set_logging_config.html">set_logging_config</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.get_qiskit_aqua_logging.html">get_qiskit_aqua_logging</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.set_qiskit_aqua_logging.html">set_qiskit_aqua_logging</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="../apidoc/aqua/aqua.html#classes">Classes</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.AquaError.html">AquaError</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.Preferences.html">Preferences</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.Pluggable.html">Pluggable</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.Operator.html">Operator</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.QuantumAlgorithm.html">QuantumAlgorithm</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.PluggableType.html">PluggableType</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.QuantumInstance.html">QuantumInstance</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.QiskitAqua.html">QiskitAqua</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../apidoc/aqua/aqua.html#submodules">Submodules</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../apidoc/qiskit.html">API References</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../apidoc/assembler.html">qiskit.assembler</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/assembler.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.assembler.assemble_circuits.html">assemble_circuits</a></li>
@@ -332,29 +283,6 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/assembler.html#classes">Classes</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.assembler.RunConfig.html">RunConfig</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../apidoc/chemistry/chemistry.html">qiskit.chemistry</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../apidoc/chemistry/chemistry.html#functions">Functions</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.run_experiment.html">run_experiment</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.run_driver_to_json.html">run_driver_to_json</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.get_logging_level.html">get_logging_level</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.build_logging_config.html">build_logging_config</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.set_logging_config.html">set_logging_config</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.get_qiskit_chemistry_logging.html">get_qiskit_chemistry_logging</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.set_qiskit_chemistry_logging.html">set_qiskit_chemistry_logging</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="../apidoc/chemistry/chemistry.html#classes">Classes</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.QiskitChemistryError.html">QiskitChemistryError</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.QMolecule.html">QMolecule</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.ChemistryProblem.html">ChemistryProblem</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.QiskitChemistry.html">QiskitChemistry</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.FermionicOperator.html">FermionicOperator</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.MP2Info.html">MP2Info</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../apidoc/chemistry/chemistry.html#submodules">Submodules</a></li>
 </ul>
 </li>
 </ul>
@@ -468,12 +396,12 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l2 current"><a class="reference internal" href="../apidoc/pulse/pulse.html">qiskit.pulse</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../apidoc/pulse/pulse.html">qiskit.pulse</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/pulse/pulse.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.pulse.functional_pulse.html">functional_pulse</a></li>
 </ul>
 </li>
-<li class="toctree-l3 current"><a class="reference internal" href="../apidoc/pulse/pulse.html#classes">Classes</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../apidoc/pulse/pulse.html#classes">Classes</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.pulse.Acquire.html">Acquire</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.pulse.AcquireChannel.html">AcquireChannel</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.pulse.CmdDef.html">CmdDef</a></li>
@@ -494,7 +422,7 @@
 <li class="toctree-l4"><a class="reference internal" href="qiskit.pulse.PulseError.html">PulseError</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.pulse.RegisterSlot.html">RegisterSlot</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.pulse.SamplePulse.html">SamplePulse</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">Schedule</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.pulse.Schedule.html">Schedule</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.pulse.ScheduleComponent.html">ScheduleComponent</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.pulse.Snapshot.html">Snapshot</a></li>
 </ul>
@@ -670,13 +598,10 @@
     
 
 <div class="languages" >
-    <span>Select a language: </span>
-	<span>
 	    <select id="language" name="languages">
 	        <option value="en">English</option>
-	        <option value="ja">日本語</option>
-        </select>
-    </span>
+	        <option value="ja">Japanese</option>
+	    </select>
 </div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
@@ -694,31 +619,31 @@
     </div>
 </div>
 <div class="globaltoc">
-  <span class="mdl-layout-title toc">目次</span>
+  <span class="mdl-layout-title toc">Table Of Contents</span>
   
   
   
       
       <nav class="mdl-navigation">
-          <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../install.html">Qiskitのインストール</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../install.html#requirements">要件</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../install.html#install">インストール</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../install.html#access-ibm-q-systems">IBM Q Systemsへのアクセス</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../install.html#checking-which-version-is-installed">インストールされたバージョンの確認方法</a></li>
+          <ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installing Qiskit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#install">Install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#access-ibm-q-systems">Access IBM Q Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#checking-which-version-is-installed">Checking Which Version is Installed</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Qiskit 入門</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../getting_started.html#workflow-step-by-step">ワークフローの手順</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-1-import-packages">手順1 : パッケージのインポート</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-2-initialize-variables">手順2：変数の初期化</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-3-add-gates">手順3：ゲートの追加</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-4-visualize-the-circuit">手順４：回路の可視化</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-5-simulate-the-experiment">実験のシミュレーション</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-6-visualize-the-results">ステップ6：結果の可視化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started with Qiskit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started.html#workflow-step-by-step">Workflow Step--by--Step</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-1-import-packages">Step 1 : Import Packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-2-initialize-variables">Step 2 : Initialize Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-3-add-gates">Step 3 : Add Gates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-4-visualize-the-circuit">Step 4 : Visualize the Circuit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-5-simulate-the-experiment">Step 5 : Simulate the Experiment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-6-visualize-the-results">Step 6 : Visualize the Results</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../getting_started.html#next-steps">次の手順</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started.html#next-steps">Next Steps</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../the_elements.html">The Qiskit Elements</a><ul>
@@ -779,11 +704,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../contributing_to_qiskit.html#where-things-are">Where Things Are</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../contributing_to_qiskit.html#getting-started">Getting Started</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../contributing_to_qiskit.html#contributor-license-agreement">Contributor License Agreement</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../contributing_to_qiskit.html#contributing-to-documentation">Contributing to Documentation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#translating-documentation">Translating Documentation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#building-from-source">Building from Source</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing_to_qiskit.html#writing-and-building-api-documentation">Writing and Building API Documentation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../contributing_to_qiskit.html#installing-from-source">Installing from Source</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#set-up-the-virtual-development-environment">Set up the virtual development environment</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#installing-terra-from-source">Installing Terra from Source</a></li>
@@ -866,46 +787,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../apidoc/qiskit.html">API References</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../apidoc/aqua/aqua.html">qiskit.aqua</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../apidoc/aqua/aqua.html#functions">Functions</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.refresh_pluggables.html">refresh_pluggables</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.get_aer_backend.html">get_aer_backend</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.get_backends_from_provider.html">get_backends_from_provider</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.get_backend_from_provider.html">get_backend_from_provider</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.get_local_providers.html">get_local_providers</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.register_ibmq_and_get_known_providers.html">register_ibmq_and_get_known_providers</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.get_provider_from_backend.html">get_provider_from_backend</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.local_pluggables_types.html">local_pluggables_types</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.local_pluggables.html">local_pluggables</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.get_pluggable_class.html">get_pluggable_class</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.get_pluggable_configuration.html">get_pluggable_configuration</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.register_pluggable.html">register_pluggable</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.deregister_pluggable.html">deregister_pluggable</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.execute_algorithm.html">execute_algorithm</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.run_algorithm.html">run_algorithm</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.run_algorithm_to_json.html">run_algorithm_to_json</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.get_logging_level.html">get_logging_level</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.build_logging_config.html">build_logging_config</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.set_logging_config.html">set_logging_config</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.get_qiskit_aqua_logging.html">get_qiskit_aqua_logging</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.set_qiskit_aqua_logging.html">set_qiskit_aqua_logging</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="../apidoc/aqua/aqua.html#classes">Classes</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.AquaError.html">AquaError</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.Preferences.html">Preferences</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.Pluggable.html">Pluggable</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.Operator.html">Operator</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.QuantumAlgorithm.html">QuantumAlgorithm</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.PluggableType.html">PluggableType</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.QuantumInstance.html">QuantumInstance</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.QiskitAqua.html">QiskitAqua</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../apidoc/aqua/aqua.html#submodules">Submodules</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../apidoc/qiskit.html">API References</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../apidoc/assembler.html">qiskit.assembler</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/assembler.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.assembler.assemble_circuits.html">assemble_circuits</a></li>
@@ -915,29 +797,6 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/assembler.html#classes">Classes</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.assembler.RunConfig.html">RunConfig</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../apidoc/chemistry/chemistry.html">qiskit.chemistry</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../apidoc/chemistry/chemistry.html#functions">Functions</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.run_experiment.html">run_experiment</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.run_driver_to_json.html">run_driver_to_json</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.get_logging_level.html">get_logging_level</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.build_logging_config.html">build_logging_config</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.set_logging_config.html">set_logging_config</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.get_qiskit_chemistry_logging.html">get_qiskit_chemistry_logging</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.set_qiskit_chemistry_logging.html">set_qiskit_chemistry_logging</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="../apidoc/chemistry/chemistry.html#classes">Classes</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.QiskitChemistryError.html">QiskitChemistryError</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.QMolecule.html">QMolecule</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.ChemistryProblem.html">ChemistryProblem</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.QiskitChemistry.html">QiskitChemistry</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.FermionicOperator.html">FermionicOperator</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.MP2Info.html">MP2Info</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../apidoc/chemistry/chemistry.html#submodules">Submodules</a></li>
 </ul>
 </li>
 </ul>
@@ -1051,12 +910,12 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l2 current"><a class="reference internal" href="../apidoc/pulse/pulse.html">qiskit.pulse</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../apidoc/pulse/pulse.html">qiskit.pulse</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/pulse/pulse.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.pulse.functional_pulse.html">functional_pulse</a></li>
 </ul>
 </li>
-<li class="toctree-l3 current"><a class="reference internal" href="../apidoc/pulse/pulse.html#classes">Classes</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../apidoc/pulse/pulse.html#classes">Classes</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.pulse.Acquire.html">Acquire</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.pulse.AcquireChannel.html">AcquireChannel</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.pulse.CmdDef.html">CmdDef</a></li>
@@ -1077,7 +936,7 @@
 <li class="toctree-l4"><a class="reference internal" href="qiskit.pulse.PulseError.html">PulseError</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.pulse.RegisterSlot.html">RegisterSlot</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.pulse.SamplePulse.html">SamplePulse</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">Schedule</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.pulse.Schedule.html">Schedule</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.pulse.ScheduleComponent.html">ScheduleComponent</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.pulse.Snapshot.html">Snapshot</a></li>
 </ul>
@@ -1243,135 +1102,43 @@
     <div class="document">
         <div class="page-content">
         
-  <div class="section" id="schedule">
-<h1>Schedule<a class="headerlink" href="#schedule" title="このヘッドラインへのパーマリンク">¶</a></h1>
+  <div class="section" id="module-qiskit.pulse.schedule">
+<span id="qiskit-pulse-schedule-module"></span><h1>qiskit.pulse.schedule module<a class="headerlink" href="#module-qiskit.pulse.schedule" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<p>Schedule.</p>
 <dl class="class">
-<dt id="qiskit.pulse.Schedule">
-<em class="property">class </em><code class="descname">Schedule</code><span class="sig-paren">(</span><em>*schedules</em>, <em>name: Optional[str] = None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/pulse/schedule.html#Schedule"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.pulse.Schedule" title="この定義へのパーマリンク">¶</a></dt>
+<dt id="qiskit.pulse.schedule.ParameterizedSchedule">
+<em class="property">class </em><code class="descname">ParameterizedSchedule</code><span class="sig-paren">(</span><em>*schedules</em>, <em>parameters: Optional[Dict[str</em>, <em>Union[float</em>, <em>complex]]] = None</em>, <em>name: Optional[str] = None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/pulse/schedule.html#ParameterizedSchedule"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.pulse.schedule.ParameterizedSchedule" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Temporary parameterized schedule class.</p>
+<p>This should not be returned to users as it is currently only a helper class.</p>
+<p>This class is takes an input command definition that accepts
+a set of parameters. Calling <cite>bind</cite> on the class will return a <cite>Schedule</cite>.</p>
+<dl class="docutils">
+<dt># TODO: In the near future this will be replaced with proper incorporation of parameters</dt>
+<dd>into the <cite>Schedule</cite> class.</dd>
+</dl>
+<dl class="method">
+<dt id="qiskit.pulse.schedule.ParameterizedSchedule.bind_parameters">
+<code class="descname">bind_parameters</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span> &#x2192; qiskit.pulse.schedule.Schedule<a class="reference internal" href="../_modules/qiskit/pulse/schedule.html#ParameterizedSchedule.bind_parameters"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.pulse.schedule.ParameterizedSchedule.bind_parameters" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Generate the Schedule from params to evaluate command expressions</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.pulse.schedule.ParameterizedSchedule.parameters">
+<code class="descname">parameters</code><a class="headerlink" href="#qiskit.pulse.schedule.ParameterizedSchedule.parameters" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Schedule parameters.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="qiskit.pulse.schedule.Schedule">
+<em class="property">class </em><code class="descname">Schedule</code><span class="sig-paren">(</span><em>*schedules</em>, <em>name: Optional[str] = None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/pulse/schedule.html#Schedule"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.pulse.schedule.Schedule" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>ベースクラス: <a class="reference internal" href="qiskit.pulse.interfaces.html#qiskit.pulse.interfaces.ScheduleComponent" title="qiskit.pulse.interfaces.ScheduleComponent"><code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.pulse.interfaces.ScheduleComponent</span></code></a></p>
 <p>Schedule of <a href="#id1"><span class="problematic" id="id2">`</span></a>ScheduleComponent`s. The composite node of a schedule tree.</p>
-<p class="rubric">Attributes Summary</p>
-<table border="1" class="longtable docutils">
-<colgroup>
-<col width="10%" />
-<col width="90%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.pulse.Schedule.buffer" title="qiskit.pulse.Schedule.buffer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">buffer</span></code></a></td>
-<td>Buffer for schedule.</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.pulse.Schedule.channels" title="qiskit.pulse.Schedule.channels"><code class="xref py py-obj docutils literal notranslate"><span class="pre">channels</span></code></a></td>
-<td>Returns channels that this schedule uses.</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.pulse.Schedule.duration" title="qiskit.pulse.Schedule.duration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">duration</span></code></a></td>
-<td>Duration of this schedule component.</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.pulse.Schedule.instructions" title="qiskit.pulse.Schedule.instructions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">instructions</span></code></a></td>
-<td>Get time-ordered instructions from Schedule tree.</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.pulse.Schedule.name" title="qiskit.pulse.Schedule.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></a></td>
-<td>Name of ScheduleComponent.</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.pulse.Schedule.start_time" title="qiskit.pulse.Schedule.start_time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">start_time</span></code></a></td>
-<td>Starting time of this schedule component.</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.pulse.Schedule.stop_time" title="qiskit.pulse.Schedule.stop_time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stop_time</span></code></a></td>
-<td>Stopping time of this schedule component.</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.pulse.Schedule.timeslots" title="qiskit.pulse.Schedule.timeslots"><code class="xref py py-obj docutils literal notranslate"><span class="pre">timeslots</span></code></a></td>
-<td>Occupied time slots by this schedule component.</td>
-</tr>
-</tbody>
-</table>
-<p class="rubric">Methods Summary</p>
-<table border="1" class="longtable docutils">
-<colgroup>
-<col width="10%" />
-<col width="90%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.pulse.Schedule.append" title="qiskit.pulse.Schedule.append"><code class="xref py py-obj docutils literal notranslate"><span class="pre">append</span></code></a>(schedule,&nbsp;buffer,&nbsp;name)</td>
-<td>Return a new schedule with <cite>schedule</cite> inserted at the maximum time over</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.pulse.Schedule.ch_duration" title="qiskit.pulse.Schedule.ch_duration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ch_duration</span></code></a>(*channels)</td>
-<td>Return duration of schedule over supplied channels.</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.pulse.Schedule.ch_start_time" title="qiskit.pulse.Schedule.ch_start_time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ch_start_time</span></code></a>(*channels)</td>
-<td>Return minimum start time over supplied channels.</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.pulse.Schedule.ch_stop_time" title="qiskit.pulse.Schedule.ch_stop_time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ch_stop_time</span></code></a>(*channels)</td>
-<td>Return maximum start time over supplied channels.</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.pulse.Schedule.draw" title="qiskit.pulse.Schedule.draw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">draw</span></code></a>(dt,&nbsp;style,&nbsp;filename,&nbsp;interp_method,&nbsp;...)</td>
-<td>Plot the schedule.</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.pulse.Schedule.flatten" title="qiskit.pulse.Schedule.flatten"><code class="xref py py-obj docutils literal notranslate"><span class="pre">flatten</span></code></a>()</td>
-<td>Return a new schedule which is the flattened schedule contained all <cite>instructions</cite>.</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.pulse.Schedule.insert" title="qiskit.pulse.Schedule.insert"><code class="xref py py-obj docutils literal notranslate"><span class="pre">insert</span></code></a>(start_time,&nbsp;schedule,&nbsp;buffer,&nbsp;name)</td>
-<td>Return a new schedule with <cite>schedule</cite> inserted within <cite>self</cite> at <cite>start_time</cite>.</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.pulse.Schedule.shift" title="qiskit.pulse.Schedule.shift"><code class="xref py py-obj docutils literal notranslate"><span class="pre">shift</span></code></a>(time,&nbsp;name)</td>
-<td>Return a new schedule shifted forward by <cite>time</cite>.</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.pulse.Schedule.union" title="qiskit.pulse.Schedule.union"><code class="xref py py-obj docutils literal notranslate"><span class="pre">union</span></code></a>(*schedules,&nbsp;name)</td>
-<td>Return a new schedule which is the union of <cite>self</cite> and <cite>schedule</cite>.</td>
-</tr>
-</tbody>
-</table>
-<p class="rubric">Attributes Documentation</p>
-<dl class="attribute">
-<dt id="qiskit.pulse.Schedule.buffer">
-<code class="descname">buffer</code><a class="headerlink" href="#qiskit.pulse.Schedule.buffer" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>Buffer for schedule. To be used when appending</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="qiskit.pulse.Schedule.channels">
-<code class="descname">channels</code><a class="headerlink" href="#qiskit.pulse.Schedule.channels" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>Returns channels that this schedule uses.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="qiskit.pulse.Schedule.duration">
-<code class="descname">duration</code><a class="headerlink" href="#qiskit.pulse.Schedule.duration" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>Duration of this schedule component.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="qiskit.pulse.Schedule.instructions">
-<code class="descname">instructions</code><a class="headerlink" href="#qiskit.pulse.Schedule.instructions" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>Get time-ordered instructions from Schedule tree.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="qiskit.pulse.Schedule.name">
-<code class="descname">name</code><a class="headerlink" href="#qiskit.pulse.Schedule.name" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>Name of ScheduleComponent.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="qiskit.pulse.Schedule.start_time">
-<code class="descname">start_time</code><a class="headerlink" href="#qiskit.pulse.Schedule.start_time" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>Starting time of this schedule component.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="qiskit.pulse.Schedule.stop_time">
-<code class="descname">stop_time</code><a class="headerlink" href="#qiskit.pulse.Schedule.stop_time" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>Stopping time of this schedule component.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="qiskit.pulse.Schedule.timeslots">
-<code class="descname">timeslots</code><a class="headerlink" href="#qiskit.pulse.Schedule.timeslots" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>Occupied time slots by this schedule component.</p>
-</dd></dl>
-
-<p class="rubric">Methods Documentation</p>
 <dl class="method">
-<dt id="qiskit.pulse.Schedule.append">
-<code class="descname">append</code><span class="sig-paren">(</span><em>schedule: qiskit.pulse.interfaces.ScheduleComponent</em>, <em>buffer: bool = True</em>, <em>name: Optional[str] = None</em><span class="sig-paren">)</span> &#x2192; qiskit.pulse.schedule.Schedule<a class="reference internal" href="../_modules/qiskit/pulse/schedule.html#Schedule.append"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.pulse.Schedule.append" title="この定義へのパーマリンク">¶</a></dt>
+<dt id="qiskit.pulse.schedule.Schedule.append">
+<code class="descname">append</code><span class="sig-paren">(</span><em>schedule: qiskit.pulse.interfaces.ScheduleComponent</em>, <em>buffer: bool = True</em>, <em>name: Optional[str] = None</em><span class="sig-paren">)</span> &#x2192; qiskit.pulse.schedule.Schedule<a class="reference internal" href="../_modules/qiskit/pulse/schedule.html#Schedule.append"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.pulse.schedule.Schedule.append" title="この定義へのパーマリンク">¶</a></dt>
 <dd><dl class="docutils">
 <dt>Return a new schedule with <cite>schedule</cite> inserted at the maximum time over</dt>
 <dd>all channels shared between <cite>self</cite> and <cite>schedule</cite>.</dd>
@@ -1387,9 +1154,15 @@ name: Name of the new schedule. Defaults to name of self</dd>
 </div></blockquote>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="qiskit.pulse.schedule.Schedule.buffer">
+<code class="descname">buffer</code><a class="headerlink" href="#qiskit.pulse.schedule.Schedule.buffer" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Buffer for schedule. To be used when appending</p>
+</dd></dl>
+
 <dl class="method">
-<dt id="qiskit.pulse.Schedule.ch_duration">
-<code class="descname">ch_duration</code><span class="sig-paren">(</span><em>*channels</em><span class="sig-paren">)</span> &#x2192; int<a class="reference internal" href="../_modules/qiskit/pulse/schedule.html#Schedule.ch_duration"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.pulse.Schedule.ch_duration" title="この定義へのパーマリンク">¶</a></dt>
+<dt id="qiskit.pulse.schedule.Schedule.ch_duration">
+<code class="descname">ch_duration</code><span class="sig-paren">(</span><em>*channels</em><span class="sig-paren">)</span> &#x2192; int<a class="reference internal" href="../_modules/qiskit/pulse/schedule.html#Schedule.ch_duration"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.pulse.schedule.Schedule.ch_duration" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Return duration of schedule over supplied channels.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1402,8 +1175,8 @@ name: Name of the new schedule. Defaults to name of self</dd>
 </dd></dl>
 
 <dl class="method">
-<dt id="qiskit.pulse.Schedule.ch_start_time">
-<code class="descname">ch_start_time</code><span class="sig-paren">(</span><em>*channels</em><span class="sig-paren">)</span> &#x2192; int<a class="reference internal" href="../_modules/qiskit/pulse/schedule.html#Schedule.ch_start_time"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.pulse.Schedule.ch_start_time" title="この定義へのパーマリンク">¶</a></dt>
+<dt id="qiskit.pulse.schedule.Schedule.ch_start_time">
+<code class="descname">ch_start_time</code><span class="sig-paren">(</span><em>*channels</em><span class="sig-paren">)</span> &#x2192; int<a class="reference internal" href="../_modules/qiskit/pulse/schedule.html#Schedule.ch_start_time"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.pulse.schedule.Schedule.ch_start_time" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Return minimum start time over supplied channels.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1416,8 +1189,8 @@ name: Name of the new schedule. Defaults to name of self</dd>
 </dd></dl>
 
 <dl class="method">
-<dt id="qiskit.pulse.Schedule.ch_stop_time">
-<code class="descname">ch_stop_time</code><span class="sig-paren">(</span><em>*channels</em><span class="sig-paren">)</span> &#x2192; int<a class="reference internal" href="../_modules/qiskit/pulse/schedule.html#Schedule.ch_stop_time"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.pulse.Schedule.ch_stop_time" title="この定義へのパーマリンク">¶</a></dt>
+<dt id="qiskit.pulse.schedule.Schedule.ch_stop_time">
+<code class="descname">ch_stop_time</code><span class="sig-paren">(</span><em>*channels</em><span class="sig-paren">)</span> &#x2192; int<a class="reference internal" href="../_modules/qiskit/pulse/schedule.html#Schedule.ch_stop_time"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.pulse.schedule.Schedule.ch_stop_time" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Return maximum start time over supplied channels.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1429,9 +1202,15 @@ name: Name of the new schedule. Defaults to name of self</dd>
 </table>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="qiskit.pulse.schedule.Schedule.channels">
+<code class="descname">channels</code><a class="headerlink" href="#qiskit.pulse.schedule.Schedule.channels" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Returns channels that this schedule uses.</p>
+</dd></dl>
+
 <dl class="method">
-<dt id="qiskit.pulse.Schedule.draw">
-<code class="descname">draw</code><span class="sig-paren">(</span><em>dt: float = 1</em>, <em>style: Optional[SchedStyle] = None</em>, <em>filename: Optional[str] = None</em>, <em>interp_method: Optional[Callable] = None</em>, <em>scaling: float = 1</em>, <em>channels_to_plot: Optional[List[qiskit.pulse.channels.channels.Channel]] = None</em>, <em>plot_all: bool = False</em>, <em>plot_range: Optional[Tuple[float]] = None</em>, <em>interactive: bool = False</em>, <em>table: bool = True</em>, <em>label: bool = False</em>, <em>framechange: bool = True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/pulse/schedule.html#Schedule.draw"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.pulse.Schedule.draw" title="この定義へのパーマリンク">¶</a></dt>
+<dt id="qiskit.pulse.schedule.Schedule.draw">
+<code class="descname">draw</code><span class="sig-paren">(</span><em>dt: float = 1</em>, <em>style: Optional[SchedStyle] = None</em>, <em>filename: Optional[str] = None</em>, <em>interp_method: Optional[Callable] = None</em>, <em>scaling: float = 1</em>, <em>channels_to_plot: Optional[List[qiskit.pulse.channels.channels.Channel]] = None</em>, <em>plot_all: bool = False</em>, <em>plot_range: Optional[Tuple[float]] = None</em>, <em>interactive: bool = False</em>, <em>table: bool = True</em>, <em>label: bool = False</em>, <em>framechange: bool = True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/pulse/schedule.html#Schedule.draw"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.pulse.schedule.Schedule.draw" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Plot the schedule.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1464,15 +1243,49 @@ name: Name of the new schedule. Defaults to name of self</dd>
 </table>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="qiskit.pulse.schedule.Schedule.duration">
+<code class="descname">duration</code><a class="headerlink" href="#qiskit.pulse.schedule.Schedule.duration" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Duration of this schedule component.</p>
+</dd></dl>
+
 <dl class="method">
-<dt id="qiskit.pulse.Schedule.flatten">
-<code class="descname">flatten</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; qiskit.pulse.schedule.Schedule<a class="reference internal" href="../_modules/qiskit/pulse/schedule.html#Schedule.flatten"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.pulse.Schedule.flatten" title="この定義へのパーマリンク">¶</a></dt>
+<dt id="qiskit.pulse.schedule.Schedule.filter">
+<code class="descname">filter</code><span class="sig-paren">(</span><em>*filter_funcs</em>, <em>channels: Optional[Iterable[qiskit.pulse.channels.channels.Channel]] = None</em>, <em>instruction_types: Optional[Iterable[Type[Instruction]]] = None</em>, <em>time_ranges: Optional[Iterable[Tuple[int</em>, <em>int]]] = None</em>, <em>intervals: Optional[Iterable[qiskit.pulse.timeslots.Interval]] = None</em><span class="sig-paren">)</span> &#x2192; Schedule<a class="reference internal" href="../_modules/qiskit/pulse/schedule.html#Schedule.filter"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.pulse.schedule.Schedule.filter" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Return a new Schedule with only the instructions which pass though the provided filters.
+Custom filters may be provided. If a list of channel indices is provided, only the
+instructions that involve that channel (and maybe also others) will be included in the new
+schedule. Similarly for instruction_types, only the instructions which are instances of the
+provided types will be included. For intervals, instructions will be retained if their
+timeslots are all wholly contained within <em>any</em> of the given intervals.</p>
+<p>If no arguments are provided, this schedule is returned.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first last simple">
+<li><strong>filter_funcs</strong> -- A list of Callables which take a (int, ScheduleComponent) tuple and
+return a bool</li>
+<li><strong>channels</strong> -- For example, [DriveChannel(0), AcquireChannel(0)]</li>
+<li><strong>instruction_types</strong> -- For example, [PulseInstruction, AcquireInstruction]</li>
+<li><strong>time_ranges</strong> -- Time intervals to keep, e.g. [(0, 5), (6, 10)]</li>
+<li><strong>intervals</strong> -- Time intervals to keep, e.g. [Interval(0, 5), Interval(6, 10)]</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.pulse.schedule.Schedule.flatten">
+<code class="descname">flatten</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; qiskit.pulse.schedule.Schedule<a class="reference internal" href="../_modules/qiskit/pulse/schedule.html#Schedule.flatten"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.pulse.schedule.Schedule.flatten" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Return a new schedule which is the flattened schedule contained all <cite>instructions</cite>.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="qiskit.pulse.Schedule.insert">
-<code class="descname">insert</code><span class="sig-paren">(</span><em>start_time: int</em>, <em>schedule: qiskit.pulse.interfaces.ScheduleComponent</em>, <em>buffer: bool = False</em>, <em>name: Optional[str] = None</em><span class="sig-paren">)</span> &#x2192; qiskit.pulse.schedule.Schedule<a class="reference internal" href="../_modules/qiskit/pulse/schedule.html#Schedule.insert"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.pulse.Schedule.insert" title="この定義へのパーマリンク">¶</a></dt>
+<dt id="qiskit.pulse.schedule.Schedule.insert">
+<code class="descname">insert</code><span class="sig-paren">(</span><em>start_time: int</em>, <em>schedule: qiskit.pulse.interfaces.ScheduleComponent</em>, <em>buffer: bool = False</em>, <em>name: Optional[str] = None</em><span class="sig-paren">)</span> &#x2192; qiskit.pulse.schedule.Schedule<a class="reference internal" href="../_modules/qiskit/pulse/schedule.html#Schedule.insert"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.pulse.schedule.Schedule.insert" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Return a new schedule with <cite>schedule</cite> inserted within <cite>self</cite> at <cite>start_time</cite>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1490,9 +1303,21 @@ name: Name of the new schedule. Defaults to name of self</dd>
 </table>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="qiskit.pulse.schedule.Schedule.instructions">
+<code class="descname">instructions</code><a class="headerlink" href="#qiskit.pulse.schedule.Schedule.instructions" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Get time-ordered instructions from Schedule tree.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.pulse.schedule.Schedule.name">
+<code class="descname">name</code><a class="headerlink" href="#qiskit.pulse.schedule.Schedule.name" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Name of ScheduleComponent.</p>
+</dd></dl>
+
 <dl class="method">
-<dt id="qiskit.pulse.Schedule.shift">
-<code class="descname">shift</code><span class="sig-paren">(</span><em>time: int</em>, <em>name: Optional[str] = None</em><span class="sig-paren">)</span> &#x2192; qiskit.pulse.schedule.Schedule<a class="reference internal" href="../_modules/qiskit/pulse/schedule.html#Schedule.shift"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.pulse.Schedule.shift" title="この定義へのパーマリンク">¶</a></dt>
+<dt id="qiskit.pulse.schedule.Schedule.shift">
+<code class="descname">shift</code><span class="sig-paren">(</span><em>time: int</em>, <em>name: Optional[str] = None</em><span class="sig-paren">)</span> &#x2192; qiskit.pulse.schedule.Schedule<a class="reference internal" href="../_modules/qiskit/pulse/schedule.html#Schedule.shift"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.pulse.schedule.Schedule.shift" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Return a new schedule shifted forward by <cite>time</cite>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1508,9 +1333,27 @@ name: Name of the new schedule. Defaults to name of self</dd>
 </table>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="qiskit.pulse.schedule.Schedule.start_time">
+<code class="descname">start_time</code><a class="headerlink" href="#qiskit.pulse.schedule.Schedule.start_time" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Starting time of this schedule component.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.pulse.schedule.Schedule.stop_time">
+<code class="descname">stop_time</code><a class="headerlink" href="#qiskit.pulse.schedule.Schedule.stop_time" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Stopping time of this schedule component.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.pulse.schedule.Schedule.timeslots">
+<code class="descname">timeslots</code><a class="headerlink" href="#qiskit.pulse.schedule.Schedule.timeslots" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Occupied time slots by this schedule component.</p>
+</dd></dl>
+
 <dl class="method">
-<dt id="qiskit.pulse.Schedule.union">
-<code class="descname">union</code><span class="sig-paren">(</span><em>*schedules</em>, <em>name: Optional[str] = None</em><span class="sig-paren">)</span> &#x2192; qiskit.pulse.schedule.Schedule<a class="reference internal" href="../_modules/qiskit/pulse/schedule.html#Schedule.union"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.pulse.Schedule.union" title="この定義へのパーマリンク">¶</a></dt>
+<dt id="qiskit.pulse.schedule.Schedule.union">
+<code class="descname">union</code><span class="sig-paren">(</span><em>*schedules</em>, <em>name: Optional[str] = None</em><span class="sig-paren">)</span> &#x2192; qiskit.pulse.schedule.Schedule<a class="reference internal" href="../_modules/qiskit/pulse/schedule.html#Schedule.union"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.pulse.schedule.Schedule.union" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Return a new schedule which is the union of <cite>self</cite> and <cite>schedule</cite>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1535,18 +1378,6 @@ name: Name of the new schedule. Defaults to name of self</dd>
 
       <div class="clearer"></div>
     </div><div class="pagenation">
-     <a id="button-prev" href="qiskit.pulse.SamplePulse.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="P">
-         <div class="pagenation-text">
-            <span class="pagenation-direction">Previous</span>
-            <div>SamplePulse</div>
-         </div>
-     </a>
-     <a id="button-next" href="qiskit.pulse.ScheduleComponent.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
-        <div class="pagenation-text">
-            <span class="pagenation-direction">Next</span>
-            <div>ScheduleComponent</div>
-        </div>
-     </a>
         
         </main>
     </div>
@@ -1581,11 +1412,11 @@ name: Name of the new schedule. Defaults to name of self</dd>
         link.addEventListener('click', clickExternalLink);
     </script>
     <script>
-	    var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
-	    var prefix = '/documentation';
-	    function getDefaultLanguage() {
-	      return 'en';
-	    }
+      var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+      var prefix = '/documentation';
+      function getDefaultLanguage() {
+        return 'en';
+      }
       var el = document.getElementById('language');
       var optionsToSelect = ['en', 'ja']
       function changeLoc(evt) {
