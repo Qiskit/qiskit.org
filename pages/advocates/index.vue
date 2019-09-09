@@ -12,7 +12,7 @@
               icon="Community"
             >
               <h2>Network with experts and enthusiasts</h2>
-              <p>Advocates will be added to a group of quantum experts and will be apart of regular information sharing sessions.</p>
+              <p>Advocates will be added to a group of quantum experts and will be a part of regular information sharing sessions.</p>
             </CompactFeature>
             <CompactFeature
               icon="Qiskit"
