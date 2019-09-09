@@ -34,7 +34,7 @@
        </script>
         <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
     
-    <title>qiskit.circuit.instructionset module &#8212; Qiskit 0.11.2 ドキュメント</title>
+    <title>InstructionSet &#8212; Qiskit 0.12.0 ドキュメント</title>
 
     <link rel="stylesheet" href="../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -52,20 +52,23 @@
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="索引" href="../genindex.html" />
-    <link rel="search" title="検索" href="../search.html" /> 
+    <link rel="search" title="検索" href="../search.html" />
+    <link rel="next" title="Measure" href="qiskit.circuit.Measure.html" />
+    <link rel="prev" title="Instruction" href="qiskit.circuit.Instruction.html" /> 
   </head>
 <body>
   <header>
     <div class="toolbar limited-width">
-      <a href="/" class="home">Qiskit ™</a>
+      <a href="/" class="home">Qiskit</a>
       <nav class="first">
         <a href="/terra">Terra</a>
         <a href="/aer">Aer</a>
         <a href="/aqua">Aqua</a>
         <a href="/ignis">Ignis</a>
+        <a href="/ibmq">IBM Q</a>
       </nav>
       <nav class="second">
-        <a class="external" id="educationLink" href="https://community.qiskit.org/education" target="_blank">Education</a>
+        <a class="external" id="educationLink" href="https://community.qiskit.org/education">Community</a>
         <a class="external" id="tutorialsLink" href="https://quantum-computing.ibm.com/jupyter/tutorial/1_start_here.ipynb" target="_blank">Tutorials</a>
         <a class="external" href="/documentation" selected>API Documentation</a>
       </nav>
@@ -84,10 +87,13 @@
     
 
 <div class="languages" >
+    <span>Select a language: </span>
+	<span>
 	    <select id="language" name="languages">
 	        <option value="en">English</option>
-	        <option value="ja">Japanese</option>
-	    </select>
+	        <option value="ja">日本語</option>
+        </select>
+    </span>
 </div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
@@ -105,31 +111,31 @@
     </div>
 </div>
 <div class="globaltoc">
-  <span class="mdl-layout-title toc">Table Of Contents</span>
+  <span class="mdl-layout-title toc">目次</span>
   
   
   
       
       <nav class="mdl-navigation">
-          <ul>
-<li class="toctree-l1"><a class="reference internal" href="../install.html">Installing Qiskit</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../install.html#requirements">Requirements</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../install.html#install">Install</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../install.html#access-ibm-q-systems">Access IBM Q Systems</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../install.html#checking-which-version-is-installed">Checking Which Version is Installed</a></li>
+          <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Qiskitのインストール</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#requirements">要件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#install">インストール</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#access-ibm-q-systems">IBM Q Systemsへのアクセス</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#checking-which-version-is-installed">インストールされたバージョンの確認方法</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started with Qiskit</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../getting_started.html#workflow-step-by-step">Workflow Step--by--Step</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-1-import-packages">Step 1 : Import Packages</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-2-initialize-variables">Step 2 : Initialize Variables</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-3-add-gates">Step 3 : Add Gates</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-4-visualize-the-circuit">Step 4 : Visualize the Circuit</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-5-simulate-the-experiment">Step 5 : Simulate the Experiment</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-6-visualize-the-results">Step 6 : Visualize the Results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Qiskit 入門</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started.html#workflow-step-by-step">ワークフローの手順</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-1-import-packages">手順1 : パッケージのインポート</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-2-initialize-variables">手順2：変数の初期化</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-3-add-gates">手順3：ゲートの追加</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-4-visualize-the-circuit">手順４：回路の可視化</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-5-simulate-the-experiment">実験のシミュレーション</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-6-visualize-the-results">ステップ6：結果の可視化</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../getting_started.html#next-steps">Next Steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started.html#next-steps">次の手順</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../the_elements.html">The Qiskit Elements</a><ul>
@@ -190,7 +196,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../contributing_to_qiskit.html#where-things-are">Where Things Are</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../contributing_to_qiskit.html#getting-started">Getting Started</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../contributing_to_qiskit.html#contributor-license-agreement">Contributor License Agreement</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../contributing_to_qiskit.html#writing-and-building-api-documentation">Writing and Building API Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing_to_qiskit.html#contributing-to-documentation">Contributing to Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#translating-documentation">Translating Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#building-from-source">Building from Source</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="../contributing_to_qiskit.html#installing-from-source">Installing from Source</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#set-up-the-virtual-development-environment">Set up the virtual development environment</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#installing-terra-from-source">Installing Terra from Source</a></li>
@@ -273,7 +283,46 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../apidoc/qiskit.html">API References</a><ul>
+<li class="toctree-l1 current"><a class="reference internal" href="../apidoc/qiskit.html">API References</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../apidoc/aqua/aqua.html">qiskit.aqua</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../apidoc/aqua/aqua.html#functions">Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.refresh_pluggables.html">refresh_pluggables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.get_aer_backend.html">get_aer_backend</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.get_backends_from_provider.html">get_backends_from_provider</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.get_backend_from_provider.html">get_backend_from_provider</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.get_local_providers.html">get_local_providers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.register_ibmq_and_get_known_providers.html">register_ibmq_and_get_known_providers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.get_provider_from_backend.html">get_provider_from_backend</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.local_pluggables_types.html">local_pluggables_types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.local_pluggables.html">local_pluggables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.get_pluggable_class.html">get_pluggable_class</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.get_pluggable_configuration.html">get_pluggable_configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.register_pluggable.html">register_pluggable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.deregister_pluggable.html">deregister_pluggable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.execute_algorithm.html">execute_algorithm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.run_algorithm.html">run_algorithm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.run_algorithm_to_json.html">run_algorithm_to_json</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.get_logging_level.html">get_logging_level</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.build_logging_config.html">build_logging_config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.set_logging_config.html">set_logging_config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.get_qiskit_aqua_logging.html">get_qiskit_aqua_logging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.set_qiskit_aqua_logging.html">set_qiskit_aqua_logging</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../apidoc/aqua/aqua.html#classes">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.AquaError.html">AquaError</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.Preferences.html">Preferences</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.Pluggable.html">Pluggable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.Operator.html">Operator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.QuantumAlgorithm.html">QuantumAlgorithm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.PluggableType.html">PluggableType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.QuantumInstance.html">QuantumInstance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.QiskitAqua.html">QiskitAqua</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../apidoc/aqua/aqua.html#submodules">Submodules</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="../apidoc/assembler.html">qiskit.assembler</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/assembler.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.assembler.assemble_circuits.html">assemble_circuits</a></li>
@@ -287,13 +336,36 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../apidoc/circuit/circuit.html">qiskit.circuit</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../apidoc/circuit/circuit.html#classes">Classes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../apidoc/chemistry/chemistry.html">qiskit.chemistry</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../apidoc/chemistry/chemistry.html#functions">Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.run_experiment.html">run_experiment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.run_driver_to_json.html">run_driver_to_json</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.get_logging_level.html">get_logging_level</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.build_logging_config.html">build_logging_config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.set_logging_config.html">set_logging_config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.get_qiskit_chemistry_logging.html">get_qiskit_chemistry_logging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.set_qiskit_chemistry_logging.html">set_qiskit_chemistry_logging</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../apidoc/chemistry/chemistry.html#classes">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.QiskitChemistryError.html">QiskitChemistryError</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.QMolecule.html">QMolecule</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.ChemistryProblem.html">ChemistryProblem</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.QiskitChemistry.html">QiskitChemistry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.FermionicOperator.html">FermionicOperator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.MP2Info.html">MP2Info</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../apidoc/chemistry/chemistry.html#submodules">Submodules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="../apidoc/circuit/circuit.html">qiskit.circuit</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../apidoc/circuit/circuit.html#classes">Classes</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="qiskit.circuit.ClassicalRegister.html">ClassicalRegister</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.circuit.Clbit.html">Clbit</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.circuit.Gate.html">Gate</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.circuit.Instruction.html">Instruction</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.circuit.InstructionSet.html">InstructionSet</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">InstructionSet</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.circuit.Measure.html">Measure</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.circuit.Parameter.html">Parameter</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.circuit.ParameterExpression.html">ParameterExpression</a></li>
@@ -598,10 +670,13 @@
     
 
 <div class="languages" >
+    <span>Select a language: </span>
+	<span>
 	    <select id="language" name="languages">
 	        <option value="en">English</option>
-	        <option value="ja">Japanese</option>
-	    </select>
+	        <option value="ja">日本語</option>
+        </select>
+    </span>
 </div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
@@ -619,31 +694,31 @@
     </div>
 </div>
 <div class="globaltoc">
-  <span class="mdl-layout-title toc">Table Of Contents</span>
+  <span class="mdl-layout-title toc">目次</span>
   
   
   
       
       <nav class="mdl-navigation">
-          <ul>
-<li class="toctree-l1"><a class="reference internal" href="../install.html">Installing Qiskit</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../install.html#requirements">Requirements</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../install.html#install">Install</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../install.html#access-ibm-q-systems">Access IBM Q Systems</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../install.html#checking-which-version-is-installed">Checking Which Version is Installed</a></li>
+          <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Qiskitのインストール</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#requirements">要件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#install">インストール</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#access-ibm-q-systems">IBM Q Systemsへのアクセス</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#checking-which-version-is-installed">インストールされたバージョンの確認方法</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started with Qiskit</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../getting_started.html#workflow-step-by-step">Workflow Step--by--Step</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-1-import-packages">Step 1 : Import Packages</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-2-initialize-variables">Step 2 : Initialize Variables</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-3-add-gates">Step 3 : Add Gates</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-4-visualize-the-circuit">Step 4 : Visualize the Circuit</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-5-simulate-the-experiment">Step 5 : Simulate the Experiment</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-6-visualize-the-results">Step 6 : Visualize the Results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Qiskit 入門</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started.html#workflow-step-by-step">ワークフローの手順</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-1-import-packages">手順1 : パッケージのインポート</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-2-initialize-variables">手順2：変数の初期化</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-3-add-gates">手順3：ゲートの追加</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-4-visualize-the-circuit">手順４：回路の可視化</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-5-simulate-the-experiment">実験のシミュレーション</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-6-visualize-the-results">ステップ6：結果の可視化</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../getting_started.html#next-steps">Next Steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started.html#next-steps">次の手順</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../the_elements.html">The Qiskit Elements</a><ul>
@@ -704,7 +779,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../contributing_to_qiskit.html#where-things-are">Where Things Are</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../contributing_to_qiskit.html#getting-started">Getting Started</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../contributing_to_qiskit.html#contributor-license-agreement">Contributor License Agreement</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../contributing_to_qiskit.html#writing-and-building-api-documentation">Writing and Building API Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing_to_qiskit.html#contributing-to-documentation">Contributing to Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#translating-documentation">Translating Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#building-from-source">Building from Source</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="../contributing_to_qiskit.html#installing-from-source">Installing from Source</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#set-up-the-virtual-development-environment">Set up the virtual development environment</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#installing-terra-from-source">Installing Terra from Source</a></li>
@@ -787,7 +866,46 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../apidoc/qiskit.html">API References</a><ul>
+<li class="toctree-l1 current"><a class="reference internal" href="../apidoc/qiskit.html">API References</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../apidoc/aqua/aqua.html">qiskit.aqua</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../apidoc/aqua/aqua.html#functions">Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.refresh_pluggables.html">refresh_pluggables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.get_aer_backend.html">get_aer_backend</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.get_backends_from_provider.html">get_backends_from_provider</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.get_backend_from_provider.html">get_backend_from_provider</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.get_local_providers.html">get_local_providers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.register_ibmq_and_get_known_providers.html">register_ibmq_and_get_known_providers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.get_provider_from_backend.html">get_provider_from_backend</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.local_pluggables_types.html">local_pluggables_types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.local_pluggables.html">local_pluggables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.get_pluggable_class.html">get_pluggable_class</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.get_pluggable_configuration.html">get_pluggable_configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.register_pluggable.html">register_pluggable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.deregister_pluggable.html">deregister_pluggable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.execute_algorithm.html">execute_algorithm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.run_algorithm.html">run_algorithm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.run_algorithm_to_json.html">run_algorithm_to_json</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.get_logging_level.html">get_logging_level</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.build_logging_config.html">build_logging_config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.set_logging_config.html">set_logging_config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.get_qiskit_aqua_logging.html">get_qiskit_aqua_logging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.set_qiskit_aqua_logging.html">set_qiskit_aqua_logging</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../apidoc/aqua/aqua.html#classes">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.AquaError.html">AquaError</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.Preferences.html">Preferences</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.Pluggable.html">Pluggable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.Operator.html">Operator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.QuantumAlgorithm.html">QuantumAlgorithm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.PluggableType.html">PluggableType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.QuantumInstance.html">QuantumInstance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.QiskitAqua.html">QiskitAqua</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../apidoc/aqua/aqua.html#submodules">Submodules</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="../apidoc/assembler.html">qiskit.assembler</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/assembler.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.assembler.assemble_circuits.html">assemble_circuits</a></li>
@@ -801,13 +919,36 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../apidoc/circuit/circuit.html">qiskit.circuit</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../apidoc/circuit/circuit.html#classes">Classes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../apidoc/chemistry/chemistry.html">qiskit.chemistry</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../apidoc/chemistry/chemistry.html#functions">Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.run_experiment.html">run_experiment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.run_driver_to_json.html">run_driver_to_json</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.get_logging_level.html">get_logging_level</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.build_logging_config.html">build_logging_config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.set_logging_config.html">set_logging_config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.get_qiskit_chemistry_logging.html">get_qiskit_chemistry_logging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.set_qiskit_chemistry_logging.html">set_qiskit_chemistry_logging</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../apidoc/chemistry/chemistry.html#classes">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.QiskitChemistryError.html">QiskitChemistryError</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.QMolecule.html">QMolecule</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.ChemistryProblem.html">ChemistryProblem</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.QiskitChemistry.html">QiskitChemistry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.FermionicOperator.html">FermionicOperator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.MP2Info.html">MP2Info</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../apidoc/chemistry/chemistry.html#submodules">Submodules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="../apidoc/circuit/circuit.html">qiskit.circuit</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../apidoc/circuit/circuit.html#classes">Classes</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="qiskit.circuit.ClassicalRegister.html">ClassicalRegister</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.circuit.Clbit.html">Clbit</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.circuit.Gate.html">Gate</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.circuit.Instruction.html">Instruction</a></li>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.circuit.InstructionSet.html">InstructionSet</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">InstructionSet</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.circuit.Measure.html">Measure</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.circuit.Parameter.html">Parameter</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.circuit.ParameterExpression.html">ParameterExpression</a></li>
@@ -1102,35 +1243,56 @@
     <div class="document">
         <div class="page-content">
         
-  <div class="section" id="module-qiskit.circuit.instructionset">
-<span id="qiskit-circuit-instructionset-module"></span><h1>qiskit.circuit.instructionset module<a class="headerlink" href="#module-qiskit.circuit.instructionset" title="このヘッドラインへのパーマリンク">¶</a></h1>
-<p>Instruction collection.</p>
+  <div class="section" id="instructionset">
+<h1>InstructionSet<a class="headerlink" href="#instructionset" title="このヘッドラインへのパーマリンク">¶</a></h1>
 <dl class="class">
-<dt id="qiskit.circuit.instructionset.InstructionSet">
-<em class="property">class </em><code class="descname">InstructionSet</code><a class="reference internal" href="../_modules/qiskit/circuit/instructionset.html#InstructionSet"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.circuit.instructionset.InstructionSet" title="この定義へのパーマリンク">¶</a></dt>
+<dt id="qiskit.circuit.InstructionSet">
+<em class="property">class </em><code class="descname">InstructionSet</code><a class="reference internal" href="../_modules/qiskit/circuit/instructionset.html#InstructionSet"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.circuit.InstructionSet" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Instruction collection, and their contexts.</p>
+<p class="rubric">Methods Summary</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.circuit.InstructionSet.add" title="qiskit.circuit.InstructionSet.add"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add</span></code></a>(gate,&nbsp;qargs,&nbsp;cargs)</td>
+<td>Add an instruction and its context (where it's attached).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.circuit.InstructionSet.c_if" title="qiskit.circuit.InstructionSet.c_if"><code class="xref py py-obj docutils literal notranslate"><span class="pre">c_if</span></code></a>(classical,&nbsp;val)</td>
+<td>Add classical control register to all instructions.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.circuit.InstructionSet.inverse" title="qiskit.circuit.InstructionSet.inverse"><code class="xref py py-obj docutils literal notranslate"><span class="pre">inverse</span></code></a>()</td>
+<td>Invert all instructions.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.circuit.InstructionSet.q_if" title="qiskit.circuit.InstructionSet.q_if"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_if</span></code></a>(*qregs)</td>
+<td>Add controls to all instructions.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods Documentation</p>
 <dl class="method">
-<dt id="qiskit.circuit.instructionset.InstructionSet.add">
-<code class="descname">add</code><span class="sig-paren">(</span><em>gate</em>, <em>qargs</em>, <em>cargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/circuit/instructionset.html#InstructionSet.add"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.circuit.instructionset.InstructionSet.add" title="この定義へのパーマリンク">¶</a></dt>
+<dt id="qiskit.circuit.InstructionSet.add">
+<code class="descname">add</code><span class="sig-paren">(</span><em>gate</em>, <em>qargs</em>, <em>cargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/circuit/instructionset.html#InstructionSet.add"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.circuit.InstructionSet.add" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Add an instruction and its context (where it's attached).</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="qiskit.circuit.instructionset.InstructionSet.c_if">
-<code class="descname">c_if</code><span class="sig-paren">(</span><em>classical</em>, <em>val</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/circuit/instructionset.html#InstructionSet.c_if"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.circuit.instructionset.InstructionSet.c_if" title="この定義へのパーマリンク">¶</a></dt>
+<dt id="qiskit.circuit.InstructionSet.c_if">
+<code class="descname">c_if</code><span class="sig-paren">(</span><em>classical</em>, <em>val</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/circuit/instructionset.html#InstructionSet.c_if"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.circuit.InstructionSet.c_if" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Add classical control register to all instructions.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="qiskit.circuit.instructionset.InstructionSet.inverse">
-<code class="descname">inverse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/circuit/instructionset.html#InstructionSet.inverse"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.circuit.instructionset.InstructionSet.inverse" title="この定義へのパーマリンク">¶</a></dt>
+<dt id="qiskit.circuit.InstructionSet.inverse">
+<code class="descname">inverse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/circuit/instructionset.html#InstructionSet.inverse"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.circuit.InstructionSet.inverse" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Invert all instructions.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="qiskit.circuit.instructionset.InstructionSet.q_if">
-<code class="descname">q_if</code><span class="sig-paren">(</span><em>*qregs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/circuit/instructionset.html#InstructionSet.q_if"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.circuit.instructionset.InstructionSet.q_if" title="この定義へのパーマリンク">¶</a></dt>
+<dt id="qiskit.circuit.InstructionSet.q_if">
+<code class="descname">q_if</code><span class="sig-paren">(</span><em>*qregs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/circuit/instructionset.html#InstructionSet.q_if"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.circuit.InstructionSet.q_if" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Add controls to all instructions.</p>
 </dd></dl>
 
@@ -1143,6 +1305,18 @@
 
       <div class="clearer"></div>
     </div><div class="pagenation">
+     <a id="button-prev" href="qiskit.circuit.Instruction.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="P">
+         <div class="pagenation-text">
+            <span class="pagenation-direction">Previous</span>
+            <div>Instruction</div>
+         </div>
+     </a>
+     <a id="button-next" href="qiskit.circuit.Measure.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
+        <div class="pagenation-text">
+            <span class="pagenation-direction">Next</span>
+            <div>Measure</div>
+        </div>
+     </a>
         
         </main>
     </div>
@@ -1177,11 +1351,11 @@
         link.addEventListener('click', clickExternalLink);
     </script>
     <script>
-      var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
-      var prefix = '/documentation';
-      function getDefaultLanguage() {
-        return 'en';
-      }
+	    var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+	    var prefix = '/documentation';
+	    function getDefaultLanguage() {
+	      return 'en';
+	    }
       var el = document.getElementById('language');
       var optionsToSelect = ['en', 'ja']
       function changeLoc(evt) {
