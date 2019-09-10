@@ -70,7 +70,7 @@ class PageIBMQP extends localize(i18next)(LitElement) {
               target="_blank"
               rel="noopener"
               @click=${() => trackClickEvent({
-                action: 'IBM Q Provider: GitHub Repository',
+                action: 'IBM Q Account: GitHub Repository',
                 objectType: 'Button'
               })}
             >
@@ -86,6 +86,10 @@ class PageIBMQP extends localize(i18next)(LitElement) {
             <h3>${i18next.t('pages.ibmqp.aboutTitle')}</h3>
             <p>
               ${i18next.t('pages.ibmqp.aboutDescription')}
+              <br>
+              <a href="https://qiskit.org/documentation/install.html#access-ibm-q-systems" target="_blank">
+                Follow these steps
+              </a> to set up your Qiskit environment to send jobs to IBM Q systems.
             </p>
             <!-- Insert stack h3 here -->
             <!-- <div class="stack-list">
@@ -113,7 +117,7 @@ class PageIBMQP extends localize(i18next)(LitElement) {
               type="python"
               copy-clipboard-button
               @click=${() => trackClickEvent({
-                action: 'IBM Q Provider: Copy Code Sample',
+                action: 'IBM Q Account: Copy Code Sample',
                 objectType: 'Button'
               })}
             >
