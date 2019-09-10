@@ -35,13 +35,17 @@ class PageTerra extends localize(i18next)(LitElement) {
       StackListStyles,
       css`
         :host {
-          --app-section-background-color: var(--qiskit-terra-color);
+          --app-section-background-color: var(--qiskit-common-background-color);
           --app-section-color: #000000;
         }
 
+        header {
+          background-color: var(--qiskit-terra-color);
+        }
+
         section.colored .row .description .actions vaadin-button {
-          --ibmq-button-secondary-color: #000000;
-          --ibmq-button-secondary-focus-color: var(--qiskit-terra-color);
+          --ibmq-button-secondary-color: var(--qiskit-terra-color);
+          --ibmq-button-secondary-focus-color: #000000;
         }
 
         .stack-list .element.dot::before {
@@ -58,7 +62,7 @@ class PageTerra extends localize(i18next)(LitElement) {
     // prettier-ignore
     return html`
       <header>
-        <img src="images/qiskit-terra-logo.png" .alt=${i18next.t('pages.terra.altLogo')}>
+        <img src="images/qiskit-terra-logo.svg" .alt=${i18next.t('pages.terra.altLogo')}>
         <div>
           <h1>
             ${i18next.t('pages.terra.headerTitle')}

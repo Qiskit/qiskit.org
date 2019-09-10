@@ -35,8 +35,12 @@ class PageIBMQP extends localize(i18next)(LitElement) {
       StackListStyles,
       css`
         :host {
-          --app-section-background-color: var(--qiskit-ibmqp-color);
+          --app-section-background-color: var(--qiskit-common-background-color);
           --app-section-color: #000000;
+        }
+
+        header {
+          background-color: var(--qiskit-ibmqp-color);
         }
 
         section.colored .row .description .actions vaadin-button {

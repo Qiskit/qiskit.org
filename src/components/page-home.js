@@ -49,6 +49,15 @@ class PageHome extends localize(i18next)(LitElement) {
           --app-section-background-color: var(--app-primary-color);
         }
 
+        header .badges vaadin-button {
+          --ibmq-button-secondary-color: #ffffff;
+          --ibmq-button-secondary-focus-color: #292c35;
+        }
+
+        header {
+          color: #ffffff;
+        }
+
         .community .row .illustration {
           align-items: flex-start;
         }
@@ -74,7 +83,7 @@ class PageHome extends localize(i18next)(LitElement) {
         }
 
         .social-networks-list li a svg {
-          fill: var(--app-primary-color);
+          fill: #000;
         }
 
         .social-networks-list li .social-network {
@@ -126,7 +135,7 @@ class PageHome extends localize(i18next)(LitElement) {
         }
 
         .colored-link {
-          color: #fff;
+          color: var(--app-header-color);
           text-decoration: underline;
           font-style: italic;
         }
@@ -177,7 +186,7 @@ class PageHome extends localize(i18next)(LitElement) {
     // prettier-ignore
     return html`
       <header>
-        <img src="images/qiskit-logo.png" .alt=${i18next.t('pages.home.altLogo')}>
+        <img src="images/qiskit-logo.svg" .alt=${i18next.t('pages.home.altLogo')}>
         <div>
           <h1>
             ${i18next.t('pages.home.headerTitle')}
@@ -209,7 +218,7 @@ class PageHome extends localize(i18next)(LitElement) {
               <div class="actions">
                 <a
                   href="https://qiskit.org/documentation/release_notes.html#notable-changes"
-                  target="_blank"		
+                  target="_blank"
                   rel="noopener"
                   tabindex="-1"
                   @click=${() => trackClickEvent({
@@ -229,7 +238,7 @@ class PageHome extends localize(i18next)(LitElement) {
               <div class="actions">
                 <a
                   href="https://www.youtube.com/playlist?list=PLOFEBzvs-Vvp2xg9-POLJhQwtVktlYGbY"
-                  target="_blank"	
+                  target="_blank"
                   tabindex="-1"
                   @click=${() => trackClickEvent({
                     action: 'Coding with Qiskit Video Series',
