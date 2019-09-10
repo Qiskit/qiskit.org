@@ -418,14 +418,14 @@
 
         <span class="k">return</span> <span class="n">circuit</span>
 
-    <span class="k">def</span> <span class="nf">broadcast_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span><span class="p">):</span>
+<div class="viewcode-block" id="Initialize.broadcast_arguments"><a class="viewcode-back" href="../../../../api/qiskit.extensions.Initialize.html#qiskit.circuit.Initialize.broadcast_arguments">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">broadcast_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span><span class="p">):</span>
         <span class="n">flat_qargs</span> <span class="o">=</span> <span class="p">[</span><span class="n">qarg</span> <span class="k">for</span> <span class="n">sublist</span> <span class="ow">in</span> <span class="n">qargs</span> <span class="k">for</span> <span class="n">qarg</span> <span class="ow">in</span> <span class="n">sublist</span><span class="p">]</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_qubits</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">flat_qargs</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;Initialize parameter vector has </span><span class="si">%d</span><span class="s2"> elements, therefore expects </span><span class="si">%s</span><span class="s2"> &quot;</span>
                               <span class="s2">&quot;qubits. However, </span><span class="si">%s</span><span class="s2"> were provided.&quot;</span> <span class="o">%</span>
                               <span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">num_qubits</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_qubits</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">flat_qargs</span><span class="p">)))</span>
-        <span class="k">yield</span> <span class="n">flat_qargs</span><span class="p">,</span> <span class="p">[]</span></div>
+        <span class="k">yield</span> <span class="n">flat_qargs</span><span class="p">,</span> <span class="p">[]</span></div></div>
 
 
 <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">qubits</span><span class="p">):</span>

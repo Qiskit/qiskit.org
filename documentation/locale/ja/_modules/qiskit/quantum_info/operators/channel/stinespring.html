@@ -227,7 +227,7 @@
 <span class="kn">from</span> <span class="nn">qiskit.quantum_info.operators.channel.transformations</span> <span class="k">import</span> <span class="n">_to_stinespring</span>
 
 
-<div class="viewcode-block" id="Stinespring"><a class="viewcode-back" href="../../../../../api/qiskit.quantum_info.operators.channel.stinespring.html#qiskit.quantum_info.Stinespring">[ドキュメント]</a><span class="k">class</span> <span class="nc">Stinespring</span><span class="p">(</span><span class="n">QuantumChannel</span><span class="p">):</span>
+<div class="viewcode-block" id="Stinespring"><a class="viewcode-back" href="../../../../../api/qiskit.quantum_info.Stinespring.html#qiskit.quantum_info.Stinespring">[ドキュメント]</a><span class="k">class</span> <span class="nc">Stinespring</span><span class="p">(</span><span class="n">QuantumChannel</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Stinespring representation of a quantum channel&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">input_dims</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">output_dims</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -328,7 +328,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span>
 
-<div class="viewcode-block" id="Stinespring.is_cptp"><a class="viewcode-back" href="../../../../../api/qiskit.quantum_info.operators.channel.stinespring.html#qiskit.quantum_info.Stinespring.is_cptp">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">is_cptp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="Stinespring.is_cptp"><a class="viewcode-back" href="../../../../../api/qiskit.quantum_info.Stinespring.html#qiskit.quantum_info.Stinespring.is_cptp">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">is_cptp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return True if completely-positive trace-preserving.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">atol</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">atol</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_atol</span>
@@ -339,7 +339,7 @@
         <span class="n">check</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">conj</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="mi">0</span><span class="p">])),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">is_identity_matrix</span><span class="p">(</span><span class="n">check</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_rtol</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_atol</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Stinespring.conjugate"><a class="viewcode-back" href="../../../../../api/qiskit.quantum_info.operators.channel.stinespring.html#qiskit.quantum_info.Stinespring.conjugate">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">conjugate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Stinespring.conjugate"><a class="viewcode-back" href="../../../../../api/qiskit.quantum_info.Stinespring.html#qiskit.quantum_info.Stinespring.conjugate">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">conjugate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the conjugate of the QuantumChannel.&quot;&quot;&quot;</span>
         <span class="c1"># pylint: disable=assignment-from-no-return</span>
         <span class="n">stine_l</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">conjugate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
@@ -349,7 +349,7 @@
         <span class="k">return</span> <span class="n">Stinespring</span><span class="p">((</span><span class="n">stine_l</span><span class="p">,</span> <span class="n">stine_r</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_dims</span><span class="p">(),</span>
                            <span class="bp">self</span><span class="o">.</span><span class="n">output_dims</span><span class="p">())</span></div>
 
-<div class="viewcode-block" id="Stinespring.transpose"><a class="viewcode-back" href="../../../../../api/qiskit.quantum_info.operators.channel.stinespring.html#qiskit.quantum_info.Stinespring.transpose">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">transpose</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Stinespring.transpose"><a class="viewcode-back" href="../../../../../api/qiskit.quantum_info.Stinespring.html#qiskit.quantum_info.Stinespring.transpose">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">transpose</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the transpose of the QuantumChannel.&quot;&quot;&quot;</span>
         <span class="n">din</span><span class="p">,</span> <span class="n">dout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span>
         <span class="n">dtr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">//</span> <span class="n">dout</span>
@@ -364,7 +364,7 @@
             <span class="n">input_dims</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">output_dims</span><span class="p">(),</span>
             <span class="n">output_dims</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">input_dims</span><span class="p">())</span></div>
 
-<div class="viewcode-block" id="Stinespring.compose"><a class="viewcode-back" href="../../../../../api/qiskit.quantum_info.operators.channel.stinespring.html#qiskit.quantum_info.Stinespring.compose">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">compose</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">qargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">front</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="Stinespring.compose"><a class="viewcode-back" href="../../../../../api/qiskit.quantum_info.Stinespring.html#qiskit.quantum_info.Stinespring.compose">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">compose</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">qargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">front</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the composition channel self∘other.</span>
 
 <span class="sd">        Args:</span>
@@ -399,7 +399,7 @@
         <span class="c1"># representation we convert to the Kraus representation</span>
         <span class="k">return</span> <span class="n">Stinespring</span><span class="p">(</span><span class="n">Kraus</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">compose</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">front</span><span class="o">=</span><span class="n">front</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="Stinespring.power"><a class="viewcode-back" href="../../../../../api/qiskit.quantum_info.operators.channel.stinespring.html#qiskit.quantum_info.Stinespring.power">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">power</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+<div class="viewcode-block" id="Stinespring.power"><a class="viewcode-back" href="../../../../../api/qiskit.quantum_info.Stinespring.html#qiskit.quantum_info.Stinespring.power">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">power</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;The matrix power of the channel.</span>
 
 <span class="sd">        Args:</span>
@@ -417,7 +417,7 @@
             <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">Stinespring</span><span class="p">(</span><span class="n">SuperOp</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">n</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="Stinespring.tensor"><a class="viewcode-back" href="../../../../../api/qiskit.quantum_info.operators.channel.stinespring.html#qiskit.quantum_info.Stinespring.tensor">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">tensor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+<div class="viewcode-block" id="Stinespring.tensor"><a class="viewcode-back" href="../../../../../api/qiskit.quantum_info.Stinespring.html#qiskit.quantum_info.Stinespring.tensor">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">tensor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the tensor product channel self ⊗ other.</span>
 
 <span class="sd">        Args:</span>
@@ -432,7 +432,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tensor_product</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Stinespring.expand"><a class="viewcode-back" href="../../../../../api/qiskit.quantum_info.operators.channel.stinespring.html#qiskit.quantum_info.Stinespring.expand">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">expand</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+<div class="viewcode-block" id="Stinespring.expand"><a class="viewcode-back" href="../../../../../api/qiskit.quantum_info.Stinespring.html#qiskit.quantum_info.Stinespring.expand">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">expand</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the tensor product channel other ⊗ self.</span>
 
 <span class="sd">        Args:</span>
@@ -447,7 +447,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tensor_product</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Stinespring.add"><a class="viewcode-back" href="../../../../../api/qiskit.quantum_info.operators.channel.stinespring.html#qiskit.quantum_info.Stinespring.add">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+<div class="viewcode-block" id="Stinespring.add"><a class="viewcode-back" href="../../../../../api/qiskit.quantum_info.Stinespring.html#qiskit.quantum_info.Stinespring.add">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the QuantumChannel self + other.</span>
 
 <span class="sd">        Args:</span>
@@ -465,7 +465,7 @@
         <span class="c1"># representation we convert to the Choi representation</span>
         <span class="k">return</span> <span class="n">Stinespring</span><span class="p">(</span><span class="n">Choi</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">other</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="Stinespring.subtract"><a class="viewcode-back" href="../../../../../api/qiskit.quantum_info.operators.channel.stinespring.html#qiskit.quantum_info.Stinespring.subtract">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">subtract</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+<div class="viewcode-block" id="Stinespring.subtract"><a class="viewcode-back" href="../../../../../api/qiskit.quantum_info.Stinespring.html#qiskit.quantum_info.Stinespring.subtract">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">subtract</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the QuantumChannel self - other.</span>
 
 <span class="sd">        Args:</span>
@@ -483,7 +483,7 @@
         <span class="c1"># representation we convert to the Choi representation</span>
         <span class="k">return</span> <span class="n">Stinespring</span><span class="p">(</span><span class="n">Choi</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">subtract</span><span class="p">(</span><span class="n">other</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="Stinespring.multiply"><a class="viewcode-back" href="../../../../../api/qiskit.quantum_info.operators.channel.stinespring.html#qiskit.quantum_info.Stinespring.multiply">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">multiply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+<div class="viewcode-block" id="Stinespring.multiply"><a class="viewcode-back" href="../../../../../api/qiskit.quantum_info.Stinespring.html#qiskit.quantum_info.Stinespring.multiply">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">multiply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the QuantumChannel self + other.</span>
 
 <span class="sd">        Args:</span>

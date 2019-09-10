@@ -1278,10 +1278,13 @@
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.mitigation.measurement.TensoredMeasFitter.plot_calibration" title="qiskit.ignis.mitigation.measurement.TensoredMeasFitter.plot_calibration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_calibration</span></code></a>([cal_index,&nbsp;ax,&nbsp;show_plot])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.mitigation.measurement.TensoredMeasFitter.add_data" title="qiskit.ignis.mitigation.measurement.TensoredMeasFitter.add_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_data</span></code></a>(new_results[,&nbsp;rebuild_cal_matrix])</td>
+<td>Add measurement calibration data</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.ignis.mitigation.measurement.TensoredMeasFitter.plot_calibration" title="qiskit.ignis.mitigation.measurement.TensoredMeasFitter.plot_calibration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_calibration</span></code></a>([cal_index,&nbsp;ax,&nbsp;show_plot])</td>
 <td>Plot one of the calibration matrices (2D color grid plot)</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.ignis.mitigation.measurement.TensoredMeasFitter.readout_fidelity" title="qiskit.ignis.mitigation.measurement.TensoredMeasFitter.readout_fidelity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">readout_fidelity</span></code></a>([cal_index,&nbsp;label_list])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.mitigation.measurement.TensoredMeasFitter.readout_fidelity" title="qiskit.ignis.mitigation.measurement.TensoredMeasFitter.readout_fidelity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">readout_fidelity</span></code></a>([cal_index,&nbsp;label_list])</td>
 <td>Based on the results output the readout fidelity, which is the average of the diagonal entries in the calibration matrices</td>
 </tr>
 </tbody>
@@ -1313,6 +1316,24 @@
 
 <p class="rubric">Methods Documentation</p>
 <dl class="method">
+<dt id="qiskit.ignis.mitigation.measurement.TensoredMeasFitter.add_data">
+<code class="descname">add_data</code><span class="sig-paren">(</span><em>new_results</em>, <em>rebuild_cal_matrix=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/mitigation/measurement/fitters.html#TensoredMeasFitter.add_data"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.ignis.mitigation.measurement.TensoredMeasFitter.add_data" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Add measurement calibration data</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first last simple">
+<li><strong>new_results</strong> -- a single result or list of results</li>
+<li><strong>rebuild_cal_matrix</strong> -- rebuild the calibration matrix</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="qiskit.ignis.mitigation.measurement.TensoredMeasFitter.plot_calibration">
 <code class="descname">plot_calibration</code><span class="sig-paren">(</span><em>cal_index=0</em>, <em>ax=None</em>, <em>show_plot=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/mitigation/measurement/fitters.html#TensoredMeasFitter.plot_calibration"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.ignis.mitigation.measurement.TensoredMeasFitter.plot_calibration" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Plot one of the calibration matrices (2D color grid plot)</p>
@@ -1343,7 +1364,7 @@ of the diagonal entries in the calibration matrices</p>
 <li><strong>cal_index</strong> -- readout fidelity of which sub cal?</li>
 <li><strong>label_list</strong> (<em>list of lists on states</em>) -- </li>
 <li><strong>the average fidelity over of the groups of states.</strong> (<em>Returns</em>) -- </li>
-<li><strong>None then each state used in the construction of the</strong> (<a class="reference internal" href="qiskit.qasm.node.if_.html#qiskit.qasm.node.if_.If" title="qiskit.qasm.node.if_.If"><em>If</em></a>) -- </li>
+<li><strong>None then each state used in the construction of the</strong> (<em>If</em>) -- </li>
 <li><strong>matrices forms a group of size 1</strong> (<em>calibration</em>) -- </li>
 </ul>
 </td>

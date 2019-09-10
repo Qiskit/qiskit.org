@@ -222,7 +222,7 @@
 <span class="kn">from</span> <span class="nn">.exceptions</span> <span class="k">import</span> <span class="n">ModelValidationError</span>
 
 
-<div class="viewcode-block" id="ModelTypeValidator"><a class="viewcode-back" href="../../../api/qiskit.validation.base.html#qiskit.assembler.ModelTypeValidator">[ドキュメント]</a><span class="k">class</span> <span class="nc">ModelTypeValidator</span><span class="p">(</span><span class="n">_fields</span><span class="o">.</span><span class="n">Field</span><span class="p">):</span>
+<div class="viewcode-block" id="ModelTypeValidator"><a class="viewcode-back" href="../../../api/qiskit.validation.ModelTypeValidator.html#qiskit.assembler.ModelTypeValidator">[ドキュメント]</a><span class="k">class</span> <span class="nc">ModelTypeValidator</span><span class="p">(</span><span class="n">_fields</span><span class="o">.</span><span class="n">Field</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;A field able to validate the correct type of a value.&quot;&quot;&quot;</span>
 
     <span class="n">valid_types</span> <span class="o">=</span> <span class="p">(</span><span class="nb">object</span><span class="p">,</span> <span class="p">)</span>
@@ -230,7 +230,7 @@
     <span class="k">def</span> <span class="nf">_expected_types</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">valid_types</span>
 
-<div class="viewcode-block" id="ModelTypeValidator.check_type"><a class="viewcode-back" href="../../../api/qiskit.validation.base.html#qiskit.assembler.ModelTypeValidator.check_type">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">check_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">attr</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<div class="viewcode-block" id="ModelTypeValidator.check_type"><a class="viewcode-back" href="../../../api/qiskit.validation.ModelTypeValidator.html#qiskit.assembler.ModelTypeValidator.check_type">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">check_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">attr</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Validates a value against the correct type of the field.</span>
 
 <span class="sd">        It calls ``_expected_types`` to get a list of valid types.</span>
@@ -269,7 +269,7 @@
         <span class="k">return</span> <span class="n">ValidationError</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="BaseSchema"><a class="viewcode-back" href="../../../api/qiskit.validation.base.html#qiskit.assembler.BaseSchema">[ドキュメント]</a><span class="k">class</span> <span class="nc">BaseSchema</span><span class="p">(</span><span class="n">Schema</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseSchema"><a class="viewcode-back" href="../../../api/qiskit.validation.BaseSchema.html#qiskit.assembler.BaseSchema">[ドキュメント]</a><span class="k">class</span> <span class="nc">BaseSchema</span><span class="p">(</span><span class="n">Schema</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Base class for Schemas for validated Qiskit classes.</span>
 
 <span class="sd">    Provides convenience functionality for the Qiskit common use case:</span>
@@ -282,14 +282,14 @@
 <span class="sd">         constructor is passed all named parameters from deserialization.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="BaseSchema.Meta"><a class="viewcode-back" href="../../../api/qiskit.validation.base.html#qiskit.assembler.BaseSchema.Meta">[ドキュメント]</a>    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;In marshmallow3, all schemas are strict.&quot;&quot;&quot;</span>
         <span class="c1"># TODO: remove when upgrading to marshmallow3</span>
-        <span class="n">strict</span> <span class="o">=</span> <span class="kc">True</span></div>
+        <span class="n">strict</span> <span class="o">=</span> <span class="kc">True</span>
 
     <span class="n">model_cls</span> <span class="o">=</span> <span class="n">SimpleNamespace</span>
 
-<div class="viewcode-block" id="BaseSchema.dump_additional_data"><a class="viewcode-back" href="../../../api/qiskit.validation.base.html#qiskit.assembler.BaseSchema.dump_additional_data">[ドキュメント]</a>    <span class="nd">@post_dump</span><span class="p">(</span><span class="n">pass_original</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">pass_many</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="viewcode-block" id="BaseSchema.dump_additional_data"><a class="viewcode-back" href="../../../api/qiskit.validation.BaseSchema.html#qiskit.assembler.BaseSchema.dump_additional_data">[ドキュメント]</a>    <span class="nd">@post_dump</span><span class="p">(</span><span class="n">pass_original</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">pass_many</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">dump_additional_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">valid_data</span><span class="p">,</span> <span class="n">many</span><span class="p">,</span> <span class="n">original_data</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Include unknown fields after dumping.</span>
 
@@ -318,7 +318,7 @@
 
         <span class="k">return</span> <span class="n">valid_data</span></div>
 
-<div class="viewcode-block" id="BaseSchema.load_additional_data"><a class="viewcode-back" href="../../../api/qiskit.validation.base.html#qiskit.assembler.BaseSchema.load_additional_data">[ドキュメント]</a>    <span class="nd">@post_load</span><span class="p">(</span><span class="n">pass_original</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">pass_many</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="viewcode-block" id="BaseSchema.load_additional_data"><a class="viewcode-back" href="../../../api/qiskit.validation.BaseSchema.html#qiskit.assembler.BaseSchema.load_additional_data">[ドキュメント]</a>    <span class="nd">@post_load</span><span class="p">(</span><span class="n">pass_original</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">pass_many</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">load_additional_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">valid_data</span><span class="p">,</span> <span class="n">many</span><span class="p">,</span> <span class="n">original_data</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Include unknown fields after load.</span>
 
@@ -347,7 +347,7 @@
 
         <span class="k">return</span> <span class="n">valid_data</span></div>
 
-<div class="viewcode-block" id="BaseSchema.make_model"><a class="viewcode-back" href="../../../api/qiskit.validation.base.html#qiskit.assembler.BaseSchema.make_model">[ドキュメント]</a>    <span class="nd">@post_load</span>
+<div class="viewcode-block" id="BaseSchema.make_model"><a class="viewcode-back" href="../../../api/qiskit.validation.BaseSchema.html#qiskit.assembler.BaseSchema.make_model">[ドキュメント]</a>    <span class="nd">@post_load</span>
     <span class="k">def</span> <span class="nf">make_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Make ``load`` return a ``model_cls`` instance instead of a dict.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_cls</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span></div></div>
@@ -484,7 +484,7 @@
     <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="BaseModel"><a class="viewcode-back" href="../../../api/qiskit.validation.base.html#qiskit.assembler.BaseModel">[ドキュメント]</a><span class="k">class</span> <span class="nc">BaseModel</span><span class="p">(</span><span class="n">SimpleNamespace</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseModel"><a class="viewcode-back" href="../../../api/qiskit.validation.BaseModel.html#qiskit.assembler.BaseModel">[ドキュメント]</a><span class="k">class</span> <span class="nc">BaseModel</span><span class="p">(</span><span class="n">SimpleNamespace</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Base class for Models for validated Qiskit classes.&quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Custom __reduce__ for allowing pickling and unpickling.</span>
@@ -505,7 +505,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span>
 
-<div class="viewcode-block" id="BaseModel.to_dict"><a class="viewcode-back" href="../../../api/qiskit.validation.base.html#qiskit.assembler.BaseModel.to_dict">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseModel.to_dict"><a class="viewcode-back" href="../../../api/qiskit.validation.BaseModel.html#qiskit.assembler.BaseModel.to_dict">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Serialize the model into a Python dict of simple types.</span>
 
 <span class="sd">        Note that this method requires that the model is bound with</span>
@@ -519,7 +519,7 @@
 
         <span class="k">return</span> <span class="n">data</span></div>
 
-<div class="viewcode-block" id="BaseModel.from_dict"><a class="viewcode-back" href="../../../api/qiskit.validation.base.html#qiskit.assembler.BaseModel.from_dict">[ドキュメント]</a>    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="BaseModel.from_dict"><a class="viewcode-back" href="../../../api/qiskit.validation.BaseModel.html#qiskit.assembler.BaseModel.from_dict">[ドキュメント]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">dict_</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Deserialize a dict of simple types into an instance of this class.</span>
 
@@ -534,22 +534,22 @@
 
         <span class="k">return</span> <span class="n">data</span></div>
 
-<div class="viewcode-block" id="BaseModel.as_dict"><a class="viewcode-back" href="../../../api/qiskit.validation.base.html#qiskit.assembler.BaseModel.as_dict">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">as_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseModel.as_dict"><a class="viewcode-back" href="../../../api/qiskit.validation.BaseModel.html#qiskit.assembler.BaseModel.as_dict">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">as_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Serialize the model into a Python dict of simple types.&quot;&quot;&quot;</span>
         <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;The as_dict() method is deprecated, use to_dict().&#39;</span><span class="p">,</span>
                       <span class="ne">DeprecationWarning</span><span class="p">,</span> <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span></div></div>
 
 
-<div class="viewcode-block" id="ObjSchema"><a class="viewcode-back" href="../../../api/qiskit.validation.base.html#qiskit.assembler.ObjSchema">[ドキュメント]</a><span class="k">class</span> <span class="nc">ObjSchema</span><span class="p">(</span><span class="n">BaseSchema</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">ObjSchema</span><span class="p">(</span><span class="n">BaseSchema</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Generic object schema.&quot;&quot;&quot;</span>
-    <span class="k">pass</span></div>
+    <span class="k">pass</span>
 
 
-<div class="viewcode-block" id="Obj"><a class="viewcode-back" href="../../../api/qiskit.validation.base.html#qiskit.assembler.Obj">[ドキュメント]</a><span class="nd">@bind_schema</span><span class="p">(</span><span class="n">ObjSchema</span><span class="p">)</span>
+<span class="nd">@bind_schema</span><span class="p">(</span><span class="n">ObjSchema</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">Obj</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Generic object in a Model.&quot;&quot;&quot;</span>
-    <span class="k">pass</span></div>
+    <span class="k">pass</span>
 </pre></div>
 
         </div>

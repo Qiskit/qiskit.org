@@ -197,7 +197,7 @@
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 
-<div class="viewcode-block" id="MultivariateProblem"><a class="viewcode-back" href="../../../../../api/qiskit.aqua.components.uncertainty_problems.multivariate_problem.html#qiskit.aqua.components.uncertainty_problems.MultivariateProblem">[ドキュメント]</a><span class="k">class</span> <span class="nc">MultivariateProblem</span><span class="p">(</span><span class="n">UncertaintyProblem</span><span class="p">):</span>
+<div class="viewcode-block" id="MultivariateProblem"><a class="viewcode-back" href="../../../../../api/qiskit.aqua.components.uncertainty_problems.MultivariateProblem.html#qiskit.aqua.components.uncertainty_problems.MultivariateProblem">[ドキュメント]</a><span class="k">class</span> <span class="nc">MultivariateProblem</span><span class="p">(</span><span class="n">UncertaintyProblem</span><span class="p">):</span>
 
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Multivariate Uncertainty Problem.</span>
@@ -232,13 +232,13 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_univariate_objective</span> <span class="o">=</span> <span class="n">univariate_objective</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_conditions</span> <span class="o">=</span> <span class="n">conditions</span>
 
-<div class="viewcode-block" id="MultivariateProblem.value_to_estimation"><a class="viewcode-back" href="../../../../../api/qiskit.aqua.components.uncertainty_problems.multivariate_problem.html#qiskit.aqua.components.uncertainty_problems.MultivariateProblem.value_to_estimation">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">value_to_estimation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+<div class="viewcode-block" id="MultivariateProblem.value_to_estimation"><a class="viewcode-back" href="../../../../../api/qiskit.aqua.components.uncertainty_problems.MultivariateProblem.html#qiskit.aqua.components.uncertainty_problems.MultivariateProblem.value_to_estimation">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">value_to_estimation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_univariate_objective</span><span class="p">,</span> <span class="s1">&#39;value_to_estimation&#39;</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_univariate_objective</span><span class="o">.</span><span class="n">value_to_estimation</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">value</span></div>
 
-<div class="viewcode-block" id="MultivariateProblem.required_ancillas"><a class="viewcode-back" href="../../../../../api/qiskit.aqua.components.uncertainty_problems.multivariate_problem.html#qiskit.aqua.components.uncertainty_problems.MultivariateProblem.required_ancillas">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">required_ancillas</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="MultivariateProblem.required_ancillas"><a class="viewcode-back" href="../../../../../api/qiskit.aqua.components.uncertainty_problems.MultivariateProblem.html#qiskit.aqua.components.uncertainty_problems.MultivariateProblem.required_ancillas">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">required_ancillas</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
         <span class="n">num_condition_ancillas</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="n">num_condition_target_ancillas</span> <span class="o">=</span> <span class="mi">0</span>
@@ -262,7 +262,7 @@
 
         <span class="k">return</span> <span class="n">num_ancillas</span></div>
 
-<div class="viewcode-block" id="MultivariateProblem.build"><a class="viewcode-back" href="../../../../../api/qiskit.aqua.components.uncertainty_problems.multivariate_problem.html#qiskit.aqua.components.uncertainty_problems.MultivariateProblem.build">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qc</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">q_ancillas</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="MultivariateProblem.build"><a class="viewcode-back" href="../../../../../api/qiskit.aqua.components.uncertainty_problems.MultivariateProblem.html#qiskit.aqua.components.uncertainty_problems.MultivariateProblem.build">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qc</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">q_ancillas</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
         <span class="c1"># apply uncertainty model (can use all ancillas and returns all clean)</span>
         <span class="n">q_state</span> <span class="o">=</span> <span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">i_state</span><span class="p">]</span>

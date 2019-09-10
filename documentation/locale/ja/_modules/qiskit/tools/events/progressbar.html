@@ -233,7 +233,7 @@
 <span class="kn">from</span> <span class="nn">qiskit.tools.events.pubsub</span> <span class="k">import</span> <span class="n">Subscriber</span>
 
 
-<div class="viewcode-block" id="BaseProgressBar"><a class="viewcode-back" href="../../../../api/qiskit.tools.events.progressbar.html#qiskit.tools.events.BaseProgressBar">[ドキュメント]</a><span class="k">class</span> <span class="nc">BaseProgressBar</span><span class="p">(</span><span class="n">Subscriber</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">BaseProgressBar</span><span class="p">(</span><span class="n">Subscriber</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;An abstract progress bar with some shared functionality.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -244,7 +244,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">t_start</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">t_done</span> <span class="o">=</span> <span class="kc">None</span>
 
-<div class="viewcode-block" id="BaseProgressBar.start"><a class="viewcode-back" href="../../../../api/qiskit.tools.events.progressbar.html#qiskit.tools.events.BaseProgressBar.start">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">iterations</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">iterations</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Start the progress bar.</span>
 
 <span class="sd">        Parameters:</span>
@@ -252,22 +252,22 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">touched</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">iter</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">iterations</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">t_start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">t_start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 
-<div class="viewcode-block" id="BaseProgressBar.update"><a class="viewcode-back" href="../../../../api/qiskit.tools.events.progressbar.html#qiskit.tools.events.BaseProgressBar.update">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Update status of progress bar.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">pass</span></div>
+        <span class="k">pass</span>
 
-<div class="viewcode-block" id="BaseProgressBar.time_elapsed"><a class="viewcode-back" href="../../../../api/qiskit.tools.events.progressbar.html#qiskit.tools.events.BaseProgressBar.time_elapsed">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">time_elapsed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">time_elapsed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the time elapsed since start.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            elapsed_time: Time since progress bar started.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%6.2f</span><span class="s2">s&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">t_start</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%6.2f</span><span class="s2">s&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">t_start</span><span class="p">)</span>
 
-<div class="viewcode-block" id="BaseProgressBar.time_remaining_est"><a class="viewcode-back" href="../../../../api/qiskit.tools.events.progressbar.html#qiskit.tools.events.BaseProgressBar.time_remaining_est">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">time_remaining_est</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">completed_iter</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">time_remaining_est</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">completed_iter</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Estimate the remaining time left.</span>
 
 <span class="sd">        Parameters:</span>
@@ -285,15 +285,15 @@
         <span class="n">time_string</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%02d</span><span class="s2">:</span><span class="si">%02d</span><span class="s2">:</span><span class="si">%02d</span><span class="s2">:</span><span class="si">%02d</span><span class="s2">&quot;</span> <span class="o">%</span> \
             <span class="p">(</span><span class="n">date_time</span><span class="o">.</span><span class="n">day</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">date_time</span><span class="o">.</span><span class="n">hour</span><span class="p">,</span> <span class="n">date_time</span><span class="o">.</span><span class="n">minute</span><span class="p">,</span> <span class="n">date_time</span><span class="o">.</span><span class="n">second</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">time_string</span></div>
+        <span class="k">return</span> <span class="n">time_string</span>
 
-<div class="viewcode-block" id="BaseProgressBar.finished"><a class="viewcode-back" href="../../../../api/qiskit.tools.events.progressbar.html#qiskit.tools.events.BaseProgressBar.finished">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">finished</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">finished</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Run when progress bar has completed.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">pass</span></div></div>
+        <span class="k">pass</span>
 
 
-<div class="viewcode-block" id="TextProgressBar"><a class="viewcode-back" href="../../../../api/qiskit.tools.events.progressbar.html#qiskit.tools.events.TextProgressBar">[ドキュメント]</a><span class="k">class</span> <span class="nc">TextProgressBar</span><span class="p">(</span><span class="n">BaseProgressBar</span><span class="p">):</span>
+<div class="viewcode-block" id="TextProgressBar"><a class="viewcode-back" href="../../../../api/qiskit.tools.events.TextProgressBar.html#qiskit.tools.events.TextProgressBar">[ドキュメント]</a><span class="k">class</span> <span class="nc">TextProgressBar</span><span class="p">(</span><span class="n">BaseProgressBar</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A simple text-based progress bar.</span>
 
@@ -326,7 +326,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">finished</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="s2">&quot;terra.parallel.finish&quot;</span><span class="p">,</span> <span class="n">_finish_progress_bar</span><span class="p">)</span>
 
-<div class="viewcode-block" id="TextProgressBar.start"><a class="viewcode-back" href="../../../../api/qiskit.tools.events.progressbar.html#qiskit.tools.events.TextProgressBar.start">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">iterations</span><span class="p">):</span>
+<div class="viewcode-block" id="TextProgressBar.start"><a class="viewcode-back" href="../../../../api/qiskit.tools.events.TextProgressBar.html#qiskit.tools.events.TextProgressBar.start">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">iterations</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">touched</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">iter</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">iterations</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">t_start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
@@ -334,7 +334,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">output_handler</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\r</span><span class="s1">|</span><span class="si">%s</span><span class="s1">| </span><span class="si">%s%s%s</span><span class="s1"> [</span><span class="si">%s</span><span class="s1">]&#39;</span> <span class="o">%</span>
                                   <span class="p">(</span><span class="n">pbar</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">iter</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="TextProgressBar.update"><a class="viewcode-back" href="../../../../api/qiskit.tools.events.progressbar.html#qiskit.tools.events.TextProgressBar.update">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+<div class="viewcode-block" id="TextProgressBar.update"><a class="viewcode-back" href="../../../../api/qiskit.tools.events.TextProgressBar.html#qiskit.tools.events.TextProgressBar.update">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
         <span class="n">filled_length</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="mi">50</span> <span class="o">*</span> <span class="n">n</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">iter</span><span class="p">))</span>
         <span class="n">pbar</span> <span class="o">=</span> <span class="s1">&#39;█&#39;</span> <span class="o">*</span> <span class="n">filled_length</span> <span class="o">+</span> <span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="p">(</span><span class="mi">50</span> <span class="o">-</span> <span class="n">filled_length</span><span class="p">)</span>
         <span class="n">time_left</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">time_remaining_est</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>

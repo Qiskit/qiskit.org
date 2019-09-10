@@ -204,7 +204,7 @@
 <span class="kn">from</span> <span class="nn">qiskit.extensions.standard.u3</span> <span class="k">import</span> <span class="n">U3Gate</span>
 
 
-<div class="viewcode-block" id="U1Gate"><a class="viewcode-back" href="../../../../api/qiskit.extensions.standard.u1.html#qiskit.circuit.U1Gate">[ドキュメント]</a><span class="k">class</span> <span class="nc">U1Gate</span><span class="p">(</span><span class="n">Gate</span><span class="p">):</span>
+<div class="viewcode-block" id="U1Gate"><a class="viewcode-back" href="../../../../api/qiskit.extensions.standard.U1Gate.html#qiskit.circuit.U1Gate">[ドキュメント]</a><span class="k">class</span> <span class="nc">U1Gate</span><span class="p">(</span><span class="n">Gate</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Diagonal single-qubit gate.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -221,20 +221,20 @@
             <span class="n">definition</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">inst</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">definition</span> <span class="o">=</span> <span class="n">definition</span>
 
-<div class="viewcode-block" id="U1Gate.inverse"><a class="viewcode-back" href="../../../../api/qiskit.extensions.standard.u1.html#qiskit.circuit.U1Gate.inverse">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="U1Gate.inverse"><a class="viewcode-back" href="../../../../api/qiskit.extensions.standard.U1Gate.html#qiskit.circuit.U1Gate.inverse">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Invert this gate.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">U1Gate</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></div>
 
-<div class="viewcode-block" id="U1Gate.to_matrix"><a class="viewcode-back" href="../../../../api/qiskit.extensions.standard.u1.html#qiskit.circuit.U1Gate.to_matrix">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">to_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="U1Gate.to_matrix"><a class="viewcode-back" href="../../../../api/qiskit.extensions.standard.U1Gate.html#qiskit.circuit.U1Gate.to_matrix">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">to_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return a Numpy.array for the U3 gate.&quot;&quot;&quot;</span>
         <span class="n">lam</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">lam</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">lam</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">lam</span><span class="p">)]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="u1"><a class="viewcode-back" href="../../../../api/qiskit.extensions.standard.u1.html#qiskit.circuit.u1">[ドキュメント]</a><span class="k">def</span> <span class="nf">u1</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">u1</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Apply u1 with angle theta to q.&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">U1Gate</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="p">[</span><span class="n">q</span><span class="p">],</span> <span class="p">[])</span></div>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">U1Gate</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="p">[</span><span class="n">q</span><span class="p">],</span> <span class="p">[])</span>
 
 
 <span class="n">QuantumCircuit</span><span class="o">.</span><span class="n">u1</span> <span class="o">=</span> <span class="n">u1</span>

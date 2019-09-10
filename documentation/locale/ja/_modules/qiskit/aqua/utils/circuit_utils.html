@@ -197,13 +197,13 @@
 <span class="kn">from</span> <span class="nn">qiskit.transpiler.passes</span> <span class="k">import</span> <span class="n">Unroller</span>
 
 
-<div class="viewcode-block" id="convert_to_basis_gates"><a class="viewcode-back" href="../../../../api/qiskit.aqua.utils.circuit_utils.html#qiskit.aqua.utils.convert_to_basis_gates">[ドキュメント]</a><span class="k">def</span> <span class="nf">convert_to_basis_gates</span><span class="p">(</span><span class="n">circuit</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">convert_to_basis_gates</span><span class="p">(</span><span class="n">circuit</span><span class="p">):</span>
     <span class="c1"># unroll the circuit using the basis u1, u2, u3, cx, and id gates</span>
     <span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">BasicAer</span>
     <span class="n">unroller</span> <span class="o">=</span> <span class="n">Unroller</span><span class="p">(</span><span class="n">basis</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;u1&#39;</span><span class="p">,</span> <span class="s1">&#39;u2&#39;</span><span class="p">,</span> <span class="s1">&#39;u3&#39;</span><span class="p">,</span> <span class="s1">&#39;cx&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">])</span>
     <span class="n">pm</span> <span class="o">=</span> <span class="n">PassManager</span><span class="p">(</span><span class="n">passes</span><span class="o">=</span><span class="p">[</span><span class="n">unroller</span><span class="p">])</span>
     <span class="n">qc</span> <span class="o">=</span> <span class="n">compiler</span><span class="o">.</span><span class="n">transpile</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="n">BasicAer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">),</span> <span class="n">pass_manager</span><span class="o">=</span><span class="n">pm</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">qc</span></div>
+    <span class="k">return</span> <span class="n">qc</span>
 
 
 <div class="viewcode-block" id="summarize_circuits"><a class="viewcode-back" href="../../../../api/qiskit.aqua.utils.summarize_circuits.html#qiskit.aqua.utils.summarize_circuits">[ドキュメント]</a><span class="k">def</span> <span class="nf">summarize_circuits</span><span class="p">(</span><span class="n">circuits</span><span class="p">):</span>

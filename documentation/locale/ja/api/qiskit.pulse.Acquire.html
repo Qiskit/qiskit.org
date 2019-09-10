@@ -1248,7 +1248,7 @@
 <dl class="class">
 <dt id="qiskit.pulse.Acquire">
 <em class="property">class </em><code class="descname">Acquire</code><span class="sig-paren">(</span><em>duration: int</em>, <em>discriminator: Optional[qiskit.pulse.commands.meas_opts.Discriminator] = None</em>, <em>kernel: Optional[qiskit.pulse.commands.meas_opts.Kernel] = None</em>, <em>name: Optional[str] = None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/pulse/commands/acquire.html#Acquire"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.pulse.Acquire" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>ベースクラス: <a class="reference internal" href="qiskit.pulse.commands.command.html#qiskit.pulse.commands.command.Command" title="qiskit.pulse.commands.command.Command"><code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.pulse.commands.command.Command</span></code></a></p>
+<dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.pulse.commands.command.Command</span></code></p>
 <p>Acquire.</p>
 <p class="rubric">Attributes Summary</p>
 <table border="1" class="longtable docutils">
@@ -1266,13 +1266,16 @@
 <tr class="row-odd"><td><a class="reference internal" href="#qiskit.pulse.Acquire.duration" title="qiskit.pulse.Acquire.duration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">duration</span></code></a></td>
 <td>Duration of this command.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.pulse.Acquire.kernel" title="qiskit.pulse.Acquire.kernel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kernel</span></code></a></td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.pulse.Acquire.instances_counter" title="qiskit.pulse.Acquire.instances_counter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">instances_counter</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.pulse.Acquire.kernel" title="qiskit.pulse.Acquire.kernel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kernel</span></code></a></td>
 <td>Return kernel settings.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.pulse.Acquire.name" title="qiskit.pulse.Acquire.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></a></td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.pulse.Acquire.name" title="qiskit.pulse.Acquire.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></a></td>
 <td>Name of this command.</td>
 </tr>
-<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">Acquire.pulseIndex</span></code></td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.pulse.Acquire.prefix" title="qiskit.pulse.Acquire.prefix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">prefix</span></code></a></td>
 <td></td>
 </tr>
 </tbody>
@@ -1287,7 +1290,10 @@
 <tr class="row-odd"><td><a class="reference internal" href="#qiskit.pulse.Acquire.__call__" title="qiskit.pulse.Acquire.__call__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__call__</span></code></a>(*args,&nbsp;**kwargs)</td>
 <td>Creates an Instruction obtained from call to <cite>to_instruction</cite> wrapped in a Schedule.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.pulse.Acquire.to_instruction" title="qiskit.pulse.Acquire.to_instruction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_instruction</span></code></a>(qubits,&nbsp;...)</td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.pulse.Acquire.create_name" title="qiskit.pulse.Acquire.create_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_name</span></code></a>(name)</td>
+<td>Autogenerate names for pulse commands.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.pulse.Acquire.to_instruction" title="qiskit.pulse.Acquire.to_instruction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_instruction</span></code></a>(qubits,&nbsp;...)</td>
 <td>Create an instruction from command.</td>
 </tr>
 </tbody>
@@ -1311,6 +1317,11 @@
 </dd></dl>
 
 <dl class="attribute">
+<dt id="qiskit.pulse.Acquire.instances_counter">
+<code class="descname">instances_counter</code><em class="property"> = 0</em><a class="headerlink" href="#qiskit.pulse.Acquire.instances_counter" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
 <dt id="qiskit.pulse.Acquire.kernel">
 <code class="descname">kernel</code><a class="headerlink" href="#qiskit.pulse.Acquire.kernel" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Return kernel settings.</p>
@@ -1322,11 +1333,22 @@
 <dd><p>Name of this command.</p>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="qiskit.pulse.Acquire.prefix">
+<code class="descname">prefix</code><em class="property"> = 'acq'</em><a class="headerlink" href="#qiskit.pulse.Acquire.prefix" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
 <p class="rubric">Methods Documentation</p>
 <dl class="method">
 <dt id="qiskit.pulse.Acquire.__call__">
 <code class="descname">__call__</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.pulse.Acquire.__call__" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Creates an Instruction obtained from call to <cite>to_instruction</cite> wrapped in a Schedule.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="qiskit.pulse.Acquire.create_name">
+<em class="property">classmethod </em><code class="descname">create_name</code><span class="sig-paren">(</span><em>name: str = None</em><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#qiskit.pulse.Acquire.create_name" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Autogenerate names for pulse commands.</p>
 </dd></dl>
 
 <dl class="method">
