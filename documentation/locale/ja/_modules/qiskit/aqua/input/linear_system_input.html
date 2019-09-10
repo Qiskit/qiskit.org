@@ -198,7 +198,7 @@
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 
-<div class="viewcode-block" id="LinearSystemInput"><a class="viewcode-back" href="../../../../api/qiskit.aqua.input.linear_system_input.html#qiskit.aqua.input.LinearSystemInput">[ドキュメント]</a><span class="k">class</span> <span class="nc">LinearSystemInput</span><span class="p">(</span><span class="n">AlgorithmInput</span><span class="p">):</span>
+<div class="viewcode-block" id="LinearSystemInput"><a class="viewcode-back" href="../../../../api/qiskit.aqua.input.LinearSystemInput.html#qiskit.aqua.input.LinearSystemInput">[ドキュメント]</a><span class="k">class</span> <span class="nc">LinearSystemInput</span><span class="p">(</span><span class="n">AlgorithmInput</span><span class="p">):</span>
 
     <span class="n">PROP_KEY_MATRIX</span> <span class="o">=</span> <span class="s1">&#39;matrix&#39;</span>
     <span class="n">PROP_KEY_VECTOR</span> <span class="o">=</span> <span class="s1">&#39;vector&#39;</span>
@@ -246,7 +246,7 @@
     <span class="k">def</span> <span class="nf">vector</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vector</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_vector</span> <span class="o">=</span> <span class="n">vector</span>
 
-<div class="viewcode-block" id="LinearSystemInput.validate"><a class="viewcode-back" href="../../../../api/qiskit.aqua.input.linear_system_input.html#qiskit.aqua.input.LinearSystemInput.validate">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args_dict</span><span class="p">):</span>
+<div class="viewcode-block" id="LinearSystemInput.validate"><a class="viewcode-back" href="../../../../api/qiskit.aqua.input.LinearSystemInput.html#qiskit.aqua.input.LinearSystemInput.validate">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args_dict</span><span class="p">):</span>
         <span class="n">params</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">args_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="n">LinearSystemInput</span><span class="o">.</span><span class="n">PROP_KEY_MATRIX</span><span class="p">:</span>
@@ -258,13 +258,13 @@
 
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">params</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="LinearSystemInput.to_params"><a class="viewcode-back" href="../../../../api/qiskit.aqua.input.linear_system_input.html#qiskit.aqua.input.LinearSystemInput.to_params">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">to_params</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="LinearSystemInput.to_params"><a class="viewcode-back" href="../../../../api/qiskit.aqua.input.LinearSystemInput.html#qiskit.aqua.input.LinearSystemInput.to_params">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">to_params</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">params</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">params</span><span class="p">[</span><span class="n">LinearSystemInput</span><span class="o">.</span><span class="n">PROP_KEY_MATRIX</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">save_to_list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_matrix</span><span class="p">)</span>
         <span class="n">params</span><span class="p">[</span><span class="n">LinearSystemInput</span><span class="o">.</span><span class="n">PROP_KEY_VECTOR</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">save_to_list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_vector</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">params</span></div>
 
-<div class="viewcode-block" id="LinearSystemInput.from_params"><a class="viewcode-back" href="../../../../api/qiskit.aqua.input.linear_system_input.html#qiskit.aqua.input.LinearSystemInput.from_params">[ドキュメント]</a>    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="LinearSystemInput.from_params"><a class="viewcode-back" href="../../../../api/qiskit.aqua.input.LinearSystemInput.html#qiskit.aqua.input.LinearSystemInput.from_params">[ドキュメント]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_params</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">LinearSystemInput</span><span class="o">.</span><span class="n">PROP_KEY_MATRIX</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">AquaError</span><span class="p">(</span><span class="s2">&quot;Matrix is required.&quot;</span><span class="p">)</span>
@@ -276,7 +276,7 @@
         <span class="n">vector</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">load_vec_from_list</span><span class="p">(</span><span class="n">vec_params</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">vector</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="LinearSystemInput.load_mat_from_list"><a class="viewcode-back" href="../../../../api/qiskit.aqua.input.linear_system_input.html#qiskit.aqua.input.LinearSystemInput.load_mat_from_list">[ドキュメント]</a>    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="LinearSystemInput.load_mat_from_list"><a class="viewcode-back" href="../../../../api/qiskit.aqua.input.LinearSystemInput.html#qiskit.aqua.input.LinearSystemInput.load_mat_from_list">[ドキュメント]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">load_mat_from_list</span><span class="p">(</span><span class="n">mat</span><span class="p">):</span>
         <span class="k">def</span> <span class="nf">depth</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">max</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">depth</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span><span class="o">+</span><span class="mi">1</span>
         <span class="k">if</span> <span class="n">depth</span><span class="p">(</span><span class="n">mat</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
@@ -286,7 +286,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">AquaError</span><span class="p">(</span><span class="s2">&quot;Matrix list must be depth 2 or 3&quot;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="LinearSystemInput.load_vec_from_list"><a class="viewcode-back" href="../../../../api/qiskit.aqua.input.linear_system_input.html#qiskit.aqua.input.LinearSystemInput.load_vec_from_list">[ドキュメント]</a>    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="LinearSystemInput.load_vec_from_list"><a class="viewcode-back" href="../../../../api/qiskit.aqua.input.LinearSystemInput.html#qiskit.aqua.input.LinearSystemInput.load_vec_from_list">[ドキュメント]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">load_vec_from_list</span><span class="p">(</span><span class="n">vec</span><span class="p">):</span>
         <span class="k">def</span> <span class="nf">depth</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">max</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">depth</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span><span class="o">+</span><span class="mi">1</span>
         <span class="k">if</span> <span class="n">depth</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
@@ -296,7 +296,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">AquaError</span><span class="p">(</span><span class="s2">&quot;Vector list must be depth 2 or 3&quot;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="LinearSystemInput.save_to_list"><a class="viewcode-back" href="../../../../api/qiskit.aqua.input.linear_system_input.html#qiskit.aqua.input.LinearSystemInput.save_to_list">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">save_to_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mat</span><span class="p">):</span>
+<div class="viewcode-block" id="LinearSystemInput.save_to_list"><a class="viewcode-back" href="../../../../api/qiskit.aqua.input.LinearSystemInput.html#qiskit.aqua.input.LinearSystemInput.save_to_list">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">save_to_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mat</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mat</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">mat</span>
         <span class="k">if</span> <span class="n">mat</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="nb">complex</span><span class="p">:</span>

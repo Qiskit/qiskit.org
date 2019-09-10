@@ -34,7 +34,7 @@
        </script>
         <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
     
-    <title>qiskit.extensions.quantum_initializer.squ &#8212; Qiskit 0.11.2 ドキュメント</title>
+    <title>qiskit.extensions.quantum_initializer.squ &#8212; Qiskit 0.12.0 ドキュメント</title>
 
     <link rel="stylesheet" href="../../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -63,15 +63,16 @@
 <body>
   <header>
     <div class="toolbar limited-width">
-      <a href="/" class="home">Qiskit ™</a>
+      <a href="/" class="home">Qiskit</a>
       <nav class="first">
         <a href="/terra">Terra</a>
         <a href="/aer">Aer</a>
         <a href="/aqua">Aqua</a>
         <a href="/ignis">Ignis</a>
+        <a href="/ibmq">IBM Q</a>
       </nav>
       <nav class="second">
-        <a class="external" id="educationLink" href="https://community.qiskit.org/education" target="_blank">Education</a>
+        <a class="external" id="educationLink" href="https://community.qiskit.org/education">Community</a>
         <a class="external" id="tutorialsLink" href="https://quantum-computing.ibm.com/jupyter/tutorial/1_start_here.ipynb" target="_blank">Tutorials</a>
         <a class="external" href="/documentation" selected>API Documentation</a>
       </nav>
@@ -90,10 +91,13 @@
     
 
 <div class="languages" >
+    <span>Select a language: </span>
+	<span>
 	    <select id="language" name="languages">
 	        <option value="en">English</option>
-	        <option value="ja">Japanese</option>
-	    </select>
+	        <option value="ja">日本語</option>
+        </select>
+    </span>
 </div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
@@ -111,7 +115,7 @@
     </div>
 </div>
 <div class="globaltoc">
-  <span class="mdl-layout-title toc">Table Of Contents</span>
+  <span class="mdl-layout-title toc">目次</span>
   
   
   
@@ -135,10 +139,13 @@
     
 
 <div class="languages" >
+    <span>Select a language: </span>
+	<span>
 	    <select id="language" name="languages">
 	        <option value="en">English</option>
-	        <option value="ja">Japanese</option>
-	    </select>
+	        <option value="ja">日本語</option>
+        </select>
+    </span>
 </div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
@@ -156,7 +163,7 @@
     </div>
 </div>
 <div class="globaltoc">
-  <span class="mdl-layout-title toc">Table Of Contents</span>
+  <span class="mdl-layout-title toc">目次</span>
   
   
   
@@ -208,7 +215,7 @@
 <span class="n">_EPS</span> <span class="o">=</span> <span class="mf">1e-10</span>  <span class="c1"># global variable used to chop very small numbers to zero</span>
 
 
-<div class="viewcode-block" id="SingleQubitUnitary"><a class="viewcode-back" href="../../../../api/qiskit.extensions.quantum_initializer.squ.html#qiskit.circuit.quantumcircuit.SingleQubitUnitary">[ドキュメント]</a><span class="k">class</span> <span class="nc">SingleQubitUnitary</span><span class="p">(</span><span class="n">Gate</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">SingleQubitUnitary</span><span class="p">(</span><span class="n">Gate</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    u = 2*2 unitary (given as a (complex) numpy.ndarray)</span>
 
@@ -309,14 +316,14 @@
         <span class="c1"># The decomposition works with another convention for the rotation gates</span>
         <span class="c1"># (the one using negative angles).</span>
         <span class="c1"># Therefore, we have to take the inverse of the angles at the end.</span>
-        <span class="k">return</span> <span class="o">-</span><span class="n">a</span><span class="p">,</span> <span class="o">-</span><span class="n">b</span><span class="p">,</span> <span class="o">-</span><span class="n">c</span><span class="p">,</span> <span class="n">d</span></div>
+        <span class="k">return</span> <span class="o">-</span><span class="n">a</span><span class="p">,</span> <span class="o">-</span><span class="n">b</span><span class="p">,</span> <span class="o">-</span><span class="n">c</span><span class="p">,</span> <span class="n">d</span>
 
 
 <span class="k">def</span> <span class="nf">_ct</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">conjugate</span><span class="p">(</span><span class="n">m</span><span class="p">))</span>
 
 
-<div class="viewcode-block" id="squ"><a class="viewcode-back" href="../../../../api/qiskit.extensions.quantum_initializer.squ.html#qiskit.circuit.quantumcircuit.squ">[ドキュメント]</a><span class="k">def</span> <span class="nf">squ</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">qubit</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;ZYZ&quot;</span><span class="p">,</span> <span class="n">up_to_diagonal</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">squ</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">qubit</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;ZYZ&quot;</span><span class="p">,</span> <span class="n">up_to_diagonal</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Decompose an arbitrary 2*2 unitary into three rotation gates: U=R_zR_yR_z.</span>
 <span class="sd">    Note that the decomposition is up to a global phase shift.</span>
@@ -349,7 +356,7 @@
     <span class="c1"># Check if there is one target qubit provided</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">qubit</span><span class="p">,</span> <span class="n">Qubit</span><span class="p">):</span>
         <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;The target qubit is not a single qubit from a QuantumRegister.&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">SingleQubitUnitary</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">up_to_diagonal</span><span class="p">),</span> <span class="p">[</span><span class="n">qubit</span><span class="p">],</span> <span class="p">[])</span></div>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">SingleQubitUnitary</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">up_to_diagonal</span><span class="p">),</span> <span class="p">[</span><span class="n">qubit</span><span class="p">],</span> <span class="p">[])</span>
 
 
 <span class="n">QuantumCircuit</span><span class="o">.</span><span class="n">squ</span> <span class="o">=</span> <span class="n">squ</span>
@@ -393,11 +400,11 @@
         link.addEventListener('click', clickExternalLink);
     </script>
     <script>
-      var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
-      var prefix = '/documentation';
-      function getDefaultLanguage() {
-        return 'en';
-      }
+	    var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+	    var prefix = '/documentation';
+	    function getDefaultLanguage() {
+	      return 'en';
+	    }
       var el = document.getElementById('language');
       var optionsToSelect = ['en', 'ja']
       function changeLoc(evt) {

@@ -301,7 +301,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_subscribers</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
 
 
-<div class="viewcode-block" id="Publisher"><a class="viewcode-back" href="../../../../api/qiskit.tools.events.pubsub.html#qiskit.tools.events.Publisher">[ドキュメント]</a><span class="k">class</span> <span class="nc">Publisher</span><span class="p">:</span>
+<span class="k">class</span> <span class="nc">Publisher</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot; Represents a Publisher, every component (class) can become a Publisher and</span>
 <span class="sd">    send events by inheriting this class. Functions can call this class like:</span>
 <span class="sd">    Publisher().publish(&quot;event&quot;, args, ... )</span>
@@ -309,33 +309,33 @@
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_broker</span> <span class="o">=</span> <span class="n">_Broker</span><span class="p">()</span>
 
-<div class="viewcode-block" id="Publisher.publish"><a class="viewcode-back" href="../../../../api/qiskit.tools.events.pubsub.html#qiskit.tools.events.Publisher.publish">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">publish</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">publish</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Triggers an event, and associates some data to it, so if there are any</span>
 <span class="sd">        subscribers, their callback will be called synchronously. &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_broker</span><span class="o">.</span><span class="n">dispatch</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_broker</span><span class="o">.</span><span class="n">dispatch</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="Subscriber"><a class="viewcode-back" href="../../../../api/qiskit.tools.events.pubsub.html#qiskit.tools.events.Subscriber">[ドキュメント]</a><span class="k">class</span> <span class="nc">Subscriber</span><span class="p">:</span>
+<span class="k">class</span> <span class="nc">Subscriber</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot; Represents a Subscriber, every component (class) can become a Subscriber and</span>
 <span class="sd">    subscribe to events, that will call callback functions when they are emitted.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_broker</span> <span class="o">=</span> <span class="n">_Broker</span><span class="p">()</span>
 
-<div class="viewcode-block" id="Subscriber.subscribe"><a class="viewcode-back" href="../../../../api/qiskit.tools.events.pubsub.html#qiskit.tools.events.Subscriber.subscribe">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">subscribe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">,</span> <span class="n">callback</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">subscribe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">,</span> <span class="n">callback</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Subscribes to an event, associating a callback function to that event, so</span>
 <span class="sd">        when the event occurs, the callback will be called.</span>
 <span class="sd">        This is a blocking call, so try to keep callbacks as lightweight as possible. &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_broker</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">callback</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_broker</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">callback</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Subscriber.unsubscribe"><a class="viewcode-back" href="../../../../api/qiskit.tools.events.pubsub.html#qiskit.tools.events.Subscriber.unsubscribe">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">unsubscribe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">,</span> <span class="n">callback</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">unsubscribe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">,</span> <span class="n">callback</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Unsubscribe a pair event-callback, so the callback will not be called anymore</span>
 <span class="sd">        when the event occurs.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_broker</span><span class="o">.</span><span class="n">unsubscribe</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">callback</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_broker</span><span class="o">.</span><span class="n">unsubscribe</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">callback</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Subscriber.clear"><a class="viewcode-back" href="../../../../api/qiskit.tools.events.pubsub.html#qiskit.tools.events.Subscriber.clear">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Unsubscribe everything&quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_broker</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span></div></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_broker</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
 </pre></div>
 
         </div>

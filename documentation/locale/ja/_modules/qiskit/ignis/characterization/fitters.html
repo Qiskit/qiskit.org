@@ -202,7 +202,7 @@
 <span class="kn">from</span> <span class="nn">..verification.tomography</span> <span class="k">import</span> <span class="n">marginal_counts</span>
 
 
-<div class="viewcode-block" id="BaseFitter"><a class="viewcode-back" href="../../../../api/qiskit.ignis.characterization.fitters.html#qiskit.ignis.characterization.BaseFitter">[ドキュメント]</a><span class="k">class</span> <span class="nc">BaseFitter</span><span class="p">:</span>
+<span class="k">class</span> <span class="nc">BaseFitter</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Base class for a data fitter</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -365,7 +365,7 @@
 
         <span class="k">return</span> <span class="n">param_list</span>
 
-<div class="viewcode-block" id="BaseFitter.add_data"><a class="viewcode-back" href="../../../../api/qiskit.ignis.characterization.fitters.html#qiskit.ignis.characterization.BaseFitter.add_data">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">add_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">results</span><span class="p">,</span> <span class="n">recalc</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">refit</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">add_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">results</span><span class="p">,</span> <span class="n">recalc</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">refit</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Adds more data</span>
 
@@ -385,7 +385,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_calc_data</span><span class="p">()</span>  <span class="c1"># computes self._ydata</span>
 
         <span class="k">if</span> <span class="n">refit</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">fit_data</span><span class="p">()</span></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fit_data</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">_calc_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -432,7 +432,7 @@
                     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ydata</span><span class="p">[</span><span class="n">serieslbl</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;std&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">_ydata</span><span class="p">[</span><span class="n">serieslbl</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;std&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1e-4</span>
 
-<div class="viewcode-block" id="BaseFitter.fit_data"><a class="viewcode-back" href="../../../../api/qiskit.ignis.characterization.fitters.html#qiskit.ignis.characterization.BaseFitter.fit_data">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">fit_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qid</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">p0</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">series</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">fit_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qid</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">p0</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">series</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Fit the curve.</span>
 <span class="sd">        Computes self._params and self._params_err:</span>
@@ -469,7 +469,7 @@
                                <span class="n">p0</span><span class="o">=</span><span class="n">p0</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="n">bounds</span><span class="p">)</span>
 
                 <span class="bp">self</span><span class="o">.</span><span class="n">_params</span><span class="p">[</span><span class="n">serieslbl</span><span class="p">][</span><span class="n">qind</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp_params</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_params_err</span><span class="p">[</span><span class="n">serieslbl</span><span class="p">][</span><span class="n">qind</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">fcov</span><span class="p">))</span></div>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_params_err</span><span class="p">[</span><span class="n">serieslbl</span><span class="p">][</span><span class="n">qind</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">fcov</span><span class="p">))</span>
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">_exp_fit_fun</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
@@ -501,10 +501,10 @@
 <span class="sd">        Function used to fit gate calibrations</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">return</span> <span class="n">a</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">((</span><span class="n">theta0</span><span class="o">+</span><span class="n">thetaerr</span><span class="p">)</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">phi0</span> <span class="o">+</span> <span class="n">phierr</span><span class="p">)</span> <span class="o">+</span> <span class="n">c</span></div>
+        <span class="k">return</span> <span class="n">a</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">((</span><span class="n">theta0</span><span class="o">+</span><span class="n">thetaerr</span><span class="p">)</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">phi0</span> <span class="o">+</span> <span class="n">phierr</span><span class="p">)</span> <span class="o">+</span> <span class="n">c</span>
 
 
-<div class="viewcode-block" id="BaseCoherenceFitter"><a class="viewcode-back" href="../../../../api/qiskit.ignis.characterization.fitters.html#qiskit.ignis.characterization.BaseCoherenceFitter">[ドキュメント]</a><span class="k">class</span> <span class="nc">BaseCoherenceFitter</span><span class="p">(</span><span class="n">BaseFitter</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseCoherenceFitter"><a class="viewcode-back" href="../../../../api/qiskit.ignis.characterization.BaseCoherenceFitter.html#qiskit.ignis.characterization.BaseCoherenceFitter">[ドキュメント]</a><span class="k">class</span> <span class="nc">BaseCoherenceFitter</span><span class="p">(</span><span class="n">BaseFitter</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Base class for fitters of characteristic times</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -531,7 +531,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_time_index</span> <span class="o">=</span> <span class="n">time_index</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_time_unit</span> <span class="o">=</span> <span class="n">time_unit</span>
 
-<div class="viewcode-block" id="BaseCoherenceFitter.time"><a class="viewcode-back" href="../../../../api/qiskit.ignis.characterization.fitters.html#qiskit.ignis.characterization.BaseCoherenceFitter.time">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qid</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">series</span><span class="o">=</span><span class="s1">&#39;0&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseCoherenceFitter.time"><a class="viewcode-back" href="../../../../api/qiskit.ignis.characterization.BaseCoherenceFitter.html#qiskit.ignis.characterization.BaseCoherenceFitter.time">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qid</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">series</span><span class="o">=</span><span class="s1">&#39;0&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return the characteristic time for qid and series</span>
 <span class="sd">        If qid==-1 return all the qubit data</span>
@@ -539,14 +539,14 @@
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_param</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_time_index</span><span class="p">,</span> <span class="n">qid</span><span class="p">,</span> <span class="n">series</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="BaseCoherenceFitter.time_err"><a class="viewcode-back" href="../../../../api/qiskit.ignis.characterization.fitters.html#qiskit.ignis.characterization.BaseCoherenceFitter.time_err">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">time_err</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qid</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">series</span><span class="o">=</span><span class="s1">&#39;0&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseCoherenceFitter.time_err"><a class="viewcode-back" href="../../../../api/qiskit.ignis.characterization.BaseCoherenceFitter.html#qiskit.ignis.characterization.BaseCoherenceFitter.time_err">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">time_err</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qid</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">series</span><span class="o">=</span><span class="s1">&#39;0&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return the error of the characteristic time</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_param</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_time_index</span><span class="p">,</span>
                                <span class="n">qid</span><span class="p">,</span> <span class="n">series</span><span class="p">,</span> <span class="n">err</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="BaseCoherenceFitter.plot"><a class="viewcode-back" href="../../../../api/qiskit.ignis.characterization.fitters.html#qiskit.ignis.characterization.BaseCoherenceFitter.plot">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qind</span><span class="p">,</span> <span class="n">series</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">show_plot</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseCoherenceFitter.plot"><a class="viewcode-back" href="../../../../api/qiskit.ignis.characterization.BaseCoherenceFitter.html#qiskit.ignis.characterization.BaseCoherenceFitter.plot">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qind</span><span class="p">,</span> <span class="n">series</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">show_plot</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Plot coherence data.</span>
 
@@ -588,7 +588,7 @@
         <span class="k">return</span> <span class="n">ax</span></div></div>
 
 
-<div class="viewcode-block" id="BaseGateFitter"><a class="viewcode-back" href="../../../../api/qiskit.ignis.characterization.fitters.html#qiskit.ignis.characterization.BaseGateFitter">[ドキュメント]</a><span class="k">class</span> <span class="nc">BaseGateFitter</span><span class="p">(</span><span class="n">BaseFitter</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseGateFitter"><a class="viewcode-back" href="../../../../api/qiskit.ignis.characterization.BaseGateFitter.html#qiskit.ignis.characterization.BaseGateFitter">[ドキュメント]</a><span class="k">class</span> <span class="nc">BaseGateFitter</span><span class="p">(</span><span class="n">BaseFitter</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Base class for fitters of gate errors</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -609,7 +609,7 @@
                             <span class="n">fit_p0</span><span class="p">,</span> <span class="n">fit_bounds</span><span class="p">,</span> <span class="n">circuit_names</span><span class="p">,</span>
                             <span class="n">series</span><span class="p">,</span> <span class="n">expected_state</span><span class="p">)</span>
 
-<div class="viewcode-block" id="BaseGateFitter.plot"><a class="viewcode-back" href="../../../../api/qiskit.ignis.characterization.fitters.html#qiskit.ignis.characterization.BaseGateFitter.plot">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qind</span><span class="p">,</span> <span class="n">series</span><span class="o">=</span><span class="s1">&#39;0&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">show_plot</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseGateFitter.plot"><a class="viewcode-back" href="../../../../api/qiskit.ignis.characterization.BaseGateFitter.html#qiskit.ignis.characterization.BaseGateFitter.plot">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qind</span><span class="p">,</span> <span class="n">series</span><span class="o">=</span><span class="s1">&#39;0&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">show_plot</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Plot err data.</span>
 
@@ -650,7 +650,7 @@
         <span class="k">return</span> <span class="n">ax</span></div></div>
 
 
-<div class="viewcode-block" id="build_counts_dict_from_list"><a class="viewcode-back" href="../../../../api/qiskit.ignis.characterization.fitters.html#qiskit.ignis.characterization.build_counts_dict_from_list">[ドキュメント]</a><span class="k">def</span> <span class="nf">build_counts_dict_from_list</span><span class="p">(</span><span class="n">count_list</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">build_counts_dict_from_list</span><span class="p">(</span><span class="n">count_list</span><span class="p">):</span>
 
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Add dictionary counts together</span>
@@ -665,7 +665,7 @@
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">countdict</span><span class="p">:</span>
             <span class="n">new_count_dict</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">countdict</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">+</span><span class="n">new_count_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">new_count_dict</span></div>
+    <span class="k">return</span> <span class="n">new_count_dict</span>
 </pre></div>
 
         </div>

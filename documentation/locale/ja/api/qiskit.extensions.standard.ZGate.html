@@ -1278,20 +1278,26 @@
 <tr class="row-odd"><td><a class="reference internal" href="#qiskit.extensions.standard.ZGate.assemble" title="qiskit.extensions.standard.ZGate.assemble"><code class="xref py py-obj docutils literal notranslate"><span class="pre">assemble</span></code></a>()</td>
 <td>Assemble a QasmQobjInstruction</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.extensions.standard.ZGate.c_if" title="qiskit.extensions.standard.ZGate.c_if"><code class="xref py py-obj docutils literal notranslate"><span class="pre">c_if</span></code></a>(classical,&nbsp;val)</td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.extensions.standard.ZGate.broadcast_arguments" title="qiskit.extensions.standard.ZGate.broadcast_arguments"><code class="xref py py-obj docutils literal notranslate"><span class="pre">broadcast_arguments</span></code></a>(qargs,&nbsp;cargs)</td>
+<td>Validation and handling of the arguments and its relationship.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.extensions.standard.ZGate.c_if" title="qiskit.extensions.standard.ZGate.c_if"><code class="xref py py-obj docutils literal notranslate"><span class="pre">c_if</span></code></a>(classical,&nbsp;val)</td>
 <td>Add classical control on register classical and value val.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.extensions.standard.ZGate.copy" title="qiskit.extensions.standard.ZGate.copy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">copy</span></code></a>([name])</td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.extensions.standard.ZGate.copy" title="qiskit.extensions.standard.ZGate.copy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">copy</span></code></a>([name])</td>
 <td>shallow copy of the instruction.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.extensions.standard.ZGate.inverse" title="qiskit.extensions.standard.ZGate.inverse"><code class="xref py py-obj docutils literal notranslate"><span class="pre">inverse</span></code></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.extensions.standard.ZGate.inverse" title="qiskit.extensions.standard.ZGate.inverse"><code class="xref py py-obj docutils literal notranslate"><span class="pre">inverse</span></code></a>()</td>
 <td>Invert this gate.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.extensions.standard.ZGate.mirror" title="qiskit.extensions.standard.ZGate.mirror"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mirror</span></code></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.extensions.standard.ZGate.mirror" title="qiskit.extensions.standard.ZGate.mirror"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mirror</span></code></a>()</td>
 <td>For a composite instruction, reverse the order of sub-gates.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.extensions.standard.ZGate.qasm" title="qiskit.extensions.standard.ZGate.qasm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qasm</span></code></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.extensions.standard.ZGate.qasm" title="qiskit.extensions.standard.ZGate.qasm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qasm</span></code></a>()</td>
 <td>Return a default OpenQASM string for the instruction.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.extensions.standard.ZGate.repeat" title="qiskit.extensions.standard.ZGate.repeat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">repeat</span></code></a>(n)</td>
+<td>Creates an instruction with <cite>gate</cite> repeated <cite>n</cite> amount of times.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#qiskit.extensions.standard.ZGate.to_matrix" title="qiskit.extensions.standard.ZGate.to_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_matrix</span></code></a>()</td>
 <td>Return a Numpy.array for the X gate.</td>
@@ -1322,6 +1328,65 @@
 <dt id="qiskit.extensions.standard.ZGate.assemble">
 <code class="descname">assemble</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.standard.ZGate.assemble" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Assemble a QasmQobjInstruction</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.extensions.standard.ZGate.broadcast_arguments">
+<code class="descname">broadcast_arguments</code><span class="sig-paren">(</span><em>qargs</em>, <em>cargs</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.standard.ZGate.broadcast_arguments" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Validation and handling of the arguments and its relationship.</p>
+<p>For example:
+<cite>cx([q[0],q[1]], q[2])</cite> means <cite>cx(q[0], q[2]); cx(q[1], q[2])</cite>. This method
+yields the arguments in the right grouping. In the given example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ow">in</span><span class="p">:</span> <span class="p">[[</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">]],[]</span>
+<span class="n">outs</span><span class="p">:</span> <span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">]],</span> <span class="p">[]</span>
+      <span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">]],</span> <span class="p">[]</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>The general broadcasting rules are:</dt>
+<dd><ul class="first last">
+<li><p class="first">If len(qargs) == 1:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]],[</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">If len(qargs) == 2:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[[</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="p">[</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">]]]</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+<span class="p">[[</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">]]]</span>       <span class="o">-&gt;</span> <span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+<span class="p">[[</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="p">[</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]]]</span>       <span class="o">-&gt;</span> <span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">If len(qargs) &gt;= 3:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="p">[</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span>  <span class="o">...</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">...</span><span class="p">],</span> <span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first simple">
+<li><strong>qargs</strong> (<em>List</em>) -- List of quantum bit arguments.</li>
+<li><strong>cargs</strong> (<em>List</em>) -- List of classical bit arguments.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first">A tuple with single arguments.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><p class="first">Tuple(List, List)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal notranslate"><span class="pre">QiskitError</span></code> -- If the input is not valid. For example, the number of
+arguments does not match the gate expectation.</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
@@ -1383,6 +1448,26 @@ It does not invert any gate.</p>
 <dd><p>Return a default OpenQASM string for the instruction.</p>
 <p>Derived instructions may override this to print in a
 different format (e.g. measure q[0] -&gt; c[0];).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.extensions.standard.ZGate.repeat">
+<code class="descname">repeat</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.standard.ZGate.repeat" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Creates an instruction with <cite>gate</cite> repeated <cite>n</cite> amount of times.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><strong>n</strong> (<em>int</em>) -- Number of times to repeat the instruction</td>
+</tr>
+<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body">Containing the definition.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><a class="reference internal" href="qiskit.circuit.Instruction.html#qiskit.circuit.Instruction" title="qiskit.circuit.Instruction">Instruction</a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal notranslate"><span class="pre">QiskitError</span></code> -- If n &lt; 1.</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">

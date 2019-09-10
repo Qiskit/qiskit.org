@@ -441,13 +441,13 @@
         <span class="sd">&quot;&quot;&quot;Return indexed operation.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">item</span><span class="p">]</span>
 
-    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="QuantumCircuit.cast"><a class="viewcode-back" href="../../../api/qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit.cast">[ドキュメント]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">cast</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">_type</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Best effort to cast value to type. Otherwise, returns the value.&quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">_type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
         <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
-            <span class="k">return</span> <span class="n">value</span>
+            <span class="k">return</span> <span class="n">value</span></div>
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">_bit_argument_conversion</span><span class="p">(</span><span class="n">bit_representation</span><span class="p">,</span> <span class="n">in_array</span><span class="p">):</span>
@@ -489,7 +489,7 @@
                                                                <span class="nb">type</span><span class="p">(</span><span class="n">bit_representation</span><span class="p">)))</span>
         <span class="k">return</span> <span class="n">ret</span>
 
-    <span class="k">def</span> <span class="nf">qbit_argument_conversion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qubit_representation</span><span class="p">):</span>
+<div class="viewcode-block" id="QuantumCircuit.qbit_argument_conversion"><a class="viewcode-back" href="../../../api/qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit.qbit_argument_conversion">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">qbit_argument_conversion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qubit_representation</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Converts several qubit representations (such as indexes, range, etc)</span>
 <span class="sd">        into a list of qubits.</span>
@@ -500,9 +500,9 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            List(tuple): Where each tuple is a qubit.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">QuantumCircuit</span><span class="o">.</span><span class="n">_bit_argument_conversion</span><span class="p">(</span><span class="n">qubit_representation</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">qubits</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">QuantumCircuit</span><span class="o">.</span><span class="n">_bit_argument_conversion</span><span class="p">(</span><span class="n">qubit_representation</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">qubits</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">cbit_argument_conversion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clbit_representation</span><span class="p">):</span>
+<div class="viewcode-block" id="QuantumCircuit.cbit_argument_conversion"><a class="viewcode-back" href="../../../api/qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit.cbit_argument_conversion">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">cbit_argument_conversion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clbit_representation</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Converts several classical bit representations (such as indexes, range, etc)</span>
 <span class="sd">        into a list of classical bits.</span>
@@ -513,7 +513,7 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            List(tuple): Where each tuple is a classical bit.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">QuantumCircuit</span><span class="o">.</span><span class="n">_bit_argument_conversion</span><span class="p">(</span><span class="n">clbit_representation</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">clbits</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">QuantumCircuit</span><span class="o">.</span><span class="n">_bit_argument_conversion</span><span class="p">(</span><span class="n">clbit_representation</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">clbits</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="QuantumCircuit.append"><a class="viewcode-back" href="../../../api/qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit.append">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">append</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instruction</span><span class="p">,</span> <span class="n">qargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cargs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Append one or more instructions to the end of the circuit, modifying</span>
