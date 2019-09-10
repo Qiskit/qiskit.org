@@ -35,8 +35,12 @@ class PageAqua extends localize(i18next)(LitElement) {
       StackListStyles,
       css`
         :host {
-          --app-section-background-color: var(--qiskit-aqua-color);
+          --app-section-background-color: var(--qiskit-common-background-color);
           --app-section-color: #000000;
+        }
+
+        header {
+          background-color: var(--qiskit-aqua-color);
         }
 
         section.colored .row .description .actions vaadin-button {
@@ -58,7 +62,7 @@ class PageAqua extends localize(i18next)(LitElement) {
     // prettier-ignore
     return html`
       <header>
-        <img src="images/qiskit-aqua-logo.png" .alt=${i18next.t('pages.aqua.altLogo')}>
+        <img src="images/qiskit-aqua-logo.svg" .alt=${i18next.t('pages.aqua.altLogo')}>
         <div>
           <h1>
             ${i18next.t('pages.aqua.headerTitle')}
