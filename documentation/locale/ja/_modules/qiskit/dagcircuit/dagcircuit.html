@@ -741,7 +741,7 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="n">DAGCircuitError</span><span class="p">(</span><span class="s2">&quot;bad node type </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">nd</span><span class="o">.</span><span class="n">type</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">idle_wires</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.idle_wires"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.idle_wires">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">idle_wires</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return idle wires.</span>
 
 <span class="sd">        Yields:</span>
@@ -750,7 +750,7 @@
         <span class="k">for</span> <span class="n">wire</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">wires</span><span class="p">:</span>
             <span class="n">nodes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes_on_wire</span><span class="p">(</span><span class="n">wire</span><span class="p">,</span> <span class="n">only_ops</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">([</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">])</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-                <span class="k">yield</span> <span class="n">wire</span>
+                <span class="k">yield</span> <span class="n">wire</span></div>
 
 <div class="viewcode-block" id="DAGCircuit.size"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.size">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the number of operations.&quot;&quot;&quot;</span>
@@ -779,17 +779,17 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wires</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">num_qubits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.num_qubits"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.num_qubits">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">num_qubits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the total number of qubits used by the circuit.</span>
 <span class="sd">           num_qubits() replaces former use of width().</span>
 <span class="sd">           DAGCircuit.width() now returns qubits + clbits for</span>
 <span class="sd">           consistency with Circuit.width() [qiskit-terra #2564].</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wires</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_clbits</span><span class="p">()</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wires</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_clbits</span><span class="p">()</span></div>
 
-    <span class="k">def</span> <span class="nf">num_clbits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.num_clbits"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.num_clbits">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">num_clbits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the total number of classical bits used by the circuit.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">creg</span><span class="o">.</span><span class="n">size</span> <span class="k">for</span> <span class="n">creg</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cregs</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+        <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">creg</span><span class="o">.</span><span class="n">size</span> <span class="k">for</span> <span class="n">creg</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cregs</span><span class="o">.</span><span class="n">values</span><span class="p">())</span></div>
 
 <div class="viewcode-block" id="DAGCircuit.num_tensor_factors"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.num_tensor_factors">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">num_tensor_factors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Compute how many components the circuit can decompose into.&quot;&quot;&quot;</span>
@@ -1118,9 +1118,9 @@
                 <span class="n">three_q_gates</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">three_q_gates</span></div>
 
-    <span class="k">def</span> <span class="nf">longest_path</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.longest_path"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.longest_path">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">longest_path</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns the longest path in the dag as a list of DAGNodes.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">nx</span><span class="o">.</span><span class="n">dag_longest_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_multi_graph</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">nx</span><span class="o">.</span><span class="n">dag_longest_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_multi_graph</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="DAGCircuit.successors"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.successors">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">successors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns iterator of the successors of a node as DAGNodes.&quot;&quot;&quot;</span>
@@ -1415,7 +1415,7 @@
                 <span class="n">op_dict</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="k">return</span> <span class="n">op_dict</span></div>
 
-    <span class="k">def</span> <span class="nf">count_ops_longest_path</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.count_ops_longest_path"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.count_ops_longest_path">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">count_ops_longest_path</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Count the occurrences of operation names on the longest path.</span>
 
 <span class="sd">        Returns a dictionary of counts keyed on the operation name.</span>
@@ -1429,7 +1429,7 @@
                 <span class="n">op_dict</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">op_dict</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">return</span> <span class="n">op_dict</span>
+        <span class="k">return</span> <span class="n">op_dict</span></div>
 
 <div class="viewcode-block" id="DAGCircuit.properties"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.properties">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">properties</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return a dictionary of circuit properties.&quot;&quot;&quot;</span>
@@ -1442,7 +1442,7 @@
                    <span class="s2">&quot;operations&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">count_ops</span><span class="p">()}</span>
         <span class="k">return</span> <span class="n">summary</span></div>
 
-    <span class="k">def</span> <span class="nf">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;color&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.draw"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.draw">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;color&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Draws the dag circuit.</span>
 
@@ -1460,7 +1460,7 @@
 <span class="sd">                otherwise None.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">qiskit.visualization.dag_visualization</span> <span class="k">import</span> <span class="n">dag_drawer</span>
-        <span class="k">return</span> <span class="n">dag_drawer</span><span class="p">(</span><span class="n">dag</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">scale</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">style</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">dag_drawer</span><span class="p">(</span><span class="n">dag</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">scale</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">style</span><span class="p">)</span></div></div>
 </pre></div>
 
         </div>

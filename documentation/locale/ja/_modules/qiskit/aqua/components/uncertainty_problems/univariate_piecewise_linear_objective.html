@@ -196,7 +196,7 @@
 <span class="kn">from</span> <span class="nn">qiskit.aqua.utils</span> <span class="k">import</span> <span class="n">CircuitFactory</span>
 
 
-<div class="viewcode-block" id="UnivariatePiecewiseLinearObjective"><a class="viewcode-back" href="../../../../../api/qiskit.aqua.components.uncertainty_problems.univariate_piecewise_linear_objective.html#qiskit.aqua.components.uncertainty_problems.UnivariatePiecewiseLinearObjective">[ドキュメント]</a><span class="k">class</span> <span class="nc">UnivariatePiecewiseLinearObjective</span><span class="p">(</span><span class="n">CircuitFactory</span><span class="p">):</span>
+<div class="viewcode-block" id="UnivariatePiecewiseLinearObjective"><a class="viewcode-back" href="../../../../../api/qiskit.aqua.components.uncertainty_problems.UnivariatePiecewiseLinearObjective.html#qiskit.aqua.components.uncertainty_problems.UnivariatePiecewiseLinearObjective">[ドキュメント]</a><span class="k">class</span> <span class="nc">UnivariatePiecewiseLinearObjective</span><span class="p">(</span><span class="n">CircuitFactory</span><span class="p">):</span>
 
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Univariate Piecewise Linear Objective Function, applies controlled Y-rotation to target qubit.</span>
@@ -321,7 +321,7 @@
             <span class="c1"># create piecewise linear Y rotation</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_pwl_ry</span> <span class="o">=</span> <span class="kc">None</span>
 
-<div class="viewcode-block" id="UnivariatePiecewiseLinearObjective.value_to_estimation"><a class="viewcode-back" href="../../../../../api/qiskit.aqua.components.uncertainty_problems.univariate_piecewise_linear_objective.html#qiskit.aqua.components.uncertainty_problems.UnivariatePiecewiseLinearObjective.value_to_estimation">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">value_to_estimation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+<div class="viewcode-block" id="UnivariatePiecewiseLinearObjective.value_to_estimation"><a class="viewcode-back" href="../../../../../api/qiskit.aqua.components.uncertainty_problems.UnivariatePiecewiseLinearObjective.html#qiskit.aqua.components.uncertainty_problems.UnivariatePiecewiseLinearObjective.value_to_estimation">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">value_to_estimation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c_approx</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="c1"># map normalized value back to estimation</span>
@@ -333,10 +333,10 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">value</span></div>
 
-<div class="viewcode-block" id="UnivariatePiecewiseLinearObjective.required_ancillas"><a class="viewcode-back" href="../../../../../api/qiskit.aqua.components.uncertainty_problems.univariate_piecewise_linear_objective.html#qiskit.aqua.components.uncertainty_problems.UnivariatePiecewiseLinearObjective.required_ancillas">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">required_ancillas</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="UnivariatePiecewiseLinearObjective.required_ancillas"><a class="viewcode-back" href="../../../../../api/qiskit.aqua.components.uncertainty_problems.UnivariatePiecewiseLinearObjective.html#qiskit.aqua.components.uncertainty_problems.UnivariatePiecewiseLinearObjective.required_ancillas">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">required_ancillas</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pwl_ry</span><span class="o">.</span><span class="n">required_ancillas</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="UnivariatePiecewiseLinearObjective.build"><a class="viewcode-back" href="../../../../../api/qiskit.aqua.components.uncertainty_problems.univariate_piecewise_linear_objective.html#qiskit.aqua.components.uncertainty_problems.UnivariatePiecewiseLinearObjective.build">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qc</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">q_ancillas</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="UnivariatePiecewiseLinearObjective.build"><a class="viewcode-back" href="../../../../../api/qiskit.aqua.components.uncertainty_problems.UnivariatePiecewiseLinearObjective.html#qiskit.aqua.components.uncertainty_problems.UnivariatePiecewiseLinearObjective.build">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qc</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">q_ancillas</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
         <span class="n">q_state</span> <span class="o">=</span> <span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">i_state</span><span class="p">]</span>
         <span class="n">q_objective</span> <span class="o">=</span> <span class="n">q</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">i_objective</span><span class="p">]</span>

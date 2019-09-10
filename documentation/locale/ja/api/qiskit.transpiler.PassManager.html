@@ -1260,13 +1260,16 @@
 <tr class="row-odd"><td><a class="reference internal" href="#qiskit.transpiler.PassManager.append" title="qiskit.transpiler.PassManager.append"><code class="xref py py-obj docutils literal notranslate"><span class="pre">append</span></code></a>(passes[,&nbsp;max_iteration])</td>
 <td>Append a Pass to the schedule of passes.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.transpiler.PassManager.passes" title="qiskit.transpiler.PassManager.passes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">passes</span></code></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.transpiler.PassManager.draw" title="qiskit.transpiler.PassManager.draw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">draw</span></code></a>([filename,&nbsp;style,&nbsp;raw])</td>
+<td>Draws the pass manager.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.transpiler.PassManager.passes" title="qiskit.transpiler.PassManager.passes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">passes</span></code></a>()</td>
 <td>Return a list structure of the appended passes and its options.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.transpiler.PassManager.reset" title="qiskit.transpiler.PassManager.reset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reset</span></code></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.transpiler.PassManager.reset" title="qiskit.transpiler.PassManager.reset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reset</span></code></a>()</td>
 <td>Reset the pass manager instance</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.transpiler.PassManager.run" title="qiskit.transpiler.PassManager.run"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run</span></code></a>(circuit)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.transpiler.PassManager.run" title="qiskit.transpiler.PassManager.run"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run</span></code></a>(circuit)</td>
 <td>Run all the passes on a QuantumCircuit</td>
 </tr>
 </tbody>
@@ -1281,7 +1284,7 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first simple">
-<li><strong>passes</strong> (<em>list</em><em>[</em><a class="reference internal" href="qiskit.transpiler.basepasses.html#qiskit.transpiler.basepasses.BasePass" title="qiskit.transpiler.basepasses.BasePass"><em>BasePass</em></a><em>] or </em><a class="reference internal" href="qiskit.transpiler.basepasses.html#qiskit.transpiler.basepasses.BasePass" title="qiskit.transpiler.basepasses.BasePass"><em>BasePass</em></a>) -- pass(es) to be added to schedule</li>
+<li><strong>passes</strong> (<em>list</em><em>[</em><em>BasePass</em><em>] or </em><em>BasePass</em>) -- pass(es) to be added to schedule</li>
 <li><strong>max_iteration</strong> (<em>int</em>) -- max number of iterations of passes. Default: 1000</li>
 <li><strong>flow_controller_conditions</strong> (<em>kwargs</em>) -- See add_flow_controller(): Dictionary of</li>
 <li><strong>flow plugins. Default</strong> (<em>control</em>) -- <ul>
@@ -1297,6 +1300,46 @@ Default: <cite>lambda x: True # i.e. passes run</cite></li>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference internal" href="qiskit.transpiler.TranspilerError.html#qiskit.transpiler.TranspilerError" title="qiskit.transpiler.TranspilerError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TranspilerError</span></code></a> -- if a pass in passes is not a proper pass.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.transpiler.PassManager.draw">
+<code class="descname">draw</code><span class="sig-paren">(</span><em>filename=None</em>, <em>style=None</em>, <em>raw=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/transpiler/passmanager.html#PassManager.draw"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.transpiler.PassManager.draw" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Draws the pass manager.</p>
+<p>This function needs <cite>pydot &lt;https://github.com/erocarrera/pydot&gt;</cite>, which in turn needs
+Graphviz &lt;<a class="reference external" href="https://www.graphviz.org/">https://www.graphviz.org/</a>&gt;` to be installed.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first simple">
+<li><strong>filename</strong> (<em>str</em><em> or </em><em>None</em>) -- file path to save image to</li>
+<li><strong>style</strong> (<em>dict</em><em> or </em><em>OrderedDict</em>) -- keys are the pass classes and the values are
+the colors to make them. An example can be seen in the DEFAULT_STYLE. An ordered
+dict can be used to ensure a priority coloring when pass falls into multiple
+categories. Any values not included in the provided dict will be filled in from
+the default dict</li>
+<li><strong>raw</strong> (<em>Bool</em>) -- True if you want to save the raw Dot output not an image. The
+default is False.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first"><dl class="docutils">
+<dt>an in-memory representation of the pass manager. Or None if</dt>
+<dd><p class="first last">no image was generated or PIL is not installed.</p>
+</dd>
+</dl>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><p class="first">PIL.Image or None</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ImportError</span></code> -- when nxpd or pydot not installed.</p>
 </td>
 </tr>
 </tbody>

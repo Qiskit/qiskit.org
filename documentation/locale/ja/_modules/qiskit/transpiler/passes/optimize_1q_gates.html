@@ -215,9 +215,9 @@
 <span class="n">_CHOP_THRESHOLD</span> <span class="o">=</span> <span class="mf">1e-15</span>
 
 
-<div class="viewcode-block" id="Optimize1qGates"><a class="viewcode-back" href="../../../../api/qiskit.transpiler.passes.optimize_1q_gates.html#qiskit.transpiler.passes.Optimize1qGates">[ドキュメント]</a><span class="k">class</span> <span class="nc">Optimize1qGates</span><span class="p">(</span><span class="n">TransformationPass</span><span class="p">):</span>
+<div class="viewcode-block" id="Optimize1qGates"><a class="viewcode-back" href="../../../../api/qiskit.transpiler.passes.Optimize1qGates.html#qiskit.transpiler.passes.Optimize1qGates">[ドキュメント]</a><span class="k">class</span> <span class="nc">Optimize1qGates</span><span class="p">(</span><span class="n">TransformationPass</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Simplify runs of single qubit gates in the [&quot;u1&quot;, &quot;u2&quot;, &quot;u3&quot;, &quot;cx&quot;, &quot;id&quot;] basis.&quot;&quot;&quot;</span>
-<div class="viewcode-block" id="Optimize1qGates.run"><a class="viewcode-back" href="../../../../api/qiskit.transpiler.passes.optimize_1q_gates.html#qiskit.transpiler.passes.Optimize1qGates.run">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dag</span><span class="p">):</span>
+<div class="viewcode-block" id="Optimize1qGates.run"><a class="viewcode-back" href="../../../../api/qiskit.transpiler.passes.Optimize1qGates.html#qiskit.transpiler.passes.Optimize1qGates.run">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dag</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return a new circuit that has been optimized.&quot;&quot;&quot;</span>
         <span class="n">runs</span> <span class="o">=</span> <span class="n">dag</span><span class="o">.</span><span class="n">collect_runs</span><span class="p">([</span><span class="s2">&quot;u1&quot;</span><span class="p">,</span> <span class="s2">&quot;u2&quot;</span><span class="p">,</span> <span class="s2">&quot;u3&quot;</span><span class="p">])</span>
         <span class="n">runs</span> <span class="o">=</span> <span class="n">_split_runs_on_parameters</span><span class="p">(</span><span class="n">runs</span><span class="p">)</span>
@@ -371,7 +371,7 @@
 
         <span class="k">return</span> <span class="n">dag</span></div>
 
-<div class="viewcode-block" id="Optimize1qGates.compose_u3"><a class="viewcode-back" href="../../../../api/qiskit.transpiler.passes.optimize_1q_gates.html#qiskit.transpiler.passes.Optimize1qGates.compose_u3">[ドキュメント]</a>    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="Optimize1qGates.compose_u3"><a class="viewcode-back" href="../../../../api/qiskit.transpiler.passes.Optimize1qGates.html#qiskit.transpiler.passes.Optimize1qGates.compose_u3">[ドキュメント]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">compose_u3</span><span class="p">(</span><span class="n">theta1</span><span class="p">,</span> <span class="n">phi1</span><span class="p">,</span> <span class="n">lambda1</span><span class="p">,</span> <span class="n">theta2</span><span class="p">,</span> <span class="n">phi2</span><span class="p">,</span> <span class="n">lambda2</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return a triple theta, phi, lambda for the product.</span>
 
@@ -389,7 +389,7 @@
 
         <span class="k">return</span> <span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">lamb</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Optimize1qGates.yzy_to_zyz"><a class="viewcode-back" href="../../../../api/qiskit.transpiler.passes.optimize_1q_gates.html#qiskit.transpiler.passes.Optimize1qGates.yzy_to_zyz">[ドキュメント]</a>    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="Optimize1qGates.yzy_to_zyz"><a class="viewcode-back" href="../../../../api/qiskit.transpiler.passes.Optimize1qGates.html#qiskit.transpiler.passes.Optimize1qGates.yzy_to_zyz">[ドキュメント]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">yzy_to_zyz</span><span class="p">(</span><span class="n">xi</span><span class="p">,</span> <span class="n">theta1</span><span class="p">,</span> <span class="n">theta2</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">):</span>  <span class="c1"># pylint: disable=invalid-name</span>
         <span class="sd">&quot;&quot;&quot;Express a Y.Z.Y single qubit gate as a Z.Y.Z gate.</span>
 

@@ -34,7 +34,7 @@
        </script>
         <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
     
-    <title>qiskit.extensions.quantum_initializer.diag &#8212; Qiskit 0.11.2 ドキュメント</title>
+    <title>qiskit.extensions.quantum_initializer.diag &#8212; Qiskit 0.12.0 ドキュメント</title>
 
     <link rel="stylesheet" href="../../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -63,15 +63,16 @@
 <body>
   <header>
     <div class="toolbar limited-width">
-      <a href="/" class="home">Qiskit ™</a>
+      <a href="/" class="home">Qiskit</a>
       <nav class="first">
         <a href="/terra">Terra</a>
         <a href="/aer">Aer</a>
         <a href="/aqua">Aqua</a>
         <a href="/ignis">Ignis</a>
+        <a href="/ibmq">IBM Q</a>
       </nav>
       <nav class="second">
-        <a class="external" id="educationLink" href="https://community.qiskit.org/education" target="_blank">Education</a>
+        <a class="external" id="educationLink" href="https://community.qiskit.org/education">Community</a>
         <a class="external" id="tutorialsLink" href="https://quantum-computing.ibm.com/jupyter/tutorial/1_start_here.ipynb" target="_blank">Tutorials</a>
         <a class="external" href="/documentation" selected>API Documentation</a>
       </nav>
@@ -90,10 +91,13 @@
     
 
 <div class="languages" >
+    <span>Select a language: </span>
+	<span>
 	    <select id="language" name="languages">
 	        <option value="en">English</option>
-	        <option value="ja">Japanese</option>
-	    </select>
+	        <option value="ja">日本語</option>
+        </select>
+    </span>
 </div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
@@ -111,7 +115,7 @@
     </div>
 </div>
 <div class="globaltoc">
-  <span class="mdl-layout-title toc">Table Of Contents</span>
+  <span class="mdl-layout-title toc">目次</span>
   
   
   
@@ -135,10 +139,13 @@
     
 
 <div class="languages" >
+    <span>Select a language: </span>
+	<span>
 	    <select id="language" name="languages">
 	        <option value="en">English</option>
-	        <option value="ja">Japanese</option>
-	    </select>
+	        <option value="ja">日本語</option>
+        </select>
+    </span>
 </div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
@@ -156,7 +163,7 @@
     </div>
 </div>
 <div class="globaltoc">
-  <span class="mdl-layout-title toc">Table Of Contents</span>
+  <span class="mdl-layout-title toc">目次</span>
   
   
   
@@ -208,7 +215,7 @@
 <span class="n">_EPS</span> <span class="o">=</span> <span class="mf">1e-10</span>  <span class="c1"># global variable used to chop very small numbers to zero</span>
 
 
-<div class="viewcode-block" id="DiagGate"><a class="viewcode-back" href="../../../../api/qiskit.extensions.quantum_initializer.diag.html#qiskit.circuit.quantumcircuit.DiagGate">[ドキュメント]</a><span class="k">class</span> <span class="nc">DiagGate</span><span class="p">(</span><span class="n">Gate</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">DiagGate</span><span class="p">(</span><span class="n">Gate</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    diag =  list of the 2^k diagonal entries (for a diagonal gate on k qubits). Must contain at</span>
 <span class="sd">    least two entries.</span>
@@ -263,7 +270,7 @@
             <span class="n">target_qubit</span> <span class="o">=</span> <span class="n">q</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">num_qubits</span> <span class="o">-</span> <span class="n">num_act_qubits</span><span class="p">]</span>
             <span class="n">circuit</span><span class="o">.</span><span class="n">ucz</span><span class="p">(</span><span class="n">angles_rz</span><span class="p">,</span> <span class="n">contr_qubits</span><span class="p">,</span> <span class="n">target_qubit</span><span class="p">)</span>
             <span class="n">n</span> <span class="o">//=</span> <span class="mi">2</span>
-        <span class="k">return</span> <span class="n">circuit</span></div>
+        <span class="k">return</span> <span class="n">circuit</span>
 
 
 <span class="c1"># extract a Rz rotation (angle given by first output) such that exp(j*phase)*Rz(z_angle)</span>
@@ -274,7 +281,7 @@
     <span class="k">return</span> <span class="n">phase</span><span class="p">,</span> <span class="n">z_angle</span>
 
 
-<div class="viewcode-block" id="diag_gate"><a class="viewcode-back" href="../../../../api/qiskit.extensions.quantum_initializer.diag.html#qiskit.circuit.quantumcircuit.diag_gate">[ドキュメント]</a><span class="k">def</span> <span class="nf">diag_gate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">diag</span><span class="p">,</span> <span class="n">qubit</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">diag_gate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">diag</span><span class="p">,</span> <span class="n">qubit</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Attach a diagonal gate to a circuit. The decomposition is based on Theorem 7 given in</span>
 <span class="sd">    &quot;Synthesis of Quantum Logic Circuits&quot; by Shende et al.</span>
@@ -311,7 +318,7 @@
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">qubit</span><span class="p">)</span> <span class="o">==</span> <span class="n">num_action_qubits</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;The number of diagonal entries does not correspond to&quot;</span>
                           <span class="s2">&quot; the number of qubits.&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">DiagGate</span><span class="p">(</span><span class="n">diag</span><span class="p">),</span> <span class="n">qubit</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">DiagGate</span><span class="p">(</span><span class="n">diag</span><span class="p">),</span> <span class="n">qubit</span><span class="p">)</span>
 
 
 <span class="n">QuantumCircuit</span><span class="o">.</span><span class="n">diag_gate</span> <span class="o">=</span> <span class="n">diag_gate</span>
@@ -355,11 +362,11 @@
         link.addEventListener('click', clickExternalLink);
     </script>
     <script>
-      var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
-      var prefix = '/documentation';
-      function getDefaultLanguage() {
-        return 'en';
-      }
+	    var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+	    var prefix = '/documentation';
+	    function getDefaultLanguage() {
+	      return 'en';
+	    }
       var el = document.getElementById('language');
       var optionsToSelect = ['en', 'ja']
       function changeLoc(evt) {
