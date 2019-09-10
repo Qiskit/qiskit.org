@@ -34,7 +34,7 @@
        </script>
         <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
     
-    <title>qiskit.extensions.quantum_initializer.ucy &#8212; Qiskit 0.11.2 ドキュメント</title>
+    <title>qiskit.extensions.quantum_initializer.ucy &#8212; Qiskit 0.12.0 ドキュメント</title>
 
     <link rel="stylesheet" href="../../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -63,15 +63,16 @@
 <body>
   <header>
     <div class="toolbar limited-width">
-      <a href="/" class="home">Qiskit ™</a>
+      <a href="/" class="home">Qiskit</a>
       <nav class="first">
         <a href="/terra">Terra</a>
         <a href="/aer">Aer</a>
         <a href="/aqua">Aqua</a>
         <a href="/ignis">Ignis</a>
+        <a href="/ibmq">IBM Q</a>
       </nav>
       <nav class="second">
-        <a class="external" id="educationLink" href="https://community.qiskit.org/education" target="_blank">Education</a>
+        <a class="external" id="educationLink" href="https://community.qiskit.org/education">Community</a>
         <a class="external" id="tutorialsLink" href="https://quantum-computing.ibm.com/jupyter/tutorial/1_start_here.ipynb" target="_blank">Tutorials</a>
         <a class="external" href="/documentation" selected>API Documentation</a>
       </nav>
@@ -90,10 +91,13 @@
     
 
 <div class="languages" >
+    <span>Select a language: </span>
+	<span>
 	    <select id="language" name="languages">
 	        <option value="en">English</option>
-	        <option value="ja">Japanese</option>
-	    </select>
+	        <option value="ja">日本語</option>
+        </select>
+    </span>
 </div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
@@ -111,7 +115,7 @@
     </div>
 </div>
 <div class="globaltoc">
-  <span class="mdl-layout-title toc">Table Of Contents</span>
+  <span class="mdl-layout-title toc">目次</span>
   
   
   
@@ -135,10 +139,13 @@
     
 
 <div class="languages" >
+    <span>Select a language: </span>
+	<span>
 	    <select id="language" name="languages">
 	        <option value="en">English</option>
-	        <option value="ja">Japanese</option>
-	    </select>
+	        <option value="ja">日本語</option>
+        </select>
+    </span>
 </div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
@@ -156,7 +163,7 @@
     </div>
 </div>
 <div class="globaltoc">
-  <span class="mdl-layout-title toc">Table Of Contents</span>
+  <span class="mdl-layout-title toc">目次</span>
   
   
   
@@ -200,7 +207,7 @@
 <span class="kn">from</span> <span class="nn">qiskit.extensions.quantum_initializer.ucrot</span> <span class="k">import</span> <span class="n">UCRot</span>
 
 
-<div class="viewcode-block" id="UCY"><a class="viewcode-back" href="../../../../api/qiskit.extensions.quantum_initializer.ucy.html#qiskit.circuit.quantumcircuit.UCY">[ドキュメント]</a><span class="k">class</span> <span class="nc">UCY</span><span class="p">(</span><span class="n">UCRot</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">UCY</span><span class="p">(</span><span class="n">UCRot</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Uniformly controlled rotations (also called multiplexed rotations).</span>
 <span class="sd">    The decomposition is based on</span>
@@ -212,10 +219,10 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">angle_list</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">angle_list</span><span class="p">,</span> <span class="s2">&quot;Y&quot;</span><span class="p">)</span></div>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">angle_list</span><span class="p">,</span> <span class="s2">&quot;Y&quot;</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="ucy"><a class="viewcode-back" href="../../../../api/qiskit.extensions.quantum_initializer.ucy.html#qiskit.circuit.quantumcircuit.ucy">[ドキュメント]</a><span class="k">def</span> <span class="nf">ucy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">angle_list</span><span class="p">,</span> <span class="n">q_controls</span><span class="p">,</span> <span class="n">q_target</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">ucy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">angle_list</span><span class="p">,</span> <span class="n">q_controls</span><span class="p">,</span> <span class="n">q_target</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Attach a uniformly controlled (also called multiplexed) Ry rotation gate to a circuit.</span>
 <span class="sd">    The decomposition is base on https://arxiv.org/pdf/quant-ph/0406176.pdf by Shende et al.</span>
@@ -259,7 +266,7 @@
     <span class="k">if</span> <span class="n">num_contr</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">q_controls</span><span class="p">):</span>
         <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;Number of controlled rotations does not correspond to&quot;</span>
                           <span class="s2">&quot; the number of control-qubits.&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">UCY</span><span class="p">(</span><span class="n">angle_list</span><span class="p">),</span> <span class="p">[</span><span class="n">q_target</span><span class="p">]</span> <span class="o">+</span> <span class="n">q_controls</span><span class="p">,</span> <span class="p">[])</span></div>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">UCY</span><span class="p">(</span><span class="n">angle_list</span><span class="p">),</span> <span class="p">[</span><span class="n">q_target</span><span class="p">]</span> <span class="o">+</span> <span class="n">q_controls</span><span class="p">,</span> <span class="p">[])</span>
 
 
 <span class="n">QuantumCircuit</span><span class="o">.</span><span class="n">ucy</span> <span class="o">=</span> <span class="n">ucy</span>
@@ -303,11 +310,11 @@
         link.addEventListener('click', clickExternalLink);
     </script>
     <script>
-      var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
-      var prefix = '/documentation';
-      function getDefaultLanguage() {
-        return 'en';
-      }
+	    var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+	    var prefix = '/documentation';
+	    function getDefaultLanguage() {
+	      return 'en';
+	    }
       var el = document.getElementById('language');
       var optionsToSelect = ['en', 'ja']
       function changeLoc(evt) {

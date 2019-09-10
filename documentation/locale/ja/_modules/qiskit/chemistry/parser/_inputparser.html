@@ -209,7 +209,7 @@
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="InputParser"><a class="viewcode-back" href="../../../../api/qiskit.chemistry.parser._inputparser.html#qiskit.chemistry.parser.InputParser">[ドキュメント]</a><span class="k">class</span> <span class="nc">InputParser</span><span class="p">(</span><span class="n">BaseParser</span><span class="p">):</span>
+<div class="viewcode-block" id="InputParser"><a class="viewcode-back" href="../../../../api/qiskit.chemistry.parser.InputParser.html#qiskit.chemistry.parser.InputParser">[ドキュメント]</a><span class="k">class</span> <span class="nc">InputParser</span><span class="p">(</span><span class="n">BaseParser</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Chemistry input file parser.&quot;&quot;&quot;</span>
 
     <span class="n">OPERATOR</span> <span class="o">=</span> <span class="s1">&#39;operator&#39;</span>
@@ -275,7 +275,7 @@
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">jsonfile</span><span class="p">)</span> <span class="k">as</span> <span class="n">json_file</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_substitutions</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">json_file</span><span class="p">)</span>
 
-<div class="viewcode-block" id="InputParser.parse"><a class="viewcode-back" href="../../../../api/qiskit.chemistry.parser._inputparser.html#qiskit.chemistry.parser.InputParser.parse">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="InputParser.parse"><a class="viewcode-back" href="../../../../api/qiskit.chemistry.parser.InputParser.html#qiskit.chemistry.parser.InputParser.parse">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Parse the data.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inputdict</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filename</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -341,7 +341,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_sections</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_order_sections</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_sections</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_original_sections</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_sections</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="InputParser.get_default_sections"><a class="viewcode-back" href="../../../../api/qiskit.chemistry.parser._inputparser.html#qiskit.chemistry.parser.InputParser.get_default_sections">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">get_default_sections</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="InputParser.get_default_sections"><a class="viewcode-back" href="../../../../api/qiskit.chemistry.parser.InputParser.html#qiskit.chemistry.parser.InputParser.get_default_sections">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">get_default_sections</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">properties</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">json_schema</span><span class="o">.</span><span class="n">get_default_sections</span><span class="p">()</span>
         <span class="n">driver_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_section_property</span><span class="p">(</span><span class="n">InputParser</span><span class="o">.</span><span class="n">DRIVER</span><span class="p">,</span> <span class="n">JSONSchema</span><span class="o">.</span><span class="n">NAME</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">driver_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -350,7 +350,7 @@
             <span class="p">}</span>
         <span class="k">return</span> <span class="n">properties</span></div>
 
-<div class="viewcode-block" id="InputParser.merge_default_values"><a class="viewcode-back" href="../../../../api/qiskit.chemistry.parser._inputparser.html#qiskit.chemistry.parser.InputParser.merge_default_values">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">merge_default_values</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="InputParser.merge_default_values"><a class="viewcode-back" href="../../../../api/qiskit.chemistry.parser.InputParser.html#qiskit.chemistry.parser.InputParser.merge_default_values">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">merge_default_values</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">section_names</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_section_names</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">JSONSchema</span><span class="o">.</span><span class="n">NAME</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">section_names</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">set_section</span><span class="p">(</span><span class="n">JSONSchema</span><span class="o">.</span><span class="n">NAME</span><span class="p">)</span>
@@ -397,11 +397,11 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_sections</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_order_sections</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_sections</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="InputParser.validate_merge_defaults"><a class="viewcode-back" href="../../../../api/qiskit.chemistry.parser._inputparser.html#qiskit.chemistry.parser.InputParser.validate_merge_defaults">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">validate_merge_defaults</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="InputParser.validate_merge_defaults"><a class="viewcode-back" href="../../../../api/qiskit.chemistry.parser.InputParser.html#qiskit.chemistry.parser.InputParser.validate_merge_defaults">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">validate_merge_defaults</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">validate_merge_defaults</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_validate_operator_problem</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="InputParser.save_to_file"><a class="viewcode-back" href="../../../../api/qiskit.chemistry.parser._inputparser.html#qiskit.chemistry.parser.InputParser.save_to_file">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">save_to_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_name</span><span class="p">):</span>
+<div class="viewcode-block" id="InputParser.save_to_file"><a class="viewcode-back" href="../../../../api/qiskit.chemistry.parser.InputParser.html#qiskit.chemistry.parser.InputParser.save_to_file">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">save_to_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_name</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">file_name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">QiskitChemistryError</span><span class="p">(</span><span class="s1">&#39;Missing file path&#39;</span><span class="p">)</span>
 
@@ -435,7 +435,7 @@
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">contents</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="InputParser.delete_section"><a class="viewcode-back" href="../../../../api/qiskit.chemistry.parser._inputparser.html#qiskit.chemistry.parser.InputParser.delete_section">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">delete_section</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section_name</span><span class="p">):</span>
+<div class="viewcode-block" id="InputParser.delete_section"><a class="viewcode-back" href="../../../../api/qiskit.chemistry.parser.InputParser.html#qiskit.chemistry.parser.InputParser.delete_section">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">delete_section</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section_name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Args:</span>
 <span class="sd">            section_name (str): the name of the section, case insensitive</span>
@@ -455,7 +455,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_update_driver_input_schemas</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_update_operator_input_schema</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="InputParser.post_set_section_property"><a class="viewcode-back" href="../../../../api/qiskit.chemistry.parser._inputparser.html#qiskit.chemistry.parser.InputParser.post_set_section_property">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">post_set_section_property</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section_name</span><span class="p">,</span> <span class="n">property_name</span><span class="p">):</span>
+<div class="viewcode-block" id="InputParser.post_set_section_property"><a class="viewcode-back" href="../../../../api/qiskit.chemistry.parser.InputParser.html#qiskit.chemistry.parser.InputParser.post_set_section_property">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">post_set_section_property</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section_name</span><span class="p">,</span> <span class="n">property_name</span><span class="p">):</span>
         <span class="n">property_name</span> <span class="o">=</span> <span class="n">JSONSchema</span><span class="o">.</span><span class="n">format_property_name</span><span class="p">(</span><span class="n">property_name</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">property_name</span> <span class="o">==</span> <span class="n">JSONSchema</span><span class="o">.</span><span class="n">NAME</span><span class="p">:</span>
             <span class="n">section_name</span> <span class="o">=</span> <span class="n">JSONSchema</span><span class="o">.</span><span class="n">format_section_name</span><span class="p">(</span><span class="n">section_name</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
@@ -478,7 +478,7 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">_update_driver_input_schemas</span><span class="p">()</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">_update_driver_sections</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="InputParser.is_substitution_allowed"><a class="viewcode-back" href="../../../../api/qiskit.chemistry.parser._inputparser.html#qiskit.chemistry.parser.InputParser.is_substitution_allowed">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">is_substitution_allowed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="InputParser.is_substitution_allowed"><a class="viewcode-back" href="../../../../api/qiskit.chemistry.parser.InputParser.html#qiskit.chemistry.parser.InputParser.is_substitution_allowed">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">is_substitution_allowed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">auto_substitutions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_property_default_value</span><span class="p">(</span><span class="n">JSONSchema</span><span class="o">.</span><span class="n">PROBLEM</span><span class="p">,</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">AUTO_SUBSTITUTIONS</span><span class="p">)</span>
         <span class="n">auto_substitutions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_section_property</span><span class="p">(</span><span class="n">JSONSchema</span><span class="o">.</span><span class="n">PROBLEM</span><span class="p">,</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">AUTO_SUBSTITUTIONS</span><span class="p">,</span> <span class="n">auto_substitutions</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">auto_substitutions</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -486,7 +486,7 @@
 
         <span class="k">return</span> <span class="n">auto_substitutions</span></div>
 
-<div class="viewcode-block" id="InputParser.check_if_substitution_key"><a class="viewcode-back" href="../../../../api/qiskit.chemistry.parser._inputparser.html#qiskit.chemistry.parser.InputParser.check_if_substitution_key">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">check_if_substitution_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section_name</span><span class="p">,</span> <span class="n">property_names</span><span class="p">):</span>
+<div class="viewcode-block" id="InputParser.check_if_substitution_key"><a class="viewcode-back" href="../../../../api/qiskit.chemistry.parser.InputParser.html#qiskit.chemistry.parser.InputParser.check_if_substitution_key">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">check_if_substitution_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section_name</span><span class="p">,</span> <span class="n">property_names</span><span class="p">):</span>
         <span class="n">result</span> <span class="o">=</span> <span class="p">[(</span><span class="n">property_name</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span> <span class="k">for</span> <span class="n">property_name</span> <span class="ow">in</span> <span class="n">property_names</span><span class="p">]</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_substitution_allowed</span><span class="p">():</span>
             <span class="k">return</span> <span class="n">result</span>
@@ -507,7 +507,7 @@
 
         <span class="k">return</span> <span class="n">result</span></div>
 
-<div class="viewcode-block" id="InputParser.process_substitutions"><a class="viewcode-back" href="../../../../api/qiskit.chemistry.parser._inputparser.html#qiskit.chemistry.parser.InputParser.process_substitutions">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">process_substitutions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">substitutions</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="InputParser.process_substitutions"><a class="viewcode-back" href="../../../../api/qiskit.chemistry.parser.InputParser.html#qiskit.chemistry.parser.InputParser.process_substitutions">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">process_substitutions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">substitutions</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">substitutions</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">substitutions</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">QiskitChemistryError</span><span class="p">(</span>
                 <span class="s1">&#39;Invalid substitution parameter: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">substitutions</span><span class="p">))</span>
@@ -618,7 +618,7 @@
 
         <span class="k">return</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
-<div class="viewcode-block" id="InputParser.get_operator_problems"><a class="viewcode-back" href="../../../../api/qiskit.chemistry.parser._inputparser.html#qiskit.chemistry.parser.InputParser.get_operator_problems">[ドキュメント]</a>    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="InputParser.get_operator_problems"><a class="viewcode-back" href="../../../../api/qiskit.chemistry.parser.InputParser.html#qiskit.chemistry.parser.InputParser.get_operator_problems">[ドキュメント]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_operator_problems</span><span class="p">(</span><span class="n">input_name</span><span class="p">):</span>
         <span class="n">config</span> <span class="o">=</span> <span class="n">get_chemistry_operator_configuration</span><span class="p">(</span><span class="n">input_name</span><span class="p">)</span>
         <span class="k">if</span> <span class="s1">&#39;problems&#39;</span> <span class="ow">in</span> <span class="n">config</span><span class="p">:</span>
@@ -735,7 +735,7 @@
         <span class="k">if</span> <span class="n">problem_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">problems</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">QiskitChemistryError</span><span class="p">(</span><span class="s2">&quot;Problem: </span><span class="si">{}</span><span class="s2"> not in the list of problems: </span><span class="si">{}</span><span class="s2"> for operator: </span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">problem_name</span><span class="p">,</span> <span class="n">problems</span><span class="p">,</span> <span class="n">operator_name</span><span class="p">))</span>
 
-<div class="viewcode-block" id="InputParser.to_dictionary"><a class="viewcode-back" href="../../../../api/qiskit.chemistry.parser._inputparser.html#qiskit.chemistry.parser.InputParser.to_dictionary">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">to_dictionary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="InputParser.to_dictionary"><a class="viewcode-back" href="../../../../api/qiskit.chemistry.parser.InputParser.html#qiskit.chemistry.parser.InputParser.to_dictionary">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">to_dictionary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">dict</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">section_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_section_names</span><span class="p">():</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">section_is_text</span><span class="p">(</span><span class="n">section_name</span><span class="p">):</span>
@@ -745,7 +745,7 @@
 
         <span class="k">return</span> <span class="nb">dict</span></div>
 
-<div class="viewcode-block" id="InputParser.export_dictionary"><a class="viewcode-back" href="../../../../api/qiskit.chemistry.parser._inputparser.html#qiskit.chemistry.parser.InputParser.export_dictionary">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">export_dictionary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_name</span><span class="p">):</span>
+<div class="viewcode-block" id="InputParser.export_dictionary"><a class="viewcode-back" href="../../../../api/qiskit.chemistry.parser.InputParser.html#qiskit.chemistry.parser.InputParser.export_dictionary">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">export_dictionary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_name</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">file_name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">QiskitChemistryError</span><span class="p">(</span><span class="s1">&#39;Missing file path&#39;</span><span class="p">)</span>
 
@@ -769,7 +769,7 @@
                             <span class="n">value</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
                             <span class="n">InputParser</span><span class="o">.</span><span class="n">_set_section_property</span><span class="p">(</span><span class="n">sections</span><span class="p">,</span> <span class="n">section_name</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;string&#39;</span><span class="p">])</span>
 
-<div class="viewcode-block" id="InputParser.section_is_driver"><a class="viewcode-back" href="../../../../api/qiskit.chemistry.parser._inputparser.html#qiskit.chemistry.parser.InputParser.section_is_driver">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">section_is_driver</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section_name</span><span class="p">):</span>
+<div class="viewcode-block" id="InputParser.section_is_driver"><a class="viewcode-back" href="../../../../api/qiskit.chemistry.parser.InputParser.html#qiskit.chemistry.parser.InputParser.section_is_driver">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">section_is_driver</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section_name</span><span class="p">):</span>
         <span class="n">section_name</span> <span class="o">=</span> <span class="n">JSONSchema</span><span class="o">.</span><span class="n">format_section_name</span><span class="p">(</span><span class="n">section_name</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
         <span class="n">InputParser</span><span class="o">.</span><span class="n">_load_driver_names</span><span class="p">()</span>
         <span class="n">driver_names</span> <span class="o">=</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">_DRIVER_NAMES</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">InputParser</span><span class="o">.</span><span class="n">_DRIVER_NAMES</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="p">[]</span>

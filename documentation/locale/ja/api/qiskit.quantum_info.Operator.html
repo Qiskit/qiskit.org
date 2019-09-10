@@ -1248,7 +1248,7 @@
 <dl class="class">
 <dt id="qiskit.quantum_info.Operator">
 <em class="property">class </em><code class="descname">Operator</code><span class="sig-paren">(</span><em>data</em>, <em>input_dims=None</em>, <em>output_dims=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/operators/operator.html#Operator"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.quantum_info.Operator" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>ベースクラス: <a class="reference internal" href="qiskit.quantum_info.operators.base_operator.html#qiskit.quantum_info.operators.base_operator.BaseOperator" title="qiskit.quantum_info.operators.base_operator.BaseOperator"><code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.quantum_info.operators.base_operator.BaseOperator</span></code></a></p>
+<dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.quantum_info.operators.base_operator.BaseOperator</span></code></p>
 <p>Matrix operator class</p>
 <p>This represents a matrix operator <cite>M</cite> that acts on a statevector as: <cite>M|v⟩</cite>
 or on a density matrix as M.ρ.M^dagger.</p>
@@ -1268,31 +1268,34 @@ or on a density matrix as M.ρ.M^dagger.</p>
 <tr class="row-odd"><td><a class="reference internal" href="#qiskit.quantum_info.Operator.conjugate" title="qiskit.quantum_info.Operator.conjugate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">conjugate</span></code></a>()</td>
 <td>Return the conjugate of the operator.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.quantum_info.Operator.expand" title="qiskit.quantum_info.Operator.expand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">expand</span></code></a>(other)</td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.quantum_info.Operator.equiv" title="qiskit.quantum_info.Operator.equiv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">equiv</span></code></a>(other[,&nbsp;rtol,&nbsp;atol])</td>
+<td>Return True if operators are equivalent up to global phase.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.quantum_info.Operator.expand" title="qiskit.quantum_info.Operator.expand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">expand</span></code></a>(other)</td>
 <td>Return the tensor product operator other ⊗ self.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.quantum_info.Operator.is_unitary" title="qiskit.quantum_info.Operator.is_unitary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_unitary</span></code></a>([atol,&nbsp;rtol])</td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.quantum_info.Operator.is_unitary" title="qiskit.quantum_info.Operator.is_unitary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_unitary</span></code></a>([atol,&nbsp;rtol])</td>
 <td>Return True if operator is a unitary matrix.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.quantum_info.Operator.multiply" title="qiskit.quantum_info.Operator.multiply"><code class="xref py py-obj docutils literal notranslate"><span class="pre">multiply</span></code></a>(other)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.quantum_info.Operator.multiply" title="qiskit.quantum_info.Operator.multiply"><code class="xref py py-obj docutils literal notranslate"><span class="pre">multiply</span></code></a>(other)</td>
 <td>Return the operator self + other.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.quantum_info.Operator.power" title="qiskit.quantum_info.Operator.power"><code class="xref py py-obj docutils literal notranslate"><span class="pre">power</span></code></a>(n)</td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.quantum_info.Operator.power" title="qiskit.quantum_info.Operator.power"><code class="xref py py-obj docutils literal notranslate"><span class="pre">power</span></code></a>(n)</td>
 <td>Return the matrix power of the operator.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.quantum_info.Operator.subtract" title="qiskit.quantum_info.Operator.subtract"><code class="xref py py-obj docutils literal notranslate"><span class="pre">subtract</span></code></a>(other)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.quantum_info.Operator.subtract" title="qiskit.quantum_info.Operator.subtract"><code class="xref py py-obj docutils literal notranslate"><span class="pre">subtract</span></code></a>(other)</td>
 <td>Return the operator self - other.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.quantum_info.Operator.tensor" title="qiskit.quantum_info.Operator.tensor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tensor</span></code></a>(other)</td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.quantum_info.Operator.tensor" title="qiskit.quantum_info.Operator.tensor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tensor</span></code></a>(other)</td>
 <td>Return the tensor product operator self ⊗ other.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.quantum_info.Operator.to_instruction" title="qiskit.quantum_info.Operator.to_instruction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_instruction</span></code></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.quantum_info.Operator.to_instruction" title="qiskit.quantum_info.Operator.to_instruction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_instruction</span></code></a>()</td>
 <td>Convert to a UnitaryGate instruction.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.quantum_info.Operator.to_operator" title="qiskit.quantum_info.Operator.to_operator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_operator</span></code></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.quantum_info.Operator.to_operator" title="qiskit.quantum_info.Operator.to_operator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_operator</span></code></a>()</td>
 <td>Convert operator to matrix operator class</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.quantum_info.Operator.transpose" title="qiskit.quantum_info.Operator.transpose"><code class="xref py py-obj docutils literal notranslate"><span class="pre">transpose</span></code></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.quantum_info.Operator.transpose" title="qiskit.quantum_info.Operator.transpose"><code class="xref py py-obj docutils literal notranslate"><span class="pre">transpose</span></code></a>()</td>
 <td>Return the transpose of the operator.</td>
 </tr>
 </tbody>
@@ -1362,6 +1365,31 @@ otherwise compose in reverse order self(other(input))
 <dt id="qiskit.quantum_info.Operator.conjugate">
 <code class="descname">conjugate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/operators/operator.html#Operator.conjugate"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.quantum_info.Operator.conjugate" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Return the conjugate of the operator.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.quantum_info.Operator.equiv">
+<code class="descname">equiv</code><span class="sig-paren">(</span><em>other</em>, <em>rtol=None</em>, <em>atol=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/operators/operator.html#Operator.equiv"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.quantum_info.Operator.equiv" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Return True if operators are equivalent up to global phase.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first simple">
+<li><strong>other</strong> (<a class="reference internal" href="qiskit.aqua.Operator.html#qiskit.aqua.Operator" title="qiskit.aqua.Operator"><em>Operator</em></a>) -- an operator object.</li>
+<li><strong>rtol</strong> (<em>float</em>) -- relative tolerance value for comparison.</li>
+<li><strong>atol</strong> (<em>float</em>) -- absolute tolerance value for comparison.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first">True if operators are equivalent up to global phase.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><p class="first last">bool</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">

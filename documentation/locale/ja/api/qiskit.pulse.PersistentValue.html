@@ -1248,7 +1248,7 @@
 <dl class="class">
 <dt id="qiskit.pulse.PersistentValue">
 <em class="property">class </em><code class="descname">PersistentValue</code><span class="sig-paren">(</span><em>value: complex</em>, <em>name: Optional[str] = None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/pulse/commands/persistent_value.html#PersistentValue"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.pulse.PersistentValue" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>ベースクラス: <a class="reference internal" href="qiskit.pulse.commands.command.html#qiskit.pulse.commands.command.Command" title="qiskit.pulse.commands.command.Command"><code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.pulse.commands.command.Command</span></code></a></p>
+<dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.pulse.commands.command.Command</span></code></p>
 <p>Persistent value.</p>
 <p class="rubric">Attributes Summary</p>
 <table border="1" class="longtable docutils">
@@ -1260,13 +1260,16 @@
 <tr class="row-odd"><td><a class="reference internal" href="#qiskit.pulse.PersistentValue.duration" title="qiskit.pulse.PersistentValue.duration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">duration</span></code></a></td>
 <td>Duration of this command.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.pulse.PersistentValue.name" title="qiskit.pulse.PersistentValue.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></a></td>
-<td>Name of this command.</td>
-</tr>
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">PersistentValue.pulseIndex</span></code></td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.pulse.PersistentValue.instances_counter" title="qiskit.pulse.PersistentValue.instances_counter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">instances_counter</span></code></a></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.pulse.PersistentValue.value" title="qiskit.pulse.PersistentValue.value"><code class="xref py py-obj docutils literal notranslate"><span class="pre">value</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.pulse.PersistentValue.name" title="qiskit.pulse.PersistentValue.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></a></td>
+<td>Name of this command.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.pulse.PersistentValue.prefix" title="qiskit.pulse.PersistentValue.prefix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">prefix</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.pulse.PersistentValue.value" title="qiskit.pulse.PersistentValue.value"><code class="xref py py-obj docutils literal notranslate"><span class="pre">value</span></code></a></td>
 <td>Persistent value amplitude.</td>
 </tr>
 </tbody>
@@ -1281,7 +1284,10 @@
 <tr class="row-odd"><td><a class="reference internal" href="#qiskit.pulse.PersistentValue.__call__" title="qiskit.pulse.PersistentValue.__call__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__call__</span></code></a>(*args,&nbsp;**kwargs)</td>
 <td>Creates an Instruction obtained from call to <cite>to_instruction</cite> wrapped in a Schedule.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.pulse.PersistentValue.to_instruction" title="qiskit.pulse.PersistentValue.to_instruction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_instruction</span></code></a>(channel[,&nbsp;name])</td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.pulse.PersistentValue.create_name" title="qiskit.pulse.PersistentValue.create_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_name</span></code></a>(name)</td>
+<td>Autogenerate names for pulse commands.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.pulse.PersistentValue.to_instruction" title="qiskit.pulse.PersistentValue.to_instruction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_instruction</span></code></a>(channel[,&nbsp;name])</td>
 <td>Create an instruction from command.</td>
 </tr>
 </tbody>
@@ -1294,10 +1300,20 @@
 </dd></dl>
 
 <dl class="attribute">
+<dt id="qiskit.pulse.PersistentValue.instances_counter">
+<code class="descname">instances_counter</code><em class="property"> = 0</em><a class="headerlink" href="#qiskit.pulse.PersistentValue.instances_counter" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
 <dt id="qiskit.pulse.PersistentValue.name">
 <code class="descname">name</code><a class="headerlink" href="#qiskit.pulse.PersistentValue.name" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Name of this command.</p>
 </dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.pulse.PersistentValue.prefix">
+<code class="descname">prefix</code><em class="property"> = 'pv'</em><a class="headerlink" href="#qiskit.pulse.PersistentValue.prefix" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.pulse.PersistentValue.value">
@@ -1310,6 +1326,12 @@
 <dt id="qiskit.pulse.PersistentValue.__call__">
 <code class="descname">__call__</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.pulse.PersistentValue.__call__" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Creates an Instruction obtained from call to <cite>to_instruction</cite> wrapped in a Schedule.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="qiskit.pulse.PersistentValue.create_name">
+<em class="property">classmethod </em><code class="descname">create_name</code><span class="sig-paren">(</span><em>name: str = None</em><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#qiskit.pulse.PersistentValue.create_name" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Autogenerate names for pulse commands.</p>
 </dd></dl>
 
 <dl class="method">

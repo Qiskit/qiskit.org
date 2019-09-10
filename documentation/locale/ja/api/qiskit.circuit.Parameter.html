@@ -1260,6 +1260,24 @@
 <tr class="row-odd"><td><a class="reference internal" href="#qiskit.circuit.Parameter.name" title="qiskit.circuit.Parameter.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></a></td>
 <td>Returns the name of the Parameter.</td>
 </tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.circuit.Parameter.parameters" title="qiskit.circuit.Parameter.parameters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parameters</span></code></a></td>
+<td>Returns a set of the unbound Parameters in the expression.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods Summary</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.circuit.Parameter.bind" title="qiskit.circuit.Parameter.bind"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bind</span></code></a>(parameter_values)</td>
+<td>Binds the provided set of parameters to their corresponding values.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.circuit.Parameter.subs" title="qiskit.circuit.Parameter.subs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">subs</span></code></a>(parameter_map)</td>
+<td>Substitute self with the corresponding parameter in parameter_map.</td>
+</tr>
 </tbody>
 </table>
 <p class="rubric">Attributes Documentation</p>
@@ -1267,6 +1285,53 @@
 <dt id="qiskit.circuit.Parameter.name">
 <code class="descname">name</code><a class="headerlink" href="#qiskit.circuit.Parameter.name" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Returns the name of the Parameter.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.circuit.Parameter.parameters">
+<code class="descname">parameters</code><a class="headerlink" href="#qiskit.circuit.Parameter.parameters" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Returns a set of the unbound Parameters in the expression.</p>
+</dd></dl>
+
+<p class="rubric">Methods Documentation</p>
+<dl class="method">
+<dt id="qiskit.circuit.Parameter.bind">
+<code class="descname">bind</code><span class="sig-paren">(</span><em>parameter_values</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.circuit.Parameter.bind" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Binds the provided set of parameters to their corresponding values.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><p class="first"><strong>parameter_values</strong> (<em>dict</em>) -- Mapping of Parameter instances to the
+numeric value to which they will be bound.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first simple">
+<li><code class="xref py py-exc docutils literal notranslate"><span class="pre">QiskitError</span></code> -- - If parameter_values contains Parameters outside those in self.
+- If a non-numeric value is passed in parameter_values.</li>
+<li><code class="xref py py-exc docutils literal notranslate"><span class="pre">ZeroDivisionError</span></code> -- - If binding the provided values requires division by zero.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first"><dl class="docutils">
+<dt>a new expession parameterized by any parameters</dt>
+<dd><p class="first last">which were not bound by parameter_values.</p>
+</dd>
+</dl>
+</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">戻り値の型:</th><td class="field-body"><p class="first last"><a class="reference internal" href="qiskit.circuit.ParameterExpression.html#qiskit.circuit.ParameterExpression" title="qiskit.circuit.ParameterExpression">ParameterExpression</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.circuit.Parameter.subs">
+<code class="descname">subs</code><span class="sig-paren">(</span><em>parameter_map</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/circuit/parameter.html#Parameter.subs"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.circuit.Parameter.subs" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Substitute self with the corresponding parameter in parameter_map.</p>
 </dd></dl>
 
 </dd></dl>

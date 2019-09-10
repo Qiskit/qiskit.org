@@ -469,7 +469,7 @@
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_qasmif</span><span class="p">(</span><span class="n">name_param</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">broadcast_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span><span class="p">):</span>
+<div class="viewcode-block" id="Instruction.broadcast_arguments"><a class="viewcode-back" href="../../../api/qiskit.circuit.Instruction.html#qiskit.circuit.Instruction.broadcast_arguments">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">broadcast_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Validation of the arguments.</span>
 
@@ -491,13 +491,13 @@
         <span class="c1">#  [[q[0], q[1]], [c[0], c[1]]] -&gt; [q[0], c[0]], [q[1], c[1]]</span>
         <span class="n">flat_qargs</span> <span class="o">=</span> <span class="p">[</span><span class="n">qarg</span> <span class="k">for</span> <span class="n">sublist</span> <span class="ow">in</span> <span class="n">qargs</span> <span class="k">for</span> <span class="n">qarg</span> <span class="ow">in</span> <span class="n">sublist</span><span class="p">]</span>
         <span class="n">flat_cargs</span> <span class="o">=</span> <span class="p">[</span><span class="n">carg</span> <span class="k">for</span> <span class="n">sublist</span> <span class="ow">in</span> <span class="n">cargs</span> <span class="k">for</span> <span class="n">carg</span> <span class="ow">in</span> <span class="n">sublist</span><span class="p">]</span>
-        <span class="k">yield</span> <span class="n">flat_qargs</span><span class="p">,</span> <span class="n">flat_cargs</span>
+        <span class="k">yield</span> <span class="n">flat_qargs</span><span class="p">,</span> <span class="n">flat_cargs</span></div>
 
     <span class="k">def</span> <span class="nf">_return_repeat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exponent</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">Instruction</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">*</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">exponent</span><span class="p">),</span> <span class="n">num_qubits</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_qubits</span><span class="p">,</span>
                            <span class="n">num_clbits</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_clbits</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">repeat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+<div class="viewcode-block" id="Instruction.repeat"><a class="viewcode-back" href="../../../api/qiskit.circuit.Instruction.html#qiskit.circuit.Instruction.repeat">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">repeat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Creates an instruction with `gate` repeated `n` amount of times.</span>
 
 <span class="sd">        Args:</span>
@@ -519,7 +519,7 @@
         <span class="n">cargs</span> <span class="o">=</span> <span class="p">[]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_clbits</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_clbits</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">)</span>
 
         <span class="n">instruction</span><span class="o">.</span><span class="n">definition</span> <span class="o">=</span> <span class="p">[(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qargs</span><span class="p">[:],</span> <span class="n">cargs</span><span class="p">[:])]</span> <span class="o">*</span> <span class="n">n</span>
-        <span class="k">return</span> <span class="n">instruction</span></div>
+        <span class="k">return</span> <span class="n">instruction</span></div></div>
 </pre></div>
 
         </div>

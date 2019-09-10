@@ -208,15 +208,15 @@
 <span class="kn">from</span> <span class="nn">.instruction</span> <span class="k">import</span> <span class="n">Instruction</span>
 
 
-<div class="viewcode-block" id="MetaCount"><a class="viewcode-back" href="../../../../api/qiskit.pulse.commands.command.html#qiskit.pulse.MetaCount">[ドキュメント]</a><span class="k">class</span> <span class="nc">MetaCount</span><span class="p">(</span><span class="n">ABCMeta</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">MetaCount</span><span class="p">(</span><span class="n">ABCMeta</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Meta class to count class instances.&quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="n">mcs</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="n">namespace</span><span class="p">):</span>
         <span class="n">new_cls</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">MetaCount</span><span class="p">,</span> <span class="n">mcs</span><span class="p">)</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="n">mcs</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="n">namespace</span><span class="p">)</span>
         <span class="n">new_cls</span><span class="o">.</span><span class="n">instances_counter</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">return</span> <span class="n">new_cls</span></div>
+        <span class="k">return</span> <span class="n">new_cls</span>
 
 
-<div class="viewcode-block" id="Command"><a class="viewcode-back" href="../../../../api/qiskit.pulse.commands.command.html#qiskit.pulse.Command">[ドキュメント]</a><span class="k">class</span> <span class="nc">Command</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">MetaCount</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">Command</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">MetaCount</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Abstract command class.&quot;&quot;&quot;</span>
 
     <span class="c1"># Counter for the number of instances in this class</span>
@@ -238,7 +238,7 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">Command</span><span class="o">.</span><span class="n">create_name</span><span class="p">()</span>
 
-<div class="viewcode-block" id="Command.create_name"><a class="viewcode-back" href="../../../../api/qiskit.pulse.commands.command.html#qiskit.pulse.Command.create_name">[ドキュメント]</a>    <span class="nd">@classmethod</span>
+    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">create_name</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Autogenerate names for pulse commands.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -258,7 +258,7 @@
 
         <span class="bp">cls</span><span class="o">.</span><span class="n">instances_counter</span> <span class="o">+=</span> <span class="mi">1</span>  <span class="c1"># pylint: disable=E1101</span>
 
-        <span class="k">return</span> <span class="n">name</span></div>
+        <span class="k">return</span> <span class="n">name</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">duration</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
@@ -270,12 +270,12 @@
         <span class="sd">&quot;&quot;&quot;Name of this command.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span>
 
-<div class="viewcode-block" id="Command.to_instruction"><a class="viewcode-back" href="../../../../api/qiskit.pulse.commands.command.html#qiskit.pulse.Command.to_instruction">[ドキュメント]</a>    <span class="nd">@abstractmethod</span>
+    <span class="nd">@abstractmethod</span>
     <span class="k">def</span> <span class="nf">to_instruction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">,</span> <span class="o">*</span><span class="n">channels</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Channel</span><span class="p">],</span>
                        <span class="n">timeslots</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">TimeslotCollection</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                        <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Instruction</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Create an instruction from command.&quot;&quot;&quot;</span>
-        <span class="k">pass</span></div>
+        <span class="k">pass</span>
 
     <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Creates an Instruction obtained from call to `to_instruction` wrapped in a Schedule.&quot;&quot;&quot;</span>
@@ -298,7 +298,7 @@
 
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">(name=</span><span class="si">%s</span><span class="s1">, duration=</span><span class="si">%d</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
-                                             <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">duration</span><span class="p">)</span></div>
+                                             <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">duration</span><span class="p">)</span>
 </pre></div>
 
         </div>

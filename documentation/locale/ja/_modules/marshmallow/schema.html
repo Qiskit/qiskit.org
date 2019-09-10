@@ -577,7 +577,7 @@
 
     <span class="c1">##### Override-able methods #####</span>
 
-<div class="viewcode-block" id="BaseSchema.handle_error"><a class="viewcode-back" href="../../api/qiskit.validation.BaseSchema.html#qiskit.assembler.models.BaseSchema.handle_error">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">handle_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">error</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseSchema.handle_error"><a class="viewcode-back" href="../../api/qiskit.validation.BaseSchema.html#qiskit.qobj.BaseSchema.handle_error">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">handle_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">error</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Custom error handler function for the schema.</span>
 
 <span class="sd">        :param ValidationError error: The `ValidationError` raised during (de)serialization.</span>
@@ -587,7 +587,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="BaseSchema.get_attribute"><a class="viewcode-back" href="../../api/qiskit.validation.BaseSchema.html#qiskit.assembler.models.BaseSchema.get_attribute">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">get_attribute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">default</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseSchema.get_attribute"><a class="viewcode-back" href="../../api/qiskit.validation.BaseSchema.html#qiskit.qobj.BaseSchema.get_attribute">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">get_attribute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">default</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Defines how to pull values from an object to serialize.</span>
 
 <span class="sd">        .. versionadded:: 2.0.0</span>
@@ -596,7 +596,7 @@
 
     <span class="c1">##### Handler decorators (deprecated) #####</span>
 
-<div class="viewcode-block" id="BaseSchema.error_handler"><a class="viewcode-back" href="../../api/qiskit.validation.BaseSchema.html#qiskit.assembler.models.BaseSchema.error_handler">[ドキュメント]</a>    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="BaseSchema.error_handler"><a class="viewcode-back" href="../../api/qiskit.validation.BaseSchema.html#qiskit.qobj.BaseSchema.error_handler">[ドキュメント]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">error_handler</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">func</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Decorator that registers an error handler function for the schema.</span>
 <span class="sd">        The function receives the :class:`Schema` instance, a dictionary of errors,</span>
@@ -627,7 +627,7 @@
         <span class="bp">cls</span><span class="o">.</span><span class="n">__error_handler__</span> <span class="o">=</span> <span class="n">func</span>
         <span class="k">return</span> <span class="n">func</span></div>
 
-<div class="viewcode-block" id="BaseSchema.accessor"><a class="viewcode-back" href="../../api/qiskit.validation.BaseSchema.html#qiskit.assembler.models.BaseSchema.accessor">[ドキュメント]</a>    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="BaseSchema.accessor"><a class="viewcode-back" href="../../api/qiskit.validation.BaseSchema.html#qiskit.qobj.BaseSchema.accessor">[ドキュメント]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">accessor</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">func</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Decorator that registers a function for pulling values from an object</span>
 <span class="sd">        to serialize. The function receives the :class:`Schema` instance, the</span>
@@ -646,7 +646,7 @@
 
     <span class="c1">##### Serialization/Deserialization API #####</span>
 
-<div class="viewcode-block" id="BaseSchema.dump"><a class="viewcode-back" href="../../api/qiskit.validation.BaseSchema.html#qiskit.assembler.models.BaseSchema.dump">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">dump</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">update_fields</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseSchema.dump"><a class="viewcode-back" href="../../api/qiskit.validation.BaseSchema.html#qiskit.qobj.BaseSchema.dump">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">dump</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">update_fields</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Serialize an object to native Python data types according to this</span>
 <span class="sd">        Schema&#39;s fields.</span>
 
@@ -732,7 +732,7 @@
 
         <span class="k">return</span> <span class="n">MarshalResult</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">errors</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="BaseSchema.dumps"><a class="viewcode-back" href="../../api/qiskit.validation.BaseSchema.html#qiskit.assembler.models.BaseSchema.dumps">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">dumps</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">update_fields</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseSchema.dumps"><a class="viewcode-back" href="../../api/qiskit.validation.BaseSchema.html#qiskit.qobj.BaseSchema.dumps">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">dumps</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">update_fields</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Same as :meth:`dump`, except return a JSON-encoded string.</span>
 
 <span class="sd">        :param obj: The object to serialize.</span>
@@ -750,7 +750,7 @@
         <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">opts</span><span class="o">.</span><span class="n">json_module</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">deserialized</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">MarshalResult</span><span class="p">(</span><span class="n">ret</span><span class="p">,</span> <span class="n">errors</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="BaseSchema.load"><a class="viewcode-back" href="../../api/qiskit.validation.BaseSchema.html#qiskit.assembler.models.BaseSchema.load">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">partial</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseSchema.load"><a class="viewcode-back" href="../../api/qiskit.validation.BaseSchema.html#qiskit.qobj.BaseSchema.load">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">partial</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Deserialize a data structure to an object defined by this Schema&#39;s</span>
 <span class="sd">        fields and :meth:`make_object`.</span>
 
@@ -768,7 +768,7 @@
         <span class="n">result</span><span class="p">,</span> <span class="n">errors</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_do_load</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">many</span><span class="p">,</span> <span class="n">partial</span><span class="o">=</span><span class="n">partial</span><span class="p">,</span> <span class="n">postprocess</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">UnmarshalResult</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">result</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="n">errors</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="BaseSchema.loads"><a class="viewcode-back" href="../../api/qiskit.validation.BaseSchema.html#qiskit.assembler.models.BaseSchema.loads">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">loads</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">json_data</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseSchema.loads"><a class="viewcode-back" href="../../api/qiskit.validation.BaseSchema.html#qiskit.qobj.BaseSchema.loads">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">loads</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">json_data</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Same as :meth:`load`, except it takes a JSON string as input.</span>
 
 <span class="sd">        :param str json_data: A JSON string of the data to deserialize.</span>
@@ -790,7 +790,7 @@
         <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">opts</span><span class="o">.</span><span class="n">json_module</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">json_data</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="n">many</span><span class="p">,</span> <span class="n">partial</span><span class="o">=</span><span class="n">partial</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="BaseSchema.validate"><a class="viewcode-back" href="../../api/qiskit.validation.BaseSchema.html#qiskit.assembler.models.BaseSchema.validate">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">partial</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseSchema.validate"><a class="viewcode-back" href="../../api/qiskit.validation.BaseSchema.html#qiskit.qobj.BaseSchema.validate">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">partial</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Validate `data` against the schema, returning a dictionary of</span>
 <span class="sd">        validation errors.</span>
 
@@ -954,7 +954,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="n">ret</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fields</span>
 
-<div class="viewcode-block" id="BaseSchema.on_bind_field"><a class="viewcode-back" href="../../api/qiskit.validation.BaseSchema.html#qiskit.assembler.models.BaseSchema.on_bind_field">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">on_bind_field</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field_name</span><span class="p">,</span> <span class="n">field_obj</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseSchema.on_bind_field"><a class="viewcode-back" href="../../api/qiskit.validation.BaseSchema.html#qiskit.qobj.BaseSchema.on_bind_field">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">on_bind_field</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field_name</span><span class="p">,</span> <span class="n">field_obj</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Hook to modify a field when it is bound to the `Schema`. No-op by default.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="kc">None</span></div>
 

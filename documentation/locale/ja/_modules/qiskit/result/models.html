@@ -203,7 +203,7 @@
 <span class="kn">from</span> <span class="nn">qiskit.qobj.utils</span> <span class="k">import</span> <span class="n">MeasReturnType</span>
 
 
-<div class="viewcode-block" id="ExperimentResultDataSchema"><a class="viewcode-back" href="../../../api/qiskit.result.models.html#qiskit.result.ExperimentResultDataSchema">[ドキュメント]</a><span class="k">class</span> <span class="nc">ExperimentResultDataSchema</span><span class="p">(</span><span class="n">BaseSchema</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">ExperimentResultDataSchema</span><span class="p">(</span><span class="n">BaseSchema</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Schema for ExperimentResultData.&quot;&quot;&quot;</span>
 
     <span class="n">counts</span> <span class="o">=</span> <span class="n">Nested</span><span class="p">(</span><span class="n">ObjSchema</span><span class="p">,</span>
@@ -216,10 +216,10 @@
                        <span class="n">validate</span><span class="o">=</span><span class="n">Length</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
     <span class="n">unitary</span> <span class="o">=</span> <span class="n">List</span><span class="p">(</span><span class="n">List</span><span class="p">(</span><span class="n">Complex</span><span class="p">(),</span>
                         <span class="n">validate</span><span class="o">=</span><span class="n">Length</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">1</span><span class="p">)),</span>
-                   <span class="n">validate</span><span class="o">=</span><span class="n">Length</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span></div>
+                   <span class="n">validate</span><span class="o">=</span><span class="n">Length</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
 
 
-<div class="viewcode-block" id="ExperimentResultSchema"><a class="viewcode-back" href="../../../api/qiskit.result.models.html#qiskit.result.ExperimentResultSchema">[ドキュメント]</a><span class="k">class</span> <span class="nc">ExperimentResultSchema</span><span class="p">(</span><span class="n">BaseSchema</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">ExperimentResultSchema</span><span class="p">(</span><span class="n">BaseSchema</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Schema for ExperimentResult.&quot;&quot;&quot;</span>
 
     <span class="c1"># Required fields.</span>
@@ -235,10 +235,10 @@
     <span class="n">meas_level</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="n">validate</span><span class="o">=</span><span class="n">Range</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
     <span class="n">meas_return</span> <span class="o">=</span> <span class="n">String</span><span class="p">(</span><span class="n">validate</span><span class="o">=</span><span class="n">OneOf</span><span class="p">(</span><span class="n">choices</span><span class="o">=</span><span class="p">(</span><span class="n">MeasReturnType</span><span class="o">.</span><span class="n">AVERAGE</span><span class="p">,</span>
                                                  <span class="n">MeasReturnType</span><span class="o">.</span><span class="n">SINGLE</span><span class="p">)))</span>
-    <span class="n">header</span> <span class="o">=</span> <span class="n">Nested</span><span class="p">(</span><span class="n">ObjSchema</span><span class="p">)</span></div>
+    <span class="n">header</span> <span class="o">=</span> <span class="n">Nested</span><span class="p">(</span><span class="n">ObjSchema</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="ResultSchema"><a class="viewcode-back" href="../../../api/qiskit.result.models.html#qiskit.result.ResultSchema">[ドキュメント]</a><span class="k">class</span> <span class="nc">ResultSchema</span><span class="p">(</span><span class="n">BaseSchema</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">ResultSchema</span><span class="p">(</span><span class="n">BaseSchema</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Schema for Result.&quot;&quot;&quot;</span>
 
     <span class="c1"># Required fields.</span>
@@ -253,10 +253,10 @@
     <span class="c1"># Optional fields.</span>
     <span class="n">date</span> <span class="o">=</span> <span class="n">DateTime</span><span class="p">()</span>
     <span class="n">status</span> <span class="o">=</span> <span class="n">String</span><span class="p">()</span>
-    <span class="n">header</span> <span class="o">=</span> <span class="n">Nested</span><span class="p">(</span><span class="n">ObjSchema</span><span class="p">)</span></div>
+    <span class="n">header</span> <span class="o">=</span> <span class="n">Nested</span><span class="p">(</span><span class="n">ObjSchema</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="ExperimentResultData"><a class="viewcode-back" href="../../../api/qiskit.result.models.html#qiskit.result.ExperimentResultData">[ドキュメント]</a><span class="nd">@bind_schema</span><span class="p">(</span><span class="n">ExperimentResultDataSchema</span><span class="p">)</span>
+<span class="nd">@bind_schema</span><span class="p">(</span><span class="n">ExperimentResultDataSchema</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">ExperimentResultData</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Model for ExperimentResultData.</span>
 
@@ -264,10 +264,10 @@
 <span class="sd">    full description of the model, please check</span>
 <span class="sd">    ``ExperimentResultDataSchema``.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">pass</span></div>
+    <span class="k">pass</span>
 
 
-<div class="viewcode-block" id="ExperimentResult"><a class="viewcode-back" href="../../../api/qiskit.result.models.html#qiskit.result.ExperimentResult">[ドキュメント]</a><span class="nd">@bind_schema</span><span class="p">(</span><span class="n">ExperimentResultSchema</span><span class="p">)</span>
+<span class="nd">@bind_schema</span><span class="p">(</span><span class="n">ExperimentResultSchema</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">ExperimentResult</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Model for ExperimentResult.</span>
 
@@ -287,7 +287,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">meas_level</span> <span class="o">=</span> <span class="n">meas_level</span>
 
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 </pre></div>
 
         </div>

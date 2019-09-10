@@ -34,7 +34,7 @@
        </script>
         <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
     
-    <title>qiskit.ignis.verification.randomized_benchmarking.Clifford module &#8212; Qiskit 0.12.0 ドキュメント</title>
+    <title>Clifford &#8212; Qiskit 0.12.0 ドキュメント</title>
 
     <link rel="stylesheet" href="../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -1243,53 +1243,153 @@
     <div class="document">
         <div class="page-content">
         
-  <div class="section" id="module-qiskit.ignis.verification.randomized_benchmarking.Clifford">
-<span id="qiskit-ignis-verification-randomized-benchmarking-clifford-module"></span><h1>qiskit.ignis.verification.randomized_benchmarking.Clifford module<a class="headerlink" href="#module-qiskit.ignis.verification.randomized_benchmarking.Clifford" title="このヘッドラインへのパーマリンク">¶</a></h1>
-<p>Clifford Operator class</p>
+  <div class="section" id="clifford">
+<h1>Clifford<a class="headerlink" href="#clifford" title="このヘッドラインへのパーマリンク">¶</a></h1>
 <dl class="class">
-<dt id="qiskit.ignis.verification.randomized_benchmarking.Clifford.Clifford">
-<em class="property">class </em><code class="descname">Clifford</code><span class="sig-paren">(</span><em>num_qubits=None</em>, <em>table=None</em>, <em>phases=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/randomized_benchmarking/Clifford.html#Clifford"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.Clifford.Clifford" title="この定義へのパーマリンク">¶</a></dt>
+<dt id="qiskit.ignis.verification.randomized_benchmarking.Clifford">
+<em class="property">class </em><code class="descname">Clifford</code><span class="sig-paren">(</span><em>num_qubits=None</em>, <em>table=None</em>, <em>phases=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/randomized_benchmarking/Clifford.html#Clifford"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.Clifford" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Clifford class</p>
+<p class="rubric">Attributes Summary</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">num_qubits</span></code></td>
+<td>Return the number of qubits for the Clifford.</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">phases</span></code></td>
+<td>Return the Clifford phases.</td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">table</span></code></td>
+<td>Return the the Clifford table.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods Summary</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">as_dict</span></code>()</td>
+<td>Return dictionary (JSON) represenation of Clifford object</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">cx</span></code>(qubit_ctrl,&nbsp;qubit_trgt)</td>
+<td>Apply a Controlled-NOT &quot;cx&quot; gate</td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">cz</span></code>(qubit_ctrl,&nbsp;qubit_trgt)</td>
+<td>Apply a Controlled-z &quot;cx&quot; gate</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">destabilizer</span></code>(row)</td>
+<td>Return the destabilizer as a Pauli object</td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_dict</span></code>(clifford_dict)</td>
+<td>Load a Clifford from a dictionary</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">h</span></code>(qubit)</td>
+<td>Apply an Hadamard &quot;h&quot; gate to qubit</td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">index</span></code>()</td>
+<td>Returns a unique index for the Clifford.</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">s</span></code>(qubit)</td>
+<td>Apply an phase &quot;s&quot; gate to qubit</td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">sdg</span></code>(qubit)</td>
+<td>Apply an adjoint phase &quot;sdg&quot; gate to qubit</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">stabilizer</span></code>(qubit)</td>
+<td>Return the qubit stabilizer as a Pauli object</td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">swap</span></code>(qubit0,&nbsp;qubit1)</td>
+<td>Apply SWAP gate between two qubits</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">update_destabilizer</span></code>(qubit,&nbsp;pauli)</td>
+<td>Update the qubit destabilizer row from a Pauli object</td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">update_stabilizer</span></code>(qubit,&nbsp;pauli)</td>
+<td>Update the qubit stabilizer row from a Pauli object</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">v</span></code>(qubit)</td>
+<td>Apply v gate sd.h</td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">w</span></code>(qubit)</td>
+<td>Apply w gate v.v</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">x</span></code>(qubit)</td>
+<td>Apply a Pauli &quot;x&quot; gate to a qubit</td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">y</span></code>(qubit)</td>
+<td>Apply an Pauli &quot;y&quot; gate to a qubit</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">z</span></code>(qubit)</td>
+<td>Apply an Pauli &quot;z&quot; gate to qubit</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes Documentation</p>
+<dl class="attribute">
+<dt id="qiskit.ignis.verification.randomized_benchmarking.Clifford.num_qubits">
+<code class="descname">num_qubits</code><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.Clifford.num_qubits" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Return the number of qubits for the Clifford.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.ignis.verification.randomized_benchmarking.Clifford.phases">
+<code class="descname">phases</code><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.Clifford.phases" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Return the Clifford phases.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.ignis.verification.randomized_benchmarking.Clifford.table">
+<code class="descname">table</code><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.Clifford.table" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Return the the Clifford table.</p>
+</dd></dl>
+
+<p class="rubric">Methods Documentation</p>
 <dl class="method">
-<dt id="qiskit.ignis.verification.randomized_benchmarking.Clifford.Clifford.as_dict">
-<code class="descname">as_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/randomized_benchmarking/Clifford.html#Clifford.as_dict"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.Clifford.Clifford.as_dict" title="この定義へのパーマリンク">¶</a></dt>
+<dt id="qiskit.ignis.verification.randomized_benchmarking.Clifford.as_dict">
+<code class="descname">as_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/randomized_benchmarking/Clifford.html#Clifford.as_dict"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.Clifford.as_dict" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Return dictionary (JSON) represenation of Clifford object</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="qiskit.ignis.verification.randomized_benchmarking.Clifford.Clifford.cx">
-<code class="descname">cx</code><span class="sig-paren">(</span><em>qubit_ctrl</em>, <em>qubit_trgt</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/randomized_benchmarking/Clifford.html#Clifford.cx"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.Clifford.Clifford.cx" title="この定義へのパーマリンク">¶</a></dt>
+<dt id="qiskit.ignis.verification.randomized_benchmarking.Clifford.cx">
+<code class="descname">cx</code><span class="sig-paren">(</span><em>qubit_ctrl</em>, <em>qubit_trgt</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/randomized_benchmarking/Clifford.html#Clifford.cx"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.Clifford.cx" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Apply a Controlled-NOT &quot;cx&quot; gate</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="qiskit.ignis.verification.randomized_benchmarking.Clifford.Clifford.cz">
-<code class="descname">cz</code><span class="sig-paren">(</span><em>qubit_ctrl</em>, <em>qubit_trgt</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/randomized_benchmarking/Clifford.html#Clifford.cz"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.Clifford.Clifford.cz" title="この定義へのパーマリンク">¶</a></dt>
+<dt id="qiskit.ignis.verification.randomized_benchmarking.Clifford.cz">
+<code class="descname">cz</code><span class="sig-paren">(</span><em>qubit_ctrl</em>, <em>qubit_trgt</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/randomized_benchmarking/Clifford.html#Clifford.cz"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.Clifford.cz" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Apply a Controlled-z &quot;cx&quot; gate</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="qiskit.ignis.verification.randomized_benchmarking.Clifford.Clifford.destabilizer">
-<code class="descname">destabilizer</code><span class="sig-paren">(</span><em>row</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/randomized_benchmarking/Clifford.html#Clifford.destabilizer"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.Clifford.Clifford.destabilizer" title="この定義へのパーマリンク">¶</a></dt>
+<dt id="qiskit.ignis.verification.randomized_benchmarking.Clifford.destabilizer">
+<code class="descname">destabilizer</code><span class="sig-paren">(</span><em>row</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/randomized_benchmarking/Clifford.html#Clifford.destabilizer"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.Clifford.destabilizer" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Return the destabilizer as a Pauli object</p>
 </dd></dl>
 
 <dl class="classmethod">
-<dt id="qiskit.ignis.verification.randomized_benchmarking.Clifford.Clifford.from_dict">
-<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>clifford_dict</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/randomized_benchmarking/Clifford.html#Clifford.from_dict"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.Clifford.Clifford.from_dict" title="この定義へのパーマリンク">¶</a></dt>
+<dt id="qiskit.ignis.verification.randomized_benchmarking.Clifford.from_dict">
+<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>clifford_dict</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/randomized_benchmarking/Clifford.html#Clifford.from_dict"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.Clifford.from_dict" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Load a Clifford from a dictionary</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="qiskit.ignis.verification.randomized_benchmarking.Clifford.Clifford.h">
-<code class="descname">h</code><span class="sig-paren">(</span><em>qubit</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/randomized_benchmarking/Clifford.html#Clifford.h"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.Clifford.Clifford.h" title="この定義へのパーマリンク">¶</a></dt>
+<dt id="qiskit.ignis.verification.randomized_benchmarking.Clifford.h">
+<code class="descname">h</code><span class="sig-paren">(</span><em>qubit</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/randomized_benchmarking/Clifford.html#Clifford.h"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.Clifford.h" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Apply an Hadamard &quot;h&quot; gate to qubit</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="qiskit.ignis.verification.randomized_benchmarking.Clifford.Clifford.index">
-<code class="descname">index</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/randomized_benchmarking/Clifford.html#Clifford.index"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.Clifford.Clifford.index" title="この定義へのパーマリンク">¶</a></dt>
+<dt id="qiskit.ignis.verification.randomized_benchmarking.Clifford.index">
+<code class="descname">index</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/randomized_benchmarking/Clifford.html#Clifford.index"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.Clifford.index" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Returns a unique index for the Clifford.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1301,87 +1401,69 @@
 </table>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="qiskit.ignis.verification.randomized_benchmarking.Clifford.Clifford.num_qubits">
-<code class="descname">num_qubits</code><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.Clifford.Clifford.num_qubits" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>Return the number of qubits for the Clifford.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="qiskit.ignis.verification.randomized_benchmarking.Clifford.Clifford.phases">
-<code class="descname">phases</code><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.Clifford.Clifford.phases" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>Return the Clifford phases.</p>
-</dd></dl>
-
 <dl class="method">
-<dt id="qiskit.ignis.verification.randomized_benchmarking.Clifford.Clifford.s">
-<code class="descname">s</code><span class="sig-paren">(</span><em>qubit</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/randomized_benchmarking/Clifford.html#Clifford.s"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.Clifford.Clifford.s" title="この定義へのパーマリンク">¶</a></dt>
+<dt id="qiskit.ignis.verification.randomized_benchmarking.Clifford.s">
+<code class="descname">s</code><span class="sig-paren">(</span><em>qubit</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/randomized_benchmarking/Clifford.html#Clifford.s"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.Clifford.s" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Apply an phase &quot;s&quot; gate to qubit</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="qiskit.ignis.verification.randomized_benchmarking.Clifford.Clifford.sdg">
-<code class="descname">sdg</code><span class="sig-paren">(</span><em>qubit</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/randomized_benchmarking/Clifford.html#Clifford.sdg"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.Clifford.Clifford.sdg" title="この定義へのパーマリンク">¶</a></dt>
+<dt id="qiskit.ignis.verification.randomized_benchmarking.Clifford.sdg">
+<code class="descname">sdg</code><span class="sig-paren">(</span><em>qubit</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/randomized_benchmarking/Clifford.html#Clifford.sdg"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.Clifford.sdg" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Apply an adjoint phase &quot;sdg&quot; gate to qubit</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="qiskit.ignis.verification.randomized_benchmarking.Clifford.Clifford.stabilizer">
-<code class="descname">stabilizer</code><span class="sig-paren">(</span><em>qubit</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/randomized_benchmarking/Clifford.html#Clifford.stabilizer"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.Clifford.Clifford.stabilizer" title="この定義へのパーマリンク">¶</a></dt>
+<dt id="qiskit.ignis.verification.randomized_benchmarking.Clifford.stabilizer">
+<code class="descname">stabilizer</code><span class="sig-paren">(</span><em>qubit</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/randomized_benchmarking/Clifford.html#Clifford.stabilizer"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.Clifford.stabilizer" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Return the qubit stabilizer as a Pauli object</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="qiskit.ignis.verification.randomized_benchmarking.Clifford.Clifford.swap">
-<code class="descname">swap</code><span class="sig-paren">(</span><em>qubit0</em>, <em>qubit1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/randomized_benchmarking/Clifford.html#Clifford.swap"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.Clifford.Clifford.swap" title="この定義へのパーマリンク">¶</a></dt>
+<dt id="qiskit.ignis.verification.randomized_benchmarking.Clifford.swap">
+<code class="descname">swap</code><span class="sig-paren">(</span><em>qubit0</em>, <em>qubit1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/randomized_benchmarking/Clifford.html#Clifford.swap"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.Clifford.swap" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Apply SWAP gate between two qubits</p>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="qiskit.ignis.verification.randomized_benchmarking.Clifford.Clifford.table">
-<code class="descname">table</code><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.Clifford.Clifford.table" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>Return the the Clifford table.</p>
-</dd></dl>
-
 <dl class="method">
-<dt id="qiskit.ignis.verification.randomized_benchmarking.Clifford.Clifford.update_destabilizer">
-<code class="descname">update_destabilizer</code><span class="sig-paren">(</span><em>qubit</em>, <em>pauli</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/randomized_benchmarking/Clifford.html#Clifford.update_destabilizer"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.Clifford.Clifford.update_destabilizer" title="この定義へのパーマリンク">¶</a></dt>
+<dt id="qiskit.ignis.verification.randomized_benchmarking.Clifford.update_destabilizer">
+<code class="descname">update_destabilizer</code><span class="sig-paren">(</span><em>qubit</em>, <em>pauli</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/randomized_benchmarking/Clifford.html#Clifford.update_destabilizer"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.Clifford.update_destabilizer" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Update the qubit destabilizer row from a Pauli object</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="qiskit.ignis.verification.randomized_benchmarking.Clifford.Clifford.update_stabilizer">
-<code class="descname">update_stabilizer</code><span class="sig-paren">(</span><em>qubit</em>, <em>pauli</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/randomized_benchmarking/Clifford.html#Clifford.update_stabilizer"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.Clifford.Clifford.update_stabilizer" title="この定義へのパーマリンク">¶</a></dt>
+<dt id="qiskit.ignis.verification.randomized_benchmarking.Clifford.update_stabilizer">
+<code class="descname">update_stabilizer</code><span class="sig-paren">(</span><em>qubit</em>, <em>pauli</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/randomized_benchmarking/Clifford.html#Clifford.update_stabilizer"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.Clifford.update_stabilizer" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Update the qubit stabilizer row from a Pauli object</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="qiskit.ignis.verification.randomized_benchmarking.Clifford.Clifford.v">
-<code class="descname">v</code><span class="sig-paren">(</span><em>qubit</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/randomized_benchmarking/Clifford.html#Clifford.v"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.Clifford.Clifford.v" title="この定義へのパーマリンク">¶</a></dt>
+<dt id="qiskit.ignis.verification.randomized_benchmarking.Clifford.v">
+<code class="descname">v</code><span class="sig-paren">(</span><em>qubit</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/randomized_benchmarking/Clifford.html#Clifford.v"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.Clifford.v" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Apply v gate sd.h</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="qiskit.ignis.verification.randomized_benchmarking.Clifford.Clifford.w">
-<code class="descname">w</code><span class="sig-paren">(</span><em>qubit</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/randomized_benchmarking/Clifford.html#Clifford.w"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.Clifford.Clifford.w" title="この定義へのパーマリンク">¶</a></dt>
+<dt id="qiskit.ignis.verification.randomized_benchmarking.Clifford.w">
+<code class="descname">w</code><span class="sig-paren">(</span><em>qubit</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/randomized_benchmarking/Clifford.html#Clifford.w"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.Clifford.w" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Apply w gate v.v</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="qiskit.ignis.verification.randomized_benchmarking.Clifford.Clifford.x">
-<code class="descname">x</code><span class="sig-paren">(</span><em>qubit</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/randomized_benchmarking/Clifford.html#Clifford.x"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.Clifford.Clifford.x" title="この定義へのパーマリンク">¶</a></dt>
+<dt id="qiskit.ignis.verification.randomized_benchmarking.Clifford.x">
+<code class="descname">x</code><span class="sig-paren">(</span><em>qubit</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/randomized_benchmarking/Clifford.html#Clifford.x"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.Clifford.x" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Apply a Pauli &quot;x&quot; gate to a qubit</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="qiskit.ignis.verification.randomized_benchmarking.Clifford.Clifford.y">
-<code class="descname">y</code><span class="sig-paren">(</span><em>qubit</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/randomized_benchmarking/Clifford.html#Clifford.y"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.Clifford.Clifford.y" title="この定義へのパーマリンク">¶</a></dt>
+<dt id="qiskit.ignis.verification.randomized_benchmarking.Clifford.y">
+<code class="descname">y</code><span class="sig-paren">(</span><em>qubit</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/randomized_benchmarking/Clifford.html#Clifford.y"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.Clifford.y" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Apply an Pauli &quot;y&quot; gate to a qubit</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="qiskit.ignis.verification.randomized_benchmarking.Clifford.Clifford.z">
-<code class="descname">z</code><span class="sig-paren">(</span><em>qubit</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/randomized_benchmarking/Clifford.html#Clifford.z"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.Clifford.Clifford.z" title="この定義へのパーマリンク">¶</a></dt>
+<dt id="qiskit.ignis.verification.randomized_benchmarking.Clifford.z">
+<code class="descname">z</code><span class="sig-paren">(</span><em>qubit</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/randomized_benchmarking/Clifford.html#Clifford.z"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.Clifford.z" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Apply an Pauli &quot;z&quot; gate to qubit</p>
 </dd></dl>
 

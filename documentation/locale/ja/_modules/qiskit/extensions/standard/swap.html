@@ -204,7 +204,7 @@
 <span class="kn">from</span> <span class="nn">qiskit.extensions.standard.cx</span> <span class="k">import</span> <span class="n">CnotGate</span>
 
 
-<div class="viewcode-block" id="SwapGate"><a class="viewcode-back" href="../../../../api/qiskit.extensions.standard.swap.html#qiskit.circuit.SwapGate">[ドキュメント]</a><span class="k">class</span> <span class="nc">SwapGate</span><span class="p">(</span><span class="n">Gate</span><span class="p">):</span>
+<div class="viewcode-block" id="SwapGate"><a class="viewcode-back" href="../../../../api/qiskit.extensions.standard.SwapGate.html#qiskit.circuit.SwapGate">[ドキュメント]</a><span class="k">class</span> <span class="nc">SwapGate</span><span class="p">(</span><span class="n">Gate</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;SWAP gate.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -226,11 +226,11 @@
             <span class="n">definition</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">inst</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">definition</span> <span class="o">=</span> <span class="n">definition</span>
 
-<div class="viewcode-block" id="SwapGate.inverse"><a class="viewcode-back" href="../../../../api/qiskit.extensions.standard.swap.html#qiskit.circuit.SwapGate.inverse">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="SwapGate.inverse"><a class="viewcode-back" href="../../../../api/qiskit.extensions.standard.SwapGate.html#qiskit.circuit.SwapGate.inverse">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Invert this gate.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">SwapGate</span><span class="p">()</span>  <span class="c1"># self-inverse</span></div>
 
-<div class="viewcode-block" id="SwapGate.to_matrix"><a class="viewcode-back" href="../../../../api/qiskit.extensions.standard.swap.html#qiskit.circuit.SwapGate.to_matrix">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">to_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="SwapGate.to_matrix"><a class="viewcode-back" href="../../../../api/qiskit.extensions.standard.SwapGate.html#qiskit.circuit.SwapGate.to_matrix">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">to_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return a Numpy.array for the Swap gate.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
                             <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
@@ -238,9 +238,9 @@
                             <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="swap"><a class="viewcode-back" href="../../../../api/qiskit.extensions.standard.swap.html#qiskit.circuit.swap">[ドキュメント]</a><span class="k">def</span> <span class="nf">swap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qubit1</span><span class="p">,</span> <span class="n">qubit2</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">swap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qubit1</span><span class="p">,</span> <span class="n">qubit2</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Apply SWAP from qubit1 to qubit2.&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">SwapGate</span><span class="p">(),</span> <span class="p">[</span><span class="n">qubit1</span><span class="p">,</span> <span class="n">qubit2</span><span class="p">],</span> <span class="p">[])</span></div>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">SwapGate</span><span class="p">(),</span> <span class="p">[</span><span class="n">qubit1</span><span class="p">,</span> <span class="n">qubit2</span><span class="p">],</span> <span class="p">[])</span>
 
 
 <span class="n">QuantumCircuit</span><span class="o">.</span><span class="n">swap</span> <span class="o">=</span> <span class="n">swap</span>
