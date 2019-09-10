@@ -35,8 +35,12 @@ class PageAer extends localize(i18next)(LitElement) {
       StackListStyles,
       css`
         :host {
-          --app-section-background-color: var(--qiskit-aer-color);
+          --app-section-background-color: var(--qiskit-common-background-color);
           --app-section-color: #000000;
+        }
+
+        header {
+          background-color: var(--qiskit-aer-color);
         }
 
         section.colored .row .description .actions vaadin-button {
@@ -58,7 +62,7 @@ class PageAer extends localize(i18next)(LitElement) {
     // prettier-ignore
     return html`
       <header>
-        <img src="images/qiskit-aer-logo.png" .alt=${i18next.t('pages.aer.altLogo')}>
+        <img src="images/qiskit-aer-logo.svg" .alt=${i18next.t('pages.aer.altLogo')}>
         <div>
           <h1>
             ${i18next.t('pages.aer.headerTitle')}
