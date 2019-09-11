@@ -1,9 +1,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-import Button from '~/components/Button.vue'
 
-@Component({ components: { Button } })
+@Component
 export default class extends Vue {
   @Prop(String) renderFn
   @Prop(String) staticRenderFns

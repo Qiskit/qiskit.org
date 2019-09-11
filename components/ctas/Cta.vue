@@ -1,5 +1,5 @@
 <template>
-  <a class="button" :href="to">
+  <a :class="{ button: true, 'button--secondary': secondary }" :href="to">
     <slot />
   </a>
 </template>
@@ -11,6 +11,7 @@ import { Component, Prop } from 'vue-property-decorator'
 @Component
 export default class extends Vue {
   @Prop(String) to
+  @Prop(Boolean) secondary
 
   isExternal(url: string): boolean {
     return url.startsWith('http')
@@ -39,5 +40,10 @@ export default class extends Vue {
   box-shadow: 0 4px 6px rgba(50,50,93,.11),0 1px 3px rgba(0,0,0,.08);
   white-space: nowrap;
   line-height: 4rem;
+
+  &--secondary {
+    color: black;
+    background-color: white;
+  }
 }
 </style>

@@ -1,16 +1,16 @@
 <template>
   <article class="page-section-container">
     <div
-      :class="[
-        'page-section',
-        extraPosition == 'start' ? 'page-section--reversed' : '',
-      ].join(' ')"
+      :class="{
+        'page-section': true,
+        'page-section--reversed': extraPosition == 'start',
+      }"
     >
       <div
-        :class="[
-          'copy-container',
-          !this.$slots.extra ? 'copy-container--alone' : ''
-        ]"
+        :class="{
+          'copy-container': true,
+          'copy-container--alone': !this.$slots.extra
+        }"
       >
         <slot />
       </div>

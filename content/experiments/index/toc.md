@@ -5,6 +5,7 @@
   collections:
     cards:
       - qiskit-blocks.md
+      - tictacq.md
 -
   title: Qiskit Experiments
   basepath: experiments/

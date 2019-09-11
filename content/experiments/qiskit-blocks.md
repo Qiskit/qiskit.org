@@ -5,10 +5,11 @@ description: The QiskitBlocks application teaches quantum computing concepts usi
 image: https://github.com/JavaFXpert/QiskitBlocks/raw/master/quantum_circuits_garden.png
 to: /experiments/qiskit-blocks
 media:
+  - https://player.vimeo.com/video/356185384
   - https://content.minetest.net/uploads/r9yczgJPla.png
   - https://content.minetest.net/uploads/3KQXwz0qVz.png
   - https://content.minetest.net/uploads/Q5etnbmvSX.png
-  
+
 source: https://github.com/JavaFXpert/QiskitBlocks
 ---
 Although quantum computing concepts can seem strange and difficult to learn, many of them are easy to understand in the context of playing games. For example, a quantum bit (qubit) may hold the value of 0 or 1, or some combination of those values. When measured, the state of the qubit collapses to either 0 or 1, based upon the probabilities expressed in its hidden quantum state. A simple demonstration in the context of a game can shed light on this phenomenon as well as how it is leveraged in quantum computing.
