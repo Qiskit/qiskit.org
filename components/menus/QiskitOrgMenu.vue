@@ -20,10 +20,10 @@
               <a
                 v-for="(link, index) in links"
                 :key="index"
-                :class="[
-                  'vertical-community-navigation__item',
-                  isActive(link.to) ? 'nuxt-link-active' : ''
-                ].join(' ')"
+                :class="{
+                  'vertical-community-navigation__item': true,
+                  'nuxt-link-active': isActive(link.to)
+                }"
                 :href="link.to"
               >
                 {{ link.label }}
@@ -54,10 +54,10 @@
           <a
             v-for="(link, index) in links"
             :key="index"
-            :class="[
-              'navigation-group__item',
-              isActive(link.to) ? 'nuxt-link-active' : ''
-            ].join(' ')"
+            :class="{
+              'navigation-group__item': true,
+              'nuxt-link-active': isActive(link.to)
+            }"
             :href="link.to"
           >
             {{ link.label }}
@@ -78,12 +78,13 @@ export default class extends Vue {
     type: Array,
     default: () => [
       { to: '/education', label: 'Education' },
-      { to: '/advocates', label: 'Advocates' }
+      { to: '/advocates', label: 'Advocates' },
+      { to: '/experiments', label: 'Experiments' }
     ]
   }) links
 
   isActive(path) {
-    return this.$route.path === path
+    return this.$route.path.startsWith(path)
   }
 }
 </script>

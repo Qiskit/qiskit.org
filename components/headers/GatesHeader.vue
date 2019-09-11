@@ -4,11 +4,11 @@
       <div class="decoration" aria-hidden="true" />
       <section class="intro-container">
         <article
-          :class="`
-            intro
-            intro--framed
-            ${extraPosition == 'start' ? 'intro--reversed' : ''}
-          `"
+          :class="{
+            intro: true,
+            'intro--framed': true,
+            'intro--reversed': extraPosition == 'start'
+          }"
         >
           <section class="copy-container">
             <h1 class="main-title">

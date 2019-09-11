@@ -29,6 +29,12 @@
           <ul>
             <li><a class="footer-column__link" href="/advocates#become-an-advocate">Become an Advocate</a></li>
           </ul>
+          <h2 class="footer-column__title">
+            Qiskit Experiments
+          </h2>
+          <ul>
+            <li><a class="footer-column__link" href="/experiments#browse-the-experiments">Browse the experiments</a></li>
+          </ul>
         </section>
         <section class="footer-column">
           <h2 class="footer-column__title">

@@ -44,32 +44,32 @@ export default class extends Vue {
 </script>
 
 <style lang="scss" scoped>
-  .advocate-card {
-    font-size: 0.9rem;
-    text-align: center;
-    background-color: var(--primary-color);
+.advocate-card {
+  font-size: 0.9rem;
+  text-align: center;
+  background-color: var(--primary-color);
 
-    p {
+  p {
+    margin-top: 0;
+  }
+
+  h3 {
+    margin-top: 1.5rem;
+
+    &:first-child {
       margin-top: 0;
     }
-
-    h3 {
-      margin-top: 1.5rem;
-
-      &:first-child {
-        margin-top: 0;
-      }
-    }
-
-    &__picture {
-      height: 350px;
-      background-repeat: no-repeat;
-      background-size: cover, cover, cover;
-      background-position: top center;
-    }
-
-    &__copy {
-      margin: 0.5rem 2rem 1em;
-    }
   }
+
+  &__picture {
+    height: 350px;
+    background-repeat: no-repeat;
+    background-size: cover, cover, cover;
+    background-position: top center;
+  }
+
+  &__copy {
+    margin: 0.5rem 2rem 1em;
+  }
+}
 </style>
