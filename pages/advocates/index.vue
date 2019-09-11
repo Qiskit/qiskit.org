@@ -48,13 +48,13 @@
       <PageSection id="become-an-advocate">
         <h2>Become an Advocate</h2>
         <ol>
-          <li>Download the test by clicking on the "Apply now" button below.</li>
-          <li>Decompress and complete the test in the application with at least a 70%.</li>
+          <li>Click on the "Apply now" button below.</li>
+          <li>Complete the test in the application with at least a 70%.</li>
           <li>Provide at least 3 contributions to the Qiskit community and complete application by <strong>October 9, 2019</strong>.</li>
         </ol>
         <ul class="actions">
           <li>
-            <Cta to="/files/qiskit_advocates_questions.zip">
+            <Cta to="http://ibm.biz/qiskit-advocate">
               Apply now
             </Cta>
           </li>
