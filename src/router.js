@@ -54,7 +54,7 @@ export function init(outlet) {
       },
     },
     {
-      path: '/ibmq',
+      path: '/ibmqaccount',
       name: 'ibmqp',
       component: 'page-ibmqp',
       action: () => {
