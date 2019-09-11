@@ -48,6 +48,12 @@ class PageIBMQP extends localize(i18next)(LitElement) {
           --ibmq-button-secondary-focus-color: var(--qiskit-ibmqp-color);
         }
 
+        .colored-link {
+          color: #000;
+          text-decoration: underline;
+          font-style: italic;
+        }
+
         .stack-list .element.dot::before {
           width: 0.682em;
           height: 0.682em;
@@ -90,10 +96,20 @@ class PageIBMQP extends localize(i18next)(LitElement) {
             <h3>${i18next.t('pages.ibmqp.aboutTitle')}</h3>
             <p>
               ${i18next.t('pages.ibmqp.aboutDescription')}
-              <br>
-              <a href="https://qiskit.org/documentation/install.html#access-ibm-q-systems" target="_blank">
-                Follow these steps
-              </a> to set up your Qiskit environment to send jobs to IBM Q systems.
+              <a
+                class="colored-link"
+                href="https://qiskit.org/documentation/install.html#access-ibm-q-systems"
+                title="Link"
+                rel="noopener"
+                target="_blank"
+                @click=${() => trackClickEvent({
+                  action: 'Link to Access IBMQ Systems',
+                  objectType: 'Link'
+                })}
+              >
+                ${i18next.t('pages.ibmqp.addLink')}
+              </a>
+              ${i18next.t('pages.ibmqp.textAfterLink')}
             </p>
             <!-- Insert stack h3 here -->
             <!-- <div class="stack-list">
