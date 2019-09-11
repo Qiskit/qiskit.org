@@ -84,7 +84,7 @@
         </p>
         <ul class="actions">
           <li>
-            <Cta to="mailto:hello@qiskit.org">
+            <Cta to="mailto:hello@qiskit.camp">
               Request an event
             </Cta>
           </li>
