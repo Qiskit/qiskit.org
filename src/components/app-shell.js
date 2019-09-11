@@ -229,7 +229,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
             <a href="/aer" ?selected=${this.page === 'aer'}>Aer</a>
             <a href="/aqua" ?selected=${this.page === 'aqua'}>Aqua</a>
             <a href="/ignis" ?selected=${this.page === 'ignis'}>Ignis</a>
-            <a href="/ibmq" ?selected=${this.page === 'ibmq'}>IBM Q Account</a>
+            <a href="/ibmqaccount" ?selected=${this.page === 'ibmq'}>IBM Q Account</a>
           </nav>
           <nav class="second">
             <a href="/education">${i18next.t('community')}</a>
@@ -259,7 +259,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
           <a href="/aer" ?selected=${this.page === 'aer'}>Aer</a>
           <a href="/aqua" ?selected=${this.page === 'aqua'}>Aqua</a>
           <a href="/ignis" ?selected=${this.page === 'ignis'}>Ignis</a>
-          <a href="/ibmq" ?selected=${this.page === 'ibmq'}>IBM Q Account</a>
+          <a href="/ibmqaccount" ?selected=${this.page === 'ibmq'}>IBM Q Account</a>
           <span>Learn more</span>
           <a href="/education">${i18next.t('community')}</a>
           <a
