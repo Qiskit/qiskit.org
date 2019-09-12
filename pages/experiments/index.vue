@@ -6,10 +6,10 @@
         main-title="Qiskit Experiments"
       >
         <p>Browse and contribute with innovatives ways of using quantum computing and Qiskit.</p>
-        <p>Do you have something to share?</p>
+        <!--<p>Do you have something to share?</p>
         <ul>
           <Cta>Submit your experiment</Cta>
-        </ul>
+        </ul>-->
       </GatesHeader>
     </header>
     <div class="inner-navigation-scope">
