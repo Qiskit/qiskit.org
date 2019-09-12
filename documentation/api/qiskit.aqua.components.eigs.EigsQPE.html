@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -90,7 +89,7 @@
 	<span>
 	    <select id="language" name="languages">
 	        <option value="en">English</option>
-	        <option value="ja">日本語</option>
+	        <option value="ja">Japanese</option>
         </select>
     </span>
 </div>
@@ -673,7 +672,7 @@
 	<span>
 	    <select id="language" name="languages">
 	        <option value="en">English</option>
-	        <option value="ja">日本語</option>
+	        <option value="ja">Japanese</option>
         </select>
     </span>
 </div>
@@ -1246,278 +1245,266 @@
 <h1>EigsQPE<a class="headerlink" href="#eigsqpe" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="qiskit.aqua.components.eigs.EigsQPE">
-<em class="property">class </em><code class="descname">EigsQPE</code><span class="sig-paren">(</span><em>operator, iqft, num_time_slices=1, num_ancillae=1, expansion_mode='trotter', expansion_order=1, evo_time=None, negative_evals=False, ne_qfts=[None, None]</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/components/eigs/eigs_qpe.html#EigsQPE"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.aqua.components.eigs.EigsQPE" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">EigsQPE</code><span class="sig-paren">(</span><em class="sig-param">operator, iqft, num_time_slices=1, num_ancillae=1, expansion_mode='trotter', expansion_order=1, evo_time=None, negative_evals=False, ne_qfts=[None, None]</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/components/eigs/eigs_qpe.html#EigsQPE"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.aqua.components.eigs.EigsQPE" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.aqua.components.eigs.eigs.Eigenvalues</span></code></p>
 <p>This class embeds a PhaseEstimationCircuit for getting the eigenvalues of a matrix.</p>
 <p>Specifically, this class is based on PhaseEstimationCircuit with no measurements and additional
 handling of negative eigenvalues, e.g. for HHL. It uses many parameters
 known from plain QPE. It depends on QFT and IQFT.</p>
 <p class="rubric">Attributes Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.components.eigs.EigsQPE.CONFIGURATION" title="qiskit.aqua.components.eigs.EigsQPE.CONFIGURATION"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CONFIGURATION</span></code></a></td>
-<td></td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.components.eigs.EigsQPE.CONFIGURATION" title="qiskit.aqua.components.eigs.EigsQPE.CONFIGURATION"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CONFIGURATION</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_ALGORITHM" title="qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_ALGORITHM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_ALGORITHM</span></code></a></td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_ALGORITHM" title="qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_ALGORITHM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_ALGORITHM</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_DISCRIMINATIVE_NETWORK" title="qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_DISCRIMINATIVE_NETWORK"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_DISCRIMINATIVE_NETWORK</span></code></a></td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_DISCRIMINATIVE_NETWORK" title="qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_DISCRIMINATIVE_NETWORK"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_DISCRIMINATIVE_NETWORK</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_EIGS" title="qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_EIGS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_EIGS</span></code></a></td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_EIGS" title="qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_EIGS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_EIGS</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_FEATURE_MAP" title="qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_FEATURE_MAP"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_FEATURE_MAP</span></code></a></td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_FEATURE_MAP" title="qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_FEATURE_MAP"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_FEATURE_MAP</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_GENERATIVE_NETWORK" title="qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_GENERATIVE_NETWORK"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_GENERATIVE_NETWORK</span></code></a></td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_GENERATIVE_NETWORK" title="qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_GENERATIVE_NETWORK"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_GENERATIVE_NETWORK</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_INITIAL_STATE" title="qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_INITIAL_STATE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_INITIAL_STATE</span></code></a></td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_INITIAL_STATE" title="qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_INITIAL_STATE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_INITIAL_STATE</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_IQFT" title="qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_IQFT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_IQFT</span></code></a></td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_IQFT" title="qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_IQFT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_IQFT</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_MULTICLASS_EXTENSION" title="qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_MULTICLASS_EXTENSION"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_MULTICLASS_EXTENSION</span></code></a></td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_MULTICLASS_EXTENSION" title="qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_MULTICLASS_EXTENSION"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_MULTICLASS_EXTENSION</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_MULTIVARIATE_DISTRIBUTION" title="qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_MULTIVARIATE_DISTRIBUTION"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_MULTIVARIATE_DISTRIBUTION</span></code></a></td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_MULTIVARIATE_DISTRIBUTION" title="qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_MULTIVARIATE_DISTRIBUTION"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_MULTIVARIATE_DISTRIBUTION</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_OPTIMIZER" title="qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_OPTIMIZER"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_OPTIMIZER</span></code></a></td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_OPTIMIZER" title="qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_OPTIMIZER"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_OPTIMIZER</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_ORACLE" title="qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_ORACLE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_ORACLE</span></code></a></td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_ORACLE" title="qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_ORACLE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_ORACLE</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_QFT" title="qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_QFT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_QFT</span></code></a></td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_QFT" title="qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_QFT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_QFT</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_RECIPROCAL" title="qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_RECIPROCAL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_RECIPROCAL</span></code></a></td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_RECIPROCAL" title="qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_RECIPROCAL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_RECIPROCAL</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_UNCERTAINTY_PROBLEM" title="qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_UNCERTAINTY_PROBLEM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_UNCERTAINTY_PROBLEM</span></code></a></td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_UNCERTAINTY_PROBLEM" title="qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_UNCERTAINTY_PROBLEM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_UNCERTAINTY_PROBLEM</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_UNIVARIATE_DISTRIBUTION" title="qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_UNIVARIATE_DISTRIBUTION"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_UNIVARIATE_DISTRIBUTION</span></code></a></td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_UNIVARIATE_DISTRIBUTION" title="qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_UNIVARIATE_DISTRIBUTION"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_UNIVARIATE_DISTRIBUTION</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_VAR_FORM" title="qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_VAR_FORM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_VAR_FORM</span></code></a></td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_VAR_FORM" title="qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_VAR_FORM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_VAR_FORM</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.components.eigs.EigsQPE.configuration" title="qiskit.aqua.components.eigs.EigsQPE.configuration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">configuration</span></code></a></td>
-<td>Return pluggable configuration.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.components.eigs.EigsQPE.configuration" title="qiskit.aqua.components.eigs.EigsQPE.configuration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">configuration</span></code></a></p></td>
+<td><p>Return pluggable configuration.</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Methods Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.components.eigs.EigsQPE.check_pluggable_valid" title="qiskit.aqua.components.eigs.EigsQPE.check_pluggable_valid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_pluggable_valid</span></code></a>()</td>
-<td>Checks if pluggable is ready for use.</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.components.eigs.EigsQPE.check_pluggable_valid" title="qiskit.aqua.components.eigs.EigsQPE.check_pluggable_valid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_pluggable_valid</span></code></a>()</p></td>
+<td><p>Checks if pluggable is ready for use.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.components.eigs.EigsQPE.construct_circuit" title="qiskit.aqua.components.eigs.EigsQPE.construct_circuit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">construct_circuit</span></code></a>(mode[,&nbsp;register])</td>
-<td>Construct the eigenvalues estimation using the PhaseEstimationCircuit</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.components.eigs.EigsQPE.construct_circuit" title="qiskit.aqua.components.eigs.EigsQPE.construct_circuit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">construct_circuit</span></code></a>(mode[, register])</p></td>
+<td><p>Construct the eigenvalues estimation using the PhaseEstimationCircuit</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.components.eigs.EigsQPE.construct_inverse" title="qiskit.aqua.components.eigs.EigsQPE.construct_inverse"><code class="xref py py-obj docutils literal notranslate"><span class="pre">construct_inverse</span></code></a>(mode,&nbsp;circuit)</td>
-<td>Construct the inverse eigenvalue estimation quantum circuit.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.components.eigs.EigsQPE.construct_inverse" title="qiskit.aqua.components.eigs.EigsQPE.construct_inverse"><code class="xref py py-obj docutils literal notranslate"><span class="pre">construct_inverse</span></code></a>(mode, circuit)</p></td>
+<td><p>Construct the inverse eigenvalue estimation quantum circuit.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.components.eigs.EigsQPE.get_register_sizes" title="qiskit.aqua.components.eigs.EigsQPE.get_register_sizes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_register_sizes</span></code></a>()</td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.components.eigs.EigsQPE.get_register_sizes" title="qiskit.aqua.components.eigs.EigsQPE.get_register_sizes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_register_sizes</span></code></a>()</p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.components.eigs.EigsQPE.get_scaling" title="qiskit.aqua.components.eigs.EigsQPE.get_scaling"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_scaling</span></code></a>()</td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.components.eigs.EigsQPE.get_scaling" title="qiskit.aqua.components.eigs.EigsQPE.get_scaling"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_scaling</span></code></a>()</p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.components.eigs.EigsQPE.init_params" title="qiskit.aqua.components.eigs.EigsQPE.init_params"><code class="xref py py-obj docutils literal notranslate"><span class="pre">init_params</span></code></a>(params,&nbsp;matrix)</td>
-<td>Initialize via parameters dictionary and algorithm input instance</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.components.eigs.EigsQPE.init_params" title="qiskit.aqua.components.eigs.EigsQPE.init_params"><code class="xref py py-obj docutils literal notranslate"><span class="pre">init_params</span></code></a>(params, matrix)</p></td>
+<td><p>Initialize via parameters dictionary and algorithm input instance</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.components.eigs.EigsQPE.validate" title="qiskit.aqua.components.eigs.EigsQPE.validate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate</span></code></a>(args_dict)</td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.components.eigs.EigsQPE.validate" title="qiskit.aqua.components.eigs.EigsQPE.validate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate</span></code></a>(args_dict)</p></td>
+<td><p></p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Attributes Documentation</p>
 <dl class="attribute">
 <dt id="qiskit.aqua.components.eigs.EigsQPE.CONFIGURATION">
-<code class="descname">CONFIGURATION</code><em class="property"> = {'depends': [{'pluggable_type': 'iqft', 'default': {'name': 'STANDARD'}}, {'pluggable_type': 'qft', 'default': {'name': 'STANDARD'}}], 'description': 'Quantum Phase Estimation for eigenvalues', 'input_schema': {'$schema': 'http://json-schema.org/schema#', 'additionalProperties': False, 'id': 'eigsqpe_schema', 'properties': {'evo_time': {'default': None, 'type': ['number', 'null']}, 'expansion_mode': {'default': 'trotter', 'enum': ['suzuki', 'trotter'], 'type': 'string'}, 'expansion_order': {'default': 1, 'minimum': 1, 'type': 'integer'}, 'negative_evals': {'default': False, 'type': 'boolean'}, 'num_ancillae': {'default': 1, 'minimum': 1, 'type': 'integer'}, 'num_time_slices': {'default': 1, 'minimum': 0, 'type': 'integer'}}, 'type': 'object'}, 'name': 'EigsQPE'}</em><a class="headerlink" href="#qiskit.aqua.components.eigs.EigsQPE.CONFIGURATION" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">CONFIGURATION</code><em class="property"> = {'depends': [{'pluggable_type': 'iqft', 'default': {'name': 'STANDARD'}}, {'pluggable_type': 'qft', 'default': {'name': 'STANDARD'}}], 'description': 'Quantum Phase Estimation for eigenvalues', 'input_schema': {'$schema': 'http://json-schema.org/schema#', 'additionalProperties': False, 'id': 'eigsqpe_schema', 'properties': {'evo_time': {'default': None, 'type': ['number', 'null']}, 'expansion_mode': {'default': 'trotter', 'enum': ['suzuki', 'trotter'], 'type': 'string'}, 'expansion_order': {'default': 1, 'minimum': 1, 'type': 'integer'}, 'negative_evals': {'default': False, 'type': 'boolean'}, 'num_ancillae': {'default': 1, 'minimum': 1, 'type': 'integer'}, 'num_time_slices': {'default': 1, 'minimum': 0, 'type': 'integer'}}, 'type': 'object'}, 'name': 'EigsQPE'}</em><a class="headerlink" href="#qiskit.aqua.components.eigs.EigsQPE.CONFIGURATION" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_ALGORITHM">
-<code class="descname">SECTION_KEY_ALGORITHM</code><em class="property"> = 'algorithm'</em><a class="headerlink" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_ALGORITHM" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">SECTION_KEY_ALGORITHM</code><em class="property"> = 'algorithm'</em><a class="headerlink" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_ALGORITHM" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_DISCRIMINATIVE_NETWORK">
-<code class="descname">SECTION_KEY_DISCRIMINATIVE_NETWORK</code><em class="property"> = 'discriminative_network'</em><a class="headerlink" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_DISCRIMINATIVE_NETWORK" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">SECTION_KEY_DISCRIMINATIVE_NETWORK</code><em class="property"> = 'discriminative_network'</em><a class="headerlink" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_DISCRIMINATIVE_NETWORK" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_EIGS">
-<code class="descname">SECTION_KEY_EIGS</code><em class="property"> = 'eigs'</em><a class="headerlink" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_EIGS" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">SECTION_KEY_EIGS</code><em class="property"> = 'eigs'</em><a class="headerlink" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_EIGS" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_FEATURE_MAP">
-<code class="descname">SECTION_KEY_FEATURE_MAP</code><em class="property"> = 'feature_map'</em><a class="headerlink" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_FEATURE_MAP" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">SECTION_KEY_FEATURE_MAP</code><em class="property"> = 'feature_map'</em><a class="headerlink" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_FEATURE_MAP" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_GENERATIVE_NETWORK">
-<code class="descname">SECTION_KEY_GENERATIVE_NETWORK</code><em class="property"> = 'generative_network'</em><a class="headerlink" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_GENERATIVE_NETWORK" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">SECTION_KEY_GENERATIVE_NETWORK</code><em class="property"> = 'generative_network'</em><a class="headerlink" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_GENERATIVE_NETWORK" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_INITIAL_STATE">
-<code class="descname">SECTION_KEY_INITIAL_STATE</code><em class="property"> = 'initial_state'</em><a class="headerlink" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_INITIAL_STATE" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">SECTION_KEY_INITIAL_STATE</code><em class="property"> = 'initial_state'</em><a class="headerlink" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_INITIAL_STATE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_IQFT">
-<code class="descname">SECTION_KEY_IQFT</code><em class="property"> = 'iqft'</em><a class="headerlink" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_IQFT" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">SECTION_KEY_IQFT</code><em class="property"> = 'iqft'</em><a class="headerlink" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_IQFT" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_MULTICLASS_EXTENSION">
-<code class="descname">SECTION_KEY_MULTICLASS_EXTENSION</code><em class="property"> = 'multiclass_extension'</em><a class="headerlink" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_MULTICLASS_EXTENSION" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">SECTION_KEY_MULTICLASS_EXTENSION</code><em class="property"> = 'multiclass_extension'</em><a class="headerlink" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_MULTICLASS_EXTENSION" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_MULTIVARIATE_DISTRIBUTION">
-<code class="descname">SECTION_KEY_MULTIVARIATE_DISTRIBUTION</code><em class="property"> = 'multivariate_distribution'</em><a class="headerlink" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_MULTIVARIATE_DISTRIBUTION" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">SECTION_KEY_MULTIVARIATE_DISTRIBUTION</code><em class="property"> = 'multivariate_distribution'</em><a class="headerlink" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_MULTIVARIATE_DISTRIBUTION" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_OPTIMIZER">
-<code class="descname">SECTION_KEY_OPTIMIZER</code><em class="property"> = 'optimizer'</em><a class="headerlink" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_OPTIMIZER" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">SECTION_KEY_OPTIMIZER</code><em class="property"> = 'optimizer'</em><a class="headerlink" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_OPTIMIZER" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_ORACLE">
-<code class="descname">SECTION_KEY_ORACLE</code><em class="property"> = 'oracle'</em><a class="headerlink" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_ORACLE" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">SECTION_KEY_ORACLE</code><em class="property"> = 'oracle'</em><a class="headerlink" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_ORACLE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_QFT">
-<code class="descname">SECTION_KEY_QFT</code><em class="property"> = 'qft'</em><a class="headerlink" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_QFT" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">SECTION_KEY_QFT</code><em class="property"> = 'qft'</em><a class="headerlink" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_QFT" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_RECIPROCAL">
-<code class="descname">SECTION_KEY_RECIPROCAL</code><em class="property"> = 'reciprocal'</em><a class="headerlink" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_RECIPROCAL" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">SECTION_KEY_RECIPROCAL</code><em class="property"> = 'reciprocal'</em><a class="headerlink" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_RECIPROCAL" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_UNCERTAINTY_PROBLEM">
-<code class="descname">SECTION_KEY_UNCERTAINTY_PROBLEM</code><em class="property"> = 'uncertainty_problem'</em><a class="headerlink" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_UNCERTAINTY_PROBLEM" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">SECTION_KEY_UNCERTAINTY_PROBLEM</code><em class="property"> = 'uncertainty_problem'</em><a class="headerlink" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_UNCERTAINTY_PROBLEM" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_UNIVARIATE_DISTRIBUTION">
-<code class="descname">SECTION_KEY_UNIVARIATE_DISTRIBUTION</code><em class="property"> = 'univariate_distribution'</em><a class="headerlink" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_UNIVARIATE_DISTRIBUTION" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">SECTION_KEY_UNIVARIATE_DISTRIBUTION</code><em class="property"> = 'univariate_distribution'</em><a class="headerlink" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_UNIVARIATE_DISTRIBUTION" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_VAR_FORM">
-<code class="descname">SECTION_KEY_VAR_FORM</code><em class="property"> = 'variational_form'</em><a class="headerlink" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_VAR_FORM" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">SECTION_KEY_VAR_FORM</code><em class="property"> = 'variational_form'</em><a class="headerlink" href="#qiskit.aqua.components.eigs.EigsQPE.SECTION_KEY_VAR_FORM" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.components.eigs.EigsQPE.configuration">
-<code class="descname">configuration</code><a class="headerlink" href="#qiskit.aqua.components.eigs.EigsQPE.configuration" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">configuration</code><a class="headerlink" href="#qiskit.aqua.components.eigs.EigsQPE.configuration" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return pluggable configuration.</p>
 </dd></dl>
 
 <p class="rubric">Methods Documentation</p>
-<dl class="staticmethod">
+<dl class="method">
 <dt id="qiskit.aqua.components.eigs.EigsQPE.check_pluggable_valid">
-<em class="property">static </em><code class="descname">check_pluggable_valid</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.components.eigs.EigsQPE.check_pluggable_valid" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">check_pluggable_valid</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.components.eigs.EigsQPE.check_pluggable_valid" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks if pluggable is ready for use. Throws an exception if not</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.components.eigs.EigsQPE.construct_circuit">
-<code class="descname">construct_circuit</code><span class="sig-paren">(</span><em>mode</em>, <em>register=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/components/eigs/eigs_qpe.html#EigsQPE.construct_circuit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.aqua.components.eigs.EigsQPE.construct_circuit" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">construct_circuit</code><span class="sig-paren">(</span><em class="sig-param">mode</em>, <em class="sig-param">register=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/components/eigs/eigs_qpe.html#EigsQPE.construct_circuit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.aqua.components.eigs.EigsQPE.construct_circuit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Construct the eigenvalues estimation using the PhaseEstimationCircuit</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>mode</strong> (<em>str</em>) – construction mode, ‘matrix’ not supported</li>
-<li><strong>register</strong> (<a class="reference internal" href="qiskit.circuit.QuantumRegister.html#qiskit.circuit.QuantumRegister" title="qiskit.circuit.QuantumRegister"><em>QuantumRegister</em></a>) – the register to use for the quantum state</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mode</strong> (<em>str</em>) – construction mode, ‘matrix’ not supported</p></li>
+<li><p><strong>register</strong> (<a class="reference internal" href="qiskit.circuit.QuantumRegister.html#qiskit.circuit.QuantumRegister" title="qiskit.circuit.QuantumRegister"><em>QuantumRegister</em></a>) – the register to use for the quantum state</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">the QuantumCircuit object for the constructed circuit</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the QuantumCircuit object for the constructed circuit</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.components.eigs.EigsQPE.construct_inverse">
-<code class="descname">construct_inverse</code><span class="sig-paren">(</span><em>mode</em>, <em>circuit</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.components.eigs.EigsQPE.construct_inverse" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">construct_inverse</code><span class="sig-paren">(</span><em class="sig-param">mode</em>, <em class="sig-param">circuit</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.components.eigs.EigsQPE.construct_inverse" title="Permalink to this definition">¶</a></dt>
 <dd><p>Construct the inverse eigenvalue estimation quantum circuit.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>mode</strong> (<em>str</em>) – construction mode, ‘matrix’ not supported</li>
-<li><strong>circuit</strong> (<a class="reference internal" href="qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit" title="qiskit.circuit.QuantumCircuit"><em>QuantumCircuit</em></a>) – the quantum circuit to invert</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mode</strong> (<em>str</em>) – construction mode, ‘matrix’ not supported</p></li>
+<li><p><strong>circuit</strong> (<a class="reference internal" href="qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit" title="qiskit.circuit.QuantumCircuit"><em>QuantumCircuit</em></a>) – the quantum circuit to invert</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">QuantumCircuit object for of the inverted eigenvalue estimation
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>QuantumCircuit object for of the inverted eigenvalue estimation
 circuit.</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.components.eigs.EigsQPE.get_register_sizes">
-<code class="descname">get_register_sizes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/components/eigs/eigs_qpe.html#EigsQPE.get_register_sizes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.aqua.components.eigs.EigsQPE.get_register_sizes" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_register_sizes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/components/eigs/eigs_qpe.html#EigsQPE.get_register_sizes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.aqua.components.eigs.EigsQPE.get_register_sizes" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.components.eigs.EigsQPE.get_scaling">
-<code class="descname">get_scaling</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/components/eigs/eigs_qpe.html#EigsQPE.get_scaling"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.aqua.components.eigs.EigsQPE.get_scaling" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_scaling</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/components/eigs/eigs_qpe.html#EigsQPE.get_scaling"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.aqua.components.eigs.EigsQPE.get_scaling" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="classmethod">
+<dl class="method">
 <dt id="qiskit.aqua.components.eigs.EigsQPE.init_params">
-<em class="property">classmethod </em><code class="descname">init_params</code><span class="sig-paren">(</span><em>params</em>, <em>matrix</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/components/eigs/eigs_qpe.html#EigsQPE.init_params"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.aqua.components.eigs.EigsQPE.init_params" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="sig-name descname">init_params</code><span class="sig-paren">(</span><em class="sig-param">params</em>, <em class="sig-param">matrix</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/components/eigs/eigs_qpe.html#EigsQPE.init_params"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.aqua.components.eigs.EigsQPE.init_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize via parameters dictionary and algorithm input instance</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>params</strong> – parameters dictionary</li>
-<li><strong>matrix</strong> – two dimensional array which represents the operator</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>params</strong> – parameters dictionary</p></li>
+<li><p><strong>matrix</strong> – two dimensional array which represents the operator</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.components.eigs.EigsQPE.validate">
-<code class="descname">validate</code><span class="sig-paren">(</span><em>args_dict</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.components.eigs.EigsQPE.validate" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">validate</code><span class="sig-paren">(</span><em class="sig-param">args_dict</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.components.eigs.EigsQPE.validate" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>

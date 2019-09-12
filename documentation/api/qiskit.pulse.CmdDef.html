@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -90,7 +89,7 @@
 	<span>
 	    <select id="language" name="languages">
 	        <option value="en">English</option>
-	        <option value="ja">日本語</option>
+	        <option value="ja">Japanese</option>
         </select>
     </span>
 </div>
@@ -673,7 +672,7 @@
 	<span>
 	    <select id="language" name="languages">
 	        <option value="en">English</option>
-	        <option value="ja">日本語</option>
+	        <option value="ja">Japanese</option>
         </select>
     </span>
 </div>
@@ -1246,77 +1245,73 @@
 <h1>CmdDef<a class="headerlink" href="#cmddef" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="qiskit.pulse.CmdDef">
-<em class="property">class </em><code class="descname">CmdDef</code><span class="sig-paren">(</span><em>schedules: Optional[Dict[KT</em>, <em>VT]] = None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/pulse/cmd_def.html#CmdDef"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.pulse.CmdDef" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">CmdDef</code><span class="sig-paren">(</span><em class="sig-param">schedules: Optional[Dict] = None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/pulse/cmd_def.html#CmdDef"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.pulse.CmdDef" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Command definition class. Relates <a href="#id1"><span class="problematic" id="id2">`</span></a>Gate`s to <a href="#id3"><span class="problematic" id="id4">`</span></a>Schedule`s.</p>
 <p class="rubric">Methods Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.pulse.CmdDef.add" title="qiskit.pulse.CmdDef.add"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add</span></code></a>(cmd_name,&nbsp;qubits,&nbsp;Iterable[int]],&nbsp;…)</td>
-<td>Add a command to the <cite>CommandDefinition</cite></td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.pulse.CmdDef.add" title="qiskit.pulse.CmdDef.add"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add</span></code></a>(cmd_name, qubits, schedule)</p></td>
+<td><p>Add a command to the <cite>CommandDefinition</cite></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.pulse.CmdDef.cmd_qubits" title="qiskit.pulse.CmdDef.cmd_qubits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cmd_qubits</span></code></a>(cmd_name)</td>
-<td>Get all qubit orderings this command exists for.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.pulse.CmdDef.cmd_qubits" title="qiskit.pulse.CmdDef.cmd_qubits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cmd_qubits</span></code></a>(cmd_name)</p></td>
+<td><p>Get all qubit orderings this command exists for.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.pulse.CmdDef.cmds" title="qiskit.pulse.CmdDef.cmds"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cmds</span></code></a>()</td>
-<td>Return all command names available in CmdDef.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.pulse.CmdDef.cmds" title="qiskit.pulse.CmdDef.cmds"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cmds</span></code></a>()</p></td>
+<td><p>Return all command names available in CmdDef.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.pulse.CmdDef.from_defaults" title="qiskit.pulse.CmdDef.from_defaults"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_defaults</span></code></a>(flat_cmd_def,&nbsp;pulse_library,&nbsp;…)</td>
-<td>Create command definition from backend defaults output.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.pulse.CmdDef.from_defaults" title="qiskit.pulse.CmdDef.from_defaults"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_defaults</span></code></a>(flat_cmd_def, pulse_library[, …])</p></td>
+<td><p>Create command definition from backend defaults output.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.pulse.CmdDef.get" title="qiskit.pulse.CmdDef.get"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get</span></code></a>(cmd_name,&nbsp;qubits,&nbsp;Iterable[int]],&nbsp;…)</td>
-<td>Get command from command definition.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.pulse.CmdDef.get" title="qiskit.pulse.CmdDef.get"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get</span></code></a>(cmd_name, qubits, *params, **kwparams)</p></td>
+<td><p>Get command from command definition.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.pulse.CmdDef.get_parameters" title="qiskit.pulse.CmdDef.get_parameters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_parameters</span></code></a>(cmd_name,&nbsp;qubits,&nbsp;Iterable[int]])</td>
-<td>Get command parameters from command definition.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.pulse.CmdDef.get_parameters" title="qiskit.pulse.CmdDef.get_parameters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_parameters</span></code></a>(cmd_name, qubits)</p></td>
+<td><p>Get command parameters from command definition.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.pulse.CmdDef.has" title="qiskit.pulse.CmdDef.has"><code class="xref py py-obj docutils literal notranslate"><span class="pre">has</span></code></a>(cmd_name,&nbsp;qubits,&nbsp;Iterable[int]])</td>
-<td>Has command of name with qubits.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.pulse.CmdDef.has" title="qiskit.pulse.CmdDef.has"><code class="xref py py-obj docutils literal notranslate"><span class="pre">has</span></code></a>(cmd_name, qubits)</p></td>
+<td><p>Has command of name with qubits.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.pulse.CmdDef.pop" title="qiskit.pulse.CmdDef.pop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pop</span></code></a>(cmd_name,&nbsp;qubits,&nbsp;Iterable[int]],&nbsp;…)</td>
-<td>Pop command from command definition.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.pulse.CmdDef.pop" title="qiskit.pulse.CmdDef.pop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pop</span></code></a>(cmd_name, qubits, *params, **kwparams)</p></td>
+<td><p>Pop command from command definition.</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Methods Documentation</p>
 <dl class="method">
 <dt id="qiskit.pulse.CmdDef.add">
-<code class="descname">add</code><span class="sig-paren">(</span><em>cmd_name: str, qubits: Union[int, Iterable[int]], schedule: Union[qiskit.pulse.schedule.ParameterizedSchedule, qiskit.pulse.schedule.Schedule]</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/pulse/cmd_def.html#CmdDef.add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.pulse.CmdDef.add" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">add</code><span class="sig-paren">(</span><em class="sig-param">cmd_name: str, qubits: Union[int, Iterable[int]], schedule: Union[qiskit.pulse.schedule.ParameterizedSchedule, qiskit.pulse.schedule.Schedule]</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/pulse/cmd_def.html#CmdDef.add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.pulse.CmdDef.add" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add a command to the <cite>CommandDefinition</cite></p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>cmd_name</strong> – Name of the command</li>
-<li><strong>qubits</strong> – Qubits command applies to</li>
-<li><strong>schedule</strong> – Schedule to be added</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cmd_name</strong> – Name of the command</p></li>
+<li><p><strong>qubits</strong> – Qubits command applies to</p></li>
+<li><p><strong>schedule</strong> – Schedule to be added</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.pulse.CmdDef.cmd_qubits">
-<code class="descname">cmd_qubits</code><span class="sig-paren">(</span><em>cmd_name: str</em><span class="sig-paren">)</span> &#x2192; List[Tuple[int]]<a class="reference internal" href="../_modules/qiskit/pulse/cmd_def.html#CmdDef.cmd_qubits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.pulse.CmdDef.cmd_qubits" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">cmd_qubits</code><span class="sig-paren">(</span><em class="sig-param">cmd_name: str</em><span class="sig-paren">)</span> &#x2192; List[Tuple[int]]<a class="reference internal" href="../_modules/qiskit/pulse/cmd_def.html#CmdDef.cmd_qubits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.pulse.CmdDef.cmd_qubits" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get all qubit orderings this command exists for.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.pulse.CmdDef.cmds">
-<code class="descname">cmds</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List[str]<a class="reference internal" href="../_modules/qiskit/pulse/cmd_def.html#CmdDef.cmds"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.pulse.CmdDef.cmds" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">cmds</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List[str]<a class="reference internal" href="../_modules/qiskit/pulse/cmd_def.html#CmdDef.cmds"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.pulse.CmdDef.cmds" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return all command names available in CmdDef.</p>
 </dd></dl>
 
-<dl class="classmethod">
+<dl class="method">
 <dt id="qiskit.pulse.CmdDef.from_defaults">
-<em class="property">classmethod </em><code class="descname">from_defaults</code><span class="sig-paren">(</span><em>flat_cmd_def: List[qiskit.qobj.models.pulse.PulseQobjInstruction], pulse_library: Dict[str, qiskit.pulse.commands.sample_pulse.SamplePulse], buffer: int = 0</em><span class="sig-paren">)</span> &#x2192; qiskit.pulse.cmd_def.CmdDef<a class="reference internal" href="../_modules/qiskit/pulse/cmd_def.html#CmdDef.from_defaults"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.pulse.CmdDef.from_defaults" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="sig-name descname">from_defaults</code><span class="sig-paren">(</span><em class="sig-param">flat_cmd_def: List[qiskit.qobj.models.pulse.PulseQobjInstruction], pulse_library: Dict[str, qiskit.pulse.commands.sample_pulse.SamplePulse], buffer: int = 0</em><span class="sig-paren">)</span> &#x2192; qiskit.pulse.cmd_def.CmdDef<a class="reference internal" href="../_modules/qiskit/pulse/cmd_def.html#CmdDef.from_defaults"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.pulse.CmdDef.from_defaults" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create command definition from backend defaults output.
 :param flat_cmd_def: Command definition list returned by backend
 :param pulse_library: Dictionary of <a href="#id5"><span class="problematic" id="id6">`</span></a>SamplePulse`s
@@ -1325,77 +1320,63 @@
 
 <dl class="method">
 <dt id="qiskit.pulse.CmdDef.get">
-<code class="descname">get</code><span class="sig-paren">(</span><em>cmd_name: str, qubits: Union[int, Iterable[int]], *params, **kwparams</em><span class="sig-paren">)</span> &#x2192; qiskit.pulse.schedule.Schedule<a class="reference internal" href="../_modules/qiskit/pulse/cmd_def.html#CmdDef.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.pulse.CmdDef.get" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param">cmd_name: str, qubits: Union[int, Iterable[int]], *params: List[Union[int, float, complex]], **kwparams: Dict[str, Union[int, float, complex]]</em><span class="sig-paren">)</span> &#x2192; qiskit.pulse.schedule.Schedule<a class="reference internal" href="../_modules/qiskit/pulse/cmd_def.html#CmdDef.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.pulse.CmdDef.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get command from command definition.
 :param cmd_name: Name of the command
 :param qubits: Ordered list of qubits command applies to
 :param *params: Command parameters to be used to generate schedule
 :param **kwparams: Keyworded command parameters to be used to generate schedule</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference internal" href="qiskit.pulse.PulseError.html#qiskit.pulse.PulseError" title="qiskit.pulse.PulseError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">PulseError</span></code></a> – If command for qubits is not available</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><a class="reference internal" href="qiskit.pulse.PulseError.html#qiskit.pulse.PulseError" title="qiskit.pulse.PulseError"><strong>PulseError</strong></a> – If command for qubits is not available</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.pulse.CmdDef.get_parameters">
-<code class="descname">get_parameters</code><span class="sig-paren">(</span><em>cmd_name: str, qubits: Union[int, Iterable[int]]</em><span class="sig-paren">)</span> &#x2192; Tuple[str]<a class="reference internal" href="../_modules/qiskit/pulse/cmd_def.html#CmdDef.get_parameters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.pulse.CmdDef.get_parameters" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_parameters</code><span class="sig-paren">(</span><em class="sig-param">cmd_name: str, qubits: Union[int, Iterable[int]]</em><span class="sig-paren">)</span> &#x2192; Tuple[str]<a class="reference internal" href="../_modules/qiskit/pulse/cmd_def.html#CmdDef.get_parameters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.pulse.CmdDef.get_parameters" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get command parameters from command definition.
 :param cmd_name: Name of the command
 :param qubits: Ordered list of qubits command applies to</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference internal" href="qiskit.pulse.PulseError.html#qiskit.pulse.PulseError" title="qiskit.pulse.PulseError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">PulseError</span></code></a> – If command for qubits is not available</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><a class="reference internal" href="qiskit.pulse.PulseError.html#qiskit.pulse.PulseError" title="qiskit.pulse.PulseError"><strong>PulseError</strong></a> – If command for qubits is not available</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.pulse.CmdDef.has">
-<code class="descname">has</code><span class="sig-paren">(</span><em>cmd_name: str, qubits: Union[int, Iterable[int]]</em><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/qiskit/pulse/cmd_def.html#CmdDef.has"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.pulse.CmdDef.has" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">has</code><span class="sig-paren">(</span><em class="sig-param">cmd_name: str, qubits: Union[int, Iterable[int]]</em><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/qiskit/pulse/cmd_def.html#CmdDef.has"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.pulse.CmdDef.has" title="Permalink to this definition">¶</a></dt>
 <dd><p>Has command of name with qubits.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>cmd_name</strong> – Name of the command</li>
-<li><strong>qubits</strong> – Ordered list of qubits command applies to</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cmd_name</strong> – Name of the command</p></li>
+<li><p><strong>qubits</strong> – Ordered list of qubits command applies to</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.pulse.CmdDef.pop">
-<code class="descname">pop</code><span class="sig-paren">(</span><em>cmd_name: str, qubits: Union[int, Iterable[int]], *params, **kwparams</em><span class="sig-paren">)</span> &#x2192; qiskit.pulse.schedule.Schedule<a class="reference internal" href="../_modules/qiskit/pulse/cmd_def.html#CmdDef.pop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.pulse.CmdDef.pop" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">pop</code><span class="sig-paren">(</span><em class="sig-param">cmd_name: str, qubits: Union[int, Iterable[int]], *params: List[Union[int, float, complex]], **kwparams: Dict[str, Union[int, float, complex]]</em><span class="sig-paren">)</span> &#x2192; qiskit.pulse.schedule.Schedule<a class="reference internal" href="../_modules/qiskit/pulse/cmd_def.html#CmdDef.pop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.pulse.CmdDef.pop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Pop command from command definition.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>cmd_name</strong> – Name of the command</li>
-<li><strong>qubits</strong> – Ordered list of qubits command applies to</li>
-<li><strong>*params</strong> – Command parameters to be used to generate schedule</li>
-<li><strong>**kwparams</strong> – Keyworded command parameters to be used to generate schedule</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cmd_name</strong> – Name of the command</p></li>
+<li><p><strong>qubits</strong> – Ordered list of qubits command applies to</p></li>
+<li><p><strong>*params</strong> – Command parameters to be used to generate schedule</p></li>
+<li><p><strong>**kwparams</strong> – Keyworded command parameters to be used to generate schedule</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference internal" href="qiskit.pulse.PulseError.html#qiskit.pulse.PulseError" title="qiskit.pulse.PulseError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">PulseError</span></code></a> – If command for qubits is not available</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="qiskit.pulse.PulseError.html#qiskit.pulse.PulseError" title="qiskit.pulse.PulseError"><strong>PulseError</strong></a> – If command for qubits is not available</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>

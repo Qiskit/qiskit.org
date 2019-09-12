@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -90,7 +89,7 @@
 	<span>
 	    <select id="language" name="languages">
 	        <option value="en">English</option>
-	        <option value="ja">日本語</option>
+	        <option value="ja">Japanese</option>
         </select>
     </span>
 </div>
@@ -673,7 +672,7 @@
 	<span>
 	    <select id="language" name="languages">
 	        <option value="en">English</option>
-	        <option value="ja">日本語</option>
+	        <option value="ja">Japanese</option>
         </select>
     </span>
 </div>
@@ -1246,23 +1245,23 @@
 <h1>PulseChannelSpec<a class="headerlink" href="#pulsechannelspec" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="qiskit.pulse.PulseChannelSpec">
-<em class="property">class </em><code class="descname">PulseChannelSpec</code><span class="sig-paren">(</span><em>n_qubits: int</em>, <em>n_control: int</em>, <em>n_registers: int</em>, <em>buffer: int = 0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/pulse/channels/pulse_channel_spec.html#PulseChannelSpec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.pulse.PulseChannelSpec" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">PulseChannelSpec</code><span class="sig-paren">(</span><em class="sig-param">n_qubits: int</em>, <em class="sig-param">n_control: int</em>, <em class="sig-param">n_registers: int</em>, <em class="sig-param">buffer: int = 0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/pulse/channels/pulse_channel_spec.html#PulseChannelSpec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.pulse.PulseChannelSpec" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>A helper class to support assembling channel objects and their mapping to qubits.
 This class can be initialized with two methods shown as below.</p>
 <ol class="arabic simple">
-<li><dl class="first docutils">
-<dt>With the <cite>BaseBackend</cite> object of the target pulse backend:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">`python</span>
+<li><dl class="simple">
+<dt>With the <cite>BaseBackend</cite> object of the target pulse backend:</dt><dd><p><code class="docutils literal notranslate"><span class="pre">`python</span>
 <span class="pre">system</span> <span class="pre">=</span> <span class="pre">PulseChannelSpec.from_backend(backend)</span>
-<span class="pre">`</span></code></dd>
+<span class="pre">`</span></code></p>
+</dd>
 </dl>
 </li>
-<li><dl class="first docutils">
-<dt>By specifying the number of pulse elements constituting the target quantum computing system:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">`python</span>
+<li><dl class="simple">
+<dt>By specifying the number of pulse elements constituting the target quantum computing system:</dt><dd><p><code class="docutils literal notranslate"><span class="pre">`python</span>
 <span class="pre">system</span> <span class="pre">=</span> <span class="pre">PulseChannelSpec(n_qubits=5,</span> <span class="pre">n_control=6,</span> <span class="pre">n_registers=1,</span> <span class="pre">buffer=10)</span>
-<span class="pre">`</span></code></dd>
+<span class="pre">`</span></code></p>
+</dd>
 </dl>
 </li>
 </ol>
@@ -1271,138 +1270,137 @@ a combination of multiple types of channels on which instructions are scheduled.
 These most common channel types are the:</p>
 <blockquote>
 <div><ul class="simple">
-<li><cite>PulseChannel</cite>: For performing stimulus of the system.</li>
-<li><cite>AcquireChannel</cite>: For scheduling acquisition of qubit data.</li>
-<li><cite>MemorySlot</cite>: For persistent storage of measurement results.</li>
-<li><cite>RegisterSlot</cite>: For temporary storage of and conditional feedback on measurement results.</li>
+<li><p><cite>PulseChannel</cite>: For performing stimulus of the system.</p></li>
+<li><p><cite>AcquireChannel</cite>: For scheduling acquisition of qubit data.</p></li>
+<li><p><cite>MemorySlot</cite>: For persistent storage of measurement results.</p></li>
+<li><p><cite>RegisterSlot</cite>: For temporary storage of and conditional feedback on measurement results.</p></li>
 </ul>
 </div></blockquote>
-<dl class="docutils">
-<dt>There are also several special types of pulse channels which are the:</dt>
-<dd><ul class="first simple">
-<li><cite>DriveChannel</cite>: Used to control a single qubit.</li>
-<li><cite>MeasureChannel</cite>: Used to perform measurement stimulus of a single qubit.</li>
-<li><cite>ControlChannel</cite>: Used to control an arbitrary Hamiltonian term on the system.</li>
+<dl>
+<dt>There are also several special types of pulse channels which are the:</dt><dd><ul class="simple">
+<li><p><cite>DriveChannel</cite>: Used to control a single qubit.</p></li>
+<li><p><cite>MeasureChannel</cite>: Used to perform measurement stimulus of a single qubit.</p></li>
+<li><p><cite>ControlChannel</cite>: Used to control an arbitrary Hamiltonian term on the system.</p></li>
 </ul>
-<p class="last">Typically a two-qubit interaction.</p>
+<p>Typically a two-qubit interaction.</p>
 </dd>
 </dl>
 <p>A collection of above channels is automatically assembled within <cite>PulseChannelSpec</cite>.</p>
-<dl class="docutils">
-<dt>For example, the zeroth drive channel may be accessed by</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">`python</span>
+<dl class="simple">
+<dt>For example, the zeroth drive channel may be accessed by</dt><dd><p><code class="docutils literal notranslate"><span class="pre">`python</span>
 <span class="pre">system.drives[0]</span>
-<span class="pre">`</span></code></dd>
-<dt>or if the channel is connected to the first qubit,</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">`python</span>
+<span class="pre">`</span></code></p>
+</dd>
+<dt>or if the channel is connected to the first qubit,</dt><dd><p><code class="docutils literal notranslate"><span class="pre">`python</span>
 <span class="pre">system.qubits[0].drive</span>
-<span class="pre">`</span></code></dd>
+<span class="pre">`</span></code></p>
+</dd>
 </dl>
 <p>In the above example, both commands refer to the same object.</p>
 <p class="rubric">Attributes Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.pulse.PulseChannelSpec.acquires" title="qiskit.pulse.PulseChannelSpec.acquires"><code class="xref py py-obj docutils literal notranslate"><span class="pre">acquires</span></code></a></td>
-<td>Return system’s acquire channels.</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.pulse.PulseChannelSpec.acquires" title="qiskit.pulse.PulseChannelSpec.acquires"><code class="xref py py-obj docutils literal notranslate"><span class="pre">acquires</span></code></a></p></td>
+<td><p>Return system’s acquire channels.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.pulse.PulseChannelSpec.controls" title="qiskit.pulse.PulseChannelSpec.controls"><code class="xref py py-obj docutils literal notranslate"><span class="pre">controls</span></code></a></td>
-<td>Return system’s control channels.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.pulse.PulseChannelSpec.controls" title="qiskit.pulse.PulseChannelSpec.controls"><code class="xref py py-obj docutils literal notranslate"><span class="pre">controls</span></code></a></p></td>
+<td><p>Return system’s control channels.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.pulse.PulseChannelSpec.drives" title="qiskit.pulse.PulseChannelSpec.drives"><code class="xref py py-obj docutils literal notranslate"><span class="pre">drives</span></code></a></td>
-<td>Return system’s drive channels.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.pulse.PulseChannelSpec.drives" title="qiskit.pulse.PulseChannelSpec.drives"><code class="xref py py-obj docutils literal notranslate"><span class="pre">drives</span></code></a></p></td>
+<td><p>Return system’s drive channels.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.pulse.PulseChannelSpec.measures" title="qiskit.pulse.PulseChannelSpec.measures"><code class="xref py py-obj docutils literal notranslate"><span class="pre">measures</span></code></a></td>
-<td>Return system’s measure channels.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.pulse.PulseChannelSpec.measures" title="qiskit.pulse.PulseChannelSpec.measures"><code class="xref py py-obj docutils literal notranslate"><span class="pre">measures</span></code></a></p></td>
+<td><p>Return system’s measure channels.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.pulse.PulseChannelSpec.memoryslots" title="qiskit.pulse.PulseChannelSpec.memoryslots"><code class="xref py py-obj docutils literal notranslate"><span class="pre">memoryslots</span></code></a></td>
-<td>Return system’s memory slots.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.pulse.PulseChannelSpec.memoryslots" title="qiskit.pulse.PulseChannelSpec.memoryslots"><code class="xref py py-obj docutils literal notranslate"><span class="pre">memoryslots</span></code></a></p></td>
+<td><p>Return system’s memory slots.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.pulse.PulseChannelSpec.qubits" title="qiskit.pulse.PulseChannelSpec.qubits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qubits</span></code></a></td>
-<td>Return system’s qubits.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.pulse.PulseChannelSpec.qubits" title="qiskit.pulse.PulseChannelSpec.qubits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qubits</span></code></a></p></td>
+<td><p>Return system’s qubits.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.pulse.PulseChannelSpec.registers" title="qiskit.pulse.PulseChannelSpec.registers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">registers</span></code></a></td>
-<td>Return system’s register slots.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.pulse.PulseChannelSpec.registers" title="qiskit.pulse.PulseChannelSpec.registers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">registers</span></code></a></p></td>
+<td><p>Return system’s register slots.</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Methods Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.pulse.PulseChannelSpec.from_backend" title="qiskit.pulse.PulseChannelSpec.from_backend"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_backend</span></code></a>(backend)</td>
-<td>Create pulse channel specification with values from backend.</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.pulse.PulseChannelSpec.from_backend" title="qiskit.pulse.PulseChannelSpec.from_backend"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_backend</span></code></a>(backend)</p></td>
+<td><p>Create pulse channel specification with values from backend.</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Attributes Documentation</p>
 <dl class="attribute">
 <dt id="qiskit.pulse.PulseChannelSpec.acquires">
-<code class="descname">acquires</code><a class="headerlink" href="#qiskit.pulse.PulseChannelSpec.acquires" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">acquires</code><a class="headerlink" href="#qiskit.pulse.PulseChannelSpec.acquires" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return system’s acquire channels.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.pulse.PulseChannelSpec.controls">
-<code class="descname">controls</code><a class="headerlink" href="#qiskit.pulse.PulseChannelSpec.controls" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">controls</code><a class="headerlink" href="#qiskit.pulse.PulseChannelSpec.controls" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return system’s control channels.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.pulse.PulseChannelSpec.drives">
-<code class="descname">drives</code><a class="headerlink" href="#qiskit.pulse.PulseChannelSpec.drives" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">drives</code><a class="headerlink" href="#qiskit.pulse.PulseChannelSpec.drives" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return system’s drive channels.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.pulse.PulseChannelSpec.measures">
-<code class="descname">measures</code><a class="headerlink" href="#qiskit.pulse.PulseChannelSpec.measures" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">measures</code><a class="headerlink" href="#qiskit.pulse.PulseChannelSpec.measures" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return system’s measure channels.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.pulse.PulseChannelSpec.memoryslots">
-<code class="descname">memoryslots</code><a class="headerlink" href="#qiskit.pulse.PulseChannelSpec.memoryslots" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">memoryslots</code><a class="headerlink" href="#qiskit.pulse.PulseChannelSpec.memoryslots" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return system’s memory slots.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.pulse.PulseChannelSpec.qubits">
-<code class="descname">qubits</code><a class="headerlink" href="#qiskit.pulse.PulseChannelSpec.qubits" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">qubits</code><a class="headerlink" href="#qiskit.pulse.PulseChannelSpec.qubits" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return system’s qubits.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.pulse.PulseChannelSpec.registers">
-<code class="descname">registers</code><a class="headerlink" href="#qiskit.pulse.PulseChannelSpec.registers" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">registers</code><a class="headerlink" href="#qiskit.pulse.PulseChannelSpec.registers" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return system’s register slots.</p>
 </dd></dl>
 
 <p class="rubric">Methods Documentation</p>
-<dl class="classmethod">
+<dl class="method">
 <dt id="qiskit.pulse.PulseChannelSpec.from_backend">
-<em class="property">classmethod </em><code class="descname">from_backend</code><span class="sig-paren">(</span><em>backend</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/pulse/channels/pulse_channel_spec.html#PulseChannelSpec.from_backend"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.pulse.PulseChannelSpec.from_backend" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="sig-name descname">from_backend</code><span class="sig-paren">(</span><em class="sig-param">backend</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/pulse/channels/pulse_channel_spec.html#PulseChannelSpec.from_backend"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.pulse.PulseChannelSpec.from_backend" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create pulse channel specification with values from backend.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>backend</strong> (<a class="reference internal" href="qiskit.providers.BaseBackend.html#qiskit.providers.BaseBackend" title="qiskit.providers.BaseBackend"><em>BaseBackend</em></a>) – Backend configuration.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">New PulseSpecification configured by backend.</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#qiskit.pulse.PulseChannelSpec" title="qiskit.pulse.PulseChannelSpec">PulseChannelSpec</a></td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference internal" href="qiskit.pulse.PulseError.html#qiskit.pulse.PulseError" title="qiskit.pulse.PulseError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">PulseError</span></code></a> – When OpenPulse is not supported.</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>backend</strong> (<a class="reference internal" href="qiskit.providers.BaseBackend.html#qiskit.providers.BaseBackend" title="qiskit.providers.BaseBackend"><em>BaseBackend</em></a>) – Backend configuration.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>New PulseSpecification configured by backend.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#qiskit.pulse.PulseChannelSpec" title="qiskit.pulse.PulseChannelSpec">PulseChannelSpec</a></p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="qiskit.pulse.PulseError.html#qiskit.pulse.PulseError" title="qiskit.pulse.PulseError"><strong>PulseError</strong></a> – When OpenPulse is not supported.</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
