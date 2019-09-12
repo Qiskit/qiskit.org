@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
+    <script>
+          /* Define digital data object based on _appInfo object */
+          window.digitalData = {
+            page: {
+              pageInfo: {
+                productTitle: 'IBM Q Experience',
+                analytics: {
+                  category: 'Qiskit.org',
+                },
+              },
+            },
+          };
+          window._analytics = {
+            segment_key: 'ffdYLviQze3kzomaINXNk6NwpY9LlXcw',
+            coremetrics: false,
+            optimizely: false,
+            googleAddServices: false,
+            fullStory: false,
+            autoPageEventSpa: true,
+            autoFormEvents: false,
+            autoPageView: true,
+            preventPageEvent: true,
+          };
+       </script>
+        <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
+    
+    <title>qiskit.ignis.verification.randomized_benchmarking.fitters &#8212; Documentação Qiskit 0.12.0</title>
+
+    <link rel="stylesheet" href="../../../../../_static/material-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx_tabs/semantic-ui-2.4.1/segment.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx_tabs/semantic-ui-2.4.1/menu.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx_tabs/semantic-ui-2.4.1/tab.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx_tabs/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/material-design-lite-1.3.0/material.blue-indigo.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx_materialdesign_theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../../../" src="../../../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../../../_static/language_data.js"></script>
+    <script type="text/javascript" src="../../../../../_static/sphinx_tabs/semantic-ui-2.4.1/tab.min.js"></script>
+    <script type="text/javascript" src="../../../../../_static/sphinx_tabs/tabs.js"></script>
+    <script type="text/javascript" src="../../../../../_static/js/themeExt.js"></script>
+    <script type="text/javascript" src="../../../../../_static/translations.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="../../../../../_static/favicon.ico"/>
+    <link rel="index" title="Índice" href="../../../../../genindex.html" />
+    <link rel="search" title="Pesquisar" href="../../../../../search.html" /> 
+  </head>
+<body>
+  <header>
+    <div class="toolbar limited-width">
+      <a href="/" class="home">Qiskit</a>
+      <nav class="first">
+        <a href="/terra">Terra</a>
+        <a href="/aer">Aer</a>
+        <a href="/aqua">Aqua</a>
+        <a href="/ignis">Ignis</a>
+        <a href="/ibmq">IBM Q</a>
+      </nav>
+      <nav class="second">
+        <a class="external" id="educationLink" href="https://community.qiskit.org/education">Community</a>
+        <a class="external" id="tutorialsLink" href="https://quantum-computing.ibm.com/jupyter/tutorial/1_start_here.ipynb" target="_blank">Tutorials</a>
+        <a class="external" href="/documentation" selected>API Documentation</a>
+      </nav>
+    </div>
+  </header>
+    <div class="mdl-layout mdl-js-layout  mdl-layout--fixed-drawer"><header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../../../../../index.html">
+              <span class="title-text">
+                  Qiskit
+              </span>
+          </a>
+      </span>
+    
+
+<div class="languages" >
+    <span>Select a language: </span>
+	<span>
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+        </select>
+    </span>
+</div>
+<div id="searchbox" role="search">
+    <div class="searchformwrapper">
+    <form class="search-form" action="../../../../../search.html" method="get">
+      <input type="text" name="q" class="search-input" placeholder="Search docs..."/>
+        <button type="submit" class="search-button">
+            <svg height="20" width="20" fill="#6F6F6F" viewBox="0 0 32 32" class="search-button-icon">
+                <title>search</title>
+                <g>
+                    <path d="M30 28.586l-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L28.586 30zM5 14a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9z"></path>
+                </g>
+            </svg>
+        </button>
+    </form>
+    </div>
+</div>
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+  
+  <!-- Local TOC -->
+  <nav class="mdl-navigation"></nav>
+  
+  </div>
+
+</header>
+        <main class="mdl-layout__content" tabIndex="0">
+<header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../../../../../index.html">
+              <span class="title-text">
+                  Qiskit
+              </span>
+          </a>
+      </span>
+    
+
+<div class="languages" >
+    <span>Select a language: </span>
+	<span>
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+        </select>
+    </span>
+</div>
+<div id="searchbox" role="search">
+    <div class="searchformwrapper">
+    <form class="search-form" action="../../../../../search.html" method="get">
+      <input type="text" name="q" class="search-input" placeholder="Search docs..."/>
+        <button type="submit" class="search-button">
+            <svg height="20" width="20" fill="#6F6F6F" viewBox="0 0 32 32" class="search-button-icon">
+                <title>search</title>
+                <g>
+                    <path d="M30 28.586l-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L28.586 30zM5 14a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9z"></path>
+                </g>
+            </svg>
+        </button>
+    </form>
+    </div>
+</div>
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+  
+  <!-- Local TOC -->
+  <nav class="mdl-navigation"></nav>
+  
+  </div>
+
+</header>
+
+    <div class="document">
+        <div class="page-content">
+        
+  <h1>Código fonte de qiskit.ignis.verification.randomized_benchmarking.fitters</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="c1"># This code is part of Qiskit.</span>
+<span class="c1">#</span>
+<span class="c1"># (C) Copyright IBM 2019.</span>
+<span class="c1">#</span>
+<span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
+<span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
+<span class="c1"># of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.</span>
+<span class="c1">#</span>
+<span class="c1"># Any modifications or derivative works of this code must retain this</span>
+<span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
+<span class="c1"># that they have been altered from the originals.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Functions used for the analysis of randomized benchmarking results.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">abc</span> <span class="k">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="k">import</span> <span class="n">curve_fit</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">QiskitError</span>
+<span class="kn">from</span> <span class="nn">qiskit.quantum_info.analysis.average</span> <span class="k">import</span> <span class="n">average_data</span>
+<span class="kn">from</span> <span class="nn">..tomography</span> <span class="k">import</span> <span class="n">marginal_counts</span>
+<span class="kn">from</span> <span class="nn">...characterization.fitters</span> <span class="k">import</span> <span class="n">build_counts_dict_from_list</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+    <span class="n">HAS_MATPLOTLIB</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">HAS_MATPLOTLIB</span> <span class="o">=</span> <span class="kc">False</span>
+
+
+<span class="k">class</span> <span class="nc">RBFitterBase</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Abstract base class (ABS) for fitters for randomized benchmarking</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">raw_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return raw data.&quot;&quot;&quot;</span>
+        <span class="k">return</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">cliff_lengths</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return clifford lengths.&quot;&quot;&quot;</span>
+        <span class="k">return</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">ydata</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return ydata (means and std devs).&quot;&quot;&quot;</span>
+        <span class="k">return</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return fit.&quot;&quot;&quot;</span>
+        <span class="k">return</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">rb_fit_fun</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the function rb_fit_fun.&quot;&quot;&quot;</span>
+        <span class="k">return</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">seeds</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the number of loaded seeds.&quot;&quot;&quot;</span>
+        <span class="k">return</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">results</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return all the results.&quot;&quot;&quot;</span>
+        <span class="k">return</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">add_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add a new result. Re calculate the raw data, means and</span>
+<span class="sd">        fit.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">calc_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieve probabilities of success from execution results.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">calc_statistics</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Extract averages and std dev from the raw data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">fit_data_pattern</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Fit the RB results of a particular pattern</span>
+<span class="sd">        to an exponential curve.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">fit_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Fit the RB results to an exponential curve.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">plot_rb_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Plot randomized benchmarking data of a single pattern.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span>
+
+
+<div class="viewcode-block" id="RBFitter"><a class="viewcode-back" href="../../../../../api/qiskit.ignis.verification.randomized_benchmarking.RBFitter.html#qiskit.ignis.verification.randomized_benchmarking.RBFitter">[documentos]</a><span class="k">class</span> <span class="nc">RBFitter</span><span class="p">(</span><span class="n">RBFitterBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Class for fitters for randomized benchmarking</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">backend_result</span><span class="p">,</span> <span class="n">cliff_lengths</span><span class="p">,</span>
+                 <span class="n">rb_pattern</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            backend_result: list of results (qiskit.Result).</span>
+<span class="sd">            cliff_lengths: the Clifford lengths, 2D list i x j where i is the</span>
+<span class="sd">                number of patterns, j is the number of cliffords lengths</span>
+<span class="sd">            rb_pattern: the pattern for the rb sequences.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">rb_pattern</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">rb_pattern</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cliff_lengths</span> <span class="o">=</span> <span class="n">cliff_lengths</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rb_pattern</span> <span class="o">=</span> <span class="n">rb_pattern</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_raw_data</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ydata</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fit</span> <span class="o">=</span> <span class="p">[{}</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">rb_pattern</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_nseeds</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_circ_name_type</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_result_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_data</span><span class="p">(</span><span class="n">backend_result</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">raw_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return raw data.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_raw_data</span>
+
+    <span class="nd">@raw_data</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">raw_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">raw_data</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">raw_data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_raw_data</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_raw_data</span> <span class="o">=</span> <span class="n">raw_data</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">cliff_lengths</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return clifford lengths.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cliff_lengths</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">ydata</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return ydata (means and std devs).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ydata</span>
+
+    <span class="nd">@ydata</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">ydata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ydata</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">ydata</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ydata</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ydata</span> <span class="o">=</span> <span class="n">ydata</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return fit.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fit</span>
+
+    <span class="nd">@fit</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fit</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">fit</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_fit</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_fit</span> <span class="o">=</span> <span class="n">fit</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">rb_fit_fun</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the function rb_fit_fun.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rb_fit_fun</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">seeds</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the number of loaded seeds.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nseeds</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">results</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return all the results.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_result_list</span>
+
+<div class="viewcode-block" id="RBFitter.add_data"><a class="viewcode-back" href="../../../../../api/qiskit.ignis.verification.randomized_benchmarking.RBFitter.html#qiskit.ignis.verification.randomized_benchmarking.RBFitter.add_data">[documentos]</a>    <span class="k">def</span> <span class="nf">add_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_backend_result</span><span class="p">,</span> <span class="n">rerun_fit</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add a new result. Re calculate the raw data, means and</span>
+<span class="sd">        fit.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            new_backend_result: list of rb results</span>
+<span class="sd">            rerun_fit: re caculate the means and fit the result</span>
+
+<span class="sd">        Additional information:</span>
+<span class="sd">            Assumes that &#39;result&#39; was executed is</span>
+<span class="sd">            the output of circuits generated by randomized_becnhmarking_seq,</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">new_backend_result</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">new_backend_result</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">new_backend_result</span> <span class="o">=</span> <span class="p">[</span><span class="n">new_backend_result</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">new_backend_result</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_result_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+            <span class="c1"># update the number of seeds *if* new ones</span>
+            <span class="c1"># added. Note, no checking if we&#39;ve done all the</span>
+            <span class="c1"># cliffords</span>
+            <span class="k">for</span> <span class="n">rbcirc</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">results</span><span class="p">:</span>
+                <span class="n">nseeds_circ</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">rbcirc</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+                <span class="k">if</span> <span class="n">nseeds_circ</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nseeds</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_nseeds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nseeds_circ</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">rerun_fit</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">calc_data</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">calc_statistics</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fit_data</span><span class="p">()</span></div>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_rb_fit_fun</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Function used to fit rb.&quot;&quot;&quot;</span>
+        <span class="c1"># pylint: disable=invalid-name</span>
+        <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">alpha</span> <span class="o">**</span> <span class="n">x</span> <span class="o">+</span> <span class="n">b</span>
+
+<div class="viewcode-block" id="RBFitter.calc_data"><a class="viewcode-back" href="../../../../../api/qiskit.ignis.verification.randomized_benchmarking.RBFitter.html#qiskit.ignis.verification.randomized_benchmarking.RBFitter.calc_data">[documentos]</a>    <span class="k">def</span> <span class="nf">calc_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieve probabilities of success from execution results. Outputs</span>
+<span class="sd">        results into an internal variable _raw_data which is a 3-dimensional</span>
+<span class="sd">        list, where item (i,j,k) is the probability to measure the ground state</span>
+<span class="sd">        for the set of qubits in pattern &quot;i&quot; for seed no. j and vector length</span>
+<span class="sd">        self._cliff_lengths[i][k].</span>
+
+<span class="sd">        Additional information:</span>
+<span class="sd">            Assumes that &#39;result&#39; was executed is</span>
+<span class="sd">            the output of circuits generated by randomized_becnhmarking_seq,</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># The type of the circuit name, e.g. rb or rb_interleaved</span>
+        <span class="c1"># as it appears in the result (before _length_%d_seed_%d)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_circ_name_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_result_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span> \
+            <span class="n">header</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_length&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">circ_counts</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">circ_shots</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">seed</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nseeds</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">circ</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cliff_lengths</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+                <span class="n">circ_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_circ_name_type</span> <span class="o">+</span> <span class="s1">&#39;_length_</span><span class="si">%d</span><span class="s1">_seed_</span><span class="si">%d</span><span class="s1">&#39;</span> \
+                            <span class="o">%</span> <span class="p">(</span><span class="n">circ</span><span class="p">,</span> <span class="n">seed</span><span class="p">)</span>
+                <span class="n">count_list</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_result_list</span><span class="p">:</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">count_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="n">circ_name</span><span class="p">))</span>
+                    <span class="k">except</span> <span class="p">(</span><span class="n">QiskitError</span><span class="p">,</span> <span class="ne">KeyError</span><span class="p">):</span>
+                        <span class="k">pass</span>
+
+                <span class="n">circ_counts</span><span class="p">[</span><span class="n">circ_name</span><span class="p">]</span> <span class="o">=</span> \
+                    <span class="n">build_counts_dict_from_list</span><span class="p">(</span><span class="n">count_list</span><span class="p">)</span>
+
+                <span class="n">circ_shots</span><span class="p">[</span><span class="n">circ_name</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">circ_counts</span><span class="p">[</span><span class="n">circ_name</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_raw_data</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">startind</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">for</span> <span class="n">patt_ind</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_rb_pattern</span><span class="p">)):</span>
+
+            <span class="n">string_of_0s</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+            <span class="n">string_of_0s</span> <span class="o">=</span> <span class="n">string_of_0s</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_rb_pattern</span><span class="p">[</span><span class="n">patt_ind</span><span class="p">]))</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_raw_data</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+            <span class="n">endind</span> <span class="o">=</span> <span class="n">startind</span><span class="o">+</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_rb_pattern</span><span class="p">[</span><span class="n">patt_ind</span><span class="p">])</span>
+
+            <span class="k">for</span> <span class="n">seedidx</span><span class="p">,</span> <span class="n">seed</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_nseeds</span><span class="p">):</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">_raw_data</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+                <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cliff_lengths</span><span class="p">[</span><span class="n">patt_ind</span><span class="p">]):</span>
+                    <span class="n">circ_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_circ_name_type</span> <span class="o">+</span> <span class="s1">&#39;_length_</span><span class="si">%d</span><span class="s1">_seed_</span><span class="si">%d</span><span class="s1">&#39;</span> \
+                                <span class="o">%</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">seed</span><span class="p">)</span>
+                    <span class="n">counts_subspace</span> <span class="o">=</span> <span class="n">marginal_counts</span><span class="p">(</span>
+                        <span class="n">circ_counts</span><span class="p">[</span><span class="n">circ_name</span><span class="p">],</span>
+                        <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">startind</span><span class="p">,</span> <span class="n">endind</span><span class="p">))</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_raw_data</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">seedidx</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                        <span class="n">counts_subspace</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">string_of_0s</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+                        <span class="o">/</span> <span class="n">circ_shots</span><span class="p">[</span><span class="n">circ_name</span><span class="p">])</span>
+            <span class="n">startind</span> <span class="o">=</span> <span class="n">endind</span></div>
+
+<div class="viewcode-block" id="RBFitter.calc_statistics"><a class="viewcode-back" href="../../../../../api/qiskit.ignis.verification.randomized_benchmarking.RBFitter.html#qiskit.ignis.verification.randomized_benchmarking.RBFitter.calc_statistics">[documentos]</a>    <span class="k">def</span> <span class="nf">calc_statistics</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Extract averages and std dev from the raw data (self._raw_data).</span>
+<span class="sd">        Assumes that self._calc_data has been run. Output into internal</span>
+<span class="sd">        _ydata variable:</span>
+
+<span class="sd">            ydata is a list of dictionaries (length number of patterns).</span>
+<span class="sd">            Dictionary ydata[i]:</span>
+<span class="sd">            ydata[i][&#39;mean&#39;] is a numpy_array of length n;</span>
+<span class="sd">                        entry j of this array contains the mean probability of</span>
+<span class="sd">                        success over seeds, for vector length</span>
+<span class="sd">                        self._cliff_lengths[i][j].</span>
+<span class="sd">            And ydata[i][&#39;std&#39;] is a numpy_array of length n;</span>
+<span class="sd">                        entry j of this array contains the std</span>
+<span class="sd">                        of the probability of success over seeds,</span>
+<span class="sd">                        for vector length self._cliff_lengths[i][j].</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ydata</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">patt_ind</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_rb_pattern</span><span class="p">)):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ydata</span><span class="o">.</span><span class="n">append</span><span class="p">({})</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ydata</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;mean&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_raw_data</span><span class="p">[</span><span class="n">patt_ind</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_raw_data</span><span class="p">[</span><span class="n">patt_ind</span><span class="p">])</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># 1 seed</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_ydata</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;std&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_ydata</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;std&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_raw_data</span><span class="p">[</span><span class="n">patt_ind</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="RBFitter.fit_data_pattern"><a class="viewcode-back" href="../../../../../api/qiskit.ignis.verification.randomized_benchmarking.RBFitter.html#qiskit.ignis.verification.randomized_benchmarking.RBFitter.fit_data_pattern">[documentos]</a>    <span class="k">def</span> <span class="nf">fit_data_pattern</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">patt_ind</span><span class="p">,</span> <span class="n">fit_guess</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Fit the RB results of a particular pattern</span>
+<span class="sd">        to an exponential curve.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            patt_ind: index of the data to fit</span>
+<span class="sd">            fit_guess: guess values for the fit</span>
+
+<span class="sd">        Puts the results into a list of fit dictionaries:</span>
+<span class="sd">            where each dictionary corresponds to a pattern and has fields:</span>
+<span class="sd">            &#39;params&#39; - three parameters of rb_fit_fun. The middle one is the</span>
+<span class="sd">                       exponent.</span>
+<span class="sd">            &#39;err&#39; - the error limits of the parameters.</span>
+<span class="sd">            &#39;epc&#39; - error per Clifford</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">lens</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cliff_lengths</span><span class="p">[</span><span class="n">patt_ind</span><span class="p">]</span>
+        <span class="n">qubits</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rb_pattern</span><span class="p">[</span><span class="n">patt_ind</span><span class="p">]</span>
+
+        <span class="c1"># if at least one of the std values is zero, then sigma is replaced</span>
+        <span class="c1"># by None</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ydata</span><span class="p">[</span><span class="n">patt_ind</span><span class="p">][</span><span class="s1">&#39;std&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">sigma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ydata</span><span class="p">[</span><span class="n">patt_ind</span><span class="p">][</span><span class="s1">&#39;std&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">sigma</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">sigma</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">params</span><span class="p">,</span> <span class="n">pcov</span> <span class="o">=</span> <span class="n">curve_fit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_rb_fit_fun</span><span class="p">,</span> <span class="n">lens</span><span class="p">,</span>
+                                 <span class="bp">self</span><span class="o">.</span><span class="n">_ydata</span><span class="p">[</span><span class="n">patt_ind</span><span class="p">][</span><span class="s1">&#39;mean&#39;</span><span class="p">],</span>
+                                 <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span>
+                                 <span class="n">p0</span><span class="o">=</span><span class="n">fit_guess</span><span class="p">,</span>
+                                 <span class="n">bounds</span><span class="o">=</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
+        <span class="n">alpha</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># exponent</span>
+        <span class="n">params_err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">pcov</span><span class="p">))</span>
+        <span class="n">alpha_err</span> <span class="o">=</span> <span class="n">params_err</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="n">nrb</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">**</span> <span class="nb">len</span><span class="p">(</span><span class="n">qubits</span><span class="p">)</span>
+        <span class="n">epc</span> <span class="o">=</span> <span class="p">(</span><span class="n">nrb</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">nrb</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">alpha</span><span class="p">)</span>
+        <span class="n">epc_err</span> <span class="o">=</span> <span class="p">(</span><span class="n">nrb</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">nrb</span><span class="o">*</span><span class="n">alpha_err</span><span class="o">/</span><span class="n">alpha</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fit</span><span class="p">[</span><span class="n">patt_ind</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;params&#39;</span><span class="p">:</span> <span class="n">params</span><span class="p">,</span> <span class="s1">&#39;params_err&#39;</span><span class="p">:</span> <span class="n">params_err</span><span class="p">,</span>
+                               <span class="s1">&#39;epc&#39;</span><span class="p">:</span> <span class="n">epc</span><span class="p">,</span> <span class="s1">&#39;epc_err&#39;</span><span class="p">:</span> <span class="n">epc_err</span><span class="p">}</span></div>
+
+<div class="viewcode-block" id="RBFitter.fit_data"><a class="viewcode-back" href="../../../../../api/qiskit.ignis.verification.randomized_benchmarking.RBFitter.html#qiskit.ignis.verification.randomized_benchmarking.RBFitter.fit_data">[documentos]</a>    <span class="k">def</span> <span class="nf">fit_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Fit the RB results to an exponential curve.</span>
+
+<span class="sd">        Fit each of the patterns. Use the data to construct guess values</span>
+<span class="sd">        for the fits</span>
+
+<span class="sd">        Puts the results into a list of fit dictionaries:</span>
+<span class="sd">            where each dictionary corresponds to a pattern and has fields:</span>
+<span class="sd">            &#39;params&#39; - three parameters of rb_fit_fun. The middle one is the</span>
+<span class="sd">                       exponent.</span>
+<span class="sd">            &#39;err&#39; - the error limits of the parameters.</span>
+<span class="sd">            &#39;epc&#39; - error per Clifford</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">for</span> <span class="n">patt_ind</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_rb_pattern</span><span class="p">):</span>
+
+            <span class="n">qubits</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rb_pattern</span><span class="p">[</span><span class="n">patt_ind</span><span class="p">]</span>
+
+            <span class="c1"># Should decay to 1/2^n</span>
+            <span class="n">fit_guess</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.95</span><span class="p">,</span> <span class="mf">0.99</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="o">**</span><span class="nb">len</span><span class="p">(</span><span class="n">qubits</span><span class="p">)]</span>
+
+            <span class="c1"># Use the first two points to guess the decay param</span>
+            <span class="n">y0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ydata</span><span class="p">[</span><span class="n">patt_ind</span><span class="p">][</span><span class="s1">&#39;mean&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">y1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ydata</span><span class="p">[</span><span class="n">patt_ind</span><span class="p">][</span><span class="s1">&#39;mean&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">dcliff</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cliff_lengths</span><span class="p">[</span><span class="n">patt_ind</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span>
+                      <span class="bp">self</span><span class="o">.</span><span class="n">_cliff_lengths</span><span class="p">[</span><span class="n">patt_ind</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">dy</span> <span class="o">=</span> <span class="p">((</span><span class="n">y1</span> <span class="o">-</span> <span class="n">fit_guess</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">/</span>
+                  <span class="p">(</span><span class="n">y0</span> <span class="o">-</span> <span class="n">fit_guess</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+            <span class="n">alpha_guess</span> <span class="o">=</span> <span class="n">dy</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">dcliff</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">alpha_guess</span> <span class="o">&lt;</span> <span class="mf">1.0</span><span class="p">:</span>
+                <span class="n">fit_guess</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">alpha_guess</span>
+
+            <span class="k">if</span> <span class="n">y0</span> <span class="o">&gt;</span> <span class="n">fit_guess</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span>
+                <span class="n">fit_guess</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">((</span><span class="n">y0</span> <span class="o">-</span> <span class="n">fit_guess</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">/</span>
+                                <span class="n">fit_guess</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_cliff_lengths</span><span class="p">[</span><span class="n">patt_ind</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">fit_data_pattern</span><span class="p">(</span><span class="n">patt_ind</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">fit_guess</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="RBFitter.plot_rb_data"><a class="viewcode-back" href="../../../../../api/qiskit.ignis.verification.randomized_benchmarking.RBFitter.html#qiskit.ignis.verification.randomized_benchmarking.RBFitter.plot_rb_data">[documentos]</a>    <span class="k">def</span> <span class="nf">plot_rb_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pattern_index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                     <span class="n">add_label</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_plt</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Plot randomized benchmarking data of a single pattern.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            pattern_index: which RB pattern to plot</span>
+<span class="sd">            ax (Axes or None): plot axis (if passed in).</span>
+<span class="sd">            add_label (bool): Add an EPC label.</span>
+<span class="sd">            show_plt (bool): display the plot.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ImportError: If matplotlib is not installed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">fit_function</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rb_fit_fun</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">HAS_MATPLOTLIB</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s1">&#39;The function plot_rb_data needs matplotlib. &#39;</span>
+                              <span class="s1">&#39;Run &quot;pip install matplotlib&quot; before.&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">ax</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+            <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+
+        <span class="n">xdata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cliff_lengths</span><span class="p">[</span><span class="n">pattern_index</span><span class="p">]</span>
+
+        <span class="c1"># Plot the result for each sequence</span>
+        <span class="k">for</span> <span class="n">one_seed_data</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_raw_data</span><span class="p">[</span><span class="n">pattern_index</span><span class="p">]:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xdata</span><span class="p">,</span> <span class="n">one_seed_data</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span>
+                    <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Plot the mean with error bars</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">xdata</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ydata</span><span class="p">[</span><span class="n">pattern_index</span><span class="p">][</span><span class="s1">&#39;mean&#39;</span><span class="p">],</span>
+                    <span class="n">yerr</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_ydata</span><span class="p">[</span><span class="n">pattern_index</span><span class="p">][</span><span class="s1">&#39;std&#39;</span><span class="p">],</span>
+                    <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+        <span class="c1"># Plot the fit</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xdata</span><span class="p">,</span>
+                <span class="n">fit_function</span><span class="p">(</span><span class="n">xdata</span><span class="p">,</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">_fit</span><span class="p">[</span><span class="n">pattern_index</span><span class="p">][</span><span class="s1">&#39;params&#39;</span><span class="p">]),</span>
+                <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Clifford Length&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Ground State Population&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">add_label</span><span class="p">:</span>
+            <span class="n">bbox_props</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">boxstyle</span><span class="o">=</span><span class="s2">&quot;round,pad=0.3&quot;</span><span class="p">,</span>
+                              <span class="n">fc</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span> <span class="n">ec</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+            <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span>
+                    <span class="s2">&quot;alpha: </span><span class="si">%.3f</span><span class="s2">(</span><span class="si">%.1e</span><span class="s2">) EPC: </span><span class="si">%.3e</span><span class="s2">(</span><span class="si">%.1e</span><span class="s2">)&quot;</span> <span class="o">%</span>
+                    <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fit</span><span class="p">[</span><span class="n">pattern_index</span><span class="p">][</span><span class="s1">&#39;params&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span>
+                     <span class="bp">self</span><span class="o">.</span><span class="n">_fit</span><span class="p">[</span><span class="n">pattern_index</span><span class="p">][</span><span class="s1">&#39;params_err&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span>
+                     <span class="bp">self</span><span class="o">.</span><span class="n">_fit</span><span class="p">[</span><span class="n">pattern_index</span><span class="p">][</span><span class="s1">&#39;epc&#39;</span><span class="p">],</span>
+                     <span class="bp">self</span><span class="o">.</span><span class="n">_fit</span><span class="p">[</span><span class="n">pattern_index</span><span class="p">][</span><span class="s1">&#39;epc_err&#39;</span><span class="p">]),</span>
+                    <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span>
+                    <span class="n">bbox</span><span class="o">=</span><span class="n">bbox_props</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">show_plt</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div></div>
+
+
+<div class="viewcode-block" id="InterleavedRBFitter"><a class="viewcode-back" href="../../../../../api/qiskit.ignis.verification.randomized_benchmarking.InterleavedRBFitter.html#qiskit.ignis.verification.randomized_benchmarking.InterleavedRBFitter">[documentos]</a><span class="k">class</span> <span class="nc">InterleavedRBFitter</span><span class="p">(</span><span class="n">RBFitterBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Class for fitters for interleaved RB</span>
+<span class="sd">        Derived from RBFitterBase class</span>
+
+<span class="sd">        Contains two RBFitter objects</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">original_result</span><span class="p">,</span> <span class="n">interleaved_result</span><span class="p">,</span>
+                 <span class="n">cliff_lengths</span><span class="p">,</span> <span class="n">rb_pattern</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            original_result: list of results of the</span>
+<span class="sd">            original RB sequence (qiskit.Result).</span>
+<span class="sd">            intelreaved_result: list of results of the</span>
+<span class="sd">            interleaved RB sequence (qiskit.Result).</span>
+<span class="sd">            cliff_lengths: the Clifford lengths, 2D list i x j where i is the</span>
+<span class="sd">                number of patterns, j is the number of cliffords lengths</span>
+<span class="sd">            rb_pattern: the pattern for the rb sequences.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cliff_lengths</span> <span class="o">=</span> <span class="n">cliff_lengths</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rb_pattern</span> <span class="o">=</span> <span class="n">rb_pattern</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fit_interleaved</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rbfit_original</span> <span class="o">=</span> <span class="n">RBFitter</span><span class="p">(</span>
+            <span class="n">original_result</span><span class="p">,</span> <span class="n">cliff_lengths</span><span class="p">,</span> <span class="n">rb_pattern</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rbfit_interleaved</span> <span class="o">=</span> <span class="n">RBFitter</span><span class="p">(</span>
+            <span class="n">interleaved_result</span><span class="p">,</span> <span class="n">cliff_lengths</span><span class="p">,</span> <span class="n">rb_pattern</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">rbfit_std</span><span class="o">.</span><span class="n">add_data</span><span class="p">(</span><span class="n">original_result</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rbfit_int</span><span class="o">.</span><span class="n">add_data</span><span class="p">(</span><span class="n">interleaved_result</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">original_result</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">interleaved_result</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fit_data</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">rbfit_std</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the original RB fitter.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rbfit_original</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">rbfit_int</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the interleaved RB fitter.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rbfit_interleaved</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">cliff_lengths</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return clifford lengths.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cliff_lengths</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return fit as a 2 element list.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">rbfit_std</span><span class="o">.</span><span class="n">fit</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rbfit_int</span><span class="o">.</span><span class="n">fit</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">fit_int</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return interleaved fit parameters&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fit_interleaved</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">rb_fit_fun</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the function rb_fit_fun.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rbfit_std</span><span class="o">.</span><span class="n">rb_fit_fun</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">seeds</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the number of loaded seeds as a</span>
+<span class="sd">        2 element list.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">rbfit_std</span><span class="o">.</span><span class="n">seeds</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rbfit_int</span><span class="o">.</span><span class="n">seeds</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">results</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return all the results as a 2 element list.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">rbfit_std</span><span class="o">.</span><span class="n">results</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rbfit_int</span><span class="o">.</span><span class="n">results</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">ydata</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return ydata (means and std devs).</span>
+<span class="sd">        2 element list [ydata_original, ydata_inteleaved]&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">rbfit_std</span><span class="o">.</span><span class="n">ydata</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rbfit_int</span><span class="o">.</span><span class="n">ydata</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">raw_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return raw_data as 2 element list</span>
+<span class="sd">        [raw_original_data, raw_interleaved_data].&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">rbfit_std</span><span class="o">.</span><span class="n">raw_data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rbfit_int</span><span class="o">.</span><span class="n">raw_data</span><span class="p">]</span>
+
+<div class="viewcode-block" id="InterleavedRBFitter.add_data"><a class="viewcode-back" href="../../../../../api/qiskit.ignis.verification.randomized_benchmarking.InterleavedRBFitter.html#qiskit.ignis.verification.randomized_benchmarking.InterleavedRBFitter.add_data">[documentos]</a>    <span class="k">def</span> <span class="nf">add_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_original_result</span><span class="p">,</span>
+                 <span class="n">new_interleaved_result</span><span class="p">,</span> <span class="n">rerun_fit</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add a new result.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            new_original_result: list of rb results</span>
+<span class="sd">            of the original circuits</span>
+<span class="sd">            new_interleaved_result: list of rb results</span>
+<span class="sd">            of the interleaved circuits</span>
+<span class="sd">            rerun_fit: re-caculate the means and fit the result</span>
+
+<span class="sd">        Additional information:</span>
+<span class="sd">            Assumes that &#39;result&#39; was executed is</span>
+<span class="sd">            the output of circuits generated by randomized_becnhmarking_seq</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rbfit_std</span><span class="o">.</span><span class="n">add_data</span><span class="p">(</span><span class="n">new_original_result</span><span class="p">,</span> <span class="n">rerun_fit</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rbfit_int</span><span class="o">.</span><span class="n">add_data</span><span class="p">(</span><span class="n">new_interleaved_result</span><span class="p">,</span> <span class="n">rerun_fit</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">rerun_fit</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fit_data</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="InterleavedRBFitter.calc_data"><a class="viewcode-back" href="../../../../../api/qiskit.ignis.verification.randomized_benchmarking.InterleavedRBFitter.html#qiskit.ignis.verification.randomized_benchmarking.InterleavedRBFitter.calc_data">[documentos]</a>    <span class="k">def</span> <span class="nf">calc_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieve probabilities of success from execution results. Outputs</span>
+<span class="sd">        results into an internal variables: _raw_original_data and</span>
+<span class="sd">        _raw_interleaved_data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rbfit_std</span><span class="o">.</span><span class="n">calc_data</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rbfit_int</span><span class="o">.</span><span class="n">calc_data</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="InterleavedRBFitter.calc_statistics"><a class="viewcode-back" href="../../../../../api/qiskit.ignis.verification.randomized_benchmarking.InterleavedRBFitter.html#qiskit.ignis.verification.randomized_benchmarking.InterleavedRBFitter.calc_statistics">[documentos]</a>    <span class="k">def</span> <span class="nf">calc_statistics</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Extract averages and std dev. Output</span>
+<span class="sd">        [ydata_original, ydata_inteleaved]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rbfit_std</span><span class="o">.</span><span class="n">calc_statistics</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rbfit_int</span><span class="o">.</span><span class="n">calc_statistics</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="InterleavedRBFitter.fit_data_pattern"><a class="viewcode-back" href="../../../../../api/qiskit.ignis.verification.randomized_benchmarking.InterleavedRBFitter.html#qiskit.ignis.verification.randomized_benchmarking.InterleavedRBFitter.fit_data_pattern">[documentos]</a>    <span class="k">def</span> <span class="nf">fit_data_pattern</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">patt_ind</span><span class="p">,</span> <span class="n">fit_guess</span><span class="p">,</span> <span class="n">fit_index</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Fit the RB results of a particular pattern</span>
+<span class="sd">        to an exponential curve.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            patt_ind: index of the data to fit</span>
+<span class="sd">            fit_guess: guess values for the fit</span>
+<span class="sd">            fit_index: 0 fit the standard data, 1 fit the</span>
+<span class="sd">            interleaved data</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">fit_index</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rbfit_std</span><span class="o">.</span><span class="n">fit_data_pattern</span><span class="p">(</span><span class="n">patt_ind</span><span class="p">,</span> <span class="n">fit_guess</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rbfit_int</span><span class="o">.</span><span class="n">fit_data_pattern</span><span class="p">(</span><span class="n">patt_ind</span><span class="p">,</span> <span class="n">fit_guess</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="InterleavedRBFitter.fit_data"><a class="viewcode-back" href="../../../../../api/qiskit.ignis.verification.randomized_benchmarking.InterleavedRBFitter.html#qiskit.ignis.verification.randomized_benchmarking.InterleavedRBFitter.fit_data">[documentos]</a>    <span class="k">def</span> <span class="nf">fit_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Fit the interleaved RB results</span>
+<span class="sd">        Fit each of the patterns</span>
+
+<span class="sd">        According to the paper: &quot;Efficient measurement of quantum gate</span>
+<span class="sd">        error by interleaved randomized benchmarking&quot; (arXiv:1203.4550)</span>
+<span class="sd">        Equations (4) and (5)</span>
+
+<span class="sd">        Puts the results into a list of fit dictionaries:</span>
+<span class="sd">            where each dictionary corresponds to a pattern and has fields:</span>
+<span class="sd">            &#39;epc_est&#39; - the estimated error per the interleaved Clifford</span>
+<span class="sd">            &#39;epc_est_error&#39; - the estimated error derived from the params_err</span>
+<span class="sd">            &#39;systematic_err&#39; - systematic error bound of epc_est</span>
+<span class="sd">            &#39;systematic_err_L&#39; = epc_est - systematic_err (left error bound)</span>
+<span class="sd">            &#39;systematic_err_R&#39; = epc_est + systematic_err (right error bound)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rbfit_std</span><span class="o">.</span><span class="n">fit_data</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rbfit_int</span><span class="o">.</span><span class="n">fit_data</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fit_interleaved</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">patt_ind</span><span class="p">,</span> <span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">qubits</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cliff_lengths</span><span class="p">,</span>
+                                                   <span class="bp">self</span><span class="o">.</span><span class="n">_rb_pattern</span><span class="p">)):</span>
+            <span class="c1"># calculate nrb=d=2^n:</span>
+            <span class="n">nrb</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">**</span> <span class="nb">len</span><span class="p">(</span><span class="n">qubits</span><span class="p">)</span>
+
+            <span class="c1"># Calculate alpha (=p) and alpha_c (=p_c):</span>
+            <span class="n">alpha</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rbfit_std</span><span class="o">.</span><span class="n">fit</span><span class="p">[</span><span class="n">patt_ind</span><span class="p">][</span><span class="s1">&#39;params&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">alpha_c</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rbfit_int</span><span class="o">.</span><span class="n">fit</span><span class="p">[</span><span class="n">patt_ind</span><span class="p">][</span><span class="s1">&#39;params&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+            <span class="c1"># Calculate their errors:</span>
+            <span class="n">alpha_err</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rbfit_std</span><span class="o">.</span><span class="n">fit</span><span class="p">[</span><span class="n">patt_ind</span><span class="p">][</span><span class="s1">&#39;params_err&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">alpha_c_err</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rbfit_int</span><span class="o">.</span><span class="n">fit</span><span class="p">[</span><span class="n">patt_ind</span><span class="p">][</span><span class="s1">&#39;params_err&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+
+            <span class="c1"># Calculate epc_est (=r_c^est) - Eq. (4):</span>
+            <span class="n">epc_est</span> <span class="o">=</span> <span class="p">(</span><span class="n">nrb</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alpha_c</span> <span class="o">/</span> <span class="n">alpha</span><span class="p">)</span> <span class="o">/</span> <span class="n">nrb</span>
+
+            <span class="c1"># Calculate the systematic error bounds - Eq. (5):</span>
+            <span class="n">systematic_err_1</span> <span class="o">=</span> <span class="p">(</span><span class="n">nrb</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">alpha</span> <span class="o">-</span> <span class="n">alpha_c</span> <span class="o">/</span> <span class="n">alpha</span><span class="p">)</span>
+                                            <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">))</span> <span class="o">/</span> <span class="n">nrb</span>
+            <span class="n">systematic_err_2</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">nrb</span> <span class="o">*</span> <span class="n">nrb</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">)</span> <span class="o">/</span> \
+                <span class="p">(</span><span class="n">alpha</span> <span class="o">*</span> <span class="n">nrb</span> <span class="o">*</span> <span class="n">nrb</span><span class="p">)</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">))</span> <span class="o">*</span> \
+                <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">nrb</span> <span class="o">*</span> <span class="n">nrb</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">/</span> <span class="n">alpha</span>
+            <span class="n">systematic_err</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">systematic_err_1</span><span class="p">,</span> <span class="n">systematic_err_2</span><span class="p">)</span>
+            <span class="n">systematic_err_L</span> <span class="o">=</span> <span class="n">epc_est</span> <span class="o">-</span> <span class="n">systematic_err</span>
+            <span class="n">systematic_err_R</span> <span class="o">=</span> <span class="n">epc_est</span> <span class="o">+</span> <span class="n">systematic_err</span>
+
+            <span class="c1"># Calculate epc_est_error</span>
+            <span class="n">alpha_err_sq</span> <span class="o">=</span> <span class="p">(</span><span class="n">alpha_err</span> <span class="o">/</span> <span class="n">alpha</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">alpha_err</span> <span class="o">/</span> <span class="n">alpha</span><span class="p">)</span>
+            <span class="n">alpha_c_err_sq</span> <span class="o">=</span> <span class="p">(</span><span class="n">alpha_c_err</span> <span class="o">/</span> <span class="n">alpha_c</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">alpha_c_err</span> <span class="o">/</span> <span class="n">alpha_c</span><span class="p">)</span>
+            <span class="n">epc_est_err</span> <span class="o">=</span> <span class="p">((</span><span class="n">nrb</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">nrb</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">alpha_c</span> <span class="o">/</span> <span class="n">alpha</span><span class="p">)</span> \
+                <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">alpha_err_sq</span> <span class="o">+</span> <span class="n">alpha_c_err_sq</span><span class="p">))</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_fit_interleaved</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="n">alpha</span><span class="p">,</span>
+                                          <span class="s1">&#39;alpha_err&#39;</span><span class="p">:</span> <span class="n">alpha_err</span><span class="p">,</span>
+                                          <span class="s1">&#39;alpha_c&#39;</span><span class="p">:</span> <span class="n">alpha_c</span><span class="p">,</span>
+                                          <span class="s1">&#39;alpha_c_err&#39;</span><span class="p">:</span> <span class="n">alpha_c_err</span><span class="p">,</span>
+                                          <span class="s1">&#39;epc_est&#39;</span><span class="p">:</span> <span class="n">epc_est</span><span class="p">,</span>
+                                          <span class="s1">&#39;epc_est_err&#39;</span><span class="p">:</span> <span class="n">epc_est_err</span><span class="p">,</span>
+                                          <span class="s1">&#39;systematic_err&#39;</span><span class="p">:</span>
+                                              <span class="n">systematic_err</span><span class="p">,</span>
+                                          <span class="s1">&#39;systematic_err_L&#39;</span><span class="p">:</span>
+                                              <span class="n">systematic_err_L</span><span class="p">,</span>
+                                          <span class="s1">&#39;systematic_err_R&#39;</span><span class="p">:</span>
+                                              <span class="n">systematic_err_R</span><span class="p">})</span></div>
+
+<div class="viewcode-block" id="InterleavedRBFitter.plot_rb_data"><a class="viewcode-back" href="../../../../../api/qiskit.ignis.verification.randomized_benchmarking.InterleavedRBFitter.html#qiskit.ignis.verification.randomized_benchmarking.InterleavedRBFitter.plot_rb_data">[documentos]</a>    <span class="k">def</span> <span class="nf">plot_rb_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pattern_index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                     <span class="n">add_label</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_plt</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Plot interleaved randomized benchmarking data of a single pattern.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            pattern_index: which RB pattern to plot</span>
+<span class="sd">            ax (Axes or None): plot axis (if passed in).</span>
+<span class="sd">            add_label (bool): Add an EPC label</span>
+<span class="sd">            show_plt (bool): display the plot.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ImportError: If matplotlib is not installed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">HAS_MATPLOTLIB</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s1">&#39;The function plot_interleaved_rb_data </span><span class="se">\</span>
+<span class="s1">            needs matplotlib. Run &quot;pip install matplotlib&quot; before.&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">ax</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+            <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+
+        <span class="n">xdata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cliff_lengths</span><span class="p">[</span><span class="n">pattern_index</span><span class="p">]</span>
+
+        <span class="c1"># Plot the original and interleaved result for each sequence</span>
+        <span class="k">for</span> <span class="n">one_seed_data</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw_data</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">pattern_index</span><span class="p">]:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xdata</span><span class="p">,</span> <span class="n">one_seed_data</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span>
+                    <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">one_seed_data</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw_data</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">pattern_index</span><span class="p">]:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xdata</span><span class="p">,</span> <span class="n">one_seed_data</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span>
+                    <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Plot the fit</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xdata</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">rbfit_std</span><span class="o">.</span><span class="n">rb_fit_fun</span><span class="p">(</span><span class="n">xdata</span><span class="p">,</span>
+                                          <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">fit</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                                          <span class="p">[</span><span class="n">pattern_index</span><span class="p">][</span><span class="s1">&#39;params&#39;</span><span class="p">]),</span>
+                <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Standard RB&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xdata</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">rbfit_int</span><span class="o">.</span><span class="n">rb_fit_fun</span><span class="p">(</span><span class="n">xdata</span><span class="p">,</span>
+                                          <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">fit</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                                          <span class="p">[</span><span class="n">pattern_index</span><span class="p">][</span><span class="s1">&#39;params&#39;</span><span class="p">]),</span>
+                <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Interleaved RB&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Clifford Length&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Ground State Population&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower left&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">add_label</span><span class="p">:</span>
+            <span class="n">bbox_props</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">boxstyle</span><span class="o">=</span><span class="s2">&quot;round,pad=0.3&quot;</span><span class="p">,</span>
+                              <span class="n">fc</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span> <span class="n">ec</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+            <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span>
+                    <span class="s2">&quot;alpha: </span><span class="si">%.3f</span><span class="s2">(</span><span class="si">%.1e</span><span class="s2">) alpha_c: </span><span class="si">%.3e</span><span class="s2">(</span><span class="si">%.1e</span><span class="s2">) </span><span class="se">\n</span><span class="s2"> </span><span class="se">\</span>
+<span class="s2">                    EPC_est: </span><span class="si">%.3e</span><span class="s2">(</span><span class="si">%.1e</span><span class="s2">)&quot;</span> <span class="o">%</span>
+                    <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fit_interleaved</span><span class="p">[</span><span class="n">pattern_index</span><span class="p">][</span><span class="s1">&#39;alpha&#39;</span><span class="p">],</span>
+                     <span class="bp">self</span><span class="o">.</span><span class="n">_fit_interleaved</span><span class="p">[</span><span class="n">pattern_index</span><span class="p">][</span><span class="s1">&#39;alpha_err&#39;</span><span class="p">],</span>
+                     <span class="bp">self</span><span class="o">.</span><span class="n">_fit_interleaved</span><span class="p">[</span><span class="n">pattern_index</span><span class="p">][</span><span class="s1">&#39;alpha_c&#39;</span><span class="p">],</span>
+                     <span class="bp">self</span><span class="o">.</span><span class="n">_fit_interleaved</span><span class="p">[</span><span class="n">pattern_index</span><span class="p">][</span><span class="s1">&#39;alpha_c_err&#39;</span><span class="p">],</span>
+                     <span class="bp">self</span><span class="o">.</span><span class="n">_fit_interleaved</span><span class="p">[</span><span class="n">pattern_index</span><span class="p">][</span><span class="s1">&#39;epc_est&#39;</span><span class="p">],</span>
+                     <span class="bp">self</span><span class="o">.</span><span class="n">_fit_interleaved</span><span class="p">[</span><span class="n">pattern_index</span><span class="p">][</span><span class="s1">&#39;epc_est_err&#39;</span><span class="p">]),</span>
+                    <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span>
+                    <span class="n">bbox</span><span class="o">=</span><span class="n">bbox_props</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">show_plt</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div></div>
+
+
+<div class="viewcode-block" id="PurityRBFitter"><a class="viewcode-back" href="../../../../../api/qiskit.ignis.verification.randomized_benchmarking.PurityRBFitter.html#qiskit.ignis.verification.randomized_benchmarking.PurityRBFitter">[documentos]</a><span class="k">class</span> <span class="nc">PurityRBFitter</span><span class="p">(</span><span class="n">RBFitterBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Class for fitter for purity RB</span>
+<span class="sd">        Derived from RBFitterBase class</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">purity_result</span><span class="p">,</span> <span class="n">npurity</span><span class="p">,</span> <span class="n">cliff_lengths</span><span class="p">,</span>
+                 <span class="n">rb_pattern</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            purity_result: list of results of the</span>
+<span class="sd">            3^n purity RB sequences per seed (qiskit.Result).</span>
+<span class="sd">            npurity: equals 3^n (where n is the dimension)</span>
+<span class="sd">            cliff_lengths: the Clifford lengths, 2D list i x j where i is the</span>
+<span class="sd">                number of patterns, j is the number of cliffords lengths</span>
+<span class="sd">            rb_pattern: the pattern for the rb sequences.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">rb_pattern</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">rb_pattern</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cliff_lengths</span> <span class="o">=</span> <span class="n">cliff_lengths</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rb_pattern</span> <span class="o">=</span> <span class="n">rb_pattern</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_npurity</span> <span class="o">=</span> <span class="n">npurity</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_nq</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">rb_pattern</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># all patterns have same length</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fit</span> <span class="o">=</span> <span class="p">[{}</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">rb_pattern</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_circ_name_type</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_zdict_ops</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_zdict_ops</span><span class="p">()</span>
+
+        <span class="c1"># rb purity fitter</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rbfit_purity</span> <span class="o">=</span> <span class="n">RBFitter</span><span class="p">(</span><span class="n">purity_result</span><span class="p">,</span> <span class="n">cliff_lengths</span><span class="p">,</span>
+                                      <span class="n">rb_pattern</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_data</span><span class="p">(</span><span class="n">purity_result</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">rbfit_pur</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the purity RB fitter.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rbfit_purity</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">raw_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return raw data.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rbfit_pur</span><span class="o">.</span><span class="n">raw_data</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">cliff_lengths</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return clifford lengths.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cliff_lengths</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">ydata</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return ydata (means and std devs).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rbfit_pur</span><span class="o">.</span><span class="n">ydata</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the purity fit parameters.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rbfit_pur</span><span class="o">.</span><span class="n">fit</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">rb_fit_fun</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the function rb_fit_fun.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rbfit_pur</span><span class="o">.</span><span class="n">rb_fit_fun</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">seeds</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the number of loaded seeds.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rbfit_pur</span><span class="o">.</span><span class="n">seeds</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">results</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return all the results.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rbfit_pur</span><span class="o">.</span><span class="n">results</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_rb_pur_fit_fun</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Function used to fit purity rb.&quot;&quot;&quot;</span>
+        <span class="c1"># pylint: disable=invalid-name</span>
+        <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">alpha</span> <span class="o">**</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span>
+
+<div class="viewcode-block" id="PurityRBFitter.F234"><a class="viewcode-back" href="../../../../../api/qiskit.ignis.verification.randomized_benchmarking.PurityRBFitter.html#qiskit.ignis.verification.randomized_benchmarking.PurityRBFitter.F234">[documentos]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">F234</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Function than maps:</span>
+<span class="sd">        2^n x 3^n --&gt; 4^n</span>
+<span class="sd">        namely:</span>
+<span class="sd">        (a,b) --&gt; c where</span>
+<span class="sd">        a in 2^n, b in 3^n, c in 4^n</span>
+
+<span class="sd">        0 &lt;--&gt; I</span>
+<span class="sd">        1 &lt;--&gt; X</span>
+<span class="sd">        2 &lt;--&gt; Y</span>
+<span class="sd">        3 &lt;--&gt; Z</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">LUT</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]</span>
+
+        <span class="c1"># compute bits</span>
+        <span class="n">aseq</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">bseq</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="n">aa</span> <span class="o">=</span> <span class="n">a</span>
+        <span class="n">bb</span> <span class="o">=</span> <span class="n">b</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">aseq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mod</span><span class="p">(</span><span class="n">aa</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+            <span class="n">bseq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mod</span><span class="p">(</span><span class="n">bb</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+            <span class="n">aa</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">floor_divide</span><span class="p">(</span><span class="n">aa</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="n">bb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">floor_divide</span><span class="p">(</span><span class="n">bb</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+        <span class="n">c</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">c</span> <span class="o">+=</span> <span class="p">(</span><span class="mi">4</span> <span class="o">**</span> <span class="n">i</span><span class="p">)</span> <span class="o">*</span> <span class="n">LUT</span><span class="p">[</span><span class="n">aseq</span><span class="p">[</span><span class="n">i</span><span class="p">]][</span><span class="n">bseq</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+
+        <span class="k">return</span> <span class="n">c</span></div>
+
+<div class="viewcode-block" id="PurityRBFitter.add_zdict_ops"><a class="viewcode-back" href="../../../../../api/qiskit.ignis.verification.randomized_benchmarking.PurityRBFitter.html#qiskit.ignis.verification.randomized_benchmarking.PurityRBFitter.add_zdict_ops">[documentos]</a>    <span class="k">def</span> <span class="nf">add_zdict_ops</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Creating all Z-correlators</span>
+<span class="sd">        in order to compute the expectation values&quot;&quot;&quot;</span>
+        <span class="n">statedict</span> <span class="o">=</span> <span class="p">{(</span><span class="s2">&quot;{0:0</span><span class="si">%d</span><span class="s2">b}&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nq</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">):</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span>
+                     <span class="nb">range</span><span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nq</span><span class="p">)}</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nq</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_zdict_ops</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">statedict</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nq</span><span class="p">):</span>
+                <span class="k">if</span> <span class="nb">bin</span><span class="p">(</span><span class="n">i</span> <span class="o">&amp;</span> <span class="n">j</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_zdict_ops</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][(</span><span class="s2">&quot;{0:0</span><span class="si">%d</span><span class="s2">b}&quot;</span>
+                                         <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nq</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">j</span><span class="p">)]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span></div>
+
+<div class="viewcode-block" id="PurityRBFitter.add_data"><a class="viewcode-back" href="../../../../../api/qiskit.ignis.verification.randomized_benchmarking.PurityRBFitter.html#qiskit.ignis.verification.randomized_benchmarking.PurityRBFitter.add_data">[documentos]</a>    <span class="k">def</span> <span class="nf">add_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_purity_result</span><span class="p">,</span> <span class="n">rerun_fit</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add a new result.</span>
+<span class="sd">        Args:</span>
+<span class="sd">            new_purity_result: list of rb results of the</span>
+<span class="sd">            purity rb circuits</span>
+<span class="sd">            rerun_fit: re-caculate the means and fit the result</span>
+<span class="sd">            Additional information:</span>
+<span class="sd">            Assumes that &#39;result&#39; was executed is</span>
+<span class="sd">            the output of circuits generated by randomized_becnhmarking_seq</span>
+<span class="sd">            where is_purity = True.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">new_purity_result</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">rbfit_pur</span><span class="o">.</span><span class="n">add_data</span><span class="p">(</span><span class="n">new_purity_result</span><span class="p">,</span> <span class="n">rerun_fit</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">rerun_fit</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">calc_data</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">calc_statistics</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fit_data</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="PurityRBFitter.calc_data"><a class="viewcode-back" href="../../../../../api/qiskit.ignis.verification.randomized_benchmarking.PurityRBFitter.html#qiskit.ignis.verification.randomized_benchmarking.PurityRBFitter.calc_data">[documentos]</a>    <span class="k">def</span> <span class="nf">calc_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Measure the purity calculation into an internal variable _raw_data</span>
+<span class="sd">        which is a 3-dimensional list, where item (i,j,k) is the purity</span>
+<span class="sd">        of the set of qubits in pattern &quot;i&quot;</span>
+<span class="sd">        for seed no. j and vector length self._cliff_lengths[i][k].</span>
+<span class="sd">        Additional information:</span>
+<span class="sd">        Assumes that &#39;result&#39; was executed is</span>
+<span class="sd">        the output of circuits generated by randomized_becnhmarking_seq,</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">circ_counts</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">circ_shots</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">result_count</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c1"># Calculating the result output</span>
+        <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">seed</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rbfit_pur</span><span class="o">.</span><span class="n">seeds</span><span class="p">):</span>
+
+            <span class="k">for</span> <span class="n">pur</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_npurity</span><span class="p">):</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">_circ_name_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rbfit_pur</span><span class="o">.</span><span class="n">results</span><span class="p">[</span>
+                    <span class="n">result_count</span><span class="p">]</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_length&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">result_count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+                <span class="k">for</span> <span class="n">circ</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cliff_lengths</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+                    <span class="n">circ_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_circ_name_type</span> <span class="o">+</span> <span class="s1">&#39;_length_</span><span class="si">%d</span><span class="s1">_seed_</span><span class="si">%d</span><span class="s1">&#39;</span> \
+                                <span class="o">%</span> <span class="p">(</span><span class="n">circ</span><span class="p">,</span> <span class="n">seed</span><span class="p">)</span>
+                    <span class="n">count_list</span> <span class="o">=</span> <span class="p">[]</span>
+                    <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rbfit_pur</span><span class="o">.</span><span class="n">results</span><span class="p">:</span>
+                        <span class="k">try</span><span class="p">:</span>
+                            <span class="n">count_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="n">circ_name</span><span class="p">))</span>
+                        <span class="k">except</span> <span class="p">(</span><span class="n">QiskitError</span><span class="p">,</span> <span class="ne">KeyError</span><span class="p">):</span>
+                            <span class="k">pass</span>
+
+                    <span class="n">circ_name</span> <span class="o">=</span> <span class="s1">&#39;rb_purity_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">pur</span><span class="p">)</span> <span class="o">+</span> \
+                                <span class="s1">&#39;_length_</span><span class="si">%d</span><span class="s1">_seed_</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">circ</span><span class="p">,</span> <span class="n">seed</span><span class="p">)</span>
+
+                    <span class="n">circ_counts</span><span class="p">[</span><span class="n">circ_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">build_counts_dict_from_list</span><span class="p">(</span>
+                        <span class="n">count_list</span><span class="p">)</span>
+                    <span class="n">circ_shots</span><span class="p">[</span><span class="n">circ_name</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">circ_counts</span><span class="p">[</span><span class="n">circ_name</span><span class="p">]</span><span class="o">.</span>
+                                                <span class="n">values</span><span class="p">())</span>
+
+        <span class="c1"># Calculating raw_data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rbfit_pur</span><span class="o">.</span><span class="n">raw_data</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">startind</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="c1"># for each pattern</span>
+        <span class="k">for</span> <span class="n">patt_ind</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_rb_pattern</span><span class="p">):</span>
+
+            <span class="n">endind</span> <span class="o">=</span> <span class="n">startind</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_rb_pattern</span><span class="p">[</span><span class="n">patt_ind</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rbfit_pur</span><span class="o">.</span><span class="n">raw_data</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+
+            <span class="c1"># for each seed</span>
+            <span class="k">for</span> <span class="n">seedidx</span><span class="p">,</span> <span class="n">seed</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rbfit_pur</span><span class="o">.</span><span class="n">seeds</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">rbfit_pur</span><span class="o">.</span><span class="n">raw_data</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+
+                <span class="c1"># for each length</span>
+                <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cliff_lengths</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+
+                    <span class="c1"># vector of the 4^n correlators and counts</span>
+                    <span class="n">corr_vec</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mi">4</span> <span class="o">**</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nq</span><span class="p">)</span>
+                    <span class="n">count_vec</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mi">4</span> <span class="o">**</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nq</span><span class="p">)</span>
+                    <span class="c1"># corr_list = [[] for e in range(4 ** self._nq)]</span>
+
+                    <span class="k">for</span> <span class="n">pur</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_npurity</span><span class="p">):</span>
+
+                        <span class="n">circ_name</span> <span class="o">=</span> <span class="s1">&#39;rb_purity_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">pur</span><span class="p">)</span> <span class="o">+</span> \
+                                    <span class="s1">&#39;_length_</span><span class="si">%d</span><span class="s1">_seed_</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">seed</span><span class="p">)</span>
+
+                        <span class="c1"># marginal counts for the pattern</span>
+                        <span class="n">counts_subspace</span> <span class="o">=</span> <span class="n">marginal_counts</span><span class="p">(</span>
+                            <span class="n">circ_counts</span><span class="p">[</span><span class="n">circ_name</span><span class="p">],</span>
+                            <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">startind</span><span class="p">,</span> <span class="n">endind</span><span class="p">))</span>
+
+                        <span class="c1"># calculating the vector of 4^n correlators</span>
+                        <span class="k">for</span> <span class="n">indcorr</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nq</span><span class="p">):</span>
+                            <span class="n">zcorr</span> <span class="o">=</span> <span class="n">average_data</span><span class="p">(</span><span class="n">counts_subspace</span><span class="p">,</span>
+                                                 <span class="bp">self</span><span class="o">.</span><span class="n">_zdict_ops</span><span class="p">[</span><span class="n">indcorr</span><span class="p">])</span>
+                            <span class="n">zind</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">F234</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_nq</span><span class="p">,</span> <span class="n">indcorr</span><span class="p">,</span> <span class="n">pur</span><span class="p">)</span>
+
+                            <span class="n">corr_vec</span><span class="p">[</span><span class="n">zind</span><span class="p">]</span> <span class="o">+=</span> <span class="n">zcorr</span>
+                            <span class="n">count_vec</span><span class="p">[</span><span class="n">zind</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+                    <span class="c1"># calculating the purity</span>
+                    <span class="n">purity</span> <span class="o">=</span> <span class="mi">0</span>
+                    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">corr_vec</span><span class="p">):</span>
+                        <span class="n">purity</span> <span class="o">+=</span> <span class="p">(</span><span class="n">corr_vec</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">/</span><span class="n">count_vec</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span>
+                    <span class="n">purity</span> <span class="o">=</span> <span class="n">purity</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nq</span><span class="p">)</span>
+
+                    <span class="bp">self</span><span class="o">.</span><span class="n">rbfit_pur</span><span class="o">.</span><span class="n">raw_data</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">seedidx</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">purity</span><span class="p">)</span>
+
+            <span class="n">startind</span> <span class="o">=</span> <span class="n">endind</span></div>
+
+<div class="viewcode-block" id="PurityRBFitter.calc_statistics"><a class="viewcode-back" href="../../../../../api/qiskit.ignis.verification.randomized_benchmarking.PurityRBFitter.html#qiskit.ignis.verification.randomized_benchmarking.PurityRBFitter.calc_statistics">[documentos]</a>    <span class="k">def</span> <span class="nf">calc_statistics</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Extract averages and std dev from the raw data (self._raw_data).</span>
+<span class="sd">        Assumes that self._calc_data has been run. Output into internal</span>
+<span class="sd">        _ydata variable:</span>
+<span class="sd">            ydata is a list of dictionaries (length number of patterns).</span>
+<span class="sd">            Dictionary ydata[i]:</span>
+<span class="sd">            ydata[i][&#39;mean&#39;] is a numpy_array of length n;</span>
+<span class="sd">                        entry j of this array contains the mean probability of</span>
+<span class="sd">                        success over seeds, for vector length</span>
+<span class="sd">                        self._cliff_lengths[i][j].</span>
+<span class="sd">            And ydata[i][&#39;std&#39;] is a numpy_array of length n;</span>
+<span class="sd">                        entry j of this array contains the std</span>
+<span class="sd">                        of the probability of success over seeds,</span>
+<span class="sd">                        for vector length self._cliff_lengths[i][j].</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rbfit_pur</span><span class="o">.</span><span class="n">calc_statistics</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="PurityRBFitter.fit_data_pattern"><a class="viewcode-back" href="../../../../../api/qiskit.ignis.verification.randomized_benchmarking.PurityRBFitter.html#qiskit.ignis.verification.randomized_benchmarking.PurityRBFitter.fit_data_pattern">[documentos]</a>    <span class="k">def</span> <span class="nf">fit_data_pattern</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">patt_ind</span><span class="p">,</span> <span class="n">fit_guess</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Fit the RB results of a particular pattern</span>
+<span class="sd">        to an exponential curve.</span>
+<span class="sd">        Args:</span>
+<span class="sd">            patt_ind: index of the subsystem to fit</span>
+<span class="sd">            fit_guess: guess values for the fit</span>
+<span class="sd">        Puts the results into a list of fit dictionaries:</span>
+<span class="sd">            where each dictionary corresponds to a pattern and has fields:</span>
+<span class="sd">            &#39;params&#39; - three parameters of rb_fit_fun. The middle one is the</span>
+<span class="sd">                       exponent.</span>
+<span class="sd">            &#39;err&#39; - the error limits of the parameters.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rbfit_pur</span><span class="o">.</span><span class="n">fit_data_pattern</span><span class="p">(</span><span class="n">patt_ind</span><span class="p">,</span> <span class="n">fit_guess</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PurityRBFitter.fit_data"><a class="viewcode-back" href="../../../../../api/qiskit.ignis.verification.randomized_benchmarking.PurityRBFitter.html#qiskit.ignis.verification.randomized_benchmarking.PurityRBFitter.fit_data">[documentos]</a>    <span class="k">def</span> <span class="nf">fit_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Fit the Purity RB results to an exponential curve.</span>
+<span class="sd">        Use the data to construct guess values</span>
+<span class="sd">        for the fits</span>
+<span class="sd">        Puts the results into a list of fit dictionaries:</span>
+<span class="sd">            where each dictionary corresponds to a pattern and has fields:</span>
+<span class="sd">            &#39;params&#39; - three parameters of rb_fit_fun. The middle one is the</span>
+<span class="sd">                       exponent.</span>
+<span class="sd">            &#39;err&#39; - the error limits of the parameters.</span>
+<span class="sd">            &#39;epc&#39; - Error per Clifford</span>
+<span class="sd">            &#39;pepc&#39; - Purity Error per Clifford</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rbfit_pur</span><span class="o">.</span><span class="n">fit_data</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">patt_ind</span><span class="p">,</span> <span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cliff_lengths</span><span class="p">,</span>
+                                              <span class="bp">self</span><span class="o">.</span><span class="n">_rb_pattern</span><span class="p">)):</span>
+            <span class="c1"># Calculate alpha (=p):</span>
+            <span class="c1"># fitting the curve: A*p^(2m)+B</span>
+            <span class="c1"># where m is the Clifford length</span>
+            <span class="n">alpha</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rbfit_pur</span><span class="o">.</span><span class="n">fit</span><span class="p">[</span><span class="n">patt_ind</span><span class="p">][</span><span class="s1">&#39;params&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">alpha_pur</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rbfit_pur</span><span class="o">.</span><span class="n">fit</span><span class="p">[</span><span class="n">patt_ind</span><span class="p">][</span><span class="s1">&#39;params&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">alpha_pur</span>
+
+            <span class="c1"># calculate the error of alpha</span>
+            <span class="n">alpha_err</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rbfit_pur</span><span class="o">.</span><span class="n">fit</span><span class="p">[</span><span class="n">patt_ind</span><span class="p">][</span><span class="s1">&#39;params_err&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">alpha_pur_err</span> <span class="o">=</span> <span class="n">alpha_err</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">alpha_pur</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rbfit_pur</span><span class="o">.</span><span class="n">fit</span><span class="p">[</span><span class="n">patt_ind</span><span class="p">][</span><span class="s1">&#39;params_err&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> \
+                <span class="n">alpha_pur_err</span>
+
+            <span class="c1"># calcuate purity error per clifford (pepc)</span>
+            <span class="n">nrb</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">**</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nq</span>
+            <span class="n">pepc</span> <span class="o">=</span> <span class="p">(</span><span class="n">nrb</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">nrb</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">alpha_pur</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rbfit_pur</span><span class="o">.</span><span class="n">fit</span><span class="p">[</span><span class="n">patt_ind</span><span class="p">][</span><span class="s1">&#39;pepc&#39;</span><span class="p">]</span> <span class="o">=</span> \
+                <span class="n">pepc</span>
+
+            <span class="n">pepc_err</span> <span class="o">=</span> <span class="p">(</span><span class="n">nrb</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">nrb</span> <span class="o">*</span> <span class="n">alpha_pur_err</span> <span class="o">/</span> <span class="n">alpha_pur</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rbfit_pur</span><span class="o">.</span><span class="n">fit</span><span class="p">[</span><span class="n">patt_ind</span><span class="p">][</span><span class="s1">&#39;pepc_err&#39;</span><span class="p">]</span> <span class="o">=</span> \
+                <span class="n">pepc_err</span></div>
+
+<div class="viewcode-block" id="PurityRBFitter.plot_rb_data"><a class="viewcode-back" href="../../../../../api/qiskit.ignis.verification.randomized_benchmarking.PurityRBFitter.html#qiskit.ignis.verification.randomized_benchmarking.PurityRBFitter.plot_rb_data">[documentos]</a>    <span class="k">def</span> <span class="nf">plot_rb_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pattern_index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                     <span class="n">add_label</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_plt</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">          Plot purity rb data of a single pattern.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">fit_function</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rb_pur_fit_fun</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">HAS_MATPLOTLIB</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s1">&#39;The function plot_rb_data needs matplotlib. &#39;</span>
+                              <span class="s1">&#39;Run &quot;pip install matplotlib&quot; before.&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">ax</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+            <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+
+        <span class="n">xdata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cliff_lengths</span><span class="p">[</span><span class="n">pattern_index</span><span class="p">]</span>
+
+        <span class="c1"># Plot the result for each sequence</span>
+        <span class="k">for</span> <span class="n">one_seed_data</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rbfit_pur</span><span class="o">.</span><span class="n">raw_data</span><span class="p">[</span><span class="n">pattern_index</span><span class="p">]:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xdata</span><span class="p">,</span> <span class="n">one_seed_data</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span>
+                    <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Plot the mean with error bars</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">xdata</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rbfit_pur</span><span class="o">.</span><span class="n">ydata</span><span class="p">[</span><span class="n">pattern_index</span><span class="p">][</span><span class="s1">&#39;mean&#39;</span><span class="p">],</span>
+                    <span class="n">yerr</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">rbfit_pur</span><span class="o">.</span><span class="n">ydata</span><span class="p">[</span><span class="n">pattern_index</span><span class="p">][</span><span class="s1">&#39;std&#39;</span><span class="p">],</span>
+                    <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+        <span class="c1"># Plot the fit</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xdata</span><span class="p">,</span>
+                <span class="n">fit_function</span><span class="p">(</span><span class="n">xdata</span><span class="p">,</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">rbfit_pur</span><span class="o">.</span><span class="n">fit</span><span class="p">[</span><span class="n">pattern_index</span><span class="p">][</span>
+                    <span class="s1">&#39;params&#39;</span><span class="p">]),</span>
+                <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Clifford Length&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Trace of Rho Square&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">add_label</span><span class="p">:</span>
+            <span class="n">bbox_props</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">boxstyle</span><span class="o">=</span><span class="s2">&quot;round,pad=0.3&quot;</span><span class="p">,</span>
+                              <span class="n">fc</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span> <span class="n">ec</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+            <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span>
+                    <span class="s2">&quot;alpha: </span><span class="si">%.3f</span><span class="s2">(</span><span class="si">%.1e</span><span class="s2">) PEPC: </span><span class="si">%.3e</span><span class="s2">(</span><span class="si">%.1e</span><span class="s2">)&quot;</span> <span class="o">%</span>
+                    <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rbfit_pur</span><span class="o">.</span><span class="n">fit</span><span class="p">[</span><span class="n">pattern_index</span><span class="p">][</span><span class="s1">&#39;params&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span>
+                     <span class="bp">self</span><span class="o">.</span><span class="n">rbfit_pur</span><span class="o">.</span><span class="n">fit</span><span class="p">[</span><span class="n">pattern_index</span><span class="p">][</span><span class="s1">&#39;params_err&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span>
+                     <span class="bp">self</span><span class="o">.</span><span class="n">rbfit_pur</span><span class="o">.</span><span class="n">fit</span><span class="p">[</span><span class="n">pattern_index</span><span class="p">][</span><span class="s1">&#39;pepc&#39;</span><span class="p">],</span>
+                     <span class="bp">self</span><span class="o">.</span><span class="n">rbfit_pur</span><span class="o">.</span><span class="n">fit</span><span class="p">[</span><span class="n">pattern_index</span><span class="p">][</span><span class="s1">&#39;pepc_err&#39;</span><span class="p">]),</span>
+                    <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span>
+                    <span class="n">bbox</span><span class="o">=</span><span class="n">bbox_props</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">show_plt</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div></div>
+</pre></div>
+
+        </div>
+
+      <div class="clearer"></div>
+    </div><div class="pagenation">
+        
+        </main>
+    </div>
+    <script>
+        function trackClickEvent (data) {
+            if (window.bluemixAnalytics && window.digitalData) {
+                var segmentEvent = {
+                    productTitle: window.digitalData.page.pageInfo.productTitle,
+                    category: window.digitalData.page.pageInfo.analytics.category,
+                    url: window.location.href,
+                    action: window.location.href + ' - Clicked: ' + data.action,
+                    objectType: data.objectType,
+                    successFlag: true
+                };
+
+                if(data.milestoneName) {
+                    segmentEvent = Object.assign(segmentEvent, { milestoneName: data.milestoneName });
+                }
+                window.bluemixAnalytics.trackEvent('Custom Event', segmentEvent);
+            }
+        };
+
+        function clickExternalLink() {
+            trackClickEvent({
+                action: "Tutorials Link in Navbar",
+                objectType: "Link",
+                milestoneName: "Looked at tutorials"
+            });
+        };
+
+        var link = document.getElementById('tutorialsLink');
+        link.addEventListener('click', clickExternalLink);
+    </script>
+    <script>
+	    var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+	    var prefix = '/documentation';
+	    function getDefaultLanguage() {
+	      return 'en';
+	    }
+      var el = document.getElementById('language');
+      var optionsToSelect = ['en', 'ja']
+      function changeLoc(evt) {
+        var language = evt.target.options[el.selectedIndex].value;
+        var pathname = window.location.pathname.slice(prefix.length);
+        if (language === getDefaultLanguage()) {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, '/')}`;
+        } else {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, `/locale/${language}/`)}`;
+        }
+      };
+      el.addEventListener('change', changeLoc);
+      function extractLanguageFromUrl(pathname) {
+        const match = pathname.slice(prefix.length).match(localeRegExp);
+        return typeof match[2] === 'undefined' ?
+                getDefaultLanguage() : match[2];
+	    }
+      function changeSelect(select) {
+        const optionToSelect = extractLanguageFromUrl(window.location.pathname);
+        for (var i = 0; i < select.options.length; i++) {
+          var o = select.options[i];
+          if (optionToSelect == o.value) {
+            o.selected = true;
+          }
+        }
+      };
+      changeSelect(el);
+    </script>
+  </body>
+</html>
