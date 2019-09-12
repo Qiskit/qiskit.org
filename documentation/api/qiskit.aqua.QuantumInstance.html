@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -90,7 +89,7 @@
 	<span>
 	    <select id="language" name="languages">
 	        <option value="en">English</option>
-	        <option value="ja">日本語</option>
+	        <option value="ja">Japanese</option>
         </select>
     </span>
 </div>
@@ -673,7 +672,7 @@
 	<span>
 	    <select id="language" name="languages">
 	        <option value="en">English</option>
-	        <option value="ja">日本語</option>
+	        <option value="ja">Japanese</option>
         </select>
     </span>
 </div>
@@ -1246,319 +1245,311 @@
 <h1>QuantumInstance<a class="headerlink" href="#quantuminstance" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="qiskit.aqua.QuantumInstance">
-<em class="property">class </em><code class="descname">QuantumInstance</code><span class="sig-paren">(</span><em>backend</em>, <em>shots=1024</em>, <em>seed_simulator=None</em>, <em>max_credits=10</em>, <em>basis_gates=None</em>, <em>coupling_map=None</em>, <em>initial_layout=None</em>, <em>pass_manager=None</em>, <em>seed_transpiler=None</em>, <em>optimization_level=None</em>, <em>backend_options=None</em>, <em>noise_model=None</em>, <em>timeout=None</em>, <em>wait=5</em>, <em>circuit_caching=False</em>, <em>cache_file=None</em>, <em>skip_qobj_deepcopy=False</em>, <em>skip_qobj_validation=True</em>, <em>measurement_error_mitigation_cls=None</em>, <em>cals_matrix_refresh_period=30</em>, <em>measurement_error_mitigation_shots=None</em>, <em>job_callback=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/quantum_instance.html#QuantumInstance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.aqua.QuantumInstance" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">QuantumInstance</code><span class="sig-paren">(</span><em class="sig-param">backend</em>, <em class="sig-param">shots=1024</em>, <em class="sig-param">seed_simulator=None</em>, <em class="sig-param">max_credits=10</em>, <em class="sig-param">basis_gates=None</em>, <em class="sig-param">coupling_map=None</em>, <em class="sig-param">initial_layout=None</em>, <em class="sig-param">pass_manager=None</em>, <em class="sig-param">seed_transpiler=None</em>, <em class="sig-param">optimization_level=None</em>, <em class="sig-param">backend_options=None</em>, <em class="sig-param">noise_model=None</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">wait=5</em>, <em class="sig-param">circuit_caching=False</em>, <em class="sig-param">cache_file=None</em>, <em class="sig-param">skip_qobj_deepcopy=False</em>, <em class="sig-param">skip_qobj_validation=True</em>, <em class="sig-param">measurement_error_mitigation_cls=None</em>, <em class="sig-param">cals_matrix_refresh_period=30</em>, <em class="sig-param">measurement_error_mitigation_shots=None</em>, <em class="sig-param">job_callback=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/quantum_instance.html#QuantumInstance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.aqua.QuantumInstance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Quantum Backend including execution setting.</p>
 <p class="rubric">Attributes Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.QuantumInstance.BACKEND_CONFIG" title="qiskit.aqua.QuantumInstance.BACKEND_CONFIG"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BACKEND_CONFIG</span></code></a></td>
-<td></td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.QuantumInstance.BACKEND_CONFIG" title="qiskit.aqua.QuantumInstance.BACKEND_CONFIG"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BACKEND_CONFIG</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.QuantumInstance.BACKEND_OPTIONS" title="qiskit.aqua.QuantumInstance.BACKEND_OPTIONS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BACKEND_OPTIONS</span></code></a></td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.QuantumInstance.BACKEND_OPTIONS" title="qiskit.aqua.QuantumInstance.BACKEND_OPTIONS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BACKEND_OPTIONS</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.QuantumInstance.BACKEND_OPTIONS_QASM_ONLY" title="qiskit.aqua.QuantumInstance.BACKEND_OPTIONS_QASM_ONLY"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BACKEND_OPTIONS_QASM_ONLY</span></code></a></td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.QuantumInstance.BACKEND_OPTIONS_QASM_ONLY" title="qiskit.aqua.QuantumInstance.BACKEND_OPTIONS_QASM_ONLY"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BACKEND_OPTIONS_QASM_ONLY</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.QuantumInstance.COMPILE_CONFIG" title="qiskit.aqua.QuantumInstance.COMPILE_CONFIG"><code class="xref py py-obj docutils literal notranslate"><span class="pre">COMPILE_CONFIG</span></code></a></td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.QuantumInstance.COMPILE_CONFIG" title="qiskit.aqua.QuantumInstance.COMPILE_CONFIG"><code class="xref py py-obj docutils literal notranslate"><span class="pre">COMPILE_CONFIG</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.QuantumInstance.NOISE_CONFIG" title="qiskit.aqua.QuantumInstance.NOISE_CONFIG"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NOISE_CONFIG</span></code></a></td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.QuantumInstance.NOISE_CONFIG" title="qiskit.aqua.QuantumInstance.NOISE_CONFIG"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NOISE_CONFIG</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.QuantumInstance.QJOB_CONFIG" title="qiskit.aqua.QuantumInstance.QJOB_CONFIG"><code class="xref py py-obj docutils literal notranslate"><span class="pre">QJOB_CONFIG</span></code></a></td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.QuantumInstance.QJOB_CONFIG" title="qiskit.aqua.QuantumInstance.QJOB_CONFIG"><code class="xref py py-obj docutils literal notranslate"><span class="pre">QJOB_CONFIG</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.QuantumInstance.RUN_CONFIG" title="qiskit.aqua.QuantumInstance.RUN_CONFIG"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RUN_CONFIG</span></code></a></td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.QuantumInstance.RUN_CONFIG" title="qiskit.aqua.QuantumInstance.RUN_CONFIG"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RUN_CONFIG</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.QuantumInstance.backend" title="qiskit.aqua.QuantumInstance.backend"><code class="xref py py-obj docutils literal notranslate"><span class="pre">backend</span></code></a></td>
-<td>Return BaseBackend backend object.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.QuantumInstance.backend" title="qiskit.aqua.QuantumInstance.backend"><code class="xref py py-obj docutils literal notranslate"><span class="pre">backend</span></code></a></p></td>
+<td><p>Return BaseBackend backend object.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.QuantumInstance.backend_config" title="qiskit.aqua.QuantumInstance.backend_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">backend_config</span></code></a></td>
-<td>Getter of backend_config.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.QuantumInstance.backend_config" title="qiskit.aqua.QuantumInstance.backend_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">backend_config</span></code></a></p></td>
+<td><p>Getter of backend_config.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.QuantumInstance.backend_name" title="qiskit.aqua.QuantumInstance.backend_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">backend_name</span></code></a></td>
-<td>Return backend name.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.QuantumInstance.backend_name" title="qiskit.aqua.QuantumInstance.backend_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">backend_name</span></code></a></p></td>
+<td><p>Return backend name.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.QuantumInstance.backend_options" title="qiskit.aqua.QuantumInstance.backend_options"><code class="xref py py-obj docutils literal notranslate"><span class="pre">backend_options</span></code></a></td>
-<td>Getter of backend_options.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.QuantumInstance.backend_options" title="qiskit.aqua.QuantumInstance.backend_options"><code class="xref py py-obj docutils literal notranslate"><span class="pre">backend_options</span></code></a></p></td>
+<td><p>Getter of backend_options.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.QuantumInstance.cals_matrix_refresh_period" title="qiskit.aqua.QuantumInstance.cals_matrix_refresh_period"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cals_matrix_refresh_period</span></code></a></td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.QuantumInstance.cals_matrix_refresh_period" title="qiskit.aqua.QuantumInstance.cals_matrix_refresh_period"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cals_matrix_refresh_period</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.QuantumInstance.circuit_cache" title="qiskit.aqua.QuantumInstance.circuit_cache"><code class="xref py py-obj docutils literal notranslate"><span class="pre">circuit_cache</span></code></a></td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.QuantumInstance.circuit_cache" title="qiskit.aqua.QuantumInstance.circuit_cache"><code class="xref py py-obj docutils literal notranslate"><span class="pre">circuit_cache</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.QuantumInstance.circuit_summary" title="qiskit.aqua.QuantumInstance.circuit_summary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">circuit_summary</span></code></a></td>
-<td>Getter of circuit summary.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.QuantumInstance.circuit_summary" title="qiskit.aqua.QuantumInstance.circuit_summary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">circuit_summary</span></code></a></p></td>
+<td><p>Getter of circuit summary.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.QuantumInstance.compile_config" title="qiskit.aqua.QuantumInstance.compile_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compile_config</span></code></a></td>
-<td>Getter of compile_config.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.QuantumInstance.compile_config" title="qiskit.aqua.QuantumInstance.compile_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compile_config</span></code></a></p></td>
+<td><p>Getter of compile_config.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.QuantumInstance.has_circuit_caching" title="qiskit.aqua.QuantumInstance.has_circuit_caching"><code class="xref py py-obj docutils literal notranslate"><span class="pre">has_circuit_caching</span></code></a></td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.QuantumInstance.has_circuit_caching" title="qiskit.aqua.QuantumInstance.has_circuit_caching"><code class="xref py py-obj docutils literal notranslate"><span class="pre">has_circuit_caching</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.QuantumInstance.is_local" title="qiskit.aqua.QuantumInstance.is_local"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_local</span></code></a></td>
-<td>Return True if backend is a local backend.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.QuantumInstance.is_local" title="qiskit.aqua.QuantumInstance.is_local"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_local</span></code></a></p></td>
+<td><p>Return True if backend is a local backend.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.QuantumInstance.is_simulator" title="qiskit.aqua.QuantumInstance.is_simulator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_simulator</span></code></a></td>
-<td>Return True if backend is a simulator.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.QuantumInstance.is_simulator" title="qiskit.aqua.QuantumInstance.is_simulator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_simulator</span></code></a></p></td>
+<td><p>Return True if backend is a simulator.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.QuantumInstance.is_statevector" title="qiskit.aqua.QuantumInstance.is_statevector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_statevector</span></code></a></td>
-<td>Return True if backend is a statevector-type simulator.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.QuantumInstance.is_statevector" title="qiskit.aqua.QuantumInstance.is_statevector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_statevector</span></code></a></p></td>
+<td><p>Return True if backend is a statevector-type simulator.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.QuantumInstance.measurement_error_mitigation_cls" title="qiskit.aqua.QuantumInstance.measurement_error_mitigation_cls"><code class="xref py py-obj docutils literal notranslate"><span class="pre">measurement_error_mitigation_cls</span></code></a></td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.QuantumInstance.measurement_error_mitigation_cls" title="qiskit.aqua.QuantumInstance.measurement_error_mitigation_cls"><code class="xref py py-obj docutils literal notranslate"><span class="pre">measurement_error_mitigation_cls</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.QuantumInstance.measurement_error_mitigation_shots" title="qiskit.aqua.QuantumInstance.measurement_error_mitigation_shots"><code class="xref py py-obj docutils literal notranslate"><span class="pre">measurement_error_mitigation_shots</span></code></a></td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.QuantumInstance.measurement_error_mitigation_shots" title="qiskit.aqua.QuantumInstance.measurement_error_mitigation_shots"><code class="xref py py-obj docutils literal notranslate"><span class="pre">measurement_error_mitigation_shots</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.QuantumInstance.noise_config" title="qiskit.aqua.QuantumInstance.noise_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">noise_config</span></code></a></td>
-<td>Getter of noise_config.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.QuantumInstance.noise_config" title="qiskit.aqua.QuantumInstance.noise_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">noise_config</span></code></a></p></td>
+<td><p>Getter of noise_config.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.QuantumInstance.qjob_config" title="qiskit.aqua.QuantumInstance.qjob_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qjob_config</span></code></a></td>
-<td>Getter of qjob_config.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.QuantumInstance.qjob_config" title="qiskit.aqua.QuantumInstance.qjob_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qjob_config</span></code></a></p></td>
+<td><p>Getter of qjob_config.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.QuantumInstance.run_config" title="qiskit.aqua.QuantumInstance.run_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_config</span></code></a></td>
-<td>Getter of run_config.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.QuantumInstance.run_config" title="qiskit.aqua.QuantumInstance.run_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_config</span></code></a></p></td>
+<td><p>Getter of run_config.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.QuantumInstance.skip_qobj_validation" title="qiskit.aqua.QuantumInstance.skip_qobj_validation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">skip_qobj_validation</span></code></a></td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.QuantumInstance.skip_qobj_validation" title="qiskit.aqua.QuantumInstance.skip_qobj_validation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">skip_qobj_validation</span></code></a></p></td>
+<td><p></p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Methods Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.QuantumInstance.cals_matrix" title="qiskit.aqua.QuantumInstance.cals_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cals_matrix</span></code></a>([qubit_index])</td>
-<td>Get the stored calibration matrices and its timestamp.</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.QuantumInstance.cals_matrix" title="qiskit.aqua.QuantumInstance.cals_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cals_matrix</span></code></a>([qubit_index])</p></td>
+<td><p>Get the stored calibration matrices and its timestamp.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.QuantumInstance.execute" title="qiskit.aqua.QuantumInstance.execute"><code class="xref py py-obj docutils literal notranslate"><span class="pre">execute</span></code></a>(circuits,&nbsp;**kwargs)</td>
-<td>A wrapper to interface with quantum backend.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.QuantumInstance.execute" title="qiskit.aqua.QuantumInstance.execute"><code class="xref py py-obj docutils literal notranslate"><span class="pre">execute</span></code></a>(circuits, **kwargs)</p></td>
+<td><p>A wrapper to interface with quantum backend.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.QuantumInstance.maybe_refresh_cals_matrix" title="qiskit.aqua.QuantumInstance.maybe_refresh_cals_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">maybe_refresh_cals_matrix</span></code></a>([timestamp])</td>
-<td>Calculate the time difference from the query of last time.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.QuantumInstance.maybe_refresh_cals_matrix" title="qiskit.aqua.QuantumInstance.maybe_refresh_cals_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">maybe_refresh_cals_matrix</span></code></a>([timestamp])</p></td>
+<td><p>Calculate the time difference from the query of last time.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.QuantumInstance.set_config" title="qiskit.aqua.QuantumInstance.set_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_config</span></code></a>(**kwargs)</td>
-<td>Set configurations for the quantum instance.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.QuantumInstance.set_config" title="qiskit.aqua.QuantumInstance.set_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_config</span></code></a>(**kwargs)</p></td>
+<td><p>Set configurations for the quantum instance.</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Attributes Documentation</p>
 <dl class="attribute">
 <dt id="qiskit.aqua.QuantumInstance.BACKEND_CONFIG">
-<code class="descname">BACKEND_CONFIG</code><em class="property"> = ['basis_gates', 'coupling_map']</em><a class="headerlink" href="#qiskit.aqua.QuantumInstance.BACKEND_CONFIG" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">BACKEND_CONFIG</code><em class="property"> = ['basis_gates', 'coupling_map']</em><a class="headerlink" href="#qiskit.aqua.QuantumInstance.BACKEND_CONFIG" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.QuantumInstance.BACKEND_OPTIONS">
-<code class="descname">BACKEND_OPTIONS</code><em class="property"> = ['initial_statevector', 'chop_threshold', 'max_parallel_threads', 'max_parallel_experiments', 'statevector_parallel_threshold', 'statevector_hpc_gate_opt', 'statevector_sample_measure_opt', 'max_parallel_shots']</em><a class="headerlink" href="#qiskit.aqua.QuantumInstance.BACKEND_OPTIONS" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">BACKEND_OPTIONS</code><em class="property"> = ['initial_statevector', 'chop_threshold', 'max_parallel_threads', 'max_parallel_experiments', 'statevector_parallel_threshold', 'statevector_hpc_gate_opt', 'statevector_sample_measure_opt', 'max_parallel_shots']</em><a class="headerlink" href="#qiskit.aqua.QuantumInstance.BACKEND_OPTIONS" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.QuantumInstance.BACKEND_OPTIONS_QASM_ONLY">
-<code class="descname">BACKEND_OPTIONS_QASM_ONLY</code><em class="property"> = ['statevector_sample_measure_opt', 'max_parallel_shots']</em><a class="headerlink" href="#qiskit.aqua.QuantumInstance.BACKEND_OPTIONS_QASM_ONLY" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">BACKEND_OPTIONS_QASM_ONLY</code><em class="property"> = ['statevector_sample_measure_opt', 'max_parallel_shots']</em><a class="headerlink" href="#qiskit.aqua.QuantumInstance.BACKEND_OPTIONS_QASM_ONLY" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.QuantumInstance.COMPILE_CONFIG">
-<code class="descname">COMPILE_CONFIG</code><em class="property"> = ['pass_manager', 'initial_layout', 'seed_transpiler', 'optimization_level']</em><a class="headerlink" href="#qiskit.aqua.QuantumInstance.COMPILE_CONFIG" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">COMPILE_CONFIG</code><em class="property"> = ['pass_manager', 'initial_layout', 'seed_transpiler', 'optimization_level']</em><a class="headerlink" href="#qiskit.aqua.QuantumInstance.COMPILE_CONFIG" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.QuantumInstance.NOISE_CONFIG">
-<code class="descname">NOISE_CONFIG</code><em class="property"> = ['noise_model']</em><a class="headerlink" href="#qiskit.aqua.QuantumInstance.NOISE_CONFIG" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">NOISE_CONFIG</code><em class="property"> = ['noise_model']</em><a class="headerlink" href="#qiskit.aqua.QuantumInstance.NOISE_CONFIG" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.QuantumInstance.QJOB_CONFIG">
-<code class="descname">QJOB_CONFIG</code><em class="property"> = ['timeout', 'wait']</em><a class="headerlink" href="#qiskit.aqua.QuantumInstance.QJOB_CONFIG" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">QJOB_CONFIG</code><em class="property"> = ['timeout', 'wait']</em><a class="headerlink" href="#qiskit.aqua.QuantumInstance.QJOB_CONFIG" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.QuantumInstance.RUN_CONFIG">
-<code class="descname">RUN_CONFIG</code><em class="property"> = ['shots', 'max_credits', 'memory', 'seed_simulator']</em><a class="headerlink" href="#qiskit.aqua.QuantumInstance.RUN_CONFIG" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">RUN_CONFIG</code><em class="property"> = ['shots', 'max_credits', 'memory', 'seed_simulator']</em><a class="headerlink" href="#qiskit.aqua.QuantumInstance.RUN_CONFIG" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.QuantumInstance.backend">
-<code class="descname">backend</code><a class="headerlink" href="#qiskit.aqua.QuantumInstance.backend" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">backend</code><a class="headerlink" href="#qiskit.aqua.QuantumInstance.backend" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return BaseBackend backend object.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.QuantumInstance.backend_config">
-<code class="descname">backend_config</code><a class="headerlink" href="#qiskit.aqua.QuantumInstance.backend_config" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">backend_config</code><a class="headerlink" href="#qiskit.aqua.QuantumInstance.backend_config" title="Permalink to this definition">¶</a></dt>
 <dd><p>Getter of backend_config.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.QuantumInstance.backend_name">
-<code class="descname">backend_name</code><a class="headerlink" href="#qiskit.aqua.QuantumInstance.backend_name" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">backend_name</code><a class="headerlink" href="#qiskit.aqua.QuantumInstance.backend_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return backend name.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.QuantumInstance.backend_options">
-<code class="descname">backend_options</code><a class="headerlink" href="#qiskit.aqua.QuantumInstance.backend_options" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">backend_options</code><a class="headerlink" href="#qiskit.aqua.QuantumInstance.backend_options" title="Permalink to this definition">¶</a></dt>
 <dd><p>Getter of backend_options.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.QuantumInstance.cals_matrix_refresh_period">
-<code class="descname">cals_matrix_refresh_period</code><a class="headerlink" href="#qiskit.aqua.QuantumInstance.cals_matrix_refresh_period" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">cals_matrix_refresh_period</code><a class="headerlink" href="#qiskit.aqua.QuantumInstance.cals_matrix_refresh_period" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.QuantumInstance.circuit_cache">
-<code class="descname">circuit_cache</code><a class="headerlink" href="#qiskit.aqua.QuantumInstance.circuit_cache" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">circuit_cache</code><a class="headerlink" href="#qiskit.aqua.QuantumInstance.circuit_cache" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.QuantumInstance.circuit_summary">
-<code class="descname">circuit_summary</code><a class="headerlink" href="#qiskit.aqua.QuantumInstance.circuit_summary" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">circuit_summary</code><a class="headerlink" href="#qiskit.aqua.QuantumInstance.circuit_summary" title="Permalink to this definition">¶</a></dt>
 <dd><p>Getter of circuit summary.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.QuantumInstance.compile_config">
-<code class="descname">compile_config</code><a class="headerlink" href="#qiskit.aqua.QuantumInstance.compile_config" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">compile_config</code><a class="headerlink" href="#qiskit.aqua.QuantumInstance.compile_config" title="Permalink to this definition">¶</a></dt>
 <dd><p>Getter of compile_config.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.QuantumInstance.has_circuit_caching">
-<code class="descname">has_circuit_caching</code><a class="headerlink" href="#qiskit.aqua.QuantumInstance.has_circuit_caching" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">has_circuit_caching</code><a class="headerlink" href="#qiskit.aqua.QuantumInstance.has_circuit_caching" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.QuantumInstance.is_local">
-<code class="descname">is_local</code><a class="headerlink" href="#qiskit.aqua.QuantumInstance.is_local" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">is_local</code><a class="headerlink" href="#qiskit.aqua.QuantumInstance.is_local" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return True if backend is a local backend.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.QuantumInstance.is_simulator">
-<code class="descname">is_simulator</code><a class="headerlink" href="#qiskit.aqua.QuantumInstance.is_simulator" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">is_simulator</code><a class="headerlink" href="#qiskit.aqua.QuantumInstance.is_simulator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return True if backend is a simulator.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.QuantumInstance.is_statevector">
-<code class="descname">is_statevector</code><a class="headerlink" href="#qiskit.aqua.QuantumInstance.is_statevector" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">is_statevector</code><a class="headerlink" href="#qiskit.aqua.QuantumInstance.is_statevector" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return True if backend is a statevector-type simulator.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.QuantumInstance.measurement_error_mitigation_cls">
-<code class="descname">measurement_error_mitigation_cls</code><a class="headerlink" href="#qiskit.aqua.QuantumInstance.measurement_error_mitigation_cls" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">measurement_error_mitigation_cls</code><a class="headerlink" href="#qiskit.aqua.QuantumInstance.measurement_error_mitigation_cls" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.QuantumInstance.measurement_error_mitigation_shots">
-<code class="descname">measurement_error_mitigation_shots</code><a class="headerlink" href="#qiskit.aqua.QuantumInstance.measurement_error_mitigation_shots" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">measurement_error_mitigation_shots</code><a class="headerlink" href="#qiskit.aqua.QuantumInstance.measurement_error_mitigation_shots" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.QuantumInstance.noise_config">
-<code class="descname">noise_config</code><a class="headerlink" href="#qiskit.aqua.QuantumInstance.noise_config" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">noise_config</code><a class="headerlink" href="#qiskit.aqua.QuantumInstance.noise_config" title="Permalink to this definition">¶</a></dt>
 <dd><p>Getter of noise_config.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.QuantumInstance.qjob_config">
-<code class="descname">qjob_config</code><a class="headerlink" href="#qiskit.aqua.QuantumInstance.qjob_config" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">qjob_config</code><a class="headerlink" href="#qiskit.aqua.QuantumInstance.qjob_config" title="Permalink to this definition">¶</a></dt>
 <dd><p>Getter of qjob_config.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.QuantumInstance.run_config">
-<code class="descname">run_config</code><a class="headerlink" href="#qiskit.aqua.QuantumInstance.run_config" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">run_config</code><a class="headerlink" href="#qiskit.aqua.QuantumInstance.run_config" title="Permalink to this definition">¶</a></dt>
 <dd><p>Getter of run_config.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.QuantumInstance.skip_qobj_validation">
-<code class="descname">skip_qobj_validation</code><a class="headerlink" href="#qiskit.aqua.QuantumInstance.skip_qobj_validation" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">skip_qobj_validation</code><a class="headerlink" href="#qiskit.aqua.QuantumInstance.skip_qobj_validation" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p class="rubric">Methods Documentation</p>
 <dl class="method">
 <dt id="qiskit.aqua.QuantumInstance.cals_matrix">
-<code class="descname">cals_matrix</code><span class="sig-paren">(</span><em>qubit_index=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/quantum_instance.html#QuantumInstance.cals_matrix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.aqua.QuantumInstance.cals_matrix" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">cals_matrix</code><span class="sig-paren">(</span><em class="sig-param">qubit_index=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/quantum_instance.html#QuantumInstance.cals_matrix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.aqua.QuantumInstance.cals_matrix" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the stored calibration matrices and its timestamp.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>qubit_index</strong> – the qubit index of corresponding calibration matrix.</li>
-<li><strong>None</strong><strong>, </strong><strong>return all stored calibration matrices.</strong> (<em>If</em>) – </li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>qubit_index</strong> – the qubit index of corresponding calibration matrix.</p></li>
+<li><p><strong>None</strong><strong>, </strong><strong>return all stored calibration matrices.</strong> (<em>If</em>) – </p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><dl class="docutils">
-<dt>the calibration matrix and the creation timestamp if qubit_index is not None.</dt>
-<dd><p class="first last">otherwise, return all matrices and their timestamp in a dictionary.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>the calibration matrix and the creation timestamp if qubit_index is not None.</dt><dd><p>otherwise, return all matrices and their timestamp in a dictionary.</p>
 </dd>
 </dl>
 </p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">tuple(np.ndarray, int)</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple(np.ndarray, int)</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.QuantumInstance.execute">
-<code class="descname">execute</code><span class="sig-paren">(</span><em>circuits</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/quantum_instance.html#QuantumInstance.execute"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.aqua.QuantumInstance.execute" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">execute</code><span class="sig-paren">(</span><em class="sig-param">circuits</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/quantum_instance.html#QuantumInstance.execute"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.aqua.QuantumInstance.execute" title="Permalink to this definition">¶</a></dt>
 <dd><p>A wrapper to interface with quantum backend.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>circuits</strong> (<a class="reference internal" href="qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit" title="qiskit.circuit.QuantumCircuit"><em>QuantumCircuit</em></a><em> or </em><em>list</em><em>[</em><a class="reference internal" href="qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit" title="qiskit.circuit.QuantumCircuit"><em>QuantumCircuit</em></a><em>]</em>) – circuits to execute</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Result object</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="qiskit.result.Result.html#qiskit.result.Result" title="qiskit.result.Result">Result</a></td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>circuits</strong> (<a class="reference internal" href="qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit" title="qiskit.circuit.QuantumCircuit"><em>QuantumCircuit</em></a><em> or </em><em>list</em><em>[</em><a class="reference internal" href="qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit" title="qiskit.circuit.QuantumCircuit"><em>QuantumCircuit</em></a><em>]</em>) – circuits to execute</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Result object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="qiskit.result.Result.html#qiskit.result.Result" title="qiskit.result.Result">Result</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.QuantumInstance.maybe_refresh_cals_matrix">
-<code class="descname">maybe_refresh_cals_matrix</code><span class="sig-paren">(</span><em>timestamp=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/quantum_instance.html#QuantumInstance.maybe_refresh_cals_matrix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.aqua.QuantumInstance.maybe_refresh_cals_matrix" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">maybe_refresh_cals_matrix</code><span class="sig-paren">(</span><em class="sig-param">timestamp=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/quantum_instance.html#QuantumInstance.maybe_refresh_cals_matrix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.aqua.QuantumInstance.maybe_refresh_cals_matrix" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the time difference from the query of last time.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">whether or not refresh the cals_matrix</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>whether or not refresh the cals_matrix</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.QuantumInstance.set_config">
-<code class="descname">set_config</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/quantum_instance.html#QuantumInstance.set_config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.aqua.QuantumInstance.set_config" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_config</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/quantum_instance.html#QuantumInstance.set_config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.aqua.QuantumInstance.set_config" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set configurations for the quantum instance.</p>
 </dd></dl>
 

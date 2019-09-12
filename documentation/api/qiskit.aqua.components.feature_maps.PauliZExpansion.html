@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -88,7 +87,7 @@
 	<span>
 	    <select id="language" name="languages">
 	        <option value="en">English</option>
-	        <option value="ja">日本語</option>
+	        <option value="ja">Japanese</option>
         </select>
     </span>
 </div>
@@ -671,7 +670,7 @@
 	<span>
 	    <select id="language" name="languages">
 	        <option value="en">English</option>
-	        <option value="ja">日本語</option>
+	        <option value="ja">Japanese</option>
         </select>
     </span>
 </div>
@@ -1244,259 +1243,255 @@
 <h1>PauliZExpansion<a class="headerlink" href="#paulizexpansion" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="qiskit.aqua.components.feature_maps.PauliZExpansion">
-<em class="property">class </em><code class="descname">PauliZExpansion</code><span class="sig-paren">(</span><em>feature_dimension</em>, <em>depth=2</em>, <em>entangler_map=None</em>, <em>entanglement='full'</em>, <em>z_order=2</em>, <em>data_map_func=&lt;function self_product&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/components/feature_maps/pauli_z_expansion.html#PauliZExpansion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.aqua.components.feature_maps.PauliZExpansion" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">PauliZExpansion</code><span class="sig-paren">(</span><em class="sig-param">feature_dimension</em>, <em class="sig-param">depth=2</em>, <em class="sig-param">entangler_map=None</em>, <em class="sig-param">entanglement='full'</em>, <em class="sig-param">z_order=2</em>, <em class="sig-param">data_map_func=&lt;function self_product&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/components/feature_maps/pauli_z_expansion.html#PauliZExpansion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.aqua.components.feature_maps.PauliZExpansion" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.aqua.components.feature_maps.pauli_expansion.PauliExpansion</span></code></p>
 <p>Mapping data with the second order expansion followed by entangling gates.</p>
 <p>Refer to <a class="reference external" href="https://arxiv.org/pdf/1804.11326.pdf">https://arxiv.org/pdf/1804.11326.pdf</a> for details.</p>
 <p class="rubric">Attributes Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.CONFIGURATION" title="qiskit.aqua.components.feature_maps.PauliZExpansion.CONFIGURATION"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CONFIGURATION</span></code></a></td>
-<td></td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.CONFIGURATION" title="qiskit.aqua.components.feature_maps.PauliZExpansion.CONFIGURATION"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CONFIGURATION</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_ALGORITHM" title="qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_ALGORITHM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_ALGORITHM</span></code></a></td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_ALGORITHM" title="qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_ALGORITHM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_ALGORITHM</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_DISCRIMINATIVE_NETWORK" title="qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_DISCRIMINATIVE_NETWORK"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_DISCRIMINATIVE_NETWORK</span></code></a></td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_DISCRIMINATIVE_NETWORK" title="qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_DISCRIMINATIVE_NETWORK"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_DISCRIMINATIVE_NETWORK</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_EIGS" title="qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_EIGS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_EIGS</span></code></a></td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_EIGS" title="qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_EIGS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_EIGS</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_FEATURE_MAP" title="qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_FEATURE_MAP"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_FEATURE_MAP</span></code></a></td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_FEATURE_MAP" title="qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_FEATURE_MAP"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_FEATURE_MAP</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_GENERATIVE_NETWORK" title="qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_GENERATIVE_NETWORK"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_GENERATIVE_NETWORK</span></code></a></td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_GENERATIVE_NETWORK" title="qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_GENERATIVE_NETWORK"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_GENERATIVE_NETWORK</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_INITIAL_STATE" title="qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_INITIAL_STATE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_INITIAL_STATE</span></code></a></td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_INITIAL_STATE" title="qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_INITIAL_STATE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_INITIAL_STATE</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_IQFT" title="qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_IQFT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_IQFT</span></code></a></td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_IQFT" title="qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_IQFT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_IQFT</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_MULTICLASS_EXTENSION" title="qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_MULTICLASS_EXTENSION"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_MULTICLASS_EXTENSION</span></code></a></td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_MULTICLASS_EXTENSION" title="qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_MULTICLASS_EXTENSION"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_MULTICLASS_EXTENSION</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_MULTIVARIATE_DISTRIBUTION" title="qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_MULTIVARIATE_DISTRIBUTION"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_MULTIVARIATE_DISTRIBUTION</span></code></a></td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_MULTIVARIATE_DISTRIBUTION" title="qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_MULTIVARIATE_DISTRIBUTION"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_MULTIVARIATE_DISTRIBUTION</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_OPTIMIZER" title="qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_OPTIMIZER"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_OPTIMIZER</span></code></a></td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_OPTIMIZER" title="qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_OPTIMIZER"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_OPTIMIZER</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_ORACLE" title="qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_ORACLE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_ORACLE</span></code></a></td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_ORACLE" title="qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_ORACLE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_ORACLE</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_QFT" title="qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_QFT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_QFT</span></code></a></td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_QFT" title="qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_QFT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_QFT</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_RECIPROCAL" title="qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_RECIPROCAL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_RECIPROCAL</span></code></a></td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_RECIPROCAL" title="qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_RECIPROCAL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_RECIPROCAL</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_UNCERTAINTY_PROBLEM" title="qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_UNCERTAINTY_PROBLEM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_UNCERTAINTY_PROBLEM</span></code></a></td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_UNCERTAINTY_PROBLEM" title="qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_UNCERTAINTY_PROBLEM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_UNCERTAINTY_PROBLEM</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_UNIVARIATE_DISTRIBUTION" title="qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_UNIVARIATE_DISTRIBUTION"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_UNIVARIATE_DISTRIBUTION</span></code></a></td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_UNIVARIATE_DISTRIBUTION" title="qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_UNIVARIATE_DISTRIBUTION"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_UNIVARIATE_DISTRIBUTION</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_VAR_FORM" title="qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_VAR_FORM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_VAR_FORM</span></code></a></td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_VAR_FORM" title="qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_VAR_FORM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_VAR_FORM</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.configuration" title="qiskit.aqua.components.feature_maps.PauliZExpansion.configuration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">configuration</span></code></a></td>
-<td>Return pluggable configuration.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.configuration" title="qiskit.aqua.components.feature_maps.PauliZExpansion.configuration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">configuration</span></code></a></p></td>
+<td><p>Return pluggable configuration.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.feature_dimension" title="qiskit.aqua.components.feature_maps.PauliZExpansion.feature_dimension"><code class="xref py py-obj docutils literal notranslate"><span class="pre">feature_dimension</span></code></a></td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.feature_dimension" title="qiskit.aqua.components.feature_maps.PauliZExpansion.feature_dimension"><code class="xref py py-obj docutils literal notranslate"><span class="pre">feature_dimension</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.num_qubits" title="qiskit.aqua.components.feature_maps.PauliZExpansion.num_qubits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">num_qubits</span></code></a></td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.num_qubits" title="qiskit.aqua.components.feature_maps.PauliZExpansion.num_qubits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">num_qubits</span></code></a></p></td>
+<td><p></p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Methods Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.check_pluggable_valid" title="qiskit.aqua.components.feature_maps.PauliZExpansion.check_pluggable_valid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_pluggable_valid</span></code></a>()</td>
-<td>Checks if pluggable is ready for use.</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.check_pluggable_valid" title="qiskit.aqua.components.feature_maps.PauliZExpansion.check_pluggable_valid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_pluggable_valid</span></code></a>()</p></td>
+<td><p>Checks if pluggable is ready for use.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.construct_circuit" title="qiskit.aqua.components.feature_maps.PauliZExpansion.construct_circuit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">construct_circuit</span></code></a>(x[,&nbsp;qr,&nbsp;inverse])</td>
-<td>Construct the second order expansion based on given data.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.construct_circuit" title="qiskit.aqua.components.feature_maps.PauliZExpansion.construct_circuit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">construct_circuit</span></code></a>(x[, qr, inverse])</p></td>
+<td><p>Construct the second order expansion based on given data.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.get_entangler_map" title="qiskit.aqua.components.feature_maps.PauliZExpansion.get_entangler_map"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_entangler_map</span></code></a>(map_type,&nbsp;num_qubits)</td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.get_entangler_map" title="qiskit.aqua.components.feature_maps.PauliZExpansion.get_entangler_map"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_entangler_map</span></code></a>(map_type, num_qubits)</p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.init_params" title="qiskit.aqua.components.feature_maps.PauliZExpansion.init_params"><code class="xref py py-obj docutils literal notranslate"><span class="pre">init_params</span></code></a>(params)</td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.init_params" title="qiskit.aqua.components.feature_maps.PauliZExpansion.init_params"><code class="xref py py-obj docutils literal notranslate"><span class="pre">init_params</span></code></a>(params)</p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.validate" title="qiskit.aqua.components.feature_maps.PauliZExpansion.validate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate</span></code></a>(args_dict)</td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.validate" title="qiskit.aqua.components.feature_maps.PauliZExpansion.validate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate</span></code></a>(args_dict)</p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.validate_entangler_map" title="qiskit.aqua.components.feature_maps.PauliZExpansion.validate_entangler_map"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_entangler_map</span></code></a>(entangler_map,&nbsp;num_qubits)</td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.validate_entangler_map" title="qiskit.aqua.components.feature_maps.PauliZExpansion.validate_entangler_map"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_entangler_map</span></code></a>(entangler_map, num_qubits)</p></td>
+<td><p></p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Attributes Documentation</p>
 <dl class="attribute">
 <dt id="qiskit.aqua.components.feature_maps.PauliZExpansion.CONFIGURATION">
-<code class="descname">CONFIGURATION</code><em class="property"> = {'description': 'Pauli Z expansion for feature map (any order)', 'input_schema': {'$schema': 'http://json-schema.org/schema#', 'additionalProperties': False, 'id': 'Pauli_Z_Expansion_schema', 'properties': {'depth': {'default': 2, 'minimum': 1, 'type': 'integer'}, 'entanglement': {'default': 'full', 'enum': ['full', 'linear'], 'type': 'string'}, 'entangler_map': {'default': None, 'type': ['array', 'null']}, 'z_order': {'default': 2, 'minimum': 1, 'type': 'integer'}}, 'type': 'object'}, 'name': 'PauliZExpansion'}</em><a class="headerlink" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.CONFIGURATION" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">CONFIGURATION</code><em class="property"> = {'description': 'Pauli Z expansion for feature map (any order)', 'input_schema': {'$schema': 'http://json-schema.org/schema#', 'additionalProperties': False, 'id': 'Pauli_Z_Expansion_schema', 'properties': {'depth': {'default': 2, 'minimum': 1, 'type': 'integer'}, 'entanglement': {'default': 'full', 'enum': ['full', 'linear'], 'type': 'string'}, 'entangler_map': {'default': None, 'type': ['array', 'null']}, 'z_order': {'default': 2, 'minimum': 1, 'type': 'integer'}}, 'type': 'object'}, 'name': 'PauliZExpansion'}</em><a class="headerlink" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.CONFIGURATION" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_ALGORITHM">
-<code class="descname">SECTION_KEY_ALGORITHM</code><em class="property"> = 'algorithm'</em><a class="headerlink" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_ALGORITHM" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">SECTION_KEY_ALGORITHM</code><em class="property"> = 'algorithm'</em><a class="headerlink" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_ALGORITHM" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_DISCRIMINATIVE_NETWORK">
-<code class="descname">SECTION_KEY_DISCRIMINATIVE_NETWORK</code><em class="property"> = 'discriminative_network'</em><a class="headerlink" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_DISCRIMINATIVE_NETWORK" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">SECTION_KEY_DISCRIMINATIVE_NETWORK</code><em class="property"> = 'discriminative_network'</em><a class="headerlink" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_DISCRIMINATIVE_NETWORK" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_EIGS">
-<code class="descname">SECTION_KEY_EIGS</code><em class="property"> = 'eigs'</em><a class="headerlink" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_EIGS" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">SECTION_KEY_EIGS</code><em class="property"> = 'eigs'</em><a class="headerlink" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_EIGS" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_FEATURE_MAP">
-<code class="descname">SECTION_KEY_FEATURE_MAP</code><em class="property"> = 'feature_map'</em><a class="headerlink" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_FEATURE_MAP" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">SECTION_KEY_FEATURE_MAP</code><em class="property"> = 'feature_map'</em><a class="headerlink" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_FEATURE_MAP" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_GENERATIVE_NETWORK">
-<code class="descname">SECTION_KEY_GENERATIVE_NETWORK</code><em class="property"> = 'generative_network'</em><a class="headerlink" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_GENERATIVE_NETWORK" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">SECTION_KEY_GENERATIVE_NETWORK</code><em class="property"> = 'generative_network'</em><a class="headerlink" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_GENERATIVE_NETWORK" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_INITIAL_STATE">
-<code class="descname">SECTION_KEY_INITIAL_STATE</code><em class="property"> = 'initial_state'</em><a class="headerlink" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_INITIAL_STATE" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">SECTION_KEY_INITIAL_STATE</code><em class="property"> = 'initial_state'</em><a class="headerlink" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_INITIAL_STATE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_IQFT">
-<code class="descname">SECTION_KEY_IQFT</code><em class="property"> = 'iqft'</em><a class="headerlink" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_IQFT" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">SECTION_KEY_IQFT</code><em class="property"> = 'iqft'</em><a class="headerlink" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_IQFT" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_MULTICLASS_EXTENSION">
-<code class="descname">SECTION_KEY_MULTICLASS_EXTENSION</code><em class="property"> = 'multiclass_extension'</em><a class="headerlink" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_MULTICLASS_EXTENSION" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">SECTION_KEY_MULTICLASS_EXTENSION</code><em class="property"> = 'multiclass_extension'</em><a class="headerlink" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_MULTICLASS_EXTENSION" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_MULTIVARIATE_DISTRIBUTION">
-<code class="descname">SECTION_KEY_MULTIVARIATE_DISTRIBUTION</code><em class="property"> = 'multivariate_distribution'</em><a class="headerlink" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_MULTIVARIATE_DISTRIBUTION" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">SECTION_KEY_MULTIVARIATE_DISTRIBUTION</code><em class="property"> = 'multivariate_distribution'</em><a class="headerlink" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_MULTIVARIATE_DISTRIBUTION" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_OPTIMIZER">
-<code class="descname">SECTION_KEY_OPTIMIZER</code><em class="property"> = 'optimizer'</em><a class="headerlink" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_OPTIMIZER" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">SECTION_KEY_OPTIMIZER</code><em class="property"> = 'optimizer'</em><a class="headerlink" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_OPTIMIZER" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_ORACLE">
-<code class="descname">SECTION_KEY_ORACLE</code><em class="property"> = 'oracle'</em><a class="headerlink" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_ORACLE" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">SECTION_KEY_ORACLE</code><em class="property"> = 'oracle'</em><a class="headerlink" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_ORACLE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_QFT">
-<code class="descname">SECTION_KEY_QFT</code><em class="property"> = 'qft'</em><a class="headerlink" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_QFT" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">SECTION_KEY_QFT</code><em class="property"> = 'qft'</em><a class="headerlink" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_QFT" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_RECIPROCAL">
-<code class="descname">SECTION_KEY_RECIPROCAL</code><em class="property"> = 'reciprocal'</em><a class="headerlink" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_RECIPROCAL" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">SECTION_KEY_RECIPROCAL</code><em class="property"> = 'reciprocal'</em><a class="headerlink" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_RECIPROCAL" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_UNCERTAINTY_PROBLEM">
-<code class="descname">SECTION_KEY_UNCERTAINTY_PROBLEM</code><em class="property"> = 'uncertainty_problem'</em><a class="headerlink" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_UNCERTAINTY_PROBLEM" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">SECTION_KEY_UNCERTAINTY_PROBLEM</code><em class="property"> = 'uncertainty_problem'</em><a class="headerlink" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_UNCERTAINTY_PROBLEM" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_UNIVARIATE_DISTRIBUTION">
-<code class="descname">SECTION_KEY_UNIVARIATE_DISTRIBUTION</code><em class="property"> = 'univariate_distribution'</em><a class="headerlink" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_UNIVARIATE_DISTRIBUTION" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">SECTION_KEY_UNIVARIATE_DISTRIBUTION</code><em class="property"> = 'univariate_distribution'</em><a class="headerlink" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_UNIVARIATE_DISTRIBUTION" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_VAR_FORM">
-<code class="descname">SECTION_KEY_VAR_FORM</code><em class="property"> = 'variational_form'</em><a class="headerlink" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_VAR_FORM" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">SECTION_KEY_VAR_FORM</code><em class="property"> = 'variational_form'</em><a class="headerlink" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.SECTION_KEY_VAR_FORM" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.components.feature_maps.PauliZExpansion.configuration">
-<code class="descname">configuration</code><a class="headerlink" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.configuration" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">configuration</code><a class="headerlink" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.configuration" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return pluggable configuration.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.components.feature_maps.PauliZExpansion.feature_dimension">
-<code class="descname">feature_dimension</code><a class="headerlink" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.feature_dimension" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">feature_dimension</code><a class="headerlink" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.feature_dimension" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.components.feature_maps.PauliZExpansion.num_qubits">
-<code class="descname">num_qubits</code><a class="headerlink" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.num_qubits" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">num_qubits</code><a class="headerlink" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.num_qubits" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p class="rubric">Methods Documentation</p>
-<dl class="staticmethod">
+<dl class="method">
 <dt id="qiskit.aqua.components.feature_maps.PauliZExpansion.check_pluggable_valid">
-<em class="property">static </em><code class="descname">check_pluggable_valid</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.check_pluggable_valid" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">check_pluggable_valid</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.check_pluggable_valid" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks if pluggable is ready for use. Throws an exception if not</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.components.feature_maps.PauliZExpansion.construct_circuit">
-<code class="descname">construct_circuit</code><span class="sig-paren">(</span><em>x</em>, <em>qr=None</em>, <em>inverse=None</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.construct_circuit" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">construct_circuit</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">qr=None</em>, <em class="sig-param">inverse=None</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.construct_circuit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Construct the second order expansion based on given data.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>x</strong> (<em>numpy.ndarray</em>) – 1-D to-be-transformed data.</li>
-<li><strong>qr</strong> (<em>QauntumRegister</em><em>, </em><em>optional</em>) – the QuantumRegister object for the circuit, if None,
-generate new registers with name q.</li>
-<li><strong>inverse</strong> (<em>bool</em><em>, </em><em>optional</em>) – whether or not inverse the circuit</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>numpy.ndarray</em>) – 1-D to-be-transformed data.</p></li>
+<li><p><strong>qr</strong> (<em>QauntumRegister</em><em>, </em><em>optional</em>) – the QuantumRegister object for the circuit, if None,
+generate new registers with name q.</p></li>
+<li><p><strong>inverse</strong> (<em>bool</em><em>, </em><em>optional</em>) – whether or not inverse the circuit</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">a quantum circuit transform data x.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit" title="qiskit.circuit.QuantumCircuit">QuantumCircuit</a></p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a quantum circuit transform data x.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit" title="qiskit.circuit.QuantumCircuit">QuantumCircuit</a></p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="staticmethod">
+<dl class="method">
 <dt id="qiskit.aqua.components.feature_maps.PauliZExpansion.get_entangler_map">
-<em class="property">static </em><code class="descname">get_entangler_map</code><span class="sig-paren">(</span><em>map_type</em>, <em>num_qubits</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.get_entangler_map" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">get_entangler_map</code><span class="sig-paren">(</span><em class="sig-param">map_type</em>, <em class="sig-param">num_qubits</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.get_entangler_map" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="classmethod">
+<dl class="method">
 <dt id="qiskit.aqua.components.feature_maps.PauliZExpansion.init_params">
-<em class="property">classmethod </em><code class="descname">init_params</code><span class="sig-paren">(</span><em>params</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.init_params" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="sig-name descname">init_params</code><span class="sig-paren">(</span><em class="sig-param">params</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.init_params" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.components.feature_maps.PauliZExpansion.validate">
-<code class="descname">validate</code><span class="sig-paren">(</span><em>args_dict</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.validate" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">validate</code><span class="sig-paren">(</span><em class="sig-param">args_dict</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.validate" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="staticmethod">
+<dl class="method">
 <dt id="qiskit.aqua.components.feature_maps.PauliZExpansion.validate_entangler_map">
-<em class="property">static </em><code class="descname">validate_entangler_map</code><span class="sig-paren">(</span><em>entangler_map</em>, <em>num_qubits</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.validate_entangler_map" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">validate_entangler_map</code><span class="sig-paren">(</span><em class="sig-param">entangler_map</em>, <em class="sig-param">num_qubits</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.components.feature_maps.PauliZExpansion.validate_entangler_map" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
