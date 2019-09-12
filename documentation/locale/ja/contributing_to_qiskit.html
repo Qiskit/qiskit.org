@@ -97,7 +97,7 @@
 	<span>
 	    <select id="language" name="languages">
 	        <option value="en">English</option>
-	        <option value="ja">日本語</option>
+	        <option value="ja">Japanese</option>
         </select>
     </span>
 </div>
@@ -680,7 +680,7 @@
 	<span>
 	    <select id="language" name="languages">
 	        <option value="en">English</option>
-	        <option value="ja">日本語</option>
+	        <option value="ja">Japanese</option>
         </select>
     </span>
 </div>
@@ -1346,23 +1346,26 @@ access as quickly as they can.</p>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Install the required dependencies by running the following
-in a terminal window:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip install -r requirements-dev.txt
-</pre></div>
-</div>
-</li>
 <li><p class="first">Build the documentation by navigating to your local clone of <cite>Qiskit/qiskit</cite>
 and running the following command in a terminal window:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>make doc
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>tox -edocs
 </pre></div>
 </div>
 </li>
 </ol>
+<blockquote>
+<div><p>If you do not already have the <a class="reference external" href="https://tox.readthedocs.io/en/latest/">tox</a>
+command installed you can install by running:</p>
+<blockquote>
+<div><div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">tox</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div></blockquote>
 <p>As you make changes to your local RST files, you can update your
 HTML files by navigating to <cite>/doc/</cite> and running the following in a terminal
 window:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>make html
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>tox -edocs
 </pre></div>
 </div>
 <p>This will build a styled, HTML version of your local documentation repository

@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
+    <script>
+          /* Define digital data object based on _appInfo object */
+          window.digitalData = {
+            page: {
+              pageInfo: {
+                productTitle: 'IBM Q Experience',
+                analytics: {
+                  category: 'Qiskit.org',
+                },
+              },
+            },
+          };
+          window._analytics = {
+            segment_key: 'ffdYLviQze3kzomaINXNk6NwpY9LlXcw',
+            coremetrics: false,
+            optimizely: false,
+            googleAddServices: false,
+            fullStory: false,
+            autoPageEventSpa: true,
+            autoFormEvents: false,
+            autoPageView: true,
+            preventPageEvent: true,
+          };
+       </script>
+        <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
+    
+    <title>qiskit.quantum_info.operators.channel.choi &#8212; Qiskit 0.12.0 Dokumentation</title>
+
+    <link rel="stylesheet" href="../../../../../_static/material-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx_tabs/semantic-ui-2.4.1/segment.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx_tabs/semantic-ui-2.4.1/menu.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx_tabs/semantic-ui-2.4.1/tab.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx_tabs/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/material-design-lite-1.3.0/material.blue-indigo.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx_materialdesign_theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../../../" src="../../../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../../../_static/language_data.js"></script>
+    <script type="text/javascript" src="../../../../../_static/sphinx_tabs/semantic-ui-2.4.1/tab.min.js"></script>
+    <script type="text/javascript" src="../../../../../_static/sphinx_tabs/tabs.js"></script>
+    <script type="text/javascript" src="../../../../../_static/js/themeExt.js"></script>
+    <script type="text/javascript" src="../../../../../_static/translations.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="../../../../../_static/favicon.ico"/>
+    <link rel="index" title="Stichwortverzeichnis" href="../../../../../genindex.html" />
+    <link rel="search" title="Suche" href="../../../../../search.html" /> 
+  </head>
+<body>
+  <header>
+    <div class="toolbar limited-width">
+      <a href="/" class="home">Qiskit</a>
+      <nav class="first">
+        <a href="/terra">Terra</a>
+        <a href="/aer">Aer</a>
+        <a href="/aqua">Aqua</a>
+        <a href="/ignis">Ignis</a>
+        <a href="/ibmq">IBM Q</a>
+      </nav>
+      <nav class="second">
+        <a class="external" id="educationLink" href="https://community.qiskit.org/education">Community</a>
+        <a class="external" id="tutorialsLink" href="https://quantum-computing.ibm.com/jupyter/tutorial/1_start_here.ipynb" target="_blank">Tutorials</a>
+        <a class="external" href="/documentation" selected>API Documentation</a>
+      </nav>
+    </div>
+  </header>
+    <div class="mdl-layout mdl-js-layout  mdl-layout--fixed-drawer"><header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../../../../../index.html">
+              <span class="title-text">
+                  Qiskit
+              </span>
+          </a>
+      </span>
+    
+
+<div class="languages" >
+    <span>Select a language: </span>
+	<span>
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+        </select>
+    </span>
+</div>
+<div id="searchbox" role="search">
+    <div class="searchformwrapper">
+    <form class="search-form" action="../../../../../search.html" method="get">
+      <input type="text" name="q" class="search-input" placeholder="Search docs..."/>
+        <button type="submit" class="search-button">
+            <svg height="20" width="20" fill="#6F6F6F" viewBox="0 0 32 32" class="search-button-icon">
+                <title>search</title>
+                <g>
+                    <path d="M30 28.586l-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L28.586 30zM5 14a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9z"></path>
+                </g>
+            </svg>
+        </button>
+    </form>
+    </div>
+</div>
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+  
+  <!-- Local TOC -->
+  <nav class="mdl-navigation"></nav>
+  
+  </div>
+
+</header>
+        <main class="mdl-layout__content" tabIndex="0">
+<header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../../../../../index.html">
+              <span class="title-text">
+                  Qiskit
+              </span>
+          </a>
+      </span>
+    
+
+<div class="languages" >
+    <span>Select a language: </span>
+	<span>
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+        </select>
+    </span>
+</div>
+<div id="searchbox" role="search">
+    <div class="searchformwrapper">
+    <form class="search-form" action="../../../../../search.html" method="get">
+      <input type="text" name="q" class="search-input" placeholder="Search docs..."/>
+        <button type="submit" class="search-button">
+            <svg height="20" width="20" fill="#6F6F6F" viewBox="0 0 32 32" class="search-button-icon">
+                <title>search</title>
+                <g>
+                    <path d="M30 28.586l-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L28.586 30zM5 14a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9z"></path>
+                </g>
+            </svg>
+        </button>
+    </form>
+    </div>
+</div>
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+  
+  <!-- Local TOC -->
+  <nav class="mdl-navigation"></nav>
+  
+  </div>
+
+</header>
+
+    <div class="document">
+        <div class="page-content">
+        
+  <h1>Quellcode für qiskit.quantum_info.operators.channel.choi</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="c1"># This code is part of Qiskit.</span>
+<span class="c1">#</span>
+<span class="c1"># (C) Copyright IBM 2017, 2019.</span>
+<span class="c1">#</span>
+<span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
+<span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
+<span class="c1"># of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.</span>
+<span class="c1">#</span>
+<span class="c1"># Any modifications or derivative works of this code must retain this</span>
+<span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
+<span class="c1"># that they have been altered from the originals.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Choi-matrix representation of a Quantum Channel.</span>
+
+
+<span class="sd">For a quantum channel E, the Choi matrix Λ is defined by:</span>
+<span class="sd">Λ = sum_{i,j} |i⟩⟨j|⊗E(|i⟩⟨j|)</span>
+
+<span class="sd">Evolution of a density matrix with respect to the Choi-matrix is given by:</span>
+
+<span class="sd">    E(ρ) = Tr_{1}[Λ.(ρ^T⊗I)]</span>
+
+<span class="sd">See [1] for further details.</span>
+
+<span class="sd">References:</span>
+<span class="sd">    [1] C.J. Wood, J.D. Biamonte, D.G. Cory, Quant. Inf. Comp. 15, 0579-0811 (2015)</span>
+<span class="sd">        Open access: arXiv:1111.6950 [quant-ph]</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">numbers</span> <span class="k">import</span> <span class="n">Number</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">qiskit.circuit.quantumcircuit</span> <span class="k">import</span> <span class="n">QuantumCircuit</span>
+<span class="kn">from</span> <span class="nn">qiskit.circuit.instruction</span> <span class="k">import</span> <span class="n">Instruction</span>
+<span class="kn">from</span> <span class="nn">qiskit.exceptions</span> <span class="k">import</span> <span class="n">QiskitError</span>
+<span class="kn">from</span> <span class="nn">qiskit.quantum_info.operators.channel.quantum_channel</span> <span class="k">import</span> <span class="n">QuantumChannel</span>
+<span class="kn">from</span> <span class="nn">qiskit.quantum_info.operators.channel.superop</span> <span class="k">import</span> <span class="n">SuperOp</span>
+<span class="kn">from</span> <span class="nn">qiskit.quantum_info.operators.channel.transformations</span> <span class="k">import</span> <span class="n">_to_choi</span>
+<span class="kn">from</span> <span class="nn">qiskit.quantum_info.operators.channel.transformations</span> <span class="k">import</span> <span class="n">_bipartite_tensor</span>
+
+
+<div class="viewcode-block" id="Choi"><a class="viewcode-back" href="../../../../../api/qiskit.quantum_info.Choi.html#qiskit.quantum_info.Choi">[Doku]</a><span class="k">class</span> <span class="nc">Choi</span><span class="p">(</span><span class="n">QuantumChannel</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Choi-matrix representation of a quantum channel&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">input_dims</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">output_dims</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize a quantum channel Choi matrix operator.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data (QuantumCircuit or</span>
+<span class="sd">                  Instruction or</span>
+<span class="sd">                  BaseOperator or</span>
+<span class="sd">                  matrix): data to initialize superoperator.</span>
+<span class="sd">            input_dims (tuple): the input subsystem dimensions.</span>
+<span class="sd">                                [Default: None]</span>
+<span class="sd">            output_dims (tuple): the output subsystem dimensions.</span>
+<span class="sd">                                 [Default: None]</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            QiskitError: if input data cannot be initialized as a</span>
+<span class="sd">            Choi matrix.</span>
+
+<span class="sd">        Additional Information</span>
+<span class="sd">        ----------------------</span>
+<span class="sd">        If the input or output dimensions are None, they will be</span>
+<span class="sd">        automatically determined from the input data. If the input data is</span>
+<span class="sd">        a Numpy array of shape (4**N, 4**N) qubit systems will be used. If</span>
+<span class="sd">        the input operator is not an N-qubit operator, it will assign a</span>
+<span class="sd">        single subsystem with dimension specified by the shape of the input.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># If the input is a raw list or matrix we assume that it is</span>
+        <span class="c1"># already a Choi matrix.</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)):</span>
+            <span class="c1"># Initialize from raw numpy or list matrix.</span>
+            <span class="n">choi_mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+            <span class="c1"># Determine input and output dimensions</span>
+            <span class="n">dim_l</span><span class="p">,</span> <span class="n">dim_r</span> <span class="o">=</span> <span class="n">choi_mat</span><span class="o">.</span><span class="n">shape</span>
+            <span class="k">if</span> <span class="n">dim_l</span> <span class="o">!=</span> <span class="n">dim_r</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s1">&#39;Invalid Choi-matrix input.&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">input_dims</span><span class="p">:</span>
+                <span class="n">input_dim</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="n">input_dims</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">output_dims</span><span class="p">:</span>
+                <span class="n">output_dim</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="n">output_dims</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">output_dims</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">input_dims</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">output_dim</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">dim_l</span><span class="p">))</span>
+                <span class="n">input_dim</span> <span class="o">=</span> <span class="n">dim_l</span> <span class="o">//</span> <span class="n">output_dim</span>
+            <span class="k">elif</span> <span class="n">input_dims</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">input_dim</span> <span class="o">=</span> <span class="n">dim_l</span> <span class="o">//</span> <span class="n">output_dim</span>
+            <span class="k">elif</span> <span class="n">output_dims</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">output_dim</span> <span class="o">=</span> <span class="n">dim_l</span> <span class="o">//</span> <span class="n">input_dim</span>
+            <span class="c1"># Check dimensions</span>
+            <span class="k">if</span> <span class="n">input_dim</span> <span class="o">*</span> <span class="n">output_dim</span> <span class="o">!=</span> <span class="n">dim_l</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;Invalid shape for input Choi-matrix.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Otherwise we initialize by conversion from another Qiskit</span>
+            <span class="c1"># object into the QuantumChannel.</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="p">(</span><span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">Instruction</span><span class="p">)):</span>
+                <span class="c1"># If the input is a Terra QuantumCircuit or Instruction we</span>
+                <span class="c1"># convert it to a SuperOp</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="n">SuperOp</span><span class="o">.</span><span class="n">_init_instruction</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># We use the QuantumChannel init transform to initialize</span>
+                <span class="c1"># other objects into a QuantumChannel or Operator object.</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_init_transformer</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+            <span class="n">input_dim</span><span class="p">,</span> <span class="n">output_dim</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">dim</span>
+            <span class="c1"># Now that the input is an operator we convert it to a Choi object</span>
+            <span class="n">choi_mat</span> <span class="o">=</span> <span class="n">_to_choi</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">rep</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">_data</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">,</span> <span class="n">output_dim</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">input_dims</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">input_dims</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">input_dims</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">output_dims</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">output_dims</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">output_dims</span><span class="p">()</span>
+        <span class="c1"># Check and format input and output dimensions</span>
+        <span class="n">input_dims</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_automatic_dims</span><span class="p">(</span><span class="n">input_dims</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">)</span>
+        <span class="n">output_dims</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_automatic_dims</span><span class="p">(</span><span class="n">output_dims</span><span class="p">,</span> <span class="n">output_dim</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s1">&#39;Choi&#39;</span><span class="p">,</span> <span class="n">choi_mat</span><span class="p">,</span> <span class="n">input_dims</span><span class="p">,</span> <span class="n">output_dims</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">_bipartite_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the shape for bipartite matrix&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_input_dim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_output_dim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_input_dim</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_output_dim</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Choi.conjugate"><a class="viewcode-back" href="../../../../../api/qiskit.quantum_info.Choi.html#qiskit.quantum_info.Choi.conjugate">[Doku]</a>    <span class="k">def</span> <span class="nf">conjugate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the conjugate of the QuantumChannel.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Choi</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">conj</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_dims</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_dims</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="Choi.transpose"><a class="viewcode-back" href="../../../../../api/qiskit.quantum_info.Choi.html#qiskit.quantum_info.Choi.transpose">[Doku]</a>    <span class="k">def</span> <span class="nf">transpose</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the transpose of the QuantumChannel.&quot;&quot;&quot;</span>
+        <span class="c1"># Make bipartite matrix</span>
+        <span class="n">d_in</span><span class="p">,</span> <span class="n">d_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">,</span> <span class="p">(</span><span class="n">d_in</span><span class="p">,</span> <span class="n">d_out</span><span class="p">,</span> <span class="n">d_in</span><span class="p">,</span> <span class="n">d_out</span><span class="p">))</span>
+        <span class="c1"># Swap input and output indices on bipartite matrix</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+        <span class="c1"># Transpose channel has input and output dimensions swapped</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="p">(</span><span class="n">d_in</span> <span class="o">*</span> <span class="n">d_out</span><span class="p">,</span> <span class="n">d_in</span> <span class="o">*</span> <span class="n">d_out</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">Choi</span><span class="p">(</span>
+            <span class="n">data</span><span class="p">,</span> <span class="n">input_dims</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">output_dims</span><span class="p">(),</span> <span class="n">output_dims</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">input_dims</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="Choi.compose"><a class="viewcode-back" href="../../../../../api/qiskit.quantum_info.Choi.html#qiskit.quantum_info.Choi.compose">[Doku]</a>    <span class="k">def</span> <span class="nf">compose</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">qargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">front</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the composition channel self∘other.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            other (QuantumChannel): a quantum channel.</span>
+<span class="sd">            qargs (list): a list of subsystem positions to compose other on.</span>
+<span class="sd">            front (bool): If False compose in standard order other(self(input))</span>
+<span class="sd">                          otherwise compose in reverse order self(other(input))</span>
+<span class="sd">                          [default: False]</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Choi: The composition channel as a Choi object.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            QiskitError: if other cannot be converted to a channel or</span>
+<span class="sd">            has incompatible dimensions.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">qargs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Choi</span><span class="p">(</span>
+                <span class="n">SuperOp</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">compose</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">qargs</span><span class="o">=</span><span class="n">qargs</span><span class="p">,</span> <span class="n">front</span><span class="o">=</span><span class="n">front</span><span class="p">))</span>
+
+        <span class="c1"># Convert to Choi matrix</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Choi</span><span class="p">):</span>
+            <span class="n">other</span> <span class="o">=</span> <span class="n">Choi</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+        <span class="c1"># Check dimensions match up</span>
+        <span class="k">if</span> <span class="n">front</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_input_dim</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">_output_dim</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span>
+                <span class="s1">&#39;input_dim of self must match output_dim of other&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">front</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_output_dim</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">_input_dim</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span>
+                <span class="s1">&#39;input_dim of other must match output_dim of self&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">front</span><span class="p">:</span>
+            <span class="n">first</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">_data</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">_bipartite_shape</span><span class="p">)</span>
+            <span class="n">second</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bipartite_shape</span><span class="p">)</span>
+            <span class="n">input_dim</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">_input_dim</span>
+            <span class="n">input_dims</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">input_dims</span><span class="p">()</span>
+            <span class="n">output_dim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_output_dim</span>
+            <span class="n">output_dims</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_dims</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">first</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bipartite_shape</span><span class="p">)</span>
+            <span class="n">second</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">_data</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">_bipartite_shape</span><span class="p">)</span>
+            <span class="n">input_dim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_input_dim</span>
+            <span class="n">input_dims</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_dims</span><span class="p">()</span>
+            <span class="n">output_dim</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">_output_dim</span>
+            <span class="n">output_dims</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">output_dims</span><span class="p">()</span>
+
+        <span class="c1"># Contract Choi matrices for composition</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;iAjB,AkBl-&gt;ikjl&#39;</span><span class="p">,</span> <span class="n">first</span><span class="p">,</span> <span class="n">second</span><span class="p">),</span>
+            <span class="p">(</span><span class="n">input_dim</span> <span class="o">*</span> <span class="n">output_dim</span><span class="p">,</span> <span class="n">input_dim</span> <span class="o">*</span> <span class="n">output_dim</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">Choi</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">input_dims</span><span class="p">,</span> <span class="n">output_dims</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Choi.power"><a class="viewcode-back" href="../../../../../api/qiskit.quantum_info.Choi.html#qiskit.quantum_info.Choi.power">[Doku]</a>    <span class="k">def</span> <span class="nf">power</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The matrix power of the channel.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            n (int): compute the matrix power of the superoperator matrix.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Choi: the matrix power of the SuperOp converted to a Choi channel.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            QiskitError: if the input and output dimensions of the</span>
+<span class="sd">            QuantumChannel are not equal, or the power is not an integer.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Choi</span><span class="p">(</span><span class="n">SuperOp</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">n</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Choi.tensor"><a class="viewcode-back" href="../../../../../api/qiskit.quantum_info.Choi.html#qiskit.quantum_info.Choi.tensor">[Doku]</a>    <span class="k">def</span> <span class="nf">tensor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the tensor product channel self ⊗ other.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            other (QuantumChannel): a quantum channel.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Choi: the tensor product channel self ⊗ other as a Choi object.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            QiskitError: if other cannot be converted to a channel.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Convert other to Choi</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Choi</span><span class="p">):</span>
+            <span class="n">other</span> <span class="o">=</span> <span class="n">Choi</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+
+        <span class="n">input_dims</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">input_dims</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_dims</span><span class="p">()</span>
+        <span class="n">output_dims</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">output_dims</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_dims</span><span class="p">()</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">_bipartite_tensor</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">,</span>
+            <span class="n">other</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>
+            <span class="n">shape1</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_bipartite_shape</span><span class="p">,</span>
+            <span class="n">shape2</span><span class="o">=</span><span class="n">other</span><span class="o">.</span><span class="n">_bipartite_shape</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Choi</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">input_dims</span><span class="p">,</span> <span class="n">output_dims</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Choi.expand"><a class="viewcode-back" href="../../../../../api/qiskit.quantum_info.Choi.html#qiskit.quantum_info.Choi.expand">[Doku]</a>    <span class="k">def</span> <span class="nf">expand</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the tensor product channel other ⊗ self.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            other (QuantumChannel): a quantum channel.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Choi: the tensor product channel other ⊗ self as a Choi object.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            QiskitError: if other cannot be converted to a channel.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Convert other to Choi</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Choi</span><span class="p">):</span>
+            <span class="n">other</span> <span class="o">=</span> <span class="n">Choi</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+
+        <span class="n">input_dims</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_dims</span><span class="p">()</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">input_dims</span><span class="p">()</span>
+        <span class="n">output_dims</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_dims</span><span class="p">()</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">output_dims</span><span class="p">()</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">_bipartite_tensor</span><span class="p">(</span>
+            <span class="n">other</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">,</span>
+            <span class="n">shape1</span><span class="o">=</span><span class="n">other</span><span class="o">.</span><span class="n">_bipartite_shape</span><span class="p">,</span>
+            <span class="n">shape2</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_bipartite_shape</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Choi</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">input_dims</span><span class="p">,</span> <span class="n">output_dims</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Choi.add"><a class="viewcode-back" href="../../../../../api/qiskit.quantum_info.Choi.html#qiskit.quantum_info.Choi.add">[Doku]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the QuantumChannel self + other.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            other (QuantumChannel): a quantum channel.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Choi: the linear addition self + other as a Choi object.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            QiskitError: if other cannot be converted to a channel or</span>
+<span class="sd">            has incompatible dimensions.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Choi</span><span class="p">):</span>
+            <span class="n">other</span> <span class="o">=</span> <span class="n">Choi</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">dim</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;other QuantumChannel dimensions are not equal&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Choi</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_input_dims</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_output_dims</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Choi.subtract"><a class="viewcode-back" href="../../../../../api/qiskit.quantum_info.Choi.html#qiskit.quantum_info.Choi.subtract">[Doku]</a>    <span class="k">def</span> <span class="nf">subtract</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the QuantumChannel self - other.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            other (QuantumChannel): a quantum channel.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Choi: the linear subtraction self - other as Choi object.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            QiskitError: if other cannot be converted to a channel or</span>
+<span class="sd">            has incompatible dimensions.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Choi</span><span class="p">):</span>
+            <span class="n">other</span> <span class="o">=</span> <span class="n">Choi</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">dim</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;other QuantumChannel dimensions are not equal&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Choi</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_input_dims</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_output_dims</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Choi.multiply"><a class="viewcode-back" href="../../../../../api/qiskit.quantum_info.Choi.html#qiskit.quantum_info.Choi.multiply">[Doku]</a>    <span class="k">def</span> <span class="nf">multiply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the QuantumChannel self + other.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            other (complex): a complex number.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Choi: the scalar multiplication other * self as a Choi object.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            QiskitError: if other is not a valid scalar.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Number</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;other is not a number&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Choi</span><span class="p">(</span><span class="n">other</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_input_dims</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_output_dims</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">_evolve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">qargs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Evolve a quantum state by the quantum channel.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            state (DensityMatrix or Statevector): The input state.</span>
+<span class="sd">            qargs (list): a list of quantum state subsystem positions to apply</span>
+<span class="sd">                           the quantum channel on.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            DensityMatrix: the output quantum state as a density matrix.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            QiskitError: if the quantum channel dimension does not match the</span>
+<span class="sd">            specified quantum state subsystem dimensions.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">SuperOp</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">_evolve</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">qargs</span><span class="p">)</span></div>
+</pre></div>
+
+        </div>
+
+      <div class="clearer"></div>
+    </div><div class="pagenation">
+        
+        </main>
+    </div>
+    <script>
+        function trackClickEvent (data) {
+            if (window.bluemixAnalytics && window.digitalData) {
+                var segmentEvent = {
+                    productTitle: window.digitalData.page.pageInfo.productTitle,
+                    category: window.digitalData.page.pageInfo.analytics.category,
+                    url: window.location.href,
+                    action: window.location.href + ' - Clicked: ' + data.action,
+                    objectType: data.objectType,
+                    successFlag: true
+                };
+
+                if(data.milestoneName) {
+                    segmentEvent = Object.assign(segmentEvent, { milestoneName: data.milestoneName });
+                }
+                window.bluemixAnalytics.trackEvent('Custom Event', segmentEvent);
+            }
+        };
+
+        function clickExternalLink() {
+            trackClickEvent({
+                action: "Tutorials Link in Navbar",
+                objectType: "Link",
+                milestoneName: "Looked at tutorials"
+            });
+        };
+
+        var link = document.getElementById('tutorialsLink');
+        link.addEventListener('click', clickExternalLink);
+    </script>
+    <script>
+	    var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+	    var prefix = '/documentation';
+	    function getDefaultLanguage() {
+	      return 'en';
+	    }
+      var el = document.getElementById('language');
+      var optionsToSelect = ['en', 'ja']
+      function changeLoc(evt) {
+        var language = evt.target.options[el.selectedIndex].value;
+        var pathname = window.location.pathname.slice(prefix.length);
+        if (language === getDefaultLanguage()) {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, '/')}`;
+        } else {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, `/locale/${language}/`)}`;
+        }
+      };
+      el.addEventListener('change', changeLoc);
+      function extractLanguageFromUrl(pathname) {
+        const match = pathname.slice(prefix.length).match(localeRegExp);
+        return typeof match[2] === 'undefined' ?
+                getDefaultLanguage() : match[2];
+	    }
+      function changeSelect(select) {
+        const optionToSelect = extractLanguageFromUrl(window.location.pathname);
+        for (var i = 0; i < select.options.length; i++) {
+          var o = select.options[i];
+          if (optionToSelect == o.value) {
+            o.selected = true;
+          }
+        }
+      };
+      changeSelect(el);
+    </script>
+  </body>
+</html>

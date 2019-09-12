@@ -95,7 +95,7 @@
 	<span>
 	    <select id="language" name="languages">
 	        <option value="en">English</option>
-	        <option value="ja">日本語</option>
+	        <option value="ja">Japanese</option>
         </select>
     </span>
 </div>
@@ -143,7 +143,7 @@
 	<span>
 	    <select id="language" name="languages">
 	        <option value="en">English</option>
-	        <option value="ja">日本語</option>
+	        <option value="ja">Japanese</option>
         </select>
     </span>
 </div>
@@ -620,17 +620,18 @@
         <span class="n">schema</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">schema</span>
         <span class="k">if</span> <span class="n">nested_obj</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">None</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">many</span> <span class="ow">and</span> <span class="n">utils</span><span class="o">.</span><span class="n">is_iterable_but_not_string</span><span class="p">(</span><span class="n">nested_obj</span><span class="p">):</span>
+        <span class="n">many</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">many</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">many</span>
+        <span class="k">if</span> <span class="n">many</span> <span class="ow">and</span> <span class="n">utils</span><span class="o">.</span><span class="n">is_iterable_but_not_string</span><span class="p">(</span><span class="n">nested_obj</span><span class="p">):</span>
             <span class="n">nested_obj</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">nested_obj</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__updated_fields</span><span class="p">:</span>
-            <span class="n">schema</span><span class="o">.</span><span class="n">_update_fields</span><span class="p">(</span><span class="n">obj</span><span class="o">=</span><span class="n">nested_obj</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">many</span><span class="p">)</span>
+            <span class="n">schema</span><span class="o">.</span><span class="n">_update_fields</span><span class="p">(</span><span class="n">obj</span><span class="o">=</span><span class="n">nested_obj</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="n">many</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__updated_fields</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="n">ret</span><span class="p">,</span> <span class="n">errors</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">nested_obj</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">many</span><span class="p">,</span>
+        <span class="n">ret</span><span class="p">,</span> <span class="n">errors</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">nested_obj</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="n">many</span><span class="p">,</span>
                 <span class="n">update_fields</span><span class="o">=</span><span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__updated_fields</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">only</span><span class="p">,</span> <span class="n">basestring</span><span class="p">):</span>  <span class="c1"># self.only is a field name</span>
             <span class="n">only_field</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">schema</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">only</span><span class="p">]</span>
             <span class="n">key</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">schema</span><span class="o">.</span><span class="n">prefix</span> <span class="ow">or</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">only_field</span><span class="o">.</span><span class="n">dump_to</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">only</span><span class="p">])</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">many</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">many</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">utils</span><span class="o">.</span><span class="n">pluck</span><span class="p">(</span><span class="n">ret</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">key</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">ret</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
