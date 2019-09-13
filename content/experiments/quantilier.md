@@ -2,12 +2,12 @@
 title: Quantilier
 author: Qiskit Team
 description: Description
-image: https://cosmos-images2.imgix.net/file/spina/photo/15582/140618_Quantum_Internet_01.jpg?ixlib=rails-2.1.4&auto=format&ch=Width%2CDPR&fit=max&w=1920
+image: /images/experiments/quantilier/QuantilierPizGloria.jpg
 to: /experiments/qiskit-blocks
 media:
-  - https://player.vimeo.com/video/356185384
-  - https://content.minetest.net/uploads/r9yczgJPla.pngg
+  - /images/experiments/quantilier/QuantilierPizGloria.jpg
+  - /images/experiments/quantilier/QuantilierNight.jpg
 
-source: https://github.com/JavaFXpert/QiskitBlocks
+source: https://github.com/qiskit
 ---
 Testing text
