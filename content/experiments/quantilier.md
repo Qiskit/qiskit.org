@@ -6,6 +6,7 @@ image: /images/experiments/quantilier/QuantilierPizGloria.jpg
 to: /experiments/quantilier
 media:
   - /images/experiments/quantilier/QuantilierPizGloria.jpg
+  - https://www.youtube.com/embed/wUo454pRTDY
   - /images/experiments/quantilier/QuantilierNight.jpg
 
 source: https://github.com/qiskit
