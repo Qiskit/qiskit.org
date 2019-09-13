@@ -5,8 +5,8 @@ description: The Quantilier is a visual experiment based on IBM Q’s quantum co
 image: /images/experiments/quantilier/QuantilierPizGloria.jpg
 to: /experiments/quantilier
 media:
-  - /images/experiments/quantilier/QuantilierPizGloria.jpg
   - https://www.youtube.com/embed/wUo454pRTDY
+  - /images/experiments/quantilier/QuantilierPizGloria.jpg
   - /images/experiments/quantilier/QuantilierNight.jpg
 
 source: https://github.com/qiskit
