@@ -32,7 +32,7 @@
         :href="source"
         secondary
       >
-        Explore the sources
+        Explore the code
       </Cta>
       <div class="experiment-header__media">
         <Media
