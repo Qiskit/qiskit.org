@@ -29,7 +29,7 @@
                 {{ link.label }}
               </a>
             </div>
-            <a class="vertical-navigation__item" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorials/blob/master/qiskit/1_start_here.ipynb">Tutorials</a>
+            <a class="vertical-navigation__item" href="https://quantum-computing.ibm.com/jupyter/tutorial/1_start_here.ipynb" target="_blank">Tutorials</a>
             <a class="vertical-navigation__item" href="https://qiskit.org/documentation">API&nbsp;Documentation</a>
           </nav>
         </section>
@@ -43,7 +43,7 @@
         </nav>
         <nav class="navigation-group navigation-group--fixed navigation-group--right-aligned">
           <a class="navigation-group__item navigation-group__item--active" href="/">Community</a>
-          <a class="navigation-group__item" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorials/blob/master/qiskit/1_start_here.ipynb">Tutorials</a>
+          <a class="navigation-group__item" href="https://quantum-computing.ibm.com/jupyter/tutorial/1_start_here.ipynb" target="_blank">Tutorials</a>
           <a class="navigation-group__item" href="https://qiskit.org/documentation">API&nbsp;Documentation</a>
         </nav>
       </div>
