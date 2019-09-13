@@ -3,7 +3,7 @@ title: Quantilier
 author: Qiskit Team
 description: Description
 image: /images/experiments/quantilier/QuantilierPizGloria.jpg
-to: /experiments/qiskit-blocks
+to: /experiments/quantilier
 media:
   - /images/experiments/quantilier/QuantilierPizGloria.jpg
   - /images/experiments/quantilier/QuantilierNight.jpg
