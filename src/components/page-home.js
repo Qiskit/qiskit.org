@@ -217,7 +217,7 @@ class PageHome extends localize(i18next)(LitElement) {
               <p>${i18next.t('pages.home.newsBox1Description')}</p>
               <div class="actions">
                 <a
-                  href="https://qiskit.org/documentation/release_notes.html#notable-changes"
+                  href="https://www.youtube.com/playlist?list=PLOFEBzvs-Vvp2xg9-POLJhQwtVktlYGbY"
                   target="_blank"
                   rel="noopener"
                   tabindex="-1"
@@ -237,7 +237,7 @@ class PageHome extends localize(i18next)(LitElement) {
               <p>${i18next.t('pages.home.newsBox2Description')}</p>
               <div class="actions">
                 <a
-                  href="https://www.youtube.com/playlist?list=PLOFEBzvs-Vvp2xg9-POLJhQwtVktlYGbY"
+                  href="https://qiskit.org/documentation/release_notes.html#notable-changes"
                   target="_blank"
                   tabindex="-1"
                   @click=${() => trackClickEvent({
