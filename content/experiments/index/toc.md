@@ -4,6 +4,7 @@
   basepath: experiments/
   collections:
     cards:
+      - quantillier.md
       - qiskit-blocks.md
       - tictacq.md
 -
