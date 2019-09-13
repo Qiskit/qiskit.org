@@ -12,6 +12,7 @@
   basepath: experiments/
   collections:
     cards:
+      - quantilier.md
       - qonway-game-of-life.md
       - quantum-toy-piano.md
       - tictacq.md
