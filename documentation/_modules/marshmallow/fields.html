@@ -1306,13 +1306,14 @@
         <span class="n">String</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">relative</span> <span class="o">=</span> <span class="n">relative</span>
-        <span class="c1"># Insert validation into self.validators so that multiple errors can be</span>
-        <span class="c1"># stored.</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">validators</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">validate</span><span class="o">.</span><span class="n">URL</span><span class="p">(</span>
-            <span class="n">relative</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">relative</span><span class="p">,</span>
-            <span class="n">schemes</span><span class="o">=</span><span class="n">schemes</span><span class="p">,</span>
-            <span class="n">error</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">error_messages</span><span class="p">[</span><span class="s1">&#39;invalid&#39;</span><span class="p">]</span>
-        <span class="p">))</span>
+        <span class="c1"># Insert validation into self.validators so that multiple errors can be stored.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">validators</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="p">[</span><span class="n">validate</span><span class="o">.</span><span class="n">URL</span><span class="p">(</span>
+                <span class="n">relative</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">relative</span><span class="p">,</span>
+                <span class="n">schemes</span><span class="o">=</span><span class="n">schemes</span><span class="p">,</span>
+                <span class="n">error</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">error_messages</span><span class="p">[</span><span class="s1">&#39;invalid&#39;</span><span class="p">]</span>
+            <span class="p">)]</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">validators</span><span class="p">)</span>
+        <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_validated</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -1334,9 +1335,10 @@
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">String</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="c1"># Insert validation into self.validators so that multiple errors can be</span>
-        <span class="c1"># stored.</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">validators</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">validate</span><span class="o">.</span><span class="n">Email</span><span class="p">(</span><span class="n">error</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">error_messages</span><span class="p">[</span><span class="s1">&#39;invalid&#39;</span><span class="p">]))</span>
+        <span class="c1"># Insert validation into self.validators so that multiple errors can be stored.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">validators</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="p">[</span><span class="n">validate</span><span class="o">.</span><span class="n">Email</span><span class="p">(</span><span class="n">error</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">error_messages</span><span class="p">[</span><span class="s1">&#39;invalid&#39;</span><span class="p">])]</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">validators</span><span class="p">)</span>
+        <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_validated</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
