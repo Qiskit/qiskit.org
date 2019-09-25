@@ -4,7 +4,7 @@ var DOCUMENTATION_OPTIONS = {
     LANGUAGE: 'None',
     COLLAPSE_INDEX: false,
     FILE_SUFFIX: '.html',
-    HAS_SOURCE: true,
+    HAS_SOURCE: false,
     SOURCELINK_SUFFIX: '.txt',
     NAVIGATION_WITH_KEYS: false
 };
