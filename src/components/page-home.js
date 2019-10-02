@@ -194,16 +194,16 @@ class PageHome extends localize(i18next)(LitElement) {
           <h2>${i18next.t('pages.home.headerSubTitle')}</h2>
           <div class="badges">
             <a
-              href="https://join.slack.com/t/qiskit/shared_invite/enQtNjQ5OTc5ODM1ODYyLTBlMWY1ZGJiYmZkNjliZTY4MTViNTQ3NzI2ZmU2MzQxZjlhZDZlYTAzZTNlMDU0ZjVmNzEyMzY3OGE1Y2UyNjk"
+              href="https://qiskit.org/documentation/install.html"
               target="_blank"
               rel="noopener"
               tabindex="-1"
               @click=${() => trackClickEvent({
-                  action: 'Qiskit Slack Community Channel',
+                  action: 'Get Started',
                   objectType: 'Button'
               })}
             >
-              <vaadin-button theme="secondary small">${slackIcon} ${i18next.t('joinSlack')}</vaadin-button>
+              <vaadin-button theme="secondary small">${i18next.t('getStarted')}</vaadin-button>
             </a>
           </div>
         </div>
