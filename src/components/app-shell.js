@@ -38,7 +38,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
       SharedStyles,
       css`
         :host {
-          --app-primary-color: #e6d6ff;
+          --app-primary-color: #bc93fc;
           --app-secondary-color: #242a2e;
           --app-header-color: #21252b;
 
