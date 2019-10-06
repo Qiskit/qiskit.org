@@ -194,17 +194,18 @@ class PageHome extends localize(i18next)(LitElement) {
           <h2>${i18next.t('pages.home.headerSubTitle')}</h2>
           <div class="badges">
             <a
-              href="https://qiskit.org/documentation/install.html"
+              href="https://quantum-computing.ibm.com/"
               target="_blank"
               rel="noopener"
               tabindex="-1"
               @click=${() => trackClickEvent({
-                  action: 'Get Started',
+                  action: 'Get Started online',
                   objectType: 'Button'
               })}
             >
-              <vaadin-button theme="secondary small">${i18next.t('getStarted')}</vaadin-button>
+              <vaadin-button theme="secondary small">Get Started Online!</vaadin-button>
             </a>
+             <font size="4">or &nbsp;&nbsp;&nbsp;&nbsp;<code>pip install qiskit</code></font>
           </div>
         </div>
       </header>
