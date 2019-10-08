@@ -10,6 +10,19 @@ script:
 before_deploy:
   - npm run build
   - cd server/
+  # Prevent deploy stage from timing out waiting for output. The function
+  # literally rings a bell and the non-printable character can be found in
+  # TravisCI output as black square.
+  # Original solution can be found at:
+  # https://github.com/travis-ci/dpl/issues/568#issuecomment-272465349
+  - |
+    function keep_alive() {
+      while true; do
+        echo -en "\a"
+        sleep 5
+      done
+    }
+    keep_alive &
 deploy:
   - provider: cloudfoundry
     username: apikey
