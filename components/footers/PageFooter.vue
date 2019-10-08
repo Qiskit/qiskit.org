@@ -11,7 +11,7 @@
             <li><a class="footer-column__link" href="https://qiskit.org/aer">Aer</a></li>
             <li><a class="footer-column__link" href="https://qiskit.org/aqua">Aqua</a></li>
             <li><a class="footer-column__link" href="https://qiskit.org/ignis">Ignis</a></li>
-            <li><a class="footer-column__link" href="https://qiskit.org/ibmq">IBM Q</a></li>
+            <li><a class="footer-column__link" href="https://qiskit.org/ibmqaccount">IBM Q Account</a></li>
           </ul>
         </section>
         <section class="footer-column">
