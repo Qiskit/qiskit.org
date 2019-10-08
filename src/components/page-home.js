@@ -222,7 +222,7 @@ class PageHome extends localize(i18next)(LitElement) {
                   rel="noopener"
                   tabindex="-1"
                   @click=${() => trackClickEvent({
-                    action: 'Qiskit 0.12 Release Notes',
+                    action: 'Coding with Qiskit Video Series',
                     objectType: 'Button'
                   })}
                 >
