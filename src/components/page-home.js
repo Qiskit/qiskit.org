@@ -237,11 +237,11 @@ class PageHome extends localize(i18next)(LitElement) {
               <p>${i18next.t('pages.home.newsBox2Description')}</p>
               <div class="actions">
                 <a
-                  href="https://qiskit.org/documentation/release_notes.html#notable-changes"
+                  href="https://ibmqawards.com/"
                   target="_blank"
                   tabindex="-1"
                   @click=${() => trackClickEvent({
-                    action: 'Coding with Qiskit Video Series',
+                    action: 'IBM Q Awards',
                     objectType: 'Button'
                   })}
                 >
