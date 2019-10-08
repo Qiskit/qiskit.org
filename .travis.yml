@@ -7,10 +7,12 @@ before_script:
   - npm run lint
 script:
   - npm run test
-after_success:
+before_deploy:
   - npm run build
   - cd server/
-before_deploy: |
+  # Prevent deploy stage from timing out. Original solution at:
+  # https://github.com/travis-ci/dpl/issues/568#issuecomment-272465349
+  - |
   function keep_alive() {
     while true; do
       echo -en "\a"
