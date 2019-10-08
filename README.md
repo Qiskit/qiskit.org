@@ -19,6 +19,6 @@ This command serves the app at `http://127.0.0.1:8081`:
 
     npm run build
 
-Also this command serves the builded application at `http://127.0.0.1:8080`:
+Also this command serves the built application at `http://127.0.0.1:8080`:
 
     npm run serve
