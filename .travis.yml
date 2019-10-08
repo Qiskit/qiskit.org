@@ -10,8 +10,6 @@ script:
 before_deploy:
   - npm run build
   - cd server/
-  # Prevent deploy stage from timing out. Original solution at:
-  # https://github.com/travis-ci/dpl/issues/568#issuecomment-272465349
   - |
   function keep_alive() {
     while true; do
