@@ -44,10 +44,12 @@ export default ({ app }) => {
       const sectionBasepath =
         typeof section.basepath !== 'undefined' ? section.basepath : basepath
 
-      section.collections[aCollection] =
-        await Promise.all(section.collections[aCollection].map(
-          path => import(`~/content/${sectionBasepath}${path}`)
-        ))
+      if (typeof section.collections[aCollection][0] === 'string') {
+        section.collections[aCollection] =
+          await Promise.all(section.collections[aCollection].map(
+            path => import(`~/content/${sectionBasepath}${path}`)
+          ))
+      }
     }
   }
 
