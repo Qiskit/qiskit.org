@@ -1,19 +1,16 @@
 ---
 title: Quantum Dice
 author: Russell Huffman
-description: The QiskitBlocks application teaches quantum computing concepts using Qiskit, in the context of a Minetest block world.
-image: https://github.com/JavaFXpert/QiskitBlocks/raw/master/quantum_circuits_garden.png
-to: /experiments/qiskit-blocks
+description: A simple dice roller app using quantum computing to generate random numbers.
+image: https://github.com/JRussellHuffman/quantum-dice/blob/master/assets/header-image.pngs
+to: /experiments/quantum-dice
 media:
-  - https://player.vimeo.com/video/356185384
-  - https://content.minetest.net/uploads/r9yczgJPla.png
-  - https://content.minetest.net/uploads/3KQXwz0qVz.png
-  - https://content.minetest.net/uploads/Q5etnbmvSX.png
+  - https://github.com/JRussellHuffman/quantum-dice/blob/master/assets/header-image.pngs
+  - https://medium.com/design-ibm/truly-quantum-dice-cfe372f4c586
 
-source: https://github.com/JavaFXpert/QiskitBlocks
+source: https://github.com/JRussellHuffman/quantum-dice
+launch: https://jrussellhuffman.com/quantumdice/
 ---
-Although quantum computing concepts can seem strange and difficult to learn, many of them are easy to understand in the context of playing games. For example, a quantum bit (qubit) may hold the value of 0 or 1, or some combination of those values. When measured, the state of the qubit collapses to either 0 or 1, based upon the probabilities expressed in its hidden quantum state. A simple demonstration in the context of a game can shed light on this phenomenon as well as how it is leveraged in quantum computing.
+Is a Dungeons and Dragons style dice roller a good use of a quantum computer? I sure think so.
 
-This QiskitBlocks game gives an introduction to quantum computing in the context of a modified open source block-mining game named Minetest. During gameplay, users will have been exposed to concepts that enable them to develop programs that run on quantum computers. QiskitBlocks leverages Qiskit and OpenQASM, so players will be well prepared to take next steps in quantum computing, such as using the Qiskit framework and tools to create programs that run on real quantum computers.
-
-Connection to the public internet is required, as the game accesses Qiskit quantum simulators to run quantum circuits.
+Computers as we know them (aka classical computers) can, at best, generate pseudo-random numbers. Quantum computers, using uniquely quantum properties, can generate truly random numbers. This project uses random numbers generated from IBM Q's quantum systems to provide a random sequence for a simple dice rolling app.
