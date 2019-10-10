@@ -54,8 +54,7 @@
         </ol>
         <ul class="actions">
           <li>
-            <Cta to="http://ibm.biz/qiskit-advocate">
-              Apply now
+              Closed
             </Cta>
           </li>
         </ul>
