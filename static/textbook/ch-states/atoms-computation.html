@@ -13147,7 +13147,7 @@ div#notebook {
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The first thing we need to know about is the idea of bits. These are designed to be the world’s simplest alphabet. With only two characters, 0 and 1, we can represent any piece of information.</p>
-<p>One example is numbers. In European languages, numbers are usually represented using a string of the the ten digits 0, 1, 2, 3, 4, 5, 6, 7, 8 and 9. In this string of digits, each represents how many times the number contains a certain powers of ten. For example, when we write 9213, we mean</p>
+<p>One example is numbers. In European languages, numbers are usually represented using a string of the ten digits 0, 1, 2, 3, 4, 5, 6, 7, 8 and 9. In this string of digits, each represents how many times the number contains a certain powers of ten. For example, when we write 9213, we mean</p>
 $$ 9000 + 200 + 10 + 3 $$<p>or, expressed in a way that emphasizes the powers of ten</p>
 $$ (9\times10^3) + (2\times10^2) + (1\times10^1) + (3\times10^0) $$<p>Though we usually use this system based on the number 10, we can just as easily use one based on any other number. The binary number system, for example, is based on the number two. This means using the two characters 0 and 1 to express numbers as multiples of powers of two. For example, 9213 becomes 10001111111101, since</p>
 $$ 9213  = (1 \times 2^{13}) + (0 \times 2^{12}) + (0 \times 2^{11})+ (0 \times 2^{10}) +(1 \times 2^9) + (1 \times 2^8) + (1 \times 2^7) \\\\ \,\,\,   + (1 \times 2^6) + (1 \times 2^5) + (1 \times 2^4) + (1 \times 2^3) + (1 \times 2^2) + (0 \times 2^1) + (1 \times 2^0) $$<p>In this we are expressing numbers as multiples of 2, 4, 8, 16, 32, etc instead of 10, 100, 1000, etc.</p>
@@ -13202,7 +13202,7 @@ $$ 9213  = (1 \times 2^{13}) + (0 \times 2^{12}) + (0 \times 2^{11})+ (0 \times 
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The picture above shows what is known (for historical reasons) as a circuit. It depicts the story of what happens to the qubits during the program, from left to right.</p>
-<p>In this particular example, not much is happening. Eight qubits have been set up and and numbered from 0 to 7 (because that’s how programmers like to do things). The measure operation is then immediately applied to the qubits, which simply extracts an output of <code>0</code> or <code>1</code> from each.</p>
+<p>In this particular example, not much is happening. Eight qubits have been set up and numbered from 0 to 7 (because that’s how programmers like to do things). The measure operation is then immediately applied to the qubits, which simply extracts an output of <code>0</code> or <code>1</code> from each.</p>
 
 </div>
 </div>
@@ -13682,8 +13682,8 @@ $$ 9213  = (1 \times 2^{13}) + (0 \times 2^{12}) + (0 \times 2^{11})+ (0 \times 
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">qc_ha</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
 <span class="c1"># encode inputs in qubits 0 and 1</span>
-<span class="n">qc_ha</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># For a=0, remove the this line. For a=1, leave it.</span>
-<span class="n">qc_ha</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># For b=0, remove the this line. For b=1, leave it.</span>
+<span class="n">qc_ha</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># For a=0, remove this line. For a=1, leave it.</span>
+<span class="n">qc_ha</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># For b=0, remove this line. For b=1, leave it.</span>
 <span class="n">qc_ha</span><span class="o">.</span><span class="n">barrier</span><span class="p">()</span>
 <span class="c1"># use cnots to write the XOR of the inputs on qubit 2</span>
 <span class="n">qc_ha</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
@@ -13727,7 +13727,7 @@ $$ 9213  = (1 \times 2^{13}) + (0 \times 2^{12}) + (0 \times 2^{11})+ (0 \times 
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We are now halfway to a fully working half adder. We just have the other bit of the output left to do: the one that will live on qubit 4.</p>
-<p>If you look again at the four possible sums, you’ll notice that there is only one case for which this <code>1</code> instead of <code>0</code>: <code>1+1</code>=<code>10</code>. It happens only when both the bits we are adding are <code>1</code>.</p>
+<p>If you look again at the four possible sums, you’ll notice that there is only one case for which this is <code>1</code> instead of <code>0</code>: <code>1+1</code>=<code>10</code>. It happens only when both the bits we are adding are <code>1</code>.</p>
 <p>To calculate this part of the output, we could just get our computer to look at whether both of the inputs are <code>1</code>. If they are — and only if they are — we need to do a NOT gate on qubit 4. That will flip it to the required value of <code>1</code> for this case only, giving us the output we need.</p>
 <p>For this we need a new gate: like a CNOT, but controlled on two qubits instead of just one. This will perform a NOT on the target qubit only when both controls are in state <code>1</code>. This new gate is called the <em>Toffoli</em>. For those of you who are familiar with Boolean logic gates, it is basically an AND gate.</p>
 <p>In Qiskit, the Toffoli is represented with the <code>ccx</code> command.</p>
