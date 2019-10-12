@@ -13222,7 +13222,7 @@ $$
 \begin{pmatrix} x &amp; x \end{pmatrix} \times \begin{pmatrix} x \\\\ x \end{pmatrix}= 2x^2.
 $$<p>We can get any value for the inner product that we want, just by choosing the appropriate value of $x$.</p>
 <p>As mentioned earlier, we are going to use the inner product as a measure of how similar two vectors are. With this interpretation in mind, it is natural to require that the inner product of any state with itself gives the value $1$. This is already acheived for the inner products of $|0\rangle$ and $|1\rangle$ with themselves, so let's make it true for all other states too.</p>
-<p>This condition is known as the normalization condition. In this case, it results means that $x=\frac{1}{\sqrt{2}}$. Now we know what our new state is, so here's a few ways of writing it down.</p>
+<p>This condition is known as the normalization condition. In this case, it means that $x=\frac{1}{\sqrt{2}}$. Now we know what our new state is, so here's a few ways of writing it down.</p>
 $$
 \begin{pmatrix} \frac{1}{\sqrt{2}} \\\\ \frac{1}{\sqrt{2}} \end{pmatrix} = \frac{1}{\sqrt{2}}\begin{pmatrix} 1 \\\\ 1 \end{pmatrix} = \frac{ |0\rangle + |1\rangle}{\sqrt{2}}
 $$<p>This state is essentially just $|0\rangle$ and $|1\rangle$ added together and then normalized, so we will give it a name to reflect that origin. We call it $|+\rangle$ .</p>
@@ -13273,7 +13273,7 @@ $$<p>The same also holds true for other types of measurement. All probabilities 
 <p>Let's find an example. Consider a state that looks like this:</p>
 $$
 |\tilde 0\rangle = \begin{pmatrix} -1 \\\\ 0 \end{pmatrix} = -|0\rangle.
-$$<p>This is is equivalent to multiplying the state $|0\rangle$ by $-1$. It means that every inner product we could calculate with $|\tilde0\rangle$ is the same as for $|0\rangle$, but multplied by $-1$.</p>
+$$<p>This is equivalent to multiplying the state $|0\rangle$ by $-1$. It means that every inner product we could calculate with $|\tilde0\rangle$ is the same as for $|0\rangle$, but multplied by $-1$.</p>
 $$
 \langle a|\tilde 0\rangle = -\langle a| 0\rangle
 $$<p>As you probably know, any negative number squares to the same value as its positive counterpart: $(-x)^2 =x^2$.</p>
@@ -13477,7 +13477,7 @@ $$<p>This is a version of Heisenberg's famous uncertainty principle. The $(p^z_0
 <p>The first step is to find a state that seems random to both x and z measurements. Let's call it $|\circlearrowleft\rangle$, for no apparent reason.</p>
 $$
 |\circlearrowleft\rangle = c_0 | 0 \rangle + c_1 | 1 \rangle
-$$<p>Now the job is to find the right values for $a_0$ and $a_1$. You could try to do this with standard positive and negative numbers, but you'll never be able to find a state that is completely random for both x and z measurements. To achieve this, we need to use complex numbers.</p>
+$$<p>Now the job is to find the right values for $c_0$ and $c_1$. You could try to do this with standard positive and negative numbers, but you'll never be able to find a state that is completely random for both x and z measurements. To achieve this, we need to use complex numbers.</p>
 
 </div>
 </div>
@@ -13498,7 +13498,7 @@ $$<p>Now the job is to find the right values for $a_0$ and $a_1$. You could try 
 $$
 x = x_r + i~x_i .
 $$<p>Here $x_r$ and $x_i$ are both normal numbers (positive or negative), where $x_r$ is known as the real part and $x_i$ as the imaginary part.</p>
-<p>For every real number $x$ there is a corresponding complex conjugate $x^*$</p>
+<p>For every complex number $x$ there is a corresponding complex conjugate $x^*$</p>
 $$
 x^* = x_r - i~x_i .
 $$<p>Multiplying $x$ by $x^*$ gives us a real number. It's most useful to write this as</p>
@@ -13508,7 +13508,7 @@ $$<p>Here $|x|$ is known as the magnitude of $x$ (or, equivalently, of $x^*$ ).<
 <p>If we are going to allow the numbers in our quantum states to be complex, we'll need to upgrade some of our equations.</p>
 <p>First, we need to ensure that the inner product of a state with itself is always 1. To do this, the bra and ket versions of the same state must be defined as follows:</p>
 $$
-|a\rangle = \begin{pmatrix} a_0 \\\\ a_1 \end{pmatrix}, ~~~ \langle a| = \begin{pmatrix} a_0^* &amp; -a_1^* \end{pmatrix}.
+|a\rangle = \begin{pmatrix} a_0 \\\\ a_1 \end{pmatrix}, ~~~ \langle a| = \begin{pmatrix} a_0^* &amp; a_1^* \end{pmatrix}.
 $$<p>Then we just need a small change to the Born rule, where we square the magnitudes of inner products, rather than just the inner products themselves.</p>
 $$
 p_0^z(|a\rangle) = |~\langle0|a\rangle~|^2,\\\\
@@ -13619,11 +13619,24 @@ $$<p>To see this, we can incorporate the y measurement into our measure of total
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>For more than one qubit, this relation will need another upgrade. This is because the qubits can spend their limited certainty on creating correlations that can only be detected when multiple qubits are measured. The fact that certainty is conserved remains true, but it can only been seen when looking at all the qubits together.</p>
+<p>For more than one qubit, this relation will need another upgrade. This is because the qubits can spend their limited certainty on creating correlations that can only be detected when multiple qubits are measured. The fact that certainty is conserved remains true, but it can only be seen when looking at all the qubits together.</p>
 <p>Before we move on to entanglement, there is more to explore about just a single qubit. As we'll see in the next section, the conservation of certainty leads to a particularly useful way of visualizing single-qubit states and gates.</p>
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
 </div>
     </div>
   </div>
