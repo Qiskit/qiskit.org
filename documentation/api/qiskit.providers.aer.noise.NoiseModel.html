@@ -1262,6 +1262,20 @@
 <em class="property">class </em><code class="sig-name descname">NoiseModel</code><span class="sig-paren">(</span><em class="sig-param">basis_gates=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/aer/noise/noise_model.html#NoiseModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.aer.noise.NoiseModel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Noise model class for Qiskit Aer simulators.</p>
+<p>Initialize an empty noise model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>basis_gates</strong> (<em>list</em><em>[</em><em>str</em><em>] or </em><em>None</em>) – Specify an initial basis_gates
+for the noise model. If None a default value of [‘id’, ‘u3’, ‘cx’]
+is used (Default: None).</p>
+</dd>
+</dl>
+<p>Errors added to the noise model will have thier instruction appended to
+the noise model basis_gates if the instruction is in the QasmSimulator
+basis_gates. If the instruction is not in the QasmSimulator basis_gates
+it is assumbed to be a label for a standard gate, and that gate should
+be added to the NoiseModel basis_gates either using the init method, or
+the <cite>add_basis_Gates</cite> method.</p>
 <p class="rubric">Attributes Summary</p>
 <table class="longtable docutils align-default">
 <colgroup>

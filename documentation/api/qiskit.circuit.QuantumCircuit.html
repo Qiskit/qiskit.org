@@ -1262,6 +1262,38 @@
 <em class="property">class </em><code class="sig-name descname">QuantumCircuit</code><span class="sig-paren">(</span><em class="sig-param">*regs</em>, <em class="sig-param">name=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/circuit/quantumcircuit.html#QuantumCircuit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.circuit.QuantumCircuit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Quantum circuit.</p>
+<p>Create a new circuit.
+A circuit is a list of instructions bound to some registers.
+:param *regs: To be included in the circuit.</p>
+<blockquote>
+<div><ul>
+<li><p>If [Register], the QuantumRegister and/or ClassicalRegister
+to include in the circuit.
+E.g.: QuantumCircuit(QuantumRegister(4))</p>
+<blockquote>
+<div><p>QuantumCircuit(QuantumRegister(4), ClassicalRegister(3))
+QuantumCircuit(QuantumRegister(4, ‘qr0’), QuantumRegister(2, ‘qr1’))</p>
+</div></blockquote>
+</li>
+<li><p>If [Int], the amount of qubits and/or classical bits to include</p></li>
+</ul>
+<dl class="simple">
+<dt>in the circuit. It can be (Int, ) or (Int, Int).</dt><dd><dl class="simple">
+<dt>E.g.: QuantumCircuit(4) # A QuantumCircuit with 4 qubits</dt><dd><p>QuantumCircuit(4, 3) # A QuantumCircuit with 4 qubits and 3 classical bits</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em><em> or </em><em>None</em>) – the name of the quantum circuit. If
+None, an automatically generated string will be assigned.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>QiskitError</strong> – if the circuit name, if given, is not valid.</p>
+</dd>
+</dl>
 <p class="rubric">Attributes Summary</p>
 <table class="longtable docutils align-default">
 <colgroup>

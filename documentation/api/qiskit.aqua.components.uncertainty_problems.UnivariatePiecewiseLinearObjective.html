@@ -1266,6 +1266,24 @@ Control qubits represent integer value, and rotation approximates a piecewise li
 <blockquote>
 <div><p><a href="#id1"><span class="problematic" id="id2">|</span></a>x&gt;|0&gt; –&gt; <a href="#id3"><span class="problematic" id="id4">|</span></a>x&gt;( sqrt(1 - f(x))|0&gt; + sqrt(f(x))|1&gt; )</p>
 </div></blockquote>
+<p>Constructor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>num_state_qubits</strong> (<em>int</em>) – number of qubits to represent the state</p></li>
+<li><p><strong>min_state_value</strong> (<em>float</em>) – lower bound of values to be represented by state qubits</p></li>
+<li><p><strong>max_state_value</strong> (<em>float</em>) – upper bound of values to be represented by state qubits</p></li>
+<li><p><strong>breakpoints</strong> (<em>list</em><em> or </em><em>array</em>) – breakpoints of piecewise linear function</p></li>
+<li><p><strong>slopes</strong> (<em>list</em><em> or </em><em>array</em>) – slopes of linear segments</p></li>
+<li><p><strong>offsets</strong> (<em>list</em><em> or </em><em>array</em>) – offset of linear segments</p></li>
+<li><p><strong>f_min</strong> (<em>float</em>) – minimal value of resulting function (required for normalization of amplitude)</p></li>
+<li><p><strong>f_max</strong> (<em>float</em>) – maximal value of resulting function (required for normalization of amplitude)</p></li>
+<li><p><strong>c_approx</strong> – approximating factor (linear segments are approximated by contracting rotation around pi/4, where sin^2() is locally linear)</p></li>
+<li><p><strong>i_state</strong> – indices of qubits that represent the state</p></li>
+<li><p><strong>i_objective</strong> – index of target qubit to apply the rotation to</p></li>
+</ul>
+</dd>
+</dl>
 <p class="rubric">Attributes Summary</p>
 <table class="longtable docutils align-default">
 <colgroup>

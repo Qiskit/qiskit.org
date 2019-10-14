@@ -1261,6 +1261,21 @@
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator">
 <em class="property">class </em><code class="sig-name descname">TPBGroupedWeightedPauliOperator</code><span class="sig-paren">(</span><em class="sig-param">paulis</em>, <em class="sig-param">basis</em>, <em class="sig-param">z2_symmetries=None</em>, <em class="sig-param">atol=1e-12</em>, <em class="sig-param">name=None</em>, <em class="sig-param">grouping_func=None</em>, <em class="sig-param">kwargs=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/operators/tpb_grouped_weighted_pauli_operator.html#TPBGroupedWeightedPauliOperator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.aqua.operators.weighted_pauli_operator.WeightedPauliOperator</span></code></p>
+<p>Args:
+paulis ([[complex, Pauli]]): the list of weighted Paulis, where a weighted pauli is composed of</p>
+<blockquote>
+<div><p>a length-2 list and the first item is the weight and
+the second item is the Pauli object.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>basis (list[tuple(object, [int])], optional): the grouping basis, each element is a tuple composed of the basis</dt><dd><p>and the indices to paulis which are belonged to that group.
+e.g., if tpb basis is used, the object will be a pauli.
+by default, the group is equal to non-grouping, each pauli is its own basis.</p>
+</dd>
+</dl>
+<p>z2_symmetries (Z2Symmetires): recording the z2 symmetries info
+atol (float, optional): the threshold used in truncating paulis
+name (str, optional): the name of operator.</p>
 <p class="rubric">Attributes Summary</p>
 <table class="longtable docutils align-default">
 <colgroup>

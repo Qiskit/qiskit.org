@@ -1264,6 +1264,28 @@
 <p>Matrix operator class</p>
 <p>This represents a matrix operator <cite>M</cite> that acts on a statevector as: <cite>M|v⟩</cite>
 or on a density matrix as M.ρ.M^dagger.</p>
+<p>Initialize an operator object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>(</strong><strong>QuantumCircuit or</strong> (<em>data</em>) – Instruction or
+BaseOperator or
+matrix): data to initialize operator.</p></li>
+<li><p><strong>input_dims</strong> (<em>tuple</em>) – the input subsystem dimensions.
+[Default: None]</p></li>
+<li><p><strong>output_dims</strong> (<em>tuple</em>) – the output subsystem dimensions.
+[Default: None]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>QiskitError</strong> – if input data cannot be initialized as an operator.</p>
+</dd>
+</dl>
+<p>If the input or output dimensions are None, they will be
+automatically determined from the input data. If the input data is
+a Numpy array of shape (2**N, 2**N) qubit systems will be used. If
+the input operator is not an N-qubit operator, it will assign a
+single subsystem with dimension specified by the shape of the input.</p>
 <p class="rubric">Methods Summary</p>
 <table class="longtable docutils align-default">
 <colgroup>

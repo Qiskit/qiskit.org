@@ -1265,6 +1265,22 @@
 Performs optimization by gradient descent where gradients
 are evaluated “analytically” using the quantum circuit evaluating
 the objective function.</p>
+<p>Constructor.</p>
+<p>Performs Analytical Quantum Gradient Descent (AQGD).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>maxiter</strong> (<em>int</em>) – Maximum number of iterations, each iteration evaluation gradient.</p></li>
+<li><p><strong>eta</strong> (<em>float</em>) – The coefficient of the gradient update. Increasing this value
+results in larger step sizes: param = previous_param - eta * deriv</p></li>
+<li><p><strong>tol</strong> (<em>float</em>) – The convergence criteria that must be reached before stopping.
+Optimization stops when: absolute(loss - previous_loss) &lt; tol</p></li>
+<li><p><strong>disp</strong> (<em>bool</em>) – Set to true to display convergence messages.</p></li>
+<li><p><strong>momentum</strong> (<em>float</em>) – Bias towards the previous gradient momentum in current update.
+Must be within the bounds: [0,1)</p></li>
+</ul>
+</dd>
+</dl>
 <p class="rubric">Attributes Summary</p>
 <table class="longtable docutils align-default">
 <colgroup>

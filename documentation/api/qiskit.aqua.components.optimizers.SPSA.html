@@ -1262,6 +1262,25 @@
 <em class="property">class </em><code class="sig-name descname">SPSA</code><span class="sig-paren">(</span><em class="sig-param">max_trials=1000</em>, <em class="sig-param">save_steps=1</em>, <em class="sig-param">last_avg=1</em>, <em class="sig-param">c0=0.6283185307179586</em>, <em class="sig-param">c1=0.1</em>, <em class="sig-param">c2=0.602</em>, <em class="sig-param">c3=0.101</em>, <em class="sig-param">c4=0</em>, <em class="sig-param">skip_calibration=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/components/optimizers/spsa.html#SPSA"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.aqua.components.optimizers.SPSA" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.aqua.components.optimizers.optimizer.Optimizer</span></code></p>
 <p>Simultaneous Perturbation Stochastic Approximation algorithm.</p>
+<p>Constructor.</p>
+<p>For details, please refer to <a class="reference external" href="https://arxiv.org/pdf/1704.05018v2.pdf">https://arxiv.org/pdf/1704.05018v2.pdf</a>.
+Supplementary information Section IV.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>max_trials</strong> (<em>int</em>) – Maximum number of iterations to perform.</p></li>
+<li><p><strong>save_steps</strong> (<em>int</em>) – Save intermeditate info every save_steps step.</p></li>
+<li><p><strong>last_avg</strong> (<em>int</em>) – Averged parameters over the last_avg iterations.
+If last_avg = 1, only the last iteration is considered.</p></li>
+<li><p><strong>c0</strong> (<em>float</em>) – The initial a. Step size to update paramters.</p></li>
+<li><p><strong>c1</strong> (<em>float</em>) – The initial c. The step size used to approximate gradient.</p></li>
+<li><p><strong>c2</strong> (<em>float</em>) – The alpha in the paper, and it is used to adjust a (c0) at each iteration.</p></li>
+<li><p><strong>c3</strong> (<em>float</em>) – The gamma in the paper, and it is used to adjust c (c1) at each iteration.</p></li>
+<li><p><strong>c4</strong> (<em>float</em>) – The parameter used to control a as well.</p></li>
+<li><p><strong>skip_calibration</strong> (<em>bool</em>) – skip calibration and use provided c(s) as is.</p></li>
+</ul>
+</dd>
+</dl>
 <p class="rubric">Attributes Summary</p>
 <table class="longtable docutils align-default">
 <colgroup>

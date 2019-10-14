@@ -1262,6 +1262,31 @@
 <em class="property">class </em><code class="sig-name descname">SuperOp</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">input_dims=None</em>, <em class="sig-param">output_dims=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/operators/channel/superop.html#SuperOp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.quantum_info.SuperOp" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.quantum_info.operators.channel.quantum_channel.QuantumChannel</span></code></p>
 <p>Superoperator representation of a quantum channel</p>
+<p>Initialize a quantum channel Superoperator operator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>(</strong><strong>QuantumCircuit or</strong> (<em>data</em>) – Instruction or
+BaseOperator or
+matrix): data to initialize superoperator.</p></li>
+<li><p><strong>input_dims</strong> (<em>tuple</em>) – the input subsystem dimensions.
+[Default: None]</p></li>
+<li><p><strong>output_dims</strong> (<em>tuple</em>) – the output subsystem dimensions.
+[Default: None]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>QiskitError</strong> – if input data cannot be initialized as a</p></li>
+<li><p><strong>superoperator.</strong> – </p></li>
+</ul>
+</dd>
+</dl>
+<p>If the input or output dimensions are None, they will be
+automatically determined from the input data. If the input data is
+a Numpy array of shape (4**N, 4**N) qubit systems will be used. If
+the input operator is not an N-qubit operator, it will assign a
+single subsystem with dimension specified by the shape of the input.</p>
 <p class="rubric">Methods Summary</p>
 <table class="longtable docutils align-default">
 <colgroup>

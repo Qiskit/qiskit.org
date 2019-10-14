@@ -1262,6 +1262,27 @@
 <em class="property">class </em><code class="sig-name descname">QGAN</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">bounds=None</em>, <em class="sig-param">num_qubits=None</em>, <em class="sig-param">batch_size=500</em>, <em class="sig-param">num_epochs=3000</em>, <em class="sig-param">seed=7</em>, <em class="sig-param">discriminator=None</em>, <em class="sig-param">generator=None</em>, <em class="sig-param">tol_rel_ent=None</em>, <em class="sig-param">snapshot_dir=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/algorithms/adaptive/qgan/qgan.html#QGAN"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.aqua.algorithms.QGAN" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.aqua.algorithms.quantum_algorithm.QuantumAlgorithm</span></code></p>
 <p>Quantum Generative Adversarial Network.</p>
+<p>Initialize qGAN.
+:param data: array, training data of dimension k
+:param bounds: array, k min/max data values [[min_0,max_0],…,[min_k-1,max_k-1]]</p>
+<blockquote>
+<div><p>if univariate data: [min_0,max_0]</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>num_qubits</strong> – array, k numbers of qubits to determine representation resolution,</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>i.e. n qubits enable the representation of 2**n values [num_qubits_0,…, num_qubits_k-1]</dt><dd><p>batch_size: int, batch size
+num_epochs: int, number of training epochs
+tol_rel_ent: float or None, Set tolerance level for relative entropy. If the training achieves relative
+entropy equal or lower than tolerance it finishes.
+discriminator: NeuralNetwork, discriminates between real and fake data samples
+generator: NeuralNetwork, generates ‘fake’ data samples
+snapshot_dir: path or None, if path given store cvs file with parameters to the directory</p>
+</dd>
+</dl>
 <p class="rubric">Attributes Summary</p>
 <table class="longtable docutils align-default">
 <colgroup>
