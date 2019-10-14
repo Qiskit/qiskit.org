@@ -47,6 +47,8 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/language_data.js"></script>
     <script type="text/javascript" src="_static/js/themeExt.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="_static/favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
@@ -623,6 +625,12 @@
 <li class="toctree-l3"><a class="reference internal" href="apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1213,6 +1221,12 @@
 <li class="toctree-l3"><a class="reference internal" href="apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1268,12 +1282,13 @@ experiments.</p></li>
 </ul>
 <p>Here is an example of the entire workflow, with each step explained in detail in
 subsequent sections:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span><span class="p">(</span>
+<div class="docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span><span class="p">(</span>
   <span class="n">QuantumCircuit</span><span class="p">,</span>
   <span class="n">execute</span><span class="p">,</span>
   <span class="n">Aer</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">qiskit.visualization</span> <span class="kn">import</span> <span class="n">plot_histogram</span>
+<span class="kn">from</span> <span class="nn">qiskit.visualization</span> <span class="k">import</span> <span class="n">plot_histogram</span>
 
 <span class="c1"># Use Aer&#39;s qasm_simulator</span>
 <span class="n">simulator</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">)</span>
@@ -1298,16 +1313,25 @@ subsequent sections:</p>
 
 <span class="c1"># Returns counts</span>
 <span class="n">counts</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="n">circuit</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Total count for 00 and 11 are:&quot;</span><span class="p">,</span><span class="n">counts</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Total count for 00 and 11 are:&quot;</span><span class="p">,</span><span class="n">counts</span><span class="p">)</span>
 
 <span class="c1"># Draw the circuit</span>
 <span class="n">circuit</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
 </pre></div>
 </div>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Total count for 00 and 11 are: {&#39;00&#39;: 479, &#39;11&#39;: 521}
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+<span class="n">Total</span> <span class="n">count</span> <span class="k">for</span> <span class="mi">00</span> <span class="ow">and</span> <span class="mi">11</span> <span class="n">are</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;00&#39;</span><span class="p">:</span> <span class="mi">482</span><span class="p">,</span> <span class="s1">&#39;11&#39;</span><span class="p">:</span> <span class="mi">518</span><span class="p">}</span>
 </pre></div>
 </div>
-<img alt="Quantum Circuit with an H gate and controlled nots." src="_images/getting_started_0.png" />
+<pre style="word-wrap: normal;white-space: pre;background: #fff0;line-height: 1.1;font-family: &quot;Courier New&quot;,Courier,monospace">        ┌───┐     ┌─┐   
+q_0: |0>┤ H ├──■──┤M├───
+        └───┘┌─┴─┐└╥┘┌─┐
+q_1: |0>─────┤ X ├─╫─┤M├
+             └───┘ ║ └╥┘
+ c_0: 0 ═══════════╩══╬═
+                      ║ 
+ c_1: 0 ══════════════╩═
+                        </pre></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The default simulator provider is <code class="docutils literal notranslate"><span class="pre">Aer</span></code>. However, if you have issues with installing this
@@ -1329,11 +1353,13 @@ circuit_drawer = mpl
 <p>You can use any of the valid circuit drawer backends as the value for this config, this includes
 text, mpl, latex, and latex_source.</p>
 </div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot a histogram</span>
+<div class="docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot a histogram</span>
 <span class="n">plot_histogram</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="Probabilities of each state." src="_images/getting_started_1.png" />
+<img alt="_images/getting_started_1_0.png" src="_images/getting_started_1_0.png" />
+</div>
 <div class="section" id="workflow-step-by-step">
 <h2>Workflow Step–by–Step<a class="headerlink" href="#workflow-step-by-step" title="Permalink to this headline">¶</a></h2>
 <p>The program above can be broken down into six steps:</p>
@@ -1407,10 +1433,19 @@ measurement result will be stored in the ith classical bit.</p></li>
 <p>You can use <code class="docutils literal notranslate"><span class="pre">QuantumCircuit.draw()</span></code> to view the circuit that you have designed
 in the <a class="reference external" href="api/qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit.draw">various forms</a>
 used in many textbooks and research articles.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">circuit</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+<div class="docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">circuit</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
 </pre></div>
 </div>
-<img alt="Quantum circuit to make a Bell state." src="_images/getting_started_0.png" />
+<pre style="word-wrap: normal;white-space: pre;background: #fff0;line-height: 1.1;font-family: &quot;Courier New&quot;,Courier,monospace">        ┌───┐     ┌─┐   
+q_0: |0>┤ H ├──■──┤M├───
+        └───┘┌─┴─┐└╥┘┌─┐
+q_1: |0>─────┤ X ├─╫─┤M├
+             └───┘ ║ └╥┘
+ c_0: 0 ═══════════╩══╬═
+                      ║ 
+ c_1: 0 ══════════════╩═
+                        </pre></div>
 <p>In this circuit, the qubits are ordered with qubit zero at the top and
 qubit one at the bottom. The circuit is read left-to-right, meaning that gates
 which are applied earlier in the circuit show up farther to the left.</p>
@@ -1422,15 +1457,18 @@ provides <a class="reference external" href="apidoc/providers/aer/aer_backends.h
 to achieve different simulation goals.</p>
 <p>To simulate this circuit, you will use the <code class="docutils literal notranslate"><span class="pre">qasm_simulator</span></code>. Each run of this
 circuit will yield either the bit string 00 or 11.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">simulator</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">)</span>
+<div class="docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simulator</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">)</span>
 <span class="n">job</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="n">simulator</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
 <span class="n">result</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
 <span class="n">counts</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="n">circuit</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Total count for 00 and 11 are:&quot;</span><span class="p">,</span><span class="n">counts</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Total count for 00 and 11 are:&quot;</span><span class="p">,</span><span class="n">counts</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Total count for 00 and 11 are: {&#39;00&#39;: 479, &#39;11&#39;: 521}
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+<span class="n">Total</span> <span class="n">count</span> <span class="k">for</span> <span class="mi">00</span> <span class="ow">and</span> <span class="mi">11</span> <span class="n">are</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;00&#39;</span><span class="p">:</span> <span class="mi">498</span><span class="p">,</span> <span class="s1">&#39;11&#39;</span><span class="p">:</span> <span class="mi">502</span><span class="p">}</span>
 </pre></div>
+</div>
 </div>
 <p>As expected, the output bit string is 00 approximately 50 percent of the time.
 The number of times the circuit is run can be specified via the <code class="docutils literal notranslate"><span class="pre">shots</span></code>
@@ -1444,10 +1482,12 @@ experiment you ran.</p>
 <h3>Step 6 : Visualize the Results<a class="headerlink" href="#step-6-visualize-the-results" title="Permalink to this headline">¶</a></h3>
 <p>Qiskit provides <a class="reference external" href="apidoc/visualization/visualization.html">many visualizations</a>,</p>
 <p>including the function <code class="docutils literal notranslate"><span class="pre">plot_histogram</span></code>, to view your results.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plot_histogram</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
+<div class="docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_histogram</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="Histogram of results." src="_images/getting_started_1.png" />
+<img alt="_images/getting_started_4_0.png" src="_images/getting_started_4_0.png" />
+</div>
 <p>The observed probabilities <span class="math notranslate nohighlight">\(Pr(00)\)</span> and <span class="math notranslate nohighlight">\(Pr(11)\)</span> are computed by
 taking the respective counts and dividing by the total number of shots.</p>
 <div class="admonition note">
