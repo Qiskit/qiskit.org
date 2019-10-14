@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,12 +48,14 @@
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/js/themeExt.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Índice" href="../genindex.html" />
     <link rel="search" title="Pesquisar" href="../search.html" />
     <link rel="next" title="plot_bloch_multivector" href="qiskit.visualization.plot_bloch_multivector.html" />
-    <link rel="prev" title="dag_drawer" href="qiskit.visualization.dag_drawer.html" /> 
+    <link rel="prev" title="iplot_state_qsphere" href="qiskit.visualization.iplot_state_qsphere.html" /> 
   </head>
 <body>
   <header>
@@ -625,6 +626,12 @@
 <li class="toctree-l3 current"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4 current"><a class="current reference internal" href="#">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1215,6 +1222,12 @@
 <li class="toctree-l3 current"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4 current"><a class="current reference internal" href="#">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1261,47 +1274,41 @@
 <h1>pass_manager_drawer<a class="headerlink" href="#pass-manager-drawer" title="Link permanente para este título">¶</a></h1>
 <dl class="function">
 <dt id="qiskit.visualization.pass_manager_drawer">
-<code class="descname">pass_manager_drawer</code><span class="sig-paren">(</span><em>pass_manager</em>, <em>filename</em>, <em>style=None</em>, <em>raw=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/visualization/pass_manager_visualization.html#pass_manager_drawer"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.visualization.pass_manager_drawer" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">pass_manager_drawer</code><span class="sig-paren">(</span><em class="sig-param">pass_manager</em>, <em class="sig-param">filename</em>, <em class="sig-param">style=None</em>, <em class="sig-param">raw=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/visualization/pass_manager_visualization.html#pass_manager_drawer"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.visualization.pass_manager_drawer" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Draws the pass manager.</p>
 <p>This function needs <cite>pydot &lt;https://github.com/erocarrera/pydot&gt;</cite>, which in turn needs
 Graphviz &lt;<a class="reference external" href="https://www.graphviz.org/">https://www.graphviz.org/</a>&gt;` to be installed.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parâmetros:</th><td class="field-body"><ul class="first simple">
-<li><strong>pass_manager</strong> (<a class="reference internal" href="qiskit.transpiler.PassManager.html#qiskit.transpiler.PassManager" title="qiskit.transpiler.PassManager"><em>PassManager</em></a>) – the pass manager to be drawn</li>
-<li><strong>filename</strong> (<em>str</em>) – file path to save image to</li>
-<li><strong>style</strong> (<em>dict</em><em> or </em><em>OrderedDict</em>) – keys are the pass classes and the values are
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pass_manager</strong> (<a class="reference internal" href="qiskit.transpiler.PassManager.html#qiskit.transpiler.PassManager" title="qiskit.transpiler.PassManager"><em>PassManager</em></a>) – the pass manager to be drawn</p></li>
+<li><p><strong>filename</strong> (<em>str</em>) – file path to save image to</p></li>
+<li><p><strong>style</strong> (<em>dict</em><em> or </em><em>OrderedDict</em>) – keys are the pass classes and the values are
 the colors to make them. An example can be seen in the DEFAULT_STYLE. An ordered
 dict can be used to ensure a priority coloring when pass falls into multiple
 categories. Any values not included in the provided dict will be filled in from
-the default dict</li>
-<li><strong>raw</strong> (<em>Bool</em>) – True if you want to save the raw Dot output not an image. The
-default is False.</li>
+the default dict</p></li>
+<li><p><strong>raw</strong> (<em>Bool</em>) – True if you want to save the raw Dot output not an image. The
+default is False.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Retorno:</th><td class="field-body"><p class="first"><dl class="docutils">
-<dt>an in-memory representation of the pass manager. Or None if</dt>
-<dd><p class="first last">no image was generated or PIL is not installed.</p>
+</dd>
+<dt class="field-even">Retorno</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>an in-memory representation of the pass manager. Or None if</dt><dd><p>no image was generated or PIL is not installed.</p>
 </dd>
 </dl>
 </p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name" colspan="2">Tipo de retorno:</th></tr>
-<tr class="field-odd field"><td>&#160;</td><td class="field-body"><p class="first">PIL.Image or None</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><code class="xref py py-exc docutils literal notranslate"><span class="pre">ImportError</span></code> – when nxpd or pydot not installed.</li>
-<li><a class="reference internal" href="qiskit.visualization.VisualizationError.html#qiskit.visualization.VisualizationError" title="qiskit.visualization.VisualizationError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">VisualizationError</span></code></a> – If raw=True and filename=None.</li>
+</dd>
+<dt class="field-odd">Tipo de retorno</dt>
+<dd class="field-odd"><p>PIL.Image or None</p>
+</dd>
+<dt class="field-even">Levanta</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ImportError</strong> – when nxpd or pydot not installed.</p></li>
+<li><p><a class="reference internal" href="qiskit.visualization.VisualizationError.html#qiskit.visualization.VisualizationError" title="qiskit.visualization.VisualizationError"><strong>VisualizationError</strong></a> – If raw=True and filename=None.</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
@@ -1311,10 +1318,10 @@ default is False.</li>
 
       <div class="clearer"></div>
     </div><div class="pagenation">
-     <a id="button-prev" href="qiskit.visualization.dag_drawer.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="P">
+     <a id="button-prev" href="qiskit.visualization.iplot_state_qsphere.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="P">
          <div class="pagenation-text">
             <span class="pagenation-direction">Previous</span>
-            <div>dag_drawer</div>
+            <div>iplot_state_qsphere</div>
          </div>
      </a>
      <a id="button-next" href="qiskit.visualization.plot_bloch_multivector.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">

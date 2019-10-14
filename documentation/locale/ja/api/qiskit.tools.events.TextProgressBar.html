@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,6 +48,8 @@
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/js/themeExt.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="索引" href="../genindex.html" />
@@ -625,6 +626,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1215,6 +1222,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1261,76 +1274,73 @@
 <h1>TextProgressBar<a class="headerlink" href="#textprogressbar" title="このヘッドラインへのパーマリンク">¶</a></h1>
 <dl class="class">
 <dt id="qiskit.tools.events.TextProgressBar">
-<em class="property">class </em><code class="descname">TextProgressBar</code><span class="sig-paren">(</span><em>output_handler=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/tools/events/progressbar.html#TextProgressBar"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.tools.events.TextProgressBar" title="この定義へのパーマリンク">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">TextProgressBar</code><span class="sig-paren">(</span><em class="sig-param">output_handler=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/tools/events/progressbar.html#TextProgressBar"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.tools.events.TextProgressBar" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.tools.events.progressbar.BaseProgressBar</span></code></p>
 <p>A simple text-based progress bar.</p>
-<dl class="docutils">
-<dt>output_handler <span class="classifier-delimiter">:</span> <span class="classifier">the handler the progress bar should be written to, default</span></dt>
-<dd>is sys.stdout, another option is sys.stderr</dd>
+<dl class="simple">
+<dt>output_handler<span class="classifier">the handler the progress bar should be written to, default</span></dt><dd><p>is sys.stdout, another option is sys.stderr</p>
+</dd>
 </dl>
 <p class="rubric">Methods Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.tools.events.TextProgressBar.clear" title="qiskit.tools.events.TextProgressBar.clear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">clear</span></code></a>()</td>
-<td>Unsubscribe everything</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.tools.events.TextProgressBar.clear" title="qiskit.tools.events.TextProgressBar.clear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">clear</span></code></a>()</p></td>
+<td><p>Unsubscribe everything</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.tools.events.TextProgressBar.finished" title="qiskit.tools.events.TextProgressBar.finished"><code class="xref py py-obj docutils literal notranslate"><span class="pre">finished</span></code></a>()</td>
-<td>Run when progress bar has completed.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.tools.events.TextProgressBar.finished" title="qiskit.tools.events.TextProgressBar.finished"><code class="xref py py-obj docutils literal notranslate"><span class="pre">finished</span></code></a>()</p></td>
+<td><p>Run when progress bar has completed.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.tools.events.TextProgressBar.start" title="qiskit.tools.events.TextProgressBar.start"><code class="xref py py-obj docutils literal notranslate"><span class="pre">start</span></code></a>(iterations)</td>
-<td>Start the progress bar.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.tools.events.TextProgressBar.start" title="qiskit.tools.events.TextProgressBar.start"><code class="xref py py-obj docutils literal notranslate"><span class="pre">start</span></code></a>(iterations)</p></td>
+<td><p>Start the progress bar.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.tools.events.TextProgressBar.subscribe" title="qiskit.tools.events.TextProgressBar.subscribe"><code class="xref py py-obj docutils literal notranslate"><span class="pre">subscribe</span></code></a>(event,&nbsp;callback)</td>
-<td>Subscribes to an event, associating a callback function to that event, so when the event occurs, the callback will be called.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.tools.events.TextProgressBar.subscribe" title="qiskit.tools.events.TextProgressBar.subscribe"><code class="xref py py-obj docutils literal notranslate"><span class="pre">subscribe</span></code></a>(event, callback)</p></td>
+<td><p>Subscribes to an event, associating a callback function to that event, so when the event occurs, the callback will be called.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.tools.events.TextProgressBar.time_elapsed" title="qiskit.tools.events.TextProgressBar.time_elapsed"><code class="xref py py-obj docutils literal notranslate"><span class="pre">time_elapsed</span></code></a>()</td>
-<td>Return the time elapsed since start.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.tools.events.TextProgressBar.time_elapsed" title="qiskit.tools.events.TextProgressBar.time_elapsed"><code class="xref py py-obj docutils literal notranslate"><span class="pre">time_elapsed</span></code></a>()</p></td>
+<td><p>Return the time elapsed since start.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.tools.events.TextProgressBar.time_remaining_est" title="qiskit.tools.events.TextProgressBar.time_remaining_est"><code class="xref py py-obj docutils literal notranslate"><span class="pre">time_remaining_est</span></code></a>(completed_iter)</td>
-<td>Estimate the remaining time left.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.tools.events.TextProgressBar.time_remaining_est" title="qiskit.tools.events.TextProgressBar.time_remaining_est"><code class="xref py py-obj docutils literal notranslate"><span class="pre">time_remaining_est</span></code></a>(completed_iter)</p></td>
+<td><p>Estimate the remaining time left.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.tools.events.TextProgressBar.unsubscribe" title="qiskit.tools.events.TextProgressBar.unsubscribe"><code class="xref py py-obj docutils literal notranslate"><span class="pre">unsubscribe</span></code></a>(event,&nbsp;callback)</td>
-<td>Unsubscribe a pair event-callback, so the callback will not be called anymore when the event occurs.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.tools.events.TextProgressBar.unsubscribe" title="qiskit.tools.events.TextProgressBar.unsubscribe"><code class="xref py py-obj docutils literal notranslate"><span class="pre">unsubscribe</span></code></a>(event, callback)</p></td>
+<td><p>Unsubscribe a pair event-callback, so the callback will not be called anymore when the event occurs.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.tools.events.TextProgressBar.update" title="qiskit.tools.events.TextProgressBar.update"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update</span></code></a>(n)</td>
-<td>Update status of progress bar.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.tools.events.TextProgressBar.update" title="qiskit.tools.events.TextProgressBar.update"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update</span></code></a>(n)</p></td>
+<td><p>Update status of progress bar.</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Methods Documentation</p>
 <dl class="method">
 <dt id="qiskit.tools.events.TextProgressBar.clear">
-<code class="descname">clear</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.tools.events.TextProgressBar.clear" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">clear</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.tools.events.TextProgressBar.clear" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Unsubscribe everything</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.tools.events.TextProgressBar.finished">
-<code class="descname">finished</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.tools.events.TextProgressBar.finished" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">finished</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.tools.events.TextProgressBar.finished" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Run when progress bar has completed.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.tools.events.TextProgressBar.start">
-<code class="descname">start</code><span class="sig-paren">(</span><em>iterations</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/tools/events/progressbar.html#TextProgressBar.start"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.tools.events.TextProgressBar.start" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">start</code><span class="sig-paren">(</span><em class="sig-param">iterations</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/tools/events/progressbar.html#TextProgressBar.start"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.tools.events.TextProgressBar.start" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Start the progress bar.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><strong>iterations</strong> (<em>int</em>) -- Number of iterations.</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><p><strong>iterations</strong> (<em>int</em>) -- Number of iterations.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.tools.events.TextProgressBar.subscribe">
-<code class="descname">subscribe</code><span class="sig-paren">(</span><em>event</em>, <em>callback</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.tools.events.TextProgressBar.subscribe" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">subscribe</code><span class="sig-paren">(</span><em class="sig-param">event</em>, <em class="sig-param">callback</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.tools.events.TextProgressBar.subscribe" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Subscribes to an event, associating a callback function to that event, so
 when the event occurs, the callback will be called.
 This is a blocking call, so try to keep callbacks as lightweight as possible.</p>
@@ -1338,48 +1348,45 @@ This is a blocking call, so try to keep callbacks as lightweight as possible.</p
 
 <dl class="method">
 <dt id="qiskit.tools.events.TextProgressBar.time_elapsed">
-<code class="descname">time_elapsed</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.tools.events.TextProgressBar.time_elapsed" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">time_elapsed</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.tools.events.TextProgressBar.time_elapsed" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Return the time elapsed since start.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">戻り値:</th><td class="field-body">Time since progress bar started.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">戻り値の型:</th><td class="field-body">elapsed_time</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">戻り値</dt>
+<dd class="field-odd"><p>Time since progress bar started.</p>
+</dd>
+<dt class="field-even">戻り値の型</dt>
+<dd class="field-even"><p>elapsed_time</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.tools.events.TextProgressBar.time_remaining_est">
-<code class="descname">time_remaining_est</code><span class="sig-paren">(</span><em>completed_iter</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.tools.events.TextProgressBar.time_remaining_est" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">time_remaining_est</code><span class="sig-paren">(</span><em class="sig-param">completed_iter</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.tools.events.TextProgressBar.time_remaining_est" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Estimate the remaining time left.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><strong>completed_iter</strong> (<em>int</em>) -- Number of iterations completed.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body">Estimated time remaining.</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body">est_time</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><p><strong>completed_iter</strong> (<em>int</em>) -- Number of iterations completed.</p>
+</dd>
+<dt class="field-even">戻り値</dt>
+<dd class="field-even"><p>Estimated time remaining.</p>
+</dd>
+<dt class="field-odd">戻り値の型</dt>
+<dd class="field-odd"><p>est_time</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.tools.events.TextProgressBar.unsubscribe">
-<code class="descname">unsubscribe</code><span class="sig-paren">(</span><em>event</em>, <em>callback</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.tools.events.TextProgressBar.unsubscribe" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">unsubscribe</code><span class="sig-paren">(</span><em class="sig-param">event</em>, <em class="sig-param">callback</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.tools.events.TextProgressBar.unsubscribe" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Unsubscribe a pair event-callback, so the callback will not be called anymore
 when the event occurs.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.tools.events.TextProgressBar.update">
-<code class="descname">update</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/tools/events/progressbar.html#TextProgressBar.update"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.tools.events.TextProgressBar.update" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">update</code><span class="sig-paren">(</span><em class="sig-param">n</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/tools/events/progressbar.html#TextProgressBar.update"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.tools.events.TextProgressBar.update" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Update status of progress bar.</p>
 </dd></dl>
 

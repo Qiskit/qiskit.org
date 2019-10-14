@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,6 +48,8 @@
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/js/themeExt.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Stichwortverzeichnis" href="../genindex.html" />
@@ -625,6 +626,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1215,6 +1222,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1261,286 +1274,288 @@
 <h1>Operator<a class="headerlink" href="#operator" title="Link zu dieser Überschrift">¶</a></h1>
 <dl class="class">
 <dt id="qiskit.quantum_info.Operator">
-<em class="property">class </em><code class="descname">Operator</code><span class="sig-paren">(</span><em>data</em>, <em>input_dims=None</em>, <em>output_dims=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/operators/operator.html#Operator"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.quantum_info.Operator" title="Link zu dieser Definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">Operator</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">input_dims=None</em>, <em class="sig-param">output_dims=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/operators/operator.html#Operator"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.quantum_info.Operator" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.quantum_info.operators.base_operator.BaseOperator</span></code></p>
 <p>Matrix operator class</p>
 <p>This represents a matrix operator <cite>M</cite> that acts on a statevector as: <cite>M|v⟩</cite>
 or on a density matrix as M.ρ.M^dagger.</p>
+<p>Initialize an operator object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>(</strong><strong>QuantumCircuit or</strong> (<em>data</em>) – Instruction or
+BaseOperator or
+matrix): data to initialize operator.</p></li>
+<li><p><strong>input_dims</strong> (<em>tuple</em>) – the input subsystem dimensions.
+[Default: None]</p></li>
+<li><p><strong>output_dims</strong> (<em>tuple</em>) – the output subsystem dimensions.
+[Default: None]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Verursacht</dt>
+<dd class="field-even"><p><strong>QiskitError</strong> – if input data cannot be initialized as an operator.</p>
+</dd>
+</dl>
+<p>If the input or output dimensions are None, they will be
+automatically determined from the input data. If the input data is
+a Numpy array of shape (2**N, 2**N) qubit systems will be used. If
+the input operator is not an N-qubit operator, it will assign a
+single subsystem with dimension specified by the shape of the input.</p>
 <p class="rubric">Methods Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.quantum_info.Operator.add" title="qiskit.quantum_info.Operator.add"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add</span></code></a>(other)</td>
-<td>Return the operator self + other.</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.quantum_info.Operator.add" title="qiskit.quantum_info.Operator.add"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add</span></code></a>(other)</p></td>
+<td><p>Return the operator self + other.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.quantum_info.Operator.compose" title="qiskit.quantum_info.Operator.compose"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compose</span></code></a>(other[,&nbsp;qargs,&nbsp;front])</td>
-<td>Return the composition channel self∘other.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.quantum_info.Operator.compose" title="qiskit.quantum_info.Operator.compose"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compose</span></code></a>(other[, qargs, front])</p></td>
+<td><p>Return the composition channel self∘other.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.quantum_info.Operator.conjugate" title="qiskit.quantum_info.Operator.conjugate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">conjugate</span></code></a>()</td>
-<td>Return the conjugate of the operator.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.quantum_info.Operator.conjugate" title="qiskit.quantum_info.Operator.conjugate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">conjugate</span></code></a>()</p></td>
+<td><p>Return the conjugate of the operator.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.quantum_info.Operator.equiv" title="qiskit.quantum_info.Operator.equiv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">equiv</span></code></a>(other[,&nbsp;rtol,&nbsp;atol])</td>
-<td>Return True if operators are equivalent up to global phase.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.quantum_info.Operator.equiv" title="qiskit.quantum_info.Operator.equiv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">equiv</span></code></a>(other[, rtol, atol])</p></td>
+<td><p>Return True if operators are equivalent up to global phase.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.quantum_info.Operator.expand" title="qiskit.quantum_info.Operator.expand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">expand</span></code></a>(other)</td>
-<td>Return the tensor product operator other ⊗ self.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.quantum_info.Operator.expand" title="qiskit.quantum_info.Operator.expand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">expand</span></code></a>(other)</p></td>
+<td><p>Return the tensor product operator other ⊗ self.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.quantum_info.Operator.is_unitary" title="qiskit.quantum_info.Operator.is_unitary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_unitary</span></code></a>([atol,&nbsp;rtol])</td>
-<td>Return True if operator is a unitary matrix.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.quantum_info.Operator.is_unitary" title="qiskit.quantum_info.Operator.is_unitary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_unitary</span></code></a>([atol, rtol])</p></td>
+<td><p>Return True if operator is a unitary matrix.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.quantum_info.Operator.multiply" title="qiskit.quantum_info.Operator.multiply"><code class="xref py py-obj docutils literal notranslate"><span class="pre">multiply</span></code></a>(other)</td>
-<td>Return the operator self + other.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.quantum_info.Operator.multiply" title="qiskit.quantum_info.Operator.multiply"><code class="xref py py-obj docutils literal notranslate"><span class="pre">multiply</span></code></a>(other)</p></td>
+<td><p>Return the operator self + other.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.quantum_info.Operator.power" title="qiskit.quantum_info.Operator.power"><code class="xref py py-obj docutils literal notranslate"><span class="pre">power</span></code></a>(n)</td>
-<td>Return the matrix power of the operator.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.quantum_info.Operator.power" title="qiskit.quantum_info.Operator.power"><code class="xref py py-obj docutils literal notranslate"><span class="pre">power</span></code></a>(n)</p></td>
+<td><p>Return the matrix power of the operator.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.quantum_info.Operator.subtract" title="qiskit.quantum_info.Operator.subtract"><code class="xref py py-obj docutils literal notranslate"><span class="pre">subtract</span></code></a>(other)</td>
-<td>Return the operator self - other.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.quantum_info.Operator.subtract" title="qiskit.quantum_info.Operator.subtract"><code class="xref py py-obj docutils literal notranslate"><span class="pre">subtract</span></code></a>(other)</p></td>
+<td><p>Return the operator self - other.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.quantum_info.Operator.tensor" title="qiskit.quantum_info.Operator.tensor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tensor</span></code></a>(other)</td>
-<td>Return the tensor product operator self ⊗ other.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.quantum_info.Operator.tensor" title="qiskit.quantum_info.Operator.tensor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tensor</span></code></a>(other)</p></td>
+<td><p>Return the tensor product operator self ⊗ other.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.quantum_info.Operator.to_instruction" title="qiskit.quantum_info.Operator.to_instruction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_instruction</span></code></a>()</td>
-<td>Convert to a UnitaryGate instruction.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.quantum_info.Operator.to_instruction" title="qiskit.quantum_info.Operator.to_instruction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_instruction</span></code></a>()</p></td>
+<td><p>Convert to a UnitaryGate instruction.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.quantum_info.Operator.to_operator" title="qiskit.quantum_info.Operator.to_operator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_operator</span></code></a>()</td>
-<td>Convert operator to matrix operator class</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.quantum_info.Operator.to_operator" title="qiskit.quantum_info.Operator.to_operator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_operator</span></code></a>()</p></td>
+<td><p>Convert operator to matrix operator class</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.quantum_info.Operator.transpose" title="qiskit.quantum_info.Operator.transpose"><code class="xref py py-obj docutils literal notranslate"><span class="pre">transpose</span></code></a>()</td>
-<td>Return the transpose of the operator.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.quantum_info.Operator.transpose" title="qiskit.quantum_info.Operator.transpose"><code class="xref py py-obj docutils literal notranslate"><span class="pre">transpose</span></code></a>()</p></td>
+<td><p>Return the transpose of the operator.</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Methods Documentation</p>
 <dl class="method">
 <dt id="qiskit.quantum_info.Operator.add">
-<code class="descname">add</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/operators/operator.html#Operator.add"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.quantum_info.Operator.add" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">add</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/operators/operator.html#Operator.add"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.quantum_info.Operator.add" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Return the operator self + other.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><p class="first"><strong>other</strong> (<a class="reference internal" href="qiskit.aqua.Operator.html#qiskit.aqua.Operator" title="qiskit.aqua.Operator"><em>Operator</em></a>) – an operator object.</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body"><p class="first">the operator self + other.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body"><p class="first"><a class="reference internal" href="qiskit.aqua.Operator.html#qiskit.aqua.Operator" title="qiskit.aqua.Operator">Operator</a></p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><code class="xref py py-exc docutils literal notranslate"><span class="pre">QiskitError</span></code> – if other is not an operator, or has incompatible</li>
-<li><code class="xref py py-exc docutils literal notranslate"><span class="pre">dimensions.</span></code></li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><p><strong>other</strong> (<a class="reference internal" href="qiskit.aqua.Operator.html#qiskit.aqua.Operator" title="qiskit.aqua.Operator"><em>Operator</em></a>) – an operator object.</p>
+</dd>
+<dt class="field-even">Rückgabe</dt>
+<dd class="field-even"><p>the operator self + other.</p>
+</dd>
+<dt class="field-odd">Rückgabetyp</dt>
+<dd class="field-odd"><p><a class="reference internal" href="qiskit.aqua.Operator.html#qiskit.aqua.Operator" title="qiskit.aqua.Operator">Operator</a></p>
+</dd>
+<dt class="field-even">Verursacht</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>QiskitError</strong> – if other is not an operator, or has incompatible</p></li>
+<li><p><strong>dimensions.</strong> – </p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.quantum_info.Operator.compose">
-<code class="descname">compose</code><span class="sig-paren">(</span><em>other</em>, <em>qargs=None</em>, <em>front=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/operators/operator.html#Operator.compose"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.quantum_info.Operator.compose" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">compose</code><span class="sig-paren">(</span><em class="sig-param">other</em>, <em class="sig-param">qargs=None</em>, <em class="sig-param">front=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/operators/operator.html#Operator.compose"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.quantum_info.Operator.compose" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Return the composition channel self∘other.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><ul class="first simple">
-<li><strong>other</strong> (<a class="reference internal" href="qiskit.aqua.Operator.html#qiskit.aqua.Operator" title="qiskit.aqua.Operator"><em>Operator</em></a>) – an operator object.</li>
-<li><strong>qargs</strong> (<em>list</em>) – a list of subsystem positions to compose other on.</li>
-<li><strong>front</strong> (<em>bool</em>) – If False compose in standard order other(self(input))
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>other</strong> (<a class="reference internal" href="qiskit.aqua.Operator.html#qiskit.aqua.Operator" title="qiskit.aqua.Operator"><em>Operator</em></a>) – an operator object.</p></li>
+<li><p><strong>qargs</strong> (<em>list</em>) – a list of subsystem positions to compose other on.</p></li>
+<li><p><strong>front</strong> (<em>bool</em>) – If False compose in standard order other(self(input))
 otherwise compose in reverse order self(other(input))
-[default: False]</li>
+[default: False]</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body"><p class="first">The composed operator.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body"><p class="first"><a class="reference internal" href="qiskit.aqua.Operator.html#qiskit.aqua.Operator" title="qiskit.aqua.Operator">Operator</a></p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><code class="xref py py-exc docutils literal notranslate"><span class="pre">QiskitError</span></code> – if other cannot be converted to an Operator or has</li>
-<li>incompatible dimensions.</li>
+</dd>
+<dt class="field-even">Rückgabe</dt>
+<dd class="field-even"><p>The composed operator.</p>
+</dd>
+<dt class="field-odd">Rückgabetyp</dt>
+<dd class="field-odd"><p><a class="reference internal" href="qiskit.aqua.Operator.html#qiskit.aqua.Operator" title="qiskit.aqua.Operator">Operator</a></p>
+</dd>
+<dt class="field-even">Verursacht</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>QiskitError</strong> – if other cannot be converted to an Operator or has</p></li>
+<li><p><strong>incompatible dimensions.</strong> – </p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.quantum_info.Operator.conjugate">
-<code class="descname">conjugate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/operators/operator.html#Operator.conjugate"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.quantum_info.Operator.conjugate" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">conjugate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/operators/operator.html#Operator.conjugate"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.quantum_info.Operator.conjugate" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Return the conjugate of the operator.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.quantum_info.Operator.equiv">
-<code class="descname">equiv</code><span class="sig-paren">(</span><em>other</em>, <em>rtol=None</em>, <em>atol=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/operators/operator.html#Operator.equiv"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.quantum_info.Operator.equiv" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">equiv</code><span class="sig-paren">(</span><em class="sig-param">other</em>, <em class="sig-param">rtol=None</em>, <em class="sig-param">atol=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/operators/operator.html#Operator.equiv"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.quantum_info.Operator.equiv" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Return True if operators are equivalent up to global phase.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><ul class="first simple">
-<li><strong>other</strong> (<a class="reference internal" href="qiskit.aqua.Operator.html#qiskit.aqua.Operator" title="qiskit.aqua.Operator"><em>Operator</em></a>) – an operator object.</li>
-<li><strong>rtol</strong> (<em>float</em>) – relative tolerance value for comparison.</li>
-<li><strong>atol</strong> (<em>float</em>) – absolute tolerance value for comparison.</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>other</strong> (<a class="reference internal" href="qiskit.aqua.Operator.html#qiskit.aqua.Operator" title="qiskit.aqua.Operator"><em>Operator</em></a>) – an operator object.</p></li>
+<li><p><strong>rtol</strong> (<em>float</em>) – relative tolerance value for comparison.</p></li>
+<li><p><strong>atol</strong> (<em>float</em>) – absolute tolerance value for comparison.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body"><p class="first">True if operators are equivalent up to global phase.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body"><p class="first last">bool</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Rückgabe</dt>
+<dd class="field-even"><p>True if operators are equivalent up to global phase.</p>
+</dd>
+<dt class="field-odd">Rückgabetyp</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.quantum_info.Operator.expand">
-<code class="descname">expand</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/operators/operator.html#Operator.expand"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.quantum_info.Operator.expand" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">expand</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/operators/operator.html#Operator.expand"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.quantum_info.Operator.expand" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Return the tensor product operator other ⊗ self.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><strong>other</strong> (<a class="reference internal" href="qiskit.aqua.Operator.html#qiskit.aqua.Operator" title="qiskit.aqua.Operator"><em>Operator</em></a>) – an operator object.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body">the tensor product operator other ⊗ self.</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body"><a class="reference internal" href="qiskit.aqua.Operator.html#qiskit.aqua.Operator" title="qiskit.aqua.Operator">Operator</a></td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal notranslate"><span class="pre">QiskitError</span></code> – if other cannot be converted to an operator.</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><p><strong>other</strong> (<a class="reference internal" href="qiskit.aqua.Operator.html#qiskit.aqua.Operator" title="qiskit.aqua.Operator"><em>Operator</em></a>) – an operator object.</p>
+</dd>
+<dt class="field-even">Rückgabe</dt>
+<dd class="field-even"><p>the tensor product operator other ⊗ self.</p>
+</dd>
+<dt class="field-odd">Rückgabetyp</dt>
+<dd class="field-odd"><p><a class="reference internal" href="qiskit.aqua.Operator.html#qiskit.aqua.Operator" title="qiskit.aqua.Operator">Operator</a></p>
+</dd>
+<dt class="field-even">Verursacht</dt>
+<dd class="field-even"><p><strong>QiskitError</strong> – if other cannot be converted to an operator.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.quantum_info.Operator.is_unitary">
-<code class="descname">is_unitary</code><span class="sig-paren">(</span><em>atol=None</em>, <em>rtol=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/operators/operator.html#Operator.is_unitary"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.quantum_info.Operator.is_unitary" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">is_unitary</code><span class="sig-paren">(</span><em class="sig-param">atol=None</em>, <em class="sig-param">rtol=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/operators/operator.html#Operator.is_unitary"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.quantum_info.Operator.is_unitary" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Return True if operator is a unitary matrix.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.quantum_info.Operator.multiply">
-<code class="descname">multiply</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/operators/operator.html#Operator.multiply"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.quantum_info.Operator.multiply" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">multiply</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/operators/operator.html#Operator.multiply"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.quantum_info.Operator.multiply" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Return the operator self + other.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><strong>other</strong> (<em>complex</em>) – a complex number.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body">the operator other * self.</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body"><a class="reference internal" href="qiskit.aqua.Operator.html#qiskit.aqua.Operator" title="qiskit.aqua.Operator">Operator</a></td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal notranslate"><span class="pre">QiskitError</span></code> – if other is not a valid complex number.</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><p><strong>other</strong> (<em>complex</em>) – a complex number.</p>
+</dd>
+<dt class="field-even">Rückgabe</dt>
+<dd class="field-even"><p>the operator other * self.</p>
+</dd>
+<dt class="field-odd">Rückgabetyp</dt>
+<dd class="field-odd"><p><a class="reference internal" href="qiskit.aqua.Operator.html#qiskit.aqua.Operator" title="qiskit.aqua.Operator">Operator</a></p>
+</dd>
+<dt class="field-even">Verursacht</dt>
+<dd class="field-even"><p><strong>QiskitError</strong> – if other is not a valid complex number.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.quantum_info.Operator.power">
-<code class="descname">power</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/operators/operator.html#Operator.power"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.quantum_info.Operator.power" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">power</code><span class="sig-paren">(</span><em class="sig-param">n</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/operators/operator.html#Operator.power"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.quantum_info.Operator.power" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Return the matrix power of the operator.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><p class="first"><strong>n</strong> (<em>int</em>) – the power to raise the matrix to.</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body"><p class="first">the n-times composed operator.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body"><p class="first"><a class="reference internal" href="qiskit.aqua.operators.BaseOperator.html#qiskit.aqua.operators.BaseOperator" title="qiskit.aqua.operators.BaseOperator">BaseOperator</a></p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><code class="xref py py-exc docutils literal notranslate"><span class="pre">QiskitError</span></code> – if the input and output dimensions of the operator</li>
-<li>are not equal, or the power is not a positive integer.</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><p><strong>n</strong> (<em>int</em>) – the power to raise the matrix to.</p>
+</dd>
+<dt class="field-even">Rückgabe</dt>
+<dd class="field-even"><p>the n-times composed operator.</p>
+</dd>
+<dt class="field-odd">Rückgabetyp</dt>
+<dd class="field-odd"><p><a class="reference internal" href="qiskit.aqua.operators.BaseOperator.html#qiskit.aqua.operators.BaseOperator" title="qiskit.aqua.operators.BaseOperator">BaseOperator</a></p>
+</dd>
+<dt class="field-even">Verursacht</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>QiskitError</strong> – if the input and output dimensions of the operator</p></li>
+<li><p><strong>are not equal</strong><strong>, or </strong><strong>the power is not a positive integer.</strong> – </p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.quantum_info.Operator.subtract">
-<code class="descname">subtract</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/operators/operator.html#Operator.subtract"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.quantum_info.Operator.subtract" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">subtract</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/operators/operator.html#Operator.subtract"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.quantum_info.Operator.subtract" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Return the operator self - other.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><p class="first"><strong>other</strong> (<a class="reference internal" href="qiskit.aqua.Operator.html#qiskit.aqua.Operator" title="qiskit.aqua.Operator"><em>Operator</em></a>) – an operator object.</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body"><p class="first">the operator self - other.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body"><p class="first"><a class="reference internal" href="qiskit.aqua.Operator.html#qiskit.aqua.Operator" title="qiskit.aqua.Operator">Operator</a></p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><code class="xref py py-exc docutils literal notranslate"><span class="pre">QiskitError</span></code> – if other is not an operator, or has incompatible</li>
-<li><code class="xref py py-exc docutils literal notranslate"><span class="pre">dimensions.</span></code></li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><p><strong>other</strong> (<a class="reference internal" href="qiskit.aqua.Operator.html#qiskit.aqua.Operator" title="qiskit.aqua.Operator"><em>Operator</em></a>) – an operator object.</p>
+</dd>
+<dt class="field-even">Rückgabe</dt>
+<dd class="field-even"><p>the operator self - other.</p>
+</dd>
+<dt class="field-odd">Rückgabetyp</dt>
+<dd class="field-odd"><p><a class="reference internal" href="qiskit.aqua.Operator.html#qiskit.aqua.Operator" title="qiskit.aqua.Operator">Operator</a></p>
+</dd>
+<dt class="field-even">Verursacht</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>QiskitError</strong> – if other is not an operator, or has incompatible</p></li>
+<li><p><strong>dimensions.</strong> – </p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.quantum_info.Operator.tensor">
-<code class="descname">tensor</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/operators/operator.html#Operator.tensor"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.quantum_info.Operator.tensor" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">tensor</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/operators/operator.html#Operator.tensor"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.quantum_info.Operator.tensor" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Return the tensor product operator self ⊗ other.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><strong>other</strong> (<a class="reference internal" href="qiskit.aqua.Operator.html#qiskit.aqua.Operator" title="qiskit.aqua.Operator"><em>Operator</em></a>) – a operator subclass object.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body">the tensor product operator self ⊗ other.</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body"><a class="reference internal" href="qiskit.aqua.Operator.html#qiskit.aqua.Operator" title="qiskit.aqua.Operator">Operator</a></td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal notranslate"><span class="pre">QiskitError</span></code> – if other cannot be converted to an operator.</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><p><strong>other</strong> (<a class="reference internal" href="qiskit.aqua.Operator.html#qiskit.aqua.Operator" title="qiskit.aqua.Operator"><em>Operator</em></a>) – a operator subclass object.</p>
+</dd>
+<dt class="field-even">Rückgabe</dt>
+<dd class="field-even"><p>the tensor product operator self ⊗ other.</p>
+</dd>
+<dt class="field-odd">Rückgabetyp</dt>
+<dd class="field-odd"><p><a class="reference internal" href="qiskit.aqua.Operator.html#qiskit.aqua.Operator" title="qiskit.aqua.Operator">Operator</a></p>
+</dd>
+<dt class="field-even">Verursacht</dt>
+<dd class="field-even"><p><strong>QiskitError</strong> – if other cannot be converted to an operator.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.quantum_info.Operator.to_instruction">
-<code class="descname">to_instruction</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/operators/operator.html#Operator.to_instruction"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.quantum_info.Operator.to_instruction" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">to_instruction</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/operators/operator.html#Operator.to_instruction"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.quantum_info.Operator.to_instruction" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Convert to a UnitaryGate instruction.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.quantum_info.Operator.to_operator">
-<code class="descname">to_operator</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/operators/operator.html#Operator.to_operator"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.quantum_info.Operator.to_operator" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">to_operator</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/operators/operator.html#Operator.to_operator"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.quantum_info.Operator.to_operator" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Convert operator to matrix operator class</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.quantum_info.Operator.transpose">
-<code class="descname">transpose</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/operators/operator.html#Operator.transpose"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.quantum_info.Operator.transpose" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">transpose</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/operators/operator.html#Operator.transpose"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.quantum_info.Operator.transpose" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Return the transpose of the operator.</p>
 </dd></dl>
 

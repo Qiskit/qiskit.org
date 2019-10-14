@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,6 +48,8 @@
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/js/themeExt.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Stichwortverzeichnis" href="../genindex.html" />
@@ -625,6 +626,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1215,6 +1222,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1261,85 +1274,80 @@
 <h1>assemble<a class="headerlink" href="#assemble" title="Link zu dieser Überschrift">¶</a></h1>
 <dl class="function">
 <dt id="qiskit.compiler.assemble">
-<code class="descname">assemble</code><span class="sig-paren">(</span><em>experiments</em>, <em>backend=None</em>, <em>qobj_id=None</em>, <em>qobj_header=None</em>, <em>shots=1024</em>, <em>memory=False</em>, <em>max_credits=None</em>, <em>seed_simulator=None</em>, <em>qubit_lo_freq=None</em>, <em>meas_lo_freq=None</em>, <em>qubit_lo_range=None</em>, <em>meas_lo_range=None</em>, <em>schedule_los=None</em>, <em>meas_level=2</em>, <em>meas_return='avg'</em>, <em>meas_map=None</em>, <em>memory_slot_size=100</em>, <em>rep_time=None</em>, <em>parameter_binds=None</em>, <em>**run_config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/compiler/assemble.html#assemble"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.compiler.assemble" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">assemble</code><span class="sig-paren">(</span><em class="sig-param">experiments</em>, <em class="sig-param">backend=None</em>, <em class="sig-param">qobj_id=None</em>, <em class="sig-param">qobj_header=None</em>, <em class="sig-param">shots=1024</em>, <em class="sig-param">memory=False</em>, <em class="sig-param">max_credits=None</em>, <em class="sig-param">seed_simulator=None</em>, <em class="sig-param">qubit_lo_freq=None</em>, <em class="sig-param">meas_lo_freq=None</em>, <em class="sig-param">qubit_lo_range=None</em>, <em class="sig-param">meas_lo_range=None</em>, <em class="sig-param">schedule_los=None</em>, <em class="sig-param">meas_level=2</em>, <em class="sig-param">meas_return='avg'</em>, <em class="sig-param">meas_map=None</em>, <em class="sig-param">memory_slot_size=100</em>, <em class="sig-param">rep_time=None</em>, <em class="sig-param">parameter_binds=None</em>, <em class="sig-param">**run_config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/compiler/assemble.html#assemble"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.compiler.assemble" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Assemble a list of circuits or pulse schedules into a Qobj.</p>
 <p>This function serializes the payloads, which could be either circuits or schedules,
 to create Qobj „experiments“. It further annotates the experiment payload with
 header and configurations.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><ul class="first simple">
-<li><strong>experiments</strong> (<a class="reference internal" href="qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit" title="qiskit.circuit.QuantumCircuit"><em>QuantumCircuit</em></a><em> or </em><em>list</em><em>[</em><a class="reference internal" href="qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit" title="qiskit.circuit.QuantumCircuit"><em>QuantumCircuit</em></a><em>] or </em><a class="reference internal" href="qiskit.pulse.Schedule.html#qiskit.pulse.Schedule" title="qiskit.pulse.Schedule"><em>Schedule</em></a><em> or </em><em>list</em><em>[</em><a class="reference internal" href="qiskit.pulse.Schedule.html#qiskit.pulse.Schedule" title="qiskit.pulse.Schedule"><em>Schedule</em></a><em>]</em>) – Circuit(s) or pulse schedule(s) to execute</li>
-<li><strong>backend</strong> (<a class="reference internal" href="qiskit.providers.BaseBackend.html#qiskit.providers.BaseBackend" title="qiskit.providers.BaseBackend"><em>BaseBackend</em></a>) – If set, some runtime options are automatically grabbed from
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>experiments</strong> (<a class="reference internal" href="qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit" title="qiskit.circuit.QuantumCircuit"><em>QuantumCircuit</em></a><em> or </em><em>list</em><em>[</em><a class="reference internal" href="qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit" title="qiskit.circuit.QuantumCircuit"><em>QuantumCircuit</em></a><em>] or </em><a class="reference internal" href="qiskit.pulse.Schedule.html#qiskit.pulse.Schedule" title="qiskit.pulse.Schedule"><em>Schedule</em></a><em> or </em><em>list</em><em>[</em><a class="reference internal" href="qiskit.pulse.Schedule.html#qiskit.pulse.Schedule" title="qiskit.pulse.Schedule"><em>Schedule</em></a><em>]</em>) – Circuit(s) or pulse schedule(s) to execute</p></li>
+<li><p><strong>backend</strong> (<a class="reference internal" href="qiskit.providers.BaseBackend.html#qiskit.providers.BaseBackend" title="qiskit.providers.BaseBackend"><em>BaseBackend</em></a>) – If set, some runtime options are automatically grabbed from
 backend.configuration() and backend.defaults().
 If any other option is explicitly set (e.g. rep_rate), it
 will override the backend’s.
 If any other options is set in the run_config, it will
-also override the backend’s.</li>
-<li><strong>qobj_id</strong> (<em>str</em>) – String identifier to annotate the Qobj</li>
-<li><strong>qobj_header</strong> (<a class="reference internal" href="qiskit.qobj.QobjHeader.html#qiskit.qobj.QobjHeader" title="qiskit.qobj.QobjHeader"><em>QobjHeader</em></a><em> or </em><em>dict</em>) – User input that will be inserted in Qobj header, and will also be
-copied to the corresponding Result header. Headers do not affect the run.</li>
-<li><strong>shots</strong> (<em>int</em>) – Number of repetitions of each circuit, for sampling. Default: 1024</li>
-<li><strong>memory</strong> (<em>bool</em>) – If True, per-shot measurement bitstrings are returned as well
+also override the backend’s.</p></li>
+<li><p><strong>qobj_id</strong> (<em>str</em>) – String identifier to annotate the Qobj</p></li>
+<li><p><strong>qobj_header</strong> (<a class="reference internal" href="qiskit.qobj.QobjHeader.html#qiskit.qobj.QobjHeader" title="qiskit.qobj.QobjHeader"><em>QobjHeader</em></a><em> or </em><em>dict</em>) – User input that will be inserted in Qobj header, and will also be
+copied to the corresponding Result header. Headers do not affect the run.</p></li>
+<li><p><strong>shots</strong> (<em>int</em>) – Number of repetitions of each circuit, for sampling. Default: 1024</p></li>
+<li><p><strong>memory</strong> (<em>bool</em>) – If True, per-shot measurement bitstrings are returned as well
 (provided the backend supports it). For OpenPulse jobs, only
-measurement level 2 supports this option. Default: False</li>
-<li><strong>max_credits</strong> (<em>int</em>) – Maximum credits to spend on job. Default: 10</li>
-<li><strong>seed_simulator</strong> (<em>int</em>) – Random seed to control sampling, for when backend is a simulator</li>
-<li><strong>qubit_lo_freq</strong> (<em>list</em>) – List of default qubit lo frequencies. Will be overridden by
-<cite>schedule_los</cite> if set.</li>
-<li><strong>meas_lo_freq</strong> (<em>list</em>) – List of default meas lo frequencies. Will be overridden by
-<cite>schedule_los</cite> if set.</li>
-<li><strong>qubit_lo_range</strong> (<em>list</em>) – List of drive lo ranges used to validate that the supplied qubit los
-are valid.</li>
-<li><strong>meas_lo_range</strong> (<em>list</em>) – List of meas lo ranges used to validate that the supplied measurement los
-are valid.</li>
-<li><strong>schedule_los</strong> (<em>None</em><em> or </em><em>list</em><em>[</em><em>Union</em><em>[</em><em>Dict</em><em>[</em><em>PulseChannel</em><em>, </em><em>float</em><em>]</em><em>, </em><a class="reference internal" href="qiskit.pulse.LoConfig.html#qiskit.pulse.LoConfig" title="qiskit.pulse.LoConfig"><em>LoConfig</em></a><em>]</em><em>] or                       </em><em>Union</em><em>[</em><em>Dict</em><em>[</em><em>PulseChannel</em><em>, </em><em>float</em><em>]</em><em>, </em><a class="reference internal" href="qiskit.pulse.LoConfig.html#qiskit.pulse.LoConfig" title="qiskit.pulse.LoConfig"><em>LoConfig</em></a><em>]</em>) – Experiment LO configurations</li>
-<li><strong>meas_level</strong> (<em>int</em>) – Set the appropriate level of the measurement output for pulse experiments.</li>
-<li><strong>meas_return</strong> (<em>str</em>) – <p>Level of measurement data for the backend to return
+measurement level 2 supports this option. Default: False</p></li>
+<li><p><strong>max_credits</strong> (<em>int</em>) – Maximum credits to spend on job. Default: 10</p></li>
+<li><p><strong>seed_simulator</strong> (<em>int</em>) – Random seed to control sampling, for when backend is a simulator</p></li>
+<li><p><strong>qubit_lo_freq</strong> (<em>list</em>) – List of default qubit lo frequencies. Will be overridden by
+<cite>schedule_los</cite> if set.</p></li>
+<li><p><strong>meas_lo_freq</strong> (<em>list</em>) – List of default meas lo frequencies. Will be overridden by
+<cite>schedule_los</cite> if set.</p></li>
+<li><p><strong>qubit_lo_range</strong> (<em>list</em>) – List of drive lo ranges used to validate that the supplied qubit los
+are valid.</p></li>
+<li><p><strong>meas_lo_range</strong> (<em>list</em>) – List of meas lo ranges used to validate that the supplied measurement los
+are valid.</p></li>
+<li><p><strong>schedule_los</strong> (<em>None</em><em> or </em><em>list</em><em>[</em><em>Union</em><em>[</em><em>Dict</em><em>[</em><em>PulseChannel</em><em>, </em><em>float</em><em>]</em><em>, </em><a class="reference internal" href="qiskit.pulse.LoConfig.html#qiskit.pulse.LoConfig" title="qiskit.pulse.LoConfig"><em>LoConfig</em></a><em>]</em><em>] or                       </em><em>Union</em><em>[</em><em>Dict</em><em>[</em><em>PulseChannel</em><em>, </em><em>float</em><em>]</em><em>, </em><a class="reference internal" href="qiskit.pulse.LoConfig.html#qiskit.pulse.LoConfig" title="qiskit.pulse.LoConfig"><em>LoConfig</em></a><em>]</em>) – Experiment LO configurations</p></li>
+<li><p><strong>meas_level</strong> (<em>int</em>) – Set the appropriate level of the measurement output for pulse experiments.</p></li>
+<li><p><strong>meas_return</strong> (<em>str</em>) – <p>Level of measurement data for the backend to return
 For <cite>meas_level</cite> 0 and 1:</p>
 <blockquote>
 <div><ul>
-<li>“single“ returns information from every shot.</li>
-<li>“avg“ returns average measurement output (averaged over number of shots).</li>
+<li><p>“single“ returns information from every shot.</p></li>
+<li><p>“avg“ returns average measurement output (averaged over number of shots).</p></li>
 </ul>
 </div></blockquote>
-</li>
-<li><strong>meas_map</strong> (<em>list</em>) – List of lists, containing qubits that must be measured together.</li>
-<li><strong>memory_slot_size</strong> (<em>int</em>) – Size of each memory slot if the output is Level 0.</li>
-<li><strong>rep_time</strong> (<em>int</em>) – repetition time of the experiment in μs.
+</p></li>
+<li><p><strong>meas_map</strong> (<em>list</em>) – List of lists, containing qubits that must be measured together.</p></li>
+<li><p><strong>memory_slot_size</strong> (<em>int</em>) – Size of each memory slot if the output is Level 0.</p></li>
+<li><p><strong>rep_time</strong> (<em>int</em>) – repetition time of the experiment in μs.
 The delay between experiments will be rep_time.
-Must be from the list provided by the device.</li>
-<li><strong>(</strong><strong>list</strong><strong>[</strong><strong>dict{Parameter</strong> (<em>parameter_binds</em>) – Value}]):
+Must be from the list provided by the device.</p></li>
+<li><p><strong>(</strong><strong>list</strong><strong>[</strong><strong>dict{Parameter</strong> (<em>parameter_binds</em>) – Value}]):
 List of Parameter bindings over which the set of experiments will be
 executed. Each list element (bind) should be of the form
 {Parameter1: value1, Parameter2: value2, …}. All binds will be
 executed across all experiments, e.g. if parameter_binds is a
 length-n list, and there are m experiments, a total of m x n
-experiments will be run (one for each experiment/bind pair).</li>
-<li><strong>**run_config</strong> (<em>dict</em>) – extra arguments used to configure the run (e.g. for Aer configurable
+experiments will be run (one for each experiment/bind pair).</p></li>
+<li><p><strong>**run_config</strong> (<em>dict</em>) – extra arguments used to configure the run (e.g. for Aer configurable
 backends). Refer to the backend documentation for details on these
-arguments.</li>
+arguments.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body"><p class="first"><dl class="docutils">
-<dt>a qobj which can be run on a backend. Depending on the type of input,</dt>
-<dd><p class="first last">this will be either a QasmQobj or a PulseQobj.</p>
+</dd>
+<dt class="field-even">Rückgabe</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>a qobj which can be run on a backend. Depending on the type of input,</dt><dd><p>this will be either a QasmQobj or a PulseQobj.</p>
 </dd>
 </dl>
 </p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body"><p class="first"><a class="reference internal" href="qiskit.qobj.Qobj.html#qiskit.qobj.Qobj" title="qiskit.qobj.Qobj">Qobj</a></p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal notranslate"><span class="pre">QiskitError</span></code> – if the input cannot be interpreted as either circuits or schedules</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-odd">Rückgabetyp</dt>
+<dd class="field-odd"><p><a class="reference internal" href="qiskit.qobj.Qobj.html#qiskit.qobj.Qobj" title="qiskit.qobj.Qobj">Qobj</a></p>
+</dd>
+<dt class="field-even">Verursacht</dt>
+<dd class="field-even"><p><strong>QiskitError</strong> – if the input cannot be interpreted as either circuits or schedules</p>
+</dd>
+</dl>
 </dd></dl>
 
 </div>

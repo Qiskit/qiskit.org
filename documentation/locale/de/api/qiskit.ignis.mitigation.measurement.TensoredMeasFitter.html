@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,6 +48,8 @@
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/js/themeExt.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Stichwortverzeichnis" href="../genindex.html" />
@@ -625,6 +626,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1215,6 +1222,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1261,138 +1274,142 @@
 <h1>TensoredMeasFitter<a class="headerlink" href="#tensoredmeasfitter" title="Link zu dieser Überschrift">¶</a></h1>
 <dl class="class">
 <dt id="qiskit.ignis.mitigation.measurement.TensoredMeasFitter">
-<em class="property">class </em><code class="descname">TensoredMeasFitter</code><span class="sig-paren">(</span><em>results</em>, <em>mit_pattern</em>, <em>substate_labels_list=None</em>, <em>circlabel=''</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/mitigation/measurement/fitters.html#TensoredMeasFitter"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.ignis.mitigation.measurement.TensoredMeasFitter" title="Link zu dieser Definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">TensoredMeasFitter</code><span class="sig-paren">(</span><em class="sig-param">results</em>, <em class="sig-param">mit_pattern</em>, <em class="sig-param">substate_labels_list=None</em>, <em class="sig-param">circlabel=''</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/mitigation/measurement/fitters.html#TensoredMeasFitter"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.ignis.mitigation.measurement.TensoredMeasFitter" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Measurement correction fitter for a tensored calibration</p>
+<p>Initialize a measurement calibration matrix from the results of running
+the circuits returned by <cite>measurement_calibration_circuits</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>results</strong> – the results of running the measurement calibration</p></li>
+<li><p><strong>If this is None the user will set calibration matrices</strong> (<em>circuits.</em>) – </p></li>
+<li><p><strong>later</strong> – </p></li>
+<li><p><strong>mit_pattern</strong> (<em>list of lists of integers</em>) – qubits to perform the</p></li>
+<li><p><strong>correction on</strong><strong>, </strong><strong>divided to groups according to tensors</strong> (<em>measurement</em>) – </p></li>
+<li><p><strong>substate_labels_list</strong> (<em>list of lists of strings</em>) – for each</p></li>
+<li><p><strong>matrix</strong><strong>, </strong><strong>the labels of its rows and columns.</strong> (<em>calibration</em>) – </p></li>
+<li><p><strong>None then the labels are ordered lexicographically</strong> (<em>If</em>) – </p></li>
+</ul>
+</dd>
+</dl>
 <p class="rubric">Attributes Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.mitigation.measurement.TensoredMeasFitter.cal_matrices" title="qiskit.ignis.mitigation.measurement.TensoredMeasFitter.cal_matrices"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cal_matrices</span></code></a></td>
-<td>Return cal_matrices.</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.ignis.mitigation.measurement.TensoredMeasFitter.cal_matrices" title="qiskit.ignis.mitigation.measurement.TensoredMeasFitter.cal_matrices"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cal_matrices</span></code></a></p></td>
+<td><p>Return cal_matrices.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.ignis.mitigation.measurement.TensoredMeasFitter.filter" title="qiskit.ignis.mitigation.measurement.TensoredMeasFitter.filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter</span></code></a></td>
-<td>return a measurement filter using the cal matrices</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.ignis.mitigation.measurement.TensoredMeasFitter.filter" title="qiskit.ignis.mitigation.measurement.TensoredMeasFitter.filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter</span></code></a></p></td>
+<td><p>return a measurement filter using the cal matrices</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.mitigation.measurement.TensoredMeasFitter.nqubits" title="qiskit.ignis.mitigation.measurement.TensoredMeasFitter.nqubits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nqubits</span></code></a></td>
-<td>Return _qubit_list_sizes</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.ignis.mitigation.measurement.TensoredMeasFitter.nqubits" title="qiskit.ignis.mitigation.measurement.TensoredMeasFitter.nqubits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nqubits</span></code></a></p></td>
+<td><p>Return _qubit_list_sizes</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.ignis.mitigation.measurement.TensoredMeasFitter.substate_labels_list" title="qiskit.ignis.mitigation.measurement.TensoredMeasFitter.substate_labels_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">substate_labels_list</span></code></a></td>
-<td>Return _substate_labels_list</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.ignis.mitigation.measurement.TensoredMeasFitter.substate_labels_list" title="qiskit.ignis.mitigation.measurement.TensoredMeasFitter.substate_labels_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">substate_labels_list</span></code></a></p></td>
+<td><p>Return _substate_labels_list</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Methods Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.mitigation.measurement.TensoredMeasFitter.add_data" title="qiskit.ignis.mitigation.measurement.TensoredMeasFitter.add_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_data</span></code></a>(new_results[,&nbsp;rebuild_cal_matrix])</td>
-<td>Add measurement calibration data</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.ignis.mitigation.measurement.TensoredMeasFitter.add_data" title="qiskit.ignis.mitigation.measurement.TensoredMeasFitter.add_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_data</span></code></a>(new_results[, rebuild_cal_matrix])</p></td>
+<td><p>Add measurement calibration data</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.ignis.mitigation.measurement.TensoredMeasFitter.plot_calibration" title="qiskit.ignis.mitigation.measurement.TensoredMeasFitter.plot_calibration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_calibration</span></code></a>([cal_index,&nbsp;ax,&nbsp;show_plot])</td>
-<td>Plot one of the calibration matrices (2D color grid plot)</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.ignis.mitigation.measurement.TensoredMeasFitter.plot_calibration" title="qiskit.ignis.mitigation.measurement.TensoredMeasFitter.plot_calibration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_calibration</span></code></a>([cal_index, ax, show_plot])</p></td>
+<td><p>Plot one of the calibration matrices (2D color grid plot)</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.mitigation.measurement.TensoredMeasFitter.readout_fidelity" title="qiskit.ignis.mitigation.measurement.TensoredMeasFitter.readout_fidelity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">readout_fidelity</span></code></a>([cal_index,&nbsp;label_list])</td>
-<td>Based on the results output the readout fidelity, which is the average of the diagonal entries in the calibration matrices</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.ignis.mitigation.measurement.TensoredMeasFitter.readout_fidelity" title="qiskit.ignis.mitigation.measurement.TensoredMeasFitter.readout_fidelity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">readout_fidelity</span></code></a>([cal_index, label_list])</p></td>
+<td><p>Based on the results output the readout fidelity, which is the average of the diagonal entries in the calibration matrices</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Attributes Documentation</p>
 <dl class="attribute">
 <dt id="qiskit.ignis.mitigation.measurement.TensoredMeasFitter.cal_matrices">
-<code class="descname">cal_matrices</code><a class="headerlink" href="#qiskit.ignis.mitigation.measurement.TensoredMeasFitter.cal_matrices" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">cal_matrices</code><a class="headerlink" href="#qiskit.ignis.mitigation.measurement.TensoredMeasFitter.cal_matrices" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Return cal_matrices.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.ignis.mitigation.measurement.TensoredMeasFitter.filter">
-<code class="descname">filter</code><a class="headerlink" href="#qiskit.ignis.mitigation.measurement.TensoredMeasFitter.filter" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">filter</code><a class="headerlink" href="#qiskit.ignis.mitigation.measurement.TensoredMeasFitter.filter" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>return a measurement filter using the cal matrices</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.ignis.mitigation.measurement.TensoredMeasFitter.nqubits">
-<code class="descname">nqubits</code><a class="headerlink" href="#qiskit.ignis.mitigation.measurement.TensoredMeasFitter.nqubits" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">nqubits</code><a class="headerlink" href="#qiskit.ignis.mitigation.measurement.TensoredMeasFitter.nqubits" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Return _qubit_list_sizes</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.ignis.mitigation.measurement.TensoredMeasFitter.substate_labels_list">
-<code class="descname">substate_labels_list</code><a class="headerlink" href="#qiskit.ignis.mitigation.measurement.TensoredMeasFitter.substate_labels_list" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">substate_labels_list</code><a class="headerlink" href="#qiskit.ignis.mitigation.measurement.TensoredMeasFitter.substate_labels_list" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Return _substate_labels_list</p>
 </dd></dl>
 
 <p class="rubric">Methods Documentation</p>
 <dl class="method">
 <dt id="qiskit.ignis.mitigation.measurement.TensoredMeasFitter.add_data">
-<code class="descname">add_data</code><span class="sig-paren">(</span><em>new_results</em>, <em>rebuild_cal_matrix=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/mitigation/measurement/fitters.html#TensoredMeasFitter.add_data"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.ignis.mitigation.measurement.TensoredMeasFitter.add_data" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">add_data</code><span class="sig-paren">(</span><em class="sig-param">new_results</em>, <em class="sig-param">rebuild_cal_matrix=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/mitigation/measurement/fitters.html#TensoredMeasFitter.add_data"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.ignis.mitigation.measurement.TensoredMeasFitter.add_data" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Add measurement calibration data</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><ul class="first last simple">
-<li><strong>new_results</strong> – a single result or list of results</li>
-<li><strong>rebuild_cal_matrix</strong> – rebuild the calibration matrix</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>new_results</strong> – a single result or list of results</p></li>
+<li><p><strong>rebuild_cal_matrix</strong> – rebuild the calibration matrix</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.ignis.mitigation.measurement.TensoredMeasFitter.plot_calibration">
-<code class="descname">plot_calibration</code><span class="sig-paren">(</span><em>cal_index=0</em>, <em>ax=None</em>, <em>show_plot=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/mitigation/measurement/fitters.html#TensoredMeasFitter.plot_calibration"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.ignis.mitigation.measurement.TensoredMeasFitter.plot_calibration" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">plot_calibration</code><span class="sig-paren">(</span><em class="sig-param">cal_index=0</em>, <em class="sig-param">ax=None</em>, <em class="sig-param">show_plot=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/mitigation/measurement/fitters.html#TensoredMeasFitter.plot_calibration"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.ignis.mitigation.measurement.TensoredMeasFitter.plot_calibration" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Plot one of the calibration matrices (2D color grid plot)</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><ul class="first last simple">
-<li><strong>cal_index</strong> – calibration matrix to plot</li>
-<li><strong>show_plot</strong> (<em>bool</em>) – call plt.show()</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cal_index</strong> – calibration matrix to plot</p></li>
+<li><p><strong>show_plot</strong> (<em>bool</em>) – call plt.show()</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.ignis.mitigation.measurement.TensoredMeasFitter.readout_fidelity">
-<code class="descname">readout_fidelity</code><span class="sig-paren">(</span><em>cal_index=0</em>, <em>label_list=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/mitigation/measurement/fitters.html#TensoredMeasFitter.readout_fidelity"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.ignis.mitigation.measurement.TensoredMeasFitter.readout_fidelity" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">readout_fidelity</code><span class="sig-paren">(</span><em class="sig-param">cal_index=0</em>, <em class="sig-param">label_list=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/mitigation/measurement/fitters.html#TensoredMeasFitter.readout_fidelity"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.ignis.mitigation.measurement.TensoredMeasFitter.readout_fidelity" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Based on the results output the readout fidelity, which is the average
 of the diagonal entries in the calibration matrices</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><ul class="first simple">
-<li><strong>cal_index</strong> – readout fidelity of which sub cal?</li>
-<li><strong>label_list</strong> (<em>list of lists on states</em>) – </li>
-<li><strong>the average fidelity over of the groups of states.</strong> (<em>Returns</em>) – </li>
-<li><strong>None then each state used in the construction of the</strong> (<em>If</em>) – </li>
-<li><strong>matrices forms a group of size 1</strong> (<em>calibration</em>) – </li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cal_index</strong> – readout fidelity of which sub cal?</p></li>
+<li><p><strong>label_list</strong> (<em>list of lists on states</em>) – </p></li>
+<li><p><strong>the average fidelity over of the groups of states.</strong> (<em>Returns</em>) – </p></li>
+<li><p><strong>None then each state used in the construction of the</strong> (<em>If</em>) – </p></li>
+<li><p><strong>matrices forms a group of size 1</strong> (<em>calibration</em>) – </p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body"><p class="first last">readout fidelity (assignment fidelity)</p>
-</td>
-</tr>
-</tbody>
-</table>
-<dl class="docutils">
-<dt>Additional Information:</dt>
-<dd>The on-diagonal elements of the calibration matrices are the
+</dd>
+<dt class="field-even">Rückgabe</dt>
+<dd class="field-even"><p>readout fidelity (assignment fidelity)</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Additional Information:</dt><dd><p>The on-diagonal elements of the calibration matrices are the
 probabilities of measuring state ‚x‘ given preparation of state
-‚x‘</dd>
+‚x‘</p>
+</dd>
 </dl>
 </dd></dl>
 

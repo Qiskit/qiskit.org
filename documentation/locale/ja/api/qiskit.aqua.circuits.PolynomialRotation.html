@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,6 +48,8 @@
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/js/themeExt.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="索引" href="../genindex.html" />
@@ -625,6 +626,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1215,6 +1222,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1261,222 +1274,213 @@
 <h1>PolynomialRotation<a class="headerlink" href="#polynomialrotation" title="このヘッドラインへのパーマリンク">¶</a></h1>
 <dl class="class">
 <dt id="qiskit.aqua.circuits.PolynomialRotation">
-<em class="property">class </em><code class="descname">PolynomialRotation</code><span class="sig-paren">(</span><em>px</em>, <em>num_state_qubits</em>, <em>basis='Y'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/circuits/polynomial_rotation.html#PolynomialRotation"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.aqua.circuits.PolynomialRotation" title="この定義へのパーマリンク">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">PolynomialRotation</code><span class="sig-paren">(</span><em class="sig-param">px</em>, <em class="sig-param">num_state_qubits</em>, <em class="sig-param">basis='Y'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/circuits/polynomial_rotation.html#PolynomialRotation"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.aqua.circuits.PolynomialRotation" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.aqua.utils.circuit_factory.CircuitFactory</span></code></p>
 <p>Polynomial rotation.
 For a polynomial p(x), a basis state <a href="#id1"><span class="problematic" id="id2">|</span></a>i&gt; and a target qubit <a href="#id3"><span class="problematic" id="id4">|</span></a>0&gt; this operator acts as:</p>
 <blockquote>
-<div><a href="#id5"><span class="problematic" id="id6">|</span></a>i&gt;|0&gt; --&gt; <a href="#id7"><span class="problematic" id="id8">|</span></a>i&gt;( cos(p(i))|0&gt; + sin(p(i))|1&gt; )</div></blockquote>
+<div><p><a href="#id5"><span class="problematic" id="id6">|</span></a>i&gt;|0&gt; --&gt; <a href="#id7"><span class="problematic" id="id8">|</span></a>i&gt;( cos(p(i))|0&gt; + sin(p(i))|1&gt; )</p>
+</div></blockquote>
 <p>Let n be the number of qubits representing the state, d the degree of p(x) and q_i the qubits,
 where q_0 is the least significant qubit. Then for</p>
 <blockquote>
-<div>x = sum_{i=0}^{n-1} 2^{i}*q_i,</div></blockquote>
-<dl class="docutils">
-<dt>we can write</dt>
-<dd>p(x) = sum_{j=0}^{j=d} px[j]*(q_0 + 2*q_1 + ... + 2^{n-1}*q_n-1)^{j}.</dd>
+<div><p>x = sum_{i=0}^{n-1} 2^{i}*q_i,</p>
+</div></blockquote>
+<dl class="simple">
+<dt>we can write</dt><dd><p>p(x) = sum_{j=0}^{j=d} px[j]*(q_0 + 2*q_1 + ... + 2^{n-1}*q_n-1)^{j}.</p>
+</dd>
 </dl>
 <p>The expression above is used to obtain the list of controls and rotation angles for the circuit.</p>
+<p>Constructor.
+Prepare an approximation to a state with amplitudes specified by a polynomial.
+:param px: coefficients of the polynomial, px[i] is the coefficient of x^i
+:type px: list
+:param num_state_qubits: number of qubits representing the state
+:type num_state_qubits: int
+:param basis: type of Pauli rotation ('X', 'Y', 'Z')
+:type basis: str</p>
 <p class="rubric">Attributes Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.circuits.PolynomialRotation.num_target_qubits" title="qiskit.aqua.circuits.PolynomialRotation.num_target_qubits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">num_target_qubits</span></code></a></td>
-<td>Returns the number of target qubits</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.circuits.PolynomialRotation.num_target_qubits" title="qiskit.aqua.circuits.PolynomialRotation.num_target_qubits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">num_target_qubits</span></code></a></p></td>
+<td><p>Returns the number of target qubits</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Methods Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.circuits.PolynomialRotation.build" title="qiskit.aqua.circuits.PolynomialRotation.build"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build</span></code></a>(qc,&nbsp;q,&nbsp;q_target[,&nbsp;q_ancillas,&nbsp;reverse])</td>
-<td><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">param qc:</th><td class="field-body">quantum circuit</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.circuits.PolynomialRotation.build" title="qiskit.aqua.circuits.PolynomialRotation.build"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build</span></code></a>(qc, q, q_target[, q_ancillas, reverse])</p></td>
+<td><p><dl class="field-list simple">
+<dt class="field-odd">param qc</dt>
+<dd class="field-odd"><p>quantum circuit</p>
+</dd>
+</dl>
+</p></td>
 </tr>
-</tbody>
-</table>
-</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.circuits.PolynomialRotation.build_controlled" title="qiskit.aqua.circuits.PolynomialRotation.build_controlled"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build_controlled</span></code></a>(qc, q, q_control[, ...])</p></td>
+<td><p>Adds corresponding controlled sub-circuit to given circuit</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.circuits.PolynomialRotation.build_controlled" title="qiskit.aqua.circuits.PolynomialRotation.build_controlled"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build_controlled</span></code></a>(qc,&nbsp;q,&nbsp;q_control[,&nbsp;...])</td>
-<td>Adds corresponding controlled sub-circuit to given circuit</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.circuits.PolynomialRotation.build_controlled_inverse" title="qiskit.aqua.circuits.PolynomialRotation.build_controlled_inverse"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build_controlled_inverse</span></code></a>(qc, q, q_control[, ...])</p></td>
+<td><p>Adds controlled inverse of corresponding sub-circuit to given circuit</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.circuits.PolynomialRotation.build_controlled_inverse" title="qiskit.aqua.circuits.PolynomialRotation.build_controlled_inverse"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build_controlled_inverse</span></code></a>(qc,&nbsp;q,&nbsp;q_control[,&nbsp;...])</td>
-<td>Adds controlled inverse of corresponding sub-circuit to given circuit</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.circuits.PolynomialRotation.build_controlled_inverse_power" title="qiskit.aqua.circuits.PolynomialRotation.build_controlled_inverse_power"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build_controlled_inverse_power</span></code></a>(qc, q, ...[, ...])</p></td>
+<td><p>Adds controlled, inverse, power of corresponding circuit.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.circuits.PolynomialRotation.build_controlled_inverse_power" title="qiskit.aqua.circuits.PolynomialRotation.build_controlled_inverse_power"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build_controlled_inverse_power</span></code></a>(qc,&nbsp;q,&nbsp;...[,&nbsp;...])</td>
-<td>Adds controlled, inverse, power of corresponding circuit.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.circuits.PolynomialRotation.build_controlled_power" title="qiskit.aqua.circuits.PolynomialRotation.build_controlled_power"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build_controlled_power</span></code></a>(qc, q, q_control, power)</p></td>
+<td><p>Adds controlled power of corresponding circuit.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.circuits.PolynomialRotation.build_controlled_power" title="qiskit.aqua.circuits.PolynomialRotation.build_controlled_power"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build_controlled_power</span></code></a>(qc,&nbsp;q,&nbsp;q_control,&nbsp;power)</td>
-<td>Adds controlled power of corresponding circuit.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.circuits.PolynomialRotation.build_inverse" title="qiskit.aqua.circuits.PolynomialRotation.build_inverse"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build_inverse</span></code></a>(qc, q[, q_ancillas])</p></td>
+<td><p>Adds inverse of corresponding sub-circuit to given circuit</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.circuits.PolynomialRotation.build_inverse" title="qiskit.aqua.circuits.PolynomialRotation.build_inverse"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build_inverse</span></code></a>(qc,&nbsp;q[,&nbsp;q_ancillas])</td>
-<td>Adds inverse of corresponding sub-circuit to given circuit</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.circuits.PolynomialRotation.build_inverse_power" title="qiskit.aqua.circuits.PolynomialRotation.build_inverse_power"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build_inverse_power</span></code></a>(qc, q, power[, q_ancillas])</p></td>
+<td><p>Adds inverse power of corresponding circuit.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.circuits.PolynomialRotation.build_inverse_power" title="qiskit.aqua.circuits.PolynomialRotation.build_inverse_power"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build_inverse_power</span></code></a>(qc,&nbsp;q,&nbsp;power[,&nbsp;q_ancillas])</td>
-<td>Adds inverse power of corresponding circuit.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.circuits.PolynomialRotation.build_power" title="qiskit.aqua.circuits.PolynomialRotation.build_power"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build_power</span></code></a>(qc, q, power[, q_ancillas])</p></td>
+<td><p>Adds power of corresponding circuit.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.circuits.PolynomialRotation.build_power" title="qiskit.aqua.circuits.PolynomialRotation.build_power"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build_power</span></code></a>(qc,&nbsp;q,&nbsp;power[,&nbsp;q_ancillas])</td>
-<td>Adds power of corresponding circuit.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.circuits.PolynomialRotation.get_num_qubits" title="qiskit.aqua.circuits.PolynomialRotation.get_num_qubits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_num_qubits</span></code></a>()</p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.circuits.PolynomialRotation.get_num_qubits" title="qiskit.aqua.circuits.PolynomialRotation.get_num_qubits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_num_qubits</span></code></a>()</td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.circuits.PolynomialRotation.get_num_qubits_controlled" title="qiskit.aqua.circuits.PolynomialRotation.get_num_qubits_controlled"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_num_qubits_controlled</span></code></a>()</p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.circuits.PolynomialRotation.get_num_qubits_controlled" title="qiskit.aqua.circuits.PolynomialRotation.get_num_qubits_controlled"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_num_qubits_controlled</span></code></a>()</td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.circuits.PolynomialRotation.required_ancillas" title="qiskit.aqua.circuits.PolynomialRotation.required_ancillas"><code class="xref py py-obj docutils literal notranslate"><span class="pre">required_ancillas</span></code></a>()</p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.circuits.PolynomialRotation.required_ancillas" title="qiskit.aqua.circuits.PolynomialRotation.required_ancillas"><code class="xref py py-obj docutils literal notranslate"><span class="pre">required_ancillas</span></code></a>()</td>
-<td></td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.circuits.PolynomialRotation.required_ancillas_controlled" title="qiskit.aqua.circuits.PolynomialRotation.required_ancillas_controlled"><code class="xref py py-obj docutils literal notranslate"><span class="pre">required_ancillas_controlled</span></code></a>()</td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.circuits.PolynomialRotation.required_ancillas_controlled" title="qiskit.aqua.circuits.PolynomialRotation.required_ancillas_controlled"><code class="xref py py-obj docutils literal notranslate"><span class="pre">required_ancillas_controlled</span></code></a>()</p></td>
+<td><p></p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Attributes Documentation</p>
 <dl class="attribute">
 <dt id="qiskit.aqua.circuits.PolynomialRotation.num_target_qubits">
-<code class="descname">num_target_qubits</code><a class="headerlink" href="#qiskit.aqua.circuits.PolynomialRotation.num_target_qubits" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">num_target_qubits</code><a class="headerlink" href="#qiskit.aqua.circuits.PolynomialRotation.num_target_qubits" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Returns the number of target qubits</p>
 </dd></dl>
 
 <p class="rubric">Methods Documentation</p>
 <dl class="method">
 <dt id="qiskit.aqua.circuits.PolynomialRotation.build">
-<code class="descname">build</code><span class="sig-paren">(</span><em>qc</em>, <em>q</em>, <em>q_target</em>, <em>q_ancillas=None</em>, <em>reverse=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/circuits/polynomial_rotation.html#PolynomialRotation.build"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.aqua.circuits.PolynomialRotation.build" title="この定義へのパーマリンク">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first last simple">
-<li><strong>qc</strong> -- quantum circuit</li>
-<li><strong>q</strong> -- list of qubits (has to be same length as self.num_state_qubits)</li>
-<li><strong>q_target</strong> -- qubit to be rotated. The algorithm is successful when this qubit is in the <a href="#id9"><span class="problematic" id="id10">|</span></a>1&gt; state</li>
-<li><strong>q_ancillas</strong> -- list of ancilla qubits (or None if none needed)</li>
-<li><strong>reverse</strong> -- if 1, apply with reversed list of qubits (i.e. q_n as q_0, q_n-1 as q_1, etc).</li>
+<code class="sig-name descname">build</code><span class="sig-paren">(</span><em class="sig-param">qc</em>, <em class="sig-param">q</em>, <em class="sig-param">q_target</em>, <em class="sig-param">q_ancillas=None</em>, <em class="sig-param">reverse=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/circuits/polynomial_rotation.html#PolynomialRotation.build"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.aqua.circuits.PolynomialRotation.build" title="この定義へのパーマリンク">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>qc</strong> -- quantum circuit</p></li>
+<li><p><strong>q</strong> -- list of qubits (has to be same length as self.num_state_qubits)</p></li>
+<li><p><strong>q_target</strong> -- qubit to be rotated. The algorithm is successful when this qubit is in the <a href="#id9"><span class="problematic" id="id10">|</span></a>1&gt; state</p></li>
+<li><p><strong>q_ancillas</strong> -- list of ancilla qubits (or None if none needed)</p></li>
+<li><p><strong>reverse</strong> -- if 1, apply with reversed list of qubits (i.e. q_n as q_0, q_n-1 as q_1, etc).</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.circuits.PolynomialRotation.build_controlled">
-<code class="descname">build_controlled</code><span class="sig-paren">(</span><em>qc</em>, <em>q</em>, <em>q_control</em>, <em>q_ancillas=None</em>, <em>use_basis_gates=True</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.circuits.PolynomialRotation.build_controlled" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">build_controlled</code><span class="sig-paren">(</span><em class="sig-param">qc</em>, <em class="sig-param">q</em>, <em class="sig-param">q_control</em>, <em class="sig-param">q_ancillas=None</em>, <em class="sig-param">use_basis_gates=True</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.circuits.PolynomialRotation.build_controlled" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Adds corresponding controlled sub-circuit to given circuit</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first last simple">
-<li><strong>qc</strong> -- quantum circuit</li>
-<li><strong>q</strong> -- list of qubits (has to be same length as self._num_qubits)</li>
-<li><strong>q_control</strong> -- control qubit</li>
-<li><strong>q_ancillas</strong> -- list of ancilla qubits (or None if none needed)</li>
-<li><strong>use_basis_gates</strong> -- use basis gates for expansion of controlled circuit</li>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>qc</strong> -- quantum circuit</p></li>
+<li><p><strong>q</strong> -- list of qubits (has to be same length as self._num_qubits)</p></li>
+<li><p><strong>q_control</strong> -- control qubit</p></li>
+<li><p><strong>q_ancillas</strong> -- list of ancilla qubits (or None if none needed)</p></li>
+<li><p><strong>use_basis_gates</strong> -- use basis gates for expansion of controlled circuit</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.circuits.PolynomialRotation.build_controlled_inverse">
-<code class="descname">build_controlled_inverse</code><span class="sig-paren">(</span><em>qc</em>, <em>q</em>, <em>q_control</em>, <em>q_ancillas=None</em>, <em>use_basis_gates=True</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.circuits.PolynomialRotation.build_controlled_inverse" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">build_controlled_inverse</code><span class="sig-paren">(</span><em class="sig-param">qc</em>, <em class="sig-param">q</em>, <em class="sig-param">q_control</em>, <em class="sig-param">q_ancillas=None</em>, <em class="sig-param">use_basis_gates=True</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.circuits.PolynomialRotation.build_controlled_inverse" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Adds controlled inverse of corresponding sub-circuit to given circuit</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first last simple">
-<li><strong>qc</strong> -- quantum circuit</li>
-<li><strong>q</strong> -- list of qubits (has to be same length as self._num_qubits)</li>
-<li><strong>q_control</strong> -- control qubit</li>
-<li><strong>q_ancillas</strong> -- list of ancilla qubits (or None if none needed)</li>
-<li><strong>use_basis_gates</strong> -- use basis gates for expansion of controlled circuit</li>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>qc</strong> -- quantum circuit</p></li>
+<li><p><strong>q</strong> -- list of qubits (has to be same length as self._num_qubits)</p></li>
+<li><p><strong>q_control</strong> -- control qubit</p></li>
+<li><p><strong>q_ancillas</strong> -- list of ancilla qubits (or None if none needed)</p></li>
+<li><p><strong>use_basis_gates</strong> -- use basis gates for expansion of controlled circuit</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.circuits.PolynomialRotation.build_controlled_inverse_power">
-<code class="descname">build_controlled_inverse_power</code><span class="sig-paren">(</span><em>qc</em>, <em>q</em>, <em>q_control</em>, <em>power</em>, <em>q_ancillas=None</em>, <em>use_basis_gates=True</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.circuits.PolynomialRotation.build_controlled_inverse_power" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">build_controlled_inverse_power</code><span class="sig-paren">(</span><em class="sig-param">qc</em>, <em class="sig-param">q</em>, <em class="sig-param">q_control</em>, <em class="sig-param">power</em>, <em class="sig-param">q_ancillas=None</em>, <em class="sig-param">use_basis_gates=True</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.circuits.PolynomialRotation.build_controlled_inverse_power" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Adds controlled, inverse, power of corresponding circuit.
 May be overridden if a more efficient implementation is possible</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.circuits.PolynomialRotation.build_controlled_power">
-<code class="descname">build_controlled_power</code><span class="sig-paren">(</span><em>qc</em>, <em>q</em>, <em>q_control</em>, <em>power</em>, <em>q_ancillas=None</em>, <em>use_basis_gates=True</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.circuits.PolynomialRotation.build_controlled_power" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">build_controlled_power</code><span class="sig-paren">(</span><em class="sig-param">qc</em>, <em class="sig-param">q</em>, <em class="sig-param">q_control</em>, <em class="sig-param">power</em>, <em class="sig-param">q_ancillas=None</em>, <em class="sig-param">use_basis_gates=True</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.circuits.PolynomialRotation.build_controlled_power" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Adds controlled power of corresponding circuit.
 May be overridden if a more efficient implementation is possible</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.circuits.PolynomialRotation.build_inverse">
-<code class="descname">build_inverse</code><span class="sig-paren">(</span><em>qc</em>, <em>q</em>, <em>q_ancillas=None</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.circuits.PolynomialRotation.build_inverse" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">build_inverse</code><span class="sig-paren">(</span><em class="sig-param">qc</em>, <em class="sig-param">q</em>, <em class="sig-param">q_ancillas=None</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.circuits.PolynomialRotation.build_inverse" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Adds inverse of corresponding sub-circuit to given circuit</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first last simple">
-<li><strong>qc</strong> -- quantum circuit</li>
-<li><strong>q</strong> -- list of qubits (has to be same length as self._num_qubits)</li>
-<li><strong>q_ancillas</strong> -- list of ancilla qubits (or None if none needed)</li>
-<li><strong>params</strong> -- parameters for circuit</li>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>qc</strong> -- quantum circuit</p></li>
+<li><p><strong>q</strong> -- list of qubits (has to be same length as self._num_qubits)</p></li>
+<li><p><strong>q_ancillas</strong> -- list of ancilla qubits (or None if none needed)</p></li>
+<li><p><strong>params</strong> -- parameters for circuit</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.circuits.PolynomialRotation.build_inverse_power">
-<code class="descname">build_inverse_power</code><span class="sig-paren">(</span><em>qc</em>, <em>q</em>, <em>power</em>, <em>q_ancillas=None</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.circuits.PolynomialRotation.build_inverse_power" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">build_inverse_power</code><span class="sig-paren">(</span><em class="sig-param">qc</em>, <em class="sig-param">q</em>, <em class="sig-param">power</em>, <em class="sig-param">q_ancillas=None</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.circuits.PolynomialRotation.build_inverse_power" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Adds inverse power of corresponding circuit.
 May be overridden if a more efficient implementation is possible</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.circuits.PolynomialRotation.build_power">
-<code class="descname">build_power</code><span class="sig-paren">(</span><em>qc</em>, <em>q</em>, <em>power</em>, <em>q_ancillas=None</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.circuits.PolynomialRotation.build_power" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">build_power</code><span class="sig-paren">(</span><em class="sig-param">qc</em>, <em class="sig-param">q</em>, <em class="sig-param">power</em>, <em class="sig-param">q_ancillas=None</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.circuits.PolynomialRotation.build_power" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Adds power of corresponding circuit.
 May be overridden if a more efficient implementation is possible</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.circuits.PolynomialRotation.get_num_qubits">
-<code class="descname">get_num_qubits</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.circuits.PolynomialRotation.get_num_qubits" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">get_num_qubits</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.circuits.PolynomialRotation.get_num_qubits" title="この定義へのパーマリンク">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.circuits.PolynomialRotation.get_num_qubits_controlled">
-<code class="descname">get_num_qubits_controlled</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.circuits.PolynomialRotation.get_num_qubits_controlled" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">get_num_qubits_controlled</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.circuits.PolynomialRotation.get_num_qubits_controlled" title="この定義へのパーマリンク">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.circuits.PolynomialRotation.required_ancillas">
-<code class="descname">required_ancillas</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/circuits/polynomial_rotation.html#PolynomialRotation.required_ancillas"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.aqua.circuits.PolynomialRotation.required_ancillas" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">required_ancillas</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/circuits/polynomial_rotation.html#PolynomialRotation.required_ancillas"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.aqua.circuits.PolynomialRotation.required_ancillas" title="この定義へのパーマリンク">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.circuits.PolynomialRotation.required_ancillas_controlled">
-<code class="descname">required_ancillas_controlled</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/circuits/polynomial_rotation.html#PolynomialRotation.required_ancillas_controlled"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.aqua.circuits.PolynomialRotation.required_ancillas_controlled" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">required_ancillas_controlled</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/circuits/polynomial_rotation.html#PolynomialRotation.required_ancillas_controlled"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.aqua.circuits.PolynomialRotation.required_ancillas_controlled" title="この定義へのパーマリンク">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>

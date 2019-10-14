@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,6 +48,8 @@
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/js/themeExt.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Índice" href="../genindex.html" />
@@ -625,6 +626,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1215,6 +1222,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1261,29 +1274,25 @@
 <h1>marginal_counts<a class="headerlink" href="#marginal-counts" title="Link permanente para este título">¶</a></h1>
 <dl class="function">
 <dt id="qiskit.ignis.verification.tomography.marginal_counts">
-<code class="descname">marginal_counts</code><span class="sig-paren">(</span><em>counts</em>, <em>meas_qubits=True</em>, <em>pad_zeros=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/tomography/data.html#marginal_counts"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.ignis.verification.tomography.marginal_counts" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">marginal_counts</code><span class="sig-paren">(</span><em class="sig-param">counts</em>, <em class="sig-param">meas_qubits=True</em>, <em class="sig-param">pad_zeros=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/tomography/data.html#marginal_counts"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.ignis.verification.tomography.marginal_counts" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Compute marginal counts from a counts dictionary.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parâmetros:</th><td class="field-body"><ul class="first simple">
-<li><strong>counts</strong> (<em>dict</em>) – a counts dictionary.</li>
-<li><strong>meas_qubits</strong> (<em>True</em><em>, </em><em>list</em><em>(</em><em>int</em><em>)</em>) – the qubits to NOT be marinalized over
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>counts</strong> (<em>dict</em>) – a counts dictionary.</p></li>
+<li><p><strong>meas_qubits</strong> (<em>True</em><em>, </em><em>list</em><em>(</em><em>int</em><em>)</em>) – the qubits to NOT be marinalized over
 if this is True meas_qubits will be
-all measured qubits (default: True).</li>
-<li><strong>pad_zeros</strong> (<em>Bool</em>) – Include zero count outcomes in return dict.</li>
+all measured qubits (default: True).</p></li>
+<li><p><strong>pad_zeros</strong> (<em>Bool</em>) – Include zero count outcomes in return dict.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Retorno:</th><td class="field-body"><p class="first last">A counts dictionary for the specified qubits. The returned dictionary
+</dd>
+<dt class="field-even">Retorno</dt>
+<dd class="field-even"><p>A counts dictionary for the specified qubits. The returned dictionary
 will have any whitespace trimmed from the input counts keys. Thus if
 meas_qubits=True the returned dictionary will have the same values as
 the input dictionary, but with whitespace trimmed from the keys.</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 </div>

@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,6 +48,8 @@
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/js/themeExt.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Stichwortverzeichnis" href="../genindex.html" />
@@ -625,6 +626,12 @@
 <li class="toctree-l3"><a class="reference internal" href="visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../api/qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../api/qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../api/qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../api/qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../api/qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1215,6 +1222,12 @@
 <li class="toctree-l3"><a class="reference internal" href="visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../api/qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../api/qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../api/qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../api/qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../api/qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1261,151 +1274,147 @@
 <span id="id1"></span><h1>qiskit.execute<a class="headerlink" href="#qiskit-execute" title="Link zu dieser Überschrift">¶</a></h1>
 <dl class="function">
 <dt id="qiskit.execute.execute">
-<code class="descname">execute</code><span class="sig-paren">(</span><em>experiments</em>, <em>backend</em>, <em>basis_gates=None</em>, <em>coupling_map=None</em>, <em>backend_properties=None</em>, <em>initial_layout=None</em>, <em>seed_transpiler=None</em>, <em>optimization_level=None</em>, <em>pass_manager=None</em>, <em>qobj_id=None</em>, <em>qobj_header=None</em>, <em>shots=1024</em>, <em>memory=False</em>, <em>max_credits=10</em>, <em>seed_simulator=None</em>, <em>default_qubit_los=None</em>, <em>default_meas_los=None</em>, <em>schedule_los=None</em>, <em>meas_level=2</em>, <em>meas_return='avg'</em>, <em>memory_slots=None</em>, <em>memory_slot_size=100</em>, <em>rep_time=None</em>, <em>parameter_binds=None</em>, <em>**run_config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/execute.html#execute"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.execute.execute" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">execute</code><span class="sig-paren">(</span><em class="sig-param">experiments</em>, <em class="sig-param">backend</em>, <em class="sig-param">basis_gates=None</em>, <em class="sig-param">coupling_map=None</em>, <em class="sig-param">backend_properties=None</em>, <em class="sig-param">initial_layout=None</em>, <em class="sig-param">seed_transpiler=None</em>, <em class="sig-param">optimization_level=None</em>, <em class="sig-param">pass_manager=None</em>, <em class="sig-param">qobj_id=None</em>, <em class="sig-param">qobj_header=None</em>, <em class="sig-param">shots=1024</em>, <em class="sig-param">memory=False</em>, <em class="sig-param">max_credits=10</em>, <em class="sig-param">seed_simulator=None</em>, <em class="sig-param">default_qubit_los=None</em>, <em class="sig-param">default_meas_los=None</em>, <em class="sig-param">schedule_los=None</em>, <em class="sig-param">meas_level=2</em>, <em class="sig-param">meas_return='avg'</em>, <em class="sig-param">memory_slots=None</em>, <em class="sig-param">memory_slot_size=100</em>, <em class="sig-param">rep_time=None</em>, <em class="sig-param">parameter_binds=None</em>, <em class="sig-param">**run_config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/execute.html#execute"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.execute.execute" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Execute a list of circuits or pulse schedules on a backend.</p>
 <p>The execution is asynchronous, and a handle to a job instance is returned.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><ul class="first simple">
-<li><strong>experiments</strong> (<a class="reference internal" href="../api/qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit" title="qiskit.circuit.QuantumCircuit"><em>QuantumCircuit</em></a><em> or </em><em>list</em><em>[</em><a class="reference internal" href="../api/qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit" title="qiskit.circuit.QuantumCircuit"><em>QuantumCircuit</em></a><em>] or </em><a class="reference internal" href="../api/qiskit.pulse.Schedule.html#qiskit.pulse.Schedule" title="qiskit.pulse.Schedule"><em>Schedule</em></a><em> or </em><em>list</em><em>[</em><a class="reference internal" href="../api/qiskit.pulse.Schedule.html#qiskit.pulse.Schedule" title="qiskit.pulse.Schedule"><em>Schedule</em></a><em>]</em>) – Circuit(s) or pulse schedule(s) to execute</li>
-<li><strong>backend</strong> (<a class="reference internal" href="../api/qiskit.providers.BaseBackend.html#qiskit.providers.BaseBackend" title="qiskit.providers.BaseBackend"><em>BaseBackend</em></a>) – Backend to execute circuits on.
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>experiments</strong> (<a class="reference internal" href="../api/qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit" title="qiskit.circuit.QuantumCircuit"><em>QuantumCircuit</em></a><em> or </em><em>list</em><em>[</em><a class="reference internal" href="../api/qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit" title="qiskit.circuit.QuantumCircuit"><em>QuantumCircuit</em></a><em>] or </em><a class="reference internal" href="../api/qiskit.pulse.Schedule.html#qiskit.pulse.Schedule" title="qiskit.pulse.Schedule"><em>Schedule</em></a><em> or </em><em>list</em><em>[</em><a class="reference internal" href="../api/qiskit.pulse.Schedule.html#qiskit.pulse.Schedule" title="qiskit.pulse.Schedule"><em>Schedule</em></a><em>]</em>) – Circuit(s) or pulse schedule(s) to execute</p></li>
+<li><p><strong>backend</strong> (<a class="reference internal" href="../api/qiskit.providers.BaseBackend.html#qiskit.providers.BaseBackend" title="qiskit.providers.BaseBackend"><em>BaseBackend</em></a>) – Backend to execute circuits on.
 Transpiler options are automatically grabbed from
 backend.configuration() and backend.properties().
 If any other option is explicitly set (e.g. coupling_map), it
-will override the backend’s.</li>
-<li><strong>basis_gates</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – <p>List of basis gate names to unroll to.
+will override the backend’s.</p></li>
+<li><p><strong>basis_gates</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – <p>List of basis gate names to unroll to.
 e.g:</p>
 <blockquote>
-<div>[‚u1‘, ‚u2‘, ‚u3‘, ‚cx‘]</div></blockquote>
+<div><p>[‚u1‘, ‚u2‘, ‚u3‘, ‚cx‘]</p>
+</div></blockquote>
 <p>If None, do not unroll.</p>
-</li>
-<li><strong>coupling_map</strong> (<a class="reference internal" href="../api/qiskit.transpiler.CouplingMap.html#qiskit.transpiler.CouplingMap" title="qiskit.transpiler.CouplingMap"><em>CouplingMap</em></a><em> or </em><em>list</em>) – <p>Coupling map (perhaps custom) to target in mapping.
+</p></li>
+<li><p><strong>coupling_map</strong> (<a class="reference internal" href="../api/qiskit.transpiler.CouplingMap.html#qiskit.transpiler.CouplingMap" title="qiskit.transpiler.CouplingMap"><em>CouplingMap</em></a><em> or </em><em>list</em>) – <p>Coupling map (perhaps custom) to target in mapping.
 Multiple formats are supported:
 a. CouplingMap instance</p>
 <ol class="loweralpha" start="2">
-<li><dl class="first docutils">
-<dt>list</dt>
-<dd>Must be given as an adjacency matrix, where each entry
+<li><dl>
+<dt>list</dt><dd><p>Must be given as an adjacency matrix, where each entry
 specifies all two-qubit interactions supported by backend
-e.g:<blockquote class="last">
-<div>[[0, 1], [0, 3], [1, 2], [1, 5], [2, 5], [4, 1], [5, 3]]</div></blockquote>
+e.g:</p>
+<blockquote>
+<div><p>[[0, 1], [0, 3], [1, 2], [1, 5], [2, 5], [4, 1], [5, 3]]</p>
+</div></blockquote>
 </dd>
 </dl>
 </li>
 </ol>
-</li>
-<li><strong>backend_properties</strong> (<a class="reference internal" href="../api/qiskit.providers.models.BackendProperties.html#qiskit.providers.models.BackendProperties" title="qiskit.providers.models.BackendProperties"><em>BackendProperties</em></a>) – Properties returned by a backend, including information on gate
+</p></li>
+<li><p><strong>backend_properties</strong> (<a class="reference internal" href="../api/qiskit.providers.models.BackendProperties.html#qiskit.providers.models.BackendProperties" title="qiskit.providers.models.BackendProperties"><em>BackendProperties</em></a>) – Properties returned by a backend, including information on gate
 errors, readout errors, qubit coherence times, etc. For a backend
 that provides this information, it can be obtained with:
-<code class="docutils literal notranslate"><span class="pre">backend.properties()</span></code></li>
-<li><strong>initial_layout</strong> (<a class="reference internal" href="../api/qiskit.transpiler.Layout.html#qiskit.transpiler.Layout" title="qiskit.transpiler.Layout"><em>Layout</em></a><em> or </em><em>dict</em><em> or </em><em>list</em>) – <p>Initial position of virtual qubits on physical qubits.
+<code class="docutils literal notranslate"><span class="pre">backend.properties()</span></code></p></li>
+<li><p><strong>initial_layout</strong> (<a class="reference internal" href="../api/qiskit.transpiler.Layout.html#qiskit.transpiler.Layout" title="qiskit.transpiler.Layout"><em>Layout</em></a><em> or </em><em>dict</em><em> or </em><em>list</em>) – <p>Initial position of virtual qubits on physical qubits.
 If this layout makes the circuit compatible with the coupling_map
 constraints, it will be used.
 The final layout is not guaranteed to be the same, as the transpiler
 may permute qubits through swaps or other means.</p>
 <p>Multiple formats are supported:
 a. Layout instance</p>
-<ol class="loweralpha" start="2">
-<li><dl class="first docutils">
-<dt>dict</dt>
-<dd><dl class="first last docutils">
-<dt>virtual to physical:</dt>
-<dd><dl class="first last docutils">
-<dt>{qr[0]: 0,</dt>
-<dd>qr[1]: 3,
-qr[2]: 5}</dd>
+<ol class="loweralpha simple" start="2">
+<li><dl class="simple">
+<dt>dict</dt><dd><dl class="simple">
+<dt>virtual to physical:</dt><dd><dl class="simple">
+<dt>{qr[0]: 0,</dt><dd><p>qr[1]: 3,
+qr[2]: 5}</p>
+</dd>
 </dl>
 </dd>
-<dt>physical to virtual:</dt>
-<dd><dl class="first last docutils">
-<dt>{0: qr[0],</dt>
-<dd>3: qr[1],
-5: qr[2]}</dd>
+<dt>physical to virtual:</dt><dd><dl class="simple">
+<dt>{0: qr[0],</dt><dd><p>3: qr[1],
+5: qr[2]}</p>
+</dd>
 </dl>
 </dd>
 </dl>
 </dd>
 </dl>
 </li>
-<li><dl class="first docutils">
-<dt>list</dt>
-<dd><dl class="first last docutils">
-<dt>virtual to physical:</dt>
-<dd>[0, 3, 5]  # virtual qubits are ordered (in addition to named)</dd>
-<dt>physical to virtual:</dt>
-<dd>[qr[0], None, None, qr[1], None, qr[2]]</dd>
+<li><dl class="simple">
+<dt>list</dt><dd><dl class="simple">
+<dt>virtual to physical:</dt><dd><p>[0, 3, 5]  # virtual qubits are ordered (in addition to named)</p>
+</dd>
+<dt>physical to virtual:</dt><dd><p>[qr[0], None, None, qr[1], None, qr[2]]</p>
+</dd>
 </dl>
 </dd>
 </dl>
 </li>
 </ol>
-</li>
-<li><strong>seed_transpiler</strong> (<em>int</em>) – Sets random seed for the stochastic parts of the transpiler</li>
-<li><strong>optimization_level</strong> (<em>int</em>) – <p>How much optimization to perform on the circuits.
+</p></li>
+<li><p><strong>seed_transpiler</strong> (<em>int</em>) – Sets random seed for the stochastic parts of the transpiler</p></li>
+<li><p><strong>optimization_level</strong> (<em>int</em>) – <p>How much optimization to perform on the circuits.
 Higher levels generate more optimized circuits,
 at the expense of longer transpilation time.</p>
 <blockquote>
-<div>0: no optimization
+<div><p>0: no optimization
 1: light optimization
 2: heavy optimization
-3: even heavier optimization</div></blockquote>
+3: even heavier optimization</p>
+</div></blockquote>
 <p>If None, level 1 will be chosen as default.</p>
-</li>
-<li><strong>pass_manager</strong> (<a class="reference internal" href="../api/qiskit.transpiler.PassManager.html#qiskit.transpiler.PassManager" title="qiskit.transpiler.PassManager"><em>PassManager</em></a>) – The pass manager to use during transpilation. If this arg is present,
+</p></li>
+<li><p><strong>pass_manager</strong> (<a class="reference internal" href="../api/qiskit.transpiler.PassManager.html#qiskit.transpiler.PassManager" title="qiskit.transpiler.PassManager"><em>PassManager</em></a>) – The pass manager to use during transpilation. If this arg is present,
 auto-selection of pass manager based on the transpile options will be
-turned off and this pass manager will be used directly.</li>
-<li><strong>qobj_id</strong> (<em>str</em>) – String identifier to annotate the Qobj</li>
-<li><strong>qobj_header</strong> (<a class="reference internal" href="../api/qiskit.qobj.QobjHeader.html#qiskit.qobj.QobjHeader" title="qiskit.qobj.QobjHeader"><em>QobjHeader</em></a><em> or </em><em>dict</em>) – User input that will be inserted in Qobj header, and will also be
-copied to the corresponding Result header. Headers do not affect the run.</li>
-<li><strong>shots</strong> (<em>int</em>) – Number of repetitions of each circuit, for sampling. Default: 1024</li>
-<li><strong>memory</strong> (<em>bool</em>) – If True, per-shot measurement bitstrings are returned as well
+turned off and this pass manager will be used directly.</p></li>
+<li><p><strong>qobj_id</strong> (<em>str</em>) – String identifier to annotate the Qobj</p></li>
+<li><p><strong>qobj_header</strong> (<a class="reference internal" href="../api/qiskit.qobj.QobjHeader.html#qiskit.qobj.QobjHeader" title="qiskit.qobj.QobjHeader"><em>QobjHeader</em></a><em> or </em><em>dict</em>) – User input that will be inserted in Qobj header, and will also be
+copied to the corresponding Result header. Headers do not affect the run.</p></li>
+<li><p><strong>shots</strong> (<em>int</em>) – Number of repetitions of each circuit, for sampling. Default: 1024</p></li>
+<li><p><strong>memory</strong> (<em>bool</em>) – If True, per-shot measurement bitstrings are returned as well
 (provided the backend supports it). For OpenPulse jobs, only
-measurement level 2 supports this option. Default: False</li>
-<li><strong>max_credits</strong> (<em>int</em>) – Maximum credits to spend on job. Default: 10</li>
-<li><strong>seed_simulator</strong> (<em>int</em>) – Random seed to control sampling, for when backend is a simulator</li>
-<li><strong>default_qubit_los</strong> (<em>list</em>) – List of default qubit lo frequencies</li>
-<li><strong>default_meas_los</strong> (<em>list</em>) – List of default meas lo frequencies</li>
-<li><strong>(</strong><strong>None</strong><strong> or </strong><strong>list</strong><strong>[</strong><strong>Union</strong><strong>[</strong><strong>Dict</strong><strong>[</strong><strong>PulseChannel</strong><strong>, </strong><strong>float</strong><strong>]</strong><strong>, </strong><strong>LoConfig</strong><strong>]</strong><strong>] </strong><strong>or</strong> (<em>schedule_los</em>) – Union[Dict[PulseChannel, float], LoConfig]):
-Experiment LO configurations</li>
-<li><strong>meas_level</strong> (<em>int</em>) – Set the appropriate level of the measurement output for pulse experiments.</li>
-<li><strong>meas_return</strong> (<em>str</em>) – <p>Level of measurement data for the backend to return
+measurement level 2 supports this option. Default: False</p></li>
+<li><p><strong>max_credits</strong> (<em>int</em>) – Maximum credits to spend on job. Default: 10</p></li>
+<li><p><strong>seed_simulator</strong> (<em>int</em>) – Random seed to control sampling, for when backend is a simulator</p></li>
+<li><p><strong>default_qubit_los</strong> (<em>list</em>) – List of default qubit lo frequencies</p></li>
+<li><p><strong>default_meas_los</strong> (<em>list</em>) – List of default meas lo frequencies</p></li>
+<li><p><strong>(</strong><strong>None</strong><strong> or </strong><strong>list</strong><strong>[</strong><strong>Union</strong><strong>[</strong><strong>Dict</strong><strong>[</strong><strong>PulseChannel</strong><strong>, </strong><strong>float</strong><strong>]</strong><strong>, </strong><strong>LoConfig</strong><strong>]</strong><strong>] </strong><strong>or</strong> (<em>schedule_los</em>) – Union[Dict[PulseChannel, float], LoConfig]):
+Experiment LO configurations</p></li>
+<li><p><strong>meas_level</strong> (<em>int</em>) – Set the appropriate level of the measurement output for pulse experiments.</p></li>
+<li><p><strong>meas_return</strong> (<em>str</em>) – <p>Level of measurement data for the backend to return
 For <cite>meas_level</cite> 0 and 1:</p>
 <blockquote>
-<div>“single“ returns information from every shot.
-„avg“ returns average measurement output (averaged over number of shots).</div></blockquote>
-</li>
-<li><strong>memory_slots</strong> (<em>int</em>) – Number of classical memory slots used in this job.</li>
-<li><strong>memory_slot_size</strong> (<em>int</em>) – Size of each memory slot if the output is Level 0.</li>
-<li><strong>rep_time</strong> (<em>int</em>) – repetition time of the experiment in μs.
+<div><p>“single“ returns information from every shot.
+„avg“ returns average measurement output (averaged over number of shots).</p>
+</div></blockquote>
+</p></li>
+<li><p><strong>memory_slots</strong> (<em>int</em>) – Number of classical memory slots used in this job.</p></li>
+<li><p><strong>memory_slot_size</strong> (<em>int</em>) – Size of each memory slot if the output is Level 0.</p></li>
+<li><p><strong>rep_time</strong> (<em>int</em>) – repetition time of the experiment in μs.
 The delay between experiments will be rep_time.
-Must be from the list provided by the device.</li>
-<li><strong>(</strong><strong>list</strong><strong>[</strong><strong>dict{Parameter</strong> (<em>parameter_binds</em>) – Value}]):
+Must be from the list provided by the device.</p></li>
+<li><p><strong>(</strong><strong>list</strong><strong>[</strong><strong>dict{Parameter</strong> (<em>parameter_binds</em>) – Value}]):
 List of Parameter bindings over which the set of experiments will be
 executed. Each list element (bind) should be of the form
 {Parameter1: value1, Parameter2: value2, …}. All binds will be
 executed across all experiments, e.g. if parameter_binds is a
 length-n list, and there are m experiments, a total of m x n
-experiments will be run (one for each experiment/bind pair).</li>
-<li><strong>run_config</strong> (<em>dict</em>) – Extra arguments used to configure the run (e.g. for Aer configurable backends)
+experiments will be run (one for each experiment/bind pair).</p></li>
+<li><p><strong>run_config</strong> (<em>dict</em>) – Extra arguments used to configure the run (e.g. for Aer configurable backends)
 Refer to the backend documentation for details on these arguments
 Note: for now, these keyword arguments will both be copied to the
-Qobj config, and passed to backend.run()</li>
+Qobj config, and passed to backend.run()</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body"><p class="first">returns job instance derived from BaseJob</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body"><p class="first"><a class="reference internal" href="../api/qiskit.providers.BaseJob.html#qiskit.providers.BaseJob" title="qiskit.providers.BaseJob">BaseJob</a></p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal notranslate"><span class="pre">QiskitError</span></code> – if the execution cannot be interpreted as either circuits or schedules</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Rückgabe</dt>
+<dd class="field-even"><p>returns job instance derived from BaseJob</p>
+</dd>
+<dt class="field-odd">Rückgabetyp</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../api/qiskit.providers.BaseJob.html#qiskit.providers.BaseJob" title="qiskit.providers.BaseJob">BaseJob</a></p>
+</dd>
+<dt class="field-even">Verursacht</dt>
+<dd class="field-even"><p><strong>QiskitError</strong> – if the execution cannot be interpreted as either circuits or schedules</p>
+</dd>
+</dl>
 </dd></dl>
 
 </div>

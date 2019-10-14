@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,6 +48,8 @@
     <script type="text/javascript" src="_static/language_data.js"></script>
     <script type="text/javascript" src="_static/js/themeExt.js"></script>
     <script type="text/javascript" src="_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="_static/favicon.ico"/>
     <link rel="index" title="索引" href="genindex.html" />
@@ -625,6 +626,12 @@
 <li class="toctree-l3"><a class="reference internal" href="apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1215,6 +1222,12 @@
 <li class="toctree-l3"><a class="reference internal" href="apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1261,17 +1274,18 @@
 <h1>Qiskit 入門<a class="headerlink" href="#getting-started-with-qiskit" title="このヘッドラインへのパーマリンク">¶</a></h1>
 <p>Qiskit を使用する流れには大きく3つの手順があります。</p>
 <ul class="simple">
-<li><strong>ビルド</strong>: 検討している問題を表現する量子回路をデザインします。</li>
-<li><strong>実行</strong>: 異なるバックエンド (<em>これにはシステムとシミュレーターの両方が含まれます</em>) で実験を実行します。</li>
-<li><strong>分析</strong>: 要約統計量を計算し、実験の結果を可視化します。</li>
+<li><p><strong>ビルド</strong>: 検討している問題を表現する量子回路をデザインします。</p></li>
+<li><p><strong>実行</strong>: 異なるバックエンド (<em>これにはシステムとシミュレーターの両方が含まれます</em>) で実験を実行します。</p></li>
+<li><p><strong>分析</strong>: 要約統計量を計算し、実験の結果を可視化します。</p></li>
 </ul>
 <p>ワークフロー全体の例を挙げます。各手順は以下のセクションで詳しく説明します。</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span><span class="p">(</span>
+<div class="docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span><span class="p">(</span>
   <span class="n">QuantumCircuit</span><span class="p">,</span>
   <span class="n">execute</span><span class="p">,</span>
   <span class="n">Aer</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">qiskit.visualization</span> <span class="kn">import</span> <span class="n">plot_histogram</span>
+<span class="kn">from</span> <span class="nn">qiskit.visualization</span> <span class="k">import</span> <span class="n">plot_histogram</span>
 
 <span class="c1"># Use Aer&#39;s qasm_simulator</span>
 <span class="n">simulator</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">)</span>
@@ -1296,45 +1310,56 @@
 
 <span class="c1"># Returns counts</span>
 <span class="n">counts</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="n">circuit</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Total count for 00 and 11 are:&quot;</span><span class="p">,</span><span class="n">counts</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Total count for 00 and 11 are:&quot;</span><span class="p">,</span><span class="n">counts</span><span class="p">)</span>
 
 <span class="c1"># Draw the circuit</span>
 <span class="n">circuit</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
 </pre></div>
 </div>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Total count for 00 and 11 are: {&#39;00&#39;: 479, &#39;11&#39;: 521}
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+<span class="n">Total</span> <span class="n">count</span> <span class="k">for</span> <span class="mi">00</span> <span class="ow">and</span> <span class="mi">11</span> <span class="n">are</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;00&#39;</span><span class="p">:</span> <span class="mi">502</span><span class="p">,</span> <span class="s1">&#39;11&#39;</span><span class="p">:</span> <span class="mi">498</span><span class="p">}</span>
 </pre></div>
 </div>
-<img alt="Quantum Circuit with an H gate and controlled nots." src="_images/getting_started_0.png" />
+<pre style="word-wrap: normal;white-space: pre;background: #fff0;line-height: 1.1;font-family: &quot;Courier New&quot;,Courier,monospace">        ┌───┐     ┌─┐   
+q_0: |0>┤ H ├──■──┤M├───
+        └───┘┌─┴─┐└╥┘┌─┐
+q_1: |0>─────┤ X ├─╫─┤M├
+             └───┘ ║ └╥┘
+ c_0: 0 ═══════════╩══╬═
+                      ║ 
+ c_1: 0 ══════════════╩═
+                        </pre></div>
 <div class="admonition note">
-<p class="first admonition-title">注釈</p>
-<p class="last">デフォルトのシミュレーター・プロバイダーは <code class="docutils literal notranslate"><span class="pre">Aer</span></code> に設定されていますが、インストール時に問題がある場合はbasic aerプロバイダーをお試しください。上記コードの <code class="docutils literal notranslate"><span class="pre">Aer</span></code> を <code class="docutils literal notranslate"><span class="pre">BasicAer</span></code> に置き換えることで切り替えることができます。</p>
+<p class="admonition-title">注釈</p>
+<p>デフォルトのシミュレーター・プロバイダーは <code class="docutils literal notranslate"><span class="pre">Aer</span></code> に設定されていますが、インストール時に問題がある場合はbasic aerプロバイダーをお試しください。上記コードの <code class="docutils literal notranslate"><span class="pre">Aer</span></code> を <code class="docutils literal notranslate"><span class="pre">BasicAer</span></code> に置き換えることで切り替えることができます。</p>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">注釈</p>
+<p class="admonition-title">注釈</p>
 <p><code class="docutils literal notranslate"><span class="pre">qiskit.visualization.circuit_drawer()</span></code> 又は <code class="docutils literal notranslate"><span class="pre">QuantumCircuit.draw()</span></code> のデフォルトのバックエンドは text backendです。ローカルの環境によっては、より適切なデフォルトの設定を行う必要があるかもしれません。その場合はuser configファイルの設定を行うことで対応できます。user configファイルは通常 <code class="docutils literal notranslate"><span class="pre">~/.qiskit/settings.conf</span></code> 下の <code class="docutils literal notranslate"><span class="pre">.ini</span></code> ファイルになります。</p>
 <p>例えば, Matplotlib drawer を設定するための <code class="docutils literal notranslate"><span class="pre">settings.conf</span></code> ファイルは：</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[default]
 circuit_drawer = mpl
 </pre></div>
 </div>
-<p class="last">このconfigには、有効な circuit drawer バックエンドであればどれでも指定することができます。これらには text, mpl, latex, そして latex_source が含まれます。</p>
+<p>このconfigには、有効な circuit drawer バックエンドであればどれでも指定することができます。これらには text, mpl, latex, そして latex_source が含まれます。</p>
 </div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot a histogram</span>
+<div class="docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot a histogram</span>
 <span class="n">plot_histogram</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="Probabilities of each state." src="_images/getting_started_1.png" />
+<img alt="_images/getting_started_1_0.png" src="_images/getting_started_1_0.png" />
+</div>
 <div class="section" id="workflow-step-by-step">
 <h2>ワークフローの手順<a class="headerlink" href="#workflow-step-by-step" title="このヘッドラインへのパーマリンク">¶</a></h2>
 <p>上のプログラムは6つの手順に分解できます。</p>
 <ol class="arabic simple">
-<li>パッケージのインポート</li>
-<li>変数の初期化</li>
-<li>ゲートの追加</li>
-<li>回路の可視化</li>
-<li>実験のシミュレーション</li>
-<li>結果の可視化</li>
+<li><p>パッケージのインポート</p></li>
+<li><p>変数の初期化</p></li>
+<li><p>ゲートの追加</p></li>
+<li><p>回路の可視化</p></li>
+<li><p>実験のシミュレーション</p></li>
+<li><p>結果の可視化</p></li>
 </ol>
 <div class="section" id="step-1-import-packages">
 <h3>手順1 : パッケージのインポート<a class="headerlink" href="#step-1-import-packages" title="このヘッドラインへのパーマリンク">¶</a></h3>
@@ -1349,10 +1374,10 @@ circuit_drawer = mpl
 </div>
 <p>インポートされるものの詳細は以下の通りです。</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">QuantumCircuit</span></code>: 量子コンピューターシステムにおける動作命令を示し、全ての量子演算をつかさどっています。</li>
-<li><code class="docutils literal notranslate"><span class="pre">execute</span></code>: 回路や実験を実行する</li>
-<li><code class="docutils literal notranslate"><span class="pre">Aer</span></code>: シミュレーターのバックエンドを管理する</li>
-<li><code class="docutils literal notranslate"><span class="pre">plot_histogram</span></code>: ヒストグラムを作成する</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">QuantumCircuit</span></code>: 量子コンピューターシステムにおける動作命令を示し、全ての量子演算をつかさどっています。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">execute</span></code>: 回路や実験を実行する</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Aer</span></code>: シミュレーターのバックエンドを管理する</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">plot_histogram</span></code>: ヒストグラムを作成する</p></li>
 </ul>
 </div>
 <div class="section" id="step-2-initialize-variables">
@@ -1364,7 +1389,7 @@ circuit_drawer = mpl
 <p>ここでは、二つの量子ビットをゼロの状態に、二つの古典ビットをゼロに初期化し、量子回路 <code class="docutils literal notranslate"><span class="pre">circuit</span></code> に代入しています。</p>
 <p>構文：</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">QuantumCircuit(int,</span> <span class="pre">int)</span></code></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">QuantumCircuit(int,</span> <span class="pre">int)</span></code></p></li>
 </ul>
 </div>
 <div class="section" id="step-3-add-gates">
@@ -1381,33 +1406,45 @@ circuit_drawer = mpl
 \[|\psi\rangle = \left(|00\rangle+|11\rangle\right)/\sqrt{2}.\]</div>
 <p>上記コードは以下のゲートが適用されています。</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">QuantumCircuit.h(0)</span></code>: 量子ビット0に対するアダマール・ゲート <span class="math notranslate nohighlight">\(H\)</span> 。量子ビット0を <strong>重ね合わせ状態</strong> にします。</li>
-<li><code class="docutils literal notranslate"><span class="pre">QuantumCircuit.cx(0,</span> <span class="pre">1)</span></code>: 量子ビット0をコントロール・ビット、量子ビット1をターゲット・ビットとした制御NOTゲート(<span class="math notranslate nohighlight">\(C_{X}\)</span>)。量子ビットを <strong>量子もつれ状態</strong> にします。</li>
-<li><code class="docutils literal notranslate"><span class="pre">QuantumCircuit.measure([0,1],</span> <span class="pre">[0,1])</span></code>: 全ての量子レジスターと古典レジスターを <code class="docutils literal notranslate"><span class="pre">measure</span></code> に送ると、i番目の量子ビットの結果がi番目の古典ビットに保存されます。</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">QuantumCircuit.h(0)</span></code>: 量子ビット0に対するアダマール・ゲート <span class="math notranslate nohighlight">\(H\)</span> 。量子ビット0を <strong>重ね合わせ状態</strong> にします。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">QuantumCircuit.cx(0,</span> <span class="pre">1)</span></code>: 量子ビット0をコントロール・ビット、量子ビット1をターゲット・ビットとした制御NOTゲート(<span class="math notranslate nohighlight">\(C_{X}\)</span>)。量子ビットを <strong>量子もつれ状態</strong> にします。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">QuantumCircuit.measure([0,1],</span> <span class="pre">[0,1])</span></code>: 全ての量子レジスターと古典レジスターを <code class="docutils literal notranslate"><span class="pre">measure</span></code> に送ると、i番目の量子ビットの結果がi番目の古典ビットに保存されます。</p></li>
 </ul>
 </div>
 <div class="section" id="step-4-visualize-the-circuit">
 <h3>手順４：回路の可視化<a class="headerlink" href="#step-4-visualize-the-circuit" title="このヘッドラインへのパーマリンク">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">QuantumCircuit.draw()</span></code> を使って、作成した回路を可視化することができます。いろいろな教科書や研究論文で使われている <a class="reference external" href="api/qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit.draw">様々な形式</a> を利用することができます。</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">circuit</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+<div class="docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">circuit</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
 </pre></div>
 </div>
-<img alt="Quantum circuit to make a Bell state." src="_images/getting_started_0.png" />
+<pre style="word-wrap: normal;white-space: pre;background: #fff0;line-height: 1.1;font-family: &quot;Courier New&quot;,Courier,monospace">        ┌───┐     ┌─┐   
+q_0: |0>┤ H ├──■──┤M├───
+        └───┘┌─┴─┐└╥┘┌─┐
+q_1: |0>─────┤ X ├─╫─┤M├
+             └───┘ ║ └╥┘
+ c_0: 0 ═══════════╩══╬═
+                      ║ 
+ c_1: 0 ══════════════╩═
+                        </pre></div>
 <p>この回路では、量子ビットは量子ビット0が上、量子ビット1が下に記述されています。回路は左から右に読み、左に表示されているゲートから順に適用されます。</p>
 </div>
 <div class="section" id="step-5-simulate-the-experiment">
 <h3>実験のシミュレーション<a class="headerlink" href="#step-5-simulate-the-experiment" title="このヘッドラインへのパーマリンク">¶</a></h3>
 <p>Qiskit Aerは、量子回路の高パフォーマンス・シミュレーター・フレームワークです。様々なシミュレーションの目的を達成するために、<a class="reference external" href="apidoc/providers/aer/aer_backends.html">いくつかのバックエンド</a> を提供します。</p>
 <p>回路のシミュレートには、<code class="docutils literal notranslate"><span class="pre">qasm_simulator</span></code> を使用します。回路の実行毎にビット文字列00もしくは11を生成します。</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">simulator</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">)</span>
+<div class="docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simulator</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">)</span>
 <span class="n">job</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="n">simulator</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
 <span class="n">result</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
 <span class="n">counts</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="n">circuit</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Total count for 00 and 11 are:&quot;</span><span class="p">,</span><span class="n">counts</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Total count for 00 and 11 are:&quot;</span><span class="p">,</span><span class="n">counts</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Total count for 00 and 11 are: {&#39;00&#39;: 479, &#39;11&#39;: 521}
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+<span class="n">Total</span> <span class="n">count</span> <span class="k">for</span> <span class="mi">00</span> <span class="ow">and</span> <span class="mi">11</span> <span class="n">are</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;00&#39;</span><span class="p">:</span> <span class="mi">504</span><span class="p">,</span> <span class="s1">&#39;11&#39;</span><span class="p">:</span> <span class="mi">496</span><span class="p">}</span>
 </pre></div>
+</div>
 </div>
 <p>期待通りにビット文字列の出力が00になるのはおおよそ50％です。回路の実行回数は <code class="docutils literal notranslate"><span class="pre">execute</span></code> メソッドの <code class="docutils literal notranslate"><span class="pre">shots</span></code> 引数で指定できます。このシミュレーションの実行回数は1000(デフォルトは1024) に設定されています。</p>
 <p><code class="docutils literal notranslate"><span class="pre">result</span></code> オブジェクトを取得できたら、<code class="docutils literal notranslate"><span class="pre">get_counts(circuit)</span></code> メソッドを使用して回数を取得することができます。これにより、実行した実験の総計を得ることができます。</p>
@@ -1416,14 +1453,16 @@ circuit_drawer = mpl
 <h3>ステップ6：結果の可視化<a class="headerlink" href="#step-6-visualize-the-results" title="このヘッドラインへのパーマリンク">¶</a></h3>
 <p>Qiskitは <a class="reference external" href="apidoc/visualization/visualization.html">多くのビジュアライゼーション</a> を提供します。</p>
 <p>その中には結果を表示するための <code class="docutils literal notranslate"><span class="pre">plot_histogram</span></code> という関数も含まれます。</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plot_histogram</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
+<div class="docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_histogram</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="Histogram of results." src="_images/getting_started_1.png" />
+<img alt="_images/getting_started_4_0.png" src="_images/getting_started_4_0.png" />
+</div>
 <p>観測された確率 <span class="math notranslate nohighlight">\(Pr(00)\)</span> と <span class="math notranslate nohighlight">\(Pr(11)\)</span> は、対応する事象が観測された回数を全実行回数で割った数値です。</p>
 <div class="admonition note">
-<p class="first admonition-title">注釈</p>
-<p class="last"><code class="docutils literal notranslate"><span class="pre">execute</span></code> メソッドの <code class="docutils literal notranslate"><span class="pre">shots</span></code> 引数を変更して、推定される確率がどのように変化するか見てみましょう。</p>
+<p class="admonition-title">注釈</p>
+<p><code class="docutils literal notranslate"><span class="pre">execute</span></code> メソッドの <code class="docutils literal notranslate"><span class="pre">shots</span></code> 引数を変更して、推定される確率がどのように変化するか見てみましょう。</p>
 </div>
 </div>
 </div>
@@ -1431,9 +1470,9 @@ circuit_drawer = mpl
 <h2>次の手順<a class="headerlink" href="#next-steps" title="このヘッドラインへのパーマリンク">¶</a></h2>
 <p>基礎の学習が終わりました。ここから先は、以下の学習リソースでの継続的な学習をおすすめします。</p>
 <ul class="simple">
-<li><a class="reference external" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorials/blob/master/qiskit/1_start_here.ipynb">Notebook によるチュートリアル</a></li>
-<li><a class="reference external" href="https://www.youtube.com/playlist?list=PLOFEBzvs-Vvp2xg9-POLJhQwtVktlYGbY">ビデオ・チュートリアル</a></li>
-<li><a class="reference external" href="apidoc/qiskit.html">API リファレンス</a></li>
+<li><p><a class="reference external" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorials/blob/master/qiskit/1_start_here.ipynb">Notebook によるチュートリアル</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/playlist?list=PLOFEBzvs-Vvp2xg9-POLJhQwtVktlYGbY">ビデオ・チュートリアル</a></p></li>
+<li><p><a class="reference external" href="apidoc/qiskit.html">API リファレンス</a></p></li>
 </ul>
 </div>
 </div>

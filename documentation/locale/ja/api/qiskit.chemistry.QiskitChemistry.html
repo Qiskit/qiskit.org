@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,6 +48,8 @@
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/js/themeExt.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="索引" href="../genindex.html" />
@@ -625,6 +626,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1215,6 +1222,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1261,118 +1274,111 @@
 <h1>QiskitChemistry<a class="headerlink" href="#qiskitchemistry" title="このヘッドラインへのパーマリンク">¶</a></h1>
 <dl class="class">
 <dt id="qiskit.chemistry.QiskitChemistry">
-<em class="property">class </em><code class="descname">QiskitChemistry</code><a class="reference internal" href="../_modules/qiskit/chemistry/qiskit_chemistry.html#QiskitChemistry"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.chemistry.QiskitChemistry" title="この定義へのパーマリンク">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">QiskitChemistry</code><a class="reference internal" href="../_modules/qiskit/chemistry/qiskit_chemistry.html#QiskitChemistry"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.chemistry.QiskitChemistry" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Main Chemistry class.</p>
+<p>Create an QiskitChemistry object.</p>
 <p class="rubric">Attributes Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.chemistry.QiskitChemistry.chemistry_result" title="qiskit.chemistry.QiskitChemistry.chemistry_result"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chemistry_result</span></code></a></td>
-<td>Returns Chemistry result.</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.chemistry.QiskitChemistry.chemistry_result" title="qiskit.chemistry.QiskitChemistry.chemistry_result"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chemistry_result</span></code></a></p></td>
+<td><p>Returns Chemistry result.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.chemistry.QiskitChemistry.hdf5_file" title="qiskit.chemistry.QiskitChemistry.hdf5_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hdf5_file</span></code></a></td>
-<td>Returns Chemistry hdf5 path with chemistry results, if used.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.chemistry.QiskitChemistry.hdf5_file" title="qiskit.chemistry.QiskitChemistry.hdf5_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hdf5_file</span></code></a></p></td>
+<td><p>Returns Chemistry hdf5 path with chemistry results, if used.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.chemistry.QiskitChemistry.operator" title="qiskit.chemistry.QiskitChemistry.operator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">operator</span></code></a></td>
-<td>Returns Chemistry Operator.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.chemistry.QiskitChemistry.operator" title="qiskit.chemistry.QiskitChemistry.operator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">operator</span></code></a></p></td>
+<td><p>Returns Chemistry Operator.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.chemistry.QiskitChemistry.parser" title="qiskit.chemistry.QiskitChemistry.parser"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parser</span></code></a></td>
-<td>Returns Chemistry parser.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.chemistry.QiskitChemistry.parser" title="qiskit.chemistry.QiskitChemistry.parser"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parser</span></code></a></p></td>
+<td><p>Returns Chemistry parser.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.chemistry.QiskitChemistry.qiskit_aqua" title="qiskit.chemistry.QiskitChemistry.qiskit_aqua"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qiskit_aqua</span></code></a></td>
-<td>Returns Qiskit Aqua object.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.chemistry.QiskitChemistry.qiskit_aqua" title="qiskit.chemistry.QiskitChemistry.qiskit_aqua"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qiskit_aqua</span></code></a></p></td>
+<td><p>Returns Qiskit Aqua object.</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Methods Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.chemistry.QiskitChemistry.run" title="qiskit.chemistry.QiskitChemistry.run"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run</span></code></a>(params[,&nbsp;output,&nbsp;backend])</td>
-<td>Runs the Qiskit Chemistry experiment</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.chemistry.QiskitChemistry.run" title="qiskit.chemistry.QiskitChemistry.run"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run</span></code></a>(params[, output, backend])</p></td>
+<td><p>Runs the Qiskit Chemistry experiment</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.chemistry.QiskitChemistry.run_driver" title="qiskit.chemistry.QiskitChemistry.run_driver"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_driver</span></code></a>(params[,&nbsp;backend])</td>
-<td>Runs the Qiskit Chemistry driver</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.chemistry.QiskitChemistry.run_driver" title="qiskit.chemistry.QiskitChemistry.run_driver"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_driver</span></code></a>(params[, backend])</p></td>
+<td><p>Runs the Qiskit Chemistry driver</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Attributes Documentation</p>
 <dl class="attribute">
 <dt id="qiskit.chemistry.QiskitChemistry.chemistry_result">
-<code class="descname">chemistry_result</code><a class="headerlink" href="#qiskit.chemistry.QiskitChemistry.chemistry_result" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">chemistry_result</code><a class="headerlink" href="#qiskit.chemistry.QiskitChemistry.chemistry_result" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Returns Chemistry result.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.chemistry.QiskitChemistry.hdf5_file">
-<code class="descname">hdf5_file</code><a class="headerlink" href="#qiskit.chemistry.QiskitChemistry.hdf5_file" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">hdf5_file</code><a class="headerlink" href="#qiskit.chemistry.QiskitChemistry.hdf5_file" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Returns Chemistry hdf5 path with chemistry results, if used.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.chemistry.QiskitChemistry.operator">
-<code class="descname">operator</code><a class="headerlink" href="#qiskit.chemistry.QiskitChemistry.operator" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">operator</code><a class="headerlink" href="#qiskit.chemistry.QiskitChemistry.operator" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Returns Chemistry Operator.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.chemistry.QiskitChemistry.parser">
-<code class="descname">parser</code><a class="headerlink" href="#qiskit.chemistry.QiskitChemistry.parser" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">parser</code><a class="headerlink" href="#qiskit.chemistry.QiskitChemistry.parser" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Returns Chemistry parser.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.chemistry.QiskitChemistry.qiskit_aqua">
-<code class="descname">qiskit_aqua</code><a class="headerlink" href="#qiskit.chemistry.QiskitChemistry.qiskit_aqua" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">qiskit_aqua</code><a class="headerlink" href="#qiskit.chemistry.QiskitChemistry.qiskit_aqua" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Returns Qiskit Aqua object.</p>
 </dd></dl>
 
 <p class="rubric">Methods Documentation</p>
 <dl class="method">
 <dt id="qiskit.chemistry.QiskitChemistry.run">
-<code class="descname">run</code><span class="sig-paren">(</span><em>params</em>, <em>output=None</em>, <em>backend=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/chemistry/qiskit_chemistry.html#QiskitChemistry.run"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.chemistry.QiskitChemistry.run" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param">params</em>, <em class="sig-param">output=None</em>, <em class="sig-param">backend=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/chemistry/qiskit_chemistry.html#QiskitChemistry.run"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.chemistry.QiskitChemistry.run" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Runs the Qiskit Chemistry experiment</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first simple">
-<li><strong>params</strong> (<em>dictionary/filename</em>) -- Chemistry input data</li>
-<li><strong>output</strong> (<em>filename</em>) -- Output data</li>
-<li><strong>backend</strong> (<a class="reference internal" href="qiskit.aqua.QuantumInstance.html#qiskit.aqua.QuantumInstance" title="qiskit.aqua.QuantumInstance"><em>QuantumInstance</em></a><em> or </em><a class="reference internal" href="qiskit.providers.BaseBackend.html#qiskit.providers.BaseBackend" title="qiskit.providers.BaseBackend"><em>BaseBackend</em></a>) -- the experimental settings to be used in place of backend name</li>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>params</strong> (<em>dictionary/filename</em>) -- Chemistry input data</p></li>
+<li><p><strong>output</strong> (<em>filename</em>) -- Output data</p></li>
+<li><p><strong>backend</strong> (<a class="reference internal" href="qiskit.aqua.QuantumInstance.html#qiskit.aqua.QuantumInstance" title="qiskit.aqua.QuantumInstance"><em>QuantumInstance</em></a><em> or </em><a class="reference internal" href="qiskit.providers.BaseBackend.html#qiskit.providers.BaseBackend" title="qiskit.providers.BaseBackend"><em>BaseBackend</em></a>) -- the experimental settings to be used in place of backend name</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first last">result dictionary</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">戻り値</dt>
+<dd class="field-even"><p>result dictionary</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.chemistry.QiskitChemistry.run_driver">
-<code class="descname">run_driver</code><span class="sig-paren">(</span><em>params</em>, <em>backend=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/chemistry/qiskit_chemistry.html#QiskitChemistry.run_driver"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.chemistry.QiskitChemistry.run_driver" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">run_driver</code><span class="sig-paren">(</span><em class="sig-param">params</em>, <em class="sig-param">backend=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/chemistry/qiskit_chemistry.html#QiskitChemistry.run_driver"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.chemistry.QiskitChemistry.run_driver" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Runs the Qiskit Chemistry driver</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first last simple">
-<li><strong>params</strong> (<em>dictionary/filename</em>) -- Chemistry input data</li>
-<li><strong>backend</strong> (<a class="reference internal" href="qiskit.aqua.QuantumInstance.html#qiskit.aqua.QuantumInstance" title="qiskit.aqua.QuantumInstance"><em>QuantumInstance</em></a><em> or </em><a class="reference internal" href="qiskit.providers.BaseBackend.html#qiskit.providers.BaseBackend" title="qiskit.providers.BaseBackend"><em>BaseBackend</em></a>) -- the experimental settings to be used in place of backend name</li>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>params</strong> (<em>dictionary/filename</em>) -- Chemistry input data</p></li>
+<li><p><strong>backend</strong> (<a class="reference internal" href="qiskit.aqua.QuantumInstance.html#qiskit.aqua.QuantumInstance" title="qiskit.aqua.QuantumInstance"><em>QuantumInstance</em></a><em> or </em><a class="reference internal" href="qiskit.providers.BaseBackend.html#qiskit.providers.BaseBackend" title="qiskit.providers.BaseBackend"><em>BaseBackend</em></a>) -- the experimental settings to be used in place of backend name</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>

@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,6 +48,8 @@
     <script type="text/javascript" src="_static/language_data.js"></script>
     <script type="text/javascript" src="_static/js/themeExt.js"></script>
     <script type="text/javascript" src="_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="_static/favicon.ico"/>
     <link rel="index" title="Stichwortverzeichnis" href="genindex.html" />
@@ -624,6 +625,12 @@
 <li class="toctree-l3"><a class="reference internal" href="apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1214,6 +1221,12 @@
 <li class="toctree-l3"><a class="reference internal" href="apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1267,16 +1280,16 @@ to facilitate research on the most important open issues facing quantum computat
 quantum computers.</p>
 <p>Qiskit consists of four foundational elements:</p>
 <ul class="simple">
-<li><a class="reference internal" href="the_elements.html#terra"><span class="std std-ref">Qiskit Terra</span></a>: Composing quantum programs at the level of circuits
-and pulses with the code foundation.</li>
-<li><a class="reference internal" href="the_elements.html#aer"><span class="std std-ref">Qiskit Aer</span></a>: Accelerating development via simulators, emulators,
-and debuggers</li>
-<li><a class="reference internal" href="the_elements.html#ignis"><span class="std std-ref">Qiskit Ignis</span></a>: Addressing noise and errors</li>
-<li><a class="reference internal" href="the_elements.html#aqua"><span class="std std-ref">Qiskit Aqua</span></a>: Building algorithms and applications</li>
+<li><p><a class="reference internal" href="the_elements.html#terra"><span class="std std-ref">Qiskit Terra</span></a>: Composing quantum programs at the level of circuits
+and pulses with the code foundation.</p></li>
+<li><p><a class="reference internal" href="the_elements.html#aer"><span class="std std-ref">Qiskit Aer</span></a>: Accelerating development via simulators, emulators,
+and debuggers</p></li>
+<li><p><a class="reference internal" href="the_elements.html#ignis"><span class="std std-ref">Qiskit Ignis</span></a>: Addressing noise and errors</p></li>
+<li><p><a class="reference internal" href="the_elements.html#aqua"><span class="std std-ref">Qiskit Aqua</span></a>: Building algorithms and applications</p></li>
 </ul>
 <div class="admonition note">
-<p class="first admonition-title">Bemerkung</p>
-<p class="last">This is the Qiskit API documentation. For detailed workflow examples, please sign in to the
+<p class="admonition-title">Bemerkung</p>
+<p>This is the Qiskit API documentation. For detailed workflow examples, please sign in to the
 IBM Q Experience to <a class="reference external" href="https://quantum-computing.ibm.com/jupyter/tutorial/1_start_here.ipynb">explore Qiskit tutorials</a>.</p>
 </div>
 <div class="toctree-wrapper compound">

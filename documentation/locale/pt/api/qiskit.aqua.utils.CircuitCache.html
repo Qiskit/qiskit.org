@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,6 +48,8 @@
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/js/themeExt.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Índice" href="../genindex.html" />
@@ -625,6 +626,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1215,6 +1222,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1261,33 +1274,33 @@
 <h1>CircuitCache<a class="headerlink" href="#circuitcache" title="Link permanente para este título">¶</a></h1>
 <dl class="class">
 <dt id="qiskit.aqua.utils.CircuitCache">
-<em class="property">class </em><code class="descname">CircuitCache</code><span class="sig-paren">(</span><em>skip_qobj_deepcopy=False</em>, <em>cache_file=None</em>, <em>allowed_misses=3</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/utils/circuit_cache.html#CircuitCache"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.aqua.utils.CircuitCache" title="Link permanente para esta definição">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">CircuitCache</code><span class="sig-paren">(</span><em class="sig-param">skip_qobj_deepcopy=False</em>, <em class="sig-param">cache_file=None</em>, <em class="sig-param">allowed_misses=3</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/utils/circuit_cache.html#CircuitCache"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.aqua.utils.CircuitCache" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p class="rubric">Methods Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.utils.CircuitCache.cache_circuit" title="qiskit.aqua.utils.CircuitCache.cache_circuit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cache_circuit</span></code></a>(qobj,&nbsp;circuits,&nbsp;chunk)</td>
-<td>A method for caching compiled qobjs by storing the compiled qobj and constructing a mapping array from the uncompiled operations in the circuit to the instructions in the qobj.</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.utils.CircuitCache.cache_circuit" title="qiskit.aqua.utils.CircuitCache.cache_circuit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cache_circuit</span></code></a>(qobj, circuits, chunk)</p></td>
+<td><p>A method for caching compiled qobjs by storing the compiled qobj and constructing a mapping array from the uncompiled operations in the circuit to the instructions in the qobj.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.utils.CircuitCache.clear_cache" title="qiskit.aqua.utils.CircuitCache.clear_cache"><code class="xref py py-obj docutils literal notranslate"><span class="pre">clear_cache</span></code></a>()</td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.utils.CircuitCache.clear_cache" title="qiskit.aqua.utils.CircuitCache.clear_cache"><code class="xref py py-obj docutils literal notranslate"><span class="pre">clear_cache</span></code></a>()</p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.utils.CircuitCache.load_qobj_from_cache" title="qiskit.aqua.utils.CircuitCache.load_qobj_from_cache"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_qobj_from_cache</span></code></a>(circuits,&nbsp;chunk[,&nbsp;…])</td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.utils.CircuitCache.load_qobj_from_cache" title="qiskit.aqua.utils.CircuitCache.load_qobj_from_cache"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_qobj_from_cache</span></code></a>(circuits, chunk[, …])</p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.utils.CircuitCache.try_loading_cache_from_file" title="qiskit.aqua.utils.CircuitCache.try_loading_cache_from_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">try_loading_cache_from_file</span></code></a>()</td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.utils.CircuitCache.try_loading_cache_from_file" title="qiskit.aqua.utils.CircuitCache.try_loading_cache_from_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">try_loading_cache_from_file</span></code></a>()</p></td>
+<td><p></p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Methods Documentation</p>
 <dl class="method">
 <dt id="qiskit.aqua.utils.CircuitCache.cache_circuit">
-<code class="descname">cache_circuit</code><span class="sig-paren">(</span><em>qobj</em>, <em>circuits</em>, <em>chunk</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/utils/circuit_cache.html#CircuitCache.cache_circuit"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.aqua.utils.CircuitCache.cache_circuit" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">cache_circuit</code><span class="sig-paren">(</span><em class="sig-param">qobj</em>, <em class="sig-param">circuits</em>, <em class="sig-param">chunk</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/utils/circuit_cache.html#CircuitCache.cache_circuit"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.aqua.utils.CircuitCache.cache_circuit" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>A method for caching compiled qobjs by storing the compiled qobj
 and constructing a mapping array from the uncompiled operations in the circuit
 to the instructions in the qobj. Note that the «qobjs» list in the cache dict is a
@@ -1299,35 +1312,31 @@ len(circuit_cache[“qobjs”][0].experiments) == 300, and
 len(circuit_cache[“qobjs”][1].experiments) == 200.</p>
 <p>This feature is only applied if “circuit_caching” is True in the “problem” Aqua
 dictionary section.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parâmetros:</th><td class="field-body"><ul class="first last simple">
-<li><strong>qobj</strong> (<a class="reference internal" href="qiskit.qobj.Qobj.html#qiskit.qobj.Qobj" title="qiskit.qobj.Qobj"><em>Qobj</em></a>) – A compiled qobj to be saved</li>
-<li><strong>circuits</strong> (<em>list</em>) – The original uncompiled QuantumCircuits</li>
-<li><strong>chunk</strong> (<em>int</em>) – If a larger list of circuits was broken into chunks by run_algorithm for separate runs,</li>
-<li><strong>chunk number circuits represents</strong> (<em>which</em>) – </li>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>qobj</strong> (<a class="reference internal" href="qiskit.qobj.Qobj.html#qiskit.qobj.Qobj" title="qiskit.qobj.Qobj"><em>Qobj</em></a>) – A compiled qobj to be saved</p></li>
+<li><p><strong>circuits</strong> (<em>list</em>) – The original uncompiled QuantumCircuits</p></li>
+<li><p><strong>chunk</strong> (<em>int</em>) – If a larger list of circuits was broken into chunks by run_algorithm for separate runs,</p></li>
+<li><p><strong>chunk number circuits represents</strong> (<em>which</em>) – </p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.utils.CircuitCache.clear_cache">
-<code class="descname">clear_cache</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/utils/circuit_cache.html#CircuitCache.clear_cache"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.aqua.utils.CircuitCache.clear_cache" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">clear_cache</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/utils/circuit_cache.html#CircuitCache.clear_cache"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.aqua.utils.CircuitCache.clear_cache" title="Link permanente para esta definição">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.utils.CircuitCache.load_qobj_from_cache">
-<code class="descname">load_qobj_from_cache</code><span class="sig-paren">(</span><em>circuits</em>, <em>chunk</em>, <em>run_config=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/utils/circuit_cache.html#CircuitCache.load_qobj_from_cache"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.aqua.utils.CircuitCache.load_qobj_from_cache" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">load_qobj_from_cache</code><span class="sig-paren">(</span><em class="sig-param">circuits</em>, <em class="sig-param">chunk</em>, <em class="sig-param">run_config=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/utils/circuit_cache.html#CircuitCache.load_qobj_from_cache"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.aqua.utils.CircuitCache.load_qobj_from_cache" title="Link permanente para esta definição">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.utils.CircuitCache.try_loading_cache_from_file">
-<code class="descname">try_loading_cache_from_file</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/utils/circuit_cache.html#CircuitCache.try_loading_cache_from_file"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.aqua.utils.CircuitCache.try_loading_cache_from_file" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">try_loading_cache_from_file</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/utils/circuit_cache.html#CircuitCache.try_loading_cache_from_file"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.aqua.utils.CircuitCache.try_loading_cache_from_file" title="Link permanente para esta definição">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>

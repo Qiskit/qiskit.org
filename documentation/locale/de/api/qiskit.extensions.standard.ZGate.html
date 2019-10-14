@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,6 +48,8 @@
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/js/themeExt.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Stichwortverzeichnis" href="../genindex.html" />
@@ -625,6 +626,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1215,6 +1222,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1261,92 +1274,93 @@
 <h1>ZGate<a class="headerlink" href="#zgate" title="Link zu dieser Überschrift">¶</a></h1>
 <dl class="class">
 <dt id="qiskit.extensions.standard.ZGate">
-<em class="property">class </em><code class="descname">ZGate</code><span class="sig-paren">(</span><em>label=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/extensions/standard/z.html#ZGate"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.extensions.standard.ZGate" title="Link zu dieser Definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">ZGate</code><span class="sig-paren">(</span><em class="sig-param">label=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/extensions/standard/z.html#ZGate"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.extensions.standard.ZGate" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.circuit.gate.Gate</span></code></p>
 <p>Pauli Z (phase-flip) gate.</p>
+<p>Create new Z gate.</p>
 <p class="rubric">Attributes Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.extensions.standard.ZGate.definition" title="qiskit.extensions.standard.ZGate.definition"><code class="xref py py-obj docutils literal notranslate"><span class="pre">definition</span></code></a></td>
-<td>Return definition in terms of other basic gates.</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.extensions.standard.ZGate.definition" title="qiskit.extensions.standard.ZGate.definition"><code class="xref py py-obj docutils literal notranslate"><span class="pre">definition</span></code></a></p></td>
+<td><p>Return definition in terms of other basic gates.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.extensions.standard.ZGate.label" title="qiskit.extensions.standard.ZGate.label"><code class="xref py py-obj docutils literal notranslate"><span class="pre">label</span></code></a></td>
-<td>Return gate label</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.extensions.standard.ZGate.label" title="qiskit.extensions.standard.ZGate.label"><code class="xref py py-obj docutils literal notranslate"><span class="pre">label</span></code></a></p></td>
+<td><p>Return gate label</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.extensions.standard.ZGate.params" title="qiskit.extensions.standard.ZGate.params"><code class="xref py py-obj docutils literal notranslate"><span class="pre">params</span></code></a></td>
-<td>return instruction params</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.extensions.standard.ZGate.params" title="qiskit.extensions.standard.ZGate.params"><code class="xref py py-obj docutils literal notranslate"><span class="pre">params</span></code></a></p></td>
+<td><p>return instruction params</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Methods Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.extensions.standard.ZGate.assemble" title="qiskit.extensions.standard.ZGate.assemble"><code class="xref py py-obj docutils literal notranslate"><span class="pre">assemble</span></code></a>()</td>
-<td>Assemble a QasmQobjInstruction</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.extensions.standard.ZGate.assemble" title="qiskit.extensions.standard.ZGate.assemble"><code class="xref py py-obj docutils literal notranslate"><span class="pre">assemble</span></code></a>()</p></td>
+<td><p>Assemble a QasmQobjInstruction</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.extensions.standard.ZGate.broadcast_arguments" title="qiskit.extensions.standard.ZGate.broadcast_arguments"><code class="xref py py-obj docutils literal notranslate"><span class="pre">broadcast_arguments</span></code></a>(qargs,&nbsp;cargs)</td>
-<td>Validation and handling of the arguments and its relationship.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.extensions.standard.ZGate.broadcast_arguments" title="qiskit.extensions.standard.ZGate.broadcast_arguments"><code class="xref py py-obj docutils literal notranslate"><span class="pre">broadcast_arguments</span></code></a>(qargs, cargs)</p></td>
+<td><p>Validation and handling of the arguments and its relationship.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.extensions.standard.ZGate.c_if" title="qiskit.extensions.standard.ZGate.c_if"><code class="xref py py-obj docutils literal notranslate"><span class="pre">c_if</span></code></a>(classical,&nbsp;val)</td>
-<td>Add classical control on register classical and value val.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.extensions.standard.ZGate.c_if" title="qiskit.extensions.standard.ZGate.c_if"><code class="xref py py-obj docutils literal notranslate"><span class="pre">c_if</span></code></a>(classical, val)</p></td>
+<td><p>Add classical control on register classical and value val.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.extensions.standard.ZGate.copy" title="qiskit.extensions.standard.ZGate.copy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">copy</span></code></a>([name])</td>
-<td>shallow copy of the instruction.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.extensions.standard.ZGate.copy" title="qiskit.extensions.standard.ZGate.copy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">copy</span></code></a>([name])</p></td>
+<td><p>shallow copy of the instruction.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.extensions.standard.ZGate.inverse" title="qiskit.extensions.standard.ZGate.inverse"><code class="xref py py-obj docutils literal notranslate"><span class="pre">inverse</span></code></a>()</td>
-<td>Invert this gate.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.extensions.standard.ZGate.inverse" title="qiskit.extensions.standard.ZGate.inverse"><code class="xref py py-obj docutils literal notranslate"><span class="pre">inverse</span></code></a>()</p></td>
+<td><p>Invert this gate.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.extensions.standard.ZGate.mirror" title="qiskit.extensions.standard.ZGate.mirror"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mirror</span></code></a>()</td>
-<td>For a composite instruction, reverse the order of sub-gates.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.extensions.standard.ZGate.mirror" title="qiskit.extensions.standard.ZGate.mirror"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mirror</span></code></a>()</p></td>
+<td><p>For a composite instruction, reverse the order of sub-gates.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.extensions.standard.ZGate.qasm" title="qiskit.extensions.standard.ZGate.qasm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qasm</span></code></a>()</td>
-<td>Return a default OpenQASM string for the instruction.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.extensions.standard.ZGate.qasm" title="qiskit.extensions.standard.ZGate.qasm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qasm</span></code></a>()</p></td>
+<td><p>Return a default OpenQASM string for the instruction.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.extensions.standard.ZGate.repeat" title="qiskit.extensions.standard.ZGate.repeat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">repeat</span></code></a>(n)</td>
-<td>Creates an instruction with <cite>gate</cite> repeated <cite>n</cite> amount of times.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.extensions.standard.ZGate.repeat" title="qiskit.extensions.standard.ZGate.repeat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">repeat</span></code></a>(n)</p></td>
+<td><p>Creates an instruction with <cite>gate</cite> repeated <cite>n</cite> amount of times.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.extensions.standard.ZGate.to_matrix" title="qiskit.extensions.standard.ZGate.to_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_matrix</span></code></a>()</td>
-<td>Return a Numpy.array for the X gate.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.extensions.standard.ZGate.to_matrix" title="qiskit.extensions.standard.ZGate.to_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_matrix</span></code></a>()</p></td>
+<td><p>Return a Numpy.array for the X gate.</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Attributes Documentation</p>
 <dl class="attribute">
 <dt id="qiskit.extensions.standard.ZGate.definition">
-<code class="descname">definition</code><a class="headerlink" href="#qiskit.extensions.standard.ZGate.definition" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">definition</code><a class="headerlink" href="#qiskit.extensions.standard.ZGate.definition" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Return definition in terms of other basic gates.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.extensions.standard.ZGate.label">
-<code class="descname">label</code><a class="headerlink" href="#qiskit.extensions.standard.ZGate.label" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">label</code><a class="headerlink" href="#qiskit.extensions.standard.ZGate.label" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Return gate label</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.extensions.standard.ZGate.params">
-<code class="descname">params</code><a class="headerlink" href="#qiskit.extensions.standard.ZGate.params" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">params</code><a class="headerlink" href="#qiskit.extensions.standard.ZGate.params" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>return instruction params</p>
 </dd></dl>
 
 <p class="rubric">Methods Documentation</p>
 <dl class="method">
 <dt id="qiskit.extensions.standard.ZGate.assemble">
-<code class="descname">assemble</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.standard.ZGate.assemble" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">assemble</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.standard.ZGate.assemble" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Assemble a QasmQobjInstruction</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.extensions.standard.ZGate.broadcast_arguments">
-<code class="descname">broadcast_arguments</code><span class="sig-paren">(</span><em>qargs</em>, <em>cargs</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.standard.ZGate.broadcast_arguments" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">broadcast_arguments</code><span class="sig-paren">(</span><em class="sig-param">qargs</em>, <em class="sig-param">cargs</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.standard.ZGate.broadcast_arguments" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Validation and handling of the arguments and its relationship.</p>
 <p>For example:
 <cite>cx([q[0],q[1]], q[2])</cite> means <cite>cx(q[0], q[2]); cx(q[1], q[2])</cite>. This method
@@ -1356,22 +1370,21 @@ yields the arguments in the right grouping. In the given example:</p>
       <span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">]],</span> <span class="p">[]</span>
 </pre></div>
 </div>
-<dl class="docutils">
-<dt>The general broadcasting rules are:</dt>
-<dd><ul class="first last">
-<li><p class="first">If len(qargs) == 1:</p>
+<dl>
+<dt>The general broadcasting rules are:</dt><dd><ul>
+<li><p>If len(qargs) == 1:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]],[</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">If len(qargs) == 2:</p>
+<li><p>If len(qargs) == 2:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[[</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="p">[</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">]]]</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
 <span class="p">[[</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">]]]</span>       <span class="o">-&gt;</span> <span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
 <span class="p">[[</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="p">[</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]]]</span>       <span class="o">-&gt;</span> <span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">If len(qargs) &gt;= 3:</p>
+<li><p>If len(qargs) &gt;= 3:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="p">[</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span>  <span class="o">...</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">...</span><span class="p">],</span> <span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">...</span><span class="p">]</span>
 </pre></div>
 </div>
@@ -1379,86 +1392,79 @@ yields the arguments in the right grouping. In the given example:</p>
 </ul>
 </dd>
 </dl>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><ul class="first simple">
-<li><strong>qargs</strong> (<em>List</em>) – List of quantum bit arguments.</li>
-<li><strong>cargs</strong> (<em>List</em>) – List of classical bit arguments.</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>qargs</strong> (<em>List</em>) – List of quantum bit arguments.</p></li>
+<li><p><strong>cargs</strong> (<em>List</em>) – List of classical bit arguments.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body"><p class="first">A tuple with single arguments.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body"><p class="first">Tuple(List, List)</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal notranslate"><span class="pre">QiskitError</span></code> – If the input is not valid. For example, the number of
-arguments does not match the gate expectation.</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Rückgabe</dt>
+<dd class="field-even"><p>A tuple with single arguments.</p>
+</dd>
+<dt class="field-odd">Rückgabetyp</dt>
+<dd class="field-odd"><p>Tuple(List, List)</p>
+</dd>
+<dt class="field-even">Verursacht</dt>
+<dd class="field-even"><p><strong>QiskitError</strong> – If the input is not valid. For example, the number of
+    arguments does not match the gate expectation.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.extensions.standard.ZGate.c_if">
-<code class="descname">c_if</code><span class="sig-paren">(</span><em>classical</em>, <em>val</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.standard.ZGate.c_if" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">c_if</code><span class="sig-paren">(</span><em class="sig-param">classical</em>, <em class="sig-param">val</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.standard.ZGate.c_if" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Add classical control on register classical and value val.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.extensions.standard.ZGate.copy">
-<code class="descname">copy</code><span class="sig-paren">(</span><em>name=None</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.standard.ZGate.copy" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">copy</code><span class="sig-paren">(</span><em class="sig-param">name=None</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.standard.ZGate.copy" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>shallow copy of the instruction.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><strong>name</strong> (<em>str</em>) – name to be given to the copied circuit,
-if None then the name stays the same</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body"><dl class="docutils">
-<dt>a shallow copy of the current instruction, with the name</dt>
-<dd>updated if it was provided</dd>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – name to be given to the copied circuit,
+if None then the name stays the same</p>
+</dd>
+<dt class="field-even">Rückgabe</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>a shallow copy of the current instruction, with the name</dt><dd><p>updated if it was provided</p>
+</dd>
 </dl>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body"><a class="reference internal" href="qiskit.circuit.Instruction.html#qiskit.circuit.Instruction" title="qiskit.circuit.Instruction">Instruction</a></td>
-</tr>
-</tbody>
-</table>
+</p>
+</dd>
+<dt class="field-odd">Rückgabetyp</dt>
+<dd class="field-odd"><p><a class="reference internal" href="qiskit.circuit.Instruction.html#qiskit.circuit.Instruction" title="qiskit.circuit.Instruction">Instruction</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.extensions.standard.ZGate.inverse">
-<code class="descname">inverse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/extensions/standard/z.html#ZGate.inverse"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.extensions.standard.ZGate.inverse" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">inverse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/extensions/standard/z.html#ZGate.inverse"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.extensions.standard.ZGate.inverse" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Invert this gate.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.extensions.standard.ZGate.mirror">
-<code class="descname">mirror</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.standard.ZGate.mirror" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">mirror</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.standard.ZGate.mirror" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>For a composite instruction, reverse the order of sub-gates.</p>
 <p>This is done by recursively mirroring all sub-instructions.
 It does not invert any gate.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Rückgabe:</th><td class="field-body">a fresh gate with sub-gates reversed</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Rückgabetyp:</th><td class="field-body"><a class="reference internal" href="qiskit.circuit.Instruction.html#qiskit.circuit.Instruction" title="qiskit.circuit.Instruction">Instruction</a></td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Rückgabe</dt>
+<dd class="field-odd"><p>a fresh gate with sub-gates reversed</p>
+</dd>
+<dt class="field-even">Rückgabetyp</dt>
+<dd class="field-even"><p><a class="reference internal" href="qiskit.circuit.Instruction.html#qiskit.circuit.Instruction" title="qiskit.circuit.Instruction">Instruction</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.extensions.standard.ZGate.qasm">
-<code class="descname">qasm</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.standard.ZGate.qasm" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">qasm</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.standard.ZGate.qasm" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Return a default OpenQASM string for the instruction.</p>
 <p>Derived instructions may override this to print in a
 different format (e.g. measure q[0] -&gt; c[0];).</p>
@@ -1466,27 +1472,27 @@ different format (e.g. measure q[0] -&gt; c[0];).</p>
 
 <dl class="method">
 <dt id="qiskit.extensions.standard.ZGate.repeat">
-<code class="descname">repeat</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.standard.ZGate.repeat" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">repeat</code><span class="sig-paren">(</span><em class="sig-param">n</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.standard.ZGate.repeat" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Creates an instruction with <cite>gate</cite> repeated <cite>n</cite> amount of times.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><strong>n</strong> (<em>int</em>) – Number of times to repeat the instruction</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body">Containing the definition.</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body"><a class="reference internal" href="qiskit.circuit.Instruction.html#qiskit.circuit.Instruction" title="qiskit.circuit.Instruction">Instruction</a></td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal notranslate"><span class="pre">QiskitError</span></code> – If n &lt; 1.</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><p><strong>n</strong> (<em>int</em>) – Number of times to repeat the instruction</p>
+</dd>
+<dt class="field-even">Rückgabe</dt>
+<dd class="field-even"><p>Containing the definition.</p>
+</dd>
+<dt class="field-odd">Rückgabetyp</dt>
+<dd class="field-odd"><p><a class="reference internal" href="qiskit.circuit.Instruction.html#qiskit.circuit.Instruction" title="qiskit.circuit.Instruction">Instruction</a></p>
+</dd>
+<dt class="field-even">Verursacht</dt>
+<dd class="field-even"><p><strong>QiskitError</strong> – If n &lt; 1.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.extensions.standard.ZGate.to_matrix">
-<code class="descname">to_matrix</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/extensions/standard/z.html#ZGate.to_matrix"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.extensions.standard.ZGate.to_matrix" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">to_matrix</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/extensions/standard/z.html#ZGate.to_matrix"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.extensions.standard.ZGate.to_matrix" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Return a Numpy.array for the X gate.</p>
 </dd></dl>
 

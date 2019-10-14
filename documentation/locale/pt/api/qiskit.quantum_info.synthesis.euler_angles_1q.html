@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,6 +48,8 @@
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/js/themeExt.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Índice" href="../genindex.html" />
@@ -625,6 +626,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1215,6 +1222,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1261,25 +1274,24 @@
 <h1>euler_angles_1q<a class="headerlink" href="#euler-angles-1q" title="Link permanente para este título">¶</a></h1>
 <dl class="function">
 <dt id="qiskit.quantum_info.synthesis.euler_angles_1q">
-<code class="descname">euler_angles_1q</code><span class="sig-paren">(</span><em>unitary_matrix</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/synthesis/two_qubit_decompose.html#euler_angles_1q"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.quantum_info.synthesis.euler_angles_1q" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">euler_angles_1q</code><span class="sig-paren">(</span><em class="sig-param">unitary_matrix</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/synthesis/two_qubit_decompose.html#euler_angles_1q"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.quantum_info.synthesis.euler_angles_1q" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Compute Euler angles for a single-qubit gate.</p>
 <p>Find angles (theta, phi, lambda) such that
 unitary_matrix = phase * Rz(phi) * Ry(theta) * Rz(lambda)</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parâmetros:</th><td class="field-body"><strong>unitary_matrix</strong> (<em>ndarray</em>) – 2x2 unitary matrix</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Retorno:</th><td class="field-body">(theta, phi, lambda) Euler angles of SU(2)</td>
-</tr>
-<tr class="field-odd field"><th class="field-name" colspan="2">Tipo de retorno:</th></tr>
-<tr class="field-odd field"><td>&#160;</td><td class="field-body">tuple</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal notranslate"><span class="pre">QiskitError</span></code> – if unitary_matrix not 2x2, or failure</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><p><strong>unitary_matrix</strong> (<em>ndarray</em>) – 2x2 unitary matrix</p>
+</dd>
+<dt class="field-even">Retorno</dt>
+<dd class="field-even"><p>(theta, phi, lambda) Euler angles of SU(2)</p>
+</dd>
+<dt class="field-odd">Tipo de retorno</dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+<dt class="field-even">Levanta</dt>
+<dd class="field-even"><p><strong>QiskitError</strong> – if unitary_matrix not 2x2, or failure</p>
+</dd>
+</dl>
 </dd></dl>
 
 </div>

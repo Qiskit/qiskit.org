@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,6 +48,8 @@
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/js/themeExt.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Stichwortverzeichnis" href="../genindex.html" />
@@ -625,6 +626,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1215,6 +1222,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1261,213 +1274,277 @@
 <h1>ScheduleComponent<a class="headerlink" href="#schedulecomponent" title="Link zu dieser Überschrift">¶</a></h1>
 <dl class="class">
 <dt id="qiskit.pulse.ScheduleComponent">
-<em class="property">class </em><code class="descname">ScheduleComponent</code><a class="reference internal" href="../_modules/qiskit/pulse/interfaces.html#ScheduleComponent"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.pulse.ScheduleComponent" title="Link zu dieser Definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">ScheduleComponent</code><a class="reference internal" href="../_modules/qiskit/pulse/interfaces.html#ScheduleComponent"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.pulse.ScheduleComponent" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Common interface for components of schedule.</p>
 <p class="rubric">Attributes Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.pulse.ScheduleComponent.buffer" title="qiskit.pulse.ScheduleComponent.buffer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">buffer</span></code></a></td>
-<td>Buffer for schedule.</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.pulse.ScheduleComponent.buffer" title="qiskit.pulse.ScheduleComponent.buffer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">buffer</span></code></a></p></td>
+<td><p>Buffer for schedule.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.pulse.ScheduleComponent.channels" title="qiskit.pulse.ScheduleComponent.channels"><code class="xref py py-obj docutils literal notranslate"><span class="pre">channels</span></code></a></td>
-<td>Return channels used by schedule.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.pulse.ScheduleComponent.channels" title="qiskit.pulse.ScheduleComponent.channels"><code class="xref py py-obj docutils literal notranslate"><span class="pre">channels</span></code></a></p></td>
+<td><p>Return channels used by schedule.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.pulse.ScheduleComponent.duration" title="qiskit.pulse.ScheduleComponent.duration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">duration</span></code></a></td>
-<td>Duration of this schedule component.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.pulse.ScheduleComponent.duration" title="qiskit.pulse.ScheduleComponent.duration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">duration</span></code></a></p></td>
+<td><p>Duration of this schedule component.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.pulse.ScheduleComponent.instructions" title="qiskit.pulse.ScheduleComponent.instructions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">instructions</span></code></a></td>
-<td>Return iterable for all <cite>Instruction`s in `Schedule</cite> tree.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.pulse.ScheduleComponent.instructions" title="qiskit.pulse.ScheduleComponent.instructions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">instructions</span></code></a></p></td>
+<td><p>Return iterable for all <cite>Instruction`s in `Schedule</cite> tree.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.pulse.ScheduleComponent.name" title="qiskit.pulse.ScheduleComponent.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></a></td>
-<td>Name of ScheduleComponent.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.pulse.ScheduleComponent.name" title="qiskit.pulse.ScheduleComponent.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></a></p></td>
+<td><p>Name of ScheduleComponent.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.pulse.ScheduleComponent.start_time" title="qiskit.pulse.ScheduleComponent.start_time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">start_time</span></code></a></td>
-<td>Starting time of this schedule component.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.pulse.ScheduleComponent.start_time" title="qiskit.pulse.ScheduleComponent.start_time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">start_time</span></code></a></p></td>
+<td><p>Starting time of this schedule component.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.pulse.ScheduleComponent.stop_time" title="qiskit.pulse.ScheduleComponent.stop_time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stop_time</span></code></a></td>
-<td>Stopping time of this schedule component.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.pulse.ScheduleComponent.stop_time" title="qiskit.pulse.ScheduleComponent.stop_time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stop_time</span></code></a></p></td>
+<td><p>Stopping time of this schedule component.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.pulse.ScheduleComponent.timeslots" title="qiskit.pulse.ScheduleComponent.timeslots"><code class="xref py py-obj docutils literal notranslate"><span class="pre">timeslots</span></code></a></td>
-<td>Occupied time slots by this schedule component.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.pulse.ScheduleComponent.timeslots" title="qiskit.pulse.ScheduleComponent.timeslots"><code class="xref py py-obj docutils literal notranslate"><span class="pre">timeslots</span></code></a></p></td>
+<td><p>Occupied time slots by this schedule component.</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Methods Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.pulse.ScheduleComponent.append" title="qiskit.pulse.ScheduleComponent.append"><code class="xref py py-obj docutils literal notranslate"><span class="pre">append</span></code></a>(schedule,&nbsp;buffer,&nbsp;name)</td>
-<td>Return a new schedule with <cite>schedule</cite> inserted at the maximum time over all channels shared between <cite>self</cite> and <cite>schedule</cite>.</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.pulse.ScheduleComponent.append" title="qiskit.pulse.ScheduleComponent.append"><code class="xref py py-obj docutils literal notranslate"><span class="pre">append</span></code></a>(schedule[, buffer, name])</p></td>
+<td><p>Return a new schedule with <cite>schedule</cite> inserted at the maximum time over all channels shared between <cite>self</cite> and <cite>schedule</cite>.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.pulse.ScheduleComponent.ch_duration" title="qiskit.pulse.ScheduleComponent.ch_duration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ch_duration</span></code></a>(*channels)</td>
-<td>Duration of the <cite>channels</cite> in schedule component.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.pulse.ScheduleComponent.ch_duration" title="qiskit.pulse.ScheduleComponent.ch_duration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ch_duration</span></code></a>(*channels)</p></td>
+<td><p>Duration of the <cite>channels</cite> in schedule component.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.pulse.ScheduleComponent.ch_start_time" title="qiskit.pulse.ScheduleComponent.ch_start_time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ch_start_time</span></code></a>(*channels)</td>
-<td>Starting time of the <cite>channels</cite> in schedule component.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.pulse.ScheduleComponent.ch_start_time" title="qiskit.pulse.ScheduleComponent.ch_start_time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ch_start_time</span></code></a>(*channels)</p></td>
+<td><p>Starting time of the <cite>channels</cite> in schedule component.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.pulse.ScheduleComponent.ch_stop_time" title="qiskit.pulse.ScheduleComponent.ch_stop_time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ch_stop_time</span></code></a>(*channels)</td>
-<td>Stopping of the <cite>channels</cite> in schedule component.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.pulse.ScheduleComponent.ch_stop_time" title="qiskit.pulse.ScheduleComponent.ch_stop_time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ch_stop_time</span></code></a>(*channels)</p></td>
+<td><p>Stopping of the <cite>channels</cite> in schedule component.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.pulse.ScheduleComponent.flatten" title="qiskit.pulse.ScheduleComponent.flatten"><code class="xref py py-obj docutils literal notranslate"><span class="pre">flatten</span></code></a>()</td>
-<td>Return a new schedule which is the flattened schedule contained all <cite>instructions</cite>.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.pulse.ScheduleComponent.flatten" title="qiskit.pulse.ScheduleComponent.flatten"><code class="xref py py-obj docutils literal notranslate"><span class="pre">flatten</span></code></a>()</p></td>
+<td><p>Return a new schedule which is the flattened schedule contained all <cite>instructions</cite>.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.pulse.ScheduleComponent.insert" title="qiskit.pulse.ScheduleComponent.insert"><code class="xref py py-obj docutils literal notranslate"><span class="pre">insert</span></code></a>(start_time,&nbsp;schedule,&nbsp;buffer,&nbsp;name)</td>
-<td>Return a new schedule with <cite>schedule</cite> inserted at <cite>start_time</cite> of <cite>self</cite>.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.pulse.ScheduleComponent.insert" title="qiskit.pulse.ScheduleComponent.insert"><code class="xref py py-obj docutils literal notranslate"><span class="pre">insert</span></code></a>(start_time, schedule[, buffer, name])</p></td>
+<td><p>Return a new schedule with <cite>schedule</cite> inserted at <cite>start_time</cite> of <cite>self</cite>.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.pulse.ScheduleComponent.shift" title="qiskit.pulse.ScheduleComponent.shift"><code class="xref py py-obj docutils literal notranslate"><span class="pre">shift</span></code></a>(time,&nbsp;name)</td>
-<td>Return a new schedule shifted forward by <cite>time</cite>.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.pulse.ScheduleComponent.shift" title="qiskit.pulse.ScheduleComponent.shift"><code class="xref py py-obj docutils literal notranslate"><span class="pre">shift</span></code></a>(time[, name])</p></td>
+<td><p>Return a new schedule shifted forward by <cite>time</cite>.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.pulse.ScheduleComponent.union" title="qiskit.pulse.ScheduleComponent.union"><code class="xref py py-obj docutils literal notranslate"><span class="pre">union</span></code></a>(*schedules,&nbsp;name)</td>
-<td>Return a new schedule which is the union of the parent <cite>Schedule</cite> and <cite>schedule</cite>.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.pulse.ScheduleComponent.union" title="qiskit.pulse.ScheduleComponent.union"><code class="xref py py-obj docutils literal notranslate"><span class="pre">union</span></code></a>(*schedules[, name])</p></td>
+<td><p>Return a new schedule which is the union of the parent <cite>Schedule</cite> and <cite>schedule</cite>.</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Attributes Documentation</p>
 <dl class="attribute">
 <dt id="qiskit.pulse.ScheduleComponent.buffer">
-<code class="descname">buffer</code><a class="headerlink" href="#qiskit.pulse.ScheduleComponent.buffer" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">buffer</code><a class="headerlink" href="#qiskit.pulse.ScheduleComponent.buffer" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Buffer for schedule. To be used when appending</p>
+<dl class="field-list simple">
+<dt class="field-odd">Rückgabetyp</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.pulse.ScheduleComponent.channels">
-<code class="descname">channels</code><a class="headerlink" href="#qiskit.pulse.ScheduleComponent.channels" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">channels</code><a class="headerlink" href="#qiskit.pulse.ScheduleComponent.channels" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Return channels used by schedule.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Rückgabetyp</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Channel</span></code>]</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.pulse.ScheduleComponent.duration">
-<code class="descname">duration</code><a class="headerlink" href="#qiskit.pulse.ScheduleComponent.duration" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">duration</code><a class="headerlink" href="#qiskit.pulse.ScheduleComponent.duration" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Duration of this schedule component.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Rückgabetyp</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.pulse.ScheduleComponent.instructions">
-<code class="descname">instructions</code><a class="headerlink" href="#qiskit.pulse.ScheduleComponent.instructions" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">instructions</code><a class="headerlink" href="#qiskit.pulse.ScheduleComponent.instructions" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Return iterable for all <cite>Instruction`s in `Schedule</cite> tree.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Rückgabetyp</dt>
+<dd class="field-odd"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ForwardRef('Instructions')</span></code>]]</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.pulse.ScheduleComponent.name">
-<code class="descname">name</code><a class="headerlink" href="#qiskit.pulse.ScheduleComponent.name" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">name</code><a class="headerlink" href="#qiskit.pulse.ScheduleComponent.name" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Name of ScheduleComponent.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Rückgabetyp</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.pulse.ScheduleComponent.start_time">
-<code class="descname">start_time</code><a class="headerlink" href="#qiskit.pulse.ScheduleComponent.start_time" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">start_time</code><a class="headerlink" href="#qiskit.pulse.ScheduleComponent.start_time" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Starting time of this schedule component.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Rückgabetyp</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.pulse.ScheduleComponent.stop_time">
-<code class="descname">stop_time</code><a class="headerlink" href="#qiskit.pulse.ScheduleComponent.stop_time" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">stop_time</code><a class="headerlink" href="#qiskit.pulse.ScheduleComponent.stop_time" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Stopping time of this schedule component.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Rückgabetyp</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.pulse.ScheduleComponent.timeslots">
-<code class="descname">timeslots</code><a class="headerlink" href="#qiskit.pulse.ScheduleComponent.timeslots" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">timeslots</code><a class="headerlink" href="#qiskit.pulse.ScheduleComponent.timeslots" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Occupied time slots by this schedule component.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Rückgabetyp</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">TimeslotCollection</span></code></p>
+</dd>
+</dl>
 </dd></dl>
 
 <p class="rubric">Methods Documentation</p>
 <dl class="method">
 <dt id="qiskit.pulse.ScheduleComponent.append">
-<code class="descname">append</code><span class="sig-paren">(</span><em>schedule: qiskit.pulse.interfaces.ScheduleComponent</em>, <em>buffer: bool = True</em>, <em>name: Optional[str] = None</em><span class="sig-paren">)</span> &#x2192; qiskit.pulse.interfaces.ScheduleComponent<a class="reference internal" href="../_modules/qiskit/pulse/interfaces.html#ScheduleComponent.append"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.pulse.ScheduleComponent.append" title="Link zu dieser Definition">¶</a></dt>
+<em class="property">abstract </em><code class="sig-name descname">append</code><span class="sig-paren">(</span><em class="sig-param">schedule</em>, <em class="sig-param">buffer=True</em>, <em class="sig-param">name=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/pulse/interfaces.html#ScheduleComponent.append"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.pulse.ScheduleComponent.append" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Return a new schedule with <cite>schedule</cite> inserted at the maximum time over
 all channels shared between <cite>self</cite> and <cite>schedule</cite>.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><ul class="first last simple">
-<li><strong>schedule</strong> – schedule to be appended</li>
-<li><strong>buffer</strong> – Obey buffer when appending</li>
-<li><strong>name</strong> – Name of the new schedule. Defaults to name of parent</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>schedule</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ScheduleComponent</span></code>) – schedule to be appended</p></li>
+<li><p><strong>buffer</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – Obey buffer when appending</p></li>
+<li><p><strong>name</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – Name of the new schedule. Defaults to name of parent</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Rückgabetyp</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ScheduleComponent</span></code></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.pulse.ScheduleComponent.ch_duration">
-<code class="descname">ch_duration</code><span class="sig-paren">(</span><em>*channels</em><span class="sig-paren">)</span> &#x2192; int<a class="reference internal" href="../_modules/qiskit/pulse/interfaces.html#ScheduleComponent.ch_duration"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.pulse.ScheduleComponent.ch_duration" title="Link zu dieser Definition">¶</a></dt>
+<em class="property">abstract </em><code class="sig-name descname">ch_duration</code><span class="sig-paren">(</span><em class="sig-param">*channels</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/pulse/interfaces.html#ScheduleComponent.ch_duration"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.pulse.ScheduleComponent.ch_duration" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Duration of the <cite>channels</cite> in schedule component.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Rückgabetyp</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.pulse.ScheduleComponent.ch_start_time">
-<code class="descname">ch_start_time</code><span class="sig-paren">(</span><em>*channels</em><span class="sig-paren">)</span> &#x2192; int<a class="reference internal" href="../_modules/qiskit/pulse/interfaces.html#ScheduleComponent.ch_start_time"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.pulse.ScheduleComponent.ch_start_time" title="Link zu dieser Definition">¶</a></dt>
+<em class="property">abstract </em><code class="sig-name descname">ch_start_time</code><span class="sig-paren">(</span><em class="sig-param">*channels</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/pulse/interfaces.html#ScheduleComponent.ch_start_time"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.pulse.ScheduleComponent.ch_start_time" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Starting time of the <cite>channels</cite> in schedule component.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Rückgabetyp</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.pulse.ScheduleComponent.ch_stop_time">
-<code class="descname">ch_stop_time</code><span class="sig-paren">(</span><em>*channels</em><span class="sig-paren">)</span> &#x2192; int<a class="reference internal" href="../_modules/qiskit/pulse/interfaces.html#ScheduleComponent.ch_stop_time"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.pulse.ScheduleComponent.ch_stop_time" title="Link zu dieser Definition">¶</a></dt>
+<em class="property">abstract </em><code class="sig-name descname">ch_stop_time</code><span class="sig-paren">(</span><em class="sig-param">*channels</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/pulse/interfaces.html#ScheduleComponent.ch_stop_time"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.pulse.ScheduleComponent.ch_stop_time" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Stopping of the <cite>channels</cite> in schedule component.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Rückgabetyp</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.pulse.ScheduleComponent.flatten">
-<code class="descname">flatten</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; qiskit.pulse.interfaces.ScheduleComponent<a class="reference internal" href="../_modules/qiskit/pulse/interfaces.html#ScheduleComponent.flatten"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.pulse.ScheduleComponent.flatten" title="Link zu dieser Definition">¶</a></dt>
+<em class="property">abstract </em><code class="sig-name descname">flatten</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/pulse/interfaces.html#ScheduleComponent.flatten"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.pulse.ScheduleComponent.flatten" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Return a new schedule which is the flattened schedule contained all <cite>instructions</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Rückgabetyp</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ScheduleComponent</span></code></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.pulse.ScheduleComponent.insert">
-<code class="descname">insert</code><span class="sig-paren">(</span><em>start_time: int</em>, <em>schedule: qiskit.pulse.interfaces.ScheduleComponent</em>, <em>buffer: bool = False</em>, <em>name: Optional[str] = None</em><span class="sig-paren">)</span> &#x2192; qiskit.pulse.interfaces.ScheduleComponent<a class="reference internal" href="../_modules/qiskit/pulse/interfaces.html#ScheduleComponent.insert"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.pulse.ScheduleComponent.insert" title="Link zu dieser Definition">¶</a></dt>
+<em class="property">abstract </em><code class="sig-name descname">insert</code><span class="sig-paren">(</span><em class="sig-param">start_time</em>, <em class="sig-param">schedule</em>, <em class="sig-param">buffer=False</em>, <em class="sig-param">name=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/pulse/interfaces.html#ScheduleComponent.insert"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.pulse.ScheduleComponent.insert" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Return a new schedule with <cite>schedule</cite> inserted at <cite>start_time</cite> of <cite>self</cite>.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><ul class="first last simple">
-<li><strong>start_time</strong> – time to be inserted</li>
-<li><strong>schedule</strong> – schedule to be inserted</li>
-<li><strong>buffer</strong> – Obey buffer when appending</li>
-<li><strong>name</strong> – Name of the new schedule. Defaults to name of parent</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>start_time</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – time to be inserted</p></li>
+<li><p><strong>schedule</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ScheduleComponent</span></code>) – schedule to be inserted</p></li>
+<li><p><strong>buffer</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – Obey buffer when appending</p></li>
+<li><p><strong>name</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – Name of the new schedule. Defaults to name of parent</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Rückgabetyp</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ScheduleComponent</span></code></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.pulse.ScheduleComponent.shift">
-<code class="descname">shift</code><span class="sig-paren">(</span><em>time: int</em>, <em>name: Optional[str] = None</em><span class="sig-paren">)</span> &#x2192; qiskit.pulse.interfaces.ScheduleComponent<a class="reference internal" href="../_modules/qiskit/pulse/interfaces.html#ScheduleComponent.shift"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.pulse.ScheduleComponent.shift" title="Link zu dieser Definition">¶</a></dt>
+<em class="property">abstract </em><code class="sig-name descname">shift</code><span class="sig-paren">(</span><em class="sig-param">time</em>, <em class="sig-param">name=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/pulse/interfaces.html#ScheduleComponent.shift"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.pulse.ScheduleComponent.shift" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Return a new schedule shifted forward by <cite>time</cite>.
+:type time: <code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>
 :param time: Time to shift by
+:type name: <code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]
 :param name: Name of the new schedule. Defaults to name of parent</p>
+<dl class="field-list simple">
+<dt class="field-odd">Rückgabetyp</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ScheduleComponent</span></code></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.pulse.ScheduleComponent.union">
-<code class="descname">union</code><span class="sig-paren">(</span><em>*schedules</em>, <em>name: Optional[str] = None</em><span class="sig-paren">)</span> &#x2192; qiskit.pulse.interfaces.ScheduleComponent<a class="reference internal" href="../_modules/qiskit/pulse/interfaces.html#ScheduleComponent.union"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.pulse.ScheduleComponent.union" title="Link zu dieser Definition">¶</a></dt>
+<em class="property">abstract </em><code class="sig-name descname">union</code><span class="sig-paren">(</span><em class="sig-param">*schedules</em>, <em class="sig-param">name=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/pulse/interfaces.html#ScheduleComponent.union"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.pulse.ScheduleComponent.union" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Return a new schedule which is the union of the parent <cite>Schedule</cite> and <cite>schedule</cite>.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><ul class="first last simple">
-<li><strong>schedules</strong> – Schedules to be take the union with the parent <cite>Schedule</cite>.</li>
-<li><strong>name</strong> – Name of the new schedule. Defaults to name of parent</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>schedules</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">ScheduleComponent</span></code>]) – Schedules to be take the union with the parent <cite>Schedule</cite>.</p></li>
+<li><p><strong>name</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – Name of the new schedule. Defaults to name of parent</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Rückgabetyp</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ScheduleComponent</span></code></p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>

@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,6 +48,8 @@
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/js/themeExt.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Stichwortverzeichnis" href="../genindex.html" />
@@ -625,6 +626,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1215,6 +1222,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1261,333 +1274,319 @@
 <h1>NoiseModel<a class="headerlink" href="#noisemodel" title="Link zu dieser Überschrift">¶</a></h1>
 <dl class="class">
 <dt id="qiskit.providers.aer.noise.NoiseModel">
-<em class="property">class </em><code class="descname">NoiseModel</code><span class="sig-paren">(</span><em>basis_gates=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/aer/noise/noise_model.html#NoiseModel"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.providers.aer.noise.NoiseModel" title="Link zu dieser Definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">NoiseModel</code><span class="sig-paren">(</span><em class="sig-param">basis_gates=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/aer/noise/noise_model.html#NoiseModel"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.providers.aer.noise.NoiseModel" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Noise model class for Qiskit Aer simulators.</p>
+<p>Initialize an empty noise model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><p><strong>basis_gates</strong> (<em>list</em><em>[</em><em>str</em><em>] or </em><em>None</em>) – Specify an initial basis_gates
+for the noise model. If None a default value of [‚id‘, ‚u3‘, ‚cx‘]
+is used (Default: None).</p>
+</dd>
+</dl>
+<p>Errors added to the noise model will have thier instruction appended to
+the noise model basis_gates if the instruction is in the QasmSimulator
+basis_gates. If the instruction is not in the QasmSimulator basis_gates
+it is assumbed to be a label for a standard gate, and that gate should
+be added to the NoiseModel basis_gates either using the init method, or
+the <cite>add_basis_Gates</cite> method.</p>
 <p class="rubric">Attributes Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.providers.aer.noise.NoiseModel.QASMSIMULATOR_BASIS_GATES" title="qiskit.providers.aer.noise.NoiseModel.QASMSIMULATOR_BASIS_GATES"><code class="xref py py-obj docutils literal notranslate"><span class="pre">QASMSIMULATOR_BASIS_GATES</span></code></a></td>
-<td></td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.providers.aer.noise.NoiseModel.QASMSIMULATOR_BASIS_GATES" title="qiskit.providers.aer.noise.NoiseModel.QASMSIMULATOR_BASIS_GATES"><code class="xref py py-obj docutils literal notranslate"><span class="pre">QASMSIMULATOR_BASIS_GATES</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.providers.aer.noise.NoiseModel.basis_gates" title="qiskit.providers.aer.noise.NoiseModel.basis_gates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">basis_gates</span></code></a></td>
-<td>Return basis_gates for compiling to the noise model.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.providers.aer.noise.NoiseModel.basis_gates" title="qiskit.providers.aer.noise.NoiseModel.basis_gates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">basis_gates</span></code></a></p></td>
+<td><p>Return basis_gates for compiling to the noise model.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.providers.aer.noise.NoiseModel.noise_instructions" title="qiskit.providers.aer.noise.NoiseModel.noise_instructions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">noise_instructions</span></code></a></td>
-<td>Return the set of noisy instructions for this noise model.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.providers.aer.noise.NoiseModel.noise_instructions" title="qiskit.providers.aer.noise.NoiseModel.noise_instructions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">noise_instructions</span></code></a></p></td>
+<td><p>Return the set of noisy instructions for this noise model.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.providers.aer.noise.NoiseModel.noise_qubits" title="qiskit.providers.aer.noise.NoiseModel.noise_qubits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">noise_qubits</span></code></a></td>
-<td>Return the set of noisy qubits for this noise model.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.providers.aer.noise.NoiseModel.noise_qubits" title="qiskit.providers.aer.noise.NoiseModel.noise_qubits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">noise_qubits</span></code></a></p></td>
+<td><p>Return the set of noisy qubits for this noise model.</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Methods Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.providers.aer.noise.NoiseModel.add_all_qubit_quantum_error" title="qiskit.providers.aer.noise.NoiseModel.add_all_qubit_quantum_error"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_all_qubit_quantum_error</span></code></a>(error,&nbsp;instructions)</td>
-<td>Add a quantum error to the noise model that applies to all qubits.</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.providers.aer.noise.NoiseModel.add_all_qubit_quantum_error" title="qiskit.providers.aer.noise.NoiseModel.add_all_qubit_quantum_error"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_all_qubit_quantum_error</span></code></a>(error, instructions)</p></td>
+<td><p>Add a quantum error to the noise model that applies to all qubits.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.providers.aer.noise.NoiseModel.add_all_qubit_readout_error" title="qiskit.providers.aer.noise.NoiseModel.add_all_qubit_readout_error"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_all_qubit_readout_error</span></code></a>(error[,&nbsp;warnings])</td>
-<td>Add a single-qubit readout error that applies measure on all qubits.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.providers.aer.noise.NoiseModel.add_all_qubit_readout_error" title="qiskit.providers.aer.noise.NoiseModel.add_all_qubit_readout_error"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_all_qubit_readout_error</span></code></a>(error[, warnings])</p></td>
+<td><p>Add a single-qubit readout error that applies measure on all qubits.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.providers.aer.noise.NoiseModel.add_basis_gates" title="qiskit.providers.aer.noise.NoiseModel.add_basis_gates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_basis_gates</span></code></a>(instructions[,&nbsp;warnings])</td>
-<td>Add additional gates to the noise model basis_gates.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.providers.aer.noise.NoiseModel.add_basis_gates" title="qiskit.providers.aer.noise.NoiseModel.add_basis_gates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_basis_gates</span></code></a>(instructions[, warnings])</p></td>
+<td><p>Add additional gates to the noise model basis_gates.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.providers.aer.noise.NoiseModel.add_nonlocal_quantum_error" title="qiskit.providers.aer.noise.NoiseModel.add_nonlocal_quantum_error"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_nonlocal_quantum_error</span></code></a>(error,&nbsp;…[,&nbsp;…])</td>
-<td>Add a non-local quantum error to the noise model.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.providers.aer.noise.NoiseModel.add_nonlocal_quantum_error" title="qiskit.providers.aer.noise.NoiseModel.add_nonlocal_quantum_error"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_nonlocal_quantum_error</span></code></a>(error, …[, …])</p></td>
+<td><p>Add a non-local quantum error to the noise model.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.providers.aer.noise.NoiseModel.add_quantum_error" title="qiskit.providers.aer.noise.NoiseModel.add_quantum_error"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_quantum_error</span></code></a>(error,&nbsp;instructions,&nbsp;qubits)</td>
-<td>Add a quantum error to the noise model.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.providers.aer.noise.NoiseModel.add_quantum_error" title="qiskit.providers.aer.noise.NoiseModel.add_quantum_error"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_quantum_error</span></code></a>(error, instructions, qubits)</p></td>
+<td><p>Add a quantum error to the noise model.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.providers.aer.noise.NoiseModel.add_readout_error" title="qiskit.providers.aer.noise.NoiseModel.add_readout_error"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_readout_error</span></code></a>(error,&nbsp;qubits[,&nbsp;warnings])</td>
-<td>Add a readout error to the noise model.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.providers.aer.noise.NoiseModel.add_readout_error" title="qiskit.providers.aer.noise.NoiseModel.add_readout_error"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_readout_error</span></code></a>(error, qubits[, warnings])</p></td>
+<td><p>Add a readout error to the noise model.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.providers.aer.noise.NoiseModel.as_dict" title="qiskit.providers.aer.noise.NoiseModel.as_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">as_dict</span></code></a>([serializable])</td>
-<td>DEPRECATED: Use to_dict() Returns a dictionary for noise model.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.providers.aer.noise.NoiseModel.as_dict" title="qiskit.providers.aer.noise.NoiseModel.as_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">as_dict</span></code></a>([serializable])</p></td>
+<td><p>DEPRECATED: Use to_dict() Returns a dictionary for noise model.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.providers.aer.noise.NoiseModel.from_dict" title="qiskit.providers.aer.noise.NoiseModel.from_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_dict</span></code></a>(noise_dict)</td>
-<td>Load NoiseModel from a dictionary.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.providers.aer.noise.NoiseModel.from_dict" title="qiskit.providers.aer.noise.NoiseModel.from_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_dict</span></code></a>(noise_dict)</p></td>
+<td><p>Load NoiseModel from a dictionary.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.providers.aer.noise.NoiseModel.reset" title="qiskit.providers.aer.noise.NoiseModel.reset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reset</span></code></a>()</td>
-<td>Reset the noise model.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.providers.aer.noise.NoiseModel.reset" title="qiskit.providers.aer.noise.NoiseModel.reset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reset</span></code></a>()</p></td>
+<td><p>Reset the noise model.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.providers.aer.noise.NoiseModel.set_x90_single_qubit_gates" title="qiskit.providers.aer.noise.NoiseModel.set_x90_single_qubit_gates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_x90_single_qubit_gates</span></code></a>(instructions)</td>
-<td>Declares X90 based gates for noise model.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.providers.aer.noise.NoiseModel.set_x90_single_qubit_gates" title="qiskit.providers.aer.noise.NoiseModel.set_x90_single_qubit_gates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_x90_single_qubit_gates</span></code></a>(instructions)</p></td>
+<td><p>Declares X90 based gates for noise model.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.providers.aer.noise.NoiseModel.to_dict" title="qiskit.providers.aer.noise.NoiseModel.to_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code></a>([serializable])</td>
-<td>Return dictionary for noise model.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.providers.aer.noise.NoiseModel.to_dict" title="qiskit.providers.aer.noise.NoiseModel.to_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code></a>([serializable])</p></td>
+<td><p>Return dictionary for noise model.</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Attributes Documentation</p>
 <dl class="attribute">
 <dt id="qiskit.providers.aer.noise.NoiseModel.QASMSIMULATOR_BASIS_GATES">
-<code class="descname">QASMSIMULATOR_BASIS_GATES</code><em class="property"> = ['u1', 'u2', 'u3', 'cx', 'cz', 'cu1', 'id', 'x', 'y', 'z', 'h', 's', 'sdg', 't', 'tdg', 'ccx', 'swap', 'multiplexer', 'snapshot', 'unitary', 'reset', 'initialize', 'kraus', 'roerror']</em><a class="headerlink" href="#qiskit.providers.aer.noise.NoiseModel.QASMSIMULATOR_BASIS_GATES" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">QASMSIMULATOR_BASIS_GATES</code><em class="property"> = ['u1', 'u2', 'u3', 'cx', 'cz', 'cu1', 'id', 'x', 'y', 'z', 'h', 's', 'sdg', 't', 'tdg', 'ccx', 'swap', 'multiplexer', 'snapshot', 'unitary', 'reset', 'initialize', 'kraus', 'roerror']</em><a class="headerlink" href="#qiskit.providers.aer.noise.NoiseModel.QASMSIMULATOR_BASIS_GATES" title="Link zu dieser Definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.providers.aer.noise.NoiseModel.basis_gates">
-<code class="descname">basis_gates</code><a class="headerlink" href="#qiskit.providers.aer.noise.NoiseModel.basis_gates" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">basis_gates</code><a class="headerlink" href="#qiskit.providers.aer.noise.NoiseModel.basis_gates" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Return basis_gates for compiling to the noise model.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.providers.aer.noise.NoiseModel.noise_instructions">
-<code class="descname">noise_instructions</code><a class="headerlink" href="#qiskit.providers.aer.noise.NoiseModel.noise_instructions" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">noise_instructions</code><a class="headerlink" href="#qiskit.providers.aer.noise.NoiseModel.noise_instructions" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Return the set of noisy instructions for this noise model.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.providers.aer.noise.NoiseModel.noise_qubits">
-<code class="descname">noise_qubits</code><a class="headerlink" href="#qiskit.providers.aer.noise.NoiseModel.noise_qubits" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">noise_qubits</code><a class="headerlink" href="#qiskit.providers.aer.noise.NoiseModel.noise_qubits" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Return the set of noisy qubits for this noise model.</p>
 </dd></dl>
 
 <p class="rubric">Methods Documentation</p>
 <dl class="method">
 <dt id="qiskit.providers.aer.noise.NoiseModel.add_all_qubit_quantum_error">
-<code class="descname">add_all_qubit_quantum_error</code><span class="sig-paren">(</span><em>error</em>, <em>instructions</em>, <em>warnings=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/aer/noise/noise_model.html#NoiseModel.add_all_qubit_quantum_error"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.providers.aer.noise.NoiseModel.add_all_qubit_quantum_error" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">add_all_qubit_quantum_error</code><span class="sig-paren">(</span><em class="sig-param">error</em>, <em class="sig-param">instructions</em>, <em class="sig-param">warnings=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/aer/noise/noise_model.html#NoiseModel.add_all_qubit_quantum_error"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.providers.aer.noise.NoiseModel.add_all_qubit_quantum_error" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Add a quantum error to the noise model that applies to all qubits.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><ul class="first simple">
-<li><strong>error</strong> (<em>QuantumError</em>) – the quantum error object.</li>
-<li><strong>(</strong><strong>str</strong><strong> or </strong><strong>list</strong><strong>[</strong><strong>str</strong><strong>] </strong><strong>or</strong> (<em>instructions</em>) – Instruction or
-list[Instruction]): the instructions error applies to.</li>
-<li><strong>warnings</strong> (<em>bool</em>) – Display warning if appending to an instruciton that
-already has an error (Default: True).</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>error</strong> (<em>QuantumError</em>) – the quantum error object.</p></li>
+<li><p><strong>(</strong><strong>str</strong><strong> or </strong><strong>list</strong><strong>[</strong><strong>str</strong><strong>] </strong><strong>or</strong> (<em>instructions</em>) – Instruction or
+list[Instruction]): the instructions error applies to.</p></li>
+<li><p><strong>warnings</strong> (<em>bool</em>) – Display warning if appending to an instruciton that
+already has an error (Default: True).</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal notranslate"><span class="pre">NoiseError</span></code> – if the input parameters are invalid.</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Verursacht</dt>
+<dd class="field-even"><p><strong>NoiseError</strong> – if the input parameters are invalid.</p>
+</dd>
+</dl>
 <p>If the error object is ideal it will not be added to the model.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.providers.aer.noise.NoiseModel.add_all_qubit_readout_error">
-<code class="descname">add_all_qubit_readout_error</code><span class="sig-paren">(</span><em>error</em>, <em>warnings=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/aer/noise/noise_model.html#NoiseModel.add_all_qubit_readout_error"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.providers.aer.noise.NoiseModel.add_all_qubit_readout_error" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">add_all_qubit_readout_error</code><span class="sig-paren">(</span><em class="sig-param">error</em>, <em class="sig-param">warnings=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/aer/noise/noise_model.html#NoiseModel.add_all_qubit_readout_error"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.providers.aer.noise.NoiseModel.add_all_qubit_readout_error" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Add a single-qubit readout error that applies measure on all qubits.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><ul class="first simple">
-<li><strong>error</strong> (<em>ReadoutError</em>) – the quantum error object.</li>
-<li><strong>warnings</strong> (<em>bool</em>) – Display warning if appending to an instruciton that
-already has an error (Default: True)</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>error</strong> (<em>ReadoutError</em>) – the quantum error object.</p></li>
+<li><p><strong>warnings</strong> (<em>bool</em>) – Display warning if appending to an instruciton that
+already has an error (Default: True)</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal notranslate"><span class="pre">NoiseError</span></code> – if the input parameters are invalid.</p>
-</td>
-</tr>
-</tbody>
-</table>
-<dl class="docutils">
-<dt>Additional Information:</dt>
-<dd>If the error object is ideal it will not be added to the model.</dd>
+</dd>
+<dt class="field-even">Verursacht</dt>
+<dd class="field-even"><p><strong>NoiseError</strong> – if the input parameters are invalid.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Additional Information:</dt><dd><p>If the error object is ideal it will not be added to the model.</p>
+</dd>
 </dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.providers.aer.noise.NoiseModel.add_basis_gates">
-<code class="descname">add_basis_gates</code><span class="sig-paren">(</span><em>instructions</em>, <em>warnings=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/aer/noise/noise_model.html#NoiseModel.add_basis_gates"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.providers.aer.noise.NoiseModel.add_basis_gates" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">add_basis_gates</code><span class="sig-paren">(</span><em class="sig-param">instructions</em>, <em class="sig-param">warnings=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/aer/noise/noise_model.html#NoiseModel.add_basis_gates"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.providers.aer.noise.NoiseModel.add_basis_gates" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Add additional gates to the noise model basis_gates.</p>
 <p>This should be used to add any gates that are identified by a
 custom gate label in the noise model.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><ul class="first last simple">
-<li><strong>(</strong><strong>list</strong><strong>[</strong><strong>str</strong><strong>] </strong><strong>or</strong> (<em>instructions</em>) – list[Instruction]): the instructions error applies to.</li>
-<li><strong>warnings</strong> (<em>bool</em>) – display warning if instruction is not in
-QasmSimulator basis_gates (Default: True).</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>(</strong><strong>list</strong><strong>[</strong><strong>str</strong><strong>] </strong><strong>or</strong> (<em>instructions</em>) – list[Instruction]): the instructions error applies to.</p></li>
+<li><p><strong>warnings</strong> (<em>bool</em>) – display warning if instruction is not in
+QasmSimulator basis_gates (Default: True).</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.providers.aer.noise.NoiseModel.add_nonlocal_quantum_error">
-<code class="descname">add_nonlocal_quantum_error</code><span class="sig-paren">(</span><em>error</em>, <em>instructions</em>, <em>qubits</em>, <em>noise_qubits</em>, <em>warnings=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/aer/noise/noise_model.html#NoiseModel.add_nonlocal_quantum_error"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.providers.aer.noise.NoiseModel.add_nonlocal_quantum_error" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">add_nonlocal_quantum_error</code><span class="sig-paren">(</span><em class="sig-param">error</em>, <em class="sig-param">instructions</em>, <em class="sig-param">qubits</em>, <em class="sig-param">noise_qubits</em>, <em class="sig-param">warnings=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/aer/noise/noise_model.html#NoiseModel.add_nonlocal_quantum_error"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.providers.aer.noise.NoiseModel.add_nonlocal_quantum_error" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Add a non-local quantum error to the noise model.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><ul class="first simple">
-<li><strong>error</strong> (<em>QuantumError</em>) – the quantum error object.</li>
-<li><strong>(</strong><strong>str</strong><strong> or </strong><strong>list</strong><strong>[</strong><strong>str</strong><strong>] </strong><strong>or</strong> (<em>instructions</em>) – Instruction or
-list[Instruction]): the instructions error applies to.</li>
-<li><strong>qubits</strong> (<em>list</em><em>[</em><em>int</em><em>]</em>) – qubits instruction error applies to.</li>
-<li><strong>noise_qubits</strong> (<em>list</em><em>[</em><em>int</em><em>]</em>) – Specify the exact qubits the error
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>error</strong> (<em>QuantumError</em>) – the quantum error object.</p></li>
+<li><p><strong>(</strong><strong>str</strong><strong> or </strong><strong>list</strong><strong>[</strong><strong>str</strong><strong>] </strong><strong>or</strong> (<em>instructions</em>) – Instruction or
+list[Instruction]): the instructions error applies to.</p></li>
+<li><p><strong>qubits</strong> (<em>list</em><em>[</em><em>int</em><em>]</em>) – qubits instruction error applies to.</p></li>
+<li><p><strong>noise_qubits</strong> (<em>list</em><em>[</em><em>int</em><em>]</em>) – Specify the exact qubits the error
 should be applied to if different
-to the instruction qubits.</li>
-<li><strong>warnings</strong> (<em>bool</em>) – Display warning if appending to an instruciton that
-already has an error (Default: True).</li>
+to the instruction qubits.</p></li>
+<li><p><strong>warnings</strong> (<em>bool</em>) – Display warning if appending to an instruciton that
+already has an error (Default: True).</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal notranslate"><span class="pre">NoiseError</span></code> – if the input parameters are invalid.</p>
-</td>
-</tr>
-</tbody>
-</table>
-<dl class="docutils">
-<dt>Additional Information:</dt>
-<dd>If the error object is ideal it will not be added to the model.</dd>
+</dd>
+<dt class="field-even">Verursacht</dt>
+<dd class="field-even"><p><strong>NoiseError</strong> – if the input parameters are invalid.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Additional Information:</dt><dd><p>If the error object is ideal it will not be added to the model.</p>
+</dd>
 </dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.providers.aer.noise.NoiseModel.add_quantum_error">
-<code class="descname">add_quantum_error</code><span class="sig-paren">(</span><em>error</em>, <em>instructions</em>, <em>qubits</em>, <em>warnings=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/aer/noise/noise_model.html#NoiseModel.add_quantum_error"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.providers.aer.noise.NoiseModel.add_quantum_error" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">add_quantum_error</code><span class="sig-paren">(</span><em class="sig-param">error</em>, <em class="sig-param">instructions</em>, <em class="sig-param">qubits</em>, <em class="sig-param">warnings=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/aer/noise/noise_model.html#NoiseModel.add_quantum_error"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.providers.aer.noise.NoiseModel.add_quantum_error" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Add a quantum error to the noise model.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><ul class="first simple">
-<li><strong>error</strong> (<em>QuantumError</em>) – the quantum error object.</li>
-<li><strong>(</strong><strong>str</strong><strong> or </strong><strong>list</strong><strong>[</strong><strong>str</strong><strong>] </strong><strong>or</strong> (<em>instructions</em>) – Instruction or
-list[Instruction]): the instructions error applies to.</li>
-<li><strong>qubits</strong> (<em>list</em><em>[</em><em>int</em><em>]</em>) – qubits instruction error applies to.</li>
-<li><strong>warnings</strong> (<em>bool</em>) – Display warning if appending to an instruciton that
-already has an error (Default: True).</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>error</strong> (<em>QuantumError</em>) – the quantum error object.</p></li>
+<li><p><strong>(</strong><strong>str</strong><strong> or </strong><strong>list</strong><strong>[</strong><strong>str</strong><strong>] </strong><strong>or</strong> (<em>instructions</em>) – Instruction or
+list[Instruction]): the instructions error applies to.</p></li>
+<li><p><strong>qubits</strong> (<em>list</em><em>[</em><em>int</em><em>]</em>) – qubits instruction error applies to.</p></li>
+<li><p><strong>warnings</strong> (<em>bool</em>) – Display warning if appending to an instruciton that
+already has an error (Default: True).</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal notranslate"><span class="pre">NoiseError</span></code> – if the input parameters are invalid.</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Verursacht</dt>
+<dd class="field-even"><p><strong>NoiseError</strong> – if the input parameters are invalid.</p>
+</dd>
+</dl>
 <p>If the error object is ideal it will not be added to the model.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.providers.aer.noise.NoiseModel.add_readout_error">
-<code class="descname">add_readout_error</code><span class="sig-paren">(</span><em>error</em>, <em>qubits</em>, <em>warnings=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/aer/noise/noise_model.html#NoiseModel.add_readout_error"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.providers.aer.noise.NoiseModel.add_readout_error" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">add_readout_error</code><span class="sig-paren">(</span><em class="sig-param">error</em>, <em class="sig-param">qubits</em>, <em class="sig-param">warnings=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/aer/noise/noise_model.html#NoiseModel.add_readout_error"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.providers.aer.noise.NoiseModel.add_readout_error" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Add a readout error to the noise model.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><ul class="first simple">
-<li><strong>error</strong> (<em>ReadoutError</em>) – the quantum error object.</li>
-<li><strong>qubits</strong> (<em>list</em><em>[</em><em>int</em><em>]</em>) – qubits instruction error applies to.</li>
-<li><strong>warnings</strong> (<em>bool</em>) – Display warning if appending to an instruciton that
-already has an error [Default: True]</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>error</strong> (<em>ReadoutError</em>) – the quantum error object.</p></li>
+<li><p><strong>qubits</strong> (<em>list</em><em>[</em><em>int</em><em>]</em>) – qubits instruction error applies to.</p></li>
+<li><p><strong>warnings</strong> (<em>bool</em>) – Display warning if appending to an instruciton that
+already has an error [Default: True]</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal notranslate"><span class="pre">NoiseError</span></code> – if the input parameters are invalid.</p>
-</td>
-</tr>
-</tbody>
-</table>
-<dl class="docutils">
-<dt>Additional Information:</dt>
-<dd>If the error object is ideal it will not be added to the model.</dd>
+</dd>
+<dt class="field-even">Verursacht</dt>
+<dd class="field-even"><p><strong>NoiseError</strong> – if the input parameters are invalid.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Additional Information:</dt><dd><p>If the error object is ideal it will not be added to the model.</p>
+</dd>
 </dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.providers.aer.noise.NoiseModel.as_dict">
-<code class="descname">as_dict</code><span class="sig-paren">(</span><em>serializable=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/aer/noise/noise_model.html#NoiseModel.as_dict"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.providers.aer.noise.NoiseModel.as_dict" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">as_dict</code><span class="sig-paren">(</span><em class="sig-param">serializable=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/aer/noise/noise_model.html#NoiseModel.as_dict"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.providers.aer.noise.NoiseModel.as_dict" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>DEPRECATED: Use to_dict()
 Returns a dictionary for noise model.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><strong>serializable</strong> (<em>bool</em>) – if <cite>True</cite>, return a dict containing only types
-that can be serializable by the stdlib <cite>json</cite> module.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body">a dictionary for a noise model.</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body">dict</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><p><strong>serializable</strong> (<em>bool</em>) – if <cite>True</cite>, return a dict containing only types
+that can be serializable by the stdlib <cite>json</cite> module.</p>
+</dd>
+<dt class="field-even">Rückgabe</dt>
+<dd class="field-even"><p>a dictionary for a noise model.</p>
+</dd>
+<dt class="field-odd">Rückgabetyp</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="staticmethod">
+<dl class="method">
 <dt id="qiskit.providers.aer.noise.NoiseModel.from_dict">
-<em class="property">static </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>noise_dict</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/aer/noise/noise_model.html#NoiseModel.from_dict"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.providers.aer.noise.NoiseModel.from_dict" title="Link zu dieser Definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">from_dict</code><span class="sig-paren">(</span><em class="sig-param">noise_dict</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/aer/noise/noise_model.html#NoiseModel.from_dict"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.providers.aer.noise.NoiseModel.from_dict" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Load NoiseModel from a dictionary.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><strong>noise_dict</strong> (<em>dict</em>) – A serialized noise model.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body">the noise model.</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body"><a class="reference internal" href="#qiskit.providers.aer.noise.NoiseModel" title="qiskit.providers.aer.noise.NoiseModel">NoiseModel</a></td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal notranslate"><span class="pre">NoiseError</span></code> – if dict cannot be converted to NoiseModel.</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><p><strong>noise_dict</strong> (<em>dict</em>) – A serialized noise model.</p>
+</dd>
+<dt class="field-even">Rückgabe</dt>
+<dd class="field-even"><p>the noise model.</p>
+</dd>
+<dt class="field-odd">Rückgabetyp</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#qiskit.providers.aer.noise.NoiseModel" title="qiskit.providers.aer.noise.NoiseModel">NoiseModel</a></p>
+</dd>
+<dt class="field-even">Verursacht</dt>
+<dd class="field-even"><p><strong>NoiseError</strong> – if dict cannot be converted to NoiseModel.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.providers.aer.noise.NoiseModel.reset">
-<code class="descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/aer/noise/noise_model.html#NoiseModel.reset"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.providers.aer.noise.NoiseModel.reset" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/aer/noise/noise_model.html#NoiseModel.reset"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.providers.aer.noise.NoiseModel.reset" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Reset the noise model.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.providers.aer.noise.NoiseModel.set_x90_single_qubit_gates">
-<code class="descname">set_x90_single_qubit_gates</code><span class="sig-paren">(</span><em>instructions</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/aer/noise/noise_model.html#NoiseModel.set_x90_single_qubit_gates"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.providers.aer.noise.NoiseModel.set_x90_single_qubit_gates" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">set_x90_single_qubit_gates</code><span class="sig-paren">(</span><em class="sig-param">instructions</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/aer/noise/noise_model.html#NoiseModel.set_x90_single_qubit_gates"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.providers.aer.noise.NoiseModel.set_x90_single_qubit_gates" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Declares X90 based gates for noise model.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><strong>(</strong><strong>list</strong><strong>[</strong><strong>str</strong><strong>] </strong><strong>or</strong> (<em>instructions</em>) – list[Instruction]): the instructions error applies to.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal notranslate"><span class="pre">NoiseError</span></code> – if the input instructions are not valid.</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><p><strong>(</strong><strong>list</strong><strong>[</strong><strong>str</strong><strong>] </strong><strong>or</strong> (<em>instructions</em>) – list[Instruction]): the instructions error applies to.</p>
+</dd>
+<dt class="field-even">Verursacht</dt>
+<dd class="field-even"><p><strong>NoiseError</strong> – if the input instructions are not valid.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.providers.aer.noise.NoiseModel.to_dict">
-<code class="descname">to_dict</code><span class="sig-paren">(</span><em>serializable=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/aer/noise/noise_model.html#NoiseModel.to_dict"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.providers.aer.noise.NoiseModel.to_dict" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">to_dict</code><span class="sig-paren">(</span><em class="sig-param">serializable=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/aer/noise/noise_model.html#NoiseModel.to_dict"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.providers.aer.noise.NoiseModel.to_dict" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Return dictionary for noise model.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><strong>serializable</strong> (<em>bool</em>) – if <cite>True</cite>, return a dict containing only types
-that can be serializable by the stdlib <cite>json</cite> module.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body">a dictionary for a noise model.</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body">dict</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><p><strong>serializable</strong> (<em>bool</em>) – if <cite>True</cite>, return a dict containing only types
+that can be serializable by the stdlib <cite>json</cite> module.</p>
+</dd>
+<dt class="field-even">Rückgabe</dt>
+<dd class="field-even"><p>a dictionary for a noise model.</p>
+</dd>
+<dt class="field-odd">Rückgabetyp</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>

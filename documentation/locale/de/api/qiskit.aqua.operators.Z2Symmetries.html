@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,6 +48,8 @@
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/js/themeExt.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Stichwortverzeichnis" href="../genindex.html" />
@@ -625,6 +626,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1215,6 +1222,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1261,63 +1274,74 @@
 <h1>Z2Symmetries<a class="headerlink" href="#z2symmetries" title="Link zu dieser Überschrift">¶</a></h1>
 <dl class="class">
 <dt id="qiskit.aqua.operators.Z2Symmetries">
-<em class="property">class </em><code class="descname">Z2Symmetries</code><span class="sig-paren">(</span><em>symmetries</em>, <em>sq_paulis</em>, <em>sq_list</em>, <em>tapering_values=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/operators/weighted_pauli_operator.html#Z2Symmetries"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.aqua.operators.Z2Symmetries" title="Link zu dieser Definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">Z2Symmetries</code><span class="sig-paren">(</span><em class="sig-param">symmetries</em>, <em class="sig-param">sq_paulis</em>, <em class="sig-param">sq_list</em>, <em class="sig-param">tapering_values=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/operators/weighted_pauli_operator.html#Z2Symmetries"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.aqua.operators.Z2Symmetries" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Constructor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>symmetries</strong> (<em>[</em><a class="reference internal" href="qiskit.quantum_info.Pauli.html#qiskit.quantum_info.Pauli" title="qiskit.quantum_info.Pauli"><em>Pauli</em></a><em>]</em>) – the list of Pauli objects representing the Z_2 symmetries</p></li>
+<li><p><strong>sq_paulis</strong> (<em>[</em><a class="reference internal" href="qiskit.quantum_info.Pauli.html#qiskit.quantum_info.Pauli" title="qiskit.quantum_info.Pauli"><em>Pauli</em></a><em>]</em>) – the list of single - qubit Pauli objects to construct the Cliffors operators</p></li>
+<li><p><strong>sq_list</strong> (<em>[</em><em>int</em><em>]</em>) – the list of support of the single-qubit Pauli objects used to build the clifford operators</p></li>
+<li><p><strong>tapering_values</strong> (<em>[</em><em>int</em><em>]</em><em>, </em><em>optional</em>) – values determines the sector.</p></li>
+</ul>
+</dd>
+</dl>
 <p class="rubric">Attributes Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.operators.Z2Symmetries.cliffords" title="qiskit.aqua.operators.Z2Symmetries.cliffords"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cliffords</span></code></a></td>
-<td>Get clifford operators, build based on symmetries and single-qubit X.</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.operators.Z2Symmetries.cliffords" title="qiskit.aqua.operators.Z2Symmetries.cliffords"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cliffords</span></code></a></p></td>
+<td><p>Get clifford operators, build based on symmetries and single-qubit X.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.operators.Z2Symmetries.sq_list" title="qiskit.aqua.operators.Z2Symmetries.sq_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sq_list</span></code></a></td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.operators.Z2Symmetries.sq_list" title="qiskit.aqua.operators.Z2Symmetries.sq_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sq_list</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.operators.Z2Symmetries.sq_paulis" title="qiskit.aqua.operators.Z2Symmetries.sq_paulis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sq_paulis</span></code></a></td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.operators.Z2Symmetries.sq_paulis" title="qiskit.aqua.operators.Z2Symmetries.sq_paulis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sq_paulis</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.operators.Z2Symmetries.symmetries" title="qiskit.aqua.operators.Z2Symmetries.symmetries"><code class="xref py py-obj docutils literal notranslate"><span class="pre">symmetries</span></code></a></td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.operators.Z2Symmetries.symmetries" title="qiskit.aqua.operators.Z2Symmetries.symmetries"><code class="xref py py-obj docutils literal notranslate"><span class="pre">symmetries</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.operators.Z2Symmetries.tapering_values" title="qiskit.aqua.operators.Z2Symmetries.tapering_values"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tapering_values</span></code></a></td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.operators.Z2Symmetries.tapering_values" title="qiskit.aqua.operators.Z2Symmetries.tapering_values"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tapering_values</span></code></a></p></td>
+<td><p></p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Methods Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.operators.Z2Symmetries.consistent_tapering" title="qiskit.aqua.operators.Z2Symmetries.consistent_tapering"><code class="xref py py-obj docutils literal notranslate"><span class="pre">consistent_tapering</span></code></a>(operator)</td>
-<td>Tapering the <cite>operator</cite> with the same manner of how this tapered operator is created.</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.operators.Z2Symmetries.consistent_tapering" title="qiskit.aqua.operators.Z2Symmetries.consistent_tapering"><code class="xref py py-obj docutils literal notranslate"><span class="pre">consistent_tapering</span></code></a>(operator)</p></td>
+<td><p>Tapering the <cite>operator</cite> with the same manner of how this tapered operator is created.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.operators.Z2Symmetries.copy" title="qiskit.aqua.operators.Z2Symmetries.copy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">copy</span></code></a>()</td>
-<td>Get a copy of self.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.operators.Z2Symmetries.copy" title="qiskit.aqua.operators.Z2Symmetries.copy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">copy</span></code></a>()</p></td>
+<td><p>Get a copy of self.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.operators.Z2Symmetries.find_Z2_symmetries" title="qiskit.aqua.operators.Z2Symmetries.find_Z2_symmetries"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_Z2_symmetries</span></code></a>(operator)</td>
-<td>Finds Z2 Pauli-type symmetries of an Operator.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.operators.Z2Symmetries.find_Z2_symmetries" title="qiskit.aqua.operators.Z2Symmetries.find_Z2_symmetries"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_Z2_symmetries</span></code></a>(operator)</p></td>
+<td><p>Finds Z2 Pauli-type symmetries of an Operator.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.operators.Z2Symmetries.is_empty" title="qiskit.aqua.operators.Z2Symmetries.is_empty"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_empty</span></code></a>()</td>
-<td>Check the z2_symmetries is empty or not.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.operators.Z2Symmetries.is_empty" title="qiskit.aqua.operators.Z2Symmetries.is_empty"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_empty</span></code></a>()</p></td>
+<td><p>Check the z2_symmetries is empty or not.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.operators.Z2Symmetries.taper" title="qiskit.aqua.operators.Z2Symmetries.taper"><code class="xref py py-obj docutils literal notranslate"><span class="pre">taper</span></code></a>(operator[,&nbsp;tapering_values])</td>
-<td>Taper an operator based on the z2_symmetries info and sector defined by <cite>tapering_values</cite>.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.operators.Z2Symmetries.taper" title="qiskit.aqua.operators.Z2Symmetries.taper"><code class="xref py py-obj docutils literal notranslate"><span class="pre">taper</span></code></a>(operator[, tapering_values])</p></td>
+<td><p>Taper an operator based on the z2_symmetries info and sector defined by <cite>tapering_values</cite>.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.operators.Z2Symmetries.two_qubit_reduction" title="qiskit.aqua.operators.Z2Symmetries.two_qubit_reduction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">two_qubit_reduction</span></code></a>(operator,&nbsp;num_particles)</td>
-<td>Eliminates the central and last qubit in a list of Pauli that has diagonal operators (Z,I) at those positions</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.operators.Z2Symmetries.two_qubit_reduction" title="qiskit.aqua.operators.Z2Symmetries.two_qubit_reduction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">two_qubit_reduction</span></code></a>(operator, num_particles)</p></td>
+<td><p>Eliminates the central and last qubit in a list of Pauli that has diagonal operators (Z,I) at those positions</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Attributes Documentation</p>
 <dl class="attribute">
 <dt id="qiskit.aqua.operators.Z2Symmetries.cliffords">
-<code class="descname">cliffords</code><a class="headerlink" href="#qiskit.aqua.operators.Z2Symmetries.cliffords" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">cliffords</code><a class="headerlink" href="#qiskit.aqua.operators.Z2Symmetries.cliffords" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Get clifford operators, build based on symmetries and single-qubit X.
 :returns: a list of unitaries used to digonalize the Hamiltonian.
 :rtype: [WeightedPauliOperator]</p>
@@ -1325,147 +1349,131 @@
 
 <dl class="attribute">
 <dt id="qiskit.aqua.operators.Z2Symmetries.sq_list">
-<code class="descname">sq_list</code><a class="headerlink" href="#qiskit.aqua.operators.Z2Symmetries.sq_list" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">sq_list</code><a class="headerlink" href="#qiskit.aqua.operators.Z2Symmetries.sq_list" title="Link zu dieser Definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.operators.Z2Symmetries.sq_paulis">
-<code class="descname">sq_paulis</code><a class="headerlink" href="#qiskit.aqua.operators.Z2Symmetries.sq_paulis" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">sq_paulis</code><a class="headerlink" href="#qiskit.aqua.operators.Z2Symmetries.sq_paulis" title="Link zu dieser Definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.operators.Z2Symmetries.symmetries">
-<code class="descname">symmetries</code><a class="headerlink" href="#qiskit.aqua.operators.Z2Symmetries.symmetries" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">symmetries</code><a class="headerlink" href="#qiskit.aqua.operators.Z2Symmetries.symmetries" title="Link zu dieser Definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.operators.Z2Symmetries.tapering_values">
-<code class="descname">tapering_values</code><a class="headerlink" href="#qiskit.aqua.operators.Z2Symmetries.tapering_values" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">tapering_values</code><a class="headerlink" href="#qiskit.aqua.operators.Z2Symmetries.tapering_values" title="Link zu dieser Definition">¶</a></dt>
 <dd></dd></dl>
 
 <p class="rubric">Methods Documentation</p>
 <dl class="method">
 <dt id="qiskit.aqua.operators.Z2Symmetries.consistent_tapering">
-<code class="descname">consistent_tapering</code><span class="sig-paren">(</span><em>operator</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/operators/weighted_pauli_operator.html#Z2Symmetries.consistent_tapering"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.aqua.operators.Z2Symmetries.consistent_tapering" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">consistent_tapering</code><span class="sig-paren">(</span><em class="sig-param">operator</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/operators/weighted_pauli_operator.html#Z2Symmetries.consistent_tapering"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.aqua.operators.Z2Symmetries.consistent_tapering" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Tapering the <cite>operator</cite> with the same manner of how this tapered operator is created. i.e., using the same
 cliffords and tapering values.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><strong>operator</strong> (<a class="reference internal" href="qiskit.aqua.operators.WeightedPauliOperator.html#qiskit.aqua.operators.WeightedPauliOperator" title="qiskit.aqua.operators.WeightedPauliOperator"><em>WeightedPauliOperator</em></a>) – the to-be-tapered operator</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body">the tapered operator</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body">TaperedWeightedPauliOperator</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><p><strong>operator</strong> (<a class="reference internal" href="qiskit.aqua.operators.WeightedPauliOperator.html#qiskit.aqua.operators.WeightedPauliOperator" title="qiskit.aqua.operators.WeightedPauliOperator"><em>WeightedPauliOperator</em></a>) – the to-be-tapered operator</p>
+</dd>
+<dt class="field-even">Rückgabe</dt>
+<dd class="field-even"><p>the tapered operator</p>
+</dd>
+<dt class="field-odd">Rückgabetyp</dt>
+<dd class="field-odd"><p>TaperedWeightedPauliOperator</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.operators.Z2Symmetries.copy">
-<code class="descname">copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/operators/weighted_pauli_operator.html#Z2Symmetries.copy"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.aqua.operators.Z2Symmetries.copy" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/operators/weighted_pauli_operator.html#Z2Symmetries.copy"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.aqua.operators.Z2Symmetries.copy" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Get a copy of self.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Rückgabe:</th><td class="field-body">Z2Symmetries</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Rückgabe</dt>
+<dd class="field-odd"><p>Z2Symmetries</p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="classmethod">
+<dl class="method">
 <dt id="qiskit.aqua.operators.Z2Symmetries.find_Z2_symmetries">
-<em class="property">classmethod </em><code class="descname">find_Z2_symmetries</code><span class="sig-paren">(</span><em>operator</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/operators/weighted_pauli_operator.html#Z2Symmetries.find_Z2_symmetries"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.aqua.operators.Z2Symmetries.find_Z2_symmetries" title="Link zu dieser Definition">¶</a></dt>
+<em class="property">classmethod </em><code class="sig-name descname">find_Z2_symmetries</code><span class="sig-paren">(</span><em class="sig-param">operator</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/operators/weighted_pauli_operator.html#Z2Symmetries.find_Z2_symmetries"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.aqua.operators.Z2Symmetries.find_Z2_symmetries" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Finds Z2 Pauli-type symmetries of an Operator.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Rückgabe:</th><td class="field-body">a z2_symmetries object contains symmetries, single-qubit X, single-qubit list.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Rückgabetyp:</th><td class="field-body"><a class="reference internal" href="#qiskit.aqua.operators.Z2Symmetries" title="qiskit.aqua.operators.Z2Symmetries">Z2Symmetries</a></td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Rückgabe</dt>
+<dd class="field-odd"><p>a z2_symmetries object contains symmetries, single-qubit X, single-qubit list.</p>
+</dd>
+<dt class="field-even">Rückgabetyp</dt>
+<dd class="field-even"><p><a class="reference internal" href="#qiskit.aqua.operators.Z2Symmetries" title="qiskit.aqua.operators.Z2Symmetries">Z2Symmetries</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.operators.Z2Symmetries.is_empty">
-<code class="descname">is_empty</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/operators/weighted_pauli_operator.html#Z2Symmetries.is_empty"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.aqua.operators.Z2Symmetries.is_empty" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">is_empty</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/operators/weighted_pauli_operator.html#Z2Symmetries.is_empty"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.aqua.operators.Z2Symmetries.is_empty" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Check the z2_symmetries is empty or not.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Rückgabe:</th><td class="field-body"></td>
-</tr>
-<tr class="field-even field"><th class="field-name">Rückgabetyp:</th><td class="field-body">bool</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Rückgabe</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">Rückgabetyp</dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.operators.Z2Symmetries.taper">
-<code class="descname">taper</code><span class="sig-paren">(</span><em>operator</em>, <em>tapering_values=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/operators/weighted_pauli_operator.html#Z2Symmetries.taper"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.aqua.operators.Z2Symmetries.taper" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">taper</code><span class="sig-paren">(</span><em class="sig-param">operator</em>, <em class="sig-param">tapering_values=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/operators/weighted_pauli_operator.html#Z2Symmetries.taper"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.aqua.operators.Z2Symmetries.taper" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Taper an operator based on the z2_symmetries info and sector defined by <cite>tapering_values</cite>.
 The <cite>tapering_values</cite> will be stored into the resulted operator for a record.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><ul class="first simple">
-<li><strong>operator</strong> (<a class="reference internal" href="qiskit.aqua.operators.WeightedPauliOperator.html#qiskit.aqua.operators.WeightedPauliOperator" title="qiskit.aqua.operators.WeightedPauliOperator"><em>WeightedPauliOperator</em></a>) – the to-be-tapered operator.</li>
-<li><strong>tapering_values</strong> (<em>[</em><em>int</em><em>]</em><em>, </em><em>optional</em>) – if None, returns operators at each sector; otherwise, returns
-the operator located in that sector.</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>operator</strong> (<a class="reference internal" href="qiskit.aqua.operators.WeightedPauliOperator.html#qiskit.aqua.operators.WeightedPauliOperator" title="qiskit.aqua.operators.WeightedPauliOperator"><em>WeightedPauliOperator</em></a>) – the to-be-tapered operator.</p></li>
+<li><p><strong>tapering_values</strong> (<em>[</em><em>int</em><em>]</em><em>, </em><em>optional</em>) – if None, returns operators at each sector; otherwise, returns
+the operator located in that sector.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body"><p class="first"><ul class="simple">
-<li>if tapering_values is None: [WeightedPauliOperator]; otherwise, WeightedPauliOperator</li>
+</dd>
+<dt class="field-even">Rückgabe</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>if tapering_values is None: [WeightedPauliOperator]; otherwise, WeightedPauliOperator</p></li>
 </ul>
 </p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body"><p class="first last">[<a class="reference internal" href="qiskit.aqua.operators.WeightedPauliOperator.html#qiskit.aqua.operators.WeightedPauliOperator" title="qiskit.aqua.operators.WeightedPauliOperator">WeightedPauliOperator</a>] or <a class="reference internal" href="qiskit.aqua.operators.WeightedPauliOperator.html#qiskit.aqua.operators.WeightedPauliOperator" title="qiskit.aqua.operators.WeightedPauliOperator">WeightedPauliOperator</a></p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-odd">Rückgabetyp</dt>
+<dd class="field-odd"><p>[<a class="reference internal" href="qiskit.aqua.operators.WeightedPauliOperator.html#qiskit.aqua.operators.WeightedPauliOperator" title="qiskit.aqua.operators.WeightedPauliOperator">WeightedPauliOperator</a>] or <a class="reference internal" href="qiskit.aqua.operators.WeightedPauliOperator.html#qiskit.aqua.operators.WeightedPauliOperator" title="qiskit.aqua.operators.WeightedPauliOperator">WeightedPauliOperator</a></p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="staticmethod">
+<dl class="method">
 <dt id="qiskit.aqua.operators.Z2Symmetries.two_qubit_reduction">
-<em class="property">static </em><code class="descname">two_qubit_reduction</code><span class="sig-paren">(</span><em>operator</em>, <em>num_particles</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/operators/weighted_pauli_operator.html#Z2Symmetries.two_qubit_reduction"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.aqua.operators.Z2Symmetries.two_qubit_reduction" title="Link zu dieser Definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">two_qubit_reduction</code><span class="sig-paren">(</span><em class="sig-param">operator</em>, <em class="sig-param">num_particles</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/operators/weighted_pauli_operator.html#Z2Symmetries.two_qubit_reduction"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.aqua.operators.Z2Symmetries.two_qubit_reduction" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Eliminates the central and last qubit in a list of Pauli that has
 diagonal operators (Z,I) at those positions</p>
 <p>Chemistry specific method:
 It can be used to taper two qubits in parity and binary-tree mapped
 fermionic Hamiltonians when the spin orbitals are ordered in two spin
 sectors, (block spin order) according to the number of particles in the system.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><ul class="first simple">
-<li><strong>operator</strong> (<a class="reference internal" href="qiskit.aqua.operators.WeightedPauliOperator.html#qiskit.aqua.operators.WeightedPauliOperator" title="qiskit.aqua.operators.WeightedPauliOperator"><em>WeightedPauliOperator</em></a>) – the operator</li>
-<li><strong>num_particles</strong> (<em>list</em><em>, </em><em>int</em>) – number of particles, if it is a list, the first number is alpha
-and the second number if beta.</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>operator</strong> (<a class="reference internal" href="qiskit.aqua.operators.WeightedPauliOperator.html#qiskit.aqua.operators.WeightedPauliOperator" title="qiskit.aqua.operators.WeightedPauliOperator"><em>WeightedPauliOperator</em></a>) – the operator</p></li>
+<li><p><strong>num_particles</strong> (<em>list</em><em>, </em><em>int</em>) – number of particles, if it is a list, the first number is alpha
+and the second number if beta.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body"><p class="first">a new operator whose qubit number is reduced by 2.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body"><p class="first last"><a class="reference internal" href="qiskit.aqua.Operator.html#qiskit.aqua.Operator" title="qiskit.aqua.Operator">Operator</a></p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Rückgabe</dt>
+<dd class="field-even"><p>a new operator whose qubit number is reduced by 2.</p>
+</dd>
+<dt class="field-odd">Rückgabetyp</dt>
+<dd class="field-odd"><p><a class="reference internal" href="qiskit.aqua.Operator.html#qiskit.aqua.Operator" title="qiskit.aqua.Operator">Operator</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>

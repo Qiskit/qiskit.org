@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,6 +48,8 @@
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/js/themeExt.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Stichwortverzeichnis" href="../genindex.html" />
@@ -625,6 +626,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1215,6 +1222,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1261,51 +1274,51 @@
 <h1>TwoQubitBasisDecomposer<a class="headerlink" href="#twoqubitbasisdecomposer" title="Link zu dieser Überschrift">¶</a></h1>
 <dl class="class">
 <dt id="qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer">
-<em class="property">class </em><code class="descname">TwoQubitBasisDecomposer</code><span class="sig-paren">(</span><em>gate</em>, <em>basis_fidelity=1.0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/synthesis/two_qubit_decompose.html#TwoQubitBasisDecomposer"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer" title="Link zu dieser Definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">TwoQubitBasisDecomposer</code><span class="sig-paren">(</span><em class="sig-param">gate</em>, <em class="sig-param">basis_fidelity=1.0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/synthesis/two_qubit_decompose.html#TwoQubitBasisDecomposer"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>A class for decomposing 2-qubit unitaries into minimal number of uses of a 2-qubit
 basis gate.</p>
 <p class="rubric">Methods Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.__call__" title="qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.__call__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__call__</span></code></a>(target[,&nbsp;basis_fidelity])</td>
-<td>Decompose a two-qubit unitary over fixed basis + SU(2) using the best approximation given that each basis application has a finite fidelity.</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.__call__" title="qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.__call__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__call__</span></code></a>(target[, basis_fidelity])</p></td>
+<td><p>Decompose a two-qubit unitary over fixed basis + SU(2) using the best approximation given that each basis application has a finite fidelity.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.decomp0" title="qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.decomp0"><code class="xref py py-obj docutils literal notranslate"><span class="pre">decomp0</span></code></a>(target)</td>
-<td>Decompose target ~Ud(x, y, z) with 0 uses of the basis gate.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.decomp0" title="qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.decomp0"><code class="xref py py-obj docutils literal notranslate"><span class="pre">decomp0</span></code></a>(target)</p></td>
+<td><p>Decompose target ~Ud(x, y, z) with 0 uses of the basis gate.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.decomp1" title="qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.decomp1"><code class="xref py py-obj docutils literal notranslate"><span class="pre">decomp1</span></code></a>(target)</td>
-<td>Decompose target ~Ud(x, y, z) with 1 uses of the basis gate ~Ud(a, b, c).</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.decomp1" title="qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.decomp1"><code class="xref py py-obj docutils literal notranslate"><span class="pre">decomp1</span></code></a>(target)</p></td>
+<td><p>Decompose target ~Ud(x, y, z) with 1 uses of the basis gate ~Ud(a, b, c).</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.decomp2_supercontrolled" title="qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.decomp2_supercontrolled"><code class="xref py py-obj docutils literal notranslate"><span class="pre">decomp2_supercontrolled</span></code></a>(target)</td>
-<td>Decompose target ~Ud(x, y, z) with 2 uses of the basis gate.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.decomp2_supercontrolled" title="qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.decomp2_supercontrolled"><code class="xref py py-obj docutils literal notranslate"><span class="pre">decomp2_supercontrolled</span></code></a>(target)</p></td>
+<td><p>Decompose target ~Ud(x, y, z) with 2 uses of the basis gate.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.decomp3_supercontrolled" title="qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.decomp3_supercontrolled"><code class="xref py py-obj docutils literal notranslate"><span class="pre">decomp3_supercontrolled</span></code></a>(target)</td>
-<td>Decompose target with 3 uses of the basis.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.decomp3_supercontrolled" title="qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.decomp3_supercontrolled"><code class="xref py py-obj docutils literal notranslate"><span class="pre">decomp3_supercontrolled</span></code></a>(target)</p></td>
+<td><p>Decompose target with 3 uses of the basis.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.num_basis_gates" title="qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.num_basis_gates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">num_basis_gates</span></code></a>(unitary)</td>
-<td>Computes the number of basis gates needed in a decomposition of input unitary</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.num_basis_gates" title="qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.num_basis_gates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">num_basis_gates</span></code></a>(unitary)</p></td>
+<td><p>Computes the number of basis gates needed in a decomposition of input unitary</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.traces" title="qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.traces"><code class="xref py py-obj docutils literal notranslate"><span class="pre">traces</span></code></a>(target)</td>
-<td>Give the expected traces <a href="#id1"><span class="problematic" id="id2">|Tr(U.Utarget^dag)|</span></a> for different number of basis gates</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.traces" title="qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.traces"><code class="xref py py-obj docutils literal notranslate"><span class="pre">traces</span></code></a>(target)</p></td>
+<td><p>Give the expected traces <a href="#id1"><span class="problematic" id="id2">|Tr(U.Utarget^dag)|</span></a> for different number of basis gates</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Methods Documentation</p>
 <dl class="method">
 <dt id="qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.__call__">
-<code class="descname">__call__</code><span class="sig-paren">(</span><em>target</em>, <em>basis_fidelity=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/synthesis/two_qubit_decompose.html#TwoQubitBasisDecomposer.__call__"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.__call__" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">__call__</code><span class="sig-paren">(</span><em class="sig-param">target</em>, <em class="sig-param">basis_fidelity=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/synthesis/two_qubit_decompose.html#TwoQubitBasisDecomposer.__call__"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.__call__" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Decompose a two-qubit unitary over fixed basis + SU(2) using the best approximation given
 that each basis application has a finite fidelity.</p>
 </dd></dl>
 
-<dl class="staticmethod">
+<dl class="method">
 <dt id="qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.decomp0">
-<em class="property">static </em><code class="descname">decomp0</code><span class="sig-paren">(</span><em>target</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/synthesis/two_qubit_decompose.html#TwoQubitBasisDecomposer.decomp0"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.decomp0" title="Link zu dieser Definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">decomp0</code><span class="sig-paren">(</span><em class="sig-param">target</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/synthesis/two_qubit_decompose.html#TwoQubitBasisDecomposer.decomp0"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.decomp0" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Decompose target ~Ud(x, y, z) with 0 uses of the basis gate.
 Result Ur has trace:
 <a href="#id3"><span class="problematic" id="id4">|Tr(Ur.Utarget^dag)|</span></a> = 4|(cos(x)cos(y)cos(z)+ j sin(x)sin(y)sin(z)|,
@@ -1314,7 +1327,7 @@ which is optimal for all targets and bases</p>
 
 <dl class="method">
 <dt id="qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.decomp1">
-<code class="descname">decomp1</code><span class="sig-paren">(</span><em>target</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/synthesis/two_qubit_decompose.html#TwoQubitBasisDecomposer.decomp1"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.decomp1" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">decomp1</code><span class="sig-paren">(</span><em class="sig-param">target</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/synthesis/two_qubit_decompose.html#TwoQubitBasisDecomposer.decomp1"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.decomp1" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Decompose target ~Ud(x, y, z) with 1 uses of the basis gate ~Ud(a, b, c).
 Result Ur has trace:
 <a href="#id5"><span class="problematic" id="id6">|Tr(Ur.Utarget^dag)|</span></a> = 4|cos(x-a)cos(y-b)cos(z-c) + j sin(x-a)sin(y-b)sin(z-c)|,
@@ -1323,7 +1336,7 @@ which is optimal for all targets and bases with z==0 or c==0</p>
 
 <dl class="method">
 <dt id="qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.decomp2_supercontrolled">
-<code class="descname">decomp2_supercontrolled</code><span class="sig-paren">(</span><em>target</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/synthesis/two_qubit_decompose.html#TwoQubitBasisDecomposer.decomp2_supercontrolled"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.decomp2_supercontrolled" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">decomp2_supercontrolled</code><span class="sig-paren">(</span><em class="sig-param">target</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/synthesis/two_qubit_decompose.html#TwoQubitBasisDecomposer.decomp2_supercontrolled"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.decomp2_supercontrolled" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Decompose target ~Ud(x, y, z) with 2 uses of the basis gate.
 For supercontrolled basis ~Ud(pi/4, b, 0), all b, result Ur has trace:
 <a href="#id7"><span class="problematic" id="id8">|Tr(Ur.Utarget^dag)|</span></a> = 4cos(z)
@@ -1331,14 +1344,15 @@ which is the optimal approximation for basis of CNOT-class ~Ud(pi/4, 0, 0)
 or DCNOT-class ~Ud(pi/4, pi/4, 0) and any target.
 May be sub-optimal for b!=0 (e.g. there exists exact decomposition for any target using B</p>
 <blockquote>
-<div>B~Ud(pi/4, pi/8, 0), but not this decomposition.)</div></blockquote>
+<div><p>B~Ud(pi/4, pi/8, 0), but not this decomposition.)</p>
+</div></blockquote>
 <p>This is an exact decomposition for supercontrolled basis and target ~Ud(x, y, 0).
 No guarantees for non-supercontrolled basis.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.decomp3_supercontrolled">
-<code class="descname">decomp3_supercontrolled</code><span class="sig-paren">(</span><em>target</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/synthesis/two_qubit_decompose.html#TwoQubitBasisDecomposer.decomp3_supercontrolled"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.decomp3_supercontrolled" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">decomp3_supercontrolled</code><span class="sig-paren">(</span><em class="sig-param">target</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/synthesis/two_qubit_decompose.html#TwoQubitBasisDecomposer.decomp3_supercontrolled"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.decomp3_supercontrolled" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Decompose target with 3 uses of the basis.
 This is an exact decomposition for supercontrolled basis ~Ud(pi/4, b, 0), all b,
 and any target. No guarantees for non-supercontrolled basis.</p>
@@ -1346,14 +1360,14 @@ and any target. No guarantees for non-supercontrolled basis.</p>
 
 <dl class="method">
 <dt id="qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.num_basis_gates">
-<code class="descname">num_basis_gates</code><span class="sig-paren">(</span><em>unitary</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/synthesis/two_qubit_decompose.html#TwoQubitBasisDecomposer.num_basis_gates"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.num_basis_gates" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">num_basis_gates</code><span class="sig-paren">(</span><em class="sig-param">unitary</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/synthesis/two_qubit_decompose.html#TwoQubitBasisDecomposer.num_basis_gates"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.num_basis_gates" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Computes the number of basis gates needed in
 a decomposition of input unitary</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.traces">
-<code class="descname">traces</code><span class="sig-paren">(</span><em>target</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/synthesis/two_qubit_decompose.html#TwoQubitBasisDecomposer.traces"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.traces" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">traces</code><span class="sig-paren">(</span><em class="sig-param">target</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/synthesis/two_qubit_decompose.html#TwoQubitBasisDecomposer.traces"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.traces" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Give the expected traces <a href="#id9"><span class="problematic" id="id10">|Tr(U.Utarget^dag)|</span></a> for different number of basis gates</p>
 </dd></dl>
 

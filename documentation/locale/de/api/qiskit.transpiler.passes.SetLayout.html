@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,6 +48,8 @@
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/js/themeExt.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Stichwortverzeichnis" href="../genindex.html" />
@@ -625,6 +626,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1215,6 +1222,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1261,43 +1274,49 @@
 <h1>SetLayout<a class="headerlink" href="#setlayout" title="Link zu dieser Überschrift">¶</a></h1>
 <dl class="class">
 <dt id="qiskit.transpiler.passes.SetLayout">
-<em class="property">class </em><code class="descname">SetLayout</code><span class="sig-paren">(</span><em>layout</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/transpiler/passes/mapping/set_layout.html#SetLayout"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.transpiler.passes.SetLayout" title="Link zu dieser Definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">SetLayout</code><span class="sig-paren">(</span><em class="sig-param">layout</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/transpiler/passes/mapping/set_layout.html#SetLayout"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.transpiler.passes.SetLayout" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.transpiler.basepasses.AnalysisPass</span></code></p>
 <p>Sets property_set[‚layout‘] to layout.</p>
+<p>Sets property_set[‚layout‘] to layout.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><p><strong>layout</strong> (<a class="reference internal" href="qiskit.transpiler.Layout.html#qiskit.transpiler.Layout" title="qiskit.transpiler.Layout"><em>Layout</em></a>) – the layout to set.</p>
+</dd>
+</dl>
 <p class="rubric">Attributes Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.transpiler.passes.SetLayout.is_analysis_pass" title="qiskit.transpiler.passes.SetLayout.is_analysis_pass"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_analysis_pass</span></code></a></td>
-<td>Check if the pass is an analysis pass.</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.transpiler.passes.SetLayout.is_analysis_pass" title="qiskit.transpiler.passes.SetLayout.is_analysis_pass"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_analysis_pass</span></code></a></p></td>
+<td><p>Check if the pass is an analysis pass.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.transpiler.passes.SetLayout.is_transformation_pass" title="qiskit.transpiler.passes.SetLayout.is_transformation_pass"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_transformation_pass</span></code></a></td>
-<td>Check if the pass is a transformation pass.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.transpiler.passes.SetLayout.is_transformation_pass" title="qiskit.transpiler.passes.SetLayout.is_transformation_pass"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_transformation_pass</span></code></a></p></td>
+<td><p>Check if the pass is a transformation pass.</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Methods Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.transpiler.passes.SetLayout.name" title="qiskit.transpiler.passes.SetLayout.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></a>()</td>
-<td>Return the name of the pass.</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.transpiler.passes.SetLayout.name" title="qiskit.transpiler.passes.SetLayout.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></a>()</p></td>
+<td><p>Return the name of the pass.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.transpiler.passes.SetLayout.run" title="qiskit.transpiler.passes.SetLayout.run"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run</span></code></a>(dag)</td>
-<td>Run a pass on the DAGCircuit.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.transpiler.passes.SetLayout.run" title="qiskit.transpiler.passes.SetLayout.run"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run</span></code></a>(dag)</p></td>
+<td><p>Run a pass on the DAGCircuit.</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Attributes Documentation</p>
 <dl class="attribute">
 <dt id="qiskit.transpiler.passes.SetLayout.is_analysis_pass">
-<code class="descname">is_analysis_pass</code><a class="headerlink" href="#qiskit.transpiler.passes.SetLayout.is_analysis_pass" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">is_analysis_pass</code><a class="headerlink" href="#qiskit.transpiler.passes.SetLayout.is_analysis_pass" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Check if the pass is an analysis pass.</p>
 <p>If the pass is an AnalysisPass, that means that the pass can analyze the DAG and write
 the results of that analysis in the property set. Modifications on the DAG are not allowed
@@ -1306,7 +1325,7 @@ by this kind of pass.</p>
 
 <dl class="attribute">
 <dt id="qiskit.transpiler.passes.SetLayout.is_transformation_pass">
-<code class="descname">is_transformation_pass</code><a class="headerlink" href="#qiskit.transpiler.passes.SetLayout.is_transformation_pass" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">is_transformation_pass</code><a class="headerlink" href="#qiskit.transpiler.passes.SetLayout.is_transformation_pass" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Check if the pass is a transformation pass.</p>
 <p>If the pass is a TransformationPass, that means that the pass can manipulate the DAG,
 but cannot modify the property set (but it can be read).</p>
@@ -1315,24 +1334,22 @@ but cannot modify the property set (but it can be read).</p>
 <p class="rubric">Methods Documentation</p>
 <dl class="method">
 <dt id="qiskit.transpiler.passes.SetLayout.name">
-<code class="descname">name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.transpiler.passes.SetLayout.name" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.transpiler.passes.SetLayout.name" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Return the name of the pass.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.transpiler.passes.SetLayout.run">
-<code class="descname">run</code><span class="sig-paren">(</span><em>dag</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/transpiler/passes/mapping/set_layout.html#SetLayout.run"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.transpiler.passes.SetLayout.run" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param">dag</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/transpiler/passes/mapping/set_layout.html#SetLayout.run"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.transpiler.passes.SetLayout.run" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Run a pass on the DAGCircuit. This is implemented by the pass developer.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><strong>dag</strong> (<a class="reference internal" href="qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit" title="qiskit.dagcircuit.DAGCircuit"><em>DAGCircuit</em></a>) – the dag on which the pass is run.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal notranslate"><span class="pre">NotImplementedError</span></code> – when this is left unimplemented for a pass.</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><p><strong>dag</strong> (<a class="reference internal" href="qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit" title="qiskit.dagcircuit.DAGCircuit"><em>DAGCircuit</em></a>) – the dag on which the pass is run.</p>
+</dd>
+<dt class="field-even">Verursacht</dt>
+<dd class="field-even"><p><strong>NotImplementedError</strong> – when this is left unimplemented for a pass.</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>

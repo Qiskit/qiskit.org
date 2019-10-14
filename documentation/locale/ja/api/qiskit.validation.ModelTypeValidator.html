@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,6 +48,8 @@
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/js/themeExt.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="索引" href="../genindex.html" />
@@ -625,6 +626,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1215,6 +1222,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1261,98 +1274,98 @@
 <h1>ModelTypeValidator<a class="headerlink" href="#modeltypevalidator" title="このヘッドラインへのパーマリンク">¶</a></h1>
 <dl class="class">
 <dt id="qiskit.validation.ModelTypeValidator">
-<em class="property">class </em><code class="descname">ModelTypeValidator</code><span class="sig-paren">(</span><em>default=&lt;marshmallow.missing&gt;</em>, <em>attribute=None</em>, <em>load_from=None</em>, <em>dump_to=None</em>, <em>error=None</em>, <em>validate=None</em>, <em>required=False</em>, <em>allow_none=None</em>, <em>load_only=False</em>, <em>dump_only=False</em>, <em>missing=&lt;marshmallow.missing&gt;</em>, <em>error_messages=None</em>, <em>**metadata</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/validation/base.html#ModelTypeValidator"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.validation.ModelTypeValidator" title="この定義へのパーマリンク">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">ModelTypeValidator</code><span class="sig-paren">(</span><em class="sig-param">default=&lt;marshmallow.missing&gt;</em>, <em class="sig-param">attribute=None</em>, <em class="sig-param">load_from=None</em>, <em class="sig-param">dump_to=None</em>, <em class="sig-param">error=None</em>, <em class="sig-param">validate=None</em>, <em class="sig-param">required=False</em>, <em class="sig-param">allow_none=None</em>, <em class="sig-param">load_only=False</em>, <em class="sig-param">dump_only=False</em>, <em class="sig-param">missing=&lt;marshmallow.missing&gt;</em>, <em class="sig-param">error_messages=None</em>, <em class="sig-param">**metadata</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/validation/base.html#ModelTypeValidator"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.validation.ModelTypeValidator" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">marshmallow.fields.Field</span></code></p>
 <p>A field able to validate the correct type of a value.</p>
 <p class="rubric">Attributes Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.validation.ModelTypeValidator.context" title="qiskit.validation.ModelTypeValidator.context"><code class="xref py py-obj docutils literal notranslate"><span class="pre">context</span></code></a></td>
-<td>The context dictionary for the parent <code class="xref py py-class docutils literal notranslate"><span class="pre">Schema</span></code>.</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.validation.ModelTypeValidator.context" title="qiskit.validation.ModelTypeValidator.context"><code class="xref py py-obj docutils literal notranslate"><span class="pre">context</span></code></a></p></td>
+<td><p>The context dictionary for the parent <code class="xref py py-class docutils literal notranslate"><span class="pre">Schema</span></code>.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.validation.ModelTypeValidator.default_error_messages" title="qiskit.validation.ModelTypeValidator.default_error_messages"><code class="xref py py-obj docutils literal notranslate"><span class="pre">default_error_messages</span></code></a></td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.validation.ModelTypeValidator.default_error_messages" title="qiskit.validation.ModelTypeValidator.default_error_messages"><code class="xref py py-obj docutils literal notranslate"><span class="pre">default_error_messages</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.validation.ModelTypeValidator.name" title="qiskit.validation.ModelTypeValidator.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></a></td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.validation.ModelTypeValidator.name" title="qiskit.validation.ModelTypeValidator.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.validation.ModelTypeValidator.parent" title="qiskit.validation.ModelTypeValidator.parent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parent</span></code></a></td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.validation.ModelTypeValidator.parent" title="qiskit.validation.ModelTypeValidator.parent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parent</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.validation.ModelTypeValidator.root" title="qiskit.validation.ModelTypeValidator.root"><code class="xref py py-obj docutils literal notranslate"><span class="pre">root</span></code></a></td>
-<td>Reference to the <cite>Schema</cite> that this field belongs to even if it is buried in a <cite>List</cite>.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.validation.ModelTypeValidator.root" title="qiskit.validation.ModelTypeValidator.root"><code class="xref py py-obj docutils literal notranslate"><span class="pre">root</span></code></a></p></td>
+<td><p>Reference to the <cite>Schema</cite> that this field belongs to even if it is buried in a <cite>List</cite>.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.validation.ModelTypeValidator.valid_types" title="qiskit.validation.ModelTypeValidator.valid_types"><code class="xref py py-obj docutils literal notranslate"><span class="pre">valid_types</span></code></a></td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.validation.ModelTypeValidator.valid_types" title="qiskit.validation.ModelTypeValidator.valid_types"><code class="xref py py-obj docutils literal notranslate"><span class="pre">valid_types</span></code></a></p></td>
+<td><p></p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Methods Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.validation.ModelTypeValidator.check_type" title="qiskit.validation.ModelTypeValidator.check_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_type</span></code></a>(value,&nbsp;attr,&nbsp;data)</td>
-<td>Validates a value against the correct type of the field.</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.validation.ModelTypeValidator.check_type" title="qiskit.validation.ModelTypeValidator.check_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_type</span></code></a>(value, attr, data)</p></td>
+<td><p>Validates a value against the correct type of the field.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.validation.ModelTypeValidator.deserialize" title="qiskit.validation.ModelTypeValidator.deserialize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">deserialize</span></code></a>(value[,&nbsp;attr,&nbsp;data])</td>
-<td>Deserialize <code class="docutils literal notranslate"><span class="pre">value</span></code>.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.validation.ModelTypeValidator.deserialize" title="qiskit.validation.ModelTypeValidator.deserialize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">deserialize</span></code></a>(value[, attr, data])</p></td>
+<td><p>Deserialize <code class="docutils literal notranslate"><span class="pre">value</span></code>.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.validation.ModelTypeValidator.fail" title="qiskit.validation.ModelTypeValidator.fail"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fail</span></code></a>(key,&nbsp;**kwargs)</td>
-<td>A helper method that simply raises a <cite>ValidationError</cite>.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.validation.ModelTypeValidator.fail" title="qiskit.validation.ModelTypeValidator.fail"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fail</span></code></a>(key, **kwargs)</p></td>
+<td><p>A helper method that simply raises a <cite>ValidationError</cite>.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.validation.ModelTypeValidator.get_value" title="qiskit.validation.ModelTypeValidator.get_value"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_value</span></code></a>(attr,&nbsp;obj[,&nbsp;accessor,&nbsp;default])</td>
-<td>Return the value for a given key from an object.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.validation.ModelTypeValidator.get_value" title="qiskit.validation.ModelTypeValidator.get_value"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_value</span></code></a>(attr, obj[, accessor, default])</p></td>
+<td><p>Return the value for a given key from an object.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.validation.ModelTypeValidator.serialize" title="qiskit.validation.ModelTypeValidator.serialize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">serialize</span></code></a>(attr,&nbsp;obj[,&nbsp;accessor])</td>
-<td>Pulls the value for the given key from the object, applies the field's formatting and returns the result.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.validation.ModelTypeValidator.serialize" title="qiskit.validation.ModelTypeValidator.serialize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">serialize</span></code></a>(attr, obj[, accessor])</p></td>
+<td><p>Pulls the value for the given key from the object, applies the field's formatting and returns the result.</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Attributes Documentation</p>
 <dl class="attribute">
 <dt id="qiskit.validation.ModelTypeValidator.context">
-<code class="descname">context</code><a class="headerlink" href="#qiskit.validation.ModelTypeValidator.context" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">context</code><a class="headerlink" href="#qiskit.validation.ModelTypeValidator.context" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>The context dictionary for the parent <code class="xref py py-class docutils literal notranslate"><span class="pre">Schema</span></code>.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.validation.ModelTypeValidator.default_error_messages">
-<code class="descname">default_error_messages</code><em class="property"> = {'null': 'Field may not be null.', 'required': 'Missing data for required field.', 'type': 'Invalid type.', 'validator_failed': 'Invalid value.'}</em><a class="headerlink" href="#qiskit.validation.ModelTypeValidator.default_error_messages" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">default_error_messages</code><em class="property"> = {'null': 'Field may not be null.', 'required': 'Missing data for required field.', 'type': 'Invalid type.', 'validator_failed': 'Invalid value.'}</em><a class="headerlink" href="#qiskit.validation.ModelTypeValidator.default_error_messages" title="この定義へのパーマリンク">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.validation.ModelTypeValidator.name">
-<code class="descname">name</code><em class="property"> = None</em><a class="headerlink" href="#qiskit.validation.ModelTypeValidator.name" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">name</code><em class="property"> = None</em><a class="headerlink" href="#qiskit.validation.ModelTypeValidator.name" title="この定義へのパーマリンク">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.validation.ModelTypeValidator.parent">
-<code class="descname">parent</code><em class="property"> = None</em><a class="headerlink" href="#qiskit.validation.ModelTypeValidator.parent" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">parent</code><em class="property"> = None</em><a class="headerlink" href="#qiskit.validation.ModelTypeValidator.parent" title="この定義へのパーマリンク">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.validation.ModelTypeValidator.root">
-<code class="descname">root</code><a class="headerlink" href="#qiskit.validation.ModelTypeValidator.root" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">root</code><a class="headerlink" href="#qiskit.validation.ModelTypeValidator.root" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Reference to the <cite>Schema</cite> that this field belongs to even if it is buried in a <cite>List</cite>.
 Return <cite>None</cite> for unbound fields.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.validation.ModelTypeValidator.valid_types">
-<code class="descname">valid_types</code><em class="property"> = (&lt;class 'object'&gt;,)</em><a class="headerlink" href="#qiskit.validation.ModelTypeValidator.valid_types" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">valid_types</code><em class="property"> = (&lt;class 'object'&gt;,)</em><a class="headerlink" href="#qiskit.validation.ModelTypeValidator.valid_types" title="この定義へのパーマリンク">¶</a></dt>
 <dd></dd></dl>
 
 <p class="rubric">Methods Documentation</p>
 <dl class="method">
 <dt id="qiskit.validation.ModelTypeValidator.check_type">
-<code class="descname">check_type</code><span class="sig-paren">(</span><em>value</em>, <em>attr</em>, <em>data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/validation/base.html#ModelTypeValidator.check_type"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.validation.ModelTypeValidator.check_type" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">check_type</code><span class="sig-paren">(</span><em class="sig-param">value</em>, <em class="sig-param">attr</em>, <em class="sig-param">data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/validation/base.html#ModelTypeValidator.check_type"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.validation.ModelTypeValidator.check_type" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Validates a value against the correct type of the field.</p>
 <p>It calls <code class="docutils literal notranslate"><span class="pre">_expected_types</span></code> to get a list of valid types.</p>
 <p>Subclasses can do one of the following:</p>
@@ -1370,52 +1383,45 @@ untouched.</p>
 
 <dl class="method">
 <dt id="qiskit.validation.ModelTypeValidator.deserialize">
-<code class="descname">deserialize</code><span class="sig-paren">(</span><em>value</em>, <em>attr=None</em>, <em>data=None</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.validation.ModelTypeValidator.deserialize" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">deserialize</code><span class="sig-paren">(</span><em class="sig-param">value</em>, <em class="sig-param">attr=None</em>, <em class="sig-param">data=None</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.validation.ModelTypeValidator.deserialize" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Deserialize <code class="docutils literal notranslate"><span class="pre">value</span></code>.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">例外:</th><td class="field-body"><strong>ValidationError</strong> -- If an invalid value is passed or if a required value
-is missing.</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">例外</dt>
+<dd class="field-odd"><p><strong>ValidationError</strong> -- If an invalid value is passed or if a required value
+is missing.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.validation.ModelTypeValidator.fail">
-<code class="descname">fail</code><span class="sig-paren">(</span><em>key</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.validation.ModelTypeValidator.fail" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">fail</code><span class="sig-paren">(</span><em class="sig-param">key</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.validation.ModelTypeValidator.fail" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>A helper method that simply raises a <cite>ValidationError</cite>.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.validation.ModelTypeValidator.get_value">
-<code class="descname">get_value</code><span class="sig-paren">(</span><em>attr</em>, <em>obj</em>, <em>accessor=None</em>, <em>default=&lt;marshmallow.missing&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.validation.ModelTypeValidator.get_value" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">get_value</code><span class="sig-paren">(</span><em class="sig-param">attr</em>, <em class="sig-param">obj</em>, <em class="sig-param">accessor=None</em>, <em class="sig-param">default=&lt;marshmallow.missing&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.validation.ModelTypeValidator.get_value" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Return the value for a given key from an object.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.validation.ModelTypeValidator.serialize">
-<code class="descname">serialize</code><span class="sig-paren">(</span><em>attr</em>, <em>obj</em>, <em>accessor=None</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.validation.ModelTypeValidator.serialize" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">serialize</code><span class="sig-paren">(</span><em class="sig-param">attr</em>, <em class="sig-param">obj</em>, <em class="sig-param">accessor=None</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.validation.ModelTypeValidator.serialize" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Pulls the value for the given key from the object, applies the
 field's formatting and returns the result.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first simple">
-<li><strong>attr</strong> (<em>str</em>) -- The attibute or key to get from the object.</li>
-<li><strong>obj</strong> (<em>str</em>) -- The object to pull the key from.</li>
-<li><strong>accessor</strong> (<em>callable</em>) -- Function used to pull values from <code class="docutils literal notranslate"><span class="pre">obj</span></code>.</li>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>attr</strong> (<em>str</em>) -- The attibute or key to get from the object.</p></li>
+<li><p><strong>obj</strong> (<em>str</em>) -- The object to pull the key from.</p></li>
+<li><p><strong>accessor</strong> (<em>callable</em>) -- Function used to pull values from <code class="docutils literal notranslate"><span class="pre">obj</span></code>.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">例外:</th><td class="field-body"><p class="first last"><strong>ValidationError</strong> -- In case of formatting problem</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">例外</dt>
+<dd class="field-even"><p><strong>ValidationError</strong> -- In case of formatting problem</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>

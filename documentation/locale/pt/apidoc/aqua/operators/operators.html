@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,6 +48,8 @@
     <script type="text/javascript" src="../../../_static/language_data.js"></script>
     <script type="text/javascript" src="../../../_static/js/themeExt.js"></script>
     <script type="text/javascript" src="../../../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
     <link rel="index" title="Índice" href="../../../genindex.html" />
@@ -625,6 +626,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../../visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../../api/qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../api/qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../api/qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../api/qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../api/qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1215,6 +1222,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../../visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../../api/qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../api/qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../api/qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../api/qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../api/qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1261,67 +1274,72 @@
 <span id="id1"></span><span id="qiskit-aqua-operators"></span><h1>qiskit.aqua.operators<a class="headerlink" href="#module-qiskit.aqua.operators" title="Link permanente para este título">¶</a></h1>
 <div class="section" id="functions">
 <h2>Functions<a class="headerlink" href="#functions" title="Link permanente para este título">¶</a></h2>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="../../../api/qiskit.aqua.operators.evolution_instruction.html#qiskit.aqua.operators.evolution_instruction" title="qiskit.aqua.operators.evolution_instruction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">evolution_instruction</span></code></a>(pauli_list,&nbsp;evo_time,&nbsp;…)</td>
-<td>Construct the evolution circuit according to the supplied specification.</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../api/qiskit.aqua.operators.evolution_instruction.html#qiskit.aqua.operators.evolution_instruction" title="qiskit.aqua.operators.evolution_instruction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">evolution_instruction</span></code></a>(pauli_list, evo_time, …)</p></td>
+<td><p>Construct the evolution circuit according to the supplied specification.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../../../api/qiskit.aqua.operators.suzuki_expansion_slice_pauli_list.html#qiskit.aqua.operators.suzuki_expansion_slice_pauli_list" title="qiskit.aqua.operators.suzuki_expansion_slice_pauli_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">suzuki_expansion_slice_pauli_list</span></code></a>(…)</td>
-<td>Compute the list of pauli terms for a single slice of the suzuki expansion following the paper <a class="reference external" href="https://arxiv.org/pdf/quant-ph/0508139.pdf">https://arxiv.org/pdf/quant-ph/0508139.pdf</a>.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../api/qiskit.aqua.operators.suzuki_expansion_slice_pauli_list.html#qiskit.aqua.operators.suzuki_expansion_slice_pauli_list" title="qiskit.aqua.operators.suzuki_expansion_slice_pauli_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">suzuki_expansion_slice_pauli_list</span></code></a>(…)</p></td>
+<td><p>Compute the list of pauli terms for a single slice of the suzuki expansion following the paper <a class="reference external" href="https://arxiv.org/pdf/quant-ph/0508139.pdf">https://arxiv.org/pdf/quant-ph/0508139.pdf</a>.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../../../api/qiskit.aqua.operators.pauli_measurement.html#qiskit.aqua.operators.pauli_measurement" title="qiskit.aqua.operators.pauli_measurement"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pauli_measurement</span></code></a>(circuit,&nbsp;pauli,&nbsp;qr,&nbsp;cr[,&nbsp;…])</td>
-<td>Add the proper post-rotation gate on the circuit.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../api/qiskit.aqua.operators.pauli_measurement.html#qiskit.aqua.operators.pauli_measurement" title="qiskit.aqua.operators.pauli_measurement"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pauli_measurement</span></code></a>(circuit, pauli, qr, cr[, …])</p></td>
+<td><p>Add the proper post-rotation gate on the circuit.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../../../api/qiskit.aqua.operators.measure_pauli_z.html#qiskit.aqua.operators.measure_pauli_z" title="qiskit.aqua.operators.measure_pauli_z"><code class="xref py py-obj docutils literal notranslate"><span class="pre">measure_pauli_z</span></code></a>(data,&nbsp;pauli)</td>
-<td>Appropriate post-rotations on the state are assumed.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../api/qiskit.aqua.operators.measure_pauli_z.html#qiskit.aqua.operators.measure_pauli_z" title="qiskit.aqua.operators.measure_pauli_z"><code class="xref py py-obj docutils literal notranslate"><span class="pre">measure_pauli_z</span></code></a>(data, pauli)</p></td>
+<td><p>Appropriate post-rotations on the state are assumed.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../../../api/qiskit.aqua.operators.covariance.html#qiskit.aqua.operators.covariance" title="qiskit.aqua.operators.covariance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">covariance</span></code></a>(data,&nbsp;pauli_1,&nbsp;pauli_2,&nbsp;avg_1,&nbsp;avg_2)</td>
-<td>Compute the covariance matrix element between two Paulis, given the measurement outcome.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../api/qiskit.aqua.operators.covariance.html#qiskit.aqua.operators.covariance" title="qiskit.aqua.operators.covariance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">covariance</span></code></a>(data, pauli_1, pauli_2, avg_1, avg_2)</p></td>
+<td><p>Compute the covariance matrix element between two Paulis, given the measurement outcome.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../../../api/qiskit.aqua.operators.row_echelon_F2.html#qiskit.aqua.operators.row_echelon_F2" title="qiskit.aqua.operators.row_echelon_F2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">row_echelon_F2</span></code></a>(matrix_in)</td>
-<td>Computes the row Echelon form of a binary matrix on the binary finite field</td>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../api/qiskit.aqua.operators.row_echelon_F2.html#qiskit.aqua.operators.row_echelon_F2" title="qiskit.aqua.operators.row_echelon_F2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">row_echelon_F2</span></code></a>(matrix_in)</p></td>
+<td><p>Computes the row Echelon form of a binary matrix on the binary finite field</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../../../api/qiskit.aqua.operators.kernel_F2.html#qiskit.aqua.operators.kernel_F2" title="qiskit.aqua.operators.kernel_F2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kernel_F2</span></code></a>(matrix_in)</td>
-<td>Computes the kernel of a binary matrix on the binary finite field</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../api/qiskit.aqua.operators.kernel_F2.html#qiskit.aqua.operators.kernel_F2" title="qiskit.aqua.operators.kernel_F2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kernel_F2</span></code></a>(matrix_in)</p></td>
+<td><p>Computes the kernel of a binary matrix on the binary finite field</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../../../api/qiskit.aqua.operators.commutator.html#qiskit.aqua.operators.commutator" title="qiskit.aqua.operators.commutator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">commutator</span></code></a>(op_a,&nbsp;op_b[,&nbsp;op_c,&nbsp;threshold])</td>
-<td>Compute commutator of op_a and op_b or the symmetric double commutator of op_a, op_b and op_c.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../api/qiskit.aqua.operators.commutator.html#qiskit.aqua.operators.commutator" title="qiskit.aqua.operators.commutator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">commutator</span></code></a>(op_a, op_b[, op_c, threshold])</p></td>
+<td><p>Compute commutator of op_a and op_b or the symmetric double commutator of op_a, op_b and op_c.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../../../api/qiskit.aqua.operators.check_commutativity.html#qiskit.aqua.operators.check_commutativity" title="qiskit.aqua.operators.check_commutativity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_commutativity</span></code></a>(op_1,&nbsp;op_2[,&nbsp;anti])</td>
-<td>Check the (anti-)commutativity between two operators.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../api/qiskit.aqua.operators.check_commutativity.html#qiskit.aqua.operators.check_commutativity" title="qiskit.aqua.operators.check_commutativity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_commutativity</span></code></a>(op_1, op_2[, anti])</p></td>
+<td><p>Check the (anti-)commutativity between two operators.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="section" id="classes">
 <h2>Classes<a class="headerlink" href="#classes" title="Link permanente para este título">¶</a></h2>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="../../../api/qiskit.aqua.operators.PauliGraph.html#qiskit.aqua.operators.PauliGraph" title="qiskit.aqua.operators.PauliGraph"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PauliGraph</span></code></a>(paulis[,&nbsp;mode])</td>
-<td>Pauli Graph.</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../api/qiskit.aqua.operators.PauliGraph.html#qiskit.aqua.operators.PauliGraph" title="qiskit.aqua.operators.PauliGraph"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PauliGraph</span></code></a>(paulis[, mode])</p></td>
+<td><p>Pauli Graph.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../../../api/qiskit.aqua.operators.BaseOperator.html#qiskit.aqua.operators.BaseOperator" title="qiskit.aqua.operators.BaseOperator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BaseOperator</span></code></a>([basis,&nbsp;z2_symmetries,&nbsp;name])</td>
-<td>Operators relevant for quantum applications.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../api/qiskit.aqua.operators.BaseOperator.html#qiskit.aqua.operators.BaseOperator" title="qiskit.aqua.operators.BaseOperator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BaseOperator</span></code></a>([basis, z2_symmetries, name])</p></td>
+<td><p>Operators relevant for quantum applications.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../../../api/qiskit.aqua.operators.WeightedPauliOperator.html#qiskit.aqua.operators.WeightedPauliOperator" title="qiskit.aqua.operators.WeightedPauliOperator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WeightedPauliOperator</span></code></a>(paulis[,&nbsp;basis,&nbsp;…])</td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../api/qiskit.aqua.operators.WeightedPauliOperator.html#qiskit.aqua.operators.WeightedPauliOperator" title="qiskit.aqua.operators.WeightedPauliOperator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WeightedPauliOperator</span></code></a>(paulis[, basis, …])</p></td>
+<td><p><dl class="field-list simple">
+<dt class="field-odd">param paulis</dt>
+<dd class="field-odd"><p>the list of weighted Paulis, where a weighted pauli is composed of</p>
+</dd>
+</dl>
+</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../../../api/qiskit.aqua.operators.Z2Symmetries.html#qiskit.aqua.operators.Z2Symmetries" title="qiskit.aqua.operators.Z2Symmetries"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Z2Symmetries</span></code></a>(symmetries,&nbsp;sq_paulis,&nbsp;sq_list)</td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../api/qiskit.aqua.operators.Z2Symmetries.html#qiskit.aqua.operators.Z2Symmetries" title="qiskit.aqua.operators.Z2Symmetries"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Z2Symmetries</span></code></a>(symmetries, sq_paulis, sq_list)</p></td>
+<td><p>Constructor.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../../../api/qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.html#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TPBGroupedWeightedPauliOperator</span></code></a>(paulis,&nbsp;basis)</td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../api/qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.html#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TPBGroupedWeightedPauliOperator</span></code></a>(paulis, basis)</p></td>
+<td><p>Args: paulis ([[complex, Pauli]]): the list of weighted Paulis, where a weighted pauli is composed of                              a length-2 list and the first item is the weight and                              the second item is the Pauli object.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../../../api/qiskit.aqua.operators.MatrixOperator.html#qiskit.aqua.operators.MatrixOperator" title="qiskit.aqua.operators.MatrixOperator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MatrixOperator</span></code></a>(matrix[,&nbsp;basis,&nbsp;…])</td>
-<td>Operators relevant for quantum applications</td>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../api/qiskit.aqua.operators.MatrixOperator.html#qiskit.aqua.operators.MatrixOperator" title="qiskit.aqua.operators.MatrixOperator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MatrixOperator</span></code></a>(matrix[, basis, …])</p></td>
+<td><p>Operators relevant for quantum applications</p></td>
 </tr>
 </tbody>
 </table>

@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,6 +48,8 @@
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/js/themeExt.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="索引" href="../genindex.html" />
@@ -625,6 +626,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1215,6 +1222,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1261,99 +1274,100 @@
 <h1>DAGNode<a class="headerlink" href="#dagnode" title="このヘッドラインへのパーマリンク">¶</a></h1>
 <dl class="class">
 <dt id="qiskit.dagcircuit.DAGNode">
-<em class="property">class </em><code class="descname">DAGNode</code><span class="sig-paren">(</span><em>data_dict</em>, <em>nid=-1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagnode.html#DAGNode"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGNode" title="この定義へのパーマリンク">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">DAGNode</code><span class="sig-paren">(</span><em class="sig-param">data_dict</em>, <em class="sig-param">nid=-1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagnode.html#DAGNode"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGNode" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Object to represent the information at a node in the DAGCircuit</p>
 <p>It is used as the return value from <cite>*_nodes()</cite> functions and can
 be supplied to functions that take a node.</p>
+<p>Create a node</p>
 <p class="rubric">Attributes Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGNode.cargs" title="qiskit.dagcircuit.DAGNode.cargs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cargs</span></code></a></td>
-<td>Returns list of (ClassicalRegister, int) tuples where the int is the index of the cbit else an empty list</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGNode.cargs" title="qiskit.dagcircuit.DAGNode.cargs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cargs</span></code></a></p></td>
+<td><p>Returns list of (ClassicalRegister, int) tuples where the int is the index of the cbit else an empty list</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGNode.condition" title="qiskit.dagcircuit.DAGNode.condition"><code class="xref py py-obj docutils literal notranslate"><span class="pre">condition</span></code></a></td>
-<td>Returns a tuple (ClassicalRegister, int) where the int is the value of the condition else None</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGNode.condition" title="qiskit.dagcircuit.DAGNode.condition"><code class="xref py py-obj docutils literal notranslate"><span class="pre">condition</span></code></a></p></td>
+<td><p>Returns a tuple (ClassicalRegister, int) where the int is the value of the condition else None</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGNode.name" title="qiskit.dagcircuit.DAGNode.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></a></td>
-<td>Returns a str which is the name of the node else None</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGNode.name" title="qiskit.dagcircuit.DAGNode.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></a></p></td>
+<td><p>Returns a str which is the name of the node else None</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGNode.op" title="qiskit.dagcircuit.DAGNode.op"><code class="xref py py-obj docutils literal notranslate"><span class="pre">op</span></code></a></td>
-<td>Returns the Instruction object corresponding to the op for the node else None</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGNode.op" title="qiskit.dagcircuit.DAGNode.op"><code class="xref py py-obj docutils literal notranslate"><span class="pre">op</span></code></a></p></td>
+<td><p>Returns the Instruction object corresponding to the op for the node else None</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGNode.qargs" title="qiskit.dagcircuit.DAGNode.qargs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qargs</span></code></a></td>
-<td>Returns list of (QuantumRegister, int) tuples where the int is the index of the qubit else an empty list</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGNode.qargs" title="qiskit.dagcircuit.DAGNode.qargs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qargs</span></code></a></p></td>
+<td><p>Returns list of (QuantumRegister, int) tuples where the int is the index of the qubit else an empty list</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGNode.type" title="qiskit.dagcircuit.DAGNode.type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">type</span></code></a></td>
-<td>Returns a str which is the type of the node else None</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGNode.type" title="qiskit.dagcircuit.DAGNode.type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">type</span></code></a></p></td>
+<td><p>Returns a str which is the type of the node else None</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGNode.wire" title="qiskit.dagcircuit.DAGNode.wire"><code class="xref py py-obj docutils literal notranslate"><span class="pre">wire</span></code></a></td>
-<td>Returns (Register, int) tuple where the int is the index of the wire else None</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGNode.wire" title="qiskit.dagcircuit.DAGNode.wire"><code class="xref py py-obj docutils literal notranslate"><span class="pre">wire</span></code></a></p></td>
+<td><p>Returns (Register, int) tuple where the int is the index of the wire else None</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Methods Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGNode.pop" title="qiskit.dagcircuit.DAGNode.pop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pop</span></code></a>(val)</td>
-<td>Remove the provided value from the dictionary</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGNode.pop" title="qiskit.dagcircuit.DAGNode.pop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pop</span></code></a>(val)</p></td>
+<td><p>Remove the provided value from the dictionary</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGNode.semantic_eq" title="qiskit.dagcircuit.DAGNode.semantic_eq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">semantic_eq</span></code></a>(node1,&nbsp;node2)</td>
-<td>Check if DAG nodes are considered equivalent, e.g.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGNode.semantic_eq" title="qiskit.dagcircuit.DAGNode.semantic_eq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">semantic_eq</span></code></a>(node1, node2)</p></td>
+<td><p>Check if DAG nodes are considered equivalent, e.g.</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Attributes Documentation</p>
 <dl class="attribute">
 <dt id="qiskit.dagcircuit.DAGNode.cargs">
-<code class="descname">cargs</code><a class="headerlink" href="#qiskit.dagcircuit.DAGNode.cargs" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">cargs</code><a class="headerlink" href="#qiskit.dagcircuit.DAGNode.cargs" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Returns list of (ClassicalRegister, int) tuples where the int is the index
 of the cbit else an empty list</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.dagcircuit.DAGNode.condition">
-<code class="descname">condition</code><a class="headerlink" href="#qiskit.dagcircuit.DAGNode.condition" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">condition</code><a class="headerlink" href="#qiskit.dagcircuit.DAGNode.condition" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Returns a tuple (ClassicalRegister, int) where the int is the
 value of the condition else None</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.dagcircuit.DAGNode.name">
-<code class="descname">name</code><a class="headerlink" href="#qiskit.dagcircuit.DAGNode.name" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">name</code><a class="headerlink" href="#qiskit.dagcircuit.DAGNode.name" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Returns a str which is the name of the node else None</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.dagcircuit.DAGNode.op">
-<code class="descname">op</code><a class="headerlink" href="#qiskit.dagcircuit.DAGNode.op" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">op</code><a class="headerlink" href="#qiskit.dagcircuit.DAGNode.op" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Returns the Instruction object corresponding to the op for the node else None</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.dagcircuit.DAGNode.qargs">
-<code class="descname">qargs</code><a class="headerlink" href="#qiskit.dagcircuit.DAGNode.qargs" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">qargs</code><a class="headerlink" href="#qiskit.dagcircuit.DAGNode.qargs" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Returns list of (QuantumRegister, int) tuples where the int is the index
 of the qubit else an empty list</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.dagcircuit.DAGNode.type">
-<code class="descname">type</code><a class="headerlink" href="#qiskit.dagcircuit.DAGNode.type" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">type</code><a class="headerlink" href="#qiskit.dagcircuit.DAGNode.type" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Returns a str which is the type of the node else None</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.dagcircuit.DAGNode.wire">
-<code class="descname">wire</code><a class="headerlink" href="#qiskit.dagcircuit.DAGNode.wire" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">wire</code><a class="headerlink" href="#qiskit.dagcircuit.DAGNode.wire" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Returns (Register, int) tuple where the int is the index of
 the wire else None</p>
 </dd></dl>
@@ -1361,32 +1375,28 @@ the wire else None</p>
 <p class="rubric">Methods Documentation</p>
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGNode.pop">
-<code class="descname">pop</code><span class="sig-paren">(</span><em>val</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagnode.html#DAGNode.pop"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGNode.pop" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">pop</code><span class="sig-paren">(</span><em class="sig-param">val</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagnode.html#DAGNode.pop"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGNode.pop" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Remove the provided value from the dictionary</p>
 </dd></dl>
 
-<dl class="staticmethod">
+<dl class="method">
 <dt id="qiskit.dagcircuit.DAGNode.semantic_eq">
-<em class="property">static </em><code class="descname">semantic_eq</code><span class="sig-paren">(</span><em>node1</em>, <em>node2</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagnode.html#DAGNode.semantic_eq"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGNode.semantic_eq" title="この定義へのパーマリンク">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">semantic_eq</code><span class="sig-paren">(</span><em class="sig-param">node1</em>, <em class="sig-param">node2</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagnode.html#DAGNode.semantic_eq"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGNode.semantic_eq" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Check if DAG nodes are considered equivalent, e.g. as a node_match for nx.is_isomorphic.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first simple">
-<li><strong>node1</strong> (<a class="reference internal" href="#qiskit.dagcircuit.DAGNode" title="qiskit.dagcircuit.DAGNode"><em>DAGNode</em></a>) -- A node to compare.</li>
-<li><strong>node2</strong> (<a class="reference internal" href="#qiskit.dagcircuit.DAGNode" title="qiskit.dagcircuit.DAGNode"><em>DAGNode</em></a>) -- The other node to compare.</li>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>node1</strong> (<a class="reference internal" href="#qiskit.dagcircuit.DAGNode" title="qiskit.dagcircuit.DAGNode"><em>DAGNode</em></a>) -- A node to compare.</p></li>
+<li><p><strong>node2</strong> (<a class="reference internal" href="#qiskit.dagcircuit.DAGNode" title="qiskit.dagcircuit.DAGNode"><em>DAGNode</em></a>) -- The other node to compare.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first">If node1 == node2</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><p class="first last">Bool</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">戻り値</dt>
+<dd class="field-even"><p>If node1 == node2</p>
+</dd>
+<dt class="field-odd">戻り値の型</dt>
+<dd class="field-odd"><p>Bool</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>

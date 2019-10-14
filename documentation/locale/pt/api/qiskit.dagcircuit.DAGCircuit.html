@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,6 +48,8 @@
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/js/themeExt.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Índice" href="../genindex.html" />
@@ -625,6 +626,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1215,6 +1222,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1261,288 +1274,279 @@
 <h1>DAGCircuit<a class="headerlink" href="#dagcircuit" title="Link permanente para este título">¶</a></h1>
 <dl class="class">
 <dt id="qiskit.dagcircuit.DAGCircuit">
-<em class="property">class </em><code class="descname">DAGCircuit</code><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit" title="Link permanente para esta definição">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">DAGCircuit</code><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Quantum circuit as a directed acyclic graph.</p>
 <p>There are 3 types of nodes in the graph: inputs, outputs, and operations.
 The nodes are connected by directed edges that correspond to qubits and
 bits.</p>
+<p>Create an empty circuit.</p>
 <p class="rubric">Attributes Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.node_counter" title="qiskit.dagcircuit.DAGCircuit.node_counter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">node_counter</span></code></a></td>
-<td>Returns the number of nodes in the dag</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.node_counter" title="qiskit.dagcircuit.DAGCircuit.node_counter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">node_counter</span></code></a></p></td>
+<td><p>Returns the number of nodes in the dag</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Methods Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.add_creg" title="qiskit.dagcircuit.DAGCircuit.add_creg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_creg</span></code></a>(creg)</td>
-<td>Add all wires in a classical register.</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.add_creg" title="qiskit.dagcircuit.DAGCircuit.add_creg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_creg</span></code></a>(creg)</p></td>
+<td><p>Add all wires in a classical register.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.add_qreg" title="qiskit.dagcircuit.DAGCircuit.add_qreg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_qreg</span></code></a>(qreg)</td>
-<td>Add all wires in a quantum register.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.add_qreg" title="qiskit.dagcircuit.DAGCircuit.add_qreg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_qreg</span></code></a>(qreg)</p></td>
+<td><p>Add all wires in a quantum register.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.ancestors" title="qiskit.dagcircuit.DAGCircuit.ancestors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ancestors</span></code></a>(node)</td>
-<td>Returns set of the ancestors of a node as DAGNodes.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.ancestors" title="qiskit.dagcircuit.DAGCircuit.ancestors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ancestors</span></code></a>(node)</p></td>
+<td><p>Returns set of the ancestors of a node as DAGNodes.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.apply_operation_back" title="qiskit.dagcircuit.DAGCircuit.apply_operation_back"><code class="xref py py-obj docutils literal notranslate"><span class="pre">apply_operation_back</span></code></a>(op[,&nbsp;qargs,&nbsp;cargs,&nbsp;…])</td>
-<td>Apply an operation to the output of the circuit.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.apply_operation_back" title="qiskit.dagcircuit.DAGCircuit.apply_operation_back"><code class="xref py py-obj docutils literal notranslate"><span class="pre">apply_operation_back</span></code></a>(op[, qargs, cargs, …])</p></td>
+<td><p>Apply an operation to the output of the circuit.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.apply_operation_front" title="qiskit.dagcircuit.DAGCircuit.apply_operation_front"><code class="xref py py-obj docutils literal notranslate"><span class="pre">apply_operation_front</span></code></a>(op,&nbsp;qargs,&nbsp;cargs[,&nbsp;…])</td>
-<td>Apply an operation to the input of the circuit.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.apply_operation_front" title="qiskit.dagcircuit.DAGCircuit.apply_operation_front"><code class="xref py py-obj docutils literal notranslate"><span class="pre">apply_operation_front</span></code></a>(op, qargs, cargs[, …])</p></td>
+<td><p>Apply an operation to the input of the circuit.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.bfs_successors" title="qiskit.dagcircuit.DAGCircuit.bfs_successors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bfs_successors</span></code></a>(node)</td>
-<td>Returns an iterator of tuples of (DAGNode, [DAGNodes]) where the DAGNode is the current node and [DAGNode] is its successors in  BFS order.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.bfs_successors" title="qiskit.dagcircuit.DAGCircuit.bfs_successors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bfs_successors</span></code></a>(node)</p></td>
+<td><p>Returns an iterator of tuples of (DAGNode, [DAGNodes]) where the DAGNode is the current node and [DAGNode] is its successors in  BFS order.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.clbits" title="qiskit.dagcircuit.DAGCircuit.clbits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">clbits</span></code></a>()</td>
-<td>Return a list of classical bits (as a list of Clbit instances).</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.clbits" title="qiskit.dagcircuit.DAGCircuit.clbits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">clbits</span></code></a>()</p></td>
+<td><p>Return a list of classical bits (as a list of Clbit instances).</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.collect_runs" title="qiskit.dagcircuit.DAGCircuit.collect_runs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">collect_runs</span></code></a>(namelist)</td>
-<td>Return a set of non-conditional runs of «op» nodes with the given names.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.collect_runs" title="qiskit.dagcircuit.DAGCircuit.collect_runs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">collect_runs</span></code></a>(namelist)</p></td>
+<td><p>Return a set of non-conditional runs of «op» nodes with the given names.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.compose_back" title="qiskit.dagcircuit.DAGCircuit.compose_back"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compose_back</span></code></a>(input_circuit[,&nbsp;edge_map])</td>
-<td>Apply the input circuit to the output of this circuit.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.compose_back" title="qiskit.dagcircuit.DAGCircuit.compose_back"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compose_back</span></code></a>(input_circuit[, edge_map])</p></td>
+<td><p>Apply the input circuit to the output of this circuit.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.compose_front" title="qiskit.dagcircuit.DAGCircuit.compose_front"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compose_front</span></code></a>(input_circuit[,&nbsp;edge_map])</td>
-<td>Apply the input circuit to the input of this circuit.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.compose_front" title="qiskit.dagcircuit.DAGCircuit.compose_front"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compose_front</span></code></a>(input_circuit[, edge_map])</p></td>
+<td><p>Apply the input circuit to the input of this circuit.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.count_ops" title="qiskit.dagcircuit.DAGCircuit.count_ops"><code class="xref py py-obj docutils literal notranslate"><span class="pre">count_ops</span></code></a>()</td>
-<td>Count the occurrences of operation names.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.count_ops" title="qiskit.dagcircuit.DAGCircuit.count_ops"><code class="xref py py-obj docutils literal notranslate"><span class="pre">count_ops</span></code></a>()</p></td>
+<td><p>Count the occurrences of operation names.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.count_ops_longest_path" title="qiskit.dagcircuit.DAGCircuit.count_ops_longest_path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">count_ops_longest_path</span></code></a>()</td>
-<td>Count the occurrences of operation names on the longest path.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.count_ops_longest_path" title="qiskit.dagcircuit.DAGCircuit.count_ops_longest_path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">count_ops_longest_path</span></code></a>()</p></td>
+<td><p>Count the occurrences of operation names on the longest path.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.depth" title="qiskit.dagcircuit.DAGCircuit.depth"><code class="xref py py-obj docutils literal notranslate"><span class="pre">depth</span></code></a>()</td>
-<td>Return the circuit depth.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.depth" title="qiskit.dagcircuit.DAGCircuit.depth"><code class="xref py py-obj docutils literal notranslate"><span class="pre">depth</span></code></a>()</p></td>
+<td><p>Return the circuit depth.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.descendants" title="qiskit.dagcircuit.DAGCircuit.descendants"><code class="xref py py-obj docutils literal notranslate"><span class="pre">descendants</span></code></a>(node)</td>
-<td>Returns set of the descendants of a node as DAGNodes.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.descendants" title="qiskit.dagcircuit.DAGCircuit.descendants"><code class="xref py py-obj docutils literal notranslate"><span class="pre">descendants</span></code></a>(node)</p></td>
+<td><p>Returns set of the descendants of a node as DAGNodes.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.draw" title="qiskit.dagcircuit.DAGCircuit.draw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">draw</span></code></a>([scale,&nbsp;filename,&nbsp;style])</td>
-<td>Draws the dag circuit.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.draw" title="qiskit.dagcircuit.DAGCircuit.draw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">draw</span></code></a>([scale, filename, style])</p></td>
+<td><p>Draws the dag circuit.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.edges" title="qiskit.dagcircuit.DAGCircuit.edges"><code class="xref py py-obj docutils literal notranslate"><span class="pre">edges</span></code></a>([nodes])</td>
-<td>Iterator for node values.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.edges" title="qiskit.dagcircuit.DAGCircuit.edges"><code class="xref py py-obj docutils literal notranslate"><span class="pre">edges</span></code></a>([nodes])</p></td>
+<td><p>Iterator for node values.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.extend_back" title="qiskit.dagcircuit.DAGCircuit.extend_back"><code class="xref py py-obj docutils literal notranslate"><span class="pre">extend_back</span></code></a>(dag[,&nbsp;edge_map])</td>
-<td>Add <cite>dag</cite> at the end of <cite>self</cite>, using <cite>edge_map</cite>.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.extend_back" title="qiskit.dagcircuit.DAGCircuit.extend_back"><code class="xref py py-obj docutils literal notranslate"><span class="pre">extend_back</span></code></a>(dag[, edge_map])</p></td>
+<td><p>Add <cite>dag</cite> at the end of <cite>self</cite>, using <cite>edge_map</cite>.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.gate_nodes" title="qiskit.dagcircuit.DAGCircuit.gate_nodes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gate_nodes</span></code></a>()</td>
-<td>Get the list of gate nodes in the dag.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.gate_nodes" title="qiskit.dagcircuit.DAGCircuit.gate_nodes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gate_nodes</span></code></a>()</p></td>
+<td><p>Get the list of gate nodes in the dag.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.idle_wires" title="qiskit.dagcircuit.DAGCircuit.idle_wires"><code class="xref py py-obj docutils literal notranslate"><span class="pre">idle_wires</span></code></a>()</td>
-<td>Return idle wires.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.idle_wires" title="qiskit.dagcircuit.DAGCircuit.idle_wires"><code class="xref py py-obj docutils literal notranslate"><span class="pre">idle_wires</span></code></a>()</p></td>
+<td><p>Return idle wires.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.layers" title="qiskit.dagcircuit.DAGCircuit.layers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">layers</span></code></a>()</td>
-<td>Yield a shallow view on a layer of this DAGCircuit for all d layers of this circuit.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.layers" title="qiskit.dagcircuit.DAGCircuit.layers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">layers</span></code></a>()</p></td>
+<td><p>Yield a shallow view on a layer of this DAGCircuit for all d layers of this circuit.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.longest_path" title="qiskit.dagcircuit.DAGCircuit.longest_path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">longest_path</span></code></a>()</td>
-<td>Returns the longest path in the dag as a list of DAGNodes.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.longest_path" title="qiskit.dagcircuit.DAGCircuit.longest_path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">longest_path</span></code></a>()</p></td>
+<td><p>Returns the longest path in the dag as a list of DAGNodes.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.multigraph_layers" title="qiskit.dagcircuit.DAGCircuit.multigraph_layers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">multigraph_layers</span></code></a>()</td>
-<td>Yield layers of the multigraph.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.multigraph_layers" title="qiskit.dagcircuit.DAGCircuit.multigraph_layers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">multigraph_layers</span></code></a>()</p></td>
+<td><p>Yield layers of the multigraph.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.named_nodes" title="qiskit.dagcircuit.DAGCircuit.named_nodes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">named_nodes</span></code></a>(*names)</td>
-<td>Get the set of «op» nodes with the given name.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.named_nodes" title="qiskit.dagcircuit.DAGCircuit.named_nodes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">named_nodes</span></code></a>(*names)</p></td>
+<td><p>Get the set of «op» nodes with the given name.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.node" title="qiskit.dagcircuit.DAGCircuit.node"><code class="xref py py-obj docutils literal notranslate"><span class="pre">node</span></code></a>(node_id)</td>
-<td>Get the node in the dag.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.node" title="qiskit.dagcircuit.DAGCircuit.node"><code class="xref py py-obj docutils literal notranslate"><span class="pre">node</span></code></a>(node_id)</p></td>
+<td><p>Get the node in the dag.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.nodes" title="qiskit.dagcircuit.DAGCircuit.nodes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nodes</span></code></a>()</td>
-<td>Iterator for node values.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.nodes" title="qiskit.dagcircuit.DAGCircuit.nodes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nodes</span></code></a>()</p></td>
+<td><p>Iterator for node values.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.nodes_on_wire" title="qiskit.dagcircuit.DAGCircuit.nodes_on_wire"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nodes_on_wire</span></code></a>(wire[,&nbsp;only_ops])</td>
-<td>Iterator for nodes that affect a given wire</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.nodes_on_wire" title="qiskit.dagcircuit.DAGCircuit.nodes_on_wire"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nodes_on_wire</span></code></a>(wire[, only_ops])</p></td>
+<td><p>Iterator for nodes that affect a given wire</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.num_clbits" title="qiskit.dagcircuit.DAGCircuit.num_clbits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">num_clbits</span></code></a>()</td>
-<td>Return the total number of classical bits used by the circuit.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.num_clbits" title="qiskit.dagcircuit.DAGCircuit.num_clbits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">num_clbits</span></code></a>()</p></td>
+<td><p>Return the total number of classical bits used by the circuit.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.num_qubits" title="qiskit.dagcircuit.DAGCircuit.num_qubits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">num_qubits</span></code></a>()</td>
-<td>Return the total number of qubits used by the circuit.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.num_qubits" title="qiskit.dagcircuit.DAGCircuit.num_qubits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">num_qubits</span></code></a>()</p></td>
+<td><p>Return the total number of qubits used by the circuit.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.num_tensor_factors" title="qiskit.dagcircuit.DAGCircuit.num_tensor_factors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">num_tensor_factors</span></code></a>()</td>
-<td>Compute how many components the circuit can decompose into.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.num_tensor_factors" title="qiskit.dagcircuit.DAGCircuit.num_tensor_factors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">num_tensor_factors</span></code></a>()</p></td>
+<td><p>Compute how many components the circuit can decompose into.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.op_nodes" title="qiskit.dagcircuit.DAGCircuit.op_nodes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">op_nodes</span></code></a>([op])</td>
-<td>Get the list of «op» nodes in the dag.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.op_nodes" title="qiskit.dagcircuit.DAGCircuit.op_nodes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">op_nodes</span></code></a>([op])</p></td>
+<td><p>Get the list of «op» nodes in the dag.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.predecessors" title="qiskit.dagcircuit.DAGCircuit.predecessors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">predecessors</span></code></a>(node)</td>
-<td>Returns iterator of the predecessors of a node as DAGNodes.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.predecessors" title="qiskit.dagcircuit.DAGCircuit.predecessors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">predecessors</span></code></a>(node)</p></td>
+<td><p>Returns iterator of the predecessors of a node as DAGNodes.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.properties" title="qiskit.dagcircuit.DAGCircuit.properties"><code class="xref py py-obj docutils literal notranslate"><span class="pre">properties</span></code></a>()</td>
-<td>Return a dictionary of circuit properties.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.properties" title="qiskit.dagcircuit.DAGCircuit.properties"><code class="xref py py-obj docutils literal notranslate"><span class="pre">properties</span></code></a>()</p></td>
+<td><p>Return a dictionary of circuit properties.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.quantum_predecessors" title="qiskit.dagcircuit.DAGCircuit.quantum_predecessors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">quantum_predecessors</span></code></a>(node)</td>
-<td>Returns iterator of the predecessors of a node that are connected by a quantum edge as DAGNodes.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.quantum_predecessors" title="qiskit.dagcircuit.DAGCircuit.quantum_predecessors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">quantum_predecessors</span></code></a>(node)</p></td>
+<td><p>Returns iterator of the predecessors of a node that are connected by a quantum edge as DAGNodes.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.quantum_successors" title="qiskit.dagcircuit.DAGCircuit.quantum_successors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">quantum_successors</span></code></a>(node)</td>
-<td>Returns iterator of the successors of a node that are connected by a quantum edge as DAGNodes.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.quantum_successors" title="qiskit.dagcircuit.DAGCircuit.quantum_successors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">quantum_successors</span></code></a>(node)</p></td>
+<td><p>Returns iterator of the successors of a node that are connected by a quantum edge as DAGNodes.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.qubits" title="qiskit.dagcircuit.DAGCircuit.qubits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qubits</span></code></a>()</td>
-<td>Return a list of qubits (as a list of Qubit instances).</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.qubits" title="qiskit.dagcircuit.DAGCircuit.qubits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qubits</span></code></a>()</p></td>
+<td><p>Return a list of qubits (as a list of Qubit instances).</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.remove_all_ops_named" title="qiskit.dagcircuit.DAGCircuit.remove_all_ops_named"><code class="xref py py-obj docutils literal notranslate"><span class="pre">remove_all_ops_named</span></code></a>(opname)</td>
-<td>Remove all operation nodes with the given name.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.remove_all_ops_named" title="qiskit.dagcircuit.DAGCircuit.remove_all_ops_named"><code class="xref py py-obj docutils literal notranslate"><span class="pre">remove_all_ops_named</span></code></a>(opname)</p></td>
+<td><p>Remove all operation nodes with the given name.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.remove_ancestors_of" title="qiskit.dagcircuit.DAGCircuit.remove_ancestors_of"><code class="xref py py-obj docutils literal notranslate"><span class="pre">remove_ancestors_of</span></code></a>(node)</td>
-<td>Remove all of the ancestor operation nodes of node.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.remove_ancestors_of" title="qiskit.dagcircuit.DAGCircuit.remove_ancestors_of"><code class="xref py py-obj docutils literal notranslate"><span class="pre">remove_ancestors_of</span></code></a>(node)</p></td>
+<td><p>Remove all of the ancestor operation nodes of node.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.remove_descendants_of" title="qiskit.dagcircuit.DAGCircuit.remove_descendants_of"><code class="xref py py-obj docutils literal notranslate"><span class="pre">remove_descendants_of</span></code></a>(node)</td>
-<td>Remove all of the descendant operation nodes of node.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.remove_descendants_of" title="qiskit.dagcircuit.DAGCircuit.remove_descendants_of"><code class="xref py py-obj docutils literal notranslate"><span class="pre">remove_descendants_of</span></code></a>(node)</p></td>
+<td><p>Remove all of the descendant operation nodes of node.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.remove_nonancestors_of" title="qiskit.dagcircuit.DAGCircuit.remove_nonancestors_of"><code class="xref py py-obj docutils literal notranslate"><span class="pre">remove_nonancestors_of</span></code></a>(node)</td>
-<td>Remove all of the non-ancestors operation nodes of node.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.remove_nonancestors_of" title="qiskit.dagcircuit.DAGCircuit.remove_nonancestors_of"><code class="xref py py-obj docutils literal notranslate"><span class="pre">remove_nonancestors_of</span></code></a>(node)</p></td>
+<td><p>Remove all of the non-ancestors operation nodes of node.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.remove_nondescendants_of" title="qiskit.dagcircuit.DAGCircuit.remove_nondescendants_of"><code class="xref py py-obj docutils literal notranslate"><span class="pre">remove_nondescendants_of</span></code></a>(node)</td>
-<td>Remove all of the non-descendants operation nodes of node.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.remove_nondescendants_of" title="qiskit.dagcircuit.DAGCircuit.remove_nondescendants_of"><code class="xref py py-obj docutils literal notranslate"><span class="pre">remove_nondescendants_of</span></code></a>(node)</p></td>
+<td><p>Remove all of the non-descendants operation nodes of node.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.remove_op_node" title="qiskit.dagcircuit.DAGCircuit.remove_op_node"><code class="xref py py-obj docutils literal notranslate"><span class="pre">remove_op_node</span></code></a>(node)</td>
-<td>Remove an operation node n.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.remove_op_node" title="qiskit.dagcircuit.DAGCircuit.remove_op_node"><code class="xref py py-obj docutils literal notranslate"><span class="pre">remove_op_node</span></code></a>(node)</p></td>
+<td><p>Remove an operation node n.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.serial_layers" title="qiskit.dagcircuit.DAGCircuit.serial_layers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">serial_layers</span></code></a>()</td>
-<td>Yield a layer for all gates of this circuit.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.serial_layers" title="qiskit.dagcircuit.DAGCircuit.serial_layers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">serial_layers</span></code></a>()</p></td>
+<td><p>Yield a layer for all gates of this circuit.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.size" title="qiskit.dagcircuit.DAGCircuit.size"><code class="xref py py-obj docutils literal notranslate"><span class="pre">size</span></code></a>()</td>
-<td>Return the number of operations.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.size" title="qiskit.dagcircuit.DAGCircuit.size"><code class="xref py py-obj docutils literal notranslate"><span class="pre">size</span></code></a>()</p></td>
+<td><p>Return the number of operations.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.substitute_node_with_dag" title="qiskit.dagcircuit.DAGCircuit.substitute_node_with_dag"><code class="xref py py-obj docutils literal notranslate"><span class="pre">substitute_node_with_dag</span></code></a>(node,&nbsp;input_dag[,&nbsp;…])</td>
-<td>Replace one node with dag.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.substitute_node_with_dag" title="qiskit.dagcircuit.DAGCircuit.substitute_node_with_dag"><code class="xref py py-obj docutils literal notranslate"><span class="pre">substitute_node_with_dag</span></code></a>(node, input_dag[, …])</p></td>
+<td><p>Replace one node with dag.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.successors" title="qiskit.dagcircuit.DAGCircuit.successors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">successors</span></code></a>(node)</td>
-<td>Returns iterator of the successors of a node as DAGNodes.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.successors" title="qiskit.dagcircuit.DAGCircuit.successors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">successors</span></code></a>(node)</p></td>
+<td><p>Returns iterator of the successors of a node as DAGNodes.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.threeQ_or_more_gates" title="qiskit.dagcircuit.DAGCircuit.threeQ_or_more_gates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">threeQ_or_more_gates</span></code></a>()</td>
-<td>Get list of 3-or-more-qubit gates: (id, data).</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.threeQ_or_more_gates" title="qiskit.dagcircuit.DAGCircuit.threeQ_or_more_gates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">threeQ_or_more_gates</span></code></a>()</p></td>
+<td><p>Get list of 3-or-more-qubit gates: (id, data).</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.to_networkx" title="qiskit.dagcircuit.DAGCircuit.to_networkx"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_networkx</span></code></a>()</td>
-<td>Returns a copy of the DAGCircuit in networkx format.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.to_networkx" title="qiskit.dagcircuit.DAGCircuit.to_networkx"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_networkx</span></code></a>()</p></td>
+<td><p>Returns a copy of the DAGCircuit in networkx format.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.topological_nodes" title="qiskit.dagcircuit.DAGCircuit.topological_nodes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">topological_nodes</span></code></a>()</td>
-<td>Yield nodes in topological order.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.topological_nodes" title="qiskit.dagcircuit.DAGCircuit.topological_nodes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">topological_nodes</span></code></a>()</p></td>
+<td><p>Yield nodes in topological order.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.topological_op_nodes" title="qiskit.dagcircuit.DAGCircuit.topological_op_nodes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">topological_op_nodes</span></code></a>()</td>
-<td>Yield op nodes in topological order.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.topological_op_nodes" title="qiskit.dagcircuit.DAGCircuit.topological_op_nodes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">topological_op_nodes</span></code></a>()</p></td>
+<td><p>Yield op nodes in topological order.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.twoQ_gates" title="qiskit.dagcircuit.DAGCircuit.twoQ_gates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">twoQ_gates</span></code></a>()</td>
-<td>Get list of 2-qubit gates.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.twoQ_gates" title="qiskit.dagcircuit.DAGCircuit.twoQ_gates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">twoQ_gates</span></code></a>()</p></td>
+<td><p>Get list of 2-qubit gates.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.width" title="qiskit.dagcircuit.DAGCircuit.width"><code class="xref py py-obj docutils literal notranslate"><span class="pre">width</span></code></a>()</td>
-<td>Return the total number of qubits + clbits used by the circuit.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.width" title="qiskit.dagcircuit.DAGCircuit.width"><code class="xref py py-obj docutils literal notranslate"><span class="pre">width</span></code></a>()</p></td>
+<td><p>Return the total number of qubits + clbits used by the circuit.</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Attributes Documentation</p>
 <dl class="attribute">
 <dt id="qiskit.dagcircuit.DAGCircuit.node_counter">
-<code class="descname">node_counter</code><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.node_counter" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">node_counter</code><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.node_counter" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Returns the number of nodes in the dag</p>
 </dd></dl>
 
 <p class="rubric">Methods Documentation</p>
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.add_creg">
-<code class="descname">add_creg</code><span class="sig-paren">(</span><em>creg</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.add_creg"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.add_creg" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">add_creg</code><span class="sig-paren">(</span><em class="sig-param">creg</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.add_creg"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.add_creg" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Add all wires in a classical register.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.add_qreg">
-<code class="descname">add_qreg</code><span class="sig-paren">(</span><em>qreg</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.add_qreg"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.add_qreg" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">add_qreg</code><span class="sig-paren">(</span><em class="sig-param">qreg</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.add_qreg"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.add_qreg" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Add all wires in a quantum register.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.ancestors">
-<code class="descname">ancestors</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.ancestors"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.ancestors" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">ancestors</code><span class="sig-paren">(</span><em class="sig-param">node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.ancestors"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.ancestors" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Returns set of the ancestors of a node as DAGNodes.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.apply_operation_back">
-<code class="descname">apply_operation_back</code><span class="sig-paren">(</span><em>op</em>, <em>qargs=None</em>, <em>cargs=None</em>, <em>condition=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.apply_operation_back"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.apply_operation_back" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">apply_operation_back</code><span class="sig-paren">(</span><em class="sig-param">op</em>, <em class="sig-param">qargs=None</em>, <em class="sig-param">cargs=None</em>, <em class="sig-param">condition=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.apply_operation_back"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.apply_operation_back" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Apply an operation to the output of the circuit.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parâmetros:</th><td class="field-body"><ul class="first simple">
-<li><strong>op</strong> (<a class="reference internal" href="qiskit.circuit.Instruction.html#qiskit.circuit.Instruction" title="qiskit.circuit.Instruction"><em>Instruction</em></a>) – the operation associated with the DAG node</li>
-<li><strong>qargs</strong> (<em>list</em><em>[</em><a class="reference internal" href="qiskit.circuit.Qubit.html#qiskit.circuit.Qubit" title="qiskit.circuit.Qubit"><em>Qubit</em></a><em>]</em>) – qubits that op will be applied to</li>
-<li><strong>cargs</strong> (<em>list</em><em>[</em><a class="reference internal" href="qiskit.circuit.Clbit.html#qiskit.circuit.Clbit" title="qiskit.circuit.Clbit"><em>Clbit</em></a><em>]</em>) – cbits that op will be applied to</li>
-<li><strong>condition</strong> (<em>tuple</em><em> or </em><em>None</em>) – optional condition (ClassicalRegister, int)</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>op</strong> (<a class="reference internal" href="qiskit.circuit.Instruction.html#qiskit.circuit.Instruction" title="qiskit.circuit.Instruction"><em>Instruction</em></a>) – the operation associated with the DAG node</p></li>
+<li><p><strong>qargs</strong> (<em>list</em><em>[</em><a class="reference internal" href="qiskit.circuit.Qubit.html#qiskit.circuit.Qubit" title="qiskit.circuit.Qubit"><em>Qubit</em></a><em>]</em>) – qubits that op will be applied to</p></li>
+<li><p><strong>cargs</strong> (<em>list</em><em>[</em><a class="reference internal" href="qiskit.circuit.Clbit.html#qiskit.circuit.Clbit" title="qiskit.circuit.Clbit"><em>Clbit</em></a><em>]</em>) – cbits that op will be applied to</p></li>
+<li><p><strong>condition</strong> (<em>tuple</em><em> or </em><em>None</em>) – optional condition (ClassicalRegister, int)</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Retorno:</th><td class="field-body"><p class="first">the current max node</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name" colspan="2">Tipo de retorno:</th></tr>
-<tr class="field-odd field"><td>&#160;</td><td class="field-body"><p class="first"><a class="reference internal" href="qiskit.dagcircuit.DAGNode.html#qiskit.dagcircuit.DAGNode" title="qiskit.dagcircuit.DAGNode">DAGNode</a></p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference internal" href="qiskit.dagcircuit.DAGCircuitError.html#qiskit.dagcircuit.DAGCircuitError" title="qiskit.dagcircuit.DAGCircuitError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">DAGCircuitError</span></code></a> – if a leaf node is connected to multiple outputs</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Retorno</dt>
+<dd class="field-even"><p>the current max node</p>
+</dd>
+<dt class="field-odd">Tipo de retorno</dt>
+<dd class="field-odd"><p><a class="reference internal" href="qiskit.dagcircuit.DAGNode.html#qiskit.dagcircuit.DAGNode" title="qiskit.dagcircuit.DAGNode">DAGNode</a></p>
+</dd>
+<dt class="field-even">Levanta</dt>
+<dd class="field-even"><p><a class="reference internal" href="qiskit.dagcircuit.DAGCircuitError.html#qiskit.dagcircuit.DAGCircuitError" title="qiskit.dagcircuit.DAGCircuitError"><strong>DAGCircuitError</strong></a> – if a leaf node is connected to multiple outputs</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.apply_operation_front">
-<code class="descname">apply_operation_front</code><span class="sig-paren">(</span><em>op</em>, <em>qargs</em>, <em>cargs</em>, <em>condition=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.apply_operation_front"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.apply_operation_front" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">apply_operation_front</code><span class="sig-paren">(</span><em class="sig-param">op</em>, <em class="sig-param">qargs</em>, <em class="sig-param">cargs</em>, <em class="sig-param">condition=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.apply_operation_front"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.apply_operation_front" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Apply an operation to the input of the circuit.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parâmetros:</th><td class="field-body"><ul class="first simple">
-<li><strong>op</strong> (<a class="reference internal" href="qiskit.circuit.Instruction.html#qiskit.circuit.Instruction" title="qiskit.circuit.Instruction"><em>Instruction</em></a>) – the operation associated with the DAG node</li>
-<li><strong>qargs</strong> (<em>list</em><em>[</em><a class="reference internal" href="qiskit.circuit.Qubit.html#qiskit.circuit.Qubit" title="qiskit.circuit.Qubit"><em>Qubit</em></a><em>]</em>) – qubits that op will be applied to</li>
-<li><strong>cargs</strong> (<em>list</em><em>[</em><a class="reference internal" href="qiskit.circuit.Clbit.html#qiskit.circuit.Clbit" title="qiskit.circuit.Clbit"><em>Clbit</em></a><em>]</em>) – cbits that op will be applied to</li>
-<li><strong>condition</strong> (<em>tuple</em><em> or </em><em>None</em>) – optional condition (ClassicalRegister, value)</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>op</strong> (<a class="reference internal" href="qiskit.circuit.Instruction.html#qiskit.circuit.Instruction" title="qiskit.circuit.Instruction"><em>Instruction</em></a>) – the operation associated with the DAG node</p></li>
+<li><p><strong>qargs</strong> (<em>list</em><em>[</em><a class="reference internal" href="qiskit.circuit.Qubit.html#qiskit.circuit.Qubit" title="qiskit.circuit.Qubit"><em>Qubit</em></a><em>]</em>) – qubits that op will be applied to</p></li>
+<li><p><strong>cargs</strong> (<em>list</em><em>[</em><a class="reference internal" href="qiskit.circuit.Clbit.html#qiskit.circuit.Clbit" title="qiskit.circuit.Clbit"><em>Clbit</em></a><em>]</em>) – cbits that op will be applied to</p></li>
+<li><p><strong>condition</strong> (<em>tuple</em><em> or </em><em>None</em>) – optional condition (ClassicalRegister, value)</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Retorno:</th><td class="field-body"><p class="first">the current max node</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name" colspan="2">Tipo de retorno:</th></tr>
-<tr class="field-odd field"><td>&#160;</td><td class="field-body"><p class="first"><a class="reference internal" href="qiskit.dagcircuit.DAGNode.html#qiskit.dagcircuit.DAGNode" title="qiskit.dagcircuit.DAGNode">DAGNode</a></p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference internal" href="qiskit.dagcircuit.DAGCircuitError.html#qiskit.dagcircuit.DAGCircuitError" title="qiskit.dagcircuit.DAGCircuitError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">DAGCircuitError</span></code></a> – if initial nodes connected to multiple out edges</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Retorno</dt>
+<dd class="field-even"><p>the current max node</p>
+</dd>
+<dt class="field-odd">Tipo de retorno</dt>
+<dd class="field-odd"><p><a class="reference internal" href="qiskit.dagcircuit.DAGNode.html#qiskit.dagcircuit.DAGNode" title="qiskit.dagcircuit.DAGNode">DAGNode</a></p>
+</dd>
+<dt class="field-even">Levanta</dt>
+<dd class="field-even"><p><a class="reference internal" href="qiskit.dagcircuit.DAGCircuitError.html#qiskit.dagcircuit.DAGCircuitError" title="qiskit.dagcircuit.DAGCircuitError"><strong>DAGCircuitError</strong></a> – if initial nodes connected to multiple out edges</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.bfs_successors">
-<code class="descname">bfs_successors</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.bfs_successors"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.bfs_successors" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">bfs_successors</code><span class="sig-paren">(</span><em class="sig-param">node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.bfs_successors"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.bfs_successors" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Returns an iterator of tuples of (DAGNode, [DAGNodes]) where the DAGNode is the current node
 and [DAGNode] is its successors in  BFS order.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.clbits">
-<code class="descname">clbits</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.clbits"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.clbits" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">clbits</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.clbits"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.clbits" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Return a list of classical bits (as a list of Clbit instances).</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.collect_runs">
-<code class="descname">collect_runs</code><span class="sig-paren">(</span><em>namelist</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.collect_runs"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.collect_runs" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">collect_runs</code><span class="sig-paren">(</span><em class="sig-param">namelist</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.collect_runs"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.collect_runs" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Return a set of non-conditional runs of «op» nodes with the given names.</p>
 <p>For example, «… h q[0]; cx q[0],q[1]; cx q[0],q[1]; h q[1]; ..»
 would produce the tuple of cx nodes as an element of the set returned
@@ -1555,181 +1559,155 @@ in the circuit’s basis.</p>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.compose_back">
-<code class="descname">compose_back</code><span class="sig-paren">(</span><em>input_circuit</em>, <em>edge_map=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.compose_back"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.compose_back" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">compose_back</code><span class="sig-paren">(</span><em class="sig-param">input_circuit</em>, <em class="sig-param">edge_map=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.compose_back"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.compose_back" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Apply the input circuit to the output of this circuit.</p>
 <p>The two bases must be «compatible» or an exception occurs.
 A subset of input qubits of the input circuit are mapped
 to a subset of output qubits of this circuit.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parâmetros:</th><td class="field-body"><ul class="first simple">
-<li><strong>input_circuit</strong> (<a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit" title="qiskit.dagcircuit.DAGCircuit"><em>DAGCircuit</em></a>) – circuit to append</li>
-<li><strong>edge_map</strong> (<em>dict</em>) – map {Bit: Bit} from the output wires of
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_circuit</strong> (<a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit" title="qiskit.dagcircuit.DAGCircuit"><em>DAGCircuit</em></a>) – circuit to append</p></li>
+<li><p><strong>edge_map</strong> (<em>dict</em>) – map {Bit: Bit} from the output wires of
 input_circuit to input wires of self. The key and value
 can either be of type Qubit or Clbit depending on the
-type of the node.</li>
+type of the node.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference internal" href="qiskit.dagcircuit.DAGCircuitError.html#qiskit.dagcircuit.DAGCircuitError" title="qiskit.dagcircuit.DAGCircuitError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">DAGCircuitError</span></code></a> – if missing, duplicate or inconsistent wire</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Levanta</dt>
+<dd class="field-even"><p><a class="reference internal" href="qiskit.dagcircuit.DAGCircuitError.html#qiskit.dagcircuit.DAGCircuitError" title="qiskit.dagcircuit.DAGCircuitError"><strong>DAGCircuitError</strong></a> – if missing, duplicate or inconsistent wire</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.compose_front">
-<code class="descname">compose_front</code><span class="sig-paren">(</span><em>input_circuit</em>, <em>edge_map=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.compose_front"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.compose_front" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">compose_front</code><span class="sig-paren">(</span><em class="sig-param">input_circuit</em>, <em class="sig-param">edge_map=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.compose_front"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.compose_front" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Apply the input circuit to the input of this circuit.</p>
 <p>The two bases must be «compatible» or an exception occurs.
 A subset of output qubits of the input circuit are mapped
 to a subset of input qubits of this circuit.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parâmetros:</th><td class="field-body"><ul class="first simple">
-<li><strong>input_circuit</strong> (<a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit" title="qiskit.dagcircuit.DAGCircuit"><em>DAGCircuit</em></a>) – circuit to append</li>
-<li><strong>edge_map</strong> (<em>dict</em>) – map {(Register, int): (Register, int)}
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_circuit</strong> (<a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit" title="qiskit.dagcircuit.DAGCircuit"><em>DAGCircuit</em></a>) – circuit to append</p></li>
+<li><p><strong>edge_map</strong> (<em>dict</em>) – map {(Register, int): (Register, int)}
 from the output wires of input_circuit to input wires
-of self.</li>
+of self.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference internal" href="qiskit.dagcircuit.DAGCircuitError.html#qiskit.dagcircuit.DAGCircuitError" title="qiskit.dagcircuit.DAGCircuitError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">DAGCircuitError</span></code></a> – missing, duplicate or inconsistent wire</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Levanta</dt>
+<dd class="field-even"><p><a class="reference internal" href="qiskit.dagcircuit.DAGCircuitError.html#qiskit.dagcircuit.DAGCircuitError" title="qiskit.dagcircuit.DAGCircuitError"><strong>DAGCircuitError</strong></a> – missing, duplicate or inconsistent wire</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.count_ops">
-<code class="descname">count_ops</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.count_ops"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.count_ops" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">count_ops</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.count_ops"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.count_ops" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Count the occurrences of operation names.</p>
 <p>Returns a dictionary of counts keyed on the operation name.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.count_ops_longest_path">
-<code class="descname">count_ops_longest_path</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.count_ops_longest_path"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.count_ops_longest_path" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">count_ops_longest_path</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.count_ops_longest_path"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.count_ops_longest_path" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Count the occurrences of operation names on the longest path.</p>
 <p>Returns a dictionary of counts keyed on the operation name.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.depth">
-<code class="descname">depth</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.depth"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.depth" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">depth</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.depth"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.depth" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Return the circuit depth.
 :returns: the circuit depth
 :rtype: int</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference internal" href="qiskit.dagcircuit.DAGCircuitError.html#qiskit.dagcircuit.DAGCircuitError" title="qiskit.dagcircuit.DAGCircuitError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">DAGCircuitError</span></code></a> – if not a directed acyclic graph</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Levanta</dt>
+<dd class="field-odd"><p><a class="reference internal" href="qiskit.dagcircuit.DAGCircuitError.html#qiskit.dagcircuit.DAGCircuitError" title="qiskit.dagcircuit.DAGCircuitError"><strong>DAGCircuitError</strong></a> – if not a directed acyclic graph</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.descendants">
-<code class="descname">descendants</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.descendants"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.descendants" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">descendants</code><span class="sig-paren">(</span><em class="sig-param">node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.descendants"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.descendants" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Returns set of the descendants of a node as DAGNodes.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.draw">
-<code class="descname">draw</code><span class="sig-paren">(</span><em>scale=0.7</em>, <em>filename=None</em>, <em>style='color'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.draw"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.draw" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">draw</code><span class="sig-paren">(</span><em class="sig-param">scale=0.7</em>, <em class="sig-param">filename=None</em>, <em class="sig-param">style='color'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.draw"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.draw" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Draws the dag circuit.</p>
 <p>This function needs <cite>pydot &lt;https://github.com/erocarrera/pydot&gt;</cite>, which in turn needs
 Graphviz &lt;<a class="reference external" href="https://www.graphviz.org/">https://www.graphviz.org/</a>&gt;` to be installed.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parâmetros:</th><td class="field-body"><ul class="first simple">
-<li><strong>scale</strong> (<em>float</em>) – scaling factor</li>
-<li><strong>filename</strong> (<em>str</em>) – file path to save image to (format inferred from name)</li>
-<li><strong>style</strong> (<em>str</em>) – “plain”: B&amp;W graph
-“color” (default): color input/output/op nodes</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>scale</strong> (<em>float</em>) – scaling factor</p></li>
+<li><p><strong>filename</strong> (<em>str</em>) – file path to save image to (format inferred from name)</p></li>
+<li><p><strong>style</strong> (<em>str</em>) – “plain”: B&amp;W graph
+“color” (default): color input/output/op nodes</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Retorno:</th><td class="field-body"><p class="first"><dl class="docutils">
-<dt>if in Jupyter notebook and not saving to file,</dt>
-<dd><p class="first last">otherwise None.</p>
+</dd>
+<dt class="field-even">Retorno</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>if in Jupyter notebook and not saving to file,</dt><dd><p>otherwise None.</p>
 </dd>
 </dl>
 </p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name" colspan="2">Tipo de retorno:</th></tr>
-<tr class="field-odd field"><td>&#160;</td><td class="field-body"><p class="first last">Ipython.display.Image</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-odd">Tipo de retorno</dt>
+<dd class="field-odd"><p>Ipython.display.Image</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.edges">
-<code class="descname">edges</code><span class="sig-paren">(</span><em>nodes=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.edges"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.edges" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">edges</code><span class="sig-paren">(</span><em class="sig-param">nodes=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.edges"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.edges" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Iterator for node values.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Yields:</th><td class="field-body"><em>node</em> – the node.</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Yields</dt>
+<dd class="field-odd"><p><em>node</em> – the node.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.extend_back">
-<code class="descname">extend_back</code><span class="sig-paren">(</span><em>dag</em>, <em>edge_map=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.extend_back"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.extend_back" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">extend_back</code><span class="sig-paren">(</span><em class="sig-param">dag</em>, <em class="sig-param">edge_map=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.extend_back"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.extend_back" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Add <cite>dag</cite> at the end of <cite>self</cite>, using <cite>edge_map</cite>.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.gate_nodes">
-<code class="descname">gate_nodes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.gate_nodes"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.gate_nodes" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">gate_nodes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.gate_nodes"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.gate_nodes" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Get the list of gate nodes in the dag.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Retorno:</th><td class="field-body">the list of DAGNodes that represent gates.</td>
-</tr>
-<tr class="field-even field"><th class="field-name" colspan="2">Tipo de retorno:</th></tr>
-<tr class="field-even field"><td>&#160;</td><td class="field-body">list[<a class="reference internal" href="qiskit.dagcircuit.DAGNode.html#qiskit.dagcircuit.DAGNode" title="qiskit.dagcircuit.DAGNode">DAGNode</a>]</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Retorno</dt>
+<dd class="field-odd"><p>the list of DAGNodes that represent gates.</p>
+</dd>
+<dt class="field-even">Tipo de retorno</dt>
+<dd class="field-even"><p>list[<a class="reference internal" href="qiskit.dagcircuit.DAGNode.html#qiskit.dagcircuit.DAGNode" title="qiskit.dagcircuit.DAGNode">DAGNode</a>]</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.idle_wires">
-<code class="descname">idle_wires</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.idle_wires"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.idle_wires" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">idle_wires</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.idle_wires"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.idle_wires" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Return idle wires.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Yields:</th><td class="field-body"><em>Bit</em> – Bit in idle wire.</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Yields</dt>
+<dd class="field-odd"><p><em>Bit</em> – Bit in idle wire.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.layers">
-<code class="descname">layers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.layers"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.layers" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">layers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.layers"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.layers" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Yield a shallow view on a layer of this DAGCircuit for all d layers of this circuit.</p>
 <p>A layer is a circuit whose gates act on disjoint qubits, i.e.
 a layer has depth 1. The total number of layers equals the
@@ -1747,89 +1725,80 @@ the desired behavior.</p>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.longest_path">
-<code class="descname">longest_path</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.longest_path"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.longest_path" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">longest_path</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.longest_path"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.longest_path" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Returns the longest path in the dag as a list of DAGNodes.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.multigraph_layers">
-<code class="descname">multigraph_layers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.multigraph_layers"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.multigraph_layers" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">multigraph_layers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.multigraph_layers"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.multigraph_layers" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Yield layers of the multigraph.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.named_nodes">
-<code class="descname">named_nodes</code><span class="sig-paren">(</span><em>*names</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.named_nodes"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.named_nodes" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">named_nodes</code><span class="sig-paren">(</span><em class="sig-param">*names</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.named_nodes"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.named_nodes" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Get the set of «op» nodes with the given name.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.node">
-<code class="descname">node</code><span class="sig-paren">(</span><em>node_id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.node"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.node" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">node</code><span class="sig-paren">(</span><em class="sig-param">node_id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.node"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.node" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Get the node in the dag.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parâmetros:</th><td class="field-body"><strong>node_id</strong> (<em>int</em>) – Node identifier.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Retorno:</th><td class="field-body">the node.</td>
-</tr>
-<tr class="field-odd field"><th class="field-name" colspan="2">Tipo de retorno:</th></tr>
-<tr class="field-odd field"><td>&#160;</td><td class="field-body">node</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><p><strong>node_id</strong> (<em>int</em>) – Node identifier.</p>
+</dd>
+<dt class="field-even">Retorno</dt>
+<dd class="field-even"><p>the node.</p>
+</dd>
+<dt class="field-odd">Tipo de retorno</dt>
+<dd class="field-odd"><p>node</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.nodes">
-<code class="descname">nodes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.nodes"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.nodes" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">nodes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.nodes"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.nodes" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Iterator for node values.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Yields:</th><td class="field-body"><em>node</em> – the node.</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Yields</dt>
+<dd class="field-odd"><p><em>node</em> – the node.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.nodes_on_wire">
-<code class="descname">nodes_on_wire</code><span class="sig-paren">(</span><em>wire</em>, <em>only_ops=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.nodes_on_wire"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.nodes_on_wire" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">nodes_on_wire</code><span class="sig-paren">(</span><em class="sig-param">wire</em>, <em class="sig-param">only_ops=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.nodes_on_wire"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.nodes_on_wire" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Iterator for nodes that affect a given wire</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parâmetros:</th><td class="field-body"><ul class="first simple">
-<li><strong>wire</strong> (<em>Bit</em>) – the wire to be looked at.</li>
-<li><strong>only_ops</strong> (<em>bool</em>) – True if only the ops nodes are wanted
-otherwise all nodes are returned.</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>wire</strong> (<em>Bit</em>) – the wire to be looked at.</p></li>
+<li><p><strong>only_ops</strong> (<em>bool</em>) – True if only the ops nodes are wanted
+otherwise all nodes are returned.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Yields:</th><td class="field-body"><p class="first"><em>DAGNode</em> – the successive ops on the given wire</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference internal" href="qiskit.dagcircuit.DAGCircuitError.html#qiskit.dagcircuit.DAGCircuitError" title="qiskit.dagcircuit.DAGCircuitError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">DAGCircuitError</span></code></a> – if the given wire doesn’t exist in the DAG</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Yields</dt>
+<dd class="field-even"><p><em>DAGNode</em> – the successive ops on the given wire</p>
+</dd>
+<dt class="field-odd">Levanta</dt>
+<dd class="field-odd"><p><a class="reference internal" href="qiskit.dagcircuit.DAGCircuitError.html#qiskit.dagcircuit.DAGCircuitError" title="qiskit.dagcircuit.DAGCircuitError"><strong>DAGCircuitError</strong></a> – if the given wire doesn’t exist in the DAG</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.num_clbits">
-<code class="descname">num_clbits</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.num_clbits"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.num_clbits" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">num_clbits</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.num_clbits"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.num_clbits" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Return the total number of classical bits used by the circuit.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.num_qubits">
-<code class="descname">num_qubits</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.num_qubits"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.num_qubits" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">num_qubits</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.num_qubits"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.num_qubits" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Return the total number of qubits used by the circuit.
 num_qubits() replaces former use of width().
 DAGCircuit.width() now returns qubits + clbits for
@@ -1838,102 +1807,100 @@ consistency with Circuit.width() [qiskit-terra #2564].</p>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.num_tensor_factors">
-<code class="descname">num_tensor_factors</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.num_tensor_factors"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.num_tensor_factors" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">num_tensor_factors</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.num_tensor_factors"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.num_tensor_factors" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Compute how many components the circuit can decompose into.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.op_nodes">
-<code class="descname">op_nodes</code><span class="sig-paren">(</span><em>op=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.op_nodes"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.op_nodes" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">op_nodes</code><span class="sig-paren">(</span><em class="sig-param">op=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.op_nodes"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.op_nodes" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Get the list of «op» nodes in the dag.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parâmetros:</th><td class="field-body"><strong>op</strong> (<em>Type</em>) – Instruction subclass op nodes to return. if op=None, return
-all op nodes.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Retorno:</th><td class="field-body">the list of node ids containing the given op.</td>
-</tr>
-<tr class="field-odd field"><th class="field-name" colspan="2">Tipo de retorno:</th></tr>
-<tr class="field-odd field"><td>&#160;</td><td class="field-body">list[<a class="reference internal" href="qiskit.dagcircuit.DAGNode.html#qiskit.dagcircuit.DAGNode" title="qiskit.dagcircuit.DAGNode">DAGNode</a>]</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><p><strong>op</strong> (<em>Type</em>) – Instruction subclass op nodes to return. if op=None, return
+all op nodes.</p>
+</dd>
+<dt class="field-even">Retorno</dt>
+<dd class="field-even"><p>the list of node ids containing the given op.</p>
+</dd>
+<dt class="field-odd">Tipo de retorno</dt>
+<dd class="field-odd"><p>list[<a class="reference internal" href="qiskit.dagcircuit.DAGNode.html#qiskit.dagcircuit.DAGNode" title="qiskit.dagcircuit.DAGNode">DAGNode</a>]</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.predecessors">
-<code class="descname">predecessors</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.predecessors"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.predecessors" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">predecessors</code><span class="sig-paren">(</span><em class="sig-param">node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.predecessors"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.predecessors" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Returns iterator of the predecessors of a node as DAGNodes.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.properties">
-<code class="descname">properties</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.properties"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.properties" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">properties</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.properties"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.properties" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Return a dictionary of circuit properties.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.quantum_predecessors">
-<code class="descname">quantum_predecessors</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.quantum_predecessors"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.quantum_predecessors" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">quantum_predecessors</code><span class="sig-paren">(</span><em class="sig-param">node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.quantum_predecessors"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.quantum_predecessors" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Returns iterator of the predecessors of a node that are
 connected by a quantum edge as DAGNodes.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.quantum_successors">
-<code class="descname">quantum_successors</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.quantum_successors"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.quantum_successors" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">quantum_successors</code><span class="sig-paren">(</span><em class="sig-param">node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.quantum_successors"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.quantum_successors" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Returns iterator of the successors of a node that are
 connected by a quantum edge as DAGNodes.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.qubits">
-<code class="descname">qubits</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.qubits"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.qubits" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">qubits</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.qubits"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.qubits" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Return a list of qubits (as a list of Qubit instances).</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.remove_all_ops_named">
-<code class="descname">remove_all_ops_named</code><span class="sig-paren">(</span><em>opname</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.remove_all_ops_named"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.remove_all_ops_named" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">remove_all_ops_named</code><span class="sig-paren">(</span><em class="sig-param">opname</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.remove_all_ops_named"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.remove_all_ops_named" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Remove all operation nodes with the given name.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.remove_ancestors_of">
-<code class="descname">remove_ancestors_of</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.remove_ancestors_of"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.remove_ancestors_of" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">remove_ancestors_of</code><span class="sig-paren">(</span><em class="sig-param">node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.remove_ancestors_of"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.remove_ancestors_of" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Remove all of the ancestor operation nodes of node.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.remove_descendants_of">
-<code class="descname">remove_descendants_of</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.remove_descendants_of"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.remove_descendants_of" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">remove_descendants_of</code><span class="sig-paren">(</span><em class="sig-param">node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.remove_descendants_of"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.remove_descendants_of" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Remove all of the descendant operation nodes of node.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.remove_nonancestors_of">
-<code class="descname">remove_nonancestors_of</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.remove_nonancestors_of"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.remove_nonancestors_of" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">remove_nonancestors_of</code><span class="sig-paren">(</span><em class="sig-param">node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.remove_nonancestors_of"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.remove_nonancestors_of" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Remove all of the non-ancestors operation nodes of node.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.remove_nondescendants_of">
-<code class="descname">remove_nondescendants_of</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.remove_nondescendants_of"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.remove_nondescendants_of" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">remove_nondescendants_of</code><span class="sig-paren">(</span><em class="sig-param">node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.remove_nondescendants_of"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.remove_nondescendants_of" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Remove all of the non-descendants operation nodes of node.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.remove_op_node">
-<code class="descname">remove_op_node</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.remove_op_node"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.remove_op_node" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">remove_op_node</code><span class="sig-paren">(</span><em class="sig-param">node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.remove_op_node"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.remove_op_node" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Remove an operation node n.</p>
 <p>Add edges from predecessors to successors.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.serial_layers">
-<code class="descname">serial_layers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.serial_layers"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.serial_layers" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">serial_layers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.serial_layers"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.serial_layers" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Yield a layer for all gates of this circuit.</p>
 <p>A serial layer is a circuit with one gate. The layers have the
 same structure as in layers().</p>
@@ -1941,95 +1908,85 @@ same structure as in layers().</p>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.size">
-<code class="descname">size</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.size"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.size" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">size</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.size"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.size" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Return the number of operations.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.substitute_node_with_dag">
-<code class="descname">substitute_node_with_dag</code><span class="sig-paren">(</span><em>node</em>, <em>input_dag</em>, <em>wires=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.substitute_node_with_dag"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.substitute_node_with_dag" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">substitute_node_with_dag</code><span class="sig-paren">(</span><em class="sig-param">node</em>, <em class="sig-param">input_dag</em>, <em class="sig-param">wires=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.substitute_node_with_dag"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.substitute_node_with_dag" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Replace one node with dag.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parâmetros:</th><td class="field-body"><ul class="first simple">
-<li><strong>node</strong> (<a class="reference internal" href="qiskit.dagcircuit.DAGNode.html#qiskit.dagcircuit.DAGNode" title="qiskit.dagcircuit.DAGNode"><em>DAGNode</em></a>) – node to substitute</li>
-<li><strong>input_dag</strong> (<a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit" title="qiskit.dagcircuit.DAGCircuit"><em>DAGCircuit</em></a>) – circuit that will substitute the node</li>
-<li><strong>wires</strong> (<em>list</em><em>[</em><em>Bit</em><em>]</em>) – gives an order for (qu)bits
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>node</strong> (<a class="reference internal" href="qiskit.dagcircuit.DAGNode.html#qiskit.dagcircuit.DAGNode" title="qiskit.dagcircuit.DAGNode"><em>DAGNode</em></a>) – node to substitute</p></li>
+<li><p><strong>input_dag</strong> (<a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit" title="qiskit.dagcircuit.DAGCircuit"><em>DAGCircuit</em></a>) – circuit that will substitute the node</p></li>
+<li><p><strong>wires</strong> (<em>list</em><em>[</em><em>Bit</em><em>]</em>) – gives an order for (qu)bits
 in the input circuit. This order gets matched to the node wires
-by qargs first, then cargs, then conditions.</li>
+by qargs first, then cargs, then conditions.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference internal" href="qiskit.dagcircuit.DAGCircuitError.html#qiskit.dagcircuit.DAGCircuitError" title="qiskit.dagcircuit.DAGCircuitError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">DAGCircuitError</span></code></a> – if met with unexpected predecessor/successors</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Levanta</dt>
+<dd class="field-even"><p><a class="reference internal" href="qiskit.dagcircuit.DAGCircuitError.html#qiskit.dagcircuit.DAGCircuitError" title="qiskit.dagcircuit.DAGCircuitError"><strong>DAGCircuitError</strong></a> – if met with unexpected predecessor/successors</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.successors">
-<code class="descname">successors</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.successors"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.successors" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">successors</code><span class="sig-paren">(</span><em class="sig-param">node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.successors"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.successors" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Returns iterator of the successors of a node as DAGNodes.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.threeQ_or_more_gates">
-<code class="descname">threeQ_or_more_gates</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.threeQ_or_more_gates"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.threeQ_or_more_gates" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">threeQ_or_more_gates</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.threeQ_or_more_gates"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.threeQ_or_more_gates" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Get list of 3-or-more-qubit gates: (id, data).</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.to_networkx">
-<code class="descname">to_networkx</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.to_networkx"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.to_networkx" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">to_networkx</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.to_networkx"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.to_networkx" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Returns a copy of the DAGCircuit in networkx format.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.topological_nodes">
-<code class="descname">topological_nodes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.topological_nodes"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.topological_nodes" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">topological_nodes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.topological_nodes"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.topological_nodes" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Yield nodes in topological order.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Retorno:</th><td class="field-body">node in topological order</td>
-</tr>
-<tr class="field-even field"><th class="field-name" colspan="2">Tipo de retorno:</th></tr>
-<tr class="field-even field"><td>&#160;</td><td class="field-body">generator(<a class="reference internal" href="qiskit.dagcircuit.DAGNode.html#qiskit.dagcircuit.DAGNode" title="qiskit.dagcircuit.DAGNode">DAGNode</a>)</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Retorno</dt>
+<dd class="field-odd"><p>node in topological order</p>
+</dd>
+<dt class="field-even">Tipo de retorno</dt>
+<dd class="field-even"><p>generator(<a class="reference internal" href="qiskit.dagcircuit.DAGNode.html#qiskit.dagcircuit.DAGNode" title="qiskit.dagcircuit.DAGNode">DAGNode</a>)</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.topological_op_nodes">
-<code class="descname">topological_op_nodes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.topological_op_nodes"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.topological_op_nodes" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">topological_op_nodes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.topological_op_nodes"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.topological_op_nodes" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Yield op nodes in topological order.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Retorno:</th><td class="field-body">op node in topological order</td>
-</tr>
-<tr class="field-even field"><th class="field-name" colspan="2">Tipo de retorno:</th></tr>
-<tr class="field-even field"><td>&#160;</td><td class="field-body">generator(<a class="reference internal" href="qiskit.dagcircuit.DAGNode.html#qiskit.dagcircuit.DAGNode" title="qiskit.dagcircuit.DAGNode">DAGNode</a>)</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Retorno</dt>
+<dd class="field-odd"><p>op node in topological order</p>
+</dd>
+<dt class="field-even">Tipo de retorno</dt>
+<dd class="field-even"><p>generator(<a class="reference internal" href="qiskit.dagcircuit.DAGNode.html#qiskit.dagcircuit.DAGNode" title="qiskit.dagcircuit.DAGNode">DAGNode</a>)</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.twoQ_gates">
-<code class="descname">twoQ_gates</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.twoQ_gates"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.twoQ_gates" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">twoQ_gates</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.twoQ_gates"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.twoQ_gates" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Get list of 2-qubit gates. Ignore snapshot, barriers, and the like.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.width">
-<code class="descname">width</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.width"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.width" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">width</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/dagcircuit.html#DAGCircuit.width"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.width" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Return the total number of qubits + clbits used by the circuit.
 This function formerly returned the number of qubits by the calculation
 return len(self.wires) - self.num_clbits()

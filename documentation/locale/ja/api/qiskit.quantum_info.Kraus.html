@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,6 +48,8 @@
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/js/themeExt.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="索引" href="../genindex.html" />
@@ -625,6 +626,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1215,6 +1222,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1261,259 +1274,268 @@
 <h1>Kraus<a class="headerlink" href="#kraus" title="このヘッドラインへのパーマリンク">¶</a></h1>
 <dl class="class">
 <dt id="qiskit.quantum_info.Kraus">
-<em class="property">class </em><code class="descname">Kraus</code><span class="sig-paren">(</span><em>data</em>, <em>input_dims=None</em>, <em>output_dims=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/operators/channel/kraus.html#Kraus"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.quantum_info.Kraus" title="この定義へのパーマリンク">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">Kraus</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">input_dims=None</em>, <em class="sig-param">output_dims=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/operators/channel/kraus.html#Kraus"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.quantum_info.Kraus" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.quantum_info.operators.channel.quantum_channel.QuantumChannel</span></code></p>
 <p>Kraus representation of a quantum channel.</p>
+<p>Initialize a quantum channel Kraus operator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>(</strong><strong>QuantumCircuit or</strong> (<em>data</em>) -- Instruction or
+BaseOperator or
+matrix): data to initialize superoperator.</p></li>
+<li><p><strong>input_dims</strong> (<em>tuple</em>) -- the input subsystem dimensions.
+[Default: None]</p></li>
+<li><p><strong>output_dims</strong> (<em>tuple</em>) -- the output subsystem dimensions.
+[Default: None]</p></li>
+</ul>
+</dd>
+<dt class="field-even">例外</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>QiskitError</strong> -- if input data cannot be initialized as a</p></li>
+<li><p><strong>a list of Kraus matrices.</strong> -- </p></li>
+</ul>
+</dd>
+</dl>
+<p>If the input or output dimensions are None, they will be
+automatically determined from the input data. If the input data is
+a list of Numpy arrays of shape (2**N, 2**N) qubit systems will be used. If
+the input does not correspond to an N-qubit channel, it will assign a
+single subsystem with dimension specified by the shape of the input.</p>
 <p class="rubric">Attributes Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.quantum_info.Kraus.data" title="qiskit.quantum_info.Kraus.data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">data</span></code></a></td>
-<td>Return list of Kraus matrices for channel.</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.quantum_info.Kraus.data" title="qiskit.quantum_info.Kraus.data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">data</span></code></a></p></td>
+<td><p>Return list of Kraus matrices for channel.</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Methods Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.quantum_info.Kraus.add" title="qiskit.quantum_info.Kraus.add"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add</span></code></a>(other)</td>
-<td>Return the QuantumChannel self + other.</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.quantum_info.Kraus.add" title="qiskit.quantum_info.Kraus.add"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add</span></code></a>(other)</p></td>
+<td><p>Return the QuantumChannel self + other.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.quantum_info.Kraus.compose" title="qiskit.quantum_info.Kraus.compose"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compose</span></code></a>(other[,&nbsp;qargs,&nbsp;front])</td>
-<td>Return the composition channel self∘other.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.quantum_info.Kraus.compose" title="qiskit.quantum_info.Kraus.compose"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compose</span></code></a>(other[, qargs, front])</p></td>
+<td><p>Return the composition channel self∘other.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.quantum_info.Kraus.conjugate" title="qiskit.quantum_info.Kraus.conjugate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">conjugate</span></code></a>()</td>
-<td>Return the conjugate of the QuantumChannel.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.quantum_info.Kraus.conjugate" title="qiskit.quantum_info.Kraus.conjugate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">conjugate</span></code></a>()</p></td>
+<td><p>Return the conjugate of the QuantumChannel.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.quantum_info.Kraus.expand" title="qiskit.quantum_info.Kraus.expand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">expand</span></code></a>(other)</td>
-<td>Return the tensor product channel other ⊗ self.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.quantum_info.Kraus.expand" title="qiskit.quantum_info.Kraus.expand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">expand</span></code></a>(other)</p></td>
+<td><p>Return the tensor product channel other ⊗ self.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.quantum_info.Kraus.is_cptp" title="qiskit.quantum_info.Kraus.is_cptp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_cptp</span></code></a>([atol,&nbsp;rtol])</td>
-<td>Return True if completely-positive trace-preserving.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.quantum_info.Kraus.is_cptp" title="qiskit.quantum_info.Kraus.is_cptp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_cptp</span></code></a>([atol, rtol])</p></td>
+<td><p>Return True if completely-positive trace-preserving.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.quantum_info.Kraus.multiply" title="qiskit.quantum_info.Kraus.multiply"><code class="xref py py-obj docutils literal notranslate"><span class="pre">multiply</span></code></a>(other)</td>
-<td>Return the QuantumChannel self + other.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.quantum_info.Kraus.multiply" title="qiskit.quantum_info.Kraus.multiply"><code class="xref py py-obj docutils literal notranslate"><span class="pre">multiply</span></code></a>(other)</p></td>
+<td><p>Return the QuantumChannel self + other.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.quantum_info.Kraus.power" title="qiskit.quantum_info.Kraus.power"><code class="xref py py-obj docutils literal notranslate"><span class="pre">power</span></code></a>(n)</td>
-<td>The matrix power of the channel.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.quantum_info.Kraus.power" title="qiskit.quantum_info.Kraus.power"><code class="xref py py-obj docutils literal notranslate"><span class="pre">power</span></code></a>(n)</p></td>
+<td><p>The matrix power of the channel.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.quantum_info.Kraus.subtract" title="qiskit.quantum_info.Kraus.subtract"><code class="xref py py-obj docutils literal notranslate"><span class="pre">subtract</span></code></a>(other)</td>
-<td>Return the QuantumChannel self - other.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.quantum_info.Kraus.subtract" title="qiskit.quantum_info.Kraus.subtract"><code class="xref py py-obj docutils literal notranslate"><span class="pre">subtract</span></code></a>(other)</p></td>
+<td><p>Return the QuantumChannel self - other.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.quantum_info.Kraus.tensor" title="qiskit.quantum_info.Kraus.tensor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tensor</span></code></a>(other)</td>
-<td>Return the tensor product channel self ⊗ other.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.quantum_info.Kraus.tensor" title="qiskit.quantum_info.Kraus.tensor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tensor</span></code></a>(other)</p></td>
+<td><p>Return the tensor product channel self ⊗ other.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.quantum_info.Kraus.transpose" title="qiskit.quantum_info.Kraus.transpose"><code class="xref py py-obj docutils literal notranslate"><span class="pre">transpose</span></code></a>()</td>
-<td>Return the transpose of the QuantumChannel.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.quantum_info.Kraus.transpose" title="qiskit.quantum_info.Kraus.transpose"><code class="xref py py-obj docutils literal notranslate"><span class="pre">transpose</span></code></a>()</p></td>
+<td><p>Return the transpose of the QuantumChannel.</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Attributes Documentation</p>
 <dl class="attribute">
 <dt id="qiskit.quantum_info.Kraus.data">
-<code class="descname">data</code><a class="headerlink" href="#qiskit.quantum_info.Kraus.data" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">data</code><a class="headerlink" href="#qiskit.quantum_info.Kraus.data" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Return list of Kraus matrices for channel.</p>
 </dd></dl>
 
 <p class="rubric">Methods Documentation</p>
 <dl class="method">
 <dt id="qiskit.quantum_info.Kraus.add">
-<code class="descname">add</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/operators/channel/kraus.html#Kraus.add"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.quantum_info.Kraus.add" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">add</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/operators/channel/kraus.html#Kraus.add"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.quantum_info.Kraus.add" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Return the QuantumChannel self + other.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><p class="first"><strong>other</strong> (<em>QuantumChannel</em>) -- a quantum channel subclass.</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first">the linear addition self + other as a Kraus object.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><p class="first"><a class="reference internal" href="#qiskit.quantum_info.Kraus" title="qiskit.quantum_info.Kraus">Kraus</a></p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><code class="xref py py-exc docutils literal notranslate"><span class="pre">QiskitError</span></code> -- if other cannot be converted to a channel, or</li>
-<li>has incompatible dimensions.</li>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><p><strong>other</strong> (<em>QuantumChannel</em>) -- a quantum channel subclass.</p>
+</dd>
+<dt class="field-even">戻り値</dt>
+<dd class="field-even"><p>the linear addition self + other as a Kraus object.</p>
+</dd>
+<dt class="field-odd">戻り値の型</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#qiskit.quantum_info.Kraus" title="qiskit.quantum_info.Kraus">Kraus</a></p>
+</dd>
+<dt class="field-even">例外</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>QiskitError</strong> -- if other cannot be converted to a channel, or</p></li>
+<li><p><strong>has incompatible dimensions.</strong> -- </p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.quantum_info.Kraus.compose">
-<code class="descname">compose</code><span class="sig-paren">(</span><em>other</em>, <em>qargs=None</em>, <em>front=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/operators/channel/kraus.html#Kraus.compose"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.quantum_info.Kraus.compose" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">compose</code><span class="sig-paren">(</span><em class="sig-param">other</em>, <em class="sig-param">qargs=None</em>, <em class="sig-param">front=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/operators/channel/kraus.html#Kraus.compose"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.quantum_info.Kraus.compose" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Return the composition channel self∘other.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first simple">
-<li><strong>other</strong> (<em>QuantumChannel</em>) -- a quantum channel subclass.</li>
-<li><strong>qargs</strong> (<em>list</em>) -- a list of subsystem positions to compose other on.</li>
-<li><strong>front</strong> (<em>bool</em>) -- If False compose in standard order other(self(input))
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>other</strong> (<em>QuantumChannel</em>) -- a quantum channel subclass.</p></li>
+<li><p><strong>qargs</strong> (<em>list</em>) -- a list of subsystem positions to compose other on.</p></li>
+<li><p><strong>front</strong> (<em>bool</em>) -- If False compose in standard order other(self(input))
 otherwise compose in reverse order self(other(input))
-[default: False]</li>
+[default: False]</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first">The composition channel as a Kraus object.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><p class="first"><a class="reference internal" href="#qiskit.quantum_info.Kraus" title="qiskit.quantum_info.Kraus">Kraus</a></p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><code class="xref py py-exc docutils literal notranslate"><span class="pre">QiskitError</span></code> -- if other cannot be converted to a channel, or</li>
-<li>has incompatible dimensions.</li>
+</dd>
+<dt class="field-even">戻り値</dt>
+<dd class="field-even"><p>The composition channel as a Kraus object.</p>
+</dd>
+<dt class="field-odd">戻り値の型</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#qiskit.quantum_info.Kraus" title="qiskit.quantum_info.Kraus">Kraus</a></p>
+</dd>
+<dt class="field-even">例外</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>QiskitError</strong> -- if other cannot be converted to a channel, or</p></li>
+<li><p><strong>has incompatible dimensions.</strong> -- </p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.quantum_info.Kraus.conjugate">
-<code class="descname">conjugate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/operators/channel/kraus.html#Kraus.conjugate"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.quantum_info.Kraus.conjugate" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">conjugate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/operators/channel/kraus.html#Kraus.conjugate"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.quantum_info.Kraus.conjugate" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Return the conjugate of the QuantumChannel.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.quantum_info.Kraus.expand">
-<code class="descname">expand</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/operators/channel/kraus.html#Kraus.expand"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.quantum_info.Kraus.expand" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">expand</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/operators/channel/kraus.html#Kraus.expand"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.quantum_info.Kraus.expand" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Return the tensor product channel other ⊗ self.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><strong>other</strong> (<em>QuantumChannel</em>) -- a quantum channel subclass.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body">the tensor product channel other ⊗ self as a Kraus
-object.</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><a class="reference internal" href="#qiskit.quantum_info.Kraus" title="qiskit.quantum_info.Kraus">Kraus</a></td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal notranslate"><span class="pre">QiskitError</span></code> -- if other cannot be converted to a channel.</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><p><strong>other</strong> (<em>QuantumChannel</em>) -- a quantum channel subclass.</p>
+</dd>
+<dt class="field-even">戻り値</dt>
+<dd class="field-even"><p>the tensor product channel other ⊗ self as a Kraus
+object.</p>
+</dd>
+<dt class="field-odd">戻り値の型</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#qiskit.quantum_info.Kraus" title="qiskit.quantum_info.Kraus">Kraus</a></p>
+</dd>
+<dt class="field-even">例外</dt>
+<dd class="field-even"><p><strong>QiskitError</strong> -- if other cannot be converted to a channel.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.quantum_info.Kraus.is_cptp">
-<code class="descname">is_cptp</code><span class="sig-paren">(</span><em>atol=None</em>, <em>rtol=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/operators/channel/kraus.html#Kraus.is_cptp"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.quantum_info.Kraus.is_cptp" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">is_cptp</code><span class="sig-paren">(</span><em class="sig-param">atol=None</em>, <em class="sig-param">rtol=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/operators/channel/kraus.html#Kraus.is_cptp"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.quantum_info.Kraus.is_cptp" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Return True if completely-positive trace-preserving.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.quantum_info.Kraus.multiply">
-<code class="descname">multiply</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/operators/channel/kraus.html#Kraus.multiply"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.quantum_info.Kraus.multiply" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">multiply</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/operators/channel/kraus.html#Kraus.multiply"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.quantum_info.Kraus.multiply" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Return the QuantumChannel self + other.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><strong>other</strong> (<em>complex</em>) -- a complex number.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body">the scalar multiplication other * self as a Kraus object.</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><a class="reference internal" href="#qiskit.quantum_info.Kraus" title="qiskit.quantum_info.Kraus">Kraus</a></td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal notranslate"><span class="pre">QiskitError</span></code> -- if other is not a valid scalar.</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><p><strong>other</strong> (<em>complex</em>) -- a complex number.</p>
+</dd>
+<dt class="field-even">戻り値</dt>
+<dd class="field-even"><p>the scalar multiplication other * self as a Kraus object.</p>
+</dd>
+<dt class="field-odd">戻り値の型</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#qiskit.quantum_info.Kraus" title="qiskit.quantum_info.Kraus">Kraus</a></p>
+</dd>
+<dt class="field-even">例外</dt>
+<dd class="field-even"><p><strong>QiskitError</strong> -- if other is not a valid scalar.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.quantum_info.Kraus.power">
-<code class="descname">power</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/operators/channel/kraus.html#Kraus.power"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.quantum_info.Kraus.power" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">power</code><span class="sig-paren">(</span><em class="sig-param">n</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/operators/channel/kraus.html#Kraus.power"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.quantum_info.Kraus.power" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>The matrix power of the channel.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><p class="first"><strong>n</strong> (<em>int</em>) -- compute the matrix power of the superoperator matrix.</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first">the matrix power of the SuperOp converted to a Kraus channel.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><p class="first"><a class="reference internal" href="#qiskit.quantum_info.Kraus" title="qiskit.quantum_info.Kraus">Kraus</a></p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><code class="xref py py-exc docutils literal notranslate"><span class="pre">QiskitError</span></code> -- if the input and output dimensions of the</li>
-<li>QuantumChannel are not equal, or the power is not an integer.</li>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><p><strong>n</strong> (<em>int</em>) -- compute the matrix power of the superoperator matrix.</p>
+</dd>
+<dt class="field-even">戻り値</dt>
+<dd class="field-even"><p>the matrix power of the SuperOp converted to a Kraus channel.</p>
+</dd>
+<dt class="field-odd">戻り値の型</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#qiskit.quantum_info.Kraus" title="qiskit.quantum_info.Kraus">Kraus</a></p>
+</dd>
+<dt class="field-even">例外</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>QiskitError</strong> -- if the input and output dimensions of the</p></li>
+<li><p><strong>QuantumChannel are not equal</strong><strong>, or </strong><strong>the power is not an integer.</strong> -- </p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.quantum_info.Kraus.subtract">
-<code class="descname">subtract</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/operators/channel/kraus.html#Kraus.subtract"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.quantum_info.Kraus.subtract" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">subtract</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/operators/channel/kraus.html#Kraus.subtract"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.quantum_info.Kraus.subtract" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Return the QuantumChannel self - other.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><p class="first"><strong>other</strong> (<em>QuantumChannel</em>) -- a quantum channel subclass.</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first">the linear subtraction self - other as Kraus object.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><p class="first"><a class="reference internal" href="#qiskit.quantum_info.Kraus" title="qiskit.quantum_info.Kraus">Kraus</a></p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><code class="xref py py-exc docutils literal notranslate"><span class="pre">QiskitError</span></code> -- if other cannot be converted to a channel, or</li>
-<li>has incompatible dimensions.</li>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><p><strong>other</strong> (<em>QuantumChannel</em>) -- a quantum channel subclass.</p>
+</dd>
+<dt class="field-even">戻り値</dt>
+<dd class="field-even"><p>the linear subtraction self - other as Kraus object.</p>
+</dd>
+<dt class="field-odd">戻り値の型</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#qiskit.quantum_info.Kraus" title="qiskit.quantum_info.Kraus">Kraus</a></p>
+</dd>
+<dt class="field-even">例外</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>QiskitError</strong> -- if other cannot be converted to a channel, or</p></li>
+<li><p><strong>has incompatible dimensions.</strong> -- </p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.quantum_info.Kraus.tensor">
-<code class="descname">tensor</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/operators/channel/kraus.html#Kraus.tensor"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.quantum_info.Kraus.tensor" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">tensor</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/operators/channel/kraus.html#Kraus.tensor"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.quantum_info.Kraus.tensor" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Return the tensor product channel self ⊗ other.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><strong>other</strong> (<em>QuantumChannel</em>) -- a quantum channel subclass.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body">the tensor product channel self ⊗ other as a Kraus
-object.</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><a class="reference internal" href="#qiskit.quantum_info.Kraus" title="qiskit.quantum_info.Kraus">Kraus</a></td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal notranslate"><span class="pre">QiskitError</span></code> -- if other cannot be converted to a channel.</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><p><strong>other</strong> (<em>QuantumChannel</em>) -- a quantum channel subclass.</p>
+</dd>
+<dt class="field-even">戻り値</dt>
+<dd class="field-even"><p>the tensor product channel self ⊗ other as a Kraus
+object.</p>
+</dd>
+<dt class="field-odd">戻り値の型</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#qiskit.quantum_info.Kraus" title="qiskit.quantum_info.Kraus">Kraus</a></p>
+</dd>
+<dt class="field-even">例外</dt>
+<dd class="field-even"><p><strong>QiskitError</strong> -- if other cannot be converted to a channel.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.quantum_info.Kraus.transpose">
-<code class="descname">transpose</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/operators/channel/kraus.html#Kraus.transpose"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.quantum_info.Kraus.transpose" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">transpose</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/quantum_info/operators/channel/kraus.html#Kraus.transpose"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.quantum_info.Kraus.transpose" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Return the transpose of the QuantumChannel.</p>
 </dd></dl>
 

@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,11 +48,13 @@
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/js/themeExt.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="検索" href="../search.html" />
-    <link rel="next" title="pass_manager_drawer" href="qiskit.visualization.pass_manager_drawer.html" />
+    <link rel="next" title="iplot_bloch_multivector" href="qiskit.visualization.iplot_bloch_multivector.html" />
     <link rel="prev" title="circuit_drawer" href="qiskit.visualization.circuit_drawer.html" /> 
   </head>
 <body>
@@ -625,6 +626,12 @@
 <li class="toctree-l3 current"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4 current"><a class="current reference internal" href="#">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1215,6 +1222,12 @@
 <li class="toctree-l3 current"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4 current"><a class="current reference internal" href="#">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1261,7 +1274,7 @@
 <h1>dag_drawer<a class="headerlink" href="#dag-drawer" title="このヘッドラインへのパーマリンク">¶</a></h1>
 <dl class="function">
 <dt id="qiskit.visualization.dag_drawer">
-<code class="descname">dag_drawer</code><span class="sig-paren">(</span><em>dag</em>, <em>scale=0.7</em>, <em>filename=None</em>, <em>style='color'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/visualization/dag_visualization.html#dag_drawer"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.visualization.dag_drawer" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">dag_drawer</code><span class="sig-paren">(</span><em class="sig-param">dag</em>, <em class="sig-param">scale=0.7</em>, <em class="sig-param">filename=None</em>, <em class="sig-param">style='color'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/visualization/dag_visualization.html#dag_drawer"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.visualization.dag_drawer" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Plot the directed acyclic graph (dag) to represent operation dependencies
 in a quantum circuit.</p>
 <p>Note this function leverages
@@ -1269,38 +1282,33 @@ in a quantum circuit.</p>
 <a href="#id1"><span class="problematic" id="id2">`nxpd &lt;https://github.com/chebee7i/nxpd`_</span></a>) to generate the graph, which
 means that having <a class="reference external" href="https://www.graphviz.org/">Graphviz</a> installed on your
 system is required for this to work.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first simple">
-<li><strong>dag</strong> (<a class="reference internal" href="qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit" title="qiskit.dagcircuit.DAGCircuit"><em>DAGCircuit</em></a>) -- The dag to draw.</li>
-<li><strong>scale</strong> (<em>float</em>) -- scaling factor</li>
-<li><strong>filename</strong> (<em>str</em>) -- file path to save image to (format inferred from name)</li>
-<li><strong>style</strong> (<em>str</em>) -- 'plain': B&amp;W graph
-'color' (default): color input/output/op nodes</li>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dag</strong> (<a class="reference internal" href="qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit" title="qiskit.dagcircuit.DAGCircuit"><em>DAGCircuit</em></a>) -- The dag to draw.</p></li>
+<li><p><strong>scale</strong> (<em>float</em>) -- scaling factor</p></li>
+<li><p><strong>filename</strong> (<em>str</em>) -- file path to save image to (format inferred from name)</p></li>
+<li><p><strong>style</strong> (<em>str</em>) -- 'plain': B&amp;W graph
+'color' (default): color input/output/op nodes</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first"><dl class="docutils">
-<dt>if in Jupyter notebook and not saving to file,</dt>
-<dd><p class="first last">otherwise None.</p>
+</dd>
+<dt class="field-even">戻り値</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>if in Jupyter notebook and not saving to file,</dt><dd><p>otherwise None.</p>
 </dd>
 </dl>
 </p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><p class="first">Ipython.display.Image</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><a class="reference internal" href="qiskit.visualization.VisualizationError.html#qiskit.visualization.VisualizationError" title="qiskit.visualization.VisualizationError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">VisualizationError</span></code></a> -- when style is not recognized.</li>
-<li><code class="xref py py-exc docutils literal notranslate"><span class="pre">ImportError</span></code> -- when nxpd or pydot not installed.</li>
+</dd>
+<dt class="field-odd">戻り値の型</dt>
+<dd class="field-odd"><p>Ipython.display.Image</p>
+</dd>
+<dt class="field-even">例外</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="qiskit.visualization.VisualizationError.html#qiskit.visualization.VisualizationError" title="qiskit.visualization.VisualizationError"><strong>VisualizationError</strong></a> -- when style is not recognized.</p></li>
+<li><p><strong>ImportError</strong> -- when nxpd or pydot not installed.</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
@@ -1316,10 +1324,10 @@ system is required for this to work.</p>
             <div>circuit_drawer</div>
          </div>
      </a>
-     <a id="button-next" href="qiskit.visualization.pass_manager_drawer.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
+     <a id="button-next" href="qiskit.visualization.iplot_bloch_multivector.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
         <div class="pagenation-text">
             <span class="pagenation-direction">Next</span>
-            <div>pass_manager_drawer</div>
+            <div>iplot_bloch_multivector</div>
         </div>
      </a>
         
