@@ -1263,6 +1263,31 @@
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.aqua.algorithms.adaptive.vqe.vqe.VQE</span></code></p>
 <p>The Quantum Approximate Optimization Algorithm.</p>
 <p>See <a class="reference external" href="https://arxiv.org/abs/1411.4028">https://arxiv.org/abs/1411.4028</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>operator</strong> (<a class="reference internal" href="qiskit.aqua.operators.BaseOperator.html#qiskit.aqua.operators.BaseOperator" title="qiskit.aqua.operators.BaseOperator"><em>BaseOperator</em></a>) – Qubit operator</p></li>
+<li><p><strong>operator_mode</strong> (<em>str</em>) – operator mode, used for eval of operator</p></li>
+<li><p><strong>p</strong> (<em>int</em>) – the integer parameter p as specified in <a class="reference external" href="https://arxiv.org/abs/1411.4028">https://arxiv.org/abs/1411.4028</a></p></li>
+<li><p><strong>initial_state</strong> (<a class="reference internal" href="qiskit.aqua.components.initial_states.InitialState.html#qiskit.aqua.components.initial_states.InitialState" title="qiskit.aqua.components.initial_states.InitialState"><em>InitialState</em></a>) – the initial state to prepend the QAOA circuit with</p></li>
+<li><p><strong>mixer</strong> (<a class="reference internal" href="qiskit.aqua.operators.BaseOperator.html#qiskit.aqua.operators.BaseOperator" title="qiskit.aqua.operators.BaseOperator"><em>BaseOperator</em></a>) – the mixer Hamiltonian to evolve with. Allows support
+of optimizations in constrained subspaces as
+specified in <a class="reference external" href="https://arxiv.org/abs/1709.03489">https://arxiv.org/abs/1709.03489</a></p></li>
+<li><p><strong>optimizer</strong> (<a class="reference internal" href="qiskit.aqua.components.optimizers.Optimizer.html#qiskit.aqua.components.optimizers.Optimizer" title="qiskit.aqua.components.optimizers.Optimizer"><em>Optimizer</em></a>) – the classical optimization algorithm.</p></li>
+<li><p><strong>initial_point</strong> (<em>numpy.ndarray</em>) – optimizer initial point.</p></li>
+<li><p><strong>max_evals_grouped</strong> (<em>int</em>) – max number of evaluations to be performed simultaneously.</p></li>
+<li><p><strong>callback</strong> (<em>Callable</em>) – a callback that can access the intermediate data during the optimization.
+Internally, four arguments are provided as follows
+the index of evaluation, parameters of variational form,
+evaluated mean, evaluated standard devation.</p></li>
+<li><p><strong>auto_conversion</strong> (<em>bool</em>) – an automatic conversion for operator and aux_operators into the type which is
+most suitable for the backend.
+- non-aer statevector_simulator: MatrixOperator
+- aer statevector_simulator: WeightedPauliOperator
+- qasm simulator or real backend: TPBGroupedWeightedPauliOperator</p></li>
+</ul>
+</dd>
+</dl>
 <p class="rubric">Attributes Summary</p>
 <table class="longtable docutils align-default">
 <colgroup>

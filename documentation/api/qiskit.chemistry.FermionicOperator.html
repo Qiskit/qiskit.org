@@ -1296,6 +1296,25 @@
 </ol>
 </li>
 </ul>
+<p>Constructor.</p>
+<dl class="simple">
+<dt>This class requires the integrals stored in the ‘chemist’ notation</dt><dd><p>h2(i,j,k,l) –&gt; adag_i adag_k a_l a_j</p>
+</dd>
+<dt>There is another popular notation is the ‘physicist’ notation</dt><dd><p>h2(i,j,k,l) –&gt; adag_i adag_j a_k a_l</p>
+</dd>
+</dl>
+<p>If you are using the ‘physicist’ notation, you need to convert it to
+the ‘chemist’ notation first. E.g., h2 = numpy.einsum(‘ikmj-&gt;ijkm’, h2)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>h1</strong> (<em>numpy.ndarray</em>) – second-quantized fermionic one-body operator, a 2-D (NxN) tensor</p></li>
+<li><p><strong>h2</strong> (<em>numpy.ndarray</em>) – second-quantized fermionic two-body operator,
+a 4-D (NxNxNxN) tensor</p></li>
+<li><p><strong>ph_trans_shift</strong> (<em>float</em>) – energy shift caused by particle hole transformation</p></li>
+</ul>
+</dd>
+</dl>
 <p class="rubric">Attributes Summary</p>
 <table class="longtable docutils align-default">
 <colgroup>

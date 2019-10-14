@@ -1262,6 +1262,49 @@
 <em class="property">class </em><code class="sig-name descname">QuantumInstance</code><span class="sig-paren">(</span><em class="sig-param">backend</em>, <em class="sig-param">shots=1024</em>, <em class="sig-param">seed_simulator=None</em>, <em class="sig-param">max_credits=10</em>, <em class="sig-param">basis_gates=None</em>, <em class="sig-param">coupling_map=None</em>, <em class="sig-param">initial_layout=None</em>, <em class="sig-param">pass_manager=None</em>, <em class="sig-param">seed_transpiler=None</em>, <em class="sig-param">optimization_level=None</em>, <em class="sig-param">backend_options=None</em>, <em class="sig-param">noise_model=None</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">wait=5</em>, <em class="sig-param">circuit_caching=False</em>, <em class="sig-param">cache_file=None</em>, <em class="sig-param">skip_qobj_deepcopy=False</em>, <em class="sig-param">skip_qobj_validation=True</em>, <em class="sig-param">measurement_error_mitigation_cls=None</em>, <em class="sig-param">cals_matrix_refresh_period=30</em>, <em class="sig-param">measurement_error_mitigation_shots=None</em>, <em class="sig-param">job_callback=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/quantum_instance.html#QuantumInstance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.aqua.QuantumInstance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Quantum Backend including execution setting.</p>
+<p>Constructor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>backend</strong> (<a class="reference internal" href="qiskit.providers.BaseBackend.html#qiskit.providers.BaseBackend" title="qiskit.providers.BaseBackend"><em>BaseBackend</em></a>) – instance of selected backend</p></li>
+<li><p><strong>shots</strong> (<em>int</em><em>, </em><em>optional</em>) – number of repetitions of each circuit, for sampling</p></li>
+<li><p><strong>seed_simulator</strong> (<em>int</em><em>, </em><em>optional</em>) – random seed for simulators</p></li>
+<li><p><strong>max_credits</strong> (<em>int</em><em>, </em><em>optional</em>) – maximum credits to use</p></li>
+<li><p><strong>basis_gates</strong> (<em>list</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – list of basis gate names supported by the
+target. Default: [‘u1’,’u2’,’u3’,’cx’,’id’]</p></li>
+<li><p><strong>coupling_map</strong> (<a class="reference internal" href="qiskit.transpiler.CouplingMap.html#qiskit.transpiler.CouplingMap" title="qiskit.transpiler.CouplingMap"><em>CouplingMap</em></a><em> or </em><em>list</em><em>[</em><em>list</em><em>]</em>) – coupling map (perhaps custom) to target in mapping</p></li>
+<li><p><strong>initial_layout</strong> (<a class="reference internal" href="qiskit.transpiler.Layout.html#qiskit.transpiler.Layout" title="qiskit.transpiler.Layout"><em>Layout</em></a><em> or </em><em>dict</em><em> or </em><em>list</em><em>, </em><em>optional</em>) – initial layout of qubits in mapping</p></li>
+<li><p><strong>pass_manager</strong> (<a class="reference internal" href="qiskit.transpiler.PassManager.html#qiskit.transpiler.PassManager" title="qiskit.transpiler.PassManager"><em>PassManager</em></a><em>, </em><em>optional</em>) – pass manager to handle how to compile the circuits</p></li>
+<li><p><strong>seed_transpiler</strong> (<em>int</em><em>, </em><em>optional</em>) – the random seed for circuit mapper</p></li>
+<li><p><strong>optimization_level</strong> (<em>int</em><em>, </em><em>optional</em>) – How much optimization to perform on the circuits. Higher levels generate more optimized circuits,
+at the expense of longer transpilation time.</p></li>
+<li><p><strong>backend_options</strong> (<em>dict</em><em>, </em><em>optional</em>) – all running options for backend, please refer to the provider.</p></li>
+<li><p><strong>noise_model</strong> (<em>qiskit.provider.aer.noise.noise_model.NoiseModel</em><em>, </em><em>optional</em>) – noise model for simulator</p></li>
+<li><p><strong>timeout</strong> (<em>float</em><em>, </em><em>optional</em>) – seconds to wait for job. If None, wait indefinitely.</p></li>
+<li><p><strong>wait</strong> (<em>float</em><em>, </em><em>optional</em>) – seconds between queries to result</p></li>
+<li><p><strong>circuit_caching</strong> (<em>bool</em><em>, </em><em>optional</em>) – Use CircuitCache when calling compile_and_run_circuits</p></li>
+<li><p><strong>cache_file</strong> (<em>str</em><em>, </em><em>optional</em>) – filename into which to store the cache as a pickle file</p></li>
+<li><p><strong>skip_qobj_deepcopy</strong> (<em>bool</em><em>, </em><em>optional</em>) – Reuses the same Qobj object over and over to avoid deepcopying</p></li>
+<li><p><strong>skip_qobj_validation</strong> (<em>bool</em><em>, </em><em>optional</em>) – Bypass Qobj validation to decrease submission time</p></li>
+<li><p><strong>measurement_error_mitigation_cls</strong> (<em>Callable</em><em>, </em><em>optional</em>) – the approach to mitigate measurement error,
+CompleteMeasFitter or TensoredMeasFitter</p></li>
+<li><p><strong>cals_matrix_refresh_period</strong> (<em>int</em><em>, </em><em>optional</em>) – how long to refresh the calibration matrix in measurement mitigation,
+unit in minutes</p></li>
+<li><p><strong>measurement_error_mitigation_shots</strong> (<em>int</em><em>, </em><em>optional</em>) – the shot number for building calibration matrix,
+if None, use the shot number in quantum instance</p></li>
+<li><p><strong>job_callback</strong> (<em>Callable</em><em>, </em><em>optional</em>) – callback used in querying info of the submitted job, and
+providing the following arguments: job_id, job_status,
+queue_position, job</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="qiskit.aqua.AquaError.html#qiskit.aqua.AquaError" title="qiskit.aqua.AquaError"><strong>AquaError</strong></a> – the shots exceeds the maximum number of shots</p></li>
+<li><p><a class="reference internal" href="qiskit.aqua.AquaError.html#qiskit.aqua.AquaError" title="qiskit.aqua.AquaError"><strong>AquaError</strong></a> – set noise model but the backend does not support that</p></li>
+<li><p><a class="reference internal" href="qiskit.aqua.AquaError.html#qiskit.aqua.AquaError" title="qiskit.aqua.AquaError"><strong>AquaError</strong></a> – set backend_options but the backend does not support that</p></li>
+</ul>
+</dd>
+</dl>
 <p class="rubric">Attributes Summary</p>
 <table class="longtable docutils align-default">
 <colgroup>

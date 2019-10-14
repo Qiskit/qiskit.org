@@ -1261,6 +1261,22 @@
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.aqua.components.feature_maps.pauli_expansion.PauliExpansion</span></code></p>
 <p>Mapping data with the second order expansion followed by entangling gates.</p>
 <p>Refer to <a class="reference external" href="https://arxiv.org/pdf/1804.11326.pdf">https://arxiv.org/pdf/1804.11326.pdf</a> for details.</p>
+<p>Constructor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>feature_dimension</strong> (<em>int</em>) – number of features</p></li>
+<li><p><strong>depth</strong> (<em>int</em>) – the number of repeated circuits</p></li>
+<li><p><strong>entangler_map</strong> (<em>list</em><em>[</em><em>list</em><em>]</em>) – describe the connectivity of qubits, each list describes
+[source, target], or None for full entanglement.
+Note that the order is the list is the order of
+applying the two-qubit gate.</p></li>
+<li><p><strong>entanglement</strong> (<em>str</em>) – [‘full’, ‘linear’], generate the qubit connectivitiy by predefined
+topology</p></li>
+<li><p><strong>data_map_func</strong> (<em>Callable</em>) – a mapping function for data x</p></li>
+</ul>
+</dd>
+</dl>
 <p class="rubric">Attributes Summary</p>
 <table class="longtable docutils align-default">
 <colgroup>

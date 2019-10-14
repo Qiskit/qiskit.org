@@ -1261,6 +1261,32 @@
 <dt id="qiskit.aqua.algorithms.adaptive.VQC">
 <em class="property">class </em><code class="sig-name descname">VQC</code><span class="sig-paren">(</span><em class="sig-param">optimizer=None</em>, <em class="sig-param">feature_map=None</em>, <em class="sig-param">var_form=None</em>, <em class="sig-param">training_dataset=None</em>, <em class="sig-param">test_dataset=None</em>, <em class="sig-param">datapoints=None</em>, <em class="sig-param">max_evals_grouped=1</em>, <em class="sig-param">minibatch_size=-1</em>, <em class="sig-param">callback=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/algorithms/adaptive/vqc/vqc.html#VQC"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.aqua.algorithms.adaptive.VQC" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.aqua.algorithms.adaptive.vq_algorithm.VQAlgorithm</span></code></p>
+<p>Initialize the object
+:param optimizer: The classical optimizer to use.
+:type optimizer: Optimizer
+:param feature_map: The FeatureMap instance to use.
+:type feature_map: FeatureMap
+:param var_form: The variational form instance.
+:type var_form: VariationalForm
+:param training_dataset: The training dataset, in the format: {‘A’: np.ndarray, ‘B’: np.ndarray, …}.
+:type training_dataset: dict
+:param test_dataset: The test dataset, in same format as <cite>training_dataset</cite>.
+:type test_dataset: dict
+:param datapoints: NxD array, N is the number of data and D is data dimension.
+:type datapoints: np.ndarray
+:param max_evals_grouped: The maximum number of evaluations to perform simultaneously.
+:type max_evals_grouped: int
+:param minibatch_size: The size of a mini-batch.
+:type minibatch_size: int
+:param callback: a callback that can access the intermediate data during the optimization.</p>
+<blockquote>
+<div><p>Internally, four arguments are provided as follows the index of data batch, the index of evaluation,
+parameters of variational form, evaluated value.</p>
+</div></blockquote>
+<dl class="field-list simple">
+</dl>
+<p class="rubric">Notes</p>
+<p>We use <cite>label</cite> to denotes numeric results and <cite>class</cite> the class names (str).</p>
 <p class="rubric">Attributes Summary</p>
 <table class="longtable docutils align-default">
 <colgroup>
