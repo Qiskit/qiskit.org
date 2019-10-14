@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,6 +48,8 @@
     <script type="text/javascript" src="../../../_static/language_data.js"></script>
     <script type="text/javascript" src="../../../_static/js/themeExt.js"></script>
     <script type="text/javascript" src="../../../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
     <link rel="index" title="索引" href="../../../genindex.html" />
@@ -625,6 +626,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../../visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../../api/qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../api/qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../api/qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../api/qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../api/qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1215,6 +1222,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../../visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../../api/qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../api/qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../api/qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../api/qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../api/qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1261,70 +1274,70 @@
 <span id="id1"></span><span id="qiskit-chemistry-drivers"></span><h1>qiskit.chemistry.drivers<a class="headerlink" href="#module-qiskit.chemistry.drivers" title="このヘッドラインへのパーマリンク">¶</a></h1>
 <div class="section" id="functions">
 <h2>Functions<a class="headerlink" href="#functions" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="../../../api/qiskit.chemistry.drivers.refresh_drivers.html#qiskit.chemistry.drivers.refresh_drivers" title="qiskit.chemistry.drivers.refresh_drivers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">refresh_drivers</span></code></a>()</td>
-<td>Attempts to rediscover all driver modules</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../api/qiskit.chemistry.drivers.refresh_drivers.html#qiskit.chemistry.drivers.refresh_drivers" title="qiskit.chemistry.drivers.refresh_drivers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">refresh_drivers</span></code></a>()</p></td>
+<td><p>Attempts to rediscover all driver modules</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../../../api/qiskit.chemistry.drivers.register_driver.html#qiskit.chemistry.drivers.register_driver" title="qiskit.chemistry.drivers.register_driver"><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_driver</span></code></a>(cls)</td>
-<td>Registers a driver class :param cls: Driver class.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../api/qiskit.chemistry.drivers.register_driver.html#qiskit.chemistry.drivers.register_driver" title="qiskit.chemistry.drivers.register_driver"><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_driver</span></code></a>(cls)</p></td>
+<td><p>Registers a driver class :param cls: Driver class.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../../../api/qiskit.chemistry.drivers.deregister_driver.html#qiskit.chemistry.drivers.deregister_driver" title="qiskit.chemistry.drivers.deregister_driver"><code class="xref py py-obj docutils literal notranslate"><span class="pre">deregister_driver</span></code></a>(driver_name)</td>
-<td>Remove driver from list of available drivers :param driver_name: name of driver to unregister :type driver_name: str</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../api/qiskit.chemistry.drivers.deregister_driver.html#qiskit.chemistry.drivers.deregister_driver" title="qiskit.chemistry.drivers.deregister_driver"><code class="xref py py-obj docutils literal notranslate"><span class="pre">deregister_driver</span></code></a>(driver_name)</p></td>
+<td><p>Remove driver from list of available drivers :param driver_name: name of driver to unregister :type driver_name: str</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../../../api/qiskit.chemistry.drivers.get_driver_class.html#qiskit.chemistry.drivers.get_driver_class" title="qiskit.chemistry.drivers.get_driver_class"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_driver_class</span></code></a>(driver_name)</td>
-<td>Return the class object for the named module.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../api/qiskit.chemistry.drivers.get_driver_class.html#qiskit.chemistry.drivers.get_driver_class" title="qiskit.chemistry.drivers.get_driver_class"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_driver_class</span></code></a>(driver_name)</p></td>
+<td><p>Return the class object for the named module.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../../../api/qiskit.chemistry.drivers.get_driver_configuration.html#qiskit.chemistry.drivers.get_driver_configuration" title="qiskit.chemistry.drivers.get_driver_configuration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_driver_configuration</span></code></a>(driver_name)</td>
-<td>Return the configuration for the named module.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../api/qiskit.chemistry.drivers.get_driver_configuration.html#qiskit.chemistry.drivers.get_driver_configuration" title="qiskit.chemistry.drivers.get_driver_configuration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_driver_configuration</span></code></a>(driver_name)</p></td>
+<td><p>Return the configuration for the named module.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../../../api/qiskit.chemistry.drivers.local_drivers.html#qiskit.chemistry.drivers.local_drivers" title="qiskit.chemistry.drivers.local_drivers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">local_drivers</span></code></a>()</td>
-<td>Accesses chemistry drivers names :returns: chemistry drivers names :rtype: names</td>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../api/qiskit.chemistry.drivers.local_drivers.html#qiskit.chemistry.drivers.local_drivers" title="qiskit.chemistry.drivers.local_drivers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">local_drivers</span></code></a>()</p></td>
+<td><p>Accesses chemistry drivers names :returns: chemistry drivers names :rtype: names</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="section" id="classes">
 <h2>Classes<a class="headerlink" href="#classes" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="../../../api/qiskit.chemistry.drivers.BaseDriver.html#qiskit.chemistry.drivers.BaseDriver" title="qiskit.chemistry.drivers.BaseDriver"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BaseDriver</span></code></a>()</td>
-<td>Base class for Drivers.</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../api/qiskit.chemistry.drivers.BaseDriver.html#qiskit.chemistry.drivers.BaseDriver" title="qiskit.chemistry.drivers.BaseDriver"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BaseDriver</span></code></a>()</p></td>
+<td><p>Base class for Drivers.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../../../api/qiskit.chemistry.drivers.UnitsType.html#qiskit.chemistry.drivers.UnitsType" title="qiskit.chemistry.drivers.UnitsType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UnitsType</span></code></a></td>
-<td>An enumeration.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../api/qiskit.chemistry.drivers.UnitsType.html#qiskit.chemistry.drivers.UnitsType" title="qiskit.chemistry.drivers.UnitsType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UnitsType</span></code></a></p></td>
+<td><p>An enumeration.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../../../api/qiskit.chemistry.drivers.HFMethodType.html#qiskit.chemistry.drivers.HFMethodType" title="qiskit.chemistry.drivers.HFMethodType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">HFMethodType</span></code></a></td>
-<td>An enumeration.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../api/qiskit.chemistry.drivers.HFMethodType.html#qiskit.chemistry.drivers.HFMethodType" title="qiskit.chemistry.drivers.HFMethodType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">HFMethodType</span></code></a></p></td>
+<td><p>An enumeration.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../../../api/qiskit.chemistry.drivers.GaussianDriver.html#qiskit.chemistry.drivers.GaussianDriver" title="qiskit.chemistry.drivers.GaussianDriver"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GaussianDriver</span></code></a>(config)</td>
-<td>Python implementation of a Gaussian 16 driver.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../api/qiskit.chemistry.drivers.GaussianDriver.html#qiskit.chemistry.drivers.GaussianDriver" title="qiskit.chemistry.drivers.GaussianDriver"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GaussianDriver</span></code></a>(config)</p></td>
+<td><p>Python implementation of a Gaussian 16 driver.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../../../api/qiskit.chemistry.drivers.HDF5Driver.html#qiskit.chemistry.drivers.HDF5Driver" title="qiskit.chemistry.drivers.HDF5Driver"><code class="xref py py-obj docutils literal notranslate"><span class="pre">HDF5Driver</span></code></a>(hdf5_input)</td>
-<td>Python implementation of a hdf5 driver.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../api/qiskit.chemistry.drivers.HDF5Driver.html#qiskit.chemistry.drivers.HDF5Driver" title="qiskit.chemistry.drivers.HDF5Driver"><code class="xref py py-obj docutils literal notranslate"><span class="pre">HDF5Driver</span></code></a>(hdf5_input)</p></td>
+<td><p>Python implementation of a hdf5 driver.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../../../api/qiskit.chemistry.drivers.PSI4Driver.html#qiskit.chemistry.drivers.PSI4Driver" title="qiskit.chemistry.drivers.PSI4Driver"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PSI4Driver</span></code></a>(config)</td>
-<td>Python implementation of a psi4 driver.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../api/qiskit.chemistry.drivers.PSI4Driver.html#qiskit.chemistry.drivers.PSI4Driver" title="qiskit.chemistry.drivers.PSI4Driver"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PSI4Driver</span></code></a>(config)</p></td>
+<td><p>Python implementation of a psi4 driver.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../../../api/qiskit.chemistry.drivers.BasisType.html#qiskit.chemistry.drivers.BasisType" title="qiskit.chemistry.drivers.BasisType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BasisType</span></code></a></td>
-<td>An enumeration.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../api/qiskit.chemistry.drivers.BasisType.html#qiskit.chemistry.drivers.BasisType" title="qiskit.chemistry.drivers.BasisType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BasisType</span></code></a></p></td>
+<td><p>An enumeration.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../../../api/qiskit.chemistry.drivers.PyQuanteDriver.html#qiskit.chemistry.drivers.PyQuanteDriver" title="qiskit.chemistry.drivers.PyQuanteDriver"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PyQuanteDriver</span></code></a>(atoms[,&nbsp;units,&nbsp;charge,&nbsp;...])</td>
-<td>Python implementation of a PyQuante driver.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../api/qiskit.chemistry.drivers.PyQuanteDriver.html#qiskit.chemistry.drivers.PyQuanteDriver" title="qiskit.chemistry.drivers.PyQuanteDriver"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PyQuanteDriver</span></code></a>(atoms[, units, charge, ...])</p></td>
+<td><p>Python implementation of a PyQuante driver.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../../../api/qiskit.chemistry.drivers.PySCFDriver.html#qiskit.chemistry.drivers.PySCFDriver" title="qiskit.chemistry.drivers.PySCFDriver"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PySCFDriver</span></code></a>(atom[,&nbsp;unit,&nbsp;charge,&nbsp;spin,&nbsp;...])</td>
-<td>Python implementation of a PySCF driver.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../api/qiskit.chemistry.drivers.PySCFDriver.html#qiskit.chemistry.drivers.PySCFDriver" title="qiskit.chemistry.drivers.PySCFDriver"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PySCFDriver</span></code></a>(atom[, unit, charge, spin, ...])</p></td>
+<td><p>Python implementation of a PySCF driver.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../../../api/qiskit.chemistry.drivers.InitialGuess.html#qiskit.chemistry.drivers.InitialGuess" title="qiskit.chemistry.drivers.InitialGuess"><code class="xref py py-obj docutils literal notranslate"><span class="pre">InitialGuess</span></code></a></td>
-<td>An enumeration.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../api/qiskit.chemistry.drivers.InitialGuess.html#qiskit.chemistry.drivers.InitialGuess" title="qiskit.chemistry.drivers.InitialGuess"><code class="xref py py-obj docutils literal notranslate"><span class="pre">InitialGuess</span></code></a></p></td>
+<td><p>An enumeration.</p></td>
 </tr>
 </tbody>
 </table>

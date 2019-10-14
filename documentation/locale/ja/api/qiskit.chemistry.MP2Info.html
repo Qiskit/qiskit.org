@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,6 +48,8 @@
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/js/themeExt.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="索引" href="../genindex.html" />
@@ -625,6 +626,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1215,6 +1222,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1261,142 +1274,139 @@
 <h1>MP2Info<a class="headerlink" href="#mp2info" title="このヘッドラインへのパーマリンク">¶</a></h1>
 <dl class="class">
 <dt id="qiskit.chemistry.MP2Info">
-<em class="property">class </em><code class="descname">MP2Info</code><span class="sig-paren">(</span><em>qmolecule</em>, <em>threshold=1e-12</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/chemistry/mp2info.html#MP2Info"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.chemistry.MP2Info" title="この定義へのパーマリンク">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">MP2Info</code><span class="sig-paren">(</span><em class="sig-param">qmolecule</em>, <em class="sig-param">threshold=1e-12</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/chemistry/mp2info.html#MP2Info"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.chemistry.MP2Info" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>A utility class for Moller-Plesset 2nd order (MP2) information</p>
-<dl class="docutils">
-<dt>Each double excitation given by [i,a,j,b] has a coefficient computed using</dt>
-<dd>coeff = -(2 * Tiajb - Tibja)/(oe[b] + oe[a] - oe[i] - oe[j])</dd>
+<dl class="simple">
+<dt>Each double excitation given by [i,a,j,b] has a coefficient computed using</dt><dd><p>coeff = -(2 * Tiajb - Tibja)/(oe[b] + oe[a] - oe[i] - oe[j])</p>
+</dd>
 </dl>
 <p>where oe[] is the orbital energy</p>
-<dl class="docutils">
-<dt>and an energy delta given by</dt>
-<dd>e_delta = coeff * Tiajb</dd>
+<dl class="simple">
+<dt>and an energy delta given by</dt><dd><p>e_delta = coeff * Tiajb</p>
+</dd>
 </dl>
 <p>All the computations are done using the molecule orbitals but the indexes used
 in the excitation information passed in and out are in the block spin orbital
 numbering as normally used by the chemistry stack.</p>
+<p>A utility class for MP2 info</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>qmolecule</strong> (<a class="reference internal" href="qiskit.chemistry.QMolecule.html#qiskit.chemistry.QMolecule" title="qiskit.chemistry.QMolecule"><em>QMolecule</em></a>) -- QMolecule from chemistry driver</p></li>
+<li><p><strong>threshold</strong> (<em>float</em>) -- Computed coefficients and energy deltas will be set to
+zero if their value is below this threshold</p></li>
+</ul>
+</dd>
+</dl>
 <p class="rubric">Attributes Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.chemistry.MP2Info.mp2_delta" title="qiskit.chemistry.MP2Info.mp2_delta"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mp2_delta</span></code></a></td>
-<td>Get the MP2 delta energy correction for the molecule</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.chemistry.MP2Info.mp2_delta" title="qiskit.chemistry.MP2Info.mp2_delta"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mp2_delta</span></code></a></p></td>
+<td><p>Get the MP2 delta energy correction for the molecule</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.chemistry.MP2Info.mp2_energy" title="qiskit.chemistry.MP2Info.mp2_energy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mp2_energy</span></code></a></td>
-<td>Get the MP2 energy for the molecule</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.chemistry.MP2Info.mp2_energy" title="qiskit.chemistry.MP2Info.mp2_energy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mp2_energy</span></code></a></p></td>
+<td><p>Get the MP2 energy for the molecule</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Methods Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.chemistry.MP2Info.mp2_get_term_info" title="qiskit.chemistry.MP2Info.mp2_get_term_info"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mp2_get_term_info</span></code></a>(excitation_list[,&nbsp;...])</td>
-<td>With a reduced active space the set of used excitations can be less than allowing all available excitations.</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.chemistry.MP2Info.mp2_get_term_info" title="qiskit.chemistry.MP2Info.mp2_get_term_info"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mp2_get_term_info</span></code></a>(excitation_list[, ...])</p></td>
+<td><p>With a reduced active space the set of used excitations can be less than allowing all available excitations.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.chemistry.MP2Info.mp2_terms" title="qiskit.chemistry.MP2Info.mp2_terms"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mp2_terms</span></code></a>([freeze_core,&nbsp;orbital_reduction])</td>
-<td>Gets the set of MP2 terms for the molecule taking into account index adjustments due to frozen core and/or other orbital reduction</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.chemistry.MP2Info.mp2_terms" title="qiskit.chemistry.MP2Info.mp2_terms"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mp2_terms</span></code></a>([freeze_core, orbital_reduction])</p></td>
+<td><p>Gets the set of MP2 terms for the molecule taking into account index adjustments due to frozen core and/or other orbital reduction</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Attributes Documentation</p>
 <dl class="attribute">
 <dt id="qiskit.chemistry.MP2Info.mp2_delta">
-<code class="descname">mp2_delta</code><a class="headerlink" href="#qiskit.chemistry.MP2Info.mp2_delta" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">mp2_delta</code><a class="headerlink" href="#qiskit.chemistry.MP2Info.mp2_delta" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Get the MP2 delta energy correction for the molecule</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">戻り値:</th><td class="field-body">The MP2 delta energy</td>
-</tr>
-<tr class="field-even field"><th class="field-name">戻り値の型:</th><td class="field-body">float</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">戻り値</dt>
+<dd class="field-odd"><p>The MP2 delta energy</p>
+</dd>
+<dt class="field-even">戻り値の型</dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.chemistry.MP2Info.mp2_energy">
-<code class="descname">mp2_energy</code><a class="headerlink" href="#qiskit.chemistry.MP2Info.mp2_energy" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">mp2_energy</code><a class="headerlink" href="#qiskit.chemistry.MP2Info.mp2_energy" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Get the MP2 energy for the molecule</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">戻り値:</th><td class="field-body">The MP2 energy</td>
-</tr>
-<tr class="field-even field"><th class="field-name">戻り値の型:</th><td class="field-body">float</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">戻り値</dt>
+<dd class="field-odd"><p>The MP2 energy</p>
+</dd>
+<dt class="field-even">戻り値の型</dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
 </dd></dl>
 
 <p class="rubric">Methods Documentation</p>
 <dl class="method">
 <dt id="qiskit.chemistry.MP2Info.mp2_get_term_info">
-<code class="descname">mp2_get_term_info</code><span class="sig-paren">(</span><em>excitation_list</em>, <em>freeze_core=False</em>, <em>orbital_reduction=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/chemistry/mp2info.html#MP2Info.mp2_get_term_info"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.chemistry.MP2Info.mp2_get_term_info" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">mp2_get_term_info</code><span class="sig-paren">(</span><em class="sig-param">excitation_list</em>, <em class="sig-param">freeze_core=False</em>, <em class="sig-param">orbital_reduction=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/chemistry/mp2info.html#MP2Info.mp2_get_term_info"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.chemistry.MP2Info.mp2_get_term_info" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>With a reduced active space the set of used excitations can be less than allowing
 all available excitations. Given a (sub)set of excitations in the space this will return
 a list of correlation coefficients and a list of correlation energies ordered as per
 the excitation list provided.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first simple">
-<li><strong>excitation_list</strong> (<em>list</em>) -- A list of excitations for which to get the coeff and e_delta</li>
-<li><strong>freeze_core</strong> (<em>bool</em>) -- Whether core orbitals are frozen or not</li>
-<li><strong>orbital_reduction</strong> (<em>list</em>) -- An optional list of ints indicating removed orbitals</li>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>excitation_list</strong> (<em>list</em>) -- A list of excitations for which to get the coeff and e_delta</p></li>
+<li><p><strong>freeze_core</strong> (<em>bool</em>) -- Whether core orbitals are frozen or not</p></li>
+<li><p><strong>orbital_reduction</strong> (<em>list</em>) -- An optional list of ints indicating removed orbitals</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first">List of coefficients and list of energy deltas</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><p class="first last">list, list</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">戻り値</dt>
+<dd class="field-even"><p>List of coefficients and list of energy deltas</p>
+</dd>
+<dt class="field-odd">戻り値の型</dt>
+<dd class="field-odd"><p>list, list</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.chemistry.MP2Info.mp2_terms">
-<code class="descname">mp2_terms</code><span class="sig-paren">(</span><em>freeze_core=False</em>, <em>orbital_reduction=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/chemistry/mp2info.html#MP2Info.mp2_terms"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.chemistry.MP2Info.mp2_terms" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">mp2_terms</code><span class="sig-paren">(</span><em class="sig-param">freeze_core=False</em>, <em class="sig-param">orbital_reduction=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/chemistry/mp2info.html#MP2Info.mp2_terms"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.chemistry.MP2Info.mp2_terms" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Gets the set of MP2 terms for the molecule taking into account index adjustments
 due to frozen core and/or other orbital reduction</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first simple">
-<li><strong>freeze_core</strong> (<em>bool</em>) -- Whether core orbitals are frozen or not</li>
-<li><strong>orbital_reduction</strong> (<em>list</em>) -- An optional list of ints indicating removed orbitals</li>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>freeze_core</strong> (<em>bool</em>) -- Whether core orbitals are frozen or not</p></li>
+<li><p><strong>orbital_reduction</strong> (<em>list</em>) -- An optional list of ints indicating removed orbitals</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first"><dl class="docutils">
-<dt>A dictionary of excitations where the key is a string in the form</dt>
-<dd><p class="first last">from_to_from_to e.g. 0_4_6_10 and the value is a tuple of
+</dd>
+<dt class="field-even">戻り値</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>A dictionary of excitations where the key is a string in the form</dt><dd><p>from_to_from_to e.g. 0_4_6_10 and the value is a tuple of
 (coeff, e_delta)</p>
 </dd>
 </dl>
 </p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><p class="first last">dict</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-odd">戻り値の型</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>

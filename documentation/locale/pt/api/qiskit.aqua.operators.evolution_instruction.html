@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,6 +48,8 @@
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/js/themeExt.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Índice" href="../genindex.html" />
@@ -625,6 +626,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1215,6 +1222,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1261,32 +1274,27 @@
 <h1>evolution_instruction<a class="headerlink" href="#evolution-instruction" title="Link permanente para este título">¶</a></h1>
 <dl class="function">
 <dt id="qiskit.aqua.operators.evolution_instruction">
-<code class="descname">evolution_instruction</code><span class="sig-paren">(</span><em>pauli_list</em>, <em>evo_time</em>, <em>num_time_slices</em>, <em>controlled=False</em>, <em>power=1</em>, <em>use_basis_gates=True</em>, <em>shallow_slicing=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/operators/common.html#evolution_instruction"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.aqua.operators.evolution_instruction" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">evolution_instruction</code><span class="sig-paren">(</span><em class="sig-param">pauli_list</em>, <em class="sig-param">evo_time</em>, <em class="sig-param">num_time_slices</em>, <em class="sig-param">controlled=False</em>, <em class="sig-param">power=1</em>, <em class="sig-param">use_basis_gates=True</em>, <em class="sig-param">shallow_slicing=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/operators/common.html#evolution_instruction"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.aqua.operators.evolution_instruction" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Construct the evolution circuit according to the supplied specification.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parâmetros:</th><td class="field-body"><ul class="first simple">
-<li><strong>pauli_list</strong> (<em>list</em><em>(</em><em>[</em><em>[</em><em>complex</em><em>, </em><a class="reference internal" href="qiskit.quantum_info.Pauli.html#qiskit.quantum_info.Pauli" title="qiskit.quantum_info.Pauli"><em>Pauli</em></a><em>]</em><em>]</em><em>)</em>) – The list of pauli terms corresponding to a single time slice to be evolved</li>
-<li><strong>evo_time</strong> (<em>complex | float</em>) – The evolution time</li>
-<li><strong>num_time_slices</strong> (<em>int</em>) – The number of time slices for the expansion</li>
-<li><strong>controlled</strong> (<em>bool</em><em>, </em><em>optional</em>) – Controlled circuit or not</li>
-<li><strong>power</strong> (<em>int</em><em>, </em><em>optional</em>) – The power to which the unitary operator is to be raised</li>
-<li><strong>use_basis_gates</strong> (<em>bool</em><em>, </em><em>optional</em>) – boolean flag for indicating only using basis gates when building circuit.</li>
-<li><strong>shallow_slicing</strong> (<em>bool</em><em>, </em><em>optional</em>) – boolean flag for indicating using shallow qc.data reference repetition for slicing</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pauli_list</strong> (<em>list</em><em>(</em><em>[</em><em>[</em><em>complex</em><em>, </em><a class="reference internal" href="qiskit.quantum_info.Pauli.html#qiskit.quantum_info.Pauli" title="qiskit.quantum_info.Pauli"><em>Pauli</em></a><em>]</em><em>]</em><em>)</em>) – The list of pauli terms corresponding to a single time slice to be evolved</p></li>
+<li><p><strong>evo_time</strong> (<em>complex | float</em>) – The evolution time</p></li>
+<li><p><strong>num_time_slices</strong> (<em>int</em>) – The number of time slices for the expansion</p></li>
+<li><p><strong>controlled</strong> (<em>bool</em><em>, </em><em>optional</em>) – Controlled circuit or not</p></li>
+<li><p><strong>power</strong> (<em>int</em><em>, </em><em>optional</em>) – The power to which the unitary operator is to be raised</p></li>
+<li><p><strong>use_basis_gates</strong> (<em>bool</em><em>, </em><em>optional</em>) – boolean flag for indicating only using basis gates when building circuit.</p></li>
+<li><p><strong>shallow_slicing</strong> (<em>bool</em><em>, </em><em>optional</em>) – boolean flag for indicating using shallow qc.data reference repetition for slicing</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Retorno:</th><td class="field-body"><p class="first">The InstructionSet corresponding to specified evolution.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name" colspan="2">Tipo de retorno:</th></tr>
-<tr class="field-odd field"><td>&#160;</td><td class="field-body"><p class="first last"><a class="reference internal" href="qiskit.circuit.InstructionSet.html#qiskit.circuit.InstructionSet" title="qiskit.circuit.InstructionSet">InstructionSet</a></p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Retorno</dt>
+<dd class="field-even"><p>The InstructionSet corresponding to specified evolution.</p>
+</dd>
+<dt class="field-odd">Tipo de retorno</dt>
+<dd class="field-odd"><p><a class="reference internal" href="qiskit.circuit.InstructionSet.html#qiskit.circuit.InstructionSet" title="qiskit.circuit.InstructionSet">InstructionSet</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 </div>

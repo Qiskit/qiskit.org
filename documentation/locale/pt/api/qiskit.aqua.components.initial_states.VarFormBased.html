@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,6 +48,8 @@
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/js/themeExt.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Índice" href="../genindex.html" />
@@ -625,6 +626,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1215,6 +1222,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1261,51 +1274,55 @@
 <h1>VarFormBased<a class="headerlink" href="#varformbased" title="Link permanente para este título">¶</a></h1>
 <dl class="class">
 <dt id="qiskit.aqua.components.initial_states.VarFormBased">
-<em class="property">class </em><code class="descname">VarFormBased</code><span class="sig-paren">(</span><em>var_form</em>, <em>params</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/components/initial_states/var_form_based.html#VarFormBased"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.aqua.components.initial_states.VarFormBased" title="Link permanente para esta definição">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">VarFormBased</code><span class="sig-paren">(</span><em class="sig-param">var_form</em>, <em class="sig-param">params</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/components/initial_states/var_form_based.html#VarFormBased"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.aqua.components.initial_states.VarFormBased" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>An initial state derived from a variational form.
 Intended to be used programmatically only.</p>
+<p>Constructor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>var_form</strong> (<em>VariationalForm</em>) – the variational form.</p></li>
+<li><p><strong>params</strong> (<em>list</em><em> or </em><em>numpy.ndarray</em>) – parameter for the variational form.</p></li>
+</ul>
+</dd>
+</dl>
 <p class="rubric">Methods Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.components.initial_states.VarFormBased.construct_circuit" title="qiskit.aqua.components.initial_states.VarFormBased.construct_circuit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">construct_circuit</span></code></a>([mode,&nbsp;register])</td>
-<td>Construct the statevector of desired initial state.</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.components.initial_states.VarFormBased.construct_circuit" title="qiskit.aqua.components.initial_states.VarFormBased.construct_circuit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">construct_circuit</span></code></a>([mode, register])</p></td>
+<td><p>Construct the statevector of desired initial state.</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Methods Documentation</p>
 <dl class="method">
 <dt id="qiskit.aqua.components.initial_states.VarFormBased.construct_circuit">
-<code class="descname">construct_circuit</code><span class="sig-paren">(</span><em>mode='circuit'</em>, <em>register=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/components/initial_states/var_form_based.html#VarFormBased.construct_circuit"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.aqua.components.initial_states.VarFormBased.construct_circuit" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">construct_circuit</code><span class="sig-paren">(</span><em class="sig-param">mode='circuit'</em>, <em class="sig-param">register=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/components/initial_states/var_form_based.html#VarFormBased.construct_circuit"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.aqua.components.initial_states.VarFormBased.construct_circuit" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Construct the statevector of desired initial state.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parâmetros:</th><td class="field-body"><ul class="first simple">
-<li><strong>mode</strong> (<em>string</em>) – <cite>vector</cite> or <cite>circuit</cite>. The <cite>vector</cite> mode produces the vector.
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mode</strong> (<em>string</em>) – <cite>vector</cite> or <cite>circuit</cite>. The <cite>vector</cite> mode produces the vector.
 While the <cite>circuit</cite> constructs the quantum circuit corresponding that
-vector.</li>
-<li><strong>register</strong> (<a class="reference internal" href="qiskit.circuit.QuantumRegister.html#qiskit.circuit.QuantumRegister" title="qiskit.circuit.QuantumRegister"><em>QuantumRegister</em></a>) – qubits for circuit construction.</li>
+vector.</p></li>
+<li><p><strong>register</strong> (<a class="reference internal" href="qiskit.circuit.QuantumRegister.html#qiskit.circuit.QuantumRegister" title="qiskit.circuit.QuantumRegister"><em>QuantumRegister</em></a>) – qubits for circuit construction.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Retorno:</th><td class="field-body"><p class="first">statevector.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name" colspan="2">Tipo de retorno:</th></tr>
-<tr class="field-odd field"><td>&#160;</td><td class="field-body"><p class="first"><a class="reference internal" href="qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit" title="qiskit.circuit.QuantumCircuit">QuantumCircuit</a> or numpy.ndarray</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal notranslate"><span class="pre">AquaError</span></code> – when mode is not “vector” or “circuit”.</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Retorno</dt>
+<dd class="field-even"><p>statevector.</p>
+</dd>
+<dt class="field-odd">Tipo de retorno</dt>
+<dd class="field-odd"><p><a class="reference internal" href="qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit" title="qiskit.circuit.QuantumCircuit">QuantumCircuit</a> or numpy.ndarray</p>
+</dd>
+<dt class="field-even">Levanta</dt>
+<dd class="field-even"><p><a class="reference internal" href="qiskit.aqua.AquaError.html#qiskit.aqua.AquaError" title="qiskit.aqua.AquaError"><strong>AquaError</strong></a> – when mode is not “vector” or “circuit”.</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>

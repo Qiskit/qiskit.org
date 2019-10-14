@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,6 +48,8 @@
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/js/themeExt.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Índice" href="../genindex.html" />
@@ -625,6 +626,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1215,6 +1222,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1261,120 +1274,139 @@
 <h1>LoConfig<a class="headerlink" href="#loconfig" title="Link permanente para este título">¶</a></h1>
 <dl class="class">
 <dt id="qiskit.pulse.LoConfig">
-<em class="property">class </em><code class="descname">LoConfig</code><span class="sig-paren">(</span><em>channel_los: Optional[Dict[qiskit.pulse.channels.pulse_channels.PulseChannel</em>, <em>float]] = None</em>, <em>lo_ranges: Optional[Dict[qiskit.pulse.channels.pulse_channels.PulseChannel</em>, <em>Union[qiskit.pulse.configuration.LoRange</em>, <em>Tuple[int]]]] = None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/pulse/configuration.html#LoConfig"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.pulse.LoConfig" title="Link permanente para esta definição">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">LoConfig</code><span class="sig-paren">(</span><em class="sig-param">channel_los=None</em>, <em class="sig-param">lo_ranges=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/pulse/configuration.html#LoConfig"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.pulse.LoConfig" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Pulse channel LO frequency container.</p>
+<p>Lo channel configuration data structure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>channel_los</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">PulseChannel</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>]]) – Dictionary of mappings from configurable channel to lo</p></li>
+<li><p><strong>lo_ranges</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">PulseChannel</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">LoRange</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]]]]) – Dictionary of mappings to be enforced from configurable channel to <cite>LoRange</cite></p></li>
+</ul>
+</dd>
+<dt class="field-even">Levanta</dt>
+<dd class="field-even"><p><a class="reference internal" href="qiskit.pulse.PulseError.html#qiskit.pulse.PulseError" title="qiskit.pulse.PulseError"><strong>PulseError</strong></a> – If channel is not configurable or set lo is out of range.</p>
+</dd>
+</dl>
 <p class="rubric">Attributes Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.pulse.LoConfig.meas_los" title="qiskit.pulse.LoConfig.meas_los"><code class="xref py py-obj docutils literal notranslate"><span class="pre">meas_los</span></code></a></td>
-<td>Returns dictionary mapping measure channels (MeasureChannel) to los.</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.pulse.LoConfig.meas_los" title="qiskit.pulse.LoConfig.meas_los"><code class="xref py py-obj docutils literal notranslate"><span class="pre">meas_los</span></code></a></p></td>
+<td><p>Returns dictionary mapping measure channels (MeasureChannel) to los.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.pulse.LoConfig.qubit_los" title="qiskit.pulse.LoConfig.qubit_los"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qubit_los</span></code></a></td>
-<td>Returns dictionary mapping qubit channels (DriveChannel) to los.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.pulse.LoConfig.qubit_los" title="qiskit.pulse.LoConfig.qubit_los"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qubit_los</span></code></a></p></td>
+<td><p>Returns dictionary mapping qubit channels (DriveChannel) to los.</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Methods Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.pulse.LoConfig.add_lo" title="qiskit.pulse.LoConfig.add_lo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_lo</span></code></a>(channel,&nbsp;…)</td>
-<td>Add a lo mapping for a channel.</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.pulse.LoConfig.add_lo" title="qiskit.pulse.LoConfig.add_lo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_lo</span></code></a>(channel, freq)</p></td>
+<td><p>Add a lo mapping for a channel.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.pulse.LoConfig.add_lo_range" title="qiskit.pulse.LoConfig.add_lo_range"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_lo_range</span></code></a>(channel,&nbsp;lo_range,&nbsp;Tuple[int]])</td>
-<td>Add lo range to configuration.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.pulse.LoConfig.add_lo_range" title="qiskit.pulse.LoConfig.add_lo_range"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_lo_range</span></code></a>(channel, lo_range)</p></td>
+<td><p>Add lo range to configuration.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.pulse.LoConfig.channel_lo" title="qiskit.pulse.LoConfig.channel_lo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">channel_lo</span></code></a>(channel,&nbsp;…)</td>
-<td>Return channel lo.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.pulse.LoConfig.channel_lo" title="qiskit.pulse.LoConfig.channel_lo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">channel_lo</span></code></a>(channel)</p></td>
+<td><p>Return channel lo.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.pulse.LoConfig.check_lo" title="qiskit.pulse.LoConfig.check_lo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_lo</span></code></a>(channel,&nbsp;…)</td>
-<td>Check that lo is valid for channel.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.pulse.LoConfig.check_lo" title="qiskit.pulse.LoConfig.check_lo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_lo</span></code></a>(channel, freq)</p></td>
+<td><p>Check that lo is valid for channel.</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Attributes Documentation</p>
 <dl class="attribute">
 <dt id="qiskit.pulse.LoConfig.meas_los">
-<code class="descname">meas_los</code><a class="headerlink" href="#qiskit.pulse.LoConfig.meas_los" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">meas_los</code><a class="headerlink" href="#qiskit.pulse.LoConfig.meas_los" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Returns dictionary mapping measure channels (MeasureChannel) to los.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Tipo de retorno</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code>[~KT, ~VT]</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.pulse.LoConfig.qubit_los">
-<code class="descname">qubit_los</code><a class="headerlink" href="#qiskit.pulse.LoConfig.qubit_los" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">qubit_los</code><a class="headerlink" href="#qiskit.pulse.LoConfig.qubit_los" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Returns dictionary mapping qubit channels (DriveChannel) to los.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Tipo de retorno</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code>[~KT, ~VT]</p>
+</dd>
+</dl>
 </dd></dl>
 
 <p class="rubric">Methods Documentation</p>
 <dl class="method">
 <dt id="qiskit.pulse.LoConfig.add_lo">
-<code class="descname">add_lo</code><span class="sig-paren">(</span><em>channel: Union[qiskit.pulse.channels.pulse_channels.DriveChannel, qiskit.pulse.channels.pulse_channels.MeasureChannel], freq: float</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/pulse/configuration.html#LoConfig.add_lo"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.pulse.LoConfig.add_lo" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">add_lo</code><span class="sig-paren">(</span><em class="sig-param">channel</em>, <em class="sig-param">freq</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/pulse/configuration.html#LoConfig.add_lo"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.pulse.LoConfig.add_lo" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Add a lo mapping for a channel.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.pulse.LoConfig.add_lo_range">
-<code class="descname">add_lo_range</code><span class="sig-paren">(</span><em>channel: qiskit.pulse.channels.pulse_channels.DriveChannel, lo_range: Union[qiskit.pulse.configuration.LoRange, Tuple[int]]</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/pulse/configuration.html#LoConfig.add_lo_range"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.pulse.LoConfig.add_lo_range" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">add_lo_range</code><span class="sig-paren">(</span><em class="sig-param">channel</em>, <em class="sig-param">lo_range</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/pulse/configuration.html#LoConfig.add_lo_range"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.pulse.LoConfig.add_lo_range" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Add lo range to configuration.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parâmetros:</th><td class="field-body"><ul class="first last simple">
-<li><strong>channel</strong> – Channel to add lo range for</li>
-<li><strong>lo_range</strong> – Lo range to add</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>channel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DriveChannel</span></code>) – Channel to add lo range for</p></li>
+<li><p><strong>lo_range</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">LoRange</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]]) – Lo range to add</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.pulse.LoConfig.channel_lo">
-<code class="descname">channel_lo</code><span class="sig-paren">(</span><em>channel: Union[qiskit.pulse.channels.pulse_channels.DriveChannel, qiskit.pulse.channels.pulse_channels.MeasureChannel]</em><span class="sig-paren">)</span> &#x2192; float<a class="reference internal" href="../_modules/qiskit/pulse/configuration.html#LoConfig.channel_lo"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.pulse.LoConfig.channel_lo" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">channel_lo</code><span class="sig-paren">(</span><em class="sig-param">channel</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/pulse/configuration.html#LoConfig.channel_lo"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.pulse.LoConfig.channel_lo" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Return channel lo.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parâmetros:</th><td class="field-body"><strong>channel</strong> – Channel to get lo for</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference internal" href="qiskit.pulse.PulseError.html#qiskit.pulse.PulseError" title="qiskit.pulse.PulseError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">PulseError</span></code></a> – If channel is not configured</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Retorno:</th><td class="field-body">Lo of supplied channel if present</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><p><strong>channel</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">DriveChannel</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">MeasureChannel</span></code>]) – Channel to get lo for</p>
+</dd>
+<dt class="field-even">Levanta</dt>
+<dd class="field-even"><p><a class="reference internal" href="qiskit.pulse.PulseError.html#qiskit.pulse.PulseError" title="qiskit.pulse.PulseError"><strong>PulseError</strong></a> – If channel is not configured</p>
+</dd>
+<dt class="field-odd">Tipo de retorno</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+<dt class="field-even">Retorno</dt>
+<dd class="field-even"><p>Lo of supplied channel if present</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.pulse.LoConfig.check_lo">
-<code class="descname">check_lo</code><span class="sig-paren">(</span><em>channel: Union[qiskit.pulse.channels.pulse_channels.DriveChannel, qiskit.pulse.channels.pulse_channels.MeasureChannel], freq: float</em><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/qiskit/pulse/configuration.html#LoConfig.check_lo"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.pulse.LoConfig.check_lo" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">check_lo</code><span class="sig-paren">(</span><em class="sig-param">channel</em>, <em class="sig-param">freq</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/pulse/configuration.html#LoConfig.check_lo"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.pulse.LoConfig.check_lo" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Check that lo is valid for channel.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parâmetros:</th><td class="field-body"><ul class="first simple">
-<li><strong>channel</strong> – Channel to validate lo for</li>
-<li><strong>freq</strong> – lo frequency</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>channel</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">DriveChannel</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">MeasureChannel</span></code>]) – Channel to validate lo for</p></li>
+<li><p><strong>freq</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – lo frequency</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference internal" href="qiskit.pulse.PulseError.html#qiskit.pulse.PulseError" title="qiskit.pulse.PulseError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">PulseError</span></code></a> – If freq is outside of channels range</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Levanta</dt>
+<dd class="field-even"><p><a class="reference internal" href="qiskit.pulse.PulseError.html#qiskit.pulse.PulseError" title="qiskit.pulse.PulseError"><strong>PulseError</strong></a> – If freq is outside of channels range</p>
+</dd>
+<dt class="field-odd">Tipo de retorno</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>

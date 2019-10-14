@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,6 +48,8 @@
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/js/themeExt.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Índice" href="../genindex.html" />
@@ -625,6 +626,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1215,6 +1222,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1261,152 +1274,158 @@
 <h1>RBFitter<a class="headerlink" href="#rbfitter" title="Link permanente para este título">¶</a></h1>
 <dl class="class">
 <dt id="qiskit.ignis.verification.randomized_benchmarking.RBFitter">
-<em class="property">class </em><code class="descname">RBFitter</code><span class="sig-paren">(</span><em>backend_result</em>, <em>cliff_lengths</em>, <em>rb_pattern=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/randomized_benchmarking/fitters.html#RBFitter"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.RBFitter" title="Link permanente para esta definição">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">RBFitter</code><span class="sig-paren">(</span><em class="sig-param">backend_result</em>, <em class="sig-param">cliff_lengths</em>, <em class="sig-param">rb_pattern=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/randomized_benchmarking/fitters.html#RBFitter"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.RBFitter" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.ignis.verification.randomized_benchmarking.fitters.RBFitterBase</span></code></p>
 <p>Class for fitters for randomized benchmarking</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>backend_result</strong> – list of results (qiskit.Result).</p></li>
+<li><p><strong>cliff_lengths</strong> – the Clifford lengths, 2D list i x j where i is the
+number of patterns, j is the number of cliffords lengths</p></li>
+<li><p><strong>rb_pattern</strong> – the pattern for the rb sequences.</p></li>
+</ul>
+</dd>
+</dl>
 <p class="rubric">Attributes Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.verification.randomized_benchmarking.RBFitter.cliff_lengths" title="qiskit.ignis.verification.randomized_benchmarking.RBFitter.cliff_lengths"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cliff_lengths</span></code></a></td>
-<td>Return clifford lengths.</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.ignis.verification.randomized_benchmarking.RBFitter.cliff_lengths" title="qiskit.ignis.verification.randomized_benchmarking.RBFitter.cliff_lengths"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cliff_lengths</span></code></a></p></td>
+<td><p>Return clifford lengths.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.ignis.verification.randomized_benchmarking.RBFitter.fit" title="qiskit.ignis.verification.randomized_benchmarking.RBFitter.fit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code></a></td>
-<td>Return fit.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.ignis.verification.randomized_benchmarking.RBFitter.fit" title="qiskit.ignis.verification.randomized_benchmarking.RBFitter.fit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code></a></p></td>
+<td><p>Return fit.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.verification.randomized_benchmarking.RBFitter.raw_data" title="qiskit.ignis.verification.randomized_benchmarking.RBFitter.raw_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">raw_data</span></code></a></td>
-<td>Return raw data.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.ignis.verification.randomized_benchmarking.RBFitter.raw_data" title="qiskit.ignis.verification.randomized_benchmarking.RBFitter.raw_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">raw_data</span></code></a></p></td>
+<td><p>Return raw data.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.ignis.verification.randomized_benchmarking.RBFitter.rb_fit_fun" title="qiskit.ignis.verification.randomized_benchmarking.RBFitter.rb_fit_fun"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rb_fit_fun</span></code></a></td>
-<td>Return the function rb_fit_fun.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.ignis.verification.randomized_benchmarking.RBFitter.rb_fit_fun" title="qiskit.ignis.verification.randomized_benchmarking.RBFitter.rb_fit_fun"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rb_fit_fun</span></code></a></p></td>
+<td><p>Return the function rb_fit_fun.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.verification.randomized_benchmarking.RBFitter.results" title="qiskit.ignis.verification.randomized_benchmarking.RBFitter.results"><code class="xref py py-obj docutils literal notranslate"><span class="pre">results</span></code></a></td>
-<td>Return all the results.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.ignis.verification.randomized_benchmarking.RBFitter.results" title="qiskit.ignis.verification.randomized_benchmarking.RBFitter.results"><code class="xref py py-obj docutils literal notranslate"><span class="pre">results</span></code></a></p></td>
+<td><p>Return all the results.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.ignis.verification.randomized_benchmarking.RBFitter.seeds" title="qiskit.ignis.verification.randomized_benchmarking.RBFitter.seeds"><code class="xref py py-obj docutils literal notranslate"><span class="pre">seeds</span></code></a></td>
-<td>Return the number of loaded seeds.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.ignis.verification.randomized_benchmarking.RBFitter.seeds" title="qiskit.ignis.verification.randomized_benchmarking.RBFitter.seeds"><code class="xref py py-obj docutils literal notranslate"><span class="pre">seeds</span></code></a></p></td>
+<td><p>Return the number of loaded seeds.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.verification.randomized_benchmarking.RBFitter.ydata" title="qiskit.ignis.verification.randomized_benchmarking.RBFitter.ydata"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ydata</span></code></a></td>
-<td>Return ydata (means and std devs).</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.ignis.verification.randomized_benchmarking.RBFitter.ydata" title="qiskit.ignis.verification.randomized_benchmarking.RBFitter.ydata"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ydata</span></code></a></p></td>
+<td><p>Return ydata (means and std devs).</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Methods Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.verification.randomized_benchmarking.RBFitter.add_data" title="qiskit.ignis.verification.randomized_benchmarking.RBFitter.add_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_data</span></code></a>(new_backend_result[,&nbsp;rerun_fit])</td>
-<td>Add a new result.</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.ignis.verification.randomized_benchmarking.RBFitter.add_data" title="qiskit.ignis.verification.randomized_benchmarking.RBFitter.add_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_data</span></code></a>(new_backend_result[, rerun_fit])</p></td>
+<td><p>Add a new result.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.ignis.verification.randomized_benchmarking.RBFitter.calc_data" title="qiskit.ignis.verification.randomized_benchmarking.RBFitter.calc_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calc_data</span></code></a>()</td>
-<td>Retrieve probabilities of success from execution results.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.ignis.verification.randomized_benchmarking.RBFitter.calc_data" title="qiskit.ignis.verification.randomized_benchmarking.RBFitter.calc_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calc_data</span></code></a>()</p></td>
+<td><p>Retrieve probabilities of success from execution results.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.verification.randomized_benchmarking.RBFitter.calc_statistics" title="qiskit.ignis.verification.randomized_benchmarking.RBFitter.calc_statistics"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calc_statistics</span></code></a>()</td>
-<td>Extract averages and std dev from the raw data (self._raw_data).</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.ignis.verification.randomized_benchmarking.RBFitter.calc_statistics" title="qiskit.ignis.verification.randomized_benchmarking.RBFitter.calc_statistics"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calc_statistics</span></code></a>()</p></td>
+<td><p>Extract averages and std dev from the raw data (self._raw_data).</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.ignis.verification.randomized_benchmarking.RBFitter.fit_data" title="qiskit.ignis.verification.randomized_benchmarking.RBFitter.fit_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_data</span></code></a>()</td>
-<td>Fit the RB results to an exponential curve.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.ignis.verification.randomized_benchmarking.RBFitter.fit_data" title="qiskit.ignis.verification.randomized_benchmarking.RBFitter.fit_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_data</span></code></a>()</p></td>
+<td><p>Fit the RB results to an exponential curve.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.verification.randomized_benchmarking.RBFitter.fit_data_pattern" title="qiskit.ignis.verification.randomized_benchmarking.RBFitter.fit_data_pattern"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_data_pattern</span></code></a>(patt_ind,&nbsp;fit_guess)</td>
-<td>Fit the RB results of a particular pattern to an exponential curve.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.ignis.verification.randomized_benchmarking.RBFitter.fit_data_pattern" title="qiskit.ignis.verification.randomized_benchmarking.RBFitter.fit_data_pattern"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_data_pattern</span></code></a>(patt_ind, fit_guess)</p></td>
+<td><p>Fit the RB results of a particular pattern to an exponential curve.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.ignis.verification.randomized_benchmarking.RBFitter.plot_rb_data" title="qiskit.ignis.verification.randomized_benchmarking.RBFitter.plot_rb_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_rb_data</span></code></a>([pattern_index,&nbsp;ax,&nbsp;add_label,&nbsp;…])</td>
-<td>Plot randomized benchmarking data of a single pattern.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.ignis.verification.randomized_benchmarking.RBFitter.plot_rb_data" title="qiskit.ignis.verification.randomized_benchmarking.RBFitter.plot_rb_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_rb_data</span></code></a>([pattern_index, ax, add_label, …])</p></td>
+<td><p>Plot randomized benchmarking data of a single pattern.</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Attributes Documentation</p>
 <dl class="attribute">
 <dt id="qiskit.ignis.verification.randomized_benchmarking.RBFitter.cliff_lengths">
-<code class="descname">cliff_lengths</code><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.RBFitter.cliff_lengths" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">cliff_lengths</code><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.RBFitter.cliff_lengths" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Return clifford lengths.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.ignis.verification.randomized_benchmarking.RBFitter.fit">
-<code class="descname">fit</code><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.RBFitter.fit" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">fit</code><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.RBFitter.fit" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Return fit.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.ignis.verification.randomized_benchmarking.RBFitter.raw_data">
-<code class="descname">raw_data</code><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.RBFitter.raw_data" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">raw_data</code><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.RBFitter.raw_data" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Return raw data.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.ignis.verification.randomized_benchmarking.RBFitter.rb_fit_fun">
-<code class="descname">rb_fit_fun</code><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.RBFitter.rb_fit_fun" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">rb_fit_fun</code><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.RBFitter.rb_fit_fun" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Return the function rb_fit_fun.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.ignis.verification.randomized_benchmarking.RBFitter.results">
-<code class="descname">results</code><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.RBFitter.results" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">results</code><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.RBFitter.results" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Return all the results.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.ignis.verification.randomized_benchmarking.RBFitter.seeds">
-<code class="descname">seeds</code><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.RBFitter.seeds" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">seeds</code><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.RBFitter.seeds" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Return the number of loaded seeds.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.ignis.verification.randomized_benchmarking.RBFitter.ydata">
-<code class="descname">ydata</code><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.RBFitter.ydata" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">ydata</code><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.RBFitter.ydata" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Return ydata (means and std devs).</p>
 </dd></dl>
 
 <p class="rubric">Methods Documentation</p>
 <dl class="method">
 <dt id="qiskit.ignis.verification.randomized_benchmarking.RBFitter.add_data">
-<code class="descname">add_data</code><span class="sig-paren">(</span><em>new_backend_result</em>, <em>rerun_fit=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/randomized_benchmarking/fitters.html#RBFitter.add_data"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.RBFitter.add_data" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">add_data</code><span class="sig-paren">(</span><em class="sig-param">new_backend_result</em>, <em class="sig-param">rerun_fit=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/randomized_benchmarking/fitters.html#RBFitter.add_data"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.RBFitter.add_data" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Add a new result. Re calculate the raw data, means and
 fit.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parâmetros:</th><td class="field-body"><ul class="first last simple">
-<li><strong>new_backend_result</strong> – list of rb results</li>
-<li><strong>rerun_fit</strong> – re caculate the means and fit the result</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>new_backend_result</strong> – list of rb results</p></li>
+<li><p><strong>rerun_fit</strong> – re caculate the means and fit the result</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
-<dl class="docutils">
-<dt>Additional information:</dt>
-<dd>Assumes that “result” was executed is
-the output of circuits generated by randomized_becnhmarking_seq,</dd>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Additional information:</dt><dd><p>Assumes that “result” was executed is
+the output of circuits generated by randomized_becnhmarking_seq,</p>
+</dd>
 </dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.ignis.verification.randomized_benchmarking.RBFitter.calc_data">
-<code class="descname">calc_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/randomized_benchmarking/fitters.html#RBFitter.calc_data"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.RBFitter.calc_data" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">calc_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/randomized_benchmarking/fitters.html#RBFitter.calc_data"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.RBFitter.calc_data" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Retrieve probabilities of success from execution results. Outputs
 results into an internal variable _raw_data which is a 3-dimensional
 list, where item (i,j,k) is the probability to measure the ground state
 for the set of qubits in pattern «i» for seed no. j and vector length
 self._cliff_lengths[i][k].</p>
-<dl class="docutils">
-<dt>Additional information:</dt>
-<dd>Assumes that “result” was executed is
-the output of circuits generated by randomized_becnhmarking_seq,</dd>
+<dl class="simple">
+<dt>Additional information:</dt><dd><p>Assumes that “result” was executed is
+the output of circuits generated by randomized_becnhmarking_seq,</p>
+</dd>
 </dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.ignis.verification.randomized_benchmarking.RBFitter.calc_statistics">
-<code class="descname">calc_statistics</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/randomized_benchmarking/fitters.html#RBFitter.calc_statistics"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.RBFitter.calc_statistics" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">calc_statistics</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/randomized_benchmarking/fitters.html#RBFitter.calc_statistics"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.RBFitter.calc_statistics" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Extract averages and std dev from the raw data (self._raw_data).
 Assumes that self._calc_data has been run. Output into internal
 _ydata variable:</p>
@@ -1415,31 +1434,32 @@ _ydata variable:</p>
 Dictionary ydata[i]:
 ydata[i][“mean”] is a numpy_array of length n;</p>
 <blockquote>
-<div>entry j of this array contains the mean probability of
+<div><p>entry j of this array contains the mean probability of
 success over seeds, for vector length
-self._cliff_lengths[i][j].</div></blockquote>
-<dl class="docutils">
-<dt>And ydata[i][“std”] is a numpy_array of length n;</dt>
-<dd>entry j of this array contains the std
+self._cliff_lengths[i][j].</p>
+</div></blockquote>
+<dl class="simple">
+<dt>And ydata[i][“std”] is a numpy_array of length n;</dt><dd><p>entry j of this array contains the std
 of the probability of success over seeds,
-for vector length self._cliff_lengths[i][j].</dd>
+for vector length self._cliff_lengths[i][j].</p>
+</dd>
 </dl>
 </div></blockquote>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.ignis.verification.randomized_benchmarking.RBFitter.fit_data">
-<code class="descname">fit_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/randomized_benchmarking/fitters.html#RBFitter.fit_data"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.RBFitter.fit_data" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">fit_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/randomized_benchmarking/fitters.html#RBFitter.fit_data"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.RBFitter.fit_data" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Fit the RB results to an exponential curve.</p>
 <p>Fit each of the patterns. Use the data to construct guess values
 for the fits</p>
-<dl class="docutils">
-<dt>Puts the results into a list of fit dictionaries:</dt>
-<dd><p class="first">where each dictionary corresponds to a pattern and has fields:
+<dl>
+<dt>Puts the results into a list of fit dictionaries:</dt><dd><p>where each dictionary corresponds to a pattern and has fields:
 “params” - three parameters of rb_fit_fun. The middle one is the</p>
 <blockquote>
-<div>exponent.</div></blockquote>
-<p class="last">“err” - the error limits of the parameters.
+<div><p>exponent.</p>
+</div></blockquote>
+<p>“err” - the error limits of the parameters.
 “epc” - error per Clifford</p>
 </dd>
 </dl>
@@ -1447,28 +1467,24 @@ for the fits</p>
 
 <dl class="method">
 <dt id="qiskit.ignis.verification.randomized_benchmarking.RBFitter.fit_data_pattern">
-<code class="descname">fit_data_pattern</code><span class="sig-paren">(</span><em>patt_ind</em>, <em>fit_guess</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/randomized_benchmarking/fitters.html#RBFitter.fit_data_pattern"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.RBFitter.fit_data_pattern" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">fit_data_pattern</code><span class="sig-paren">(</span><em class="sig-param">patt_ind</em>, <em class="sig-param">fit_guess</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/randomized_benchmarking/fitters.html#RBFitter.fit_data_pattern"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.RBFitter.fit_data_pattern" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Fit the RB results of a particular pattern
 to an exponential curve.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parâmetros:</th><td class="field-body"><ul class="first last simple">
-<li><strong>patt_ind</strong> – index of the data to fit</li>
-<li><strong>fit_guess</strong> – guess values for the fit</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>patt_ind</strong> – index of the data to fit</p></li>
+<li><p><strong>fit_guess</strong> – guess values for the fit</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
-<dl class="docutils">
-<dt>Puts the results into a list of fit dictionaries:</dt>
-<dd><p class="first">where each dictionary corresponds to a pattern and has fields:
+</dd>
+</dl>
+<dl>
+<dt>Puts the results into a list of fit dictionaries:</dt><dd><p>where each dictionary corresponds to a pattern and has fields:
 “params” - three parameters of rb_fit_fun. The middle one is the</p>
 <blockquote>
-<div>exponent.</div></blockquote>
-<p class="last">“err” - the error limits of the parameters.
+<div><p>exponent.</p>
+</div></blockquote>
+<p>“err” - the error limits of the parameters.
 “epc” - error per Clifford</p>
 </dd>
 </dl>
@@ -1476,25 +1492,21 @@ to an exponential curve.</p>
 
 <dl class="method">
 <dt id="qiskit.ignis.verification.randomized_benchmarking.RBFitter.plot_rb_data">
-<code class="descname">plot_rb_data</code><span class="sig-paren">(</span><em>pattern_index=0</em>, <em>ax=None</em>, <em>add_label=True</em>, <em>show_plt=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/randomized_benchmarking/fitters.html#RBFitter.plot_rb_data"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.RBFitter.plot_rb_data" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">plot_rb_data</code><span class="sig-paren">(</span><em class="sig-param">pattern_index=0</em>, <em class="sig-param">ax=None</em>, <em class="sig-param">add_label=True</em>, <em class="sig-param">show_plt=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/randomized_benchmarking/fitters.html#RBFitter.plot_rb_data"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.ignis.verification.randomized_benchmarking.RBFitter.plot_rb_data" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Plot randomized benchmarking data of a single pattern.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parâmetros:</th><td class="field-body"><ul class="first simple">
-<li><strong>pattern_index</strong> – which RB pattern to plot</li>
-<li><strong>ax</strong> (<em>Axes</em><em> or </em><em>None</em>) – plot axis (if passed in).</li>
-<li><strong>add_label</strong> (<em>bool</em>) – Add an EPC label.</li>
-<li><strong>show_plt</strong> (<em>bool</em>) – display the plot.</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pattern_index</strong> – which RB pattern to plot</p></li>
+<li><p><strong>ax</strong> (<em>Axes</em><em> or </em><em>None</em>) – plot axis (if passed in).</p></li>
+<li><p><strong>add_label</strong> (<em>bool</em>) – Add an EPC label.</p></li>
+<li><p><strong>show_plt</strong> (<em>bool</em>) – display the plot.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ImportError</span></code> – If matplotlib is not installed.</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Levanta</dt>
+<dd class="field-even"><p><strong>ImportError</strong> – If matplotlib is not installed.</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>

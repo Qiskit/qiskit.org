@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,6 +48,8 @@
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/js/themeExt.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Stichwortverzeichnis" href="../genindex.html" />
@@ -625,6 +626,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1215,6 +1222,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1261,111 +1274,120 @@
 <h1>ParameterExpression<a class="headerlink" href="#parameterexpression" title="Link zu dieser Überschrift">¶</a></h1>
 <dl class="class">
 <dt id="qiskit.circuit.ParameterExpression">
-<em class="property">class </em><code class="descname">ParameterExpression</code><span class="sig-paren">(</span><em>symbol_map</em>, <em>expr</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/circuit/parameterexpression.html#ParameterExpression"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.circuit.ParameterExpression" title="Link zu dieser Definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">ParameterExpression</code><span class="sig-paren">(</span><em class="sig-param">symbol_map</em>, <em class="sig-param">expr</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/circuit/parameterexpression.html#ParameterExpression"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.circuit.ParameterExpression" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>ParameterExpression class to enable creating expressions of Parameters.</p>
+<p>Create a new ParameterExpression.</p>
+<p>Not intended to be called directly, but to be instantiated via operations
+on other Parameter or ParameterExpression objects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>symbol_map</strong> (<em>dict</em>) – Mapping of Parameter instances to the sympy.Symbol
+serving as their placeholder in expr.</p></li>
+<li><p><strong>expr</strong> (<em>sympy.Expr</em>) – Expression of sympy.Symbols.</p></li>
+</ul>
+</dd>
+</dl>
 <p class="rubric">Attributes Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.circuit.ParameterExpression.parameters" title="qiskit.circuit.ParameterExpression.parameters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parameters</span></code></a></td>
-<td>Returns a set of the unbound Parameters in the expression.</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.circuit.ParameterExpression.parameters" title="qiskit.circuit.ParameterExpression.parameters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parameters</span></code></a></p></td>
+<td><p>Returns a set of the unbound Parameters in the expression.</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Methods Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.circuit.ParameterExpression.bind" title="qiskit.circuit.ParameterExpression.bind"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bind</span></code></a>(parameter_values)</td>
-<td>Binds the provided set of parameters to their corresponding values.</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.circuit.ParameterExpression.bind" title="qiskit.circuit.ParameterExpression.bind"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bind</span></code></a>(parameter_values)</p></td>
+<td><p>Binds the provided set of parameters to their corresponding values.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.circuit.ParameterExpression.subs" title="qiskit.circuit.ParameterExpression.subs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">subs</span></code></a>(parameter_map)</td>
-<td>Returns a new Expression with replacement Parameters.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.circuit.ParameterExpression.subs" title="qiskit.circuit.ParameterExpression.subs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">subs</span></code></a>(parameter_map)</p></td>
+<td><p>Returns a new Expression with replacement Parameters.</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Attributes Documentation</p>
 <dl class="attribute">
 <dt id="qiskit.circuit.ParameterExpression.parameters">
-<code class="descname">parameters</code><a class="headerlink" href="#qiskit.circuit.ParameterExpression.parameters" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">parameters</code><a class="headerlink" href="#qiskit.circuit.ParameterExpression.parameters" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Returns a set of the unbound Parameters in the expression.</p>
 </dd></dl>
 
 <p class="rubric">Methods Documentation</p>
 <dl class="method">
 <dt id="qiskit.circuit.ParameterExpression.bind">
-<code class="descname">bind</code><span class="sig-paren">(</span><em>parameter_values</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/circuit/parameterexpression.html#ParameterExpression.bind"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.circuit.ParameterExpression.bind" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">bind</code><span class="sig-paren">(</span><em class="sig-param">parameter_values</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/circuit/parameterexpression.html#ParameterExpression.bind"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.circuit.ParameterExpression.bind" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Binds the provided set of parameters to their corresponding values.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><p class="first"><strong>parameter_values</strong> (<em>dict</em>) – Mapping of Parameter instances to the
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><p><strong>parameter_values</strong> (<em>dict</em>) – Mapping of Parameter instances to the
 numeric value to which they will be bound.</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first simple">
-<li><code class="xref py py-exc docutils literal notranslate"><span class="pre">QiskitError</span></code> – - If parameter_values contains Parameters outside those in self.
-- If a non-numeric value is passed in parameter_values.</li>
-<li><code class="xref py py-exc docutils literal notranslate"><span class="pre">ZeroDivisionError</span></code> – - If binding the provided values requires division by zero.</li>
+</dd>
+<dt class="field-even">Verursacht</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>QiskitError</strong> – <ul>
+<li><p>If parameter_values contains Parameters outside those in self.
+    - If a non-numeric value is passed in parameter_values.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Rückgabe:</th><td class="field-body"><p class="first"><dl class="docutils">
-<dt>a new expession parameterized by any parameters</dt>
-<dd><p class="first last">which were not bound by parameter_values.</p>
+</p></li>
+<li><p><strong>ZeroDivisionError</strong> – <ul>
+<li><p>If binding the provided values requires division by zero.</p></li>
+</ul>
+</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Rückgabe</dt>
+<dd class="field-odd"><p><dl class="simple">
+<dt>a new expession parameterized by any parameters</dt><dd><p>which were not bound by parameter_values.</p>
 </dd>
 </dl>
 </p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Rückgabetyp:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#qiskit.circuit.ParameterExpression" title="qiskit.circuit.ParameterExpression">ParameterExpression</a></p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Rückgabetyp</dt>
+<dd class="field-even"><p><a class="reference internal" href="#qiskit.circuit.ParameterExpression" title="qiskit.circuit.ParameterExpression">ParameterExpression</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.circuit.ParameterExpression.subs">
-<code class="descname">subs</code><span class="sig-paren">(</span><em>parameter_map</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/circuit/parameterexpression.html#ParameterExpression.subs"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.circuit.ParameterExpression.subs" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">subs</code><span class="sig-paren">(</span><em class="sig-param">parameter_map</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/circuit/parameterexpression.html#ParameterExpression.subs"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.circuit.ParameterExpression.subs" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Returns a new Expression with replacement Parameters.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><p class="first"><strong>parameter_map</strong> (<em>dict</em>) – Mapping from Parameters in self to the
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><p><strong>parameter_map</strong> (<em>dict</em>) – Mapping from Parameters in self to the
 Parameter instances with which they should be
 replaced.</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><code class="xref py py-exc docutils literal notranslate"><span class="pre">QiskitError</span></code> – - If parameter_map contains Parameters outside those in self.
-- If the replacement Parameters in parameter_map would result in</p>
-<blockquote>
-<div><p>a name conflict in the generated expression.</p>
-</div></blockquote>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Rückgabe:</th><td class="field-body"><p class="first"><dl class="docutils">
-<dt>a new expession with the specified parameters</dt>
-<dd><p class="first last">replaced.</p>
+</dd>
+<dt class="field-even">Verursacht</dt>
+<dd class="field-even"><p><strong>QiskitError</strong> – <ul class="simple">
+<li><p>If parameter_map contains Parameters outside those in self.
+    - If the replacement Parameters in parameter_map would result in
+      a name conflict in the generated expression.</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Rückgabe</dt>
+<dd class="field-odd"><p><dl class="simple">
+<dt>a new expession with the specified parameters</dt><dd><p>replaced.</p>
 </dd>
 </dl>
 </p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Rückgabetyp:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#qiskit.circuit.ParameterExpression" title="qiskit.circuit.ParameterExpression">ParameterExpression</a></p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Rückgabetyp</dt>
+<dd class="field-even"><p><a class="reference internal" href="#qiskit.circuit.ParameterExpression" title="qiskit.circuit.ParameterExpression">ParameterExpression</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>

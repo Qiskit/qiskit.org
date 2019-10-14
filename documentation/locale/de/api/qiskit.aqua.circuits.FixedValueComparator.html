@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,6 +48,8 @@
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/js/themeExt.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Stichwortverzeichnis" href="../genindex.html" />
@@ -625,6 +626,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1215,6 +1222,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1261,223 +1274,221 @@
 <h1>FixedValueComparator<a class="headerlink" href="#fixedvaluecomparator" title="Link zu dieser Überschrift">¶</a></h1>
 <dl class="class">
 <dt id="qiskit.aqua.circuits.FixedValueComparator">
-<em class="property">class </em><code class="descname">FixedValueComparator</code><span class="sig-paren">(</span><em>num_state_qubits</em>, <em>value</em>, <em>geq=True</em>, <em>i_state=None</em>, <em>i_target=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/circuits/fixed_value_comparator.html#FixedValueComparator"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.aqua.circuits.FixedValueComparator" title="Link zu dieser Definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">FixedValueComparator</code><span class="sig-paren">(</span><em class="sig-param">num_state_qubits</em>, <em class="sig-param">value</em>, <em class="sig-param">geq=True</em>, <em class="sig-param">i_state=None</em>, <em class="sig-param">i_target=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/circuits/fixed_value_comparator.html#FixedValueComparator"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.aqua.circuits.FixedValueComparator" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.aqua.utils.circuit_factory.CircuitFactory</span></code></p>
 <p>Fixed Value Comparator.</p>
 <p>Operator compares basis states <a href="#id1"><span class="problematic" id="id2">|</span></a>i&gt;_n against a classically given fixed value L and flips a target qubit if i &gt;= L (or &lt; depending on parameters):</p>
 <blockquote>
-<div><a href="#id3"><span class="problematic" id="id4">|</span></a>i&gt;_n|0&gt; –&gt; <a href="#id5"><span class="problematic" id="id6">|</span></a>i&gt;_n|1&gt; if i &gt;= L else <a href="#id7"><span class="problematic" id="id8">|</span></a>i&gt;|0&gt;</div></blockquote>
+<div><p><a href="#id3"><span class="problematic" id="id4">|</span></a>i&gt;_n|0&gt; –&gt; <a href="#id5"><span class="problematic" id="id6">|</span></a>i&gt;_n|1&gt; if i &gt;= L else <a href="#id7"><span class="problematic" id="id8">|</span></a>i&gt;|0&gt;</p>
+</div></blockquote>
 <p>Operator is based on two’s complement implementation of binary subtraction but only uses carry bits and no actual result bits.
 If the most significant carry bit (= results bit) is 1, the „“&gt;=“ condition is True otherwise it is False.</p>
+<p>Constructor.</p>
+<p>Initializes the fixed value comparator</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>num_state_qubits</strong> (<em>int</em>) – number of state qubits, the target qubit comes on top of this</p></li>
+<li><p><strong>value</strong> (<em>int</em>) – fixed value to compare with</p></li>
+<li><p><strong>geq</strong> (<em>bool</em>) – evaluate „&gt;=“ condition of „&lt;“ condition</p></li>
+<li><p><strong>i_state</strong> (<em>array</em><em> or </em><em>list</em>) – indices of state qubits in given list of qubits / register, if None, i_state = list(range(num_state_qubits)) is used</p></li>
+<li><p><strong>i_target</strong> (<em>int</em>) – index of target qubit in given list of qubits / register, if None, i_target = num_state_qubits is used</p></li>
+</ul>
+</dd>
+</dl>
 <p class="rubric">Attributes Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.circuits.FixedValueComparator.num_state_qubits" title="qiskit.aqua.circuits.FixedValueComparator.num_state_qubits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">num_state_qubits</span></code></a></td>
-<td></td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.circuits.FixedValueComparator.num_state_qubits" title="qiskit.aqua.circuits.FixedValueComparator.num_state_qubits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">num_state_qubits</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.circuits.FixedValueComparator.num_target_qubits" title="qiskit.aqua.circuits.FixedValueComparator.num_target_qubits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">num_target_qubits</span></code></a></td>
-<td>Returns the number of target qubits</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.circuits.FixedValueComparator.num_target_qubits" title="qiskit.aqua.circuits.FixedValueComparator.num_target_qubits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">num_target_qubits</span></code></a></p></td>
+<td><p>Returns the number of target qubits</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.circuits.FixedValueComparator.value" title="qiskit.aqua.circuits.FixedValueComparator.value"><code class="xref py py-obj docutils literal notranslate"><span class="pre">value</span></code></a></td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.circuits.FixedValueComparator.value" title="qiskit.aqua.circuits.FixedValueComparator.value"><code class="xref py py-obj docutils literal notranslate"><span class="pre">value</span></code></a></p></td>
+<td><p></p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Methods Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.circuits.FixedValueComparator.build" title="qiskit.aqua.circuits.FixedValueComparator.build"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build</span></code></a>(qc,&nbsp;q[,&nbsp;q_ancillas])</td>
-<td>Adds corresponding sub-circuit to given circuit</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.circuits.FixedValueComparator.build" title="qiskit.aqua.circuits.FixedValueComparator.build"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build</span></code></a>(qc, q[, q_ancillas])</p></td>
+<td><p>Adds corresponding sub-circuit to given circuit</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.circuits.FixedValueComparator.build_controlled" title="qiskit.aqua.circuits.FixedValueComparator.build_controlled"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build_controlled</span></code></a>(qc,&nbsp;q,&nbsp;q_control[,&nbsp;…])</td>
-<td>Adds corresponding controlled sub-circuit to given circuit</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.circuits.FixedValueComparator.build_controlled" title="qiskit.aqua.circuits.FixedValueComparator.build_controlled"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build_controlled</span></code></a>(qc, q, q_control[, …])</p></td>
+<td><p>Adds corresponding controlled sub-circuit to given circuit</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.circuits.FixedValueComparator.build_controlled_inverse" title="qiskit.aqua.circuits.FixedValueComparator.build_controlled_inverse"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build_controlled_inverse</span></code></a>(qc,&nbsp;q,&nbsp;q_control[,&nbsp;…])</td>
-<td>Adds controlled inverse of corresponding sub-circuit to given circuit</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.circuits.FixedValueComparator.build_controlled_inverse" title="qiskit.aqua.circuits.FixedValueComparator.build_controlled_inverse"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build_controlled_inverse</span></code></a>(qc, q, q_control[, …])</p></td>
+<td><p>Adds controlled inverse of corresponding sub-circuit to given circuit</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.circuits.FixedValueComparator.build_controlled_inverse_power" title="qiskit.aqua.circuits.FixedValueComparator.build_controlled_inverse_power"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build_controlled_inverse_power</span></code></a>(qc,&nbsp;q,&nbsp;…[,&nbsp;…])</td>
-<td>Adds controlled, inverse, power of corresponding circuit.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.circuits.FixedValueComparator.build_controlled_inverse_power" title="qiskit.aqua.circuits.FixedValueComparator.build_controlled_inverse_power"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build_controlled_inverse_power</span></code></a>(qc, q, …[, …])</p></td>
+<td><p>Adds controlled, inverse, power of corresponding circuit.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.circuits.FixedValueComparator.build_controlled_power" title="qiskit.aqua.circuits.FixedValueComparator.build_controlled_power"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build_controlled_power</span></code></a>(qc,&nbsp;q,&nbsp;q_control,&nbsp;power)</td>
-<td>Adds controlled power of corresponding circuit.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.circuits.FixedValueComparator.build_controlled_power" title="qiskit.aqua.circuits.FixedValueComparator.build_controlled_power"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build_controlled_power</span></code></a>(qc, q, q_control, power)</p></td>
+<td><p>Adds controlled power of corresponding circuit.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.circuits.FixedValueComparator.build_inverse" title="qiskit.aqua.circuits.FixedValueComparator.build_inverse"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build_inverse</span></code></a>(qc,&nbsp;q[,&nbsp;q_ancillas])</td>
-<td>Adds inverse of corresponding sub-circuit to given circuit</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.circuits.FixedValueComparator.build_inverse" title="qiskit.aqua.circuits.FixedValueComparator.build_inverse"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build_inverse</span></code></a>(qc, q[, q_ancillas])</p></td>
+<td><p>Adds inverse of corresponding sub-circuit to given circuit</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.circuits.FixedValueComparator.build_inverse_power" title="qiskit.aqua.circuits.FixedValueComparator.build_inverse_power"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build_inverse_power</span></code></a>(qc,&nbsp;q,&nbsp;power[,&nbsp;q_ancillas])</td>
-<td>Adds inverse power of corresponding circuit.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.circuits.FixedValueComparator.build_inverse_power" title="qiskit.aqua.circuits.FixedValueComparator.build_inverse_power"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build_inverse_power</span></code></a>(qc, q, power[, q_ancillas])</p></td>
+<td><p>Adds inverse power of corresponding circuit.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.circuits.FixedValueComparator.build_power" title="qiskit.aqua.circuits.FixedValueComparator.build_power"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build_power</span></code></a>(qc,&nbsp;q,&nbsp;power[,&nbsp;q_ancillas])</td>
-<td>Adds power of corresponding circuit.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.circuits.FixedValueComparator.build_power" title="qiskit.aqua.circuits.FixedValueComparator.build_power"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build_power</span></code></a>(qc, q, power[, q_ancillas])</p></td>
+<td><p>Adds power of corresponding circuit.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.circuits.FixedValueComparator.get_num_qubits" title="qiskit.aqua.circuits.FixedValueComparator.get_num_qubits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_num_qubits</span></code></a>()</td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.circuits.FixedValueComparator.get_num_qubits" title="qiskit.aqua.circuits.FixedValueComparator.get_num_qubits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_num_qubits</span></code></a>()</p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.circuits.FixedValueComparator.get_num_qubits_controlled" title="qiskit.aqua.circuits.FixedValueComparator.get_num_qubits_controlled"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_num_qubits_controlled</span></code></a>()</td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.circuits.FixedValueComparator.get_num_qubits_controlled" title="qiskit.aqua.circuits.FixedValueComparator.get_num_qubits_controlled"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_num_qubits_controlled</span></code></a>()</p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.circuits.FixedValueComparator.required_ancillas" title="qiskit.aqua.circuits.FixedValueComparator.required_ancillas"><code class="xref py py-obj docutils literal notranslate"><span class="pre">required_ancillas</span></code></a>()</td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.circuits.FixedValueComparator.required_ancillas" title="qiskit.aqua.circuits.FixedValueComparator.required_ancillas"><code class="xref py py-obj docutils literal notranslate"><span class="pre">required_ancillas</span></code></a>()</p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.circuits.FixedValueComparator.required_ancillas_controlled" title="qiskit.aqua.circuits.FixedValueComparator.required_ancillas_controlled"><code class="xref py py-obj docutils literal notranslate"><span class="pre">required_ancillas_controlled</span></code></a>()</td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.circuits.FixedValueComparator.required_ancillas_controlled" title="qiskit.aqua.circuits.FixedValueComparator.required_ancillas_controlled"><code class="xref py py-obj docutils literal notranslate"><span class="pre">required_ancillas_controlled</span></code></a>()</p></td>
+<td><p></p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Attributes Documentation</p>
 <dl class="attribute">
 <dt id="qiskit.aqua.circuits.FixedValueComparator.num_state_qubits">
-<code class="descname">num_state_qubits</code><a class="headerlink" href="#qiskit.aqua.circuits.FixedValueComparator.num_state_qubits" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">num_state_qubits</code><a class="headerlink" href="#qiskit.aqua.circuits.FixedValueComparator.num_state_qubits" title="Link zu dieser Definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.circuits.FixedValueComparator.num_target_qubits">
-<code class="descname">num_target_qubits</code><a class="headerlink" href="#qiskit.aqua.circuits.FixedValueComparator.num_target_qubits" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">num_target_qubits</code><a class="headerlink" href="#qiskit.aqua.circuits.FixedValueComparator.num_target_qubits" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Returns the number of target qubits</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.circuits.FixedValueComparator.value">
-<code class="descname">value</code><a class="headerlink" href="#qiskit.aqua.circuits.FixedValueComparator.value" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">value</code><a class="headerlink" href="#qiskit.aqua.circuits.FixedValueComparator.value" title="Link zu dieser Definition">¶</a></dt>
 <dd></dd></dl>
 
 <p class="rubric">Methods Documentation</p>
 <dl class="method">
 <dt id="qiskit.aqua.circuits.FixedValueComparator.build">
-<code class="descname">build</code><span class="sig-paren">(</span><em>qc</em>, <em>q</em>, <em>q_ancillas=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/circuits/fixed_value_comparator.html#FixedValueComparator.build"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.aqua.circuits.FixedValueComparator.build" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">build</code><span class="sig-paren">(</span><em class="sig-param">qc</em>, <em class="sig-param">q</em>, <em class="sig-param">q_ancillas=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/circuits/fixed_value_comparator.html#FixedValueComparator.build"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.aqua.circuits.FixedValueComparator.build" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Adds corresponding sub-circuit to given circuit</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><ul class="first last simple">
-<li><strong>qc</strong> – quantum circuit</li>
-<li><strong>q</strong> – list of qubits (has to be same length as self._num_qubits)</li>
-<li><strong>q_ancillas</strong> – list of ancilla qubits (or None if none needed)</li>
-<li><strong>params</strong> – parameters for circuit</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>qc</strong> – quantum circuit</p></li>
+<li><p><strong>q</strong> – list of qubits (has to be same length as self._num_qubits)</p></li>
+<li><p><strong>q_ancillas</strong> – list of ancilla qubits (or None if none needed)</p></li>
+<li><p><strong>params</strong> – parameters for circuit</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.circuits.FixedValueComparator.build_controlled">
-<code class="descname">build_controlled</code><span class="sig-paren">(</span><em>qc</em>, <em>q</em>, <em>q_control</em>, <em>q_ancillas=None</em>, <em>use_basis_gates=True</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.circuits.FixedValueComparator.build_controlled" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">build_controlled</code><span class="sig-paren">(</span><em class="sig-param">qc</em>, <em class="sig-param">q</em>, <em class="sig-param">q_control</em>, <em class="sig-param">q_ancillas=None</em>, <em class="sig-param">use_basis_gates=True</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.circuits.FixedValueComparator.build_controlled" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Adds corresponding controlled sub-circuit to given circuit</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><ul class="first last simple">
-<li><strong>qc</strong> – quantum circuit</li>
-<li><strong>q</strong> – list of qubits (has to be same length as self._num_qubits)</li>
-<li><strong>q_control</strong> – control qubit</li>
-<li><strong>q_ancillas</strong> – list of ancilla qubits (or None if none needed)</li>
-<li><strong>use_basis_gates</strong> – use basis gates for expansion of controlled circuit</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>qc</strong> – quantum circuit</p></li>
+<li><p><strong>q</strong> – list of qubits (has to be same length as self._num_qubits)</p></li>
+<li><p><strong>q_control</strong> – control qubit</p></li>
+<li><p><strong>q_ancillas</strong> – list of ancilla qubits (or None if none needed)</p></li>
+<li><p><strong>use_basis_gates</strong> – use basis gates for expansion of controlled circuit</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.circuits.FixedValueComparator.build_controlled_inverse">
-<code class="descname">build_controlled_inverse</code><span class="sig-paren">(</span><em>qc</em>, <em>q</em>, <em>q_control</em>, <em>q_ancillas=None</em>, <em>use_basis_gates=True</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.circuits.FixedValueComparator.build_controlled_inverse" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">build_controlled_inverse</code><span class="sig-paren">(</span><em class="sig-param">qc</em>, <em class="sig-param">q</em>, <em class="sig-param">q_control</em>, <em class="sig-param">q_ancillas=None</em>, <em class="sig-param">use_basis_gates=True</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.circuits.FixedValueComparator.build_controlled_inverse" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Adds controlled inverse of corresponding sub-circuit to given circuit</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><ul class="first last simple">
-<li><strong>qc</strong> – quantum circuit</li>
-<li><strong>q</strong> – list of qubits (has to be same length as self._num_qubits)</li>
-<li><strong>q_control</strong> – control qubit</li>
-<li><strong>q_ancillas</strong> – list of ancilla qubits (or None if none needed)</li>
-<li><strong>use_basis_gates</strong> – use basis gates for expansion of controlled circuit</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>qc</strong> – quantum circuit</p></li>
+<li><p><strong>q</strong> – list of qubits (has to be same length as self._num_qubits)</p></li>
+<li><p><strong>q_control</strong> – control qubit</p></li>
+<li><p><strong>q_ancillas</strong> – list of ancilla qubits (or None if none needed)</p></li>
+<li><p><strong>use_basis_gates</strong> – use basis gates for expansion of controlled circuit</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.circuits.FixedValueComparator.build_controlled_inverse_power">
-<code class="descname">build_controlled_inverse_power</code><span class="sig-paren">(</span><em>qc</em>, <em>q</em>, <em>q_control</em>, <em>power</em>, <em>q_ancillas=None</em>, <em>use_basis_gates=True</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.circuits.FixedValueComparator.build_controlled_inverse_power" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">build_controlled_inverse_power</code><span class="sig-paren">(</span><em class="sig-param">qc</em>, <em class="sig-param">q</em>, <em class="sig-param">q_control</em>, <em class="sig-param">power</em>, <em class="sig-param">q_ancillas=None</em>, <em class="sig-param">use_basis_gates=True</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.circuits.FixedValueComparator.build_controlled_inverse_power" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Adds controlled, inverse, power of corresponding circuit.
 May be overridden if a more efficient implementation is possible</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.circuits.FixedValueComparator.build_controlled_power">
-<code class="descname">build_controlled_power</code><span class="sig-paren">(</span><em>qc</em>, <em>q</em>, <em>q_control</em>, <em>power</em>, <em>q_ancillas=None</em>, <em>use_basis_gates=True</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.circuits.FixedValueComparator.build_controlled_power" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">build_controlled_power</code><span class="sig-paren">(</span><em class="sig-param">qc</em>, <em class="sig-param">q</em>, <em class="sig-param">q_control</em>, <em class="sig-param">power</em>, <em class="sig-param">q_ancillas=None</em>, <em class="sig-param">use_basis_gates=True</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.circuits.FixedValueComparator.build_controlled_power" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Adds controlled power of corresponding circuit.
 May be overridden if a more efficient implementation is possible</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.circuits.FixedValueComparator.build_inverse">
-<code class="descname">build_inverse</code><span class="sig-paren">(</span><em>qc</em>, <em>q</em>, <em>q_ancillas=None</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.circuits.FixedValueComparator.build_inverse" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">build_inverse</code><span class="sig-paren">(</span><em class="sig-param">qc</em>, <em class="sig-param">q</em>, <em class="sig-param">q_ancillas=None</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.circuits.FixedValueComparator.build_inverse" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Adds inverse of corresponding sub-circuit to given circuit</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><ul class="first last simple">
-<li><strong>qc</strong> – quantum circuit</li>
-<li><strong>q</strong> – list of qubits (has to be same length as self._num_qubits)</li>
-<li><strong>q_ancillas</strong> – list of ancilla qubits (or None if none needed)</li>
-<li><strong>params</strong> – parameters for circuit</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>qc</strong> – quantum circuit</p></li>
+<li><p><strong>q</strong> – list of qubits (has to be same length as self._num_qubits)</p></li>
+<li><p><strong>q_ancillas</strong> – list of ancilla qubits (or None if none needed)</p></li>
+<li><p><strong>params</strong> – parameters for circuit</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.circuits.FixedValueComparator.build_inverse_power">
-<code class="descname">build_inverse_power</code><span class="sig-paren">(</span><em>qc</em>, <em>q</em>, <em>power</em>, <em>q_ancillas=None</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.circuits.FixedValueComparator.build_inverse_power" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">build_inverse_power</code><span class="sig-paren">(</span><em class="sig-param">qc</em>, <em class="sig-param">q</em>, <em class="sig-param">power</em>, <em class="sig-param">q_ancillas=None</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.circuits.FixedValueComparator.build_inverse_power" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Adds inverse power of corresponding circuit.
 May be overridden if a more efficient implementation is possible</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.circuits.FixedValueComparator.build_power">
-<code class="descname">build_power</code><span class="sig-paren">(</span><em>qc</em>, <em>q</em>, <em>power</em>, <em>q_ancillas=None</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.circuits.FixedValueComparator.build_power" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">build_power</code><span class="sig-paren">(</span><em class="sig-param">qc</em>, <em class="sig-param">q</em>, <em class="sig-param">power</em>, <em class="sig-param">q_ancillas=None</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.circuits.FixedValueComparator.build_power" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Adds power of corresponding circuit.
 May be overridden if a more efficient implementation is possible</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.circuits.FixedValueComparator.get_num_qubits">
-<code class="descname">get_num_qubits</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.circuits.FixedValueComparator.get_num_qubits" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">get_num_qubits</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.circuits.FixedValueComparator.get_num_qubits" title="Link zu dieser Definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.circuits.FixedValueComparator.get_num_qubits_controlled">
-<code class="descname">get_num_qubits_controlled</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.circuits.FixedValueComparator.get_num_qubits_controlled" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">get_num_qubits_controlled</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.circuits.FixedValueComparator.get_num_qubits_controlled" title="Link zu dieser Definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.circuits.FixedValueComparator.required_ancillas">
-<code class="descname">required_ancillas</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/circuits/fixed_value_comparator.html#FixedValueComparator.required_ancillas"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.aqua.circuits.FixedValueComparator.required_ancillas" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">required_ancillas</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/circuits/fixed_value_comparator.html#FixedValueComparator.required_ancillas"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.aqua.circuits.FixedValueComparator.required_ancillas" title="Link zu dieser Definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.circuits.FixedValueComparator.required_ancillas_controlled">
-<code class="descname">required_ancillas_controlled</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/circuits/fixed_value_comparator.html#FixedValueComparator.required_ancillas_controlled"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.aqua.circuits.FixedValueComparator.required_ancillas_controlled" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">required_ancillas_controlled</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/circuits/fixed_value_comparator.html#FixedValueComparator.required_ancillas_controlled"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.aqua.circuits.FixedValueComparator.required_ancillas_controlled" title="Link zu dieser Definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>

@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,6 +48,8 @@
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/js/themeExt.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Índice" href="../genindex.html" />
@@ -625,6 +626,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1215,6 +1222,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1261,212 +1274,222 @@
 <h1>ExactEigensolver<a class="headerlink" href="#exacteigensolver" title="Link permanente para este título">¶</a></h1>
 <dl class="class">
 <dt id="qiskit.aqua.algorithms.ExactEigensolver">
-<em class="property">class </em><code class="descname">ExactEigensolver</code><span class="sig-paren">(</span><em>operator</em>, <em>k=1</em>, <em>aux_operators=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/algorithms/classical/exact_eigen_solver/exact_eigen_solver.html#ExactEigensolver"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.aqua.algorithms.ExactEigensolver" title="Link permanente para esta definição">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">ExactEigensolver</code><span class="sig-paren">(</span><em class="sig-param">operator</em>, <em class="sig-param">k=1</em>, <em class="sig-param">aux_operators=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/algorithms/classical/exact_eigen_solver/exact_eigen_solver.html#ExactEigensolver"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.aqua.algorithms.ExactEigensolver" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.aqua.algorithms.quantum_algorithm.QuantumAlgorithm</span></code></p>
 <p>The Exact Eigensolver algorithm.</p>
+<p>Constructor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>operator</strong> (<a class="reference internal" href="qiskit.aqua.operators.MatrixOperator.html#qiskit.aqua.operators.MatrixOperator" title="qiskit.aqua.operators.MatrixOperator"><em>MatrixOperator</em></a>) – instance</p></li>
+<li><p><strong>k</strong> (<em>int</em>) – How many eigenvalues are to be computed</p></li>
+<li><p><strong>aux_operators</strong> (<em>list</em><em>[</em><a class="reference internal" href="qiskit.aqua.operators.MatrixOperator.html#qiskit.aqua.operators.MatrixOperator" title="qiskit.aqua.operators.MatrixOperator"><em>MatrixOperator</em></a><em>]</em>) – Auxiliary operators to be evaluated at each eigenvalue</p></li>
+</ul>
+</dd>
+</dl>
 <p class="rubric">Attributes Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.algorithms.ExactEigensolver.CONFIGURATION" title="qiskit.aqua.algorithms.ExactEigensolver.CONFIGURATION"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CONFIGURATION</span></code></a></td>
-<td></td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.algorithms.ExactEigensolver.CONFIGURATION" title="qiskit.aqua.algorithms.ExactEigensolver.CONFIGURATION"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CONFIGURATION</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_ALGORITHM" title="qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_ALGORITHM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_ALGORITHM</span></code></a></td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_ALGORITHM" title="qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_ALGORITHM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_ALGORITHM</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_DISCRIMINATIVE_NETWORK" title="qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_DISCRIMINATIVE_NETWORK"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_DISCRIMINATIVE_NETWORK</span></code></a></td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_DISCRIMINATIVE_NETWORK" title="qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_DISCRIMINATIVE_NETWORK"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_DISCRIMINATIVE_NETWORK</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_EIGS" title="qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_EIGS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_EIGS</span></code></a></td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_EIGS" title="qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_EIGS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_EIGS</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_FEATURE_MAP" title="qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_FEATURE_MAP"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_FEATURE_MAP</span></code></a></td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_FEATURE_MAP" title="qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_FEATURE_MAP"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_FEATURE_MAP</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_GENERATIVE_NETWORK" title="qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_GENERATIVE_NETWORK"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_GENERATIVE_NETWORK</span></code></a></td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_GENERATIVE_NETWORK" title="qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_GENERATIVE_NETWORK"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_GENERATIVE_NETWORK</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_INITIAL_STATE" title="qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_INITIAL_STATE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_INITIAL_STATE</span></code></a></td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_INITIAL_STATE" title="qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_INITIAL_STATE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_INITIAL_STATE</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_IQFT" title="qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_IQFT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_IQFT</span></code></a></td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_IQFT" title="qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_IQFT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_IQFT</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_MULTICLASS_EXTENSION" title="qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_MULTICLASS_EXTENSION"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_MULTICLASS_EXTENSION</span></code></a></td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_MULTICLASS_EXTENSION" title="qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_MULTICLASS_EXTENSION"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_MULTICLASS_EXTENSION</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_MULTIVARIATE_DISTRIBUTION" title="qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_MULTIVARIATE_DISTRIBUTION"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_MULTIVARIATE_DISTRIBUTION</span></code></a></td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_MULTIVARIATE_DISTRIBUTION" title="qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_MULTIVARIATE_DISTRIBUTION"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_MULTIVARIATE_DISTRIBUTION</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_OPTIMIZER" title="qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_OPTIMIZER"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_OPTIMIZER</span></code></a></td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_OPTIMIZER" title="qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_OPTIMIZER"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_OPTIMIZER</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_ORACLE" title="qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_ORACLE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_ORACLE</span></code></a></td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_ORACLE" title="qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_ORACLE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_ORACLE</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_QFT" title="qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_QFT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_QFT</span></code></a></td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_QFT" title="qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_QFT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_QFT</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_RECIPROCAL" title="qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_RECIPROCAL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_RECIPROCAL</span></code></a></td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_RECIPROCAL" title="qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_RECIPROCAL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_RECIPROCAL</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_UNCERTAINTY_PROBLEM" title="qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_UNCERTAINTY_PROBLEM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_UNCERTAINTY_PROBLEM</span></code></a></td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_UNCERTAINTY_PROBLEM" title="qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_UNCERTAINTY_PROBLEM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_UNCERTAINTY_PROBLEM</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_UNIVARIATE_DISTRIBUTION" title="qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_UNIVARIATE_DISTRIBUTION"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_UNIVARIATE_DISTRIBUTION</span></code></a></td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_UNIVARIATE_DISTRIBUTION" title="qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_UNIVARIATE_DISTRIBUTION"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_UNIVARIATE_DISTRIBUTION</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_VAR_FORM" title="qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_VAR_FORM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_VAR_FORM</span></code></a></td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_VAR_FORM" title="qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_VAR_FORM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION_KEY_VAR_FORM</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.algorithms.ExactEigensolver.configuration" title="qiskit.aqua.algorithms.ExactEigensolver.configuration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">configuration</span></code></a></td>
-<td>Return pluggable configuration.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.algorithms.ExactEigensolver.configuration" title="qiskit.aqua.algorithms.ExactEigensolver.configuration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">configuration</span></code></a></p></td>
+<td><p>Return pluggable configuration.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.algorithms.ExactEigensolver.quantum_instance" title="qiskit.aqua.algorithms.ExactEigensolver.quantum_instance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">quantum_instance</span></code></a></td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.algorithms.ExactEigensolver.quantum_instance" title="qiskit.aqua.algorithms.ExactEigensolver.quantum_instance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">quantum_instance</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.algorithms.ExactEigensolver.random" title="qiskit.aqua.algorithms.ExactEigensolver.random"><code class="xref py py-obj docutils literal notranslate"><span class="pre">random</span></code></a></td>
-<td>Return a numpy random.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.algorithms.ExactEigensolver.random" title="qiskit.aqua.algorithms.ExactEigensolver.random"><code class="xref py py-obj docutils literal notranslate"><span class="pre">random</span></code></a></p></td>
+<td><p>Return a numpy random.</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Methods Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.algorithms.ExactEigensolver.check_pluggable_valid" title="qiskit.aqua.algorithms.ExactEigensolver.check_pluggable_valid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_pluggable_valid</span></code></a>()</td>
-<td>Checks if pluggable is ready for use.</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.algorithms.ExactEigensolver.check_pluggable_valid" title="qiskit.aqua.algorithms.ExactEigensolver.check_pluggable_valid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_pluggable_valid</span></code></a>()</p></td>
+<td><p>Checks if pluggable is ready for use.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.algorithms.ExactEigensolver.init_params" title="qiskit.aqua.algorithms.ExactEigensolver.init_params"><code class="xref py py-obj docutils literal notranslate"><span class="pre">init_params</span></code></a>(params,&nbsp;algo_input)</td>
-<td>Initialize via parameters dictionary and algorithm input instance :param params: parameters dictionary :param algo_input: EnergyInput instance</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.algorithms.ExactEigensolver.init_params" title="qiskit.aqua.algorithms.ExactEigensolver.init_params"><code class="xref py py-obj docutils literal notranslate"><span class="pre">init_params</span></code></a>(params, algo_input)</p></td>
+<td><p>Initialize via parameters dictionary and algorithm input instance :param params: parameters dictionary :param algo_input: EnergyInput instance</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.algorithms.ExactEigensolver.run" title="qiskit.aqua.algorithms.ExactEigensolver.run"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run</span></code></a>([quantum_instance])</td>
-<td>Execute the algorithm with selected backend.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.algorithms.ExactEigensolver.run" title="qiskit.aqua.algorithms.ExactEigensolver.run"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run</span></code></a>([quantum_instance])</p></td>
+<td><p>Execute the algorithm with selected backend.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.algorithms.ExactEigensolver.validate" title="qiskit.aqua.algorithms.ExactEigensolver.validate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate</span></code></a>(args_dict)</td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.algorithms.ExactEigensolver.validate" title="qiskit.aqua.algorithms.ExactEigensolver.validate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate</span></code></a>(args_dict)</p></td>
+<td><p></p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Attributes Documentation</p>
 <dl class="attribute">
 <dt id="qiskit.aqua.algorithms.ExactEigensolver.CONFIGURATION">
-<code class="descname">CONFIGURATION</code><em class="property"> = {'classical': True, 'description': 'ExactEigensolver Algorithm', 'input_schema': {'$schema': 'http://json-schema.org/schema#', 'additionalProperties': False, 'id': 'ExactEigensolver_schema', 'properties': {'k': {'default': 1, 'minimum': 1, 'type': 'integer'}}, 'type': 'object'}, 'name': 'ExactEigensolver', 'problems': ['energy', 'excited_states', 'ising']}</em><a class="headerlink" href="#qiskit.aqua.algorithms.ExactEigensolver.CONFIGURATION" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">CONFIGURATION</code><em class="property"> = {'classical': True, 'description': 'ExactEigensolver Algorithm', 'input_schema': {'$schema': 'http://json-schema.org/schema#', 'additionalProperties': False, 'id': 'ExactEigensolver_schema', 'properties': {'k': {'default': 1, 'minimum': 1, 'type': 'integer'}}, 'type': 'object'}, 'name': 'ExactEigensolver', 'problems': ['energy', 'excited_states', 'ising']}</em><a class="headerlink" href="#qiskit.aqua.algorithms.ExactEigensolver.CONFIGURATION" title="Link permanente para esta definição">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_ALGORITHM">
-<code class="descname">SECTION_KEY_ALGORITHM</code><em class="property"> = 'algorithm'</em><a class="headerlink" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_ALGORITHM" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">SECTION_KEY_ALGORITHM</code><em class="property"> = 'algorithm'</em><a class="headerlink" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_ALGORITHM" title="Link permanente para esta definição">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_DISCRIMINATIVE_NETWORK">
-<code class="descname">SECTION_KEY_DISCRIMINATIVE_NETWORK</code><em class="property"> = 'discriminative_network'</em><a class="headerlink" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_DISCRIMINATIVE_NETWORK" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">SECTION_KEY_DISCRIMINATIVE_NETWORK</code><em class="property"> = 'discriminative_network'</em><a class="headerlink" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_DISCRIMINATIVE_NETWORK" title="Link permanente para esta definição">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_EIGS">
-<code class="descname">SECTION_KEY_EIGS</code><em class="property"> = 'eigs'</em><a class="headerlink" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_EIGS" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">SECTION_KEY_EIGS</code><em class="property"> = 'eigs'</em><a class="headerlink" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_EIGS" title="Link permanente para esta definição">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_FEATURE_MAP">
-<code class="descname">SECTION_KEY_FEATURE_MAP</code><em class="property"> = 'feature_map'</em><a class="headerlink" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_FEATURE_MAP" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">SECTION_KEY_FEATURE_MAP</code><em class="property"> = 'feature_map'</em><a class="headerlink" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_FEATURE_MAP" title="Link permanente para esta definição">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_GENERATIVE_NETWORK">
-<code class="descname">SECTION_KEY_GENERATIVE_NETWORK</code><em class="property"> = 'generative_network'</em><a class="headerlink" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_GENERATIVE_NETWORK" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">SECTION_KEY_GENERATIVE_NETWORK</code><em class="property"> = 'generative_network'</em><a class="headerlink" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_GENERATIVE_NETWORK" title="Link permanente para esta definição">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_INITIAL_STATE">
-<code class="descname">SECTION_KEY_INITIAL_STATE</code><em class="property"> = 'initial_state'</em><a class="headerlink" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_INITIAL_STATE" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">SECTION_KEY_INITIAL_STATE</code><em class="property"> = 'initial_state'</em><a class="headerlink" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_INITIAL_STATE" title="Link permanente para esta definição">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_IQFT">
-<code class="descname">SECTION_KEY_IQFT</code><em class="property"> = 'iqft'</em><a class="headerlink" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_IQFT" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">SECTION_KEY_IQFT</code><em class="property"> = 'iqft'</em><a class="headerlink" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_IQFT" title="Link permanente para esta definição">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_MULTICLASS_EXTENSION">
-<code class="descname">SECTION_KEY_MULTICLASS_EXTENSION</code><em class="property"> = 'multiclass_extension'</em><a class="headerlink" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_MULTICLASS_EXTENSION" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">SECTION_KEY_MULTICLASS_EXTENSION</code><em class="property"> = 'multiclass_extension'</em><a class="headerlink" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_MULTICLASS_EXTENSION" title="Link permanente para esta definição">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_MULTIVARIATE_DISTRIBUTION">
-<code class="descname">SECTION_KEY_MULTIVARIATE_DISTRIBUTION</code><em class="property"> = 'multivariate_distribution'</em><a class="headerlink" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_MULTIVARIATE_DISTRIBUTION" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">SECTION_KEY_MULTIVARIATE_DISTRIBUTION</code><em class="property"> = 'multivariate_distribution'</em><a class="headerlink" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_MULTIVARIATE_DISTRIBUTION" title="Link permanente para esta definição">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_OPTIMIZER">
-<code class="descname">SECTION_KEY_OPTIMIZER</code><em class="property"> = 'optimizer'</em><a class="headerlink" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_OPTIMIZER" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">SECTION_KEY_OPTIMIZER</code><em class="property"> = 'optimizer'</em><a class="headerlink" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_OPTIMIZER" title="Link permanente para esta definição">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_ORACLE">
-<code class="descname">SECTION_KEY_ORACLE</code><em class="property"> = 'oracle'</em><a class="headerlink" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_ORACLE" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">SECTION_KEY_ORACLE</code><em class="property"> = 'oracle'</em><a class="headerlink" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_ORACLE" title="Link permanente para esta definição">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_QFT">
-<code class="descname">SECTION_KEY_QFT</code><em class="property"> = 'qft'</em><a class="headerlink" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_QFT" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">SECTION_KEY_QFT</code><em class="property"> = 'qft'</em><a class="headerlink" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_QFT" title="Link permanente para esta definição">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_RECIPROCAL">
-<code class="descname">SECTION_KEY_RECIPROCAL</code><em class="property"> = 'reciprocal'</em><a class="headerlink" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_RECIPROCAL" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">SECTION_KEY_RECIPROCAL</code><em class="property"> = 'reciprocal'</em><a class="headerlink" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_RECIPROCAL" title="Link permanente para esta definição">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_UNCERTAINTY_PROBLEM">
-<code class="descname">SECTION_KEY_UNCERTAINTY_PROBLEM</code><em class="property"> = 'uncertainty_problem'</em><a class="headerlink" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_UNCERTAINTY_PROBLEM" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">SECTION_KEY_UNCERTAINTY_PROBLEM</code><em class="property"> = 'uncertainty_problem'</em><a class="headerlink" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_UNCERTAINTY_PROBLEM" title="Link permanente para esta definição">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_UNIVARIATE_DISTRIBUTION">
-<code class="descname">SECTION_KEY_UNIVARIATE_DISTRIBUTION</code><em class="property"> = 'univariate_distribution'</em><a class="headerlink" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_UNIVARIATE_DISTRIBUTION" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">SECTION_KEY_UNIVARIATE_DISTRIBUTION</code><em class="property"> = 'univariate_distribution'</em><a class="headerlink" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_UNIVARIATE_DISTRIBUTION" title="Link permanente para esta definição">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_VAR_FORM">
-<code class="descname">SECTION_KEY_VAR_FORM</code><em class="property"> = 'variational_form'</em><a class="headerlink" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_VAR_FORM" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">SECTION_KEY_VAR_FORM</code><em class="property"> = 'variational_form'</em><a class="headerlink" href="#qiskit.aqua.algorithms.ExactEigensolver.SECTION_KEY_VAR_FORM" title="Link permanente para esta definição">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.algorithms.ExactEigensolver.configuration">
-<code class="descname">configuration</code><a class="headerlink" href="#qiskit.aqua.algorithms.ExactEigensolver.configuration" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">configuration</code><a class="headerlink" href="#qiskit.aqua.algorithms.ExactEigensolver.configuration" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Return pluggable configuration.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.algorithms.ExactEigensolver.quantum_instance">
-<code class="descname">quantum_instance</code><a class="headerlink" href="#qiskit.aqua.algorithms.ExactEigensolver.quantum_instance" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">quantum_instance</code><a class="headerlink" href="#qiskit.aqua.algorithms.ExactEigensolver.quantum_instance" title="Link permanente para esta definição">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.algorithms.ExactEigensolver.random">
-<code class="descname">random</code><a class="headerlink" href="#qiskit.aqua.algorithms.ExactEigensolver.random" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">random</code><a class="headerlink" href="#qiskit.aqua.algorithms.ExactEigensolver.random" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Return a numpy random.</p>
 </dd></dl>
 
 <p class="rubric">Methods Documentation</p>
-<dl class="staticmethod">
+<dl class="method">
 <dt id="qiskit.aqua.algorithms.ExactEigensolver.check_pluggable_valid">
-<em class="property">static </em><code class="descname">check_pluggable_valid</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.algorithms.ExactEigensolver.check_pluggable_valid" title="Link permanente para esta definição">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">check_pluggable_valid</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.algorithms.ExactEigensolver.check_pluggable_valid" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Checks if pluggable is ready for use. Throws an exception if not</p>
 </dd></dl>
 
-<dl class="classmethod">
+<dl class="method">
 <dt id="qiskit.aqua.algorithms.ExactEigensolver.init_params">
-<em class="property">classmethod </em><code class="descname">init_params</code><span class="sig-paren">(</span><em>params</em>, <em>algo_input</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/algorithms/classical/exact_eigen_solver/exact_eigen_solver.html#ExactEigensolver.init_params"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.aqua.algorithms.ExactEigensolver.init_params" title="Link permanente para esta definição">¶</a></dt>
+<em class="property">classmethod </em><code class="sig-name descname">init_params</code><span class="sig-paren">(</span><em class="sig-param">params</em>, <em class="sig-param">algo_input</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/algorithms/classical/exact_eigen_solver/exact_eigen_solver.html#ExactEigensolver.init_params"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.aqua.algorithms.ExactEigensolver.init_params" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Initialize via parameters dictionary and algorithm input instance
 :param params: parameters dictionary
 :param algo_input: EnergyInput instance</p>
@@ -1474,26 +1497,24 @@
 
 <dl class="method">
 <dt id="qiskit.aqua.algorithms.ExactEigensolver.run">
-<code class="descname">run</code><span class="sig-paren">(</span><em>quantum_instance=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.algorithms.ExactEigensolver.run" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param">quantum_instance=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.algorithms.ExactEigensolver.run" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Execute the algorithm with selected backend.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parâmetros:</th><td class="field-body"><strong>quantum_instance</strong> (<a class="reference internal" href="qiskit.aqua.QuantumInstance.html#qiskit.aqua.QuantumInstance" title="qiskit.aqua.QuantumInstance"><em>QuantumInstance</em></a><em> or </em><a class="reference internal" href="qiskit.providers.BaseBackend.html#qiskit.providers.BaseBackend" title="qiskit.providers.BaseBackend"><em>BaseBackend</em></a>) – the experiemental setting.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Retorno:</th><td class="field-body">results of an algorithm.</td>
-</tr>
-<tr class="field-odd field"><th class="field-name" colspan="2">Tipo de retorno:</th></tr>
-<tr class="field-odd field"><td>&#160;</td><td class="field-body">dict</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><p><strong>quantum_instance</strong> (<a class="reference internal" href="qiskit.aqua.QuantumInstance.html#qiskit.aqua.QuantumInstance" title="qiskit.aqua.QuantumInstance"><em>QuantumInstance</em></a><em> or </em><a class="reference internal" href="qiskit.providers.BaseBackend.html#qiskit.providers.BaseBackend" title="qiskit.providers.BaseBackend"><em>BaseBackend</em></a>) – the experiemental setting.</p>
+</dd>
+<dt class="field-even">Retorno</dt>
+<dd class="field-even"><p>results of an algorithm.</p>
+</dd>
+<dt class="field-odd">Tipo de retorno</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.algorithms.ExactEigensolver.validate">
-<code class="descname">validate</code><span class="sig-paren">(</span><em>args_dict</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.algorithms.ExactEigensolver.validate" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">validate</code><span class="sig-paren">(</span><em class="sig-param">args_dict</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.algorithms.ExactEigensolver.validate" title="Link permanente para esta definição">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>

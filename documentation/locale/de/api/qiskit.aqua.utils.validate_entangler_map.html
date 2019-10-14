@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,6 +48,8 @@
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/js/themeExt.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Stichwortverzeichnis" href="../genindex.html" />
@@ -625,6 +626,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1215,6 +1222,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1261,32 +1274,28 @@
 <h1>validate_entangler_map<a class="headerlink" href="#validate-entangler-map" title="Link zu dieser Überschrift">¶</a></h1>
 <dl class="function">
 <dt id="qiskit.aqua.utils.validate_entangler_map">
-<code class="descname">validate_entangler_map</code><span class="sig-paren">(</span><em>entangler_map</em>, <em>num_qubits</em>, <em>allow_double_entanglement=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/utils/entangler_map.html#validate_entangler_map"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.aqua.utils.validate_entangler_map" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">validate_entangler_map</code><span class="sig-paren">(</span><em class="sig-param">entangler_map</em>, <em class="sig-param">num_qubits</em>, <em class="sig-param">allow_double_entanglement=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/utils/entangler_map.html#validate_entangler_map"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.aqua.utils.validate_entangler_map" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Validate a user supplied entangler map and converts entries to ints.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><ul class="first simple">
-<li><strong>entangler_map</strong> (<em>list</em><em>[</em><em>list</em><em>]</em>) – An entangler map, keys are source qubit index (int), value is array
-of target qubit index(es) (int)</li>
-<li><strong>num_qubits</strong> (<em>int</em>) – Number of qubits</li>
-<li><strong>allow_double_entanglement</strong> – If we allow in two qubits can be entangled each other</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>entangler_map</strong> (<em>list</em><em>[</em><em>list</em><em>]</em>) – An entangler map, keys are source qubit index (int), value is array
+of target qubit index(es) (int)</p></li>
+<li><p><strong>num_qubits</strong> (<em>int</em>) – Number of qubits</p></li>
+<li><p><strong>allow_double_entanglement</strong> – If we allow in two qubits can be entangled each other</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body"><p class="first">Validated/converted map</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code> – entangler map is not list type or list of list</li>
-<li><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code> – the index of entangler map is out of range</li>
-<li><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code> – the qubits are cross-entangled.</li>
+</dd>
+<dt class="field-even">Rückgabe</dt>
+<dd class="field-even"><p>Validated/converted map</p>
+</dd>
+<dt class="field-odd">Verursacht</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>TypeError</strong> – entangler map is not list type or list of list</p></li>
+<li><p><strong>ValueError</strong> – the index of entangler map is out of range</p></li>
+<li><p><strong>ValueError</strong> – the qubits are cross-entangled.</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 </div>

@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,6 +48,8 @@
     <script type="text/javascript" src="../../_static/language_data.js"></script>
     <script type="text/javascript" src="../../_static/js/themeExt.js"></script>
     <script type="text/javascript" src="../../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="索引" href="../../genindex.html" />
@@ -625,6 +626,12 @@
 <li class="toctree-l3"><a class="reference internal" href="#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../api/qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api/qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api/qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api/qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api/qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1215,6 +1222,12 @@
 <li class="toctree-l3"><a class="reference internal" href="#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../api/qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api/qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api/qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api/qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api/qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1262,70 +1275,88 @@
 <p>Main Qiskit visualization methods.</p>
 <div class="section" id="functions">
 <h2>Functions<a class="headerlink" href="#functions" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="../../api/qiskit.visualization.circuit_drawer.html#qiskit.visualization.circuit_drawer" title="qiskit.visualization.circuit_drawer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">circuit_drawer</span></code></a>(circuit[,&nbsp;scale,&nbsp;filename,&nbsp;...])</td>
-<td>Draw a quantum circuit to different formats (set by output parameter): 0.</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../api/qiskit.visualization.circuit_drawer.html#qiskit.visualization.circuit_drawer" title="qiskit.visualization.circuit_drawer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">circuit_drawer</span></code></a>(circuit[, scale, filename, ...])</p></td>
+<td><p>Draw a quantum circuit to different formats (set by output parameter): 0.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../../api/qiskit.visualization.dag_drawer.html#qiskit.visualization.dag_drawer" title="qiskit.visualization.dag_drawer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dag_drawer</span></code></a>(dag[,&nbsp;scale,&nbsp;filename,&nbsp;style])</td>
-<td>Plot the directed acyclic graph (dag) to represent operation dependencies in a quantum circuit.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="../../api/qiskit.visualization.dag_drawer.html#qiskit.visualization.dag_drawer" title="qiskit.visualization.dag_drawer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dag_drawer</span></code></a>(dag[, scale, filename, style])</p></td>
+<td><p>Plot the directed acyclic graph (dag) to represent operation dependencies in a quantum circuit.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../../api/qiskit.visualization.pass_manager_drawer.html#qiskit.visualization.pass_manager_drawer" title="qiskit.visualization.pass_manager_drawer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pass_manager_drawer</span></code></a>(pass_manager,&nbsp;filename)</td>
-<td>Draws the pass manager.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../api/qiskit.visualization.iplot_bloch_multivector.html#qiskit.visualization.iplot_bloch_multivector" title="qiskit.visualization.iplot_bloch_multivector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">iplot_bloch_multivector</span></code></a>(rho[, figsize])</p></td>
+<td><p>Create a bloch sphere representation.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../../api/qiskit.visualization.plot_bloch_multivector.html#qiskit.visualization.plot_bloch_multivector" title="qiskit.visualization.plot_bloch_multivector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_bloch_multivector</span></code></a>(rho[,&nbsp;title,&nbsp;figsize])</td>
-<td>Plot the Bloch sphere.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="../../api/qiskit.visualization.iplot_histogram.html#qiskit.visualization.iplot_histogram" title="qiskit.visualization.iplot_histogram"><code class="xref py py-obj docutils literal notranslate"><span class="pre">iplot_histogram</span></code></a>(data[, figsize, ...])</p></td>
+<td><p>Create a histogram representation.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../../api/qiskit.visualization.plot_bloch_vector.html#qiskit.visualization.plot_bloch_vector" title="qiskit.visualization.plot_bloch_vector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_bloch_vector</span></code></a>(bloch[,&nbsp;title,&nbsp;ax,&nbsp;figsize])</td>
-<td>Plot the Bloch sphere.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../api/qiskit.visualization.iplot_state_city.html#qiskit.visualization.iplot_state_city" title="qiskit.visualization.iplot_state_city"><code class="xref py py-obj docutils literal notranslate"><span class="pre">iplot_state_city</span></code></a>(rho[, figsize])</p></td>
+<td><p>Create a cities representation.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../../api/qiskit.visualization.plot_circuit_layout.html#qiskit.visualization.plot_circuit_layout" title="qiskit.visualization.plot_circuit_layout"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_circuit_layout</span></code></a>(circuit,&nbsp;backend[,&nbsp;view])</td>
-<td>Plot the layout of a circuit transpiled for a given target backend.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="../../api/qiskit.visualization.iplot_state_hinton.html#qiskit.visualization.iplot_state_hinton" title="qiskit.visualization.iplot_state_hinton"><code class="xref py py-obj docutils literal notranslate"><span class="pre">iplot_state_hinton</span></code></a>(rho[, figsize])</p></td>
+<td><p>Create a hinton representation.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../../api/qiskit.visualization.plot_error_map.html#qiskit.visualization.plot_error_map" title="qiskit.visualization.plot_error_map"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_error_map</span></code></a>(backend[,&nbsp;figsize,&nbsp;show_title])</td>
-<td>Plots the error map of a given backend.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../api/qiskit.visualization.iplot_state_paulivec.html#qiskit.visualization.iplot_state_paulivec" title="qiskit.visualization.iplot_state_paulivec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">iplot_state_paulivec</span></code></a>(rho[, figsize, slider, ...])</p></td>
+<td><p>Create a paulivec representation.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../../api/qiskit.visualization.plot_gate_map.html#qiskit.visualization.plot_gate_map" title="qiskit.visualization.plot_gate_map"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_gate_map</span></code></a>(backend[,&nbsp;figsize,&nbsp;...])</td>
-<td>Plots the gate map of a device.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="../../api/qiskit.visualization.iplot_state_qsphere.html#qiskit.visualization.iplot_state_qsphere" title="qiskit.visualization.iplot_state_qsphere"><code class="xref py py-obj docutils literal notranslate"><span class="pre">iplot_state_qsphere</span></code></a>(rho[, figsize])</p></td>
+<td><p>Create a Q sphere representation.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../../api/qiskit.visualization.plot_histogram.html#qiskit.visualization.plot_histogram" title="qiskit.visualization.plot_histogram"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_histogram</span></code></a>(data[,&nbsp;figsize,&nbsp;color,&nbsp;...])</td>
-<td>Plot a histogram of data.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../api/qiskit.visualization.pass_manager_drawer.html#qiskit.visualization.pass_manager_drawer" title="qiskit.visualization.pass_manager_drawer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pass_manager_drawer</span></code></a>(pass_manager, filename)</p></td>
+<td><p>Draws the pass manager.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../../api/qiskit.visualization.plot_state_city.html#qiskit.visualization.plot_state_city" title="qiskit.visualization.plot_state_city"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_state_city</span></code></a>(rho[,&nbsp;title,&nbsp;figsize,&nbsp;...])</td>
-<td>Plot the cityscape of quantum state.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="../../api/qiskit.visualization.plot_bloch_multivector.html#qiskit.visualization.plot_bloch_multivector" title="qiskit.visualization.plot_bloch_multivector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_bloch_multivector</span></code></a>(rho[, title, figsize])</p></td>
+<td><p>Plot the Bloch sphere.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../../api/qiskit.visualization.plot_state_hinton.html#qiskit.visualization.plot_state_hinton" title="qiskit.visualization.plot_state_hinton"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_state_hinton</span></code></a>(rho[,&nbsp;title,&nbsp;figsize])</td>
-<td>Plot a hinton diagram for the quanum state.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../api/qiskit.visualization.plot_bloch_vector.html#qiskit.visualization.plot_bloch_vector" title="qiskit.visualization.plot_bloch_vector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_bloch_vector</span></code></a>(bloch[, title, ax, figsize])</p></td>
+<td><p>Plot the Bloch sphere.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../../api/qiskit.visualization.plot_state_paulivec.html#qiskit.visualization.plot_state_paulivec" title="qiskit.visualization.plot_state_paulivec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_state_paulivec</span></code></a>(rho[,&nbsp;title,&nbsp;figsize,&nbsp;color])</td>
-<td>Plot the paulivec representation of a quantum state.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="../../api/qiskit.visualization.plot_circuit_layout.html#qiskit.visualization.plot_circuit_layout" title="qiskit.visualization.plot_circuit_layout"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_circuit_layout</span></code></a>(circuit, backend[, view])</p></td>
+<td><p>Plot the layout of a circuit transpiled for a given target backend.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../../api/qiskit.visualization.plot_state_qsphere.html#qiskit.visualization.plot_state_qsphere" title="qiskit.visualization.plot_state_qsphere"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_state_qsphere</span></code></a>(rho[,&nbsp;figsize])</td>
-<td>Plot the qsphere representation of a quantum state.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../api/qiskit.visualization.plot_error_map.html#qiskit.visualization.plot_error_map" title="qiskit.visualization.plot_error_map"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_error_map</span></code></a>(backend[, figsize, show_title])</p></td>
+<td><p>Plots the error map of a given backend.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../../api/qiskit.visualization.pulse_drawer.html#qiskit.visualization.pulse_drawer" title="qiskit.visualization.pulse_drawer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pulse_drawer</span></code></a>(data[,&nbsp;dt,&nbsp;style,&nbsp;filename,&nbsp;...])</td>
-<td>Plot the interpolated envelope of pulse</td>
+<tr class="row-even"><td><p><a class="reference internal" href="../../api/qiskit.visualization.plot_gate_map.html#qiskit.visualization.plot_gate_map" title="qiskit.visualization.plot_gate_map"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_gate_map</span></code></a>(backend[, figsize, ...])</p></td>
+<td><p>Plots the gate map of a device.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../../api/qiskit.visualization.qx_color_scheme.html#qiskit.visualization.qx_color_scheme" title="qiskit.visualization.qx_color_scheme"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qx_color_scheme</span></code></a>()</td>
-<td>Return default style for matplotlib_circuit_drawer (IBM QX style).</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../api/qiskit.visualization.plot_histogram.html#qiskit.visualization.plot_histogram" title="qiskit.visualization.plot_histogram"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_histogram</span></code></a>(data[, figsize, color, ...])</p></td>
+<td><p>Plot a histogram of data.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../api/qiskit.visualization.plot_state_city.html#qiskit.visualization.plot_state_city" title="qiskit.visualization.plot_state_city"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_state_city</span></code></a>(rho[, title, figsize, ...])</p></td>
+<td><p>Plot the cityscape of quantum state.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../api/qiskit.visualization.plot_state_hinton.html#qiskit.visualization.plot_state_hinton" title="qiskit.visualization.plot_state_hinton"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_state_hinton</span></code></a>(rho[, title, figsize])</p></td>
+<td><p>Plot a hinton diagram for the quanum state.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../api/qiskit.visualization.plot_state_paulivec.html#qiskit.visualization.plot_state_paulivec" title="qiskit.visualization.plot_state_paulivec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_state_paulivec</span></code></a>(rho[, title, figsize, color])</p></td>
+<td><p>Plot the paulivec representation of a quantum state.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../api/qiskit.visualization.plot_state_qsphere.html#qiskit.visualization.plot_state_qsphere" title="qiskit.visualization.plot_state_qsphere"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_state_qsphere</span></code></a>(rho[, figsize])</p></td>
+<td><p>Plot the qsphere representation of a quantum state.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../api/qiskit.visualization.pulse_drawer.html#qiskit.visualization.pulse_drawer" title="qiskit.visualization.pulse_drawer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pulse_drawer</span></code></a>(data[, dt, style, filename, ...])</p></td>
+<td><p>Plot the interpolated envelope of pulse</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../api/qiskit.visualization.qx_color_scheme.html#qiskit.visualization.qx_color_scheme" title="qiskit.visualization.qx_color_scheme"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qx_color_scheme</span></code></a>()</p></td>
+<td><p>Return default style for matplotlib_circuit_drawer (IBM QX style).</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="section" id="classes">
 <h2>Classes<a class="headerlink" href="#classes" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="../../api/qiskit.visualization.VisualizationError.html#qiskit.visualization.VisualizationError" title="qiskit.visualization.VisualizationError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">VisualizationError</span></code></a>(*message)</td>
-<td>For visualization specific errors.</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../api/qiskit.visualization.VisualizationError.html#qiskit.visualization.VisualizationError" title="qiskit.visualization.VisualizationError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">VisualizationError</span></code></a>(*message)</p></td>
+<td><p>For visualization specific errors.</p></td>
 </tr>
 </tbody>
 </table>

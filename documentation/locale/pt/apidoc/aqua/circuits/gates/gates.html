@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,6 +48,8 @@
     <script type="text/javascript" src="../../../../_static/language_data.js"></script>
     <script type="text/javascript" src="../../../../_static/js/themeExt.js"></script>
     <script type="text/javascript" src="../../../../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../../../../_static/favicon.ico"/>
     <link rel="index" title="Índice" href="../../../../genindex.html" />
@@ -625,6 +626,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../../../api/qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../../api/qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../../api/qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../../api/qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../../api/qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1215,6 +1222,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../../../api/qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../../api/qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../../api/qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../../api/qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../../api/qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1261,44 +1274,44 @@
 <span id="id1"></span><span id="qiskit-aqua-circuits-gates"></span><h1>qiskit.aqua.circuits.gates<a class="headerlink" href="#module-qiskit.aqua.circuits.gates" title="Link permanente para este título">¶</a></h1>
 <div class="section" id="functions">
 <h2>Functions<a class="headerlink" href="#functions" title="Link permanente para este título">¶</a></h2>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="../../../../api/qiskit.aqua.circuits.gates.mcu1.html#qiskit.aqua.circuits.gates.mcu1" title="qiskit.aqua.circuits.gates.mcu1"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mcu1</span></code></a>(self,&nbsp;lam,&nbsp;control_qubits,&nbsp;target_qubit)</td>
-<td>Apply Multiple-Controlled U1 gate</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../../api/qiskit.aqua.circuits.gates.mcu1.html#qiskit.aqua.circuits.gates.mcu1" title="qiskit.aqua.circuits.gates.mcu1"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mcu1</span></code></a>(self, lam, control_qubits, target_qubit)</p></td>
+<td><p>Apply Multiple-Controlled U1 gate</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../../../../api/qiskit.aqua.circuits.gates.mcrx.html#qiskit.aqua.circuits.gates.mcrx" title="qiskit.aqua.circuits.gates.mcrx"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mcrx</span></code></a>(self,&nbsp;theta,&nbsp;q_controls,&nbsp;q_target[,&nbsp;…])</td>
-<td>Apply Multiple-Controlled X rotation gate</td>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../../api/qiskit.aqua.circuits.gates.mcrx.html#qiskit.aqua.circuits.gates.mcrx" title="qiskit.aqua.circuits.gates.mcrx"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mcrx</span></code></a>(self, theta, q_controls, q_target[, …])</p></td>
+<td><p>Apply Multiple-Controlled X rotation gate</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../../../../api/qiskit.aqua.circuits.gates.mcry.html#qiskit.aqua.circuits.gates.mcry" title="qiskit.aqua.circuits.gates.mcry"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mcry</span></code></a>(self,&nbsp;theta,&nbsp;q_controls,&nbsp;q_target,&nbsp;…)</td>
-<td>Apply Multiple-Controlled Y rotation gate</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../../api/qiskit.aqua.circuits.gates.mcry.html#qiskit.aqua.circuits.gates.mcry" title="qiskit.aqua.circuits.gates.mcry"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mcry</span></code></a>(self, theta, q_controls, q_target, …)</p></td>
+<td><p>Apply Multiple-Controlled Y rotation gate</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../../../../api/qiskit.aqua.circuits.gates.mcrz.html#qiskit.aqua.circuits.gates.mcrz" title="qiskit.aqua.circuits.gates.mcrz"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mcrz</span></code></a>(self,&nbsp;lam,&nbsp;q_controls,&nbsp;q_target[,&nbsp;…])</td>
-<td>Apply Multiple-Controlled Z rotation gate</td>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../../api/qiskit.aqua.circuits.gates.mcrz.html#qiskit.aqua.circuits.gates.mcrz" title="qiskit.aqua.circuits.gates.mcrz"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mcrz</span></code></a>(self, lam, q_controls, q_target[, …])</p></td>
+<td><p>Apply Multiple-Controlled Z rotation gate</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../../../../api/qiskit.aqua.circuits.gates.mct.html#qiskit.aqua.circuits.gates.mct" title="qiskit.aqua.circuits.gates.mct"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mct</span></code></a>(self,&nbsp;q_controls,&nbsp;q_target,&nbsp;q_ancilla[,&nbsp;…])</td>
-<td>Apply Multiple-Control Toffoli operation</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../../api/qiskit.aqua.circuits.gates.mct.html#qiskit.aqua.circuits.gates.mct" title="qiskit.aqua.circuits.gates.mct"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mct</span></code></a>(self, q_controls, q_target, q_ancilla[, …])</p></td>
+<td><p>Apply Multiple-Control Toffoli operation</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../../../../api/qiskit.aqua.circuits.gates.mcmt.html#qiskit.aqua.circuits.gates.mcmt" title="qiskit.aqua.circuits.gates.mcmt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mcmt</span></code></a>(self,&nbsp;q_controls,&nbsp;q_ancillae,&nbsp;…[,&nbsp;mode])</td>
-<td>Apply a Multi-Control, Multi-Target using a generic gate.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../../api/qiskit.aqua.circuits.gates.mcmt.html#qiskit.aqua.circuits.gates.mcmt" title="qiskit.aqua.circuits.gates.mcmt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mcmt</span></code></a>(self, q_controls, q_ancillae, …[, mode])</p></td>
+<td><p>Apply a Multi-Control, Multi-Target using a generic gate.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../../../../api/qiskit.aqua.circuits.gates.logical_and.html#qiskit.aqua.circuits.gates.logical_and" title="qiskit.aqua.circuits.gates.logical_and"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logical_and</span></code></a>(self,&nbsp;qr_variables,&nbsp;qb_target,&nbsp;…)</td>
-<td>Build a collective conjunction (AND) circuit in place using mct.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../../api/qiskit.aqua.circuits.gates.logical_and.html#qiskit.aqua.circuits.gates.logical_and" title="qiskit.aqua.circuits.gates.logical_and"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logical_and</span></code></a>(self, qr_variables, qb_target, …)</p></td>
+<td><p>Build a collective conjunction (AND) circuit in place using mct.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../../../../api/qiskit.aqua.circuits.gates.logical_or.html#qiskit.aqua.circuits.gates.logical_or" title="qiskit.aqua.circuits.gates.logical_or"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logical_or</span></code></a>(self,&nbsp;qr_variables,&nbsp;qb_target,&nbsp;…)</td>
-<td>Build a collective disjunction (OR) circuit in place using mct.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../../api/qiskit.aqua.circuits.gates.logical_or.html#qiskit.aqua.circuits.gates.logical_or" title="qiskit.aqua.circuits.gates.logical_or"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logical_or</span></code></a>(self, qr_variables, qb_target, …)</p></td>
+<td><p>Build a collective disjunction (OR) circuit in place using mct.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../../../../api/qiskit.aqua.circuits.gates.cry.html#qiskit.aqua.circuits.gates.cry" title="qiskit.aqua.circuits.gates.cry"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cry</span></code></a>(self,&nbsp;theta,&nbsp;q_control,&nbsp;q_target)</td>
-<td>Apply Controlled-RY (cry) Gate.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../../api/qiskit.aqua.circuits.gates.cry.html#qiskit.aqua.circuits.gates.cry" title="qiskit.aqua.circuits.gates.cry"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cry</span></code></a>(self, theta, q_control, q_target)</p></td>
+<td><p>Apply Controlled-RY (cry) Gate.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../../../../api/qiskit.aqua.circuits.gates.rccx.html#qiskit.aqua.circuits.gates.rccx" title="qiskit.aqua.circuits.gates.rccx"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rccx</span></code></a>(self,&nbsp;q_control_1,&nbsp;q_control_2,&nbsp;q_target)</td>
-<td>Apply 2-Control Relative-Phase Toffoli gate from q_control_1 and q_control_2 to q_target.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../../api/qiskit.aqua.circuits.gates.rccx.html#qiskit.aqua.circuits.gates.rccx" title="qiskit.aqua.circuits.gates.rccx"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rccx</span></code></a>(self, q_control_1, q_control_2, q_target)</p></td>
+<td><p>Apply 2-Control Relative-Phase Toffoli gate from q_control_1 and q_control_2 to q_target.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../../../../api/qiskit.aqua.circuits.gates.rcccx.html#qiskit.aqua.circuits.gates.rcccx" title="qiskit.aqua.circuits.gates.rcccx"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rcccx</span></code></a>(self,&nbsp;q_control_1,&nbsp;q_control_2,&nbsp;…)</td>
-<td>Apply 3-Control Relative-Phase Toffoli gate from q_control_1, q_control_2, and q_control_3 to q_target.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../../api/qiskit.aqua.circuits.gates.rcccx.html#qiskit.aqua.circuits.gates.rcccx" title="qiskit.aqua.circuits.gates.rcccx"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rcccx</span></code></a>(self, q_control_1, q_control_2, …)</p></td>
+<td><p>Apply 3-Control Relative-Phase Toffoli gate from q_control_1, q_control_2, and q_control_3 to q_target.</p></td>
 </tr>
 </tbody>
 </table>

@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,6 +48,8 @@
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/js/themeExt.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="索引" href="../genindex.html" />
@@ -625,6 +626,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1215,6 +1222,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1261,814 +1274,763 @@
 <h1>TPBGroupedWeightedPauliOperator<a class="headerlink" href="#tpbgroupedweightedpaulioperator" title="このヘッドラインへのパーマリンク">¶</a></h1>
 <dl class="class">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator">
-<em class="property">class </em><code class="descname">TPBGroupedWeightedPauliOperator</code><span class="sig-paren">(</span><em>paulis</em>, <em>basis</em>, <em>z2_symmetries=None</em>, <em>atol=1e-12</em>, <em>name=None</em>, <em>grouping_func=None</em>, <em>kwargs=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/operators/tpb_grouped_weighted_pauli_operator.html#TPBGroupedWeightedPauliOperator"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator" title="この定義へのパーマリンク">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">TPBGroupedWeightedPauliOperator</code><span class="sig-paren">(</span><em class="sig-param">paulis</em>, <em class="sig-param">basis</em>, <em class="sig-param">z2_symmetries=None</em>, <em class="sig-param">atol=1e-12</em>, <em class="sig-param">name=None</em>, <em class="sig-param">grouping_func=None</em>, <em class="sig-param">kwargs=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/operators/tpb_grouped_weighted_pauli_operator.html#TPBGroupedWeightedPauliOperator"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.aqua.operators.weighted_pauli_operator.WeightedPauliOperator</span></code></p>
+<p>Args:
+paulis ([[complex, Pauli]]): the list of weighted Paulis, where a weighted pauli is composed of</p>
+<blockquote>
+<div><p>a length-2 list and the first item is the weight and
+the second item is the Pauli object.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>basis (list[tuple(object, [int])], optional): the grouping basis, each element is a tuple composed of the basis</dt><dd><p>and the indices to paulis which are belonged to that group.
+e.g., if tpb basis is used, the object will be a pauli.
+by default, the group is equal to non-grouping, each pauli is its own basis.</p>
+</dd>
+</dl>
+<p>z2_symmetries (Z2Symmetires): recording the z2 symmetries info
+atol (float, optional): the threshold used in truncating paulis
+name (str, optional): the name of operator.</p>
 <p class="rubric">Attributes Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.aer_paulis" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.aer_paulis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">aer_paulis</span></code></a></td>
-<td>the weighted paulis formatted for the aer simulator.</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.aer_paulis" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.aer_paulis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">aer_paulis</span></code></a></p></td>
+<td><p>the weighted paulis formatted for the aer simulator.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.atol" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.atol"><code class="xref py py-obj docutils literal notranslate"><span class="pre">atol</span></code></a></td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.atol" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.atol"><code class="xref py py-obj docutils literal notranslate"><span class="pre">atol</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.basis" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.basis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">basis</span></code></a></td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.basis" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.basis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">basis</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.coloring" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.coloring"><code class="xref py py-obj docutils literal notranslate"><span class="pre">coloring</span></code></a></td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.coloring" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.coloring"><code class="xref py py-obj docutils literal notranslate"><span class="pre">coloring</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.grouping_func" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.grouping_func"><code class="xref py py-obj docutils literal notranslate"><span class="pre">grouping_func</span></code></a></td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.grouping_func" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.grouping_func"><code class="xref py py-obj docutils literal notranslate"><span class="pre">grouping_func</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.kwargs" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.kwargs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kwargs</span></code></a></td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.kwargs" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.kwargs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kwargs</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.name" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></a></td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.name" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.num_groups" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.num_groups"><code class="xref py py-obj docutils literal notranslate"><span class="pre">num_groups</span></code></a></td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.num_groups" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.num_groups"><code class="xref py py-obj docutils literal notranslate"><span class="pre">num_groups</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.num_qubits" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.num_qubits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">num_qubits</span></code></a></td>
-<td>number of qubits required for the operator.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.num_qubits" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.num_qubits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">num_qubits</span></code></a></p></td>
+<td><p>number of qubits required for the operator.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.paulis" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.paulis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">paulis</span></code></a></td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.paulis" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.paulis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">paulis</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.representations" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.representations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">representations</span></code></a></td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.representations" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.representations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">representations</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.z2_symmetries" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.z2_symmetries"><code class="xref py py-obj docutils literal notranslate"><span class="pre">z2_symmetries</span></code></a></td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.z2_symmetries" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.z2_symmetries"><code class="xref py py-obj docutils literal notranslate"><span class="pre">z2_symmetries</span></code></a></p></td>
+<td><p></p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Methods Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.add" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.add"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add</span></code></a>(other[,&nbsp;copy])</td>
-<td>Perform self + other.</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.add" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.add"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add</span></code></a>(other[, copy])</p></td>
+<td><p>Perform self + other.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.anticommute_with" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.anticommute_with"><code class="xref py py-obj docutils literal notranslate"><span class="pre">anticommute_with</span></code></a>(other)</td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.anticommute_with" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.anticommute_with"><code class="xref py py-obj docutils literal notranslate"><span class="pre">anticommute_with</span></code></a>(other)</p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.chop" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.chop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chop</span></code></a>([threshold,&nbsp;copy])</td>
-<td>Eliminate the real and imagine part of weight in each pauli by <cite>threshold</cite>.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.chop" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.chop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chop</span></code></a>([threshold, copy])</p></td>
+<td><p>Eliminate the real and imagine part of weight in each pauli by <cite>threshold</cite>.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.commute_with" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.commute_with"><code class="xref py py-obj docutils literal notranslate"><span class="pre">commute_with</span></code></a>(other)</td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.commute_with" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.commute_with"><code class="xref py py-obj docutils literal notranslate"><span class="pre">commute_with</span></code></a>(other)</p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.construct_evaluation_circuit" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.construct_evaluation_circuit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">construct_evaluation_circuit</span></code></a>([...])</td>
-<td>Construct the circuits for evaluation, which calculating the expectation &lt;psi|H|psi&gt;.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.construct_evaluation_circuit" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.construct_evaluation_circuit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">construct_evaluation_circuit</span></code></a>([...])</p></td>
+<td><p>Construct the circuits for evaluation, which calculating the expectation &lt;psi|H|psi&gt;.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.construct_evolution_circuit" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.construct_evolution_circuit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">construct_evolution_circuit</span></code></a>(...[,&nbsp;...])</td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.construct_evolution_circuit" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.construct_evolution_circuit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">construct_evolution_circuit</span></code></a>(...[, ...])</p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.convert" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.convert"><code class="xref py py-obj docutils literal notranslate"><span class="pre">convert</span></code></a>(input_format,&nbsp;output_format[,&nbsp;force])</td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.convert" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.convert"><code class="xref py py-obj docutils literal notranslate"><span class="pre">convert</span></code></a>(input_format, output_format[, force])</p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.copy" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.copy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">copy</span></code></a>()</td>
-<td>Get a copy of self.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.copy" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.copy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">copy</span></code></a>()</p></td>
+<td><p>Get a copy of self.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.disable_summarize_circuits" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.disable_summarize_circuits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">disable_summarize_circuits</span></code></a>()</td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.disable_summarize_circuits" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.disable_summarize_circuits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">disable_summarize_circuits</span></code></a>()</p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.enable_summarize_circuits" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.enable_summarize_circuits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">enable_summarize_circuits</span></code></a>()</td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.enable_summarize_circuits" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.enable_summarize_circuits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">enable_summarize_circuits</span></code></a>()</p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.eval" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.eval"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eval</span></code></a>(operator_mode,&nbsp;input_circuit,&nbsp;backend)</td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.eval" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.eval"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eval</span></code></a>(operator_mode, input_circuit, backend)</p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.evaluate_with_result" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.evaluate_with_result"><code class="xref py py-obj docutils literal notranslate"><span class="pre">evaluate_with_result</span></code></a>([operator_mode,&nbsp;...])</td>
-<td>This method can be only used with the circuits generated by the <cite>construct_evaluation_circuit</cite> method with the same <cite>circuit_name_prefix</cite> since the circuit names are tied to some meanings.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.evaluate_with_result" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.evaluate_with_result"><code class="xref py py-obj docutils literal notranslate"><span class="pre">evaluate_with_result</span></code></a>([operator_mode, ...])</p></td>
+<td><p>This method can be only used with the circuits generated by the <cite>construct_evaluation_circuit</cite> method with the same <cite>circuit_name_prefix</cite> since the circuit names are tied to some meanings.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.evaluate_with_statevector" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.evaluate_with_statevector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">evaluate_with_statevector</span></code></a>(quantum_state)</td>
-<td><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name" colspan="2">param quantum_state:</th></tr>
-<tr class="field-odd field"><td>&#160;</td><td class="field-body">a quantum state.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.evaluate_with_statevector" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.evaluate_with_statevector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">evaluate_with_statevector</span></code></a>(quantum_state)</p></td>
+<td><p><dl class="field-list simple">
+<dt class="field-odd">param quantum_state</dt>
+<dd class="field-odd"><p>a quantum state.</p>
+</dd>
+</dl>
+</p></td>
 </tr>
-</tbody>
-</table>
-</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.evaluation_instruction" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.evaluation_instruction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">evaluation_instruction</span></code></a>(statevector_mode[, ...])</p></td>
+<td><p><dl class="field-list simple">
+<dt class="field-odd">param statevector_mode</dt>
+<dd class="field-odd"><p>will it be run on statevector simulator or not</p>
+</dd>
+</dl>
+</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.evaluation_instruction" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.evaluation_instruction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">evaluation_instruction</span></code></a>(statevector_mode[,&nbsp;...])</td>
-<td><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name" colspan="2">param statevector_mode:</th></tr>
-<tr class="field-odd field"><td>&#160;</td><td class="field-body">will it be run on statevector simulator or not</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.evolve" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.evolve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">evolve</span></code></a>([state_in, evo_time, evo_mode, ...])</p></td>
+<td><p>Carry out the eoh evolution for the operator under supplied specifications.</p></td>
 </tr>
-</tbody>
-</table>
-</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.evolve_instruction" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.evolve_instruction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">evolve_instruction</span></code></a>([evo_time, ...])</p></td>
+<td><p>Carry out the eoh evolution for the operator under supplied specifications.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.evolve" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.evolve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">evolve</span></code></a>([state_in,&nbsp;evo_time,&nbsp;evo_mode,&nbsp;...])</td>
-<td>Carry out the eoh evolution for the operator under supplied specifications.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.find_Z2_symmetries" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.find_Z2_symmetries"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_Z2_symmetries</span></code></a>()</p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.evolve_instruction" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.evolve_instruction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">evolve_instruction</span></code></a>([evo_time,&nbsp;...])</td>
-<td>Carry out the eoh evolution for the operator under supplied specifications.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.from_dict" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.from_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_dict</span></code></a>(dictionary[, before_04])</p></td>
+<td><p>Load paulis in a dict to construct an Operator,         the dict must be represented as follows: label and coeff (real and imag).</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.find_Z2_symmetries" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.find_Z2_symmetries"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_Z2_symmetries</span></code></a>()</td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.from_file" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.from_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_file</span></code></a>(file_name[, before_04])</p></td>
+<td><p>Load paulis in a file to construct an Operator.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.from_dict" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.from_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_dict</span></code></a>(dictionary[,&nbsp;before_04])</td>
-<td>Load paulis in a dict to construct an Operator,         the dict must be represented as follows: label and coeff (real and imag).</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.from_list" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.from_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_list</span></code></a>(paulis[, weights, name])</p></td>
+<td><p>Create a WeightedPauliOperator via a pair of list.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.from_file" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.from_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_file</span></code></a>(file_name[,&nbsp;before_04])</td>
-<td>Load paulis in a file to construct an Operator.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.get_flat_pauli_list" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.get_flat_pauli_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_flat_pauli_list</span></code></a>()</p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.from_list" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.from_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_list</span></code></a>(paulis[,&nbsp;weights,&nbsp;name])</td>
-<td>Create a WeightedPauliOperator via a pair of list.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.is_empty" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.is_empty"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_empty</span></code></a>()</p></td>
+<td><p>Check Operator is empty or not.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.get_flat_pauli_list" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.get_flat_pauli_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_flat_pauli_list</span></code></a>()</td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.kernel_F2" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.kernel_F2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kernel_F2</span></code></a>(matrix_in)</p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.is_empty" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.is_empty"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_empty</span></code></a>()</td>
-<td>Check Operator is empty or not.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.load_from_dict" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.load_from_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_from_dict</span></code></a>(dictionary[, before_04])</p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.kernel_F2" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.kernel_F2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kernel_F2</span></code></a>(matrix_in)</td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.load_from_file" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.load_from_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_from_file</span></code></a>(file_name[, before_04])</p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.load_from_dict" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.load_from_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_from_dict</span></code></a>(dictionary[,&nbsp;before_04])</td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.multiply" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.multiply"><code class="xref py py-obj docutils literal notranslate"><span class="pre">multiply</span></code></a>(other)</p></td>
+<td><p>Perform self * other.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.load_from_file" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.load_from_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_from_file</span></code></a>(file_name[,&nbsp;before_04])</td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.print_details" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.print_details"><code class="xref py py-obj docutils literal notranslate"><span class="pre">print_details</span></code></a>()</p></td>
+<td><p>Print out the operator in details.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.multiply" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.multiply"><code class="xref py py-obj docutils literal notranslate"><span class="pre">multiply</span></code></a>(other)</td>
-<td>Perform self * other.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.print_operators" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.print_operators"><code class="xref py py-obj docutils literal notranslate"><span class="pre">print_operators</span></code></a>([mode])</p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.print_details" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.print_details"><code class="xref py py-obj docutils literal notranslate"><span class="pre">print_details</span></code></a>()</td>
-<td>Print out the operator in details.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.qubit_tapering" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.qubit_tapering"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qubit_tapering</span></code></a>(operator, cliffords, sq_list, ...)</p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.print_operators" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.print_operators"><code class="xref py py-obj docutils literal notranslate"><span class="pre">print_operators</span></code></a>([mode])</td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.reorder_paulis" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.reorder_paulis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reorder_paulis</span></code></a>()</p></td>
+<td><p>Reorder the paulis based on the basis and return the reordered paulis.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.qubit_tapering" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.qubit_tapering"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qubit_tapering</span></code></a>(operator,&nbsp;cliffords,&nbsp;sq_list,&nbsp;...)</td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.rounding" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.rounding"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rounding</span></code></a>(decimals[, copy])</p></td>
+<td><p>Rounding the weight.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.reorder_paulis" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.reorder_paulis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reorder_paulis</span></code></a>()</td>
-<td>Reorder the paulis based on the basis and return the reordered paulis.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.row_echelon_F2" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.row_echelon_F2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">row_echelon_F2</span></code></a>(matrix_in)</p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.rounding" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.rounding"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rounding</span></code></a>(decimals[,&nbsp;copy])</td>
-<td>Rounding the weight.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.save_to_dict" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.save_to_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_to_dict</span></code></a>()</p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.row_echelon_F2" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.row_echelon_F2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">row_echelon_F2</span></code></a>(matrix_in)</td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.save_to_file" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.save_to_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_to_file</span></code></a>(file_name)</p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.save_to_dict" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.save_to_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_to_dict</span></code></a>()</td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.scaling_coeff" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.scaling_coeff"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scaling_coeff</span></code></a>(scaling_factor)</p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.save_to_file" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.save_to_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_to_file</span></code></a>(file_name)</td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.simplify" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.simplify"><code class="xref py py-obj docutils literal notranslate"><span class="pre">simplify</span></code></a>([copy])</p></td>
+<td><p>Merge the paulis whose bases are identical and the pauli with zero coefficient would be removed.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.scaling_coeff" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.scaling_coeff"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scaling_coeff</span></code></a>(scaling_factor)</td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.sorted_grouping" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.sorted_grouping"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sorted_grouping</span></code></a>(weighted_pauli_operator[, ...])</p></td>
+<td><p>Largest-Degree First Coloring for grouping paulis.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.simplify" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.simplify"><code class="xref py py-obj docutils literal notranslate"><span class="pre">simplify</span></code></a>([copy])</td>
-<td>Merge the paulis whose bases are identical and the pauli with zero coefficient would be removed.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.sub" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.sub"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sub</span></code></a>(other[, copy])</p></td>
+<td><p>Perform self - other.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.sorted_grouping" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.sorted_grouping"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sorted_grouping</span></code></a>(weighted_pauli_operator[,&nbsp;...])</td>
-<td>Largest-Degree First Coloring for grouping paulis.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_dict" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code></a>()</p></td>
+<td><p>Save operator to a dict in pauli representation.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.sub" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.sub"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sub</span></code></a>(other[,&nbsp;copy])</td>
-<td>Perform self - other.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_file" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_file</span></code></a>(file_name)</p></td>
+<td><p>Save operator to a file in pauli representation.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_dict" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code></a>()</td>
-<td>Save operator to a dict in pauli representation.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_grouped_paulis" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_grouped_paulis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_grouped_paulis</span></code></a>()</p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_file" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_file</span></code></a>(file_name)</td>
-<td>Save operator to a file in pauli representation.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_matrix" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_matrix</span></code></a>()</p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_grouped_paulis" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_grouped_paulis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_grouped_paulis</span></code></a>()</td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_matrix_operator" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_matrix_operator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_matrix_operator</span></code></a>()</p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_matrix" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_matrix</span></code></a>()</td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_paulis" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_paulis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_paulis</span></code></a>()</p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_matrix_operator" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_matrix_operator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_matrix_operator</span></code></a>()</td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_tpb_grouped_weighted_pauli_operator" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_tpb_grouped_weighted_pauli_operator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_tpb_grouped_weighted_pauli_operator</span></code></a>()</p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_paulis" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_paulis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_paulis</span></code></a>()</td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_weighted_pauli_operator" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_weighted_pauli_operator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_weighted_pauli_operator</span></code></a>()</p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_tpb_grouped_weighted_pauli_operator" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_tpb_grouped_weighted_pauli_operator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_tpb_grouped_weighted_pauli_operator</span></code></a>()</td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.two_qubit_reduced_operator" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.two_qubit_reduced_operator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">two_qubit_reduced_operator</span></code></a>(m[, threshold])</p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_weighted_pauli_operator" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_weighted_pauli_operator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_weighted_pauli_operator</span></code></a>()</td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.unsorted_grouping" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.unsorted_grouping"><code class="xref py py-obj docutils literal notranslate"><span class="pre">unsorted_grouping</span></code></a>(weighted_pauli_operator)</p></td>
+<td><p>Greedy and unsorted grouping paulis.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.two_qubit_reduced_operator" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.two_qubit_reduced_operator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">two_qubit_reduced_operator</span></code></a>(m[,&nbsp;threshold])</td>
-<td></td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.unsorted_grouping" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.unsorted_grouping"><code class="xref py py-obj docutils literal notranslate"><span class="pre">unsorted_grouping</span></code></a>(weighted_pauli_operator)</td>
-<td>Greedy and unsorted grouping paulis.</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.zeros_coeff_elimination" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.zeros_coeff_elimination"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zeros_coeff_elimination</span></code></a>()</td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.zeros_coeff_elimination" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.zeros_coeff_elimination"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zeros_coeff_elimination</span></code></a>()</p></td>
+<td><p></p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Attributes Documentation</p>
 <dl class="attribute">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.aer_paulis">
-<code class="descname">aer_paulis</code><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.aer_paulis" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">aer_paulis</code><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.aer_paulis" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>the weighted paulis formatted for the aer simulator.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Returns</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Returns</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.atol">
-<code class="descname">atol</code><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.atol" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">atol</code><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.atol" title="この定義へのパーマリンク">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.basis">
-<code class="descname">basis</code><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.basis" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">basis</code><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.basis" title="この定義へのパーマリンク">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.coloring">
-<code class="descname">coloring</code><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.coloring" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">coloring</code><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.coloring" title="この定義へのパーマリンク">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.grouping_func">
-<code class="descname">grouping_func</code><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.grouping_func" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">grouping_func</code><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.grouping_func" title="この定義へのパーマリンク">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.kwargs">
-<code class="descname">kwargs</code><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.kwargs" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">kwargs</code><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.kwargs" title="この定義へのパーマリンク">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.name">
-<code class="descname">name</code><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.name" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">name</code><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.name" title="この定義へのパーマリンク">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.num_groups">
-<code class="descname">num_groups</code><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.num_groups" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">num_groups</code><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.num_groups" title="この定義へのパーマリンク">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.num_qubits">
-<code class="descname">num_qubits</code><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.num_qubits" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">num_qubits</code><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.num_qubits" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>number of qubits required for the operator.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">戻り値:</th><td class="field-body">number of qubits</td>
-</tr>
-<tr class="field-even field"><th class="field-name">戻り値の型:</th><td class="field-body">int</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">戻り値</dt>
+<dd class="field-odd"><p>number of qubits</p>
+</dd>
+<dt class="field-even">戻り値の型</dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.paulis">
-<code class="descname">paulis</code><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.paulis" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">paulis</code><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.paulis" title="この定義へのパーマリンク">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.representations">
-<code class="descname">representations</code><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.representations" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">representations</code><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.representations" title="この定義へのパーマリンク">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.z2_symmetries">
-<code class="descname">z2_symmetries</code><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.z2_symmetries" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">z2_symmetries</code><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.z2_symmetries" title="この定義へのパーマリンク">¶</a></dt>
 <dd></dd></dl>
 
 <p class="rubric">Methods Documentation</p>
 <dl class="method">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.add">
-<code class="descname">add</code><span class="sig-paren">(</span><em>other</em>, <em>copy=False</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.add" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">add</code><span class="sig-paren">(</span><em class="sig-param">other</em>, <em class="sig-param">copy=False</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.add" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Perform self + other.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first simple">
-<li><strong>other</strong> (<a class="reference internal" href="qiskit.aqua.operators.WeightedPauliOperator.html#qiskit.aqua.operators.WeightedPauliOperator" title="qiskit.aqua.operators.WeightedPauliOperator"><em>WeightedPauliOperator</em></a>) -- to-be-combined operator</li>
-<li><strong>copy</strong> (<em>bool</em>) -- working on a copy or self, if False, the results are written back to self.</li>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>other</strong> (<a class="reference internal" href="qiskit.aqua.operators.WeightedPauliOperator.html#qiskit.aqua.operators.WeightedPauliOperator" title="qiskit.aqua.operators.WeightedPauliOperator"><em>WeightedPauliOperator</em></a>) -- to-be-combined operator</p></li>
+<li><p><strong>copy</strong> (<em>bool</em>) -- working on a copy or self, if False, the results are written back to self.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first last">WeightedPauliOperator</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">戻り値</dt>
+<dd class="field-even"><p>WeightedPauliOperator</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.anticommute_with">
-<code class="descname">anticommute_with</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.anticommute_with" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">anticommute_with</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.anticommute_with" title="この定義へのパーマリンク">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.chop">
-<code class="descname">chop</code><span class="sig-paren">(</span><em>threshold=None</em>, <em>copy=False</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.chop" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">chop</code><span class="sig-paren">(</span><em class="sig-param">threshold=None</em>, <em class="sig-param">copy=False</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.chop" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Eliminate the real and imagine part of weight in each pauli by <cite>threshold</cite>.
 If pauli's weight is less then <cite>threshold</cite> in both real and imagine parts, the pauli is removed.</p>
 <div class="admonition note">
-<p class="first admonition-title">注釈</p>
-<p class="last">If weight is real-only, the imag part is skipped.</p>
+<p class="admonition-title">注釈</p>
+<p>If weight is real-only, the imag part is skipped.</p>
 </div>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first simple">
-<li><strong>threshold</strong> (<em>float</em>) -- the threshold is used to remove the paulis</li>
-<li><strong>copy</strong> (<em>bool</em>) -- chop on a copy or self</li>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>threshold</strong> (<em>float</em>) -- the threshold is used to remove the paulis</p></li>
+<li><p><strong>copy</strong> (<em>bool</em>) -- chop on a copy or self</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first"><dl class="docutils">
-<dt>if copy is True, the original operator is unchanged; otherwise,</dt>
-<dd><p class="first last">the operator is mutated.</p>
+</dd>
+<dt class="field-even">戻り値</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>if copy is True, the original operator is unchanged; otherwise,</dt><dd><p>the operator is mutated.</p>
 </dd>
 </dl>
 </p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><p class="first last"><a class="reference internal" href="qiskit.aqua.operators.WeightedPauliOperator.html#qiskit.aqua.operators.WeightedPauliOperator" title="qiskit.aqua.operators.WeightedPauliOperator">WeightedPauliOperator</a></p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-odd">戻り値の型</dt>
+<dd class="field-odd"><p><a class="reference internal" href="qiskit.aqua.operators.WeightedPauliOperator.html#qiskit.aqua.operators.WeightedPauliOperator" title="qiskit.aqua.operators.WeightedPauliOperator">WeightedPauliOperator</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.commute_with">
-<code class="descname">commute_with</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.commute_with" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">commute_with</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.commute_with" title="この定義へのパーマリンク">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.construct_evaluation_circuit">
-<code class="descname">construct_evaluation_circuit</code><span class="sig-paren">(</span><em>operator_mode=None</em>, <em>input_circuit=None</em>, <em>backend=None</em>, <em>qr=None</em>, <em>cr=None</em>, <em>use_simulator_operator_mode=False</em>, <em>wave_function=None</em>, <em>statevector_mode=None</em>, <em>circuit_name_prefix=''</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.construct_evaluation_circuit" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">construct_evaluation_circuit</code><span class="sig-paren">(</span><em class="sig-param">operator_mode=None</em>, <em class="sig-param">input_circuit=None</em>, <em class="sig-param">backend=None</em>, <em class="sig-param">qr=None</em>, <em class="sig-param">cr=None</em>, <em class="sig-param">use_simulator_operator_mode=False</em>, <em class="sig-param">wave_function=None</em>, <em class="sig-param">statevector_mode=None</em>, <em class="sig-param">circuit_name_prefix=''</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.construct_evaluation_circuit" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Construct the circuits for evaluation, which calculating the expectation &lt;psi|H|psi&gt;.</p>
 <p>At statevector mode: to simplify the computation, we do not build the whole circuit for &lt;psi|H|psi&gt;, instead of
 that we construct an individual circuit &lt;psi|, and a bundle circuit for H|psi&gt;</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first simple">
-<li><strong>operator_mode</strong> (<em>str</em>) -- representation of operator, including paulis, grouped_paulis and matrix</li>
-<li><strong>input_circuit</strong> (<a class="reference internal" href="qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit" title="qiskit.circuit.QuantumCircuit"><em>QuantumCircuit</em></a>) -- the quantum circuit.</li>
-<li><strong>wave_function</strong> (<a class="reference internal" href="qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit" title="qiskit.circuit.QuantumCircuit"><em>QuantumCircuit</em></a>) -- the quantum circuit.</li>
-<li><strong>backend</strong> (<a class="reference internal" href="qiskit.providers.BaseBackend.html#qiskit.providers.BaseBackend" title="qiskit.providers.BaseBackend"><em>BaseBackend</em></a><em>, </em><em>optional</em>) -- backend selection for quantum machine.</li>
-<li><strong>statevector_mode</strong> (<em>bool</em><em>, </em><em>optional</em>) -- indicate which type of simulator are going to use.</li>
-<li><strong>qr</strong> (<a class="reference internal" href="qiskit.circuit.QuantumRegister.html#qiskit.circuit.QuantumRegister" title="qiskit.circuit.QuantumRegister"><em>QuantumRegister</em></a><em>, </em><em>optional</em>) -- the quantum register associated with the input_circuit</li>
-<li><strong>cr</strong> (<a class="reference internal" href="qiskit.circuit.ClassicalRegister.html#qiskit.circuit.ClassicalRegister" title="qiskit.circuit.ClassicalRegister"><em>ClassicalRegister</em></a><em>, </em><em>optional</em>) -- the classical register associated with the input_circuit</li>
-<li><strong>use_simulator_operator_mode</strong> (<em>bool</em><em>, </em><em>optional</em>) -- if aer_provider is used, we can do faster
-evaluation for pauli mode on statevector simualtion</li>
-<li><strong>circuit_name_prefix</strong> (<em>str</em><em>, </em><em>optional</em>) -- a prefix of circuit name</li>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>operator_mode</strong> (<em>str</em>) -- representation of operator, including paulis, grouped_paulis and matrix</p></li>
+<li><p><strong>input_circuit</strong> (<a class="reference internal" href="qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit" title="qiskit.circuit.QuantumCircuit"><em>QuantumCircuit</em></a>) -- the quantum circuit.</p></li>
+<li><p><strong>wave_function</strong> (<a class="reference internal" href="qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit" title="qiskit.circuit.QuantumCircuit"><em>QuantumCircuit</em></a>) -- the quantum circuit.</p></li>
+<li><p><strong>backend</strong> (<a class="reference internal" href="qiskit.providers.BaseBackend.html#qiskit.providers.BaseBackend" title="qiskit.providers.BaseBackend"><em>BaseBackend</em></a><em>, </em><em>optional</em>) -- backend selection for quantum machine.</p></li>
+<li><p><strong>statevector_mode</strong> (<em>bool</em><em>, </em><em>optional</em>) -- indicate which type of simulator are going to use.</p></li>
+<li><p><strong>qr</strong> (<a class="reference internal" href="qiskit.circuit.QuantumRegister.html#qiskit.circuit.QuantumRegister" title="qiskit.circuit.QuantumRegister"><em>QuantumRegister</em></a><em>, </em><em>optional</em>) -- the quantum register associated with the input_circuit</p></li>
+<li><p><strong>cr</strong> (<a class="reference internal" href="qiskit.circuit.ClassicalRegister.html#qiskit.circuit.ClassicalRegister" title="qiskit.circuit.ClassicalRegister"><em>ClassicalRegister</em></a><em>, </em><em>optional</em>) -- the classical register associated with the input_circuit</p></li>
+<li><p><strong>use_simulator_operator_mode</strong> (<em>bool</em><em>, </em><em>optional</em>) -- if aer_provider is used, we can do faster
+evaluation for pauli mode on statevector simualtion</p></li>
+<li><p><strong>circuit_name_prefix</strong> (<em>str</em><em>, </em><em>optional</em>) -- a prefix of circuit name</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first"><dl class="docutils">
-<dt>a list of quantum circuits and each circuit with a unique name:</dt>
-<dd><p class="first last">circuit_name_prefix + Pauli string</p>
+</dd>
+<dt class="field-even">戻り値</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>a list of quantum circuits and each circuit with a unique name:</dt><dd><p>circuit_name_prefix + Pauli string</p>
 </dd>
 </dl>
 </p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><p class="first">list[<a class="reference internal" href="qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit" title="qiskit.circuit.QuantumCircuit">QuantumCircuit</a>]</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><code class="xref py py-exc docutils literal notranslate"><span class="pre">AquaError</span></code> -- Can not find quantum register with <cite>q</cite> as the name and do not provide
-quantum register explicitly</li>
-<li><code class="xref py py-exc docutils literal notranslate"><span class="pre">AquaError</span></code> -- The provided qr is not in the input_circuit</li>
-<li><code class="xref py py-exc docutils literal notranslate"><span class="pre">AquaError</span></code> -- Neither backend nor statevector_mode is provided</li>
+</dd>
+<dt class="field-odd">戻り値の型</dt>
+<dd class="field-odd"><p>list[<a class="reference internal" href="qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit" title="qiskit.circuit.QuantumCircuit">QuantumCircuit</a>]</p>
+</dd>
+<dt class="field-even">例外</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="qiskit.aqua.AquaError.html#qiskit.aqua.AquaError" title="qiskit.aqua.AquaError"><strong>AquaError</strong></a> -- Can not find quantum register with <cite>q</cite> as the name and do not provide
+    quantum register explicitly</p></li>
+<li><p><a class="reference internal" href="qiskit.aqua.AquaError.html#qiskit.aqua.AquaError" title="qiskit.aqua.AquaError"><strong>AquaError</strong></a> -- The provided qr is not in the input_circuit</p></li>
+<li><p><a class="reference internal" href="qiskit.aqua.AquaError.html#qiskit.aqua.AquaError" title="qiskit.aqua.AquaError"><strong>AquaError</strong></a> -- Neither backend nor statevector_mode is provided</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="staticmethod">
+<dl class="method">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.construct_evolution_circuit">
-<em class="property">static </em><code class="descname">construct_evolution_circuit</code><span class="sig-paren">(</span><em>slice_pauli_list</em>, <em>evo_time</em>, <em>num_time_slices</em>, <em>state_registers</em>, <em>ancillary_registers=None</em>, <em>ctl_idx=0</em>, <em>unitary_power=None</em>, <em>use_basis_gates=True</em>, <em>shallow_slicing=False</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.construct_evolution_circuit" title="この定義へのパーマリンク">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">construct_evolution_circuit</code><span class="sig-paren">(</span><em class="sig-param">slice_pauli_list</em>, <em class="sig-param">evo_time</em>, <em class="sig-param">num_time_slices</em>, <em class="sig-param">state_registers</em>, <em class="sig-param">ancillary_registers=None</em>, <em class="sig-param">ctl_idx=0</em>, <em class="sig-param">unitary_power=None</em>, <em class="sig-param">use_basis_gates=True</em>, <em class="sig-param">shallow_slicing=False</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.construct_evolution_circuit" title="この定義へのパーマリンク">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.convert">
-<code class="descname">convert</code><span class="sig-paren">(</span><em>input_format</em>, <em>output_format</em>, <em>force=False</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.convert" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">convert</code><span class="sig-paren">(</span><em class="sig-param">input_format</em>, <em class="sig-param">output_format</em>, <em class="sig-param">force=False</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.convert" title="この定義へのパーマリンク">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.copy">
-<code class="descname">copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.copy" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.copy" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Get a copy of self.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.disable_summarize_circuits">
-<code class="descname">disable_summarize_circuits</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.disable_summarize_circuits" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">disable_summarize_circuits</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.disable_summarize_circuits" title="この定義へのパーマリンク">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.enable_summarize_circuits">
-<code class="descname">enable_summarize_circuits</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.enable_summarize_circuits" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">enable_summarize_circuits</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.enable_summarize_circuits" title="この定義へのパーマリンク">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.eval">
-<code class="descname">eval</code><span class="sig-paren">(</span><em>operator_mode</em>, <em>input_circuit</em>, <em>backend</em>, <em>backend_config=None</em>, <em>compile_config=None</em>, <em>run_config=None</em>, <em>qjob_config=None</em>, <em>noise_config=None</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.eval" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">eval</code><span class="sig-paren">(</span><em class="sig-param">operator_mode</em>, <em class="sig-param">input_circuit</em>, <em class="sig-param">backend</em>, <em class="sig-param">backend_config=None</em>, <em class="sig-param">compile_config=None</em>, <em class="sig-param">run_config=None</em>, <em class="sig-param">qjob_config=None</em>, <em class="sig-param">noise_config=None</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.eval" title="この定義へのパーマリンク">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.evaluate_with_result">
-<code class="descname">evaluate_with_result</code><span class="sig-paren">(</span><em>operator_mode=None</em>, <em>circuits=None</em>, <em>backend=None</em>, <em>result=None</em>, <em>use_simulator_operator_mode=False</em>, <em>statevector_mode=None</em>, <em>circuit_name_prefix=''</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.evaluate_with_result" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">evaluate_with_result</code><span class="sig-paren">(</span><em class="sig-param">operator_mode=None</em>, <em class="sig-param">circuits=None</em>, <em class="sig-param">backend=None</em>, <em class="sig-param">result=None</em>, <em class="sig-param">use_simulator_operator_mode=False</em>, <em class="sig-param">statevector_mode=None</em>, <em class="sig-param">circuit_name_prefix=''</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.evaluate_with_result" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>This method can be only used with the circuits generated by the <cite>construct_evaluation_circuit</cite> method
 with the same <cite>circuit_name_prefix</cite> since the circuit names are tied to some meanings.</p>
 <p>Calculate the evaluated value with the measurement results.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first simple">
-<li><strong>operator_mode</strong> (<em>str</em>) -- representation of operator, including paulis, grouped_paulis and matrix</li>
-<li><strong>circuits</strong> (<em>list of qiskit.QuantumCircuit</em>) -- the quantum circuits.</li>
-<li><strong>result</strong> (<em>qiskit.Result</em>) -- the result from the backend.</li>
-<li><strong>backend</strong> (<a class="reference internal" href="qiskit.providers.BaseBackend.html#qiskit.providers.BaseBackend" title="qiskit.providers.BaseBackend"><em>BaseBackend</em></a><em>, </em><em>optional</em>) -- backend for quantum machine.</li>
-<li><strong>statevector_mode</strong> (<em>bool</em><em>, </em><em>optional</em>) -- indicate which type of simulator are used.</li>
-<li><strong>use_simulator_operator_mode</strong> (<em>bool</em>) -- if aer_provider is used, we can do faster
-evaluation for pauli mode on statevector simualtion</li>
-<li><strong>circuit_name_prefix</strong> (<em>str</em>) -- a prefix of circuit name</li>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>operator_mode</strong> (<em>str</em>) -- representation of operator, including paulis, grouped_paulis and matrix</p></li>
+<li><p><strong>circuits</strong> (<em>list of qiskit.QuantumCircuit</em>) -- the quantum circuits.</p></li>
+<li><p><strong>result</strong> (<em>qiskit.Result</em>) -- the result from the backend.</p></li>
+<li><p><strong>backend</strong> (<a class="reference internal" href="qiskit.providers.BaseBackend.html#qiskit.providers.BaseBackend" title="qiskit.providers.BaseBackend"><em>BaseBackend</em></a><em>, </em><em>optional</em>) -- backend for quantum machine.</p></li>
+<li><p><strong>statevector_mode</strong> (<em>bool</em><em>, </em><em>optional</em>) -- indicate which type of simulator are used.</p></li>
+<li><p><strong>use_simulator_operator_mode</strong> (<em>bool</em>) -- if aer_provider is used, we can do faster
+evaluation for pauli mode on statevector simualtion</p></li>
+<li><p><strong>circuit_name_prefix</strong> (<em>str</em>) -- a prefix of circuit name</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first">the mean value
+</dd>
+<dt class="field-even">戻り値</dt>
+<dd class="field-even"><p>the mean value
 float: the standard deviation</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><p class="first last">float</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-odd">戻り値の型</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.evaluate_with_statevector">
-<code class="descname">evaluate_with_statevector</code><span class="sig-paren">(</span><em>quantum_state</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.evaluate_with_statevector" title="この定義へのパーマリンク">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><strong>quantum_state</strong> (<em>numpy.ndarray</em>) -- a quantum state.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body">the mean value
-float: the standard deviation</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body">float</td>
-</tr>
-</tbody>
-</table>
+<code class="sig-name descname">evaluate_with_statevector</code><span class="sig-paren">(</span><em class="sig-param">quantum_state</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.evaluate_with_statevector" title="この定義へのパーマリンク">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><p><strong>quantum_state</strong> (<em>numpy.ndarray</em>) -- a quantum state.</p>
+</dd>
+<dt class="field-even">戻り値</dt>
+<dd class="field-even"><p>the mean value
+float: the standard deviation</p>
+</dd>
+<dt class="field-odd">戻り値の型</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.evaluation_instruction">
-<code class="descname">evaluation_instruction</code><span class="sig-paren">(</span><em>statevector_mode</em>, <em>use_simulator_operator_mode=False</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.evaluation_instruction" title="この定義へのパーマリンク">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first simple">
-<li><strong>statevector_mode</strong> (<em>bool</em>) -- will it be run on statevector simulator or not</li>
-<li><strong>use_simulator_operator_mode</strong> -- will it use qiskit aer simulator operator mode</li>
+<code class="sig-name descname">evaluation_instruction</code><span class="sig-paren">(</span><em class="sig-param">statevector_mode</em>, <em class="sig-param">use_simulator_operator_mode=False</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.evaluation_instruction" title="この定義へのパーマリンク">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>statevector_mode</strong> (<em>bool</em>) -- will it be run on statevector simulator or not</p></li>
+<li><p><strong>use_simulator_operator_mode</strong> -- will it use qiskit aer simulator operator mode</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first">Pauli-instruction pair.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><p class="first last">dict</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">戻り値</dt>
+<dd class="field-even"><p>Pauli-instruction pair.</p>
+</dd>
+<dt class="field-odd">戻り値の型</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.evolve">
-<code class="descname">evolve</code><span class="sig-paren">(</span><em>state_in=None</em>, <em>evo_time=0</em>, <em>evo_mode=None</em>, <em>num_time_slices=1</em>, <em>quantum_registers=None</em>, <em>expansion_mode='trotter'</em>, <em>expansion_order=1</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.evolve" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">evolve</code><span class="sig-paren">(</span><em class="sig-param">state_in=None</em>, <em class="sig-param">evo_time=0</em>, <em class="sig-param">evo_mode=None</em>, <em class="sig-param">num_time_slices=1</em>, <em class="sig-param">quantum_registers=None</em>, <em class="sig-param">expansion_mode='trotter'</em>, <em class="sig-param">expansion_order=1</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.evolve" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Carry out the eoh evolution for the operator under supplied specifications.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first simple">
-<li><strong>state_in</strong> (<a class="reference internal" href="qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit" title="qiskit.circuit.QuantumCircuit"><em>QuantumCircuit</em></a>) -- a circuit describes the input state</li>
-<li><strong>evo_time</strong> (<em>int</em>) -- The evolution time</li>
-<li><strong>num_time_slices</strong> (<em>int</em>) -- The number of time slices for the expansion</li>
-<li><strong>quantum_registers</strong> (<a class="reference internal" href="qiskit.circuit.QuantumRegister.html#qiskit.circuit.QuantumRegister" title="qiskit.circuit.QuantumRegister"><em>QuantumRegister</em></a>) -- The QuantumRegister to build the QuantumCircuit off of</li>
-<li><strong>expansion_mode</strong> (<em>str</em>) -- The mode under which the expansion is to be done.
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state_in</strong> (<a class="reference internal" href="qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit" title="qiskit.circuit.QuantumCircuit"><em>QuantumCircuit</em></a>) -- a circuit describes the input state</p></li>
+<li><p><strong>evo_time</strong> (<em>int</em>) -- The evolution time</p></li>
+<li><p><strong>num_time_slices</strong> (<em>int</em>) -- The number of time slices for the expansion</p></li>
+<li><p><strong>quantum_registers</strong> (<a class="reference internal" href="qiskit.circuit.QuantumRegister.html#qiskit.circuit.QuantumRegister" title="qiskit.circuit.QuantumRegister"><em>QuantumRegister</em></a>) -- The QuantumRegister to build the QuantumCircuit off of</p></li>
+<li><p><strong>expansion_mode</strong> (<em>str</em>) -- The mode under which the expansion is to be done.
 Currently support 'trotter', which follows the expansion as discussed in
 <a class="reference external" href="http://science.sciencemag.org/content/273/5278/1073">http://science.sciencemag.org/content/273/5278/1073</a>,
 and 'suzuki', which corresponds to the discussion in
-<a class="reference external" href="https://arxiv.org/pdf/quant-ph/0508139.pdf">https://arxiv.org/pdf/quant-ph/0508139.pdf</a></li>
-<li><strong>expansion_order</strong> (<em>int</em>) -- The order for suzuki expansion</li>
+<a class="reference external" href="https://arxiv.org/pdf/quant-ph/0508139.pdf">https://arxiv.org/pdf/quant-ph/0508139.pdf</a></p></li>
+<li><p><strong>expansion_order</strong> (<em>int</em>) -- The order for suzuki expansion</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first last">The constructed QuantumCircuit.</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">戻り値</dt>
+<dd class="field-even"><p>The constructed QuantumCircuit.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.evolve_instruction">
-<code class="descname">evolve_instruction</code><span class="sig-paren">(</span><em>evo_time=0</em>, <em>num_time_slices=1</em>, <em>expansion_mode='trotter'</em>, <em>expansion_order=1</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.evolve_instruction" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">evolve_instruction</code><span class="sig-paren">(</span><em class="sig-param">evo_time=0</em>, <em class="sig-param">num_time_slices=1</em>, <em class="sig-param">expansion_mode='trotter'</em>, <em class="sig-param">expansion_order=1</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.evolve_instruction" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Carry out the eoh evolution for the operator under supplied specifications.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first simple">
-<li><strong>evo_time</strong> (<em>int</em>) -- The evolution time</li>
-<li><strong>num_time_slices</strong> (<em>int</em>) -- The number of time slices for the expansion</li>
-<li><strong>expansion_mode</strong> (<em>str</em>) -- The mode under which the expansion is to be done.
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>evo_time</strong> (<em>int</em>) -- The evolution time</p></li>
+<li><p><strong>num_time_slices</strong> (<em>int</em>) -- The number of time slices for the expansion</p></li>
+<li><p><strong>expansion_mode</strong> (<em>str</em>) -- The mode under which the expansion is to be done.
 Currently support 'trotter', which follows the expansion as discussed in
 <a class="reference external" href="http://science.sciencemag.org/content/273/5278/1073">http://science.sciencemag.org/content/273/5278/1073</a>,
 and 'suzuki', which corresponds to the discussion in
-<a class="reference external" href="https://arxiv.org/pdf/quant-ph/0508139.pdf">https://arxiv.org/pdf/quant-ph/0508139.pdf</a></li>
-<li><strong>expansion_order</strong> (<em>int</em>) -- The order for suzuki expansion</li>
+<a class="reference external" href="https://arxiv.org/pdf/quant-ph/0508139.pdf">https://arxiv.org/pdf/quant-ph/0508139.pdf</a></p></li>
+<li><p><strong>expansion_order</strong> (<em>int</em>) -- The order for suzuki expansion</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first last">The constructed QuantumCircuit.</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">戻り値</dt>
+<dd class="field-even"><p>The constructed QuantumCircuit.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.find_Z2_symmetries">
-<code class="descname">find_Z2_symmetries</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.find_Z2_symmetries" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">find_Z2_symmetries</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.find_Z2_symmetries" title="この定義へのパーマリンク">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="classmethod">
+<dl class="method">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.from_dict">
-<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>dictionary</em>, <em>before_04=False</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.from_dict" title="この定義へのパーマリンク">¶</a></dt>
+<em class="property">classmethod </em><code class="sig-name descname">from_dict</code><span class="sig-paren">(</span><em class="sig-param">dictionary</em>, <em class="sig-param">before_04=False</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.from_dict" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Load paulis in a dict to construct an Operator,         the dict must be represented as follows: label and coeff (real and imag).         E.g.:            {'paulis':                [                    {'label': 'IIII',                     'coeff': {'real': -0.33562957575267038, 'imag': 0.0}},                    {'label': 'ZIII',                     'coeff': {'real': 0.28220597164664896, 'imag': 0.0}},                     ...                 ]             }
 :param dictionary: dictionary, which contains a list of Paulis and coefficients.
 :type dictionary: dict
 :param before_04: support the format before Aqua 0.4.
 :type before_04: bool</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">戻り値:</th><td class="field-body">the loaded operator.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">戻り値の型:</th><td class="field-body"><a class="reference internal" href="qiskit.aqua.Operator.html#qiskit.aqua.Operator" title="qiskit.aqua.Operator">Operator</a></td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">戻り値</dt>
+<dd class="field-odd"><p>the loaded operator.</p>
+</dd>
+<dt class="field-even">戻り値の型</dt>
+<dd class="field-even"><p><a class="reference internal" href="qiskit.aqua.Operator.html#qiskit.aqua.Operator" title="qiskit.aqua.Operator">Operator</a></p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="classmethod">
+<dl class="method">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.from_file">
-<em class="property">classmethod </em><code class="descname">from_file</code><span class="sig-paren">(</span><em>file_name</em>, <em>before_04=False</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.from_file" title="この定義へのパーマリンク">¶</a></dt>
+<em class="property">classmethod </em><code class="sig-name descname">from_file</code><span class="sig-paren">(</span><em class="sig-param">file_name</em>, <em class="sig-param">before_04=False</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.from_file" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Load paulis in a file to construct an Operator.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first simple">
-<li><strong>file_name</strong> (<em>str</em>) -- path to the file, which contains a list of Paulis and coefficients.</li>
-<li><strong>before_04</strong> (<em>bool</em>) -- support the format before Aqua 0.4.</li>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_name</strong> (<em>str</em>) -- path to the file, which contains a list of Paulis and coefficients.</p></li>
+<li><p><strong>before_04</strong> (<em>bool</em>) -- support the format before Aqua 0.4.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first">the loaded operator.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><p class="first last">Operator class</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">戻り値</dt>
+<dd class="field-even"><p>the loaded operator.</p>
+</dd>
+<dt class="field-odd">戻り値の型</dt>
+<dd class="field-odd"><p>Operator class</p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="classmethod">
+<dl class="method">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.from_list">
-<em class="property">classmethod </em><code class="descname">from_list</code><span class="sig-paren">(</span><em>paulis</em>, <em>weights=None</em>, <em>name=None</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.from_list" title="この定義へのパーマリンク">¶</a></dt>
+<em class="property">classmethod </em><code class="sig-name descname">from_list</code><span class="sig-paren">(</span><em class="sig-param">paulis</em>, <em class="sig-param">weights=None</em>, <em class="sig-param">name=None</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.from_list" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Create a WeightedPauliOperator via a pair of list.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first simple">
-<li><strong>paulis</strong> (<em>[</em><a class="reference internal" href="qiskit.quantum_info.Pauli.html#qiskit.quantum_info.Pauli" title="qiskit.quantum_info.Pauli"><em>Pauli</em></a><em>]</em>) -- the list of Paulis</li>
-<li><strong>weights</strong> (<em>[</em><em>complex</em><em>]</em><em>, </em><em>optional</em>) -- the list of weights, if it is None, all weights are 1.</li>
-<li><strong>name</strong> (<em>str</em><em>, </em><em>optional</em>) -- name of the operator.</li>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>paulis</strong> (<em>[</em><a class="reference internal" href="qiskit.quantum_info.Pauli.html#qiskit.quantum_info.Pauli" title="qiskit.quantum_info.Pauli"><em>Pauli</em></a><em>]</em>) -- the list of Paulis</p></li>
+<li><p><strong>weights</strong> (<em>[</em><em>complex</em><em>]</em><em>, </em><em>optional</em>) -- the list of weights, if it is None, all weights are 1.</p></li>
+<li><p><strong>name</strong> (<em>str</em><em>, </em><em>optional</em>) -- name of the operator.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first last">WeightedPauliOperator</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">戻り値</dt>
+<dd class="field-even"><p>WeightedPauliOperator</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.get_flat_pauli_list">
-<code class="descname">get_flat_pauli_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.get_flat_pauli_list" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">get_flat_pauli_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.get_flat_pauli_list" title="この定義へのパーマリンク">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.is_empty">
-<code class="descname">is_empty</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.is_empty" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">is_empty</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.is_empty" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Check Operator is empty or not.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">戻り値:</th><td class="field-body">is empty?</td>
-</tr>
-<tr class="field-even field"><th class="field-name">戻り値の型:</th><td class="field-body">bool</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">戻り値</dt>
+<dd class="field-odd"><p>is empty?</p>
+</dd>
+<dt class="field-even">戻り値の型</dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="staticmethod">
+<dl class="method">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.kernel_F2">
-<em class="property">static </em><code class="descname">kernel_F2</code><span class="sig-paren">(</span><em>matrix_in</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.kernel_F2" title="この定義へのパーマリンク">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">kernel_F2</code><span class="sig-paren">(</span><em class="sig-param">matrix_in</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.kernel_F2" title="この定義へのパーマリンク">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="classmethod">
+<dl class="method">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.load_from_dict">
-<em class="property">classmethod </em><code class="descname">load_from_dict</code><span class="sig-paren">(</span><em>dictionary</em>, <em>before_04=False</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.load_from_dict" title="この定義へのパーマリンク">¶</a></dt>
+<em class="property">classmethod </em><code class="sig-name descname">load_from_dict</code><span class="sig-paren">(</span><em class="sig-param">dictionary</em>, <em class="sig-param">before_04=False</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.load_from_dict" title="この定義へのパーマリンク">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="classmethod">
+<dl class="method">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.load_from_file">
-<em class="property">classmethod </em><code class="descname">load_from_file</code><span class="sig-paren">(</span><em>file_name</em>, <em>before_04=False</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.load_from_file" title="この定義へのパーマリンク">¶</a></dt>
+<em class="property">classmethod </em><code class="sig-name descname">load_from_file</code><span class="sig-paren">(</span><em class="sig-param">file_name</em>, <em class="sig-param">before_04=False</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.load_from_file" title="この定義へのパーマリンク">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.multiply">
-<code class="descname">multiply</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/operators/tpb_grouped_weighted_pauli_operator.html#TPBGroupedWeightedPauliOperator.multiply"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.multiply" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">multiply</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/operators/tpb_grouped_weighted_pauli_operator.html#TPBGroupedWeightedPauliOperator.multiply"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.multiply" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Perform self * other.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><strong>other</strong> (<a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator"><em>TPBGroupedWeightedPauliOperator</em></a>) -- an operator</td>
-</tr>
-<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body">the multiplied operator</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator">TPBGroupedWeightedPauliOperator</a></td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><p><strong>other</strong> (<a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator"><em>TPBGroupedWeightedPauliOperator</em></a>) -- an operator</p>
+</dd>
+<dt class="field-even">戻り値</dt>
+<dd class="field-even"><p>the multiplied operator</p>
+</dd>
+<dt class="field-odd">戻り値の型</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator" title="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator">TPBGroupedWeightedPauliOperator</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.print_details">
-<code class="descname">print_details</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/operators/tpb_grouped_weighted_pauli_operator.html#TPBGroupedWeightedPauliOperator.print_details"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.print_details" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">print_details</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/operators/tpb_grouped_weighted_pauli_operator.html#TPBGroupedWeightedPauliOperator.print_details"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.print_details" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Print out the operator in details.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">戻り値:</th><td class="field-body">a formatted string describes the operator.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">戻り値の型:</th><td class="field-body">str</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">戻り値</dt>
+<dd class="field-odd"><p>a formatted string describes the operator.</p>
+</dd>
+<dt class="field-even">戻り値の型</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.print_operators">
-<code class="descname">print_operators</code><span class="sig-paren">(</span><em>mode='paulis'</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.print_operators" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">print_operators</code><span class="sig-paren">(</span><em class="sig-param">mode='paulis'</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.print_operators" title="この定義へのパーマリンク">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="staticmethod">
+<dl class="method">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.qubit_tapering">
-<em class="property">static </em><code class="descname">qubit_tapering</code><span class="sig-paren">(</span><em>operator</em>, <em>cliffords</em>, <em>sq_list</em>, <em>tapering_values</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.qubit_tapering" title="この定義へのパーマリンク">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">qubit_tapering</code><span class="sig-paren">(</span><em class="sig-param">operator</em>, <em class="sig-param">cliffords</em>, <em class="sig-param">sq_list</em>, <em class="sig-param">tapering_values</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.qubit_tapering" title="この定義へのパーマリンク">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.reorder_paulis">
-<code class="descname">reorder_paulis</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.reorder_paulis" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">reorder_paulis</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.reorder_paulis" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Reorder the paulis based on the basis and return the reordered paulis.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">戻り値:</th><td class="field-body">the ordered paulis based on the basis.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">戻り値の型:</th><td class="field-body">[[complex, paulis]]</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">戻り値</dt>
+<dd class="field-odd"><p>the ordered paulis based on the basis.</p>
+</dd>
+<dt class="field-even">戻り値の型</dt>
+<dd class="field-even"><p>[[complex, paulis]]</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.rounding">
-<code class="descname">rounding</code><span class="sig-paren">(</span><em>decimals</em>, <em>copy=False</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.rounding" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">rounding</code><span class="sig-paren">(</span><em class="sig-param">decimals</em>, <em class="sig-param">copy=False</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.rounding" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Rounding the weight.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first simple">
-<li><strong>decimals</strong> (<em>int</em>) -- rounding the weight to the decimals.</li>
-<li><strong>copy</strong> (<em>bool</em>) -- chop on a copy or self</li>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>decimals</strong> (<em>int</em>) -- rounding the weight to the decimals.</p></li>
+<li><p><strong>copy</strong> (<em>bool</em>) -- chop on a copy or self</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first last">WeightedPauliOperator</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">戻り値</dt>
+<dd class="field-even"><p>WeightedPauliOperator</p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="staticmethod">
+<dl class="method">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.row_echelon_F2">
-<em class="property">static </em><code class="descname">row_echelon_F2</code><span class="sig-paren">(</span><em>matrix_in</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.row_echelon_F2" title="この定義へのパーマリンク">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">row_echelon_F2</code><span class="sig-paren">(</span><em class="sig-param">matrix_in</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.row_echelon_F2" title="この定義へのパーマリンク">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.save_to_dict">
-<code class="descname">save_to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.save_to_dict" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">save_to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.save_to_dict" title="この定義へのパーマリンク">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.save_to_file">
-<code class="descname">save_to_file</code><span class="sig-paren">(</span><em>file_name</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.save_to_file" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">save_to_file</code><span class="sig-paren">(</span><em class="sig-param">file_name</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.save_to_file" title="この定義へのパーマリンク">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.scaling_coeff">
-<code class="descname">scaling_coeff</code><span class="sig-paren">(</span><em>scaling_factor</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.scaling_coeff" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">scaling_coeff</code><span class="sig-paren">(</span><em class="sig-param">scaling_factor</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.scaling_coeff" title="この定義へのパーマリンク">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.simplify">
-<code class="descname">simplify</code><span class="sig-paren">(</span><em>copy=False</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.simplify" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">simplify</code><span class="sig-paren">(</span><em class="sig-param">copy=False</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.simplify" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Merge the paulis whose bases are identical and the pauli with zero coefficient
 would be removed.</p>
 <p class="rubric">メモ</p>
 <p>This behavior of this method is slightly changed, it will remove the paulis whose weights are zero.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><strong>copy</strong> (<em>bool</em>) -- simplify on a copy or self</td>
-</tr>
-<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body">the simplified operator</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><a class="reference internal" href="qiskit.aqua.operators.WeightedPauliOperator.html#qiskit.aqua.operators.WeightedPauliOperator" title="qiskit.aqua.operators.WeightedPauliOperator">WeightedPauliOperator</a></td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><p><strong>copy</strong> (<em>bool</em>) -- simplify on a copy or self</p>
+</dd>
+<dt class="field-even">戻り値</dt>
+<dd class="field-even"><p>the simplified operator</p>
+</dd>
+<dt class="field-odd">戻り値の型</dt>
+<dd class="field-odd"><p><a class="reference internal" href="qiskit.aqua.operators.WeightedPauliOperator.html#qiskit.aqua.operators.WeightedPauliOperator" title="qiskit.aqua.operators.WeightedPauliOperator">WeightedPauliOperator</a></p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="classmethod">
+<dl class="method">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.sorted_grouping">
-<em class="property">classmethod </em><code class="descname">sorted_grouping</code><span class="sig-paren">(</span><em>weighted_pauli_operator</em>, <em>method='largest-degree'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/operators/tpb_grouped_weighted_pauli_operator.html#TPBGroupedWeightedPauliOperator.sorted_grouping"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.sorted_grouping" title="この定義へのパーマリンク">¶</a></dt>
+<em class="property">classmethod </em><code class="sig-name descname">sorted_grouping</code><span class="sig-paren">(</span><em class="sig-param">weighted_pauli_operator</em>, <em class="sig-param">method='largest-degree'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/operators/tpb_grouped_weighted_pauli_operator.html#TPBGroupedWeightedPauliOperator.sorted_grouping"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.sorted_grouping" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Largest-Degree First Coloring for grouping paulis.
 :param weighted_pauli_operator: the to-be-grouped weighted pauli operator.
 :type weighted_pauli_operator: WeightedPauliOperator
@@ -2076,123 +2038,108 @@ would be removed.</p>
 :type method: str
 :param name: the operator name after group.
 :type name: str</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">戻り値:</th><td class="field-body">TPBGroupedWeightedPauliOperator</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">戻り値</dt>
+<dd class="field-odd"><p>TPBGroupedWeightedPauliOperator</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.sub">
-<code class="descname">sub</code><span class="sig-paren">(</span><em>other</em>, <em>copy=False</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.sub" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">sub</code><span class="sig-paren">(</span><em class="sig-param">other</em>, <em class="sig-param">copy=False</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.sub" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Perform self - other.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first simple">
-<li><strong>other</strong> (<a class="reference internal" href="qiskit.aqua.operators.WeightedPauliOperator.html#qiskit.aqua.operators.WeightedPauliOperator" title="qiskit.aqua.operators.WeightedPauliOperator"><em>WeightedPauliOperator</em></a>) -- to-be-combined operator</li>
-<li><strong>copy</strong> (<em>bool</em>) -- working on a copy or self, if False, the results are written back to self.</li>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>other</strong> (<a class="reference internal" href="qiskit.aqua.operators.WeightedPauliOperator.html#qiskit.aqua.operators.WeightedPauliOperator" title="qiskit.aqua.operators.WeightedPauliOperator"><em>WeightedPauliOperator</em></a>) -- to-be-combined operator</p></li>
+<li><p><strong>copy</strong> (<em>bool</em>) -- working on a copy or self, if False, the results are written back to self.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first last">WeightedPauliOperator</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">戻り値</dt>
+<dd class="field-even"><p>WeightedPauliOperator</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_dict">
-<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_dict" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_dict" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Save operator to a dict in pauli representation.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">戻り値:</th><td class="field-body">a dictionary contains an operator with pauli representation.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">戻り値の型:</th><td class="field-body">dict</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">戻り値</dt>
+<dd class="field-odd"><p>a dictionary contains an operator with pauli representation.</p>
+</dd>
+<dt class="field-even">戻り値の型</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_file">
-<code class="descname">to_file</code><span class="sig-paren">(</span><em>file_name</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_file" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">to_file</code><span class="sig-paren">(</span><em class="sig-param">file_name</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_file" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Save operator to a file in pauli representation.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><strong>file_name</strong> (<em>str</em>) -- path to the file</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><p><strong>file_name</strong> (<em>str</em>) -- path to the file</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_grouped_paulis">
-<code class="descname">to_grouped_paulis</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_grouped_paulis" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">to_grouped_paulis</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_grouped_paulis" title="この定義へのパーマリンク">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_matrix">
-<code class="descname">to_matrix</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_matrix" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">to_matrix</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_matrix" title="この定義へのパーマリンク">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_matrix_operator">
-<code class="descname">to_matrix_operator</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_matrix_operator" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">to_matrix_operator</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_matrix_operator" title="この定義へのパーマリンク">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_paulis">
-<code class="descname">to_paulis</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_paulis" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">to_paulis</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_paulis" title="この定義へのパーマリンク">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_tpb_grouped_weighted_pauli_operator">
-<code class="descname">to_tpb_grouped_weighted_pauli_operator</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_tpb_grouped_weighted_pauli_operator" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">to_tpb_grouped_weighted_pauli_operator</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_tpb_grouped_weighted_pauli_operator" title="この定義へのパーマリンク">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_weighted_pauli_operator">
-<code class="descname">to_weighted_pauli_operator</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_weighted_pauli_operator" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">to_weighted_pauli_operator</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.to_weighted_pauli_operator" title="この定義へのパーマリンク">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.two_qubit_reduced_operator">
-<code class="descname">two_qubit_reduced_operator</code><span class="sig-paren">(</span><em>m</em>, <em>threshold=1e-13</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.two_qubit_reduced_operator" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">two_qubit_reduced_operator</code><span class="sig-paren">(</span><em class="sig-param">m</em>, <em class="sig-param">threshold=1e-13</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.two_qubit_reduced_operator" title="この定義へのパーマリンク">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="classmethod">
+<dl class="method">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.unsorted_grouping">
-<em class="property">classmethod </em><code class="descname">unsorted_grouping</code><span class="sig-paren">(</span><em>weighted_pauli_operator</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/operators/tpb_grouped_weighted_pauli_operator.html#TPBGroupedWeightedPauliOperator.unsorted_grouping"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.unsorted_grouping" title="この定義へのパーマリンク">¶</a></dt>
+<em class="property">classmethod </em><code class="sig-name descname">unsorted_grouping</code><span class="sig-paren">(</span><em class="sig-param">weighted_pauli_operator</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/operators/tpb_grouped_weighted_pauli_operator.html#TPBGroupedWeightedPauliOperator.unsorted_grouping"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.unsorted_grouping" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Greedy and unsorted grouping paulis.
 :param weighted_pauli_operator: the to-be-grouped weighted pauli operator.
 :type weighted_pauli_operator: WeightedPauliOperator
 :param name: the operator name after group.
 :type name: str</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">戻り値:</th><td class="field-body">TPBGroupedWeightedPauliOperator</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">戻り値</dt>
+<dd class="field-odd"><p>TPBGroupedWeightedPauliOperator</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.zeros_coeff_elimination">
-<code class="descname">zeros_coeff_elimination</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.zeros_coeff_elimination" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">zeros_coeff_elimination</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.aqua.operators.TPBGroupedWeightedPauliOperator.zeros_coeff_elimination" title="この定義へのパーマリンク">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>

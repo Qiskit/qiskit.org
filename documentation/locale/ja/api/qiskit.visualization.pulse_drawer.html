@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,6 +48,8 @@
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/js/themeExt.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="索引" href="../genindex.html" />
@@ -625,6 +626,12 @@
 <li class="toctree-l3 current"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1215,6 +1222,12 @@
 <li class="toctree-l3 current"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1261,43 +1274,39 @@
 <h1>pulse_drawer<a class="headerlink" href="#pulse-drawer" title="このヘッドラインへのパーマリンク">¶</a></h1>
 <dl class="function">
 <dt id="qiskit.visualization.pulse_drawer">
-<code class="descname">pulse_drawer</code><span class="sig-paren">(</span><em>data</em>, <em>dt=1</em>, <em>style=None</em>, <em>filename=None</em>, <em>interp_method=None</em>, <em>scaling=None</em>, <em>channels_to_plot=None</em>, <em>plot_all=False</em>, <em>plot_range=None</em>, <em>interactive=False</em>, <em>table=True</em>, <em>label=False</em>, <em>framechange=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/visualization/pulse_visualization.html#pulse_drawer"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.visualization.pulse_drawer" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">pulse_drawer</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">dt=1</em>, <em class="sig-param">style=None</em>, <em class="sig-param">filename=None</em>, <em class="sig-param">interp_method=None</em>, <em class="sig-param">scaling=None</em>, <em class="sig-param">channels_to_plot=None</em>, <em class="sig-param">plot_all=False</em>, <em class="sig-param">plot_range=None</em>, <em class="sig-param">interactive=False</em>, <em class="sig-param">table=True</em>, <em class="sig-param">label=False</em>, <em class="sig-param">framechange=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/visualization/pulse_visualization.html#pulse_drawer"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.visualization.pulse_drawer" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Plot the interpolated envelope of pulse</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first simple">
-<li><strong>data</strong> (<a class="reference internal" href="qiskit.pulse.ScheduleComponent.html#qiskit.pulse.ScheduleComponent" title="qiskit.pulse.ScheduleComponent"><em>ScheduleComponent</em></a><em> or </em><a class="reference internal" href="qiskit.pulse.SamplePulse.html#qiskit.pulse.SamplePulse" title="qiskit.pulse.SamplePulse"><em>SamplePulse</em></a>) -- Data to plot</li>
-<li><strong>dt</strong> (<em>float</em>) -- Time interval of samples</li>
-<li><strong>style</strong> (<em>PulseStyle</em><em> or </em><em>SchedStyle</em>) -- A style sheet to configure
-plot appearance</li>
-<li><strong>filename</strong> (<em>str</em>) -- Name required to save pulse image</li>
-<li><strong>interp_method</strong> (<em>Callable</em>) -- interpolation function
-See <cite>qiskit.visualization.interpolation</cite> for more information</li>
-<li><strong>scaling</strong> (<em>float</em>) -- scaling of waveform amplitude</li>
-<li><strong>channels_to_plot</strong> (<em>list</em>) -- A list of channel names to plot</li>
-<li><strong>plot_all</strong> (<em>bool</em>) -- Plot empty channels</li>
-<li><strong>plot_range</strong> (<em>tuple</em>) -- A tuple of time range to plot</li>
-<li><strong>interactive</strong> (<em>bool</em>) -- When set true show the circuit in a new window
-(this depends on the matplotlib backend being used supporting this)</li>
-<li><strong>table</strong> (<em>bool</em>) -- Draw event table for supported commands</li>
-<li><strong>label</strong> (<em>bool</em>) -- Label individual instructions</li>
-<li><strong>framechange</strong> (<em>bool</em>) -- Add framechange indicators</li>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<a class="reference internal" href="qiskit.pulse.ScheduleComponent.html#qiskit.pulse.ScheduleComponent" title="qiskit.pulse.ScheduleComponent"><em>ScheduleComponent</em></a><em> or </em><a class="reference internal" href="qiskit.pulse.SamplePulse.html#qiskit.pulse.SamplePulse" title="qiskit.pulse.SamplePulse"><em>SamplePulse</em></a>) -- Data to plot</p></li>
+<li><p><strong>dt</strong> (<em>float</em>) -- Time interval of samples</p></li>
+<li><p><strong>style</strong> (<em>PulseStyle</em><em> or </em><em>SchedStyle</em>) -- A style sheet to configure
+plot appearance</p></li>
+<li><p><strong>filename</strong> (<em>str</em>) -- Name required to save pulse image</p></li>
+<li><p><strong>interp_method</strong> (<em>Callable</em>) -- interpolation function
+See <cite>qiskit.visualization.interpolation</cite> for more information</p></li>
+<li><p><strong>scaling</strong> (<em>float</em>) -- scaling of waveform amplitude</p></li>
+<li><p><strong>channels_to_plot</strong> (<em>list</em>) -- A list of channel names to plot</p></li>
+<li><p><strong>plot_all</strong> (<em>bool</em>) -- Plot empty channels</p></li>
+<li><p><strong>plot_range</strong> (<em>tuple</em>) -- A tuple of time range to plot</p></li>
+<li><p><strong>interactive</strong> (<em>bool</em>) -- When set true show the circuit in a new window
+(this depends on the matplotlib backend being used supporting this)</p></li>
+<li><p><strong>table</strong> (<em>bool</em>) -- Draw event table for supported commands</p></li>
+<li><p><strong>label</strong> (<em>bool</em>) -- Label individual instructions</p></li>
+<li><p><strong>framechange</strong> (<em>bool</em>) -- Add framechange indicators</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first">A matplotlib figure object for the pulse envelope</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><p class="first">matplotlib.figure</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference internal" href="qiskit.visualization.VisualizationError.html#qiskit.visualization.VisualizationError" title="qiskit.visualization.VisualizationError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">VisualizationError</span></code></a> -- when invalid data is given or lack of information</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">戻り値</dt>
+<dd class="field-even"><p>A matplotlib figure object for the pulse envelope</p>
+</dd>
+<dt class="field-odd">戻り値の型</dt>
+<dd class="field-odd"><p>matplotlib.figure</p>
+</dd>
+<dt class="field-even">例外</dt>
+<dd class="field-even"><p><a class="reference internal" href="qiskit.visualization.VisualizationError.html#qiskit.visualization.VisualizationError" title="qiskit.visualization.VisualizationError"><strong>VisualizationError</strong></a> -- when invalid data is given or lack of information</p>
+</dd>
+</dl>
 </dd></dl>
 
 </div>

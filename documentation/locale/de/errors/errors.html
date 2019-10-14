@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,6 +48,8 @@
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/js/themeExt.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Stichwortverzeichnis" href="../genindex.html" />
@@ -624,6 +625,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../api/qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../api/qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../api/qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../api/qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../api/qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1214,6 +1221,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../api/qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../api/qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../api/qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../api/qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../api/qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1261,75 +1274,67 @@
 <div class="contents local topic" id="error-codes">
 <p class="topic-title first">Error Codes</p>
 <ul class="simple">
-<li><a class="reference internal" href="#xxx" id="id7">6XXX</a></li>
-<li><a class="reference internal" href="#id2" id="id8">7XXX</a></li>
-<li><a class="reference internal" href="#id4" id="id9">8XXX</a></li>
-<li><a class="reference internal" href="#id6" id="id10">-1</a></li>
+<li><p><a class="reference internal" href="#xxx" id="id7">6XXX</a></p></li>
+<li><p><a class="reference internal" href="#id2" id="id8">7XXX</a></p></li>
+<li><p><a class="reference internal" href="#id4" id="id9">8XXX</a></p></li>
+<li><p><a class="reference internal" href="#id6" id="id10">-1</a></p></li>
 </ul>
 </div>
 <div class="section" id="xxx">
 <h2><a class="toc-backref" href="#id7">6XXX</a><a class="headerlink" href="#xxx" title="Link zu dieser Überschrift">¶</a></h2>
-<table border="1" class="docutils" id="id1">
+<table class="docutils align-default" id="id1">
 <colgroup>
-<col width="21%" />
-<col width="79%" />
+<col style="width: 21%" />
+<col style="width: 79%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Error codes</th>
-<th class="head">Messages</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Error codes</p></th>
+<th class="head"><p>Messages</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td><strong>6000</strong></td>
-<td><table class="first last docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Error message:</th><td class="field-body">Too many shots given ({} &gt; {}).</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Solution:</th><td class="field-body">Reduce the requested number of shots.</td>
-</tr>
-</tbody>
-</table>
+<tbody>
+<tr class="row-even"><td><p><strong>6000</strong></p></td>
+<td><dl class="field-list simple">
+<dt class="field-odd">Error message</dt>
+<dd class="field-odd"><p>Too many shots given ({} &gt; {}).</p>
+</dd>
+<dt class="field-even">Solution</dt>
+<dd class="field-even"><p>Reduce the requested number of shots.</p>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="row-odd"><td><strong>6001</strong></td>
-<td><table class="first last docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Error message:</th><td class="field-body">Too few shots given ({} &lt; {}).</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Solution:</th><td class="field-body">Increase the number of shots.</td>
-</tr>
-</tbody>
-</table>
+<tr class="row-odd"><td><p><strong>6001</strong></p></td>
+<td><dl class="field-list simple">
+<dt class="field-odd">Error message</dt>
+<dd class="field-odd"><p>Too few shots given ({} &lt; {}).</p>
+</dd>
+<dt class="field-even">Solution</dt>
+<dd class="field-even"><p>Increase the number of shots.</p>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="row-even"><td><strong>6002</strong></td>
-<td><table class="first last docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Error message:</th><td class="field-body">Too many experiments given ({} &gt; {}).</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Solution:</th><td class="field-body">Reduce the number of experiments given at once.</td>
-</tr>
-</tbody>
-</table>
+<tr class="row-even"><td><p><strong>6002</strong></p></td>
+<td><dl class="field-list simple">
+<dt class="field-odd">Error message</dt>
+<dd class="field-odd"><p>Too many experiments given ({} &gt; {}).</p>
+</dd>
+<dt class="field-even">Solution</dt>
+<dd class="field-even"><p>Reduce the number of experiments given at once.</p>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="row-odd"><td><strong>6003</strong></td>
-<td><table class="first last docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Error message:</th><td class="field-body">Too few experiments given ({} &lt; {}).</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Solution:</th><td class="field-body">Increase number of experiments.</td>
-</tr>
-</tbody>
-</table>
+<tr class="row-odd"><td><p><strong>6003</strong></p></td>
+<td><dl class="field-list simple">
+<dt class="field-odd">Error message</dt>
+<dd class="field-odd"><p>Too few experiments given ({} &lt; {}).</p>
+</dd>
+<dt class="field-even">Solution</dt>
+<dd class="field-even"><p>Increase number of experiments.</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -1337,85 +1342,75 @@
 </div>
 <div class="section" id="id2">
 <h2><a class="toc-backref" href="#id8">7XXX</a><a class="headerlink" href="#id2" title="Link zu dieser Überschrift">¶</a></h2>
-<table border="1" class="docutils" id="id3">
+<table class="docutils align-default" id="id3">
 <colgroup>
-<col width="21%" />
-<col width="79%" />
+<col style="width: 21%" />
+<col style="width: 79%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Error codes</th>
-<th class="head">Messages</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Error codes</p></th>
+<th class="head"><p>Messages</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td><strong>7000</strong></td>
-<td><table class="first last docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Error message:</th><td class="field-body">Instruction not in basis gates:
-instruction: {}, qubits: {}, params: {}</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Solution:</th><td class="field-body">Circuits must be constructed from backend
-basis gates.</td>
-</tr>
-</tbody>
-</table>
+<tbody>
+<tr class="row-even"><td><p><strong>7000</strong></p></td>
+<td><dl class="field-list simple">
+<dt class="field-odd">Error message</dt>
+<dd class="field-odd"><p>Instruction not in basis gates:
+instruction: {}, qubits: {}, params: {}</p>
+</dd>
+<dt class="field-even">Solution</dt>
+<dd class="field-even"><p>Circuits must be constructed from backend
+basis gates.</p>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="row-odd"><td><strong>7001</strong></td>
-<td><table class="first last docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Error message:</th><td class="field-body">Instruction {} is not supported.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Solution:</th><td class="field-body">Remove unsupported instruction, or run on a
-simulator that supports it.</td>
-</tr>
-</tbody>
-</table>
+<tr class="row-odd"><td><p><strong>7001</strong></p></td>
+<td><dl class="field-list simple">
+<dt class="field-odd">Error message</dt>
+<dd class="field-odd"><p>Instruction {} is not supported.</p>
+</dd>
+<dt class="field-even">Solution</dt>
+<dd class="field-even"><p>Remove unsupported instruction, or run on a
+simulator that supports it.</p>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="row-even"><td><strong>7002</strong></td>
-<td><table class="first last docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Error message:</th><td class="field-body">Memory output is disabled.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Solution:</th><td class="field-body">Select a different backend or set
-<cite>memory=False</cite> in transpile / execute.</td>
-</tr>
-</tbody>
-</table>
+<tr class="row-even"><td><p><strong>7002</strong></p></td>
+<td><dl class="field-list simple">
+<dt class="field-odd">Error message</dt>
+<dd class="field-odd"><p>Memory output is disabled.</p>
+</dd>
+<dt class="field-even">Solution</dt>
+<dd class="field-even"><p>Select a different backend or set
+<cite>memory=False</cite> in transpile / execute.</p>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="row-odd"><td><strong>7003</strong></td>
-<td><table class="first last docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Error message:</th><td class="field-body">qubits: {} and classical bits: {} do not
-have equal lengths.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Solution:</th><td class="field-body">Qubit and Clbits must be correctly mapped.</td>
-</tr>
-</tbody>
-</table>
+<tr class="row-odd"><td><p><strong>7003</strong></p></td>
+<td><dl class="field-list simple">
+<dt class="field-odd">Error message</dt>
+<dd class="field-odd"><p>qubits: {} and classical bits: {} do not
+have equal lengths.</p>
+</dd>
+<dt class="field-even">Solution</dt>
+<dd class="field-even"><p>Qubit and Clbits must be correctly mapped.</p>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="row-even"><td><strong>7004</strong></td>
-<td><table class="first last docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Error message:</th><td class="field-body">Qubit measured multiple times in circuit.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Solution:</th><td class="field-body">Remove multiple measurements on qubits.</td>
-</tr>
-</tbody>
-</table>
+<tr class="row-even"><td><p><strong>7004</strong></p></td>
+<td><dl class="field-list simple">
+<dt class="field-odd">Error message</dt>
+<dd class="field-odd"><p>Qubit measured multiple times in circuit.</p>
+</dd>
+<dt class="field-even">Solution</dt>
+<dd class="field-even"><p>Remove multiple measurements on qubits.</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -1423,70 +1418,62 @@ have equal lengths.</td>
 </div>
 <div class="section" id="id4">
 <h2><a class="toc-backref" href="#id9">8XXX</a><a class="headerlink" href="#id4" title="Link zu dieser Überschrift">¶</a></h2>
-<table border="1" class="docutils" id="id5">
+<table class="docutils align-default" id="id5">
 <colgroup>
-<col width="21%" />
-<col width="79%" />
+<col style="width: 21%" />
+<col style="width: 79%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Error codes</th>
-<th class="head">Messages</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Error codes</p></th>
+<th class="head"><p>Messages</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td><strong>8000</strong></td>
-<td><table class="first last docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Error message:</th><td class="field-body">Channel {}{} lo setting: {} is not within
-acceptable range of {}.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Solution:</th><td class="field-body">Set channel LO within specified range.</td>
-</tr>
-</tbody>
-</table>
+<tbody>
+<tr class="row-even"><td><p><strong>8000</strong></p></td>
+<td><dl class="field-list simple">
+<dt class="field-odd">Error message</dt>
+<dd class="field-odd"><p>Channel {}{} lo setting: {} is not within
+acceptable range of {}.</p>
+</dd>
+<dt class="field-even">Solution</dt>
+<dd class="field-even"><p>Set channel LO within specified range.</p>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="row-odd"><td><strong>8001</strong></td>
-<td><table class="first last docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Error message:</th><td class="field-body">qubits {} in measurement are not mapped.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Solution:</th><td class="field-body">Assign qubits to a classical memory slot.</td>
-</tr>
-</tbody>
-</table>
+<tr class="row-odd"><td><p><strong>8001</strong></p></td>
+<td><dl class="field-list simple">
+<dt class="field-odd">Error message</dt>
+<dd class="field-odd"><p>qubits {} in measurement are not mapped.</p>
+</dd>
+<dt class="field-even">Solution</dt>
+<dd class="field-even"><p>Assign qubits to a classical memory slot.</p>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="row-even"><td><strong>8002</strong></td>
-<td><table class="first last docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Error message:</th><td class="field-body">Total samples exceeds the maximum number of
-samples for channel {}. ({} &gt; {}).</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Solution:</th><td class="field-body">Reduce number of samples below specified limit.</td>
-</tr>
-</tbody>
-</table>
+<tr class="row-even"><td><p><strong>8002</strong></p></td>
+<td><dl class="field-list simple">
+<dt class="field-odd">Error message</dt>
+<dd class="field-odd"><p>Total samples exceeds the maximum number of
+samples for channel {}. ({} &gt; {}).</p>
+</dd>
+<dt class="field-even">Solution</dt>
+<dd class="field-even"><p>Reduce number of samples below specified limit.</p>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="row-odd"><td><strong>8003</strong></td>
-<td><table class="first last docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Error message:</th><td class="field-body">Total pulses exceeds the maximum number of
-pulses for channel: {}, ({} &gt; {}).</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Solution:</th><td class="field-body">Reduce number of pulses below specified limit.</td>
-</tr>
-</tbody>
-</table>
+<tr class="row-odd"><td><p><strong>8003</strong></p></td>
+<td><dl class="field-list simple">
+<dt class="field-odd">Error message</dt>
+<dd class="field-odd"><p>Total pulses exceeds the maximum number of
+pulses for channel: {}, ({} &gt; {}).</p>
+</dd>
+<dt class="field-even">Solution</dt>
+<dd class="field-even"><p>Reduce number of pulses below specified limit.</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -1494,28 +1481,26 @@ pulses for channel: {}, ({} &gt; {}).</td>
 </div>
 <div class="section" id="id6">
 <h2><a class="toc-backref" href="#id10">-1</a><a class="headerlink" href="#id6" title="Link zu dieser Überschrift">¶</a></h2>
-<table border="1" class="docutils" id="minus1">
+<table class="docutils align-default" id="minus1">
 <colgroup>
-<col width="21%" />
-<col width="79%" />
+<col style="width: 21%" />
+<col style="width: 79%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Error codes</th>
-<th class="head">Messages</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Error codes</p></th>
+<th class="head"><p>Messages</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td><strong>-1</strong></td>
-<td><table class="first last docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Error message:</th><td class="field-body">Internal error.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Solution:</th><td class="field-body">Contact IBM Quantum via email or slack for help.</td>
-</tr>
-</tbody>
-</table>
+<tbody>
+<tr class="row-even"><td><p><strong>-1</strong></p></td>
+<td><dl class="field-list simple">
+<dt class="field-odd">Error message</dt>
+<dd class="field-odd"><p>Internal error.</p>
+</dd>
+<dt class="field-even">Solution</dt>
+<dd class="field-even"><p>Contact IBM Quantum via email or slack for help.</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>

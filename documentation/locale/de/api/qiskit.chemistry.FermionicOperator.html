@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,6 +48,8 @@
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/js/themeExt.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Stichwortverzeichnis" href="../genindex.html" />
@@ -625,6 +626,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1215,6 +1222,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1261,187 +1274,200 @@
 <h1>FermionicOperator<a class="headerlink" href="#fermionicoperator" title="Link zu dieser Überschrift">¶</a></h1>
 <dl class="class">
 <dt id="qiskit.chemistry.FermionicOperator">
-<em class="property">class </em><code class="descname">FermionicOperator</code><span class="sig-paren">(</span><em>h1</em>, <em>h2=None</em>, <em>ph_trans_shift=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/chemistry/fermionic_operator.html#FermionicOperator"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.chemistry.FermionicOperator" title="Link zu dieser Definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">FermionicOperator</code><span class="sig-paren">(</span><em class="sig-param">h1</em>, <em class="sig-param">h2=None</em>, <em class="sig-param">ph_trans_shift=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/chemistry/fermionic_operator.html#FermionicOperator"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.chemistry.FermionicOperator" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>A set of functions to map fermionic Hamiltonians to qubit Hamiltonians.</p>
 <p>References:
 - E. Wigner and P. Jordan., Über das Paulische Äguivalenzverbot, </p>
 <blockquote>
 <div><ol class="upperalpha simple" start="26">
-<li>Phys., 47:631 (1928). </li>
+<li><p>Phys., 47:631 (1928). </p></li>
 </ol>
 </div></blockquote>
 <ul>
-<li><ol class="first upperalpha simple" start="19">
-<li>Bravyi and A. Kitaev. Fermionic quantum computation, </li>
+<li><ol class="upperalpha simple" start="19">
+<li><p>Bravyi and A. Kitaev. Fermionic quantum computation, </p></li>
 </ol>
 <blockquote>
 <div><p>Ann. of Phys., 298(1):210–226 (2002). </p>
 </div></blockquote>
 </li>
-<li><ol class="first upperalpha simple">
-<li>Tranter, S. Sofia, J. Seeley, M. Kaicher, J. McClean, R. Babbush, </li>
+<li><ol class="upperalpha simple">
+<li><p>Tranter, S. Sofia, J. Seeley, M. Kaicher, J. McClean, R. Babbush, </p></li>
 </ol>
 <blockquote>
 <div><p>P. Coveney, F. Mintert, F. Wilhelm, and P. Love. The Bravyi–Kitaev transformation: Properties and applications. Int. Journal of Quantum Chemistry, 115(19):1431–1441 (2015). </p>
 </div></blockquote>
 </li>
-<li><ol class="first upperalpha simple" start="19">
-<li>Bravyi, J. M. Gambetta, A. Mezzacapo, and K. Temme, </li>
+<li><ol class="upperalpha simple" start="19">
+<li><p>Bravyi, J. M. Gambetta, A. Mezzacapo, and K. Temme, </p></li>
 </ol>
 <blockquote>
 <div><p>arXiv e-print arXiv:1701.08213 (2017). </p>
 </div></blockquote>
 </li>
-<li><ol class="first upperalpha simple" start="11">
-<li>Setia, J. D. Whitfield, arXiv:1712.00446 (2017)</li>
+<li><ol class="upperalpha simple" start="11">
+<li><p>Setia, J. D. Whitfield, arXiv:1712.00446 (2017)</p></li>
 </ol>
 </li>
 </ul>
+<p>Constructor.</p>
+<dl class="simple">
+<dt>This class requires the integrals stored in the ‚chemist‘ notation</dt><dd><p>h2(i,j,k,l) –&gt; adag_i adag_k a_l a_j</p>
+</dd>
+<dt>There is another popular notation is the ‚physicist‘ notation</dt><dd><p>h2(i,j,k,l) –&gt; adag_i adag_j a_k a_l</p>
+</dd>
+</dl>
+<p>If you are using the ‚physicist‘ notation, you need to convert it to
+the ‚chemist‘ notation first. E.g., h2 = numpy.einsum(‚ikmj-&gt;ijkm‘, h2)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>h1</strong> (<em>numpy.ndarray</em>) – second-quantized fermionic one-body operator, a 2-D (NxN) tensor</p></li>
+<li><p><strong>h2</strong> (<em>numpy.ndarray</em>) – second-quantized fermionic two-body operator,
+a 4-D (NxNxNxN) tensor</p></li>
+<li><p><strong>ph_trans_shift</strong> (<em>float</em>) – energy shift caused by particle hole transformation</p></li>
+</ul>
+</dd>
+</dl>
 <p class="rubric">Attributes Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.chemistry.FermionicOperator.h1" title="qiskit.chemistry.FermionicOperator.h1"><code class="xref py py-obj docutils literal notranslate"><span class="pre">h1</span></code></a></td>
-<td>Getter of one body integral tensor.</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.chemistry.FermionicOperator.h1" title="qiskit.chemistry.FermionicOperator.h1"><code class="xref py py-obj docutils literal notranslate"><span class="pre">h1</span></code></a></p></td>
+<td><p>Getter of one body integral tensor.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.chemistry.FermionicOperator.h2" title="qiskit.chemistry.FermionicOperator.h2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">h2</span></code></a></td>
-<td>Getter of two body integral tensor.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.chemistry.FermionicOperator.h2" title="qiskit.chemistry.FermionicOperator.h2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">h2</span></code></a></p></td>
+<td><p>Getter of two body integral tensor.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.chemistry.FermionicOperator.modes" title="qiskit.chemistry.FermionicOperator.modes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modes</span></code></a></td>
-<td>Getter of modes.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.chemistry.FermionicOperator.modes" title="qiskit.chemistry.FermionicOperator.modes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modes</span></code></a></p></td>
+<td><p>Getter of modes.</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Methods Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.chemistry.FermionicOperator.fermion_mode_elimination" title="qiskit.chemistry.FermionicOperator.fermion_mode_elimination"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fermion_mode_elimination</span></code></a>(fermion_mode_array)</td>
-<td>Eliminate modes.</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.chemistry.FermionicOperator.fermion_mode_elimination" title="qiskit.chemistry.FermionicOperator.fermion_mode_elimination"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fermion_mode_elimination</span></code></a>(fermion_mode_array)</p></td>
+<td><p>Eliminate modes.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.chemistry.FermionicOperator.fermion_mode_freezing" title="qiskit.chemistry.FermionicOperator.fermion_mode_freezing"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fermion_mode_freezing</span></code></a>(fermion_mode_array)</td>
-<td>Freezing modes and extracting its energy.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.chemistry.FermionicOperator.fermion_mode_freezing" title="qiskit.chemistry.FermionicOperator.fermion_mode_freezing"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fermion_mode_freezing</span></code></a>(fermion_mode_array)</p></td>
+<td><p>Freezing modes and extracting its energy.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.chemistry.FermionicOperator.mapping" title="qiskit.chemistry.FermionicOperator.mapping"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mapping</span></code></a>(map_type[,&nbsp;threshold])</td>
-<td>Map fermionic operator to qubit operator.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.chemistry.FermionicOperator.mapping" title="qiskit.chemistry.FermionicOperator.mapping"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mapping</span></code></a>(map_type[, threshold])</p></td>
+<td><p>Map fermionic operator to qubit operator.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.chemistry.FermionicOperator.particle_hole_transformation" title="qiskit.chemistry.FermionicOperator.particle_hole_transformation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">particle_hole_transformation</span></code></a>(num_particles)</td>
-<td>The ‚standard‘ second quantized Hamiltonian can be transformed in the particle-hole (p/h) picture, which makes the expansion of the trail wavefunction from the HF reference state more natural.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.chemistry.FermionicOperator.particle_hole_transformation" title="qiskit.chemistry.FermionicOperator.particle_hole_transformation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">particle_hole_transformation</span></code></a>(num_particles)</p></td>
+<td><p>The ‚standard‘ second quantized Hamiltonian can be transformed in the particle-hole (p/h) picture, which makes the expansion of the trail wavefunction from the HF reference state more natural.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.chemistry.FermionicOperator.total_angular_momentum" title="qiskit.chemistry.FermionicOperator.total_angular_momentum"><code class="xref py py-obj docutils literal notranslate"><span class="pre">total_angular_momentum</span></code></a>()</td>
-<td>Total angular momentum.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.chemistry.FermionicOperator.total_angular_momentum" title="qiskit.chemistry.FermionicOperator.total_angular_momentum"><code class="xref py py-obj docutils literal notranslate"><span class="pre">total_angular_momentum</span></code></a>()</p></td>
+<td><p>Total angular momentum.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.chemistry.FermionicOperator.total_magnetization" title="qiskit.chemistry.FermionicOperator.total_magnetization"><code class="xref py py-obj docutils literal notranslate"><span class="pre">total_magnetization</span></code></a>()</td>
-<td>A data_preprocess_helper fermionic operator which can be used to         evaluate the magnetization of the given eigenstate.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.chemistry.FermionicOperator.total_magnetization" title="qiskit.chemistry.FermionicOperator.total_magnetization"><code class="xref py py-obj docutils literal notranslate"><span class="pre">total_magnetization</span></code></a>()</p></td>
+<td><p>A data_preprocess_helper fermionic operator which can be used to         evaluate the magnetization of the given eigenstate.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.chemistry.FermionicOperator.total_particle_number" title="qiskit.chemistry.FermionicOperator.total_particle_number"><code class="xref py py-obj docutils literal notranslate"><span class="pre">total_particle_number</span></code></a>()</td>
-<td>A data_preprocess_helper fermionic operator which can be used to evaluate the number of particle of the given eigenstate.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.chemistry.FermionicOperator.total_particle_number" title="qiskit.chemistry.FermionicOperator.total_particle_number"><code class="xref py py-obj docutils literal notranslate"><span class="pre">total_particle_number</span></code></a>()</p></td>
+<td><p>A data_preprocess_helper fermionic operator which can be used to evaluate the number of particle of the given eigenstate.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.chemistry.FermionicOperator.transform" title="qiskit.chemistry.FermionicOperator.transform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">transform</span></code></a>(unitary_matrix)</td>
-<td>Transform the one and two body term based on unitary_matrix.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.chemistry.FermionicOperator.transform" title="qiskit.chemistry.FermionicOperator.transform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">transform</span></code></a>(unitary_matrix)</p></td>
+<td><p>Transform the one and two body term based on unitary_matrix.</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Attributes Documentation</p>
 <dl class="attribute">
 <dt id="qiskit.chemistry.FermionicOperator.h1">
-<code class="descname">h1</code><a class="headerlink" href="#qiskit.chemistry.FermionicOperator.h1" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">h1</code><a class="headerlink" href="#qiskit.chemistry.FermionicOperator.h1" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Getter of one body integral tensor.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.chemistry.FermionicOperator.h2">
-<code class="descname">h2</code><a class="headerlink" href="#qiskit.chemistry.FermionicOperator.h2" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">h2</code><a class="headerlink" href="#qiskit.chemistry.FermionicOperator.h2" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Getter of two body integral tensor.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.chemistry.FermionicOperator.modes">
-<code class="descname">modes</code><a class="headerlink" href="#qiskit.chemistry.FermionicOperator.modes" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">modes</code><a class="headerlink" href="#qiskit.chemistry.FermionicOperator.modes" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Getter of modes.</p>
 </dd></dl>
 
 <p class="rubric">Methods Documentation</p>
 <dl class="method">
 <dt id="qiskit.chemistry.FermionicOperator.fermion_mode_elimination">
-<code class="descname">fermion_mode_elimination</code><span class="sig-paren">(</span><em>fermion_mode_array</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/chemistry/fermionic_operator.html#FermionicOperator.fermion_mode_elimination"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.chemistry.FermionicOperator.fermion_mode_elimination" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">fermion_mode_elimination</code><span class="sig-paren">(</span><em class="sig-param">fermion_mode_array</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/chemistry/fermionic_operator.html#FermionicOperator.fermion_mode_elimination"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.chemistry.FermionicOperator.fermion_mode_elimination" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Eliminate modes.</p>
 <p>Generate a new fermionic operator with the modes in fermion_mode_array deleted</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><strong>fermion_mode_array</strong> (<em>list</em>) – orbital index for elimination</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body">Fermionic Hamiltonian</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body"><a class="reference internal" href="#qiskit.chemistry.FermionicOperator" title="qiskit.chemistry.FermionicOperator">FermionicOperator</a></td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><p><strong>fermion_mode_array</strong> (<em>list</em>) – orbital index for elimination</p>
+</dd>
+<dt class="field-even">Rückgabe</dt>
+<dd class="field-even"><p>Fermionic Hamiltonian</p>
+</dd>
+<dt class="field-odd">Rückgabetyp</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#qiskit.chemistry.FermionicOperator" title="qiskit.chemistry.FermionicOperator">FermionicOperator</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.chemistry.FermionicOperator.fermion_mode_freezing">
-<code class="descname">fermion_mode_freezing</code><span class="sig-paren">(</span><em>fermion_mode_array</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/chemistry/fermionic_operator.html#FermionicOperator.fermion_mode_freezing"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.chemistry.FermionicOperator.fermion_mode_freezing" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">fermion_mode_freezing</code><span class="sig-paren">(</span><em class="sig-param">fermion_mode_array</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/chemistry/fermionic_operator.html#FermionicOperator.fermion_mode_freezing"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.chemistry.FermionicOperator.fermion_mode_freezing" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Freezing modes and extracting its energy.</p>
 <p>Generate a fermionic operator with the modes in fermion_mode_array deleted and
 provide the shifted energy after freezing.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><strong>fermion_mode_array</strong> (<em>list</em>) – orbital index for freezing</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body">Fermionic Hamiltonian
-float: energy of frozen modes</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body"><a class="reference internal" href="#qiskit.chemistry.FermionicOperator" title="qiskit.chemistry.FermionicOperator">FermionicOperator</a></td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><p><strong>fermion_mode_array</strong> (<em>list</em>) – orbital index for freezing</p>
+</dd>
+<dt class="field-even">Rückgabe</dt>
+<dd class="field-even"><p>Fermionic Hamiltonian
+float: energy of frozen modes</p>
+</dd>
+<dt class="field-odd">Rückgabetyp</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#qiskit.chemistry.FermionicOperator" title="qiskit.chemistry.FermionicOperator">FermionicOperator</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.chemistry.FermionicOperator.mapping">
-<code class="descname">mapping</code><span class="sig-paren">(</span><em>map_type</em>, <em>threshold=1e-08</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/chemistry/fermionic_operator.html#FermionicOperator.mapping"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.chemistry.FermionicOperator.mapping" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">mapping</code><span class="sig-paren">(</span><em class="sig-param">map_type</em>, <em class="sig-param">threshold=1e-08</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/chemistry/fermionic_operator.html#FermionicOperator.mapping"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.chemistry.FermionicOperator.mapping" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Map fermionic operator to qubit operator.</p>
 <p>Using multiprocess to speedup the mapping, the improvement can be
 observed when h2 is a non-sparse matrix.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><ul class="first simple">
-<li><strong>map_type</strong> (<em>str</em>) – case-insensitive mapping type.
-„jordan_wigner“, „parity“, „bravyi_kitaev“, „bksf“</li>
-<li><strong>threshold</strong> (<em>float</em>) – threshold for Pauli simplification</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>map_type</strong> (<em>str</em>) – case-insensitive mapping type.
+„jordan_wigner“, „parity“, „bravyi_kitaev“, „bksf“</p></li>
+<li><p><strong>threshold</strong> (<em>float</em>) – threshold for Pauli simplification</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body"><p class="first">create an Operator object in Paulis form.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body"><p class="first"><a class="reference internal" href="qiskit.aqua.operators.WeightedPauliOperator.html#qiskit.aqua.operators.WeightedPauliOperator" title="qiskit.aqua.operators.WeightedPauliOperator">WeightedPauliOperator</a></p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference internal" href="qiskit.chemistry.QiskitChemistryError.html#qiskit.chemistry.QiskitChemistryError" title="qiskit.chemistry.QiskitChemistryError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">QiskitChemistryError</span></code></a> – if the <cite>map_type</cite> can not be recognized.</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Rückgabe</dt>
+<dd class="field-even"><p>create an Operator object in Paulis form.</p>
+</dd>
+<dt class="field-odd">Rückgabetyp</dt>
+<dd class="field-odd"><p><a class="reference internal" href="qiskit.aqua.operators.WeightedPauliOperator.html#qiskit.aqua.operators.WeightedPauliOperator" title="qiskit.aqua.operators.WeightedPauliOperator">WeightedPauliOperator</a></p>
+</dd>
+<dt class="field-even">Verursacht</dt>
+<dd class="field-even"><p><a class="reference internal" href="qiskit.chemistry.QiskitChemistryError.html#qiskit.chemistry.QiskitChemistryError" title="qiskit.chemistry.QiskitChemistryError"><strong>QiskitChemistryError</strong></a> – if the <cite>map_type</cite> can not be recognized.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.chemistry.FermionicOperator.particle_hole_transformation">
-<code class="descname">particle_hole_transformation</code><span class="sig-paren">(</span><em>num_particles</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/chemistry/fermionic_operator.html#FermionicOperator.particle_hole_transformation"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.chemistry.FermionicOperator.particle_hole_transformation" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">particle_hole_transformation</code><span class="sig-paren">(</span><em class="sig-param">num_particles</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/chemistry/fermionic_operator.html#FermionicOperator.particle_hole_transformation"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.chemistry.FermionicOperator.particle_hole_transformation" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>The ‚standard‘ second quantized Hamiltonian can be transformed in the
 particle-hole (p/h) picture, which makes the expansion of the trail wavefunction
 from the HF reference state more natural. In fact, for both trail wavefunctions
@@ -1450,71 +1476,62 @@ improves the speed of convergence of the VQE algorithm for the calculation of
 the electronic ground state properties.
 For more information on the p/h formalism see:
 P. Barkoutsos, arXiv:1805.04340(https://arxiv.org/abs/1805.04340).</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><strong>num_particles</strong> (<em>list</em><em>, </em><em>int</em>) – number of particles, if it is a list, the first number is alpha
-and the second number is beta.</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><p><strong>num_particles</strong> (<em>list</em><em>, </em><em>int</em>) – number of particles, if it is a list, the first number is alpha
+and the second number is beta.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.chemistry.FermionicOperator.total_angular_momentum">
-<code class="descname">total_angular_momentum</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/chemistry/fermionic_operator.html#FermionicOperator.total_angular_momentum"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.chemistry.FermionicOperator.total_angular_momentum" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">total_angular_momentum</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/chemistry/fermionic_operator.html#FermionicOperator.total_angular_momentum"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.chemistry.FermionicOperator.total_angular_momentum" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Total angular momentum.</p>
 <p>A data_preprocess_helper fermionic operator which can be used to evaluate the total
 angular momentum of the given eigenstate.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Rückgabe:</th><td class="field-body">Fermionic Hamiltonian</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Rückgabetyp:</th><td class="field-body"><a class="reference internal" href="#qiskit.chemistry.FermionicOperator" title="qiskit.chemistry.FermionicOperator">FermionicOperator</a></td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Rückgabe</dt>
+<dd class="field-odd"><p>Fermionic Hamiltonian</p>
+</dd>
+<dt class="field-even">Rückgabetyp</dt>
+<dd class="field-even"><p><a class="reference internal" href="#qiskit.chemistry.FermionicOperator" title="qiskit.chemistry.FermionicOperator">FermionicOperator</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.chemistry.FermionicOperator.total_magnetization">
-<code class="descname">total_magnetization</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/chemistry/fermionic_operator.html#FermionicOperator.total_magnetization"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.chemistry.FermionicOperator.total_magnetization" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">total_magnetization</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/chemistry/fermionic_operator.html#FermionicOperator.total_magnetization"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.chemistry.FermionicOperator.total_magnetization" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>A data_preprocess_helper fermionic operator which can be used to         evaluate the magnetization of the given eigenstate.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Rückgabe:</th><td class="field-body">Fermionic Hamiltonian</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Rückgabetyp:</th><td class="field-body"><a class="reference internal" href="#qiskit.chemistry.FermionicOperator" title="qiskit.chemistry.FermionicOperator">FermionicOperator</a></td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Rückgabe</dt>
+<dd class="field-odd"><p>Fermionic Hamiltonian</p>
+</dd>
+<dt class="field-even">Rückgabetyp</dt>
+<dd class="field-even"><p><a class="reference internal" href="#qiskit.chemistry.FermionicOperator" title="qiskit.chemistry.FermionicOperator">FermionicOperator</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.chemistry.FermionicOperator.total_particle_number">
-<code class="descname">total_particle_number</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/chemistry/fermionic_operator.html#FermionicOperator.total_particle_number"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.chemistry.FermionicOperator.total_particle_number" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">total_particle_number</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/chemistry/fermionic_operator.html#FermionicOperator.total_particle_number"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.chemistry.FermionicOperator.total_particle_number" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>A data_preprocess_helper fermionic operator which can be used to evaluate the number of
 particle of the given eigenstate.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Rückgabe:</th><td class="field-body">Fermionic Hamiltonian</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Rückgabetyp:</th><td class="field-body"><a class="reference internal" href="#qiskit.chemistry.FermionicOperator" title="qiskit.chemistry.FermionicOperator">FermionicOperator</a></td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Rückgabe</dt>
+<dd class="field-odd"><p>Fermionic Hamiltonian</p>
+</dd>
+<dt class="field-even">Rückgabetyp</dt>
+<dd class="field-even"><p><a class="reference internal" href="#qiskit.chemistry.FermionicOperator" title="qiskit.chemistry.FermionicOperator">FermionicOperator</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.chemistry.FermionicOperator.transform">
-<code class="descname">transform</code><span class="sig-paren">(</span><em>unitary_matrix</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/chemistry/fermionic_operator.html#FermionicOperator.transform"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.chemistry.FermionicOperator.transform" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">transform</code><span class="sig-paren">(</span><em class="sig-param">unitary_matrix</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/chemistry/fermionic_operator.html#FermionicOperator.transform"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.chemistry.FermionicOperator.transform" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Transform the one and two body term based on unitary_matrix.</p>
 </dd></dl>
 

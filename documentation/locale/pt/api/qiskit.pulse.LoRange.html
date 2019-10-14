@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,6 +48,8 @@
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/js/themeExt.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Índice" href="../genindex.html" />
@@ -625,6 +626,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1215,6 +1222,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1261,67 +1274,75 @@
 <h1>LoRange<a class="headerlink" href="#lorange" title="Link permanente para este título">¶</a></h1>
 <dl class="class">
 <dt id="qiskit.pulse.LoRange">
-<em class="property">class </em><code class="descname">LoRange</code><span class="sig-paren">(</span><em>lower_bound: float</em>, <em>upper_bound: float</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/pulse/configuration.html#LoRange"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.pulse.LoRange" title="Link permanente para esta definição">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">LoRange</code><span class="sig-paren">(</span><em class="sig-param">lower_bound</em>, <em class="sig-param">upper_bound</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/pulse/configuration.html#LoRange"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.pulse.LoRange" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Range of LO frequency.</p>
 <p class="rubric">Attributes Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.pulse.LoRange.lower_bound" title="qiskit.pulse.LoRange.lower_bound"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lower_bound</span></code></a></td>
-<td>Lower bound of the LO range</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.pulse.LoRange.lower_bound" title="qiskit.pulse.LoRange.lower_bound"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lower_bound</span></code></a></p></td>
+<td><p>Lower bound of the LO range</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.pulse.LoRange.upper_bound" title="qiskit.pulse.LoRange.upper_bound"><code class="xref py py-obj docutils literal notranslate"><span class="pre">upper_bound</span></code></a></td>
-<td>Upper bound of the LO range</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.pulse.LoRange.upper_bound" title="qiskit.pulse.LoRange.upper_bound"><code class="xref py py-obj docutils literal notranslate"><span class="pre">upper_bound</span></code></a></p></td>
+<td><p>Upper bound of the LO range</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Methods Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.pulse.LoRange.includes" title="qiskit.pulse.LoRange.includes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">includes</span></code></a>(lo_freq)</td>
-<td>Whether <cite>lo_freq</cite> is within the <cite>LoRange</cite>.</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.pulse.LoRange.includes" title="qiskit.pulse.LoRange.includes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">includes</span></code></a>(lo_freq)</p></td>
+<td><p>Whether <cite>lo_freq</cite> is within the <cite>LoRange</cite>.</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Attributes Documentation</p>
 <dl class="attribute">
 <dt id="qiskit.pulse.LoRange.lower_bound">
-<code class="descname">lower_bound</code><a class="headerlink" href="#qiskit.pulse.LoRange.lower_bound" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">lower_bound</code><a class="headerlink" href="#qiskit.pulse.LoRange.lower_bound" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Lower bound of the LO range</p>
+<dl class="field-list simple">
+<dt class="field-odd">Tipo de retorno</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.pulse.LoRange.upper_bound">
-<code class="descname">upper_bound</code><a class="headerlink" href="#qiskit.pulse.LoRange.upper_bound" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">upper_bound</code><a class="headerlink" href="#qiskit.pulse.LoRange.upper_bound" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Upper bound of the LO range</p>
+<dl class="field-list simple">
+<dt class="field-odd">Tipo de retorno</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+</dl>
 </dd></dl>
 
 <p class="rubric">Methods Documentation</p>
 <dl class="method">
 <dt id="qiskit.pulse.LoRange.includes">
-<code class="descname">includes</code><span class="sig-paren">(</span><em>lo_freq: complex</em><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/qiskit/pulse/configuration.html#LoRange.includes"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.pulse.LoRange.includes" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">includes</code><span class="sig-paren">(</span><em class="sig-param">lo_freq</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/pulse/configuration.html#LoRange.includes"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.pulse.LoRange.includes" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Whether <cite>lo_freq</cite> is within the <cite>LoRange</cite>.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parâmetros:</th><td class="field-body"><strong>lo_freq</strong> – LO frequency to be validated</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Retorno:</th><td class="field-body">True if lo_freq is included in this range, otherwise False</td>
-</tr>
-<tr class="field-odd field"><th class="field-name" colspan="2">Tipo de retorno:</th></tr>
-<tr class="field-odd field"><td>&#160;</td><td class="field-body">bool</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><p><strong>lo_freq</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">complex</span></code>) – LO frequency to be validated</p>
+</dd>
+<dt class="field-even">Retorno</dt>
+<dd class="field-even"><p>True if lo_freq is included in this range, otherwise False</p>
+</dd>
+<dt class="field-odd">Tipo de retorno</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>

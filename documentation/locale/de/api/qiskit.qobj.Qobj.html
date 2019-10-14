@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,6 +48,8 @@
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/js/themeExt.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Stichwortverzeichnis" href="../genindex.html" />
@@ -625,6 +626,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1215,6 +1222,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1261,135 +1274,120 @@
 <h1>Qobj<a class="headerlink" href="#qobj" title="Link zu dieser Überschrift">¶</a></h1>
 <dl class="class">
 <dt id="qiskit.qobj.Qobj">
-<em class="property">class </em><code class="descname">Qobj</code><span class="sig-paren">(</span><em>qobj_id</em>, <em>config</em>, <em>experiments</em>, <em>header</em>, <em>type</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qobj/qobj.html#Qobj"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.qobj.Qobj" title="Link zu dieser Definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">Qobj</code><span class="sig-paren">(</span><em class="sig-param">qobj_id</em>, <em class="sig-param">config</em>, <em class="sig-param">experiments</em>, <em class="sig-param">header</em>, <em class="sig-param">type</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qobj/qobj.html#Qobj"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.qobj.Qobj" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.validation.base.BaseModel</span></code></p>
 <p>Model for Qobj.</p>
 <p>Please note that this class only describes the required fields. For the
 full description of the model, please check <code class="docutils literal notranslate"><span class="pre">QobjSchema</span></code>.</p>
 <dl class="attribute">
 <dt id="qiskit.qobj.Qobj.qobj_id">
-<code class="descname">qobj_id</code><a class="headerlink" href="#qiskit.qobj.Qobj.qobj_id" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">qobj_id</code><a class="headerlink" href="#qiskit.qobj.Qobj.qobj_id" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Qobj identifier.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">str</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.qobj.Qobj.config">
-<code class="descname">config</code><a class="headerlink" href="#qiskit.qobj.Qobj.config" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">config</code><a class="headerlink" href="#qiskit.qobj.Qobj.config" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>config settings for the Qobj.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference internal" href="qiskit.qobj.QobjConfig.html#qiskit.qobj.QobjConfig" title="qiskit.qobj.QobjConfig">QobjConfig</a></td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="qiskit.qobj.QobjConfig.html#qiskit.qobj.QobjConfig" title="qiskit.qobj.QobjConfig">QobjConfig</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.qobj.Qobj.experiments">
-<code class="descname">experiments</code><a class="headerlink" href="#qiskit.qobj.Qobj.experiments" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">experiments</code><a class="headerlink" href="#qiskit.qobj.Qobj.experiments" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>list of experiments.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">list[<a class="reference internal" href="qiskit.qobj.QobjExperiment.html#qiskit.qobj.QobjExperiment" title="qiskit.qobj.QobjExperiment">QobjExperiment</a>]</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list[<a class="reference internal" href="qiskit.qobj.QobjExperiment.html#qiskit.qobj.QobjExperiment" title="qiskit.qobj.QobjExperiment">QobjExperiment</a>]</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.qobj.Qobj.header">
-<code class="descname">header</code><a class="headerlink" href="#qiskit.qobj.Qobj.header" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">header</code><a class="headerlink" href="#qiskit.qobj.Qobj.header" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>headers.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference internal" href="qiskit.qobj.QobjHeader.html#qiskit.qobj.QobjHeader" title="qiskit.qobj.QobjHeader">QobjHeader</a></td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="qiskit.qobj.QobjHeader.html#qiskit.qobj.QobjHeader" title="qiskit.qobj.QobjHeader">QobjHeader</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.qobj.Qobj.type">
-<code class="descname">type</code><a class="headerlink" href="#qiskit.qobj.Qobj.type" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">type</code><a class="headerlink" href="#qiskit.qobj.Qobj.type" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Qobj type.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">str</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
 </dd></dl>
 
 <p class="rubric">Attributes Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.qobj.Qobj.schema" title="qiskit.qobj.Qobj.schema"><code class="xref py py-obj docutils literal notranslate"><span class="pre">schema</span></code></a></td>
-<td></td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.qobj.Qobj.schema" title="qiskit.qobj.Qobj.schema"><code class="xref py py-obj docutils literal notranslate"><span class="pre">schema</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.qobj.Qobj.shallow_schema" title="qiskit.qobj.Qobj.shallow_schema"><code class="xref py py-obj docutils literal notranslate"><span class="pre">shallow_schema</span></code></a></td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.qobj.Qobj.shallow_schema" title="qiskit.qobj.Qobj.shallow_schema"><code class="xref py py-obj docutils literal notranslate"><span class="pre">shallow_schema</span></code></a></p></td>
+<td><p></p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Methods Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.qobj.Qobj.as_dict" title="qiskit.qobj.Qobj.as_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">as_dict</span></code></a>()</td>
-<td>Serialize the model into a Python dict of simple types.</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.qobj.Qobj.as_dict" title="qiskit.qobj.Qobj.as_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">as_dict</span></code></a>()</p></td>
+<td><p>Serialize the model into a Python dict of simple types.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.qobj.Qobj.from_dict" title="qiskit.qobj.Qobj.from_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_dict</span></code></a>(dict_)</td>
-<td>Deserialize a dict of simple types into an instance of this class.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.qobj.Qobj.from_dict" title="qiskit.qobj.Qobj.from_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_dict</span></code></a>(dict_)</p></td>
+<td><p>Deserialize a dict of simple types into an instance of this class.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.qobj.Qobj.to_dict" title="qiskit.qobj.Qobj.to_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code></a>()</td>
-<td>Serialize the model into a Python dict of simple types.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.qobj.Qobj.to_dict" title="qiskit.qobj.Qobj.to_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code></a>()</p></td>
+<td><p>Serialize the model into a Python dict of simple types.</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Attributes Documentation</p>
 <dl class="attribute">
 <dt id="qiskit.qobj.Qobj.schema">
-<code class="descname">schema</code><em class="property"> = &lt;QobjSchema(many=False, strict=True)&gt;</em><a class="headerlink" href="#qiskit.qobj.Qobj.schema" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">schema</code><em class="property"> = &lt;QobjSchema(many=False, strict=True)&gt;</em><a class="headerlink" href="#qiskit.qobj.Qobj.schema" title="Link zu dieser Definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.qobj.Qobj.shallow_schema">
-<code class="descname">shallow_schema</code><em class="property"> = &lt;QobjSchema(many=False, strict=True)&gt;</em><a class="headerlink" href="#qiskit.qobj.Qobj.shallow_schema" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">shallow_schema</code><em class="property"> = &lt;QobjSchema(many=False, strict=True)&gt;</em><a class="headerlink" href="#qiskit.qobj.Qobj.shallow_schema" title="Link zu dieser Definition">¶</a></dt>
 <dd></dd></dl>
 
 <p class="rubric">Methods Documentation</p>
 <dl class="method">
 <dt id="qiskit.qobj.Qobj.as_dict">
-<code class="descname">as_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.qobj.Qobj.as_dict" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">as_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.qobj.Qobj.as_dict" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Serialize the model into a Python dict of simple types.</p>
 </dd></dl>
 
-<dl class="classmethod">
+<dl class="method">
 <dt id="qiskit.qobj.Qobj.from_dict">
-<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>dict_</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.qobj.Qobj.from_dict" title="Link zu dieser Definition">¶</a></dt>
+<em class="property">classmethod </em><code class="sig-name descname">from_dict</code><span class="sig-paren">(</span><em class="sig-param">dict_</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.qobj.Qobj.from_dict" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Deserialize a dict of simple types into an instance of this class.</p>
 <p>Note that this method requires that the model is bound with
 <code class="docutils literal notranslate"><span class="pre">&#64;bind_schema</span></code>.</p>
@@ -1397,7 +1395,7 @@ full description of the model, please check <code class="docutils literal notran
 
 <dl class="method">
 <dt id="qiskit.qobj.Qobj.to_dict">
-<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.qobj.Qobj.to_dict" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.qobj.Qobj.to_dict" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Serialize the model into a Python dict of simple types.</p>
 <p>Note that this method requires that the model is bound with
 <code class="docutils literal notranslate"><span class="pre">&#64;bind_schema</span></code>.</p>

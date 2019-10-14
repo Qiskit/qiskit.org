@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,6 +48,8 @@
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/js/themeExt.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Índice" href="../genindex.html" />
@@ -625,6 +626,12 @@
 <li class="toctree-l3 current"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1215,6 +1222,12 @@
 <li class="toctree-l3 current"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1261,45 +1274,40 @@
 <h1>plot_histogram<a class="headerlink" href="#plot-histogram" title="Link permanente para este título">¶</a></h1>
 <dl class="function">
 <dt id="qiskit.visualization.plot_histogram">
-<code class="descname">plot_histogram</code><span class="sig-paren">(</span><em>data</em>, <em>figsize=(7</em>, <em>5)</em>, <em>color=None</em>, <em>number_to_keep=None</em>, <em>sort='asc'</em>, <em>target_string=None</em>, <em>legend=None</em>, <em>bar_labels=True</em>, <em>title=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/visualization/counts_visualization.html#plot_histogram"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.visualization.plot_histogram" title="Link permanente para esta definição">¶</a></dt>
+<code class="sig-name descname">plot_histogram</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">figsize=(7</em>, <em class="sig-param">5)</em>, <em class="sig-param">color=None</em>, <em class="sig-param">number_to_keep=None</em>, <em class="sig-param">sort='asc'</em>, <em class="sig-param">target_string=None</em>, <em class="sig-param">legend=None</em>, <em class="sig-param">bar_labels=True</em>, <em class="sig-param">title=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/visualization/counts_visualization.html#plot_histogram"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#qiskit.visualization.plot_histogram" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Plot a histogram of data.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parâmetros:</th><td class="field-body"><ul class="first simple">
-<li><strong>data</strong> (<em>list</em><em> or </em><em>dict</em>) – This is either a list of dictionaries or a single
-dict containing the values to represent (ex {“001”: 130})</li>
-<li><strong>figsize</strong> (<em>tuple</em>) – Figure size in inches.</li>
-<li><strong>color</strong> (<em>list</em><em> or </em><em>str</em>) – String or list of strings for histogram bar colors.</li>
-<li><strong>number_to_keep</strong> (<em>int</em>) – The number of terms to plot and rest
-is made into a single bar called “rest”.</li>
-<li><strong>sort</strong> (<em>string</em>) – Could be “asc”, “desc”, or “hamming”.</li>
-<li><strong>target_string</strong> (<em>str</em>) – Target string if “sort” is a distance measure.</li>
-<li><strong>legend</strong> (<em>list</em>) – A list of strings to use for labels of the data.
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>list</em><em> or </em><em>dict</em>) – This is either a list of dictionaries or a single
+dict containing the values to represent (ex {“001”: 130})</p></li>
+<li><p><strong>figsize</strong> (<em>tuple</em>) – Figure size in inches.</p></li>
+<li><p><strong>color</strong> (<em>list</em><em> or </em><em>str</em>) – String or list of strings for histogram bar colors.</p></li>
+<li><p><strong>number_to_keep</strong> (<em>int</em>) – The number of terms to plot and rest
+is made into a single bar called “rest”.</p></li>
+<li><p><strong>sort</strong> (<em>string</em>) – Could be “asc”, “desc”, or “hamming”.</p></li>
+<li><p><strong>target_string</strong> (<em>str</em>) – Target string if “sort” is a distance measure.</p></li>
+<li><p><strong>legend</strong> (<em>list</em>) – A list of strings to use for labels of the data.
 The number of entries must match the length of data (if data is a
-list or 1 if it’s a dict)</li>
-<li><strong>bar_labels</strong> (<em>bool</em>) – Label each bar in histogram with probability value.</li>
-<li><strong>title</strong> (<em>str</em>) – A string to use for the plot title</li>
+list or 1 if it’s a dict)</p></li>
+<li><p><strong>bar_labels</strong> (<em>bool</em>) – Label each bar in histogram with probability value.</p></li>
+<li><p><strong>title</strong> (<em>str</em>) – A string to use for the plot title</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Retorno:</th><td class="field-body"><p class="first">A figure for the rendered histogram.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name" colspan="2">Tipo de retorno:</th></tr>
-<tr class="field-odd field"><td>&#160;</td><td class="field-body"><p class="first">matplotlib.Figure</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><code class="xref py py-exc docutils literal notranslate"><span class="pre">ImportError</span></code> – Matplotlib not available.</li>
-<li><a class="reference internal" href="qiskit.visualization.VisualizationError.html#qiskit.visualization.VisualizationError" title="qiskit.visualization.VisualizationError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">VisualizationError</span></code></a> – When legend is provided and the length doesn’t
-match the input data.</li>
+</dd>
+<dt class="field-even">Retorno</dt>
+<dd class="field-even"><p>A figure for the rendered histogram.</p>
+</dd>
+<dt class="field-odd">Tipo de retorno</dt>
+<dd class="field-odd"><p>matplotlib.Figure</p>
+</dd>
+<dt class="field-even">Levanta</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ImportError</strong> – Matplotlib not available.</p></li>
+<li><p><a class="reference internal" href="qiskit.visualization.VisualizationError.html#qiskit.visualization.VisualizationError" title="qiskit.visualization.VisualizationError"><strong>VisualizationError</strong></a> – When legend is provided and the length doesn’t
+    match the input data.</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 </div>

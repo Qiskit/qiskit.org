@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,6 +48,8 @@
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/js/themeExt.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="索引" href="../genindex.html" />
@@ -625,6 +626,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1215,6 +1222,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1261,230 +1274,215 @@
 <h1>BaseSchema<a class="headerlink" href="#baseschema" title="このヘッドラインへのパーマリンク">¶</a></h1>
 <dl class="class">
 <dt id="qiskit.validation.BaseSchema">
-<em class="property">class </em><code class="descname">BaseSchema</code><span class="sig-paren">(</span><em>extra=None</em>, <em>only=None</em>, <em>exclude=()</em>, <em>prefix=''</em>, <em>strict=None</em>, <em>many=False</em>, <em>context=None</em>, <em>load_only=()</em>, <em>dump_only=()</em>, <em>partial=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/validation/base.html#BaseSchema"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.validation.BaseSchema" title="この定義へのパーマリンク">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">BaseSchema</code><span class="sig-paren">(</span><em class="sig-param">extra=None</em>, <em class="sig-param">only=None</em>, <em class="sig-param">exclude=()</em>, <em class="sig-param">prefix=''</em>, <em class="sig-param">strict=None</em>, <em class="sig-param">many=False</em>, <em class="sig-param">context=None</em>, <em class="sig-param">load_only=()</em>, <em class="sig-param">dump_only=()</em>, <em class="sig-param">partial=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/validation/base.html#BaseSchema"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.validation.BaseSchema" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">marshmallow.schema.Schema</span></code></p>
 <p>Base class for Schemas for validated Qiskit classes.</p>
 <p>Provides convenience functionality for the Qiskit common use case:</p>
 <ul class="simple">
-<li>deserialization into class instances instead of dicts.</li>
-<li>handling of unknown attributes not defined in the schema.</li>
+<li><p>deserialization into class instances instead of dicts.</p></li>
+<li><p>handling of unknown attributes not defined in the schema.</p></li>
 </ul>
 <dl class="attribute">
 <dt id="qiskit.validation.BaseSchema.model_cls">
-<code class="descname">model_cls</code><a class="headerlink" href="#qiskit.validation.BaseSchema.model_cls" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">model_cls</code><a class="headerlink" href="#qiskit.validation.BaseSchema.model_cls" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>class used to instantiate the instance. The</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">type</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>type</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="attribute">
 <dt>
-<code class="descname">constructor is passed all named parameters from deserialization.</code></dt>
+<code class="sig-name descname">constructor is passed all named parameters from deserialization.</code></dt>
 <dd></dd></dl>
 
 <p class="rubric">Attributes Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.validation.BaseSchema.TYPE_MAPPING" title="qiskit.validation.BaseSchema.TYPE_MAPPING"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TYPE_MAPPING</span></code></a></td>
-<td></td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.validation.BaseSchema.TYPE_MAPPING" title="qiskit.validation.BaseSchema.TYPE_MAPPING"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TYPE_MAPPING</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.validation.BaseSchema.dict_class" title="qiskit.validation.BaseSchema.dict_class"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict_class</span></code></a></td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.validation.BaseSchema.dict_class" title="qiskit.validation.BaseSchema.dict_class"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict_class</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.validation.BaseSchema.opts" title="qiskit.validation.BaseSchema.opts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">opts</span></code></a></td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.validation.BaseSchema.opts" title="qiskit.validation.BaseSchema.opts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">opts</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.validation.BaseSchema.set_class" title="qiskit.validation.BaseSchema.set_class"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_class</span></code></a></td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.validation.BaseSchema.set_class" title="qiskit.validation.BaseSchema.set_class"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_class</span></code></a></p></td>
+<td><p></p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Methods Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.validation.BaseSchema.accessor" title="qiskit.validation.BaseSchema.accessor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">accessor</span></code></a>(func)</td>
-<td>Decorator that registers a function for pulling values from an object to serialize.</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.validation.BaseSchema.accessor" title="qiskit.validation.BaseSchema.accessor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">accessor</span></code></a>(func)</p></td>
+<td><p>Decorator that registers a function for pulling values from an object to serialize.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.validation.BaseSchema.dump" title="qiskit.validation.BaseSchema.dump"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dump</span></code></a>(obj[,&nbsp;many,&nbsp;update_fields])</td>
-<td>Serialize an object to native Python data types according to this Schema's fields.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.validation.BaseSchema.dump" title="qiskit.validation.BaseSchema.dump"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dump</span></code></a>(obj[, many, update_fields])</p></td>
+<td><p>Serialize an object to native Python data types according to this Schema's fields.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.validation.BaseSchema.dump_additional_data" title="qiskit.validation.BaseSchema.dump_additional_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dump_additional_data</span></code></a>(valid_data,&nbsp;many,&nbsp;...)</td>
-<td>Include unknown fields after dumping.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.validation.BaseSchema.dump_additional_data" title="qiskit.validation.BaseSchema.dump_additional_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dump_additional_data</span></code></a>(valid_data, many, ...)</p></td>
+<td><p>Include unknown fields after dumping.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.validation.BaseSchema.dumps" title="qiskit.validation.BaseSchema.dumps"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dumps</span></code></a>(obj[,&nbsp;many,&nbsp;update_fields])</td>
-<td>Same as <a class="reference internal" href="#qiskit.validation.BaseSchema.dump" title="qiskit.validation.BaseSchema.dump"><code class="xref py py-meth docutils literal notranslate"><span class="pre">dump()</span></code></a>, except return a JSON-encoded string.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.validation.BaseSchema.dumps" title="qiskit.validation.BaseSchema.dumps"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dumps</span></code></a>(obj[, many, update_fields])</p></td>
+<td><p>Same as <a class="reference internal" href="#qiskit.validation.BaseSchema.dump" title="qiskit.validation.BaseSchema.dump"><code class="xref py py-meth docutils literal notranslate"><span class="pre">dump()</span></code></a>, except return a JSON-encoded string.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.validation.BaseSchema.error_handler" title="qiskit.validation.BaseSchema.error_handler"><code class="xref py py-obj docutils literal notranslate"><span class="pre">error_handler</span></code></a>(func)</td>
-<td>Decorator that registers an error handler function for the schema.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.validation.BaseSchema.error_handler" title="qiskit.validation.BaseSchema.error_handler"><code class="xref py py-obj docutils literal notranslate"><span class="pre">error_handler</span></code></a>(func)</p></td>
+<td><p>Decorator that registers an error handler function for the schema.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.validation.BaseSchema.get_attribute" title="qiskit.validation.BaseSchema.get_attribute"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_attribute</span></code></a>(attr,&nbsp;obj,&nbsp;default)</td>
-<td>Defines how to pull values from an object to serialize.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.validation.BaseSchema.get_attribute" title="qiskit.validation.BaseSchema.get_attribute"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_attribute</span></code></a>(attr, obj, default)</p></td>
+<td><p>Defines how to pull values from an object to serialize.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.validation.BaseSchema.handle_error" title="qiskit.validation.BaseSchema.handle_error"><code class="xref py py-obj docutils literal notranslate"><span class="pre">handle_error</span></code></a>(error,&nbsp;data)</td>
-<td>Custom error handler function for the schema.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.validation.BaseSchema.handle_error" title="qiskit.validation.BaseSchema.handle_error"><code class="xref py py-obj docutils literal notranslate"><span class="pre">handle_error</span></code></a>(error, data)</p></td>
+<td><p>Custom error handler function for the schema.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.validation.BaseSchema.load" title="qiskit.validation.BaseSchema.load"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load</span></code></a>(data[,&nbsp;many,&nbsp;partial])</td>
-<td>Deserialize a data structure to an object defined by this Schema's fields and <code class="xref py py-meth docutils literal notranslate"><span class="pre">make_object()</span></code>.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.validation.BaseSchema.load" title="qiskit.validation.BaseSchema.load"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load</span></code></a>(data[, many, partial])</p></td>
+<td><p>Deserialize a data structure to an object defined by this Schema's fields and <code class="xref py py-meth docutils literal notranslate"><span class="pre">make_object()</span></code>.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.validation.BaseSchema.load_additional_data" title="qiskit.validation.BaseSchema.load_additional_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_additional_data</span></code></a>(valid_data,&nbsp;many,&nbsp;...)</td>
-<td>Include unknown fields after load.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.validation.BaseSchema.load_additional_data" title="qiskit.validation.BaseSchema.load_additional_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_additional_data</span></code></a>(valid_data, many, ...)</p></td>
+<td><p>Include unknown fields after load.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.validation.BaseSchema.loads" title="qiskit.validation.BaseSchema.loads"><code class="xref py py-obj docutils literal notranslate"><span class="pre">loads</span></code></a>(json_data[,&nbsp;many])</td>
-<td>Same as <a class="reference internal" href="#qiskit.validation.BaseSchema.load" title="qiskit.validation.BaseSchema.load"><code class="xref py py-meth docutils literal notranslate"><span class="pre">load()</span></code></a>, except it takes a JSON string as input.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.validation.BaseSchema.loads" title="qiskit.validation.BaseSchema.loads"><code class="xref py py-obj docutils literal notranslate"><span class="pre">loads</span></code></a>(json_data[, many])</p></td>
+<td><p>Same as <a class="reference internal" href="#qiskit.validation.BaseSchema.load" title="qiskit.validation.BaseSchema.load"><code class="xref py py-meth docutils literal notranslate"><span class="pre">load()</span></code></a>, except it takes a JSON string as input.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.validation.BaseSchema.make_model" title="qiskit.validation.BaseSchema.make_model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_model</span></code></a>(data)</td>
-<td>Make <code class="docutils literal notranslate"><span class="pre">load</span></code> return a <code class="docutils literal notranslate"><span class="pre">model_cls</span></code> instance instead of a dict.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.validation.BaseSchema.make_model" title="qiskit.validation.BaseSchema.make_model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_model</span></code></a>(data)</p></td>
+<td><p>Make <code class="docutils literal notranslate"><span class="pre">load</span></code> return a <code class="docutils literal notranslate"><span class="pre">model_cls</span></code> instance instead of a dict.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.validation.BaseSchema.on_bind_field" title="qiskit.validation.BaseSchema.on_bind_field"><code class="xref py py-obj docutils literal notranslate"><span class="pre">on_bind_field</span></code></a>(field_name,&nbsp;field_obj)</td>
-<td>Hook to modify a field when it is bound to the <cite>Schema</cite>.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.validation.BaseSchema.on_bind_field" title="qiskit.validation.BaseSchema.on_bind_field"><code class="xref py py-obj docutils literal notranslate"><span class="pre">on_bind_field</span></code></a>(field_name, field_obj)</p></td>
+<td><p>Hook to modify a field when it is bound to the <cite>Schema</cite>.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.validation.BaseSchema.validate" title="qiskit.validation.BaseSchema.validate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate</span></code></a>(data[,&nbsp;many,&nbsp;partial])</td>
-<td>Validate <cite>data</cite> against the schema, returning a dictionary of validation errors.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.validation.BaseSchema.validate" title="qiskit.validation.BaseSchema.validate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate</span></code></a>(data[, many, partial])</p></td>
+<td><p>Validate <cite>data</cite> against the schema, returning a dictionary of validation errors.</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Attributes Documentation</p>
 <dl class="attribute">
 <dt id="qiskit.validation.BaseSchema.TYPE_MAPPING">
-<code class="descname">TYPE_MAPPING</code><em class="property"> = {&lt;class 'str'&gt;: &lt;class 'marshmallow.fields.String'&gt;, &lt;class 'bytes'&gt;: &lt;class 'marshmallow.fields.String'&gt;, &lt;class 'datetime.datetime'&gt;: &lt;class 'marshmallow.fields.DateTime'&gt;, &lt;class 'float'&gt;: &lt;class 'marshmallow.fields.Float'&gt;, &lt;class 'bool'&gt;: &lt;class 'marshmallow.fields.Boolean'&gt;, &lt;class 'tuple'&gt;: &lt;class 'marshmallow.fields.Raw'&gt;, &lt;class 'list'&gt;: &lt;class 'marshmallow.fields.Raw'&gt;, &lt;class 'set'&gt;: &lt;class 'marshmallow.fields.Raw'&gt;, &lt;class 'int'&gt;: &lt;class 'marshmallow.fields.Integer'&gt;, &lt;class 'uuid.UUID'&gt;: &lt;class 'marshmallow.fields.UUID'&gt;, &lt;class 'datetime.time'&gt;: &lt;class 'marshmallow.fields.Time'&gt;, &lt;class 'datetime.date'&gt;: &lt;class 'marshmallow.fields.Date'&gt;, &lt;class 'datetime.timedelta'&gt;: &lt;class 'marshmallow.fields.TimeDelta'&gt;, &lt;class 'decimal.Decimal'&gt;: &lt;class 'marshmallow.fields.Decimal'&gt;}</em><a class="headerlink" href="#qiskit.validation.BaseSchema.TYPE_MAPPING" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">TYPE_MAPPING</code><em class="property"> = {&lt;class 'str'&gt;: &lt;class 'marshmallow.fields.String'&gt;, &lt;class 'bytes'&gt;: &lt;class 'marshmallow.fields.String'&gt;, &lt;class 'datetime.datetime'&gt;: &lt;class 'marshmallow.fields.DateTime'&gt;, &lt;class 'float'&gt;: &lt;class 'marshmallow.fields.Float'&gt;, &lt;class 'bool'&gt;: &lt;class 'marshmallow.fields.Boolean'&gt;, &lt;class 'tuple'&gt;: &lt;class 'marshmallow.fields.Raw'&gt;, &lt;class 'list'&gt;: &lt;class 'marshmallow.fields.Raw'&gt;, &lt;class 'set'&gt;: &lt;class 'marshmallow.fields.Raw'&gt;, &lt;class 'int'&gt;: &lt;class 'marshmallow.fields.Integer'&gt;, &lt;class 'uuid.UUID'&gt;: &lt;class 'marshmallow.fields.UUID'&gt;, &lt;class 'datetime.time'&gt;: &lt;class 'marshmallow.fields.Time'&gt;, &lt;class 'datetime.date'&gt;: &lt;class 'marshmallow.fields.Date'&gt;, &lt;class 'datetime.timedelta'&gt;: &lt;class 'marshmallow.fields.TimeDelta'&gt;, &lt;class 'decimal.Decimal'&gt;: &lt;class 'marshmallow.fields.Decimal'&gt;}</em><a class="headerlink" href="#qiskit.validation.BaseSchema.TYPE_MAPPING" title="この定義へのパーマリンク">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.validation.BaseSchema.dict_class">
-<code class="descname">dict_class</code><a class="headerlink" href="#qiskit.validation.BaseSchema.dict_class" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">dict_class</code><a class="headerlink" href="#qiskit.validation.BaseSchema.dict_class" title="この定義へのパーマリンク">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.validation.BaseSchema.opts">
-<code class="descname">opts</code><em class="property"> = &lt;marshmallow.schema.SchemaOpts object&gt;</em><a class="headerlink" href="#qiskit.validation.BaseSchema.opts" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">opts</code><em class="property"> = &lt;marshmallow.schema.SchemaOpts object&gt;</em><a class="headerlink" href="#qiskit.validation.BaseSchema.opts" title="この定義へのパーマリンク">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.validation.BaseSchema.set_class">
-<code class="descname">set_class</code><a class="headerlink" href="#qiskit.validation.BaseSchema.set_class" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">set_class</code><a class="headerlink" href="#qiskit.validation.BaseSchema.set_class" title="この定義へのパーマリンク">¶</a></dt>
 <dd></dd></dl>
 
 <p class="rubric">Methods Documentation</p>
-<dl class="classmethod">
+<dl class="method">
 <dt id="qiskit.validation.BaseSchema.accessor">
-<em class="property">classmethod </em><code class="descname">accessor</code><span class="sig-paren">(</span><em>func</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/marshmallow/schema.html#BaseSchema.accessor"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.validation.BaseSchema.accessor" title="この定義へのパーマリンク">¶</a></dt>
+<em class="property">classmethod </em><code class="sig-name descname">accessor</code><span class="sig-paren">(</span><em class="sig-param">func</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/marshmallow/schema.html#BaseSchema.accessor"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.validation.BaseSchema.accessor" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Decorator that registers a function for pulling values from an object
 to serialize. The function receives the <code class="xref py py-class docutils literal notranslate"><span class="pre">Schema</span></code> instance, the
 <code class="docutils literal notranslate"><span class="pre">key</span></code> of the value to get, the <code class="docutils literal notranslate"><span class="pre">obj</span></code> to serialize, and an optional
 <code class="docutils literal notranslate"><span class="pre">default</span></code> value.</p>
 <div class="deprecated">
-<p><span class="versionmodified">バージョン 2.0.0 で非推奨: </span>Set the <code class="docutils literal notranslate"><span class="pre">error_handler</span></code> class Meta option instead.</p>
+<p><span class="versionmodified deprecated">バージョン 2.0.0 で非推奨: </span>Set the <code class="docutils literal notranslate"><span class="pre">error_handler</span></code> class Meta option instead.</p>
 </div>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.validation.BaseSchema.dump">
-<code class="descname">dump</code><span class="sig-paren">(</span><em>obj</em>, <em>many=None</em>, <em>update_fields=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/marshmallow/schema.html#BaseSchema.dump"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.validation.BaseSchema.dump" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">dump</code><span class="sig-paren">(</span><em class="sig-param">obj</em>, <em class="sig-param">many=None</em>, <em class="sig-param">update_fields=True</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/marshmallow/schema.html#BaseSchema.dump"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.validation.BaseSchema.dump" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Serialize an object to native Python data types according to this
 Schema's fields.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first simple">
-<li><strong>obj</strong> -- The object to serialize.</li>
-<li><strong>many</strong> (<em>bool</em>) -- Whether to serialize <cite>obj</cite> as a collection. If <cite>None</cite>, the value
-for <cite>self.many</cite> is used.</li>
-<li><strong>update_fields</strong> (<em>bool</em>) -- Whether to update the schema's field classes. Typically
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj</strong> -- The object to serialize.</p></li>
+<li><p><strong>many</strong> (<em>bool</em>) -- Whether to serialize <cite>obj</cite> as a collection. If <cite>None</cite>, the value
+for <cite>self.many</cite> is used.</p></li>
+<li><p><strong>update_fields</strong> (<em>bool</em>) -- Whether to update the schema's field classes. Typically
 set to <cite>True</cite>, but may be <cite>False</cite> when serializing a homogenous collection.
-This parameter is used by <cite>fields.Nested</cite> to avoid multiple updates.</li>
+This parameter is used by <cite>fields.Nested</cite> to avoid multiple updates.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first">A tuple of the form (<code class="docutils literal notranslate"><span class="pre">data</span></code>, <code class="docutils literal notranslate"><span class="pre">errors</span></code>)</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><p class="first last"><cite>MarshalResult</cite>, a <cite>collections.namedtuple</cite></p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">戻り値</dt>
+<dd class="field-even"><p>A tuple of the form (<code class="docutils literal notranslate"><span class="pre">data</span></code>, <code class="docutils literal notranslate"><span class="pre">errors</span></code>)</p>
+</dd>
+<dt class="field-odd">戻り値の型</dt>
+<dd class="field-odd"><p><cite>MarshalResult</cite>, a <cite>collections.namedtuple</cite></p>
+</dd>
+</dl>
 <div class="versionadded">
-<p><span class="versionmodified">バージョン 1.0.0 で追加.</span></p>
+<p><span class="versionmodified added">バージョン 1.0.0 で追加.</span></p>
 </div>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.validation.BaseSchema.dump_additional_data">
-<code class="descname">dump_additional_data</code><span class="sig-paren">(</span><em>valid_data</em>, <em>many</em>, <em>original_data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/validation/base.html#BaseSchema.dump_additional_data"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.validation.BaseSchema.dump_additional_data" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">dump_additional_data</code><span class="sig-paren">(</span><em class="sig-param">valid_data</em>, <em class="sig-param">many</em>, <em class="sig-param">original_data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/validation/base.html#BaseSchema.dump_additional_data"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.validation.BaseSchema.dump_additional_data" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Include unknown fields after dumping.</p>
 <p>Unknown fields are added with no processing at all.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first simple">
-<li><strong>valid_data</strong> (<em>dict</em><em> or </em><em>list</em>) -- data collected and returned by <code class="docutils literal notranslate"><span class="pre">dump()</span></code>.</li>
-<li><strong>many</strong> (<em>bool</em>) -- if True, data and original_data are a list.</li>
-<li><strong>original_data</strong> (<em>object</em><em> or </em><em>list</em>) -- object passed to <code class="docutils literal notranslate"><span class="pre">dump()</span></code> in the
-first place.</li>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>valid_data</strong> (<em>dict</em><em> or </em><em>list</em>) -- data collected and returned by <code class="docutils literal notranslate"><span class="pre">dump()</span></code>.</p></li>
+<li><p><strong>many</strong> (<em>bool</em>) -- if True, data and original_data are a list.</p></li>
+<li><p><strong>original_data</strong> (<em>object</em><em> or </em><em>list</em>) -- object passed to <code class="docutils literal notranslate"><span class="pre">dump()</span></code> in the
+first place.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first">the same <code class="docutils literal notranslate"><span class="pre">valid_data</span></code> extended with the unknown attributes.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><p class="first last">dict</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">戻り値</dt>
+<dd class="field-even"><p>the same <code class="docutils literal notranslate"><span class="pre">valid_data</span></code> extended with the unknown attributes.</p>
+</dd>
+<dt class="field-odd">戻り値の型</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
 <p>Inspired by <a class="reference external" href="https://github.com/marshmallow-code/marshmallow/pull/595">https://github.com/marshmallow-code/marshmallow/pull/595</a>.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.validation.BaseSchema.dumps">
-<code class="descname">dumps</code><span class="sig-paren">(</span><em>obj</em>, <em>many=None</em>, <em>update_fields=True</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/marshmallow/schema.html#BaseSchema.dumps"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.validation.BaseSchema.dumps" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">dumps</code><span class="sig-paren">(</span><em class="sig-param">obj</em>, <em class="sig-param">many=None</em>, <em class="sig-param">update_fields=True</em>, <em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/marshmallow/schema.html#BaseSchema.dumps"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.validation.BaseSchema.dumps" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Same as <a class="reference internal" href="#qiskit.validation.BaseSchema.dump" title="qiskit.validation.BaseSchema.dump"><code class="xref py py-meth docutils literal notranslate"><span class="pre">dump()</span></code></a>, except return a JSON-encoded string.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first simple">
-<li><strong>obj</strong> -- The object to serialize.</li>
-<li><strong>many</strong> (<em>bool</em>) -- Whether to serialize <cite>obj</cite> as a collection. If <cite>None</cite>, the value
-for <cite>self.many</cite> is used.</li>
-<li><strong>update_fields</strong> (<em>bool</em>) -- Whether to update the schema's field classes. Typically
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj</strong> -- The object to serialize.</p></li>
+<li><p><strong>many</strong> (<em>bool</em>) -- Whether to serialize <cite>obj</cite> as a collection. If <cite>None</cite>, the value
+for <cite>self.many</cite> is used.</p></li>
+<li><p><strong>update_fields</strong> (<em>bool</em>) -- Whether to update the schema's field classes. Typically
 set to <cite>True</cite>, but may be <cite>False</cite> when serializing a homogenous collection.
-This parameter is used by <cite>fields.Nested</cite> to avoid multiple updates.</li>
+This parameter is used by <cite>fields.Nested</cite> to avoid multiple updates.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first">A tuple of the form (<code class="docutils literal notranslate"><span class="pre">data</span></code>, <code class="docutils literal notranslate"><span class="pre">errors</span></code>)</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><p class="first last"><cite>MarshalResult</cite>, a <cite>collections.namedtuple</cite></p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">戻り値</dt>
+<dd class="field-even"><p>A tuple of the form (<code class="docutils literal notranslate"><span class="pre">data</span></code>, <code class="docutils literal notranslate"><span class="pre">errors</span></code>)</p>
+</dd>
+<dt class="field-odd">戻り値の型</dt>
+<dd class="field-odd"><p><cite>MarshalResult</cite>, a <cite>collections.namedtuple</cite></p>
+</dd>
+</dl>
 <div class="versionadded">
-<p><span class="versionmodified">バージョン 1.0.0 で追加.</span></p>
+<p><span class="versionmodified added">バージョン 1.0.0 で追加.</span></p>
 </div>
 </dd></dl>
 
-<dl class="classmethod">
+<dl class="method">
 <dt id="qiskit.validation.BaseSchema.error_handler">
-<em class="property">classmethod </em><code class="descname">error_handler</code><span class="sig-paren">(</span><em>func</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/marshmallow/schema.html#BaseSchema.error_handler"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.validation.BaseSchema.error_handler" title="この定義へのパーマリンク">¶</a></dt>
+<em class="property">classmethod </em><code class="sig-name descname">error_handler</code><span class="sig-paren">(</span><em class="sig-param">func</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/marshmallow/schema.html#BaseSchema.error_handler"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.validation.BaseSchema.error_handler" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Decorator that registers an error handler function for the schema.
 The function receives the <code class="xref py py-class docutils literal notranslate"><span class="pre">Schema</span></code> instance, a dictionary of errors,
 and the serialized object (if serializing data) or data dictionary (if
@@ -1503,175 +1501,155 @@ deserializing data) as arguments.</p>
 </pre></div>
 </div>
 <div class="versionadded">
-<p><span class="versionmodified">バージョン 0.7.0 で追加.</span></p>
+<p><span class="versionmodified added">バージョン 0.7.0 で追加.</span></p>
 </div>
 <div class="deprecated">
-<p><span class="versionmodified">バージョン 2.0.0 で非推奨: </span>Set the <code class="docutils literal notranslate"><span class="pre">error_handler</span></code> class Meta option instead.</p>
+<p><span class="versionmodified deprecated">バージョン 2.0.0 で非推奨: </span>Set the <code class="docutils literal notranslate"><span class="pre">error_handler</span></code> class Meta option instead.</p>
 </div>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.validation.BaseSchema.get_attribute">
-<code class="descname">get_attribute</code><span class="sig-paren">(</span><em>attr</em>, <em>obj</em>, <em>default</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/marshmallow/schema.html#BaseSchema.get_attribute"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.validation.BaseSchema.get_attribute" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">get_attribute</code><span class="sig-paren">(</span><em class="sig-param">attr</em>, <em class="sig-param">obj</em>, <em class="sig-param">default</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/marshmallow/schema.html#BaseSchema.get_attribute"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.validation.BaseSchema.get_attribute" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Defines how to pull values from an object to serialize.</p>
 <div class="versionadded">
-<p><span class="versionmodified">バージョン 2.0.0 で追加.</span></p>
+<p><span class="versionmodified added">バージョン 2.0.0 で追加.</span></p>
 </div>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.validation.BaseSchema.handle_error">
-<code class="descname">handle_error</code><span class="sig-paren">(</span><em>error</em>, <em>data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/marshmallow/schema.html#BaseSchema.handle_error"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.validation.BaseSchema.handle_error" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">handle_error</code><span class="sig-paren">(</span><em class="sig-param">error</em>, <em class="sig-param">data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/marshmallow/schema.html#BaseSchema.handle_error"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.validation.BaseSchema.handle_error" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Custom error handler function for the schema.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first last simple">
-<li><strong>error</strong> (<em>ValidationError</em>) -- The <cite>ValidationError</cite> raised during (de)serialization.</li>
-<li><strong>data</strong> -- The original input data.</li>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>error</strong> (<em>ValidationError</em>) -- The <cite>ValidationError</cite> raised during (de)serialization.</p></li>
+<li><p><strong>data</strong> -- The original input data.</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <div class="versionadded">
-<p><span class="versionmodified">バージョン 2.0.0 で追加.</span></p>
+<p><span class="versionmodified added">バージョン 2.0.0 で追加.</span></p>
 </div>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.validation.BaseSchema.load">
-<code class="descname">load</code><span class="sig-paren">(</span><em>data</em>, <em>many=None</em>, <em>partial=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/marshmallow/schema.html#BaseSchema.load"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.validation.BaseSchema.load" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">load</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">many=None</em>, <em class="sig-param">partial=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/marshmallow/schema.html#BaseSchema.load"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.validation.BaseSchema.load" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Deserialize a data structure to an object defined by this Schema's
 fields and <code class="xref py py-meth docutils literal notranslate"><span class="pre">make_object()</span></code>.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first simple">
-<li><strong>data</strong> (<em>dict</em>) -- The data to deserialize.</li>
-<li><strong>many</strong> (<em>bool</em>) -- Whether to deserialize <cite>data</cite> as a collection. If <cite>None</cite>, the
-value for <cite>self.many</cite> is used.</li>
-<li><strong>partial</strong> (<em>bool|tuple</em>) -- Whether to ignore missing fields. If <cite>None</cite>,
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>dict</em>) -- The data to deserialize.</p></li>
+<li><p><strong>many</strong> (<em>bool</em>) -- Whether to deserialize <cite>data</cite> as a collection. If <cite>None</cite>, the
+value for <cite>self.many</cite> is used.</p></li>
+<li><p><strong>partial</strong> (<em>bool|tuple</em>) -- Whether to ignore missing fields. If <cite>None</cite>,
 the value for <cite>self.partial</cite> is used. If its value is an iterable,
-only missing fields listed in that iterable will be ignored.</li>
+only missing fields listed in that iterable will be ignored.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first">A tuple of the form (<code class="docutils literal notranslate"><span class="pre">data</span></code>, <code class="docutils literal notranslate"><span class="pre">errors</span></code>)</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><p class="first last"><cite>UnmarshalResult</cite>, a <cite>collections.namedtuple</cite></p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">戻り値</dt>
+<dd class="field-even"><p>A tuple of the form (<code class="docutils literal notranslate"><span class="pre">data</span></code>, <code class="docutils literal notranslate"><span class="pre">errors</span></code>)</p>
+</dd>
+<dt class="field-odd">戻り値の型</dt>
+<dd class="field-odd"><p><cite>UnmarshalResult</cite>, a <cite>collections.namedtuple</cite></p>
+</dd>
+</dl>
 <div class="versionadded">
-<p><span class="versionmodified">バージョン 1.0.0 で追加.</span></p>
+<p><span class="versionmodified added">バージョン 1.0.0 で追加.</span></p>
 </div>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.validation.BaseSchema.load_additional_data">
-<code class="descname">load_additional_data</code><span class="sig-paren">(</span><em>valid_data</em>, <em>many</em>, <em>original_data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/validation/base.html#BaseSchema.load_additional_data"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.validation.BaseSchema.load_additional_data" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">load_additional_data</code><span class="sig-paren">(</span><em class="sig-param">valid_data</em>, <em class="sig-param">many</em>, <em class="sig-param">original_data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/validation/base.html#BaseSchema.load_additional_data"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.validation.BaseSchema.load_additional_data" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Include unknown fields after load.</p>
 <p>Unknown fields are added with no processing at all.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first simple">
-<li><strong>valid_data</strong> (<em>dict</em><em> or </em><em>list</em>) -- validated data returned by <code class="docutils literal notranslate"><span class="pre">load()</span></code>.</li>
-<li><strong>many</strong> (<em>bool</em>) -- if True, data and original_data are a list.</li>
-<li><strong>original_data</strong> (<em>dict</em><em> or </em><em>list</em>) -- data passed to <code class="docutils literal notranslate"><span class="pre">load()</span></code> in the
-first place.</li>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>valid_data</strong> (<em>dict</em><em> or </em><em>list</em>) -- validated data returned by <code class="docutils literal notranslate"><span class="pre">load()</span></code>.</p></li>
+<li><p><strong>many</strong> (<em>bool</em>) -- if True, data and original_data are a list.</p></li>
+<li><p><strong>original_data</strong> (<em>dict</em><em> or </em><em>list</em>) -- data passed to <code class="docutils literal notranslate"><span class="pre">load()</span></code> in the
+first place.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first">the same <code class="docutils literal notranslate"><span class="pre">valid_data</span></code> extended with the unknown attributes.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><p class="first last">dict</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">戻り値</dt>
+<dd class="field-even"><p>the same <code class="docutils literal notranslate"><span class="pre">valid_data</span></code> extended with the unknown attributes.</p>
+</dd>
+<dt class="field-odd">戻り値の型</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
 <p>Inspired by <a class="reference external" href="https://github.com/marshmallow-code/marshmallow/pull/595">https://github.com/marshmallow-code/marshmallow/pull/595</a>.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.validation.BaseSchema.loads">
-<code class="descname">loads</code><span class="sig-paren">(</span><em>json_data</em>, <em>many=None</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/marshmallow/schema.html#BaseSchema.loads"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.validation.BaseSchema.loads" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">loads</code><span class="sig-paren">(</span><em class="sig-param">json_data</em>, <em class="sig-param">many=None</em>, <em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/marshmallow/schema.html#BaseSchema.loads"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.validation.BaseSchema.loads" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Same as <a class="reference internal" href="#qiskit.validation.BaseSchema.load" title="qiskit.validation.BaseSchema.load"><code class="xref py py-meth docutils literal notranslate"><span class="pre">load()</span></code></a>, except it takes a JSON string as input.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first simple">
-<li><strong>json_data</strong> (<em>str</em>) -- A JSON string of the data to deserialize.</li>
-<li><strong>many</strong> (<em>bool</em>) -- Whether to deserialize <cite>obj</cite> as a collection. If <cite>None</cite>, the
-value for <cite>self.many</cite> is used.</li>
-<li><strong>partial</strong> (<em>bool|tuple</em>) -- Whether to ignore missing fields. If <cite>None</cite>,
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>json_data</strong> (<em>str</em>) -- A JSON string of the data to deserialize.</p></li>
+<li><p><strong>many</strong> (<em>bool</em>) -- Whether to deserialize <cite>obj</cite> as a collection. If <cite>None</cite>, the
+value for <cite>self.many</cite> is used.</p></li>
+<li><p><strong>partial</strong> (<em>bool|tuple</em>) -- Whether to ignore missing fields. If <cite>None</cite>,
 the value for <cite>self.partial</cite> is used. If its value is an iterable,
-only missing fields listed in that iterable will be ignored.</li>
+only missing fields listed in that iterable will be ignored.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first">A tuple of the form (<code class="docutils literal notranslate"><span class="pre">data</span></code>, <code class="docutils literal notranslate"><span class="pre">errors</span></code>)</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><p class="first last"><cite>UnmarshalResult</cite>, a <cite>collections.namedtuple</cite></p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">戻り値</dt>
+<dd class="field-even"><p>A tuple of the form (<code class="docutils literal notranslate"><span class="pre">data</span></code>, <code class="docutils literal notranslate"><span class="pre">errors</span></code>)</p>
+</dd>
+<dt class="field-odd">戻り値の型</dt>
+<dd class="field-odd"><p><cite>UnmarshalResult</cite>, a <cite>collections.namedtuple</cite></p>
+</dd>
+</dl>
 <div class="versionadded">
-<p><span class="versionmodified">バージョン 1.0.0 で追加.</span></p>
+<p><span class="versionmodified added">バージョン 1.0.0 で追加.</span></p>
 </div>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.validation.BaseSchema.make_model">
-<code class="descname">make_model</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/validation/base.html#BaseSchema.make_model"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.validation.BaseSchema.make_model" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">make_model</code><span class="sig-paren">(</span><em class="sig-param">data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/validation/base.html#BaseSchema.make_model"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.validation.BaseSchema.make_model" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Make <code class="docutils literal notranslate"><span class="pre">load</span></code> return a <code class="docutils literal notranslate"><span class="pre">model_cls</span></code> instance instead of a dict.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.validation.BaseSchema.on_bind_field">
-<code class="descname">on_bind_field</code><span class="sig-paren">(</span><em>field_name</em>, <em>field_obj</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/marshmallow/schema.html#BaseSchema.on_bind_field"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.validation.BaseSchema.on_bind_field" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">on_bind_field</code><span class="sig-paren">(</span><em class="sig-param">field_name</em>, <em class="sig-param">field_obj</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/marshmallow/schema.html#BaseSchema.on_bind_field"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.validation.BaseSchema.on_bind_field" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Hook to modify a field when it is bound to the <cite>Schema</cite>. No-op by default.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.validation.BaseSchema.validate">
-<code class="descname">validate</code><span class="sig-paren">(</span><em>data</em>, <em>many=None</em>, <em>partial=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/marshmallow/schema.html#BaseSchema.validate"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.validation.BaseSchema.validate" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">validate</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">many=None</em>, <em class="sig-param">partial=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/marshmallow/schema.html#BaseSchema.validate"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.validation.BaseSchema.validate" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Validate <cite>data</cite> against the schema, returning a dictionary of
 validation errors.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first simple">
-<li><strong>data</strong> (<em>dict</em>) -- The data to validate.</li>
-<li><strong>many</strong> (<em>bool</em>) -- Whether to validate <cite>data</cite> as a collection. If <cite>None</cite>, the
-value for <cite>self.many</cite> is used.</li>
-<li><strong>partial</strong> (<em>bool|tuple</em>) -- Whether to ignore missing fields. If <cite>None</cite>,
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>dict</em>) -- The data to validate.</p></li>
+<li><p><strong>many</strong> (<em>bool</em>) -- Whether to validate <cite>data</cite> as a collection. If <cite>None</cite>, the
+value for <cite>self.many</cite> is used.</p></li>
+<li><p><strong>partial</strong> (<em>bool|tuple</em>) -- Whether to ignore missing fields. If <cite>None</cite>,
 the value for <cite>self.partial</cite> is used. If its value is an iterable,
-only missing fields listed in that iterable will be ignored.</li>
+only missing fields listed in that iterable will be ignored.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first">A dictionary of validation errors.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><p class="first last">dict</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">戻り値</dt>
+<dd class="field-even"><p>A dictionary of validation errors.</p>
+</dd>
+<dt class="field-odd">戻り値の型</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
 <div class="versionadded">
-<p><span class="versionmodified">バージョン 1.1.0 で追加.</span></p>
+<p><span class="versionmodified added">バージョン 1.1.0 で追加.</span></p>
 </div>
 </dd></dl>
 

@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,6 +48,8 @@
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/js/themeExt.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Stichwortverzeichnis" href="../genindex.html" />
@@ -625,6 +626,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1215,6 +1222,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../apidoc/visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1261,118 +1274,128 @@
 <h1>ProcessTomographyFitter<a class="headerlink" href="#processtomographyfitter" title="Link zu dieser Überschrift">¶</a></h1>
 <dl class="class">
 <dt id="qiskit.ignis.verification.tomography.ProcessTomographyFitter">
-<em class="property">class </em><code class="descname">ProcessTomographyFitter</code><span class="sig-paren">(</span><em>result</em>, <em>circuits</em>, <em>meas_basis='Pauli'</em>, <em>prep_basis='Pauli'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/tomography/fitters/process_fitter.html#ProcessTomographyFitter"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.ignis.verification.tomography.ProcessTomographyFitter" title="Link zu dieser Definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">ProcessTomographyFitter</code><span class="sig-paren">(</span><em class="sig-param">result</em>, <em class="sig-param">circuits</em>, <em class="sig-param">meas_basis='Pauli'</em>, <em class="sig-param">prep_basis='Pauli'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/tomography/fitters/process_fitter.html#ProcessTomographyFitter"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.ignis.verification.tomography.ProcessTomographyFitter" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.ignis.verification.tomography.fitters.base_fitter.TomographyFitter</span></code></p>
 <p>Maximum-Likelihood estimation process tomography fitter.</p>
+<p>Initialize tomography fitter with experimental data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>result</strong> (<a class="reference internal" href="qiskit.result.Result.html#qiskit.result.Result" title="qiskit.result.Result"><em>Result</em></a>) – a Qiskit Result object obtained from executing
+tomography circuits.</p></li>
+<li><p><strong>circuits</strong> (<em>list</em>) – a list of circuits or circuit names to extract
+count information from the result object.</p></li>
+<li><p><strong>meas_basis</strong> (<em>TomographyBasis</em><em>, </em><em>str</em>) – A function to return
+measurement operators corresponding to measurement
+outcomes. See Additional Information
+(default: ‚Pauli‘)</p></li>
+<li><p><strong>prep_basis</strong> (<em>TomographyBasis</em><em>, </em><em>str</em>) – A function to return
+preparation operators. See Additional
+Information (default: ‚Pauli‘)</p></li>
+</ul>
+</dd>
+</dl>
 <p class="rubric">Attributes Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.verification.tomography.ProcessTomographyFitter.data" title="qiskit.ignis.verification.tomography.ProcessTomographyFitter.data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">data</span></code></a></td>
-<td>Return tomography data</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.ignis.verification.tomography.ProcessTomographyFitter.data" title="qiskit.ignis.verification.tomography.ProcessTomographyFitter.data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">data</span></code></a></p></td>
+<td><p>Return tomography data</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.ignis.verification.tomography.ProcessTomographyFitter.measure_basis" title="qiskit.ignis.verification.tomography.ProcessTomographyFitter.measure_basis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">measure_basis</span></code></a></td>
-<td>Return the tomography measurement basis.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.ignis.verification.tomography.ProcessTomographyFitter.measure_basis" title="qiskit.ignis.verification.tomography.ProcessTomographyFitter.measure_basis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">measure_basis</span></code></a></p></td>
+<td><p>Return the tomography measurement basis.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.verification.tomography.ProcessTomographyFitter.preparation_basis" title="qiskit.ignis.verification.tomography.ProcessTomographyFitter.preparation_basis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">preparation_basis</span></code></a></td>
-<td>Return the tomography preperation basis.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.ignis.verification.tomography.ProcessTomographyFitter.preparation_basis" title="qiskit.ignis.verification.tomography.ProcessTomographyFitter.preparation_basis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">preparation_basis</span></code></a></p></td>
+<td><p>Return the tomography preperation basis.</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Methods Summary</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.verification.tomography.ProcessTomographyFitter.add_data" title="qiskit.ignis.verification.tomography.ProcessTomographyFitter.add_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_data</span></code></a>(result,&nbsp;circuits)</td>
-<td>Add tomography data from a Qiskit Result object.</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.ignis.verification.tomography.ProcessTomographyFitter.add_data" title="qiskit.ignis.verification.tomography.ProcessTomographyFitter.add_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_data</span></code></a>(result, circuits)</p></td>
+<td><p>Add tomography data from a Qiskit Result object.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.ignis.verification.tomography.ProcessTomographyFitter.fit" title="qiskit.ignis.verification.tomography.ProcessTomographyFitter.fit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code></a>([method,&nbsp;standard_weights,&nbsp;beta])</td>
-<td>Reconstruct a quantum channel using CVXPY convex optimization.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.ignis.verification.tomography.ProcessTomographyFitter.fit" title="qiskit.ignis.verification.tomography.ProcessTomographyFitter.fit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code></a>([method, standard_weights, beta])</p></td>
+<td><p>Reconstruct a quantum channel using CVXPY convex optimization.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.verification.tomography.ProcessTomographyFitter.set_measure_basis" title="qiskit.ignis.verification.tomography.ProcessTomographyFitter.set_measure_basis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_measure_basis</span></code></a>(basis)</td>
-<td>Set the measurement basis</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qiskit.ignis.verification.tomography.ProcessTomographyFitter.set_measure_basis" title="qiskit.ignis.verification.tomography.ProcessTomographyFitter.set_measure_basis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_measure_basis</span></code></a>(basis)</p></td>
+<td><p>Set the measurement basis</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.ignis.verification.tomography.ProcessTomographyFitter.set_preparation_basis" title="qiskit.ignis.verification.tomography.ProcessTomographyFitter.set_preparation_basis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_preparation_basis</span></code></a>(basis)</td>
-<td>Set the prepearation basis function</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#qiskit.ignis.verification.tomography.ProcessTomographyFitter.set_preparation_basis" title="qiskit.ignis.verification.tomography.ProcessTomographyFitter.set_preparation_basis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_preparation_basis</span></code></a>(basis)</p></td>
+<td><p>Set the prepearation basis function</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Attributes Documentation</p>
 <dl class="attribute">
 <dt id="qiskit.ignis.verification.tomography.ProcessTomographyFitter.data">
-<code class="descname">data</code><a class="headerlink" href="#qiskit.ignis.verification.tomography.ProcessTomographyFitter.data" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">data</code><a class="headerlink" href="#qiskit.ignis.verification.tomography.ProcessTomographyFitter.data" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Return tomography data</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.ignis.verification.tomography.ProcessTomographyFitter.measure_basis">
-<code class="descname">measure_basis</code><a class="headerlink" href="#qiskit.ignis.verification.tomography.ProcessTomographyFitter.measure_basis" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">measure_basis</code><a class="headerlink" href="#qiskit.ignis.verification.tomography.ProcessTomographyFitter.measure_basis" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Return the tomography measurement basis.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="qiskit.ignis.verification.tomography.ProcessTomographyFitter.preparation_basis">
-<code class="descname">preparation_basis</code><a class="headerlink" href="#qiskit.ignis.verification.tomography.ProcessTomographyFitter.preparation_basis" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">preparation_basis</code><a class="headerlink" href="#qiskit.ignis.verification.tomography.ProcessTomographyFitter.preparation_basis" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Return the tomography preperation basis.</p>
 </dd></dl>
 
 <p class="rubric">Methods Documentation</p>
 <dl class="method">
 <dt id="qiskit.ignis.verification.tomography.ProcessTomographyFitter.add_data">
-<code class="descname">add_data</code><span class="sig-paren">(</span><em>result</em>, <em>circuits</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.ignis.verification.tomography.ProcessTomographyFitter.add_data" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">add_data</code><span class="sig-paren">(</span><em class="sig-param">result</em>, <em class="sig-param">circuits</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.ignis.verification.tomography.ProcessTomographyFitter.add_data" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Add tomography data from a Qiskit Result object.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><ul class="first last simple">
-<li><strong>result</strong> (<a class="reference internal" href="qiskit.result.Result.html#qiskit.result.Result" title="qiskit.result.Result"><em>Result</em></a>) – a Qiskit Result object obtained from executing
-tomography circuits.</li>
-<li><strong>circuits</strong> (<em>list</em>) – a list of circuits or circuit names to extract
-count information from the result object.</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>result</strong> (<a class="reference internal" href="qiskit.result.Result.html#qiskit.result.Result" title="qiskit.result.Result"><em>Result</em></a>) – a Qiskit Result object obtained from executing
+tomography circuits.</p></li>
+<li><p><strong>circuits</strong> (<em>list</em>) – a list of circuits or circuit names to extract
+count information from the result object.</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.ignis.verification.tomography.ProcessTomographyFitter.fit">
-<code class="descname">fit</code><span class="sig-paren">(</span><em>method='auto'</em>, <em>standard_weights=True</em>, <em>beta=0.5</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/tomography/fitters/process_fitter.html#ProcessTomographyFitter.fit"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.ignis.verification.tomography.ProcessTomographyFitter.fit" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param">method='auto'</em>, <em class="sig-param">standard_weights=True</em>, <em class="sig-param">beta=0.5</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/tomography/fitters/process_fitter.html#ProcessTomographyFitter.fit"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.ignis.verification.tomography.ProcessTomographyFitter.fit" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Reconstruct a quantum channel using CVXPY convex optimization.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><ul class="first simple">
-<li><strong>method</strong> (<em>str</em>) – The fitter method ‚auto‘, ‚cvx‘ or ‚lstsq‘.</li>
-<li><strong>standard_weights</strong> (<em>bool</em><em>, </em><em>optional</em>) – Apply weights
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>method</strong> (<em>str</em>) – The fitter method ‚auto‘, ‚cvx‘ or ‚lstsq‘.</p></li>
+<li><p><strong>standard_weights</strong> (<em>bool</em><em>, </em><em>optional</em>) – Apply weights
 to tomography data
 based on count probability
-(default: True)</li>
-<li><strong>beta</strong> (<em>float</em>) – hedging parameter for converting counts
-to probabilities (default: 0.5)</li>
-<li><strong>**kwargs</strong> (<em>optional</em>) – kwargs for fitter method.</li>
+(default: True)</p></li>
+<li><p><strong>beta</strong> (<em>float</em>) – hedging parameter for converting counts
+to probabilities (default: 0.5)</p></li>
+<li><p><strong>**kwargs</strong> (<em>optional</em>) – kwargs for fitter method.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body"><p class="first">The fitted Choi-matrix J for the channel that maximizes
+</dd>
+<dt class="field-even">Rückgabe</dt>
+<dd class="field-even"><p>The fitted Choi-matrix J for the channel that maximizes
 ||basis_matrix * vec(J) - data||_2. The Numpy matrix can be
 obtained from <cite>Choi.data</cite>.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body"><p class="first last"><a class="reference internal" href="qiskit.quantum_info.Choi.html#qiskit.quantum_info.Choi" title="qiskit.quantum_info.Choi">Choi</a></p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-odd">Rückgabetyp</dt>
+<dd class="field-odd"><p><a class="reference internal" href="qiskit.quantum_info.Choi.html#qiskit.quantum_info.Choi" title="qiskit.quantum_info.Choi">Choi</a></p>
+</dd>
+</dl>
 <p>Additional Information:</p>
 <blockquote>
 <div><p>The Choi matrix object is a QuantumChannel representation which
@@ -1389,15 +1412,16 @@ the system, otherwise it will default to ‚lstsq‘.</p>
 <div><p>minimize: ||a * x - b ||_2
 subject to: x &gt;&gt; 0 (PSD)</p>
 <blockquote>
-<div>trace(x) = dim (trace)
-partial_trace(x) = identity (trace_preserving)</div></blockquote>
+<div><p>trace(x) = dim (trace)
+partial_trace(x) = identity (trace_preserving)</p>
 </div></blockquote>
-<dl class="docutils">
-<dt>where:</dt>
-<dd>a is the matrix of measurement operators a[i] = vec(M_i).H
+</div></blockquote>
+<dl class="simple">
+<dt>where:</dt><dd><p>a is the matrix of measurement operators a[i] = vec(M_i).H
 b is the vector of expectation value data for each projector
 b[i] ~ Tr[M_i.H * x] = (a * x)[i]
-x is the vectorized Choi-matrix to be fitted</dd>
+x is the vectorized Choi-matrix to be fitted</p>
+</dd>
 </dl>
 <p>The PSD keyword constrains the fitted matrix to be
 postive-semidefinite.
@@ -1428,43 +1452,39 @@ only be used for the CVX method.</p>
 <p>Various solvers can be called in CVXPY using the <cite>solver</cite> keyword
 argument. Solvers included in CVXPY are:</p>
 <blockquote>
-<div>‚CVXOPT‘: SDP and SOCP (default solver)
+<div><p>‚CVXOPT‘: SDP and SOCP (default solver)
 ‚SCS‘   : SDP and SOCP
-‚ECOS‘  : SOCP only</div></blockquote>
+‚ECOS‘  : SOCP only</p>
+</div></blockquote>
 <p>See the documentation on CVXPY for more information on solvers.</p>
 <p>References:
 [1] J Smolin, JM Gambetta, G Smith, Phys. Rev. Lett. 108, 070502</p>
 <blockquote>
-<div>(2012). Open access: arXiv:1106.5458 [quant-ph].</div></blockquote>
+<div><p>(2012). Open access: arXiv:1106.5458 [quant-ph].</p>
+</div></blockquote>
 </div></blockquote>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.ignis.verification.tomography.ProcessTomographyFitter.set_measure_basis">
-<code class="descname">set_measure_basis</code><span class="sig-paren">(</span><em>basis</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.ignis.verification.tomography.ProcessTomographyFitter.set_measure_basis" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">set_measure_basis</code><span class="sig-paren">(</span><em class="sig-param">basis</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.ignis.verification.tomography.ProcessTomographyFitter.set_measure_basis" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Set the measurement basis</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><strong>basis</strong> (<em>TomographyBasis</em><em> or </em><em>str</em>) – measurement basis</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><p><strong>basis</strong> (<em>TomographyBasis</em><em> or </em><em>str</em>) – measurement basis</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.ignis.verification.tomography.ProcessTomographyFitter.set_preparation_basis">
-<code class="descname">set_preparation_basis</code><span class="sig-paren">(</span><em>basis</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.ignis.verification.tomography.ProcessTomographyFitter.set_preparation_basis" title="Link zu dieser Definition">¶</a></dt>
+<code class="sig-name descname">set_preparation_basis</code><span class="sig-paren">(</span><em class="sig-param">basis</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.ignis.verification.tomography.ProcessTomographyFitter.set_preparation_basis" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Set the prepearation basis function</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><strong>basis</strong> (<em>TomographyBasis</em><em> or </em><em>str</em>) – preparation basis</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><p><strong>basis</strong> (<em>TomographyBasis</em><em> or </em><em>str</em>) – preparation basis</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>

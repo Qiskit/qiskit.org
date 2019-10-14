@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,6 +48,8 @@
     <script type="text/javascript" src="../../../../_static/language_data.js"></script>
     <script type="text/javascript" src="../../../../_static/js/themeExt.js"></script>
     <script type="text/javascript" src="../../../../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../../../../_static/favicon.ico"/>
     <link rel="index" title="索引" href="../../../../genindex.html" />
@@ -625,6 +626,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../../../api/qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../../api/qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../../api/qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../../api/qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../../api/qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1215,6 +1222,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../visualization/visualization.html#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../../../api/qiskit.visualization.circuit_drawer.html">circuit_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../../api/qiskit.visualization.dag_drawer.html">dag_drawer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/qiskit.visualization.iplot_bloch_multivector.html">iplot_bloch_multivector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/qiskit.visualization.iplot_histogram.html">iplot_histogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/qiskit.visualization.iplot_state_city.html">iplot_state_city</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/qiskit.visualization.iplot_state_hinton.html">iplot_state_hinton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/qiskit.visualization.iplot_state_paulivec.html">iplot_state_paulivec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/qiskit.visualization.iplot_state_qsphere.html">iplot_state_qsphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../../api/qiskit.visualization.pass_manager_drawer.html">pass_manager_drawer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../../api/qiskit.visualization.plot_bloch_multivector.html">plot_bloch_multivector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../../api/qiskit.visualization.plot_bloch_vector.html">plot_bloch_vector</a></li>
@@ -1273,12 +1286,13 @@ noise model can be generated for a device using built in functions.</p>
 <p>Approximate noise models for a hardware device can be generated from the
 device properties using the functions from the <cite>device</cite> submodule.</p>
 <blockquote>
-<div>Generates a noise mode based on 1 and 2 qubit gate errors consisting of
+<div><p>Generates a noise mode based on 1 and 2 qubit gate errors consisting of
 a depolarizing error followed by a thermal relaxation error, and readout
 errors on measurement outcomes. The error parameters are tuned for each
 individual qubit based on the T_1, T_2, frequency and readout error
 parameters for each qubit, and the gate error and gate time parameters
-for each gate obtained from the device backend properties.</div></blockquote>
+for each gate obtained from the device backend properties.</p>
+</div></blockquote>
 </div>
 <div class="section" id="custom-noise-models">
 <h2>Custom Noise Models<a class="headerlink" href="#custom-noise-models" title="このヘッドラインへのパーマリンク">¶</a></h2>
@@ -1297,7 +1311,7 @@ classical measurement outcome.</p>
 the <cite>noise.errors</cite> module. These allow simple generation of the follow
 canonical types of quantum errors:</p>
 <blockquote>
-<div>Kraus error
+<div><p>Kraus error
 Mixed unitary error
 Coherent unitary error
 Pauli error
@@ -1306,29 +1320,30 @@ Reset error
 Thermal relaxation error
 Amplitude damping error
 Phase damping error
-Combined phase and amplitude damping error</div></blockquote>
+Combined phase and amplitude damping error</p>
+</div></blockquote>
 </div>
 <div class="section" id="noise-utilities">
 <h2>Noise Utilities<a class="headerlink" href="#noise-utilities" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<dl class="docutils">
-<dt>The <cite>noise.utils</cite> module contains utilities for noise models and errors including:</dt>
-<dd><cite>remap_noise_model</cite> for remapping the qubits specified in a NoiseModel.
+<dl class="simple">
+<dt>The <cite>noise.utils</cite> module contains utilities for noise models and errors including:</dt><dd><p><cite>remap_noise_model</cite> for remapping the qubits specified in a NoiseModel.
 <cite>approximate_quantum_error</cite> for approximating a general quantum error via
 a provided set of errors (e.g. approximating amplitude damping via reset errors).
 <cite>approximate_noise_model</cite> for approximating all the errors in a nose model using
-the same provided set of errors.</dd>
+the same provided set of errors.</p>
+</dd>
 </dl>
 </div>
 <div class="section" id="classes">
 <h2>Classes<a class="headerlink" href="#classes" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="../../../../api/qiskit.providers.aer.noise.NoiseModel.html#qiskit.providers.aer.noise.NoiseModel" title="qiskit.providers.aer.noise.NoiseModel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NoiseModel</span></code></a>([basis_gates])</td>
-<td>Noise model class for Qiskit Aer simulators.</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../../api/qiskit.providers.aer.noise.NoiseModel.html#qiskit.providers.aer.noise.NoiseModel" title="qiskit.providers.aer.noise.NoiseModel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NoiseModel</span></code></a>([basis_gates])</p></td>
+<td><p>Noise model class for Qiskit Aer simulators.</p></td>
 </tr>
 </tbody>
 </table>
