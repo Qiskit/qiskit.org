@@ -1,6 +1,5 @@
 language: node_js
 node_js: '10'
-sudo: true
 cache:
   directories:
     - node_modules
@@ -9,7 +8,6 @@ before_script:
 script:
   - npm run test
 before_deploy:
-  - npm install -g cf-blue-green
   - npm run build
   - cd server/
   # Prevent deploy stage from timing out waiting for output. The function
@@ -26,7 +24,12 @@ before_deploy:
     }
     keep_alive &
 deploy:
-  provider: script
-  script: cf-blue-green-travis
-  on:
-    branch: master
+  - provider: cloudfoundry
+    username: apikey
+    password: $IBM_CLOUD_API_KEY
+    api: https://api.ng.bluemix.net
+    organization: $IBM_CLOUD_ORGANIZATION
+    space: $IBM_CLOUD_SPACE
+    app_name: Qiskit website
+    on:
+      branch: master
