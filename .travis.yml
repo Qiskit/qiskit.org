@@ -24,7 +24,8 @@ before_deploy:
     }
     keep_alive &
 deploy:
-  - provider: cloudfoundry
+    edge: true
+    provider: bluemixcloudfoundry
     username: apikey
     password: $IBM_CLOUD_API_KEY
     api: https://api.ng.bluemix.net
