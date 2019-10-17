@@ -33,7 +33,7 @@
        </script>
         <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
     
-    <title>qiskit.transpiler.passes.mapping.lookahead_swap &#8212; Qiskit 0.12.2 documentation</title>
+    <title>qiskit.transpiler.passes.mapping.lookahead_swap &#8212; Qiskit 0.13.0 documentation</title>
 
     <link rel="stylesheet" href="../../../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
@@ -458,12 +458,9 @@
 
     <span class="n">mapped_op_node</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">([</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">gate</span><span class="p">[</span><span class="s1">&#39;graph&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">nodes</span><span class="p">()</span> <span class="k">if</span> <span class="n">n</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s1">&#39;op&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
 
-    <span class="c1"># Workaround until #1816, apply mapped to qargs to both DAGNode and op</span>
     <span class="n">device_qreg</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">layout</span><span class="o">.</span><span class="n">get_physical_bits</span><span class="p">()),</span> <span class="s1">&#39;q&#39;</span><span class="p">)</span>
     <span class="n">mapped_qargs</span> <span class="o">=</span> <span class="p">[</span><span class="n">device_qreg</span><span class="p">[</span><span class="n">layout</span><span class="p">[</span><span class="n">a</span><span class="p">]]</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">mapped_op_node</span><span class="o">.</span><span class="n">qargs</span><span class="p">]</span>
     <span class="n">mapped_op_node</span><span class="o">.</span><span class="n">qargs</span> <span class="o">=</span> <span class="n">mapped_op_node</span><span class="o">.</span><span class="n">op</span><span class="o">.</span><span class="n">qargs</span> <span class="o">=</span> <span class="n">mapped_qargs</span>
-
-    <span class="n">mapped_op_node</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">mapped_op_node</span>
 

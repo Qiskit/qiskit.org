@@ -33,7 +33,7 @@
        </script>
         <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
     
-    <title>qiskit.compiler.transpile &#8212; Qiskit 0.12.2 documentation</title>
+    <title>qiskit.compiler.transpile &#8212; Qiskit 0.13.0 documentation</title>
 
     <link rel="stylesheet" href="../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -204,6 +204,7 @@
 <span class="kn">from</span> <span class="nn">qiskit.circuit.quantumregister</span> <span class="k">import</span> <span class="n">Qubit</span>
 <span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">user_config</span>
 <span class="kn">from</span> <span class="nn">qiskit.transpiler.exceptions</span> <span class="k">import</span> <span class="n">TranspilerError</span>
+<span class="kn">from</span> <span class="nn">qiskit.converters</span> <span class="k">import</span> <span class="n">isinstanceint</span><span class="p">,</span> <span class="n">isinstancelist</span>
 
 
 <div class="viewcode-block" id="transpile"><a class="viewcode-back" href="../../../api/qiskit.compiler.transpile.html#qiskit.compiler.transpile">[docs]</a><span class="k">def</span> <span class="nf">transpile</span><span class="p">(</span><span class="n">circuits</span><span class="p">,</span>
@@ -510,13 +511,17 @@
     <span class="c1"># initial_layout could be None, or a list of ints, e.g. [0, 5, 14]</span>
     <span class="c1"># or a list of tuples/None e.g. [qr[0], None, qr[1]] or a dict e.g. {qr[0]: 0}</span>
     <span class="k">def</span> <span class="nf">_layout_from_raw</span><span class="p">(</span><span class="n">initial_layout</span><span class="p">,</span> <span class="n">circuit</span><span class="p">):</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">initial_layout</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-            <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">elem</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">initial_layout</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">initial_layout</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">initial_layout</span><span class="p">,</span> <span class="n">Layout</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">initial_layout</span>
+        <span class="k">elif</span> <span class="n">isinstancelist</span><span class="p">(</span><span class="n">initial_layout</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">isinstanceint</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span> <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">initial_layout</span><span class="p">):</span>
                 <span class="n">initial_layout</span> <span class="o">=</span> <span class="n">Layout</span><span class="o">.</span><span class="n">from_intlist</span><span class="p">(</span><span class="n">initial_layout</span><span class="p">,</span> <span class="o">*</span><span class="n">circuit</span><span class="o">.</span><span class="n">qregs</span><span class="p">)</span>
             <span class="k">elif</span> <span class="nb">all</span><span class="p">(</span><span class="n">elem</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">elem</span><span class="p">,</span> <span class="n">Qubit</span><span class="p">)</span> <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">initial_layout</span><span class="p">):</span>
                 <span class="n">initial_layout</span> <span class="o">=</span> <span class="n">Layout</span><span class="o">.</span><span class="n">from_qubit_list</span><span class="p">(</span><span class="n">initial_layout</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">initial_layout</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
             <span class="n">initial_layout</span> <span class="o">=</span> <span class="n">Layout</span><span class="p">(</span><span class="n">initial_layout</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">TranspilerError</span><span class="p">(</span><span class="s2">&quot;The initial_layout parameter could not be parsed&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">initial_layout</span>
 
     <span class="c1"># multiple layouts?</span>

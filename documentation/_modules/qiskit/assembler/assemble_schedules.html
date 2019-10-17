@@ -33,7 +33,7 @@
        </script>
         <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
     
-    <title>qiskit.assembler.assemble_schedules &#8212; Qiskit 0.12.2 documentation</title>
+    <title>qiskit.assembler.assemble_schedules &#8212; Qiskit 0.13.0 documentation</title>
 
     <link rel="stylesheet" href="../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -204,6 +204,7 @@
 
 <div class="viewcode-block" id="assemble_schedules"><a class="viewcode-back" href="../../../api/qiskit.assembler.assemble_schedules.html#qiskit.assembler.assemble_schedules">[docs]</a><span class="k">def</span> <span class="nf">assemble_schedules</span><span class="p">(</span><span class="n">schedules</span><span class="p">,</span> <span class="n">qobj_id</span><span class="p">,</span> <span class="n">qobj_header</span><span class="p">,</span> <span class="n">run_config</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Assembles a list of schedules into a qobj which can be run on the backend.</span>
+
 <span class="sd">    Args:</span>
 <span class="sd">        schedules (list[Schedule]): schedules to assemble</span>
 <span class="sd">        qobj_id (int): identifier for the generated qobj</span>
@@ -233,8 +234,6 @@
     <span class="n">meas_lo_range</span> <span class="o">=</span> <span class="n">qobj_config</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;meas_lo_range&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
     <span class="n">meas_map</span> <span class="o">=</span> <span class="n">qobj_config</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;meas_map&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
-    <span class="n">max_memory_slot</span> <span class="o">=</span> <span class="mi">0</span>
-
     <span class="n">instruction_converter</span> <span class="o">=</span> <span class="n">instruction_converter</span><span class="p">(</span><span class="n">PulseQobjInstruction</span><span class="p">,</span> <span class="o">**</span><span class="n">qobj_config</span><span class="p">)</span>
 
     <span class="n">lo_converter</span> <span class="o">=</span> <span class="n">LoConfigConverter</span><span class="p">(</span><span class="n">PulseQobjExperimentConfig</span><span class="p">,</span>
@@ -242,12 +241,16 @@
                                      <span class="n">meas_lo_range</span><span class="o">=</span><span class="n">meas_lo_range</span><span class="p">,</span>
                                      <span class="o">**</span><span class="n">qobj_config</span><span class="p">)</span>
 
+    <span class="n">memory_slot_size</span> <span class="o">=</span> <span class="mi">0</span>
+
     <span class="c1"># Pack everything into the Qobj</span>
     <span class="n">qobj_schedules</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">user_pulselib</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">schedule</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">schedules</span><span class="p">):</span>
         <span class="c1"># instructions</span>
+        <span class="n">max_memory_slot</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="n">qobj_instructions</span> <span class="o">=</span> <span class="p">[]</span>
+
         <span class="c1"># Instructions are returned as tuple of shifted time and instruction</span>
         <span class="k">for</span> <span class="n">shift</span><span class="p">,</span> <span class="n">instruction</span> <span class="ow">in</span> <span class="n">schedule</span><span class="o">.</span><span class="n">instructions</span><span class="p">:</span>
             <span class="c1"># TODO: support conditional gate</span>
@@ -263,10 +266,9 @@
                     <span class="n">instruction</span> <span class="o">=</span> <span class="n">PulseInstruction</span><span class="p">(</span>
                         <span class="n">command</span><span class="o">=</span><span class="n">SamplePulse</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">samples</span><span class="o">=</span><span class="n">instruction</span><span class="o">.</span><span class="n">command</span><span class="o">.</span><span class="n">samples</span><span class="p">),</span>
                         <span class="n">name</span><span class="o">=</span><span class="n">instruction</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-                        <span class="n">channel</span><span class="o">=</span><span class="n">instruction</span><span class="o">.</span><span class="n">timeslots</span><span class="o">.</span><span class="n">channels</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                        <span class="n">channel</span><span class="o">=</span><span class="n">instruction</span><span class="o">.</span><span class="n">channels</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
                 <span class="c1"># add samples to pulse library</span>
                 <span class="n">user_pulselib</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">instruction</span><span class="o">.</span><span class="n">command</span>
-
             <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">instruction</span><span class="p">,</span> <span class="n">AcquireInstruction</span><span class="p">):</span>
                 <span class="n">max_memory_slot</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_memory_slot</span><span class="p">,</span>
                                       <span class="o">*</span><span class="p">[</span><span class="n">slot</span><span class="o">.</span><span class="n">index</span> <span class="k">for</span> <span class="n">slot</span> <span class="ow">in</span> <span class="n">instruction</span><span class="o">.</span><span class="n">mem_slots</span><span class="p">])</span>
@@ -277,8 +279,14 @@
             <span class="n">converted_instruction</span> <span class="o">=</span> <span class="n">instruction_converter</span><span class="p">(</span><span class="n">shift</span><span class="p">,</span> <span class="n">instruction</span><span class="p">)</span>
             <span class="n">qobj_instructions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">converted_instruction</span><span class="p">)</span>
 
+        <span class="c1"># memory slot size is memory slot index + 1 because index starts from zero</span>
+        <span class="n">exp_memory_slot_size</span> <span class="o">=</span> <span class="n">max_memory_slot</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">memory_slot_size</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">memory_slot_size</span><span class="p">,</span> <span class="n">exp_memory_slot_size</span><span class="p">)</span>
+
         <span class="c1"># experiment header</span>
+        <span class="c1"># TODO: add other experimental header items (see circuit assembler)</span>
         <span class="n">qobj_experiment_header</span> <span class="o">=</span> <span class="n">QobjExperimentHeader</span><span class="p">(</span>
+            <span class="n">memory_slots</span><span class="o">=</span><span class="n">exp_memory_slot_size</span><span class="p">,</span>
             <span class="n">name</span><span class="o">=</span><span class="n">schedule</span><span class="o">.</span><span class="n">name</span> <span class="ow">or</span> <span class="s1">&#39;Experiment-</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">idx</span>
         <span class="p">)</span>
 
@@ -288,7 +296,7 @@
         <span class="p">})</span>
 
     <span class="c1"># set number of memoryslots</span>
-    <span class="n">qobj_config</span><span class="p">[</span><span class="s1">&#39;memory_slots&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">max_memory_slot</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">qobj_config</span><span class="p">[</span><span class="s1">&#39;memory_slots&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">memory_slot_size</span>
 
     <span class="c1"># setup pulse_library</span>
     <span class="n">qobj_config</span><span class="p">[</span><span class="s1">&#39;pulse_library&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">PulseLibraryItem</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">pulse</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">samples</span><span class="o">=</span><span class="n">pulse</span><span class="o">.</span><span class="n">samples</span><span class="p">)</span>

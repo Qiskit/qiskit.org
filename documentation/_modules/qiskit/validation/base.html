@@ -33,7 +33,7 @@
        </script>
         <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
     
-    <title>qiskit.validation.base &#8212; Qiskit 0.12.2 documentation</title>
+    <title>qiskit.validation.base &#8212; Qiskit 0.13.0 documentation</title>
 
     <link rel="stylesheet" href="../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -217,7 +217,7 @@
 <span class="kn">from</span> <span class="nn">marshmallow</span> <span class="k">import</span> <span class="n">ValidationError</span>
 <span class="kn">from</span> <span class="nn">marshmallow</span> <span class="k">import</span> <span class="n">Schema</span><span class="p">,</span> <span class="n">post_dump</span><span class="p">,</span> <span class="n">post_load</span>
 <span class="kn">from</span> <span class="nn">marshmallow</span> <span class="k">import</span> <span class="n">fields</span> <span class="k">as</span> <span class="n">_fields</span>
-<span class="kn">from</span> <span class="nn">marshmallow.utils</span> <span class="k">import</span> <span class="n">is_collection</span>
+<span class="kn">from</span> <span class="nn">marshmallow.utils</span> <span class="k">import</span> <span class="n">is_collection</span><span class="p">,</span> <span class="n">INCLUDE</span>
 
 <span class="kn">from</span> <span class="nn">.exceptions</span> <span class="k">import</span> <span class="n">ModelValidationError</span>
 
@@ -230,7 +230,7 @@
     <span class="k">def</span> <span class="nf">_expected_types</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">valid_types</span>
 
-<div class="viewcode-block" id="ModelTypeValidator.check_type"><a class="viewcode-back" href="../../../api/qiskit.validation.ModelTypeValidator.html#qiskit.assembler.ModelTypeValidator.check_type">[docs]</a>    <span class="k">def</span> <span class="nf">check_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">attr</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<div class="viewcode-block" id="ModelTypeValidator.check_type"><a class="viewcode-back" href="../../../api/qiskit.validation.ModelTypeValidator.html#qiskit.assembler.ModelTypeValidator.check_type">[docs]</a>    <span class="k">def</span> <span class="nf">check_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">attr</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">_</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Validates a value against the correct type of the field.</span>
 
 <span class="sd">        It calls ``_expected_types`` to get a list of valid types.</span>
@@ -283,30 +283,29 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;In marshmallow3, all schemas are strict.&quot;&quot;&quot;</span>
-        <span class="c1"># TODO: remove when upgrading to marshmallow3</span>
-        <span class="n">strict</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="sd">&quot;&quot;&quot;Add extra fields to the schema.&quot;&quot;&quot;</span>
+        <span class="n">unknown</span> <span class="o">=</span> <span class="n">INCLUDE</span>
 
     <span class="n">model_cls</span> <span class="o">=</span> <span class="n">SimpleNamespace</span>
 
 <div class="viewcode-block" id="BaseSchema.dump_additional_data"><a class="viewcode-back" href="../../../api/qiskit.validation.BaseSchema.html#qiskit.assembler.BaseSchema.dump_additional_data">[docs]</a>    <span class="nd">@post_dump</span><span class="p">(</span><span class="n">pass_original</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">pass_many</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">dump_additional_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">valid_data</span><span class="p">,</span> <span class="n">many</span><span class="p">,</span> <span class="n">original_data</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">dump_additional_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">valid_data</span><span class="p">,</span> <span class="n">original_data</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Include unknown fields after dumping.</span>
 
 <span class="sd">        Unknown fields are added with no processing at all.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            valid_data (dict or list): data collected and returned by ``dump()``.</span>
-<span class="sd">            many (bool): if True, data and original_data are a list.</span>
 <span class="sd">            original_data (object or list): object passed to ``dump()`` in the</span>
 <span class="sd">                first place.</span>
+<span class="sd">            **kwargs: extra arguments from the decorators.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            dict: the same ``valid_data`` extended with the unknown attributes.</span>
 
 <span class="sd">        Inspired by https://github.com/marshmallow-code/marshmallow/pull/595.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">many</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;many&#39;</span><span class="p">):</span>
             <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">valid_data</span><span class="p">):</span>
                 <span class="n">additional_keys</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">original_data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">valid_data</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
                 <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">additional_keys</span><span class="p">:</span>
@@ -318,37 +317,8 @@
 
         <span class="k">return</span> <span class="n">valid_data</span></div>
 
-<div class="viewcode-block" id="BaseSchema.load_additional_data"><a class="viewcode-back" href="../../../api/qiskit.validation.BaseSchema.html#qiskit.assembler.BaseSchema.load_additional_data">[docs]</a>    <span class="nd">@post_load</span><span class="p">(</span><span class="n">pass_original</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">pass_many</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">load_additional_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">valid_data</span><span class="p">,</span> <span class="n">many</span><span class="p">,</span> <span class="n">original_data</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Include unknown fields after load.</span>
-
-<span class="sd">        Unknown fields are added with no processing at all.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            valid_data (dict or list): validated data returned by ``load()``.</span>
-<span class="sd">            many (bool): if True, data and original_data are a list.</span>
-<span class="sd">            original_data (dict or list): data passed to ``load()`` in the</span>
-<span class="sd">                first place.</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            dict: the same ``valid_data`` extended with the unknown attributes.</span>
-
-<span class="sd">        Inspired by https://github.com/marshmallow-code/marshmallow/pull/595.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">many</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">valid_data</span><span class="p">):</span>
-                <span class="n">additional_keys</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">original_data</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">valid_data</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-                <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">additional_keys</span><span class="p">:</span>
-                    <span class="n">valid_data</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">original_data</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">key</span><span class="p">]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">additional_keys</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">original_data</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">valid_data</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">additional_keys</span><span class="p">:</span>
-                <span class="n">valid_data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">original_data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
-
-        <span class="k">return</span> <span class="n">valid_data</span></div>
-
 <div class="viewcode-block" id="BaseSchema.make_model"><a class="viewcode-back" href="../../../api/qiskit.validation.BaseSchema.html#qiskit.assembler.BaseSchema.make_model">[docs]</a>    <span class="nd">@post_load</span>
-    <span class="k">def</span> <span class="nf">make_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">make_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">_</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Make ``load`` return a ``model_cls`` instance instead of a dict.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_cls</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span></div></div>
 
@@ -377,7 +347,6 @@
         <span class="n">model_cls</span><span class="o">.</span><span class="n">schema</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schema_cls</span><span class="p">()</span>
 
         <span class="c1"># Append the methods to the Model class.</span>
-        <span class="n">model_cls</span><span class="o">.</span><span class="n">_validate</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_validate</span>
         <span class="n">model_cls</span><span class="o">.</span><span class="fm">__init__</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_validate_after_init</span><span class="p">(</span><span class="n">model_cls</span><span class="o">.</span><span class="fm">__init__</span><span class="p">)</span>
 
         <span class="c1"># Add a Schema that performs minimal validation to the Model.</span>
@@ -412,25 +381,17 @@
         <span class="k">return</span> <span class="n">validation_schema</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_validate</span><span class="p">(</span><span class="n">instance</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Validate the internal representation of the instance.&quot;&quot;&quot;</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">_</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">schema</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">instance</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
-        <span class="k">except</span> <span class="n">ValidationError</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">ModelValidationError</span><span class="p">(</span>
-                <span class="n">ex</span><span class="o">.</span><span class="n">messages</span><span class="p">,</span> <span class="n">ex</span><span class="o">.</span><span class="n">field_names</span><span class="p">,</span> <span class="n">ex</span><span class="o">.</span><span class="n">fields</span><span class="p">,</span> <span class="n">ex</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">ex</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span>
-
-    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">_validate_after_init</span><span class="p">(</span><span class="n">init_method</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Add validation after instantiation.&quot;&quot;&quot;</span>
 
         <span class="nd">@wraps</span><span class="p">(</span><span class="n">init_method</span><span class="p">)</span>
         <span class="k">def</span> <span class="nf">_decorated</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">shallow_schema</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+                <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">shallow_schema</span><span class="o">.</span><span class="n">_do_load</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span>
+                                                 <span class="n">postprocess</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
             <span class="k">except</span> <span class="n">ValidationError</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="n">ModelValidationError</span><span class="p">(</span>
-                    <span class="n">ex</span><span class="o">.</span><span class="n">messages</span><span class="p">,</span> <span class="n">ex</span><span class="o">.</span><span class="n">field_names</span><span class="p">,</span> <span class="n">ex</span><span class="o">.</span><span class="n">fields</span><span class="p">,</span> <span class="n">ex</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">ex</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">None</span>
+                    <span class="n">ex</span><span class="o">.</span><span class="n">messages</span><span class="p">,</span> <span class="n">ex</span><span class="o">.</span><span class="n">field_name</span><span class="p">,</span> <span class="n">ex</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">ex</span><span class="o">.</span><span class="n">valid_data</span><span class="p">,</span> <span class="o">**</span><span class="n">ex</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">None</span>
 
             <span class="n">init_method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
@@ -512,10 +473,10 @@
 <span class="sd">        ``@bind_schema``.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">data</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">schema</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">schema</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="k">except</span> <span class="n">ValidationError</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">ModelValidationError</span><span class="p">(</span>
-                <span class="n">ex</span><span class="o">.</span><span class="n">messages</span><span class="p">,</span> <span class="n">ex</span><span class="o">.</span><span class="n">field_names</span><span class="p">,</span> <span class="n">ex</span><span class="o">.</span><span class="n">fields</span><span class="p">,</span> <span class="n">ex</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">ex</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">None</span>
+                <span class="n">ex</span><span class="o">.</span><span class="n">messages</span><span class="p">,</span> <span class="n">ex</span><span class="o">.</span><span class="n">field_name</span><span class="p">,</span> <span class="n">ex</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">ex</span><span class="o">.</span><span class="n">valid_data</span><span class="p">,</span> <span class="o">**</span><span class="n">ex</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">None</span>
 
         <span class="k">return</span> <span class="n">data</span></div>
 
@@ -527,10 +488,10 @@
 <span class="sd">        ``@bind_schema``.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">data</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">schema</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">dict_</span><span class="p">)</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">schema</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">dict_</span><span class="p">)</span>
         <span class="k">except</span> <span class="n">ValidationError</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">ModelValidationError</span><span class="p">(</span>
-                <span class="n">ex</span><span class="o">.</span><span class="n">messages</span><span class="p">,</span> <span class="n">ex</span><span class="o">.</span><span class="n">field_names</span><span class="p">,</span> <span class="n">ex</span><span class="o">.</span><span class="n">fields</span><span class="p">,</span> <span class="n">ex</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">ex</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">None</span>
+                <span class="n">ex</span><span class="o">.</span><span class="n">messages</span><span class="p">,</span> <span class="n">ex</span><span class="o">.</span><span class="n">field_name</span><span class="p">,</span> <span class="n">ex</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">ex</span><span class="o">.</span><span class="n">valid_data</span><span class="p">,</span> <span class="o">**</span><span class="n">ex</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">None</span>
 
         <span class="k">return</span> <span class="n">data</span></div>
 

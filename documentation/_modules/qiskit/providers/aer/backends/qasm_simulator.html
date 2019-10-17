@@ -33,7 +33,7 @@
        </script>
         <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
     
-    <title>qiskit.providers.aer.backends.qasm_simulator &#8212; Qiskit 0.12.2 documentation</title>
+    <title>qiskit.providers.aer.backends.qasm_simulator &#8212; Qiskit 0.13.0 documentation</title>
 
     <link rel="stylesheet" href="../../../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
@@ -359,57 +359,25 @@
     <span class="k">def</span> <span class="nf">_validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qobj</span><span class="p">,</span> <span class="n">backend_options</span><span class="p">,</span> <span class="n">noise_model</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Semantic validations of the qobj which cannot be done via schemas.</span>
 
-<span class="sd">        1. Check number of qubits will fit in local memory.</span>
-<span class="sd">        2. warn if no classical registers or measurements in circuit.</span>
+<span class="sd">        Warn if no measurements in circuit with classical registers.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">clifford_instructions</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="s2">&quot;z&quot;</span><span class="p">,</span> <span class="s2">&quot;h&quot;</span><span class="p">,</span> <span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="s2">&quot;sdg&quot;</span><span class="p">,</span> <span class="s2">&quot;CX&quot;</span><span class="p">,</span> <span class="s2">&quot;cx&quot;</span><span class="p">,</span> <span class="s2">&quot;cz&quot;</span><span class="p">,</span> <span class="s2">&quot;swap&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;barrier&quot;</span><span class="p">,</span> <span class="s2">&quot;reset&quot;</span><span class="p">,</span> <span class="s2">&quot;measure&quot;</span><span class="p">,</span> <span class="s1">&#39;roerror&#39;</span>
-        <span class="p">]</span>
-        <span class="n">unsupported_ch_instructions</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;u2&quot;</span><span class="p">,</span> <span class="s2">&quot;u3&quot;</span><span class="p">,</span> <span class="s2">&quot;cu1&quot;</span><span class="p">]</span>
-        <span class="c1"># Check if noise model is Clifford:</span>
-        <span class="n">method</span> <span class="o">=</span> <span class="s2">&quot;automatic&quot;</span>
-        <span class="k">if</span> <span class="n">backend_options</span> <span class="ow">and</span> <span class="s2">&quot;method&quot;</span> <span class="ow">in</span> <span class="n">backend_options</span><span class="p">:</span>
-            <span class="n">method</span> <span class="o">=</span> <span class="n">backend_options</span><span class="p">[</span><span class="s2">&quot;method&quot;</span><span class="p">]</span>
-
-        <span class="n">clifford_noise</span> <span class="o">=</span> <span class="p">(</span><span class="n">method</span> <span class="o">!=</span> <span class="s2">&quot;statevector&quot;</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">clifford_noise</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">method</span> <span class="o">!=</span> <span class="s2">&quot;stabilizer&quot;</span> <span class="ow">and</span> <span class="n">noise_model</span><span class="p">:</span>
-                <span class="k">for</span> <span class="n">error</span> <span class="ow">in</span> <span class="n">noise_model</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()[</span><span class="s1">&#39;errors&#39;</span><span class="p">]:</span>
-                    <span class="k">if</span> <span class="n">error</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;qerror&#39;</span><span class="p">:</span>
-                        <span class="k">for</span> <span class="n">circ</span> <span class="ow">in</span> <span class="n">error</span><span class="p">[</span><span class="s2">&quot;instructions&quot;</span><span class="p">]:</span>
-                            <span class="k">for</span> <span class="n">instr</span> <span class="ow">in</span> <span class="n">circ</span><span class="p">:</span>
-                                <span class="k">if</span> <span class="n">instr</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">clifford_instructions</span><span class="p">:</span>
-                                    <span class="n">clifford_noise</span> <span class="o">=</span> <span class="kc">False</span>
-                                    <span class="k">break</span>
-        <span class="c1"># Check to see if experiments are clifford</span>
         <span class="k">for</span> <span class="n">experiment</span> <span class="ow">in</span> <span class="n">qobj</span><span class="o">.</span><span class="n">experiments</span><span class="p">:</span>
-            <span class="n">name</span> <span class="o">=</span> <span class="n">experiment</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">name</span>
-            <span class="c1"># Check for classical bits</span>
-            <span class="k">if</span> <span class="n">experiment</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">memory_slots</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
-                    <span class="s1">&#39;No classical registers in circuit &quot;</span><span class="si">%s</span><span class="s1">&quot;: &#39;</span>
-                    <span class="s1">&#39;result data will not contain counts.&#39;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
-            <span class="c1"># Check if Clifford circuit or if measure opts missing</span>
-            <span class="n">no_measure</span> <span class="o">=</span> <span class="kc">True</span>
-            <span class="n">ch_supported</span> <span class="o">=</span> <span class="kc">False</span>
-            <span class="n">ch_supported</span> <span class="o">=</span> <span class="n">method</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;extended_stabilizer&quot;</span><span class="p">,</span> <span class="s2">&quot;automatic&quot;</span><span class="p">]</span>
-            <span class="n">clifford</span> <span class="o">=</span> <span class="kc">False</span> <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;statevector&quot;</span> <span class="k">else</span> <span class="n">clifford_noise</span>
-            <span class="k">for</span> <span class="n">op</span> <span class="ow">in</span> <span class="n">experiment</span><span class="o">.</span><span class="n">instructions</span><span class="p">:</span>
-                <span class="k">if</span> <span class="ow">not</span> <span class="n">clifford</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">no_measure</span><span class="p">:</span>
-                    <span class="k">break</span>  <span class="c1"># we don&#39;t need to check any more ops</span>
-                <span class="k">if</span> <span class="n">clifford</span> <span class="ow">and</span> <span class="n">op</span><span class="o">.</span><span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">clifford_instructions</span><span class="p">:</span>
-                    <span class="n">clifford</span> <span class="o">=</span> <span class="kc">False</span>
-                <span class="k">if</span> <span class="n">no_measure</span> <span class="ow">and</span> <span class="n">op</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;measure&quot;</span><span class="p">:</span>
-                    <span class="n">no_measure</span> <span class="o">=</span> <span class="kc">False</span>
-                <span class="k">if</span> <span class="n">ch_supported</span> <span class="ow">and</span> <span class="n">op</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="n">unsupported_ch_instructions</span><span class="p">:</span>
-                    <span class="n">ch_supported</span> <span class="o">=</span> <span class="kc">False</span>
-            <span class="c1"># Print warning if clbits but no measure</span>
-            <span class="k">if</span> <span class="n">no_measure</span><span class="p">:</span>
-                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
-                    <span class="s1">&#39;No measurements in circuit &quot;</span><span class="si">%s</span><span class="s1">&quot;: &#39;</span>
-                    <span class="s1">&#39;count data will return all zeros.&#39;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span></div>
+            <span class="c1"># If circuit contains classical registers but not</span>
+            <span class="c1"># measurements raise a warning</span>
+            <span class="k">if</span> <span class="n">experiment</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">memory_slots</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="c1"># Check if measure opts missing</span>
+                <span class="n">no_measure</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">for</span> <span class="n">op</span> <span class="ow">in</span> <span class="n">experiment</span><span class="o">.</span><span class="n">instructions</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">no_measure</span><span class="p">:</span>
+                        <span class="k">break</span>  <span class="c1"># we don&#39;t need to check any more ops</span>
+                    <span class="k">if</span> <span class="n">no_measure</span> <span class="ow">and</span> <span class="n">op</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;measure&quot;</span><span class="p">:</span>
+                        <span class="n">no_measure</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="c1"># Print warning if clbits but no measure</span>
+                <span class="k">if</span> <span class="n">no_measure</span><span class="p">:</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                        <span class="s1">&#39;No measurements in circuit &quot;</span><span class="si">%s</span><span class="s1">&quot;: &#39;</span>
+                        <span class="s1">&#39;count data will return all zeros.&#39;</span><span class="p">,</span>
+                        <span class="n">experiment</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">name</span><span class="p">)</span></div>
 </pre></div>
 
         </div>
