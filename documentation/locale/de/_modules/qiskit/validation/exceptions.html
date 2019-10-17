@@ -33,7 +33,7 @@
        </script>
         <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
     
-    <title>qiskit.validation.exceptions &#8212; Qiskit 0.12.2 Dokumentation</title>
+    <title>qiskit.validation.exceptions &#8212; Qiskit 0.13.0 Dokumentation</title>
 
     <link rel="stylesheet" href="../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -200,13 +200,16 @@
 <span class="kn">from</span> <span class="nn">qiskit.exceptions</span> <span class="k">import</span> <span class="n">QiskitError</span>
 
 
-<div class="viewcode-block" id="ModelValidationError"><a class="viewcode-back" href="../../../api/qiskit.validation.ModelValidationError.html#qiskit.validation.ModelValidationError">[Doku]</a><span class="k">class</span> <span class="nc">ModelValidationError</span><span class="p">(</span><span class="n">ValidationError</span><span class="p">,</span> <span class="n">QiskitError</span><span class="p">):</span>
+<div class="viewcode-block" id="ModelValidationError"><a class="viewcode-back" href="../../../api/qiskit.validation.ModelValidationError.html#qiskit.validation.ModelValidationError">[Doku]</a><span class="k">class</span> <span class="nc">ModelValidationError</span><span class="p">(</span><span class="n">QiskitError</span><span class="p">,</span> <span class="n">ValidationError</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Raised when a sequence subscript is out of range.&quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">field_names</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">field_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">valid_data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">field_names</span><span class="p">,</span> <span class="n">fields</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="c1"># Populate self.message, as it is required by QiskitError.</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="n">message</span></div>
+        <span class="c1"># pylint: disable=super-init-not-called</span>
+        <span class="c1"># ValidationError.__init__ is called manually instead of calling super,</span>
+        <span class="c1"># as the signatures of ValidationError and QiskitError constructors</span>
+        <span class="c1"># differ.</span>
+        <span class="n">ValidationError</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">field_name</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">valid_data</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">message</span><span class="p">)</span></div>
 </pre></div>
 
         </div>

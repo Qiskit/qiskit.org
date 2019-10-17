@@ -33,7 +33,7 @@
        </script>
         <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
     
-    <title>qiskit.transpiler.transpile_circuit &#8212; Documentação Qiskit 0.12.2</title>
+    <title>qiskit.transpiler.transpile_circuit &#8212; Documentação Qiskit 0.13.0</title>
 
     <link rel="stylesheet" href="../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -199,6 +199,7 @@
                                                    <span class="n">level_1_pass_manager</span><span class="p">,</span>
                                                    <span class="n">level_2_pass_manager</span><span class="p">,</span>
                                                    <span class="n">level_3_pass_manager</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">qiskit.transpiler.passes.ms_basis_decomposer</span> <span class="k">import</span> <span class="n">MSBasisDecomposer</span>
 <span class="kn">from</span> <span class="nn">qiskit.transpiler.exceptions</span> <span class="k">import</span> <span class="n">TranspilerError</span>
 
 
@@ -221,6 +222,19 @@
 
     <span class="c1"># or we choose an appropriate one based on desired optimization level (default: level 1)</span>
     <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Workaround for ion trap support: If basis gates includes</span>
+        <span class="c1"># Mølmer-Sørensen (rxx) and the circuit includes gates outside the basis,</span>
+        <span class="c1"># first unroll to u3, cx, then run MSBasisDecomposer to target basis.</span>
+        <span class="n">basic_insts</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;measure&#39;</span><span class="p">,</span> <span class="s1">&#39;reset&#39;</span><span class="p">,</span> <span class="s1">&#39;barrier&#39;</span><span class="p">,</span> <span class="s1">&#39;snapshot&#39;</span><span class="p">]</span>
+        <span class="n">device_insts</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">transpile_config</span><span class="o">.</span><span class="n">basis_gates</span><span class="p">)</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">basic_insts</span><span class="p">)</span>
+
+        <span class="n">ms_basis_swap</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="s1">&#39;rxx&#39;</span> <span class="ow">in</span> <span class="n">transpile_config</span><span class="o">.</span><span class="n">basis_gates</span> <span class="ow">and</span> \
+                <span class="ow">not</span> <span class="n">device_insts</span> <span class="o">&gt;=</span> <span class="n">circuit</span><span class="o">.</span><span class="n">count_ops</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">ms_basis_swap</span> <span class="o">=</span> <span class="n">transpile_config</span><span class="o">.</span><span class="n">basis_gates</span>
+            <span class="n">transpile_config</span><span class="o">.</span><span class="n">basis_gates</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="s1">&#39;u3&#39;</span><span class="p">,</span> <span class="s1">&#39;cx&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">union</span><span class="p">(</span>
+                <span class="n">transpile_config</span><span class="o">.</span><span class="n">basis_gates</span><span class="p">))</span>
+
         <span class="n">level</span> <span class="o">=</span> <span class="n">transpile_config</span><span class="o">.</span><span class="n">optimization_level</span>
         <span class="k">if</span> <span class="n">level</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">level</span> <span class="o">=</span> <span class="mi">1</span>
@@ -235,6 +249,9 @@
             <span class="n">pass_manager</span> <span class="o">=</span> <span class="n">level_3_pass_manager</span><span class="p">(</span><span class="n">transpile_config</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">TranspilerError</span><span class="p">(</span><span class="s2">&quot;optimization_level can range from 0 to 3.&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">ms_basis_swap</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">pass_manager</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">MSBasisDecomposer</span><span class="p">(</span><span class="n">ms_basis_swap</span><span class="p">))</span>
 
     <span class="c1"># Set a callback on the pass manager there is one</span>
     <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">transpile_config</span><span class="p">,</span> <span class="s1">&#39;callback&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>

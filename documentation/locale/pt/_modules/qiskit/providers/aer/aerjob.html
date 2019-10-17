@@ -33,7 +33,7 @@
        </script>
         <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
     
-    <title>qiskit.providers.aer.aerjob &#8212; Documentação Qiskit 0.12.2</title>
+    <title>qiskit.providers.aer.aerjob &#8212; Documentação Qiskit 0.13.0</title>
 
     <link rel="stylesheet" href="../../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -200,7 +200,6 @@
 <span class="kn">import</span> <span class="nn">functools</span>
 
 <span class="kn">from</span> <span class="nn">qiskit.providers</span> <span class="k">import</span> <span class="n">BaseJob</span><span class="p">,</span> <span class="n">JobStatus</span><span class="p">,</span> <span class="n">JobError</span>
-<span class="kn">from</span> <span class="nn">qiskit.qobj</span> <span class="k">import</span> <span class="n">validate_qobj_against_schema</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
@@ -252,7 +251,6 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_future</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">JobError</span><span class="p">(</span><span class="s2">&quot;We have already submitted the job!&quot;</span><span class="p">)</span>
 
-        <span class="n">validate_qobj_against_schema</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_qobj</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_future</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fn</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_job_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_qobj</span><span class="p">,</span>
                                              <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">_args</span><span class="p">)</span></div>
 

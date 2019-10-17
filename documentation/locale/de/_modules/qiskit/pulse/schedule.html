@@ -33,7 +33,7 @@
        </script>
         <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
     
-    <title>qiskit.pulse.schedule &#8212; Qiskit 0.12.2 Dokumentation</title>
+    <title>qiskit.pulse.schedule &#8212; Qiskit 0.13.0 Dokumentation</title>
 
     <link rel="stylesheet" href="../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -328,9 +328,9 @@
         <span class="k">for</span> <span class="n">insert_time</span><span class="p">,</span> <span class="n">child_sched</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_children</span><span class="p">:</span>
             <span class="k">yield from</span> <span class="n">child_sched</span><span class="o">.</span><span class="n">_instructions</span><span class="p">(</span><span class="n">time</span> <span class="o">+</span> <span class="n">insert_time</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Schedule.union"><a class="viewcode-back" href="../../../api/qiskit.pulse.Schedule.html#qiskit.pulse.Schedule.union">[Doku]</a>    <span class="k">def</span> <span class="nf">union</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">schedules</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">ScheduleComponent</span><span class="p">],</span>
+<div class="viewcode-block" id="Schedule.union"><a class="viewcode-back" href="../../../api/qiskit.pulse.Schedule.html#qiskit.pulse.Schedule.union">[Doku]</a>    <span class="k">def</span> <span class="nf">union</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">schedules</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ScheduleComponent</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">ScheduleComponent</span><span class="p">]],</span>
               <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Schedule&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return a new schedule which is the union of `self` and `schedule`.</span>
+        <span class="sd">&quot;&quot;&quot;Return a new schedule which is the union of both `self` and `schedules`.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            *schedules: Schedules to be take the union with this `Schedule`.</span>
@@ -338,7 +338,32 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
-        <span class="k">return</span> <span class="n">Schedule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">schedules</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span></div>
+        <span class="n">new_sched</span> <span class="o">=</span> <span class="n">Schedule</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">new_sched</span><span class="o">.</span><span class="n">_union</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">sched_pair</span> <span class="ow">in</span> <span class="n">schedules</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sched_pair</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+                <span class="n">sched_pair</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">sched_pair</span><span class="p">)</span>
+            <span class="n">new_sched</span><span class="o">.</span><span class="n">_union</span><span class="p">(</span><span class="n">sched_pair</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">new_sched</span></div>
+
+    <span class="k">def</span> <span class="nf">_union</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">ScheduleComponent</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s1">&#39;Schedule&#39;</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Mutably union `self` and `other` Schedule with shift time.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            other: Schedule with shift time to be take the union with this `Schedule`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">shift_time</span><span class="p">,</span> <span class="n">sched</span> <span class="o">=</span> <span class="n">other</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sched</span><span class="p">,</span> <span class="n">Schedule</span><span class="p">):</span>
+            <span class="n">shifted_children</span> <span class="o">=</span> <span class="n">sched</span><span class="o">.</span><span class="n">_children</span>
+            <span class="k">if</span> <span class="n">shift_time</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">shifted_children</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">((</span><span class="n">t</span> <span class="o">+</span> <span class="n">shift_time</span><span class="p">,</span> <span class="n">child</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span><span class="p">,</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">shifted_children</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__children</span> <span class="o">+=</span> <span class="n">shifted_children</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># isinstance(sched, Instruction)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__children</span> <span class="o">+=</span> <span class="p">(</span><span class="n">other</span><span class="p">,)</span>
+
+        <span class="n">sched_timeslots</span> <span class="o">=</span> <span class="n">sched</span><span class="o">.</span><span class="n">timeslots</span> <span class="k">if</span> <span class="n">shift_time</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">sched</span><span class="o">.</span><span class="n">timeslots</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">shift_time</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_timeslots</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeslots</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">sched_timeslots</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_buffer</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">,</span> <span class="n">sched</span><span class="o">.</span><span class="n">buffer</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Schedule.shift"><a class="viewcode-back" href="../../../api/qiskit.pulse.Schedule.html#qiskit.pulse.Schedule.shift">[Doku]</a>    <span class="k">def</span> <span class="nf">shift</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Schedule&#39;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Return a new schedule shifted forward by `time`.</span>

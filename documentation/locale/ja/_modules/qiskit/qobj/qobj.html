@@ -33,7 +33,7 @@
        </script>
         <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
     
-    <title>qiskit.qobj.qobj &#8212; Qiskit 0.12.2 ドキュメント</title>
+    <title>qiskit.qobj.qobj &#8212; Qiskit 0.13.0 ドキュメント</title>
 
     <link rel="stylesheet" href="../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -195,6 +195,7 @@
 
 <span class="sd">&quot;&quot;&quot;Model for Qobj.&quot;&quot;&quot;</span>
 
+<span class="kn">from</span> <span class="nn">marshmallow</span> <span class="k">import</span> <span class="n">pre_load</span>
 <span class="kn">from</span> <span class="nn">marshmallow.validate</span> <span class="k">import</span> <span class="n">Equal</span><span class="p">,</span> <span class="n">OneOf</span>
 
 <span class="kn">from</span> <span class="nn">qiskit.qobj.models.base</span> <span class="k">import</span> <span class="n">QobjExperimentSchema</span><span class="p">,</span> <span class="n">QobjConfigSchema</span><span class="p">,</span> <span class="n">QobjHeaderSchema</span>
@@ -219,13 +220,19 @@
     <span class="sd">&quot;&quot;&quot;Schema for Qobj.&quot;&quot;&quot;</span>
     <span class="c1"># Required properties.</span>
     <span class="n">qobj_id</span> <span class="o">=</span> <span class="n">String</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">schema_version</span> <span class="o">=</span> <span class="n">String</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">missing</span><span class="o">=</span><span class="n">QOBJ_VERSION</span><span class="p">)</span>
+    <span class="n">schema_version</span> <span class="o">=</span> <span class="n">String</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
     <span class="c1"># Required properties depend on Qobj type.</span>
     <span class="n">config</span> <span class="o">=</span> <span class="n">Nested</span><span class="p">(</span><span class="n">QobjConfigSchema</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">experiments</span> <span class="o">=</span> <span class="n">Nested</span><span class="p">(</span><span class="n">QobjExperimentSchema</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">header</span> <span class="o">=</span> <span class="n">Nested</span><span class="p">(</span><span class="n">QobjHeaderSchema</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="nb">type</span> <span class="o">=</span> <span class="n">String</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">validate</span><span class="o">=</span><span class="n">OneOf</span><span class="p">(</span><span class="n">choices</span><span class="o">=</span><span class="p">(</span><span class="n">QobjType</span><span class="o">.</span><span class="n">QASM</span><span class="p">,</span> <span class="n">QobjType</span><span class="o">.</span><span class="n">PULSE</span><span class="p">)))</span>
+
+    <span class="nd">@pre_load</span>
+    <span class="k">def</span> <span class="nf">add_schema_version</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">_</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add the schema version on loading.&quot;&quot;&quot;</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;schema_version&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">QOBJ_VERSION</span>
+        <span class="k">return</span> <span class="n">data</span>
 
 
 <span class="k">class</span> <span class="nc">QasmQobjSchema</span><span class="p">(</span><span class="n">QobjSchema</span><span class="p">):</span>
@@ -235,8 +242,13 @@
     <span class="n">config</span> <span class="o">=</span> <span class="n">Nested</span><span class="p">(</span><span class="n">QasmQobjConfigSchema</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">experiments</span> <span class="o">=</span> <span class="n">Nested</span><span class="p">(</span><span class="n">QasmQobjExperimentSchema</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-    <span class="nb">type</span> <span class="o">=</span> <span class="n">String</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">validate</span><span class="o">=</span><span class="n">Equal</span><span class="p">(</span><span class="n">QobjType</span><span class="o">.</span><span class="n">QASM</span><span class="p">),</span>
-                  <span class="n">missing</span><span class="o">=</span><span class="n">QobjType</span><span class="o">.</span><span class="n">QASM</span><span class="p">)</span>
+    <span class="nb">type</span> <span class="o">=</span> <span class="n">String</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">validate</span><span class="o">=</span><span class="n">Equal</span><span class="p">(</span><span class="n">QobjType</span><span class="o">.</span><span class="n">QASM</span><span class="p">))</span>
+
+    <span class="nd">@pre_load</span>
+    <span class="k">def</span> <span class="nf">add_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">_</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add the Qobj type (QASM) on loading.&quot;&quot;&quot;</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">QobjType</span><span class="o">.</span><span class="n">QASM</span><span class="o">.</span><span class="n">value</span>
+        <span class="k">return</span> <span class="n">data</span>
 
 
 <span class="k">class</span> <span class="nc">PulseQobjSchema</span><span class="p">(</span><span class="n">QobjSchema</span><span class="p">):</span>
@@ -246,8 +258,13 @@
     <span class="n">config</span> <span class="o">=</span> <span class="n">Nested</span><span class="p">(</span><span class="n">PulseQobjConfigSchema</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">experiments</span> <span class="o">=</span> <span class="n">Nested</span><span class="p">(</span><span class="n">PulseQobjExperimentSchema</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-    <span class="nb">type</span> <span class="o">=</span> <span class="n">String</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">validate</span><span class="o">=</span><span class="n">Equal</span><span class="p">(</span><span class="n">QobjType</span><span class="o">.</span><span class="n">PULSE</span><span class="p">),</span>
-                  <span class="n">missing</span><span class="o">=</span><span class="n">QobjType</span><span class="o">.</span><span class="n">PULSE</span><span class="p">)</span>
+    <span class="nb">type</span> <span class="o">=</span> <span class="n">String</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">validate</span><span class="o">=</span><span class="n">Equal</span><span class="p">(</span><span class="n">QobjType</span><span class="o">.</span><span class="n">PULSE</span><span class="p">))</span>
+
+    <span class="nd">@pre_load</span>
+    <span class="k">def</span> <span class="nf">add_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">_</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add the Qobj type (PULSE) on loading.&quot;&quot;&quot;</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">QobjType</span><span class="o">.</span><span class="n">PULSE</span><span class="o">.</span><span class="n">value</span>
+        <span class="k">return</span> <span class="n">data</span>
 
 
 <div class="viewcode-block" id="Qobj"><a class="viewcode-back" href="../../../api/qiskit.qobj.Qobj.html#qiskit.qobj.Qobj">[ドキュメント]</a><span class="nd">@bind_schema</span><span class="p">(</span><span class="n">QobjSchema</span><span class="p">)</span>
@@ -271,7 +288,6 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">experiments</span> <span class="o">=</span> <span class="n">experiments</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">header</span> <span class="o">=</span> <span class="n">header</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="nb">type</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">schema_version</span> <span class="o">=</span> <span class="n">QOBJ_VERSION</span>
 
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
@@ -290,15 +306,10 @@
 <span class="sd">        header (QobjHeader): headers.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qobj_id</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">experiments</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-
-        <span class="c1"># to avoid specifying &#39;type&#39; here within from_dict()</span>
-        <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">qobj_id</span><span class="o">=</span><span class="n">qobj_id</span><span class="p">,</span>
                          <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span>
                          <span class="n">experiments</span><span class="o">=</span><span class="n">experiments</span><span class="p">,</span>
                          <span class="n">header</span><span class="o">=</span><span class="n">header</span><span class="p">,</span>
-                         <span class="nb">type</span><span class="o">=</span><span class="n">QobjType</span><span class="o">.</span><span class="n">QASM</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
                          <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 
@@ -316,15 +327,10 @@
 <span class="sd">        header (QobjHeader): headers.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qobj_id</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">experiments</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-
-        <span class="c1"># to avoid specifying &#39;type&#39; here within from_dict()</span>
-        <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">qobj_id</span><span class="o">=</span><span class="n">qobj_id</span><span class="p">,</span>
                          <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span>
                          <span class="n">experiments</span><span class="o">=</span><span class="n">experiments</span><span class="p">,</span>
                          <span class="n">header</span><span class="o">=</span><span class="n">header</span><span class="p">,</span>
-                         <span class="nb">type</span><span class="o">=</span><span class="n">QobjType</span><span class="o">.</span><span class="n">PULSE</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
                          <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 </pre></div>
 

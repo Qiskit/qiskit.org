@@ -33,7 +33,7 @@
        </script>
         <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
     
-    <title>qiskit.circuit.instruction &#8212; Documentação Qiskit 0.12.2</title>
+    <title>qiskit.circuit.instruction &#8212; Documentação Qiskit 0.13.0</title>
 
     <link rel="stylesheet" href="../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -215,6 +215,8 @@
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">copy</span>
 <span class="kn">from</span> <span class="nn">itertools</span> <span class="k">import</span> <span class="n">zip_longest</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+
 <span class="kn">import</span> <span class="nn">sympy</span>
 <span class="kn">import</span> <span class="nn">numpy</span>
 
@@ -233,11 +235,14 @@
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">num_qubits</span><span class="p">,</span> <span class="n">num_clbits</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create a new instruction.</span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            name (str): instruction name</span>
 <span class="sd">            num_qubits (int): instruction&#39;s qubit width</span>
 <span class="sd">            num_clbits (int): instruction&#39;s clbit width</span>
-<span class="sd">            params (list[sympy.Basic|qasm.Node|int|float|complex|str|ndarray]): list of parameters</span>
+<span class="sd">            params (list[sympy.Basic||int|float|complex|str|ParameterExpressionndarray]): list of</span>
+<span class="sd">                parameters</span>
+
 <span class="sd">        Raises:</span>
 <span class="sd">            QiskitError: when the register is not in the correct format.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -254,7 +259,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_params</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># a list of gate params stored</span>
 
         <span class="c1"># tuple (ClassicalRegister, int) when the instruction has a conditional (&quot;if&quot;)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">control</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">condition</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="c1"># list of instructions (and their contexts) that this instruction is composed of</span>
         <span class="c1"># empty definition means opaque or fundamental instruction</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_definition</span> <span class="o">=</span> <span class="kc">None</span>
@@ -321,6 +326,15 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">_params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">single_param</span><span class="p">)</span>
             <span class="c1"># example: OpenQASM parsed instruction</span>
             <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">single_param</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">Node</span><span class="p">):</span>
+                <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;Using qasm ast node as a circuit.Instruction &#39;</span>
+                              <span class="s1">&#39;parameter is deprecated as of the 0.10.0, and &#39;</span>
+                              <span class="s1">&#39;will be removed no earlier than 3 months after &#39;</span>
+                              <span class="s1">&#39;that release date. You should convert the qasm &#39;</span>
+                              <span class="s1">&#39;node to a supported type int, float, complex, &#39;</span>
+                              <span class="s1">&#39;str, circuit.ParameterExpression, or ndarray &#39;</span>
+                              <span class="s1">&#39;before setting Instruction.parameters&#39;</span><span class="p">,</span>
+                              <span class="ne">DeprecationWarning</span><span class="p">,</span> <span class="n">stacklevel</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
                 <span class="bp">self</span><span class="o">.</span><span class="n">_params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">single_param</span><span class="o">.</span><span class="n">sym</span><span class="p">())</span>
             <span class="c1"># example: u3(0.1, 0.2, 0.3)</span>
             <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">single_param</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
@@ -376,11 +390,11 @@
             <span class="n">instruction</span><span class="o">.</span><span class="n">qubits</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_qubits</span><span class="p">))</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_clbits</span><span class="p">:</span>
             <span class="n">instruction</span><span class="o">.</span><span class="n">memory</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_clbits</span><span class="p">))</span>
-        <span class="c1"># Add control parameters for assembler. This is needed to convert</span>
+        <span class="c1"># Add condition parameters for assembler. This is needed to convert</span>
         <span class="c1"># to a qobj conditional instruction at assemble time and after</span>
         <span class="c1"># conversion will be deleted by the assembler.</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">control</span><span class="p">:</span>
-            <span class="n">instruction</span><span class="o">.</span><span class="n">_control</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">control</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">condition</span><span class="p">:</span>
+            <span class="n">instruction</span><span class="o">.</span><span class="n">_condition</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">condition</span>
         <span class="k">return</span> <span class="n">instruction</span></div>
 
 <div class="viewcode-block" id="Instruction.mirror"><a class="viewcode-back" href="../../../api/qiskit.circuit.Instruction.html#qiskit.circuit.Instruction.mirror">[documentos]</a>    <span class="k">def</span> <span class="nf">mirror</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -426,12 +440,12 @@
         <span class="k">return</span> <span class="n">inverse_gate</span></div>
 
 <div class="viewcode-block" id="Instruction.c_if"><a class="viewcode-back" href="../../../api/qiskit.circuit.Instruction.html#qiskit.circuit.Instruction.c_if">[documentos]</a>    <span class="k">def</span> <span class="nf">c_if</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">classical</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Add classical control on register classical and value val.&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Add classical condition on register classical and value val.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">classical</span><span class="p">,</span> <span class="n">ClassicalRegister</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;c_if must be used with a classical register&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">val</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;control value should be non-negative&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">control</span> <span class="o">=</span> <span class="p">(</span><span class="n">classical</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;condition value should be non-negative&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">condition</span> <span class="o">=</span> <span class="p">(</span><span class="n">classical</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span></div>
 
 <div class="viewcode-block" id="Instruction.copy"><a class="viewcode-back" href="../../../api/qiskit.circuit.Instruction.html#qiskit.circuit.Instruction.copy">[documentos]</a>    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -453,9 +467,9 @@
 
     <span class="k">def</span> <span class="nf">_qasmif</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Print an if statement if needed.&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">control</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">condition</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">string</span>
-        <span class="k">return</span> <span class="s2">&quot;if(</span><span class="si">%s</span><span class="s2">==</span><span class="si">%d</span><span class="s2">) &quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">control</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">control</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="n">string</span>
+        <span class="k">return</span> <span class="s2">&quot;if(</span><span class="si">%s</span><span class="s2">==</span><span class="si">%d</span><span class="s2">) &quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">condition</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">condition</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="n">string</span>
 
 <div class="viewcode-block" id="Instruction.qasm"><a class="viewcode-back" href="../../../api/qiskit.circuit.Instruction.html#qiskit.circuit.Instruction.qasm">[documentos]</a>    <span class="k">def</span> <span class="nf">qasm</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return a default OpenQASM string for the instruction.</span>
@@ -520,7 +534,22 @@
         <span class="n">cargs</span> <span class="o">=</span> <span class="p">[]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_clbits</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_clbits</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">)</span>
 
         <span class="n">instruction</span><span class="o">.</span><span class="n">definition</span> <span class="o">=</span> <span class="p">[(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qargs</span><span class="p">[:],</span> <span class="n">cargs</span><span class="p">[:])]</span> <span class="o">*</span> <span class="n">n</span>
-        <span class="k">return</span> <span class="n">instruction</span></div></div>
+        <span class="k">return</span> <span class="n">instruction</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">control</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;temporary classical control. Will be deprecated.&quot;&quot;&quot;</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;The instruction attribute, &quot;control&quot;, will be renamed &#39;</span>
+                      <span class="s1">&#39;to &quot;condition&quot;. The &quot;control&quot; method will later be used &#39;</span>
+                      <span class="s1">&#39;to create quantum controlled gates&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">condition</span>
+
+    <span class="nd">@control</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">control</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;The instruction attribute, &quot;control&quot;, will be renamed &#39;</span>
+                      <span class="s1">&#39;to &quot;condition&quot;. The &quot;control&quot; method will later be used &#39;</span>
+                      <span class="s1">&#39;to create quantum controlled gates&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">condition</span> <span class="o">=</span> <span class="n">value</span></div>
 </pre></div>
 
         </div>

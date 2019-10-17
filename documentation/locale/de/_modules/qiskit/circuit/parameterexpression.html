@@ -33,7 +33,7 @@
        </script>
         <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
     
-    <title>qiskit.circuit.parameterexpression &#8212; Qiskit 0.12.2 Dokumentation</title>
+    <title>qiskit.circuit.parameterexpression &#8212; Qiskit 0.13.0 Dokumentation</title>
 
     <link rel="stylesheet" href="../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -340,7 +340,7 @@
 
 <span class="sd">        Args:</span>
 <span class="sd">            operation (function): One of operator.{add,sub,mul,truediv}.</span>
-<span class="sd">            other (Parameter or number.real): The second argument to be used</span>
+<span class="sd">            other (Parameter or numbers.Real): The second argument to be used</span>
 <span class="sd">               with self in operation.</span>
 <span class="sd">            reflected (bool): Optional - The default ordering is</span>
 <span class="sd">                &quot;self operator other&quot;. If reflected is True, this is switched</span>
@@ -392,6 +392,9 @@
     <span class="k">def</span> <span class="nf">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apply_operation</span><span class="p">(</span><span class="n">operator</span><span class="o">.</span><span class="n">mul</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
 
+    <span class="k">def</span> <span class="nf">__neg__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apply_operation</span><span class="p">(</span><span class="n">operator</span><span class="o">.</span><span class="n">mul</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">)</span>
+
     <span class="k">def</span> <span class="nf">__rmul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apply_operation</span><span class="p">(</span><span class="n">operator</span><span class="o">.</span><span class="n">mul</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">reflected</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
@@ -413,7 +416,6 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;ParameterExpression with unbound parameters (</span><span class="si">{}</span><span class="s1">) &#39;</span>
                             <span class="s1">&#39;cannot be cast to a float.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">))</span>
-
         <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_symbol_expr</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__copy__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>

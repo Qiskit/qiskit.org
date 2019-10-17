@@ -33,7 +33,7 @@
        </script>
         <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
     
-    <title>qiskit.circuit.gate &#8212; Documentação Qiskit 0.12.2</title>
+    <title>qiskit.circuit.gate &#8212; Documentação Qiskit 0.13.0</title>
 
     <link rel="stylesheet" href="../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -195,6 +195,9 @@
 
 <span class="sd">&quot;&quot;&quot;Unitary gate.&quot;&quot;&quot;</span>
 
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.linalg</span> <span class="k">import</span> <span class="n">schur</span>
+
 <span class="kn">from</span> <span class="nn">qiskit.exceptions</span> <span class="k">import</span> <span class="n">QiskitError</span>
 <span class="kn">from</span> <span class="nn">.instruction</span> <span class="k">import</span> <span class="n">Instruction</span>
 
@@ -222,6 +225,35 @@
 <span class="sd">                exception will be raised when this base class method is called.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;to_matrix not defined for this </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)))</span></div>
+
+<div class="viewcode-block" id="Gate.power"><a class="viewcode-back" href="../../../api/qiskit.circuit.Gate.html#qiskit.circuit.Gate.power">[documentos]</a>    <span class="k">def</span> <span class="nf">power</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exponent</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Creates a unitary gate as `gate^exponent`.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            exponent (float): Gate^exponent</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            UnitaryGate: To which `to_matrix` is self.to_matrix^exponent.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            QiskitError: If Gate is not unitary</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">qiskit.extensions.unitary</span> <span class="k">import</span> <span class="n">UnitaryGate</span>  <span class="c1"># pylint: disable=cyclic-import</span>
+        <span class="c1"># Should be diagonalized because it&#39;s a unitary.</span>
+        <span class="n">decomposition</span><span class="p">,</span> <span class="n">unitary</span> <span class="o">=</span> <span class="n">schur</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">to_matrix</span><span class="p">(),</span> <span class="n">output</span><span class="o">=</span><span class="s1">&#39;complex&#39;</span><span class="p">)</span>
+        <span class="c1"># Raise the diagonal entries to the specified power</span>
+        <span class="n">decomposition_power</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+
+        <span class="n">decomposition_diagonal</span> <span class="o">=</span> <span class="n">decomposition</span><span class="o">.</span><span class="n">diagonal</span><span class="p">()</span>
+        <span class="c1"># assert off-diagonal are 0</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">decomposition_diagonal</span><span class="p">),</span> <span class="n">decomposition</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s1">&#39;The matrix is not diagonal&#39;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">decomposition_diagonal</span><span class="p">:</span>
+            <span class="n">decomposition_power</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">pow</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">exponent</span><span class="p">))</span>
+        <span class="c1"># Then reconstruct the resulting gate.</span>
+        <span class="n">unitary_power</span> <span class="o">=</span> <span class="n">unitary</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">decomposition_power</span><span class="p">)</span> <span class="o">@</span> <span class="n">unitary</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>
+        <span class="k">return</span> <span class="n">UnitaryGate</span><span class="p">(</span><span class="n">unitary_power</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">^</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">exponent</span><span class="p">))</span></div>
 
     <span class="k">def</span> <span class="nf">_return_repeat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exponent</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">Gate</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">*</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">exponent</span><span class="p">),</span> <span class="n">num_qubits</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_qubits</span><span class="p">,</span>

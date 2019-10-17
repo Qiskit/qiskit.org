@@ -33,7 +33,7 @@
        </script>
         <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
     
-    <title>qiskit.converters.circuit_to_dag &#8212; Documentação Qiskit 0.12.2</title>
+    <title>qiskit.converters.circuit_to_dag &#8212; Documentação Qiskit 0.13.0</title>
 
     <link rel="stylesheet" href="../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -215,8 +215,8 @@
         <span class="n">dagcircuit</span><span class="o">.</span><span class="n">add_creg</span><span class="p">(</span><span class="n">register</span><span class="p">)</span>
 
     <span class="k">for</span> <span class="n">instruction</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span> <span class="ow">in</span> <span class="n">circuit</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
-        <span class="n">dagcircuit</span><span class="o">.</span><span class="n">apply_operation_back</span><span class="p">(</span><span class="n">instruction</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span><span class="p">,</span> <span class="n">instruction</span><span class="o">.</span><span class="n">control</span><span class="p">)</span>
-
+        <span class="n">dagcircuit</span><span class="o">.</span><span class="n">apply_operation_back</span><span class="p">(</span><span class="n">instruction</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span><span class="p">,</span>
+                                        <span class="n">instruction</span><span class="o">.</span><span class="n">condition</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">dagcircuit</span></div>
 </pre></div>
 

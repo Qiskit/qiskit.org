@@ -33,7 +33,7 @@
        </script>
         <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
     
-    <title>qiskit.visualization.pulse_visualization &#8212; Qiskit 0.12.2 Dokumentation</title>
+    <title>qiskit.visualization.pulse_visualization &#8212; Qiskit 0.13.0 Dokumentation</title>
 
     <link rel="stylesheet" href="../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -203,6 +203,9 @@
 <span class="kn">from</span> <span class="nn">qiskit.visualization.exceptions</span> <span class="k">import</span> <span class="n">VisualizationError</span>
 <span class="kn">from</span> <span class="nn">qiskit.visualization.pulse</span> <span class="k">import</span> <span class="n">matplotlib</span> <span class="k">as</span> <span class="n">_matplotlib</span>
 
+<span class="k">if</span> <span class="n">_matplotlib</span><span class="o">.</span><span class="n">HAS_MATPLOTLIB</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">get_backend</span>
+
 
 <div class="viewcode-block" id="pulse_drawer"><a class="viewcode-back" href="../../../api/qiskit.visualization.pulse_drawer.html#qiskit.visualization.pulse_drawer">[Doku]</a><span class="k">def</span> <span class="nf">pulse_drawer</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">interp_method</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">scaling</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">channels_to_plot</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -231,7 +234,10 @@
 <span class="sd">        matplotlib.figure: A matplotlib figure object for the pulse envelope</span>
 <span class="sd">    Raises:</span>
 <span class="sd">        VisualizationError: when invalid data is given or lack of information</span>
+<span class="sd">        ImportError: when matplotlib is not installed</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">_matplotlib</span><span class="o">.</span><span class="n">HAS_MATPLOTLIB</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s1">&#39;Must have Matplotlib installed.&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">SamplePulse</span><span class="p">):</span>
         <span class="n">drawer</span> <span class="o">=</span> <span class="n">_matplotlib</span><span class="o">.</span><span class="n">SamplePulseDrawer</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="n">style</span><span class="p">)</span>
         <span class="n">image</span> <span class="o">=</span> <span class="n">drawer</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="n">dt</span><span class="p">,</span> <span class="n">interp_method</span><span class="o">=</span><span class="n">interp_method</span><span class="p">,</span> <span class="n">scaling</span><span class="o">=</span><span class="n">scaling</span><span class="p">)</span>
@@ -247,7 +253,9 @@
     <span class="k">if</span> <span class="n">filename</span><span class="p">:</span>
         <span class="n">image</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="n">drawer</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">dpi</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
 
-    <span class="n">_matplotlib</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">get_backend</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;module://ipykernel.pylab.backend_inline&#39;</span><span class="p">,</span>
+                         <span class="s1">&#39;nbAgg&#39;</span><span class="p">]:</span>
+        <span class="n">_matplotlib</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">image</span> <span class="ow">and</span> <span class="n">interactive</span><span class="p">:</span>
         <span class="n">image</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">image</span></div>

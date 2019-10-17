@@ -33,7 +33,7 @@
        </script>
         <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
     
-    <title>qiskit.extensions.quantum_initializer.ucx &#8212; Documentação Qiskit 0.12.2</title>
+    <title>qiskit.extensions.quantum_initializer.ucx &#8212; Documentação Qiskit 0.13.0</title>
 
     <link rel="stylesheet" href="../../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -227,27 +227,27 @@
 
 
 <span class="k">def</span> <span class="nf">ucx</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">angle_list</span><span class="p">,</span> <span class="n">q_controls</span><span class="p">,</span> <span class="n">q_target</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Attach a uniformly controlled (also called multiplexed) Rx rotation gate to a circuit.</span>
+    <span class="sd">&quot;&quot;&quot;Attach a uniformly controlled (also called multiplexed) Rx rotation gate to a circuit.</span>
+
 <span class="sd">    The decomposition is base on https://arxiv.org/pdf/quant-ph/0406176.pdf by Shende et al.</span>
 
-<span class="sd">        Args:</span>
-<span class="sd">            angle_list (list): list of (real) rotation angles [a_0,...,a_{2^k-1}]</span>
-<span class="sd">            q_controls (QuantumRegister|list): list of k control qubits</span>
-<span class="sd">                (or empty list if no controls). The control qubits are ordered according to their</span>
-<span class="sd">                significance in increasing order: For example if q_controls=[q[1],q[2]]</span>
-<span class="sd">                (with q = QuantumRegister(2)), the rotation Rx(a_0)is performed if q[1] and q[2]</span>
-<span class="sd">                are in the state zero, the rotation  Rx(a_1) is performed if q[1] is in the state</span>
-<span class="sd">                 one and q[2] is in the state zero, and so on</span>
-<span class="sd">            q_target (QuantumRegister|Qubit): target qubit, where we act on with</span>
-<span class="sd">                the single-qubit rotation gates</span>
+<span class="sd">    Args:</span>
+<span class="sd">        angle_list (list): list of (real) rotation angles [a_0,...,a_{2^k-1}]</span>
+<span class="sd">        q_controls (QuantumRegister|list): list of k control qubits</span>
+<span class="sd">            (or empty list if no controls). The control qubits are ordered according to their</span>
+<span class="sd">            significance in increasing order: For example if q_controls=[q[1],q[2]]</span>
+<span class="sd">            (with q = QuantumRegister(2)), the rotation Rx(a_0)is performed if q[1] and q[2]</span>
+<span class="sd">            are in the state zero, the rotation  Rx(a_1) is performed if q[1] is in the state</span>
+<span class="sd">             one and q[2] is in the state zero, and so on</span>
+<span class="sd">        q_target (QuantumRegister|Qubit): target qubit, where we act on with</span>
+<span class="sd">            the single-qubit rotation gates</span>
 
-<span class="sd">        Returns:</span>
-<span class="sd">            QuantumCircuit: the uniformly controlled rotation gate is attached to the circuit.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        QuantumCircuit: the uniformly controlled rotation gate is attached to the circuit.</span>
 
-<span class="sd">        Raises:</span>
-<span class="sd">            QiskitError: if the list number of control qubits does not correspond to the provided</span>
-<span class="sd">                number of single-qubit unitaries; if an input is of the wrong type</span>
+<span class="sd">    Raises:</span>
+<span class="sd">        QiskitError: if the list number of control qubits does not correspond to the provided</span>
+<span class="sd">            number of single-qubit unitaries; if an input is of the wrong type</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">q_controls</span><span class="p">,</span> <span class="n">QuantumRegister</span><span class="p">):</span>
