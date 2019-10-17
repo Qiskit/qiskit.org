@@ -33,7 +33,7 @@
        </script>
         <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
     
-    <title>qiskit.pulse.channels.pulse_channels &#8212; Qiskit 0.12.2 documentation</title>
+    <title>qiskit.transpiler.passes.remove_final_measurements &#8212; Qiskit 0.13.0 documentation</title>
 
     <link rel="stylesheet" href="../../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -177,7 +177,7 @@
     <div class="document">
         <div class="page-content">
         
-  <h1>Source code for qiskit.pulse.channels.pulse_channels</h1><div class="highlight"><pre>
+  <h1>Source code for qiskit.transpiler.passes.remove_final_measurements</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
 <span class="c1"># This code is part of Qiskit.</span>
@@ -192,35 +192,80 @@
 <span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
 <span class="c1"># that they have been altered from the originals.</span>
 
+
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Channels support signal output.</span>
+<span class="sd">This pass removes final barriers and final measurements, as well as the</span>
+<span class="sd">ClassicalRegisters they are connected to if the ClassicalRegister</span>
+<span class="sd">is unused. Measurements and barriers are considered final if they are</span>
+<span class="sd">followed by no other operations (aside from other measurements or barriers.)</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">abc</span> <span class="k">import</span> <span class="n">ABCMeta</span>
 
-<span class="kn">from</span> <span class="nn">.channels</span> <span class="k">import</span> <span class="n">Channel</span>
-
-
-<span class="k">class</span> <span class="nc">PulseChannel</span><span class="p">(</span><span class="n">Channel</span><span class="p">,</span> <span class="n">metaclass</span><span class="o">=</span><span class="n">ABCMeta</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Base class of Channel supporting pulse output.&quot;&quot;&quot;</span>
-    <span class="k">pass</span>
+<span class="kn">from</span> <span class="nn">qiskit.transpiler.basepasses</span> <span class="k">import</span> <span class="n">TransformationPass</span>
+<span class="kn">from</span> <span class="nn">qiskit.dagcircuit</span> <span class="k">import</span> <span class="n">DAGCircuit</span>
 
 
-<div class="viewcode-block" id="DriveChannel"><a class="viewcode-back" href="../../../../api/qiskit.pulse.DriveChannel.html#qiskit.pulse.DriveChannel">[docs]</a><span class="k">class</span> <span class="nc">DriveChannel</span><span class="p">(</span><span class="n">PulseChannel</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Drive Channel.&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="RemoveFinalMeasurements"><a class="viewcode-back" href="../../../../api/qiskit.transpiler.passes.RemoveFinalMeasurements.html#qiskit.transpiler.passes.RemoveFinalMeasurements">[docs]</a><span class="k">class</span> <span class="nc">RemoveFinalMeasurements</span><span class="p">(</span><span class="n">TransformationPass</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Removes final measurements and barriers at the end of a circuit.&quot;&quot;&quot;</span>
 
-    <span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;d&#39;</span></div>
+<div class="viewcode-block" id="RemoveFinalMeasurements.run"><a class="viewcode-back" href="../../../../api/qiskit.transpiler.passes.RemoveFinalMeasurements.html#qiskit.transpiler.passes.RemoveFinalMeasurements.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dag</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return a circuit with final measurements and barriers removed.&quot;&quot;&quot;</span>
 
+        <span class="n">final_op_types</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;measure&#39;</span><span class="p">,</span> <span class="s1">&#39;barrier&#39;</span><span class="p">]</span>
+        <span class="n">final_ops</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">cregs_to_remove</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="n">clbits_with_final_measures</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
 
-<div class="viewcode-block" id="MeasureChannel"><a class="viewcode-back" href="../../../../api/qiskit.pulse.MeasureChannel.html#qiskit.pulse.MeasureChannel">[docs]</a><span class="k">class</span> <span class="nc">MeasureChannel</span><span class="p">(</span><span class="n">PulseChannel</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Measure Channel.&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">candidate_node</span> <span class="ow">in</span> <span class="n">dag</span><span class="o">.</span><span class="n">named_nodes</span><span class="p">(</span><span class="o">*</span><span class="n">final_op_types</span><span class="p">):</span>
+            <span class="n">is_final_op</span> <span class="o">=</span> <span class="kc">True</span>
 
-    <span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;m&#39;</span></div>
+            <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">child_successors</span> <span class="ow">in</span> <span class="n">dag</span><span class="o">.</span><span class="n">bfs_successors</span><span class="p">(</span><span class="n">candidate_node</span><span class="p">):</span>
+                <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">suc</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s1">&#39;op&#39;</span> <span class="ow">and</span> <span class="n">suc</span><span class="o">.</span><span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">final_op_types</span>
+                       <span class="k">for</span> <span class="n">suc</span> <span class="ow">in</span> <span class="n">child_successors</span><span class="p">):</span>
+                    <span class="n">is_final_op</span> <span class="o">=</span> <span class="kc">False</span>
+                    <span class="k">break</span>
 
+            <span class="k">if</span> <span class="n">is_final_op</span><span class="p">:</span>
+                <span class="n">final_ops</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">candidate_node</span><span class="p">)</span>
 
-<div class="viewcode-block" id="ControlChannel"><a class="viewcode-back" href="../../../../api/qiskit.pulse.ControlChannel.html#qiskit.pulse.ControlChannel">[docs]</a><span class="k">class</span> <span class="nc">ControlChannel</span><span class="p">(</span><span class="n">PulseChannel</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Control Channel.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">final_ops</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">dag</span>
 
-    <span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;u&#39;</span></div>
+        <span class="n">new_dag</span> <span class="o">=</span> <span class="n">DAGCircuit</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">final_ops</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">carg</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">cargs</span><span class="p">:</span>
+                <span class="c1"># Add the clbit that was attached to the measure we are removing</span>
+                <span class="n">clbits_with_final_measures</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">carg</span><span class="p">)</span>
+            <span class="n">dag</span><span class="o">.</span><span class="n">remove_op_node</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+
+        <span class="c1"># If the clbit is idle, add its register to list of registers we may remove</span>
+        <span class="k">for</span> <span class="n">clbit</span> <span class="ow">in</span> <span class="n">clbits_with_final_measures</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">clbit</span> <span class="ow">in</span> <span class="n">dag</span><span class="o">.</span><span class="n">idle_wires</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">clbit</span><span class="o">.</span><span class="n">register</span> <span class="ow">in</span> <span class="n">cregs_to_remove</span><span class="p">:</span>
+                    <span class="n">cregs_to_remove</span><span class="p">[</span><span class="n">clbit</span><span class="o">.</span><span class="n">register</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">cregs_to_remove</span><span class="p">[</span><span class="n">clbit</span><span class="o">.</span><span class="n">register</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+        <span class="c1"># Remove creg if all of its clbits were added above</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">dag</span><span class="o">.</span><span class="n">cregs</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span> <span class="nb">list</span><span class="p">(</span><span class="n">dag</span><span class="o">.</span><span class="n">cregs</span><span class="o">.</span><span class="n">values</span><span class="p">())):</span>
+            <span class="k">if</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">cregs_to_remove</span> <span class="ow">and</span> <span class="n">cregs_to_remove</span><span class="p">[</span><span class="n">val</span><span class="p">]</span> <span class="o">==</span> <span class="n">val</span><span class="o">.</span><span class="n">size</span><span class="p">:</span>
+                <span class="k">del</span> <span class="n">dag</span><span class="o">.</span><span class="n">cregs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+
+        <span class="c1"># Fill new DAGCircuit</span>
+        <span class="k">for</span> <span class="n">qreg</span> <span class="ow">in</span> <span class="n">dag</span><span class="o">.</span><span class="n">qregs</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="n">new_dag</span><span class="o">.</span><span class="n">add_qreg</span><span class="p">(</span><span class="n">qreg</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">creg</span> <span class="ow">in</span> <span class="n">dag</span><span class="o">.</span><span class="n">cregs</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="n">new_dag</span><span class="o">.</span><span class="n">add_creg</span><span class="p">(</span><span class="n">creg</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">dag</span><span class="o">.</span><span class="n">topological_op_nodes</span><span class="p">():</span>
+            <span class="c1"># copy the condition over too</span>
+            <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">condition</span><span class="p">:</span>
+                <span class="n">new_dag</span><span class="o">.</span><span class="n">apply_operation_back</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">op</span><span class="p">,</span> <span class="n">qargs</span><span class="o">=</span><span class="n">node</span><span class="o">.</span><span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span><span class="o">=</span><span class="n">node</span><span class="o">.</span><span class="n">cargs</span><span class="p">,</span>
+                                             <span class="n">condition</span><span class="o">=</span><span class="n">node</span><span class="o">.</span><span class="n">condition</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">new_dag</span><span class="o">.</span><span class="n">apply_operation_back</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">op</span><span class="p">,</span> <span class="n">qargs</span><span class="o">=</span><span class="n">node</span><span class="o">.</span><span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span><span class="o">=</span><span class="n">node</span><span class="o">.</span><span class="n">cargs</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">new_dag</span></div></div>
 </pre></div>
 
         </div>

@@ -33,7 +33,7 @@
        </script>
         <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
     
-    <title>qiskit.converters.dag_to_circuit &#8212; Qiskit 0.12.2 documentation</title>
+    <title>qiskit.converters.dag_to_circuit &#8212; Qiskit 0.13.0 documentation</title>
 
     <link rel="stylesheet" href="../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -193,11 +193,7 @@
 <span class="c1"># that they have been altered from the originals.</span>
 
 <span class="sd">&quot;&quot;&quot;Helper function for converting a dag to a circuit&quot;&quot;&quot;</span>
-<span class="kn">import</span> <span class="nn">collections</span>
-
 <span class="kn">from</span> <span class="nn">qiskit.circuit</span> <span class="k">import</span> <span class="n">QuantumCircuit</span>
-<span class="kn">from</span> <span class="nn">qiskit.circuit</span> <span class="k">import</span> <span class="n">ClassicalRegister</span>
-<span class="kn">from</span> <span class="nn">qiskit.circuit</span> <span class="k">import</span> <span class="n">QuantumRegister</span>
 
 
 <div class="viewcode-block" id="dag_to_circuit"><a class="viewcode-back" href="../../../api/qiskit.converters.dag_to_circuit.html#qiskit.converters.dag_to_circuit">[docs]</a><span class="k">def</span> <span class="nf">dag_to_circuit</span><span class="p">(</span><span class="n">dag</span><span class="p">):</span>
@@ -209,31 +205,16 @@
 <span class="sd">    Return:</span>
 <span class="sd">        QuantumCircuit: the circuit representing the input dag.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">qregs</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">OrderedDict</span><span class="p">()</span>
-    <span class="k">for</span> <span class="n">qreg</span> <span class="ow">in</span> <span class="n">dag</span><span class="o">.</span><span class="n">qregs</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-        <span class="n">qreg_tmp</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="n">qreg</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">qreg</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-        <span class="n">qregs</span><span class="p">[</span><span class="n">qreg</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">qreg_tmp</span>
-    <span class="n">cregs</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">OrderedDict</span><span class="p">()</span>
-    <span class="k">for</span> <span class="n">creg</span> <span class="ow">in</span> <span class="n">dag</span><span class="o">.</span><span class="n">cregs</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-        <span class="n">creg_tmp</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="n">creg</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">creg</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-        <span class="n">cregs</span><span class="p">[</span><span class="n">creg</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">creg_tmp</span>
 
     <span class="n">name</span> <span class="o">=</span> <span class="n">dag</span><span class="o">.</span><span class="n">name</span> <span class="ow">or</span> <span class="kc">None</span>
-    <span class="n">circuit</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="o">*</span><span class="n">qregs</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span> <span class="o">*</span><span class="n">cregs</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">circuit</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="o">*</span><span class="n">dag</span><span class="o">.</span><span class="n">qregs</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span> <span class="o">*</span><span class="n">dag</span><span class="o">.</span><span class="n">cregs</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
 
     <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">dag</span><span class="o">.</span><span class="n">topological_op_nodes</span><span class="p">():</span>
-        <span class="n">qubits</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">qubit</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">qargs</span><span class="p">:</span>
-            <span class="n">qubits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">qregs</span><span class="p">[</span><span class="n">qubit</span><span class="o">.</span><span class="n">register</span><span class="o">.</span><span class="n">name</span><span class="p">][</span><span class="n">qubit</span><span class="o">.</span><span class="n">index</span><span class="p">])</span>
-
-        <span class="n">clbits</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">clbit</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">cargs</span><span class="p">:</span>
-            <span class="n">clbits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cregs</span><span class="p">[</span><span class="n">clbit</span><span class="o">.</span><span class="n">register</span><span class="o">.</span><span class="n">name</span><span class="p">][</span><span class="n">clbit</span><span class="o">.</span><span class="n">index</span><span class="p">])</span>
-
         <span class="c1"># Get arguments for classical control (if any)</span>
         <span class="n">inst</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">op</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-        <span class="n">inst</span><span class="o">.</span><span class="n">control</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">condition</span>
-        <span class="n">circuit</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">inst</span><span class="p">,</span> <span class="n">qubits</span><span class="p">,</span> <span class="n">clbits</span><span class="p">)</span>
+        <span class="n">inst</span><span class="o">.</span><span class="n">condition</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">condition</span>
+        <span class="n">circuit</span><span class="o">.</span><span class="n">_append</span><span class="p">(</span><span class="n">inst</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">qargs</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">cargs</span><span class="p">)</span>
+
     <span class="k">return</span> <span class="n">circuit</span></div>
 </pre></div>
 

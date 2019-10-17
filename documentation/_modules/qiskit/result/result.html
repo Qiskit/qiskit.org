@@ -33,7 +33,7 @@
        </script>
         <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
     
-    <title>qiskit.result.result &#8212; Qiskit 0.12.2 documentation</title>
+    <title>qiskit.result.result &#8212; Qiskit 0.13.0 documentation</title>
 
     <link rel="stylesheet" href="../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -411,7 +411,7 @@
 
 <span class="sd">        Args:</span>
 <span class="sd">            key (str or QuantumCircuit or Schedule or int or None): the index of the</span>
-<span class="sd">                experiment, as specified by ``get_data()``.</span>
+<span class="sd">                experiment, as specified by ``data()``.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            ExperimentResult: the results for an experiment.</span>
@@ -420,35 +420,37 @@
 <span class="sd">            QiskitError: if there is no data for the experiment, or an unhandled</span>
 <span class="sd">                error occurred while fetching the data.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;status&#39;</span><span class="p">,</span>
-                                      <span class="s1">&#39;Result was not successful&#39;</span><span class="p">))</span>
-
         <span class="c1"># Automatically return the first result if no key was provided.</span>
         <span class="k">if</span> <span class="n">key</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span>
                     <span class="s1">&#39;You have to select a circuit or schedule when there is more than &#39;</span>
                     <span class="s1">&#39;one available&#39;</span><span class="p">)</span>
-
             <span class="n">key</span> <span class="o">=</span> <span class="mi">0</span>
-
-        <span class="c1"># Key is an integer: return result by index.</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
 
         <span class="c1"># Key is a QuantumCircuit/Schedule or str: retrieve result by name.</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="p">(</span><span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">Schedule</span><span class="p">)):</span>
             <span class="n">key</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">name</span>
+        <span class="c1"># Key is an integer: return result by index.</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="n">exp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># Look into `result[x].header.name` for the names.</span>
+                <span class="n">exp</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">result</span> <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">results</span>
+                           <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s1">&#39;header&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+                                      <span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">key</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s1">&#39;Data for experiment &quot;</span><span class="si">%s</span><span class="s1">&quot; could not be found.&#39;</span> <span class="o">%</span>
+                                  <span class="n">key</span><span class="p">)</span>
 
-        <span class="k">try</span><span class="p">:</span>
-            <span class="c1"># Look into `result[x].header.name` for the names.</span>
-            <span class="k">return</span> <span class="nb">next</span><span class="p">(</span><span class="n">result</span> <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">results</span>
-                        <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s1">&#39;header&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-                                   <span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">key</span><span class="p">)</span>
-        <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s1">&#39;Data for experiment &quot;</span><span class="si">%s</span><span class="s1">&quot; could not be found.&#39;</span> <span class="o">%</span>
-                              <span class="n">key</span><span class="p">)</span></div>
+        <span class="c1"># Check that the retrieved experiment was successful</span>
+        <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">exp</span><span class="p">,</span> <span class="s1">&#39;success&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">exp</span>
+        <span class="c1"># If unsuccessful check experiment and result status and raise exception</span>
+        <span class="n">result_status</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;status&#39;</span><span class="p">,</span> <span class="s1">&#39;Result was not successful&#39;</span><span class="p">)</span>
+        <span class="n">exp_status</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">exp</span><span class="p">,</span> <span class="s1">&#39;status&#39;</span><span class="p">,</span> <span class="s1">&#39;Experiment was not successful&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="n">result_status</span><span class="p">,</span> <span class="s2">&quot;, &quot;</span><span class="p">,</span> <span class="n">exp_status</span><span class="p">)</span></div>
 </pre></div>
 
         </div>
