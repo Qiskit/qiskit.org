@@ -8,6 +8,9 @@ before_script:
 script:
   - npm run test
 before_deploy:
+  - curl -L https://clis.ng.bluemix.net/download/bluemix-cli/0.6.1/linux64 | tar -zx
+  - chmod -R u+x ./Bluemix_CLI/bin
+  - chmod +x ./deploy.sh
   - npm run build
   - cd server/
   # Prevent deploy stage from timing out waiting for output. The function
@@ -24,12 +27,8 @@ before_deploy:
     }
     keep_alive &
 deploy:
-    provider: cloudfoundry
-    username: apikey
-    password: $IBM_CLOUD_API_KEY
-    api: https://api.ng.bluemix.net
-    organization: $IBM_CLOUD_ORGANIZATION
-    space: $IBM_CLOUD_SPACE
-    app_name: Qiskit website
-    on:
-      branch: master
+  provider: script
+  script: ./deploy.sh
+  on:
+    branch: master
+  skip_cleanup: true
