@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" lang="pt">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de">
   <head>
     <meta charset="utf-8" />
     <meta charset="utf-8">
@@ -33,7 +33,7 @@
        </script>
         <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
     
-    <title>qiskit.pulse.channels.pulse_channels &#8212; Documentação Qiskit 0.12.2</title>
+    <title>qiskit.extensions.standard.rxx &#8212; Qiskit 0.13.0 Dokumentation</title>
 
     <link rel="stylesheet" href="../../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -58,8 +58,8 @@
     <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../../../../_static/favicon.ico"/>
-    <link rel="index" title="Índice" href="../../../../genindex.html" />
-    <link rel="search" title="Pesquisar" href="../../../../search.html" /> 
+    <link rel="index" title="Stichwortverzeichnis" href="../../../../genindex.html" />
+    <link rel="search" title="Suche" href="../../../../search.html" /> 
   </head>
 <body>
   <header>
@@ -178,7 +178,7 @@
     <div class="document">
         <div class="page-content">
         
-  <h1>Código fonte de qiskit.pulse.channels.pulse_channels</h1><div class="highlight"><pre>
+  <h1>Quellcode für qiskit.extensions.standard.rxx</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
 <span class="c1"># This code is part of Qiskit.</span>
@@ -194,34 +194,71 @@
 <span class="c1"># that they have been altered from the originals.</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Channels support signal output.</span>
+<span class="sd">Two-qubit XX-rotation gate.</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">abc</span> <span class="k">import</span> <span class="n">ABCMeta</span>
-
-<span class="kn">from</span> <span class="nn">.channels</span> <span class="k">import</span> <span class="n">Channel</span>
-
-
-<span class="k">class</span> <span class="nc">PulseChannel</span><span class="p">(</span><span class="n">Channel</span><span class="p">,</span> <span class="n">metaclass</span><span class="o">=</span><span class="n">ABCMeta</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Base class of Channel supporting pulse output.&quot;&quot;&quot;</span>
-    <span class="k">pass</span>
-
-
-<div class="viewcode-block" id="DriveChannel"><a class="viewcode-back" href="../../../../api/qiskit.pulse.DriveChannel.html#qiskit.pulse.DriveChannel">[documentos]</a><span class="k">class</span> <span class="nc">DriveChannel</span><span class="p">(</span><span class="n">PulseChannel</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Drive Channel.&quot;&quot;&quot;</span>
-
-    <span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;d&#39;</span></div>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">qiskit.circuit</span> <span class="k">import</span> <span class="n">Gate</span>
+<span class="kn">from</span> <span class="nn">qiskit.circuit</span> <span class="k">import</span> <span class="n">QuantumCircuit</span>
+<span class="kn">from</span> <span class="nn">qiskit.circuit</span> <span class="k">import</span> <span class="n">QuantumRegister</span>
+<span class="kn">from</span> <span class="nn">qiskit.extensions.standard.cx</span> <span class="k">import</span> <span class="n">CnotGate</span>
+<span class="kn">from</span> <span class="nn">qiskit.extensions.standard.u1</span> <span class="k">import</span> <span class="n">U1Gate</span>
+<span class="kn">from</span> <span class="nn">qiskit.extensions.standard.u2</span> <span class="k">import</span> <span class="n">U2Gate</span>
+<span class="kn">from</span> <span class="nn">qiskit.extensions.standard.u3</span> <span class="k">import</span> <span class="n">U3Gate</span>
+<span class="kn">from</span> <span class="nn">qiskit.extensions.standard.h</span> <span class="k">import</span> <span class="n">HGate</span>
 
 
-<div class="viewcode-block" id="MeasureChannel"><a class="viewcode-back" href="../../../../api/qiskit.pulse.MeasureChannel.html#qiskit.pulse.MeasureChannel">[documentos]</a><span class="k">class</span> <span class="nc">MeasureChannel</span><span class="p">(</span><span class="n">PulseChannel</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Measure Channel.&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="RXXGate"><a class="viewcode-back" href="../../../../api/qiskit.extensions.standard.RXXGate.html#qiskit.circuit.RXXGate">[Doku]</a><span class="k">class</span> <span class="nc">RXXGate</span><span class="p">(</span><span class="n">Gate</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Two-qubit XX-rotation gate.</span>
 
-    <span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;m&#39;</span></div>
+<span class="sd">    This gate corresponds to the rotation U(θ) = exp(-1j * θ * X⊗X / 2)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create new rxx gate.&quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;rxx&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="n">theta</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">_define</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Calculate a subcircuit that implements this unitary.&quot;&quot;&quot;</span>
+        <span class="n">definition</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;q&quot;</span><span class="p">)</span>
+        <span class="n">theta</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">rule</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">(</span><span class="n">U3Gate</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[]),</span>
+            <span class="p">(</span><span class="n">HGate</span><span class="p">(),</span> <span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="p">[]),</span>
+            <span class="p">(</span><span class="n">CnotGate</span><span class="p">(),</span> <span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="p">[]),</span>
+            <span class="p">(</span><span class="n">U1Gate</span><span class="p">(</span><span class="o">-</span><span class="n">theta</span><span class="p">),</span> <span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="p">[]),</span>
+            <span class="p">(</span><span class="n">CnotGate</span><span class="p">(),</span> <span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="p">[]),</span>
+            <span class="p">(</span><span class="n">HGate</span><span class="p">(),</span> <span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="p">[]),</span>
+            <span class="p">(</span><span class="n">U2Gate</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">-</span> <span class="n">theta</span><span class="p">),</span> <span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[]),</span>
+        <span class="p">]</span>
+        <span class="k">for</span> <span class="n">inst</span> <span class="ow">in</span> <span class="n">rule</span><span class="p">:</span>
+            <span class="n">definition</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">inst</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">definition</span> <span class="o">=</span> <span class="n">definition</span>
+
+<div class="viewcode-block" id="RXXGate.inverse"><a class="viewcode-back" href="../../../../api/qiskit.extensions.standard.RXXGate.html#qiskit.circuit.RXXGate.inverse">[Doku]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Invert this gate.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">RXXGate</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></div></div>
+
+    <span class="c1"># NOTE: we should use the following as the canonical matrix</span>
+    <span class="c1"># definition but we don&#39;t include it yet since it differs from</span>
+    <span class="c1"># the circuit decomposition matrix by a global phase</span>
+    <span class="c1"># def to_matrix(self):</span>
+    <span class="c1">#   &quot;&quot;&quot;Return a Numpy.array for the RXX gate.&quot;&quot;&quot;</span>
+    <span class="c1">#    theta = float(self.params[0])</span>
+    <span class="c1">#    return np.array([</span>
+    <span class="c1">#        [np.cos(theta / 2), 0, 0, -1j * np.sin(theta / 2)],</span>
+    <span class="c1">#        [0, np.cos(theta / 2), -1j * np.sin(theta / 2), 0],</span>
+    <span class="c1">#        [0, -1j * np.sin(theta / 2), np.cos(theta / 2), 0],</span>
+    <span class="c1">#        [-1j * np.sin(theta / 2), 0, 0, np.cos(theta / 2)]], dtype=complex)</span>
 
 
-<div class="viewcode-block" id="ControlChannel"><a class="viewcode-back" href="../../../../api/qiskit.pulse.ControlChannel.html#qiskit.pulse.ControlChannel">[documentos]</a><span class="k">class</span> <span class="nc">ControlChannel</span><span class="p">(</span><span class="n">PulseChannel</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Control Channel.&quot;&quot;&quot;</span>
+<span class="k">def</span> <span class="nf">rxx</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">qubit1</span><span class="p">,</span> <span class="n">qubit2</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Apply RXX to circuit.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">RXXGate</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="p">[</span><span class="n">qubit1</span><span class="p">,</span> <span class="n">qubit2</span><span class="p">],</span> <span class="p">[])</span>
 
-    <span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;u&#39;</span></div>
+
+<span class="c1"># Add to QuantumCircuit class</span>
+<span class="n">QuantumCircuit</span><span class="o">.</span><span class="n">rxx</span> <span class="o">=</span> <span class="n">rxx</span>
 </pre></div>
 
         </div>

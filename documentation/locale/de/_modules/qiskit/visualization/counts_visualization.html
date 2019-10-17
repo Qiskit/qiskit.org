@@ -33,7 +33,7 @@
        </script>
         <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
     
-    <title>qiskit.visualization.counts_visualization &#8212; Qiskit 0.12.2 Dokumentation</title>
+    <title>qiskit.visualization.counts_visualization &#8212; Qiskit 0.13.0 Dokumentation</title>
 
     <link rel="stylesheet" href="../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -193,7 +193,7 @@
 <span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
 <span class="c1"># that they have been altered from the originals.</span>
 
-<span class="c1"># pylint: disable=invalid-name,import-error</span>
+<span class="c1"># pylint: disable=import-error</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Visualization functions for measurement counts.</span>
@@ -206,6 +206,7 @@
 <span class="kn">from</span> <span class="nn">.exceptions</span> <span class="k">import</span> <span class="n">VisualizationError</span>
 
 <span class="k">if</span> <span class="n">HAS_MATPLOTLIB</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">get_backend</span>
     <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
     <span class="kn">from</span> <span class="nn">matplotlib.ticker</span> <span class="k">import</span> <span class="n">MaxNLocator</span>
 
@@ -232,7 +233,7 @@
 
 <div class="viewcode-block" id="plot_histogram"><a class="viewcode-back" href="../../../api/qiskit.visualization.plot_histogram.html#qiskit.visualization.plot_histogram">[Doku]</a><span class="k">def</span> <span class="nf">plot_histogram</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">number_to_keep</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                    <span class="n">sort</span><span class="o">=</span><span class="s1">&#39;asc&#39;</span><span class="p">,</span> <span class="n">target_string</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                   <span class="n">legend</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bar_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+                   <span class="n">legend</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bar_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Plot a histogram of data.</span>
 
 <span class="sd">    Args:</span>
@@ -249,14 +250,35 @@
 <span class="sd">            list or 1 if it&#39;s a dict)</span>
 <span class="sd">        bar_labels (bool): Label each bar in histogram with probability value.</span>
 <span class="sd">        title (str): A string to use for the plot title</span>
+<span class="sd">        ax (matplotlib.axes.Axes): An optional Axes object to be used for</span>
+<span class="sd">            the visualization output. If none is specified a new matplotlib</span>
+<span class="sd">            Figure will be created and used. Additionally, if specified there</span>
+<span class="sd">            will be no returned Figure since it is redundant.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        matplotlib.Figure: A figure for the rendered histogram.</span>
+<span class="sd">        matplotlib.Figure: A figure for the rendered histogram, if the ``ax``</span>
+<span class="sd">            kwarg is not set.</span>
 
 <span class="sd">    Raises:</span>
 <span class="sd">        ImportError: Matplotlib not available.</span>
 <span class="sd">        VisualizationError: When legend is provided and the length doesn&#39;t</span>
 <span class="sd">            match the input data.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        .. jupyter-execute::</span>
+
+<span class="sd">           from qiskit import QuantumCircuit, BasicAer, execute</span>
+<span class="sd">           from qiskit.visualization import plot_histogram</span>
+<span class="sd">           %matplotlib inline</span>
+
+<span class="sd">           qc = QuantumCircuit(2, 2)</span>
+<span class="sd">           qc.h(0)</span>
+<span class="sd">           qc.cx(0, 1)</span>
+<span class="sd">           qc.measure([0, 1], [0, 1])</span>
+
+<span class="sd">           backend = BasicAer.get_backend(&#39;qasm_simulator&#39;)</span>
+<span class="sd">           job = execute(qc, backend)</span>
+<span class="sd">           plot_histogram(job.result().get_counts())</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">HAS_MATPLOTLIB</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s1">&#39;Must have Matplotlib installed.&#39;</span><span class="p">)</span>
@@ -275,8 +297,11 @@
         <span class="k">raise</span> <span class="n">VisualizationError</span><span class="p">(</span><span class="s2">&quot;Length of legendL (</span><span class="si">%s</span><span class="s2">) doesn&#39;t match &quot;</span>
                                  <span class="s2">&quot;number of input executions: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span>
                                  <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">legend</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)))</span>
+    <span class="k">if</span> <span class="n">ax</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">fig</span> <span class="o">=</span> <span class="kc">None</span>
 
-    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">)</span>
     <span class="n">labels</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span>
         <span class="n">functools</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span> <span class="n">data</span><span class="p">,</span> <span class="nb">set</span><span class="p">())))</span>
     <span class="k">if</span> <span class="n">number_to_keep</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -368,7 +393,9 @@
         <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.01</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
                   <span class="n">borderaxespad</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">fig</span><span class="p">:</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">get_backend</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;module://ipykernel.pylab.backend_inline&#39;</span><span class="p">,</span>
+                             <span class="s1">&#39;nbAgg&#39;</span><span class="p">]:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">fig</span></div>
 </pre></div>
 

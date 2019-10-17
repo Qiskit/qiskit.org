@@ -33,7 +33,7 @@
        </script>
         <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
     
-    <title>qiskit.pulse.channels.channels &#8212; Qiskit 0.12.2 Dokumentation</title>
+    <title>qiskit.pulse.channels.channels &#8212; Qiskit 0.13.0 Dokumentation</title>
 
     <link rel="stylesheet" href="../../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -244,33 +244,49 @@
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">(</span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_index</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Two channels are the same if they are of the same type, and have the same index.</span>
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="s1">&#39;Channel&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Channels are the same iff they are of the same type, and have the same index.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            other (Channel): other Channel</span>
-
+<span class="sd">            other: The channel to compare to this channel.</span>
 <span class="sd">        Returns:</span>
-<span class="sd">            bool: are self and other equal.</span>
+<span class="sd">            bool: equality</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">and</span> \
-                <span class="bp">self</span><span class="o">.</span><span class="n">_index</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_index</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kc">True</span>
-        <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_index</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_index</span>
 
     <span class="k">def</span> <span class="nf">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">hash</span><span class="p">((</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_index</span><span class="p">))</span>
 
 
+<span class="k">class</span> <span class="nc">PulseChannel</span><span class="p">(</span><span class="n">Channel</span><span class="p">,</span> <span class="n">metaclass</span><span class="o">=</span><span class="n">ABCMeta</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Base class of Channel supporting pulse output.&quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+
+
+<div class="viewcode-block" id="DriveChannel"><a class="viewcode-back" href="../../../../api/qiskit.pulse.DriveChannel.html#qiskit.pulse.DriveChannel">[Doku]</a><span class="k">class</span> <span class="nc">DriveChannel</span><span class="p">(</span><span class="n">PulseChannel</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Drive Channel.&quot;&quot;&quot;</span>
+    <span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;d&#39;</span></div>
+
+
+<div class="viewcode-block" id="MeasureChannel"><a class="viewcode-back" href="../../../../api/qiskit.pulse.MeasureChannel.html#qiskit.pulse.MeasureChannel">[Doku]</a><span class="k">class</span> <span class="nc">MeasureChannel</span><span class="p">(</span><span class="n">PulseChannel</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Measure Channel.&quot;&quot;&quot;</span>
+    <span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;m&#39;</span></div>
+
+
+<div class="viewcode-block" id="ControlChannel"><a class="viewcode-back" href="../../../../api/qiskit.pulse.ControlChannel.html#qiskit.pulse.ControlChannel">[Doku]</a><span class="k">class</span> <span class="nc">ControlChannel</span><span class="p">(</span><span class="n">PulseChannel</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Control Channel.&quot;&quot;&quot;</span>
+    <span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;u&#39;</span></div>
+
+
 <div class="viewcode-block" id="AcquireChannel"><a class="viewcode-back" href="../../../../api/qiskit.pulse.AcquireChannel.html#qiskit.pulse.AcquireChannel">[Doku]</a><span class="k">class</span> <span class="nc">AcquireChannel</span><span class="p">(</span><span class="n">Channel</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Acquire channel.&quot;&quot;&quot;</span>
-
     <span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;a&#39;</span></div>
 
 
 <span class="k">class</span> <span class="nc">SnapshotChannel</span><span class="p">(</span><span class="n">Channel</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Snapshot channel.&quot;&quot;&quot;</span>
-
     <span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;s&#39;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -280,13 +296,11 @@
 
 <div class="viewcode-block" id="MemorySlot"><a class="viewcode-back" href="../../../../api/qiskit.pulse.MemorySlot.html#qiskit.pulse.MemorySlot">[Doku]</a><span class="k">class</span> <span class="nc">MemorySlot</span><span class="p">(</span><span class="n">Channel</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Memory slot channel.&quot;&quot;&quot;</span>
-
     <span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;m&#39;</span></div>
 
 
 <div class="viewcode-block" id="RegisterSlot"><a class="viewcode-back" href="../../../../api/qiskit.pulse.RegisterSlot.html#qiskit.pulse.RegisterSlot">[Doku]</a><span class="k">class</span> <span class="nc">RegisterSlot</span><span class="p">(</span><span class="n">Channel</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Classical resister slot channel.&quot;&quot;&quot;</span>
-
     <span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;c&#39;</span></div>
 </pre></div>
 

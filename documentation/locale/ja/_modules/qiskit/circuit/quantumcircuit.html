@@ -33,7 +33,7 @@
        </script>
         <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
     
-    <title>qiskit.circuit.quantumcircuit &#8212; Qiskit 0.12.2 ドキュメント</title>
+    <title>qiskit.circuit.quantumcircuit &#8212; Qiskit 0.13.0 ドキュメント</title>
 
     <link rel="stylesheet" href="../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -212,6 +212,7 @@
 <span class="kn">from</span> <span class="nn">.instructionset</span> <span class="k">import</span> <span class="n">InstructionSet</span>
 <span class="kn">from</span> <span class="nn">.register</span> <span class="k">import</span> <span class="n">Register</span>
 <span class="kn">from</span> <span class="nn">.bit</span> <span class="k">import</span> <span class="n">Bit</span>
+<span class="kn">from</span> <span class="nn">.quantumcircuitdata</span> <span class="k">import</span> <span class="n">QuantumCircuitData</span>
 
 
 <span class="k">def</span> <span class="nf">_is_bit</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
@@ -236,20 +237,34 @@
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">regs</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create a new circuit.</span>
+
 <span class="sd">        A circuit is a list of instructions bound to some registers.</span>
+
 <span class="sd">        Args:</span>
-<span class="sd">            *regs (list(Register) or list(Int)): To be included in the circuit.</span>
-<span class="sd">                  - If [Register], the QuantumRegister and/or ClassicalRegister</span>
-<span class="sd">                    to include in the circuit.</span>
-<span class="sd">                    E.g.: QuantumCircuit(QuantumRegister(4))</span>
-<span class="sd">                          QuantumCircuit(QuantumRegister(4), ClassicalRegister(3))</span>
-<span class="sd">                          QuantumCircuit(QuantumRegister(4, &#39;qr0&#39;), QuantumRegister(2, &#39;qr1&#39;))</span>
-<span class="sd">                  - If [Int], the amount of qubits and/or classical bits to include</span>
-<span class="sd">                  in the circuit. It can be (Int, ) or (Int, Int).</span>
-<span class="sd">                    E.g.: QuantumCircuit(4) # A QuantumCircuit with 4 qubits</span>
-<span class="sd">                          QuantumCircuit(4, 3) # A QuantumCircuit with 4 qubits and 3 classical bits</span>
-<span class="sd">            name (str or None): the name of the quantum circuit. If</span>
-<span class="sd">                None, an automatically generated string will be assigned.</span>
+<span class="sd">            regs: list(:class:`Register`) or list(``int``) The registers to be</span>
+<span class="sd">                included in the circuit.</span>
+
+<span class="sd">                 * If a list of :class:`Register` objects, represents the :class:`QuantumRegister`</span>
+<span class="sd">                   and/or :class:`ClassicalRegister` objects to include in the circuit.</span>
+
+<span class="sd">                   For example:</span>
+
+<span class="sd">                    * ``QuantumCircuit(QuantumRegister(4))``</span>
+<span class="sd">                    * ``QuantumCircuit(QuantumRegister(4), ClassicalRegister(3))``</span>
+<span class="sd">                    * ``QuantumCircuit(QuantumRegister(4, &#39;qr0&#39;), QuantumRegister(2, &#39;qr1&#39;))``</span>
+
+<span class="sd">                 * If a list of ``int``, the amount of qubits and/or classical</span>
+<span class="sd">                   bits to include in the circuit. It can either be a single</span>
+<span class="sd">                   int for just the number of quantum bits, or 2 ints for the number of</span>
+<span class="sd">                   quantum bits and classical bits respectively.</span>
+
+<span class="sd">                   For example:</span>
+
+<span class="sd">                    * ``QuantumCircuit(4) # A QuantumCircuit with 4 qubits``</span>
+<span class="sd">                    * ``QuantumCircuit(4, 3) # A QuantumCircuit with 4 qubits and 3 classical bits``</span>
+
+<span class="sd">            name (str): the name of the quantum circuit. If not set, an</span>
+<span class="sd">                automatically generated string will be assigned.</span>
 
 <span class="sd">        Raises:</span>
 <span class="sd">            QiskitError: if the circuit name, if given, is not valid.</span>
@@ -270,7 +285,7 @@
 
         <span class="c1"># Data contains a list of instructions and their contexts,</span>
         <span class="c1"># in the order they were applied.</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="p">[]</span>
 
         <span class="c1"># This is a map of registers bound to this circuit, by name.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">qregs</span> <span class="o">=</span> <span class="p">[]</span>
@@ -281,6 +296,39 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_parameter_table</span> <span class="o">=</span> <span class="n">ParameterTable</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_layout</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the circuit data (instructions and context).</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            QuantumCircuitData: a list-like object containing the tuples for the circuit&#39;s data.</span>
+
+<span class="sd">            Each tuple is in the format ``(instruction, qargs, cargs)``.</span>
+<span class="sd">            Where instruction is an Instruction (or subclass) object,</span>
+<span class="sd">            qargs is a list of Qubit objects, and cargs is a list of Clbit</span>
+<span class="sd">            objects.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">QuantumCircuitData</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="nd">@data</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_input</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Sets the circuit data from a list of instructions and context.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data_input (list): A list of instructions with context</span>
+<span class="sd">                in the format (instruction, qargs, cargs). Where Instruction</span>
+<span class="sd">                is an Instruction (or subclass) object, qargs is a list of</span>
+<span class="sd">                Qubit objects, and cargs is a list of Clbit objects.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># If data_input is QuantumCircuitData(self), clearing self._data</span>
+        <span class="c1"># below will also empty data_input, so make a shallow copy first.</span>
+        <span class="n">data_input</span> <span class="o">=</span> <span class="n">data_input</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">inst</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span> <span class="ow">in</span> <span class="n">data_input</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">inst</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;text&#39;</span><span class="p">))</span>
@@ -334,9 +382,9 @@
 <span class="sd">            QuantumCircuit: the mirrored circuit</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">reverse_circ</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;_mirror&#39;</span><span class="p">)</span>
-        <span class="n">reverse_circ</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">reverse_circ</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">inst</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">):</span>
-            <span class="n">reverse_circ</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">inst</span><span class="o">.</span><span class="n">mirror</span><span class="p">(),</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span><span class="p">))</span>
+            <span class="n">reverse_circ</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">inst</span><span class="o">.</span><span class="n">mirror</span><span class="p">(),</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">reverse_circ</span></div>
 
 <div class="viewcode-block" id="QuantumCircuit.inverse"><a class="viewcode-back" href="../../../api/qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit.inverse">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -351,14 +399,13 @@
 <span class="sd">            QiskitError: if the circuit cannot be inverted.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">inverse_circ</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;_dg&#39;</span><span class="p">)</span>
-        <span class="n">inverse_circ</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">inst</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">):</span>
-            <span class="n">inverse_circ</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">inst</span><span class="o">.</span><span class="n">inverse</span><span class="p">(),</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span><span class="p">))</span>
+        <span class="n">inverse_circ</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">inst</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">):</span>
+            <span class="n">inverse_circ</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">inst</span><span class="o">.</span><span class="n">inverse</span><span class="p">(),</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">inverse_circ</span></div>
 
 <div class="viewcode-block" id="QuantumCircuit.combine"><a class="viewcode-back" href="../../../api/qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit.combine">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">combine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rhs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Append rhs to self if self contains compatible registers.</span>
+        <span class="sd">&quot;&quot;&quot;Append rhs to self if self contains compatible registers.</span>
 
 <span class="sd">        Two circuits are compatible if they contain the same registers</span>
 <span class="sd">        or if they contain different registers with unique names. The</span>
@@ -366,6 +413,15 @@
 <span class="sd">        circuits.</span>
 
 <span class="sd">        Return self + rhs as a new object.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            rhs (QuantumCircuit): The quantum circuit to append to the right hand side.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            QuantumCircuit: Returns a new QuantumCircuit object</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            QiskitError: if the rhs circuit is not compatible</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Check registers in LHS are compatible with RHS</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_check_compatible_regs</span><span class="p">(</span><span class="n">rhs</span><span class="p">)</span>
@@ -382,12 +438,11 @@
                 <span class="n">combined_cregs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
         <span class="n">circuit</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="o">*</span><span class="n">combined_qregs</span><span class="p">,</span> <span class="o">*</span><span class="n">combined_cregs</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">instruction_context</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">rhs</span><span class="o">.</span><span class="n">data</span><span class="p">):</span>
-            <span class="n">circuit</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="o">*</span><span class="n">instruction_context</span><span class="p">)</span>
+            <span class="n">circuit</span><span class="o">.</span><span class="n">_append</span><span class="p">(</span><span class="o">*</span><span class="n">instruction_context</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">circuit</span></div>
 
 <div class="viewcode-block" id="QuantumCircuit.extend"><a class="viewcode-back" href="../../../api/qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit.extend">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">extend</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rhs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Append rhs to self if self contains compatible registers.</span>
+        <span class="sd">&quot;&quot;&quot;Append QuantumCircuit to the right hand side if it contains compatible registers.</span>
 
 <span class="sd">        Two circuits are compatible if they contain the same registers</span>
 <span class="sd">        or if they contain different registers with unique names. The</span>
@@ -395,6 +450,15 @@
 <span class="sd">        circuits.</span>
 
 <span class="sd">        Modify and return self.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            rhs (QuantumCircuit): The quantum circuit to append to the right hand side.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            QuantumCircuit: Returns this QuantumCircuit object (which has been modified)</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            QiskitError: if the rhs circuit is not compatible</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Check registers in LHS are compatible with RHS</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_check_compatible_regs</span><span class="p">(</span><span class="n">rhs</span><span class="p">)</span>
@@ -409,7 +473,7 @@
 
         <span class="c1"># Add new gates</span>
         <span class="k">for</span> <span class="n">instruction_context</span> <span class="ow">in</span> <span class="n">rhs</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="o">*</span><span class="n">instruction_context</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_append</span><span class="p">(</span><span class="o">*</span><span class="n">instruction_context</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span></div>
 
     <span class="nd">@property</span>
@@ -436,11 +500,11 @@
 
     <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return number of operations in circuit.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return indexed operation.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">item</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">item</span><span class="p">]</span>
 
 <div class="viewcode-block" id="QuantumCircuit.cast"><a class="viewcode-back" href="../../../api/qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit.cast">[ドキュメント]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">cast</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">_type</span><span class="p">):</span>
@@ -536,24 +600,8 @@
         <span class="n">expanded_cargs</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">cbit_argument_conversion</span><span class="p">(</span><span class="n">carg</span><span class="p">)</span> <span class="k">for</span> <span class="n">carg</span> <span class="ow">in</span> <span class="n">cargs</span> <span class="ow">or</span> <span class="p">[]]</span>
 
         <span class="n">instructions</span> <span class="o">=</span> <span class="n">InstructionSet</span><span class="p">()</span>
-
-        <span class="c1"># When broadcasting was handled by decorators (prior to #2282), append</span>
-        <span class="c1"># received multiple distinct instruction instances, one for each expanded</span>
-        <span class="c1"># arg. With broadcasting as part of QuantumCircuit.append, the</span>
-        <span class="c1"># instruction instance is constructed before append is called. However,</span>
-        <span class="c1"># (at least) ParameterTable expects instruction instances to be unique</span>
-        <span class="c1"># within a circuit, so make instruction deepcopies for expanded_args[1:].</span>
-
-        <span class="n">first_instruction</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">for</span> <span class="p">(</span><span class="n">qarg</span><span class="p">,</span> <span class="n">carg</span><span class="p">)</span> <span class="ow">in</span> <span class="n">instruction</span><span class="o">.</span><span class="n">broadcast_arguments</span><span class="p">(</span><span class="n">expanded_qargs</span><span class="p">,</span> <span class="n">expanded_cargs</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">first_instruction</span><span class="p">:</span>
-                <span class="n">instructions</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">_append</span><span class="p">(</span><span class="n">instruction</span><span class="p">,</span> <span class="n">qarg</span><span class="p">,</span> <span class="n">carg</span><span class="p">),</span> <span class="n">qarg</span><span class="p">,</span> <span class="n">carg</span><span class="p">)</span>
-                <span class="n">first_instruction</span> <span class="o">=</span> <span class="kc">False</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">instructions</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">_append</span><span class="p">(</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">instruction</span><span class="p">),</span> <span class="n">qarg</span><span class="p">,</span> <span class="n">carg</span><span class="p">),</span> <span class="n">qarg</span><span class="p">,</span> <span class="n">carg</span><span class="p">)</span>
-
+            <span class="n">instructions</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_append</span><span class="p">(</span><span class="n">instruction</span><span class="p">,</span> <span class="n">qarg</span><span class="p">,</span> <span class="n">carg</span><span class="p">),</span> <span class="n">qarg</span><span class="p">,</span> <span class="n">carg</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">instructions</span></div>
 
     <span class="k">def</span> <span class="nf">_append</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instruction</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span><span class="p">):</span>
@@ -582,16 +630,22 @@
 
         <span class="c1"># add the instruction onto the given wires</span>
         <span class="n">instruction_context</span> <span class="o">=</span> <span class="n">instruction</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">instruction_context</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">instruction_context</span><span class="p">)</span>
 
-        <span class="c1"># track variable parameters in instruction</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_update_parameter_table</span><span class="p">(</span><span class="n">instruction</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">instruction</span>
+
+    <span class="k">def</span> <span class="nf">_update_parameter_table</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instruction</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">param_index</span><span class="p">,</span> <span class="n">param</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">instruction</span><span class="o">.</span><span class="n">params</span><span class="p">):</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="n">ParameterExpression</span><span class="p">):</span>
                 <span class="n">current_parameters</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span>
 
                 <span class="k">for</span> <span class="n">parameter</span> <span class="ow">in</span> <span class="n">param</span><span class="o">.</span><span class="n">parameters</span><span class="p">:</span>
                     <span class="k">if</span> <span class="n">parameter</span> <span class="ow">in</span> <span class="n">current_parameters</span><span class="p">:</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">_parameter_table</span><span class="p">[</span><span class="n">parameter</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">instruction</span><span class="p">,</span> <span class="n">param_index</span><span class="p">))</span>
+                        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_dup_param_spec</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_parameter_table</span><span class="p">[</span><span class="n">parameter</span><span class="p">],</span>
+                                                          <span class="n">instruction</span><span class="p">,</span> <span class="n">param_index</span><span class="p">):</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">_parameter_table</span><span class="p">[</span><span class="n">parameter</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">instruction</span><span class="p">,</span> <span class="n">param_index</span><span class="p">))</span>
                     <span class="k">else</span><span class="p">:</span>
                         <span class="k">if</span> <span class="n">parameter</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="p">{</span><span class="n">p</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">current_parameters</span><span class="p">}:</span>
                             <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span>
@@ -599,6 +653,12 @@
                         <span class="bp">self</span><span class="o">.</span><span class="n">_parameter_table</span><span class="p">[</span><span class="n">parameter</span><span class="p">]</span> <span class="o">=</span> <span class="p">[(</span><span class="n">instruction</span><span class="p">,</span> <span class="n">param_index</span><span class="p">)]</span>
 
         <span class="k">return</span> <span class="n">instruction</span>
+
+    <span class="k">def</span> <span class="nf">_check_dup_param_spec</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter_spec_list</span><span class="p">,</span> <span class="n">instruction</span><span class="p">,</span> <span class="n">param_index</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">spec</span> <span class="ow">in</span> <span class="n">parameter_spec_list</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">spec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="n">instruction</span> <span class="ow">and</span> <span class="n">spec</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">param_index</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span>
 
 <div class="viewcode-block" id="QuantumCircuit.add_register"><a class="viewcode-back" href="../../../api/qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit.add_register">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">add_register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">regs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Add registers.&quot;&quot;&quot;</span>
@@ -660,7 +720,7 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Instruction: a composite instruction encapsulating this circuit</span>
-<span class="sd">                (can be decomposed back)</span>
+<span class="sd">            (can be decomposed back)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">qiskit.converters.circuit_to_instruction</span> <span class="k">import</span> <span class="n">circuit_to_instruction</span>
         <span class="k">return</span> <span class="n">circuit_to_instruction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter_map</span><span class="p">)</span></div>
@@ -697,7 +757,7 @@
             <span class="n">string_temp</span> <span class="o">+=</span> <span class="n">register</span><span class="o">.</span><span class="n">qasm</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
         <span class="k">for</span> <span class="n">register</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cregs</span><span class="p">:</span>
             <span class="n">string_temp</span> <span class="o">+=</span> <span class="n">register</span><span class="o">.</span><span class="n">qasm</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
-        <span class="k">for</span> <span class="n">instruction</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">instruction</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">instruction</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;measure&#39;</span><span class="p">:</span>
                 <span class="n">qubit</span> <span class="o">=</span> <span class="n">qargs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
                 <span class="n">clbit</span> <span class="o">=</span> <span class="n">cargs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -713,62 +773,195 @@
 <div class="viewcode-block" id="QuantumCircuit.draw"><a class="viewcode-back" href="../../../api/qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit.draw">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
              <span class="n">interactive</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">line_length</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">plot_barriers</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
              <span class="n">reverse_bits</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">justify</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">vertical_compression</span><span class="o">=</span><span class="s1">&#39;medium&#39;</span><span class="p">,</span> <span class="n">idle_wires</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-             <span class="n">with_layout</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+             <span class="n">with_layout</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fold</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Draw the quantum circuit</span>
 
-<span class="sd">        Using the output parameter you can specify the format. The choices are:</span>
-<span class="sd">        0. text: ASCII art string</span>
-<span class="sd">        1. latex: high-quality images, but heavy external software dependencies</span>
-<span class="sd">        2. matplotlib: purely in Python with no external dependencies</span>
+<span class="sd">        **text**: ASCII art TextDrawing that can be printed in the console.</span>
 
-<span class="sd">        Defaults to an overcomplete basis, in order to not alter gates.</span>
+<span class="sd">        **latex**: high-quality images compiled via latex.</span>
+
+<span class="sd">        **latex_source**: raw uncompiled latex output.</span>
+
+<span class="sd">        **matplotlib**: images with color rendered purely in Python.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            scale (float): scale of image to draw (shrink if &lt; 1)</span>
 <span class="sd">            filename (str): file path to save image to</span>
 <span class="sd">            style (dict or str): dictionary of style or file name of style</span>
-<span class="sd">                file. You can refer to the</span>
-<span class="sd">                :ref:`Style Dict Doc &lt;style-dict-doc&gt;` for more information</span>
-<span class="sd">                on the contents.</span>
+<span class="sd">                file. This option is only used by the ``mpl`` output type. If a</span>
+<span class="sd">                str is passed in that is the path to a json file which contains</span>
+<span class="sd">                that will be open, parsed, and then used just as the input</span>
+<span class="sd">                dict. See: :ref:`Style Dict Doc &lt;style-dict-circ-doc&gt;` for more</span>
+<span class="sd">                information on the contents.</span>
 <span class="sd">            output (str): Select the output method to use for drawing the</span>
-<span class="sd">                circuit. Valid choices are `text`, `latex`, `latex_source`,</span>
-<span class="sd">                `mpl`. By default the &#39;text&#39; drawer is used unless a user</span>
-<span class="sd">                config file has an alternative backend set as the default. If</span>
-<span class="sd">                the output is passed in that backend will always be used.</span>
+<span class="sd">                circuit. Valid choices are ``text``, ``latex``,</span>
+<span class="sd">                ``latex_source``, or ``mpl``. By default the `&#39;text`&#39; drawer is</span>
+<span class="sd">                used unless a user config file has an alternative backend set</span>
+<span class="sd">                as the default. If the output kwarg is set, that backend</span>
+<span class="sd">                will always be used over the default in a user config file.</span>
 <span class="sd">            interactive (bool): when set true show the circuit in a new window</span>
 <span class="sd">                (for `mpl` this depends on the matplotlib backend being used</span>
 <span class="sd">                supporting this). Note when used with either the `text` or the</span>
 <span class="sd">                `latex_source` output type this has no effect and will be</span>
 <span class="sd">                silently ignored.</span>
-<span class="sd">            line_length (int): sets the length of the lines generated by `text`</span>
+<span class="sd">            line_length (int): Deprecated, see `fold` which supersedes this</span>
+<span class="sd">                option. Sets the length of the lines generated by `text` output</span>
+<span class="sd">                type. This useful when the drawing does not fit in the console.</span>
+<span class="sd">                If None (default), it will try to guess the console width using</span>
+<span class="sd">                ``shutil.get_terminal_size()``. However, if you&#39;re running in</span>
+<span class="sd">                jupyter the default line length is set to 80 characters. If you</span>
+<span class="sd">                don&#39;t want pagination at all, set ``line_length=-1``.</span>
 <span class="sd">            reverse_bits (bool): When set to True reverse the bit order inside</span>
 <span class="sd">                registers for the output visualization.</span>
 <span class="sd">            plot_barriers (bool): Enable/disable drawing barriers in the output</span>
 <span class="sd">                circuit. Defaults to True.</span>
-<span class="sd">            justify (string): Options are `left`, `right` or `none`, if anything</span>
-<span class="sd">                else is supplied it defaults to left justified. It refers to where</span>
-<span class="sd">                gates should be placed in the output circuit if there is an option.</span>
-<span class="sd">                `none` results in each gate being placed in its own column. Currently</span>
-<span class="sd">                only supported by text drawer.</span>
-<span class="sd">            vertical_compression (string): `high`, `medium` or `low`. It merges the</span>
-<span class="sd">                lines generated by `text` so the drawing will take less vertical room.</span>
-<span class="sd">                Default is `medium`. It is ignored if output is not `text`.</span>
-<span class="sd">            idle_wires (bool): Include idle wires. Default is True.</span>
-<span class="sd">            with_layout (bool): Include layout information, with labels on the physical</span>
-<span class="sd">                layout. Default is True.</span>
+<span class="sd">            justify (string): Options are ``left``, ``right`` or</span>
+<span class="sd">                ``none``, if anything else is supplied it defaults to left</span>
+<span class="sd">                justified. It refers to where gates should be placed in the</span>
+<span class="sd">                output circuit if there is an option. ``none`` results in</span>
+<span class="sd">                each gate being placed in its own column.</span>
+<span class="sd">            vertical_compression (string): ``high``, ``medium`` or ``low``. It</span>
+<span class="sd">                merges the lines generated by the ``text`` output so the</span>
+<span class="sd">                drawing will take less vertical room.  Default is ``medium``.</span>
+<span class="sd">                Only used by the ``text`` output, will be silently ignored</span>
+<span class="sd">                otherwise.</span>
+<span class="sd">            idle_wires (bool): Include idle wires (wires with no circuit</span>
+<span class="sd">                elements) in output visualization. Default is True.</span>
+<span class="sd">            with_layout (bool): Include layout information, with labels on the</span>
+<span class="sd">                physical layout. Default is True.</span>
+<span class="sd">            fold (int): Sets pagination. It can be disabled using -1.</span>
+<span class="sd">                In `text`, sets the length of the lines. This useful when the</span>
+<span class="sd">                drawing does not fit in the console. If None (default), it will</span>
+<span class="sd">                try to guess the console width using ``shutil.</span>
+<span class="sd">                get_terminal_size()``. However, if running in jupyter, the</span>
+<span class="sd">                default line length is set to 80 characters. In ``mpl`` is the</span>
+<span class="sd">                number of (visual) layers before folding. Default is 25.</span>
+<span class="sd">            ax (matplotlib.axes.Axes): An optional Axes object to be used for</span>
+<span class="sd">                the visualization output. If none is specified a new matplotlib</span>
+<span class="sd">                Figure will be created and used. Additionally, if specified</span>
+<span class="sd">                there will be no returned Figure since it is redundant. This is</span>
+<span class="sd">                only used when the ``output`` kwarg is set to use the ``mpl``</span>
+<span class="sd">                backend. It will be silently ignored with all other outputs.</span>
+
 <span class="sd">        Returns:</span>
-<span class="sd">            PIL.Image or matplotlib.figure or str or TextDrawing:</span>
-<span class="sd">                * PIL.Image: (output `latex`) an in-memory representation of the</span>
-<span class="sd">                  image of the circuit diagram.</span>
-<span class="sd">                * matplotlib.figure: (output `mpl`) a matplotlib figure object</span>
-<span class="sd">                  for the circuit diagram.</span>
-<span class="sd">                * str: (output `latex_source`). The LaTeX source code.</span>
-<span class="sd">                * TextDrawing: (output `text`). A drawing that can be printed as</span>
-<span class="sd">                  ascii art</span>
+<span class="sd">            :class:`PIL.Image` or :class:`matplotlib.figure` or :class:`str` or</span>
+<span class="sd">            :class:`TextDrawing`:</span>
+
+<span class="sd">            * `PIL.Image` (output=&#39;latex&#39;)</span>
+<span class="sd">                an in-memory representation of the image of the circuit</span>
+<span class="sd">                diagram.</span>
+<span class="sd">            * `matplotlib.figure.Figure` (output=&#39;mpl&#39;)</span>
+<span class="sd">                a matplotlib figure object for the circuit diagram.</span>
+<span class="sd">            * `str` (output=&#39;latex_source&#39;)</span>
+<span class="sd">                The LaTeX source code for visualizing the circuit diagram.</span>
+<span class="sd">            * `TextDrawing` (output=&#39;text&#39;)</span>
+<span class="sd">                A drawing that can be printed as ascii art</span>
 
 <span class="sd">        Raises:</span>
 <span class="sd">            VisualizationError: when an invalid output method is selected</span>
+<span class="sd">            ImportError: when the output methods requires non-installed</span>
+<span class="sd">                libraries.</span>
+
+<span class="sd">        .. _style-dict-circ-doc:</span>
+
+<span class="sd">        **Style Dict Details**</span>
+
+<span class="sd">        The style dict kwarg contains numerous options that define the style of</span>
+<span class="sd">        the output circuit visualization. The style dict is only used by the</span>
+<span class="sd">        ``mpl`` output. The options available in the style dict are defined</span>
+<span class="sd">        below:</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            textcolor (str): The color code to use for text. Defaults to</span>
+<span class="sd">                `&#39;#000000&#39;`</span>
+<span class="sd">            subtextcolor (str): The color code to use for subtext. Defaults to</span>
+<span class="sd">                `&#39;#000000&#39;`</span>
+<span class="sd">            linecolor (str): The color code to use for lines. Defaults to</span>
+<span class="sd">                `&#39;#000000&#39;`</span>
+<span class="sd">            creglinecolor (str): The color code to use for classical register</span>
+<span class="sd">                lines. Defaults to `&#39;#778899&#39;`</span>
+<span class="sd">            gatetextcolor (str): The color code to use for gate text. Defaults</span>
+<span class="sd">                to `&#39;#000000&#39;`</span>
+<span class="sd">            gatefacecolor (str): The color code to use for gates. Defaults to</span>
+<span class="sd">                `&#39;#ffffff&#39;`</span>
+<span class="sd">            barrierfacecolor (str): The color code to use for barriers.</span>
+<span class="sd">                Defaults to `&#39;#bdbdbd&#39;`</span>
+<span class="sd">            backgroundcolor (str): The color code to use for the background.</span>
+<span class="sd">                Defaults to `&#39;#ffffff&#39;`</span>
+<span class="sd">            fontsize (int): The font size to use for text. Defaults to 13</span>
+<span class="sd">            subfontsize (int): The font size to use for subtext. Defaults to 8</span>
+<span class="sd">            displaytext (dict): A dictionary of the text to use for each</span>
+<span class="sd">                element type in the output visualization. The default values</span>
+<span class="sd">                are::</span>
+
+<span class="sd">                    {</span>
+<span class="sd">                        &#39;id&#39;: &#39;id&#39;,</span>
+<span class="sd">                        &#39;u0&#39;: &#39;U_0&#39;,</span>
+<span class="sd">                        &#39;u1&#39;: &#39;U_1&#39;,</span>
+<span class="sd">                        &#39;u2&#39;: &#39;U_2&#39;,</span>
+<span class="sd">                        &#39;u3&#39;: &#39;U_3&#39;,</span>
+<span class="sd">                        &#39;x&#39;: &#39;X&#39;,</span>
+<span class="sd">                        &#39;y&#39;: &#39;Y&#39;,</span>
+<span class="sd">                        &#39;z&#39;: &#39;Z&#39;,</span>
+<span class="sd">                        &#39;h&#39;: &#39;H&#39;,</span>
+<span class="sd">                        &#39;s&#39;: &#39;S&#39;,</span>
+<span class="sd">                        &#39;sdg&#39;: &#39;S^\\dagger&#39;,</span>
+<span class="sd">                        &#39;t&#39;: &#39;T&#39;,</span>
+<span class="sd">                        &#39;tdg&#39;: &#39;T^\\dagger&#39;,</span>
+<span class="sd">                        &#39;rx&#39;: &#39;R_x&#39;,</span>
+<span class="sd">                        &#39;ry&#39;: &#39;R_y&#39;,</span>
+<span class="sd">                        &#39;rz&#39;: &#39;R_z&#39;,</span>
+<span class="sd">                        &#39;reset&#39;: &#39;\\left|0\\right\\rangle&#39;</span>
+<span class="sd">                    }</span>
+
+<span class="sd">                You must specify all the necessary values if using this. There</span>
+<span class="sd">                is no provision for passing an incomplete dict in.</span>
+<span class="sd">            displaycolor (dict): The color codes to use for each circuit</span>
+<span class="sd">                element. The default values are::</span>
+
+<span class="sd">                    {</span>
+<span class="sd">                        &#39;id&#39;: &#39;#F0E442&#39;,</span>
+<span class="sd">                        &#39;u0&#39;: &#39;#E7AB3B&#39;,</span>
+<span class="sd">                        &#39;u1&#39;: &#39;#E7AB3B&#39;,</span>
+<span class="sd">                        &#39;u2&#39;: &#39;#E7AB3B&#39;,</span>
+<span class="sd">                        &#39;u3&#39;: &#39;#E7AB3B&#39;,</span>
+<span class="sd">                        &#39;x&#39;: &#39;#58C698&#39;,</span>
+<span class="sd">                        &#39;y&#39;: &#39;#58C698&#39;,</span>
+<span class="sd">                        &#39;z&#39;: &#39;#58C698&#39;,</span>
+<span class="sd">                        &#39;h&#39;: &#39;#70B7EB&#39;,</span>
+<span class="sd">                        &#39;s&#39;: &#39;#E0722D&#39;,</span>
+<span class="sd">                        &#39;sdg&#39;: &#39;#E0722D&#39;,</span>
+<span class="sd">                        &#39;t&#39;: &#39;#E0722D&#39;,</span>
+<span class="sd">                        &#39;tdg&#39;: &#39;#E0722D&#39;,</span>
+<span class="sd">                        &#39;rx&#39;: &#39;#ffffff&#39;,</span>
+<span class="sd">                        &#39;ry&#39;: &#39;#ffffff&#39;,</span>
+<span class="sd">                        &#39;rz&#39;: &#39;#ffffff&#39;,</span>
+<span class="sd">                        &#39;reset&#39;: &#39;#D188B4&#39;,</span>
+<span class="sd">                        &#39;target&#39;: &#39;#70B7EB&#39;,</span>
+<span class="sd">                        &#39;meas&#39;: &#39;#D188B4&#39;</span>
+<span class="sd">                    }</span>
+
+<span class="sd">               Also, just like  `displaytext` there is no provision for an</span>
+<span class="sd">               incomplete dict passed in.</span>
+
+<span class="sd">            latexdrawerstyle (bool): When set to True enable latex mode which</span>
+<span class="sd">                will draw gates like the `latex` output modes.</span>
+<span class="sd">            usepiformat (bool): When set to True use radians for output</span>
+<span class="sd">            fold (int): The number of circuit elements to fold the circuit at.</span>
+<span class="sd">                Defaults to 20</span>
+<span class="sd">            cregbundle (bool): If set True bundle classical registers</span>
+<span class="sd">            showindex (bool): If set True draw an index.</span>
+<span class="sd">            compress (bool): If set True draw a compressed circuit</span>
+<span class="sd">            figwidth (int): The maximum width (in inches) for the output figure.</span>
+<span class="sd">            dpi (int): The DPI to use for the output image. Defaults to 150</span>
+<span class="sd">            margin (list): A list of margin values to adjust spacing around</span>
+<span class="sd">                output image. Takes a list of 4 ints:</span>
+<span class="sd">                [x left, x right, y bottom, y top].</span>
+<span class="sd">            creglinestyle (str): The style of line to use for classical</span>
+<span class="sd">                registers. Choices are `&#39;solid&#39;`, `&#39;doublet&#39;`, or any valid</span>
+<span class="sd">                matplotlib `linestyle` kwarg value. Defaults to `doublet`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="c1"># pylint: disable=cyclic-import</span>
         <span class="kn">from</span> <span class="nn">qiskit.visualization</span> <span class="k">import</span> <span class="n">circuit_drawer</span>
         <span class="k">return</span> <span class="n">circuit_drawer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">scale</span><span class="p">,</span>
@@ -781,7 +974,9 @@
                               <span class="n">justify</span><span class="o">=</span><span class="n">justify</span><span class="p">,</span>
                               <span class="n">vertical_compression</span><span class="o">=</span><span class="n">vertical_compression</span><span class="p">,</span>
                               <span class="n">idle_wires</span><span class="o">=</span><span class="n">idle_wires</span><span class="p">,</span>
-                              <span class="n">with_layout</span><span class="o">=</span><span class="n">with_layout</span><span class="p">)</span></div>
+                              <span class="n">with_layout</span><span class="o">=</span><span class="n">with_layout</span><span class="p">,</span>
+                              <span class="n">fold</span><span class="o">=</span><span class="n">fold</span><span class="p">,</span>
+                              <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="QuantumCircuit.size"><a class="viewcode-back" href="../../../api/qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit.size">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns total number of gate operations in circuit.</span>
@@ -790,7 +985,7 @@
 <span class="sd">            int: Total number of gate operations.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">gate_ops</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">for</span> <span class="n">instr</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">instr</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">instr</span><span class="o">.</span><span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;barrier&#39;</span><span class="p">,</span> <span class="s1">&#39;snapshot&#39;</span><span class="p">]:</span>
                 <span class="n">gate_ops</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="k">return</span> <span class="n">gate_ops</span></div>
@@ -829,7 +1024,7 @@
         <span class="c1"># We treat barriers or snapshots different as</span>
         <span class="c1"># They are transpiler and simulator directives.</span>
         <span class="c1"># The max stack height is the circuit depth.</span>
-        <span class="k">for</span> <span class="n">instr</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">instr</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">:</span>
             <span class="n">levels</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="n">reg_ints</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="c1"># If count then add one to stack heights</span>
@@ -844,13 +1039,13 @@
                     <span class="n">levels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">op_stack</span><span class="p">[</span><span class="n">reg_ints</span><span class="p">[</span><span class="n">ind</span><span class="p">]]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">levels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">op_stack</span><span class="p">[</span><span class="n">reg_ints</span><span class="p">[</span><span class="n">ind</span><span class="p">]])</span>
-            <span class="c1"># Assuming here that there is no controlled</span>
+            <span class="c1"># Assuming here that there is no conditional</span>
             <span class="c1"># snapshots or barriers ever.</span>
-            <span class="k">if</span> <span class="n">instr</span><span class="o">.</span><span class="n">control</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">instr</span><span class="o">.</span><span class="n">condition</span><span class="p">:</span>
                 <span class="c1"># Controls operate over all bits in the</span>
                 <span class="c1"># classical register they use.</span>
-                <span class="n">cint</span> <span class="o">=</span> <span class="n">reg_map</span><span class="p">[</span><span class="n">instr</span><span class="o">.</span><span class="n">control</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">]</span>
-                <span class="k">for</span> <span class="n">off</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">instr</span><span class="o">.</span><span class="n">control</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">size</span><span class="p">):</span>
+                <span class="n">cint</span> <span class="o">=</span> <span class="n">reg_map</span><span class="p">[</span><span class="n">instr</span><span class="o">.</span><span class="n">condition</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">off</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">instr</span><span class="o">.</span><span class="n">condition</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">size</span><span class="p">):</span>
                     <span class="k">if</span> <span class="n">cint</span> <span class="o">+</span> <span class="n">off</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">reg_ints</span><span class="p">:</span>
                         <span class="n">reg_ints</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cint</span> <span class="o">+</span> <span class="n">off</span><span class="p">)</span>
                         <span class="n">levels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">op_stack</span><span class="p">[</span><span class="n">cint</span> <span class="o">+</span> <span class="n">off</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
@@ -887,7 +1082,7 @@
 <span class="sd">            OrderedDict: a breakdown of how many operations of each kind, sorted by amount.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">count_ops</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="k">for</span> <span class="n">instr</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">instr</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">instr</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="n">count_ops</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
                 <span class="n">count_ops</span><span class="p">[</span><span class="n">instr</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="k">else</span><span class="p">:</span>
@@ -922,21 +1117,21 @@
 
         <span class="c1"># Here we are traversing the gates and looking to see</span>
         <span class="c1"># which of the sub_graphs the gate joins together.</span>
-        <span class="k">for</span> <span class="n">instr</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">instr</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">unitary_only</span><span class="p">:</span>
                 <span class="n">args</span> <span class="o">=</span> <span class="n">qargs</span>
                 <span class="n">num_qargs</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">args</span> <span class="o">=</span> <span class="n">qargs</span> <span class="o">+</span> <span class="n">cargs</span>
-                <span class="n">num_qargs</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="k">if</span> <span class="n">instr</span><span class="o">.</span><span class="n">control</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
+                <span class="n">num_qargs</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="k">if</span> <span class="n">instr</span><span class="o">.</span><span class="n">condition</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
 
             <span class="k">if</span> <span class="n">num_qargs</span> <span class="o">&gt;=</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">instr</span><span class="o">.</span><span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;barrier&#39;</span><span class="p">,</span> <span class="s1">&#39;snapshot&#39;</span><span class="p">]:</span>
                 <span class="n">graphs_touched</span> <span class="o">=</span> <span class="p">[]</span>
                 <span class="n">num_touched</span> <span class="o">=</span> <span class="mi">0</span>
                 <span class="c1"># Controls necessarily join all the cbits in the</span>
                 <span class="c1"># register that they use.</span>
-                <span class="k">if</span> <span class="n">instr</span><span class="o">.</span><span class="n">control</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">unitary_only</span><span class="p">:</span>
-                    <span class="n">creg</span> <span class="o">=</span> <span class="n">instr</span><span class="o">.</span><span class="n">control</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">instr</span><span class="o">.</span><span class="n">condition</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">unitary_only</span><span class="p">:</span>
+                    <span class="n">creg</span> <span class="o">=</span> <span class="n">instr</span><span class="o">.</span><span class="n">condition</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
                     <span class="n">creg_int</span> <span class="o">=</span> <span class="n">reg_map</span><span class="p">[</span><span class="n">creg</span><span class="o">.</span><span class="n">name</span><span class="p">]</span>
                     <span class="k">for</span> <span class="n">coff</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">creg</span><span class="o">.</span><span class="n">size</span><span class="p">):</span>
                         <span class="n">temp_int</span> <span class="o">=</span> <span class="n">creg_int</span> <span class="o">+</span> <span class="n">coff</span>
@@ -992,17 +1187,81 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_unitary_factors</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="QuantumCircuit.copy"><a class="viewcode-back" href="../../../api/qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit.copy">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Copy the circuit.</span>
+
 <span class="sd">        Args:</span>
 <span class="sd">          name (str): name to be given to the copied circuit, if None then the name stays the same</span>
+
 <span class="sd">        Returns:</span>
-<span class="sd">          QuantumCircuit: a deepcopy of the current circuit, with the name updated if</span>
-<span class="sd">                          it was provided</span>
+<span class="sd">          QuantumCircuit: a deepcopy of the current circuit, with the specified name</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">cpy</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">name</span><span class="p">:</span>
             <span class="n">cpy</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
         <span class="k">return</span> <span class="n">cpy</span></div>
+
+    <span class="k">def</span> <span class="nf">_create_creg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Creates a creg, checking if ClassicalRegister with same name exists</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">[</span><span class="n">creg</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">creg</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cregs</span><span class="p">]:</span>
+            <span class="n">save_prefix</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="o">.</span><span class="n">prefix</span>
+            <span class="n">ClassicalRegister</span><span class="o">.</span><span class="n">prefix</span> <span class="o">=</span> <span class="n">name</span>
+            <span class="n">new_creg</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="n">length</span><span class="p">)</span>
+            <span class="n">ClassicalRegister</span><span class="o">.</span><span class="n">prefix</span> <span class="o">=</span> <span class="n">save_prefix</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">new_creg</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">new_creg</span>
+
+<div class="viewcode-block" id="QuantumCircuit.measure_active"><a class="viewcode-back" href="../../../api/qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit.measure_active">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">measure_active</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Adds measurement to all non-idle qubits. Creates a new ClassicalRegister with</span>
+<span class="sd">        a size equal to the number of non-idle qubits being measured.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">qiskit.converters.circuit_to_dag</span> <span class="k">import</span> <span class="n">circuit_to_dag</span>
+        <span class="n">dag</span> <span class="o">=</span> <span class="n">circuit_to_dag</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">qubits_to_measure</span> <span class="o">=</span> <span class="p">[</span><span class="n">qubit</span> <span class="k">for</span> <span class="n">qubit</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">qubits</span> <span class="k">if</span> <span class="n">qubit</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">dag</span><span class="o">.</span><span class="n">idle_wires</span><span class="p">()]</span>
+        <span class="n">new_creg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_creg</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">qubits_to_measure</span><span class="p">),</span> <span class="s1">&#39;measure&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_register</span><span class="p">(</span><span class="n">new_creg</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">barrier</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">qubits_to_measure</span><span class="p">,</span> <span class="n">new_creg</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="QuantumCircuit.measure_all"><a class="viewcode-back" href="../../../api/qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit.measure_all">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">measure_all</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Adds measurement to all qubits. Creates a new ClassicalRegister with a</span>
+<span class="sd">        size equal to the number of qubits being measured.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">new_creg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_creg</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">qubits</span><span class="p">),</span> <span class="s1">&#39;measure&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_register</span><span class="p">(</span><span class="n">new_creg</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">barrier</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">qubits</span><span class="p">,</span> <span class="n">new_creg</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="QuantumCircuit.remove_final_measurements"><a class="viewcode-back" href="../../../api/qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit.remove_final_measurements">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">remove_final_measurements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Removes final measurement on all qubits if they are present.</span>
+<span class="sd">        Deletes the ClassicalRegister that was used to store the values from these measurements</span>
+<span class="sd">        if it is idle.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># pylint: disable=cyclic-import</span>
+        <span class="kn">from</span> <span class="nn">qiskit.transpiler.passes</span> <span class="k">import</span> <span class="n">RemoveFinalMeasurements</span>
+        <span class="kn">from</span> <span class="nn">qiskit.converters</span> <span class="k">import</span> <span class="n">circuit_to_dag</span>
+        <span class="n">dag</span> <span class="o">=</span> <span class="n">circuit_to_dag</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">remove_final_meas</span> <span class="o">=</span> <span class="n">RemoveFinalMeasurements</span><span class="p">()</span>
+        <span class="n">new_dag</span> <span class="o">=</span> <span class="n">remove_final_meas</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">dag</span><span class="p">)</span>
+
+        <span class="c1"># Set self&#39;s cregs and instructions to match the new DAGCircuit&#39;s</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cregs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">new_dag</span><span class="o">.</span><span class="n">cregs</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+
+        <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">new_dag</span><span class="o">.</span><span class="n">topological_op_nodes</span><span class="p">():</span>
+            <span class="n">qubits</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">qubit</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">qargs</span><span class="p">:</span>
+                <span class="n">qubits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_dag</span><span class="o">.</span><span class="n">qregs</span><span class="p">[</span><span class="n">qubit</span><span class="o">.</span><span class="n">register</span><span class="o">.</span><span class="n">name</span><span class="p">][</span><span class="n">qubit</span><span class="o">.</span><span class="n">index</span><span class="p">])</span>
+
+            <span class="n">clbits</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">clbit</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">cargs</span><span class="p">:</span>
+                <span class="n">clbits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_dag</span><span class="o">.</span><span class="n">cregs</span><span class="p">[</span><span class="n">clbit</span><span class="o">.</span><span class="n">register</span><span class="o">.</span><span class="n">name</span><span class="p">][</span><span class="n">clbit</span><span class="o">.</span><span class="n">index</span><span class="p">])</span>
+
+            <span class="c1"># Get arguments for classical condition (if any)</span>
+            <span class="n">inst</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">op</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="n">inst</span><span class="o">.</span><span class="n">condition</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">condition</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">inst</span><span class="p">,</span> <span class="n">qubits</span><span class="p">,</span> <span class="n">clbits</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="QuantumCircuit.from_qasm_file"><a class="viewcode-back" href="../../../api/qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit.from_qasm_file">[ドキュメント]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">from_qasm_file</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>

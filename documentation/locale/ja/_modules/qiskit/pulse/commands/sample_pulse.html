@@ -33,7 +33,7 @@
        </script>
         <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
     
-    <title>qiskit.pulse.commands.sample_pulse &#8212; Qiskit 0.12.2 ドキュメント</title>
+    <title>qiskit.pulse.commands.sample_pulse &#8212; Qiskit 0.13.0 ドキュメント</title>
 
     <link rel="stylesheet" href="../../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -213,7 +213,7 @@
     <span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;p&#39;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">samples</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">complex</span><span class="p">]],</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                 <span class="n">epsilon</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-6</span><span class="p">):</span>
+                 <span class="n">epsilon</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-7</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create new sample pulse command.</span>
 
 <span class="sd">        Args:</span>
@@ -236,7 +236,7 @@
         <span class="sd">&quot;&quot;&quot;Return sample values.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_samples</span>
 
-    <span class="k">def</span> <span class="nf">_clip</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">samples</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-6</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_clip</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">samples</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-7</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;If samples are within epsilon of unit norm, clip sample by reducing norm by (1-epsilon).</span>
 
 <span class="sd">        If difference is greater than epsilon error is raised.</span>
@@ -257,8 +257,22 @@
         <span class="n">to_clip</span> <span class="o">=</span> <span class="p">(</span><span class="n">samples_norm</span> <span class="o">&gt;</span> <span class="mf">1.</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">samples_norm</span> <span class="o">&lt;=</span> <span class="mf">1.</span> <span class="o">+</span> <span class="n">epsilon</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">to_clip</span><span class="p">):</span>
+            <span class="c1"># first try normalizing by the abs value</span>
             <span class="n">clip_where</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argwhere</span><span class="p">(</span><span class="n">to_clip</span><span class="p">)</span>
-            <span class="n">clipped_samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">samples</span><span class="p">[</span><span class="n">clip_where</span><span class="p">]),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">complex_</span><span class="p">)</span>
+            <span class="n">clip_angle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">samples</span><span class="p">[</span><span class="n">clip_where</span><span class="p">])</span>
+            <span class="n">clipped_samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">clip_angle</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">complex_</span><span class="p">)</span>
+
+            <span class="c1"># if norm still exceed one subtract epsilon</span>
+            <span class="c1"># required for some platforms</span>
+            <span class="n">clipped_sample_norms</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">clipped_samples</span><span class="p">)</span>
+            <span class="n">to_clip_epsilon</span> <span class="o">=</span> <span class="n">clipped_sample_norms</span> <span class="o">&gt;</span> <span class="mf">1.</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">to_clip_epsilon</span><span class="p">):</span>
+                <span class="n">clip_where_epsilon</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argwhere</span><span class="p">(</span><span class="n">to_clip_epsilon</span><span class="p">)</span>
+                <span class="n">clipped_samples_epsilon</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span>
+                    <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">epsilon</span><span class="p">)</span><span class="o">*</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">clip_angle</span><span class="p">[</span><span class="n">clip_where_epsilon</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">complex_</span><span class="p">)</span>
+                <span class="n">clipped_samples</span><span class="p">[</span><span class="n">clip_where_epsilon</span><span class="p">]</span> <span class="o">=</span> <span class="n">clipped_samples_epsilon</span>
+
+            <span class="c1"># update samples with clipped values</span>
             <span class="n">samples</span><span class="p">[</span><span class="n">clip_where</span><span class="p">]</span> <span class="o">=</span> <span class="n">clipped_samples</span>
             <span class="n">samples_norm</span><span class="p">[</span><span class="n">clip_where</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">clipped_samples</span><span class="p">)</span>
 
@@ -267,8 +281,10 @@
 
         <span class="k">return</span> <span class="n">samples</span>
 
-<div class="viewcode-block" id="SamplePulse.draw"><a class="viewcode-back" href="../../../../api/qiskit.pulse.SamplePulse.html#qiskit.pulse.SamplePulse.draw">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s1">&#39;PulseStyle&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-             <span class="n">filename</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">interp_method</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<div class="viewcode-block" id="SamplePulse.draw"><a class="viewcode-back" href="../../../../api/qiskit.pulse.SamplePulse.html#qiskit.pulse.SamplePulse.draw">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+             <span class="n">style</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s1">&#39;PulseStyle&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+             <span class="n">filename</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+             <span class="n">interp_method</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
              <span class="n">scaling</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">interactive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Plot the interpolated envelope of pulse.</span>
 

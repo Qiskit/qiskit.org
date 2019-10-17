@@ -33,7 +33,7 @@
        </script>
         <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
     
-    <title>qiskit.transpiler.preset_passmanagers.level2 &#8212; Qiskit 0.12.2 ドキュメント</title>
+    <title>qiskit.transpiler.preset_passmanagers.level2 &#8212; Qiskit 0.13.0 ドキュメント</title>
 
     <link rel="stylesheet" href="../../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -210,7 +210,6 @@
 <span class="kn">from</span> <span class="nn">qiskit.transpiler.passes</span> <span class="k">import</span> <span class="n">CXDirection</span>
 <span class="kn">from</span> <span class="nn">qiskit.transpiler.passes</span> <span class="k">import</span> <span class="n">SetLayout</span>
 <span class="kn">from</span> <span class="nn">qiskit.transpiler.passes</span> <span class="k">import</span> <span class="n">DenseLayout</span>
-<span class="kn">from</span> <span class="nn">qiskit.transpiler.passes</span> <span class="k">import</span> <span class="n">NoiseAdaptiveLayout</span>
 <span class="kn">from</span> <span class="nn">qiskit.transpiler.passes</span> <span class="k">import</span> <span class="n">BarrierBeforeFinalMeasurements</span>
 <span class="kn">from</span> <span class="nn">qiskit.transpiler.passes</span> <span class="k">import</span> <span class="n">StochasticSwap</span>
 <span class="kn">from</span> <span class="nn">qiskit.transpiler.passes</span> <span class="k">import</span> <span class="n">FullAncillaAllocation</span>
@@ -261,9 +260,7 @@
     <span class="k">def</span> <span class="nf">_choose_layout_condition</span><span class="p">(</span><span class="n">property_set</span><span class="p">):</span>
         <span class="k">return</span> <span class="ow">not</span> <span class="n">property_set</span><span class="p">[</span><span class="s1">&#39;layout&#39;</span><span class="p">]</span>
 
-    <span class="n">_choose_layout</span> <span class="o">=</span> <span class="n">DenseLayout</span><span class="p">(</span><span class="n">coupling_map</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">backend_properties</span><span class="p">:</span>
-        <span class="n">_choose_layout</span> <span class="o">=</span> <span class="n">NoiseAdaptiveLayout</span><span class="p">(</span><span class="n">backend_properties</span><span class="p">)</span>
+    <span class="n">_choose_layout</span> <span class="o">=</span> <span class="n">DenseLayout</span><span class="p">(</span><span class="n">coupling_map</span><span class="p">,</span> <span class="n">backend_properties</span><span class="p">)</span>
 
     <span class="c1"># 3. Extend dag/layout with ancillas using the full coupling map</span>
     <span class="n">_embed</span> <span class="o">=</span> <span class="p">[</span><span class="n">FullAncillaAllocation</span><span class="p">(</span><span class="n">coupling_map</span><span class="p">),</span> <span class="n">EnlargeWithAncilla</span><span class="p">(),</span> <span class="n">ApplyLayout</span><span class="p">()]</span>

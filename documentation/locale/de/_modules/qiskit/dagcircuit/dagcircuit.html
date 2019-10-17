@@ -33,7 +33,7 @@
        </script>
         <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
     
-    <title>qiskit.dagcircuit.dagcircuit &#8212; Qiskit 0.12.2 Dokumentation</title>
+    <title>qiskit.dagcircuit.dagcircuit &#8212; Qiskit 0.13.0 Dokumentation</title>
 
     <link rel="stylesheet" href="../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -545,11 +545,11 @@
                     <span class="c1"># If mapping to a register not in valregs, add it.</span>
                     <span class="c1"># (k,0) exists in edge_map because edge_map doesn&#39;t</span>
                     <span class="c1"># fragment k</span>
-                    <span class="k">if</span> <span class="ow">not</span> <span class="n">edge_map</span><span class="p">[(</span><span class="n">k</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]</span><span class="o">.</span><span class="n">register</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="n">valregs</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">edge_map</span><span class="p">[</span><span class="n">k</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">register</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="n">valregs</span><span class="p">:</span>
                         <span class="n">size</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">index</span><span class="p">,</span>
-                                       <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">register</span> <span class="o">==</span> <span class="n">edge_map</span><span class="p">[(</span><span class="n">k</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]</span><span class="o">.</span><span class="n">register</span><span class="p">,</span>
+                                       <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">register</span> <span class="o">==</span> <span class="n">edge_map</span><span class="p">[</span><span class="n">k</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">register</span><span class="p">,</span>
                                               <span class="n">edge_map</span><span class="o">.</span><span class="n">values</span><span class="p">())))</span>
-                        <span class="n">qreg</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="n">size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">edge_map</span><span class="p">[(</span><span class="n">k</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]</span><span class="o">.</span><span class="n">register</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+                        <span class="n">qreg</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="n">size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">edge_map</span><span class="p">[</span><span class="n">k</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">register</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
                         <span class="n">add_regs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">qreg</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">add_regs</span>
 
@@ -899,8 +899,7 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            generator(DAGNode): node in topological order</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">nx</span><span class="o">.</span><span class="n">lexicographical_topological_sort</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_multi_graph</span><span class="p">,</span>
-                                                   <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">qargs</span><span class="p">))</span></div>
+        <span class="k">return</span> <span class="n">nx</span><span class="o">.</span><span class="n">lexicographical_topological_sort</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_multi_graph</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">qargs</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="DAGCircuit.topological_op_nodes"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.topological_op_nodes">[Doku]</a>    <span class="k">def</span> <span class="nf">topological_op_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -933,7 +932,7 @@
             <span class="n">to_replay</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">sorted_node</span> <span class="ow">in</span> <span class="n">input_dag</span><span class="o">.</span><span class="n">topological_nodes</span><span class="p">():</span>
                 <span class="k">if</span> <span class="n">sorted_node</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">&quot;op&quot;</span><span class="p">:</span>
-                    <span class="n">sorted_node</span><span class="o">.</span><span class="n">op</span><span class="o">.</span><span class="n">control</span> <span class="o">=</span> <span class="n">condition</span>
+                    <span class="n">sorted_node</span><span class="o">.</span><span class="n">op</span><span class="o">.</span><span class="n">condition</span> <span class="o">=</span> <span class="n">condition</span>
                     <span class="n">to_replay</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sorted_node</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">input_node</span> <span class="ow">in</span> <span class="n">input_dag</span><span class="o">.</span><span class="n">op_nodes</span><span class="p">():</span>
                 <span class="n">input_dag</span><span class="o">.</span><span class="n">remove_op_node</span><span class="p">(</span><span class="n">input_node</span><span class="p">)</span>
@@ -966,7 +965,7 @@
         <span class="c1"># Replace the node by iterating through the input_circuit.</span>
         <span class="c1"># Constructing and checking the validity of the wire_map.</span>
         <span class="c1"># If a gate is conditioned, we expect the replacement subcircuit</span>
-        <span class="c1"># to depend on those control bits as well.</span>
+        <span class="c1"># to depend on those condition bits as well.</span>
         <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">type</span> <span class="o">!=</span> <span class="s2">&quot;op&quot;</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">DAGCircuitError</span><span class="p">(</span><span class="s2">&quot;expected node type </span><span class="se">\&quot;</span><span class="s2">op</span><span class="se">\&quot;</span><span class="s2">, got </span><span class="si">%s</span><span class="s2">&quot;</span>
                                   <span class="o">%</span> <span class="n">node</span><span class="o">.</span><span class="n">type</span><span class="p">)</span>
@@ -1037,6 +1036,63 @@
                     <span class="k">raise</span> <span class="n">DAGCircuitError</span><span class="p">(</span><span class="s2">&quot;expected 1 predecessor to pass filter&quot;</span><span class="p">)</span>
 
                 <span class="bp">self</span><span class="o">.</span><span class="n">_multi_graph</span><span class="o">.</span><span class="n">remove_edge</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_map</span><span class="p">[</span><span class="n">w</span><span class="p">])</span></div>
+
+<div class="viewcode-block" id="DAGCircuit.substitute_node"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.substitute_node">[Doku]</a>    <span class="k">def</span> <span class="nf">substitute_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">op</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Replace a DAGNode with a single instruction. qargs, cargs and</span>
+<span class="sd">        conditions for the new instruction will be inferred from the node to be</span>
+<span class="sd">        replaced. The new instruction will be checked to match the shape of the</span>
+<span class="sd">        replaced instruction.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            node (DAGNode): Node to be replaced</span>
+<span class="sd">            op (Instruction): The Instruction instance to be added to the DAG</span>
+<span class="sd">            inplace (bool): Optional, default False. If True, existing DAG node</span>
+<span class="sd">                will be modified to include op. Otherwise, a new DAG node will</span>
+<span class="sd">                be used.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            DAGNode: the new node containing the added instruction.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            DAGCircuitError: If replacement instruction was incompatible with</span>
+<span class="sd">            location of target node.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">type</span> <span class="o">!=</span> <span class="s1">&#39;op&#39;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">DAGCircuitError</span><span class="p">(</span><span class="s1">&#39;Only DAGNodes of type &quot;op&quot; can be replaced.&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="p">(</span>
+                <span class="n">node</span><span class="o">.</span><span class="n">op</span><span class="o">.</span><span class="n">num_qubits</span> <span class="o">!=</span> <span class="n">op</span><span class="o">.</span><span class="n">num_qubits</span>
+                <span class="ow">or</span> <span class="n">node</span><span class="o">.</span><span class="n">op</span><span class="o">.</span><span class="n">num_clbits</span> <span class="o">!=</span> <span class="n">op</span><span class="o">.</span><span class="n">num_clbits</span>
+        <span class="p">):</span>
+            <span class="k">raise</span> <span class="n">DAGCircuitError</span><span class="p">(</span>
+                <span class="s1">&#39;Cannot replace node of width (</span><span class="si">{}</span><span class="s1"> qubits, </span><span class="si">{}</span><span class="s1"> clbits) with &#39;</span>
+                <span class="s1">&#39;instruction of mismatched with (</span><span class="si">{}</span><span class="s1"> qubits, </span><span class="si">{}</span><span class="s1"> clbits).&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">node</span><span class="o">.</span><span class="n">op</span><span class="o">.</span><span class="n">num_qubits</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">op</span><span class="o">.</span><span class="n">num_clbits</span><span class="p">,</span>
+                    <span class="n">op</span><span class="o">.</span><span class="n">num_qubits</span><span class="p">,</span> <span class="n">op</span><span class="o">.</span><span class="n">num_clbits</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">inplace</span><span class="p">:</span>
+            <span class="n">node</span><span class="o">.</span><span class="n">data_dict</span><span class="p">[</span><span class="s1">&#39;op&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">op</span>
+            <span class="k">return</span> <span class="n">node</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_max_node_id</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">new_data_dict</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">data_dict</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">new_data_dict</span><span class="p">[</span><span class="s1">&#39;op&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">op</span>
+        <span class="n">new_node</span> <span class="o">=</span> <span class="n">DAGNode</span><span class="p">(</span><span class="n">new_data_dict</span><span class="p">,</span> <span class="n">nid</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_max_node_id</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_multi_graph</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">new_node</span><span class="p">)</span>
+
+        <span class="n">in_edges</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_multi_graph</span><span class="o">.</span><span class="n">in_edges</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">out_edges</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_multi_graph</span><span class="o">.</span><span class="n">out_edges</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_multi_graph</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">(</span>
+            <span class="p">[(</span><span class="n">src</span><span class="p">,</span> <span class="n">new_node</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span> <span class="k">for</span> <span class="n">src</span><span class="p">,</span> <span class="n">dest</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">in_edges</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_multi_graph</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">(</span>
+            <span class="p">[(</span><span class="n">new_node</span><span class="p">,</span> <span class="n">dest</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span> <span class="k">for</span> <span class="n">src</span><span class="p">,</span> <span class="n">dest</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">out_edges</span><span class="p">])</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_multi_graph</span><span class="o">.</span><span class="n">remove_node</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">new_node</span></div>
 
 <div class="viewcode-block" id="DAGCircuit.node"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.node">[Doku]</a>    <span class="k">def</span> <span class="nf">node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_id</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the node in the dag.</span>

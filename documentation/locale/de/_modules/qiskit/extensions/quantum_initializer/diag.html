@@ -33,7 +33,7 @@
        </script>
         <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
     
-    <title>qiskit.extensions.quantum_initializer.diag &#8212; Qiskit 0.12.2 Dokumentation</title>
+    <title>qiskit.extensions.quantum_initializer.diag &#8212; Qiskit 0.13.0 Dokumentation</title>
 
     <link rel="stylesheet" href="../../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -196,7 +196,6 @@
 <span class="c1"># The structure of the code is based on Emanuel Malvetti&#39;s semester thesis at ETH in 2018,</span>
 <span class="c1"># which was supervised by Raban Iten and Prof. Renato Renner.</span>
 
-<span class="c1"># pylint: disable=invalid-name</span>
 <span class="c1"># pylint: disable=missing-param-doc</span>
 <span class="c1"># pylint: disable=missing-type-doc</span>
 
@@ -283,27 +282,27 @@
 
 
 <span class="k">def</span> <span class="nf">diag_gate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">diag</span><span class="p">,</span> <span class="n">qubit</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Attach a diagonal gate to a circuit. The decomposition is based on Theorem 7 given in</span>
-<span class="sd">    &quot;Synthesis of Quantum Logic Circuits&quot; by Shende et al.</span>
-<span class="sd">    (https://arxiv.org/pdf/quant-ph/0406176.pdf).</span>
+    <span class="sd">&quot;&quot;&quot;Attach a diagonal gate to a circuit.</span>
 
-<span class="sd">        Args:</span>
-<span class="sd">            diag (list): list of the 2^k diagonal entries (for a diagonal gate on k qubits).</span>
-<span class="sd">                Must contain at least two entries</span>
-<span class="sd">            qubit (QuantumRegister|list): list of k qubits the diagonal is</span>
-<span class="sd">                acting on (the order of the qubits specifies the computational basis in which the</span>
-<span class="sd">                diagonal gate is provided: the first element in diag acts on the state where all</span>
-<span class="sd">                the qubits in q are in the state 0, the second entry acts on the state where all</span>
-<span class="sd">                the qubits q[1],...,q[k-1] are in the state zero and q[0] is in the state 1,</span>
-<span class="sd">                and so on</span>
+<span class="sd">    The decomposition is based on Theorem 7 given in &quot;Synthesis of Quantum Logic Circuits&quot; by</span>
+<span class="sd">    Shende et al. (https://arxiv.org/pdf/quant-ph/0406176.pdf).</span>
 
-<span class="sd">        Returns:</span>
-<span class="sd">            QuantumCircuit: the diagonal gate is attached to the circuit.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        diag (list): list of the 2^k diagonal entries (for a diagonal gate on k qubits).</span>
+<span class="sd">            Must contain at least two entries</span>
+<span class="sd">        qubit (QuantumRegister|list): list of k qubits the diagonal is</span>
+<span class="sd">            acting on (the order of the qubits specifies the computational basis in which the</span>
+<span class="sd">            diagonal gate is provided: the first element in diag acts on the state where all</span>
+<span class="sd">            the qubits in q are in the state 0, the second entry acts on the state where all</span>
+<span class="sd">            the qubits q[1],...,q[k-1] are in the state zero and q[0] is in the state 1,</span>
+<span class="sd">            and so on</span>
 
-<span class="sd">        Raises:</span>
-<span class="sd">            QiskitError: if the list of the diagonal entries or the qubit list is in bad format;</span>
-<span class="sd">                if the number of diagonal entries is not 2^k, where k denotes the number of qubits</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        QuantumCircuit: the diagonal gate which was attached to the circuit.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        QiskitError: if the list of the diagonal entries or the qubit list is in bad format;</span>
+<span class="sd">            if the number of diagonal entries is not 2^k, where k denotes the number of qubits</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">qubit</span><span class="p">,</span> <span class="n">QuantumRegister</span><span class="p">):</span>

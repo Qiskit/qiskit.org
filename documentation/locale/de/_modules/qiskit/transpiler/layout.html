@@ -33,7 +33,7 @@
        </script>
         <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
     
-    <title>qiskit.transpiler.layout &#8212; Qiskit 0.12.2 Dokumentation</title>
+    <title>qiskit.transpiler.layout &#8212; Qiskit 0.13.0 Dokumentation</title>
 
     <link rel="stylesheet" href="../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -204,6 +204,7 @@
 
 <span class="kn">from</span> <span class="nn">qiskit.circuit.quantumregister</span> <span class="k">import</span> <span class="n">Qubit</span>
 <span class="kn">from</span> <span class="nn">qiskit.transpiler.exceptions</span> <span class="k">import</span> <span class="n">LayoutError</span>
+<span class="kn">from</span> <span class="nn">qiskit.converters</span> <span class="k">import</span> <span class="n">isinstanceint</span>
 
 
 <div class="viewcode-block" id="Layout"><a class="viewcode-back" href="../../../api/qiskit.transpiler.Layout.html#qiskit.transpiler.Layout">[Doku]</a><span class="k">class</span> <span class="nc">Layout</span><span class="p">():</span>
@@ -268,11 +269,11 @@
 <div class="viewcode-block" id="Layout.order_based_on_type"><a class="viewcode-back" href="../../../api/qiskit.transpiler.Layout.html#qiskit.transpiler.Layout.order_based_on_type">[Doku]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">order_based_on_type</span><span class="p">(</span><span class="n">value1</span><span class="p">,</span> <span class="n">value2</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;decides which one is physical/virtual based on the type. Returns (virtual, physical)&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value1</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value2</span><span class="p">,</span> <span class="p">(</span><span class="n">Qubit</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">))):</span>
-            <span class="n">physical</span> <span class="o">=</span> <span class="n">value1</span>
+        <span class="k">if</span> <span class="n">isinstanceint</span><span class="p">(</span><span class="n">value1</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value2</span><span class="p">,</span> <span class="p">(</span><span class="n">Qubit</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">))):</span>
+            <span class="n">physical</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">value1</span><span class="p">)</span>
             <span class="n">virtual</span> <span class="o">=</span> <span class="n">value2</span>
-        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value2</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value1</span><span class="p">,</span> <span class="p">(</span><span class="n">Qubit</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">))):</span>
-            <span class="n">physical</span> <span class="o">=</span> <span class="n">value2</span>
+        <span class="k">elif</span> <span class="n">isinstanceint</span><span class="p">(</span><span class="n">value2</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value1</span><span class="p">,</span> <span class="p">(</span><span class="n">Qubit</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">))):</span>
+            <span class="n">physical</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">value2</span><span class="p">)</span>
             <span class="n">virtual</span> <span class="o">=</span> <span class="n">value1</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">LayoutError</span><span class="p">(</span><span class="s1">&#39;The map (</span><span class="si">%s</span><span class="s1"> -&gt; </span><span class="si">%s</span><span class="s1">) has to be a (Bit -&gt; integer)&#39;</span>
@@ -339,6 +340,7 @@
 <span class="sd">        Adds a map element between `bit` and `physical_bit`. If `physical_bit` is not</span>
 <span class="sd">        defined, `bit` will be mapped to a new physical bit (extending the length of the</span>
 <span class="sd">        layout by one.)</span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            virtual_bit (tuple): A (qu)bit. For example, (QuantumRegister(3, &#39;qr&#39;), 2).</span>
 <span class="sd">            physical_bit (int): A physical bit. For example, 3.</span>
@@ -351,8 +353,8 @@
         <span class="bp">self</span><span class="p">[</span><span class="n">virtual_bit</span><span class="p">]</span> <span class="o">=</span> <span class="n">physical_bit</span></div>
 
 <div class="viewcode-block" id="Layout.add_register"><a class="viewcode-back" href="../../../api/qiskit.transpiler.Layout.html#qiskit.transpiler.Layout.add_register">[Doku]</a>    <span class="k">def</span> <span class="nf">add_register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reg</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Adds at the end physical_qubits that map each bit in reg.</span>
+        <span class="sd">&quot;&quot;&quot;Adds at the end physical_qubits that map each bit in reg.</span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            reg (Register): A (qu)bit Register. For example, QuantumRegister(3, &#39;qr&#39;).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -383,6 +385,7 @@
 
 <div class="viewcode-block" id="Layout.swap"><a class="viewcode-back" href="../../../api/qiskit.transpiler.Layout.html#qiskit.transpiler.Layout.swap">[Doku]</a>    <span class="k">def</span> <span class="nf">swap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Swaps the map between left and right.</span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            left (tuple or int): Item to swap with right.</span>
 <span class="sd">            right (tuple or int): Item to swap with left.</span>
@@ -426,8 +429,8 @@
 
 <div class="viewcode-block" id="Layout.generate_trivial_layout"><a class="viewcode-back" href="../../../api/qiskit.transpiler.Layout.html#qiskit.transpiler.Layout.generate_trivial_layout">[Doku]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">generate_trivial_layout</span><span class="p">(</span><span class="o">*</span><span class="n">regs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Creates a trivial (&quot;one-to-one&quot;) Layout with the registers in `regs`.</span>
+        <span class="sd">&quot;&quot;&quot;Creates a trivial (&quot;one-to-one&quot;) Layout with the registers in `regs`.</span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            *regs (Registers): registers to include in the layout.</span>
 <span class="sd">        Returns:</span>
@@ -453,7 +456,7 @@
 <span class="sd">        Raises:</span>
 <span class="sd">            LayoutError: Invalid input layout.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">int_list</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">isinstanceint</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">int_list</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">LayoutError</span><span class="p">(</span><span class="s1">&#39;Expected a list of ints&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">int_list</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">int_list</span><span class="p">)):</span>
             <span class="k">raise</span> <span class="n">LayoutError</span><span class="p">(</span><span class="s1">&#39;Duplicate values not permitted; Layout is bijective.&#39;</span><span class="p">)</span>
@@ -478,6 +481,7 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Populates a Layout from a list containing virtual</span>
 <span class="sd">        qubits---(QuantumRegister, int) tuples---, or None.</span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            tuple_list (list):</span>
 <span class="sd">                e.g.: [(qr,0), None, (qr,2), (qr,3)]</span>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de">
   <head>
     <meta charset="utf-8" />
     <meta charset="utf-8">
@@ -33,7 +33,7 @@
        </script>
         <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
     
-    <title>qiskit.pulse.channels.pulse_channels &#8212; Qiskit 0.12.2 ドキュメント</title>
+    <title>qiskit.extensions.standard.ms &#8212; Qiskit 0.13.0 Dokumentation</title>
 
     <link rel="stylesheet" href="../../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -58,8 +58,8 @@
     <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../../../../_static/favicon.ico"/>
-    <link rel="index" title="索引" href="../../../../genindex.html" />
-    <link rel="search" title="検索" href="../../../../search.html" /> 
+    <link rel="index" title="Stichwortverzeichnis" href="../../../../genindex.html" />
+    <link rel="search" title="Suche" href="../../../../search.html" /> 
   </head>
 <body>
   <header>
@@ -116,7 +116,7 @@
     </div>
 </div>
 <div class="globaltoc">
-  <span class="mdl-layout-title toc">目次</span>
+  <span class="mdl-layout-title toc">Table Of Contents</span>
   
   
   
@@ -164,7 +164,7 @@
     </div>
 </div>
 <div class="globaltoc">
-  <span class="mdl-layout-title toc">目次</span>
+  <span class="mdl-layout-title toc">Table Of Contents</span>
   
   
   
@@ -178,12 +178,12 @@
     <div class="document">
         <div class="page-content">
         
-  <h1>qiskit.pulse.channels.pulse_channels のソースコード</h1><div class="highlight"><pre>
+  <h1>Quellcode für qiskit.extensions.standard.ms</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
 <span class="c1"># This code is part of Qiskit.</span>
 <span class="c1">#</span>
-<span class="c1"># (C) Copyright IBM 2017, 2019.</span>
+<span class="c1"># (C) Copyright IBM 2019.</span>
 <span class="c1">#</span>
 <span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
 <span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
@@ -193,35 +193,51 @@
 <span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
 <span class="c1"># that they have been altered from the originals.</span>
 
+<span class="c1"># pylint: disable=invalid-name</span>
+
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Channels support signal output.</span>
+<span class="sd">Global Mølmer–Sørensen gate.</span>
+
+<span class="sd">The Mølmer–Sørensen gate is native to ion-trap systems. The global MS can be</span>
+<span class="sd">applied to multiple ions to entangle multiple qubits simultaneously.</span>
+
+<span class="sd">In the two-qubit case, this is equivalent to an XX(theta) interaction,</span>
+<span class="sd">and is thus reduced to the RXXGate.</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">abc</span> <span class="k">import</span> <span class="n">ABCMeta</span>
-
-<span class="kn">from</span> <span class="nn">.channels</span> <span class="k">import</span> <span class="n">Channel</span>
 
 
-<span class="k">class</span> <span class="nc">PulseChannel</span><span class="p">(</span><span class="n">Channel</span><span class="p">,</span> <span class="n">metaclass</span><span class="o">=</span><span class="n">ABCMeta</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Base class of Channel supporting pulse output.&quot;&quot;&quot;</span>
-    <span class="k">pass</span>
+<span class="kn">from</span> <span class="nn">qiskit.circuit</span> <span class="k">import</span> <span class="n">Gate</span>
+<span class="kn">from</span> <span class="nn">qiskit.circuit</span> <span class="k">import</span> <span class="n">QuantumCircuit</span>
+<span class="kn">from</span> <span class="nn">qiskit.circuit</span> <span class="k">import</span> <span class="n">QuantumRegister</span>
+<span class="kn">from</span> <span class="nn">qiskit.extensions.standard.rxx</span> <span class="k">import</span> <span class="n">RXXGate</span>
 
 
-<div class="viewcode-block" id="DriveChannel"><a class="viewcode-back" href="../../../../api/qiskit.pulse.DriveChannel.html#qiskit.pulse.DriveChannel">[ドキュメント]</a><span class="k">class</span> <span class="nc">DriveChannel</span><span class="p">(</span><span class="n">PulseChannel</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Drive Channel.&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="MSGate"><a class="viewcode-back" href="../../../../api/qiskit.extensions.standard.MSGate.html#qiskit.circuit.MSGate">[Doku]</a><span class="k">class</span> <span class="nc">MSGate</span><span class="p">(</span><span class="n">Gate</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Global Molmer-Sorensen gate.&quot;&quot;&quot;</span>
 
-    <span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;d&#39;</span></div>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_qubits</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create new MS gate.&quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;ms&quot;</span><span class="p">,</span> <span class="n">n_qubits</span><span class="p">,</span> <span class="p">[</span><span class="n">theta</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">_define</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">definition</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_qubits</span><span class="p">,</span> <span class="s2">&quot;q&quot;</span><span class="p">)</span>
+        <span class="n">rule</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_qubits</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_qubits</span><span class="p">):</span>
+                <span class="n">rule</span> <span class="o">+=</span> <span class="p">[(</span><span class="n">RXXGate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="n">j</span><span class="p">]],</span> <span class="p">[])]</span>
+
+        <span class="k">for</span> <span class="n">inst</span> <span class="ow">in</span> <span class="n">rule</span><span class="p">:</span>
+            <span class="n">definition</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">inst</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">definition</span> <span class="o">=</span> <span class="n">definition</span></div>
 
 
-<div class="viewcode-block" id="MeasureChannel"><a class="viewcode-back" href="../../../../api/qiskit.pulse.MeasureChannel.html#qiskit.pulse.MeasureChannel">[ドキュメント]</a><span class="k">class</span> <span class="nc">MeasureChannel</span><span class="p">(</span><span class="n">PulseChannel</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Measure Channel.&quot;&quot;&quot;</span>
+<span class="k">def</span> <span class="nf">ms</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">qubits</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Apply MS to q1 and q2.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">MSGate</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">qubits</span><span class="p">),</span> <span class="n">theta</span><span class="p">),</span> <span class="n">qubits</span><span class="p">)</span>
 
-    <span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;m&#39;</span></div>
 
-
-<div class="viewcode-block" id="ControlChannel"><a class="viewcode-back" href="../../../../api/qiskit.pulse.ControlChannel.html#qiskit.pulse.ControlChannel">[ドキュメント]</a><span class="k">class</span> <span class="nc">ControlChannel</span><span class="p">(</span><span class="n">PulseChannel</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Control Channel.&quot;&quot;&quot;</span>
-
-    <span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;u&#39;</span></div>
+<span class="n">QuantumCircuit</span><span class="o">.</span><span class="n">ms</span> <span class="o">=</span> <span class="n">ms</span>
 </pre></div>
 
         </div>

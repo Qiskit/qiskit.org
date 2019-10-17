@@ -33,7 +33,7 @@
        </script>
         <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
     
-    <title>qiskit.transpiler.passmanager &#8212; Qiskit 0.12.2 Dokumentation</title>
+    <title>qiskit.transpiler.passmanager &#8212; Qiskit 0.13.0 Dokumentation</title>
 
     <link rel="stylesheet" href="../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -308,25 +308,68 @@
 <span class="sd">        Raises:</span>
 <span class="sd">            TranspilerError: if a pass in passes is not a proper pass.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">passset_options</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;max_iteration&#39;</span><span class="p">:</span> <span class="n">max_iteration</span><span class="p">}</span>
+        <span class="n">options</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_join_options</span><span class="p">({</span><span class="s1">&#39;max_iteration&#39;</span><span class="p">:</span> <span class="n">max_iteration</span><span class="p">})</span>
 
-        <span class="n">options</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_join_options</span><span class="p">(</span><span class="n">passset_options</span><span class="p">)</span>
+        <span class="n">passes</span> <span class="o">=</span> <span class="n">PassManager</span><span class="o">.</span><span class="n">_normalize_passes</span><span class="p">(</span><span class="n">passes</span><span class="p">)</span>
 
+        <span class="n">flow_controller_conditions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_normalize_flow_controller</span><span class="p">(</span><span class="n">flow_controller_conditions</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">working_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="n">FlowController</span><span class="o">.</span><span class="n">controller_factory</span><span class="p">(</span><span class="n">passes</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="o">**</span><span class="n">flow_controller_conditions</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="PassManager.replace"><a class="viewcode-back" href="../../../api/qiskit.transpiler.PassManager.html#qiskit.transpiler.PassManager.replace">[Doku]</a>    <span class="k">def</span> <span class="nf">replace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">passes</span><span class="p">,</span> <span class="n">max_iteration</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">flow_controller_conditions</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Replace a particular pass in the scheduler</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            index (int): Pass index to replace, based on the position in passes().</span>
+<span class="sd">            passes (list[BasePass] or BasePass): pass(es) to be added to schedule</span>
+<span class="sd">            max_iteration (int): max number of iterations of passes. Default: 1000</span>
+<span class="sd">            flow_controller_conditions (kwargs): See add_flow_controller(): Dictionary of</span>
+<span class="sd">            control flow plugins. Default:</span>
+
+<span class="sd">                * do_while (callable property_set -&gt; boolean): The passes repeat until the</span>
+<span class="sd">                  callable returns False.</span>
+<span class="sd">                  Default: `lambda x: False # i.e. passes run once`</span>
+
+<span class="sd">                * condition (callable property_set -&gt; boolean): The passes run only if the</span>
+<span class="sd">                  callable returns True.</span>
+<span class="sd">                  Default: `lambda x: True # i.e. passes run`</span>
+<span class="sd">        Raises:</span>
+<span class="sd">            TranspilerError: if a pass in passes is not a proper pass.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">options</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_join_options</span><span class="p">({</span><span class="s1">&#39;max_iteration&#39;</span><span class="p">:</span> <span class="n">max_iteration</span><span class="p">})</span>
+
+        <span class="n">passes</span> <span class="o">=</span> <span class="n">PassManager</span><span class="o">.</span><span class="n">_normalize_passes</span><span class="p">(</span><span class="n">passes</span><span class="p">)</span>
+
+        <span class="n">flow_controller_conditions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_normalize_flow_controller</span><span class="p">(</span><span class="n">flow_controller_conditions</span><span class="p">)</span>
+
+        <span class="n">controller</span> <span class="o">=</span> <span class="n">FlowController</span><span class="o">.</span><span class="n">controller_factory</span><span class="p">(</span><span class="n">passes</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span>
+                                                       <span class="o">**</span><span class="n">flow_controller_conditions</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">working_list</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">controller</span>
+        <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">TranspilerError</span><span class="p">(</span><span class="s1">&#39;Index to replace </span><span class="si">%s</span><span class="s1"> does not exists&#39;</span> <span class="o">%</span> <span class="n">index</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_normalize_passes</span><span class="p">(</span><span class="n">passes</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">passes</span><span class="p">,</span> <span class="n">BasePass</span><span class="p">):</span>
             <span class="n">passes</span> <span class="o">=</span> <span class="p">[</span><span class="n">passes</span><span class="p">]</span>
 
         <span class="k">for</span> <span class="n">pass_</span> <span class="ow">in</span> <span class="n">passes</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pass_</span><span class="p">,</span> <span class="n">BasePass</span><span class="p">):</span>
                 <span class="k">raise</span> <span class="n">TranspilerError</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> is not a pass instance&#39;</span> <span class="o">%</span> <span class="n">pass_</span><span class="o">.</span><span class="vm">__class__</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">passes</span>
 
-        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">flow_controller_conditions</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">def</span> <span class="nf">_normalize_flow_controller</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flow_controller</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">flow_controller</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">callable</span><span class="p">(</span><span class="n">param</span><span class="p">):</span>
-                <span class="n">flow_controller_conditions</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fenced_property_set</span><span class="p">)</span>
+                <span class="n">flow_controller</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fenced_property_set</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="n">TranspilerError</span><span class="p">(</span><span class="s1">&#39;The flow controller parameter </span><span class="si">%s</span><span class="s1"> is not callable&#39;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">working_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-            <span class="n">FlowController</span><span class="o">.</span><span class="n">controller_factory</span><span class="p">(</span><span class="n">passes</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="o">**</span><span class="n">flow_controller_conditions</span><span class="p">))</span></div>
+        <span class="k">return</span> <span class="n">flow_controller</span>
 
 <div class="viewcode-block" id="PassManager.reset"><a class="viewcode-back" href="../../../api/qiskit.transpiler.PassManager.html#qiskit.transpiler.PassManager.reset">[Doku]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Reset the pass manager instance&quot;&quot;&quot;</span>

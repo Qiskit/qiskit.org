@@ -33,7 +33,7 @@
        </script>
         <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
     
-    <title>qiskit.extensions.quantum_initializer.ucg &#8212; Qiskit 0.12.2 ドキュメント</title>
+    <title>qiskit.extensions.quantum_initializer.ucg &#8212; Qiskit 0.13.0 ドキュメント</title>
 
     <link rel="stylesheet" href="../../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -238,7 +238,8 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gate_list</span><span class="p">,</span> <span class="n">up_to_diagonal</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;UCG Gate initializer.</span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            gate_list (list[ndarray]): list of two qubit unitaries [U_0,...,U_{2^k-1}],</span>
 <span class="sd">                where each single-qubit unitary U_i is given as a 2*2 numpy array.</span>
@@ -442,32 +443,32 @@
 
 
 <span class="k">def</span> <span class="nf">ucg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gate_list</span><span class="p">,</span> <span class="n">q_controls</span><span class="p">,</span> <span class="n">q_target</span><span class="p">,</span> <span class="n">up_to_diagonal</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Attach a uniformly controlled gates (also called multiplexed gates) to a circuit.</span>
+    <span class="sd">&quot;&quot;&quot;Attach a uniformly controlled gates (also called multiplexed gates) to a circuit.</span>
+
 <span class="sd">    The decomposition was introduced by Bergholm et al. in</span>
 <span class="sd">    https://arxiv.org/pdf/quant-ph/0410066.pdf.</span>
 
-<span class="sd">        Args:</span>
-<span class="sd">            gate_list (list[ndarray]): list of two qubit unitaries [U_0,...,U_{2^k-1}],</span>
-<span class="sd">                where each single-qubit unitary U_i is a given as a 2*2 array</span>
-<span class="sd">            q_controls (QuantumRegister|list[(QuantumRegister,int)]): list of k control qubits.</span>
-<span class="sd">                The qubits are ordered according to their significance in the computational basis.</span>
-<span class="sd">                For example if q_controls=[q[1],q[2]] (with q = QuantumRegister(2)),</span>
-<span class="sd">                the unitary U_0 is performed if q[1] and q[2] are in the state zero, U_1 is</span>
-<span class="sd">                performed if q[2] is in the state zero and q[1] is in the state one, and so on</span>
-<span class="sd">            q_target (QuantumRegister|(QuantumRegister,int)):  target qubit, where we act on with</span>
-<span class="sd">                the single-qubit gates.</span>
-<span class="sd">            up_to_diagonal (bool): If set to True, the uniformly controlled gate is decomposed up</span>
-<span class="sd">                to a diagonal gate, i.e. a unitary u&#39; is implemented such that there exists a</span>
-<span class="sd">                diagonal gate d with u = d.dot(u&#39;), where the unitary u describes the uniformly</span>
-<span class="sd">                controlled gate</span>
+<span class="sd">    Args:</span>
+<span class="sd">        gate_list (list[ndarray]): list of two qubit unitaries [U_0,...,U_{2^k-1}],</span>
+<span class="sd">            where each single-qubit unitary U_i is a given as a 2*2 array</span>
+<span class="sd">        q_controls (QuantumRegister|list[(QuantumRegister,int)]): list of k control qubits.</span>
+<span class="sd">            The qubits are ordered according to their significance in the computational basis.</span>
+<span class="sd">            For example if q_controls=[q[1],q[2]] (with q = QuantumRegister(2)),</span>
+<span class="sd">            the unitary U_0 is performed if q[1] and q[2] are in the state zero, U_1 is</span>
+<span class="sd">            performed if q[2] is in the state zero and q[1] is in the state one, and so on</span>
+<span class="sd">        q_target (QuantumRegister|(QuantumRegister,int)):  target qubit, where we act on with</span>
+<span class="sd">            the single-qubit gates.</span>
+<span class="sd">        up_to_diagonal (bool): If set to True, the uniformly controlled gate is decomposed up</span>
+<span class="sd">            to a diagonal gate, i.e. a unitary u&#39; is implemented such that there exists a</span>
+<span class="sd">            diagonal gate d with u = d.dot(u&#39;), where the unitary u describes the uniformly</span>
+<span class="sd">            controlled gate</span>
 
-<span class="sd">        Returns:</span>
-<span class="sd">            QuantumCircuit: the uniformly controlled gate is attached to the circuit.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        QuantumCircuit: the uniformly controlled gate is attached to the circuit.</span>
 
-<span class="sd">        Raises:</span>
-<span class="sd">            QiskitError: if the list number of control qubits does not correspond to the provided</span>
-<span class="sd">                number of single-qubit unitaries; if an input is of the wrong type</span>
+<span class="sd">    Raises:</span>
+<span class="sd">        QiskitError: if the list number of control qubits does not correspond to the provided</span>
+<span class="sd">            number of single-qubit unitaries; if an input is of the wrong type</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">q_controls</span><span class="p">,</span> <span class="n">QuantumRegister</span><span class="p">):</span>

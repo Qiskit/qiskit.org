@@ -33,7 +33,7 @@
        </script>
         <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
     
-    <title>qiskit.quantum_info.random.utils &#8212; Documentação Qiskit 0.12.2</title>
+    <title>qiskit.quantum_info.random.utils &#8212; Documentação Qiskit 0.13.0</title>
 
     <link rel="stylesheet" href="../../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -193,8 +193,6 @@
 <span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
 <span class="c1"># that they have been altered from the originals.</span>
 
-<span class="c1"># pylint: disable=invalid-name</span>
-
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Methods to create random unitaries, states, etc.</span>
 <span class="sd">&quot;&quot;&quot;</span>
@@ -228,8 +226,8 @@
     <span class="n">x</span> <span class="o">+=</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">0</span>
     <span class="n">x</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
     <span class="n">sumx</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">phases</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span><span class="o">*</span><span class="mf">2.0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="o">/</span><span class="n">sumx</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">phases</span><span class="p">)</span></div>
+    <span class="n">phases</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span> <span class="o">*</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="n">sumx</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">phases</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="random_unitary"><a class="viewcode-back" href="../../../../api/qiskit.quantum_info.random_unitary.html#qiskit.quantum_info.random_unitary">[documentos]</a><span class="k">def</span> <span class="nf">random_unitary</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -295,44 +293,44 @@
         <span class="n">ncol</span> <span class="o">=</span> <span class="n">nrow</span>
     <span class="k">if</span> <span class="n">seed</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
-    <span class="n">G</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">nrow</span><span class="p">,</span> <span class="n">ncol</span><span class="p">))</span> <span class="o">+</span> \
-        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">nrow</span><span class="p">,</span> <span class="n">ncol</span><span class="p">))</span> <span class="o">*</span> <span class="mi">1</span><span class="n">j</span>
-    <span class="k">return</span> <span class="n">G</span>
+
+    <span class="n">ginibre</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">nrow</span><span class="p">,</span> <span class="n">ncol</span><span class="p">))</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">nrow</span><span class="p">,</span> <span class="n">ncol</span><span class="p">))</span> <span class="o">*</span> <span class="mi">1</span><span class="n">j</span>
+    <span class="k">return</span> <span class="n">ginibre</span>
 
 
-<span class="k">def</span> <span class="nf">__random_density_hs</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">rank</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">__random_density_hs</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">rank</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generate a random density matrix from the Hilbert-Schmidt metric.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        N (int): the length of the density matrix.</span>
+<span class="sd">        length (int): the length of the density matrix.</span>
 <span class="sd">        rank (int or None): the rank of the density matrix. The default</span>
 <span class="sd">            value is full-rank.</span>
 <span class="sd">        seed (int): Optional. To set a random seed.</span>
 <span class="sd">    Returns:</span>
 <span class="sd">        ndarray: rho (N,N  a density matrix.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">G</span> <span class="o">=</span> <span class="n">__ginibre_matrix</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">rank</span><span class="p">,</span> <span class="n">seed</span><span class="p">)</span>
-    <span class="n">G</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">G</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">trace</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+    <span class="n">ginibre</span> <span class="o">=</span> <span class="n">__ginibre_matrix</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">rank</span><span class="p">,</span> <span class="n">seed</span><span class="p">)</span>
+    <span class="n">ginibre</span> <span class="o">=</span> <span class="n">ginibre</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">ginibre</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ginibre</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">trace</span><span class="p">(</span><span class="n">ginibre</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">__random_density_bures</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">rank</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">__random_density_bures</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">rank</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generate a random density matrix from the Bures metric.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        N (int): the length of the density matrix.</span>
+<span class="sd">        length (int): the length of the density matrix.</span>
 <span class="sd">        rank (int or None): the rank of the density matrix. The default</span>
 <span class="sd">            value is full-rank.</span>
 <span class="sd">        seed (int): Optional. To set a random seed.</span>
 <span class="sd">    Returns:</span>
 <span class="sd">        ndarray: rho (N,N) a density matrix.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="o">+</span> <span class="n">random_unitary</span><span class="p">(</span><span class="n">N</span><span class="p">)</span><span class="o">.</span><span class="n">data</span>
-    <span class="n">G</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">__ginibre_matrix</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">rank</span><span class="p">,</span> <span class="n">seed</span><span class="p">))</span>
-    <span class="n">G</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">G</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">trace</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+    <span class="n">density</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">length</span><span class="p">)</span> <span class="o">+</span> <span class="n">random_unitary</span><span class="p">(</span><span class="n">length</span><span class="p">)</span><span class="o">.</span><span class="n">data</span>
+    <span class="n">ginibre</span> <span class="o">=</span> <span class="n">density</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">__ginibre_matrix</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">rank</span><span class="p">,</span> <span class="n">seed</span><span class="p">))</span>
+    <span class="n">ginibre</span> <span class="o">=</span> <span class="n">ginibre</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">ginibre</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ginibre</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">trace</span><span class="p">(</span><span class="n">ginibre</span><span class="p">)</span>
 </pre></div>
 
         </div>

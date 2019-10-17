@@ -33,7 +33,7 @@
        </script>
         <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
     
-    <title>qiskit.quantum_info.states.measures &#8212; Qiskit 0.12.2 ドキュメント</title>
+    <title>qiskit.quantum_info.states.measures &#8212; Qiskit 0.13.0 ドキュメント</title>
 
     <link rel="stylesheet" href="../../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -193,8 +193,6 @@
 <span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
 <span class="c1"># that they have been altered from the originals.</span>
 
-<span class="c1"># pylint: disable=invalid-name</span>
-
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">A collection of useful quantum information functions for states.</span>
 
@@ -229,39 +227,39 @@
 <span class="sd">        array_like: The state fidelity F(state1, state2).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># convert input to numpy arrays</span>
-    <span class="n">s1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">state1</span><span class="p">)</span>
-    <span class="n">s2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">state2</span><span class="p">)</span>
+    <span class="n">state1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">state1</span><span class="p">)</span>
+    <span class="n">state2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">state2</span><span class="p">)</span>
 
     <span class="c1"># fidelity of two state vectors</span>
-    <span class="k">if</span> <span class="n">s1</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">s2</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">s2</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">s1</span><span class="p">))</span> <span class="o">**</span> <span class="mi">2</span>
+    <span class="k">if</span> <span class="n">state1</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">state2</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">state2</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">state1</span><span class="p">))</span> <span class="o">**</span> <span class="mi">2</span>
     <span class="c1"># fidelity of vector and density matrix</span>
-    <span class="k">elif</span> <span class="n">s1</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="k">elif</span> <span class="n">state1</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
         <span class="c1"># psi = s1, rho = s2</span>
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">s1</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">s2</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">s1</span><span class="p">))</span>
-    <span class="k">elif</span> <span class="n">s2</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">state1</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">state2</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">state1</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="n">state2</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
         <span class="c1"># psi = s2, rho = s1</span>
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">s2</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">s1</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">s2</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">state2</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">state1</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">state2</span><span class="p">))</span>
     <span class="c1"># fidelity of two density matrices</span>
-    <span class="n">s1sq</span> <span class="o">=</span> <span class="n">_funm_svd</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">)</span>
-    <span class="n">s2sq</span> <span class="o">=</span> <span class="n">_funm_svd</span><span class="p">(</span><span class="n">s2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">)</span>
+    <span class="n">s1sq</span> <span class="o">=</span> <span class="n">_funm_svd</span><span class="p">(</span><span class="n">state1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">)</span>
+    <span class="n">s2sq</span> <span class="o">=</span> <span class="n">_funm_svd</span><span class="p">(</span><span class="n">state2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">s1sq</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">s2sq</span><span class="p">),</span> <span class="nb">ord</span><span class="o">=</span><span class="s1">&#39;nuc&#39;</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span></div>
 
 
-<span class="k">def</span> <span class="nf">_funm_svd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">func</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">_funm_svd</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">func</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Apply real scalar function to singular values of a matrix.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        a (array_like): (N, N) Matrix at which to evaluate the function.</span>
+<span class="sd">        matrix (array_like): (N, N) Matrix at which to evaluate the function.</span>
 <span class="sd">        func (callable): Callable object that evaluates a scalar function f.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        ndarray: funm (N, N) Value of the matrix function specified by func</span>
 <span class="sd">        evaluated at `A`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">U</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">Vh</span> <span class="o">=</span> <span class="n">la</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">lapack_driver</span><span class="o">=</span><span class="s1">&#39;gesvd&#39;</span><span class="p">)</span>
-    <span class="n">S</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">func</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">U</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Vh</span><span class="p">)</span>
+    <span class="n">unitary1</span><span class="p">,</span> <span class="n">singular_values</span><span class="p">,</span> <span class="n">unitary2</span> <span class="o">=</span> <span class="n">la</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">lapack_driver</span><span class="o">=</span><span class="s1">&#39;gesvd&#39;</span><span class="p">)</span>
+    <span class="n">diag_func_singular</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">func</span><span class="p">(</span><span class="n">singular_values</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">unitary1</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">diag_func_singular</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">unitary2</span><span class="p">)</span>
 </pre></div>
 
         </div>
