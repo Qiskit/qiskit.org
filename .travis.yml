@@ -1,6 +1,6 @@
 language: node_js
 node_js: '10'
-sudo: required
+sudo: true
 cache:
   directories:
     - node_modules
@@ -9,9 +9,7 @@ before_script:
 script:
   - npm run test
 before_deploy:
-  - curl -L https://clis.ng.bluemix.net/download/bluemix-cli/0.6.1/linux64 | tar -zx
-  - chmod -R u+x ./Bluemix_CLI/bin
-  - chmod +x ./deploy.sh
+  - npm install -g cf-blue-green
   - npm run build
   - cd server/
   # Prevent deploy stage from timing out waiting for output. The function
@@ -29,7 +27,6 @@ before_deploy:
     keep_alive &
 deploy:
   provider: script
-  script: ./deploy.sh
+  script: cf-blue-green-travis
   on:
     branch: master
-  skip_cleanup: true
