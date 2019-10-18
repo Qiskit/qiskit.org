@@ -12,7 +12,7 @@ openssl aes-256-cbc -K $encrypted_rclone_key -iv $encrypted_rclone_iv -in rclone
 cp -r ../documentation ../build/default/.
 cp -r ../license ../build/default/.
 cp -r ../googlefd7c7bd12b94442f.html ../build/default/.
-cp -r ../education/. ../build/default/.
+cp -r ../education ../build/default/.
 cp -r ../modelq ../build/default/.
 cp -r ../robots.txt ../build/default/.
 
