@@ -7,16 +7,5 @@ before_script:
 - npm run lint
 script:
 - npm run test
-before_deploy:
 - npm run build
-deploy:
-  provider: s3
-  access_key_id: 7127a5f8867b42f785c9d33122dae99d
-  secret_access_key:
-    secure: QYps5BoyBx+VRgbHvQ7AiLp2Lf2lucIgQLTNYEtnQQ0NOGv2k5KLrHGiK0FpivGO3AfAgpD7CS0GomeLEhBhdTShwdBNvdmaRafklzbwcfvB7uk9TJu07WC72X4Ao29A8L+X3QCfcjAhd3c/ziyqXlAVd2P1pELyRmmK2kwSrxhXcUnk2AGvtcbf2LfuAPqQ6gQUsUl+dmeZIKr8f/JCFl5xYZ5p/k8XrRk686uRdOCmZviRTk0USecOs2KsdCXG2MTuYr21kJ+CFofiKouM1/tHXV9+L+kXcjzO9AcMACL8Opy9pAHjGdere0TDiAMS/C10UPyZ71P7EYy6F9UUBJ51/TiqOt6WvRPHkh/FN/JSAZSXQWhSzqlLkfQD95b2AAnz42R2bV9T7wQYon68gsFBpRqawHaJt52edupuX+ZPR4oHHYoUk3c8CPZ+HDdO+bUrGtBK4muwtIhWUYFCWZDn/2z24etK3BGfILUPf4LAj9KRr0Tgg6nH02P/qXCPWRjWkGEiJ6xlTNXI0CjYvFdDk9BgVMS+BWoQMlpNEa8QkdWnvll91tiX+0IU0zRtHx+7/jO+sOsV2VRPB0RqHnzU7u+glyFYkxJAS3DhUFv+9u7bW/17aygaCWnpfaoF3k3E3Vx2l67yzPK4VUq6jlSwnzmV1bYp2PuM1eLnpN0=
-  bucket: qiskit-web-test
-  acl: public_read
-  on:
-    repo: mtreinish/qiskit.org
-    branch: s3-upload-test
-  endpoint: https://s3.us.cloud-object-storage.appdomain.cloud/
+- cd deploy && bash deploy/deploy_ibmcos.sh
