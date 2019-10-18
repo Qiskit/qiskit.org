@@ -1,4 +1,4 @@
 ---
 title: Join Slack
-to: https://qiskit.slack.com/join/shared_invite/enQtNjQ5OTc5ODM1ODYyLTBlMWY1ZGJiYmZkNjliZTY4MTViNTQ3NzI2ZmU2MzQxZjlhZDZlYTAzZTNlMDU0ZjVmNzEyMzY3OGE1Y2UyNjk
+to: https://join.slack.com/t/qiskit/shared_invite/enQtNjQ5OTc5ODM1ODYyLTc2YWJhOWViZDA2OWI5N2EyMjIxN2YwODM5MWQyN2Q3MjczOGRlMDU4MzMxMWE5MzZjMzEzYzM3MmJiMzU5MzU
 ---
