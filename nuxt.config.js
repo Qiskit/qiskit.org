@@ -57,6 +57,7 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    '~/plugins/directives.ts',
     '~/plugins/deep-load.ts',
     { src: '~/plugins/hotjar.ts', mode: 'client' },
     { src: '~/plugins/segment-analytics.ts', mode: 'client' }
