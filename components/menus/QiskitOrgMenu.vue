@@ -19,7 +19,10 @@
             </a>
             <h2>Learn more</h2>
             <a class="vertical-navigation__item vertical-navigation__item--active" href="/">Community</a>
-            <div class="vertical-community-navigation">
+            <div
+              v-if="!qiskitOrgOnly"
+              class="vertical-community-navigation"
+            >
               <nuxt-link
                 v-for="communitySubLink in communitySubLinks"
                 :key="communitySubLink.label"
@@ -61,7 +64,10 @@
         </nav>
       </div>
     </div>
-    <div class="community-menu menu-container menu-container--light">
+    <div
+      v-if="!qiskitOrgOnly"
+      class="community-menu menu-container menu-container--light"
+    >
       <section class="menu menu--framed">
         <nav class="navigation-group navigation-group--right-aligned navigation-group--fixed">
           <nuxt-link
