@@ -39,7 +39,7 @@ export default class extends Vue {
       font-size: 1.5rem;
       font-weight: 300;
       font-family: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
-      margin: 0 0 1.5rem;
+      margin-bottom: 1.5rem;
     }
 
     p {
