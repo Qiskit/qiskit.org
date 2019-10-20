@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <main>
     <LegacyPresentation
       title="Welcome to Quantum"
       image="images/qiskit-logo.svg"
@@ -90,7 +90,7 @@
         </p>
       </article>
     </LegacySection>
-  </div>
+  </main>
 </template>
 
 <script lang="ts">
@@ -106,6 +106,9 @@ import Cta from '~/components/ctas/Cta.vue'
     Cta,
     LegacyPresentation,
     LegacySection
+  },
+  head() {
+    return { title: 'Qiskit' }
   }
 })
 export default class extends Vue { }
