@@ -18,26 +18,6 @@
           modularly constructed, simplifying the addition of extensions for
           circuit optimizations and backends. We welcome your contributions!
         </p>
-      </article>
-      <article>
-        <h2>Example</h2>
-        <pre v-highlightjs><code class="python">from qiskit import QuantumCircuit, Aer, execute
-
-qc = QuantumCircuit(2, 2)
-
-qc.h(0)
-qc.cx(0, 1)
-qc.measure([0, 1], [0, 1])
-
-backend = Aer.get_backend('qasm_simulator')
-job_sim = execute(qc, backend)
-sim_result = job_sim.result()
-
-print(sim_result.get_counts(qc))</code></pre>
-      </article>
-    </LegacySection>
-    <LegacySection>
-      <article>
         <h2>Stack</h2>
         <ul class="stack-list">
           <li class="element">
@@ -57,6 +37,22 @@ print(sim_result.get_counts(qc))</code></pre>
             <p class="stack-list__description">Histogram, State, Unitary, Entanglement, ...</p>
           </li>
         </ul>
+      </article>
+      <article>
+        <h2>Example</h2>
+        <pre v-highlightjs><code class="python">from qiskit import QuantumCircuit, Aer, execute
+
+qc = QuantumCircuit(2, 2)
+
+qc.h(0)
+qc.cx(0, 1)
+qc.measure([0, 1], [0, 1])
+
+backend = Aer.get_backend('qasm_simulator')
+job_sim = execute(qc, backend)
+sim_result = job_sim.result()
+
+print(sim_result.get_counts(qc))</code></pre>
       </article>
     </LegacySection>
   </main>
@@ -92,6 +88,10 @@ export default class QiskitTerra extends Vue {
 </script>
 
 <style lang="scss">
+@import '~/assets/scss/legacy-elements.scss'
+</style>
+
+<style lang="scss">
 .legacy-presentation {
   --legacy-presentation-color: rgb(224, 219, 218);
   --legacy-presentation-text-color: black;
@@ -114,42 +114,39 @@ code {
       padding-bottom: 1.5rem;
       position: relative;
 
-      &:last-child {
-        border: none;
-
-        .stack-list__title::before {
-          content: '';
-          display: inline-block;
-          position: absolute;
-          width: 0.8rem;
-          height: 0.8rem;
-          background-color: black;
-          top: 0.2rem;
-          left: -1.35rem;
-          border-radius: 50%;
-        }
-      }
-    }
-
-    &__title, &__description {
-      padding: 0;
-      margin: 0;
-      line-height: normal;
-      position: relative;
-      top: -0.2rem;
-    }
-
-    &__title {
       &::before {
         content: '';
         display: inline-block;
         position: absolute;
         width: 0.25rem;
-        height: 50%;
+        height: 0.60rem;
         background-color: black;
-        top: 0.2rem;
-        left: -1rem;
+        left: 0;
       }
+
+      &:last-child {
+        border: none;
+
+        &::before {
+          content: '';
+          display: inline-block;
+          position: absolute;
+          width: 0.6rem;
+          height: 0.6rem;
+          background-color: black;
+          left: -0.25rem;
+          border-radius: 50%;
+        }
+      }
+    }
+
+    &__title,
+    &__description {
+      padding: 0;
+      margin: 0;
+      line-height: normal;
+      position: relative;
+      top: -0.2rem;
     }
 
     &__description {
