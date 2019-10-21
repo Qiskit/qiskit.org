@@ -17,5 +17,6 @@ cp -r ../googlefd7c7bd12b94442f.html ../build/default/.
 cp -r ../education ../build/default/.
 cp -r ../modelq ../build/default/.
 cp -r ../robots.txt ../build/default/.
+cp -r ../404.html ../build/default/.
 
 rclone sync ../build/default IBMCOS:qiskit-web-test
