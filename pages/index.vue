@@ -10,25 +10,25 @@
       <article>
         <h2>Coding with Qiskit</h2>
         <p>Would you like to learn how to code a quantum computer? Take a look at the Coding with Qiskit Video Series, where Abraham Asfaw explains everything you need to know. Starting with installing Qiskit, to investigating the latest algorithms and research topics.</p>
-        <Cta to="https://www.youtube.com/playlist?list=PLOFEBzvs-Vvp2xg9-POLJhQwtVktlYGbY">
+        <LegacyCta to="https://www.youtube.com/playlist?list=PLOFEBzvs-Vvp2xg9-POLJhQwtVktlYGbY">
           Watch it
-        </Cta>
+        </LegacyCta>
       </article>
       <article>
         <h2>IBM Q Awards</h2>
         <p>The IBM Q Awards are back again, now with two new categories. The Teach Me Qiskit Video Award and the Quantum Game Award are just two of the six categories open for students, educators and developers.</p>
-        <Cta to="https://ibmqawards.com/">
+        <LegacyCta to="https://ibmqawards.com/">
           Learn more
-        </Cta>
+        </LegacyCta>
       </article>
     </LegacySection>
     <LegacySection>
       <article>
         <h2>IBM Q Experience</h2>
         <p>New to quantum computing? Try out the IBM Q Experience to get started with Qiskit in the cloud. No installation required and free hosted tutorials. Work is saved in the cloud and automatically updated with every Qiskit release.</p>
-        <Cta to="https://quantum-computing.ibm.com/login">
+        <LegacyCta to="https://quantum-computing.ibm.com/login">
           Try it
-        </Cta>
+        </LegacyCta>
       </article>
       <aside>
         <img src="images/qiskit-notebooks.jpg" alt="Screenshot of the IBM Q Experience Qiskit notebooks">
@@ -98,12 +98,12 @@ import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 import LegacyPresentation from '~/components/headers/LegacyPresentation.vue'
 import LegacySection from '~/components/sections/LegacySection.vue'
-import Cta from '~/components/ctas/Cta.vue'
+import LegacyCta from '~/components/ctas/LegacyCta.vue'
 
 @Component({
   layout: 'legacy',
   components: {
-    Cta,
+    LegacyCta,
     LegacyPresentation,
     LegacySection
   },
@@ -115,6 +115,10 @@ export default class extends Vue { }
 </script>
 
 <style lang="scss">
+.legacy-section {
+  background-color: white;
+}
+
 .legacy-section:nth-child(2n+1) {
   background-color: rgb(188, 147, 252);
 }

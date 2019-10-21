@@ -134,7 +134,6 @@ export default class extends Vue {
 
 <style lang="scss">
 main {
-  color: var(--body-color-light);
   background-color: var(--primary-color-darkmost);
   background-image: linear-gradient(150deg, var(--primary-color-darkmost) 15%,var(--primary-color-dark) 70%,var(--primary-color) 94%);
 }
@@ -198,12 +197,16 @@ main {
 }
 
 #global-community {
+  color: var(--body-color-light);
+
   h2 {
     @include elegant-title();
   }
 }
 
 #meet-the-advocates {
+  color: var(--body-color-light);
+
   h2 {
     @include elegant-title();
   }

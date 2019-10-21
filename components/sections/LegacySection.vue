@@ -20,8 +20,6 @@ export default class extends Vue {
 @import '~/assets/scss/mixins.scss';
 
 .legacy-section {
-  background-color: white;
-
   & > div {
     @include framed();
 
@@ -32,8 +30,13 @@ export default class extends Vue {
   }
 
   article {
+    min-width: 0;
     margin-right: 3rem;
     flex: 3;
+
+    &:last-child {
+      margin-right: 0;
+    }
 
     h2 {
       font-size: 1.5rem;

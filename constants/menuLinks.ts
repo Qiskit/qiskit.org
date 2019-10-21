@@ -15,27 +15,26 @@ type QiskitElements = {
   ibmQAccount: NavLink
 }
 
-const QISKIT_URL: string = 'https://qiskit.org'
 const QISKIT_ELEMENTS: QiskitElements = {
   terra: {
     label: 'Terra',
-    url: `${QISKIT_URL}/terra`
+    url: `/terra`
   },
   aer: {
     label: 'Aer',
-    url: `${QISKIT_URL}/aer`
+    url: `/aer`
   },
   aqua: {
     label: 'Aqua',
-    url: `${QISKIT_URL}/aqua`
+    url: `/aqua`
   },
   ignis: {
     label: 'Ignis',
-    url: `${QISKIT_URL}/ignis`
+    url: `/ignis`
   },
   ibmQAccount: {
     label: 'IBM Q Account',
-    url: `${QISKIT_URL}/ibmqaccount`
+    url: `/ibmqaccount`
   }
 }
 
@@ -105,7 +104,6 @@ const ORDERED_COMMUNITY_SUB_LINKS: Array<NavLink> = [
 ]
 
 export {
-  QISKIT_URL,
   ORDERED_QISKIT_ELEMENTS,
   ORDERED_SOCIAL_MEDIA,
   ORDERED_COMMUNITY_SUB_LINKS,
