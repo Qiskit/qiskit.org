@@ -72,7 +72,7 @@ export function init(outlet) {
       path: '/documentation',
       component: 'page-documentation',
       action: () => {
-        window.location.replace('/documentation/index.html');
+        window.location.replace('/documentation');
       },
     },
     {
