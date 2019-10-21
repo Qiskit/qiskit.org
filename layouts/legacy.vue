@@ -2,7 +2,7 @@
   <!-- tabindex is needed to allow hiding the menu in iOS Safari -->
   <div class="content-root" tabindex="-1">
     <header id="navigation">
-      <QiskitOrgMenu qiskit-org-only />
+      <QiskitOrgMenu />
     </header>
     <nuxt />
     <PageFooter />

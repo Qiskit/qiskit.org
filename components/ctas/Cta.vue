@@ -36,7 +36,7 @@ export default class extends Vue {
 </script>
 
 <style lang="scss" scoped>
-.button {
+.cta {
   padding: 0.66rem 1rem;
   background-color: var(--primary-color);
   border: 2px solid var(--secondary-color);

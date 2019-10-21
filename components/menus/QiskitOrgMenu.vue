@@ -12,15 +12,26 @@
             <a
               v-for="qiskitElement in qiskitElements"
               :key="qiskitElement.label"
-              class="vertical-navigation__item"
+              :class="{
+                'vertical-navigation__item': true,
+                'nuxt-link-active': isActive(qiskitElement.url)
+              }"
               :href="qiskitElement.url"
             >
               {{ qiskitElement.label }}
             </a>
             <h2>Learn more</h2>
-            <a class="vertical-navigation__item vertical-navigation__item--active" href="/">Community</a>
+            <a
+              :class="{
+                'vertical-navigation__item': true,
+                'vertical-navigation__item--active': isCommunityActive()
+              }"
+              href="/advocates"
+            >
+              Community
+            </a>
             <div
-              v-if="!qiskitOrgOnly"
+              v-if="isCommunityActive()"
               class="vertical-community-navigation"
             >
               <nuxt-link
@@ -46,7 +57,9 @@
             >API&nbsp;Documentation</a>
           </nav>
         </section>
-        <a class="link-to-home" :href="qiskitUrl">Qiskit</a>
+        <nuxt-link class="link-to-home" to="/">
+          Qiskit
+        </nuxt-link>
         <nav class="navigation-group navigation-group--with-separator">
           <a
             v-for="qiskitElement in qiskitElements"
@@ -58,14 +71,31 @@
           </a>
         </nav>
         <nav class="navigation-group navigation-group--fixed navigation-group--right-aligned">
-          <a class="navigation-group__item navigation-group__item--active" href="/">Community</a>
-          <a class="navigation-group__item" href="https://quantum-computing.ibm.com/jupyter/tutorial/1_start_here.ipynb" target="_blank">Tutorials</a>
-          <a class="navigation-group__item" href="https://qiskit.org/documentation">API&nbsp;Documentation</a>
+          <a
+            :class="{
+              'navigation-group__item': true,
+              'navigation-group__item--active': isCommunityActive()
+            }"
+            href="/advocates"
+          >
+            Community
+          </a>
+          <a
+            v-for="link in learnMore"
+            :key="link.label"
+            :class="{
+              'navigation-group__item': true,
+              'nuxt-link-active': isActive(link.url)
+            }"
+            :href="link.url"
+          >
+            {{ link.label }}
+          </a>
         </nav>
       </div>
     </div>
     <div
-      v-if="!qiskitOrgOnly"
+      v-if="isCommunityActive()"
       class="community-menu menu-container menu-container--light"
     >
       <section class="menu menu--framed">
@@ -92,7 +122,6 @@ import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 
 import {
-  QISKIT_URL,
   ORDERED_QISKIT_ELEMENTS,
   ORDERED_COMMUNITY_SUB_LINKS,
   NavLink
@@ -100,12 +129,19 @@ import {
 
 @Component
 export default class extends Vue {
-  qiskitUrl: string = QISKIT_URL
   qiskitElements: Array<NavLink> = ORDERED_QISKIT_ELEMENTS
   communitySubLinks: Array<NavLink> = ORDERED_COMMUNITY_SUB_LINKS
+  learnMore: Array<NavLink> = [
+    { label: 'Tutorials', url: 'https://quantum-computing.ibm.com/jupyter/tutorial/1_start_here.ipynb' },
+    { label: 'API Documentation', url: '/documentation' }
+  ]
 
   isActive (path) {
     return this.$route.path.startsWith(path)
+  }
+
+  isCommunityActive () {
+    return this.communitySubLinks.some(link => this.isActive(link.url))
   }
 }
 </script>
