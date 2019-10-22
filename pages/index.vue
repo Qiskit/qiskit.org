@@ -71,11 +71,6 @@
               <div class="social-network"><svg viewBox="0 0 24 24" width="24" height="24" aria-labelledby="youtube-icon" role="img"><title id="youtube-icon">YouTube icon</title><path class="a" d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"></path></svg> <span class="name">YouTube</span></div>
             </a>
           </li>
-          <li>
-            <a href="https://www.facebook.com/Qiskit" title="Facebook page" target="_blank" rel="noopener">
-              <div class="social-network"><svg viewBox="0 0 24 24" width="24" height="24" aria-labelledby="facebook-icon" role="img"><title id="facebook-icon">Facebook icon</title><path d="M22.676 0H1.324C.593 0 0 .593 0 1.324v21.352C0 23.408.593 24 1.324 24h11.494v-9.294H9.689v-3.621h3.129V8.41c0-3.099 1.894-4.785 4.659-4.785 1.325 0 2.464.097 2.796.141v3.24h-1.921c-1.5 0-1.792.721-1.792 1.771v2.311h3.584l-.465 3.63H16.56V24h6.115c.733 0 1.325-.592 1.325-1.324V1.324C24 .593 23.408 0 22.676 0"></path></svg> <span class="name">Facebook</span></div>
-            </a>
-          </li>
         </ul>
       </aside>
     </LegacySection>
@@ -156,6 +151,12 @@ export default class extends Vue { }
       margin-left: 0.5rem;
       font-size: 0.8rem;
     }
+  }
+}
+
+@media (max-width: 600px) {
+  .social-networks-list {
+    flex-direction: column;
   }
 }
 </style>

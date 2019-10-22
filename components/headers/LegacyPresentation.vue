@@ -106,4 +106,26 @@ export default class extends Vue {
     height: 0.8rem;
   }
 }
+
+@media (max-width: 600px) {
+  .legacy-presentation {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+
+    & > div {
+      flex-direction: column;
+    }
+
+    * {
+      text-align: center;
+    }
+
+    &__image {
+      width: 128px;
+      height: 128px;
+      margin-right: 0;
+      margin-bottom: 1rem;
+    }
+  }
+}
 </style>
