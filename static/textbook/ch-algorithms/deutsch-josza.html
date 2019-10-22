@@ -13174,7 +13174,7 @@ div#notebook {
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We are given a hidden Boolean function $f$, which takes as as input a string of bits, and returns either $0$ or $1$, that is</p>
 <p><center>$f(\{x_0,x_1,x_2,...\}) \rightarrow 0 \textrm{ or } 1 \textrm{ , where } x_n \textrm{ is } 0 \textrm{ or } 1$.</p>
-<p>For a string of $n$ bits, there are a total of $2^n$ combinations. The property of the given Boolean function is that it is guaranteed to either be balanced or constant. A constant function returns all $0$'s or all $1$'s for any input, while a balanced function returns $0$'s for exactly half of all inputs and $1$'s for the other half. Our task is to determine whether the given function is balanced or constant.</p>
+<p>The property of the given Boolean function is that it is guaranteed to either be balanced or constant. A constant function returns all $0$'s or all $1$'s for any input, while a balanced function returns $0$'s for exactly half of all inputs and $1$'s for the other half. Our task is to determine whether the given function is balanced or constant.</p>
 <p>Note that the Deutsch-Josza problem is an $n$-bit extension of the single bit Deutsch problem.</p>
 
 </div>
@@ -13208,7 +13208,7 @@ Realistically, we could opt to truncate our classical algorithm early, say if we
 <p>Now, let's go through the steps of the algorithm:</p>
 <ol>
    <li>
-        Prepare two quantum registers. The first is an $n$-qubit reqister initialised to $\vert 0 \rangle$, and the second is a one-qubit register initialised to $\vert 1\rangle$:
+        Prepare two quantum registers. The first is an $n$-qubit register initialised to $\vert 0 \rangle$, and the second is a one-qubit register initialised to $\vert 1\rangle$:
         $$\vert \psi_0 \rangle = \vert0\rangle^{\otimes n} \vert 1\rangle$$
    </li>
 
@@ -13260,7 +13260,7 @@ Realistically, we could opt to truncate our classical algorithm early, say if we
 <p>$\qquad$ 1. if f(x) = 0, then apply the $I$ gate to the qubit in register 2.<br>
 $\qquad$ 2. if f(x) = 1, then apply the $X$ gate to the qubit in register 2.</p>
 <p>For a balanced function, it is more complicated:</p>
-<p>$\qquad$ There are $2^{n}-2$ different configurations for an $n$-qubit balanced function. These can be defined by one of the bitstrings from $1$ to $2^n-1$ inclusive. Given a particular bitstring, $a$, the oracle is the bitwise product of $x$ and $a$, which is implemented as a multi-qubit f-controlled-NOT gate with the second register, as per Reference [2].</p>
+<p>$\qquad$ There are $2^{n}-2$ different bitstring configurations for an $n$-bit balanced function. These can be defined by one of the bitstrings from $1$ to $2^n-1$ inclusive. Given a particular bitstring, $a$, the oracle is the bitwise product of $x$ and $a$, which is implemented as a multi-qubit f-controlled-NOT gate with the second register, as per Reference [2].</p>
 
 </div>
 </div>
