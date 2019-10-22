@@ -50,6 +50,7 @@ export default class extends Vue {
       font-size: 0.85rem;
       line-height: 1.7rem;
       margin-top: 0.9rem;
+      margin-bottom: 0.9rem;
 
       a {
         color: black;
@@ -68,12 +69,15 @@ export default class extends Vue {
 }
 
 @media (max-width: 600px) {
-  .importance--decoration {
-    display: none;
-  }
+  .legacy-section {
+    & > div {
+      flex-direction: column;
+    }
 
-  .copy-container {
-    width: 100%;
+    article {
+      margin-right: 0;
+      margin-bottom: 2rem;
+    }
   }
 }
 </style>
