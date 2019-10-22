@@ -13260,7 +13260,7 @@ Realistically, we could opt to truncate our classical algorithm early, say if we
 <p>$\qquad$ 1. if f(x) = 0, then apply the $I$ gate to the qubit in register 2.<br>
 $\qquad$ 2. if f(x) = 1, then apply the $X$ gate to the qubit in register 2.</p>
 <p>For a balanced function, it is more complicated:</p>
-<p>$\qquad$ There are $2^{n}-2$ different bitstring configurations for an $n$-bit balanced function. These can be defined by one of the bitstrings from $1$ to $2^n-1$ inclusive. Given a particular bitstring, $a$, the oracle is the bitwise product of $x$ and $a$, which is implemented as a multi-qubit f-controlled-NOT gate with the second register, as per Reference [2].</p>
+<p>$\qquad$ There are $2^{n}-1$ different hidden bitstring configurations for an $n$-bit balanced function oracle. These can be defined by one of the bitstrings from $1$ to $2^n-1$ inclusive. Given a particular hidden bitstring, $a$, the oracle is the bitwise product of $x$ and $a$, which is implemented as a multi-qubit f-controlled-NOT gate with the second register, as per Reference [2].</p>
 
 </div>
 </div>
@@ -13268,7 +13268,7 @@ $\qquad$ 2. if f(x) = 1, then apply the $X$ gate to the qubit in register 2.</p>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="2.-Example--">2. Example  <a id="example" /><a class="anchor-link" href="#2.-Example--">&#182;</a></h2><p>Let's go through a specfic example for a two bit balanced function with $a = 3$.</p>
+<h2 id="2.-Example--">2. Example  <a id="example" /><a class="anchor-link" href="#2.-Example--">&#182;</a></h2><p>Let's go through a specfic example for a two bit balanced function with hidden bitstring $a = 3$.</p>
 <ol>
     <li> The first register of two qubits is initialized to zero and the second register qubit to one 
     $$\lvert \psi_0 \rangle = \lvert 0 0 \rangle_1 \lvert 1 \rangle_2 $$ 
@@ -13308,7 +13308,7 @@ $\qquad$ 2. if f(x) = 1, then apply the $X$ gate to the qubit in register 2.</p>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="3.-Qiskit-Implementation-">3. Qiskit Implementation <a id="implementation" /><a class="anchor-link" href="#3.-Qiskit-Implementation-">&#182;</a></h2><p>We now implement the Deutsch-Josza algorithm for the example of a two bit balanced function with $a = 3$.</p>
+<h2 id="3.-Qiskit-Implementation-">3. Qiskit Implementation <a id="implementation" /><a class="anchor-link" href="#3.-Qiskit-Implementation-">&#182;</a></h2><p>We now implement the Deutsch-Josza algorithm for the example of a two bit balanced function with hidden bitstring $a = 3$.</p>
 
 </div>
 </div>
@@ -13348,7 +13348,7 @@ $\qquad$ 2. if f(x) = 1, then apply the $X$ gate to the qubit in register 2.</p>
 <span class="c1"># set the oracle, b for balanced, c for constant</span>
 <span class="n">oracle</span> <span class="o">=</span> <span class="s2">&quot;b&quot;</span>
 
-<span class="c1"># if the oracle is balanced, set b</span>
+<span class="c1"># if the oracle is balanced, set the hidden bitstring, b</span>
 <span class="k">if</span> <span class="n">oracle</span> <span class="o">==</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span>
     <span class="n">b</span> <span class="o">=</span> <span class="mi">3</span> <span class="c1"># np.random.randint(1,2**n) uncomment for a random value</span>
 
