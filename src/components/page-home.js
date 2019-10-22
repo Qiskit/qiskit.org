@@ -18,7 +18,6 @@ import {
   SectionStyles,
 } from './app-shared-styles.js';
 import {
-  facebookIcon,
   githubIcon,
   mediumIcon,
   slackIcon,
@@ -367,20 +366,6 @@ class PageHome extends localize(i18next)(LitElement) {
                   })}
                 >
                   <div class="social-network">${youtubeIcon} <span class="name">YouTube</span></div>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://www.facebook.com/Qiskit"
-                  title="Facebook page"
-                  target="_blank"
-                  rel="noopener"
-                  @click=${() => trackClickEvent({
-                    action: 'Qiskit Community: Facebook',
-                    objectType: 'Icon Button'
-                  })}
-                >
-                  <div class="social-network">${facebookIcon} <span class="name">Facebook</span></div>
                 </a>
               </li>
             </ul>
