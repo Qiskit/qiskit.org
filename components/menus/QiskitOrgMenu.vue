@@ -17,17 +17,17 @@
             <h2>Learn more</h2>
             <a class="vertical-navigation__item vertical-navigation__item--active" href="/">Community</a>
             <div class="vertical-community-navigation">
-              <a
+              <nuxt-link
                 v-for="(link, index) in links"
                 :key="index"
                 :class="{
                   'vertical-community-navigation__item': true,
                   'nuxt-link-active': isActive(link.to)
                 }"
-                :href="link.to"
+                :to="link.to"
               >
                 {{ link.label }}
-              </a>
+              </nuxt-link>
             </div>
             <a class="vertical-navigation__item" href="https://quantum-computing.ibm.com/jupyter/tutorial/1_start_here.ipynb" target="_blank">Tutorials</a>
             <a class="vertical-navigation__item" href="https://qiskit.org/documentation">API&nbsp;Documentation</a>
@@ -51,17 +51,17 @@
     <div class="community-menu menu-container menu-container--light">
       <section class="menu menu--framed">
         <nav class="navigation-group navigation-group--right-aligned navigation-group--fixed">
-          <a
+          <nuxt-link
             v-for="(link, index) in links"
             :key="index"
             :class="{
               'navigation-group__item': true,
               'nuxt-link-active': isActive(link.to)
             }"
-            :href="link.to"
+            :to="link.to"
           >
             {{ link.label }}
-          </a>
+          </nuxt-link>
         </nav>
       </section>
     </div>
