@@ -44,12 +44,10 @@ export default ({ app }) => {
       const sectionBasepath =
         typeof section.basepath !== 'undefined' ? section.basepath : basepath
 
-      if (typeof section.collections[aCollection][0] === 'string') {
-        section.collections[aCollection] =
-          await Promise.all(section.collections[aCollection].map(
-            path => import(`~/content/${sectionBasepath}${path}`)
-          ))
-      }
+      section.collections[aCollection] =
+        await Promise.all(section.collections[aCollection].map(
+          path => import(`~/content/${sectionBasepath}${path}`)
+        ))
     }
   }
 
@@ -61,16 +59,24 @@ export default ({ app }) => {
    * @param filePath the TOC file path inside the `~/contents/` folder.
    * @param options optional modifiers.
    */
+
+  const cache = {}
+
   async function deepLoadCardToc(
     filePath: string,
     options: DeepLoadOptions = { basePath: '' }
   ): Promise<any> {
     const { basePath } = options
-    const toc = await loadToc(`${basePath}${filePath}`)
-    for (const aSection of toc) {
-      await embedDocumentsInPlace(aSection, basePath)
+    const key = `${basePath}${filePath}`
+
+    if (!(key in cache)) {
+      const toc = await loadToc(key)
+      for (const aSection of toc) {
+        await embedDocumentsInPlace(aSection, basePath)
+      }
+      cache[key] = toc
     }
-    return toc
+    return cache[key]
   }
 
   app.deepLoadCardToc = deepLoadCardToc
