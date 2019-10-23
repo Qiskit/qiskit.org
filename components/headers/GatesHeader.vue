@@ -5,7 +5,7 @@
       <section class="intro-container">
         <article
           :class="{
-            intro: true,
+            'intro': true,
             'intro--framed': true,
             'intro--reversed': extraPosition == 'start'
           }"
@@ -49,6 +49,14 @@ export default class extends Vue {
 
 <style lang="scss" scoped>
 @import '~/assets/scss/mixins.scss';
+
+.extra-container {
+  margin-right: 1rem;
+}
+
+.copy-container:not(:only-child) {
+  max-width: 40%;
+}
 
 .header-container {
   position: relative;
