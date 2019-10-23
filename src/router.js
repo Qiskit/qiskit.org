@@ -84,14 +84,6 @@ export function init(outlet) {
       },
     },
     {
-      path: '/community',
-      name: 'community',
-      component: 'page-community',
-      action: () => {
-        import('./components/page-community.js');
-      },
-    },
-    {
       path: '/vscode',
       name: 'vscode',
       component: 'page-vscode',
