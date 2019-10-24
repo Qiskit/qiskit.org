@@ -17,4 +17,7 @@ cp -r ../modelq ../build/es5-bundled/.
 cp -r ../robots.txt ../build/es5-bundled/.
 cp -r ../404.html ../build/es5-bundled/.
 
+git clone --depth=1 https://github.com/Qiskit/qiskit-terra.git
+cp -r qiskit-terra/qiskit/schemas ../build/es5-bundled/.
+
 rclone sync ../build/es5-bundled IBMCOS:qiskit-org-website
