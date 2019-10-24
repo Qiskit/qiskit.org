@@ -199,7 +199,7 @@
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 
-<div class="viewcode-block" id="LinearSystemInput"><a class="viewcode-back" href="../../../../api/qiskit.aqua.input.LinearSystemInput.html#qiskit.aqua.input.LinearSystemInput">[documentos]</a><span class="k">class</span> <span class="nc">LinearSystemInput</span><span class="p">(</span><span class="n">AlgorithmInput</span><span class="p">):</span>
+<div class="viewcode-block" id="LinearSystemInput"><a class="viewcode-back" href="../../../../apidoc/aqua/input/input.html#qiskit.aqua.input.LinearSystemInput">[documentos]</a><span class="k">class</span> <span class="nc">LinearSystemInput</span><span class="p">(</span><span class="n">AlgorithmInput</span><span class="p">):</span>
 
     <span class="n">PROP_KEY_MATRIX</span> <span class="o">=</span> <span class="s1">&#39;matrix&#39;</span>
     <span class="n">PROP_KEY_VECTOR</span> <span class="o">=</span> <span class="s1">&#39;vector&#39;</span>
@@ -259,13 +259,13 @@
 
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">params</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="LinearSystemInput.to_params"><a class="viewcode-back" href="../../../../api/qiskit.aqua.input.LinearSystemInput.html#qiskit.aqua.input.LinearSystemInput.to_params">[documentos]</a>    <span class="k">def</span> <span class="nf">to_params</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="LinearSystemInput.to_params"><a class="viewcode-back" href="../../../../apidoc/aqua/input/input.html#qiskit.aqua.input.LinearSystemInput.to_params">[documentos]</a>    <span class="k">def</span> <span class="nf">to_params</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">params</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">params</span><span class="p">[</span><span class="n">LinearSystemInput</span><span class="o">.</span><span class="n">PROP_KEY_MATRIX</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">save_to_list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_matrix</span><span class="p">)</span>
         <span class="n">params</span><span class="p">[</span><span class="n">LinearSystemInput</span><span class="o">.</span><span class="n">PROP_KEY_VECTOR</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">save_to_list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_vector</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">params</span></div>
 
-<div class="viewcode-block" id="LinearSystemInput.from_params"><a class="viewcode-back" href="../../../../api/qiskit.aqua.input.LinearSystemInput.html#qiskit.aqua.input.LinearSystemInput.from_params">[documentos]</a>    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="LinearSystemInput.from_params"><a class="viewcode-back" href="../../../../apidoc/aqua/input/input.html#qiskit.aqua.input.LinearSystemInput.from_params">[documentos]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_params</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">LinearSystemInput</span><span class="o">.</span><span class="n">PROP_KEY_MATRIX</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">AquaError</span><span class="p">(</span><span class="s2">&quot;Matrix is required.&quot;</span><span class="p">)</span>
