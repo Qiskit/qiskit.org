@@ -219,7 +219,7 @@
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="JSONSchema"><a class="viewcode-back" href="../../../../api/qiskit.aqua.parser.JSONSchema.html#qiskit.aqua.parser.JSONSchema">[documentos]</a><span class="k">class</span> <span class="nc">JSONSchema</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="JSONSchema"><a class="viewcode-back" href="../../../../apidoc/aqua/parser/parser.html#qiskit.aqua.parser.JSONSchema">[documentos]</a><span class="k">class</span> <span class="nc">JSONSchema</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;JSON schema Utilities class.&quot;&quot;&quot;</span>
 
     <span class="n">NAME</span> <span class="o">=</span> <span class="s1">&#39;name&#39;</span>
@@ -264,11 +264,11 @@
         <span class="sd">&quot;&quot;&quot;Returns original json schema&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_original_schema</span>
 
-<div class="viewcode-block" id="JSONSchema.commit_changes"><a class="viewcode-back" href="../../../../api/qiskit.aqua.parser.JSONSchema.html#qiskit.aqua.parser.JSONSchema.commit_changes">[documentos]</a>    <span class="k">def</span> <span class="nf">commit_changes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="JSONSchema.commit_changes"><a class="viewcode-back" href="../../../../apidoc/aqua/parser/parser.html#qiskit.aqua.parser.JSONSchema.commit_changes">[documentos]</a>    <span class="k">def</span> <span class="nf">commit_changes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Saves changes to original json schema&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_original_schema</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="JSONSchema.rollback_changes"><a class="viewcode-back" href="../../../../api/qiskit.aqua.parser.JSONSchema.html#qiskit.aqua.parser.JSONSchema.rollback_changes">[documentos]</a>    <span class="k">def</span> <span class="nf">rollback_changes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="JSONSchema.rollback_changes"><a class="viewcode-back" href="../../../../apidoc/aqua/parser/parser.html#qiskit.aqua.parser.JSONSchema.rollback_changes">[documentos]</a>    <span class="k">def</span> <span class="nf">rollback_changes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Restores schema from original json schema&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_original_schema</span><span class="p">)</span></div>
 
@@ -283,7 +283,7 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;properties&#39;</span><span class="p">][</span><span class="n">JSONSchema</span><span class="o">.</span><span class="n">PROBLEM</span><span class="p">][</span><span class="s1">&#39;properties&#39;</span><span class="p">][</span><span class="n">JSONSchema</span><span class="o">.</span><span class="n">NAME</span><span class="p">][</span><span class="s1">&#39;enum&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">problems_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
 
-<div class="viewcode-block" id="JSONSchema.copy_section_from_aqua_schema"><a class="viewcode-back" href="../../../../api/qiskit.aqua.parser.JSONSchema.html#qiskit.aqua.parser.JSONSchema.copy_section_from_aqua_schema">[documentos]</a>    <span class="k">def</span> <span class="nf">copy_section_from_aqua_schema</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section_name</span><span class="p">):</span>
+<div class="viewcode-block" id="JSONSchema.copy_section_from_aqua_schema"><a class="viewcode-back" href="../../../../apidoc/aqua/parser/parser.html#qiskit.aqua.parser.JSONSchema.copy_section_from_aqua_schema">[documentos]</a>    <span class="k">def</span> <span class="nf">copy_section_from_aqua_schema</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section_name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Copy a section from aqua json schema if if exists</span>
 <span class="sd">        Args:</span>
@@ -296,7 +296,7 @@
         <span class="k">if</span> <span class="n">section_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">aqua_jsonschema</span><span class="o">.</span><span class="n">schema</span><span class="p">[</span><span class="s1">&#39;properties&#39;</span><span class="p">]:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;properties&#39;</span><span class="p">][</span><span class="n">section_name</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">aqua_jsonschema</span><span class="o">.</span><span class="n">schema</span><span class="p">[</span><span class="s1">&#39;properties&#39;</span><span class="p">][</span><span class="n">section_name</span><span class="p">]</span></div>
 
-<div class="viewcode-block" id="JSONSchema.get_section_types"><a class="viewcode-back" href="../../../../api/qiskit.aqua.parser.JSONSchema.html#qiskit.aqua.parser.JSONSchema.get_section_types">[documentos]</a>    <span class="k">def</span> <span class="nf">get_section_types</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section_name</span><span class="p">):</span>
+<div class="viewcode-block" id="JSONSchema.get_section_types"><a class="viewcode-back" href="../../../../apidoc/aqua/parser/parser.html#qiskit.aqua.parser.JSONSchema.get_section_types">[documentos]</a>    <span class="k">def</span> <span class="nf">get_section_types</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section_name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns types for a schema section</span>
 
@@ -326,7 +326,7 @@
 
         <span class="k">return</span> <span class="p">[</span><span class="n">schema_type</span><span class="p">]</span></div>
 
-<div class="viewcode-block" id="JSONSchema.get_property_types"><a class="viewcode-back" href="../../../../api/qiskit.aqua.parser.JSONSchema.html#qiskit.aqua.parser.JSONSchema.get_property_types">[documentos]</a>    <span class="k">def</span> <span class="nf">get_property_types</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section_name</span><span class="p">,</span> <span class="n">property_name</span><span class="p">):</span>
+<div class="viewcode-block" id="JSONSchema.get_property_types"><a class="viewcode-back" href="../../../../apidoc/aqua/parser/parser.html#qiskit.aqua.parser.JSONSchema.get_property_types">[documentos]</a>    <span class="k">def</span> <span class="nf">get_property_types</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section_name</span><span class="p">,</span> <span class="n">property_name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns types for a schema section property</span>
 <span class="sd">        Args:</span>
@@ -364,7 +364,7 @@
 
         <span class="k">return</span> <span class="p">[</span><span class="n">schema_type</span><span class="p">]</span></div>
 
-<div class="viewcode-block" id="JSONSchema.get_default_sections"><a class="viewcode-back" href="../../../../api/qiskit.aqua.parser.JSONSchema.html#qiskit.aqua.parser.JSONSchema.get_default_sections">[documentos]</a>    <span class="k">def</span> <span class="nf">get_default_sections</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="JSONSchema.get_default_sections"><a class="viewcode-back" href="../../../../apidoc/aqua/parser/parser.html#qiskit.aqua.parser.JSONSchema.get_default_sections">[documentos]</a>    <span class="k">def</span> <span class="nf">get_default_sections</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns default sections</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -373,14 +373,14 @@
 
         <span class="k">return</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;properties&#39;</span><span class="p">])</span></div>
 
-<div class="viewcode-block" id="JSONSchema.get_default_section_names"><a class="viewcode-back" href="../../../../api/qiskit.aqua.parser.JSONSchema.html#qiskit.aqua.parser.JSONSchema.get_default_section_names">[documentos]</a>    <span class="k">def</span> <span class="nf">get_default_section_names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="JSONSchema.get_default_section_names"><a class="viewcode-back" href="../../../../apidoc/aqua/parser/parser.html#qiskit.aqua.parser.JSONSchema.get_default_section_names">[documentos]</a>    <span class="k">def</span> <span class="nf">get_default_section_names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns default section names</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">sections</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_default_sections</span><span class="p">()</span>
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">sections</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="k">if</span> <span class="n">sections</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">[]</span></div>
 
-<div class="viewcode-block" id="JSONSchema.get_section_default_properties"><a class="viewcode-back" href="../../../../api/qiskit.aqua.parser.JSONSchema.html#qiskit.aqua.parser.JSONSchema.get_section_default_properties">[documentos]</a>    <span class="k">def</span> <span class="nf">get_section_default_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section_name</span><span class="p">):</span>
+<div class="viewcode-block" id="JSONSchema.get_section_default_properties"><a class="viewcode-back" href="../../../../apidoc/aqua/parser/parser.html#qiskit.aqua.parser.JSONSchema.get_section_default_properties">[documentos]</a>    <span class="k">def</span> <span class="nf">get_section_default_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section_name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns default properties for a schema section</span>
 
@@ -414,7 +414,7 @@
 
         <span class="k">return</span> <span class="n">properties</span></div>
 
-<div class="viewcode-block" id="JSONSchema.allows_additional_properties"><a class="viewcode-back" href="../../../../api/qiskit.aqua.parser.JSONSchema.html#qiskit.aqua.parser.JSONSchema.allows_additional_properties">[documentos]</a>    <span class="k">def</span> <span class="nf">allows_additional_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section_name</span><span class="p">):</span>
+<div class="viewcode-block" id="JSONSchema.allows_additional_properties"><a class="viewcode-back" href="../../../../apidoc/aqua/parser/parser.html#qiskit.aqua.parser.JSONSchema.allows_additional_properties">[documentos]</a>    <span class="k">def</span> <span class="nf">allows_additional_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section_name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns allows additional properties flag for a schema section</span>
 <span class="sd">        Args:</span>
@@ -433,7 +433,7 @@
         <span class="n">additionalProperties</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;properties&#39;</span><span class="p">][</span><span class="n">section_name</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;additionalProperties&#39;</span><span class="p">,</span> <span class="s1">&#39;true&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">additionalProperties</span> <span class="o">==</span> <span class="s1">&#39;true&#39;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="JSONSchema.get_property_default_values"><a class="viewcode-back" href="../../../../api/qiskit.aqua.parser.JSONSchema.html#qiskit.aqua.parser.JSONSchema.get_property_default_values">[documentos]</a>    <span class="k">def</span> <span class="nf">get_property_default_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section_name</span><span class="p">,</span> <span class="n">property_name</span><span class="p">):</span>
+<div class="viewcode-block" id="JSONSchema.get_property_default_values"><a class="viewcode-back" href="../../../../apidoc/aqua/parser/parser.html#qiskit.aqua.parser.JSONSchema.get_property_default_values">[documentos]</a>    <span class="k">def</span> <span class="nf">get_property_default_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section_name</span><span class="p">,</span> <span class="n">property_name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns default values for a schema section property</span>
 <span class="sd">        Args:</span>
@@ -478,7 +478,7 @@
 
         <span class="k">return</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="JSONSchema.get_property_default_value"><a class="viewcode-back" href="../../../../api/qiskit.aqua.parser.JSONSchema.html#qiskit.aqua.parser.JSONSchema.get_property_default_value">[documentos]</a>    <span class="k">def</span> <span class="nf">get_property_default_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section_name</span><span class="p">,</span> <span class="n">property_name</span><span class="p">):</span>
+<div class="viewcode-block" id="JSONSchema.get_property_default_value"><a class="viewcode-back" href="../../../../apidoc/aqua/parser/parser.html#qiskit.aqua.parser.JSONSchema.get_property_default_value">[documentos]</a>    <span class="k">def</span> <span class="nf">get_property_default_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section_name</span><span class="p">,</span> <span class="n">property_name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns default value for a schema section property</span>
 
@@ -509,7 +509,7 @@
 
         <span class="k">return</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="JSONSchema.update_backend_schema"><a class="viewcode-back" href="../../../../api/qiskit.aqua.parser.JSONSchema.html#qiskit.aqua.parser.JSONSchema.update_backend_schema">[documentos]</a>    <span class="k">def</span> <span class="nf">update_backend_schema</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_parser</span><span class="p">):</span>
+<div class="viewcode-block" id="JSONSchema.update_backend_schema"><a class="viewcode-back" href="../../../../apidoc/aqua/parser/parser.html#qiskit.aqua.parser.JSONSchema.update_backend_schema">[documentos]</a>    <span class="k">def</span> <span class="nf">update_backend_schema</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_parser</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Updates backend schema</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -671,7 +671,7 @@
                 <span class="s1">&#39;minimum&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
             <span class="p">}</span></div>
 
-<div class="viewcode-block" id="JSONSchema.update_pluggable_schemas"><a class="viewcode-back" href="../../../../api/qiskit.aqua.parser.JSONSchema.html#qiskit.aqua.parser.JSONSchema.update_pluggable_schemas">[documentos]</a>    <span class="k">def</span> <span class="nf">update_pluggable_schemas</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_parser</span><span class="p">):</span>
+<div class="viewcode-block" id="JSONSchema.update_pluggable_schemas"><a class="viewcode-back" href="../../../../apidoc/aqua/parser/parser.html#qiskit.aqua.parser.JSONSchema.update_pluggable_schemas">[documentos]</a>    <span class="k">def</span> <span class="nf">update_pluggable_schemas</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_parser</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Updates schemas of all pluggables</span>
 
@@ -770,7 +770,7 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;properties&#39;</span><span class="p">][</span><span class="n">pluggable_type</span><span class="p">][</span><span class="s1">&#39;additionalProperties&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">additionalProperties</span>
 
-<div class="viewcode-block" id="JSONSchema.check_section_value"><a class="viewcode-back" href="../../../../api/qiskit.aqua.parser.JSONSchema.html#qiskit.aqua.parser.JSONSchema.check_section_value">[documentos]</a>    <span class="k">def</span> <span class="nf">check_section_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section_name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+<div class="viewcode-block" id="JSONSchema.check_section_value"><a class="viewcode-back" href="../../../../apidoc/aqua/parser/parser.html#qiskit.aqua.parser.JSONSchema.check_section_value">[documentos]</a>    <span class="k">def</span> <span class="nf">check_section_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section_name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Check value for section name</span>
 
@@ -797,7 +797,7 @@
 
         <span class="k">return</span> <span class="n">value</span></div>
 
-<div class="viewcode-block" id="JSONSchema.check_property_value"><a class="viewcode-back" href="../../../../api/qiskit.aqua.parser.JSONSchema.html#qiskit.aqua.parser.JSONSchema.check_property_value">[documentos]</a>    <span class="k">def</span> <span class="nf">check_property_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section_name</span><span class="p">,</span> <span class="n">property_name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+<div class="viewcode-block" id="JSONSchema.check_property_value"><a class="viewcode-back" href="../../../../apidoc/aqua/parser/parser.html#qiskit.aqua.parser.JSONSchema.check_property_value">[documentos]</a>    <span class="k">def</span> <span class="nf">check_property_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section_name</span><span class="p">,</span> <span class="n">property_name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Check value for property name</span>
 
@@ -835,7 +835,7 @@
             <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;JSON Validation error: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">ve</span><span class="p">)))</span>
             <span class="k">raise</span> <span class="n">AquaError</span><span class="p">(</span><span class="n">ve</span><span class="o">.</span><span class="n">message</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="JSONSchema.validate_property"><a class="viewcode-back" href="../../../../api/qiskit.aqua.parser.JSONSchema.html#qiskit.aqua.parser.JSONSchema.validate_property">[documentos]</a>    <span class="k">def</span> <span class="nf">validate_property</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sections_json</span><span class="p">,</span> <span class="n">section_name</span><span class="p">,</span> <span class="n">property_name</span><span class="p">):</span>
+<div class="viewcode-block" id="JSONSchema.validate_property"><a class="viewcode-back" href="../../../../apidoc/aqua/parser/parser.html#qiskit.aqua.parser.JSONSchema.validate_property">[documentos]</a>    <span class="k">def</span> <span class="nf">validate_property</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sections_json</span><span class="p">,</span> <span class="n">section_name</span><span class="p">,</span> <span class="n">property_name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Validates the propery and returns error message</span>
 <span class="sd">        Args:</span>
@@ -853,7 +853,7 @@
 
         <span class="k">return</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="JSONSchema.get_algorithm_problems"><a class="viewcode-back" href="../../../../api/qiskit.aqua.parser.JSONSchema.html#qiskit.aqua.parser.JSONSchema.get_algorithm_problems">[documentos]</a>    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="JSONSchema.get_algorithm_problems"><a class="viewcode-back" href="../../../../apidoc/aqua/parser/parser.html#qiskit.aqua.parser.JSONSchema.get_algorithm_problems">[documentos]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_algorithm_problems</span><span class="p">(</span><span class="n">algo_name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get algorithm problem name list</span>
@@ -931,7 +931,7 @@
 
         <span class="k">return</span> <span class="n">value</span><span class="p">,</span> <span class="kc">False</span>
 
-<div class="viewcode-block" id="JSONSchema.get_value"><a class="viewcode-back" href="../../../../api/qiskit.aqua.parser.JSONSchema.html#qiskit.aqua.parser.JSONSchema.get_value">[documentos]</a>    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="JSONSchema.get_value"><a class="viewcode-back" href="../../../../apidoc/aqua/parser/parser.html#qiskit.aqua.parser.JSONSchema.get_value">[documentos]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_value</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">types</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns a converted value based on schema types</span>
