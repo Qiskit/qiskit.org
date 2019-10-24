@@ -218,7 +218,7 @@
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="Operator"><a class="viewcode-back" href="../../../api/qiskit.aqua.Operator.html#qiskit.aqua.Operator">[docs]</a><span class="k">class</span> <span class="nc">Operator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="Operator"><a class="viewcode-back" href="../../../apidoc/aqua/aqua.html#qiskit.aqua.Operator">[docs]</a><span class="k">class</span> <span class="nc">Operator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Operators relevant for quantum applications</span>
@@ -372,7 +372,7 @@
 
         <span class="k">return</span> <span class="n">ret</span>
 
-<div class="viewcode-block" id="Operator.copy"><a class="viewcode-back" href="../../../api/qiskit.aqua.Operator.html#qiskit.aqua.Operator.copy">[docs]</a>    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Operator.copy"><a class="viewcode-back" href="../../../apidoc/aqua/aqua.html#qiskit.aqua.Operator.copy">[docs]</a>    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get a copy of self.&quot;&quot;&quot;</span>
         <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;The `Operator` class is deprecated and will be removed after 0.6. &quot;</span>
                       <span class="s2">&quot;Use the class for each representation instead, including `MatrixOperator`, &quot;</span>
@@ -380,7 +380,7 @@
                       <span class="ne">DeprecationWarning</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Operator.chop"><a class="viewcode-back" href="../../../api/qiskit.aqua.Operator.html#qiskit.aqua.Operator.chop">[docs]</a>    <span class="k">def</span> <span class="nf">chop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">1e-15</span><span class="p">):</span>
+<div class="viewcode-block" id="Operator.chop"><a class="viewcode-back" href="../../../apidoc/aqua/aqua.html#qiskit.aqua.Operator.chop">[docs]</a>    <span class="k">def</span> <span class="nf">chop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">1e-15</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Eliminate the real and imagine part of coeff in each pauli by `threshold`.</span>
 <span class="sd">        If pauli&#39;s coeff is less then `threshold` in both real and imagine parts, the pauli is removed.</span>
@@ -655,7 +655,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
 
-<div class="viewcode-block" id="Operator.load_from_file"><a class="viewcode-back" href="../../../api/qiskit.aqua.Operator.html#qiskit.aqua.Operator.load_from_file">[docs]</a>    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="Operator.load_from_file"><a class="viewcode-back" href="../../../apidoc/aqua/aqua.html#qiskit.aqua.Operator.load_from_file">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">load_from_file</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">before_04</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Load paulis in a file to construct an Operator.</span>
@@ -673,7 +673,7 @@
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">Operator</span><span class="o">.</span><span class="n">load_from_dict</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">),</span> <span class="n">before_04</span><span class="o">=</span><span class="n">before_04</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Operator.save_to_file"><a class="viewcode-back" href="../../../api/qiskit.aqua.Operator.html#qiskit.aqua.Operator.save_to_file">[docs]</a>    <span class="k">def</span> <span class="nf">save_to_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_name</span><span class="p">):</span>
+<div class="viewcode-block" id="Operator.save_to_file"><a class="viewcode-back" href="../../../apidoc/aqua/aqua.html#qiskit.aqua.Operator.save_to_file">[docs]</a>    <span class="k">def</span> <span class="nf">save_to_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Save operator to a file in pauli representation.</span>
 
@@ -688,7 +688,7 @@
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">save_to_dict</span><span class="p">(),</span> <span class="n">f</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Operator.load_from_dict"><a class="viewcode-back" href="../../../api/qiskit.aqua.Operator.html#qiskit.aqua.Operator.load_from_dict">[docs]</a>    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="Operator.load_from_dict"><a class="viewcode-back" href="../../../apidoc/aqua/aqua.html#qiskit.aqua.Operator.load_from_dict">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">load_from_dict</span><span class="p">(</span><span class="n">dictionary</span><span class="p">,</span> <span class="n">before_04</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Load paulis in a dict to construct an Operator, \</span>
@@ -740,7 +740,7 @@
 
         <span class="k">return</span> <span class="n">Operator</span><span class="p">(</span><span class="n">paulis</span><span class="o">=</span><span class="n">paulis</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Operator.save_to_dict"><a class="viewcode-back" href="../../../api/qiskit.aqua.Operator.html#qiskit.aqua.Operator.save_to_dict">[docs]</a>    <span class="k">def</span> <span class="nf">save_to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Operator.save_to_dict"><a class="viewcode-back" href="../../../apidoc/aqua/aqua.html#qiskit.aqua.Operator.save_to_dict">[docs]</a>    <span class="k">def</span> <span class="nf">save_to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Save operator to a dict in pauli representation.</span>
 
@@ -796,7 +796,7 @@
                       <span class="ne">DeprecationWarning</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">save_to_dict</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="Operator.print_operators"><a class="viewcode-back" href="../../../api/qiskit.aqua.Operator.html#qiskit.aqua.Operator.print_operators">[docs]</a>    <span class="k">def</span> <span class="nf">print_operators</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">print_format</span><span class="o">=</span><span class="s1">&#39;paulis&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="Operator.print_operators"><a class="viewcode-back" href="../../../apidoc/aqua/aqua.html#qiskit.aqua.Operator.print_operators">[docs]</a>    <span class="k">def</span> <span class="nf">print_operators</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">print_format</span><span class="o">=</span><span class="s1">&#39;paulis&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Print out the paulis in the selected representation.</span>
 
@@ -839,7 +839,7 @@
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Mode should be one of &quot;matrix&quot;, &quot;paulis&quot;, &quot;grouped_paulis&quot;&#39;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">ret</span></div>
 
-<div class="viewcode-block" id="Operator.construct_evaluation_circuit"><a class="viewcode-back" href="../../../api/qiskit.aqua.Operator.html#qiskit.aqua.Operator.construct_evaluation_circuit">[docs]</a>    <span class="k">def</span> <span class="nf">construct_evaluation_circuit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">operator_mode</span><span class="p">,</span> <span class="n">input_circuit</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span> <span class="n">qr</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cr</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<div class="viewcode-block" id="Operator.construct_evaluation_circuit"><a class="viewcode-back" href="../../../apidoc/aqua/aqua.html#qiskit.aqua.Operator.construct_evaluation_circuit">[docs]</a>    <span class="k">def</span> <span class="nf">construct_evaluation_circuit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">operator_mode</span><span class="p">,</span> <span class="n">input_circuit</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span> <span class="n">qr</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cr</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                      <span class="n">use_simulator_operator_mode</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Construct the circuits for evaluation.</span>
@@ -952,7 +952,7 @@
                     <span class="n">circuits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">circuit</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">circuits</span></div>
 
-<div class="viewcode-block" id="Operator.evaluate_with_result"><a class="viewcode-back" href="../../../api/qiskit.aqua.Operator.html#qiskit.aqua.Operator.evaluate_with_result">[docs]</a>    <span class="k">def</span> <span class="nf">evaluate_with_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">operator_mode</span><span class="p">,</span> <span class="n">circuits</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">use_simulator_operator_mode</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="Operator.evaluate_with_result"><a class="viewcode-back" href="../../../apidoc/aqua/aqua.html#qiskit.aqua.Operator.evaluate_with_result">[docs]</a>    <span class="k">def</span> <span class="nf">evaluate_with_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">operator_mode</span><span class="p">,</span> <span class="n">circuits</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">use_simulator_operator_mode</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Use the executed result with operator to get the evaluated value.</span>
 
@@ -1069,7 +1069,7 @@
             <span class="n">avg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vdot</span><span class="p">(</span><span class="n">quantum_state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_matrix</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">quantum_state</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">avg</span>
 
-<div class="viewcode-block" id="Operator.eval"><a class="viewcode-back" href="../../../api/qiskit.aqua.Operator.html#qiskit.aqua.Operator.eval">[docs]</a>    <span class="k">def</span> <span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">operator_mode</span><span class="p">,</span> <span class="n">input_circuit</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span> <span class="n">backend_config</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">compile_config</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<div class="viewcode-block" id="Operator.eval"><a class="viewcode-back" href="../../../apidoc/aqua/aqua.html#qiskit.aqua.Operator.eval">[docs]</a>    <span class="k">def</span> <span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">operator_mode</span><span class="p">,</span> <span class="n">input_circuit</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span> <span class="n">backend_config</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">compile_config</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
              <span class="n">run_config</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">qjob_config</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">noise_config</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Supporting three ways to evaluate the given circuits with the operator.</span>
@@ -1145,7 +1145,7 @@
                       <span class="ne">DeprecationWarning</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_check_representation</span><span class="p">(</span><span class="s1">&#39;matrix&#39;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Operator.convert"><a class="viewcode-back" href="../../../api/qiskit.aqua.Operator.html#qiskit.aqua.Operator.convert">[docs]</a>    <span class="k">def</span> <span class="nf">convert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_format</span><span class="p">,</span> <span class="n">output_format</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="Operator.convert"><a class="viewcode-back" href="../../../apidoc/aqua/aqua.html#qiskit.aqua.Operator.convert">[docs]</a>    <span class="k">def</span> <span class="nf">convert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_format</span><span class="p">,</span> <span class="n">output_format</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        A wrapper for conversion among all representations.</span>
 <span class="sd">        Note that, if the output target is already there, it will skip the conversion.</span>
@@ -1405,7 +1405,7 @@
         <span class="n">cov</span> <span class="o">/=</span> <span class="p">(</span><span class="n">num_shots</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">cov</span>
 
-<div class="viewcode-block" id="Operator.two_qubit_reduced_operator"><a class="viewcode-back" href="../../../api/qiskit.aqua.Operator.html#qiskit.aqua.Operator.two_qubit_reduced_operator">[docs]</a>    <span class="k">def</span> <span class="nf">two_qubit_reduced_operator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mi">10</span><span class="o">**-</span><span class="mi">13</span><span class="p">):</span>
+<div class="viewcode-block" id="Operator.two_qubit_reduced_operator"><a class="viewcode-back" href="../../../apidoc/aqua/aqua.html#qiskit.aqua.Operator.two_qubit_reduced_operator">[docs]</a>    <span class="k">def</span> <span class="nf">two_qubit_reduced_operator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mi">10</span><span class="o">**-</span><span class="mi">13</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Eliminates the central and last qubit in a list of Pauli that has</span>
 <span class="sd">        diagonal operators (Z,I) at those positions</span>
@@ -1470,7 +1470,7 @@
 
         <span class="k">return</span> <span class="n">operator_out</span></div>
 
-<div class="viewcode-block" id="Operator.get_flat_pauli_list"><a class="viewcode-back" href="../../../api/qiskit.aqua.Operator.html#qiskit.aqua.Operator.get_flat_pauli_list">[docs]</a>    <span class="k">def</span> <span class="nf">get_flat_pauli_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Operator.get_flat_pauli_list"><a class="viewcode-back" href="../../../apidoc/aqua/aqua.html#qiskit.aqua.Operator.get_flat_pauli_list">[docs]</a>    <span class="k">def</span> <span class="nf">get_flat_pauli_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get the flat list of paulis</span>
 
@@ -1491,7 +1491,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">_check_representation</span><span class="p">(</span><span class="s1">&#39;paulis&#39;</span><span class="p">)</span>
                 <span class="k">return</span> <span class="p">[]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_paulis</span></div>
 
-<div class="viewcode-block" id="Operator.construct_evolution_circuit"><a class="viewcode-back" href="../../../api/qiskit.aqua.Operator.html#qiskit.aqua.Operator.construct_evolution_circuit">[docs]</a>    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="Operator.construct_evolution_circuit"><a class="viewcode-back" href="../../../apidoc/aqua/aqua.html#qiskit.aqua.Operator.construct_evolution_circuit">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">construct_evolution_circuit</span><span class="p">(</span><span class="n">slice_pauli_list</span><span class="p">,</span> <span class="n">evo_time</span><span class="p">,</span> <span class="n">num_time_slices</span><span class="p">,</span> <span class="n">state_registers</span><span class="p">,</span>
                                     <span class="n">ancillary_registers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ctl_idx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">unitary_power</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">use_basis_gates</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                     <span class="n">shallow_slicing</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -1692,7 +1692,7 @@
             <span class="p">)</span>
             <span class="k">return</span> <span class="n">side</span> <span class="o">+</span> <span class="n">middle</span> <span class="o">+</span> <span class="n">side</span>
 
-<div class="viewcode-block" id="Operator.evolve"><a class="viewcode-back" href="../../../api/qiskit.aqua.Operator.html#qiskit.aqua.Operator.evolve">[docs]</a>    <span class="k">def</span> <span class="nf">evolve</span><span class="p">(</span>
+<div class="viewcode-block" id="Operator.evolve"><a class="viewcode-back" href="../../../apidoc/aqua/aqua.html#qiskit.aqua.Operator.evolve">[docs]</a>    <span class="k">def</span> <span class="nf">evolve</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span>
             <span class="n">state_in</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
             <span class="n">evo_time</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
@@ -1791,7 +1791,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Evolution mode should be either &quot;matrix&quot; or &quot;circuit&quot;.&#39;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Operator.is_empty"><a class="viewcode-back" href="../../../api/qiskit.aqua.Operator.html#qiskit.aqua.Operator.is_empty">[docs]</a>    <span class="k">def</span> <span class="nf">is_empty</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Operator.is_empty"><a class="viewcode-back" href="../../../apidoc/aqua/aqua.html#qiskit.aqua.Operator.is_empty">[docs]</a>    <span class="k">def</span> <span class="nf">is_empty</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Check Operator is empty or not.</span>
 
@@ -1856,7 +1856,7 @@
                 <span class="s1">&#39;&quot;targeted_representation&quot; should be one of &quot;paulis&quot;, &quot;grouped_paulis&quot; and &quot;matrix&quot;.&#39;</span>
             <span class="p">)</span>
 
-<div class="viewcode-block" id="Operator.row_echelon_F2"><a class="viewcode-back" href="../../../api/qiskit.aqua.Operator.html#qiskit.aqua.Operator.row_echelon_F2">[docs]</a>    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="Operator.row_echelon_F2"><a class="viewcode-back" href="../../../apidoc/aqua/aqua.html#qiskit.aqua.Operator.row_echelon_F2">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">row_echelon_F2</span><span class="p">(</span><span class="n">matrix_in</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Computes the row Echelon form of a binary matrix on the binary</span>
@@ -1900,7 +1900,7 @@
 
         <span class="k">return</span> <span class="n">matrix_out</span></div>
 
-<div class="viewcode-block" id="Operator.kernel_F2"><a class="viewcode-back" href="../../../api/qiskit.aqua.Operator.html#qiskit.aqua.Operator.kernel_F2">[docs]</a>    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="Operator.kernel_F2"><a class="viewcode-back" href="../../../apidoc/aqua/aqua.html#qiskit.aqua.Operator.kernel_F2">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">kernel_F2</span><span class="p">(</span><span class="n">matrix_in</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Computes the kernel of a binary matrix on the binary finite field</span>
@@ -1927,7 +1927,7 @@
 
         <span class="k">return</span> <span class="n">kernel</span></div>
 
-<div class="viewcode-block" id="Operator.find_Z2_symmetries"><a class="viewcode-back" href="../../../api/qiskit.aqua.Operator.html#qiskit.aqua.Operator.find_Z2_symmetries">[docs]</a>    <span class="k">def</span> <span class="nf">find_Z2_symmetries</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Operator.find_Z2_symmetries"><a class="viewcode-back" href="../../../apidoc/aqua/aqua.html#qiskit.aqua.Operator.find_Z2_symmetries">[docs]</a>    <span class="k">def</span> <span class="nf">find_Z2_symmetries</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Finds Z2 Pauli-type symmetries of an Operator</span>
 
@@ -2033,7 +2033,7 @@
 
         <span class="k">return</span> <span class="n">Pauli_symmetries</span><span class="p">,</span> <span class="n">sq_paulis</span><span class="p">,</span> <span class="n">cliffords</span><span class="p">,</span> <span class="n">sq_list</span></div>
 
-<div class="viewcode-block" id="Operator.qubit_tapering"><a class="viewcode-back" href="../../../api/qiskit.aqua.Operator.html#qiskit.aqua.Operator.qubit_tapering">[docs]</a>    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="Operator.qubit_tapering"><a class="viewcode-back" href="../../../apidoc/aqua/aqua.html#qiskit.aqua.Operator.qubit_tapering">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">qubit_tapering</span><span class="p">(</span><span class="n">operator</span><span class="p">,</span> <span class="n">cliffords</span><span class="p">,</span> <span class="n">sq_list</span><span class="p">,</span> <span class="n">tapering_values</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Builds an Operator which has a number of qubits tapered off,</span>
@@ -2095,7 +2095,7 @@
         <span class="n">operator_out</span><span class="o">.</span><span class="n">zeros_coeff_elimination</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">operator_out</span></div>
 
-<div class="viewcode-block" id="Operator.zeros_coeff_elimination"><a class="viewcode-back" href="../../../api/qiskit.aqua.Operator.html#qiskit.aqua.Operator.zeros_coeff_elimination">[docs]</a>    <span class="k">def</span> <span class="nf">zeros_coeff_elimination</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Operator.zeros_coeff_elimination"><a class="viewcode-back" href="../../../apidoc/aqua/aqua.html#qiskit.aqua.Operator.zeros_coeff_elimination">[docs]</a>    <span class="k">def</span> <span class="nf">zeros_coeff_elimination</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Elinminate paulis or grouped paulis whose coefficients are zeros.</span>
 
@@ -2117,7 +2117,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_paulis_to_grouped_paulis</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_paulis</span> <span class="o">=</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="Operator.scaling_coeff"><a class="viewcode-back" href="../../../api/qiskit.aqua.Operator.html#qiskit.aqua.Operator.scaling_coeff">[docs]</a>    <span class="k">def</span> <span class="nf">scaling_coeff</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scaling_factor</span><span class="p">):</span>
+<div class="viewcode-block" id="Operator.scaling_coeff"><a class="viewcode-back" href="../../../apidoc/aqua/aqua.html#qiskit.aqua.Operator.scaling_coeff">[docs]</a>    <span class="k">def</span> <span class="nf">scaling_coeff</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scaling_factor</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Constant scale the coefficient in an operator.</span>
 

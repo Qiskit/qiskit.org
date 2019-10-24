@@ -197,7 +197,7 @@
 <span class="kn">from</span> <span class="nn">qiskit.aqua.operators</span> <span class="k">import</span> <span class="n">WeightedPauliOperator</span>
 
 
-<div class="viewcode-block" id="EnergyInput"><a class="viewcode-back" href="../../../../api/qiskit.aqua.input.EnergyInput.html#qiskit.aqua.input.EnergyInput">[docs]</a><span class="k">class</span> <span class="nc">EnergyInput</span><span class="p">(</span><span class="n">AlgorithmInput</span><span class="p">):</span>
+<div class="viewcode-block" id="EnergyInput"><a class="viewcode-back" href="../../../../apidoc/aqua/input/input.html#qiskit.aqua.input.EnergyInput">[docs]</a><span class="k">class</span> <span class="nc">EnergyInput</span><span class="p">(</span><span class="n">AlgorithmInput</span><span class="p">):</span>
 
     <span class="n">PROP_KEY_QUBITOP</span> <span class="o">=</span> <span class="s1">&#39;qubit_op&#39;</span>
     <span class="n">PROP_KEY_AUXOPS</span> <span class="o">=</span> <span class="s1">&#39;aux_ops&#39;</span>
@@ -260,13 +260,13 @@
 <div class="viewcode-block" id="EnergyInput.has_aux_ops"><a class="viewcode-back" href="../../../../api/qiskit.aqua.input.EnergyInput.html#qiskit.aqua.input.EnergyInput.has_aux_ops">[docs]</a>    <span class="k">def</span> <span class="nf">has_aux_ops</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_aux_ops</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span></div>
 
-<div class="viewcode-block" id="EnergyInput.to_params"><a class="viewcode-back" href="../../../../api/qiskit.aqua.input.EnergyInput.html#qiskit.aqua.input.EnergyInput.to_params">[docs]</a>    <span class="k">def</span> <span class="nf">to_params</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="EnergyInput.to_params"><a class="viewcode-back" href="../../../../apidoc/aqua/input/input.html#qiskit.aqua.input.EnergyInput.to_params">[docs]</a>    <span class="k">def</span> <span class="nf">to_params</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">params</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">params</span><span class="p">[</span><span class="n">EnergyInput</span><span class="o">.</span><span class="n">PROP_KEY_QUBITOP</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_qubit_op</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
         <span class="n">params</span><span class="p">[</span><span class="n">EnergyInput</span><span class="o">.</span><span class="n">PROP_KEY_AUXOPS</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_aux_ops</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_aux_ops</span><span class="p">))]</span>
         <span class="k">return</span> <span class="n">params</span></div>
 
-<div class="viewcode-block" id="EnergyInput.from_params"><a class="viewcode-back" href="../../../../api/qiskit.aqua.input.EnergyInput.html#qiskit.aqua.input.EnergyInput.from_params">[docs]</a>    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="EnergyInput.from_params"><a class="viewcode-back" href="../../../../apidoc/aqua/input/input.html#qiskit.aqua.input.EnergyInput.from_params">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_params</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">EnergyInput</span><span class="o">.</span><span class="n">PROP_KEY_QUBITOP</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">AquaError</span><span class="p">(</span><span class="s2">&quot;Qubit operator is required.&quot;</span><span class="p">)</span>
