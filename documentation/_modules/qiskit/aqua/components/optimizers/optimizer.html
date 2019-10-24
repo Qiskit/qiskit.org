@@ -203,14 +203,14 @@
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="Optimizer"><a class="viewcode-back" href="../../../../../api/qiskit.aqua.components.optimizers.Optimizer.html#qiskit.aqua.components.optimizers.Optimizer">[docs]</a><span class="k">class</span> <span class="nc">Optimizer</span><span class="p">(</span><span class="n">Pluggable</span><span class="p">):</span>
+<div class="viewcode-block" id="Optimizer"><a class="viewcode-back" href="../../../../../apidoc/aqua/components/variational_forms/variational_forms.html#qiskit.aqua.components.optimizers.Optimizer">[docs]</a><span class="k">class</span> <span class="nc">Optimizer</span><span class="p">(</span><span class="n">Pluggable</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Base class for optimization algorithm.&quot;&quot;&quot;</span>
 
-    <span class="k">class</span> <span class="nc">SupportLevel</span><span class="p">(</span><span class="n">IntEnum</span><span class="p">):</span>
+<div class="viewcode-block" id="Optimizer.SupportLevel"><a class="viewcode-back" href="../../../../../apidoc/aqua/components/variational_forms/variational_forms.html#qiskit.aqua.components.optimizers.Optimizer.SupportLevel">[docs]</a>    <span class="k">class</span> <span class="nc">SupportLevel</span><span class="p">(</span><span class="n">IntEnum</span><span class="p">):</span>
         <span class="n">not_supported</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Does not support the corresponding parameter in optimize()</span>
         <span class="n">ignored</span> <span class="o">=</span> <span class="mi">1</span>        <span class="c1"># Feature can be passed as non None but will be ignored</span>
         <span class="n">supported</span> <span class="o">=</span> <span class="mi">2</span>      <span class="c1"># Feature is supported</span>
-        <span class="n">required</span> <span class="o">=</span> <span class="mi">3</span>       <span class="c1"># Feature is required and must be given, None is invalid</span>
+        <span class="n">required</span> <span class="o">=</span> <span class="mi">3</span>       <span class="c1"># Feature is required and must be given, None is invalid</span></div>
 
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Base class for Optimizers.</span>
@@ -251,7 +251,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_options</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_max_evals_grouped</span> <span class="o">=</span> <span class="mi">1</span>
 
-<div class="viewcode-block" id="Optimizer.init_params"><a class="viewcode-back" href="../../../../../api/qiskit.aqua.components.optimizers.Optimizer.html#qiskit.aqua.components.optimizers.Optimizer.init_params">[docs]</a>    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="Optimizer.init_params"><a class="viewcode-back" href="../../../../../apidoc/aqua/components/variational_forms/variational_forms.html#qiskit.aqua.components.optimizers.Optimizer.init_params">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">init_params</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Initialize with a params dictionary.</span>
 
@@ -269,7 +269,7 @@
         <span class="n">optimizer</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="o">**</span><span class="n">args</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">optimizer</span></div>
 
-<div class="viewcode-block" id="Optimizer.set_options"><a class="viewcode-back" href="../../../../../api/qiskit.aqua.components.optimizers.Optimizer.html#qiskit.aqua.components.optimizers.Optimizer.set_options">[docs]</a>    <span class="k">def</span> <span class="nf">set_options</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="Optimizer.set_options"><a class="viewcode-back" href="../../../../../apidoc/aqua/components/variational_forms/variational_forms.html#qiskit.aqua.components.optimizers.Optimizer.set_options">[docs]</a>    <span class="k">def</span> <span class="nf">set_options</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Sets or updates values in the options dictionary.</span>
 
@@ -285,7 +285,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_options</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;options: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_options</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="Optimizer.gradient_num_diff"><a class="viewcode-back" href="../../../../../api/qiskit.aqua.components.optimizers.Optimizer.html#qiskit.aqua.components.optimizers.Optimizer.gradient_num_diff">[docs]</a>    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="Optimizer.gradient_num_diff"><a class="viewcode-back" href="../../../../../apidoc/aqua/components/variational_forms/variational_forms.html#qiskit.aqua.components.optimizers.Optimizer.gradient_num_diff">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">gradient_num_diff</span><span class="p">(</span><span class="n">x_center</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">,</span> <span class="n">max_evals_grouped</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        We compute the gradient with the numeric differentiation in the parallel way, around the point x_center.</span>
@@ -331,7 +331,7 @@
 
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">grad</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Optimizer.wrap_function"><a class="viewcode-back" href="../../../../../api/qiskit.aqua.components.optimizers.Optimizer.html#qiskit.aqua.components.optimizers.Optimizer.wrap_function">[docs]</a>    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="Optimizer.wrap_function"><a class="viewcode-back" href="../../../../../apidoc/aqua/components/variational_forms/variational_forms.html#qiskit.aqua.components.optimizers.Optimizer.wrap_function">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">wrap_function</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Wrap the function to implicitly inject the args at the call of the function.</span>
@@ -354,7 +354,7 @@
         <span class="n">ret</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">ret</span>
 
-<div class="viewcode-block" id="Optimizer.optimize"><a class="viewcode-back" href="../../../../../api/qiskit.aqua.components.optimizers.Optimizer.html#qiskit.aqua.components.optimizers.Optimizer.optimize">[docs]</a>    <span class="nd">@abstractmethod</span>
+<div class="viewcode-block" id="Optimizer.optimize"><a class="viewcode-back" href="../../../../../apidoc/aqua/components/variational_forms/variational_forms.html#qiskit.aqua.components.optimizers.Optimizer.optimize">[docs]</a>    <span class="nd">@abstractmethod</span>
     <span class="k">def</span> <span class="nf">optimize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_vars</span><span class="p">,</span> <span class="n">objective_function</span><span class="p">,</span> <span class="n">gradient_function</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">variable_bounds</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">initial_point</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Perform optimization.</span>
 
@@ -450,7 +450,7 @@
     <span class="k">def</span> <span class="nf">is_initial_point_required</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_initial_point_support_level</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">SupportLevel</span><span class="o">.</span><span class="n">required</span>
 
-<div class="viewcode-block" id="Optimizer.print_options"><a class="viewcode-back" href="../../../../../api/qiskit.aqua.components.optimizers.Optimizer.html#qiskit.aqua.components.optimizers.Optimizer.print_options">[docs]</a>    <span class="k">def</span> <span class="nf">print_options</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Optimizer.print_options"><a class="viewcode-back" href="../../../../../apidoc/aqua/components/variational_forms/variational_forms.html#qiskit.aqua.components.optimizers.Optimizer.print_options">[docs]</a>    <span class="k">def</span> <span class="nf">print_options</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Print algorithm-specific options.&quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_options</span><span class="p">):</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{:s}</span><span class="s1"> = </span><span class="si">{:s}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_options</span><span class="p">[</span><span class="n">name</span><span class="p">])))</span></div>
