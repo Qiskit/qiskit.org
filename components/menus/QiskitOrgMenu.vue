@@ -9,27 +9,27 @@
           <div class="overlay" />
           <nav class="vertical-navigation">
             <h2>Elements</h2>
-            <a
+            <nuxt-link
               v-for="qiskitElement in qiskitElements"
               :key="qiskitElement.label"
               :class="{
                 'vertical-navigation__item': true,
                 'nuxt-link-active': isActive(qiskitElement.url)
               }"
-              :href="qiskitElement.url"
+              :to="qiskitElement.url"
             >
               {{ qiskitElement.label }}
-            </a>
+            </nuxt-link>
             <h2>Learn more</h2>
-            <a
+            <nuxt-link
               :class="{
                 'vertical-navigation__item': true,
                 'vertical-navigation__item--active': isCommunityActive()
               }"
-              href="/advocates"
+              to="/advocates"
             >
               Community
-            </a>
+            </nuxt-link>
             <div
               v-if="isCommunityActive()"
               class="vertical-community-navigation"
@@ -46,40 +46,45 @@
                 {{ communitySubLink.label }}
               </nuxt-link>
             </div>
-            <a
-              class="vertical-navigation__item"
-              href="https://quantum-computing.ibm.com/jupyter/tutorial/1_start_here.ipynb"
-              target="_blank"
-            >Tutorials</a>
-            <a
-              class="vertical-navigation__item"
-              href="https://qiskit.org/documentation"
-            >API&nbsp;Documentation</a>
+            <nuxt-link
+              v-for="link in learnMore"
+              :key="link.label"
+              :class="{
+                'vertical-navigation__item': true,
+                'nuxt-link-active': isActive(link.url)
+              }"
+              :to="link.url"
+            >
+              {{ link.label }}
+            </nuxt-link>
           </nav>
         </section>
         <nuxt-link class="link-to-home" to="/">
           Qiskit
         </nuxt-link>
         <nav class="navigation-group navigation-group--with-separator">
-          <a
-            v-for="qiskitElement in qiskitElements"
-            :key="qiskitElement.label"
-            class="navigation-group__item"
-            :href="qiskitElement.url"
+          <nuxt-link
+            v-for="link in qiskitElements"
+            :key="link.url"
+            :class="{
+              'navigation-group__item': true,
+              'nuxt-link-active': isActive(link.url)
+            }"
+            :to="link.url"
           >
-            {{ qiskitElement.label }}
-          </a>
+            {{ link.label }}
+          </nuxt-link>
         </nav>
         <nav class="navigation-group navigation-group--fixed navigation-group--right-aligned">
-          <a
+          <nuxt-link
             :class="{
               'navigation-group__item': true,
               'navigation-group__item--active': isCommunityActive()
             }"
-            href="/advocates"
+            to="/advocates"
           >
             Community
-          </a>
+          </nuxt-link>
           <a
             v-for="link in learnMore"
             :key="link.label"
@@ -88,6 +93,7 @@
               'nuxt-link-active': isActive(link.url)
             }"
             :href="link.url"
+            target="_blank"
           >
             {{ link.label }}
           </a>
