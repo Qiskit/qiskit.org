@@ -33,7 +33,7 @@
        </script>
         <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
     
-    <title>Development Strategy &#8212; Qiskit 0.13.0 ドキュメント</title>
+    <title>開発ストラテジー &#8212; Qiskit 0.13.0 ドキュメント</title>
 
     <link rel="stylesheet" href="_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -55,7 +55,7 @@
     <link rel="index" title="索引" href="genindex.html" />
     <link rel="search" title="検索" href="search.html" />
     <link rel="next" title="Qiskit に貢献する" href="contributing_to_qiskit.html" />
-    <link rel="prev" title="The Qiskit Elements" href="the_elements.html" /> 
+    <link rel="prev" title="Qiskit の要素" href="the_elements.html" /> 
   </head>
 <body>
   <header>
@@ -139,36 +139,36 @@
 <li class="toctree-l2"><a class="reference internal" href="getting_started.html#next-steps">次の手順</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="the_elements.html">The Qiskit Elements</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="the_elements.html">Qiskit の要素</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="the_elements.html#terra">Terra</a></li>
 <li class="toctree-l2"><a class="reference internal" href="the_elements.html#aer">Aer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="the_elements.html#ignis">Ignis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="the_elements.html#aqua">Aqua</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Development Strategy</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#roadmap">Roadmap</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">開発ストラテジー</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#roadmap">ロードマップ</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#qiskit-terra">Qiskit Terra</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#qiskit-aer">Qiskit Aer</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#qiskit-ignis">Qiskit Ignis</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#qiskit-aqua">Qiskit Aqua</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#summary">Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#summary">概要</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#versioning">Versioning</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#meta-package-version">Meta-package Version</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#adding-new-elements">Adding New Elements</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#patch-version-increases">Patch Version Increases</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#minor-version-increases">Minor Version Increases</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#major-version-increases">Major Version Increases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#versioning">バージョン管理</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#meta-package-version">メタパッケージバージョン</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#adding-new-elements">新しい要素(エレメント) の追加</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#patch-version-increases">パッチバージョンの増加</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#minor-version-increases">マイナーバージョンの増加</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#major-version-increases">メジャーバージョンの増加</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#qiskit-element-requirement-tracking">Qiskit Element Requirement Tracking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#qiskit-element-requirement-tracking">Qiskit要素の要件の追跡</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#module-status">Module Status</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#modules">Modules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#providers">Providers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-status">モジュールの状態</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#modules">モジュール</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#providers">プロバイダー</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#basic-aer-provider">Basic Aer Provider</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#aer-provider">Aer Provider</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#ibm-q-provider">IBM Q Provider</a></li>
@@ -176,17 +176,17 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#community-extensions">Community Extensions</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id1">Providers</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#additional-providers">Additional providers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#community-extensions">コミュニティーによる拡張</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">プロバイダー</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#additional-providers">追加のプロバイダー</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#transpiler">Transpiler</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#additional-passes">Additional passes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#transpiler">トランスパイラー</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#additional-passes">追加のパス</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#tools">Tools</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#additional-tools">Additional Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tools">ツール</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#additional-tools">追加のツール</a></li>
 </ul>
 </li>
 </ul>
@@ -194,24 +194,24 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="contributing_to_qiskit.html">Qiskit に貢献する</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="contributing_to_qiskit.html#where-things-are">Where Things Are</a></li>
-<li class="toctree-l2"><a class="reference internal" href="contributing_to_qiskit.html#getting-started">Getting Started</a></li>
-<li class="toctree-l2"><a class="reference internal" href="contributing_to_qiskit.html#contributor-license-agreement">Contributor License Agreement</a></li>
-<li class="toctree-l2"><a class="reference internal" href="contributing_to_qiskit.html#contributing-to-documentation">Contributing to Documentation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="contributing_to_qiskit.html#translating-documentation">Translating Documentation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="contributing_to_qiskit.html#building-from-source">Building from Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing_to_qiskit.html#where-things-are">Qiskitのコードのロケーションについて</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing_to_qiskit.html#getting-started">はじめに</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing_to_qiskit.html#contributor-license-agreement">Contributor License Agreement (CLA、貢献者ライセンス同意書)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing_to_qiskit.html#contributing-to-documentation">ドキュメンテーションへの貢献</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="contributing_to_qiskit.html#translating-documentation">ドキュメンテーションの翻訳について</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributing_to_qiskit.html#building-from-source">ソースからのビルド</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="contributing_to_qiskit.html#installing-from-source">Installing from Source</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="contributing_to_qiskit.html#set-up-the-virtual-development-environment">Set up the virtual development environment</a></li>
-<li class="toctree-l3"><a class="reference internal" href="contributing_to_qiskit.html#installing-terra-from-source">Installing Terra from Source</a></li>
-<li class="toctree-l3"><a class="reference internal" href="contributing_to_qiskit.html#installing-aer-from-source">Installing Aer from Source</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="contributing_to_qiskit.html#custom-options-during-wheel-builds">Custom options during wheel builds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing_to_qiskit.html#installing-from-source">ソースからインストールする方法</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="contributing_to_qiskit.html#set-up-the-virtual-development-environment">仮想開発環境を作成します。</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributing_to_qiskit.html#installing-terra-from-source">ソースから Terra をインストールする</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributing_to_qiskit.html#installing-aer-from-source">Aerのソースコードからのインストール</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="contributing_to_qiskit.html#custom-options-during-wheel-builds">wheelビルドのカスタム・オプション</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="contributing_to_qiskit.html#installing-ignis-from-source">Installing Ignis from Source</a></li>
-<li class="toctree-l3"><a class="reference internal" href="contributing_to_qiskit.html#installing-aqua-from-source">Installing Aqua from Source</a></li>
-<li class="toctree-l3"><a class="reference internal" href="contributing_to_qiskit.html#installing-ibmq-provider-from-source">Installing IBMQ Provider from Source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributing_to_qiskit.html#installing-ignis-from-source">Ignisのソースコードからのインストール</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributing_to_qiskit.html#installing-aqua-from-source">Aquaのソースコードからのインストール</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributing_to_qiskit.html#installing-ibmq-provider-from-source">IBMQプロバイダのソースコードからのインストール</a></li>
 </ul>
 </li>
 </ul>
@@ -756,36 +756,36 @@
 <li class="toctree-l2"><a class="reference internal" href="getting_started.html#next-steps">次の手順</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="the_elements.html">The Qiskit Elements</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="the_elements.html">Qiskit の要素</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="the_elements.html#terra">Terra</a></li>
 <li class="toctree-l2"><a class="reference internal" href="the_elements.html#aer">Aer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="the_elements.html#ignis">Ignis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="the_elements.html#aqua">Aqua</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Development Strategy</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#roadmap">Roadmap</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">開発ストラテジー</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#roadmap">ロードマップ</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#qiskit-terra">Qiskit Terra</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#qiskit-aer">Qiskit Aer</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#qiskit-ignis">Qiskit Ignis</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#qiskit-aqua">Qiskit Aqua</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#summary">Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#summary">概要</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#versioning">Versioning</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#meta-package-version">Meta-package Version</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#adding-new-elements">Adding New Elements</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#patch-version-increases">Patch Version Increases</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#minor-version-increases">Minor Version Increases</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#major-version-increases">Major Version Increases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#versioning">バージョン管理</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#meta-package-version">メタパッケージバージョン</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#adding-new-elements">新しい要素(エレメント) の追加</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#patch-version-increases">パッチバージョンの増加</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#minor-version-increases">マイナーバージョンの増加</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#major-version-increases">メジャーバージョンの増加</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#qiskit-element-requirement-tracking">Qiskit Element Requirement Tracking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#qiskit-element-requirement-tracking">Qiskit要素の要件の追跡</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#module-status">Module Status</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#modules">Modules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#providers">Providers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-status">モジュールの状態</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#modules">モジュール</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#providers">プロバイダー</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#basic-aer-provider">Basic Aer Provider</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#aer-provider">Aer Provider</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#ibm-q-provider">IBM Q Provider</a></li>
@@ -793,17 +793,17 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#community-extensions">Community Extensions</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id1">Providers</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#additional-providers">Additional providers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#community-extensions">コミュニティーによる拡張</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">プロバイダー</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#additional-providers">追加のプロバイダー</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#transpiler">Transpiler</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#additional-passes">Additional passes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#transpiler">トランスパイラー</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#additional-passes">追加のパス</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#tools">Tools</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#additional-tools">Additional Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tools">ツール</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#additional-tools">追加のツール</a></li>
 </ul>
 </li>
 </ul>
@@ -811,24 +811,24 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="contributing_to_qiskit.html">Qiskit に貢献する</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="contributing_to_qiskit.html#where-things-are">Where Things Are</a></li>
-<li class="toctree-l2"><a class="reference internal" href="contributing_to_qiskit.html#getting-started">Getting Started</a></li>
-<li class="toctree-l2"><a class="reference internal" href="contributing_to_qiskit.html#contributor-license-agreement">Contributor License Agreement</a></li>
-<li class="toctree-l2"><a class="reference internal" href="contributing_to_qiskit.html#contributing-to-documentation">Contributing to Documentation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="contributing_to_qiskit.html#translating-documentation">Translating Documentation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="contributing_to_qiskit.html#building-from-source">Building from Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing_to_qiskit.html#where-things-are">Qiskitのコードのロケーションについて</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing_to_qiskit.html#getting-started">はじめに</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing_to_qiskit.html#contributor-license-agreement">Contributor License Agreement (CLA、貢献者ライセンス同意書)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing_to_qiskit.html#contributing-to-documentation">ドキュメンテーションへの貢献</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="contributing_to_qiskit.html#translating-documentation">ドキュメンテーションの翻訳について</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributing_to_qiskit.html#building-from-source">ソースからのビルド</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="contributing_to_qiskit.html#installing-from-source">Installing from Source</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="contributing_to_qiskit.html#set-up-the-virtual-development-environment">Set up the virtual development environment</a></li>
-<li class="toctree-l3"><a class="reference internal" href="contributing_to_qiskit.html#installing-terra-from-source">Installing Terra from Source</a></li>
-<li class="toctree-l3"><a class="reference internal" href="contributing_to_qiskit.html#installing-aer-from-source">Installing Aer from Source</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="contributing_to_qiskit.html#custom-options-during-wheel-builds">Custom options during wheel builds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing_to_qiskit.html#installing-from-source">ソースからインストールする方法</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="contributing_to_qiskit.html#set-up-the-virtual-development-environment">仮想開発環境を作成します。</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributing_to_qiskit.html#installing-terra-from-source">ソースから Terra をインストールする</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributing_to_qiskit.html#installing-aer-from-source">Aerのソースコードからのインストール</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="contributing_to_qiskit.html#custom-options-during-wheel-builds">wheelビルドのカスタム・オプション</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="contributing_to_qiskit.html#installing-ignis-from-source">Installing Ignis from Source</a></li>
-<li class="toctree-l3"><a class="reference internal" href="contributing_to_qiskit.html#installing-aqua-from-source">Installing Aqua from Source</a></li>
-<li class="toctree-l3"><a class="reference internal" href="contributing_to_qiskit.html#installing-ibmq-provider-from-source">Installing IBMQ Provider from Source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributing_to_qiskit.html#installing-ignis-from-source">Ignisのソースコードからのインストール</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributing_to_qiskit.html#installing-aqua-from-source">Aquaのソースコードからのインストール</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributing_to_qiskit.html#installing-ibmq-provider-from-source">IBMQプロバイダのソースコードからのインストール</a></li>
 </ul>
 </li>
 </ul>
@@ -1313,218 +1313,108 @@
         <div class="page-content">
         
   <div class="section" id="development-strategy">
-<h1>Development Strategy<a class="headerlink" href="#development-strategy" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<h1>開発ストラテジー<a class="headerlink" href="#development-strategy" title="このヘッドラインへのパーマリンク">¶</a></h1>
 <div class="section" id="roadmap">
-<h2>Roadmap<a class="headerlink" href="#roadmap" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<p>We are going to look out 12 months to establish a set of goals we want to work
-towards. When planning, we typically look at potential work from the perspective
-of the elements.</p>
+<h2>ロードマップ<a class="headerlink" href="#roadmap" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>目指す一連の目標をセットするとき、12ヶ月を見据えます。計画時、通常要素の視点から潜在的な作業を洗い出します。</p>
 <div class="section" id="qiskit-terra">
 <h3>Qiskit Terra<a class="headerlink" href="#qiskit-terra" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>In 2018 we worked on formalizing the backends and user flow in Qiskit Terra. The
-basic idea is as follows: the user designs a quantum circuit and then, through a set of
-transpiler passes, rewrites the circuit to run on different backends with
-different optimizations. We also introduced the concept of a <em>provider</em>,
-whose role is to supply backends for the user to run quantum circuits on.
-The provider API we have defined at version one supplies a set of
-schemas to verify that the provider and its backends are Terra-compatible.</p>
-<p>In 2019, we have many extensions planned. These include:</p>
+<p>2018年、QiskitTerraのバックエンドとユーザー・フローの正式化に取り組みました。基本的なアイディアは以下の通りです。ユーザーは、まず量子回路をデザインし、次に一連のトランスパイラー・パスを通じ、異なるバックエンドで動作するよう異なる最適化を利用して回路を書き換えます。また、<a href="#id1"><span class="problematic" id="id2">*</span></a>プロバイダー*の概念を導入し、量子回路を走らせるバックエンドをユーザーに提供する役割を与えました。バージョン1で定義したプロバイダーAPIは、プロバイダーとそのバックエンドがTerra互換であるかを確認するためのスキーマを提供しています。</p>
+<p>2019年、以下の通り、多くの拡張が計画されています。</p>
 <ul class="simple">
-<li><p><strong>Add passes to the transpiler.</strong> The goal here is to be more efficient in
-circuit depth as well as adding passes that find approximate circuits and resource estimations.</p></li>
-<li><p><strong>Introduce a circuit foundry and circuit API.</strong> This has the goal of making sure that a
-user can easily build complex circuits from operations. Some of these include
-adding controls and power to operations, and inserting unitary matrices directly.</p></li>
-<li><p><strong>Provide an API for OpenPulse.</strong> Now that OpenPulse is defined, and the IBM Q provider can accept
-it, we plan to build out the pulse features. These will include a
-scheduler and tools for building experiments out of pulses. Also included will
-be tools for mapping between experiments with gates (QASM) to experiments with pulses.</p></li>
+<li><p><strong>トランスパイラーへのパスを追加</strong> : ここでのゴールは回路の深さをより効率的にすること、そして回路とリソースのおおよその見積もりを見つけるパスを追加することです。</p></li>
+<li><p><strong>回路ファウンドリと回路APIの導入</strong> : このゴールは複雑な回路を簡単な操作で構築できるようにすることです。これには演算への制御とパワーの追加、ユニタリー行列の直接挿入などが含まれます。</p></li>
+<li><p><strong>OpenPulseに対するAPIの提供</strong> : OpenPulseが定義され、IBM Qプロバイダーが受け入れた今、パルス機能を構築する予定です。これらは、パルスを使った実験を構築するスケジューラーやツールが含まれます。また、ゲートを使った実験(QASM)とパルスを使った実験をマップするツールも含まれます。</p></li>
 </ul>
 </div>
 <div class="section" id="qiskit-aer">
 <h3>Qiskit Aer<a class="headerlink" href="#qiskit-aer" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>The first release of Qiskit Aer was made avaialble at the end of 2018. It included C++
-implementations of QASM, statevector, and unitary simulators. These are the core to
-Qiskit Aer, and replace the simulators that existed in Terra. The QASM simulator includes
-a customizable general (Kraus) noise model, and all simulators are include CPU parallelization
-through the OpenMP library.</p>
-<p>In 2019, Aer will be extended in many ways:</p>
+<p>Qiskit Aerの最初のリリースは2018年末に利用可能となりました。これは、QASM、状態ベクトル、ユニタリー・シミュレーターのC++実装が含まれます。これらがQiskit Aerの中核であり、Terraに存在してたシミュレーターを置き換えるものです。QASMシミュレーターにはカスタマイズ可能な一般的 (Kraus) ノイズ・モデルが含まれており、すべてのシミュレーターにOpenMPライブラリを使用したCPU並列化が含まれています。</p>
+<p>2019年、Aerは多くの拡張が予定されています。</p>
 <ul class="simple">
-<li><p><strong>Optimize simulators.</strong> We are going to start profiling the simulators and work on making
-them faster. This will include automatic settings for backend configuration and
-OpenMP parallelization configuration based on the input Qobj and available hardware.</p></li>
-<li><p><strong>Develop additional simulator backends.</strong> We will include several approximate simulator backends
-that are more efficient for specific subclasses of circuits, such as the
-T-gate simulator, which works on Clifford and T gates (with low T-depth), and a stabilizer
-simulator,  which works just on Clifford gates.</p></li>
-<li><p><strong>Add noise approximation tools.</strong> We plan to add noise approximation tools to mapping
-general (Kraus) noise models to approximate noise model that may be implemented on
-an approximate backends (for example only mixed Clifford and reset errors in the noise model).</p></li>
+<li><p><strong>シミュレーターの最適化</strong> : シミュレーターのプロファイリングを開始し、高速化に取り組みます。これは、入力Qobjと利用可能なハードウェアに基づいた、バックエンド構成とOpenMP並列化の構成の自動設定が含まれます。</p></li>
+<li><p><strong>追加のシミュレーター・バックエンドの開発</strong> : 回路の特定のサブクラスに対しより効率的であるいくつかの近似シミュレーター・バックエンドが含まれます。例えば、CliffordとTゲート(低T深度)で動作するTゲート・シミュレーターや、Cliffordゲートだけで動作するスタビライザー・シミュレーターです。</p></li>
+<li><p><strong>ノイズ近似ツールの追加</strong> : 近似バックエンド上に実装されているかもしれないノイズ・モデルを近似するために、一般的な(Kraus)ノイズモデルをマップするノイズ近似ツール(例えば、Cliffordとリセットの混合エラーのみのノイズ・モデル)を追加する予定です 。</p></li>
 </ul>
 </div>
 <div class="section" id="qiskit-ignis">
 <h3>Qiskit Ignis<a class="headerlink" href="#qiskit-ignis" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>This year, we are going to release the first version of Qiskit Ignis. The goal of
-Ignis is to be a set of tools for characterization of errors,
-improving gates, and enhancing computation
-in the presence of noise. Examples of these tools include optimal control, dynamical
-decoupling, and error mitigation.</p>
-<p>In 2019, Ignis will include tools for:</p>
+<p>今年、Qiskit Ignis の最初のバージョンをリリースする予定です。Ignisの目標は、エラーの性能評価や、ゲートの改良、ノイズの存在下での計算強化のためのツールを提供することです。ツール例としては、最適制御、動的デカップリング、エラー軽減が含まれます。</p>
+<p>2019年、Ignisは以下のツールを提供する予定です。</p>
 <ul class="simple">
-<li><p>quantum state/process tomography</p></li>
-<li><p>randomized benchmarking over different groups</p></li>
-<li><p>optimal control (e.g., pulse shaping)</p></li>
-<li><p>dynamical decoupling</p></li>
-<li><p>circuit randomization</p></li>
-<li><p>error mitigation (to improve results for quantum chemistry experiments)</p></li>
+<li><p>量子状態/プロセス・トモグラフィ</p></li>
+<li><p>異なるグループに対するランダム化ベンチマーキング</p></li>
+<li><p>最適化制御 (例: パルス整形)</p></li>
+<li><p>動的デカップリング</p></li>
+<li><p>回路のランダム化</p></li>
+<li><p>(量子化学実験の結果改善のための) エラー軽減</p></li>
 </ul>
 </div>
 <div class="section" id="qiskit-aqua">
 <h3>Qiskit Aqua<a class="headerlink" href="#qiskit-aqua" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>Aqua is an open-source library of quantum algorithms and applications, introduced in June 2018.
-As a library of quantum algorithms, Aqua comes with a rich set of quantum algorithms of
-general applicability—such as VQE, QAOA, Grover's Search, Amplitude Estimation and
-Phase Estimation—and domain-specific algorithms-such as the Support Vector Machine (SVM)
-Quantum Kernel and Variational algorithms, suitable for supervised learning.  In addition,
-Aqua includes algorithm-supporting components, such as optimizers, variational forms, oracles,
-Quantum Fourier Transforms, feature maps, multiclass classification extension algorithms,
-uncertainty problems, and random distributions.
-As a framework for quantum applications, Aqua provides support for Chemistry (released separately
-as the Qiskit Chemistry component), as well as Artificial Intelligence (AI), Optimization and
-Finance.  Aqua is extensible across multiple domains, and has been designed and structured as a
-framework that allows researchers to contribute their own implementations of new algorithms and
-algorithm-supporting components.</p>
-<p>Over the course of 2019, we are planning to enrich Aqua as follows:</p>
+<p>Aquaは、2018年6月に導入された量子アルゴリズムとアプリケーションのオープンソース・ライブラリです。量子アルゴリズムのライブラリとして、Aquaには一般に適用可能な豊富な量子アルゴリズムのセット、例えば、VQE、QAOA、Grover検索、振幅推定と位相推定、などがあります。また、ドメイン固有のアルゴリズム、例えば教師あり学習に適したサポート・ベクター・マシン (Support Vector Machine, SVM) の量子カーネルや変分アルゴリズムもあります。さらに、Aquaはアルゴリズムをサポートする構成要素、例えば最適化、変分形式、オラクル、量子フーリエ変換、特徴量マップ、複数クラス分類拡張アルゴリズム、不確定性問題、ランダム分布なども含みます。量子アプリケーションのフレームワークとして、AquaはChemistry (Qiskit Chemistry構成要素として個別にリリース) や、AI (人工知能)、Optimization、Financeを提供します。Aquaは複数ドメインにわたって拡張可能であり、研究者が新しいアルゴリズムやアルゴリズムをサポートする構成要素を独自に実装することに貢献できるフレームワークとしてデザインおよび構造化されています。</p>
+<p>2019年を通じて、Aquaを以下のように強化する予定です。</p>
 <ul class="simple">
-<li><p>We will include several new quantum algorithms,
-such as Deutsch-Jozsa, Simon's, Bernstein-Vazirani, and
-Harrow, Hassidim, and Lloyd (HHL).</p></li>
-<li><p>We will improve the performance of quantum algorithms on top of both
-simulators and real hardware.</p></li>
-<li><p>We will provide better support for execution on real quantum hardware.</p></li>
-<li><p>We will increase the set of problems supported by the AI, Optimization and Finance
-applications of Aqua.</p></li>
+<li><p>Deutsch-Jozsa、Simon's、Bernstein-Vazirani、そしてHarrowm、 Hassidim and Lloyd (HHL) といった、新しい量子アルゴリズムを提供する予定です。</p></li>
+<li><p>シミュレーターでも実機でも量子アルゴリズムのパフォーマンスを改良します。</p></li>
+<li><p>実機上の実行サポートを改善します。</p></li>
+<li><p>AquaのAI、Optimization、Financeアプリケーションを用いてサポートされる問題のセットを増加します。</p></li>
 </ul>
 </div>
 <div class="section" id="summary">
-<h3>Summary<a class="headerlink" href="#summary" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>These are examples of just some of the work we will be focusing on in the next 12 months.
-We will continuously adapt the plan based on feedback. Please follow along and let us
-know what you think!</p>
+<h3>概要<a class="headerlink" href="#summary" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>これらは次の１２ヶ月内にフォーカスしている作業のいくつかの例です。フィードバックに基づいて計画を継続的に調整する予定です。フォローをして、ぜひあなたのご意見を聞かせて下さい！</p>
 </div>
 </div>
 <div class="section" id="versioning">
-<span id="versioning-strategy"></span><h2>Versioning<a class="headerlink" href="#versioning" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<p>The Qiskit project is made up of several elements each performing different
-functionality. Each is independently useful and can be used on their own,
-but for convenience we provide this repository and meta-package to provide
-a single entrypoint to install all the elements at once. This is to simplify
-the install process and provide a unified interface to end users. However,
-because each Qiskit element has it's own releases and versions some care is
-needed when dealing with versions between the different repositories. This
-document outlines the guidelines for dealing with versions and releases of
-both Qiskit elements and the meta-package.</p>
-<p>For the rest of this guide the standard Semantic Versioning nomenclature will
-be used of: <code class="docutils literal notranslate"><span class="pre">Major.Minor.Patch</span></code> to refer to the different components of a
-version number. For example, if the version number was <code class="docutils literal notranslate"><span class="pre">0.7.1</span></code>, then the major
-version is <code class="docutils literal notranslate"><span class="pre">0</span></code>, the minor version <code class="docutils literal notranslate"><span class="pre">7</span></code>, and the patch version <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+<span id="versioning-strategy"></span><h2>バージョン管理<a class="headerlink" href="#versioning" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>Qiskit プロジェクトは、各自異なる機能を実行するいくつかの要素(エレメント) から構成されています。各要素は独立しており、それ単独で機能します。しかしながら、利便性のためにこのリポジトリを提供し、全ての要素を一度にインストールできるように、単一のエントリーポイントのメタパッケージとして提供しています。これによりインストールプロセスが簡略化され、エンドユーザーに統一されたインタフェースを提供できます。ただし、それぞれの Qiskit エレメントは独自のリリースとバージョンをもつため、異なるリポジトリ間でのバージョンを扱う際には注意が必要です。このドキュメントは Qiskit エレメントとメタパッケージ両者のバージョンとリリースの扱いのガイドラインを概略します。</p>
+<p>このガイドの残りでは、異なるコンポーネントのバージョン番号を参照するのに、標準のセマンティック バージョニング (Semantic Versioning) 命名規則: <code class="docutils literal notranslate"><span class="pre">Major.Minor.Patch</span></code> を採用します。例えば、バージョン番号が <code class="docutils literal notranslate"><span class="pre">0.7.1</span></code> だった場合、メジャーバージョンは <code class="docutils literal notranslate"><span class="pre">0</span></code> 、マイナーバージョンが <code class="docutils literal notranslate"><span class="pre">7</span></code>、そしてパッチバージョンが <code class="docutils literal notranslate"><span class="pre">1</span></code> です。</p>
 <div class="section" id="meta-package-version">
-<h3>Meta-package Version<a class="headerlink" href="#meta-package-version" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>The Qiskit meta-package version is an independent value that is determined by
-the releases of each of the elements being tracked. Each time we push a release
-to a tracked component (or add an element) the meta-package requirements, and
-version will need to be updated and a new release published. The timing should
-be coordinated with the release of elements to ensure that the meta-package
-releases track with element releases.</p>
+<h3>メタパッケージバージョン<a class="headerlink" href="#meta-package-version" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>Qiskitメタパッケージバージョンは、追跡対象の各要素のリリースによって決定される独立した値です。
+リリースを追跡対象コンポーネントにプッシュする(または要素を追加する)たびに、メタパッケージの要件とバージョンを更新し、新しいリリースを公開する必要があります。 タイミングを要素のリリースと調整して、メタパッケージのリリースが要素のリリースを追跡するようにします。</p>
 <div class="section" id="adding-new-elements">
-<h4>Adding New Elements<a class="headerlink" href="#adding-new-elements" title="このヘッドラインへのパーマリンク">¶</a></h4>
-<p>When a new Qiskit element is being added to the meta-package requirements, we
-need to increase the <strong>Minor</strong> version of the meta-package.</p>
-<p>For example, if the meta-package is tracking 2 elements <code class="docutils literal notranslate"><span class="pre">qiskit-aer</span></code> and
-<code class="docutils literal notranslate"><span class="pre">qiskit-terra</span></code> and it's version is <code class="docutils literal notranslate"><span class="pre">0.7.4</span></code>. Then we release a new element
-<code class="docutils literal notranslate"><span class="pre">qiskit-ignis</span></code> that we intend to also have included in the meta-package. When
-we add the new element to the meta-package we increase the version to
-<code class="docutils literal notranslate"><span class="pre">0.8.0</span></code>.</p>
+<h4>新しい要素(エレメント) の追加<a class="headerlink" href="#adding-new-elements" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>新しいQiskit要素がメタパッケージ要件に追加されると、メタパッケージのマイナーバージョンを増やす必要があります。</p>
+<p>たとえば、メタパッケージが2つの要素 qiskit-aerとqiskit-terraを追跡しており、そのバージョンが 0.7.4であるとします。次に、メタパッケージに含める予定の新しい要素qiskit-ignisをリリースします。メタパッケージに新しい要素を追加するとき、バージョンを0.8.0に増やします。</p>
 </div>
 <div class="section" id="patch-version-increases">
-<h4>Patch Version Increases<a class="headerlink" href="#patch-version-increases" title="このヘッドラインへのパーマリンク">¶</a></h4>
-<p>When any Qiskit element that is being already tracked by the meta-package
-releases a patch version to fix bugs in a release we need also bump the
-requirement in the setup.py and then increase the patch version of the
-meta-package.</p>
-<p>For example, if the meta-package is tracking 3 elements <code class="docutils literal notranslate"><span class="pre">qiskit-terra==0.8.1</span></code>,
-<code class="docutils literal notranslate"><span class="pre">qiskit-aer==0.2.1</span></code>, and <code class="docutils literal notranslate"><span class="pre">qiskit-ignis==0.1.4</span></code> with the current version
-<code class="docutils literal notranslate"><span class="pre">0.9.6</span></code>. When qiskit-terra release a new patch version to fix a bug <code class="docutils literal notranslate"><span class="pre">0.8.2</span></code>
-the meta-package will also need to increase it's patch version and release,
-becoming <code class="docutils literal notranslate"><span class="pre">0.9.7</span></code>.</p>
-<p>Additionally, there are occasionally packaging or other bugs in the
-meta-package itself that need to be fixed by pushing new releases. When those
-are encountered we should increase the patch version to differentiate it from
-the broken release. Do <strong>not</strong> delete the broken or any old releases from pypi
-in any situation, instead just increase the patch version and upload a new
-release.</p>
+<h4>パッチバージョンの増加<a class="headerlink" href="#patch-version-increases" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>メタパッケージによって既に追跡されているQiskit要素がバグを修正するためのパッチバージョンをリリースする際に、setup.pyの要件を上げてから、メタパッケージのパッチバージョンを増やす必要もあります。</p>
+<p>たとえば、メタパッケージが3つの要素 qiskit-terra == 0.8.1、qiskit-aer == 0.2.1およびqiskit-ignis == 0.1.4を追跡していて 現在のバージョン0.9.6だとします。qiskit-terraがバグ 0.8.2を修正するための新しいパッチバージョンをリリースすると、メタパッケージもパッチバージョンとリリースを増やして 0.9.7にする必要があります。</p>
+<p>さらに、メタパッケージ自体には、新しいリリースをプッシュすることで修正する必要があるパッケージングまたはその他のバグが時々あります。 それらがおきたら、パッチバージョンを増やして、破損したリリースと区別する必要があります。 いかなる状況でもpypiから壊れたリリースや古いリリースを削除しないでください。代わりに、パッチバージョンを増やして新しいリリースをアップロードしてください。</p>
 </div>
 <div class="section" id="minor-version-increases">
-<h4>Minor Version Increases<a class="headerlink" href="#minor-version-increases" title="このヘッドラインへのパーマリンク">¶</a></h4>
-<p>Besides adding a new element to the meta-package the minor version of the
-meta-package should also be increased anytime a minor version is increased in
-a tracked element.</p>
-<p>For example, if the meta-package is tracking 2 elements <code class="docutils literal notranslate"><span class="pre">qiskit-terra==0.7.0</span></code>
-and <code class="docutils literal notranslate"><span class="pre">qiskit-aer==0.1.1</span></code> and the current version is <code class="docutils literal notranslate"><span class="pre">0.7.5</span></code>. When the
-<code class="docutils literal notranslate"><span class="pre">qiskit-aer</span></code> element releases <code class="docutils literal notranslate"><span class="pre">0.2.0</span></code> then we need to increase the
-meta-package version to be <code class="docutils literal notranslate"><span class="pre">0.8.0</span></code> to correspond to the new release.</p>
+<h4>マイナーバージョンの増加<a class="headerlink" href="#minor-version-increases" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>メタパッケージに新しい要素を追加することに加え、追跡される要素のマイナーバージョンが増加するたびに、メタパッケージのマイナーバージョンも増加させる必要があります。</p>
+<p>たとえば、メタパッケージが2つの要素``qiskit-terra == 0.7.0``および``qiskit-aer == 0.1.1``を追跡しており、現在のバージョンが``0.7.5``であるとします。`` qiskit-aer``要素が `` 0.2.0``をリリースしたら、新しいリリースに対応するためにメタパッケージのバージョンを `` 0.8.0``に増やす必要があります。</p>
 </div>
 <div class="section" id="major-version-increases">
-<h4>Major Version Increases<a class="headerlink" href="#major-version-increases" title="このヘッドラインへのパーマリンク">¶</a></h4>
-<p>The major version is different from the other version number components. Unlike
-the other version number components, which are updated in lock step with each
-tracked element, the major version is only increased when all tracked versions
-are bumped (at least before <code class="docutils literal notranslate"><span class="pre">1.0.0</span></code>). Right now all the elements still have
-a major version number component of <code class="docutils literal notranslate"><span class="pre">0</span></code> and until each tracked element in the
-meta-repository is marked as stable by bumping the major version to be <code class="docutils literal notranslate"><span class="pre">&gt;=1</span></code>
-then the meta-package version should not increase the major version.</p>
-<p>The behavior of the major version number component tracking after when all the
-elements are at &gt;=1.0.0 has not been decided yet.</p>
+<h4>メジャーバージョンの増加<a class="headerlink" href="#major-version-increases" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>メジャーバージョンは、他のバージョン番号コンポーネントとは異なります。追跡対象の各要素でロックステップで更新される他のバージョン番号コンポーネントとは異なり、メジャーバージョンは、すべての追跡対象バージョンがバンプされたとき（少なくとも``1.0.0``の前に）にのみ増加します。現在、すべての要素のメジャーバージョン番号コンポーネントは `` 0``であり、メジャーバージョンを <a href="#id1"><span class="problematic" id="id2">``</span></a>&gt; = 1``にバンプしてメタリポジトリ内の各追跡要素が安定しているとマークされるまでは、 パッケージバージョンは、メジャーバージョンを増やすべきではありません。</p>
+<p>すべての要素が&gt; = 1.0.0になった後のメジャーバージョン番号コンポーネントトラッキングの動作はまだ決定されていません。</p>
 </div>
 </div>
 <div class="section" id="qiskit-element-requirement-tracking">
-<h3>Qiskit Element Requirement Tracking<a class="headerlink" href="#qiskit-element-requirement-tracking" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>While not strictly related to the meta-package and Qiskit versioning how we
-track the element versions in the meta-package's requirements list is
-important. Each element listed in the setup.py should be pinned to a single
-version. This means that each version of Qiskit should only install a single
-version for each tracked element. For example, the requirements list at any
-given point should look something like:</p>
+<h3>Qiskit要素の要件の追跡<a class="headerlink" href="#qiskit-element-requirement-tracking" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>メタパッケージとQiskitのバージョン管理に厳密に関連しているわけではありませんが、メタパッケージの要件リストで要素のバージョンを追跡する方法が重要です。 setup.pyにリストされている各要素は、単一のバージョンに固定する必要があります。 つまり、Qiskitの各バージョンでは、追跡対象の要素ごとに1つのバージョンのみをインストールする必要があります。 たとえば、特定の時点での要件リストは次のようになります。</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">requirements</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s2">&quot;qiskit_terra==0.7.0&quot;</span><span class="p">,</span>
     <span class="s2">&quot;qiskit-aer==0.1.1&quot;</span><span class="p">,</span>
 <span class="p">]</span>
 </pre></div>
 </div>
-<p>This is to aid in debugging, but also make tracking the versions across
-multiple elements more transparent.</p>
-<p>It is also worth pointing out that the order we install the elements is
-critically important too. <code class="docutils literal notranslate"><span class="pre">pip</span></code> does not have a real dependency solver which
-means the installation order matters. So if there are overlapping requirements
-versions between elements or dependencies between elements we need to ensure
-that the order in the requirements list installs everything as expected. If the
-order needs to be change for some install time incompatibility it should be
-noted clearly.</p>
+<p>これはデバッグに役立つだけでなく、複数の要素にわたるバージョンの追跡をより透明にするためでもあります。</p>
+<p>また、要素をインストールする順序も非常に重要であることを指摘する価値があります。 `` pip``には実際の依存関係ソルバーがありません。つまり、インストールの順序が重要です。 したがって、要素間で要件バージョンが重複したり、要素間で依存関係がある場合、要件リストの順序ですべてが期待どおりにインストールされるようにする必要があります。 インストール時の非互換性のために順序を変更する必要がある場合は、明確に注意する必要があります。</p>
 </div>
 </div>
 <div class="section" id="module-status">
-<h2>Module Status<a class="headerlink" href="#module-status" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<p>Qiskit is developing so fast that is it is hard to keep all different parts
-of the API supported for various versions. We do our best and we use
-the rule that for one minor version update, for example 0.6 to 0.7,
-we will keep the API working with a deprecated warning. Please don’t
-ignore these warnings. Sometimes there are cases in which this can’t
-be done and for these in the release history we will outline these in
-great details.</p>
-<p>This being said as we work towards Qiskit 1.0 there are some modules
-that have become stable and the table below is our attempt to label them</p>
+<h2>モジュールの状態<a class="headerlink" href="#module-status" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>Qiskitは非常に高速に開発されているため、さまざまなバージョンでサポートされるAPIの異なる部分をすべて維持するのは困難です。 最善を尽くし、1つのマイナーバージョンアップデート（例えば0.6から0.7へ）に対して、非推奨の警告を使用してAPIを動作させ続けるというルールを適用しています。なのでこれらの警告を無視しないでください。 ときにはルールが適用されない場合があります。これらについては、リリース履歴で詳細に説明します。</p>
+<p>これは、Qiskit 1.0に向けて取り組んでいると言われていますが、安定したモジュールがいくつかあり、下の表はそれらにラベルを付ける試みです</p>
 <div class="section" id="modules">
-<h3>Modules<a class="headerlink" href="#modules" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<h3>モジュール<a class="headerlink" href="#modules" title="このヘッドラインへのパーマリンク">¶</a></h3>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 33%" />
@@ -1532,9 +1422,9 @@ that have become stable and the table below is our attempt to label them</p>
 <col style="width: 50%" />
 </colgroup>
 <thead>
-<tr class="row-odd"><th class="head"><p>Name</p></th>
-<th class="head"><p>status</p></th>
-<th class="head"><p>Note</p></th>
+<tr class="row-odd"><th class="head"><p>名称</p></th>
+<th class="head"><p>ステータス</p></th>
+<th class="head"><p>備考</p></th>
 </tr>
 </thead>
 <tbody>
@@ -1626,44 +1516,30 @@ that have become stable and the table below is our attempt to label them</p>
 </table>
 </div>
 <div class="section" id="providers">
-<h3>Providers<a class="headerlink" href="#providers" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>There are three providers that come with the default installation of Qiskit</p>
+<h3>プロバイダー<a class="headerlink" href="#providers" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>Qiskitをデフォルトでインストールすると、下記三つのプロバイダーが提供されます。</p>
 <div class="section" id="basic-aer-provider">
 <h4>Basic Aer Provider<a class="headerlink" href="#basic-aer-provider" title="このヘッドラインへのパーマリンク">¶</a></h4>
-<p>This provider simulates ideal quantum circuits and has three backends.
-As Aer becomes more stable and can work on any operating system this
-provider will be removed.</p>
+<p>当プロバイダーは三つのバックエンドを持ち、理想的な量子回路をシミュレーションします。今後Aerが安定化し、どのOSにも対応できるようになった際は、このプロバイダーは削除される予定です。</p>
 </div>
 <div class="section" id="aer-provider">
 <h4>Aer Provider<a class="headerlink" href="#aer-provider" title="このヘッドラインへのパーマリンク">¶</a></h4>
-<p>This is a more advance simulator that is written in C++. It runs faster than Basic Aer
-and also allows you to add noise to your circuits. This allow you to explore what
-happens to your circuits for realistic
-models of the experiments and design experiments that might be more resilient
-to the noise in today’s quantum computers.</p>
+<p>C++で書かれたより高度なシミュレーターです。Basic Aerと比べて実行処理が速く、量子回路にノイズを載せることも可能です。これにより今日の量子コンピューターのノイズに対して、現実的な実験モデルに基づく量子回路の振る舞いを探求できます。</p>
 </div>
 <div class="section" id="ibm-q-provider">
 <h4>IBM Q Provider<a class="headerlink" href="#ibm-q-provider" title="このヘッドラインへのパーマリンク">¶</a></h4>
-<p>This provider gives you access to real experiments. You will need an IBM Q Experience
-account to use it.  It also has an online HPC simulator that can be used. It is a
-hosted version of the Aer Provider.</p>
+<p>このプロバイダは実機へのアクセスを提供します。利用にはIBM Q Experienceのアカウントが必要です。IBM Q ProviderはオンラインでHPCシミュレーターも提供します。言い換えるならば、クラウドにホスティングされたAer Providerです。</p>
 </div>
 </div>
 </div>
 <div class="section" id="community-extensions">
-<h2>Community Extensions<a class="headerlink" href="#community-extensions" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<p>Qiskit has been designed with modularity in mind. It is extensible in many
-different ways; on the page, we highlight the ways in which the Qiskit community
-has engaged with Qiskit and developed extensions and packages on top of it.</p>
+<h2>コミュニティーによる拡張<a class="headerlink" href="#community-extensions" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>Qiskitはモジュール性を考慮した設計がされています。ここではQiskit コミュニティーとの協働で開発したエクステンションやパッケージ等、各種拡張に関するご紹介をします。</p>
 <div class="section" id="id1">
-<h3>Providers<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>The Qiskit base provider is an entity that provides access to a group
-of different backends (for example, backends available through IBM Q).
-It interacts with those backends to do many things: find out which ones
-are available, retrieve an instance of a particular backend, get backend
-properties and configurations, and handling running and working with jobs.</p>
+<h3>プロバイダー<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>Qiskit base providerは異なるバックエンド群（IBMQ を通じて提供されているバックエンド等) へのアクセスを提供します。バックエンドとのやり取りをして、どのバックエンドがオンラインなのかを判断したり、特定のバックエンドのインスタンス、プロパティや設定を取得したり、ジョブの実行と管理等を行います。</p>
 <div class="section" id="additional-providers">
-<h4>Additional providers<a class="headerlink" href="#additional-providers" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<h4>追加のプロバイダー<a class="headerlink" href="#additional-providers" title="このヘッドラインへのパーマリンク">¶</a></h4>
 <ul>
 <li><p><strong>Decision diagram-based quantum simulator</strong></p>
 <div class="line-block">
@@ -1690,18 +1566,10 @@ and <a class="reference external" href="https://github.com/QuTech-Delft/quantumi
 </div>
 </div>
 <div class="section" id="transpiler">
-<h3>Transpiler<a class="headerlink" href="#transpiler" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>Circuit optimization is at the heart of making quantum computing feasible on actual hardware.
-A central component of Qiskit is the transpiler, which is a framework for manipulating
-quantum circuits according to certain transformations (known as transpiler passes). The transpiler
-enables users to create customized sets of passes, orchestrated by a pass manager, to transform
-the circuit according to the rules specified by the passes. In addition, the transpiler architecture
-is designed for modularity and extensibility, enabling Qiskit users to write their own passes,
-use them in the pass manager, and combine them with existing passes. In this way,
-the transpiler architecture opens up the door for research into aggressive optimization
-of quantum circuits.</p>
+<h3>トランスパイラー<a class="headerlink" href="#transpiler" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>量子コンピューティングを実際のハードウェアで実現する鍵が量子回路の最適化です。Qiskitの主要コンポーネントはTranspilerで、特定の変換（Transpiler passes）に基づいて量子回路を操作するフレームワークです。Transpilerは、pass managerによって、ユーザーがカスタマイズされたパスを作成し、パスが指定したルールに基づいて回路を変換できるようにしたものです。加えて、Transpilerのアーキテクチャはモジュール性と拡張性を考慮して設計され、Qiskitユーザが各自のパスを設計し、pass managerで利用し、既存のパスと組み合わせられるようにしました。このように、Transpilerのアーキテクチャは量子回路のより積極的な最適化を可能にします。</p>
 <div class="section" id="additional-passes">
-<h4>Additional passes<a class="headerlink" href="#additional-passes" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<h4>追加のパス<a class="headerlink" href="#additional-passes" title="このヘッドラインへのパーマリンク">¶</a></h4>
 <ul>
 <li><p><strong>t|ket〉 optimization &amp; routing pass</strong></p>
 <div class="line-block">
@@ -1717,12 +1585,10 @@ and <a class="reference external" href="https://github.com/CQCL/pytket">Github</
 </div>
 </div>
 <div class="section" id="tools">
-<h3>Tools<a class="headerlink" href="#tools" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>Extending Qiskit with new tools and functionality is an important part
-of building a community. These tools can be new visualizations, slack integration,
-Juypter extensions and much more.</p>
+<h3>ツール<a class="headerlink" href="#tools" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>Qiskitの新しいツールや機能の拡張は、コミュニティーの発展にとって重要な取組です。新しいツールとは、可視化ツールであったり、Slackとの統合であったり、Jupyterのエクステンションをつくること等です。</p>
 <div class="section" id="additional-tools">
-<h4>Additional Tools<a class="headerlink" href="#additional-tools" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<h4>追加のツール<a class="headerlink" href="#additional-tools" title="このヘッドラインへのパーマリンク">¶</a></h4>
 <ul>
 <li><p><strong>OpenControls library</strong></p>
 <div class="line-block">
@@ -1747,7 +1613,7 @@ and <a class="reference external" href="https://q-ctrl.com/products/open-control
      <a id="button-prev" href="the_elements.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="P">
          <div class="pagenation-text">
             <span class="pagenation-direction">Previous</span>
-            <div>The Qiskit Elements</div>
+            <div>Qiskit の要素</div>
          </div>
      </a>
      <a id="button-next" href="contributing_to_qiskit.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
