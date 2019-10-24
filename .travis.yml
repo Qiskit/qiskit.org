@@ -8,13 +8,14 @@ cache:
   directories:
   - node_modules
 jobs:
-  - name: Lint, Tests, and Build
-    if: type = pull_request
-    script:
-        - npm run lint
+  include:
+    - name: Lint, Tests, and Build
+      if: type = pull_request
+      script:
+          - npm run lint
+          - npm run build
+    - name: Build and Deploy
+      if: type = push AND branch = master
+      script:
         - npm run build
-  - name: Build and Deploy
-    if: type = push AND branch = master
-    script:
-      - npm run build
-      - cd deploy && bash ./deploy_cos.sh
+        - cd deploy && bash ./deploy_cos.sh
