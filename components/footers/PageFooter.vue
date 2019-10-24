@@ -8,9 +8,9 @@
           </h2>
           <ul>
             <li v-for="qiskitElement in qiskitElements" :key="qiskitElement.label">
-              <a class="footer-column__link" :href="qiskitElement.url">
+              <nuxt-link class="footer-column__link" :to="qiskitElement.url">
                 {{ qiskitElement.label }}
-              </a>
+              </nuxt-link>
             </li>
           </ul>
         </section>
