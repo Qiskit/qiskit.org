@@ -2,11 +2,10 @@
 title: Quantum Dice
 author: Russell Huffman
 description: A simple dice roller app using quantum computing to generate random numbers.
-image: https://github.com/JRussellHuffman/quantum-dice/blob/master/assets/header-image.pngs
+image: https://rawcdn.githack.com/JRussellHuffman/quantum-dice/04a21fc6fe5a0e0a00a47dbc86467b888716e1d5/assets/header-image.png
 to: /experiments/quantum-dice
 media:
-  - https://github.com/JRussellHuffman/quantum-dice/blob/master/assets/header-image.pngs
-  - https://medium.com/design-ibm/truly-quantum-dice-cfe372f4c586
+  - https://rawcdn.githack.com/JRussellHuffman/quantum-dice/04a21fc6fe5a0e0a00a47dbc86467b888716e1d5/assets/header-image.png
 
 source: https://github.com/JRussellHuffman/quantum-dice
 launch: https://jrussellhuffman.com/quantumdice/
