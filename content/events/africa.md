@@ -19,7 +19,7 @@ Qiskit Camps are an immersive experience that consists of training sessions, dee
 
 2019 Qiskit Camp Africa will be hosted near Johannesberg, South Africa from 11-14 December. Invitations will be distributed prior to the event.
 
-Attendees that are new to Qiskit, or simply want to increase their proficiency in quantum computing, additional information to follow on training and development opportunities coming to WITS University in December, 2019, or contact us at hello@qiskit.camp.
+Attendees that are new to Qiskit, or simply want to increase their proficiency in quantum computing should attend the week-long [Quantum Computing Summer School](http://www.wits.ac.za/quantum-computing/summer-school/) at Wits University from December 2-11 immediately preceding Qiskit Camp.
 
 ## Location
 
