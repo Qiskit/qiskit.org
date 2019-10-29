@@ -25,10 +25,10 @@
       :key="`deck-experiment-${index}`"
       name="experiment-deck__slide"
     >
-      <a
+      <nuxt-link
         v-if="active == index"
         class="experiment-deck__slide slide-link"
-        :href="experiment.to"
+        :to="experiment.to"
       >
         <div
           class="experiment-deck__slide-picture"
@@ -45,7 +45,7 @@
             {{ experiment.description }}
           </p>
         </div>
-      </a>
+      </nuxt-link>
     </transition>
   </section>
 </template>

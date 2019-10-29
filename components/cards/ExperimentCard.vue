@@ -1,7 +1,7 @@
 <template>
   <article class="experiment-card">
-    <a
-      :href="to"
+    <nuxt-link
+      :to="to"
       class="card-link"
     >
       <div
@@ -19,7 +19,7 @@
           {{ summary }}
         </p>
       </div>
-    </a>
+    </nuxt-link>
   </article>
 </template>
 
