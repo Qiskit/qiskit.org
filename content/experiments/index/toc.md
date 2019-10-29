@@ -17,4 +17,5 @@
       - quantum-toy-piano.md
       - tictacq.md
       - qiskit-blocks.md
+      - quantum-dice.md
 ---
