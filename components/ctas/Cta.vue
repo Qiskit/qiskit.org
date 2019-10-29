@@ -1,9 +1,9 @@
 <template>
   <component
-    :is="isInternal(to) ? 'nuxt-link' : 'a'"
+    :is="!isStatic && isInternal(to) ? 'nuxt-link' : 'a'"
     :class="[ 'button', { 'button--secondary': secondary } ]"
     :href="to"
-    :to="isInternal(to) ? to : null"
+    :to="!isStatic && isInternal(to) ? to : null"
     :rel="isExternal(to) ? 'noopener' : null"
     :target="isExternal(to) ? '_blank' : null"
   >
@@ -19,6 +19,7 @@ import { Component, Prop } from 'vue-property-decorator'
 export default class extends Vue {
   @Prop(String) to
   @Prop(Boolean) secondary
+  @Prop(Boolean) isStatic
 
   isExternal(url: string): boolean {
     return url.startsWith('http')
