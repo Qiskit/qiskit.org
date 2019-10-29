@@ -5,6 +5,7 @@ import miLinkAttributes from 'markdown-it-link-attributes'
 import miAnchor from 'markdown-it-anchor'
 import uslug from 'uslug'
 import pkg from './package'
+import generateTextbookToc from './hooks/generate-textbook-toc'
 
 const md = markdownIt({
   linkify: true,
@@ -162,5 +163,16 @@ export default {
         .map(filename => `/experiments/${path.parse(filename).name}`)
       return events.concat(experiments)
     })()
+  },
+
+  hooks: {
+    build: {
+      before() {
+        generateTextbookToc(
+          './static/textbook/index.html',
+          './content/education/textbook-toc.md'
+        )
+      }
+    }
   }
 }
