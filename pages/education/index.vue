@@ -65,7 +65,7 @@
         </p>
         <ul class="actions">
           <li>
-            <Cta to="/textbook/">
+            <Cta to="/textbook/" is-static>
               Discover more
             </Cta>
           </li>
