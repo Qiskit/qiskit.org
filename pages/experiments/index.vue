@@ -6,10 +6,6 @@
         main-title="Qiskit Experiments"
       >
         <p>Browse and contribute with innovatives ways of using quantum computing and Qiskit.</p>
-        <!--<p>Do you have something to share?</p>
-        <ul>
-          <Cta>Submit your experiment</Cta>
-        </ul>-->
       </GatesHeader>
     </header>
     <div class="inner-navigation-scope">
@@ -43,7 +39,6 @@ import { Component } from 'vue-property-decorator'
 import InnerNavigation from '~/components/menus/InnerNavigation.vue'
 import GatesHeader from '~/components/headers/GatesHeader.vue'
 import PageSection from '~/components/sections/PageSection.vue'
-import Cta from '~/components/ctas/Cta.vue'
 import ExperimentCard from '~/components/cards/ExperimentCard.vue'
 import ExperimentCarousel from '~/components/cards/ExperimentCarousel.vue'
 
@@ -52,7 +47,6 @@ import ExperimentCarousel from '~/components/cards/ExperimentCarousel.vue'
     InnerNavigation,
     GatesHeader,
     PageSection,
-    Cta,
     ExperimentCard,
     ExperimentCarousel
   },

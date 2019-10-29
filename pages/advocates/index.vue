@@ -88,7 +88,6 @@ import InnerNavigation from '~/components/menus/InnerNavigation.vue'
 import GatesHeader from '~/components/headers/GatesHeader.vue'
 import PageSection from '~/components/sections/PageSection.vue'
 import MapSection from '~/components/advocates/MapSection.vue'
-import Cta from '~/components/ctas/Cta.vue'
 import AdvocateCard from '~/components/cards/AdvocateCard.vue'
 import CompactFeature from '~/components/features/CompactFeature.vue'
 
@@ -98,7 +97,6 @@ import CompactFeature from '~/components/features/CompactFeature.vue'
     GatesHeader,
     PageSection,
     MapSection,
-    Cta,
     AdvocateCard,
     CompactFeature
   },
