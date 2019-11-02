@@ -8,7 +8,7 @@
     />
     <LegacySection>
       <article>
-        <h2>Coding with Qiskit</h2>
+        <h2>Qiskit on YouTube</h2>
         <p>Would you like to learn how to code a quantum computer? Take a look at the Coding with Qiskit Video Series, where Abraham Asfaw explains everything you need to know. Starting with installing Qiskit, to investigating the latest algorithms and research topics.</p>
         <LegacyCta to="https://www.youtube.com/playlist?list=PLOFEBzvs-Vvp2xg9-POLJhQwtVktlYGbY">
           Watch it
