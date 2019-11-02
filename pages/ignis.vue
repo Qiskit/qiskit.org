@@ -113,8 +113,8 @@ import Cta from '~/components/ctas/Cta.vue'
   }
 })
 export default class extends QiskitElementPage {
-  title = 'Qiskit Aer'
-  description = 'A high performance simulator framework for quantum circuits'
+  title = 'Qiskit Ignis'
+  description = 'Understanding and mitigating noise in quantum systems.'
 }
 </script>
 
