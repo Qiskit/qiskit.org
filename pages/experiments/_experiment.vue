@@ -38,6 +38,7 @@ import MdContent from '~/components/MdContent.vue'
   head () {
     const self = this as any
     const image = self.media[0].url
+
     return {
       title: self.title,
       meta: [
@@ -47,6 +48,40 @@ import MdContent from '~/components/MdContent.vue'
         { hid: 'twitter:title', name: 'twitter:title', content: self.title },
         { hid: 'twitter:description', name: 'twitter:description', content: self.description },
         { hid: 'twitter:image', name: 'twitter:image', content: image }
+      ],
+      script: [
+        {
+          hid: 'segment',
+          innerHTML: `
+          window.digitalData = {
+            page: {
+              pageInfo: {
+                productTitle: 'IBM Q Experience', // This is common across sites
+                analytics: {
+                  category: 'Qiskit.org'
+                }
+              }
+            }
+          }
+
+          window._analytics = {
+            segment_key: 'ffdYLviQze3kzomaINXNk6NwpY9LlXcw',
+            coremetrics: false,
+            optimizely: false,
+            googleAddServices: false,
+            fullStory: false,
+            // This will disable default track of events from the script so you will need to send them yourself
+            autoPageEventSpa: false,
+            autoFormEvents: false,
+            autoPageView: false
+          }
+
+          window.bluemixAnalytics.pageEvent('Qiskit.org', 'localhost_experiments', {
+            navigationType: 'pushState',
+            productTitle: 'IBM Q Experience',
+            path: 'https://community.qiskit.org${self.to}'
+          })`
+        }
       ]
     }
   },
