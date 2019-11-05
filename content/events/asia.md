@@ -35,14 +35,19 @@ This is an initial schedule, subject to change.
 
 ### 18 November
 
--	Arrival at Hoshino Resort Venue
--	Welcome Reception
--	Dinner
+- 10:00 - 12:00 Registration & Optional Tokyo Lab Activities
+- 12:30 Shuttles Depart
+- 15:00 Arrival & Check In at Hoshino Resort
+- 16:30 Quantum Escape Room
+- 19:30 Welcome Reception & Dinner
 
 ### 19 November
 
--	Breakfast and Team Formation
--	Hackathon Begins
+- 8:00 Breakfast
+- 9:00 Hackathon Continues
+- 15:00 Project Presentations
+- 17:45 Award Ceremony
+- 18:00 Celebration Dinner
 
 ### 20 November
 
@@ -53,14 +58,23 @@ This is an initial schedule, subject to change.
 
 ### 21 November 
 
--	Departure from Hoshino Resort Venue 
--	Optional Activities Available
+- 10:00 Shuttle # 1 Departure from Hoshino Resort
+- 12:00 Hoshino Resort Check Out
+- 15:00 Shuttle # 2 Departure from Hoshino Resort
 
- _(Attendees have the option to extend at their own expense)_
+_(Attendees have the option to extend at their own expense)_
+ 
+## Prizes and Contest
+ 
+There are 3 ways to win this hackathon!
+ 
+1st & 2nd Prize - Decided by a panel of 3 judges, 1st and 2nd prize winners will be evaluated on 1) Originality and Uniqueness; 2) Live Pitch Presentation; 3) Usefulness; and 4) Technical complexity. 1st place winners will receive a paid trip to the annual flagship Qiskit Camp event near Yorktown Heights, NY.
+ 
+Community Choice - The community choice award will be given based on the highest scoring team voted on by the community.
 
 ## Code of Conduct
 
-IBM Q is dedicated to providing an enjoyable and safe experience for all participants. In the interest of fostering an open and welcoming environment, all participants, including attendees, speakers, sponsors, volunteers, online contributors, and IBM employees are expected to show respect for each other and our community by creating a harassment-free experience for everyone, regardless of age, body size, disability, ethnicity, gender identity and expression, level of experience, nationality, personal appearance, race, religion, or sexual identity and orientation. Expected behavior applies to both online and offline engagement with the IBM Q Community.
+IBM Quantum is dedicated to providing an enjoyable and safe experience for all participants. In the interest of fostering an open and welcoming environment, all participants, including attendees, speakers, sponsors, volunteers, online contributors, and IBM employees are expected to show respect for each other and our community by creating a harassment-free experience for everyone, regardless of age, body size, disability, ethnicity, gender identity and expression, level of experience, nationality, personal appearance, race, religion, or sexual identity and orientation. Expected behavior applies to both online and offline engagement with the IBM Q Community.
 
 Examples of behavior that contributes to creating a positive environment include:
 
@@ -88,11 +102,11 @@ If you are planning to attend an upcoming event and you have concerns regarding 
 
 ### Reporting an Incident
 
-Instances of abusive, harassing, or otherwise unacceptable behavior should be reported immediately by contacting hello@qiskit.camp or by speaking directly with any IBM employee. IBM Q will review and investigate all complaints and will respond in a way that it deems appropriate to the circumstances. The organizers will maintain confidentiality with regard to the reporter of an incident.
+Instances of abusive, harassing, or otherwise unacceptable behavior should be reported immediately by contacting hello@qiskit.camp or by speaking directly with any IBM employee. IBM Quantum will review and investigate all complaints and will respond in a way that it deems appropriate to the circumstances. The organizers will maintain confidentiality with regard to the reporter of an incident.
 
 ### Incident Response
 
-If a participant engages in negative or harmful behavior, the IBM Q may take any action they deem appropriate, including but not limited to issuing warnings, expulsion from an event with no refund, permanent banning from future events or online community, or calling local law enforcement. IBM Q has the right and responsibility to remove, edit, or reject comments, commits, code, wiki edits, issues, and other contributions that are not aligned to this Code of Conduct, or to temporarily or permanently ban any contributor for other behaviors that they deem inappropriate, threatening, offensive, or harmful.
+If a participant engages in negative or harmful behavior, the IBM Quantum may take any action they deem appropriate, including but not limited to issuing warnings, expulsion from an event with no refund, permanent banning from future events or online community, or calling local law enforcement. IBM Quantum has the right and responsibility to remove, edit, or reject comments, commits, code, wiki edits, issues, and other contributions that are not aligned to this Code of Conduct, or to temporarily or permanently ban any contributor for other behaviors that they deem inappropriate, threatening, offensive, or harmful.
 
 IBM staff will provide support to victims, including, but not limited to:
 
