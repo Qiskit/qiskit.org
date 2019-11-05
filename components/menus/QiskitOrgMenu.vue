@@ -94,6 +94,7 @@
             }"
             :href="link.url"
             target="_blank"
+            @click="link.segment && $trackClickEvent(link.segment)"
           >
             {{ link.label }}
           </a>
@@ -138,7 +139,15 @@ export default class extends Vue {
   qiskitElements: Array<NavLink> = ORDERED_QISKIT_ELEMENTS
   communitySubLinks: Array<NavLink> = ORDERED_COMMUNITY_SUB_LINKS
   learnMore: Array<NavLink> = [
-    { label: 'Tutorials', url: 'https://quantum-computing.ibm.com/jupyter/tutorial/1_start_here.ipynb' },
+    {
+      label: 'Tutorials',
+      url: 'https://quantum-computing.ibm.com/jupyter/tutorial/1_start_here.ipynb',
+      segment: {
+        action: 'Tutorials',
+        objectType: 'Link',
+        milestoneName: 'Looked at tutorials'
+      }
+    },
     { label: 'API Documentation', url: '/documentation' }
   ]
 

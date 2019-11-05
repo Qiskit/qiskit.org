@@ -5,6 +5,7 @@
       image="images/qiskit-aer-logo.svg"
       :description="description"
       sources="https://github.com/Qiskit/qiskit-aer"
+      segment-action="Qiskit Aer: GitHub Repository"
     />
     <LegacySection>
       <article>
@@ -43,7 +44,10 @@
         <h2>Example</h2>
         <!-- eslint-disable vue/multiline-html-element-content-newline -->
         <!-- eslint-disable vue/html-indent -->
-        <SyntaxHighlight lang="python">from qiskit import QuantumCircuit, execute, Aer, IBMQ
+        <SyntaxHighlight
+          lang="python"
+          :label="title"
+        >from qiskit import QuantumCircuit, execute, Aer, IBMQ
 from qiskit.providers.aer import noise
 
 # Choose a real device to simulate
@@ -98,7 +102,7 @@ import Cta from '~/components/ctas/Cta.vue'
     SoftwareStack,
     SyntaxHighlight
   },
-  head(this: QiskitElementPage) {
+  head (this: QiskitElementPage) {
     return {
       title: `${this.title} | ${this.description}`,
       link: [

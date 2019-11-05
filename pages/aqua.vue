@@ -5,6 +5,7 @@
       image="images/qiskit-aqua-logo.svg"
       :description="description"
       sources="https://github.com/Qiskit/qiskit-aqua"
+      segment-action="Qiskit Aqua: GitHub Repository"
     />
     <LegacySection>
       <article>
@@ -43,7 +44,10 @@
         <h2>Example</h2>
         <!-- eslint-disable vue/multiline-html-element-content-newline -->
         <!-- eslint-disable vue/html-indent -->
-        <SyntaxHighlight lang="python">from qiskit import Aer
+        <SyntaxHighlight
+          lang="python"
+          :label="title"
+        >from qiskit import Aer
 from qiskit.aqua.components.oracles import LogicalExpressionOracle
 from qiskit.aqua.algorithms import Grover
 
@@ -88,7 +92,7 @@ import Cta from '~/components/ctas/Cta.vue'
     SoftwareStack,
     SyntaxHighlight
   },
-  head(this: QiskitElementPage) {
+  head (this: QiskitElementPage) {
     return {
       title: `${this.title} | ${this.description}`,
       link: [
