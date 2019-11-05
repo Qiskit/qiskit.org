@@ -5,6 +5,7 @@
       image="images/qiskit-ignis-logo.svg"
       :description="description"
       sources="https://github.com/Qiskit/qiskit-ignis"
+      segment-action="Qiskit Ignis: GitHub Repository"
     />
     <LegacySection>
       <article>
@@ -46,7 +47,10 @@
         <h2>Example</h2>
         <!-- eslint-disable vue/multiline-html-element-content-newline -->
         <!-- eslint-disable vue/html-indent -->
-        <SyntaxHighlight lang="python">import qiskit
+        <SyntaxHighlight
+          lang="python"
+          :label="title"
+        >import qiskit
 from qiskit.providers.aer.noise import NoiseModel
 from qiskit.providers.aer.noise.errors.standard_errors import depolarizing_error
 
@@ -103,7 +107,7 @@ import Cta from '~/components/ctas/Cta.vue'
     SoftwareStack,
     SyntaxHighlight
   },
-  head(this: QiskitElementPage) {
+  head (this: QiskitElementPage) {
     return {
       title: `${this.title} | ${this.description}`,
       link: [

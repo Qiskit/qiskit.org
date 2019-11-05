@@ -1,6 +1,13 @@
+type SegmentData = {
+  action: string
+  objectType: string
+  milestoneName?: string
+}
+
 type NavLink = {
   label: string
   url: string
+  segment?: SegmentData
 }
 
 type LabeledLinks = {
@@ -18,23 +25,23 @@ type QiskitElements = {
 const QISKIT_ELEMENTS: QiskitElements = {
   terra: {
     label: 'Terra',
-    url: `/terra`
+    url: '/terra'
   },
   aer: {
     label: 'Aer',
-    url: `/aer`
+    url: '/aer'
   },
   aqua: {
     label: 'Aqua',
-    url: `/aqua`
+    url: '/aqua'
   },
   ignis: {
     label: 'Ignis',
-    url: `/ignis`
+    url: '/ignis'
   },
   ibmQAccount: {
     label: 'IBM Q Account',
-    url: `/ibmqaccount`
+    url: '/ibmqaccount'
   }
 }
 

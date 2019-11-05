@@ -5,6 +5,7 @@
       image="images/qiskit-terra-logo.svg"
       :description="description"
       sources="https://github.com/Qiskit/qiskit-terra"
+      segment-action="Qiskit Terra: GitHub Repository"
     />
     <LegacySection>
       <article>
@@ -44,7 +45,10 @@
         <h2>Example</h2>
         <!-- eslint-disable vue/multiline-html-element-content-newline -->
         <!-- eslint-disable vue/html-indent -->
-        <SyntaxHighlight lang="python">from qiskit import QuantumCircuit, Aer, execute
+        <SyntaxHighlight
+          lang="python"
+          :label="title"
+        >from qiskit import QuantumCircuit, Aer, execute
 
 qc = QuantumCircuit(2, 2)
 
@@ -65,8 +69,8 @@ print(sim_result.get_counts(qc))</SyntaxHighlight>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
+import QiskitElementPage from '~/components/qiskit/QiskitElementPage.vue'
 import LegacyPresentation from '~/components/headers/LegacyPresentation.vue'
 import LegacySection from '~/components/sections/LegacySection.vue'
 import SoftwareStack from '~/components/qiskit/SoftwareStack.vue'
@@ -82,7 +86,7 @@ import Cta from '~/components/ctas/Cta.vue'
     SoftwareStack,
     SyntaxHighlight
   },
-  head(this: QiskitTerra) {
+  head (this: QiskitElementPage) {
     return {
       title: `${this.title} | ${this.description}`,
       link: [
@@ -91,9 +95,9 @@ import Cta from '~/components/ctas/Cta.vue'
     }
   }
 })
-export default class QiskitTerra extends Vue {
-  title: String = 'Qiskit Terra'
-  description: String = 'A solid foundation for quantum computing'
+export default class extends QiskitElementPage {
+  title = 'Qiskit Terra'
+  description = 'A solid foundation for quantum computing'
 }
 </script>
 

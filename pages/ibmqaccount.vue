@@ -5,6 +5,7 @@
       image="images/qiskit-ibmqp-logo.svg"
       :description="description"
       sources="https://github.com/Qiskit/qiskit-ibmq-provider"
+      segment-action="IBM Q Account: GitHub Repository"
     />
     <LegacySection>
       <article>
@@ -21,6 +22,10 @@
             title="Link"
             rel="noopener"
             target="_blank"
+            @click="$trackClickEvent({
+              action: 'Link to Access IBMQ Systems',
+              objectType: 'Link'
+            })"
           >
             Follow these steps
           </a>
@@ -31,7 +36,10 @@
         <h2>Example</h2>
         <!-- eslint-disable vue/multiline-html-element-content-newline -->
         <!-- eslint-disable vue/html-indent -->
-        <SyntaxHighlight lang="python">from qiskit import IBMQ
+        <SyntaxHighlight
+          lang="python"
+          :label="title"
+        >from qiskit import IBMQ
 from qiskit.providers.ibmq import least_busy
 
 # Load local account information
@@ -65,7 +73,7 @@ import Cta from '~/components/ctas/Cta.vue'
     SoftwareStack,
     SyntaxHighlight
   },
-  head(this: QiskitElementPage) {
+  head (this: QiskitElementPage) {
     return {
       title: `${this.title} | ${this.description}`,
       link: [

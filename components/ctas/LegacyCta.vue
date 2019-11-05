@@ -1,5 +1,9 @@
 <template>
-  <a :class="{ 'legacy-cta': true }" :href="to">
+  <a
+    :class="{ 'legacy-cta': true }"
+    :href="to"
+    v-on="$listeners"
+  >
     <slot />
   </a>
 </template>
@@ -12,11 +16,11 @@ import { Component, Prop } from 'vue-property-decorator'
 export default class extends Vue {
   @Prop(String) to
 
-  isExternal(url: string): boolean {
+  isExternal (url: string): boolean {
     return url.startsWith('http')
   }
 
-  created() {
+  created () {
     const targetUrl = this.$props.to
     if (targetUrl && this.isExternal(targetUrl)) {
       this.$attrs.target = '_blank'
