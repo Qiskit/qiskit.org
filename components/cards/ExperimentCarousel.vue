@@ -73,6 +73,8 @@ export default class extends Vue {
 </script>
 
 <style lang="scss" scoped>
+@import '~/assets/scss/mq.scss';
+
 .slide-link {
   display: block;
   text-decoration: none;
@@ -137,6 +139,10 @@ export default class extends Vue {
       color: var(--primary-color-lightmost);
     }
   }
+
+  @include mq($until: desktop) {
+    flex-direction: column;
+  }
 }
 
 .experiment-deck__switches {
@@ -159,12 +165,6 @@ export default class extends Vue {
 
   &:hover path {
     fill: var(--secondary-color-lightmost);
-  }
-}
-
-@media (max-width: 600px) {
-  .experiment-deck__slide {
-    flex-direction: column;
   }
 }
 

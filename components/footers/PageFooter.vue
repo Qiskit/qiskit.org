@@ -55,6 +55,7 @@
 </template>
 
 <style lang="scss" scoped>
+@import '~/assets/scss/mq.scss';
 @import '~/assets/scss/mixins.scss';
 
 .page-footer-container {
@@ -82,6 +83,10 @@
   &--framed {
     @include framed();
   }
+
+  @include mq($until: desktop) {
+    display: block;
+  }
 }
 
 .footer-column {
@@ -97,6 +102,10 @@
 
     &:first-child {
       margin-top: 0;
+
+      @include mq($until: desktop) {
+        margin-top: 0;
+      }
     }
   }
 
@@ -114,20 +123,10 @@
   &:last-child {
     margin-right: 0;
   }
-}
 
-@media (max-width: 600px) {
-  .page-footer {
-    display: block;
-  }
-
-  .footer-column {
+  @include mq($until: desktop) {
     margin-top: 2rem;
     margin-right: 0;
-
-    &:first-child {
-      margin-top: 0;
-    }
   }
 }
 </style>

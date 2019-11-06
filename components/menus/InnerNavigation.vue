@@ -28,6 +28,7 @@ export default class extends Vue {
 </script>
 
 <style lang="scss" scoped>
+@import '~/assets/scss/mq.scss';
 @import '~/assets/scss/mixins.scss';
 
 .menu-container {
@@ -45,6 +46,10 @@ export default class extends Vue {
 
   &--framed {
     @include framed();
+  }
+
+  @include mq($until: desktop) {
+    height: auto;
   }
 }
 
@@ -69,23 +74,23 @@ export default class extends Vue {
     &:last-child {
       border-right: none;
     }
-  }
-}
 
-@media (max-width: 600px) {
-  .menu {
-    height: auto;
-  }
-
-  .navigation-group {
-    flex-direction: column;
-
-    &__item {
+    @include mq($until: desktop) {
       border: none;
       border-bottom: 1px solid #3334;
       padding: 1rem;
       width: 100%;
     }
+  }
+
+  @include mq($until: desktop) {
+    flex-direction: column;
+  }
+}
+
+@media (max-height: 600px) {
+  .inner-navigation {
+    position: static;
   }
 }
 </style>

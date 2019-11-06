@@ -71,6 +71,7 @@ export default class extends Vue { }
 </script>
 
 <style lang="scss">
+@import '~/assets/scss/mq.scss';
 @import '~/assets/scss/mixins.scss';
 
 main {
@@ -117,6 +118,12 @@ main {
     grid-gap: 1rem;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 
+    & > * {
+      @include mq($until: desktop) {
+        margin-bottom: 1rem;
+      }
+    }
+
     .experiment-card {
       min-width: 300px;
       border: 1px solid var(--secondary-color);
@@ -130,17 +137,9 @@ main {
         box-shadow: 0px 10px 20px 5px #000f;
       }
     }
-  }
-}
 
-@media (max-width: 600px) {
-  #meet-the-advocates {
-    .experiment-card-container {
+    @include mq($until: desktop) {
       display: block;
-
-      & > * {
-        margin-bottom: 1rem;
-      }
     }
   }
 }

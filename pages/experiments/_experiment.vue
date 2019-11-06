@@ -106,18 +106,4 @@ export default class extends Vue { }
     text-align: justify;
   }
 }
-
-@media (max-width: 800px) {
-  .secondary {
-    display: block;
-  }
-
-  .secondary > * {
-    max-width: 100%;
-  }
-
-  .button {
-    margin-bottom: 0.5rem;
-  }
-}
 </style>
