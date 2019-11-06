@@ -127,21 +127,13 @@ export default class extends Vue { }
 </script>
 
 <style lang="scss">
+@import '~/assets/scss/mq.scss';
 @import '~/assets/scss/mixins.scss';
 
 main {
   color: var(--body-color-light);
   background-color: var(--primary-color-darkmost);
   background-image: linear-gradient(150deg, var(--primary-color-darkmost) 15%,var(--primary-color-dark) 70%,var(--primary-color) 94%);
-}
-
-#education-benefits {
-  display: flex;
-  flex-direction: row;
-
-  & > * {
-    flex: 1;
-  }
 }
 
 .inner-navigation {
@@ -165,6 +157,24 @@ main {
     box-shadow: 0 13px 27px -5px rgba(50,50,93,.25),
                 0 8px 16px -8px rgba(0,0,0,.5),
                 0 -6px 16px -6px rgba(0,0,0,.025);
+  }
+
+  .intro {
+    @include mq($until: desktop) {
+      display: block;
+    }
+  }
+
+  .copy-container {
+    @include mq($until: desktop) {
+      max-width: 100%;
+    }
+  }
+
+  .header-video {
+    @include mq($until: desktop) {
+      display: none;
+    }
   }
 }
 
@@ -198,12 +208,21 @@ main {
     background-color: white;
     padding: 0;
     padding-left: 4rem;
+
+    @include mq($until: desktop) {
+      width: 100%;
+      padding-left: 0;
+    }
   }
 
   .extra-container {
     width: 60%;
     margin-top: -6rem;
     margin-left: -10%;
+  }
+
+  @include mq($until: desktop) {
+    min-height: auto;
   }
 }
 
@@ -220,44 +239,7 @@ main {
   }
 }
 
-@media (max-width: 600px) {
-  .inner-navigation {
-    position: static;
-  }
-
-  #presentation {
-    .intro {
-      display: block;
-    }
-
-    .copy-container {
-      max-width: 100%;
-    }
-
-    .header-video {
-      display: none;
-    }
-  }
-
-  #textbook {
-    min-height: auto;
-
-    .copy-container {
-      width: 100%;
-      padding-left: 0;
-    }
-  }
-
-  #education-benefits {
-    display: block;
-  }
-}
-
 @media (max-height: 600px) {
-  .inner-navigation {
-    position: static;
-  }
-
   #textbook {
     .copy-container {
       top: 1rem;

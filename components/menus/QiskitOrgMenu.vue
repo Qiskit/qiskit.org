@@ -90,6 +90,7 @@ export default class extends Vue {
 </script>
 
 <style lang="scss" scoped>
+@import '~/assets/scss/mq.scss';
 @import '~/assets/scss/mixins.scss';
 
 @mixin vertical-navigation-item() {
@@ -172,6 +173,10 @@ export default class extends Vue {
     /* fixings for mimicing qiskit.org menu */
     margin-right: -0.4rem;
   }
+
+  @include mq($until: wide-desktop) {
+    display: none;
+  }
 }
 
 .link-to-home {
@@ -181,10 +186,26 @@ export default class extends Vue {
   padding: 0 1em;
   color: var(--link-color);
   text-decoration: none;
+
+  @include mq($until: wide-desktop) {
+    font-size: 1.1rem;
+    margin-left: -0.5rem;
+  }
 }
 
 .drawer {
   display: none;
+
+  @include mq($until: wide-desktop) {
+    display: unset;
+    margin-left: -2rem;
+  }
+}
+
+.community-menu {
+  @include mq($until: wide-desktop) {
+    display: none;
+  }
 }
 
 .drawer-toggle {
@@ -256,28 +277,6 @@ export default class extends Vue {
 
   .overlay {
     opacity: 0.5;
-  }
-}
-
-@media (max-width: 830px) {
-
-  #navigation {
-    min-height: 60px;
-  }
-
-  .link-to-home {
-    font-size: 1.1rem;
-    margin-left: -0.5rem;
-  }
-
-  .drawer {
-    display: unset;
-    margin-left: -2rem;
-  }
-
-  .community-menu,
-  .navigation-group {
-    display: none;
   }
 }
 </style>
