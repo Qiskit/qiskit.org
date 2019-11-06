@@ -372,30 +372,6 @@ class PageHome extends localize(i18next)(LitElement) {
           </div>
         </div>
       </section>
-
-      <section class="citation colored">
-        <div class="row limited-width">
-          <div class="description">
-            <h3>${i18next.t('pages.home.citationTitle')}</h3>
-            <p>
-              ${i18next.t('pages.home.citationDescription')}
-              <a
-                class="colored-link"
-                href="https://raw.githubusercontent.com/Qiskit/qiskit/master/Qiskit.bib"
-                title="BibTeX"
-                target="_blank"
-                rel="noopener"
-                @click=${() => trackClickEvent({
-                  action: 'Citation: BibTex File',
-                  objectType: 'Link'
-                })}
-              >
-                  ${i18next.t('pages.home.bibtexLink')}
-              </a>
-            </p>
-          </div>
-        </div>
-      </section>
     `;
   }
 
