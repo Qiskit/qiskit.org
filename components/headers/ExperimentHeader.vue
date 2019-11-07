@@ -64,9 +64,6 @@ export default class extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '~/assets/scss/mq.scss';
-@import '~/assets/scss/mixins.scss';
-
 .experiment-header-container {
   background-color: black;
   padding-top: 1rem;

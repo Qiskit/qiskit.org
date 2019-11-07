@@ -94,7 +94,18 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
+    '@nuxtjs/style-resources'
   ],
+
+  styleResources: {
+    /*
+    ** Do not include styles! Only variables, mixins and functions.
+    */
+    scss: [
+      './assets/scss/mq.scss',
+      './assets/scss/mixins.scss'
+    ]
+  },
 
   /*
   ** Migrating from Nuxt 2.8.x to 2.9.y

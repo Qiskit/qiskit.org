@@ -73,8 +73,6 @@ export default class extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '~/assets/scss/mq.scss';
-
 .slide-link {
   display: block;
   text-decoration: none;
