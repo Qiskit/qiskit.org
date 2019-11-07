@@ -68,8 +68,6 @@ export default class extends Vue { }
 </script>
 
 <style lang="scss">
-@import '~/assets/scss/mixins.scss';
-
 #copy {
   background-color: white;
   padding-top: 0;

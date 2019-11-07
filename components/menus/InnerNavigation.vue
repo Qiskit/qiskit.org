@@ -28,9 +28,6 @@ export default class extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '~/assets/scss/mq.scss';
-@import '~/assets/scss/mixins.scss';
-
 .menu-container {
   background-color: #fffe;
 }

@@ -25,10 +25,8 @@ export default class extends Vue { }
 </script>
 
 <style lang="scss">
-@import '~/assets/scss/mixins.scss';
 @import '~/assets/scss/theme.scss';
 @import '~/assets/scss/layout.scss';
-
 @import url(~/static/css/fonts.css);
 
 html {

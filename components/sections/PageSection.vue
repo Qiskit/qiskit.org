@@ -35,8 +35,6 @@ export default class extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '~/assets/scss/mq.scss';
-
 .page-section-container {
   padding-top: 4rem;
   padding-bottom: 4rem;

@@ -55,9 +55,6 @@
 </template>
 
 <style lang="scss" scoped>
-@import '~/assets/scss/mq.scss';
-@import '~/assets/scss/mixins.scss';
-
 .page-footer-container {
   margin-top: 4rem;
   padding-bottom: 4rem;

@@ -71,9 +71,6 @@ export default class extends Vue { }
 </script>
 
 <style lang="scss">
-@import '~/assets/scss/mq.scss';
-@import '~/assets/scss/mixins.scss';
-
 main {
   color: var(--body-color-light);
   background-color: var(--primary-color-darkmost);

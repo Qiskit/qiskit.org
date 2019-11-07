@@ -90,9 +90,6 @@ export default class extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '~/assets/scss/mq.scss';
-@import '~/assets/scss/mixins.scss';
-
 @mixin vertical-navigation-item() {
   font-size: 0.9rem;
   text-decoration: none;

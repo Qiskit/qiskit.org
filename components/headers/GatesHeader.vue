@@ -48,8 +48,6 @@ export default class extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '~/assets/scss/mixins.scss';
-
 .extra-container {
   margin-right: 1rem;
 }
