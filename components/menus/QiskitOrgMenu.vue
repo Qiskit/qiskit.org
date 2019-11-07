@@ -267,7 +267,7 @@ export default class extends Vue {
   }
 }
 
-.drawer:focus-within {
+.drawer:focus {
   .vertical-navigation {
     transform: translateX(0);
   }
