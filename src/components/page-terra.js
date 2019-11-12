@@ -93,7 +93,7 @@ class PageTerra extends localize(i18next)(LitElement) {
             <h3>${i18next.t('pages.terra.stackTitle')}</h3>
             <div class="stack-list">
               <div class="element">
-                <div class="title">User Inputs (Circuits, and Scheules)</div>
+                <div class="title">User Inputs (Circuits, and Schedules)</div>
                 <div class="subtitle">Quantum Circuit, Pulse Schedule</div>
               </div>
               <div class="element">
