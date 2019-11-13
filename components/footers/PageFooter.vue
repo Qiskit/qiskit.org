@@ -7,11 +7,11 @@
             Qiskit Elements
           </h2>
           <ul>
-            <li><a class="footer-column__link" href="https://qiskit.org/terra">Terra</a></li>
-            <li><a class="footer-column__link" href="https://qiskit.org/aer">Aer</a></li>
-            <li><a class="footer-column__link" href="https://qiskit.org/aqua">Aqua</a></li>
-            <li><a class="footer-column__link" href="https://qiskit.org/ignis">Ignis</a></li>
-            <li><a class="footer-column__link" href="https://qiskit.org/ibmqaccount">IBM Q Account</a></li>
+            <li v-for="qiskitElement in qiskitElements" :key="qiskitElement.label">
+              <a class="footer-column__link" :href="qiskitElement.url">
+                {{ qiskitElement.label }}
+              </a>
+            </li>
           </ul>
         </section>
         <section class="footer-column">
@@ -19,21 +19,37 @@
             Qiskit for Educators
           </h2>
           <ul>
-            <li><nuxt-link class="footer-column__link" to="/textbook">Textbook</nuxt-link></li>
-            <li><a class="footer-column__link" href="https://www.youtube.com/playlist?list=PLOFEBzvs-Vvp2xg9-POLJhQwtVktlYGbY" target="_blank" rel="noopener">Coding With Qiskit</a></li>
-            <li><a class="footer-column__link" href="mailto:hello@qiskit.camp" target="_blank" rel="noopener">Host an Event</a></li>
+            <li>
+              <nuxt-link class="footer-column__link" to="/textbook">
+                Textbook
+              </nuxt-link>
+            </li>
+            <li>
+              <a class="footer-column__link" href="https://www.youtube.com/playlist?list=PLOFEBzvs-Vvp2xg9-POLJhQwtVktlYGbY" target="_blank" rel="noopener">Coding With Qiskit</a>
+            </li>
+            <li>
+              <a class="footer-column__link" href="mailto:hello@qiskit.camp" target="_blank" rel="noopener">Host an Event</a>
+            </li>
           </ul>
           <h2 class="footer-column__title">
             Qiskit Advocates
           </h2>
           <ul>
-            <li><nuxt-link class="footer-column__link" to="/advocates#become-an-advocate">Become an Advocate</nuxt-link></li>
+            <li>
+              <nuxt-link class="footer-column__link" to="/advocates#become-an-advocate">
+                Become an Advocate
+              </nuxt-link>
+            </li>
           </ul>
           <h2 class="footer-column__title">
             Qiskit Experiments
           </h2>
           <ul>
-            <li><nuxt-link class="footer-column__link" to="/experiments#browse-the-experiments">Browse the experiments</nuxt-link></li>
+            <li>
+              <nuxt-link class="footer-column__link" to="/experiments#browse-the-experiments">
+                Browse the experiments
+              </nuxt-link>
+            </li>
           </ul>
         </section>
         <section class="footer-column">
@@ -41,18 +57,34 @@
             Social Media
           </h2>
           <ul>
-            <li><a class="footer-column__link" href="https://github.com/Qiskit" target="_blank" rel="noopener">GitHub</a></li>
-            <li><a class="footer-column__link" href="https://qiskit.slack.com/" target="_blank" rel="noopener">Slack</a></li>
-            <li><a class="footer-column__link" href="https://twitter.com/Qiskit" target="_blank" rel="noopener">Twitter</a></li>
-            <li><a class="footer-column__link" href="https://medium.com/Qiskit" target="_blank" rel="noopener">Medium</a></li>
-            <li><a class="footer-column__link" href="https://www.youtube.com/Qiskit" target="_blank" rel="noopener">YouTube</a></li>
-            <li><a class="footer-column__link" href="https://quantumcomputing.stackexchange.com/questions/tagged/qiskit" target="_blank" rel="noopener">Stack Exchange</a></li>
+            <li v-for="socialMedia in socialMediaList" :key="socialMedia.label">
+              <a class="footer-column__link" :href="socialMedia.url" target="_blank" rel="noopener">
+                {{ socialMedia.label }}
+              </a>
+            </li>
           </ul>
         </section>
       </div>
     </div>
   </footer>
 </template>
+
+<script lang="ts">
+import Vue from 'vue'
+import { Component } from 'vue-property-decorator'
+
+import {
+  ORDERED_QISKIT_ELEMENTS,
+  ORDERED_SOCIAL_MEDIA,
+  NavLink
+} from '~/constants/menuLinks'
+
+@Component
+export default class extends Vue {
+  qiskitElements: Array<NavLink> = ORDERED_QISKIT_ELEMENTS
+  socialMediaList: Array<NavLink> = ORDERED_SOCIAL_MEDIA
+}
+</script>
 
 <style lang="scss" scoped>
 .page-footer-container {

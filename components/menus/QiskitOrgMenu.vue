@@ -9,37 +9,50 @@
           <div class="overlay" />
           <nav class="vertical-navigation">
             <h2>Elements</h2>
-            <a class="vertical-navigation__item" href="https://qiskit.org/terra">Terra</a>
-            <a class="vertical-navigation__item" href="https://qiskit.org/aer">Aer</a>
-            <a class="vertical-navigation__item" href="https://qiskit.org/aqua">Aqua</a>
-            <a class="vertical-navigation__item" href="https://qiskit.org/ignis">Ignis</a>
-            <a class="vertical-navigation__item" href="https://qiskit.org/ibmqaccount">IBM Q Account</a>
+            <a
+              v-for="qiskitElement in qiskitElements"
+              :key="qiskitElement.label"
+              class="vertical-navigation__item"
+              :href="qiskitElement.url"
+            >
+              {{ qiskitElement.label }}
+            </a>
             <h2>Learn more</h2>
             <a class="vertical-navigation__item vertical-navigation__item--active" href="/">Community</a>
             <div class="vertical-community-navigation">
               <nuxt-link
-                v-for="(link, index) in links"
-                :key="index"
+                v-for="communitySubLink in communitySubLinks"
+                :key="communitySubLink.label"
                 :class="{
                   'vertical-community-navigation__item': true,
-                  'nuxt-link-active': isActive(link.to)
+                  'nuxt-link-active': isActive(communitySubLink.url)
                 }"
-                :to="link.to"
+                :to="communitySubLink.url"
               >
-                {{ link.label }}
+                {{ communitySubLink.label }}
               </nuxt-link>
             </div>
-            <a class="vertical-navigation__item" href="https://quantum-computing.ibm.com/jupyter/tutorial/1_start_here.ipynb" target="_blank">Tutorials</a>
-            <a class="vertical-navigation__item" href="https://qiskit.org/documentation">API&nbsp;Documentation</a>
+            <a
+              class="vertical-navigation__item"
+              href="https://quantum-computing.ibm.com/jupyter/tutorial/1_start_here.ipynb"
+              target="_blank"
+            >Tutorials</a>
+            <a
+              class="vertical-navigation__item"
+              href="https://qiskit.org/documentation"
+            >API&nbsp;Documentation</a>
           </nav>
         </section>
-        <a class="link-to-home" href="https://qiskit.org">Qiskit</a>
+        <a class="link-to-home" :href="qiskitUrl">Qiskit</a>
         <nav class="navigation-group navigation-group--with-separator">
-          <a class="navigation-group__item" href="https://qiskit.org/terra">Terra</a>
-          <a class="navigation-group__item" href="https://qiskit.org/aer">Aer</a>
-          <a class="navigation-group__item" href="https://qiskit.org/aqua">Aqua</a>
-          <a class="navigation-group__item" href="https://qiskit.org/ignis">Ignis</a>
-          <a class="navigation-group__item" href="https://qiskit.org/ibmqaccount">IBM Q Account</a>
+          <a
+            v-for="qiskitElement in qiskitElements"
+            :key="qiskitElement.label"
+            class="navigation-group__item"
+            :href="qiskitElement.url"
+          >
+            {{ qiskitElement.label }}
+          </a>
         </nav>
         <nav class="navigation-group navigation-group--fixed navigation-group--right-aligned">
           <a class="navigation-group__item navigation-group__item--active" href="/">Community</a>
@@ -52,15 +65,15 @@
       <section class="menu menu--framed">
         <nav class="navigation-group navigation-group--right-aligned navigation-group--fixed">
           <nuxt-link
-            v-for="(link, index) in links"
-            :key="index"
+            v-for="communitySubLink in communitySubLinks"
+            :key="communitySubLink.label"
             :class="{
               'navigation-group__item': true,
-              'nuxt-link-active': isActive(link.to)
+              'nuxt-link-active': isActive(communitySubLink.url)
             }"
-            :to="link.to"
+            :to="communitySubLink.url"
           >
-            {{ link.label }}
+            {{ communitySubLink.label }}
           </nuxt-link>
         </nav>
       </section>
@@ -70,18 +83,20 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
+import { Component } from 'vue-property-decorator'
+
+import {
+  QISKIT_URL,
+  ORDERED_QISKIT_ELEMENTS,
+  ORDERED_COMMUNITY_SUB_LINKS,
+  NavLink
+} from '~/constants/menuLinks'
 
 @Component
 export default class extends Vue {
-  @Prop({
-    type: Array,
-    default: () => [
-      { to: '/education', label: 'Education' },
-      { to: '/advocates', label: 'Advocates' },
-      { to: '/experiments', label: 'Experiments' }
-    ]
-  }) links
+  qiskitUrl: string = QISKIT_URL
+  qiskitElements: Array<NavLink> = ORDERED_QISKIT_ELEMENTS
+  communitySubLinks: Array<NavLink> = ORDERED_COMMUNITY_SUB_LINKS
 
   isActive(path) {
     return this.$route.path.startsWith(path)
@@ -106,9 +121,7 @@ export default class extends Vue {
   font-weight: 400;
   border-bottom: 1px solid black;
   background-color: #21252b;
-
   --link-color: white;
-
   &--light {
     --link-color: var(--body-color-dark);
     background-color: var(--secondary-color-lightmost);
@@ -119,12 +132,10 @@ export default class extends Vue {
 .menu {
   height: 60px;
   display: flex;
-  font-size: 0.80rem;
-
+  font-size: 0.8rem;
   & > * {
     height: 100%;
   }
-
   &--framed {
     @include framed();
   }
@@ -214,7 +225,10 @@ export default class extends Vue {
 
 .overlay {
   position: fixed;
-  top: 0; right: 0; bottom: 0; left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   z-index: 150;
   background-color: black;
   opacity: 0;
@@ -226,7 +240,9 @@ export default class extends Vue {
   display: flex;
   flex-direction: column;
   position: fixed;
-  top: 0; bottom: 0; left: 0;
+  top: 0;
+  bottom: 0;
+  left: 0;
   z-index: 200;
   width: 256px;
   padding: 1.3rem;
@@ -268,6 +284,7 @@ export default class extends Vue {
 }
 
 .drawer:focus {
+
   .vertical-navigation {
     transform: translateX(0);
   }
