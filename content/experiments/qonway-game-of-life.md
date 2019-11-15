@@ -5,8 +5,8 @@ description: A reinterpretation of the classical Conway Game of Life by incorpor
 image: /images/experiments/qonway-game-of-life/featured.jpeg
 to: /experiments/qonway-game-of-life
 media:
-  - https://raw.githubusercontent.com/qonwaygameoflife/qonwaygameoflife/master/images/life.jpeg
-  - https://raw.githubusercontent.com/qonwaygameoflife/qonwaygameoflife/master/images/onedgameoflife.jpeg
+  - /images/experiments/qonway-game-of-life/life.jpeg
+  - /images/experiments/qonway-game-of-life/onedgameoflife.jpeg
 source: https://github.com/qonwaygameoflife/qonwaygameoflife
 ---
 These are three renditions of the quantum game of life - top left is the classical game of life, top right is the semi quantum version
