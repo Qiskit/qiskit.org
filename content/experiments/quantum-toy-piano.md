@@ -5,7 +5,7 @@ description: The Quantum Music Composer application enables a user to compose mu
 image: https://raw.githubusercontent.com/JavaFXpert/quantum-toy-piano-ibmq/master/docimages/performance-tab.png
 to: /experiments/quantum-toy-piano
 media:
-  - https://raw.githubusercontent.com/JavaFXpert/quantum-toy-piano-ibmq/master/docimages/performance-tab.png
+  - /images/experiments/quantum-toy-piano/performance-tab.png
   - /images/experiments/quantum-toy-piano/third-species-performance.png
 source: https://github.com/JavaFXpert/quantum-toy-piano-ibmq
 ---
