@@ -67,8 +67,9 @@ import MdContent from '~/components/MdContent.vue'
 export default class extends Vue { }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 #copy {
+  color: var(--body-color-dark);
   background-color: white;
   padding-top: 0;
   padding-bottom: 2rem;
