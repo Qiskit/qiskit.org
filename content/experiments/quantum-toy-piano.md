@@ -2,7 +2,7 @@
 title: Quantum Toy Piano
 author: James Weaver
 description: The Quantum Music Composer application enables a user to compose music that is performed by a quantum computer or quantum simulator.
-image: https://raw.githubusercontent.com/JavaFXpert/quantum-toy-piano-ibmq/master/docimages/performance-tab.png
+image: /images/experiments/quantum-toy-piano/performance-tab.png
 to: /experiments/quantum-toy-piano
 media:
   - /images/experiments/quantum-toy-piano/performance-tab.png
