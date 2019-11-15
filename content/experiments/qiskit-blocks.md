@@ -2,7 +2,7 @@
 title: Qiskit Blocks
 author: James Weaver
 description: The QiskitBlocks application teaches quantum computing concepts using Qiskit, in the context of a Minetest block world.
-image: https://github.com/JavaFXpert/QiskitBlocks/raw/master/quantum_circuits_garden.png
+image: /images/experiments/qiskit-blocks/quantum_circuits_garden.png
 to: /experiments/qiskit-blocks
 media:
   - https://player.vimeo.com/video/356185384
