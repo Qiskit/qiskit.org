@@ -51,10 +51,11 @@ This is an initial schedule, subject to change.
 
 ### 20 November
 
--	Hackathon Continues
--	Project Presentations
--	Award Ceremony
--	Celebration Dinner
+- 8:00 Breakfast
+- 9:00 Hackathon Continues
+- 15:00 Project Presentations
+- 17:45 Award Ceremony
+- 18:00 Celebration Dinner
 
 ### 21 November 
 
