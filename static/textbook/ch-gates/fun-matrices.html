@@ -13100,7 +13100,8 @@ div#notebook {
   }
 }());
 </script>
-<script data-n-head="true" src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js" async="true"></script></head>
+<script data-n-head="true" src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js" async="true"></script>
+</head>
 <body>
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
@@ -13192,10 +13193,10 @@ $$<p>Here the unitary takes each state of this basis, which we've called $|h_j\r
 $$
 H = \sum_j h_j |h_j\rangle\langle h_j| .
 $$<p>In order to satisfy the constraint that $H = H^\dagger$, we must determine what properties are required for the eigenstates and eigenvalues.</p>
-<p>For the eigenstates, we can see what happens when we take the inner product of a state with itself. For this we use the fact that the Hermitian conjugate of a product can be evaluated by taking the Hermitian conjugate of each factor, and then reversing the order of the factors. If we also note that the Hermitian conjugate of a ket is the corresponding bra, and vice versa, we find</p>
+<p>For the eigenstates, we can see what happens when we take the outer product of a state with itself. For this we use the fact that the Hermitian conjugate of a product can be evaluated by taking the Hermitian conjugate of each factor, and then reversing the order of the factors. If we also note that the Hermitian conjugate of a ket is the corresponding bra, and vice versa, we find</p>
 $$
 (|h_j\rangle\langle h_j|)^\dagger = \langle (h_j|^\dagger) ~(|h_j\rangle^\dagger) = |h_j\rangle\langle h_j| .
-$$<p>The inner product of a state with itself is therefore inherently Hermitian. To ensure that $H$ is Hermitian as a whole, we only need to require the eigenvalues $h_j$ to be real.</p>
+$$<p>The outer product of a state with itself is therefore inherently Hermitian. To ensure that $H$ is Hermitian as a whole, we only need to require the eigenvalues $h_j$ to be real.</p>
 <p>If you were wondering about the coincidence of notation used above for $U$ and $H$ in spectral form, this should hopefully begin to explain it. Essentially, these two types of matrices differ only in that one must have real numbers for eigenvalues, and the other must have complex exponentials of real numbers. This means that, for every unitary, we can define a corresponding Hermitian matrix. For this we simply reuse the same eigenstates, and use the $h_j$ from each $e^{ih_j}$ as the corresponding eigenvalue.</p>
 <p>Similarly, for each Hermitian matrix there exists a unitary. We simply reuse the same eigenstates, and exponentiate the $h_j$ to create the eigenvalues $e^{ih_j}$. This can be expressed as</p>
 $$
@@ -13204,7 +13205,7 @@ $$<p>Here we have used the standard definition of how to exponentiate a matrix. 
 <p>We can also build a whole family of unitaries for each given Hermitian, using</p>
 $$
 U(\theta) = e^{i \theta H},
-$$<p>where $\theta$ is an arbitrary real number. This allows us to interpolate between $\theta=0$, which will be the identity matrix, to $\theta=1$, which is $U$. It also allow us to define a notion of a gate that is the square root of $U$: one that must be done twice to get the full effect of $U$. This would simply have $\theta=1/2$.</p>
+$$<p>where $\theta$ is an arbitrary real number. This allows us to interpolate between $\theta=0$, which will be the identity matrix, to $\theta=1$, which is $U$. It also allows us to define a notion of a gate that is the square root of $U$: one that must be done twice to get the full effect of $U$. This would simply have $\theta=1/2$.</p>
 
 </div>
 </div>
@@ -13222,7 +13223,7 @@ $$<p>where $\theta$ is an arbitrary real number. This allows us to interpolate b
 <p>As we saw above, it is possible to write matrices entirely in terms of outer products.</p>
 $$
 M= \begin{pmatrix} m_{0,0}&amp;m_{0,1} \\\\ m_{1,0}&amp;m_{1,1} \end{pmatrix} = m_{0,0} |0\rangle\langle0|+ m_{0,1} |0\rangle\langle1|+ m_{1,0} |1\rangle\langle0|+ m_{1,1} |1\rangle\langle1|
-$$<p>Now we will see that it also possible to write them completely in terms of Pauli operators. For this, the key thing to note is that</p>
+$$<p>Now we will see that it is also possible to write them completely in terms of Pauli operators. For this, the key thing to note is that</p>
 $$
 \frac{1+Z}{2} = \frac{1}{2}\left[ \begin{pmatrix} 1&amp;0 \\\\0&amp;1 \end{pmatrix}+\begin{pmatrix} 1&amp;0 \\\\0&amp;-1 \end{pmatrix}\right] = |0\rangle\langle0|,\\\\\frac{1-Z}{2} = \frac{1}{2}\left[ \begin{pmatrix} 1&amp;0 \\\\0&amp;1 \end{pmatrix}-\begin{pmatrix} 1&amp;0 \\\\0&amp;-1 \end{pmatrix}\right] = |1\rangle\langle1|
 $$<p>This shows that $|0\rangle\langle0|$ and $|1\rangle\langle1|$ can be expressed using the identity matrix and $Z$. Now, using the property that $X|0\rangle = |1\rangle$, we can also produce</p>
@@ -13232,7 +13233,7 @@ $$
 $$<p>Since we have all the outer products, we can now use this to write the matrix in terms of Pauli matrices:</p>
 $$
 M = \frac{m_{0,0}+m_{1,1}}{2}~1~+~\frac{m_{0,1}+m_{1,0}}{2}~X~+~i\frac{m_{0,1}-m_{1,0}}{2}~Y~+~\frac{m_{0,0}-m_{1,1}}{2}~Z.
-$$<p>This example was for a general single-qubit matrix, but the a corresponding result is true also for matrices for any number of qubits. We simply start from the observation that</p>
+$$<p>This example was for a general single-qubit matrix, but the corresponding result is true also for matrices for any number of qubits. We simply start from the observation that</p>
 $$
 \left(\frac{1+Z}{2}\right)\otimes\left(\frac{1+Z}{2}\right)\otimes\ldots\otimes\left(\frac{1+Z}{2}\right) = |00\ldots0\rangle\langle00\ldots0|,
 $$<p>and can then proceed in the same manner as above. In the end it can be shown that any matrix can be expressed in terms of tensor products of Pauli matrices:</p>
@@ -13243,6 +13244,19 @@ $$<p>For Hermitian matrices, note that the coefficients $C_{P_{n-1}\ldots,P_0}$ 
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
 </div>
     </div>
   </div>

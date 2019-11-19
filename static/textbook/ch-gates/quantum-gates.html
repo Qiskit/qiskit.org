@@ -13100,7 +13100,8 @@ div#notebook {
   }
 }());
 </script>
-<script data-n-head="true" src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js" async="true"></script></head>
+<script data-n-head="true" src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js" async="true"></script>
+</head>
 <body>
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
@@ -13146,7 +13147,7 @@ X= \begin{pmatrix} 0&amp;1 \\\\ 1&amp;0 \end{pmatrix}\\\\
 Y= \begin{pmatrix} 0&amp;-i \\\\ i&amp;0 \end{pmatrix}\\\\
 Z= \begin{pmatrix} 1&amp;0 \\\\ 0&amp;-1 \end{pmatrix}
 $$<p>There, their job was to help us make calculations regarding measurements. But since these matrices are unitary, and therefore define a reversible quantum operation, this additional interpretation of them as gates is also possible.</p>
-<p>Note that here we referred to these gates as $X$, $Y$ and $Z$ and <code>x</code>, <code>y</code> and <code>z</code>, depending on whether we were talking about their matrix representation or which the way they are written in Qiskit. Typically we will use the style of $X$, $Y$ and $Z$ when referring to gates in text or equations, and <code>x</code>, <code>y</code> and <code>z</code> when writing Qiskit code.</p>
+<p>Note that here we referred to these gates as $X$, $Y$ and $Z$ and <code>x</code>, <code>y</code> and <code>z</code>, depending on whether we were talking about their matrix representation or the way they are written in Qiskit. Typically we will use the style of $X$, $Y$ and $Z$ when referring to gates in text or equations, and <code>x</code>, <code>y</code> and <code>z</code> when writing Qiskit code.</p>
 
 </div>
 </div>
@@ -13168,7 +13169,7 @@ $$
 H = \frac{1}{\sqrt{2}} \begin{pmatrix} 1&amp;1 \\\\ 1&amp;-1 \end{pmatrix}.
 $$<p>The $S$ and $S^\dagger$ gates have a similar role to play in quantum computation.</p>
 <div class="highlight"><pre><span></span><span class="n">qc</span><span class="o">.</span><span class="n">s</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># s gate on qubit 0</span>
-<span class="n">qc</span><span class="o">.</span><span class="n">sdg</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># s† on qubit 1</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">sdg</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># s† on qubit 0</span>
 </pre></div>
 <p>They are quarter turns of the Bloch sphere around the z axis, and so can be regarded as the two possible square roots of the $Z$ gate,</p>
 $$
@@ -13263,10 +13264,10 @@ $$<p>This is exactly what we find when we analyze the circuit with this tool.</p
 <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># qubits numbered from the right, so qubit 0 is the qubit on the right</span>
 <span class="n">qc</span><span class="o">.</span><span class="n">z</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># and qubit 1 is on the left</span>
 
-<span class="c1"># set up simulator that returns statevectors</span>
+<span class="c1"># set up simulator that returns unitary matrix</span>
 <span class="n">backend</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;unitary_simulator&#39;</span><span class="p">)</span>
 
-<span class="c1"># run the circuit to get the matric</span>
+<span class="c1"># run the circuit to get the matrix</span>
 <span class="n">gate</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">backend</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_unitary</span><span class="p">()</span>
 
 <span class="c1"># now we use some fanciness to display it in latex</span>
