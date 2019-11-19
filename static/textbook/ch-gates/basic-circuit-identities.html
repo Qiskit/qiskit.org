@@ -13100,7 +13100,8 @@ div#notebook {
   }
 }());
 </script>
-<script data-n-head="true" src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js" async="true"></script></head>
+<script data-n-head="true" src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js" async="true"></script>
+</head>
 <body>
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
@@ -13154,13 +13155,12 @@ div#notebook {
 $$
 H X H = Z,\\\\
 H Z H = X.
-$$<p>All we need to do is precede and follow the CNOT with a Hadamard on the target qubit. This will transform any $X$ applied to that qubit into a $Z$.</p>
+$$<p>The same trick can be used to transform a CNOT into a controlled-$Z$. All we need to do is precede and follow the CNOT with a Hadamard on the target qubit. This will transform any $X$ applied to that qubit into a $Z$.</p>
 <div class="highlight"><pre><span></span><span class="c1"># also a controlled-Z</span>
 <span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
 <span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 </pre></div>
-<p>The same trick can be used to transform a CNOT into a controlled-$Z$.</p>
 <p>More generally, we can transform a single CNOT  into a controlled version of any rotation around the Bloch sphere by an angle $\pi$, by simply preceding and following it with the correct rotations. For example, a controlled-$Y$:</p>
 <div class="highlight"><pre><span></span><span class="c1"># a controlled-Y</span>
 <span class="n">qc</span><span class="o">.</span><span class="n">sdg</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
@@ -13195,7 +13195,7 @@ $$<p>All we need to do is precede and follow the CNOT with a Hadamard on the tar
 <p>First, we'll look at the case that qubit a is in state $|1\rangle$ and qubit b is in state $|0\rangle$. For this we'll apply the following gates:</p>
 <div class="highlight"><pre><span></span><span class="c1"># swap a 1 from a to b</span>
 <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span> <span class="c1"># copies 1 from a to b</span>
-<span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span> <span class="c1"># uses the 1 on b to rotate the state of a to 0</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">a</span><span class="p">)</span> <span class="c1"># uses the 1 on b to rotate the state of a to 0</span>
 </pre></div>
 <p>This has the effect of putting qubit b in state $|1\rangle$ and qubit a in state $|0\rangle$. In this case at least, we have done a SWAP.</p>
 <p>Now let's take this state and SWAP back to the original one. As you may have guessed, we can do this with the reverse of the above process:</p>
@@ -13250,7 +13250,7 @@ $$<p>All we need to do is precede and follow the CNOT with a Hadamard on the tar
 <p>has exactly the same effect as</p>
 <div class="highlight"><pre><span></span><span class="n">qc</span><span class="o">.</span><span class="n">cz</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">c</span><span class="p">)</span>
 </pre></div>
-<p>This means that we can think of either either one as the control, and the other as the target.</p>
+<p>This means that we can think of either one as the control, and the other as the target.</p>
 <p>To see why this is true, let's remind ourselves of what the Z gate is:</p>
 $$
 Z= \begin{pmatrix} 1&amp;0 \\\\ 0&amp;-1 \end{pmatrix}.
@@ -13272,14 +13272,14 @@ $$<p>We can think of this as multiplying the state by $-1$, but only when it is 
 <span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
 </pre></div>
 <p>And there we have it: we've turned around the CNOT. All that is needed is a Hadamard on both qubits before and after.</p>
-<p>The rest of this subsection is dedicated to another explanation of how to turn around a CNOT, with a bit of math (introduced in the 'Fun with qubits' article of the next chapter), and some different insight. Feel free to skip over it.</p>
+<p>The rest of this subsection is dedicated to another explanation of how to turn around a CNOT, with a bit of math (introduced in the 'States for Many Qubits' article of the previous chapter, and the 'Fun with Matrices' article of this chapter), and some different insight. Feel free to skip over it.</p>
 <p>Here is another way to write the CNOT gate:</p>
 $$
 {\rm CX}_{c,t} = |0\rangle \langle0| \otimes I + |1\rangle \langle1| \otimes X.
 $$<p>Here the $|1\rangle \langle1|$ ensures that the second term only affects those parts of a superposition for which the control qubit $c$ is in state $|1\rangle$. For those, the effect on the target qubit t is $X$. The first terms similarly address those parts of the superposition for which the control qubit is in state $|0\rangle$, in which case it leaves the target qubit unaffected.</p>
 <p>Now let's do a little math. The $X$ gate has eigenvalues $\pm 1$ for the states $|+\rangle$ and $|-\rangle$. The $I$ gate has an eigenvalue of $1$ for all states including $|+\rangle$ and $|-\rangle$. We can thus write them in spectral form as</p>
 $$
-X = |+\rangle \langle+| \, \, \, \, |-\rangle \langle-|, \, \, \, \,  I = |+\rangle \langle+| \, \,  + \, \,  |-\rangle \langle-|
+X = |+\rangle \langle+| \, \, - \, \, |-\rangle \langle-|, \, \, \, \,  I = |+\rangle \langle+| \, \,  + \, \,  |-\rangle \langle-|
 $$<p>Substituting these into the expression above gives us</p>
 $$
 {\rm CX}_{c,t} = |0\rangle \langle0| \otimes |+\rangle \langle+| \, \,  + \, \, |0\rangle \langle0| \otimes |-\rangle \langle-| \, \,  + \, \, |1\rangle \langle1| \otimes |+\rangle \langle+| \, \,  - \, \, |1\rangle \langle1| \otimes |-\rangle \langle-|
@@ -13297,7 +13297,7 @@ $$<p>This gives us a whole new way to interpret the effect of the CNOT. The $Z \
 <span class="n">h</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
 </pre></div>
 <p>This transforms the $Z$ in the $Z \otimes |-\rangle \langle-| $ term into an $X$, and leaves the other term unchanged. The combined effect is then a gate that applies an $X$ to qubit $c$ when qubit $t$ is in state $|-\rangle$. This is halfway to what we are wanting to build.</p>
-<p>To complete the process, we can apply a Hadamard both before and after on qubit $t$. This transforms the $|+\rangle$ and $|-\rangle$ states in each term into $|0\rangle$ and $|1\rangle$. Now we have something that applies an $X$ to qubit $c$ when qubit $t$ is in state $|1\rangle$. This is exactly want we want: a CNOT in reverse, with qubit $t$ as the control and $c$ as the target.</p>
+<p>To complete the process, we can apply a Hadamard both before and after on qubit $t$. This transforms the $|+\rangle$ and $|-\rangle$ states in each term into $|0\rangle$ and $|1\rangle$. Now we have something that applies an $X$ to qubit $c$ when qubit $t$ is in state $|1\rangle$. This is exactly what we want: a CNOT in reverse, with qubit $t$ as the control and $c$ as the target.</p>
 <h4 id="CNOT-between-distant-qubits">CNOT between distant qubits<a class="anchor-link" href="#CNOT-between-distant-qubits">&#182;</a></h4><p>Suppose we have a control qubit $c$ and a target qubit $t$, and we want to do a CNOT gate between them. If this gate is directly possible on a device, we can just do it. If it's only possible to do the CNOT in the wrong direction, we can use the method explained above. But what if qubits $c$ and $t$ are not connected at all?</p>
 <p>If qubits $c$ and $t$ are on completely different devices in completely different labs in completely different countries, you may be out of luck. But consider the case where it is possible to do a CNOT between qubit $c$ and an additional qubit $a$, and it is also possible to do one between qubits $a$ and $t$. The new qubit can then be used to mediate the interaction between $c$ and $t$.</p>
 <p>One way to do this is with the SWAP gate. We can simply SWAP $a$ and t, do the CNOT between $c$ and $a$, and then swap $a$ and $t$ back again. The end result is that we have effectively done a CNOT between $c$ and $t$. The drawback of this method is that it costs a lot of CNOT gates, with six needed to implement the two SWAPs.</p>
@@ -13367,7 +13367,7 @@ $$<p>We then use controlled-Z gates to cause the first of these relations to hap
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The Toffoli gate is a three-qubit gate with two controls and one target. It performs an X on the target only if both controls are in the state $|0\rangle$. The final state of the target is then equal to either the AND or the NAND of the two controls, depending on whether the initial state of the target was $|0\rangle$ or $|1\rangle$. A Toffoli can also be thought of a controlled-controlled-NOT, and is also called the CCX gate.</p>
+<p>The Toffoli gate is a three-qubit gate with two controls and one target. It performs an X on the target only if both controls are in the state $|0\rangle$. The final state of the target is then equal to either the AND or the NAND of the two controls, depending on whether the initial state of the target was $|0\rangle$ or $|1\rangle$. A Toffoli can also be thought of as a controlled-controlled-NOT, and is also called the CCX gate.</p>
 <div class="highlight"><pre><span></span><span class="c1"># Toffoli with control qubits a and b and target t</span>
 <span class="n">qc</span><span class="o">.</span><span class="n">ccx</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
 </pre></div>
@@ -13423,7 +13423,7 @@ $$<p>We then use controlled-Z gates to cause the first of these relations to hap
 <span class="n">qc</span><span class="o">.</span><span class="n">t</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 <p>Since this is a single-qubit gate, we can think of it as a rotation around the Bloch sphere. That means that it is a rotation around some axis by some angle. We don't need to think about the axis too much here, but it clearly won't be simply x, y or z. More important is the angle.</p>
-<p>The crucial property of the angle for this rotation is that it is irrational. You can prove this yourself with a bunch of math, but you can also see the irrationality in action by applying the gate. Repeating it $n$ times results in a rotation around the same axis by a different angle. Due to to the irrationality, the angles that result from different repetitions will never be the same.</p>
+<p>The crucial property of the angle for this rotation is that it is irrational. You can prove this yourself with a bunch of math, but you can also see the irrationality in action by applying the gate. Repeating it $n$ times results in a rotation around the same axis by a different angle. Due to the irrationality, the angles that result from different repetitions will never be the same.</p>
 <p>We can use this to our advantage. Each angle will be somewhere between $0$ and $2\pi$. Let's split this interval up into $n$ slices of width $2\pi/n$. For each repetition, the resulting angle will fall in one of these slices. If we look at the angles for the first $n+1$ repetitions, it must be true that at least one slice contains two of these angles. Let's use $n_1$ to denote the number of repetitions required for the first, and $n_2$ for the second.</p>
 <p>With this, we can prove something about the angle for $n_2-n_1$ repetitions. This is effectively the same as doing $n_2$ repetitions, followed by the inverse of $n_1$ repetitions. Since the angles for these are not equal (because of the irrationality) but also differ by no greater than $2\pi/n$ (because they correspond to the same slice), the angle for $n_2-n_1$ repetitions satisfies</p>
 $$
