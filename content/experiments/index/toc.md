@@ -13,6 +13,7 @@
   collections:
     cards:
       - quantilier.md
+      - quantum-deep-advantage.md
       - qonway-game-of-life.md
       - quantum-toy-piano.md
       - tictacq.md
