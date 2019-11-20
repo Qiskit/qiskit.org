@@ -1,6 +1,6 @@
 ---
 title: Quantum Duel
-author: Daniel Serrano, Gregorio Iniesta, Eduardo Gonzalez, Jairo Kishi, Yohei Wakabayashi, Unchalisa Taetragool
+author: Eduardo Gonzalez, Jairo Kishi, Yohei Wakabayashi, Unchalisa Taetragool, Daniel Serrano
 description: “Quantum Duel” is the first online multiplayer quantum game. Two players compete to be the fastest on writing a quantum circuit.
 image: /images/experiments/quantum-duel/quantum-duel-game.png
 to: /experiments/quantum-duel
