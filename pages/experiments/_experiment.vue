@@ -73,7 +73,7 @@ export default class extends Vue { }
   background-color: white;
   padding-top: 0;
   padding-bottom: 2rem;
- 
+
   /deep/ {
     .page-section {
       @include framed();
