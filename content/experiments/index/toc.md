@@ -4,17 +4,18 @@
   basepath: experiments/
   collections:
     cards:
-      - quantilier.md
-      - qiskit-blocks.md
-      - tictacq.md
+      - quantum-duel.md
+      - quantum-img-processing.md
+      - quantum-deep-advantage.md
 -
   title: Qiskit Experiments
   basepath: experiments/
   collections:
     cards:
-      - quantilier.md
       - quantum-duel.md
+      - quantum-img-processing.md
       - quantum-deep-advantage.md
+      - quantilier.md
       - qonway-game-of-life.md
       - quantum-toy-piano.md
       - tictacq.md
