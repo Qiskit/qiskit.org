@@ -2,7 +2,7 @@
 title: Quantum Deep Advantage
 author: Asier Arranz, Makoto Nakai, Eden Chen, Liu Sitong, Yinjie Zhou, Sam Tonetto
 description: Automation of the quantum circuit building process by using reinforcement learning and validating the method by performing simple numerical experiments on a Bell State.
-image: /images/experiments/quantum-deep-advantage/quantum-deep.gif
+image: /images/experiments/quantum-deep-advantage/gates.gif
 to: /experiments/quantum-deep-advantage
 media:
   - /images/experiments/quantum-deep-advantage/qda.jpg
