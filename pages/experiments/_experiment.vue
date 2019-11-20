@@ -74,35 +74,37 @@ export default class extends Vue { }
   padding-top: 0;
   padding-bottom: 2rem;
 
-  .page-section {
-    @include framed();
-  }
+  /deep/ {
+    .page-section {
+      @include framed();
+    }
 
-  ul, ol {
-    list-style-position: inside;
-    padding-left: 2rem;
-    margin-top: 1rem;
-  }
+    ul, ol {
+      list-style-position: inside;
+      padding-left: 2rem;
+      margin-top: 1rem;
+    }
 
-  ul {
-    list-style-type: square;
-  }
+    ul {
+      list-style-type: square;
+    }
 
-  ol li,
-  ul li {
-    margin: 1rem 0;
-  }
+    ol li,
+    ul li {
+      margin: 1rem 0;
+    }
 
-  h2 {
-    margin-top: 3rem;
-  }
+    h2 {
+      margin-top: 3rem;
+    }
 
-  h3 {
-    margin-top: 2rem;
-  }
+    h3 {
+      margin-top: 2rem;
+    }
 
-  p {
-    text-align: justify;
+    p {
+      text-align: justify;
+    }
   }
 }
 </style>
