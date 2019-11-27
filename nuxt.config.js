@@ -30,35 +30,7 @@ export default {
   */
   head: {
     title: pkg.name,
-    script: [
-      {
-        hid: 'segment',
-        innerHTML: `
-(function () {
-  'use strict'
-  window.digitalData = {
-    page: {
-      pageInfo: {
-        productTitle: 'IBM Q Experience',
-        analytics: {
-          category: 'Qiskit.org'
-        }
-      }
-    }
-  }
-  window._analytics = {
-    segment_key: 'ffdYLviQze3kzomaINXNk6NwpY9LlXcw',
-    coremetrics: false,
-    optimizely: false
-  }
-}());
-`
-      },
-      {
-        src: 'https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js',
-        async: true
-      }
-    ],
+    script: [],
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -66,10 +38,7 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ],
-    __dangerouslyDisableSanitizersByTagID: {
-      'segment': ['innerHTML']
-    }
+    ]
   },
 
   /*
@@ -87,7 +56,9 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '~/plugins/deep-load.ts'
+    '~/plugins/deep-load.ts',
+    { src: '~/plugins/hotjar.ts', mode: 'client' },
+    { src: '~/plugins/segment-analytics.ts', mode: 'client' }
   ],
 
   /*
