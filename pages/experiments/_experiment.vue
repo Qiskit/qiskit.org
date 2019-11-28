@@ -53,34 +53,17 @@ import MdContent from '~/components/MdContent.vue'
         {
           hid: 'segment',
           innerHTML: `
-          window.digitalData = {
-            page: {
-              pageInfo: {
-                productTitle: 'IBM Q Experience', // This is common across sites
-                analytics: {
-                  category: 'Qiskit.org'
+            window.digitalData = {
+              page: {
+                pageInfo: {
+                  pageID: '${self.to}',
+                  productTitle: 'experiments',
+                  analytics: {
+                    category: 'Qiskit.org'
+                  }
                 }
               }
-            }
-          }
-
-          window._analytics = {
-            segment_key: 'ffdYLviQze3kzomaINXNk6NwpY9LlXcw',
-            coremetrics: false,
-            optimizely: false,
-            googleAddServices: false,
-            fullStory: false,
-            // This will disable default track of events from the script so you will need to send them yourself
-            autoPageEventSpa: false,
-            autoFormEvents: false,
-            autoPageView: false
-          }
-
-          window.bluemixAnalytics.pageEvent('Qiskit.org', 'localhost_experiments', {
-            navigationType: 'pushState',
-            productTitle: 'IBM Q Experience',
-            path: 'https://community.qiskit.org${self.to}'
-          })`
+            }`
         }
       ]
     }
