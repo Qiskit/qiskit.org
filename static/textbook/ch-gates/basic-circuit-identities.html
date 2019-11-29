@@ -13118,8 +13118,8 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">qiskit.circuit</span> <span class="k">import</span> <span class="n">Gate</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">qiskit.circuit</span> <span class="kn">import</span> <span class="n">Gate</span>
 </pre></div>
 
     </div>
@@ -13259,9 +13259,9 @@ $$<p>We can think of this as multiplying the state by $-1$, but only when it is 
 <p>This new interpretation is phrased in a perfectly symmetric way, and demonstrates that the labels of 'control' and 'target' are not necessary for this gate.</p>
 <p>This property gives us a way to reverse the orientation of a CNOT. We can first turn the CNOT into a controlled-$Z$ by using the method described earlier: placing a Hadamard both before and after on the target qubit.</p>
 <div class="highlight"><pre><span></span><span class="c1"># a cz</span>
-<span class="n">qc</span><span class="o">.</span><span class="n">h</span> <span class="n">q</span><span class="p">[</span><span class="n">t</span><span class="p">];</span>
-<span class="n">qc</span><span class="o">.</span><span class="n">cx</span> <span class="n">q</span><span class="p">[</span><span class="n">c</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="n">t</span><span class="p">];</span>
-<span class="n">qc</span><span class="o">.</span><span class="n">h</span> <span class="n">q</span><span class="p">[</span><span class="n">t</span><span class="p">];</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 </pre></div>
 <p>Then, since we are free to choose which way around to think about a controlled-$Z$'s action, we can choose to think of $t$ as the control and $c$ as the target. We can then transform this controlled-$Z$ into a corresponding CNOT. We just need to place a Hadamard both before and after on the target qubit (which is now qubit $c$).</p>
 <div class="highlight"><pre><span></span><span class="c1"># a cx with control qubit t and target qubit c</span>
@@ -13308,9 +13308,9 @@ $$<p>This gives us a whole new way to interpret the effect of the CNOT. The $Z \
 <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
 <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">a</span><span class="p">)</span>
 </pre></div>
-<p>To see how this works, first consider the case where qubit $c$ is in state $|0\rangle$. The effect of the <code>cx q[c], q[a]</code> gates in this case are trivial. This leaves only the two <code>cx q[a], q[t]</code> gates, which cancel each other out. The net effect is therefore that nothing happens.</p>
-<p>If qubit $c$ is in state $|1\rangle$, things are not quite so simple. The effect of the <code>cx q[c], q[a]</code> gates is to toggle the value of qubit $a$; it turns any $|0\rangle$ in the state of qubit $a$ into $|1\rangle$ and back again, and vice versa.</p>
-<p>This toggle effect affects the action of the two <code>cx q[a], q[t]</code> gates. It ensures that whenever one is controlled on a $|0\rangle$ and has trivial effect, the other is controlled on a $|1\rangle$ and applies an $X$ to qubit $t$. The end effect is that qubit $a$ is left unchanged, but qubit $t$ will always have had an $X$ applied to it.</p>
+<p>To see how this works, first consider the case where qubit $c$ is in state $|0\rangle$. The effect of the <code>cx(c,a)</code> gates in this case are trivial. This leaves only the two <code>cx q[a], q[t]</code> gates, which cancel each other out. The net effect is therefore that nothing happens.</p>
+<p>If qubit $c$ is in state $|1\rangle$, things are not quite so simple. The effect of the <code>cx q(c,a)</code> gates is to toggle the value of qubit $a$; it turns any $|0\rangle$ in the state of qubit $a$ into $|1\rangle$ and back again, and vice versa.</p>
+<p>This toggle effect affects the action of the two <code>cx(a,t)</code> gates. It ensures that whenever one is controlled on a $|0\rangle$ and has trivial effect, the other is controlled on a $|1\rangle$ and applies an $X$ to qubit $t$. The end effect is that qubit $a$ is left unchanged, but qubit $t$ will always have had an $X$ applied to it.</p>
 <p>Putting everything together, this means that an $X$ is applied to qubit $t$ only when qubit $c$ is in state $|1\rangle$. Qubit $a$ is left unaffected. We have therefore engineered a CNOT between qubits $c$ and $t$. Unlike when using SWAP gates, this required only four CNOT gates to implement.</p>
 <p>It is similarly possible to engineer CNOT gates when there is a longer chain of qubits required to connect our desired control and target. The methods described above simply need to be scaled up.</p>
 
@@ -13329,10 +13329,10 @@ $$<p>This gives us a whole new way to interpret the effect of the CNOT. The $Z \
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We have already seen how to build controlled $\pi$ rotations from a single CNOT gate. Now we'll look at how to build any controlled rotation.</p>
 <p>First, let's consider arbitrary rotations around the y axis. Specifically, consider the following sequence of gates.</p>
-<div class="highlight"><pre><span></span><span class="n">qc</span><span class="o">.</span><span class="n">ry</span><span class="p">(</span><span class="n">theta</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="n">q</span><span class="p">[</span><span class="n">t</span><span class="p">];</span>
-<span class="n">qc</span><span class="o">.</span><span class="n">cx</span> <span class="n">q</span><span class="p">[</span><span class="n">c</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="n">t</span><span class="p">];</span>
-<span class="n">qc</span><span class="o">.</span><span class="n">ry</span><span class="p">(</span><span class="o">-</span><span class="n">theta</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="n">q</span><span class="p">[</span><span class="n">t</span><span class="p">];</span>
-<span class="n">qc</span><span class="o">.</span><span class="n">cx</span> <span class="n">q</span><span class="p">[</span><span class="n">c</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="n">t</span><span class="p">];</span>
+<div class="highlight"><pre><span></span><span class="n">qc</span><span class="o">.</span><span class="n">ry</span><span class="p">(</span><span class="n">theta</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">ry</span><span class="p">(</span><span class="o">-</span><span class="n">theta</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
 </pre></div>
 <p>If the control qubit is in state $|0\rangle$, all we have here is a $R_y(\theta/2)$ immediately followed by its inverse, $R_y(-\theta/2)$. The end effect is trivial. If the control qubit is in state $|1\rangle$, however, the <code>ry(-theta/2)</code> is effectively preceded and followed by an X gate. This has the effect of flipping the direction of the y rotation and making a second $R_y(\theta/2)$. The net effect in this case is therefore to make a controlled version of the rotation $R_y(\theta)$.</p>
 <p>This method works because the x and y axis are orthogonal, which causes the x gates to flip the direction of the rotation. It therefore similarly works to make a controlled $R_z(\theta)$. A controlled $R_x(\theta)$ could similarly be made using CNOT gates.</p>
@@ -13372,11 +13372,11 @@ $$<p>We then use controlled-Z gates to cause the first of these relations to hap
 <span class="n">qc</span><span class="o">.</span><span class="n">ccx</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
 </pre></div>
 <p>To see how to build it from single- and two-qubit gates, it is helpful to first show how to build something even more general: an arbitrary controlled-controlled-U for any single-qubit rotation U. For this we need to define controlled versions of $V = \sqrt{U}$ and $V^\dagger$. In the Qasm code below, we assume that subroutines <code>cv</code> and <code>cvdg</code> have been defined for these, respectively. The controls are qubits $a$ and $b$, and the target is qubit $t$.</p>
-<div class="highlight"><pre><span></span><span class="n">qc</span><span class="o">.</span><span class="n">cv</span> <span class="n">q</span><span class="p">[</span><span class="n">b</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="n">t</span><span class="p">];</span>
-<span class="n">qc</span><span class="o">.</span><span class="n">cx</span> <span class="n">q</span><span class="p">[</span><span class="n">a</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="n">b</span><span class="p">];</span>
-<span class="n">qc</span><span class="o">.</span><span class="n">cvdg</span> <span class="n">q</span><span class="p">[</span><span class="n">b</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="n">t</span><span class="p">];</span>
-<span class="n">qc</span><span class="o">.</span><span class="n">cx</span> <span class="n">q</span><span class="p">[</span><span class="n">a</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="n">b</span><span class="p">];</span>
-<span class="n">qc</span><span class="o">.</span><span class="n">cv</span> <span class="n">q</span><span class="p">[</span><span class="n">a</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="n">t</span><span class="p">];</span>
+<div class="highlight"><pre><span></span><span class="n">qc</span><span class="o">.</span><span class="n">cv</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">cvdg</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">cv</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
 </pre></div>
 <p><img src="https://s3.us-south.cloud-object-storage.appdomain.cloud/strapi/693974b222d24dba9111e02ae25e9151iden2.png" alt="A doubly controlled version of a gate V"></p>
 <p>By tracing through each value of the two control qubits, you can convince yourself that a U gate is applied to the target qubit if and only if both controls are 1. Using ideas we have already described, you could now implement each controlled-V gate to arrive at some circuit for the doubly-controlled-U gate. It turns out that the minimum number of CNOT gates required to implement the Toffoli gate is six [2].</p>
