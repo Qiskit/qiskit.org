@@ -103,7 +103,7 @@ export default {
         loader: 'frontmatter-markdown-loader',
         include: path.resolve(__dirname, 'content'),
         options: {
-          mode: [Mode.VUE_RENDER_FUNCTIONS, Mode.VUE_COMPONENT],
+          mode: [Mode.VUE_RENDER_FUNCTIONS, Mode.VUE_COMPONENT, Mode.HTML],
           vue: {
             root: 'content'
           },
