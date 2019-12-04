@@ -98,7 +98,7 @@ export default class extends Vue {
   qiskitElements: Array<NavLink> = ORDERED_QISKIT_ELEMENTS
   communitySubLinks: Array<NavLink> = ORDERED_COMMUNITY_SUB_LINKS
 
-  isActive(path) {
+  isActive (path) {
     return this.$route.path.startsWith(path)
   }
 }

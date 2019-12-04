@@ -36,7 +36,7 @@ export default class extends Vue {
   @Prop(Boolean) horizontal
   @Prop(String) to
 
-  decorate(image) {
+  decorate (image) {
     const bgEffects = [
       `url(${image})`
     ]

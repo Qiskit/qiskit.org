@@ -7,16 +7,16 @@ export default class extends Vue {
   @Prop(String) renderFn
   @Prop(String) staticRenderFns
 
-  render(createElement) {
-    return this.$data.templateRender ? this.$data.templateRender()
-      : createElement('div', 'Rendering...')
+  templateRender: Function | null = null
+
+  render (createElement) {
+    return this.templateRender ? this.templateRender() : createElement('div', 'Rendering...')
   }
 
-  created() {
-    /* eslint no-new-func: "off" */
-    this.$data.templateRender =
-      (new Function(this.$props.renderFn)()).bind(this)
-    this.$options.staticRenderFns = new Function(this.$props.staticRenderFns)()
+  created () {
+    /* eslint no-eval: "off" */
+    this.templateRender = eval(this.$props.renderFn).bind(this)
+    this.$options.staticRenderFns = eval(this.$props.staticRenderFns)
   }
 }
 </script>
