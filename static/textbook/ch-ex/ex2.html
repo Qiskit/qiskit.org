@@ -26,16 +26,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,minimum-scale=1">
 
-  <title>Single Qubits and Multi-Qubits gates</title>
-  <meta name="description" content="        Introduction Just having some qubits is not enough: We also need to manipulate them. All possible ways of doing this can be compiled down to a basic ...">
+  <title>Set 2. Basic Synthesis of Single-Qubit Gates</title>
+  <meta name="description" content="        Basic Synthesis of Single-Qubit Gates     from qiskit import *from qiskit.tools.visualization import plot_histogramimport numpy as np    1 Show that ...">
 
-  <link rel="canonical" href="https://community.qiskit.org/textbook/ch-gates/introduction.html">
+  <link rel="canonical" href="https://community.qiskit.org/textbook/ch-ex/ex2.html">
   <link rel="alternate" type="application/rss+xml" title="Qiskit Textbook" href="https://community.qiskit.org/textbook/feed.xml">
 
-  <meta property="og:url"         content="https://community.qiskit.org/textbook/ch-gates/introduction.html" />
+  <meta property="og:url"         content="https://community.qiskit.org/textbook/ch-ex/ex2.html" />
 <meta property="og:type"        content="article" />
-<meta property="og:title"       content="Single Qubits and Multi-Qubits gates" />
-<meta property="og:description" content="        Introduction Just having some qubits is not enough: We also need to manipulate them. All possible ways of doing this can be compiled down to a basic ..." />
+<meta property="og:title"       content="Set 2. Basic Synthesis of Single-Qubit Gates" />
+<meta property="og:description" content="        Basic Synthesis of Single-Qubit Gates     from qiskit import *from qiskit.tools.visualization import plot_histogramimport numpy as np    1 Show that ..." />
 <meta property="og:image"       content="https://community.qiskit.org/textbook/images/logo/logo.png" />
 
 <meta name="twitter:card" content="summary">
@@ -45,11 +45,11 @@
   {
   "@context": "http://schema.org",
   "@type": "NewsArticle",
-  "mainEntityOfPage": "https://community.qiskit.org/textbook/ch-gates/introduction.html",
-  "headline": "Single Qubits and Multi-Qubits gates",
+  "mainEntityOfPage": "https://community.qiskit.org/textbook/ch-ex/ex2.html",
+  "headline": "Set 2. Basic Synthesis of Single-Qubit Gates",
   "datePublished": "2019-12-04T22:17:55+00:00",
   "dateModified": "2019-12-04T22:17:55+00:00",
-  "description": "        Introduction Just having some qubits is not enough: We also need to manipulate them. All possible ways of doing this can be compiled down to a basic ...",
+  "description": "        Basic Synthesis of Single-Qubit Gates     from qiskit import *from qiskit.tools.visualization import plot_histogramimport numpy as np    1 Show that ...",
   "author": {
     "@type": "Person",
     "name": "The Qiskit Team"
@@ -819,7 +819,7 @@ initFunction(initPrint)
       
       
       <li class="c-sidebar__chapter">
-        <a class="c-sidebar__entry c-sidebar__entry--active"
+        <a class="c-sidebar__entry "
           href="/textbook/ch-gates/introduction.html"
         >
           
@@ -843,7 +843,7 @@ initFunction(initPrint)
               
 
               <li class="c-sidebar__section">
-                <a class="c-sidebar__entry c-sidebar__entry--active"
+                <a class="c-sidebar__entry "
                   href="/textbook/ch-gates/introduction.html"
                 >
                   
@@ -1007,7 +1007,7 @@ initFunction(initPrint)
               
 
               <li class="c-sidebar__section">
-                <a class="c-sidebar__entry "
+                <a class="c-sidebar__entry c-sidebar__entry--active"
                   href="/textbook/ch-ex/ex2.html"
                 >
                   
@@ -1488,7 +1488,7 @@ initFunction(initPrint)
 <div class="download-buttons-dropdown">
     <button id="dropdown-button-trigger" class="interact-button"><i class="fa fa-download"></i></button>
     <div class="download-buttons">
-        <a href="/textbook/content/ch-gates/introduction.ipynb" download>
+        <a href="/textbook/content/ch-ex/ex2.ipynb" download>
         <button id="interact-button-download" class="interact-button">ORIG</button>
         </a>
         
@@ -1521,7 +1521,39 @@ initFunction(initPrint)
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Introduction">Introduction<a class="anchor-link" href="#Introduction"> </a></h1>
+<h1 id="Basic-Synthesis-of-Single-Qubit-Gates">Basic Synthesis of Single-Qubit Gates<a class="anchor-link" href="#Basic-Synthesis-of-Single-Qubit-Gates"> </a></h1>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">qiskit.tools.visualization</span> <span class="kn">import</span> <span class="n">plot_histogram</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="1">1<a class="anchor-link" href="#1"> </a></h2><p>Show that the Hadamard gate can be written in the following two forms</p>
+$$H = \frac{X+Z}{\sqrt{2}} \equiv \exp\left(i \frac{\pi}{2} \, \frac{X+Z}{\sqrt{2}}\right).$$<p>Here $\equiv$ is used to denote that the equality is valid up to a global phase, and hence that the resulting gates are physically equivalent.</p>
+<p>Hint: it might even be easiest to prove that $e^{i\frac{\pi}{2} M} \equiv M$ for any matrix whose eigenvalues are all $\pm 1$, and that such matrices uniquely satisfy $M^2=I$.</p>
+
 </div>
 </div>
 </div>
@@ -1531,11 +1563,92 @@ initFunction(initPrint)
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Just having some qubits is not enough: We also need to manipulate them. All possible ways of doing this can be compiled down to a basic set of operations, known as quantum gates.</p>
-<p>Typically, the gates that can be directly implemented in hardware will act only on one or two qubits. In our circuits, we may want to use complex gates that act on a great number of qubits. Fortunately, this will not be a problem. With the one and two qubit gates given to us by the hardware, it is possible to build any other gate.</p>
-<p>In this chapter we will first introduce the most basic gates, as well as the mathematics used to describe and analyze them. Then we'll show how to prove that these gates can be used to create any possible quantum algorithm.</p>
-<p>The chapter then concludes by looking at small-scale uses of quantum gates. For example, we see how to build three-qubit gates like the Toffoli from single- and two-qubit operations.</p>
-<p><img src="https://s3.us-south.cloud-object-storage.appdomain.cloud/strapi/640242cc209e48a699164d98922cc60ebasic3.png" alt="A Toffoli made from single- and two-qubit gates"></p>
+<h2 id="2">2<a class="anchor-link" href="#2"> </a></h2><p>The Hadamard can be constructed from <code>rx</code> and <code>rz</code> operations as</p>
+$$ R_x(\theta) = e^{i\frac{\theta}{2} X}, ~~~ R_z(\theta) = e^{i\frac{\theta}{2} Z},\\ H \equiv \lim_{n\rightarrow\infty} \left( ~R_x\left(\frac{\theta}{n}\right) ~~R_z \left(\frac{\theta}{n}\right) ~\right)^n.$$<p>For some suitably chosen $\theta$. When implemented for finite $n$, the resulting gate will be an approximation to the Hadamard whose error decreases with $n$.</p>
+<p>The following shows an example of this implemented with Qiskit with an incorrectly chosen value of $\theta$ (and with the global phase ignored).</p>
+<ul>
+<li><p>Determine the correct value of $\theta$.</p>
+</li>
+<li><p>Show that the error (when using the correct value of $\theta$) decreases quadratically with $n$.</p>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">error</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">11</span><span class="p">):</span>
+
+    <span class="c1"># Create a blank circuit</span>
+    <span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="n">c</span><span class="p">)</span>
+    
+    <span class="c1"># Implement an approximate Hadamard</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="c1"># here we incorrectly choose theta=pi</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">qc</span><span class="o">.</span><span class="n">rx</span><span class="p">(</span><span class="n">theta</span><span class="o">/</span><span class="n">n</span><span class="p">,</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">qc</span><span class="o">.</span><span class="n">rz</span><span class="p">(</span><span class="n">theta</span><span class="o">/</span><span class="n">n</span><span class="p">,</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+      
+    <span class="c1"># We need to measure how good the above approximation is. Here&#39;s a simple way to do this.</span>
+    <span class="c1"># Step 1: Use a real hadamard to cancel the above approximation.</span>
+    <span class="c1"># For a good approximatuon, the qubit will return to state 0. For a bad one, it will end up as some superposition.</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    
+    <span class="c1"># Step 2: Run the circuit, and see how many times we get the outcome 1.</span>
+    <span class="c1"># Since it should return 0 with certainty, the fraction of 1s is a measure of the error.</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="n">c</span><span class="p">)</span>
+    <span class="n">shots</span> <span class="o">=</span> <span class="mi">20000</span>
+    <span class="n">job</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">),</span><span class="n">shots</span><span class="o">=</span><span class="n">shots</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">error</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_counts</span><span class="p">()[</span><span class="s1">&#39;1&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">shots</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">pass</span>
+        
+<span class="n">plot_histogram</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea output_execute_result">
+<img src="../images/ch-ex/ex2_4_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="3">3<a class="anchor-link" href="#3"> </a></h2><p>An improved version of the approximation can be found from,</p>
+$$H \equiv \lim_{n\rightarrow\infty} \left( ~ R_z \left(\frac{\theta}{2n}\right)~~ R_x\left(\frac{\theta}{n}\right) ~~ R_z \left(\frac{\theta}{2n}\right) ~\right)^n.$$<p>Implement this, and investigate the scaling of the error.</p>
 
 </div>
 </div>
@@ -1551,15 +1664,15 @@ initFunction(initPrint)
         <nav class="c-page__nav">
   
     
-    <a id="js-page__nav__prev" class="c-page__nav__prev" href="/textbook/ch-states/states-many-qubits.html">
-      〈 <span class="u-margin-right-tiny"></span> States for Many Qubits
+    <a id="js-page__nav__prev" class="c-page__nav__prev" href="/textbook/ch-ex/ex1.html">
+      〈 <span class="u-margin-right-tiny"></span> Set 1. Classical Logic Gates with ...
     </a>
   
 
   
     
-    <a id="js-page__nav__next" class="c-page__nav__next" href="/textbook/ch-gates/introduction.html">
-      Introduction <span class="u-margin-right-tiny"></span> 〉
+    <a id="js-page__nav__next" class="c-page__nav__next" href="/textbook/ch-ex/ex3.html">
+      Set 3. Building the Best AND Gate <span class="u-margin-right-tiny"></span> 〉
     </a>
   
 </nav>
