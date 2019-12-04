@@ -101,13 +101,13 @@ import CompactFeature from '~/components/features/CompactFeature.vue'
     CompactFeature
   },
 
-  head() {
+  head () {
     return {
       title: 'Qiskit Advocates'
     }
   },
 
-  async asyncData(ctx) {
+  async asyncData (ctx) {
     const index = await import(`~/content/advocates/index/${'master.md'}`)
     const sections = await ctx.app.deepLoadCardToc('profiles.md', {
       basePath: 'advocates/index/'
@@ -121,7 +121,7 @@ import CompactFeature from '~/components/features/CompactFeature.vue'
   }
 })
 export default class extends Vue {
-  cities() {
+  cities () {
     const cityIndex = this.$data.profiles.reduce((cityIndex, card) => {
       const { location, latitude, longitude } = card.attributes
       cityIndex[location] = { name: location, latitude, longitude }

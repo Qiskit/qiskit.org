@@ -8,7 +8,7 @@ import { Component } from 'vue-property-decorator'
 import { MetaPropertyEquiv } from 'vue-meta'
 
 @Component({
-  head() {
+  head () {
     return {
       meta: [
         { hid: 'redirect', 'http-equiv': 'refresh', content: '0;URL=\'/education\'' } as unknown as MetaPropertyEquiv

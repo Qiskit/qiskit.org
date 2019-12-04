@@ -117,7 +117,7 @@ import TextbookTOC from '~/content/education/textbook-toc.md'
     TextbookTOC: TextbookTOC.vue.component
   },
 
-  head() {
+  head () {
     return {
       title: 'Qiskit for Educators'
     }

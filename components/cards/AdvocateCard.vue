@@ -32,7 +32,7 @@ export default class extends Vue {
   @Prop(String) location
   @Prop(String) areas
 
-  decorate(image) {
+  decorate (image) {
     const bgEffects = [
       'linear-gradient(170deg, #0000 0%, #0000 90%, var(--primary-color) 90.3%)',
       'linear-gradient(-170deg, #0000 0%, #0000 90%, var(--primary-color) 90.3%)',
