@@ -32,20 +32,8 @@ export default {
   head: {
     title: pkg.name,
     script: [
-      {
-        hid: 'segment',
-        innerHTML: `
-          window.digitalData = {
-            page: {
-              pageInfo: {
-                productTitle: 'IBM Q Experience',
-                analytics: {
-                  category: 'Qiskit.org'
-                }
-              }
-            }
-          }`
-      }
+      // { src: 'https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js' }
+      { src: 'https://console.test.cloud.ibm.com/analytics/build/bluemix-analytics.min.js' }
     ],
     meta: [
       { charset: 'utf-8' },
@@ -77,8 +65,7 @@ export default {
   plugins: [
     '~/plugins/directives.ts',
     '~/plugins/deep-load.ts',
-    { src: '~/plugins/hotjar.ts', mode: 'client' },
-    { src: '~/plugins/segment-analytics.ts', mode: 'client' }
+    { src: '~/plugins/hotjar.ts', mode: 'client' }
   ],
 
   /*
