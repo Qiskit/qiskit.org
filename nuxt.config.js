@@ -153,7 +153,7 @@ export default {
     build: {
       before () {
         generateTextbookToc(
-          './static/textbook/index.html',
+          './static/textbook/preface.html',
           './content/education/textbook-toc.md'
         )
       }

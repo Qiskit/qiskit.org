@@ -12,5 +12,5 @@ export default function generateTextbookToc (indexPath: string, tocPath: string)
   const indexContent = fs.readFileSync(indexPath, 'utf8')
   const toc = extractToc(indexContent)
   const mdTocLines = formatTocLines(toc)
-  fs.writeFileSync(tocPath, mdTocLines.join('\n'))
+  fs.writeFileSync(tocPath, mdTocLines.join('\n') + '\n')
 }
