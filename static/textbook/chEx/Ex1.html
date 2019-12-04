@@ -26,16 +26,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,minimum-scale=1">
 
-  <title>The Unique Properties of Qubits</title>
-  <meta name="description" content="        The Unique Properties of Qubits     from qiskit import *from qiskit.visualization import plot_histogram    You now know something about bits, and abo...">
+  <title>Problems</title>
+  <meta name="description" content="        Classical Logic Gates with Quantum Circuits     from qiskit import *from qiskit.tools.visualization import plot_histogramimport numpy as np    Using ...">
 
-  <link rel="canonical" href="https://community.qiskit.org/textbook/ch-states/unique-properties-qubits.html">
+  <link rel="canonical" href="https://community.qiskit.org/textbook/chEx/Ex1.html">
   <link rel="alternate" type="application/rss+xml" title="Qiskit Textbook" href="https://community.qiskit.org/textbook/feed.xml">
 
-  <meta property="og:url"         content="https://community.qiskit.org/textbook/ch-states/unique-properties-qubits.html" />
+  <meta property="og:url"         content="https://community.qiskit.org/textbook/chEx/Ex1.html" />
 <meta property="og:type"        content="article" />
-<meta property="og:title"       content="The Unique Properties of Qubits" />
-<meta property="og:description" content="        The Unique Properties of Qubits     from qiskit import *from qiskit.visualization import plot_histogram    You now know something about bits, and abo..." />
+<meta property="og:title"       content="Problems" />
+<meta property="og:description" content="        Classical Logic Gates with Quantum Circuits     from qiskit import *from qiskit.tools.visualization import plot_histogramimport numpy as np    Using ..." />
 <meta property="og:image"       content="https://community.qiskit.org/textbook/images/logo/logo.png" />
 
 <meta name="twitter:card" content="summary">
@@ -45,11 +45,11 @@
   {
   "@context": "http://schema.org",
   "@type": "NewsArticle",
-  "mainEntityOfPage": "https://community.qiskit.org/textbook/ch-states/unique-properties-qubits.html",
-  "headline": "The Unique Properties of Qubits",
+  "mainEntityOfPage": "https://community.qiskit.org/textbook/chEx/Ex1.html",
+  "headline": "Problems",
   "datePublished": "2019-12-04T10:02:21+00:00",
   "dateModified": "2019-12-04T10:02:21+00:00",
-  "description": "        The Unique Properties of Qubits     from qiskit import *from qiskit.visualization import plot_histogram    You now know something about bits, and abo...",
+  "description": "        Classical Logic Gates with Quantum Circuits     from qiskit import *from qiskit.tools.visualization import plot_histogramimport numpy as np    Using ...",
   "author": {
     "@type": "Person",
     "name": "The Qiskit Team"
@@ -732,7 +732,7 @@ initFunction(initPrint)
               
 
               <li class="c-sidebar__section">
-                <a class="c-sidebar__entry c-sidebar__entry--active"
+                <a class="c-sidebar__entry "
                   href="/textbook/ch-states/unique-properties-qubits.html"
                 >
                   
@@ -968,7 +968,7 @@ initFunction(initPrint)
       
       
       <li class="c-sidebar__chapter">
-        <a class="c-sidebar__entry "
+        <a class="c-sidebar__entry c-sidebar__entry--active"
           href="/textbook/chEx/Ex1.html"
         >
           
@@ -990,7 +990,7 @@ initFunction(initPrint)
               
 
               <li class="c-sidebar__section">
-                <a class="c-sidebar__entry "
+                <a class="c-sidebar__entry c-sidebar__entry--active"
                   href="/textbook/chEx/Ex1.html"
                 >
                   
@@ -1488,7 +1488,7 @@ initFunction(initPrint)
 <div class="download-buttons-dropdown">
     <button id="dropdown-button-trigger" class="interact-button"><i class="fa fa-download"></i></button>
     <div class="download-buttons">
-        <a href="/textbook/content/ch-states/unique-properties-qubits.ipynb" download>
+        <a href="/textbook/content/chEx/Ex1.ipynb" download>
         <button id="interact-button-download" class="interact-button">ORIG</button>
         </a>
         
@@ -1521,7 +1521,7 @@ initFunction(initPrint)
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="The-Unique-Properties-of-Qubits">The Unique Properties of Qubits<a class="anchor-link" href="#The-Unique-Properties-of-Qubits"> </a></h1>
+<h1 id="Classical-Logic-Gates-with-Quantum-Circuits">Classical Logic Gates with Quantum Circuits<a class="anchor-link" href="#Classical-Logic-Gates-with-Quantum-Circuits"> </a></h1>
 </div>
 </div>
 </div>
@@ -1535,7 +1535,8 @@ initFunction(initPrint)
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">qiskit.visualization</span> <span class="kn">import</span> <span class="n">plot_histogram</span>
+<span class="kn">from</span> <span class="nn">qiskit.tools.visualization</span> <span class="kn">import</span> <span class="n">plot_histogram</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 </pre></div>
 
     </div>
@@ -1549,10 +1550,8 @@ initFunction(initPrint)
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>You now know something about bits, and about how our familiar digital computers work. All the complex variables, objects and data structures used in modern software are basically all just big piles of bits. Those of us who work on quantum computing call these <em>classical variables.</em> The computers that use them, like the one you are using to read this article, we call <em>classical computers</em>.</p>
-<p>In quantum computers, our basic variable is the <em>qubit</em>: a quantum variant of the bit. These are quantum objects, obeying the laws of quantum mechanics. Unlike any classical variable, these cannot be represented by some number of classical bits. They are fundamentally different.</p>
-<p>The purpose of this section is to give you your first taste of what a qubit is, and how they are unique. We'll do this in a way that requires essentially no math. This means leaving terms like 'superposition' and 'entanglement' until future sections, since it is difficult to properly convey their meaning without pointing at an equation.</p>
-<p>Instead, we will use another well-known feature of quantum mechanics: the uncertainty principle.</p>
+<p>Using the NOT gate (expressed as <code>x</code> in Qiskit), the CNOT gate (expressed as <code>cx</code> in Qiskit) and the Toffoli gate (expressed as <code>ccx</code> in Qiskit) create functions to implement the XOR, AND, NAND and OR gates.</p>
+<p>An implementation of the NOT gate is provided as an example.</p>
 
 </div>
 </div>
@@ -1563,7 +1562,7 @@ initFunction(initPrint)
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Heisenberg's-uncertainty-principle">Heisenberg's uncertainty principle<a class="anchor-link" href="#Heisenberg's-uncertainty-principle"> </a></h3>
+<h2 id="NOT-gate">NOT gate<a class="anchor-link" href="#NOT-gate"> </a></h2>
 </div>
 </div>
 </div>
@@ -1573,30 +1572,7 @@ initFunction(initPrint)
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The most common formulation of the uncertainty principle refers to the position and momentum of a particle: the more precisely its position is defined, the more uncertainty there is in its momentum, and vice-versa.</p>
-
-</div>
-</div>
-</div>
-</div>
-
-<div class="jb_cell">
-
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><img src="./images/heisenberg_xkcd.png" alt=""></p>
-
-</div>
-</div>
-</div>
-</div>
-
-<div class="jb_cell">
-
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>This is a common feature of quantum objects, though it need not always refer to position and momentum. There are many possible sets of parameters for different quantum objects, where certain knowledge of one means that our observations of the others will be completely random.</p>
-<p>To see how the uncertainty principle affects qubits, we need to look at measurement. As we saw in the last section, this is the method by which we extract a bit from a qubit.</p>
+<p>This function takes a binary string input (<code>'0'</code> or <code>'1'</code>) and returns the opposite binary output'.</p>
 
 </div>
 </div>
@@ -1610,34 +1586,37 @@ initFunction(initPrint)
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">measure_z</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">measure_z</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">NOT</span><span class="p">(</span><span class="nb">input</span><span class="p">):</span>
 
-<span class="n">measure_z</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># a qubit in which to encode and manipulate the input</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># a bit to store the output</span>
+    <span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="c1"># this is where the quantum program goes</span>
+    
+    <span class="c1"># We encode &#39;0&#39; as the qubit state |0⟩, and &#39;1&#39; as |1⟩</span>
+    <span class="c1"># Since the qubit is initially |0⟩, we don&#39;t need to do anything for an input of &#39;0&#39;</span>
+    <span class="c1"># For an input of &#39;1&#39;, we do an x to rotate the |0⟩ to |1⟩</span>
+    <span class="k">if</span> <span class="nb">input</span><span class="o">==</span><span class="s1">&#39;1&#39;</span><span class="p">:</span>
+        <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span> <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">)</span>
+        
+    <span class="c1"># Now we&#39;ve encoded the input, we can do a NOT on it using x</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span> <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">)</span>
+    
+    <span class="c1"># Finally, we extract the |0⟩/|1⟩ output of the qubit and encode it in the bit c[0]</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span> <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">)</span>
+    
+    <span class="c1"># We&#39;ll run the program on a simulator</span>
+    <span class="n">backend</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">)</span>
+    <span class="c1"># Since the output will be deterministic, we can use just a single shot to get it</span>
+    <span class="n">job</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">backend</span><span class="p">,</span><span class="n">shots</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_counts</span><span class="p">()))</span>
+    
+    <span class="k">return</span> <span class="n">output</span>
 </pre></div>
 
     </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-<div class="jb_output_wrapper }}">
-<div class="output_area">
-
-
-
-<div class="output_png output_subarea output_execute_result">
-<img src="../images/ch-states/unique-properties-qubits_7_0.png"
->
-</div>
-
-</div>
-</div>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -1645,10 +1624,18 @@ initFunction(initPrint)
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>On the <a href="https://quantum-computing.ibm.com/composer">Circuit Composer</a>, the same operation looks like this.</p>
-<p><img src="https://s3.us-south.cloud-object-storage.appdomain.cloud/strapi/e8401fb5e3ff4cd18590010209203bc4uni1.png" alt="A z measurement"></p>
-<p>This version has a small ‘z’ written in the box that represents the operation. This hints at the fact that this kind of measurement is not the only one. In fact, it is only one of an infinite number of possible ways to extract a bit from a qubit. Specifically, it is known as a <em>z measurement</em>.</p>
-<p>Another commonly used measurement is the <em>x measurement</em>. It can be performed using the following sequence of gates.</p>
+<h2 id="XOR-gate">XOR gate<a class="anchor-link" href="#XOR-gate"> </a></h2>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Takes two binary strings as input and gives one as output.</p>
+<p>The output is <code>'0'</code> when the inputs are equal and  <code>'1'</code> otherwise.</p>
 
 </div>
 </div>
@@ -1662,35 +1649,28 @@ initFunction(initPrint)
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">measure_x</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">measure_x</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">measure_x</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
-
-<span class="n">measure_x</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">XOR</span><span class="p">(</span><span class="n">input1</span><span class="p">,</span><span class="n">input2</span><span class="p">):</span>
+    
+    <span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># two qubits in which to encode and manipulate the input</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># a bit to store the output</span>
+    <span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="c1"># this is where the quantum program goes</span>
+    
+    <span class="c1"># YOUR QUANTUM PROGRAM GOES HERE    </span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="c1"># YOU CAN CHANGE THIS IF YOU WANT TO</span>
+    
+    <span class="c1"># We&#39;ll run the program on a simulator</span>
+    <span class="n">backend</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">)</span>
+    <span class="c1"># Since the output will be deterministic, we can use just a single shot to get it</span>
+    <span class="n">job</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">backend</span><span class="p">,</span><span class="n">shots</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">memory</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_memory</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="k">return</span> <span class="n">output</span>
 </pre></div>
 
     </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-<div class="jb_output_wrapper }}">
-<div class="output_area">
-
-
-
-<div class="output_png output_subarea output_execute_result">
-<img src="../images/ch-states/unique-properties-qubits_9_0.png"
->
-</div>
-
-</div>
-</div>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -1698,9 +1678,18 @@ initFunction(initPrint)
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Later chapters will explain why this sequence of operations performs a new kind of measurement. For now, you'll need to trust us.</p>
-<p>Like the position and momentum of a quantum particle, the z and x measurements of a qubit are governed by the uncertainty principle. Below we'll look at results from a few different circuits to see this effect in action.</p>
-<h4 id="Results-for-an-empty-circuit">Results for an empty circuit<a class="anchor-link" href="#Results-for-an-empty-circuit"> </a></h4><p>The easiest way to see an example is to take a freshly initialized qubit.</p>
+<h2 id="AND-gate">AND gate<a class="anchor-link" href="#AND-gate"> </a></h2>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Takes two binary strings as input and gives one as output.</p>
+<p>The output is <code>'1'</code> only when both the inputs are <code>'1'</code>.</p>
 
 </div>
 </div>
@@ -1714,33 +1703,28 @@ initFunction(initPrint)
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">qc_0</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="n">qc_0</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">AND</span><span class="p">(</span><span class="n">input1</span><span class="p">,</span><span class="n">input2</span><span class="p">):</span>
+    
+    <span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="c1"># two qubits in which to encode the input, and one for the output</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># a bit to store the output</span>
+    <span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="c1"># this is where the quantum program goes</span>
+    
+    <span class="c1"># YOUR QUANTUM PROGRAM GOES HERE</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="c1"># YOU CAN CHANGE THIS IF YOU WANT TO</span>
+    
+    <span class="c1"># We&#39;ll run the program on a simulator</span>
+    <span class="n">backend</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">)</span>
+    <span class="c1"># Since the output will be deterministic, we can use just a single shot to get it</span>
+    <span class="n">job</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">backend</span><span class="p">,</span><span class="n">shots</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">memory</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_memory</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="k">return</span> <span class="n">output</span>
 </pre></div>
 
     </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-<div class="jb_output_wrapper }}">
-<div class="output_area">
-
-
-
-<div class="output_png output_subarea output_execute_result">
-<img src="../images/ch-states/unique-properties-qubits_11_0.png"
->
-</div>
-
-</div>
-</div>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -1748,7 +1732,18 @@ initFunction(initPrint)
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Qubits are always initialized such that they are certain to give the result <code>0</code> for a z measurement. The resulting histogram will therefore simply have a single column, showing the 100% probability of getting a <code>0</code>.</p>
+<h2 id="NAND-gate">NAND gate<a class="anchor-link" href="#NAND-gate"> </a></h2>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Takes two binary strings as input and gives one as output.</p>
+<p>The output is <code>'0'</code> only when both the inputs are <code>'1'</code>.</p>
 
 </div>
 </div>
@@ -1762,44 +1757,28 @@ initFunction(initPrint)
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">qc</span> <span class="o">=</span> <span class="n">qc_0</span> <span class="o">+</span> <span class="n">measure_z</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Results for z measurement:&#39;</span><span class="p">)</span>
-<span class="n">counts</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_counts</span><span class="p">()</span>
-<span class="n">plot_histogram</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">NAND</span><span class="p">(</span><span class="n">input1</span><span class="p">,</span><span class="n">input2</span><span class="p">):</span>
+  
+    <span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="c1"># two qubits in which to encode the input, and one for the output</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># a bit to store the output</span>
+    <span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="c1"># this is where the quantum program goes</span>
+    
+    <span class="c1"># YOUR QUANTUM PROGRAM GOES HERE</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="c1"># YOU CAN CHANGE THIS IF YOU WANT TO</span>
+    
+    <span class="c1"># We&#39;ll run the program on a simulator</span>
+    <span class="n">backend</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">)</span>
+    <span class="c1"># Since the output will be deterministic, we can use just a single shot to get it</span>
+    <span class="n">job</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">backend</span><span class="p">,</span><span class="n">shots</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">memory</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_memory</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="k">return</span> <span class="n">output</span>
 </pre></div>
 
     </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-<div class="jb_output_wrapper }}">
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Results for z measurement:
-</pre>
-</div>
-</div>
-</div>
-<div class="jb_output_wrapper }}">
-<div class="output_area">
-
-
-
-<div class="output_png output_subarea output_execute_result">
-<img src="../images/ch-states/unique-properties-qubits_13_1.png"
->
-</div>
-
-</div>
-</div>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -1807,7 +1786,18 @@ initFunction(initPrint)
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>If we instead do an x measurement, the results will be completely random.</p>
+<h2 id="OR-gate">OR gate<a class="anchor-link" href="#OR-gate"> </a></h2>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Takes two binary strings as input and gives one as output.</p>
+<p>The output is <code>'1'</code> if either input is <code>'1'</code>.</p>
 
 </div>
 </div>
@@ -1821,44 +1811,28 @@ initFunction(initPrint)
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">qc</span> <span class="o">=</span> <span class="n">qc_0</span> <span class="o">+</span>  <span class="n">measure_x</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Results for x measurement:&#39;</span><span class="p">)</span>
-<span class="n">counts</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_counts</span><span class="p">()</span>
-<span class="n">plot_histogram</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">OR</span><span class="p">(</span><span class="n">input1</span><span class="p">,</span><span class="n">input2</span><span class="p">):</span>
+  
+    <span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="c1"># two qubits in which to encode the input, and one for the output</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># a bit to store the output</span>
+    <span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="c1"># this is where the quantum program goes</span>
+    
+    <span class="c1"># YOUR QUANTUM PROGRAM GOES HERE</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="c1"># YOU CAN CHANGE THIS IF YOU WANT TO</span>
+    
+    <span class="c1"># We&#39;ll run the program on a simulator</span>
+    <span class="n">backend</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">)</span>
+    <span class="c1"># Since the output will be deterministic, we can use just a single shot to get it</span>
+    <span class="n">job</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">backend</span><span class="p">,</span><span class="n">shots</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">memory</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_memory</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="k">return</span> <span class="n">output</span>
 </pre></div>
 
     </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-<div class="jb_output_wrapper }}">
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Results for x measurement:
-</pre>
-</div>
-</div>
-</div>
-<div class="jb_output_wrapper }}">
-<div class="output_area">
-
-
-
-<div class="output_png output_subarea output_execute_result">
-<img src="../images/ch-states/unique-properties-qubits_15_1.png"
->
-</div>
-
-</div>
-</div>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -1866,8 +1840,7 @@ initFunction(initPrint)
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Note that the reason why the results are not split exactly 50/50 here is because we take samples by repeating the circuit a finite number of times, and so there will always be statistical noise. In this case, the default of <code>shots=1024</code> was used.</p>
-
+<h2 id="Tests">Tests<a class="anchor-link" href="#Tests"> </a></h2>
 </div>
 </div>
 </div>
@@ -1877,7 +1850,7 @@ initFunction(initPrint)
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Results-for-a-single-Hadamard">Results for a single Hadamard<a class="anchor-link" href="#Results-for-a-single-Hadamard"> </a></h4><p>Now we'll try a different circuit. This has a single gate called a Hadamard, which we will learn more about in future sections.</p>
+<p>The following code runs the functions above for all possible inputs, so that you can check whether they work.</p>
 
 </div>
 </div>
@@ -1891,290 +1864,29 @@ initFunction(initPrint)
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">qc_plus</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">qc_plus</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-
-<span class="n">qc_plus</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="jb_output_wrapper }}">
-<div class="output_area">
-
-
-
-<div class="output_png output_subarea output_execute_result">
-<img src="../images/ch-states/unique-properties-qubits_18_0.png"
->
-</div>
-
-</div>
-</div>
-</div>
-</div>
-
-</div>
-</div>
-
-<div class="jb_cell">
-
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>To see what effect it has, let's first try the z measurement.</p>
-
-</div>
-</div>
-</div>
-</div>
-
-<div class="jb_cell">
-
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">qc</span> <span class="o">=</span> <span class="n">qc_plus</span> <span class="o">+</span> <span class="n">measure_z</span>
-
-<span class="n">qc</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Results for z measurement:&#39;</span><span class="p">)</span>
-<span class="n">counts</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_counts</span><span class="p">()</span>
-<span class="n">plot_histogram</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="jb_output_wrapper }}">
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Results for z measurement:
-</pre>
-</div>
-</div>
-</div>
-<div class="jb_output_wrapper }}">
-<div class="output_area">
-
-
-
-<div class="output_png output_subarea output_execute_result">
-<img src="../images/ch-states/unique-properties-qubits_20_1.png"
->
-</div>
-
-</div>
-</div>
-</div>
-</div>
-
-</div>
-</div>
-
-<div class="jb_cell">
-
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Here we see that it is the results of the z measurement that are random for this circuit.</p>
-<p>Now let's see what happens for an x measurement.</p>
-
-</div>
-</div>
-</div>
-</div>
-
-<div class="jb_cell">
-
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">qc</span> <span class="o">=</span> <span class="n">qc_plus</span> <span class="o">+</span> <span class="n">measure_x</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Results for x measurement:&#39;</span><span class="p">)</span>
-<span class="n">counts</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_counts</span><span class="p">()</span>
-<span class="n">plot_histogram</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="jb_output_wrapper }}">
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Results for x measurement:
-</pre>
-</div>
-</div>
-</div>
-<div class="jb_output_wrapper }}">
-<div class="output_area">
-
-
-
-<div class="output_png output_subarea output_execute_result">
-<img src="../images/ch-states/unique-properties-qubits_22_1.png"
->
-</div>
-
-</div>
-</div>
-</div>
-</div>
-
-</div>
-</div>
-
-<div class="jb_cell">
-
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>For the x measurement, it is certain that the output for this circuit is <code>0</code>. The results here are therefore very different to what we saw for the empty circuit. The Hadamard has lead to an entirely opposite set of outcomes.</p>
-<h4 id="Results-for-a-y-rotation">Results for a y rotation<a class="anchor-link" href="#Results-for-a-y-rotation"> </a></h4><p>Using other circuits we can manipulate the results in different ways. Here is an example with an <code>ry</code> gate.</p>
-
-</div>
-</div>
-</div>
-</div>
-
-<div class="jb_cell">
-
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">qc_y</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">qc_y</span><span class="o">.</span><span class="n">ry</span><span class="p">(</span> <span class="o">-</span><span class="mf">3.14159</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
-
-<span class="n">qc_y</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="jb_output_wrapper }}">
-<div class="output_area">
-
-
-
-<div class="output_png output_subarea output_execute_result">
-<img src="../images/ch-states/unique-properties-qubits_24_0.png"
->
-</div>
-
-</div>
-</div>
-</div>
-</div>
-
-</div>
-</div>
-
-<div class="jb_cell">
-
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>We will learn more about <code>ry</code> in future sections. For now, just notice the effect it has for the z and x measurements.</p>
-
-</div>
-</div>
-</div>
-</div>
-
-<div class="jb_cell">
-
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">qc</span> <span class="o">=</span> <span class="n">qc_y</span> <span class="o">+</span> <span class="n">measure_z</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Results for z measurement:&#39;</span><span class="p">)</span>
-<span class="n">counts</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_counts</span><span class="p">()</span>
-<span class="n">plot_histogram</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="jb_output_wrapper }}">
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Results for z measurement:
-</pre>
-</div>
-</div>
-</div>
-<div class="jb_output_wrapper }}">
-<div class="output_area">
-
-
-
-<div class="output_png output_subarea output_execute_result">
-<img src="../images/ch-states/unique-properties-qubits_26_1.png"
->
-</div>
-
-</div>
-</div>
-</div>
-</div>
-
-</div>
-</div>
-
-<div class="jb_cell">
-
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Here we have a case that we have not seen before. The z measurement is most likely to output <code>0</code>, but it is not completely certain. A similar effect is seen below for the x measurement: it is most likely, but not certain, to output <code>1</code>.</p>
-
-</div>
-</div>
-</div>
-</div>
-
-<div class="jb_cell">
-
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">qc</span> <span class="o">=</span> <span class="n">qc_y</span> <span class="o">+</span> <span class="n">measure_x</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Results for x measurement:&#39;</span><span class="p">)</span>
-<span class="n">counts</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_counts</span><span class="p">()</span>
-<span class="n">plot_histogram</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Results for the NOT gate&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="nb">input</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;0&#39;</span><span class="p">,</span><span class="s1">&#39;1&#39;</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;    Input&#39;</span><span class="p">,</span><span class="nb">input</span><span class="p">,</span><span class="s1">&#39;gives output&#39;</span><span class="p">,</span><span class="n">NOT</span><span class="p">(</span><span class="nb">input</span><span class="p">))</span>
+    
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Results for the XOR gate&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">input1</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;0&#39;</span><span class="p">,</span><span class="s1">&#39;1&#39;</span><span class="p">]:</span>
+    <span class="k">for</span> <span class="n">input2</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;0&#39;</span><span class="p">,</span><span class="s1">&#39;1&#39;</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;    Inputs&#39;</span><span class="p">,</span><span class="n">input1</span><span class="p">,</span><span class="n">input2</span><span class="p">,</span><span class="s1">&#39;give output&#39;</span><span class="p">,</span><span class="n">XOR</span><span class="p">(</span><span class="n">input1</span><span class="p">,</span><span class="n">input2</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Results for the AND gate&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">input1</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;0&#39;</span><span class="p">,</span><span class="s1">&#39;1&#39;</span><span class="p">]:</span>
+    <span class="k">for</span> <span class="n">input2</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;0&#39;</span><span class="p">,</span><span class="s1">&#39;1&#39;</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;    Inputs&#39;</span><span class="p">,</span><span class="n">input1</span><span class="p">,</span><span class="n">input2</span><span class="p">,</span><span class="s1">&#39;give output&#39;</span><span class="p">,</span><span class="n">AND</span><span class="p">(</span><span class="n">input1</span><span class="p">,</span><span class="n">input2</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Results for the NAND gate&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">input1</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;0&#39;</span><span class="p">,</span><span class="s1">&#39;1&#39;</span><span class="p">]:</span>
+    <span class="k">for</span> <span class="n">input2</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;0&#39;</span><span class="p">,</span><span class="s1">&#39;1&#39;</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;    Inputs&#39;</span><span class="p">,</span><span class="n">input1</span><span class="p">,</span><span class="n">input2</span><span class="p">,</span><span class="s1">&#39;give output&#39;</span><span class="p">,</span><span class="n">NAND</span><span class="p">(</span><span class="n">input1</span><span class="p">,</span><span class="n">input2</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Results for the OR gate&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">input1</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;0&#39;</span><span class="p">,</span><span class="s1">&#39;1&#39;</span><span class="p">]:</span>
+    <span class="k">for</span> <span class="n">input2</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;0&#39;</span><span class="p">,</span><span class="s1">&#39;1&#39;</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;    Inputs&#39;</span><span class="p">,</span><span class="n">input1</span><span class="p">,</span><span class="n">input2</span><span class="p">,</span><span class="s1">&#39;give output&#39;</span><span class="p">,</span><span class="n">OR</span><span class="p">(</span><span class="n">input1</span><span class="p">,</span><span class="n">input2</span><span class="p">))</span>
 </pre></div>
 
     </div>
@@ -2189,333 +1901,40 @@ initFunction(initPrint)
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>
-Results for x measurement:
+Results for the NOT gate
+    Input 0 gives output 1
+    Input 1 gives output 0
+
+Results for the XOR gate
+    Inputs 0 0 give output 0
+    Inputs 0 1 give output 0
+    Inputs 1 0 give output 0
+    Inputs 1 1 give output 0
+
+Results for the AND gate
+    Inputs 0 0 give output 0
+    Inputs 0 1 give output 0
+    Inputs 1 0 give output 0
+    Inputs 1 1 give output 0
+
+Results for the NAND gate
+    Inputs 0 0 give output 0
+    Inputs 0 1 give output 0
+    Inputs 1 0 give output 0
+    Inputs 1 1 give output 0
+
+Results for the OR gate
+    Inputs 0 0 give output 0
+    Inputs 0 1 give output 0
+    Inputs 1 0 give output 0
+    Inputs 1 1 give output 0
 </pre>
 </div>
 </div>
 </div>
-<div class="jb_output_wrapper }}">
-<div class="output_area">
-
-
-
-<div class="output_png output_subarea output_execute_result">
-<img src="../images/ch-states/unique-properties-qubits_28_1.png"
->
-</div>
-
-</div>
-</div>
-</div>
-</div>
-
-</div>
-</div>
-
-<div class="jb_cell">
-
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>These results hint at an important principle: Qubits have a limited amount of certainty that they can hold. This ensures that, despite the different ways we can extract outputs from a qubit, it can only be used to store a single bit of information. In the case of the blank circuit, this certainty was dedicated entirely to the outcomes of z measurements. For the circuit with a single Hadamard, it was dedicated entirely to x measurements. In this case, it is shared between the two.</p>
-
-</div>
-</div>
-</div>
-</div>
-
-<div class="jb_cell">
-
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Einstein-vs.-Bell">Einstein vs. Bell<a class="anchor-link" href="#Einstein-vs.-Bell"> </a></h3>
-</div>
-</div>
-</div>
-</div>
-
-<div class="jb_cell">
-
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>We have now played with some of the features of qubits, but we haven't done anything that couldn't be reproduced by a few bits and a random number generator. You can therefore be forgiven for thinking that quantum variables are just classical variables with some randomness bundled in.</p>
-<p>This is essentially the claim made by Einstein, Podolsky and Rosen back in 1935. They objected to the uncertainty seen in quantum mechanics, and thought it meant that the theory was incomplete. They thought that a qubit should always know what output it would give for both kinds of measurement, and that it only seems random because some information is hidden from us. As Einstein said: God does not play dice with the universe.</p>
-<p>No one spoke of qubits back then, and people hardly spoke of computers. But if we translate their arguments into modern language, they essentially claimed that qubits can indeed be described by some form of classical variable. They didn’t know how to do it, but they were sure it could be done. Then quantum mechanics could be replaced by a much nicer and more sensible theory.</p>
-<p>It took until 1964 to show that they were wrong. J. S. Bell proved that quantum variables behaved in a way that was fundamentally unique. Since then, many new ways have been found to prove this, and extensive experiments have been done to show that this is exactly the way the universe works. We'll now consider a simple demonstration, using a variant of <em>Hardy’s paradox</em>.</p>
-<p>For this we need two qubits, set up in such a way that their results are correlated. Specifically, we want to set them up such that we see the following properties.</p>
-<ol>
-<li>If z measurements are made on both qubits, they never both output <code>0</code>.</li>
-<li>If an x measurement of one qubit outputs <code>1</code>, a z measurement of the other will output <code>0</code>.</li>
-</ol>
-<p>If we have qubits that satisfy these properties, what can we infer about the remaining case: an x measurement of both?</p>
-<p>For example, let's think about the case where both qubits output <code>1</code> for an x measurement. By applying property 2 we can deduce what the result would have been if we had made z measurements instead: We would have gotten an output of <code>0</code> for both. However, this result is impossible according to property 1. We can therefore conclude that an output of <code>1</code> for x measurements of both qubits must also be impossible.</p>
-<p>The paragraph you just read contains all the math in this section. Don't feel bad if you need to read it a couple more times!</p>
-<p>Now let's see what actually happens. Here is a circuit, composed of gates you will learn about in later sections. It prepares a pair of qubits that will satisfy the above properties.</p>
-
-</div>
-</div>
-</div>
-</div>
-
-<div class="jb_cell">
-
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">qc_hardy</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">qc_hardy</span><span class="o">.</span><span class="n">ry</span><span class="p">(</span><span class="mf">1.911</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">qc_hardy</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">qc_hardy</span><span class="o">.</span><span class="n">ry</span><span class="p">(</span><span class="mf">0.785</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">qc_hardy</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">qc_hardy</span><span class="o">.</span><span class="n">ry</span><span class="p">(</span><span class="mf">2.356</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
-
-<span class="n">qc_hardy</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="jb_output_wrapper }}">
-<div class="output_area">
-
-
-
-<div class="output_png output_subarea output_execute_result">
-<img src="../images/ch-states/unique-properties-qubits_32_0.png"
->
-</div>
-
-</div>
-</div>
-</div>
-</div>
-
-</div>
-</div>
-
-<div class="jb_cell">
-
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's see it in action. First a z measurement of both qubits.</p>
-
-</div>
-</div>
-</div>
-</div>
-
-<div class="jb_cell">
-
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">measurements</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
-<span class="c1"># z measurement on both qubits</span>
-<span class="n">measurements</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">measurements</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="n">qc</span> <span class="o">=</span> <span class="n">qc_hardy</span> <span class="o">+</span> <span class="n">measurements</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Results for two z measurements:&#39;</span><span class="p">)</span>
-<span class="n">counts</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_counts</span><span class="p">()</span>
-<span class="n">plot_histogram</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="jb_output_wrapper }}">
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>
-Results for two z measurements:
-</pre>
-</div>
-</div>
-</div>
-<div class="jb_output_wrapper }}">
-<div class="output_area">
-
-
-
-<div class="output_png output_subarea output_execute_result">
-<img src="../images/ch-states/unique-properties-qubits_34_1.png"
->
 </div>
-
-</div>
-</div>
-</div>
-</div>
-
-</div>
-</div>
-
-<div class="jb_cell">
-
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>The probability of <code>00</code> is zero, and so these qubits do indeed satisfy property 1.</p>
-<p>Next, let's see the results of an x measurement of one and a z measurement of the other.</p>
-
-</div>
-</div>
-</div>
-</div>
-
-<div class="jb_cell">
-
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">measurements</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
-<span class="c1"># x measurement on qubit 0</span>
-<span class="n">measurements</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">measurements</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
-<span class="c1"># z measurement on qubit 1</span>
-<span class="n">measurements</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="n">qc</span> <span class="o">=</span> <span class="n">qc_hardy</span> <span class="o">+</span> <span class="n">measurements</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Results for two x measurement on qubit 0 and z measurement on qubit 1:&#39;</span><span class="p">)</span>
-<span class="n">counts</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_counts</span><span class="p">()</span>
-<span class="n">plot_histogram</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="jb_output_wrapper }}">
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>
-Results for two x measurement on qubit 0 and z measurement on qubit 1:
-</pre>
-</div>
-</div>
-</div>
-<div class="jb_output_wrapper }}">
-<div class="output_area">
-
-
-
-<div class="output_png output_subarea output_execute_result">
-<img src="../images/ch-states/unique-properties-qubits_36_1.png"
->
-</div>
-
-</div>
-</div>
-</div>
-</div>
-
-</div>
-</div>
-
-<div class="jb_cell">
-
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>The probability of <code>11</code> is zero. You'll see the same if you swap around the measurements. These qubits therefore also satisfy property 2.</p>
-<p>Finally, let's look at an x measurement of both.</p>
-
-</div>
-</div>
-</div>
-</div>
-
-<div class="jb_cell">
-
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">measurements</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">measurements</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">measurements</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">measurements</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">measurements</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="n">qc</span> <span class="o">=</span> <span class="n">qc_hardy</span> <span class="o">+</span> <span class="n">measurements</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Results for two x measurement on both qubits:&#39;</span><span class="p">)</span>
-<span class="n">counts</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_counts</span><span class="p">()</span>
-<span class="n">plot_histogram</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="jb_output_wrapper }}">
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>
-Results for two x measurement on both qubits:
-</pre>
-</div>
-</div>
-</div>
-<div class="jb_output_wrapper }}">
-<div class="output_area">
-
-
-
-<div class="output_png output_subarea output_execute_result">
-<img src="../images/ch-states/unique-properties-qubits_38_1.png"
->
-</div>
-
 </div>
-</div>
-</div>
-</div>
-
-</div>
-</div>
-
-<div class="jb_cell">
 
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>We reasoned that, given properties 1 and 2, it would be impossible to get the output <code>11</code>. From the results above, we see that our reasoning was not correct: one in every dozen results will have this 'impossible' result.</p>
-<p>So where did we go wrong? Our mistake was in the following piece of reasoning.</p>
-<blockquote><p>By applying property 2 we can deduce what the result would have been if we had made z measurements instead</p>
-</blockquote>
-<p>We used our knowledge of the x outputs to work out what the z outputs were. Once we’d done that, we assumed that we were certain about the value of both. More certain than the uncertainty principle allows us to be. And so we were wrong.</p>
-<p>Our logic would be completely valid if we weren’t reasoning about quantum objects. If it was some non-quantum variable, that we initialized by some random process, the x and z outputs would indeed both be well defined. They would just be based on some pre-determined list of random numbers in our computer, or generated by some deterministic process. Then there would be no reason why we shouldn't use one to deduce the value of the other, and our reasoning would be perfectly valid. The restriction it predicts would apply, and it would be impossible for both x measurements to output <code>1</code>.</p>
-<p>But our qubits behave differently. The uncertainty of quantum mechanics allows qubits to dodge restrictions placed on classical variables. It allows them to do things that would otherwise be impossible. Indeed, this is the main thing to take away from this section:</p>
-<blockquote><p>A physical system in a definite state can still behave randomly.</p>
-</blockquote>
-<p>This is the first of the key principles of the quantum world. It needs to become your new intuition, as it is what makes quantum systems different to classical systems. It's what makes quantum computers able to outperform classical computers. It leads to effects that allow programs made with quantum variables to solve problems in ways that those with normal variables cannot. But just because qubits don’t follow the same logic as normal computers, it doesn’t mean they defy logic entirely. They obey the definite rules laid out by quantum mechanics.</p>
-<p>If you’d like to learn these rules, we’ll use the remainder of this chapter to guide you through them. We'll also show you how to express them using math. This will provide a foundation for later chapters, in which we'll explain various quantum algorithms and techniques.</p>
-
-</div>
-</div>
 </div>
 </div>
 
@@ -2528,15 +1947,15 @@ Results for two x measurement on both qubits:
         <nav class="c-page__nav">
   
     
-    <a id="js-page__nav__prev" class="c-page__nav__prev" href="/textbook/ch-states/atoms-computation.html">
-      〈 <span class="u-margin-right-tiny"></span> The Atoms of Computation
+    <a id="js-page__nav__prev" class="c-page__nav__prev" href="/textbook/ch-gates/basic-circuit-identities.html">
+      〈 <span class="u-margin-right-tiny"></span> Basic Circuit Identities
     </a>
   
 
   
     
-    <a id="js-page__nav__next" class="c-page__nav__next" href="/textbook/ch-states/writing-down-qubit-states.html">
-      Writing Down Qubit States <span class="u-margin-right-tiny"></span> 〉
+    <a id="js-page__nav__next" class="c-page__nav__next" href="/textbook/chEx/Ex1.html">
+      Set 1. Classical Logic Gates with ... <span class="u-margin-right-tiny"></span> 〉
     </a>
   
 </nav>
