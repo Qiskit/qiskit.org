@@ -20,3 +20,32 @@ export default class extends Vue {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+ul, ol {
+  list-style-position: inside;
+  padding-left: 2rem;
+  margin-top: 1rem;
+}
+
+ul {
+  list-style-type: square;
+}
+
+ol li,
+ul li {
+  margin: 1rem 0;
+}
+
+h2 {
+  margin-top: 3rem;
+}
+
+h3 {
+  margin-top: 2rem;
+}
+
+p {
+  text-align: justify;
+}
+</style>
