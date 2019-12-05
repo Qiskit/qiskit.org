@@ -41,8 +41,10 @@ import GatesHeader from '~/components/headers/GatesHeader.vue'
 import PageSection from '~/components/sections/PageSection.vue'
 import ExperimentCard from '~/components/cards/ExperimentCard.vue'
 import ExperimentCarousel from '~/components/cards/ExperimentCarousel.vue'
+import { segmentMixin } from '~/mixins/segment-mixin.ts'
 
 @Component({
+  mixins: [segmentMixin],
   components: {
     InnerNavigation,
     GatesHeader,
@@ -53,7 +55,7 @@ import ExperimentCarousel from '~/components/cards/ExperimentCarousel.vue'
 
   head () {
     return {
-      title: 'Qiskit Experiments'
+      title: 'Qiskit Experiments',
     }
   },
 
@@ -67,7 +69,11 @@ import ExperimentCarousel from '~/components/cards/ExperimentCarousel.vue'
     }
   }
 })
-export default class extends Vue { }
+export default class extends Vue {
+  title: string = 'Qiskit Experiments'
+  belongsTo: string = 'experiments'
+  to: string = 'experiments/index/'
+}
 </script>
 
 <style lang="scss">
