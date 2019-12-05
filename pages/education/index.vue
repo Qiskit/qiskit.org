@@ -105,8 +105,10 @@ import MdContent from '~/components/MdContent.vue'
 import Cta from '~/components/ctas/Cta.vue'
 // @ts-ignore: Cannot find module
 import TextbookTOC from '~/content/education/textbook-toc.md'
+import { segmentMixin } from '~/mixins/segment-mixin.ts'
 
 @Component({
+  mixins: [segmentMixin],
   components: {
     InnerNavigation,
     GatesHeader,
@@ -123,7 +125,11 @@ import TextbookTOC from '~/content/education/textbook-toc.md'
     }
   }
 })
-export default class extends Vue { }
+export default class extends Vue {
+  title: string = 'Qiskit for Educators'
+  belongsTo: string = 'education'
+  to: string = 'education/index/'
+}
 </script>
 
 <style lang="scss">
