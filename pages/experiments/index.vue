@@ -55,7 +55,7 @@ import { segmentMixin } from '~/mixins/segment-mixin.ts'
 
   head () {
     return {
-      title: 'Qiskit Experiments',
+      title: 'Qiskit Experiments'
     }
   },
 
