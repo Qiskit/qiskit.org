@@ -103,13 +103,13 @@ import { segmentMixin } from '~/mixins/segment-mixin.ts'
     CompactFeature
   },
 
-  head () {
+  head() {
     return {
       title: 'Qiskit Advocates'
     }
   },
 
-  async asyncData (ctx) {
+  async asyncData(ctx) {
     const index = await import(`~/content/advocates/index/${'master.md'}`)
     const sections = await ctx.app.deepLoadCardToc('profiles.md', {
       basePath: 'advocates/index/'

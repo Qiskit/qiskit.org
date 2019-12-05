@@ -37,7 +37,7 @@ import { Component, Prop } from 'vue-property-decorator'
 export default class Media extends Vue {
   @Prop(String) src
 
-  isImg (src: string): boolean {
+  isImg(src: string): boolean {
     return [
       '.jpg',
       '.jpeg',
@@ -46,17 +46,17 @@ export default class Media extends Vue {
     ].some(ext => src.endsWith(ext))
   }
 
-  isVideo (src: string): boolean {
+  isVideo(src: string): boolean {
     return [
       '.mp4'
     ].some(ext => src.endsWith(ext))
   }
 
-  isYouTube (src: string): boolean {
+  isYouTube(src: string): boolean {
     return src.startsWith('https://www.youtube.com/embed/')
   }
 
-  isVimeo (src: string): boolean {
+  isVimeo(src: string): boolean {
     return src.startsWith('https://player.vimeo.com/video/')
   }
 }

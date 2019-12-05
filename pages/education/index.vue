@@ -119,7 +119,7 @@ import { segmentMixin } from '~/mixins/segment-mixin.ts'
     TextbookTOC: TextbookTOC.vue.component
   },
 
-  head () {
+  head() {
     return {
       title: 'Qiskit for Educators'
     }

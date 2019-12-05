@@ -166,6 +166,7 @@ import LegacyCta from '~/components/ctas/LegacyCta.vue'
     return { title: 'Qiskit' }
   }
 })
+
 export default class extends Vue { }
 </script>
 

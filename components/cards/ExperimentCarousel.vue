@@ -60,12 +60,12 @@ export default class extends Vue {
 
   active: number = 0
 
-  previous () {
+  previous() {
     const count = this.experiments.length
     this.active = this.active === 0 ? count - 1 : this.active - 1
   }
 
-  next () {
+  next() {
     const count = this.experiments.length
     this.active = this.active === count - 1 ? 0 : this.active + 1
   }

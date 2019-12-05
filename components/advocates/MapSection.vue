@@ -12,7 +12,7 @@ import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 
 @Component({
-  mounted () {
+  mounted() {
     require('d3')
     require('topojson')
     const Datamap = require('datamaps')
@@ -33,11 +33,11 @@ import { Component, Prop } from 'vue-property-decorator'
         borderWidth: 0,
         highlightBorderWidth: 0,
         highlightFillColor: 'var(--secondary-color-light)',
-        popupTemplate (_, data) {
+        popupTemplate(_, data) {
           return `<div class="map-tip">${data.name}</div>`
         }
       },
-      done () {
+      done() {
         // fix cutting the bottom of the map.
         this.element.style.paddingBottom = '60%'
       }
