@@ -8,7 +8,20 @@ declare global {
 
 export const segmentMixin = {
   created() {
+    const self = this as any
+    
     if (process.client) {
+      window.digitalData = {
+        page: {
+          pageInfo: {
+            productTitle: self.title,
+            analytics: {
+              category: 'Qiskit.org'
+            }
+          }
+        }
+      }
+
       window._analytics = {
         segment_key: 'zbHWEXPUfXm0K6C7HbegwB5ewDEC8o1H',
         coremetrics: false,
@@ -25,17 +38,6 @@ export const segmentMixin = {
     const self = this as any
 
     self.$nextTick(function () {
-      window.digitalData = {
-        page: {
-          pageInfo: {
-            productTitle: self.title,
-            analytics: {
-              category: 'Qiskit.org'
-            }
-          }
-        }
-      }
-
       if (window.bluemixAnalytics && window.bluemixAnalytics.pageEvent) {
         window.bluemixAnalytics.pageEvent(
           'Qiskit.org', 
