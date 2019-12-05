@@ -26,7 +26,7 @@ interface DeepLoadOptions {
 }
 
 export default ({ app }) => {
-  async function loadToc(source: string): Promise<any> {
+  async function loadToc (source: string): Promise<any> {
     const toc: any[] = []
     const attrs = (await import(`~/content/${source}`)).attributes
     let entry = null
@@ -38,7 +38,7 @@ export default ({ app }) => {
     return toc
   }
 
-  async function embedDocumentsInPlace(section: SlimCardSection, basepath: string) {
+  async function embedDocumentsInPlace (section: SlimCardSection, basepath: string) {
     if (typeof section.collections === 'undefined') { return }
     for (const aCollection of Object.keys(section.collections)) {
       const sectionBasepath =
@@ -62,7 +62,7 @@ export default ({ app }) => {
 
   const cache = {}
 
-  async function deepLoadCardToc(
+  async function deepLoadCardToc (
     filePath: string,
     options: DeepLoadOptions = { basePath: '' }
   ): Promise<any> {
