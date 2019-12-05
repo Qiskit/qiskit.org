@@ -22,15 +22,15 @@ export default class extends Vue {
   @Prop(Boolean) secondary
   @Prop(Boolean) isStatic
 
-  isExternal (url: string): boolean {
+  isExternal(url: string): boolean {
     return url.startsWith('http')
   }
 
-  isMail (url: string): boolean {
+  isMail(url: string): boolean {
     return url.startsWith('mailto')
   }
 
-  isInternal (url: string): boolean {
+  isInternal(url: string): boolean {
     return !(this.isExternal(url) || this.isMail(url))
   }
 }

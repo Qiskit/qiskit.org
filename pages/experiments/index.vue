@@ -53,13 +53,13 @@ import { segmentMixin } from '~/mixins/segment-mixin.ts'
     ExperimentCarousel
   },
 
-  head () {
+  head() {
     return {
       title: 'Qiskit Experiments'
     }
   },
 
-  async asyncData (ctx) {
+  async asyncData(ctx) {
     const sections = await ctx.app.deepLoadCardToc('toc.md', {
       basePath: 'experiments/index/'
     })

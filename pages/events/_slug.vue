@@ -37,7 +37,7 @@ import { Context } from '@nuxt/types'
 import Menu from '~/components/Menu.vue'
 import Footer from '~/components/Footer.vue'
 
-function getBackgroundUris (background: string): [string, string] {
+function getBackgroundUris(background: string): [string, string] {
   const bgRoute = '/images/events/headers/'
   const lBackgroundUri = `${bgRoute}${background}-low-res.jpg`
   const hBackgroundUri = `${bgRoute}${background}-hi-res.jpg`
@@ -50,7 +50,7 @@ function getBackgroundUris (background: string): [string, string] {
     Menu,
     Footer
   },
-  async asyncData (context: Context) {
+  async asyncData(context: Context) {
     const sourceName = context.route.params.slug
     if (sourceName === 'undefined') {
       return

@@ -9,11 +9,11 @@ export default class extends Vue {
 
   templateRender: Function | null = null
 
-  render (createElement) {
+  render(createElement) {
     return this.templateRender ? this.templateRender() : createElement('div', 'Rendering...')
   }
 
-  created () {
+  created() {
     /* eslint no-eval: "off" */
     this.templateRender = eval(this.$props.renderFn).bind(this)
     this.$options.staticRenderFns = eval(this.$props.staticRenderFns)

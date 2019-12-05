@@ -30,7 +30,7 @@ import { Component } from 'vue-property-decorator'
 
 @Component
 export default class extends Vue {
-  activate (evt: PointerEvent) {
+  activate(evt: PointerEvent) {
     const thismarker = evt.currentTarget && evt.currentTarget as HTMLElement
     if (!thismarker || thismarker.classList.contains('marker--active')) {
       return
@@ -45,7 +45,7 @@ export default class extends Vue {
 
     // Dismiss the current active section
     const self = this
-    function clearOut (evt: Event) {
+    function clearOut(evt: Event) {
       if (evt.currentTarget) {
         evt.currentTarget.removeEventListener('transitionend', clearOut)
         self.clearIsOut(evt.currentTarget as HTMLElement)
@@ -65,7 +65,7 @@ export default class extends Vue {
     }
   }
 
-  clearIsOut (target: HTMLElement) {
+  clearIsOut(target: HTMLElement) {
     target.classList.remove('textbook-features__page--out')
   }
 }
