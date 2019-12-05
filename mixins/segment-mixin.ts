@@ -44,6 +44,7 @@ export const segmentMixin = {
             navigationType: 'pushState',
             productTitle: self.title,
             path: self.to,
+            title: self.title
           }
         )
       }
