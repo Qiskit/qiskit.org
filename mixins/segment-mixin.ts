@@ -1,15 +1,30 @@
 declare global {
   interface Window {
     digitalData: any
-    _analytics: any
+    _analytics: any,
+    bluemixAnalytics: any
   }
 }
 
 export const segmentMixin = {
   created() {
-    const self = this as any
-    
     if (process.client) {
+      window._analytics = {
+        segment_key: 'zbHWEXPUfXm0K6C7HbegwB5ewDEC8o1H',
+        coremetrics: false,
+        optimizely: false,
+        googleAddServices: false,
+        fullStory: false,
+        autoPageEventSpa: false,
+        autoFormEvents: false,
+        autoPageView: false
+      }
+    }
+  },
+  mounted() {
+    const self = this as any
+
+    self.$nextTick(function () {
       window.digitalData = {
         page: {
           pageInfo: {
@@ -21,17 +36,18 @@ export const segmentMixin = {
           }
         }
       }
-      window._analytics = {
-        segment_key: 'zbHWEXPUfXm0K6C7HbegwB5ewDEC8o1H',
-        coremetrics: false,
-        optimizely: false,
-        autoPageView: true
+
+      if (window.bluemixAnalytics && window.bluemixAnalytics.pageEvent) {
+        window.bluemixAnalytics.pageEvent(
+          'Qiskit.org', 
+          'experiments', 
+          {
+            navigationType: 'pushState',
+            productTitle: self.title,
+            path: self.to,
+          }
+        )
       }
-    }
-  },
-  beforeRouteUpdate (to, from, next) {
-    console.log('===to', to)
-    console.log('===from', from)
-    console.log('===next', next)
+    })
   }
 }
