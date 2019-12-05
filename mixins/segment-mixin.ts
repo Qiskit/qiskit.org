@@ -7,7 +7,7 @@ declare global {
 }
 
 export const segmentMixin = {
-  created() {
+  created () {
     const self = this as any
 
     if (process.client) {
@@ -34,7 +34,7 @@ export const segmentMixin = {
       }
     }
   },
-  mounted() {
+  mounted () {
     const self = this as any
 
     self.$nextTick(function () {

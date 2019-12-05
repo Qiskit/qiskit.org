@@ -153,7 +153,7 @@ export default class extends Vue {
     { label: 'API Documentation', url: '/documentation' }
   ]
 
-  isActive(path) {
+  isActive (path) {
     return this.$route.path.startsWith(path)
   }
 
