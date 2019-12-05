@@ -9,7 +9,7 @@ declare global {
 export const segmentMixin = {
   created() {
     const self = this as any
-    
+
     if (process.client) {
       window.digitalData = {
         page: {
@@ -40,8 +40,8 @@ export const segmentMixin = {
     self.$nextTick(function () {
       if (window.bluemixAnalytics && window.bluemixAnalytics.pageEvent) {
         window.bluemixAnalytics.pageEvent(
-          'Qiskit.org', 
-          self.belongsTo, 
+          'Qiskit.org',
+          self.belongsTo,
           {
             navigationType: 'pushState',
             productTitle: self.title,
