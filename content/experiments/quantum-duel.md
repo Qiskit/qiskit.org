@@ -8,6 +8,7 @@ media:
   - https://www.youtube.com/embed/icQ9r7IRp1s
   - /images/experiments/quantum-duel/quantum-duel-game.png
 source: https://github.com/geduardo/Quantum-Duel--QISKITCAMPASIA
+belongsTo: experiments
 ---
 “Quantum Duel” is the first online multiplayer quantum game. Each player is given initial and final quantum states. The objective of the game is to build a quantum circuit to achieve such the transformation. The first to submit the correct circuit wins the duel and becomes the fastest draw in the quantum west!
 

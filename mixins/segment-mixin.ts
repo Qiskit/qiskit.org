@@ -28,8 +28,7 @@ export const segmentMixin = {
       window.digitalData = {
         page: {
           pageInfo: {
-            pageID: `${self.to}`,
-            productTitle: 'experiments',
+            productTitle: self.title,
             analytics: {
               category: 'Qiskit.org'
             }
@@ -40,7 +39,7 @@ export const segmentMixin = {
       if (window.bluemixAnalytics && window.bluemixAnalytics.pageEvent) {
         window.bluemixAnalytics.pageEvent(
           'Qiskit.org', 
-          'experiments', 
+          self.belongsTo, 
           {
             navigationType: 'pushState',
             productTitle: self.title,
