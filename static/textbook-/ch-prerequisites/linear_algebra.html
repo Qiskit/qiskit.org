@@ -1,0 +1,1971 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+
+  <script>
+(function () {
+  'use strict'
+  window.digitalData = {
+    page: {
+      pageInfo: {
+        productTitle: 'IBM Q Experience',
+        analytics: {
+          category: 'Qiskit.org'
+        }
+      }
+    }
+  }
+  window._analytics = {
+    segment_key: 'ffdYLviQze3kzomaINXNk6NwpY9LlXcw'
+  }
+}());
+</script>
+<script async src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,minimum-scale=1">
+
+  <title>Linear Algebra</title>
+  <meta name="description" content="            An Introduction to Linear Algebra for Quantum Computing    from matplotlib import pyplot as pltimport numpy as npfrom qiskit import *from qiskit....">
+
+  <link rel="canonical" href="https://community.qiskit.org/textbook/ch-prerequisites/linear_algebra.html">
+  <link rel="alternate" type="application/rss+xml" title="Qiskit Textbook" href="https://community.qiskit.org/textbook/feed.xml">
+
+  <meta property="og:url"         content="https://community.qiskit.org/textbook/ch-prerequisites/linear_algebra.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Linear Algebra" />
+<meta property="og:description" content="            An Introduction to Linear Algebra for Quantum Computing    from matplotlib import pyplot as pltimport numpy as npfrom qiskit import *from qiskit...." />
+<meta property="og:image"       content="https://community.qiskit.org/textbook/images/logo/logo.png" />
+
+<meta name="twitter:card" content="summary">
+
+
+  <script type="application/ld+json">
+  {
+  "@context": "http://schema.org",
+  "@type": "NewsArticle",
+  "mainEntityOfPage": "https://community.qiskit.org/textbook/ch-prerequisites/linear_algebra.html",
+  "headline": "Linear Algebra",
+  "datePublished": "2019-12-07T20:59:38+00:00",
+  "dateModified": "2019-12-07T20:59:38+00:00",
+  "description": "            An Introduction to Linear Algebra for Quantum Computing    from matplotlib import pyplot as pltimport numpy as npfrom qiskit import *from qiskit....",
+  "author": {
+    "@type": "Person",
+    "name": "The Qiskit Team"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Data 100 at UC Berkeley",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://community.qiskit.org/textbook",
+      "width": 60,
+      "height": 60
+    }
+  },
+  "image": {
+    "@type": "ImageObject",
+    "url": "https://community.qiskit.org/textbook",
+    "height": 60,
+    "width": 60
+  }
+}
+
+  </script>
+  <link rel="stylesheet" href="/textbook/assets/css/styles.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css ">
+
+  <!-- <link rel="manifest" href="/manifest.json"> -->
+  <!-- <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#efae0a"> -->
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+  <meta name="theme-color" content="#233947">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/x-icon" href="/textbook/images/logo/favicon.ico">
+
+  <!-- MathJax Config -->
+  <!-- Allow inline math using $ and automatically break long math lines -->
+<!-- (mostly) copied from nbconvert configuration -->
+<!-- https://github.com/jupyter/nbconvert/blob/master/nbconvert/templates/html/mathjax.tpl -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true,
+        processEnvironments: true
+    },
+    // Center justify equations in code and markdown cells. Elsewhere
+    // we use CSS to left justify single line equations in code cells.
+    displayAlign: 'center',
+    "HTML-CSS": {
+        styles: {'.MathJax_Display': {"margin": 0}},
+        linebreaks: { automatic: true },
+    }
+});
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_HTML' async></script>
+
+  <!-- DOM updating function -->
+  <script>
+const runWhenDOMLoaded = cb => {
+  if (document.readyState != 'loading') {
+    cb()
+  } else if (document.addEventListener) {
+    document.addEventListener('DOMContentLoaded', cb)
+  } else {
+    document.attachEvent('onreadystatechange', function() {
+      if (document.readyState == 'complete') cb()
+    })
+  }
+}
+
+// Helper function to init things quickly
+initFunction = function(myfunc) {
+  runWhenDOMLoaded(myfunc);
+  document.addEventListener('turbolinks:load', myfunc);
+};
+</script>
+
+  <!-- Define some javascript variables that will be useful in other javascript -->
+  <script>
+    const site_basename = '/textbook';
+  </script>
+
+  <!-- Add AnchorJS to let headers be linked -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js" async></script>
+  <script>
+const initAnchors = () => {
+  if (window.anchors === undefined) {
+    setTimeout(initAnchors, 250)
+    return
+  }
+  anchors.add("main h1, main h2, main h3, main h4")
+}
+
+initFunction(initAnchors);
+</script>
+
+
+  <!-- Include Turbolinks to make page loads fast -->
+  <!-- https://github.com/turbolinks/turbolinks -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/turbolinks/5.2.0/turbolinks.js" async></script>
+  <meta name="turbolinks-cache-control" content="no-cache">
+
+  <!-- Selectors for elements on the page -->
+  <script>
+/**
+ * Select various elements on the page for later use
+ */
+
+// IDs we'll attach to cells
+const codeCellId = index => `codecell${index}`
+const inputCellId = index => `inputcell${index}`
+
+pageElements = {}
+
+// All code cells
+findCodeCells = function() {
+    var codeCells = document.querySelectorAll('div.c-textbook__content > div.highlighter-rouge > div.highlight > pre, div.input_area pre, div.text_cell_render div.highlight pre')
+    pageElements['codeCells'] = codeCells;
+
+    codeCells.forEach((codeCell, index) => {
+      const id = codeCellId(index)
+      codeCell.setAttribute('id', id)
+    })
+};
+
+initFunction(findCodeCells);
+
+// All cells in general
+findInputCells = function() {
+    var inputCells = document.querySelectorAll('div.jb_cell')
+    pageElements['inputCells'] = inputCells;
+
+    inputCells.forEach((inputCell, index) => {
+        const id = inputCellId(index)
+        inputCell.setAttribute('id', id)
+    })
+};
+
+initFunction(findInputCells);
+</script>
+
+  <!-- Load nbinteract for widgets -->
+  
+
+  <!-- Load Thebelab for interactive widgets -->
+  <!-- Include Thebelab for interactive code if it's enabled -->
+
+
+
+  <!-- Load the auto-generating TOC -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js" async></script>
+<script>
+const initToc = () => {
+  if (window.tocbot === undefined) {
+    setTimeout(initToc, 250)
+    return
+  }
+
+  // Check whether we have any sidebar content. If not, then show the sidebar earlier.
+  var SIDEBAR_CONTENT_TAGS = ['.tag_full_width', '.tag_popout'];
+  var sidebar_content_query = SIDEBAR_CONTENT_TAGS.join(', ')
+  if (document.querySelectorAll(sidebar_content_query).length === 0) {
+    document.querySelector('nav.onthispage').classList.add('no_sidebar_content')
+  }
+
+  // Initialize the TOC bot
+  tocbot.init({
+    tocSelector: 'nav.onthispage',
+    contentSelector: '.c-textbook__content',
+    headingSelector: 'h2, h3',
+    orderedList: false,
+    collapseDepth: 6,
+    listClass: 'toc__menu',
+    activeListItemClass: "",  // Not using
+    activeLinkClass: "", // Not using
+  });
+
+}
+initFunction(initToc);
+</script>
+
+
+  <!-- Google analytics -->
+  <script src="/textbook/assets/js/ga.js" async></script>
+
+  <!-- Clipboard copy button -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" async></script>
+
+  <!-- Load custom website scripts -->
+  <script src="/textbook/assets/js/scripts.js" async></script>
+
+  <!-- Load custom user CSS and JS  -->
+  <script src="/textbook/assets/custom/custom.js" async></script>
+  <link rel="stylesheet" href="/textbook/assets/custom/custom.css">
+
+  <!-- Update interact links w/ REST param, is defined in includes so we can use templates -->
+  
+
+  <!-- Lunr search code - will only be executed on the /search page -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.6/lunr.min.js" async></script>
+  <script>var initQuery = function() {
+  // See if we have a search box
+  var searchInput = document.querySelector('input#lunr_search');
+  if (searchInput === null) {
+    return;
+  }
+
+  // Function to parse our lunr cache
+  var idx = lunr(function () {
+    this.field('title')
+    this.field('excerpt')
+    this.field('categories')
+    this.field('tags')
+    this.ref('id')
+
+    this.pipeline.remove(lunr.trimmer)
+
+    for (var item in store) {
+      this.add({
+        title: store[item].title,
+        excerpt: store[item].excerpt,
+        categories: store[item].categories,
+        tags: store[item].tags,
+        id: item
+      })
+    }
+  });
+
+  // Run search upon keyup
+  searchInput.addEventListener('keyup', function () {
+    var resultdiv = document.querySelector('#results');
+    var query = document.querySelector("input#lunr_search").value.toLowerCase();
+    var result =
+      idx.query(function (q) {
+        query.split(lunr.tokenizer.separator).forEach(function (term) {
+          q.term(term, { boost: 100 })
+          if(query.lastIndexOf(" ") != query.length-1){
+            q.term(term, {  usePipeline: false, wildcard: lunr.Query.wildcard.TRAILING, boost: 10 })
+          }
+          if (term != ""){
+            q.term(term, {  usePipeline: false, editDistance: 1, boost: 1 })
+          }
+        })
+      });
+
+      // Empty the results div
+      while (resultdiv.firstChild) {
+        resultdiv.removeChild(resultdiv.firstChild);
+      }
+
+    resultdiv.insertAdjacentHTML('afterbegin', '<p class="results__found">'+result.length+' Result(s) found</p>');
+    for (var item in result) {
+      var ref = result[item].ref;
+      if(store[ref].teaser){
+        var searchitem =
+          '<div class="list__item">'+
+            '<article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">'+
+              '<h2 class="archive__item-title" itemprop="headline">'+
+                '<a href="'+store[ref].url+'" rel="permalink">'+store[ref].title+'</a>'+
+              '</h2>'+
+              '<div class="archive__item-teaser">'+
+                '<img src="'+store[ref].teaser+'" alt="">'+
+              '</div>'+
+              '<p class="archive__item-excerpt" itemprop="description">'+store[ref].excerpt.split(" ").splice(0,20).join(" ")+'...</p>'+
+            '</article>'+
+          '</div>';
+      }
+      else{
+    	  var searchitem =
+          '<div class="list__item">'+
+            '<article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">'+
+              '<h2 class="archive__item-title" itemprop="headline">'+
+                '<a href="'+store[ref].url+'" rel="permalink">'+store[ref].title+'</a>'+
+              '</h2>'+
+              '<p class="archive__item-excerpt" itemprop="description">'+store[ref].excerpt.split(" ").splice(0,20).join(" ")+'...</p>'+
+            '</article>'+
+          '</div>';
+      }
+      resultdiv.insertAdjacentHTML('beforeend', searchitem);
+    }
+  });
+};
+
+initFunction(initQuery);
+</script>
+
+  <!-- Load JS that depends on site variables -->
+  <script>
+/**
+ * Set up copy/paste for code blocks
+ */
+const clipboardButton = id =>
+  `<a id="copy-button-${id}" class="btn copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#${id}">
+    <img src="/textbook/assets/images/copy-button.svg" alt="Copy to clipboard">
+  </a>`
+
+// Clears selected text since ClipboardJS will select the text when copying
+const clearSelection = () => {
+  if (window.getSelection) {
+    window.getSelection().removeAllRanges()
+  } else if (document.selection) {
+    document.selection.empty()
+  }
+}
+
+// Changes tooltip text for two seconds, then changes it back
+const temporarilyChangeTooltip = (el, newText) => {
+  const oldText = el.getAttribute('data-tooltip')
+  el.setAttribute('data-tooltip', newText)
+  setTimeout(() => el.setAttribute('data-tooltip', oldText), 2000)
+}
+
+const addCopyButtonToCodeCells = () => {
+  // If ClipboardJS hasn't loaded, wait a bit and try again. This
+  // happens because we load ClipboardJS asynchronously.
+  if (window.ClipboardJS === undefined) {
+    setTimeout(addCopyButtonToCodeCells, 250)
+    return
+  }
+
+  pageElements['codeCells'].forEach((codeCell) => {
+    const id = codeCell.getAttribute('id')
+    if (document.getElementById("copy-button" + id) == null) {
+      codeCell.insertAdjacentHTML('afterend', clipboardButton(id));
+    }
+  })
+
+  const clipboard = new ClipboardJS('.copybtn')
+  clipboard.on('success', event => {
+    clearSelection()
+    temporarilyChangeTooltip(event.trigger, 'Copied!')
+  })
+
+  clipboard.on('error', event => {
+    temporarilyChangeTooltip(event.trigger, 'Failed to copy')
+  })
+
+  // Get rid of clipboard before the next page visit to avoid memory leak
+  document.addEventListener('turbolinks:before-visit', () =>
+    clipboard.destroy()
+  )
+}
+
+initFunction(addCopyButtonToCodeCells);
+</script>
+
+
+  <!-- Hide cell code -->
+  <script>
+    /**
+    Add buttons to hide code cells
+    */
+
+
+    var setCodeCellVisibility = function (inputField, kind) {
+        // Update the image and class for hidden
+        var id = inputField.getAttribute('data-id');
+        var codeCell = document.querySelector(`#${id} div.highlight`);
+
+        if (kind === "visible") {
+            codeCell.classList.remove('hidden');
+            inputField.checked = true;
+        } else {
+            codeCell.classList.add('hidden');
+            inputField.checked = false;
+        }
+    }
+
+    var toggleCodeCellVisibility = function (event) {
+        // The label is clicked, and now we decide what to do based on the input field's clicked status
+        if (event.target.tagName === "LABEL") {
+            var inputField = event.target.previousElementSibling;
+        } else {
+            // It is the span inside the target
+            var inputField = event.target.parentElement.previousElementSibling;
+        }
+
+        if (inputField.checked === true) {
+            setCodeCellVisibility(inputField, "visible");
+        } else {
+            setCodeCellVisibility(inputField, "hidden");
+        }
+    }
+
+
+    // Button constructor
+    const hideCodeButton = id => `<input class="hidebtn" type="checkbox" id="hidebtn${id}" data-id="${id}"><label title="Toggle cell" for="hidebtn${id}" class="plusminus"><span class="pm_h"></span><span class="pm_v"></span></label>`
+
+    var addHideButton = function () {
+        // If a hide button is already added, don't add another
+        if (document.querySelector('div.tag_hide_input input') !== null) {
+            return;
+        }
+
+        // Find the input cells and add a hide button
+        pageElements['inputCells'].forEach(function (inputCell) {
+            if (!inputCell.classList.contains("tag_hide_input")) {
+                // Skip the cell if it doesn't have a hidecode class
+                return;
+            }
+
+            const id = inputCell.getAttribute('id')
+
+            // Insert the button just inside the end of the next div
+            inputCell.querySelector('div.input').insertAdjacentHTML('beforeend', hideCodeButton(id))
+
+            // Set up the visibility toggle
+            hideLink = document.querySelector(`#${id} div.inner_cell + input + label`);
+            hideLink.addEventListener('click', toggleCodeCellVisibility)
+        });
+    }
+
+
+    // Initialize the hide buttos
+    var initHiddenCells = function () {
+        // Add hide buttons to the cells
+        addHideButton();
+
+        // Toggle the code cells that should be hidden
+        document.querySelectorAll('div.tag_hide_input input').forEach(function (item) {
+            setCodeCellVisibility(item, 'hidden');
+            item.checked = true;
+        })
+    }
+
+    initFunction(initHiddenCells);
+
+</script>
+
+  <!-- Printing the screen -->
+  <!-- Include nbinteract for interactive widgets -->
+<script src="https://printjs-4de6.kxcdn.com/print.min.js" async></script>
+<script>
+printContent = () => {
+    // MathJax displays a second version of any math for assistive devices etc.
+    // This prevents double-rendering in the PDF output.
+    var ignoreAssistList = [];
+    assistives = document.querySelectorAll('.MathJax_Display span.MJX_Assistive_MathML').forEach((element, index) => {
+        var thisId = 'MathJax-assistive-' + index.toString();
+        element.setAttribute('id', thisId);
+        ignoreAssistList.push(thisId)
+    });
+
+    // Print the actual content object
+    printJS({
+        printable: 'textbook_content',
+        type: 'html',
+        css: "/textbook/assets/css/styles.css",
+        scanStyles: false,
+        targetStyles: ["*"],
+        ignoreElements: ignoreAssistList
+    })
+};
+
+initPrint = () => {
+    document.querySelector('#interact-button-print').addEventListener('click', printContent)
+}
+
+initFunction(initPrint)
+</script>
+
+</head>
+
+  <body>
+    <!-- .js-show-sidebar shows sidebar by default -->
+    <div id="js-textbook" class="c-textbook js-show-sidebar">
+      
+
+
+
+<nav id="js-sidebar" class="c-textbook__sidebar">
+  <a href="https://delapuente.github.io/qiskit-textbook"><img src="/textbook/images/logo/logo.png" class="textbook_logo" id="sidebar-logo" data-turbolinks-permanent/></a>
+  <h2 class="c-sidebar__title">Qiskit Textbook</h2>
+  <ul class="c-sidebar__chapters">
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook/preface.html"
+        >
+          
+          Preface
+        </a>
+
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook/upcoming.html"
+        >
+          
+          Upcoming
+        </a>
+
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook/ch-prerequisites/python-and-jupyter-notebooks.html"
+        >
+          
+            0.
+          
+          Prerequisites
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-prerequisites/python-and-jupyter-notebooks.html"
+                >
+                  
+                    0.1
+                  
+                  Python and Jupyter Notebooks
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-prerequisites/qiskit.html"
+                >
+                  
+                    0.2
+                  
+                  Qiskit
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry c-sidebar__entry--active"
+                  href="/textbook/ch-prerequisites/linear_algebra.html"
+                >
+                  
+                    0.3
+                  
+                  Linear Algebra
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook/ch-states/introduction.html"
+        >
+          
+            1.
+          
+          Quantum States and Qubits
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-states/introduction.html"
+                >
+                  
+                    1.1
+                  
+                  Introduction
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-states/atoms-computation.html"
+                >
+                  
+                    1.2
+                  
+                  The Atoms of Computation
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-states/unique-properties-qubits.html"
+                >
+                  
+                    1.3
+                  
+                  The Unique Properties of Qubits
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-states/writing-down-qubit-states.html"
+                >
+                  
+                    1.4
+                  
+                  Writing Down Qubit States
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-states/pauli-matrices-bloch-sphere.html"
+                >
+                  
+                    1.5
+                  
+                  Pauli Matrices and the Bloch Sphere
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-states/states-many-qubits.html"
+                >
+                  
+                    1.6
+                  
+                  States for Many Qubits
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook/ch-gates/introduction.html"
+        >
+          
+            2.
+          
+          Single Qubits and Multi-Qubits gates
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-gates/introduction.html"
+                >
+                  
+                    2.1
+                  
+                  Introduction
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-gates/quantum-gates.html"
+                >
+                  
+                    2.2
+                  
+                  Quantum Gates
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-gates/fun-matrices.html"
+                >
+                  
+                    2.3
+                  
+                  Fun with Matrices
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-gates/standard-gate-set.html"
+                >
+                  
+                    2.4
+                  
+                  The Standard Gate Set
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-gates/proving-universality.html"
+                >
+                  
+                    2.5
+                  
+                  Proving Universality
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-gates/basic-circuit-identities.html"
+                >
+                  
+                    2.6
+                  
+                  Basic Circuit Identities
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook/ch-ex/ex1.html"
+        >
+          
+          Problems
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-ex/ex1.html"
+                >
+                  
+                  Set 1. Classical Logic Gates with Quantum Circuits
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-ex/ex2.html"
+                >
+                  
+                  Set 2. Basic Synthesis of Single-Qubit Gates
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-ex/ex3.html"
+                >
+                  
+                  Set 3. Building the Best AND Gate
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook/ch-algorithms/teleportation.html"
+        >
+          
+            3.
+          
+          Quantum Algorithms
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-algorithms/teleportation.html"
+                >
+                  
+                    3.1
+                  
+                  Quantum Teleportation
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-algorithms/deutsch-josza.html"
+                >
+                  
+                    3.2
+                  
+                  Deutsch-Josza Algorithm
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-algorithms/bernstein-vazirani.html"
+                >
+                  
+                    3.3
+                  
+                  Bernstein-Vazirani Algorithm
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-algorithms/simon.html"
+                >
+                  
+                    3.4
+                  
+                  Simon's Algorithm
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-algorithms/quantum-fourier-transform.html"
+                >
+                  
+                    3.5
+                  
+                  Quantum Fourier Transform
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-algorithms/quantum-phase-estimation.html"
+                >
+                  
+                    3.6
+                  
+                  Quantum Phase Estimation
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-algorithms/grover.html"
+                >
+                  
+                    3.7
+                  
+                  Grover's Algorithm
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook/ch-applications/vqe-molecules.html"
+        >
+          
+            4.
+          
+          Quantum Algorithms for Applications
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-applications/vqe-molecules.html"
+                >
+                  
+                    4.1
+                  
+                  Simulating Molecules using VQE
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-applications/satisfiability-grover.html"
+                >
+                  
+                    4.2
+                  
+                  Solving Satisfiability Problems using Grover's Algorithm
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook/ch-quantum-hardware/calibrating-qubits-openpulse.html"
+        >
+          
+            5.
+          
+          Investigating Quantum Hardware Using Qiskit
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-quantum-hardware/calibrating-qubits-openpulse.html"
+                >
+                  
+                    5.1
+                  
+                  Calibrating Qubits with OpenPulse
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-quantum-hardware/error-correction-repetition-code.html"
+                >
+                  
+                    5.2
+                  
+                  Introduction to Quantum Error Correction using Repetition Codes
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-quantum-hardware/measurement-error-mitigation.html"
+                >
+                  
+                    5.3
+                  
+                  Measurement Error Mitigation
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-quantum-hardware/randomized-benchmarking.html"
+                >
+                  
+                    5.4
+                  
+                  Randomized Benchmarking
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-quantum-hardware/measuring-quantum-volume.html"
+                >
+                  
+                    5.5
+                  
+                  Measuring Quantum Volume
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook/ch-paper-implementations/vqls.html"
+        >
+          
+            6.
+          
+          Implementations of Recent Quantum Algorithms
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-paper-implementations/vqls.html"
+                >
+                  
+                    6.1
+                  
+                  Variational Quantum Linear Solver
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+  </ul>
+  <p class="sidebar_footer">Powered by <a href="https://github.com/jupyter/jupyter-book">Jupyter Book</a></p>
+</nav>
+
+      
+      <div class="c-topbar" id="top-navbar">
+  <!-- We show the sidebar by default so we use .is-active -->
+  <div class="c-topbar__buttons">
+    <button
+      id="js-sidebar-toggle"
+      class="hamburger hamburger--arrowalt is-active"
+    >
+      <span class="hamburger-box">
+        <span class="hamburger-inner"></span>
+      </span>
+    </button>
+    <div class="buttons">
+<div class="download-buttons-dropdown">
+    <button id="dropdown-button-trigger" class="interact-button"><i class="fa fa-download"></i></button>
+    <div class="download-buttons">
+        <a href="/textbook/content/ch-prerequisites/linear_algebra.ipynb" download>
+        <button id="interact-button-download" class="interact-button">ORIG</button>
+        </a>
+        
+        <a id="interact-button-print"><button id="interact-button-download" class="interact-button">PDF</button></a>
+    </div>
+</div>
+
+  
+  
+  
+  
+
+
+</div>
+
+  </div>
+  <!-- Empty sidebar placeholder that we'll auto-fill with javascript -->
+  <aside class="sidebar__right">
+    <header><h4 class="nav__title"><i class="fa fa-list"></i>   On this page</h4></header>
+    <nav class="onthispage">
+    </nav>
+  </aside>
+  <a href="/textbook/search.html" class="topbar-right-button" id="search-button"><i class="fa fa-search"></i></a>
+</div>
+
+      <main class="c-textbook__page" tabindex="-1">
+        <div class="c-textbook__content" id="textbook_content">
+              <main class="jupyter-page">
+    <div id="page-info"></div>
+    <div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1>An Introduction to Linear Algebra for Quantum Computing</h1>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">qiskit.visualization</span> <span class="kn">import</span> <span class="n">plot_bloch_vector</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Introduction</strong></p>
+<p>Linear algebra is the language of quantum computing. For this reason, it is crucial to develop a good understanding of the basic mathematical concepts that are built upon in order to arrive at many of the amazing and interesting constructions seen in quantum computation! The goal of this section of the textbook is to start at the absolute basics of linear algebra: vectors and vector spaces, and build a foundation that the reader can then leverage in their study of quantum computing.</p>
+<p><strong>Vectors and Vector Spaces</strong></p>
+<p>We will start our investigation into introductory linear algebra by first discussing one of the most important mathematical quantities in quantum computation, the vector!</p>
+<p>Formally, a <strong>vector</strong> $|v\rangle$ is defined as elements of a set known as a vector space. A more intutive and geometric definition as that a vector "is a mathematical quantity with both direction and magnitude". For instance, consider a vector with $x$ and $y$ components of the form $\begin{pmatrix} 3 \\ 5 \end{pmatrix}$. This vector can be visualized as an arrow pointing in the direction of $3$ unit down the $x$ axis and $5$ units up the $y$ axis:</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">quiver</span><span class="p">([</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">angles</span><span class="o">=</span><span class="s1">&#39;xy&#39;</span><span class="p">,</span> <span class="n">scale_units</span><span class="o">=</span><span class="s1">&#39;xy&#39;</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="../images/ch-prerequisites/linear_algebra_3_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Note that "tail" of the vector doesn't have to be positioned at the origin, all that matters is that it is pointing in the correct direction.</p>
+<p>Now, let's talk about a concrete example of vectors in quantum computing. Oftentimes, in quantum computing, we deal with <strong>state vectors</strong>, which are simply vectors, no different than the one just presented that point to a specific point in space that corresponds to a particular quantum state. Oftentimes, this is visualized using a Bloch sphere. For instance, a vector, representing the state of a quantum system could look something like this arrow, enclosed inside the Bloch sphere, which is the so-called "state" space of all possible points to which our state vectors can "point":</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">plot_bloch_vector</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea output_execute_result">
+<img src="../images/ch-prerequisites/linear_algebra_5_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Hopefully this help to illuminate how vectors can be used to store information about quantum states. This particular state corresponds to an even superposition between $|0\rangle$ and $|1\rangle$ (you can see that the arrow is halfway between $|0\rangle$ at the top and $|1\rangle$ at the bottom of the sphere!). Our vectors are allowed to rotate anywhere on the surface of the sphere, and each of these points represents a different quantum state!</p>
+<p>Now that we have talked about vectors a bit more intuitively, in the context of quantum computing, we can go back to our more formal definition of a vector, which is that a vector is an element of a vector space. From this, it follows that we must define a vector space. A <strong>vector space</strong> $V$ over a <strong>field</strong> F is a set of objects (vectors), where two conditions hold. Firstly, <strong>vector addition</strong> of two vectors $|a\rangle, \ |b\rangle \ \in \ V$ will yield a third vector $|a\rangle \ + \ |b\rangle \ = \ |c\rangle$, also contained in $V$. The second condition is that <strong>scalar multiplication</strong> between some $|a\rangle \ \in \ V$ and some $n \ \in \ F$, denoted by $n|a\rangle$ is also contained within $V$.</p>
+<p>We will now clarify this previous definition by working through a basic example. Let us demonstrate that the set $\mathbb{R}^2$ over the field $\mathbb{R}$ is a vector space. We assert that</p>
+<p><br>
+$$\begin{pmatrix} x_1 \\ y_1 \end{pmatrix} \ + \ \begin{pmatrix} x_1 \\ y_1 \end{pmatrix} \ = \ \begin{pmatrix} x_1 \ + \ x_2 \\ y_1 \ + \ y_2 \end{pmatrix}$$
+<br></p>
+<p>is contained within $\mathbb{R}^2$. Well, this is evidently the case, as the sum of two real numbers is a real number, making both components of the newly-formed vector real numbers, and in turn making the vector be contained in $\mathbb{R}^2$ by definition. We also assert that:</p>
+<p><br>
+$$n |v\rangle \ = \ \begin{pmatrix} nx \\ ny \end{pmatrix} \ \in \ V \ \ \ \ \forall n \ \in \ \mathbb{R}$$
+<br></p>
+<p>This is true as well, as the product of a real number and a real number is in turn a real number, making the entires of the new vector real, and thus proving this statement.</p>
+<p><strong>Matrices and Matrix Operations</strong></p>
+<p>Now that we have introduced vectors, we can turn our attention to another fundamental concept: a <strong>matrix</strong>. The best way to think of matrices from a quantum computational/quantum mechanical perspective is the fact that matrices are mathematical objects that transform vectors to other vectors:</p>
+<p><br>
+$$|v\rangle \ \rightarrow \ |v'\rangle \ = \ M |v\rangle$$
+<br></p>
+<p>Generally, matrices are written as "arrays" of numbers, looking something like this:</p>
+<p><br>
+$$M \ = \ \begin{pmatrix} 1 &amp; -2 &amp; 3 \\ 1 &amp; 5i &amp; 0 \\ 1 \ + \ i &amp; 7 &amp; -4 \end{pmatrix}$$
+<br></p>
+<p>We can actually "apply" a matrix to a vector by performing matrix multiplication. In general, matrix multiplication between two matrices involves taking the first row of the first matrix, and multiplying each element by its "partner" in the first column of the second matrix (the first number of the row is multiplied by the first number of the column, second number of the row and second number of column, etc.) These new numbers are then added up, and we have the first element of the first row of the new matrix! To fill in the rest of the first row, we repeat this process for the second, third, etc. columns of the second matrix. Then we take the second row of the first matrix, and repeat the process for each column of the second matrix, getting the second row. We perform this process until was have used all rows of the first matrix. The resulting matrix is our new matrix! That may have been confusing, so here is an example:</p>
+<p><br>
+$$\begin{pmatrix} 2 &amp; 0 \\ 5 &amp; -1 \end{pmatrix} \begin{pmatrix} -3 &amp; 1 \\ 2 &amp; 1 \end{pmatrix} \ = \ \begin{pmatrix} (2)(-3) + (0)(2) &amp; (2)(1) \ + \ (0)(1) \\ (5)(-3) + (-1)(2) &amp; (5)(1) \ + \ (-1)(1) \end{pmatrix} \ = \ \begin{pmatrix} -6 &amp; 2 \\ -17 &amp; 4 \end{pmatrix}$$
+<br></p>
+<p>As you can see, we simply used the previously outlined proces to arrive at the final matrix! Going back to "applying" matrices to vectors, all we have to realize is that a vector is simply a matrix with $1$ column, so matrix multiplication behaves the exact same way! As we previously discussed, in quantum computing we have some quantum state vector that we are manipulating in order to perform quantum computation. Well, as you can probably guess, the way that we represent the manipulation of that vector mathematically is through the application of matrices. We manipulate qubits in our quantum computer by applying sequences of <strong>quantum gates</strong>. As it turns out, we can express each of these quantum gates as a different matrix that can be "applied" to a start vectors, thus changing the state. For instance, one of the most commonly seen quantum gates in the Pauli-X gate, which is represented by the follwing matrix:</p>
+<p><br>
+$$\sigma_x \ = \ \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}$$
+<br></p>
+<p>This gate acts kind of similarly to the classical NOT logic gate. It maps the computational basis state $|0\rangle$ to $|1\rangle$ and $|1\rangle$ to $|0\rangle$ (it "flips" the state). As actual column vectors, we write the two basis states:</p>
+<p><br>
+$$|0\rangle \ = \ \begin{pmatrix} 1 \\ 0 \end{pmatrix} \ \ \ \ \ \ \ |1\rangle \ = \ \begin{pmatrix} 0 \\ 1 \end{pmatrix}$$
+<br></p>
+<p>So when we apply this matrix to each of the vectors:</p>
+<p><br>
+$$\sigma_x |0\rangle \ = \ \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix} \begin{pmatrix} 1 \\ 0 \end{pmatrix} \ = \ \begin{pmatrix} (0)(1) \ + \ (1)(0) \\ (1)(1) \ + \ (0)(0) \end{pmatrix} \ = \ \begin{pmatrix} 0 \\ 1 \end{pmatrix} \ = \ |1\rangle$$
+<br>
+$$\sigma_x |1\rangle \ = \ \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix} \begin{pmatrix} 0 \\ 1 \end{pmatrix} \ = \ \begin{pmatrix} (0)(0) \ + \ (1)(1) \\ (1)(0) \ + \ (0)(1) \end{pmatrix} \ = \ \begin{pmatrix} 1 \\ 0 \end{pmatrix} \ = \ |0\rangle$$
+<br></p>
+<p>And so the matrix acts on the state vectors exactly as expected!</p>
+<p>Within quantum computation, we often deal with two very important types of matrices: <strong>Hermitian</strong> and <strong>Unitary</strong> matrices. The former is more important in the study of quantum mechanics, but is still definitely worth talking about in a study of quantum computation. The latter is of unparalleled importance in both quantum mechanics and quantum computation, if there is one concept that the reader should take away from this entire linear algebra section, it should be the idea of a unitary matrix.</p>
+<p>Firstly, a Hermitian matrix is simply a matrix that is equal to its <strong>conjugate transpose</strong> (denoted with a $\dagger$ symbol). This essentially means taking a matrix, flipping the sign in its imaginary components, and then reflecting the entries of the maatrix across its main diagonal (the diagonal that goes from the top left corner to the bottom right corner). For instance, a matrix that we commonly use in quantum computation, the Pauli-Y matrix is Hermitian:</p>
+<p><br>
+$$\sigma_y \ = \ \begin{pmatrix} 0 &amp; -i \\ i &amp; 0 \end{pmatrix} \ \Rightarrow \ \sigma_y^{\dagger} \ = \ \begin{pmatrix} 0 &amp; -(i) \\ -(-i) &amp; 0 \end{pmatrix} \ = \ \begin{pmatrix} 0 &amp; -i \\ i &amp; 0 \end{pmatrix} \ = \ \sigma_y$$
+<br></p>
+<p>Notice how we switched the places of the $i$ and the $-i$ (as we are reflecting across the main diagonal, the zeroes remain unchanged), and then flip the sign. A unitary matrix is very similar. Specifically, a unitary matrix is a matrix such that the <strong>inverse matrix</strong> is equal to the conjugate transpose of the original matrix.</p>
+<p>Let's go on a quick tangent and talk a bit about what the <strong>inverse matrix</strong> is. The inverse of some matrix $A$, denoted as $A^{-1}$ is simply a matrix such that:</p>
+<p><br>
+$$A^{-1} A \ = \ A A^{-1} \ = \ \mathbb{I}$$
+<br></p>
+<p>Where $\mathbb{I}$ is the identity matrix. The identity matrix is just a matrix that has zeroes everywhere, except along the main diagonal (top left to bottom right), which is all ones. The reason why it is called the identity matrix is because it acts trivially on any other matrix (it has no effect). If you don't believe me, check it in a couple cases and convince yourself!</p>
+<p>I don't want to go too deep into the inverse matrix, and frankly, when matrices get larger than $2 \ \times \ 2$, calculating the inverse becomes a huge pain and is left to computers for the most part. For a $2 \ \times \ 2$ matrix, the inverse is defined as:</p>
+<p><br>
+$$A \ = \ \begin{pmatrix} a &amp; b \\ c &amp; d \end{pmatrix} \ \Rightarrow \ A^{-1} \ = \ \frac{1}{\text{det} \ A} \begin{pmatrix} d &amp; -b \\ -c &amp; a \end{pmatrix}$$
+<br></p>
+<p>Where $\text{det} \ A$ is the <strong>determinant</strong> of the matrix. Calculating the matrix for anything larger than $2 \ \times \ 2$ is really annoying, so I won't go into it. In the $2 \ \times \ 2$ case, $\text{det} \ A \ = \ ad \ - \ bc$.</p>
+<p>To be completely honest, the calculating of inverse matrices is <strong>rarely</strong> important in quantum computing. Since most of the matrices we deal with are unitary, we already know that the inverse if simply given by taking the conjugate transpose, so we don't have to go through this annoying process of rigorously calculating the invserse.</p>
+<p>Anyways, going back to to unitary matrices, we can now look at a basic example. As it turns out, the Pauli-Y matrix, in addition to being Hermitian, is also unitary (it is equal to its conjugate transpose, which is also equal to its inverse, therefore, the Pauli-Y matrix is its own inverse, that's pretty cool!). We can verify that this matrix is in fact unitary:</p>
+<p><br>
+$$\sigma_y \ = \ \begin{pmatrix} 0 &amp; -i \\ i &amp; 0 \end{pmatrix} \ \ \ \ \ \sigma_y^{\dagger} \ = \ \begin{pmatrix} 0 &amp; -i \\ i &amp; 0 \end{pmatrix} \ \Rightarrow \ \sigma_y^{\dagger} \sigma_y \ = \ \begin{pmatrix} (0)(0) + (-i)(i) &amp; (0)(-i) \ + \ (-i)(0) \\ (i)(0) \ + \ (0)(i) &amp;  (i)(-i) \ + \ (0)(0) \end{pmatrix} \ = \ \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix} \ = \ \mathbb{I}$$
+<br></p>
+<p>The reason why unitary matrices are so important in the context of quantum computation will become more apparent in the section on Hilbert spaces, but the basic idea is that evolution of a quantum state by application of a unitary matrix "preserve" the quantum state in a sense (we will discuss this more rigorously in the Hilbert spaces section, and even more so in the quantum mechanics subtopic of the textbook).</p>
+<p><strong>Spanning Sets, Linear Dependence and Bases</strong></p>
+<p>We are now in a position to discuss the construction of vector spaces. Consider some vector space $V$. We say that some set of vectors $S$ spans a subspace $V_S \ \subset \ V$ (subset closed under vector space operations) of the vector space if we can write any vector in the subspace as a <strong>linear combination</strong> of vectors contained within the spanning set.</p>
+<p>A linear combination of some collection vectors $|v_1\rangle, \ ..., \ |v_n\rangle$ in some vector space over a field $F$ is defined as an arbitrary sum of these vectors (which of course will be another vector, which we will call $|v\rangle$!):</p>
+<p><br>
+$$|v\rangle \ = \ f_1 |v_1\rangle \ + \ f_2 |v_2\rangle \ + \ ... \ + \ f_n |v_n\rangle \ = \ \displaystyle\sum_{i} \ f_i |v_i\rangle$$
+<br></p>
+<p>Where each $f_i$ is some element of $F$. Now, if we have a set of vectors that spans a space, we are simply saying that <strong>any other vector</strong> in the vector space can be written as a linear combination of these vectors.</p>
+<p>Now, we are in a position to define a <strong>basis</strong>, which is a specific case of a spanning set, but first, we must talk about <strong>linear dependence</strong>. This is a fairly straightforward idea as well. A set of vectors $|v_1\rangle, \ ..., \ |v_n\rangle$ is said to be linearly dependent if there exist corresponding,  coefficients for each vector, $b_i \ \in \ F$, such that:</p>
+<p><br>
+$$b_1 |v_1\rangle \ + \ b_2 |v_2\rangle \ + \ ... \ + \ b_n |v_n\rangle \ = \ \displaystyle\sum_{i} \ b_i |v_i\rangle \ = \ 0$$
+<br></p>
+<p>Where at least one of the $b_i$ coefficients is non-zero. This is equivalent to the more intuitive statement that "the set of vectors can be expressed as linear combinations of each other". This can be proven fairly simply. Let us have the set $\{|v_1\rangle, \ ..., \ |v_n\rangle \}$ along with the corresponding coefficients $\{|b_1\rangle, \ ..., \ |b_n\rangle \}$, such that the linear combination is equal to $0$. Since there is at least one vector with a non-zero coefficient, we choose a term in the linear combination $b_a |v_a\rangle$:</p>
+<p><br>
+$$\displaystyle\sum_{i} \ b_i |v_i\rangle \ = \ b_a |v_a\rangle \ + \ \displaystyle\sum_{i, \ i \ \neq \ a} \ b_i |v_i\rangle \ = \ 0 \ \Rightarrow \ |v_a\rangle \ = \ - \displaystyle\sum_{i, \ i \ \neq \ a} \ \frac{b_i}{b_a} |v_i\rangle \ = \ \displaystyle\sum_{i, \ i \ \neq \ a} \ c_i |v_i\rangle$$
+<br></p>
+<p>In the case that $b_a$ is the only non-zero coefficient, it is necessarily true that $|v_a\rangle$ is the null vector, automatically making the set linearly dependent. If this is not the case, $|v_a\rangle$ has been written as a linear combination of non-zero vectors, as was shown above. To prove the converse, we assume that there exists some vector $|v_a\rangle$ in the subspace $|v_1\rangle, ..., \ |v_n\rangle$ that can be written as a linear combination of other vectors in the subspace. This means that:</p>
+<p><br>
+$$|v_a\rangle \ = \ \displaystyle\sum_{s} b_s |v_s\rangle$$
+<br></p>
+<p>Where $s$ is an index that runs over a subset of the subspace. It follows that:</p>
+<p><br>
+$$|v_a\rangle \ - \ \displaystyle\sum_{s} b_s |v_s\rangle \ = \ |v_a\rangle \ - \ (|v_{s_1}\rangle \ + \ ... \ + \ |v_{s_r}\rangle) \ = \ 0$$
+<br></p>
+<p>For all vectors in the subspace that are not included in the subset indexed by $s$, we set their coefficients, indexed by $q$ equal to $0$. Thus,</p>
+<p><br>
+$$|v_a\rangle \ - \ (|v_{s_1}\rangle \ + \ ... \ + \ |v_{s_r}\rangle) \ + \ (0)(|v_{q_1}\rangle \ + \ ... \ + \ |v_{q_t}\rangle) \ = \ 0$$
+<br></p>
+<p>Which is a linear combination of all elements in the subspace $|v_1\rangle, \ ..., \ |v_n\rangle$ which is equal to $0$, thus completing the proof that the two definitions of linear dependence imply each other.</p>
+<p>Let's now consider a basic example. For instance, consider the set of two vectors in $\mathbb{R}^2$, consisting of $|a\rangle \ = \ \begin{pmatrix} 1 \\ 0 \end{pmatrix}$ and $|b\rangle \ = \ \begin{pmatrix} 2 \\ 0 \end{pmatrix}$. Well, for example, if we choose the field over our vector space to be $\mathbb{R}$, then we can create a linear combination of these vectors that equates to $0$. For example:</p>
+<p><br>
+$$2|a\rangle \ - \ |b\rangle \ = \ 0$$
+<br></p>
+<p>A set of vectors is said to be <strong>linearly independent</strong> if a linear combination of vectors is $0$ only if every coefficient is equal to $0$.</p>
+<p>The notion of a basis is simply a <strong>linearly independent spanning set</strong>. In this sense, the basis of a vector space is the minimal possible set that spans the entire space. We call the size of the basis set the <strong>dimension</strong> of the vector space.</p>
+<p>The reason why bases and spanning sets are so important is becasue they allow us to "shrink down" vector spaces and express them in terms of only a few vectors rather than a ton! Oftentimes, we can come to certain conclusions about our basis set that we can generalize to the entire vector space, simply because we know every vector in the space is just a linear combination of the basis vectors. Consider in quantum computation, how one of the bases that we often deal with is $|0\rangle, \ |1\rangle$. We can write any other qubit state as a linear combination of these basis vectors. For instance, the linear combination</p>
+<p><br>
+$$\frac{|0\rangle \ + \ |1\rangle}{\sqrt{2}}$$
+<br></p>
+<p>represents a superposition between the $|0\rangle$ and $|1\rangle$ basis state, with equal probability of measuring the state to be in either one of the basis vector states (this is kind of intuitive, as the "weight" or the "amount of each basis vector" in the linear combination is equal, both being scaled by $1/\sqrt{2}$.</p>
+<p><strong>Hilbert Spaces, Orthonormality, and the Inner Product</strong></p>
+<p>Hilbert Spaces are one of the most important mathematical constructs in quantum mechanics and quantum computation. Less rigorously, a Hilbert space can be thought of as the space state in which all quantum state vectors "live". The main fact that differentiates a Hilbert space from any random vector space is that a Hilbert space is equipped with an <strong>inner product</strong>, which is an operation that can be performed between two vectors, returning a scalar.</p>
+<p>In the context of quantum mechanics and quantum computation, the inner product between two state vectors returns a scalar quantity representing the amount to which the first vector lies along the second vector. From this, the probabilities of measurement in different quantum states, among other things can be calculated (this will be discussed more in the quantum mechanics subtopic).</p>
+<p>For two vectors $|a\rangle$ and $|b\rangle$ in a Hilbert space, we denote the inner product as $\langle a | b \rangle$, where $\langle a |$ is equal to the conjugate transpose of $|a\rangle$, denoted $|a\rangle^{\dagger}$. Thus, the inner product between two vectors of the Hilbert space looks something like:</p>
+<p><br>
+$$\langle a | b \rangle \ = \ \begin{pmatrix} a_1^{*} &amp; a_2^{*} &amp; ... &amp; a_n^{*} \end{pmatrix} \begin{pmatrix} b_1 \\ b_2 \\ . \\ . \\ . \\ b_n \end{pmatrix} \ = \ a_1^{*} b_1 \ + \ a_2^{*} b_2 \ + \ ... \ + \ a_n^{*} b_n$$
+<br></p>
+<p>Where $*$ denotes the complex conjugate of the vector.</p>
+<p>One of the most important conditions for a Hilbert space representing a quantum system is that the inner product of a vector with itself is equal to one: $\langle \psi | \psi \rangle \ = \ 1$. This is the so-called normalization condition, and essentially just states that the length of the vector squared (each componenet of the vector is squared and summed together, by defintion of the inner product) must be equal to one. The physical significance of this is that the length of a vector in a particular direction is representative of the "probability ampltide" of the quantum system with regards to being measured in that particular state. Obviously, the probability of the quantum system being measured in the state that it is actually in must be $1$, after all, the sum of the probabilities of finding the quantum system in any particular state has to equal one (I mean, it has to be in <strong>some</strong> state!).</p>
+<p>Let's consider the Bloch sphere:</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">plot_bloch_vector</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea output_execute_result">
+<img src="../images/ch-prerequisites/linear_algebra_7_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The surface of this sphere, along with the inner product between qubit state vectors, is a valid Hilbert space! In addition to this, it can be seen that the normalization condition holds true, as the radius of the Bloch sphere is $1$, therefore the length squared of each vector must also be equal to one!</p>
+<p>The last thing that is worth noting about Hilbert spaces and the inner product is their relationship to <strong>unitary matrices</strong>. The reason why unitary matrices are so important in quantum computation is because they <strong>preserve the inner product</strong>, meaning that no matter how you transform a vector under a sequence of unitary matrices, the normalization condition still holds true. This can be demonstrated in the following short proof:</p>
+<p><br>
+$$\langle \psi | \psi \rangle \ = \ 1 \ \Rightarrow \ |\psi\rangle \ \rightarrow \ U |\psi\rangle \ = \ |\psi'\rangle \ \Rightarrow \ \langle \psi' | \psi' \rangle \ = \ (U |\psi\rangle)^{\dagger} U|\psi\rangle \ = \ \langle \psi | U^{\dagger} U |\psi\rangle \ = \ \langle \psi | \psi \rangle \ = \ 1$$
+<br></p>
+<p>This essentially means that unitary evolution sends quantum states to other valid quantum states. for a single qubit Hilbert space, represented by the Bloch sphere, unitary transformations correspond to rotations of state vectors to different points on the sphere, not changing the length of the state vector in any way.</p>
+<p><strong>Eigenvectors and Eigenvalues</strong></p>
+<p>Consider the relationship of the form:</p>
+$$A |v\rangle \ = \ \lambda |v\rangle$$<p>Where $A$ is a matrix, and $\lambda$ is some number. If we are given some matrix $A$, and need to find the vectors $|v\rangle$ and numbers $\lambda$ that satisfy this relationship, we call these vectors <strong>eigenvectors</strong> and their corresponding number multipliers <strong>eigenvalues</strong>. Eigenvectors and eigenvalues have very important physical significance in the context of quantum mechanics, and therefore quantum computation. Given some $A$, we exploit an interesting trick in order to find the set of eigenvectors and corresponding eigenvalues. Let us re-arrange our equation as:</p>
+<p><br>
+$$A |v\rangle \ - \ \lambda |v\rangle \ = 0 \ \Rightarrow \ (A \ - \ \lambda \mathbb{I}) |v\rangle \ = \ 0$$
+<br></p>
+<p>Now, if we multiply both sides of this equation by the inverse matrix $(A \ - \ \lambda \mathbb{I})^{-1}$, we get $|v\rangle \ = \ 0$. This is an extraneous solution (we don't allow eigenvectors to be the null vector, or else any eigenvalue/matrix combination would satisfy the eigenvector-eigenvalue relationship). Thus, in order to find the allowed eigenvectors and eigenvalues, we have to assume that the matrix $(A \ - \ \lambda \mathbb{I})$ is <strong>non-invertible</strong>. Recall from earlier that the inverse of a matrix is of the form:</p>
+<p><br>
+$$M^{-1} \ = \ \frac{1}{\text{det} (M)} \ F(M)$$
+<br></p>
+<p>Where $F(M)$ is some new matrix (don't worry about what that matrix actually is, it doesn't matter in this context) that depends on $M$. The part of this equation we are interested in is the inverse of the determinant. If the determinant of the matrix $M$ is $0$, it follows that the inverse is undefined, and thus so is the inverse, making the matrix $M$ non-invertible! Thus, we require that:</p>
+<p><br>
+$$\text{det} (A \ - \ \lambda \mathbb{I}) \ = \ 0$$
+<br></p>
+<p>From this, we can determine $\lambda$, then we plug each value of lambda back into the original equation to get the eigenvalues! Let's do an example, and find the eigenvectors/eigenvalues of the Pauli-Z matrix, $\sigma_z$. We start with:</p>
+<p><br>
+$$\text{det} (\sigma_z \ - \ \lambda \mathbb{I}) \ = \ \text{det} \begin{pmatrix} 1 \ - \ \lambda &amp; 0 \\ 0 &amp; -1 \ - \ \lambda \end{pmatrix}  \ = \ (-1 \ - \ \lambda)(1 \ - \ \lambda) \ = \ 1 \ - \ \lambda^2 \ = \ 0 \ \Rightarrow \ \lambda \ = \ \pm 1$$
+<br></p>
+<p>The equation, in terms of lambda that is obtained when solving the determinant is called the <strong>characteristic polynomial</strong>. We can then plug each of these values back into the original equation. We'll start with $\lambda \ = \ 1$:</p>
+<p><br>
+$$\begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix} |v\rangle \ = \ |v\rangle \ \Rightarrow \ \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix} \begin{pmatrix} a \\ b \end{pmatrix} \ = \ \begin{pmatrix} a \\ b \end{pmatrix} \ \Rightarrow \begin{pmatrix} a \\ -b \end{pmatrix} \ = \ \begin{pmatrix} a \\ b \end{pmatrix}$$
+<br></p>
+<p>So this means that $a$ can be any number and $b$ is $0$. Thus, the vector $\begin{pmatrix} 1 \\ 0 \end{pmatrix}$ forms a basis for all vectors that satisfy our relationship, and is thus the eigenvector that corresponds to the eigenvalue of $1$! We do the same thing for $\lambda \ = \ -1$:</p>
+<p><br>
+$$\begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix} |v\rangle \ = \ -|v\rangle \ \Rightarrow \ \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix} \begin{pmatrix} a \\ b \end{pmatrix} \ = \ \begin{pmatrix} -a \\ -b \end{pmatrix} \ \Rightarrow \begin{pmatrix} a \\ -b \end{pmatrix} \ = \ \begin{pmatrix} -a \\ -b \end{pmatrix}$$
+<br></p>
+<p>This time, $b$ can be any number and $a$ is $0$, thus our basis vector (and thus our eigenvector corresponding to $-1$) is $\begin{pmatrix} 0 \\ 1 \end{pmatrix}$. Notice how the eigenvectors of the Pauli-Z matrix are the quantum computational basis states $|0\rangle$ and $|1\rangle$! This is no coincidence! For instance, when we measure a qubit in the $Z$-basis, we are referring to performing a measurement that collapses the qubit's state into one of the eigenvectors of the Z matrix, either $|0\rangle$ or $|1\rangle$!</p>
+<p><strong>Matrix Exponentials</strong></p>
+<p>The notion of a matrix exponential is a very specific idea, but one that is so important that it warrants its own section in this part of the textbook. Oftentimes in quantum computing (and when I say oftentimes, I mean <strong>all the time</strong>, especially during the creation of variational or parametrized quantum circuits), we will see unitary transformations in the form:</p>
+<p><br>
+$$U \ = \ e^{i\gamma H}$$
+<br></p>
+<p>Where $H$ is some Hermitian matrix and $\gamma$ is some real number. It is fairly simple to prove that all matrices of this form are unitary. Taking the conjugate transpose of $U$, we get:</p>
+<p><br>
+$$U^{\dagger} \ = \ \Big( e^{i\gamma H} \Big)^{\dagger} \ = \ e^{-i \gamma H^{\dagger}}$$
+<br></p>
+<p>But since $H$ is Hermitian, we know that $H^{\dagger} \ = \ H$, thus:</p>
+<p><br>
+$$e^{-i \gamma H^{\dagger}} \ = \ e^{-i \gamma H} \ \Rightarrow \ U^{\dagger} U \ = \ e^{-i \gamma H} e^{i\gamma H} \ = \ \mathbb{I}$$
+<br></p>
+<p>See, fairly straightforward! But wait, a matrix inside of an expinential seems super weird, how is it even still a matrix? Well, this actually becomes much more apparent when we expand our exponential function as a Taylor series. If you recall from calculus, a Taylor series is essentially a way to write any function as an infinite-degree polynomial. I won't go too far into this idea, but the main idea is that we choose the terms of the polynomial and centre it at some point $x_0$ lying on the function we are trying to transform into the polynomial, such that the zeroth, first, second, third, etc. derivative at this point is the same for both the original function and the polynomial. Thus, we write our Taylor series in the form:</p>
+<p><br>
+$$g(x) \ = \ \displaystyle\sum_{n \ = \ 0}^{\infty} \ f^{(n)}(x_0) \ \frac{(x \ - \ x_0)^n}{n!}$$
+<br></p>
+<p>Where $g(x)$ is the polynomial, $f(x)$ is the original function, $f^(n)$ is the $n$-th derivative of $f$, and $x_0$ is the point at which we centre the function. Since we are not approximating, $x_0$ doesn't actually matter, so for simplicity, we choose $x_0 \ = \ 0$, and the Taylor series becomes a Maclaurin series:</p>
+<p><br>
+$$g(x) \ = \ \displaystyle\sum_{n \ = \ 0}^{\infty} \ f^{(n)}(0) \ \frac{x^n}{n!}$$
+<br></p>
+<p>And, so if we choose $f(x) \ = \ e^x$, we can create an equivalent polynomial using the Maclaurin series. Since the derivative of $e^x$ is simply $e^x$, and evidently, $e^0 \ = \ 1$, we get:</p>
+<p><br>
+$$g(x) \ = \ \displaystyle\sum_{n \ = \ 0}^{\infty} \ \frac{x^n}{n!} \ = \ e^x$$
+<br></p>
+<p>And so for some matrix, $i \gamma H$, we get:</p>
+<p><br>
+$$e^{i \gamma H} \ = \ \displaystyle\sum_{n \ = \ 0}^{\infty} \ \frac{(i \gamma H)^n}{n!}$$
+<br></p>
+<p>This makes much more sense, the exponential of a matrix is a matrix. It is an infinite sum of powers of matrices, which looks kind of intimidating, but at least we have concluded that the matrix exponential is in fact a matrix! We are now in a position to demonstrate a very important fact, if we have some matrix $B$ such that $B^2 \ = \ \mathbb{I}$ (this is called an <strong>involutory matrix</strong>), then:</p>
+<p><br>
+$$e^{i \gamma B} \ = \ \cos(\gamma) \mathbb{I} \ + \ i \sin(\gamma) B$$
+<br></p>
+<p>We start with the Maclauren series:</p>
+<p><br>
+$$e^{i \gamma B} \ = \ \displaystyle\sum_{n \ = \ 0}^{\infty} \ \frac{(i \gamma B)^n}{n!}$$
+<br></p>
+<p>Notice that we can split the summation into an imaginary part and a real part, based on whether $n$ is even or odd in each term of the sum:</p>
+<p><br>
+$$\displaystyle\sum_{n \ = \ 0}^{\infty} \ \frac{(i \gamma B)^n}{n!} \ = \ \displaystyle\sum_{n \ = \ 0}^{\infty} \ \frac{(-1)^n \gamma^{2n} B^{2n}}{(2n)!} \ + \ i \displaystyle\sum_{n \ = \ 0}^{\infty} \frac{(-1)^n \gamma^{2n + 1} B^{2n + 1}}{(2n + 1)!}$$
+<br></p>
+<p>Now, let us find the Maclaurin series for both $\sin x$ and $\cos x$. We'll start with $f(x) \ = \ \sin x$:</p>
+<p><br>
+$$\sin x \ = \ \displaystyle\sum_{n \ = \ 0}^{\infty} \ f^{n}(0) \frac{x^n}{n!}$$
+<br></p>
+<p>Well, the derivative of $\sin x$ is <strong>cyclical</strong> in a sense (each arrow represents taking the derivative of the previous function):</p>
+<p><br>
+$$\sin x \ \rightarrow \ \cos x \ \rightarrow \ -\sin x \ \rightarrow \ -\cos x \ \rightarrow \ \sin x$$
+<br></p>
+<p>Since $\sin (0) \ = \ 0$ and $\cos (0) \ = \ 1$, all of the terms with even $n$ become $0$ and we get:</p>
+<p><br>
+$$\displaystyle\sum_{n \ = \ 0}^{\infty} \ f^{n}(0) \frac{x^n}{n!} \ = \ \displaystyle\sum_{n \ = \ 0}^{\infty} \ \frac{(-1)^n x^{2n \ + \ 1}}{(2n \ + \ 1)!}$$
+<br></p>
+<p>This looks awfully similar to the odd term of our original equation, in fact, if we let $x \ = \ \gamma B$, they are exactly the same. We follow a process that is almost identical to show that the even terms are identical to the Maclauren series for $f(x) \ = \ \cos x$:</p>
+<p><br>
+$$\cos x \ = \ \displaystyle\sum_{n \ = \ 0}^{\infty} \ f^{n}(0) \frac{x^n}{n!}$$
+<br>
+$$\Rightarrow \ \cos x \ \rightarrow \ -\sin x \ \rightarrow \ -\cos x \ \rightarrow \ \sin x \ \rightarrow \ \cos x$$
+<br>
+$$\Rightarrow \ \displaystyle\sum_{n \ = \ 0}^{\infty} \ f^{n}(0) \frac{x^n}{n!} \ = \ \displaystyle\sum_{n \ = \ 0}^{\infty} \ \frac{(-1)^n x^{2n}}{(2n)!}$$
+<br></p>
+<p>Now, let us go back to the original equation. Recall that $B^2 \ = \ \mathbb{I}$ For any $n$, we have:</p>
+<p><br>
+$$B^{2n} \ = \ \big( B^2 \Big)^n \ = \ \mathbb{I}^n \ = \ \mathbb{I}$$
+<br>
+$$B^{2n \ + \ 1} \ = \ B \ \big( B^2 \Big)^n \ = \ B \ \mathbb{I}^n \ = \ B \ \mathbb{I} \ = \ B$$
+<br></p>
+<p>Substituting in all of this new information, we get:</p>
+<p><br>
+$$\displaystyle\sum_{n \ = \ 0}^{\infty} \ \frac{(-1)^n \gamma^{2n} B^{2n}}{(2n)!} \ + \ i \displaystyle\sum_{n \ = \ 0}^{\infty} \frac{(-1)^n \gamma^{2n + 1} B^{2n + 1}}{(2n + 1)!} \ = \ \mathbb{I} \displaystyle\sum_{n \ = \ 0}^{\infty} \ \frac{(-1)^n \gamma^{2n}}{(2n)!} \ + \ i B \displaystyle\sum_{n \ = \ 0}^{\infty} \frac{(-1)^n \gamma^{2n + 1} B^{2n + 1}}{(2n + 1)!} \ = \ \cos (\gamma) \mathbb{I} \ + \ i \sin (\gamma) B$$
+<br></p>
+<p>We did it! This fact is <strong>super</strong> useful in quantum computation! Consider the Pauli matrices:</p>
+<p><br>
+$$\sigma_x \ = \ \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}$$
+<br>
+$$\sigma_y \ = \ \begin{pmatrix} 0 &amp; i \\ -i &amp; 0 \end{pmatrix}$$
+<br>
+$$\sigma_z \ = \ \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix}$$
+<br></p>
+<p>These matrices are incredibly important to quantum computation, they are some of the most fundamental "quantum gates" used to manipulate qubits. As it turns out, these operations are not only unitary, they are also <strong>Hermitian</strong> and <strong>Involutory</strong>. This means that a matrix of the form $e^{i \gamma \sigma_k} \ k \ \in \ \{x, \ y, \ z\}$ is not only a valid unitary matrix that can act upon a quantum state vector (a qubit), but it can be expressed using the sine-cosine relationship that we just proved! This is fact very powerful, and is seen throughout quantum computational theory, as gates of this type are used all the time (as you will see in future sections of this textbook)!</p>
+<p>Before we end this section, there is one other useful fact about matrix exponentials that is worth discussing: if we have some matrix $M$, with eigenvectors $|v\rangle$ and corresponding eigenvalues $v$, then:</p>
+<p><br>
+$$e^{M} |v\rangle \ = \ e^v |v\rangle$$
+<br></p>
+<p>This one is much more straightforward to prove:</p>
+<p><br>
+$$e^M |v\rangle \ = \ \displaystyle\sum_{n \ = \ 0}^{\infty} \ \frac{B^n |v\rangle}{n!} \ = \ \displaystyle\sum_{n \ = \ 0}^{\infty} \ \frac{v^n |v\rangle}{n!} \ = \ e^v |v\rangle$$
+<br></p>
+<p>This fact is super useful as well. Often when creating quantum circuits that simulate a certain Hamiltonian (especially for variational circuits), gates of the form $e^{i \gamma \sigma_z}$ will be used. Well, since $|0\rangle$ and $|1\rangle$ are eigenvalues of $\sigma_z$, we can easily determine mathematically that $e^{i \gamma \sigma_z}$ will add a phase of $e^{i \gamma}$ to $|0\rangle$ and will add a phase of $e^{-i\gamma}$ to $|1\rangle$. This then allows us to construct this gate in terms of $CNOT$ and phase/rotation gates fairly easily, as we know mathematically the outcome of the gate on each of the computational basis states.</p>
+<p>This fact doesn't only apply to exponentials of the $\sigma_z$ gate. For example, we can determine the outcome of a gate of the form $e^{i \gamma \sigma_x}$ on the eigenvectors of $\sigma_x$, $(|0\rangle \ + \ |1\rangle)/\sqrt{2}$ and $(|0\rangle \ - \ |1\rangle)/\sqrt{2}$. The same applies for exponentials of the $\sigma_y$ matrix.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+ 
+
+
+    </main>
+    
+        </div>
+        <nav class="c-page__nav">
+  
+    
+    <a id="js-page__nav__prev" class="c-page__nav__prev" href="/textbook/ch-prerequisites/qiskit.html">
+      〈 <span class="u-margin-right-tiny"></span> 
+    </a>
+  
+
+  
+    
+    <a id="js-page__nav__next" class="c-page__nav__next" href="/textbook/ch-states/introduction.html">
+       <span class="u-margin-right-tiny"></span> 〉
+    </a>
+  
+</nav>
+
+        <footer>
+  <p class="footer">This page was created by <a href="https://github.com/jupyter/jupyter-book/graphs/contributors">The Jupyter Book Community</a></p>
+</footer>
+
+      </main>
+    </div>
+  </body>
+</html>

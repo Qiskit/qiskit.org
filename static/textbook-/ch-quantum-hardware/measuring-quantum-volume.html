@@ -1,0 +1,2390 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+
+  <script>
+(function () {
+  'use strict'
+  window.digitalData = {
+    page: {
+      pageInfo: {
+        productTitle: 'IBM Q Experience',
+        analytics: {
+          category: 'Qiskit.org'
+        }
+      }
+    }
+  }
+  window._analytics = {
+    segment_key: 'ffdYLviQze3kzomaINXNk6NwpY9LlXcw'
+  }
+}());
+</script>
+<script async src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,minimum-scale=1">
+
+  <title>Measuring Quantum Volume</title>
+  <meta name="description" content="            Measuring Quantum Volume Introduction Quantum Volume (QV) is a single-number metric that can be measured using a concreteprotocol on near-term qu...">
+
+  <link rel="canonical" href="https://community.qiskit.org/textbook/ch-quantum-hardware/measuring-quantum-volume.html">
+  <link rel="alternate" type="application/rss+xml" title="Qiskit Textbook" href="https://community.qiskit.org/textbook/feed.xml">
+
+  <meta property="og:url"         content="https://community.qiskit.org/textbook/ch-quantum-hardware/measuring-quantum-volume.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Measuring Quantum Volume" />
+<meta property="og:description" content="            Measuring Quantum Volume Introduction Quantum Volume (QV) is a single-number metric that can be measured using a concreteprotocol on near-term qu..." />
+<meta property="og:image"       content="https://community.qiskit.org/textbook/images/logo/logo.png" />
+
+<meta name="twitter:card" content="summary">
+
+
+  <script type="application/ld+json">
+  {
+  "@context": "http://schema.org",
+  "@type": "NewsArticle",
+  "mainEntityOfPage": "https://community.qiskit.org/textbook/ch-quantum-hardware/measuring-quantum-volume.html",
+  "headline": "Measuring Quantum Volume",
+  "datePublished": "2019-12-07T20:59:38+00:00",
+  "dateModified": "2019-12-07T20:59:38+00:00",
+  "description": "            Measuring Quantum Volume Introduction Quantum Volume (QV) is a single-number metric that can be measured using a concreteprotocol on near-term qu...",
+  "author": {
+    "@type": "Person",
+    "name": "The Qiskit Team"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Data 100 at UC Berkeley",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://community.qiskit.org/textbook",
+      "width": 60,
+      "height": 60
+    }
+  },
+  "image": {
+    "@type": "ImageObject",
+    "url": "https://community.qiskit.org/textbook",
+    "height": 60,
+    "width": 60
+  }
+}
+
+  </script>
+  <link rel="stylesheet" href="/textbook/assets/css/styles.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css ">
+
+  <!-- <link rel="manifest" href="/manifest.json"> -->
+  <!-- <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#efae0a"> -->
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+  <meta name="theme-color" content="#233947">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/x-icon" href="/textbook/images/logo/favicon.ico">
+
+  <!-- MathJax Config -->
+  <!-- Allow inline math using $ and automatically break long math lines -->
+<!-- (mostly) copied from nbconvert configuration -->
+<!-- https://github.com/jupyter/nbconvert/blob/master/nbconvert/templates/html/mathjax.tpl -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true,
+        processEnvironments: true
+    },
+    // Center justify equations in code and markdown cells. Elsewhere
+    // we use CSS to left justify single line equations in code cells.
+    displayAlign: 'center',
+    "HTML-CSS": {
+        styles: {'.MathJax_Display': {"margin": 0}},
+        linebreaks: { automatic: true },
+    }
+});
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_HTML' async></script>
+
+  <!-- DOM updating function -->
+  <script>
+const runWhenDOMLoaded = cb => {
+  if (document.readyState != 'loading') {
+    cb()
+  } else if (document.addEventListener) {
+    document.addEventListener('DOMContentLoaded', cb)
+  } else {
+    document.attachEvent('onreadystatechange', function() {
+      if (document.readyState == 'complete') cb()
+    })
+  }
+}
+
+// Helper function to init things quickly
+initFunction = function(myfunc) {
+  runWhenDOMLoaded(myfunc);
+  document.addEventListener('turbolinks:load', myfunc);
+};
+</script>
+
+  <!-- Define some javascript variables that will be useful in other javascript -->
+  <script>
+    const site_basename = '/textbook';
+  </script>
+
+  <!-- Add AnchorJS to let headers be linked -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js" async></script>
+  <script>
+const initAnchors = () => {
+  if (window.anchors === undefined) {
+    setTimeout(initAnchors, 250)
+    return
+  }
+  anchors.add("main h1, main h2, main h3, main h4")
+}
+
+initFunction(initAnchors);
+</script>
+
+
+  <!-- Include Turbolinks to make page loads fast -->
+  <!-- https://github.com/turbolinks/turbolinks -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/turbolinks/5.2.0/turbolinks.js" async></script>
+  <meta name="turbolinks-cache-control" content="no-cache">
+
+  <!-- Selectors for elements on the page -->
+  <script>
+/**
+ * Select various elements on the page for later use
+ */
+
+// IDs we'll attach to cells
+const codeCellId = index => `codecell${index}`
+const inputCellId = index => `inputcell${index}`
+
+pageElements = {}
+
+// All code cells
+findCodeCells = function() {
+    var codeCells = document.querySelectorAll('div.c-textbook__content > div.highlighter-rouge > div.highlight > pre, div.input_area pre, div.text_cell_render div.highlight pre')
+    pageElements['codeCells'] = codeCells;
+
+    codeCells.forEach((codeCell, index) => {
+      const id = codeCellId(index)
+      codeCell.setAttribute('id', id)
+    })
+};
+
+initFunction(findCodeCells);
+
+// All cells in general
+findInputCells = function() {
+    var inputCells = document.querySelectorAll('div.jb_cell')
+    pageElements['inputCells'] = inputCells;
+
+    inputCells.forEach((inputCell, index) => {
+        const id = inputCellId(index)
+        inputCell.setAttribute('id', id)
+    })
+};
+
+initFunction(findInputCells);
+</script>
+
+  <!-- Load nbinteract for widgets -->
+  
+
+  <!-- Load Thebelab for interactive widgets -->
+  <!-- Include Thebelab for interactive code if it's enabled -->
+
+
+
+  <!-- Load the auto-generating TOC -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js" async></script>
+<script>
+const initToc = () => {
+  if (window.tocbot === undefined) {
+    setTimeout(initToc, 250)
+    return
+  }
+
+  // Check whether we have any sidebar content. If not, then show the sidebar earlier.
+  var SIDEBAR_CONTENT_TAGS = ['.tag_full_width', '.tag_popout'];
+  var sidebar_content_query = SIDEBAR_CONTENT_TAGS.join(', ')
+  if (document.querySelectorAll(sidebar_content_query).length === 0) {
+    document.querySelector('nav.onthispage').classList.add('no_sidebar_content')
+  }
+
+  // Initialize the TOC bot
+  tocbot.init({
+    tocSelector: 'nav.onthispage',
+    contentSelector: '.c-textbook__content',
+    headingSelector: 'h2, h3',
+    orderedList: false,
+    collapseDepth: 6,
+    listClass: 'toc__menu',
+    activeListItemClass: "",  // Not using
+    activeLinkClass: "", // Not using
+  });
+
+}
+initFunction(initToc);
+</script>
+
+
+  <!-- Google analytics -->
+  <script src="/textbook/assets/js/ga.js" async></script>
+
+  <!-- Clipboard copy button -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" async></script>
+
+  <!-- Load custom website scripts -->
+  <script src="/textbook/assets/js/scripts.js" async></script>
+
+  <!-- Load custom user CSS and JS  -->
+  <script src="/textbook/assets/custom/custom.js" async></script>
+  <link rel="stylesheet" href="/textbook/assets/custom/custom.css">
+
+  <!-- Update interact links w/ REST param, is defined in includes so we can use templates -->
+  
+
+  <!-- Lunr search code - will only be executed on the /search page -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.6/lunr.min.js" async></script>
+  <script>var initQuery = function() {
+  // See if we have a search box
+  var searchInput = document.querySelector('input#lunr_search');
+  if (searchInput === null) {
+    return;
+  }
+
+  // Function to parse our lunr cache
+  var idx = lunr(function () {
+    this.field('title')
+    this.field('excerpt')
+    this.field('categories')
+    this.field('tags')
+    this.ref('id')
+
+    this.pipeline.remove(lunr.trimmer)
+
+    for (var item in store) {
+      this.add({
+        title: store[item].title,
+        excerpt: store[item].excerpt,
+        categories: store[item].categories,
+        tags: store[item].tags,
+        id: item
+      })
+    }
+  });
+
+  // Run search upon keyup
+  searchInput.addEventListener('keyup', function () {
+    var resultdiv = document.querySelector('#results');
+    var query = document.querySelector("input#lunr_search").value.toLowerCase();
+    var result =
+      idx.query(function (q) {
+        query.split(lunr.tokenizer.separator).forEach(function (term) {
+          q.term(term, { boost: 100 })
+          if(query.lastIndexOf(" ") != query.length-1){
+            q.term(term, {  usePipeline: false, wildcard: lunr.Query.wildcard.TRAILING, boost: 10 })
+          }
+          if (term != ""){
+            q.term(term, {  usePipeline: false, editDistance: 1, boost: 1 })
+          }
+        })
+      });
+
+      // Empty the results div
+      while (resultdiv.firstChild) {
+        resultdiv.removeChild(resultdiv.firstChild);
+      }
+
+    resultdiv.insertAdjacentHTML('afterbegin', '<p class="results__found">'+result.length+' Result(s) found</p>');
+    for (var item in result) {
+      var ref = result[item].ref;
+      if(store[ref].teaser){
+        var searchitem =
+          '<div class="list__item">'+
+            '<article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">'+
+              '<h2 class="archive__item-title" itemprop="headline">'+
+                '<a href="'+store[ref].url+'" rel="permalink">'+store[ref].title+'</a>'+
+              '</h2>'+
+              '<div class="archive__item-teaser">'+
+                '<img src="'+store[ref].teaser+'" alt="">'+
+              '</div>'+
+              '<p class="archive__item-excerpt" itemprop="description">'+store[ref].excerpt.split(" ").splice(0,20).join(" ")+'...</p>'+
+            '</article>'+
+          '</div>';
+      }
+      else{
+    	  var searchitem =
+          '<div class="list__item">'+
+            '<article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">'+
+              '<h2 class="archive__item-title" itemprop="headline">'+
+                '<a href="'+store[ref].url+'" rel="permalink">'+store[ref].title+'</a>'+
+              '</h2>'+
+              '<p class="archive__item-excerpt" itemprop="description">'+store[ref].excerpt.split(" ").splice(0,20).join(" ")+'...</p>'+
+            '</article>'+
+          '</div>';
+      }
+      resultdiv.insertAdjacentHTML('beforeend', searchitem);
+    }
+  });
+};
+
+initFunction(initQuery);
+</script>
+
+  <!-- Load JS that depends on site variables -->
+  <script>
+/**
+ * Set up copy/paste for code blocks
+ */
+const clipboardButton = id =>
+  `<a id="copy-button-${id}" class="btn copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#${id}">
+    <img src="/textbook/assets/images/copy-button.svg" alt="Copy to clipboard">
+  </a>`
+
+// Clears selected text since ClipboardJS will select the text when copying
+const clearSelection = () => {
+  if (window.getSelection) {
+    window.getSelection().removeAllRanges()
+  } else if (document.selection) {
+    document.selection.empty()
+  }
+}
+
+// Changes tooltip text for two seconds, then changes it back
+const temporarilyChangeTooltip = (el, newText) => {
+  const oldText = el.getAttribute('data-tooltip')
+  el.setAttribute('data-tooltip', newText)
+  setTimeout(() => el.setAttribute('data-tooltip', oldText), 2000)
+}
+
+const addCopyButtonToCodeCells = () => {
+  // If ClipboardJS hasn't loaded, wait a bit and try again. This
+  // happens because we load ClipboardJS asynchronously.
+  if (window.ClipboardJS === undefined) {
+    setTimeout(addCopyButtonToCodeCells, 250)
+    return
+  }
+
+  pageElements['codeCells'].forEach((codeCell) => {
+    const id = codeCell.getAttribute('id')
+    if (document.getElementById("copy-button" + id) == null) {
+      codeCell.insertAdjacentHTML('afterend', clipboardButton(id));
+    }
+  })
+
+  const clipboard = new ClipboardJS('.copybtn')
+  clipboard.on('success', event => {
+    clearSelection()
+    temporarilyChangeTooltip(event.trigger, 'Copied!')
+  })
+
+  clipboard.on('error', event => {
+    temporarilyChangeTooltip(event.trigger, 'Failed to copy')
+  })
+
+  // Get rid of clipboard before the next page visit to avoid memory leak
+  document.addEventListener('turbolinks:before-visit', () =>
+    clipboard.destroy()
+  )
+}
+
+initFunction(addCopyButtonToCodeCells);
+</script>
+
+
+  <!-- Hide cell code -->
+  <script>
+    /**
+    Add buttons to hide code cells
+    */
+
+
+    var setCodeCellVisibility = function (inputField, kind) {
+        // Update the image and class for hidden
+        var id = inputField.getAttribute('data-id');
+        var codeCell = document.querySelector(`#${id} div.highlight`);
+
+        if (kind === "visible") {
+            codeCell.classList.remove('hidden');
+            inputField.checked = true;
+        } else {
+            codeCell.classList.add('hidden');
+            inputField.checked = false;
+        }
+    }
+
+    var toggleCodeCellVisibility = function (event) {
+        // The label is clicked, and now we decide what to do based on the input field's clicked status
+        if (event.target.tagName === "LABEL") {
+            var inputField = event.target.previousElementSibling;
+        } else {
+            // It is the span inside the target
+            var inputField = event.target.parentElement.previousElementSibling;
+        }
+
+        if (inputField.checked === true) {
+            setCodeCellVisibility(inputField, "visible");
+        } else {
+            setCodeCellVisibility(inputField, "hidden");
+        }
+    }
+
+
+    // Button constructor
+    const hideCodeButton = id => `<input class="hidebtn" type="checkbox" id="hidebtn${id}" data-id="${id}"><label title="Toggle cell" for="hidebtn${id}" class="plusminus"><span class="pm_h"></span><span class="pm_v"></span></label>`
+
+    var addHideButton = function () {
+        // If a hide button is already added, don't add another
+        if (document.querySelector('div.tag_hide_input input') !== null) {
+            return;
+        }
+
+        // Find the input cells and add a hide button
+        pageElements['inputCells'].forEach(function (inputCell) {
+            if (!inputCell.classList.contains("tag_hide_input")) {
+                // Skip the cell if it doesn't have a hidecode class
+                return;
+            }
+
+            const id = inputCell.getAttribute('id')
+
+            // Insert the button just inside the end of the next div
+            inputCell.querySelector('div.input').insertAdjacentHTML('beforeend', hideCodeButton(id))
+
+            // Set up the visibility toggle
+            hideLink = document.querySelector(`#${id} div.inner_cell + input + label`);
+            hideLink.addEventListener('click', toggleCodeCellVisibility)
+        });
+    }
+
+
+    // Initialize the hide buttos
+    var initHiddenCells = function () {
+        // Add hide buttons to the cells
+        addHideButton();
+
+        // Toggle the code cells that should be hidden
+        document.querySelectorAll('div.tag_hide_input input').forEach(function (item) {
+            setCodeCellVisibility(item, 'hidden');
+            item.checked = true;
+        })
+    }
+
+    initFunction(initHiddenCells);
+
+</script>
+
+  <!-- Printing the screen -->
+  <!-- Include nbinteract for interactive widgets -->
+<script src="https://printjs-4de6.kxcdn.com/print.min.js" async></script>
+<script>
+printContent = () => {
+    // MathJax displays a second version of any math for assistive devices etc.
+    // This prevents double-rendering in the PDF output.
+    var ignoreAssistList = [];
+    assistives = document.querySelectorAll('.MathJax_Display span.MJX_Assistive_MathML').forEach((element, index) => {
+        var thisId = 'MathJax-assistive-' + index.toString();
+        element.setAttribute('id', thisId);
+        ignoreAssistList.push(thisId)
+    });
+
+    // Print the actual content object
+    printJS({
+        printable: 'textbook_content',
+        type: 'html',
+        css: "/textbook/assets/css/styles.css",
+        scanStyles: false,
+        targetStyles: ["*"],
+        ignoreElements: ignoreAssistList
+    })
+};
+
+initPrint = () => {
+    document.querySelector('#interact-button-print').addEventListener('click', printContent)
+}
+
+initFunction(initPrint)
+</script>
+
+</head>
+
+  <body>
+    <!-- .js-show-sidebar shows sidebar by default -->
+    <div id="js-textbook" class="c-textbook js-show-sidebar">
+      
+
+
+
+<nav id="js-sidebar" class="c-textbook__sidebar">
+  <a href="https://delapuente.github.io/qiskit-textbook"><img src="/textbook/images/logo/logo.png" class="textbook_logo" id="sidebar-logo" data-turbolinks-permanent/></a>
+  <h2 class="c-sidebar__title">Qiskit Textbook</h2>
+  <ul class="c-sidebar__chapters">
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook/preface.html"
+        >
+          
+          Preface
+        </a>
+
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook/upcoming.html"
+        >
+          
+          Upcoming
+        </a>
+
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook/ch-prerequisites/python-and-jupyter-notebooks.html"
+        >
+          
+            0.
+          
+          Prerequisites
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-prerequisites/python-and-jupyter-notebooks.html"
+                >
+                  
+                    0.1
+                  
+                  Python and Jupyter Notebooks
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-prerequisites/qiskit.html"
+                >
+                  
+                    0.2
+                  
+                  Qiskit
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-prerequisites/linear_algebra.html"
+                >
+                  
+                    0.3
+                  
+                  Linear Algebra
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook/ch-states/introduction.html"
+        >
+          
+            1.
+          
+          Quantum States and Qubits
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-states/introduction.html"
+                >
+                  
+                    1.1
+                  
+                  Introduction
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-states/atoms-computation.html"
+                >
+                  
+                    1.2
+                  
+                  The Atoms of Computation
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-states/unique-properties-qubits.html"
+                >
+                  
+                    1.3
+                  
+                  The Unique Properties of Qubits
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-states/writing-down-qubit-states.html"
+                >
+                  
+                    1.4
+                  
+                  Writing Down Qubit States
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-states/pauli-matrices-bloch-sphere.html"
+                >
+                  
+                    1.5
+                  
+                  Pauli Matrices and the Bloch Sphere
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-states/states-many-qubits.html"
+                >
+                  
+                    1.6
+                  
+                  States for Many Qubits
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook/ch-gates/introduction.html"
+        >
+          
+            2.
+          
+          Single Qubits and Multi-Qubits gates
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-gates/introduction.html"
+                >
+                  
+                    2.1
+                  
+                  Introduction
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-gates/quantum-gates.html"
+                >
+                  
+                    2.2
+                  
+                  Quantum Gates
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-gates/fun-matrices.html"
+                >
+                  
+                    2.3
+                  
+                  Fun with Matrices
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-gates/standard-gate-set.html"
+                >
+                  
+                    2.4
+                  
+                  The Standard Gate Set
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-gates/proving-universality.html"
+                >
+                  
+                    2.5
+                  
+                  Proving Universality
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-gates/basic-circuit-identities.html"
+                >
+                  
+                    2.6
+                  
+                  Basic Circuit Identities
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook/ch-ex/ex1.html"
+        >
+          
+          Problems
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-ex/ex1.html"
+                >
+                  
+                  Set 1. Classical Logic Gates with Quantum Circuits
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-ex/ex2.html"
+                >
+                  
+                  Set 2. Basic Synthesis of Single-Qubit Gates
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-ex/ex3.html"
+                >
+                  
+                  Set 3. Building the Best AND Gate
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook/ch-algorithms/teleportation.html"
+        >
+          
+            3.
+          
+          Quantum Algorithms
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-algorithms/teleportation.html"
+                >
+                  
+                    3.1
+                  
+                  Quantum Teleportation
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-algorithms/deutsch-josza.html"
+                >
+                  
+                    3.2
+                  
+                  Deutsch-Josza Algorithm
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-algorithms/bernstein-vazirani.html"
+                >
+                  
+                    3.3
+                  
+                  Bernstein-Vazirani Algorithm
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-algorithms/simon.html"
+                >
+                  
+                    3.4
+                  
+                  Simon's Algorithm
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-algorithms/quantum-fourier-transform.html"
+                >
+                  
+                    3.5
+                  
+                  Quantum Fourier Transform
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-algorithms/quantum-phase-estimation.html"
+                >
+                  
+                    3.6
+                  
+                  Quantum Phase Estimation
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-algorithms/grover.html"
+                >
+                  
+                    3.7
+                  
+                  Grover's Algorithm
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook/ch-applications/vqe-molecules.html"
+        >
+          
+            4.
+          
+          Quantum Algorithms for Applications
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-applications/vqe-molecules.html"
+                >
+                  
+                    4.1
+                  
+                  Simulating Molecules using VQE
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-applications/satisfiability-grover.html"
+                >
+                  
+                    4.2
+                  
+                  Solving Satisfiability Problems using Grover's Algorithm
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook/ch-quantum-hardware/calibrating-qubits-openpulse.html"
+        >
+          
+            5.
+          
+          Investigating Quantum Hardware Using Qiskit
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-quantum-hardware/calibrating-qubits-openpulse.html"
+                >
+                  
+                    5.1
+                  
+                  Calibrating Qubits with OpenPulse
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-quantum-hardware/error-correction-repetition-code.html"
+                >
+                  
+                    5.2
+                  
+                  Introduction to Quantum Error Correction using Repetition Codes
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-quantum-hardware/measurement-error-mitigation.html"
+                >
+                  
+                    5.3
+                  
+                  Measurement Error Mitigation
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-quantum-hardware/randomized-benchmarking.html"
+                >
+                  
+                    5.4
+                  
+                  Randomized Benchmarking
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry c-sidebar__entry--active"
+                  href="/textbook/ch-quantum-hardware/measuring-quantum-volume.html"
+                >
+                  
+                    5.5
+                  
+                  Measuring Quantum Volume
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook/ch-paper-implementations/vqls.html"
+        >
+          
+            6.
+          
+          Implementations of Recent Quantum Algorithms
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-paper-implementations/vqls.html"
+                >
+                  
+                    6.1
+                  
+                  Variational Quantum Linear Solver
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+  </ul>
+  <p class="sidebar_footer">Powered by <a href="https://github.com/jupyter/jupyter-book">Jupyter Book</a></p>
+</nav>
+
+      
+      <div class="c-topbar" id="top-navbar">
+  <!-- We show the sidebar by default so we use .is-active -->
+  <div class="c-topbar__buttons">
+    <button
+      id="js-sidebar-toggle"
+      class="hamburger hamburger--arrowalt is-active"
+    >
+      <span class="hamburger-box">
+        <span class="hamburger-inner"></span>
+      </span>
+    </button>
+    <div class="buttons">
+<div class="download-buttons-dropdown">
+    <button id="dropdown-button-trigger" class="interact-button"><i class="fa fa-download"></i></button>
+    <div class="download-buttons">
+        <a href="/textbook/content/ch-quantum-hardware/measuring-quantum-volume.ipynb" download>
+        <button id="interact-button-download" class="interact-button">ORIG</button>
+        </a>
+        
+        <a id="interact-button-print"><button id="interact-button-download" class="interact-button">PDF</button></a>
+    </div>
+</div>
+
+  
+  
+  
+  
+
+
+</div>
+
+  </div>
+  <!-- Empty sidebar placeholder that we'll auto-fill with javascript -->
+  <aside class="sidebar__right">
+    <header><h4 class="nav__title"><i class="fa fa-list"></i>   On this page</h4></header>
+    <nav class="onthispage">
+    </nav>
+  </aside>
+  <a href="/textbook/search.html" class="topbar-right-button" id="search-button"><i class="fa fa-search"></i></a>
+</div>
+
+      <main class="c-textbook__page" tabindex="-1">
+        <div class="c-textbook__content" id="textbook_content">
+              <main class="jupyter-page">
+    <div id="page-info"></div>
+    <div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Measuring-Quantum-Volume">Measuring Quantum Volume<a class="anchor-link" href="#Measuring-Quantum-Volume"> </a></h1>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Introduction">Introduction<a class="anchor-link" href="#Introduction"> </a></h2><p><strong>Quantum Volume (QV)</strong> is a single-number metric that can be measured using a concrete
+protocol on near-term quantum computers of modest size. The QV method quantifies
+the largest random circuit of equal width and depth that the computer successfully implements.
+Quantum computing systems with high-fidelity operations, high connectivity, large calibrated gate
+sets, and circuit rewriting toolchains are expected to have higher quantum volumes.</p>
+<h3 id="References">References<a class="anchor-link" href="#References"> </a></h3><p>[1] Andrew W. Cross, Lev S. Bishop, Sarah Sheldon, Paul D. Nation, and Jay M. Gambetta, <em>Validating quantum computers using randomized model circuits</em>, <a href="https://arxiv.org/pdf/1811.12926">https://arxiv.org/pdf/1811.12926</a></p>
+<h2 id="The-Quantum-Volume-Protocol">The Quantum Volume Protocol<a class="anchor-link" href="#The-Quantum-Volume-Protocol"> </a></h2><p>A QV protocol (see [1]) consists of the following steps:</p>
+<p>(We should first import the relevant qiskit classes for the demonstration).</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Import general libraries (needed for functions)</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1">#Import Qiskit classes classes</span>
+<span class="kn">import</span> <span class="nn">qiskit</span>
+<span class="kn">from</span> <span class="nn">qiskit.providers.aer.noise</span> <span class="kn">import</span> <span class="n">NoiseModel</span>
+<span class="kn">from</span> <span class="nn">qiskit.providers.aer.noise.errors.standard_errors</span> <span class="kn">import</span> <span class="n">depolarizing_error</span><span class="p">,</span> <span class="n">thermal_relaxation_error</span>
+
+<span class="c1">#Import the qv function.</span>
+<span class="kn">import</span> <span class="nn">qiskit.ignis.verification.quantum_volume</span> <span class="k">as</span> <span class="nn">qv</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Step-1:-Generate-QV-sequences">Step 1: Generate QV sequences<a class="anchor-link" href="#Step-1:-Generate-QV-sequences"> </a></h3><p>It is well-known that quantum algorithms can be expressed as polynomial-sized quantum circuits built from two-qubit unitary gates. Therefore, a model circuit consists of $d$ layers of random permutations of the qubit labels, followed by random two-qubit gates (from $SU(4)$). When the circuit width $m$ is odd, one of the qubits is idle in each layer.</p>
+<p>More precisely, a <strong>QV circuit</strong> with <strong>depth $d$</strong> and <strong>width $m$</strong>, is a sequence $U = U^{(d)}...U^{(2)}U^{(1)}$ of $d$ layers:
+$$ U^{(t)} = U^{(t)}_{\pi_t(m'-1),\pi_t(m)} \otimes ... \otimes U^{(t)}_{\pi_t(1),\pi_t(2)} $$
+each labeled by times $t = 1 ... d$ and acting on $m' = 2 \lfloor n/2 \rfloor$ qubits. 
+Each layer is specified by choosing a uniformly random permutation $\pi_t \in S_m$ of the $m$ qubit indices
+and sampling each $U^{(t)}_{a,b}$, acting on qubits $a$ and $b$, from the Haar measure on $SU(4)$.</p>
+<p>In the following example we have 6 qubits Q0,Q1,Q3,Q5,Q7,Q10. We are going to look at subsets up to the full set
+(each volume circuit will be depth equal to the number of qubits in the subset)</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># qubit_lists: list of list of qubit subsets to generate QV circuits</span>
+<span class="n">qubit_lists</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">10</span><span class="p">]]</span>
+<span class="c1"># ntrials: Number of random circuits to create for each subset</span>
+<span class="n">ntrials</span> <span class="o">=</span> <span class="mi">50</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We generate the quantum volume sequences. We start with a small example (so it doesn't take too long to run).</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">qv_circs</span><span class="p">,</span> <span class="n">qv_circs_nomeas</span> <span class="o">=</span> <span class="n">qv</span><span class="o">.</span><span class="n">qv_circuits</span><span class="p">(</span><span class="n">qubit_lists</span><span class="p">,</span> <span class="n">ntrials</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As an example, we print the circuit corresponding to the first QV sequence. Note that the ideal circuits are run on the first n qubits (where n is the number of qubits in the subset).</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#pass the first trial of the nomeas through the transpiler to illustrate the circuit</span>
+<span class="n">qv_circs_nomeas</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">compiler</span><span class="o">.</span><span class="n">transpile</span><span class="p">(</span><span class="n">qv_circs_nomeas</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">basis_gates</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;u1&#39;</span><span class="p">,</span><span class="s1">&#39;u2&#39;</span><span class="p">,</span><span class="s1">&#39;u3&#39;</span><span class="p">,</span><span class="s1">&#39;cx&#39;</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">qv_circs_nomeas</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>         ┌──────────────────────────────┐                                  »
+qr_0: |0&gt;┤ U3(0.87222,-3.6056,-0.99855) ├──────────────────────────────────»
+         └┬────────────────────────────┬┘     ┌───────────────────────────┐»
+qr_1: |0&gt;─┤ U3(0.52509,-1.8514,0.3785) ├───■──┤ U3(0.63498,1.5708,4.7124) ├»
+         ┌┴────────────────────────────┤ ┌─┴─┐└──┬─────────────────────┬──┘»
+qr_2: |0&gt;┤ U3(1.9895,0.0074621,5.0423) ├─┤ X ├───┤ U3(1.5708,0,-5.713) ├───»
+         └─────────────────────────────┘ └───┘   └─────────────────────┘   »
+ cr_0: 0 ══════════════════════════════════════════════════════════════════»
+                                                                           »
+ cr_1: 0 ══════════════════════════════════════════════════════════════════»
+                                                                           »
+ cr_2: 0 ══════════════════════════════════════════════════════════════════»
+                                                                           »
+«                                                  »
+«qr_0: ────────────────────────────────────────────»
+«           ┌────────────────────────────────┐     »
+«qr_1: ──■──┤ U3(0.33219,-1.7764e-15,4.7124) ├──■──»
+«      ┌─┴─┐└─┬────────────────────────────┬─┘┌─┴─┐»
+«qr_2: ┤ X ├──┤ U3(1.5708,-3.1416,-1.5708) ├──┤ X ├»
+«      └───┘  └────────────────────────────┘  └───┘»
+«cr_0: ════════════════════════════════════════════»
+«                                                  »
+«cr_1: ════════════════════════════════════════════»
+«                                                  »
+«cr_2: ════════════════════════════════════════════»
+«                                                  »
+«                                                                       »
+«qr_0: ─────────────────────────────────────────────────────────────────»
+«      ┌────────────────────────────┐┌────────────────────────────┐     »
+«qr_1: ┤ U3(1.9521,5.8535,0.045854) ├┤ U3(1.1882,3.6057,-0.89911) ├──■──»
+«      ├────────────────────────────┤├───────────────────────────┬┘┌─┴─┐»
+«qr_2: ┤ U3(0.51454,2.5314,-2.1542) ├┤ U3(0.86532,0.8319,2.0513) ├─┤ X ├»
+«      └────────────────────────────┘└───────────────────────────┘ └───┘»
+«cr_0: ═════════════════════════════════════════════════════════════════»
+«                                                                       »
+«cr_1: ═════════════════════════════════════════════════════════════════»
+«                                                                       »
+«cr_2: ═════════════════════════════════════════════════════════════════»
+«                                                                       »
+«                                                                           »
+«qr_0: ─────────────────────────────────────────────────────────────────────»
+«        ┌───────────────────────────┐       ┌─────────────────────────────┐»
+«qr_1: ──┤ U3(0.94961,1.5708,4.7124) ├────■──┤ U3(0.0076131,3.1416,1.5708) ├»
+«      ┌─┴───────────────────────────┴─┐┌─┴─┐└┬────────────────────────────┤»
+«qr_2: ┤ U3(1.5708,-4.4409e-16,-5.938) ├┤ X ├─┤ U3(1.5708,-3.1416,-1.5708) ├»
+«      └───────────────────────────────┘└───┘ └────────────────────────────┘»
+«cr_0: ═════════════════════════════════════════════════════════════════════»
+«                                                                           »
+«cr_1: ═════════════════════════════════════════════════════════════════════»
+«                                                                           »
+«cr_2: ═════════════════════════════════════════════════════════════════════»
+«                                                                           »
+«                                                                            »
+«qr_0: ───────────────────────────────────────────────────────────────────■──»
+«            ┌────────────────────────────┐┌───────────────────────────┐┌─┴─┐»
+«qr_1: ──■───┤ U3(1.0471,-1.5044,-2.6216) ├┤ U3(0.83828,-3.7118,-2.27) ├┤ X ├»
+«      ┌─┴─┐┌┴────────────────────────────┤└───────────────────────────┘└───┘»
+«qr_2: ┤ X ├┤ U3(0.68382,-3.5321,-1.3577) ├──────────────────────────────────»
+«      └───┘└─────────────────────────────┘                                  »
+«cr_0: ══════════════════════════════════════════════════════════════════════»
+«                                                                            »
+«cr_1: ══════════════════════════════════════════════════════════════════════»
+«                                                                            »
+«cr_2: ══════════════════════════════════════════════════════════════════════»
+«                                                                            »
+«        ┌───────────────────────────┐        »
+«qr_0: ──┤ U3(0.90513,1.5708,4.7124) ├─────■──»
+«      ┌─┴───────────────────────────┴──┐┌─┴─┐»
+«qr_1: ┤ U3(1.5708,-4.4409e-16,-6.2526) ├┤ X ├»
+«      └────────────────────────────────┘└───┘»
+«qr_2: ───────────────────────────────────────»
+«                                             »
+«cr_0: ═══════════════════════════════════════»
+«                                             »
+«cr_1: ═══════════════════════════════════════»
+«                                             »
+«cr_2: ═══════════════════════════════════════»
+«                                             »
+«      ┌────────────────────────────────┐     ┌─────────────────────────────┐
+«qr_0: ┤ U3(0.25732,-2.2204e-15,4.7124) ├──■──┤ U3(1.7629,3.2103,-0.053929) ├
+«      └─┬────────────────────────────┬─┘┌─┴─┐└┬───────────────────────────┬┘
+«qr_1: ──┤ U3(1.5708,-3.1416,-1.5708) ├──┤ X ├─┤ U3(2.3943,0.23818,0.7056) ├─
+«        └────────────────────────────┘  └───┘ └───────────────────────────┘ 
+«qr_2: ──────────────────────────────────────────────────────────────────────
+«                                                                            
+«cr_0: ══════════════════════════════════════════════════════════════════════
+«                                                                            
+«cr_1: ══════════════════════════════════════════════════════════════════════
+«                                                                            
+«cr_2: ══════════════════════════════════════════════════════════════════════
+«                                                                            
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Step-2:-Simulate-the-ideal-QV-circuits">Step 2: Simulate the ideal QV circuits<a class="anchor-link" href="#Step-2:-Simulate-the-ideal-QV-circuits"> </a></h3><p>The quantum volume method requires that we know the ideal output for each circuit, so we use the statevector simulator in Aer to get the ideal result.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#The Unitary is an identity (with a global phase)</span>
+<span class="n">backend</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;statevector_simulator&#39;</span><span class="p">)</span>
+<span class="n">ideal_results</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">trial</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ntrials</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Simulating trial </span><span class="si">%d</span><span class="s1">&#39;</span><span class="o">%</span><span class="k">trial</span>)
+    <span class="n">ideal_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">qiskit</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">qv_circs_nomeas</span><span class="p">[</span><span class="n">trial</span><span class="p">],</span> <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Simulating trial 0
+Simulating trial 1
+Simulating trial 2
+Simulating trial 3
+Simulating trial 4
+Simulating trial 5
+Simulating trial 6
+Simulating trial 7
+Simulating trial 8
+Simulating trial 9
+Simulating trial 10
+Simulating trial 11
+Simulating trial 12
+Simulating trial 13
+Simulating trial 14
+Simulating trial 15
+Simulating trial 16
+Simulating trial 17
+Simulating trial 18
+Simulating trial 19
+Simulating trial 20
+Simulating trial 21
+Simulating trial 22
+Simulating trial 23
+Simulating trial 24
+Simulating trial 25
+Simulating trial 26
+Simulating trial 27
+Simulating trial 28
+Simulating trial 29
+Simulating trial 30
+Simulating trial 31
+Simulating trial 32
+Simulating trial 33
+Simulating trial 34
+Simulating trial 35
+Simulating trial 36
+Simulating trial 37
+Simulating trial 38
+Simulating trial 39
+Simulating trial 40
+Simulating trial 41
+Simulating trial 42
+Simulating trial 43
+Simulating trial 44
+Simulating trial 45
+Simulating trial 46
+Simulating trial 47
+Simulating trial 48
+Simulating trial 49
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Next, we load the ideal results into a quantum volume fitter</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">qv_fitter</span> <span class="o">=</span> <span class="n">qv</span><span class="o">.</span><span class="n">QVFitter</span><span class="p">(</span><span class="n">qubit_lists</span><span class="o">=</span><span class="n">qubit_lists</span><span class="p">)</span>
+<span class="n">qv_fitter</span><span class="o">.</span><span class="n">add_statevectors</span><span class="p">(</span><span class="n">ideal_results</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Step-3:-Calculate-the-heavy-outputs">Step 3: Calculate the heavy outputs<a class="anchor-link" href="#Step-3:-Calculate-the-heavy-outputs"> </a></h3><p>To define when a model circuit $U$ has been successfully implemented in practice, we use the <em>heavy output</em> generation problem. The ideal output distribution is $p_U(x) = |\langle x|U|0 \rangle|^2$, 
+where $x \in \{0,1\}^m$ is an observable bit-string.</p>
+<p>Consider the set of output probabilities given by the range of $p_U(x)$ sorted in ascending order 
+$p_0 \leq p_1 \leq \dots \leq p_{2^m-1}$. The median of the set of probabilities is 
+$p_{med} = (p_{2^{m-1}} + p_{2^{m-1}-1})/2$, and the <em>heavy outputs</em> are
+$$ H_U = \{ x \in \{0,1\}^m \text{ such that } p_U(x)&gt;p_{med} \}.$$
+The heavy output generation problem is to produce a set of output strings such that more than two-thirds are heavy.</p>
+<p>As an illustration, we print the heavy outputs from various depths and their probabilities (for trial 0):</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">qubit_list</span> <span class="ow">in</span> <span class="n">qubit_lists</span><span class="p">:</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">qubit_list</span><span class="p">)</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;qv_depth_&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">l</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;_trial_0:&#39;</span><span class="p">,</span> <span class="n">qv_fitter</span><span class="o">.</span><span class="n">_heavy_outputs</span><span class="p">[</span><span class="s1">&#39;qv_depth_&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">l</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;_trial_0&#39;</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>qv_depth_3_trial_0: [&#39;000&#39;, &#39;001&#39;, &#39;100&#39;, &#39;111&#39;]
+qv_depth_4_trial_0: [&#39;0000&#39;, &#39;0100&#39;, &#39;0101&#39;, &#39;1000&#39;, &#39;1001&#39;, &#39;1011&#39;, &#39;1100&#39;, &#39;1101&#39;]
+qv_depth_5_trial_0: [&#39;00000&#39;, &#39;00011&#39;, &#39;00100&#39;, &#39;00101&#39;, &#39;00111&#39;, &#39;01001&#39;, &#39;01011&#39;, &#39;01100&#39;, &#39;10000&#39;, &#39;10011&#39;, &#39;10101&#39;, &#39;10110&#39;, &#39;11000&#39;, &#39;11001&#39;, &#39;11010&#39;, &#39;11101&#39;]
+qv_depth_6_trial_0: [&#39;000011&#39;, &#39;000110&#39;, &#39;000111&#39;, &#39;001000&#39;, &#39;001100&#39;, &#39;001110&#39;, &#39;001111&#39;, &#39;010001&#39;, &#39;010011&#39;, &#39;010101&#39;, &#39;011000&#39;, &#39;011100&#39;, &#39;011101&#39;, &#39;100001&#39;, &#39;100101&#39;, &#39;100110&#39;, &#39;100111&#39;, &#39;101000&#39;, &#39;101001&#39;, &#39;101011&#39;, &#39;101100&#39;, &#39;101101&#39;, &#39;101110&#39;, &#39;101111&#39;, &#39;110011&#39;, &#39;110100&#39;, &#39;110101&#39;, &#39;110110&#39;, &#39;111001&#39;, &#39;111010&#39;, &#39;111011&#39;, &#39;111110&#39;]
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">qubit_list</span> <span class="ow">in</span> <span class="n">qubit_lists</span><span class="p">:</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">qubit_list</span><span class="p">)</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;qv_depth_&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">l</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;_trial_0:&#39;</span><span class="p">,</span> <span class="n">qv_fitter</span><span class="o">.</span><span class="n">_heavy_output_prob_ideal</span><span class="p">[</span><span class="s1">&#39;qv_depth_&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">l</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;_trial_0&#39;</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>qv_depth_3_trial_0: 0.8364265965659454
+qv_depth_4_trial_0: 0.8954287202366203
+qv_depth_5_trial_0: 0.8721440467960914
+qv_depth_6_trial_0: 0.8499058961161158
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Step-4:-Define-the-noise-model">Step 4: Define the noise model<a class="anchor-link" href="#Step-4:-Define-the-noise-model"> </a></h3><p>We define a noise model for the simulator. To simulate decay, we add depolarizing error probabilities to the CNOT and U gates.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">noise_model</span> <span class="o">=</span> <span class="n">NoiseModel</span><span class="p">()</span>
+<span class="n">p1Q</span> <span class="o">=</span> <span class="mf">0.002</span>
+<span class="n">p2Q</span> <span class="o">=</span> <span class="mf">0.02</span>
+<span class="n">noise_model</span><span class="o">.</span><span class="n">add_all_qubit_quantum_error</span><span class="p">(</span><span class="n">depolarizing_error</span><span class="p">(</span><span class="n">p1Q</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s1">&#39;u2&#39;</span><span class="p">)</span>
+<span class="n">noise_model</span><span class="o">.</span><span class="n">add_all_qubit_quantum_error</span><span class="p">(</span><span class="n">depolarizing_error</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">p1Q</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s1">&#39;u3&#39;</span><span class="p">)</span>
+<span class="n">noise_model</span><span class="o">.</span><span class="n">add_all_qubit_quantum_error</span><span class="p">(</span><span class="n">depolarizing_error</span><span class="p">(</span><span class="n">p2Q</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="s1">&#39;cx&#39;</span><span class="p">)</span>
+<span class="c1">#noise_model = None</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can execute the QV sequences either using Qiskit Aer Simulator (with some noise model) or using IBMQ provider, and obtain a list of exp_results.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">backend</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">)</span>
+<span class="n">basis_gates</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;u1&#39;</span><span class="p">,</span><span class="s1">&#39;u2&#39;</span><span class="p">,</span><span class="s1">&#39;u3&#39;</span><span class="p">,</span><span class="s1">&#39;cx&#39;</span><span class="p">]</span> <span class="c1"># use U,CX for now</span>
+<span class="n">shots</span> <span class="o">=</span> <span class="mi">1024</span>
+<span class="n">exp_results</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">trial</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ntrials</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Running trial </span><span class="si">%d</span><span class="s1">&#39;</span><span class="o">%</span><span class="k">trial</span>)
+    <span class="n">exp_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">qiskit</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">qv_circs</span><span class="p">[</span><span class="n">trial</span><span class="p">],</span> <span class="n">basis_gates</span><span class="o">=</span><span class="n">basis_gates</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">,</span> <span class="n">noise_model</span><span class="o">=</span><span class="n">noise_model</span><span class="p">,</span> <span class="n">backend_options</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;max_parallel_experiments&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">})</span><span class="o">.</span><span class="n">result</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Running trial 0
+Running trial 1
+Running trial 2
+Running trial 3
+Running trial 4
+Running trial 5
+Running trial 6
+Running trial 7
+Running trial 8
+Running trial 9
+Running trial 10
+Running trial 11
+Running trial 12
+Running trial 13
+Running trial 14
+Running trial 15
+Running trial 16
+Running trial 17
+Running trial 18
+Running trial 19
+Running trial 20
+Running trial 21
+Running trial 22
+Running trial 23
+Running trial 24
+Running trial 25
+Running trial 26
+Running trial 27
+Running trial 28
+Running trial 29
+Running trial 30
+Running trial 31
+Running trial 32
+Running trial 33
+Running trial 34
+Running trial 35
+Running trial 36
+Running trial 37
+Running trial 38
+Running trial 39
+Running trial 40
+Running trial 41
+Running trial 42
+Running trial 43
+Running trial 44
+Running trial 45
+Running trial 46
+Running trial 47
+Running trial 48
+Running trial 49
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Step-5:-Calculate-the-average-gate-fidelity">Step 5: Calculate the average gate fidelity<a class="anchor-link" href="#Step-5:-Calculate-the-average-gate-fidelity"> </a></h3><p>The <em>average gate fidelity</em> between the $m$-qubit ideal unitaries $U$ and the executed $U'$ is:
+$$ F_{avg}(U,U') = \frac{|Tr(U^{\dagger}U')|^2/2^m+1}{2^m+1}$$</p>
+<p>The observed distribution for an implementation $U'$ of model circuit $U$ is $q_U(x)$, and the probability of sampling
+a heavy output is:
+$$ h_U = \sum_{x \in H_U} q_U(x)$$</p>
+<p>As an illustration, we print the heavy output counts from various depths (for trial 0):</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">qv_fitter</span><span class="o">.</span><span class="n">add_data</span><span class="p">(</span><span class="n">exp_results</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qubit_list</span> <span class="ow">in</span> <span class="n">qubit_lists</span><span class="p">:</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">qubit_list</span><span class="p">)</span>
+    <span class="c1">#print (qv_fitter._heavy_output_counts)</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;qv_depth_&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">l</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;_trial_0:&#39;</span><span class="p">,</span> <span class="n">qv_fitter</span><span class="o">.</span><span class="n">_heavy_output_counts</span><span class="p">[</span><span class="s1">&#39;qv_depth_&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">l</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;_trial_0&#39;</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>qv_depth_3_trial_0: 792
+qv_depth_4_trial_0: 788
+qv_depth_5_trial_0: 736
+qv_depth_6_trial_0: 651
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Step-6:-Calculate-the-achievable-depth">Step 6: Calculate the achievable depth<a class="anchor-link" href="#Step-6:-Calculate-the-achievable-depth"> </a></h3><p>The probability of observing a heavy output by implementing a randomly selected depth $d$ model circuit is:
+$$h_d = \int_U h_U dU$$</p>
+<p>The <em>achievable depth</em> $d(m)$ is the largest $d$ such that we are confident that $h_d &gt; 2/3$. In other words,
+$$ h_1,h_2,\dots,h_{d(m)}&gt;2/3 \text{ and } h_{d(m+1)} \leq 2/3$$</p>
+<p>We now convert the heavy outputs in the different trials and calculate the mean $h_d$ and the error for plotting the graph.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+
+<span class="c1"># Plot the essence by calling plot_rb_data</span>
+<span class="n">qv_fitter</span><span class="o">.</span><span class="n">plot_qv_data</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">show_plt</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Add title and label</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Quantum Volume for up to </span><span class="si">%d</span><span class="s1"> Qubits </span><span class="se">\n</span><span class="s1"> and </span><span class="si">%d</span><span class="s1"> Trials&#39;</span><span class="o">%</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">qubit_lists</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span> <span class="n">ntrials</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="../images/ch-quantum-hardware/measuring-quantum-volume_24_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Step-7:-Calculate-the-Quantum-Volume">Step 7: Calculate the Quantum Volume<a class="anchor-link" href="#Step-7:-Calculate-the-Quantum-Volume"> </a></h3><p>The quantum volume treats the width and depth of a model circuit with equal importance and measures the largest square-shaped (i.e., $m = d$) model circuit a quantum computer can implement successfully on average.</p>
+<p>The <em>quantum volume</em> $V_Q$ is defined as
+$$\log_2 V_Q = \arg\max_{m} \min (m, d(m))$$</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We list the statistics for each depth. For each depth we list if the depth was successful or not and with what confidence interval. For a depth to be successful the confidence interval must be &gt; 97.5%.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">qv_success_list</span> <span class="o">=</span> <span class="n">qv_fitter</span><span class="o">.</span><span class="n">qv_success</span><span class="p">()</span>
+<span class="n">qv_list</span> <span class="o">=</span> <span class="n">qv_fitter</span><span class="o">.</span><span class="n">ydata</span>
+<span class="n">QV</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">for</span> <span class="n">qidx</span><span class="p">,</span> <span class="n">qubit_list</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">qubit_lists</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">qv_list</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">qidx</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">2</span><span class="o">/</span><span class="mi">3</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">qv_success_list</span><span class="p">[</span><span class="n">qidx</span><span class="p">][</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Width/depth </span><span class="si">%d</span><span class="s2"> greater than 2/3 (</span><span class="si">%f</span><span class="s2">) with confidence </span><span class="si">%f</span><span class="s2"> (successful). Quantum volume </span><span class="si">%d</span><span class="s2">&quot;</span><span class="o">%</span>
+                  <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">qubit_list</span><span class="p">),</span><span class="n">qv_list</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">qidx</span><span class="p">],</span><span class="n">qv_success_list</span><span class="p">[</span><span class="n">qidx</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span><span class="n">qv_fitter</span><span class="o">.</span><span class="n">quantum_volume</span><span class="p">()[</span><span class="n">qidx</span><span class="p">]))</span>
+            <span class="n">QV</span> <span class="o">=</span> <span class="n">qv_fitter</span><span class="o">.</span><span class="n">quantum_volume</span><span class="p">()[</span><span class="n">qidx</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Width/depth </span><span class="si">%d</span><span class="s2"> greater than 2/3 (</span><span class="si">%f</span><span class="s2">) with confidence </span><span class="si">%f</span><span class="s2"> (unsuccessful).&quot;</span><span class="o">%</span>
+                  <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">qubit_list</span><span class="p">),</span><span class="n">qv_list</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">qidx</span><span class="p">],</span><span class="n">qv_success_list</span><span class="p">[</span><span class="n">qidx</span><span class="p">][</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Width/depth </span><span class="si">%d</span><span class="s2"> less than 2/3 (unsuccessful).&quot;</span><span class="o">%</span><span class="k">len</span>(qubit_list))
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Width/depth 3 greater than 2/3 (0.796309) with confidence 0.988582 (successful). Quantum volume 8
+Width/depth 4 greater than 2/3 (0.702207) with confidence 0.708690 (unsuccessful).
+Width/depth 5 greater than 2/3 (0.703359) with confidence 0.714988 (unsuccessful).
+Width/depth 6 less than 2/3 (unsuccessful).
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;The Quantum Volume is:&quot;</span><span class="p">,</span> <span class="n">QV</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>The Quantum Volume is: 8
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+ 
+
+
+    </main>
+    
+        </div>
+        <nav class="c-page__nav">
+  
+    
+    <a id="js-page__nav__prev" class="c-page__nav__prev" href="/textbook/ch-quantum-hardware/randomized-benchmarking.html">
+      〈 <span class="u-margin-right-tiny"></span> 
+    </a>
+  
+
+  
+    
+    <a id="js-page__nav__next" class="c-page__nav__next" href="/textbook/ch-paper-implementations/vqls.html">
+       <span class="u-margin-right-tiny"></span> 〉
+    </a>
+  
+</nav>
+
+        <footer>
+  <p class="footer">This page was created by <a href="https://github.com/jupyter/jupyter-book/graphs/contributors">The Jupyter Book Community</a></p>
+</footer>
+
+      </main>
+    </div>
+  </body>
+</html>
