@@ -1,0 +1,2790 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+
+  <script>
+(function () {
+  'use strict'
+  window.digitalData = {
+    page: {
+      pageInfo: {
+        productTitle: 'IBM Q Experience',
+        analytics: {
+          category: 'Qiskit.org'
+        }
+      }
+    }
+  }
+  window._analytics = {
+    segment_key: 'ffdYLviQze3kzomaINXNk6NwpY9LlXcw'
+  }
+}());
+</script>
+<script async src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,minimum-scale=1">
+
+  <title>Grover&#39;s Algorithm</title>
+  <meta name="description" content="            Grover's Algorithm In this section, we introduce Grover's algorithm and how it can be used to solve unstructured search problems. We then impleme...">
+
+  <link rel="canonical" href="https://community.qiskit.org/textbook/ch-algorithms/grover.html">
+  <link rel="alternate" type="application/rss+xml" title="Qiskit Textbook" href="https://community.qiskit.org/textbook/feed.xml">
+
+  <meta property="og:url"         content="https://community.qiskit.org/textbook/ch-algorithms/grover.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Grover&#39;s Algorithm" />
+<meta property="og:description" content="            Grover's Algorithm In this section, we introduce Grover's algorithm and how it can be used to solve unstructured search problems. We then impleme..." />
+<meta property="og:image"       content="https://community.qiskit.org/textbook/images/logo/logo.png" />
+
+<meta name="twitter:card" content="summary">
+
+
+  <script type="application/ld+json">
+  {
+  "@context": "http://schema.org",
+  "@type": "NewsArticle",
+  "mainEntityOfPage": "https://community.qiskit.org/textbook/ch-algorithms/grover.html",
+  "headline": "Grover&#39;s Algorithm",
+  "datePublished": "2019-12-07T21:10:34+00:00",
+  "dateModified": "2019-12-07T21:10:34+00:00",
+  "description": "            Grover's Algorithm In this section, we introduce Grover's algorithm and how it can be used to solve unstructured search problems. We then impleme...",
+  "author": {
+    "@type": "Person",
+    "name": "The Qiskit Team"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Data 100 at UC Berkeley",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://community.qiskit.org/textbook",
+      "width": 60,
+      "height": 60
+    }
+  },
+  "image": {
+    "@type": "ImageObject",
+    "url": "https://community.qiskit.org/textbook",
+    "height": 60,
+    "width": 60
+  }
+}
+
+  </script>
+  <link rel="stylesheet" href="/textbook/assets/css/styles.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css ">
+
+  <!-- <link rel="manifest" href="/manifest.json"> -->
+  <!-- <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#efae0a"> -->
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+  <meta name="theme-color" content="#233947">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/x-icon" href="/textbook/images/logo/favicon.ico">
+
+  <!-- MathJax Config -->
+  <!-- Allow inline math using $ and automatically break long math lines -->
+<!-- (mostly) copied from nbconvert configuration -->
+<!-- https://github.com/jupyter/nbconvert/blob/master/nbconvert/templates/html/mathjax.tpl -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true,
+        processEnvironments: true
+    },
+    // Center justify equations in code and markdown cells. Elsewhere
+    // we use CSS to left justify single line equations in code cells.
+    displayAlign: 'center',
+    "HTML-CSS": {
+        styles: {'.MathJax_Display': {"margin": 0}},
+        linebreaks: { automatic: true },
+    }
+});
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_HTML' async></script>
+
+  <!-- DOM updating function -->
+  <script>
+const runWhenDOMLoaded = cb => {
+  if (document.readyState != 'loading') {
+    cb()
+  } else if (document.addEventListener) {
+    document.addEventListener('DOMContentLoaded', cb)
+  } else {
+    document.attachEvent('onreadystatechange', function() {
+      if (document.readyState == 'complete') cb()
+    })
+  }
+}
+
+// Helper function to init things quickly
+initFunction = function(myfunc) {
+  runWhenDOMLoaded(myfunc);
+  document.addEventListener('turbolinks:load', myfunc);
+};
+</script>
+
+  <!-- Define some javascript variables that will be useful in other javascript -->
+  <script>
+    const site_basename = '/textbook';
+  </script>
+
+  <!-- Add AnchorJS to let headers be linked -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js" async></script>
+  <script>
+const initAnchors = () => {
+  if (window.anchors === undefined) {
+    setTimeout(initAnchors, 250)
+    return
+  }
+  anchors.add("main h1, main h2, main h3, main h4")
+}
+
+initFunction(initAnchors);
+</script>
+
+
+  <!-- Include Turbolinks to make page loads fast -->
+  <!-- https://github.com/turbolinks/turbolinks -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/turbolinks/5.2.0/turbolinks.js" async></script>
+  <meta name="turbolinks-cache-control" content="no-cache">
+
+  <!-- Selectors for elements on the page -->
+  <script>
+/**
+ * Select various elements on the page for later use
+ */
+
+// IDs we'll attach to cells
+const codeCellId = index => `codecell${index}`
+const inputCellId = index => `inputcell${index}`
+
+pageElements = {}
+
+// All code cells
+findCodeCells = function() {
+    var codeCells = document.querySelectorAll('div.c-textbook__content > div.highlighter-rouge > div.highlight > pre, div.input_area pre, div.text_cell_render div.highlight pre')
+    pageElements['codeCells'] = codeCells;
+
+    codeCells.forEach((codeCell, index) => {
+      const id = codeCellId(index)
+      codeCell.setAttribute('id', id)
+    })
+};
+
+initFunction(findCodeCells);
+
+// All cells in general
+findInputCells = function() {
+    var inputCells = document.querySelectorAll('div.jb_cell')
+    pageElements['inputCells'] = inputCells;
+
+    inputCells.forEach((inputCell, index) => {
+        const id = inputCellId(index)
+        inputCell.setAttribute('id', id)
+    })
+};
+
+initFunction(findInputCells);
+</script>
+
+  <!-- Load nbinteract for widgets -->
+  
+
+  <!-- Load Thebelab for interactive widgets -->
+  <!-- Include Thebelab for interactive code if it's enabled -->
+
+
+
+  <!-- Load the auto-generating TOC -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js" async></script>
+<script>
+const initToc = () => {
+  if (window.tocbot === undefined) {
+    setTimeout(initToc, 250)
+    return
+  }
+
+  // Check whether we have any sidebar content. If not, then show the sidebar earlier.
+  var SIDEBAR_CONTENT_TAGS = ['.tag_full_width', '.tag_popout'];
+  var sidebar_content_query = SIDEBAR_CONTENT_TAGS.join(', ')
+  if (document.querySelectorAll(sidebar_content_query).length === 0) {
+    document.querySelector('nav.onthispage').classList.add('no_sidebar_content')
+  }
+
+  // Initialize the TOC bot
+  tocbot.init({
+    tocSelector: 'nav.onthispage',
+    contentSelector: '.c-textbook__content',
+    headingSelector: 'h2, h3',
+    orderedList: false,
+    collapseDepth: 6,
+    listClass: 'toc__menu',
+    activeListItemClass: "",  // Not using
+    activeLinkClass: "", // Not using
+  });
+
+}
+initFunction(initToc);
+</script>
+
+
+  <!-- Google analytics -->
+  <script src="/textbook/assets/js/ga.js" async></script>
+
+  <!-- Clipboard copy button -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" async></script>
+
+  <!-- Load custom website scripts -->
+  <script src="/textbook/assets/js/scripts.js" async></script>
+
+  <!-- Load custom user CSS and JS  -->
+  <script src="/textbook/assets/custom/custom.js" async></script>
+  <link rel="stylesheet" href="/textbook/assets/custom/custom.css">
+
+  <!-- Update interact links w/ REST param, is defined in includes so we can use templates -->
+  
+
+  <!-- Lunr search code - will only be executed on the /search page -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.6/lunr.min.js" async></script>
+  <script>var initQuery = function() {
+  // See if we have a search box
+  var searchInput = document.querySelector('input#lunr_search');
+  if (searchInput === null) {
+    return;
+  }
+
+  // Function to parse our lunr cache
+  var idx = lunr(function () {
+    this.field('title')
+    this.field('excerpt')
+    this.field('categories')
+    this.field('tags')
+    this.ref('id')
+
+    this.pipeline.remove(lunr.trimmer)
+
+    for (var item in store) {
+      this.add({
+        title: store[item].title,
+        excerpt: store[item].excerpt,
+        categories: store[item].categories,
+        tags: store[item].tags,
+        id: item
+      })
+    }
+  });
+
+  // Run search upon keyup
+  searchInput.addEventListener('keyup', function () {
+    var resultdiv = document.querySelector('#results');
+    var query = document.querySelector("input#lunr_search").value.toLowerCase();
+    var result =
+      idx.query(function (q) {
+        query.split(lunr.tokenizer.separator).forEach(function (term) {
+          q.term(term, { boost: 100 })
+          if(query.lastIndexOf(" ") != query.length-1){
+            q.term(term, {  usePipeline: false, wildcard: lunr.Query.wildcard.TRAILING, boost: 10 })
+          }
+          if (term != ""){
+            q.term(term, {  usePipeline: false, editDistance: 1, boost: 1 })
+          }
+        })
+      });
+
+      // Empty the results div
+      while (resultdiv.firstChild) {
+        resultdiv.removeChild(resultdiv.firstChild);
+      }
+
+    resultdiv.insertAdjacentHTML('afterbegin', '<p class="results__found">'+result.length+' Result(s) found</p>');
+    for (var item in result) {
+      var ref = result[item].ref;
+      if(store[ref].teaser){
+        var searchitem =
+          '<div class="list__item">'+
+            '<article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">'+
+              '<h2 class="archive__item-title" itemprop="headline">'+
+                '<a href="'+store[ref].url+'" rel="permalink">'+store[ref].title+'</a>'+
+              '</h2>'+
+              '<div class="archive__item-teaser">'+
+                '<img src="'+store[ref].teaser+'" alt="">'+
+              '</div>'+
+              '<p class="archive__item-excerpt" itemprop="description">'+store[ref].excerpt.split(" ").splice(0,20).join(" ")+'...</p>'+
+            '</article>'+
+          '</div>';
+      }
+      else{
+    	  var searchitem =
+          '<div class="list__item">'+
+            '<article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">'+
+              '<h2 class="archive__item-title" itemprop="headline">'+
+                '<a href="'+store[ref].url+'" rel="permalink">'+store[ref].title+'</a>'+
+              '</h2>'+
+              '<p class="archive__item-excerpt" itemprop="description">'+store[ref].excerpt.split(" ").splice(0,20).join(" ")+'...</p>'+
+            '</article>'+
+          '</div>';
+      }
+      resultdiv.insertAdjacentHTML('beforeend', searchitem);
+    }
+  });
+};
+
+initFunction(initQuery);
+</script>
+
+  <!-- Load JS that depends on site variables -->
+  <script>
+/**
+ * Set up copy/paste for code blocks
+ */
+const clipboardButton = id =>
+  `<a id="copy-button-${id}" class="btn copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#${id}">
+    <img src="/textbook/assets/images/copy-button.svg" alt="Copy to clipboard">
+  </a>`
+
+// Clears selected text since ClipboardJS will select the text when copying
+const clearSelection = () => {
+  if (window.getSelection) {
+    window.getSelection().removeAllRanges()
+  } else if (document.selection) {
+    document.selection.empty()
+  }
+}
+
+// Changes tooltip text for two seconds, then changes it back
+const temporarilyChangeTooltip = (el, newText) => {
+  const oldText = el.getAttribute('data-tooltip')
+  el.setAttribute('data-tooltip', newText)
+  setTimeout(() => el.setAttribute('data-tooltip', oldText), 2000)
+}
+
+const addCopyButtonToCodeCells = () => {
+  // If ClipboardJS hasn't loaded, wait a bit and try again. This
+  // happens because we load ClipboardJS asynchronously.
+  if (window.ClipboardJS === undefined) {
+    setTimeout(addCopyButtonToCodeCells, 250)
+    return
+  }
+
+  pageElements['codeCells'].forEach((codeCell) => {
+    const id = codeCell.getAttribute('id')
+    if (document.getElementById("copy-button" + id) == null) {
+      codeCell.insertAdjacentHTML('afterend', clipboardButton(id));
+    }
+  })
+
+  const clipboard = new ClipboardJS('.copybtn')
+  clipboard.on('success', event => {
+    clearSelection()
+    temporarilyChangeTooltip(event.trigger, 'Copied!')
+  })
+
+  clipboard.on('error', event => {
+    temporarilyChangeTooltip(event.trigger, 'Failed to copy')
+  })
+
+  // Get rid of clipboard before the next page visit to avoid memory leak
+  document.addEventListener('turbolinks:before-visit', () =>
+    clipboard.destroy()
+  )
+}
+
+initFunction(addCopyButtonToCodeCells);
+</script>
+
+
+  <!-- Hide cell code -->
+  <script>
+    /**
+    Add buttons to hide code cells
+    */
+
+
+    var setCodeCellVisibility = function (inputField, kind) {
+        // Update the image and class for hidden
+        var id = inputField.getAttribute('data-id');
+        var codeCell = document.querySelector(`#${id} div.highlight`);
+
+        if (kind === "visible") {
+            codeCell.classList.remove('hidden');
+            inputField.checked = true;
+        } else {
+            codeCell.classList.add('hidden');
+            inputField.checked = false;
+        }
+    }
+
+    var toggleCodeCellVisibility = function (event) {
+        // The label is clicked, and now we decide what to do based on the input field's clicked status
+        if (event.target.tagName === "LABEL") {
+            var inputField = event.target.previousElementSibling;
+        } else {
+            // It is the span inside the target
+            var inputField = event.target.parentElement.previousElementSibling;
+        }
+
+        if (inputField.checked === true) {
+            setCodeCellVisibility(inputField, "visible");
+        } else {
+            setCodeCellVisibility(inputField, "hidden");
+        }
+    }
+
+
+    // Button constructor
+    const hideCodeButton = id => `<input class="hidebtn" type="checkbox" id="hidebtn${id}" data-id="${id}"><label title="Toggle cell" for="hidebtn${id}" class="plusminus"><span class="pm_h"></span><span class="pm_v"></span></label>`
+
+    var addHideButton = function () {
+        // If a hide button is already added, don't add another
+        if (document.querySelector('div.tag_hide_input input') !== null) {
+            return;
+        }
+
+        // Find the input cells and add a hide button
+        pageElements['inputCells'].forEach(function (inputCell) {
+            if (!inputCell.classList.contains("tag_hide_input")) {
+                // Skip the cell if it doesn't have a hidecode class
+                return;
+            }
+
+            const id = inputCell.getAttribute('id')
+
+            // Insert the button just inside the end of the next div
+            inputCell.querySelector('div.input').insertAdjacentHTML('beforeend', hideCodeButton(id))
+
+            // Set up the visibility toggle
+            hideLink = document.querySelector(`#${id} div.inner_cell + input + label`);
+            hideLink.addEventListener('click', toggleCodeCellVisibility)
+        });
+    }
+
+
+    // Initialize the hide buttos
+    var initHiddenCells = function () {
+        // Add hide buttons to the cells
+        addHideButton();
+
+        // Toggle the code cells that should be hidden
+        document.querySelectorAll('div.tag_hide_input input').forEach(function (item) {
+            setCodeCellVisibility(item, 'hidden');
+            item.checked = true;
+        })
+    }
+
+    initFunction(initHiddenCells);
+
+</script>
+
+  <!-- Printing the screen -->
+  <!-- Include nbinteract for interactive widgets -->
+<script src="https://printjs-4de6.kxcdn.com/print.min.js" async></script>
+<script>
+printContent = () => {
+    // MathJax displays a second version of any math for assistive devices etc.
+    // This prevents double-rendering in the PDF output.
+    var ignoreAssistList = [];
+    assistives = document.querySelectorAll('.MathJax_Display span.MJX_Assistive_MathML').forEach((element, index) => {
+        var thisId = 'MathJax-assistive-' + index.toString();
+        element.setAttribute('id', thisId);
+        ignoreAssistList.push(thisId)
+    });
+
+    // Print the actual content object
+    printJS({
+        printable: 'textbook_content',
+        type: 'html',
+        css: "/textbook/assets/css/styles.css",
+        scanStyles: false,
+        targetStyles: ["*"],
+        ignoreElements: ignoreAssistList
+    })
+};
+
+initPrint = () => {
+    document.querySelector('#interact-button-print').addEventListener('click', printContent)
+}
+
+initFunction(initPrint)
+</script>
+
+</head>
+
+  <body>
+    <!-- .js-show-sidebar shows sidebar by default -->
+    <div id="js-textbook" class="c-textbook js-show-sidebar">
+      
+
+
+
+<nav id="js-sidebar" class="c-textbook__sidebar">
+  <a href="https://delapuente.github.io/qiskit-textbook"><img src="/textbook/images/logo/logo.png" class="textbook_logo" id="sidebar-logo" data-turbolinks-permanent/></a>
+  <h2 class="c-sidebar__title">Qiskit Textbook</h2>
+  <ul class="c-sidebar__chapters">
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook/preface.html"
+        >
+          
+          Preface
+        </a>
+
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook/upcoming.html"
+        >
+          
+          Upcoming
+        </a>
+
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook/ch-prerequisites/python-and-jupyter-notebooks.html"
+        >
+          
+            0.
+          
+          Prerequisites
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-prerequisites/python-and-jupyter-notebooks.html"
+                >
+                  
+                    0.1
+                  
+                  Python and Jupyter Notebooks
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-prerequisites/qiskit.html"
+                >
+                  
+                    0.2
+                  
+                  Qiskit
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-prerequisites/linear_algebra.html"
+                >
+                  
+                    0.3
+                  
+                  Linear Algebra
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook/ch-states/introduction.html"
+        >
+          
+            1.
+          
+          Quantum States and Qubits
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-states/introduction.html"
+                >
+                  
+                    1.1
+                  
+                  Introduction
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-states/atoms-computation.html"
+                >
+                  
+                    1.2
+                  
+                  The Atoms of Computation
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-states/unique-properties-qubits.html"
+                >
+                  
+                    1.3
+                  
+                  The Unique Properties of Qubits
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-states/writing-down-qubit-states.html"
+                >
+                  
+                    1.4
+                  
+                  Writing Down Qubit States
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-states/pauli-matrices-bloch-sphere.html"
+                >
+                  
+                    1.5
+                  
+                  Pauli Matrices and the Bloch Sphere
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-states/states-many-qubits.html"
+                >
+                  
+                    1.6
+                  
+                  States for Many Qubits
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook/ch-gates/introduction.html"
+        >
+          
+            2.
+          
+          Single Qubits and Multi-Qubits gates
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-gates/introduction.html"
+                >
+                  
+                    2.1
+                  
+                  Introduction
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-gates/quantum-gates.html"
+                >
+                  
+                    2.2
+                  
+                  Quantum Gates
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-gates/fun-matrices.html"
+                >
+                  
+                    2.3
+                  
+                  Fun with Matrices
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-gates/standard-gate-set.html"
+                >
+                  
+                    2.4
+                  
+                  The Standard Gate Set
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-gates/proving-universality.html"
+                >
+                  
+                    2.5
+                  
+                  Proving Universality
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-gates/basic-circuit-identities.html"
+                >
+                  
+                    2.6
+                  
+                  Basic Circuit Identities
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook/ch-ex/ex1.html"
+        >
+          
+          Problems
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-ex/ex1.html"
+                >
+                  
+                  Set 1. Classical Logic Gates with Quantum Circuits
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-ex/ex2.html"
+                >
+                  
+                  Set 2. Basic Synthesis of Single-Qubit Gates
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-ex/ex3.html"
+                >
+                  
+                  Set 3. Building the Best AND Gate
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook/ch-algorithms/teleportation.html"
+        >
+          
+            3.
+          
+          Quantum Algorithms
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-algorithms/teleportation.html"
+                >
+                  
+                    3.1
+                  
+                  Quantum Teleportation
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-algorithms/deutsch-josza.html"
+                >
+                  
+                    3.2
+                  
+                  Deutsch-Josza Algorithm
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-algorithms/bernstein-vazirani.html"
+                >
+                  
+                    3.3
+                  
+                  Bernstein-Vazirani Algorithm
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-algorithms/simon.html"
+                >
+                  
+                    3.4
+                  
+                  Simon's Algorithm
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-algorithms/quantum-fourier-transform.html"
+                >
+                  
+                    3.5
+                  
+                  Quantum Fourier Transform
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-algorithms/quantum-phase-estimation.html"
+                >
+                  
+                    3.6
+                  
+                  Quantum Phase Estimation
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry c-sidebar__entry--active"
+                  href="/textbook/ch-algorithms/grover.html"
+                >
+                  
+                    3.7
+                  
+                  Grover's Algorithm
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook/ch-applications/vqe-molecules.html"
+        >
+          
+            4.
+          
+          Quantum Algorithms for Applications
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-applications/vqe-molecules.html"
+                >
+                  
+                    4.1
+                  
+                  Simulating Molecules using VQE
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-applications/satisfiability-grover.html"
+                >
+                  
+                    4.2
+                  
+                  Solving Satisfiability Problems using Grover's Algorithm
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook/ch-quantum-hardware/calibrating-qubits-openpulse.html"
+        >
+          
+            5.
+          
+          Investigating Quantum Hardware Using Qiskit
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-quantum-hardware/calibrating-qubits-openpulse.html"
+                >
+                  
+                    5.1
+                  
+                  Calibrating Qubits with OpenPulse
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-quantum-hardware/error-correction-repetition-code.html"
+                >
+                  
+                    5.2
+                  
+                  Introduction to Quantum Error Correction using Repetition Codes
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-quantum-hardware/measurement-error-mitigation.html"
+                >
+                  
+                    5.3
+                  
+                  Measurement Error Mitigation
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-quantum-hardware/randomized-benchmarking.html"
+                >
+                  
+                    5.4
+                  
+                  Randomized Benchmarking
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-quantum-hardware/measuring-quantum-volume.html"
+                >
+                  
+                    5.5
+                  
+                  Measuring Quantum Volume
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook/ch-paper-implementations/vqls.html"
+        >
+          
+            6.
+          
+          Implementations of Recent Quantum Algorithms
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-paper-implementations/vqls.html"
+                >
+                  
+                    6.1
+                  
+                  Variational Quantum Linear Solver
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+  </ul>
+  <p class="sidebar_footer">Powered by <a href="https://github.com/jupyter/jupyter-book">Jupyter Book</a></p>
+</nav>
+
+      
+      <div class="c-topbar" id="top-navbar">
+  <!-- We show the sidebar by default so we use .is-active -->
+  <div class="c-topbar__buttons">
+    <button
+      id="js-sidebar-toggle"
+      class="hamburger hamburger--arrowalt is-active"
+    >
+      <span class="hamburger-box">
+        <span class="hamburger-inner"></span>
+      </span>
+    </button>
+    <div class="buttons">
+<div class="download-buttons-dropdown">
+    <button id="dropdown-button-trigger" class="interact-button"><i class="fa fa-download"></i></button>
+    <div class="download-buttons">
+        <a href="/textbook/content/ch-algorithms/grover.ipynb" download>
+        <button id="interact-button-download" class="interact-button">ORIG</button>
+        </a>
+        
+        <a id="interact-button-print"><button id="interact-button-download" class="interact-button">PDF</button></a>
+    </div>
+</div>
+
+  
+  
+  
+  
+
+
+</div>
+
+  </div>
+  <!-- Empty sidebar placeholder that we'll auto-fill with javascript -->
+  <aside class="sidebar__right">
+    <header><h4 class="nav__title"><i class="fa fa-list"></i>   On this page</h4></header>
+    <nav class="onthispage">
+    </nav>
+  </aside>
+  <a href="/textbook/search.html" class="topbar-right-button" id="search-button"><i class="fa fa-search"></i></a>
+</div>
+
+      <main class="c-textbook__page" tabindex="-1">
+        <div class="c-textbook__content" id="textbook_content">
+              <main class="jupyter-page">
+    <div id="page-info"></div>
+    <div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Grover's-Algorithm">Grover's Algorithm<a class="anchor-link" href="#Grover's-Algorithm"> </a></h1>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In this section, we introduce Grover's algorithm and how it can be used to solve unstructured search problems. We then implement the quantum algorithm using Qiskit, and run on a simulator and device.</p>
+<h2 id="Contents">Contents<a class="anchor-link" href="#Contents"> </a></h2><ol>
+<li><p><a href="#introduction">Introduction</a></p>
+</li>
+<li><p><a href="#2qubits">Example: 2 Qubits</a></p>
+<ul>
+<li><a href="#2qubits-simulation">Simulation</a></li>
+<li><a href="#2qubits-device">Device</a></li>
+</ul>
+</li>
+<li><p><a href="#3qubits">Example: 3 Qubits</a></p>
+<ul>
+<li><a href="#3qubits-simulation">Simulation</a></li>
+<li><a href="#3qubits-device">Device</a></li>
+</ul>
+</li>
+<li><p><a href="#problems">Problems</a></p>
+</li>
+<li><p><a href="#references">References</a></p>
+</li>
+</ol>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="1.-Introduction-">1. Introduction <a id="introduction" /><a class="anchor-link" href="#1.-Introduction-"> </a></h2><p>You have likely heard that one of the many advantages a quantum computer has over a classical computer is its superior speed searching databases. Grover's algorithm demonstrates this capability. This algorithm can speed up an unstructured search problem quadratically, but its uses extend beyond that; it can serve as a general trick or subroutine to obtain quadratic run time improvements for a variety of other algorithms. This is called the amplitude amplification trick.</p>
+<h3 id="Unstructured-Search">Unstructured Search<a class="anchor-link" href="#Unstructured-Search"> </a></h3><p>Suppose you are given a large list of $N$ items. Among these items there is one item with a unique property that we wish to locate; we will call this one the winner $w$. Think of each item in the list as a box of a particular color. Say all items in the list are gray except the winner $w$, which is pink.</p>
+<p><img src="images/grover_search.png"></p>
+<p>To find the pink box -- the <em>marked item</em> -- using classical computation, one would have to check on average $N/2$ of these boxes, and in the worst case, all $N$ of them. On a quantum computer, however, we can find the marked item in roughly $\sqrt{N}$ steps with Grover's amplitude amplification trick. A quadratic speedup is indeed a substantial time-saver for finding marked items in long lists. Additionally, the algorithm does not use the list's internal structure, which makes it <em>generic;</em> this is why it immediately provides a quadratic quantum speed-up for many classical problems.</p>
+<h3 id="Oracle">Oracle<a class="anchor-link" href="#Oracle"> </a></h3><p>How will the list items be provided to the quantum computer? A common way to encode such a list is in terms of a function $f$ which returns $f(x) = 0$ for all unmarked items $x$ and $f(w) = 1$ for the winner. To use a quantum computer for this problem, we must provide the items in superposition to this function, so we encode the function into a unitary matrix called an <em>oracle</em>. First we choose a binary encoding of the items $x, w \in \{0,1\}^n$ so that $N = 2^n$; now we can represent it in terms of qubits on a quantum computer. Then we define the oracle matrix $U_f$ to act on any of the simple, standard basis states $| x \rangle$ by $U_f | x \rangle = (-1)^{f(x)}  |  x \rangle.$</p>
+<p>We see that if $x$ is an unmarked item, the oracle does nothing to the state. However, when we apply the oracle to the basis state $| w \rangle$, it maps $U_f | w \rangle = -| w \rangle$. Geometrically, this unitary matrix corresponds to a reflection about the origin for the marked item in an $N = 2^n$ dimensional vector space.</p>
+<h3 id="Amplitude-Amplification">Amplitude Amplification<a class="anchor-link" href="#Amplitude-Amplification"> </a></h3><p>So how does the algorithm work? Before looking at the list of items, we have no idea where the marked item is. Therefore, any guess of its location is as good as any other, which can be expressed in terms of a
+uniform superposition: $|s \rangle = \frac{1}{\sqrt{N}} \sum_{x = 0}^{N -1} | x
+\rangle.$</p>
+<p>If at this point we were to measure in the standard basis $\{ | x \rangle \}$, this superposition would collapse, according to the fifth quantum law, to any one of the basis states with the same probability of $\frac{1}{N} = \frac{1}{2^n}$. Our chances of guessing the right value $w$ is therefore $1$ in $2^n$, as could be expected. Hence, on average we would need to try about $N = 2^n$ times to guess the correct item.</p>
+<p>Enter the procedure called amplitude amplification, which is how a quantum computer significantly enhances this probability. This procedure stretches out (amplifies) the amplitude of the marked item, which shrinks the other items' amplitude, so that measuring the final state will return the right item with near-certainty.</p>
+<p>This algorithm has a nice geometrical interpretation in terms of two reflections, which generate a rotation in a two-dimensional plane. The only two special states we need to consider are the winner $| w \rangle$ and the uniform superposition $| s \rangle$. These two vectors span a two-dimensional plane in the vector space $\mathbb{C}^N.$ They are not quite perpendicular because $| w \rangle$ occurs in the superposition with amplitude $N^{-1/2}$ as well.
+We can, however, introduce an additional state $|s'\rangle$ that is in the span of these two vectors, which is perpendicular to $| w \rangle$ and is obtained from $|s \rangle$ by removing $| w \rangle$ and
+rescaling.</p>
+<p><strong>Step 1</strong>: The amplitude amplification procedure starts out in the uniform superposition $| s \rangle$, which is easily constructed from $| s \rangle = H^{\otimes n} | 0 \rangle^n$.</p>
+<p><img src="images/grover_step1.png"></p>
+<p>The left graphic corresponds to the two-dimensional plane spanned by perpendicular vectors $|w\rangle$ and $|s'\rangle$ which allows to express the initial state as $|s\rangle = \sin \theta \lvert w \rangle + \cos \theta \lvert s' \rangle,$ where $\theta = \arcsin \langle s \lvert w \rangle = \arcsin \frac{1}{\sqrt{N}}$. The right graphic is a bar graph of the amplitudes of the state $| \psi_t \rangle$ for the case $N = 2^2 = 4$. The average amplitude is indicated by a dashed line.</p>
+<p><strong>Step 2</strong>: We apply the oracle reflection $U_f$ to the state $U_f | \psi_t \rangle =  | \psi_{t'} \rangle$.</p>
+<p><img src="images/grover_step2.png"></p>
+<p>Geometrically this corresponds to a reflection of the state $|\psi_t\rangle$ about $-|w\rangle$. This transformation means that the amplitude in front of the $|w\rangle$ state becomes negative, which in turn means that the average amplitude has been lowered.</p>
+<p><strong>Step 3</strong>: We now apply an additional reflection $U_s$ about the state $|s\rangle$: $U_s = 2|s\rangle\langle s| - \mathbb{1}$. This transformation maps the state to $U_s | \psi_{t'} \rangle$ and completes the transformation $|\psi_{t+1}\rangle = U_s U_f | \psi_t \rangle$.</p>
+<p><img src="images/grover_step3.png"></p>
+<p>Two reflections always correspond to a rotation. The transformation $U_s U_f$ rotates the initial state $|s\rangle$ closer towards the winner $|w\rangle$. The action of the reflection $U_s$ in the amplitude bar diagram can be understood as a reflection about the average amplitude. Since the average amplitude has been lowered by the first reflection, this transformation boosts the negative amplitude of $|w\rangle$ to roughly three times its original value, while it decreases the other amplitudes. We then go to <strong>step 2</strong> to repeat the application. This procedure will be repeated several times to zero in on the winner.</p>
+<p>After $t$ steps the state will have transformed to $| \psi_t \rangle = (U_s U_f)^t  | \psi_0 \rangle.$</p>
+<p>How many times do we need to apply the rotation? It turns out that roughly $\sqrt{N}$ rotations suffice. This becomes clear when looking at the amplitudes of the state $| \psi_t \rangle$. We can see that the amplitude of $| w \rangle$ grows linearly with the number of applications $\sim t N^{-1/2}$. However, since we are dealing with amplitudes and not probabilities, the vector space's dimension enters as a square root. Therefore it is the amplitude, and not just the probability, that is being amplified in this procedure.</p>
+<p>In the case that there are multiple solutions, $M$, it can be shown that roughly $\sqrt{(N/M)}$ rotations will suffice.</p>
+<p><img src="images/grover_algorithm.png"></p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="2.-Example:-2-Qubits-">2. Example: 2 Qubits <a id="2qubits" /><a class="anchor-link" href="#2.-Example:-2-Qubits-"> </a></h2><p>Let's first have a look at the case of Grover's algorithm for $N=4$ which is realized with 2 qubits. In this particular case, contrary to inuition, only <b>one rotation</b> is required which will rotate the initial state $|s\rangle$ to the winner $|w\rangle$ which can easily be shown [3]:</p>
+<ol>
+    <li>
+        Following  the above introduction, in the case $N=4$ we have $$\theta = \arcsin \frac{1}{2} = \frac{\pi}{6}.$$
+    </li>
+    <li>
+        After $t$ steps, we have $$(U_s U_f)^t  \lvert s \rangle = \sin \theta_t \lvert w \rangle + \cos \theta_t \lvert s' \rangle ,$$where $$\theta_t = (2t+1)\theta.$$
+    </li>
+    <li>
+        In order to obtain $\lvert w \rangle$ we need $\theta_t = \frac{\pi}{2}$, which with $\theta=\frac{\pi}{6}$ inserted above results to $t=1$. This implies that after $t=1$ rotation the searched element is found.
+    </li>
+</ol><p>Now let us look into the possible oracles. We have $N=4$ possible elements, i.e. $\lvert 00 \rangle, \lvert 01 \rangle, \lvert 10 \rangle, \lvert 11 \rangle$ and hence require in total $4$ oracles.<br></p>
+<h4 id="Oracle-for-$\lvert-w-\rangle-=-\lvert-11-\rangle$">Oracle for $\lvert w \rangle = \lvert 11 \rangle$<a class="anchor-link" href="#Oracle-for-$\lvert-w-\rangle-=-\lvert-11-\rangle$"> </a></h4><p>Let us start with the case $\lvert w \rangle = \lvert 11 \rangle$. The oracle $U_f$ in this case acts as follows: $$U_f \lvert s \rangle = U_f\frac{1}{2}\left( \lvert 00 \rangle + \lvert 01 \rangle + \lvert 10 \rangle + \lvert 11 \rangle \right) = \frac{1}{2}\left( \lvert 00 \rangle + \lvert 01 \rangle + \lvert 10 \rangle - \lvert 11 \rangle \right).$$In order to realize the sign flip for $\lvert 11 \rangle$ we simply need to apply a controlled Z gate to the initial state. This leads to the following circuit:</p>
+<p><img src="images/grover_circuit_2qbuits_oracle_11.png"></p>
+<h4 id="Oracle-for-$\lvert-w-\rangle-=-\lvert-00-\rangle$">Oracle for $\lvert w \rangle = \lvert 00 \rangle$<a class="anchor-link" href="#Oracle-for-$\lvert-w-\rangle-=-\lvert-00-\rangle$"> </a></h4><p>In the case of $\lvert w \rangle = \lvert 00 \rangle$ the oracle $U_f$ acts as follows: $$U_f \lvert s \rangle = U_f\frac{1}{2}\left( \lvert 00 \rangle + \lvert 01 \rangle + \lvert 10 \rangle + \lvert 11 \rangle \right) = \frac{1}{2}\left( -\lvert 00 \rangle + \lvert 01 \rangle + \lvert 10 \rangle + \lvert 11 \rangle \right).$$In order to realize the sign flip for $\lvert 00 \rangle$ we need to apply an "inverted" controlled Z gate to the initial state leading to the following circuit:</p>
+<p><img src="images/grover_circuit_2qbuits_oracle_00.png"></p>
+<h4 id="Oracles-for-$\lvert-w-\rangle-=-\lvert-01-\rangle$-and-$\lvert-w-\rangle-=-\lvert-10-\rangle$">Oracles for $\lvert w \rangle = \lvert 01 \rangle$ and $\lvert w \rangle = \lvert 10 \rangle$<a class="anchor-link" href="#Oracles-for-$\lvert-w-\rangle-=-\lvert-01-\rangle$-and-$\lvert-w-\rangle-=-\lvert-10-\rangle$"> </a></h4><p>Following the above logic one can straight forwardly construct the oracles for $\lvert w \rangle = \lvert 01 \rangle$ (left circuit) and $\lvert w \rangle = \lvert 10 \rangle$ (right circuit):</p>
+<p><img src="images/grover_circuit_2qbuits_oracle_01_10.png"></p>
+<h4 id="Reflection-$U_s$">Reflection $U_s$<a class="anchor-link" href="#Reflection-$U_s$"> </a></h4><p>In order to complete the circuit we need to implement the additional reflection $U_s = 2|s\rangle\langle s| - \mathbb{1}$ which acts as follows $$U_s \frac{1}{2}\left( \lvert 00 \rangle + \lvert 01 \rangle + \lvert 10 \rangle + \lvert 11 \rangle \right) = \frac{1}{2}\left( \lvert 00 \rangle - \lvert 01 \rangle - \lvert 10 \rangle - \lvert 11 \rangle \right),$$i.e. the signs of each state are flipped except for $\lvert 00 \rangle$. As can easily be verified, one way of implementing $U_s$ is the following circuit:</p>
+<p><img src="images/grover_circuit_2qbuits_reflection.png"></p>
+<h4 id="Full-Circuit-for-$\lvert-w-\rangle-=-\lvert-00-\rangle$">Full Circuit for $\lvert w \rangle = \lvert 00 \rangle$<a class="anchor-link" href="#Full-Circuit-for-$\lvert-w-\rangle-=-\lvert-00-\rangle$"> </a></h4><p>Since in the particular case of $N=4$ only one rotation is required we can combine the above components to build the full circuit for Grover's algorithm for the case $\lvert w \rangle = \lvert 00 \rangle$:</p>
+<p><img src="images/grover_circuit_2qubits_full_00.png"></p>
+<p>The other three circuits can be constructed in the same way and will not be depicted here.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="2.1-Qiskit-Implementation">2.1 Qiskit Implementation<a class="anchor-link" href="#2.1-Qiskit-Implementation"> </a></h3><p>We now implement Grover's algorithm for the above case of 2 qubits for $\lvert w \rangle = \lvert 00 \rangle$.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#initialization</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># importing Qiskit</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">IBMQ</span><span class="p">,</span> <span class="n">BasicAer</span><span class="p">,</span> <span class="n">Aer</span>
+<span class="kn">from</span> <span class="nn">qiskit.providers.ibmq</span> <span class="kn">import</span> <span class="n">least_busy</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">ClassicalRegister</span><span class="p">,</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">execute</span>
+
+<span class="c1"># import basic plot tools</span>
+<span class="kn">from</span> <span class="nn">qiskit.visualization</span> <span class="kn">import</span> <span class="n">plot_histogram</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We start by preparing a quantum circuit for two qubits and a classical register with two bits.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">qr</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">cr</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">groverCircuit</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span><span class="n">cr</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Then we simply need to write out the commands for the circuit depicted above. First, Initialize the state $|s\rangle$:</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">groverCircuit</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">qr</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;qiskit.circuit.instructionset.InstructionSet at 0x1a2608d4d0&gt;</pre>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Apply the Oracle for $|w\rangle = |00\rangle$:</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">groverCircuit</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">qr</span><span class="p">)</span>
+<span class="n">groverCircuit</span><span class="o">.</span><span class="n">cz</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">qr</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">groverCircuit</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">qr</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;qiskit.circuit.instructionset.InstructionSet at 0x1a2608ddd0&gt;</pre>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Apply a Hadamard operation to both qubits:</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">groverCircuit</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">qr</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;qiskit.circuit.instructionset.InstructionSet at 0x1a2613a3d0&gt;</pre>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Apply the reflection $U_s$:</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">groverCircuit</span><span class="o">.</span><span class="n">z</span><span class="p">(</span><span class="n">qr</span><span class="p">)</span>
+<span class="n">groverCircuit</span><span class="o">.</span><span class="n">cz</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">qr</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;qiskit.circuit.instructionset.InstructionSet at 0x1a2613f090&gt;</pre>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Apply the final Hadamard to both qubits:</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">groverCircuit</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">qr</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;qiskit.circuit.instructionset.InstructionSet at 0x1a2613f6d0&gt;</pre>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Drawing the circuit confirms that we have assembled it correctly:</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">groverCircuit</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s2">&quot;mpl&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea output_execute_result">
+<img src="../images/ch-algorithms/grover_19_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="2.1.1-Experiment-with-Simulators-">2.1.1 Experiment with Simulators <a id="2qubits-simulation" /><a class="anchor-link" href="#2.1.1-Experiment-with-Simulators-"> </a></h3><p>Let's run the circuit in simulation. First, we can verify that we have the correct statevector:</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">backend_sim</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;statevector_simulator&#39;</span><span class="p">)</span>
+<span class="n">job_sim</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">groverCircuit</span><span class="p">,</span> <span class="n">backend_sim</span><span class="p">)</span>
+<span class="n">statevec</span> <span class="o">=</span> <span class="n">job_sim</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_statevector</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">statevec</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[1.+0.j 0.+0.j 0.+0.j 0.+0.j]
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now let us measure the state and create the corresponding histogram experiments:</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">groverCircuit</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span><span class="n">cr</span><span class="p">)</span>
+
+<span class="n">backend</span> <span class="o">=</span> <span class="n">BasicAer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">)</span>
+<span class="n">shots</span> <span class="o">=</span> <span class="mi">1024</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">groverCircuit</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="n">shots</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+<span class="n">answer</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get_counts</span><span class="p">()</span>
+<span class="n">plot_histogram</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea output_execute_result">
+<img src="../images/ch-algorithms/grover_23_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We confirm that in 100% of the cases the element $|00\rangle$ is found.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="2.1.2-Experiment-with-Real-Devices-">2.1.2 Experiment with Real Devices <a id="2qubits-device" /><a class="anchor-link" href="#2.1.2-Experiment-with-Real-Devices-"> </a></h3>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can run the circuit on the real device as below.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Load IBM Q account and get the least busy backend device</span>
+<span class="n">provider</span> <span class="o">=</span> <span class="n">IBMQ</span><span class="o">.</span><span class="n">load_account</span><span class="p">()</span>
+<span class="n">device</span> <span class="o">=</span> <span class="n">least_busy</span><span class="p">(</span><span class="n">provider</span><span class="o">.</span><span class="n">backends</span><span class="p">(</span><span class="n">simulator</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Running on current least busy device: &quot;</span><span class="p">,</span> <span class="n">device</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Running on current least busy device:  ibmqx2
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Run our circuit on the least busy backend. Monitor the execution of the job in the queue</span>
+<span class="kn">from</span> <span class="nn">qiskit.tools.monitor</span> <span class="kn">import</span> <span class="n">job_monitor</span>
+<span class="n">job</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">groverCircuit</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="n">device</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">max_credits</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">job_monitor</span><span class="p">(</span><span class="n">job</span><span class="p">,</span> <span class="n">interval</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Job Status: job has successfully run
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Get the results from the computation</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+<span class="n">answer</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="n">groverCircuit</span><span class="p">)</span>
+<span class="n">plot_histogram</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea output_execute_result">
+<img src="../images/ch-algorithms/grover_29_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We confirm that in the majority of the cases the element $|00\rangle$ is found. The other results are due to errors in the quantum computation.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="3.-Example:-3-Qubits-">3. Example: 3 Qubits <a id="3qubits" /><a class="anchor-link" href="#3.-Example:-3-Qubits-"> </a></h2><p>We now go through the example of Grover's algorithm for 3 qubits with two marked states $\lvert101\rangle$ and $\lvert110\rangle$, following the implementation found in Reference [2]. The quantum circuit to solve the problem using a phase oracle is:</p>
+<p><img src="images/grover_circuit_3qubits.png"  width="300"></p>
+<ol>
+<li> 
+  Apply Hadamard gates to $3$ qubits initialised to $\lvert000\rangle$ to create a uniform superposition:
+  $$\lvert \psi_1 \rangle = \frac{1}{\sqrt{8}} \left( 
+    \lvert000\rangle + \lvert001\rangle + \lvert010\rangle + \lvert011\rangle + 
+    \lvert100\rangle + \lvert101\rangle + \lvert110\rangle + \lvert111\rangle \right) $$
+</li>
+
+<li>
+  Mark states $\lvert101\rangle$ and $\lvert110\rangle$ using a phase oracle:
+  $$\lvert \psi_2 \rangle = \frac{1}{\sqrt{8}} \left( 
+    \lvert000\rangle + \lvert001\rangle + \lvert010\rangle + \lvert011\rangle + 
+    \lvert100\rangle - \lvert101\rangle - \lvert110\rangle + \lvert111\rangle \right) $$
+</li>
+
+<li>
+  Perform the reflection around the average amplitute:
+
+  <ol>
+   <li> Apply Hadamard gates to the qubits
+      $$\lvert \psi_{3a} \rangle = \frac{1}{2} \left( 
+        \lvert000\rangle +\lvert011\rangle +\lvert100\rangle -\lvert111\rangle \right) $$
+   </li>
+
+   <li> Apply X gates to the qubits
+      $$\lvert \psi_{3b} \rangle = \frac{1}{2} \left( 
+        -\lvert000\rangle +\lvert011\rangle +\lvert100\rangle +\lvert111\rangle \right) $$
+   </li>
+
+   <li> Apply a doubly controlled Z gate between the 1, 2 (controls) and 3 (target) qubits
+      $$\lvert \psi_{3c} \rangle = \frac{1}{2} \left( 
+        -\lvert000\rangle +\lvert011\rangle +\lvert100\rangle -\lvert111\rangle \right) $$
+   </li>
+   <li> Apply X gates to the qubits
+      $$\lvert \psi_{3d} \rangle = \frac{1}{2} \left( 
+        -\lvert000\rangle +\lvert011\rangle +\lvert100\rangle -\lvert111\rangle \right) $$
+   </li>
+   <li> Apply Hadamard gates to the qubits
+      $$\lvert \psi_{3e} \rangle = \frac{1}{\sqrt{2}} \left( 
+        -\lvert101\rangle -\lvert110\rangle \right) $$
+   </li>
+  </ol>
+</li>
+
+<li>
+  Measure the $3$ qubits to retrieve states $\lvert101\rangle$ and $\lvert110\rangle$
+</li>
+</ol><p>Note that since there are 2 solutions and 8 possibilities, we will only need to run one iteration (steps 2 &amp; 3).</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="3.1-Qiskit-Implementation-">3.1 Qiskit Implementation <a id="3qubit-implementation" /><a class="anchor-link" href="#3.1-Qiskit-Implementation-"> </a></h3><p>We now implement Grover's algorithm for the above <a href="example">example</a> for $3$-qubits and searching for two marked states $\lvert101\rangle$ and $\lvert110\rangle$.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We create a phase oracle that will mark states $\lvert101\rangle$ and $\lvert110\rangle$ as the results (step 1).</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">phase_oracle</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="n">register</span><span class="p">):</span>
+    <span class="n">circuit</span><span class="o">.</span><span class="n">cz</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">qr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">circuit</span><span class="o">.</span><span class="n">cz</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">qr</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Next we set up the circuit for inversion about the average (step 2), where we will first need to define a function that creates a multiple-controlled Z gate.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">n_controlled_Z</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="n">controls</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Implement a Z gate with multiple controls&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">controls</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;The controlled Z with more than 2 controls is not implemented&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">controls</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">circuit</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+        <span class="n">circuit</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">controls</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">target</span><span class="p">)</span>
+        <span class="n">circuit</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">controls</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="n">circuit</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+        <span class="n">circuit</span><span class="o">.</span><span class="n">ccx</span><span class="p">(</span><span class="n">controls</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">controls</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">target</span><span class="p">)</span>
+        <span class="n">circuit</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">inversion_about_average</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="n">register</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">barriers</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Apply inversion about the average step of Grover&#39;s algorithm.&quot;&quot;&quot;</span>
+    <span class="n">circuit</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">register</span><span class="p">)</span>
+    <span class="n">circuit</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">register</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">barriers</span><span class="p">:</span>
+        <span class="n">circuit</span><span class="o">.</span><span class="n">barrier</span><span class="p">()</span>
+    
+    <span class="n">n_controlled_Z</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="p">[</span><span class="n">register</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)],</span> <span class="n">register</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    
+    <span class="k">if</span> <span class="n">barriers</span><span class="p">:</span>
+        <span class="n">circuit</span><span class="o">.</span><span class="n">barrier</span><span class="p">()</span>
+    
+    <span class="n">circuit</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">register</span><span class="p">)</span>
+    <span class="n">circuit</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">register</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now we put the pieces together, with the creation of a uniform superposition at the start of the circuit and a measurement at the end. Note that since there are 2 solutions and 8 possibilities, we will only need to run one iteration.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">barriers</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="n">qr</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">cr</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="n">groverCircuit</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span><span class="n">cr</span><span class="p">)</span>
+<span class="n">groverCircuit</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">qr</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">barriers</span><span class="p">:</span>
+    <span class="n">groverCircuit</span><span class="o">.</span><span class="n">barrier</span><span class="p">()</span>
+
+<span class="n">phase_oracle</span><span class="p">(</span><span class="n">groverCircuit</span><span class="p">,</span> <span class="n">qr</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">barriers</span><span class="p">:</span>
+    <span class="n">groverCircuit</span><span class="o">.</span><span class="n">barrier</span><span class="p">()</span>
+
+<span class="n">inversion_about_average</span><span class="p">(</span><span class="n">groverCircuit</span><span class="p">,</span> <span class="n">qr</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">barriers</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">barriers</span><span class="p">:</span>
+    <span class="n">groverCircuit</span><span class="o">.</span><span class="n">barrier</span><span class="p">()</span>
+
+<span class="n">groverCircuit</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span><span class="n">cr</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;qiskit.circuit.instructionset.InstructionSet at 0x1a26e6e890&gt;</pre>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">groverCircuit</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s2">&quot;mpl&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea output_execute_result">
+<img src="../images/ch-algorithms/grover_40_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="3.1.1-Experiment-with-Simulators--">3.1.1 Experiment with Simulators  <a id="3qubits-simulation" /><a class="anchor-link" href="#3.1.1-Experiment-with-Simulators--"> </a></h3><p>We can run the above circuit on the simulator.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">backend</span> <span class="o">=</span> <span class="n">BasicAer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">)</span>
+<span class="n">shots</span> <span class="o">=</span> <span class="mi">1024</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">groverCircuit</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="n">shots</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+<span class="n">answer</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get_counts</span><span class="p">()</span>
+<span class="n">plot_histogram</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea output_execute_result">
+<img src="../images/ch-algorithms/grover_42_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As we can see, the algorithm discovers our marked states $\lvert101\rangle$ and $\lvert110\rangle$.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="3.1.2-Experiment-with-Real-Devices--">3.1.2 Experiment with Real Devices  <a id="3qubits-device" /><a class="anchor-link" href="#3.1.2-Experiment-with-Real-Devices--"> </a></h3><p>We can run the circuit on the real device as below.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">backend</span> <span class="o">=</span> <span class="n">least_busy</span><span class="p">(</span><span class="n">provider</span><span class="o">.</span><span class="n">backends</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">configuration</span><span class="p">()</span><span class="o">.</span><span class="n">n_qubits</span> <span class="o">&lt;=</span> <span class="mi">5</span> <span class="ow">and</span> 
+                                   <span class="ow">not</span> <span class="n">x</span><span class="o">.</span><span class="n">configuration</span><span class="p">()</span><span class="o">.</span><span class="n">simulator</span> <span class="ow">and</span> <span class="n">x</span><span class="o">.</span><span class="n">status</span><span class="p">()</span><span class="o">.</span><span class="n">operational</span><span class="o">==</span><span class="kc">True</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;least busy backend: &quot;</span><span class="p">,</span> <span class="n">backend</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>least busy backend:  ibmqx2
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Run our circuit on the least busy backend. Monitor the execution of the job in the queue</span>
+<span class="kn">from</span> <span class="nn">qiskit.tools.monitor</span> <span class="kn">import</span> <span class="n">job_monitor</span>
+
+<span class="n">shots</span> <span class="o">=</span> <span class="mi">1024</span>
+<span class="n">job</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">groverCircuit</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="n">shots</span><span class="p">)</span>
+
+<span class="n">job_monitor</span><span class="p">(</span><span class="n">job</span><span class="p">,</span> <span class="n">interval</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Job Status: job has successfully run
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Get the results from the computation</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+<span class="n">answer</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="n">groverCircuit</span><span class="p">)</span>
+<span class="n">plot_histogram</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea output_execute_result">
+<img src="../images/ch-algorithms/grover_47_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As we can see, the algorithm discovers our marked states $\lvert101\rangle$ and $\lvert110\rangle$. The other results are due to errors in the quantum computation.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="4.-Problems-">4. Problems <a id="problems" /><a class="anchor-link" href="#4.-Problems-"> </a></h2><ol>
+<li><p>The above <a href="#example">example</a> and <a href="#implementation">implementation</a> of Grover is to find the two marked $3$-qubit states $\lvert101\rangle$ and $\lvert110\rangle$. Modify the implementation to find one marked $2$-qubit state $\lvert01\rangle$. Are the results what you expect? Explain.</p>
+</li>
+<li><p>The above <a href="#example">example</a> and <a href="#implementation">implementation</a> of Grover is to find the two marked $3$-qubit states $\lvert101\rangle$ and $\lvert110\rangle$. Modify the implementation to find one marked $4$-qubit state $\lvert0101\rangle$. Are the results what you expect? Explain.</p>
+</li>
+</ol>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="5.-References-">5. References <a id="references" /><a class="anchor-link" href="#5.-References-"> </a></h2><ol>
+<li>L. K. Grover (1996), "A fast quantum mechanical algorithm for database search", Proceedings of the 28th Annual ACM Symposium on the Theory of Computing (STOC 1996), <a href="http://doi.acm.org/10.1145/237814.237866">doi:10.1145/237814.237866</a>, <a href="https://arxiv.org/abs/quant-ph/9605043">arXiv:quant-ph/9605043</a></li>
+<li>C. Figgatt, D. Maslov, K. A. Landsman, N. M. Linke, S. Debnath &amp; C. Monroe (2017), "Complete 3-Qubit Grover search on a programmable quantum computer", Nature Communications, Vol 8, Art 1918, <a href="https://doi.org/10.1038/s41467-017-01904-7">doi:10.1038/s41467-017-01904-7</a>, <a href="https://arxiv.org/abs/1703.10535">arXiv:1703.10535 </a></li>
+<li>I. Chuang &amp; M. Nielsen, "Quantum Computation and Quantum Information", Cambridge: Cambridge University Press, 2000.</li>
+</ol>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">qiskit</span>
+<span class="n">qiskit</span><span class="o">.</span><span class="n">__qiskit_version__</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{&#39;qiskit-terra&#39;: &#39;0.10.0&#39;,
+ &#39;qiskit-aer&#39;: &#39;0.3.2&#39;,
+ &#39;qiskit-ignis&#39;: &#39;0.2.0&#39;,
+ &#39;qiskit-ibmq-provider&#39;: &#39;0.3.3&#39;,
+ &#39;qiskit-aqua&#39;: &#39;0.6.1&#39;,
+ &#39;qiskit&#39;: &#39;0.13.0&#39;}</pre>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+ 
+
+
+    </main>
+    
+        </div>
+        <nav class="c-page__nav">
+  
+    
+    <a id="js-page__nav__prev" class="c-page__nav__prev" href="/textbook/ch-algorithms/quantum-phase-estimation.html">
+      〈 <span class="u-margin-right-tiny"></span> 
+    </a>
+  
+
+  
+    
+    <a id="js-page__nav__next" class="c-page__nav__next" href="/textbook/ch-applications/vqe-molecules.html">
+       <span class="u-margin-right-tiny"></span> 〉
+    </a>
+  
+</nav>
+
+        <footer>
+  <p class="footer">This page was created by <a href="https://github.com/jupyter/jupyter-book/graphs/contributors">The Jupyter Book Community</a></p>
+</footer>
+
+      </main>
+    </div>
+  </body>
+</html>
