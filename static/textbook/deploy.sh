@@ -5,9 +5,9 @@ org=qiskit-community
 repo=community.qiskit.org
 path=textbook
 
-if [[ "$1" != "stable" ]] && [[ "$1" != "" ]]
+if [[ $TRAVIS_BRANCH != "stable" ]] && [[ $TRAVIS_BRANCH != "" ]]
 then
-    path="${path}-${1}"
+    path="${path}-${TRAVIS_BRANCH}"
 fi
 
 download_repo () {
@@ -21,9 +21,9 @@ download_repo () {
 push_repo () {
   root=$1
   pushd $root/$repo || return
-  git add static/textbook
+  git add static/${path}
   git add .
-  git commit -m"Updating textbook to ${TRAVIS_REPO_SLUG}@${TRAVIS_COMMIT}"
+  git commit -m"Updating ${path} to ${TRAVIS_REPO_SLUG}@${TRAVIS_COMMIT}"
   git push origin master
   popd || return
 }
