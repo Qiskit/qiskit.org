@@ -1,0 +1,4229 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+
+  <script>
+(function () {
+  'use strict'
+  window.digitalData = {
+    page: {
+      pageInfo: {
+        productTitle: 'IBM Q Experience',
+        analytics: {
+          category: 'Qiskit.org'
+        }
+      }
+    }
+  }
+  window._analytics = {
+    segment_key: 'ffdYLviQze3kzomaINXNk6NwpY9LlXcw'
+  }
+}());
+</script>
+<script async src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,minimum-scale=1">
+
+  <title>Investigating Quantum Hardware Using Qiskit</title>
+  <meta name="description" content="            Calibrating Qubits using OpenPulse ContentsIntroductionFinding our qubitRabi experiment0 vs 1Measuring T1Ramsey experimentMeasuring T2Dynamical D...">
+
+  <link rel="canonical" href="https://community.qiskit.orgtextbook-master/ch-quantum-hardware/calibrating-qubits-openpulse.html">
+  <link rel="alternate" type="application/rss+xml" title="Qiskit Textbook" href="https://community.qiskit.orgtextbook-master/feed.xml">
+
+  <meta property="og:url"         content="https://community.qiskit.orgtextbook-master/ch-quantum-hardware/calibrating-qubits-openpulse.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Investigating Quantum Hardware Using Qiskit" />
+<meta property="og:description" content="            Calibrating Qubits using OpenPulse ContentsIntroductionFinding our qubitRabi experiment0 vs 1Measuring T1Ramsey experimentMeasuring T2Dynamical D..." />
+<meta property="og:image"       content="https://community.qiskit.org/textbook-master/images/logo/logo.png" />
+
+<meta name="twitter:card" content="summary">
+
+
+  <script type="application/ld+json">
+  {
+  "@context": "http://schema.org",
+  "@type": "NewsArticle",
+  "mainEntityOfPage": "https://community.qiskit.orgtextbook-master/ch-quantum-hardware/calibrating-qubits-openpulse.html",
+  "headline": "Investigating Quantum Hardware Using Qiskit",
+  "datePublished": "2019-12-08T14:00:17+00:00",
+  "dateModified": "2019-12-08T14:00:17+00:00",
+  "description": "            Calibrating Qubits using OpenPulse ContentsIntroductionFinding our qubitRabi experiment0 vs 1Measuring T1Ramsey experimentMeasuring T2Dynamical D...",
+  "author": {
+    "@type": "Person",
+    "name": "The Qiskit Team"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Data 100 at UC Berkeley",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://community.qiskit.orgtextbook-master",
+      "width": 60,
+      "height": 60
+    }
+  },
+  "image": {
+    "@type": "ImageObject",
+    "url": "https://community.qiskit.orgtextbook-master",
+    "height": 60,
+    "width": 60
+  }
+}
+
+  </script>
+  <link rel="stylesheet" href="/textbook-master/assets/css/styles.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css ">
+
+  <!-- <link rel="manifest" href="/manifest.json"> -->
+  <!-- <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#efae0a"> -->
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+  <meta name="theme-color" content="#233947">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/x-icon" href="/textbook-master/images/logo/favicon.ico">
+
+  <!-- MathJax Config -->
+  <!-- Allow inline math using $ and automatically break long math lines -->
+<!-- (mostly) copied from nbconvert configuration -->
+<!-- https://github.com/jupyter/nbconvert/blob/master/nbconvert/templates/html/mathjax.tpl -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true,
+        processEnvironments: true
+    },
+    // Center justify equations in code and markdown cells. Elsewhere
+    // we use CSS to left justify single line equations in code cells.
+    displayAlign: 'center',
+    "HTML-CSS": {
+        styles: {'.MathJax_Display': {"margin": 0}},
+        linebreaks: { automatic: true },
+    }
+});
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_HTML' async></script>
+
+  <!-- DOM updating function -->
+  <script>
+const runWhenDOMLoaded = cb => {
+  if (document.readyState != 'loading') {
+    cb()
+  } else if (document.addEventListener) {
+    document.addEventListener('DOMContentLoaded', cb)
+  } else {
+    document.attachEvent('onreadystatechange', function() {
+      if (document.readyState == 'complete') cb()
+    })
+  }
+}
+
+// Helper function to init things quickly
+initFunction = function(myfunc) {
+  runWhenDOMLoaded(myfunc);
+  document.addEventListener('turbolinks:load', myfunc);
+};
+</script>
+
+  <!-- Define some javascript variables that will be useful in other javascript -->
+  <script>
+    const site_basename = 'textbook-master';
+  </script>
+
+  <!-- Add AnchorJS to let headers be linked -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js" async></script>
+  <script>
+const initAnchors = () => {
+  if (window.anchors === undefined) {
+    setTimeout(initAnchors, 250)
+    return
+  }
+  anchors.add("main h1, main h2, main h3, main h4")
+}
+
+initFunction(initAnchors);
+</script>
+
+
+  <!-- Include Turbolinks to make page loads fast -->
+  <!-- https://github.com/turbolinks/turbolinks -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/turbolinks/5.2.0/turbolinks.js" async></script>
+  <meta name="turbolinks-cache-control" content="no-cache">
+
+  <!-- Selectors for elements on the page -->
+  <script>
+/**
+ * Select various elements on the page for later use
+ */
+
+// IDs we'll attach to cells
+const codeCellId = index => `codecell${index}`
+const inputCellId = index => `inputcell${index}`
+
+pageElements = {}
+
+// All code cells
+findCodeCells = function() {
+    var codeCells = document.querySelectorAll('div.c-textbook__content > div.highlighter-rouge > div.highlight > pre, div.input_area pre, div.text_cell_render div.highlight pre')
+    pageElements['codeCells'] = codeCells;
+
+    codeCells.forEach((codeCell, index) => {
+      const id = codeCellId(index)
+      codeCell.setAttribute('id', id)
+    })
+};
+
+initFunction(findCodeCells);
+
+// All cells in general
+findInputCells = function() {
+    var inputCells = document.querySelectorAll('div.jb_cell')
+    pageElements['inputCells'] = inputCells;
+
+    inputCells.forEach((inputCell, index) => {
+        const id = inputCellId(index)
+        inputCell.setAttribute('id', id)
+    })
+};
+
+initFunction(findInputCells);
+</script>
+
+  <!-- Load nbinteract for widgets -->
+  
+
+  <!-- Load Thebelab for interactive widgets -->
+  <!-- Include Thebelab for interactive code if it's enabled -->
+
+
+
+  <!-- Load the auto-generating TOC -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js" async></script>
+<script>
+const initToc = () => {
+  if (window.tocbot === undefined) {
+    setTimeout(initToc, 250)
+    return
+  }
+
+  // Check whether we have any sidebar content. If not, then show the sidebar earlier.
+  var SIDEBAR_CONTENT_TAGS = ['.tag_full_width', '.tag_popout'];
+  var sidebar_content_query = SIDEBAR_CONTENT_TAGS.join(', ')
+  if (document.querySelectorAll(sidebar_content_query).length === 0) {
+    document.querySelector('nav.onthispage').classList.add('no_sidebar_content')
+  }
+
+  // Initialize the TOC bot
+  tocbot.init({
+    tocSelector: 'nav.onthispage',
+    contentSelector: '.c-textbook__content',
+    headingSelector: 'h2, h3',
+    orderedList: false,
+    collapseDepth: 6,
+    listClass: 'toc__menu',
+    activeListItemClass: "",  // Not using
+    activeLinkClass: "", // Not using
+  });
+
+}
+initFunction(initToc);
+</script>
+
+
+  <!-- Google analytics -->
+  <script src="/textbook-master/assets/js/ga.js" async></script>
+
+  <!-- Clipboard copy button -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" async></script>
+
+  <!-- Load custom website scripts -->
+  <script src="/textbook-master/assets/js/scripts.js" async></script>
+
+  <!-- Load custom user CSS and JS  -->
+  <script src="/textbook-master/assets/custom/custom.js" async></script>
+  <link rel="stylesheet" href="/textbook-master/assets/custom/custom.css">
+
+  <!-- Update interact links w/ REST param, is defined in includes so we can use templates -->
+  
+
+  <!-- Lunr search code - will only be executed on the /search page -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.6/lunr.min.js" async></script>
+  <script>var initQuery = function() {
+  // See if we have a search box
+  var searchInput = document.querySelector('input#lunr_search');
+  if (searchInput === null) {
+    return;
+  }
+
+  // Function to parse our lunr cache
+  var idx = lunr(function () {
+    this.field('title')
+    this.field('excerpt')
+    this.field('categories')
+    this.field('tags')
+    this.ref('id')
+
+    this.pipeline.remove(lunr.trimmer)
+
+    for (var item in store) {
+      this.add({
+        title: store[item].title,
+        excerpt: store[item].excerpt,
+        categories: store[item].categories,
+        tags: store[item].tags,
+        id: item
+      })
+    }
+  });
+
+  // Run search upon keyup
+  searchInput.addEventListener('keyup', function () {
+    var resultdiv = document.querySelector('#results');
+    var query = document.querySelector("input#lunr_search").value.toLowerCase();
+    var result =
+      idx.query(function (q) {
+        query.split(lunr.tokenizer.separator).forEach(function (term) {
+          q.term(term, { boost: 100 })
+          if(query.lastIndexOf(" ") != query.length-1){
+            q.term(term, {  usePipeline: false, wildcard: lunr.Query.wildcard.TRAILING, boost: 10 })
+          }
+          if (term != ""){
+            q.term(term, {  usePipeline: false, editDistance: 1, boost: 1 })
+          }
+        })
+      });
+
+      // Empty the results div
+      while (resultdiv.firstChild) {
+        resultdiv.removeChild(resultdiv.firstChild);
+      }
+
+    resultdiv.insertAdjacentHTML('afterbegin', '<p class="results__found">'+result.length+' Result(s) found</p>');
+    for (var item in result) {
+      var ref = result[item].ref;
+      if(store[ref].teaser){
+        var searchitem =
+          '<div class="list__item">'+
+            '<article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">'+
+              '<h2 class="archive__item-title" itemprop="headline">'+
+                '<a href="'+store[ref].url+'" rel="permalink">'+store[ref].title+'</a>'+
+              '</h2>'+
+              '<div class="archive__item-teaser">'+
+                '<img src="'+store[ref].teaser+'" alt="">'+
+              '</div>'+
+              '<p class="archive__item-excerpt" itemprop="description">'+store[ref].excerpt.split(" ").splice(0,20).join(" ")+'...</p>'+
+            '</article>'+
+          '</div>';
+      }
+      else{
+    	  var searchitem =
+          '<div class="list__item">'+
+            '<article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">'+
+              '<h2 class="archive__item-title" itemprop="headline">'+
+                '<a href="'+store[ref].url+'" rel="permalink">'+store[ref].title+'</a>'+
+              '</h2>'+
+              '<p class="archive__item-excerpt" itemprop="description">'+store[ref].excerpt.split(" ").splice(0,20).join(" ")+'...</p>'+
+            '</article>'+
+          '</div>';
+      }
+      resultdiv.insertAdjacentHTML('beforeend', searchitem);
+    }
+  });
+};
+
+initFunction(initQuery);
+</script>
+
+  <!-- Load JS that depends on site variables -->
+  <script>
+/**
+ * Set up copy/paste for code blocks
+ */
+const clipboardButton = id =>
+  `<a id="copy-button-${id}" class="btn copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#${id}">
+    <img src="/textbook-master/assets/images/copy-button.svg" alt="Copy to clipboard">
+  </a>`
+
+// Clears selected text since ClipboardJS will select the text when copying
+const clearSelection = () => {
+  if (window.getSelection) {
+    window.getSelection().removeAllRanges()
+  } else if (document.selection) {
+    document.selection.empty()
+  }
+}
+
+// Changes tooltip text for two seconds, then changes it back
+const temporarilyChangeTooltip = (el, newText) => {
+  const oldText = el.getAttribute('data-tooltip')
+  el.setAttribute('data-tooltip', newText)
+  setTimeout(() => el.setAttribute('data-tooltip', oldText), 2000)
+}
+
+const addCopyButtonToCodeCells = () => {
+  // If ClipboardJS hasn't loaded, wait a bit and try again. This
+  // happens because we load ClipboardJS asynchronously.
+  if (window.ClipboardJS === undefined) {
+    setTimeout(addCopyButtonToCodeCells, 250)
+    return
+  }
+
+  pageElements['codeCells'].forEach((codeCell) => {
+    const id = codeCell.getAttribute('id')
+    if (document.getElementById("copy-button" + id) == null) {
+      codeCell.insertAdjacentHTML('afterend', clipboardButton(id));
+    }
+  })
+
+  const clipboard = new ClipboardJS('.copybtn')
+  clipboard.on('success', event => {
+    clearSelection()
+    temporarilyChangeTooltip(event.trigger, 'Copied!')
+  })
+
+  clipboard.on('error', event => {
+    temporarilyChangeTooltip(event.trigger, 'Failed to copy')
+  })
+
+  // Get rid of clipboard before the next page visit to avoid memory leak
+  document.addEventListener('turbolinks:before-visit', () =>
+    clipboard.destroy()
+  )
+}
+
+initFunction(addCopyButtonToCodeCells);
+</script>
+
+
+  <!-- Hide cell code -->
+  <script>
+    /**
+    Add buttons to hide code cells
+    */
+
+
+    var setCodeCellVisibility = function (inputField, kind) {
+        // Update the image and class for hidden
+        var id = inputField.getAttribute('data-id');
+        var codeCell = document.querySelector(`#${id} div.highlight`);
+
+        if (kind === "visible") {
+            codeCell.classList.remove('hidden');
+            inputField.checked = true;
+        } else {
+            codeCell.classList.add('hidden');
+            inputField.checked = false;
+        }
+    }
+
+    var toggleCodeCellVisibility = function (event) {
+        // The label is clicked, and now we decide what to do based on the input field's clicked status
+        if (event.target.tagName === "LABEL") {
+            var inputField = event.target.previousElementSibling;
+        } else {
+            // It is the span inside the target
+            var inputField = event.target.parentElement.previousElementSibling;
+        }
+
+        if (inputField.checked === true) {
+            setCodeCellVisibility(inputField, "visible");
+        } else {
+            setCodeCellVisibility(inputField, "hidden");
+        }
+    }
+
+
+    // Button constructor
+    const hideCodeButton = id => `<input class="hidebtn" type="checkbox" id="hidebtn${id}" data-id="${id}"><label title="Toggle cell" for="hidebtn${id}" class="plusminus"><span class="pm_h"></span><span class="pm_v"></span></label>`
+
+    var addHideButton = function () {
+        // If a hide button is already added, don't add another
+        if (document.querySelector('div.tag_hide_input input') !== null) {
+            return;
+        }
+
+        // Find the input cells and add a hide button
+        pageElements['inputCells'].forEach(function (inputCell) {
+            if (!inputCell.classList.contains("tag_hide_input")) {
+                // Skip the cell if it doesn't have a hidecode class
+                return;
+            }
+
+            const id = inputCell.getAttribute('id')
+
+            // Insert the button just inside the end of the next div
+            inputCell.querySelector('div.input').insertAdjacentHTML('beforeend', hideCodeButton(id))
+
+            // Set up the visibility toggle
+            hideLink = document.querySelector(`#${id} div.inner_cell + input + label`);
+            hideLink.addEventListener('click', toggleCodeCellVisibility)
+        });
+    }
+
+
+    // Initialize the hide buttos
+    var initHiddenCells = function () {
+        // Add hide buttons to the cells
+        addHideButton();
+
+        // Toggle the code cells that should be hidden
+        document.querySelectorAll('div.tag_hide_input input').forEach(function (item) {
+            setCodeCellVisibility(item, 'hidden');
+            item.checked = true;
+        })
+    }
+
+    initFunction(initHiddenCells);
+
+</script>
+
+  <!-- Printing the screen -->
+  <!-- Include nbinteract for interactive widgets -->
+<script src="https://printjs-4de6.kxcdn.com/print.min.js" async></script>
+<script>
+printContent = () => {
+    // MathJax displays a second version of any math for assistive devices etc.
+    // This prevents double-rendering in the PDF output.
+    var ignoreAssistList = [];
+    assistives = document.querySelectorAll('.MathJax_Display span.MJX_Assistive_MathML').forEach((element, index) => {
+        var thisId = 'MathJax-assistive-' + index.toString();
+        element.setAttribute('id', thisId);
+        ignoreAssistList.push(thisId)
+    });
+
+    // Print the actual content object
+    printJS({
+        printable: 'textbook_content',
+        type: 'html',
+        css: "/textbook-master/assets/css/styles.css",
+        scanStyles: false,
+        targetStyles: ["*"],
+        ignoreElements: ignoreAssistList
+    })
+};
+
+initPrint = () => {
+    document.querySelector('#interact-button-print').addEventListener('click', printContent)
+}
+
+initFunction(initPrint)
+</script>
+
+</head>
+
+  <body>
+    <!-- .js-show-sidebar shows sidebar by default -->
+    <div id="js-textbook" class="c-textbook js-show-sidebar">
+      
+
+
+
+<nav id="js-sidebar" class="c-textbook__sidebar">
+  <a href="https://delapuente.github.io/qiskit-textbook"><img src="/textbook-master/images/logo/logo.png" class="textbook_logo" id="sidebar-logo" data-turbolinks-permanent/></a>
+  <h2 class="c-sidebar__title">Qiskit Textbook</h2>
+  <ul class="c-sidebar__chapters">
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook-master/preface.html"
+        >
+          
+          Preface
+        </a>
+
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook-master/upcoming.html"
+        >
+          
+          Upcoming
+        </a>
+
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook-master/ch-prerequisites/python-and-jupyter-notebooks.html"
+        >
+          
+            0.
+          
+          Prerequisites
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-prerequisites/python-and-jupyter-notebooks.html"
+                >
+                  
+                    0.1
+                  
+                  Python and Jupyter Notebooks
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-prerequisites/qiskit.html"
+                >
+                  
+                    0.2
+                  
+                  Qiskit
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-prerequisites/linear_algebra.html"
+                >
+                  
+                    0.3
+                  
+                  Linear Algebra
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook-master/ch-states/introduction.html"
+        >
+          
+            1.
+          
+          Quantum States and Qubits
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-states/introduction.html"
+                >
+                  
+                    1.1
+                  
+                  Introduction
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-states/atoms-computation.html"
+                >
+                  
+                    1.2
+                  
+                  The Atoms of Computation
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-states/unique-properties-qubits.html"
+                >
+                  
+                    1.3
+                  
+                  The Unique Properties of Qubits
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-states/writing-down-qubit-states.html"
+                >
+                  
+                    1.4
+                  
+                  Writing Down Qubit States
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-states/pauli-matrices-bloch-sphere.html"
+                >
+                  
+                    1.5
+                  
+                  Pauli Matrices and the Bloch Sphere
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-states/states-many-qubits.html"
+                >
+                  
+                    1.6
+                  
+                  States for Many Qubits
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook-master/ch-gates/introduction.html"
+        >
+          
+            2.
+          
+          Single Qubits and Multi-Qubits gates
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-gates/introduction.html"
+                >
+                  
+                    2.1
+                  
+                  Introduction
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-gates/quantum-gates.html"
+                >
+                  
+                    2.2
+                  
+                  Quantum Gates
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-gates/fun-matrices.html"
+                >
+                  
+                    2.3
+                  
+                  Fun with Matrices
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-gates/standard-gate-set.html"
+                >
+                  
+                    2.4
+                  
+                  The Standard Gate Set
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-gates/proving-universality.html"
+                >
+                  
+                    2.5
+                  
+                  Proving Universality
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-gates/basic-circuit-identities.html"
+                >
+                  
+                    2.6
+                  
+                  Basic Circuit Identities
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook-master/ch-ex/ex1.html"
+        >
+          
+          Problems
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-ex/ex1.html"
+                >
+                  
+                  Set 1. Classical Logic Gates with Quantum Circuits
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-ex/ex2.html"
+                >
+                  
+                  Set 2. Basic Synthesis of Single-Qubit Gates
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-ex/ex3.html"
+                >
+                  
+                  Set 3. Building the Best AND Gate
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook-master/ch-algorithms/teleportation.html"
+        >
+          
+            3.
+          
+          Quantum Algorithms
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-algorithms/teleportation.html"
+                >
+                  
+                    3.1
+                  
+                  Quantum Teleportation
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-algorithms/deutsch-josza.html"
+                >
+                  
+                    3.2
+                  
+                  Deutsch-Josza Algorithm
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-algorithms/bernstein-vazirani.html"
+                >
+                  
+                    3.3
+                  
+                  Bernstein-Vazirani Algorithm
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-algorithms/simon.html"
+                >
+                  
+                    3.4
+                  
+                  Simon's Algorithm
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-algorithms/quantum-fourier-transform.html"
+                >
+                  
+                    3.5
+                  
+                  Quantum Fourier Transform
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-algorithms/quantum-phase-estimation.html"
+                >
+                  
+                    3.6
+                  
+                  Quantum Phase Estimation
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-algorithms/grover.html"
+                >
+                  
+                    3.7
+                  
+                  Grover's Algorithm
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook-master/ch-applications/vqe-molecules.html"
+        >
+          
+            4.
+          
+          Quantum Algorithms for Applications
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-applications/vqe-molecules.html"
+                >
+                  
+                    4.1
+                  
+                  Simulating Molecules using VQE
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-applications/qaoa.html"
+                >
+                  
+                    4.2
+                  
+                  Solving combinatorial optimization problems using QAOA
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-applications/satisfiability-grover.html"
+                >
+                  
+                    4.3
+                  
+                  Solving Satisfiability Problems using Grover's Algorithm
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry c-sidebar__entry--active"
+          href="/textbook-master/ch-quantum-hardware/calibrating-qubits-openpulse.html"
+        >
+          
+            5.
+          
+          Investigating Quantum Hardware Using Qiskit
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry c-sidebar__entry--active"
+                  href="/textbook-master/ch-quantum-hardware/calibrating-qubits-openpulse.html"
+                >
+                  
+                    5.1
+                  
+                  Calibrating Qubits with OpenPulse
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-quantum-hardware/error-correction-repetition-code.html"
+                >
+                  
+                    5.2
+                  
+                  Introduction to Quantum Error Correction using Repetition Codes
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-quantum-hardware/measurement-error-mitigation.html"
+                >
+                  
+                    5.3
+                  
+                  Measurement Error Mitigation
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-quantum-hardware/randomized-benchmarking.html"
+                >
+                  
+                    5.4
+                  
+                  Randomized Benchmarking
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-quantum-hardware/measuring-quantum-volume.html"
+                >
+                  
+                    5.5
+                  
+                  Measuring Quantum Volume
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook-master/ch-paper-implementations/vqls.html"
+        >
+          
+            6.
+          
+          Implementations of Recent Quantum Algorithms
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-paper-implementations/vqls.html"
+                >
+                  
+                    6.1
+                  
+                  Variational Quantum Linear Solver
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+  </ul>
+  <p class="sidebar_footer">Powered by <a href="https://github.com/jupyter/jupyter-book">Jupyter Book</a></p>
+</nav>
+
+      
+      <div class="c-topbar" id="top-navbar">
+  <!-- We show the sidebar by default so we use .is-active -->
+  <div class="c-topbar__buttons">
+    <button
+      id="js-sidebar-toggle"
+      class="hamburger hamburger--arrowalt is-active"
+    >
+      <span class="hamburger-box">
+        <span class="hamburger-inner"></span>
+      </span>
+    </button>
+    <div class="buttons">
+<div class="download-buttons-dropdown">
+    <button id="dropdown-button-trigger" class="interact-button"><i class="fa fa-download"></i></button>
+    <div class="download-buttons">
+        <a href="/textbook-master/content/ch-quantum-hardware/calibrating-qubits-openpulse.ipynb" download>
+        <button id="interact-button-download" class="interact-button">ORIG</button>
+        </a>
+        
+        <a id="interact-button-print"><button id="interact-button-download" class="interact-button">PDF</button></a>
+    </div>
+</div>
+
+  
+  
+  
+  
+
+
+</div>
+
+  </div>
+  <!-- Empty sidebar placeholder that we'll auto-fill with javascript -->
+  <aside class="sidebar__right">
+    <header><h4 class="nav__title"><i class="fa fa-list"></i>   On this page</h4></header>
+    <nav class="onthispage">
+    </nav>
+  </aside>
+  <a href="/textbook-master/search.html" class="topbar-right-button" id="search-button"><i class="fa fa-search"></i></a>
+</div>
+
+      <main class="c-textbook__page" tabindex="-1">
+        <div class="c-textbook__content" id="textbook_content">
+              <main class="jupyter-page">
+    <div id="page-info"></div>
+    <div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Calibrating-Qubits-using-OpenPulse">Calibrating Qubits using OpenPulse<a class="anchor-link" href="#Calibrating-Qubits-using-OpenPulse"> </a></h1>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Contents</p>
+<ol>
+<li>Introduction</li>
+<li>Finding our qubit</li>
+<li>Rabi experiment</li>
+<li>0 vs 1</li>
+<li>Measuring T1</li>
+<li>Ramsey experiment</li>
+<li>Measuring T2</li>
+<li>Dynamical Decoupling</li>
+</ol>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="1.-Introduction">1. Introduction<a class="anchor-link" href="#1.-Introduction"> </a></h1>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">qiskit.pulse</span> <span class="k">as</span> <span class="nn">pulse</span>
+<span class="kn">import</span> <span class="nn">qiskit.pulse.pulse_lib</span> <span class="k">as</span> <span class="nn">pulse_lib</span>
+<span class="kn">from</span> <span class="nn">qiskit.compiler</span> <span class="kn">import</span> <span class="n">assemble</span>
+
+<span class="kn">import</span> <span class="nn">qiskit</span>
+<span class="n">qiskit</span><span class="o">.</span><span class="n">__qiskit_version__</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{&#39;qiskit&#39;: &#39;0.11.1&#39;,
+ &#39;qiskit-terra&#39;: &#39;0.8.2&#39;,
+ &#39;qiskit-ignis&#39;: &#39;0.1.1&#39;,
+ &#39;qiskit-aer&#39;: &#39;0.2.3&#39;,
+ &#39;qiskit-ibmq-provider&#39;: &#39;0.3.1&#39;,
+ &#39;qiskit-aqua&#39;: &#39;0.5.3&#39;}</pre>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">IBMQ</span>
+<span class="n">IBMQ</span><span class="o">.</span><span class="n">load_account</span><span class="p">()</span>
+<span class="n">provider</span> <span class="o">=</span> <span class="n">IBMQ</span><span class="o">.</span><span class="n">get_provider</span><span class="p">(</span><span class="n">hub</span><span class="o">=</span><span class="s1">&#39;your-hub-name&#39;</span><span class="p">)</span> <span class="c1"># change to your hub name</span>
+<span class="n">backend</span> <span class="o">=</span> <span class="n">provider</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;ibmq_poughkeepsie&#39;</span><span class="p">)</span>
+
+<span class="n">backend_config</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">configuration</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit.tools.jupyter</span> <span class="kn">import</span> <span class="n">backend_overview</span><span class="p">,</span> <span class="n">backend_monitor</span>
+<span class="o">%</span><span class="k">qiskit_backend_monitor</span> backend
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>
+</pre>
+</div>
+</div>
+</div>
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+
+ 
+ 
+<div id="9a89f122-3fbf-4972-8ce7-7a9e06d633f0"></div>
+<div class="output_subarea output_widget_view ">
+<script type="text/javascript">
+var element = $('#9a89f122-3fbf-4972-8ce7-7a9e06d633f0');
+</script>
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "8f070edd14414266b49073cad7218ba2", "version_major": 2, "version_minor": 0}
+</script>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The superconducting devices at IBM are routinely calibrated to determine the properties of each qubit. The calibration procedure determines the qubit frequency, coherence and energy relaxation times, and pulse parameters, among other things. In this notebook, we show how these parameters can be determined at the microwave level using Terra.Pulse.</p>
+<p>For an introduction to the experiments, please see <a href="https://arxiv.org/pdf/0812.1865.pdf">this paper</a> or <a href="https://arxiv.org/abs/cond-mat/0703002">this paper</a> or <a href="http://qulab.eng.yale.edu/documents/reprints/QIP_Devoret_squbit_review.pdf">this paper</a>.</p>
+<p>Note: Pulse is a fairly new component of Qiskit. Please contact abraham.asfaw@ibm.com if you find that something in this notebook is suddenly broken.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">backend_defaults</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">defaults</span><span class="p">()</span>
+<span class="n">backend_devicespec</span> <span class="o">=</span> <span class="n">pulse</span><span class="o">.</span><span class="n">DeviceSpecification</span><span class="o">.</span><span class="n">create_from</span><span class="p">(</span><span class="n">backend</span><span class="p">)</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="n">backend_config</span><span class="o">.</span><span class="n">dt</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="2.-Finding-our-qubit">2. Finding our qubit<a class="anchor-link" href="#2.-Finding-our-qubit"> </a></h1>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># choose device to work on</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">IBMQ</span>
+<span class="n">IBMQ</span><span class="o">.</span><span class="n">load_account</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Define the frequency range that will be swept in search of the qubit.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">qubit</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">center_frequency_GHz</span> <span class="o">=</span> <span class="n">backend_defaults</span><span class="o">.</span><span class="n">qubit_freq_est</span><span class="p">[</span><span class="n">qubit</span><span class="p">]</span>
+<span class="c1"># define frequencies to do VNA sweep</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">frequency_span_kHz</span> <span class="o">=</span> <span class="mi">20000</span>
+<span class="n">frequency_step_kHz</span> <span class="o">=</span> <span class="mi">1000</span>
+
+<span class="n">frequency_min</span> <span class="o">=</span> <span class="n">center_frequency_GHz</span> <span class="o">-</span> <span class="n">frequency_span_kHz</span><span class="o">/</span><span class="mf">2.e6</span>
+<span class="n">frequency_max</span> <span class="o">=</span> <span class="n">center_frequency_GHz</span> <span class="o">+</span> <span class="n">frequency_span_kHz</span><span class="o">/</span><span class="mf">2.e6</span>
+<span class="n">frequencies_GHz</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">frequency_min</span><span class="p">,</span> <span class="n">frequency_max</span><span class="p">,</span> <span class="n">frequency_step_kHz</span><span class="o">/</span><span class="mf">1e6</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">frequencies_GHz</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[4.82198758 4.82298758 4.82398758 4.82498758 4.82598758 4.82698758
+ 4.82798758 4.82898758 4.82998758 4.83098758 4.83198758 4.83298758
+ 4.83398758 4.83498758 4.83598758 4.83698758 4.83798758 4.83898758
+ 4.83998758 4.84098758]
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Define drive and measurement pulse parameters for the experiment</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># drive pulse parameters</span>
+<span class="n">drive_power</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">drive_samples</span> <span class="o">=</span> <span class="mi">128</span>
+<span class="n">drive_sigma</span> <span class="o">=</span> <span class="mi">16</span>
+
+<span class="c1"># creating drive pulse</span>
+<span class="n">drive_pulse</span> <span class="o">=</span> <span class="n">pulse_lib</span><span class="o">.</span><span class="n">gaussian</span><span class="p">(</span><span class="n">duration</span><span class="o">=</span><span class="n">drive_samples</span><span class="p">,</span> <span class="n">amp</span><span class="o">=</span><span class="n">drive_power</span><span class="p">,</span>
+                                 <span class="n">sigma</span><span class="o">=</span><span class="n">drive_sigma</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;mydrivepulse&#39;</span><span class="p">)</span>
+<span class="n">drive_pulse_qubit</span> <span class="o">=</span> <span class="n">drive_pulse</span><span class="p">(</span><span class="n">backend_devicespec</span><span class="o">.</span><span class="n">q</span><span class="p">[</span><span class="n">qubit</span><span class="p">]</span><span class="o">.</span><span class="n">drive</span><span class="p">)</span>
+
+<span class="c1"># measurement pulse parameters</span>
+<span class="n">meas_amp</span> <span class="o">=</span> <span class="mf">0.05</span>
+<span class="n">meas_samples</span> <span class="o">=</span> <span class="mi">1200</span>
+<span class="n">meas_sigma</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">meas_risefall</span> <span class="o">=</span> <span class="mi">25</span>
+
+<span class="c1"># creating measurement pulse</span>
+<span class="n">meas_pulse</span> <span class="o">=</span> <span class="n">pulse_lib</span><span class="o">.</span><span class="n">gaussian_square</span><span class="p">(</span><span class="n">duration</span><span class="o">=</span><span class="n">meas_samples</span><span class="p">,</span> <span class="n">amp</span><span class="o">=</span><span class="n">meas_amp</span><span class="p">,</span>
+                                       <span class="n">sigma</span><span class="o">=</span><span class="n">meas_sigma</span><span class="p">,</span> <span class="n">risefall</span><span class="o">=</span><span class="n">meas_risefall</span><span class="p">,</span> 
+                                       <span class="n">name</span><span class="o">=</span><span class="s1">&#39;mymeasurepulse&#39;</span><span class="p">)</span>
+<span class="n">meas_pulse_qubit</span> <span class="o">=</span> <span class="n">meas_pulse</span><span class="p">(</span><span class="n">backend_devicespec</span><span class="o">.</span><span class="n">q</span><span class="p">[</span><span class="n">qubit</span><span class="p">]</span><span class="o">.</span><span class="n">measure</span><span class="p">)</span>
+
+<span class="c1"># create acquire pulse</span>
+<span class="n">acq_cmd</span><span class="o">=</span><span class="n">pulse</span><span class="o">.</span><span class="n">Acquire</span><span class="p">(</span><span class="n">duration</span><span class="o">=</span><span class="n">meas_samples</span><span class="p">)</span>
+<span class="n">acq_cmd_qubit</span> <span class="o">=</span> <span class="n">acq_cmd</span><span class="p">(</span><span class="n">backend_devicespec</span><span class="o">.</span><span class="n">q</span><span class="p">,</span> <span class="n">backend_devicespec</span><span class="o">.</span><span class="n">mem</span><span class="p">)</span>
+
+<span class="c1"># combined measure and acquire pulse</span>
+<span class="n">measure_and_acquire_qubit</span> <span class="o">=</span> <span class="n">meas_pulse_qubit</span> <span class="o">|</span> <span class="n">acq_cmd_qubit</span>
+
+<span class="c1"># scalefactor for received data</span>
+<span class="n">scale_factor</span> <span class="o">=</span> <span class="mf">1e-10</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Once the pulse parameters have been defined, we can create the pulse schedules corresponding to each frequency in the sweep.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># schedules</span>
+<span class="n">schedules</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">schedule_LOs</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="n">num_shots_per_frequency</span> <span class="o">=</span> <span class="mi">256</span>
+<span class="k">for</span> <span class="n">jj</span><span class="p">,</span> <span class="n">drive_frequency</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">frequencies_GHz</span><span class="p">):</span>
+    <span class="c1"># start an empty schedule with a label</span>
+    <span class="n">this_schedule</span> <span class="o">=</span> <span class="n">pulse</span><span class="o">.</span><span class="n">Schedule</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Frequency = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">drive_frequency</span><span class="p">))</span>
+    <span class="n">this_schedule</span> <span class="o">+=</span> <span class="n">drive_pulse_qubit</span>
+    <span class="n">this_schedule</span> <span class="o">+=</span> <span class="n">measure_and_acquire_qubit</span> <span class="o">&lt;&lt;</span> <span class="n">this_schedule</span><span class="o">.</span><span class="n">duration</span>
+
+    <span class="n">schedules</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">this_schedule</span><span class="p">)</span>
+    <span class="n">thisLO</span> <span class="o">=</span> <span class="n">pulse</span><span class="o">.</span><span class="n">LoConfig</span><span class="p">({</span><span class="n">backend_devicespec</span><span class="o">.</span><span class="n">q</span><span class="p">[</span><span class="n">qubit</span><span class="p">]</span><span class="o">.</span><span class="n">drive</span><span class="p">:</span> <span class="n">drive_frequency</span><span class="p">})</span>
+    <span class="n">schedule_LOs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">thisLO</span><span class="p">)</span>
+        
+<span class="n">VNASweep_experiment_qobj</span> <span class="o">=</span> <span class="n">assemble</span><span class="p">(</span><span class="n">schedules</span><span class="p">,</span> <span class="n">backend</span> <span class="o">=</span> <span class="n">backend</span><span class="p">,</span> 
+                            <span class="n">meas_level</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">meas_return</span><span class="o">=</span><span class="s1">&#39;single&#39;</span><span class="p">,</span> 
+                            <span class="n">shots</span><span class="o">=</span><span class="n">num_shots_per_frequency</span><span class="p">,</span>
+                            <span class="n">schedule_los</span> <span class="o">=</span> <span class="n">schedule_LOs</span>
+                            <span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">schedules</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">channels_to_plot</span><span class="o">=</span><span class="p">[</span><span class="n">backend_devicespec</span><span class="o">.</span><span class="n">q</span><span class="p">[</span><span class="n">qubit</span><span class="p">]</span><span class="o">.</span><span class="n">measure</span><span class="p">,</span> 
+                                           <span class="n">backend_devicespec</span><span class="o">.</span><span class="n">q</span><span class="p">[</span><span class="n">qubit</span><span class="p">]</span><span class="o">.</span><span class="n">drive</span><span class="p">,</span>
+                                           <span class="c1">#backend_devicespec.q[qubit].acquire,</span>
+                                         <span class="p">],</span>
+                                         <span class="n">scaling</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea output_execute_result">
+<img src="../images/ch-quantum-hardware/calibrating-qubits-openpulse_16_0.png"
+>
+</div>
+
+</div>
+</div>
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="../images/ch-quantum-hardware/calibrating-qubits-openpulse_16_1.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">job</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">VNASweep_experiment_qobj</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit.tools.monitor</span> <span class="kn">import</span> <span class="n">job_monitor</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">job</span><span class="o">.</span><span class="n">job_id</span><span class="p">())</span>
+<span class="n">job_monitor</span><span class="p">(</span><span class="n">job</span><span class="p">,</span> <span class="n">monitor_async</span><span class="o">=</span><span class="s1">&#39;True&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">job</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">retrieve_job</span><span class="p">(</span><span class="s1">&#39;5d2e228e15ce0100196d8c22&#39;</span><span class="p">)</span>
+<span class="n">VNASweep_results</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mi">3600</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">plot_X</span> <span class="o">=</span> <span class="n">frequencies_GHz</span>
+<span class="n">plot_Y</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">kk</span><span class="p">,</span> <span class="n">drive_frequency</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">frequencies_GHz</span><span class="p">):</span>
+    <span class="n">thisfrequency_results</span> <span class="o">=</span> <span class="n">VNASweep_results</span><span class="o">.</span><span class="n">get_memory</span><span class="p">(</span><span class="n">kk</span><span class="p">)</span><span class="o">*</span><span class="n">scale_factor</span>
+    <span class="n">plot_Y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>  <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">thisfrequency_results</span><span class="p">[:,</span> <span class="n">qubit</span><span class="p">])</span>  <span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plotter</span>
+<span class="n">plotter</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">plot_X</span><span class="p">,</span> <span class="n">plot_Y</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>
+</pre>
+</div>
+</div>
+</div>
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&lt;matplotlib.lines.Line2D at 0x12e2fd320&gt;]</pre>
+</div>
+
+</div>
+</div>
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="../images/ch-quantum-hardware/calibrating-qubits-openpulse_20_2.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">rough_frequency_qubit</span> <span class="o">=</span> <span class="n">frequencies_GHz</span> <span class="p">[</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span> <span class="n">plot_Y</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">plot_Y</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">rough_frequency_qubit</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">rough_frequency_qubit</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">rough_frequency_qubit</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>4.83199
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="3.-Rabi-experiment">3. Rabi experiment<a class="anchor-link" href="#3.-Rabi-experiment"> </a></h1>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Once we know the frequency of our qubit, the next step is to determine the strength of a $\pi$ pulse.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Rabi experiment parameters</span>
+<span class="n">num_Rabi_points</span> <span class="o">=</span> <span class="mi">64</span>
+<span class="n">num_shots_per_point</span> <span class="o">=</span> <span class="mi">256</span>
+
+<span class="c1"># drive parameters</span>
+<span class="n">drive_power_min</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">drive_power_max</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">drive_powers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">drive_power_min</span><span class="p">,</span> <span class="n">drive_power_max</span><span class="p">,</span> <span class="n">num_Rabi_points</span><span class="p">)</span>
+<span class="n">drive_samples</span> <span class="o">=</span> <span class="mi">128</span>
+<span class="n">drive_sigma</span> <span class="o">=</span> <span class="mi">16</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># create schedules for Rabi experiment </span>
+<span class="n">Rabi_schedules</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">Rabi_schedule_LOs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">ii</span><span class="p">,</span> <span class="n">drive_power</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">drive_powers</span><span class="p">):</span>
+    <span class="n">rabi_pulse</span> <span class="o">=</span> <span class="n">pulse_lib</span><span class="o">.</span><span class="n">gaussian</span><span class="p">(</span><span class="n">duration</span><span class="o">=</span><span class="n">drive_samples</span><span class="p">,</span> <span class="n">amp</span><span class="o">=</span><span class="n">drive_power</span><span class="p">,</span> 
+                                    <span class="n">sigma</span><span class="o">=</span><span class="n">drive_sigma</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;rabi_pulse_</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ii</span><span class="p">))</span>
+    <span class="n">rabi_pulse_qubit</span> <span class="o">=</span> <span class="n">rabi_pulse</span><span class="p">(</span><span class="n">backend_devicespec</span><span class="o">.</span><span class="n">q</span><span class="p">[</span><span class="n">qubit</span><span class="p">]</span><span class="o">.</span><span class="n">drive</span><span class="p">)</span>
+    <span class="c1"># start an empty schedule with a label</span>
+    <span class="n">this_schedule</span> <span class="o">=</span> <span class="n">pulse</span><span class="o">.</span><span class="n">Schedule</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Rabi drive = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">drive_power</span><span class="p">))</span>
+    <span class="n">this_schedule</span> <span class="o">+=</span> <span class="n">rabi_pulse_qubit</span>
+    <span class="n">this_schedule</span> <span class="o">+=</span> <span class="n">measure_and_acquire_qubit</span> <span class="o">&lt;&lt;</span> <span class="n">this_schedule</span><span class="o">.</span><span class="n">duration</span>
+    
+    <span class="n">Rabi_schedules</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">this_schedule</span><span class="p">)</span>
+    <span class="n">thisLO</span> <span class="o">=</span> <span class="n">pulse</span><span class="o">.</span><span class="n">LoConfig</span><span class="p">({</span><span class="n">backend_devicespec</span><span class="o">.</span><span class="n">q</span><span class="p">[</span><span class="n">qubit</span><span class="p">]</span><span class="o">.</span><span class="n">drive</span><span class="p">:</span> <span class="n">rough_frequency_qubit</span><span class="p">})</span>
+    <span class="n">Rabi_schedule_LOs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">thisLO</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Rabi_schedules</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">channels_to_plot</span><span class="o">=</span><span class="p">[</span><span class="n">backend_devicespec</span><span class="o">.</span><span class="n">q</span><span class="p">[</span><span class="n">qubit</span><span class="p">]</span><span class="o">.</span><span class="n">measure</span><span class="p">,</span> 
+                                           <span class="n">backend_devicespec</span><span class="o">.</span><span class="n">q</span><span class="p">[</span><span class="n">qubit</span><span class="p">]</span><span class="o">.</span><span class="n">drive</span><span class="p">,</span>
+                                           <span class="c1">#backend_devicespec.q[qubit].acquire,</span>
+                                         <span class="p">],</span>
+                                         <span class="n">scaling</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea output_execute_result">
+<img src="../images/ch-quantum-hardware/calibrating-qubits-openpulse_26_0.png"
+>
+</div>
+
+</div>
+</div>
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="../images/ch-quantum-hardware/calibrating-qubits-openpulse_26_1.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">rabi_experiment_qobj</span> <span class="o">=</span> <span class="n">assemble</span> <span class="p">(</span><span class="n">Rabi_schedules</span><span class="p">,</span> <span class="n">backend</span> <span class="o">=</span> <span class="n">backend</span><span class="p">,</span> 
+                            <span class="n">meas_level</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">meas_return</span><span class="o">=</span><span class="s1">&#39;avg&#39;</span><span class="p">,</span>
+                            <span class="n">shots</span><span class="o">=</span><span class="n">num_shots_per_point</span><span class="p">,</span>
+                            <span class="n">schedule_los</span> <span class="o">=</span> <span class="n">Rabi_schedule_LOs</span>
+                                <span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">job</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">rabi_experiment_qobj</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">job</span><span class="o">.</span><span class="n">job_id</span><span class="p">())</span>
+<span class="n">job_monitor</span><span class="p">(</span><span class="n">job</span><span class="p">,</span> <span class="n">monitor_async</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">job</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">retrieve_job</span><span class="p">(</span><span class="s1">&#39;5d2e2a0099a509001888ab02&#39;</span><span class="p">)</span>
+<span class="n">Rabi_results</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mi">3600</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">plot_X</span> <span class="o">=</span> <span class="n">drive_powers</span>
+<span class="n">plot_Y</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">jj</span><span class="p">,</span> <span class="n">drive_power</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">drive_powers</span><span class="p">):</span>
+    <span class="n">thispower_results</span> <span class="o">=</span> <span class="n">Rabi_results</span><span class="o">.</span><span class="n">get_memory</span><span class="p">(</span><span class="n">jj</span><span class="p">)</span><span class="o">*</span><span class="n">scale_factor</span>
+    <span class="n">plot_Y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">thispower_results</span><span class="p">[</span><span class="n">qubit</span><span class="p">]</span> <span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plotter</span>
+<span class="n">plot_Y</span> <span class="o">=</span> <span class="n">plot_Y</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">plot_Y</span><span class="p">)</span>
+<span class="n">plotter</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">plot_X</span><span class="p">,</span> <span class="n">plot_Y</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&lt;matplotlib.lines.Line2D at 0x130045940&gt;]</pre>
+</div>
+
+</div>
+</div>
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="../images/ch-quantum-hardware/calibrating-qubits-openpulse_30_1.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">curve_fit</span>
+
+<span class="n">fit_func</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">,</span><span class="n">T</span><span class="p">,</span><span class="n">phi</span><span class="p">:</span> <span class="p">(</span><span class="n">A</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="o">/</span><span class="n">T</span><span class="o">+</span><span class="n">phi</span><span class="p">)</span><span class="o">+</span><span class="n">B</span><span class="p">)</span>
+
+<span class="c1">#Fit the data</span>
+<span class="n">fitparams</span><span class="p">,</span> <span class="n">conv</span> <span class="o">=</span> <span class="n">curve_fit</span><span class="p">(</span><span class="n">fit_func</span><span class="p">,</span> <span class="n">plot_X</span><span class="p">,</span> <span class="n">plot_Y</span><span class="p">,</span> <span class="p">[</span><span class="mf">3.0</span>  <span class="p">,</span><span class="mf">0.0</span>  <span class="p">,</span><span class="mf">0.04</span>  <span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="c1">#get the pi amplitude</span>
+<span class="n">first_peak</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">-</span><span class="n">fitparams</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span><span class="o">*</span><span class="n">fitparams</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+<span class="n">pi_amp</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">fitparams</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">plotter</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">plot_X</span><span class="p">,</span> <span class="n">plot_Y</span><span class="p">)</span>
+<span class="n">plotter</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">plot_X</span><span class="p">,</span> <span class="n">fit_func</span><span class="p">(</span><span class="n">plot_X</span><span class="p">,</span> <span class="o">*</span><span class="n">fitparams</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">plotter</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">first_peak</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">)</span>
+<span class="n">plotter</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">first_peak</span> <span class="o">+</span> <span class="n">pi_amp</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">)</span>
+<span class="n">plotter</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Pulse amplitude, a.u.&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plotter</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Signal, a.u.&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plotter</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Rough Pi Amplitude Calibration&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Pi Amplitude </span><span class="si">%f</span><span class="s1">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">pi_amp</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Pi Amplitude 0.021406
+</pre>
+</div>
+</div>
+</div>
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>
+</pre>
+</div>
+</div>
+</div>
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="../images/ch-quantum-hardware/calibrating-qubits-openpulse_31_2.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="4.-0-vs-1">4. 0 vs 1<a class="anchor-link" href="#4.-0-vs-1"> </a></h1>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>One our $\pi$ pulses have been calibrated, we can now create the state $\vert1\rangle$ with reasonably probability. We can use this to find out what the states $\vert0\rangle$ and $\vert1\rangle$ look like in our measurements.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Rabi experiment parameters</span>
+<span class="n">num_shots_gndexc</span> <span class="o">=</span> <span class="mi">512</span>
+
+<span class="c1"># drive parameters</span>
+<span class="n">drive_power</span> <span class="o">=</span> <span class="n">pi_amp</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">drive_power</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>0.021406169328870545
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># create schedules for Rabi experiment </span>
+<span class="n">gndexc_schedules</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">gndexc_schedule_LOs</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="n">pi_pulse</span> <span class="o">=</span> <span class="n">pulse_lib</span><span class="o">.</span><span class="n">gaussian</span><span class="p">(</span><span class="n">duration</span><span class="o">=</span><span class="n">drive_samples</span><span class="p">,</span> <span class="n">amp</span><span class="o">=</span><span class="n">pi_amp</span><span class="p">,</span> 
+                                <span class="n">sigma</span><span class="o">=</span><span class="n">drive_sigma</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;pi_pulse&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ii</span><span class="p">))</span>
+<span class="n">pi_pulse_qubit</span> <span class="o">=</span> <span class="n">pi_pulse</span><span class="p">(</span><span class="n">backend_devicespec</span><span class="o">.</span><span class="n">q</span><span class="p">[</span><span class="n">qubit</span><span class="p">]</span><span class="o">.</span><span class="n">drive</span><span class="p">)</span>
+    
+<span class="c1"># ground state schedule</span>
+<span class="n">gnd_schedule</span> <span class="o">=</span> <span class="n">pulse</span><span class="o">.</span><span class="n">Schedule</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;ground state&quot;</span><span class="p">)</span>
+<span class="n">gnd_schedule</span> <span class="o">+=</span> <span class="n">measure_and_acquire_qubit</span> <span class="o">&lt;&lt;</span> <span class="n">gnd_schedule</span><span class="o">.</span><span class="n">duration</span>
+<span class="n">thisLO</span> <span class="o">=</span> <span class="n">pulse</span><span class="o">.</span><span class="n">LoConfig</span><span class="p">({</span><span class="n">backend_devicespec</span><span class="o">.</span><span class="n">q</span><span class="p">[</span><span class="n">qubit</span><span class="p">]</span><span class="o">.</span><span class="n">drive</span><span class="p">:</span> <span class="n">rough_frequency_qubit</span><span class="p">})</span>
+    
+<span class="c1"># excited state schedule</span>
+<span class="n">exc_schedule</span> <span class="o">=</span> <span class="n">pulse</span><span class="o">.</span><span class="n">Schedule</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;excited state&quot;</span><span class="p">)</span>
+<span class="n">exc_schedule</span> <span class="o">+=</span> <span class="n">pi_pulse_qubit</span>
+<span class="n">exc_schedule</span> <span class="o">+=</span> <span class="n">measure_and_acquire_qubit</span> <span class="o">&lt;&lt;</span> <span class="n">exc_schedule</span><span class="o">.</span><span class="n">duration</span>
+<span class="n">thisLO</span> <span class="o">=</span> <span class="n">pulse</span><span class="o">.</span><span class="n">LoConfig</span><span class="p">({</span><span class="n">backend_devicespec</span><span class="o">.</span><span class="n">q</span><span class="p">[</span><span class="n">qubit</span><span class="p">]</span><span class="o">.</span><span class="n">drive</span><span class="p">:</span> <span class="n">rough_frequency_qubit</span><span class="p">})</span>
+
+<span class="n">gndexc_schedules</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gnd_schedule</span><span class="p">)</span>
+<span class="n">gndexc_schedules</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">exc_schedule</span><span class="p">)</span>
+<span class="n">gndexc_schedule_LOs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">thisLO</span><span class="p">)</span>
+<span class="n">gndexc_schedule_LOs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">thisLO</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">gndexc_schedules</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">channels_to_plot</span><span class="o">=</span><span class="p">[</span><span class="n">backend_devicespec</span><span class="o">.</span><span class="n">q</span><span class="p">[</span><span class="n">qubit</span><span class="p">]</span><span class="o">.</span><span class="n">measure</span><span class="p">,</span> 
+                                           <span class="n">backend_devicespec</span><span class="o">.</span><span class="n">q</span><span class="p">[</span><span class="n">qubit</span><span class="p">]</span><span class="o">.</span><span class="n">drive</span><span class="p">,</span>
+                                           <span class="c1">#backend_devicespec.q[qubit].acquire,</span>
+                                         <span class="p">],</span>
+                                         <span class="n">scaling</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea output_execute_result">
+<img src="../images/ch-quantum-hardware/calibrating-qubits-openpulse_36_0.png"
+>
+</div>
+
+</div>
+</div>
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="../images/ch-quantum-hardware/calibrating-qubits-openpulse_36_1.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">gndexc_schedules</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">channels_to_plot</span><span class="o">=</span><span class="p">[</span><span class="n">backend_devicespec</span><span class="o">.</span><span class="n">q</span><span class="p">[</span><span class="n">qubit</span><span class="p">]</span><span class="o">.</span><span class="n">measure</span><span class="p">,</span> 
+                                           <span class="n">backend_devicespec</span><span class="o">.</span><span class="n">q</span><span class="p">[</span><span class="n">qubit</span><span class="p">]</span><span class="o">.</span><span class="n">drive</span><span class="p">,</span>
+                                           <span class="c1">#backend_devicespec.q[qubit].acquire,</span>
+                                         <span class="p">],</span>
+                                         <span class="n">scaling</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea output_execute_result">
+<img src="../images/ch-quantum-hardware/calibrating-qubits-openpulse_37_0.png"
+>
+</div>
+
+</div>
+</div>
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="../images/ch-quantum-hardware/calibrating-qubits-openpulse_37_1.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">gndexc_experiment_qobj</span> <span class="o">=</span> <span class="n">assemble</span> <span class="p">(</span><span class="n">gndexc_schedules</span><span class="p">,</span> <span class="n">backend</span> <span class="o">=</span> <span class="n">backend</span><span class="p">,</span> 
+                            <span class="n">meas_level</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">meas_return</span><span class="o">=</span><span class="s1">&#39;single&#39;</span><span class="p">,</span>
+                            <span class="n">shots</span><span class="o">=</span><span class="n">num_shots_gndexc</span><span class="p">,</span>
+                            <span class="n">schedule_los</span> <span class="o">=</span> <span class="n">gndexc_schedule_LOs</span>
+                                <span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">job</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">gndexc_experiment_qobj</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">job</span><span class="o">.</span><span class="n">job_id</span><span class="p">())</span>
+<span class="n">job_monitor</span><span class="p">(</span><span class="n">job</span><span class="p">,</span> <span class="n">monitor_async</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">job</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">retrieve_job</span><span class="p">(</span><span class="s1">&#39;5d2e2c3a61157a0018e22440&#39;</span><span class="p">)</span>
+<span class="n">gndexc_results</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mi">3600</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">gnd_results</span> <span class="o">=</span> <span class="n">gndexc_results</span><span class="o">.</span><span class="n">get_memory</span><span class="p">(</span><span class="mi">0</span><span class="p">)[:,</span> <span class="n">qubit</span><span class="p">]</span><span class="o">*</span><span class="n">scale_factor</span>
+<span class="n">exc_results</span> <span class="o">=</span> <span class="n">gndexc_results</span><span class="o">.</span><span class="n">get_memory</span><span class="p">(</span><span class="mi">1</span><span class="p">)[:,</span> <span class="n">qubit</span><span class="p">]</span><span class="o">*</span><span class="n">scale_factor</span>
+
+
+<span class="n">plotter</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">gnd_results</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">gnd_results</span><span class="p">),</span> 
+                <span class="n">s</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;state_0&#39;</span><span class="p">)</span>
+<span class="n">plotter</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">exc_results</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">exc_results</span><span class="p">),</span> 
+                <span class="n">s</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;state_1&#39;</span><span class="p">)</span>
+<span class="n">mean_gnd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">gnd_results</span><span class="p">)</span> <span class="c1"># takes mean of both real and imaginary parts</span>
+<span class="n">mean_exc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">exc_results</span><span class="p">)</span>
+<span class="n">plotter</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">mean_gnd</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">mean_gnd</span><span class="p">),</span> 
+                <span class="n">s</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;state_0_mean&#39;</span><span class="p">)</span>
+<span class="n">plotter</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">mean_exc</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">mean_exc</span><span class="p">),</span> 
+                <span class="n">s</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;state_1_mean&#39;</span><span class="p">)</span>
+
+<span class="n">plotter</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;I (a.u.)&#39;</span><span class="p">)</span>
+<span class="n">plotter</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Q (a.u.)&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Text(0.5, 0, &#39;Q (a.u.)&#39;)</pre>
+</div>
+
+</div>
+</div>
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="../images/ch-quantum-hardware/calibrating-qubits-openpulse_41_1.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_01</span><span class="p">(</span><span class="n">IQ_data</span><span class="p">):</span>
+    <span class="n">dist_0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+                        <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">IQ_data</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">mean_gnd</span><span class="p">),</span>
+                        <span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">IQ_data</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">mean_gnd</span><span class="p">)</span>
+                        <span class="p">]))</span>
+    <span class="n">dist_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+                        <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">IQ_data</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">mean_exc</span><span class="p">),</span>
+                        <span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">IQ_data</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">mean_exc</span><span class="p">)</span>
+                        <span class="p">]))</span>
+    
+    <span class="k">if</span> <span class="n">dist_1</span> <span class="o">&lt;=</span> <span class="n">dist_0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+
+    
+<span class="nb">print</span><span class="p">(</span><span class="n">get_01</span><span class="p">(</span><span class="n">mean_gnd</span><span class="p">),</span> <span class="n">get_01</span><span class="p">(</span><span class="n">mean_exc</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>0 1
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="5.-Measuring-T1">5. Measuring T1<a class="anchor-link" href="#5.-Measuring-T1"> </a></h1>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># T1 experiment parameters</span>
+<span class="n">time_max_us</span> <span class="o">=</span> <span class="mi">500</span>
+<span class="n">time_step_us</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">times_us</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">time_max_us</span><span class="p">,</span> <span class="n">time_step_us</span><span class="p">)</span>
+<span class="n">num_shots_per_point</span> <span class="o">=</span> <span class="mi">512</span>
+
+<span class="c1"># drive parameters</span>
+<span class="n">drive_power</span> <span class="o">=</span> <span class="n">pi_amp</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">drive_power</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>0.021406169328870545
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># create schedules for Ramsey experiment </span>
+<span class="n">T1_schedules</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">T1_schedule_LOs</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="n">T1_pulse</span> <span class="o">=</span> <span class="n">pulse_lib</span><span class="o">.</span><span class="n">gaussian</span><span class="p">(</span><span class="n">duration</span><span class="o">=</span><span class="n">drive_samples</span><span class="p">,</span> <span class="n">amp</span><span class="o">=</span><span class="n">drive_power</span><span class="p">,</span> 
+                                <span class="n">sigma</span><span class="o">=</span><span class="n">drive_sigma</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;T1_pulse&#39;</span><span class="p">)</span>
+<span class="n">T1_pulse_qubit</span> <span class="o">=</span> <span class="n">T1_pulse</span><span class="p">(</span><span class="n">backend_devicespec</span><span class="o">.</span><span class="n">q</span><span class="p">[</span><span class="n">qubit</span><span class="p">]</span><span class="o">.</span><span class="n">drive</span><span class="p">)</span>
+<span class="n">thisLO</span> <span class="o">=</span> <span class="n">pulse</span><span class="o">.</span><span class="n">LoConfig</span><span class="p">({</span><span class="n">backend_devicespec</span><span class="o">.</span><span class="n">q</span><span class="p">[</span><span class="n">qubit</span><span class="p">]</span><span class="o">.</span><span class="n">drive</span><span class="p">:</span> <span class="n">rough_frequency_qubit</span><span class="p">})</span>
+<span class="k">for</span> <span class="n">ii</span><span class="p">,</span> <span class="n">delay_time_us</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">times_us</span><span class="p">):</span>
+    <span class="c1"># start an empty schedule with a label</span>
+    <span class="n">this_schedule</span> <span class="o">=</span> <span class="n">pulse</span><span class="o">.</span><span class="n">Schedule</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;T1 delay = </span><span class="si">{}</span><span class="s2"> us&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">delay_time_us</span><span class="p">))</span>
+    <span class="n">this_schedule</span> <span class="o">+=</span> <span class="n">T1_pulse_qubit</span>
+    <span class="n">this_schedule</span> <span class="o">|=</span> <span class="p">(</span><span class="n">measure_and_acquire_qubit</span> <span class="o">&lt;&lt;</span> <span class="nb">int</span><span class="p">(</span><span class="n">delay_time_us</span><span class="o">*</span><span class="mi">1000</span><span class="o">/</span><span class="n">dt</span><span class="p">))</span>
+    
+    <span class="n">T1_schedules</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">this_schedule</span><span class="p">)</span>
+    <span class="n">T1_schedule_LOs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">thisLO</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">T1_schedules</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">channels_to_plot</span><span class="o">=</span><span class="p">[</span><span class="n">backend_devicespec</span><span class="o">.</span><span class="n">q</span><span class="p">[</span><span class="n">qubit</span><span class="p">]</span><span class="o">.</span><span class="n">measure</span><span class="p">,</span> 
+                                           <span class="n">backend_devicespec</span><span class="o">.</span><span class="n">q</span><span class="p">[</span><span class="n">qubit</span><span class="p">]</span><span class="o">.</span><span class="n">drive</span><span class="p">,</span>
+                                           <span class="c1">#backend_devicespec.q[qubit].acquire,</span>
+                                         <span class="p">],</span>
+                                         <span class="n">scaling</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea output_execute_result">
+<img src="../images/ch-quantum-hardware/calibrating-qubits-openpulse_46_0.png"
+>
+</div>
+
+</div>
+</div>
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="../images/ch-quantum-hardware/calibrating-qubits-openpulse_46_1.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">T1_experiment_qobj</span> <span class="o">=</span> <span class="n">assemble</span> <span class="p">(</span><span class="n">T1_schedules</span><span class="p">,</span> <span class="n">backend</span> <span class="o">=</span> <span class="n">backend</span><span class="p">,</span> 
+                            <span class="n">meas_level</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">meas_return</span><span class="o">=</span><span class="s1">&#39;avg&#39;</span><span class="p">,</span>
+                            <span class="n">shots</span><span class="o">=</span><span class="n">num_shots_per_point</span><span class="p">,</span>
+                            <span class="n">schedule_los</span> <span class="o">=</span> <span class="n">T1_schedule_LOs</span>
+                                <span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">job</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">T1_experiment_qobj</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">job</span><span class="o">.</span><span class="n">job_id</span><span class="p">())</span>
+<span class="n">job_monitor</span><span class="p">(</span><span class="n">job</span><span class="p">,</span> <span class="n">monitor_async</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">job</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">retrieve_job</span><span class="p">(</span><span class="s1">&#39;5d2e79ad99a509001888ab09&#39;</span><span class="p">)</span>
+<span class="n">T1_results</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mi">3600</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">plot_X</span> <span class="o">=</span> <span class="n">times_us</span>
+<span class="n">plot_Y</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">jj</span><span class="p">,</span> <span class="n">delay_time_us</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">times_us</span><span class="p">):</span>
+    <span class="n">thisdelay_results</span> <span class="o">=</span> <span class="n">T1_results</span><span class="o">.</span><span class="n">get_memory</span><span class="p">(</span><span class="n">jj</span><span class="p">)</span><span class="o">*</span><span class="n">scale_factor</span>
+    <span class="n">plot_Y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">thisdelay_results</span><span class="p">[</span><span class="n">qubit</span><span class="p">]</span> <span class="p">)</span>
+
+<span class="n">plotter</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">plot_X</span><span class="p">,</span> <span class="n">plot_Y</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&lt;matplotlib.lines.Line2D at 0x13161aba8&gt;]</pre>
+</div>
+
+</div>
+</div>
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="../images/ch-quantum-hardware/calibrating-qubits-openpulse_50_1.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">curve_fit</span>
+
+<span class="n">fit_func2</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">:</span> <span class="p">(</span><span class="n">A</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="o">/</span><span class="mf">59.8</span><span class="p">)</span><span class="o">+</span><span class="n">B</span><span class="p">)</span>
+
+<span class="c1">#Fit the data</span>
+<span class="n">fitparams2</span><span class="p">,</span> <span class="n">conv2</span> <span class="o">=</span> <span class="n">curve_fit</span><span class="p">(</span><span class="n">fit_func2</span><span class="p">,</span> <span class="n">plot_X</span><span class="p">,</span>
+                                      <span class="n">plot_Y</span><span class="p">,</span>
+                                      <span class="p">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="o">-</span><span class="mi">11</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;T1 from backend = {backend.properties().qubits[qubit][0].value} us&quot;</span><span class="p">)</span>
+
+<span class="n">plotter</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">plot_X</span><span class="p">,</span> <span class="n">plot_Y</span><span class="p">)</span>
+<span class="n">plotter</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">plot_X</span><span class="p">,</span> <span class="n">fit_func2</span><span class="p">(</span><span class="n">plot_X</span><span class="p">,</span> <span class="o">*</span><span class="n">fitparams2</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">plotter</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">plot_X</span><span class="p">))</span>
+<span class="n">plotter</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Delay before measurement, ($\mu$s)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plotter</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Measured signal, a.u.&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>T1 = 69.32438949917486 us
+T1 from backend = 85.19798054150876 us
+</pre>
+</div>
+</div>
+</div>
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Text(0, 0.5, &#39;Measured signal, a.u.&#39;)</pre>
+</div>
+
+</div>
+</div>
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="../images/ch-quantum-hardware/calibrating-qubits-openpulse_51_2.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="6.-Ramsey-experiment">6. Ramsey experiment<a class="anchor-link" href="#6.-Ramsey-experiment"> </a></h1>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now, we determine both $T_2$ and the qubit frequency to better precision. This is done using a Ramsey pulse sequence.</p>
+<p>In this pulse sequence, we first apply a $\pi/2$ pulse, wait some time $\Delta t$, and then apply another $\pi/2$ pulse.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Ramsey experiment parameters</span>
+<span class="n">time_max_us</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">time_step_us</span> <span class="o">=</span> <span class="mf">0.25</span>
+<span class="n">times_us</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">time_max_us</span><span class="p">,</span> <span class="n">time_step_us</span><span class="p">)</span>
+<span class="n">num_shots_per_point</span> <span class="o">=</span> <span class="mi">256</span>
+
+<span class="c1"># drive parameters</span>
+<span class="n">drive_power</span> <span class="o">=</span> <span class="n">pi_amp</span><span class="o">/</span><span class="mi">2</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">drive_power</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>0.010703084664435272
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># create schedules for Ramsey experiment </span>
+<span class="n">Ramsey_schedules</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">Ramsey_schedule_LOs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">ramsey_pulse</span> <span class="o">=</span> <span class="n">pulse_lib</span><span class="o">.</span><span class="n">gaussian</span><span class="p">(</span><span class="n">duration</span><span class="o">=</span><span class="n">drive_samples</span><span class="p">,</span> <span class="n">amp</span><span class="o">=</span><span class="n">drive_power</span><span class="p">,</span> 
+                                <span class="n">sigma</span><span class="o">=</span><span class="n">drive_sigma</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;ramsey_pulse&#39;</span><span class="p">)</span>
+<span class="n">ramsey_pulse_qubit</span> <span class="o">=</span> <span class="n">ramsey_pulse</span><span class="p">(</span><span class="n">backend_devicespec</span><span class="o">.</span><span class="n">q</span><span class="p">[</span><span class="n">qubit</span><span class="p">]</span><span class="o">.</span><span class="n">drive</span><span class="p">)</span>
+<span class="n">thisLO</span> <span class="o">=</span> <span class="n">pulse</span><span class="o">.</span><span class="n">LoConfig</span><span class="p">({</span><span class="n">backend_devicespec</span><span class="o">.</span><span class="n">q</span><span class="p">[</span><span class="n">qubit</span><span class="p">]</span><span class="o">.</span><span class="n">drive</span><span class="p">:</span> <span class="n">rough_frequency_qubit</span><span class="p">})</span>
+<span class="k">for</span> <span class="n">ii</span><span class="p">,</span> <span class="n">delay_time_us</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">times_us</span><span class="p">):</span>
+    <span class="c1"># start an empty schedule with a label</span>
+    <span class="n">this_schedule</span> <span class="o">=</span> <span class="n">pulse</span><span class="o">.</span><span class="n">Schedule</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Ramsey delay = </span><span class="si">{}</span><span class="s2"> us&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">delay_time_us</span><span class="p">))</span>
+    <span class="n">this_schedule</span> <span class="o">+=</span> <span class="n">ramsey_pulse_qubit</span>
+    <span class="n">this_schedule</span> <span class="o">|=</span> <span class="p">(</span><span class="n">ramsey_pulse_qubit</span> <span class="o">&lt;&lt;</span> <span class="nb">int</span><span class="p">(</span><span class="n">this_schedule</span><span class="o">.</span><span class="n">duration</span><span class="o">+</span><span class="n">delay_time_us</span><span class="o">*</span><span class="mi">1000</span><span class="o">/</span><span class="n">dt</span><span class="p">))</span>
+    <span class="n">this_schedule</span> <span class="o">|=</span> <span class="p">(</span><span class="n">measure_and_acquire_qubit</span> <span class="o">&lt;&lt;</span> <span class="n">this_schedule</span><span class="o">.</span><span class="n">duration</span><span class="p">)</span>
+    
+    <span class="n">Ramsey_schedules</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">this_schedule</span><span class="p">)</span>
+    <span class="n">Ramsey_schedule_LOs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">thisLO</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Ramsey_schedules</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">channels_to_plot</span><span class="o">=</span><span class="p">[</span><span class="n">backend_devicespec</span><span class="o">.</span><span class="n">q</span><span class="p">[</span><span class="n">qubit</span><span class="p">]</span><span class="o">.</span><span class="n">measure</span><span class="p">,</span> 
+                                           <span class="n">backend_devicespec</span><span class="o">.</span><span class="n">q</span><span class="p">[</span><span class="n">qubit</span><span class="p">]</span><span class="o">.</span><span class="n">drive</span><span class="p">,</span>
+                                           <span class="c1">#backend_devicespec.q[qubit].acquire,</span>
+                                         <span class="p">],</span>
+                                         <span class="n">scaling</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea output_execute_result">
+<img src="../images/ch-quantum-hardware/calibrating-qubits-openpulse_56_0.png"
+>
+</div>
+
+</div>
+</div>
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="../images/ch-quantum-hardware/calibrating-qubits-openpulse_56_1.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ramsey_experiment_qobj</span> <span class="o">=</span> <span class="n">assemble</span> <span class="p">(</span><span class="n">Ramsey_schedules</span><span class="p">,</span> <span class="n">backend</span> <span class="o">=</span> <span class="n">backend</span><span class="p">,</span> 
+                            <span class="n">meas_level</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">meas_return</span><span class="o">=</span><span class="s1">&#39;avg&#39;</span><span class="p">,</span>
+                            <span class="n">shots</span><span class="o">=</span><span class="n">num_shots_per_point</span><span class="p">,</span>
+                            <span class="n">schedule_los</span> <span class="o">=</span> <span class="n">Ramsey_schedule_LOs</span>
+                                <span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">job</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">ramsey_experiment_qobj</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">job</span><span class="o">.</span><span class="n">job_id</span><span class="p">())</span>
+<span class="n">job_monitor</span><span class="p">(</span><span class="n">job</span><span class="p">,</span> <span class="n">monitor_async</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">job</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">retrieve_job</span><span class="p">(</span><span class="s1">&#39;5d2e75dc137af400181be14a&#39;</span><span class="p">)</span>
+<span class="n">Ramsey_results</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mi">3600</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">plot_X</span> <span class="o">=</span> <span class="n">times_us</span>
+<span class="n">plot_Y</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">jj</span><span class="p">,</span> <span class="n">delay_time_us</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">times_us</span><span class="p">):</span>
+    <span class="n">thisdelay_results</span> <span class="o">=</span> <span class="n">Ramsey_results</span><span class="o">.</span><span class="n">get_memory</span><span class="p">(</span><span class="n">jj</span><span class="p">)[</span><span class="n">qubit</span><span class="p">]</span><span class="o">*</span><span class="n">scale_factor</span>
+    <span class="n">plot_Y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">thisdelay_results</span><span class="p">))</span>
+
+<span class="n">plotter</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">plot_X</span><span class="p">,</span> <span class="p">(</span><span class="n">plot_Y</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&lt;matplotlib.lines.Line2D at 0x132f05ac8&gt;]</pre>
+</div>
+
+</div>
+</div>
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="../images/ch-quantum-hardware/calibrating-qubits-openpulse_60_1.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">curve_fit</span>
+
+<span class="n">fit_func</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">T</span><span class="p">,</span><span class="n">phi</span><span class="p">,</span><span class="n">T2p</span><span class="p">,</span><span class="n">B</span><span class="p">:</span> <span class="p">(</span><span class="n">A</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="o">/</span><span class="n">T2p</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="o">/</span><span class="n">T</span><span class="o">+</span><span class="n">phi</span><span class="p">))</span><span class="o">+</span><span class="n">B</span><span class="p">)</span>
+
+<span class="c1">#Fit the data</span>
+<span class="n">fitparams</span><span class="p">,</span> <span class="n">conv</span> <span class="o">=</span> <span class="n">curve_fit</span><span class="p">(</span><span class="n">fit_func</span><span class="p">,</span> <span class="n">plot_X</span><span class="p">,</span>
+                                      <span class="n">plot_Y</span><span class="p">,</span>
+                                      <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">34</span><span class="p">])</span>
+
+<span class="c1">#off-resonance component</span>
+<span class="n">delT</span> <span class="o">=</span> <span class="n">fitparams</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">delf_MHz</span> <span class="o">=</span> <span class="mf">1.</span><span class="o">/</span><span class="p">(</span><span class="n">delT</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;df = </span><span class="si">{delf_MHz}</span><span class="s2"> MHz&quot;</span><span class="p">)</span>
+<span class="n">first_peak</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">-</span><span class="n">fitparams</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span><span class="o">*</span><span class="n">delT</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">+</span> <span class="n">delT</span><span class="o">/</span><span class="mi">4</span>
+<span class="n">second_peak</span> <span class="o">=</span> <span class="n">first_peak</span> <span class="o">+</span> <span class="n">delT</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;T2p = </span><span class="si">{fitparams[3]}</span><span class="s2"> us&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;T2 from backend = {backend.properties().qubits[qubit][1].value} us&quot;</span><span class="p">)</span>
+<span class="c1">#get the pi amplitude</span>
+<span class="n">plotter</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">plot_X</span><span class="p">,</span> <span class="n">plot_Y</span><span class="p">)</span>
+<span class="n">plotter</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">plot_X</span><span class="p">,</span> <span class="n">fit_func</span><span class="p">(</span><span class="n">plot_X</span><span class="p">,</span> <span class="o">*</span><span class="n">fitparams</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">plotter</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">first_peak</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">)</span>
+<span class="n">plotter</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">second_peak</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">)</span>
+<span class="n">plotter</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">plot_X</span><span class="p">))</span>
+<span class="n">plotter</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Ramsey delay, ($\mu$s)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plotter</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Ramsey signal, a.u.&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plotter</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Rough $\Delta$f Calibration&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>df = 0.04256591254904121 MHz
+T2p = 18.247325010242665 us
+T2 from backend = 91.09718741658209 us
+</pre>
+</div>
+</div>
+</div>
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Text(0.5, 1.0, &#39;Rough $\\Delta$f Calibration&#39;)</pre>
+</div>
+
+</div>
+</div>
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="../images/ch-quantum-hardware/calibrating-qubits-openpulse_61_2.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">precise_frequency_qubit_plus</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">rough_frequency_qubit</span> <span class="o">+</span> <span class="n">delf_MHz</span><span class="o">/</span><span class="mf">1e3</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">precise_frequency_qubit_minus</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">rough_frequency_qubit</span> <span class="o">-</span> <span class="n">delf_MHz</span><span class="o">/</span><span class="mf">1e3</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{rough_frequency_qubit}</span><span class="s2">-&gt;</span><span class="si">{precise_frequency_qubit_plus}</span><span class="s2"> or </span><span class="si">{precise_frequency_qubit_minus}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>4.83199-&gt;4.83203 or 4.83195
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="7.-Measuring-T2">7. Measuring T2<a class="anchor-link" href="#7.-Measuring-T2"> </a></h1>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># T2 experiment parameters</span>
+<span class="n">time_max_us</span> <span class="o">=</span> <span class="mi">125</span>
+<span class="n">time_step_us</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">times_us</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">time_max_us</span><span class="p">,</span> <span class="n">time_step_us</span><span class="p">)</span>
+<span class="n">num_shots_per_point</span> <span class="o">=</span> <span class="mi">512</span>
+
+<span class="c1"># drive parameters</span>
+<span class="n">drive_power_1</span> <span class="o">=</span> <span class="n">pi_amp</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">drive_power_2</span> <span class="o">=</span> <span class="n">pi_amp</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">drive_power_1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">drive_power_2</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>0.010703084664435272
+0.021406169328870545
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># create schedules for Ramsey experiment </span>
+<span class="n">T2_schedules</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">T2_schedule_LOs</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="n">T2_pulse_pio2</span> <span class="o">=</span> <span class="n">pulse_lib</span><span class="o">.</span><span class="n">gaussian</span><span class="p">(</span><span class="n">duration</span><span class="o">=</span><span class="n">drive_samples</span><span class="p">,</span> <span class="n">amp</span><span class="o">=</span><span class="n">drive_power_1</span><span class="p">,</span> 
+                                <span class="n">sigma</span><span class="o">=</span><span class="n">drive_sigma</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;T2_pio2_pulse&#39;</span><span class="p">)</span>
+<span class="n">T2_pulse_pio2_qubit</span> <span class="o">=</span> <span class="n">T2_pulse_pio2</span><span class="p">(</span><span class="n">backend_devicespec</span><span class="o">.</span><span class="n">q</span><span class="p">[</span><span class="n">qubit</span><span class="p">]</span><span class="o">.</span><span class="n">drive</span><span class="p">)</span>
+<span class="n">T2_pulse_pi</span> <span class="o">=</span> <span class="n">pulse_lib</span><span class="o">.</span><span class="n">gaussian</span><span class="p">(</span><span class="n">duration</span><span class="o">=</span><span class="n">drive_samples</span><span class="p">,</span> <span class="n">amp</span><span class="o">=</span><span class="n">drive_power_2</span><span class="p">,</span> 
+                                <span class="n">sigma</span><span class="o">=</span><span class="n">drive_sigma</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;T2_pi_pulse&#39;</span><span class="p">)</span>
+<span class="n">T2_pulse_pi_qubit</span> <span class="o">=</span> <span class="n">T2_pulse_pi</span><span class="p">(</span><span class="n">backend_devicespec</span><span class="o">.</span><span class="n">q</span><span class="p">[</span><span class="n">qubit</span><span class="p">]</span><span class="o">.</span><span class="n">drive</span><span class="p">)</span>
+<span class="n">thisLO</span> <span class="o">=</span> <span class="n">pulse</span><span class="o">.</span><span class="n">LoConfig</span><span class="p">({</span><span class="n">backend_devicespec</span><span class="o">.</span><span class="n">q</span><span class="p">[</span><span class="n">qubit</span><span class="p">]</span><span class="o">.</span><span class="n">drive</span><span class="p">:</span> <span class="n">precise_frequency_qubit_minus</span><span class="p">})</span>
+<span class="k">for</span> <span class="n">ii</span><span class="p">,</span> <span class="n">delay_time_us</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">times_us</span><span class="p">):</span>
+    <span class="c1"># start an empty schedule with a label</span>
+    <span class="n">this_schedule</span> <span class="o">=</span> <span class="n">pulse</span><span class="o">.</span><span class="n">Schedule</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;T2 delay = </span><span class="si">{}</span><span class="s2"> us&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">delay_time_us</span><span class="p">))</span>
+    <span class="n">this_schedule</span> <span class="o">|=</span> <span class="n">T2_pulse_pio2_qubit</span>
+    <span class="n">this_schedule</span> <span class="o">|=</span> <span class="p">(</span><span class="n">T2_pulse_pi_qubit</span> <span class="o">&lt;&lt;</span> <span class="nb">int</span><span class="p">(</span><span class="n">this_schedule</span><span class="o">.</span><span class="n">duration</span> <span class="o">+</span> 
+                                               <span class="n">delay_time_us</span><span class="o">*</span><span class="mi">1000</span><span class="o">/</span><span class="n">dt</span><span class="p">))</span>
+    <span class="n">this_schedule</span> <span class="o">|=</span> <span class="p">(</span><span class="n">T2_pulse_pio2_qubit</span> <span class="o">&lt;&lt;</span> <span class="nb">int</span><span class="p">(</span><span class="n">this_schedule</span><span class="o">.</span><span class="n">duration</span> <span class="o">+</span> 
+                                               <span class="n">delay_time_us</span><span class="o">*</span><span class="mi">1000</span><span class="o">/</span><span class="n">dt</span><span class="p">))</span>
+    <span class="n">this_schedule</span> <span class="o">|=</span> <span class="p">(</span><span class="n">measure_and_acquire_qubit</span> <span class="o">&lt;&lt;</span> <span class="nb">int</span><span class="p">(</span><span class="n">this_schedule</span><span class="o">.</span><span class="n">duration</span><span class="p">))</span>
+    
+    <span class="n">T2_schedules</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">this_schedule</span><span class="p">)</span>
+    <span class="n">T2_schedule_LOs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">thisLO</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">T2_schedules</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">channels_to_plot</span><span class="o">=</span><span class="p">[</span><span class="n">backend_devicespec</span><span class="o">.</span><span class="n">q</span><span class="p">[</span><span class="n">qubit</span><span class="p">]</span><span class="o">.</span><span class="n">measure</span><span class="p">,</span> 
+                                           <span class="n">backend_devicespec</span><span class="o">.</span><span class="n">q</span><span class="p">[</span><span class="n">qubit</span><span class="p">]</span><span class="o">.</span><span class="n">drive</span><span class="p">,</span>
+                                           <span class="c1">#backend_devicespec.q[qubit].acquire,</span>
+                                         <span class="p">],</span>
+                                         <span class="n">scaling</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea output_execute_result">
+<img src="../images/ch-quantum-hardware/calibrating-qubits-openpulse_66_0.png"
+>
+</div>
+
+</div>
+</div>
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="../images/ch-quantum-hardware/calibrating-qubits-openpulse_66_1.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">T2_experiment_qobj</span> <span class="o">=</span> <span class="n">assemble</span> <span class="p">(</span><span class="n">T2_schedules</span><span class="p">,</span> <span class="n">backend</span> <span class="o">=</span> <span class="n">backend</span><span class="p">,</span> 
+                            <span class="n">meas_level</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">meas_return</span><span class="o">=</span><span class="s1">&#39;avg&#39;</span><span class="p">,</span>
+                            <span class="n">shots</span><span class="o">=</span><span class="n">num_shots_per_point</span><span class="p">,</span>
+                            <span class="n">schedule_los</span> <span class="o">=</span> <span class="n">T2_schedule_LOs</span>
+                                <span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">job</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">T2_experiment_qobj</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">job</span><span class="o">.</span><span class="n">job_id</span><span class="p">())</span>
+<span class="n">job_monitor</span><span class="p">(</span><span class="n">job</span><span class="p">,</span> <span class="n">monitor_async</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>5d4d187b507dc70011cc1ca0
+</pre>
+</div>
+</div>
+</div>
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+
+ 
+ 
+<div id="aaaa2998-cdea-44dc-9ec3-64df1e937a0d"></div>
+<div class="output_subarea output_widget_view ">
+<script type="text/javascript">
+var element = $('#aaaa2998-cdea-44dc-9ec3-64df1e937a0d');
+</script>
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "8280bca183a34325beb64560d8722ccc", "version_major": 2, "version_minor": 0}
+</script>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">T2job</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">retrieve_job</span><span class="p">(</span><span class="s1">&#39;5d2f6c0ae741150012334c44&#39;</span><span class="p">)</span> 
+<span class="n">T2_results</span> <span class="o">=</span> <span class="n">T2job</span><span class="o">.</span><span class="n">result</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mi">3600</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">plot_X</span> <span class="o">=</span> <span class="mf">2.</span><span class="o">*</span><span class="n">times_us</span>
+<span class="n">plot_Y</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">jj</span><span class="p">,</span> <span class="n">delay_time_us</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">times_us</span><span class="p">):</span>
+    <span class="n">thisdelay_results</span> <span class="o">=</span> <span class="n">T2_results</span><span class="o">.</span><span class="n">get_memory</span><span class="p">(</span><span class="n">jj</span><span class="p">)</span><span class="o">*</span><span class="n">scale_factor</span>
+    <span class="n">plot_Y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">thisdelay_results</span><span class="p">[</span><span class="n">qubit</span><span class="p">]</span> <span class="p">)</span>
+
+<span class="n">plotter</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">plot_X</span><span class="p">,</span> <span class="n">plot_Y</span><span class="p">)</span>
+<span class="n">T2y_echo</span> <span class="o">=</span> <span class="n">plot_Y</span>
+<span class="n">T2x_echo</span> <span class="o">=</span> <span class="n">plot_X</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="../images/ch-quantum-hardware/calibrating-qubits-openpulse_70_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">curve_fit</span>
+
+<span class="n">T2guess</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">properties</span><span class="p">()</span><span class="o">.</span><span class="n">qubits</span><span class="p">[</span><span class="n">qubit</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+
+<span class="n">fit_func2</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">:</span> <span class="p">(</span><span class="n">A</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="o">/</span><span class="n">T2guess</span><span class="p">)</span><span class="o">+</span><span class="n">B</span><span class="p">)</span>
+<span class="c1">#Fit the data</span>
+<span class="n">fitparams2</span><span class="p">,</span> <span class="n">conv2</span> <span class="o">=</span> <span class="n">curve_fit</span><span class="p">(</span><span class="n">fit_func2</span><span class="p">,</span> <span class="n">plot_X</span><span class="p">,</span>
+                                      <span class="n">plot_Y</span><span class="p">,</span>
+                                      <span class="p">[</span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;T2 from backend = {backend.properties().qubits[qubit][1].value} us&quot;</span><span class="p">)</span>
+
+<span class="n">plotter</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">plot_X</span><span class="p">,</span> <span class="n">plot_Y</span><span class="p">)</span>
+<span class="n">plotter</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">plot_X</span><span class="p">,</span> <span class="n">fit_func2</span><span class="p">(</span><span class="n">plot_X</span><span class="p">,</span> <span class="o">*</span><span class="n">fitparams2</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">plotter</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">plot_X</span><span class="p">))</span>
+<span class="n">plotter</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Total time, ($\mu$s)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plotter</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Measured signal, a.u.&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>T2 = 23.492976894313635 us
+T2 from backend = 91.09718741658209 us
+</pre>
+</div>
+</div>
+</div>
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Text(0, 0.5, &#39;Measured signal, a.u.&#39;)</pre>
+</div>
+
+</div>
+</div>
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="../images/ch-quantum-hardware/calibrating-qubits-openpulse_71_2.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># measurement pulse parameters</span>
+<span class="n">meas_amp</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">meas_samples</span> <span class="o">=</span> <span class="mi">1200</span>
+<span class="n">meas_sigma</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">meas_risefall</span> <span class="o">=</span> <span class="mi">25</span>
+
+<span class="c1"># creating measurement pulse</span>
+<span class="n">meas_pulse</span> <span class="o">=</span> <span class="n">pulse_lib</span><span class="o">.</span><span class="n">gaussian_square</span><span class="p">(</span><span class="n">duration</span><span class="o">=</span><span class="n">meas_samples</span><span class="p">,</span> <span class="n">amp</span><span class="o">=</span><span class="n">meas_amp</span><span class="p">,</span>
+                                       <span class="n">sigma</span><span class="o">=</span><span class="n">meas_sigma</span><span class="p">,</span> <span class="n">risefall</span><span class="o">=</span><span class="n">meas_risefall</span><span class="p">,</span> 
+                                       <span class="n">name</span><span class="o">=</span><span class="s1">&#39;mymeasurepulse&#39;</span><span class="p">)</span>
+<span class="n">meas_pulse_qubit</span> <span class="o">=</span> <span class="n">meas_pulse</span><span class="p">(</span><span class="n">backend_devicespec</span><span class="o">.</span><span class="n">q</span><span class="p">[</span><span class="n">qubit</span><span class="p">]</span><span class="o">.</span><span class="n">measure</span><span class="p">)</span>
+
+<span class="c1"># create acquire pulse</span>
+<span class="n">acq_cmd</span><span class="o">=</span><span class="n">pulse</span><span class="o">.</span><span class="n">Acquire</span><span class="p">(</span><span class="n">duration</span><span class="o">=</span><span class="n">meas_samples</span><span class="p">)</span>
+<span class="n">acq_cmd_qubit</span> <span class="o">=</span> <span class="n">acq_cmd</span><span class="p">(</span><span class="n">backend_devicespec</span><span class="o">.</span><span class="n">q</span><span class="p">,</span> <span class="n">backend_devicespec</span><span class="o">.</span><span class="n">mem</span><span class="p">)</span>
+
+<span class="c1"># combined measure and acquire pulse</span>
+<span class="n">measure_and_acquire_qubit</span> <span class="o">=</span> <span class="n">meas_pulse_qubit</span> <span class="o">|</span> <span class="n">acq_cmd_qubit</span>
+
+<span class="c1"># scalefactor for received data</span>
+<span class="n">scale_factor</span> <span class="o">=</span> <span class="mf">1e-10</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="8.-Doing-CPMG">8. Doing CPMG<a class="anchor-link" href="#8.-Doing-CPMG"> </a></h1>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># T2 experiment parameters</span>
+<span class="n">tau_us_min</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">tau_us_max</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="n">tau_step_us</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">taus_us</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">tau_us_min</span><span class="p">,</span> <span class="n">tau_us_max</span><span class="p">,</span> <span class="n">tau_step_us</span><span class="p">)</span>
+<span class="n">num_shots_per_point</span> <span class="o">=</span> <span class="mi">512</span>
+<span class="n">ncpmg</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="c1"># drive parameters</span>
+<span class="n">drive_power_1</span> <span class="o">=</span> <span class="n">pi_amp</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">drive_power_2</span> <span class="o">=</span> <span class="n">pi_amp</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total time ranges from {2.*ncpmg*taus_us[0]} to {2.*ncpmg*taus_us[-1]} us&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>0.010703084664435272
+0.021406169328870545
+Total time ranges from 20.0 to 598.0000000000006 us
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># create schedules for Ramsey experiment </span>
+<span class="n">T2cpmg_schedules</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">T2cpmg_schedule_LOs</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="n">T2cpmg_pulse_pio2</span> <span class="o">=</span> <span class="n">pulse_lib</span><span class="o">.</span><span class="n">gaussian</span><span class="p">(</span><span class="n">duration</span><span class="o">=</span><span class="n">drive_samples</span><span class="p">,</span> <span class="n">amp</span><span class="o">=</span><span class="n">drive_power_1</span><span class="p">,</span> 
+                                <span class="n">sigma</span><span class="o">=</span><span class="n">drive_sigma</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;T2cpmg_pio2_pulse&#39;</span><span class="p">)</span>
+<span class="n">T2cpmg_pulse_pio2_qubit</span> <span class="o">=</span> <span class="n">T2cpmg_pulse_pio2</span><span class="p">(</span><span class="n">backend_devicespec</span><span class="o">.</span><span class="n">q</span><span class="p">[</span><span class="n">qubit</span><span class="p">]</span><span class="o">.</span><span class="n">drive</span><span class="p">)</span>
+<span class="n">T2cpmg_pulse_pi</span> <span class="o">=</span> <span class="n">pulse_lib</span><span class="o">.</span><span class="n">gaussian</span><span class="p">(</span><span class="n">duration</span><span class="o">=</span><span class="n">drive_samples</span><span class="p">,</span> <span class="n">amp</span><span class="o">=</span><span class="n">drive_power_2</span><span class="p">,</span> 
+                                <span class="n">sigma</span><span class="o">=</span><span class="n">drive_sigma</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;T2cpmg_pi_pulse&#39;</span><span class="p">)</span>
+<span class="n">T2cpmg_pulse_pi_qubit</span> <span class="o">=</span> <span class="n">T2cpmg_pulse_pi</span><span class="p">(</span><span class="n">backend_devicespec</span><span class="o">.</span><span class="n">q</span><span class="p">[</span><span class="n">qubit</span><span class="p">]</span><span class="o">.</span><span class="n">drive</span><span class="p">)</span>
+<span class="n">thisLO</span> <span class="o">=</span> <span class="n">pulse</span><span class="o">.</span><span class="n">LoConfig</span><span class="p">({</span><span class="n">backend_devicespec</span><span class="o">.</span><span class="n">q</span><span class="p">[</span><span class="n">qubit</span><span class="p">]</span><span class="o">.</span><span class="n">drive</span><span class="p">:</span> <span class="n">precise_frequency_qubit_minus</span><span class="p">})</span>
+<span class="k">for</span> <span class="n">ii</span><span class="p">,</span> <span class="n">delay_time_us</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">taus_us</span><span class="p">):</span>
+    <span class="c1"># start an empty schedule with a label</span>
+    <span class="n">this_schedule</span> <span class="o">=</span> <span class="n">pulse</span><span class="o">.</span><span class="n">Schedule</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;T2cpmg delay = </span><span class="si">{}</span><span class="s2"> us&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">delay_time_us</span><span class="p">))</span>
+    <span class="n">this_schedule</span> <span class="o">|=</span> <span class="n">T2cpmg_pulse_pio2_qubit</span>
+    <span class="n">this_schedule</span> <span class="o">|=</span> <span class="p">(</span><span class="n">T2cpmg_pulse_pi_qubit</span> <span class="o">&lt;&lt;</span> <span class="nb">int</span><span class="p">(</span><span class="n">this_schedule</span><span class="o">.</span><span class="n">duration</span> <span class="o">+</span> 
+                                               <span class="n">delay_time_us</span><span class="o">*</span><span class="mi">1000</span><span class="o">/</span><span class="n">dt</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ncpmg</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">this_schedule</span> <span class="o">|=</span> <span class="p">(</span><span class="n">T2cpmg_pulse_pi_qubit</span> <span class="o">&lt;&lt;</span> <span class="nb">int</span><span class="p">(</span><span class="n">this_schedule</span><span class="o">.</span><span class="n">duration</span> <span class="o">+</span> 
+                                                   <span class="mi">2</span><span class="o">*</span><span class="n">delay_time_us</span><span class="o">*</span><span class="mi">1000</span><span class="o">/</span><span class="n">dt</span><span class="p">))</span>
+    <span class="n">this_schedule</span> <span class="o">|=</span> <span class="p">(</span><span class="n">T2cpmg_pulse_pio2_qubit</span> <span class="o">&lt;&lt;</span> <span class="nb">int</span><span class="p">(</span><span class="n">this_schedule</span><span class="o">.</span><span class="n">duration</span> <span class="o">+</span> 
+                                               <span class="n">delay_time_us</span><span class="o">*</span><span class="mi">1000</span><span class="o">/</span><span class="n">dt</span><span class="p">))</span>
+    
+    <span class="n">this_schedule</span> <span class="o">|=</span> <span class="p">(</span><span class="n">measure_and_acquire_qubit</span> <span class="o">&lt;&lt;</span> <span class="nb">int</span><span class="p">(</span><span class="n">this_schedule</span><span class="o">.</span><span class="n">duration</span><span class="p">))</span>
+    
+    <span class="n">T2cpmg_schedules</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">this_schedule</span><span class="p">)</span>
+    <span class="n">T2cpmg_schedule_LOs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">thisLO</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">T2cpmg_schedules</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">channels_to_plot</span><span class="o">=</span><span class="p">[</span><span class="n">backend_devicespec</span><span class="o">.</span><span class="n">q</span><span class="p">[</span><span class="n">qubit</span><span class="p">]</span><span class="o">.</span><span class="n">measure</span><span class="p">,</span> 
+                                           <span class="n">backend_devicespec</span><span class="o">.</span><span class="n">q</span><span class="p">[</span><span class="n">qubit</span><span class="p">]</span><span class="o">.</span><span class="n">drive</span><span class="p">,</span>
+                                           <span class="c1">#backend_devicespec.q[qubit].acquire,</span>
+                                         <span class="p">],</span>
+                                         <span class="n">scaling</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea output_execute_result">
+<img src="../images/ch-quantum-hardware/calibrating-qubits-openpulse_76_0.png"
+>
+</div>
+
+</div>
+</div>
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="../images/ch-quantum-hardware/calibrating-qubits-openpulse_76_1.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">T2cpmg_experiment_qobj</span> <span class="o">=</span> <span class="n">assemble</span> <span class="p">(</span><span class="n">T2cpmg_schedules</span><span class="p">,</span> <span class="n">backend</span> <span class="o">=</span> <span class="n">backend</span><span class="p">,</span> 
+                            <span class="n">meas_level</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">meas_return</span><span class="o">=</span><span class="s1">&#39;avg&#39;</span><span class="p">,</span>
+                            <span class="n">shots</span><span class="o">=</span><span class="n">num_shots_per_point</span><span class="p">,</span>
+                            <span class="n">schedule_los</span> <span class="o">=</span> <span class="n">T2cpmg_schedule_LOs</span>
+                                <span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">job</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">T2cpmg_experiment_qobj</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">job</span><span class="o">.</span><span class="n">job_id</span><span class="p">())</span>
+<span class="n">job_monitor</span><span class="p">(</span><span class="n">job</span><span class="p">,</span> <span class="n">monitor_async</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">T2cpmgjob</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">retrieve_job</span><span class="p">(</span><span class="s1">&#39;5d2f6e1aca4ad70012795340&#39;</span><span class="p">)</span>
+<span class="n">T2cpmg_results</span> <span class="o">=</span> <span class="n">T2cpmgjob</span><span class="o">.</span><span class="n">result</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mi">3600</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">plot_X</span> <span class="o">=</span> <span class="mf">2.</span><span class="o">*</span><span class="n">ncpmg</span><span class="o">*</span><span class="n">taus_us</span>
+<span class="n">plot_Y</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">jj</span><span class="p">,</span> <span class="n">delay_time_us</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">taus_us</span><span class="p">):</span>
+    <span class="n">thisdelay_results</span> <span class="o">=</span> <span class="n">T2cpmg_results</span><span class="o">.</span><span class="n">get_memory</span><span class="p">(</span><span class="n">jj</span><span class="p">)</span><span class="o">*</span><span class="n">scale_factor</span>
+    <span class="n">plot_Y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">thisdelay_results</span><span class="p">[</span><span class="n">qubit</span><span class="p">]</span> <span class="p">)</span>
+
+<span class="n">plotter</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">plot_X</span><span class="p">,</span> <span class="n">plot_Y</span><span class="p">)</span>
+<span class="n">T2y_cpmg</span> <span class="o">=</span> <span class="n">plot_Y</span>
+<span class="n">T2x_cpmg</span> <span class="o">=</span> <span class="n">plot_X</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="../images/ch-quantum-hardware/calibrating-qubits-openpulse_80_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">curve_fit</span>
+
+<span class="n">T2guess</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">properties</span><span class="p">()</span><span class="o">.</span><span class="n">qubits</span><span class="p">[</span><span class="n">qubit</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+<span class="n">fit_func2</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">:</span> <span class="p">(</span><span class="n">A</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="o">/</span><span class="n">T2guess</span><span class="p">)</span><span class="o">+</span><span class="n">B</span><span class="p">)</span>
+<span class="c1">#Fit the data</span>
+<span class="n">fitparams2</span><span class="p">,</span> <span class="n">conv2</span> <span class="o">=</span> <span class="n">curve_fit</span><span class="p">(</span><span class="n">fit_func2</span><span class="p">,</span> <span class="n">plot_X</span><span class="p">,</span>
+                                      <span class="n">plot_Y</span><span class="p">,</span>
+                                      <span class="p">[</span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;T2 from backend = </span><span class="si">{T2guess}</span><span class="s2"> us&quot;</span><span class="p">)</span>
+
+<span class="n">plotter</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">plot_X</span><span class="p">,</span> <span class="n">plot_Y</span><span class="p">)</span>
+<span class="n">plotter</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">plot_X</span><span class="p">,</span> <span class="n">fit_func2</span><span class="p">(</span><span class="n">plot_X</span><span class="p">,</span> <span class="o">*</span><span class="n">fitparams2</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">plotter</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">plot_X</span><span class="p">))</span>
+<span class="n">plotter</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Total time, ($\mu$s)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plotter</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Measured signal, a.u.&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>T2 from backend = 91.09718741658209 us
+</pre>
+</div>
+</div>
+</div>
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Text(0, 0.5, &#39;Measured signal, a.u.&#39;)</pre>
+</div>
+
+</div>
+</div>
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="../images/ch-quantum-hardware/calibrating-qubits-openpulse_81_2.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+ 
+
+
+    </main>
+    
+        </div>
+        <nav class="c-page__nav">
+  
+    
+    <a id="js-page__nav__prev" class="c-page__nav__prev" href="/textbook-master/ch-applications/satisfiability-grover.html">
+      〈 <span class="u-margin-right-tiny"></span> 
+    </a>
+  
+
+  
+    
+    <a id="js-page__nav__next" class="c-page__nav__next" href="/textbook-master/ch-quantum-hardware/calibrating-qubits-openpulse.html">
+       <span class="u-margin-right-tiny"></span> 〉
+    </a>
+  
+</nav>
+
+        <footer>
+  <p class="footer">This page was created by <a href="https://github.com/jupyter/jupyter-book/graphs/contributors">The Jupyter Book Community</a></p>
+</footer>
+
+      </main>
+    </div>
+  </body>
+</html>
