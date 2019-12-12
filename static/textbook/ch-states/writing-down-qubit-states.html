@@ -1,0 +1,2192 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+
+  <script>
+(function () {
+  'use strict'
+  window.digitalData = {
+    page: {
+      pageInfo: {
+        productTitle: 'IBM Q Experience',
+        analytics: {
+          category: 'Qiskit.org'
+        }
+      }
+    }
+  }
+  window._analytics = {
+    segment_key: 'ffdYLviQze3kzomaINXNk6NwpY9LlXcw'
+  }
+}());
+</script>
+<script async src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,minimum-scale=1">
+
+  <title>Writing Down Qubit States</title>
+  <meta name="description" content="            Writing Down Qubit States     from qiskit import *    In the previous chapter we saw that there are multiple ways to extract an output from a qub...">
+
+  <link rel="canonical" href="https://community.qiskit.orgtextbook/ch-states/writing-down-qubit-states.html">
+  <link rel="alternate" type="application/rss+xml" title="Qiskit Textbook" href="https://community.qiskit.orgtextbook/feed.xml">
+
+  <meta property="og:url"         content="https://community.qiskit.orgtextbook/ch-states/writing-down-qubit-states.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Writing Down Qubit States" />
+<meta property="og:description" content="            Writing Down Qubit States     from qiskit import *    In the previous chapter we saw that there are multiple ways to extract an output from a qub..." />
+<meta property="og:image"       content="https://community.qiskit.org/textbook/images/logo/logo.png" />
+
+<meta name="twitter:card" content="summary">
+
+
+  <script type="application/ld+json">
+  {
+  "@context": "http://schema.org",
+  "@type": "NewsArticle",
+  "mainEntityOfPage": "https://community.qiskit.orgtextbook/ch-states/writing-down-qubit-states.html",
+  "headline": "Writing Down Qubit States",
+  "datePublished": "2019-12-11T21:28:08+00:00",
+  "dateModified": "2019-12-11T21:28:08+00:00",
+  "description": "            Writing Down Qubit States     from qiskit import *    In the previous chapter we saw that there are multiple ways to extract an output from a qub...",
+  "author": {
+    "@type": "Person",
+    "name": "The Qiskit Team"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Data 100 at UC Berkeley",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://community.qiskit.orgtextbook",
+      "width": 60,
+      "height": 60
+    }
+  },
+  "image": {
+    "@type": "ImageObject",
+    "url": "https://community.qiskit.orgtextbook",
+    "height": 60,
+    "width": 60
+  }
+}
+
+  </script>
+  <link rel="stylesheet" href="/textbook/assets/css/styles.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css ">
+
+  <!-- <link rel="manifest" href="/manifest.json"> -->
+  <!-- <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#efae0a"> -->
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+  <meta name="theme-color" content="#233947">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/x-icon" href="/textbook/images/logo/favicon.ico">
+
+  <!-- MathJax Config -->
+  <!-- Allow inline math using $ and automatically break long math lines -->
+<!-- (mostly) copied from nbconvert configuration -->
+<!-- https://github.com/jupyter/nbconvert/blob/master/nbconvert/templates/html/mathjax.tpl -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true,
+        processEnvironments: true
+    },
+    // Center justify equations in code and markdown cells. Elsewhere
+    // we use CSS to left justify single line equations in code cells.
+    displayAlign: 'center',
+    "HTML-CSS": {
+        styles: {'.MathJax_Display': {"margin": 0}},
+        linebreaks: { automatic: true },
+    }
+});
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_HTML' async></script>
+
+  <!-- DOM updating function -->
+  <script>
+const runWhenDOMLoaded = cb => {
+  if (document.readyState != 'loading') {
+    cb()
+  } else if (document.addEventListener) {
+    document.addEventListener('DOMContentLoaded', cb)
+  } else {
+    document.attachEvent('onreadystatechange', function() {
+      if (document.readyState == 'complete') cb()
+    })
+  }
+}
+
+// Helper function to init things quickly
+initFunction = function(myfunc) {
+  runWhenDOMLoaded(myfunc);
+  document.addEventListener('turbolinks:load', myfunc);
+};
+</script>
+
+  <!-- Define some javascript variables that will be useful in other javascript -->
+  <script>
+    const site_basename = 'textbook';
+  </script>
+
+  <!-- Add AnchorJS to let headers be linked -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js" async></script>
+  <script>
+const initAnchors = () => {
+  if (window.anchors === undefined) {
+    setTimeout(initAnchors, 250)
+    return
+  }
+  anchors.add("main h1, main h2, main h3, main h4")
+}
+
+initFunction(initAnchors);
+</script>
+
+
+  <!-- Include Turbolinks to make page loads fast -->
+  <!-- https://github.com/turbolinks/turbolinks -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/turbolinks/5.2.0/turbolinks.js" async></script>
+  <meta name="turbolinks-cache-control" content="no-cache">
+
+  <!-- Selectors for elements on the page -->
+  <script>
+/**
+ * Select various elements on the page for later use
+ */
+
+// IDs we'll attach to cells
+const codeCellId = index => `codecell${index}`
+const inputCellId = index => `inputcell${index}`
+
+pageElements = {}
+
+// All code cells
+findCodeCells = function() {
+    var codeCells = document.querySelectorAll('div.c-textbook__content > div.highlighter-rouge > div.highlight > pre, div.input_area pre, div.text_cell_render div.highlight pre')
+    pageElements['codeCells'] = codeCells;
+
+    codeCells.forEach((codeCell, index) => {
+      const id = codeCellId(index)
+      codeCell.setAttribute('id', id)
+    })
+};
+
+initFunction(findCodeCells);
+
+// All cells in general
+findInputCells = function() {
+    var inputCells = document.querySelectorAll('div.jb_cell')
+    pageElements['inputCells'] = inputCells;
+
+    inputCells.forEach((inputCell, index) => {
+        const id = inputCellId(index)
+        inputCell.setAttribute('id', id)
+    })
+};
+
+initFunction(findInputCells);
+</script>
+
+  <!-- Load nbinteract for widgets -->
+  
+
+  <!-- Load Thebelab for interactive widgets -->
+  <!-- Include Thebelab for interactive code if it's enabled -->
+
+
+
+  <!-- Load the auto-generating TOC -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js" async></script>
+<script>
+const initToc = () => {
+  if (window.tocbot === undefined) {
+    setTimeout(initToc, 250)
+    return
+  }
+
+  // Check whether we have any sidebar content. If not, then show the sidebar earlier.
+  var SIDEBAR_CONTENT_TAGS = ['.tag_full_width', '.tag_popout'];
+  var sidebar_content_query = SIDEBAR_CONTENT_TAGS.join(', ')
+  if (document.querySelectorAll(sidebar_content_query).length === 0) {
+    document.querySelector('nav.onthispage').classList.add('no_sidebar_content')
+  }
+
+  // Initialize the TOC bot
+  tocbot.init({
+    tocSelector: 'nav.onthispage',
+    contentSelector: '.c-textbook__content',
+    headingSelector: 'h2, h3',
+    orderedList: false,
+    collapseDepth: 6,
+    listClass: 'toc__menu',
+    activeListItemClass: "",  // Not using
+    activeLinkClass: "", // Not using
+  });
+
+}
+initFunction(initToc);
+</script>
+
+
+  <!-- Google analytics -->
+  <script src="/textbook/assets/js/ga.js" async></script>
+
+  <!-- Clipboard copy button -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" async></script>
+
+  <!-- Load custom website scripts -->
+  <script src="/textbook/assets/js/scripts.js" async></script>
+
+  <!-- Load custom user CSS and JS  -->
+  <script src="/textbook/assets/custom/custom.js" async></script>
+  <link rel="stylesheet" href="/textbook/assets/custom/custom.css">
+
+  <!-- Update interact links w/ REST param, is defined in includes so we can use templates -->
+  
+
+  <!-- Lunr search code - will only be executed on the /search page -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.6/lunr.min.js" async></script>
+  <script>var initQuery = function() {
+  // See if we have a search box
+  var searchInput = document.querySelector('input#lunr_search');
+  if (searchInput === null) {
+    return;
+  }
+
+  // Function to parse our lunr cache
+  var idx = lunr(function () {
+    this.field('title')
+    this.field('excerpt')
+    this.field('categories')
+    this.field('tags')
+    this.ref('id')
+
+    this.pipeline.remove(lunr.trimmer)
+
+    for (var item in store) {
+      this.add({
+        title: store[item].title,
+        excerpt: store[item].excerpt,
+        categories: store[item].categories,
+        tags: store[item].tags,
+        id: item
+      })
+    }
+  });
+
+  // Run search upon keyup
+  searchInput.addEventListener('keyup', function () {
+    var resultdiv = document.querySelector('#results');
+    var query = document.querySelector("input#lunr_search").value.toLowerCase();
+    var result =
+      idx.query(function (q) {
+        query.split(lunr.tokenizer.separator).forEach(function (term) {
+          q.term(term, { boost: 100 })
+          if(query.lastIndexOf(" ") != query.length-1){
+            q.term(term, {  usePipeline: false, wildcard: lunr.Query.wildcard.TRAILING, boost: 10 })
+          }
+          if (term != ""){
+            q.term(term, {  usePipeline: false, editDistance: 1, boost: 1 })
+          }
+        })
+      });
+
+      // Empty the results div
+      while (resultdiv.firstChild) {
+        resultdiv.removeChild(resultdiv.firstChild);
+      }
+
+    resultdiv.insertAdjacentHTML('afterbegin', '<p class="results__found">'+result.length+' Result(s) found</p>');
+    for (var item in result) {
+      var ref = result[item].ref;
+      if(store[ref].teaser){
+        var searchitem =
+          '<div class="list__item">'+
+            '<article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">'+
+              '<h2 class="archive__item-title" itemprop="headline">'+
+                '<a href="'+store[ref].url+'" rel="permalink">'+store[ref].title+'</a>'+
+              '</h2>'+
+              '<div class="archive__item-teaser">'+
+                '<img src="'+store[ref].teaser+'" alt="">'+
+              '</div>'+
+              '<p class="archive__item-excerpt" itemprop="description">'+store[ref].excerpt.split(" ").splice(0,20).join(" ")+'...</p>'+
+            '</article>'+
+          '</div>';
+      }
+      else{
+    	  var searchitem =
+          '<div class="list__item">'+
+            '<article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">'+
+              '<h2 class="archive__item-title" itemprop="headline">'+
+                '<a href="'+store[ref].url+'" rel="permalink">'+store[ref].title+'</a>'+
+              '</h2>'+
+              '<p class="archive__item-excerpt" itemprop="description">'+store[ref].excerpt.split(" ").splice(0,20).join(" ")+'...</p>'+
+            '</article>'+
+          '</div>';
+      }
+      resultdiv.insertAdjacentHTML('beforeend', searchitem);
+    }
+  });
+};
+
+initFunction(initQuery);
+</script>
+
+  <!-- Load JS that depends on site variables -->
+  <script>
+/**
+ * Set up copy/paste for code blocks
+ */
+const clipboardButton = id =>
+  `<a id="copy-button-${id}" class="btn copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#${id}">
+    <img src="/textbook/assets/images/copy-button.svg" alt="Copy to clipboard">
+  </a>`
+
+// Clears selected text since ClipboardJS will select the text when copying
+const clearSelection = () => {
+  if (window.getSelection) {
+    window.getSelection().removeAllRanges()
+  } else if (document.selection) {
+    document.selection.empty()
+  }
+}
+
+// Changes tooltip text for two seconds, then changes it back
+const temporarilyChangeTooltip = (el, newText) => {
+  const oldText = el.getAttribute('data-tooltip')
+  el.setAttribute('data-tooltip', newText)
+  setTimeout(() => el.setAttribute('data-tooltip', oldText), 2000)
+}
+
+const addCopyButtonToCodeCells = () => {
+  // If ClipboardJS hasn't loaded, wait a bit and try again. This
+  // happens because we load ClipboardJS asynchronously.
+  if (window.ClipboardJS === undefined) {
+    setTimeout(addCopyButtonToCodeCells, 250)
+    return
+  }
+
+  pageElements['codeCells'].forEach((codeCell) => {
+    const id = codeCell.getAttribute('id')
+    if (document.getElementById("copy-button" + id) == null) {
+      codeCell.insertAdjacentHTML('afterend', clipboardButton(id));
+    }
+  })
+
+  const clipboard = new ClipboardJS('.copybtn')
+  clipboard.on('success', event => {
+    clearSelection()
+    temporarilyChangeTooltip(event.trigger, 'Copied!')
+  })
+
+  clipboard.on('error', event => {
+    temporarilyChangeTooltip(event.trigger, 'Failed to copy')
+  })
+
+  // Get rid of clipboard before the next page visit to avoid memory leak
+  document.addEventListener('turbolinks:before-visit', () =>
+    clipboard.destroy()
+  )
+}
+
+initFunction(addCopyButtonToCodeCells);
+</script>
+
+
+  <!-- Hide cell code -->
+  <script>
+    /**
+    Add buttons to hide code cells
+    */
+
+
+    var setCodeCellVisibility = function (inputField, kind) {
+        // Update the image and class for hidden
+        var id = inputField.getAttribute('data-id');
+        var codeCell = document.querySelector(`#${id} div.highlight`);
+
+        if (kind === "visible") {
+            codeCell.classList.remove('hidden');
+            inputField.checked = true;
+        } else {
+            codeCell.classList.add('hidden');
+            inputField.checked = false;
+        }
+    }
+
+    var toggleCodeCellVisibility = function (event) {
+        // The label is clicked, and now we decide what to do based on the input field's clicked status
+        if (event.target.tagName === "LABEL") {
+            var inputField = event.target.previousElementSibling;
+        } else {
+            // It is the span inside the target
+            var inputField = event.target.parentElement.previousElementSibling;
+        }
+
+        if (inputField.checked === true) {
+            setCodeCellVisibility(inputField, "visible");
+        } else {
+            setCodeCellVisibility(inputField, "hidden");
+        }
+    }
+
+
+    // Button constructor
+    const hideCodeButton = id => `<input class="hidebtn" type="checkbox" id="hidebtn${id}" data-id="${id}"><label title="Toggle cell" for="hidebtn${id}" class="plusminus"><span class="pm_h"></span><span class="pm_v"></span></label>`
+
+    var addHideButton = function () {
+        // If a hide button is already added, don't add another
+        if (document.querySelector('div.tag_hide_input input') !== null) {
+            return;
+        }
+
+        // Find the input cells and add a hide button
+        pageElements['inputCells'].forEach(function (inputCell) {
+            if (!inputCell.classList.contains("tag_hide_input")) {
+                // Skip the cell if it doesn't have a hidecode class
+                return;
+            }
+
+            const id = inputCell.getAttribute('id')
+
+            // Insert the button just inside the end of the next div
+            inputCell.querySelector('div.input').insertAdjacentHTML('beforeend', hideCodeButton(id))
+
+            // Set up the visibility toggle
+            hideLink = document.querySelector(`#${id} div.inner_cell + input + label`);
+            hideLink.addEventListener('click', toggleCodeCellVisibility)
+        });
+    }
+
+
+    // Initialize the hide buttos
+    var initHiddenCells = function () {
+        // Add hide buttons to the cells
+        addHideButton();
+
+        // Toggle the code cells that should be hidden
+        document.querySelectorAll('div.tag_hide_input input').forEach(function (item) {
+            setCodeCellVisibility(item, 'hidden');
+            item.checked = true;
+        })
+    }
+
+    initFunction(initHiddenCells);
+
+</script>
+
+  <!-- Printing the screen -->
+  <!-- Include nbinteract for interactive widgets -->
+<script src="https://printjs-4de6.kxcdn.com/print.min.js" async></script>
+<script>
+printContent = () => {
+    // MathJax displays a second version of any math for assistive devices etc.
+    // This prevents double-rendering in the PDF output.
+    var ignoreAssistList = [];
+    assistives = document.querySelectorAll('.MathJax_Display span.MJX_Assistive_MathML').forEach((element, index) => {
+        var thisId = 'MathJax-assistive-' + index.toString();
+        element.setAttribute('id', thisId);
+        ignoreAssistList.push(thisId)
+    });
+
+    // Print the actual content object
+    printJS({
+        printable: 'textbook_content',
+        type: 'html',
+        css: "/textbook/assets/css/styles.css",
+        scanStyles: false,
+        targetStyles: ["*"],
+        ignoreElements: ignoreAssistList
+    })
+};
+
+initPrint = () => {
+    document.querySelector('#interact-button-print').addEventListener('click', printContent)
+}
+
+initFunction(initPrint)
+</script>
+
+</head>
+
+  <body>
+    <!-- .js-show-sidebar shows sidebar by default -->
+    <div id="js-textbook" class="c-textbook js-show-sidebar">
+      
+
+
+
+<nav id="js-sidebar" class="c-textbook__sidebar">
+  <a href="https://delapuente.github.io/qiskit-textbook"><img src="/textbook/images/logo/logo.png" class="textbook_logo" id="sidebar-logo" data-turbolinks-permanent/></a>
+  <h2 class="c-sidebar__title">Qiskit Textbook</h2>
+  <ul class="c-sidebar__chapters">
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook/preface.html"
+        >
+          
+          Preface
+        </a>
+
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook/upcoming.html"
+        >
+          
+          Upcoming
+        </a>
+
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook/ch-prerequisites/python-and-jupyter-notebooks.html"
+        >
+          
+            0.
+          
+          Prerequisites
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-prerequisites/python-and-jupyter-notebooks.html"
+                >
+                  
+                    0.1
+                  
+                  Python and Jupyter Notebooks
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-prerequisites/qiskit.html"
+                >
+                  
+                    0.2
+                  
+                  Qiskit
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-prerequisites/linear_algebra.html"
+                >
+                  
+                    0.3
+                  
+                  Linear Algebra
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook/ch-states/introduction.html"
+        >
+          
+            1.
+          
+          Quantum States and Qubits
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-states/introduction.html"
+                >
+                  
+                    1.1
+                  
+                  Introduction
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-states/atoms-computation.html"
+                >
+                  
+                    1.2
+                  
+                  The Atoms of Computation
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-states/unique-properties-qubits.html"
+                >
+                  
+                    1.3
+                  
+                  The Unique Properties of Qubits
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry c-sidebar__entry--active"
+                  href="/textbook/ch-states/writing-down-qubit-states.html"
+                >
+                  
+                    1.4
+                  
+                  Writing Down Qubit States
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-states/pauli-matrices-bloch-sphere.html"
+                >
+                  
+                    1.5
+                  
+                  Pauli Matrices and the Bloch Sphere
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-states/states-many-qubits.html"
+                >
+                  
+                    1.6
+                  
+                  States for Many Qubits
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook/ch-gates/introduction.html"
+        >
+          
+            2.
+          
+          Single Qubits and Multi-Qubits gates
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-gates/introduction.html"
+                >
+                  
+                    2.1
+                  
+                  Introduction
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-gates/quantum-gates.html"
+                >
+                  
+                    2.2
+                  
+                  Quantum Gates
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-gates/fun-matrices.html"
+                >
+                  
+                    2.3
+                  
+                  Fun with Matrices
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-gates/standard-gate-set.html"
+                >
+                  
+                    2.4
+                  
+                  The Standard Gate Set
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-gates/proving-universality.html"
+                >
+                  
+                    2.5
+                  
+                  Proving Universality
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-gates/basic-circuit-identities.html"
+                >
+                  
+                    2.6
+                  
+                  Basic Circuit Identities
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook/ch-ex/ex1.html"
+        >
+          
+          Problems
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-ex/ex1.html"
+                >
+                  
+                  Set 1. Classical Logic Gates with Quantum Circuits
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-ex/ex2.html"
+                >
+                  
+                  Set 2. Basic Synthesis of Single-Qubit Gates
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-ex/ex3.html"
+                >
+                  
+                  Set 3. Building the Best AND Gate
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook/ch-algorithms/teleportation.html"
+        >
+          
+            3.
+          
+          Quantum Algorithms
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-algorithms/teleportation.html"
+                >
+                  
+                    3.1
+                  
+                  Quantum Teleportation
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-algorithms/deutsch-josza.html"
+                >
+                  
+                    3.2
+                  
+                  Deutsch-Josza Algorithm
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-algorithms/bernstein-vazirani.html"
+                >
+                  
+                    3.3
+                  
+                  Bernstein-Vazirani Algorithm
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-algorithms/simon.html"
+                >
+                  
+                    3.4
+                  
+                  Simon's Algorithm
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-algorithms/quantum-fourier-transform.html"
+                >
+                  
+                    3.5
+                  
+                  Quantum Fourier Transform
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-algorithms/quantum-phase-estimation.html"
+                >
+                  
+                    3.6
+                  
+                  Quantum Phase Estimation
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-algorithms/grover.html"
+                >
+                  
+                    3.7
+                  
+                  Grover's Algorithm
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook/ch-applications/vqe-molecules.html"
+        >
+          
+            4.
+          
+          Quantum Algorithms for Applications
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-applications/vqe-molecules.html"
+                >
+                  
+                    4.1
+                  
+                  Simulating Molecules using VQE
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-applications/qaoa.html"
+                >
+                  
+                    4.2
+                  
+                  Solving combinatorial optimization problems using QAOA
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-applications/satisfiability-grover.html"
+                >
+                  
+                    4.3
+                  
+                  Solving Satisfiability Problems using Grover's Algorithm
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook/ch-quantum-hardware/calibrating-qubits-openpulse.html"
+        >
+          
+            5.
+          
+          Investigating Quantum Hardware Using Qiskit
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-quantum-hardware/calibrating-qubits-openpulse.html"
+                >
+                  
+                    5.1
+                  
+                  Calibrating Qubits with OpenPulse
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-quantum-hardware/error-correction-repetition-code.html"
+                >
+                  
+                    5.2
+                  
+                  Introduction to Quantum Error Correction using Repetition Codes
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-quantum-hardware/measurement-error-mitigation.html"
+                >
+                  
+                    5.3
+                  
+                  Measurement Error Mitigation
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-quantum-hardware/randomized-benchmarking.html"
+                >
+                  
+                    5.4
+                  
+                  Randomized Benchmarking
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-quantum-hardware/measuring-quantum-volume.html"
+                >
+                  
+                    5.5
+                  
+                  Measuring Quantum Volume
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook/ch-paper-implementations/vqls.html"
+        >
+          
+            6.
+          
+          Implementations of Recent Quantum Algorithms
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-paper-implementations/vqls.html"
+                >
+                  
+                    6.1
+                  
+                  Variational Quantum Linear Solver
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+  </ul>
+  <p class="sidebar_footer">Powered by <a href="https://github.com/jupyter/jupyter-book">Jupyter Book</a></p>
+</nav>
+
+      
+      <div class="c-topbar" id="top-navbar">
+  <!-- We show the sidebar by default so we use .is-active -->
+  <div class="c-topbar__buttons">
+    <button
+      id="js-sidebar-toggle"
+      class="hamburger hamburger--arrowalt is-active"
+    >
+      <span class="hamburger-box">
+        <span class="hamburger-inner"></span>
+      </span>
+    </button>
+    <div class="buttons">
+<div class="download-buttons-dropdown">
+    <button id="dropdown-button-trigger" class="interact-button"><i class="fa fa-download"></i></button>
+    <div class="download-buttons">
+        <a href="/textbook/content/ch-states/writing-down-qubit-states.ipynb" download>
+        <button id="interact-button-download" class="interact-button">ORIG</button>
+        </a>
+        
+        <a id="interact-button-print"><button id="interact-button-download" class="interact-button">PDF</button></a>
+    </div>
+</div>
+
+  
+  
+  
+  
+
+
+</div>
+
+  </div>
+  <!-- Empty sidebar placeholder that we'll auto-fill with javascript -->
+  <aside class="sidebar__right">
+    <header><h4 class="nav__title"><i class="fa fa-list"></i>   On this page</h4></header>
+    <nav class="onthispage">
+    </nav>
+  </aside>
+  <a href="/textbook/search.html" class="topbar-right-button" id="search-button"><i class="fa fa-search"></i></a>
+</div>
+
+      <main class="c-textbook__page" tabindex="-1">
+        <div class="c-textbook__content" id="textbook_content">
+              <main class="jupyter-page">
+    <div id="page-info"></div>
+    <div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Writing-Down-Qubit-States">Writing Down Qubit States<a class="anchor-link" href="#Writing-Down-Qubit-States"> </a></h1>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In the previous chapter we saw that there are multiple ways to extract an output from a qubit. The two methods we've used so far are the z and x measurements.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># z measurement of qubit 0</span>
+<span class="n">measure_z</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">measure_z</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+
+<span class="c1"># x measurement of qubit 0</span>
+<span class="n">measure_x</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">measure_x</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">measure_x</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Sometimes these measurements give results with certainty. Sometimes their outputs are random. This all depends on which of the infinitely many possible states our qubit is in. We therefore need a way to write down these states and figure out what outputs they'll give. For this we need some notation, and we need some math.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="The-z-basis">The z basis<a class="anchor-link" href="#The-z-basis"> </a></h3>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If you do nothing in a circuit but a measurement, you are certain to get the outcome <code>0</code>. This is because the qubits always start in a particular state, whose defining property is that it is certain to output a <code>0</code> for a z measurement.</p>
+<p>We need a name for this state. Let's be unimaginative and call it $0$ . Similarly, there exists a qubit state that is certain to output a <code>1</code>. We'll call this $1$.</p>
+<p>These two states are completely mutually exclusive. Either the qubit definitely outputs a <code>0</code>, or it definitely outputs a <code>1</code>. There is no overlap.</p>
+<p>One way to represent this with mathematics is to use two orthogonal vectors.</p>
+$$
+|0\rangle = \begin{pmatrix} 1 \\\\\\ 0 \end{pmatrix} \, \, \, \, |1\rangle =\begin{pmatrix} 0 \\\\\\ 1 \end{pmatrix}.
+$$<p>This is a lot of notation to take in all at once. First let's unpack the weird $|$ and $\rangle$ . Their job is essentially just to remind us that we are talking about the vectors that represent qubit states labelled $0$ and $1$. This helps us distinguish them from things like the bit values <code>0</code> and <code>1</code> or the numbers 0 and 1. It is part of the bra-ket notation, introduced by Dirac.</p>
+<p>If you are not familiar with vectors, you can essentially just think of them as lists of numbers which we manipulate using certain rules. If you are familiar with vectors from your high school physics classes, you'll know that these rules make vectors well-suited for describing quantities with a magnitude and a direction. For example, velocity of an object is described perfectly with a vector. However, the way we use vectors for quantum states is slightly different to this. So don't hold on too hard to your previous intuition. It's time to do something new!</p>
+<p>In the example above, we wrote the vector as a vertical list of numbers. We call these <em>column vectors</em>. In Dirac notation, they are also called <em>kets</em>.</p>
+<p>Horizontal lists are called <em>row vectors</em>. In Dirac notation they are <em>bras</em>. They are represented with a $\langle$ and a $|$.</p>
+$$
+\langle 0| = \begin{pmatrix} 1 &amp; 0\end{pmatrix} \, \, \, \, \langle 1| =\begin{pmatrix} 0 &amp; 1 \end{pmatrix}.
+$$<p>The rules on how to manipulate vectors define what it means to add or multiply them. For example, to add two vectors we need them to be the same type (either both column vectors, or both row vectors) and the same length. Then we add each element in one list to the corresponding element in the other. For a couple of arbitrary vectors that we'll call $a$ and $b$, this works as follows.</p>
+$$
+\begin{pmatrix} a_0 \\\\ a_1 \end{pmatrix} +\begin{pmatrix} b_0 \\\\ b_1 \end{pmatrix}=\begin{pmatrix} a_0+b_0 \\\\ a_1+b_1 \end{pmatrix}.
+$$<p>To multiple a vector by a number, we simply multiply every element in the list by that number:</p>
+$$
+x \times\begin{pmatrix} a_0 \\\\ a_1 \end{pmatrix} = \begin{pmatrix} x \times a_0 \\\\ x \times a_1 \end{pmatrix}
+$$<p>Multiplying a vector with another vector is a bit more tricky, since there are multiple ways we can do it. One is called the 'inner product', and works as follows.</p>
+$$
+\begin{pmatrix} a_0 &amp; a_1 \end{pmatrix} \begin{pmatrix} b_0 \\\\ b_1 \end{pmatrix}= a_0~b_0 + a_1~b_1.
+$$<p>Note that the right hand side of this equation contains only normal numbers being multipled and added in a normal way. The inner product of two vectors therefore yields just a number. As we'll see, we can interpret this as a measure of how similar the vectors are.</p>
+<p>The inner product requires the first vector to be a bra and the second to be a ket. In fact, this is where their names come from. Dirac wanted to write the inner product as something like $\langle a | b \rangle$, which looks like the names of the vectors enclosed in brackets. Then he worked backwards to split the <em>bracket</em> into a <em>bra</em> and a <em>ket</em>.</p>
+<p>If you try out the inner product on the vectors we already know, you'll find</p>
+$$
+\langle 0 | 0\rangle = \langle 1 | 1\rangle = 1,\\\\
+\langle 0 | 1\rangle = \langle 1 | 0\rangle = 0.
+$$<p>Here we are using a concise way of writing the inner products where, for example, $\langle 0 | 1 \rangle$ is the inner product of $\langle 0 |$ with $| 1 \rangle$. The top line shows us that the inner product of these states with themselves always gives a 1. When done with two orthogonal states, as on the bottom line, we get the outcome 0. These two properties will come in handy later on.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="The-x-basis---part-1">The x basis - part 1<a class="anchor-link" href="#The-x-basis---part-1"> </a></h3>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>So far we've looked at states for which the z measurement has a certain outcome. But there are also states for which the outcome of a z measurement is equally likely to be <code>0</code> or <code>1</code>. What might these look like in the language of vectors?</p>
+<p>A good place to start would be something like $|0\rangle + |1\rangle$ , since this includes both $|0\rangle$ and $|1\rangle$ with no particular bias towards either. But let's hedge our bets a little and multiply it by some number $x$ .</p>
+$$
+x ~ (|0\rangle + |1\rangle) = \begin{pmatrix} x \\\\ x \end{pmatrix}
+$$<p>We can choose the value of $x$ to make sure that the state plays nicely in our calculations. For example, think about the inner product,</p>
+$$
+\begin{pmatrix} x &amp; x \end{pmatrix} \times \begin{pmatrix} x \\\\ x \end{pmatrix}= 2x^2.
+$$<p>We can get any value for the inner product that we want, just by choosing the appropriate value of $x$.</p>
+<p>As mentioned earlier, we are going to use the inner product as a measure of how similar two vectors are. With this interpretation in mind, it is natural to require that the inner product of any state with itself gives the value $1$. This is already acheived for the inner products of $|0\rangle$ and $|1\rangle$ with themselves, so let's make it true for all other states too.</p>
+<p>This condition is known as the normalization condition. In this case, it means that $x=\frac{1}{\sqrt{2}}$. Now we know what our new state is, so here's a few ways of writing it down.</p>
+$$
+\begin{pmatrix} \frac{1}{\sqrt{2}} \\\\ \frac{1}{\sqrt{2}} \end{pmatrix} = \frac{1}{\sqrt{2}}\begin{pmatrix} 1 \\\\ 1 \end{pmatrix} = \frac{ |0\rangle + |1\rangle}{\sqrt{2}}
+$$<p>This state is essentially just $|0\rangle$ and $|1\rangle$ added together and then normalized, so we will give it a name to reflect that origin. We call it $|+\rangle$ .</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="The-Born-rule">The Born rule<a class="anchor-link" href="#The-Born-rule"> </a></h3>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now we've got three states that we can write down as vectors. We can also calculate inner products for them. For example, the inner product of each with $\langle 0 |$ is</p>
+$$
+\langle 0 | 0\rangle = 1 \\\\ \langle 0 | 1\rangle = 0 \\\\ \, \, \, \, \langle 0 | +\rangle = \frac{1}{\sqrt{2}}.
+$$<p>We also know the probabilities of getting various outcomes from a z measurement for these states. For example, let's use $p^z_0$ to denote the probability of the result <code>0</code> for a z measurement. The values this has for our three states are</p>
+$$
+p_0^z( | 0\rangle) = 1,\\\\ p_0^z( | 1\rangle) = 0, \\\\ p_0^z( | +\rangle) = \frac{1}{2}.
+$$<p>As you might have noticed, there's a lot of similarlity between the numbers we get from the inner products and those we get for the probabilities. Specifically, the three probabilities can all be written as the square of the inner products:</p>
+$$
+p_0^z(|a\rangle) = (~\langle0|a\rangle~)^2.
+$$<p>Here $|a\rangle$ represents any generic qubit state.</p>
+<p>This property doesn't just hold for the <code>0</code> outcome. If we compare the inner products with $\langle 1 |$ with the probabilities of the <code>1</code> outcome, we find a similar relation.</p>
+$$
+\\\\
+p_1^z(|a\rangle) = (~\langle1|a\rangle~)^2.
+$$<p>The same also holds true for other types of measurement. All probabilities in quantum mechanics can be expressed in this way. It is known as the <em>Born rule</em>.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Global-and-relative-phases">Global and relative phases<a class="anchor-link" href="#Global-and-relative-phases"> </a></h3>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Vectors are how we use math to represent the state of a qubit. With them we can calculate the probabilities of all the possible things that could ever be measured. These probabilities are essentially all that is physically relevant about a qubit. It is by measuring them that we can determine or verify what state our qubits are in. Any aspect of the state that doesn't affect the probabilities is therefore just a mathematical curiosity.</p>
+<p>Let's find an example. Consider a state that looks like this:</p>
+$$
+|\tilde 0\rangle = \begin{pmatrix} -1 \\\\ 0 \end{pmatrix} = -|0\rangle.
+$$<p>This is equivalent to multiplying the state $|0\rangle$ by $-1$. It means that every inner product we could calculate with $|\tilde0\rangle$ is the same as for $|0\rangle$, but multplied by $-1$.</p>
+$$
+\langle a|\tilde 0\rangle = -\langle a| 0\rangle
+$$<p>As you probably know, any negative number squares to the same value as its positive counterpart: $(-x)^2 =x^2$.</p>
+<p>Since we square inner products to get probabilities, this means that any probability we could ever calculate for $|\tilde0\rangle$ will give us the same value as for $|0\rangle$. If the probabilities of everything are the same, there is no observable difference between $|\tilde0\rangle$ and $|0\rangle$; they are just different ways of representing the same state.</p>
+<p>This is known as the irrelevance of the global phase. Quite simply, this means that multplying the whole of a quantum state by $-1$ gives us a state that will look different mathematically, but which is actually completely equivalent physically.</p>
+<p>The same is not true if the phase is <em>relative</em> rather than <em>global</em>. This would mean multiplying only part of the state by $-1$ , for example:</p>
+$$
+\begin{pmatrix} a_0 \\\\ a_1 \end{pmatrix} \rightarrow \begin{pmatrix} a_0 \\\\ -a_1 \end{pmatrix}.
+$$<p>Doing this with the $|+\rangle$ state gives us a new state. We'll call it $|-\rangle$.</p>
+$$
+|-\rangle = \frac{1}{\sqrt{2}}\begin{pmatrix} 1 \\\\ -1 \end{pmatrix} = \frac{ |0\rangle - |1\rangle}{\sqrt{2}}
+$$<p>The values $p_0^z$ and $p_1^z$ for $|-\rangle$ are the same as for $|+\rangle$. These two states are thus indistinguishable when we make only z measurements. But there are other ways to distinguish them. To see how, consider the inner product of $|+\rangle$ and $|-\rangle$.</p>
+$$
+\langle-|+\rangle = \langle+|-\rangle = 0
+$$<p>The inner product is 0, just as it is for $|0\rangle$ and $|1\rangle$. This means that the $|+\rangle$ and $|-\rangle$ states are orthogonal: they represent a pair of mutually exclusive possible ways for a qubit to be a qubit.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="The-x-basis---part-2">The x basis - part 2<a class="anchor-link" href="#The-x-basis---part-2"> </a></h3>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Whenever we find a pair of orthogonal qubit states, we can use it to define a new kind of measurement.</p>
+<p>First, let's apply this to the case we know well: the z measurement. This asks a qubit whether it is $|0\rangle$ or $|1\rangle$. If it is $|0\rangle$, we get the result <code>0</code>. For $|1\rangle$ we get <code>1</code>. Anything else, such as $|+\rangle$, is treated as a superposition of the two.</p>
+$$
+|+\rangle = \frac{|0\rangle+|1\rangle}{\sqrt{2}}.
+$$<p>For a superposition, the qubit needs to randomly choose between the two possibilities according to the Born rule.</p>
+<p>We can similarly define a measurement based on $|+\rangle$ and $|-\rangle$. This asks a qubit whether it is $|+\rangle$ or $|-\rangle$. If it is $|+\rangle$, we get the result <code>0</code>. For $|-\rangle$ we get <code>1</code>. Anything else is treated as a superposition of the two. This includes the states $|0\rangle$ and $|1\rangle$, which we can write as</p>
+$$
+|0\rangle = \frac{|+\rangle+|-\rangle}{\sqrt{2}}, \, \, \, \, |1\rangle = \frac{|+\rangle-|-\rangle}{\sqrt{2}}.
+$$<p>For these, and any other superpositions of $|+\rangle$ and $|-\rangle$, the qubit chooses its outcome randomly with probabilities</p>
+$$
+p_0^x(|a\rangle) = (~\langle+|a\rangle~)^2,\\\\
+p_1^x(|a\rangle) = (~\langle-|a\rangle~)^2.
+$$<p>This is the x measurement.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="The-conservation-of-certainty">The conservation of certainty<a class="anchor-link" href="#The-conservation-of-certainty"> </a></h3>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Qubits in quantum circuits always start out in the state $|0\rangle$. By applying different operations, we can make them explore other states.</p>
+<p>Try this out yourself using a single qubit, creating circuits using operations from the following list, and then doing the x and z measurements in the way described at the top of the page.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># the hadamard</span>
+
+<span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># x gate</span>
+
+<span class="n">qc</span><span class="o">.</span><span class="n">y</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># y gate</span>
+
+<span class="n">qc</span><span class="o">.</span><span class="n">z</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># z gate</span>
+
+<span class="c1"># for the following, replace theta by any number</span>
+<span class="n">theta</span> <span class="o">=</span> <span class="mf">3.14159</span><span class="o">/</span><span class="mi">4</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">ry</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span> <span class="c1"># y axis rotation</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>You'll find examples where the z measurement gives a certain result, but the x is completely random. You'll also find examples where the opposite is true. Furthermore, there are many examples where both are partially random. With enough experimentation, you might even uncover the rule that underlies this behavior:</p>
+$$
+(p^z_0-p^z_1)^2 + (p^x_0-p^x_1)^2 = 1.
+$$<p>This is a version of Heisenberg's famous uncertainty principle. The $(p^z_0-p^z_1)^2$ term measures how certain the qubit is about the outcome of a z measurement. The $(p^x_0-p^x_1)^2$ term measures the same for the x measurement. Their sum is the total certainty of the two combined. Given that this total always takes the same value, we find that the amount of information a qubit can be certain about is a limited and conserved resource.</p>
+<p>Here is a program to calculate this total certainty. As you should see, whatever gates from the above list you choose to put in <code>qc</code>, the total certainty comes out as $1$ (or as near as possible given statistical noise).</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">shots</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="mi">14</span> <span class="c1"># number of samples used for statistics</span>
+
+<span class="n">uncertainty</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">measure_circuit</span> <span class="ow">in</span> <span class="p">[</span><span class="n">measure_z</span><span class="p">,</span> <span class="n">measure_x</span><span class="p">]:</span>
+
+    <span class="c1"># run the circuit with a the selected measurement and get the number of samples that output each bit value</span>
+    <span class="n">counts</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="o">+</span><span class="n">measure_circuit</span><span class="p">,</span><span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">),</span><span class="n">shots</span><span class="o">=</span><span class="n">shots</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_counts</span><span class="p">()</span>
+
+    <span class="c1"># calculate the probabilities for each bit value</span>
+    <span class="n">probs</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">output</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;0&#39;</span><span class="p">,</span><span class="s1">&#39;1&#39;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">output</span> <span class="ow">in</span> <span class="n">counts</span><span class="p">:</span>
+            <span class="n">probs</span><span class="p">[</span><span class="n">output</span><span class="p">]</span> <span class="o">=</span> <span class="n">counts</span><span class="p">[</span><span class="n">output</span><span class="p">]</span><span class="o">/</span><span class="n">shots</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">probs</span><span class="p">[</span><span class="n">output</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+            
+    <span class="n">uncertainty</span> <span class="o">+=</span> <span class="p">(</span> <span class="n">probs</span><span class="p">[</span><span class="s1">&#39;0&#39;</span><span class="p">]</span> <span class="o">-</span>  <span class="n">probs</span><span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">]</span> <span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="c1"># print the total uncertainty</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The total uncertainty is&#39;</span><span class="p">,</span><span class="n">uncertainty</span> <span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>The total uncertainty is 0.9984774887561798
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now we have found this rule, let's try to break it! Then we can hope to get a deeper understanding of what is going on. We can do this by simply implementing the operation below, and then recalculating the total uncertainty.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># for the following, replace theta by any number</span>
+<span class="n">theta</span> <span class="o">=</span> <span class="mf">3.14159</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">rx</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span> <span class="c1"># x axis rotation</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>For a circuit with a single <code>rx</code> with $\theta=\pi/2$, we will find that $(p^z_0-p^z_1)^2 + (p^x_0-p^x_1)^2=0$. This operation seems to have reduced our total certainty to zero.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>All is not lost, though. We simply need to perform another identical <code>rx</code> gate to our circuit to go back to obeying $(p^z_0-p^z_1)^2 + (p^x_0-p^x_1)^2=1$. This shows that the operation does not destroy our certainty; it simply moves it somewhere else and then back again. So let's find that somewhere else.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="The-y-basis---part-1">The y basis - part 1<a class="anchor-link" href="#The-y-basis---part-1"> </a></h3>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>There are infinitely many ways to measure a qubit, but the z and x measurements have a special relationship with each other. We say that they are <em>mutually unbiased</em>. This simply means that certainty for one implies complete randomness for the other.</p>
+<p>At the end of the last section, it seemed that we were missing a piece of the puzzle. We need another type of measurement to plug the gap in our total certainty, and it makes sense to look for one that is also mutually unbiased with x and z.</p>
+<p>The first step is to find a state that seems random to both x and z measurements. Let's call it $|\circlearrowleft\rangle$, for no apparent reason.</p>
+$$
+|\circlearrowleft\rangle = c_0 | 0 \rangle + c_1 | 1 \rangle
+$$<p>Now the job is to find the right values for $c_0$ and $c_1$. You could try to do this with standard positive and negative numbers, but you'll never be able to find a state that is completely random for both x and z measurements. To achieve this, we need to use complex numbers.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Complex-numbers">Complex numbers<a class="anchor-link" href="#Complex-numbers"> </a></h3>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Hopefully you've come across complex numbers before, but here is a quick reminder.</p>
+<p>Normal numbers, such as the ones we use for counting bananas, are known as <em>real numbers</em>. We cannot solve all possible equations using only real numbers. For example, there is no real number that serves as the square root of $-1$. To deal with this issue, we need more numbers, which we call <em>complex numbers</em>.</p>
+<p>To define complex numbers we start by accepting the fact that $-1$ has a square root, and that its name is $i$. Any complex number can then be written</p>
+$$
+x = x_r + i~x_i .
+$$<p>Here $x_r$ and $x_i$ are both normal numbers (positive or negative), where $x_r$ is known as the real part and $x_i$ as the imaginary part.</p>
+<p>For every complex number $x$ there is a corresponding complex conjugate $x^*$</p>
+$$
+x^* = x_r - i~x_i .
+$$<p>Multiplying $x$ by $x^*$ gives us a real number. It's most useful to write this as</p>
+$$
+|x| = \sqrt{x~x^*}.
+$$<p>Here $|x|$ is known as the magnitude of $x$ (or, equivalently, of $x^*$ ).</p>
+<p>If we are going to allow the numbers in our quantum states to be complex, we'll need to upgrade some of our equations.</p>
+<p>First, we need to ensure that the inner product of a state with itself is always 1. To do this, the bra and ket versions of the same state must be defined as follows:</p>
+$$
+|a\rangle = \begin{pmatrix} a_0 \\\\ a_1 \end{pmatrix}, ~~~ \langle a| = \begin{pmatrix} a_0^* &amp; a_1^* \end{pmatrix}.
+$$<p>Then we just need a small change to the Born rule, where we square the magnitudes of inner products, rather than just the inner products themselves.</p>
+$$
+p_0^z(|a\rangle) = |~\langle0|a\rangle~|^2,\\\\
+p_1^z(|a\rangle) = |~\langle1|a\rangle~|^2,\\\\
+p_0^x(|a\rangle) = |~\langle+|a\rangle~|^2,\\\\
+p_1^x(|a\rangle) = |~\langle-|a\rangle~|^2.
+$$<p>The irrelevance of the global phase also needs an upgrade. Previously, we only talked about multiplying by -1. In fact, we can multiply a state by any complex number whose magnitude is 1. This will give us a state that will look different, but which is actually completely equivalent. This includes multiplying by $i$, $-i$ or infinitely many other possibilities.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="The-y-basis---part-2">The y basis - part 2<a class="anchor-link" href="#The-y-basis---part-2"> </a></h3>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now that we have complex numbers, we can define the following pair of states.</p>
+$$
+|\circlearrowright\rangle = \frac{ | 0 \rangle + i | 1 \rangle}{\sqrt{2}}, ~~~~ |\circlearrowleft\rangle = \frac{ | 0 \rangle -i | 1 \rangle}{\sqrt{2}}
+$$<p>You can verify yourself that they both give random outputs for x and z measurements. They are also orthogonal to each other. They therefore define a new measurement, and that basis is mutally unbiased with x and z. This is the third and final fundamental measurement for a single qubit. We call it the y measurement, and can implement it with</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># y measurement of qubit 0</span>
+<span class="n">measure_y</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">measure_y</span><span class="o">.</span><span class="n">sdg</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">measure_y</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">measure_y</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>With the x, y and z measurements, we now have everything covered. Whatever operations we apply, a single isolated qubit will always obey</p>
+$$
+(p^z_0-p^z_1)^2 + (p^y_0-p^y_1)^2 + (p^x_0-p^x_1)^2 = 1.
+$$<p>To see this, we can incorporate the y measurement into our measure of total certainty.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">shots</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="mi">14</span> <span class="c1"># number of samples used for statistics</span>
+
+<span class="n">uncertainty</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">measure_circuit</span> <span class="ow">in</span> <span class="p">[</span><span class="n">measure_z</span><span class="p">,</span> <span class="n">measure_x</span><span class="p">,</span> <span class="n">measure_y</span><span class="p">]:</span>
+
+    <span class="c1"># run the circuit with a the selected measurement and get the number of samples that output each bit value</span>
+    <span class="n">counts</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="o">+</span><span class="n">measure_circuit</span><span class="p">,</span><span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">),</span><span class="n">shots</span><span class="o">=</span><span class="n">shots</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_counts</span><span class="p">()</span>
+
+    <span class="c1"># calculate the probabilities for each bit value</span>
+    <span class="n">probs</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">output</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;0&#39;</span><span class="p">,</span><span class="s1">&#39;1&#39;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">output</span> <span class="ow">in</span> <span class="n">counts</span><span class="p">:</span>
+            <span class="n">probs</span><span class="p">[</span><span class="n">output</span><span class="p">]</span> <span class="o">=</span> <span class="n">counts</span><span class="p">[</span><span class="n">output</span><span class="p">]</span><span class="o">/</span><span class="n">shots</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">probs</span><span class="p">[</span><span class="n">output</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+            
+    <span class="n">uncertainty</span> <span class="o">+=</span> <span class="p">(</span> <span class="n">probs</span><span class="p">[</span><span class="s1">&#39;0&#39;</span><span class="p">]</span> <span class="o">-</span>  <span class="n">probs</span><span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">]</span> <span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="c1"># print the total uncertainty</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The total uncertainty is&#39;</span><span class="p">,</span><span class="n">uncertainty</span> <span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>The total uncertainty is 0.986548513174057
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>For more than one qubit, this relation will need another upgrade. This is because the qubits can spend their limited certainty on creating correlations that can only be detected when multiple qubits are measured. The fact that certainty is conserved remains true, but it can only be seen when looking at all the qubits together.</p>
+<p>Before we move on to entanglement, there is more to explore about just a single qubit. As we'll see in the next section, the conservation of certainty leads to a particularly useful way of visualizing single-qubit states and gates.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+ 
+
+
+    </main>
+    
+        </div>
+        <nav class="c-page__nav">
+  
+    
+    <a id="js-page__nav__prev" class="c-page__nav__prev" href="/textbook/ch-states/unique-properties-qubits.html">
+      〈 <span class="u-margin-right-tiny"></span> 
+    </a>
+  
+
+  
+    
+    <a id="js-page__nav__next" class="c-page__nav__next" href="/textbook/ch-states/pauli-matrices-bloch-sphere.html">
+       <span class="u-margin-right-tiny"></span> 〉
+    </a>
+  
+</nav>
+
+        <footer>
+  <p class="footer">This page was created by <a href="https://github.com/jupyter/jupyter-book/graphs/contributors">The Jupyter Book Community</a></p>
+</footer>
+
+      </main>
+    </div>
+  </body>
+</html>
