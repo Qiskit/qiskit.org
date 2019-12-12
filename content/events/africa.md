@@ -53,6 +53,14 @@ Qiskit Camp Africa will take place at the Kwa Maritane Bush Lodge (https://www.l
 
 _(People are welcome to extend the trip at their own expense)_
 
+## Prizes and Judging
+
+There are 3 ways to win this hackathon!
+
+1st & 2nd Prize - Decided by a panel of 3 judges, 1st and 2nd prize winners will be evaluated on 1) Originality and Uniqueness; 2) Live Pitch Presentation; 3) Usefulness; and 4) Technical complexity. 1st place winners will receive a paid trip to the annual flagship Qiskit Camp event near Yorktown Heights, NY.
+
+Community Choice - The community choice award will be given based on the highest scoring team voted on by the community.
+
 ## Code of Conduct
 
 IBM Q is dedicated to providing an enjoyable and safe experience for all participants. In the interest of fostering an open and welcoming environment, all participants, including attendees, speakers, sponsors, volunteers, online contributors, and IBM employees are expected to show respect for each other and our community by creating a harassment-free experience for everyone, regardless of age, body size, disability, ethnicity, gender identity and expression, level of experience, nationality, personal appearance, race, religion, or sexual identity and orientation. Expected behavior applies to both online and offline engagement with the IBM Q Community.
