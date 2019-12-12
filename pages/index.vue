@@ -55,8 +55,8 @@
     </LegacySection>
     <LegacySection>
       <article>
-        <h2>Qiskit community</h2>
-        <p>Qiskit is driven by our avid community of Qiskitters! We are committed to our goal of bringing quantum computing to people of all backgrounds, and are always excited to hear your feedback directly from you. There are many ways to stay informed, contribute to, and collaborate on Qiskit.</p>
+        <h2>Where to find us</h2>
+        <p>Through connecting, contributing and collaborating, our diverse community of Qiskitters propels Qiskit to new forefronts and fields. In our commitment to open this quantum computing community to people of all backgrounds, we span across several platforms. Find us today to start connecting and contributing!</p>
       </article>
       <aside>
         <ul class="social-networks-list">
@@ -144,26 +144,6 @@
           </li>
         </ul>
       </aside>
-    </LegacySection>
-    <LegacySection>
-      <article>
-        <h2>Citation</h2>
-        <p>
-          If you use Qiskit, please cite it as per the included
-          <a
-            href="https://raw.githubusercontent.com/Qiskit/qiskit/master/Qiskit.bib"
-            title="BibTeX"
-            target="_blank"
-            rel="noopener"
-            @click="$trackClickEvent({
-              action: 'Citation: BibTeX File',
-              objectType: 'Link'
-            })"
-          >
-            BibTeX file
-          </a>
-        </p>
-      </article>
     </LegacySection>
   </main>
 </template>
