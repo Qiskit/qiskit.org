@@ -15,7 +15,7 @@
       - quantum-duel.md
       - quantum-img-processing.md
       - quantum-deep-advantage.md
-      - quantilier.md
+      - quantalier.md
       - qonway-game-of-life.md
       - quantum-toy-piano.md
       - tictacq.md
