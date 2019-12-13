@@ -70,7 +70,6 @@ export function init(outlet) {
     },
     {
       path: '/textbook',
-      component: 'page-textbook',
       action: () => {
         window.location.replace('https://community.qiskit.org/textbook');
       },
