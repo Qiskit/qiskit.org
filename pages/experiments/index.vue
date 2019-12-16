@@ -5,7 +5,7 @@
         id="presentation"
         main-title="Qiskit Experiments"
       >
-        <p>Browse and contribute with innovatives ways of using quantum computing and Qiskit.</p>
+        <p>Browse and contribute to the fun and innovative applications of Qiskit.</p>
       </GatesHeader>
     </header>
     <div class="inner-navigation-scope">
