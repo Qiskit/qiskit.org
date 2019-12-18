@@ -70,9 +70,7 @@ import { segmentMixin } from '~/mixins/segment-mixin.ts'
   }
 })
 export default class extends Vue {
-  title: string = 'Qiskit Experiments'
   belongsTo: string = 'experiments'
-  to: string = 'experiments/index/'
 }
 </script>
 

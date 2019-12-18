@@ -123,9 +123,7 @@ import { segmentMixin } from '~/mixins/segment-mixin.ts'
   }
 })
 export default class extends Vue {
-  title: string = 'Qiskit Advocates'
   belongsTo: string = 'advocates'
-  to: string = 'advocates/index/'
 
   cities () {
     const cityIndex = this.$data.profiles.reduce((cityIndex, card) => {
