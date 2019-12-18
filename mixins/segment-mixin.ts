@@ -35,9 +35,9 @@ export const segmentMixin = {
     }
   },
   beforeRouteEnter (to, from, next) {
-    next((self) => {
-      const routeName: string = self.belongsTo
-      const title: string = self.$metaInfo.title
+    next((pageComponent) => {
+      const routeName: string = pageComponent.belongsTo
+      const title: string = pageComponent.$metaInfo.title
       const path: string = to.path
 
       if (window.bluemixAnalytics && window.bluemixAnalytics.pageEvent) {
