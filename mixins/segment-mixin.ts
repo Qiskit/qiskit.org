@@ -23,7 +23,7 @@ export const segmentMixin = {
       }
 
       window._analytics = {
-        segment_key: 'ffdYLviQze3kzomaINXNk6NwpY9LlXcw',
+        segment_key: 'zbHWEXPUfXm0K6C7HbegwB5ewDEC8o1H',
         coremetrics: false,
         optimizely: false,
         googleAddServices: false,
@@ -34,10 +34,9 @@ export const segmentMixin = {
       }
     }
   },
-  mounted () {
-    const self = this as any
-
-    self.$nextTick(function () {
+  beforeRouteEnter (to, from, next) {
+    next(self => {
+      console.log('VM', self)
       if (window.bluemixAnalytics && window.bluemixAnalytics.pageEvent) {
         window.bluemixAnalytics.pageEvent(
           'Qiskit.org',
