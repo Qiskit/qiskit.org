@@ -70,7 +70,7 @@ import { segmentMixin } from '~/mixins/segment-mixin.ts'
   }
 })
 export default class extends Vue {
-  belongsTo: string = 'experiments'
+  belongsTo: string = 'projects'
 }
 </script>
 

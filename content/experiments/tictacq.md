@@ -9,7 +9,7 @@ media:
   - /images/experiments/tictacq/grover-player.png
   - /images/experiments/tictacq/svm-player.png
 source: https://github.com/maddy-tod/tictactoe-roli
-belongsTo: experiments
+belongsTo: projects
 ---
 
 In this experiment you can play noughts and crosses against a real quantum computer! Try it our for yourself [here](https://maddytod.trinket.io/sites/tictacq)! You can also edit the code to come up with new better strategies for the quantum computer to play as. The stragies that are currently implemented are explained below.
