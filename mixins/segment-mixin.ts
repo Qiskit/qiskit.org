@@ -36,16 +36,19 @@ export const segmentMixin = {
   },
   beforeRouteEnter (to, from, next) {
     next(self => {
-      console.log('VM', self)
+      const routeName: string = self.belongsTo
+      const title: string = self.$metaInfo.title
+      const path: string = to.path
+
       if (window.bluemixAnalytics && window.bluemixAnalytics.pageEvent) {
         window.bluemixAnalytics.pageEvent(
           'Qiskit.org',
-          self.belongsTo,
+          routeName,
           {
             navigationType: 'pushState',
-            productTitle: self.title,
-            path: self.to,
-            title: self.title
+            productTitle: title,
+            path,
+            title
           }
         )
       }
