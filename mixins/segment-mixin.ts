@@ -35,7 +35,7 @@ export const segmentMixin = {
     }
   },
   beforeRouteEnter (to, from, next) {
-    next(self => {
+    next((self) => {
       const routeName: string = self.belongsTo
       const title: string = self.$metaInfo.title
       const path: string = to.path
