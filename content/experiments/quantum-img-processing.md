@@ -8,7 +8,7 @@ media:
   - /images/experiments/quantum-img-processing/img-candidates.png
 
 source: https://github.com/Shedka/citiesatnight
-belongsTo: experiments
+belongsTo: projects
 ---
 A quantum approach to image processing: encoding, edge detection & image matching with a cool application: *mapping the Earth at night*.
 
