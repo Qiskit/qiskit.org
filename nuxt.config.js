@@ -32,8 +32,7 @@ export default {
   head: {
     title: pkg.name,
     script: [
-      // { src: 'https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js', async: 'true' }
-      { src: 'https://console.test.cloud.ibm.com/analytics/build/bluemix-analytics.min.js', async: 'true' }
+      { src: 'https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js', async: 'true' }
     ],
     meta: [
       { charset: 'utf-8' },
