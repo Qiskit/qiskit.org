@@ -46,7 +46,7 @@ export const segmentMixin = {
           routeName,
           {
             navigationType: 'pushState',
-            productTitle: title,
+            productTitle: 'IBM Q Experience',
             path,
             title
           }
