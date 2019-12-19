@@ -8,13 +8,11 @@ declare global {
 
 export const segmentMixin = {
   created () {
-    const self = this as any
-
     if (process.client) {
       window.digitalData = {
         page: {
           pageInfo: {
-            productTitle: self.title,
+            productTitle: 'IBM Q Experience',
             analytics: {
               category: 'Qiskit.org'
             }
