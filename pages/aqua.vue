@@ -2,7 +2,7 @@
   <main>
     <LegacyPresentation
       :title="title"
-      image="images/qiskit-aqua-logo.svg"
+      image="/images/qiskit-aqua-logo.svg"
       :description="description"
       sources="https://github.com/Qiskit/qiskit-aqua"
       segment-action="Qiskit Aqua: GitHub Repository"

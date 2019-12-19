@@ -2,7 +2,7 @@
   <main>
     <LegacyPresentation
       :title="title"
-      image="images/qiskit-ibmqp-logo.svg"
+      image="/images/qiskit-ibmqp-logo.svg"
       :description="description"
       sources="https://github.com/Qiskit/qiskit-ibmq-provider"
       segment-action="IBM Q Account: GitHub Repository"
