@@ -2,7 +2,7 @@
   <main>
     <LegacyPresentation
       :title="title"
-      image="images/qiskit-ignis-logo.svg"
+      image="/images/qiskit-ignis-logo.svg"
       :description="description"
       sources="https://github.com/Qiskit/qiskit-ignis"
       segment-action="Qiskit Ignis: GitHub Repository"

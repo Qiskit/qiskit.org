@@ -2,7 +2,7 @@
   <main>
     <LegacyPresentation
       :title="title"
-      image="images/qiskit-terra-logo.svg"
+      image="/images/qiskit-terra-logo.svg"
       :description="description"
       sources="https://github.com/Qiskit/qiskit-terra"
       segment-action="Qiskit Terra: GitHub Repository"
