@@ -46,17 +46,19 @@
                 {{ communitySubLink.label }}
               </nuxt-link>
             </div>
-            <nuxt-link
+            <a
               v-for="link in learnMore"
               :key="link.label"
               :class="{
                 'vertical-navigation__item': true,
                 'nuxt-link-active': isActive(link.url)
               }"
-              :to="link.url"
+              :href="link.url"
+              target="_blank"
+              @click="link.segment && $trackClickEvent(link.segment)"
             >
               {{ link.label }}
-            </nuxt-link>
+            </a>
           </nav>
         </section>
         <nuxt-link class="link-to-home" to="/">
