@@ -46,11 +46,11 @@ export const segmentMixin = {
     const pageComponent = this as any
 
     if (process.client) {
-      /* To see the window._analytics default values go to
-      * https://github.ibm.com/Bluemix/Bluemix.Analytics/blob/master/webpack.constants.js
-      */
+      // To see the window._analytics default values go to
+      // https://github.ibm.com/Bluemix/Bluemix.Analytics/blob/master/webpack.constants.js
       window._analytics = {
-        segment_key: 'zbHWEXPUfXm0K6C7HbegwB5ewDEC8o1H',
+        // For testing use: zbHWEXPUfXm0K6C7HbegwB5ewDEC8o1H
+        segment_key: 'ffdYLviQze3kzomaINXNk6NwpY9LlXcw',
         optimizely: false,
         googleAddServices: false,
         autoPageView: false
