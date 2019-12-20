@@ -6,22 +6,44 @@ declare global {
   }
 }
 
+const category: string = 'Qiskit.org'
+const productTitle: string = 'IBM Q Experience'
+const navigationType: string = 'pushState'
+
+const trackPage = (routeName, path, title) => {
+  if (window.bluemixAnalytics && window.bluemixAnalytics.pageEvent) {
+    window.bluemixAnalytics.pageEvent(
+      category,
+      routeName,
+      {
+        navigationType,
+        productTitle,
+        path,
+        title
+      }
+    )
+  }
+}
+
 export const segmentMixin = {
   created () {
+    const pageComponent = this as any
+    const routeName: string = pageComponent.belongsTo
+    const title: string = pageComponent.$metaInfo.title
+    const path: string = pageComponent.to
+
     if (process.client) {
       window.digitalData = {
         page: {
           pageInfo: {
-            productTitle: 'IBM Q Experience',
-            analytics: {
-              category: 'Qiskit.org'
-            }
+            productTitle,
+            analytics: { category }
           }
         }
       }
 
       window._analytics = {
-        segment_key: 'ffdYLviQze3kzomaINXNk6NwpY9LlXcw',
+        segment_key: 'zbHWEXPUfXm0K6C7HbegwB5ewDEC8o1H',
         coremetrics: false,
         optimizely: false,
         googleAddServices: false,
@@ -30,7 +52,12 @@ export const segmentMixin = {
         autoFormEvents: false,
         autoPageView: false
       }
+
+      window.onload = () => {
+        trackPage (routeName, path, title)
+      }
     }
+
   },
   beforeRouteEnter (to, from, next) {
     next((pageComponent) => {
@@ -38,18 +65,7 @@ export const segmentMixin = {
       const title: string = pageComponent.$metaInfo.title
       const path: string = to.path
 
-      if (window.bluemixAnalytics && window.bluemixAnalytics.pageEvent) {
-        window.bluemixAnalytics.pageEvent(
-          'Qiskit.org',
-          routeName,
-          {
-            navigationType: 'pushState',
-            productTitle: 'IBM Q Experience',
-            path,
-            title
-          }
-        )
-      }
+      trackPage (routeName, path, title)
     })
   }
 }
