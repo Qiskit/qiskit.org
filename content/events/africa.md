@@ -11,6 +11,7 @@ nav:
     goTo: '#agenda'
   - text: Code of Conduct
     goTo: '#code-of-conduct'
+routeName: events
 ---
 
 ## What is Qiskit Camp?
