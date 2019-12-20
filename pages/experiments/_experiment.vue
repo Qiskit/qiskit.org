@@ -25,11 +25,9 @@ import { Context } from '@nuxt/types'
 import ExperimentHeader from '~/components/headers/ExperimentHeader.vue'
 import PageSection from '~/components/sections/PageSection.vue'
 import MdContent from '~/components/MdContent.vue'
-import { segmentMixin } from '~/mixins/segment-mixin.ts'
 
 @Component({
   layout: 'second-level',
-  mixins: [segmentMixin],
   components: {
     ExperimentHeader,
     MdContent,
