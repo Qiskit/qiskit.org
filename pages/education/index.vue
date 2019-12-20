@@ -128,7 +128,6 @@ export default class extends Vue { }
 
 <style lang="scss">
 main {
-  color: var(--body-color-light);
   background-color: var(--primary-color-darkmost);
   background-image: linear-gradient(150deg, var(--primary-color-darkmost) 15%,var(--primary-color-dark) 70%,var(--primary-color) 94%);
 }
@@ -176,6 +175,8 @@ main {
 }
 
 #video-series {
+  color: var(--body-color-light);
+
   .page-section {
     @include framed();
   }
@@ -224,6 +225,7 @@ main {
 }
 
 #host-an-event {
+  color: var(--body-color-light);
   background-image:
     linear-gradient(#000000a0 0%, #000000a0 100%),
     url('/images/education/host-an-event-bg.jpg');

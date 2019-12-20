@@ -27,6 +27,7 @@
 - Grover's Algorithm
 ### Chapter 4. Quantum Algorithms for Applications
 - Simulating Molecules using VQE
+- Solving combinatorial optimization problems using QAOA
 - Solving Satisfiability Problems using Grover's Algorithm
 ### Chapter 5. Investigating Quantum Hardware Using Qiskit
 - Calibrating Qubits with OpenPulse

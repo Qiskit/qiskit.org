@@ -1,17 +1,18 @@
+addons:
+  apt:
+    packages:
+    - curl
 language: node_js
 node_js: '12'
 cache: npm
-before_script:
-  - npm run lint
-before_deploy:
-  - npm run generate
-deploy:
-  provider: pages
-  local_dir: public
-  skip_cleanup: true
-  github_token: $GITHUB_TOKEN
-  keep_history: true
-  fqdn: community.qiskit.org
-  on:
-    branch: master
-
+jobs:
+  include:
+    - name: Lint, Tests, and Build
+      if: type = pull_request
+      script:
+          - npm run lint
+    - name: Build and Deploy
+      if: type = push AND branch = master
+      script:
+        - npm run generate
+        - cd deploy && bash ./deploy_cos.sh

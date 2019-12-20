@@ -1,11 +1,12 @@
 <template>
   <component
     :is="!isStatic && isInternal(to) ? 'nuxt-link' : 'a'"
-    :class="[ 'button', { 'button--secondary': secondary } ]"
+    :class="[ 'cta', { 'cta--secondary': secondary } ]"
     :href="to"
     :to="!isStatic && isInternal(to) ? to : null"
     :rel="isExternal(to) ? 'noopener' : null"
     :target="isExternal(to) ? '_blank' : null"
+    v-on="$listeners"
   >
     <slot />
   </component>
@@ -36,7 +37,7 @@ export default class extends Vue {
 </script>
 
 <style lang="scss" scoped>
-.button {
+.cta {
   padding: 0.66rem 1rem;
   background-color: var(--primary-color);
   border: 2px solid var(--secondary-color);
