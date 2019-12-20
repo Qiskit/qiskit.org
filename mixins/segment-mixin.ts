@@ -9,7 +9,7 @@ declare global {
 /**
  * Sends the page event to segment. Needs the following information:
  * @param pageComponent has the information of the page.
- * 
+ *
  * It's not needed to add the 'path' because it's done automatically
  */
 const trackPage = (pageComponent: any) => {
@@ -39,7 +39,7 @@ const trackPage = (pageComponent: any) => {
  * We do this on nuxt.config.js
  * - To include the title of the page. We do this on the meta info on the header
  * - To add the routeName for each page (on vue index component and in .md files)
- *   The routheName identifies the visited page regardless of the URL changing 
+ *   The routheName identifies the visited page regardless of the URL changing
  *   over the time
  */
 export const segmentMixin = {
@@ -58,14 +58,13 @@ export const segmentMixin = {
       }
 
       window.onload = () => {
-        trackPage (pageComponent)
+        trackPage(pageComponent)
       }
     }
-
   },
   beforeRouteEnter (to, from, next) {
     next((pageComponent) => {
-      trackPage (pageComponent)
+      trackPage(pageComponent)
     })
   }
 }
