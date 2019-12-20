@@ -47,7 +47,7 @@ const trackPage = (routeName: string, path: string, title: string) => {
 export const segmentMixin = {
   created () {
     const pageComponent = this as any
-    const routeName: string = pageComponent.belongsTo
+    const routeName: string = pageComponent.routeName
     const title: string = pageComponent.$metaInfo.title
     const path: string = pageComponent.to
 
@@ -80,7 +80,7 @@ export const segmentMixin = {
   },
   beforeRouteEnter (to, from, next) {
     next((pageComponent) => {
-      const routeName: string = pageComponent.belongsTo
+      const routeName: string = pageComponent.routeName
       const title: string = pageComponent.$metaInfo.title
       const path: string = to.path
 
