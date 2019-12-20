@@ -123,7 +123,7 @@ import { segmentMixin } from '~/mixins/segment-mixin.ts'
   }
 })
 export default class extends Vue {
-  belongsTo: string = 'advocates'
+  routeName: string = 'advocates'
 
   cities () {
     const cityIndex = this.$data.profiles.reduce((cityIndex, card) => {

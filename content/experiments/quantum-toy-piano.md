@@ -8,7 +8,7 @@ media:
   - /images/experiments/quantum-toy-piano/performance-tab.png
   - /images/experiments/quantum-toy-piano/third-species-performance.png
 source: https://github.com/JavaFXpert/quantum-toy-piano-ibmq
-belongsTo: projects
+routeName: projects
 ---
 The Quantum Music Composer application enables a user to compose music that is performed by a quantum computer or quantum simulator. The musical *composition* consists of a series of quantum circuits. Each quantum musical tone [[1]](#references) in the *performance* of a composition is a quantum state, which when measured, results in a pitch determined by quantum mechanical behavior. This normally results in unique melodies and harmonies each time a given composition is performed by a quantum computer or simulator. Fig. 1 contains a musical score captured from one such performance.
 

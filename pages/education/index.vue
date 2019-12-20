@@ -126,7 +126,7 @@ import { segmentMixin } from '~/mixins/segment-mixin.ts'
   }
 })
 export default class extends Vue {
-  belongsTo: string = 'education'
+  routeName: string = 'education'
 }
 </script>
 
