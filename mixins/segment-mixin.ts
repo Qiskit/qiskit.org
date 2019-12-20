@@ -8,8 +8,6 @@ declare global {
 /**
  * Sends the page event to segment. Needs the following information:
  * @param pageComponent has the information of the page.
- *
- * It's not needed to add the 'path' because it's done automatically
  */
 const trackPage = (pageComponent: any) => {
   const category: string = 'Qiskit.org'
@@ -19,6 +17,7 @@ const trackPage = (pageComponent: any) => {
   const title: string = pageComponent.$metaInfo.title
 
   if (window.bluemixAnalytics && window.bluemixAnalytics.pageEvent) {
+    // It's not needed to add the 'path' because it's done automatically
     window.bluemixAnalytics.pageEvent(
       category,
       routeName,
@@ -32,12 +31,11 @@ const trackPage = (pageComponent: any) => {
 }
 
 /**
- * To use this tracking we need:
- * - To include this js file in all pages:
+ * To use this tracking:
+ * - Include this js file in all pages via nuxt.config.js:
  * https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js
- * We do this on nuxt.config.js
- * - To include the title of the page. We do this on the meta info on the header
- * - To add the routeName for each page (on vue index component and in .md files)
+ * - Include the title of the page on the meta info of the header (in the vue component)
+ * - Add the routeName for each page (on vue index component and in .md files)
  *   The routheName identifies the visited page regardless of the URL changing
  *   over the time
  */
