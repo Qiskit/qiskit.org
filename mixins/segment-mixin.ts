@@ -1,6 +1,5 @@
 declare global {
   interface Window {
-    digitalData: any
     _analytics: any,
     bluemixAnalytics: any
   }
