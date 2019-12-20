@@ -1,6 +1,9 @@
-# community.qiskit.org
+[![Build Status](https://travis-ci.com/Qiskit/qiskit.org.svg?branch=master)](https://travis-ci.com/Qiskit/qiskit.org)
 
-> Home of the Qiskit Community
+# qiskit.org
+
+This repo is for the website for qiskit.org.
+
 
 ## Build Setup
 

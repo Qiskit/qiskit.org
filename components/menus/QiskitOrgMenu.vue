@@ -9,17 +9,31 @@
           <div class="overlay" />
           <nav class="vertical-navigation">
             <h2>Elements</h2>
-            <a
+            <nuxt-link
               v-for="qiskitElement in qiskitElements"
               :key="qiskitElement.label"
-              class="vertical-navigation__item"
-              :href="qiskitElement.url"
+              :class="{
+                'vertical-navigation__item': true,
+                'nuxt-link-active': isActive(qiskitElement.url)
+              }"
+              :to="qiskitElement.url"
             >
               {{ qiskitElement.label }}
-            </a>
+            </nuxt-link>
             <h2>Learn more</h2>
-            <a class="vertical-navigation__item vertical-navigation__item--active" href="/">Community</a>
-            <div class="vertical-community-navigation">
+            <nuxt-link
+              :class="{
+                'vertical-navigation__item': true,
+                'vertical-navigation__item--active': isCommunityActive()
+              }"
+              to="/advocates"
+            >
+              Community
+            </nuxt-link>
+            <div
+              v-if="isCommunityActive()"
+              class="vertical-community-navigation"
+            >
               <nuxt-link
                 v-for="communitySubLink in communitySubLinks"
                 :key="communitySubLink.label"
@@ -33,35 +47,66 @@
               </nuxt-link>
             </div>
             <a
-              class="vertical-navigation__item"
-              href="https://quantum-computing.ibm.com/jupyter/tutorial/1_start_here.ipynb"
+              v-for="link in learnMore"
+              :key="link.label"
+              :class="{
+                'vertical-navigation__item': true,
+                'nuxt-link-active': isActive(link.url)
+              }"
+              :href="link.url"
               target="_blank"
-            >Tutorials</a>
-            <a
-              class="vertical-navigation__item"
-              href="https://qiskit.org/documentation"
-            >API&nbsp;Documentation</a>
+              @click="link.segment && $trackClickEvent(link.segment)"
+            >
+              {{ link.label }}
+            </a>
           </nav>
         </section>
-        <a class="link-to-home" :href="qiskitUrl">Qiskit</a>
+        <nuxt-link class="link-to-home" to="/">
+          Qiskit
+        </nuxt-link>
         <nav class="navigation-group navigation-group--with-separator">
-          <a
-            v-for="qiskitElement in qiskitElements"
-            :key="qiskitElement.label"
-            class="navigation-group__item"
-            :href="qiskitElement.url"
+          <nuxt-link
+            v-for="link in qiskitElements"
+            :key="link.url"
+            :class="{
+              'navigation-group__item': true,
+              'nuxt-link-active': isActive(link.url)
+            }"
+            :to="link.url"
           >
-            {{ qiskitElement.label }}
-          </a>
+            {{ link.label }}
+          </nuxt-link>
         </nav>
         <nav class="navigation-group navigation-group--fixed navigation-group--right-aligned">
-          <a class="navigation-group__item navigation-group__item--active" href="/">Community</a>
-          <a class="navigation-group__item" href="https://quantum-computing.ibm.com/jupyter/tutorial/1_start_here.ipynb" target="_blank">Tutorials</a>
-          <a class="navigation-group__item" href="https://qiskit.org/documentation">API&nbsp;Documentation</a>
+          <nuxt-link
+            :class="{
+              'navigation-group__item': true,
+              'navigation-group__item--active': isCommunityActive()
+            }"
+            to="/advocates"
+          >
+            Community
+          </nuxt-link>
+          <a
+            v-for="link in learnMore"
+            :key="link.label"
+            :class="{
+              'navigation-group__item': true,
+              'nuxt-link-active': isActive(link.url)
+            }"
+            :href="link.url"
+            target="_blank"
+            @click="link.segment && $trackClickEvent(link.segment)"
+          >
+            {{ link.label }}
+          </a>
         </nav>
       </div>
     </div>
-    <div class="community-menu menu-container menu-container--light">
+    <div
+      v-if="isCommunityActive()"
+      class="community-menu menu-container menu-container--light"
+    >
       <section class="menu menu--framed">
         <nav class="navigation-group navigation-group--right-aligned navigation-group--fixed">
           <nuxt-link
@@ -86,7 +131,6 @@ import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 
 import {
-  QISKIT_URL,
   ORDERED_QISKIT_ELEMENTS,
   ORDERED_COMMUNITY_SUB_LINKS,
   NavLink
@@ -94,12 +138,27 @@ import {
 
 @Component
 export default class extends Vue {
-  qiskitUrl: string = QISKIT_URL
   qiskitElements: Array<NavLink> = ORDERED_QISKIT_ELEMENTS
   communitySubLinks: Array<NavLink> = ORDERED_COMMUNITY_SUB_LINKS
+  learnMore: Array<NavLink> = [
+    {
+      label: 'Tutorials',
+      url: 'https://quantum-computing.ibm.com/jupyter/tutorial/1_start_here.ipynb',
+      segment: {
+        action: 'Tutorials',
+        objectType: 'Link',
+        milestoneName: 'Looked at tutorials'
+      }
+    },
+    { label: 'API Documentation', url: '/documentation' }
+  ]
 
   isActive (path) {
     return this.$route.path.startsWith(path)
+  }
+
+  isCommunityActive () {
+    return this.communitySubLinks.some(link => this.isActive(link.url))
   }
 }
 </script>
