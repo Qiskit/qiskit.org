@@ -76,9 +76,11 @@ import LegacySection from '~/components/sections/LegacySection.vue'
 import SoftwareStack from '~/components/qiskit/SoftwareStack.vue'
 import SyntaxHighlight from '~/components/qiskit/SyntaxHighlight.vue'
 import Cta from '~/components/ctas/Cta.vue'
+import { segmentMixin } from '~/mixins/segment-mixin.ts'
 
 @Component({
   layout: 'legacy',
+  mixins: [segmentMixin],
   components: {
     Cta,
     LegacyPresentation,
@@ -98,6 +100,7 @@ import Cta from '~/components/ctas/Cta.vue'
 export default class extends QiskitElementPage {
   title = 'Qiskit Terra'
   description = 'A solid foundation for quantum computing'
+  routeName = 'terra-element'
 }
 </script>
 

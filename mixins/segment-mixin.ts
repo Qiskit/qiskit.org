@@ -6,62 +6,61 @@ declare global {
 }
 
 /**
- * Sends the page event to segment. Needs the following information:
- * @param pageComponent has the information of the page.
+ * Send a page visitation event to segment.
+ * @param pageComponent the page component.
  */
-const trackPage = (pageComponent: any) => {
-  const category: string = 'Qiskit.org'
-  const productTitle: string = 'IBM Q Experience'
-  const navigationType: string = 'pushState'
-  const routeName: string = pageComponent.routeName
-  const title: string = pageComponent.$metaInfo.title
-
-  if (window.bluemixAnalytics && window.bluemixAnalytics.pageEvent) {
-    // It's not needed to add the 'path' because it's done automatically
-    window.bluemixAnalytics.pageEvent(
-      category,
-      routeName,
-      {
-        navigationType,
-        productTitle,
-        title
-      }
-    )
+function trackPage (pageComponent: any) {
+  if (!window.bluemixAnalytics || !window.bluemixAnalytics.pageEvent) { return }
+  if (!pageComponent.routeName) {
+    console.warn('Component', pageComponent, 'is missing the `routeName` property.')
+    return
   }
+
+  const category: string = 'Qiskit.org'
+  const routeName: string = pageComponent.routeName
+
+  window.bluemixAnalytics.pageEvent(category, routeName, {
+    navigationType: 'pushState',
+    productTitle: 'IBM Q Experience',
+    title: pageComponent.$metaInfo.title
+  })
 }
 
 /**
- * To use this tracking:
- * - Include this js file in all pages via nuxt.config.js:
- * https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js
- * - Include the title of the page on the meta info of the header (in the vue component)
- * - Add the routeName for each page (on vue index component and in .md files)
- *   The routheName identifies the visited page regardless of the URL changing
- *   over the time
+ * Mixin enabling page visitation tracking in Bluemix Analytics. To use it:
+ * 1. Add the mixin to the page component.
+ * 2. In the page component, include the title of the page in the meta info.
+ * 3. In the page component, add the `routeName` property set to a string
+ * identifying the route regardless the URL changing over time.
  */
 export const segmentMixin = {
   created () {
-    const pageComponent = this as any
+    if (!process.client) { return }
 
-    if (process.client) {
-      // To see the window._analytics default values go to
-      // https://github.ibm.com/Bluemix/Bluemix.Analytics/blob/master/webpack.constants.js
-      window._analytics = {
-        // For testing use: zbHWEXPUfXm0K6C7HbegwB5ewDEC8o1H
-        segment_key: 'ffdYLviQze3kzomaINXNk6NwpY9LlXcw',
-        optimizely: false,
-        googleAddServices: false,
-        autoPageView: false
-      }
-
-      window.onload = () => {
-        trackPage(pageComponent)
-      }
+    // See window._analytics default values at:
+    // https://github.ibm.com/Bluemix/Bluemix.Analytics/blob/master/webpack.constants.js
+    window._analytics = {
+      segment_key: process.env.analyticsKey,
+      optimizely: false,
+      googleAddServices: false,
+      autoPageView: false
     }
+
+    const script = document.createElement('script')
+    script.async = true
+    script.src = process.env.analyticsScriptUrl || ''
+    document.head.appendChild(script)
   },
+
   beforeRouteEnter (to, from, next) {
     next((pageComponent) => {
-      trackPage(pageComponent)
+      if (document.readyState === 'complete') {
+        trackPage(pageComponent)
+      } else {
+        window.addEventListener('load', () => {
+          trackPage(pageComponent)
+        })
+      }
     })
   }
 }
