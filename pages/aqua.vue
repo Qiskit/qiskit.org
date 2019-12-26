@@ -106,7 +106,7 @@ import { segmentMixin } from '~/mixins/segment-mixin.ts'
 export default class extends QiskitElementPage {
   title = 'Qiskit Aqua'
   description = 'Algorithms for quantum computing applications'
-  routeName = 'aqua-element'
+  routeName = 'aqua_element'
 }
 </script>
 

@@ -41,8 +41,12 @@ export const segmentMixin = {
     // https://github.ibm.com/Bluemix/Bluemix.Analytics/blob/master/webpack.constants.js
     window._analytics = {
       segment_key: process.env.analyticsKey,
+      coremetrics: false,
       optimizely: false,
       googleAddServices: false,
+      fullStory: false,
+      autoPageEventSpa: false,
+      autoFormEvents: false,
       autoPageView: false
     }
 

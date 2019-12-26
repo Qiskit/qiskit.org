@@ -116,7 +116,7 @@ import { segmentMixin } from '~/mixins/segment-mixin.ts'
 export default class extends QiskitElementPage {
   title = 'Qiskit Aer'
   description = 'A high performance simulator framework for quantum circuits'
-  routeName = 'aer-element'
+  routeName = 'aer_element'
 }
 </script>
 
