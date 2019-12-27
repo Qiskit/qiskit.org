@@ -10,7 +10,6 @@ media:
   - /images/experiments/quantalier/QuantalierNight.jpg
 
 source: https://github.com/qiskit
-routeName: projects
 ---
 The Quantum Chandelier, called the Quantalier, is a visual experiment based on IBM Q’s quantum computers. Physically made of over 1000 LEDs and a single Raspberry Pi, the shape of the Quantalier reflects the interior elements of a real quantum computer.
 

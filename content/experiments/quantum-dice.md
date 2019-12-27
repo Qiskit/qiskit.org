@@ -9,7 +9,6 @@ media:
 
 source: https://github.com/JRussellHuffman/quantum-dice
 launch: https://jrussellhuffman.com/quantumdice/
-routeName: projects
 ---
 Is a Dungeons and Dragons style dice roller a good use of a quantum computer? I sure think so.
 
