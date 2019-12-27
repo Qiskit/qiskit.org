@@ -154,9 +154,11 @@ import { Component } from 'vue-property-decorator'
 import LegacyPresentation from '~/components/headers/LegacyPresentation.vue'
 import LegacySection from '~/components/sections/LegacySection.vue'
 import LegacyCta from '~/components/ctas/LegacyCta.vue'
+import { segmentMixin } from '~/mixins/segment-mixin.ts'
 
 @Component({
   layout: 'legacy',
+  mixins: [segmentMixin],
   components: {
     LegacyCta,
     LegacyPresentation,
@@ -166,7 +168,10 @@ import LegacyCta from '~/components/ctas/LegacyCta.vue'
     return { title: 'Qiskit' }
   }
 })
-export default class extends Vue { }
+
+export default class extends Vue {
+  routeName = 'qiskit-landing-page'
+}
 </script>
 
 <style lang="scss">
