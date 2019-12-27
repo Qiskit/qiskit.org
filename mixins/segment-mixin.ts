@@ -72,8 +72,12 @@ export const segmentMixin = {
 
   beforeRouteEnter (to, from, next) {
     next(async (pageComponent) => {
-      await window._analyticsReady
-      trackPage(pageComponent)
+      try {
+        await window._analyticsReady
+        trackPage(pageComponent)
+      } catch (err) {
+        console.warn('Error loading Bluemix Analytics script:', err)
+      }
     })
   }
 }
