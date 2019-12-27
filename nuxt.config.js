@@ -26,40 +26,20 @@ md.use(miAnchor, {
 export default {
   mode: 'universal',
 
+  env: {
+    analyticsScriptUrl: process.env.NODE_ENV === 'development'
+      ? 'https://dev.console.test.cloud.ibm.com/analytics/build/bluemix-analytics.min.js'
+      : 'https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js',
+    analyticsKey: process.env.NODE_ENV === 'development'
+      ? 'zbHWEXPUfXm0K6C7HbegwB5ewDEC8o1H'
+      : 'ffdYLviQze3kzomaINXNk6NwpY9LlXcw'
+  },
+
   /*
   ** Headers of the page
   */
   head: {
     title: pkg.name,
-    script: [
-      {
-        hid: 'segment',
-        innerHTML: `
-(function () {
-  'use strict'
-  window.digitalData = {
-    page: {
-      pageInfo: {
-        productTitle: 'IBM Q Experience',
-        analytics: {
-          category: 'Qiskit.org'
-        }
-      }
-    }
-  }
-  window._analytics = {
-    segment_key: 'ffdYLviQze3kzomaINXNk6NwpY9LlXcw',
-    coremetrics: false,
-    optimizely: false
-  }
-}());
-`
-      },
-      {
-        src: 'https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js',
-        async: true
-      }
-    ],
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -67,10 +47,7 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ],
-    __dangerouslyDisableSanitizersByTagID: {
-      segment: ['innerHTML']
-    }
+    ]
   },
 
   /*

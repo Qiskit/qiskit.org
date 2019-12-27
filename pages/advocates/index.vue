@@ -90,8 +90,10 @@ import PageSection from '~/components/sections/PageSection.vue'
 import MapSection from '~/components/advocates/MapSection.vue'
 import AdvocateCard from '~/components/cards/AdvocateCard.vue'
 import CompactFeature from '~/components/features/CompactFeature.vue'
+import { segmentMixin } from '~/mixins/segment-mixin.ts'
 
 @Component({
+  mixins: [segmentMixin],
   components: {
     InnerNavigation,
     GatesHeader,
@@ -121,6 +123,8 @@ import CompactFeature from '~/components/features/CompactFeature.vue'
   }
 })
 export default class extends Vue {
+  routeName: string = 'advocates'
+
   cities () {
     const cityIndex = this.$data.profiles.reduce((cityIndex, card) => {
       const { location, latitude, longitude } = card.attributes

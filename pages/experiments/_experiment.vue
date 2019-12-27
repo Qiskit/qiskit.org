@@ -25,10 +25,11 @@ import { Context } from '@nuxt/types'
 import ExperimentHeader from '~/components/headers/ExperimentHeader.vue'
 import PageSection from '~/components/sections/PageSection.vue'
 import MdContent from '~/components/MdContent.vue'
+import { segmentMixin } from '~/mixins/segment-mixin.ts'
 
 @Component({
   layout: 'second-level',
-
+  mixins: [segmentMixin],
   components: {
     ExperimentHeader,
     MdContent,
@@ -38,6 +39,7 @@ import MdContent from '~/components/MdContent.vue'
   head () {
     const self = this as any
     const image = self.media[0].url
+
     return {
       title: self.title,
       meta: [
@@ -69,6 +71,7 @@ import MdContent from '~/components/MdContent.vue'
 export default class extends Vue {
   render: String | null = null
   staticRenderFns: String | null = null
+  routeName = 'projects-entry'
 }
 
 type RenderFns = { render: Function, staticRenderFns: Function[] }

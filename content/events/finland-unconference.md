@@ -15,6 +15,7 @@ nav:
     goTo: '#funding'
   - text: Code of Conduct
     goTo: '#code-of-conduct'
+routeName: events
 ---
 
 ## What is a Qiskit Research Unconference?
