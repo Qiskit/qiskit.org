@@ -1,6 +1,7 @@
 declare global {
   interface Window {
-    _analytics: any,
+    _analytics: any
+    _analyticsReady: Promise<Event>
     bluemixAnalytics: any
   }
 }
@@ -29,6 +30,32 @@ function trackPage (pageComponent: any) {
   })
 }
 
+function configureAnalytics () {
+  // See window._analytics default values at:
+  // https://github.ibm.com/Bluemix/Bluemix.Analytics/blob/master/webpack.constants.js
+  window._analytics = {
+    segment_key: process.env.analyticsKey,
+    coremetrics: false,
+    optimizely: false,
+    googleAddServices: false,
+    fullStory: false,
+    autoPageEventSpa: false,
+    autoFormEvents: false,
+    autoPageView: false
+  }
+}
+
+function installAnalyticsOnce () {
+  window._analyticsReady = window._analyticsReady || new Promise((resolve, reject) => {
+    const script = document.createElement('script')
+    script.async = true
+    script.src = process.env.analyticsScriptUrl || ''
+    document.head.appendChild(script)
+    script.onload = resolve
+    script.onerror = reject
+  })
+}
+
 /**
  * Mixin enabling page visitation tracking in Bluemix Analytics. To use it:
  * 1. Add the mixin to the page component.
@@ -39,35 +66,14 @@ function trackPage (pageComponent: any) {
 export const segmentMixin = {
   created () {
     if (!process.client) { return }
-
-    // See window._analytics default values at:
-    // https://github.ibm.com/Bluemix/Bluemix.Analytics/blob/master/webpack.constants.js
-    window._analytics = {
-      segment_key: process.env.analyticsKey,
-      coremetrics: false,
-      optimizely: false,
-      googleAddServices: false,
-      fullStory: false,
-      autoPageEventSpa: false,
-      autoFormEvents: false,
-      autoPageView: false
-    }
-
-    const script = document.createElement('script')
-    script.async = true
-    script.src = process.env.analyticsScriptUrl || ''
-    document.head.appendChild(script)
+    configureAnalytics()
+    installAnalyticsOnce()
   },
 
   beforeRouteEnter (to, from, next) {
-    next((pageComponent) => {
-      if (document.readyState === 'complete') {
-        trackPage(pageComponent)
-      } else {
-        window.addEventListener('load', () => {
-          trackPage(pageComponent)
-        })
-      }
+    next(async (pageComponent) => {
+      await window._analyticsReady
+      trackPage(pageComponent)
     })
   }
 }
