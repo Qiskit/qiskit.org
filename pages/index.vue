@@ -170,7 +170,7 @@ import { segmentMixin } from '~/mixins/segment-mixin.ts'
 })
 
 export default class extends Vue {
-  routeName = 'qiskit_landing_page'
+  routeName = 'qiskit-landing-page'
 }
 </script>
 

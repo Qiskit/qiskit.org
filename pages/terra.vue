@@ -100,7 +100,7 @@ import { segmentMixin } from '~/mixins/segment-mixin.ts'
 export default class extends QiskitElementPage {
   title = 'Qiskit Terra'
   description = 'A solid foundation for quantum computing'
-  routeName = 'terra_element'
+  routeName = 'terra-element'
 }
 </script>
 
