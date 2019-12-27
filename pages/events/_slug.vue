@@ -77,7 +77,7 @@ function getBackgroundUris (background: string): [string, string] {
   }
 })
 export default class extends Vue {
-  routeName = 'events_entry'
+  routeName = 'events-entry'
 }
 </script>
 

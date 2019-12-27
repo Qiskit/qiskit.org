@@ -121,7 +121,7 @@ import { segmentMixin } from '~/mixins/segment-mixin.ts'
 export default class extends QiskitElementPage {
   title = 'Qiskit Ignis'
   description = 'Understanding and mitigating noise in quantum systems.'
-  routeName = 'ignis_element'
+  routeName = 'ignis-element'
 }
 </script>
 

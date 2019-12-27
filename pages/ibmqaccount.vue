@@ -87,7 +87,7 @@ import { segmentMixin } from '~/mixins/segment-mixin.ts'
 export default class extends QiskitElementPage {
   title = 'IBM Q Account'
   description = 'Access to world-leading quantum systems and simulators.'
-  routeName = 'ibm_q_account'
+  routeName = 'ibm-q-account'
 }
 </script>
 

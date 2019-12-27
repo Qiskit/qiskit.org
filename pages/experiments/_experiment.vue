@@ -71,7 +71,7 @@ import { segmentMixin } from '~/mixins/segment-mixin.ts'
 export default class extends Vue {
   render: String | null = null
   staticRenderFns: String | null = null
-  routeName = 'projects_entry'
+  routeName = 'projects-entry'
 }
 
 type RenderFns = { render: Function, staticRenderFns: Function[] }
