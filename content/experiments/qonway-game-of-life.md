@@ -8,7 +8,6 @@ media:
   - /images/experiments/qonway-game-of-life/life.jpeg
   - /images/experiments/qonway-game-of-life/onedgameoflife.jpeg
 source: https://github.com/qonwaygameoflife/qonwaygameoflife
-routeName: projects
 ---
 These are three renditions of the quantum game of life - top left is the classical game of life, top right is the semi quantum version
 and the bottom is a fully quantum kernel rendition. The fully quantum kernel uses a quantum cloning machine to bring cells to life as an average of the neighbouring cells.

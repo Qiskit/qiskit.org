@@ -36,6 +36,7 @@ import { Component } from 'vue-property-decorator'
 import { Context } from '@nuxt/types'
 import Menu from '~/components/Menu.vue'
 import Footer from '~/components/Footer.vue'
+import { segmentMixin } from '~/mixins/segment-mixin.ts'
 
 function getBackgroundUris (background: string): [string, string] {
   const bgRoute = '/images/events/headers/'
@@ -46,6 +47,7 @@ function getBackgroundUris (background: string): [string, string] {
 
 @Component({
   layout: 'event',
+  mixins: [segmentMixin],
   components: {
     Menu,
     Footer
@@ -74,7 +76,9 @@ function getBackgroundUris (background: string): [string, string] {
     }
   }
 })
-export default class extends Vue { }
+export default class extends Vue {
+  routeName = 'events_entry'
+}
 </script>
 
 <style>

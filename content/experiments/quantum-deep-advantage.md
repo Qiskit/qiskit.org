@@ -10,7 +10,6 @@ media:
   - https://www.youtube.com/embed/5DBJIHtjJMg
 
 source: https://github.com/dacozai/QuantumDeepAdvantage
-routeName: projects
 ---
 Automation of the quantum circuit building process by using reinforcement learning and validating the method by performing simple numerical experiments on a Bell State.
 
