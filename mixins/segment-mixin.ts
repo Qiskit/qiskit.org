@@ -12,7 +12,10 @@ declare global {
 function trackPage (pageComponent: any) {
   if (!window.bluemixAnalytics || !window.bluemixAnalytics.pageEvent) { return }
   if (!pageComponent.routeName) {
-    console.warn('Component', pageComponent, 'is missing the `routeName` property.')
+    console.warn(
+      'Component',
+      pageComponent,
+      'is missing the \'routeName\' property, needed by analytics.')
     return
   }
 
