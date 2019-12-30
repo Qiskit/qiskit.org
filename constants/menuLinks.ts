@@ -1,7 +1,5 @@
 type SegmentData = {
   action: string
-  objectType: string
-  milestoneName?: string
 }
 
 type NavLink = {

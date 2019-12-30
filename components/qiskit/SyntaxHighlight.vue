@@ -23,8 +23,7 @@ export default class extends Vue {
     const code = this.$refs.code as HTMLElement
     navigator.clipboard.writeText(code.textContent || '')
     this.$trackClickEvent({
-      action: `${this.label}: Copy Code Sample`,
-      objectType: 'Button'
+      action: `${this.label}: Copy Code Sample`
     })
   }
 }
