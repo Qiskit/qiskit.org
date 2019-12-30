@@ -13,17 +13,11 @@ const window: AnalyticsContext = {
         }
       }
     }
-  },
-  location: {
-    href: 'http://test.com/test/path',
-    pathname: '/test/path'
   }
 }
 
 const eventParams = {
-  action: 'Test Action',
-  objectType: 'Test Type',
-  milestoneName: 'Test Milestone'
+  action: 'Test Action'
 }
 
 describe('trackClickEvent', () => {
@@ -39,16 +33,11 @@ describe('trackClickEvent', () => {
   it('translates the event into a Bluemix Analytics "Custom Event"', () => {
     trackClickEvent(window, eventParams)
     expect(window.bluemixAnalytics.trackEvent).toHaveBeenCalledWith(
-      'Custom Event',
+      'CTA Clicked',
       {
         productTitle: window.digitalData.page.pageInfo.productTitle,
         category: window.digitalData.page.pageInfo.analytics.category,
-        url: window.location.href,
-        path: window.location.pathname,
-        action: `${window.location.href} - Button Clicked: ${eventParams.action}`,
-        objectType: eventParams.objectType,
-        successFlag: true,
-        milestoneName: eventParams.milestoneName
+        CTA: eventParams.action
       }
     )
   })
