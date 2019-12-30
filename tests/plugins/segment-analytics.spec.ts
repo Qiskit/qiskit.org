@@ -17,7 +17,7 @@ const window: AnalyticsContext = {
 }
 
 const eventParams = {
-  action: 'Test Action',
+  action: 'Test Action'
 }
 
 describe('trackClickEvent', () => {
@@ -37,7 +37,7 @@ describe('trackClickEvent', () => {
       {
         productTitle: window.digitalData.page.pageInfo.productTitle,
         category: window.digitalData.page.pageInfo.analytics.category,
-        CTA: eventParams.action,
+        CTA: eventParams.action
       }
     )
   })
