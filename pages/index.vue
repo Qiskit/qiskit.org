@@ -62,7 +62,7 @@
         <ul class="social-networks-list">
           <li>
             <a
-              href="https://join.slack.com/t/qiskit/shared_invite/enQtNjQ5OTc5ODM1ODYyLTc2YWJhOWViZDA2OWI5N2EyMjIxN2YwODM5MWQyN2Q3MjczOGRlMDU4MzMxMWE5MzZjMzEzYzM3MmJiMzU5MzU"
+              href="https://join.slack.com/t/qiskit/shared_invite/enQtODQ2NTIyOTgwMTQ3LTI0NzM2NzkzZjJhNDgzZjY5MTQzNDY3MGNiZGQzNTNkZTE4Nzg1MjMwMmFjY2UwZTgyNDlmYWQwYmZjMjE1ZTM"
               title="Slack community"
               target="_blank"
               @click="$trackClickEvent({
@@ -154,9 +154,11 @@ import { Component } from 'vue-property-decorator'
 import LegacyPresentation from '~/components/headers/LegacyPresentation.vue'
 import LegacySection from '~/components/sections/LegacySection.vue'
 import LegacyCta from '~/components/ctas/LegacyCta.vue'
+import { segmentMixin } from '~/mixins/segment-mixin.ts'
 
 @Component({
   layout: 'legacy',
+  mixins: [segmentMixin],
   components: {
     LegacyCta,
     LegacyPresentation,
@@ -166,7 +168,10 @@ import LegacyCta from '~/components/ctas/LegacyCta.vue'
     return { title: 'Qiskit' }
   }
 })
-export default class extends Vue { }
+
+export default class extends Vue {
+  routeName = 'qiskit-landing-page'
+}
 </script>
 
 <style lang="scss">
