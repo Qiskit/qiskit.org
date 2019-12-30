@@ -20,6 +20,9 @@ function trackPage (pageComponent: any) {
     return
   }
 
+  // TODO: Consider getting these values from the `digitalData` global object
+  // when addressing:
+  // https://github.com/Qiskit/qiskit.org/issues/364
   const category: string = 'Qiskit.org'
   const routeName: string = pageComponent.routeName
 
@@ -42,6 +45,17 @@ function configureAnalytics () {
     autoPageEventSpa: false,
     autoFormEvents: false,
     autoPageView: false
+  }
+
+  window.digitalData = {
+    page: {
+      pageInfo: {
+        productTitle: 'IBM Q Experience',
+        analytics: {
+          category: 'Qiskit.org'
+        }
+      }
+    }
   }
 }
 
