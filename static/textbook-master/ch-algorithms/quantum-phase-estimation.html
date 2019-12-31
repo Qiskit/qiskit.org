@@ -1,0 +1,2452 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+
+  <script>
+(function () {
+  'use strict'
+  window.digitalData = {
+    page: {
+      pageInfo: {
+        productTitle: 'IBM Q Experience',
+        analytics: {
+          category: 'Qiskit.org'
+        }
+      }
+    }
+  }
+  window._analytics = {
+    segment_key: 'ffdYLviQze3kzomaINXNk6NwpY9LlXcw'
+  }
+}());
+</script>
+<script async src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,minimum-scale=1">
+
+  <title>Quantum Phase Estimation</title>
+  <meta name="description" content="            Quantum Phase Estimation Quantum phase estimation is one of the most important subroutines in quantum computation. It serves as a central buildin...">
+
+  <link rel="canonical" href="https://community.qiskit.orgtextbook-master/ch-algorithms/quantum-phase-estimation.html">
+  <link rel="alternate" type="application/rss+xml" title="Qiskit Textbook" href="https://community.qiskit.orgtextbook-master/feed.xml">
+
+  <meta property="og:url"         content="https://community.qiskit.orgtextbook-master/ch-algorithms/quantum-phase-estimation.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Quantum Phase Estimation" />
+<meta property="og:description" content="            Quantum Phase Estimation Quantum phase estimation is one of the most important subroutines in quantum computation. It serves as a central buildin..." />
+<meta property="og:image"       content="https://community.qiskit.org/textbook-master/images/logo/logo.png" />
+
+<meta name="twitter:card" content="summary">
+
+
+  <script type="application/ld+json">
+  {
+  "@context": "http://schema.org",
+  "@type": "NewsArticle",
+  "mainEntityOfPage": "https://community.qiskit.orgtextbook-master/ch-algorithms/quantum-phase-estimation.html",
+  "headline": "Quantum Phase Estimation",
+  "datePublished": "2019-12-23T22:04:54+00:00",
+  "dateModified": "2019-12-23T22:04:54+00:00",
+  "description": "            Quantum Phase Estimation Quantum phase estimation is one of the most important subroutines in quantum computation. It serves as a central buildin...",
+  "author": {
+    "@type": "Person",
+    "name": "The Qiskit Team"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Data 100 at UC Berkeley",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://community.qiskit.orgtextbook-master",
+      "width": 60,
+      "height": 60
+    }
+  },
+  "image": {
+    "@type": "ImageObject",
+    "url": "https://community.qiskit.orgtextbook-master",
+    "height": 60,
+    "width": 60
+  }
+}
+
+  </script>
+  <link rel="stylesheet" href="/textbook-master/assets/css/styles.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css ">
+
+  <!-- <link rel="manifest" href="/manifest.json"> -->
+  <!-- <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#efae0a"> -->
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+  <meta name="theme-color" content="#233947">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/x-icon" href="/textbook-master/images/logo/favicon.ico">
+
+  <!-- MathJax Config -->
+  <!-- Allow inline math using $ and automatically break long math lines -->
+<!-- (mostly) copied from nbconvert configuration -->
+<!-- https://github.com/jupyter/nbconvert/blob/master/nbconvert/templates/html/mathjax.tpl -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true,
+        processEnvironments: true
+    },
+    // Center justify equations in code and markdown cells. Elsewhere
+    // we use CSS to left justify single line equations in code cells.
+    displayAlign: 'center',
+    "HTML-CSS": {
+        styles: {'.MathJax_Display': {"margin": 0}},
+        linebreaks: { automatic: true },
+    }
+});
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_HTML' async></script>
+
+  <!-- DOM updating function -->
+  <script>
+const runWhenDOMLoaded = cb => {
+  if (document.readyState != 'loading') {
+    cb()
+  } else if (document.addEventListener) {
+    document.addEventListener('DOMContentLoaded', cb)
+  } else {
+    document.attachEvent('onreadystatechange', function() {
+      if (document.readyState == 'complete') cb()
+    })
+  }
+}
+
+// Helper function to init things quickly
+initFunction = function(myfunc) {
+  runWhenDOMLoaded(myfunc);
+  document.addEventListener('turbolinks:load', myfunc);
+};
+</script>
+
+  <!-- Define some javascript variables that will be useful in other javascript -->
+  <script>
+    const site_basename = 'textbook-master';
+  </script>
+
+  <!-- Add AnchorJS to let headers be linked -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js" async></script>
+  <script>
+const initAnchors = () => {
+  if (window.anchors === undefined) {
+    setTimeout(initAnchors, 250)
+    return
+  }
+  anchors.add("main h1, main h2, main h3, main h4")
+}
+
+initFunction(initAnchors);
+</script>
+
+
+  <!-- Include Turbolinks to make page loads fast -->
+  <!-- https://github.com/turbolinks/turbolinks -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/turbolinks/5.2.0/turbolinks.js" async></script>
+  <meta name="turbolinks-cache-control" content="no-cache">
+
+  <!-- Selectors for elements on the page -->
+  <script>
+/**
+ * Select various elements on the page for later use
+ */
+
+// IDs we'll attach to cells
+const codeCellId = index => `codecell${index}`
+const inputCellId = index => `inputcell${index}`
+
+pageElements = {}
+
+// All code cells
+findCodeCells = function() {
+    var codeCells = document.querySelectorAll('div.c-textbook__content > div.highlighter-rouge > div.highlight > pre, div.input_area pre, div.text_cell_render div.highlight pre')
+    pageElements['codeCells'] = codeCells;
+
+    codeCells.forEach((codeCell, index) => {
+      const id = codeCellId(index)
+      codeCell.setAttribute('id', id)
+    })
+};
+
+initFunction(findCodeCells);
+
+// All cells in general
+findInputCells = function() {
+    var inputCells = document.querySelectorAll('div.jb_cell')
+    pageElements['inputCells'] = inputCells;
+
+    inputCells.forEach((inputCell, index) => {
+        const id = inputCellId(index)
+        inputCell.setAttribute('id', id)
+    })
+};
+
+initFunction(findInputCells);
+</script>
+
+  <!-- Load nbinteract for widgets -->
+  
+
+  <!-- Load Thebelab for interactive widgets -->
+  <!-- Include Thebelab for interactive code if it's enabled -->
+
+
+
+  <!-- Load the auto-generating TOC -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js" async></script>
+<script>
+const initToc = () => {
+  if (window.tocbot === undefined) {
+    setTimeout(initToc, 250)
+    return
+  }
+
+  // Check whether we have any sidebar content. If not, then show the sidebar earlier.
+  var SIDEBAR_CONTENT_TAGS = ['.tag_full_width', '.tag_popout'];
+  var sidebar_content_query = SIDEBAR_CONTENT_TAGS.join(', ')
+  if (document.querySelectorAll(sidebar_content_query).length === 0) {
+    document.querySelector('nav.onthispage').classList.add('no_sidebar_content')
+  }
+
+  // Initialize the TOC bot
+  tocbot.init({
+    tocSelector: 'nav.onthispage',
+    contentSelector: '.c-textbook__content',
+    headingSelector: 'h2, h3',
+    orderedList: false,
+    collapseDepth: 6,
+    listClass: 'toc__menu',
+    activeListItemClass: "",  // Not using
+    activeLinkClass: "", // Not using
+  });
+
+}
+initFunction(initToc);
+</script>
+
+
+  <!-- Google analytics -->
+  <script src="/textbook-master/assets/js/ga.js" async></script>
+
+  <!-- Clipboard copy button -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" async></script>
+
+  <!-- Load custom website scripts -->
+  <script src="/textbook-master/assets/js/scripts.js" async></script>
+
+  <!-- Load custom user CSS and JS  -->
+  <script src="/textbook-master/assets/custom/custom.js" async></script>
+  <link rel="stylesheet" href="/textbook-master/assets/custom/custom.css">
+
+  <!-- Update interact links w/ REST param, is defined in includes so we can use templates -->
+  
+
+  <!-- Lunr search code - will only be executed on the /search page -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.6/lunr.min.js" async></script>
+  <script>var initQuery = function() {
+  // See if we have a search box
+  var searchInput = document.querySelector('input#lunr_search');
+  if (searchInput === null) {
+    return;
+  }
+
+  // Function to parse our lunr cache
+  var idx = lunr(function () {
+    this.field('title')
+    this.field('excerpt')
+    this.field('categories')
+    this.field('tags')
+    this.ref('id')
+
+    this.pipeline.remove(lunr.trimmer)
+
+    for (var item in store) {
+      this.add({
+        title: store[item].title,
+        excerpt: store[item].excerpt,
+        categories: store[item].categories,
+        tags: store[item].tags,
+        id: item
+      })
+    }
+  });
+
+  // Run search upon keyup
+  searchInput.addEventListener('keyup', function () {
+    var resultdiv = document.querySelector('#results');
+    var query = document.querySelector("input#lunr_search").value.toLowerCase();
+    var result =
+      idx.query(function (q) {
+        query.split(lunr.tokenizer.separator).forEach(function (term) {
+          q.term(term, { boost: 100 })
+          if(query.lastIndexOf(" ") != query.length-1){
+            q.term(term, {  usePipeline: false, wildcard: lunr.Query.wildcard.TRAILING, boost: 10 })
+          }
+          if (term != ""){
+            q.term(term, {  usePipeline: false, editDistance: 1, boost: 1 })
+          }
+        })
+      });
+
+      // Empty the results div
+      while (resultdiv.firstChild) {
+        resultdiv.removeChild(resultdiv.firstChild);
+      }
+
+    resultdiv.insertAdjacentHTML('afterbegin', '<p class="results__found">'+result.length+' Result(s) found</p>');
+    for (var item in result) {
+      var ref = result[item].ref;
+      if(store[ref].teaser){
+        var searchitem =
+          '<div class="list__item">'+
+            '<article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">'+
+              '<h2 class="archive__item-title" itemprop="headline">'+
+                '<a href="'+store[ref].url+'" rel="permalink">'+store[ref].title+'</a>'+
+              '</h2>'+
+              '<div class="archive__item-teaser">'+
+                '<img src="'+store[ref].teaser+'" alt="">'+
+              '</div>'+
+              '<p class="archive__item-excerpt" itemprop="description">'+store[ref].excerpt.split(" ").splice(0,20).join(" ")+'...</p>'+
+            '</article>'+
+          '</div>';
+      }
+      else{
+    	  var searchitem =
+          '<div class="list__item">'+
+            '<article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">'+
+              '<h2 class="archive__item-title" itemprop="headline">'+
+                '<a href="'+store[ref].url+'" rel="permalink">'+store[ref].title+'</a>'+
+              '</h2>'+
+              '<p class="archive__item-excerpt" itemprop="description">'+store[ref].excerpt.split(" ").splice(0,20).join(" ")+'...</p>'+
+            '</article>'+
+          '</div>';
+      }
+      resultdiv.insertAdjacentHTML('beforeend', searchitem);
+    }
+  });
+};
+
+initFunction(initQuery);
+</script>
+
+  <!-- Load JS that depends on site variables -->
+  <script>
+/**
+ * Set up copy/paste for code blocks
+ */
+const clipboardButton = id =>
+  `<a id="copy-button-${id}" class="btn copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#${id}">
+    <img src="/textbook-master/assets/images/copy-button.svg" alt="Copy to clipboard">
+  </a>`
+
+// Clears selected text since ClipboardJS will select the text when copying
+const clearSelection = () => {
+  if (window.getSelection) {
+    window.getSelection().removeAllRanges()
+  } else if (document.selection) {
+    document.selection.empty()
+  }
+}
+
+// Changes tooltip text for two seconds, then changes it back
+const temporarilyChangeTooltip = (el, newText) => {
+  const oldText = el.getAttribute('data-tooltip')
+  el.setAttribute('data-tooltip', newText)
+  setTimeout(() => el.setAttribute('data-tooltip', oldText), 2000)
+}
+
+const addCopyButtonToCodeCells = () => {
+  // If ClipboardJS hasn't loaded, wait a bit and try again. This
+  // happens because we load ClipboardJS asynchronously.
+  if (window.ClipboardJS === undefined) {
+    setTimeout(addCopyButtonToCodeCells, 250)
+    return
+  }
+
+  pageElements['codeCells'].forEach((codeCell) => {
+    const id = codeCell.getAttribute('id')
+    if (document.getElementById("copy-button" + id) == null) {
+      codeCell.insertAdjacentHTML('afterend', clipboardButton(id));
+    }
+  })
+
+  const clipboard = new ClipboardJS('.copybtn')
+  clipboard.on('success', event => {
+    clearSelection()
+    temporarilyChangeTooltip(event.trigger, 'Copied!')
+  })
+
+  clipboard.on('error', event => {
+    temporarilyChangeTooltip(event.trigger, 'Failed to copy')
+  })
+
+  // Get rid of clipboard before the next page visit to avoid memory leak
+  document.addEventListener('turbolinks:before-visit', () =>
+    clipboard.destroy()
+  )
+}
+
+initFunction(addCopyButtonToCodeCells);
+</script>
+
+
+  <!-- Hide cell code -->
+  <script>
+    /**
+    Add buttons to hide code cells
+    */
+
+
+    var setCodeCellVisibility = function (inputField, kind) {
+        // Update the image and class for hidden
+        var id = inputField.getAttribute('data-id');
+        var codeCell = document.querySelector(`#${id} div.highlight`);
+
+        if (kind === "visible") {
+            codeCell.classList.remove('hidden');
+            inputField.checked = true;
+        } else {
+            codeCell.classList.add('hidden');
+            inputField.checked = false;
+        }
+    }
+
+    var toggleCodeCellVisibility = function (event) {
+        // The label is clicked, and now we decide what to do based on the input field's clicked status
+        if (event.target.tagName === "LABEL") {
+            var inputField = event.target.previousElementSibling;
+        } else {
+            // It is the span inside the target
+            var inputField = event.target.parentElement.previousElementSibling;
+        }
+
+        if (inputField.checked === true) {
+            setCodeCellVisibility(inputField, "visible");
+        } else {
+            setCodeCellVisibility(inputField, "hidden");
+        }
+    }
+
+
+    // Button constructor
+    const hideCodeButton = id => `<input class="hidebtn" type="checkbox" id="hidebtn${id}" data-id="${id}"><label title="Toggle cell" for="hidebtn${id}" class="plusminus"><span class="pm_h"></span><span class="pm_v"></span></label>`
+
+    var addHideButton = function () {
+        // If a hide button is already added, don't add another
+        if (document.querySelector('div.tag_hide_input input') !== null) {
+            return;
+        }
+
+        // Find the input cells and add a hide button
+        pageElements['inputCells'].forEach(function (inputCell) {
+            if (!inputCell.classList.contains("tag_hide_input")) {
+                // Skip the cell if it doesn't have a hidecode class
+                return;
+            }
+
+            const id = inputCell.getAttribute('id')
+
+            // Insert the button just inside the end of the next div
+            inputCell.querySelector('div.input').insertAdjacentHTML('beforeend', hideCodeButton(id))
+
+            // Set up the visibility toggle
+            hideLink = document.querySelector(`#${id} div.inner_cell + input + label`);
+            hideLink.addEventListener('click', toggleCodeCellVisibility)
+        });
+    }
+
+
+    // Initialize the hide buttos
+    var initHiddenCells = function () {
+        // Add hide buttons to the cells
+        addHideButton();
+
+        // Toggle the code cells that should be hidden
+        document.querySelectorAll('div.tag_hide_input input').forEach(function (item) {
+            setCodeCellVisibility(item, 'hidden');
+            item.checked = true;
+        })
+    }
+
+    initFunction(initHiddenCells);
+
+</script>
+
+  <!-- Printing the screen -->
+  <!-- Include nbinteract for interactive widgets -->
+<script src="https://printjs-4de6.kxcdn.com/print.min.js" async></script>
+<script>
+printContent = () => {
+    // MathJax displays a second version of any math for assistive devices etc.
+    // This prevents double-rendering in the PDF output.
+    var ignoreAssistList = [];
+    assistives = document.querySelectorAll('.MathJax_Display span.MJX_Assistive_MathML').forEach((element, index) => {
+        var thisId = 'MathJax-assistive-' + index.toString();
+        element.setAttribute('id', thisId);
+        ignoreAssistList.push(thisId)
+    });
+
+    // Print the actual content object
+    printJS({
+        printable: 'textbook_content',
+        type: 'html',
+        css: "/textbook-master/assets/css/styles.css",
+        scanStyles: false,
+        targetStyles: ["*"],
+        ignoreElements: ignoreAssistList
+    })
+};
+
+initPrint = () => {
+    document.querySelector('#interact-button-print').addEventListener('click', printContent)
+}
+
+initFunction(initPrint)
+</script>
+
+</head>
+
+  <body>
+    <!-- .js-show-sidebar shows sidebar by default -->
+    <div id="js-textbook" class="c-textbook js-show-sidebar">
+      
+
+
+
+<nav id="js-sidebar" class="c-textbook__sidebar">
+  <a href="https://delapuente.github.io/qiskit-textbook"><img src="/textbook-master/images/logo/logo.png" class="textbook_logo" id="sidebar-logo" data-turbolinks-permanent/></a>
+  <h2 class="c-sidebar__title">Qiskit Textbook</h2>
+  <ul class="c-sidebar__chapters">
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook-master/preface.html"
+        >
+          
+          Preface
+        </a>
+
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook-master/upcoming.html"
+        >
+          
+          Upcoming
+        </a>
+
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook-master/ch-prerequisites/python-and-jupyter-notebooks.html"
+        >
+          
+            0.
+          
+          Prerequisites
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-prerequisites/python-and-jupyter-notebooks.html"
+                >
+                  
+                    0.1
+                  
+                  Python and Jupyter Notebooks
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-prerequisites/qiskit.html"
+                >
+                  
+                    0.2
+                  
+                  Qiskit
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-prerequisites/linear_algebra.html"
+                >
+                  
+                    0.3
+                  
+                  Linear Algebra
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook-master/ch-states/introduction.html"
+        >
+          
+            1.
+          
+          Quantum States and Qubits
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-states/introduction.html"
+                >
+                  
+                    1.1
+                  
+                  Introduction
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-states/atoms-computation.html"
+                >
+                  
+                    1.2
+                  
+                  The Atoms of Computation
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-states/unique-properties-qubits.html"
+                >
+                  
+                    1.3
+                  
+                  The Unique Properties of Qubits
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-states/writing-down-qubit-states.html"
+                >
+                  
+                    1.4
+                  
+                  Writing Down Qubit States
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-states/pauli-matrices-bloch-sphere.html"
+                >
+                  
+                    1.5
+                  
+                  Pauli Matrices and the Bloch Sphere
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-states/states-many-qubits.html"
+                >
+                  
+                    1.6
+                  
+                  States for Many Qubits
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook-master/ch-gates/introduction.html"
+        >
+          
+            2.
+          
+          Single Qubits and Multi-Qubits gates
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-gates/introduction.html"
+                >
+                  
+                    2.1
+                  
+                  Introduction
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-gates/quantum-gates.html"
+                >
+                  
+                    2.2
+                  
+                  Quantum Gates
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-gates/fun-matrices.html"
+                >
+                  
+                    2.3
+                  
+                  Fun with Matrices
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-gates/standard-gate-set.html"
+                >
+                  
+                    2.4
+                  
+                  The Standard Gate Set
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-gates/proving-universality.html"
+                >
+                  
+                    2.5
+                  
+                  Proving Universality
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-gates/basic-circuit-identities.html"
+                >
+                  
+                    2.6
+                  
+                  Basic Circuit Identities
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook-master/ch-ex/ex1.html"
+        >
+          
+          Problems
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-ex/ex1.html"
+                >
+                  
+                  Set 1. Classical Logic Gates with Quantum Circuits
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-ex/ex2.html"
+                >
+                  
+                  Set 2. Basic Synthesis of Single-Qubit Gates
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-ex/ex3.html"
+                >
+                  
+                  Set 3. Building the Best AND Gate
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook-master/ch-algorithms/teleportation.html"
+        >
+          
+            3.
+          
+          Quantum Algorithms
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-algorithms/teleportation.html"
+                >
+                  
+                    3.1
+                  
+                  Quantum Teleportation
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-algorithms/deutsch-josza.html"
+                >
+                  
+                    3.2
+                  
+                  Deutsch-Josza Algorithm
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-algorithms/bernstein-vazirani.html"
+                >
+                  
+                    3.3
+                  
+                  Bernstein-Vazirani Algorithm
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-algorithms/simon.html"
+                >
+                  
+                    3.4
+                  
+                  Simon's Algorithm
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-algorithms/quantum-fourier-transform.html"
+                >
+                  
+                    3.5
+                  
+                  Quantum Fourier Transform
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry c-sidebar__entry--active"
+                  href="/textbook-master/ch-algorithms/quantum-phase-estimation.html"
+                >
+                  
+                    3.6
+                  
+                  Quantum Phase Estimation
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-algorithms/grover.html"
+                >
+                  
+                    3.7
+                  
+                  Grover's Algorithm
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook-master/ch-applications/vqe-molecules.html"
+        >
+          
+            4.
+          
+          Quantum Algorithms for Applications
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-applications/vqe-molecules.html"
+                >
+                  
+                    4.1
+                  
+                  Simulating Molecules using VQE
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-applications/qaoa.html"
+                >
+                  
+                    4.2
+                  
+                  Solving combinatorial optimization problems using QAOA
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-applications/satisfiability-grover.html"
+                >
+                  
+                    4.3
+                  
+                  Solving Satisfiability Problems using Grover's Algorithm
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook-master/ch-quantum-hardware/calibrating-qubits-openpulse.html"
+        >
+          
+            5.
+          
+          Investigating Quantum Hardware Using Qiskit
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-quantum-hardware/calibrating-qubits-openpulse.html"
+                >
+                  
+                    5.1
+                  
+                  Calibrating Qubits with OpenPulse
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-quantum-hardware/error-correction-repetition-code.html"
+                >
+                  
+                    5.2
+                  
+                  Introduction to Quantum Error Correction using Repetition Codes
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-quantum-hardware/measurement-error-mitigation.html"
+                >
+                  
+                    5.3
+                  
+                  Measurement Error Mitigation
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-quantum-hardware/randomized-benchmarking.html"
+                >
+                  
+                    5.4
+                  
+                  Randomized Benchmarking
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-quantum-hardware/measuring-quantum-volume.html"
+                >
+                  
+                    5.5
+                  
+                  Measuring Quantum Volume
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook-master/ch-paper-implementations/vqls.html"
+        >
+          
+            6.
+          
+          Implementations of Recent Quantum Algorithms
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-paper-implementations/vqls.html"
+                >
+                  
+                    6.1
+                  
+                  Variational Quantum Linear Solver
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+  </ul>
+  <p class="sidebar_footer">Powered by <a href="https://github.com/jupyter/jupyter-book">Jupyter Book</a></p>
+</nav>
+
+      
+      <div class="c-topbar" id="top-navbar">
+  <!-- We show the sidebar by default so we use .is-active -->
+  <div class="c-topbar__buttons">
+    <button
+      id="js-sidebar-toggle"
+      class="hamburger hamburger--arrowalt is-active"
+    >
+      <span class="hamburger-box">
+        <span class="hamburger-inner"></span>
+      </span>
+    </button>
+    <div class="buttons">
+<div class="download-buttons-dropdown">
+    <button id="dropdown-button-trigger" class="interact-button"><i class="fa fa-download"></i></button>
+    <div class="download-buttons">
+        <a href="/textbook-master/content/ch-algorithms/quantum-phase-estimation.ipynb" download>
+        <button id="interact-button-download" class="interact-button">ORIG</button>
+        </a>
+        
+        <a id="interact-button-print"><button id="interact-button-download" class="interact-button">PDF</button></a>
+    </div>
+</div>
+
+  
+  
+  
+  
+
+
+</div>
+
+  </div>
+  <!-- Empty sidebar placeholder that we'll auto-fill with javascript -->
+  <aside class="sidebar__right">
+    <header><h4 class="nav__title"><i class="fa fa-list"></i>   On this page</h4></header>
+    <nav class="onthispage">
+    </nav>
+  </aside>
+  <a href="/textbook-master/search.html" class="topbar-right-button" id="search-button"><i class="fa fa-search"></i></a>
+</div>
+
+      <main class="c-textbook__page" tabindex="-1">
+        <div class="c-textbook__content" id="textbook_content">
+              <main class="jupyter-page">
+    <div id="page-info"></div>
+    <div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Quantum-Phase-Estimation">Quantum Phase Estimation<a class="anchor-link" href="#Quantum-Phase-Estimation"> </a></h1>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Quantum phase estimation is one of the most important subroutines in quantum computation. It serves as a central building block for many quantum algorithms. The objective of the algorithm is the following:</p>
+<p>Given a unitary operator $U$, the algorithm estimates $\theta$ in $U\vert\psi \rangle =e^{\boldsymbol{2\pi i} \theta }|\psi \rangle$. Here $|\psi\rangle$ is an eigenvector and $e^{\boldsymbol{2\pi i}\theta}$ is the corresponding eigenvalue. Since $U$ is unitary, all of its eigenvalues have a norm of 1.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Quantum-Circuit-for-Phase-Estimation">Quantum Circuit for Phase Estimation<a class="anchor-link" href="#Quantum-Circuit-for-Phase-Estimation"> </a></h2>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The general quantum circuit for phase estimation is:
+<img src="images/qpe_tex_qz.png"></p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As mentioned above, this circuit estimates the phase of a unitary operator $U$. It estimates $\theta$ in $U\vert\psi \rangle =e^{\boldsymbol{2\pi i} \theta }|\psi \rangle$, where $|\psi\rangle$ is an eigenvector and $e^{\boldsymbol{2\pi i}\theta}$ is the corresponding eigenvalue. The circuit operates in the following steps:</p>
+<ol>
+<li><strong>Setup</strong>: $\vert\psi\rangle$ is in one set of qubit registers. An additional set of $n$ qubits form an ancilla register: </li>
+</ol>
+$$ \psi_0 = \lvert 0 \rangle^{\otimes n} \lvert \psi \rangle$$<p></p>
+<ol>
+<li><strong>Superposition</strong>: Apply a $n$-bit Hadamard gate operation $H^{\otimes n}$ on the ancilla register: </li>
+</ol>
+$$ \psi_1 = {\frac {1}{2^{\frac {n}{2}}}}\left(|0\rangle +|1\rangle \right)^{\otimes n} \lvert \psi \rangle$$<ol>
+<li><strong>Controlled Unitary Operations</strong>: We need to introduce the controlled unitary $C-U$ that applies the unitary operator $U$ on the target register only if its corresponding control bit is $|1\rangle$. Since $U$ is a unitary operatory with eigenvector $|\psi\rangle$ such that $U|\psi \rangle =e^{\boldsymbol{2\pi i} \theta }|\psi \rangle$, this means: </li>
+</ol>
+$$U^{2^{j}}|\psi \rangle =U^{2^{j}-1}U|\psi \rangle =U^{2^{j}-1}e^{2\pi i\theta }|\psi \rangle =\cdots =e^{2\pi i2^{j}\theta }|\psi \rangle$$<p>Applying all the $n$ controlled operations $C − U^{2^j}$ with $0\leq j\leq n-1$, and using the relation $|0\rangle \otimes |\psi \rangle +|1\rangle \otimes e^{2\pi i\theta }|\psi \rangle =\left(|0\rangle +e^{2\pi i\theta }|1\rangle \right)\otimes |\psi \rangle$:</p>
+\begin{aligned}
+\psi_{2} &amp; =\frac {1}{2^{\frac {n}{2}}} \left(|0\rangle+{e^{\boldsymbol{2\pi i} \theta 2^{n-1}}}|1\rangle \right) \otimes \cdots \otimes \left(|0\rangle+{e^{\boldsymbol{2\pi i} \theta 2^{1}}}\vert1\rangle \right) \otimes \left(|0\rangle+{e^{\boldsymbol{2\pi i} \theta 2^{0}}}\vert1\rangle \right) \otimes |\psi\rangle\\\\
+&amp; = \frac{1}{2^{\frac {n}{2}}}\sum _{k=0}^{2^{n}-1}e^{\boldsymbol{2\pi i} \theta k}|k\rangle \otimes \vert\psi\rangle
+\end{aligned}<p>where $k$ denotes the integer representation of n-bit binary numbers.</p>
+<ol>
+<li><strong>Inverse Fourier Transform</strong>: Notice that the above expression is exactly the result of applying a quantum Fourier transform as we derived in the notebook on <a href="qft.ipynb">Quantum Fourier Transform and its Qiskit Implementation</a>. Recall that QFT maps an n-qubit input state $\vert x\rangle$ into an output as</li>
+</ol>
+$$
+QFT\vert x \rangle = \frac{1}{2^\frac{n}{2}}
+\left(\vert0\rangle + e^{\frac{2\pi i}{2}x} \vert1\rangle\right) 
+\otimes
+\left(\vert0\rangle + e^{\frac{2\pi i}{2^2}x} \vert1\rangle\right) 
+\otimes  
+\ldots
+\otimes
+\left(\vert0\rangle + e^{\frac{2\pi i}{2^{n-1}}x} \vert1\rangle\right) 
+\otimes
+\left(\vert0\rangle + e^{\frac{2\pi i}{2^n}x} \vert1\rangle\right) 
+$$<p>Replacing $x$ by $2^n\theta$ in the above expression gives exactly the expression derived in step 2 above. Therefore, to recover the state $\vert2^n\theta\rangle$, apply an inverse Fourier transform on the ancilla register. Doing so, we find</p>
+$$
+\vert\psi_3\rangle = \frac {1}{2^{\frac {n}{2}}}\sum _{k=0}^{2^{n}-1}e^{\boldsymbol{2\pi i} \theta k}|k\rangle \otimes | \psi \rangle \xrightarrow{\mathcal{QFT}_n^{-1}} \frac {1}{2^n}\sum _{x=0}^{2^{n}-1}\sum _{k=0}^{2^{n}-1} e^{-\frac{2\pi i k}{2^n}(x - 2^n \theta)} |x\rangle \otimes |\psi\rangle
+$$<p></p>
+<ol>
+<li><strong>Measurement</strong>: 
+The above expression peaks near $x = 2^n\theta$. For the case when $2^n\theta$ is an integer, measuring in the computational basis gives the phase in the ancilla register with high probability: </li>
+</ol>
+$$ |\psi_4\rangle = | 2^n \theta \rangle \otimes | \psi \rangle$$<p>For the case when $2^n\theta$ is not an integer, it can be shown that the above expression still peaks near $x = 2^n\theta$ with probability better than $4/\pi^2 \approx 40\%$ [1].</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Example">Example<a class="anchor-link" href="#Example"> </a></h2>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Consider a 3-qubit quantum phase estimation of a one-qubit state $\vert\psi\rangle$.</p>
+<p>For this example, let us take the unitary matrix to be $Z$. Then, the input state $\vert1\rangle$ is an eigenvector with eigenvalue $-1 = \exp{\left(2\pi i \times 0.5 \right)}$. Hence, $\theta = 0.5$ and $2^n\theta = 2$ if we use $n = 2$ ancilla qubits.</p>
+<p>Note that in this case, the controlled unitary gates are</p>
+$$
+U^{2^{n-1}} = Z^2 = I
+$$<p>and 
+$$
+U^{2^{0}} = Z
+$$</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Qiskit-Implementation-1">Qiskit Implementation 1<a class="anchor-link" href="#Qiskit-Implementation-1"> </a></h2><p>Now we will implement the above example in Qiskit.</p>
+<p>Let's first prepare our environment.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#initialization</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">math</span>
+
+<span class="c1"># importing Qiskit</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">IBMQ</span><span class="p">,</span> <span class="n">BasicAer</span>
+<span class="kn">from</span> <span class="nn">qiskit.providers.ibmq</span> <span class="kn">import</span> <span class="n">least_busy</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">ClassicalRegister</span><span class="p">,</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">execute</span>
+
+<span class="c1"># import basic plot tools</span>
+<span class="kn">from</span> <span class="nn">qiskit.tools.visualization</span> <span class="kn">import</span> <span class="n">plot_histogram</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now, set up the quantum circuit. We will use three qubits -- qubits 0 and 1 as ancilla, and qubit 2 as the eigenstate of the unitary operator.</p>
+<p>We initialize $\vert\psi\rangle = \vert1\rangle$ by applying an $X$ gate.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;q&#39;</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">)</span>
+
+<span class="n">qpe</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+<span class="n">qpe</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;qiskit.extensions.standard.x.XGate at 0x11bb2a588&gt;</pre>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Next, we apply Hadamard gates to the ancilla qubits.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">qpe</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">qpe</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;qiskit.extensions.standard.h.HGate at 0x11bb2a518&gt;</pre>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Next we perform the controlled unitary operations:</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># controlled unitary from q[0] is the identity matrix</span>
+
+<span class="c1"># controlled unitary from q[1] is a controlled-Z gate</span>
+<span class="n">qpe</span><span class="o">.</span><span class="n">cz</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We apply quantum inverse Fourier transformation to write the phase to the ancilla register. We will use exactly the code that we wrote to do a $QFT$ and adapt it to be that of $QFT^\dagger$.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">qft</span><span class="p">(</span><span class="n">circ</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;n-qubit QFT on q in circ.&quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">circ</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">circ</span><span class="o">.</span><span class="n">cu1</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="n">j</span><span class="p">)),</span> <span class="n">q</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+            
+<span class="k">def</span> <span class="nf">qft_dagger</span><span class="p">(</span><span class="n">circ</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;n-qubit QFTdagger on q in circ.&quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">j</span>
+        <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+            <span class="n">circ</span><span class="o">.</span><span class="n">cu1</span><span class="p">(</span><span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="n">m</span><span class="p">)),</span> <span class="n">q</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="n">m</span><span class="p">])</span>
+        <span class="n">circ</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We then measure the ancilla register:</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">qft_dagger</span><span class="p">(</span><span class="n">qpe</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="n">qpe</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">qpe</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;qiskit.circuit.measure.Measure at 0x10b051128&gt;</pre>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">qpe</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s2">&quot;mpl&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea output_execute_result">
+<img src="../images/ch-algorithms/quantum-phase-estimation_19_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Qiskit-Implementation-2">Qiskit Implementation 2<a class="anchor-link" href="#Qiskit-Implementation-2"> </a></h2><p>This time, we will see what happens to our estimate of the phase by using more ancilla qubits. Let's go from two ancilla to three, and from a one-qubit state to a two-qubit state. The unitary operator will be $U = C-Z$. Then, for state $\vert11\rangle$, we get a phase of $\theta = 0.5$. We will implement a C-U gate (C-C-Z) from a C-C-X gate (Toffoli) by using the relation</p>
+$$
+HXH = Z
+$$
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>First, we set up the quantum circuit as before. We initialize $\vert\psi\rangle = \vert11\rangle$ by applying an $X$ gate to both qubits.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">nancilla</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">q2</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="n">nancilla</span><span class="o">+</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;q&#39;</span><span class="p">)</span>
+<span class="n">c2</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="n">nancilla</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">)</span>
+
+<span class="n">qpe2</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">q2</span><span class="p">,</span> <span class="n">c2</span><span class="p">)</span>
+<span class="n">qpe2</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">q2</span><span class="p">[</span><span class="n">nancilla</span><span class="p">])</span>
+<span class="n">qpe2</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">q2</span><span class="p">[</span><span class="n">nancilla</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;qiskit.extensions.standard.x.XGate at 0x11dd65fd0&gt;</pre>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Again, we apply Hadamard gates to the ancilla qubits.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nancilla</span><span class="p">):</span>
+    <span class="n">qpe2</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">q2</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Next we perform the controlled unitary operations:</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># controlled unitary from q[0] is the identity matrix</span>
+<span class="c1"># controlled unitary from q[1] is the identity matrix</span>
+<span class="c1"># controlled unitary from q[2] is a controlled-Z gate</span>
+<span class="n">qpe2</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">q2</span><span class="p">[</span><span class="n">nancilla</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">qpe2</span><span class="o">.</span><span class="n">ccx</span><span class="p">(</span><span class="n">q2</span><span class="p">[</span><span class="n">nancilla</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">q2</span><span class="p">[</span><span class="n">nancilla</span><span class="p">],</span> <span class="n">q2</span><span class="p">[</span><span class="n">nancilla</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">qpe2</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">q2</span><span class="p">[</span><span class="n">nancilla</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;qiskit.extensions.standard.h.HGate at 0x11dd78668&gt;</pre>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As before, we apply an inverse quantum Fourier transform to write the phase to the ancilla register. We then measure the ancilla register.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">qft_dagger</span><span class="p">(</span><span class="n">qpe2</span><span class="p">,</span> <span class="n">q2</span><span class="p">,</span> <span class="n">nancilla</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nancilla</span><span class="p">):</span>
+    <span class="n">qpe2</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">q2</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">c2</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">qpe2</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s2">&quot;mpl&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea output_execute_result">
+<img src="../images/ch-algorithms/quantum-phase-estimation_29_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Experiment-with-Simulators">Experiment with Simulators<a class="anchor-link" href="#Experiment-with-Simulators"> </a></h2><p>We can run the above circuit on the simulator.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">backend</span> <span class="o">=</span> <span class="n">BasicAer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">)</span>
+<span class="n">shots</span> <span class="o">=</span> <span class="mi">2048</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qpe</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="n">shots</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+<span class="n">answer</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get_counts</span><span class="p">()</span>
+<span class="n">plot_histogram</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea output_execute_result">
+<img src="../images/ch-algorithms/quantum-phase-estimation_31_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We indeed see a peak at the binary representation of $2^n\theta = 2^2\times0.5 = 2$ (10).</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">results2</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qpe2</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="n">shots</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+<span class="n">answer2</span> <span class="o">=</span> <span class="n">results2</span><span class="o">.</span><span class="n">get_counts</span><span class="p">()</span>
+<span class="n">plot_histogram</span><span class="p">(</span><span class="n">answer2</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea output_execute_result">
+<img src="../images/ch-algorithms/quantum-phase-estimation_33_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We indeed see a peak at the binary representation of $2^n\theta = 2^4\times0.5 = 8$ (1000).</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Experiment-with-Real-Devices">Experiment with Real Devices<a class="anchor-link" href="#Experiment-with-Real-Devices"> </a></h2><p>We can run the circuit for our three-qubit implementation of quantum phase estimation on the real device as shown below.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Load our saved IBMQ accounts and get the least busy backend device</span>
+<span class="n">IBMQ</span><span class="o">.</span><span class="n">load_account</span><span class="p">()</span>
+<span class="n">IBMQ</span><span class="o">.</span><span class="n">get_provider</span><span class="p">(</span><span class="n">hub</span><span class="o">=</span><span class="s1">&#39;ibm-q&#39;</span><span class="p">)</span>
+<span class="n">provider</span><span class="o">.</span><span class="n">backends</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&lt;IBMQBackend(&#39;ibmqx4&#39;) from IBMQ()&gt;,
+ &lt;IBMQBackend(&#39;ibmqx2&#39;) from IBMQ()&gt;,
+ &lt;IBMQBackend(&#39;ibmq_16_melbourne&#39;) from IBMQ()&gt;,
+ &lt;IBMQBackend(&#39;ibmq_qasm_simulator&#39;) from IBMQ()&gt;,
+ &lt;IBMQBackend(&#39;ibmq_20_tokyo&#39;) from IBMQ(ibm-q-internal, yrk, main)&gt;,
+ &lt;IBMQBackend(&#39;ibmq_poughkeepsie&#39;) from IBMQ(ibm-q-internal, yrk, main)&gt;,
+ &lt;IBMQBackend(&#39;ibmq_qasm_simulator&#39;) from IBMQ(ibm-q-internal, yrk, main)&gt;]</pre>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">backend</span> <span class="o">=</span> <span class="n">provider</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;ibmq_vigo&#39;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">qiskit.tools.monitor</span> <span class="kn">import</span> <span class="n">job_monitor</span>
+<span class="n">shots</span> <span class="o">=</span> <span class="mi">2048</span>
+<span class="n">job_exp</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qpe</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="n">shots</span><span class="p">)</span>
+
+<span class="n">job_monitor</span><span class="p">(</span><span class="n">job_exp</span><span class="p">,</span> <span class="n">interval</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+
+ 
+ 
+<div id="44b002bc-7bde-4f13-88ae-9cb408d2bbac"></div>
+<div class="output_subarea output_widget_view ">
+<script type="text/javascript">
+var element = $('#44b002bc-7bde-4f13-88ae-9cb408d2bbac');
+</script>
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "0412fd4ce6b24bdba3c63eb32f84a590", "version_major": 2, "version_minor": 0}
+</script>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># get the results from the computation</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">job_exp</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+<span class="n">answer</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="n">qpe</span><span class="p">)</span>
+<span class="n">plot_histogram</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea output_execute_result">
+<img src="../images/ch-algorithms/quantum-phase-estimation_38_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="References">References<a class="anchor-link" href="#References"> </a></h2><p>[1] Michael A. Nielsen and Isaac L. Chuang. 2011. Quantum Computation and Quantum Information: 10th Anniversary Edition (10th ed.). Cambridge University Press, New York, NY, USA.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+ 
+
+
+    </main>
+    
+        </div>
+        <nav class="c-page__nav">
+  
+    
+    <a id="js-page__nav__prev" class="c-page__nav__prev" href="/textbook-master/ch-algorithms/quantum-fourier-transform.html">
+      〈 <span class="u-margin-right-tiny"></span> 
+    </a>
+  
+
+  
+    
+    <a id="js-page__nav__next" class="c-page__nav__next" href="/textbook-master/ch-algorithms/grover.html">
+       <span class="u-margin-right-tiny"></span> 〉
+    </a>
+  
+</nav>
+
+        <footer>
+  <p class="footer">This page was created by <a href="https://github.com/jupyter/jupyter-book/graphs/contributors">The Jupyter Book Community</a></p>
+</footer>
+
+      </main>
+    </div>
+  </body>
+</html>

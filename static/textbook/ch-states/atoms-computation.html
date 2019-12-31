@@ -1,0 +1,2467 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+
+  <script>
+(function () {
+  'use strict'
+  window.digitalData = {
+    page: {
+      pageInfo: {
+        productTitle: 'IBM Q Experience',
+        analytics: {
+          category: 'Qiskit.org'
+        }
+      }
+    }
+  }
+  window._analytics = {
+    segment_key: 'ffdYLviQze3kzomaINXNk6NwpY9LlXcw'
+  }
+}());
+</script>
+<script async src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,minimum-scale=1">
+
+  <title>The Atoms of Computation</title>
+  <meta name="description" content="            The Atoms of Computation Programming a quantum computer is now something that anyone can do in the comfort of their own home.But what to create? ...">
+
+  <link rel="canonical" href="https://community.qiskit.orgtextbook/ch-states/atoms-computation.html">
+  <link rel="alternate" type="application/rss+xml" title="Qiskit Textbook" href="https://community.qiskit.orgtextbook/feed.xml">
+
+  <meta property="og:url"         content="https://community.qiskit.orgtextbook/ch-states/atoms-computation.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="The Atoms of Computation" />
+<meta property="og:description" content="            The Atoms of Computation Programming a quantum computer is now something that anyone can do in the comfort of their own home.But what to create? ..." />
+<meta property="og:image"       content="https://community.qiskit.org/textbook/images/logo/logo.png" />
+
+<meta name="twitter:card" content="summary">
+
+
+  <script type="application/ld+json">
+  {
+  "@context": "http://schema.org",
+  "@type": "NewsArticle",
+  "mainEntityOfPage": "https://community.qiskit.orgtextbook/ch-states/atoms-computation.html",
+  "headline": "The Atoms of Computation",
+  "datePublished": "2019-12-11T21:28:08+00:00",
+  "dateModified": "2019-12-11T21:28:08+00:00",
+  "description": "            The Atoms of Computation Programming a quantum computer is now something that anyone can do in the comfort of their own home.But what to create? ...",
+  "author": {
+    "@type": "Person",
+    "name": "The Qiskit Team"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Data 100 at UC Berkeley",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://community.qiskit.orgtextbook",
+      "width": 60,
+      "height": 60
+    }
+  },
+  "image": {
+    "@type": "ImageObject",
+    "url": "https://community.qiskit.orgtextbook",
+    "height": 60,
+    "width": 60
+  }
+}
+
+  </script>
+  <link rel="stylesheet" href="/textbook/assets/css/styles.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css ">
+
+  <!-- <link rel="manifest" href="/manifest.json"> -->
+  <!-- <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#efae0a"> -->
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+  <meta name="theme-color" content="#233947">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/x-icon" href="/textbook/images/logo/favicon.ico">
+
+  <!-- MathJax Config -->
+  <!-- Allow inline math using $ and automatically break long math lines -->
+<!-- (mostly) copied from nbconvert configuration -->
+<!-- https://github.com/jupyter/nbconvert/blob/master/nbconvert/templates/html/mathjax.tpl -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true,
+        processEnvironments: true
+    },
+    // Center justify equations in code and markdown cells. Elsewhere
+    // we use CSS to left justify single line equations in code cells.
+    displayAlign: 'center',
+    "HTML-CSS": {
+        styles: {'.MathJax_Display': {"margin": 0}},
+        linebreaks: { automatic: true },
+    }
+});
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_HTML' async></script>
+
+  <!-- DOM updating function -->
+  <script>
+const runWhenDOMLoaded = cb => {
+  if (document.readyState != 'loading') {
+    cb()
+  } else if (document.addEventListener) {
+    document.addEventListener('DOMContentLoaded', cb)
+  } else {
+    document.attachEvent('onreadystatechange', function() {
+      if (document.readyState == 'complete') cb()
+    })
+  }
+}
+
+// Helper function to init things quickly
+initFunction = function(myfunc) {
+  runWhenDOMLoaded(myfunc);
+  document.addEventListener('turbolinks:load', myfunc);
+};
+</script>
+
+  <!-- Define some javascript variables that will be useful in other javascript -->
+  <script>
+    const site_basename = 'textbook';
+  </script>
+
+  <!-- Add AnchorJS to let headers be linked -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js" async></script>
+  <script>
+const initAnchors = () => {
+  if (window.anchors === undefined) {
+    setTimeout(initAnchors, 250)
+    return
+  }
+  anchors.add("main h1, main h2, main h3, main h4")
+}
+
+initFunction(initAnchors);
+</script>
+
+
+  <!-- Include Turbolinks to make page loads fast -->
+  <!-- https://github.com/turbolinks/turbolinks -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/turbolinks/5.2.0/turbolinks.js" async></script>
+  <meta name="turbolinks-cache-control" content="no-cache">
+
+  <!-- Selectors for elements on the page -->
+  <script>
+/**
+ * Select various elements on the page for later use
+ */
+
+// IDs we'll attach to cells
+const codeCellId = index => `codecell${index}`
+const inputCellId = index => `inputcell${index}`
+
+pageElements = {}
+
+// All code cells
+findCodeCells = function() {
+    var codeCells = document.querySelectorAll('div.c-textbook__content > div.highlighter-rouge > div.highlight > pre, div.input_area pre, div.text_cell_render div.highlight pre')
+    pageElements['codeCells'] = codeCells;
+
+    codeCells.forEach((codeCell, index) => {
+      const id = codeCellId(index)
+      codeCell.setAttribute('id', id)
+    })
+};
+
+initFunction(findCodeCells);
+
+// All cells in general
+findInputCells = function() {
+    var inputCells = document.querySelectorAll('div.jb_cell')
+    pageElements['inputCells'] = inputCells;
+
+    inputCells.forEach((inputCell, index) => {
+        const id = inputCellId(index)
+        inputCell.setAttribute('id', id)
+    })
+};
+
+initFunction(findInputCells);
+</script>
+
+  <!-- Load nbinteract for widgets -->
+  
+
+  <!-- Load Thebelab for interactive widgets -->
+  <!-- Include Thebelab for interactive code if it's enabled -->
+
+
+
+  <!-- Load the auto-generating TOC -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js" async></script>
+<script>
+const initToc = () => {
+  if (window.tocbot === undefined) {
+    setTimeout(initToc, 250)
+    return
+  }
+
+  // Check whether we have any sidebar content. If not, then show the sidebar earlier.
+  var SIDEBAR_CONTENT_TAGS = ['.tag_full_width', '.tag_popout'];
+  var sidebar_content_query = SIDEBAR_CONTENT_TAGS.join(', ')
+  if (document.querySelectorAll(sidebar_content_query).length === 0) {
+    document.querySelector('nav.onthispage').classList.add('no_sidebar_content')
+  }
+
+  // Initialize the TOC bot
+  tocbot.init({
+    tocSelector: 'nav.onthispage',
+    contentSelector: '.c-textbook__content',
+    headingSelector: 'h2, h3',
+    orderedList: false,
+    collapseDepth: 6,
+    listClass: 'toc__menu',
+    activeListItemClass: "",  // Not using
+    activeLinkClass: "", // Not using
+  });
+
+}
+initFunction(initToc);
+</script>
+
+
+  <!-- Google analytics -->
+  <script src="/textbook/assets/js/ga.js" async></script>
+
+  <!-- Clipboard copy button -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" async></script>
+
+  <!-- Load custom website scripts -->
+  <script src="/textbook/assets/js/scripts.js" async></script>
+
+  <!-- Load custom user CSS and JS  -->
+  <script src="/textbook/assets/custom/custom.js" async></script>
+  <link rel="stylesheet" href="/textbook/assets/custom/custom.css">
+
+  <!-- Update interact links w/ REST param, is defined in includes so we can use templates -->
+  
+
+  <!-- Lunr search code - will only be executed on the /search page -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.6/lunr.min.js" async></script>
+  <script>var initQuery = function() {
+  // See if we have a search box
+  var searchInput = document.querySelector('input#lunr_search');
+  if (searchInput === null) {
+    return;
+  }
+
+  // Function to parse our lunr cache
+  var idx = lunr(function () {
+    this.field('title')
+    this.field('excerpt')
+    this.field('categories')
+    this.field('tags')
+    this.ref('id')
+
+    this.pipeline.remove(lunr.trimmer)
+
+    for (var item in store) {
+      this.add({
+        title: store[item].title,
+        excerpt: store[item].excerpt,
+        categories: store[item].categories,
+        tags: store[item].tags,
+        id: item
+      })
+    }
+  });
+
+  // Run search upon keyup
+  searchInput.addEventListener('keyup', function () {
+    var resultdiv = document.querySelector('#results');
+    var query = document.querySelector("input#lunr_search").value.toLowerCase();
+    var result =
+      idx.query(function (q) {
+        query.split(lunr.tokenizer.separator).forEach(function (term) {
+          q.term(term, { boost: 100 })
+          if(query.lastIndexOf(" ") != query.length-1){
+            q.term(term, {  usePipeline: false, wildcard: lunr.Query.wildcard.TRAILING, boost: 10 })
+          }
+          if (term != ""){
+            q.term(term, {  usePipeline: false, editDistance: 1, boost: 1 })
+          }
+        })
+      });
+
+      // Empty the results div
+      while (resultdiv.firstChild) {
+        resultdiv.removeChild(resultdiv.firstChild);
+      }
+
+    resultdiv.insertAdjacentHTML('afterbegin', '<p class="results__found">'+result.length+' Result(s) found</p>');
+    for (var item in result) {
+      var ref = result[item].ref;
+      if(store[ref].teaser){
+        var searchitem =
+          '<div class="list__item">'+
+            '<article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">'+
+              '<h2 class="archive__item-title" itemprop="headline">'+
+                '<a href="'+store[ref].url+'" rel="permalink">'+store[ref].title+'</a>'+
+              '</h2>'+
+              '<div class="archive__item-teaser">'+
+                '<img src="'+store[ref].teaser+'" alt="">'+
+              '</div>'+
+              '<p class="archive__item-excerpt" itemprop="description">'+store[ref].excerpt.split(" ").splice(0,20).join(" ")+'...</p>'+
+            '</article>'+
+          '</div>';
+      }
+      else{
+    	  var searchitem =
+          '<div class="list__item">'+
+            '<article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">'+
+              '<h2 class="archive__item-title" itemprop="headline">'+
+                '<a href="'+store[ref].url+'" rel="permalink">'+store[ref].title+'</a>'+
+              '</h2>'+
+              '<p class="archive__item-excerpt" itemprop="description">'+store[ref].excerpt.split(" ").splice(0,20).join(" ")+'...</p>'+
+            '</article>'+
+          '</div>';
+      }
+      resultdiv.insertAdjacentHTML('beforeend', searchitem);
+    }
+  });
+};
+
+initFunction(initQuery);
+</script>
+
+  <!-- Load JS that depends on site variables -->
+  <script>
+/**
+ * Set up copy/paste for code blocks
+ */
+const clipboardButton = id =>
+  `<a id="copy-button-${id}" class="btn copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#${id}">
+    <img src="/textbook/assets/images/copy-button.svg" alt="Copy to clipboard">
+  </a>`
+
+// Clears selected text since ClipboardJS will select the text when copying
+const clearSelection = () => {
+  if (window.getSelection) {
+    window.getSelection().removeAllRanges()
+  } else if (document.selection) {
+    document.selection.empty()
+  }
+}
+
+// Changes tooltip text for two seconds, then changes it back
+const temporarilyChangeTooltip = (el, newText) => {
+  const oldText = el.getAttribute('data-tooltip')
+  el.setAttribute('data-tooltip', newText)
+  setTimeout(() => el.setAttribute('data-tooltip', oldText), 2000)
+}
+
+const addCopyButtonToCodeCells = () => {
+  // If ClipboardJS hasn't loaded, wait a bit and try again. This
+  // happens because we load ClipboardJS asynchronously.
+  if (window.ClipboardJS === undefined) {
+    setTimeout(addCopyButtonToCodeCells, 250)
+    return
+  }
+
+  pageElements['codeCells'].forEach((codeCell) => {
+    const id = codeCell.getAttribute('id')
+    if (document.getElementById("copy-button" + id) == null) {
+      codeCell.insertAdjacentHTML('afterend', clipboardButton(id));
+    }
+  })
+
+  const clipboard = new ClipboardJS('.copybtn')
+  clipboard.on('success', event => {
+    clearSelection()
+    temporarilyChangeTooltip(event.trigger, 'Copied!')
+  })
+
+  clipboard.on('error', event => {
+    temporarilyChangeTooltip(event.trigger, 'Failed to copy')
+  })
+
+  // Get rid of clipboard before the next page visit to avoid memory leak
+  document.addEventListener('turbolinks:before-visit', () =>
+    clipboard.destroy()
+  )
+}
+
+initFunction(addCopyButtonToCodeCells);
+</script>
+
+
+  <!-- Hide cell code -->
+  <script>
+    /**
+    Add buttons to hide code cells
+    */
+
+
+    var setCodeCellVisibility = function (inputField, kind) {
+        // Update the image and class for hidden
+        var id = inputField.getAttribute('data-id');
+        var codeCell = document.querySelector(`#${id} div.highlight`);
+
+        if (kind === "visible") {
+            codeCell.classList.remove('hidden');
+            inputField.checked = true;
+        } else {
+            codeCell.classList.add('hidden');
+            inputField.checked = false;
+        }
+    }
+
+    var toggleCodeCellVisibility = function (event) {
+        // The label is clicked, and now we decide what to do based on the input field's clicked status
+        if (event.target.tagName === "LABEL") {
+            var inputField = event.target.previousElementSibling;
+        } else {
+            // It is the span inside the target
+            var inputField = event.target.parentElement.previousElementSibling;
+        }
+
+        if (inputField.checked === true) {
+            setCodeCellVisibility(inputField, "visible");
+        } else {
+            setCodeCellVisibility(inputField, "hidden");
+        }
+    }
+
+
+    // Button constructor
+    const hideCodeButton = id => `<input class="hidebtn" type="checkbox" id="hidebtn${id}" data-id="${id}"><label title="Toggle cell" for="hidebtn${id}" class="plusminus"><span class="pm_h"></span><span class="pm_v"></span></label>`
+
+    var addHideButton = function () {
+        // If a hide button is already added, don't add another
+        if (document.querySelector('div.tag_hide_input input') !== null) {
+            return;
+        }
+
+        // Find the input cells and add a hide button
+        pageElements['inputCells'].forEach(function (inputCell) {
+            if (!inputCell.classList.contains("tag_hide_input")) {
+                // Skip the cell if it doesn't have a hidecode class
+                return;
+            }
+
+            const id = inputCell.getAttribute('id')
+
+            // Insert the button just inside the end of the next div
+            inputCell.querySelector('div.input').insertAdjacentHTML('beforeend', hideCodeButton(id))
+
+            // Set up the visibility toggle
+            hideLink = document.querySelector(`#${id} div.inner_cell + input + label`);
+            hideLink.addEventListener('click', toggleCodeCellVisibility)
+        });
+    }
+
+
+    // Initialize the hide buttos
+    var initHiddenCells = function () {
+        // Add hide buttons to the cells
+        addHideButton();
+
+        // Toggle the code cells that should be hidden
+        document.querySelectorAll('div.tag_hide_input input').forEach(function (item) {
+            setCodeCellVisibility(item, 'hidden');
+            item.checked = true;
+        })
+    }
+
+    initFunction(initHiddenCells);
+
+</script>
+
+  <!-- Printing the screen -->
+  <!-- Include nbinteract for interactive widgets -->
+<script src="https://printjs-4de6.kxcdn.com/print.min.js" async></script>
+<script>
+printContent = () => {
+    // MathJax displays a second version of any math for assistive devices etc.
+    // This prevents double-rendering in the PDF output.
+    var ignoreAssistList = [];
+    assistives = document.querySelectorAll('.MathJax_Display span.MJX_Assistive_MathML').forEach((element, index) => {
+        var thisId = 'MathJax-assistive-' + index.toString();
+        element.setAttribute('id', thisId);
+        ignoreAssistList.push(thisId)
+    });
+
+    // Print the actual content object
+    printJS({
+        printable: 'textbook_content',
+        type: 'html',
+        css: "/textbook/assets/css/styles.css",
+        scanStyles: false,
+        targetStyles: ["*"],
+        ignoreElements: ignoreAssistList
+    })
+};
+
+initPrint = () => {
+    document.querySelector('#interact-button-print').addEventListener('click', printContent)
+}
+
+initFunction(initPrint)
+</script>
+
+</head>
+
+  <body>
+    <!-- .js-show-sidebar shows sidebar by default -->
+    <div id="js-textbook" class="c-textbook js-show-sidebar">
+      
+
+
+
+<nav id="js-sidebar" class="c-textbook__sidebar">
+  <a href="https://delapuente.github.io/qiskit-textbook"><img src="/textbook/images/logo/logo.png" class="textbook_logo" id="sidebar-logo" data-turbolinks-permanent/></a>
+  <h2 class="c-sidebar__title">Qiskit Textbook</h2>
+  <ul class="c-sidebar__chapters">
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook/preface.html"
+        >
+          
+          Preface
+        </a>
+
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook/upcoming.html"
+        >
+          
+          Upcoming
+        </a>
+
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook/ch-prerequisites/python-and-jupyter-notebooks.html"
+        >
+          
+            0.
+          
+          Prerequisites
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-prerequisites/python-and-jupyter-notebooks.html"
+                >
+                  
+                    0.1
+                  
+                  Python and Jupyter Notebooks
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-prerequisites/qiskit.html"
+                >
+                  
+                    0.2
+                  
+                  Qiskit
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-prerequisites/linear_algebra.html"
+                >
+                  
+                    0.3
+                  
+                  Linear Algebra
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook/ch-states/introduction.html"
+        >
+          
+            1.
+          
+          Quantum States and Qubits
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-states/introduction.html"
+                >
+                  
+                    1.1
+                  
+                  Introduction
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry c-sidebar__entry--active"
+                  href="/textbook/ch-states/atoms-computation.html"
+                >
+                  
+                    1.2
+                  
+                  The Atoms of Computation
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-states/unique-properties-qubits.html"
+                >
+                  
+                    1.3
+                  
+                  The Unique Properties of Qubits
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-states/writing-down-qubit-states.html"
+                >
+                  
+                    1.4
+                  
+                  Writing Down Qubit States
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-states/pauli-matrices-bloch-sphere.html"
+                >
+                  
+                    1.5
+                  
+                  Pauli Matrices and the Bloch Sphere
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-states/states-many-qubits.html"
+                >
+                  
+                    1.6
+                  
+                  States for Many Qubits
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook/ch-gates/introduction.html"
+        >
+          
+            2.
+          
+          Single Qubits and Multi-Qubits gates
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-gates/introduction.html"
+                >
+                  
+                    2.1
+                  
+                  Introduction
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-gates/quantum-gates.html"
+                >
+                  
+                    2.2
+                  
+                  Quantum Gates
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-gates/fun-matrices.html"
+                >
+                  
+                    2.3
+                  
+                  Fun with Matrices
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-gates/standard-gate-set.html"
+                >
+                  
+                    2.4
+                  
+                  The Standard Gate Set
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-gates/proving-universality.html"
+                >
+                  
+                    2.5
+                  
+                  Proving Universality
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-gates/basic-circuit-identities.html"
+                >
+                  
+                    2.6
+                  
+                  Basic Circuit Identities
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook/ch-ex/ex1.html"
+        >
+          
+          Problems
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-ex/ex1.html"
+                >
+                  
+                  Set 1. Classical Logic Gates with Quantum Circuits
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-ex/ex2.html"
+                >
+                  
+                  Set 2. Basic Synthesis of Single-Qubit Gates
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-ex/ex3.html"
+                >
+                  
+                  Set 3. Building the Best AND Gate
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook/ch-algorithms/teleportation.html"
+        >
+          
+            3.
+          
+          Quantum Algorithms
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-algorithms/teleportation.html"
+                >
+                  
+                    3.1
+                  
+                  Quantum Teleportation
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-algorithms/deutsch-josza.html"
+                >
+                  
+                    3.2
+                  
+                  Deutsch-Josza Algorithm
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-algorithms/bernstein-vazirani.html"
+                >
+                  
+                    3.3
+                  
+                  Bernstein-Vazirani Algorithm
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-algorithms/simon.html"
+                >
+                  
+                    3.4
+                  
+                  Simon's Algorithm
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-algorithms/quantum-fourier-transform.html"
+                >
+                  
+                    3.5
+                  
+                  Quantum Fourier Transform
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-algorithms/quantum-phase-estimation.html"
+                >
+                  
+                    3.6
+                  
+                  Quantum Phase Estimation
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-algorithms/grover.html"
+                >
+                  
+                    3.7
+                  
+                  Grover's Algorithm
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook/ch-applications/vqe-molecules.html"
+        >
+          
+            4.
+          
+          Quantum Algorithms for Applications
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-applications/vqe-molecules.html"
+                >
+                  
+                    4.1
+                  
+                  Simulating Molecules using VQE
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-applications/qaoa.html"
+                >
+                  
+                    4.2
+                  
+                  Solving combinatorial optimization problems using QAOA
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-applications/satisfiability-grover.html"
+                >
+                  
+                    4.3
+                  
+                  Solving Satisfiability Problems using Grover's Algorithm
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook/ch-quantum-hardware/calibrating-qubits-openpulse.html"
+        >
+          
+            5.
+          
+          Investigating Quantum Hardware Using Qiskit
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-quantum-hardware/calibrating-qubits-openpulse.html"
+                >
+                  
+                    5.1
+                  
+                  Calibrating Qubits with OpenPulse
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-quantum-hardware/error-correction-repetition-code.html"
+                >
+                  
+                    5.2
+                  
+                  Introduction to Quantum Error Correction using Repetition Codes
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-quantum-hardware/measurement-error-mitigation.html"
+                >
+                  
+                    5.3
+                  
+                  Measurement Error Mitigation
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-quantum-hardware/randomized-benchmarking.html"
+                >
+                  
+                    5.4
+                  
+                  Randomized Benchmarking
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-quantum-hardware/measuring-quantum-volume.html"
+                >
+                  
+                    5.5
+                  
+                  Measuring Quantum Volume
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook/ch-paper-implementations/vqls.html"
+        >
+          
+            6.
+          
+          Implementations of Recent Quantum Algorithms
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook/ch-paper-implementations/vqls.html"
+                >
+                  
+                    6.1
+                  
+                  Variational Quantum Linear Solver
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+  </ul>
+  <p class="sidebar_footer">Powered by <a href="https://github.com/jupyter/jupyter-book">Jupyter Book</a></p>
+</nav>
+
+      
+      <div class="c-topbar" id="top-navbar">
+  <!-- We show the sidebar by default so we use .is-active -->
+  <div class="c-topbar__buttons">
+    <button
+      id="js-sidebar-toggle"
+      class="hamburger hamburger--arrowalt is-active"
+    >
+      <span class="hamburger-box">
+        <span class="hamburger-inner"></span>
+      </span>
+    </button>
+    <div class="buttons">
+<div class="download-buttons-dropdown">
+    <button id="dropdown-button-trigger" class="interact-button"><i class="fa fa-download"></i></button>
+    <div class="download-buttons">
+        <a href="/textbook/content/ch-states/atoms-computation.ipynb" download>
+        <button id="interact-button-download" class="interact-button">ORIG</button>
+        </a>
+        
+        <a id="interact-button-print"><button id="interact-button-download" class="interact-button">PDF</button></a>
+    </div>
+</div>
+
+  
+  
+  
+  
+
+
+</div>
+
+  </div>
+  <!-- Empty sidebar placeholder that we'll auto-fill with javascript -->
+  <aside class="sidebar__right">
+    <header><h4 class="nav__title"><i class="fa fa-list"></i>   On this page</h4></header>
+    <nav class="onthispage">
+    </nav>
+  </aside>
+  <a href="/textbook/search.html" class="topbar-right-button" id="search-button"><i class="fa fa-search"></i></a>
+</div>
+
+      <main class="c-textbook__page" tabindex="-1">
+        <div class="c-textbook__content" id="textbook_content">
+              <main class="jupyter-page">
+    <div id="page-info"></div>
+    <div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="The-Atoms-of-Computation">The Atoms of Computation<a class="anchor-link" href="#The-Atoms-of-Computation"> </a></h1>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Programming a quantum computer is now something that anyone can do in the comfort of their own home.</p>
+<p>But what to create? What is a quantum program anyway? In fact, what is a quantum computer?</p>
+<p>These questions can be answered by making comparisons to standard digital computers. Unfortunately, most people don’t actually understand how digital computers work either. So in this article we’ll look at the basics principles behind these devices. To help us transition over to quantum computing later on, we’ll do it using the same tools as we'll use for quantum.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">execute</span><span class="p">,</span> <span class="n">Aer</span>
+<span class="kn">from</span> <span class="nn">qiskit.visualization</span> <span class="kn">import</span> <span class="n">plot_histogram</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Splitting-information-into-bits">Splitting information into bits<a class="anchor-link" href="#Splitting-information-into-bits"> </a></h3>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The first thing we need to know about is the idea of bits. These are designed to be the world’s simplest alphabet. With only two characters, 0 and 1, we can represent any piece of information.</p>
+<p>One example is numbers. In European languages, numbers are usually represented using a string of the ten digits 0, 1, 2, 3, 4, 5, 6, 7, 8 and 9. In this string of digits, each represents how many times the number contains a certain powers of ten. For example, when we write 9213, we mean</p>
+$$ 9000 + 200 + 10 + 3 $$<p>or, expressed in a way that emphasizes the powers of ten</p>
+$$ (9\times10^3) + (2\times10^2) + (1\times10^1) + (3\times10^0) $$<p>Though we usually use this system based on the number 10, we can just as easily use one based on any other number. The binary number system, for example, is based on the number two. This means using the two characters 0 and 1 to express numbers as multiples of powers of two. For example, 9213 becomes 10001111111101, since</p>
+$$ 9213  = (1 \times 2^{13}) + (0 \times 2^{12}) + (0 \times 2^{11})+ (0 \times 2^{10}) +(1 \times 2^9) + (1 \times 2^8) + (1 \times 2^7) \\\\ \,\,\,   + (1 \times 2^6) + (1 \times 2^5) + (1 \times 2^4) + (1 \times 2^3) + (1 \times 2^2) + (0 \times 2^1) + (1 \times 2^0) $$<p>In this we are expressing numbers as multiples of 2, 4, 8, 16, 32, etc instead of 10, 100, 1000, etc.</p>
+<p>These strings of bits, known as binary strings, can be used to represent more than just numbers. For example, there is a way to represent any text using bits. For any letter, number or punctuation mark you want to use, you can find a corresponding string of at most eight bits using <a href="https://www.ibm.com/support/knowledgecenter/en/ssw_aix_72/com.ibm.aix.networkcomm/conversion_table.htm">this table.</a> Though these are quite arbitrary, this is a widely agreed upon standard. In fact, it's what was used to transmit this article to you through the internet.</p>
+<p>This is how all information is represented in computers. Whether numbers, letters, images or sound, it all exists in the form of binary strings.</p>
+<p>Like our standard digital computers, quantum computers are based on this same basic idea. The main difference is that they use <em>qubits</em>, a variant of the bit that can be manipulated in quantum ways. In the rest of this textbook, we will explore what qubits are, what they can do and how they do it. In this section, however, we are not talking about quantum at all. So we just use qubits as if they were bits.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Computation-as-a-diagram">Computation as a diagram<a class="anchor-link" href="#Computation-as-a-diagram"> </a></h3><p>Whether we are using qubits our bits, we need to manipulate them in order to turn the inputs we have into the outputs we need. For the very simplest programs for small numbers of bits, it is useful to represent this process in a diagram known as a <em>circuit diagram</em>. These have inputs on the left, outputs on the right, and operations represented by arcane symbols in between. These operations are called 'gates', mostly for historical reasons.</p>
+<p>Here's an example of what a circuit looks like for standard, bit-based computers. You aren't expected to understand what it does. It is simply to give you an idea of what these circuits look like.</p>
+<p><img src="images/classical_circuit.png" width="500"/></p>
+<p>For quantum computers we use the same basic idea, but we have different conventions for how to represent inputs, outputs, and the symbols used for operations. Here is the quantum circuit that represents the same process as above.</p>
+<p><img src="images/quantum_circuit.png" width="600"/></p>
+<p>In the rest of this section, we will explain how to build circuits. At the end you'll know how to create the circuit above, what it does and why it is useful.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Your-first-quantum-circuit">Your first quantum circuit<a class="anchor-link" href="#Your-first-quantum-circuit"> </a></h3>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In a circuit we typically need to do three jobs: First encode the input, then do some actual computation and finally extract an output. For your first quantum circuit, we'll focus on the last of these jobs. We start by creating a circuit with eight qubits and eight outputs.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="n">n_q</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="n">n_b</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="n">qc_output</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">n_q</span><span class="p">,</span><span class="n">n_b</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This circuit, which we have called <code>qc_output</code>, is created by Qiskit using <code>QuantumCircuit</code>. The number <code>n_q</code> defines the number of qubits in the circuit. With <code>n_b</code> we define the number of output bits we will extract from the circuit at the end.</p>
+<p>The extraction of outputs in a quantum circuit is done using an operation called <code>measure</code>. Each measurement tells a specific qubit to give an output to a specific output bit. The following code adds a <code>measure</code> operation to each of our eight qubits. The qubits and bits are both labelled by the numbers from 0 to 7 (because that’s how programmers like to do things). The command <code>qc.measure(j,j)</code> adds a measurement to our circuit <code>qc</code> that tells qubit <code>j</code> to write an output to bit <code>j</code>.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">qc_output</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">j</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now our circuit has something in, let's take a look at it.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">qc_output</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea output_execute_result">
+<img src="../images/ch-states/atoms-computation_12_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Qubits are always initialized to give the output <code>0</code>. Since we don't do anything to our qubits in the circuit above, this is exactly the result we'll get when we measure them. We can see this by running the circuit many times and plotting the results in a histogram. We will find that the result is always <code>00000000</code>: a <code>0</code> from each qubit.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">counts</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc_output</span><span class="p">,</span><span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_counts</span><span class="p">()</span>
+<span class="n">plot_histogram</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea output_execute_result">
+<img src="../images/ch-states/atoms-computation_14_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The reason for running many times and showing the result as a histogram is because sometimes quantum computers have some randomness in their results. In this case, since we aren’t doing anything quantum, we get just the <code>00000000</code> result with certainty.</p>
+<p>Note that this result comes from a quantum simulator, which is a standard computer calculating what a quantum computer would do. Simulations are only possible for small numbers of qubits, but they are nevertheless a very useful tool when designing your first quantum circuits. To run on a real device you simply need to replace <code>Aer.get_backend('qasm_simulator')</code> with the backend object of the device you want to use.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Encoding-an-input">Encoding an input<a class="anchor-link" href="#Encoding-an-input"> </a></h3><p>Now let's look at how to encode a different binary string as an input. For this we need what is known as a NOT gate. This is the most basic operation that you can do in a computer. It simply flips the bit value: <code>0</code> becomes <code>1</code> and <code>1</code> becomes <code>0</code>. For qubits, it is an operation called <code>x</code> that does the job of the NOT.</p>
+<p>Below we create a new circuit dedicated to the job of encoding and call it <code>qc_encode</code>. For this we only specify the number of qubits for now.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">qc_encode</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">qc_encode</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+
+<span class="n">qc_encode</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea output_execute_result">
+<img src="../images/ch-states/atoms-computation_17_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Extracting results can be done using the circuit we have from before: <code>qc_output</code>. Adding the two circuits using <code>qc_encode + qc_output</code> creates a new circuit with everything needed to extract an output added at the end.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">qc</span> <span class="o">=</span> <span class="n">qc_encode</span> <span class="o">+</span> <span class="n">qc_output</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">,</span><span class="n">justify</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea output_execute_result">
+<img src="../images/ch-states/atoms-computation_19_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now we can run the combined circuit and look at the results.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">counts</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_counts</span><span class="p">()</span>
+<span class="n">plot_histogram</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea output_execute_result">
+<img src="../images/ch-states/atoms-computation_21_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now our computer outputs the string <code>10000000</code> instead.</p>
+<p>The bit we flipped, which comes from qubit 7, lives on the far left of the string. This is because Qiskit numbers the bits in a string from left to right. If this convention seems odd to you, don’t worry. It seems odd to lots of other people too, and some prefer to number their bits the other way around. But this system certainly has its advantages when we are using the bits to represent numbers. Specifically, it means that qubit 7 is telling us about how many $2^7$s we have in our number. So by flipping this bit, we’ve now written the number 128 in our simple 8-bit computer.</p>
+<p>Now try out writing another number for yourself. You could do your age, for example. Just use a search engine to find out what the number looks like in binary (if it includes a ‘0b’, just ignore it), and then add some 0s to the left side if you are younger than 64.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">qc_encode</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">qc_encode</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">qc_encode</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="n">qc_encode</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea output_execute_result">
+<img src="../images/ch-states/atoms-computation_23_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now we know how to encode information in a computer. The next step is to process it: To take an input that we have encoded, and turn it into an output that we need.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Remembering-how-to-add">Remembering how to add<a class="anchor-link" href="#Remembering-how-to-add"> </a></h3>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>To look at turning inputs into outputs, we need a problem to solve. Let’s do some basic maths. In primary school you will have learned how to take large mathematical problems and break them down into manageable pieces. For example, how would you go about solving the following?</p>
+
+<pre><code>   9213
++  1854
+=  ????</code></pre>
+<p>One way is to do it digit by digit, from right to left. So we start with 3+4</p>
+
+<pre><code>   9213
++  1854
+=  ???7</code></pre>
+<p>And then 1+5</p>
+
+<pre><code>   9213
++  1854
+=  ??67</code></pre>
+<p>Then we have 2+8=10. Since this is a two digit answer, we need to carry the one over to the next column.</p>
+
+<pre><code>   9213
++  1854
+=  ?067
+   ¹</code></pre>
+<p>Finally we have 9+1+1=11, and get our answer</p>
+
+<pre><code>   9213
++  1854
+= 11067
+   ¹</code></pre>
+<p>This may just be simple addition, but it demonstrates the principles behind all algorithms. Whether the algorithm is designed to solve mathematical problems or process text or images, we always break big tasks down into small and simple steps.</p>
+<p>To run on a computer, algorithms need to be compiled down to the smallest and simplest steps possible. To see what these look like, let’s do the above addition problem again, but in binary.</p>
+
+<pre><code>   10001111111101
++  00011100111110
+
+=  ??????????????</code></pre>
+<p>Note that the second number has a bunch of extra 0s on the left. This just serves to make the two strings the same length.</p>
+<p>Our first task is to do the 1+0 for the column on the right. In binary, as in any number system, the answer is 1. We get the same result for the 0+1 of the second column.</p>
+
+<pre><code>   10001111111101
++  00011100111110
+
+=  ????????????11</code></pre>
+<p>Next we have 1+1. As you’ll surely be aware, 1+1=2. In binary, the number 2 is written <code>10</code>, and so requires two bits. This means that we need to carry the 1, just as we would for the number 10 in decimal.</p>
+
+<pre><code>   10001111111101
++  00011100111110
+=  ???????????011 
+             ¹</code></pre>
+<p>The next column now requires us to calculate <code>1+1+1</code>. This means adding three numbers together, so things are getting complicated for our computer. But we can still compile it down to simpler operations, and do it in a way that only ever requires us to add two bits together. For this we can start with just the first two 1s.</p>
+
+<pre><code>   1
++  1
+= 10</code></pre>
+<p>Now we need to add this <code>10</code> to the final <code>1</code> , which can be done using our usual method of going through the columns.</p>
+
+<pre><code>  10
++ 01
+= 11</code></pre>
+<p>The final answer is <code>11</code> (also known as 3).</p>
+<p>Now we can get back to the rest of the problem. With the answer of  <code>11</code>, we have another carry bit.</p>
+
+<pre><code>   10001111111101
++  00011100111110
+=  ??????????1011
+            ¹¹</code></pre>
+<p>So now we have another 1+1+1 to do. But we already know how to do that, so it’s not a big deal.</p>
+<p>In fact, everything left so far is something we already know how to do. This is because, if you break everything down into adding just two bits, there’s only four possible things you’ll ever need to calculate. Here are the four basic sums (we’ll write all the answers with two bits to be consistent).</p>
+
+<pre><code>0+0 = 00 (in decimal, this is 0+0=0)
+0+1 = 01 (in decimal, this is 0+1=1)
+1+0 = 01 (in decimal, this is 1+0=1)
+1+1 = 10 (in decimal, this is 1+1=2)</code></pre>
+<p>This is called a <em>half adder</em>. If our computer can implement this, and if it can chain many of them together, it can add anything.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Adding-with-Qiskit">Adding with Qiskit<a class="anchor-link" href="#Adding-with-Qiskit"> </a></h3>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let's make our own half adder using Qiskit. This will include a part of the circuit that encodes the input, a part that executes the algorithm, and a part that extracts the result. The first part will need to be changed whenever we want to use a new input, but the rest will always remain the same.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="https://s3.us-south.cloud-object-storage.appdomain.cloud/strapi/04498f84a69d4e859afd19b2760ced24atoms6.png" alt="" width="500" align="middle"/></p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The two bits we want to add are encoded in the qubits 0 and 1. The above example encodes a <code>1</code> in both these qubits, and so it seeks to find the solution of <code>1+1</code>. The result will be a string of two bits, which we will read out from the qubits 2 and 3. All that remains is to fill in the actual program, which lives in the blank space in the middle.</p>
+<p>The dashed lines in the image are just to distinguish the different parts of the circuit (although they can have more interesting uses too). They are made by using the <code>barrier</code> command.</p>
+<p>The basic operations of computing are known as logic gates. We’ve already used the NOT gate, but this is not enough to make our half adder. We could only use it to manually write out the answers. But since we want the computer to do the actual computing for us, we’ll need some more powerful gates.</p>
+<p>To see what we need, let’s take another look at what our half adder needs to do.</p>
+
+<pre><code>0+0 = 00
+0+1 = 01
+1+0 = 01
+1+1 = 10</code></pre>
+<p>The rightmost bit in all four of these answers is completely determined by whether the two bits we are adding are the same or different. So for <code>0+0</code> and <code>1+1</code>, where the two bits are equal, the rightmost bit of the answer comes out <code>0</code>. For <code>0+1</code> and <code>1+0</code>, where we are adding different bit values, the rightmost bit is <code>1</code>.</p>
+<p>To get this part of our solution correct, we need something that can figure out whether two bits are different or not. Traditionally, in the study of digital computation, this is called an XOR gate.</p>
+<p>In quantum computers, the job of the XOR gate is done by the controlled-NOT gate. Since that's quite a long name, we usually just call it the CNOT. In Qiskit its name is <code>cx</code>, which is even shorter. In circuit diagrams it is drawn as in the image below.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">qc_cnot</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">qc_cnot</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">qc_cnot</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea output_execute_result">
+<img src="../images/ch-states/atoms-computation_31_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This is applied to a pair of qubits. One acts as the control qubit (this is the one with the little dot). The other acts as the <em>target qubit</em> (with the big circle).</p>
+<p>There are multiple ways to explain the effect of the CNOT. One is to say that it looks at its two input bits to see whether they are the same or different. Then it writes over the target qubit with the answer. The target becomes <code>0</code> if they are the same, and <code>1</code> if they are different.</p>
+<p>Another way of explaining the CNOT is to say that it does a NOT on the target if the control is <code>1</code>, and does nothing otherwise. This explanation is just as valid as the previous one (in fact, it’s the one that gives the gate its name).</p>
+<p>Try the CNOT out for yourself by trying each of the possible inputs. For example, here's a circuit that tests the CNOT with the input <code>01</code>.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea output_execute_result">
+<img src="../images/ch-states/atoms-computation_33_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If you execute this circuit, you’ll find that the output is <code>11</code>. We can think of this happening because of either of the following reasons.</p>
+<ul>
+<li><p>The CNOT calculates whether the input values are different and finds that they are, which means that it wants to output <code>1</code>. It does this by writing over the state of qubit 1 (which, remember, is on the left of the bit string), turning <code>01</code> into <code>11</code>.</p>
+</li>
+<li><p>The CNOT sees that qubit 0 is in state <code>1</code>, and so applies a NOT to qubit 1. This flips the <code>0</code> of qubit 1 into a <code>1</code>, and so turns <code>01</code> into <code>11</code>.</p>
+</li>
+</ul>
+<p>For our half adder, we don’t want to overwrite one of our inputs. Instead, we want to write the result on a different pair of qubits. For this we can use two CNOTs.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">qc_ha</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1"># encode inputs in qubits 0 and 1</span>
+<span class="n">qc_ha</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># For a=0, remove this line. For a=1, leave it.</span>
+<span class="n">qc_ha</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># For b=0, remove this line. For b=1, leave it.</span>
+<span class="n">qc_ha</span><span class="o">.</span><span class="n">barrier</span><span class="p">()</span>
+<span class="c1"># use cnots to write the XOR of the inputs on qubit 2</span>
+<span class="n">qc_ha</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">qc_ha</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">qc_ha</span><span class="o">.</span><span class="n">barrier</span><span class="p">()</span>
+<span class="c1"># extract outputs</span>
+<span class="n">qc_ha</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># extract XOR value</span>
+<span class="n">qc_ha</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">qc_ha</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea output_execute_result">
+<img src="../images/ch-states/atoms-computation_35_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We are now halfway to a fully working half adder. We just have the other bit of the output left to do: the one that will live on qubit 4.</p>
+<p>If you look again at the four possible sums, you’ll notice that there is only one case for which this is <code>1</code> instead of <code>0</code>: <code>1+1</code>=<code>10</code>. It happens only when both the bits we are adding are <code>1</code>.</p>
+<p>To calculate this part of the output, we could just get our computer to look at whether both of the inputs are <code>1</code>. If they are — and only if they are — we need to do a NOT gate on qubit 4. That will flip it to the required value of <code>1</code> for this case only, giving us the output we need.</p>
+<p>For this we need a new gate: like a CNOT, but controlled on two qubits instead of just one. This will perform a NOT on the target qubit only when both controls are in state <code>1</code>. This new gate is called the <em>Toffoli</em>. For those of you who are familiar with Boolean logic gates, it is basically an AND gate.</p>
+<p>In Qiskit, the Toffoli is represented with the <code>ccx</code> command.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">qc_ha</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1"># encode inputs in qubits 0 and 1</span>
+<span class="n">qc_ha</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># For a=0, remove the this line. For a=1, leave it.</span>
+<span class="n">qc_ha</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># For b=0, remove the this line. For b=1, leave it.</span>
+<span class="n">qc_ha</span><span class="o">.</span><span class="n">barrier</span><span class="p">()</span>
+<span class="c1"># use cnots to write the XOR of the inputs on qubit 2</span>
+<span class="n">qc_ha</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">qc_ha</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1"># use ccx to write the AND of the inputs on qubit 3</span>
+<span class="n">qc_ha</span><span class="o">.</span><span class="n">ccx</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">qc_ha</span><span class="o">.</span><span class="n">barrier</span><span class="p">()</span>
+<span class="c1"># extract outputs</span>
+<span class="n">qc_ha</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># extract XOR value</span>
+<span class="n">qc_ha</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># extract AND value</span>
+
+<span class="n">qc_ha</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea output_execute_result">
+<img src="../images/ch-states/atoms-computation_37_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In this example we are calculating <code>1+1</code>, because the two input bits are both <code>1</code>. Let's see what we get.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">counts</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc_ha</span><span class="p">,</span><span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_counts</span><span class="p">()</span>
+<span class="n">plot_histogram</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea output_execute_result">
+<img src="../images/ch-states/atoms-computation_39_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The result is <code>10</code>, which is the binary representation of the number 2. We have built a computer that can solve the famous mathematical problem of 1+1!</p>
+<p>Now you can try it out with the other three possible inputs, and show that our algorithm gives the right results for those too.</p>
+<p>The half adder contains everything you need for addition. With the NOT, CNOT and Toffoli gates, we can create programs that add any set of numbers of any size.</p>
+<p>These three gates are enough to do everything else in computing too. In fact, we can even do without the CNOT, and the NOT gate is only really needed to create bits with value <code>1</code>. The Toffoli gate is essentially the atom of mathematics. It is simplest element into which every other problem-solving technique can be compiled.</p>
+<p>As we'll see, in quantum computing we split the atom.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+ 
+
+
+    </main>
+    
+        </div>
+        <nav class="c-page__nav">
+  
+    
+    <a id="js-page__nav__prev" class="c-page__nav__prev" href="/textbook/ch-states/introduction.html">
+      〈 <span class="u-margin-right-tiny"></span> 
+    </a>
+  
+
+  
+    
+    <a id="js-page__nav__next" class="c-page__nav__next" href="/textbook/ch-states/unique-properties-qubits.html">
+       <span class="u-margin-right-tiny"></span> 〉
+    </a>
+  
+</nav>
+
+        <footer>
+  <p class="footer">This page was created by <a href="https://github.com/jupyter/jupyter-book/graphs/contributors">The Jupyter Book Community</a></p>
+</footer>
+
+      </main>
+    </div>
+  </body>
+</html>

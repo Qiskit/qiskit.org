@@ -1,0 +1,1643 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+
+  <script>
+(function () {
+  'use strict'
+  window.digitalData = {
+    page: {
+      pageInfo: {
+        productTitle: 'IBM Q Experience',
+        analytics: {
+          category: 'Qiskit.org'
+        }
+      }
+    }
+  }
+  window._analytics = {
+    segment_key: 'ffdYLviQze3kzomaINXNk6NwpY9LlXcw'
+  }
+}());
+</script>
+<script async src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,minimum-scale=1">
+
+  <title>Quantum States and Qubits</title>
+  <meta name="description" content="            Introduction If you think quantum mechanics sounds challenging, you are not alone. All of our intuitions are based on day-to-day experiences, and...">
+
+  <link rel="canonical" href="https://community.qiskit.orgtextbook-master/ch-states/introduction.html">
+  <link rel="alternate" type="application/rss+xml" title="Qiskit Textbook" href="https://community.qiskit.orgtextbook-master/feed.xml">
+
+  <meta property="og:url"         content="https://community.qiskit.orgtextbook-master/ch-states/introduction.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Quantum States and Qubits" />
+<meta property="og:description" content="            Introduction If you think quantum mechanics sounds challenging, you are not alone. All of our intuitions are based on day-to-day experiences, and..." />
+<meta property="og:image"       content="https://community.qiskit.org/textbook-master/images/logo/logo.png" />
+
+<meta name="twitter:card" content="summary">
+
+
+  <script type="application/ld+json">
+  {
+  "@context": "http://schema.org",
+  "@type": "NewsArticle",
+  "mainEntityOfPage": "https://community.qiskit.orgtextbook-master/ch-states/introduction.html",
+  "headline": "Quantum States and Qubits",
+  "datePublished": "2019-12-23T22:04:54+00:00",
+  "dateModified": "2019-12-23T22:04:54+00:00",
+  "description": "            Introduction If you think quantum mechanics sounds challenging, you are not alone. All of our intuitions are based on day-to-day experiences, and...",
+  "author": {
+    "@type": "Person",
+    "name": "The Qiskit Team"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Data 100 at UC Berkeley",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://community.qiskit.orgtextbook-master",
+      "width": 60,
+      "height": 60
+    }
+  },
+  "image": {
+    "@type": "ImageObject",
+    "url": "https://community.qiskit.orgtextbook-master",
+    "height": 60,
+    "width": 60
+  }
+}
+
+  </script>
+  <link rel="stylesheet" href="/textbook-master/assets/css/styles.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css ">
+
+  <!-- <link rel="manifest" href="/manifest.json"> -->
+  <!-- <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#efae0a"> -->
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+  <meta name="theme-color" content="#233947">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/x-icon" href="/textbook-master/images/logo/favicon.ico">
+
+  <!-- MathJax Config -->
+  <!-- Allow inline math using $ and automatically break long math lines -->
+<!-- (mostly) copied from nbconvert configuration -->
+<!-- https://github.com/jupyter/nbconvert/blob/master/nbconvert/templates/html/mathjax.tpl -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true,
+        processEnvironments: true
+    },
+    // Center justify equations in code and markdown cells. Elsewhere
+    // we use CSS to left justify single line equations in code cells.
+    displayAlign: 'center',
+    "HTML-CSS": {
+        styles: {'.MathJax_Display': {"margin": 0}},
+        linebreaks: { automatic: true },
+    }
+});
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_HTML' async></script>
+
+  <!-- DOM updating function -->
+  <script>
+const runWhenDOMLoaded = cb => {
+  if (document.readyState != 'loading') {
+    cb()
+  } else if (document.addEventListener) {
+    document.addEventListener('DOMContentLoaded', cb)
+  } else {
+    document.attachEvent('onreadystatechange', function() {
+      if (document.readyState == 'complete') cb()
+    })
+  }
+}
+
+// Helper function to init things quickly
+initFunction = function(myfunc) {
+  runWhenDOMLoaded(myfunc);
+  document.addEventListener('turbolinks:load', myfunc);
+};
+</script>
+
+  <!-- Define some javascript variables that will be useful in other javascript -->
+  <script>
+    const site_basename = 'textbook-master';
+  </script>
+
+  <!-- Add AnchorJS to let headers be linked -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js" async></script>
+  <script>
+const initAnchors = () => {
+  if (window.anchors === undefined) {
+    setTimeout(initAnchors, 250)
+    return
+  }
+  anchors.add("main h1, main h2, main h3, main h4")
+}
+
+initFunction(initAnchors);
+</script>
+
+
+  <!-- Include Turbolinks to make page loads fast -->
+  <!-- https://github.com/turbolinks/turbolinks -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/turbolinks/5.2.0/turbolinks.js" async></script>
+  <meta name="turbolinks-cache-control" content="no-cache">
+
+  <!-- Selectors for elements on the page -->
+  <script>
+/**
+ * Select various elements on the page for later use
+ */
+
+// IDs we'll attach to cells
+const codeCellId = index => `codecell${index}`
+const inputCellId = index => `inputcell${index}`
+
+pageElements = {}
+
+// All code cells
+findCodeCells = function() {
+    var codeCells = document.querySelectorAll('div.c-textbook__content > div.highlighter-rouge > div.highlight > pre, div.input_area pre, div.text_cell_render div.highlight pre')
+    pageElements['codeCells'] = codeCells;
+
+    codeCells.forEach((codeCell, index) => {
+      const id = codeCellId(index)
+      codeCell.setAttribute('id', id)
+    })
+};
+
+initFunction(findCodeCells);
+
+// All cells in general
+findInputCells = function() {
+    var inputCells = document.querySelectorAll('div.jb_cell')
+    pageElements['inputCells'] = inputCells;
+
+    inputCells.forEach((inputCell, index) => {
+        const id = inputCellId(index)
+        inputCell.setAttribute('id', id)
+    })
+};
+
+initFunction(findInputCells);
+</script>
+
+  <!-- Load nbinteract for widgets -->
+  
+
+  <!-- Load Thebelab for interactive widgets -->
+  <!-- Include Thebelab for interactive code if it's enabled -->
+
+
+
+  <!-- Load the auto-generating TOC -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js" async></script>
+<script>
+const initToc = () => {
+  if (window.tocbot === undefined) {
+    setTimeout(initToc, 250)
+    return
+  }
+
+  // Check whether we have any sidebar content. If not, then show the sidebar earlier.
+  var SIDEBAR_CONTENT_TAGS = ['.tag_full_width', '.tag_popout'];
+  var sidebar_content_query = SIDEBAR_CONTENT_TAGS.join(', ')
+  if (document.querySelectorAll(sidebar_content_query).length === 0) {
+    document.querySelector('nav.onthispage').classList.add('no_sidebar_content')
+  }
+
+  // Initialize the TOC bot
+  tocbot.init({
+    tocSelector: 'nav.onthispage',
+    contentSelector: '.c-textbook__content',
+    headingSelector: 'h2, h3',
+    orderedList: false,
+    collapseDepth: 6,
+    listClass: 'toc__menu',
+    activeListItemClass: "",  // Not using
+    activeLinkClass: "", // Not using
+  });
+
+}
+initFunction(initToc);
+</script>
+
+
+  <!-- Google analytics -->
+  <script src="/textbook-master/assets/js/ga.js" async></script>
+
+  <!-- Clipboard copy button -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" async></script>
+
+  <!-- Load custom website scripts -->
+  <script src="/textbook-master/assets/js/scripts.js" async></script>
+
+  <!-- Load custom user CSS and JS  -->
+  <script src="/textbook-master/assets/custom/custom.js" async></script>
+  <link rel="stylesheet" href="/textbook-master/assets/custom/custom.css">
+
+  <!-- Update interact links w/ REST param, is defined in includes so we can use templates -->
+  
+
+  <!-- Lunr search code - will only be executed on the /search page -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.6/lunr.min.js" async></script>
+  <script>var initQuery = function() {
+  // See if we have a search box
+  var searchInput = document.querySelector('input#lunr_search');
+  if (searchInput === null) {
+    return;
+  }
+
+  // Function to parse our lunr cache
+  var idx = lunr(function () {
+    this.field('title')
+    this.field('excerpt')
+    this.field('categories')
+    this.field('tags')
+    this.ref('id')
+
+    this.pipeline.remove(lunr.trimmer)
+
+    for (var item in store) {
+      this.add({
+        title: store[item].title,
+        excerpt: store[item].excerpt,
+        categories: store[item].categories,
+        tags: store[item].tags,
+        id: item
+      })
+    }
+  });
+
+  // Run search upon keyup
+  searchInput.addEventListener('keyup', function () {
+    var resultdiv = document.querySelector('#results');
+    var query = document.querySelector("input#lunr_search").value.toLowerCase();
+    var result =
+      idx.query(function (q) {
+        query.split(lunr.tokenizer.separator).forEach(function (term) {
+          q.term(term, { boost: 100 })
+          if(query.lastIndexOf(" ") != query.length-1){
+            q.term(term, {  usePipeline: false, wildcard: lunr.Query.wildcard.TRAILING, boost: 10 })
+          }
+          if (term != ""){
+            q.term(term, {  usePipeline: false, editDistance: 1, boost: 1 })
+          }
+        })
+      });
+
+      // Empty the results div
+      while (resultdiv.firstChild) {
+        resultdiv.removeChild(resultdiv.firstChild);
+      }
+
+    resultdiv.insertAdjacentHTML('afterbegin', '<p class="results__found">'+result.length+' Result(s) found</p>');
+    for (var item in result) {
+      var ref = result[item].ref;
+      if(store[ref].teaser){
+        var searchitem =
+          '<div class="list__item">'+
+            '<article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">'+
+              '<h2 class="archive__item-title" itemprop="headline">'+
+                '<a href="'+store[ref].url+'" rel="permalink">'+store[ref].title+'</a>'+
+              '</h2>'+
+              '<div class="archive__item-teaser">'+
+                '<img src="'+store[ref].teaser+'" alt="">'+
+              '</div>'+
+              '<p class="archive__item-excerpt" itemprop="description">'+store[ref].excerpt.split(" ").splice(0,20).join(" ")+'...</p>'+
+            '</article>'+
+          '</div>';
+      }
+      else{
+    	  var searchitem =
+          '<div class="list__item">'+
+            '<article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">'+
+              '<h2 class="archive__item-title" itemprop="headline">'+
+                '<a href="'+store[ref].url+'" rel="permalink">'+store[ref].title+'</a>'+
+              '</h2>'+
+              '<p class="archive__item-excerpt" itemprop="description">'+store[ref].excerpt.split(" ").splice(0,20).join(" ")+'...</p>'+
+            '</article>'+
+          '</div>';
+      }
+      resultdiv.insertAdjacentHTML('beforeend', searchitem);
+    }
+  });
+};
+
+initFunction(initQuery);
+</script>
+
+  <!-- Load JS that depends on site variables -->
+  <script>
+/**
+ * Set up copy/paste for code blocks
+ */
+const clipboardButton = id =>
+  `<a id="copy-button-${id}" class="btn copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#${id}">
+    <img src="/textbook-master/assets/images/copy-button.svg" alt="Copy to clipboard">
+  </a>`
+
+// Clears selected text since ClipboardJS will select the text when copying
+const clearSelection = () => {
+  if (window.getSelection) {
+    window.getSelection().removeAllRanges()
+  } else if (document.selection) {
+    document.selection.empty()
+  }
+}
+
+// Changes tooltip text for two seconds, then changes it back
+const temporarilyChangeTooltip = (el, newText) => {
+  const oldText = el.getAttribute('data-tooltip')
+  el.setAttribute('data-tooltip', newText)
+  setTimeout(() => el.setAttribute('data-tooltip', oldText), 2000)
+}
+
+const addCopyButtonToCodeCells = () => {
+  // If ClipboardJS hasn't loaded, wait a bit and try again. This
+  // happens because we load ClipboardJS asynchronously.
+  if (window.ClipboardJS === undefined) {
+    setTimeout(addCopyButtonToCodeCells, 250)
+    return
+  }
+
+  pageElements['codeCells'].forEach((codeCell) => {
+    const id = codeCell.getAttribute('id')
+    if (document.getElementById("copy-button" + id) == null) {
+      codeCell.insertAdjacentHTML('afterend', clipboardButton(id));
+    }
+  })
+
+  const clipboard = new ClipboardJS('.copybtn')
+  clipboard.on('success', event => {
+    clearSelection()
+    temporarilyChangeTooltip(event.trigger, 'Copied!')
+  })
+
+  clipboard.on('error', event => {
+    temporarilyChangeTooltip(event.trigger, 'Failed to copy')
+  })
+
+  // Get rid of clipboard before the next page visit to avoid memory leak
+  document.addEventListener('turbolinks:before-visit', () =>
+    clipboard.destroy()
+  )
+}
+
+initFunction(addCopyButtonToCodeCells);
+</script>
+
+
+  <!-- Hide cell code -->
+  <script>
+    /**
+    Add buttons to hide code cells
+    */
+
+
+    var setCodeCellVisibility = function (inputField, kind) {
+        // Update the image and class for hidden
+        var id = inputField.getAttribute('data-id');
+        var codeCell = document.querySelector(`#${id} div.highlight`);
+
+        if (kind === "visible") {
+            codeCell.classList.remove('hidden');
+            inputField.checked = true;
+        } else {
+            codeCell.classList.add('hidden');
+            inputField.checked = false;
+        }
+    }
+
+    var toggleCodeCellVisibility = function (event) {
+        // The label is clicked, and now we decide what to do based on the input field's clicked status
+        if (event.target.tagName === "LABEL") {
+            var inputField = event.target.previousElementSibling;
+        } else {
+            // It is the span inside the target
+            var inputField = event.target.parentElement.previousElementSibling;
+        }
+
+        if (inputField.checked === true) {
+            setCodeCellVisibility(inputField, "visible");
+        } else {
+            setCodeCellVisibility(inputField, "hidden");
+        }
+    }
+
+
+    // Button constructor
+    const hideCodeButton = id => `<input class="hidebtn" type="checkbox" id="hidebtn${id}" data-id="${id}"><label title="Toggle cell" for="hidebtn${id}" class="plusminus"><span class="pm_h"></span><span class="pm_v"></span></label>`
+
+    var addHideButton = function () {
+        // If a hide button is already added, don't add another
+        if (document.querySelector('div.tag_hide_input input') !== null) {
+            return;
+        }
+
+        // Find the input cells and add a hide button
+        pageElements['inputCells'].forEach(function (inputCell) {
+            if (!inputCell.classList.contains("tag_hide_input")) {
+                // Skip the cell if it doesn't have a hidecode class
+                return;
+            }
+
+            const id = inputCell.getAttribute('id')
+
+            // Insert the button just inside the end of the next div
+            inputCell.querySelector('div.input').insertAdjacentHTML('beforeend', hideCodeButton(id))
+
+            // Set up the visibility toggle
+            hideLink = document.querySelector(`#${id} div.inner_cell + input + label`);
+            hideLink.addEventListener('click', toggleCodeCellVisibility)
+        });
+    }
+
+
+    // Initialize the hide buttos
+    var initHiddenCells = function () {
+        // Add hide buttons to the cells
+        addHideButton();
+
+        // Toggle the code cells that should be hidden
+        document.querySelectorAll('div.tag_hide_input input').forEach(function (item) {
+            setCodeCellVisibility(item, 'hidden');
+            item.checked = true;
+        })
+    }
+
+    initFunction(initHiddenCells);
+
+</script>
+
+  <!-- Printing the screen -->
+  <!-- Include nbinteract for interactive widgets -->
+<script src="https://printjs-4de6.kxcdn.com/print.min.js" async></script>
+<script>
+printContent = () => {
+    // MathJax displays a second version of any math for assistive devices etc.
+    // This prevents double-rendering in the PDF output.
+    var ignoreAssistList = [];
+    assistives = document.querySelectorAll('.MathJax_Display span.MJX_Assistive_MathML').forEach((element, index) => {
+        var thisId = 'MathJax-assistive-' + index.toString();
+        element.setAttribute('id', thisId);
+        ignoreAssistList.push(thisId)
+    });
+
+    // Print the actual content object
+    printJS({
+        printable: 'textbook_content',
+        type: 'html',
+        css: "/textbook-master/assets/css/styles.css",
+        scanStyles: false,
+        targetStyles: ["*"],
+        ignoreElements: ignoreAssistList
+    })
+};
+
+initPrint = () => {
+    document.querySelector('#interact-button-print').addEventListener('click', printContent)
+}
+
+initFunction(initPrint)
+</script>
+
+</head>
+
+  <body>
+    <!-- .js-show-sidebar shows sidebar by default -->
+    <div id="js-textbook" class="c-textbook js-show-sidebar">
+      
+
+
+
+<nav id="js-sidebar" class="c-textbook__sidebar">
+  <a href="https://delapuente.github.io/qiskit-textbook"><img src="/textbook-master/images/logo/logo.png" class="textbook_logo" id="sidebar-logo" data-turbolinks-permanent/></a>
+  <h2 class="c-sidebar__title">Qiskit Textbook</h2>
+  <ul class="c-sidebar__chapters">
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook-master/preface.html"
+        >
+          
+          Preface
+        </a>
+
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook-master/upcoming.html"
+        >
+          
+          Upcoming
+        </a>
+
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook-master/ch-prerequisites/python-and-jupyter-notebooks.html"
+        >
+          
+            0.
+          
+          Prerequisites
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-prerequisites/python-and-jupyter-notebooks.html"
+                >
+                  
+                    0.1
+                  
+                  Python and Jupyter Notebooks
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-prerequisites/qiskit.html"
+                >
+                  
+                    0.2
+                  
+                  Qiskit
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-prerequisites/linear_algebra.html"
+                >
+                  
+                    0.3
+                  
+                  Linear Algebra
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry c-sidebar__entry--active"
+          href="/textbook-master/ch-states/introduction.html"
+        >
+          
+            1.
+          
+          Quantum States and Qubits
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry c-sidebar__entry--active"
+                  href="/textbook-master/ch-states/introduction.html"
+                >
+                  
+                    1.1
+                  
+                  Introduction
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-states/atoms-computation.html"
+                >
+                  
+                    1.2
+                  
+                  The Atoms of Computation
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-states/unique-properties-qubits.html"
+                >
+                  
+                    1.3
+                  
+                  The Unique Properties of Qubits
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-states/writing-down-qubit-states.html"
+                >
+                  
+                    1.4
+                  
+                  Writing Down Qubit States
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-states/pauli-matrices-bloch-sphere.html"
+                >
+                  
+                    1.5
+                  
+                  Pauli Matrices and the Bloch Sphere
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-states/states-many-qubits.html"
+                >
+                  
+                    1.6
+                  
+                  States for Many Qubits
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook-master/ch-gates/introduction.html"
+        >
+          
+            2.
+          
+          Single Qubits and Multi-Qubits gates
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-gates/introduction.html"
+                >
+                  
+                    2.1
+                  
+                  Introduction
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-gates/quantum-gates.html"
+                >
+                  
+                    2.2
+                  
+                  Quantum Gates
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-gates/fun-matrices.html"
+                >
+                  
+                    2.3
+                  
+                  Fun with Matrices
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-gates/standard-gate-set.html"
+                >
+                  
+                    2.4
+                  
+                  The Standard Gate Set
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-gates/proving-universality.html"
+                >
+                  
+                    2.5
+                  
+                  Proving Universality
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-gates/basic-circuit-identities.html"
+                >
+                  
+                    2.6
+                  
+                  Basic Circuit Identities
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook-master/ch-ex/ex1.html"
+        >
+          
+          Problems
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-ex/ex1.html"
+                >
+                  
+                  Set 1. Classical Logic Gates with Quantum Circuits
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-ex/ex2.html"
+                >
+                  
+                  Set 2. Basic Synthesis of Single-Qubit Gates
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-ex/ex3.html"
+                >
+                  
+                  Set 3. Building the Best AND Gate
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook-master/ch-algorithms/teleportation.html"
+        >
+          
+            3.
+          
+          Quantum Algorithms
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-algorithms/teleportation.html"
+                >
+                  
+                    3.1
+                  
+                  Quantum Teleportation
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-algorithms/deutsch-josza.html"
+                >
+                  
+                    3.2
+                  
+                  Deutsch-Josza Algorithm
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-algorithms/bernstein-vazirani.html"
+                >
+                  
+                    3.3
+                  
+                  Bernstein-Vazirani Algorithm
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-algorithms/simon.html"
+                >
+                  
+                    3.4
+                  
+                  Simon's Algorithm
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-algorithms/quantum-fourier-transform.html"
+                >
+                  
+                    3.5
+                  
+                  Quantum Fourier Transform
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-algorithms/quantum-phase-estimation.html"
+                >
+                  
+                    3.6
+                  
+                  Quantum Phase Estimation
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-algorithms/grover.html"
+                >
+                  
+                    3.7
+                  
+                  Grover's Algorithm
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook-master/ch-applications/vqe-molecules.html"
+        >
+          
+            4.
+          
+          Quantum Algorithms for Applications
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-applications/vqe-molecules.html"
+                >
+                  
+                    4.1
+                  
+                  Simulating Molecules using VQE
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-applications/qaoa.html"
+                >
+                  
+                    4.2
+                  
+                  Solving combinatorial optimization problems using QAOA
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-applications/satisfiability-grover.html"
+                >
+                  
+                    4.3
+                  
+                  Solving Satisfiability Problems using Grover's Algorithm
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook-master/ch-quantum-hardware/calibrating-qubits-openpulse.html"
+        >
+          
+            5.
+          
+          Investigating Quantum Hardware Using Qiskit
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-quantum-hardware/calibrating-qubits-openpulse.html"
+                >
+                  
+                    5.1
+                  
+                  Calibrating Qubits with OpenPulse
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-quantum-hardware/error-correction-repetition-code.html"
+                >
+                  
+                    5.2
+                  
+                  Introduction to Quantum Error Correction using Repetition Codes
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-quantum-hardware/measurement-error-mitigation.html"
+                >
+                  
+                    5.3
+                  
+                  Measurement Error Mitigation
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-quantum-hardware/randomized-benchmarking.html"
+                >
+                  
+                    5.4
+                  
+                  Randomized Benchmarking
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-quantum-hardware/measuring-quantum-volume.html"
+                >
+                  
+                    5.5
+                  
+                  Measuring Quantum Volume
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/textbook-master/ch-paper-implementations/vqls.html"
+        >
+          
+            6.
+          
+          Implementations of Recent Quantum Algorithms
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/textbook-master/ch-paper-implementations/vqls.html"
+                >
+                  
+                    6.1
+                  
+                  Variational Quantum Linear Solver
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+  </ul>
+  <p class="sidebar_footer">Powered by <a href="https://github.com/jupyter/jupyter-book">Jupyter Book</a></p>
+</nav>
+
+      
+      <div class="c-topbar" id="top-navbar">
+  <!-- We show the sidebar by default so we use .is-active -->
+  <div class="c-topbar__buttons">
+    <button
+      id="js-sidebar-toggle"
+      class="hamburger hamburger--arrowalt is-active"
+    >
+      <span class="hamburger-box">
+        <span class="hamburger-inner"></span>
+      </span>
+    </button>
+    <div class="buttons">
+<div class="download-buttons-dropdown">
+    <button id="dropdown-button-trigger" class="interact-button"><i class="fa fa-download"></i></button>
+    <div class="download-buttons">
+        <a href="/textbook-master/content/ch-states/introduction.ipynb" download>
+        <button id="interact-button-download" class="interact-button">ORIG</button>
+        </a>
+        
+        <a id="interact-button-print"><button id="interact-button-download" class="interact-button">PDF</button></a>
+    </div>
+</div>
+
+  
+  
+  
+  
+
+
+</div>
+
+  </div>
+  <!-- Empty sidebar placeholder that we'll auto-fill with javascript -->
+  <aside class="sidebar__right">
+    <header><h4 class="nav__title"><i class="fa fa-list"></i>   On this page</h4></header>
+    <nav class="onthispage">
+    </nav>
+  </aside>
+  <a href="/textbook-master/search.html" class="topbar-right-button" id="search-button"><i class="fa fa-search"></i></a>
+</div>
+
+      <main class="c-textbook__page" tabindex="-1">
+        <div class="c-textbook__content" id="textbook_content">
+              <main class="jupyter-page">
+    <div id="page-info"></div>
+    <div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Introduction">Introduction<a class="anchor-link" href="#Introduction"> </a></h1>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If you think quantum mechanics sounds challenging, you are not alone. All of our intuitions are based on day-to-day experiences, and so are better at understanding the behavior of balls and bananas than atoms or electrons. Though quantum objects can seem random and chaotic at first, they just follow a different set of rules. Once we know what those rules are, we can use them to create new and powerful technology. Quantum computing will be the most revolutionary example of this.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="https://s3.us-south.cloud-object-storage.appdomain.cloud/strapi/b37a8ea62054452f83a2c051e7de12efatoms10.png" width="600"/></p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>To get you started on your journey towards quantum computing, let's test what you already know. Which of the following is the correct description of a <em>bit</em>?</p>
+<ul>
+<li>A blade used by a carpenter.</li>
+<li>The smallest unit of information: either a <code>0</code> or a <code>1</code>.</li>
+<li>Something you put in a horse's mouth.</li>
+</ul>
+<p>Actually, they are all correct: it's a very multi-purpose word! But if you chose the second one, it shows that you are already thinking along the right lines. The idea that information can be stored and processed as a series of <code>0</code>s and <code>1</code>s is quite a big conceptual hurdle, but it's something most people today know without even thinking about it. Taking this as a starting point, we can start to imagine bits that obey the rules of quantum mechanics. These quantum bits, or <em>qubits</em>, will then allow us to process information in new and different ways.</p>
+<p>The first few sections in this chapter are intended for the broadest possible audience. You won't see any math that you didn't learn before you were age 10. We'll look at how bits work in standard computers, and then start to explore how qubits can allow us to do things in a different way. After reading this, you should already be able to start thinking about interesting things to try out with qubits.</p>
+<p>We'll start diving deeper into the world of qubits. For this, we'll need some way of keeping track of what they are doing when we apply gates. The most powerful way to do this is to use the mathematical language of vectors and matrices.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="https://s3.us-south.cloud-object-storage.appdomain.cloud/strapi/d382d3105b154856bcb3a99656954ad2bloch.png" width="500"/></p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This chapter will be most effective for readers who are already familiar with vectors and matrices. Those who aren't familiar will likely be fine too, though it might be useful to consult our <a href="../ch-prerequisites/linear_algebra.html">Introduction to Linear Algebra for Quantum Computing</a> from time to time.</p>
+<p>Since we will be using Qiskit, our Python-based framework for quantum computing, it would also be useful to know the basics of Python. Those who need a primer can consult the <a href="../ch-prerequisites/python-and-jupyter-notebooks.html">Introduction to Python and Jupyter notebooks</a>.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+ 
+
+
+    </main>
+    
+        </div>
+        <nav class="c-page__nav">
+  
+    
+    <a id="js-page__nav__prev" class="c-page__nav__prev" href="/textbook-master/ch-prerequisites/linear_algebra.html">
+      〈 <span class="u-margin-right-tiny"></span> 
+    </a>
+  
+
+  
+    
+    <a id="js-page__nav__next" class="c-page__nav__next" href="/textbook-master/ch-states/introduction.html">
+       <span class="u-margin-right-tiny"></span> 〉
+    </a>
+  
+</nav>
+
+        <footer>
+  <p class="footer">This page was created by <a href="https://github.com/jupyter/jupyter-book/graphs/contributors">The Jupyter Book Community</a></p>
+</footer>
+
+      </main>
+    </div>
+  </body>
+</html>
