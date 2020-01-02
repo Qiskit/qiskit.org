@@ -20,9 +20,9 @@
           </h2>
           <ul>
             <li>
-              <nuxt-link class="footer-column__link" to="/textbook">
+              <a class="footer-column__link" href="/textbook">
                 Textbook
-              </nuxt-link>
+              </a>
             </li>
             <li>
               <a class="footer-column__link" href="https://www.youtube.com/playlist?list=PLOFEBzvs-Vvp2xg9-POLJhQwtVktlYGbY" target="_blank" rel="noopener">Coding With Qiskit</a>

@@ -17,8 +17,7 @@
           v-if="to"
           :to="to"
           @click="segmentAction && $trackClickEvent({
-            action: segmentAction,
-            objectType: 'Button'
+            action: segmentAction
           })"
         >
           Get Started!
@@ -27,8 +26,7 @@
           v-if="sources"
           :to="sources"
           @click="segmentAction && $trackClickEvent({
-            action: segmentAction,
-            objectType: 'Button'
+            action: segmentAction
           })"
         >
           <div class="social-network">
