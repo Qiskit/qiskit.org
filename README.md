@@ -66,10 +66,15 @@ A **pre-rendering SPA** is a single page application that generates a static mar
 
 **[Nuxt.js](https://nuxtjs.org/)** is the biggest framework on top of **[Vue.js](https://vuejs.org/)** to generate *universal* SPAs. Universal or "isomorphic" apps can be pre-rendering or SSR. Since so far we don't need server functions, our website it's just pre-rendering.
 
+We create and run unit tests using [Jest](https://jestjs.io/), ensure avoiding syntax errors using [ESLint](https://eslint.org/) and automate all these previous tools and deployment using [Trevis](https://travis-ci.org/).
+
 With this technology we want to achieve:
 - Use a component based framework like Vue that allow us to reuse part of the UI code in different parts of the application.
 - Fast initial page load.
 - Index content on Google.
+- Test JS unit functions.
+- Avoid syntax errors.
+- Continuous integration pipeline.
 
 ## 🚀 Get Up and Running
 
@@ -145,7 +150,7 @@ Build static version, output will be at a new folder called `dist`.
   npm run build
 ```
 
-Run the linter checker to find possible typos in the code. We use [ESLint](https://eslint.org/)
+Run the linter checker to find possible typos in the code. We use [ESLint](https://eslint.org/).
 ```shell
   npm run lint
 ```
