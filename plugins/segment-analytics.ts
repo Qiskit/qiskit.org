@@ -3,24 +3,16 @@ import Vue from 'vue'
 interface AnalyticsContext {
   bluemixAnalytics?: any
   digitalData?: any
-  location: Pick<Location, 'href' | 'pathname'>
 }
 
 interface ClickEventParams {
   action: string
-  objectType: string
-  milestoneName?: string
 }
 
-interface CustomEvent {
-  milestoneName?: any
+interface CtaEvent {
+  CTA: string
   productTitle: string
-  category: string,
-  url: string,
-  path: string,
-  action: string,
-  objectType: string,
-  successFlag: boolean
+  category: string
 }
 
 declare global {
@@ -28,27 +20,21 @@ declare global {
 }
 
 function trackClickEvent (context: AnalyticsContext, params: ClickEventParams) {
-  const { action, objectType, milestoneName } = params
-  const { bluemixAnalytics, digitalData, location } = context
+  const { action } = params
+  const { bluemixAnalytics, digitalData } = context
 
   if (!bluemixAnalytics || !digitalData) { return }
 
   const productTitle = getOrFailProductTitle(digitalData)
   const category = getOrFailCategory(digitalData)
 
-  const segmentEvent: CustomEvent = {
+  const cta: CtaEvent = {
     productTitle,
     category,
-    url: location.href,
-    path: location.pathname,
-    action: `${location.href} - Button Clicked: ${action}`,
-    objectType,
-    successFlag: true
+    CTA: action
   }
 
-  if (milestoneName) { segmentEvent.milestoneName = milestoneName }
-
-  bluemixAnalytics.trackEvent('Custom Event', segmentEvent)
+  bluemixAnalytics.trackEvent('CTA Clicked', cta)
 }
 
 function getOrFailProductTitle (digitalData: any): string {
@@ -82,8 +68,9 @@ declare module 'vue/types/vue' {
   }
 }
 
-Vue.prototype.$trackClickEvent = (params: ClickEventParams) => {
+Vue.prototype.$trackClickEvent = async (params: ClickEventParams) => {
   try {
+    await window._analyticsReady
     trackClickEvent(window, params)
   } catch (ex) {
     console.warn('Error trying to track a click event:', ex)

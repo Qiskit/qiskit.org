@@ -23,8 +23,7 @@
             rel="noopener"
             target="_blank"
             @click="$trackClickEvent({
-              action: 'Link to Access IBMQ Systems',
-              objectType: 'Link'
+              action: 'Link to Access IBMQ Systems'
             })"
           >
             Follow these steps
