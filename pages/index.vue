@@ -21,12 +21,12 @@
         </LegacyCta>
       </article>
       <article>
-        <h2>IBM Q Awards</h2>
-        <p>The IBM Q Awards are back again, now with two new categories. The Teach Me Qiskit Video Award and the Quantum Game Award are just two of the six categories open for students, educators and developers.</p>
+        <h2>Qiskit Camp 2020</h2>
+        <p>Your favorite flagship event is returning, now with an even larger and more diverse community. Learn more about Qiskit Camp 2020, collapsing March 10–13.</p>
         <LegacyCta
-          to="https://ibmqawards.com/"
+          to="https://medium.com/qiskit/qiskit-camp-2020-coming-next-march-7b8c39e5d42c"
           @click="$trackClickEvent({
-            action: 'IBM Q Awards'
+            action: 'Qiskit Camp 2020'
           })"
         >
           Learn more
