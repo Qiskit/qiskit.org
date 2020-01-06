@@ -63,30 +63,42 @@ const ORDERED_QISKIT_ELEMENTS: Array<NavLink> = [
   QISKIT_ELEMENTS.ibmQAccount
 ]
 
-const SOCIAL_MEDIA: LabeledLinks = {
+const SOCIAL_MEDIA: LabeledLinksWithAttributes = {
   github: {
     label: 'GitHub',
-    url: 'https://github.com/Qiskit'
+    url: 'https://github.com/Qiskit',
+    target: '_blank',
+    rel: 'noopener'
   },
   slack: {
     label: 'Slack',
-    url: 'https://qiskit.slack.com/'
+    url: 'https://qiskit.slack.com/',
+    target: '_blank',
+    rel: 'noopener'
   },
   twitter: {
     label: 'Twitter',
-    url: 'https://twitter.com/Qiskit'
+    url: 'https://twitter.com/Qiskit',
+    target: '_blank',
+    rel: 'noopener'
   },
   medium: {
     label: 'Medium',
-    url: 'https://medium.com/Qiskit'
+    url: 'https://medium.com/Qiskit',
+    target: '_blank',
+    rel: 'noopener'
   },
   youtube: {
     label: 'YouTube',
-    url: 'https://www.youtube.com/Qiskit'
+    url: 'https://www.youtube.com/Qiskit',
+    target: '_blank',
+    rel: 'noopener'
   },
   stack: {
     label: 'Stack Exchange',
-    url: 'https://quantumcomputing.stackexchange.com/questions/tagged/qiskit'
+    url: 'https://quantumcomputing.stackexchange.com/questions/tagged/qiskit',
+    target: '_blank',
+    rel: 'noopener'
   }
 }
 
