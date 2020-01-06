@@ -145,11 +145,23 @@ const ORDERED_QISKIT_EDUCATION: Array<NavLinkWithAttributes> = [
   QISKIT_EDUCATION.hostEvent
 ]
 
+const QISKIT_ADVOCATES: LabeledLinks = {
+  advocates: {
+    label: 'Become an Advocate',
+    url: '/advocates#become-an-advocate'
+  }
+}
+
+const ORDERED_QISKIT_ADVOCATES: Array<NavLink> = [
+  QISKIT_ADVOCATES.advocates,
+]
+
 export {
   ORDERED_QISKIT_ELEMENTS,
   ORDERED_SOCIAL_MEDIA,
   ORDERED_COMMUNITY_SUB_LINKS,
   ORDERED_QISKIT_EDUCATION,
+  ORDERED_QISKIT_ADVOCATES,
   NavLink,
   NavLinkWithAttributes
 }

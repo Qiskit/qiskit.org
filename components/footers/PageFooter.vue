@@ -29,9 +29,9 @@
             Qiskit Advocates
           </h2>
           <ul>
-            <li>
-              <nuxt-link class="footer-column__link" to="/advocates#become-an-advocate">
-                Become an Advocate
+            <li v-for="qiskitAdvocateElement in qiskitAdvocatesList" :key="qiskitAdvocateElement.label">
+              <nuxt-link class="footer-column__link" :to="qiskitAdvocateElement.url">
+                {{ qiskitAdvocateElement.label }}
               </nuxt-link>
             </li>
           </ul>
@@ -71,6 +71,7 @@ import {
   ORDERED_QISKIT_ELEMENTS,
   ORDERED_SOCIAL_MEDIA,
   ORDERED_QISKIT_EDUCATION,
+  ORDERED_QISKIT_ADVOCATES,
   NavLink,
   NavLinkWithAttributes
 } from '~/constants/menuLinks'
@@ -80,6 +81,7 @@ export default class extends Vue {
   qiskitElements: Array<NavLink> = ORDERED_QISKIT_ELEMENTS
   socialMediaList: Array<NavLink> = ORDERED_SOCIAL_MEDIA
   qiskitEducationList: Array<NavLinkWithAttributes> = ORDERED_QISKIT_EDUCATION
+  qiskitAdvocatesList: Array<NavLink> = ORDERED_QISKIT_ADVOCATES
 }
 </script>
 
