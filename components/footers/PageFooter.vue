@@ -76,17 +76,6 @@ export default class extends Vue {
   font-size: 0.9rem;
   color: var(--primary-color-lightmost);
 
-  ul {
-    list-style: none;
-    margin-top: 1.5rem;
-  }
-
-  li {
-    margin-top: 0.5rem;
-    display: inline-block;
-    width: 100%;
-  }
-
   &--framed {
     @include framed();
   }
@@ -113,17 +102,6 @@ export default class extends Vue {
       @include mq($until: desktop) {
         margin-top: 0;
       }
-    }
-  }
-
-  &__link {
-    color: inherit;
-    text-decoration: none;
-    display: inline-block;
-    width: 100%;
-
-    &:hover {
-      color: var(--body-color-light);
     }
   }
 
