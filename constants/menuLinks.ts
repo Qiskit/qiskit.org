@@ -156,12 +156,24 @@ const ORDERED_QISKIT_ADVOCATES: Array<NavLink> = [
   QISKIT_ADVOCATES.advocates,
 ]
 
+const QISKIT_EXPERIMENTS: LabeledLinks = {
+  experiments: {
+    label: 'Browse the experiments',
+    url: '/experiments#browse-the-experiments'
+  }
+}
+
+const ORDERED_QISKIT_EXPERIMENTS: Array<NavLink> = [
+  QISKIT_EXPERIMENTS.experiments,
+]
+
 export {
   ORDERED_QISKIT_ELEMENTS,
   ORDERED_SOCIAL_MEDIA,
   ORDERED_COMMUNITY_SUB_LINKS,
   ORDERED_QISKIT_EDUCATION,
   ORDERED_QISKIT_ADVOCATES,
+  ORDERED_QISKIT_EXPERIMENTS,
   NavLink,
   NavLinkWithAttributes
 }

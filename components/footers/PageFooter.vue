@@ -39,9 +39,9 @@
             Qiskit Experiments
           </h2>
           <ul>
-            <li>
-              <nuxt-link class="footer-column__link" to="/experiments#browse-the-experiments">
-                Browse the experiments
+            <li v-for="qiskitExperimentElement in qiskitExperimentsList" :key="qiskitExperimentElement.label">
+              <nuxt-link class="footer-column__link" :to="qiskitExperimentElement.url">
+                {{ qiskitExperimentElement.label }}
               </nuxt-link>
             </li>
           </ul>
@@ -72,6 +72,7 @@ import {
   ORDERED_SOCIAL_MEDIA,
   ORDERED_QISKIT_EDUCATION,
   ORDERED_QISKIT_ADVOCATES,
+  ORDERED_QISKIT_EXPERIMENTS,
   NavLink,
   NavLinkWithAttributes
 } from '~/constants/menuLinks'
@@ -82,6 +83,7 @@ export default class extends Vue {
   socialMediaList: Array<NavLink> = ORDERED_SOCIAL_MEDIA
   qiskitEducationList: Array<NavLinkWithAttributes> = ORDERED_QISKIT_EDUCATION
   qiskitAdvocatesList: Array<NavLink> = ORDERED_QISKIT_ADVOCATES
+  qiskitExperimentsList: Array<NavLink> = ORDERED_QISKIT_EXPERIMENTS
 }
 </script>
 
