@@ -47,14 +47,14 @@
 
 ## What’s In This Document
 
-- [Live](#-live)
+- [Live](#%EF%B8%8F-live)
 - [Technology Used](#-technology-used)
 - [Get Up and Running](#-get-up-and-running)
 - [Folder Structure](#-folder-structure)
-- [How to Contribute](#-how-to-contribute)
-- [Available Scripts](#available-scripts)
-- [Open Backlog](#open-backlog)
-- [Maintainers](#maintainers)
+- [How to Contribute](#%EF%B8%8F-how-to-contribute)
+- [Available Scripts](#-available-scripts)
+- [Open Backlog](#-open-backlog)
+- [Maintainers](#-maintainers)
 
 ## ⚡️ Live
 [Go to Qiskit.org's website](https://qiskit.org/)
