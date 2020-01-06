@@ -1,6 +1,6 @@
 <p align="center">
-  <a href="https://qiskit.org/" style="background-color: #242a2e; display: block; padding: 20px;">
-    <img alt="Qiskit" src="https://qiskit.org/images/qiskit-logo.svg" width="70" />
+  <a href="https://qiskit.org/">
+    <img alt="Qiskit" src="https://qiskit.org/images/qiskit-logo.png" width="70" />
   </a>
 </p>
 <h1 align="center">
