@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://qiskit.org/">
+  <a href="https://qiskit.org/" style="background-color: #242a2e; display: block; padding: 20px;">
     <img alt="Qiskit" src="https://qiskit.org/images/qiskit-logo.svg" width="70" />
   </a>
 </p>
@@ -57,11 +57,11 @@
 - [Maintainers](#maintainers)
 
 ## ⚡️ Live
-[Check it live](https://qiskit.org/)
+[Go to Qiskit.org's website](https://qiskit.org/)
 
 ## 💻 Technology Used
 
-Qiskit.org is a pre-rendering SPA made using [Nuxt.js](https://nuxtjs.org/).
+Qiskit.org is a pre-rendering SPA using [Nuxt.js](https://nuxtjs.org/).
 
 A **pre-rendering SPA** is a single page application that generates a static markup (HTML) at build time. The user, when entering the web, receives HTML (as if it were a static web) but in the meantime, JS files belonging to the SPA are loaded “hydrating” the web until it's completely dynamic.
 
@@ -157,7 +157,7 @@ Run a local server enabling inspector agent:
   npm run dev-debug
 ```
 
-Run Jest tests:
+Run unit tests made with [Jest](https://jestjs.io/):
 ```shell
   npm run test
 ```
@@ -172,7 +172,7 @@ Run a local server on the website's production built. Make sure you ran `npm run
   npm run start
 ```
 
-Run the linter checker to find possible typos in the code. We use [ESLint](https://eslint.org/):
+Find syntax errors. We use [ESLint](https://eslint.org/):
 ```shell
   npm run lint
 ```
@@ -193,6 +193,6 @@ by alphabetical order:
 <td align="center"><a href="https://github.com/CatherineKlauss "><img src="https://avatars1.githubusercontent.com/u/50955024?s=460&v=4" width="120px;" alt="Catherine Klauss"/><br /><sub><b>Catherine Klauss</b></sub></a><br /><a href="https://github.com/qiskit/qiskit.org/issues?q=author%3ACatherineKlauss" title="Bug reports">🐛</a><a href="https://join.slack.com/t/qiskit/shared_invite/enQtODQ2NTIyOTgwMTQ3LTI0NzM2NzkzZjJhNDgzZjY5MTQzNDY3MGNiZGQzNTNkZTE4Nzg1MjMwMmFjY2UwZTgyNDlmYWQwYmZjMjE1ZTM" title="Answering Questions on Slack">💬</a></td>
 <td align="center"><a href="https://github.com/lerongil"><img src="https://avatars3.githubusercontent.com/u/9096989?s=460&v=4" width="120px;" alt="Leron Gil"/><br /><sub><b>Leron Gil</b></sub></a><br /><a href="https://github.com/qiskit/qiskit.org/issues?q=author%3Alerongil" title="Bug reports">🐛</a><a href="https://join.slack.com/t/qiskit/shared_invite/enQtODQ2NTIyOTgwMTQ3LTI0NzM2NzkzZjJhNDgzZjY5MTQzNDY3MGNiZGQzNTNkZTE4Nzg1MjMwMmFjY2UwZTgyNDlmYWQwYmZjMjE1ZTM" title="Answering Questions on Slack">💬</a></td>
 <td align="center"><a href="https://github.com/marinaaisa"><img src="https://avatars3.githubusercontent.com/u/8567677?s=460&v=4" width="120px;" alt="Marina Aisa"/><br /><sub><b>Marina Aísa</b></sub></a><br /><a href="https://github.com/qiskit/qiskit.org/issues?q=author%3Amarinaaisa" title="Bug reports">🐛</a><a href="https://github.com/qiskit/qiskit.org/commits?author=marinaaisa" title="Code">💻</a><span aria-label="Design">🎨</span><a href="https://join.slack.com/t/qiskit/shared_invite/enQtODQ2NTIyOTgwMTQ3LTI0NzM2NzkzZjJhNDgzZjY5MTQzNDY3MGNiZGQzNTNkZTE4Nzg1MjMwMmFjY2UwZTgyNDlmYWQwYmZjMjE1ZTM" title="Answering Questions on Slack">💬</a></td>
-<td align="center"><a href="https://github.com/delapuente"><img src="https://avatars1.githubusercontent.com/u/757942?s=460&v=4" width="120px;" alt="Salvador de la Puente"/><br /><sub><b>Salvador de la Puente</b></sub></a><br /><a href="https://github.com/qiskit/qiskit.org/issues?q=author%3Adelapuente" title="Bug reports">🐛</a><a href="https://github.com/qiskit/qiskit.org/commits?author=delapuente" title="Code">💻</a><a href="https://join.slack.com/t/qiskit/shared_invite/enQtODQ2NTIyOTgwMTQ3LTI0NzM2NzkzZjJhNDgzZjY5MTQzNDY3MGNiZGQzNTNkZTE4Nzg1MjMwMmFjY2UwZTgyNDlmYWQwYmZjMjE1ZTM" title="Answering Questions on Slack">💬</a></td></tr>
-<tr><td align="center"><a href="https://github.com/y4izus"><img src="https://avatars2.githubusercontent.com/u/17231966?s=460&v=4" width="120px;" alt="Yaiza García"/><br /><sub><b>Yaiza García</b></sub></a><br /><a href="https://github.com/qiskit/qiskit.org/issues?q=author%3Ay4izus" title="Bug reports">🐛</a><a href="https://github.com/qiskit/qiskit.org/commits?author=y4izus" title="Code">💻</a><a href="https://join.slack.com/t/qiskit/shared_invite/enQtODQ2NTIyOTgwMTQ3LTI0NzM2NzkzZjJhNDgzZjY5MTQzNDY3MGNiZGQzNTNkZTE4Nzg1MjMwMmFjY2UwZTgyNDlmYWQwYmZjMjE1ZTM" title="Answering Questions on Slack">💬</a></td>
+<td align="center"><a href="https://github.com/delapuente"><img src="https://avatars1.githubusercontent.com/u/757942?s=460&v=4" width="120px;" alt="Salvador de la Puente"/><br /><sub><b>Salvador de la Puente</b></sub></a><br /><a href="https://github.com/qiskit/qiskit.org/issues?q=author%3Adelapuente" title="Bug reports">🐛</a><a href="https://github.com/qiskit/qiskit.org/commits?author=delapuente" title="Code">💻</a><a href="https://join.slack.com/t/qiskit/shared_invite/enQtODQ2NTIyOTgwMTQ3LTI0NzM2NzkzZjJhNDgzZjY5MTQzNDY3MGNiZGQzNTNkZTE4Nzg1MjMwMmFjY2UwZTgyNDlmYWQwYmZjMjE1ZTM" title="Answering Questions on Slack">💬</a></td>
+<td align="center"><a href="https://github.com/y4izus"><img src="https://avatars2.githubusercontent.com/u/17231966?s=460&v=4" width="120px;" alt="Yaiza García"/><br /><sub><b>Yaiza García</b></sub></a><br /><a href="https://github.com/qiskit/qiskit.org/issues?q=author%3Ay4izus" title="Bug reports">🐛</a><a href="https://github.com/qiskit/qiskit.org/commits?author=y4izus" title="Code">💻</a><a href="https://join.slack.com/t/qiskit/shared_invite/enQtODQ2NTIyOTgwMTQ3LTI0NzM2NzkzZjJhNDgzZjY5MTQzNDY3MGNiZGQzNTNkZTE4Nzg1MjMwMmFjY2UwZTgyNDlmYWQwYmZjMjE1ZTM" title="Answering Questions on Slack">💬</a></td>
 </tr></table>

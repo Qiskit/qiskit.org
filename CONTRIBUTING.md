@@ -45,7 +45,7 @@ Run a local server on the website's production built. Make sure you ran `npm run
   npm run start
 ```
 
-Run the linter checker to find possible typos in the code. We use [ESLint](https://eslint.org/):
+Find syntax errors. We use [ESLint](https://eslint.org/):
 ```shell
   npm run lint
 ```
