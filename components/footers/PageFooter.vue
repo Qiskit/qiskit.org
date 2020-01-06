@@ -6,13 +6,7 @@
           <h2 class="footer-column__title">
             Qiskit Elements
           </h2>
-          <ul>
-            <li v-for="qiskitElement in qiskitElements" :key="qiskitElement.label">
-              <nuxt-link class="footer-column__link" :to="qiskitElement.url">
-                {{ qiskitElement.label }}
-              </nuxt-link>
-            </li>
-          </ul>
+          <NuxtLinkList :elements="qiskitElements" />
         </section>
         <section class="footer-column">
           <h2 class="footer-column__title">
@@ -28,23 +22,11 @@
           <h2 class="footer-column__title">
             Qiskit Advocates
           </h2>
-          <ul>
-            <li v-for="qiskitAdvocateElement in qiskitAdvocatesList" :key="qiskitAdvocateElement.label">
-              <nuxt-link class="footer-column__link" :to="qiskitAdvocateElement.url">
-                {{ qiskitAdvocateElement.label }}
-              </nuxt-link>
-            </li>
-          </ul>
+          <NuxtLinkList :elements="qiskitAdvocatesList" />
           <h2 class="footer-column__title">
             Qiskit Experiments
           </h2>
-          <ul>
-            <li v-for="qiskitExperimentElement in qiskitExperimentsList" :key="qiskitExperimentElement.label">
-              <nuxt-link class="footer-column__link" :to="qiskitExperimentElement.url">
-                {{ qiskitExperimentElement.label }}
-              </nuxt-link>
-            </li>
-          </ul>
+          <NuxtLinkList :elements="qiskitExperimentsList" />
         </section>
         <section class="footer-column">
           <h2 class="footer-column__title">
@@ -66,6 +48,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
+import NuxtLinkList from '~/components/footers/NuxtLinkList.vue'
 
 import {
   ORDERED_QISKIT_ELEMENTS,
@@ -77,7 +60,11 @@ import {
   NavLinkWithAttributes
 } from '~/constants/menuLinks'
 
-@Component
+@Component({
+  components: {
+    NuxtLinkList
+  }
+})
 export default class extends Vue {
   qiskitElements: Array<NavLink> = ORDERED_QISKIT_ELEMENTS
   socialMediaList: Array<NavLink> = ORDERED_SOCIAL_MEDIA
