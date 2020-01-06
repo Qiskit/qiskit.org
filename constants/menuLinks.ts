@@ -12,6 +12,18 @@ type LabeledLinks = {
   [key: string]: NavLink
 }
 
+type NavLinkWithAttributes = {
+  label: string
+  url: string
+  segment?: SegmentData
+  target?: string
+  rel?: string
+}
+
+type LabeledLinksWithAttributes = {
+  [key: string]: NavLinkWithAttributes
+}
+
 type QiskitElements = {
   terra: NavLink,
   aer: NavLink,
@@ -108,9 +120,36 @@ const ORDERED_COMMUNITY_SUB_LINKS: Array<NavLink> = [
   COMMUNITY_SUB_LINKS.experiments
 ]
 
+const QISKIT_EDUCATION: LabeledLinksWithAttributes = {
+  textbook: {
+    label: 'Textbook',
+    url: '/textbook',
+  },
+  youtube: {
+    label: 'Coding With Qiskit',
+    url: 'https://www.youtube.com/playlist?list=PLOFEBzvs-Vvp2xg9-POLJhQwtVktlYGbY',
+    target: '_blank',
+    rel: 'noopener'
+  },
+  hostEvent: {
+    label: 'Host an Event',
+    url: 'mailto:hello@qiskit.camp',
+    target: '_blank',
+    rel: 'noopener'
+  }
+}
+
+const ORDERED_QISKIT_EDUCATION: Array<NavLinkWithAttributes> = [
+  QISKIT_EDUCATION.textbook,
+  QISKIT_EDUCATION.youtube,
+  QISKIT_EDUCATION.hostEvent
+]
+
 export {
   ORDERED_QISKIT_ELEMENTS,
   ORDERED_SOCIAL_MEDIA,
   ORDERED_COMMUNITY_SUB_LINKS,
-  NavLink
+  ORDERED_QISKIT_EDUCATION,
+  NavLink,
+  NavLinkWithAttributes
 }

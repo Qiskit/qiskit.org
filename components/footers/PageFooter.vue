@@ -19,16 +19,10 @@
             Qiskit for Educators
           </h2>
           <ul>
-            <li>
-              <a class="footer-column__link" href="/textbook">
-                Textbook
+            <li v-for="educationElement in qiskitEducationList" :key="educationElement.label">
+              <a class="footer-column__link" :href="educationElement.url" :target="educationElement.target || '_self'" :rel="educationElement.rel || ''">
+                {{ educationElement.label }}
               </a>
-            </li>
-            <li>
-              <a class="footer-column__link" href="https://www.youtube.com/playlist?list=PLOFEBzvs-Vvp2xg9-POLJhQwtVktlYGbY" target="_blank" rel="noopener">Coding With Qiskit</a>
-            </li>
-            <li>
-              <a class="footer-column__link" href="mailto:hello@qiskit.camp" target="_blank" rel="noopener">Host an Event</a>
             </li>
           </ul>
           <h2 class="footer-column__title">
@@ -76,13 +70,16 @@ import { Component } from 'vue-property-decorator'
 import {
   ORDERED_QISKIT_ELEMENTS,
   ORDERED_SOCIAL_MEDIA,
-  NavLink
+  ORDERED_QISKIT_EDUCATION,
+  NavLink,
+  NavLinkWithAttributes
 } from '~/constants/menuLinks'
 
 @Component
 export default class extends Vue {
   qiskitElements: Array<NavLink> = ORDERED_QISKIT_ELEMENTS
   socialMediaList: Array<NavLink> = ORDERED_SOCIAL_MEDIA
+  qiskitEducationList: Array<NavLinkWithAttributes> = ORDERED_QISKIT_EDUCATION
 }
 </script>
 
