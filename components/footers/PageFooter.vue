@@ -12,13 +12,7 @@
           <h2 class="footer-column__title">
             Qiskit for Educators
           </h2>
-          <ul>
-            <li v-for="educationElement in qiskitEducationList" :key="educationElement.label">
-              <a class="footer-column__link" :href="educationElement.url" :target="educationElement.target || '_self'" :rel="educationElement.rel || ''">
-                {{ educationElement.label }}
-              </a>
-            </li>
-          </ul>
+          <ATagLinkList :elements="qiskitEducationList" />
           <h2 class="footer-column__title">
             Qiskit Advocates
           </h2>
@@ -32,13 +26,7 @@
           <h2 class="footer-column__title">
             Social Media
           </h2>
-          <ul>
-            <li v-for="socialMedia in socialMediaList" :key="socialMedia.label">
-              <a class="footer-column__link" :href="socialMedia.url" target="_blank" rel="noopener">
-                {{ socialMedia.label }}
-              </a>
-            </li>
-          </ul>
+          <ATagLinkList :elements="socialMediaList" />
         </section>
       </div>
     </div>
@@ -49,6 +37,7 @@
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 import NuxtLinkList from '~/components/footers/NuxtLinkList.vue'
+import ATagLinkList from '~/components/footers/ATagLinkList.vue'
 
 import {
   ORDERED_QISKIT_ELEMENTS,
@@ -62,7 +51,8 @@ import {
 
 @Component({
   components: {
-    NuxtLinkList
+    NuxtLinkList,
+    ATagLinkList
   }
 })
 export default class extends Vue {
