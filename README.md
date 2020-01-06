@@ -48,17 +48,18 @@
 ## What’s In This Document
 
 - [Live](#-live)
-- [The Technology Behind](#-get-up-and-running)
-- [Get Up and Running](#-whats-inside?)
-- [What's Inside](#-migration-guides)
+- [Technology Used](#-technology-used)
+- [Get Up and Running](#-get-up-and-running)
+- [Folder Structure](#-folder-structure)
 - [How to Contribute](#-how-to-contribute)
-- [Other Important Commands](#memo-license)
-- [Roadmap](#memo-license)
+- [Available Scripts](#available-scripts)
+- [Open Backlog](#open-backlog)
+- [Maintainers](#maintainers)
 
 ## ⚡️ Live
 [Check it live](https://qiskit.org/)
 
-## The technology behind
+## 💻 Technology Used
 
 Qiskit.org is a pre-rendering SPA made using [Nuxt.js](https://nuxtjs.org/).
 
@@ -68,7 +69,7 @@ A **pre-rendering SPA** is a single page application that generates a static mar
 
 We create and run unit tests using [Jest](https://jestjs.io/), ensure avoiding syntax errors using [ESLint](https://eslint.org/) and automate all these previous tools and deployment using [Trevis](https://travis-ci.org/).
 
-With this technology we want to achieve:
+With this technology we want to **achieve**:
 - Use a component based framework like Vue that allow us to reuse part of the UI code in different parts of the application.
 - Fast initial page load.
 - Index content on Google.
@@ -81,23 +82,23 @@ With this technology we want to achieve:
 
 1. **Download this repository and go to its folder**
 
-  ```shell
-   git clone git@github.com:Qiskit/qiskit.org.git && cd qiskit.org
-   ```
+    ```shell
+    git clone git@github.com:Qiskit/qiskit.org.git && cd qiskit.org
+    ```
 
 2. **Install dependencies**
 
-   ```shell
-   npm install
-   ```
+    ```shell
+     npm install
+     ```
 
 3. **Run a local server with hot reload at [localhost:3000](localhost:3000)**
 
-   ```shell
-   npm run dev
-   ```
+    ```shell
+    npm run dev
+    ```
 
-## 🧐 What's inside?
+## 🧐 Folder Structure
 
     .
     ├── assets
@@ -115,28 +116,43 @@ With this technology we want to achieve:
     ├── tests
     ├── textbook
     ├── nuxt.config.js
-    ├── jest.config.js
-    ... other third-parties configuration files
+    ... other third-parties configuration files like ESLint, Jest or Travis
 
-2.  **`/assets`**: You will find the images and assets for the project. You can find more information at [Nuxt's assets directory documentation](https://nuxtjs.org/guide/assets/)
+1.  **`/assets`**: You will find the images and assets for the project. You can find more information at [Nuxt's assets directory documentation](https://nuxtjs.org/guide/assets/)
 
-3.  **`/components`**: Vue components for the project. You can find more information at [Nuxt's components directory documentation](https://nuxtjs.org/guide/directory-structure#the-components-directory)
+2.  **`/components`**: Vue components for the project. You can find more information at [Nuxt's components directory documentation](https://nuxtjs.org/guide/directory-structure#the-components-directory)
 
-4.  **`/contents`**: You will save your MD files here. They are divided by language and you will have to write the URL name of each of them at `blogsEn.js` and `blogsEs.js`.
+3.  **`/constants`**: Constants shared through the whole project.
 
-5.  **`/layouts`**: You can find information at [Nuxt's layout directory documentation](https://nuxtjs.org/guide/directory-structure#the-layouts-directory)
+4.  **`/content`**: You will save your MD files here. They are divided in folders by sections.
 
-7.  **`/pages`**: You can find information at [Nuxt's pages directory documentation](https://nuxtjs.org/guide/directory-structure#the-pages-directory)
+5.  **`/deploy`**: Deploy configuration.
 
-8.  **`/plugins`**: You can find information at [Nuxt's plugins directory documentation](https://nuxtjs.org/guide/directory-structure#the-plugins-directory)
+6.  **`/hooks`**: Hook functions shared through the whole project.
 
-9.  **`/statics`**: You can find information at [Nuxt's statics directory documentation](https://nuxtjs.org/guide/directory-structure#the-static-directory)
+7.  **`/layouts`**: You can find information at [Nuxt's layout directory documentation](https://nuxtjs.org/guide/directory-structure#the-layouts-directory)
 
-12. **`nuxt-config.js`**: This is the main configuration file for a Nuxt site. This is where you can specify information about your site (metadata) like the site title and description, which Nuxt plugins you’d like to include, etc. (Check out the [config docs](https://nuxtjs.org/guide/configuration) for more detail).
+8.  **`/mixins`**: Mixin functions shared through the whole project.
 
-## Other important commands to know
+9.  **`/pages`**: You can find information at [Nuxt's pages directory documentation](https://nuxtjs.org/guide/directory-structure#the-pages-directory)
 
-Run a local server with the development mode on and debug TypeScript errors
+10.  **`/plugins`**: You can find information at [Nuxt's plugins directory documentation](https://nuxtjs.org/guide/directory-structure#the-plugins-directory)
+
+11.  **`/statics`**: You can find information at [Nuxt's statics directory documentation](https://nuxtjs.org/guide/directory-structure#the-static-directory)
+
+12.  **`/tests`**: Unit tests made with Jest
+
+13.  **`/textbook`**: Redirect page for textbook
+
+14. **`nuxt-config.js`**: This is the main configuration file for a Nuxt site. You can find information at [Nuxt's config documentation](https://nuxtjs.org/guide/configuration)
+
+## ✏️ How to Contribute
+
+Contributions are always welcome, no matter how large or small. Before contributing, please read the [contributing guide](CONTRIBUTING.md) and [code of conduct](CODE_OF_CONDUCT.md).
+
+## 🛠 Available Scripts
+
+Run a local server enabling inspector agent:
 ```shell
   npm run dev-debug
 ```
@@ -145,16 +161,38 @@ Run Jest tests:
 ```shell
   npm run test
 ```
-Build static version, output will be at a new folder called `dist`.
+
+Build static version ready for production, output will generated inside a new folder called `dist`:
 ```shell
   npm run build
 ```
 
-Run the linter checker to find possible typos in the code. We use [ESLint](https://eslint.org/).
+Run a local server on the website's production built. Make sure you ran `npm run build` first:
+```shell
+  npm run start
+```
+
+Run the linter checker to find possible typos in the code. We use [ESLint](https://eslint.org/):
 ```shell
   npm run lint
 ```
-Run the linter autofixer. 
+
+Autofix linter:
 ```shell
   npm run fix-lint
 ```
+
+## 🗓 Open backlog
+
+You can see our backlog [here](https://github.com/Qiskit/qiskit.org/projects/2).
+
+## 👩‍💻 Maintainers
+
+by alphabetical order:
+<table><tr>
+<td align="center"><a href="https://github.com/CatherineKlauss "><img src="https://avatars1.githubusercontent.com/u/50955024?s=460&v=4" width="120px;" alt="Catherine Klauss"/><br /><sub><b>Catherine Klauss</b></sub></a><br /><a href="https://github.com/qiskit/qiskit.org/issues?q=author%3ACatherineKlauss" title="Bug reports">🐛</a><a href="https://join.slack.com/t/qiskit/shared_invite/enQtODQ2NTIyOTgwMTQ3LTI0NzM2NzkzZjJhNDgzZjY5MTQzNDY3MGNiZGQzNTNkZTE4Nzg1MjMwMmFjY2UwZTgyNDlmYWQwYmZjMjE1ZTM" title="Answering Questions on Slack">💬</a></td>
+<td align="center"><a href="https://github.com/lerongil"><img src="https://avatars3.githubusercontent.com/u/9096989?s=460&v=4" width="120px;" alt="Leron Gil"/><br /><sub><b>Leron Gil</b></sub></a><br /><a href="https://github.com/qiskit/qiskit.org/issues?q=author%3Alerongil" title="Bug reports">🐛</a><a href="https://join.slack.com/t/qiskit/shared_invite/enQtODQ2NTIyOTgwMTQ3LTI0NzM2NzkzZjJhNDgzZjY5MTQzNDY3MGNiZGQzNTNkZTE4Nzg1MjMwMmFjY2UwZTgyNDlmYWQwYmZjMjE1ZTM" title="Answering Questions on Slack">💬</a></td>
+<td align="center"><a href="https://github.com/marinaaisa"><img src="https://avatars3.githubusercontent.com/u/8567677?s=460&v=4" width="120px;" alt="Marina Aisa"/><br /><sub><b>Marina Aísa</b></sub></a><br /><a href="https://github.com/qiskit/qiskit.org/issues?q=author%3Amarinaaisa" title="Bug reports">🐛</a><a href="https://github.com/qiskit/qiskit.org/commits?author=marinaaisa" title="Code">💻</a><span aria-label="Design">🎨</span><a href="https://join.slack.com/t/qiskit/shared_invite/enQtODQ2NTIyOTgwMTQ3LTI0NzM2NzkzZjJhNDgzZjY5MTQzNDY3MGNiZGQzNTNkZTE4Nzg1MjMwMmFjY2UwZTgyNDlmYWQwYmZjMjE1ZTM" title="Answering Questions on Slack">💬</a></td>
+<td align="center"><a href="https://github.com/delapuente"><img src="https://avatars1.githubusercontent.com/u/757942?s=460&v=4" width="120px;" alt="Salvador de la Puente"/><br /><sub><b>Salvador de la Puente</b></sub></a><br /><a href="https://github.com/qiskit/qiskit.org/issues?q=author%3Adelapuente" title="Bug reports">🐛</a><a href="https://github.com/qiskit/qiskit.org/commits?author=delapuente" title="Code">💻</a><a href="https://join.slack.com/t/qiskit/shared_invite/enQtODQ2NTIyOTgwMTQ3LTI0NzM2NzkzZjJhNDgzZjY5MTQzNDY3MGNiZGQzNTNkZTE4Nzg1MjMwMmFjY2UwZTgyNDlmYWQwYmZjMjE1ZTM" title="Answering Questions on Slack">💬</a></td></tr>
+<tr><td align="center"><a href="https://github.com/y4izus"><img src="https://avatars2.githubusercontent.com/u/17231966?s=460&v=4" width="120px;" alt="Yaiza García"/><br /><sub><b>Yaiza García</b></sub></a><br /><a href="https://github.com/qiskit/qiskit.org/issues?q=author%3Ay4izus" title="Bug reports">🐛</a><a href="https://github.com/qiskit/qiskit.org/commits?author=y4izus" title="Code">💻</a><a href="https://join.slack.com/t/qiskit/shared_invite/enQtODQ2NTIyOTgwMTQ3LTI0NzM2NzkzZjJhNDgzZjY5MTQzNDY3MGNiZGQzNTNkZTE4Nzg1MjMwMmFjY2UwZTgyNDlmYWQwYmZjMjE1ZTM" title="Answering Questions on Slack">💬</a></td>
+</tr></table>
