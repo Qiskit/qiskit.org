@@ -75,7 +75,7 @@
               href="https://github.com/Qiskit"
               title="GitHub organization"
               target="_blank"
-              rel="noopener noreferrer"
+              rel="me noopener noreferrer"
               @click="$trackClickEvent({
                 action: 'Qiskit Community: GitHub'
               })"
@@ -101,7 +101,7 @@
               href="https://twitter.com/Qiskit"
               title="Twitter profile"
               target="_blank"
-              rel="noopener noreferrer"
+              rel="me noopener noreferrer"
               @click="$trackClickEvent({
                 action: 'Qiskit Community: Twitter'
               })"
@@ -114,7 +114,7 @@
               href="https://medium.com/Qiskit"
               title="Medium profile"
               target="_blank"
-              rel="noopener noreferrer"
+              rel="me noopener noreferrer"
               @click="$trackClickEvent({
                 action: 'Qiskit Community: Medium'
               })"
@@ -127,7 +127,7 @@
               href="https://www.youtube.com/Qiskit"
               title="YouTube channel"
               target="_blank"
-              rel="noopener noreferrer"
+              rel="me noopener noreferrer"
               @click="$trackClickEvent({
                 action: 'Qiskit Community: YouTube'
               })"

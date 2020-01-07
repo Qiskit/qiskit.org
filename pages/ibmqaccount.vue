@@ -20,7 +20,7 @@
             class="colored-link"
             href="https://qiskit.org/documentation/install.html#access-ibm-q-systems"
             title="Link"
-            rel="noopener noreferrer"
+            rel="me noopener noreferrer"
             target="_blank"
             @click="$trackClickEvent({
               action: 'Link to Access IBMQ Systems'

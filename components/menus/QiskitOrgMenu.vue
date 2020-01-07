@@ -55,7 +55,7 @@
               }"
               :href="link.url"
               target="_blank"
-              rel="noopener noreferrer"
+              rel="me noopener noreferrer"
               @click="link.segment && $trackClickEvent(link.segment)"
             >
               {{ link.label }}
@@ -97,7 +97,7 @@
             }"
             :href="link.url"
             target="_blank"
-            rel="noopener noreferrer"
+            rel="me noopener noreferrer"
             @click="link.segment && $trackClickEvent(link.segment)"
           >
             {{ link.label }}

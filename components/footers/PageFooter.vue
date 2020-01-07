@@ -58,7 +58,7 @@
           </h2>
           <ul>
             <li v-for="socialMedia in socialMediaList" :key="socialMedia.label">
-              <a class="footer-column__link" :href="socialMedia.url" target="_blank" rel="noopener noreferrer">
+              <a class="footer-column__link" :href="socialMedia.url" target="_blank" rel="me noopener noreferrer">
                 {{ socialMedia.label }}
               </a>
             </li>
