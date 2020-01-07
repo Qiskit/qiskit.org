@@ -1,5 +1,4 @@
 import Vue from 'vue'
-import QiskitPage from '~/components/qiskit/QiskitPage.vue'
 
 interface AnalyticsContext {
   _analytics?: any
@@ -66,26 +65,18 @@ function installAnalyticsOnce () {
  * Send a page visitation event to segment.
  * @param pageComponent the page component.
  */
-function trackPage (pageComponent: QiskitPage) {
-  if (!window.bluemixAnalytics || !window.bluemixAnalytics.pageEvent) { return }
-  if (!pageComponent.routeName) {
-    console.warn(
-      'Component',
-      pageComponent,
-      'is missing the \'routeName\' property, needed by analytics.')
-    return
-  }
+function trackPage (context: AnalyticsContext, routeName: string, title: string) {
+  const { bluemixAnalytics, digitalData } = context
 
-  // TODO: Consider getting these values from the `digitalData` global object
-  // when addressing:
-  // https://github.com/Qiskit/qiskit.org/issues/364
-  const category: string = 'Qiskit.org'
-  const routeName: string = pageComponent.routeName
+  if (!bluemixAnalytics || !digitalData) { return }
 
-  window.bluemixAnalytics.pageEvent(category, routeName, {
+  const category = getOrFailCategory(digitalData)
+  const productTitle = getOrFailProductTitle(digitalData)
+
+  bluemixAnalytics.pageEvent(category, routeName, {
     navigationType: 'pushState',
-    productTitle: 'IBM Q Experience',
-    title: pageComponent.$metaInfo.title
+    productTitle,
+    title
   })
 }
 
@@ -135,24 +126,21 @@ function assertCanGet<T> (getter: () => T, error: string): T {
 declare module 'vue/types/vue' {
   interface Vue {
     $trackClickEvent(params: ClickEventParams): void
-    $trackPage(page: QiskitPage): void
-  }
-}
-
-Vue.prototype.$trackClickEvent = async (params: ClickEventParams) => {
-  try {
-    await window._analyticsReady
-    trackClickEvent(window, params)
-  } catch (ex) {
-    console.warn('Error trying to track a click event:', ex)
+    $trackPage(routeName: string, title: string): void
   }
 }
 
 export default (_, inject) => {
   configureAnalytics()
   installAnalyticsOnce()
-  //inject('trackClickEvent', trackClickEvent)
-  inject('trackPage', trackPage)
+  inject('trackClickEvent', async (params: ClickEventParams) => {
+    await window._analyticsReady
+    trackClickEvent(window, params)
+  })
+  inject('trackPage', async (routeName, title) => {
+    await window._analyticsReady
+    trackPage(window, routeName, title)
+  })
 }
 
-export { trackClickEvent, ClickEventParams, AnalyticsContext }
+export { trackClickEvent, trackPage, ClickEventParams, AnalyticsContext }

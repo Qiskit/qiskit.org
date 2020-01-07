@@ -1,10 +1,10 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import { segmentMixin } from '~/mixins/segment-mixin'
+import SegmentMixin from '~/mixins/segment-analytics'
 
 @Component({
-  mixins: [segmentMixin]
+  mixins: [SegmentMixin]
 })
 export default class extends Vue { }
 </script>
