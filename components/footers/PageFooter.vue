@@ -25,10 +25,10 @@
               </a>
             </li>
             <li>
-              <a class="footer-column__link" href="https://www.youtube.com/playlist?list=PLOFEBzvs-Vvp2xg9-POLJhQwtVktlYGbY" target="_blank" rel="noopener">Coding With Qiskit</a>
+              <a class="footer-column__link" href="https://www.youtube.com/playlist?list=PLOFEBzvs-Vvp2xg9-POLJhQwtVktlYGbY" target="_blank" rel="noopener noreferrer">Coding With Qiskit</a>
             </li>
             <li>
-              <a class="footer-column__link" href="mailto:hello@qiskit.camp" target="_blank" rel="noopener">Host an Event</a>
+              <a class="footer-column__link" href="mailto:hello@qiskit.camp" target="_blank" rel="noopener noreferrer">Host an Event</a>
             </li>
           </ul>
           <h2 class="footer-column__title">
@@ -58,7 +58,7 @@
           </h2>
           <ul>
             <li v-for="socialMedia in socialMediaList" :key="socialMedia.label">
-              <a class="footer-column__link" :href="socialMedia.url" target="_blank" rel="noopener">
+              <a class="footer-column__link" :href="socialMedia.url" target="_blank" rel="noopener noreferrer">
                 {{ socialMedia.label }}
               </a>
             </li>

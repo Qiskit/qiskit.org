@@ -62,6 +62,7 @@
               href="https://join.slack.com/t/qiskit/shared_invite/enQtODQ2NTIyOTgwMTQ3LTI0NzM2NzkzZjJhNDgzZjY5MTQzNDY3MGNiZGQzNTNkZTE4Nzg1MjMwMmFjY2UwZTgyNDlmYWQwYmZjMjE1ZTM"
               title="Slack community"
               target="_blank"
+              rel="noopener noreferrer"
               @click="$trackClickEvent({
                 action: 'Qiskit Community: Slack'
               })"
@@ -74,6 +75,7 @@
               href="https://github.com/Qiskit"
               title="GitHub organization"
               target="_blank"
+              rel="noopener noreferrer"
               @click="$trackClickEvent({
                 action: 'Qiskit Community: GitHub'
               })"
@@ -86,7 +88,7 @@
               href="https://quantumcomputing.stackexchange.com/questions/tagged/qiskit"
               title="Stack Exchange community"
               target="_blank"
-              rel="noopener"
+              rel="noopener noreferrer"
               @click="$trackClickEvent({
                 action: 'Qiskit Community: StackExchange'
               })"
@@ -99,7 +101,7 @@
               href="https://twitter.com/Qiskit"
               title="Twitter profile"
               target="_blank"
-              rel="noopener"
+              rel="noopener noreferrer"
               @click="$trackClickEvent({
                 action: 'Qiskit Community: Twitter'
               })"
@@ -112,7 +114,7 @@
               href="https://medium.com/Qiskit"
               title="Medium profile"
               target="_blank"
-              rel="noopener"
+              rel="noopener noreferrer"
               @click="$trackClickEvent({
                 action: 'Qiskit Community: Medium'
               })"
@@ -125,7 +127,7 @@
               href="https://www.youtube.com/Qiskit"
               title="YouTube channel"
               target="_blank"
-              rel="noopener"
+              rel="noopener noreferrer"
               @click="$trackClickEvent({
                 action: 'Qiskit Community: YouTube'
               })"
