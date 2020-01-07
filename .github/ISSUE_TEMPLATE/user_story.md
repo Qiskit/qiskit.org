@@ -1,5 +1,5 @@
 ---
-name: "User Story"
+name: "\U0001F4AC User Story"
 about: "Define a new User Story"
 title: 'As a [persona], I [want to], [so that].'
 labels: 'type: user story'
