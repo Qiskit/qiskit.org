@@ -62,13 +62,15 @@ export default {
   ],
 
   /*
-  ** Plugins to load before mounting the App
+  ** Plugins to load before mounting the App. Plugins are loaded client
+  ** and server only according to the name convention described here:
+  ** https://nuxtjs.org/guide/plugins/#name-conventional-plugin
   */
   plugins: [
     '~/plugins/directives.ts',
     '~/plugins/deep-load.ts',
     { src: '~/plugins/hotjar.ts', mode: 'client' },
-    { src: '~/plugins/segment-analytics.ts', mode: 'client' }
+    '~/plugins/segment-analytics.client.ts'
   ],
 
   /*

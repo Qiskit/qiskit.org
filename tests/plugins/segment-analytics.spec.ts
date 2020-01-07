@@ -1,4 +1,4 @@
-import { trackClickEvent, AnalyticsContext } from '~/plugins/segment-analytics'
+import { trackClickEvent, AnalyticsContext } from '~/plugins/segment-analytics.client'
 
 const window: AnalyticsContext = {
   bluemixAnalytics: {

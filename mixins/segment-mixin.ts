@@ -78,20 +78,10 @@ function installAnalyticsOnce () {
  * identifying the route regardless the URL changing over time.
  */
 export const segmentMixin = {
-  created () {
-    if (!process.client) { return }
-    configureAnalytics()
-    installAnalyticsOnce()
-  },
-
-  beforeRouteEnter (to, from, next) {
+  beforeRouteEnter (_to, _from, next) {
     next(async (pageComponent) => {
-      try {
-        await window._analyticsReady
-        trackPage(pageComponent)
-      } catch (err) {
-        console.warn('Error loading Bluemix Analytics script:', err)
-      }
+      await window._analyticsReady
+      pageComponent.$trackPage(pageComponent)
     })
   }
 }

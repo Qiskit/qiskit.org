@@ -82,18 +82,16 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
+import QiskitPage from '~/components/qiskit/QiskitPage.vue'
 import InnerNavigation from '~/components/menus/InnerNavigation.vue'
 import GatesHeader from '~/components/headers/GatesHeader.vue'
 import PageSection from '~/components/sections/PageSection.vue'
 import MapSection from '~/components/advocates/MapSection.vue'
 import AdvocateCard from '~/components/cards/AdvocateCard.vue'
 import CompactFeature from '~/components/features/CompactFeature.vue'
-import { segmentMixin } from '~/mixins/segment-mixin.ts'
 
 @Component({
-  mixins: [segmentMixin],
   components: {
     InnerNavigation,
     GatesHeader,
@@ -122,7 +120,7 @@ import { segmentMixin } from '~/mixins/segment-mixin.ts'
     }
   }
 })
-export default class extends Vue {
+export default class extends QiskitPage {
   routeName: string = 'advocates'
 
   cities () {

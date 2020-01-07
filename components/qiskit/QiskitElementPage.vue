@@ -1,9 +1,9 @@
 <script lang="ts">
-import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
+import QiskitPage from '~/components/qiskit/QiskitPage.vue'
 
 @Component
-export default class extends Vue {
+export default class extends QiskitPage {
   title: string = ''
   description: string = ''
 }
