@@ -1,9 +1,33 @@
 /**
  * Mixin enabling page visitation tracking in Bluemix Analytics. To use it:
- * 1. Add the mixin to the page component.
- * 2. In the page component, include the title of the page in the meta info.
+ *
+ * 1. Add the mixin to the page component:
+ * ```js
+ * import SegmentMixin from '~/mixins/segment-analytics.ts'
+ * @Component({ mixins: [SegmentMixin] })
+ * export default class extends Vue {}
+ * ```
+ *
+ * 2. In the page component, add a title to the page:
+ * ```js
+ * @Component({
+ *   head() {
+ *     title: 'Some title'
+ *   }
+ *   ...
+ * })
+ * export default class extends Vue { ... }
+ * ```
+ *
  * 3. In the page component, add the `routeName` property set to a string
- * identifying the route regardless the URL changing over time.
+ * matching kebab-case and identifying the route regardless the URL changing
+ * over time:
+ * ```js
+ * @Component({ ... })
+ * export default class extends Vue {
+ *   routeName: 'route-id'
+ * }
+ * ```
  */
 export default {
   beforeRouteEnter (_to, _from, next) {

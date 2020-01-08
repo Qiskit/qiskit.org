@@ -1,5 +1,13 @@
-import Vue from 'vue'
 
+/**
+ * Set of configuration objects and flags required by Bluemix Analytics.
+ * Main configuration objects are `_analytics`, `bluemixAnalytics` and
+ * `digitalData`.
+ *
+ * See
+ * https://github.ibm.com/Bluemix/Bluemix.Analytics/blob/master/webpack.constants.js
+ * for default values.
+ */
 interface AnalyticsContext {
   _analytics?: any
   _analyticsReady?: Promise<Event>
@@ -7,7 +15,11 @@ interface AnalyticsContext {
   digitalData?: any
 }
 
+/**
+ * The parameters needed to register a click event.
+ */
 interface ClickEventParams {
+  /** A description of the CTA. */
   action: string
 }
 
@@ -22,8 +34,6 @@ declare global {
 }
 
 function configureAnalytics () {
-  // See window._analytics default values at:
-  // https://github.ibm.com/Bluemix/Bluemix.Analytics/blob/master/webpack.constants.js
   window._analytics = {
     segment_key: process.env.analyticsKey,
     coremetrics: false,
@@ -63,7 +73,10 @@ function installAnalyticsOnce () {
 
 /**
  * Send a page visitation event to segment.
- * @param pageComponent the page component.
+ * @param context the Bluemix Analytics object with the analytics configuration.
+ * This is usually `window`.
+ * @param routeName a unique name identifying the contents of the route.
+ * @param title the title meta tag of the page
  */
 function trackPage (context: AnalyticsContext, routeName: string, title: string) {
   const { bluemixAnalytics, digitalData } = context
@@ -80,6 +93,12 @@ function trackPage (context: AnalyticsContext, routeName: string, title: string)
   })
 }
 
+/**
+ * Send a CTA to segment.
+ * @param context the Bluemix Analytics object with the analytics configuration.
+ * This is usually `window`.
+ * @param params the parameters for the CTA.
+ */
 function trackClickEvent (context: AnalyticsContext, params: ClickEventParams) {
   const { action } = params
   const { bluemixAnalytics, digitalData } = context
