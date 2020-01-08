@@ -3,30 +3,35 @@
     <div class="page-footer-container">
       <div class="page-footer page-footer--framed">
         <section class="footer-column">
-          <h2 class="footer-column__title">
-            Qiskit Elements
-          </h2>
-          <NuxtLinkList :elements="qiskitElements" />
+          <FooterSubsection
+            title="Qiskit Elements"
+            :elements="qiskitElements"
+            listType="NuxtLinkList"
+          />
         </section>
         <section class="footer-column">
-          <h2 class="footer-column__title">
-            Qiskit for Educators
-          </h2>
-          <ATagLinkList :elements="qiskitEducationList" />
-          <h2 class="footer-column__title">
-            Qiskit Advocates
-          </h2>
-          <NuxtLinkList :elements="qiskitAdvocatesList" />
-          <h2 class="footer-column__title">
-            Qiskit Experiments
-          </h2>
-          <NuxtLinkList :elements="qiskitExperimentsList" />
+          <FooterSubsection
+            title="Qiskit for Educators"
+            :elements="qiskitEducationList"
+            listType="ATagLinkList"
+          />
+          <FooterSubsection
+            title="Qiskit Advocates"
+            :elements="qiskitAdvocatesList"
+            listType="NuxtLinkList"
+          />
+          <FooterSubsection
+            title="Qiskit Experiments"
+            :elements="qiskitExperimentsList"
+            listType="NuxtLinkList"
+          />
         </section>
         <section class="footer-column">
-          <h2 class="footer-column__title">
-            Social Media
-          </h2>
-          <ATagLinkList :elements="socialMediaList" />
+          <FooterSubsection
+            title="Social Media"
+            :elements="socialMediaList"
+            listType="ATagLinkList"
+          />
         </section>
       </div>
     </div>
@@ -38,6 +43,7 @@ import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 import NuxtLinkList from '~/components/footers/NuxtLinkList.vue'
 import ATagLinkList from '~/components/footers/ATagLinkList.vue'
+import FooterSubsection from '~/components/footers/FooterSubsection.vue'
 
 import {
   ORDERED_QISKIT_ELEMENTS,
@@ -52,7 +58,8 @@ import {
 @Component({
   components: {
     NuxtLinkList,
-    ATagLinkList
+    ATagLinkList,
+    FooterSubsection
   }
 })
 export default class extends Vue {
@@ -89,19 +96,11 @@ export default class extends Vue {
   flex: 1;
   margin-right: 2rem;
 
-  &__title {
-    margin-top: 2rem;
-    font-size: inherit;
-    font-weight: normal;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid var(--primary-color-lightmost);
+  &:first-child {
+    margin-top: 0;
 
-    &:first-child {
+    @include mq($until: desktop) {
       margin-top: 0;
-
-      @include mq($until: desktop) {
-        margin-top: 0;
-      }
     }
   }
 
