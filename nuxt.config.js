@@ -67,6 +67,7 @@ export default {
   ** https://nuxtjs.org/guide/plugins/#name-conventional-plugin
   */
   plugins: [
+    '~/plugins/router-hooks.ts',
     '~/plugins/directives.ts',
     '~/plugins/deep-load.ts',
     { src: '~/plugins/hotjar.ts', mode: 'client' },

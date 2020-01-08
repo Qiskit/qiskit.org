@@ -1,3 +1,6 @@
+import Vue from 'vue'
+import { Component } from 'vue-property-decorator'
+
 /**
  * Mixin enabling page visitation tracking in Bluemix Analytics. To use it:
  *
@@ -29,7 +32,8 @@
  * }
  * ```
  */
-export default {
+@Component
+export default class extends Vue {
   beforeRouteEnter (_to, _from, next) {
     next(pageComponent => {
       if (!pageComponent.routeName) {
