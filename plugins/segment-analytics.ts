@@ -58,7 +58,7 @@ function configureAnalytics () {
 }
 
 function installAnalyticsOnce () {
-  window._analyticsReady = window._analyticsReady || new Promise((resolve, reject) => {
+  window._analyticsReady = window._analyticsReady || new Promise((resolve) => {
     const script = document.createElement('script')
     script.async = true
     script.src = process.env.analyticsScriptUrl || ''
@@ -142,13 +142,12 @@ function assertCanGet<T> (getter: () => T, error: string): T {
   return result
 }
 
-function afterAnalyticsReady<S extends any[]>(callback: (...S) => void) {
+function afterAnalyticsReady<S extends any[]> (callback: (...S) => void) {
   return async function (...args: S): Promise<void> {
     try {
       await window._analyticsReady
       callback(window, ...args)
-    }
-    catch (err) {
+    } catch (err) {
       console.warn(err)
     }
   }

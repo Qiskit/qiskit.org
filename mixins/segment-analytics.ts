@@ -35,7 +35,7 @@ import { Component } from 'vue-property-decorator'
 @Component
 export default class extends Vue {
   beforeRouteEnter (_to, _from, next) {
-    next(pageComponent => {
+    next((pageComponent) => {
       if (!pageComponent.routeName) {
         return console.warn('Component', pageComponent,
           'is missing the \'routeName\' property, needed by analytics.')
