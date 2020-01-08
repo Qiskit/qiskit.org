@@ -142,6 +142,18 @@ function assertCanGet<T> (getter: () => T, error: string): T {
   return result
 }
 
+function afterAnalyticsReady<S extends any[]>(callback: (...S) => void) {
+  return async function (...args: S): Promise<void> {
+    try {
+      await window._analyticsReady
+      callback(window, ...args)
+    }
+    catch (err) {
+      console.warn(err)
+    }
+  }
+}
+
 declare module 'vue/types/vue' {
   interface Vue {
     $trackClickEvent(params: ClickEventParams): void
@@ -152,14 +164,8 @@ declare module 'vue/types/vue' {
 export default (_, inject) => {
   configureAnalytics()
   installAnalyticsOnce()
-  inject('trackClickEvent', async (params: ClickEventParams) => {
-    await window._analyticsReady
-    trackClickEvent(window, params)
-  })
-  inject('trackPage', async (routeName, title) => {
-    await window._analyticsReady
-    trackPage(window, routeName, title)
-  })
+  inject('trackPage', afterAnalyticsReady(trackPage))
+  inject('trackClickEvent', afterAnalyticsReady(trackClickEvent))
 }
 
 export { trackClickEvent, trackPage, ClickEventParams, AnalyticsContext }
