@@ -2,26 +2,19 @@ type SegmentData = {
   action: string
 }
 
+/**
+ * Use `target` and `rel` only for <a> links
+ */
 type NavLink = {
   label: string
   url: string
-  segment?: SegmentData
-}
-
-type LabeledLinks = {
-  [key: string]: NavLink
-}
-
-type NavLinkWithAttributes = {
-  label: string
-  url: string
-  segment?: SegmentData
+  segment?: SegmentData,
   target?: string
   rel?: string
 }
 
-type LabeledLinksWithAttributes = {
-  [key: string]: NavLinkWithAttributes
+type LabeledLinks = {
+  [key: string]: NavLink
 }
 
 type QiskitElements = {
@@ -63,7 +56,7 @@ const ORDERED_QISKIT_ELEMENTS: Array<NavLink> = [
   QISKIT_ELEMENTS.ibmQAccount
 ]
 
-const SOCIAL_MEDIA: LabeledLinksWithAttributes = {
+const SOCIAL_MEDIA: LabeledLinks = {
   github: {
     label: 'GitHub',
     url: 'https://github.com/Qiskit',
@@ -132,10 +125,10 @@ const ORDERED_COMMUNITY_SUB_LINKS: Array<NavLink> = [
   COMMUNITY_SUB_LINKS.experiments
 ]
 
-const QISKIT_EDUCATION: LabeledLinksWithAttributes = {
+const QISKIT_EDUCATION: LabeledLinks = {
   textbook: {
     label: 'Textbook',
-    url: '/textbook',
+    url: '/textbook'
   },
   youtube: {
     label: 'Coding With Qiskit',
@@ -151,7 +144,7 @@ const QISKIT_EDUCATION: LabeledLinksWithAttributes = {
   }
 }
 
-const ORDERED_QISKIT_EDUCATION: Array<NavLinkWithAttributes> = [
+const ORDERED_QISKIT_EDUCATION: Array<NavLink> = [
   QISKIT_EDUCATION.textbook,
   QISKIT_EDUCATION.youtube,
   QISKIT_EDUCATION.hostEvent
@@ -165,7 +158,7 @@ const QISKIT_ADVOCATES: LabeledLinks = {
 }
 
 const ORDERED_QISKIT_ADVOCATES: Array<NavLink> = [
-  QISKIT_ADVOCATES.advocates,
+  QISKIT_ADVOCATES.advocates
 ]
 
 const QISKIT_EXPERIMENTS: LabeledLinks = {
@@ -176,7 +169,7 @@ const QISKIT_EXPERIMENTS: LabeledLinks = {
 }
 
 const ORDERED_QISKIT_EXPERIMENTS: Array<NavLink> = [
-  QISKIT_EXPERIMENTS.experiments,
+  QISKIT_EXPERIMENTS.experiments
 ]
 
 export {
@@ -186,6 +179,5 @@ export {
   ORDERED_QISKIT_EDUCATION,
   ORDERED_QISKIT_ADVOCATES,
   ORDERED_QISKIT_EXPERIMENTS,
-  NavLink,
-  NavLinkWithAttributes
+  NavLink
 }

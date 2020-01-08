@@ -5,7 +5,8 @@
         class="footer-column__link"
         :href="el.url"
         :target="el.target || '_self'"
-        :rel="el.rel || ''">
+        :rel="el.rel || ''"
+      >
         {{ el.label }}
       </a>
     </li>

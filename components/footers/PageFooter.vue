@@ -6,31 +6,31 @@
           <FooterSubsection
             title="Qiskit Elements"
             :elements="qiskitElements"
-            listType="NuxtLinkList"
+            list-type="NuxtLinkList"
           />
         </section>
         <section class="footer-column">
           <FooterSubsection
             title="Qiskit for Educators"
             :elements="qiskitEducationList"
-            listType="ATagLinkList"
+            list-type="ATagLinkList"
           />
           <FooterSubsection
             title="Qiskit Advocates"
             :elements="qiskitAdvocatesList"
-            listType="NuxtLinkList"
+            list-type="NuxtLinkList"
           />
           <FooterSubsection
             title="Qiskit Experiments"
             :elements="qiskitExperimentsList"
-            listType="NuxtLinkList"
+            list-type="NuxtLinkList"
           />
         </section>
         <section class="footer-column">
           <FooterSubsection
             title="Social Media"
             :elements="socialMediaList"
-            listType="ATagLinkList"
+            list-type="ATagLinkList"
           />
         </section>
       </div>
@@ -51,8 +51,7 @@ import {
   ORDERED_QISKIT_EDUCATION,
   ORDERED_QISKIT_ADVOCATES,
   ORDERED_QISKIT_EXPERIMENTS,
-  NavLink,
-  NavLinkWithAttributes
+  NavLink
 } from '~/constants/menuLinks'
 
 @Component({
@@ -65,7 +64,7 @@ import {
 export default class extends Vue {
   qiskitElements: Array<NavLink> = ORDERED_QISKIT_ELEMENTS
   socialMediaList: Array<NavLink> = ORDERED_SOCIAL_MEDIA
-  qiskitEducationList: Array<NavLinkWithAttributes> = ORDERED_QISKIT_EDUCATION
+  qiskitEducationList: Array<NavLink> = ORDERED_QISKIT_EDUCATION
   qiskitAdvocatesList: Array<NavLink> = ORDERED_QISKIT_ADVOCATES
   qiskitExperimentsList: Array<NavLink> = ORDERED_QISKIT_EXPERIMENTS
 }
