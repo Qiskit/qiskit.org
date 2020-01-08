@@ -95,8 +95,8 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
+import QiskitPage from '~/components/qiskit/QiskitPage.vue'
 import InnerNavigation from '~/components/menus/InnerNavigation.vue'
 import GatesHeader from '~/components/headers/GatesHeader.vue'
 import PageSection from '~/components/sections/PageSection.vue'
@@ -105,10 +105,8 @@ import MdContent from '~/components/MdContent.vue'
 import Cta from '~/components/ctas/Cta.vue'
 // @ts-ignore: Cannot find module
 import TextbookTOC from '~/content/education/textbook-toc.md'
-import { segmentMixin } from '~/mixins/segment-mixin.ts'
 
 @Component({
-  mixins: [segmentMixin],
   components: {
     InnerNavigation,
     GatesHeader,
@@ -125,7 +123,7 @@ import { segmentMixin } from '~/mixins/segment-mixin.ts'
     }
   }
 })
-export default class extends Vue {
+export default class extends QiskitPage {
   routeName: string = 'education'
 }
 </script>

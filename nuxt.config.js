@@ -6,7 +6,7 @@ import miAnchor from 'markdown-it-anchor'
 import uslug from 'uslug'
 import Mode from 'frontmatter-markdown-loader/mode'
 import pkg from './package'
-import generateTextbookToc from './hooks/generate-textbook-toc'
+import generateTextbookToc from './hooks/generate-textbook-toc.ts'
 
 const md = markdownIt({
   linkify: true,
@@ -62,9 +62,10 @@ export default {
   ],
 
   /*
-  ** Plugins to load before mounting the App
+  ** Plugins to load before mounting the App.
   */
   plugins: [
+    '~/plugins/router-hooks.ts',
     '~/plugins/directives.ts',
     '~/plugins/deep-load.ts',
     { src: '~/plugins/hotjar.ts', mode: 'client' },
