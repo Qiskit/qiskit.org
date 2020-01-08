@@ -4,33 +4,29 @@
       <div class="page-footer page-footer--framed">
         <section class="footer-column">
           <FooterSubsection
-            title="Qiskit Elements"
-            :elements="qiskitElements"
-            list-type="NuxtLinkList"
+            v-for="el in firstColumnElements"
+            :key="el.title"
+            :title="el.title"
+            :elements="el.elements"
+            :list-type="el.listType"
           />
         </section>
         <section class="footer-column">
           <FooterSubsection
-            title="Qiskit for Educators"
-            :elements="qiskitEducationList"
-            list-type="ATagLinkList"
-          />
-          <FooterSubsection
-            title="Qiskit Advocates"
-            :elements="qiskitAdvocatesList"
-            list-type="NuxtLinkList"
-          />
-          <FooterSubsection
-            title="Qiskit Experiments"
-            :elements="qiskitExperimentsList"
-            list-type="NuxtLinkList"
+            v-for="el in secondColumnElements"
+            :key="el.title"
+            :title="el.title"
+            :elements="el.elements"
+            :list-type="el.listType"
           />
         </section>
         <section class="footer-column">
           <FooterSubsection
-            title="Social Media"
-            :elements="socialMediaList"
-            list-type="ATagLinkList"
+            v-for="el in thirdColumnElements"
+            :key="el.title"
+            :title="el.title"
+            :elements="el.elements"
+            :list-type="el.listType"
           />
         </section>
       </div>
@@ -46,12 +42,8 @@ import ATagLinkList from '~/components/footers/ATagLinkList.vue'
 import FooterSubsection from '~/components/footers/FooterSubsection.vue'
 
 import {
-  ORDERED_QISKIT_ELEMENTS,
-  ORDERED_SOCIAL_MEDIA,
-  ORDERED_QISKIT_EDUCATION,
-  ORDERED_QISKIT_ADVOCATES,
-  ORDERED_QISKIT_EXPERIMENTS,
-  NavLink
+  FOOTER,
+  FooterSubsections
 } from '~/constants/menuLinks'
 
 @Component({
@@ -62,11 +54,9 @@ import {
   }
 })
 export default class extends Vue {
-  qiskitElements: Array<NavLink> = ORDERED_QISKIT_ELEMENTS
-  socialMediaList: Array<NavLink> = ORDERED_SOCIAL_MEDIA
-  qiskitEducationList: Array<NavLink> = ORDERED_QISKIT_EDUCATION
-  qiskitAdvocatesList: Array<NavLink> = ORDERED_QISKIT_ADVOCATES
-  qiskitExperimentsList: Array<NavLink> = ORDERED_QISKIT_EXPERIMENTS
+  firstColumnElements: Array<FooterSubsections> = FOOTER.firstColumn
+  secondColumnElements: Array<FooterSubsections> = FOOTER.secondColumn
+  thirdColumnElements: Array<FooterSubsections> = FOOTER.thirdColumn
 }
 </script>
 
