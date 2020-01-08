@@ -140,16 +140,14 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
+import QiskitPage from '~/components/qiskit/QiskitPage.vue'
 import LegacyPresentation from '~/components/headers/LegacyPresentation.vue'
 import LegacySection from '~/components/sections/LegacySection.vue'
 import LegacyCta from '~/components/ctas/LegacyCta.vue'
-import { segmentMixin } from '~/mixins/segment-mixin.ts'
 
 @Component({
   layout: 'legacy',
-  mixins: [segmentMixin],
   components: {
     LegacyCta,
     LegacyPresentation,
@@ -159,8 +157,7 @@ import { segmentMixin } from '~/mixins/segment-mixin.ts'
     return { title: 'Qiskit' }
   }
 })
-
-export default class extends Vue {
+export default class extends QiskitPage {
   routeName = 'qiskit-landing-page'
 }
 </script>
