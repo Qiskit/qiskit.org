@@ -6,7 +6,7 @@ import miAnchor from 'markdown-it-anchor'
 import uslug from 'uslug'
 import Mode from 'frontmatter-markdown-loader/mode'
 import pkg from './package'
-import generateTextbookToc from './hooks/generate-textbook-toc'
+import generateTextbookToc from './hooks/generate-textbook-toc.ts'
 
 const md = markdownIt({
   linkify: true,
