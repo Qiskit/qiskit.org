@@ -8,7 +8,7 @@ type SegmentData = {
 type NavLink = {
   label: string
   url: string
-  linkType: "nuxtLink" | "aLink"
+  linkType: 'nuxtLink' | 'aLink'
   segment?: SegmentData
   target?: string
   rel?: string
@@ -200,32 +200,32 @@ type FooterSubsections = {
 type FooterStructure = Array<Array<FooterSubsections>>
 
 const FOOTER_ELEMENTS: FooterStructure = [
-  //Elements in the first footer column
+  // Elements in the first footer column
   [
     {
-      title:"Qiskit Elements",
+      title: 'Qiskit Elements',
       elements: ORDERED_QISKIT_ELEMENTS
     }
   ],
-  //Elements in the second footer column
+  // Elements in the second footer column
   [
     {
-      title:"Qiskit for Educators",
+      title: 'Qiskit for Educators',
       elements: ORDERED_QISKIT_EDUCATION
     },
     {
-      title:"Qiskit Advocates",
+      title: 'Qiskit Advocates',
       elements: ORDERED_QISKIT_ADVOCATES
     },
     {
-      title:"Qiskit Experiments",
+      title: 'Qiskit Experiments',
       elements: ORDERED_QISKIT_EXPERIMENTS
     }
   ],
-  //Elements in the third footer column
+  // Elements in the third footer column
   [
     {
-      title:"Social Media",
+      title: 'Social Media',
       elements: ORDERED_SOCIAL_MEDIA
     }
   ]
