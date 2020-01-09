@@ -20,7 +20,6 @@ import LinksList from '~/components/footers/LinksList.vue'
 export default class extends Vue {
   @Prop(String) title
   @Prop(Array) elements
-  @Prop(String) listType
 }
 </script>
 
