@@ -3,14 +3,14 @@
     <li v-for="el in elements" :key="el.label">
       <nuxt-link
         v-if="el.linkType==='nuxtLink'"
-        class="footer-column__link"
+        class="footer-link"
         :to="el.url"
       >
         {{ el.label }}
       </nuxt-link>
       <a
         v-else
-        class="footer-column__link"
+        class="footer-link"
         :href="el.url"
         :target="el.target || '_self'"
         :rel="el.rel || ''"
@@ -43,16 +43,14 @@ li {
   width: 100%;
 }
 
-.footer-column {
-  &__link {
-    color: inherit;
-    text-decoration: none;
-    display: inline-block;
-    width: 100%;
+.footer-link {
+  color: inherit;
+  text-decoration: none;
+  display: inline-block;
+  width: 100%;
 
-    &:hover {
-      color: var(--body-color-light);
-    }
+  &:hover {
+    color: var(--body-color-light);
   }
 }
 </style>

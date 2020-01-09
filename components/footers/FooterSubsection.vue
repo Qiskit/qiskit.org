@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 class="footer-column__title">
+    <h2 class="footer-title">
       {{ title }}
     </h2>
     <LinksList :elements="elements" />
@@ -25,13 +25,11 @@ export default class extends Vue {
 </script>
 
 <style lang="scss" scoped>
-.footer-column {
-  &__title {
-    margin-top: 2rem;
-    font-size: inherit;
-    font-weight: normal;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid var(--primary-color-lightmost);
-  }
+.footer-title {
+  margin-top: 2rem;
+  font-size: inherit;
+  font-weight: normal;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--primary-color-lightmost);
 }
 </style>
