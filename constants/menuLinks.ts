@@ -18,17 +18,6 @@ type LabeledLinks = {
   [key: string]: NavLink
 }
 
-type FooterSubsections = {
-  title: string,
-  elements: Array<NavLink>
-}
-
-type FooterStructure = {
-  firstColumn: Array<FooterSubsections>,
-  secondColumn: Array<FooterSubsections>,
-  thirdColumn: Array<FooterSubsections>
-}
-
 type QiskitElements = {
   terra: NavLink,
   aer: NavLink,
@@ -203,14 +192,23 @@ const ORDERED_QISKIT_EXPERIMENTS: Array<NavLink> = [
   QISKIT_EXPERIMENTS.experiments
 ]
 
-const FOOTER: FooterStructure = {
-  firstColumn: [
+type FooterSubsections = {
+  title: string,
+  elements: Array<NavLink>
+}
+
+type FooterStructure = Array<Array<FooterSubsections>>
+
+const FOOTER_ELEMENTS: FooterStructure = [
+  //Elements in the first footer column
+  [
     {
       title:"Qiskit Elements",
       elements: ORDERED_QISKIT_ELEMENTS
     }
   ],
-  secondColumn: [
+  //Elements in the second footer column
+  [
     {
       title:"Qiskit for Educators",
       elements: ORDERED_QISKIT_EDUCATION
@@ -224,13 +222,14 @@ const FOOTER: FooterStructure = {
       elements: ORDERED_QISKIT_EXPERIMENTS
     }
   ],
-  thirdColumn: [
+  //Elements in the third footer column
+  [
     {
       title:"Social Media",
       elements: ORDERED_SOCIAL_MEDIA
     }
   ]
-}
+]
 
 export {
   ORDERED_QISKIT_ELEMENTS,
@@ -239,7 +238,7 @@ export {
   ORDERED_QISKIT_EDUCATION,
   ORDERED_QISKIT_ADVOCATES,
   ORDERED_QISKIT_EXPERIMENTS,
-  FOOTER,
+  FOOTER_ELEMENTS,
   NavLink,
   FooterSubsections
 }

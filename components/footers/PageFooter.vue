@@ -2,30 +2,11 @@
   <footer>
     <div class="page-footer-container">
       <div class="page-footer page-footer--framed">
-        <section class="footer-column">
-          <FooterSubsection
-            v-for="el in firstColumnElements"
-            :key="el.title"
-            :title="el.title"
-            :elements="el.elements"
-          />
-        </section>
-        <section class="footer-column">
-          <FooterSubsection
-            v-for="el in secondColumnElements"
-            :key="el.title"
-            :title="el.title"
-            :elements="el.elements"
-          />
-        </section>
-        <section class="footer-column">
-          <FooterSubsection
-            v-for="el in thirdColumnElements"
-            :key="el.title"
-            :title="el.title"
-            :elements="el.elements"
-          />
-        </section>
+        <FooterColumn
+          v-for="(columnElements, index) in footerElements"
+          :key="index"
+          :elements="columnElements"
+        />
       </div>
     </div>
   </footer>
@@ -34,22 +15,20 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import FooterSubsection from '~/components/footers/FooterSubsection.vue'
+import FooterColumn from '~/components/footers/FooterColumn.vue'
 
 import {
-  FOOTER,
+  FOOTER_ELEMENTS,
   FooterSubsections
 } from '~/constants/menuLinks'
 
 @Component({
   components: {
-    FooterSubsection
+    FooterColumn
   }
 })
 export default class extends Vue {
-  firstColumnElements: Array<FooterSubsections> = FOOTER.firstColumn
-  secondColumnElements: Array<FooterSubsections> = FOOTER.secondColumn
-  thirdColumnElements: Array<FooterSubsections> = FOOTER.thirdColumn
+  footerElements: Array<Array<FooterSubsections>> = FOOTER_ELEMENTS
 }
 </script>
 
@@ -71,28 +50,6 @@ export default class extends Vue {
 
   @include mq($until: desktop) {
     display: block;
-  }
-}
-
-.footer-column {
-  flex: 1;
-  margin-right: 2rem;
-
-  &:first-child {
-    margin-top: 0;
-
-    @include mq($until: desktop) {
-      margin-top: 0;
-    }
-  }
-
-  &:last-child {
-    margin-right: 0;
-  }
-
-  @include mq($until: desktop) {
-    margin-top: 2rem;
-    margin-right: 0;
   }
 }
 </style>
