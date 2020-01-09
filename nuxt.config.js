@@ -62,9 +62,10 @@ export default {
   ],
 
   /*
-  ** Plugins to load before mounting the App
+  ** Plugins to load before mounting the App.
   */
   plugins: [
+    '~/plugins/router-hooks.ts',
     '~/plugins/directives.ts',
     '~/plugins/deep-load.ts',
     { src: '~/plugins/hotjar.ts', mode: 'client' },
