@@ -1,5 +1,27 @@
-import Vue from 'vue'
+import Vue, { ComponentOptions } from 'vue'
 import { Component } from 'vue-property-decorator'
+import { Route } from 'vue-router'
+
+// Patch the Component decorator to work with abstract classes.
+// @ts-ignore is needed for avoiding the error:
+// "Overload signatures must all be exported or non-exported."
+// See https://github.com/microsoft/TypeScript/issues/21566#issuecomment-362462824
+declare module 'vue-property-decorator' {
+  abstract class _Abstract extends Vue {}
+  // @ts-ignore
+  function Component<V extends Vue>(options: ComponentOptions<V> & ThisType<V>): <VC extends typeof _Abstract>(target: VC) => VC;
+  // @ts-ignore
+  function Component<VC extends typeof _Abstract>(target: VC): VC;
+}
+
+/**
+ * The interface that all tracked pages must implement.
+ */
+interface TrackedPage extends Vue {
+  routeName: string
+}
+
+type TrackedPageGuardNext = (to: ((vm: TrackedPage) => any)) => void
 
 /**
  * Mixin enabling page visitation tracking in Bluemix Analytics. To use it:
@@ -34,7 +56,7 @@ import { Component } from 'vue-property-decorator'
  */
 @Component
 export default class extends Vue {
-  beforeRouteEnter (_to, _from, next) {
+  beforeRouteEnter (_from: Route, _to: Route, next: TrackedPageGuardNext): any {
     next((pageComponent) => {
       if (!pageComponent.routeName) {
         return console.warn('Component', pageComponent,
@@ -45,3 +67,5 @@ export default class extends Vue {
     })
   }
 }
+
+export { TrackedPage }
