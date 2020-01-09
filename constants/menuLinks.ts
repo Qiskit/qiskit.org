@@ -8,7 +8,7 @@ type SegmentData = {
 type NavLink = {
   label: string
   url: string
-  linkType: string
+  linkType: "nuxtLink" | "aLink"
   segment?: SegmentData
   target?: string
   rel?: string
