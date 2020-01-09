@@ -3,23 +3,18 @@
     <h2 class="footer-column__title">
       {{ title }}
     </h2>
-    <component
-      :is="listType"
-      :elements="elements"
-    />
+    <LinksList :elements="elements" />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-import NuxtLinkList from '~/components/footers/NuxtLinkList.vue'
-import ATagLinkList from '~/components/footers/ATagLinkList.vue'
+import LinksList from '~/components/footers/LinksList.vue'
 
 @Component({
   components: {
-    NuxtLinkList,
-    ATagLinkList
+    LinksList
   }
 })
 export default class extends Vue {

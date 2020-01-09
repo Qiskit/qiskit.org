@@ -8,7 +8,6 @@
             :key="el.title"
             :title="el.title"
             :elements="el.elements"
-            :list-type="el.listType"
           />
         </section>
         <section class="footer-column">
@@ -17,7 +16,6 @@
             :key="el.title"
             :title="el.title"
             :elements="el.elements"
-            :list-type="el.listType"
           />
         </section>
         <section class="footer-column">
@@ -26,7 +24,6 @@
             :key="el.title"
             :title="el.title"
             :elements="el.elements"
-            :list-type="el.listType"
           />
         </section>
       </div>
@@ -37,8 +34,6 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import NuxtLinkList from '~/components/footers/NuxtLinkList.vue'
-import ATagLinkList from '~/components/footers/ATagLinkList.vue'
 import FooterSubsection from '~/components/footers/FooterSubsection.vue'
 
 import {
@@ -48,8 +43,6 @@ import {
 
 @Component({
   components: {
-    NuxtLinkList,
-    ATagLinkList,
     FooterSubsection
   }
 })

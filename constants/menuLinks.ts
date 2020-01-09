@@ -8,7 +8,8 @@ type SegmentData = {
 type NavLink = {
   label: string
   url: string
-  segment?: SegmentData,
+  linkType: string
+  segment?: SegmentData
   target?: string
   rel?: string
 }
@@ -19,8 +20,7 @@ type LabeledLinks = {
 
 type FooterSubsections = {
   title: string,
-  elements: Array<NavLink>,
-  listType: string
+  elements: Array<NavLink>
 }
 
 type FooterStructure = {
@@ -40,23 +40,28 @@ type QiskitElements = {
 const QISKIT_ELEMENTS: QiskitElements = {
   terra: {
     label: 'Terra',
-    url: '/terra'
+    url: '/terra',
+    linkType: 'nuxtLink'
   },
   aer: {
     label: 'Aer',
-    url: '/aer'
+    url: '/aer',
+    linkType: 'nuxtLink'
   },
   aqua: {
     label: 'Aqua',
-    url: '/aqua'
+    url: '/aqua',
+    linkType: 'nuxtLink'
   },
   ignis: {
     label: 'Ignis',
-    url: '/ignis'
+    url: '/ignis',
+    linkType: 'nuxtLink'
   },
   ibmQAccount: {
     label: 'IBM Q Account',
-    url: '/ibmqaccount'
+    url: '/ibmqaccount',
+    linkType: 'nuxtLink'
   }
 }
 
@@ -73,37 +78,43 @@ const SOCIAL_MEDIA: LabeledLinks = {
     label: 'GitHub',
     url: 'https://github.com/Qiskit',
     target: '_blank',
-    rel: 'noopener'
+    rel: 'noopener',
+    linkType: 'aLink'
   },
   slack: {
     label: 'Slack',
     url: 'https://qiskit.slack.com/',
     target: '_blank',
-    rel: 'noopener'
+    rel: 'noopener',
+    linkType: 'aLink'
   },
   twitter: {
     label: 'Twitter',
     url: 'https://twitter.com/Qiskit',
     target: '_blank',
-    rel: 'noopener'
+    rel: 'noopener',
+    linkType: 'aLink'
   },
   medium: {
     label: 'Medium',
     url: 'https://medium.com/Qiskit',
     target: '_blank',
-    rel: 'noopener'
+    rel: 'noopener',
+    linkType: 'aLink'
   },
   youtube: {
     label: 'YouTube',
     url: 'https://www.youtube.com/Qiskit',
     target: '_blank',
-    rel: 'noopener'
+    rel: 'noopener',
+    linkType: 'aLink'
   },
   stack: {
     label: 'Stack Exchange',
     url: 'https://quantumcomputing.stackexchange.com/questions/tagged/qiskit',
     target: '_blank',
-    rel: 'noopener'
+    rel: 'noopener',
+    linkType: 'aLink'
   }
 }
 
@@ -119,15 +130,18 @@ const ORDERED_SOCIAL_MEDIA: Array<NavLink> = [
 const COMMUNITY_SUB_LINKS: LabeledLinks = {
   education: {
     label: 'Education',
-    url: '/education'
+    url: '/education',
+    linkType: 'nuxtLink'
   },
   advocates: {
     label: 'Advocates',
-    url: '/advocates'
+    url: '/advocates',
+    linkType: 'nuxtLink'
   },
   experiments: {
     label: 'Experiments',
-    url: '/experiments'
+    url: '/experiments',
+    linkType: 'nuxtLink'
   }
 }
 
@@ -140,19 +154,22 @@ const ORDERED_COMMUNITY_SUB_LINKS: Array<NavLink> = [
 const QISKIT_EDUCATION: LabeledLinks = {
   textbook: {
     label: 'Textbook',
-    url: '/textbook'
+    url: '/textbook',
+    linkType: 'aLink'
   },
   youtube: {
     label: 'Coding With Qiskit',
     url: 'https://www.youtube.com/playlist?list=PLOFEBzvs-Vvp2xg9-POLJhQwtVktlYGbY',
     target: '_blank',
-    rel: 'noopener'
+    rel: 'noopener',
+    linkType: 'aLink'
   },
   hostEvent: {
     label: 'Host an Event',
     url: 'mailto:hello@qiskit.camp',
     target: '_blank',
-    rel: 'noopener'
+    rel: 'noopener',
+    linkType: 'aLink'
   }
 }
 
@@ -165,7 +182,8 @@ const ORDERED_QISKIT_EDUCATION: Array<NavLink> = [
 const QISKIT_ADVOCATES: LabeledLinks = {
   advocates: {
     label: 'Become an Advocate',
-    url: '/advocates#become-an-advocate'
+    url: '/advocates#become-an-advocate',
+    linkType: 'nuxtLink'
   }
 }
 
@@ -176,7 +194,8 @@ const ORDERED_QISKIT_ADVOCATES: Array<NavLink> = [
 const QISKIT_EXPERIMENTS: LabeledLinks = {
   experiments: {
     label: 'Browse the experiments',
-    url: '/experiments#browse-the-experiments'
+    url: '/experiments#browse-the-experiments',
+    linkType: 'nuxtLink'
   }
 }
 
@@ -188,32 +207,27 @@ const FOOTER: FooterStructure = {
   firstColumn: [
     {
       title:"Qiskit Elements",
-      elements: ORDERED_QISKIT_ELEMENTS,
-      listType:"NuxtLinkList"
+      elements: ORDERED_QISKIT_ELEMENTS
     }
   ],
   secondColumn: [
     {
       title:"Qiskit for Educators",
-      elements: ORDERED_QISKIT_EDUCATION,
-      listType:"ATagLinkList"
+      elements: ORDERED_QISKIT_EDUCATION
     },
     {
       title:"Qiskit Advocates",
-      elements: ORDERED_QISKIT_ADVOCATES,
-      listType:"NuxtLinkList"
+      elements: ORDERED_QISKIT_ADVOCATES
     },
     {
       title:"Qiskit Experiments",
-      elements: ORDERED_QISKIT_EXPERIMENTS,
-      listType:"NuxtLinkList"
+      elements: ORDERED_QISKIT_EXPERIMENTS
     }
   ],
   thirdColumn: [
     {
       title:"Social Media",
-      elements: ORDERED_SOCIAL_MEDIA,
-      listType:"ATagLinkList"
+      elements: ORDERED_SOCIAL_MEDIA
     }
   ]
 }

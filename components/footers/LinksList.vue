@@ -1,9 +1,22 @@
 <template>
   <ul>
     <li v-for="el in elements" :key="el.label">
-      <nuxt-link class="footer-column__link" :to="el.url">
+      <nuxt-link
+        v-if="el.linkType==='nuxtLink'"
+        class="footer-column__link"
+        :to="el.url"
+      >
         {{ el.label }}
       </nuxt-link>
+      <a
+        v-else
+        class="footer-column__link"
+        :href="el.url"
+        :target="el.target || '_self'"
+        :rel="el.rel || ''"
+      >
+        {{ el.label }}
+      </a>
     </li>
   </ul>
 </template>
