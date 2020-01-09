@@ -67,12 +67,13 @@ A **pre-rendering SPA** is a single page application that generates a static mar
 
 **[Nuxt.js](https://nuxtjs.org/)** is the biggest framework on top of **[Vue.js](https://vuejs.org/)** to generate *universal* SPAs. Universal or "isomorphic" apps can be pre-rendering or SSR. Since so far we don't need server functions, our website it's just pre-rendering.
 
-We create and run unit tests using [Jest](https://jestjs.io/), ensure avoiding syntax errors using [ESLint](https://eslint.org/) and automate all these previous tools and deployment using [Trevis](https://travis-ci.org/).
+We create and run unit tests using [Jest](https://jestjs.io/), ensure avoiding syntax errors using [ESLint](https://eslint.org/) and automate all these previous tools and deployment using [Travis](https://travis-ci.org/).
 
 With this technology we want to **achieve**:
+- Separation between content edition and development concerns.
 - Use a component based framework like Vue that allow us to reuse part of the UI code in different parts of the application.
 - Fast initial page load.
-- Index content on Google.
+- Index content on Search Engines.
 - Test JS unit functions.
 - Avoid syntax errors.
 - Continuous integration pipeline.
@@ -118,13 +119,13 @@ With this technology we want to **achieve**:
     ├── nuxt.config.js
     ... other third-parties configuration files like ESLint, Jest or Travis
 
-1.  **`/assets`**: You will find the images and assets for the project. You can find more information at [Nuxt's assets directory documentation](https://nuxtjs.org/guide/assets/)
+1.  **`/assets`**: Images and assets for the project. You can find more information at [Nuxt's assets directory documentation](https://nuxtjs.org/guide/assets/)
 
 2.  **`/components`**: Vue components for the project. You can find more information at [Nuxt's components directory documentation](https://nuxtjs.org/guide/directory-structure#the-components-directory)
 
 3.  **`/constants`**: Constants shared through the whole project.
 
-4.  **`/content`**: You will save your MD files here. They are divided in folders by sections.
+4.  **`/content`**: Markdown files, website's editable content. They are divided in folders by sections.
 
 5.  **`/deploy`**: Deploy configuration.
 
@@ -134,7 +135,7 @@ With this technology we want to **achieve**:
 
 8.  **`/mixins`**: Mixin functions shared through the whole project.
 
-9.  **`/pages`**: You can find information at [Nuxt's pages directory documentation](https://nuxtjs.org/guide/directory-structure#the-pages-directory)
+9.  **`/pages`**: This is a starting point because if you want to know what is the website structure, it's the same as this folder's structure. Nuxt reads all the `.vue` files inside this directory and creates the application router based on it. You can find information at [Nuxt's pages directory documentation](https://nuxtjs.org/guide/directory-structure#the-pages-directory). All `.vue` pages prefixed by an underscore are [dynamic routes](https://nuxtjs.org/guide/routing/#dynamic-routes) and we use them to create different pages based on the same template. We also use [nuxt-link](https://nuxtjs.org/guide/routing/) to keep the user inside our webapp router.
 
 10.  **`/plugins`**: You can find information at [Nuxt's plugins directory documentation](https://nuxtjs.org/guide/directory-structure#the-plugins-directory)
 
@@ -162,7 +163,7 @@ Run unit tests made with [Jest](https://jestjs.io/):
   npm run test
 ```
 
-Build static version ready for production, output will generated inside a new folder called `dist`:
+Build static version ready for production, output will generated inside a new folder called `public`:
 ```shell
   npm run build
 ```

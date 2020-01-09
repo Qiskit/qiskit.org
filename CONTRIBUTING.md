@@ -35,7 +35,7 @@ Run unit tests made with [Jest](https://jestjs.io/):
   npm run test
 ```
 
-Build static version ready for production, output will generated inside a new folder called `dist`:
+Build static version ready for production, output will generated inside a new folder called `public`:
 ```shell
   npm run build
 ```
@@ -68,7 +68,7 @@ Qiskit.org uses the [Forking Workflow](https://www.atlassian.com/git/tutorials/c
 2. Create a branch from `master`. If you're addressing a specific issue, prefix your branch name with the issue number.
 3. If you've added code that should be tested, add tests.
 4. Run `npm run test` and ensure the test suite passes.
-5. Use `npm run lint` to format and lint your code.
+5. Use `npm run lint` to find syntax errors and `npm run fix-lint` to format the code and fix them.
 6. PR's must be rebased before merge (feel free to ask for help).
 7. PR should be reviewed by one maintainer prior to merging.
 
