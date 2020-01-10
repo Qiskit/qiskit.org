@@ -47,8 +47,8 @@
   "@type": "NewsArticle",
   "mainEntityOfPage": "https://community.qiskit.orgtextbook/ch-gates/basic-circuit-identities.html",
   "headline": "Basic Circuit Identities",
-  "datePublished": "2019-12-11T21:28:08+00:00",
-  "dateModified": "2019-12-11T21:28:08+00:00",
+  "datePublished": "2020-01-10T18:38:54+00:00",
+  "dateModified": "2020-01-10T18:38:54+00:00",
   "description": "            Basic Circuit Identities     from qiskit import *from qiskit.circuit import Gate    When we program quantum computers, our aim is always to build...",
   "author": {
     "@type": "Person",
@@ -1811,7 +1811,7 @@ $$<p>We then use controlled-Z gates to cause the first of these relations to hap
 <span class="n">qc</span><span class="o">.</span><span class="n">u1</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span><span class="n">c</span><span class="p">)</span>
 </pre></div>
 <p><img src="https://s3.us-south.cloud-object-storage.appdomain.cloud/strapi/4efe86a907a64a59a720b4dc54a98a88iden1.png" alt="A controlled version of a gate V"></p>
-<p>Here <code>A</code>, <code>B</code> and <code>C</code> are gates that implement $A$ , $B$ and $C$, and must be defined as custom gates. For example, if we wanted $A$ to be $R_x(\pi/4)$, the custom would be defined as</p>
+<p>Here <code>A</code>, <code>B</code> and <code>C</code> are gates that implement $A$ , $B$ and $C$, respectively, and must be defined as custom gates. For example, if we wanted $A$ to be $R_x(\pi/4)$, the custom would be defined as</p>
 <div class="highlight"><pre><span></span><span class="n">qc_a</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;A&#39;</span><span class="p">)</span>
 <span class="n">qc_a</span><span class="o">.</span><span class="n">rx</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">A</span> <span class="o">=</span> <span class="n">qc_a</span><span class="o">.</span><span class="n">to_instruction</span><span class="p">()</span>
@@ -1836,7 +1836,7 @@ $$<p>We then use controlled-Z gates to cause the first of these relations to hap
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The Toffoli gate is a three-qubit gate with two controls and one target. It performs an X on the target only if both controls are in the state $|0\rangle$. The final state of the target is then equal to either the AND or the NAND of the two controls, depending on whether the initial state of the target was $|0\rangle$ or $|1\rangle$. A Toffoli can also be thought of as a controlled-controlled-NOT, and is also called the CCX gate.</p>
+<p>The Toffoli gate is a three-qubit gate with two controls and one target. It performs an X on the target only if both controls are in the state $|1\rangle$. The final state of the target is then equal to either the AND or the NAND of the two controls, depending on whether the initial state of the target was $|0\rangle$ or $|1\rangle$. A Toffoli can also be thought of as a controlled-controlled-NOT, and is also called the CCX gate.</p>
 <div class="highlight"><pre><span></span><span class="c1"># Toffoli with control qubits a and b and target t</span>
 <span class="n">qc</span><span class="o">.</span><span class="n">ccx</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
 </pre></div>
