@@ -192,12 +192,12 @@ const ORDERED_QISKIT_EXPERIMENTS: Array<NavLink> = [
   QISKIT_EXPERIMENTS.experiments
 ]
 
-type FooterSubsections = {
+type FooterSubsection = {
   title: string,
   elements: Array<NavLink>
 }
 
-type FooterStructure = Array<Array<FooterSubsections>>
+type FooterStructure = Array<Array<FooterSubsection>>
 
 const FOOTER_ELEMENTS: FooterStructure = [
   // Elements in the first footer column
@@ -236,5 +236,5 @@ export {
   ORDERED_COMMUNITY_SUB_LINKS,
   FOOTER_ELEMENTS,
   NavLink,
-  FooterSubsections
+  FooterSubsection
 }

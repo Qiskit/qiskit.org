@@ -19,7 +19,7 @@ import FooterColumn from '~/components/footers/FooterColumn.vue'
 
 import {
   FOOTER_ELEMENTS,
-  FooterSubsections
+  FooterSubsection
 } from '~/constants/menuLinks'
 
 @Component({
@@ -28,7 +28,7 @@ import {
   }
 })
 export default class extends Vue {
-  footerElements: Array<Array<FooterSubsections>> = FOOTER_ELEMENTS
+  footerElements: Array<Array<FooterSubsection>> = FOOTER_ELEMENTS
 }
 </script>
 
