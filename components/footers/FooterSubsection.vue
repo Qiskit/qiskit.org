@@ -3,18 +3,18 @@
     <h2 class="footer-title">
       {{ title }}
     </h2>
-    <LinksList :elements="elements" />
+    <LinkList :elements="elements" />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-import LinksList from '~/components/footers/LinksList.vue'
+import LinkList from '~/components/footers/LinkList.vue'
 
 @Component({
   components: {
-    LinksList
+    LinkList
   }
 })
 export default class extends Vue {
