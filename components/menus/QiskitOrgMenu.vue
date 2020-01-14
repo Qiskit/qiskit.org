@@ -26,7 +26,7 @@
                 'vertical-navigation__item': true,
                 'vertical-navigation__item--active': isCommunityActive()
               }"
-              to="/advocates"
+              to="/education"
             >
               Community
             </nuxt-link>
@@ -83,7 +83,7 @@
               'navigation-group__item': true,
               'navigation-group__item--active': isCommunityActive()
             }"
-            to="/advocates"
+            to="/education"
           >
             Community
           </nuxt-link>
