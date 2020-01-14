@@ -247,6 +247,5 @@ export {
   ORDERED_QISKIT_ELEMENTS,
   ORDERED_COMMUNITY_SUB_LINKS,
   FOOTER_ELEMENTS,
-  NavLink,
-  FooterSubsection
+  NavLink
 }
