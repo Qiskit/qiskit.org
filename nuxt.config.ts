@@ -5,7 +5,10 @@ import miLinkAttributes from 'markdown-it-link-attributes'
 import miAnchor from 'markdown-it-anchor'
 import uslug from 'uslug'
 import Mode from 'frontmatter-markdown-loader/mode'
-import pkg from './package'
+
+import { Configuration } from '@nuxt/types'
+
+import pkg from './package.json'
 import generateTextbookToc from './hooks/generate-textbook-toc'
 
 const md = markdownIt({
@@ -23,7 +26,7 @@ md.use(miAnchor, {
   slugify (id) { return uslug(id) }
 })
 
-export default {
+const config: Configuration = {
   mode: 'universal',
 
   env: {
@@ -108,6 +111,7 @@ export default {
     ** You can extend webpack config here
     */
     extend (config) {
+      config.module = config.module || { rules: [] }
       config.module.rules.push({
         test: /\.md$/,
         loader: 'frontmatter-markdown-loader',
@@ -134,7 +138,8 @@ export default {
   router: {
     scrollBehavior (to) {
       if (to.hash) {
-        const el = document.querySelector(to.hash)
+        const el: HTMLElement | null = document.querySelector(to.hash)
+        if (!el) { return }
         if ('scrollBehavior' in document.documentElement.style) {
           return window.scrollTo({ top: el.offsetTop, behavior: 'smooth' })
         } else {
@@ -170,3 +175,5 @@ export default {
     }
   }
 }
+
+export default config
