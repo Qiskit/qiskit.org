@@ -2,7 +2,7 @@
   <footer>
     <div class="page-footer-container">
       <div class="page-footer page-footer--framed">
-        <FooterColumn
+        <FooterSection
           v-for="(columnElements, index) in footerElements"
           :key="index"
           :elements="columnElements"
@@ -15,13 +15,13 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import FooterColumn from '~/components/footers/FooterColumn.vue'
+import FooterSection from '~/components/footers/FooterSection.vue'
 
 import { FOOTER_ELEMENTS } from '~/constants/menuLinks'
 
 @Component({
   components: {
-    FooterColumn
+    FooterSection
   }
 })
 export default class extends Vue {
