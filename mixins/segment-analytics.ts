@@ -18,6 +18,14 @@ declare module 'vue-property-decorator' {
  * The interface that all tracked pages must implement.
  */
 interface TrackedPage extends Vue {
+  /**
+   * A unique kebab-case string identifying the page regardless URL or title
+   * changing over time. This value should be resilient to change, more related
+   * to the page functionality.
+   *
+   * @example
+   * `'support-guides'`, `'notebooks-list'`, `'ignis-introduction'`...
+   */
   routeName: string
 }
 
