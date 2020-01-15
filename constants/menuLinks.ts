@@ -3,26 +3,29 @@ type SegmentData = {
 }
 
 /**
- * To use this type:
- * @label is the visible name of the link
- * @url is the link where we want to go
- * @linkType indicates if we need to use a <nuxt-link> or an <a>
- * @segment includes an object with the information of the action. Example:
- *  {
-      action: 'Qiskit Community: GitHub'
-    }
- * @target use `_blank` to open the link in a new tab
- * @rel specifies the relationship between the current document and the linked document.
- *  Possible values: `nofollow`, `noreferrer`, `noopener`, `me` or a combination of them
- *
- * Note that `target` and `rel` are only for <a> links
+ * Represent a navigation link for the menus of the site
  */
-type NavLink = {
+interface NavLink {
+  /** The visible name of the link */
   label: string
+  /** Where we want to go */
   url: string
+  /** Indicates if we need to use a <nuxt-link> or an <a> */
   linkType: 'nuxtLink' | 'aLink'
+  /** Includes an object with the information of the action. Example:
+   * ```ts
+   * {
+      action: 'Qiskit Community: GitHub'
+     }
+    ```
+   */
   segment?: SegmentData
+  /** Only for <a> links. Use `_blank` to open the link in a new tab */
   target?: string
+  /** Only for <a> links. Specifies the relationship between the current document
+   *  and the linked document. Possible values: `nofollow`, `noreferrer`, `noopener`,
+   *  `me` or a combination of them
+   */
   rel?: string
 }
 
