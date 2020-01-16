@@ -146,9 +146,14 @@ export default class extends Vue {
       url: 'https://quantum-computing.ibm.com/jupyter/tutorial/1_start_here.ipynb',
       segment: {
         action: 'Tutorials'
-      }
+      },
+      linkType: 'aLink'
     },
-    { label: 'API Documentation', url: '/documentation' }
+    {
+      label: 'API Documentation',
+      url: '/documentation',
+      linkType: 'aLink'
+    }
   ]
 
   isActive (path) {
