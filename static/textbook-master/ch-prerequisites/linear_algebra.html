@@ -47,8 +47,8 @@
   "@type": "NewsArticle",
   "mainEntityOfPage": "https://community.qiskit.orgtextbook-master/ch-prerequisites/linear_algebra.html",
   "headline": "Linear Algebra",
-  "datePublished": "2020-01-17T18:56:52+00:00",
-  "dateModified": "2020-01-17T18:56:52+00:00",
+  "datePublished": "2020-01-17T18:57:51+00:00",
+  "dateModified": "2020-01-17T18:57:51+00:00",
   "description": "            An Introduction to Linear Algebra for Quantum Computing    from matplotlib import pyplot as pltimport numpy as npfrom qiskit import *from qiskit....",
   "author": {
     "@type": "Person",
@@ -1684,7 +1684,7 @@ $$\begin{pmatrix} x_1 \\ y_1 \end{pmatrix} \ + \ \begin{pmatrix} x_1 \\ y_1 \end
 <p><br>
 $$n |v\rangle \ = \ \begin{pmatrix} nx \\ ny \end{pmatrix} \ \in \ V \ \ \ \ \forall n \ \in \ \mathbb{R}$$
 <br></p>
-<p>This is true as well, as the product of a real number and a real number is in turn a real number, making the entires of the new vector real, and thus proving this statement.</p>
+<p>This is true as well, as the product of a real number and a real number is in turn a real number, making the entries of the new vector real, and thus proving this statement.</p>
 <p><strong>Matrices and Matrix Operations</strong></p>
 <p>Now that we have introduced vectors, we can turn our attention to another fundamental concept: a <strong>matrix</strong>. The best way to think of matrices from a quantum computational/quantum mechanical perspective is the fact that matrices are mathematical objects that transform vectors to other vectors:</p>
 <p><br>
@@ -1694,11 +1694,11 @@ $$|v\rangle \ \rightarrow \ |v'\rangle \ = \ M |v\rangle$$
 <p><br>
 $$M \ = \ \begin{pmatrix} 1 &amp; -2 &amp; 3 \\ 1 &amp; 5i &amp; 0 \\ 1 \ + \ i &amp; 7 &amp; -4 \end{pmatrix}$$
 <br></p>
-<p>We can actually "apply" a matrix to a vector by performing matrix multiplication. In general, matrix multiplication between two matrices involves taking the first row of the first matrix, and multiplying each element by its "partner" in the first column of the second matrix (the first number of the row is multiplied by the first number of the column, second number of the row and second number of column, etc.) These new numbers are then added up, and we have the first element of the first row of the new matrix! To fill in the rest of the first row, we repeat this process for the second, third, etc. columns of the second matrix. Then we take the second row of the first matrix, and repeat the process for each column of the second matrix, getting the second row. We perform this process until was have used all rows of the first matrix. The resulting matrix is our new matrix! That may have been confusing, so here is an example:</p>
+<p>We can actually "apply" a matrix to a vector by performing matrix multiplication. In general, matrix multiplication between two matrices involves taking the first row of the first matrix, and multiplying each element by its "partner" in the first column of the second matrix (the first number of the row is multiplied by the first number of the column, second number of the row and second number of column, etc.) These new numbers are then added up, and we have the first element of the first row of the new matrix! To fill in the rest of the first row, we repeat this process for the second, third, etc. columns of the second matrix. Then we take the second row of the first matrix, and repeat the process for each column of the second matrix, getting the second row. We perform this process until we have used all rows of the first matrix. The resulting matrix is our new matrix! That may have been confusing, so here is an example:</p>
 <p><br>
 $$\begin{pmatrix} 2 &amp; 0 \\ 5 &amp; -1 \end{pmatrix} \begin{pmatrix} -3 &amp; 1 \\ 2 &amp; 1 \end{pmatrix} \ = \ \begin{pmatrix} (2)(-3) + (0)(2) &amp; (2)(1) \ + \ (0)(1) \\ (5)(-3) + (-1)(2) &amp; (5)(1) \ + \ (-1)(1) \end{pmatrix} \ = \ \begin{pmatrix} -6 &amp; 2 \\ -17 &amp; 4 \end{pmatrix}$$
 <br></p>
-<p>As you can see, we simply used the previously outlined process to arrive at the final matrix! Going back to "applying" matrices to vectors, all we have to realize is that a vector is simply a matrix with $1$ column, so matrix multiplication behaves the exact same way! As we previously discussed, in quantum computing we have some quantum state vector that we are manipulating in order to perform quantum computation. Well, as you can probably guess, the way that we represent the manipulation of that vector mathematically is through the application of matrices. We manipulate qubits in our quantum computer by applying sequences of <strong>quantum gates</strong>. As it turns out, we can express each of these quantum gates as a different matrix that can be "applied" to a start vectors, thus changing the state. For instance, one of the most commonly seen quantum gates in the Pauli-X gate, which is represented by the follwing matrix:</p>
+<p>As you can see, we simply used the previously outlined process to arrive at the final matrix! Going back to "applying" matrices to vectors, all we have to realize is that a vector is simply a matrix with $1$ column, so matrix multiplication behaves the exact same way! As we previously discussed, in quantum computing we have some quantum state vector that we are manipulating in order to perform quantum computation. Well, as you can probably guess, the way that we represent the manipulation of that vector mathematically is through the application of matrices. We manipulate qubits in our quantum computer by applying sequences of <strong>quantum gates</strong>. As it turns out, we can express each of these quantum gates as a different matrix that can be "applied" to a state vector, thus changing the state. For instance, one of the most commonly seen quantum gates is the Pauli-X gate, which is represented by the follwing matrix:</p>
 <p><br>
 $$\sigma_x \ = \ \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}$$
 <br></p>
@@ -1734,7 +1734,7 @@ $$A \ = \ \begin{pmatrix} a &amp; b \\ c &amp; d \end{pmatrix} \ \Rightarrow \ A
 <p><br>
 $$\sigma_y \ = \ \begin{pmatrix} 0 &amp; -i \\ i &amp; 0 \end{pmatrix} \ \ \ \ \ \sigma_y^{\dagger} \ = \ \begin{pmatrix} 0 &amp; -i \\ i &amp; 0 \end{pmatrix} \ \Rightarrow \ \sigma_y^{\dagger} \sigma_y \ = \ \begin{pmatrix} (0)(0) + (-i)(i) &amp; (0)(-i) \ + \ (-i)(0) \\ (i)(0) \ + \ (0)(i) &amp;  (i)(-i) \ + \ (0)(0) \end{pmatrix} \ = \ \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix} \ = \ \mathbb{I}$$
 <br></p>
-<p>The reason why unitary matrices are so important in the context of quantum computation will become more apparent in the section on Hilbert spaces, but the basic idea is that evolution of a quantum state by application of a unitary matrix "preserve" the quantum state in a sense (we will discuss this more rigorously in the Hilbert spaces section, and even more so in the quantum mechanics subtopic of the textbook).</p>
+<p>The reason why unitary matrices are so important in the context of quantum computation will become more apparent in the section on Hilbert spaces, but the basic idea is that evolution of a quantum state by application of a unitary matrix "preserves" the quantum state in a sense (we will discuss this more rigorously in the Hilbert spaces section, and even more so in the quantum mechanics subtopic of the textbook).</p>
 <p><strong>Spanning Sets, Linear Dependence and Bases</strong></p>
 <p>We are now in a position to discuss the construction of vector spaces. Consider some vector space $V$. We say that some set of vectors $S$ spans a subspace $V_S \ \subset \ V$ (subset closed under vector space operations) of the vector space if we can write any vector in the subspace as a <strong>linear combination</strong> of vectors contained within the spanning set.</p>
 <p>A linear combination of some collection vectors $|v_1\rangle, \ ..., \ |v_n\rangle$ in some vector space over a field $F$ is defined as an arbitrary sum of these vectors (which of course will be another vector, which we will call $|v\rangle$!):</p>
@@ -1742,7 +1742,7 @@ $$\sigma_y \ = \ \begin{pmatrix} 0 &amp; -i \\ i &amp; 0 \end{pmatrix} \ \ \ \ \
 $$|v\rangle \ = \ f_1 |v_1\rangle \ + \ f_2 |v_2\rangle \ + \ ... \ + \ f_n |v_n\rangle \ = \ \displaystyle\sum_{i} \ f_i |v_i\rangle$$
 <br></p>
 <p>Where each $f_i$ is some element of $F$. Now, if we have a set of vectors that spans a space, we are simply saying that <strong>any other vector</strong> in the vector space can be written as a linear combination of these vectors.</p>
-<p>Now, we are in a position to define a <strong>basis</strong>, which is a specific case of a spanning set, but first, we must talk about <strong>linear dependence</strong>. This is a fairly straightforward idea as well. A set of vectors $|v_1\rangle, \ ..., \ |v_n\rangle$ is said to be linearly dependent if there exist corresponding,  coefficients for each vector, $b_i \ \in \ F$, such that:</p>
+<p>Now, we are in a position to define a <strong>basis</strong>, which is a specific case of a spanning set, but first, we must talk about <strong>linear dependence</strong>. This is a fairly straightforward idea as well. A set of vectors $|v_1\rangle, \ ..., \ |v_n\rangle$ is said to be linearly dependent if there exist corresponding coefficients for each vector, $b_i \ \in \ F$, such that:</p>
 <p><br>
 $$b_1 |v_1\rangle \ + \ b_2 |v_2\rangle \ + \ ... \ + \ b_n |v_n\rangle \ = \ \displaystyle\sum_{i} \ b_i |v_i\rangle \ = \ 0$$
 <br></p>
@@ -1834,7 +1834,7 @@ $$\langle a | b \rangle \ = \ \begin{pmatrix} a_1^{*} &amp; a_2^{*} &amp; ... &a
 <p><br>
 $$\langle \psi | \psi \rangle \ = \ 1 \ \Rightarrow \ |\psi\rangle \ \rightarrow \ U |\psi\rangle \ = \ |\psi'\rangle \ \Rightarrow \ \langle \psi' | \psi' \rangle \ = \ (U |\psi\rangle)^{\dagger} U|\psi\rangle \ = \ \langle \psi | U^{\dagger} U |\psi\rangle \ = \ \langle \psi | \psi \rangle \ = \ 1$$
 <br></p>
-<p>This essentially means that unitary evolution sends quantum states to other valid quantum states. for a single qubit Hilbert space, represented by the Bloch sphere, unitary transformations correspond to rotations of state vectors to different points on the sphere, not changing the length of the state vector in any way.</p>
+<p>This essentially means that unitary evolution sends quantum states to other valid quantum states. For a single qubit Hilbert space, represented by the Bloch sphere, unitary transformations correspond to rotations of state vectors to different points on the sphere, not changing the length of the state vector in any way.</p>
 <p><strong>Eigenvectors and Eigenvalues</strong></p>
 <p>Consider the relationship of the form:</p>
 $$A |v\rangle \ = \ \lambda |v\rangle$$<p>Where $A$ is a matrix, and $\lambda$ is some number. If we are given some matrix $A$, and need to find the vectors $|v\rangle$ and numbers $\lambda$ that satisfy this relationship, we call these vectors <strong>eigenvectors</strong> and their corresponding number multipliers <strong>eigenvalues</strong>. Eigenvectors and eigenvalues have very important physical significance in the context of quantum mechanics, and therefore quantum computation. Given some $A$, we exploit an interesting trick in order to find the set of eigenvectors and corresponding eigenvalues. Let us re-arrange our equation as:</p>
@@ -1875,7 +1875,7 @@ $$U^{\dagger} \ = \ \Big( e^{i\gamma H} \Big)^{\dagger} \ = \ e^{-i \gamma H^{\d
 <p><br>
 $$e^{-i \gamma H^{\dagger}} \ = \ e^{-i \gamma H} \ \Rightarrow \ U^{\dagger} U \ = \ e^{-i \gamma H} e^{i\gamma H} \ = \ \mathbb{I}$$
 <br></p>
-<p>See, fairly straightforward! But wait, a matrix inside of an expinential seems super weird, how is it even still a matrix? Well, this actually becomes much more apparent when we expand our exponential function as a Taylor series. If you recall from calculus, a Taylor series is essentially a way to write any function as an infinite-degree polynomial. I won't go too far into this idea, but the main idea is that we choose the terms of the polynomial and centre it at some point $x_0$ lying on the function we are trying to transform into the polynomial, such that the zeroth, first, second, third, etc. derivative at this point is the same for both the original function and the polynomial. Thus, we write our Taylor series in the form:</p>
+<p>See, fairly straightforward! But wait, a matrix inside of an expinential seems super weird, how is it even still a matrix? Well, this actually becomes much more apparent when we expand our exponential function as a Taylor series. If you recall from calculus, a Taylor series is essentially a way to write any function as an infinite-degree polynomial. I won't go too far into this idea, but the main idea is that we choose the terms of the polynomial and center it at some point $x_0$ lying on the function we are trying to transform into the polynomial, such that the zeroth, first, second, third, etc. derivative at this point is the same for both the original function and the polynomial. Thus, we write our Taylor series in the form:</p>
 <p><br>
 $$g(x) \ = \ \displaystyle\sum_{n \ = \ 0}^{\infty} \ f^{(n)}(x_0) \ \frac{(x \ - \ x_0)^n}{n!}$$
 <br></p>
@@ -1883,7 +1883,7 @@ $$g(x) \ = \ \displaystyle\sum_{n \ = \ 0}^{\infty} \ f^{(n)}(x_0) \ \frac{(x \ 
 <p><br>
 $$g(x) \ = \ \displaystyle\sum_{n \ = \ 0}^{\infty} \ f^{(n)}(0) \ \frac{x^n}{n!}$$
 <br></p>
-<p>And, so if we choose $f(x) \ = \ e^x$, we can create an equivalent polynomial using the Maclaurin series. Since the derivative of $e^x$ is simply $e^x$, and evidently, $e^0 \ = \ 1$, we get:</p>
+<p>And so, if we choose $f(x) \ = \ e^x$, we can create an equivalent polynomial using the Maclaurin series. Since the derivative of $e^x$ is simply $e^x$, and evidently, $e^0 \ = \ 1$, we get:</p>
 <p><br>
 $$g(x) \ = \ \displaystyle\sum_{n \ = \ 0}^{\infty} \ \frac{x^n}{n!} \ = \ e^x$$
 <br></p>
@@ -1891,11 +1891,11 @@ $$g(x) \ = \ \displaystyle\sum_{n \ = \ 0}^{\infty} \ \frac{x^n}{n!} \ = \ e^x$$
 <p><br>
 $$e^{i \gamma H} \ = \ \displaystyle\sum_{n \ = \ 0}^{\infty} \ \frac{(i \gamma H)^n}{n!}$$
 <br></p>
-<p>This makes much more sense, the exponential of a matrix is a matrix. It is an infinite sum of powers of matrices, which looks kind of intimidating, but at least we have concluded that the matrix exponential is in fact a matrix! We are now in a position to demonstrate a very important fact, if we have some matrix $B$ such that $B^2 \ = \ \mathbb{I}$ (this is called an <strong>involutory matrix</strong>), then:</p>
+<p>This makes much more sense; the exponential of a matrix is a matrix. It is an infinite sum of powers of matrices, which looks kind of intimidating, but at least we have concluded that the matrix exponential is in fact a matrix! We are now in a position to demonstrate a very important fact, if we have some matrix $B$ such that $B^2 \ = \ \mathbb{I}$ (this is called an <strong>involutory matrix</strong>), then:</p>
 <p><br>
 $$e^{i \gamma B} \ = \ \cos(\gamma) \mathbb{I} \ + \ i \sin(\gamma) B$$
 <br></p>
-<p>We start with the Maclauren series:</p>
+<p>We start with the Maclaurin series:</p>
 <p><br>
 $$e^{i \gamma B} \ = \ \displaystyle\sum_{n \ = \ 0}^{\infty} \ \frac{(i \gamma B)^n}{n!}$$
 <br></p>
@@ -1915,7 +1915,7 @@ $$\sin x \ \rightarrow \ \cos x \ \rightarrow \ -\sin x \ \rightarrow \ -\cos x 
 <p><br>
 $$\displaystyle\sum_{n \ = \ 0}^{\infty} \ f^{n}(0) \frac{x^n}{n!} \ = \ \displaystyle\sum_{n \ = \ 0}^{\infty} \ \frac{(-1)^n x^{2n \ + \ 1}}{(2n \ + \ 1)!}$$
 <br></p>
-<p>This looks awfully similar to the odd term of our original equation, in fact, if we let $x \ = \ \gamma B$, they are exactly the same. We follow a process that is almost identical to show that the even terms are identical to the Maclauren series for $f(x) \ = \ \cos x$:</p>
+<p>This looks awfully similar to the odd term of our original equation, in fact, if we let $x \ = \ \gamma B$, they are exactly the same. We follow a process that is almost identical to show that the even terms are identical to the Maclaurin series for $f(x) \ = \ \cos x$:</p>
 <p><br>
 $$\cos x \ = \ \displaystyle\sum_{n \ = \ 0}^{\infty} \ f^{n}(0) \frac{x^n}{n!}$$
 <br>
@@ -1941,7 +1941,7 @@ $$\sigma_y \ = \ \begin{pmatrix} 0 &amp; i \\ -i &amp; 0 \end{pmatrix}$$
 <br>
 $$\sigma_z \ = \ \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix}$$
 <br></p>
-<p>These matrices are incredibly important to quantum computation, they are some of the most fundamental "quantum gates" used to manipulate qubits. As it turns out, these operations are not only unitary, they are also <strong>Hermitian</strong> and <strong>Involutory</strong>. This means that a matrix of the form $e^{i \gamma \sigma_k} \ k \ \in \ \{x, \ y, \ z\}$ is not only a valid unitary matrix that can act upon a quantum state vector (a qubit), but it can be expressed using the sine-cosine relationship that we just proved! This is fact very powerful, and is seen throughout quantum computational theory, as gates of this type are used all the time (as you will see in future sections of this textbook)!</p>
+<p>These matrices are incredibly important to quantum computation, they are some of the most fundamental "quantum gates" used to manipulate qubits. As it turns out, these operations are not only unitary, they are also <strong>Hermitian</strong> and <strong>Involutory</strong>. This means that a matrix of the form $e^{i \gamma \sigma_k} \ k \ \in \ \{x, \ y, \ z\}$ is not only a valid unitary matrix that can act upon a quantum state vector (a qubit), but it can be expressed using the sine-cosine relationship that we just proved! This fact is very powerful, and is seen throughout quantum computational theory, as gates of this type are used all the time (as you will see in future sections of this textbook)!</p>
 <p>Before we end this section, there is one other useful fact about matrix exponentials that is worth discussing: if we have some matrix $M$, with eigenvectors $|v\rangle$ and corresponding eigenvalues $v$, then:</p>
 <p><br>
 $$e^{M} |v\rangle \ = \ e^v |v\rangle$$
