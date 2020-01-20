@@ -7,7 +7,6 @@ import uslug from 'uslug'
 import Mode from 'frontmatter-markdown-loader/mode'
 
 import { Configuration } from '@nuxt/types'
-
 import pkg from './package.json'
 import generateTextbookToc from './hooks/generate-textbook-toc'
 
@@ -136,18 +135,38 @@ const config: Configuration = {
   },
 
   router: {
-    scrollBehavior (to) {
-      if (to.hash) {
-        const el: HTMLElement | null = document.querySelector(to.hash)
-        if (!el) { return }
-        if ('scrollBehavior' in document.documentElement.style) {
-          return window.scrollTo({ top: el.offsetTop, behavior: 'smooth' })
-        } else {
-          return window.scrollTo(0, el.offsetTop)
-        }
+    scrollBehavior (to, from) {
+      const nuxt = window.$nuxt
+
+      // Force `triggerScroll` when navigating through the page.
+      // Did not found the event `triggerScroll` documented but it is used in
+      // the default behaviour to ensure the page has loaded:
+      // https://github.com/nuxt/nuxt.js/blob/e3ba6c290dd60e1a8c5b7daec72982a667a7fe04/packages/vue-app/template/router.scrollBehavior.js
+      if (to.path === from.path && to.hash !== from.hash) {
+        nuxt.$nextTick(() => nuxt.$emit('triggerScroll'))
       }
 
-      return { x: 0, y: 0 }
+      return new Promise((resolve) => {
+        nuxt.$once('triggerScroll', () => {
+          if (!to.hash) {
+            return resolve()
+          }
+
+          const el: HTMLElement | null = document.querySelector(to.hash)
+          if (!el) {
+            console.warn('Trying to navigate to a missing element', to.hash)
+            return resolve()
+          }
+
+          if ('scrollBehavior' in document.documentElement.style) {
+            window.scrollTo({ top: el.offsetTop, behavior: 'smooth' })
+          } else {
+            window.scrollTo(0, el.offsetTop)
+          }
+
+          return resolve()
+        })
+      })
     }
   },
 
