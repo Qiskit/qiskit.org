@@ -171,7 +171,6 @@ const config: Configuration = {
   },
 
   generate: {
-    dir: 'public',
     routes: (function () {
       const events = getContentUrls('events')
       const experiments = getContentUrls('experiments')
