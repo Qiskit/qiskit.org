@@ -171,7 +171,6 @@ const config: Configuration = {
   },
 
   generate: {
-    dir: 'public',
     routes: (function () {
       const events = fs.readdirSync(path.resolve(__dirname, 'content', 'events'))
         .filter(filename => path.extname(filename) === '.md')
