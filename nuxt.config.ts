@@ -174,12 +174,16 @@ const config: Configuration = {
     dir: 'public',
     routes: (function () {
       const events = fs.readdirSync(path.resolve(__dirname, 'content', 'events'))
-        .filter(filename => path.extname(filename) === '.md')
+        .filter(isMarkdownContent)
         .map(filename => `/events/${path.parse(filename).name}`)
       const experiments = fs.readdirSync(path.resolve(__dirname, 'content', 'experiments'))
-        .filter(filename => path.extname(filename) === '.md')
+        .filter(isMarkdownContent)
         .map(filename => `/experiments/${path.parse(filename).name}`)
       return events.concat(experiments)
+
+      function isMarkdownContent (filename: string): boolean {
+        return path.extname(filename) === '.md' && filename.toUpperCase() !== 'README.MD'
+      }
     })()
   },
 
