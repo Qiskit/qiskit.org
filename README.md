@@ -163,7 +163,7 @@ Run unit tests made with [Jest](https://jestjs.io/):
   npm run test
 ```
 
-Build static version ready for production, output will generated inside a new folder called `public`:
+Build static version ready for production, output will generated inside a new folder called `dist`:
 ```shell
   npm run build
 ```
