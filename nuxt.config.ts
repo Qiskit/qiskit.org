@@ -172,13 +172,26 @@ const config: Configuration = {
 
   generate: {
     routes: (function () {
-      const events = fs.readdirSync(path.resolve(__dirname, 'content', 'events'))
-        .filter(filename => path.extname(filename) === '.md')
-        .map(filename => `/events/${path.parse(filename).name}`)
-      const experiments = fs.readdirSync(path.resolve(__dirname, 'content', 'experiments'))
-        .filter(filename => path.extname(filename) === '.md')
-        .map(filename => `/experiments/${path.parse(filename).name}`)
+      const events = getContentUrls('events')
+      const experiments = getContentUrls('experiments')
       return events.concat(experiments)
+
+      function getContentUrls (contentRoot: string): string[] {
+        return fs.readdirSync(path.resolve(__dirname, 'content', contentRoot))
+          .filter(isContentAndNotReadme)
+          .map(toContentUrl(contentRoot))
+      }
+
+      function isContentAndNotReadme (filename: string): boolean {
+        return path.extname(filename) === '.md' &&
+               path.parse(filename).name.toUpperCase() !== 'README'
+      }
+
+      function toContentUrl (contentRoot: string): (s: string) => string {
+        return (filename: string): string => {
+          return `/${contentRoot}/${path.parse(filename).name}`
+        }
+      }
     })()
   },
 
