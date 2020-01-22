@@ -47,8 +47,8 @@
   "@type": "NewsArticle",
   "mainEntityOfPage": "https://community.qiskit.orgtextbook/ch-algorithms/bernstein-vazirani.html",
   "headline": "Bernstein-Vazirani Algorithm",
-  "datePublished": "2020-01-22T17:30:16+00:00",
-  "dateModified": "2020-01-22T17:30:16+00:00",
+  "datePublished": "2020-01-22T18:41:15+00:00",
+  "dateModified": "2020-01-22T18:41:15+00:00",
   "description": "            Bernstein-Vazirani Algorithm In this section, we first introduce the Bernstein-Vazirani problem, and classical and quantum algorithms to solve it...",
   "author": {
     "@type": "Person",
@@ -1946,7 +1946,8 @@ $$
 <span class="n">IBMQ</span><span class="o">.</span><span class="n">load_account</span><span class="p">()</span>
 <span class="n">provider</span> <span class="o">=</span> <span class="n">IBMQ</span><span class="o">.</span><span class="n">get_provider</span><span class="p">(</span><span class="n">hub</span><span class="o">=</span><span class="s1">&#39;ibm-q&#39;</span><span class="p">)</span>
 <span class="n">provider</span><span class="o">.</span><span class="n">backends</span><span class="p">()</span>
-<span class="n">backend</span> <span class="o">=</span> <span class="n">least_busy</span><span class="p">(</span><span class="n">provider</span><span class="o">.</span><span class="n">backends</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">configuration</span><span class="p">()</span><span class="o">.</span><span class="n">n_qubits</span> <span class="o">&lt;=</span> <span class="mi">5</span> <span class="ow">and</span> 
+<span class="n">backend</span> <span class="o">=</span> <span class="n">least_busy</span><span class="p">(</span><span class="n">provider</span><span class="o">.</span><span class="n">backends</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">configuration</span><span class="p">()</span><span class="o">.</span><span class="n">n_qubits</span> <span class="o">&lt;=</span> <span class="mi">5</span> <span class="ow">and</span>
+                                   <span class="n">x</span><span class="o">.</span><span class="n">configuration</span><span class="p">()</span><span class="o">.</span><span class="n">n_qubits</span> <span class="o">&gt;=</span> <span class="mi">2</span> <span class="ow">and</span>
                                    <span class="ow">not</span> <span class="n">x</span><span class="o">.</span><span class="n">configuration</span><span class="p">()</span><span class="o">.</span><span class="n">simulator</span> <span class="ow">and</span> <span class="n">x</span><span class="o">.</span><span class="n">status</span><span class="p">()</span><span class="o">.</span><span class="n">operational</span><span class="o">==</span><span class="kc">True</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;least busy backend: &quot;</span><span class="p">,</span> <span class="n">backend</span><span class="p">)</span>
 </pre></div>
