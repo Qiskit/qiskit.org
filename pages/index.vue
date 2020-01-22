@@ -35,8 +35,8 @@
     </LegacySection>
     <LegacySection>
       <article>
-        <h2>IBM Q Experience</h2>
-        <p>New to quantum computing? Try out the IBM Q Experience to get started with Qiskit in the cloud. No installation required and free hosted tutorials. Work is saved in the cloud and automatically updated with every Qiskit release.</p>
+        <h2>IBM Quantum Experience</h2>
+        <p>New to quantum computing? Try out the IBM Quantum Experience to get started with Qiskit in the cloud. No installation required and free hosted tutorials. Work is saved in the cloud and automatically updated with every Qiskit release.</p>
         <LegacyCta
           to="https://quantum-computing.ibm.com/login"
           @click="$trackClickEvent({
@@ -47,7 +47,7 @@
         </LegacyCta>
       </article>
       <aside>
-        <img src="images/qiskit-notebooks.jpg" alt="Screenshot of the IBM Q Experience Qiskit notebooks">
+        <img src="images/qiskit-notebooks.jpg" alt="Screenshot of the IBM Quantum Experience Qiskit notebooks">
       </aside>
     </LegacySection>
     <LegacySection>
