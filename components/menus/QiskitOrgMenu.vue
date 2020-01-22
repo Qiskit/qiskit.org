@@ -26,7 +26,7 @@
                 'vertical-navigation__item': true,
                 'vertical-navigation__item--active': isCommunityActive()
               }"
-              to="/advocates"
+              to="/education"
             >
               Community
             </nuxt-link>
@@ -83,7 +83,7 @@
               'navigation-group__item': true,
               'navigation-group__item--active': isCommunityActive()
             }"
-            to="/advocates"
+            to="/education"
           >
             Community
           </nuxt-link>
@@ -146,9 +146,14 @@ export default class extends Vue {
       url: 'https://quantum-computing.ibm.com/jupyter/tutorial/1_start_here.ipynb',
       segment: {
         action: 'Tutorials'
-      }
+      },
+      linkType: 'aLink'
     },
-    { label: 'API Documentation', url: '/documentation' }
+    {
+      label: 'API Documentation',
+      url: '/documentation',
+      linkType: 'aLink'
+    }
   ]
 
   isActive (path) {

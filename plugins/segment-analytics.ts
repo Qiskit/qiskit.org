@@ -155,6 +155,7 @@ function afterAnalyticsReady<S extends any[]> (callback: (...S) => void) {
 
 declare module 'vue/types/vue' {
   interface Vue {
+    $metaInfo: { title: string }
     $trackClickEvent(params: ClickEventParams): void
     $trackPage(routeName: string, title: string): void
   }
