@@ -26,7 +26,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,minimum-scale=1">
 
-  <title>Investigating Quantum Hardware Using Qiskit</title>
+  <title>Calibrating Qubits with OpenPulse</title>
   <meta name="description" content="            Calibrating qubits using Qiskit and OpenPulse Qiskit is an open-source framework for programming quantum computers (Ref. 1). Using Qiskit, quantu...">
 
   <link rel="canonical" href="https://community.qiskit.orgtextbook/ch-quantum-hardware/calibrating-qubits-openpulse.html">
@@ -34,7 +34,7 @@
 
   <meta property="og:url"         content="https://community.qiskit.orgtextbook/ch-quantum-hardware/calibrating-qubits-openpulse.html" />
 <meta property="og:type"        content="article" />
-<meta property="og:title"       content="Investigating Quantum Hardware Using Qiskit" />
+<meta property="og:title"       content="Calibrating Qubits with OpenPulse" />
 <meta property="og:description" content="            Calibrating qubits using Qiskit and OpenPulse Qiskit is an open-source framework for programming quantum computers (Ref. 1). Using Qiskit, quantu..." />
 <meta property="og:image"       content="https://community.qiskit.org/textbook/images/logo/logo.png" />
 
@@ -46,9 +46,9 @@
   "@context": "http://schema.org",
   "@type": "NewsArticle",
   "mainEntityOfPage": "https://community.qiskit.orgtextbook/ch-quantum-hardware/calibrating-qubits-openpulse.html",
-  "headline": "Investigating Quantum Hardware Using Qiskit",
-  "datePublished": "2020-01-10T18:38:54+00:00",
-  "dateModified": "2020-01-10T18:38:54+00:00",
+  "headline": "Calibrating Qubits with OpenPulse",
+  "datePublished": "2020-01-22T17:30:16+00:00",
+  "dateModified": "2020-01-22T17:30:16+00:00",
   "description": "            Calibrating qubits using Qiskit and OpenPulse Qiskit is an open-source framework for programming quantum computers (Ref. 1). Using Qiskit, quantu...",
   "author": {
     "@type": "Person",
@@ -523,7 +523,7 @@ initFunction(initPrint)
 
 
 <nav id="js-sidebar" class="c-textbook__sidebar">
-  <a href="https://delapuente.github.io/qiskit-textbook"><img src="/textbook/images/logo/logo.png" class="textbook_logo" id="sidebar-logo" data-turbolinks-permanent/></a>
+  <a href="https://qiskit.org/textbook"><img src="/textbook/images/logo/logo.png" class="textbook_logo" id="sidebar-logo" data-turbolinks-permanent/></a>
   <h2 class="c-sidebar__title">Qiskit Textbook</h2>
   <ul class="c-sidebar__chapters">
     
@@ -1553,7 +1553,7 @@ initFunction(initPrint)
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Qiskit is an open-source framework for programming quantum computers (Ref. <a href="#refs">1</a>). Using Qiskit, quantum circuits can be built, simulated and executed on quantum devices.</p>
 <p>OpenPulse provides a language for specifying pulse level control (i.e. control of the continuous time dynamics of input signals) of a general quantum device independent of the specific hardware implementation (Ref. <a href="#refs">2</a>).</p>
-<p>In this tutorial, we show how to implement typical single-qubit calibration and characterization experiments using Qiskit and OpenPulse. These are typically the first round of experiments that would be done in the lab immediately after a device has been fabricated and installed into a system. The presentation is pedagogical, and allows students to explore two-level-system dynamics experimentally.</p>
+<p>In this tutorial, we show how to implement typical single-qubit calibration and characterization experiments using Qiskit and OpenPulse. These are typically the first round of experiments that would be done in the lab immediately after a device has been fabricated and installed into a system. The presentation is pedagogical, and allows students to explore two-level-system dynamics experimentally. All units are returned as standard SI (ie Hz, sec, etc).</p>
 <p>Each experiment gives us more information about the system, which is typically used in subsequent experiments. For this reason, this notebook has to be mostly executed in order.</p>
 
 </div>
@@ -1664,7 +1664,8 @@ Part 1. <a href="#frequencysweep">Finding the qubit frequency using a frequency 
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">dt</span> <span class="o">=</span> <span class="n">backend_config</span><span class="o">.</span><span class="n">dt</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sampling time: {dt*1e9} ns&quot;</span><span class="p">)</span>    <span class="c1"># The configuration returns dt in seconds</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sampling time: {dt*1e9} ns&quot;</span><span class="p">)</span>    <span class="c1"># The configuration returns dt in seconds, so multiply by</span>
+                                        <span class="c1"># 1e9 to get nanoseconds</span>
 </pre></div>
 
     </div>
@@ -1750,8 +1751,11 @@ Part 1. <a href="#frequencysweep">Finding the qubit frequency using a frequency 
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<span class="n">GHz</span> <span class="o">=</span> <span class="mf">1.0e9</span>
-<span class="n">MHz</span> <span class="o">=</span> <span class="mf">1.0e6</span>
+<span class="c1"># unit conversion factors -&gt; all backend properties returned in SI (Hz, sec, etc)</span>
+<span class="n">GHz</span> <span class="o">=</span> <span class="mf">1.0e9</span> <span class="c1"># Gigahertz</span>
+<span class="n">MHz</span> <span class="o">=</span> <span class="mf">1.0e6</span> <span class="c1"># Megahertz</span>
+<span class="n">us</span> <span class="o">=</span> <span class="mf">1.0e-6</span> <span class="c1"># Microseconds</span>
+<span class="n">ns</span> <span class="o">=</span> <span class="mf">1.0e-9</span> <span class="c1"># Nanoseconds</span>
 
 <span class="c1"># We will find the qubit frequency for the following qubit.</span>
 <span class="n">qubit</span> <span class="o">=</span> <span class="mi">0</span>
@@ -1789,8 +1793,8 @@ Part 1. <a href="#frequencysweep">Finding the qubit frequency using a frequency 
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Qubit 0 has an estimated frequency of 4.974265348122223 GHz.
-The sweep will go from 4.954265348122224 GHz to 4.994265348122224 GHz in steps of 1.0 MHz.
+<pre>Qubit 0 has an estimated frequency of 4.9742874067701255 GHz.
+The sweep will go from 4.954287406770125 GHz to 4.994287406770125 GHz in steps of 1.0 MHz.
 </pre>
 </div>
 </div>
@@ -1820,7 +1824,8 @@ The sweep will go from 4.954265348122224 GHz to 4.994265348122224 GHz in steps o
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_closest_multiple_of_16</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># samples need to be multiples of 16</span>
+<span class="k">def</span> <span class="nf">get_closest_multiple_of_16</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
     <span class="k">return</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">num</span><span class="p">)</span><span class="o">%</span><span class="k">16</span>))
 </pre></div>
 
@@ -1842,13 +1847,13 @@ The sweep will go from 4.954265348122224 GHz to 4.994265348122224 GHz in steps o
 <span class="kn">from</span> <span class="nn">qiskit.pulse</span> <span class="kn">import</span> <span class="n">pulse_lib</span>  <span class="c1"># This Pulse module helps us build sampled pulses for common pulse shapes</span>
 
 
-<span class="c1"># Drive pulse parameters</span>
+<span class="c1"># Drive pulse parameters (us = microseconds)</span>
 <span class="n">drive_sigma_us</span> <span class="o">=</span> <span class="mf">0.075</span>                     <span class="c1"># This determines the actual width of the gaussian</span>
 <span class="n">drive_samples_us</span> <span class="o">=</span> <span class="n">drive_sigma_us</span><span class="o">*</span><span class="mi">8</span>        <span class="c1"># This is a truncating parameter, because gaussians don&#39;t have </span>
                                            <span class="c1"># a natural finite length</span>
 
-<span class="n">drive_sigma</span> <span class="o">=</span> <span class="n">get_closest_multiple_of_16</span><span class="p">(</span><span class="n">drive_sigma_us</span> <span class="o">*</span> <span class="mf">1e-6</span><span class="o">/</span><span class="n">dt</span><span class="p">)</span>       <span class="c1"># The width of the gaussian in units of dt</span>
-<span class="n">drive_samples</span> <span class="o">=</span> <span class="n">get_closest_multiple_of_16</span><span class="p">(</span><span class="n">drive_samples_us</span> <span class="o">*</span> <span class="mf">1e-6</span><span class="o">/</span><span class="n">dt</span><span class="p">)</span>   <span class="c1"># The truncating parameter in units of dt</span>
+<span class="n">drive_sigma</span> <span class="o">=</span> <span class="n">get_closest_multiple_of_16</span><span class="p">(</span><span class="n">drive_sigma_us</span> <span class="o">*</span> <span class="n">us</span> <span class="o">/</span><span class="n">dt</span><span class="p">)</span>       <span class="c1"># The width of the gaussian in units of dt</span>
+<span class="n">drive_samples</span> <span class="o">=</span> <span class="n">get_closest_multiple_of_16</span><span class="p">(</span><span class="n">drive_samples_us</span> <span class="o">*</span> <span class="n">us</span> <span class="o">/</span><span class="n">dt</span><span class="p">)</span>   <span class="c1"># The truncating parameter in units of dt</span>
 <span class="n">drive_amp</span> <span class="o">=</span> <span class="mf">0.3</span>
 <span class="c1"># Drive pulse samples</span>
 <span class="n">drive_pulse</span> <span class="o">=</span> <span class="n">pulse_lib</span><span class="o">.</span><span class="n">gaussian</span><span class="p">(</span><span class="n">duration</span><span class="o">=</span><span class="n">drive_samples</span><span class="p">,</span>
@@ -1889,13 +1894,9 @@ The sweep will go from 4.954265348122224 GHz to 4.994265348122224 GHz in steps o
 <span class="n">meas_sigma_us</span> <span class="o">=</span> <span class="mf">0.014</span>     <span class="c1"># The width of the gaussian part of the rise and fall</span>
 <span class="n">meas_risefall_us</span> <span class="o">=</span> <span class="mf">0.1</span>    <span class="c1"># and the truncating parameter: how many samples to dedicate to the risefall</span>
 
-<span class="n">meas_samples</span> <span class="o">=</span> <span class="n">get_closest_multiple_of_16</span><span class="p">(</span><span class="n">meas_samples_us</span> <span class="o">*</span> <span class="mf">1e-6</span><span class="o">/</span><span class="n">dt</span><span class="p">)</span>
-<span class="n">meas_sigma</span> <span class="o">=</span> <span class="n">get_closest_multiple_of_16</span><span class="p">(</span><span class="n">meas_sigma_us</span> <span class="o">*</span> <span class="mf">1e-6</span><span class="o">/</span><span class="n">dt</span><span class="p">)</span>         <span class="c1"># The width of the gaussian part of the rise and fall</span>
-<span class="n">meas_risefall</span> <span class="o">=</span> <span class="n">get_closest_multiple_of_16</span><span class="p">(</span><span class="n">meas_risefall_us</span> <span class="o">*</span> <span class="mf">1e-6</span><span class="o">/</span><span class="n">dt</span><span class="p">)</span>     <span class="c1"># and the truncating parameter: how many samples to dedicate to the risefall</span>
-
-<span class="c1"># meas_samples = 12800</span>
-<span class="c1"># meas_sigma = 64         # The width of the gaussian part of the rise and fall</span>
-<span class="c1"># meas_risefall = 400     # and the truncating parameter: how many samples to dedicate to the risefall</span>
+<span class="n">meas_samples</span> <span class="o">=</span> <span class="n">get_closest_multiple_of_16</span><span class="p">(</span><span class="n">meas_samples_us</span> <span class="o">*</span> <span class="n">us</span><span class="o">/</span><span class="n">dt</span><span class="p">)</span>
+<span class="n">meas_sigma</span> <span class="o">=</span> <span class="n">get_closest_multiple_of_16</span><span class="p">(</span><span class="n">meas_sigma_us</span> <span class="o">*</span> <span class="n">us</span><span class="o">/</span><span class="n">dt</span><span class="p">)</span>       <span class="c1"># The width of the gaussian part in units of dt</span>
+<span class="n">meas_risefall</span> <span class="o">=</span> <span class="n">get_closest_multiple_of_16</span><span class="p">(</span><span class="n">meas_risefall_us</span> <span class="o">*</span> <span class="n">us</span><span class="o">/</span><span class="n">dt</span><span class="p">)</span> <span class="c1"># The truncating parameter in units of dt</span>
 
 <span class="n">meas_amp</span> <span class="o">=</span> <span class="mf">0.25</span>
 <span class="c1"># Measurement pulse samples</span>
@@ -1986,7 +1987,7 @@ The sweep will go from 4.954265348122224 GHz to 4.994265348122224 GHz in steps o
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now that the pulse parameters have been defined, and we have created the pulse shapes for our experiments. We can proceed to creating the pulse schedules.</p>
+<p>Now that the pulse parameters have been defined, and we have created the pulse shapes for our experiments, we can proceed to creating the pulse schedules.</p>
 <p>At each frequency, we will send a drive pulse of that frequency to the qubit and measure immediately after the pulse. The pulse envelopes are independent of frequency, so we will build a reusable <code>schedule</code>, and we will specify the drive pulse frequency with a frequency configuration array.</p>
 
 </div>
@@ -2015,8 +2016,9 @@ The sweep will go from 4.954265348122224 GHz to 4.994265348122224 GHz in steps o
 <span class="c1"># The left shift `&lt;&lt;` is special syntax meaning to shift the start time of the schedule by some duration</span>
 <span class="n">schedule</span> <span class="o">+=</span> <span class="n">measure_schedule</span> <span class="o">&lt;&lt;</span> <span class="n">schedule</span><span class="o">.</span><span class="n">duration</span>
 
-<span class="c1"># Create the frequency settings for the sweep</span>
-<span class="n">schedule_frequencies</span> <span class="o">=</span> <span class="p">[{</span><span class="n">drive_chan</span><span class="p">:</span> <span class="n">freq</span><span class="p">}</span> <span class="k">for</span> <span class="n">freq</span> <span class="ow">in</span> <span class="n">frequencies_GHz</span><span class="p">]</span>
+<span class="c1"># Create the frequency settings for the sweep (MUST BE IN HZ)</span>
+<span class="n">frequencies_Hz</span> <span class="o">=</span> <span class="n">frequencies_GHz</span><span class="o">*</span><span class="n">GHz</span>
+<span class="n">schedule_frequencies</span> <span class="o">=</span> <span class="p">[{</span><span class="n">drive_chan</span><span class="p">:</span> <span class="n">freq</span><span class="p">}</span> <span class="k">for</span> <span class="n">freq</span> <span class="ow">in</span> <span class="n">frequencies_Hz</span><span class="p">]</span>
 </pre></div>
 
     </div>
@@ -2200,7 +2202,7 @@ The sweep will go from 4.954265348122224 GHz to 4.994265348122224 GHz in steps o
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">frequency_sweep_results</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mi">120</span><span class="p">)</span> <span class="c1"># timeout parameter set to 60 seconds</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">frequency_sweep_results</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mi">120</span><span class="p">)</span> <span class="c1"># timeout parameter set to 120 seconds</span>
 </pre></div>
 
     </div>
@@ -2238,7 +2240,7 @@ The sweep will go from 4.954265348122224 GHz to 4.994265348122224 GHz in steps o
     <span class="c1"># Get the results for `qubit` from this experiment</span>
     <span class="n">sweep_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="n">qubit</span><span class="p">])</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">frequencies_GHz</span><span class="p">,</span> <span class="n">sweep_values</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">frequencies_GHz</span><span class="p">,</span> <span class="n">sweep_values</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span> <span class="c1"># plot real part of sweep values</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="nb">min</span><span class="p">(</span><span class="n">frequencies_GHz</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">frequencies_GHz</span><span class="p">)])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Frequency [GHz]&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Measured signal [a.u.]&quot;</span><span class="p">)</span>
@@ -2374,9 +2376,9 @@ The sweep will go from 4.954265348122224 GHz to 4.994265348122224 GHz in steps o
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">A</span><span class="p">,</span> <span class="n">rough_qubit_frequency</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span> <span class="o">=</span> <span class="n">fit_params</span>
-<span class="n">rough_qubit_frequency</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">rough_qubit_frequency</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">rough_qubit_frequency</span> <span class="o">=</span> <span class="n">rough_qubit_frequency</span><span class="o">*</span><span class="n">GHz</span> <span class="c1"># make sure qubit freq is in Hz</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;We&#39;ve updated our qubit frequency estimate from &quot;</span>
-      <span class="sa">f</span><span class="s2">&quot;{round(backend_defaults.qubit_freq_est[qubit] / GHz, 5)} GHz to </span><span class="si">{rough_qubit_frequency}</span><span class="s2"> GHz.&quot;</span><span class="p">)</span>
+      <span class="sa">f</span><span class="s2">&quot;{round(backend_defaults.qubit_freq_est[qubit] / GHz, 5)} GHz to {round(rough_qubit_frequency/GHz, 5)} GHz.&quot;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -2390,7 +2392,7 @@ The sweep will go from 4.954265348122224 GHz to 4.994265348122224 GHz in steps o
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>We&#39;ve updated our qubit frequency estimate from 4.97427 GHz to 4.97435 GHz.
+<pre>We&#39;ve updated our qubit frequency estimate from 4.97429 GHz to 4.97438 GHz.
 </pre>
 </div>
 </div>
@@ -2449,7 +2451,7 @@ The sweep will go from 4.954265348122224 GHz to 4.994265348122224 GHz in steps o
 <span class="c1"># Rabi experiment parameters</span>
 <span class="n">num_rabi_points</span> <span class="o">=</span> <span class="mi">50</span>
 
-<span class="c1"># Drive amplitude values to iterate over: 64 amplitudes evenly spaced from 0 to 0.1</span>
+<span class="c1"># Drive amplitude values to iterate over: 50 amplitudes evenly spaced from 0 to 0.75</span>
 <span class="n">drive_amp_min</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">drive_amp_max</span> <span class="o">=</span> <span class="mf">0.75</span>
 <span class="n">drive_amps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">drive_amp_min</span><span class="p">,</span> <span class="n">drive_amp_max</span><span class="p">,</span> <span class="n">num_rabi_points</span><span class="p">)</span>
@@ -2569,8 +2571,8 @@ The sweep will go from 4.954265348122224 GHz to 4.994265348122224 GHz in steps o
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">job</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">rabi_experiment_program</span><span class="p">)</span>
-<span class="c1"># print(job.job_id())</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># print(job.job_id())</span>
+<span class="n">job</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">rabi_experiment_program</span><span class="p">)</span>
 <span class="n">job_monitor</span><span class="p">(</span><span class="n">job</span><span class="p">)</span>
 </pre></div>
 
@@ -2617,7 +2619,7 @@ The sweep will go from 4.954265348122224 GHz to 4.994265348122224 GHz in steps o
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now that we have our results, we will extract them and fit them to a sinusoidal curve. For the range of drive amplitudes we selected, we expect that we will rotate the qubit several times completely around the Bloch sphere, starting from $|0\rangle$. The amplitude of this sinusoid tells us the fraction of the shots at that Rabi drive amplitude which yielded the $|1\rangle$ state.  We want to find the first amplitude for which that fraction state reaches a maximum -- that is the calibrated amplitude that enacts a $\pi$ pulse.</p>
+<p>Now that we have our results, we will extract them and fit them to a sinusoidal curve. For the range of drive amplitudes we selected, we expect that we will rotate the qubit several times completely around the Bloch sphere, starting from $|0\rangle$. The amplitude of this sinusoid tells us the fraction of the shots at that Rabi drive amplitude which yielded the $|1\rangle$ state.  We want to find the drive amplitude needed for the signal to oscillate from a maximum (all $|0\rangle$ state) to a minimum (all $|1\rangle$ state) -- this gives the calibrated amplitude that enacts a $\pi$ pulse.</p>
 
 </div>
 </div>
@@ -2631,7 +2633,8 @@ The sweep will go from 4.954265348122224 GHz to 4.994265348122224 GHz in steps o
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">baseline_remove</span><span class="p">(</span><span class="n">values</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># center data around 0</span>
+<span class="k">def</span> <span class="nf">baseline_remove</span><span class="p">(</span><span class="n">values</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
 </pre></div>
 
@@ -2654,15 +2657,11 @@ The sweep will go from 4.954265348122224 GHz to 4.994265348122224 GHz in steps o
     <span class="c1"># Get the results for `qubit` from the ith experiment</span>
     <span class="n">rabi_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rabi_results</span><span class="o">.</span><span class="n">get_memory</span><span class="p">(</span><span class="n">i</span><span class="p">)[</span><span class="n">qubit</span><span class="p">])</span>
 
-<span class="n">rabi_values</span> <span class="o">=</span> <span class="n">baseline_remove</span><span class="p">(</span><span class="n">rabi_values</span><span class="p">)</span>    
+<span class="n">rabi_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">baseline_remove</span><span class="p">(</span><span class="n">rabi_values</span><span class="p">))</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Drive amp [a.u.]&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Measured signal [a.u.]&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">drive_amps</span><span class="p">,</span> <span class="n">rabi_values</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mf">0.215</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mf">0.445</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mf">0.445</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mf">0.215</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s2">&quot;&lt;-&gt;&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s2">&quot;$\pi$&quot;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.1e10</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">drive_amps</span><span class="p">,</span> <span class="n">rabi_values</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span> <span class="c1"># plot real part of Rabi values</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 
@@ -2705,6 +2704,14 @@ The sweep will go from 4.954265348122224 GHz to 4.994265348122224 GHz in steps o
 
 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">drive_amps</span><span class="p">,</span> <span class="n">rabi_values</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">drive_amps</span><span class="p">,</span> <span class="n">y_fit</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+
+<span class="n">drive_period</span> <span class="o">=</span> <span class="n">fit_params</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="c1"># get period of rabi oscillation</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">drive_period</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">drive_period</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">drive_period</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="n">drive_period</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s2">&quot;&lt;-&gt;&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s2">&quot;$\pi$&quot;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">drive_period</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="mf">0.03</span><span class="p">,</span> <span class="mf">0.1e10</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Drive amp [a.u.]&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Measured signal [a.u.]&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -2742,8 +2749,7 @@ The sweep will go from 4.954265348122224 GHz to 4.994265348122224 GHz in steps o
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">drive_period</span><span class="p">,</span><span class="n">_</span> <span class="o">=</span> <span class="n">fit_params</span>
-<span class="n">pi_amp</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">drive_period</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pi_amp</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">drive_period</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Pi Amplitude = </span><span class="si">{pi_amp}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 
@@ -2758,7 +2764,7 @@ The sweep will go from 4.954265348122224 GHz to 4.994265348122224 GHz in steps o
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Pi Amplitude = 0.23060434214516984
+<pre>Pi Amplitude = 0.2469284322316107
 </pre>
 </div>
 </div>
@@ -2814,7 +2820,7 @@ The sweep will go from 4.954265348122224 GHz to 4.994265348122224 GHz in steps o
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Once our $\pi$ pulses have been calibrated, we can now create the state $\vert1\rangle$ with good probability. We can use this to find out what the states $\vert0\rangle$ and $\vert1\rangle$ look like in our measurements, by repeatedly preparing them and plotting the measured signal. This is what we use to build a discriminator, which is simply a function which takes a measured and kerneled complex value and classifies it as a 0 or a 1.</p>
+<p>Once our $\pi$ pulses have been calibrated, we can now create the state $\vert1\rangle$ with good probability. We can use this to find out what the states $\vert0\rangle$ and $\vert1\rangle$ look like in our measurements, by repeatedly preparing them and plotting the measured signal. This is what we use to build a discriminator, which is simply a function which takes a measured and kerneled complex value (<code>meas_level=1</code>) and classifies it as a 0 or a 1 (<code>meas_level=2</code>).</p>
 
 </div>
 </div>
@@ -2961,8 +2967,8 @@ We pass the same frequency for both schedules, although it is only used by the <
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">job</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">gnd_exc_program</span><span class="p">)</span>
-<span class="c1"># print(job.job_id())</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># print(job.job_id())</span>
+<span class="n">job</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">gnd_exc_program</span><span class="p">)</span>
 <span class="n">job_monitor</span><span class="p">(</span><span class="n">job</span><span class="p">)</span>
 </pre></div>
 
@@ -3133,8 +3139,8 @@ We pass the same frequency for both schedules, although it is only used by the <
 <span class="n">time_max_us</span> <span class="o">=</span> <span class="mi">450</span>
 <span class="n">time_step_us</span> <span class="o">=</span> <span class="mi">6</span>
 <span class="n">times_us</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">time_max_us</span><span class="p">,</span> <span class="n">time_step_us</span><span class="p">)</span>
-<span class="c1"># Convert to ns first (1 us = 1000 ns) and then convert to units of dt</span>
-<span class="n">delay_times_dt</span> <span class="o">=</span> <span class="n">times_us</span> <span class="o">*</span> <span class="mf">1e-6</span> <span class="o">/</span> <span class="n">dt</span>
+<span class="c1"># Convert to units of dt</span>
+<span class="n">delay_times_dt</span> <span class="o">=</span> <span class="n">times_us</span> <span class="o">*</span> <span class="n">us</span> <span class="o">/</span> <span class="n">dt</span>
 <span class="c1"># We will use the same `pi_pulse` and qubit frequency that we calibrated and used before</span>
 </pre></div>
 
@@ -3155,7 +3161,7 @@ We pass the same frequency for both schedules, although it is only used by the <
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Create schedules for the experiment </span>
 <span class="n">t1_schedules</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">delay</span> <span class="ow">in</span> <span class="n">delay_times_dt</span><span class="p">:</span>
-    <span class="n">this_schedule</span> <span class="o">=</span> <span class="n">pulse</span><span class="o">.</span><span class="n">Schedule</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;T1 delay = </span><span class="si">{delay}</span><span class="s2"> us&quot;</span><span class="p">)</span>
+    <span class="n">this_schedule</span> <span class="o">=</span> <span class="n">pulse</span><span class="o">.</span><span class="n">Schedule</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;T1 delay = {delay * dt/us} us&quot;</span><span class="p">)</span>
     <span class="n">this_schedule</span> <span class="o">+=</span> <span class="n">pi_pulse</span><span class="p">(</span><span class="n">drive_chan</span><span class="p">)</span>
     <span class="n">this_schedule</span> <span class="o">|=</span> <span class="n">measure_schedule</span> <span class="o">&lt;&lt;</span> <span class="nb">int</span><span class="p">(</span><span class="n">delay</span><span class="p">)</span>
     <span class="n">t1_schedules</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">this_schedule</span><span class="p">)</span>
@@ -3302,7 +3308,7 @@ We pass the same frequency for both schedules, although it is only used by the <
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">times_us</span><span class="p">)):</span>
     <span class="n">t1_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t1_results</span><span class="o">.</span><span class="n">get_memory</span><span class="p">(</span><span class="n">i</span><span class="p">)[</span><span class="n">qubit</span><span class="p">])</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">times_us</span><span class="p">,</span> <span class="n">t1_values</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">times_us</span><span class="p">,</span> <span class="n">t1_values</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span> 
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;$T_1$ Experiment&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Delay before measurement [$\mu$s]&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Signal [a.u.]&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
@@ -3428,8 +3434,8 @@ We pass the same frequency for both schedules, although it is only used by the <
 <span class="n">time_max_us</span> <span class="o">=</span> <span class="mf">1.8</span>
 <span class="n">time_step_us</span> <span class="o">=</span> <span class="mf">0.025</span>
 <span class="n">times_us</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">time_max_us</span><span class="p">,</span> <span class="n">time_step_us</span><span class="p">)</span>
-<span class="c1"># Convert to ns first (1 us = 1000 ns) and then convert to units of dt</span>
-<span class="n">delay_times_dt</span> <span class="o">=</span> <span class="n">times_us</span> <span class="o">*</span> <span class="mf">1e-6</span> <span class="o">/</span> <span class="n">dt</span>
+<span class="c1"># Convert to units of dt</span>
+<span class="n">delay_times_dt</span> <span class="o">=</span> <span class="n">times_us</span> <span class="o">*</span> <span class="n">us</span> <span class="o">/</span> <span class="n">dt</span>
 
 <span class="c1"># Drive parameters</span>
 <span class="c1"># The drive amplitude for pi/2 is simply half the amplitude of the pi pulse</span>
@@ -3459,7 +3465,7 @@ We pass the same frequency for both schedules, although it is only used by the <
 <span class="n">ramsey_schedules</span> <span class="o">=</span> <span class="p">[]</span>
 
 <span class="k">for</span> <span class="n">delay</span> <span class="ow">in</span> <span class="n">delay_times_dt</span><span class="p">:</span>
-    <span class="n">this_schedule</span> <span class="o">=</span> <span class="n">pulse</span><span class="o">.</span><span class="n">Schedule</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Ramsey delay = {delay * dt / 1e3} us&quot;</span><span class="p">)</span>
+    <span class="n">this_schedule</span> <span class="o">=</span> <span class="n">pulse</span><span class="o">.</span><span class="n">Schedule</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Ramsey delay = {delay * dt / us} us&quot;</span><span class="p">)</span>
     <span class="n">this_schedule</span> <span class="o">|=</span> <span class="n">x90_pulse</span><span class="p">(</span><span class="n">drive_chan</span><span class="p">)</span>
     <span class="n">this_schedule</span> <span class="o">|=</span> <span class="n">x90_pulse</span><span class="p">(</span><span class="n">drive_chan</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="nb">int</span><span class="p">(</span><span class="n">this_schedule</span><span class="o">.</span><span class="n">duration</span> <span class="o">+</span> <span class="n">delay</span><span class="p">)</span>
     <span class="n">this_schedule</span> <span class="o">|=</span> <span class="n">measure_schedule</span> <span class="o">&lt;&lt;</span> <span class="nb">int</span><span class="p">(</span><span class="n">this_schedule</span><span class="o">.</span><span class="n">duration</span><span class="p">)</span>
@@ -3541,8 +3547,8 @@ We pass the same frequency for both schedules, although it is only used by the <
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Execution settings</span>
 <span class="n">num_shots</span> <span class="o">=</span> <span class="mi">256</span>
 
-<span class="n">detuning_MHz</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="n">ramsey_frequency</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">rough_qubit_frequency</span> <span class="o">+</span> <span class="n">detuning_MHz</span><span class="o">/</span><span class="mf">1.0e3</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="n">detuning_MHz</span> <span class="o">=</span> <span class="mi">2</span> 
+<span class="n">ramsey_frequency</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">rough_qubit_frequency</span> <span class="o">+</span> <span class="n">detuning_MHz</span> <span class="o">*</span> <span class="n">MHz</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span> <span class="c1"># need ramsey freq in Hz</span>
 <span class="n">ramsey_program</span> <span class="o">=</span> <span class="n">assemble</span><span class="p">(</span><span class="n">ramsey_schedules</span><span class="p">,</span>
                              <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">,</span>
                              <span class="n">meas_level</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
@@ -3680,9 +3686,9 @@ We pass the same frequency for both schedules, although it is only used by the <
                                 <span class="p">)</span>
 
 <span class="c1"># Off-resonance component</span>
-<span class="n">_</span><span class="p">,</span> <span class="n">del_f_MHz</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="o">=</span> <span class="n">fit_params</span>
+<span class="n">_</span><span class="p">,</span> <span class="n">del_f_MHz</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="o">=</span> <span class="n">fit_params</span> <span class="c1"># freq is MHz since times in us</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">times_us</span><span class="p">,</span> <span class="n">ramsey_values</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">times_us</span><span class="p">,</span> <span class="n">ramsey_values</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">times_us</span><span class="p">,</span> <span class="n">y_fit</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;df = </span><span class="si">{del_f_MHz:.2f}</span><span class="s2"> MHz&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">times_us</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Delay between X90 pulses [$\mu$s]&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
@@ -3735,8 +3741,9 @@ We pass the same frequency for both schedules, although it is only used by the <
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">precise_qubit_freq</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">rough_qubit_frequency</span> <span class="o">+</span> <span class="p">(</span><span class="n">del_f_MHz</span> <span class="o">-</span> <span class="n">detuning_MHz</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1e3</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Our updated qubit frequency is now </span><span class="si">{precise_qubit_freq}</span><span class="s2"> GHz. It used to be </span><span class="si">{rough_qubit_frequency}</span><span class="s2"> GHz&quot;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">precise_qubit_freq</span> <span class="o">=</span> <span class="n">rough_qubit_frequency</span> <span class="o">+</span> <span class="p">(</span><span class="n">del_f_MHz</span> <span class="o">-</span> <span class="n">detuning_MHz</span><span class="p">)</span> <span class="o">*</span> <span class="n">MHz</span> <span class="c1"># get new freq in Hz</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Our updated qubit frequency is now {round(precise_qubit_freq/GHz, 6)} GHz. &quot;</span>
+      <span class="sa">f</span><span class="s2">&quot;It used to be {round(rough_qubit_frequency / GHz, 6)} GHz&quot;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -3750,7 +3757,7 @@ We pass the same frequency for both schedules, although it is only used by the <
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Our updated qubit frequency is now 4.974421 GHz. It used to be 4.97435 GHz
+<pre>Our updated qubit frequency is now 4.974455 GHz. It used to be 4.974376 GHz
 </pre>
 </div>
 </div>
@@ -3765,7 +3772,7 @@ We pass the same frequency for both schedules, although it is only used by the <
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="B.-Measuring-$T_2$-using-Hahn-echoes-">B. Measuring $T_2$ using Hahn echoes <a id="hahn" /><a class="anchor-link" href="#B.-Measuring-$T_2$-using-Hahn-echoes-"> </a></h2><p>Next, we can measure the coherence time, $T_2$, of our qubit. The pulse sequence used to do this experiment is known as a Hahn echo, a term that comes from the NMR community. A Hahn echo experiment is very similar to the Ramsey experiment above, with an additional $\pi$ pulse between the two $\pi/2$ pulses. The $\pi$ pulse at time $\tau$ reverses the accumulation of phase, and results in an echo at time $2\tau$, where we apply the last $\pi/2$ pulse to do our measurement. The Wikipedia page for Hahn echoes</p>
+<h2 id="B.-Measuring-$T_2$-using-Hahn-echoes-">B. Measuring $T_2$ using Hahn echoes <a id="hahn" /><a class="anchor-link" href="#B.-Measuring-$T_2$-using-Hahn-echoes-"> </a></h2><p>Next, we can measure the coherence time, $T_2$, of our qubit. The pulse sequence used to do this experiment is known as a Hahn echo, a term that comes from the NMR community. A Hahn echo experiment is very similar to the Ramsey experiment above, with an additional $\pi$ pulse between the two $\pi/2$ pulses. The $\pi$ pulse at time $\tau$ reverses the accumulation of phase, and results in an echo at time $2\tau$, where we apply the last $\pi/2$ pulse to do our measurement.</p>
 <p>The decay time for the Hahn echo experiment gives us the coherence time, $T_2$.</p>
 
 </div>
@@ -3784,8 +3791,8 @@ We pass the same frequency for both schedules, although it is only used by the <
 <span class="n">tau_max_us</span> <span class="o">=</span> <span class="mi">200</span>
 <span class="n">tau_step_us</span> <span class="o">=</span> <span class="mi">4</span>
 <span class="n">taus_us</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">tau_max_us</span><span class="p">,</span> <span class="n">tau_step_us</span><span class="p">)</span>
-<span class="c1"># Convert to ns first (1 us = 1000 ns) and then convert to units of dt</span>
-<span class="n">delay_times_dt</span> <span class="o">=</span> <span class="n">taus_us</span> <span class="o">*</span> <span class="mf">1e-6</span> <span class="o">/</span> <span class="n">dt</span>
+<span class="c1"># Convert to units of dt</span>
+<span class="n">delay_times_dt</span> <span class="o">=</span> <span class="n">taus_us</span> <span class="o">*</span> <span class="n">us</span> <span class="o">/</span> <span class="n">dt</span>
 
 <span class="c1"># We will use the pi_pulse and x90_pulse from previous experiments</span>
 </pre></div>
@@ -3806,7 +3813,7 @@ We pass the same frequency for both schedules, although it is only used by the <
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">t2_schedules</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">tau</span> <span class="ow">in</span> <span class="n">delay_times_dt</span><span class="p">:</span>
-    <span class="n">this_schedule</span> <span class="o">=</span> <span class="n">pulse</span><span class="o">.</span><span class="n">Schedule</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;T2 delay = </span><span class="si">{tau}</span><span class="s2"> us&quot;</span><span class="p">)</span>
+    <span class="n">this_schedule</span> <span class="o">=</span> <span class="n">pulse</span><span class="o">.</span><span class="n">Schedule</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;T2 delay = {tau *dt/us} us&quot;</span><span class="p">)</span>
     <span class="n">this_schedule</span> <span class="o">|=</span> <span class="n">x90_pulse</span><span class="p">(</span><span class="n">drive_chan</span><span class="p">)</span>
     <span class="n">this_schedule</span> <span class="o">|=</span> <span class="n">pi_pulse</span><span class="p">(</span><span class="n">drive_chan</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="nb">int</span><span class="p">(</span><span class="n">this_schedule</span><span class="o">.</span><span class="n">duration</span> <span class="o">+</span> <span class="n">tau</span><span class="p">)</span>
     <span class="n">this_schedule</span> <span class="o">|=</span> <span class="n">x90_pulse</span><span class="p">(</span><span class="n">drive_chan</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="nb">int</span><span class="p">(</span><span class="n">this_schedule</span><span class="o">.</span><span class="n">duration</span> <span class="o">+</span> <span class="n">tau</span><span class="p">)</span>
@@ -4058,10 +4065,10 @@ We pass the same frequency for both schedules, although it is only used by the <
 <span class="n">tau_us_max</span> <span class="o">=</span> <span class="mi">40</span>
 <span class="n">tau_step_us</span> <span class="o">=</span> <span class="mf">1.5</span>
 <span class="n">taus_us</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">tau_us_min</span><span class="p">,</span> <span class="n">tau_us_max</span><span class="p">,</span> <span class="n">tau_step_us</span><span class="p">)</span>
-<span class="c1"># Convert to dt</span>
-<span class="n">taus_dt</span> <span class="o">=</span> <span class="n">taus_us</span> <span class="o">*</span> <span class="mf">1e-6</span> <span class="o">/</span> <span class="n">dt</span>
-<span class="n">numpipulses</span> <span class="o">=</span> <span class="mi">6</span> <span class="c1"># apply two pi pulses</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total time ranges from {2.*numpipulses*taus_us[0]} to {2.*numpipulses*taus_us[-1]} us&quot;</span><span class="p">)</span>
+<span class="c1"># Convert to units of dt</span>
+<span class="n">taus_dt</span> <span class="o">=</span> <span class="n">taus_us</span> <span class="o">*</span> <span class="n">us</span> <span class="o">/</span> <span class="n">dt</span>
+<span class="n">num_pi_pulses</span> <span class="o">=</span> <span class="mi">6</span> <span class="c1"># apply two pi pulses</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total time ranges from {2.*num_pi_pulses*taus_us[0]} to {2.*num_pi_pulses*taus_us[-1]} us&quot;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -4095,11 +4102,11 @@ We pass the same frequency for both schedules, although it is only used by the <
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">T2DD_schedules</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">delay</span> <span class="ow">in</span> <span class="n">taus_dt</span><span class="p">:</span>
-    <span class="n">this_schedule</span> <span class="o">=</span> <span class="n">pulse</span><span class="o">.</span><span class="n">Schedule</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;T2DD delay = </span><span class="si">{delay}</span><span class="s2"> us&quot;</span><span class="p">)</span>
+    <span class="n">this_schedule</span> <span class="o">=</span> <span class="n">pulse</span><span class="o">.</span><span class="n">Schedule</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;T2DD delay = {delay * dt/us} us&quot;</span><span class="p">)</span>
     <span class="n">this_schedule</span> <span class="o">|=</span> <span class="n">x90_pulse</span><span class="p">(</span><span class="n">drive_chan</span><span class="p">)</span>
     <span class="n">this_schedule</span> <span class="o">|=</span> <span class="n">pi_pulse</span><span class="p">(</span><span class="n">drive_chan</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="nb">int</span><span class="p">(</span><span class="n">this_schedule</span><span class="o">.</span><span class="n">duration</span> <span class="o">+</span> <span class="n">delay</span><span class="p">)</span>
 
-    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numpipulses</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_pi_pulses</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
         <span class="n">this_schedule</span> <span class="o">|=</span> <span class="n">pi_pulse</span><span class="p">(</span><span class="n">drive_chan</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="nb">int</span><span class="p">(</span><span class="n">this_schedule</span><span class="o">.</span><span class="n">duration</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">delay</span><span class="p">)</span>
 
     <span class="n">this_schedule</span> <span class="o">|=</span> <span class="n">x90_pulse</span><span class="p">(</span><span class="n">drive_chan</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="nb">int</span><span class="p">(</span><span class="n">this_schedule</span><span class="o">.</span><span class="n">duration</span> <span class="o">+</span> <span class="n">delay</span><span class="p">)</span>
@@ -4233,11 +4240,10 @@ We pass the same frequency for both schedules, although it is only used by the <
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">times_us</span> <span class="o">=</span> <span class="mf">2.</span><span class="o">*</span><span class="n">numpipulses</span><span class="o">*</span><span class="n">taus_us</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">times_us</span> <span class="o">=</span> <span class="mf">2.</span><span class="o">*</span><span class="n">num_pi_pulses</span><span class="o">*</span><span class="n">taus_us</span>
 <span class="n">DD_values</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">taus_us</span><span class="p">)):</span>
     <span class="n">DD_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">T2DD_results</span><span class="o">.</span><span class="n">get_memory</span><span class="p">(</span><span class="n">i</span><span class="p">)[</span><span class="n">qubit</span><span class="p">])</span>
-
 
 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">times_us</span><span class="p">,</span> <span class="n">DD_values</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">times_us</span><span class="p">))</span>
@@ -4358,23 +4364,6 @@ We pass the same frequency for both schedules, although it is only used by the <
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-<div class="jb_output_wrapper }}">
-<div class="output_area">
-
-
-<div class="output_html rendered_html output_subarea ">
-<h3>Version Information</h3><table><tr><th>Qiskit Software</th><th>Version</th></tr><tr><td>Qiskit</td><td>0.14.0</td></tr><tr><td>Terra</td><td>0.11.0</td></tr><tr><td>Aer</td><td>0.3.4</td></tr><tr><td>Ignis</td><td>0.2.0</td></tr><tr><td>Aqua</td><td>0.6.1</td></tr><tr><td>IBM Q Provider</td><td>0.4.4</td></tr><tr><th>System information</th></tr><tr><td>Python</td><td>3.7.3 (default, Mar 27 2019, 16:54:48) 
-[Clang 4.0.1 (tags/RELEASE_401/final)]</td></tr><tr><td>OS</td><td>Darwin</td></tr><tr><td>CPUs</td><td>6</td></tr><tr><td>Memory (Gb)</td><td>16.0</td></tr><tr><td colspan='2'>Wed Dec 11 01:59:49 2019 SAST</td></tr></table>
-</div>
-
-</div>
-</div>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -4394,7 +4383,7 @@ We pass the same frequency for both schedules, although it is only used by the <
 
   
     
-    <a id="js-page__nav__next" class="c-page__nav__next" href="/textbook/ch-quantum-hardware/calibrating-qubits-openpulse.html">
+    <a id="js-page__nav__next" class="c-page__nav__next" href="/textbook/ch-quantum-hardware/error-correction-repetition-code.html">
        <span class="u-margin-right-tiny"></span> 〉
     </a>
   
