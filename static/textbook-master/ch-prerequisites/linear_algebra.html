@@ -47,8 +47,8 @@
   "@type": "NewsArticle",
   "mainEntityOfPage": "https://community.qiskit.orgtextbook-master/ch-prerequisites/linear_algebra.html",
   "headline": "Linear Algebra",
-  "datePublished": "2020-01-23T11:08:02+00:00",
-  "dateModified": "2020-01-23T11:08:02+00:00",
+  "datePublished": "2020-01-23T11:10:06+00:00",
+  "dateModified": "2020-01-23T11:10:06+00:00",
   "description": "            An Introduction to Linear Algebra for Quantum Computing    from matplotlib import pyplot as pltimport numpy as npfrom qiskit import *from qiskit....",
   "author": {
     "@type": "Person",
@@ -1628,7 +1628,7 @@ initFunction(initPrint)
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Note that "tail" of the vector doesn't have to be positioned at the origin, all that matters is that it is pointing in the correct direction.</p>
-<p>Now, let's talk about a concrete example of vectors in quantum computing. Oftentimes, in quantum computing, we deal with <strong>state vectors</strong>, which are simply vectors, no different than the one just presented that point to a specific point in space that corresponds to a particular quantum state. Oftentimes, this is visualized using a Bloch sphere. For instance, a vector, representing the state of a quantum system could look something like this arrow, enclosed inside the Bloch sphere, which is the so-called "state" space of all possible points to which our state vectors can "point":</p>
+<p>Now, let's talk about a concrete example of vectors in quantum computing. Oftentimes, in quantum computing, we deal with <strong>state vectors</strong>, which are simply vectors, no different than the one just presented. They point to a specific point in space that corresponds to a particular quantum state. Oftentimes, this is visualized using a Bloch sphere. For instance, a vector, representing the state of a quantum system could look something like this arrow, enclosed inside the Bloch sphere, which is the so-called "state" space of all possible points to which our state vectors can "point":</p>
 
 </div>
 </div>
@@ -1674,7 +1674,7 @@ initFunction(initPrint)
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Hopefully this help to illuminate how vectors can be used to store information about quantum states. This particular state corresponds to an even superposition between $|0\rangle$ and $|1\rangle$ (you can see that the arrow is halfway between $|0\rangle$ at the top and $|1\rangle$ at the bottom of the sphere!). Our vectors are allowed to rotate anywhere on the surface of the sphere, and each of these points represents a different quantum state!</p>
+<p>Hopefully this helps to illuminate how vectors can be used to store information about quantum states. This particular state corresponds to an even superposition between $|0\rangle$ and $|1\rangle$ (you can see that the arrow is halfway between $|0\rangle$ at the top and $|1\rangle$ at the bottom of the sphere!). Our vectors are allowed to rotate anywhere on the surface of the sphere, and each of these points represents a different quantum state!</p>
 <p>Now that we have talked about vectors a bit more intuitively, in the context of quantum computing, we can go back to our more formal definition of a vector, which is that a vector is an element of a vector space. From this, it follows that we must define a vector space. A <strong>vector space</strong> $V$ over a <strong>field</strong> F is a set of objects (vectors), where two conditions hold. Firstly, <strong>vector addition</strong> of two vectors $|a\rangle, \ |b\rangle \ \in \ V$ will yield a third vector $|a\rangle \ + \ |b\rangle \ = \ |c\rangle$, also contained in $V$. The second condition is that <strong>scalar multiplication</strong> between some $|a\rangle \ \in \ V$ and some $n \ \in \ F$, denoted by $n|a\rangle$ is also contained within $V$.</p>
 <p>We will now clarify this previous definition by working through a basic example. Let us demonstrate that the set $\mathbb{R}^2$ over the field $\mathbb{R}$ is a vector space. We assert that</p>
 <p><br>
@@ -1713,7 +1713,7 @@ $$\sigma_x |0\rangle \ = \ \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix} 
 $$\sigma_x |1\rangle \ = \ \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix} \begin{pmatrix} 0 \\ 1 \end{pmatrix} \ = \ \begin{pmatrix} (0)(0) \ + \ (1)(1) \\ (1)(0) \ + \ (0)(1) \end{pmatrix} \ = \ \begin{pmatrix} 1 \\ 0 \end{pmatrix} \ = \ |0\rangle$$
 <br></p>
 <p>And so the matrix acts on the state vectors exactly as expected!</p>
-<p>Within quantum computation, we often deal with two very important types of matrices: <strong>Hermitian</strong> and <strong>Unitary</strong> matrices. The former is more important in the study of quantum mechanics, but is still definitely worth talking about in a study of quantum computation. The latter is of unparalleled importance in both quantum mechanics and quantum computation, if there is one concept that the reader should take away from this entire linear algebra section, it should be the idea of a unitary matrix.</p>
+<p>Within quantum computation, we often deal with two very important types of matrices: <strong>Hermitian</strong> and <strong>Unitary</strong> matrices. The former is more important in the study of quantum mechanics, but is still definitely worth talking about in a study of quantum computation. The latter is of unparalleled importance in both quantum mechanics and quantum computation. If there is one concept that the reader should take away from this entire linear algebra section, it should be the idea of a unitary matrix.</p>
 <p>Firstly, a Hermitian matrix is simply a matrix that is equal to its <strong>conjugate transpose</strong> (denoted with a $\dagger$ symbol). This essentially means taking a matrix, flipping the sign in its imaginary components, and then reflecting the entries of the matrix across its main diagonal (the diagonal that goes from the top left corner to the bottom right corner). For instance, a matrix that we commonly use in quantum computation, the Pauli-Y matrix is Hermitian:</p>
 <p><br>
 $$\sigma_y \ = \ \begin{pmatrix} 0 &amp; -i \\ i &amp; 0 \end{pmatrix} \ \Rightarrow \ \sigma_y^{\dagger} \ = \ \begin{pmatrix} 0 &amp; -(i) \\ -(-i) &amp; 0 \end{pmatrix} \ = \ \begin{pmatrix} 0 &amp; -i \\ i &amp; 0 \end{pmatrix} \ = \ \sigma_y$$
@@ -1728,8 +1728,8 @@ $$A^{-1} A \ = \ A A^{-1} \ = \ \mathbb{I}$$
 <p><br>
 $$A \ = \ \begin{pmatrix} a &amp; b \\ c &amp; d \end{pmatrix} \ \Rightarrow \ A^{-1} \ = \ \frac{1}{\text{det} \ A} \begin{pmatrix} d &amp; -b \\ -c &amp; a \end{pmatrix}$$
 <br></p>
-<p>Where $\text{det} \ A$ is the <strong>determinant</strong> of the matrix. Calculating the matrix for anything larger than $2 \ \times \ 2$ is really annoying, so I won't go into it. In the $2 \ \times \ 2$ case, $\text{det} \ A \ = \ ad \ - \ bc$.</p>
-<p>To be completely honest, the calculating of inverse matrices is <strong>rarely</strong> important in quantum computing. Since most of the matrices we deal with are unitary, we already know that the inverse if simply given by taking the conjugate transpose, so we don't have to go through this annoying process of rigorously calculating the inverse.</p>
+<p>Where $\text{det} \ A$ is the <strong>determinant</strong> of the matrix. In the $2 \ \times \ 2$ case, $\text{det} \ A \ = \ ad \ - \ bc$.</p>
+<p>To be completely honest, the calculating of inverse matrices is <strong>rarely</strong> important in quantum computing. Since most of the matrices we deal with are unitary, we already know that the inverse is simply given by taking the conjugate transpose, so we don't have to go through this annoying process of rigorously calculating the inverse.</p>
 <p>Anyways, going back to to unitary matrices, we can now look at a basic example. As it turns out, the Pauli-Y matrix, in addition to being Hermitian, is also unitary (it is equal to its conjugate transpose, which is also equal to its inverse, therefore, the Pauli-Y matrix is its own inverse, that's pretty cool!). We can verify that this matrix is in fact unitary:</p>
 <p><br>
 $$\sigma_y \ = \ \begin{pmatrix} 0 &amp; -i \\ i &amp; 0 \end{pmatrix} \ \ \ \ \ \sigma_y^{\dagger} \ = \ \begin{pmatrix} 0 &amp; -i \\ i &amp; 0 \end{pmatrix} \ \Rightarrow \ \sigma_y^{\dagger} \sigma_y \ = \ \begin{pmatrix} (0)(0) + (-i)(i) &amp; (0)(-i) \ + \ (-i)(0) \\ (i)(0) \ + \ (0)(i) &amp;  (i)(-i) \ + \ (0)(0) \end{pmatrix} \ = \ \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix} \ = \ \mathbb{I}$$
@@ -1773,7 +1773,7 @@ $$2|a\rangle \ - \ |b\rangle \ = \ 0$$
 <p><br>
 $$\frac{|0\rangle \ + \ |1\rangle}{\sqrt{2}}$$
 <br></p>
-<p>represents a superposition between the $|0\rangle$ and $|1\rangle$ basis state, with equal probability of measuring the state to be in either one of the basis vector states (this is kind of intuitive, as the "weight" or the "amount of each basis vector" in the linear combination is equal, both being scaled by $1/\sqrt{2}$.</p>
+<p>represents a superposition between the $|0\rangle$ and $|1\rangle$ basis state, with equal probability of measuring the state to be in either one of the basis vector states. (this is kind of intuitive, as the "weight" or the "amount of each basis vector" in the linear combination is equal, both being scaled by $1/\sqrt{2}$).</p>
 <p><strong>Hilbert Spaces, Orthonormality, and the Inner Product</strong></p>
 <p>Hilbert Spaces are one of the most important mathematical constructs in quantum mechanics and quantum computation. Less rigorously, a Hilbert space can be thought of as the space state in which all quantum state vectors "live". The main fact that differentiates a Hilbert space from any random vector space is that a Hilbert space is equipped with an <strong>inner product</strong>, which is an operation that can be performed between two vectors, returning a scalar.</p>
 <p>In the context of quantum mechanics and quantum computation, the inner product between two state vectors returns a scalar quantity representing the amount to which the first vector lies along the second vector. From this, the probabilities of measurement in different quantum states, among other things can be calculated (this will be discussed more in the quantum mechanics subtopic).</p>
@@ -1782,7 +1782,7 @@ $$\frac{|0\rangle \ + \ |1\rangle}{\sqrt{2}}$$
 $$\langle a | b \rangle \ = \ \begin{pmatrix} a_1^{*} &amp; a_2^{*} &amp; ... &amp; a_n^{*} \end{pmatrix} \begin{pmatrix} b_1 \\ b_2 \\ . \\ . \\ . \\ b_n \end{pmatrix} \ = \ a_1^{*} b_1 \ + \ a_2^{*} b_2 \ + \ ... \ + \ a_n^{*} b_n$$
 <br></p>
 <p>Where $*$ denotes the complex conjugate of the vector.</p>
-<p>One of the most important conditions for a Hilbert space representing a quantum system is that the inner product of a vector with itself is equal to one: $\langle \psi | \psi \rangle \ = \ 1$. This is the so-called normalization condition, and essentially just states that the length of the vector squared (each componenet of the vector is squared and summed together, by defintion of the inner product) must be equal to one. The physical significance of this is that the length of a vector in a particular direction is representative of the "probability ampltide" of the quantum system with regards to being measured in that particular state. Obviously, the probability of the quantum system being measured in the state that it is actually in must be $1$, after all, the sum of the probabilities of finding the quantum system in any particular state has to equal one (I mean, it has to be in <strong>some</strong> state!).</p>
+<p>One of the most important conditions for a Hilbert space representing a quantum system is that the inner product of a vector with itself is equal to one: $\langle \psi | \psi \rangle \ = \ 1$. This is the so-called normalization condition, and essentially just states that the length of the vector squared (each componenet of the vector is squared and summed together, by defintion of the inner product) must be equal to one. The physical significance of this is that the length of a vector in a particular direction is representative of the "probability amplitude" of the quantum system with regards to being measured in that particular state. Obviously, the probability of the quantum system being measured in the state that it is actually in must be $1$, after all, the sum of the probabilities of finding the quantum system in any particular state has to equal one (I mean, it has to be in <strong>some</strong> state!).</p>
 <p>Let's consider the Bloch sphere:</p>
 
 </div>
@@ -1875,7 +1875,7 @@ $$U^{\dagger} \ = \ \Big( e^{i\gamma H} \Big)^{\dagger} \ = \ e^{-i \gamma H^{\d
 <p><br>
 $$e^{-i \gamma H^{\dagger}} \ = \ e^{-i \gamma H} \ \Rightarrow \ U^{\dagger} U \ = \ e^{-i \gamma H} e^{i\gamma H} \ = \ \mathbb{I}$$
 <br></p>
-<p>See, fairly straightforward! But wait, a matrix inside of an expinential seems super weird, how is it even still a matrix? Well, this actually becomes much more apparent when we expand our exponential function as a Taylor series. If you recall from calculus, a Taylor series is essentially a way to write any function as an infinite-degree polynomial. I won't go too far into this idea, but the main idea is that we choose the terms of the polynomial and center it at some point $x_0$ lying on the function we are trying to transform into the polynomial, such that the zeroth, first, second, third, etc. derivative at this point is the same for both the original function and the polynomial. Thus, we write our Taylor series in the form:</p>
+<p>See, fairly straightforward! But wait, a matrix inside of an exponential seems super weird, how is it even still a matrix? Well, this actually becomes much more apparent when we expand our exponential function as a Taylor series. If you recall from calculus, a Taylor series is essentially a way to write any function as an infinite-degree polynomial. I won't go too far into this idea, but the main idea is that we choose the terms of the polynomial and center it at some point $x_0$ lying on the function we are trying to transform into the polynomial, such that the zeroth, first, second, third, etc. derivative at this point is the same for both the original function and the polynomial. Thus, we write our Taylor series in the form:</p>
 <p><br>
 $$g(x) \ = \ \displaystyle\sum_{n \ = \ 0}^{\infty} \ f^{(n)}(x_0) \ \frac{(x \ - \ x_0)^n}{n!}$$
 <br></p>
