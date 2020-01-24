@@ -78,7 +78,8 @@ const config: Configuration = {
   ** Nuxt.js modules
   */
   modules: [
-    '@nuxtjs/style-resources'
+    '@nuxtjs/style-resources',
+    '@nuxtjs/axios'
   ],
 
   styleResources: {
@@ -197,9 +198,9 @@ const config: Configuration = {
 
   hooks: {
     build: {
-      before () {
-        generateTextbookToc(
-          './static/textbook/preface.html',
+      async before () {
+        await generateTextbookToc(
+          'https://qiskit.org/textbook/preface.html',
           './content/education/textbook-toc.md'
         )
       }
