@@ -23,7 +23,7 @@
         <SoftwareStack
           :stack="[
             {
-              title: 'User Inputs (Circuits, and Scheules)',
+              title: 'User Inputs (Circuits, and Schedules)',
               description: 'Quantum Circuit, Pulse Schedule'
             },
             {
