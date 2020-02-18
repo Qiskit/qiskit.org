@@ -12,4 +12,4 @@ launch: https://jrussellhuffman.com/quantumdice/
 ---
 Is a Dungeons and Dragons style dice roller a good use of a quantum computer? I sure think so.
 
-Computers as we know them (aka classical computers) can, at best, generate pseudo-random numbers. Quantum computers, using uniquely quantum properties, can generate truly random numbers. This project uses random numbers generated from IBM Q's quantum systems to provide a random sequence for a simple dice rolling app.
+Computers as we know them (aka classical computers) can, at best, generate pseudo-random numbers. Quantum computers, using uniquely quantum properties, can generate truly random numbers. This project uses random numbers generated from IBM Quantum systems to provide a random sequence for a simple dice rolling app.

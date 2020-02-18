@@ -1,7 +1,7 @@
 ---
 title: Quantalier
 author: Qiskit Team
-description: The Quantalier is a visual experiment based on IBM Q’s quantum computers. Physically made of over 1000 LEDs and a Raspberry Pi, the shape of the Quantalier reflects the interior elements of a real quantum computer.
+description: The Quantalier is a visual experiment based on IBM Quantum computers. Physically made of over 1000 LEDs and a Raspberry Pi, the shape of the Quantalier reflects the interior elements of a real quantum computer.
 image: /images/experiments/quantalier/QuantalierPizGloria.jpg
 to: /experiments/quantalier
 media:
@@ -11,7 +11,7 @@ media:
 
 source: https://github.com/qiskit
 ---
-The Quantum Chandelier, called the Quantalier, is a visual experiment based on IBM Q’s quantum computers. Physically made of over 1000 LEDs and a single Raspberry Pi, the shape of the Quantalier reflects the interior elements of a real quantum computer.
+The Quantum Chandelier, called the Quantalier, is a visual experiment based on IBM Quantum computers. Physically made of over 1000 LEDs and a single Raspberry Pi, the shape of the Quantalier reflects the interior elements of a real quantum computer.
 
 The horizontal disks of this Quantalier represent the cooling plates of a real quantum computer. In a real computer, these plates isolate the temperature gradients that allow the bottom component to be supercooled to the extremely low temperature of 15 milliKelvin.
 

@@ -24,7 +24,7 @@ Attendees that are new to Qiskit, or simply want to increase their proficiency i
 
 ## Location
 
-Qiskit Camp Asia will take place at [Hoshino Resorts Risonare Yatsugatake](https://risonare.com/yatsugatake/en/) in Japan. The Hoshino Resort is surrounded by Yamanashi Wine country and has views of Mount Fuji. 
+Qiskit Camp Asia will take place at [Hoshino Resorts Risonare Yatsugatake](https://risonare.com/yatsugatake/en/) in Japan. The Hoshino Resort is surrounded by Yamanashi Wine country and has views of Mount Fuji.
 
 129-1 Kobuchisawachō, Hokuto-shi, Yamanashi-ken 408-0044, Japan
 
@@ -58,25 +58,25 @@ This is an initial schedule, subject to change.
 - 17:45 Award Ceremony
 - 18:00 Celebration Dinner
 
-### 21 November 
+### 21 November
 
 - 10:00 Shuttle # 1 Departure from Hoshino Resort
 - 12:00 Hoshino Resort Check Out
 - 15:00 Shuttle # 2 Departure from Hoshino Resort
 
 _(Attendees have the option to extend at their own expense)_
- 
+
 ## Prizes and Contest
- 
+
 There are 3 ways to win this hackathon!
- 
+
 1st & 2nd Prize - Decided by a panel of 3 judges, 1st and 2nd prize winners will be evaluated on 1) Originality and Uniqueness; 2) Live Pitch Presentation; 3) Usefulness; and 4) Technical complexity. 1st place winners will receive a paid trip to the annual flagship Qiskit Camp event near Yorktown Heights, NY.
- 
+
 Community Choice - The community choice award will be given based on the highest scoring team voted on by the community.
 
 ## Code of Conduct
 
-IBM Quantum is dedicated to providing an enjoyable and safe experience for all participants. In the interest of fostering an open and welcoming environment, all participants, including attendees, speakers, sponsors, volunteers, online contributors, and IBM employees are expected to show respect for each other and our community by creating a harassment-free experience for everyone, regardless of age, body size, disability, ethnicity, gender identity and expression, level of experience, nationality, personal appearance, race, religion, or sexual identity and orientation. Expected behavior applies to both online and offline engagement with the IBM Q Community.
+IBM Quantum is dedicated to providing an enjoyable and safe experience for all participants. In the interest of fostering an open and welcoming environment, all participants, including attendees, speakers, sponsors, volunteers, online contributors, and IBM employees are expected to show respect for each other and our community by creating a harassment-free experience for everyone, regardless of age, body size, disability, ethnicity, gender identity and expression, level of experience, nationality, personal appearance, race, religion, or sexual identity and orientation. Expected behavior applies to both online and offline engagement with the IBM Quantum Community.
 
 Examples of behavior that contributes to creating a positive environment include:
 
@@ -96,7 +96,7 @@ Offensive or degrading language.
 Publishing others' private information, such as a physical or electronic address, without explicit permission.
 Destruction or vandalism of personal property or event site or materials.
 Other conduct which could reasonably be considered inappropriate in a professional setting.
-Harassment will not be tolerated in any form. Participants in the IBM Q Community should conduct themselves with respect and courtesy.
+Harassment will not be tolerated in any form. Participants in the IBM Quantum Community should conduct themselves with respect and courtesy.
 
 ### Pre-Event Concerns
 

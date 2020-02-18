@@ -32,7 +32,7 @@
             },
             {
               title: 'Providers',
-              description: 'Qiskit Aer, IBM Q, Third Party'
+              description: 'Qiskit Aer, IBM Quantum, Third Party'
             },
             {
               title: 'Visualization and Quantum Information Tools',
