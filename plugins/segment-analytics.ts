@@ -48,7 +48,7 @@ function configureAnalytics () {
   window.digitalData = {
     page: {
       pageInfo: {
-        productTitle: 'IBM Quantum Experience',
+        productTitle: 'IBM Q Experience',
         analytics: {
           category: 'Qiskit.org'
         }
