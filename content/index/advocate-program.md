@@ -6,5 +6,5 @@ A global program that provides support to the individuals who actively work on a
 
 - Educators can request funding for events and projects
 - Access to a network of experts
-- Prioritized access to the IBM Q hardware
+- Prioritized access to the IBM Quantum hardware
 - Opportunities to get your work officially supported by IBM
