@@ -1,8 +1,20 @@
 <template>
   <footer>
-    <p>Copyright IBM Corp. 2018-2019</p>
+    <p>Copyright IBM Corp. 2018-{{ currentYear }}</p>
   </footer>
 </template>
+
+<script lang="ts">
+import Vue from 'vue'
+import { Component } from 'vue-property-decorator'
+
+const today = new Date()
+
+@Component
+export default class extends Vue {
+  currentYear = today.getFullYear()
+}
+</script>
 
 <style scoped>
 footer {
