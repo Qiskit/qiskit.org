@@ -12,8 +12,8 @@
         <h2>About</h2>
         <p>
           Your IBM Q Account is the doorway for accessing the full suite of
-          cloud-based IBM Q quantum systems and simulators. From job submission
-          and tracking to viewing detailed quantum device properties, the IBM Q
+          cloud-based IBM Quantum systems and simulators. From job submission
+          and tracking to viewing detailed quantum device properties, the IBM Quantum
           Account connects the proven Qiskit software framework to the most
           advanced quantum computing platforms on the planet.
           <a
@@ -28,7 +28,7 @@
           >
             Follow these steps
           </a>
-          to set up your Qiskit environment to send jobs to IBM Q systems.
+          to set up your Qiskit environment to send jobs to IBM Quantum systems.
         </p>
       </article>
       <article>
