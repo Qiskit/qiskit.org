@@ -33,17 +33,23 @@ export default class extends QiskitPage {
   routeName: string = 'events'
 
   autoplayVideo () {
+    if (!this.$refs.video) {
+      return
+    }
+
+    const video = this.$refs.video as any
+
     setTimeout(() => {
-      if (this.$refs.video) {
-        this.$refs.video.load()
-        this.$refs.video.muted = true
-        this.$refs.video.play()
-      }
+      video.load()
+      video.muted = true
+      video.play()
     }, 1)
   }
 
-  created () {
-    this.autoplayVideo()
+  mounted () {
+    if (window.innerWidth > 600) {
+      this.autoplayVideo()
+    }
   }
 }
 </script>
@@ -53,18 +59,21 @@ export default class extends QiskitPage {
 .header-video {
   position: relative;
   overflow: hidden;
-  height: 40vh;
+  height: 35vh;
 
   &__video {
     position: absolute;
     width: 100%;
-    top: -50%;
+    @include mq($from: super-wide-desktop) {
+      top: -60%;
+    }
   }
 
   &:after {
     content: '';
     height: 100%;
     width: 100%;
+    bottom: -2px;
     position: absolute;
     background: linear-gradient(0deg, var(--primary-color) 0%, #242a2e00 100%);
   }
