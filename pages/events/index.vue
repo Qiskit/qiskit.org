@@ -1,6 +1,6 @@
 <template>
   <main>
-    <header class="header-video">
+    <header v-if="isDesktop" class="header-video">
       <video
         ref="video"
         class="header-video__video"
@@ -31,6 +31,7 @@ import QiskitPage from '~/components/qiskit/QiskitPage.vue'
 
 export default class extends QiskitPage {
   routeName: string = 'events'
+  windowWidth: Number = 0
 
   autoplayVideo () {
     if (!this.$refs.video) {
@@ -46,10 +47,16 @@ export default class extends QiskitPage {
     }, 1)
   }
 
+  get isDesktop () {
+    return this.windowWidth > 600
+  }
+
   mounted () {
-    if (window.innerWidth > 600) {
+    this.windowWidth = window.innerWidth
+
+    this.$nextTick(() => {
       this.autoplayVideo()
-    }
+    })
   }
 }
 </script>
@@ -73,7 +80,7 @@ export default class extends QiskitPage {
     content: '';
     height: 100%;
     width: 100%;
-    bottom: -2px;
+    bottom: -.5rem;
     position: absolute;
     background: linear-gradient(0deg, var(--primary-color) 0%, #242a2e00 100%);
   }
