@@ -1,6 +1,6 @@
 <template>
   <main>
-    <header v-if="isDesktop" class="header-video">
+    <header v-if="isDesktop" class="header-video" playsinline>
       <video
         ref="video"
         class="header-video__video"
@@ -38,25 +38,22 @@ export default class extends QiskitPage {
       return
     }
 
-    const video = this.$refs.video as any
+    const video = this.$refs.video as HTMLMediaElement
 
-    setTimeout(() => {
-      video.load()
-      video.muted = true
-      video.play()
-    }, 1)
+    video.load()
+    video.muted = true
+    video.play()
   }
 
   get isDesktop () {
     return this.windowWidth > 600
   }
 
-  mounted () {
+  async mounted () {
     this.windowWidth = window.innerWidth
 
-    this.$nextTick(() => {
-      this.autoplayVideo()
-    })
+    await this.$nextTick()
+    this.autoplayVideo()
   }
 }
 </script>
