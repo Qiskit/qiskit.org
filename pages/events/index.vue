@@ -1,6 +1,6 @@
 <template>
   <main>
-    <header class="header-video">
+    <header v-if="isDesktop" class="header-video" playsinline>
       <video
         ref="video"
         class="header-video__video"
@@ -31,18 +31,28 @@ import QiskitPage from '~/components/qiskit/QiskitPage.vue'
 
 export default class extends QiskitPage {
   routeName: string = 'events'
+  windowWidth: Number = 0
 
   autoplayVideo () {
-    setTimeout(() => {
-      if (this.$refs.video) {
-        this.$refs.video.load()
-        this.$refs.video.muted = true
-        this.$refs.video.play()
-      }
-    }, 1)
+    if (!this.$refs.video) {
+      return
+    }
+
+    const video = this.$refs.video as HTMLMediaElement
+
+    video.load()
+    video.muted = true
+    video.play()
   }
 
-  created () {
+  get isDesktop () {
+    return this.windowWidth > 600
+  }
+
+  async mounted () {
+    this.windowWidth = window.innerWidth
+
+    await this.$nextTick()
     this.autoplayVideo()
   }
 }
@@ -53,18 +63,21 @@ export default class extends QiskitPage {
 .header-video {
   position: relative;
   overflow: hidden;
-  height: 40vh;
+  height: 35vh;
 
   &__video {
     position: absolute;
     width: 100%;
-    top: -50%;
+    @include mq($from: super-wide-desktop) {
+      top: -60%;
+    }
   }
 
   &:after {
     content: '';
     height: 100%;
     width: 100%;
+    bottom: -.5rem;
     position: absolute;
     background: linear-gradient(0deg, var(--primary-color) 0%, #242a2e00 100%);
   }
