@@ -23,7 +23,7 @@
         <SoftwareStack
           :stack="[
             {
-              title: 'User Inputs (Circuits, and Scheules)',
+              title: 'User Inputs (Circuits, and Schedules)',
               description: 'Quantum Circuit, Pulse Schedule'
             },
             {
@@ -32,7 +32,7 @@
             },
             {
               title: 'Providers',
-              description: 'Qiskit Aer, IBM Q, Third Party'
+              description: 'Qiskit Aer, IBM Quantum, Third Party'
             },
             {
               title: 'Visualization and Quantum Information Tools',
