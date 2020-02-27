@@ -12,15 +12,28 @@
         Your browser does not support HTML5 video.
       </video>
     </header>
+    <EventCard
+      type="Camp"
+      title="Qiskit Camp 2020"
+      image="/images/events/promo-vermont.jpg"
+      place="Vermont, United States"
+      date="March 20-25, 2020"
+      to="/experiments/quantalier"
+    />
   </main>
 </template>
 
 <script lang="ts">
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/qiskit/QiskitPage.vue'
+import EventCard from '~/components/cards/EventCard.vue'
 
 @Component({
   layout: 'event',
+
+  components: {
+    EventCard
+  },
 
   head () {
     return {

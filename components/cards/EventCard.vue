@@ -11,6 +11,7 @@
             <h3>{{ title }}</h3>
           </div>
           <div>
+            <Bee32 />
             <p class="event-content__place">
               {{ place }}
             </p>
