@@ -11,10 +11,11 @@
             <h3>{{ title }}</h3>
           </div>
           <div>
-            <Bee32 />
+            <Map32 />
             <p class="event-content__place">
               {{ place }}
             </p>
+            <Calendar32 />
             <p class="event-content__date">
               {{ date }}
             </p>
@@ -62,6 +63,7 @@ export default class extends Vue {
   display: flex;
   font-size: 0.9rem;
   color: var(--body-color-light);
+  fill: var(--body-color-light);
   background-color: var(--primary-color);
 
   &__details {
