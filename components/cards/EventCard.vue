@@ -1,5 +1,5 @@
 <template>
-  <article>
+  <article class="event-card">
     <nuxt-link
       :to="to"
       class="card-link"
@@ -11,15 +11,10 @@
             <h3>{{ title }}</h3>
           </div>
           <div>
-            <Map32 />
-            <p class="event-content__place">
-              {{ place }}
-            </p>
-            <Calendar32 />
-            <p class="event-content__date">
-              {{ date }}
-            </p>
+            <p><Map20 /> {{ place }}</p>
+            <p><Calendar20 /> {{ date }}</p>
           </div>
+          <ArrowRight20 class="event-content__arrow-right" />
         </div>
         <div
           class="event-content__picture"
@@ -58,21 +53,37 @@ export default class extends Vue {
 }
 
 .event-content {
-  width: 735px;
-  height: 254px;
+  height: 15.875rem;
+  width: 100%;
   display: flex;
   font-size: 0.9rem;
-  color: var(--body-color-light);
-  fill: var(--body-color-light);
-  background-color: var(--primary-color);
+  color: var(--white);
+  background-color: var(--gray-70);
 
   &__details {
+    width: 50%;
     display: grid;
     justify-content: space-between;
+    fill: var(--white);
+  }
+
+  &__details p {
+    font-size: 0.875rem;
+  }
+
+  &__details h3 {
+    font-size: 1.5rem;
+  }
+
+  &__arrow-right {
+    position: relative;
+    bottom: -1.25rem;
+    right: -1.25rem;
+    fill: var(--purple-60);
   }
 
   &__picture {
-    width: 100%;
+    width: 50%;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
