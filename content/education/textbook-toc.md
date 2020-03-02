@@ -19,18 +19,21 @@
 - Basic Circuit Identities
 ### Chapter 3. Quantum Algorithms
 - Quantum Teleportation
+- Superdense Coding
 - Deutsch-Josza Algorithm
 - Bernstein-Vazirani Algorithm
 - Simon's Algorithm
 - Quantum Fourier Transform
 - Quantum Phase Estimation
 - Grover's Algorithm
+- Quantum Counting
 ### Chapter 4. Quantum Algorithms for Applications
 - Simulating Molecules using VQE
 - Solving combinatorial optimization problems using QAOA
 - Solving Satisfiability Problems using Grover's Algorithm
 ### Chapter 5. Investigating Quantum Hardware Using Qiskit
 - Calibrating Qubits with OpenPulse
+- Accessing Higher Energy States
 - Introduction to Quantum Error Correction using Repetition Codes
 - Measurement Error Mitigation
 - Randomized Benchmarking
