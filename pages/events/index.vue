@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <div class="event-page">
     <header v-if="isDesktop" class="header-video" playsinline>
       <video
         ref="video"
@@ -11,6 +11,9 @@
         <source src="@/assets/videos/qiskit-camp-africa-2019.mp4" type="video/ogg">
         Your browser does not support HTML5 video.
       </video>
+      <div class="event-page__title">
+        <h1 class="wrapper">Qiskit Events</h1>
+      </div>
     </header>
     <EventCard
       v-for="event in events"
@@ -23,6 +26,32 @@
       :to="event.to"
     />
   </main>
+    <main class="wrapper event-page__content">
+      <div class="event-page__filters-time">
+        <cv-tabs aria-label="navigation tab label">
+          <cv-tab id="tab-1"label="Tab link 1"/>
+          <cv-tab id="tab-2"label="Tab link 2"/>
+        </cv-tabs>
+      </div>
+      <div class="event-page__view">
+        Carbon tabs
+      </div>
+      <div class="event-page__filters-checkboxes">
+        <cv-checkbox
+          v-model="checks" value="check-1" label="check-1">
+        </cv-checkbox>
+        <cv-checkbox
+          v-model="checks" value="check-2" label="check-2">
+        </cv-checkbox>
+        <cv-checkbox
+          v-model="checks" value="check-3" label="check-3">
+        </cv-checkbox>
+      </div>
+      <div class="event-page__results">
+        Results
+      </div>
+    </main>
+  </div>
 </template>
 
 <script lang="ts">
@@ -91,6 +120,43 @@ export default class extends QiskitPage {
 
 <style lang="scss">
 
+.event-page {
+  background-color: var(--primary-color);
+  height: 100%;
+  color: white;
+
+  &__title {
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+    width: 100%;
+  }
+
+  &__content {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+  }
+
+  &__filters-time {
+    grid-area: 1 / 1 / 2 / 7;
+  }
+
+  &__view {
+    grid-area: 1 / 7 / 2 / 8;
+  }
+
+  &__filters-checkboxes {
+    grid-area: 2 / 1 / 3 / 3;
+  }
+
+  &__results {
+    grid-area: 2 / 3 / 3 / 8;
+  }
+}
+
 .header-video {
   position: relative;
   overflow: hidden;
@@ -112,5 +178,11 @@ export default class extends QiskitPage {
     position: absolute;
     background: linear-gradient(0deg, var(--primary-color) 0%, #242a2e00 100%);
   }
+}
+
+.wrapper {
+  max-width: 1056px;
+  margin: 0 auto;
+  width: 100%;
 }
 </style>
