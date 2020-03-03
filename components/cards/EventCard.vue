@@ -73,7 +73,6 @@ export default class extends Vue {
 
   &__details p {
     font-size: 0.875rem;
-    line-height: 1.25rem;
     margin-top: 0;
   }
 
