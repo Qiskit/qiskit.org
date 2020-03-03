@@ -1,30 +1,40 @@
 <template>
-  <article class="event-card">
-    <nuxt-link
-      :to="to"
-      class="card-link"
-    >
-      <div class="event-content">
-        <div class="event-content__details">
-          <div>
-            <p>{{ type }}</p>
-            <h3>{{ title }}</h3>
+  <nuxt-link
+    :to="to"
+    class="card-link"
+  >
+    <article class="event-card">
+      <div class="event-card__content">
+        <header>
+          <span class="event-card__subtitle">
+            {{ type }}
+          </span>
+          <h3 class="event-card__title">
+            {{ title }}
+          </h3>
+        </header>
+
+        <footer>
+          <div class="event-card__info-detail">
+            <Map20 class="event-card__icon-map" />
+            <span class="event-card__place">{{ place }}</span>
           </div>
-          <div>
-            <p><Map20 /> {{ place }}</p>
-            <div class="event-content__date-and-arrow">
-              <p><Calendar20 /> {{ date }}</p>
-              <ArrowRight20 class="event-content__arrow-right" />
+          <div class="event-card__date-and-arrow">
+            <div class="event-card__info-detail">
+              <Calendar20 class="event-card__icon-calendar" />
+              <span class="event-card__date">{{ date }}</span>
             </div>
+            <ArrowRight20 class="event-card__icon-arrow-right" />
           </div>
-        </div>
-        <div
-          class="event-content__picture"
-          :style="`background-image: ${decorate(image)};`"
-        />
+        </footer>
       </div>
-    </nuxt-link>
-  </article>
+
+      <div
+        class="event-card__media"
+        :style="`background-image: ${decorate(image)};`"
+      />
+    </article>
+  </nuxt-link>
 </template>
 
 <script lang="ts">
@@ -50,39 +60,56 @@ export default class extends Vue {
 </script>
 
 <style lang="scss" scoped>
+@mixin config-icons($prefix, $colors...) {
+  @each $color in $colors {
+    .#{$prefix}#{nth($color, 1)} {
+      fill: nth($color, 2);
+      position: relative;
+      top: .2em;
+    }
+  }
+}
+
+@include config-icons('event-card__icon-',
+    'map' var(--white),
+    'calendar' var(--white),
+    'arrow-right' var(--purple-60)
+);
+
 .card-link {
   text-decoration: none;
 }
 
-.event-content {
+.event-card {
   height: 15.875rem;
   width: 100%;
-  display: flex;
-  font-size: 0.9rem;
-  color: var(--white);
   background-color: var(--gray-70);
+  display: flex;
 
-  &__details {
+  &__content {
+    color: var(--white);
     width: 50%;
     margin: 16px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    fill: var(--white);
   }
 
-  &__details p {
-    font-size: 0.875rem;
-    margin-top: 0;
-  }
-
-  &__details h3 {
+  &__title {
     font-size: 1.5rem;
+    margin-top: 0.313rem;
   }
 
-  &__details svg {
-    top: .15em;
-    position: relative;
+  &__subtitle, &__place, &__date {
+    font-size: 0.875rem;
+  }
+
+  &__place, &__date {
+    padding-left: 0.313rem;
+  }
+
+  &__info-detail {
+    margin-top: 0.625rem;
   }
 
   &__date-and-arrow {
@@ -91,11 +118,7 @@ export default class extends Vue {
     align-items: baseline;
   }
 
-  &__arrow-right {
-    fill: var(--purple-60);
-  }
-
-  &__picture {
+  &__media {
     width: 50%;
     background-repeat: no-repeat;
     background-size: cover;
