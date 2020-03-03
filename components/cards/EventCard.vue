@@ -58,7 +58,7 @@ export default class extends Vue {
 }
 
 .event-card {
-  height: 15.875rem;
+  height: 15.88rem;
   width: 100%;
   background-color: var(--gray-70);
   color: var(--white);
@@ -74,19 +74,19 @@ export default class extends Vue {
 
   &__title {
     font-size: 1.5rem;
-    margin-top: 0.313rem;
+    margin-top: 0.31rem;
   }
 
   &__subtitle, &__place, &__date {
-    font-size: 0.875rem;
+    font-size: 0.88rem;
   }
 
   &__place, &__date {
-    padding-left: 0.313rem;
+    padding-left: 0.31rem;
   }
 
   &__info-detail {
-    margin-top: 0.625rem;
+    margin-top: 0.63rem;
   }
 
   &__icon {
