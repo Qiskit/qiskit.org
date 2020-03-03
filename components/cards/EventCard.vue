@@ -65,7 +65,9 @@ export default class extends Vue {
     .#{$prefix}#{nth($color, 1)} {
       fill: nth($color, 2);
       position: relative;
-      top: .2em;
+      top: .3em;
+      width: 1.25rem;
+      height: 1.25rem;
     }
   }
 }
@@ -89,7 +91,7 @@ export default class extends Vue {
   &__content {
     color: var(--white);
     width: 50%;
-    margin: 16px;
+    margin: 1rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
