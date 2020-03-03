@@ -16,15 +16,15 @@
 
         <footer>
           <div class="event-card__info-detail">
-            <Map20 class="event-card__icon-map" />
+            <Map20 class="event-card__icon" />
             <span class="event-card__place">{{ place }}</span>
           </div>
           <div class="event-card__date-and-arrow">
             <div class="event-card__info-detail">
-              <Calendar20 class="event-card__icon-calendar" />
+              <Calendar20 class="event-card__icon" />
               <span class="event-card__date"><time>{{ date }}</time></span>
             </div>
-            <ArrowRight20 class="event-card__icon-arrow-right" />
+            <ArrowRight20 class="event-card__icon event-card__icon--purple" />
           </div>
         </footer>
       </div>
@@ -53,24 +53,6 @@ export default class extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@mixin config-icons($prefix, $colors...) {
-  @each $color in $colors {
-    .#{$prefix}#{nth($color, 1)} {
-      fill: nth($color, 2);
-      position: relative;
-      top: .3em;
-      width: 1.25rem;
-      height: 1.25rem;
-    }
-  }
-}
-
-@include config-icons('event-card__icon-',
-    'map' var(--white),
-    'calendar' var(--white),
-    'arrow-right' var(--purple-60)
-);
-
 .card-link {
   text-decoration: none;
 }
@@ -79,10 +61,10 @@ export default class extends Vue {
   height: 15.875rem;
   width: 100%;
   background-color: var(--gray-70);
+  color: var(--white);
   display: flex;
 
   &__content {
-    color: var(--white);
     width: 50%;
     margin: 1rem;
     display: flex;
@@ -105,6 +87,18 @@ export default class extends Vue {
 
   &__info-detail {
     margin-top: 0.625rem;
+  }
+
+  &__icon {
+  fill: currentColor;
+  position: relative;
+  top: .3em;
+  width: 1.25rem;
+  height: 1.25rem;
+
+    &--purple {
+      color: var(--purple-60)
+    }
   }
 
   &__date-and-arrow {
