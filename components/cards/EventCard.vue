@@ -90,11 +90,11 @@ export default class extends Vue {
   }
 
   &__icon {
-  fill: currentColor;
-  position: relative;
-  top: .3em;
-  width: 1.25rem;
-  height: 1.25rem;
+    fill: currentColor;
+    position: relative;
+    top: .3em;
+    width: 1.25rem;
+    height: 1.25rem;
 
     &--purple {
       color: var(--purple-60)
