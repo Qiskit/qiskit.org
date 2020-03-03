@@ -31,7 +31,7 @@
 
       <div
         class="event-card__media"
-        :style="`background-image: ${decorate(image)};`"
+        :style="`background-image: url(${image});`"
       />
     </article>
   </nuxt-link>
@@ -49,13 +49,6 @@ export default class extends Vue {
   @Prop(String) place
   @Prop(String) date
   @Prop(String) to
-
-  decorate (image) {
-    const bgEffects = [
-      `url(${image})`
-    ]
-    return bgEffects.join(', ')
-  }
 }
 </script>
 
