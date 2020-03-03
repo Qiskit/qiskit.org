@@ -12,9 +12,11 @@
           </div>
           <div>
             <p><Map20 /> {{ place }}</p>
-            <p><Calendar20 /> {{ date }}</p>
+            <div class="event-content__date-and-arrow">
+              <p><Calendar20 /> {{ date }}</p>
+              <ArrowRight20 class="event-content__arrow-right" />
+            </div>
           </div>
-          <ArrowRight20 class="event-content__arrow-right" />
         </div>
         <div
           class="event-content__picture"
@@ -62,23 +64,35 @@ export default class extends Vue {
 
   &__details {
     width: 50%;
-    display: grid;
+    margin: 16px;
+    display: flex;
+    flex-direction: column;
     justify-content: space-between;
     fill: var(--white);
   }
 
   &__details p {
     font-size: 0.875rem;
+    line-height: 1.25rem;
+    margin-top: 0;
   }
 
   &__details h3 {
     font-size: 1.5rem;
   }
 
-  &__arrow-right {
+  &__details svg {
+    top: .15em;
     position: relative;
-    bottom: -1.25rem;
-    right: -1.25rem;
+  }
+
+  &__date-and-arrow {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  &__arrow-right {
     fill: var(--purple-60);
   }
 
