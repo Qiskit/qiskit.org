@@ -22,7 +22,7 @@
           <div class="event-card__date-and-arrow">
             <div class="event-card__info-detail">
               <Calendar20 class="event-card__icon-calendar" />
-              <span class="event-card__date">{{ date }}</span>
+              <span class="event-card__date"><time>{{ date }}</time></span>
             </div>
             <ArrowRight20 class="event-card__icon-arrow-right" />
           </div>
