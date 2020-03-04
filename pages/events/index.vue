@@ -30,6 +30,15 @@ import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/qiskit/QiskitPage.vue'
 import EventCard from '~/components/cards/EventCard.vue'
 
+interface Event {
+  type: String,
+  title: String,
+  image: String,
+  place: String,
+  date: String,
+  to: String
+}
+
 @Component({
   layout: 'event',
 
@@ -44,7 +53,8 @@ import EventCard from '~/components/cards/EventCard.vue'
   },
 
   async asyncData () {
-    const { default: events }: any = await import('~/content/events/events-previews.json')
+    const jsonEventsFile = await import('~/content/events/events-previews.json')
+    const events: Array<Event> = jsonEventsFile.default || []
 
     return { events }
   }
