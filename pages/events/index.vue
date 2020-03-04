@@ -31,26 +31,34 @@
     <main class="wrapper event-page__content">
       <div class="event-page__filters-time">
         <cv-tabs aria-label="navigation tab label">
-          <cv-tab id="tab-1" label="Tab link 1" />
-          <cv-tab id="tab-2" label="Tab link 2" />
+          <cv-tab id="tab-1" label="Upcoming" />
+          <cv-tab id="tab-2" label="Past" />
         </cv-tabs>
       </div>
       <div class="event-page__view">
         Carbon tabs
       </div>
       <div class="event-page__filters-checkboxes">
-        <cv-checkbox
-          value="check-1"
-          label="check-1"
-        />
-        <cv-checkbox
-          value="check-2"
-          label="check-2"
-        />
-        <cv-checkbox
-          value="check-3"
-          label="check-3"
-        />
+        <div>
+          <p>Locations</p>
+          <cv-checkbox
+            v-for="location in locations"
+            v-model="locationModel"
+            :key="location.value"
+            :value="location.value"
+            :label="location.label"
+          />
+        </div>
+        <div>
+          <p>Locations</p>
+          <cv-checkbox
+            v-for="type in types"
+            v-model="typeModel"
+            :key="type.value"
+            :value="type.value"
+            :label="type.label"
+          />
+        </div>
       </div>
       <div class="event-page__results">
         Results
@@ -63,6 +71,11 @@
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/qiskit/QiskitPage.vue'
 import EventCard from '~/components/cards/EventCard.vue'
+import {
+  ORDERED_LOCATION_FILTERS,
+  ORDERED_TYPE_FILTERS,
+  Filter
+} from '~/constants/filters'
 
 type Event = {
   type: String,
@@ -95,8 +108,12 @@ type Event = {
 })
 
 export default class extends QiskitPage {
+  locations: Array<Filter> = ORDERED_LOCATION_FILTERS
+  types: Array<Filter> = ORDERED_TYPE_FILTERS
   routeName: string = 'events'
   windowWidth: Number = 0
+  locationModel: string = ''
+  typeModel: string = ''
 
   autoplayVideo () {
     if (!this.$refs.video) {
@@ -180,7 +197,7 @@ export default class extends QiskitPage {
     width: 100%;
     bottom: -.5rem;
     position: absolute;
-    background: linear-gradient(0deg, var(--primary-color) 0%, #242a2e00 100%);
+    background: linear-gradient(0deg, #262626 0%, #26262600 100%);
   }
 }
 
