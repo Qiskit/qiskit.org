@@ -13,12 +13,14 @@
       </video>
     </header>
     <EventCard
-      type="Camp"
-      title="Qiskit Camp 2020"
-      image="/images/events/promo-vermont.jpg"
-      place="Vermont, United States"
-      date="March 20-25, 2020"
-      to="/experiments/quantalier"
+      v-for="event in events"
+      :key="`${event.place}-${event.date}`"
+      :type="event.type"
+      :title="event.title"
+      :image="event.image"
+      :place="event.place"
+      :date="event.date"
+      :to="event.to"
     />
   </main>
 </template>
@@ -38,6 +40,29 @@ import EventCard from '~/components/cards/EventCard.vue'
   head () {
     return {
       title: 'Qiskit Experiments'
+    }
+  },
+
+  data () {
+    return {
+      events: [
+        {
+          type: 'Camp',
+          title: 'Qiskit Camp 2020',
+          image: '/images/events/promo-vermont.jpg',
+          place: 'Vermont, United States',
+          date: 'March 20-25, 2020',
+          to: '/experiments/quantalier'
+        },
+        {
+          type: 'Camp',
+          title: 'Qiskit Camp 2020',
+          image: '/images/events/promo-vermont.jpg',
+          place: 'Vermont, United States',
+          date: 'March 13-16, 2020',
+          to: '/experiments/quantalier'
+        }
+      ]
     }
   }
 })
