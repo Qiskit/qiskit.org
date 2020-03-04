@@ -12,7 +12,9 @@
         Your browser does not support HTML5 video.
       </video>
       <div class="event-page__title">
-        <h1 class="wrapper">Qiskit Events</h1>
+        <h1 class="wrapper">
+          Qiskit Events
+        </h1>
       </div>
     </header>
     <EventCard
@@ -29,8 +31,8 @@
     <main class="wrapper event-page__content">
       <div class="event-page__filters-time">
         <cv-tabs aria-label="navigation tab label">
-          <cv-tab id="tab-1"label="Tab link 1"/>
-          <cv-tab id="tab-2"label="Tab link 2"/>
+          <cv-tab id="tab-1" label="Tab link 1" />
+          <cv-tab id="tab-2" label="Tab link 2" />
         </cv-tabs>
       </div>
       <div class="event-page__view">
@@ -38,14 +40,17 @@
       </div>
       <div class="event-page__filters-checkboxes">
         <cv-checkbox
-          v-model="checks" value="check-1" label="check-1">
-        </cv-checkbox>
+          value="check-1"
+          label="check-1"
+        />
         <cv-checkbox
-          v-model="checks" value="check-2" label="check-2">
-        </cv-checkbox>
+          value="check-2"
+          label="check-2"
+        />
         <cv-checkbox
-          v-model="checks" value="check-3" label="check-3">
-        </cv-checkbox>
+          value="check-3"
+          label="check-3"
+        />
       </div>
       <div class="event-page__results">
         Results
@@ -121,7 +126,7 @@ export default class extends QiskitPage {
 <style lang="scss">
 
 .event-page {
-  background-color: var(--primary-color);
+  // background-color: var(--primary-color);
   height: 100%;
   color: white;
 
@@ -142,6 +147,18 @@ export default class extends QiskitPage {
 
   &__filters-time {
     grid-area: 1 / 1 / 2 / 7;
+
+    // .bx--tabs__nav-item--selected:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link {
+    //   color: white;
+    // }
+
+    // .bx--tabs__nav-link {
+    //   color: var(--body-color-light);
+    // }
+
+    // .bx--tabs__nav-item--selected:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link {
+    //   border-color: var(--secondary-color);
+    // }
   }
 
   &__view {
