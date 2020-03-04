@@ -41,9 +41,9 @@ _check back soon for more details_
 -	Seminars at Aalto University (Optional)
 
 ### March 25
--	Depart for Saariselkä, Finland
-- Arrival & Check In at the Star Arctic Hotel
--	Welcome Reception & Dinner
+- 11:35 - Flight HK 28 departs Helsinki for Ivalo. All seats reserved by Unconference team; e-tickets will be sent to attendees 1 week before the event.
+-	13:15 - Arrival in Ivalo, Shuttle to Star Artic Hotel & Check In / Registration.
+- 18:00 - Welcome Reception & Dinner.
 
 ### March 26
 - Breakfast
@@ -66,10 +66,7 @@ _check back soon for more details_
 - Celebration Dinner
 
 ### March 29
-- Departure to Helsinki
-
-
-_Attendees are welcome to extend their trip at their own expense._
+- Departures to Helsinki are scheduled for 13:55 (with an arrival in Helsinki  at 15:25) and 19:00 (arrival in Helsinki at 20:30). Seats have also been reserved by the Unconference team and each attendee will receive their eticket a week prior to the event.
 
 ## Aalto Seminars
 
