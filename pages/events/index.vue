@@ -43,27 +43,17 @@ import EventCard from '~/components/cards/EventCard.vue'
     }
   },
 
-  data () {
-    return {
-      events: [
-        {
-          type: 'Camp',
-          title: 'Qiskit Camp 2020',
-          image: '/images/events/promo-vermont.jpg',
-          place: 'Vermont, United States',
-          date: 'March 20-25, 2020',
-          to: '/experiments/quantalier'
-        },
-        {
-          type: 'Camp',
-          title: 'Qiskit Camp 2020',
-          image: '/images/events/promo-vermont.jpg',
-          place: 'Vermont, United States',
-          date: 'March 13-16, 2020',
-          to: '/experiments/quantalier'
-        }
-      ]
+  asyncData () {
+    let events = []
+
+    if (process.server) {
+      const fs = require('fs')
+      const path = require('path')
+
+      events = JSON.parse(fs.readFileSync(path.resolve('content/events/events-previews.json'), 'utf8'))
     }
+
+    return { events }
   }
 })
 
