@@ -53,7 +53,7 @@ interface Event {
   },
 
   async asyncData () {
-    const jsonEventsFile = await import('~/content/events/events-previews.json')
+    const jsonEventsFile: any = await import('~/content/events/events-previews.json')
     const events: Array<Event> = jsonEventsFile.default || []
 
     return { events }
