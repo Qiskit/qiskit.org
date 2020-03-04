@@ -1,8 +1,13 @@
 @import '@carbon/themes/scss/themes';
-// @import './my-theme';
 
-$carbon--theme: $carbon--theme--g90;
-$interactive-01: pink;
+$carbon--theme--custom: map-merge(
+  $carbon--theme--g90,
+  (
+    interactive-01: #893ffc,
+  )
+);
+
+$carbon--theme: $carbon--theme--custom;
 @include carbon--theme();
 
 @import 'carbon-components/scss/globals/scss/styles.scss';

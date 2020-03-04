@@ -126,7 +126,6 @@ export default class extends QiskitPage {
 <style lang="scss">
 
 .event-page {
-  // background-color: var(--primary-color);
   height: 100%;
   color: white;
 
@@ -147,18 +146,6 @@ export default class extends QiskitPage {
 
   &__filters-time {
     grid-area: 1 / 1 / 2 / 7;
-
-    // .bx--tabs__nav-item--selected:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link {
-    //   color: white;
-    // }
-
-    // .bx--tabs__nav-link {
-    //   color: var(--body-color-light);
-    // }
-
-    // .bx--tabs__nav-item--selected:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link {
-    //   border-color: var(--secondary-color);
-    // }
   }
 
   &__view {
