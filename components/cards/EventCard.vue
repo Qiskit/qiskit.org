@@ -41,14 +41,22 @@
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 
+type Event = {
+  type: String,
+  title: String,
+  image: String,
+  place: String,
+  date: String,
+  to: String
+}
+
 @Component
 export default class extends Vue {
-  @Prop(String) type
-  @Prop(String) title
-  @Prop(String) image
-  @Prop(String) place
-  @Prop(String) date
-  @Prop(String) to
+  @Prop({ type: Object, required: true }) readonly event!: Event
+
+  data () {
+    return this.event
+  }
 }
 </script>
 

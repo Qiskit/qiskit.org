@@ -15,12 +15,7 @@
     <EventCard
       v-for="event in events"
       :key="`${event.place}-${event.date}`"
-      :type="event.type"
-      :title="event.title"
-      :image="event.image"
-      :place="event.place"
-      :date="event.date"
-      :to="event.to"
+      :event="event"
     />
   </main>
 </template>
