@@ -43,15 +43,8 @@ import EventCard from '~/components/cards/EventCard.vue'
     }
   },
 
-  asyncData () {
-    let events = []
-
-    if (process.server) {
-      const fs = require('fs')
-      const path = require('path')
-
-      events = JSON.parse(fs.readFileSync(path.resolve('content/events/events-previews.json'), 'utf8'))
-    }
+  async asyncData () {
+    const { default: events }: any = await import('~/content/events/events-previews.json')
 
     return { events }
   }
