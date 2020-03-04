@@ -42,8 +42,8 @@ _check back soon for more details_
 
 ### March 25
 - 11:35 - Flight HK 28 departs Helsinki for Ivalo. All seats reserved by Unconference team; e-tickets will be sent to attendees 1 week before the event.
--	13:15 - Arrival in Ivalo, shuttle to Star Artic hotel & Check In / registration
-- 18:00 - Welcome Reception & Dinner
+-	13:15 - Arrival in Ivalo, Shuttle to Star Artic Hotel & Check In / Registration.
+- 18:00 - Welcome Reception & Dinner.
 
 ### March 26
 - Breakfast
