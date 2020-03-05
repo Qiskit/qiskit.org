@@ -180,6 +180,14 @@ export default class extends QiskitPage {
     justify-content: space-between;
     margin-top: 2rem;
   }
+
+  &__results {
+    width: 100%;
+
+    @include mq($from: desktop) {
+      width: 75%;
+    }
+  }
 }
 
 .header-video {
