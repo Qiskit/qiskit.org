@@ -68,6 +68,7 @@ export default class extends Vue {
 .event-card {
   height: 15.88rem;
   width: 100%;
+  margin: 1rem;
   background-color: var(--gray-70);
   color: var(--white);
   display: flex;
