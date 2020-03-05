@@ -29,16 +29,11 @@
       :to="event.to"
     />
     <main class="wrapper">
-      <div class="event-page__time-view">
-        <div class="event-page__filters-time">
-          <cv-tabs aria-label="navigation tab label">
-            <cv-tab id="tab-1" label="Upcoming" />
-            <cv-tab id="tab-2" label="Past" />
-          </cv-tabs>
-        </div>
-        <div class="event-page__view">
-          Different views
-        </div>
+      <div class="event-page__filters-time">
+        <cv-tabs aria-label="navigation tab label">
+          <cv-tab id="tab-1" label="Upcoming" />
+          <cv-tab id="tab-2" label="Past" />
+        </cv-tabs>
       </div>
       <div class="event-page__checkboxes-results">
         <div class="event-page__filters-checkboxes">
@@ -157,7 +152,7 @@ export default class extends QiskitPage {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 
 .event-page {
   height: 100%;
@@ -174,10 +169,13 @@ export default class extends QiskitPage {
     }
   }
 
-  &__time-view,
   &__checkboxes-results {
     display: flex;
     justify-content: space-between;
+    margin-top: 2rem;
+  }
+
+  &__filters-time {
     margin-top: 2rem;
   }
 
