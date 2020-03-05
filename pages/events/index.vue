@@ -1,7 +1,8 @@
 <template>
   <div class="event-page">
-    <header v-if="isDesktop" class="header-video" playsinline>
+    <header class="header-video" playsinline>
       <video
+        v-if="isDesktop"
         ref="video"
         class="header-video__video"
         loop
@@ -27,41 +28,57 @@
       :date="event.date"
       :to="event.to"
     />
-  </main>
-    <main class="wrapper event-page__content">
-      <div class="event-page__filters-time">
-        <cv-tabs aria-label="navigation tab label">
-          <cv-tab id="tab-1" label="Upcoming" />
-          <cv-tab id="tab-2" label="Past" />
-        </cv-tabs>
-      </div>
-      <div class="event-page__view">
-        Carbon tabs
-      </div>
-      <div class="event-page__filters-checkboxes">
-        <div>
-          <p>Locations</p>
-          <cv-checkbox
-            v-for="location in locations"
-            v-model="locationModel"
-            :key="location.value"
-            :value="location.value"
-            :label="location.label"
-          />
+    <main class="wrapper">
+      <div class="event-page__time-view">
+        <div class="event-page__filters-time">
+          <cv-tabs aria-label="navigation tab label">
+            <cv-tab id="tab-1" label="Upcoming" />
+            <cv-tab id="tab-2" label="Past" />
+          </cv-tabs>
         </div>
-        <div>
-          <p>Locations</p>
-          <cv-checkbox
-            v-for="type in types"
-            v-model="typeModel"
-            :key="type.value"
-            :value="type.value"
-            :label="type.label"
-          />
+        <div class="event-page__view">
+          Different views
         </div>
       </div>
-      <div class="event-page__results">
-        Results
+      <div class="event-page__checkboxes-results">
+        <div class="event-page__filters-checkboxes">
+          <fieldset class="bx--fieldset">
+            <legend class="bx--label">
+              Location
+            </legend>
+            <cv-checkbox
+              v-for="location in locations"
+              :key="location.value"
+              v-model="locationModel"
+              :name="location.value"
+              :value="location.value"
+              :label="location.label"
+            />
+          </fieldset>
+          <fieldset class="bx--fieldset">
+            <legend class="bx--label">
+              Type
+            </legend>
+            <cv-checkbox
+              v-for="type in types"
+              :key="type.value"
+              v-model="typeModel"
+              :name="type.value"
+              :value="type.value"
+              :label="type.label"
+            />
+          </fieldset>
+        </div>
+        <div class="event-page__results">
+          <EventCard
+            type="Camp"
+            title="Qiskit Camp 2020"
+            image="/images/events/promo-vermont.jpg"
+            place="Vermont, United States"
+            date="March 20-25, 2020"
+            to="/experiments/quantalier"
+          />
+        </div>
       </div>
     </main>
   </div>
@@ -95,7 +112,7 @@ type Event = {
 
   head () {
     return {
-      title: 'Qiskit Experiments'
+      title: 'Qiskit Events'
     }
   },
 
@@ -112,8 +129,8 @@ export default class extends QiskitPage {
   types: Array<Filter> = ORDERED_TYPE_FILTERS
   routeName: string = 'events'
   windowWidth: Number = 0
-  locationModel: string = ''
-  typeModel: string = ''
+  locationModel: Array<Filter> = []
+  typeModel: Array<Filter> = []
 
   autoplayVideo () {
     if (!this.$refs.video) {
@@ -151,41 +168,32 @@ export default class extends QiskitPage {
     bottom: 0;
     z-index: 1;
     width: 100%;
+
+    h1 {
+      font-size: 3.4rem;
+    }
   }
 
-  &__content {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
-  }
-
-  &__filters-time {
-    grid-area: 1 / 1 / 2 / 7;
-  }
-
-  &__view {
-    grid-area: 1 / 7 / 2 / 8;
-  }
-
-  &__filters-checkboxes {
-    grid-area: 2 / 1 / 3 / 3;
-  }
-
-  &__results {
-    grid-area: 2 / 3 / 3 / 8;
+  &__time-view,
+  &__checkboxes-results {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
   }
 }
 
 .header-video {
   position: relative;
   overflow: hidden;
-  height: 35vh;
+
+  @include mq($from: desktop) {
+    height: 35vh;
+  }
 
   &__video {
     position: absolute;
     width: 100%;
+
     @include mq($from: super-wide-desktop) {
       top: -60%;
     }
