@@ -160,7 +160,7 @@ export default class extends QiskitPage {
 
   &__title {
     position: absolute;
-    bottom: 0;
+    bottom: .5rem;
     z-index: 1;
     width: 100%;
 
