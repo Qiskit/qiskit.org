@@ -18,16 +18,6 @@
         </h1>
       </div>
     </header>
-    <EventCard
-      v-for="event in events"
-      :key="`${event.place}-${event.date}`"
-      :type="event.type"
-      :title="event.title"
-      :image="event.image"
-      :place="event.place"
-      :date="event.date"
-      :to="event.to"
-    />
     <div class="wrapper">
       <div class="event-page__filters-time">
         <cv-tabs aria-label="navigation tab label">
@@ -64,12 +54,14 @@
         </div>
         <div class="event-page__results">
           <EventCard
-            type="Camp"
-            title="Qiskit Camp 2020"
-            image="/images/events/promo-vermont.jpg"
-            place="Vermont, United States"
-            date="March 20-25, 2020"
-            to="/experiments/quantalier"
+            v-for="event in events"
+            :key="`${event.place}-${event.date}`"
+            :type="event.type"
+            :title="event.title"
+            :image="event.image"
+            :place="event.place"
+            :date="event.date"
+            :to="event.to"
           />
         </div>
       </div>
@@ -153,7 +145,6 @@ export default class extends QiskitPage {
 <style lang="scss" scoped>
 
 .event-page {
-  height: 100%;
   color: white;
 
   &__title {
