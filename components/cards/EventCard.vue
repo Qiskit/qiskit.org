@@ -40,15 +40,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-
-type Event = {
-  type: String,
-  title: String,
-  image: String,
-  place: String,
-  date: String,
-  to: String
-}
+import Event from '~/pages/events/index.vue'
 
 @Component
 export default class extends Vue {

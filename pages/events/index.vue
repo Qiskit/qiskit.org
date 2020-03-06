@@ -25,7 +25,7 @@ import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/qiskit/QiskitPage.vue'
 import EventCard from '~/components/cards/EventCard.vue'
 
-type Event = {
+export type Event = {
   type: String,
   title: String,
   image: String,
