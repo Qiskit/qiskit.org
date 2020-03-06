@@ -13,12 +13,14 @@
       </video>
     </header>
     <EventCard
-      type="Camp"
-      title="Qiskit Camp 2020"
-      image="/images/events/promo-vermont.jpg"
-      place="Vermont, United States"
-      date="March 20-25, 2020"
-      to="/experiments/quantalier"
+      v-for="event in events"
+      :key="`${event.place}-${event.date}`"
+      :type="event.type"
+      :title="event.title"
+      :image="event.image"
+      :place="event.place"
+      :date="event.date"
+      :to="event.to"
     />
   </main>
 </template>
@@ -27,6 +29,15 @@
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/qiskit/QiskitPage.vue'
 import EventCard from '~/components/cards/EventCard.vue'
+
+type Event = {
+  type: String,
+  title: String,
+  image: String,
+  place: String,
+  date: String,
+  to: String
+}
 
 @Component({
   layout: 'event',
@@ -39,6 +50,13 @@ import EventCard from '~/components/cards/EventCard.vue'
     return {
       title: 'Qiskit Experiments'
     }
+  },
+
+  async asyncData () {
+    const eventsModule = await import('~/content/events/events-previews.json')
+    const events: Array<Event> = eventsModule.default || []
+
+    return { events }
   }
 })
 
