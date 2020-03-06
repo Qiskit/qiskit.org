@@ -15,7 +15,12 @@
     <EventCard
       v-for="event in events"
       :key="`${event.place}-${event.date}`"
-      :event="event"
+      :type="event.type"
+      :title="event.title"
+      :image="event.image"
+      :place="event.place"
+      :date="event.date"
+      :to="event.to"
     />
   </main>
 </template>
@@ -25,7 +30,7 @@ import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/qiskit/QiskitPage.vue'
 import EventCard from '~/components/cards/EventCard.vue'
 
-export type Event = {
+type Event = {
   type: String,
   title: String,
   image: String,
@@ -48,8 +53,8 @@ export type Event = {
   },
 
   async asyncData () {
-    const jsonEventsFile: any = await import('~/content/events/events-previews.json')
-    const events: Array<Event> = jsonEventsFile.default || []
+    const eventsModule = await import('~/content/events/events-previews.json')
+    const events: Array<Event> = eventsModule.default || []
 
     return { events }
   }
