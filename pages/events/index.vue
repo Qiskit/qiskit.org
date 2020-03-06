@@ -28,7 +28,7 @@
       :date="event.date"
       :to="event.to"
     />
-    <main class="wrapper">
+    <div class="wrapper">
       <div class="event-page__filters-time">
         <cv-tabs aria-label="navigation tab label">
           <cv-tab id="tab-1" label="Upcoming" />
@@ -45,7 +45,6 @@
               v-for="location in locations"
               :key="location.value"
               v-model="locationModel"
-              :name="location.value"
               :value="location.value"
               :label="location.label"
             />
@@ -58,7 +57,6 @@
               v-for="type in types"
               :key="type.value"
               v-model="typeModel"
-              :name="type.value"
               :value="type.value"
               :label="type.label"
             />
@@ -75,7 +73,7 @@
           />
         </div>
       </div>
-    </main>
+    </div>
   </div>
 </template>
 

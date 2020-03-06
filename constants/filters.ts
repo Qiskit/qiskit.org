@@ -3,20 +3,11 @@ interface Filter {
   value: string
 }
 
-type LocationFilter = {
-  america: Filter,
-  europe: Filter,
-  africa: Filter,
-  asia: Filter
+type LabeledFilters = {
+  [key: string]: Filter
 }
 
-type TypesFilter = {
-  camp: Filter,
-  unconference: Filter,
-  hackathon: Filter
-}
-
-const LOCATION_FILTERS: LocationFilter = {
+const LOCATION_FILTERS: LabeledFilters = {
   america: {
     label: 'America',
     value: 'america'
@@ -35,7 +26,7 @@ const LOCATION_FILTERS: LocationFilter = {
   }
 }
 
-const TYPES_FILTERS: TypesFilter = {
+const TYPES_FILTERS: LabeledFilters = {
   camp: {
     label: 'Camp',
     value: 'camp'

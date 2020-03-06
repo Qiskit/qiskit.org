@@ -182,7 +182,7 @@ export default class extends Vue {
   font-size: 16px;
   font-weight: 400;
   border-bottom: 1px solid black;
-  background-color: #21252b;
+  background-color: var(--gray-90);
   --link-color: white;
   &--light {
     --link-color: var(--body-color-dark);
