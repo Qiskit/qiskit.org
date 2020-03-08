@@ -27,7 +27,6 @@ import PageSection from '~/components/sections/PageSection.vue'
 import MdContent from '~/components/MdContent.vue'
 
 @Component({
-  layout: 'second-level',
   components: {
     ExperimentHeader,
     MdContent,

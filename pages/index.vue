@@ -147,7 +147,6 @@ import LegacySection from '~/components/sections/LegacySection.vue'
 import LegacyCta from '~/components/ctas/LegacyCta.vue'
 
 @Component({
-  layout: 'legacy',
   components: {
     LegacyCta,
     LegacyPresentation,
