@@ -89,7 +89,7 @@ type Event = {
 }
 
 @Component({
-  layout: 'event',
+  layout: 'carbon',
 
   components: {
     EventCard
