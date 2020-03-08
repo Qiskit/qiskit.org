@@ -20,10 +20,12 @@
     </header>
     <div class="wrapper">
       <div class="event-page__filters-time">
-        <cv-tabs aria-label="navigation tab label">
-          <cv-tab id="tab-1" label="Upcoming" />
-          <cv-tab id="tab-2" label="Past" />
-        </cv-tabs>
+        <client-only>
+          <cv-tabs aria-label="navigation tab label">
+            <cv-tab id="tab-1" label="Upcoming" />
+            <cv-tab id="tab-2" label="Past" />
+          </cv-tabs>
+        </client-only>
       </div>
       <div class="event-page__checkboxes-results">
         <div class="event-page__filters-checkboxes">
@@ -31,25 +33,29 @@
             <legend class="bx--label">
               Location
             </legend>
-            <cv-checkbox
-              v-for="location in locations"
-              :key="location.value"
-              v-model="locationModel"
-              :value="location.value"
-              :label="location.label"
-            />
+            <client-only>
+              <cv-checkbox
+                v-for="location in locations"
+                :key="location.value"
+                v-model="locationModel"
+                :value="location.value"
+                :label="location.label"
+              />
+            </client-only>
           </fieldset>
           <fieldset class="bx--fieldset">
             <legend class="bx--label">
               Type
             </legend>
-            <cv-checkbox
-              v-for="type in types"
-              :key="type.value"
-              v-model="typeModel"
-              :value="type.value"
-              :label="type.label"
-            />
+            <client-only>
+              <cv-checkbox
+                v-for="type in types"
+                :key="type.value"
+                v-model="typeModel"
+                :value="type.value"
+                :label="type.label"
+              />
+            </client-only>
           </fieldset>
         </div>
         <div class="event-page__results">
