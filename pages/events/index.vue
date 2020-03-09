@@ -1,12 +1,13 @@
 <template>
   <div class="event-page">
-    <header class="header-video" playsinline>
+    <header class="header-video">
       <video
         v-if="isDesktop"
         ref="video"
         class="header-video__video"
         loop
         preload="none"
+        playsinline
       >
         <source src="@/assets/videos/qiskit-camp-africa-2019.mp4" type="video/mp4">
         <source src="@/assets/videos/qiskit-camp-africa-2019.mp4" type="video/ogg">
