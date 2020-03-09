@@ -32,7 +32,7 @@ export default class extends Vue {
   &:first-child {
     margin-top: 0;
 
-    @include mq($until: desktop) {
+    @include mq($until: medium) {
       margin-top: 0;
     }
   }
@@ -41,7 +41,7 @@ export default class extends Vue {
     margin-right: 0;
   }
 
-  @include mq($until: desktop) {
+  @include mq($until: medium) {
     margin-top: 2rem;
     margin-right: 0;
   }

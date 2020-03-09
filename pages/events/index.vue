@@ -221,7 +221,7 @@ export default class extends QiskitPage {
   &__results {
     width: 100%;
 
-    @include mq($from: desktop) {
+    @include mq($from: medium) {
       width: 75%;
     }
   }
@@ -231,7 +231,7 @@ export default class extends QiskitPage {
   position: relative;
   overflow: hidden;
 
-  @include mq($from: desktop) {
+  @include mq($from: medium) {
     height: 35vh;
   }
 
@@ -239,7 +239,7 @@ export default class extends QiskitPage {
     position: absolute;
     width: 100%;
 
-    @include mq($from: super-wide-desktop) {
+    @include mq($from: x-large) {
       top: -60%;
     }
   }

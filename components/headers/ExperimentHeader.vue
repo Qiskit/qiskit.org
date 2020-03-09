@@ -122,19 +122,19 @@ export default class extends Vue {
   width: 100%;
 
   & > * {
-    @include mq($from: desktop) {
+    @include mq($from: medium) {
       max-width: 100%;
     }
 
     &:first-child {
-      @include mq($from: desktop) {
+      @include mq($from: medium) {
         grid-column-start: 1;
         grid-column-end: 3;
       }
     }
   }
 
-  @include mq($from: desktop) {
+  @include mq($from: medium) {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 0.5rem;
