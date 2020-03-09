@@ -32,4 +32,8 @@ export default class extends Vue { }
 html {
   background-color: var(--primary-color);
 }
+
+main {
+  color: black;
+}
 </style>
