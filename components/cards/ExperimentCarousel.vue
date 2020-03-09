@@ -138,7 +138,7 @@ export default class extends Vue {
     }
   }
 
-  @include mq($until: desktop) {
+  @include mq($until: medium) {
     flex-direction: column;
   }
 }

@@ -119,7 +119,7 @@ main {
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 
     & > * {
-      @include mq($until: desktop) {
+      @include mq($until: medium) {
         margin-bottom: 1rem;
       }
     }
@@ -138,7 +138,7 @@ main {
       }
     }
 
-    @include mq($until: desktop) {
+    @include mq($until: medium) {
       display: block;
     }
   }

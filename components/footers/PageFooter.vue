@@ -45,7 +45,7 @@ export default class extends Vue {
     @include framed();
   }
 
-  @include mq($until: desktop) {
+  @include mq($until: medium) {
     display: block;
   }
 }

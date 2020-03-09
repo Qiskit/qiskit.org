@@ -244,7 +244,7 @@ export default class extends Vue {
     margin-right: -0.4rem;
   }
 
-  @include mq($until: wide-desktop) {
+  @include mq($until: large) {
     display: none;
   }
 }
@@ -257,7 +257,7 @@ export default class extends Vue {
   color: var(--link-color);
   text-decoration: none;
 
-  @include mq($until: wide-desktop) {
+  @include mq($until: large) {
     font-size: 1.1rem;
     margin-left: -0.5rem;
   }
@@ -266,14 +266,14 @@ export default class extends Vue {
 .drawer {
   display: none;
 
-  @include mq($until: wide-desktop) {
+  @include mq($until: large) {
     display: unset;
     margin-left: -2rem;
   }
 }
 
 .community-menu {
-  @include mq($until: wide-desktop) {
+  @include mq($until: large) {
     display: none;
   }
 }

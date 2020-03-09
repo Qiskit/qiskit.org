@@ -61,6 +61,8 @@ const config: Configuration = {
   ** Global CSS
   */
   css: [
+    '~/static/css/fonts.css',
+    '~/assets/scss/carbon-theme.scss'
   ],
 
   /*

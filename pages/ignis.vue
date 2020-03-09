@@ -99,7 +99,6 @@ import SyntaxHighlight from '~/components/qiskit/SyntaxHighlight.vue'
 import Cta from '~/components/ctas/Cta.vue'
 
 @Component({
-  layout: 'legacy',
   components: {
     Cta,
     LegacyPresentation,

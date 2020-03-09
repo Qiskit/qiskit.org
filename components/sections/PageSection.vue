@@ -60,7 +60,7 @@ export default class extends Vue {
     width: 100%;
   }
 
-  @include mq($until: desktop) {
+  @include mq($until: medium) {
     width: 100%;
   }
 }
@@ -70,7 +70,7 @@ export default class extends Vue {
 }
 
 .importance--decoration {
-  @include mq($until: desktop) {
+  @include mq($until: medium) {
     display: none;
   }
 }

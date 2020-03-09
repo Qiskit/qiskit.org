@@ -27,7 +27,6 @@ export default class extends Vue { }
 <style lang="scss">
 @import '~/assets/scss/theme.scss';
 @import '~/assets/scss/layout.scss';
-@import url(~/static/css/fonts.css);
 
 html {
   background-color: var(--primary-color);

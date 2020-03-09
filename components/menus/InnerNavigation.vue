@@ -45,7 +45,7 @@ export default class extends Vue {
     @include framed();
   }
 
-  @include mq($until: desktop) {
+  @include mq($until: medium) {
     height: auto;
   }
 }
@@ -72,7 +72,7 @@ export default class extends Vue {
       border-right: none;
     }
 
-    @include mq($until: desktop) {
+    @include mq($until: medium) {
       border: none;
       border-bottom: 1px solid #3334;
       padding: 1rem;
@@ -80,7 +80,7 @@ export default class extends Vue {
     }
   }
 
-  @include mq($until: desktop) {
+  @include mq($until: medium) {
     flex-direction: column;
   }
 }
