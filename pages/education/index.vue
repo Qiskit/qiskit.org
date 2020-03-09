@@ -158,19 +158,19 @@ main {
   }
 
   .intro {
-    @include mq($until: desktop) {
+    @include mq($until: medium) {
       display: block;
     }
   }
 
   .copy-container {
-    @include mq($until: desktop) {
+    @include mq($until: medium) {
       max-width: 100%;
     }
   }
 
   .header-video {
-    @include mq($until: desktop) {
+    @include mq($until: medium) {
       display: none;
     }
   }
@@ -209,7 +209,7 @@ main {
     padding: 0;
     padding-left: 4rem;
 
-    @include mq($until: desktop) {
+    @include mq($until: medium) {
       width: 100%;
       padding-left: 0;
     }
@@ -221,7 +221,7 @@ main {
     margin-left: -10%;
   }
 
-  @include mq($until: desktop) {
+  @include mq($until: medium) {
     min-height: auto;
   }
 }

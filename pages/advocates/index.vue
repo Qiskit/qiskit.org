@@ -145,7 +145,7 @@ main {
   top: 0;
   z-index: 100;
 
-  @include mq($until: desktop) {
+  @include mq($until: medium) {
     position: static;
   }
 }
@@ -164,7 +164,7 @@ main {
   & > * {
     flex: 1;
 
-    @include mq($until: desktop) {
+    @include mq($until: medium) {
       text-align: center;
       margin-top: 2rem;
     }
@@ -178,7 +178,7 @@ main {
     }
   }
 
-  @include mq($until: desktop) {
+  @include mq($until: medium) {
     display: flex;
     flex-direction: column;
   }
@@ -224,7 +224,7 @@ main {
     gap: 1rem;
 
     & > * {
-      @include mq($until: desktop) {
+      @include mq($until: medium) {
         margin-bottom: 1rem;
       }
     }
@@ -234,7 +234,7 @@ main {
       border: 1px solid var(--secondary-color);
     }
 
-    @include mq($until: desktop) {
+    @include mq($until: medium) {
       display: block;
     }
   }
