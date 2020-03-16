@@ -83,11 +83,11 @@ export default class extends Vue {
   }
 
   &__title {
-    @include type-style('productive-heading-07');
+    @include code-09();
   }
 
   &__description {
-    @include type-style('body-short-02');
+    @include type-style('productive-heading-04');
     margin: 1.1rem 0;
   }
 

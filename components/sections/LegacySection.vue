@@ -17,7 +17,7 @@ export default class extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '~/assets/scss/mixins.scss';
+@import '~carbon-components/scss/globals/scss/typography';
 
 .legacy-section {
   & > div {
@@ -39,22 +39,17 @@ export default class extends Vue {
     }
 
     h2 {
-      font-size: 1.5rem;
-      font-weight: 300;
-      font-family: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
-      margin-bottom: 1.5rem;
+      @include type-style('productive-heading-06');
     }
 
     p {
-      font-weight: normal;
-      font-size: 0.85rem;
+      @include type-style('body-short-02');
       line-height: 1.7rem;
       margin-top: 0.9rem;
       margin-bottom: 0.9rem;
 
       a {
         color: black;
-        font-style: italic;
       }
     }
   }
