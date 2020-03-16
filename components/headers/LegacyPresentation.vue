@@ -59,7 +59,7 @@ export default class extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '~/assets/scss/mixins.scss';
+@import '~carbon-components/scss/globals/scss/typography';
 
 .legacy-presentation {
   color: var(--legacy-presentation-text-color, white);
@@ -83,14 +83,11 @@ export default class extends Vue {
   }
 
   &__title {
-    font-size: 2rem;
-    font-weight: 400;
-    font-family: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
+    @include type-style('productive-heading-07');
   }
 
   &__description {
-    font-size: 1.2rem;
-    font-weight: 400;
+    @include type-style('body-short-02');
     margin: 1.1rem 0;
   }
 
