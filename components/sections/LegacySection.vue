@@ -39,12 +39,13 @@ export default class extends Vue {
     }
 
     h2 {
-      @include type-style('productive-heading-06');
+      @include code-08();
     }
 
     p {
-      @include type-style('body-short-02');
-      line-height: 1.7rem;
+      @include type-style('body-long-02');
+      /* TODO: Remove when adapting to Carbon. Should be regulated by the type style. */
+      line-height: 2rem;
       margin-top: 0.9rem;
       margin-bottom: 0.9rem;
 
