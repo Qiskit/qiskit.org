@@ -249,7 +249,7 @@ export default class extends Vue {
 }
 
 .link-to-home {
-  @include type-style('productive-heading-03');
+  @include type-style('productive-heading-02');
   display: inline-flex;
   align-items: center;
   margin-left: -1.2rem;
