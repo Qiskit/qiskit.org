@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import CarbonComponentsVue from '@carbon/vue'
+import '~/assets/scss/carbon/components.scss'
 import { CarbonIconsVue } from '@carbon/icons-vue'
 import Calendar20 from '@carbon/icons-vue/lib/calendar/20'
 import Map20 from '@carbon/icons-vue/lib/map/20'

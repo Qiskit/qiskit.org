@@ -30,6 +30,8 @@ export default class extends Vue {
 </script>
 
 <style lang="scss" scoped>
+@import '~carbon-components/scss/globals/scss/typography';
+
 .syntax-highlight {
   position: relative;
 
@@ -43,8 +45,8 @@ export default class extends Vue {
   }
 
   code {
+    @include type-style('code-02');
     padding: 1.5rem 1rem;
-    font-size: 0.7rem;
   }
 }
 </style>
