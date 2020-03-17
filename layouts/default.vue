@@ -28,8 +28,8 @@ export default class extends Vue { }
 @import '~/assets/scss/theme.scss';
 @import '~/assets/scss/layout.scss';
 
-html {
-  background-color: var(--primary-color);
+.content-root {
+  background-color: $ui-background;
 }
 
 main {
