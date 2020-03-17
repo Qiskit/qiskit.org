@@ -53,6 +53,8 @@ export default class extends Vue {
 </script>
 
 <style lang="scss" scoped>
+@import '~carbon-components/scss/globals/scss/typography';
+
 .card-link {
   text-decoration: none;
 }
@@ -75,12 +77,16 @@ export default class extends Vue {
   }
 
   &__title {
-    font-size: 1.5rem;
+    @include type-style('productive-heading-03');
     margin-top: 0.31rem;
   }
 
-  &__subtitle, &__place, &__date {
-    font-size: 0.88rem;
+  &__subtitle {
+    @include type-style('productive-heading-02');
+  }
+
+  &__place, &__date {
+    @include type-style('body-short-01');
   }
 
   &__place, &__date {
