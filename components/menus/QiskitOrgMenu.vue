@@ -167,8 +167,10 @@ export default class extends Vue {
 </script>
 
 <style lang="scss" scoped>
+@import '~carbon-components/scss/globals/scss/typography';
+
 @mixin vertical-navigation-item() {
-  font-size: 0.9rem;
+  @include type-style('productive-heading-02');
   text-decoration: none;
   color: white;
   padding: 0.5rem 1.5em;
@@ -179,8 +181,6 @@ export default class extends Vue {
 }
 
 .menu-container {
-  font-size: 16px;
-  font-weight: 400;
   border-bottom: 1px solid black;
   background-color: var(--gray-90);
   --link-color: white;
@@ -194,7 +194,6 @@ export default class extends Vue {
 .menu {
   height: 60px;
   display: flex;
-  font-size: 0.8rem;
   & > * {
     height: 100%;
   }
@@ -207,6 +206,7 @@ export default class extends Vue {
   display: flex;
 
   &__item {
+    @include type-style('productive-heading-02');
     display: inline-flex;
     align-items: center;
     padding: 0 1em;
@@ -214,7 +214,6 @@ export default class extends Vue {
     text-decoration: none;
 
     &.nuxt-link-active {
-      font-weight: bold;
       position: relative;
       top: 1px;
       border-bottom: 4px solid var(--secondary-color);
@@ -250,6 +249,7 @@ export default class extends Vue {
 }
 
 .link-to-home {
+  @include type-style('productive-heading-02');
   display: inline-flex;
   align-items: center;
   margin-left: -1.2rem;
@@ -258,7 +258,6 @@ export default class extends Vue {
   text-decoration: none;
 
   @include mq($until: large) {
-    font-size: 1.1rem;
     margin-left: -0.5rem;
   }
 }
@@ -314,8 +313,7 @@ export default class extends Vue {
   overflow-y: auto;
 
   h2 {
-    font-size: 0.8rem;
-    font-weight: normal;
+    @include type-style('productive-heading-03');
     color: var(--primary-color-lightmost);
     padding: 1em;
   }
@@ -338,7 +336,6 @@ export default class extends Vue {
     color: var(--body-color-dark);
 
     &.nuxt-link-active {
-      font-weight: bold;
       border-left: 4px solid var(--secondary-color);
       padding-left: calc(3rem - 4px);
     }

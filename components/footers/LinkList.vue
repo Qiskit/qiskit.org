@@ -32,6 +32,8 @@ export default class extends Vue {
 </script>
 
 <style lang="scss" scoped>
+@import '~carbon-components/scss/globals/scss/typography';
+
 ul {
   list-style: none;
   margin-top: 1.5rem;
@@ -44,6 +46,7 @@ li {
 }
 
 .footer-link {
+  @include type-style('productive-heading-02');
   color: inherit;
   text-decoration: none;
   display: inline-block;

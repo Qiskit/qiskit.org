@@ -61,8 +61,7 @@ const config: Configuration = {
   ** Global CSS
   */
   css: [
-    '~/static/css/fonts.css',
-    '~/assets/scss/carbon-theme.scss'
+    '~/static/css/fonts.css'
   ],
 
   /*
@@ -91,7 +90,8 @@ const config: Configuration = {
     */
     scss: [
       './assets/scss/mq.scss',
-      './assets/scss/mixins.scss'
+      './assets/scss/mixins.scss',
+      './assets/scss/carbon/community-theme.scss'
     ]
   },
 

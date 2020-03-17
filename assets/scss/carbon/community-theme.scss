@@ -1,0 +1,31 @@
+@import '~@carbon/themes/scss/themes';
+
+$carbon--theme--custom: map-merge(
+  $carbon--theme--g90,
+  (
+    interactive-01: #893ffc,
+    focus: #893ffc,
+    icon-01: #893ffc,
+  )
+);
+
+/* TODO: Remove when adapting to Carbon. */
+@mixin code-08() {
+  font-family: carbon--font-family('mono');
+  font-size: 2rem;
+  font-weight: carbon--font-weight('bold');
+  letter-spacing: 0.32px;
+  margin-bottom: 2rem;
+};
+
+/* TODO: Remove when adapting to Carbon. */
+@mixin code-09() {
+  font-family: carbon--font-family('mono');
+  font-size: 2.5rem;
+  font-weight: bold;
+  letter-spacing: 0.32px;
+  margin-bottom: 2rem;
+};
+
+$carbon--theme: $carbon--theme--custom;
+@include carbon--theme();

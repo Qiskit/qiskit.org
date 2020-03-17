@@ -162,6 +162,8 @@ export default class extends QiskitPage {
 </script>
 
 <style lang="scss">
+@import '~carbon-components/scss/globals/scss/typography';
+
 .legacy-section {
   background-color: white;
 }
@@ -184,7 +186,7 @@ export default class extends QiskitPage {
     padding: 0.8rem;
 
     a {
-      font-weight: 400;
+      @include type-style('productive-heading-02');
       text-decoration: none;
 
       &:hover {
@@ -201,7 +203,6 @@ export default class extends QiskitPage {
     .name {
       color: black;
       margin-left: 0.5rem;
-      font-size: 0.8rem;
     }
   }
 }

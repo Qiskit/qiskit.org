@@ -37,18 +37,19 @@ export default class extends Vue {
 </script>
 
 <style lang="scss" scoped>
+@import '~carbon-components/scss/globals/scss/typography';
+
 .cta {
+  @include type-style('productive-heading-02');
+  display: inline-block;
   padding: 0.66rem 1rem;
   background-color: var(--primary-color);
   border: 2px solid var(--secondary-color);
-  font-size: 0.75em;
-  font-weight: 100;
   color: white;
   text-transform: uppercase;
   text-decoration: none;
   box-shadow: 0 4px 6px rgba(50,50,93,.11),0 1px 3px rgba(0,0,0,.08);
   white-space: nowrap;
-  line-height: 4rem;
 
   &--secondary {
     color: black;
