@@ -56,7 +56,6 @@ export default class extends Vue {
 }
 
 .experiment-card {
-  font-size: 0.9rem;
   color: var(--body-color-light);
   background-color: var(--primary-color);
 
