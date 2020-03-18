@@ -46,6 +46,8 @@ export default class extends Vue {
 </script>
 
 <style lang="scss" scoped>
+@import '~carbon-components/scss/globals/scss/typography';
+
 .card-link {
   display: block;
   text-decoration: none;
@@ -86,6 +88,7 @@ export default class extends Vue {
   }
 
   &__copy {
+    @include type-style('body-short-01');
     margin: 0.5rem 1rem 1em;
 
     &--horizontal {
@@ -94,10 +97,12 @@ export default class extends Vue {
   }
 
   h3 {
+    @include type-style('productive-heading-03');
     margin-top: 1.5rem;
   }
 
   &__author {
+    @include type-style('body-short-01');
     color: var(--secondary-color-lightmost);
     margin-top: 0.5rem;
 
