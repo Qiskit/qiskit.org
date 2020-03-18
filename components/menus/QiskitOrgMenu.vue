@@ -182,7 +182,7 @@ export default class extends Vue {
 
 .menu-container {
   border-bottom: 1px solid black;
-  background-color: var(--gray-90);
+  background-color: $ui-background;
   --link-color: white;
   &--light {
     --link-color: var(--body-color-dark);

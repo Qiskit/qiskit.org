@@ -193,6 +193,7 @@ export default class extends QiskitPage {
 </script>
 
 <style lang="scss" scoped>
+@import '~carbon-components/scss/globals/scss/typography';
 
 .event-page {
   color: white;
@@ -204,7 +205,7 @@ export default class extends QiskitPage {
     width: 100%;
 
     h1 {
-      font-size: 3.4rem;
+      @include type-style('productive-heading-07');
     }
   }
 
