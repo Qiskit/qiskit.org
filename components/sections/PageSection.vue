@@ -35,6 +35,8 @@ export default class extends Vue {
 </script>
 
 <style lang="scss" scoped>
+@import '~carbon-components/scss/globals/scss/typography';
+
 .page-section-container {
   padding-top: 4rem;
   padding-bottom: 4rem;
@@ -51,6 +53,15 @@ export default class extends Vue {
   &--reversed {
     flex-direction: row-reverse;
   }
+
+  h2 {
+    @include productive-heading-08();
+  }
+
+  p {
+    @include body-long-04();
+  }
+
 }
 
 .copy-container {

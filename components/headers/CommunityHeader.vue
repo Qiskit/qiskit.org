@@ -66,11 +66,11 @@ export default class extends Vue {
 }
 
 .main-title {
-  @include type-style('productive-heading-07');
+  @include productive-heading-09();
 }
 
 .description p {
-  @include type-style('body-short-02');
+  @include body-long-04();
 }
 
 .decoration {
