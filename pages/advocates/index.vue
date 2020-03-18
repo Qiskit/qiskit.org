@@ -135,6 +135,8 @@ export default class extends QiskitPage {
 </script>
 
 <style lang="scss">
+@import '~carbon-components/scss/globals/scss/typography';
+
 main {
   background-color: var(--primary-color-darkmost);
   background-image: linear-gradient(150deg, var(--primary-color-darkmost) 15%,var(--primary-color-dark) 70%,var(--primary-color) 94%);
@@ -194,7 +196,12 @@ main {
 
   ol {
     margin-top: 1rem;
-    list-style-position: inside
+    list-style-position: inside;
+    list-style-type: decimal;
+  }
+
+  li {
+    @include body-long-04();
   }
 }
 
@@ -202,6 +209,7 @@ main {
   color: var(--body-color-light);
 
   h2 {
+    @include type-style('productive-heading-06');
     @include elegant-title();
   }
 }
@@ -210,6 +218,7 @@ main {
   color: var(--body-color-light);
 
   h2 {
+    @include type-style('productive-heading-06');
     @include elegant-title();
   }
 

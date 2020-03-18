@@ -20,21 +20,23 @@ export default class extends Vue {
 </script>
 
 <style lang="scss" scoped>
+@import '~carbon-components/scss/globals/scss/typography';
+
 .compact-feature {
   &__icon {
     position: relative;
-    width: 3rem;
-    height: 3rem;
+    width: 3.75rem;
+    height: 3.75rem;
+    margin-bottom: 1rem;
   }
 
   p {
-    font-size: 0.9rem;
+    @include body-long-04();
     margin-top: 0.5rem;
   }
 
   h2 {
-    font-size: 1.1rem;
-    margin-top: 0.5rem;
+    @include productive-heading-04_5();
   }
 }
 </style>
