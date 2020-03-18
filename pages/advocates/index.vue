@@ -1,7 +1,7 @@
 <template>
   <main>
     <header>
-      <GatesHeader
+      <CommunityHeader
         id="presentation"
         main-title="Qiskit Advocates"
       >
@@ -34,7 +34,7 @@
             </CompactFeature>
           </div>
         </template>
-      </GatesHeader>
+      </CommunityHeader>
     </header>
     <div class="inner-navigation-scope">
       <InnerNavigation
@@ -85,7 +85,7 @@
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/qiskit/QiskitPage.vue'
 import InnerNavigation from '~/components/menus/InnerNavigation.vue'
-import GatesHeader from '~/components/headers/GatesHeader.vue'
+import CommunityHeader from '~/components/headers/CommunityHeader.vue'
 import PageSection from '~/components/sections/PageSection.vue'
 import MapSection from '~/components/advocates/MapSection.vue'
 import AdvocateCard from '~/components/cards/AdvocateCard.vue'
@@ -94,7 +94,7 @@ import CompactFeature from '~/components/features/CompactFeature.vue'
 @Component({
   components: {
     InnerNavigation,
-    GatesHeader,
+    CommunityHeader,
     PageSection,
     MapSection,
     AdvocateCard,
