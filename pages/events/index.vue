@@ -77,6 +77,7 @@
 </template>
 
 <script lang="ts">
+import { mapState, mapActions } from 'vuex'
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/qiskit/QiskitPage.vue'
 import EventCard from '~/components/cards/EventCard.vue'
@@ -109,16 +110,20 @@ type Event = {
   },
 
   computed: {
-    events () {
-      return this.$store.state.events.events
-    }
+    ...mapState({
+      events: state => state.events.items
+    })
   },
 
-  async asyncData ({ store }) {
-    const eventsModule = await import('~/content/events/events-previews.json')
-    const events: Array<Event> = eventsModule.default || []
+  methods: {
+    ...mapActions({
+      fetchEvents: 'fetchEvents'
+    })
+  },
 
-    // return { events }
+  async fetch ({ store }) {
+    const events: Array<Event> = await store.dispatch('fetchEvents')
+
     store.commit('setEvents', events)
   }
 })
