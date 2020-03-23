@@ -23,8 +23,9 @@
       <article>
         <h2>Qiskit Camp 2020</h2>
         <p>Your favorite flagship event is returning, now with an even larger and more diverse community. Learn more about Qiskit Camp 2020, coming TBD.</p>
+        <!-- to="https://medium.com/qiskit/qiskit-camp-2020-coming-next-march-7b8c39e5d42c" -->
         <LegacyCta
-          to="https://medium.com/qiskit/qiskit-camp-2020-coming-next-march-7b8c39e5d42c"
+          to="/activities/quantum-activity-pack-for-kids.pdf"
           @click="$trackClickEvent({
             action: 'Qiskit Camp 2020'
           })"
