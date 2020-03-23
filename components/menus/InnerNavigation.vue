@@ -28,6 +28,8 @@ export default class extends Vue {
 </script>
 
 <style lang="scss" scoped>
+@import '~carbon-components/scss/globals/scss/typography';
+
 .menu-container {
   background-color: #fffe;
 }
@@ -35,7 +37,6 @@ export default class extends Vue {
 .menu {
   height: 90px;
   display: flex;
-  font-size: 0.80rem;
 
   & > * {
     height: 100%;
@@ -55,6 +56,7 @@ export default class extends Vue {
   width: 100%;
 
   &__item {
+    @include type-style('productive-heading-03');
     flex: 1;
     display: inline-flex;
     align-items: center;
@@ -62,11 +64,9 @@ export default class extends Vue {
     color: var(--body-color-dark);
     text-decoration: none;
     text-transform: uppercase;
-    letter-spacing: 0.2em;
     border-right: 1px solid #3334;
     text-align: center;
     padding: 0.5rem;
-    font-size: 0.8rem;
 
     &:last-child {
       border-right: none;

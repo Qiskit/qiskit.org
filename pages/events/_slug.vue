@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="event-page">
     <Menu>
       <li
         v-for="link in event.attributes.nav"
@@ -109,6 +109,11 @@ export default class extends QiskitPage {
 * {
   margin: 0;
   padding: 0;
+}
+
+.event-page {
+  background-color: white;
+  color: black;
 }
 
 ul {

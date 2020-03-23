@@ -80,10 +80,11 @@ export default class extends Vue {
 </style>
 
 <style lang="scss">
+@import '~carbon-components/scss/globals/scss/typography';
+
 .map-tip {
+  @include type-style('body-short-01');
   position: relative;
-  font-size: 0.8rem;
-  font-weight: 200;
   color: white;
   background-color: var(--secondary-color-light);
   padding: 0.2rem 0.6rem;
@@ -97,7 +98,6 @@ export default class extends Vue {
     left: 50%;
     width: 0;
     height: 0;
-    font-size: 0;
     border: 8px solid transparent;
     border-bottom: 8px solid var(--secondary-color-light);
     transform: translate(-50%);

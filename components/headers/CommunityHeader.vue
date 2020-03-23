@@ -48,6 +48,8 @@ export default class extends Vue {
 </script>
 
 <style lang="scss" scoped>
+@import '~carbon-components/scss/globals/scss/typography';
+
 .extra-container {
   margin-right: 1rem;
 }
@@ -61,6 +63,14 @@ export default class extends Vue {
   z-index: 0;
   padding-top: 2rem;
   padding-bottom: 2rem;
+}
+
+.main-title {
+  @include productive-heading-09();
+}
+
+.description p {
+  @include body-long-04();
 }
 
 .decoration {
