@@ -108,11 +108,18 @@ type Event = {
     }
   },
 
-  async asyncData () {
+  computed: {
+    events () {
+      return this.$store.state.events.events
+    }
+  },
+
+  async asyncData ({ store }) {
     const eventsModule = await import('~/content/events/events-previews.json')
     const events: Array<Event> = eventsModule.default || []
 
-    return { events }
+    // return { events }
+    store.commit('setEvents', events)
   }
 })
 
