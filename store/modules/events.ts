@@ -9,7 +9,8 @@ type Event = {
 
 export default {
   state: {
-    items: []
+    items: [],
+    typeFilters: []
   },
   getters: {
     eventsCount () {
@@ -19,6 +20,12 @@ export default {
   mutations: {
     setEvents (state, events) {
       state.items = events
+    },
+    addFilter (state, payload) {
+      const { filter, filterValue } = payload
+      const filters = state[filter]
+
+      state[filter] = [...filters, filterValue]
     }
   },
   actions: {
