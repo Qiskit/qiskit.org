@@ -27,35 +27,31 @@ export default {
     filteredEvents (state) {
       const { items, typeFilters, locationFilters } = state
       const events = items
-      let accFilteredEvents: Array<Event> = []
 
       if (!typeFilters.length && !locationFilters.length) { return events }
 
-      if (!locationFilters.length && typeFilters.length) {
-        typeFilters.forEach((typeFilter: String) => {
-          const filteredEvents: Array<Event> = events.filter((event: Event) => event.type === typeFilter)
+      const applyFiltersToEvents = (allEvents, selectedFilters, propToFilter) => {
+        let accFilteredEvents: Array<Event> = []
+
+        selectedFilters.forEach((typeFilter: String) => {
+          const filteredEvents: Array<Event> = allEvents.filter((event: Event) => event[propToFilter] === typeFilter)
           accFilteredEvents = [...accFilteredEvents, ...filteredEvents]
         })
 
         return accFilteredEvents
+      }
+
+      if (!locationFilters.length && typeFilters.length) {
+        return applyFiltersToEvents(events, typeFilters, 'type')
       }
 
       if (!typeFilters.length && locationFilters.length) {
-        locationFilters.forEach((locationFilter: String) => {
-          const filteredEvents: Array<Event> = events.filter((event: Event) => event.location === locationFilter)
-          accFilteredEvents = [...accFilteredEvents, ...filteredEvents]
-        })
-        return accFilteredEvents
+        return applyFiltersToEvents(events, locationFilters, 'location')
       }
 
-      typeFilters.forEach((typeFilter: String) => {
-        locationFilters.forEach((locationFilter: String) => {
-          const filteredEvents: Array<Event> = events.filter((event: Event) => event.type === typeFilter && event.location === locationFilter)
-          accFilteredEvents = [...accFilteredEvents, ...filteredEvents]
-        })
-      })
+      const eventsAfterApplyTypeFilter = applyFiltersToEvents(events, typeFilters, 'type')
 
-      return accFilteredEvents
+      return applyFiltersToEvents(eventsAfterApplyTypeFilter, locationFilters, 'location')
     }
   },
   mutations: {
