@@ -78,7 +78,7 @@
 </template>
 
 <script lang="ts">
-import { mapGetters, mapState, mapActions } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/qiskit/QiskitPage.vue'
 import EventCard from '~/components/cards/EventCard.vue'
@@ -113,10 +113,7 @@ type Event = {
   computed: {
     ...mapGetters([
       'filteredEvents'
-    ]),
-    ...mapState({
-      events: (state: any) => state.events.items
-    })
+    ])
   },
 
   methods: {
