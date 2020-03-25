@@ -55,7 +55,7 @@
                 v-model="typeModel"
                 :value="type.value"
                 :label="type.label"
-                @change="toggle('typeFilters', type.label, $event)"
+                @change="updateFilter('typeFilters', type.label, $event)"
               />
             </client-only>
           </fieldset>
@@ -123,12 +123,12 @@ type Event = {
     ...mapActions({
       fetchEvents: 'fetchEvents'
     }),
-    toggle (filter, filterValue, checked) {
+    updateFilter (filter, filterValue, deselectFilter) {
       const payload = { filter, filterValue }
 
-      checked
-        ? this.$store.commit('addFilter', payload)
-        : console.log('CHECK', filterValue, checked)
+      deselectFilter
+        ? this.$store.commit('removeFilter', payload)
+        : this.$store.commit('addFilter', payload)
     }
   },
 

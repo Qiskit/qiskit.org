@@ -18,15 +18,19 @@ export default {
     },
     filteredEvents (state) {
       const { items, typeFilters } = state
-      let filteredEvents = items
+      const events = items
+      let accFilteredEvents: Array<Event> = []
+
+      if (!typeFilters.length) { return events }
 
       if (typeFilters) {
         typeFilters.forEach((typeFilter: String) => {
-          filteredEvents = filteredEvents.filter((event: Event) => event.type === typeFilter)
+          const filteredEvents: Array<Event> = events.filter((event: Event) => event.type === typeFilter)
+          accFilteredEvents = [...accFilteredEvents, ...filteredEvents]
         })
       }
 
-      return filteredEvents
+      return accFilteredEvents
     }
   },
   mutations: {
@@ -34,6 +38,12 @@ export default {
       state.items = events
     },
     addFilter (state, payload) {
+      const { filter, filterValue } = payload
+      const filters = state[filter]
+
+      state[filter] = filters.filter((eventFilter: String) => eventFilter !== filterValue)
+    },
+    removeFilter (state, payload) {
       const { filter, filterValue } = payload
       const filters = state[filter]
 
