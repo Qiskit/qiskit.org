@@ -62,7 +62,7 @@
         </div>
         <div class="event-page__results">
           <EventCard
-            v-for="event in events"
+            v-for="event in filteredEvents"
             :key="`${event.place}-${event.date}`"
             :type="event.type"
             :title="event.title"
@@ -78,7 +78,7 @@
 </template>
 
 <script lang="ts">
-import { mapState, mapActions } from 'vuex'
+import { mapGetters, mapState, mapActions } from 'vuex'
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/qiskit/QiskitPage.vue'
 import EventCard from '~/components/cards/EventCard.vue'
@@ -111,6 +111,9 @@ type Event = {
   },
 
   computed: {
+    ...mapGetters([
+      'filteredEvents'
+    ]),
     ...mapState({
       events: (state: any) => state.events.items
     })

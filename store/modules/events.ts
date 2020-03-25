@@ -15,6 +15,18 @@ export default {
   getters: {
     eventsCount () {
 
+    },
+    filteredEvents (state) {
+      const { items, typeFilters } = state
+      let filteredEvents = items
+
+      if (typeFilters) {
+        typeFilters.forEach((typeFilter: String) => {
+          filteredEvents = filteredEvents.filter((event: Event) => event.type === typeFilter)
+        })
+      }
+
+      return filteredEvents
     }
   },
   mutations: {
