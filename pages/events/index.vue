@@ -38,9 +38,11 @@
               <cv-checkbox
                 v-for="location in locations"
                 :key="location.value"
-                v-model="locationModel"
                 :value="location.value"
                 :label="location.label"
+                :checked="isFilterChecked('locationFilters', location.label)"
+                :aria-checked="`${isFilterChecked('locationFilters', location.label)}`"
+                @change="updateFilter('locationFilters', location.label, $event)"
               />
             </client-only>
           </fieldset>
@@ -52,7 +54,6 @@
               <cv-checkbox
                 v-for="type in types"
                 :key="type.value"
-                v-model="typeModel"
                 :value="type.value"
                 :label="type.label"
                 @change="updateFilter('typeFilters', type.label, $event)"
@@ -93,6 +94,7 @@ type Event = {
   title: String,
   image: String,
   place: String,
+  location: String,
   date: String,
   to: String
 }
@@ -112,7 +114,9 @@ type Event = {
 
   computed: {
     ...mapGetters([
-      'filteredEvents'
+      'filteredEvents',
+      'getTypeFilters',
+      'getLocationFilters'
     ])
   },
 
@@ -120,12 +124,20 @@ type Event = {
     ...mapActions({
       fetchEvents: 'fetchEvents'
     }),
-    updateFilter (filter, filterValue, deselectFilter) {
+    isFilterChecked (filter, filterValue) {
+      const typeFilters = this.$store.getters.getTypeFilters
+      const locationFilters = this.$store.getters.getLocationFilters
+
+      return filter === 'locationFilters'
+        ? locationFilters.includes(filterValue)
+        : typeFilters.includes(filterValue)
+    },
+    updateFilter (filter, filterValue, selectFilter) {
       const payload = { filter, filterValue }
 
-      deselectFilter
-        ? this.$store.commit('removeFilter', payload)
-        : this.$store.commit('addFilter', payload)
+      selectFilter
+        ? this.$store.commit('addFilter', payload)
+        : this.$store.commit('removeFilter', payload)
     }
   },
 
@@ -141,8 +153,6 @@ export default class extends QiskitPage {
   types: Array<Filter> = ORDERED_TYPE_FILTERS
   routeName: string = 'events'
   windowWidth: Number = 0
-  locationModel: Array<Filter> = []
-  typeModel: Array<Filter> = []
 
   autoplayVideo () {
     if (!this.$refs.video) {
