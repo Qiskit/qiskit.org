@@ -56,6 +56,8 @@
                 :key="type.value"
                 :value="type.value"
                 :label="type.label"
+                :checked="isFilterChecked('typeFilters', type.label)"
+                :aria-checked="`${isFilterChecked('typeFilters', type.label)}`"
                 @change="updateFilter('typeFilters', type.label, $event)"
               />
             </client-only>
@@ -88,16 +90,6 @@ import {
   ORDERED_TYPE_FILTERS,
   Filter
 } from '~/constants/filters'
-
-type Event = {
-  type: String,
-  title: String,
-  image: String,
-  place: String,
-  location: String,
-  date: String,
-  to: String
-}
 
 @Component({
   layout: 'carbon',
@@ -142,7 +134,7 @@ type Event = {
   },
 
   async fetch ({ store }) {
-    const events: Array<Event> = await store.dispatch('fetchEvents')
+    const events = await store.dispatch('fetchEvents')
 
     store.commit('setEvents', events)
   }
