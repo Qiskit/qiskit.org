@@ -27,11 +27,16 @@ export default {
     filteredEvents (state) {
       const { items, typeFilters, locationFilters } = state
       const events = items
+      const hasTypeFilters = !!typeFilters.length
+      const hasLocationFilters = !!locationFilters.length
 
-      if (!typeFilters.length && !locationFilters.length) { return events }
+      if (!hasTypeFilters && !hasLocationFilters) { return events }
 
       const applyFiltersToEvents = (allEvents, selectedFilters, propToFilter) => {
         let accFilteredEvents: Array<Event> = []
+        const hasFilters = !!selectedFilters.length
+
+        if (!hasFilters) { return allEvents }
 
         selectedFilters.forEach((typeFilter: String) => {
           const filteredEvents: Array<Event> = allEvents.filter((event: Event) => event[propToFilter] === typeFilter)
@@ -39,14 +44,6 @@ export default {
         })
 
         return accFilteredEvents
-      }
-
-      if (!locationFilters.length && typeFilters.length) {
-        return applyFiltersToEvents(events, typeFilters, 'type')
-      }
-
-      if (!typeFilters.length && locationFilters.length) {
-        return applyFiltersToEvents(events, locationFilters, 'location')
       }
 
       const eventsAfterApplyTypeFilter = applyFiltersToEvents(events, typeFilters, 'type')
