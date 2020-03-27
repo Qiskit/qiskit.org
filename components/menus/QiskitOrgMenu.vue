@@ -150,7 +150,7 @@ export default class extends Vue {
       linkType: 'aLink'
     },
     {
-      label: 'API Documentation',
+      label: 'Documentation',
       url: '/documentation',
       linkType: 'aLink'
     }
