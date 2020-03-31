@@ -107,8 +107,8 @@ import {
   computed: {
     ...mapGetters([
       'filteredEvents',
-      'getTypeFilters',
-      'getLocationFilters'
+      'typeFilters',
+      'locationFilters'
     ])
   },
 
@@ -117,8 +117,8 @@ import {
       fetchEvents: 'fetchEvents'
     }),
     isFilterChecked (filter, filterValue) {
-      const typeFilters = this.$store.getters.getTypeFilters
-      const locationFilters = this.$store.getters.getLocationFilters
+      const typeFilters = (this as any).typeFilters
+      const locationFilters = (this as any).locationFilters
 
       return filter === 'locationFilters'
         ? locationFilters.includes(filterValue)
