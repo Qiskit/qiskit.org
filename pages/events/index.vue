@@ -186,7 +186,7 @@ export default class extends QiskitPage {
       : commit('removeFilter', payload)
   }
 
-  selectTab (selectedTab) {
+  selectTab (selectedTab: boolean) {
     this.$store.commit('setActiveTab', selectedTab)
   }
 }
