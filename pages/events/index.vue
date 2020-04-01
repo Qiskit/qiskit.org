@@ -91,6 +91,16 @@ import {
   Filter
 } from '~/constants/filters'
 
+type CommunityEvent = {
+  type: string,
+  title: string,
+  image: string,
+  place: string,
+  location: string,
+  date: string,
+  to: string
+}
+
 @Component({
   layout: 'carbon',
 
@@ -115,22 +125,7 @@ import {
   methods: {
     ...mapActions({
       fetchEvents: 'fetchEvents'
-    }),
-    isFilterChecked (filter, filterValue) {
-      const typeFilters = (this as any).typeFilters
-      const locationFilters = (this as any).locationFilters
-
-      return filter === 'locationFilters'
-        ? locationFilters.includes(filterValue)
-        : typeFilters.includes(filterValue)
-    },
-    updateFilter (filter, filterValue, selectFilter) {
-      const payload = { filter, filterValue }
-
-      selectFilter
-        ? this.$store.commit('addFilter', payload)
-        : this.$store.commit('removeFilter', payload)
-    }
+    })
   },
 
   async fetch ({ store }) {
@@ -167,6 +162,24 @@ export default class extends QiskitPage {
 
     await this.$nextTick()
     this.autoplayVideo()
+  }
+
+  isFilterChecked (filter: string, filterValue: string): Array<CommunityEvent> {
+    const typeFilters = (this as any).typeFilters
+    const locationFilters = (this as any).locationFilters
+
+    return filter === 'locationFilters'
+      ? locationFilters.includes(filterValue)
+      : typeFilters.includes(filterValue)
+  }
+
+  updateFilter (filter: string, filterValue: string, isSelected: boolean): void {
+    const payload = { filter, filterValue }
+    const { commit } = this.$store
+
+    isSelected
+      ? commit('addFilter', payload)
+      : commit('removeFilter', payload)
   }
 }
 </script>

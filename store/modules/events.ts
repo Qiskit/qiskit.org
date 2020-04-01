@@ -1,13 +1,3 @@
-type CommunityEvent = {
-  type: String,
-  title: String,
-  image: String,
-  place: String,
-  location: String,
-  date: String,
-  to: String
-}
-
 export default {
   state: {
     communityEvents: [],
@@ -48,13 +38,17 @@ export default {
     },
     addFilter (state, payload) {
       const { filter, filterValue } = payload
+      const filterIndex = state[filter].indexOf(filterValue)
+      const noFilterFound = filterIndex === -1
 
-      state[filter].push(filterValue)
+      noFilterFound && state[filter].push(filterValue)
     },
     removeFilter (state, payload) {
       const { filter, filterValue } = payload
+      const filterIndex = state[filter].indexOf(filterValue)
+      const isFilterFound = filterIndex !== -1
 
-      state[filter].splice(state[filter].indexOf(filterValue), 1)
+      isFilterFound && state[filter].splice(filterIndex, 1)
     }
   },
   actions: {
