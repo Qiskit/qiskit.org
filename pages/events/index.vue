@@ -38,9 +38,11 @@
               <cv-checkbox
                 v-for="location in locations"
                 :key="location.value"
-                v-model="locationModel"
                 :value="location.value"
                 :label="location.label"
+                :checked="isFilterChecked('locationFilters', location.label)"
+                :aria-checked="`${isFilterChecked('locationFilters', location.label)}`"
+                @change="updateFilter('locationFilters', location.label, $event)"
               />
             </client-only>
           </fieldset>
@@ -52,16 +54,18 @@
               <cv-checkbox
                 v-for="type in types"
                 :key="type.value"
-                v-model="typeModel"
                 :value="type.value"
                 :label="type.label"
+                :checked="isFilterChecked('typeFilters', type.label)"
+                :aria-checked="`${isFilterChecked('typeFilters', type.label)}`"
+                @change="updateFilter('typeFilters', type.label, $event)"
               />
             </client-only>
           </fieldset>
         </div>
         <div class="event-page__results">
           <EventCard
-            v-for="event in events"
+            v-for="event in filteredEvents"
             :key="`${event.place}-${event.date}`"
             :type="event.type"
             :title="event.title"
@@ -77,6 +81,7 @@
 </template>
 
 <script lang="ts">
+import { mapGetters, mapActions } from 'vuex'
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/qiskit/QiskitPage.vue'
 import EventCard from '~/components/cards/EventCard.vue'
@@ -86,13 +91,14 @@ import {
   Filter
 } from '~/constants/filters'
 
-type Event = {
-  type: String,
-  title: String,
-  image: String,
-  place: String,
-  date: String,
-  to: String
+type CommunityEvent = {
+  type: string,
+  title: string,
+  image: string,
+  place: string,
+  location: string,
+  date: string,
+  to: string
 }
 
 @Component({
@@ -108,11 +114,24 @@ type Event = {
     }
   },
 
-  async asyncData () {
-    const eventsModule = await import('~/content/events/events-previews.json')
-    const events: Array<Event> = eventsModule.default || []
+  computed: {
+    ...mapGetters([
+      'filteredEvents',
+      'typeFilters',
+      'locationFilters'
+    ])
+  },
 
-    return { events }
+  methods: {
+    ...mapActions({
+      fetchEvents: 'fetchEvents'
+    })
+  },
+
+  async fetch ({ store }) {
+    const events = await store.dispatch('fetchEvents')
+
+    store.commit('setEvents', events)
   }
 })
 
@@ -121,8 +140,6 @@ export default class extends QiskitPage {
   types: Array<Filter> = ORDERED_TYPE_FILTERS
   routeName: string = 'events'
   windowWidth: Number = 0
-  locationModel: Array<Filter> = []
-  typeModel: Array<Filter> = []
 
   autoplayVideo () {
     if (!this.$refs.video) {
@@ -145,6 +162,24 @@ export default class extends QiskitPage {
 
     await this.$nextTick()
     this.autoplayVideo()
+  }
+
+  isFilterChecked (filter: string, filterValue: string): Array<CommunityEvent> {
+    const typeFilters = (this as any).typeFilters
+    const locationFilters = (this as any).locationFilters
+
+    return filter === 'locationFilters'
+      ? locationFilters.includes(filterValue)
+      : typeFilters.includes(filterValue)
+  }
+
+  updateFilter (filter: string, filterValue: string, isSelected: boolean): void {
+    const payload = { filter, filterValue }
+    const { commit } = this.$store
+
+    isSelected
+      ? commit('addFilter', payload)
+      : commit('removeFilter', payload)
   }
 }
 </script>
