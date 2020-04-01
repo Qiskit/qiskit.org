@@ -22,7 +22,7 @@
     <div class="wrapper">
       <div class="event-page__filters-time">
         <client-only>
-          <cv-tabs aria-label="navigation tab label">
+          <cv-tabs aria-label="navigation tab label" @tab-selected="selectTab">
             <cv-tab id="tab-1" label="Upcoming" />
             <cv-tab id="tab-2" label="Past" />
           </cv-tabs>
@@ -129,9 +129,13 @@ type CommunityEvent = {
   },
 
   async fetch ({ store }) {
-    const events = await store.dispatch('fetchEvents')
+    const futureEvents = await store.dispatch('fetchFutureEvents')
+    const pastEvents = await store.dispatch('fetchPastEvents')
 
-    store.commit('setEvents', events)
+    const futureEventsPayload = { events: 'futureCommunityEvents', eventsList: futureEvents }
+    const pastEventsPayload = { events: 'pastCommunityEvents', eventsList: pastEvents }
+    store.commit('setEvents', futureEventsPayload)
+    store.commit('setEvents', pastEventsPayload)
   }
 })
 
@@ -180,6 +184,10 @@ export default class extends QiskitPage {
     isSelected
       ? commit('addFilter', payload)
       : commit('removeFilter', payload)
+  }
+
+  selectTab (selectedTab) {
+    this.$store.commit('setActiveTab', selectedTab)
   }
 }
 </script>
