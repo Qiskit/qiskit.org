@@ -1,6 +1,8 @@
 export default {
   state: {
-    communityEvents: [],
+    activeTab: 0,
+    futureCommunityEvents: [],
+    pastCommunityEvents: [],
     typeFilters: [],
     locationFilters: []
   },
@@ -12,8 +14,15 @@ export default {
       return state.locationFilters
     },
     filteredEvents (state) {
-      const { communityEvents, typeFilters, locationFilters } = state
-      const events = communityEvents
+      const {
+        activeTab,
+        futureCommunityEvents,
+        pastCommunityEvents,
+        typeFilters,
+        locationFilters
+      } = state
+      const showFutureEvents = activeTab === 0
+      const events = showFutureEvents ? futureCommunityEvents : pastCommunityEvents
       const noTypeFilters = typeFilters.length === 0
       const noLocationFilters = locationFilters.length === 0
 
@@ -33,8 +42,13 @@ export default {
     }
   },
   mutations: {
-    setEvents (state, events) {
-      state.communityEvents = events
+    setEvents (state, payload) {
+      const { events, eventsList } = payload
+
+      state[events] = eventsList
+    },
+    setActiveTab (state, payload) {
+      state.activeTab = payload
     },
     addFilter (state, payload) {
       const { filter, filterValue } = payload
@@ -52,8 +66,12 @@ export default {
     }
   },
   actions: {
-    async fetchEvents () {
-      const eventsModule = await import('~/content/events/events-previews.json')
+    async fetchFutureEvents () {
+      const eventsModule = await import('~/content/events/future-community-events.json')
+      return eventsModule.default || []
+    },
+    async fetchPastEvents () {
+      const eventsModule = await import('~/content/events/past-community-events.json')
       return eventsModule.default || []
     }
   }
