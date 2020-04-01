@@ -9,6 +9,9 @@ import Mode from 'frontmatter-markdown-loader/mode'
 import { Configuration } from '@nuxt/types'
 import pkg from './package.json'
 import generateTextbookToc from './hooks/generate-textbook-toc'
+import fetchEvents from './hooks/update-events'
+
+const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY
 
 const md = markdownIt({
   linkify: true,
@@ -71,8 +74,8 @@ const config: Configuration = {
     '~/plugins/highlight-js.ts',
     '~/plugins/carbon.ts',
     '~/plugins/deep-load.ts',
-    { src: '~/plugins/hotjar.ts', mode: 'client' },
-    { src: '~/plugins/segment-analytics.ts', mode: 'client' }
+    { src: '~/plugins/hotjar.ts', mode: 'client' }
+    // { src: '~/plugins/segment-analytics.ts', mode: 'client' }
   ],
 
   /*
@@ -204,6 +207,7 @@ const config: Configuration = {
           'https://qiskit.org/textbook/preface.html',
           './content/education/textbook-toc.md'
         )
+        await fetchEvents(AIRTABLE_API_KEY, './content/events')
       }
     }
   }
