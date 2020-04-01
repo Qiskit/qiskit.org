@@ -1,71 +1,54 @@
-type Event = {
-  type: String,
-  title: String,
-  image: String,
-  place: String,
-  location: String,
-  date: String,
-  to: String
-}
-
 export default {
   state: {
-    items: [],
+    communityEvents: [],
     typeFilters: [],
     locationFilters: []
   },
   getters: {
-    eventsCount () {
-
-    },
-    getTypeFilters (state) {
+    typeFilters (state) {
       return state.typeFilters
     },
-    getLocationFilters (state) {
+    locationFilters (state) {
       return state.locationFilters
     },
     filteredEvents (state) {
-      const { items, typeFilters, locationFilters } = state
-      const events = items
-      const hasTypeFilters = !!typeFilters.length
-      const hasLocationFilters = !!locationFilters.length
+      const { communityEvents, typeFilters, locationFilters } = state
+      const events = communityEvents
+      const noTypeFilters = typeFilters.length === 0
+      const noLocationFilters = locationFilters.length === 0
 
-      if (!hasTypeFilters && !hasLocationFilters) { return events }
+      if (noTypeFilters && noLocationFilters) { return events }
 
-      const applyFiltersToEvents = (allEvents, selectedFilters, propToFilter) => {
-        let accFilteredEvents: Array<Event> = []
-        const hasFilters = !!selectedFilters.length
+      const eventsAfterApplyTypeFilter = filterBy(events, typeFilters, 'type')
 
-        if (!hasFilters) { return allEvents }
+      return filterBy(eventsAfterApplyTypeFilter, locationFilters, 'location')
 
-        selectedFilters.forEach((typeFilter: String) => {
-          const filteredEvents: Array<Event> = allEvents.filter((event: Event) => event[propToFilter] === typeFilter)
-          accFilteredEvents = [...accFilteredEvents, ...filteredEvents]
-        })
+      function filterBy (allEvents, selectedFilters, propToFilter) {
+        const noFilters = selectedFilters.length === 0
 
-        return accFilteredEvents
+        if (noFilters) { return allEvents }
+
+        return allEvents.filter(event => selectedFilters.includes(event[propToFilter]))
       }
-
-      const eventsAfterApplyTypeFilter = applyFiltersToEvents(events, typeFilters, 'type')
-
-      return applyFiltersToEvents(eventsAfterApplyTypeFilter, locationFilters, 'location')
     }
   },
   mutations: {
     setEvents (state, events) {
-      state.items = events
+      state.communityEvents = events
     },
     addFilter (state, payload) {
       const { filter, filterValue } = payload
-      const filters = state[filter]
+      const filterIndex = state[filter].indexOf(filterValue)
+      const noFilterFound = filterIndex === -1
 
-      state[filter] = [...filters, filterValue]
+      noFilterFound && state[filter].push(filterValue)
     },
     removeFilter (state, payload) {
       const { filter, filterValue } = payload
-      const filters = state[filter]
+      const filterIndex = state[filter].indexOf(filterValue)
+      const isFilterFound = filterIndex !== -1
 
-      state[filter] = filters.filter((eventFilter: String) => eventFilter !== filterValue)
+      isFilterFound && state[filter].splice(filterIndex, 1)
     }
   },
   actions: {
