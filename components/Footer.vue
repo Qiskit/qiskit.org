@@ -25,6 +25,6 @@ footer {
   min-height: 10rem;
   text-align: center;
   margin-top: 4rem;
-  background-color: var(--dark-color);
+  background-color: black;
 }
 </style>
