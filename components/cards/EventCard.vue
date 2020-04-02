@@ -1,6 +1,6 @@
 <template>
-  <nuxt-link
-    :to="to"
+  <a
+    :href="to"
     class="card-link"
   >
     <article class="event-card">
@@ -34,7 +34,7 @@
         :style="`background-image: url(${image});`"
       />
     </article>
-  </nuxt-link>
+  </a>
 </template>
 
 <script lang="ts">
