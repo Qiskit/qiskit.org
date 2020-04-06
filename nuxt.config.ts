@@ -74,8 +74,8 @@ const config: Configuration = {
     '~/plugins/highlight-js.ts',
     '~/plugins/carbon.ts',
     '~/plugins/deep-load.ts',
-    { src: '~/plugins/hotjar.ts', mode: 'client' }
-    // { src: '~/plugins/segment-analytics.ts', mode: 'client' }
+    { src: '~/plugins/hotjar.ts', mode: 'client' },
+    { src: '~/plugins/segment-analytics.ts', mode: 'client' }
   ],
 
   /*
