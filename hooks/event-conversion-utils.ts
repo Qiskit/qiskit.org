@@ -10,7 +10,7 @@ export {
   getPlace,
   getLocation,
   getWebsite,
-  getDate,
+  getDates,
   formatDates
 }
 
@@ -32,7 +32,7 @@ async function fetchCommunityEvents (apiKey: string, { days }): Promise<Communit
       FIND("IBMers Attending", {What do we send? (Involvement)}) > 0
     )`,
     sort: [{ field: 'Start Date', direction: days > 0 ? 'asc' : 'desc' }]
-  }).eachPage((records, nextPage) => {
+  }).eachPage((records: any[], nextPage: () => any) => {
     for (const record of records) {
       const event = convertToCommunityEvent(record)
       events.push(event)
@@ -49,7 +49,7 @@ function convertToCommunityEvent (record: any): CommunityEvent {
     image: getImage(record),
     place: getPlace(record),
     location: getLocation(record),
-    date: getDate(record),
+    date: formatDates(...getDates(record)),
     to: getWebsite(record)
   }
 }
@@ -74,7 +74,7 @@ function getImage (_record: any): string {
   return options[Math.floor(Math.random() * options.length)]
 }
 
-function getPlace (record) {
+function getPlace (record: any) {
   return record.get('Event Location')
 }
 
@@ -83,12 +83,12 @@ function getLocation (_record: any): WorldLocation {
   return options[Math.floor(Math.random() * options.length)]
 }
 
-function getDate (record: any): string {
+function getDates (record: any): [Date, Date|undefined] {
   const recordStartDate = record.get('Start Date')
   const recordEndDate = record.get('End Date')
   const startDate = recordStartDate && new Date(recordStartDate)
   const endDate = recordEndDate && new Date(recordEndDate)
-  return formatDates(startDate, endDate)
+  return [startDate, endDate]
 }
 
 function formatDates (startDate?: Date, endDate?: Date): string {
@@ -121,5 +121,5 @@ function dateParts (date: Date): [string, string, string] {
 }
 
 function getWebsite (record: any): string {
-  return record.get('Event WebSite')
+  return record.get('Event Website')
 }
