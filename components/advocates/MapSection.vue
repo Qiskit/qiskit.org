@@ -23,16 +23,16 @@ import { Component, Prop } from 'vue-property-decorator'
       geographyConfig: {
         highlightOnHover: false,
         popupOnHover: false,
-        borderColor: 'var(--primary-color-lightmost)'
+        borderColor: 'var(--border-color)'
       },
       fills: {
         defaultFill: '#0000',
-        city: 'var(--secondary-color)'
+        city: 'var(--city-color)'
       },
       bubblesConfig: {
         borderWidth: 0,
         highlightBorderWidth: 0,
-        highlightFillColor: 'var(--secondary-color-light)',
+        highlightFillColor: 'var(--bubble-color)',
         popupTemplate (_, data) {
           return `<div class="map-tip">${data.name}</div>`
         }
@@ -61,6 +61,10 @@ export default class extends Vue {
 
 <style lang="scss" scoped>
 .map-section {
+  --border-color: #{$ui-04};
+  --city-color: #{$purple-60};
+  --bubble-color: #{$purple-50};
+
   position: relative;
 
   &__content {
@@ -85,10 +89,11 @@ export default class extends Vue {
 .map-tip {
   @include type-style('body-short-01');
   position: relative;
-  color: white;
-  background-color: var(--secondary-color-light);
-  padding: 0.2rem 0.6rem;
+  color: $inverse-01;
+  background-color: var(--bubble-color);
+  padding: 0.4rem 0.6rem;
   transform: translateX(-50%);
+  border-radius: 2px;
 
   &::before {
     content: "";
@@ -98,8 +103,9 @@ export default class extends Vue {
     left: 50%;
     width: 0;
     height: 0;
+    font-size: 0;
     border: 8px solid transparent;
-    border-bottom: 8px solid var(--secondary-color-light);
+    border-bottom: 8px solid var(--bubble-color);
     transform: translate(-50%);
   }
 }
