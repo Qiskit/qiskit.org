@@ -1,12 +1,12 @@
 <template>
   <main>
     <header>
-      <GatesHeader
+      <CommunityHeader
         id="presentation"
         main-title="Qiskit Experiments"
       >
         <p>Browse and contribute with innovatives ways of using quantum computing and Qiskit.</p>
-      </GatesHeader>
+      </CommunityHeader>
     </header>
     <div class="inner-navigation-scope">
       <PageSection id="featured-experiments">
@@ -37,7 +37,7 @@
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/qiskit/QiskitPage.vue'
 import InnerNavigation from '~/components/menus/InnerNavigation.vue'
-import GatesHeader from '~/components/headers/GatesHeader.vue'
+import CommunityHeader from '~/components/headers/CommunityHeader.vue'
 import PageSection from '~/components/sections/PageSection.vue'
 import ExperimentCard from '~/components/cards/ExperimentCard.vue'
 import ExperimentCarousel from '~/components/cards/ExperimentCarousel.vue'
@@ -45,7 +45,7 @@ import ExperimentCarousel from '~/components/cards/ExperimentCarousel.vue'
 @Component({
   components: {
     InnerNavigation,
-    GatesHeader,
+    CommunityHeader,
     PageSection,
     ExperimentCard,
     ExperimentCarousel
@@ -73,6 +73,8 @@ export default class extends QiskitPage {
 </script>
 
 <style lang="scss">
+@import '~carbon-components/scss/globals/scss/typography';
+
 main {
   background-color: var(--primary-color-darkmost);
   background-image: linear-gradient(150deg, var(--primary-color-darkmost) 15%,var(--primary-color-dark) 70%,var(--primary-color) 94%);
@@ -91,6 +93,7 @@ main {
   padding-bottom: 7rem;
 
   h2 {
+    @include type-style('productive-heading-06');
     @include elegant-title();
     margin-bottom: 4rem;
   }
@@ -104,6 +107,7 @@ main {
   color: var(--body-color-light);
 
   h2 {
+    @include type-style('productive-heading-06');
     @include elegant-title();
   }
 

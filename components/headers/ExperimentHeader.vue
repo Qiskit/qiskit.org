@@ -64,6 +64,8 @@ export default class extends Vue {
 </script>
 
 <style lang="scss" scoped>
+@import '~carbon-components/scss/globals/scss/typography';
+
 .experiment-header-container {
   background-color: black;
   padding-top: 1rem;
@@ -74,12 +76,13 @@ export default class extends Vue {
   }
 
   h1 {
-    font-size: 2.5rem;
+    @include type-style('productive-heading-07');
     color: white;
   }
 }
 
 .experiment-header__author {
+  @include type-style('body-short-01');
   color: var(--secondary-color-lightmost);
   margin: 1rem 0 1rem 0;
 
@@ -90,6 +93,7 @@ export default class extends Vue {
 }
 
 .experiment-header__back-navigation {
+  @include type-style('label-01');
   height: 100%;
   vertical-align: middle;
   display: inline-flex;

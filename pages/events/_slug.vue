@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="event-page">
     <Menu>
       <li
         v-for="link in event.attributes.nav"

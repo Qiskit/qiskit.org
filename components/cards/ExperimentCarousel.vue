@@ -73,6 +73,8 @@ export default class extends Vue {
 </script>
 
 <style lang="scss" scoped>
+@import '~carbon-components/scss/globals/scss/typography';
+
 .slide-link {
   display: block;
   text-decoration: none;
@@ -105,7 +107,6 @@ export default class extends Vue {
   z-index: 2;
   display: flex;
   flex-direction: row;
-  font-size: 0.9rem;
   color: var(--body-color-light);
   background-color: var(--primary-color);
   box-shadow: 0 23px 35px 0 rgba(10, 0, 50, 0.35);
@@ -120,15 +121,18 @@ export default class extends Vue {
   }
 
   &-copy {
+    @include type-style('body-short-01');
     flex: 1;
     margin: 0.5rem 1rem 1em;
   }
 
   h3 {
+    @include type-style('productive-heading-03');
     margin-top: 1.5rem;
   }
 
   &-author {
+    @include type-style('body-short-01');
     color: var(--secondary-color-lightmost);
     margin-top: 0.5rem;
 

@@ -72,6 +72,8 @@ export default class extends Vue {
 </script>
 
 <style lang="scss" scoped>
+@import '~carbon-components/scss/globals/scss/typography';
+
 .textbook-features {
   position: relative;
 
@@ -150,15 +152,14 @@ export default class extends Vue {
 }
 
 .marker__label {
+  @include type-style('productive-heading-01');
   margin: 0;
   position: absolute;
-  bottom: 0.5rem;
+  bottom: 0.1rem;
   right: 1rem;
   writing-mode: vertical-rl;
   height: 100%;
   color: white;
-  font-size: 0.7rem;
-  font-weight: bold;
   transform: rotate(180deg);
 }
 
@@ -180,23 +181,29 @@ export default class extends Vue {
 </style>
 
 <style lang="scss">
+@import '~carbon-components/scss/globals/scss/typography';
+
 .textbook-features__toc-content {
   z-index: 1;
   max-height: 100%;
-  overflow-y: auto;
+  overflow-y: hidden;
   padding-left: 3.5rem;
-  font-size: 0.8rem;
 
   ul {
-    margin: 0.5rem 0 0 2rem;
+    margin: 0.5rem 0 1rem 2rem;
+    list-style: disc;
+
+    li {
+      @include type-style('body-short-02');
+    }
   }
 
   h2 {
-    font-size: 1.1rem;
+    @include type-style('productive-heading-02');
   }
 
   h3 {
-    margin: 1rem 0 0 0;
+    @include type-style('productive-heading-03');
     color: var(--secondary-color);
   }
 }
