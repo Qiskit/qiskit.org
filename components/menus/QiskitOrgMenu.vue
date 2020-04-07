@@ -183,10 +183,10 @@ export default class extends Vue {
 .menu-container {
   border-bottom: 1px solid black;
   background-color: $ui-background;
-  --link-color: white;
+  --link-color: #{$text-01};
   &--light {
-    --link-color: var(--body-color-dark);
-    background-color: var(--secondary-color-lightmost);
+    --link-color: #{$inverse-01};
+    background-color: $purple-30;
     border-bottom: none;
   }
 }
@@ -216,20 +216,20 @@ export default class extends Vue {
     &.nuxt-link-active {
       position: relative;
       top: 1px;
-      border-bottom: 4px solid var(--secondary-color);
+      border-bottom: 4px solid $focus;
     }
 
     &--active {
       padding-top: 2px;
       position: relative;
       top: 1px;
-      border-bottom: 4px solid var(--secondary-color);
+      border-bottom: 4px solid $focus;
     }
   }
 
   &--with-separator::before {
     content: "";
-    background-color: #fff4;
+    background-color: $ui-03;
     width: 2px;
     margin: 12px 10px;
   }
@@ -291,7 +291,7 @@ export default class extends Vue {
   bottom: 0;
   left: 0;
   z-index: 150;
-  background-color: black;
+  background-color: $ui-background;
   opacity: 0;
   transition: opacity 200ms;
   pointer-events: none;
@@ -307,14 +307,14 @@ export default class extends Vue {
   z-index: 200;
   width: 256px;
   padding: 1.3rem;
-  background-color: var(--primary-color);
+  background-color: $ui-background;
   transform: translateX(-100%);
   transition: transform 200ms;
   overflow-y: auto;
 
   h2 {
     @include type-style('productive-heading-03');
-    color: var(--primary-color-lightmost);
+    color: $text-01;
     padding: 1em;
   }
 
@@ -328,15 +328,15 @@ export default class extends Vue {
   flex-direction: column;
   margin: 0 -1.3rem;
   padding: 1rem 0;
-  background-color: var(--secondary-color-lightmost);
+  background-color: $purple-30;
 
   &__item {
     @include vertical-navigation-item();
     padding: 0.5rem 3rem;
-    color: var(--body-color-dark);
+    color: $inverse-01;
 
     &.nuxt-link-active {
-      border-left: 4px solid var(--secondary-color);
+      border-left: 4px solid $focus;
       padding-left: calc(3rem - 4px);
     }
   }
