@@ -50,6 +50,7 @@ export default class extends Vue {
   --component-bg: #{$ui-01};
 
   text-align: center;
+  border: 1px solid $focus;
   background-color: var(--component-bg);
 
   p {
