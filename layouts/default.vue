@@ -33,6 +33,6 @@ export default class extends Vue { }
 }
 
 main {
-  color: black;
+  color: $inverse-01;
 }
 </style>
