@@ -34,8 +34,8 @@ export default class extends Vue {
 
   decorate (image) {
     const bgEffects = [
-      'linear-gradient(170deg, #0000 0%, #0000 90%, var(--primary-color) 90.3%)',
-      'linear-gradient(-170deg, #0000 0%, #0000 90%, var(--primary-color) 90.3%)',
+      'linear-gradient(170deg, #0000 0%, #0000 90%, var(--component-bg) 90.3%)',
+      'linear-gradient(-170deg, #0000 0%, #0000 90%, var(--component-bg) 90.3%)',
       `url(${image})`
     ]
     return bgEffects.join(', ')
@@ -47,8 +47,10 @@ export default class extends Vue {
 @import '~carbon-components/scss/globals/scss/typography';
 
 .advocate-card {
+  --component-bg: #{$ui-01};
+
   text-align: center;
-  background-color: var(--primary-color);
+  background-color: var(--component-bg);
 
   p {
     @include type-style('body-short-02');

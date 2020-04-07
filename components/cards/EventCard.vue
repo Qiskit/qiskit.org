@@ -63,9 +63,9 @@ export default class extends Vue {
   height: 15.88rem;
   width: 100%;
   margin-bottom: 1rem;
-  background-color: var(--gray-80);
-  color: var(--white);
-  border-top: 1px solid var(--gray-70);
+  background-color: $ui-01;
+  color: $text-01;
+  border-top: 1px solid $ui-03;
   display: flex;
 
   &__content {
@@ -105,7 +105,7 @@ export default class extends Vue {
     height: 1.25rem;
 
     &--purple {
-      color: var(--purple-60)
+      color: $icon-01;
     }
   }
 

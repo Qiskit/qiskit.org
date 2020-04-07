@@ -56,8 +56,8 @@ export default class extends Vue {
 }
 
 .experiment-card {
-  color: var(--body-color-light);
-  background-color: var(--primary-color);
+  color: $text-01;
+  background-color: $ui-01;
 
   &--horizontal {
     display: flex;
@@ -102,12 +102,12 @@ export default class extends Vue {
 
   &__author {
     @include type-style('body-short-01');
-    color: var(--secondary-color-lightmost);
+    color: $purple-50;
     margin-top: 0.5rem;
 
     &:before {
       content: "by ";
-      color: var(--primary-color-lightmost);
+      color: $text-02;
     }
   }
 }

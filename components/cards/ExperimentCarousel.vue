@@ -94,8 +94,8 @@ export default class extends Vue {
     z-index: 1;
     width: 100%;
     height: 100px;
-    background-color: var(--primary-color);
-    box-shadow: 0 23px 35px 0 rgba(10, 0, 50, 0.35);
+    background-color: $ui-background;
+    box-shadow: 0 23px 35px 0 $gray-100-a30;
     transform-origin: center bottom;
     transform: scale(0.95);
   }
@@ -107,9 +107,9 @@ export default class extends Vue {
   z-index: 2;
   display: flex;
   flex-direction: row;
-  color: var(--body-color-light);
-  background-color: var(--primary-color);
-  box-shadow: 0 23px 35px 0 rgba(10, 0, 50, 0.35);
+  color: $text-01;
+  background-color: $ui-01;
+  box-shadow: 0 23px 35px 0 $gray-100-a30;
   transform-origin: center bottom;
 
   &-picture {
@@ -133,12 +133,12 @@ export default class extends Vue {
 
   &-author {
     @include type-style('body-short-01');
-    color: var(--secondary-color-lightmost);
+    color: $purple-30;
     margin-top: 0.5rem;
 
     &:before {
       content: "by ";
-      color: var(--primary-color-lightmost);
+      color: $text-02;
     }
   }
 
@@ -166,7 +166,7 @@ export default class extends Vue {
   }
 
   &:hover path {
-    fill: var(--secondary-color-lightmost);
+    fill: $interactive-01;
   }
 }
 
