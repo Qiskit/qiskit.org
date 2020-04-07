@@ -186,7 +186,7 @@ export default class extends Vue {
   --link-color: #{$text-01};
   &--light {
     --link-color: #{$inverse-01};
-    background-color: $purple-30;
+    background-color: $purple-40;
     border-bottom: none;
   }
 }
