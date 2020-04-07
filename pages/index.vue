@@ -165,11 +165,11 @@ export default class extends QiskitPage {
 @import '~carbon-components/scss/globals/scss/typography';
 
 .legacy-section {
-  background-color: white;
+  background-color: $text-01;
 }
 
 .legacy-section:nth-child(2n+1) {
-  background-color: rgb(188, 147, 252);
+  background-color: $purple-40;
 }
 
 .social-networks-list {
@@ -190,7 +190,7 @@ export default class extends QiskitPage {
       text-decoration: none;
 
       &:hover {
-        color: black;
+        color: $inverse-01;
         text-decoration: underline;
       }
 
@@ -201,7 +201,7 @@ export default class extends QiskitPage {
     }
 
     .name {
-      color: black;
+      color: $inverse-01;
       margin-left: 0.5rem;
     }
   }
