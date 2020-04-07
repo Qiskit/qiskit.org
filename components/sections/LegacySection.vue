@@ -50,7 +50,7 @@ export default class extends Vue {
       margin-bottom: 0.9rem;
 
       a {
-        color: black;
+        color: $inverse-01;
       }
     }
   }
