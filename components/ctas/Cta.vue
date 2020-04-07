@@ -43,17 +43,16 @@ export default class extends Vue {
   @include type-style('productive-heading-02');
   display: inline-block;
   padding: 0.66rem 1rem;
-  background-color: var(--primary-color);
-  border: 2px solid var(--secondary-color);
-  color: white;
+  background-color: $ui-01;
+  border: 2px solid $interactive-01;
+  color: $text-01;
   text-transform: uppercase;
   text-decoration: none;
-  box-shadow: 0 4px 6px rgba(50,50,93,.11),0 1px 3px rgba(0,0,0,.08);
   white-space: nowrap;
 
   &--secondary {
-    color: black;
-    background-color: white;
+    color: $inverse-01;
+    background-color: $inverse-02;
   }
 }
 </style>
