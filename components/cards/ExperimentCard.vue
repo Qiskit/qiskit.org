@@ -58,6 +58,7 @@ export default class extends Vue {
 .experiment-card {
   color: $text-01;
   background-color: $ui-01;
+  border: 1px solid $focus;
 
   &--horizontal {
     display: flex;
