@@ -91,15 +91,7 @@ import {
   Filter
 } from '~/constants/filters'
 
-type CommunityEvent = {
-  type: string,
-  title: string,
-  image: string,
-  place: string,
-  location: string,
-  date: string,
-  to: string
-}
+import { CommunityEvent } from '~/store/modules/events.ts'
 
 @Component({
   layout: 'carbon',
