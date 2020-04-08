@@ -121,12 +121,12 @@ import { CommunityEvent } from '~/store/modules/events.ts'
   },
 
   async fetch ({ store }) {
-    const futureEvents = await store.dispatch('fetchFutureEvents')
+    const upcomingEvents = await store.dispatch('fetchUpcomingEvents')
     const pastEvents = await store.dispatch('fetchPastEvents')
 
-    const futureEventsPayload = { events: 'futureCommunityEvents', eventsList: futureEvents }
-    const pastEventsPayload = { events: 'pastCommunityEvents', eventsList: pastEvents }
-    store.commit('setEvents', futureEventsPayload)
+    const upcomingEventsPayload = { events: 'upcomingCommunityEvents', eventsSet: upcomingEvents }
+    const pastEventsPayload = { events: 'pastCommunityEvents', eventsSet: pastEvents }
+    store.commit('setEvents', upcomingEventsPayload)
     store.commit('setEvents', pastEventsPayload)
   }
 })
@@ -178,8 +178,10 @@ export default class extends QiskitPage {
       : commit('removeFilter', payload)
   }
 
-  selectTab (selectedTab: boolean) {
-    this.$store.commit('setActiveTab', selectedTab)
+  selectTab (selectedTab: number) {
+    const activeSet = selectedTab === 0 ? 'upcoming' : 'past'
+
+    this.$store.commit('setActiveSet', activeSet)
   }
 }
 </script>

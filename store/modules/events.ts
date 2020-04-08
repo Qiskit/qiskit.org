@@ -1,3 +1,4 @@
+type CommunityEventSet = 'past'|'upcoming'
 type WorldLocation = 'America'|'Asia'|'Europe'|'Africa'|'TBD'
 type CommunityEventType = 'Hackathon'|'Camp'|'Unconference'|'Conference'
 
@@ -15,8 +16,8 @@ export { CommunityEvent, CommunityEventType, WorldLocation }
 
 export default {
   state: {
-    activeTab: 0,
-    futureCommunityEvents: [],
+    activeSet: 'upcoming',
+    upcomingCommunityEvents: [],
     pastCommunityEvents: [],
     typeFilters: [],
     locationFilters: []
@@ -30,14 +31,14 @@ export default {
     },
     filteredEvents (state) {
       const {
-        activeTab,
-        futureCommunityEvents,
+        activeSet,
+        upcomingCommunityEvents,
         pastCommunityEvents,
         typeFilters,
         locationFilters
       } = state
-      const showFutureEvents = activeTab === 0
-      const events = showFutureEvents ? futureCommunityEvents : pastCommunityEvents
+      const showUpcomingEvents = activeSet === 'upcoming'
+      const events = showUpcomingEvents ? upcomingCommunityEvents : pastCommunityEvents
       const noTypeFilters = typeFilters.length === 0
       const noLocationFilters = locationFilters.length === 0
 
@@ -58,12 +59,12 @@ export default {
   },
   mutations: {
     setEvents (state, payload) {
-      const { events, eventsList } = payload
+      const { events, eventsSet } = payload
 
-      state[events] = eventsList
+      state[events] = eventsSet
     },
-    setActiveTab (state, payload) {
-      state.activeTab = payload
+    setActiveSet (state, payload: CommunityEventSet) {
+      state.activeSet = payload
     },
     addFilter (state, payload) {
       const { filter, filterValue } = payload
@@ -81,8 +82,8 @@ export default {
     }
   },
   actions: {
-    async fetchFutureEvents () {
-      const eventsModule = await import('~/content/events/future-community-events.json')
+    async fetchUpcomingEvents () {
+      const eventsModule = await import('~/content/events/upcoming-community-events.json')
       return eventsModule.default || []
     },
     async fetchPastEvents () {
