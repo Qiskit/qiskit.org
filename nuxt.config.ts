@@ -1,5 +1,7 @@
 import path from 'path'
 import fs from 'fs'
+import consola from 'consola'
+
 import markdownIt from 'markdown-it'
 import miLinkAttributes from 'markdown-it-link-attributes'
 import miAnchor from 'markdown-it-anchor'
@@ -11,6 +13,8 @@ import pkg from './package.json'
 import generateTextbookToc from './hooks/generate-textbook-toc'
 import fetchEvents from './hooks/update-events'
 
+const IS_PRODUCTION = process.env.NODE_ENV === 'production'
+const GENERATE_CONTENT = process.env.GENERATE_CONTENT
 const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY
 
 const md = markdownIt({
@@ -32,12 +36,12 @@ const config: Configuration = {
   mode: 'universal',
 
   env: {
-    analyticsScriptUrl: process.env.NODE_ENV === 'development'
-      ? 'https://dev.console.test.cloud.ibm.com/analytics/build/bluemix-analytics.min.js'
-      : 'https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js',
-    analyticsKey: process.env.NODE_ENV === 'development'
-      ? 'zbHWEXPUfXm0K6C7HbegwB5ewDEC8o1H'
-      : 'ffdYLviQze3kzomaINXNk6NwpY9LlXcw'
+    analyticsScriptUrl: IS_PRODUCTION
+      ? 'https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js'
+      : 'https://dev.console.test.cloud.ibm.com/analytics/build/bluemix-analytics.min.js',
+    analyticsKey: IS_PRODUCTION
+      ? 'ffdYLviQze3kzomaINXNk6NwpY9LlXcw'
+      : 'zbHWEXPUfXm0K6C7HbegwB5ewDEC8o1H'
   },
 
   /*
@@ -203,13 +207,27 @@ const config: Configuration = {
   hooks: {
     build: {
       async before () {
-        await generateTextbookToc(
-          'https://qiskit.org/textbook/preface.html',
-          './content/education/textbook-toc.md'
-        )
-        await fetchEvents(AIRTABLE_API_KEY, './content/events')
+        if (!IS_PRODUCTION && !GENERATE_CONTENT) {
+          console.warn('Skipping content generation. Set GENERATE_CONTENT to enable it.')
+          return
+        }
+        await generateContent()
       }
     }
+  }
+}
+
+async function generateContent () {
+  consola.info('Generating Textbook TOC')
+  await generateTextbookToc(
+    'https://qiskit.org/textbook/preface.html',
+    './content/education/textbook-toc.md'
+  )
+  if (AIRTABLE_API_KEY) {
+    consola.info('Generating community event previews')
+    await fetchEvents(AIRTABLE_API_KEY, './content/events')
+  } else {
+    consola.warn('Cannot generate events: missing AIRTABLE_API_KEY environment variable')
   }
 }
 
