@@ -15,7 +15,7 @@ export {
 }
 
 async function fetchCommunityEvents (apiKey: string, { days }): Promise<CommunityEvent[]> {
-  const events: CommunityEvent[] = []
+  const communityEvents: CommunityEvent[] = []
   const base = new Airtable({ apiKey }).base('appkaaRF2QdwfusP1')
   await base('Events Master View').select({
     fields: [
@@ -32,14 +32,14 @@ async function fetchCommunityEvents (apiKey: string, { days }): Promise<Communit
       FIND("IBMers Attending", {What do we send? (Involvement)}) > 0
     )`,
     sort: [{ field: 'Start Date', direction: days > 0 ? 'asc' : 'desc' }]
-  }).eachPage((records: any[], nextPage: () => any) => {
+  }).eachPage((records: [], nextPage: () => any) => {
     for (const record of records) {
-      const event = convertToCommunityEvent(record)
-      events.push(event)
+      const communityEvent = convertToCommunityEvent(record)
+      communityEvents.push(communityEvent)
     }
     nextPage()
   })
-  return Promise.resolve(events)
+  return Promise.resolve(communityEvents)
 }
 
 function convertToCommunityEvent (record: any): CommunityEvent {
