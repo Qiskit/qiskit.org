@@ -1,4 +1,5 @@
 import {
+  RECORD_FIELDS,
   formatDates,
   convertToCommunityEvent,
   getType,
@@ -19,12 +20,12 @@ class FakeRecord {
 
   constructor ({ name, types, location, startDate, endDate, website }: RecordFields) {
     this._fields = {
-      Name: name,
-      'Type of Event': types,
-      'Event Location': location,
-      'Start Date': startDate,
-      'End Date': endDate,
-      'Event Website': website
+      [RECORD_FIELDS.name]: name,
+      [RECORD_FIELDS.typeOfEvent]: types,
+      [RECORD_FIELDS.eventLocation]: location,
+      [RECORD_FIELDS.startDate]: startDate,
+      [RECORD_FIELDS.endDate]: endDate,
+      [RECORD_FIELDS.eventWebsite]: website
     }
   }
 

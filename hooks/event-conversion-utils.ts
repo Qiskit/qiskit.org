@@ -1,38 +1,27 @@
 import Airtable from 'airtable'
 import { CommunityEvent, CommunityEventType, WorldLocation } from '~/store/modules/events.ts'
 
-export {
-  fetchCommunityEvents,
-  convertToCommunityEvent,
-  getName,
-  getType,
-  getImage,
-  getPlace,
-  getLocation,
-  getWebsite,
-  getDates,
-  formatDates
+const RECORD_FIELDS = {
+  name: 'Name',
+  startDate: 'Start Date',
+  endDate: 'End Date',
+  typeOfEvent: 'Type of Event',
+  eventWebsite: 'Event Website',
+  eventLocation: 'Event Location'
 }
 
 async function fetchCommunityEvents (apiKey: string, { days }): Promise<CommunityEvent[]> {
   const communityEvents: CommunityEvent[] = []
   const base = new Airtable({ apiKey }).base('appkaaRF2QdwfusP1')
   await base('Events Master View').select({
-    fields: [
-      'Name',
-      'Start Date',
-      'End Date',
-      'Type of Event',
-      'Event Website',
-      'Event Location'
-    ],
+    fields: Object.values(RECORD_FIELDS),
     filterByFormula: `AND(
       DATETIME_DIFF({Start Date}, TODAY(), 'days') ${days > 0 ? '<=' : '>='} ${days},
       DATETIME_DIFF({Start Date}, TODAY(), 'days') ${days > 0 ? '>=' : '<'} 0,
       FIND("IBMers Attending", {What do we send? (Involvement)}) > 0
     )`,
     sort: [{ field: 'Start Date', direction: days > 0 ? 'asc' : 'desc' }]
-  }).eachPage((records: [], nextPage: () => any) => {
+  }).eachPage((records, nextPage) => {
     for (const record of records) {
       const communityEvent = convertToCommunityEvent(record)
       communityEvents.push(communityEvent)
@@ -55,13 +44,19 @@ function convertToCommunityEvent (record: any): CommunityEvent {
 }
 
 function getName (record: any): string {
-  return record.get('Name')
+  return record.get(RECORD_FIELDS.name)
 }
 
 function getType (record: any): CommunityEventType {
-  if (record.get('Name').toLowerCase().includes('qiskit camp')) { return 'Camp' }
-  if ((record.get('Type of Event') || []).includes('Hackathon')) { return 'Hackathon' }
-  if ((record.get('Type of Event') || []).includes('Unconference')) { return 'Unconference' }
+  if (record.get(RECORD_FIELDS.name).toLowerCase().includes('qiskit camp')) {
+    return 'Camp'
+  }
+  if ((record.get(RECORD_FIELDS.typeOfEvent) || []).includes('Hackathon')) {
+    return 'Hackathon'
+  }
+  if ((record.get(RECORD_FIELDS.typeOfEvent) || []).includes('Unconference')) {
+    return 'Unconference'
+  }
   return 'Conference'
 }
 
@@ -75,7 +70,7 @@ function getImage (_record: any): string {
 }
 
 function getPlace (record: any) {
-  return record.get('Event Location')
+  return record.get(RECORD_FIELDS.eventLocation)
 }
 
 function getLocation (_record: any): WorldLocation {
@@ -84,8 +79,8 @@ function getLocation (_record: any): WorldLocation {
 }
 
 function getDates (record: any): [Date, Date|undefined] {
-  const recordStartDate = record.get('Start Date')
-  const recordEndDate = record.get('End Date')
+  const recordStartDate = record.get(RECORD_FIELDS.startDate)
+  const recordEndDate = record.get(RECORD_FIELDS.endDate)
   const startDate = recordStartDate && new Date(recordStartDate)
   const endDate = recordEndDate && new Date(recordEndDate)
   return [startDate, endDate]
@@ -122,4 +117,18 @@ function dateParts (date: Date): [string, string, string] {
 
 function getWebsite (record: any): string {
   return record.get('Event Website')
+}
+
+export {
+  RECORD_FIELDS,
+  fetchCommunityEvents,
+  convertToCommunityEvent,
+  getName,
+  getType,
+  getImage,
+  getPlace,
+  getLocation,
+  getWebsite,
+  getDates,
+  formatDates
 }
