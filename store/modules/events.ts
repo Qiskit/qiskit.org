@@ -59,9 +59,9 @@ export default {
   },
   mutations: {
     setEvents (state, payload) {
-      const { events, eventsList } = payload
+      const { events, eventsSet } = payload
 
-      state[events] = eventsList
+      state[events] = eventsSet
     },
     setActiveSet (state, payload: CommunityEventSet) {
       state.activeSet = payload

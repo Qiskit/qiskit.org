@@ -124,8 +124,8 @@ import { CommunityEvent } from '~/store/modules/events.ts'
     const upcomingEvents = await store.dispatch('fetchUpcomingEvents')
     const pastEvents = await store.dispatch('fetchPastEvents')
 
-    const upcomingEventsPayload = { events: 'upcomingCommunityEvents', eventsList: upcomingEvents }
-    const pastEventsPayload = { events: 'pastCommunityEvents', eventsList: pastEvents }
+    const upcomingEventsPayload = { events: 'upcomingCommunityEvents', eventsSet: upcomingEvents }
+    const pastEventsPayload = { events: 'pastCommunityEvents', eventsSet: pastEvents }
     store.commit('setEvents', upcomingEventsPayload)
     store.commit('setEvents', pastEventsPayload)
   }
