@@ -1,6 +1,8 @@
+type CommunityEventsByDate = 'past'|'upcoming'
+
 export default {
   state: {
-    activeTab: 0,
+    communityEventsShowed: 'upcoming',
     futureCommunityEvents: [],
     pastCommunityEvents: [],
     typeFilters: [],
@@ -15,13 +17,13 @@ export default {
     },
     filteredEvents (state) {
       const {
-        activeTab,
+        communityEventsShowed,
         futureCommunityEvents,
         pastCommunityEvents,
         typeFilters,
         locationFilters
       } = state
-      const showFutureEvents = activeTab === 0
+      const showFutureEvents = communityEventsShowed === 'upcoming'
       const events = showFutureEvents ? futureCommunityEvents : pastCommunityEvents
       const noTypeFilters = typeFilters.length === 0
       const noLocationFilters = locationFilters.length === 0
@@ -47,8 +49,8 @@ export default {
 
       state[events] = eventsList
     },
-    setActiveTab (state, payload) {
-      state.activeTab = payload
+    setCommunityEventsShowed (state, payload) {
+      state.communityEventsShowed = payload
     },
     addFilter (state, payload) {
       const { filter, filterValue } = payload

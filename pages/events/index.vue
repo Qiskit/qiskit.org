@@ -186,8 +186,10 @@ export default class extends QiskitPage {
       : commit('removeFilter', payload)
   }
 
-  selectTab (selectedTab: boolean) {
-    this.$store.commit('setActiveTab', selectedTab)
+  selectTab (selectedTab: number) {
+    const communityEventsToShow = selectedTab === 0 ? 'upcoming' : 'past'
+
+    this.$store.commit('setCommunityEventsShowed', communityEventsToShow)
   }
 }
 </script>
