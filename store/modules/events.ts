@@ -1,3 +1,4 @@
+type CommunityEventsToShowByDate = 'past'|'upcoming'
 type WorldLocation = 'America'|'Asia'|'Europe'|'Africa'|'TBD'
 type CommunityEventType = 'Hackathon'|'Camp'|'Unconference'|'Conference'
 
