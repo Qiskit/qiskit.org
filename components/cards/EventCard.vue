@@ -1,6 +1,6 @@
 <template>
-  <nuxt-link
-    :to="to"
+  <a
+    :href="to"
     class="card-link"
   >
     <article class="event-card">
@@ -34,7 +34,7 @@
         :style="`background-image: url(${image});`"
       />
     </article>
-  </nuxt-link>
+  </a>
 </template>
 
 <script lang="ts">
@@ -53,6 +53,8 @@ export default class extends Vue {
 </script>
 
 <style lang="scss" scoped>
+@import '~carbon-components/scss/globals/scss/typography';
+
 .card-link {
   text-decoration: none;
 }
@@ -61,9 +63,9 @@ export default class extends Vue {
   height: 15.88rem;
   width: 100%;
   margin-bottom: 1rem;
-  background-color: var(--gray-80);
-  color: var(--white);
-  border-top: 1px solid var(--gray-70);
+  background-color: $ui-01;
+  color: $text-01;
+  border-top: 1px solid $ui-03;
   display: flex;
 
   &__content {
@@ -75,12 +77,16 @@ export default class extends Vue {
   }
 
   &__title {
-    font-size: 1.5rem;
+    @include type-style('productive-heading-03');
     margin-top: 0.31rem;
   }
 
-  &__subtitle, &__place, &__date {
-    font-size: 0.88rem;
+  &__subtitle {
+    @include type-style('productive-heading-02');
+  }
+
+  &__place, &__date {
+    @include type-style('body-short-01');
   }
 
   &__place, &__date {
@@ -99,7 +105,7 @@ export default class extends Vue {
     height: 1.25rem;
 
     &--purple {
-      color: var(--purple-60)
+      color: $icon-01;
     }
   }
 

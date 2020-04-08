@@ -1,4 +1,16 @@
-type CommunityEventsByDate = 'past'|'upcoming'
+type WorldLocation = 'America'|'Asia'|'Europe'|'Africa'|'TBD'
+type CommunityEventType = 'Hackathon'|'Camp'|'Unconference'|'Conference'
+type CommunityEvent = {
+  type: CommunityEventType,
+  title: string,
+  image: string,
+  place: string,
+  location: WorldLocation,
+  date: string,
+  to: string
+}
+
+export { CommunityEvent, CommunityEventType, WorldLocation }
 
 export default {
   state: {

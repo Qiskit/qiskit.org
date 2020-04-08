@@ -15,7 +15,7 @@
   </nav>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .logo {
   width: 1.7rem;
   margin-top: -0.2rem;
@@ -33,9 +33,9 @@
   margin: 0;
   padding-top: 0.2rem;
   display: inline-block;
-  border-top: 4px solid black;
+  border-top: 4px solid $inverse-01;
   font-size: 1.7rem;
-  color: black;
+  color: $inverse-01;
 }
 
 nav {
@@ -45,8 +45,8 @@ nav {
   position: fixed;
   top: 0;
   z-index: 100;
-  box-shadow: 0px 0px 16px #2B2B2B;
-  background-color: white;
+  box-shadow: 0px 0px 16px $gray-100-a30;
+  background-color: $inverse-02;
   flex-wrap: wrap;
   min-height: 63px;
 }
@@ -77,7 +77,7 @@ nav li {
 
 nav li:hover a {
   opacity: 0.6;
-  border-bottom: 2px solid #0A1D8F;
+  border-bottom: 2px solid $ibm-blue;
 }
 
 nav li.active a,
@@ -87,7 +87,7 @@ nav li.active:hover a {
 }
 
 nav li a {
-  color: black;
+  color: $inverse-01;
 }
 
 .convertible-menu {
@@ -123,7 +123,7 @@ nav li a {
   border-radius: 3px;
   position: relative;
   z-index: 1;
-  background-color: #cdcdcd;
+  background-color: $inverse-01;
   transform-origin: 4px 0;
   transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
               background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
@@ -134,7 +134,7 @@ nav li a {
   opacity: 1;
   transform: rotate(45deg)
              translate(0, -1px);
-  background: #232323;
+  background: $inverse-01;
 }
 
 .convertible-menu input:checked ~ span:nth-last-child(3) {
@@ -146,7 +146,7 @@ nav li a {
   opacity: 1;
   transform: rotate(-45deg)
              translate(-1px, -2px);
-  background: #232323;
+  background: $inverse-01;
 }
 
 @media (max-width: 800px) {
@@ -159,10 +159,10 @@ nav li a {
     text-align: right;
     width: 100vw;
     position: absolute;
-    background-color: white;
+    background-color: $inverse-02;
     display: block;
     height: auto;
-    border-bottom: 1px solid #0A1D8F;
+    border-bottom: 1px solid $ibm-blue;
     transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
     transform: translateX(100%);
   }

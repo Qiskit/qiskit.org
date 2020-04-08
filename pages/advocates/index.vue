@@ -1,7 +1,7 @@
 <template>
   <main>
     <header>
-      <GatesHeader
+      <CommunityHeader
         id="presentation"
         main-title="Qiskit Advocates"
       >
@@ -34,7 +34,7 @@
             </CompactFeature>
           </div>
         </template>
-      </GatesHeader>
+      </CommunityHeader>
     </header>
     <div class="inner-navigation-scope">
       <InnerNavigation
@@ -85,7 +85,7 @@
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/qiskit/QiskitPage.vue'
 import InnerNavigation from '~/components/menus/InnerNavigation.vue'
-import GatesHeader from '~/components/headers/GatesHeader.vue'
+import CommunityHeader from '~/components/headers/CommunityHeader.vue'
 import PageSection from '~/components/sections/PageSection.vue'
 import MapSection from '~/components/advocates/MapSection.vue'
 import AdvocateCard from '~/components/cards/AdvocateCard.vue'
@@ -94,7 +94,7 @@ import CompactFeature from '~/components/features/CompactFeature.vue'
 @Component({
   components: {
     InnerNavigation,
-    GatesHeader,
+    CommunityHeader,
     PageSection,
     MapSection,
     AdvocateCard,
@@ -135,9 +135,10 @@ export default class extends QiskitPage {
 </script>
 
 <style lang="scss">
+@import '~carbon-components/scss/globals/scss/typography';
+
 main {
-  background-color: var(--primary-color-darkmost);
-  background-image: linear-gradient(150deg, var(--primary-color-darkmost) 15%,var(--primary-color-dark) 70%,var(--primary-color) 94%);
+  background-color: $ui-background;
 }
 
 .inner-navigation {
@@ -145,7 +146,7 @@ main {
   top: 0;
   z-index: 100;
 
-  @include mq($until: desktop) {
+  @include mq($until: medium) {
     position: static;
   }
 }
@@ -164,7 +165,7 @@ main {
   & > * {
     flex: 1;
 
-    @include mq($until: desktop) {
+    @include mq($until: medium) {
       text-align: center;
       margin-top: 2rem;
     }
@@ -178,15 +179,15 @@ main {
     }
   }
 
-  @include mq($until: desktop) {
+  @include mq($until: medium) {
     display: flex;
     flex-direction: column;
   }
 }
 
 #become-an-advocate {
-  color: var(--body-color-dark);
-  background-color: white;
+  color: $inverse-01;
+  background-color: $inverse-02;
 
   .page-section {
     @include framed();
@@ -194,22 +195,29 @@ main {
 
   ol {
     margin-top: 1rem;
-    list-style-position: inside
+    list-style-position: inside;
+    list-style-type: decimal;
+  }
+
+  li {
+    @include body-long-04();
   }
 }
 
 #global-community {
-  color: var(--body-color-light);
+  color: $text-01;
 
   h2 {
+    @include type-style('productive-heading-06');
     @include elegant-title();
   }
 }
 
 #meet-the-advocates {
-  color: var(--body-color-light);
+  color: $text-01;
 
   h2 {
+    @include type-style('productive-heading-06');
     @include elegant-title();
   }
 
@@ -224,17 +232,16 @@ main {
     gap: 1rem;
 
     & > * {
-      @include mq($until: desktop) {
+      @include mq($until: medium) {
         margin-bottom: 1rem;
       }
     }
 
     .advocate-card {
       width: 100%;
-      border: 1px solid var(--secondary-color);
     }
 
-    @include mq($until: desktop) {
+    @include mq($until: medium) {
       display: block;
     }
   }

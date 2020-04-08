@@ -91,15 +91,7 @@ import {
   Filter
 } from '~/constants/filters'
 
-type CommunityEvent = {
-  type: string,
-  title: string,
-  image: string,
-  place: string,
-  location: string,
-  date: string,
-  to: string
-}
+import { CommunityEvent } from '~/store/modules/events.ts'
 
 @Component({
   layout: 'carbon',
@@ -195,9 +187,10 @@ export default class extends QiskitPage {
 </script>
 
 <style lang="scss" scoped>
+@import '~carbon-components/scss/globals/scss/typography';
 
 .event-page {
-  color: white;
+  color: $text-01;
 
   &__title {
     position: absolute;
@@ -206,7 +199,7 @@ export default class extends QiskitPage {
     width: 100%;
 
     h1 {
-      font-size: 3.4rem;
+      @include type-style('productive-heading-07');
     }
   }
 
@@ -223,7 +216,7 @@ export default class extends QiskitPage {
   &__results {
     width: 100%;
 
-    @include mq($from: desktop) {
+    @include mq($from: medium) {
       width: 75%;
     }
   }
@@ -233,7 +226,7 @@ export default class extends QiskitPage {
   position: relative;
   overflow: hidden;
 
-  @include mq($from: desktop) {
+  @include mq($from: medium) {
     height: 35vh;
   }
 
@@ -241,7 +234,7 @@ export default class extends QiskitPage {
     position: absolute;
     width: 100%;
 
-    @include mq($from: super-wide-desktop) {
+    @include mq($from: x-large) {
       top: -60%;
     }
   }

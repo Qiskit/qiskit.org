@@ -38,14 +38,13 @@ export default class extends Vue {
 .page-footer {
   display: flex;
   flex-direction: row;
-  font-size: 0.9rem;
-  color: var(--primary-color-lightmost);
+  color: $text-02;
 
   &--framed {
     @include framed();
   }
 
-  @include mq($until: desktop) {
+  @include mq($until: medium) {
     display: block;
   }
 }
