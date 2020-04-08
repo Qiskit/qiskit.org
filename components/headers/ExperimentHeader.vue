@@ -64,8 +64,10 @@ export default class extends Vue {
 </script>
 
 <style lang="scss" scoped>
+@import '~carbon-components/scss/globals/scss/typography';
+
 .experiment-header-container {
-  background-color: black;
+  background-color: $ui-background;
   padding-top: 1rem;
   padding-bottom: 4rem;
 
@@ -74,38 +76,41 @@ export default class extends Vue {
   }
 
   h1 {
-    font-size: 2.5rem;
-    color: white;
+    @include type-style('productive-heading-07');
+    color: $text-01;
   }
 }
 
 .experiment-header__author {
-  color: var(--secondary-color-lightmost);
+  @include type-style('body-short-01');
+  color: $purple-30;
   margin: 1rem 0 1rem 0;
 
   &::before {
     content: "by";
-    color: var(--primary-color-lightmost);
+    color: $text-02;
   }
 }
 
 .experiment-header__back-navigation {
+  @include type-style('label-01');
   height: 100%;
   vertical-align: middle;
   display: inline-flex;
   text-decoration: none;
-  color: var(--secondary-color-lightmost);
+  color: $text-02;
   margin-bottom: 2rem;
 
   &:hover {
-    border-bottom: 1px solid var(--secondary-color-lightmost);
+    color: $text-02;
+    border-bottom: 1px solid $text-02;
   }
 
   svg {
     width: 0.5rem;
 
     path {
-      fill: var(--secondary-color-lightmost);
+      fill: $text-02;
     }
 
     &:last-child {
@@ -122,19 +127,19 @@ export default class extends Vue {
   width: 100%;
 
   & > * {
-    @include mq($from: desktop) {
+    @include mq($from: medium) {
       max-width: 100%;
     }
 
     &:first-child {
-      @include mq($from: desktop) {
+      @include mq($from: medium) {
         grid-column-start: 1;
         grid-column-end: 3;
       }
     }
   }
 
-  @include mq($from: desktop) {
+  @include mq($from: medium) {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 0.5rem;

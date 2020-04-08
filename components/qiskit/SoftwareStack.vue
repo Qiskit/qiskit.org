@@ -25,11 +25,13 @@ export default class extends Vue {
 </script>
 
 <style lang="scss" scoped>
+@import '~carbon-components/scss/globals/scss/typography';
+
 .stack-list {
   list-style: none;
 
   li {
-    border-left: 2px solid black;
+    border-left: 2px solid $inverse-01;
     padding-left: 1rem;
     padding-bottom: 1.5rem;
     position: relative;
@@ -40,7 +42,7 @@ export default class extends Vue {
       position: absolute;
       width: 0.25rem;
       height: 0.60rem;
-      background-color: black;
+      background-color: $inverse-01;
       left: 0;
     }
 
@@ -53,7 +55,7 @@ export default class extends Vue {
         position: absolute;
         width: 0.6rem;
         height: 0.6rem;
-        background-color: black;
+        background-color: $inverse-01;
         left: -0.25rem;
         border-radius: 50%;
       }
@@ -67,15 +69,14 @@ export default class extends Vue {
     line-height: normal;
     position: relative;
     top: -0.2rem;
-    font-weight: 400;
   }
 
   &__title {
-    font-size: 0.9rem;
+    @include type-style('productive-heading-02');
   }
 
   &__description {
-    font-size: 0.7rem;
+    @include type-style('body-short-01');
   }
 }
 </style>

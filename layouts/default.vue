@@ -25,15 +25,13 @@ export default class extends Vue { }
 </script>
 
 <style lang="scss">
-@import '~/assets/scss/theme.scss';
 @import '~/assets/scss/layout.scss';
-@import url(~/static/css/fonts.css);
 
-html {
-  background-color: var(--primary-color);
+.content-root {
+  background-color: $ui-background;
 }
 
 main {
-  color: black;
+  color: $inverse-01;
 }
 </style>

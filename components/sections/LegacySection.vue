@@ -17,7 +17,7 @@ export default class extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '~/assets/scss/mixins.scss';
+@import '~carbon-components/scss/globals/scss/typography';
 
 .legacy-section {
   & > div {
@@ -39,22 +39,18 @@ export default class extends Vue {
     }
 
     h2 {
-      font-size: 1.5rem;
-      font-weight: 300;
-      font-family: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
-      margin-bottom: 1.5rem;
+      @include code-08();
     }
 
     p {
-      font-weight: normal;
-      font-size: 0.85rem;
-      line-height: 1.7rem;
+      @include type-style('body-long-02');
+      /* TODO: Remove when adapting to Carbon. Should be regulated by the type style. */
+      line-height: 2rem;
       margin-top: 0.9rem;
       margin-bottom: 0.9rem;
 
       a {
         color: black;
-        font-style: italic;
       }
     }
   }
