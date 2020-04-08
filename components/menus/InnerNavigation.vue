@@ -31,7 +31,7 @@ export default class extends Vue {
 @import '~carbon-components/scss/globals/scss/typography';
 
 .menu-container {
-  background-color: #fffe;
+  background-color: $inverse-02;
 }
 
 .menu {
@@ -61,10 +61,10 @@ export default class extends Vue {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    color: var(--body-color-dark);
+    color: $inverse-01;
     text-decoration: none;
     text-transform: uppercase;
-    border-right: 1px solid #3334;
+    border-right: 1px solid $ui-02;
     text-align: center;
     padding: 0.5rem;
 
@@ -74,7 +74,7 @@ export default class extends Vue {
 
     @include mq($until: medium) {
       border: none;
-      border-bottom: 1px solid #3334;
+      border-bottom: 1px solid $ui-02;
       padding: 1rem;
       width: 100%;
     }

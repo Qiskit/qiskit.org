@@ -67,7 +67,7 @@ export default class extends Vue {
 @import '~carbon-components/scss/globals/scss/typography';
 
 .experiment-header-container {
-  background-color: black;
+  background-color: $ui-background;
   padding-top: 1rem;
   padding-bottom: 4rem;
 
@@ -77,18 +77,18 @@ export default class extends Vue {
 
   h1 {
     @include type-style('productive-heading-07');
-    color: white;
+    color: $text-01;
   }
 }
 
 .experiment-header__author {
   @include type-style('body-short-01');
-  color: var(--secondary-color-lightmost);
+  color: $purple-30;
   margin: 1rem 0 1rem 0;
 
   &::before {
     content: "by";
-    color: var(--primary-color-lightmost);
+    color: $text-02;
   }
 }
 
@@ -98,18 +98,19 @@ export default class extends Vue {
   vertical-align: middle;
   display: inline-flex;
   text-decoration: none;
-  color: var(--secondary-color-lightmost);
+  color: $text-02;
   margin-bottom: 2rem;
 
   &:hover {
-    border-bottom: 1px solid var(--secondary-color-lightmost);
+    color: $text-02;
+    border-bottom: 1px solid $text-02;
   }
 
   svg {
     width: 0.5rem;
 
     path {
-      fill: var(--secondary-color-lightmost);
+      fill: $text-02;
     }
 
     &:last-child {

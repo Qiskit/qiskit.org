@@ -25,7 +25,6 @@ export default class extends Vue { }
 </script>
 
 <style lang="scss">
-@import '~/assets/scss/theme.scss';
 @import '~/assets/scss/layout.scss';
 
 .content-root {
@@ -33,6 +32,6 @@ export default class extends Vue { }
 }
 
 main {
-  color: black;
+  color: $inverse-01;
 }
 </style>

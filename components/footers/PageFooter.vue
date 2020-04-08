@@ -38,7 +38,7 @@ export default class extends Vue {
 .page-footer {
   display: flex;
   flex-direction: row;
-  color: var(--primary-color-lightmost);
+  color: $text-02;
 
   &--framed {
     @include framed();

@@ -130,8 +130,7 @@ export default class extends QiskitPage {
 
 <style lang="scss">
 main {
-  background-color: var(--primary-color-darkmost);
-  background-image: linear-gradient(150deg, var(--primary-color-darkmost) 15%,var(--primary-color-dark) 70%,var(--primary-color) 94%);
+  background-color: $ui-background;
 }
 
 .inner-navigation {
@@ -152,9 +151,9 @@ main {
     width: 100%;
     max-width: 560px;
     height: 315px;
-    box-shadow: 0 13px 27px -5px rgba(50,50,93,.25),
-                0 8px 16px -8px rgba(0,0,0,.5),
-                0 -6px 16px -6px rgba(0,0,0,.025);
+    box-shadow: 0 13px 27px -5px $gray-100-a30,
+                0 8px 16px -8px $gray-100-a30,
+                0 -6px 16px -6px $gray-100-a30;
   }
 
   .intro {
@@ -177,7 +176,7 @@ main {
 }
 
 #video-series {
-  color: var(--body-color-light);
+  color: $text-01;
 
   .page-section {
     @include framed();
@@ -187,13 +186,13 @@ main {
     margin-left: 2rem;
     transform: perspective(1200px) rotateY(-20deg) rotateX(5deg);
     border-radius: 10px;
-    box-shadow: 25px 35px 30px 0 #000f;
+    box-shadow: 25px 35px 30px 0 $gray-100-a30;
   }
 }
 
 #textbook {
-  color: var(--body-color-dark);
-  background-color: white;
+  color: $inverse-01;
+  background-color: $inverse-02;
   padding-bottom: 4rem;
 
   .page-section {
@@ -205,7 +204,7 @@ main {
     top: 120px;
     align-self: start;
     width: 50%;
-    background-color: white;
+    background-color: $inverse-02;
     padding: 0;
     padding-left: 4rem;
 
@@ -227,7 +226,7 @@ main {
 }
 
 #host-an-event {
-  color: var(--body-color-light);
+  color: $text-01;
   background-image:
     linear-gradient(#000000a0 0%, #000000a0 100%),
     url('/images/education/host-an-event-bg.jpg');

@@ -76,8 +76,7 @@ export default class extends QiskitPage {
 @import '~carbon-components/scss/globals/scss/typography';
 
 main {
-  background-color: var(--primary-color-darkmost);
-  background-image: linear-gradient(150deg, var(--primary-color-darkmost) 15%,var(--primary-color-dark) 70%,var(--primary-color) 94%);
+  background-color: $ui-background;
 }
 
 .actions {
@@ -88,8 +87,8 @@ main {
 }
 
 #featured-experiments {
-  color: var(--body-color-dark);
-  background-color: white;
+  color: $inverse-01;
+  background-color: $inverse-02;
   padding-bottom: 7rem;
 
   h2 {
@@ -104,7 +103,7 @@ main {
 }
 
 #browse-the-experiments {
-  color: var(--body-color-light);
+  color: $text-01;
 
   h2 {
     @include type-style('productive-heading-06');
@@ -130,7 +129,6 @@ main {
 
     .experiment-card {
       min-width: 300px;
-      border: 1px solid var(--secondary-color);
       transform-origin: center 80%;
       transition: box-shadow 0.2s, transform 0.2s;
       box-shadow: 0px 2px 10px 0 #000f;

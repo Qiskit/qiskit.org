@@ -79,9 +79,9 @@ export default class extends Vue {
   z-index: -1;
   height: 100%;
   background-image: linear-gradient(150deg,
-    var(--secondary-color) 15%,
-    var(--secondary-color-light) 70%,
-    var(--secondary-color-lightmost) 94%);
+    $purple-60 15%,
+    $purple-50 70%,
+    $purple-30 94%);
 }
 
 .intro {
@@ -90,7 +90,7 @@ export default class extends Vue {
   align-items: center;
   margin-left: auto;
   margin-right: auto;
-  color: white;
+  color: $text-01;
 
   &--framed {
     @include framed()
@@ -104,7 +104,7 @@ export default class extends Vue {
 .features {
   display: flex;
   flex-direction: row;
-  color: white;
+  color: $text-01;
   margin-top: 4rem;
 
   &--framed {

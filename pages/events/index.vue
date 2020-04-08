@@ -196,7 +196,7 @@ export default class extends QiskitPage {
 @import '~carbon-components/scss/globals/scss/typography';
 
 .event-page {
-  color: white;
+  color: $text-01;
 
   &__title {
     position: absolute;

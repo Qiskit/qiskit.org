@@ -138,8 +138,7 @@ export default class extends QiskitPage {
 @import '~carbon-components/scss/globals/scss/typography';
 
 main {
-  background-color: var(--primary-color-darkmost);
-  background-image: linear-gradient(150deg, var(--primary-color-darkmost) 15%,var(--primary-color-dark) 70%,var(--primary-color) 94%);
+  background-color: $ui-background;
 }
 
 .inner-navigation {
@@ -187,8 +186,8 @@ main {
 }
 
 #become-an-advocate {
-  color: var(--body-color-dark);
-  background-color: white;
+  color: $inverse-01;
+  background-color: $inverse-02;
 
   .page-section {
     @include framed();
@@ -206,7 +205,7 @@ main {
 }
 
 #global-community {
-  color: var(--body-color-light);
+  color: $text-01;
 
   h2 {
     @include type-style('productive-heading-06');
@@ -215,7 +214,7 @@ main {
 }
 
 #meet-the-advocates {
-  color: var(--body-color-light);
+  color: $text-01;
 
   h2 {
     @include type-style('productive-heading-06');
@@ -240,7 +239,6 @@ main {
 
     .advocate-card {
       width: 100%;
-      border: 1px solid var(--secondary-color);
     }
 
     @include mq($until: medium) {

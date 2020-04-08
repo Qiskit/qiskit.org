@@ -53,7 +53,7 @@ li {
   width: 100%;
 
   &:hover {
-    color: var(--body-color-light);
+    color: $text-01;
   }
 }
 </style>
