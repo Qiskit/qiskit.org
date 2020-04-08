@@ -1,7 +1,7 @@
 <template>
   <main>
     <header>
-      <GatesHeader
+      <CommunityHeader
         id="presentation"
         main-title="Qiskit for Educators"
         extra-position="start"
@@ -18,7 +18,7 @@
             allowfullscreen
           />
         </template>
-      </GatesHeader>
+      </CommunityHeader>
     </header>
     <div class="inner-navigation-scope">
       <InnerNavigation
@@ -98,7 +98,7 @@
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/qiskit/QiskitPage.vue'
 import InnerNavigation from '~/components/menus/InnerNavigation.vue'
-import GatesHeader from '~/components/headers/GatesHeader.vue'
+import CommunityHeader from '~/components/headers/CommunityHeader.vue'
 import PageSection from '~/components/sections/PageSection.vue'
 import TextbookPreview from '~/components/education/TextbookPreview.vue'
 import MdContent from '~/components/MdContent.vue'
@@ -109,7 +109,7 @@ import TextbookTOC from '~/content/education/textbook-toc.md'
 @Component({
   components: {
     InnerNavigation,
-    GatesHeader,
+    CommunityHeader,
     PageSection,
     TextbookPreview,
     MdContent,
@@ -130,8 +130,7 @@ export default class extends QiskitPage {
 
 <style lang="scss">
 main {
-  background-color: var(--primary-color-darkmost);
-  background-image: linear-gradient(150deg, var(--primary-color-darkmost) 15%,var(--primary-color-dark) 70%,var(--primary-color) 94%);
+  background-color: $ui-background;
 }
 
 .inner-navigation {
@@ -152,32 +151,32 @@ main {
     width: 100%;
     max-width: 560px;
     height: 315px;
-    box-shadow: 0 13px 27px -5px rgba(50,50,93,.25),
-                0 8px 16px -8px rgba(0,0,0,.5),
-                0 -6px 16px -6px rgba(0,0,0,.025);
+    box-shadow: 0 13px 27px -5px $gray-100-a30,
+                0 8px 16px -8px $gray-100-a30,
+                0 -6px 16px -6px $gray-100-a30;
   }
 
   .intro {
-    @include mq($until: desktop) {
+    @include mq($until: medium) {
       display: block;
     }
   }
 
   .copy-container {
-    @include mq($until: desktop) {
+    @include mq($until: medium) {
       max-width: 100%;
     }
   }
 
   .header-video {
-    @include mq($until: desktop) {
+    @include mq($until: medium) {
       display: none;
     }
   }
 }
 
 #video-series {
-  color: var(--body-color-light);
+  color: $text-01;
 
   .page-section {
     @include framed();
@@ -187,13 +186,13 @@ main {
     margin-left: 2rem;
     transform: perspective(1200px) rotateY(-20deg) rotateX(5deg);
     border-radius: 10px;
-    box-shadow: 25px 35px 30px 0 #000f;
+    box-shadow: 25px 35px 30px 0 $gray-100-a30;
   }
 }
 
 #textbook {
-  color: var(--body-color-dark);
-  background-color: white;
+  color: $inverse-01;
+  background-color: $inverse-02;
   padding-bottom: 4rem;
 
   .page-section {
@@ -205,11 +204,11 @@ main {
     top: 120px;
     align-self: start;
     width: 50%;
-    background-color: white;
+    background-color: $inverse-02;
     padding: 0;
     padding-left: 4rem;
 
-    @include mq($until: desktop) {
+    @include mq($until: medium) {
       width: 100%;
       padding-left: 0;
     }
@@ -221,13 +220,13 @@ main {
     margin-left: -10%;
   }
 
-  @include mq($until: desktop) {
+  @include mq($until: medium) {
     min-height: auto;
   }
 }
 
 #host-an-event {
-  color: var(--body-color-light);
+  color: $text-01;
   background-image:
     linear-gradient(#000000a0 0%, #000000a0 100%),
     url('/images/education/host-an-event-bg.jpg');

@@ -167,8 +167,10 @@ export default class extends Vue {
 </script>
 
 <style lang="scss" scoped>
+@import '~carbon-components/scss/globals/scss/typography';
+
 @mixin vertical-navigation-item() {
-  font-size: 0.9rem;
+  @include type-style('productive-heading-02');
   text-decoration: none;
   color: white;
   padding: 0.5rem 1.5em;
@@ -179,14 +181,12 @@ export default class extends Vue {
 }
 
 .menu-container {
-  font-size: 16px;
-  font-weight: 400;
   border-bottom: 1px solid black;
-  background-color: var(--gray-90);
-  --link-color: white;
+  background-color: $ui-background;
+  --link-color: #{$text-01};
   &--light {
-    --link-color: var(--body-color-dark);
-    background-color: var(--secondary-color-lightmost);
+    --link-color: #{$inverse-01};
+    background-color: $purple-40;
     border-bottom: none;
   }
 }
@@ -194,7 +194,6 @@ export default class extends Vue {
 .menu {
   height: 60px;
   display: flex;
-  font-size: 0.8rem;
   & > * {
     height: 100%;
   }
@@ -207,6 +206,7 @@ export default class extends Vue {
   display: flex;
 
   &__item {
+    @include type-style('productive-heading-02');
     display: inline-flex;
     align-items: center;
     padding: 0 1em;
@@ -214,23 +214,22 @@ export default class extends Vue {
     text-decoration: none;
 
     &.nuxt-link-active {
-      font-weight: bold;
       position: relative;
       top: 1px;
-      border-bottom: 4px solid var(--secondary-color);
+      border-bottom: 4px solid $focus;
     }
 
     &--active {
       padding-top: 2px;
       position: relative;
       top: 1px;
-      border-bottom: 4px solid var(--secondary-color);
+      border-bottom: 4px solid $focus;
     }
   }
 
   &--with-separator::before {
     content: "";
-    background-color: #fff4;
+    background-color: $ui-03;
     width: 2px;
     margin: 12px 10px;
   }
@@ -244,12 +243,13 @@ export default class extends Vue {
     margin-right: -0.4rem;
   }
 
-  @include mq($until: wide-desktop) {
+  @include mq($until: large) {
     display: none;
   }
 }
 
 .link-to-home {
+  @include type-style('productive-heading-02');
   display: inline-flex;
   align-items: center;
   margin-left: -1.2rem;
@@ -257,8 +257,7 @@ export default class extends Vue {
   color: var(--link-color);
   text-decoration: none;
 
-  @include mq($until: wide-desktop) {
-    font-size: 1.1rem;
+  @include mq($until: large) {
     margin-left: -0.5rem;
   }
 }
@@ -266,14 +265,14 @@ export default class extends Vue {
 .drawer {
   display: none;
 
-  @include mq($until: wide-desktop) {
+  @include mq($until: large) {
     display: unset;
     margin-left: -2rem;
   }
 }
 
 .community-menu {
-  @include mq($until: wide-desktop) {
+  @include mq($until: large) {
     display: none;
   }
 }
@@ -292,7 +291,7 @@ export default class extends Vue {
   bottom: 0;
   left: 0;
   z-index: 150;
-  background-color: black;
+  background-color: $ui-background;
   opacity: 0;
   transition: opacity 200ms;
   pointer-events: none;
@@ -308,15 +307,14 @@ export default class extends Vue {
   z-index: 200;
   width: 256px;
   padding: 1.3rem;
-  background-color: var(--primary-color);
+  background-color: $ui-background;
   transform: translateX(-100%);
   transition: transform 200ms;
   overflow-y: auto;
 
   h2 {
-    font-size: 0.8rem;
-    font-weight: normal;
-    color: var(--primary-color-lightmost);
+    @include type-style('productive-heading-03');
+    color: $text-01;
     padding: 1em;
   }
 
@@ -330,16 +328,15 @@ export default class extends Vue {
   flex-direction: column;
   margin: 0 -1.3rem;
   padding: 1rem 0;
-  background-color: var(--secondary-color-lightmost);
+  background-color: $purple-30;
 
   &__item {
     @include vertical-navigation-item();
     padding: 0.5rem 3rem;
-    color: var(--body-color-dark);
+    color: $inverse-01;
 
     &.nuxt-link-active {
-      font-weight: bold;
-      border-left: 4px solid var(--secondary-color);
+      border-left: 4px solid $focus;
       padding-left: calc(3rem - 4px);
     }
   }

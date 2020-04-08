@@ -31,22 +31,23 @@ export default class extends Vue {
 </script>
 
 <style lang="scss" scoped>
+@import '~carbon-components/scss/globals/scss/typography';
+
 .legacy-cta {
-  font-size: 0.7rem;
+  @include type-style('productive-heading-01');
   display: inline-block;
   padding: 0.5rem 0.8rem;
-  border: 2px black solid;
-  color: black;
+  border: 2px $ui-01 solid;
+  color: $inverse-01;
   text-decoration: none;
-  font-weight: 800;
   transition: background-color linear 200ms,
               color linear 200ms,
               fill linear 200ms;
 
   &:hover {
-    background-color: black;
-    color: white;
-    fill: white;
+    background-color: $ui-01;
+    color: $text-01;
+    fill: $text-01;
   }
 }
 </style>

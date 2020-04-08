@@ -24,11 +24,12 @@ export default class extends Vue {
 </script>
 
 <style lang="scss" scoped>
+@import '~carbon-components/scss/globals/scss/typography';
+
 .footer-title {
+  @include type-style('productive-heading-03');
   margin-top: 2rem;
-  font-size: inherit;
-  font-weight: normal;
   padding-bottom: 0.5rem;
-  border-bottom: 1px solid var(--primary-color-lightmost);
+  border-bottom: 1px solid $ui-03;
 }
 </style>
