@@ -1,5 +1,9 @@
 import Airtable from 'airtable'
-import { CommunityEvent, CommunityEventType, WorldLocation } from '~/store/modules/events.ts'
+import {
+  CommunityEvent,
+  CommunityEventType,
+  WorldLocation
+} from '~/store/modules/events.ts'
 
 const RECORD_FIELDS = {
   name: 'Name',
@@ -74,7 +78,7 @@ function getPlace (record: any) {
 }
 
 function getLocation (_record: any): WorldLocation {
-  const options: WorldLocation[] = ['America', 'Asia', 'Europe', 'Africa']
+  const options: WorldLocation[] = ['Americas', 'Asia Pacific', 'Europe', 'Africa', 'Online']
   return options[Math.floor(Math.random() * options.length)]
 }
 

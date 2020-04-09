@@ -1,5 +1,5 @@
 type CommunityEventSet = 'past'|'upcoming'
-type WorldLocation = 'America'|'Asia'|'Europe'|'Africa'|'TBD'
+type WorldLocation = 'Americas'|'Asia Pacific'|'Europe'|'Africa'|'TBD'|'Online'
 type CommunityEventType = 'Hackathon'|'Camp'|'Unconference'|'Conference'
 
 type CommunityEvent = {
