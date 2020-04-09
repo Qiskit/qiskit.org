@@ -25,7 +25,7 @@
               <Calendar20 class="event-card__icon" />
               <span class="event-card__date"><time>{{ date }}</time></span>
             </div>
-            <ArrowRight20 class="event-card__icon event-card__icon--purple" />
+            <ArrowRight20 v-if="hasWebsite" class="event-card__icon event-card__icon--purple"/>
           </div>
         </footer>
       </div>
@@ -50,6 +50,8 @@ export default class extends Vue {
   @Prop(String) place
   @Prop(String) date
   @Prop(String) to
+
+  hasWebsite: boolean = !!this.to
 }
 </script>
 
