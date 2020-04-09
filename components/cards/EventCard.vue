@@ -2,6 +2,7 @@
   <a
     :href="to"
     class="card-link"
+    target="_blank"
   >
     <article class="event-card">
       <div class="event-card__content">
