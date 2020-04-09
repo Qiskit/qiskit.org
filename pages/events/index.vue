@@ -63,7 +63,7 @@
             </client-only>
           </fieldset>
         </div>
-        <div class="event-page__results">
+        <div v-if="hasEvents" class="event-page__results">
           <EventCard
             v-for="event in filteredEvents"
             :key="`${event.place}-${event.date}`"
@@ -74,6 +74,9 @@
             :date="event.date"
             :to="event.to"
           />
+        </div>
+        <div v-else>
+          <h3>Plan an event in your area today!</h3>
         </div>
       </div>
     </div>
@@ -136,6 +139,10 @@ export default class extends QiskitPage {
   types: Array<Filter> = ORDERED_TYPE_FILTERS
   routeName: string = 'events'
   windowWidth: Number = 0
+
+  get hasEvents (): boolean {
+    return this.$store.getters.filteredEvents.length !== 0
+  }
 
   autoplayVideo () {
     if (!this.$refs.video) {
