@@ -13,9 +13,9 @@ import pkg from './package.json'
 import generateTextbookToc from './hooks/generate-textbook-toc'
 import fetchEvents from './hooks/update-events'
 
-const IS_PRODUCTION = process.env.NODE_ENV === 'production'
-const GENERATE_CONTENT = process.env.GENERATE_CONTENT
-const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY
+const { NODE_ENV, GENERATE_CONTENT, AIRTABLE_API_KEY } = process.env
+
+const IS_PRODUCTION = NODE_ENV === 'production'
 
 const md = markdownIt({
   linkify: true,
@@ -34,7 +34,6 @@ md.use(miAnchor, {
 
 const config: Configuration = {
   mode: 'universal',
-
   env: {
     analyticsScriptUrl: IS_PRODUCTION
       ? 'https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js'
@@ -213,18 +212,24 @@ const config: Configuration = {
           console.warn('Skipping content generation. Set GENERATE_CONTENT to enable it.')
           return
         }
-        await generateContent()
+        await generateTextbook()
+      },
+      async done () {
+        await generateCommunityEventsFiles()
       }
     }
   }
 }
 
-async function generateContent () {
+async function generateTextbook () {
   consola.info('Generating Textbook TOC')
   await generateTextbookToc(
     'https://qiskit.org/textbook/preface.html',
     './content/education/textbook-toc.md'
   )
+}
+
+async function generateCommunityEventsFiles () {
   if (AIRTABLE_API_KEY) {
     consola.info('Generating community event previews')
     await fetchEvents(AIRTABLE_API_KEY, './content/events')
