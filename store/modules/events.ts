@@ -12,7 +12,9 @@ type CommunityEvent = {
   to: string
 }
 
-export { CommunityEvent, CommunityEventType, WorldLocation }
+const LOCATION_CATEGORIES: WorldLocation[] = ['Americas', 'Asia Pacific', 'Europe', 'Africa', 'Online']
+
+export { CommunityEvent, CommunityEventType, WorldLocation, LOCATION_CATEGORIES }
 
 export default {
   state: {

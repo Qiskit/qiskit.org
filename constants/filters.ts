@@ -1,5 +1,3 @@
-import { WorldLocation } from '~/store/modules/events.ts'
-
 interface Filter {
   label: string
   value: string
@@ -30,10 +28,7 @@ const ORDERED_TYPE_FILTERS: Array<Filter> = [
   TYPES_FILTERS.hackathon
 ]
 
-const LOCATION_CATEGORIES: WorldLocation[] = ['Americas', 'Asia Pacific', 'Europe', 'Africa', 'Online']
-
 export {
-  LOCATION_CATEGORIES,
   ORDERED_TYPE_FILTERS,
   Filter
 }

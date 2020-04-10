@@ -85,13 +85,8 @@ import { mapGetters, mapActions } from 'vuex'
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/qiskit/QiskitPage.vue'
 import EventCard from '~/components/cards/EventCard.vue'
-import {
-  LOCATION_CATEGORIES,
-  ORDERED_TYPE_FILTERS,
-  Filter
-} from '~/constants/filters'
-
-import { CommunityEvent } from '~/store/modules/events.ts'
+import { ORDERED_TYPE_FILTERS, Filter } from '~/constants/filters'
+import { CommunityEvent, LOCATION_CATEGORIES } from '~/store/modules/events.ts'
 
 @Component({
   layout: 'carbon',

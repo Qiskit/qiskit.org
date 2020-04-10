@@ -1,9 +1,12 @@
 import Airtable from 'airtable'
+
+// TODO: Understand why this import works with '../' and not with '~/'
 import {
   CommunityEvent,
   CommunityEventType,
-  WorldLocation
-} from '~/store/modules/events.ts'
+  WorldLocation,
+  LOCATION_CATEGORIES
+} from '../store/modules/events'
 
 const RECORD_FIELDS = {
   name: 'Name',
@@ -78,7 +81,7 @@ function getPlace (record: any) {
 }
 
 function getLocation (_record: any): WorldLocation {
-  const options: WorldLocation[] = ['Americas', 'Asia Pacific', 'Europe', 'Africa', 'Online']
+  const options: WorldLocation[] = LOCATION_CATEGORIES
   return options[Math.floor(Math.random() * options.length)]
 }
 
