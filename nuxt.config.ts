@@ -212,24 +212,18 @@ const config: Configuration = {
           console.warn('Skipping content generation. Set GENERATE_CONTENT to enable it.')
           return
         }
-        await generateTextbook()
-      },
-      async done () {
-        await generateCommunityEventsFiles()
+        await generateContent()
       }
     }
   }
 }
 
-async function generateTextbook () {
+async function generateContent () {
   consola.info('Generating Textbook TOC')
   await generateTextbookToc(
     'https://qiskit.org/textbook/preface.html',
     './content/education/textbook-toc.md'
   )
-}
-
-async function generateCommunityEventsFiles () {
   if (AIRTABLE_API_KEY) {
     consola.info('Generating community event previews')
     await fetchEvents(AIRTABLE_API_KEY, './content/events')
