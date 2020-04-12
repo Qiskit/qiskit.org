@@ -15,15 +15,15 @@
           upon which applications for near-term quantum computing can be built.
           Aqua is designed to be extensible, and employs a pluggable framework
           where quantum algorithms can easily be added. It currently allows the
-          user to experiment on chemistry, AI, optimization and finance
+          user to experiment on chemistry, ML, optimization and finance
           applications for near-term quantum computers.
         </p>
         <h2>Stack</h2>
         <SoftwareStack
           :stack="[
             {
-              title: 'Qiskit Aqua Translators',
-              description: 'Chemistry, AI, Optimization, Finance'
+              title: 'Qiskit Aqua Applications',
+              description: 'Chemistry, Machine Learning, Optimization, Finance'
             },
             {
               title: 'Quantum Algorithms',
@@ -69,6 +69,20 @@ result = algorithm.run(backend)
 print(result["result"])</SyntaxHighlight>
         <!-- eslint-enable vue/html-indent -->
         <!-- eslint-enable vue/multiline-html-element-content-newline -->
+      </article>
+    </LegacySection>
+    <LegacySection>
+      <article>
+        <h2>Qiskit Optimization</h2>
+        <p>
+          Qiskit Optimization enables easy and efficient modeling of
+          optimization problems by using established high-level modeling
+          languages, such as docplex. Qiskit Optimization covers the whole stack
+          from high-level modeling of optimization problems, automatic
+          conversion of problems to different required representations, to a
+          suite of easy-to-use quantum optimization algorithms that are ready to
+          run on classical simulators and real quantum devices via Qiskit.
+        </p>
       </article>
     </LegacySection>
   </main>
@@ -120,5 +134,9 @@ export default class extends QiskitElementPage {
 
 .legacy-section {
   background-color: white;
+}
+
+.legacy-section:nth-child(2n + 1) {
+  background-color: rgb(219, 251, 251);
 }
 </style>

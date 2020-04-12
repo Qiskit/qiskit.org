@@ -21,12 +21,17 @@
         </LegacyCta>
       </article>
       <article>
-        <h2>Kids meet quantum!</h2>
-        <p>This activity pack will entertain your kids with fun activities about quantum computing. Fun for all kids and parents!</p>
+        <h2>Qiskit Optimization</h2>
+        <p>
+          Read about the release of Qiskit Optimization, an open source library
+          that combines best practices from classical optimizations with
+          state-of-the-art quantum algorithms to enable rapid prototyping,
+          support education, and boost cutteing-edge research.
+        </p>
         <LegacyCta
           to="/activities/quantum-activity-pack-for-kids.pdf"
           @click="$trackClickEvent({
-            action: 'Activity pack for kids'
+            action: 'Qiskit Optimization release'
           })"
         >
           Try it
