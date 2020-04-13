@@ -71,14 +71,15 @@ function getType (record: any): CommunityEventType {
 function getImage (record: any): string {
   const fallbackImage = '/images/events/no-picture.jpg'
   const attachments = record.get(RECORD_FIELDS.image)
-  const imageAttachment = attachments && getImageAttachment(attachments)
+  const imageAttachment = attachments && findImageAttachment(attachments)
   const imageUrl = imageAttachment && getBestSizeUrl(imageAttachment)
   return imageUrl || fallbackImage
 }
 
-function getImageAttachment (attachments: any[]): any|null {
+function findImageAttachment (attachments: any[]): any|null {
   for (const oneAttachment of attachments) {
-    if (oneAttachment.type.startsWith('image')) {
+    const isImage = oneAttachment.type.startsWith('image')
+    if (isImage) {
       return oneAttachment
     }
   }
@@ -86,12 +87,13 @@ function getImageAttachment (attachments: any[]): any|null {
 }
 
 function getBestSizeUrl (imageAttachment: any): string {
-  if (!imageAttachment.thumbnails) {
+  const { thumbnails } = imageAttachment
+  const { large: largeThumbnail } = thumbnails || {}
+
+  if (!thumbnails || !largeThumbnail) {
     return imageAttachment.url
   }
-  if (!imageAttachment.thumbnails.large) {
-    return imageAttachment.url
-  }
+
   return imageAttachment.thumbnails.large.url
 }
 
