@@ -17,12 +17,14 @@ const LOCATION_CATEGORIES: WorldLocation[] = ['Americas', 'Asia Pacific', 'Europ
 export { CommunityEvent, CommunityEventType, WorldLocation, LOCATION_CATEGORIES }
 
 export default {
-  state: {
-    activeSet: 'upcoming',
-    upcomingCommunityEvents: [],
-    pastCommunityEvents: [],
-    typeFilters: [],
-    locationFilters: []
+  state () {
+    return {
+      activeSet: 'upcoming',
+      upcomingCommunityEvents: [],
+      pastCommunityEvents: [],
+      typeFilters: [],
+      locationFilters: []
+    }
   },
   getters: {
     typeFilters (state) {
