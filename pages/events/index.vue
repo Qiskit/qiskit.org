@@ -75,7 +75,7 @@
             :to="event.to"
           />
         </div>
-        <div v-else>
+        <div v-else class="event-page__results">
           <h3>Plan an event in your area today!</h3>
         </div>
       </div>
