@@ -3,11 +3,13 @@ import {
   formatDates,
   convertToCommunityEvent,
   getType,
-  getDates
+  getDates,
+  getImage
 } from '~/hooks/event-conversion-utils'
 
 type RecordFields = {
   name: string,
+  picture?: object[],
   types?: string[],
   location?: string,
   startDate?: string,
@@ -18,9 +20,10 @@ type RecordFields = {
 class FakeRecord {
   _fields: object = {}
 
-  constructor ({ name, types, location, startDate, endDate, website }: RecordFields) {
+  constructor ({ name, picture, types, location, startDate, endDate, website }: RecordFields) {
     this._fields = {
       [RECORD_FIELDS.name]: name,
+      [RECORD_FIELDS.image]: picture,
       [RECORD_FIELDS.typeOfEvent]: types,
       [RECORD_FIELDS.eventLocation]: location,
       [RECORD_FIELDS.startDate]: startDate,
@@ -111,6 +114,65 @@ describe('getType', () => {
       types: ['Hackathon', 'Unconference']
     })
     expect(getType(event)).toBe('Camp')
+  })
+})
+
+describe('getImage', () => {
+  it('defaults in a no-picture.jpg value if there is no attachment', () => {
+    const noPictureEvent = new FakeRecord({
+      name: 'Fake Conference'
+    })
+    expect(getImage(noPictureEvent)).toBe('/images/events/no-picture.jpg')
+  })
+
+  it('defaults in a no-picture.jpg value if the attachment is of no image type', () => {
+    const invalidPictureEvent = new FakeRecord({
+      name: 'Fake Conference',
+      picture: [{
+        type: 'application/json'
+      }]
+    })
+    expect(getImage(invalidPictureEvent)).toBe('/images/events/no-picture.jpg')
+  })
+
+  it('uses the attachment URL if there are no thumbnails', () => {
+    const expectedUrl = 'http://url.to/image.jpg'
+    const noPictureThumbnailsEvent = new FakeRecord({
+      name: 'Fake Conference',
+      picture: [{
+        url: expectedUrl,
+        type: 'image/jpg'
+      }]
+    })
+    expect(getImage(noPictureThumbnailsEvent)).toBe(expectedUrl)
+  })
+
+  it('uses the attachment URL if there is no large thumbnail', () => {
+    const expectedUrl = 'http://url.to/image.jpg'
+    const noLargeThumbnailEvent = new FakeRecord({
+      name: 'Fake Conference',
+      picture: [{
+        url: expectedUrl,
+        type: 'image/jpg',
+        thumbnails: { }
+      }]
+    })
+    expect(getImage(noLargeThumbnailEvent)).toBe(expectedUrl)
+  })
+
+  it('uses the thumbnail URL if there is a large thumbnail available', () => {
+    const expectedUrl = 'http://url.to/thumbnails/large.jpg'
+    const thumbnailPictureEvent = new FakeRecord({
+      name: 'Fake Conference',
+      picture: [{
+        url: 'http://url.to/image.jpg',
+        type: 'image/jpg',
+        thumbnails: {
+          large: { url: expectedUrl }
+        }
+      }]
+    })
+    expect(getImage(thumbnailPictureEvent)).toBe(expectedUrl)
   })
 })
 
