@@ -37,9 +37,10 @@ class FakeRecord {
 }
 
 describe('convertToCommunityEvent', () => {
+  const { hackathon } = COMMUNITY_EVENT_TYPES
   const fakeRecord = new FakeRecord({
     name: 'Fake conference',
-    types: [COMMUNITY_EVENT_TYPES.hackathon],
+    types: [hackathon],
     location: 'Someplace',
     startDate: '2020-01-01',
     endDate: '2020-01-02',
@@ -51,7 +52,7 @@ describe('convertToCommunityEvent', () => {
     const { title, type, place, date, to } = convertToCommunityEvent(fakeRecord)
     expect({ title, type, place, date, to }).toEqual({
       title: 'Fake conference',
-      type: COMMUNITY_EVENT_TYPES.hackathon,
+      type: hackathon,
       place: 'Someplace',
       date: 'January 1-2, 2020',
       to: 'https://qiskit.org/events'
@@ -61,11 +62,12 @@ describe('convertToCommunityEvent', () => {
 
 describe('getType', () => {
   it('checks the name contains the "qiskit camp" pattern regardless the capitalization', () => {
+    const { hackathon, camp } = COMMUNITY_EVENT_TYPES
     const fakeCamp = new FakeRecord({
       name: 'qisKit CamP Oceania',
-      types: [COMMUNITY_EVENT_TYPES.hackathon, 'Community']
+      types: [hackathon, 'Community']
     })
-    expect(getType(fakeCamp)).toBe(COMMUNITY_EVENT_TYPES.camp)
+    expect(getType(fakeCamp)).toBe(camp)
   })
 
   it('defaults in "Conference" if there is no type', () => {
@@ -84,35 +86,39 @@ describe('getType', () => {
   })
 
   it('infers "Hackathon" if "Hackathon" is among the tags', () => {
+    const { hackathon } = COMMUNITY_EVENT_TYPES
     const fakeCamp = new FakeRecord({
       name: 'Fake Conference',
-      types: [COMMUNITY_EVENT_TYPES.hackathon, 'Education']
+      types: [hackathon, 'Education']
     })
-    expect(getType(fakeCamp)).toBe(COMMUNITY_EVENT_TYPES.hackathon)
+    expect(getType(fakeCamp)).toBe(hackathon)
   })
 
   it('infers "Unconference" if "Unconference" is among the types', () => {
+    const { unconference } = COMMUNITY_EVENT_TYPES
     const event = new FakeRecord({
       name: 'Fake Conference',
-      types: [COMMUNITY_EVENT_TYPES.unconference, 'Education']
+      types: [unconference, 'Education']
     })
-    expect(getType(event)).toBe(COMMUNITY_EVENT_TYPES.unconference)
+    expect(getType(event)).toBe(unconference)
   })
 
   it('gives "Hackathon" preference over "Unconference"', () => {
+    const { hackathon, unconference } = COMMUNITY_EVENT_TYPES
     const event = new FakeRecord({
       name: 'Fake Conference',
-      types: [COMMUNITY_EVENT_TYPES.hackathon, COMMUNITY_EVENT_TYPES.unconference]
+      types: [hackathon, unconference]
     })
-    expect(getType(event)).toBe(COMMUNITY_EVENT_TYPES.hackathon)
+    expect(getType(event)).toBe(hackathon)
   })
 
   it('gives "Camp" preference over "Hackathon"', () => {
+    const { hackathon, unconference, camp } = COMMUNITY_EVENT_TYPES
     const event = new FakeRecord({
       name: 'Qiskit Camp Oceania',
-      types: [COMMUNITY_EVENT_TYPES.hackathon, COMMUNITY_EVENT_TYPES.unconference]
+      types: [hackathon, unconference]
     })
-    expect(getType(event)).toBe(COMMUNITY_EVENT_TYPES.camp)
+    expect(getType(event)).toBe(camp)
   })
 })
 
