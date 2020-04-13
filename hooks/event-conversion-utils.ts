@@ -72,8 +72,12 @@ function getImage (record: any): string {
   const fallbackImage = '/images/events/no-picture.jpg'
   const attachments = record.get(RECORD_FIELDS.image)
   const imageAttachment = attachments && findImageAttachment(attachments)
-  const imageUrl = imageAttachment && getBestSizeUrl(imageAttachment)
+  const imageUrl = imageAttachment && getImageUrl(imageAttachment)
   return imageUrl || fallbackImage
+}
+
+function getImageUrl (imageAttachment: any): string {
+  return getThumbnailUrl(imageAttachment) || imageAttachment.url
 }
 
 function findImageAttachment (attachments: any[]): any|null {
@@ -86,15 +90,10 @@ function findImageAttachment (attachments: any[]): any|null {
   return null
 }
 
-function getBestSizeUrl (imageAttachment: any): string {
+function getThumbnailUrl (imageAttachment: any): string|null {
   const { thumbnails } = imageAttachment
   const { large: largeThumbnail } = thumbnails || {}
-
-  if (!thumbnails || !largeThumbnail) {
-    return imageAttachment.url
-  }
-
-  return imageAttachment.thumbnails.large.url
+  return largeThumbnail ? largeThumbnail.url : null
 }
 
 function getPlace (record: any) {
