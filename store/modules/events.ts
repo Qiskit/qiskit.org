@@ -3,7 +3,7 @@ type WorldLocation = 'Americas'|'Asia Pacific'|'Europe'|'Africa'|'TBD'|'Online'
 type CommunityEventType = 'Hackathon'|'Camp'|'Unconference'|'Conference'
 
 type CommunityEvent = {
-  type: CommunityEventType,
+  type: CommunityEventType[],
   title: string,
   image: string,
   place: string,
@@ -13,8 +13,15 @@ type CommunityEvent = {
 }
 
 const LOCATION_CATEGORIES: WorldLocation[] = ['Americas', 'Asia Pacific', 'Europe', 'Africa', 'Online']
+const TYPE_CATEGORIES: CommunityEventType[] = ['Hackathon', 'Camp', 'Unconference']
 
-export { CommunityEvent, CommunityEventType, WorldLocation, LOCATION_CATEGORIES }
+export {
+  CommunityEvent,
+  CommunityEventType,
+  WorldLocation,
+  LOCATION_CATEGORIES,
+  TYPE_CATEGORIES
+}
 
 export default {
   state () {
