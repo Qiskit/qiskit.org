@@ -76,7 +76,9 @@
           />
         </div>
         <div v-else class="event-page__results">
-          <h3>Plan an event in your area today!</h3>
+          <p class="event-page__no-events-msg">
+            No events: Plan an event in your area today!
+          </p>
         </div>
       </div>
     </div>
@@ -136,7 +138,7 @@ export default class extends QiskitPage {
   windowWidth: Number = 0
 
   get hasEvents (): boolean {
-    return this.$store.getters.filteredEvents.length !== 0
+    return (this as any).filteredEvents.length !== 0
   }
 
   autoplayVideo () {
@@ -221,6 +223,10 @@ export default class extends QiskitPage {
     @include mq($from: medium) {
       width: 75%;
     }
+  }
+
+  &__no-events-msg {
+    @include type-style('expressive-paragraph-01');
   }
 }
 
