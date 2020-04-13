@@ -13,9 +13,9 @@ import pkg from './package.json'
 import generateTextbookToc from './hooks/generate-textbook-toc'
 import fetchEvents from './hooks/update-events'
 
-const IS_PRODUCTION = process.env.NODE_ENV === 'production'
-const GENERATE_CONTENT = process.env.GENERATE_CONTENT
-const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY
+const { NODE_ENV, GENERATE_CONTENT, AIRTABLE_API_KEY } = process.env
+
+const IS_PRODUCTION = NODE_ENV === 'production'
 
 const md = markdownIt({
   linkify: true,
@@ -34,7 +34,6 @@ md.use(miAnchor, {
 
 const config: Configuration = {
   mode: 'universal',
-
   env: {
     analyticsScriptUrl: IS_PRODUCTION
       ? 'https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js'
