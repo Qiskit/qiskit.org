@@ -5,7 +5,8 @@ import {
   CommunityEvent,
   CommunityEventType,
   WorldLocation,
-  LOCATION_CATEGORIES
+  LOCATION_CATEGORIES,
+  COMMUNITY_EVENT_TYPES
 } from '../store/modules/events'
 
 const RECORD_FIELDS = {
@@ -55,16 +56,19 @@ function getName (record: any): string {
 }
 
 function getType (record: any): CommunityEventType {
-  if (record.get(RECORD_FIELDS.name).toLowerCase().includes('qiskit camp')) {
-    return 'Camp'
+  const { camp, hackathon, unconference, conference } = COMMUNITY_EVENT_TYPES
+  const { name, typeOfEvent } = RECORD_FIELDS
+
+  if (record.get(name).toLowerCase().includes('qiskit camp')) {
+    return camp
   }
-  if ((record.get(RECORD_FIELDS.typeOfEvent) || []).includes('Hackathon')) {
-    return 'Hackathon'
+  if ((record.get(typeOfEvent) || []).includes(hackathon)) {
+    return hackathon
   }
-  if ((record.get(RECORD_FIELDS.typeOfEvent) || []).includes('Unconference')) {
-    return 'Unconference'
+  if ((record.get(typeOfEvent) || []).includes(unconference)) {
+    return unconference
   }
-  return 'Conference'
+  return conference
 }
 
 function getImage (_record: any): string {

@@ -12,10 +12,33 @@ type CommunityEvent = {
   to: string
 }
 
-const LOCATION_CATEGORIES: WorldLocation[] = ['Americas', 'Asia Pacific', 'Europe', 'Africa', 'Online']
-const TYPE_CATEGORIES: CommunityEventType[] = ['Hackathon', 'Camp', 'Unconference', 'Conference']
+type CommunityEventTypes = {
+  [key: string]: CommunityEventType
+}
 
-export { CommunityEvent, CommunityEventType, WorldLocation, LOCATION_CATEGORIES, TYPE_CATEGORIES }
+const COMMUNITY_EVENT_TYPES: CommunityEventTypes = {
+  hackathon: 'Hackathon',
+  camp: 'Camp',
+  unconference: 'Unconference',
+  conference: 'Conference'
+}
+
+const LOCATION_CATEGORIES: WorldLocation[] = ['Americas', 'Asia Pacific', 'Europe', 'Africa', 'Online']
+const TYPE_CATEGORIES: CommunityEventType[] = [
+  COMMUNITY_EVENT_TYPES.hackathon,
+  COMMUNITY_EVENT_TYPES.camp,
+  COMMUNITY_EVENT_TYPES.unconference,
+  COMMUNITY_EVENT_TYPES.conference
+]
+
+export {
+  CommunityEvent,
+  CommunityEventType,
+  WorldLocation,
+  LOCATION_CATEGORIES,
+  TYPE_CATEGORIES,
+  COMMUNITY_EVENT_TYPES
+}
 
 export default {
   state: {
