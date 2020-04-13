@@ -7,10 +7,14 @@ import {
   getImage
 } from '~/hooks/event-conversion-utils'
 
+import {
+  TYPE_CATEGORIES
+} from '~/store/modules/events'
+
 type RecordFields = {
   name: string,
   picture?: object[],
-  types?: string[],
+  types?: string[]|string,
   location?: string,
   startDate?: string,
   endDate?: string,
@@ -52,7 +56,7 @@ describe('convertToCommunityEvent', () => {
     const { title, type, place, date, to } = convertToCommunityEvent(fakeRecord)
     expect({ title, type, place, date, to }).toEqual({
       title: 'Fake conference',
-      type: 'Hackathon',
+      type: ['Hackathon'],
       place: 'Someplace',
       date: 'January 1-2, 2020',
       to: 'https://qiskit.org/events'
@@ -61,59 +65,35 @@ describe('convertToCommunityEvent', () => {
 })
 
 describe('getType', () => {
-  it('checks the name contains the "qiskit camp" pattern regardless the capitalization', () => {
+  it('filter the values so only those in the whitelist gets into the event', () => {
     const camp = new FakeRecord({
-      name: 'qisKit CamP Oceania',
-      types: ['Hackathon', 'Community']
+      name: 'Fake Camp',
+      types: ['Hackathon', 'Community', 'Unknown']
     })
-    expect(getType(camp)).toBe('Camp')
+    expect(getType(camp, TYPE_CATEGORIES, 'Conference')).toEqual(['Hackathon'])
   })
 
-  it('defaults in "Conference" if there is no type', () => {
+  it('if there is no type, get the default type', () => {
     const camp = new FakeRecord({
-      name: 'Fake Conference'
+      name: 'Fake Camp'
     })
-    expect(getType(camp)).toBe('Conference')
+    expect(getType(camp, TYPE_CATEGORIES, 'Conference')).toEqual(['Conference'])
   })
 
-  it('defaults in "Conference" if cannot infer the type', () => {
+  it('if no type is in the whitelist, get the default type', () => {
+    const camp = new FakeRecord({
+      name: 'Fake Camp',
+      types: ['A', 'B', 'C']
+    })
+    expect(getType(camp, TYPE_CATEGORIES, 'Conference')).toEqual(['Conference'])
+  })
+
+  it('get an array of one value if the type is not an array but one value', () => {
     const camp = new FakeRecord({
       name: 'Fake Conference',
-      types: ['xxxx', 'yyyy']
+      types: 'Hackathon'
     })
-    expect(getType(camp)).toBe('Conference')
-  })
-
-  it('infers "Hackathon" if "Hackathon" is among the tags', () => {
-    const camp = new FakeRecord({
-      name: 'Fake Conference',
-      types: ['Hackathon', 'Education']
-    })
-    expect(getType(camp)).toBe('Hackathon')
-  })
-
-  it('infers "Unconference" if "Unconference" is among the types', () => {
-    const event = new FakeRecord({
-      name: 'Fake Conference',
-      types: ['Unconference', 'Education']
-    })
-    expect(getType(event)).toBe('Unconference')
-  })
-
-  it('gives "Hackathon" preference over "Unconference"', () => {
-    const event = new FakeRecord({
-      name: 'Fake Conference',
-      types: ['Hackathon', 'Unconference']
-    })
-    expect(getType(event)).toBe('Hackathon')
-  })
-
-  it('gives "Camp" preference over "Hackathon"', () => {
-    const event = new FakeRecord({
-      name: 'Qiskit Camp Oceania',
-      types: ['Hackathon', 'Unconference']
-    })
-    expect(getType(event)).toBe('Camp')
+    expect(getType(camp, TYPE_CATEGORIES, 'Conference')).toEqual(['Hackathon'])
   })
 })
 
