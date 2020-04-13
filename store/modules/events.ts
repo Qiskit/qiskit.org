@@ -50,12 +50,16 @@ export default {
 
       return filterBy(eventsAfterApplyTypeFilter, locationFilters, 'location')
 
-      function filterBy (allEvents, selectedFilters, propToFilter) {
+      function filterBy (allEvents: CommunityEvent[], selectedFilters: string[], propToFilter: keyof CommunityEvent) {
         const noFilters = selectedFilters.length === 0
 
         if (noFilters) { return allEvents }
 
-        return allEvents.filter(event => selectedFilters.includes(event[propToFilter]))
+        return allEvents.filter((event) => {
+          const propValue = event[propToFilter]
+          const valueArray = Array.isArray(propValue) ? propValue : [propValue]
+          return valueArray.some(value => selectedFilters.includes(value))
+        })
       }
     }
   },
