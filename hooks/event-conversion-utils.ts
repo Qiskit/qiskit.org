@@ -14,7 +14,8 @@ const RECORD_FIELDS = {
   endDate: 'End Date',
   typeOfEvent: 'Type of Event',
   eventWebsite: 'Event Website',
-  eventLocation: 'Event Location'
+  eventLocation: 'Event Location',
+  image: 'Picture?'
 }
 
 async function fetchCommunityEvents (apiKey: string, { days }): Promise<CommunityEvent[]> {
@@ -67,13 +68,31 @@ function getType (record: any): CommunityEventType {
   return 'Conference'
 }
 
-function getImage (_record: any): string {
-  const options = [
-    '/images/events/promo-finland-unconference.jpg',
-    '/images/events/promo-vermont.jpg',
-    '/images/events/promo-asia.jpg'
-  ]
-  return options[Math.floor(Math.random() * options.length)]
+function getImage (record: any): string {
+  const fallbackImage = '/images/events/no-picture.jpg'
+  const attachments = record.get(RECORD_FIELDS.image)
+  const imageAttachment = attachments && getImageAttachment(attachments)
+  const imageUrl = imageAttachment && getBestSizeUrl(imageAttachment)
+  return imageUrl || fallbackImage
+}
+
+function getImageAttachment (attachments: any[]): any|null {
+  for (const oneAttachment of attachments) {
+    if (oneAttachment.type.startsWith('image')) {
+      return oneAttachment
+    }
+  }
+  return null
+}
+
+function getBestSizeUrl (imageAttachment: any): string {
+  if (!imageAttachment.thumbnails) {
+    return imageAttachment.url
+  }
+  if (!imageAttachment.thumbnails.large) {
+    return imageAttachment.url
+  }
+  return imageAttachment.thumbnails.large.url
 }
 
 function getPlace (record: any) {
