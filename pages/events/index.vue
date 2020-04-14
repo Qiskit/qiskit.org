@@ -77,7 +77,7 @@
         </div>
         <div v-else class="event-page__results">
           <p class="event-page__no-events-msg">
-            No events: Plan an event in your area today!
+            Nothing here yet - let’s make it happen!
           </p>
         </div>
       </div>
