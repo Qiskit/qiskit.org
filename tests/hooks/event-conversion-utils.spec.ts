@@ -1,15 +1,12 @@
 import {
   RECORD_FIELDS,
   formatDates,
+  filterWithWhitelist,
   convertToCommunityEvent,
   getType,
   getDates,
   getImage
 } from '~/hooks/event-conversion-utils'
-
-import {
-  TYPE_CATEGORIES
-} from '~/store/modules/events'
 
 type RecordFields = {
   name: string,
@@ -70,14 +67,14 @@ describe('getType', () => {
       name: 'Fake Camp',
       types: ['Hackathon', 'Community', 'Unknown']
     })
-    expect(getType(camp, TYPE_CATEGORIES, 'Conference')).toEqual(['Hackathon'])
+    expect(getType(camp)).toEqual(['Hackathon'])
   })
 
   it('if there is no type, get the default type', () => {
     const camp = new FakeRecord({
       name: 'Fake Camp'
     })
-    expect(getType(camp, TYPE_CATEGORIES, 'Conference')).toEqual(['Conference'])
+    expect(getType(camp)).toEqual(['Conference'])
   })
 
   it('if no type is in the whitelist, get the default type', () => {
@@ -85,7 +82,7 @@ describe('getType', () => {
       name: 'Fake Camp',
       types: ['A', 'B', 'C']
     })
-    expect(getType(camp, TYPE_CATEGORIES, 'Conference')).toEqual(['Conference'])
+    expect(getType(camp)).toEqual(['Conference'])
   })
 
   it('get an array of one value if the type is not an array but one value', () => {
@@ -93,7 +90,14 @@ describe('getType', () => {
       name: 'Fake Conference',
       types: 'Hackathon'
     })
-    expect(getType(camp, TYPE_CATEGORIES, 'Conference')).toEqual(['Hackathon'])
+    expect(getType(camp)).toEqual(['Hackathon'])
+  })
+})
+
+describe('filterByWhitelist', () => {
+  it('given a list, creates a new list only with the values in a whitelist', () => {
+    const list = ['a', 'x', 'b', 'y', 'c', 'z', 'a', 'x', 'b', 'y']
+    expect(filterWithWhitelist(list, ['a', 'b', 'c'])).toEqual(['a', 'b', 'c', 'a', 'b'])
   })
 })
 
