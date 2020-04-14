@@ -56,7 +56,7 @@ function getName (record: any): string {
 }
 
 function getType (record: any): CommunityEventType {
-  const { camp, hackathon, unconference, conference } = COMMUNITY_EVENT_TYPES
+  const { camp, hackathon, unconference, talks } = COMMUNITY_EVENT_TYPES
   const { name, typeOfEvent } = RECORD_FIELDS
 
   if (record.get(name).toLowerCase().includes('qiskit camp')) {
@@ -68,7 +68,7 @@ function getType (record: any): CommunityEventType {
   if ((record.get(typeOfEvent) || []).includes(unconference)) {
     return unconference
   }
-  return conference
+  return talks
 }
 
 function getImage (_record: any): string {

@@ -1,6 +1,6 @@
 type CommunityEventSet = 'past'|'upcoming'
 type WorldLocation = 'Americas'|'Asia Pacific'|'Europe'|'Africa'|'TBD'|'Online'
-type CommunityEventType = 'Hackathon'|'Camp'|'Unconference'|'Conference'
+type CommunityEventType = 'Hackathon'|'Camp'|'Unconference'|'Industry Event'|'Workshop'|'Talks'|'Virtual Event'
 
 type CommunityEvent = {
   type: CommunityEventType,
@@ -20,7 +20,10 @@ const COMMUNITY_EVENT_TYPES: CommunityEventTypes = {
   hackathon: 'Hackathon',
   camp: 'Camp',
   unconference: 'Unconference',
-  conference: 'Conference'
+  industryEvent: 'Industry Event',
+  workshop: 'Workshop',
+  talks: 'Talks',
+  virtualEvent: 'Virtual Event'
 }
 
 const LOCATION_CATEGORIES: WorldLocation[] = ['Americas', 'Asia Pacific', 'Europe', 'Africa', 'Online']
@@ -28,7 +31,10 @@ const TYPE_CATEGORIES: CommunityEventType[] = [
   COMMUNITY_EVENT_TYPES.hackathon,
   COMMUNITY_EVENT_TYPES.camp,
   COMMUNITY_EVENT_TYPES.unconference,
-  COMMUNITY_EVENT_TYPES.conference
+  COMMUNITY_EVENT_TYPES.industryEvent,
+  COMMUNITY_EVENT_TYPES.workshop,
+  COMMUNITY_EVENT_TYPES.talks,
+  COMMUNITY_EVENT_TYPES.virtualEvent
 ]
 
 export {

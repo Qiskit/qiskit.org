@@ -70,55 +70,55 @@ describe('getType', () => {
     expect(getType(fakeCamp)).toBe(camp)
   })
 
-  it('defaults in "Conference" if there is no type', () => {
-    const fakeCamp = new FakeRecord({
-      name: 'Fake Conference'
+  it('defaults in "Talks" if there is no type', () => {
+    const fakeEvent = new FakeRecord({
+      name: 'Fake Talk'
     })
-    expect(getType(fakeCamp)).toBe(COMMUNITY_EVENT_TYPES.conference)
+    expect(getType(fakeEvent)).toBe(COMMUNITY_EVENT_TYPES.talks)
   })
 
-  it('defaults in "Conference" if cannot infer the type', () => {
-    const fakeCamp = new FakeRecord({
-      name: 'Fake Conference',
+  it('defaults in "Talks" if cannot infer the type', () => {
+    const fakeEvent = new FakeRecord({
+      name: 'Fake Talk',
       types: ['xxxx', 'yyyy']
     })
-    expect(getType(fakeCamp)).toBe(COMMUNITY_EVENT_TYPES.conference)
+    expect(getType(fakeEvent)).toBe(COMMUNITY_EVENT_TYPES.talks)
   })
 
   it('infers "Hackathon" if "Hackathon" is among the tags', () => {
     const { hackathon } = COMMUNITY_EVENT_TYPES
-    const fakeCamp = new FakeRecord({
+    const fakeEvent = new FakeRecord({
       name: 'Fake Conference',
       types: [hackathon, 'Education']
     })
-    expect(getType(fakeCamp)).toBe(hackathon)
+    expect(getType(fakeEvent)).toBe(hackathon)
   })
 
   it('infers "Unconference" if "Unconference" is among the types', () => {
     const { unconference } = COMMUNITY_EVENT_TYPES
-    const event = new FakeRecord({
+    const FakeEvent = new FakeRecord({
       name: 'Fake Conference',
       types: [unconference, 'Education']
     })
-    expect(getType(event)).toBe(unconference)
+    expect(getType(FakeEvent)).toBe(unconference)
   })
 
   it('gives "Hackathon" preference over "Unconference"', () => {
     const { hackathon, unconference } = COMMUNITY_EVENT_TYPES
-    const event = new FakeRecord({
+    const FakeEvent = new FakeRecord({
       name: 'Fake Conference',
       types: [hackathon, unconference]
     })
-    expect(getType(event)).toBe(hackathon)
+    expect(getType(FakeEvent)).toBe(hackathon)
   })
 
   it('gives "Camp" preference over "Hackathon"', () => {
     const { hackathon, unconference, camp } = COMMUNITY_EVENT_TYPES
-    const event = new FakeRecord({
+    const FakeEvent = new FakeRecord({
       name: 'Qiskit Camp Oceania',
       types: [hackathon, unconference]
     })
-    expect(getType(event)).toBe(camp)
+    expect(getType(FakeEvent)).toBe(camp)
   })
 })
 
@@ -126,32 +126,32 @@ describe('getDates', () => {
   it('returns date objects if both dates exists', () => {
     const expectedStartDate = new Date('2020-01-01')
     const expectedEndDate = new Date('2020-01-02')
-    const event = new FakeRecord({
+    const FakeEvent = new FakeRecord({
       name: 'Fake Conference',
       startDate: '2020-01-01',
       endDate: '2020-01-02'
     })
-    const [startDate, endDate] = getDates(event)
+    const [startDate, endDate] = getDates(FakeEvent)
     expect(startDate).toEqual(expectedStartDate)
     expect(endDate).toEqual(expectedEndDate)
   })
 
   it('returns undefined if the start date is missing', () => {
-    const event = new FakeRecord({
-      name: 'Fake Conference',
+    const FakeEvent = new FakeRecord({
+      name: 'Fake Unconference',
       endDate: '2020-01-01'
     })
-    const [startDate, endDate] = getDates(event)
+    const [startDate, endDate] = getDates(FakeEvent)
     expect(endDate).toBeInstanceOf(Date)
     expect(startDate).toBeUndefined()
   })
 
   it('returns undefined if the end date is missing', () => {
-    const event = new FakeRecord({
-      name: 'Fake Conference',
+    const FakeEvent = new FakeRecord({
+      name: 'Fake Unconference',
       startDate: '2020-01-01'
     })
-    const [startDate, endDate] = getDates(event)
+    const [startDate, endDate] = getDates(FakeEvent)
     expect(startDate).toBeInstanceOf(Date)
     expect(endDate).toBeUndefined()
   })
