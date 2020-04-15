@@ -5,8 +5,9 @@ import {
   CommunityEvent,
   CommunityEventType,
   WorldLocation,
+  COMMUNITY_EVENT_TYPES,
   LOCATION_CATEGORIES,
-  COMMUNITY_EVENT_TYPES
+  TYPE_CATEGORIES
 } from '../store/modules/events'
 
 const RECORD_FIELDS = {
@@ -15,7 +16,8 @@ const RECORD_FIELDS = {
   endDate: 'End Date',
   typeOfEvent: 'Type of Event',
   eventWebsite: 'Event Website',
-  eventLocation: 'Event Location'
+  eventLocation: 'Event Location',
+  image: 'Picture?'
 }
 
 async function fetchCommunityEvents (apiKey: string, { days }): Promise<CommunityEvent[]> {
@@ -42,7 +44,7 @@ async function fetchCommunityEvents (apiKey: string, { days }): Promise<Communit
 function convertToCommunityEvent (record: any): CommunityEvent {
   return {
     title: getName(record),
-    type: getType(record),
+    types: getTypes(record),
     image: getImage(record),
     place: getPlace(record),
     location: getLocation(record),
@@ -55,29 +57,44 @@ function getName (record: any): string {
   return record.get(RECORD_FIELDS.name)
 }
 
-function getType (record: any): CommunityEventType {
-  const { camp, hackathon, unconference, talks } = COMMUNITY_EVENT_TYPES
-  const { name, typeOfEvent } = RECORD_FIELDS
-
-  if (record.get(name).toLowerCase().includes('qiskit camp')) {
-    return camp
-  }
-  if ((record.get(typeOfEvent) || []).includes(hackathon)) {
-    return hackathon
-  }
-  if ((record.get(typeOfEvent) || []).includes(unconference)) {
-    return unconference
-  }
-  return talks
+function getTypes (record: any): CommunityEventType[] {
+  const value = record.get(RECORD_FIELDS.typeOfEvent) || []
+  const valueList = (Array.isArray(value) ? value : [value]) as string[]
+  const communityEventTypes = filterWithWhitelist(valueList, TYPE_CATEGORIES)
+  const noTypes = communityEventTypes.length === 0
+  return noTypes ? [COMMUNITY_EVENT_TYPES.talks] : communityEventTypes
 }
 
-function getImage (_record: any): string {
-  const options = [
-    '/images/events/promo-finland-unconference.jpg',
-    '/images/events/promo-vermont.jpg',
-    '/images/events/promo-asia.jpg'
-  ]
-  return options[Math.floor(Math.random() * options.length)]
+function filterWithWhitelist<W> (list: any[], whitelist: W[]): W[] {
+  return list.filter((type): type is W => whitelist.includes(type))
+}
+
+function getImage (record: any): string {
+  const fallbackImage = '/images/events/no-picture.jpg'
+  const attachments = record.get(RECORD_FIELDS.image)
+  const imageAttachment = attachments && findImageAttachment(attachments)
+  const imageUrl = imageAttachment && getImageUrl(imageAttachment)
+  return imageUrl || fallbackImage
+}
+
+function getImageUrl (imageAttachment: any): string {
+  return getThumbnailUrl(imageAttachment) || imageAttachment.url
+}
+
+function findImageAttachment (attachments: any[]): any|null {
+  for (const oneAttachment of attachments) {
+    const isImage = oneAttachment.type.startsWith('image')
+    if (isImage) {
+      return oneAttachment
+    }
+  }
+  return null
+}
+
+function getThumbnailUrl (imageAttachment: any): string|null {
+  const { thumbnails } = imageAttachment
+  const { large: largeThumbnail } = thumbnails || {}
+  return largeThumbnail ? largeThumbnail.url : null
 }
 
 function getPlace (record: any) {
@@ -135,11 +152,12 @@ export {
   fetchCommunityEvents,
   convertToCommunityEvent,
   getName,
-  getType,
+  getTypes,
   getImage,
   getPlace,
   getLocation,
   getWebsite,
   getDates,
-  formatDates
+  formatDates,
+  filterWithWhitelist
 }

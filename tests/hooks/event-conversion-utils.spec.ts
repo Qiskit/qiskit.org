@@ -1,16 +1,19 @@
 import {
   RECORD_FIELDS,
   formatDates,
+  filterWithWhitelist,
   convertToCommunityEvent,
-  getType,
-  getDates
+  getTypes,
+  getDates,
+  getImage
 } from '~/hooks/event-conversion-utils'
 
 import { COMMUNITY_EVENT_TYPES } from '~/store/modules/events'
 
 type RecordFields = {
   name: string,
-  types?: string[],
+  picture?: object[],
+  types?: string[]|string,
   location?: string,
   startDate?: string,
   endDate?: string,
@@ -20,9 +23,10 @@ type RecordFields = {
 class FakeRecord {
   _fields: object = {}
 
-  constructor ({ name, types, location, startDate, endDate, website }: RecordFields) {
+  constructor ({ name, picture, types, location, startDate, endDate, website }: RecordFields) {
     this._fields = {
       [RECORD_FIELDS.name]: name,
+      [RECORD_FIELDS.image]: picture,
       [RECORD_FIELDS.typeOfEvent]: types,
       [RECORD_FIELDS.eventLocation]: location,
       [RECORD_FIELDS.startDate]: startDate,
@@ -47,12 +51,12 @@ describe('convertToCommunityEvent', () => {
     website: 'https://qiskit.org/events'
   })
 
-  it('extract and format information from the record', () => {
-    // TODO: Now ignoring image and location since they are random. Add them once implemented.
-    const { title, type, place, date, to } = convertToCommunityEvent(fakeRecord)
-    expect({ title, type, place, date, to }).toEqual({
+  it('extracts and format information from the record', () => {
+    const { hackathon } = COMMUNITY_EVENT_TYPES
+    const { title, types, place, date, to } = convertToCommunityEvent(fakeRecord)
+    expect({ title, types, place, date, to }).toEqual({
       title: 'Fake conference',
-      type: hackathon,
+      types: [hackathon],
       place: 'Someplace',
       date: 'January 1-2, 2020',
       to: 'https://qiskit.org/events'
@@ -61,64 +65,105 @@ describe('convertToCommunityEvent', () => {
 })
 
 describe('getType', () => {
-  it('checks the name contains the "qiskit camp" pattern regardless the capitalization', () => {
-    const { hackathon, camp } = COMMUNITY_EVENT_TYPES
-    const fakeCamp = new FakeRecord({
-      name: 'qisKit CamP Oceania',
-      types: [hackathon, 'Community']
-    })
-    expect(getType(fakeCamp)).toBe(camp)
-  })
-
-  it('defaults in "Talks" if there is no type', () => {
-    const fakeEvent = new FakeRecord({
-      name: 'Fake Talk'
-    })
-    expect(getType(fakeEvent)).toBe(COMMUNITY_EVENT_TYPES.talks)
-  })
-
-  it('defaults in "Talks" if cannot infer the type', () => {
-    const fakeEvent = new FakeRecord({
-      name: 'Fake Talk',
-      types: ['xxxx', 'yyyy']
-    })
-    expect(getType(fakeEvent)).toBe(COMMUNITY_EVENT_TYPES.talks)
-  })
-
-  it('infers "Hackathon" if "Hackathon" is among the tags', () => {
+  it('filters the values so only those recognized by qiskit.org get into the event', () => {
     const { hackathon } = COMMUNITY_EVENT_TYPES
-    const fakeEvent = new FakeRecord({
-      name: 'Fake Conference',
-      types: [hackathon, 'Education']
+    const camp = new FakeRecord({
+      name: 'Fake Camp',
+      types: [hackathon, 'Unknown1', 'Unknown2']
     })
-    expect(getType(fakeEvent)).toBe(hackathon)
+    expect(getTypes(camp)).toEqual([hackathon])
   })
 
-  it('infers "Unconference" if "Unconference" is among the types', () => {
-    const { unconference } = COMMUNITY_EVENT_TYPES
-    const FakeEvent = new FakeRecord({
-      name: 'Fake Conference',
-      types: [unconference, 'Education']
+  it('gets Talks type if there is no type', () => {
+    const { talks } = COMMUNITY_EVENT_TYPES
+    const camp = new FakeRecord({
+      name: 'Fake Camp'
     })
-    expect(getType(FakeEvent)).toBe(unconference)
+    expect(getTypes(camp)).toEqual([talks])
   })
 
-  it('gives "Hackathon" preference over "Unconference"', () => {
-    const { hackathon, unconference } = COMMUNITY_EVENT_TYPES
-    const FakeEvent = new FakeRecord({
-      name: 'Fake Conference',
-      types: [hackathon, unconference]
+  it('gets Talks type if no type is recognized by qiskit.org', () => {
+    const { talks } = COMMUNITY_EVENT_TYPES
+    const camp = new FakeRecord({
+      name: 'Fake Camp',
+      types: ['A', 'B', 'C']
     })
-    expect(getType(FakeEvent)).toBe(hackathon)
+    expect(getTypes(camp)).toEqual([talks])
   })
 
-  it('gives "Camp" preference over "Hackathon"', () => {
-    const { hackathon, unconference, camp } = COMMUNITY_EVENT_TYPES
-    const FakeEvent = new FakeRecord({
-      name: 'Qiskit Camp Oceania',
-      types: [hackathon, unconference]
+  it('gets an array of one value if types is not an array but a single value', () => {
+    const { hackathon } = COMMUNITY_EVENT_TYPES
+    const camp = new FakeRecord({
+      name: 'Fake Conference',
+      types: hackathon
     })
-    expect(getType(FakeEvent)).toBe(camp)
+    expect(getTypes(camp)).toEqual([hackathon])
+  })
+})
+
+describe('filterByWhitelist', () => {
+  it('creates a new list, from an input one, only with the values in a whitelist', () => {
+    const list = ['a', 'x', 'b', 'y', 'c', 'z', 'a', 'x', 'b', 'y']
+    expect(filterWithWhitelist(list, ['a', 'b', 'c'])).toEqual(['a', 'b', 'c', 'a', 'b'])
+  })
+})
+
+describe('getImage', () => {
+  it('defaults in a no-picture.jpg value if there is no attachment', () => {
+    const noPictureEvent = new FakeRecord({
+      name: 'Fake Conference'
+    })
+    expect(getImage(noPictureEvent)).toBe('/images/events/no-picture.jpg')
+  })
+
+  it('defaults in a no-picture.jpg value if the attachment is of no image type', () => {
+    const invalidPictureEvent = new FakeRecord({
+      name: 'Fake Conference',
+      picture: [{
+        type: 'application/json'
+      }]
+    })
+    expect(getImage(invalidPictureEvent)).toBe('/images/events/no-picture.jpg')
+  })
+
+  it('uses the attachment URL if there are no thumbnails', () => {
+    const expectedUrl = 'http://url.to/image.jpg'
+    const noPictureThumbnailsEvent = new FakeRecord({
+      name: 'Fake Conference',
+      picture: [{
+        url: expectedUrl,
+        type: 'image/jpg'
+      }]
+    })
+    expect(getImage(noPictureThumbnailsEvent)).toBe(expectedUrl)
+  })
+
+  it('uses the attachment URL if there is no large thumbnail', () => {
+    const expectedUrl = 'http://url.to/image.jpg'
+    const noLargeThumbnailEvent = new FakeRecord({
+      name: 'Fake Conference',
+      picture: [{
+        url: expectedUrl,
+        type: 'image/jpg',
+        thumbnails: { }
+      }]
+    })
+    expect(getImage(noLargeThumbnailEvent)).toBe(expectedUrl)
+  })
+
+  it('uses the thumbnail URL if there is a large thumbnail available', () => {
+    const expectedUrl = 'http://url.to/thumbnails/large.jpg'
+    const thumbnailPictureEvent = new FakeRecord({
+      name: 'Fake Conference',
+      picture: [{
+        url: 'http://url.to/image.jpg',
+        type: 'image/jpg',
+        thumbnails: {
+          large: { url: expectedUrl }
+        }
+      }]
+    })
+    expect(getImage(thumbnailPictureEvent)).toBe(expectedUrl)
   })
 })
 
@@ -182,11 +227,11 @@ describe('formatDates', () => {
     expect(formatDates(start, endNextYear)).toBe('January 1, 2020 - January 1, 2021')
   })
 
-  it('factor out the year when years are equal', () => {
+  it('factors out the year when years are equal', () => {
     expect(formatDates(start, endNextMonth)).toBe('January 1 - February 1, 2020')
   })
 
-  it('factour out year and month when the event falls into the same month', () => {
+  it('factors out year and month when the event falls into the same month', () => {
     expect(formatDates(start, endNextDay)).toBe('January 1-2, 2020')
   })
 })

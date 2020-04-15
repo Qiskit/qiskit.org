@@ -3,7 +3,7 @@ type WorldLocation = 'Americas'|'Asia Pacific'|'Europe'|'Africa'|'TBD'|'Online'
 type CommunityEventType = 'Hackathon'|'Camp'|'Unconference'|'Industry Event'|'Workshop'|'Talks'|'Virtual Event'
 
 type CommunityEvent = {
-  type: CommunityEventType,
+  types: CommunityEventType[],
   title: string,
   image: string,
   place: string,
@@ -47,12 +47,14 @@ export {
 }
 
 export default {
-  state: {
-    activeSet: 'upcoming',
-    upcomingCommunityEvents: [],
-    pastCommunityEvents: [],
-    typeFilters: [],
-    locationFilters: []
+  state () {
+    return {
+      activeSet: 'upcoming',
+      upcomingCommunityEvents: [],
+      pastCommunityEvents: [],
+      typeFilters: [],
+      locationFilters: []
+    }
   },
   getters: {
     typeFilters (state) {
@@ -76,16 +78,20 @@ export default {
 
       if (noTypeFilters && noLocationFilters) { return events }
 
-      const eventsAfterApplyTypeFilter = filterBy(events, typeFilters, 'type')
+      const eventsAfterApplyTypeFilter = filterBy(events, typeFilters, 'types')
 
       return filterBy(eventsAfterApplyTypeFilter, locationFilters, 'location')
 
-      function filterBy (allEvents, selectedFilters, propToFilter) {
+      function filterBy (allEvents: CommunityEvent[], selectedFilters: string[], propToFilter: keyof CommunityEvent) {
         const noFilters = selectedFilters.length === 0
 
         if (noFilters) { return allEvents }
 
-        return allEvents.filter(event => selectedFilters.includes(event[propToFilter]))
+        return allEvents.filter((event) => {
+          const propValue = event[propToFilter]
+          const valueArray = Array.isArray(propValue) ? propValue : [propValue]
+          return valueArray.some(value => selectedFilters.includes(value))
+        })
       }
     }
   },
