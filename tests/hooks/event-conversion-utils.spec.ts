@@ -3,7 +3,7 @@ import {
   formatDates,
   filterWithWhitelist,
   convertToCommunityEvent,
-  getType,
+  getTypes,
   getDates,
   getImage
 } from '~/hooks/event-conversion-utils'
@@ -48,12 +48,12 @@ describe('convertToCommunityEvent', () => {
     website: 'https://qiskit.org/events'
   })
 
-  it('extract and format information from the record', () => {
+  it('extracts and format information from the record', () => {
     // TODO: Now ignoring image and location since they are random. Add them once implemented.
-    const { title, type, place, date, to } = convertToCommunityEvent(fakeRecord)
-    expect({ title, type, place, date, to }).toEqual({
+    const { title, types, place, date, to } = convertToCommunityEvent(fakeRecord)
+    expect({ title, types, place, date, to }).toEqual({
       title: 'Fake conference',
-      type: ['Hackathon'],
+      types: ['Hackathon'],
       place: 'Someplace',
       date: 'January 1-2, 2020',
       to: 'https://qiskit.org/events'
@@ -62,40 +62,40 @@ describe('convertToCommunityEvent', () => {
 })
 
 describe('getType', () => {
-  it('filter the values so only those in the whitelist gets into the event', () => {
+  it('filters the values so only those in the whitelist gets into the event', () => {
     const camp = new FakeRecord({
       name: 'Fake Camp',
       types: ['Hackathon', 'Community', 'Unknown']
     })
-    expect(getType(camp)).toEqual(['Hackathon'])
+    expect(getTypes(camp)).toEqual(['Hackathon'])
   })
 
-  it('if there is no type, get the default type', () => {
+  it('gets the default type if there is no type', () => {
     const camp = new FakeRecord({
       name: 'Fake Camp'
     })
-    expect(getType(camp)).toEqual(['Conference'])
+    expect(getTypes(camp)).toEqual(['Conference'])
   })
 
-  it('if no type is in the whitelist, get the default type', () => {
+  it('gets the default type if no type is in the whitelist', () => {
     const camp = new FakeRecord({
       name: 'Fake Camp',
       types: ['A', 'B', 'C']
     })
-    expect(getType(camp)).toEqual(['Conference'])
+    expect(getTypes(camp)).toEqual(['Conference'])
   })
 
-  it('get an array of one value if the type is not an array but one value', () => {
+  it('gets an array of one value if the type is not an array but one value', () => {
     const camp = new FakeRecord({
       name: 'Fake Conference',
       types: 'Hackathon'
     })
-    expect(getType(camp)).toEqual(['Hackathon'])
+    expect(getTypes(camp)).toEqual(['Hackathon'])
   })
 })
 
 describe('filterByWhitelist', () => {
-  it('given a list, creates a new list only with the values in a whitelist', () => {
+  it('creates a new list, from an input one, only with the values in a whitelist', () => {
     const list = ['a', 'x', 'b', 'y', 'c', 'z', 'a', 'x', 'b', 'y']
     expect(filterWithWhitelist(list, ['a', 'b', 'c'])).toEqual(['a', 'b', 'c', 'a', 'b'])
   })
@@ -220,11 +220,11 @@ describe('formatDates', () => {
     expect(formatDates(start, endNextYear)).toBe('January 1, 2020 - January 1, 2021')
   })
 
-  it('factor out the year when years are equal', () => {
+  it('factors out the year when years are equal', () => {
     expect(formatDates(start, endNextMonth)).toBe('January 1 - February 1, 2020')
   })
 
-  it('factour out year and month when the event falls into the same month', () => {
+  it('factors out year and month when the event falls into the same month', () => {
     expect(formatDates(start, endNextDay)).toBe('January 1-2, 2020')
   })
 })

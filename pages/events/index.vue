@@ -67,7 +67,7 @@
           <EventCard
             v-for="event in filteredEvents"
             :key="`${event.place}-${event.date}`"
-            :type="formatType(event.type)"
+            :type="formatType(event.types)"
             :title="event.title"
             :image="event.image"
             :place="event.place"

@@ -43,7 +43,7 @@ async function fetchCommunityEvents (apiKey: string, { days }): Promise<Communit
 function convertToCommunityEvent (record: any): CommunityEvent {
   return {
     title: getName(record),
-    type: getType(record),
+    types: getTypes(record),
     image: getImage(record),
     place: getPlace(record),
     location: getLocation(record),
@@ -56,12 +56,12 @@ function getName (record: any): string {
   return record.get(RECORD_FIELDS.name)
 }
 
-function getType (record: any): CommunityEventType[] {
+function getTypes (record: any): CommunityEventType[] {
   const value = record.get(RECORD_FIELDS.typeOfEvent) || []
   const valueList = (Array.isArray(value) ? value : [value]) as string[]
   const communityEventTypes = filterWithWhitelist(valueList, TYPE_CATEGORIES)
-  const isEmpty = communityEventTypes.length === 0
-  return isEmpty ? ['Conference'] : communityEventTypes
+  const noTypes = communityEventTypes.length === 0
+  return noTypes ? ['Conference'] : communityEventTypes
 }
 
 function filterWithWhitelist<W> (list: any[], whitelist: W[]): W[] {
@@ -151,7 +151,7 @@ export {
   fetchCommunityEvents,
   convertToCommunityEvent,
   getName,
-  getType,
+  getTypes,
   getImage,
   getPlace,
   getLocation,

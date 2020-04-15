@@ -3,7 +3,7 @@ type WorldLocation = 'Americas'|'Asia Pacific'|'Europe'|'Africa'|'TBD'|'Online'
 type CommunityEventType = 'Hackathon'|'Camp'|'Unconference'|'Conference'
 
 type CommunityEvent = {
-  type: CommunityEventType[],
+  types: CommunityEventType[],
   title: string,
   image: string,
   place: string,
@@ -55,7 +55,7 @@ export default {
 
       if (noTypeFilters && noLocationFilters) { return events }
 
-      const eventsAfterApplyTypeFilter = filterBy(events, typeFilters, 'type')
+      const eventsAfterApplyTypeFilter = filterBy(events, typeFilters, 'types')
 
       return filterBy(eventsAfterApplyTypeFilter, locationFilters, 'location')
 
