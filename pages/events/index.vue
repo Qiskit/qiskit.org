@@ -53,12 +53,12 @@
             <client-only>
               <cv-checkbox
                 v-for="type in types"
-                :key="type.value"
-                :value="type.value"
-                :label="type.label"
-                :checked="isFilterChecked('typeFilters', type.label)"
-                :aria-checked="`${isFilterChecked('typeFilters', type.label)}`"
-                @change="updateFilter('typeFilters', type.label, $event)"
+                :key="type"
+                :value="type"
+                :label="type"
+                :checked="isFilterChecked('typeFilters', type)"
+                :aria-checked="`${isFilterChecked('typeFilters', type)}`"
+                @change="updateFilter('typeFilters', type, $event)"
               />
             </client-only>
           </fieldset>
@@ -90,8 +90,11 @@ import { mapGetters, mapActions } from 'vuex'
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/qiskit/QiskitPage.vue'
 import EventCard from '~/components/cards/EventCard.vue'
-import { ORDERED_TYPE_FILTERS, Filter } from '~/constants/filters'
-import { CommunityEvent, LOCATION_CATEGORIES } from '~/store/modules/events.ts'
+import {
+  CommunityEvent,
+  LOCATION_CATEGORIES,
+  TYPE_CATEGORIES
+} from '~/store/modules/events.ts'
 
 @Component({
   layout: 'carbon',
@@ -133,7 +136,7 @@ import { CommunityEvent, LOCATION_CATEGORIES } from '~/store/modules/events.ts'
 
 export default class extends QiskitPage {
   locations = LOCATION_CATEGORIES
-  types: Array<Filter> = ORDERED_TYPE_FILTERS
+  types = TYPE_CATEGORIES
   routeName: string = 'events'
   windowWidth: Number = 0
 

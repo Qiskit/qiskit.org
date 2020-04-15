@@ -5,6 +5,7 @@ import {
   CommunityEvent,
   CommunityEventType,
   WorldLocation,
+  COMMUNITY_EVENT_TYPES,
   LOCATION_CATEGORIES,
   TYPE_CATEGORIES
 } from '../store/modules/events'
@@ -61,7 +62,7 @@ function getTypes (record: any): CommunityEventType[] {
   const valueList = (Array.isArray(value) ? value : [value]) as string[]
   const communityEventTypes = filterWithWhitelist(valueList, TYPE_CATEGORIES)
   const noTypes = communityEventTypes.length === 0
-  return noTypes ? ['Conference'] : communityEventTypes
+  return noTypes ? [COMMUNITY_EVENT_TYPES.talks] : communityEventTypes
 }
 
 function filterWithWhitelist<W> (list: any[], whitelist: W[]): W[] {
