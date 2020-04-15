@@ -33,7 +33,7 @@
 - Randomized Benchmarking
 - Measuring Quantum Volume
 ### Chapter 6. Investigating Quantum Hardware Using Microwave Pulses
-- Calibrating Qubits with OpenPulse
+- Calibrating Qubits with Qiskit Pulse
 - Accessing Higher Energy States
-### Chapter 7. Demos
-- Estimating Pi Using Quantum Phase Estimation Algorithm
+### Chapter 7. Problem Sets & Exercises
+### Chapter 8. Games & Demos
