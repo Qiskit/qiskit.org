@@ -92,8 +92,8 @@ import QiskitPage from '~/components/qiskit/QiskitPage.vue'
 import EventCard from '~/components/cards/EventCard.vue'
 import {
   CommunityEvent,
-  LOCATION_CATEGORIES,
-  TYPE_CATEGORIES
+  WORLD_LOCATION_OPTIONS,
+  TYPE_OPTIONS
 } from '~/store/modules/events.ts'
 
 @Component({
@@ -135,8 +135,8 @@ import {
 })
 
 export default class extends QiskitPage {
-  locations = LOCATION_CATEGORIES
-  types = TYPE_CATEGORIES
+  locations = WORLD_LOCATION_OPTIONS
+  types = TYPE_OPTIONS
   routeName: string = 'events'
   windowWidth: Number = 0
 

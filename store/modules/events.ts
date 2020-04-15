@@ -1,6 +1,24 @@
+const COMMUNITY_EVENT_TYPES = Object.freeze({
+  hackathon: 'Hackathon',
+  camp: 'Camp',
+  unconference: 'Unconference',
+  industryEvent: 'Industry Event',
+  workshop: 'Workshop',
+  talks: 'Talks',
+  virtualEvent: 'Virtual Event'
+} as const)
+
+const WORLD_LOCATIONS = Object.freeze({
+  americas: 'Americas',
+  asiaPacific: 'Asia Pacific',
+  europe: 'Europe',
+  africa: 'Africa',
+  online: 'Online'
+} as const)
+
 type CommunityEventSet = 'past'|'upcoming'
-type WorldLocation = 'Americas'|'Asia Pacific'|'Europe'|'Africa'|'TBD'|'Online'
-type CommunityEventType = 'Hackathon'|'Camp'|'Unconference'|'Industry Event'|'Workshop'|'Talks'|'Virtual Event'
+type WorldLocation = typeof WORLD_LOCATIONS[keyof typeof WORLD_LOCATIONS]
+type CommunityEventType = typeof COMMUNITY_EVENT_TYPES[keyof typeof COMMUNITY_EVENT_TYPES]
 
 type CommunityEvent = {
   types: CommunityEventType[],
@@ -12,22 +30,14 @@ type CommunityEvent = {
   to: string
 }
 
-type CommunityEventTypes = {
-  [key: string]: CommunityEventType
-}
-
-const COMMUNITY_EVENT_TYPES: CommunityEventTypes = {
-  hackathon: 'Hackathon',
-  camp: 'Camp',
-  unconference: 'Unconference',
-  industryEvent: 'Industry Event',
-  workshop: 'Workshop',
-  talks: 'Talks',
-  virtualEvent: 'Virtual Event'
-}
-
-const LOCATION_CATEGORIES: WorldLocation[] = ['Americas', 'Asia Pacific', 'Europe', 'Africa', 'Online']
-const TYPE_CATEGORIES: CommunityEventType[] = [
+const WORLD_LOCATION_OPTIONS: WorldLocation[] = [
+  WORLD_LOCATIONS.americas,
+  WORLD_LOCATIONS.asiaPacific,
+  WORLD_LOCATIONS.europe,
+  WORLD_LOCATIONS.africa,
+  WORLD_LOCATIONS.online
+]
+const TYPE_OPTIONS: CommunityEventType[] = [
   COMMUNITY_EVENT_TYPES.hackathon,
   COMMUNITY_EVENT_TYPES.camp,
   COMMUNITY_EVENT_TYPES.unconference,
@@ -41,9 +51,9 @@ export {
   CommunityEvent,
   CommunityEventType,
   WorldLocation,
-  LOCATION_CATEGORIES,
-  TYPE_CATEGORIES,
-  COMMUNITY_EVENT_TYPES
+  COMMUNITY_EVENT_TYPES,
+  WORLD_LOCATION_OPTIONS,
+  TYPE_OPTIONS
 }
 
 export default {
