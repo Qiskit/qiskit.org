@@ -65,7 +65,7 @@ function getTypes (record: any): CommunityEventType[] {
   return noTypes ? [COMMUNITY_EVENT_TYPES.talks] : communityEventTypes
 }
 
-function filterWithWhitelist<W> (list: any[], whitelist: W[]): W[] {
+function filterWithWhitelist<W> (list: any[], whitelist: readonly W[]): W[] {
   return list.filter((type): type is W => whitelist.includes(type))
 }
 
@@ -102,7 +102,7 @@ function getPlace (record: any) {
 }
 
 function getLocation (_record: any): WorldLocation {
-  const options: WorldLocation[] = WORLD_LOCATION_OPTIONS
+  const options = WORLD_LOCATION_OPTIONS
   return options[Math.floor(Math.random() * options.length)]
 }
 

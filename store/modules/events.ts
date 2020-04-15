@@ -5,15 +5,14 @@ const COMMUNITY_EVENT_TYPES = Object.freeze({
   industryEvent: 'Industry Event',
   workshop: 'Workshop',
   talks: 'Talks',
-  virtualEvent: 'Virtual Event'
+  online: 'Online'
 } as const)
 
 const WORLD_LOCATIONS = Object.freeze({
   americas: 'Americas',
   asiaPacific: 'Asia Pacific',
   europe: 'Europe',
-  africa: 'Africa',
-  online: 'Online'
+  africa: 'Africa'
 } as const)
 
 type CommunityEventSet = 'past'|'upcoming'
@@ -30,22 +29,21 @@ type CommunityEvent = {
   to: string
 }
 
-const WORLD_LOCATION_OPTIONS: WorldLocation[] = [
+const WORLD_LOCATION_OPTIONS = Object.freeze([
   WORLD_LOCATIONS.americas,
   WORLD_LOCATIONS.asiaPacific,
   WORLD_LOCATIONS.europe,
-  WORLD_LOCATIONS.africa,
-  WORLD_LOCATIONS.online
-]
-const COMMUNITY_EVENT_TYPE_OPTIONS: CommunityEventType[] = [
+  WORLD_LOCATIONS.africa
+])
+const COMMUNITY_EVENT_TYPE_OPTIONS = Object.freeze([
   COMMUNITY_EVENT_TYPES.hackathon,
   COMMUNITY_EVENT_TYPES.camp,
   COMMUNITY_EVENT_TYPES.unconference,
   COMMUNITY_EVENT_TYPES.industryEvent,
   COMMUNITY_EVENT_TYPES.workshop,
   COMMUNITY_EVENT_TYPES.talks,
-  COMMUNITY_EVENT_TYPES.virtualEvent
-]
+  COMMUNITY_EVENT_TYPES.online
+])
 
 export {
   CommunityEvent,
