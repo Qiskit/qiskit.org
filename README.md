@@ -47,14 +47,16 @@
 
 ## What’s In This Document
 
-- [Live](#%EF%B8%8F-live)
-- [Technology Used](#-technology-used)
-- [Get Up and Running](#-get-up-and-running)
-- [Folder Structure](#-folder-structure)
-- [How to Contribute](#%EF%B8%8F-how-to-contribute)
-- [Available Scripts](#-available-scripts)
-- [Open Backlog](#-open-backlog)
-- [Maintainers](#-maintainers)
+- [What’s In This Document](#whats-in-this-document)
+- [⚡️ Live](#%e2%9a%a1%ef%b8%8f-live)
+- [💻 Technology Used](#%f0%9f%92%bb-technology-used)
+- [🚀 Get Up and Running](#%f0%9f%9a%80-get-up-and-running)
+- [🏭 Content Generation](#%f0%9f%9a%80-content-generation)
+- [🧐 Folder Structure](#%f0%9f%a7%90-folder-structure)
+- [✏️ How to Contribute](#%e2%9c%8f%ef%b8%8f-how-to-contribute)
+- [🛠 Available Scripts](#%f0%9f%9b%a0-available-scripts)
+- [🗓 Open backlog](#%f0%9f%97%93-open-backlog)
+- [👩‍💻 Maintainers](#%f0%9f%91%a9%e2%80%8d%f0%9f%92%bb-maintainers)
 
 ## ⚡️ Live
 [Go to Qiskit.org's website](https://qiskit.org/)
@@ -98,6 +100,19 @@ With this technology we want to **achieve**:
     ```shell
     npm run dev
     ```
+## 🏭 Content Generation
+
+qiskit.org integrates with the tools used by the IBM Quantum Community Team and generate some content based on 3rd party APIs such as Airtable. Part of this content is prefetched during building time. While developing, it is disabled by default. If you want enable content generation, you must set the environment variable `GENERATE_CONTENT`. For instance:
+
+```shell
+GENERATE_CONTENT=1 npm run dev
+```
+
+Notice that, for communicating with the team tools, API keys may be required. It is the case of dealing with Airtable for the generation of the event index. If you think you should have access to these tables, talk to the Event Squad in the Community Team, get your developer API key and set the `AIRTABLE_API_KEY` environment variable to this value:
+
+```shell
+GENERATE_CONTENT=1 AIRTABLE_API_KEY=<your airtable api key> npm run dev
+```
 
 ## 🧐 Folder Structure
 
