@@ -37,7 +37,7 @@ const WORLD_LOCATION_OPTIONS: WorldLocation[] = [
   WORLD_LOCATIONS.africa,
   WORLD_LOCATIONS.online
 ]
-const TYPE_OPTIONS: CommunityEventType[] = [
+const COMMUNITY_EVENT_TYPE_OPTIONS: CommunityEventType[] = [
   COMMUNITY_EVENT_TYPES.hackathon,
   COMMUNITY_EVENT_TYPES.camp,
   COMMUNITY_EVENT_TYPES.unconference,
@@ -53,7 +53,7 @@ export {
   WorldLocation,
   COMMUNITY_EVENT_TYPES,
   WORLD_LOCATION_OPTIONS,
-  TYPE_OPTIONS
+  COMMUNITY_EVENT_TYPE_OPTIONS
 }
 
 export default {

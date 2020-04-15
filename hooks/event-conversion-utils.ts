@@ -7,7 +7,7 @@ import {
   WorldLocation,
   COMMUNITY_EVENT_TYPES,
   WORLD_LOCATION_OPTIONS,
-  TYPE_OPTIONS
+  COMMUNITY_EVENT_TYPE_OPTIONS
 } from '../store/modules/events'
 
 const RECORD_FIELDS = {
@@ -60,7 +60,7 @@ function getName (record: any): string {
 function getTypes (record: any): CommunityEventType[] {
   const value = record.get(RECORD_FIELDS.typeOfEvent) || []
   const valueList = (Array.isArray(value) ? value : [value]) as string[]
-  const communityEventTypes = filterWithWhitelist(valueList, TYPE_OPTIONS)
+  const communityEventTypes = filterWithWhitelist(valueList, COMMUNITY_EVENT_TYPE_OPTIONS)
   const noTypes = communityEventTypes.length === 0
   return noTypes ? [COMMUNITY_EVENT_TYPES.talks] : communityEventTypes
 }
