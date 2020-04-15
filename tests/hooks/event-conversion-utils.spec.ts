@@ -8,6 +8,8 @@ import {
   getImage
 } from '~/hooks/event-conversion-utils'
 
+import { COMMUNITY_EVENT_TYPES } from '~/store/modules/events'
+
 type RecordFields = {
   name: string,
   picture?: object[],
@@ -39,9 +41,10 @@ class FakeRecord {
 }
 
 describe('convertToCommunityEvent', () => {
+  const { hackathon } = COMMUNITY_EVENT_TYPES
   const fakeRecord = new FakeRecord({
     name: 'Fake conference',
-    types: ['Hackathon'],
+    types: [hackathon],
     location: 'Someplace',
     startDate: '2020-01-01',
     endDate: '2020-01-02',
@@ -49,11 +52,11 @@ describe('convertToCommunityEvent', () => {
   })
 
   it('extracts and format information from the record', () => {
-    // TODO: Now ignoring image and location since they are random. Add them once implemented.
+    const { hackathon } = COMMUNITY_EVENT_TYPES
     const { title, types, place, date, to } = convertToCommunityEvent(fakeRecord)
     expect({ title, types, place, date, to }).toEqual({
       title: 'Fake conference',
-      types: ['Hackathon'],
+      types: [hackathon],
       place: 'Someplace',
       date: 'January 1-2, 2020',
       to: 'https://qiskit.org/events'
@@ -62,35 +65,39 @@ describe('convertToCommunityEvent', () => {
 })
 
 describe('getType', () => {
-  it('filters the values so only those in the whitelist gets into the event', () => {
+  it('filters the values so only those recognized by qiskit.org get into the event', () => {
+    const { hackathon } = COMMUNITY_EVENT_TYPES
     const camp = new FakeRecord({
       name: 'Fake Camp',
-      types: ['Hackathon', 'Community', 'Unknown']
+      types: [hackathon, 'Unknown1', 'Unknown2']
     })
-    expect(getTypes(camp)).toEqual(['Hackathon'])
+    expect(getTypes(camp)).toEqual([hackathon])
   })
 
-  it('gets the default type if there is no type', () => {
+  it('gets Talks type if there is no type', () => {
+    const { talks } = COMMUNITY_EVENT_TYPES
     const camp = new FakeRecord({
       name: 'Fake Camp'
     })
-    expect(getTypes(camp)).toEqual(['Conference'])
+    expect(getTypes(camp)).toEqual([talks])
   })
 
-  it('gets the default type if no type is in the whitelist', () => {
+  it('gets Talks type if no type is recognized by qiskit.org', () => {
+    const { talks } = COMMUNITY_EVENT_TYPES
     const camp = new FakeRecord({
       name: 'Fake Camp',
       types: ['A', 'B', 'C']
     })
-    expect(getTypes(camp)).toEqual(['Conference'])
+    expect(getTypes(camp)).toEqual([talks])
   })
 
-  it('gets an array of one value if the type is not an array but one value', () => {
+  it('gets an array of one value if types is not an array but a single value', () => {
+    const { hackathon } = COMMUNITY_EVENT_TYPES
     const camp = new FakeRecord({
       name: 'Fake Conference',
-      types: 'Hackathon'
+      types: hackathon
     })
-    expect(getTypes(camp)).toEqual(['Hackathon'])
+    expect(getTypes(camp)).toEqual([hackathon])
   })
 })
 
@@ -164,32 +171,32 @@ describe('getDates', () => {
   it('returns date objects if both dates exists', () => {
     const expectedStartDate = new Date('2020-01-01')
     const expectedEndDate = new Date('2020-01-02')
-    const event = new FakeRecord({
+    const FakeEvent = new FakeRecord({
       name: 'Fake Conference',
       startDate: '2020-01-01',
       endDate: '2020-01-02'
     })
-    const [startDate, endDate] = getDates(event)
+    const [startDate, endDate] = getDates(FakeEvent)
     expect(startDate).toEqual(expectedStartDate)
     expect(endDate).toEqual(expectedEndDate)
   })
 
   it('returns undefined if the start date is missing', () => {
-    const event = new FakeRecord({
-      name: 'Fake Conference',
+    const FakeEvent = new FakeRecord({
+      name: 'Fake Unconference',
       endDate: '2020-01-01'
     })
-    const [startDate, endDate] = getDates(event)
+    const [startDate, endDate] = getDates(FakeEvent)
     expect(endDate).toBeInstanceOf(Date)
     expect(startDate).toBeUndefined()
   })
 
   it('returns undefined if the end date is missing', () => {
-    const event = new FakeRecord({
-      name: 'Fake Conference',
+    const FakeEvent = new FakeRecord({
+      name: 'Fake Unconference',
       startDate: '2020-01-01'
     })
-    const [startDate, endDate] = getDates(event)
+    const [startDate, endDate] = getDates(FakeEvent)
     expect(startDate).toBeInstanceOf(Date)
     expect(endDate).toBeUndefined()
   })
