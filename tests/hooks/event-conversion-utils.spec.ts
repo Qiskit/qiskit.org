@@ -1,8 +1,9 @@
 import {
   RECORD_FIELDS,
   formatDates,
+  filterWithWhitelist,
   convertToCommunityEvent,
-  getType,
+  getTypes,
   getDates,
   getImage
 } from '~/hooks/event-conversion-utils'
@@ -10,7 +11,7 @@ import {
 type RecordFields = {
   name: string,
   picture?: object[],
-  types?: string[],
+  types?: string[]|string,
   location?: string,
   startDate?: string,
   endDate?: string,
@@ -47,12 +48,12 @@ describe('convertToCommunityEvent', () => {
     website: 'https://qiskit.org/events'
   })
 
-  it('extract and format information from the record', () => {
+  it('extracts and format information from the record', () => {
     // TODO: Now ignoring image and location since they are random. Add them once implemented.
-    const { title, type, place, date, to } = convertToCommunityEvent(fakeRecord)
-    expect({ title, type, place, date, to }).toEqual({
+    const { title, types, place, date, to } = convertToCommunityEvent(fakeRecord)
+    expect({ title, types, place, date, to }).toEqual({
       title: 'Fake conference',
-      type: 'Hackathon',
+      types: ['Hackathon'],
       place: 'Someplace',
       date: 'January 1-2, 2020',
       to: 'https://qiskit.org/events'
@@ -61,59 +62,42 @@ describe('convertToCommunityEvent', () => {
 })
 
 describe('getType', () => {
-  it('checks the name contains the "qiskit camp" pattern regardless the capitalization', () => {
+  it('filters the values so only those in the whitelist gets into the event', () => {
     const camp = new FakeRecord({
-      name: 'qisKit CamP Oceania',
-      types: ['Hackathon', 'Community']
+      name: 'Fake Camp',
+      types: ['Hackathon', 'Community', 'Unknown']
     })
-    expect(getType(camp)).toBe('Camp')
+    expect(getTypes(camp)).toEqual(['Hackathon'])
   })
 
-  it('defaults in "Conference" if there is no type', () => {
+  it('gets the default type if there is no type', () => {
     const camp = new FakeRecord({
-      name: 'Fake Conference'
+      name: 'Fake Camp'
     })
-    expect(getType(camp)).toBe('Conference')
+    expect(getTypes(camp)).toEqual(['Conference'])
   })
 
-  it('defaults in "Conference" if cannot infer the type', () => {
+  it('gets the default type if no type is in the whitelist', () => {
+    const camp = new FakeRecord({
+      name: 'Fake Camp',
+      types: ['A', 'B', 'C']
+    })
+    expect(getTypes(camp)).toEqual(['Conference'])
+  })
+
+  it('gets an array of one value if the type is not an array but one value', () => {
     const camp = new FakeRecord({
       name: 'Fake Conference',
-      types: ['xxxx', 'yyyy']
+      types: 'Hackathon'
     })
-    expect(getType(camp)).toBe('Conference')
+    expect(getTypes(camp)).toEqual(['Hackathon'])
   })
+})
 
-  it('infers "Hackathon" if "Hackathon" is among the tags', () => {
-    const camp = new FakeRecord({
-      name: 'Fake Conference',
-      types: ['Hackathon', 'Education']
-    })
-    expect(getType(camp)).toBe('Hackathon')
-  })
-
-  it('infers "Unconference" if "Unconference" is among the types', () => {
-    const event = new FakeRecord({
-      name: 'Fake Conference',
-      types: ['Unconference', 'Education']
-    })
-    expect(getType(event)).toBe('Unconference')
-  })
-
-  it('gives "Hackathon" preference over "Unconference"', () => {
-    const event = new FakeRecord({
-      name: 'Fake Conference',
-      types: ['Hackathon', 'Unconference']
-    })
-    expect(getType(event)).toBe('Hackathon')
-  })
-
-  it('gives "Camp" preference over "Hackathon"', () => {
-    const event = new FakeRecord({
-      name: 'Qiskit Camp Oceania',
-      types: ['Hackathon', 'Unconference']
-    })
-    expect(getType(event)).toBe('Camp')
+describe('filterByWhitelist', () => {
+  it('creates a new list, from an input one, only with the values in a whitelist', () => {
+    const list = ['a', 'x', 'b', 'y', 'c', 'z', 'a', 'x', 'b', 'y']
+    expect(filterWithWhitelist(list, ['a', 'b', 'c'])).toEqual(['a', 'b', 'c', 'a', 'b'])
   })
 })
 
@@ -236,11 +220,11 @@ describe('formatDates', () => {
     expect(formatDates(start, endNextYear)).toBe('January 1, 2020 - January 1, 2021')
   })
 
-  it('factor out the year when years are equal', () => {
+  it('factors out the year when years are equal', () => {
     expect(formatDates(start, endNextMonth)).toBe('January 1 - February 1, 2020')
   })
 
-  it('factour out year and month when the event falls into the same month', () => {
+  it('factors out year and month when the event falls into the same month', () => {
     expect(formatDates(start, endNextDay)).toBe('January 1-2, 2020')
   })
 })

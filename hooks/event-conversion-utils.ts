@@ -5,7 +5,8 @@ import {
   CommunityEvent,
   CommunityEventType,
   WorldLocation,
-  LOCATION_CATEGORIES
+  LOCATION_CATEGORIES,
+  TYPE_CATEGORIES
 } from '../store/modules/events'
 
 const RECORD_FIELDS = {
@@ -42,7 +43,7 @@ async function fetchCommunityEvents (apiKey: string, { days }): Promise<Communit
 function convertToCommunityEvent (record: any): CommunityEvent {
   return {
     title: getName(record),
-    type: getType(record),
+    types: getTypes(record),
     image: getImage(record),
     place: getPlace(record),
     location: getLocation(record),
@@ -55,17 +56,16 @@ function getName (record: any): string {
   return record.get(RECORD_FIELDS.name)
 }
 
-function getType (record: any): CommunityEventType {
-  if (record.get(RECORD_FIELDS.name).toLowerCase().includes('qiskit camp')) {
-    return 'Camp'
-  }
-  if ((record.get(RECORD_FIELDS.typeOfEvent) || []).includes('Hackathon')) {
-    return 'Hackathon'
-  }
-  if ((record.get(RECORD_FIELDS.typeOfEvent) || []).includes('Unconference')) {
-    return 'Unconference'
-  }
-  return 'Conference'
+function getTypes (record: any): CommunityEventType[] {
+  const value = record.get(RECORD_FIELDS.typeOfEvent) || []
+  const valueList = (Array.isArray(value) ? value : [value]) as string[]
+  const communityEventTypes = filterWithWhitelist(valueList, TYPE_CATEGORIES)
+  const noTypes = communityEventTypes.length === 0
+  return noTypes ? ['Conference'] : communityEventTypes
+}
+
+function filterWithWhitelist<W> (list: any[], whitelist: W[]): W[] {
+  return list.filter((type): type is W => whitelist.includes(type))
 }
 
 function getImage (record: any): string {
@@ -151,11 +151,12 @@ export {
   fetchCommunityEvents,
   convertToCommunityEvent,
   getName,
-  getType,
+  getTypes,
   getImage,
   getPlace,
   getLocation,
   getWebsite,
   getDates,
-  formatDates
+  formatDates,
+  filterWithWhitelist
 }
