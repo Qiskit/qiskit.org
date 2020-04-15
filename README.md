@@ -48,15 +48,15 @@
 ## What’s In This Document
 
 - [What’s In This Document](#whats-in-this-document)
-- [⚡️ Live](#%e2%9a%a1%ef%b8%8f-live)
-- [💻 Technology Used](#%f0%9f%92%bb-technology-used)
-- [🚀 Get Up and Running](#%f0%9f%9a%80-get-up-and-running)
-- [🏭 Content Generation](#%f0%9f%9a%80-content-generation)
-- [🧐 Folder Structure](#%f0%9f%a7%90-folder-structure)
-- [✏️ How to Contribute](#%e2%9c%8f%ef%b8%8f-how-to-contribute)
-- [🛠 Available Scripts](#%f0%9f%9b%a0-available-scripts)
-- [🗓 Open backlog](#%f0%9f%97%93-open-backlog)
-- [👩‍💻 Maintainers](#%f0%9f%91%a9%e2%80%8d%f0%9f%92%bb-maintainers)
+- [⚡️ Live](#-live)
+- [💻 Technology Used](#-technology-used)
+- [🚀 Get Up and Running](#-get-up-and-running)
+- [🏭 Content Generation](#-content-generation)
+- [🧐 Folder Structure](#-folder-structure)
+- [✏️ How to Contribute](#f-how-to-contribute)
+- [🛠 Available Scripts](#-available-scripts)
+- [🗓 Open backlog](#-open-backlog)
+- [👩‍💻 Maintainers](#-maintainers)
 
 ## ⚡️ Live
 [Go to Qiskit.org's website](https://qiskit.org/)
