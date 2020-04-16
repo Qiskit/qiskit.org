@@ -18,14 +18,14 @@
         <footer>
           <div class="event-card__info-detail">
             <Map20 class="event-card__icon" />
-            <span class="event-card__place">{{ place }}</span>
+            <span class="event-card__location">{{ location }}</span>
           </div>
           <div class="event-card__date-and-arrow">
             <div class="event-card__info-detail">
               <Calendar20 class="event-card__icon" />
               <span class="event-card__date"><time>{{ date }}</time></span>
             </div>
-            <ArrowRight20 v-if="hasWebsite" class="event-card__icon event-card__icon--purple"/>
+            <ArrowRight20 v-if="hasWebsite" class="event-card__icon event-card__icon--purple" />
           </div>
         </footer>
       </div>
@@ -47,7 +47,7 @@ export default class extends Vue {
   @Prop(String) type
   @Prop(String) title
   @Prop(String) image
-  @Prop(String) place
+  @Prop(String) location
   @Prop(String) date
   @Prop(String) to
 
@@ -88,11 +88,11 @@ export default class extends Vue {
     @include type-style('productive-heading-02');
   }
 
-  &__place, &__date {
+  &__location, &__date {
     @include type-style('body-short-01');
   }
 
-  &__place, &__date {
+  &__location, &__date {
     padding-left: 0.31rem;
   }
 

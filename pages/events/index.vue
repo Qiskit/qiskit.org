@@ -32,17 +32,17 @@
         <div class="event-page__filters-checkboxes">
           <fieldset class="bx--fieldset">
             <legend class="bx--label">
-              Location
+              Region
             </legend>
             <client-only>
               <cv-checkbox
-                v-for="location in locations"
-                :key="location"
-                :value="location"
-                :label="location"
-                :checked="isFilterChecked('locationFilters', location)"
-                :aria-checked="`${isFilterChecked('locationFilters', location)}`"
-                @change="updateFilter('locationFilters', location, $event)"
+                v-for="region in regions"
+                :key="region"
+                :value="region"
+                :label="region"
+                :checked="isFilterChecked('regionFilters', region)"
+                :aria-checked="`${isFilterChecked('regionFilters', region)}`"
+                @change="updateFilter('regionFilters', region, $event)"
               />
             </client-only>
           </fieldset>
@@ -70,7 +70,7 @@
             :type="formatType(event.types)"
             :title="event.title"
             :image="event.image"
-            :place="event.place"
+            :location="event.location"
             :date="event.date"
             :to="event.to"
           />
@@ -92,7 +92,7 @@ import QiskitPage from '~/components/qiskit/QiskitPage.vue'
 import EventCard from '~/components/cards/EventCard.vue'
 import {
   CommunityEvent,
-  WORLD_LOCATION_OPTIONS,
+  WORLD_REGION_OPTIONS,
   COMMUNITY_EVENT_TYPE_OPTIONS
 } from '~/store/modules/events.ts'
 
@@ -113,7 +113,7 @@ import {
     ...mapGetters([
       'filteredEvents',
       'typeFilters',
-      'locationFilters'
+      'regionFilters'
     ])
   },
 
@@ -135,7 +135,7 @@ import {
 })
 
 export default class extends QiskitPage {
-  locations = WORLD_LOCATION_OPTIONS
+  regions = WORLD_REGION_OPTIONS
   types = COMMUNITY_EVENT_TYPE_OPTIONS
   routeName: string = 'events'
   windowWidth: Number = 0
@@ -169,10 +169,10 @@ export default class extends QiskitPage {
 
   isFilterChecked (filter: string, filterValue: string): Array<CommunityEvent> {
     const typeFilters = (this as any).typeFilters
-    const locationFilters = (this as any).locationFilters
+    const regionFilters = (this as any).regionFilters
 
-    return filter === 'locationFilters'
-      ? locationFilters.includes(filterValue)
+    return filter === 'regionFilters'
+      ? regionFilters.includes(filterValue)
       : typeFilters.includes(filterValue)
   }
 
