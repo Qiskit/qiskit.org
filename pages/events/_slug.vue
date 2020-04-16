@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="event-page">
     <Menu>
       <li
         v-for="link in event.attributes.nav"
@@ -54,7 +54,10 @@ function getBackgroundUris (background: string): [string, string] {
     const self = this as any
 
     return {
-      title: self.title
+      title: self.title,
+      bodyAttrs: {
+        id: 'event-body'
+      }
     }
   },
   async asyncData (context: Context) {
@@ -79,76 +82,7 @@ export default class extends QiskitPage {
 }
 </script>
 
-<style>
-@font-face {
-  font-family: 'IBM Plex Mono';
-  font-style: normal;
-  font-weight: 400;
-  src: local("IBM Plex Mono"), local("IBMPlexMono"), url("/fonts/IBM-Plex-Mono/fonts/complete/woff/IBMPlexMono-Regular.woff") format("woff");
-}
-
-@font-face {
-  font-family: 'IBM Plex Mono';
-  font-style: italic;
-  font-weight: 400;
-  src: local("IBM Plex Mono Italic"), local("IBMPlexMono-Italic"), url("/fonts/IBM-Plex-Mono/fonts/complete/woff/IBMPlexMono-Italic.woff") format("woff");
-}
-
-@font-face {
-  font-family: 'IBM Plex Sans';
-  font-style: normal;
-  font-weight: 400;
-  src: local("IBM Plex Sans"), local("IBMPlexSans"), url("/fonts/IBM-Plex-Sans/fonts/complete/woff/IBMPlexSans-Regular.woff") format("woff");
-}
-
-:root {
-  --secondary-color: rgb(138, 63, 252);
-  --dark-color: rgb(33, 37, 43);
-}
-
-* {
-  margin: 0;
-  padding: 0;
-}
-
-ul {
-  margin: 1rem 0 1rem 3rem;
-}
-
-a {
-  text-decoration: none;
-  color: #4A90E2;
-}
-
-a:hover {
-  opacity: 0.6;
-}
-
-html {
-  font-family: 'IBM Plex Sans', sans-serif;
-  /* min-fs + (max-fs - min-fs) * ((viewport-width - min-vw) / (max-vw - min-vw)) */
-  font-size: calc(10px + (18 - 10) * ((900px - 340px) / (900 - 340)));
-  background-image: url('/images/events/deco/dots.svg'), url('/images/events/deco/dots.svg'), url('/images/events/deco/dots.svg'),
-    url('/images/events/deco/lines.svg'), url('/images/events/deco/lines.svg'), url('/images/events/deco/lines.svg');
-  background-repeat: repeat-x, repeat-x, repeat-x, repeat-y, repeat-y, repeat-y;
-  background-position: top calc(100vh + 890px) left 0, top calc(100vh + 930px) left 0, top calc(100vh + 970px) left 0,
-    top 0 right 100px, top 0 right 0, top 0 right -100px;
-}
-
-h2::before {
-  content: "";
-  float: left;
-  width: 5%;
-  margin-top: 0.5rem;
-  margin-right: 5%;
-  border-top: 1px solid #0A1D8F;
-}
-
-h2 {
-  margin: 2rem 0 2.5rem;
-  color: #0A1D8F;
-}
-
+<style scoped>
 header {
   position: relative;
   height: 100vh;
@@ -238,102 +172,6 @@ header .headlines {
   }
 }
 
-main .cta {
-  border-color: black;
-}
-
-main > :not(h2):not(iframe):not(table) {
-  margin-left: 10%;
-  margin-right: 1.5rem;
-  line-height: 1.4rem;
-  margin-bottom: 1rem;
-  max-width: 30rem;
-}
-
-main ul {
-  list-style-type: square;
-  padding-left: 2rem;
-  margin-bottom: 2rem;
-}
-
-main ul li {
-  margin: 0.5rem 0;
-}
-
-main .clarification {
-  font-size: 0.7rem;
-  line-height: 1rem;
-}
-
-h2 {
-  padding-top: 4rem;
-  margin: 0 0 2rem;
-  color: #0A1D8F;
-}
-
-h2::before {
-  content: "";
-  float: left;
-  width: 5%;
-  margin-top: 0.5rem;
-  margin-right: 5%;
-  border-top: 1px solid #0A1D8F;
-}
-
-.agenda h2 {
-  margin-bottom: 0.5rem;
-}
-
-.agenda .location {
-  font-weight: bold;
-  padding-left: 10%;
-  margin-bottom: 3rem;
-}
-
-h3 {
-  font-weight: bold;
-  margin-top: 2.5rem;
-  margin-bottom: 1rem;
-}
-
-.agenda h3 {
-  margin-top: 0;
-}
-
-h3 strong {
-  font-weight: bold;
-}
-
-table {
-  margin-left: 10%;
-}
-
-table tr td.time {
-  color: #0A1D8F;
-}
-
-table td {
-  text-align: center;
-  padding: 1.2rem 1.2rem 1rem 0;
-  border-bottom: 1px dotted #0A1D8F;
-}
-
-table tr td:first-child {
-  text-align: left;
-}
-
-td.multislot {
-  vertical-align: top;
-}
-
-.session {
-  margin-bottom: 1rem;
-}
-
-.author {
-  font-style: italic;
-}
-
 @media (max-height: 500px) {
   .headlines {
     font-size: 0.9em;
@@ -358,4 +196,135 @@ td.multislot {
   }
 }
 
+</style>
+
+<style>
+#event-body a {
+  text-decoration: none;
+}
+
+#event-body {
+  background-color: white;
+  background-image: url('/images/events/deco/dots.svg'), url('/images/events/deco/dots.svg'), url('/images/events/deco/dots.svg'),
+    url('/images/events/deco/lines.svg'), url('/images/events/deco/lines.svg'), url('/images/events/deco/lines.svg');
+  background-repeat: repeat-x, repeat-x, repeat-x, repeat-y, repeat-y, repeat-y;
+  background-position: top calc(100vh + 890px) left 0, top calc(100vh + 930px) left 0, top calc(100vh + 970px) left 0,
+    top 0 right 100px, top 0 right 0, top 0 right -100px;
+  color: black;
+}
+
+#event-body h2::before {
+  content: "";
+  float: left;
+  width: 5%;
+  margin-top: 0.5rem;
+  margin-right: 5%;
+  border-top: 1px solid #0A1D8F;
+}
+
+#event-body h2 {
+  margin: 2rem 0 2.5rem;
+  color: #0A1D8F;
+}
+
+#event-body main {
+  background-color: transparent;
+  background-image: none;
+}
+
+#event-body main .cta {
+  border-color: black;
+}
+
+#event-body main > :not(h2):not(iframe):not(table) {
+  margin-left: 10%;
+  margin-right: 1.5rem;
+  line-height: 1.4rem;
+  margin-bottom: 1rem;
+  max-width: 30rem;
+}
+
+#event-body main ul {
+  list-style-type: square;
+  padding-left: 2rem;
+  margin-bottom: 2rem;
+}
+
+#event-body main ul li {
+  margin: 0.5rem 0;
+}
+
+#event-body main .clarification {
+  font-size: 0.7rem;
+  line-height: 1rem;
+}
+
+#event-body h2 {
+  padding-top: 4rem;
+  margin: 0 0 2rem;
+  color: #0A1D8F;
+}
+
+#event-body h2::before {
+  content: "";
+  float: left;
+  width: 5%;
+  margin-top: 0.5rem;
+  margin-right: 5%;
+  border-top: 1px solid #0A1D8F;
+}
+
+#event-body .agenda h2 {
+  margin-bottom: 0.5rem;
+}
+
+#event-body .agenda .location {
+  font-weight: bold;
+  padding-left: 10%;
+  margin-bottom: 3rem;
+}
+
+#event-body h3 {
+  font-weight: bold;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+#event-body .agenda h3 {
+  margin-top: 0;
+}
+
+#event-body h3 strong {
+  font-weight: bold;
+}
+
+#event-body table {
+  margin-left: 10%;
+}
+
+table tr td.time {
+  color: #0A1D8F;
+}
+
+#event-body table td {
+  text-align: center;
+  padding: 1.2rem 1.2rem 1rem 0;
+  border-bottom: 1px dotted #0A1D8F;
+}
+
+#event-body table tr td:first-child {
+  text-align: left;
+}
+
+#event-body td.multislot {
+  vertical-align: top;
+}
+
+#event-body .session {
+  margin-bottom: 1rem;
+}
+
+#event-body .author {
+  font-style: italic;
+}
 </style>

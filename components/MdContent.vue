@@ -22,6 +22,8 @@ export default class extends Vue {
 </script>
 
 <style lang="scss" scoped>
+@import '~carbon-components/scss/globals/scss/typography';
+
 ul, ol {
   list-style-position: inside;
   padding-left: 2rem;
@@ -46,6 +48,7 @@ h3 {
 }
 
 p {
-  text-align: justify;
+  @include type-style('body-long-02');
+  text-align: left;
 }
 </style>

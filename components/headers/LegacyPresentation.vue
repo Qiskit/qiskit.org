@@ -59,14 +59,16 @@ export default class extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '~/assets/scss/mixins.scss';
+@import '~carbon-components/scss/globals/scss/typography';
 
 .legacy-presentation {
   color: var(--legacy-presentation-text-color, white);
-  background-color: var(--legacy-presentation-color, rgb(36, 42, 46));
+  background-color: var(--legacy-presentation-color, $ui-background);
   min-height: 340px;
   display: flex;
   align-items: center;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 
   & > div {
     @include framed();
@@ -83,14 +85,11 @@ export default class extends Vue {
   }
 
   &__title {
-    font-size: 2rem;
-    font-weight: 400;
-    font-family: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
+    @include code-09();
   }
 
   &__description {
-    font-size: 1.2rem;
-    font-weight: 400;
+    @include type-style('productive-heading-04');
     margin: 1.1rem 0;
   }
 
@@ -117,11 +116,8 @@ export default class extends Vue {
   }
 }
 
-@media (max-width: 600px) {
+@include mq($until: medium) {
   .legacy-presentation {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-
     & > div {
       flex-direction: column;
     }

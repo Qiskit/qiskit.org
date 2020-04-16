@@ -47,14 +47,16 @@
 
 ## What’s In This Document
 
-- [Live](#%EF%B8%8F-live)
-- [Technology Used](#-technology-used)
-- [Get Up and Running](#-get-up-and-running)
-- [Folder Structure](#-folder-structure)
-- [How to Contribute](#%EF%B8%8F-how-to-contribute)
-- [Available Scripts](#-available-scripts)
-- [Open Backlog](#-open-backlog)
-- [Maintainers](#-maintainers)
+- [What’s In This Document](#whats-in-this-document)
+- [⚡️ Live](#-live)
+- [💻 Technology Used](#-technology-used)
+- [🚀 Get Up and Running](#-get-up-and-running)
+- [🏭 Content Generation](#-content-generation)
+- [🧐 Folder Structure](#-folder-structure)
+- [✏️ How to Contribute](#f-how-to-contribute)
+- [🛠 Available Scripts](#-available-scripts)
+- [🗓 Open backlog](#-open-backlog)
+- [👩‍💻 Maintainers](#-maintainers)
 
 ## ⚡️ Live
 [Go to Qiskit.org's website](https://qiskit.org/)
@@ -98,6 +100,19 @@ With this technology we want to **achieve**:
     ```shell
     npm run dev
     ```
+## 🏭 Content Generation
+
+qiskit.org integrates with the tools used by the IBM Quantum Community Team and generate some content based on 3rd party APIs such as Airtable. Part of this content is prefetched during building time. While developing, it is disabled by default. If you want enable content generation, you must set the environment variable `GENERATE_CONTENT`. For instance:
+
+```shell
+GENERATE_CONTENT=1 npm run dev
+```
+
+Notice that, for communicating with the team tools, API keys may be required. It is the case of dealing with Airtable for the generation of the event index. If you think you should have access to these tables, talk to the Event Squad in the Community Team, get your developer API key and set the `AIRTABLE_API_KEY` environment variable to this value:
+
+```shell
+GENERATE_CONTENT=1 AIRTABLE_API_KEY=<your airtable api key> npm run dev
+```
 
 ## 🧐 Folder Structure
 
@@ -191,9 +206,7 @@ You can see our backlog [here](https://github.com/Qiskit/qiskit.org/projects/2).
 
 by alphabetical order:
 <table><tr>
-<td align="center"><a href="https://github.com/CatherineKlauss "><img src="https://avatars1.githubusercontent.com/u/50955024?s=460&v=4" width="120px;" alt="Catherine Klauss"/><br /><sub><b>Catherine Klauss</b></sub></a><br /><a href="https://github.com/qiskit/qiskit.org/issues?q=author%3ACatherineKlauss" title="Bug reports">🐛</a><a href="https://join.slack.com/t/qiskit/shared_invite/enQtODQ2NTIyOTgwMTQ3LTI0NzM2NzkzZjJhNDgzZjY5MTQzNDY3MGNiZGQzNTNkZTE4Nzg1MjMwMmFjY2UwZTgyNDlmYWQwYmZjMjE1ZTM" title="Answering Questions on Slack">💬</a></td>
 <td align="center"><a href="https://github.com/lerongil"><img src="https://avatars3.githubusercontent.com/u/9096989?s=460&v=4" width="120px;" alt="Leron Gil"/><br /><sub><b>Leron Gil</b></sub></a><br /><a href="https://github.com/qiskit/qiskit.org/issues?q=author%3Alerongil" title="Bug reports">🐛</a><a href="https://join.slack.com/t/qiskit/shared_invite/enQtODQ2NTIyOTgwMTQ3LTI0NzM2NzkzZjJhNDgzZjY5MTQzNDY3MGNiZGQzNTNkZTE4Nzg1MjMwMmFjY2UwZTgyNDlmYWQwYmZjMjE1ZTM" title="Answering Questions on Slack">💬</a></td>
-<td align="center"><a href="https://github.com/marinaaisa"><img src="https://avatars3.githubusercontent.com/u/8567677?s=460&v=4" width="120px;" alt="Marina Aisa"/><br /><sub><b>Marina Aísa</b></sub></a><br /><a href="https://github.com/qiskit/qiskit.org/issues?q=author%3Amarinaaisa" title="Bug reports">🐛</a><a href="https://github.com/qiskit/qiskit.org/commits?author=marinaaisa" title="Code">💻</a><span aria-label="Design">🎨</span><a href="https://join.slack.com/t/qiskit/shared_invite/enQtODQ2NTIyOTgwMTQ3LTI0NzM2NzkzZjJhNDgzZjY5MTQzNDY3MGNiZGQzNTNkZTE4Nzg1MjMwMmFjY2UwZTgyNDlmYWQwYmZjMjE1ZTM" title="Answering Questions on Slack">💬</a></td>
 <td align="center"><a href="https://github.com/delapuente"><img src="https://avatars1.githubusercontent.com/u/757942?s=460&v=4" width="120px;" alt="Salvador de la Puente"/><br /><sub><b>Salvador de la Puente</b></sub></a><br /><a href="https://github.com/qiskit/qiskit.org/issues?q=author%3Adelapuente" title="Bug reports">🐛</a><a href="https://github.com/qiskit/qiskit.org/commits?author=delapuente" title="Code">💻</a><a href="https://join.slack.com/t/qiskit/shared_invite/enQtODQ2NTIyOTgwMTQ3LTI0NzM2NzkzZjJhNDgzZjY5MTQzNDY3MGNiZGQzNTNkZTE4Nzg1MjMwMmFjY2UwZTgyNDlmYWQwYmZjMjE1ZTM" title="Answering Questions on Slack">💬</a></td>
 <td align="center"><a href="https://github.com/y4izus"><img src="https://avatars2.githubusercontent.com/u/17231966?s=460&v=4" width="120px;" alt="Yaiza García"/><br /><sub><b>Yaiza García</b></sub></a><br /><a href="https://github.com/qiskit/qiskit.org/issues?q=author%3Ay4izus" title="Bug reports">🐛</a><a href="https://github.com/qiskit/qiskit.org/commits?author=y4izus" title="Code">💻</a><a href="https://join.slack.com/t/qiskit/shared_invite/enQtODQ2NTIyOTgwMTQ3LTI0NzM2NzkzZjJhNDgzZjY5MTQzNDY3MGNiZGQzNTNkZTE4Nzg1MjMwMmFjY2UwZTgyNDlmYWQwYmZjMjE1ZTM" title="Answering Questions on Slack">💬</a></td>
 </tr></table>

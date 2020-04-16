@@ -46,6 +46,8 @@ export default class extends Vue {
 </script>
 
 <style lang="scss" scoped>
+@import '~carbon-components/scss/globals/scss/typography';
+
 .card-link {
   display: block;
   text-decoration: none;
@@ -54,9 +56,9 @@ export default class extends Vue {
 }
 
 .experiment-card {
-  font-size: 0.9rem;
-  color: var(--body-color-light);
-  background-color: var(--primary-color);
+  color: $text-01;
+  background-color: $ui-01;
+  border: 1px solid $focus;
 
   &--horizontal {
     display: flex;
@@ -86,6 +88,7 @@ export default class extends Vue {
   }
 
   &__copy {
+    @include type-style('body-short-01');
     margin: 0.5rem 1rem 1em;
 
     &--horizontal {
@@ -94,16 +97,18 @@ export default class extends Vue {
   }
 
   h3 {
+    @include type-style('productive-heading-03');
     margin-top: 1.5rem;
   }
 
   &__author {
-    color: var(--secondary-color-lightmost);
+    @include type-style('body-short-01');
+    color: $purple-50;
     margin-top: 0.5rem;
 
     &:before {
       content: "by ";
-      color: var(--primary-color-lightmost);
+      color: $text-02;
     }
   }
 }

@@ -28,14 +28,15 @@ export default class extends Vue {
 </script>
 
 <style lang="scss" scoped>
+@import '~carbon-components/scss/globals/scss/typography';
+
 .menu-container {
-  background-color: #fffe;
+  background-color: $inverse-02;
 }
 
 .menu {
   height: 90px;
   display: flex;
-  font-size: 0.80rem;
 
   & > * {
     height: 100%;
@@ -45,7 +46,7 @@ export default class extends Vue {
     @include framed();
   }
 
-  @include mq($until: desktop) {
+  @include mq($until: medium) {
     height: auto;
   }
 }
@@ -55,32 +56,31 @@ export default class extends Vue {
   width: 100%;
 
   &__item {
+    @include type-style('productive-heading-03');
     flex: 1;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    color: var(--body-color-dark);
+    color: $inverse-01;
     text-decoration: none;
     text-transform: uppercase;
-    letter-spacing: 0.2em;
-    border-right: 1px solid #3334;
+    border-right: 1px solid $ui-02;
     text-align: center;
     padding: 0.5rem;
-    font-size: 0.8rem;
 
     &:last-child {
       border-right: none;
     }
 
-    @include mq($until: desktop) {
+    @include mq($until: medium) {
       border: none;
-      border-bottom: 1px solid #3334;
+      border-bottom: 1px solid $ui-02;
       padding: 1rem;
       width: 100%;
     }
   }
 
-  @include mq($until: desktop) {
+  @include mq($until: medium) {
     flex-direction: column;
   }
 }

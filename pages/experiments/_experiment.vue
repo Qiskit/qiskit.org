@@ -27,7 +27,6 @@ import PageSection from '~/components/sections/PageSection.vue'
 import MdContent from '~/components/MdContent.vue'
 
 @Component({
-  layout: 'second-level',
   components: {
     ExperimentHeader,
     MdContent,
@@ -85,8 +84,8 @@ function serializableRenderFns ({ render, staticRenderFns }: RenderFns): Seriali
 
 <style lang="scss" scoped>
 #copy {
-  color: var(--body-color-dark);
-  background-color: white;
+  color: $inverse-01;
+  background-color: $inverse-02;
   padding-top: 0;
   padding-bottom: 2rem;
 }

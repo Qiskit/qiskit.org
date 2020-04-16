@@ -73,6 +73,8 @@ export default class extends Vue {
 </script>
 
 <style lang="scss" scoped>
+@import '~carbon-components/scss/globals/scss/typography';
+
 .slide-link {
   display: block;
   text-decoration: none;
@@ -92,8 +94,8 @@ export default class extends Vue {
     z-index: 1;
     width: 100%;
     height: 100px;
-    background-color: var(--primary-color);
-    box-shadow: 0 23px 35px 0 rgba(10, 0, 50, 0.35);
+    background-color: $ui-background;
+    box-shadow: 0 23px 35px 0 $gray-100-a30;
     transform-origin: center bottom;
     transform: scale(0.95);
   }
@@ -105,10 +107,9 @@ export default class extends Vue {
   z-index: 2;
   display: flex;
   flex-direction: row;
-  font-size: 0.9rem;
-  color: var(--body-color-light);
-  background-color: var(--primary-color);
-  box-shadow: 0 23px 35px 0 rgba(10, 0, 50, 0.35);
+  color: $text-01;
+  background-color: $ui-01;
+  box-shadow: 0 23px 35px 0 $gray-100-a30;
   transform-origin: center bottom;
 
   &-picture {
@@ -120,25 +121,28 @@ export default class extends Vue {
   }
 
   &-copy {
+    @include type-style('body-short-01');
     flex: 1;
     margin: 0.5rem 1rem 1em;
   }
 
   h3 {
+    @include type-style('productive-heading-03');
     margin-top: 1.5rem;
   }
 
   &-author {
-    color: var(--secondary-color-lightmost);
+    @include type-style('body-short-01');
+    color: $purple-30;
     margin-top: 0.5rem;
 
     &:before {
       content: "by ";
-      color: var(--primary-color-lightmost);
+      color: $text-02;
     }
   }
 
-  @include mq($until: desktop) {
+  @include mq($until: medium) {
     flex-direction: column;
   }
 }
@@ -162,7 +166,7 @@ export default class extends Vue {
   }
 
   &:hover path {
-    fill: var(--secondary-color-lightmost);
+    fill: $interactive-01;
   }
 }
 

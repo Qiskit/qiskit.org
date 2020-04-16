@@ -16,15 +16,15 @@ export default class extends Vue {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 footer {
-  color: white;
+  color: $text-01;
   display: flex;
   flex-direction: column;
   justify-content: center;
   min-height: 10rem;
   text-align: center;
   margin-top: 4rem;
-  background-color: var(--dark-color);
+  background-color: $ui-background;
 }
 </style>
