@@ -226,7 +226,7 @@ export default class extends QiskitPage {
   }
 
   &__no-events-msg {
-    @include type-style('expressive-paragraph-01');
+    @include type-style('body-short-02');
   }
 }
 
