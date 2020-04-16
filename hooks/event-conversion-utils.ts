@@ -10,28 +10,30 @@ import {
   COMMUNITY_EVENT_TYPE_OPTIONS
 } from '../store/modules/events'
 
-const RECORD_FIELDS = {
+const RECORD_FIELDS = Object.freeze({
   name: 'Name',
   startDate: 'Start Date',
   endDate: 'End Date',
   typeOfEvent: 'Type of Event',
   eventWebsite: 'Event Website',
   eventLocation: 'Event Location',
-  image: 'Picture?'
-}
+  image: 'Picture?',
+  published: 'SUZIE - for website?'
+} as const)
 
 async function fetchCommunityEvents (apiKey: string, { days }): Promise<CommunityEvent[]> {
+  const { startDate, published } = RECORD_FIELDS
   const communityEvents: CommunityEvent[] = []
   const base = new Airtable({ apiKey }).base('appkaaRF2QdwfusP1')
   await base('Events Master View').select({
     fields: Object.values(RECORD_FIELDS),
     filterByFormula: `AND(
-      DATETIME_DIFF({Start Date}, TODAY(), 'days') ${days > 0 ? '<=' : '>='} ${days},
-      DATETIME_DIFF({Start Date}, TODAY(), 'days') ${days > 0 ? '>=' : '<'} 0,
-      FIND("IBMers Attending", {What do we send? (Involvement)}) > 0
+      DATETIME_DIFF({${startDate}}, TODAY(), 'days') ${days > 0 ? '<=' : '>='} ${days},
+      DATETIME_DIFF({${startDate}}, TODAY(), 'days') ${days > 0 ? '>=' : '<'} 0,
+      {${published}}
     )`,
-    sort: [{ field: 'Start Date', direction: days > 0 ? 'asc' : 'desc' }]
-  }).eachPage((records, nextPage) => {
+    sort: [{ field: startDate, direction: days > 0 ? 'asc' : 'desc' }]
+  }).eachPage((records: any[], nextPage: () => void) => {
     for (const record of records) {
       const communityEvent = convertToCommunityEvent(record)
       communityEvents.push(communityEvent)
