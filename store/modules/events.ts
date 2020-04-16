@@ -12,7 +12,14 @@ const WORLD_LOCATIONS = Object.freeze({
   americas: 'Americas',
   asiaPacific: 'Asia Pacific',
   europe: 'Europe',
-  africa: 'Africa'
+  africa: 'Africa',
+  // TODO: Remove when "Online" is under "Type of Event" in Airtable. Right now
+  // it is a region but the event squad expressed its will of "Online" being an
+  // event type.
+  //
+  // See also:
+  // https://github.com/Qiskit/qiskit.org/issues/526
+  online: 'Online'
 } as const)
 
 type CommunityEventSet = 'past'|'upcoming'
@@ -23,8 +30,14 @@ type CommunityEvent = {
   types: CommunityEventType[],
   title: string,
   image: string,
-  place: string,
-  location: WorldLocation,
+  // TODO: We need to clarify if region and place have default values and what
+  // these are. Place and location may seem mandatory but human error is
+  // possible. In that case, what's the value of place and location?
+  //
+  // See also:
+  // https://github.com/Qiskit/qiskit.org/issues/527
+  place: string|null,
+  location: WorldLocation|null,
   date: string,
   to: string
 }
@@ -96,7 +109,7 @@ export default {
         if (noFilters) { return allEvents }
 
         return allEvents.filter((event) => {
-          const propValue = event[propToFilter]
+          const propValue = event[propToFilter] || []
           const valueArray = Array.isArray(propValue) ? propValue : [propValue]
           return valueArray.some(value => selectedFilters.includes(value))
         })
