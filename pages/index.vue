@@ -21,15 +21,15 @@
         </LegacyCta>
       </article>
       <article>
-        <h2>Qiskit Camp 2020</h2>
-        <p>Your favorite flagship event is returning, now with an even larger and more diverse community. Learn more about Qiskit Camp 2020, coming March 10–13.</p>
+        <h2>Kids meet quantum!</h2>
+        <p>This activity pack will entertain your kids with fun activities about quantum computing. Fun for all kids and parents!</p>
         <LegacyCta
-          to="https://medium.com/qiskit/qiskit-camp-2020-coming-next-march-7b8c39e5d42c"
+          to="/activities/quantum-activity-pack-for-kids.pdf"
           @click="$trackClickEvent({
-            action: 'Qiskit Camp 2020'
+            action: 'Activity pack for kids'
           })"
         >
-          Learn more
+          Try it
         </LegacyCta>
       </article>
     </LegacySection>

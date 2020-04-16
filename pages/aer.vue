@@ -48,17 +48,16 @@
           lang="python"
           :label="title"
         >from qiskit import QuantumCircuit, execute, Aer, IBMQ
-from qiskit.providers.aer import noise
+from qiskit.providers.aer.noise import NoiseModel
 
 # Choose a real device to simulate
 IBMQ.load_account()
 provider = IBMQ.get_provider(group='open')
 device = provider.get_backend('ibmq_16_melbourne')
-properties = device.properties()
 coupling_map = device.configuration().coupling_map
 
 # Generate an Aer noise model for device
-noise_model = noise.device.basic_device_noise_model(properties)
+noise_model = NoiseModel.from_backend(properties)
 basis_gates = noise_model.basis_gates
 
 # Generate a quantum circuit
