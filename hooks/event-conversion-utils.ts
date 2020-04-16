@@ -4,9 +4,10 @@ import Airtable from 'airtable'
 import {
   CommunityEvent,
   CommunityEventType,
-  WorldLocation,
+  WorldRegion,
   COMMUNITY_EVENT_TYPES,
-  COMMUNITY_EVENT_TYPE_OPTIONS
+  COMMUNITY_EVENT_TYPE_OPTIONS,
+  WORLD_REGIONS
 } from '../store/modules/events'
 
 const RECORD_FIELDS = Object.freeze({
@@ -15,7 +16,7 @@ const RECORD_FIELDS = Object.freeze({
   endDate: 'End Date',
   typeOfEvent: 'Type of Event',
   eventWebsite: 'Event Website',
-  eventLocation: 'Event Location',
+  location: 'Event Location',
   region: 'Region',
   image: 'Picture?',
   published: 'SUZIE - for website?'
@@ -48,8 +49,8 @@ function convertToCommunityEvent (record: any): CommunityEvent {
     title: getName(record),
     types: getTypes(record),
     image: getImage(record),
-    place: getPlace(record),
     location: getLocation(record),
+    region: getRegion(record),
     date: formatDates(...getDates(record)),
     to: getWebsite(record)
   }
@@ -69,9 +70,9 @@ function getTypes (record: any): CommunityEventType[] {
   //
   // See also:
   // https://github.com/Qiskit/qiskit.org/issues/526
-  const location = getLocation(record)
-  if (location) {
-    valueList.push(location)
+  const region = getRegion(record)
+  if (region) {
+    valueList.push(region)
   }
 
   const communityEventTypes = filterWithWhitelist(valueList, COMMUNITY_EVENT_TYPE_OPTIONS)
@@ -111,12 +112,12 @@ function getThumbnailUrl (imageAttachment: any): string|null {
   return largeThumbnail ? largeThumbnail.url : null
 }
 
-function getPlace (record: any): string|null {
-  return record.get(RECORD_FIELDS.eventLocation) || getLocation(record)
+function getLocation (record: any): string {
+  return record.get(RECORD_FIELDS.location) || getRegion(record)
 }
 
-function getLocation (record: any): WorldLocation|null {
-  return record.get(RECORD_FIELDS.region) || null
+function getRegion (record: any): WorldRegion {
+  return record.get(RECORD_FIELDS.region) || WORLD_REGIONS.tbd
 }
 
 function getDates (record: any): [Date, Date|undefined] {
@@ -167,8 +168,8 @@ export {
   getName,
   getTypes,
   getImage,
-  getPlace,
   getLocation,
+  getRegion,
   getWebsite,
   getDates,
   formatDates,

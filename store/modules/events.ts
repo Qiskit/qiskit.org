@@ -8,7 +8,7 @@ const COMMUNITY_EVENT_TYPES = Object.freeze({
   online: 'Online'
 } as const)
 
-const WORLD_LOCATIONS = Object.freeze({
+const WORLD_REGIONS = Object.freeze({
   americas: 'Americas',
   asiaPacific: 'Asia Pacific',
   europe: 'Europe',
@@ -19,11 +19,12 @@ const WORLD_LOCATIONS = Object.freeze({
   //
   // See also:
   // https://github.com/Qiskit/qiskit.org/issues/526
-  online: 'Online'
+  online: 'Online',
+  tbd: 'TBD'
 } as const)
 
 type CommunityEventSet = 'past'|'upcoming'
-type WorldLocation = typeof WORLD_LOCATIONS[keyof typeof WORLD_LOCATIONS]
+type WorldRegion = typeof WORLD_REGIONS[keyof typeof WORLD_REGIONS]
 type CommunityEventType = typeof COMMUNITY_EVENT_TYPES[keyof typeof COMMUNITY_EVENT_TYPES]
 
 type CommunityEvent = {
@@ -31,22 +32,22 @@ type CommunityEvent = {
   title: string,
   image: string,
   // TODO: We need to clarify if region and place have default values and what
-  // these are. Place and location may seem mandatory but human error is
-  // possible. In that case, what's the value of place and location?
+  // these are. Place and region may seem mandatory but human error is
+  // possible. In that case, what's the value of place and region?
   //
   // See also:
   // https://github.com/Qiskit/qiskit.org/issues/527
-  place: string|null,
-  location: WorldLocation|null,
+  location: string,
+  region: WorldRegion,
   date: string,
   to: string
 }
 
-const WORLD_LOCATION_OPTIONS = Object.freeze([
-  WORLD_LOCATIONS.americas,
-  WORLD_LOCATIONS.asiaPacific,
-  WORLD_LOCATIONS.europe,
-  WORLD_LOCATIONS.africa
+const WORLD_REGION_OPTIONS = Object.freeze([
+  WORLD_REGIONS.americas,
+  WORLD_REGIONS.asiaPacific,
+  WORLD_REGIONS.europe,
+  WORLD_REGIONS.africa
 ])
 const COMMUNITY_EVENT_TYPE_OPTIONS = Object.freeze([
   COMMUNITY_EVENT_TYPES.hackathon,
@@ -61,9 +62,10 @@ const COMMUNITY_EVENT_TYPE_OPTIONS = Object.freeze([
 export {
   CommunityEvent,
   CommunityEventType,
-  WorldLocation,
+  WorldRegion,
   COMMUNITY_EVENT_TYPES,
-  WORLD_LOCATION_OPTIONS,
+  WORLD_REGIONS,
+  WORLD_REGION_OPTIONS,
   COMMUNITY_EVENT_TYPE_OPTIONS
 }
 
@@ -74,15 +76,15 @@ export default {
       upcomingCommunityEvents: [],
       pastCommunityEvents: [],
       typeFilters: [],
-      locationFilters: []
+      regionFilters: []
     }
   },
   getters: {
     typeFilters (state) {
       return state.typeFilters
     },
-    locationFilters (state) {
-      return state.locationFilters
+    regionFilters (state) {
+      return state.regionFilters
     },
     filteredEvents (state) {
       const {
@@ -90,18 +92,18 @@ export default {
         upcomingCommunityEvents,
         pastCommunityEvents,
         typeFilters,
-        locationFilters
+        regionFilters
       } = state
       const showUpcomingEvents = activeSet === 'upcoming'
       const events = showUpcomingEvents ? upcomingCommunityEvents : pastCommunityEvents
       const noTypeFilters = typeFilters.length === 0
-      const noLocationFilters = locationFilters.length === 0
+      const noRegionFilters = regionFilters.length === 0
 
-      if (noTypeFilters && noLocationFilters) { return events }
+      if (noTypeFilters && noRegionFilters) { return events }
 
       const eventsAfterApplyTypeFilter = filterBy(events, typeFilters, 'types')
 
-      return filterBy(eventsAfterApplyTypeFilter, locationFilters, 'location')
+      return filterBy(eventsAfterApplyTypeFilter, regionFilters, 'region')
 
       function filterBy (allEvents: CommunityEvent[], selectedFilters: string[], propToFilter: keyof CommunityEvent) {
         const noFilters = selectedFilters.length === 0
