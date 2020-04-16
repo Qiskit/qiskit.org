@@ -6,7 +6,6 @@ import {
   CommunityEventType,
   WorldLocation,
   COMMUNITY_EVENT_TYPES,
-  WORLD_LOCATION_OPTIONS,
   COMMUNITY_EVENT_TYPE_OPTIONS
 } from '../store/modules/events'
 
@@ -17,6 +16,7 @@ const RECORD_FIELDS = Object.freeze({
   typeOfEvent: 'Type of Event',
   eventWebsite: 'Event Website',
   eventLocation: 'Event Location',
+  region: 'Region',
   image: 'Picture?',
   published: 'SUZIE - for website?'
 } as const)
@@ -62,6 +62,18 @@ function getName (record: any): string {
 function getTypes (record: any): CommunityEventType[] {
   const value = record.get(RECORD_FIELDS.typeOfEvent) || []
   const valueList = (Array.isArray(value) ? value : [value]) as string[]
+
+  // TODO: Remove when the Online type is under the "Type of Event" column in
+  // Airtable. Right now, it is in the "Region" column and we need to include
+  // it as a type.
+  //
+  // See also:
+  // https://github.com/Qiskit/qiskit.org/issues/526
+  const location = getLocation(record)
+  if (location) {
+    valueList.push(location)
+  }
+
   const communityEventTypes = filterWithWhitelist(valueList, COMMUNITY_EVENT_TYPE_OPTIONS)
   const noTypes = communityEventTypes.length === 0
   return noTypes ? [COMMUNITY_EVENT_TYPES.talks] : communityEventTypes
@@ -99,13 +111,12 @@ function getThumbnailUrl (imageAttachment: any): string|null {
   return largeThumbnail ? largeThumbnail.url : null
 }
 
-function getPlace (record: any) {
-  return record.get(RECORD_FIELDS.eventLocation)
+function getPlace (record: any): string|null {
+  return record.get(RECORD_FIELDS.eventLocation) || getLocation(record)
 }
 
-function getLocation (_record: any): WorldLocation {
-  const options = WORLD_LOCATION_OPTIONS
-  return options[Math.floor(Math.random() * options.length)]
+function getLocation (record: any): WorldLocation|null {
+  return record.get(RECORD_FIELDS.region) || null
 }
 
 function getDates (record: any): [Date, Date|undefined] {
