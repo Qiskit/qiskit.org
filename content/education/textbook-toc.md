@@ -15,6 +15,7 @@
 - Proving Universality
 - More Circuit Identities
 ### Chapter 3. Quantum Protocols and Quantum Algorithms
+- Defining Quantum Circuits
 - Quantum Teleportation
 - Superdense Coding
 - Deutsch-Josza Algorithm
