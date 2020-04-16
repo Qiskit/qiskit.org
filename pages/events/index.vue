@@ -77,7 +77,7 @@
         </div>
         <div v-else class="event-page__results">
           <p class="event-page__no-events-msg">
-            No events: Plan an event in your area today!
+            Nothing here yet - let’s make it happen!
           </p>
         </div>
       </div>
@@ -233,7 +233,7 @@ export default class extends QiskitPage {
   }
 
   &__no-events-msg {
-    @include type-style('expressive-paragraph-01');
+    @include type-style('body-short-02');
   }
 }
 
