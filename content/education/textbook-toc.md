@@ -6,18 +6,16 @@
 ### Chapter 1. Quantum States and Qubits
 - Introduction
 - The Atoms of Computation
-- The Unique Properties of Qubits
-- Writing Down Qubit States
-- Pauli Matrices and the Bloch Sphere
-- States for Many Qubits
-### Chapter 2. Single Qubits and Multi-Qubits gates
+- Representing Qubit States
+- Single Qubit Gates
+### Chapter 2. Multiple Qubits and Entanglement
 - Introduction
-- Quantum Gates
-- Fun with Matrices
-- The Standard Gate Set
+- Multiple Qubits and Entangled States
+- Phase Kickback
 - Proving Universality
-- Basic Circuit Identities
-### Chapter 3. Quantum Algorithms
+- More Circuit Identities
+### Chapter 3. Quantum Protocols and Quantum Algorithms
+- Defining Quantum Circuits
 - Quantum Teleportation
 - Superdense Coding
 - Deutsch-Josza Algorithm
@@ -28,18 +26,15 @@
 - Grover's Algorithm
 - Quantum Counting
 ### Chapter 4. Quantum Algorithms for Applications
-- Simulating Molecules using VQE
-- Solving combinatorial optimization problems using QAOA
-- Solving Satisfiability Problems using Grover's Algorithm
-- Hybrid quantum-classical Neural Networks with PyTorch and Qiskit
-### Chapter 5. Investigating Quantum Hardware Using Qiskit
-- Calibrating Qubits with OpenPulse
-- Accessing Higher Energy States
+- Applied Quantum Algorithms
+- Implementations of Recent Quantum Algorithms
+### Chapter 5. Investigating Quantum Hardware Using Quantum Circuits
 - Introduction to Quantum Error Correction using Repetition Codes
 - Measurement Error Mitigation
 - Randomized Benchmarking
 - Measuring Quantum Volume
-### Chapter 6. Implementations of Recent Quantum Algorithms
-- Variational Quantum Linear Solver
-### Chapter 7. Demos
-- Estimating Pi Using Quantum Phase Estimation Algorithm
+### Chapter 6. Investigating Quantum Hardware Using Microwave Pulses
+- Calibrating Qubits with Qiskit Pulse
+- Accessing Higher Energy States
+### Chapter 7. Problem Sets & Exercises
+### Chapter 8. Games & Demos

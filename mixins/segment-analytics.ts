@@ -66,6 +66,7 @@ type TrackedPageGuardNext = (to: ((vm: TrackedPage) => any)) => void
 export default class extends Vue {
   beforeRouteEnter (_from: Route, _to: Route, next: TrackedPageGuardNext): any {
     next((pageComponent) => {
+      if (!pageComponent.$trackPage) { return }
       if (!pageComponent.routeName) {
         return console.warn('Component', pageComponent,
           'is missing the \'routeName\' property, needed by analytics.')

@@ -84,7 +84,6 @@ import SyntaxHighlight from '~/components/qiskit/SyntaxHighlight.vue'
 import Cta from '~/components/ctas/Cta.vue'
 
 @Component({
-  layout: 'legacy',
   components: {
     Cta,
     LegacyPresentation,
@@ -115,10 +114,10 @@ export default class extends QiskitElementPage {
 <style lang="scss" scoped>
 .legacy-presentation {
   --legacy-presentation-color: rgb(219, 251, 251);
-  --legacy-presentation-text-color: black;
+  --legacy-presentation-text-color: $inverse-01;
 }
 
 .legacy-section {
-  background-color: white;
+  background-color: $inverse-02;
 }
 </style>

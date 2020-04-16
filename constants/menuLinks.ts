@@ -132,6 +132,11 @@ const ORDERED_SOCIAL_MEDIA: Array<NavLink> = [
 ]
 
 const COMMUNITY_SUB_LINKS: LabeledLinks = {
+  events: {
+    label: 'Events',
+    url: '/events',
+    linkType: 'nuxtLink'
+  },
   education: {
     label: 'Education',
     url: '/education',
@@ -150,6 +155,7 @@ const COMMUNITY_SUB_LINKS: LabeledLinks = {
 }
 
 const ORDERED_COMMUNITY_SUB_LINKS: Array<NavLink> = [
+  COMMUNITY_SUB_LINKS.events,
   COMMUNITY_SUB_LINKS.education,
   COMMUNITY_SUB_LINKS.advocates,
   COMMUNITY_SUB_LINKS.experiments

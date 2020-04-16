@@ -1,5 +1,7 @@
 import path from 'path'
 import fs from 'fs'
+import consola from 'consola'
+
 import markdownIt from 'markdown-it'
 import miLinkAttributes from 'markdown-it-link-attributes'
 import miAnchor from 'markdown-it-anchor'
@@ -9,6 +11,11 @@ import Mode from 'frontmatter-markdown-loader/mode'
 import { Configuration } from '@nuxt/types'
 import pkg from './package.json'
 import generateTextbookToc from './hooks/generate-textbook-toc'
+import fetchEvents from './hooks/update-events'
+
+const { NODE_ENV, GENERATE_CONTENT, AIRTABLE_API_KEY } = process.env
+
+const IS_PRODUCTION = NODE_ENV === 'production'
 
 const md = markdownIt({
   linkify: true,
@@ -27,14 +34,13 @@ md.use(miAnchor, {
 
 const config: Configuration = {
   mode: 'universal',
-
   env: {
-    analyticsScriptUrl: process.env.NODE_ENV === 'development'
-      ? 'https://dev.console.test.cloud.ibm.com/analytics/build/bluemix-analytics.min.js'
-      : 'https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js',
-    analyticsKey: process.env.NODE_ENV === 'development'
-      ? 'zbHWEXPUfXm0K6C7HbegwB5ewDEC8o1H'
-      : 'ffdYLviQze3kzomaINXNk6NwpY9LlXcw'
+    analyticsScriptUrl: IS_PRODUCTION
+      ? 'https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js'
+      : 'https://dev.console.test.cloud.ibm.com/analytics/build/bluemix-analytics.min.js',
+    analyticsKey: IS_PRODUCTION
+      ? 'ffdYLviQze3kzomaINXNk6NwpY9LlXcw'
+      : 'zbHWEXPUfXm0K6C7HbegwB5ewDEC8o1H'
   },
 
   /*
@@ -61,6 +67,7 @@ const config: Configuration = {
   ** Global CSS
   */
   css: [
+    '~/static/css/fonts.css'
   ],
 
   /*
@@ -68,7 +75,8 @@ const config: Configuration = {
   */
   plugins: [
     '~/plugins/router-hooks.ts',
-    '~/plugins/directives.ts',
+    '~/plugins/highlight-js.ts',
+    '~/plugins/carbon.ts',
     '~/plugins/deep-load.ts',
     { src: '~/plugins/hotjar.ts', mode: 'client' },
     { src: '~/plugins/segment-analytics.ts', mode: 'client' }
@@ -88,7 +96,8 @@ const config: Configuration = {
     */
     scss: [
       './assets/scss/mq.scss',
-      './assets/scss/mixins.scss'
+      './assets/scss/mixins.scss',
+      './assets/scss/carbon/community-theme.scss'
     ]
   },
 
@@ -199,12 +208,27 @@ const config: Configuration = {
   hooks: {
     build: {
       async before () {
-        await generateTextbookToc(
-          'https://qiskit.org/textbook/preface.html',
-          './content/education/textbook-toc.md'
-        )
+        if (!IS_PRODUCTION && !GENERATE_CONTENT) {
+          console.warn('Skipping content generation. Set GENERATE_CONTENT to enable it.')
+          return
+        }
+        await generateContent()
       }
     }
+  }
+}
+
+async function generateContent () {
+  consola.info('Generating Textbook TOC')
+  await generateTextbookToc(
+    'https://qiskit.org/textbook/preface.html',
+    './content/education/textbook-toc.md'
+  )
+  if (AIRTABLE_API_KEY) {
+    consola.info('Generating community event previews')
+    await fetchEvents(AIRTABLE_API_KEY, './content/events')
+  } else {
+    consola.warn('Cannot generate events: missing AIRTABLE_API_KEY environment variable')
   }
 }
 

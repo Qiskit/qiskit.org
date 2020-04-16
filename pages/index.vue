@@ -147,7 +147,6 @@ import LegacySection from '~/components/sections/LegacySection.vue'
 import LegacyCta from '~/components/ctas/LegacyCta.vue'
 
 @Component({
-  layout: 'legacy',
   components: {
     LegacyCta,
     LegacyPresentation,
@@ -163,12 +162,14 @@ export default class extends QiskitPage {
 </script>
 
 <style lang="scss">
+@import '~carbon-components/scss/globals/scss/typography';
+
 .legacy-section {
-  background-color: white;
+  background-color: $text-01;
 }
 
 .legacy-section:nth-child(2n+1) {
-  background-color: rgb(188, 147, 252);
+  background-color: $purple-40;
 }
 
 .social-networks-list {
@@ -185,11 +186,11 @@ export default class extends QiskitPage {
     padding: 0.8rem;
 
     a {
-      font-weight: 400;
+      @include type-style('productive-heading-02');
       text-decoration: none;
 
       &:hover {
-        color: black;
+        color: $inverse-01;
         text-decoration: underline;
       }
 
@@ -200,9 +201,8 @@ export default class extends QiskitPage {
     }
 
     .name {
-      color: black;
+      color: $inverse-01;
       margin-left: 0.5rem;
-      font-size: 0.8rem;
     }
   }
 }
