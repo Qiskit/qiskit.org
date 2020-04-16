@@ -6,27 +6,27 @@ describe('module events', () => {
   const unconferenceCampInAsia = {
     title: 'Fake event A',
     types: ['Unconference', 'Camp'],
-    location: 'Asia Pacific'
+    region: 'Asia Pacific'
   }
   const hackathonInEurope = {
     title: 'Fake event B',
     types: ['Unconference', 'Hackathon'],
-    location: 'Europe'
+    region: 'Europe'
   }
   const campInAfrica = {
     title: 'Fake event C',
     types: ['Camp'],
-    location: 'Africa'
+    region: 'Africa'
   }
   const hackathonInAmericas = {
     title: 'Fake event D',
     types: ['Camp', 'Hackathon'],
-    location: 'Americas'
+    region: 'Americas'
   }
   const unconferenceOnline = {
     title: 'Fake event E',
     types: ['Unconference'],
-    location: 'Online'
+    region: 'Online'
   }
 
   const futureEvents = [unconferenceCampInAsia, hackathonInEurope, campInAfrica]
@@ -54,9 +54,9 @@ describe('module events', () => {
       expect(store.getters.filteredEvents).toEqual(pastEvents)
     })
 
-    it('gets active-set filtered by location', () => {
+    it('gets active-set filtered by region', () => {
       store.commit('addFilter', {
-        filter: 'locationFilters',
+        filter: 'regionFilters',
         filterValue: 'Asia Pacific'
       })
       expect(store.getters.filteredEvents).toEqual([unconferenceCampInAsia])
@@ -78,13 +78,13 @@ describe('module events', () => {
       expect(store.getters.filteredEvents).toEqual([unconferenceCampInAsia, campInAfrica])
     })
 
-    it('gets active-set filtered by type and location', () => {
+    it('gets active-set filtered by type and region', () => {
       store.commit('addFilter', {
         filter: 'typeFilters',
         filterValue: 'Camp'
       })
       store.commit('addFilter', {
-        filter: 'locationFilters',
+        filter: 'regionFilters',
         filterValue: 'Africa'
       })
       expect(store.getters.filteredEvents).toEqual([campInAfrica])

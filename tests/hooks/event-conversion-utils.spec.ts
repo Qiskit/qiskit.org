@@ -4,17 +4,20 @@ import {
   filterWithWhitelist,
   convertToCommunityEvent,
   getTypes,
+  getLocation,
+  getRegion,
   getDates,
   getImage
 } from '~/hooks/event-conversion-utils'
 
-import { COMMUNITY_EVENT_TYPES } from '~/store/modules/events'
+import { COMMUNITY_EVENT_TYPES, WORLD_REGIONS } from '~/store/modules/events'
 
 type RecordFields = {
   name: string,
   picture?: object[],
   types?: string[]|string,
   location?: string,
+  region?: string,
   startDate?: string,
   endDate?: string,
   website?: string
@@ -23,12 +26,13 @@ type RecordFields = {
 class FakeRecord {
   _fields: object = {}
 
-  constructor ({ name, picture, types, location, startDate, endDate, website }: RecordFields) {
+  constructor ({ name, picture, types, location, region, startDate, endDate, website }: RecordFields) {
     this._fields = {
       [RECORD_FIELDS.name]: name,
       [RECORD_FIELDS.image]: picture,
       [RECORD_FIELDS.typeOfEvent]: types,
-      [RECORD_FIELDS.eventLocation]: location,
+      [RECORD_FIELDS.location]: location,
+      [RECORD_FIELDS.region]: region,
       [RECORD_FIELDS.startDate]: startDate,
       [RECORD_FIELDS.endDate]: endDate,
       [RECORD_FIELDS.eventWebsite]: website
@@ -46,6 +50,7 @@ describe('convertToCommunityEvent', () => {
     name: 'Fake conference',
     types: [hackathon],
     location: 'Someplace',
+    region: 'Americas',
     startDate: '2020-01-01',
     endDate: '2020-01-02',
     website: 'https://qiskit.org/events'
@@ -53,11 +58,12 @@ describe('convertToCommunityEvent', () => {
 
   it('extracts and format information from the record', () => {
     const { hackathon } = COMMUNITY_EVENT_TYPES
-    const { title, types, place, date, to } = convertToCommunityEvent(fakeRecord)
-    expect({ title, types, place, date, to }).toEqual({
+    const { title, types, location, region, date, to } = convertToCommunityEvent(fakeRecord)
+    expect({ title, types, location, region, date, to }).toEqual({
       title: 'Fake conference',
       types: [hackathon],
-      place: 'Someplace',
+      location: 'Someplace',
+      region: 'Americas',
       date: 'January 1-2, 2020',
       to: 'https://qiskit.org/events'
     })
@@ -105,6 +111,59 @@ describe('filterByWhitelist', () => {
   it('creates a new list, from an input one, only with the values in a whitelist', () => {
     const list = ['a', 'x', 'b', 'y', 'c', 'z', 'a', 'x', 'b', 'y']
     expect(filterWithWhitelist(list, ['a', 'b', 'c'])).toEqual(['a', 'b', 'c', 'a', 'b'])
+  })
+})
+
+describe('getRegion', () => {
+  it('defaults in TBD if there is no region', () => {
+    const { tbd } = WORLD_REGIONS
+    const noRegionEvent = new FakeRecord({
+      name: 'Fake Conference'
+    })
+    expect(getRegion(noRegionEvent)).toBe(tbd)
+  })
+
+  it('gets the region from the record', () => {
+    const { americas } = WORLD_REGIONS
+    const fakeEvent = new FakeRecord({
+      name: 'Fake Conference',
+      region: americas
+    })
+    expect(getRegion(fakeEvent)).toBe(americas)
+  })
+
+  it('gets the region from the record even if it is not recognized by qiskit', () => {
+    const unknownRegionEvent = new FakeRecord({
+      name: 'Fake Conference',
+      region: 'Lemuria'
+    })
+    expect(getRegion(unknownRegionEvent)).toBe('Lemuria')
+  })
+})
+
+describe('getLocation', () => {
+  it('defaults in TBD if there is no location, no region', () => {
+    const nowhereEvent = new FakeRecord({
+      name: 'Nowhere Conference'
+    })
+    expect(getLocation(nowhereEvent)).toBe('TBD')
+  })
+
+  it('defaults in region if there is no location', () => {
+    const { americas } = WORLD_REGIONS
+    const noLocationEvent = new FakeRecord({
+      name: 'Fake Conference',
+      region: americas
+    })
+    expect(getLocation(noLocationEvent)).toBe(getRegion(noLocationEvent))
+  })
+
+  it('gets the location from the record', () => {
+    const fakeEvent = new FakeRecord({
+      name: 'Fake Conference',
+      location: 'Gotham'
+    })
+    expect(getLocation(fakeEvent)).toBe('Gotham')
   })
 })
 
