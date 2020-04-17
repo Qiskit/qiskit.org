@@ -28,39 +28,43 @@
           </cv-tabs>
         </client-only>
       </div>
-      <div class="event-page__checkboxes-results">
-        <div class="event-page__filters-checkboxes">
+      <div class="event-page__event-index">
+        <div class="event-page__filters-others">
           <fieldset class="bx--fieldset">
             <legend class="bx--label">
               Region
             </legend>
-            <client-only>
-              <cv-checkbox
-                v-for="region in regions"
-                :key="region"
-                :value="region"
-                :label="region"
-                :checked="isFilterChecked('regionFilters', region)"
-                :aria-checked="`${isFilterChecked('regionFilters', region)}`"
-                @change="updateFilter('regionFilters', region, $event)"
-              />
-            </client-only>
+            <div class="event-page__chrome-columns-fix">
+              <client-only>
+                <cv-checkbox
+                  v-for="region in regions"
+                  :key="region"
+                  :value="region"
+                  :label="region"
+                  :checked="isFilterChecked('regionFilters', region)"
+                  :aria-checked="`${isFilterChecked('regionFilters', region)}`"
+                  @change="updateFilter('regionFilters', region, $event)"
+                />
+              </client-only>
+            </div>
           </fieldset>
           <fieldset class="bx--fieldset">
             <legend class="bx--label">
               Type
             </legend>
-            <client-only>
-              <cv-checkbox
-                v-for="type in types"
-                :key="type"
-                :value="type"
-                :label="type"
-                :checked="isFilterChecked('typeFilters', type)"
-                :aria-checked="`${isFilterChecked('typeFilters', type)}`"
-                @change="updateFilter('typeFilters', type, $event)"
-              />
-            </client-only>
+            <div class="event-page__chrome-columns-fix">
+              <client-only>
+                <cv-checkbox
+                  v-for="type in types"
+                  :key="type"
+                  :value="type"
+                  :label="type"
+                  :checked="isFilterChecked('typeFilters', type)"
+                  :aria-checked="`${isFilterChecked('typeFilters', type)}`"
+                  @change="updateFilter('typeFilters', type, $event)"
+                />
+              </client-only>
+            </div>
           </fieldset>
         </div>
         <div v-if="hasEvents" class="event-page__results">
@@ -164,7 +168,7 @@ export default class extends QiskitPage {
   }
 
   get isDesktop () {
-    return this.windowWidth > 600
+    return this.windowWidth > 672 // mq.scss medium value
   }
 
   async mounted () {
@@ -211,31 +215,65 @@ export default class extends QiskitPage {
   color: $text-01;
 
   &__title {
-    position: absolute;
-    bottom: .5rem;
-    z-index: 1;
+    bottom: 0;
     width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background: linear-gradient(0deg, #262626 0%, #26262600 100%);
+
+    @include mq($from: medium) {
+      position: absolute;
+    }
 
     h1 {
       @include type-style('productive-heading-07');
+      padding-left: 1rem;
+
+      @include mq($until: medium) {
+        @include type-style('productive-heading-06');
+        margin-top: 1rem;
+      }
     }
   }
 
-  &__checkboxes-results {
+  &__event-index {
     display: flex;
     justify-content: space-between;
-    margin-top: 2rem;
+
+    @include mq($until: medium) {
+      flex-direction: column;
+    }
   }
 
   &__filters-time {
     margin-top: 2rem;
   }
 
-  &__results {
-    width: 100%;
+  /*
+  It seems to be a problem with Chrome when trying to set the number of columns
+  to 2 inside a fieldset:
+  https://stackoverflow.com/questions/55819846/column-count-does-not-work-within-a-fieldst-in-chrome
+  https://stackoverflow.com/questions/3322891/why-is-chrome-cutting-off-text-in-my-css3-multi-column-layout
+  */
+  &__chrome-columns-fix {
+    @include mq($until: medium) {
+      column-count: 2;
+    }
 
-    @include mq($from: medium) {
-      width: 75%;
+    & > * {
+      @include mq($until: medium) {
+        display: block;
+      }
+    }
+  }
+
+  &__results {
+    width: 75%;
+
+    @include mq($until: medium) {
+      width: 100%;
     }
   }
 
@@ -257,21 +295,11 @@ export default class extends QiskitPage {
   }
 
   &__video {
-    position: absolute;
     width: 100%;
 
     @include mq($from: x-large) {
       top: -60%;
     }
-  }
-
-  &:after {
-    content: '';
-    height: 100%;
-    width: 100%;
-    bottom: -.5rem;
-    position: absolute;
-    background: linear-gradient(0deg, #262626 0%, #26262600 100%);
   }
 }
 
@@ -279,5 +307,9 @@ export default class extends QiskitPage {
   max-width: 1056px;
   margin: 0 auto;
   width: 100%;
+
+  & > * {
+    margin: 1rem;
+  }
 }
 </style>
