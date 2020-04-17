@@ -161,7 +161,7 @@ export default class extends QiskitPage {
   }
 
   get isDesktop () {
-    return this.windowWidth > 600
+    return this.windowWidth > 672 // mq.scss medium value
   }
 
   async mounted () {
@@ -208,13 +208,26 @@ export default class extends QiskitPage {
   color: $text-01;
 
   &__title {
-    position: absolute;
-    bottom: .5rem;
-    z-index: 1;
+    bottom: 0;
     width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background: linear-gradient(0deg, #262626 0%, #26262600 100%);
+
+    @include mq($from: medium) {
+      position: absolute;
+    }
 
     h1 {
       @include type-style('productive-heading-07');
+      padding-left: 1rem;
+
+      @include mq($until: medium) {
+        @include type-style('productive-heading-06');
+        margin-top: 1rem;
+      }
     }
   }
 
@@ -271,21 +284,11 @@ export default class extends QiskitPage {
   }
 
   &__video {
-    position: absolute;
     width: 100%;
 
     @include mq($from: x-large) {
       top: -60%;
     }
-  }
-
-  &:after {
-    content: '';
-    height: 100%;
-    width: 100%;
-    bottom: -.5rem;
-    position: absolute;
-    background: linear-gradient(0deg, #262626 0%, #26262600 100%);
   }
 }
 
