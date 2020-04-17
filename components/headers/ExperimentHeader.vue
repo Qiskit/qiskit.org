@@ -23,6 +23,7 @@
         v-if="launch"
         class="experiment-header__cta"
         :to="launch"
+        primary
       >
         Launch
       </Cta>

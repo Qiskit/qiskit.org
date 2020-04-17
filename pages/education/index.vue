@@ -38,7 +38,10 @@
         </p>
         <ul class="actions">
           <li>
-            <Cta to="https://www.youtube.com/playlist?list=PLOFEBzvs-Vvp2xg9-POLJhQwtVktlYGbY">
+            <Cta
+              to="https://www.youtube.com/playlist?list=PLOFEBzvs-Vvp2xg9-POLJhQwtVktlYGbY"
+              primary
+            >
               View all episodes
             </Cta>
           </li>
@@ -65,7 +68,11 @@
         </p>
         <ul class="actions">
           <li>
-            <Cta to="/textbook/" is-static>
+            <Cta
+              to="/textbook/"
+              is-static
+              primary
+            >
               Discover more
             </Cta>
           </li>
@@ -84,7 +91,10 @@
         </p>
         <ul class="actions">
           <li>
-            <Cta to="mailto:hello@qiskit.camp">
+            <Cta
+              to="mailto:hello@qiskit.camp"
+              primary
+            >
               Request an event
             </Cta>
           </li>

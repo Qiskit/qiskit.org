@@ -16,6 +16,7 @@
         <Cta
           v-if="to"
           :to="to"
+          primary
           @click="segmentAction && $trackClickEvent({
             action: segmentAction
           })"
