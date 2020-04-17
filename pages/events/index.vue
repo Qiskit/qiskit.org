@@ -77,7 +77,14 @@
         </div>
         <div v-else class="event-page__results">
           <p class="event-page__no-events-msg">
-            Nothing here yet - let’s make it happen!
+            Nothing here yet -
+            <a
+              href="https://airtable.com/shrP84QQiqzC3aWMF"
+              target="_blank"
+              rel="noopener"
+            >
+              let’s make it happen!
+            </a>
           </p>
         </div>
       </div>
@@ -234,6 +241,10 @@ export default class extends QiskitPage {
 
   &__no-events-msg {
     @include type-style('body-short-02');
+
+    a {
+      color: $purple-30;
+    }
   }
 }
 
