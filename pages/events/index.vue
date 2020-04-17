@@ -34,33 +34,37 @@
             <legend class="bx--label">
               Region
             </legend>
-            <client-only>
-              <cv-checkbox
-                v-for="region in regions"
-                :key="region"
-                :value="region"
-                :label="region"
-                :checked="isFilterChecked('regionFilters', region)"
-                :aria-checked="`${isFilterChecked('regionFilters', region)}`"
-                @change="updateFilter('regionFilters', region, $event)"
-              />
-            </client-only>
+            <div class="event-page__chrome-columns-fix">
+              <client-only>
+                <cv-checkbox
+                  v-for="region in regions"
+                  :key="region"
+                  :value="region"
+                  :label="region"
+                  :checked="isFilterChecked('regionFilters', region)"
+                  :aria-checked="`${isFilterChecked('regionFilters', region)}`"
+                  @change="updateFilter('regionFilters', region, $event)"
+                />
+              </client-only>
+            </div>
           </fieldset>
           <fieldset class="bx--fieldset">
             <legend class="bx--label">
               Type
             </legend>
-            <client-only>
-              <cv-checkbox
-                v-for="type in types"
-                :key="type"
-                :value="type"
-                :label="type"
-                :checked="isFilterChecked('typeFilters', type)"
-                :aria-checked="`${isFilterChecked('typeFilters', type)}`"
-                @change="updateFilter('typeFilters', type, $event)"
-              />
-            </client-only>
+            <div class="event-page__chrome-columns-fix">
+              <client-only>
+                <cv-checkbox
+                  v-for="type in types"
+                  :key="type"
+                  :value="type"
+                  :label="type"
+                  :checked="isFilterChecked('typeFilters', type)"
+                  :aria-checked="`${isFilterChecked('typeFilters', type)}`"
+                  @change="updateFilter('typeFilters', type, $event)"
+                />
+              </client-only>
+            </div>
           </fieldset>
         </div>
         <div v-if="hasEvents" class="event-page__results">
@@ -227,10 +231,20 @@ export default class extends QiskitPage {
     margin-top: 2rem;
   }
 
-  &__filters-others {
-    fieldset {
+  /*
+  It seems to be a problem with Chrome when trying to set the number of columns
+  to 2 inside a fieldset:
+  https://stackoverflow.com/questions/55819846/column-count-does-not-work-within-a-fieldst-in-chrome
+  https://stackoverflow.com/questions/3322891/why-is-chrome-cutting-off-text-in-my-css3-multi-column-layout
+  */
+  &__chrome-columns-fix {
+    @include mq($until: medium) {
+      column-count: 2;
+    }
+
+    & > * {
       @include mq($until: medium) {
-        column-count: 2;
+        display: block;
       }
     }
   }
