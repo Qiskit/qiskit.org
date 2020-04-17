@@ -32,8 +32,13 @@
 
       <div
         class="event-card__media"
-        :style="`background-image: url(${image});`"
-      />
+      >
+        <img
+          class="event-card__media-image"
+          :src="image"
+          alt=""
+        >
+      </div>
     </article>
   </a>
 </template>
@@ -71,8 +76,13 @@ export default class extends Vue {
   border-top: 1px solid $ui-03;
   display: flex;
 
+  @include mq($until: medium) {
+    height: auto;
+    flex-direction: column-reverse;
+  }
+
   &__content {
-    width: 50%;
+    flex: 1;
     margin: 1rem;
     display: flex;
     flex-direction: column;
@@ -119,10 +129,25 @@ export default class extends Vue {
   }
 
   &__media {
-    width: 50%;
+    flex: 1;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+    overflow: hidden;
+
+    @include mq($until: medium) {
+
+    }
+  }
+
+  &__media-image {
+    width: auto;
+    height: 100%;
+
+    @include mq($until: medium) {
+      width: 100%;
+      height: auto;
+    }
   }
 }
 </style>
