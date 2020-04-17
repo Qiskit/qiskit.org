@@ -44,11 +44,12 @@ export default class extends Vue {
 .cta {
   display: inline-block;
   text-decoration: none;
+  border: 2px solid;
 
   &--primary, &--secondary {
     @include type-style('productive-heading-02');
     padding: 0.66rem 1rem;
-    border: 2px solid $interactive-01;
+    border-color: $interactive-01;
     text-transform: uppercase;
     white-space: nowrap;
   }
@@ -66,7 +67,7 @@ export default class extends Vue {
   &--terciary {
     @include type-style('productive-heading-01');
     padding: 0.5rem 0.8rem;
-    border: 2px $ui-01 solid;
+    border-color: $ui-01;
     color: $inverse-01;
     transition: background-color linear 200ms,
                 color linear 200ms,
