@@ -26,7 +26,7 @@
         <Cta
           v-if="sources"
           :to="sources"
-          legacy
+          terciary
           @click="segmentAction && $trackClickEvent({
             action: segmentAction
           })"

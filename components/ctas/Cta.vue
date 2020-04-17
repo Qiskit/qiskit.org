@@ -1,7 +1,7 @@
 <template>
   <component
     :is="!isStatic && isInternal(to) ? 'nuxt-link' : 'a'"
-    :class="[ 'cta', { 'cta--primary': primary, 'cta--secondary': secondary, 'cta--legacy': legacy } ]"
+    :class="[ 'cta', { 'cta--primary': primary, 'cta--secondary': secondary, 'cta--terciary': terciary } ]"
     :href="to"
     :to="!isStatic && isInternal(to) ? to : null"
     :rel="isExternal(to) ? 'noopener' : null"
@@ -21,7 +21,7 @@ export default class extends Vue {
   @Prop(String) to
   @Prop(Boolean) primary
   @Prop(Boolean) secondary
-  @Prop(Boolean) legacy
+  @Prop(Boolean) terciary
   @Prop(Boolean) isStatic
 
   isExternal (url: string): boolean {
@@ -63,7 +63,7 @@ export default class extends Vue {
     background-color: $inverse-02;
   }
 
-  &--legacy {
+  &--terciary {
     @include type-style('productive-heading-01');
     padding: 0.5rem 0.8rem;
     border: 2px $ui-01 solid;
