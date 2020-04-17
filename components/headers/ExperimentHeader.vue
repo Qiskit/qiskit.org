@@ -21,7 +21,6 @@
       </p>
       <Cta
         v-if="launch"
-        class="experiment-header__cta"
         :to="launch"
         primary
       >
@@ -29,7 +28,6 @@
       </Cta>
       <Cta
         v-if="source"
-        class="experiment-header__cta"
         :to="source"
         secondary
       >
@@ -118,10 +116,6 @@ export default class extends Vue {
       margin-right: 0.25rem;
     }
   }
-}
-
-.experiment-header__cta {
-  margin-right: 1rem;
 }
 
 .experiment-header__media {
