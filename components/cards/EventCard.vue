@@ -143,6 +143,11 @@ export default class extends Vue {
   &__media-image {
     width: auto;
     height: 100%;
+    /*
+    Safari ignores width: auto when height is 100%.
+    TODO: Find a better/more standard solution.
+    */
+    height: -webkit-fill-available;
 
     @include mq($until: medium) {
       width: 100%;
