@@ -28,8 +28,8 @@
           </cv-tabs>
         </client-only>
       </div>
-      <div class="event-page__checkboxes-results">
-        <div class="event-page__filters-checkboxes">
+      <div class="event-page__event-index">
+        <div class="event-page__filters-others">
           <fieldset class="bx--fieldset">
             <legend class="bx--label">
               Region
@@ -214,21 +214,32 @@ export default class extends QiskitPage {
     }
   }
 
-  &__checkboxes-results {
+  &__event-index {
     display: flex;
     justify-content: space-between;
-    margin-top: 2rem;
+
+    @include mq($until: medium) {
+      flex-direction: column;
+    }
   }
 
   &__filters-time {
     margin-top: 2rem;
   }
 
-  &__results {
-    width: 100%;
+  &__filters-others {
+    fieldset {
+      @include mq($until: medium) {
+        column-count: 2;
+      }
+    }
+  }
 
-    @include mq($from: medium) {
-      width: 75%;
+  &__results {
+    width: 75%;
+
+    @include mq($until: medium) {
+      width: 100%;
     }
   }
 
@@ -268,5 +279,9 @@ export default class extends QiskitPage {
   max-width: 1056px;
   margin: 0 auto;
   width: 100%;
+
+  & > * {
+    margin: 1rem;
+  }
 }
 </style>
