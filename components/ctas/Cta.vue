@@ -42,13 +42,16 @@ export default class extends Vue {
 @import '~carbon-components/scss/globals/scss/typography';
 
 .cta {
-  @include type-style('productive-heading-02');
   display: inline-block;
-  padding: 0.66rem 1rem;
-  border: 2px solid $interactive-01;
-  text-transform: uppercase;
   text-decoration: none;
-  white-space: nowrap;
+
+  &--primary, &--secondary {
+    @include type-style('productive-heading-02');
+    padding: 0.66rem 1rem;
+    border: 2px solid $interactive-01;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
 
   &--primary {
     color: $text-01;
