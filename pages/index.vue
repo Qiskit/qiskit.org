@@ -13,7 +13,7 @@
         <p>Would you like to learn how to code a quantum computer? Take a look at the Coding with Qiskit Video Series, where Abraham Asfaw explains everything you need to know. Starting with installing Qiskit, to investigating the latest algorithms and research topics.</p>
         <Cta
           to="https://www.youtube.com/playlist?list=PLOFEBzvs-Vvp2xg9-POLJhQwtVktlYGbY"
-          tertiary
+          type="tertiary"
           @click="$trackClickEvent({
             action: 'Coding with Qiskit Video Series'
           })"
@@ -26,7 +26,7 @@
         <p>This activity pack will entertain your kids with fun activities about quantum computing. Fun for all kids and parents!</p>
         <Cta
           to="/activities/quantum-activity-pack-for-kids.pdf"
-          tertiary
+          type="tertiary"
           is-static
           @click="$trackClickEvent({
             action: 'Activity pack for kids'
@@ -42,7 +42,7 @@
         <p>New to quantum computing? Try out the IBM Quantum Experience to get started with Qiskit in the cloud. No installation required and free hosted tutorials. Work is saved in the cloud and automatically updated with every Qiskit release.</p>
         <Cta
           to="https://quantum-computing.ibm.com/login"
-          tertiary
+          type="tertiary"
           @click="$trackClickEvent({
             action: 'Introducing Qiskit notebooks: Try out'
           })"

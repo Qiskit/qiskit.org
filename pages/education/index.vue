@@ -40,7 +40,7 @@
           <li>
             <Cta
               to="https://www.youtube.com/playlist?list=PLOFEBzvs-Vvp2xg9-POLJhQwtVktlYGbY"
-              primary
+              type="primary"
             >
               View all episodes
             </Cta>
@@ -71,7 +71,7 @@
             <Cta
               to="/textbook/"
               is-static
-              primary
+              type="primary"
             >
               Discover more
             </Cta>
@@ -93,7 +93,7 @@
           <li>
             <Cta
               to="mailto:hello@qiskit.camp"
-              primary
+              type="primary"
             >
               Request an event
             </Cta>

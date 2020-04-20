@@ -1,7 +1,7 @@
 <template>
   <component
     :is="!isStatic && isInternal(to) ? 'nuxt-link' : 'a'"
-    :class="[ 'cta', { 'cta--primary': primary, 'cta--secondary': secondary, 'cta--tertiary': tertiary } ]"
+    :class="[ 'cta', `cta--${type}`]"
     :href="to"
     :to="!isStatic && isInternal(to) ? to : null"
     :rel="isExternal(to) ? 'noopener' : null"
@@ -16,12 +16,12 @@
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 
+type CtaTypes = 'primary' | 'secondary' | 'tertiary'
+
 @Component
 export default class extends Vue {
   @Prop(String) to
-  @Prop(Boolean) primary
-  @Prop(Boolean) secondary
-  @Prop(Boolean) tertiary
+  @Prop({ default: 'primary' }) type!: CtaTypes
   @Prop(Boolean) isStatic
 
   isExternal (url: string): boolean {

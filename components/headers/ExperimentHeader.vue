@@ -22,14 +22,14 @@
       <Cta
         v-if="launch"
         :to="launch"
-        primary
+        type="primary"
       >
         Launch
       </Cta>
       <Cta
         v-if="source"
         :to="source"
-        secondary
+        type="secondary"
       >
         Explore the code
       </Cta>

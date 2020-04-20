@@ -16,7 +16,7 @@
         <Cta
           v-if="to"
           :to="to"
-          primary
+          type="primary"
           @click="segmentAction && $trackClickEvent({
             action: segmentAction
           })"
@@ -26,7 +26,7 @@
         <Cta
           v-if="sources"
           :to="sources"
-          tertiary
+          type="tertiary"
           @click="segmentAction && $trackClickEvent({
             action: segmentAction
           })"
