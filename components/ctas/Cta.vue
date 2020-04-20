@@ -16,12 +16,12 @@
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 
-type CtaTypes = 'primary' | 'secondary' | 'tertiary'
+type CtaType = 'primary' | 'secondary' | 'tertiary'
 
 @Component
 export default class extends Vue {
   @Prop(String) to
-  @Prop({ default: 'primary' }) type!: CtaTypes
+  @Prop({ default: 'primary' }) type!: CtaType
   @Prop(Boolean) isStatic
 
   isExternal (url: string): boolean {
