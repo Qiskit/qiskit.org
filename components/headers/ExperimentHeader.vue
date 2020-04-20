@@ -19,18 +19,10 @@
       <p class="experiment-header__author">
         {{ authors }}
       </p>
-      <Cta
-        v-if="launch"
-        :to="launch"
-        type="primary"
-      >
+      <Cta v-if="launch" :to="launch">
         Launch
       </Cta>
-      <Cta
-        v-if="source"
-        :to="source"
-        type="secondary"
-      >
+      <Cta v-if="source" :to="source" type="secondary">
         Explore the code
       </Cta>
       <div class="experiment-header__media">
