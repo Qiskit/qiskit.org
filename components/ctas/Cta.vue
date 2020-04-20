@@ -1,7 +1,7 @@
 <template>
   <component
     :is="!isStatic && isInternal(to) ? 'nuxt-link' : 'a'"
-    :class="[ 'cta', { 'cta--secondary': secondary } ]"
+    :class="[ 'cta', `cta--${type}`]"
     :href="to"
     :to="!isStatic && isInternal(to) ? to : null"
     :rel="isExternal(to) ? 'noopener' : null"
@@ -16,10 +16,12 @@
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 
+type CtaType = 'primary' | 'secondary' | 'tertiary'
+
 @Component
 export default class extends Vue {
   @Prop(String) to
-  @Prop(Boolean) secondary
+  @Prop({ default: 'primary' }) type!: CtaType
   @Prop(Boolean) isStatic
 
   isExternal (url: string): boolean {
@@ -40,19 +42,42 @@ export default class extends Vue {
 @import '~carbon-components/scss/globals/scss/typography';
 
 .cta {
-  @include type-style('productive-heading-02');
   display: inline-block;
-  padding: 0.66rem 1rem;
-  background-color: $ui-01;
-  border: 2px solid $interactive-01;
-  color: $text-01;
-  text-transform: uppercase;
   text-decoration: none;
-  white-space: nowrap;
+  border: 2px solid;
+
+  &--primary, &--secondary {
+    @include type-style('productive-heading-02');
+    padding: 0.66rem 1rem;
+    border-color: $interactive-01;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  &--primary {
+    color: $text-01;
+    background-color: $ui-01;
+  }
 
   &--secondary {
     color: $inverse-01;
     background-color: $inverse-02;
+  }
+
+  &--tertiary {
+    @include type-style('productive-heading-01');
+    padding: 0.5rem 0.8rem;
+    border-color: $ui-01;
+    color: $inverse-01;
+    transition: background-color linear 200ms,
+                color linear 200ms,
+                fill linear 200ms;
+
+    &:hover {
+      background-color: $ui-01;
+      color: $text-01;
+      fill: $text-01;
+    }
   }
 }
 </style>
