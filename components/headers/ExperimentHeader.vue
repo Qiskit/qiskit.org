@@ -19,19 +19,10 @@
       <p class="experiment-header__author">
         {{ authors }}
       </p>
-      <Cta
-        v-if="launch"
-        class="experiment-header__cta"
-        :to="launch"
-      >
+      <Cta v-if="launch" :to="launch">
         Launch
       </Cta>
-      <Cta
-        v-if="source"
-        class="experiment-header__cta"
-        :to="source"
-        secondary
-      >
+      <Cta v-if="source" :to="source" type="secondary">
         Explore the code
       </Cta>
       <div class="experiment-header__media">
@@ -117,10 +108,6 @@ export default class extends Vue {
       margin-right: 0.25rem;
     }
   }
-}
-
-.experiment-header__cta {
-  margin-right: 1rem;
 }
 
 .experiment-header__media {
