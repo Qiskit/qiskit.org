@@ -155,7 +155,7 @@ describe('getLocation', () => {
       name: 'Fake Conference',
       region: americas
     })
-    expect(getLocation(noLocationEvent)).toBe(getRegion(noLocationEvent))
+    expect(getLocation(noLocationEvent)).toBe(americas)
   })
 
   it('gets the location from the record', () => {
@@ -275,7 +275,7 @@ describe('formatDates', () => {
   })
 
   it('shows start date when start and end dates are equal', () => {
-    expect(formatDates(start, endSameDate)).toBe(formatDates(start))
+    expect(formatDates(start, endSameDate)).toBe('January 1, 2020')
   })
 
   it('shows the start date when there is only start date', () => {
