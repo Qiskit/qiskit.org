@@ -61,7 +61,7 @@ import LegacyPresentation from '~/components/headers/LegacyPresentation.vue'
 import LegacySection from '~/components/sections/LegacySection.vue'
 import SoftwareStack from '~/components/qiskit/SoftwareStack.vue'
 import SyntaxHighlight from '~/components/qiskit/SyntaxHighlight.vue'
-import Cta from '~/components/ctas/Cta.vue'
+import Cta from '~/components/ui/Cta.vue'
 
 @Component({
   components: {

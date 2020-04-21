@@ -102,7 +102,7 @@ import CommunityHeader from '~/components/headers/CommunityHeader.vue'
 import PageSection from '~/components/sections/PageSection.vue'
 import TextbookPreview from '~/components/education/TextbookPreview.vue'
 import MdContent from '~/components/MdContent.vue'
-import Cta from '~/components/ctas/Cta.vue'
+import Cta from '~/components/ui/Cta.vue'
 // @ts-ignore: Cannot find module
 import TextbookTOC from '~/content/education/textbook-toc.md'
 

@@ -43,7 +43,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-import Cta from '~/components/ctas/Cta.vue'
+import Cta from '~/components/ui/Cta.vue'
 
 @Component({
   components: { Cta }
