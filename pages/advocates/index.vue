@@ -88,7 +88,7 @@ import InnerNavigation from '~/components/menus/InnerNavigation.vue'
 import CommunityHeader from '~/components/headers/CommunityHeader.vue'
 import PageSection from '~/components/sections/PageSection.vue'
 import MapSection from '~/components/advocates/MapSection.vue'
-import AdvocateCard from '~/components/cards/AdvocateCard.vue'
+import AdvocateCard from '~/components/advocates/AdvocateCard.vue'
 import CompactFeature from '~/components/features/CompactFeature.vue'
 
 @Component({
