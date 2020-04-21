@@ -1,6 +1,6 @@
 <template>
   <div class="event-page">
-    <Menu>
+    <EventMenu>
       <li
         v-for="link in event.attributes.nav"
         :key="link.goTo"
@@ -9,7 +9,7 @@
           {{ link.text }}
         </nuxt-link>
       </li>
-    </Menu>
+    </EventMenu>
     <header
       :style="{
         backgroundImage: `url(${uri.hBackground}), url(${uri.lBackground})`
@@ -34,7 +34,7 @@
 import { Component } from 'vue-property-decorator'
 import { Context } from '@nuxt/types'
 import QiskitPage from '~/components/qiskit/QiskitPage.vue'
-import Menu from '~/components/Menu.vue'
+import EventMenu from '~/components/events/EventMenu.vue'
 import EventFooter from '~/components/events/EventFooter.vue'
 
 function getBackgroundUris (background: string): [string, string] {
@@ -47,7 +47,7 @@ function getBackgroundUris (background: string): [string, string] {
 @Component({
   layout: 'event',
   components: {
-    Menu,
+    EventMenu,
     EventFooter
   },
   head () {
