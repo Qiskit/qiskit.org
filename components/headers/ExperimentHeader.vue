@@ -40,7 +40,7 @@
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 import Cta from '~/components/ui/Cta.vue'
-import Media from '~/components/Media.vue'
+import Media from '~/components/ui/Media.vue'
 
 @Component({
   components: { Cta, Media }
