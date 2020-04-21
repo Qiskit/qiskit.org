@@ -40,7 +40,7 @@ import InnerNavigation from '~/components/menus/InnerNavigation.vue'
 import CommunityHeader from '~/components/headers/CommunityHeader.vue'
 import PageSection from '~/components/sections/PageSection.vue'
 import ExperimentCard from '~/components/experiments/ExperimentCard.vue'
-import ExperimentCarousel from '~/components/cards/ExperimentCarousel.vue'
+import ExperimentCarousel from '~/components/experiments/ExperimentCarousel.vue'
 
 @Component({
   components: {
