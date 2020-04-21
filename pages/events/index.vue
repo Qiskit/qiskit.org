@@ -100,7 +100,7 @@
 import { mapGetters, mapActions } from 'vuex'
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/qiskit/QiskitPage.vue'
-import EventCard from '~/components/cards/EventCard.vue'
+import EventCard from '~/components/events/EventCard.vue'
 import {
   CommunityEvent,
   WORLD_REGION_OPTIONS,
