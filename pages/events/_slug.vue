@@ -26,7 +26,7 @@
       </section>
     </header>
     <main v-html="event.html" />
-    <Footer />
+    <EventFooter />
   </div>
 </template>
 
@@ -35,7 +35,7 @@ import { Component } from 'vue-property-decorator'
 import { Context } from '@nuxt/types'
 import QiskitPage from '~/components/qiskit/QiskitPage.vue'
 import Menu from '~/components/Menu.vue'
-import Footer from '~/components/Footer.vue'
+import EventFooter from '~/components/events/EventFooter.vue'
 
 function getBackgroundUris (background: string): [string, string] {
   const bgRoute = '/images/events/headers/'
@@ -48,7 +48,7 @@ function getBackgroundUris (background: string): [string, string] {
   layout: 'event',
   components: {
     Menu,
-    Footer
+    EventFooter
   },
   head () {
     const self = this as any
