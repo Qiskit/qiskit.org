@@ -93,7 +93,7 @@ for rb_seed,rb_circ_seed in enumerate(rb_circs):
 import { Component } from 'vue-property-decorator'
 import QiskitElementPage from '~/components/logic/QiskitElementPage.vue'
 import LegacyPresentation from '~/components/elements/LegacyPresentation.vue'
-import LegacySection from '~/components/sections/LegacySection.vue'
+import LegacySection from '~/components/ui/sections/LegacySection.vue'
 import SoftwareStack from '~/components/ui/SoftwareStack.vue'
 import SyntaxHighlight from '~/components/ui/SyntaxHighlight.vue'
 import Cta from '~/components/ui/Cta.vue'

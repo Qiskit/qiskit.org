@@ -37,7 +37,7 @@
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import CommunityHeader from '~/components/ui/CommunityHeader.vue'
-import PageSection from '~/components/sections/PageSection.vue'
+import PageSection from '~/components/ui/sections/PageSection.vue'
 import ExperimentCard from '~/components/experiments/ExperimentCard.vue'
 import ExperimentCarousel from '~/components/experiments/ExperimentCarousel.vue'
 

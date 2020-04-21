@@ -147,7 +147,7 @@
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import LegacyPresentation from '~/components/elements/LegacyPresentation.vue'
-import LegacySection from '~/components/sections/LegacySection.vue'
+import LegacySection from '~/components/ui/sections/LegacySection.vue'
 import Cta from '~/components/ui/Cta.vue'
 
 @Component({
