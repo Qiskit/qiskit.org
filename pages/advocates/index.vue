@@ -89,7 +89,7 @@ import CommunityHeader from '~/components/headers/CommunityHeader.vue'
 import PageSection from '~/components/sections/PageSection.vue'
 import MapSection from '~/components/advocates/MapSection.vue'
 import AdvocateCard from '~/components/advocates/AdvocateCard.vue'
-import CompactFeature from '~/components/features/CompactFeature.vue'
+import CompactFeature from '~/components/ui/CompactFeature.vue'
 
 @Component({
   components: {
