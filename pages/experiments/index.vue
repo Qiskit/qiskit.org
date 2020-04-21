@@ -39,7 +39,7 @@ import QiskitPage from '~/components/qiskit/QiskitPage.vue'
 import InnerNavigation from '~/components/menus/InnerNavigation.vue'
 import CommunityHeader from '~/components/headers/CommunityHeader.vue'
 import PageSection from '~/components/sections/PageSection.vue'
-import ExperimentCard from '~/components/cards/ExperimentCard.vue'
+import ExperimentCard from '~/components/experiments/ExperimentCard.vue'
 import ExperimentCarousel from '~/components/cards/ExperimentCarousel.vue'
 
 @Component({
