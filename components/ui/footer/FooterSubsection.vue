@@ -10,7 +10,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-import LinkList from '~/components/footers/LinkList.vue'
+import LinkList from '~/components/ui/footer/LinkList.vue'
 
 @Component({
   components: {
