@@ -85,7 +85,7 @@
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/qiskit/QiskitPage.vue'
 import InnerNavigation from '~/components/ui/InnerNavigation.vue'
-import CommunityHeader from '~/components/headers/CommunityHeader.vue'
+import CommunityHeader from '~/components/ui/CommunityHeader.vue'
 import PageSection from '~/components/sections/PageSection.vue'
 import MapSection from '~/components/advocates/MapSection.vue'
 import AdvocateCard from '~/components/advocates/AdvocateCard.vue'
