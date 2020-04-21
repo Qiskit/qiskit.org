@@ -57,7 +57,7 @@ print(backend, backend.status().pending_jobs)</SyntaxHighlight>
 <script lang="ts">
 import { Component } from 'vue-property-decorator'
 import QiskitElementPage from '~/components/qiskit/QiskitElementPage.vue'
-import LegacyPresentation from '~/components/headers/LegacyPresentation.vue'
+import LegacyPresentation from '~/components/elements/LegacyPresentation.vue'
 import LegacySection from '~/components/sections/LegacySection.vue'
 import SoftwareStack from '~/components/qiskit/SoftwareStack.vue'
 import SyntaxHighlight from '~/components/qiskit/SyntaxHighlight.vue'
