@@ -22,7 +22,7 @@
 import { Component } from 'vue-property-decorator'
 import { Context } from '@nuxt/types'
 import QiskitPage from '~/components/qiskit/QiskitPage.vue'
-import ExperimentHeader from '~/components/headers/ExperimentHeader.vue'
+import ExperimentHeader from '~/components/experiments/ExperimentHeader.vue'
 import PageSection from '~/components/sections/PageSection.vue'
 import MdContent from '~/components/ui/MdContent.vue'
 
