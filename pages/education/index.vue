@@ -96,7 +96,7 @@
 
 <script lang="ts">
 import { Component } from 'vue-property-decorator'
-import QiskitPage from '~/components/qiskit/QiskitPage.vue'
+import QiskitPage from '~/components/logic/QiskitPage.vue'
 import InnerNavigation from '~/components/ui/InnerNavigation.vue'
 import CommunityHeader from '~/components/ui/CommunityHeader.vue'
 import PageSection from '~/components/sections/PageSection.vue'
