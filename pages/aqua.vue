@@ -76,7 +76,7 @@ print(result["result"])</SyntaxHighlight>
 
 <script lang="ts">
 import { Component } from 'vue-property-decorator'
-import QiskitElementPage from '~/components/qiskit/QiskitElementPage.vue'
+import QiskitElementPage from '~/components/elements/QiskitElementPage.vue'
 import LegacyPresentation from '~/components/elements/LegacyPresentation.vue'
 import LegacySection from '~/components/sections/LegacySection.vue'
 import SoftwareStack from '~/components/qiskit/SoftwareStack.vue'
