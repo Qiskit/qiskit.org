@@ -101,7 +101,6 @@ import InnerNavigation from '~/components/menus/InnerNavigation.vue'
 import CommunityHeader from '~/components/headers/CommunityHeader.vue'
 import PageSection from '~/components/sections/PageSection.vue'
 import TextbookPreview from '~/components/education/TextbookPreview.vue'
-import MdContent from '~/components/MdContent.vue'
 import Cta from '~/components/ui/Cta.vue'
 // @ts-ignore: Cannot find module
 import TextbookTOC from '~/content/education/textbook-toc.md'
@@ -112,7 +111,6 @@ import TextbookTOC from '~/content/education/textbook-toc.md'
     CommunityHeader,
     PageSection,
     TextbookPreview,
-    MdContent,
     Cta,
     TextbookTOC: TextbookTOC.vue.component
   },
