@@ -5,7 +5,8 @@
       class="compact-feature__icon"
       :src="`/images/icons/icon${icon}White@3x.png`"
     >
-    <slot />
+    <h2 class="compact-feature__title">{{ title }}</h2>
+    <p class="compact-feature__description">{{ description }}</p>
   </section>
 </template>
 
@@ -16,6 +17,8 @@ import { Component, Prop } from 'vue-property-decorator'
 @Component
 export default class extends Vue {
   @Prop({ type: String, default: '' }) icon
+  @Prop({ type: String, default: '' }) title
+  @Prop({ type: String, default: '' }) description
 }
 </script>
 
@@ -30,13 +33,13 @@ export default class extends Vue {
     margin-bottom: 1rem;
   }
 
-  p {
-    @include body-long-04();
-    margin-top: 0.5rem;
+  &__title {
+    @include productive-heading-04_5();
   }
 
-  h2 {
-    @include productive-heading-04_5();
+  &__description {
+    @include body-long-04();
+    margin-top: 0.5rem;
   }
 }
 </style>

@@ -9,29 +9,10 @@
         <template #features>
           <div id="advocates-benefits">
             <CompactFeature
-              icon="Community"
-            >
-              <h2>Network with experts and enthusiasts</h2>
-              <p>Advocates will be added to a group of quantum experts and will be a part of regular information sharing sessions.</p>
-            </CompactFeature>
-            <CompactFeature
-              icon="Qiskit"
-            >
-              <h2>Access to Qiskit core members and projects</h2>
-              <p>Advocates will receive special access to core members of the Qiskit team for questions and brainstorming ideas.</p>
-            </CompactFeature>
-            <CompactFeature
-              icon="Visibility"
-            >
-              <h2>Increased visibility for your work</h2>
-              <p>All advocates will have the opportunity to have their work supported and highlighted by IBM.</p>
-            </CompactFeature>
-            <CompactFeature
-              icon="Events"
-            >
-              <h2>Invitation to events</h2>
-              <p>Active Qiskit Advocates will be invited to attend global events created for the quantum computing community.</p>
-            </CompactFeature>
+              v-for="benefit in advocateBenefits"
+              :key="`benefit-${benefit.icon}`"
+              v-bind="benefit"
+            />
           </div>
         </template>
       </CommunityHeader>
@@ -91,6 +72,10 @@ import MapSection from '~/components/advocates/MapSection.vue'
 import AdvocateCard from '~/components/advocates/AdvocateCard.vue'
 import CompactFeature from '~/components/ui/CompactFeature.vue'
 
+type Benefit = {
+  [key: string]: string
+}
+
 @Component({
   components: {
     InnerNavigation,
@@ -122,6 +107,28 @@ import CompactFeature from '~/components/ui/CompactFeature.vue'
 })
 export default class extends QiskitPage {
   routeName: string = 'advocates'
+  advocateBenefits: Array<Benefit> = [
+    {
+      icon: 'Community',
+      title: 'Network with experts and enthusiasts',
+      description: 'Advocates will be added to a group of quantum experts and will be a part of regular information sharing sessions.'
+    },
+    {
+      icon: 'Qiskit',
+      title: 'Access to Qiskit core members and projects',
+      description: 'Advocates will receive special access to core members of the Qiskit team for questions and brainstorming ideas.'
+    },
+    {
+      icon: 'Visibility',
+      title: 'Increased visibility for your work',
+      description: 'All advocates will have the opportunity to have their work supported and highlighted by IBM.'
+    },
+    {
+      icon: 'Events',
+      title: 'Invitation to events',
+      description: 'Active Qiskit Advocates will be invited to attend global events created for the quantum computing community.'
+    }
+  ]
 
   cities () {
     const cityIndex = this.$data.profiles.reduce((cityIndex, card) => {
