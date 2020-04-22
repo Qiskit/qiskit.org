@@ -16,14 +16,22 @@
         Back to experiments
       </nuxt-link>
       <h1>{{ name }}</h1>
-      <p class="experiment-header__author">
-        {{ authors }}
+      <p class="experiment-header__meta">
+        <span class="experiment-header__author">
+          {{ authors }}
+        </span>
+        |
+        <a
+          class="experiment-header__source-code-link"
+          :href="source"
+          target="_blank"
+          rel="noopener"
+        >
+          Explore the code
+        </a>
       </p>
       <Cta v-if="launch" :to="launch">
         Launch
-      </Cta>
-      <Cta v-if="source" :to="source" type="secondary">
-        Explore the code
       </Cta>
       <div class="experiment-header__media">
         <Media
@@ -72,15 +80,21 @@ export default class extends Vue {
   }
 }
 
-.experiment-header__author {
+.experiment-header__meta {
   @include type-style('body-short-01');
   color: $purple-30;
   margin: 1rem 0 1rem 0;
+}
 
-  &::before {
+.experiment-header__author {
+    &::before {
     content: "by";
     color: $text-02;
   }
+}
+
+.experiment-header__source-code-link {
+  color: currentColor;
 }
 
 .experiment-header__back-navigation {
@@ -111,6 +125,7 @@ export default class extends Vue {
 }
 
 .experiment-header__media {
+  margin-top: 1rem;
   width: 100%;
 
   & > * {
