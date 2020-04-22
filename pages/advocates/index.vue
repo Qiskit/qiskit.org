@@ -68,9 +68,9 @@
         <h2>Meet the Advocates</h2>
         <div class="advocate-cards-container">
           <AdvocateCard
-            v-for="card in profiles"
-            :key="`advocate-${card.attributes.name}`"
-            v-bind="card.attributes"
+            v-for="profile in profiles"
+            :key="`advocate-${profile.attributes.name}`"
+            v-bind="profile.attributes"
           />
         </div>
       </PageSection>
