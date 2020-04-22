@@ -68,12 +68,9 @@
         <h2>Meet the Advocates</h2>
         <div class="advocate-cards-container">
           <AdvocateCard
-            v-for="(card, index) in profiles"
-            :key="`advocate-${index}`"
-            :name="card.attributes.name"
-            :image="`/images/advocates/${card.attributes.image}`"
-            :location="card.attributes.location"
-            :areas="card.attributes.areas"
+            v-for="card in profiles"
+            :key="`advocate-${card.attributes.name}`"
+            v-bind="card.attributes"
           />
         </div>
       </PageSection>

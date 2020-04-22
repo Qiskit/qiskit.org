@@ -5,16 +5,16 @@
       :style="`background-image: ${decorate(image)};`"
     />
     <div class="advocate-card__copy">
-      <h3>
+      <h3 class="advocate-card__name">
         {{ name }}
       </h3>
-      <p>
+      <p class="advocate-card__location">
         {{ location }}
       </p>
-      <h3>
+      <h3 class="advocate-card__focus-areas-title">
         Focus areas
       </h3>
-      <p>
+      <p class="advocate-card__focus-areas">
         {{ areas }}
       </p>
     </div>
@@ -36,7 +36,7 @@ export default class extends Vue {
     const bgEffects = [
       'linear-gradient(170deg, #0000 0%, #0000 90%, var(--component-bg) 90.3%)',
       'linear-gradient(-170deg, #0000 0%, #0000 90%, var(--component-bg) 90.3%)',
-      `url(${image})`
+      `url(/images/advocates/${image})`
     ]
     return bgEffects.join(', ')
   }
@@ -53,20 +53,6 @@ export default class extends Vue {
   border: 1px solid $focus;
   background-color: var(--component-bg);
 
-  p {
-    @include type-style('body-short-02');
-    margin-top: 0;
-  }
-
-  h3 {
-    @include type-style('productive-heading-04');
-    margin-top: 1.5rem;
-
-    &:first-child {
-      margin-top: 0;
-    }
-  }
-
   &__picture {
     height: 350px;
     background-repeat: no-repeat;
@@ -76,6 +62,18 @@ export default class extends Vue {
 
   &__copy {
     margin: 0.5rem 2rem 1em;
+  }
+
+  &__name, &__focus-areas-title {
+    @include type-style('productive-heading-04');
+  }
+
+  &__focus-areas-title {
+    margin-top: 1.5rem;
+  }
+
+  &__location, &__focus-areas {
+    @include type-style('body-short-02');
   }
 }
 </style>
