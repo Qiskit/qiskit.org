@@ -145,10 +145,10 @@
 
 <script lang="ts">
 import { Component } from 'vue-property-decorator'
-import QiskitPage from '~/components/qiskit/QiskitPage.vue'
-import LegacyPresentation from '~/components/headers/LegacyPresentation.vue'
-import LegacySection from '~/components/sections/LegacySection.vue'
-import Cta from '~/components/ctas/Cta.vue'
+import QiskitPage from '~/components/logic/QiskitPage.vue'
+import LegacyPresentation from '~/components/elements/LegacyPresentation.vue'
+import LegacySection from '~/components/ui/sections/LegacySection.vue'
+import Cta from '~/components/ui/Cta.vue'
 
 @Component({
   components: {

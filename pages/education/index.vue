@@ -96,13 +96,12 @@
 
 <script lang="ts">
 import { Component } from 'vue-property-decorator'
-import QiskitPage from '~/components/qiskit/QiskitPage.vue'
-import InnerNavigation from '~/components/menus/InnerNavigation.vue'
-import CommunityHeader from '~/components/headers/CommunityHeader.vue'
-import PageSection from '~/components/sections/PageSection.vue'
+import QiskitPage from '~/components/logic/QiskitPage.vue'
+import InnerNavigation from '~/components/ui/InnerNavigation.vue'
+import CommunityHeader from '~/components/ui/CommunityHeader.vue'
+import PageSection from '~/components/ui/sections/PageSection.vue'
 import TextbookPreview from '~/components/education/TextbookPreview.vue'
-import MdContent from '~/components/MdContent.vue'
-import Cta from '~/components/ctas/Cta.vue'
+import Cta from '~/components/ui/Cta.vue'
 // @ts-ignore: Cannot find module
 import TextbookTOC from '~/content/education/textbook-toc.md'
 
@@ -112,7 +111,6 @@ import TextbookTOC from '~/content/education/textbook-toc.md'
     CommunityHeader,
     PageSection,
     TextbookPreview,
-    MdContent,
     Cta,
     TextbookTOC: TextbookTOC.vue.component
   },
