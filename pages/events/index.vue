@@ -99,8 +99,8 @@
 <script lang="ts">
 import { mapGetters, mapActions } from 'vuex'
 import { Component } from 'vue-property-decorator'
-import QiskitPage from '~/components/qiskit/QiskitPage.vue'
-import EventCard from '~/components/cards/EventCard.vue'
+import QiskitPage from '~/components/logic/QiskitPage.vue'
+import EventCard from '~/components/events/EventCard.vue'
 import {
   CommunityEvent,
   WORLD_REGION_OPTIONS,

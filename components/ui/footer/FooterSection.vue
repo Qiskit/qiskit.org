@@ -12,7 +12,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-import FooterSubsection from '~/components/footers/FooterSubsection.vue'
+import FooterSubsection from '~/components/ui/footer/FooterSubsection.vue'
 
 @Component({
   components: {

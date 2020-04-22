@@ -76,12 +76,12 @@ print(result["result"])</SyntaxHighlight>
 
 <script lang="ts">
 import { Component } from 'vue-property-decorator'
-import QiskitElementPage from '~/components/qiskit/QiskitElementPage.vue'
-import LegacyPresentation from '~/components/headers/LegacyPresentation.vue'
-import LegacySection from '~/components/sections/LegacySection.vue'
-import SoftwareStack from '~/components/qiskit/SoftwareStack.vue'
-import SyntaxHighlight from '~/components/qiskit/SyntaxHighlight.vue'
-import Cta from '~/components/ctas/Cta.vue'
+import QiskitElementPage from '~/components/logic/QiskitElementPage.vue'
+import LegacyPresentation from '~/components/elements/LegacyPresentation.vue'
+import LegacySection from '~/components/ui/sections/LegacySection.vue'
+import SoftwareStack from '~/components/ui/SoftwareStack.vue'
+import SyntaxHighlight from '~/components/ui/SyntaxHighlight.vue'
+import Cta from '~/components/ui/Cta.vue'
 
 @Component({
   components: {
