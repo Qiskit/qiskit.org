@@ -250,7 +250,7 @@ export default class extends QiskitPage {
 </script>
 
 <style lang="scss">
-@import '~/assets/scss/legacy-elements.scss';
+@import '~/assets/scss/elements.scss';
 @import '~carbon-components/scss/globals/scss/typography';
 
 .landing-page {
@@ -338,39 +338,6 @@ export default class extends QiskitPage {
     &:hover {
       color: $inverse-01;
       text-decoration: underline;
-    }
-  }
-}
-
-.legacy-section {
-  background-color: $text-01;
-}
-
-.legacy-section:nth-child(2n+1) {
-  background-color: $purple-40;
-}
-
-.social-network-list {
-
-  li {
-
-    a {
-      @include type-style('productive-heading-02');
-      text-decoration: none;
-
-      &:hover {
-        color: $inverse-01;
-        text-decoration: underline;
-      }
-
-      div {
-        display: flex;
-        align-items: center;
-      }
-    }
-
-    .name {
-
     }
   }
 }

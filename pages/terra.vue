@@ -110,7 +110,7 @@ export default class extends QiskitElementPage {
 </script>
 
 <style lang="scss" scoped>
-@import '~/assets/scss/legacy-elements.scss';
+@import '~/assets/scss/elements.scss';
 
 .terra-element {
   --community-header__background-color: rgb(224, 219, 218);
