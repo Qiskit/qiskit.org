@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="community-header">
     <div class="header-container">
       <div class="decoration" aria-hidden="true" />
       <section class="intro-container">
@@ -50,19 +50,12 @@ export default class extends Vue {
 <style lang="scss" scoped>
 @import '~carbon-components/scss/globals/scss/typography';
 
-.extra-container {
-  margin-right: 1rem;
-}
-
-.copy-container:not(:only-child) {
-  max-width: 40%;
-}
-
 .header-container {
   position: relative;
   z-index: 0;
   padding-top: 2rem;
   padding-bottom: 2rem;
+  height: 100%;
 }
 
 .main-title {
@@ -87,6 +80,7 @@ export default class extends Vue {
 .intro {
   display: flex;
   flex-direction: row;
+  justify-content: flex-end;
   align-items: center;
   margin-left: auto;
   margin-right: auto;
@@ -112,8 +106,7 @@ export default class extends Vue {
   }
 }
 
-.copy-container,
-.extra-container {
+.copy-container {
   flex: 1;
 }
 </style>

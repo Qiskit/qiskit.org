@@ -146,7 +146,7 @@ main {
 
 #presentation {
   .header-video {
-    width: 100%;
+    margin-right: 2rem;
     max-width: 560px;
     height: 315px;
     box-shadow: 0 13px 27px -5px $gray-100-a30,
