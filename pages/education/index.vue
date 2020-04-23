@@ -34,7 +34,7 @@
           { anchor: 'host-an-event', label: 'Host Qiskit Events' }
         ]"
       />
-      <PageSection id="video-series">
+      <PageSection id="video-series" framed>
         <h2>Coding With Qiskit Video Series</h2>
         <p class="community__paragraph">
           Accompany Abraham Asfaw through a series of video tutorials
@@ -60,29 +60,31 @@
           />
         </template>
       </PageSection>
-      <PageSection id="textbook" aside-position="start">
-        <h2>Qiskit Textbook</h2>
-        <p class="community__paragraph">
-          Leverage the power of quantum computing using Qiskit with this
-          university course supplement covering introductory materials,
-          advanced algorithms and hardware. Include problem sets and
-          exercises for students.
-        </p>
-        <ul class="actions">
-          <li>
-            <Cta to="/textbook/" is-static>
-              Discover more
-            </Cta>
-          </li>
-        </ul>
+      <PageSection id="textbook" aside-position="start" framed>
+        <div class="education-page__textbook-copy">
+          <h2>Qiskit Textbook</h2>
+          <p class="community__paragraph">
+            Leverage the power of quantum computing using Qiskit with this
+            university course supplement covering introductory materials,
+            advanced algorithms and hardware. Include problem sets and
+            exercises for students.
+          </p>
+          <ul class="actions">
+            <li>
+              <Cta to="/textbook/" is-static>
+                Discover more
+              </Cta>
+            </li>
+          </ul>
+        </div>
 
         <template #extra>
-          <TextbookPreview>
+          <TextbookPreview class="education-page__textbook-preview">
             <TextbookTOC />
           </TextbookPreview>
         </template>
       </PageSection>
-      <PageSection id="host-an-event">
+      <PageSection id="host-an-event" framed>
         <h2>Host Qiskit Events</h2>
         <p class="community__paragraph">
           Bring Qiskit experts to your campus for guest lectures, hackathons,
@@ -198,10 +200,6 @@ main {
 #video-series {
   color: $text-01;
 
-  .page-section {
-    @include framed();
-  }
-
   .episode {
     margin-left: 2rem;
     transform: perspective(75rem) rotateY(-20deg) rotateX(5deg);
@@ -215,15 +213,10 @@ main {
   background-color: $inverse-02;
   padding-bottom: 4rem;
 
-  .page-section {
-    @include framed();
-  }
-
-  .copy-container {
+  .education-page__textbook-copy {
     position: sticky;
     top: 7.5rem;
     align-self: start;
-    width: 50%;
     background-color: $inverse-02;
     padding: 0;
     padding-left: 4rem;
@@ -234,8 +227,7 @@ main {
     }
   }
 
-  .extra-container {
-    width: 60%;
+  .education-page__textbook-preview {
     margin-top: -6rem;
     margin-left: -10%;
   }
