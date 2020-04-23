@@ -9,13 +9,13 @@
       </CommunityHeader>
     </header>
     <div class="inner-navigation-scope">
-      <PageSection id="featured-experiments">
+      <PageSection id="featured-experiments" framed>
         <h2>Now featuring</h2>
         <ExperimentCarousel
           :experiments="featured"
         />
       </PageSection>
-      <PageSection id="browse-the-experiments">
+      <PageSection id="browse-the-experiments" framed>
         <h2>Browse the experiments</h2>
         <div class="experiment-card-container">
           <ExperimentCard
