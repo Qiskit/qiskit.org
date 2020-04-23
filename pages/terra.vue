@@ -106,9 +106,9 @@ export default class extends QiskitElementPage {
 </style>
 
 <style lang="scss" scoped>
-.legacy-presentation {
-  --legacy-presentation-color: rgb(224, 219, 218);
-  --legacy-presentation-text-color: $inverse-01;
+.element-presentation {
+  --community-header__background-color: rgb(224, 219, 218);
+  --community-header__text-color: $inverse-01;
 }
 
 .legacy-section {

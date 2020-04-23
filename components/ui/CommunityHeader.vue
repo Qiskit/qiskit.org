@@ -52,8 +52,8 @@ export default class extends Vue {
 @import '~carbon-components/scss/globals/scss/typography';
 
 .community-header {
-  color: var(--legacy-presentation-text-color, white);
-  background-color: var(--legacy-presentation-color, $ui-background);
+  color: var(--community-header__text-color, white);
+  background-color: var(--community-header__background-color, $ui-background);
 
   height: 100%;
   padding-top: 2rem;
