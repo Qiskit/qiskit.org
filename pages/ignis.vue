@@ -131,7 +131,7 @@ export default class extends QiskitElementPage {
 </script>
 
 <style lang="scss" scoped>
-@import '~/assets/scss/elements.scss';
+@import '~/assets/scss/element.scss';
 
 .legacy-presentation {
   --community-header__background-color: rgb(255, 207, 225);

@@ -250,7 +250,7 @@ export default class extends QiskitPage {
 </script>
 
 <style lang="scss">
-@import '~/assets/scss/elements.scss';
+@import '~/assets/scss/element.scss';
 @import '~carbon-components/scss/globals/scss/typography';
 
 .landing-page {
