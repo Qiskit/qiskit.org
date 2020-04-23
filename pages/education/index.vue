@@ -4,7 +4,7 @@
       <CommunityHeader
         id="presentation"
         main-title="Qiskit for Educators"
-        extra-position="start"
+        aside-position="start"
       >
         <p>Qiskit makes it easy to start learning quantum software to run on real quantum hardware. Teach your students with the same tools used by scientists and engineers worldwide to accelerate research towards practical applications for quantum computing.</p>
         <template #extra>
@@ -55,7 +55,7 @@
           />
         </template>
       </PageSection>
-      <PageSection id="textbook" extra-position="start">
+      <PageSection id="textbook" aside-position="start">
         <h2>Qiskit Textbook</h2>
         <p>
           Leverage the power of quantum computing using Qiskit with this
@@ -100,6 +100,7 @@ import QiskitPage from '~/components/logic/QiskitPage.vue'
 import InnerNavigation from '~/components/ui/InnerNavigation.vue'
 import CommunityHeader from '~/components/ui/CommunityHeader.vue'
 import PageSection from '~/components/ui/sections/PageSection.vue'
+// @ts-ignore: Cannot find module
 import TextbookPreview from '~/components/education/TextbookPreview.vue'
 import Cta from '~/components/ui/Cta.vue'
 // @ts-ignore: Cannot find module

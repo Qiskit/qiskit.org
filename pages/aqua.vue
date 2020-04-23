@@ -1,6 +1,6 @@
 <template>
   <main>
-    <LegacyPresentation
+    <ElementPresentation
       :title="title"
       image="/images/qiskit-aqua-logo.svg"
       :description="description"
@@ -77,7 +77,7 @@ print(result["result"])</SyntaxHighlight>
 <script lang="ts">
 import { Component } from 'vue-property-decorator'
 import QiskitElementPage from '~/components/logic/QiskitElementPage.vue'
-import LegacyPresentation from '~/components/elements/LegacyPresentation.vue'
+import ElementPresentation from '~/components/elements/ElementPresentation.vue'
 import LegacySection from '~/components/ui/sections/LegacySection.vue'
 import SoftwareStack from '~/components/ui/SoftwareStack.vue'
 import SyntaxHighlight from '~/components/ui/SyntaxHighlight.vue'
@@ -86,7 +86,7 @@ import Cta from '~/components/ui/Cta.vue'
 @Component({
   components: {
     Cta,
-    LegacyPresentation,
+    ElementPresentation,
     LegacySection,
     SoftwareStack,
     SyntaxHighlight
