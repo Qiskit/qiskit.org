@@ -1,23 +1,23 @@
 <template>
-  <article class="page-section-container">
+  <article class="page-section">
     <div
       :class="{
-        'page-section': true,
-        'page-section--reversed': extraPosition == 'start',
-        'page-section--framed': framed
+        'page-section__layout': true,
+        'page-section__layout_reversed': asidePosition == 'start',
+        'page-section__layout_framed': framed
       }"
     >
       <div
         :class="{
-          'copy-container': true,
-          'copy-container--alone': !this.$slots.extra
+          'page-section__main-content': true,
+          'page-section__main-content_alone': !this.$slots.extra
         }"
       >
         <slot />
       </div>
       <aside
         v-if="this.$slots.extra"
-        class="extra-container importance--decoration"
+        class="page-section__aside"
       >
         <slot name="extra" />
       </aside>
@@ -31,7 +31,7 @@ import { Component, Prop } from 'vue-property-decorator'
 
 @Component
 export default class extends Vue {
-  @Prop({ type: String, default: 'end' }) extraPosition;
+  @Prop({ type: String, default: 'end' }) asidePosition!: 'start' | 'end';
   @Prop({ type: Boolean, default: false }) framed!: boolean;
 }
 </script>
@@ -39,47 +39,41 @@ export default class extends Vue {
 <style lang="scss" scoped>
 @import '~carbon-components/scss/globals/scss/typography';
 
-.page-section-container {
+.page-section {
   padding-top: 4rem;
   padding-bottom: 4rem;
-}
 
-.page-section {
-  display: flex;
-  flex-direction: row;
+  &__layout {
+    display: flex;
+    flex-direction: row;
 
-  & > * {
+    &_reversed {
+      flex-direction: row-reverse;
+    }
+
+    &_framed {
+      @include framed();
+    }
+  }
+
+  &__main-content {
     width: 50%;
+
+    &_alone {
+      width: 100%;
+    }
+
+    @include mq($until: medium) {
+      width: 100%;
+    }
   }
 
-  &--reversed {
-    flex-direction: row-reverse;
-  }
+  &__aside {
+    width: 50;
 
-  &--framed {
-    @include framed();
-  }
-}
-
-.copy-container {
-  width: 50%;
-
-  &--alone {
-    width: 100%;
-  }
-
-  @include mq($until: medium) {
-    width: 100%;
-  }
-}
-
-.extra-container {
-  width: 50%;
-}
-
-.importance--decoration {
-  @include mq($until: medium) {
-    display: none;
+    @include mq($until: medium) {
+      display: none;
+    }
   }
 }
 </style>
