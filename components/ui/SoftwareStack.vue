@@ -25,11 +25,12 @@ export default class extends Vue {
   @Prop({ type: Array, default: [] }) stack;
 }
 
-export type SwStack = {
+type StackLayer = {
   title: string
   description: string
 }
 
+export { StackLayer }
 </script>
 
 <style lang="scss" scoped>

@@ -79,7 +79,7 @@ import { Component } from 'vue-property-decorator'
 import QiskitElementPage from '~/components/logic/QiskitElementPage.vue'
 import LegacyPresentation from '~/components/elements/LegacyPresentation.vue'
 import LegacySection from '~/components/ui/sections/LegacySection.vue'
-import SoftwareStack, { SwStack } from '~/components/ui/SoftwareStack.vue'
+import SoftwareStack, { StackLayer } from '~/components/ui/SoftwareStack.vue'
 import SyntaxHighlight from '~/components/ui/SyntaxHighlight.vue'
 import Cta from '~/components/ui/Cta.vue'
 
@@ -105,7 +105,7 @@ export default class extends QiskitElementPage {
   description = 'Algorithms for quantum computing applications'
   routeName = 'aqua-element'
 
-  elementStack: Array<SwStack> = [
+  elementStack: Array<StackLayer> = [
     {
       title: 'Qiskit Aqua Translators',
       description: 'Chemistry, AI, Optimization, Finance'
