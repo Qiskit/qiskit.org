@@ -86,12 +86,21 @@ export default class extends Vue {
   margin-right: auto;
   color: $text-01;
 
+  @include mq($until: medium) {
+    flex-direction: column;
+    text-align: center;
+  }
+
   &--framed {
     @include framed()
   }
 
   &--reversed {
     flex-direction: row-reverse;
+
+    @include mq($until: medium) {
+      flex-direction: column-reverse;
+    }
   }
 }
 

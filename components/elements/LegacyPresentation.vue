@@ -73,6 +73,12 @@ export default class extends Vue {
     width: 200px;
     height: 200px;
     margin: 2rem 2rem 2rem 0;
+
+    @include mq($until: medium) {
+      width: 128px;
+      height: 128px;
+      margin: 2rem 0;
+    }
   }
 }
 
