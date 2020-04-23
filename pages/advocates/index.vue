@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main class="community-page advocates-page">
     <header>
       <CommunityHeader
         id="presentation"
@@ -27,7 +27,9 @@
         ]"
       />
       <PageSection id="become-an-advocate" framed>
-        <h2>Become an Advocate</h2>
+        <h2 class="community-page__header">
+          Become an Advocate
+        </h2>
         <ol>
           <li>Click on the "Apply now" button below.</li>
           <li>Complete the test in the application with at least a 70%.</li>
@@ -43,10 +45,14 @@
         id="global-community"
         :points="cities()"
       >
-        <h2>Global Community</h2>
+        <h2 class="community-page__header community-page__header_elegant">
+          Global Community
+        </h2>
       </MapSection>
       <PageSection id="meet-the-advocates" framed>
-        <h2>Meet the Advocates</h2>
+        <h2 class="community-page__header community-page__header_elegant">
+          Meet the Advocates
+        </h2>
         <div class="advocate-cards-container">
           <AdvocateCard
             v-for="profile in profiles"
@@ -204,20 +210,10 @@ main {
 
 #global-community {
   color: $text-01;
-
-  h2 {
-    @include type-style('productive-heading-06');
-    @include elegant-title();
-  }
 }
 
 #meet-the-advocates {
   color: $text-01;
-
-  h2 {
-    @include type-style('productive-heading-06');
-    @include elegant-title();
-  }
 
   .advocate-cards-container {
     margin-top: 3rem;

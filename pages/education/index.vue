@@ -1,12 +1,12 @@
 <template>
-  <main class="community education-page">
+  <main class="community-page education-page">
     <header>
       <CommunityHeader
         id="presentation"
         main-title="Qiskit for Educators"
         aside-position="start"
       >
-        <p class="community__paragraph">
+        <p class="community-page__paragraph">
           Qiskit makes it easy to start learning quantum software to run on real
           quantum hardware. Teach your students with the same tools used by
           scientists and engineers worldwide to accelerate research towards
@@ -35,8 +35,10 @@
         ]"
       />
       <PageSection id="video-series" framed>
-        <h2>Coding With Qiskit Video Series</h2>
-        <p class="community__paragraph">
+        <h2 class="community-page__header">
+          Coding With Qiskit Video Series
+        </h2>
+        <p class="community-page__paragraph">
           Accompany Abraham Asfaw through a series of video tutorials
           in our YouTube Channel explaining quantum computing through
           the use of Qiskit.
@@ -62,8 +64,10 @@
       </PageSection>
       <PageSection id="textbook" aside-position="start" framed>
         <div class="education-page__textbook-copy">
-          <h2>Qiskit Textbook</h2>
-          <p class="community__paragraph">
+          <h2 class="community-page__header">
+            Qiskit Textbook
+          </h2>
+          <p class="community-page__paragraph">
             Leverage the power of quantum computing using Qiskit with this
             university course supplement covering introductory materials,
             advanced algorithms and hardware. Include problem sets and
@@ -85,8 +89,10 @@
         </template>
       </PageSection>
       <PageSection id="host-an-event" framed>
-        <h2>Host Qiskit Events</h2>
-        <p class="community__paragraph">
+        <h2 class="community-page__header">
+          Host Qiskit Events
+        </h2>
+        <p class="community-page__paragraph">
           Bring Qiskit experts to your campus for guest lectures, hackathons,
           and other events. Guest lecture topics can range from quantum basics
           to advanced algorithms.
@@ -137,15 +143,7 @@ export default class extends QiskitPage {
 </script>
 
 <style lang="scss">
-@import '~carbon-components/scss/globals/scss/typography';
-
-h2 {
-  @include productive-heading-08();
-}
-
-p {
-  @include body-long-04();
-}
+@import '~/assets/scss/community-page.scss';
 
 main {
   background-color: $ui-background;
@@ -246,10 +244,6 @@ main {
   background-position: 0, top;
   background-repeat: no-repeat;
   background-size: cover;
-
-  .page-section {
-    @include framed();
-  }
 }
 
 @media (max-height: 37.5rem) {
