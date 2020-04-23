@@ -1,8 +1,10 @@
+
 <template>
   <ul class="stack-list">
     <li
-      v-for="(layer, index) in stack"
-      :key="`stack-list__layer-${index}`"
+      v-for="layer in stack"
+      :key="`layer-${layer.title}`"
+      class="stack-list__layer"
     >
       <p class="stack-list__title">
         {{ layer.title }}
@@ -22,15 +24,20 @@ import { Component, Prop } from 'vue-property-decorator'
 export default class extends Vue {
   @Prop({ type: Array, default: [] }) stack;
 }
+
+type StackLayer = {
+  title: string
+  description: string
+}
+
+export { StackLayer }
 </script>
 
 <style lang="scss" scoped>
 @import '~carbon-components/scss/globals/scss/typography';
 
 .stack-list {
-  list-style: none;
-
-  li {
+  &__layer {
     border-left: 2px solid $inverse-01;
     padding-left: 1rem;
     padding-bottom: 1.5rem;
@@ -38,10 +45,9 @@ export default class extends Vue {
 
     &::before {
       content: '';
-      display: inline-block;
       position: absolute;
       width: 0.25rem;
-      height: 0.60rem;
+      height: 0.6rem;
       background-color: $inverse-01;
       left: 0;
     }
@@ -50,12 +56,7 @@ export default class extends Vue {
       border: none;
 
       &::before {
-        content: '';
-        display: inline-block;
-        position: absolute;
         width: 0.6rem;
-        height: 0.6rem;
-        background-color: $inverse-01;
         left: -0.25rem;
         border-radius: 50%;
       }
@@ -64,11 +65,8 @@ export default class extends Vue {
 
   &__title,
   &__description {
-    padding: 0;
-    margin: 0;
-    line-height: normal;
     position: relative;
-    top: -0.2rem;
+    top: -0.4rem;
   }
 
   &__title {
