@@ -22,26 +22,7 @@
           same backend.
         </p>
         <h2>Stack</h2>
-        <SoftwareStack
-          :stack="[
-            {
-              title: 'Qiskit Ignis Experiments',
-              description: 'List of Quantum Circuits or Pulse Schedules'
-            },
-            {
-              title: 'Qiskit Terra',
-              description: 'Compile Circuits or Schedules'
-            },
-            {
-              title: 'Providers',
-              description: 'Qiskit Aer, IBM Quantum, Third Party'
-            },
-            {
-              title: 'Fitter/Filter',
-              description: 'Fit to a Model/Plot Results'
-            }
-          ]"
-        />
+        <SoftwareStack :stack="elementStack" />
       </article>
       <article>
         <h2>Example</h2>
@@ -94,7 +75,7 @@ import { Component } from 'vue-property-decorator'
 import QiskitElementPage from '~/components/logic/QiskitElementPage.vue'
 import LegacyPresentation from '~/components/elements/LegacyPresentation.vue'
 import LegacySection from '~/components/ui/sections/LegacySection.vue'
-import SoftwareStack from '~/components/ui/SoftwareStack.vue'
+import SoftwareStack, { SwStack } from '~/components/ui/SoftwareStack.vue'
 import SyntaxHighlight from '~/components/ui/SyntaxHighlight.vue'
 import Cta from '~/components/ui/Cta.vue'
 
@@ -119,6 +100,24 @@ export default class extends QiskitElementPage {
   title = 'Qiskit Ignis'
   description = 'Understanding and mitigating noise in quantum systems.'
   routeName = 'ignis-element'
+  elementStack: Array<SwStack> = [
+    {
+      title: 'Qiskit Ignis Experiments',
+      description: 'List of Quantum Circuits or Pulse Schedules'
+    },
+    {
+      title: 'Qiskit Terra',
+      description: 'Compile Circuits or Schedules'
+    },
+    {
+      title: 'Providers',
+      description: 'Qiskit Aer, IBM Quantum, Third Party'
+    },
+    {
+      title: 'Fitter/Filter',
+      description: 'Fit to a Model/Plot Results'
+    }
+  ]
 }
 </script>
 

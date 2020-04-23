@@ -20,26 +20,7 @@
           circuit optimizations and backends. We welcome your contributions!
         </p>
         <h2>Stack</h2>
-        <SoftwareStack
-          :stack="[
-            {
-              title: 'User Inputs (Circuits, and Schedules)',
-              description: 'Quantum Circuit, Pulse Schedule'
-            },
-            {
-              title: 'Transpiler',
-              description: 'Optimization Passes, Third Party'
-            },
-            {
-              title: 'Providers',
-              description: 'Qiskit Aer, IBM Quantum, Third Party'
-            },
-            {
-              title: 'Visualization and Quantum Information Tools',
-              description: 'Histogram, State, Unitary, Entanglement, ...'
-            }
-          ]"
-        />
+        <SoftwareStack :stack="elementStack" />
       </article>
       <article>
         <h2>Example</h2>
@@ -73,7 +54,7 @@ import { Component } from 'vue-property-decorator'
 import QiskitElementPage from '~/components/logic/QiskitElementPage.vue'
 import LegacyPresentation from '~/components/elements/LegacyPresentation.vue'
 import LegacySection from '~/components/ui/sections/LegacySection.vue'
-import SoftwareStack from '~/components/ui/SoftwareStack.vue'
+import SoftwareStack, { SwStack } from '~/components/ui/SoftwareStack.vue'
 import SyntaxHighlight from '~/components/ui/SyntaxHighlight.vue'
 import Cta from '~/components/ui/Cta.vue'
 
@@ -98,6 +79,24 @@ export default class extends QiskitElementPage {
   title = 'Qiskit Terra'
   description = 'A solid foundation for quantum computing'
   routeName = 'terra-element'
+  elementStack: Array<SwStack> = [
+    {
+      title: 'User Inputs (Circuits, and Schedules)',
+      description: 'Quantum Circuit, Pulse Schedule'
+    },
+    {
+      title: 'Transpiler',
+      description: 'Optimization Passes, Third Party'
+    },
+    {
+      title: 'Providers',
+      description: 'Qiskit Aer, IBM Quantum, Third Party'
+    },
+    {
+      title: 'Visualization and Quantum Information Tools',
+      description: 'Histogram, State, Unitary, Entanglement, ...'
+    }
+  ]
 }
 </script>
 

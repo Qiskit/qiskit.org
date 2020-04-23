@@ -19,26 +19,7 @@
           on real devices.
         </p>
         <h2>Stack</h2>
-        <SoftwareStack
-          :stack="[
-            {
-              title: 'Qiskit Terra',
-              description: 'Quantum Circuit'
-            },
-            {
-              title: 'Noise Simulation (QasmSimulator Only)',
-              description: 'NoiseModel, QuantumErrors, ReadoutErrors'
-            },
-            {
-              title: 'Backends',
-              description: 'QasmSimulator, StatevectorSimulator, UnitarySimulator'
-            },
-            {
-              title: 'Job and Result',
-              description: 'Counts, Memory, Statevector, Unitary, Snapshots'
-            }
-          ]"
-        />
+        <SoftwareStack :stack="elementStack" />
       </article>
       <article>
         <h2>Example</h2>
@@ -88,7 +69,7 @@ import { Component } from 'vue-property-decorator'
 import QiskitElementPage from '~/components/logic/QiskitElementPage.vue'
 import LegacyPresentation from '~/components/elements/LegacyPresentation.vue'
 import LegacySection from '~/components/ui/sections/LegacySection.vue'
-import SoftwareStack from '~/components/ui/SoftwareStack.vue'
+import SoftwareStack, { SwStack } from '~/components/ui/SoftwareStack.vue'
 import SyntaxHighlight from '~/components/ui/SyntaxHighlight.vue'
 import Cta from '~/components/ui/Cta.vue'
 
@@ -113,6 +94,24 @@ export default class extends QiskitElementPage {
   title = 'Qiskit Aer'
   description = 'A high performance simulator framework for quantum circuits'
   routeName = 'aer-element'
+  elementStack: Array<SwStack> = [
+    {
+      title: 'Qiskit Terra',
+      description: 'Quantum Circuit'
+    },
+    {
+      title: 'Noise Simulation (QasmSimulator Only)',
+      description: 'NoiseModel, QuantumErrors, ReadoutErrors'
+    },
+    {
+      title: 'Backends',
+      description: 'QasmSimulator, StatevectorSimulator, UnitarySimulator'
+    },
+    {
+      title: 'Job and Result',
+      description: 'Counts, Memory, Statevector, Unitary, Snapshots'
+    }
+  ]
 }
 </script>
 
