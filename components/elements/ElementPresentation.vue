@@ -2,7 +2,7 @@
   <header class="element-presentation">
     <CommunityHeader
       :main-title="title"
-      extra-position="start"
+      aside-position="start"
       no-gradient
     >
       <template #extra>
@@ -70,6 +70,7 @@ export default class extends Vue {
 <style lang="scss" scoped>
 .element-presentation {
   &__description {
+    @include body-long-04();
     margin: 1.1rem 0;
   }
 
