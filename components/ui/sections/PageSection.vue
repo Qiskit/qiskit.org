@@ -4,6 +4,7 @@
       :class="{
         'page-section': true,
         'page-section--reversed': extraPosition == 'start',
+        'page-section--framed': framed
       }"
     >
       <div
@@ -31,6 +32,7 @@ import { Component, Prop } from 'vue-property-decorator'
 @Component
 export default class extends Vue {
   @Prop({ type: String, default: 'end' }) extraPosition;
+  @Prop({ type: Boolean, default: false }) framed!: boolean;
 }
 </script>
 
@@ -54,14 +56,9 @@ export default class extends Vue {
     flex-direction: row-reverse;
   }
 
-  h2 {
-    @include productive-heading-08();
+  &--framed {
+    @include framed();
   }
-
-  p {
-    @include body-long-04();
-  }
-
 }
 
 .copy-container {

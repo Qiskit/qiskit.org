@@ -1,7 +1,34 @@
-h2 {
-  padding-top: 2rem;
+@import '~carbon-components/scss/globals/scss/typography';
 
-  &:first-of-type {
-    padding-top: 0;
+.element {
+  &__copy {
+    min-width: 0;
+    margin-right: 3rem;
+    flex: 3;
+  }
+
+  &__example {
+    flex: 2;
+  }
+
+  &__header {
+    @include code-08();
+    padding-top: 2rem;
+
+    &:first-of-type {
+      padding-top: 0;
+    }
+  }
+
+  &__body {
+    background-color: $inverse-02;
+  }
+
+  &__paragraph {
+    @include type-style('body-long-02');
+    /* TODO: Remove when adapting to Carbon. Should be regulated by the type style. */
+    line-height: 2rem;
+    margin-top: 0.9rem;
+    margin-bottom: 0.9rem;
   }
 }
