@@ -1,7 +1,12 @@
 <template>
   <div class="community-header">
-    <div class="header-container">
-      <div class="decoration" aria-hidden="true" />
+    <div
+      :class="{
+        'header-container': true,
+        'header-container_background_gradient': !noGradient
+      }"
+      :style="`background-color: ${backgroundColor}`"
+    >
       <section class="intro-container">
         <article
           :class="{
@@ -42,8 +47,9 @@ import { Component, Prop } from 'vue-property-decorator'
 
 @Component
 export default class extends Vue {
-  @Prop(String) mainTitle;
-  @Prop({ type: String, default: 'end' }) extraPosition;
+  @Prop(String) mainTitle
+  @Prop({ type: String, default: 'end' }) extraPosition
+  @Prop({ type: Boolean, default: false }) noGradient!: boolean
 }
 </script>
 
@@ -56,6 +62,16 @@ export default class extends Vue {
   padding-top: 2rem;
   padding-bottom: 2rem;
   height: 100%;
+
+  color: var(--legacy-presentation-text-color, white);
+  background-color: var(--legacy-presentation-color, $ui-background);
+
+  &_background_gradient {
+    background-image: linear-gradient(150deg,
+      $purple-60 15%,
+      $purple-50 70%,
+      $purple-30 94%);
+  }
 }
 
 .main-title {
@@ -66,17 +82,6 @@ export default class extends Vue {
   @include body-long-04();
 }
 
-.decoration {
-  position: absolute;
-  top: 0; right: 0; bottom: 0; left: 0;
-  z-index: -1;
-  height: 100%;
-  background-image: linear-gradient(150deg,
-    $purple-60 15%,
-    $purple-50 70%,
-    $purple-30 94%);
-}
-
 .intro {
   display: flex;
   flex-direction: row;
@@ -84,7 +89,7 @@ export default class extends Vue {
   align-items: center;
   margin-left: auto;
   margin-right: auto;
-  color: $text-01;
+  color: currentColor;
 
   @include mq($until: medium) {
     flex-direction: column;

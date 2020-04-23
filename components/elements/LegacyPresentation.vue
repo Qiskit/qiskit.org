@@ -3,6 +3,7 @@
     <CommunityHeader
       :main-title="title"
       extra-position="start"
+      no-gradient
     >
       <template #extra>
         <img
@@ -62,9 +63,6 @@ export default class extends Vue {
 @import '~carbon-components/scss/globals/scss/typography';
 
 .legacy-presentation {
-  color: var(--legacy-presentation-text-color, white);
-  background-color: var(--legacy-presentation-color, $ui-background);
-
   &__description {
     margin: 1.1rem 0;
   }
