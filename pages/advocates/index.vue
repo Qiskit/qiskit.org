@@ -72,9 +72,7 @@ import MapSection from '~/components/advocates/MapSection.vue'
 import AdvocateCard from '~/components/advocates/AdvocateCard.vue'
 import CompactFeature from '~/components/ui/CompactFeature.vue'
 
-type Benefit = {
-  [key: string]: string
-}
+type Benefit = Pick<CompactFeature, 'icon'|'title'|'description'>
 
 @Component({
   components: {

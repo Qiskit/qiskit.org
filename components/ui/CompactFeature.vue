@@ -5,8 +5,12 @@
       class="compact-feature__icon"
       :src="`/images/icons/icon${icon}White@3x.png`"
     >
-    <h2 class="compact-feature__title">{{ title }}</h2>
-    <p class="compact-feature__description">{{ description }}</p>
+    <h2 v-if="title" class="compact-feature__title">
+      {{ title }}
+    </h2>
+    <p v-if="description" class="compact-feature__description">
+      {{ description }}
+    </p>
   </section>
 </template>
 
@@ -16,9 +20,9 @@ import { Component, Prop } from 'vue-property-decorator'
 
 @Component
 export default class extends Vue {
-  @Prop({ type: String, default: '' }) icon
-  @Prop({ type: String, default: '' }) title
-  @Prop({ type: String, default: '' }) description
+  @Prop(String) icon: string | undefined
+  @Prop(String) title: string | undefined
+  @Prop(String) description: string | undefined
 }
 </script>
 
