@@ -170,6 +170,10 @@ main {
     @include mq($until: medium) {
       display: none;
     }
+
+    @include mq($until: large) {
+      width: 300px;
+    }
   }
 }
 
@@ -220,6 +224,7 @@ main {
 
   @include mq($until: medium) {
     min-height: auto;
+
   }
 }
 
