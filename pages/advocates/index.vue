@@ -26,7 +26,7 @@
           { anchor: 'meet-the-advocates', label: 'Meet the Advocates' },
         ]"
       />
-      <PageSection id="become-an-advocate">
+      <PageSection id="become-an-advocate" framed>
         <h2>Become an Advocate</h2>
         <ol>
           <li>Click on the "Apply now" button below.</li>
@@ -45,7 +45,7 @@
       >
         <h2>Global Community</h2>
       </MapSection>
-      <PageSection id="meet-the-advocates">
+      <PageSection id="meet-the-advocates" framed>
         <h2>Meet the Advocates</h2>
         <div class="advocate-cards-container">
           <AdvocateCard
@@ -191,10 +191,6 @@ main {
   color: $inverse-01;
   background-color: $inverse-02;
 
-  .page-section {
-    @include framed();
-  }
-
   ol {
     margin-top: 1rem;
     list-style-position: inside;
@@ -221,10 +217,6 @@ main {
   h2 {
     @include type-style('productive-heading-06');
     @include elegant-title();
-  }
-
-  .page-section {
-    @include framed();
   }
 
   .advocate-cards-container {
