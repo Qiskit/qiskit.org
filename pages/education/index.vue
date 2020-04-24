@@ -4,7 +4,7 @@
       <CommunityHeader
         id="presentation"
         main-title="Qiskit for Educators"
-        extra-position="start"
+        aside-position="start"
       >
         <p>Qiskit makes it easy to start learning quantum software to run on real quantum hardware. Teach your students with the same tools used by scientists and engineers worldwide to accelerate research towards practical applications for quantum computing.</p>
         <template #extra>
@@ -55,7 +55,7 @@
           />
         </template>
       </PageSection>
-      <PageSection id="textbook" extra-position="start">
+      <PageSection id="textbook" aside-position="start">
         <h2>Qiskit Textbook</h2>
         <p>
           Leverage the power of quantum computing using Qiskit with this
@@ -100,6 +100,7 @@ import QiskitPage from '~/components/logic/QiskitPage.vue'
 import InnerNavigation from '~/components/ui/InnerNavigation.vue'
 import CommunityHeader from '~/components/ui/CommunityHeader.vue'
 import PageSection from '~/components/ui/sections/PageSection.vue'
+// @ts-ignore: Cannot find module
 import TextbookPreview from '~/components/education/TextbookPreview.vue'
 import Cta from '~/components/ui/Cta.vue'
 // @ts-ignore: Cannot find module
@@ -146,12 +147,12 @@ main {
 
 #presentation {
   .header-video {
-    width: 100%;
-    max-width: 560px;
-    height: 315px;
-    box-shadow: 0 13px 27px -5px $gray-100-a30,
-                0 8px 16px -8px $gray-100-a30,
-                0 -6px 16px -6px $gray-100-a30;
+    margin-right: 2rem;
+    max-width: 35rem;
+    height: 20rem;
+    box-shadow: 0  0.75rem 1.75rem -0.25rem $gray-100-a30,
+                0   0.5rem    1rem  -0.5rem $gray-100-a30,
+                0 -0.25rem    1rem -0.25rem $gray-100-a30;
   }
 
   .intro {
@@ -170,6 +171,10 @@ main {
     @include mq($until: medium) {
       display: none;
     }
+
+    @include mq($until: large) {
+      width: 19rem;
+    }
   }
 }
 
@@ -182,9 +187,9 @@ main {
 
   .episode {
     margin-left: 2rem;
-    transform: perspective(1200px) rotateY(-20deg) rotateX(5deg);
-    border-radius: 10px;
-    box-shadow: 25px 35px 30px 0 $gray-100-a30;
+    transform: perspective(75rem) rotateY(-20deg) rotateX(5deg);
+    border-radius: 0.5rem;
+    box-shadow: 1.5rem 2.25rem 1.75rem 0 $gray-100-a30;
   }
 }
 
@@ -199,7 +204,7 @@ main {
 
   .copy-container {
     position: sticky;
-    top: 120px;
+    top: 7.5rem;
     align-self: start;
     width: 50%;
     background-color: $inverse-02;
@@ -220,6 +225,7 @@ main {
 
   @include mq($until: medium) {
     min-height: auto;
+
   }
 }
 
@@ -237,7 +243,7 @@ main {
   }
 }
 
-@media (max-height: 600px) {
+@media (max-height: 37.5rem) {
   #textbook {
     .copy-container {
       top: 1rem;

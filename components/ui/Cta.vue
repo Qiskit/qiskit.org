@@ -50,5 +50,7 @@ export default class extends Vue {
   white-space: nowrap;
   color: $text-01;
   background-color: $ui-01;
+
+  fill: currentColor;
 }
 </style>
