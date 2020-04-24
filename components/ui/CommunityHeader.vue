@@ -1,39 +1,39 @@
 <template>
-  <div>
-    <div class="header-container">
-      <div class="decoration" aria-hidden="true" />
-      <section class="intro-container">
-        <article
-          :class="{
-            'intro': true,
-            'intro--framed': true,
-            'intro--reversed': extraPosition == 'start'
-          }"
-        >
-          <section class="copy-container">
-            <h1 class="main-title">
-              {{ mainTitle }}
-            </h1>
-            <div class="description">
-              <slot />
-            </div>
-          </section>
-          <aside
-            v-if="this.$slots.extra"
-            class="extra-container importance--decoration"
-          >
-            <slot name="extra" />
-          </aside>
-        </article>
-        <aside
-          v-if="this.$slots.features"
-          class="features features--framed"
-        >
-          <slot name="features" />
-        </aside>
+  <section
+    :class="{
+      'community-header': true,
+      'community-header_background_gradient': !noGradient
+    }"
+    :style="`background-color: ${backgroundColor}`"
+  >
+    <article
+      :class="{
+        'community-header__content': true,
+        'community-header__content_reversed': asidePosition == 'start'
+      }"
+    >
+      <section class="community-header__main-content">
+        <h1 class="community-header__title">
+          {{ mainTitle }}
+        </h1>
+        <div class="community-header__description">
+          <slot />
+        </div>
       </section>
-    </div>
-  </div>
+      <aside
+        v-if="this.$slots.extra"
+        class="community-header__aside"
+      >
+        <slot name="extra" />
+      </aside>
+    </article>
+    <aside
+      v-if="this.$slots.features"
+      class="community-header__features"
+    >
+      <slot name="features" />
+    </aside>
+  </section>
 </template>
 
 <script lang="ts">
@@ -42,78 +42,68 @@ import { Component, Prop } from 'vue-property-decorator'
 
 @Component
 export default class extends Vue {
-  @Prop(String) mainTitle;
-  @Prop({ type: String, default: 'end' }) extraPosition;
+  @Prop(String) mainTitle!: string
+  @Prop({ type: String, default: 'end' }) asidePosition!: 'start'|'end'
+  @Prop({ type: Boolean, default: false }) noGradient!: boolean
 }
 </script>
 
 <style lang="scss" scoped>
 @import '~carbon-components/scss/globals/scss/typography';
 
-.extra-container {
-  margin-right: 1rem;
-}
+.community-header {
+  color: var(--community-header__text-color, white);
+  background-color: var(--community-header__background-color, $ui-background);
 
-.copy-container:not(:only-child) {
-  max-width: 40%;
-}
-
-.header-container {
-  position: relative;
-  z-index: 0;
+  height: 100%;
   padding-top: 2rem;
   padding-bottom: 2rem;
-}
 
-.main-title {
-  @include productive-heading-09();
-}
-
-.description p {
-  @include body-long-04();
-}
-
-.decoration {
-  position: absolute;
-  top: 0; right: 0; bottom: 0; left: 0;
-  z-index: -1;
-  height: 100%;
-  background-image: linear-gradient(150deg,
-    $purple-60 15%,
-    $purple-50 70%,
-    $purple-30 94%);
-}
-
-.intro {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-left: auto;
-  margin-right: auto;
-  color: $text-01;
-
-  &--framed {
-    @include framed()
+  &_background_gradient {
+    background-image: linear-gradient(150deg,
+      $purple-60 15%,
+      $purple-50 70%,
+      $purple-30 94%);
   }
 
-  &--reversed {
-    flex-direction: row-reverse;
+  &__main-content {
+    flex: 1;
   }
-}
 
-.features {
-  display: flex;
-  flex-direction: row;
-  color: $text-01;
-  margin-top: 4rem;
-
-  &--framed {
-    @include framed()
+  &__title {
+    @include productive-heading-09();
   }
-}
 
-.copy-container,
-.extra-container {
-  flex: 1;
+  &__content {
+    @include framed();
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    color: currentColor;
+
+    @include mq($until: medium) {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    &_reversed {
+      flex-direction: row-reverse;
+
+      @include mq($until: medium) {
+        flex-direction: column-reverse;
+      }
+    }
+  }
+
+  &__features {
+    @include framed();
+    display: flex;
+    flex-direction: row;
+    color: $text-01;
+    margin-top: 4rem;
+  }
 }
 </style>

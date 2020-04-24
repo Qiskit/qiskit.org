@@ -1,6 +1,6 @@
 <template>
   <main>
-    <LegacyPresentation
+    <ElementPresentation
       title="Welcome to Quantum"
       image="/images/qiskit-logo.svg"
       description="Qiskit is an open-source quantum computing software development framework for leveraging today's quantum processors in research, education, and business."
@@ -143,14 +143,14 @@
 <script lang="ts">
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
-import LegacyPresentation from '~/components/elements/LegacyPresentation.vue'
+import ElementPresentation from '~/components/elements/ElementPresentation.vue'
 import LegacySection from '~/components/ui/sections/LegacySection.vue'
 import Cta from '~/components/ui/Cta.vue'
 
 @Component({
   components: {
     Cta,
-    LegacyPresentation,
+    ElementPresentation,
     LegacySection
   },
   head () {
