@@ -75,13 +75,13 @@ export default class extends Vue {
   }
 
   &__image {
-    width: 200px;
-    height: 200px;
+    width: 12.5rem;
+    height: 12.5rem;
     margin: 2rem 2rem 2rem 0;
 
     @include mq($until: medium) {
-      width: 128px;
-      height: 128px;
+      width: 8rem;
+      height: 8rem;
       margin: 2rem 0;
     }
   }

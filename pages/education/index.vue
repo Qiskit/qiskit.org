@@ -148,11 +148,11 @@ main {
 #presentation {
   .header-video {
     margin-right: 2rem;
-    max-width: 560px;
-    height: 315px;
-    box-shadow: 0 13px 27px -5px $gray-100-a30,
-                0 8px 16px -8px $gray-100-a30,
-                0 -6px 16px -6px $gray-100-a30;
+    max-width: 35rem;
+    height: 20rem;
+    box-shadow: 0  0.75rem 1.75rem -0.25rem $gray-100-a30,
+                0   0.5rem    1rem  -0.5rem $gray-100-a30,
+                0 -0.25rem    1rem -0.25rem $gray-100-a30;
   }
 
   .intro {
@@ -173,7 +173,7 @@ main {
     }
 
     @include mq($until: large) {
-      width: 300px;
+      width: 19rem;
     }
   }
 }
@@ -187,9 +187,9 @@ main {
 
   .episode {
     margin-left: 2rem;
-    transform: perspective(1200px) rotateY(-20deg) rotateX(5deg);
-    border-radius: 10px;
-    box-shadow: 25px 35px 30px 0 $gray-100-a30;
+    transform: perspective(75rem) rotateY(-20deg) rotateX(5deg);
+    border-radius: 0.5rem;
+    box-shadow: 1.5rem 2.25rem 1.75rem 0 $gray-100-a30;
   }
 }
 
@@ -204,7 +204,7 @@ main {
 
   .copy-container {
     position: sticky;
-    top: 120px;
+    top: 7.5rem;
     align-self: start;
     width: 50%;
     background-color: $inverse-02;
@@ -243,7 +243,7 @@ main {
   }
 }
 
-@media (max-height: 600px) {
+@media (max-height: 37.5rem) {
   #textbook {
     .copy-container {
       top: 1rem;
