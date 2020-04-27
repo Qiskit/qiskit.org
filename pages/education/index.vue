@@ -1,12 +1,17 @@
 <template>
-  <main>
+  <main class="community-page education-page">
     <header>
       <CommunityHeader
         id="presentation"
         main-title="Qiskit for Educators"
         aside-position="start"
       >
-        <p>Qiskit makes it easy to start learning quantum software to run on real quantum hardware. Teach your students with the same tools used by scientists and engineers worldwide to accelerate research towards practical applications for quantum computing.</p>
+        <p class="community-page__paragraph">
+          Qiskit makes it easy to start learning quantum software to run on real
+          quantum hardware. Teach your students with the same tools used by
+          scientists and engineers worldwide to accelerate research towards
+          practical applications for quantum computing.
+        </p>
         <template #extra>
           <iframe
             class="header-video"
@@ -29,9 +34,11 @@
           { anchor: 'host-an-event', label: 'Host Qiskit Events' }
         ]"
       />
-      <PageSection id="video-series">
-        <h2>Coding With Qiskit Video Series</h2>
-        <p>
+      <PageSection id="video-series" framed>
+        <h2 class="community-page__header">
+          Coding With Qiskit Video Series
+        </h2>
+        <p class="community-page__paragraph">
           Accompany Abraham Asfaw through a series of video tutorials
           in our YouTube Channel explaining quantum computing through
           the use of Qiskit.
@@ -55,32 +62,40 @@
           />
         </template>
       </PageSection>
-      <PageSection id="textbook" aside-position="start">
-        <h2>Qiskit Textbook</h2>
-        <p>
-          Leverage the power of quantum computing using Qiskit with this
-          university course supplement covering introductory materials,
-          advanced algorithms and hardware. Include problem sets and
-          exercises for students.
-        </p>
-        <ul class="actions">
-          <li>
-            <Cta to="/textbook/" is-static>
-              Discover more
-            </Cta>
-          </li>
-        </ul>
+      <PageSection id="textbook" aside-position="start" framed>
+        <div class="education-page__textbook-copy">
+          <h2 class="community-page__header">
+            Qiskit Textbook
+          </h2>
+          <p class="community-page__paragraph">
+            Leverage the power of quantum computing using Qiskit with this
+            university course supplement covering introductory materials,
+            advanced algorithms and hardware. Include problem sets and
+            exercises for students.
+          </p>
+          <ul class="actions">
+            <li>
+              <Cta to="/textbook/" is-static>
+                Discover more
+              </Cta>
+            </li>
+          </ul>
+        </div>
 
         <template #extra>
-          <TextbookPreview>
+          <TextbookPreview class="education-page__textbook-preview">
             <TextbookTOC />
           </TextbookPreview>
         </template>
       </PageSection>
-      <PageSection id="host-an-event">
-        <h2>Host Qiskit Events</h2>
-        <p>
-          Bring Qiskit experts to your campus for guest lectures, hackathons, and other events. Guest lecture topics can range from quantum basics to advanced algorithms.
+      <PageSection id="host-an-event" framed>
+        <h2 class="community-page__header">
+          Host Qiskit Events
+        </h2>
+        <p class="community-page__paragraph">
+          Bring Qiskit experts to your campus for guest lectures, hackathons,
+          and other events. Guest lecture topics can range from quantum basics
+          to advanced algorithms.
         </p>
         <ul class="actions">
           <li>
@@ -99,7 +114,7 @@ import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import InnerNavigation from '~/components/ui/InnerNavigation.vue'
 import CommunityHeader from '~/components/ui/CommunityHeader.vue'
-import PageSection from '~/components/ui/sections/PageSection.vue'
+import PageSection from '~/components/ui/PageSection.vue'
 // @ts-ignore: Cannot find module
 import TextbookPreview from '~/components/education/TextbookPreview.vue'
 import Cta from '~/components/ui/Cta.vue'
@@ -128,6 +143,8 @@ export default class extends QiskitPage {
 </script>
 
 <style lang="scss">
+@import '~/assets/scss/community-page.scss';
+
 main {
   background-color: $ui-background;
 }
@@ -181,10 +198,6 @@ main {
 #video-series {
   color: $text-01;
 
-  .page-section {
-    @include framed();
-  }
-
   .episode {
     margin-left: 2rem;
     transform: perspective(75rem) rotateY(-20deg) rotateX(5deg);
@@ -198,15 +211,10 @@ main {
   background-color: $inverse-02;
   padding-bottom: 4rem;
 
-  .page-section {
-    @include framed();
-  }
-
-  .copy-container {
+  .education-page__textbook-copy {
     position: sticky;
     top: 7.5rem;
     align-self: start;
-    width: 50%;
     background-color: $inverse-02;
     padding: 0;
     padding-left: 4rem;
@@ -217,8 +225,7 @@ main {
     }
   }
 
-  .extra-container {
-    width: 60%;
+  .education-page__textbook-preview {
     margin-top: -6rem;
     margin-left: -10%;
   }
@@ -237,10 +244,6 @@ main {
   background-position: 0, top;
   background-repeat: no-repeat;
   background-size: cover;
-
-  .page-section {
-    @include framed();
-  }
 }
 
 @media (max-height: 37.5rem) {
