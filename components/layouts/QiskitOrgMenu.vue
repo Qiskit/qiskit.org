@@ -146,13 +146,11 @@ export default class extends Vue {
       url: 'https://qiskit.org/documentation/tutorials/fundamentals/1_getting_started_with_qiskit.html',
       segment: {
         action: 'Tutorials'
-      },
-      linkType: 'aLink'
+      }
     },
     {
       label: 'Documentation',
-      url: '/documentation',
-      linkType: 'aLink'
+      url: '/documentation'
     }
   ]
 
