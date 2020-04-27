@@ -11,17 +11,7 @@
       class="media__element"
     />
     <iframe
-      v-if="isYouTube(src)"
-      :src="src"
-      class="media__element"
-      width="560"
-      height="315"
-      frameborder="0"
-      allow="autoplay; accelerometer; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen
-    />
-    <iframe
-      v-if="isVimeo(src)"
+      v-if="isYouTube(src) || isVimeo(src)"
       :src="src"
       class="media__element"
       width="640"
