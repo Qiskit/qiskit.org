@@ -19,6 +19,7 @@ import { Component, Prop } from 'vue-property-decorator'
 export default class extends Vue {
   @Prop(String) url
   @Prop(String) label
+  @Prop({ type: Boolean, default: false }) isStatic
 
   isExternal (url: string): boolean {
     return url.startsWith('http')
