@@ -10,8 +10,6 @@ interface NavLink {
   label: string
   /** Where we want to go */
   url: string
-  /** Indicates if we need to use a <nuxt-link> or an <a> */
-  linkType: 'nuxtLink' | 'aLink'
   /** Includes an object with the information of the action. Example:
    * ```ts
    * {
@@ -44,28 +42,23 @@ type QiskitElements = {
 const QISKIT_ELEMENTS: QiskitElements = {
   terra: {
     label: 'Terra',
-    url: '/terra',
-    linkType: 'nuxtLink'
+    url: '/terra'
   },
   aer: {
     label: 'Aer',
-    url: '/aer',
-    linkType: 'nuxtLink'
+    url: '/aer'
   },
   aqua: {
     label: 'Aqua',
-    url: '/aqua',
-    linkType: 'nuxtLink'
+    url: '/aqua'
   },
   ignis: {
     label: 'Ignis',
-    url: '/ignis',
-    linkType: 'nuxtLink'
+    url: '/ignis'
   },
   ibmQAccount: {
     label: 'IBM Q Account',
-    url: '/ibmqaccount',
-    linkType: 'nuxtLink'
+    url: '/ibmqaccount'
   }
 }
 
@@ -80,45 +73,27 @@ const ORDERED_QISKIT_ELEMENTS: Array<NavLink> = [
 const SOCIAL_MEDIA: LabeledLinks = {
   github: {
     label: 'GitHub',
-    url: 'https://github.com/Qiskit',
-    target: '_blank',
-    rel: 'noopener',
-    linkType: 'aLink'
+    url: 'https://github.com/Qiskit'
   },
   slack: {
     label: 'Slack',
-    url: 'https://qiskit.slack.com/',
-    target: '_blank',
-    rel: 'noopener',
-    linkType: 'aLink'
+    url: 'https://qiskit.slack.com/'
   },
   twitter: {
     label: 'Twitter',
-    url: 'https://twitter.com/Qiskit',
-    target: '_blank',
-    rel: 'noopener',
-    linkType: 'aLink'
+    url: 'https://twitter.com/Qiskit'
   },
   medium: {
     label: 'Medium',
-    url: 'https://medium.com/Qiskit',
-    target: '_blank',
-    rel: 'noopener',
-    linkType: 'aLink'
+    url: 'https://medium.com/Qiskit'
   },
   youtube: {
     label: 'YouTube',
-    url: 'https://www.youtube.com/Qiskit',
-    target: '_blank',
-    rel: 'noopener',
-    linkType: 'aLink'
+    url: 'https://www.youtube.com/Qiskit'
   },
   stack: {
     label: 'Stack Exchange',
-    url: 'https://quantumcomputing.stackexchange.com/questions/tagged/qiskit',
-    target: '_blank',
-    rel: 'noopener',
-    linkType: 'aLink'
+    url: 'https://quantumcomputing.stackexchange.com/questions/tagged/qiskit'
   }
 }
 
@@ -134,23 +109,19 @@ const ORDERED_SOCIAL_MEDIA: Array<NavLink> = [
 const COMMUNITY_SUB_LINKS: LabeledLinks = {
   events: {
     label: 'Events',
-    url: '/events',
-    linkType: 'nuxtLink'
+    url: '/events'
   },
   education: {
     label: 'Education',
-    url: '/education',
-    linkType: 'nuxtLink'
+    url: '/education'
   },
   advocates: {
     label: 'Advocates',
-    url: '/advocates',
-    linkType: 'nuxtLink'
+    url: '/advocates'
   },
   experiments: {
     label: 'Experiments',
-    url: '/experiments',
-    linkType: 'nuxtLink'
+    url: '/experiments'
   }
 }
 
@@ -164,22 +135,15 @@ const ORDERED_COMMUNITY_SUB_LINKS: Array<NavLink> = [
 const QISKIT_EDUCATION: LabeledLinks = {
   textbook: {
     label: 'Textbook',
-    url: 'https://qiskit.org/textbook/preface.html',
-    linkType: 'aLink'
+    url: 'https://qiskit.org/textbook/preface.html'
   },
   youtube: {
     label: 'Coding With Qiskit',
-    url: 'https://www.youtube.com/playlist?list=PLOFEBzvs-Vvp2xg9-POLJhQwtVktlYGbY',
-    target: '_blank',
-    rel: 'noopener',
-    linkType: 'aLink'
+    url: 'https://www.youtube.com/playlist?list=PLOFEBzvs-Vvp2xg9-POLJhQwtVktlYGbY'
   },
   hostEvent: {
     label: 'Host an Event',
-    url: 'mailto:hello@qiskit.camp',
-    target: '_blank',
-    rel: 'noopener',
-    linkType: 'aLink'
+    url: 'mailto:hello@qiskit.camp'
   }
 }
 
@@ -192,8 +156,7 @@ const ORDERED_QISKIT_EDUCATION: Array<NavLink> = [
 const QISKIT_ADVOCATES: LabeledLinks = {
   advocates: {
     label: 'Become an Advocate',
-    url: '/advocates#become-an-advocate',
-    linkType: 'nuxtLink'
+    url: '/advocates#become-an-advocate'
   }
 }
 
@@ -204,8 +167,7 @@ const ORDERED_QISKIT_ADVOCATES: Array<NavLink> = [
 const QISKIT_EXPERIMENTS: LabeledLinks = {
   experiments: {
     label: 'Browse the experiments',
-    url: '/experiments#browse-the-experiments',
-    linkType: 'nuxtLink'
+    url: '/experiments#browse-the-experiments'
   }
 }
 
