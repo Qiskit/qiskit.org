@@ -10,15 +10,17 @@
       :src="src"
       class="media__element"
     />
-    <iframe
+    <div
       v-if="isYouTube(src) || isVimeo(src)"
-      :src="src"
-      class="media__element"
-      width="640"
-      height="360"
-      allow="autoplay; fullscreen"
-      allowfullscreen
-    />
+      class="media__iframe-container"
+    >
+      <iframe
+        :src="src"
+        class="media__responsive-iframe"
+        allow="autoplay; fullscreen"
+        allowfullscreen
+      />
+    </div>
   </div>
 </template>
 
@@ -60,6 +62,23 @@ export default class Media extends Vue {
 
   &__element {
     max-width: 100%;
+  }
+
+  &__iframe-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    padding-top: 56.25%;
+  }
+
+  &__responsive-iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
   }
 }
 </style>
