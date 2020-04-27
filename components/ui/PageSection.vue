@@ -69,7 +69,7 @@ export default class extends Vue {
   }
 
   &__aside {
-    width: 50;
+    width: 50%;
 
     @include mq($until: medium) {
       display: none;

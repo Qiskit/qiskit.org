@@ -231,7 +231,7 @@
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import ElementPresentation from '~/components/elements/ElementPresentation.vue'
-import PageSection from '~/components/ui/sections/PageSection.vue'
+import PageSection from '~/components/ui/PageSection.vue'
 import Cta from '~/components/ui/Cta.vue'
 
 @Component({

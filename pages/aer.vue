@@ -1,5 +1,5 @@
 <template>
-  <main class="element terra-element">
+  <main class="element aer-element">
     <ElementPresentation
       class="element__presentation"
       :title="title"
@@ -77,7 +77,7 @@ print(sim_result.get_counts(qc))</SyntaxHighlight>
 import { Component } from 'vue-property-decorator'
 import QiskitElementPage from '~/components/logic/QiskitElementPage.vue'
 import ElementPresentation from '~/components/elements/ElementPresentation.vue'
-import PageSection from '~/components/ui/sections/PageSection.vue'
+import PageSection from '~/components/ui/PageSection.vue'
 import SoftwareStack, { StackLayer } from '~/components/ui/SoftwareStack.vue'
 import SyntaxHighlight from '~/components/ui/SyntaxHighlight.vue'
 import Cta from '~/components/ui/Cta.vue'
@@ -127,7 +127,7 @@ export default class extends QiskitElementPage {
 <style lang="scss" scoped>
 @import '~/assets/scss/element.scss';
 
-.legacy-presentation {
+.aer-element {
   --community-header__background-color: rgb(179, 230, 255);
   --community-header__text-color: $inverse-01;
 }

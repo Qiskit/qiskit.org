@@ -114,7 +114,7 @@ import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import InnerNavigation from '~/components/ui/InnerNavigation.vue'
 import CommunityHeader from '~/components/ui/CommunityHeader.vue'
-import PageSection from '~/components/ui/sections/PageSection.vue'
+import PageSection from '~/components/ui/PageSection.vue'
 // @ts-ignore: Cannot find module
 import TextbookPreview from '~/components/education/TextbookPreview.vue'
 import Cta from '~/components/ui/Cta.vue'

@@ -1,5 +1,5 @@
 <template>
-  <main class="element terra-element">
+  <main class="element ibmq-account-element">
     <ElementPresentation
       class="element__presentation"
       :title="title"
@@ -64,7 +64,7 @@ print(backend, backend.status().pending_jobs)</SyntaxHighlight>
 import { Component } from 'vue-property-decorator'
 import QiskitElementPage from '~/components/logic/QiskitElementPage.vue'
 import ElementPresentation from '~/components/elements/ElementPresentation.vue'
-import PageSection from '~/components/ui/sections/PageSection.vue'
+import PageSection from '~/components/ui/PageSection.vue'
 import SyntaxHighlight from '~/components/ui/SyntaxHighlight.vue'
 import Cta from '~/components/ui/Cta.vue'
 
@@ -94,7 +94,7 @@ export default class extends QiskitElementPage {
 <style lang="scss" scoped>
 @import '~/assets/scss/element.scss';
 
-.legacy-presentation {
+.ibmq-account-element {
   --community-header__background-color: rgb(201, 222, 255);
   --community-header__text-color: $inverse-01;
 }

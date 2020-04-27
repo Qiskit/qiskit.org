@@ -1,5 +1,5 @@
 <template>
-  <main class="element terra-element">
+  <main class="element ignis-element">
     <ElementPresentation
       class="element__presentation"
       :title="title"
@@ -83,7 +83,7 @@ for rb_seed,rb_circ_seed in enumerate(rb_circs):
 import { Component } from 'vue-property-decorator'
 import QiskitElementPage from '~/components/logic/QiskitElementPage.vue'
 import ElementPresentation from '~/components/elements/ElementPresentation.vue'
-import PageSection from '~/components/ui/sections/PageSection.vue'
+import PageSection from '~/components/ui/PageSection.vue'
 import SoftwareStack, { StackLayer } from '~/components/ui/SoftwareStack.vue'
 import SyntaxHighlight from '~/components/ui/SyntaxHighlight.vue'
 import Cta from '~/components/ui/Cta.vue'
@@ -133,7 +133,7 @@ export default class extends QiskitElementPage {
 <style lang="scss" scoped>
 @import '~/assets/scss/element.scss';
 
-.legacy-presentation {
+.ignis-element {
   --community-header__background-color: rgb(255, 207, 225);
   --community-header__text-color: $inverse-01;
 }

@@ -4,7 +4,6 @@
       'community-header': true,
       'community-header_background_gradient': !noGradient
     }"
-    :style="`background-color: ${backgroundColor}`"
   >
     <article
       :class="{
