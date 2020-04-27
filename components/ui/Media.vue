@@ -1,25 +1,29 @@
 <template>
-  <div class="media-container">
+  <div class="media">
     <img
       v-if="isImg(src)"
       :src="src"
+      class="media__element"
     >
     <video
       v-if="isVideo(src)"
       :src="src"
+      class="media__element"
     />
     <iframe
       v-if="isYouTube(src)"
+      :src="src"
+      class="media__element"
       width="560"
       height="315"
-      :src="src"
       frameborder="0"
-      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+      allow="autoplay; accelerometer; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen
     />
     <iframe
       v-if="isVimeo(src)"
       :src="src"
+      class="media__element"
       width="640"
       height="360"
       frameborder="0"
@@ -63,9 +67,10 @@ export default class Media extends Vue {
 </script>
 
 <style lang="scss" scoped>
-img,
-video,
-iframe {
-  max-width: 100%;
+.media {
+
+  &__element {
+    max-width: 100%;
+  }
 }
 </style>
