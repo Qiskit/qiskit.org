@@ -1,16 +1,19 @@
 <template>
-  <main>
+  <main class="element aqua-element">
     <ElementPresentation
+      class="element__presentation"
       :title="title"
       image="/images/qiskit-aqua-logo.svg"
       :description="description"
       sources="https://github.com/Qiskit/qiskit-aqua"
       segment-action="Qiskit Aqua: GitHub Repository"
     />
-    <LegacySection>
-      <article>
-        <h2>About</h2>
-        <p>
+    <PageSection class="element__body" framed>
+      <article class="element__copy">
+        <h2 class="element__header">
+          About
+        </h2>
+        <p class="element__paragraph">
           Qiskit Aqua contains a library of cross-domain quantum algorithms
           upon which applications for near-term quantum computing can be built.
           Aqua is designed to be extensible, and employs a pluggable framework
@@ -18,36 +21,22 @@
           user to experiment on chemistry, AI, optimization and finance
           applications for near-term quantum computers.
         </p>
-        <h2>Stack</h2>
-        <SoftwareStack
-          :stack="[
-            {
-              title: 'Qiskit Aqua Translators',
-              description: 'Chemistry, AI, Optimization, Finance'
-            },
-            {
-              title: 'Quantum Algorithms',
-              description: 'QPE, Grover, HHL, QSVM, VQE, QAOA, ...'
-            },
-            {
-              title: 'Qiskit Terra',
-              description: 'Compile Circuits'
-            },
-            {
-              title: 'Providers',
-              description: 'Qiskit Aer, IBM Quantum, Third Party'
-            }
-          ]"
-        />
+        <h2 class="element__header">
+          Stack
+        </h2>
+        <SoftwareStack :stack="elementStack" />
       </article>
-      <article>
-        <h2>Example</h2>
-        <!-- eslint-disable vue/multiline-html-element-content-newline -->
-        <!-- eslint-disable vue/html-indent -->
-        <SyntaxHighlight
-          lang="python"
-          :label="title"
-        >from qiskit import Aer
+      <template #extra>
+        <article class="element__example">
+          <h2 class="element__header">
+            Example
+          </h2>
+          <!-- eslint-disable vue/multiline-html-element-content-newline -->
+          <!-- eslint-disable vue/html-indent -->
+          <SyntaxHighlight
+            lang="python"
+            :label="title"
+          >from qiskit import Aer
 from qiskit.aqua.components.oracles import LogicalExpressionOracle
 from qiskit.aqua.algorithms import Grover
 
@@ -67,10 +56,11 @@ algorithm = Grover(oracle)
 result = algorithm.run(backend)
 
 print(result["result"])</SyntaxHighlight>
-        <!-- eslint-enable vue/html-indent -->
-        <!-- eslint-enable vue/multiline-html-element-content-newline -->
-      </article>
-    </LegacySection>
+          <!-- eslint-enable vue/html-indent -->
+          <!-- eslint-enable vue/multiline-html-element-content-newline -->
+        </article>
+      </template>
+    </PageSection>
   </main>
 </template>
 
@@ -78,7 +68,7 @@ print(result["result"])</SyntaxHighlight>
 import { Component } from 'vue-property-decorator'
 import QiskitElementPage from '~/components/logic/QiskitElementPage.vue'
 import ElementPresentation from '~/components/elements/ElementPresentation.vue'
-import LegacySection from '~/components/ui/sections/LegacySection.vue'
+import PageSection from '~/components/ui/PageSection.vue'
 import SoftwareStack, { StackLayer } from '~/components/ui/SoftwareStack.vue'
 import SyntaxHighlight from '~/components/ui/SyntaxHighlight.vue'
 import Cta from '~/components/ui/Cta.vue'
@@ -87,7 +77,7 @@ import Cta from '~/components/ui/Cta.vue'
   components: {
     Cta,
     ElementPresentation,
-    LegacySection,
+    PageSection,
     SoftwareStack,
     SyntaxHighlight
   },
@@ -126,17 +116,11 @@ export default class extends QiskitElementPage {
 }
 </script>
 
-<style lang="scss">
-@import '~/assets/scss/legacy-elements.scss';
-</style>
-
 <style lang="scss" scoped>
-.element-presentation {
+@import '~/assets/scss/element.scss';
+
+.aqua-element {
   --community-header__background-color: rgb(219, 251, 251);
   --community-header__text-color: $inverse-01;
-}
-
-.legacy-section {
-  background-color: $inverse-02;
 }
 </style>

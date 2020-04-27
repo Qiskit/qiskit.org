@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main class="community-page advocates-page">
     <header>
       <CommunityHeader
         id="presentation"
@@ -26,8 +26,10 @@
           { anchor: 'meet-the-advocates', label: 'Meet the Advocates' },
         ]"
       />
-      <PageSection id="become-an-advocate">
-        <h2>Become an Advocate</h2>
+      <PageSection id="become-an-advocate" framed>
+        <h2 class="community-page__header">
+          Become an Advocate
+        </h2>
         <ol>
           <li>Click on the "Apply now" button below.</li>
           <li>Complete the test in the application with at least a 70%.</li>
@@ -43,10 +45,14 @@
         id="global-community"
         :points="cities()"
       >
-        <h2>Global Community</h2>
+        <h2 class="community-page__header community-page__header_elegant">
+          Global Community
+        </h2>
       </MapSection>
-      <PageSection id="meet-the-advocates">
-        <h2>Meet the Advocates</h2>
+      <PageSection id="meet-the-advocates" framed>
+        <h2 class="community-page__header community-page__header_elegant">
+          Meet the Advocates
+        </h2>
         <div class="advocate-cards-container">
           <AdvocateCard
             v-for="profile in profiles"
@@ -64,7 +70,7 @@ import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import InnerNavigation from '~/components/ui/InnerNavigation.vue'
 import CommunityHeader from '~/components/ui/CommunityHeader.vue'
-import PageSection from '~/components/ui/sections/PageSection.vue'
+import PageSection from '~/components/ui/PageSection.vue'
 import MapSection from '~/components/advocates/MapSection.vue'
 import AdvocateCard from '~/components/advocates/AdvocateCard.vue'
 import CompactFeature from '~/components/ui/CompactFeature.vue'
@@ -191,10 +197,6 @@ main {
   color: $inverse-01;
   background-color: $inverse-02;
 
-  .page-section {
-    @include framed();
-  }
-
   ol {
     margin-top: 1rem;
     list-style-position: inside;
@@ -208,24 +210,10 @@ main {
 
 #global-community {
   color: $text-01;
-
-  h2 {
-    @include type-style('productive-heading-06');
-    @include elegant-title();
-  }
 }
 
 #meet-the-advocates {
   color: $text-01;
-
-  h2 {
-    @include type-style('productive-heading-06');
-    @include elegant-title();
-  }
-
-  .page-section {
-    @include framed();
-  }
 
   .advocate-cards-container {
     margin-top: 3rem;

@@ -1,16 +1,19 @@
 <template>
-  <main>
+  <main class="element aer-element">
     <ElementPresentation
+      class="element__presentation"
       :title="title"
       image="/images/qiskit-aer-logo.svg"
       :description="description"
       sources="https://github.com/Qiskit/qiskit-aer"
       segment-action="Qiskit Aer: GitHub Repository"
     />
-    <LegacySection>
-      <article>
-        <h2>About</h2>
-        <p>
+    <PageSection class="element__body" framed>
+      <article class="element__copy">
+        <h2 class="element__header">
+          About
+        </h2>
+        <p class="element__paragraph">
           Qiskit Aer provides a high performance simulator framework for the
           Qiskit software stack. It contains optimized C++ simulator backends
           for executing circuits compiled in Qiskit Terra, and tools for
@@ -18,17 +21,22 @@
           realistic noisy simulations of the errors that occur during execution
           on real devices.
         </p>
-        <h2>Stack</h2>
+        <h2 class="element__header">
+          Stack
+        </h2>
         <SoftwareStack :stack="elementStack" />
       </article>
-      <article>
-        <h2>Example</h2>
-        <!-- eslint-disable vue/multiline-html-element-content-newline -->
-        <!-- eslint-disable vue/html-indent -->
-        <SyntaxHighlight
-          lang="python"
-          :label="title"
-        >from qiskit import QuantumCircuit, execute, Aer, IBMQ
+      <template #extra>
+        <article class="element__example">
+          <h2 class="element__header">
+            Example
+          </h2>
+          <!-- eslint-disable vue/multiline-html-element-content-newline -->
+          <!-- eslint-disable vue/html-indent -->
+          <SyntaxHighlight
+            lang="python"
+            :label="title"
+          >from qiskit import QuantumCircuit, execute, Aer, IBMQ
 from qiskit.providers.aer.noise import NoiseModel
 
 # Choose a real device to simulate
@@ -57,10 +65,11 @@ job_sim = execute(qc, backend,
 
 sim_result = job_sim.result()
 print(sim_result.get_counts(qc))</SyntaxHighlight>
-        <!-- eslint-enable vue/html-indent -->
-        <!-- eslint-enable vue/multiline-html-element-content-newline -->
-      </article>
-    </LegacySection>
+          <!-- eslint-enable vue/html-indent -->
+          <!-- eslint-enable vue/multiline-html-element-content-newline -->
+        </article>
+      </template>
+    </PageSection>
   </main>
 </template>
 
@@ -68,7 +77,7 @@ print(sim_result.get_counts(qc))</SyntaxHighlight>
 import { Component } from 'vue-property-decorator'
 import QiskitElementPage from '~/components/logic/QiskitElementPage.vue'
 import ElementPresentation from '~/components/elements/ElementPresentation.vue'
-import LegacySection from '~/components/ui/sections/LegacySection.vue'
+import PageSection from '~/components/ui/PageSection.vue'
 import SoftwareStack, { StackLayer } from '~/components/ui/SoftwareStack.vue'
 import SyntaxHighlight from '~/components/ui/SyntaxHighlight.vue'
 import Cta from '~/components/ui/Cta.vue'
@@ -77,7 +86,7 @@ import Cta from '~/components/ui/Cta.vue'
   components: {
     Cta,
     ElementPresentation,
-    LegacySection,
+    PageSection,
     SoftwareStack,
     SyntaxHighlight
   },
@@ -115,17 +124,11 @@ export default class extends QiskitElementPage {
 }
 </script>
 
-<style lang="scss">
-@import '~/assets/scss/legacy-elements.scss';
-</style>
-
 <style lang="scss" scoped>
-.element-presentation {
+@import '~/assets/scss/element.scss';
+
+.aer-element {
   --community-header__background-color: rgb(179, 230, 255);
   --community-header__text-color: $inverse-01;
-}
-
-.legacy-section {
-  background-color: $inverse-02;
 }
 </style>

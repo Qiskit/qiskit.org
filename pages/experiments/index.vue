@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main class="community-page experiments-page">
     <header>
       <CommunityHeader
         id="presentation"
@@ -9,14 +9,18 @@
       </CommunityHeader>
     </header>
     <div class="inner-navigation-scope">
-      <PageSection id="featured-experiments">
-        <h2>Now featuring</h2>
+      <PageSection id="featured-experiments" framed>
+        <h2 class="community-page__header community-page__header_elegant">
+          Now featuring
+        </h2>
         <ExperimentCarousel
           :experiments="featured"
         />
       </PageSection>
-      <PageSection id="browse-the-experiments">
-        <h2>Browse the experiments</h2>
+      <PageSection id="browse-the-experiments" framed>
+        <h2 class="community-page__header community-page__header">
+          Browse the experiments
+        </h2>
         <div class="experiment-card-container">
           <ExperimentCard
             v-for="(experiment, index) in experiments"
@@ -37,7 +41,7 @@
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import CommunityHeader from '~/components/ui/CommunityHeader.vue'
-import PageSection from '~/components/ui/sections/PageSection.vue'
+import PageSection from '~/components/ui/PageSection.vue'
 import ExperimentCard from '~/components/experiments/ExperimentCard.vue'
 import ExperimentCarousel from '~/components/experiments/ExperimentCarousel.vue'
 
@@ -71,7 +75,7 @@ export default class extends QiskitPage {
 </script>
 
 <style lang="scss">
-@import '~carbon-components/scss/globals/scss/typography';
+@import '~/assets/scss/community-page.scss';
 
 main {
   background-color: $ui-background;
@@ -90,8 +94,6 @@ main {
   padding-bottom: 7rem;
 
   h2 {
-    @include type-style('productive-heading-06');
-    @include elegant-title();
     margin-bottom: 4rem;
   }
 
@@ -102,11 +104,6 @@ main {
 
 #browse-the-experiments {
   color: $text-01;
-
-  h2 {
-    @include type-style('productive-heading-06');
-    @include elegant-title();
-  }
 
   .page-section {
     @include framed();
