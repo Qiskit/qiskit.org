@@ -6,7 +6,7 @@
     >
       Copy
     </button>
-    <pre v-highlightjs><code ref="code" :class="lang"><slot /></code></pre>
+    <pre v-highlightjs="code"><code :class="lang" /></pre>
   </div>
 </template>
 
@@ -18,10 +18,10 @@ import { Component, Prop } from 'vue-property-decorator'
 export default class extends Vue {
   @Prop({ type: String, default: 'python' }) lang
   @Prop(String) label
+  @Prop({ type: String, default: '' }) code
 
   copyToClipboard () {
-    const code = this.$refs.code as HTMLElement
-    navigator.clipboard.writeText(code.textContent || '')
+    navigator.clipboard.writeText(this.code)
     this.$trackClickEvent({
       action: `${this.label}: Copy Code Sample`
     })
