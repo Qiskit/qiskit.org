@@ -1,12 +1,14 @@
 <template>
   <div class="syntax-highlight">
-    <button
+    <cv-button
+      size="small"
       title="Copy to clipboard"
+      class="syntax-highlight__copy-button"
       @click="copyToClipboard"
     >
       Copy
-    </button>
-    <pre v-highlightjs="code"><code :class="lang" /></pre>
+    </cv-button>
+    <pre v-highlightjs="code"><code :class="`${lang} syntax-highlight__code`" /></pre>
   </div>
 </template>
 
@@ -35,16 +37,20 @@ export default class extends Vue {
 .syntax-highlight {
   position: relative;
 
-  button {
+  &__copy-button {
     position: absolute;
-    top: 0; right: 0;
+    right: 0;
     text-transform: uppercase;
     border: none;
-    padding: 0.2rem 0.5rem;
-    cursor: pointer;
+    padding: 0.5rem;
+
+    &:hover {
+      background-color: $interactive-01;
+      color: white;
+    }
   }
 
-  code {
+  &__code {
     @include type-style('code-02');
     padding: 1.5rem 1rem;
   }
