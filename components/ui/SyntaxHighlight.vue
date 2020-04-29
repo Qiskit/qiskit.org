@@ -18,9 +18,9 @@ import { Component, Prop } from 'vue-property-decorator'
 
 @Component
 export default class extends Vue {
-  @Prop({ type: String, default: 'python' }) lang
+  @Prop({ type: String, default: 'python' }) lang!: string
   @Prop(String) label
-  @Prop({ type: String, default: '' }) code
+  @Prop({ type: String, default: '' }) code!: string
 
   copyToClipboard () {
     navigator.clipboard.writeText(this.code)
