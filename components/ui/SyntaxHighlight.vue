@@ -8,7 +8,7 @@
     >
       Copy
     </cv-button>
-    <pre v-highlightjs="code"><code :class="`${lang} syntax-highlight__code`" /></pre>
+    <pre v-highlightjs="code"><code class="syntax-highlight__code" :class="lang" /></pre>
   </div>
 </template>
 
