@@ -32,26 +32,10 @@
           <h2 class="element__header">
             Example
           </h2>
-          <!-- eslint-disable vue/multiline-html-element-content-newline -->
-          <!-- eslint-disable vue/html-indent -->
           <SyntaxHighlight
-            lang="python"
             :label="title"
-          >from qiskit import QuantumCircuit, Aer, execute
-
-  qc = QuantumCircuit(2, 2)
-
-  qc.h(0)
-  qc.cx(0, 1)
-  qc.measure([0, 1], [0, 1])
-
-  backend = Aer.get_backend('qasm_simulator')
-  job_sim = execute(qc, backend)
-  sim_result = job_sim.result()
-
-  print(sim_result.get_counts(qc))</SyntaxHighlight>
-          <!-- eslint-enable vue/html-indent -->
-          <!-- eslint-enable vue/multiline-html-element-content-newline -->
+            :code="codeExample"
+          />
         </article>
       </template>
     </PageSection>
@@ -106,6 +90,20 @@ export default class extends QiskitElementPage {
       description: 'Histogram, State, Unitary, Entanglement, ...'
     }
   ]
+
+  codeExample = `from qiskit import QuantumCircuit, Aer, execute
+
+qc = QuantumCircuit(2, 2)
+
+qc.h(0)
+qc.cx(0, 1)
+qc.measure([0, 1], [0, 1])
+
+backend = Aer.get_backend('qasm_simulator')
+job_sim = execute(qc, backend)
+sim_result = job_sim.result()
+
+print(sim_result.get_counts(qc))`
 }
 </script>
 

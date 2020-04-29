@@ -31,33 +31,10 @@
           <h2 class="element__header">
             Example
           </h2>
-          <!-- eslint-disable vue/multiline-html-element-content-newline -->
-          <!-- eslint-disable vue/html-indent -->
           <SyntaxHighlight
-            lang="python"
             :label="title"
-          >from qiskit import Aer
-from qiskit.aqua.components.oracles import LogicalExpressionOracle
-from qiskit.aqua.algorithms import Grover
-
-sat_cnf = """
-c Example DIMACS 3-sat
-p cnf 3 5
--1 -2 -3 0
-1 -2 3 0
-1 2 -3 0
-1 -2 -3 0
--1 2 3 0
-"""
-
-backend = Aer.get_backend('qasm_simulator')
-oracle = LogicalExpressionOracle(sat_cnf)
-algorithm = Grover(oracle)
-result = algorithm.run(backend)
-
-print(result["result"])</SyntaxHighlight>
-          <!-- eslint-enable vue/html-indent -->
-          <!-- eslint-enable vue/multiline-html-element-content-newline -->
+            :code="codeExample"
+          />
         </article>
       </template>
     </PageSection>
@@ -113,6 +90,27 @@ export default class extends QiskitElementPage {
       description: 'Qiskit Aer, IBM Quantum, Third Party'
     }
   ]
+
+  codeExample = `from qiskit import Aer
+from qiskit.aqua.components.oracles import LogicalExpressionOracle
+from qiskit.aqua.algorithms import Grover
+
+sat_cnf = """
+c Example DIMACS 3-sat
+p cnf 3 5
+-1 -2 -3 0
+1 -2 3 0
+1 2 -3 0
+1 -2 -3 0
+-1 2 3 0
+"""
+
+backend = Aer.get_backend('qasm_simulator')
+oracle = LogicalExpressionOracle(sat_cnf)
+algorithm = Grover(oracle)
+result = algorithm.run(backend)
+
+print(result["result"])`
 }
 </script>
 

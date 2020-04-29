@@ -38,22 +38,10 @@
           <h2 class="element__header">
             Example
           </h2>
-          <!-- eslint-disable vue/multiline-html-element-content-newline -->
-          <!-- eslint-disable vue/html-indent -->
           <SyntaxHighlight
-            lang="python"
             :label="title"
-          >from qiskit import IBMQ
-from qiskit.providers.ibmq import least_busy
-
-# Load local account information
-provider = IBMQ.load_account()
-
-# Get the least busy real quantum system
-backend = least_busy(provider.backends(simulator=False))
-print(backend, backend.status().pending_jobs)</SyntaxHighlight>
-          <!-- eslint-enable vue/html-indent -->
-          <!-- eslint-enable vue/multiline-html-element-content-newline -->
+            :code="codeExample"
+          />
         </article>
       </template>
     </PageSection>
@@ -88,6 +76,15 @@ export default class extends QiskitElementPage {
   title = 'IBM Q Account'
   description = 'Access to world-leading quantum systems and simulators.'
   routeName = 'ibm-q-account'
+  codeExample = `from qiskit import IBMQ
+from qiskit.providers.ibmq import least_busy
+
+# Load local account information
+provider = IBMQ.load_account()
+
+# Get the least busy real quantum system
+backend = least_busy(provider.backends(simulator=False))
+print(backend, backend.status().pending_jobs)`
 }
 </script>
 
