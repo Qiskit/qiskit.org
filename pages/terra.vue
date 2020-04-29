@@ -91,7 +91,7 @@ export default class extends QiskitElementPage {
     }
   ]
 
-  codeExample: string = `from qiskit import QuantumCircuit, Aer, execute
+  codeExample = `from qiskit import QuantumCircuit, Aer, execute
 
   qc = QuantumCircuit(2, 2)
 

@@ -90,7 +90,7 @@ export default class extends QiskitElementPage {
     }
   ]
 
-  codeExample: string = `from qiskit import QuantumCircuit, execute, Aer, IBMQ
+  codeExample = `from qiskit import QuantumCircuit, execute, Aer, IBMQ
 from qiskit.providers.aer.noise import NoiseModel
 
 # Choose a real device to simulate

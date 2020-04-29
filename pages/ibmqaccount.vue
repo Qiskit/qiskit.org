@@ -76,7 +76,7 @@ export default class extends QiskitElementPage {
   title = 'IBM Q Account'
   description = 'Access to world-leading quantum systems and simulators.'
   routeName = 'ibm-q-account'
-  codeExample: string = `from qiskit import IBMQ
+  codeExample = `from qiskit import IBMQ
 from qiskit.providers.ibmq import least_busy
 
 # Load local account information

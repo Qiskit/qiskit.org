@@ -93,7 +93,7 @@ export default class extends QiskitElementPage {
     }
   ]
 
-  codeExample: string = `import qiskit
+  codeExample = `import qiskit
 from qiskit.providers.aer.noise import NoiseModel
 from qiskit.providers.aer.noise.errors.standard_errors import depolarizing_error
 

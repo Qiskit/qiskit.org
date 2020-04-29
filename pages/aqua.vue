@@ -91,7 +91,7 @@ export default class extends QiskitElementPage {
     }
   ]
 
-  codeExample: string = `from qiskit import Aer
+  codeExample = `from qiskit import Aer
 from qiskit.aqua.components.oracles import LogicalExpressionOracle
 from qiskit.aqua.algorithms import Grover
 
