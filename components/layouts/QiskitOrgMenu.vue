@@ -174,14 +174,8 @@ export default class extends Vue {
   padding: 0.5rem 1.5em;
 }
 
-* {
-  box-sizing: border-box;
-}
-
 .menu-container {
   border-bottom: 1px solid black;
-  background-color: $ui-background;
-  --link-color: #{$text-01};
   &--light {
     --link-color: #{$inverse-01};
     background-color: $purple-40;
@@ -192,9 +186,7 @@ export default class extends Vue {
 .menu {
   height: 60px;
   display: flex;
-  & > * {
-    height: 100%;
-  }
+
   &--framed {
     @include framed();
   }
@@ -212,6 +204,7 @@ export default class extends Vue {
     text-decoration: none;
 
     &.nuxt-link-active {
+      padding-top: 2px;
       position: relative;
       top: 1px;
       border-bottom: 4px solid $focus;
@@ -250,8 +243,7 @@ export default class extends Vue {
   @include type-style('productive-heading-02');
   display: inline-flex;
   align-items: center;
-  margin-left: -1.2rem;
-  padding: 0 1em;
+  margin: 0 1rem 0 -0.2rem;
   color: var(--link-color);
   text-decoration: none;
 
@@ -265,7 +257,7 @@ export default class extends Vue {
 
   @include mq($until: large) {
     display: unset;
-    margin-left: -2rem;
+    margin: 0 -0.5rem 0 -2rem;
   }
 }
 
@@ -279,7 +271,7 @@ export default class extends Vue {
   fill: white;
   height: 100%;
   cursor: pointer;
-  margin: 0 0 0 1.5rem;
+  margin: 0 1.5rem;
 }
 
 .overlay {
@@ -288,7 +280,7 @@ export default class extends Vue {
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 150;
+  z-index: 1;
   background-color: $ui-background;
   opacity: 0;
   transition: opacity 200ms;
@@ -301,8 +293,7 @@ export default class extends Vue {
   position: fixed;
   top: 0;
   bottom: 0;
-  left: 0;
-  z-index: 200;
+  z-index: 2;
   width: 256px;
   padding: 1.3rem;
   background-color: $ui-background;
@@ -312,7 +303,6 @@ export default class extends Vue {
 
   h2 {
     @include type-style('productive-heading-03');
-    color: $text-01;
     padding: 1em;
   }
 
