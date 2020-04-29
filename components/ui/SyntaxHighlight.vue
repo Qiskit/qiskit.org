@@ -1,12 +1,14 @@
 <template>
   <div class="syntax-highlight">
-    <button
+    <cv-button
+      size="small"
       title="Copy to clipboard"
+      class="syntax-highlight__copy-button"
       @click="copyToClipboard"
     >
       Copy
-    </button>
-    <pre v-highlightjs><code ref="code" :class="lang"><slot /></code></pre>
+    </cv-button>
+    <pre v-highlightjs="code"><code class="syntax-highlight__code" :class="lang" /></pre>
   </div>
 </template>
 
@@ -16,12 +18,12 @@ import { Component, Prop } from 'vue-property-decorator'
 
 @Component
 export default class extends Vue {
-  @Prop({ type: String, default: 'python' }) lang
+  @Prop({ type: String, default: 'python' }) lang!: string
   @Prop(String) label
+  @Prop({ type: String, default: '' }) code!: string
 
   copyToClipboard () {
-    const code = this.$refs.code as HTMLElement
-    navigator.clipboard.writeText(code.textContent || '')
+    navigator.clipboard.writeText(this.code)
     this.$trackClickEvent({
       action: `${this.label}: Copy Code Sample`
     })
@@ -35,16 +37,20 @@ export default class extends Vue {
 .syntax-highlight {
   position: relative;
 
-  button {
+  &__copy-button {
     position: absolute;
-    top: 0; right: 0;
+    right: 0;
     text-transform: uppercase;
     border: none;
-    padding: 0.2rem 0.5rem;
-    cursor: pointer;
+    padding: 0.5rem;
+
+    &:hover {
+      background-color: $interactive-01;
+      color: white;
+    }
   }
 
-  code {
+  &__code {
     @include type-style('code-02');
     padding: 1.5rem 1rem;
   }
