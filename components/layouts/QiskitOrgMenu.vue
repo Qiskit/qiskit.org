@@ -3,9 +3,7 @@
     <div class="menu-container">
       <div class="main_menu">
         <section class="drawer" tabindex="-1">
-          <svg class="drawer-toggle" height="24" viewBox="0 0 24 24" width="24">
-            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
-          </svg>
+          <Menu20 />
           <div class="overlay" />
           <SidebarMenu />
         </section>
@@ -200,26 +198,10 @@ export default class extends Vue {
   }
 }
 
-.drawer {
-  display: none;
-
-  @include mq($until: large) {
-    display: unset;
-    margin: 0 -0.5rem 0 -2rem;
-  }
-}
-
 .community-menu {
   @include mq($until: large) {
     display: none;
   }
-}
-
-.drawer-toggle {
-  fill: white;
-  height: 100%;
-  cursor: pointer;
-  margin: 0 1.5rem;
 }
 
 .overlay {
@@ -235,9 +217,25 @@ export default class extends Vue {
   pointer-events: none;
 }
 
+.drawer {
+  display: none;
+
+  @include mq($until: large) {
+    display: unset;
+    cursor: pointer;
+    fill: white;
+    height: 100%;
+    margin: 1.25rem 1rem 0 -0.5rem;
+  }
+}
+
 .drawer:focus {
   .overlay {
     opacity: 0.5;
+  }
+
+  .sidebar-menu {
+    transform: translateX(0);
   }
 }
 </style>

@@ -110,6 +110,7 @@ export default class extends Vue {
 .sidebar-menu {
   position: fixed;
   top: 0;
+  left: 0;
   bottom: 0;
   z-index: 150;
   width: 256px;
@@ -143,12 +144,6 @@ export default class extends Vue {
       border-left: 4px solid $focus;
       padding-left: calc(3rem - 4px);
     }
-  }
-}
-
-.drawer:focus {
-  .sidebar-menu {
-    transform: translateX(0);
   }
 }
 </style>
