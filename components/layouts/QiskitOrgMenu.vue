@@ -108,6 +108,8 @@ export default class extends Vue {
 
 .main_menu {
   @include framed();
+  padding-left: 0;
+  padding-right: 0;
   height: 3.75rem;
   border-bottom: 1px solid black;
   display: flex;
@@ -129,6 +131,7 @@ export default class extends Vue {
   --link-color: #{$inverse-01};
   background-color: $purple-40;
   border-bottom: none;
+  padding-right: calc((100vw - 1100px) / 2);
 
   &--on-right {
     display: flex;
