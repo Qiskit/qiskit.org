@@ -11,9 +11,7 @@
       </section>
       <section class="main_menu">
         <nav class="main_menu--on-left">
-          <nuxt-link class="link-to-home" to="/">
-            Qiskit
-          </nuxt-link>
+          <MenuLink v-bind="homeLink" />
           <div class="separator" />
           <MenuLink
             v-for="link in qiskitElements"
@@ -84,6 +82,11 @@ export default class extends Vue {
     }
   ]
 
+  homeLink: NavLink = {
+    label: 'Qiskit',
+    url: '/'
+  }
+
   isPathStartingWith (linkPath: string) {
     return this.$route.path.startsWith(linkPath)
   }
@@ -142,19 +145,6 @@ export default class extends Vue {
 
   @include mq($until: large) {
     display: none;
-  }
-}
-
-.link-to-home {
-  @include type-style('productive-heading-02');
-  display: inline-flex;
-  align-items: center;
-  margin: 0 1rem 0 -0.2rem;
-  color: var(--link-color);
-  text-decoration: none;
-
-  @include mq($until: large) {
-    margin-left: -0.5rem;
   }
 }
 
