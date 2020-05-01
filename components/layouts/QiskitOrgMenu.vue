@@ -2,9 +2,7 @@
   <div>
     <section class="mobile-menu" tabindex="-1">
       <Menu20 class="mobile-menu--menu-link" />
-      <nuxt-link class="mobile-menu--home-link" to="/">
-        Qiskit
-      </nuxt-link>
+      <MenuLink v-bind="homeLink" />
       <div class="overlay" />
       <SidebarMenu />
     </section>
@@ -106,39 +104,39 @@ export default class extends Vue {
 <style lang="scss" scoped>
 @import '~carbon-components/scss/globals/scss/typography';
 
-.main_menu {
-  @include framed();
-  padding-left: 0;
-  padding-right: 0;
+.main_menu, .secondary-menu {
   height: 3.75rem;
-  border-bottom: 1px solid black;
   display: flex;
-  justify-content: space-between;
-
-  &--on-left, &--on-right {
-    display: flex;
-  }
 
   @include mq($until: large) {
     display: none;
   }
 }
 
+.main_menu {
+  @include framed();
+  padding-left: 0;
+  padding-right: 0;
+  border-bottom: 1px solid black;
+  justify-content: space-between;
+
+  &--on-left, &--on-right {
+    display: flex;
+  }
+}
+
 .secondary-menu {
-  height: 3.75rem;
-  display: flex;
   justify-content: flex-end;
   --link-color: #{$inverse-01};
   background-color: $purple-40;
-  border-bottom: none;
-  padding-right: calc((100vw - 1100px) / 2);
+  /* The menu should be framed() (max-width of 1100px = 68.75rem)
+  *  If we framed this menu, the purple backgroud fit the framed size, not all
+  *  That's why we calculate the padding, to align the secondary menu with the main one
+  */
+  padding-right: calc((100vw - 68.75rem) / 2);
 
   &--on-right {
     display: flex;
-  }
-
-  @include mq($until: large) {
-    display: none;
   }
 }
 
@@ -165,23 +163,14 @@ export default class extends Vue {
   display: none;
 
   &--menu-link {
-    margin: 1.3rem 0.7rem 0 1.3rem;
-  }
-
-  &--home-link {
-    @include type-style('productive-heading-02');
-    display: inline-flex;
-    align-items: center;
-    margin: 0 1rem 0 -0.2rem;
-    color: var(--link-color);
-    text-decoration: none;
+    margin: 1.3rem -0.2rem 0 1.3rem;
   }
 
   @include mq($until: large) {
     display: flex;
+    height: 3.75rem;
     cursor: pointer;
     fill: white;
-    height: 3.75rem;
   }
 }
 
