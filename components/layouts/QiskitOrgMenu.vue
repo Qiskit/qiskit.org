@@ -76,7 +76,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import SidebarMenu from '~/components/layouts/SidebarMenu.vue'
+import SidebarMenu from '~/components/ui/menu/SidebarMenu.vue'
 
 import {
   ORDERED_QISKIT_ELEMENTS,
