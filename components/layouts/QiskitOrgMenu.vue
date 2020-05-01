@@ -12,41 +12,20 @@
         </nuxt-link>
         <div class="separator" />
         <nav class="navigation-group">
-          <nuxt-link
+          <MenuLink
             v-for="link in qiskitElements"
             :key="link.url"
-            :class="{
-              'navigation-group__item': true,
-              'navigation-group__item--active': isActive(link.url)
-            }"
-            :to="link.url"
-          >
-            {{ link.label }}
-          </nuxt-link>
+            :is-active="isActive(link)"
+            v-bind="link"
+          />
         </nav>
         <nav class="navigation-group navigation-group--right-aligned">
-          <nuxt-link
-            :class="{
-              'navigation-group__item': true,
-              'navigation-group__item--active': isCommunityActive()
-            }"
-            to="/education"
-          >
-            Community
-          </nuxt-link>
-          <a
+          <MenuLink
             v-for="link in learnMore"
-            :key="link.label"
-            :class="{
-              'navigation-group__item': true,
-              'navigation-group__item--active': isActive(link.url)
-            }"
-            :href="link.url"
-            target="_blank"
-            @click="link.segment && $trackClickEvent(link.segment)"
-          >
-            {{ link.label }}
-          </a>
+            :key="link.url"
+            :is-active="isActive(link)"
+            v-bind="link"
+          />
         </nav>
       </div>
     </div>
@@ -56,17 +35,12 @@
     >
       <section class="main_menu">
         <nav class="navigation-group navigation-group--right-aligned">
-          <nuxt-link
-            v-for="communitySubLink in communitySubLinks"
-            :key="communitySubLink.label"
-            :class="{
-              'navigation-group__item': true,
-              'navigation-group__item--active': isActive(communitySubLink.url)
-            }"
-            :to="communitySubLink.url"
-          >
-            {{ communitySubLink.label }}
-          </nuxt-link>
+          <MenuLink
+            v-for="link in communitySubLinks"
+            :key="link.url"
+            :is-active="isActive(link)"
+            v-bind="link"
+          />
         </nav>
       </section>
     </div>
@@ -77,6 +51,7 @@
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 import SidebarMenu from '~/components/ui/menu/SidebarMenu.vue'
+import MenuLink from '~/components/ui/menu/MenuLink.vue'
 
 import {
   ORDERED_QISKIT_ELEMENTS,
@@ -85,12 +60,16 @@ import {
 } from '~/constants/menuLinks'
 
 @Component({
-  components: { SidebarMenu }
+  components: { SidebarMenu, MenuLink }
 })
 export default class extends Vue {
   qiskitElements: Array<NavLink> = ORDERED_QISKIT_ELEMENTS
   communitySubLinks: Array<NavLink> = ORDERED_COMMUNITY_SUB_LINKS
   learnMore: Array<NavLink> = [
+    {
+      label: 'Community',
+      url: '/education'
+    },
     {
       label: 'Tutorials',
       url: 'https://quantum-computing.ibm.com/jupyter/tutorial/1_start_here.ipynb',
@@ -100,16 +79,24 @@ export default class extends Vue {
     },
     {
       label: 'Documentation',
-      url: '/documentation'
+      url: 'https://qiskit.org/documentation/'
     }
   ]
 
-  isActive (path) {
-    return this.$route.path.startsWith(path)
+  isPathStartingWith (linkPath: string) {
+    return this.$route.path.startsWith(linkPath)
+  }
+
+  isActive (link: NavLink) {
+    const isCommunityLink = link.label === 'Community'
+
+    return isCommunityLink
+      ? this.communitySubLinks.some(communitySection => this.isPathStartingWith(communitySection.url))
+      : this.isPathStartingWith(link.url)
   }
 
   isCommunityActive () {
-    return this.communitySubLinks.some(link => this.isActive(link.url))
+    return this.communitySubLinks.some(link => this.isActive(link))
   }
 }
 </script>
@@ -141,22 +128,6 @@ export default class extends Vue {
 
 .navigation-group {
   display: flex;
-
-  &__item {
-    @include type-style('productive-heading-02');
-    display: inline-flex;
-    align-items: center;
-    padding: 0 1em;
-    color: var(--link-color);
-    text-decoration: none;
-
-    &--active {
-      padding-top: 2px;
-      position: relative;
-      top: 1px;
-      border-bottom: 4px solid $focus;
-    }
-  }
 
   &--right-aligned {
     margin-left: auto;
