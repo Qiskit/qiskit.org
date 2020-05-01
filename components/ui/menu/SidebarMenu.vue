@@ -1,62 +1,42 @@
 <template>
   <nav class="sidebar-menu">
     <h2>Elements</h2>
-    <nuxt-link
-      v-for="qiskitElement in qiskitElements"
-      :key="qiskitElement.label"
-      :class="{
-        'sidebar-menu__item': true,
-        'nuxt-link-active': isActive(qiskitElement.url)
-      }"
-      :to="qiskitElement.url"
-    >
-      {{ qiskitElement.label }}
-    </nuxt-link>
+    <SidebarMenuLink
+      v-for="link in qiskitElements"
+      :key="link.url"
+      :is-active="isActive(link)"
+      v-bind="link"
+    />
     <h2>Learn more</h2>
-    <nuxt-link
-      :class="{
-        'sidebar-menu__item': true,
-        'sidebar-menu__item--active': isCommunityActive()
-      }"
-      to="/education"
-    >
-      Community
-    </nuxt-link>
+    <SidebarMenuLink
+      :is-active="isActive(communityLink)"
+      v-bind="communityLink"
+    />
     <div
       v-if="isCommunityActive()"
       class="sidebar-secondary-menu"
     >
-      <nuxt-link
-        v-for="communitySubLink in communitySubLinks"
-        :key="communitySubLink.label"
-        :class="{
-          'sidebar-secondary-menu__item': true,
-          'nuxt-link-active': isActive(communitySubLink.url)
-        }"
-        :to="communitySubLink.url"
-      >
-        {{ communitySubLink.label }}
-      </nuxt-link>
+      <SidebarMenuLink
+        v-for="link in communitySubLinks"
+        :key="link.url"
+        :is-active="isActive(link)"
+        type="secondary"
+        v-bind="link"
+      />
     </div>
-    <a
+    <SidebarMenuLink
       v-for="link in learnMore"
-      :key="link.label"
-      :class="{
-        'sidebar-menu__item': true,
-        'nuxt-link-active': isActive(link.url)
-      }"
-      :href="link.url"
-      target="_blank"
-      @click="link.segment && $trackClickEvent(link.segment)"
-    >
-      {{ link.label }}
-    </a>
+      :key="link.url"
+      :is-active="isActive(link)"
+      v-bind="link"
+    />
   </nav>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
+import SidebarMenuLink from '~/components/ui/menu/SidebarMenuLink.vue'
 
 import {
   ORDERED_QISKIT_ELEMENTS,
@@ -64,7 +44,9 @@ import {
   NavLink
 } from '~/constants/menuLinks'
 
-@Component
+@Component({
+  components: { SidebarMenuLink }
+})
 export default class extends Vue {
   qiskitElements: Array<NavLink> = ORDERED_QISKIT_ELEMENTS
   communitySubLinks: Array<NavLink> = ORDERED_COMMUNITY_SUB_LINKS
@@ -78,29 +60,35 @@ export default class extends Vue {
     },
     {
       label: 'Documentation',
-      url: '/documentation'
+      url: 'https://qiskit.org/documentation/'
     }
   ]
 
-  isActive (path) {
-    return this.$route.path.startsWith(path)
+  communityLink: NavLink = {
+    label: 'Community',
+    url: '/education'
+  }
+
+  isPathStartingWith (linkPath: string) {
+    return this.$route.path.startsWith(linkPath)
+  }
+
+  isActive (link: NavLink) {
+    const isCommunityLink = link.label === 'Community'
+
+    return isCommunityLink
+      ? this.communitySubLinks.some(communitySection => this.isPathStartingWith(communitySection.url))
+      : this.isPathStartingWith(link.url)
   }
 
   isCommunityActive () {
-    return this.communitySubLinks.some(link => this.isActive(link.url))
+    return this.communitySubLinks.some(link => this.isActive(link))
   }
 }
 </script>
 
 <style lang="scss" scoped>
 @import '~carbon-components/scss/globals/scss/typography';
-
-@mixin sidebar-menu-item() {
-  @include type-style('productive-heading-02');
-  text-decoration: none;
-  color: white;
-  padding: 0.5rem 1.5em;
-}
 
 .sidebar-menu, .sidebar-secondary-menu {
   display: flex;
@@ -124,26 +112,11 @@ export default class extends Vue {
     @include type-style('productive-heading-03');
     padding: 1em;
   }
-
-  &__item {
-    @include sidebar-menu-item();
-  }
 }
 
 .sidebar-secondary-menu {
   margin: 0 -1.3rem;
   padding: 1rem 0;
   background-color: $purple-30;
-
-  &__item {
-    @include sidebar-menu-item();
-    padding: 0.5rem 3rem;
-    color: $inverse-01;
-
-    &.nuxt-link-active {
-      border-left: 4px solid $focus;
-      padding-left: calc(3rem - 4px);
-    }
-  }
 }
 </style>
