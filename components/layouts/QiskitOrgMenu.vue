@@ -1,35 +1,33 @@
 <template>
-  <section>
-    <div class="menu-container">
-      <section class="mobile-menu" tabindex="-1">
-        <Menu20 class="mobile-menu--menu-link" />
-        <nuxt-link class="mobile-menu--home-link" to="/">
-          Qiskit
-        </nuxt-link>
-        <div class="overlay" />
-        <SidebarMenu />
-      </section>
-      <section class="main_menu">
-        <nav class="main_menu--on-left">
-          <MenuLink v-bind="homeLink" />
-          <div class="separator" />
-          <MenuLink
-            v-for="link in qiskitElements"
-            :key="link.url"
-            :is-active="isActive(link)"
-            v-bind="link"
-          />
-        </nav>
-        <nav class="main_menu--on-right">
-          <MenuLink
-            v-for="link in learnMore"
-            :key="link.url"
-            :is-active="isActive(link)"
-            v-bind="link"
-          />
-        </nav>
-      </section>
-    </div>
+  <div>
+    <section class="mobile-menu" tabindex="-1">
+      <Menu20 class="mobile-menu--menu-link" />
+      <nuxt-link class="mobile-menu--home-link" to="/">
+        Qiskit
+      </nuxt-link>
+      <div class="overlay" />
+      <SidebarMenu />
+    </section>
+    <section class="main_menu">
+      <nav class="main_menu--on-left">
+        <MenuLink v-bind="homeLink" />
+        <div class="separator" />
+        <MenuLink
+          v-for="link in qiskitElements"
+          :key="link.url"
+          :is-active="isActive(link)"
+          v-bind="link"
+        />
+      </nav>
+      <nav class="main_menu--on-right">
+        <MenuLink
+          v-for="link in learnMore"
+          :key="link.url"
+          :is-active="isActive(link)"
+          v-bind="link"
+        />
+      </nav>
+    </section>
     <section
       v-if="isCommunityActive()"
       class="secondary-menu"
@@ -43,7 +41,7 @@
         />
       </nav>
     </section>
-  </section>
+  </div>
 </template>
 
 <script lang="ts">
@@ -108,13 +106,10 @@ export default class extends Vue {
 <style lang="scss" scoped>
 @import '~carbon-components/scss/globals/scss/typography';
 
-.menu-container {
-  border-bottom: 1px solid black;
-}
-
 .main_menu {
   @include framed();
   height: 3.75rem;
+  border-bottom: 1px solid black;
   display: flex;
   justify-content: space-between;
 
@@ -128,10 +123,6 @@ export default class extends Vue {
 }
 
 .secondary-menu {
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 2rem;
-  padding-right: 2rem;
   height: 3.75rem;
   display: flex;
   justify-content: flex-end;
