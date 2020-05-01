@@ -185,6 +185,10 @@ export default class extends Vue {
   background-color: $ui-03;
   width: 0.125rem;
   margin: 0.75rem 0.625rem;
+
+  @include mq($until: large) {
+    display: none;
+  }
 }
 
 .community-menu {
