@@ -1,33 +1,37 @@
 <template>
   <nav class="sidebar-menu">
     <h2>Elements</h2>
-    <SidebarMenuLink
+    <MenuLink
       v-for="link in qiskitElements"
       :key="link.url"
       :is-active="isActive(link)"
+      menu-type="sidebar"
       v-bind="link"
     />
     <h2>Learn more</h2>
-    <SidebarMenuLink
-      :is-active="isActive(communityLink)"
+    <MenuLink
+      :is-active="false"
+      menu-type="sidebar"
       v-bind="communityLink"
     />
     <div
       v-if="isCommunityActive()"
       class="sidebar-secondary-menu"
     >
-      <SidebarMenuLink
+      <MenuLink
         v-for="link in communitySubLinks"
         :key="link.url"
         :is-active="isActive(link)"
-        type="secondary"
+        menu-type="sidebar"
+        link-type="secondary"
         v-bind="link"
       />
     </div>
-    <SidebarMenuLink
+    <MenuLink
       v-for="link in learnMore"
       :key="link.url"
       :is-active="isActive(link)"
+      menu-type="sidebar"
       v-bind="link"
     />
   </nav>
@@ -36,7 +40,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import SidebarMenuLink from '~/components/ui/menu/SidebarMenuLink.vue'
+import MenuLink from '~/components/ui/menu/MenuLink.vue'
 
 import {
   ORDERED_QISKIT_ELEMENTS,
@@ -45,7 +49,7 @@ import {
 } from '~/constants/menuLinks'
 
 @Component({
-  components: { SidebarMenuLink }
+  components: { MenuLink }
 })
 export default class extends Vue {
   qiskitElements: Array<NavLink> = ORDERED_QISKIT_ELEMENTS

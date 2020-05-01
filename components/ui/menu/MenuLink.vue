@@ -2,7 +2,11 @@
   <component
     :is="isInternal(url) ? 'nuxt-link' : 'a'"
     class="menu-link"
-    :class="isActive && 'menu-link_active'"
+    :class="{
+      [`menu-link--${menuType}`]: true,
+      [`menu-link--${menuType}_${linkType}`]: true,
+      [`menu-link--${menuType}_active`]: isActive
+    }"
     :href="url"
     :to="isInternal(url) ? url : null"
     :rel="isExternal(url) ? 'noopener' : null"
@@ -23,6 +27,8 @@ export default class extends Vue {
   @Prop(String) label
   @Prop(Object) segment
   @Prop(Boolean) isActive
+  @Prop({ type: String, default: 'main' }) menuType
+  @Prop({ type: String, default: 'primary' }) linkType
 
   isExternal (url: string): boolean {
     return url.startsWith('http')
@@ -39,17 +45,55 @@ export default class extends Vue {
 
 .menu-link {
   @include type-style('productive-heading-02');
-  display: inline-flex;
-  align-items: center;
-  padding: 0 1em;
-  color: var(--link-color);
   text-decoration: none;
 
-  &_active {
-    padding-top: 2px;
-    position: relative;
-    top: 1px;
-    border-bottom: 4px solid $focus;
+  &--main {
+    display: inline-flex;
+    align-items: center;
+    padding: 0 1rem;
+    color: var(--link-color);
+    text-decoration: none;
+
+    &_active {
+      padding-top: 2px;
+      position: relative;
+      top: 1px;
+      border-bottom: 4px solid $focus;
+    }
+  }
+
+  &--sidebar {
+    &_primary {
+      color: white;
+      padding: 0.5rem 1.5em;
+    }
+
+    &_secondary {
+      color: $inverse-01;
+      padding: 0.5rem 3rem;
+
+    }
+
+    &_active {
+      border-left: 4px solid $focus;
+      padding-left: calc(3rem - 4px);
+    }
   }
 }
+
+// .menu-link {
+//   @include type-style('productive-heading-02');
+//   display: inline-flex;
+//   align-items: center;
+//   padding: 0 1em;
+//   color: var(--link-color);
+//   text-decoration: none;
+
+//   &_active {
+//     padding-top: 2px;
+//     position: relative;
+//     top: 1px;
+//     border-bottom: 4px solid $focus;
+//   }
+// }
 </style>
