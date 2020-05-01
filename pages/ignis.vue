@@ -1,16 +1,19 @@
 <template>
-  <main>
-    <LegacyPresentation
+  <main class="element ignis-element">
+    <ElementPresentation
+      class="element__presentation"
       :title="title"
       image="/images/qiskit-ignis-logo.svg"
       :description="description"
       sources="https://github.com/Qiskit/qiskit-ignis"
       segment-action="Qiskit Ignis: GitHub Repository"
     />
-    <LegacySection>
-      <article>
-        <h2>About</h2>
-        <p>
+    <PageSection class="element__body" framed>
+      <article class="element__copy">
+        <h2 class="element__header">
+          About
+        </h2>
+        <p class="element__paragraph">
           Qiskit Ignis is a framework for understanding and mitigating noise in
           quantum circuits and systems. The experiments provided in Ignis are
           grouped into the topics of characterization, verification and
@@ -21,36 +24,76 @@
           routines that can be applied to arbitrary sets of results run on the
           same backend.
         </p>
-        <h2>Stack</h2>
-        <SoftwareStack
-          :stack="[
-            {
-              title: 'Qiskit Ignis Experiments',
-              description: 'List of Quantum Circuits or Pulse Schedules'
-            },
-            {
-              title: 'Qiskit Terra',
-              description: 'Compile Circuits or Schedules'
-            },
-            {
-              title: 'Providers',
-              description: 'Qiskit Aer, IBM Q, Third Party'
-            },
-            {
-              title: 'Fitter/Filter',
-              description: 'Fit to a Model/Plot Results'
-            }
-          ]"
-        />
+        <h2 class="element__header">
+          Stack
+        </h2>
+        <SoftwareStack :stack="elementStack" />
       </article>
-      <article>
-        <h2>Example</h2>
-        <!-- eslint-disable vue/multiline-html-element-content-newline -->
-        <!-- eslint-disable vue/html-indent -->
-        <SyntaxHighlight
-          lang="python"
-          :label="title"
-        >import qiskit
+      <template #extra>
+        <article class="element__example">
+          <h2 class="element__header">
+            Example
+          </h2>
+          <SyntaxHighlight
+            :label="title"
+            :code="codeExample"
+          />
+        </article>
+      </template>
+    </PageSection>
+  </main>
+</template>
+
+<script lang="ts">
+import { Component } from 'vue-property-decorator'
+import QiskitElementPage from '~/components/logic/QiskitElementPage.vue'
+import ElementPresentation from '~/components/elements/ElementPresentation.vue'
+import PageSection from '~/components/ui/PageSection.vue'
+import SoftwareStack, { StackLayer } from '~/components/ui/SoftwareStack.vue'
+import SyntaxHighlight from '~/components/ui/SyntaxHighlight.vue'
+import Cta from '~/components/ui/Cta.vue'
+
+@Component({
+  components: {
+    Cta,
+    ElementPresentation,
+    PageSection,
+    SoftwareStack,
+    SyntaxHighlight
+  },
+  head (this: QiskitElementPage) {
+    return {
+      title: `${this.title} | ${this.description}`,
+      link: [
+        { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/atom-one-dark.min.css' }
+      ]
+    }
+  }
+})
+export default class extends QiskitElementPage {
+  title = 'Qiskit Ignis'
+  description = 'Understanding and mitigating noise in quantum systems.'
+  routeName = 'ignis-element'
+  elementStack: Array<StackLayer> = [
+    {
+      title: 'Qiskit Ignis Experiments',
+      description: 'List of Quantum Circuits or Pulse Schedules'
+    },
+    {
+      title: 'Qiskit Terra',
+      description: 'Compile Circuits or Schedules'
+    },
+    {
+      title: 'Providers',
+      description: 'Qiskit Aer, IBM Quantum, Third Party'
+    },
+    {
+      title: 'Fitter/Filter',
+      description: 'Fit to a Model/Plot Results'
+    }
+  ]
+
+  codeExample = `import qiskit
 from qiskit.providers.aer.noise import NoiseModel
 from qiskit.providers.aer.noise.errors.standard_errors import depolarizing_error
 
@@ -81,61 +124,15 @@ for rb_seed,rb_circ_seed in enumerate(rb_circs):
 
     # Add data to the fitter
     rb_fit.add_data(job.result())
-    print('After seed %d, EPC %f'%(rb_seed,rb_fit.fit[0]['epc']))</SyntaxHighlight>
-        <!-- eslint-enable vue/html-indent -->
-        <!-- eslint-enable vue/multiline-html-element-content-newline -->
-      </article>
-    </LegacySection>
-  </main>
-</template>
-
-<script lang="ts">
-import { Component } from 'vue-property-decorator'
-import QiskitElementPage from '~/components/qiskit/QiskitElementPage.vue'
-import LegacyPresentation from '~/components/headers/LegacyPresentation.vue'
-import LegacySection from '~/components/sections/LegacySection.vue'
-import SoftwareStack from '~/components/qiskit/SoftwareStack.vue'
-import SyntaxHighlight from '~/components/qiskit/SyntaxHighlight.vue'
-import Cta from '~/components/ctas/Cta.vue'
-import { segmentMixin } from '~/mixins/segment-mixin.ts'
-
-@Component({
-  layout: 'legacy',
-  mixins: [segmentMixin],
-  components: {
-    Cta,
-    LegacyPresentation,
-    LegacySection,
-    SoftwareStack,
-    SyntaxHighlight
-  },
-  head (this: QiskitElementPage) {
-    return {
-      title: `${this.title} | ${this.description}`,
-      link: [
-        { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/atom-one-dark.min.css' }
-      ]
-    }
-  }
-})
-export default class extends QiskitElementPage {
-  title = 'Qiskit Ignis'
-  description = 'Understanding and mitigating noise in quantum systems.'
-  routeName = 'ignis-element'
+    print('After seed %d, EPC %f'%(rb_seed,rb_fit.fit[0]['epc']))`
 }
 </script>
 
-<style lang="scss">
-@import '~/assets/scss/legacy-elements.scss';
-</style>
-
 <style lang="scss" scoped>
-.legacy-presentation {
-  --legacy-presentation-color: rgb(255, 207, 225);
-  --legacy-presentation-text-color: black;
-}
+@import '~/assets/scss/element.scss';
 
-.legacy-section {
-  background-color: white;
+.ignis-element {
+  --community-header__background-color: rgb(255, 207, 225);
+  --community-header__text-color: $inverse-01;
 }
 </style>

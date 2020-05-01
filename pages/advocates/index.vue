@@ -1,7 +1,7 @@
 <template>
-  <main>
+  <main class="community-page advocates-page">
     <header>
-      <GatesHeader
+      <CommunityHeader
         id="presentation"
         main-title="Qiskit Advocates"
       >
@@ -9,32 +9,13 @@
         <template #features>
           <div id="advocates-benefits">
             <CompactFeature
-              icon="Community"
-            >
-              <h2>Network with experts and enthusiasts</h2>
-              <p>Advocates will be added to a group of quantum experts and will be a part of regular information sharing sessions.</p>
-            </CompactFeature>
-            <CompactFeature
-              icon="Qiskit"
-            >
-              <h2>Access to Qiskit core members and projects</h2>
-              <p>Advocates will receive special access to core members of the Qiskit team for questions and brainstorming ideas.</p>
-            </CompactFeature>
-            <CompactFeature
-              icon="Visibility"
-            >
-              <h2>Increased visibility for your work</h2>
-              <p>All advocates will have the opportunity to have their work supported and highlighted by IBM.</p>
-            </CompactFeature>
-            <CompactFeature
-              icon="Events"
-            >
-              <h2>Invitation to events</h2>
-              <p>Active Qiskit Advocates will be invited to attend global events created for the quantum computing community.</p>
-            </CompactFeature>
+              v-for="benefit in advocateBenefits"
+              :key="`benefit-${benefit.icon}`"
+              v-bind="benefit"
+            />
           </div>
         </template>
-      </GatesHeader>
+      </CommunityHeader>
     </header>
     <div class="inner-navigation-scope">
       <InnerNavigation
@@ -45,8 +26,10 @@
           { anchor: 'meet-the-advocates', label: 'Meet the Advocates' },
         ]"
       />
-      <PageSection id="become-an-advocate">
-        <h2>Become an Advocate</h2>
+      <PageSection id="become-an-advocate" framed>
+        <h2 class="community-page__header">
+          Become an Advocate
+        </h2>
         <ol>
           <li>Click on the "Apply now" button below.</li>
           <li>Complete the test in the application with at least a 70%.</li>
@@ -62,18 +45,19 @@
         id="global-community"
         :points="cities()"
       >
-        <h2>Global Community</h2>
+        <h2 class="community-page__header community-page__header_elegant">
+          Global Community
+        </h2>
       </MapSection>
-      <PageSection id="meet-the-advocates">
-        <h2>Meet the Advocates</h2>
+      <PageSection id="meet-the-advocates" framed>
+        <h2 class="community-page__header community-page__header_elegant">
+          Meet the Advocates
+        </h2>
         <div class="advocate-cards-container">
           <AdvocateCard
-            v-for="(card, index) in profiles"
-            :key="`advocate-${index}`"
-            :name="card.attributes.name"
-            :image="`/images/advocates/${card.attributes.image}`"
-            :location="card.attributes.location"
-            :areas="card.attributes.areas"
+            v-for="profile in profiles"
+            :key="`advocate-${profile.attributes.name}`"
+            v-bind="profile.attributes"
           />
         </div>
       </PageSection>
@@ -82,21 +66,21 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import InnerNavigation from '~/components/menus/InnerNavigation.vue'
-import GatesHeader from '~/components/headers/GatesHeader.vue'
-import PageSection from '~/components/sections/PageSection.vue'
+import QiskitPage from '~/components/logic/QiskitPage.vue'
+import InnerNavigation from '~/components/ui/InnerNavigation.vue'
+import CommunityHeader from '~/components/ui/CommunityHeader.vue'
+import PageSection from '~/components/ui/PageSection.vue'
 import MapSection from '~/components/advocates/MapSection.vue'
-import AdvocateCard from '~/components/cards/AdvocateCard.vue'
-import CompactFeature from '~/components/features/CompactFeature.vue'
-import { segmentMixin } from '~/mixins/segment-mixin.ts'
+import AdvocateCard from '~/components/advocates/AdvocateCard.vue'
+import CompactFeature from '~/components/ui/CompactFeature.vue'
+
+type Benefit = Pick<CompactFeature, 'icon'|'title'|'description'>
 
 @Component({
-  mixins: [segmentMixin],
   components: {
     InnerNavigation,
-    GatesHeader,
+    CommunityHeader,
     PageSection,
     MapSection,
     AdvocateCard,
@@ -122,8 +106,30 @@ import { segmentMixin } from '~/mixins/segment-mixin.ts'
     }
   }
 })
-export default class extends Vue {
+export default class extends QiskitPage {
   routeName: string = 'advocates'
+  advocateBenefits: Array<Benefit> = [
+    {
+      icon: 'Community',
+      title: 'Network with experts and enthusiasts',
+      description: 'Advocates will be added to a group of quantum experts and will be a part of regular information sharing sessions.'
+    },
+    {
+      icon: 'Qiskit',
+      title: 'Access to Qiskit core members and projects',
+      description: 'Advocates will receive special access to core members of the Qiskit team for questions and brainstorming ideas.'
+    },
+    {
+      icon: 'Visibility',
+      title: 'Increased visibility for your work',
+      description: 'All advocates will have the opportunity to have their work supported and highlighted by IBM.'
+    },
+    {
+      icon: 'Events',
+      title: 'Invitation to events',
+      description: 'Active Qiskit Advocates will be invited to attend global events created for the quantum computing community.'
+    }
+  ]
 
   cities () {
     const cityIndex = this.$data.profiles.reduce((cityIndex, card) => {
@@ -137,9 +143,10 @@ export default class extends Vue {
 </script>
 
 <style lang="scss">
+@import '~carbon-components/scss/globals/scss/typography';
+
 main {
-  background-color: var(--primary-color-darkmost);
-  background-image: linear-gradient(150deg, var(--primary-color-darkmost) 15%,var(--primary-color-dark) 70%,var(--primary-color) 94%);
+  background-color: $ui-background;
 }
 
 .inner-navigation {
@@ -147,7 +154,7 @@ main {
   top: 0;
   z-index: 100;
 
-  @include mq($until: desktop) {
+  @include mq($until: medium) {
     position: static;
   }
 }
@@ -166,7 +173,7 @@ main {
   & > * {
     flex: 1;
 
-    @include mq($until: desktop) {
+    @include mq($until: medium) {
       text-align: center;
       margin-top: 2rem;
     }
@@ -180,44 +187,33 @@ main {
     }
   }
 
-  @include mq($until: desktop) {
+  @include mq($until: medium) {
     display: flex;
     flex-direction: column;
   }
 }
 
 #become-an-advocate {
-  color: var(--body-color-dark);
-  background-color: white;
-
-  .page-section {
-    @include framed();
-  }
+  color: $inverse-01;
+  background-color: $inverse-02;
 
   ol {
     margin-top: 1rem;
-    list-style-position: inside
+    list-style-position: inside;
+    list-style-type: decimal;
+  }
+
+  li {
+    @include body-long-04();
   }
 }
 
 #global-community {
-  color: var(--body-color-light);
-
-  h2 {
-    @include elegant-title();
-  }
+  color: $text-01;
 }
 
 #meet-the-advocates {
-  color: var(--body-color-light);
-
-  h2 {
-    @include elegant-title();
-  }
-
-  .page-section {
-    @include framed();
-  }
+  color: $text-01;
 
   .advocate-cards-container {
     margin-top: 3rem;
@@ -226,17 +222,16 @@ main {
     gap: 1rem;
 
     & > * {
-      @include mq($until: desktop) {
+      @include mq($until: medium) {
         margin-bottom: 1rem;
       }
     }
 
     .advocate-card {
       width: 100%;
-      border: 1px solid var(--secondary-color);
     }
 
-    @include mq($until: desktop) {
+    @include mq($until: medium) {
       display: block;
     }
   }

@@ -13,7 +13,7 @@ jobs:
           - npm run lint
           - npm test
     - name: Build and Deploy
-      if: type = push AND branch = master
+      if: (type = push OR type = cron) AND branch = master
       script:
         - npm run generate
         - cd deploy && bash ./deploy_cos.sh

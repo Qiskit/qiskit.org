@@ -12,8 +12,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import QiskitOrgMenu from '~/components/menus/QiskitOrgMenu.vue'
-import PageFooter from '~/components/footers/PageFooter.vue'
+import QiskitOrgMenu from '~/components/layouts/QiskitOrgMenu.vue'
+import PageFooter from '~/components/layouts/PageFooter.vue'
 
 @Component({
   components: {
@@ -25,11 +25,13 @@ export default class extends Vue { }
 </script>
 
 <style lang="scss">
-@import '~/assets/scss/theme.scss';
 @import '~/assets/scss/layout.scss';
-@import url(~/static/css/fonts.css);
 
-html {
-  background-color: var(--primary-color);
+.content-root {
+  background-color: $ui-background;
+}
+
+main {
+  color: $inverse-01;
 }
 </style>

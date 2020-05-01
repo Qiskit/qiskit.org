@@ -1,0 +1,80 @@
+
+<template>
+  <ul class="stack-list">
+    <li
+      v-for="layer in stack"
+      :key="`layer-${layer.title}`"
+      class="stack-list__layer"
+    >
+      <p class="stack-list__title">
+        {{ layer.title }}
+      </p>
+      <p class="stack-list__description">
+        {{ layer.description }}
+      </p>
+    </li>
+  </ul>
+</template>
+
+<script lang="ts">
+import Vue from 'vue'
+import { Component, Prop } from 'vue-property-decorator'
+
+@Component
+export default class extends Vue {
+  @Prop({ type: Array, default: [] }) stack;
+}
+
+type StackLayer = {
+  title: string
+  description: string
+}
+
+export { StackLayer }
+</script>
+
+<style lang="scss" scoped>
+@import '~carbon-components/scss/globals/scss/typography';
+
+.stack-list {
+  &__layer {
+    border-left: 2px solid $inverse-01;
+    padding-left: 1rem;
+    padding-bottom: 1.5rem;
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      width: 0.25rem;
+      height: 0.6rem;
+      background-color: $inverse-01;
+      left: 0;
+    }
+
+    &:last-child {
+      border: none;
+
+      &::before {
+        width: 0.6rem;
+        left: -0.25rem;
+        border-radius: 50%;
+      }
+    }
+  }
+
+  &__title,
+  &__description {
+    position: relative;
+    top: -0.4rem;
+  }
+
+  &__title {
+    @include type-style('productive-heading-02');
+  }
+
+  &__description {
+    @include type-style('body-short-01');
+  }
+}
+</style>

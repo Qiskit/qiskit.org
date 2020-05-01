@@ -19,17 +19,14 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 import { Context } from '@nuxt/types'
-import ExperimentHeader from '~/components/headers/ExperimentHeader.vue'
-import PageSection from '~/components/sections/PageSection.vue'
-import MdContent from '~/components/MdContent.vue'
-import { segmentMixin } from '~/mixins/segment-mixin.ts'
+import QiskitPage from '~/components/logic/QiskitPage.vue'
+import ExperimentHeader from '~/components/experiments/ExperimentHeader.vue'
+import PageSection from '~/components/ui/PageSection.vue'
+import MdContent from '~/components/ui/MdContent.vue'
 
 @Component({
-  layout: 'second-level',
-  mixins: [segmentMixin],
   components: {
     ExperimentHeader,
     MdContent,
@@ -68,7 +65,7 @@ import { segmentMixin } from '~/mixins/segment-mixin.ts'
     }
   }
 })
-export default class extends Vue {
+export default class extends QiskitPage {
   render: String | null = null
   staticRenderFns: String | null = null
   routeName = 'projects-entry'
@@ -87,8 +84,8 @@ function serializableRenderFns ({ render, staticRenderFns }: RenderFns): Seriali
 
 <style lang="scss" scoped>
 #copy {
-  color: var(--body-color-dark);
-  background-color: white;
+  color: $inverse-01;
+  background-color: $inverse-02;
   padding-top: 0;
   padding-bottom: 2rem;
 }

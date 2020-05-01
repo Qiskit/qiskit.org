@@ -1,23 +1,26 @@
 <template>
-  <main>
-    <LegacyPresentation
+  <main class="element ibmq-account-element">
+    <ElementPresentation
+      class="element__presentation"
       :title="title"
       image="/images/qiskit-ibmqp-logo.svg"
       :description="description"
       sources="https://github.com/Qiskit/qiskit-ibmq-provider"
       segment-action="IBM Q Account: GitHub Repository"
     />
-    <LegacySection>
-      <article>
-        <h2>About</h2>
-        <p>
+    <PageSection class="element__body" framed>
+      <article class="element__copy">
+        <h2 class="element__header">
+          About
+        </h2>
+        <p class="element__paragraph">
           Your IBM Q Account is the doorway for accessing the full suite of
-          cloud-based IBM Q quantum systems and simulators. From job submission
-          and tracking to viewing detailed quantum device properties, the IBM Q
+          cloud-based IBM Quantum systems and simulators. From job submission
+          and tracking to viewing detailed quantum device properties, the IBM Quantum
           Account connects the proven Qiskit software framework to the most
           advanced quantum computing platforms on the planet.
           <a
-            class="colored-link"
+            class="element__link"
             href="https://qiskit.org/documentation/install.html#access-ibm-q-systems"
             title="Link"
             rel="noopener"
@@ -26,52 +29,38 @@
               action: 'Link to Access IBMQ Systems'
             })"
           >
-            Follow these steps
-          </a>
-          to set up your Qiskit environment to send jobs to IBM Q systems.
+            Follow these steps</a>
+          to set up your Qiskit environment to send jobs to IBM Quantum systems.
         </p>
       </article>
-      <article>
-        <h2>Example</h2>
-        <!-- eslint-disable vue/multiline-html-element-content-newline -->
-        <!-- eslint-disable vue/html-indent -->
-        <SyntaxHighlight
-          lang="python"
-          :label="title"
-        >from qiskit import IBMQ
-from qiskit.providers.ibmq import least_busy
-
-# Load local account information
-provider = IBMQ.load_account()
-
-# Get the least busy real quantum system
-backend = least_busy(provider.backends(simulator=False))
-print(backend, backend.status().pending_jobs)</SyntaxHighlight>
-        <!-- eslint-enable vue/html-indent -->
-        <!-- eslint-enable vue/multiline-html-element-content-newline -->
-      </article>
-    </LegacySection>
+      <template #extra>
+        <article class="element__example">
+          <h2 class="element__header">
+            Example
+          </h2>
+          <SyntaxHighlight
+            :label="title"
+            :code="codeExample"
+          />
+        </article>
+      </template>
+    </PageSection>
   </main>
 </template>
 
 <script lang="ts">
 import { Component } from 'vue-property-decorator'
-import QiskitElementPage from '~/components/qiskit/QiskitElementPage.vue'
-import LegacyPresentation from '~/components/headers/LegacyPresentation.vue'
-import LegacySection from '~/components/sections/LegacySection.vue'
-import SoftwareStack from '~/components/qiskit/SoftwareStack.vue'
-import SyntaxHighlight from '~/components/qiskit/SyntaxHighlight.vue'
-import Cta from '~/components/ctas/Cta.vue'
-import { segmentMixin } from '~/mixins/segment-mixin.ts'
+import QiskitElementPage from '~/components/logic/QiskitElementPage.vue'
+import ElementPresentation from '~/components/elements/ElementPresentation.vue'
+import PageSection from '~/components/ui/PageSection.vue'
+import SyntaxHighlight from '~/components/ui/SyntaxHighlight.vue'
+import Cta from '~/components/ui/Cta.vue'
 
 @Component({
-  layout: 'legacy',
-  mixins: [segmentMixin],
   components: {
     Cta,
-    LegacyPresentation,
-    LegacySection,
-    SoftwareStack,
+    ElementPresentation,
+    PageSection,
     SyntaxHighlight
   },
   head (this: QiskitElementPage) {
@@ -87,20 +76,23 @@ export default class extends QiskitElementPage {
   title = 'IBM Q Account'
   description = 'Access to world-leading quantum systems and simulators.'
   routeName = 'ibm-q-account'
+  codeExample = `from qiskit import IBMQ
+from qiskit.providers.ibmq import least_busy
+
+# Load local account information
+provider = IBMQ.load_account()
+
+# Get the least busy real quantum system
+backend = least_busy(provider.backends(simulator=False))
+print(backend, backend.status().pending_jobs)`
 }
 </script>
 
-<style lang="scss">
-@import '~/assets/scss/legacy-elements.scss';
-</style>
-
 <style lang="scss" scoped>
-.legacy-presentation {
-  --legacy-presentation-color: rgb(201, 222, 255);
-  --legacy-presentation-text-color: black;
-}
+@import '~/assets/scss/element.scss';
 
-.legacy-section {
-  background-color: white;
+.ibmq-account-element {
+  --community-header__background-color: rgb(201, 222, 255);
+  --community-header__text-color: $inverse-01;
 }
 </style>

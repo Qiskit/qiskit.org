@@ -2,10 +2,29 @@ type SegmentData = {
   action: string
 }
 
-type NavLink = {
+/**
+ * Represent a navigation link for the menus of the site
+ */
+interface NavLink {
+  /** The visible name of the link */
   label: string
+  /** Where we want to go */
   url: string
+  /** Includes an object with the information of the action. Example:
+   * ```ts
+   * {
+      action: 'Qiskit Community: GitHub'
+     }
+    ```
+   */
   segment?: SegmentData
+  /** Only for <a> links. Use `_blank` to open the link in a new tab */
+  target?: string
+  /** Only for <a> links. Specifies the relationship between the current document
+   *  and the linked document. Possible values: `nofollow`, `noreferrer`, `noopener`,
+   *  `me` or a combination of them
+   */
+  rel?: string
 }
 
 type LabeledLinks = {
@@ -88,6 +107,10 @@ const ORDERED_SOCIAL_MEDIA: Array<NavLink> = [
 ]
 
 const COMMUNITY_SUB_LINKS: LabeledLinks = {
+  events: {
+    label: 'Events',
+    url: '/events'
+  },
   education: {
     label: 'Education',
     url: '/education'
@@ -103,14 +126,97 @@ const COMMUNITY_SUB_LINKS: LabeledLinks = {
 }
 
 const ORDERED_COMMUNITY_SUB_LINKS: Array<NavLink> = [
+  COMMUNITY_SUB_LINKS.events,
   COMMUNITY_SUB_LINKS.education,
   COMMUNITY_SUB_LINKS.advocates,
   COMMUNITY_SUB_LINKS.experiments
 ]
 
+const QISKIT_EDUCATION: LabeledLinks = {
+  textbook: {
+    label: 'Textbook',
+    url: 'https://qiskit.org/textbook/preface.html'
+  },
+  youtube: {
+    label: 'Coding With Qiskit',
+    url: 'https://www.youtube.com/playlist?list=PLOFEBzvs-Vvp2xg9-POLJhQwtVktlYGbY'
+  },
+  hostEvent: {
+    label: 'Host an Event',
+    url: 'mailto:hello@qiskit.camp'
+  }
+}
+
+const ORDERED_QISKIT_EDUCATION: Array<NavLink> = [
+  QISKIT_EDUCATION.textbook,
+  QISKIT_EDUCATION.youtube,
+  QISKIT_EDUCATION.hostEvent
+]
+
+const QISKIT_ADVOCATES: LabeledLinks = {
+  advocates: {
+    label: 'Become an Advocate',
+    url: '/advocates#become-an-advocate'
+  }
+}
+
+const ORDERED_QISKIT_ADVOCATES: Array<NavLink> = [
+  QISKIT_ADVOCATES.advocates
+]
+
+const QISKIT_EXPERIMENTS: LabeledLinks = {
+  experiments: {
+    label: 'Browse the experiments',
+    url: '/experiments#browse-the-experiments'
+  }
+}
+
+const ORDERED_QISKIT_EXPERIMENTS: Array<NavLink> = [
+  QISKIT_EXPERIMENTS.experiments
+]
+
+type FooterSubsection = {
+  title: string,
+  elements: Array<NavLink>
+}
+
+type FooterStructure = Array<Array<FooterSubsection>>
+
+const FOOTER_ELEMENTS: FooterStructure = [
+  // Elements in the first footer column
+  [
+    {
+      title: 'Qiskit Elements',
+      elements: ORDERED_QISKIT_ELEMENTS
+    }
+  ],
+  // Elements in the second footer column
+  [
+    {
+      title: 'Qiskit for Educators',
+      elements: ORDERED_QISKIT_EDUCATION
+    },
+    {
+      title: 'Qiskit Advocates',
+      elements: ORDERED_QISKIT_ADVOCATES
+    },
+    {
+      title: 'Qiskit Experiments',
+      elements: ORDERED_QISKIT_EXPERIMENTS
+    }
+  ],
+  // Elements in the third footer column
+  [
+    {
+      title: 'Social Media',
+      elements: ORDERED_SOCIAL_MEDIA
+    }
+  ]
+]
+
 export {
   ORDERED_QISKIT_ELEMENTS,
-  ORDERED_SOCIAL_MEDIA,
   ORDERED_COMMUNITY_SUB_LINKS,
+  FOOTER_ELEMENTS,
   NavLink
 }

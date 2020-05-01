@@ -1,22 +1,26 @@
 <template>
-  <main>
+  <main class="community-page experiments-page">
     <header>
-      <GatesHeader
+      <CommunityHeader
         id="presentation"
         main-title="Qiskit Experiments"
       >
         <p>Browse and contribute with innovatives ways of using quantum computing and Qiskit.</p>
-      </GatesHeader>
+      </CommunityHeader>
     </header>
     <div class="inner-navigation-scope">
-      <PageSection id="featured-experiments">
-        <h2>Now featuring</h2>
+      <PageSection id="featured-experiments" framed>
+        <h2 class="community-page__header community-page__header_elegant">
+          Now featuring
+        </h2>
         <ExperimentCarousel
           :experiments="featured"
         />
       </PageSection>
-      <PageSection id="browse-the-experiments">
-        <h2>Browse the experiments</h2>
+      <PageSection id="browse-the-experiments" framed>
+        <h2 class="community-page__header community-page__header">
+          Browse the experiments
+        </h2>
         <div class="experiment-card-container">
           <ExperimentCard
             v-for="(experiment, index) in experiments"
@@ -34,20 +38,16 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import InnerNavigation from '~/components/menus/InnerNavigation.vue'
-import GatesHeader from '~/components/headers/GatesHeader.vue'
-import PageSection from '~/components/sections/PageSection.vue'
-import ExperimentCard from '~/components/cards/ExperimentCard.vue'
-import ExperimentCarousel from '~/components/cards/ExperimentCarousel.vue'
-import { segmentMixin } from '~/mixins/segment-mixin.ts'
+import QiskitPage from '~/components/logic/QiskitPage.vue'
+import CommunityHeader from '~/components/ui/CommunityHeader.vue'
+import PageSection from '~/components/ui/PageSection.vue'
+import ExperimentCard from '~/components/experiments/ExperimentCard.vue'
+import ExperimentCarousel from '~/components/experiments/ExperimentCarousel.vue'
 
 @Component({
-  mixins: [segmentMixin],
   components: {
-    InnerNavigation,
-    GatesHeader,
+    CommunityHeader,
     PageSection,
     ExperimentCard,
     ExperimentCarousel
@@ -69,15 +69,16 @@ import { segmentMixin } from '~/mixins/segment-mixin.ts'
     }
   }
 })
-export default class extends Vue {
+export default class extends QiskitPage {
   routeName: string = 'projects'
 }
 </script>
 
 <style lang="scss">
+@import '~/assets/scss/community-page.scss';
+
 main {
-  background-color: var(--primary-color-darkmost);
-  background-image: linear-gradient(150deg, var(--primary-color-darkmost) 15%,var(--primary-color-dark) 70%,var(--primary-color) 94%);
+  background-color: $ui-background;
 }
 
 .actions {
@@ -88,12 +89,11 @@ main {
 }
 
 #featured-experiments {
-  color: var(--body-color-dark);
-  background-color: white;
+  color: $inverse-01;
+  background-color: $inverse-02;
   padding-bottom: 7rem;
 
   h2 {
-    @include elegant-title();
     margin-bottom: 4rem;
   }
 
@@ -103,11 +103,7 @@ main {
 }
 
 #browse-the-experiments {
-  color: var(--body-color-light);
-
-  h2 {
-    @include elegant-title();
-  }
+  color: $text-01;
 
   .page-section {
     @include framed();
@@ -121,14 +117,13 @@ main {
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 
     & > * {
-      @include mq($until: desktop) {
+      @include mq($until: medium) {
         margin-bottom: 1rem;
       }
     }
 
     .experiment-card {
       min-width: 300px;
-      border: 1px solid var(--secondary-color);
       transform-origin: center 80%;
       transition: box-shadow 0.2s, transform 0.2s;
       box-shadow: 0px 2px 10px 0 #000f;
@@ -140,7 +135,7 @@ main {
       }
     }
 
-    @include mq($until: desktop) {
+    @include mq($until: medium) {
       display: block;
     }
   }

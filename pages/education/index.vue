@@ -1,12 +1,17 @@
 <template>
-  <main>
+  <main class="community-page education-page">
     <header>
-      <GatesHeader
+      <CommunityHeader
         id="presentation"
         main-title="Qiskit for Educators"
-        extra-position="start"
+        aside-position="start"
       >
-        <p>Qiskit makes it easy to start learning quantum software to run on real quantum hardware. Teach your students with the same tools used by scientists and engineers worldwide to accelerate research towards practical applications for quantum computing.</p>
+        <p class="community-page__paragraph">
+          Qiskit makes it easy to start learning quantum software to run on real
+          quantum hardware. Teach your students with the same tools used by
+          scientists and engineers worldwide to accelerate research towards
+          practical applications for quantum computing.
+        </p>
         <template #extra>
           <iframe
             class="header-video"
@@ -18,7 +23,7 @@
             allowfullscreen
           />
         </template>
-      </GatesHeader>
+      </CommunityHeader>
     </header>
     <div class="inner-navigation-scope">
       <InnerNavigation
@@ -29,9 +34,11 @@
           { anchor: 'host-an-event', label: 'Host Qiskit Events' }
         ]"
       />
-      <PageSection id="video-series">
-        <h2>Coding With Qiskit Video Series</h2>
-        <p>
+      <PageSection id="video-series" framed>
+        <h2 class="community-page__header">
+          Coding With Qiskit Video Series
+        </h2>
+        <p class="community-page__paragraph">
           Accompany Abraham Asfaw through a series of video tutorials
           in our YouTube Channel explaining quantum computing through
           the use of Qiskit.
@@ -55,32 +62,40 @@
           />
         </template>
       </PageSection>
-      <PageSection id="textbook" extra-position="start">
-        <h2>Qiskit Textbook</h2>
-        <p>
-          Leverage the power of quantum computing using Qiskit with this
-          university course supplement covering introductory materials,
-          advanced algorithms and hardware. Include problem sets and
-          exercises for students.
-        </p>
-        <ul class="actions">
-          <li>
-            <Cta to="/textbook/" is-static>
-              Discover more
-            </Cta>
-          </li>
-        </ul>
+      <PageSection id="textbook" aside-position="start" framed>
+        <div class="education-page__textbook-copy">
+          <h2 class="community-page__header">
+            Qiskit Textbook
+          </h2>
+          <p class="community-page__paragraph">
+            Leverage the power of quantum computing using Qiskit with this
+            university course supplement covering introductory materials,
+            advanced algorithms and hardware. Include problem sets and
+            exercises for students.
+          </p>
+          <ul class="actions">
+            <li>
+              <Cta to="/textbook/" is-static>
+                Discover more
+              </Cta>
+            </li>
+          </ul>
+        </div>
 
         <template #extra>
-          <TextbookPreview>
+          <TextbookPreview class="education-page__textbook-preview">
             <TextbookTOC />
           </TextbookPreview>
         </template>
       </PageSection>
-      <PageSection id="host-an-event">
-        <h2>Host Qiskit Events</h2>
-        <p>
-          Bring Qiskit experts to your campus for guest lectures, hackathons, and other events. Guest lecture topics can range from quantum basics to advanced algorithms.
+      <PageSection id="host-an-event" framed>
+        <h2 class="community-page__header">
+          Host Qiskit Events
+        </h2>
+        <p class="community-page__paragraph">
+          Bring Qiskit experts to your campus for guest lectures, hackathons,
+          and other events. Guest lecture topics can range from quantum basics
+          to advanced algorithms.
         </p>
         <ul class="actions">
           <li>
@@ -95,26 +110,23 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import InnerNavigation from '~/components/menus/InnerNavigation.vue'
-import GatesHeader from '~/components/headers/GatesHeader.vue'
-import PageSection from '~/components/sections/PageSection.vue'
+import QiskitPage from '~/components/logic/QiskitPage.vue'
+import InnerNavigation from '~/components/ui/InnerNavigation.vue'
+import CommunityHeader from '~/components/ui/CommunityHeader.vue'
+import PageSection from '~/components/ui/PageSection.vue'
+// @ts-ignore: Cannot find module
 import TextbookPreview from '~/components/education/TextbookPreview.vue'
-import MdContent from '~/components/MdContent.vue'
-import Cta from '~/components/ctas/Cta.vue'
+import Cta from '~/components/ui/Cta.vue'
 // @ts-ignore: Cannot find module
 import TextbookTOC from '~/content/education/textbook-toc.md'
-import { segmentMixin } from '~/mixins/segment-mixin.ts'
 
 @Component({
-  mixins: [segmentMixin],
   components: {
     InnerNavigation,
-    GatesHeader,
+    CommunityHeader,
     PageSection,
     TextbookPreview,
-    MdContent,
     Cta,
     TextbookTOC: TextbookTOC.vue.component
   },
@@ -125,15 +137,16 @@ import { segmentMixin } from '~/mixins/segment-mixin.ts'
     }
   }
 })
-export default class extends Vue {
+export default class extends QiskitPage {
   routeName: string = 'education'
 }
 </script>
 
 <style lang="scss">
+@import '~/assets/scss/community-page.scss';
+
 main {
-  background-color: var(--primary-color-darkmost);
-  background-image: linear-gradient(150deg, var(--primary-color-darkmost) 15%,var(--primary-color-dark) 70%,var(--primary-color) 94%);
+  background-color: $ui-background;
 }
 
 .inner-navigation {
@@ -151,98 +164,89 @@ main {
 
 #presentation {
   .header-video {
-    width: 100%;
-    max-width: 560px;
-    height: 315px;
-    box-shadow: 0 13px 27px -5px rgba(50,50,93,.25),
-                0 8px 16px -8px rgba(0,0,0,.5),
-                0 -6px 16px -6px rgba(0,0,0,.025);
+    margin-right: 2rem;
+    max-width: 35rem;
+    height: 20rem;
+    box-shadow: 0  0.75rem 1.75rem -0.25rem $gray-100-a30,
+                0   0.5rem    1rem  -0.5rem $gray-100-a30,
+                0 -0.25rem    1rem -0.25rem $gray-100-a30;
   }
 
   .intro {
-    @include mq($until: desktop) {
+    @include mq($until: medium) {
       display: block;
     }
   }
 
   .copy-container {
-    @include mq($until: desktop) {
+    @include mq($until: medium) {
       max-width: 100%;
     }
   }
 
   .header-video {
-    @include mq($until: desktop) {
+    @include mq($until: medium) {
       display: none;
+    }
+
+    @include mq($until: large) {
+      width: 19rem;
     }
   }
 }
 
 #video-series {
-  color: var(--body-color-light);
-
-  .page-section {
-    @include framed();
-  }
+  color: $text-01;
 
   .episode {
     margin-left: 2rem;
-    transform: perspective(1200px) rotateY(-20deg) rotateX(5deg);
-    border-radius: 10px;
-    box-shadow: 25px 35px 30px 0 #000f;
+    transform: perspective(75rem) rotateY(-20deg) rotateX(5deg);
+    border-radius: 0.5rem;
+    box-shadow: 1.5rem 2.25rem 1.75rem 0 $gray-100-a30;
   }
 }
 
 #textbook {
-  color: var(--body-color-dark);
-  background-color: white;
+  color: $inverse-01;
+  background-color: $inverse-02;
   padding-bottom: 4rem;
 
-  .page-section {
-    @include framed();
-  }
-
-  .copy-container {
+  .education-page__textbook-copy {
     position: sticky;
-    top: 120px;
+    top: 7.5rem;
     align-self: start;
-    width: 50%;
-    background-color: white;
+    background-color: $inverse-02;
     padding: 0;
     padding-left: 4rem;
 
-    @include mq($until: desktop) {
+    @include mq($until: medium) {
       width: 100%;
       padding-left: 0;
     }
   }
 
-  .extra-container {
-    width: 60%;
+  .education-page__textbook-preview {
     margin-top: -6rem;
     margin-left: -10%;
   }
 
-  @include mq($until: desktop) {
+  @include mq($until: medium) {
     min-height: auto;
+
   }
 }
 
 #host-an-event {
-  color: var(--body-color-light);
+  color: $text-01;
   background-image:
     linear-gradient(#000000a0 0%, #000000a0 100%),
     url('/images/education/host-an-event-bg.jpg');
   background-position: 0, top;
   background-repeat: no-repeat;
   background-size: cover;
-
-  .page-section {
-    @include framed();
-  }
 }
 
-@media (max-height: 600px) {
+@media (max-height: 37.5rem) {
   #textbook {
     .copy-container {
       top: 1rem;

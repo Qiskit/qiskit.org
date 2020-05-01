@@ -41,9 +41,9 @@ _check back soon for more details_
 -	Seminars at Aalto University (Optional)
 
 ### March 25
--	Depart for Saariselkä, Finland
-- Arrival & Check In at the Star Arctic Hotel
--	Welcome Reception & Dinner
+- 11:35 - Flight HK 28 departs Helsinki for Ivalo. All seats reserved by Unconference team; e-tickets will be sent to attendees 1 week before the event.
+-	13:15 - Arrival in Ivalo, Shuttle to Star Artic Hotel & Check In / Registration.
+- 18:00 - Welcome Reception & Dinner.
 
 ### March 26
 - Breakfast
@@ -66,10 +66,7 @@ _check back soon for more details_
 - Celebration Dinner
 
 ### March 29
-- Departure to Helsinki
-
-
-_Attendees are welcome to extend their trip at their own expense._
+- Departures to Helsinki are scheduled for 13:55 (with an arrival in Helsinki  at 15:25) and 19:00 (arrival in Helsinki at 20:30). Seats have also been reserved by the Unconference team and each attendee will receive their eticket a week prior to the event.
 
 ## Aalto Seminars
 
@@ -92,7 +89,7 @@ This event is co-organized by the [Qiskit Community Team](https://community.qisk
 
 ## Code of Conduct
 
-IBM Q is dedicated to providing an enjoyable and safe experience for all participants. In the interest of fostering an open and welcoming environment, all participants, including attendees, speakers, sponsors, volunteers, online contributors, and IBM employees are expected to show respect for each other and our community by creating a harassment-free experience for everyone, regardless of age, body size, disability, ethnicity, gender identity and expression, level of experience, nationality, personal appearance, race, religion, or sexual identity and orientation. Expected behavior applies to both online and offline engagement with the IBM Q Community.
+IBM Quantum is dedicated to providing an enjoyable and safe experience for all participants. In the interest of fostering an open and welcoming environment, all participants, including attendees, speakers, sponsors, volunteers, online contributors, and IBM employees are expected to show respect for each other and our community by creating a harassment-free experience for everyone, regardless of age, body size, disability, ethnicity, gender identity and expression, level of experience, nationality, personal appearance, race, religion, or sexual identity and orientation. Expected behavior applies to both online and offline engagement with the IBM Quantum Community.
 
 Examples of behavior that contributes to creating a positive environment include:
 
@@ -114,7 +111,7 @@ Examples of unacceptable behavior by participants include:
 - Destruction or vandalism of personal property or event site or materials.
 - Other conduct which could reasonably be considered inappropriate in a professional setting.
 
-Harassment will not be tolerated in any form. Participants in the IBM Q Community should conduct themselves with respect and courtesy.
+Harassment will not be tolerated in any form. Participants in the IBM Quantum Community should conduct themselves with respect and courtesy.
 
 ### Pre-Event Concerns
 
@@ -122,11 +119,11 @@ If you are planning to attend an upcoming event and you have concerns regarding 
 
 ### Reporting an Incident
 
-Instances of abusive, harassing, or otherwise unacceptable behavior should be reported immediately by contacting [hello@qiskit.camp](mailto:hello@qiskit.camp) or by speaking directly with any IBM employee. IBM Q will review and investigate all complaints and will respond in a way that it deems appropriate to the circumstances. The organizers will maintain confidentiality with regard to the reporter of an incident.
+Instances of abusive, harassing, or otherwise unacceptable behavior should be reported immediately by contacting [hello@qiskit.camp](mailto:hello@qiskit.camp) or by speaking directly with any IBM employee. IBM Quantum will review and investigate all complaints and will respond in a way that it deems appropriate to the circumstances. The organizers will maintain confidentiality with regard to the reporter of an incident.
 
 ### Incident Response
 
-If a participant engages in negative or harmful behavior, the IBM Q may take any action they deem appropriate, including but not limited to issuing warnings, expulsion from an event with no refund, permanent banning from future events or online community, or calling local law enforcement. IBM Q has the right and responsibility to remove, edit, or reject comments, commits, code, wiki edits, issues, and other contributions that are not aligned to this Code of Conduct, or to temporarily or permanently ban any contributor for other behaviors that they deem inappropriate, threatening, offensive, or harmful.
+If a participant engages in negative or harmful behavior, the IBM Quantum may take any action they deem appropriate, including but not limited to issuing warnings, expulsion from an event with no refund, permanent banning from future events or online community, or calling local law enforcement. IBM Quantum has the right and responsibility to remove, edit, or reject comments, commits, code, wiki edits, issues, and other contributions that are not aligned to this Code of Conduct, or to temporarily or permanently ban any contributor for other behaviors that they deem inappropriate, threatening, offensive, or harmful.
 
 IBM staff will provide support to victims, including, but not limited to:
 
