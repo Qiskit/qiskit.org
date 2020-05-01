@@ -10,8 +10,8 @@
         <nuxt-link class="link-to-home" to="/">
           Qiskit
         </nuxt-link>
-        <div class="separator" />
         <nav class="navigation-group">
+          <div class="separator" />
           <MenuLink
             v-for="link in qiskitElements"
             :key="link.url"
@@ -156,10 +156,6 @@ export default class extends Vue {
   background-color: $ui-03;
   width: 0.125rem;
   margin: 0.75rem 0.625rem;
-
-  @include mq($until: large) {
-    display: none;
-  }
 }
 
 .community-menu {
