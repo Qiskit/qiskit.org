@@ -24,7 +24,7 @@
             {{ link.label }}
           </nuxt-link>
         </nav>
-        <nav class="navigation-group navigation-group--fixed navigation-group--right-aligned">
+        <nav class="navigation-group navigation-group--right-aligned">
           <nuxt-link
             :class="{
               'navigation-group__item': true,
@@ -55,7 +55,7 @@
       class="community-menu menu-container menu-container--light"
     >
       <section class="main_menu">
-        <nav class="navigation-group navigation-group--right-aligned navigation-group--fixed">
+        <nav class="navigation-group navigation-group--right-aligned">
           <nuxt-link
             v-for="communitySubLink in communitySubLinks"
             :key="communitySubLink.label"
@@ -167,10 +167,6 @@ export default class extends Vue {
 
   &--right-aligned {
     margin-left: auto;
-  }
-
-  &--fixed {
-    /* fixings for mimicing qiskit.org menu */
     margin-right: -0.4rem;
   }
 
