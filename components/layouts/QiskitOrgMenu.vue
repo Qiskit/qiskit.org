@@ -10,7 +10,8 @@
         <nuxt-link class="link-to-home" to="/">
           Qiskit
         </nuxt-link>
-        <nav class="navigation-group navigation-group--with-separator">
+        <div class="separator" />
+        <nav class="navigation-group">
           <nuxt-link
             v-for="link in qiskitElements"
             :key="link.url"
@@ -164,13 +165,6 @@ export default class extends Vue {
     }
   }
 
-  &--with-separator::before {
-    content: "";
-    background-color: $ui-03;
-    width: 2px;
-    margin: 12px 10px;
-  }
-
   &--right-aligned {
     margin-left: auto;
   }
@@ -196,6 +190,12 @@ export default class extends Vue {
   @include mq($until: large) {
     margin-left: -0.5rem;
   }
+}
+
+.separator{
+  background-color: $ui-03;
+  width: 0.125rem;
+  margin: 0.75rem 0.625rem;
 }
 
 .community-menu {
