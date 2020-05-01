@@ -80,20 +80,4 @@ export default class extends Vue {
     }
   }
 }
-
-// .menu-link {
-//   @include type-style('productive-heading-02');
-//   display: inline-flex;
-//   align-items: center;
-//   padding: 0 1em;
-//   color: var(--link-color);
-//   text-decoration: none;
-
-//   &_active {
-//     padding-top: 2px;
-//     position: relative;
-//     top: 1px;
-//     border-bottom: 4px solid $focus;
-//   }
-// }
 </style>
