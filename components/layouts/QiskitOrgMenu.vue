@@ -1,16 +1,19 @@
 <template>
   <section>
     <div class="menu-container">
-      <div class="main_menu">
-        <section class="drawer" tabindex="-1">
-          <Menu20 />
-          <div class="overlay" />
-          <SidebarMenu />
-        </section>
-        <nuxt-link class="link-to-home" to="/">
+      <section class="mobile-menu" tabindex="-1">
+        <Menu20 class="mobile-menu--menu-link" />
+        <nuxt-link class="mobile-menu--home-link" to="/">
           Qiskit
         </nuxt-link>
-        <nav class="navigation-group">
+        <div class="overlay" />
+        <SidebarMenu />
+      </section>
+      <section class="main_menu">
+        <nav class="main_menu--on-left">
+          <nuxt-link class="link-to-home" to="/">
+            Qiskit
+          </nuxt-link>
           <div class="separator" />
           <MenuLink
             v-for="link in qiskitElements"
@@ -19,7 +22,7 @@
             v-bind="link"
           />
         </nav>
-        <nav class="navigation-group navigation-group--right-aligned">
+        <nav class="main_menu--on-right">
           <MenuLink
             v-for="link in learnMore"
             :key="link.url"
@@ -27,23 +30,21 @@
             v-bind="link"
           />
         </nav>
-      </div>
-    </div>
-    <div
-      v-if="isCommunityActive()"
-      class="community-menu menu-container menu-container--light"
-    >
-      <section class="main_menu">
-        <nav class="navigation-group navigation-group--right-aligned">
-          <MenuLink
-            v-for="link in communitySubLinks"
-            :key="link.url"
-            :is-active="isActive(link)"
-            v-bind="link"
-          />
-        </nav>
       </section>
     </div>
+    <section
+      v-if="isCommunityActive()"
+      class="secondary-menu"
+    >
+      <nav class="secondary-menu--on-right">
+        <MenuLink
+          v-for="link in communitySubLinks"
+          :key="link.url"
+          :is-active="isActive(link)"
+          v-bind="link"
+        />
+      </nav>
+    </section>
   </section>
 </template>
 
@@ -104,34 +105,39 @@ export default class extends Vue {
 <style lang="scss" scoped>
 @import '~carbon-components/scss/globals/scss/typography';
 
-@mixin sidebar-menu-item() {
-  @include type-style('productive-heading-02');
-  text-decoration: none;
-  color: white;
-  padding: 0.5rem 1.5em;
-}
-
 .menu-container {
   border-bottom: 1px solid black;
-  &--light {
-    --link-color: #{$inverse-01};
-    background-color: $purple-40;
-    border-bottom: none;
-  }
 }
 
 .main_menu {
   @include framed();
   height: 3.75rem;
   display: flex;
+  justify-content: space-between;
+
+  &--on-left, &--on-right {
+    display: flex;
+  }
+
+  @include mq($until: large) {
+    display: none;
+  }
 }
 
-.navigation-group {
+.secondary-menu {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  height: 3.75rem;
   display: flex;
+  justify-content: flex-end;
+  --link-color: #{$inverse-01};
+  background-color: $purple-40;
+  border-bottom: none;
 
-  &--right-aligned {
-    margin-left: auto;
-    margin-right: -0.4rem;
+  &--on-right {
+    display: flex;
   }
 
   @include mq($until: large) {
@@ -158,12 +164,6 @@ export default class extends Vue {
   margin: 0.75rem 0.625rem;
 }
 
-.community-menu {
-  @include mq($until: large) {
-    display: none;
-  }
-}
-
 .overlay {
   position: fixed;
   top: 0;
@@ -177,19 +177,31 @@ export default class extends Vue {
   pointer-events: none;
 }
 
-.drawer {
+.mobile-menu {
   display: none;
 
+  &--menu-link {
+    margin: 1.3rem 0.7rem 0 1.3rem;
+  }
+
+  &--home-link {
+    @include type-style('productive-heading-02');
+    display: inline-flex;
+    align-items: center;
+    margin: 0 1rem 0 -0.2rem;
+    color: var(--link-color);
+    text-decoration: none;
+  }
+
   @include mq($until: large) {
-    display: unset;
+    display: flex;
     cursor: pointer;
     fill: white;
-    height: 100%;
-    margin: 1.25rem 1rem 0 -0.5rem;
+    height: 3.75rem;
   }
 }
 
-.drawer:focus {
+.mobile-menu:focus {
   .overlay {
     opacity: 0.5;
   }
