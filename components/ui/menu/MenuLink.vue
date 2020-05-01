@@ -21,8 +21,8 @@ import { Component, Prop } from 'vue-property-decorator'
 export default class extends Vue {
   @Prop(String) url
   @Prop(String) label
-  @Prop(String) segment
-  @Prop(String) isActive
+  @Prop(Object) segment
+  @Prop(Boolean) isActive
 
   isExternal (url: string): boolean {
     return url.startsWith('http')

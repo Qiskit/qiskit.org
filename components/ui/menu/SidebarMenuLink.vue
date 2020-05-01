@@ -24,7 +24,7 @@ import { Component, Prop } from 'vue-property-decorator'
 export default class extends Vue {
   @Prop(String) url
   @Prop(String) label
-  @Prop(String) segment
+  @Prop(Object) segment
   @Prop(Boolean) isActive
   @Prop({ type: String, default: 'primary' }) type
 
