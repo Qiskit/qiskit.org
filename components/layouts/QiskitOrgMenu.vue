@@ -17,7 +17,7 @@
             :key="link.url"
             :class="{
               'navigation-group__item': true,
-              'nuxt-link-active': isActive(link.url)
+              'navigation-group__item--active': isActive(link.url)
             }"
             :to="link.url"
           >
@@ -39,7 +39,7 @@
             :key="link.label"
             :class="{
               'navigation-group__item': true,
-              'nuxt-link-active': isActive(link.url)
+              'navigation-group__item--active': isActive(link.url)
             }"
             :href="link.url"
             target="_blank"
@@ -61,7 +61,7 @@
             :key="communitySubLink.label"
             :class="{
               'navigation-group__item': true,
-              'nuxt-link-active': isActive(communitySubLink.url)
+              'navigation-group__item--active': isActive(communitySubLink.url)
             }"
             :to="communitySubLink.url"
           >
@@ -149,13 +149,6 @@ export default class extends Vue {
     padding: 0 1em;
     color: var(--link-color);
     text-decoration: none;
-
-    &.nuxt-link-active {
-      padding-top: 2px;
-      position: relative;
-      top: 1px;
-      border-bottom: 4px solid $focus;
-    }
 
     &--active {
       padding-top: 2px;
