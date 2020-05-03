@@ -143,7 +143,7 @@ export default class extends Vue {
   learnMore: Array<NavLink> = [
     {
       label: 'Tutorials',
-      url: 'https://qiskit.org/documentation/tutorials/fundamentals/1_getting_started_with_qiskit.html',
+      url: 'https://quantum-computing.ibm.com/jupyter/tutorial/1_start_here.ipynb',
       segment: {
         action: 'Tutorials'
       }
