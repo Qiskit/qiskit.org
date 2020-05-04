@@ -226,7 +226,7 @@ const COMMUNITY_LINK: NavLink = {
 
 const TUTORIALS_LINK: NavLink = {
   label: 'Tutorials',
-  url: 'https://qiskit.org/documentation/tutorials/fundamentals/1_getting_started_with_qiskit.html',
+  url: 'https://quantum-computing.ibm.com/jupyter/tutorial/1_start_here.ipynb',
   segment: {
     action: 'Tutorials'
   }
