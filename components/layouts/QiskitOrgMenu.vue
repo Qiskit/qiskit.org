@@ -71,6 +71,10 @@ export default class extends Vue {}
 }
 
 .menu {
+  &__main-level-wrapper {
+    border-bottom: 1px solid black;
+  }
+
   &__main-level {
     @include framed();
     padding-left: 0;
