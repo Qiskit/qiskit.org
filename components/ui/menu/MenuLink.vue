@@ -46,7 +46,7 @@ export default class extends Vue {
     display: inline-flex;
     align-items: center;
     padding: 0 1rem;
-    color: var(__link-color);
+    color: var(--link-color);
     text-decoration: none;
 
     &_active {

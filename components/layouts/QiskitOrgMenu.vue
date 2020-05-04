@@ -83,7 +83,7 @@ export default class extends Vue {}
 
   &__second-level {
     justify-content: flex-end;
-    __link-color: #{$inverse-01};
+    --link-color: #{$inverse-01};
     background-color: $purple-40;
     /* The menu should be framed() (max-width of 1100px = 68.75rem)
     *  If we framed this menu, the purple backgroud fit the framed size, not all
