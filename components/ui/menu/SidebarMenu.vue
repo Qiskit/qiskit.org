@@ -45,6 +45,9 @@ import MenuLink from '~/components/ui/menu/MenuLink.vue'
 import {
   ORDERED_QISKIT_ELEMENTS,
   ORDERED_COMMUNITY_SUB_LINKS,
+  COMMUNITY_LINK,
+  TUTORIALS_LINK,
+  DOCUMENTATION_LINK,
   NavLink
 } from '~/constants/menuLinks'
 
@@ -53,25 +56,9 @@ import {
 })
 export default class extends Vue {
   qiskitElements: Array<NavLink> = ORDERED_QISKIT_ELEMENTS
+  learnMore: Array<NavLink> = [TUTORIALS_LINK, DOCUMENTATION_LINK]
+  communityLink: NavLink = COMMUNITY_LINK
   communitySubLinks: Array<NavLink> = ORDERED_COMMUNITY_SUB_LINKS
-  learnMore: Array<NavLink> = [
-    {
-      label: 'Tutorials',
-      url: 'https://qiskit.org/documentation/tutorials/fundamentals/1_getting_started_with_qiskit.html',
-      segment: {
-        action: 'Tutorials'
-      }
-    },
-    {
-      label: 'Documentation',
-      url: 'https://qiskit.org/documentation/'
-    }
-  ]
-
-  communityLink: NavLink = {
-    label: 'Community',
-    url: '/education'
-  }
 
   isPathStartingWith (linkPath: string) {
     return this.$route.path.startsWith(linkPath)

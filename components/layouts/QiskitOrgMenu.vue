@@ -19,7 +19,7 @@
       </nav>
       <nav class="main_menu--on-right">
         <MenuLink
-          v-for="link in learnMore"
+          v-for="link in [communityLink, ...learnMore]"
           :key="link.url"
           :is-active="isActive(link)"
           v-bind="link"
@@ -51,6 +51,10 @@ import MenuLink from '~/components/ui/menu/MenuLink.vue'
 import {
   ORDERED_QISKIT_ELEMENTS,
   ORDERED_COMMUNITY_SUB_LINKS,
+  HOME_LINK,
+  COMMUNITY_LINK,
+  TUTORIALS_LINK,
+  DOCUMENTATION_LINK,
   NavLink
 } from '~/constants/menuLinks'
 
@@ -58,30 +62,11 @@ import {
   components: { SidebarMenu, MenuLink }
 })
 export default class extends Vue {
+  homeLink: NavLink = HOME_LINK
   qiskitElements: Array<NavLink> = ORDERED_QISKIT_ELEMENTS
+  learnMore: Array<NavLink> = [TUTORIALS_LINK, DOCUMENTATION_LINK]
+  communityLink: NavLink = COMMUNITY_LINK
   communitySubLinks: Array<NavLink> = ORDERED_COMMUNITY_SUB_LINKS
-  learnMore: Array<NavLink> = [
-    {
-      label: 'Community',
-      url: '/education'
-    },
-    {
-      label: 'Tutorials',
-      url: 'https://quantum-computing.ibm.com/jupyter/tutorial/1_start_here.ipynb',
-      segment: {
-        action: 'Tutorials'
-      }
-    },
-    {
-      label: 'Documentation',
-      url: 'https://qiskit.org/documentation/'
-    }
-  ]
-
-  homeLink: NavLink = {
-    label: 'Qiskit',
-    url: '/'
-  }
 
   isPathStartingWith (linkPath: string) {
     return this.$route.path.startsWith(linkPath)
