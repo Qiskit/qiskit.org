@@ -3,9 +3,9 @@
     :is="isInternal(url) ? 'nuxt-link' : 'a'"
     class="menu-link"
     :class="{
-      [`menu-link--${menuType}`]: true,
-      [`menu-link--${menuType}_${linkType}`]: true,
-      [`menu-link--${menuType}_active`]: isActive
+      [`menu-link__${menuType}`]: true,
+      [`menu-link__${menuType}_${linkType}`]: true,
+      [`menu-link__${menuType}_active`]: isActive
     }"
     :href="url"
     :to="isInternal(url) ? url : null"
@@ -42,11 +42,11 @@ export default class extends Vue {
   @include type-style('productive-heading-02');
   text-decoration: none;
 
-  &--main {
+  &__main {
     display: inline-flex;
     align-items: center;
     padding: 0 1rem;
-    color: var(--link-color);
+    color: var(__link-color);
     text-decoration: none;
 
     &_active {
@@ -57,7 +57,7 @@ export default class extends Vue {
     }
   }
 
-  &--sidebar {
+  &__sidebar {
     &_primary {
       color: white;
       padding: 0.5rem 1.5em;

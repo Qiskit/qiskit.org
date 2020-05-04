@@ -1,15 +1,15 @@
 <template>
   <div class="menu">
-    <section class="menu--mobile" tabindex="-1">
-      <Menu20 class="menu--link" />
+    <section class="menu__mobile" tabindex="-1">
+      <Menu20 class="menu__link" />
       <MenuLink v-bind="homeLink" />
-      <div class="menu--overlay" />
+      <div class="menu__overlay" />
       <SidebarMenu />
     </section>
-    <section class="menu--main-level">
-      <nav class="menu--main-level_on-left">
+    <section class="menu__main-level">
+      <nav class="menu__main-level_on-left">
         <MenuLink v-bind="homeLink" />
-        <div class="menu--separator" />
+        <div class="menu__separator" />
         <MenuLink
           v-for="link in qiskitElements"
           :key="link.url"
@@ -17,7 +17,7 @@
           v-bind="link"
         />
       </nav>
-      <nav class="menu--main-level_on-right">
+      <nav class="menu__main-level_on-right">
         <MenuLink
           v-for="link in [communityLink, ...learnMore]"
           :key="link.url"
@@ -28,9 +28,9 @@
     </section>
     <section
       v-if="isCommunityActive()"
-      class="menu--second-level"
+      class="menu__second-level"
     >
-      <nav class="menu--second-level_on-right">
+      <nav class="menu__second-level_on-right">
         <MenuLink
           v-for="link in communitySubLinks"
           :key="link.url"
@@ -59,7 +59,7 @@ export default class extends Vue {}
 <style lang="scss" scoped>
 @import '~carbon-components/scss/globals/scss/typography';
 
-.menu--main-level, .menu--second-level {
+.menu__main-level, .menu__second-level {
   height: 3.75rem;
   display: flex;
 
@@ -69,7 +69,7 @@ export default class extends Vue {}
 }
 
 .menu {
-  &--main-level {
+  &__main-level {
     @include framed();
     padding-left: 0;
     padding-right: 0;
@@ -81,9 +81,9 @@ export default class extends Vue {}
     }
   }
 
-  &--second-level {
+  &__second-level {
     justify-content: flex-end;
-    --link-color: #{$inverse-01};
+    __link-color: #{$inverse-01};
     background-color: $purple-40;
     /* The menu should be framed() (max-width of 1100px = 68.75rem)
     *  If we framed this menu, the purple backgroud fit the framed size, not all
@@ -96,7 +96,7 @@ export default class extends Vue {}
     }
   }
 
-  &--mobile {
+  &__mobile {
     display: none;
 
     @include mq($until: large) {
@@ -107,7 +107,7 @@ export default class extends Vue {}
     }
 
     &:focus {
-      .menu--overlay {
+      .menu__overlay {
         opacity: 0.5;
       }
 
@@ -117,17 +117,17 @@ export default class extends Vue {}
     }
   }
 
-  &--link {
+  &__link {
     margin: 1.3rem -0.2rem 0 1.3rem;
   }
 
-  &--separator{
+  &__separator{
     background-color: $ui-03;
     width: 0.125rem;
     margin: 0.75rem 0.625rem;
   }
 
-  &--overlay {
+  &__overlay {
     position: fixed;
     top: 0;
     right: 0;
