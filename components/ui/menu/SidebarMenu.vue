@@ -1,6 +1,8 @@
 <template>
   <nav class="sidebar-menu">
-    <h2>Elements</h2>
+    <h2 class="sidebar-menu--title">
+      Elements
+    </h2>
     <MenuLink
       v-for="link in qiskitElements"
       :key="link.url"
@@ -8,7 +10,9 @@
       menu-type="sidebar"
       v-bind="link"
     />
-    <h2>Learn more</h2>
+    <h2 class="sidebar-menu--title">
+      Learn more
+    </h2>
     <MenuLink
       :is-active="false"
       menu-type="sidebar"
@@ -16,7 +20,7 @@
     />
     <div
       v-if="isCommunityActive()"
-      class="sidebar-secondary-menu"
+      class="sidebar-menu--second-level"
     >
       <MenuLink
         v-for="link in communitySubLinks"
@@ -53,7 +57,7 @@ export default class extends Vue {}
 <style lang="scss" scoped>
 @import '~carbon-components/scss/globals/scss/typography';
 
-.sidebar-menu, .sidebar-secondary-menu {
+.sidebar-menu, .sidebar-menu--second-level {
   display: flex;
   flex-direction: column;
 }
@@ -71,15 +75,15 @@ export default class extends Vue {}
   transition: transform 200ms;
   overflow-y: auto;
 
-  h2 {
+  &--title {
     @include type-style('productive-heading-03');
     padding: 1em;
   }
-}
 
-.sidebar-secondary-menu {
-  margin: 0 -1.3rem;
-  padding: 1rem 0;
-  background-color: $purple-30;
+  &--second-level {
+    margin: 0 -1.3rem;
+    padding: 1rem 0;
+    background-color: $purple-30;
+  }
 }
 </style>
