@@ -20,8 +20,11 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
+import menuLinkMixin from '~/mixins/menuLink'
 
-@Component
+@Component({
+  mixins: [menuLinkMixin]
+})
 export default class extends Vue {
   @Prop(String) url
   @Prop(String) label
@@ -29,14 +32,6 @@ export default class extends Vue {
   @Prop(Boolean) isActive
   @Prop({ type: String, default: 'main' }) menuType
   @Prop({ type: String, default: 'primary' }) linkType
-
-  isExternal (url: string): boolean {
-    return url.startsWith('http')
-  }
-
-  isInternal (url: string): boolean {
-    return !this.isExternal(url)
-  }
 }
 </script>
 

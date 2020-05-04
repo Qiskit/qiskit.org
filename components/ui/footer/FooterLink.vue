@@ -14,24 +14,15 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
+import menuLinkMixin from '~/mixins/menuLink'
 
-@Component
+@Component({
+  mixins: [menuLinkMixin]
+})
 export default class extends Vue {
   @Prop(String) url
   @Prop(String) label
   @Prop({ type: Boolean, default: false }) isStatic
-
-  isExternal (url: string): boolean {
-    return url.startsWith('http')
-  }
-
-  isMail (url: string): boolean {
-    return url.startsWith('mailto')
-  }
-
-  isInternal (url: string): boolean {
-    return !(this.isExternal(url) || this.isMail(url))
-  }
 }
 </script>
 
