@@ -66,7 +66,6 @@ export default class extends Vue {
     &_secondary {
       color: $inverse-01;
       padding: 0.5rem 3rem;
-
     }
 
     &_active {
