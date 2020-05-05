@@ -44,7 +44,7 @@ export default class extends Vue {
   text-decoration: none;
   display: inline-block;
   width: 100%;
-  margin-top: .5rem;
+  margin-top: $spacing-03;
 
   &:hover {
     color: $text-01;
