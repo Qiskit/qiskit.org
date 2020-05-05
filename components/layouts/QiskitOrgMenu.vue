@@ -6,26 +6,28 @@
       <div class="menu__overlay" />
       <SidebarMenu />
     </section>
-    <section class="menu__main-level">
-      <nav class="menu__nav-section">
-        <MenuLink v-bind="homeLink" />
-        <div class="menu__separator" />
-        <MenuLink
-          v-for="link in qiskitElements"
-          :key="link.url"
-          :is-active="isActive(link)"
-          v-bind="link"
-        />
-      </nav>
-      <nav class="menu__nav-section">
-        <MenuLink
-          v-for="link in [communityLink, ...learnMore]"
-          :key="link.url"
-          :is-active="isActive(link)"
-          v-bind="link"
-        />
-      </nav>
-    </section>
+    <div class="menu__main-level-wrapper">
+      <section class="menu__main-level">
+        <nav class="menu__nav-section">
+          <MenuLink v-bind="homeLink" />
+          <div class="menu__separator" />
+          <MenuLink
+            v-for="link in qiskitElements"
+            :key="link.url"
+            :is-active="isActive(link)"
+            v-bind="link"
+          />
+        </nav>
+        <nav class="menu__nav-section">
+          <MenuLink
+            v-for="link in [communityLink, ...learnMore]"
+            :key="link.url"
+            :is-active="isActive(link)"
+            v-bind="link"
+          />
+        </nav>
+      </section>
+    </div>
     <section
       v-if="isCommunityActive()"
       class="menu__second-level"
@@ -73,8 +75,11 @@ export default class extends Vue {}
     @include framed();
     padding-left: 0;
     padding-right: 0;
-    border-bottom: 1px solid black;
     justify-content: space-between;
+  }
+
+  &__main-level-wrapper {
+    border-bottom: 1px solid black;
   }
 
   &__second-level {
