@@ -52,7 +52,7 @@ export default class extends Vue {
 
   &__code {
     @include type-style('code-02');
-    padding: 1.5rem 1rem;
+    padding: $spacing-07 $spacing-05 $spacing-05;
   }
 }
 </style>
