@@ -82,7 +82,7 @@ main {
 }
 
 .actions {
-  margin-top: 1rem;
+  margin-top: $layout-01;
   list-style: none;
   display: flex;
   flex-direction: row;
@@ -91,10 +91,10 @@ main {
 #featured-experiments {
   color: $inverse-01;
   background-color: $inverse-02;
-  padding-bottom: 7rem;
+  padding-bottom: $layout-06;
 
   h2 {
-    margin-bottom: 4rem;
+    margin-bottom: $layout-05;
   }
 
   .page-section {
@@ -111,27 +111,27 @@ main {
 
   .experiment-card-container {
     width: 100%;
-    margin-top: 3rem;
+    margin-top: $layout-04;
     display: grid;
-    grid-gap: 1rem;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: $spacing-05;
+    grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));
 
     & > * {
       @include mq($until: medium) {
-        margin-bottom: 1rem;
+        margin-bottom: $layout-01;
       }
     }
 
     .experiment-card {
-      min-width: 300px;
+      min-width: 19rem;
       transform-origin: center 80%;
       transition: box-shadow 0.2s, transform 0.2s;
-      box-shadow: 0px 2px 10px 0 #000f;
+      box-shadow: 0px 0.1rem 0.75 0 #000f;
 
       &:hover {
         z-index: 1;
         transform: scale(1.05);
-        box-shadow: 0px 10px 20px 5px #000f;
+        box-shadow: 0px 0.75rem 1.5rem 0.25rem #000f;
       }
     }
 
