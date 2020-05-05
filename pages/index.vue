@@ -3,7 +3,7 @@
     <ElementPresentation
       class="element__presentation"
       title="Welcome to Quantum"
-      image="/images/qiskit-logo.svg"
+      logo="/images/qiskit-logo.svg"
       description="Qiskit is an open-source quantum computing software development framework for leveraging today's quantum processors in research, education, and business."
       to="https://qiskit.org/documentation/install.html"
       segment-action="Get Started"

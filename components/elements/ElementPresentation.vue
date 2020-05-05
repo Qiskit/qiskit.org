@@ -7,8 +7,8 @@
     >
       <template #extra>
         <img
-          class="element-presentation__image"
-          :src="image"
+          class="element-presentation__logo"
+          :src="logo"
           :alt="`${title} logo`"
         >
       </template>
@@ -58,7 +58,7 @@ import CommunityHeader from '~/components/ui/CommunityHeader.vue'
   components: { Cta, CommunityHeader }
 })
 export default class extends Vue {
-  @Prop(String) image
+  @Prop(String) logo
   @Prop(String) title
   @Prop(String) description
   @Prop({ type: String, required: false }) to
@@ -71,18 +71,16 @@ export default class extends Vue {
 .element-presentation {
   &__description {
     @include body-long-04();
-    margin: 1.1rem 0;
+    margin: $layout-01 0;
   }
 
-  &__image {
-    width: 12.5rem;
-    height: 12.5rem;
-    margin: 2rem 2rem 2rem 0;
+  &__logo {
+    width: $logo-side;
+    height: $logo-side;
 
     @include mq($until: medium) {
-      width: 8rem;
-      height: 8rem;
-      margin: 2rem 0;
+      width: $logo-side-small;
+      height: $logo-side-small;
     }
   }
 
@@ -92,12 +90,12 @@ export default class extends Vue {
   }
 
   &__github-cta-label {
-    padding-left: 0.4rem;
+    padding-left: $spacing-03;
   }
 
   &__github-cta-icon {
-    width: 0.8rem;
-    height: 0.8rem;
+    width: $icon-side;
+    height: $icon-side;
   }
 }
 </style>
