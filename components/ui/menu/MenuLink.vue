@@ -42,21 +42,6 @@ export default class extends Vue {
   @include type-style('productive-heading-02');
   text-decoration: none;
 
-  &__main {
-    display: inline-flex;
-    align-items: center;
-    padding: 0 1rem;
-    color: var(--link-color);
-    text-decoration: none;
-
-    &_active {
-      padding-top: 2px;
-      position: relative;
-      top: 1px;
-      border-bottom: 4px solid $focus;
-    }
-  }
-
   &__sidebar {
     &_primary {
       color: white;

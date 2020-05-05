@@ -1,20 +1,20 @@
 <template>
   <div class="menu">
     <section class="menu__mobile" tabindex="-1">
-      <Menu20 class="menu__link" />
-      <MenuLink v-bind="homeLink" />
+      <Menu20 class="menu__hamburguer-link" />
+      <MenuLink class="menu__link" v-bind="homeLink" />
       <div class="menu__overlay" />
       <SidebarMenu class="menu__side-menu" />
     </section>
     <div class="menu__main-level-wrapper">
       <section class="menu__main-level">
         <nav class="menu__nav-section">
-          <MenuLink v-bind="homeLink" />
+          <MenuLink class="menu__link" v-bind="homeLink" />
           <div class="menu__separator" />
           <MenuLink
             v-for="link in qiskitElements"
             :key="link.url"
-            :is-active="isActive(link)"
+            :class="['menu__link', isActive(link) && 'menu__link_active']"
             v-bind="link"
           />
         </nav>
@@ -22,7 +22,7 @@
           <MenuLink
             v-for="link in [communityLink, ...learnMore]"
             :key="link.url"
-            :is-active="isActive(link)"
+            :class="['menu__link', isActive(link) && 'menu__link_active']"
             v-bind="link"
           />
         </nav>
@@ -36,7 +36,7 @@
         <MenuLink
           v-for="link in communitySubLinks"
           :key="link.url"
-          :is-active="isActive(link)"
+          :class="['menu__link', isActive(link) && 'menu__link_active']"
           v-bind="link"
         />
       </nav>
@@ -123,6 +123,21 @@ export default class extends Vue {}
   }
 
   &__link {
+    display: inline-flex;
+    align-items: center;
+    padding: 0 1rem;
+    color: var(--link-color);
+    text-decoration: none;
+
+    &_active {
+      padding-top: 2px;
+      position: relative;
+      top: 1px;
+      border-bottom: 4px solid $focus;
+    }
+  }
+
+  &__hamburguer-link {
     margin: 1.3rem -0.2rem 0 1.3rem;
   }
 
