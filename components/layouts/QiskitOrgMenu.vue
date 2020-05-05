@@ -4,7 +4,7 @@
       <Menu20 class="menu__link" />
       <MenuLink v-bind="homeLink" />
       <div class="menu__overlay" />
-      <SidebarMenu />
+      <SidebarMenu class="menu__side-menu" />
     </section>
     <div class="menu__main-level-wrapper">
       <section class="menu__main-level">
@@ -112,7 +112,7 @@ export default class extends Vue {}
         opacity: 0.5;
       }
 
-      .sidebar-menu {
+      .menu__side-menu {
         transform: translateX(0);
       }
     }
