@@ -50,7 +50,7 @@
             </Cta>
           </li>
         </ul>
-        <template #extra>
+        <template #aside>
           <iframe
             class="episode"
             width="560"
@@ -82,7 +82,7 @@
           </ul>
         </div>
 
-        <template #extra>
+        <template #aside>
           <TextbookPreview class="education-page__textbook-preview">
             <TextbookTOC />
           </TextbookPreview>

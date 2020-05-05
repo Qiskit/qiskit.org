@@ -29,7 +29,7 @@
         </h2>
         <SoftwareStack :stack="elementStack" />
       </article>
-      <template #extra>
+      <template #aside>
         <article class="element__example">
           <h2 class="element__header">
             Example

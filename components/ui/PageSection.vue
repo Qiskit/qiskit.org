@@ -1,25 +1,25 @@
 <template>
   <article class="page-section">
     <div
+      class="page-section__layout"
       :class="{
-        'page-section__layout': true,
         'page-section__layout_reversed': asidePosition == 'start',
         'page-section__layout_framed': framed
       }"
     >
       <div
+        class="page-section__main-content"
         :class="{
-          'page-section__main-content': true,
-          'page-section__main-content_alone': !this.$slots.extra
+          'page-section__main-content_alone': !this.$slots.aside
         }"
       >
         <slot />
       </div>
       <aside
-        v-if="this.$slots.extra"
+        v-if="this.$slots.aside"
         class="page-section__aside"
       >
-        <slot name="extra" />
+        <slot name="aside" />
       </aside>
     </div>
   </article>
@@ -40,8 +40,8 @@ export default class extends Vue {
 @import '~carbon-components/scss/globals/scss/typography';
 
 .page-section {
-  padding-top: 4rem;
-  padding-bottom: 4rem;
+  padding-top: $layout-05;
+  padding-bottom: $layout-05;
 
   &__layout {
     display: flex;
