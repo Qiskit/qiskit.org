@@ -2,7 +2,7 @@
   <!-- tabindex is needed to allow hiding the menu in iOS Safari -->
   <div class="content-root" tabindex="-1">
     <header id="navigation">
-      <QiskitOrgMenu />
+      <Menu />
     </header>
     <nuxt />
     <PageFooter />
@@ -12,12 +12,12 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import QiskitOrgMenu from '~/components/layouts/QiskitOrgMenu.vue'
+import Menu from '~/components/layouts/Menu.vue'
 import PageFooter from '~/components/layouts/PageFooter.vue'
 
 @Component({
   components: {
-    QiskitOrgMenu,
+    Menu,
     PageFooter
   }
 })
