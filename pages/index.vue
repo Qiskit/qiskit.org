@@ -256,7 +256,6 @@ export default class extends QiskitPage {
 .landing-page {
   &__horizontal-section {
     background-color: $inverse-02;
-    margin-bottom: -2rem;
   }
 
   &__horizontal-section:nth-child(2n+1) {
@@ -275,14 +274,14 @@ export default class extends QiskitPage {
     flex: 1;
 
     @include mq($until: medium) {
-      margin-top: 2rem;
+      margin-top: $layout-03;
     }
 
     &:first-child {
-      margin-right: 2rem;
+      margin-right: $layout-03;
 
       @include mq($until: medium) {
-        margin-top: -2rem;
+        margin-top: -$layout-03;
         margin-right: 0;
       }
     }
@@ -307,7 +306,7 @@ export default class extends QiskitPage {
   &__social-network-list {
     list-style: none;
     padding: 0;
-    margin: -1rem;
+    margin: -$layout-01;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -320,13 +319,13 @@ export default class extends QiskitPage {
   &__social-network {
     width: 50%;
     display: inline-flex;
-    padding: 0.8rem;
+    padding: $spacing-04;
   }
 
   &__social-network-name {
     flex: 1;
     color: $inverse-01;
-    margin-left: 0.5rem;
+    margin-left: $spacing-03;
   }
 
   &__social-network-link {
