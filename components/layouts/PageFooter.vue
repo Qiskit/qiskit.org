@@ -31,8 +31,8 @@ export default class extends Vue {
 
 <style lang="scss" scoped>
 .page-footer-container {
-  margin-top: 4rem;
-  padding-bottom: 4rem;
+  margin-top: $layout-05;
+  padding-bottom: $layout-05;
 }
 
 .page-footer {
