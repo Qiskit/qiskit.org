@@ -7,7 +7,7 @@
       <SidebarMenu />
     </section>
     <section class="menu__main-level">
-      <nav class="menu__main-level_on-left">
+      <nav class="menu__nav-section">
         <MenuLink v-bind="homeLink" />
         <div class="menu__separator" />
         <MenuLink
@@ -17,7 +17,7 @@
           v-bind="link"
         />
       </nav>
-      <nav class="menu__main-level_on-right">
+      <nav class="menu__nav-section">
         <MenuLink
           v-for="link in [communityLink, ...learnMore]"
           :key="link.url"
@@ -30,7 +30,7 @@
       v-if="isCommunityActive()"
       class="menu__second-level"
     >
-      <nav class="menu__second-level_on-right">
+      <nav class="menu__nav-section">
         <MenuLink
           v-for="link in communitySubLinks"
           :key="link.url"
@@ -75,10 +75,6 @@ export default class extends Vue {}
     padding-right: 0;
     border-bottom: 1px solid black;
     justify-content: space-between;
-
-    &_on-left, &_on-right {
-      display: flex;
-    }
   }
 
   &__second-level {
@@ -90,10 +86,6 @@ export default class extends Vue {}
     *  That's why we calculate the padding, to align the secondary menu with the main one
     */
     padding-right: calc((100vw - 68.75rem) / 2);
-
-    &_on-right {
-      display: flex;
-    }
   }
 
   &__mobile {
@@ -115,6 +107,10 @@ export default class extends Vue {}
         transform: translateX(0);
       }
     }
+  }
+
+  &__nav-section {
+    display: flex;
   }
 
   &__link {
