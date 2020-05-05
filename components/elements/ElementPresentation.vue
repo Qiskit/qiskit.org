@@ -75,12 +75,12 @@ export default class extends Vue {
   }
 
   &__logo {
-    width: $logo-side;
-    height: $logo-side;
+    width: $logo-size;
+    height: $logo-size;
 
     @include mq($until: medium) {
-      width: $logo-side-small;
-      height: $logo-side-small;
+      width: $logo-size-small;
+      height: $logo-size-small;
     }
   }
 
@@ -94,8 +94,8 @@ export default class extends Vue {
   }
 
   &__github-cta-icon {
-    width: $icon-side;
-    height: $icon-side;
+    width: $icon-size;
+    height: $icon-size;
   }
 }
 </style>
