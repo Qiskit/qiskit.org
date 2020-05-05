@@ -5,7 +5,7 @@
       aside-position="start"
       no-gradient
     >
-      <template #extra>
+      <template #aside>
         <img
           class="element-presentation__logo"
           :src="logo"

@@ -12,7 +12,7 @@
           scientists and engineers worldwide to accelerate research towards
           practical applications for quantum computing.
         </p>
-        <template #extra>
+        <template #aside>
           <iframe
             class="header-video"
             width="560"

@@ -6,8 +6,8 @@
     }"
   >
     <article
+      class="community-header__content"
       :class="{
-        'community-header__content': true,
         'community-header__content_reversed': asidePosition == 'start'
       }"
     >
@@ -20,10 +20,11 @@
         </div>
       </section>
       <aside
-        v-if="this.$slots.extra"
+        v-if="this.$slots.aside"
         class="community-header__aside"
+        :class="[`community-header__aside_position_${asidePosition}`]"
       >
-        <slot name="extra" />
+        <slot name="aside" />
       </aside>
     </article>
     <aside
@@ -55,8 +56,8 @@ export default class extends Vue {
   background-color: var(--community-header__background-color, $ui-background);
 
   height: 100%;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
+  padding-top: $layout-05;
+  padding-bottom: $layout-05;
 
   &_background_gradient {
     background-image: linear-gradient(150deg,
@@ -102,7 +103,29 @@ export default class extends Vue {
     display: flex;
     flex-direction: row;
     color: $text-01;
-    margin-top: 4rem;
+    margin-top: $layout-05;
+  }
+
+  &__aside {
+    &_position_start {
+      margin-left: 0;
+      margin-right: $layout-03;
+
+      @include mq($until: medium) {
+        margin: 0;
+        margin-bottom: $layout-03;
+      }
+    }
+
+    &_positon_end {
+      margin-left: $layout-03;
+      margin-right: 0;
+
+      @include mq($until: medium) {
+        margin: 0;
+        margin-bottom: $layout-03;
+      }
+    }
   }
 }
 </style>
