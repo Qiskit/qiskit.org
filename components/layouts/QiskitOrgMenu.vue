@@ -123,6 +123,7 @@ export default class extends Vue {}
   }
 
   &__link {
+    @include type-style('productive-heading-02');
     display: inline-flex;
     align-items: center;
     padding: 0 1rem;

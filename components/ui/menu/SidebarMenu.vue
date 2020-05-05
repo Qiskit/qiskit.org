@@ -6,16 +6,14 @@
     <MenuLink
       v-for="link in qiskitElements"
       :key="link.url"
-      :is-active="isActive(link)"
-      menu-type="sidebar"
+      :class="['sidebar-menu__link', isActive(link) && 'sidebar-menu__link_active']"
       v-bind="link"
     />
     <h2 class="sidebar-menu__title">
       Learn more
     </h2>
     <MenuLink
-      :is-active="false"
-      menu-type="sidebar"
+      class="sidebar-menu__link"
       v-bind="communityLink"
     />
     <div
@@ -25,17 +23,14 @@
       <MenuLink
         v-for="link in communitySubLinks"
         :key="link.url"
-        :is-active="isActive(link)"
-        menu-type="sidebar"
-        link-type="secondary"
+        :class="['sidebar-menu__link', 'sidebar-menu__link_secondary', isActive(link) && 'sidebar-menu__link_active']"
         v-bind="link"
       />
     </div>
     <MenuLink
       v-for="link in learnMore"
       :key="link.url"
-      :is-active="isActive(link)"
-      menu-type="sidebar"
+      :class="['sidebar-menu__link', isActive(link) && 'sidebar-menu__link_active']"
       v-bind="link"
     />
   </nav>
@@ -84,6 +79,24 @@ export default class extends Vue {}
     margin: 0 -1.3rem;
     padding: 1rem 0;
     background-color: $purple-30;
+  }
+
+  &__link {
+    @include type-style('productive-heading-02');
+    text-decoration: none;
+    color: white;
+    padding: 0.5rem 1.5em;
+
+    &_secondary {
+      color: $inverse-01;
+      padding-right: 3rem;
+      padding-left: 3rem;
+    }
+
+    &_active {
+      border-left: 4px solid $focus;
+      padding-left: calc(3rem - 4px);
+    }
   }
 }
 </style>
