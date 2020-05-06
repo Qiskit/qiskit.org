@@ -7,7 +7,10 @@
     :target="isExternal(url) ? '_blank' : null"
     @click="segment && $trackClickEvent(segment)"
   >
-    {{ label }}
+    <template v-if="label">
+      {{ label }}
+    </template>
+    <slot v-else />
   </component>
 </template>
 
