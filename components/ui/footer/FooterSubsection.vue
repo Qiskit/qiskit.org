@@ -3,7 +3,7 @@
     <h2 class="footer-subsection__title">
       {{ title }}
     </h2>
-    <FooterLink
+    <AppLink
       v-for="element in elements"
       :key="element.label"
       class="footer-subsection__link"
@@ -15,10 +15,10 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-import FooterLink from '~/components/ui/footer/FooterLink.vue'
+import AppLink from '~/components/ui/AppLink.vue'
 
 @Component({
-  components: { FooterLink }
+  components: { AppLink }
 })
 export default class extends Vue {
   @Prop(String) title

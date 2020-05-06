@@ -2,16 +2,16 @@
   <div class="menu">
     <section class="menu__mobile" tabindex="-1">
       <Menu20 class="menu__hamburguer-link" />
-      <MenuLink class="menu__link" v-bind="homeLink" />
+      <AppLink class="menu__link" v-bind="homeLink" />
       <div class="menu__overlay" />
       <SidebarMenu class="menu__side-menu" />
     </section>
     <div class="menu__main-level-wrapper">
       <section class="menu__main-level">
         <nav class="menu__nav-section">
-          <MenuLink class="menu__link" v-bind="homeLink" />
+          <AppLink class="menu__link" v-bind="homeLink" />
           <div class="menu__separator" />
-          <MenuLink
+          <AppLink
             v-for="link in qiskitElements"
             :key="link.url"
             class="menu__link"
@@ -20,7 +20,7 @@
           />
         </nav>
         <nav class="menu__nav-section">
-          <MenuLink
+          <AppLink
             v-for="link in [communityLink, ...learnMore]"
             :key="link.url"
             class="menu__link"
@@ -35,7 +35,7 @@
       class="menu__second-level"
     >
       <nav class="menu__nav-section">
-        <MenuLink
+        <AppLink
           v-for="link in communitySubLinks"
           :key="link.url"
           class="menu__link"
@@ -50,11 +50,11 @@
 <script lang="ts">
 import { Component, Mixins } from 'vue-property-decorator'
 import SidebarMenu from '~/components/ui/menu/SidebarMenu.vue'
-import MenuLink from '~/components/ui/menu/MenuLink.vue'
+import AppLink from '~/components/ui/AppLink.vue'
 import MenuMixin from '~/mixins/menu'
 
 @Component({
-  components: { SidebarMenu, MenuLink }
+  components: { SidebarMenu, AppLink }
 })
 export default class extends Mixins(MenuMixin) {}
 </script>

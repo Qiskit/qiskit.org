@@ -3,7 +3,7 @@
     <h2 class="sidebar-menu__title">
       Elements
     </h2>
-    <MenuLink
+    <AppLink
       v-for="link in qiskitElements"
       :key="link.url"
       class="sidebar-menu__link"
@@ -13,7 +13,7 @@
     <h2 class="sidebar-menu__title">
       Learn more
     </h2>
-    <MenuLink
+    <AppLink
       class="sidebar-menu__link"
       v-bind="communityLink"
     />
@@ -21,7 +21,7 @@
       v-if="isCommunityActive()"
       class="sidebar-menu__second-level"
     >
-      <MenuLink
+      <AppLink
         v-for="link in communitySubLinks"
         :key="link.url"
         class="sidebar-menu__link sidebar-menu__link_secondary"
@@ -29,7 +29,7 @@
         v-bind="link"
       />
     </div>
-    <MenuLink
+    <AppLink
       v-for="link in learnMore"
       :key="link.url"
       class="sidebar-menu__link"
@@ -41,11 +41,11 @@
 
 <script lang="ts">
 import { Component, Mixins } from 'vue-property-decorator'
-import MenuLink from '~/components/ui/menu/MenuLink.vue'
+import AppLink from '~/components/ui/AppLink.vue'
 import MenuMixin from '~/mixins/menu'
 
 @Component({
-  components: { MenuLink }
+  components: { AppLink }
 })
 export default class extends Mixins(MenuMixin) {}
 </script>
