@@ -214,9 +214,36 @@ const FOOTER_ELEMENTS: FooterStructure = [
   ]
 ]
 
+const HOME_LINK: NavLink = {
+  label: 'Qiskit',
+  url: '/'
+}
+
+const COMMUNITY_LINK: NavLink = {
+  label: 'Community',
+  url: '/education'
+}
+
+const TUTORIALS_LINK: NavLink = {
+  label: 'Tutorials',
+  url: 'https://quantum-computing.ibm.com/jupyter/tutorial/1_start_here.ipynb',
+  segment: {
+    action: 'Tutorials'
+  }
+}
+
+const DOCUMENTATION_LINK: NavLink = {
+  label: 'Documentation',
+  url: 'https://qiskit.org/documentation/'
+}
+
 export {
   ORDERED_QISKIT_ELEMENTS,
   ORDERED_COMMUNITY_SUB_LINKS,
   FOOTER_ELEMENTS,
+  HOME_LINK,
+  COMMUNITY_LINK,
+  TUTORIALS_LINK,
+  DOCUMENTATION_LINK,
   NavLink
 }
