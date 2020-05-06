@@ -12,14 +12,11 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
-import menuLinkMixin from '~/mixins/menuLink'
+import { Component, Prop, Mixins } from 'vue-property-decorator'
+import MenuLinkMixin from '~/mixins/menuLink'
 
-@Component({
-  mixins: [menuLinkMixin]
-})
-export default class extends Vue {
+@Component
+export default class extends Mixins(MenuLinkMixin) {
   @Prop(String) url
   @Prop(String) label
   @Prop({ type: Boolean, default: false }) isStatic

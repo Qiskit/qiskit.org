@@ -37,16 +37,14 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
+import { Component, Mixins } from 'vue-property-decorator'
 import MenuLink from '~/components/ui/menu/MenuLink.vue'
-import menuMixin from '~/mixins/menu'
+import MenuMixin from '~/mixins/menu'
 
 @Component({
-  components: { MenuLink },
-  mixins: [menuMixin]
+  components: { MenuLink }
 })
-export default class extends Vue {}
+export default class extends Mixins(MenuMixin) {}
 </script>
 
 <style lang="scss" scoped>
