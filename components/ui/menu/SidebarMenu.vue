@@ -6,7 +6,8 @@
     <MenuLink
       v-for="link in qiskitElements"
       :key="link.url"
-      :class="['sidebar-menu__link', isActive(link) && 'sidebar-menu__link_active']"
+      class="sidebar-menu__link"
+      :class="{ 'sidebar-menu__link_active': isActive(link) }"
       v-bind="link"
     />
     <h2 class="sidebar-menu__title">
@@ -23,14 +24,16 @@
       <MenuLink
         v-for="link in communitySubLinks"
         :key="link.url"
-        :class="['sidebar-menu__link', 'sidebar-menu__link_secondary', isActive(link) && 'sidebar-menu__link_active']"
+        class="sidebar-menu__link sidebar-menu__link_secondary"
+        :class="{ 'sidebar-menu__link_active': isActive(link) }"
         v-bind="link"
       />
     </div>
     <MenuLink
       v-for="link in learnMore"
       :key="link.url"
-      :class="['sidebar-menu__link', isActive(link) && 'sidebar-menu__link_active']"
+      class="sidebar-menu__link"
+      :class="{ 'sidebar-menu__link_active': isActive(link) }"
       v-bind="link"
     />
   </nav>

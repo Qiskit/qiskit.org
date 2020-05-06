@@ -14,7 +14,8 @@
           <MenuLink
             v-for="link in qiskitElements"
             :key="link.url"
-            :class="['menu__link', isActive(link) && 'menu__link_active']"
+            class="menu__link"
+            :class="{ 'menu__link_active': isActive(link) }"
             v-bind="link"
           />
         </nav>
@@ -22,7 +23,8 @@
           <MenuLink
             v-for="link in [communityLink, ...learnMore]"
             :key="link.url"
-            :class="['menu__link', isActive(link) && 'menu__link_active']"
+            class="menu__link"
+            :class="{ 'menu__link_active': isActive(link) }"
             v-bind="link"
           />
         </nav>
@@ -36,7 +38,8 @@
         <MenuLink
           v-for="link in communitySubLinks"
           :key="link.url"
-          :class="['menu__link', isActive(link) && 'menu__link_active']"
+          class="menu__link"
+          :class="{ 'menu__link_active': isActive(link) }"
           v-bind="link"
         />
       </nav>
