@@ -19,11 +19,11 @@ export default class extends Vue {
   communityLink: NavLink = COMMUNITY_LINK
   communitySubLinks: Array<NavLink> = ORDERED_COMMUNITY_SUB_LINKS
 
-  isPathStartingWith (linkPath: string) {
+  isPathStartingWith (linkPath: string): boolean {
     return this.$route.path.startsWith(linkPath)
   }
 
-  isActive (link: NavLink) {
+  isActive (link: NavLink): boolean {
     const isCommunityLink = link.label === 'Community'
 
     return isCommunityLink
@@ -31,7 +31,7 @@ export default class extends Vue {
       : this.isPathStartingWith(link.url)
   }
 
-  isCommunityActive () {
+  isCommunityActive (): boolean {
     return this.communitySubLinks.some(link => this.isActive(link))
   }
 }
