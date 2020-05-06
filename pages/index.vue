@@ -22,12 +22,11 @@
           </p>
           <Cta
             to="https://www.youtube.com/playlist?list=PLOFEBzvs-Vvp2xg9-POLJhQwtVktlYGbY"
-            @click="$trackClickEvent({
+            label="Watch it"
+            :segment="{
               action: 'Coding with Qiskit Video Series'
-            })"
-          >
-            Watch it
-          </Cta>
+            }"
+          />
         </article>
         <article class="landing-page__section">
           <h2 class="element__header">
@@ -39,13 +38,12 @@
           </p>
           <Cta
             to="/activities/quantum-activity-pack-for-kids.pdf"
+            label="Try it"
             is-static
-            @click="$trackClickEvent({
+            :segment="{
               action: 'Activity pack for kids'
-            })"
-          >
-            Try it
-          </Cta>
+            }"
+          />
         </article>
       </div>
     </PageSection>
@@ -65,12 +63,11 @@
           </p>
           <Cta
             to="https://quantum-computing.ibm.com/login"
-            @click="$trackClickEvent({
+            label="Try it"
+            :segment="{
               action: 'Introducing Qiskit notebooks: Try out'
-            })"
-          >
-            Try it
-          </Cta>
+            }"
+          />
         </article>
         <aside
           class="landing-page__section landing-page__section_flex_2"
