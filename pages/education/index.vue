@@ -46,7 +46,7 @@
         <ul class="actions">
           <li>
             <Cta
-              to="https://www.youtube.com/playlist?list=PLOFEBzvs-Vvp2xg9-POLJhQwtVktlYGbY"
+              url="https://www.youtube.com/playlist?list=PLOFEBzvs-Vvp2xg9-POLJhQwtVktlYGbY"
               label="View all episodes"
             />
           </li>
@@ -77,7 +77,7 @@
           <ul class="actions">
             <li>
               <Cta
-                to="https://qiskit.org/textbook"
+                url="https://qiskit.org/textbook"
                 label="Discover more"
               />
             </li>
@@ -102,7 +102,7 @@
         <ul class="actions">
           <li>
             <Cta
-              to="mailto:hello@qiskit.camp"
+              url="mailto:hello@qiskit.camp"
               label="Request an event"
             />
           </li>

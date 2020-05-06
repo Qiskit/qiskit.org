@@ -30,7 +30,7 @@
           Explore the code
         </a>
       </p>
-      <Cta v-if="launch" :to="launch" label="Launch" />
+      <Cta v-if="launch" :url="launch" label="Launch" />
       <div class="experiment-header__media">
         <Media
           v-for="(url, index) in media"

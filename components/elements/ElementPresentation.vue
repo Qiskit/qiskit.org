@@ -18,7 +18,7 @@
       <Cta
         v-if="to"
         class="element-presentation__get-started-cta"
-        :to="to"
+        :url="to"
         label="Get Started!"
         :segment="{
           action: segmentAction
@@ -27,7 +27,7 @@
       <Cta
         v-if="sources"
         class="element-presentation__github-cta"
-        :to="sources"
+        :url="sources"
         :segment="{
           action: segmentAction
         }"

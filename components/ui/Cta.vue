@@ -16,13 +16,13 @@ import AppLink from '~/components/ui/AppLink.vue'
   components: { AppLink }
 })
 export default class extends Vue {
-  @Prop(String) to
+  @Prop(String) url
   @Prop(String) label
   @Prop(Object) segment
   @Prop({ type: Boolean, default: false }) isStatic
 
   link = {
-    url: this.to,
+    url: this.url,
     label: this.label,
     segment: this.segment,
     isStatic: this.isStatic

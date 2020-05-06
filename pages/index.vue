@@ -21,7 +21,7 @@
             investigating the latest algorithms and research topics.
           </p>
           <Cta
-            to="https://www.youtube.com/playlist?list=PLOFEBzvs-Vvp2xg9-POLJhQwtVktlYGbY"
+            url="https://www.youtube.com/playlist?list=PLOFEBzvs-Vvp2xg9-POLJhQwtVktlYGbY"
             label="Watch it"
             :segment="{
               action: 'Coding with Qiskit Video Series'
@@ -37,7 +37,7 @@
             about quantum computing. Fun for all kids and parents!
           </p>
           <Cta
-            to="/activities/quantum-activity-pack-for-kids.pdf"
+            url="/activities/quantum-activity-pack-for-kids.pdf"
             label="Try it"
             is-static
             :segment="{
@@ -62,7 +62,7 @@
             with every Qiskit release.
           </p>
           <Cta
-            to="https://quantum-computing.ibm.com/login"
+            url="https://quantum-computing.ibm.com/login"
             label="Try it"
             :segment="{
               action: 'Introducing Qiskit notebooks: Try out'
