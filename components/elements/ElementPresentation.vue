@@ -19,19 +19,18 @@
         v-if="to"
         class="element-presentation__get-started-cta"
         :to="to"
-        @click="segmentAction && $trackClickEvent({
+        label="Get Started!"
+        :segment="{
           action: segmentAction
-        })"
-      >
-        Get Started!
-      </Cta>
+        }"
+      />
       <Cta
         v-if="sources"
         class="element-presentation__github-cta"
         :to="sources"
-        @click="segmentAction && $trackClickEvent({
+        :segment="{
           action: segmentAction
-        })"
+        }"
       >
         <div class="element-presentation__github-cta-layout">
           <svg
