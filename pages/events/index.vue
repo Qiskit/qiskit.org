@@ -82,13 +82,13 @@
         <div v-else class="event-page__results">
           <p class="event-page__no-events-msg">
             Nothing here yet -
-            <a
-              href="https://airtable.com/shrP84QQiqzC3aWMF"
-              target="_blank"
-              rel="noopener"
-            >
-              let’s make it happen!
-            </a>
+            <AppLink
+              class="experiment-header__source-code-link"
+              v-bind="{
+                url: 'https://airtable.com/shrP84QQiqzC3aWMF',
+                label: ' let’s make it happen!'
+              }"
+            />
           </p>
         </div>
       </div>
@@ -101,6 +101,7 @@ import { mapGetters, mapActions } from 'vuex'
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import EventCard from '~/components/events/EventCard.vue'
+import AppLink from '~/components/ui/AppLink.vue'
 import {
   CommunityEvent,
   WORLD_REGION_OPTIONS,
@@ -111,7 +112,8 @@ import {
   layout: 'carbon',
 
   components: {
-    EventCard
+    EventCard,
+    AppLink
   },
 
   head () {
