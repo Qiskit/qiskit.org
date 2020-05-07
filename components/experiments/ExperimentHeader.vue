@@ -1,9 +1,9 @@
 <template>
   <div class="experiment-header-container">
     <div>
-      <nuxt-link
+      <AppLink
         class="experiment-header__back-navigation"
-        to="/experiments"
+        v-bind="{ 'url': '/experiments' }"
       >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11 18">
           <path fill="#999" d="M8.681.196l2.121 2.12-8.484 8.487-2.12-2.12z" />
@@ -14,21 +14,17 @@
           <path fill="#999" d="M10.803 15.047l-2.121 2.121L.197 8.683l2.121-2.121z" />
         </svg>
         Back to experiments
-      </nuxt-link>
+      </AppLink>
       <h1>{{ name }}</h1>
       <p class="experiment-header__meta">
         <span class="experiment-header__author">
           {{ authors }}
         </span>
         |
-        <a
+        <AppLink
           class="experiment-header__source-code-link"
-          :href="source"
-          target="_blank"
-          rel="noopener"
-        >
-          Explore the code
-        </a>
+          v-bind="{ 'url': source, 'label': 'Explore the code'}"
+        />
       </p>
       <Cta v-if="launch" :url="launch" label="Launch" />
       <div class="experiment-header__media">
@@ -47,9 +43,10 @@ import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 import Cta from '~/components/ui/Cta.vue'
 import Media from '~/components/ui/Media.vue'
+import AppLink from '~/components/ui/AppLink.vue'
 
 @Component({
-  components: { Cta, Media }
+  components: { Cta, Media, AppLink }
 })
 export default class extends Vue {
   @Prop(String) name
