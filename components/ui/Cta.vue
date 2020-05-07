@@ -2,6 +2,7 @@
   <AppLink
     class="cta"
     v-bind="link"
+    :is-static="isStatic"
   >
     <slot />
   </AppLink>
@@ -16,17 +17,8 @@ import AppLink from '~/components/ui/AppLink.vue'
   components: { AppLink }
 })
 export default class extends Vue {
-  @Prop(String) url
-  @Prop(String) label
-  @Prop(Object) segment
+  @Prop(Object) link
   @Prop({ type: Boolean, default: false }) isStatic
-
-  link = {
-    url: this.url,
-    label: this.label,
-    segment: this.segment,
-    isStatic: this.isStatic
-  }
 }
 </script>
 

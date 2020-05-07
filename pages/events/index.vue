@@ -84,10 +84,7 @@
             Nothing here yet -
             <AppLink
               class="experiment-header__source-code-link"
-              v-bind="{
-                url: 'https://airtable.com/shrP84QQiqzC3aWMF',
-                label: ' let’s make it happen!'
-              }"
+              v-bind="eventRequestLink"
             />
           </p>
         </div>
@@ -107,6 +104,7 @@ import {
   WORLD_REGION_OPTIONS,
   COMMUNITY_EVENT_TYPE_OPTIONS
 } from '~/store/modules/events.ts'
+import { EVENT_REQUEST_LINK } from '~/constants/appLinks'
 
 @Component({
   layout: 'carbon',
@@ -152,6 +150,7 @@ export default class extends QiskitPage {
   types = COMMUNITY_EVENT_TYPE_OPTIONS
   routeName: string = 'events'
   windowWidth: Number = 0
+  eventRequestLink = EVENT_REQUEST_LINK
 
   get hasEvents (): boolean {
     return (this as any).filteredEvents.length !== 0

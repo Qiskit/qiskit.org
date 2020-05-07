@@ -18,18 +18,22 @@
       <Cta
         v-if="to"
         class="element-presentation__get-started-cta"
-        :url="to"
-        label="Get Started!"
-        :segment="{
-          action: segmentAction
+        :link="{
+          url: to,
+          label: 'Get Started!',
+          segment: {
+            action: segmentAction
+          }
         }"
       />
       <Cta
         v-if="sources"
         class="element-presentation__github-cta"
-        :url="sources"
-        :segment="{
-          action: segmentAction
+        :link="{
+          url: sources,
+          segment: {
+            action: segmentAction
+          }
         }"
       >
         <div class="element-presentation__github-cta-layout">

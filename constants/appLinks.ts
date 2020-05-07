@@ -26,6 +26,26 @@ interface SocialMediaCommunityLink {
   iconPathSecondPart?: string
 }
 
+/**
+ * Represent a general link use on the site
+ */
+interface GeneralLink {
+  /** The visible name of the link */
+  label: string
+  /** Where we want to go */
+  url: string
+  /** Includes an object with the information of the action. Example:
+   * ```ts
+   * {
+      action: 'Qiskit Community: GitHub'
+     }
+    ```
+   */
+  segment?: SegmentData
+  /** Text shown when leaving the cursor on the link */
+  title?: string,
+}
+
 const SOCIAL_MEDIA_COMMUNITY: Array<SocialMediaCommunityLink> = [
   {
     name: 'Slack',
@@ -84,6 +104,67 @@ const SOCIAL_MEDIA_COMMUNITY: Array<SocialMediaCommunityLink> = [
   }
 ]
 
+const ACCESS_IBM_Q_SYSTEMS: GeneralLink = {
+  url: 'https://qiskit.org/documentation/install.html#access-ibm-q-systems',
+  label: 'Follow these steps',
+  title: 'Link',
+  segment: {
+    action: 'Link to Access IBMQ Systems'
+  }
+}
+
+const EVENT_REQUEST_LINK: GeneralLink = {
+  url: 'https://airtable.com/shrP84QQiqzC3aWMF',
+  label: ' let’s make it happen!'
+}
+
+const YOUTUBE_QISKIT_CTA: GeneralLink = {
+  url: 'https://www.youtube.com/playlist?list=PLOFEBzvs-Vvp2xg9-POLJhQwtVktlYGbY',
+  label: 'Watch it',
+  segment: {
+    action: 'Coding with Qiskit Video Series'
+  }
+}
+
+const ACTIVITIES_WITH_KIDS_CTA: GeneralLink = {
+  url: '/activities/quantum-activity-pack-for-kids.pdf',
+  label: 'Try it',
+  segment: {
+    action: 'Activity pack for kids'
+  }
+}
+
+const INTRO_QISKIT_NOTEBOOKS_CTA: GeneralLink = {
+  url: 'https://quantum-computing.ibm.com/login',
+  label: 'Try it',
+  segment: {
+    action: 'Introducing Qiskit notebooks: Try out'
+  }
+}
+
+const YOUTUBE_ALL_EPISODES_CTA: GeneralLink = {
+  url: 'https://www.youtube.com/playlist?list=PLOFEBzvs-Vvp2xg9-POLJhQwtVktlYGbY',
+  label: 'View all episodes'
+}
+
+const DISCOVER_TEXTBOOK_CTA: GeneralLink = {
+  url: 'https://qiskit.org/textbook',
+  label: 'Discover more'
+}
+
+const REQUEST_AN_EVENT_CTA: GeneralLink = {
+  url: 'mailto:hello@qiskit.camp',
+  label: 'Request an event'
+}
+
 export {
-  SOCIAL_MEDIA_COMMUNITY
+  SOCIAL_MEDIA_COMMUNITY,
+  ACCESS_IBM_Q_SYSTEMS,
+  EVENT_REQUEST_LINK,
+  YOUTUBE_QISKIT_CTA,
+  ACTIVITIES_WITH_KIDS_CTA,
+  INTRO_QISKIT_NOTEBOOKS_CTA,
+  YOUTUBE_ALL_EPISODES_CTA,
+  DISCOVER_TEXTBOOK_CTA,
+  REQUEST_AN_EVENT_CTA
 }

@@ -20,13 +20,7 @@
             everything you need to know. Starting with installing Qiskit, to
             investigating the latest algorithms and research topics.
           </p>
-          <Cta
-            url="https://www.youtube.com/playlist?list=PLOFEBzvs-Vvp2xg9-POLJhQwtVktlYGbY"
-            label="Watch it"
-            :segment="{
-              action: 'Coding with Qiskit Video Series'
-            }"
-          />
+          <Cta :link="youtubeQiskitCtaLink" />
         </article>
         <article class="landing-page__section">
           <h2 class="element__header">
@@ -36,14 +30,7 @@
             This activity pack will entertain your kids with fun activities
             about quantum computing. Fun for all kids and parents!
           </p>
-          <Cta
-            url="/activities/quantum-activity-pack-for-kids.pdf"
-            label="Try it"
-            is-static
-            :segment="{
-              action: 'Activity pack for kids'
-            }"
-          />
+          <Cta :link="activitiesWithKidsCtaLink" is-static />
         </article>
       </div>
     </PageSection>
@@ -61,13 +48,7 @@
             hosted tutorials. Work is saved in the cloud and automatically updated
             with every Qiskit release.
           </p>
-          <Cta
-            url="https://quantum-computing.ibm.com/login"
-            label="Try it"
-            :segment="{
-              action: 'Introducing Qiskit notebooks: Try out'
-            }"
-          />
+          <Cta :link="introQiskitNotebooksCtaLink" />
         </article>
         <aside
           class="landing-page__section landing-page__section_flex_2"
@@ -130,7 +111,12 @@ import PageSection from '~/components/ui/PageSection.vue'
 import Cta from '~/components/ui/Cta.vue'
 import AppLink from '~/components/ui/AppLink.vue'
 
-import { SOCIAL_MEDIA_COMMUNITY } from '~/constants/appLinks'
+import {
+  SOCIAL_MEDIA_COMMUNITY,
+  YOUTUBE_QISKIT_CTA,
+  ACTIVITIES_WITH_KIDS_CTA,
+  INTRO_QISKIT_NOTEBOOKS_CTA
+} from '~/constants/appLinks'
 
 @Component({
   components: {
@@ -146,6 +132,9 @@ import { SOCIAL_MEDIA_COMMUNITY } from '~/constants/appLinks'
 export default class extends QiskitPage {
   routeName = 'qiskit-landing-page'
   socialNetworkLinks = SOCIAL_MEDIA_COMMUNITY
+  youtubeQiskitCtaLink = YOUTUBE_QISKIT_CTA
+  activitiesWithKidsCtaLink = ACTIVITIES_WITH_KIDS_CTA
+  introQiskitNotebooksCtaLink = INTRO_QISKIT_NOTEBOOKS_CTA
 }
 </script>
 

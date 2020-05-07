@@ -45,10 +45,7 @@
         </p>
         <ul class="actions">
           <li>
-            <Cta
-              url="https://www.youtube.com/playlist?list=PLOFEBzvs-Vvp2xg9-POLJhQwtVktlYGbY"
-              label="View all episodes"
-            />
+            <Cta :link="youtubeAllEpisodesCtaLink" />
           </li>
         </ul>
         <template #extra>
@@ -76,10 +73,7 @@
           </p>
           <ul class="actions">
             <li>
-              <Cta
-                url="https://qiskit.org/textbook"
-                label="Discover more"
-              />
+              <Cta :link="discoverTextbookCtaLink" />
             </li>
           </ul>
         </div>
@@ -101,10 +95,7 @@
         </p>
         <ul class="actions">
           <li>
-            <Cta
-              url="mailto:hello@qiskit.camp"
-              label="Request an event"
-            />
+            <Cta :link="requestAnEventCtaLink" />
           </li>
         </ul>
       </PageSection>
@@ -124,6 +115,8 @@ import Cta from '~/components/ui/Cta.vue'
 // @ts-ignore: Cannot find module
 import TextbookTOC from '~/content/education/textbook-toc.md'
 
+import { YOUTUBE_ALL_EPISODES_CTA, DISCOVER_TEXTBOOK_CTA, REQUEST_AN_EVENT_CTA } from '~/constants/appLinks'
+
 @Component({
   components: {
     InnerNavigation,
@@ -142,6 +135,9 @@ import TextbookTOC from '~/content/education/textbook-toc.md'
 })
 export default class extends QiskitPage {
   routeName: string = 'education'
+  youtubeAllEpisodesCtaLink = YOUTUBE_ALL_EPISODES_CTA
+  discoverTextbookCtaLink = DISCOVER_TEXTBOOK_CTA
+  requestAnEventCtaLink = REQUEST_AN_EVENT_CTA
 }
 </script>
 

@@ -21,13 +21,7 @@
           advanced quantum computing platforms on the planet.
           <AppLink
             class="element__link"
-            v-bind="{
-              url: 'https://qiskit.org/documentation/install.html#access-ibm-q-systems',
-              label: 'Follow these steps',
-              title:'Link',
-              segment: {
-                action: 'Link to Access IBMQ Systems'
-              }}"
+            v-bind="linkToAccessIBMQSystems"
           />
           to set up your Qiskit environment to send jobs to IBM Quantum systems.
         </p>
@@ -56,6 +50,8 @@ import SyntaxHighlight from '~/components/ui/SyntaxHighlight.vue'
 import Cta from '~/components/ui/Cta.vue'
 import AppLink from '~/components/ui/AppLink.vue'
 
+import { ACCESS_IBM_Q_SYSTEMS } from '~/constants/appLinks'
+
 @Component({
   components: {
     Cta,
@@ -77,6 +73,7 @@ export default class extends QiskitElementPage {
   title = 'IBM Q Account'
   description = 'Access to world-leading quantum systems and simulators.'
   routeName = 'ibm-q-account'
+  linkToAccessIBMQSystems = ACCESS_IBM_Q_SYSTEMS
   codeExample = `from qiskit import IBMQ
 from qiskit.providers.ibmq import least_busy
 
