@@ -65,7 +65,7 @@ This is an initial schedule, subject to change.
 
 ## Have a question?
 
-[Join us in Slack](https://qiskit.slack.com/).
+[Join us in Slack](http://ibm.co/joinqiskitslack).
 
 [Send an e-mail](mailto:hello@qiskit.camp).
 

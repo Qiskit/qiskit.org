@@ -98,7 +98,7 @@
             <li class="landing-page__social-network">
               <a
                 class="landing-page__social-network-link"
-                href="https://join.slack.com/t/qiskit/shared_invite/enQtODQ2NTIyOTgwMTQ3LTI0NzM2NzkzZjJhNDgzZjY5MTQzNDY3MGNiZGQzNTNkZTE4Nzg1MjMwMmFjY2UwZTgyNDlmYWQwYmZjMjE1ZTM"
+                href="http://ibm.co/joinqiskitslack"
                 title="Slack community"
                 target="_blank"
                 @click="$trackClickEvent({

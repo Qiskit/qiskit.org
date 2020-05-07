@@ -42,7 +42,7 @@
   <span> · </span>
   <a href="https://qiskit.org/advocates/">Advocates</a>
   <span> · </span>
-  Support: <a href="https://join.slack.com/t/qiskit/shared_invite/enQtODQ2NTIyOTgwMTQ3LTI0NzM2NzkzZjJhNDgzZjY5MTQzNDY3MGNiZGQzNTNkZTE4Nzg1MjMwMmFjY2UwZTgyNDlmYWQwYmZjMjE1ZTM">Slack</a>
+  Support: <a href="http://ibm.co/joinqiskitslack">Slack</a>
 </h3>
 
 ## What’s In This Document
