@@ -71,7 +71,7 @@ export default class extends Vue {
 .element-presentation {
   &__description {
     @include body-long-04();
-    margin: $layout-01 0;
+    margin: $spacing-05 0;
   }
 
   &__logo {

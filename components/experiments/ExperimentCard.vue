@@ -98,13 +98,13 @@ export default class extends Vue {
 
   h3 {
     @include type-style('productive-heading-03');
-    margin-top: $layout-02;
+    margin-top: $spacing-06;
   }
 
   &__author {
     @include type-style('body-short-01');
     color: $purple-50;
-    margin-top: $layout-01;
+    margin-top: $spacing-05;
 
     &:before {
       content: "by ";

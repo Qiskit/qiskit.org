@@ -67,8 +67,7 @@ export default class extends Vue {
 
 .experiment-header-container {
   background-color: $ui-background;
-  padding-top: $layout-01;
-  padding-bottom: $layout-05;
+  padding-top: $spacing-05;
 
   & > div {
     @include framed();
@@ -83,7 +82,7 @@ export default class extends Vue {
 .experiment-header__meta {
   @include type-style('body-short-01');
   color: $purple-30;
-  margin: $layout-01 0;
+  margin: $spacing-05 0;
 }
 
 .experiment-header__author {
@@ -104,7 +103,7 @@ export default class extends Vue {
   display: inline-flex;
   text-decoration: none;
   color: $text-02;
-  margin-bottom: $layout-03;
+  margin-bottom: $spacing-07;
 
   &:hover {
     color: $text-02;
@@ -125,7 +124,7 @@ export default class extends Vue {
 }
 
 .experiment-header__media {
-  margin-top: $layout-01;
+  margin-top: $spacing-05;
   width: 100%;
 
   & > * {

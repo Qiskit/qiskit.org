@@ -40,8 +40,8 @@ export default class extends Vue {
 @import '~carbon-components/scss/globals/scss/typography';
 
 .page-section {
-  padding-top: $layout-05;
-  padding-bottom: $layout-05;
+  padding-top: $spacing-09;
+  padding-bottom: $spacing-09;
 
   &__layout {
     display: flex;

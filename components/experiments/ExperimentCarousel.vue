@@ -74,7 +74,6 @@ export default class extends Vue {
 
 <style lang="scss" scoped>
 @import '~carbon-components/scss/globals/scss/typography';
-
 .slide-link {
   display: block;
   text-decoration: none;
@@ -82,6 +81,7 @@ export default class extends Vue {
   height: 100%;
 }
 
+$back-experiment-offset: 1rem;
 .experiment-deck {
   position: relative;
   height: 350px;
@@ -90,7 +90,7 @@ export default class extends Vue {
     content: "";
     display: block;
     position: absolute;
-    bottom: -$layout-01;
+    bottom: -$back-experiment-offset;
     z-index: 1;
     width: 100%;
     height: 100px;
@@ -123,12 +123,12 @@ export default class extends Vue {
   &-copy {
     @include type-style('body-short-01');
     flex: 1;
-    margin: 0 $layout-01 $layout-01 $layout-01;
+    margin: 0 $spacing-05 $spacing-05 $spacing-05;
   }
 
   h3 {
     @include type-style('productive-heading-03');
-    margin: $layout-02 0;
+    margin: $spacing-06 0;
   }
 
   &-author {
@@ -146,9 +146,13 @@ export default class extends Vue {
   }
 }
 
+$switch-size: 2rem;
 .experiment-deck__switches {
+  $under-deck-offset: $back-experiment-offset + $switch-size;
   position: absolute;
-  right: 0; bottom: -$layout-05; left: 0;
+  right: 0;
+  bottom: -($under-deck-offset + $spacing-04);
+  left: 0;
   list-style: none;
   display: flex;
   justify-content: space-between;
@@ -156,8 +160,6 @@ export default class extends Vue {
 
 .experiment-deck__left-switch,
 .experiment-deck__right-switch {
-  $switch-size: 2rem;
-
   width: $switch-size;
   height: $switch-size;
   cursor: pointer;
@@ -172,8 +174,6 @@ export default class extends Vue {
 }
 
 /* Transition styles */
-$back-slide-offset: 1rem;
-
 .experiment-deck__slide-enter-active {
   transition: transform .8s;
 }
@@ -184,7 +184,7 @@ $back-slide-offset: 1rem;
 
 .experiment-deck__slide-enter {
   z-index: 1;
-  transform: scale(0.95) translateY($back-slide-offset);
+  transform: scale(0.95) translateY($back-experiment-offset);
 }
 
 .experiment-deck__slide-enter-to {
@@ -194,6 +194,6 @@ $back-slide-offset: 1rem;
 
 .experiment-deck__slide-leave-to {
   opacity: 0;
-  transform: scale(1.3) translateY(-2 * $back-slide-offset);
+  transform: scale(1.3) translateY(-2 * $back-experiment-offset);
 }
 </style>

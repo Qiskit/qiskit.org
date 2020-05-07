@@ -30,8 +30,8 @@ export default class extends Vue {
 
 .footer-title {
   @include type-style('productive-heading-03');
-  margin-top: $layout-03;
-  margin-bottom: $layout-02;
+  margin-top: $spacing-07;
+  margin-bottom: $spacing-06;
   padding-bottom: $spacing-03;
   border-bottom: 1px solid $ui-03;
 }

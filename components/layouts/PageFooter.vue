@@ -30,11 +30,6 @@ export default class extends Vue {
 </script>
 
 <style lang="scss" scoped>
-.page-footer-container {
-  margin-top: $layout-05;
-  padding-bottom: $layout-05;
-}
-
 .page-footer {
   display: flex;
   flex-direction: row;

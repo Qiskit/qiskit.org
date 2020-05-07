@@ -88,6 +88,7 @@ function serializableRenderFns ({ render, staticRenderFns }: RenderFns): Seriali
   background-color: $inverse-02;
   padding-top: 0;
   padding-bottom: $spacing-07;
+  margin-top: $layout-05;
 }
 
 .content {

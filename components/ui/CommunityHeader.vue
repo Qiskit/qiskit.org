@@ -56,8 +56,8 @@ export default class extends Vue {
   background-color: var(--community-header__background-color, $ui-background);
 
   height: 100%;
-  padding-top: $layout-05;
-  padding-bottom: $layout-05;
+  padding-top: $spacing-09;
+  padding-bottom: $spacing-09;
 
   &_background_gradient {
     background-image: linear-gradient(150deg,
@@ -103,27 +103,27 @@ export default class extends Vue {
     display: flex;
     flex-direction: row;
     color: $text-01;
-    margin-top: $layout-05;
+    margin-top: $spacing-09;
   }
 
   &__aside {
     &_position_start {
       margin-left: 0;
-      margin-right: $layout-03;
+      margin-right: $spacing-07;
 
       @include mq($until: medium) {
         margin: 0;
-        margin-bottom: $layout-03;
+        margin-bottom: $spacing-07;
       }
     }
 
     &_positon_end {
-      margin-left: $layout-03;
+      margin-left: $spacing-07;
       margin-right: 0;
 
       @include mq($until: medium) {
         margin: 0;
-        margin-bottom: $layout-03;
+        margin-bottom: $spacing-07;
       }
     }
   }

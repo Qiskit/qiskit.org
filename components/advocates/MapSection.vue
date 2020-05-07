@@ -70,7 +70,7 @@ export default class extends Vue {
   &__content {
     position: absolute;
     top: 0; right: 0; bottom: 0; left: 0;
-    padding-top: $layout-05;
+    padding-top: $spacing-09;
     width: 100%;
     height: 100%;
     z-index: 1;
