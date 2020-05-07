@@ -19,17 +19,16 @@
           and tracking to viewing detailed quantum device properties, the IBM Quantum
           Account connects the proven Qiskit software framework to the most
           advanced quantum computing platforms on the planet.
-          <a
+          <AppLink
             class="element__link"
-            href="https://qiskit.org/documentation/install.html#access-ibm-q-systems"
-            title="Link"
-            rel="noopener"
-            target="_blank"
-            @click="$trackClickEvent({
-              action: 'Link to Access IBMQ Systems'
-            })"
-          >
-            Follow these steps</a>
+            v-bind="{
+              url: 'https://qiskit.org/documentation/install.html#access-ibm-q-systems',
+              label: 'Follow these steps',
+              title:'Link',
+              segment: {
+                action: 'Link to Access IBMQ Systems'
+              }}"
+          />
           to set up your Qiskit environment to send jobs to IBM Quantum systems.
         </p>
       </article>
@@ -55,13 +54,15 @@ import ElementPresentation from '~/components/elements/ElementPresentation.vue'
 import PageSection from '~/components/ui/PageSection.vue'
 import SyntaxHighlight from '~/components/ui/SyntaxHighlight.vue'
 import Cta from '~/components/ui/Cta.vue'
+import AppLink from '~/components/ui/AppLink.vue'
 
 @Component({
   components: {
     Cta,
     ElementPresentation,
     PageSection,
-    SyntaxHighlight
+    SyntaxHighlight,
+    AppLink
   },
   head (this: QiskitElementPage) {
     return {
