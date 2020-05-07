@@ -1,13 +1,6 @@
 <template>
   <main class="element landing-page">
-    <ElementPresentation
-      class="element__presentation"
-      title="Welcome to Quantum"
-      image="/images/qiskit-logo.svg"
-      description="Qiskit is an open-source quantum computing software development framework for leveraging today's quantum processors in research, education, and business."
-      to="https://qiskit.org/documentation/install.html"
-      segment-action="Get Started"
-    />
+    <TheHeroMoment class="landing-page__presentation" />
     <PageSection class="landing-page__horizontal-section" framed>
       <div class="landing-page__multi-column-layout">
         <article class="landing-page__section">
@@ -230,14 +223,14 @@
 <script lang="ts">
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
-import ElementPresentation from '~/components/elements/ElementPresentation.vue'
+import TheHeroMoment from '~/components/landing/TheHeroMoment.vue'
 import PageSection from '~/components/ui/PageSection.vue'
 import Cta from '~/components/ui/Cta.vue'
 
 @Component({
   components: {
     Cta,
-    ElementPresentation,
+    TheHeroMoment,
     PageSection
   },
   head () {
@@ -254,6 +247,14 @@ export default class extends QiskitPage {
 @import '~carbon-components/scss/globals/scss/typography';
 
 .landing-page {
+  background-color: $white-background-ui;
+
+  &__presentation {
+    @include contained();
+    margin-top: $layout-06;
+    margin-bottom: $layout-06;
+  }
+
   &__horizontal-section {
     background-color: $inverse-02;
     margin-bottom: -2rem;
