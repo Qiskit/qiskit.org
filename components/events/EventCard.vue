@@ -1,8 +1,8 @@
 <template>
-  <a
-    :href="to"
+  <component
+    :is="to ? 'AppLink' : 'div'"
     class="card-link"
-    target="_blank"
+    v-bind="{ 'url': to }"
   >
     <article class="event-card">
       <div class="event-card__content">
@@ -40,14 +40,17 @@
         >
       </div>
     </article>
-  </a>
+  </component>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
+import AppLink from '~/components/ui/AppLink.vue'
 
-@Component
+@Component({
+  components: { AppLink }
+})
 export default class extends Vue {
   @Prop(String) type
   @Prop(String) title
