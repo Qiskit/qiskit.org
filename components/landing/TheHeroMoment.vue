@@ -41,14 +41,19 @@ export default class extends Vue {}
     flex-direction: column;
   }
 
+  &__version-info {
+    margin: 0 0 $spacing-09;
+    padding: 0;
+  }
+
   &__title {
-    margin: $layout-05 0;
+    margin: 0 0 $spacing-09;
     padding: 0;
     width: 100%;
   }
 
   &__description {
-    margin: 0 0 $layout-05;
+    margin: 0 0 $spacing-09;
     padding: 0 25% 0 0;
   }
 
