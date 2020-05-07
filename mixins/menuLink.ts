@@ -11,7 +11,11 @@ export default class extends Vue {
     return url.startsWith('mailto')
   }
 
+  isIdAnchor (url: string): boolean {
+    return url.startsWith('#')
+  }
+
   isInternal (url: string): boolean {
-    return !(this.isExternal(url) || this.isMail(url))
+    return !(this.isExternal(url) || this.isMail(url)) || this.isIdAnchor(url)
   }
 }
