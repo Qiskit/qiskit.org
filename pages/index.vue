@@ -20,7 +20,9 @@
             everything you need to know. Starting with installing Qiskit, to
             investigating the latest algorithms and research topics.
           </p>
-          <Cta :link="youtubeQiskitCtaLink" />
+          <Cta :link="youtubeQiskitCtaLink">
+            {{ youtubeQiskitCtaLink.label }}
+          </Cta>
         </article>
         <article class="landing-page__section">
           <h2 class="element__header">
@@ -30,7 +32,9 @@
             This activity pack will entertain your kids with fun activities
             about quantum computing. Fun for all kids and parents!
           </p>
-          <Cta :link="activitiesWithKidsCtaLink" is-static />
+          <Cta :link="activitiesWithKidsCtaLink" is-static>
+            {{ activitiesWithKidsCtaLink.label }}
+          </Cta>
         </article>
       </div>
     </PageSection>
@@ -48,7 +52,9 @@
             hosted tutorials. Work is saved in the cloud and automatically updated
             with every Qiskit release.
           </p>
-          <Cta :link="introQiskitNotebooksCtaLink" />
+          <Cta :link="introQiskitNotebooksCtaLink">
+            {{ introQiskitNotebooksCtaLink.label }}
+          </Cta>
         </article>
         <aside
           class="landing-page__section landing-page__section_flex_2"

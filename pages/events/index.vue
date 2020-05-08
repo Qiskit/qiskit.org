@@ -85,7 +85,9 @@
             <AppLink
               class="experiment-header__source-code-link"
               v-bind="eventRequestLink"
-            />
+            >
+              {{ eventRequestLink.label }}
+            </AppLink>
           </p>
         </div>
       </div>

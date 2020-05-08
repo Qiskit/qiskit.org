@@ -7,10 +7,7 @@
     :target="isExternal(url) ? '_blank' : null"
     @click="segment && $trackClickEvent(segment)"
   >
-    <template v-if="label">
-      {{ label }}
-    </template>
-    <slot v-else />
+    <slot />
   </component>
 </template>
 
@@ -21,7 +18,6 @@ import { Component, Prop } from 'vue-property-decorator'
 @Component
 export default class extends Vue {
   @Prop(String) url
-  @Prop(String) label
   @Prop(Object) segment
   @Prop({ type: Boolean, default: false }) isStatic
 

@@ -22,7 +22,9 @@
           <AppLink
             class="element__link"
             v-bind="linkToAccessIBMQSystems"
-          />
+          >
+            {{ linkToAccessIBMQSystems.label }}
+          </AppLink>
           to set up your Qiskit environment to send jobs to IBM Quantum systems.
         </p>
       </article>

@@ -23,10 +23,14 @@
         |
         <AppLink
           class="experiment-header__source-code-link"
-          v-bind="{ url: source, label: 'Explore the code'}"
-        />
+          v-bind="{ url: source }"
+        >
+          Explore the code
+        </AppLink>
       </p>
-      <Cta v-if="launch" :link="{ url: launch, label: 'Launch' }" />
+      <Cta v-if="launch" :link="{ url: launch }">
+        Launch
+      </Cta>
       <div class="experiment-header__media">
         <Media
           v-for="(url, index) in media"

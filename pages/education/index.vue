@@ -45,7 +45,9 @@
         </p>
         <ul class="actions">
           <li>
-            <Cta :link="youtubeAllEpisodesCtaLink" />
+            <Cta :link="youtubeAllEpisodesCtaLink">
+              {{ youtubeAllEpisodesCtaLink.label }}
+            </Cta>
           </li>
         </ul>
         <template #extra>
@@ -73,7 +75,9 @@
           </p>
           <ul class="actions">
             <li>
-              <Cta :link="discoverTextbookCtaLink" />
+              <Cta :link="discoverTextbookCtaLink">
+                {{ discoverTextbookCtaLink.label }}
+              </Cta>
             </li>
           </ul>
         </div>
@@ -95,7 +99,9 @@
         </p>
         <ul class="actions">
           <li>
-            <Cta :link="requestAnEventCtaLink" />
+            <Cta :link="requestAnEventCtaLink">
+              {{ requestAnEventCtaLink.label }}
+            </Cta>
           </li>
         </ul>
       </PageSection>

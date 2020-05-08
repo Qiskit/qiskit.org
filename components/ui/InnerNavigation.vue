@@ -7,8 +7,10 @@
             v-for="section in sections"
             :key="section.label"
             class="navigation-group__item"
-            v-bind="{ url: `#${section.anchor}`, label: section.label}"
-          />
+            v-bind="{ url: `#${section.anchor}` }"
+          >
+            {{ section.label }}
+          </AppLink>
         </nav>
       </div>
     </div>

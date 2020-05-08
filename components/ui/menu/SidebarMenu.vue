@@ -9,14 +9,18 @@
       class="sidebar-menu__link"
       :class="{ 'sidebar-menu__link_active': isActive(link) }"
       v-bind="link"
-    />
+    >
+      {{ link.label }}
+    </AppLink>
     <h2 class="sidebar-menu__title">
       Learn more
     </h2>
     <AppLink
       class="sidebar-menu__link"
       v-bind="communityLink"
-    />
+    >
+      {{ communityLink.label }}
+    </AppLink>
     <div
       v-if="isCommunityActive()"
       class="sidebar-menu__second-level"
@@ -27,7 +31,9 @@
         class="sidebar-menu__link sidebar-menu__link_secondary"
         :class="{ 'sidebar-menu__link_active': isActive(link) }"
         v-bind="link"
-      />
+      >
+        {{ link.label }}
+      </AppLink>
     </div>
     <AppLink
       v-for="link in learnMore"
@@ -35,7 +41,9 @@
       class="sidebar-menu__link"
       :class="{ 'sidebar-menu__link_active': isActive(link) }"
       v-bind="link"
-    />
+    >
+      {{ link.label }}
+    </AppLink>
   </nav>
 </template>
 

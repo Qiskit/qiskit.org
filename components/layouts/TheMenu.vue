@@ -2,14 +2,18 @@
   <div class="menu">
     <section class="menu__mobile" tabindex="-1">
       <Menu20 class="menu__hamburguer-link" />
-      <AppLink class="menu__link" v-bind="homeLink" />
+      <AppLink class="menu__link" v-bind="homeLink">
+        {{ homeLink.label }}
+      </AppLink>
       <div class="menu__overlay" />
       <SidebarMenu class="menu__side-menu" />
     </section>
     <div class="menu__main-level-wrapper">
       <section class="menu__main-level">
         <nav class="menu__nav-section">
-          <AppLink class="menu__link" v-bind="homeLink" />
+          <AppLink class="menu__link" v-bind="homeLink">
+            {{ homeLink.label }}
+          </AppLink>
           <div class="menu__separator" />
           <AppLink
             v-for="link in qiskitElements"
@@ -17,7 +21,9 @@
             class="menu__link"
             :class="{ 'menu__link_active': isActive(link) }"
             v-bind="link"
-          />
+          >
+            {{ link.label }}
+          </AppLink>
         </nav>
         <nav class="menu__nav-section">
           <AppLink
@@ -26,7 +32,9 @@
             class="menu__link"
             :class="{ 'menu__link_active': isActive(link) }"
             v-bind="link"
-          />
+          >
+            {{ link.label }}
+          </AppLink>
         </nav>
       </section>
     </div>
@@ -41,7 +49,9 @@
           class="menu__link"
           :class="{ 'menu__link_active': isActive(link) }"
           v-bind="link"
-        />
+        >
+          {{ link.label }}
+        </AppLink>
       </nav>
     </section>
   </div>

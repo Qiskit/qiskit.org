@@ -8,7 +8,9 @@
       :key="element.label"
       class="footer-subsection__link"
       v-bind="element"
-    />
+    >
+      {{ element.label }}
+    </AppLink>
   </div>
 </template>
 

@@ -20,12 +20,13 @@
         class="element-presentation__get-started-cta"
         :link="{
           url: to,
-          label: 'Get Started!',
           segment: {
             action: segmentAction
           }
         }"
-      />
+      >
+        Get Started!
+      </Cta>
       <Cta
         v-if="sources"
         class="element-presentation__github-cta"
