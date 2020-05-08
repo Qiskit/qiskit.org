@@ -47,17 +47,22 @@ export default class extends Vue {}
   }
 
   &__title {
+    @include type-style('display-01', true);
+    color: $white-text-01;
     margin: 0 0 $spacing-09;
     padding: 0;
     width: 100%;
   }
 
   &__description {
+    @include type-style('body-short-02');
+    color: $white-text-01;
     margin: 0 0 $spacing-09;
     padding: 0 25% 0 0;
   }
 
   &__cta {
+    @include type-style('body-short-01');
     margin-top: auto;
   }
 }
