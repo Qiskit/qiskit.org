@@ -15,16 +15,32 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Mixins } from 'vue-property-decorator'
-import MenuLinkMixin from '~/mixins/menuLink'
+import Vue from 'vue'
+import { Component, Prop } from 'vue-property-decorator'
 
 @Component
-export default class extends Mixins(MenuLinkMixin) {
+export default class extends Vue {
   @Prop(String) url
   @Prop(String) label
   @Prop(Object) segment
   @Prop({ type: Boolean, default: false }) isStatic
 
   isNuxtLink = !this.isStatic && this.isInternal(this.url)
+
+  isExternal (url: string): boolean {
+    return url.startsWith('http')
+  }
+
+  isMail (url: string): boolean {
+    return url.startsWith('mailto')
+  }
+
+  isIdAnchor (url: string): boolean {
+    return url.startsWith('#')
+  }
+
+  isInternal (url: string): boolean {
+    return !(this.isExternal(url) || this.isMail(url)) || this.isIdAnchor(url)
+  }
 }
 </script>
