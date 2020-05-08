@@ -1,6 +1,9 @@
 <template>
   <main class="element landing-page">
-    <TheHeroMoment class="landing-page__presentation" />
+    <div class="landing-page__presentation-container">
+      <div class="landing-page__presentation-picture" />
+      <TheHeroMoment class="landing-page__presentation" />
+    </div>
     <PageSection class="landing-page__horizontal-section" framed>
       <div class="landing-page__multi-column-layout">
         <article class="landing-page__section">
@@ -249,10 +252,40 @@ export default class extends QiskitPage {
 .landing-page {
   background-color: $white-background-ui;
 
+  &__presentation-container {
+    position: relative;
+    padding-top: $layout-05;
+    padding-bottom: $layout-05;
+    background-attachment: fixed;
+    background-size:
+      2rem 2rem,
+      2rem 2rem;
+    background-image:
+      linear-gradient(to right, $cool-gray-10 1px, transparent 1px),
+      linear-gradient(to bottom, $cool-gray-10 1px, transparent 1px);
+    background-position:
+      -1rem center,
+      -1rem center;
+    background-repeat:
+      repeat,
+      repeat;
+  }
+
+  &__presentation-picture {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    left: 40%;
+    left: unquote("max(40%, #{$small})");
+    background: url('/images/menda.png') no-repeat;
+    background-attachment: fixed;
+    background-size: 50rem 50rem;
+    background-position: left  unquote("max(40vw, #{$small})") top 5rem;
+  }
+
   &__presentation {
     @include contained();
-    margin-top: $layout-06;
-    margin-bottom: $layout-06;
   }
 
   &__horizontal-section {

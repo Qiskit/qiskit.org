@@ -35,15 +35,28 @@ export default class extends Vue {}
 @import '~carbon-components/scss/globals/scss/typography';
 
 .the-hero-moment {
+  position: relative;
   display: flex;
   padding: 0 $spacing-05;
 
+  &__picture {
+    position: absolute;
+    top: -12rem;
+    right: -14rem;
+  }
+
   &__content {
+    position: relative;
     margin: 0;
     padding: 0;
-    width: 50%;
+    max-width: $medium / 2;
     display: flex;
     flex-direction: column;
+
+    @include mq($from: medium) {
+      width: 50%;
+      max-width: unset;
+    }
   }
 
   &__version-info {
@@ -62,7 +75,7 @@ export default class extends Vue {}
   &__description {
     @include type-style('body-short-02');
     color: $white-text-01;
-    margin: 0 0 $spacing-09;
+    margin: 0 0 (3 * $spacing-09);
     padding: 0 25% 0 0;
   }
 
