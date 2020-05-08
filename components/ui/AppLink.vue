@@ -1,8 +1,8 @@
 <template>
   <component
-    :is="!isStatic && isInternal(url) ? 'nuxt-link' : 'a'"
+    :is="isNuxtLink ? 'nuxt-link' : 'a'"
     :href="url"
-    :to="!isStatic && isInternal(url) ? url : null"
+    :to="isNuxtLink ? url : null"
     :rel="isExternal(url) ? 'noopener' : null"
     :target="isExternal(url) ? '_blank' : null"
     :title="title"
@@ -26,5 +26,7 @@ export default class extends Mixins(MenuLinkMixin) {
   @Prop(String) title
   @Prop(Object) segment
   @Prop({ type: Boolean, default: false }) isStatic
+
+  isNuxtLink = !this.isStatic && this.isInternal(this.url)
 }
 </script>
