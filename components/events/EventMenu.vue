@@ -45,7 +45,7 @@ nav {
   position: fixed;
   top: 0;
   z-index: 100;
-  box-shadow: 0px 0px 16px $gray-100-a30;
+  box-shadow: 0px 0px 16px rgba($gray-100, 0.3);
   background-color: $inverse-02;
   flex-wrap: wrap;
   min-height: 63px;

@@ -28,7 +28,7 @@
     z-index: 1;
     width: 100%;
     height: 100px;
-    box-shadow: 0 23px 35px 0 $gray-100-a30;
+    box-shadow: 0 23px 35px 0 rgba($gray-100, 0.3);
     border-radius: 8px;
     transform-origin: center bottom;
     transform: scale(0.95);
@@ -50,7 +50,7 @@
     opacity: 1;
     z-index: 2;
     transform: scale(1);
-    box-shadow: 0 23px 35px 0 $gray-100-a30;
+    box-shadow: 0 23px 35px 0 rgba($gray-100, 0.3);
   }
 
   &--out {
