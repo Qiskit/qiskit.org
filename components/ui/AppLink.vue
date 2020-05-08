@@ -5,7 +5,6 @@
     :to="isNuxtLink ? url : null"
     :rel="isExternal(url) ? 'noopener' : null"
     :target="isExternal(url) ? '_blank' : null"
-    :title="title"
     @click="segment && $trackClickEvent(segment)"
   >
     <template v-if="label">
@@ -23,7 +22,6 @@ import MenuLinkMixin from '~/mixins/menuLink'
 export default class extends Mixins(MenuLinkMixin) {
   @Prop(String) url
   @Prop(String) label
-  @Prop(String) title
   @Prop(Object) segment
   @Prop({ type: Boolean, default: false }) isStatic
 
