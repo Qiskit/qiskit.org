@@ -1,10 +1,11 @@
 <template>
   <component
     :is="isNuxtLink ? 'nuxt-link' : 'a'"
-    :href="url"
-    :to="isNuxtLink ? url : null"
-    :rel="isExternal(url) ? 'noopener' : null"
-    :target="isExternal(url) ? '_blank' : null"
+    :href="isAnchor && url"
+    :to="isNuxtLink && url"
+    style="cursor:pointer"
+    :rel="isExternal && 'noopener'"
+    :target="isExternal && '_blank'"
     @click="segment && $trackClickEvent(segment)"
   >
     <slot />
@@ -21,22 +22,10 @@ export default class extends Vue {
   @Prop(Object) segment
   @Prop({ type: Boolean, default: false }) isStatic
 
-  isNuxtLink = !this.isStatic && this.isInternal(this.url)
-
-  isExternal (url: string): boolean {
-    return url.startsWith('http')
-  }
-
-  isMail (url: string): boolean {
-    return url.startsWith('mailto')
-  }
-
-  isIdAnchor (url: string): boolean {
-    return url.startsWith('#')
-  }
-
-  isInternal (url: string): boolean {
-    return !(this.isExternal(url) || this.isMail(url)) || this.isIdAnchor(url)
-  }
+  isExternal: boolean = this.url.startsWith('http')
+  isMail: boolean = this.url.startsWith('mailto')
+  isIdAnchor: boolean = this.url.startsWith('#')
+  isAnchor: boolean = this.isExternal || this.isMail || this.isIdAnchor || this.isStatic
+  isNuxtLink: boolean = !this.isAnchor
 }
 </script>
