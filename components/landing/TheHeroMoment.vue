@@ -1,19 +1,20 @@
 <template>
   <section class="the-hero-moment">
     <article class="the-hero-moment__content">
-      <section class="the-hero-moment__version-info">
-        qiskit version info
-      </section>
+      <VersionInfo class="the-hero-moment__version-info" />
       <h1 class="the-hero-moment__title">
-        Open-Source Quantum Computing
+        Open-Source Quantum Development
       </h1>
       <p class="the-hero-moment__description">
         Qiskit [kiss-kit] is an open source SDK for working with quantum
         computers at the level of pulses, circuits and algorithms.
       </p>
-      <section class="the-hero-moment__cta">
+      <LandingCta
+        class="the-hero-moment__cta"
+        href="https://qiskit.org/documentation/install.html"
+      >
         Get started
-      </section>
+      </LandingCta>
     </article>
   </section>
 </template>
@@ -21,8 +22,12 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
+import VersionInfo from './VersionInfo.vue'
+import LandingCta from './LandingCta.vue'
 
-@Component
+@Component({
+  components: { VersionInfo, LandingCta }
+})
 export default class extends Vue {}
 </script>
 
