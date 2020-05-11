@@ -269,6 +269,8 @@ export default class extends QiskitPage {
     background-repeat:
       repeat,
       repeat;
+
+    overflow: hidden;
   }
 
   &__presentation-picture {
