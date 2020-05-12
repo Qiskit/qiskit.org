@@ -27,14 +27,14 @@ export default class extends Vue {
 <style lang="scss" scoped>
 .footer-column {
   flex: 1;
-  margin-right: $spacing-07;
+  margin-right: $layout-03;
 
   &:last-child {
     margin-right: 0;
   }
 
   @include mq($until: medium) {
-    margin-top: $spacing-07;
+    margin-top: $layout-03;
     margin-right: 0;
   }
 }
