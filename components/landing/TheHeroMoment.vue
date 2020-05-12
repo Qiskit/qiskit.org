@@ -39,12 +39,6 @@ export default class extends Vue {}
   display: flex;
   padding: 0 $spacing-05;
 
-  &__picture {
-    position: absolute;
-    top: -12rem;
-    right: -14rem;
-  }
-
   &__content {
     position: relative;
     margin: 0;

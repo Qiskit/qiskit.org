@@ -279,7 +279,11 @@ export default class extends QiskitPage {
     top: 0;
     bottom: 0;
     left: 40%;
+    // Not a duplicate. CSS max function is not fully supported yet and the
+    // previous value is provided as fallback.
     left: unquote("max(40%, #{$small})");
+    // TODO: Replace with the final illustration and change the name
+    // accordingly. Issue #598
     background: url('/images/menda.png') no-repeat;
     background-attachment: fixed;
     background-size: 50rem 50rem;
