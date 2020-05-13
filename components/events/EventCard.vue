@@ -2,7 +2,7 @@
   <component
     :is="to ? 'AppLink' : 'div'"
     class="card-link"
-    v-bind="{ 'url': to }"
+    :url="to"
   >
     <article class="event-card">
       <div class="event-card__content">

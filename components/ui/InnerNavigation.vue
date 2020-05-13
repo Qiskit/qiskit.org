@@ -7,7 +7,7 @@
             v-for="section in sections"
             :key="section.label"
             class="navigation-group__item"
-            v-bind="{ url: `#${section.anchor}` }"
+            :url="`#${section.anchor}`"
           >
             {{ section.label }}
           </AppLink>

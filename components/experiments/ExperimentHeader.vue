@@ -3,7 +3,7 @@
     <div>
       <AppLink
         class="experiment-header__back-navigation"
-        v-bind="{ url: '/experiments' }"
+        :url="'/experiments'"
       >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11 18">
           <path fill="#999" d="M8.681.196l2.121 2.12-8.484 8.487-2.12-2.12z" />
@@ -23,7 +23,7 @@
         |
         <AppLink
           class="experiment-header__source-code-link"
-          v-bind="{ url: source }"
+          :url="source"
         >
           Explore the code
         </AppLink>

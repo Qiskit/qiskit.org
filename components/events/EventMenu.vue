@@ -3,7 +3,7 @@
     <section class="ibm-research">
       <AppLink
         class="text-logo"
-        v-bind="{ url: '/'}"
+        :url="'/'"
       >
         <img class="logo" alt="Qiskit logo" src="https://qiskit.camp/img/qiskit-logo.png">&nbsp;Qiskit
       </AppLink>
