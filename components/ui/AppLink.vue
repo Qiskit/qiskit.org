@@ -22,10 +22,24 @@ export default class extends Vue {
   @Prop(Object) segment
   @Prop({ type: Boolean, default: false }) isStatic
 
-  isExternal: boolean = this.url.startsWith('http')
-  isMail: boolean = this.url.startsWith('mailto')
-  isIdAnchor: boolean = this.url.startsWith('#')
-  isAnchor: boolean = this.isExternal || this.isMail || this.isIdAnchor || this.isStatic
-  isNuxtLink: boolean = !this.isAnchor
+  get isExternal (): boolean {
+    return this.url.startsWith('http')
+  }
+
+  get isMail (): boolean {
+    return this.url.startsWith('mailto')
+  }
+
+  get isIdAnchor (): boolean {
+    return this.url.startsWith('#')
+  }
+
+  get isAnchor (): boolean {
+    return this.isExternal || this.isMail || this.isIdAnchor || this.isStatic
+  }
+
+  get isNuxtLink (): boolean {
+    return !this.isAnchor
+  }
 }
 </script>
