@@ -45,7 +45,7 @@
         </p>
         <ul class="actions">
           <li>
-            <Cta :link="youtubeAllEpisodesCtaLink">
+            <Cta v-bind="youtubeAllEpisodesCtaLink">
               {{ youtubeAllEpisodesCtaLink.label }}
             </Cta>
           </li>
@@ -75,7 +75,7 @@
           </p>
           <ul class="actions">
             <li>
-              <Cta :link="discoverTextbookCtaLink">
+              <Cta v-bind="discoverTextbookCtaLink">
                 {{ discoverTextbookCtaLink.label }}
               </Cta>
             </li>
@@ -99,7 +99,7 @@
         </p>
         <ul class="actions">
           <li>
-            <Cta :link="requestAnEventCtaLink">
+            <Cta v-bind="requestAnEventCtaLink">
               {{ requestAnEventCtaLink.label }}
             </Cta>
           </li>

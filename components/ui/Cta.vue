@@ -1,7 +1,7 @@
 <template>
   <AppLink
     class="cta"
-    v-bind="link"
+    v-bind="$attrs"
   >
     <slot />
   </AppLink>
@@ -9,15 +9,13 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
+import { Component } from 'vue-property-decorator'
 import AppLink from '~/components/ui/AppLink.vue'
 
 @Component({
   components: { AppLink }
 })
-export default class extends Vue {
-  @Prop(Object) link
-}
+export default class extends Vue {}
 </script>
 
 <style lang="scss" scoped>

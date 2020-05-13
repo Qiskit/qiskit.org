@@ -18,7 +18,7 @@
       <Cta
         v-if="to"
         class="element-presentation__get-started-cta"
-        :link="{
+        v-bind="{
           url: to,
           segment: {
             action: segmentAction
@@ -30,7 +30,7 @@
       <Cta
         v-if="sources"
         class="element-presentation__github-cta"
-        :link="{
+        v-bind="{
           url: sources,
           segment: {
             action: segmentAction
