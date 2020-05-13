@@ -3,7 +3,7 @@
     :is="isNuxtLink ? 'nuxt-link' : 'a'"
     :href="isAnchor && url"
     :to="isNuxtLink && url"
-    style="cursor:pointer"
+    :style="hasLink && 'cursor:pointer'"
     :rel="isExternal && 'noopener'"
     :target="isExternal && '_blank'"
     @click="segment && $trackClickEvent(segment)"
@@ -21,6 +21,10 @@ export default class extends Vue {
   @Prop({ type: String, default: '' }) url
   @Prop(Object) segment
   @Prop({ type: Boolean, default: false }) isStatic
+
+  get hasLink (): boolean {
+    return this.url
+  }
 
   get isExternal (): boolean {
     return this.url.startsWith('http')
