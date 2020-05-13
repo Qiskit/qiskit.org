@@ -74,7 +74,6 @@ export default class extends Vue {
 
 <style lang="scss" scoped>
 @import '~carbon-components/scss/globals/scss/typography';
-
 .slide-link {
   display: block;
   text-decoration: none;
@@ -82,6 +81,7 @@ export default class extends Vue {
   height: 100%;
 }
 
+$back-experiment-offset: 1rem;
 .experiment-deck {
   position: relative;
   height: 350px;
@@ -90,7 +90,7 @@ export default class extends Vue {
     content: "";
     display: block;
     position: absolute;
-    bottom: -1rem;
+    bottom: -$back-experiment-offset;
     z-index: 1;
     width: 100%;
     height: 100px;
@@ -123,18 +123,17 @@ export default class extends Vue {
   &-copy {
     @include type-style('body-short-01');
     flex: 1;
-    margin: 0.5rem 1rem 1em;
+    margin: 0 $spacing-05 $spacing-05 $spacing-05;
   }
 
   h3 {
     @include type-style('productive-heading-03');
-    margin-top: 1.5rem;
+    margin: $spacing-06 0;
   }
 
   &-author {
     @include type-style('body-short-01');
     color: $purple-30;
-    margin-top: 0.5rem;
 
     &:before {
       content: "by ";
@@ -147,9 +146,13 @@ export default class extends Vue {
   }
 }
 
+$switch-size: 2rem;
 .experiment-deck__switches {
+  $under-deck-offset: $back-experiment-offset + $switch-size;
   position: absolute;
-  right: 0; bottom: -4rem; left: 0;
+  right: 0;
+  bottom: -($under-deck-offset + $spacing-04);
+  left: 0;
   list-style: none;
   display: flex;
   justify-content: space-between;
@@ -157,12 +160,12 @@ export default class extends Vue {
 
 .experiment-deck__left-switch,
 .experiment-deck__right-switch {
-  width: 2rem;
-  height: 2rem;
+  width: $switch-size;
+  height: $switch-size;
   cursor: pointer;
 
   & svg {
-    height: 2rem;
+    height: $switch-size;
   }
 
   &:hover path {
@@ -181,7 +184,7 @@ export default class extends Vue {
 
 .experiment-deck__slide-enter {
   z-index: 1;
-  transform: scale(0.95) translateY(1rem);
+  transform: scale(0.95) translateY($back-experiment-offset);
 }
 
 .experiment-deck__slide-enter-to {
@@ -191,6 +194,6 @@ export default class extends Vue {
 
 .experiment-deck__slide-leave-to {
   opacity: 0;
-  transform: scale(1.3) translateY(-2rem);
+  transform: scale(1.3) translateY(-2 * $back-experiment-offset);
 }
 </style>

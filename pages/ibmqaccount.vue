@@ -3,7 +3,7 @@
     <ElementPresentation
       class="element__presentation"
       :title="title"
-      image="/images/qiskit-ibmqp-logo.svg"
+      logo="/images/qiskit-ibmqp-logo.svg"
       :description="description"
       sources="https://github.com/Qiskit/qiskit-ibmq-provider"
       segment-action="IBM Q Account: GitHub Repository"
@@ -33,7 +33,7 @@
           to set up your Qiskit environment to send jobs to IBM Quantum systems.
         </p>
       </article>
-      <template #extra>
+      <template #aside>
         <article class="element__example">
           <h2 class="element__header">
             Example

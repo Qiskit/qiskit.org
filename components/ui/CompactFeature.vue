@@ -30,11 +30,13 @@ export default class extends Vue {
 @import '~carbon-components/scss/globals/scss/typography';
 
 .compact-feature {
+  $feature-icon-size: 3.75rem;
+
   &__icon {
     position: relative;
-    width: 3.75rem;
-    height: 3.75rem;
-    margin-bottom: 1rem;
+    width: $feature-icon-size;
+    height: $feature-icon-size;
+    margin-bottom: $spacing-05;
   }
 
   &__title {
@@ -43,7 +45,7 @@ export default class extends Vue {
 
   &__description {
     @include body-long-04();
-    margin-top: 0.5rem;
+    margin-top: $spacing-03;
   }
 }
 </style>

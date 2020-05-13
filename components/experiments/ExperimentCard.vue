@@ -89,7 +89,7 @@ export default class extends Vue {
 
   &__copy {
     @include type-style('body-short-01');
-    margin: 0.5rem 1rem 1em;
+    margin: $spacing-03 $spacing-05 $spacing-05;
 
     &--horizontal {
       flex: 1;
@@ -98,13 +98,13 @@ export default class extends Vue {
 
   h3 {
     @include type-style('productive-heading-03');
-    margin-top: 1.5rem;
+    margin-top: $spacing-06;
   }
 
   &__author {
     @include type-style('body-short-01');
     color: $purple-50;
-    margin-top: 0.5rem;
+    margin-top: $spacing-05;
 
     &:before {
       content: "by ";

@@ -160,7 +160,7 @@ main {
 }
 
 .actions {
-  margin-top: 1rem;
+  margin-top: $layout-01;
   list-style: none;
   display: flex;
   flex-direction: row;
@@ -175,12 +175,12 @@ main {
 
     @include mq($until: medium) {
       text-align: center;
-      margin-top: 2rem;
+      margin-top: $layout-03;
     }
   }
 
   .compact-feature {
-    padding-right: 1rem;
+    padding-right: $layout-01;
 
     &:last-child {
       padding-right: 0;
@@ -198,7 +198,7 @@ main {
   background-color: $inverse-02;
 
   ol {
-    margin-top: 1rem;
+    margin-top: $layout-01;
     list-style-position: inside;
     list-style-type: decimal;
   }
@@ -216,14 +216,14 @@ main {
   color: $text-01;
 
   .advocate-cards-container {
-    margin-top: 3rem;
+    margin-top: $layout-04;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
+    gap: $spacing-05;
 
     & > * {
       @include mq($until: medium) {
-        margin-bottom: 1rem;
+        margin-bottom: $layout-01;
       }
     }
 
