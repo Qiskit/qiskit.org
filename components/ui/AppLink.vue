@@ -18,7 +18,7 @@ import { Component, Prop } from 'vue-property-decorator'
 
 @Component
 export default class extends Vue {
-  @Prop(String) url
+  @Prop({ type: String, default: '' }) url
   @Prop(Object) segment
   @Prop({ type: Boolean, default: false }) isStatic
 

@@ -1,6 +1,5 @@
 <template>
-  <component
-    :is="to ? 'AppLink' : 'div'"
+  <AppLink
     class="card-link"
     :url="to"
   >
@@ -40,7 +39,7 @@
         >
       </div>
     </article>
-  </component>
+  </AppLink>
 </template>
 
 <script lang="ts">
