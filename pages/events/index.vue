@@ -229,11 +229,11 @@ export default class extends QiskitPage {
 
     h1 {
       @include type-style('productive-heading-07');
-      padding-left: 1rem;
+      padding-left: $layout-01;
 
       @include mq($until: medium) {
         @include type-style('productive-heading-06');
-        margin-top: 1rem;
+        margin-top: $layout-01;
       }
     }
   }
@@ -248,7 +248,7 @@ export default class extends QiskitPage {
   }
 
   &__filters-time {
-    margin-top: 2rem;
+    margin-top: $layout-03;
   }
 
   /*
@@ -309,7 +309,7 @@ export default class extends QiskitPage {
   width: 100%;
 
   & > * {
-    margin: 1rem;
+    margin: $layout-01;
   }
 }
 </style>

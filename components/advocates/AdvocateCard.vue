@@ -61,7 +61,7 @@ export default class extends Vue {
   }
 
   &__copy {
-    margin: 0.5rem 2rem 1em;
+    margin: $spacing-05 $spacing-07 $spacing-05;
   }
 
   &__name, &__focus-areas-title {
@@ -69,7 +69,7 @@ export default class extends Vue {
   }
 
   &__focus-areas-title {
-    margin-top: 1.5rem;
+    margin-top: $spacing-06;
   }
 
   &__location, &__focus-areas {

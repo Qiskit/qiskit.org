@@ -44,7 +44,7 @@ export default class extends Vue {
   border: 2px solid;
 
   @include type-style('productive-heading-02');
-  padding: 0.66rem 1rem;
+  padding: $spacing-04 $spacing-05;
   border-color: $interactive-01;
   text-transform: uppercase;
   white-space: nowrap;

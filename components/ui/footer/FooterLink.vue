@@ -32,7 +32,7 @@ export default class extends Mixins(MenuLinkMixin) {
   text-decoration: none;
   display: inline-block;
   width: 100%;
-  margin-top: .5rem;
+  margin-bottom: $layout-01;
 
   &:hover {
     color: $text-01;

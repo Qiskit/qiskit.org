@@ -3,7 +3,7 @@
     <ElementPresentation
       class="element__presentation"
       :title="title"
-      image="/images/qiskit-ignis-logo.svg"
+      logo="/images/qiskit-ignis-logo.svg"
       :description="description"
       sources="https://github.com/Qiskit/qiskit-ignis"
       segment-action="Qiskit Ignis: GitHub Repository"
@@ -29,7 +29,7 @@
         </h2>
         <SoftwareStack :stack="elementStack" />
       </article>
-      <template #extra>
+      <template #aside>
         <article class="element__example">
           <h2 class="element__header">
             Example

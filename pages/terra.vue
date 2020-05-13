@@ -3,7 +3,7 @@
     <ElementPresentation
       class="element__presentation"
       :title="title"
-      image="/images/qiskit-terra-logo.svg"
+      logo="/images/qiskit-terra-logo.svg"
       :description="description"
       sources="https://github.com/Qiskit/qiskit-terra"
       segment-action="Qiskit Terra: GitHub Repository"
@@ -27,7 +27,7 @@
         </h2>
         <SoftwareStack :stack="elementStack" />
       </article>
-      <template #extra>
+      <template #aside>
         <article class="element_example">
           <h2 class="element__header">
             Example

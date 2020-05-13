@@ -70,7 +70,7 @@ export default class extends Vue {
   &__content {
     position: absolute;
     top: 0; right: 0; bottom: 0; left: 0;
-    padding-top: 4rem;
+    padding-top: $spacing-09;
     width: 100%;
     height: 100%;
     z-index: 1;
@@ -91,7 +91,7 @@ export default class extends Vue {
   position: relative;
   color: $inverse-01;
   background-color: var(--bubble-color);
-  padding: 0.4rem 0.6rem;
+  padding: $spacing-03 $spacing-04;
   transform: translateX(-50%);
   border-radius: 2px;
 
