@@ -17,19 +17,35 @@ export default class extends Vue {}
 @import '~carbon-components/scss/globals/scss/typography';
 
 .landing-cta {
-  height: 5rem;
-  width: 16rem;
-  padding: $spacing-05;
+  @include type-style('body-short-01');
+  position: relative;
+  min-height: 5rem;
+  max-width: 20rem;
+  min-width: 8.75rem;
+  // From the Carbon component <cv-button>
+  padding: calc(.875rem - 3px) 3.75rem calc(.875rem - 3px) 0.75rem;
   color: $white-inverse-01;
   text-decoration: none;
   background-color: $purple-70;
+  align-self: flex-start;
   display: inline-flex;
   flex-direction: row;
   align-items: center;
+  width: 75%;
+
+  @include mq($from: medium, $until: large) {
+    min-height: 4rem;
+  }
+
+  @include mq($until: medium) {
+    width: 60%;
+    min-height: 4rem;
+  }
 
   &__icon {
+    position: absolute;
+    right: 1rem;
     fill: currentColor;
-    margin-left: auto;
   }
 }
 </style>

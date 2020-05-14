@@ -100,7 +100,6 @@ export default class extends Vue {}
 
   &__cta {
     @include type-style('body-short-01');
-    margin-top: auto;
   }
 }
 </style>
