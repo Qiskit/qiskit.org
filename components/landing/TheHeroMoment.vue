@@ -36,7 +36,6 @@ export default class extends Vue {}
 
 .the-hero-moment {
   position: relative;
-  display: flex;
   padding: 0 $spacing-05;
 
   &__content {
@@ -56,6 +55,14 @@ export default class extends Vue {}
   &__version-info {
     margin: 0 0 $spacing-09;
     padding: 0;
+
+    @include mq($until: large) {
+      margin: 0 0 $spacing-08;
+    }
+
+    @include mq($until: medium) {
+      margin: 0 0 $spacing-07;
+    }
   }
 
   &__title {
@@ -64,13 +71,31 @@ export default class extends Vue {}
     margin: 0 0 $spacing-09;
     padding: 0;
     width: 100%;
+
+    @include mq($from: medium, $until: large) {
+      margin: 0 0 $spacing-08;
+    }
+
+    @include mq($until: medium) {
+      margin: 0 0 $spacing-07;
+    }
   }
 
   &__description {
     @include type-style('body-short-02');
     color: $white-text-01;
-    margin: 0 0 (3 * $spacing-09);
+    margin: 0 0 $layout-07;
     padding: 0 25% 0 0;
+
+    @include mq($from: medium, $until: large) {
+      @include type-style('body-short-01');
+      margin: 0 0 $layout-06;
+    }
+
+    @include mq($until: medium) {
+      @include type-style('body-short-01');
+      margin: 0 0 $layout-05;
+    }
   }
 
   &__cta {

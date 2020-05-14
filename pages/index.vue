@@ -256,7 +256,6 @@ export default class extends QiskitPage {
     position: relative;
     padding-top: $layout-05;
     padding-bottom: $layout-05;
-    background-attachment: fixed;
     background-size:
       2rem 2rem,
       2rem 2rem;
@@ -271,6 +270,16 @@ export default class extends QiskitPage {
       repeat;
 
     overflow: hidden;
+
+    @include mq($from: medium, $until: large) {
+      padding-top: $layout-04;
+      padding-bottom: $layout-04;
+    }
+
+    @include mq($until: medium) {
+      padding-top: $layout-03;
+      padding-bottom: $layout-03;
+    }
   }
 
   &__presentation-picture {
@@ -279,15 +288,14 @@ export default class extends QiskitPage {
     top: 0;
     bottom: 0;
     left: 40%;
-    // Not a duplicate. CSS max function is not fully supported yet and the
-    // previous value is provided as fallback.
-    left: unquote("max(40%, #{$small})");
     // TODO: Replace with the final illustration and change the name
     // accordingly. Issue #598
     background: url('/images/menda.png') no-repeat;
-    background-attachment: fixed;
-    background-size: 50rem 50rem;
-    background-position: left  unquote("max(40vw, #{$small})") top 5rem;
+    background-size: contain;
+
+    @include mq($until: 0.9 * $medium) {
+      display: none;
+    }
   }
 
   &__presentation {
