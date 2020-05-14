@@ -257,8 +257,8 @@ export default class extends QiskitPage {
     padding-top: $layout-05;
     padding-bottom: $layout-05;
     background-size:
-      2rem 2rem,
-      2rem 2rem;
+      5rem 5rem,
+      5rem 5rem;
     background-image:
       linear-gradient(to right, $cool-gray-10 1px, transparent 1px),
       linear-gradient(to bottom, $cool-gray-10 1px, transparent 1px);
@@ -274,11 +274,17 @@ export default class extends QiskitPage {
     @include mq($from: medium, $until: large) {
       padding-top: $layout-04;
       padding-bottom: $layout-04;
+      background-size:
+        3rem 3rem,
+        3rem 3rem;
     }
 
     @include mq($until: medium) {
       padding-top: $layout-03;
       padding-bottom: $layout-03;
+      background-size:
+        2rem 2rem,
+        2rem 2rem;
     }
   }
 
