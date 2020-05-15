@@ -293,17 +293,17 @@ export default class extends QiskitPage {
     width: 100%;
     top: 0;
     bottom: 0;
-    left: 40%;
-    // TODO: Replace with the final illustration and change the name
-    // accordingly. Issue #598
-    background: url('/images/menda.png') no-repeat;
-    // background-size: contain; // leave it for the definitive picture
-    // Remove these when switching to the definitive illustration...
-    background-size: auto;
-    background-position: center left 10%;
-    // ...until here.
+    left: 50%;
+    background: url('/images/hero-illustration.png') no-repeat;
+    background-size: contain;
 
-    @include mq($until: 0.9 * $medium) {
+    $picture-threshold-for-hiding: 0.75 * $medium;
+
+    @include mq($from: $picture-threshold-for-hiding, $until: large) {
+      left: 40%;
+    }
+
+    @include mq($until: $picture-threshold-for-hiding) {
       display: none;
     }
   }
