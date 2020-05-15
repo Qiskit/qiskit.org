@@ -1,13 +1,9 @@
 <template>
   <main class="element landing-page">
-    <ElementPresentation
-      class="element__presentation"
-      title="Welcome to Quantum"
-      logo="/images/qiskit-logo.svg"
-      description="Qiskit is an open-source quantum computing software development framework for leveraging today's quantum processors in research, education, and business."
-      to="https://qiskit.org/documentation/install.html"
-      segment-action="Get Started"
-    />
+    <div class="landing-page__presentation-container">
+      <div class="landing-page__presentation-picture" />
+      <TheHeroMoment class="landing-page__presentation" />
+    </div>
     <PageSection class="landing-page__horizontal-section" framed>
       <div class="landing-page__multi-column-layout">
         <article class="landing-page__section">
@@ -230,14 +226,14 @@
 <script lang="ts">
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
-import ElementPresentation from '~/components/elements/ElementPresentation.vue'
+import TheHeroMoment from '~/components/landing/TheHeroMoment.vue'
 import PageSection from '~/components/ui/PageSection.vue'
 import Cta from '~/components/ui/Cta.vue'
 
 @Component({
   components: {
     Cta,
-    ElementPresentation,
+    TheHeroMoment,
     PageSection
   },
   head () {
@@ -254,6 +250,68 @@ export default class extends QiskitPage {
 @import '~carbon-components/scss/globals/scss/typography';
 
 .landing-page {
+  background-color: $white-background-ui;
+
+  &__presentation-container {
+    position: relative;
+    padding-top: $layout-05;
+    padding-bottom: $layout-05;
+    background-size:
+      5rem 5rem,
+      5rem 5rem;
+    background-image:
+      linear-gradient(to right, $cool-gray-10 1px, transparent 1px),
+      linear-gradient(to bottom, $cool-gray-10 1px, transparent 1px);
+    background-position:
+      -1rem center,
+      -1rem center;
+    background-repeat:
+      repeat,
+      repeat;
+
+    overflow: hidden;
+
+    @include mq($from: medium, $until: large) {
+      padding-top: $layout-04;
+      padding-bottom: $layout-04;
+      background-size:
+        3rem 3rem,
+        3rem 3rem;
+    }
+
+    @include mq($until: medium) {
+      padding-top: $layout-03;
+      padding-bottom: $layout-03;
+      background-size:
+        2rem 2rem,
+        2rem 2rem;
+    }
+  }
+
+  &__presentation-picture {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    background: url('/images/hero-illustration.png') no-repeat;
+    background-size: contain;
+
+    $picture-threshold-for-hiding: 0.75 * $medium;
+
+    @include mq($from: $picture-threshold-for-hiding, $until: large) {
+      left: 40%;
+    }
+
+    @include mq($until: $picture-threshold-for-hiding) {
+      display: none;
+    }
+  }
+
+  &__presentation {
+    @include contained();
+  }
+
   &__horizontal-section {
     background-color: $inverse-02;
   }

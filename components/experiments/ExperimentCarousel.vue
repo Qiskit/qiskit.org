@@ -95,7 +95,7 @@ $back-experiment-offset: 1rem;
     width: 100%;
     height: 100px;
     background-color: $ui-background;
-    box-shadow: 0 23px 35px 0 $gray-100-a30;
+    box-shadow: 0 23px 35px 0 rgba($gray-100, 0.3);
     transform-origin: center bottom;
     transform: scale(0.95);
   }
@@ -109,7 +109,7 @@ $back-experiment-offset: 1rem;
   flex-direction: row;
   color: $text-01;
   background-color: $ui-01;
-  box-shadow: 0 23px 35px 0 $gray-100-a30;
+  box-shadow: 0 23px 35px 0 rgba($gray-100, 0.3);
   transform-origin: center bottom;
 
   &-picture {

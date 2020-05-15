@@ -166,9 +166,9 @@ main {
   .header-video {
     max-width: 35rem;
     height: 20rem;
-    box-shadow: 0  0.75rem 1.75rem -0.25rem $gray-100-a30,
-                0   0.5rem    1rem  -0.5rem $gray-100-a30,
-                0 -0.25rem    1rem -0.25rem $gray-100-a30;
+    box-shadow: 0  0.75rem 1.75rem -0.25rem rgba($gray-100, 0.3),
+                0   0.5rem    1rem  -0.5rem rgba($gray-100, 0.3),
+                0 -0.25rem    1rem -0.25rem rgba($gray-100, 0.3);
   }
 
   .intro {
@@ -201,7 +201,7 @@ main {
     margin-left: $layout-03;
     transform: perspective(75rem) rotateY(-20deg) rotateX(5deg);
     border-radius: 0.5rem;
-    box-shadow: 1.5rem 2.25rem 1.75rem 0 $gray-100-a30;
+    box-shadow: 1.5rem 2.25rem 1.75rem 0 rgba($gray-100, 0.3);
   }
 }
 
