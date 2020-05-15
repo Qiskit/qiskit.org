@@ -297,7 +297,11 @@ export default class extends QiskitPage {
     // TODO: Replace with the final illustration and change the name
     // accordingly. Issue #598
     background: url('/images/menda.png') no-repeat;
-    background-size: contain;
+    // background-size: contain; // leave it for the definitive picture
+    // Remove these when switching to the definitive illustration...
+    background-size: auto;
+    background-position: center left 10%;
+    // ...until here.
 
     @include mq($until: 0.9 * $medium) {
       display: none;
