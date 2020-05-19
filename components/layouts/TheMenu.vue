@@ -49,8 +49,8 @@
 
 <script lang="ts">
 import { Component, Mixins } from 'vue-property-decorator'
-import SidebarMenu from '~/components/ui/menu/SidebarMenu.vue'
-import MenuLink from '~/components/ui/menu/MenuLink.vue'
+import SidebarMenu from '~/components/ui/TheMenu/SidebarMenu.vue'
+import MenuLink from '~/components/ui/TheMenu/MenuLink.vue'
 import MenuMixin from '~/mixins/menu'
 
 @Component({
