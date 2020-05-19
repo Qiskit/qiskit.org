@@ -49,11 +49,11 @@ import ElementPresentation from '~/components/elements/ElementPresentation.vue'
 import PageSection from '~/components/ui/PageSection.vue'
 import SoftwareStack, { StackLayer } from '~/components/ui/SoftwareStack.vue'
 import SyntaxHighlight from '~/components/ui/SyntaxHighlight.vue'
-import Cta from '~/components/ui/Cta.vue'
+import AppCta from '~/components/ui/AppCta.vue'
 
 @Component({
   components: {
-    Cta,
+    AppCta,
     ElementPresentation,
     PageSection,
     SoftwareStack,

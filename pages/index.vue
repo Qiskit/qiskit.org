@@ -20,14 +20,14 @@
             everything you need to know. Starting with installing Qiskit, to
             investigating the latest algorithms and research topics.
           </p>
-          <Cta
+          <AppCta
             to="https://www.youtube.com/playlist?list=PLOFEBzvs-Vvp2xg9-POLJhQwtVktlYGbY"
             @click="$trackClickEvent({
               action: 'Coding with Qiskit Video Series'
             })"
           >
             Watch it
-          </Cta>
+          </AppCta>
         </article>
         <article class="landing-page__section">
           <h2 class="element__header">
@@ -37,7 +37,7 @@
             This activity pack will entertain your kids with fun activities
             about quantum computing. Fun for all kids and parents!
           </p>
-          <Cta
+          <AppCta
             to="/activities/quantum-activity-pack-for-kids.pdf"
             is-static
             @click="$trackClickEvent({
@@ -45,7 +45,7 @@
             })"
           >
             Try it
-          </Cta>
+          </AppCta>
         </article>
       </div>
     </PageSection>
@@ -63,14 +63,14 @@
             hosted tutorials. Work is saved in the cloud and automatically updated
             with every Qiskit release.
           </p>
-          <Cta
+          <AppCta
             to="https://quantum-computing.ibm.com/login"
             @click="$trackClickEvent({
               action: 'Introducing Qiskit notebooks: Try out'
             })"
           >
             Try it
-          </Cta>
+          </AppCta>
         </article>
         <aside
           class="landing-page__section landing-page__section_flex_2"
@@ -232,11 +232,11 @@ import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import ElementPresentation from '~/components/elements/ElementPresentation.vue'
 import PageSection from '~/components/ui/PageSection.vue'
-import Cta from '~/components/ui/Cta.vue'
+import AppCta from '~/components/ui/AppCta.vue'
 
 @Component({
   components: {
-    Cta,
+    AppCta,
     ElementPresentation,
     PageSection
   },
