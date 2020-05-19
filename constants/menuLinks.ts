@@ -118,18 +118,13 @@ const COMMUNITY_SUB_LINKS: LabeledLinks = {
   advocates: {
     label: 'Advocates',
     url: '/advocates'
-  },
-  experiments: {
-    label: 'Experiments',
-    url: '/experiments'
   }
 }
 
 const ORDERED_COMMUNITY_SUB_LINKS: Array<NavLink> = [
   COMMUNITY_SUB_LINKS.events,
   COMMUNITY_SUB_LINKS.education,
-  COMMUNITY_SUB_LINKS.advocates,
-  COMMUNITY_SUB_LINKS.experiments
+  COMMUNITY_SUB_LINKS.advocates
 ]
 
 const QISKIT_EDUCATION: LabeledLinks = {
@@ -164,17 +159,6 @@ const ORDERED_QISKIT_ADVOCATES: Array<NavLink> = [
   QISKIT_ADVOCATES.advocates
 ]
 
-const QISKIT_EXPERIMENTS: LabeledLinks = {
-  experiments: {
-    label: 'Browse the experiments',
-    url: '/experiments#browse-the-experiments'
-  }
-}
-
-const ORDERED_QISKIT_EXPERIMENTS: Array<NavLink> = [
-  QISKIT_EXPERIMENTS.experiments
-]
-
 type FooterSubsection = {
   title: string,
   elements: Array<NavLink>
@@ -199,10 +183,6 @@ const FOOTER_ELEMENTS: FooterStructure = [
     {
       title: 'Qiskit Advocates',
       elements: ORDERED_QISKIT_ADVOCATES
-    },
-    {
-      title: 'Qiskit Experiments',
-      elements: ORDERED_QISKIT_EXPERIMENTS
     }
   ],
   // Elements in the third footer column
