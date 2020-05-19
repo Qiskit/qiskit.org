@@ -12,8 +12,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import TheMenu from '~/components/layouts/TheMenu.vue'
-import PageFooter from '~/components/layouts/PageFooter.vue'
+import TheMenu from '~/components/layouts/TheMenu/index.vue'
+import PageFooter from '~/components/layouts/PageFooter/index.vue'
 
 @Component({
   components: {

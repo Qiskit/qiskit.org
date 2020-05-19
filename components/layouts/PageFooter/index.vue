@@ -15,7 +15,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import FooterSection from '~/components/ui/PageFooter/FooterSection.vue'
+import FooterSection from './FooterSection.vue'
 
 import { FOOTER_ELEMENTS } from '~/constants/menuLinks'
 

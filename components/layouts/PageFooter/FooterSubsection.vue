@@ -14,7 +14,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-import FooterLink from '~/components/ui/PageFooter/FooterLink.vue'
+import FooterLink from './FooterLink.vue'
 
 @Component({
   components: { FooterLink }
