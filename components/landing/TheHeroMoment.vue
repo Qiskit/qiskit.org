@@ -41,7 +41,6 @@ export default class extends Vue {
 
 .the-hero-moment {
   position: relative;
-  padding: 0 $spacing-05;
 
   &__content {
     position: relative;
