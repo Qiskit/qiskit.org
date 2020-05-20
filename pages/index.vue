@@ -2,53 +2,35 @@
   <main class="element landing-page">
     <div class="landing-page__presentation-container">
       <div class="landing-page__presentation-picture" />
-      <TheHeroMoment class="landing-page__presentation" />
-    </div>
-    <PageSection class="landing-page__horizontal-section" framed>
-      <div class="landing-page__multi-column-layout">
-        <article class="landing-page__section">
-          <h2 class="element__header">
-            Qiskit on YouTube
-          </h2>
-          <p class="element__paragraph">
-            Would you like to learn how to code a quantum computer? Take a look
-            at the Coding with Qiskit Video Series, where Abraham Asfaw explains
-            everything you need to know. Starting with installing Qiskit, to
-            investigating the latest algorithms and research topics.
-          </p>
-          <Cta
-            to="https://www.youtube.com/playlist?list=PLOFEBzvs-Vvp2xg9-POLJhQwtVktlYGbY"
-            @click="$trackClickEvent({
-              action: 'Coding with Qiskit Video Series'
-            })"
-          >
-            Watch it
-          </Cta>
-        </article>
-        <article class="landing-page__section">
-          <h2 class="element__header">
-            Kids meet quantum!
-          </h2>
-          <p class="element__paragraph">
-            This activity pack will entertain your kids with fun activities
-            about quantum computing. Fun for all kids and parents!
-          </p>
-          <Cta
-            to="/activities/quantum-activity-pack-for-kids.pdf"
-            is-static
-            @click="$trackClickEvent({
-              action: 'Activity pack for kids'
-            })"
-          >
-            Try it
-          </Cta>
-        </article>
+      <div class="landing-page__section">
+        <TheHeroMoment class="landing-page__presentation" />
       </div>
-    </PageSection>
-    <PageSection class="landing-page__horizontal-section" framed>
+    </div>
+    <article class="landing-page__section">
+      <h2 class="landing-page__header">
+        What can Qiskit do
+      </h2>
+      <p class="landing-page__paragraph">
+        Qiskit accelerates the development of quantum applications by
+        providing the complete set of tools needed for interacting with
+        quantum systems and simulators.
+      </p>
+      <section class="landing-page__feature-mosaic" />
+      <!-- TODO: Link to the overview page -->
+      <Cta
+        class="landing-page__full-overview-cta"
+        to=""
+        @click="$trackClickEvent({
+          action: 'Visit Full Overview'
+        })"
+      >
+        Full Overview
+      </Cta>
+    </article>
+    <PageSection class="landing-page__horizontal-section-legacy" framed>
       <div class="landing-page__multi-column-layout">
         <article
-          class="landing-page__section landing-page__section_flex_3"
+          class="landing-page__section-legacy landing-page__section-legacy_flex_3"
         >
           <h2 class="element__header">
             IBM Quantum Experience
@@ -69,7 +51,7 @@
           </Cta>
         </article>
         <aside
-          class="landing-page__section landing-page__section_flex_2"
+          class="landing-page__section-legacy landing-page__section-legacy_flex_2"
         >
           <img
             class="landing-page__quantum-experience-image"
@@ -79,9 +61,9 @@
         </aside>
       </div>
     </PageSection>
-    <PageSection class="landing-page__horizontal-section" framed>
+    <PageSection class="landing-page__horizontal-section-legacy" framed>
       <div class="landing-page__multi-column-layout">
-        <article class="landing-page__section landing-page__section_flex_3">
+        <article class="landing-page__section-legacy landing-page__section-legacy_flex_3">
           <h2 class="element__header">
             Where to find us
           </h2>
@@ -89,7 +71,7 @@
             Through connecting, contributing and collaborating, our diverse community of Qiskitters propels Qiskit to new forefronts and fields. In our commitment to open this quantum computing community to people of all backgrounds, we span across several platforms. Find us today to start connecting and contributing!
           </p>
         </article>
-        <aside class="landing-page__section landing-page__section_flex_2">
+        <aside class="landing-page__section-legacy landing-page__section-legacy_flex_2">
           <ul class="landing-page__social-network-list">
             <li class="landing-page__social-network">
               <a
@@ -308,15 +290,23 @@ export default class extends QiskitPage {
     }
   }
 
-  &__presentation {
+  &__section {
     @include contained();
+    margin-bottom: $layout-07;
   }
 
-  &__horizontal-section {
-    background-color: $inverse-02;
+  &__header {
+    @include type-style('expressive-heading-05');
+    margin-bottom: $layout-03;
   }
 
-  &__horizontal-section:nth-child(2n+1) {
+  &__paragraph {
+    @include type-style('body-long-01');
+    max-width: 33%;
+    margin-bottom: $layout-04;
+  }
+
+  &__horizontal-section-legacy:nth-child(2n+1) {
     background-color: $purple-40;
   }
 
@@ -328,7 +318,7 @@ export default class extends QiskitPage {
     }
   }
 
-  &__section {
+  &__section-legacy {
     flex: 1;
 
     @include mq($until: medium) {
