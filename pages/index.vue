@@ -17,15 +17,16 @@
       </p>
       <section class="landing-page__feature-mosaic" />
       <!-- TODO: Link to the overview page -->
-      <LandingSecondaryCta
+      <LandingCta
+        kind="secondary"
         class="landing-page__full-overview-cta"
-        to=""
+        to="#"
         @click="$trackClickEvent({
           action: 'Visit Full Overview'
         })"
       >
         Full Overview
-      </LandingSecondaryCta>
+      </LandingCta>
     </article>
     <PageSection class="landing-page__horizontal-section-legacy" framed>
       <div class="landing-page__multi-column-layout">
@@ -209,14 +210,14 @@
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import TheHeroMoment from '~/components/landing/TheHeroMoment.vue'
-import LandingSecondaryCta from '~/components/landing/LandingSecondaryCta.vue'
+import LandingCta from '~/components/landing/LandingCta.vue'
 import PageSection from '~/components/ui/PageSection.vue'
 import Cta from '~/components/ui/Cta.vue'
 
 @Component({
   components: {
     Cta,
-    LandingSecondaryCta,
+    LandingCta,
     TheHeroMoment,
     PageSection
   },
