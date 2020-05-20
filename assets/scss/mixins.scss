@@ -6,13 +6,26 @@
   padding-right: 2rem;
 }
 
+/*
+ * Based on Carbon Grid breakpoints and grid margins and column paddings:
+ * https://www.carbondesignsystem.com/guidelines/2x-grid/basics/#breakpoints
+ */
 @mixin contained() {
   box-sizing: border-box;
   max-width: $large;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 2rem; // 1rem for the grid padding + 1 rem for the column padding
+  padding-left: 2rem; // 1rem for the grid margin + 1 rem for the column padding
   padding-right: 1rem;
+
+  @include mq($from: max-size) {
+    padding-left: 2.5rem; // 1.5rem for the grid margin + 1 rem for the column padding
+    padding-right: 1.5rem;
+  }
+
+  @include mq($until: medium) {
+    padding-left: 1rem; // 0rem for the grid margin + 1 rem for the column padding
+  }
 }
 
 @mixin elegant-title() {
