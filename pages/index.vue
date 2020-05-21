@@ -2,7 +2,10 @@
   <main class="element landing-page">
     <div class="landing-page__presentation-container">
       <div class="landing-page__presentation-picture" />
-      <TheHeroMoment class="landing-page__presentation" />
+      <TheHeroMoment
+        class="landing-page__presentation"
+        :version="qiskitVersion"
+      />
     </div>
     <PageSection class="landing-page__horizontal-section" framed>
       <div class="landing-page__multi-column-layout">
@@ -224,6 +227,8 @@
 </template>
 
 <script lang="ts">
+import axios from 'axios'
+
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import TheHeroMoment from '~/components/landing/TheHeroMoment.vue'
@@ -238,6 +243,13 @@ import AppCta from '~/components/ui/AppCta.vue'
   },
   head () {
     return { title: 'Qiskit' }
+  },
+  async asyncData () {
+    const qiskitPackageInfoUrl = 'https://pypi.org/pypi/qiskit/json'
+    const packageInfo = (await axios.get(qiskitPackageInfoUrl)).data
+    return {
+      qiskitVersion: packageInfo.info.version
+    }
   }
 })
 export default class extends QiskitPage {

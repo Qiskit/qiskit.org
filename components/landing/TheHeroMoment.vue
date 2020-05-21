@@ -1,7 +1,10 @@
 <template>
   <section class="the-hero-moment">
     <article class="the-hero-moment__content">
-      <VersionInfo class="the-hero-moment__version-info" />
+      <VersionInfo
+        class="the-hero-moment__version-info"
+        :version="version"
+      />
       <h1 class="the-hero-moment__title">
         Open-Source Quantum Development
       </h1>
@@ -21,14 +24,16 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
+import { Component, Prop } from 'vue-property-decorator'
 import VersionInfo from './VersionInfo.vue'
 import LandingCta from './LandingCta.vue'
 
 @Component({
   components: { VersionInfo, LandingCta }
 })
-export default class extends Vue {}
+export default class extends Vue {
+  @Prop({ type: String, required: true }) version!: string
+}
 </script>
 
 <style lang="scss" scoped>
