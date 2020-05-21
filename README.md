@@ -38,8 +38,6 @@
   <span> · </span>
   <a href="https://qiskit.org/documentation/">Documentation</a>
   <span> · </span>
-  <a href="https://qiskit.org/experiments/">Experiments</a>
-  <span> · </span>
   <a href="https://qiskit.org/advocates/">Advocates</a>
   <span> · </span>
   Support: <a href="http://ibm.co/joinqiskitslack">Slack</a>
