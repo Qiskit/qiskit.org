@@ -18,7 +18,7 @@
         providing the complete set of tools needed for interacting with
         quantum systems and simulators.
       </p>
-      <section class="landing-page__feature-mosaic" />
+      <TheFeatureMosaic class="landing-page__feature-mosaic" />
       <!-- TODO: Link to the overview page -->
       <LandingCta
         kind="secondary"
@@ -216,6 +216,7 @@ import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import TheHeroMoment from '~/components/landing/TheHeroMoment.vue'
 import LandingCta from '~/components/landing/LandingCta.vue'
+import TheFeatureMosaic from '~/components/landing/TheFeatureMosaic.vue'
 import PageSection from '~/components/ui/PageSection.vue'
 import AppCta from '~/components/ui/AppCta.vue'
 
@@ -224,6 +225,7 @@ import AppCta from '~/components/ui/AppCta.vue'
     AppCta,
     LandingCta,
     TheHeroMoment,
+    TheFeatureMosaic,
     PageSection
   },
   head () {
@@ -310,6 +312,11 @@ export default class extends QiskitPage {
     margin-bottom: $layout-07;
   }
 
+  &__feature-mosaic {
+    margin-top: $layout-01;
+    margin-bottom: $layout-03;
+  }
+
   &__header {
     @include type-style('expressive-heading-05');
     margin-bottom: $layout-03;
@@ -318,7 +325,7 @@ export default class extends QiskitPage {
   &__paragraph {
     @include type-style('body-long-01');
     max-width: 33%;
-    margin-bottom: $layout-04;
+    margin-bottom: $layout-03;
   }
 
   &__horizontal-section-legacy:nth-child(2n+1) {
