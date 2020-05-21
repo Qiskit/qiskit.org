@@ -45,9 +45,9 @@
         </p>
         <ul class="actions">
           <li>
-            <Cta to="https://www.youtube.com/playlist?list=PLOFEBzvs-Vvp2xg9-POLJhQwtVktlYGbY">
+            <AppCta to="https://www.youtube.com/playlist?list=PLOFEBzvs-Vvp2xg9-POLJhQwtVktlYGbY">
               View all episodes
-            </Cta>
+            </AppCta>
           </li>
         </ul>
         <template #aside>
@@ -75,9 +75,9 @@
           </p>
           <ul class="actions">
             <li>
-              <Cta to="/textbook/" is-static>
+              <AppCta to="/textbook/" is-static>
                 Discover more
-              </Cta>
+              </AppCta>
             </li>
           </ul>
         </div>
@@ -99,9 +99,9 @@
         </p>
         <ul class="actions">
           <li>
-            <Cta to="mailto:hello@qiskit.camp">
+            <AppCta to="mailto:hello@qiskit.camp">
               Request an event
-            </Cta>
+            </AppCta>
           </li>
         </ul>
       </PageSection>
@@ -117,7 +117,7 @@ import CommunityHeader from '~/components/ui/CommunityHeader.vue'
 import PageSection from '~/components/ui/PageSection.vue'
 // @ts-ignore: Cannot find module
 import TextbookPreview from '~/components/education/TextbookPreview.vue'
-import Cta from '~/components/ui/Cta.vue'
+import AppCta from '~/components/ui/AppCta.vue'
 // @ts-ignore: Cannot find module
 import TextbookTOC from '~/content/education/textbook-toc.md'
 
@@ -127,7 +127,7 @@ import TextbookTOC from '~/content/education/textbook-toc.md'
     CommunityHeader,
     PageSection,
     TextbookPreview,
-    Cta,
+    AppCta,
     TextbookTOC: TextbookTOC.vue.component
   },
 
