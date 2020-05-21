@@ -1,18 +1,20 @@
 <template>
   <div class="event-page">
     <header class="header-video">
-      <video
-        v-if="isDesktop"
-        ref="video"
-        class="header-video__video"
-        loop
-        preload="none"
-        playsinline
-      >
-        <source src="@/assets/videos/qiskit-camp-africa-2019.mp4" type="video/mp4">
-        <source src="@/assets/videos/qiskit-camp-africa-2019.mp4" type="video/ogg">
-        Your browser does not support HTML5 video.
-      </video>
+      <client-only>
+        <video
+          v-if="isDesktop"
+          ref="video"
+          class="header-video__video"
+          loop
+          preload="none"
+          playsinline
+        >
+          <source src="@/assets/videos/qiskit-camp-africa-2019.mp4" type="video/mp4">
+          <source src="@/assets/videos/qiskit-camp-africa-2019.mp4" type="video/ogg">
+          Your browser does not support HTML5 video.
+        </video>
+      </client-only>
       <div class="event-page__title">
         <h1 class="wrapper">
           Qiskit Events
@@ -149,7 +151,7 @@ export default class extends QiskitPage {
   regions = WORLD_REGION_OPTIONS
   types = COMMUNITY_EVENT_TYPE_OPTIONS
   routeName: string = 'events'
-  windowWidth: Number = 0
+  isDesktop: boolean = false
 
   get hasEvents (): boolean {
     return (this as any).filteredEvents.length !== 0
@@ -167,12 +169,9 @@ export default class extends QiskitPage {
     video.play()
   }
 
-  get isDesktop () {
-    return this.windowWidth > 672 // mq.scss medium value
-  }
-
   async mounted () {
-    this.windowWidth = window.innerWidth
+    const medium = '42em' // mq.scss medium value
+    this.isDesktop = window.matchMedia(`(min-width: ${medium})`).matches
 
     await this.$nextTick()
     this.autoplayVideo()
@@ -287,18 +286,24 @@ export default class extends QiskitPage {
 }
 
 .header-video {
+  height: 20rem;
   position: relative;
   overflow: hidden;
 
-  @include mq($from: medium) {
-    height: 35vh;
-  }
-
   &__video {
+    position: relative;
     width: 100%;
 
     @include mq($from: x-large) {
       top: -60%;
+    }
+
+    @include mq($from: large, $until: x-large) {
+      top: -40%;
+    }
+
+    @include mq($from: medium, $until: large) {
+      top: -7%;
     }
   }
 }
