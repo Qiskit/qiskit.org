@@ -11,7 +11,7 @@
           <dt class="feature-mosaic__feature-title">
             Access to circuits
           </dt>
-          <dd class="feature-mosaic__feature-content">
+          <dd class="feature-mosaic__feature-description">
             Access a rich set of well-studied circuits, which can be used as
             benchmarks, building blocks in more complex circuits, or as a tool to
             explore quantum computational advantage.
@@ -39,7 +39,7 @@
           <dt class="feature-mosaic__feature-title">
             Hardware Access
           </dt>
-          <dd class="feature-mosaic__feature-content">
+          <dd class="feature-mosaic__feature-description">
             Execute code on multiple quantum hardware architectures, from
             superconducting to trapped-ions.
           </dd>
@@ -55,7 +55,7 @@
           <dt class="feature-mosaic__feature-title">
             Quantum Algorithms
           </dt>
-          <dd class="feature-mosaic__feature-content">
+          <dd class="feature-mosaic__feature-description">
             Research and prototype machine learning, optimization and chemistry
             applications by building upon a library of quantum algorithms.
           </dd>
@@ -77,7 +77,7 @@
           <dt class="feature-mosaic__feature-title">
             Noise Mitigation
           </dt>
-          <dd class="feature-mosaic__feature-content">
+          <dd class="feature-mosaic__feature-description">
             Study the impact of noise using built in modules such as quantum
             hardware verification, noise characterization, and error mitigation.
           </dd>
@@ -136,10 +136,18 @@ export default class extends Vue {}
     margin-bottom: $spacing-05;
   }
 
-  &__feature-content {
+  &__feature-description {
     @include type-style('body-long-01');
-    max-width: 6 * $column-size-large;
     color: $cool-gray-60;
+    max-width: 6 * $column-size-large;
+
+    @include mq($from: medium, $until: large) {
+      max-width: 4 * $column-size-medium;
+    }
+
+    @include mq($until: medium) {
+      max-width: 4 * $column-size-small;
+    }
   }
 
   &__feature-decoration {
@@ -168,10 +176,20 @@ export default class extends Vue {}
     background-size: cover;
     background-repeat: no-repeat;
     min-height: 15rem;
+
+    @include mq($from: medium, $until: large) {
+      min-height: 10rem;
+    }
   }
 
   &__algorithms-feature {
     grid-area: c;
+
+    @include mq($from: medium, $until: large) {
+      display: grid;
+      grid-template-columns: 2fr 3fr;
+      gap: $spacing-07;
+    }
   }
 
   &__algorithms-feature-decoration {
@@ -180,6 +198,11 @@ export default class extends Vue {}
     background-size: cover;
     background-repeat: no-repeat;
     height: 25rem;
+
+    @include mq($from: medium, $until: large) {
+      background-image: url('/images/feature-algorithms-medium.png');
+      height: auto;
+    }
   }
 
   &__mitigation-feature {
@@ -189,13 +212,25 @@ export default class extends Vue {}
     ;
     background-position:
       right center,
-      center bottom
+      center bottom -4rem
     ;
     background-size: auto;
     background-repeat: no-repeat;
-    padding-right: 14rem;
     padding-bottom: 6rem;
     grid-area: d;
+
+    @include mq($from: medium, $until: large) {
+      padding-right: 1rem;
+      padding-bottom: 1rem;
+      background-size:
+        10rem auto,
+        8rem auto
+      ;
+      background-position:
+        top -3rem right,
+        right 9rem bottom -2rem
+      ;
+    }
   }
 }
 </style>
