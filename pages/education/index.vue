@@ -45,8 +45,8 @@
         </p>
         <ul class="actions">
           <li>
-            <AppCta to="https://www.youtube.com/playlist?list=PLOFEBzvs-Vvp2xg9-POLJhQwtVktlYGbY">
-              View all episodes
+            <AppCta v-bind="youtubeAllEpisodesCtaLink">
+              {{ youtubeAllEpisodesCtaLink.label }}
             </AppCta>
           </li>
         </ul>
@@ -75,8 +75,8 @@
           </p>
           <ul class="actions">
             <li>
-              <AppCta to="/textbook/" is-static>
-                Discover more
+              <AppCta v-bind="discoverTextbookCtaLink">
+                {{ discoverTextbookCtaLink.label }}
               </AppCta>
             </li>
           </ul>
@@ -99,8 +99,8 @@
         </p>
         <ul class="actions">
           <li>
-            <AppCta to="mailto:hello@qiskit.camp">
-              Request an event
+            <AppCta v-bind="requestAnEventCtaLink">
+              {{ requestAnEventCtaLink.label }}
             </AppCta>
           </li>
         </ul>
@@ -121,6 +121,8 @@ import AppCta from '~/components/ui/AppCta.vue'
 // @ts-ignore: Cannot find module
 import TextbookTOC from '~/content/education/textbook-toc.md'
 
+import { YOUTUBE_ALL_EPISODES_CTA, DISCOVER_TEXTBOOK_CTA, REQUEST_AN_EVENT_CTA } from '~/constants/appLinks'
+
 @Component({
   components: {
     InnerNavigation,
@@ -139,6 +141,9 @@ import TextbookTOC from '~/content/education/textbook-toc.md'
 })
 export default class extends QiskitPage {
   routeName: string = 'education'
+  youtubeAllEpisodesCtaLink = YOUTUBE_ALL_EPISODES_CTA
+  discoverTextbookCtaLink = DISCOVER_TEXTBOOK_CTA
+  requestAnEventCtaLink = REQUEST_AN_EVENT_CTA
 }
 </script>
 

@@ -1,38 +1,21 @@
 <template>
-  <component
-    :is="!isStatic && isInternal(to) ? 'nuxt-link' : 'a'"
+  <AppLink
     class="cta"
-    :href="to"
-    :to="!isStatic && isInternal(to) ? to : null"
-    :rel="isExternal(to) ? 'noopener' : null"
-    :target="isExternal(to) ? '_blank' : null"
-    v-on="$listeners"
+    v-bind="$attrs"
   >
     <slot />
-  </component>
+  </AppLink>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
+import { Component } from 'vue-property-decorator'
+import AppLink from '~/components/ui/AppLink.vue'
 
-@Component
-export default class extends Vue {
-  @Prop(String) to
-  @Prop(Boolean) isStatic
-
-  isExternal (url: string): boolean {
-    return url.startsWith('http')
-  }
-
-  isMail (url: string): boolean {
-    return url.startsWith('mailto')
-  }
-
-  isInternal (url: string): boolean {
-    return !(this.isExternal(url) || this.isMail(url))
-  }
-}
+@Component({
+  components: { AppLink }
+})
+export default class extends Vue {}
 </script>
 
 <style lang="scss" scoped>

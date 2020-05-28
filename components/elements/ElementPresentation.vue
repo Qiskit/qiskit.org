@@ -18,20 +18,20 @@
       <AppCta
         v-if="to"
         class="element-presentation__get-started-cta"
-        :to="to"
-        @click="segmentAction && $trackClickEvent({
+        :url="to"
+        :segment="{
           action: segmentAction
-        })"
+        }"
       >
         Get Started!
       </AppCta>
       <AppCta
         v-if="sources"
         class="element-presentation__github-cta"
-        :to="sources"
-        @click="segmentAction && $trackClickEvent({
+        :url="sources"
+        :segment="{
           action: segmentAction
-        })"
+        }"
       >
         <div class="element-presentation__github-cta-layout">
           <svg
