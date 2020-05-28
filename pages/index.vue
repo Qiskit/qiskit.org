@@ -253,8 +253,9 @@ export default class extends QiskitPage {
 
   &__presentation-container {
     position: relative;
-    padding-top: $layout-05;
-    padding-bottom: $layout-05;
+    padding-top: $layout-06;
+    padding-bottom: $layout-07;
+    margin-bottom: $layout-06;
     background-size:
       5rem 5rem,
       5rem 5rem;
@@ -338,7 +339,7 @@ export default class extends QiskitPage {
   &__paragraph {
     @include type-style('body-long-01');
     max-width: 6 * $column-size-large;
-    margin-bottom: $layout-03;
+    margin-bottom: $layout-04;
 
     @include mq($from: medium, $until: large) {
       @include type-style('label-01');

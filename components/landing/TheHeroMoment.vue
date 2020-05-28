@@ -57,7 +57,7 @@ export default class extends Vue {
   }
 
   &__version-info {
-    margin: 0 0 $spacing-09;
+    margin: 0 0 $layout-06;
     padding: 0;
 
     @include mq($until: large) {
@@ -72,7 +72,7 @@ export default class extends Vue {
   &__title {
     @include type-style('display-01', true);
     color: $white-text-01;
-    margin: 0 0 $spacing-09;
+    margin: 0 0 $layout-05;
     padding: 0;
     width: 100%;
 
@@ -88,7 +88,7 @@ export default class extends Vue {
   &__description {
     @include type-style('body-short-02');
     color: $white-text-01;
-    margin: 0 0 $layout-07;
+    margin: 0 0 $layout-06;
     padding: 0 25% 0 0;
 
     @include mq($from: medium, $until: large) {

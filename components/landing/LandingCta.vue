@@ -27,6 +27,7 @@ export default class extends Vue {
   @include type-style('body-short-01');
   position: relative;
   width: 18rem;
+  max-width: 100%;
   // From the Carbon component <cv-button>
   padding: calc(.875rem - 3px) 3.75rem calc(.875rem - 3px) 0.75rem;
   text-decoration: none;

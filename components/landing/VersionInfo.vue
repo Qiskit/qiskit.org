@@ -53,7 +53,7 @@ export default class extends Vue {
 
   &__github-icon {
     fill: $purple-70;
-    margin-right: $spacing-03;
+    margin-right: $spacing-07;
   }
 
   &__content {
@@ -62,14 +62,14 @@ export default class extends Vue {
   }
 
   &__version-string {
-    @include type-style('label-01');
+    @include type-style('code-01');
     color: $white-text-01;
     text-decoration: none;
     margin-bottom: $spacing-01;
   }
 
   &__release-notes {
-    @include type-style('label-01');
+    @include type-style('code-01');
     color: $purple-50;
   }
 
