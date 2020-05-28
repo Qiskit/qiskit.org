@@ -4,7 +4,7 @@
       <div
         class="
           feature-mosaic__feature
-          feature-mosaic__circuits-feature
+          feature-mosaic__feature-circuits
         "
       >
         <div class="feature-mosaic__feature-copy">
@@ -21,13 +21,13 @@
       <div
         class="
           feature-mosaic__feature
-          feature-mosaic__hardware-feature
+          feature-mosaic__feature-hardware
         "
       >
         <div
           class="
             feature-mosaic__feature-decoration
-            feature-mosaic__hardware-feature-decoration
+            feature-mosaic__feature-decoration-hardware
           "
         />
         <div
@@ -45,7 +45,7 @@
           </dd>
         </div>
       </div>
-      <div class="feature-mosaic__feature feature-mosaic__algorithms-feature">
+      <div class="feature-mosaic__feature feature-mosaic__feature-algorithms">
         <div
           class="
             feature-mosaic__feature-copy
@@ -63,14 +63,14 @@
         <div
           class="
             feature-mosaic__feature-decoration
-            feature-mosaic__algorithms-feature-decoration
+            feature-mosaic__feature-decoration-algorithms
           "
         />
       </div>
       <div
         class="
           feature-mosaic__feature
-          feature-mosaic__mitigation-feature
+          feature-mosaic__feature-mitigation
         "
       >
         <div class="feature-mosaic__feature-copy">
@@ -180,7 +180,7 @@ export default class extends Vue {}
     padding: $spacing-07;
   }
 
-  &__circuits-feature {
+  &__feature-circuits {
     background-image: url('/images/library/circuit-01.png');
     background-position: right bottom;
     background-size: auto;
@@ -192,11 +192,11 @@ export default class extends Vue {}
     }
   }
 
-  &__hardware-feature {
+  &__feature-hardware {
     grid-area: b;
   }
 
-  &__hardware-feature-decoration {
+  &__feature-decoration-hardware {
     background-image: url('/images/feature-hardware.png');
     background-position: center top;
     background-size: cover;
@@ -212,7 +212,7 @@ export default class extends Vue {}
     }
   }
 
-  &__algorithms-feature {
+  &__feature-algorithms {
     grid-area: c;
 
     @include mq($from: medium, $until: large) {
@@ -227,7 +227,7 @@ export default class extends Vue {}
     }
   }
 
-  &__algorithms-feature-decoration {
+  &__feature-decoration-algorithms {
     background-image: url('/images/feature-algorithms.png');
     background-position: center bottom;
     background-size: cover;
@@ -245,7 +245,7 @@ export default class extends Vue {}
     }
   }
 
-  &__mitigation-feature {
+  &__feature-mitigation {
     background-image: url('/images/feature-mitigation.png');
     background-position: right top calc(50% + 2rem) ;
     background-size: auto;
