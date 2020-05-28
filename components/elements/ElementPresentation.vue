@@ -18,11 +18,9 @@
       <AppCta
         v-if="to"
         class="element-presentation__get-started-cta"
-        v-bind="{
-          url: to,
-          segment: {
-            action: segmentAction
-          }
+        :url="to"
+        :segment="{
+          action: segmentAction
         }"
       >
         Get Started!
@@ -30,11 +28,9 @@
       <AppCta
         v-if="sources"
         class="element-presentation__github-cta"
-        v-bind="{
-          url: sources,
-          segment: {
-            action: segmentAction
-          }
+        :url="sources"
+        :segment="{
+          action: segmentAction
         }"
       >
         <div class="element-presentation__github-cta-layout">
