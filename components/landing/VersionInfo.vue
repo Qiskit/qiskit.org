@@ -54,6 +54,10 @@ export default class extends Vue {
   &__github-icon {
     fill: $purple-70;
     margin-right: $spacing-07;
+
+    @include mq($from: medium, $until: large) {
+      margin-right: $spacing-05;
+    }
   }
 
   &__content {
