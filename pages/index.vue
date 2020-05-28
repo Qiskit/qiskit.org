@@ -282,7 +282,8 @@ export default class extends QiskitPage {
 
     @include mq($until: medium) {
       padding-top: $layout-03;
-      padding-bottom: $layout-03;
+      padding-bottom: $layout-05;
+      margin-bottom: $layout-03;
       background-size:
         2rem 2rem,
         2rem 2rem;
@@ -336,6 +337,10 @@ export default class extends QiskitPage {
       font-weight: 300;
       max-width: 4 * $column-size-small;
     }
+
+    @include mq($until: medium) {
+      margin-bottom: $layout-01;
+    }
   }
 
   &__paragraph {
@@ -345,13 +350,14 @@ export default class extends QiskitPage {
 
     @include mq($from: medium, $until: large) {
       @include type-style('label-01');
-      margin-bottom: $layout-03;
       max-width: 4 * $column-size-medium;
+      margin-bottom: $layout-03;
     }
 
     @include mq($until: medium) {
       @include type-style('label-01');
       max-width: 4 * $column-size-small;
+      margin-bottom: $layout-03;
     }
   }
 

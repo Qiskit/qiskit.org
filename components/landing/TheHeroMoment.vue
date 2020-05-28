@@ -65,7 +65,7 @@ export default class extends Vue {
     }
 
     @include mq($until: medium) {
-      margin: 0 0 $spacing-07;
+      margin: 0 0 $layout-05;
     }
   }
 
@@ -81,7 +81,7 @@ export default class extends Vue {
     }
 
     @include mq($until: medium) {
-      margin: 0 0 $spacing-07;
+      margin: 0 0 $layout-03;
     }
   }
 
@@ -98,7 +98,7 @@ export default class extends Vue {
 
     @include mq($until: medium) {
       @include type-style('body-short-01');
-      margin: 0 0 $layout-05;
+      margin: 0 0 $layout-03;
     }
   }
 
