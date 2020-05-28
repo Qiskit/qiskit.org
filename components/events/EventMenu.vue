@@ -3,7 +3,7 @@
     <section class="ibm-research">
       <AppLink
         class="text-logo"
-        :url="'/'"
+        url="/"
       >
         <img class="logo" alt="Qiskit logo" src="https://qiskit.camp/img/qiskit-logo.png">&nbsp;Qiskit
       </AppLink>
