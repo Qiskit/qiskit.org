@@ -128,12 +128,32 @@ export default class extends Vue {}
     background-color: $cool-gray-10;
     display: flex;
     flex-direction: column;
+
+    @include mq($from: medium, $until: large) {
+
+    }
+
+    @include mq($until: medium) {
+      min-height: 12rem;
+    }
   }
 
   &__feature-title {
     @include type-style('productive-heading-02');
     color: $cool-gray-60;
     margin-bottom: $spacing-05;
+
+    @include mq($from: medium, $until: large) {
+      @include type-style('label-01');
+      font-weight: 600;
+      max-width: 4 * $column-size-medium;
+    }
+
+    @include mq($until: medium) {
+      @include type-style('label-01');
+      font-weight: 600;
+      max-width: 4 * $column-size-small;
+    }
   }
 
   &__feature-description {
@@ -142,10 +162,12 @@ export default class extends Vue {}
     max-width: 6 * $column-size-large;
 
     @include mq($from: medium, $until: large) {
+      @include type-style('label-01');
       max-width: 4 * $column-size-medium;
     }
 
     @include mq($until: medium) {
+      @include type-style('label-01');
       max-width: 4 * $column-size-small;
     }
   }
@@ -164,6 +186,10 @@ export default class extends Vue {}
     background-size: auto;
     background-repeat: no-repeat;
     grid-area: a;
+
+    @include mq($until: medium) {
+      padding-bottom: 6rem;
+    }
   }
 
   &__hardware-feature {
@@ -180,6 +206,10 @@ export default class extends Vue {}
     @include mq($from: medium, $until: large) {
       min-height: 10rem;
     }
+
+    @include mq($until: medium) {
+      min-height: 4rem;
+    }
   }
 
   &__algorithms-feature {
@@ -189,6 +219,11 @@ export default class extends Vue {}
       display: grid;
       grid-template-columns: 2fr 3fr;
       gap: $spacing-07;
+    }
+
+    @include mq($until: medium) {
+      display: flex;
+      flex-direction: column-reverse;
     }
   }
 
@@ -203,33 +238,31 @@ export default class extends Vue {}
       background-image: url('/images/feature-algorithms-medium.png');
       height: auto;
     }
+
+    @include mq($until: medium) {
+      background-image: url('/images/feature-algorithms-medium.png');
+      min-height: 4rem;
+    }
   }
 
   &__mitigation-feature {
-    background-image:
-      url('/images/library/chip-01.png'),
-      url('/images/library/bloch-sphere.png')
-    ;
-    background-position:
-      right center,
-      center bottom -4rem
-    ;
+    background-image: url('/images/feature-mitigation.png');
+    background-position: right top calc(50% + 2rem) ;
     background-size: auto;
     background-repeat: no-repeat;
-    padding-bottom: 6rem;
+    padding-bottom: 5rem;
     grid-area: d;
 
     @include mq($from: medium, $until: large) {
-      padding-right: 1rem;
-      padding-bottom: 1rem;
-      background-size:
-        10rem auto,
-        8rem auto
-      ;
-      background-position:
-        top -3rem right,
-        right 9rem bottom -2rem
-      ;
+      background-size: 18rem auto;
+      padding-bottom: unset;
+      background-position: right center;
+    }
+
+    @include mq($until: medium) {
+      background-size: auto 60%;
+      padding-bottom: 6rem;
+      background-position: right bottom -30%;
     }
   }
 }
