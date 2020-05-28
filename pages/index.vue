@@ -92,10 +92,10 @@
                   viewBox="0 0 24 24"
                   width="24"
                   height="24"
-                  :aria-labelledby="`${socialNetworkLink.name.toLowerCase().trim()}-icon`"
+                  :aria-labelledby="`${socialNetworkLink.name.toLowerCase().replace(' ', '-')}-icon`"
                   role="img"
                 >
-                  <title :id="`${socialNetworkLink.name.toLowerCase().trim()}-icon`">{{ socialNetworkLink.name }} icon</title>
+                  <title :id="`${socialNetworkLink.name.toLowerCase().replace(' ', '-')}-icon`">{{ socialNetworkLink.name }} icon</title>
                   <path :d="socialNetworkLink.iconPath" />
                   <path v-if="socialNetworkLink.iconPathSecondPart" :d="socialNetworkLink.iconPathSecondPart" />
                 </svg>
