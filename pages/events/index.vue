@@ -84,13 +84,12 @@
         <div v-else class="event-page__results">
           <p class="event-page__no-events-msg">
             Nothing here yet -
-            <a
-              href="https://airtable.com/shrP84QQiqzC3aWMF"
-              target="_blank"
-              rel="noopener"
+            <AppLink
+              class="experiment-header__source-code-link"
+              v-bind="eventRequestLink"
             >
-              let’s make it happen!
-            </a>
+              {{ eventRequestLink.label }}
+            </AppLink>
           </p>
         </div>
       </div>
@@ -103,17 +102,20 @@ import { mapGetters, mapActions } from 'vuex'
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import EventCard from '~/components/events/EventCard.vue'
+import AppLink from '~/components/ui/AppLink.vue'
 import {
   CommunityEvent,
   WORLD_REGION_OPTIONS,
   COMMUNITY_EVENT_TYPE_OPTIONS
 } from '~/store/modules/events.ts'
+import { EVENT_REQUEST_LINK } from '~/constants/appLinks'
 
 @Component({
   layout: 'carbon',
 
   components: {
-    EventCard
+    EventCard,
+    AppLink
   },
 
   head () {
@@ -151,6 +153,7 @@ export default class extends QiskitPage {
   regions = WORLD_REGION_OPTIONS
   types = COMMUNITY_EVENT_TYPE_OPTIONS
   routeName: string = 'events'
+  eventRequestLink = EVENT_REQUEST_LINK
   isDesktop: boolean = false
 
   get hasEvents (): boolean {
