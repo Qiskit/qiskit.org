@@ -59,7 +59,7 @@
 
 <script lang="ts">
 import { Component, Mixins } from 'vue-property-decorator'
-import SidebarMenu from '~/components/layouts/TheMenu/SidebarMenu'
+import SidebarMenu from '~/components/layouts/TheMenu/SidebarMenu.vue'
 import AppLink from '~/components/ui/AppLink.vue'
 import MenuMixin from '~/mixins/menu'
 
