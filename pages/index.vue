@@ -3,7 +3,7 @@
     <ElementPresentation
       class="element__presentation"
       title="Welcome to Quantum"
-      image="/images/qiskit-logo.svg"
+      logo="/images/qiskit-logo.svg"
       description="Qiskit is an open-source quantum computing software development framework for leveraging today's quantum processors in research, education, and business."
       to="https://qiskit.org/documentation/install.html"
       segment-action="Get Started"
@@ -20,9 +20,9 @@
             everything you need to know. Starting with installing Qiskit, to
             investigating the latest algorithms and research topics.
           </p>
-          <Cta v-bind="youtubeQiskitCtaLink">
+          <AppCta v-bind="youtubeQiskitAppLink">
             {{ youtubeQiskitCtaLink.label }}
-          </Cta>
+          </AppCta>
         </article>
         <article class="landing-page__section">
           <h2 class="element__header">
@@ -32,9 +32,9 @@
             This activity pack will entertain your kids with fun activities
             about quantum computing. Fun for all kids and parents!
           </p>
-          <Cta v-bind="activitiesWithKidsCtaLink" is-static>
+          <AppCta v-bind="activitiesWithKidsCtaLink" is-static>
             {{ activitiesWithKidsCtaLink.label }}
-          </Cta>
+          </AppCta>
         </article>
       </div>
     </PageSection>
@@ -52,9 +52,9 @@
             hosted tutorials. Work is saved in the cloud and automatically updated
             with every Qiskit release.
           </p>
-          <Cta v-bind="introQiskitNotebooksCtaLink">
+          <AppCta v-bind="introQiskitNotebooksCtaLink">
             {{ introQiskitNotebooksCtaLink.label }}
-          </Cta>
+          </AppCta>
         </article>
         <aside
           class="landing-page__section landing-page__section_flex_2"
@@ -114,7 +114,7 @@ import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import ElementPresentation from '~/components/elements/ElementPresentation.vue'
 import PageSection from '~/components/ui/PageSection.vue'
-import Cta from '~/components/ui/Cta.vue'
+import AppCta from '~/components/ui/AppCta.vue'
 import AppLink from '~/components/ui/AppLink.vue'
 
 import {
@@ -126,7 +126,7 @@ import {
 
 @Component({
   components: {
-    Cta,
+    AppCta,
     ElementPresentation,
     PageSection,
     AppLink
@@ -151,7 +151,6 @@ export default class extends QiskitPage {
 .landing-page {
   &__horizontal-section {
     background-color: $inverse-02;
-    margin-bottom: -2rem;
   }
 
   &__horizontal-section:nth-child(2n+1) {
@@ -170,14 +169,14 @@ export default class extends QiskitPage {
     flex: 1;
 
     @include mq($until: medium) {
-      margin-top: 2rem;
+      margin-top: $layout-03;
     }
 
     &:first-child {
-      margin-right: 2rem;
+      margin-right: $layout-03;
 
       @include mq($until: medium) {
-        margin-top: -2rem;
+        margin-top: -$layout-03;
         margin-right: 0;
       }
     }
@@ -202,7 +201,7 @@ export default class extends QiskitPage {
   &__social-network-list {
     list-style: none;
     padding: 0;
-    margin: -1rem;
+    margin: -$layout-01;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -215,13 +214,13 @@ export default class extends QiskitPage {
   &__social-network {
     width: 50%;
     display: inline-flex;
-    padding: 0.8rem;
+    padding: $spacing-04;
   }
 
   &__social-network-name {
     flex: 1;
     color: $inverse-01;
-    margin-left: 0.5rem;
+    margin-left: $spacing-03;
   }
 
   &__social-network-link {

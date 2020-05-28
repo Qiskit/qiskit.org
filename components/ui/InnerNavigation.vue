@@ -38,7 +38,9 @@ export default class extends Vue {
 }
 
 .menu {
-  height: 90px;
+  $submenu-height: 5rem;
+
+  height: $submenu-height;
   display: flex;
 
   & > * {
@@ -69,7 +71,7 @@ export default class extends Vue {
     text-transform: uppercase;
     border-right: 1px solid $ui-02;
     text-align: center;
-    padding: 0.5rem;
+    padding: $spacing-03;
 
     &:last-child {
       border-right: none;
@@ -78,7 +80,7 @@ export default class extends Vue {
     @include mq($until: medium) {
       border: none;
       border-bottom: 1px solid $ui-02;
-      padding: 1rem;
+      padding: $spacing-05;
       width: 100%;
     }
   }

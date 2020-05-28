@@ -3,7 +3,7 @@
     <ElementPresentation
       class="element__presentation"
       :title="title"
-      image="/images/qiskit-ibmqp-logo.svg"
+      logo="/images/qiskit-ibmqp-logo.svg"
       :description="description"
       sources="https://github.com/Qiskit/qiskit-ibmq-provider"
       segment-action="IBM Q Account: GitHub Repository"
@@ -28,7 +28,7 @@
           to set up your Qiskit environment to send jobs to IBM Quantum systems.
         </p>
       </article>
-      <template #extra>
+      <template #aside>
         <article class="element__example">
           <h2 class="element__header">
             Example
@@ -49,14 +49,12 @@ import QiskitElementPage from '~/components/logic/QiskitElementPage.vue'
 import ElementPresentation from '~/components/elements/ElementPresentation.vue'
 import PageSection from '~/components/ui/PageSection.vue'
 import SyntaxHighlight from '~/components/ui/SyntaxHighlight.vue'
-import Cta from '~/components/ui/Cta.vue'
 import AppLink from '~/components/ui/AppLink.vue'
 
 import { ACCESS_IBM_Q_SYSTEMS } from '~/constants/appLinks'
 
 @Component({
   components: {
-    Cta,
     ElementPresentation,
     PageSection,
     SyntaxHighlight,
