@@ -20,7 +20,7 @@
             everything you need to know. Starting with installing Qiskit, to
             investigating the latest algorithms and research topics.
           </p>
-          <AppCta v-bind="youtubeQiskitAppLink">
+          <AppCta v-bind="youtubeQiskitCtaLink">
             {{ youtubeQiskitCtaLink.label }}
           </AppCta>
         </article>
