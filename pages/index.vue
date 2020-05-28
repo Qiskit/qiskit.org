@@ -95,7 +95,7 @@
                   :aria-labelledby="`${socialNetworkLink.name.toLowerCase().trim()}-icon`"
                   role="img"
                 >
-                  <title id="slack-icon">{{ socialNetworkLink.name }} icon</title>
+                  <title :id="`${socialNetworkLink.name.toLowerCase().trim()}-icon`">{{ socialNetworkLink.name }} icon</title>
                   <path :d="socialNetworkLink.iconPath" />
                   <path v-if="socialNetworkLink.iconPathSecondPart" :d="socialNetworkLink.iconPathSecondPart" />
                 </svg>
