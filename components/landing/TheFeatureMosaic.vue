@@ -131,7 +131,7 @@ export default class extends Vue {}
     flex-direction: column;
 
     @include mq($until: medium) {
-      min-height: 12rem;
+      height: 12rem;
       margin-bottom: $layout-03;
     }
 
@@ -202,6 +202,7 @@ export default class extends Vue {}
     grid-area: a;
 
     @include mq($until: medium) {
+      background-size: auto 8rem;
       padding-bottom: 6rem;
     }
   }
