@@ -148,22 +148,20 @@ export default class extends Vue {}
     margin-bottom: $spacing-05;
 
     @include mq($from: medium, $until: large) {
-      @include type-style('label-01');
-      font-weight: 600;
+      @include type-style('productive-heading-01');
       max-width: 4 * $column-size-medium;
       margin-bottom: $spacing-03;
     }
 
     @include mq($until: medium) {
-      @include type-style('label-01');
-      font-weight: 600;
+      @include type-style('productive-heading-01');
       max-width: 4 * $column-size-small;
       margin-bottom: $spacing-03;
     }
   }
 
   &__feature-description {
-    @include type-style('body-long-01');
+    @include type-style('body-long-01', true);
     color: $cool-gray-60;
     max-width: 6 * $column-size-large;
 
