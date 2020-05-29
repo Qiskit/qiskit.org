@@ -121,6 +121,7 @@ export default class extends Vue {}
     @include mq($until: medium) {
       display: flex;
       flex-direction: column;
+      gap: unset;
     }
   }
 
@@ -129,12 +130,15 @@ export default class extends Vue {}
     display: flex;
     flex-direction: column;
 
-    @include mq($from: medium, $until: large) {
-
-    }
-
     @include mq($until: medium) {
       min-height: 12rem;
+      margin-bottom: $layout-03;
+    }
+
+    &:last-child {
+      @include mq($until: medium) {
+        margin-bottom: 0;
+      }
     }
   }
 
@@ -147,12 +151,14 @@ export default class extends Vue {}
       @include type-style('label-01');
       font-weight: 600;
       max-width: 4 * $column-size-medium;
+      margin-bottom: $spacing-03;
     }
 
     @include mq($until: medium) {
       @include type-style('label-01');
       font-weight: 600;
       max-width: 4 * $column-size-small;
+      margin-bottom: $spacing-03;
     }
   }
 
@@ -178,6 +184,14 @@ export default class extends Vue {}
 
   &__feature-copy {
     padding: $spacing-07;
+
+    @include mq($from: medium, $until: large) {
+      padding: $spacing-05;
+    }
+
+    @include mq($until: medium) {
+      padding: $spacing-05;
+    }
   }
 
   &__feature-circuits {
@@ -247,7 +261,7 @@ export default class extends Vue {}
 
   &__feature-mitigation {
     background-image: url('/images/feature-mitigation.png');
-    background-position: right top calc(50% + 2rem) ;
+    background-position: right 0 top calc(50% + 2rem);
     background-size: auto;
     background-repeat: no-repeat;
     padding-bottom: 5rem;
