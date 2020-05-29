@@ -320,12 +320,35 @@ export default class extends QiskitPage {
   &__header {
     @include type-style('expressive-heading-05');
     margin-bottom: $layout-03;
+    color: $cool-gray-80;
+
+    @include mq($from: medium, $until: large) {
+      @include type-style('expressive-heading-03');
+      font-weight: 300;
+      max-width: 4 * $column-size-medium;
+    }
+
+    @include mq($until: medium) {
+      @include type-style('expressive-heading-03');
+      font-weight: 300;
+      max-width: 4 * $column-size-small;
+    }
   }
 
   &__paragraph {
     @include type-style('body-long-01');
-    max-width: 33%;
+    max-width: 6 * $column-size-large;
     margin-bottom: $layout-03;
+
+    @include mq($from: medium, $until: large) {
+      @include type-style('label-01');
+      max-width: 4 * $column-size-medium;
+    }
+
+    @include mq($until: medium) {
+      @include type-style('label-01');
+      max-width: 4 * $column-size-small;
+    }
   }
 
   &__horizontal-section-legacy:nth-child(2n+1) {
