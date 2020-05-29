@@ -86,19 +86,17 @@ export default class extends Vue {
   }
 
   &__description {
-    @include type-style('body-short-02');
+    @include type-style('body-long-01');
     color: $white-text-01;
     margin: 0 0 $layout-06;
     padding: 0 25% 0 0;
 
     @include mq($from: medium, $until: large) {
-      @include type-style('body-short-01');
-      margin: 0 0 $layout-05;
+      @include type-style('label-01');
     }
 
     @include mq($until: medium) {
-      @include type-style('body-short-01');
-      margin: 0 0 $layout-03;
+      @include type-style('label-01');
     }
   }
 
