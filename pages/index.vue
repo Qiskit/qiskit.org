@@ -26,14 +26,15 @@
         </article>
         <article class="landing-page__section">
           <h2 class="element__header">
-            Kids meet quantum!
+            Virtual Event Guide!
           </h2>
           <p class="element__paragraph">
-            This activity pack will entertain your kids with fun activities
-            about quantum computing. Fun for all kids and parents!
+            Host your own virtual event using this guide curated by the
+            community! Use everything from hackathon projects to sample agendas
+            to make your next event awesome.
           </p>
-          <AppCta v-bind="activitiesWithKidsCtaLink" is-static>
-            {{ activitiesWithKidsCtaLink.label }}
+          <AppCta v-bind="virtualEventGuideCtaLink" is-static>
+            {{ virtualEventGuideCtaLink.label }}
           </AppCta>
         </article>
       </div>
@@ -82,7 +83,8 @@
             <li
               v-for="socialNetworkLink in socialNetworkLinks"
               :key="socialNetworkLink.name"
-              class="landing-page__social-network">
+              class="landing-page__social-network"
+            >
               <AppLink
                 class="landing-page__social-network-link"
                 v-bind="socialNetworkLink"
@@ -120,7 +122,7 @@ import AppLink from '~/components/ui/AppLink.vue'
 import {
   SOCIAL_MEDIA_COMMUNITY,
   YOUTUBE_QISKIT_CTA,
-  ACTIVITIES_WITH_KIDS_CTA,
+  VIRTUAL_EVENT_GUIDE_CTA,
   INTRO_QISKIT_NOTEBOOKS_CTA
 } from '~/constants/appLinks'
 
@@ -139,7 +141,7 @@ export default class extends QiskitPage {
   routeName = 'qiskit-landing-page'
   socialNetworkLinks = SOCIAL_MEDIA_COMMUNITY
   youtubeQiskitCtaLink = YOUTUBE_QISKIT_CTA
-  activitiesWithKidsCtaLink = ACTIVITIES_WITH_KIDS_CTA
+  virtualEventGuideCtaLink = VIRTUAL_EVENT_GUIDE_CTA
   introQiskitNotebooksCtaLink = INTRO_QISKIT_NOTEBOOKS_CTA
 }
 </script>

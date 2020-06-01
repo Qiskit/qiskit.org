@@ -126,11 +126,11 @@ const YOUTUBE_QISKIT_CTA: GeneralLink = {
   }
 }
 
-const ACTIVITIES_WITH_KIDS_CTA: GeneralLink = {
-  url: '/activities/quantum-activity-pack-for-kids.pdf',
+const VIRTUAL_EVENT_GUIDE_CTA: GeneralLink = {
+  url: 'https://qiskit-community.github.io/virtual-event-guide/',
   label: 'Try it',
   segment: {
-    action: 'Activity pack for kids'
+    action: 'Virtual Events Guide'
   }
 }
 
@@ -162,7 +162,7 @@ export {
   ACCESS_IBM_Q_SYSTEMS,
   EVENT_REQUEST_LINK,
   YOUTUBE_QISKIT_CTA,
-  ACTIVITIES_WITH_KIDS_CTA,
+  VIRTUAL_EVENT_GUIDE_CTA,
   INTRO_QISKIT_NOTEBOOKS_CTA,
   YOUTUBE_ALL_EPISODES_CTA,
   DISCOVER_TEXTBOOK_CTA,
