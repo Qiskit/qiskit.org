@@ -158,6 +158,7 @@ const REQUEST_AN_EVENT_CTA: GeneralLink = {
 }
 
 export {
+  SegmentData,
   SOCIAL_MEDIA_COMMUNITY,
   ACCESS_IBM_Q_SYSTEMS,
   EVENT_REQUEST_LINK,

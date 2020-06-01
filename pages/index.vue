@@ -23,7 +23,7 @@
       <LandingCta
         kind="secondary"
         class="landing-page__full-overview-cta"
-        to="#"
+        url="#"
         @click="$trackClickEvent({
           action: 'Visit Full Overview'
         })"

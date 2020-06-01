@@ -1,9 +1,8 @@
 <template>
-  <a
+  <AppLink
     class="qiskit-version-info"
-    href="https://github.com/Qiskit/qiskit"
-    target="_blank"
-    rel="noopener"
+    url="https://github.com/Qiskit/qiskit"
+    :segment="{ action: 'GitHub repository' }"
   >
     <svg
       class="qiskit-version-info__github-icon"
@@ -19,24 +18,26 @@
       </p>
       <p class="qiskit-version-info__release-notes">
         See
-        <a
+        <AppLink
           class="qiskit-version-info__release-notes-link"
-          href="https://qiskit.org/documentation/release_notes.html#notable-changes"
-          target="_blank"
-          rel="noopener"
+          url="https://qiskit.org/documentation/release_notes.html#notable-changes"
+          :segment="{ action: 'Release notes' }"
         >
           release notes
-        </a>
+        </AppLink>
       </p>
     </div>
-  </a>
+  </AppLink>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
+import AppLink from '~/components/ui/AppLink.vue'
 
-@Component
+@Component({
+  components: { AppLink }
+})
 export default class extends Vue {
   @Prop({ type: String, required: true }) version!: string
 }

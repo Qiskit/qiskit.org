@@ -1,20 +1,22 @@
 <template>
-  <a
+  <AppLink
     class="landing-cta"
     :class="`landing-cta_kind_${kind}`"
-    target="_blank"
-    rel="noopener"
+    v-bind="$attrs"
   >
     <slot />
     <ArrowRight20 class="landing-cta__icon" />
-  </a>
+  </AppLink>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
+import AppLink from '~/components/ui/AppLink.vue'
 
-@Component
+@Component({
+  components: { AppLink }
+})
 export default class extends Vue {
   @Prop({ type: String, default: 'primary' }) kind!: 'primary'|'secondary';
 }

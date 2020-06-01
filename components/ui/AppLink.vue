@@ -15,11 +15,12 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
+import { SegmentData } from '~/constants/appLinks'
 
 @Component
 export default class extends Vue {
   @Prop({ type: String, default: '' }) url
-  @Prop(Object) segment
+  @Prop({ type: Object, required: false }) segment!: SegmentData
   @Prop({ type: Boolean, default: false }) isStatic
 
   get hasLink (): boolean {
