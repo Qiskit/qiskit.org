@@ -111,6 +111,7 @@ export default class extends Vue {}
 
     @include mq($from: medium, $until: large) {
       grid-template-columns: 2fr 3fr;
+      grid-template-rows: repeat(3, minmax(10rem, auto));
       grid-template-areas:
         "a b"
         "c c"

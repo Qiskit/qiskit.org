@@ -253,8 +253,9 @@ export default class extends QiskitPage {
 
   &__presentation-container {
     position: relative;
-    padding-top: $layout-05;
-    padding-bottom: $layout-05;
+    padding-top: $layout-06;
+    padding-bottom: $layout-07;
+    margin-bottom: $layout-06;
     background-size:
       5rem 5rem,
       5rem 5rem;
@@ -271,8 +272,9 @@ export default class extends QiskitPage {
     overflow: hidden;
 
     @include mq($from: medium, $until: large) {
-      padding-top: $layout-04;
-      padding-bottom: $layout-04;
+      padding-top: $layout-05;
+      padding-bottom: $layout-06;
+      margin-bottom: $layout-05;
       background-size:
         3rem 3rem,
         3rem 3rem;
@@ -280,7 +282,8 @@ export default class extends QiskitPage {
 
     @include mq($until: medium) {
       padding-top: $layout-03;
-      padding-bottom: $layout-03;
+      padding-bottom: $layout-05;
+      margin-bottom: $layout-03;
       background-size:
         2rem 2rem,
         2rem 2rem;
@@ -315,6 +318,14 @@ export default class extends QiskitPage {
   &__feature-mosaic {
     margin-top: $layout-01;
     margin-bottom: $layout-03;
+
+    @include mq($from: medium, $until: large) {
+      margin-bottom: $layout-01;
+    }
+
+    @include mq($until: medium) {
+      margin-bottom: $layout-01;
+    }
   }
 
   &__header {
@@ -325,6 +336,7 @@ export default class extends QiskitPage {
     @include mq($from: medium, $until: large) {
       @include type-style('expressive-heading-03');
       font-weight: 300;
+      margin-bottom: $layout-01;
       max-width: 4 * $column-size-medium;
     }
 
@@ -332,22 +344,25 @@ export default class extends QiskitPage {
       @include type-style('expressive-heading-03');
       font-weight: 300;
       max-width: 4 * $column-size-small;
+      margin-bottom: $layout-01;
     }
   }
 
   &__paragraph {
     @include type-style('body-long-01');
     max-width: 6 * $column-size-large;
-    margin-bottom: $layout-03;
+    margin-bottom: $layout-04;
 
     @include mq($from: medium, $until: large) {
       @include type-style('label-01');
       max-width: 4 * $column-size-medium;
+      margin-bottom: $layout-03;
     }
 
     @include mq($until: medium) {
       @include type-style('label-01');
       max-width: 4 * $column-size-small;
+      margin-bottom: $layout-03;
     }
   }
 
