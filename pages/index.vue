@@ -2,46 +2,39 @@
   <main class="element landing-page">
     <div class="landing-page__presentation-container">
       <div class="landing-page__presentation-picture" />
-      <TheHeroMoment
-        class="landing-page__presentation"
-        :version="qiskitVersion"
-      />
-    </div>
-    <PageSection class="landing-page__horizontal-section" framed>
-      <div class="landing-page__multi-column-layout">
-        <article class="landing-page__section">
-          <h2 class="element__header">
-            Qiskit on YouTube
-          </h2>
-          <p class="element__paragraph">
-            Would you like to learn how to code a quantum computer? Take a look
-            at the Coding with Qiskit Video Series, where Abraham Asfaw explains
-            everything you need to know. Starting with installing Qiskit, to
-            investigating the latest algorithms and research topics.
-          </p>
-          <AppCta v-bind="youtubeQiskitCtaLink">
-            {{ youtubeQiskitCtaLink.label }}
-          </AppCta>
-        </article>
-        <article class="landing-page__section">
-          <h2 class="element__header">
-            Virtual Event Guide!
-          </h2>
-          <p class="element__paragraph">
-            Host your own virtual event using this guide curated by the
-            community! Use everything from hackathon projects to sample agendas
-            to make your next event awesome.
-          </p>
-          <AppCta v-bind="virtualEventGuideCtaLink" is-static>
-            {{ virtualEventGuideCtaLink.label }}
-          </AppCta>
-        </article>
+      <div class="landing-page__section">
+        <TheHeroMoment
+          class="landing-page__presentation"
+          :version="qiskitVersion"
+        />
       </div>
-    </PageSection>
-    <PageSection class="landing-page__horizontal-section" framed>
+    </div>
+    <article class="landing-page__section">
+      <h2 class="landing-page__header">
+        What can Qiskit do
+      </h2>
+      <p class="landing-page__paragraph">
+        Qiskit accelerates the development of quantum applications by
+        providing the complete set of tools needed for interacting with
+        quantum systems and simulators.
+      </p>
+      <TheFeatureMosaic class="landing-page__feature-mosaic" />
+      <!-- TODO: Link to the overview page -->
+      <LandingCta
+        kind="secondary"
+        class="landing-page__full-overview-cta"
+        to="#"
+        @click="$trackClickEvent({
+          action: 'Visit Full Overview'
+        })"
+      >
+        Full Overview
+      </LandingCta>
+    </article>
+    <PageSection class="landing-page__horizontal-section-legacy" framed>
       <div class="landing-page__multi-column-layout">
         <article
-          class="landing-page__section landing-page__section_flex_3"
+          class="landing-page__section-legacy landing-page__section-legacy_flex_3"
         >
           <h2 class="element__header">
             IBM Quantum Experience
@@ -57,7 +50,7 @@
           </AppCta>
         </article>
         <aside
-          class="landing-page__section landing-page__section_flex_2"
+          class="landing-page__section-legacy landing-page__section-legacy_flex_2"
         >
           <img
             class="landing-page__quantum-experience-image"
@@ -67,9 +60,9 @@
         </aside>
       </div>
     </PageSection>
-    <PageSection class="landing-page__horizontal-section" framed>
+    <PageSection class="landing-page__horizontal-section-legacy" framed>
       <div class="landing-page__multi-column-layout">
-        <article class="landing-page__section landing-page__section_flex_3">
+        <article class="landing-page__section-legacy landing-page__section-legacy_flex_3">
           <h2 class="element__header">
             Where to find us
           </h2>
@@ -77,7 +70,7 @@
             Through connecting, contributing and collaborating, our diverse community of Qiskitters propels Qiskit to new forefronts and fields. In our commitment to open this quantum computing community to people of all backgrounds, we span across several platforms. Find us today to start connecting and contributing!
           </p>
         </article>
-        <aside class="landing-page__section landing-page__section_flex_2">
+        <aside class="landing-page__section-legacy landing-page__section-legacy_flex_2">
           <ul class="landing-page__social-network-list">
             <li
               v-for="socialNetworkLink in socialNetworkLinks"
@@ -116,6 +109,8 @@ import axios from 'axios'
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import TheHeroMoment from '~/components/landing/TheHeroMoment.vue'
+import LandingCta from '~/components/landing/LandingCta.vue'
+import TheFeatureMosaic from '~/components/landing/TheFeatureMosaic.vue'
 import PageSection from '~/components/ui/PageSection.vue'
 import AppCta from '~/components/ui/AppCta.vue'
 import AppLink from '~/components/ui/AppLink.vue'
@@ -130,7 +125,9 @@ import {
 @Component({
   components: {
     AppCta,
+    LandingCta,
     TheHeroMoment,
+    TheFeatureMosaic,
     PageSection,
     AppLink
   },
@@ -163,8 +160,9 @@ export default class extends QiskitPage {
 
   &__presentation-container {
     position: relative;
-    padding-top: $layout-05;
-    padding-bottom: $layout-05;
+    padding-top: $layout-06;
+    padding-bottom: $layout-07;
+    margin-bottom: $layout-06;
     background-size:
       5rem 5rem,
       5rem 5rem;
@@ -181,8 +179,9 @@ export default class extends QiskitPage {
     overflow: hidden;
 
     @include mq($from: medium, $until: large) {
-      padding-top: $layout-04;
-      padding-bottom: $layout-04;
+      padding-top: $layout-05;
+      padding-bottom: $layout-06;
+      margin-bottom: $layout-05;
       background-size:
         3rem 3rem,
         3rem 3rem;
@@ -190,7 +189,8 @@ export default class extends QiskitPage {
 
     @include mq($until: medium) {
       padding-top: $layout-03;
-      padding-bottom: $layout-03;
+      padding-bottom: $layout-05;
+      margin-bottom: $layout-03;
       background-size:
         2rem 2rem,
         2rem 2rem;
@@ -217,15 +217,63 @@ export default class extends QiskitPage {
     }
   }
 
-  &__presentation {
+  &__section {
     @include contained();
+    margin-bottom: $layout-07;
   }
 
-  &__horizontal-section {
-    background-color: $inverse-02;
+  &__feature-mosaic {
+    margin-top: $layout-01;
+    margin-bottom: $layout-03;
+
+    @include mq($from: medium, $until: large) {
+      margin-bottom: $layout-01;
+    }
+
+    @include mq($until: medium) {
+      margin-bottom: $layout-01;
+    }
   }
 
-  &__horizontal-section:nth-child(2n+1) {
+  &__header {
+    @include type-style('expressive-heading-05');
+    margin-bottom: $layout-03;
+    color: $cool-gray-80;
+
+    @include mq($from: medium, $until: large) {
+      @include type-style('expressive-heading-03');
+      font-weight: 300;
+      margin-bottom: $layout-01;
+      max-width: 4 * $column-size-medium;
+    }
+
+    @include mq($until: medium) {
+      @include type-style('expressive-heading-03');
+      font-weight: 300;
+      max-width: 4 * $column-size-small;
+      margin-bottom: $layout-01;
+    }
+  }
+
+  &__paragraph {
+    @include type-style('body-long-01');
+    max-width: 6 * $column-size-large;
+    margin-bottom: $layout-04;
+
+    @include mq($from: medium, $until: large) {
+      @include type-style('label-01');
+      max-width: 4 * $column-size-medium;
+      margin-bottom: $layout-03;
+    }
+
+    @include mq($until: medium) {
+      @include type-style('label-01');
+      max-width: 4 * $column-size-small;
+      margin-bottom: $layout-03;
+    }
+  }
+
+  &__horizontal-section-legacy:nth-child(2n+1) {
     background-color: $purple-40;
   }
 
@@ -237,7 +285,7 @@ export default class extends QiskitPage {
     }
   }
 
-  &__section {
+  &__section-legacy {
     flex: 1;
 
     @include mq($until: medium) {
