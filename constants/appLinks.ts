@@ -127,7 +127,7 @@ const YOUTUBE_QISKIT_CTA: GeneralLink = {
 }
 
 const VIRTUAL_EVENT_GUIDE_CTA: GeneralLink = {
-  url: 'https://pages.github.ibm.com/Josie-Kies/virtual-event-guide/',
+  url: 'https://qiskit-community.github.io/virtual-event-guide/',
   label: 'Try it',
   segment: {
     action: 'Virtual Events Guide'
