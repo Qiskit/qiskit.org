@@ -58,6 +58,10 @@ export default class extends Vue {
     @include mq($from: medium, $until: large) {
       margin-right: $spacing-05;
     }
+
+    @include mq($until: medium) {
+      margin-right: $spacing-03;
+    }
   }
 
   &__content {

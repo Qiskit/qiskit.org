@@ -318,6 +318,14 @@ export default class extends QiskitPage {
   &__feature-mosaic {
     margin-top: $layout-01;
     margin-bottom: $layout-03;
+
+    @include mq($from: medium, $until: large) {
+      margin-bottom: $layout-01;
+    }
+
+    @include mq($until: medium) {
+      margin-bottom: $layout-01;
+    }
   }
 
   &__header {
@@ -336,9 +344,6 @@ export default class extends QiskitPage {
       @include type-style('expressive-heading-03');
       font-weight: 300;
       max-width: 4 * $column-size-small;
-    }
-
-    @include mq($until: medium) {
       margin-bottom: $layout-01;
     }
   }
