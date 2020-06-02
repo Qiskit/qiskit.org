@@ -33,15 +33,13 @@ export default class extends Vue {
 
 .footer-section {
   &__title {
-    @include type-style('productive-heading-03');
-    margin-top: 2rem;
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid $ui-03;
+    @include type-style('productive-heading-02');
+    margin-top: $layout-03;
+    margin-bottom: $spacing-07;
   }
 
   &__link {
-    @include type-style('productive-heading-02');
+    @include type-style('caption-01');
     color: inherit;
     text-decoration: none;
     display: inline-block;
