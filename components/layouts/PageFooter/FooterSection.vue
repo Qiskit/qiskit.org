@@ -1,41 +1,56 @@
 <template>
-  <section class="footer-column">
-    <FooterSubsection
-      v-for="el in elements"
-      :key="el.title"
-      :title="el.title"
-      :elements="el.elements"
-    />
-  </section>
+  <div class="footer-section">
+    <h2 class="footer-section__title">
+      {{ title }}
+    </h2>
+    <AppLink
+      v-for="element in elements"
+      :key="element.label"
+      class="footer-section__link"
+      v-bind="element"
+    >
+      {{ element.label }}
+    </AppLink>
+  </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-import FooterSubsection from './FooterSubsection.vue'
+import AppLink from '~/components/ui/AppLink.vue'
 
 @Component({
-  components: {
-    FooterSubsection
-  }
+  components: { AppLink }
 })
 export default class extends Vue {
+  @Prop(String) title
   @Prop(Array) elements
 }
 </script>
 
 <style lang="scss" scoped>
-.footer-column {
-  flex: 1;
-  margin-right: $layout-03;
+@import '~carbon-components/scss/globals/scss/typography';
 
-  &:last-child {
-    margin-right: 0;
+.footer-section {
+  &__title {
+    @include type-style('productive-heading-03');
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid $ui-03;
   }
 
-  @include mq($until: medium) {
-    margin-top: $layout-03;
-    margin-right: 0;
+  &__link {
+    @include type-style('productive-heading-02');
+    color: inherit;
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+    margin-top: .5rem;
+
+    &:hover {
+      color: $text-01;
+    }
   }
 }
 </style>

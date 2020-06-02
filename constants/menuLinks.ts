@@ -164,34 +164,29 @@ type FooterSubsection = {
   elements: Array<NavLink>
 }
 
-type FooterStructure = Array<Array<FooterSubsection>>
+type FooterStructure = Array<FooterSubsection>
 
 const FOOTER_ELEMENTS: FooterStructure = [
   // Elements in the first footer column
-  [
-    {
-      title: 'Qiskit Elements',
-      elements: ORDERED_QISKIT_ELEMENTS
-    }
-  ],
+  {
+    title: 'Qiskit Elements',
+    elements: ORDERED_QISKIT_ELEMENTS
+  },
   // Elements in the second footer column
-  [
-    {
-      title: 'Qiskit for Educators',
-      elements: ORDERED_QISKIT_EDUCATION
-    },
-    {
-      title: 'Qiskit Advocates',
-      elements: ORDERED_QISKIT_ADVOCATES
-    }
-  ],
+  {
+    title: 'Qiskit for Educators',
+    elements: ORDERED_QISKIT_EDUCATION
+  },
   // Elements in the third footer column
-  [
-    {
-      title: 'Social Media',
-      elements: ORDERED_SOCIAL_MEDIA
-    }
-  ]
+  {
+    title: 'Qiskit Advocates',
+    elements: ORDERED_QISKIT_ADVOCATES
+  },
+  // Elements in the fourth footer column
+  {
+    title: 'Social Media',
+    elements: ORDERED_SOCIAL_MEDIA
+  }
 ]
 
 const HOME_LINK: NavLink = {

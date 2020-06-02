@@ -3,9 +3,11 @@
     <div class="page-footer-container">
       <div class="page-footer page-footer--framed">
         <FooterSection
-          v-for="(columnElements, index) in footerElements"
-          :key="index"
-          :elements="columnElements"
+          v-for="sectionElements in footerElements"
+          :key="sectionElements.title"
+          class="page-footer__section"
+          :title="sectionElements.title"
+          :elements="sectionElements.elements"
         />
       </div>
     </div>
@@ -41,6 +43,20 @@ export default class extends Vue {
 
   @include mq($until: medium) {
     display: block;
+  }
+
+  &__section {
+     flex: 1;
+    margin-right: $layout-03;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    @include mq($until: medium) {
+      margin-top: $layout-03;
+      margin-right: 0;
+    }
   }
 }
 </style>
