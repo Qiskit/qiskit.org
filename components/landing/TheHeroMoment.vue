@@ -14,7 +14,10 @@
       </p>
       <LandingCta
         class="the-hero-moment__cta"
-        href="https://qiskit.org/documentation/install.html"
+        url="https://qiskit.org/documentation/install.html"
+        @click="$trackClickEvent({
+          action: 'Get Started'
+        })"
       >
         Get started
       </LandingCta>
