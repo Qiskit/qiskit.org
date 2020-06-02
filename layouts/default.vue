@@ -37,7 +37,6 @@ main {
 
 .default-layout {
   &__footer {
-    margin-top: $layout-05;
     margin-bottom: $layout-05;
   }
 }
