@@ -43,11 +43,6 @@ import TheHeroMoment from '~/components/landing/TheHeroMoment.vue'
 import LandingCta from '~/components/landing/LandingCta.vue'
 import TheFeatureMosaic from '~/components/landing/TheFeatureMosaic.vue'
 
-import {
-  YOUTUBE_QISKIT_CTA,
-  VIRTUAL_EVENT_GUIDE_CTA
-} from '~/constants/appLinks'
-
 @Component({
   components: {
     LandingCta,
@@ -67,8 +62,6 @@ import {
 })
 export default class extends QiskitPage {
   routeName = 'qiskit-landing-page'
-  youtubeQiskitCtaLink = YOUTUBE_QISKIT_CTA
-  virtualEventGuideCtaLink = VIRTUAL_EVENT_GUIDE_CTA
 }
 </script>
 
