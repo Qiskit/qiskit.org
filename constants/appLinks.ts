@@ -76,6 +76,7 @@ const REQUEST_AN_EVENT_CTA: GeneralLink = {
 }
 
 export {
+  SegmentData,
   ACCESS_IBM_Q_SYSTEMS,
   EVENT_REQUEST_LINK,
   YOUTUBE_ALL_EPISODES_CTA,
