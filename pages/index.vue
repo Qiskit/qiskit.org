@@ -42,9 +42,6 @@ import QiskitPage from '~/components/logic/QiskitPage.vue'
 import TheHeroMoment from '~/components/landing/TheHeroMoment.vue'
 import LandingCta from '~/components/landing/LandingCta.vue'
 import TheFeatureMosaic from '~/components/landing/TheFeatureMosaic.vue'
-import PageSection from '~/components/ui/PageSection.vue'
-import AppCta from '~/components/ui/AppCta.vue'
-import AppLink from '~/components/ui/AppLink.vue'
 
 import {
   YOUTUBE_QISKIT_CTA,
@@ -53,12 +50,9 @@ import {
 
 @Component({
   components: {
-    AppCta,
     LandingCta,
     TheHeroMoment,
-    TheFeatureMosaic,
-    PageSection,
-    AppLink
+    TheFeatureMosaic
   },
   head () {
     return { title: 'Qiskit' }
