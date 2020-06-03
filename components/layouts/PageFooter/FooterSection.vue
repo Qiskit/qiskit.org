@@ -34,8 +34,7 @@ export default class extends Vue {
 .footer-section {
   &__title {
     @include type-style('productive-heading-02');
-    margin-top: $layout-03;
-    margin-bottom: $spacing-07;
+    padding-bottom: $spacing-07;
   }
 
   &__link {
@@ -44,7 +43,7 @@ export default class extends Vue {
     text-decoration: none;
     display: inline-block;
     width: 100%;
-    margin-top: .5rem;
+    padding-bottom: $spacing-03;
 
     &:hover {
       color: $text-01;

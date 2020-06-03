@@ -36,6 +36,8 @@ export default class extends Vue {
   display: flex;
   flex-direction: row;
   color: $text-02;
+  padding-top: $spacing-09;
+  padding-bottom: $spacing-09;
 
   &--framed {
     @include framed();
@@ -46,7 +48,7 @@ export default class extends Vue {
   }
 
   &__section {
-     flex: 1;
+    flex: 1;
     margin-right: $layout-03;
 
     &:last-child {
