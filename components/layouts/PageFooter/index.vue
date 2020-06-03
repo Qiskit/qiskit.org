@@ -37,15 +37,12 @@ export default class extends Vue {
 
 .main-footer {
   background-color: $cool-gray-10;
-  padding-top: $spacing-09;
-  padding-bottom: $spacing-09;
   /*
   * The footer should be framed() (max-width of 1100px = 68.75rem)
   * If we framed it, the backgroud fit the framed size, not all
   * That's why we calculate the padding
   */
-  padding-right: calc((100vw - 68.75rem) / 2);
-  padding-left: calc((100vw - 68.75rem) / 2);
+  padding: $spacing-07 calc((100vw - 68.75rem) / 2);
   display: flex;
   justify-content: space-between;
 
@@ -53,11 +50,13 @@ export default class extends Vue {
     @include type-style('productive-heading-05');
     line-height: 2rem;
     color: $cool-gray-60;
+    padding: 0 $spacing-07
   }
 
   &__sitemap {
     display: flex;
     justify-content: space-between;
+    padding: 0 $spacing-07
   }
 
   &__section {
