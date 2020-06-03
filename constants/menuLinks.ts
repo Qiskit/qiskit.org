@@ -211,6 +211,25 @@ const FOOTER_ELEMENTS: FooterStructure = [
   }
 ]
 
+const SECONDARY_FOOTER_LINKS: Array<NavLink> = [
+  {
+    label: 'Terms of use',
+    url: ''
+  },
+  {
+    label: 'Accessibility',
+    url: ''
+  },
+  {
+    label: 'Contact',
+    url: ''
+  },
+  {
+    label: 'Privacy',
+    url: ''
+  }
+]
+
 const HOME_LINK: NavLink = {
   label: 'Qiskit',
   url: '/'
@@ -225,6 +244,7 @@ export {
   ORDERED_QISKIT_ELEMENTS,
   ORDERED_COMMUNITY_SUB_LINKS,
   FOOTER_ELEMENTS,
+  SECONDARY_FOOTER_LINKS,
   HOME_LINK,
   COMMUNITY_LINK,
   TUTORIALS_LINK,

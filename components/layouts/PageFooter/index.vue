@@ -12,6 +12,19 @@
         />
       </div>
     </div>
+    <div class="secondary-footer">
+      <div class="secondary-footer__copyright">©Qiskit | All Rights Reserved</div>
+      <div class="secondary-footer__links">
+        <AppLink
+          v-for="link in secondaryFooterLinks"
+          :key="link.label"
+          class="secondary-footer__link"
+          v-bind="link"
+        >
+          {{ link.label }}
+        </AppLink>
+      </div>
+    </div>
   </footer>
 </template>
 
@@ -19,16 +32,19 @@
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 import FooterSection from './FooterSection.vue'
+import AppLink from '~/components/ui/AppLink.vue'
 
-import { FOOTER_ELEMENTS } from '~/constants/menuLinks'
+import { FOOTER_ELEMENTS, SECONDARY_FOOTER_LINKS } from '~/constants/menuLinks'
 
 @Component({
   components: {
-    FooterSection
+    FooterSection,
+    AppLink
   }
 })
 export default class extends Vue {
   footerElements = FOOTER_ELEMENTS
+  secondaryFooterLinks = SECONDARY_FOOTER_LINKS
 }
 </script>
 
@@ -65,8 +81,31 @@ export default class extends Vue {
 }
 
 .secondary-footer {
-  &_framed {
-    @include framed();
+  background-color: $white;
+  /*
+  * The footer should be framed() (max-width of 1100px = 68.75rem)
+  * If we framed it, the backgroud fit the framed size, not all
+  * That's why we calculate the padding
+  */
+  padding: $spacing-07 calc((100vw - 68.75rem) / 2);
+  display: flex;
+  justify-content: space-between;
+
+  &__copyright {
+    @include type-style('caption-01');
+    color: $cool-gray-60;
+    padding: 0 $spacing-07
+  }
+
+  &__links {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__link {
+    @include type-style('caption-01');
+    color: $cool-gray-60;
+    padding-right: $spacing-07
   }
 
 }
