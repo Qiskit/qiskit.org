@@ -33,20 +33,21 @@ export default class extends Vue {
 
 .footer-section {
   &__title {
-    @include type-style('productive-heading-02');
+    @include type-style('productive-heading-01');
+    color: $cool-gray-60;
     padding-bottom: $spacing-07;
   }
 
   &__link {
     @include type-style('caption-01');
-    color: inherit;
+    color: rgba($cool-gray-60, 0.5);
     text-decoration: none;
     display: inline-block;
     width: 100%;
     padding-bottom: $spacing-03;
 
     &:hover {
-      color: $text-01;
+      color: $inverse-01;
     }
   }
 }

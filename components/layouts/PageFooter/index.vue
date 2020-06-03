@@ -1,11 +1,12 @@
 <template>
   <footer>
-    <div class="page-footer-container">
-      <div class="page-footer page-footer--framed">
+    <div class="main-footer">
+      <div class="main-footer__logo">Qiskit</div>
+      <div class="main-footer__sitemap">
         <FooterSection
           v-for="sectionElements in footerElements"
           :key="sectionElements.title"
-          class="page-footer__section"
+          class="main-footer__section"
           :title="sectionElements.title"
           :elements="sectionElements.elements"
         />
@@ -32,33 +33,42 @@ export default class extends Vue {
 </script>
 
 <style lang="scss" scoped>
-.page-footer {
-  display: flex;
-  flex-direction: row;
-  color: $text-02;
+@import '~carbon-components/scss/globals/scss/typography';
+
+.main-footer {
+  background-color: $cool-gray-10;
   padding-top: $spacing-09;
   padding-bottom: $spacing-09;
+  /*
+  * The footer should be framed() (max-width of 1100px = 68.75rem)
+  * If we framed it, the backgroud fit the framed size, not all
+  * That's why we calculate the padding
+  */
+  padding-right: calc((100vw - 68.75rem) / 2);
+  padding-left: calc((100vw - 68.75rem) / 2);
+  display: flex;
+  justify-content: space-between;
 
-  &--framed {
-    @include framed();
+  &__logo {
+    @include type-style('productive-heading-05');
+    line-height: 2rem;
+    color: $cool-gray-60;
   }
 
-  @include mq($until: medium) {
-    display: block;
+  &__sitemap {
+    display: flex;
+    justify-content: space-between;
   }
 
   &__section {
     flex: 1;
-    margin-right: $layout-03;
-
-    &:last-child {
-      margin-right: 0;
-    }
-
-    @include mq($until: medium) {
-      margin-top: $layout-03;
-      margin-right: 0;
-    }
   }
+}
+
+.secondary-footer {
+  &_framed {
+    @include framed();
+  }
+
 }
 </style>
