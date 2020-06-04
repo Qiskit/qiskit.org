@@ -62,8 +62,7 @@ export default class extends Vue {
 <style lang="scss" scoped>
 @import '~carbon-components/scss/globals/scss/typography';
 
-.main-footer {
-  background-color: $cool-gray-10;
+.main-footer, .secondary-footer {
   /*
   * The footer should be framed() (max-width of 1100px = 68.75rem)
   * If we framed it, the backgroud fit the framed size, not all
@@ -72,18 +71,22 @@ export default class extends Vue {
   padding: $spacing-07 calc((100vw - 68.75rem) / 2);
   display: flex;
   justify-content: space-between;
+}
+
+.main-footer {
+  background-color: $cool-gray-10;
 
   &__logo {
     @include type-style('productive-heading-05');
     line-height: 2rem;
     color: $cool-gray-60;
-    padding: 0 $spacing-07
+    padding: 0 $spacing-07;
   }
 
   &__sitemap {
     display: flex;
     justify-content: space-between;
-    padding: 0 $spacing-07
+    padding: 0 $spacing-07;
   }
 
   &__section {
@@ -93,16 +96,8 @@ export default class extends Vue {
 
 .secondary-footer {
   background-color: $white;
-  /*
-  * The footer should be framed() (max-width of 1100px = 68.75rem)
-  * If we framed it, the backgroud fit the framed size, not all
-  * That's why we calculate the padding
-  */
-  padding: $spacing-07 calc((100vw - 68.75rem) / 2);
-  display: flex;
-  justify-content: space-between;
 
-  &__copyright {
+  &__copyright, &__link {
     @include type-style('caption-01');
     color: $cool-gray-60;
     padding: 0 $spacing-07
@@ -114,10 +109,7 @@ export default class extends Vue {
   }
 
   &__link {
-    @include type-style('caption-01');
     text-decoration: none;
-    color: $cool-gray-60;
-    padding-right: $spacing-07
   }
 }
 </style>
