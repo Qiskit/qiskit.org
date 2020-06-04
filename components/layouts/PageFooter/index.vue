@@ -10,19 +10,10 @@
           :title="sectionElements.title"
           :elements="sectionElements.elements"
         />
-        <div>
-          <h2 class="main-footer__icon-links-title">
-            {{ stayConnectedLinks.title }}
-          </h2>
-          <AppLink
-            v-for="iconLink in stayConnectedLinks.elements"
-            :key="iconLink.icon"
-            :url="iconLink.url"
-            class="main-footer__icon-link"
-          >
-            <component :is="iconLink.icon" />
-          </AppLink>
-        </div>
+        <FooterIconsSection
+          class="main-footer__section"
+          v-bind="stayConnectedElements"
+        />
       </div>
     </div>
     <div class="secondary-footer">
@@ -45,6 +36,7 @@
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 import FooterSection from './FooterSection.vue'
+import FooterIconsSection from './FooterIconsSection.vue'
 import AppLink from '~/components/ui/AppLink.vue'
 
 import {
@@ -56,12 +48,13 @@ import {
 @Component({
   components: {
     FooterSection,
+    FooterIconsSection,
     AppLink
   }
 })
 export default class extends Vue {
   footerElements = FOOTER_ELEMENTS
-  stayConnectedLinks = STAY_CONNECTED_LINKS
+  stayConnectedElements = STAY_CONNECTED_LINKS
   secondaryFooterLinks = SECONDARY_FOOTER_LINKS
 }
 </script>
@@ -96,21 +89,6 @@ export default class extends Vue {
   &__section {
     flex: 1;
   }
-
-  &__icon-links-title {
-    @include type-style('productive-heading-01');
-    color: $cool-gray-60;
-    padding-bottom: $spacing-07;
-  }
-
-  &__icon-link {
-    fill: $cool-gray-60;
-    padding-right: $spacing-05;
-  }
-
-  &__icon-link:nth-child(3) {
-    margin-right: 100%;
-  }
 }
 
 .secondary-footer {
@@ -141,6 +119,5 @@ export default class extends Vue {
     color: $cool-gray-60;
     padding-right: $spacing-07
   }
-
 }
 </style>
