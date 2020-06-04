@@ -137,6 +137,7 @@ export default class extends Vue {
 
   &__link {
     @include type-style('caption-01');
+    text-decoration: none;
     color: $cool-gray-60;
     padding-right: $spacing-07
   }
