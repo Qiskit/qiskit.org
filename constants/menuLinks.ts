@@ -27,6 +27,16 @@ interface NavLink {
   rel?: string
 }
 
+/**
+ * Represent an icon navigation link for the menus of the site
+ */
+interface IconNavLink {
+  /** The visible icon of the link */
+  icon: string
+  /** Where we want to go */
+  url: string
+}
+
 type LabeledLinks = {
   [key: string]: NavLink
 }
@@ -152,7 +162,7 @@ const TUTORIALS_LINK: NavLink = {
 
 type FooterSection = {
   title: string,
-  elements: Array<NavLink>
+  elements: Array<NavLink> | Array<IconNavLink>
 }
 
 type FooterStructure = Array<FooterSection>
@@ -198,18 +208,30 @@ const FOOTER_ELEMENTS: FooterStructure = [
       SOCIAL_MEDIA.stack,
       DOCUMENTATION_LINK
     ]
-  },
-  // Elements in the sixth footer column
-  {
-    title: 'Stay Connected',
-    elements: [
-      SOCIAL_MEDIA.twitter,
-      SOCIAL_MEDIA.slack,
-      SOCIAL_MEDIA.youtube,
-      SOCIAL_MEDIA.medium
-    ]
   }
 ]
+
+const STAY_CONNECTED_LINKS: FooterSection = {
+  title: 'Stay Connected',
+  elements: [
+    {
+      icon: 'LogoTwitter20',
+      url: SOCIAL_MEDIA.twitter.url
+    },
+    {
+      icon: 'LogoSlack20',
+      url: SOCIAL_MEDIA.slack.url
+    },
+    {
+      icon: 'LogoYouTube20',
+      url: SOCIAL_MEDIA.youtube.url
+    },
+    {
+      icon: 'LogoMedium20',
+      url: SOCIAL_MEDIA.medium.url
+    }
+  ]
+}
 
 const SECONDARY_FOOTER_LINKS: Array<NavLink> = [
   {
@@ -249,5 +271,6 @@ export {
   COMMUNITY_LINK,
   TUTORIALS_LINK,
   DOCUMENTATION_LINK,
+  STAY_CONNECTED_LINKS,
   NavLink
 }
