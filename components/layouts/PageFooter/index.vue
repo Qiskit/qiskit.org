@@ -85,12 +85,14 @@ export default class extends Vue {
 
   &__sitemap {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
+    flex-wrap: wrap;
     padding: 0 $spacing-07;
   }
 
   &__section {
-    flex: 1;
+    flex: 1 0;
+    min-width: 6rem;
   }
 }
 
