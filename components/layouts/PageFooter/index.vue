@@ -2,22 +2,18 @@
   <footer>
     <div class="main-footer">
       <div class="main-footer__logo">Qiskit</div>
-      <div class="main-footer__sections">
-        <div class="main-footer__sitemap">
-          <FooterSection
-            v-for="sectionElements in footerElements"
-            :key="sectionElements.title"
-            class="main-footer__section"
-            :title="sectionElements.title"
-            :elements="sectionElements.elements"
-          />
-        </div>
-        <div class="main-footer__stay-connected">
-          <FooterIconsSection
-            class="main-footer__section"
-            v-bind="stayConnectedElements"
-          />
-        </div>
+      <div class="main-footer__sitemap">
+        <FooterSection
+          v-for="sectionElements in footerElements"
+          :key="sectionElements.title"
+          class="main-footer__section"
+          :title="sectionElements.title"
+          :elements="sectionElements.elements"
+        />
+        <FooterIconsSection
+          class="main-footer__section"
+          v-bind="stayConnectedElements"
+        />
       </div>
     </div>
     <div class="secondary-footer">
@@ -80,19 +76,6 @@ export default class extends Vue {
 .main-footer {
   background-color: $cool-gray-10;
 
-  &__sections {
-    display: flex;
-
-     @include mq($from: medium, $until: large) {
-      flex-direction: column;
-    }
-  }
-
-  &__section {
-    flex: 1 0;
-    min-width: 6rem;
-  }
-
   &__logo {
     @include type-style('productive-heading-05');
     line-height: 2rem;
@@ -100,14 +83,18 @@ export default class extends Vue {
     padding: 0 $spacing-07;
   }
 
-  &__sitemap, &__stay-connected {
-    display: flex;
-    justify-content: flex-end;
-  }
+  &__sitemap {
+    display: grid;
+    grid-template-columns: repeat(6, 0.5fr);
 
-  &__stay-connected {
-     @include mq($from: medium, $until: large) {
-       margin-left: 80%;
+    @include mq($until: medium) {
+      grid-template-columns: repeat(3, 0.5fr);
+      grid-template-rows: repeat(2, 0.5fr);
+    }
+
+    @include mq($from:medium, $until: large) {
+      grid-template-columns: repeat(5, 0.5fr);
+      grid-template-rows: repeat(2, 0.5fr);
     }
   }
 }
@@ -124,10 +111,18 @@ export default class extends Vue {
   &__links {
     display: flex;
     justify-content: space-between;
+
+    @include mq($until: medium) {
+      flex-direction: column;
+    }
   }
 
   &__link {
     text-decoration: none;
+
+    @include mq($until: medium) {
+      padding-bottom: $spacing-05;
+    }
   }
 }
 </style>
