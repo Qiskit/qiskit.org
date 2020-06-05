@@ -96,6 +96,11 @@ export default class extends Vue {
     @include mq($from:medium, $until: large) {
       grid-template-columns: repeat(5, 0.5fr);
       grid-template-rows: repeat(2, 0.5fr);
+
+      :nth-child(6) {
+        grid-column: 5 / 6;
+        grid-row: 2 / 3;
+      }
     }
   }
 }
