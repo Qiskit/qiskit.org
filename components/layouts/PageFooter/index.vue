@@ -2,18 +2,22 @@
   <footer>
     <div class="main-footer">
       <div class="main-footer__logo">Qiskit</div>
-      <div class="main-footer__sitemap">
-        <FooterSection
-          v-for="sectionElements in footerElements"
-          :key="sectionElements.title"
-          class="main-footer__section"
-          :title="sectionElements.title"
-          :elements="sectionElements.elements"
-        />
-        <FooterIconsSection
-          class="main-footer__section"
-          v-bind="stayConnectedElements"
-        />
+      <div class="main-footer__sections">
+        <div class="main-footer__sitemap">
+          <FooterSection
+            v-for="sectionElements in footerElements"
+            :key="sectionElements.title"
+            class="main-footer__section"
+            :title="sectionElements.title"
+            :elements="sectionElements.elements"
+          />
+        </div>
+        <div class="main-footer__stay-connected">
+          <FooterIconsSection
+            class="main-footer__section"
+            v-bind="stayConnectedElements"
+          />
+        </div>
       </div>
     </div>
     <div class="secondary-footer">
@@ -76,6 +80,19 @@ export default class extends Vue {
 .main-footer {
   background-color: $cool-gray-10;
 
+  &__sections {
+    display: flex;
+
+     @include mq($from: medium, $until: large) {
+      flex-direction: column;
+    }
+  }
+
+  &__section {
+    flex: 1 0;
+    min-width: 6rem;
+  }
+
   &__logo {
     @include type-style('productive-heading-05');
     line-height: 2rem;
@@ -83,16 +100,15 @@ export default class extends Vue {
     padding: 0 $spacing-07;
   }
 
-  &__sitemap {
+  &__sitemap, &__stay-connected {
     display: flex;
     justify-content: flex-end;
-    flex-wrap: wrap;
-    padding: 0 $spacing-07;
   }
 
-  &__section {
-    flex: 1 0;
-    min-width: 6rem;
+  &__stay-connected {
+     @include mq($from: medium, $until: large) {
+       margin-left: 80%;
+    }
   }
 }
 
