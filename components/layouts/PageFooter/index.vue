@@ -6,14 +6,9 @@
         <FooterSection
           v-for="sectionElements in footerElements"
           :key="sectionElements.title"
-          class="main-footer__section"
-          :title="sectionElements.title"
-          :elements="sectionElements.elements"
+          v-bind="sectionElements"
         />
-        <FooterIconsSection
-          class="main-footer__section"
-          v-bind="stayConnectedElements"
-        />
+        <FooterIconsSection v-bind="stayConnectedElements" />
       </div>
     </div>
     <div class="secondary-footer">
