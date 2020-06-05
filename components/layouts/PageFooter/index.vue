@@ -86,6 +86,7 @@ export default class extends Vue {
   &__sitemap {
     display: grid;
     grid-template-columns: repeat(6, 0.5fr);
+    row-gap: $spacing-07;
 
     @include mq($until: medium) {
       grid-template-columns: repeat(3, 0.5fr);
