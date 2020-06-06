@@ -1,6 +1,7 @@
 ---
 title: Qiskit Camp Africa
-dates: Dates December 11-14, 2019
+location: Pilanesberg National Park
+dates: December 11-14, 2019
 tagline: Bringing together the Qiskit community
 description: Add your description here
 background: africa

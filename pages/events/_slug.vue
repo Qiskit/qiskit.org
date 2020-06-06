@@ -1,5 +1,5 @@
 <template>
-  <div class="event-page">
+  <div class="individual-event">
     <EventMenu>
       <li
         v-for="link in event.attributes.nav"
@@ -11,19 +11,51 @@
       </li>
     </EventMenu>
     <header
-      :style="{
-        backgroundImage: `url(${uri.hBackground}), url(${uri.lBackground})`
-      }"
+      class="event-header"
     >
-      <section class="headlines">
-        <h1>{{ event.attributes.title }}</h1>
-        <p>{{ event.attributes.tagline }}</p>
-        <p>{{ event.attributes.dates }}<br></p>
-      </section>
-      <section class="scroll-down">
-        <div class="icon-scroll" />
-        <p>Scroll-down for further info</p>
-      </section>
+      <div class="event-header__live-background" />
+      <div class="event-header__info-layout">
+        <section class="event-header__title-layout">
+          <h1 class="event-header__title">
+            {{ event.attributes.title }}
+          </h1>
+          <p class="event-header__slack">
+            or ask any question in <br>
+            <AppLink url="http://ibm.co/joinqiskitslack">
+              <img
+                src="/images/slack-logo.png"
+                alt="Slack logo"
+                class="event-header__slack-logo"
+              >
+              <ArrowRight20 class="event-header__slack-arrow" />
+            </AppLink>
+          </p>
+        </section>
+        <aside class="event-summary">
+          <div
+            class="event-summary__picture"
+            :style="`background-image: url(${uri.lBackground})`"
+          />
+          <dl class="event-summary__info">
+            <div class="event-summary__info-item">
+              <dt class="event-summary__info-item-label">
+                Location <ArrowRight20 class="event-summary__info-item-icon" />
+              </dt>
+              <dd class="event-summary__infor-item-data">
+                {{ event.attributes.location }}
+              </dd>
+            </div>
+            <div class="event-summary__info-item">
+              <dt class="event-summary__info-item-label">
+                Dates <ArrowRight20 class="event-summary__info-item-icon" />
+              </dt>
+              <dd class="event-summary__infor-item-data">
+                {{ event.attributes.dates }}
+              </dd>
+            </div>
+          </dl>
+        </aside>
+      </div>
     </header>
     <main v-html="event.html" />
     <EventFooter />
@@ -34,6 +66,7 @@
 import { Component } from 'vue-property-decorator'
 import { Context } from '@nuxt/types'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
+import AppLink from '~/components/ui/AppLink.vue'
 import EventMenu from '~/components/events/EventMenu.vue'
 import EventFooter from '~/components/events/EventFooter.vue'
 
@@ -48,7 +81,8 @@ function getBackgroundUris (background: string): [string, string] {
   layout: 'event',
   components: {
     EventMenu,
-    EventFooter
+    EventFooter,
+    AppLink
   },
   head () {
     const self = this as any
@@ -82,29 +116,82 @@ export default class extends QiskitPage {
 }
 </script>
 
-<style scoped>
-header {
-  position: relative;
-  height: 100vh;
+<style lang="scss" scoped>
+@import '~carbon-components/scss/globals/scss/typography';
+
+$purple-60: #8A3FFC;
+
+.individual-event {
   color: white;
-  text-align: center;
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  background-color: rgb(103, 58, 183);
+  background-color: black;
+}
+
+.event-header {
+  @include framed();
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  text-shadow: -1px 0 black, 0 1px #000, 1px 0 black, 0 -1px black
+
+  &__info-layout {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 22rem;
+  }
+
+  &__title-layout {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &__title {
+    @include type-style('productive-heading-07');
+  }
+
+  &__slack-logo {
+    margin-top: $spacing-03;
+  }
+
+  &__slack-arrow {
+    fill: $purple-60;
+    margin-left: $spacing-03;
+  }
 }
 
-/* Hack to target Safari only and disable the fixed effect which seems broken
-in the latest version of the browser. */
-@media not all and (min-resolution:.001dpcm) {
-  @media {
-    header {
-      background-attachment: scroll;
-    }
+.event-summary {
+  width: 22rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &__picture {
+    flex: 1 0 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  &__info {
+    padding: $spacing-05;
+    background-color: $purple-60;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__info-item {
+    flex: 1 0 0;
+  }
+
+  &__info-item-label {
+    @include type-style('productive-heading-02');
+    display: flex;
+    align-items: center;
+    margin-bottom: $spacing-03;
+  }
+
+  &__info-item-icon {
+    margin-left: $spacing-03;
   }
 }
 
