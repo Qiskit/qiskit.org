@@ -2,6 +2,7 @@
   <!-- tabindex is needed to allow hiding the menu in iOS Safari -->
   <div class="default-layout content-root" tabindex="-1">
     <header id="navigation">
+      <TheBlackLivesMatterBanner />
       <TheMenu />
     </header>
     <nuxt />
@@ -13,11 +14,13 @@
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 import TheMenu from '~/components/layouts/TheMenu/index.vue'
+import TheBlackLivesMatterBanner from '~/components/layouts/banners/TheBlackLivesMatterBanner.vue'
 import PageFooter from '~/components/layouts/PageFooter/index.vue'
 
 @Component({
   components: {
     TheMenu,
+    TheBlackLivesMatterBanner,
     PageFooter
   }
 })
