@@ -176,6 +176,10 @@ $purple-60: #8A3FFC;
       width: 100%;
       height: 100%;
     }
+
+    & canvas {
+      outline: none;
+    }
   }
 
   &__info-layout {
