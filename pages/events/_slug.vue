@@ -31,7 +31,12 @@
             </AppLink>
           </p>
         </section>
-        <aside class="event-summary">
+        <aside
+          class="
+            event-header__summary
+            event-summary
+          "
+        >
           <div
             class="event-summary__picture"
             :style="`background-image: url(${uri.lBackground})`"
@@ -41,7 +46,7 @@
               <dt class="event-summary__info-item-label">
                 Location <ArrowRight20 class="event-summary__info-item-icon" />
               </dt>
-              <dd class="event-summary__infor-item-data">
+              <dd class="event-summary__info-item-data">
                 {{ event.attributes.location }}
               </dd>
             </div>
@@ -57,7 +62,7 @@
         </aside>
       </div>
     </header>
-    <main v-html="event.html" />
+    <main class="individual-event__main" v-html="event.html" />
     <EventFooter />
   </div>
 </template>
@@ -113,6 +118,28 @@ function getBackgroundUris (background: string): [string, string] {
 })
 export default class extends QiskitPage {
   routeName = 'events-entry'
+
+  mounted () {
+    const { coordinates } = this.$data.event.attributes
+    const container = document.querySelector('.event-header__live-background')
+    if (!container) { return }
+    const dimensions = container.getBoundingClientRect()
+    const Globe = require('globe.gl').default
+    const eventsGlobe = Globe()
+    const globeFactory = eventsGlobe
+      .width(dimensions.width)
+      .height(dimensions.height)
+      .globeImageUrl('/images/events/earth-bw.png')
+      .showAtmosphere(false)
+      .backgroundColor('#000000')
+      .pointsData([coordinates])
+      .pointColor(() => '#8A3FFC')
+      .pointAltitude(0)
+      .pointRadius(2.5)
+      .pointResolution(24)
+    globeFactory(container)
+      .pointOfView({ altitude: 1.8, ...coordinates }, 4000)
+  }
 }
 </script>
 
@@ -124,6 +151,10 @@ $purple-60: #8A3FFC;
 .individual-event {
   color: white;
   background-color: black;
+
+  &__main {
+    @include framed();
+  }
 }
 
 .event-header {
@@ -132,8 +163,24 @@ $purple-60: #8A3FFC;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  position: relative;
+
+  &__live-background {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    & div {
+      width: 100%;
+      height: 100%;
+    }
+  }
 
   &__info-layout {
+    position: relative;
+    pointer-events: none;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -148,6 +195,15 @@ $purple-60: #8A3FFC;
 
   &__title {
     @include type-style('productive-heading-07');
+    pointer-events: all;
+  }
+
+  &__summary {
+    pointer-events: all;
+  }
+
+  &__slack {
+    pointer-events: all;
   }
 
   &__slack-logo {
@@ -194,224 +250,37 @@ $purple-60: #8A3FFC;
     margin-left: $spacing-03;
   }
 }
-
-header p {
-  margin: 0.8rem;
-}
-
-header .headlines {
-  margin-top: 60px;
-}
-
-.interest {
-  margin-top: 2rem;
-}
-
-.sign-up {
-  display: inline-block;
-  font-family: 'IBM Plex Sans', sans-serif;
-  font-weight: bold;
-  color: white;
-  text-decoration: none;
-  background-color: transparent;
-  border: 1px solid white;
-  padding: 0.7rem 2rem;
-  margin-top: 2rem;
-}
-
-.scroll-down {
-  margin-top: 2rem;
-  position: relative;
-  font-style: italic;
-}
-
-.icon-scroll {
-  width: 30px;
-  height: 53px;
-  margin: 0 auto;
-  box-shadow: inset 0 0 0 3px #fff;
-  border-radius: 25px;
-}
-
-.icon-scroll:before {
-  position: absolute;
-}
-
-.icon-scroll:before {
-  content: '';
-  width: 8px;
-  height: 8px;
-  background: #fff;
-  margin-left: -4px;
-  top: 8px;
-  border-radius: 4px;
-  animation: scroll 1.5s infinite;
-}
-
-@keyframes scroll {
-  0% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0;
-    transform: translateY(46px);
-  }
-}
-
-@media (max-height: 500px) {
-  .headlines {
-    font-size: 0.9em;
-    margin-top: 4.4rem;
-    margin-bottom: -6rem;
-  }
-
-  .headlines h1 {
-    margin-bottom: 0;
-  }
-}
-
-@media (max-height: 320px) {
-  .headlines {
-    font-size: 0.9em;
-    margin-top: 6.5rem;
-    margin-bottom: -7rem;
-  }
-
-  .icon-scroll {
-    display: none;
-  }
-}
-
 </style>
 
-<style>
-#event-body a {
-  text-decoration: none;
-}
+<style lang="scss">
+@import '~carbon-components/scss/globals/scss/typography';
 
-#event-body {
-  background-color: white;
-  background-image: url('/images/events/deco/dots.svg'), url('/images/events/deco/dots.svg'), url('/images/events/deco/dots.svg'),
-    url('/images/events/deco/lines.svg'), url('/images/events/deco/lines.svg'), url('/images/events/deco/lines.svg');
-  background-repeat: repeat-x, repeat-x, repeat-x, repeat-y, repeat-y, repeat-y;
-  background-position: top calc(100vh + 890px) left 0, top calc(100vh + 930px) left 0, top calc(100vh + 970px) left 0,
-    top 0 right 100px, top 0 right 0, top 0 right -100px;
-  color: black;
-}
+.individual-event__main {
+  & h2 {
+    @include type-style('productive-heading-07');
+    color: white;
+    margin-top: $layout-01;
+    margin-bottom: $layout-03;
+  }
 
-#event-body h2::before {
-  content: "";
-  float: left;
-  width: 5%;
-  margin-top: 0.5rem;
-  margin-right: 5%;
-  border-top: 1px solid #0A1D8F;
-}
+  & h3 {
+    @include type-style('productive-heading-05');
+    margin-bottom: $layout-02;
+  }
 
-#event-body h2 {
-  margin: 2rem 0 2.5rem;
-  color: #0A1D8F;
-}
+  & p {
+    @include type-style('body-long-02');
+    margin-bottom: $layout-02;
+  }
 
-#event-body main {
-  background-color: transparent;
-  background-image: none;
-}
+  & ul {
+    list-style-type: square;
+    padding-left: $spacing-07;
+    margin-bottom: $spacing-07;
 
-#event-body main .cta {
-  border-color: black;
-}
-
-#event-body main > :not(h2):not(iframe):not(table) {
-  margin-left: 10%;
-  margin-right: 1.5rem;
-  line-height: 1.4rem;
-  margin-bottom: 1rem;
-  max-width: 30rem;
-}
-
-#event-body main ul {
-  list-style-type: square;
-  padding-left: 2rem;
-  margin-bottom: 2rem;
-}
-
-#event-body main ul li {
-  margin: 0.5rem 0;
-}
-
-#event-body main .clarification {
-  font-size: 0.7rem;
-  line-height: 1rem;
-}
-
-#event-body h2 {
-  padding-top: 4rem;
-  margin: 0 0 2rem;
-  color: #0A1D8F;
-}
-
-#event-body h2::before {
-  content: "";
-  float: left;
-  width: 5%;
-  margin-top: 0.5rem;
-  margin-right: 5%;
-  border-top: 1px solid #0A1D8F;
-}
-
-#event-body .agenda h2 {
-  margin-bottom: 0.5rem;
-}
-
-#event-body .agenda .location {
-  font-weight: bold;
-  padding-left: 10%;
-  margin-bottom: 3rem;
-}
-
-#event-body h3 {
-  font-weight: bold;
-  margin-top: 2.5rem;
-  margin-bottom: 1rem;
-}
-
-#event-body .agenda h3 {
-  margin-top: 0;
-}
-
-#event-body h3 strong {
-  font-weight: bold;
-}
-
-#event-body table {
-  margin-left: 10%;
-}
-
-table tr td.time {
-  color: #0A1D8F;
-}
-
-#event-body table td {
-  text-align: center;
-  padding: 1.2rem 1.2rem 1rem 0;
-  border-bottom: 1px dotted #0A1D8F;
-}
-
-#event-body table tr td:first-child {
-  text-align: left;
-}
-
-#event-body td.multislot {
-  vertical-align: top;
-}
-
-#event-body .session {
-  margin-bottom: 1rem;
-}
-
-#event-body .author {
-  font-style: italic;
+    & li {
+      margin: 0.5rem 0;
+    }
+  }
 }
 </style>

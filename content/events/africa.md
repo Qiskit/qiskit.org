@@ -1,6 +1,9 @@
 ---
 title: Qiskit Camp Africa
 location: Pilanesberg National Park
+coordinates:
+  lat: -25.3340
+  lng: 27.1463
 dates: December 11-14, 2019
 tagline: Bringing together the Qiskit community
 description: Add your description here
