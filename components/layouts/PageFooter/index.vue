@@ -70,6 +70,7 @@ export default class extends Vue {
 
 .main-footer {
   background-color: $cool-gray-10;
+  overflow: hidden;
 
   &__logo {
     @include type-style('productive-heading-05');
