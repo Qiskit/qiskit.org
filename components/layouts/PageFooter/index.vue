@@ -2,7 +2,7 @@
   <footer>
     <div class="main-footer">
       <div class="main-footer__logo">Qiskit</div>
-      <div class="main-footer__sitemap">
+      <div class="main-footer__sections">
         <FooterSection
           v-for="sectionElements in footerElements"
           :key="sectionElements.title"
@@ -78,7 +78,7 @@ export default class extends Vue {
     padding: 0 $spacing-07;
   }
 
-  &__sitemap {
+  &__sections {
     display: grid;
     grid-template-columns: repeat(6, 0.5fr);
     row-gap: $spacing-07;
