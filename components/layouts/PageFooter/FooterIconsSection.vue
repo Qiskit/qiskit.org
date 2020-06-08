@@ -5,7 +5,7 @@
     </h2>
     <AppLink
       v-for="iconLink in elements"
-      :key="iconLink.icon"
+      :key="iconLink.label"
       :url="iconLink.url"
       class="footer-icons-section__icon-link"
     >

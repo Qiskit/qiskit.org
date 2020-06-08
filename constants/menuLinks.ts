@@ -31,6 +31,7 @@ interface NavLink {
  * Represent an icon navigation link for the menus of the site
  */
 interface IconNavLink {
+  label: string
   /** The visible icon of the link */
   icon: string
   /** Where we want to go */
@@ -215,18 +216,22 @@ const STAY_CONNECTED_LINKS: FooterSection = {
   title: 'Stay Connected',
   elements: [
     {
+      label: 'Twitter',
       icon: 'LogoTwitter20',
       url: SOCIAL_MEDIA.twitter.url
     },
     {
+      label: 'Slack',
       icon: 'LogoSlack20',
       url: SOCIAL_MEDIA.slack.url
     },
     {
+      label: 'Youtube',
       icon: 'LogoYouTube20',
       url: SOCIAL_MEDIA.youtube.url
     },
     {
+      label: 'Medium',
       icon: 'LogoMedium20',
       url: SOCIAL_MEDIA.medium.url
     }
