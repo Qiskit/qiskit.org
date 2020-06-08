@@ -236,19 +236,19 @@ const STAY_CONNECTED_LINKS: FooterSection = {
 const SECONDARY_FOOTER_LINKS: Array<NavLink> = [
   {
     label: 'Terms of use',
-    url: ''
+    url: '#'
   },
   {
     label: 'Accessibility',
-    url: ''
+    url: '#'
   },
   {
     label: 'Contact',
-    url: ''
+    url: 'mailto:hello@qiskit.camp'
   },
   {
     label: 'Privacy',
-    url: ''
+    url: '#'
   }
 ]
 
