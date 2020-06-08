@@ -40,7 +40,7 @@ export default class extends Vue {
 
   &__link {
     @include type-style('caption-01');
-    color: rgba($cool-gray-60, 0.5);
+    color: $cool-gray-60;
     text-decoration: none;
     display: inline-block;
     width: 100%;
