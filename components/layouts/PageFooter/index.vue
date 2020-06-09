@@ -129,6 +129,10 @@ export default class extends Vue {
     @include mq($until: medium) {
       padding-bottom: $spacing-05;
     }
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
 </style>

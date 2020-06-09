@@ -47,7 +47,7 @@ export default class extends Vue {
     padding-bottom: $spacing-03;
 
     &:hover {
-      color: $inverse-01;
+      text-decoration: underline;
     }
   }
 }
