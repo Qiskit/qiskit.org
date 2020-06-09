@@ -115,7 +115,7 @@ export default class extends Vue {
 
 .secondary-footer {
   background-color: $white;
-  margin-bottom: $spacing-08;
+  padding-bottom: $spacing-08;
 
   &__copyright, &__link {
     @include type-style('caption-01');
