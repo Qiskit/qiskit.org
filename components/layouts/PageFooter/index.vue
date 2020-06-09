@@ -76,15 +76,24 @@ export default class extends Vue {
   background-color: $cool-gray-10;
   overflow: hidden;
 
+  @include mq($until: medium) {
+    flex-direction: column;
+  }
+
   &__logo {
     height: 32px;
     width: 112px;
     margin: 0 $spacing-07;
+
+    @include mq($until: medium) {
+      margin-bottom: $spacing-07;
+    }
   }
 
   &__sections {
     display: grid;
     grid-template-columns: repeat(6, 0.5fr);
+    margin: 0 $spacing-07;
     row-gap: $spacing-07;
 
     @include mq($until: medium) {
@@ -106,17 +115,18 @@ export default class extends Vue {
 
 .secondary-footer {
   background-color: $white;
-  padding-bottom: $spacing-08;
+  margin-bottom: $spacing-08;
 
   &__copyright, &__link {
     @include type-style('caption-01');
     color: $cool-gray-60;
-    padding: 0 $spacing-07
+    margin-left: $spacing-07;
   }
 
   &__links {
     display: flex;
     justify-content: space-between;
+    margin-right: $spacing-07;
 
     @include mq($until: medium) {
       flex-direction: column;
@@ -127,7 +137,7 @@ export default class extends Vue {
     text-decoration: none;
 
     @include mq($until: medium) {
-      padding-bottom: $spacing-05;
+      margin-bottom: $spacing-05;
     }
 
     &:hover {
