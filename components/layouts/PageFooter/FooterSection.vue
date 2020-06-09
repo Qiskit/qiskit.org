@@ -33,7 +33,7 @@ export default class extends Vue {
 
 .footer-section {
   &__title {
-    @include type-style('productive-heading-01');
+    @include type-style('expressive-heading-01');
     color: $cool-gray-60;
     padding-bottom: $spacing-07;
   }
