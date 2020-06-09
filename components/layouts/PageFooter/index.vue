@@ -1,7 +1,11 @@
 <template>
   <footer>
     <div class="main-footer">
-      <div class="main-footer__logo">Qiskit</div>
+      <img
+        class="main-footer__logo"
+        src="/images/qiskit-new-logo.svg"
+        alt="Qiskit logo"
+      >
       <div class="main-footer__sections">
         <FooterSection
           v-for="sectionElements in footerElements"
@@ -73,10 +77,9 @@ export default class extends Vue {
   overflow: hidden;
 
   &__logo {
-    @include type-style('productive-heading-05');
-    line-height: 2rem;
-    color: $cool-gray-60;
-    padding: 0 $spacing-07;
+    height: 32px;
+    width: 112px;
+    margin: 0 $spacing-07;
   }
 
   &__sections {
