@@ -99,13 +99,13 @@ export default class extends Vue {
 
   &__sections {
     display: grid;
-    grid-template-columns: repeat(6, 0.5fr);
+    grid-template-columns: repeat(6, 1fr);
     margin: 0 $spacing-07;
     row-gap: $spacing-07;
 
     @include mq($from:medium, $until: large) {
-      grid-template-columns: repeat(5, 0.5fr);
-      grid-template-rows: repeat(2, 0.5fr);
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: repeat(2, 1fr);
 
       :nth-child(6) {
         grid-column: 5 / 6;
@@ -114,8 +114,8 @@ export default class extends Vue {
     }
 
     @include mq($until: medium) {
-      grid-template-columns: repeat(3, 0.5fr);
-      grid-template-rows: repeat(2, 0.5fr);
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 1fr);
     }
   }
 }
