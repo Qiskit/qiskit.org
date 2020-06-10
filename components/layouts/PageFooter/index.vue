@@ -1,31 +1,35 @@
 <template>
   <footer>
-    <section class="main-footer">
-      <img
-        class="main-footer__logo"
-        src="/images/qiskit-new-logo.svg"
-        alt="Qiskit logo"
-      >
-      <div class="main-footer__sections">
-        <FooterSection
-          v-for="sectionElements in footerElements"
-          :key="sectionElements.title"
-          v-bind="sectionElements"
-        />
-        <FooterIconsSection v-bind="stayConnectedElements" />
+    <section class="main-footer-container">
+      <div class="main-footer">
+        <img
+          class="main-footer__logo"
+          src="/images/qiskit-new-logo.svg"
+          alt="Qiskit logo"
+        >
+        <div class="main-footer__sections">
+          <FooterSection
+            v-for="sectionElements in footerElements"
+            :key="sectionElements.title"
+            v-bind="sectionElements"
+          />
+          <FooterIconsSection v-bind="stayConnectedElements" />
+        </div>
       </div>
     </section>
-    <section class="secondary-footer">
-      <div class="secondary-footer__copyright">©Qiskit | All Rights Reserved</div>
-      <div class="secondary-footer__links">
-        <AppLink
-          v-for="link in secondaryFooterLinks"
-          :key="link.label"
-          class="secondary-footer__link"
-          v-bind="link"
-        >
-          {{ link.label }}
-        </AppLink>
+    <section class="secondary-footer-container">
+      <div class="secondary-footer">
+        <div class="secondary-footer__copyright">©Qiskit | All Rights Reserved</div>
+        <div class="secondary-footer__links">
+          <AppLink
+            v-for="link in secondaryFooterLinks"
+            :key="link.label"
+            class="secondary-footer__link"
+            v-bind="link"
+          >
+            {{ link.label }}
+          </AppLink>
+        </div>
       </div>
     </section>
   </footer>
@@ -61,21 +65,24 @@ export default class extends Vue {
 <style lang="scss" scoped>
 @import '~carbon-components/scss/globals/scss/typography';
 
+.main-footer-container {
+  background-color: $cool-gray-10;
+  overflow: hidden;
+}
+
+.secondary-footer-container {
+  background-color: $white;
+  padding-bottom: $spacing-08;
+}
+
 .main-footer, .secondary-footer {
-  /*
-  * The footer should be framed() (max-width of 1100px = 68.75rem)
-  * If we framed it, the backgroud fit the framed size, not all
-  * That's why we calculate the padding
-  */
-  padding: $spacing-07 calc((100vw - 66rem) / 2);
+  @include contained();
+  padding: $spacing-07 0;
   display: flex;
   justify-content: space-between;
 }
 
 .main-footer {
-  background-color: $cool-gray-10;
-  overflow: hidden;
-
   @include mq($until: medium) {
     flex-direction: column;
   }
@@ -114,9 +121,6 @@ export default class extends Vue {
 }
 
 .secondary-footer {
-  background-color: $white;
-  padding-bottom: $spacing-08;
-
   &__copyright, &__link {
     @include type-style('caption-01');
     color: $cool-gray-60;
