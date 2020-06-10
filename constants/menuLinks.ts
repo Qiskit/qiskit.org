@@ -25,17 +25,8 @@ interface NavLink {
    *  `me` or a combination of them
    */
   rel?: string
-}
-
-/**
- * Represent an icon navigation link for the menus of the site
- */
-interface IconNavLink {
-  label: string
   /** The visible icon of the link */
-  icon: string
-  /** Where we want to go */
-  url: string
+  icon?: string
 }
 
 type LabeledLinks = {
@@ -163,7 +154,7 @@ const TUTORIALS_LINK: NavLink = {
 
 type FooterSection = {
   title: string,
-  elements: Array<NavLink> | Array<IconNavLink>
+  elements: Array<NavLink> | Array<NavLink>
 }
 
 type FooterStructure = Array<FooterSection>
