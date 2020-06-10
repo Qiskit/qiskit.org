@@ -1,6 +1,6 @@
 <template>
   <footer>
-    <div class="main-footer">
+    <section class="main-footer">
       <img
         class="main-footer__logo"
         src="/images/qiskit-new-logo.svg"
@@ -14,8 +14,8 @@
         />
         <FooterIconsSection v-bind="stayConnectedElements" />
       </div>
-    </div>
-    <div class="secondary-footer">
+    </section>
+    <section class="secondary-footer">
       <div class="secondary-footer__copyright">©Qiskit | All Rights Reserved</div>
       <div class="secondary-footer__links">
         <AppLink
@@ -27,7 +27,7 @@
           {{ link.label }}
         </AppLink>
       </div>
-    </div>
+    </section>
   </footer>
 </template>
 
@@ -67,7 +67,7 @@ export default class extends Vue {
   * If we framed it, the backgroud fit the framed size, not all
   * That's why we calculate the padding
   */
-  padding: $spacing-07 calc((100vw - 68.75rem) / 2);
+  padding: $spacing-07 calc((100vw - 66rem) / 2);
   display: flex;
   justify-content: space-between;
 }
