@@ -107,7 +107,7 @@ export default class extends Vue {
       grid-template-columns: repeat(5, 1fr);
       grid-template-rows: repeat(2, 1fr);
 
-      :nth-child(6) {
+      :last-child {
         grid-column: 5 / 6;
         grid-row: 2 / 3;
       }
