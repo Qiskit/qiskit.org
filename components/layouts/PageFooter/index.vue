@@ -103,11 +103,6 @@ export default class extends Vue {
     margin: 0 $spacing-07;
     row-gap: $spacing-07;
 
-    @include mq($until: medium) {
-      grid-template-columns: repeat(3, 0.5fr);
-      grid-template-rows: repeat(2, 0.5fr);
-    }
-
     @include mq($from:medium, $until: large) {
       grid-template-columns: repeat(5, 0.5fr);
       grid-template-rows: repeat(2, 0.5fr);
@@ -116,6 +111,11 @@ export default class extends Vue {
         grid-column: 5 / 6;
         grid-row: 2 / 3;
       }
+    }
+
+    @include mq($until: medium) {
+      grid-template-columns: repeat(3, 0.5fr);
+      grid-template-rows: repeat(2, 0.5fr);
     }
   }
 }
