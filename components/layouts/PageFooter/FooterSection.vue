@@ -3,15 +3,17 @@
     <h2 class="footer-section__title">
       {{ title }}
     </h2>
-    <AppLink
-      v-for="element in elements"
-      :key="element.label"
-      :class="showIconLinks ? 'footer-section__icon-link' : 'footer-section__link'"
-      v-bind="element"
-    >
-      <component :is="element.icon" v-if="showIconLinks" />
-      <span v-else>{{ element.label }}</span>
-    </AppLink>
+    <section :class="showIconLinks && 'footer-section__icons-group'">
+      <AppLink
+        v-for="element in elements"
+        :key="element.label"
+        :class="showIconLinks ? 'footer-section__icon-link' : 'footer-section__link'"
+        v-bind="element"
+      >
+        <component :is="element.icon" v-if="showIconLinks" />
+        <span v-else>{{ element.label }}</span>
+      </AppLink>
+    </section>
   </div>
 </template>
 
@@ -53,13 +55,17 @@ export default class extends Vue {
     }
   }
 
-  &__icon-link {
-    fill: $cool-gray-60;
-    padding-right: $spacing-05;
+  &__icons-group {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: $spacing-05;
+    justify-items: start;
   }
 
-  &__icon-link:nth-child(3) {
-    margin-right: 100%;
+  &__icon-link {
+    fill: $cool-gray-60;
   }
+
 }
 </style>
