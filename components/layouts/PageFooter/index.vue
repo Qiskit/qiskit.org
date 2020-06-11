@@ -103,7 +103,6 @@ export default class extends Vue {
 
     @include mq($from:medium, $until: large) {
       grid-template-columns: repeat(5, 1fr);
-      grid-template-rows: repeat(2, 1fr);
 
       & > :last-child {
         grid-column: 5 / 6;
@@ -113,7 +112,6 @@ export default class extends Vue {
 
     @include mq($until: medium) {
       grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: repeat(2, 1fr);
     }
   }
 }
