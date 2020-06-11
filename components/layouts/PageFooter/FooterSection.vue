@@ -6,10 +6,11 @@
     <AppLink
       v-for="element in elements"
       :key="element.label"
-      class="footer-section__link"
+      :class="isIconLink ? 'footer-section__icon-link' : 'footer-section__link'"
       v-bind="element"
     >
-      {{ element.label }}
+      <component :is="element.icon" v-if="isIconLink" />
+      <span v-else>{{ element.label }}</span>
     </AppLink>
   </div>
 </template>
@@ -25,6 +26,7 @@ import AppLink from '~/components/ui/AppLink.vue'
 export default class extends Vue {
   @Prop(String) title
   @Prop(Array) elements
+  @Prop({ type: Boolean, default: false }) isIconLink
 }
 </script>
 
@@ -49,6 +51,15 @@ export default class extends Vue {
     &:hover {
       text-decoration: underline;
     }
+  }
+
+  &__icon-link {
+    fill: $cool-gray-60;
+    padding-right: $spacing-05;
+  }
+
+  &__icon-link:nth-child(3) {
+    margin-right: 100%;
   }
 }
 </style>

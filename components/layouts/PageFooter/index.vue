@@ -13,7 +13,7 @@
             :key="sectionElements.title"
             v-bind="sectionElements"
           />
-          <FooterIconsSection v-bind="stayConnectedElements" />
+          <FooterSection v-bind="stayConnectedElements" is-icon-link />
         </div>
       </div>
     </section>
@@ -39,7 +39,6 @@
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 import FooterSection from './FooterSection.vue'
-import FooterIconsSection from './FooterIconsSection.vue'
 import AppLink from '~/components/ui/AppLink.vue'
 
 import {
@@ -51,7 +50,6 @@ import {
 @Component({
   components: {
     FooterSection,
-    FooterIconsSection,
     AppLink
   }
 })
