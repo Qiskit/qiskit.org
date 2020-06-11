@@ -232,11 +232,11 @@ const STAY_CONNECTED_LINKS: FooterSection = {
 const SECONDARY_FOOTER_LINKS: Array<NavLink> = [
   {
     label: 'Terms of use',
-    url: '#'
+    url: 'https://www.ibm.com/legal?lnk=flg-tous-usen'
   },
   {
     label: 'Accessibility',
-    url: '#'
+    url: 'https://www.ibm.com/accessibility/us/en/?lnk=flg-acce-usen'
   },
   {
     label: 'Contact',
@@ -244,7 +244,7 @@ const SECONDARY_FOOTER_LINKS: Array<NavLink> = [
   },
   {
     label: 'Privacy',
-    url: '#'
+    url: 'https://quantum-computing.ibm.com/terms/privacy'
   }
 ]
 
