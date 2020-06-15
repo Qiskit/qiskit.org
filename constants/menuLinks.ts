@@ -25,6 +25,8 @@ interface NavLink {
    *  `me` or a combination of them
    */
   rel?: string
+  /** The visible icon of the link */
+  icon?: 'LogoTwitter20'|'LogoSlack20'|'LogoYouTube20'|'LogoMedium20'
 }
 
 type LabeledLinks = {
@@ -97,15 +99,6 @@ const SOCIAL_MEDIA: LabeledLinks = {
   }
 }
 
-const ORDERED_SOCIAL_MEDIA: Array<NavLink> = [
-  SOCIAL_MEDIA.github,
-  SOCIAL_MEDIA.slack,
-  SOCIAL_MEDIA.twitter,
-  SOCIAL_MEDIA.medium,
-  SOCIAL_MEDIA.youtube,
-  SOCIAL_MEDIA.stack
-]
-
 const COMMUNITY_SUB_LINKS: LabeledLinks = {
   events: {
     label: 'Events',
@@ -131,67 +124,128 @@ const QISKIT_EDUCATION: LabeledLinks = {
   textbook: {
     label: 'Textbook',
     url: 'https://qiskit.org/textbook/preface.html'
-  },
-  youtube: {
-    label: 'Coding With Qiskit',
-    url: 'https://www.youtube.com/playlist?list=PLOFEBzvs-Vvp2xg9-POLJhQwtVktlYGbY'
-  },
-  hostEvent: {
-    label: 'Host an Event',
-    url: 'mailto:hello@qiskit.camp'
   }
 }
 
-const ORDERED_QISKIT_EDUCATION: Array<NavLink> = [
-  QISKIT_EDUCATION.textbook,
-  QISKIT_EDUCATION.youtube,
-  QISKIT_EDUCATION.hostEvent
-]
-
 const QISKIT_ADVOCATES: LabeledLinks = {
   advocates: {
-    label: 'Become an Advocate',
+    label: 'Advocates',
     url: '/advocates#become-an-advocate'
   }
 }
 
-const ORDERED_QISKIT_ADVOCATES: Array<NavLink> = [
-  QISKIT_ADVOCATES.advocates
-]
+const DOCUMENTATION_LINK: NavLink = {
+  label: 'Documentation',
+  url: 'https://qiskit.org/documentation/'
+}
 
-type FooterSubsection = {
+const QISKIT_VIDEOS: NavLink = {
+  label: 'Videos',
+  url: 'https://www.youtube.com/playlist?list=PLOFEBzvs-Vvp2xg9-POLJhQwtVktlYGbY'
+}
+
+const TUTORIALS_LINK: NavLink = {
+  label: 'Tutorials',
+  url: 'https://qiskit.org/documentation/tutorials/circuits/index.html#',
+  segment: {
+    action: 'Tutorials'
+  }
+}
+
+type FooterSection = {
   title: string,
   elements: Array<NavLink>
 }
 
-type FooterStructure = Array<Array<FooterSubsection>>
+type FooterStructure = Array<FooterSection>
 
 const FOOTER_ELEMENTS: FooterStructure = [
   // Elements in the first footer column
-  [
-    {
-      title: 'Qiskit Elements',
-      elements: ORDERED_QISKIT_ELEMENTS
-    }
-  ],
+  {
+    title: 'Careers',
+    elements: []
+  },
   // Elements in the second footer column
-  [
+  {
+    title: 'Overview',
+    elements: [
+      QISKIT_ELEMENTS.terra,
+      QISKIT_ELEMENTS.aqua,
+      QISKIT_ELEMENTS.aer,
+      QISKIT_ELEMENTS.ignis
+    ]
+  },
+  // Elements in the third footer column
+  {
+    title: 'Learn',
+    elements: [
+      QISKIT_EDUCATION.textbook,
+      TUTORIALS_LINK,
+      QISKIT_VIDEOS
+    ]
+  },
+  // Elements in the fourth footer column
+  {
+    title: 'Community',
+    elements: [
+      COMMUNITY_SUB_LINKS.events,
+      QISKIT_ADVOCATES.advocates
+    ]
+  },
+  // Elements in the fifth footer column
+  {
+    title: 'Support',
+    elements: [
+      SOCIAL_MEDIA.github,
+      SOCIAL_MEDIA.stack,
+      DOCUMENTATION_LINK
+    ]
+  }
+]
+
+const STAY_CONNECTED_LINKS: FooterSection = {
+  title: 'Stay Connected',
+  elements: [
     {
-      title: 'Qiskit for Educators',
-      elements: ORDERED_QISKIT_EDUCATION
+      label: 'Twitter',
+      icon: 'LogoTwitter20',
+      url: SOCIAL_MEDIA.twitter.url
     },
     {
-      title: 'Qiskit Advocates',
-      elements: ORDERED_QISKIT_ADVOCATES
-    }
-  ],
-  // Elements in the third footer column
-  [
+      label: 'Slack',
+      icon: 'LogoSlack20',
+      url: SOCIAL_MEDIA.slack.url
+    },
     {
-      title: 'Social Media',
-      elements: ORDERED_SOCIAL_MEDIA
+      label: 'Youtube',
+      icon: 'LogoYouTube20',
+      url: SOCIAL_MEDIA.youtube.url
+    },
+    {
+      label: 'Medium',
+      icon: 'LogoMedium20',
+      url: SOCIAL_MEDIA.medium.url
     }
   ]
+}
+
+const SECONDARY_FOOTER_LINKS: Array<NavLink> = [
+  {
+    label: 'Terms of use',
+    url: 'https://www.ibm.com/legal?lnk=flg-tous-usen'
+  },
+  {
+    label: 'Accessibility',
+    url: 'https://www.ibm.com/accessibility/us/en/?lnk=flg-acce-usen'
+  },
+  {
+    label: 'Contact',
+    url: 'mailto:hello@qiskit.camp'
+  },
+  {
+    label: 'Privacy',
+    url: 'https://quantum-computing.ibm.com/terms/privacy'
+  }
 ]
 
 const HOME_LINK: NavLink = {
@@ -204,26 +258,15 @@ const COMMUNITY_LINK: NavLink = {
   url: '/education'
 }
 
-const TUTORIALS_LINK: NavLink = {
-  label: 'Tutorials',
-  url: 'https://qiskit.org/documentation/tutorials/circuits/index.html#',
-  segment: {
-    action: 'Tutorials'
-  }
-}
-
-const DOCUMENTATION_LINK: NavLink = {
-  label: 'Documentation',
-  url: 'https://qiskit.org/documentation/'
-}
-
 export {
   ORDERED_QISKIT_ELEMENTS,
   ORDERED_COMMUNITY_SUB_LINKS,
   FOOTER_ELEMENTS,
+  SECONDARY_FOOTER_LINKS,
   HOME_LINK,
   COMMUNITY_LINK,
   TUTORIALS_LINK,
   DOCUMENTATION_LINK,
+  STAY_CONNECTED_LINKS,
   NavLink
 }
