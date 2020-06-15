@@ -37,11 +37,4 @@ export default class extends Vue { }
 main {
   color: $inverse-01;
 }
-
-.default-layout {
-  &__footer {
-    margin-top: $layout-05;
-    margin-bottom: $layout-05;
-  }
-}
 </style>
