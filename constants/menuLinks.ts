@@ -26,7 +26,7 @@ interface NavLink {
    */
   rel?: string
   /** The visible icon of the link */
-  icon?: string
+  icon?: 'LogoTwitter20'|'LogoSlack20'|'LogoYouTube20'|'LogoMedium20'
 }
 
 type LabeledLinks = {
