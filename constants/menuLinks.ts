@@ -154,7 +154,7 @@ const TUTORIALS_LINK: NavLink = {
 
 type FooterSection = {
   title: string,
-  elements: Array<NavLink> | Array<NavLink>
+  elements: Array<NavLink>
 }
 
 type FooterStructure = Array<FooterSection>
