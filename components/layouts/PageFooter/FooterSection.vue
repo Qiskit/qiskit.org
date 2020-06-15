@@ -3,14 +3,14 @@
     <h2 class="footer-section__title">
       {{ title }}
     </h2>
-    <nav :class="showIconLinks && 'footer-section__icons-group'">
+    <nav :class="{ 'footer-section__icons-group': iconsOnly }">
       <AppLink
         v-for="element in elements"
         :key="element.label"
-        :class="showIconLinks ? 'footer-section__icon-link' : 'footer-section__link'"
+        :class="iconsOnly ? 'footer-section__icon-link' : 'footer-section__link'"
         v-bind="element"
       >
-        <component :is="element.icon" v-if="showIconLinks" />
+        <component :is="element.icon" v-if="iconsOnly" />
         <span v-else>{{ element.label }}</span>
       </AppLink>
     </nav>
@@ -28,7 +28,7 @@ import AppLink from '~/components/ui/AppLink.vue'
 export default class extends Vue {
   @Prop(String) title
   @Prop(Array) elements
-  @Prop({ type: Boolean, default: false }) showIconLinks
+  @Prop({ type: Boolean, default: false }) iconsOnly
 }
 </script>
 

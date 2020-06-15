@@ -13,7 +13,7 @@
             :key="sectionElements.title"
             v-bind="sectionElements"
           />
-          <FooterSection v-bind="stayConnectedElements" show-icon-links />
+          <FooterSection v-bind="stayConnectedElements" icons-only />
         </div>
       </div>
     </section>
