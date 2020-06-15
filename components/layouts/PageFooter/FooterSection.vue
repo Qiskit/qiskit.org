@@ -1,9 +1,9 @@
 <template>
-  <div class="footer-section">
+  <section class="footer-section">
     <h2 class="footer-section__title">
       {{ title }}
     </h2>
-    <section :class="showIconLinks && 'footer-section__icons-group'">
+    <nav :class="showIconLinks && 'footer-section__icons-group'">
       <AppLink
         v-for="element in elements"
         :key="element.label"
@@ -13,8 +13,8 @@
         <component :is="element.icon" v-if="showIconLinks" />
         <span v-else>{{ element.label }}</span>
       </AppLink>
-    </section>
-  </div>
+    </nav>
+  </section>
 </template>
 
 <script lang="ts">
