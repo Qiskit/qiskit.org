@@ -152,6 +152,11 @@ const TUTORIALS_LINK: NavLink = {
   }
 }
 
+const QISKIT_CAREERS: NavLink = {
+  label: 'Careers',
+  url: '#'
+}
+
 type FooterSection = {
   title: string,
   elements: Array<NavLink>
@@ -189,7 +194,8 @@ const FOOTER_ELEMENTS: FooterStructure = [
     title: 'Community',
     elements: [
       COMMUNITY_SUB_LINKS.events,
-      QISKIT_ADVOCATES.advocates
+      QISKIT_ADVOCATES.advocates,
+      QISKIT_CAREERS
     ]
   },
   // Elements in the fifth footer column
