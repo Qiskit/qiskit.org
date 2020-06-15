@@ -97,18 +97,9 @@ export default class extends Vue {
 
   &__sections {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     margin: 0 $spacing-07;
     row-gap: $spacing-07;
-
-    @include mq($from:medium, $until: large) {
-      grid-template-columns: repeat(5, 1fr);
-
-      & > :last-child {
-        grid-column: 5 / 6;
-        grid-row: 2 / 3;
-      }
-    }
 
     @include mq($until: medium) {
       grid-template-columns: repeat(3, 1fr);

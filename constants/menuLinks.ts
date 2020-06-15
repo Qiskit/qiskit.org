@@ -162,11 +162,6 @@ type FooterStructure = Array<FooterSection>
 const FOOTER_ELEMENTS: FooterStructure = [
   // Elements in the first footer column
   {
-    title: 'Careers',
-    elements: []
-  },
-  // Elements in the second footer column
-  {
     title: 'Overview',
     elements: [
       QISKIT_ELEMENTS.terra,
@@ -175,7 +170,7 @@ const FOOTER_ELEMENTS: FooterStructure = [
       QISKIT_ELEMENTS.ignis
     ]
   },
-  // Elements in the third footer column
+  // Elements in the second footer column
   {
     title: 'Learn',
     elements: [
@@ -184,7 +179,7 @@ const FOOTER_ELEMENTS: FooterStructure = [
       QISKIT_VIDEOS
     ]
   },
-  // Elements in the fourth footer column
+  // Elements in the third footer column
   {
     title: 'Community',
     elements: [
@@ -192,7 +187,7 @@ const FOOTER_ELEMENTS: FooterStructure = [
       QISKIT_ADVOCATES.advocates
     ]
   },
-  // Elements in the fifth footer column
+  // Elements in the fourth footer column
   {
     title: 'Support',
     elements: [
