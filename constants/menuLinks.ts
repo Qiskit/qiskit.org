@@ -154,7 +154,7 @@ const TUTORIALS_LINK: NavLink = {
 
 const QISKIT_CAREERS: NavLink = {
   label: 'Careers',
-  url: ''
+  url: '#'
 }
 
 type FooterSection = {
