@@ -164,8 +164,8 @@ type FooterSection = {
 
 type FooterStructure = Array<FooterSection>
 
+// Each entry represents a column
 const FOOTER_ELEMENTS: FooterStructure = [
-  // Elements in the first footer column
   {
     title: 'Overview',
     elements: [
@@ -175,7 +175,6 @@ const FOOTER_ELEMENTS: FooterStructure = [
       QISKIT_ELEMENTS.ignis
     ]
   },
-  // Elements in the second footer column
   {
     title: 'Learn',
     elements: [
@@ -184,7 +183,6 @@ const FOOTER_ELEMENTS: FooterStructure = [
       QISKIT_VIDEOS
     ]
   },
-  // Elements in the third footer column
   {
     title: 'Community',
     elements: [
@@ -193,7 +191,6 @@ const FOOTER_ELEMENTS: FooterStructure = [
       QISKIT_CAREERS
     ]
   },
-  // Elements in the fourth footer column
   {
     title: 'Support',
     elements: [
