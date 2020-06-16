@@ -188,6 +188,7 @@ const FOOTER_ELEMENTS: FooterStructure = [
     elements: [
       COMMUNITY_SUB_LINKS.events,
       QISKIT_ADVOCATES.advocates
+      // TODO: enable when #663 is done
       // QISKIT_CAREERS
     ]
   },
