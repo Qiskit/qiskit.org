@@ -20,7 +20,7 @@
         >
           <img
             class="menu__logo"
-            src="/images/qiskit-new-logo.svg"
+            src="/images/qiskit-new-logo-purple.svg"
             alt="Qiskit logo"
           >
         </AppLink>
