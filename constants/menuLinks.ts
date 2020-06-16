@@ -152,10 +152,11 @@ const TUTORIALS_LINK: NavLink = {
   }
 }
 
-const QISKIT_CAREERS: NavLink = {
-  label: 'Careers',
-  url: '#'
-}
+// TODO: enable when #663 is done
+// const QISKIT_CAREERS: NavLink = {
+//   label: 'Careers',
+//   url: '#'
+// }
 
 type FooterSection = {
   title: string,
