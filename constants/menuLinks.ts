@@ -187,8 +187,8 @@ const FOOTER_ELEMENTS: FooterStructure = [
     title: 'Community',
     elements: [
       COMMUNITY_SUB_LINKS.events,
-      QISKIT_ADVOCATES.advocates,
-      QISKIT_CAREERS
+      QISKIT_ADVOCATES.advocates
+      // QISKIT_CAREERS
     ]
   },
   {
