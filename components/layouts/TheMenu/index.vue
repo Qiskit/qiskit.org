@@ -8,21 +8,21 @@
       <div class="menu__overlay" />
       <SidebarMenu class="menu__side-menu" />
     </section>
-    <div class="menu__main-level-wrapper">
-      <section class="menu__main-level">
+    <section class="menu__main-level">
+      <div class="menu__inner-container">
         <nav class="menu__nav-section">
-          <AppLink class="menu__link" v-bind="homeLink">
-            {{ homeLink.label }}
-          </AppLink>
-          <div class="menu__separator" />
           <AppLink
-            v-for="link in qiskitElements"
-            :key="link.url"
-            class="menu__link"
-            :class="{ 'menu__link_active': isActive(link) }"
-            v-bind="link"
+            class="
+              menu__link
+              menu__link_img-only
+            "
+            v-bind="homeLink"
           >
-            {{ link.label }}
+            <img
+              class="menu__logo"
+              src="/images/qiskit-new-logo.svg"
+              alt="Qiskit logo"
+            >
           </AppLink>
         </nav>
         <nav class="menu__nav-section">
@@ -36,8 +36,8 @@
             {{ link.label }}
           </AppLink>
         </nav>
-      </section>
-    </div>
+      </div>
+    </section>
     <section
       v-if="isCommunityActive()"
       class="menu__second-level"
@@ -72,8 +72,10 @@ export default class extends Mixins(MenuMixin) {}
 <style lang="scss" scoped>
 @import '~carbon-components/scss/globals/scss/typography';
 
-.menu__main-level, .menu__second-level {
-  height: 3.75rem;
+.menu__inner-container, .menu__second-level {
+  @include contained();
+  padding-top: $spacing-05;
+  padding-bottom: $spacing-05;
   display: flex;
 
   @include mq($until: large) {
@@ -82,19 +84,13 @@ export default class extends Mixins(MenuMixin) {}
 }
 
 .menu {
-  &__main-level-wrapper {
-    border-bottom: 1px solid black;
-  }
-
-  &__main-level {
-    @include framed();
-    padding-left: 0;
-    padding-right: 0;
+  &__inner-container {
     justify-content: space-between;
   }
 
-  &__main-level-wrapper {
-    border-bottom: 1px solid black;
+  &__main-level {
+    --link-color: #{$gray-80};
+    background-color: white;
   }
 
   &__second-level {
@@ -133,30 +129,32 @@ export default class extends Mixins(MenuMixin) {}
     display: flex;
   }
 
+  &__logo {
+    height: 1.5rem;
+    width: auto;
+  }
+
   &__link {
-    @include type-style('productive-heading-02');
+    @include type-style('label-01');
     display: inline-flex;
-    align-items: center;
-    padding: 0 1rem;
+    flex-direction: column;
+    justify-content: center;
     color: var(--link-color);
     text-decoration: none;
+    margin-right: $spacing-09;
 
-    &_active {
-      padding-top: 2px;
-      position: relative;
-      top: 1px;
-      border-bottom: 4px solid $focus;
+    &:last-child {
+      margin-right: 0;
+    }
+
+    &_img-only {
+      font-size: 0;
+      line-height: 0;
     }
   }
 
   &__hamburguer-link {
     margin: 1.3rem -0.2rem 0 1.3rem;
-  }
-
-  &__separator{
-    background-color: $ui-03;
-    width: 0.125rem;
-    margin: 0.75rem 0.625rem;
   }
 
   &__overlay {
