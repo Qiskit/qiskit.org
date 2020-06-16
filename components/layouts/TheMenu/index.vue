@@ -9,40 +9,37 @@
       <SidebarMenu class="menu__side-menu" />
     </section>
     <section class="menu__main-level">
-      <div class="menu__inner-container">
-        <nav class="menu__nav-section">
-          <AppLink
-            class="
-              menu__link
-              menu__link_img-only
-            "
-            v-bind="homeLink"
+      <nav class="menu__navigation-level">
+        <AppLink
+          class="
+            menu__link
+            menu__link_img-only
+            menu__home-link
+          "
+          v-bind="homeLink"
+        >
+          <img
+            class="menu__logo"
+            src="/images/qiskit-new-logo.svg"
+            alt="Qiskit logo"
           >
-            <img
-              class="menu__logo"
-              src="/images/qiskit-new-logo.svg"
-              alt="Qiskit logo"
-            >
-          </AppLink>
-        </nav>
-        <nav class="menu__nav-section">
-          <AppLink
-            v-for="link in [communityLink, ...learnMore]"
-            :key="link.url"
-            class="menu__link"
-            :class="{ 'menu__link_active': isActive(link) }"
-            v-bind="link"
-          >
-            {{ link.label }}
-          </AppLink>
-        </nav>
-      </div>
+        </AppLink>
+        <AppLink
+          v-for="link in [communityLink, ...learnMore]"
+          :key="link.url"
+          class="menu__link"
+          :class="{ 'menu__link_active': isActive(link) }"
+          v-bind="link"
+        >
+          {{ link.label }}
+        </AppLink>
+      </nav>
     </section>
     <section
       v-if="isCommunityActive()"
       class="menu__second-level"
     >
-      <nav class="menu__nav-section">
+      <nav class="menu__navigation-level">
         <AppLink
           v-for="link in communitySubLinks"
           :key="link.url"
@@ -72,36 +69,15 @@ export default class extends Mixins(MenuMixin) {}
 <style lang="scss" scoped>
 @import '~carbon-components/scss/globals/scss/typography';
 
-.menu__inner-container, .menu__second-level {
-  @include contained();
-  padding-top: $spacing-05;
-  padding-bottom: $spacing-05;
-  display: flex;
-
-  @include mq($until: large) {
-    display: none;
-  }
-}
-
 .menu {
-  &__inner-container {
-    justify-content: space-between;
-  }
-
   &__main-level {
     --link-color: #{$gray-80};
     background-color: white;
   }
 
   &__second-level {
-    justify-content: flex-end;
     --link-color: #{$inverse-01};
     background-color: $purple-40;
-    /* The menu should be framed() (max-width of 1100px = 68.75rem)
-    *  If we framed this menu, the purple backgroud fit the framed size, not all
-    *  That's why we calculate the padding, to align the secondary menu with the main one
-    */
-    padding-right: calc((100vw - 68.75rem) / 2);
   }
 
   &__mobile {
@@ -125,8 +101,16 @@ export default class extends Mixins(MenuMixin) {}
     }
   }
 
-  &__nav-section {
+  &__navigation-level {
+    @include contained();
+    padding-top: $spacing-05;
+    padding-bottom: $spacing-05;
     display: flex;
+    justify-content: flex-end;
+
+    @include mq($until: large) {
+      display: none;
+    }
   }
 
   &__logo {
@@ -151,6 +135,11 @@ export default class extends Mixins(MenuMixin) {}
       font-size: 0;
       line-height: 0;
     }
+  }
+
+  &__home-link {
+    margin-left: 0;
+    margin-right: auto;
   }
 
   &__hamburguer-link {
