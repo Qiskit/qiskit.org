@@ -13,7 +13,6 @@
         <AppLink
           class="
             menu__link
-            menu__link_img-only
             menu__home-link
           "
           v-bind="homeLink"
@@ -127,19 +126,22 @@ export default class extends Mixins(MenuMixin) {}
     text-decoration: none;
     margin-right: $spacing-09;
 
-    &:last-child {
-      margin-right: 0;
+    &:hover {
+      text-decoration: underline;
     }
 
-    &_img-only {
-      font-size: 0;
-      line-height: 0;
+    &:last-child {
+      margin-right: 0;
     }
   }
 
   &__home-link {
     margin-left: 0;
     margin-right: auto;
+
+    &:hover {
+      text-decoration: none;
+    }
   }
 
   &__hamburguer-link {
