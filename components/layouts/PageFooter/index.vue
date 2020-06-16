@@ -91,6 +91,11 @@ export default class extends Vue {
   &__logo {
     height: 32px;
     width: 112px;
+    margin-right: $layout-06;
+
+    @include mq($from: medium, $until: large) {
+      margin-right: $layout-05;
+    }
 
     @include mq($until: medium) {
       margin-bottom: $spacing-07;
@@ -101,11 +106,9 @@ export default class extends Vue {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     row-gap: $spacing-07;
-    max-width: 12 * $column-size-large;
 
     @include mq($from:medium, $until: large) {
       grid-template-columns: repeat(5, 1fr);
-      max-width: 6 * $column-size-medium;
 
       & > :last-child {
         grid-column: 5 / 6;
