@@ -25,7 +25,7 @@
           >
         </AppLink>
         <AppLink
-          v-for="link in [communityLink, ...learnMore]"
+          v-for="link in mainLevelLinks"
           :key="link.url"
           class="menu__link"
           :class="{ 'menu__link_active': isActive(link) }"
