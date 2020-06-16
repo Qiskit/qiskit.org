@@ -152,6 +152,12 @@ const TUTORIALS_LINK: NavLink = {
   }
 }
 
+// TODO: enable when #663 is done
+// const QISKIT_CAREERS: NavLink = {
+//   label: 'Careers',
+//   url: '#'
+// }
+
 type FooterSection = {
   title: string,
   elements: Array<NavLink>
@@ -159,13 +165,8 @@ type FooterSection = {
 
 type FooterStructure = Array<FooterSection>
 
+// Each entry represents a column
 const FOOTER_ELEMENTS: FooterStructure = [
-  // Elements in the first footer column
-  {
-    title: 'Careers',
-    elements: []
-  },
-  // Elements in the second footer column
   {
     title: 'Overview',
     elements: [
@@ -175,7 +176,6 @@ const FOOTER_ELEMENTS: FooterStructure = [
       QISKIT_ELEMENTS.ignis
     ]
   },
-  // Elements in the third footer column
   {
     title: 'Learn',
     elements: [
@@ -184,15 +184,15 @@ const FOOTER_ELEMENTS: FooterStructure = [
       QISKIT_VIDEOS
     ]
   },
-  // Elements in the fourth footer column
   {
     title: 'Community',
     elements: [
       COMMUNITY_SUB_LINKS.events,
       QISKIT_ADVOCATES.advocates
+      // TODO: enable when #663 is done
+      // QISKIT_CAREERS
     ]
   },
-  // Elements in the fifth footer column
   {
     title: 'Support',
     elements: [
