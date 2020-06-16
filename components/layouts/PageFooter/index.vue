@@ -74,7 +74,7 @@ export default class extends Vue {
   background-color: $white;
   padding-bottom: $spacing-08;
   padding: $spacing-07 0;
-  padding-bottom: $spacing-07 * 1.5; // make room for the "cookies preferences" button
+  padding-bottom: $spacing-07 + 2.5rem; // make room for the "cookies preferences" button
 }
 
 .main-footer, .secondary-footer {
