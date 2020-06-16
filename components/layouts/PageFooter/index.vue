@@ -19,7 +19,9 @@
     </section>
     <section class="secondary-footer-container">
       <div class="secondary-footer">
-        <div class="secondary-footer__copyright">©Qiskit | All Rights Reserved</div>
+        <div class="secondary-footer__copyright">
+          ©Qiskit | All Rights Reserved
+        </div>
         <div class="secondary-footer__links">
           <AppLink
             v-for="link in secondaryFooterLinks"
@@ -65,17 +67,18 @@ export default class extends Vue {
 
 .main-footer-container {
   background-color: $cool-gray-10;
-  overflow: hidden;
+  padding: $spacing-07 0;
 }
 
 .secondary-footer-container {
   background-color: $white;
   padding-bottom: $spacing-08;
+  padding: $spacing-07 0;
+  padding-bottom: $spacing-07 + 2.5rem; // make room for the "cookies preferences" button
 }
 
 .main-footer, .secondary-footer {
   @include contained();
-  padding: $spacing-07 0;
   display: flex;
   justify-content: space-between;
 }
@@ -88,7 +91,11 @@ export default class extends Vue {
   &__logo {
     height: 32px;
     width: 112px;
-    margin: 0 $spacing-07;
+    margin-right: $layout-06;
+
+    @include mq($from: medium, $until: large) {
+      margin-right: $layout-05;
+    }
 
     @include mq($until: medium) {
       margin-bottom: $spacing-07;
@@ -98,7 +105,6 @@ export default class extends Vue {
   &__sections {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    margin: 0 $spacing-07;
     row-gap: $spacing-07;
 
     @include mq($until: medium) {
@@ -111,13 +117,11 @@ export default class extends Vue {
   &__copyright, &__link {
     @include type-style('caption-01');
     color: $cool-gray-60;
-    margin-left: $spacing-07;
   }
 
   &__links {
     display: flex;
     justify-content: space-between;
-    margin-right: $spacing-07;
 
     @include mq($until: medium) {
       flex-direction: column;
@@ -125,6 +129,7 @@ export default class extends Vue {
   }
 
   &__link {
+    margin-left: $spacing-07;
     text-decoration: none;
 
     @include mq($until: medium) {
