@@ -79,18 +79,34 @@
 </template>
 
 <script lang="ts">
-import { Component, Mixins } from 'vue-property-decorator'
+import { Watch, Component, Mixins } from 'vue-property-decorator'
 import SidebarMenu from '~/components/layouts/TheMenu/SidebarMenu.vue'
 import AppLink from '~/components/ui/AppLink.vue'
 import MenuMixin from '~/mixins/menu'
 
+Component.registerHooks([
+  'beforeRouteEnter',
+  'beforeRouteLeave',
+  'beforeRouteUpdate'
+])
+
 @Component({
-  components: { SidebarMenu, AppLink }
+  components: { SidebarMenu, AppLink },
+  beforeRouteUpdate (this: any, to, from, next) {
+    alert('yeah')
+    this.isMobileMenuShown = false
+    next()
+  }
 })
 export default class extends Mixins(MenuMixin) {
-  data () {
-    return {
-      isMobileMenuShown: false
+  isMobileMenuShown: boolean = false
+
+  @Watch('isMobileMenuShown')
+  toggleScroll () {
+    if (this.isMobileMenuShown) {
+      this.$root.$el.classList.add('no-scroll')
+    } else {
+      this.$root.$el.classList.remove('no-scroll')
     }
   }
 }

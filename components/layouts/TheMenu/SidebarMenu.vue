@@ -1,6 +1,8 @@
 <template>
   <section class="mobile-menu">
-    <nav class="mobile-menu__navigation-links">
+    <nav
+      class="mobile-menu__navigation-links"
+    >
       <AppLink
         v-for="link in mainLevelLinks"
         :key="link.url"
@@ -49,6 +51,7 @@ export default class extends Mixins(MenuMixin) {
   display: flex;
   flex-direction: column;
   background-color: white;
+  overflow-y: auto;
 
   &__navigation-links,
   &__stay-connected,
