@@ -59,7 +59,7 @@ export default class extends Vue {
     display: grid;
     grid-template-columns: auto 1fr;
     grid-template-rows: 1fr 1fr;
-    gap: $spacing-05;
+    gap: 0 $spacing-05;
     justify-items: start;
   }
 
