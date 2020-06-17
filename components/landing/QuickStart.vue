@@ -18,12 +18,13 @@
           </h4>
           <cv-button-set :class="`quick-start__${optionsBlock.alias}-options`">
             <cv-button
-              v-for="option in optionsBlock.options"
-              :key="option"
-              :title="option"
-              class="quick-start__btn quick-start__btn_option"
+              v-for="option in optionsBlock.elements"
+              :key="option.label"
+              :title="option.label"
+              class="quick-start__btn"
+              :class="{ 'quick-start__btn_active': option.active }"
             >
-              {{ option }}
+              {{ option.label }}
             </cv-button>
           </cv-button-set>
         </div>
@@ -73,17 +74,42 @@ export default class extends Vue {
     {
       title: 'Languages',
       alias: 'languages',
-      options: ['Python 3.5+']
+      elements: [{
+        label: 'Python 3.5+',
+        active: true
+      }]
     },
     {
       title: 'Qiskit Install',
       alias: 'qiskit-install',
-      options: ['Stable (Recommended)', 'Master']
+      elements: [
+        {
+          label: 'Stable (Recommended)',
+          active: true
+        },
+        {
+          label: 'Master',
+          active: false
+        }
+      ]
     },
     {
       title: 'Operating System',
       alias: 'os',
-      options: ['Linux', 'Mac', 'Windows']
+      elements: [
+        {
+          label: 'Linux',
+          active: false
+        },
+        {
+          label: 'Mac',
+          active: true
+        },
+        {
+          label: 'Windows',
+          active: false
+        }
+      ]
     }
   ]
 
@@ -149,10 +175,13 @@ export default class extends Vue {
     @include type-style('body-long-01');
     background-color: $cool-gray-10;
     max-width: 100%;
+    color: $inverse-01;
+    padding-left: $spacing-07;
 
-    &_option {
-      color: $inverse-01;
-      padding-left: $spacing-07;
+    &_active {
+      border-color: $purple-70;;
+      border-width: 2px;
+      color: $purple-70;;
     }
   }
 
@@ -165,8 +194,8 @@ export default class extends Vue {
   &__cloud-link {
     padding-top: $spacing-02 + $spacing-07; //To align with locally block
     text-decoration: none;
-    color: $purple-50;
-    fill: $purple-50;
+    color: $purple-70;;
+    fill: $purple-70;;
     display: flex;
 
     :first-child {
