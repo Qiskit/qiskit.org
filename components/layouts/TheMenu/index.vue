@@ -118,7 +118,7 @@ export default class extends Mixins(MenuMixin) {}
   }
 
   &__link {
-    @include type-style('label-01');
+    @include type-style('body-long-02');
     display: inline-flex;
     flex-direction: column;
     justify-content: center;
@@ -128,6 +128,10 @@ export default class extends Mixins(MenuMixin) {}
 
     &:hover {
       text-decoration: underline;
+    }
+
+    &.nuxt-link-active {
+      color: $purple-70;
     }
 
     &:last-child {
