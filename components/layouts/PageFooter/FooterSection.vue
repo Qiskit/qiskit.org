@@ -6,7 +6,7 @@
     <nav :class="{ 'footer-section__icons-group': iconsOnly }">
       <AppLink
         v-for="element in elements"
-        :key="`footer-link:${element.url}`"
+        :key="element.url"
         :class="iconsOnly ? 'footer-section__icon-link' : 'footer-section__link'"
         v-bind="element"
       >

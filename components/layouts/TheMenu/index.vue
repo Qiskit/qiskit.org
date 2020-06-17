@@ -69,7 +69,7 @@
       <nav class="menu__navigation-level">
         <AppLink
           v-for="link in communitySubLinks"
-          :key="`menu-link:${link.url}`"
+          :key="link.url"
           class="menu__link"
           :class="{ 'menu__link_active': isActive(link) }"
           v-bind="link"

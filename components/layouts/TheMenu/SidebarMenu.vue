@@ -5,7 +5,7 @@
     >
       <AppLink
         v-for="link in mainLevelLinks"
-        :key="`mobile-menu-link:${link.url}`"
+        :key="link.url"
         class="mobile-menu__link"
         :class="{ 'mobile-menu__link_active': isActive(link) }"
         v-bind="link"
