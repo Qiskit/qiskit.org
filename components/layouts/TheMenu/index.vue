@@ -109,6 +109,11 @@ export default class extends Mixins(MenuMixin) {
       this.$root.$el.classList.remove('no-scroll')
     }
   }
+
+  @Watch('$route')
+  onRouteChange () {
+    this.isMobileMenuShown = false
+  }
 }
 </script>
 
