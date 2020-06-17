@@ -31,17 +31,7 @@
         Full Overview
       </LandingCta>
     </article>
-    <article class="landing-page__section">
-      <h2 class="landing-page__header">
-        Quick Start
-      </h2>
-      <p class="landing-page__paragraph">
-        When you are looking to start Qiskit you have two options. You can
-        start Qiskit locally which is much more secure and private, or you get
-        started online where you can immediately jump in and start working.
-      </p>
-      <QuickStart />
-    </article>
+    <QuickStart class="landing-page__section" />
   </main>
 </template>
 
@@ -53,7 +43,7 @@ import QiskitPage from '~/components/logic/QiskitPage.vue'
 import TheHeroMoment from '~/components/landing/TheHeroMoment.vue'
 import LandingCta from '~/components/landing/LandingCta.vue'
 import TheFeatureMosaic from '~/components/landing/TheFeatureMosaic.vue'
-import QuickStart from '~/components/landing/QuickStart.vue'
+import QuickStart from '~/components/landing/QuickStart/index.vue'
 
 @Component({
   components: {
