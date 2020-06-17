@@ -5,17 +5,16 @@
     >
       <AppLink
         v-for="link in mainLevelLinks"
-        :key="link.url"
+        :key="`mobile-menu-link:${link.url}`"
         class="mobile-menu__link"
         :class="{ 'mobile-menu__link_active': isActive(link) }"
         v-bind="link"
       >
-        {{ link.label }}
+        <p class="mobile-menu__link-label">
+          {{ link.label }}
+        </p>
       </AppLink>
     </nav>
-    <section class="mobile-menu__stay-connected">
-      <FooterSection v-bind="stayConnectedElements" icons-only />
-    </section>
     <footer class="mobile-menu__footer">
       <div class="mobile-menu__footer-inner-container">
         <p class="mobile-menu__footer-text">
@@ -53,12 +52,10 @@ export default class extends Mixins(MenuMixin) {
   background-color: white;
   overflow-y: auto;
 
-  &__navigation-links,
-  &__stay-connected,
+  &__link-label,
   &__footer-inner-container {
     @include contained();
     width: 100%;
-    flex: 1 0 0;
   }
 
   &__navigation-links {
@@ -70,13 +67,15 @@ export default class extends Mixins(MenuMixin) {
 
   &__link {
     @include type-style('expressive-paragraph-01');
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     text-decoration: none;
     color: $cool-gray-80;
-    padding: $spacing-07;
-    padding-right: 0;
+    height: 4rem;
     border-bottom: 1px solid $cool-gray-10;
 
-    &_active {
+    &.nuxt-link-active {
       color: $cool-gray-10;
       background-color: $purple-70;
     }
@@ -88,7 +87,7 @@ export default class extends Mixins(MenuMixin) {
 
   &__footer {
     padding-top: $spacing-05;
-    padding-bottom: $spacing-05;
+    padding-bottom: $spacing-05 + 2.5rem; // make room for the "cookies preferences" button
     background-color: $cool-gray-10;
   }
 
