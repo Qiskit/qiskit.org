@@ -144,7 +144,7 @@ const OVERVIEW_LINK: NavLink = {
 
 const LEARN_LINK: NavLink = {
   label: 'Learn',
-  url: '#',
+  url: '/education',
   segment: {
     action: 'Learn'
   }
