@@ -75,8 +75,6 @@ export default class extends Mixins(MenuMixin) {}
   width: 256px;
   padding: 1.3rem;
   background-color: $ui-background;
-  transform: translateX(-100%);
-  transition: transform 200ms;
   overflow-y: auto;
 
   &__title {
