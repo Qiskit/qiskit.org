@@ -1,50 +1,17 @@
 <template>
-  <nav class="sidebar-menu">
-    <h2 class="sidebar-menu__title">
-      Elements
-    </h2>
-    <AppLink
-      v-for="link in qiskitElements"
-      :key="link.url"
-      class="sidebar-menu__link"
-      :class="{ 'sidebar-menu__link_active': isActive(link) }"
-      v-bind="link"
-    >
-      {{ link.label }}
-    </AppLink>
-    <h2 class="sidebar-menu__title">
-      Learn more
-    </h2>
-    <AppLink
-      class="sidebar-menu__link"
-      v-bind="communityLink"
-    >
-      {{ communityLink.label }}
-    </AppLink>
-    <div
-      v-if="isCommunityActive()"
-      class="sidebar-menu__second-level"
-    >
+  <section class="sidebar-menu">
+    <nav class="sidebar-menu__navigation-links">
       <AppLink
-        v-for="link in communitySubLinks"
+        v-for="link in mainLevelLinks"
         :key="link.url"
-        class="sidebar-menu__link sidebar-menu__link_secondary"
+        class="sidebar-menu__link"
         :class="{ 'sidebar-menu__link_active': isActive(link) }"
         v-bind="link"
       >
         {{ link.label }}
       </AppLink>
-    </div>
-    <AppLink
-      v-for="link in learnMore"
-      :key="link.url"
-      class="sidebar-menu__link"
-      :class="{ 'sidebar-menu__link_active': isActive(link) }"
-      v-bind="link"
-    >
-      {{ link.label }}
-    </AppLink>
-  </nav>
+    </nav>
+  </section>
 </template>
 
 <script lang="ts">
@@ -61,48 +28,27 @@ export default class extends Mixins(MenuMixin) {}
 <style lang="scss" scoped>
 @import '~carbon-components/scss/globals/scss/typography';
 
-.sidebar-menu, .sidebar-menu__second-level {
-  display: flex;
-  flex-direction: column;
-}
-
 .sidebar-menu {
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  z-index: 150;
-  width: 256px;
-  padding: 1.3rem;
-  background-color: $ui-background;
-  overflow-y: auto;
+  background-color: white;
 
-  &__title {
-    @include type-style('productive-heading-03');
-    padding: 1em;
-  }
-
-  &__second-level {
-    margin: 0 -1.3rem;
-    padding: 1rem 0;
-    background-color: $purple-30;
+  &__navigation-links {
+    @include contained();
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
   }
 
   &__link {
-    @include type-style('productive-heading-02');
+    @include type-style('expressive-paragraph-01');
     text-decoration: none;
-    color: white;
-    padding: 0.5rem 1.5em;
-
-    &_secondary {
-      color: $inverse-01;
-      padding-right: 3rem;
-      padding-left: 3rem;
-    }
+    color: $cool-gray-80;
+    padding: $spacing-07;
+    padding-right: 0;
+    border-bottom: 1px solid $cool-gray-10;
 
     &_active {
-      border-left: 4px solid $focus;
-      padding-left: calc(3rem - 4px);
+      color: $cool-gray-10;
+      background-color: $purple-70;
     }
   }
 }

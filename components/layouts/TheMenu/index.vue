@@ -127,6 +127,13 @@ export default class extends Mixins(MenuMixin) {
   }
 
   .menu__mobile-menu {
+    position: fixed;
+    top: 3.5rem; // taking into account the height of the top menu
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 150;
+
     visibility: hidden;
     pointer-events: none;
   }
@@ -191,19 +198,6 @@ export default class extends Mixins(MenuMixin) {
     display: inline-flex;
     flex-direction: column;
     justify-content: center;
-  }
-
-  &__overlay {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 1;
-    background-color: $ui-background;
-    opacity: 0;
-    transition: opacity 200ms;
-    pointer-events: none;
   }
 }
 </style>
