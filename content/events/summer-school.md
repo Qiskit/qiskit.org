@@ -1,5 +1,5 @@
 ---
-title: Global Summer School
+title: Global1 Summer School
 dates: Dates December 11-14, 2019
 tagline: Bringing together the Qiskit community
 description: Add your description here
