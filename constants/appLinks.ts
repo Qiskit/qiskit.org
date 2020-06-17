@@ -75,11 +75,17 @@ const REQUEST_AN_EVENT_CTA: GeneralLink = {
   label: 'Request an event'
 }
 
+const IBM_Q_EXPERIENCE: GeneralLink = {
+  url: 'https://quantum-computing.ibm.com/login',
+  label: 'IBM Q Experience'
+}
+
 export {
   SegmentData,
   ACCESS_IBM_Q_SYSTEMS,
   EVENT_REQUEST_LINK,
   YOUTUBE_ALL_EPISODES_CTA,
   DISCOVER_TEXTBOOK_CTA,
-  REQUEST_AN_EVENT_CTA
+  REQUEST_AN_EVENT_CTA,
+  IBM_Q_EXPERIENCE
 }

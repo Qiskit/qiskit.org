@@ -9,54 +9,21 @@
         environment for Qiskit, you can find it here.
       </p>
       <div class="quick-start__section-content">
-        <div class="quick-start__options-block">
-          <h4 class="quick-start__option-title">Languages</h4>
-          <cv-button-set class="quick-start__languages-options">
+        <div
+          v-for="optionsBlock in installOptions"
+          :key="optionsBlock.alias"
+          class="quick-start__options-block">
+          <h4 class="quick-start__option-title">
+            {{ optionsBlock.title }}
+          </h4>
+          <cv-button-set :class="`quick-start__${optionsBlock.alias}-options`">
             <cv-button
-              title="Python 3.5+"
-              class="quick-start__option-button"
+              v-for="option in optionsBlock.options"
+              :key="option"
+              :title="option"
+              class="quick-start__btn quick-start__btn_option"
             >
-              Python 3.5+
-            </cv-button>
-          </cv-button-set>
-        </div>
-        <div class="quick-start__options-block">
-          <h4 class="quick-start__option-title">Qiskit Install</h4>
-          <cv-button-set class="quick-start__quick-install-options">
-            <cv-button
-              title="Stable (Recommended)"
-              class="quick-start__option-button"
-            >
-              Stable (Recommended)
-            </cv-button>
-            <cv-button
-              title="Master"
-              class="quick-start__option-button"
-            >
-              Master
-            </cv-button>
-          </cv-button-set>
-        </div>
-        <div class="quick-start__options-block">
-          <h4 class="quick-start__option-title">Operating System</h4>
-          <cv-button-set class="quick-start__os-options">
-            <cv-button
-              title="Linux"
-              class="quick-start__option-button"
-            >
-              Linux
-            </cv-button>
-            <cv-button
-              title="Mac"
-              class="quick-start__option-button"
-            >
-              Mac
-            </cv-button>
-            <cv-button
-              title="Windows"
-              class="quick-start__option-button"
-            >
-              Windows
+              {{ option }}
             </cv-button>
           </cv-button-set>
         </div>
@@ -78,6 +45,13 @@
         without installing anything.
       </p>
       <div class="quick-start__section-content">
+        <AppLink
+          class="quick-start__cloud-link"
+          :url="ibmQExperienceLink.url"
+        >
+          <span>{{ ibmQExperienceLink.label }}</span>
+          <ArrowRight16 />
+        </AppLink>
       </div>
     </section>
   </div>
@@ -86,12 +60,33 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
+import { IBM_Q_EXPERIENCE } from '~/constants/appLinks'
+import AppLink from '~/components/ui/AppLink.vue'
 import SyntaxHighlight from '~/components/ui/SyntaxHighlight.vue'
 
 @Component({
-  components: { SyntaxHighlight }
+  components: { AppLink, SyntaxHighlight }
 })
 export default class extends Vue {
+  ibmQExperienceLink = IBM_Q_EXPERIENCE
+  installOptions = [
+    {
+      title: 'Languages',
+      alias: 'languages',
+      options: ['Python 3.5+']
+    },
+    {
+      title: 'Qiskit Install',
+      alias: 'qiskit-install',
+      options: ['Stable (Recommended)', 'Master']
+    },
+    {
+      title: 'Operating System',
+      alias: 'os',
+      options: ['Linux', 'Mac', 'Windows']
+    }
+  ]
+
   title = 'Qiskit Install'
   codeExample = `conda install qiskit macos -m qiskit
 # MacOS Binaries dont support CUDA, install from source if CUDA is needed`
@@ -124,13 +119,17 @@ export default class extends Vue {
     padding-right: $spacing-07;
   }
 
+  &__options-block {
+    margin-top: $spacing-07;
+  }
+
   &__languages-options {
     display: grid;
     grid-template-columns: 1fr;
     column-gap: $spacing-07;
   }
 
-  &__quick-install-options {
+  &__qiskit-install-options {
     display: grid;
     grid-template-columns: 1fr 1fr;
     column-gap: $spacing-07;
@@ -146,18 +145,33 @@ export default class extends Vue {
     @include type-style('body-long-01');
   }
 
-  &__option-button {
+  &__btn {
     @include type-style('body-long-01');
     background-color: $cool-gray-10;
-    color: $inverse-01;
-    padding-left: $spacing-07;
     max-width: 100%;
+
+    &_option {
+      color: $inverse-01;
+      padding-left: $spacing-07;
+    }
   }
 
   &__cloud {
     width: 35%;
     background-color: $cool-gray-10;
     padding: $spacing-07;
+  }
+
+  &__cloud-link {
+    padding-top: $spacing-02 + $spacing-07; //To align with locally block
+    text-decoration: none;
+    color: $purple-50;
+    fill: $purple-50;
+    display: flex;
+
+    :first-child {
+      margin-right: 2 * $spacing-07;
+    }
   }
 }
 </style>
