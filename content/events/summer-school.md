@@ -5,7 +5,7 @@ tagline: Bringing together the Qiskit community
 description: Add your description here
 background: africa
 nav:
-  - text: Location
+  - text: Location12
     goTo: '#location'
   - text: Agenda1
     goTo: '#agenda'
