@@ -22,16 +22,19 @@
           "
           for="mobile-menu-toggle"
         >
-          <component :is="isMobileMenuShown ? 'Close20' : 'Menu20'" />
+          <component :is="isMobileMenuVisible ? 'Close20' : 'Menu20'" />
         </label>
       </div>
       <input
         id="mobile-menu-toggle"
-        v-model="isMobileMenuShown"
+        v-model="isMobileMenuVisible"
         class="menu__mobile-menu-toggle"
         type="checkbox"
       >
-      <SidebarMenu class="menu__mobile-menu" />
+      <SidebarMenu
+        class="menu__mobile-menu"
+        :class="{ 'menu__mobile-menu_visible': isMobileMenuVisible }"
+      />
     </section>
     <section class="menu__main-level">
       <nav class="menu__navigation-level">
@@ -84,26 +87,15 @@ import SidebarMenu from '~/components/layouts/TheMenu/SidebarMenu.vue'
 import AppLink from '~/components/ui/AppLink.vue'
 import MenuMixin from '~/mixins/menu'
 
-Component.registerHooks([
-  'beforeRouteEnter',
-  'beforeRouteLeave',
-  'beforeRouteUpdate'
-])
-
 @Component({
-  components: { SidebarMenu, AppLink },
-  beforeRouteUpdate (this: any, to, from, next) {
-    alert('yeah')
-    this.isMobileMenuShown = false
-    next()
-  }
+  components: { SidebarMenu, AppLink }
 })
 export default class extends Mixins(MenuMixin) {
-  isMobileMenuShown: boolean = false
+  isMobileMenuVisible: boolean = false
 
-  @Watch('isMobileMenuShown')
+  @Watch('isMobileMenuVisible')
   toggleScroll () {
-    if (this.isMobileMenuShown) {
+    if (this.isMobileMenuVisible) {
       this.$root.$el.classList.add('no-scroll')
     } else {
       this.$root.$el.classList.remove('no-scroll')
@@ -111,8 +103,8 @@ export default class extends Mixins(MenuMixin) {
   }
 
   @Watch('$route')
-  onRouteChange () {
-    this.isMobileMenuShown = false
+  hideMenu () {
+    this.isMobileMenuVisible = false
   }
 }
 </script>
@@ -157,11 +149,11 @@ export default class extends Mixins(MenuMixin) {
 
     visibility: hidden;
     pointer-events: none;
-  }
 
-  .menu__mobile-menu-toggle:checked ~ .menu__mobile-menu {
-    visibility: visible;
-    pointer-events: all;
+    &_visible {
+      visibility: visible;
+      pointer-events: all;
+    }
   }
 
   &__mobile-inner-container,
