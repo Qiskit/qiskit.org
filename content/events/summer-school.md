@@ -9,7 +9,7 @@ nav:
     goTo: '#location'
   - text: Agenda1
     goTo: '#agenda'
-  - text: Code of Conduct
+  - text: Code of Conduct1
     goTo: '#code-of-conduct'
 routeName: events
 ---
