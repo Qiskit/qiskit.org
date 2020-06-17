@@ -7,7 +7,7 @@ background: africa
 nav:
   - text: Location
     goTo: '#location'
-  - text: Agenda
+  - text: Agenda1
     goTo: '#agenda'
   - text: Code of Conduct
     goTo: '#code-of-conduct'
