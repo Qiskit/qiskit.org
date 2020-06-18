@@ -1,66 +1,93 @@
 ---
-title: Global Summer School
-dates: Dates December 11-14, 2019
-tagline: Bringing together the Qiskit community
+title: Qiskit Global Summer School
+dates: July 20-30, 2020
+tagline: A two-week intensive summer school designed to empower the next generation of quantum developers with the knowledge to explore quantum applications on their own.
 description: Add your description here
-background: africa
+background: globalsummerschool
 nav:
   - text: Location
     goTo: '#location'
-  - text: Agenda
-    goTo: '#agenda'
+  - text: Curriculum
+    goTo: '#curriculum'
   - text: Code of Conduct
     goTo: '#code-of-conduct'
 routeName: events
 ---
 
-## What is Qiskit Camp?
+## What is the Qiskit Global Summer School?
+Qiskit Global Summer School is a two-week intensive summer school designed to empower the next generation of quantum developers with the knowledge to explore quantum applications on their own. The curriculum covers quantum computing preliminaries before focusing on two key areas: superconducting devices and quantum chemistry applications.
 
-Qiskit Camps are an immersive experience that consists of training sessions, deep technical talks, and a hackathon alongside the Qiskit core development team. At Qiskit Camp, attendees can collaborate with both quantum researchers and computer scientists to connect with the larger global quantum community.
+The Qiskit Global Summer School is based on premium training provided to our IBM Quantum interns. We are incredibly excited to make this educational opportunity open to a broad audience. The lectures of the Qiskit Global Summer School will be thorough, and our team of quantum computing experts with extensive teaching experience will cover all steps of the calculations.
 
-2019 Qiskit Camp Africa will be hosted near Johannesberg, South Africa from 11-14 December. Invitations will be distributed prior to the event.
+Each day of the Qiskit Global Summer School consists of 3 hours of lectures followed by an hour-long hands-on programming lab where we implement quantum programs in Qiskit.
 
-Attendees that are new to Qiskit, or simply want to increase their proficiency in quantum computing should attend the week-long [Quantum Computing Summer School](http://www.wits.ac.za/quantum-computing/summer-school/) at Wits University from December 2-11 immediately preceding Qiskit Camp.
+## Prerequisites
+The Qiskit Global Summer School is designed to have minimal prerequisites. If you know [how to multiply two matrices](https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:matrices/x9e81a4f98389efdf:multiplying-matrices-by-matrices/v/matrix-multiplication-intro), and have some programming experience in Python, you are ready for the Qiskit Global Summer School.
+
+You can [brush up on Python programming](https://qiskit.org/textbook/ch-prerequisites/python-and-jupyter-notebooks.html) before attending the lectures by using the Qiskit Textbook. To make the most out of these lectures, you may also consider looking through the [linear algebra prerequisites](https://qiskit.org/textbook/ch-prerequisites/linear_algebra.html) section of the Qiskit Textbook.
 
 ## Location
 
-Qiskit Camp Africa will take place at the Kwa Maritane Bush Lodge (https://www.legacyhotels.co.za/hotels/kwa-maritane-bush-lodge). The Kwa Maritane is located in the Pilanesberg National Park on the slopes of a 2-billion-year-old volcano, and is a wildlife refuge.
+The summer school will be hosted virtually, and recordings will be made available following the lectures. Invitations will be distributed prior to the event. Interested applicants should [apply here](https://www.eventbrite.com/e/qiskit-global-summer-school-tickets-108899074062).
 
-<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2387.41265024288!2d27.144590812282576!3d-25.33368849087539!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1ebc2b59a4c3c811%3A0xfc839400fe45015f!2sKwa+Maritane+Bush+lodge!5e0!3m2!1sen!2sus!4v1562184701364!5m2!1sen!2sus" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+## Curriculum
+Each day of the Qiskit Global Summer School consists of 3 hours of lectures followed by an hour-long hands-on programming lab where we implement quantum programs in Qiskit.
 
-## Agenda
+### Week 1: July 20-24
+-	Monday, July 20
+	- 9:00 - 12:00 EDT **Lecture**: Qubits and Quantum States, Quantum Circuits, Measurements\
+	_Lecturer: Elisa B&auml;umer_
+	-	13:00 - 14:00 EDT **Hands-on Programming with Qiskit**\
+	_Lab Lead: Abraham Asfaw_
 
-### December 11
--	10:00 - 12:30 Registration & Optional Johannesburg Lab Activities
--	12:30 Shuttles Depart
--	16:00 Arrival & Check In at Kwa Maritane Venue
--	18:00 Welcome Reception & Dinner
+-	Tuesday, July 21
+	- 9:00 - 12:00 EDT **Lecture**: Writing and Running Quantum Programs\
+	_Lecturer: Elisa B&auml;umer_
+	-	13:00 - 14:00 EDT **Hands-on Programming with Qiskit**\
+	_Lab Lead: Abraham Asfaw_
 
-### December 12
--	8:00 Breakfast
--	9:00 Team Formation
--	10:00 Hackathon Begins
+-	Wednesday, July 22
+	- 9:00 - 12:00 EDT **Lecture**: Shor's Algorithm I: Understanding Quantum Fourier Transform, Quantum Phase Estimation\
+	_Lecturer: Abraham Asfaw_
+	-	13:00 - 14:00 EDT **Hands-on Programming with Qiskit**\
+	_Lab Lead: Abraham Asfaw_
 
-### December 13
--	8:00 Breakfast
--	9:00 Hackathon Continues
--	15:00 Project Presentations
--	18:00 Award Ceremony
--	19:00 Celebration Dinner
+-	Thursday, July 23
+	- 9:00 - 12:00 EDT **Lecture**: Shor's algorithm II: From Factoring to Period-Finding, Writing the Quantum Program\
+	_Lecturer: Abraham Asfaw_
+	-	13:00 - 14:00 EDT **Hands-on Programming with Qiskit**\
+	_Lab Lead: Abraham Asfaw_
 
-### December 14
--	10:00 Shuttle # 1 Departure from Kwa Maritane Venue
--	15:00 Shuttle # 2 Departure from Kwa Maritane
+-	Friday, July 24
+	- 9:00 - 12:00 EDT **Lecture**: Quantum Error Correction using Repetition Codes\
+	_Lecturer: James Wootton_
+	-	13:00 - 14:00 EDT **Hands-on Programming with Qiskit**\
+	_Lab Lead: James Wootton_
 
-_(People are welcome to extend the trip at their own expense)_
+### Week 2: July 27-30
+-	Monday, July 27
+	- 9:00 - 12:00 EDT **Lecture**: Superconducting Qubits I: Quantizing a Harmonic Oscillator, Josephson Junctions\
+	_Lecturer: Zlatko Minev_
+	-	13:00 - 14:00 EDT **Hands-on Programming with Qiskit**\
+	_Lab Lead: Nick Bronn_
 
-## Prizes and Judging
+-	Tuesday, July 28
+	- 9:00 - 12:00 EDT **Lecture**: Superconducting Qubits II: Circuit Quantum Electrodynamics, Readout and Calibration Methods\
+	_Lecturer: Zlatko Minev_
+	-	13:00 - 14:00 EDT **Hands-on Programming with Qiskit**\
+	_Lab Lead: Nick Bronn_
 
-There are 3 ways to win this hackathon!
+-	Wednesday, July 29
+	- 9:00 - 12:00 EDT **Lecture**: Quantum Chemistry I: Obtaining the Qubit Hamiltonian for H<sub>2</sub> and LiH\
+	_Lecturer: Abhinav Kandala & Antonio Mezzacapo_
+	-	13:00 - 14:00 EDT **Hands-on Programming with Qiskit**\
+	_Lab Lead: Abhinav Kandala & Antonio Mezzacapo_
 
-1st & 2nd Prize - Decided by a panel of 3 judges, 1st and 2nd prize winners will be evaluated on 1) Originality and Uniqueness; 2) Live Pitch Presentation; 3) Usefulness; and 4) Technical complexity. 1st place winners will receive a paid trip to the annual flagship Qiskit Camp event near Yorktown Heights, NY.
-
-Community Choice - The community choice award will be given based on the highest scoring team voted on by the community.
+-	Thursday, July 30
+	- 9:00 - 12:00 EDT **Lecture**: Quantum Chemistry II: Finding the Ground States of H<sub>2</sub> and LiH Using a Variational Quantum Eigensolver\
+	_Lecturer: Abhinav Kandala & Antonio Mezzacapo_
+	-	13:00 - 14:00 EDT **Hands-on Programming with Qiskit**\
+	_Lab Lead: Abhinav Kandala & Antonio Mezzacapo_
 
 ## Code of Conduct
 
