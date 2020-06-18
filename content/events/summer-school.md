@@ -1,6 +1,6 @@
 ---
 title: Qiskit Global Summer School
-dates: Dates July 20-30, 2020
+dates: Dates: July 20-30, 2020
 tagline: A two-week intensive summer school designed to empower the next generation of quantum developers with the knowledge to explore quantum applications on their own.
 description: Add your description here
 background: africa
@@ -47,13 +47,13 @@ Each day of the Qiskit Global Summer School consists of 3 hours of lectures foll
 	_Lab Lead: Abraham Asfaw_
 
 -	Wednesday, July 22
-	- 9:00 - 12:00 EDT **Lecture**: Shor's Algorithm I: Understanding Quantum Fourier Transform\
+	- 9:00 - 12:00 EDT **Lecture**: Shor's Algorithm I: Understanding Quantum Fourier Transform, Quantum Phase Estimation\
 	_Lecturer: Abraham Asfaw_
 	-	13:00 - 14:00 EDT **Hands-on Programming with Qiskit**\
 	_Lab Lead: Abraham Asfaw_
 
 -	Thursday, July 23
-	- 9:00 - 12:00 EDT **Lecture**: Shor's algorithm II: Writing the Quantum Program\
+	- 9:00 - 12:00 EDT **Lecture**: Shor's algorithm II: From Factoring to Period-Finding, Writing the Quantum Program\
 	_Lecturer: Abraham Asfaw_
 	-	13:00 - 14:00 EDT **Hands-on Programming with Qiskit**\
 	_Lab Lead: Abraham Asfaw_
