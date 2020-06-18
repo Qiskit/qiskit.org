@@ -130,12 +130,12 @@ export default class extends Mixins(MenuMixin) {}
       text-decoration: underline;
     }
 
-    &.nuxt-link-active {
-      color: $purple-70;
-    }
-
     &:last-child {
       margin-right: 0;
+    }
+
+    &_active {
+      color: $purple-70;
     }
   }
 
