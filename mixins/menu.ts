@@ -8,6 +8,8 @@ import {
   COMMUNITY_LINK,
   TUTORIALS_LINK,
   DOCUMENTATION_LINK,
+  OVERVIEW_LINK,
+  LEARN_LINK,
   NavLink
 } from '~/constants/menuLinks'
 
@@ -16,6 +18,7 @@ export default class extends Vue {
   homeLink: NavLink = HOME_LINK
   qiskitElements: Array<NavLink> = ORDERED_QISKIT_ELEMENTS
   learnMore: Array<NavLink> = [TUTORIALS_LINK, DOCUMENTATION_LINK]
+  mainLevelLinks: Array<NavLink> = [OVERVIEW_LINK, LEARN_LINK, COMMUNITY_LINK, DOCUMENTATION_LINK]
   communityLink: NavLink = COMMUNITY_LINK
   communitySubLinks: Array<NavLink> = ORDERED_COMMUNITY_SUB_LINKS
 
@@ -24,11 +27,9 @@ export default class extends Vue {
   }
 
   isActive (link: NavLink): boolean {
-    const isCommunityLink = link.label === 'Community'
-
-    return isCommunityLink
-      ? this.communitySubLinks.some(communitySection => this.isPathStartingWith(communitySection.url))
-      : this.isPathStartingWith(link.url)
+    // TODO: Should remove after the new menu (second menu included) is
+    // completely done. #573
+    return this.isPathStartingWith(link.url)
   }
 
   isCommunityActive (): boolean {

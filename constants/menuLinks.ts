@@ -134,6 +134,22 @@ const QISKIT_ADVOCATES: LabeledLinks = {
   }
 }
 
+const OVERVIEW_LINK: NavLink = {
+  label: 'Overview',
+  url: '#',
+  segment: {
+    action: 'Overview'
+  }
+}
+
+const LEARN_LINK: NavLink = {
+  label: 'Learn',
+  url: '/education',
+  segment: {
+    action: 'Learn'
+  }
+}
+
 const DOCUMENTATION_LINK: NavLink = {
   label: 'Documentation',
   url: 'https://qiskit.org/documentation/'
@@ -255,7 +271,7 @@ const HOME_LINK: NavLink = {
 
 const COMMUNITY_LINK: NavLink = {
   label: 'Community',
-  url: '/education'
+  url: '/advocates'
 }
 
 export {
@@ -268,5 +284,7 @@ export {
   TUTORIALS_LINK,
   DOCUMENTATION_LINK,
   STAY_CONNECTED_LINKS,
+  OVERVIEW_LINK,
+  LEARN_LINK,
   NavLink
 }
