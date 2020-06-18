@@ -35,10 +35,10 @@ The summer school will be hosted virtually, and recordings will be made availabl
 ### July 20
 -	9:00 - 12:00 EDT **Lecture**\
 Qubits and quantum states, quantum circuits, measurements\
-_Lecturer: Elisa Baumer_\
+_Lecturer: Elisa B&auml;umer_
 
 -	13:00 - 14:00 **Hands-on Lab**\
-_Lab Lead: Abraham Asfaw_\
+_Lab Lead: Abraham Asfaw_
 
 ### July 21
 -	9:00 - 12:00 EDT **Lecture**\
@@ -48,13 +48,18 @@ _Lecturer: Elisa Baumer_
 -	13:00 - 14:00 **Hands-on Lab**\
 _Lab Lead: Abraham Asfaw_
 
-### July 22
--	9:00 - 12:00 EDT **Lecture**\
-Qubits and quantum states, quantum circuits, measurements\
-_Lecturer: Elisa Baumer_
+### Week 1: July 20-24
+-	July 20
+	- 9:00 - 12:00 EDT **Lecture**: Qubits and quantum states, quantum circuits, measurements\
+	_Lecturer: Elisa B&auml;umer_
+	-	13:00 - 14:00 **Hands-on Lab**\
+	_Lab Lead: Abraham Asfaw_
 
--	13:00 - 14:00 **Hands-on Lab**\
-_Lab Lead: Abraham Asfaw_
+-	July 21
+	- 9:00 - 12:00 EDT **Lecture**: Qubits and quantum states, quantum circuits, measurements\
+	_Lecturer: Elisa B&auml;umer_
+	-	13:00 - 14:00 **Hands-on Lab**\
+	_Lab Lead: Abraham Asfaw_
 
 There will be short breaks during each lecture.
 
