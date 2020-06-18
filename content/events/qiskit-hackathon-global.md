@@ -18,74 +18,78 @@ nav:
 routeName: events
 ---
 
-## What is a Qiskit Research Unconference?
+## What is Qiskit Hackathon Global?
 
-Qiskit Research Unconferences are participant-driven events meant to catalyze collaborative research projects. The event forms around the ideas and work of the attendees. Attendees will collaborate with both fellow quantum researchers and the Qiskit core development team.
+Qiskit Hackathon Global will be the first immersive and live 24-hour hackathon experience hosted by IBM's Qiskit Community Team from August 6-8. This invitation-only hackathon brings together the quantum community for an immersive three days of training sessions, deep technical talks, and a hackathon with the Qiskit core development team. 
 
-The 2020 Qiskit Research Unconference will be hosted in Lapland, Finland from 25–29 of March. Invitations with a registration link will be emailed prior to the event. This event has an attendee cap of 30 and registration is first-come, first-serve. Please register soon.
 
-Attendees that are new to [Qiskit](https://qiskit.org/), or want to learn more about current research applications of the open-source software, should attend the optional seminars at Aalto University on March 24 immediately preceding the Unconference.
+Attendees be able to learn about new updates to Qiskit and meet the people building it hands-on, and not only create connections within the Qiskit community, but with the researchers and developers behind it. 
+
+
+More updates to come as this virtual experience approaches!
 
 ## Location
 
-The  2020 Qiskit Research Unconference will take place at the [Star Arctic Hotel](https://stararctichotel.com/). Located in Saariselkä, Finland, the Star Arctic Hotel is a gateway to the trails and ski areas of mountainous Urho Kekkonen National Park.
-
-Lodging and meals at the Star Arctic Hotel and transportation (via plane) to and from Lapland from Helsinki will be provided. See more information under [funding](#funding).
-
-<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6756869.517052683!2d17.66159026972095!3d65.57768934892147!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x45cd43a094323867%3A0x3d6d61fa406c39cd!2sStar%20Arctic%20Hotel!5e0!3m2!1sen!2sus!4v1576092755370!5m2!1sen!2sus" width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+Qiskit Hackathon Global will be hosted 100% virtually! A central "location" will be provided as the event gets closer, and wherever you are in the world - you will be able to participate. 
 
 ## Agenda
-_check back soon for more details_
+_* times subject to change_
 
-### March 24
--	Seminars at Aalto University (Optional)
 
-### March 25
-- 11:35 - Flight HK 28 departs Helsinki for Ivalo. All seats reserved by Unconference team; e-tickets will be sent to attendees 1 week before the event.
--	13:15 - Arrival in Ivalo, Shuttle to Star Artic Hotel & Check In / Registration.
-- 18:00 - Welcome Reception & Dinner.
+### August 6
+### Day 1: Welcome! Presentations and Project Pitches
+4:00 PM - 6:30 PM EST
+_more details coming soon!_
 
-### March 26
-- Breakfast
--	Idea Share
-- Lunch
--	Unconference Begins
--	Dinner
 
-### March 27
-- Breakfast
-- Unconference Continues
-- Lunch
-- Dinner
+### August 7
+### Day 2: Team Formation & Hackathon
+8:30 AM EST Start Time
+_more details coming soon!_
 
-### March 28
-- Breakfast
-- Unconference Continues
-- Lunch
-- Project Presentations
-- Celebration Dinner
 
-### March 29
-- Departures to Helsinki are scheduled for 13:55 (with an arrival in Helsinki  at 15:25) and 19:00 (arrival in Helsinki at 20:30). Seats have also been reserved by the Unconference team and each attendee will receive their eticket a week prior to the event.
+### August 8
+### Day 3: Hackathon, Awards, & Celebration
+- 1:45 PM EST Hackathon Ends
+- 3:00 PM EST Award Ceremony
+- 3:30 PM EST Celebration Begins!
+_more details coming soon!_
 
-## Aalto Seminars
 
-On Tuesday, March 24, we will host several seminars at Aalto University near Helsinki, Finland. Attendance is optional. These seminars will cover Qiskit tutorials as well as previous research applications of Qiskit.
 
-Lodinging in Helsinki is at your own expense. Check back soon for a list of suggested lodging.
+## Learn about the Qiskit Global Summer School
+_Website coming soon!_
 
-_Speaker List Coming Soon_
+## FAQ
 
-## Funding
+### How much does registration cost for the hackathon? 
+There is no cost to participate in Qiskit Hackathon Global.
 
-Transportation between Helsinki and Lapland (via plane) and accommodations (lodging and meals) at the Star Arctic Hotel in Lapland will be covered by IBM for all students, postdocs, and non-GOE PI’s. Costs of GOE's will be reimbursed by funding from the Finnish Centre of Excellence on Quantum Technologies (University of Turku and Aalto University).
 
-Travel to and from Helsinki, any accomodations in Helsinki, and any extension of the trip must be covered by attendees.
+### Will I need any supplies or equipment in order to participate? 
+You will need an operating computer with a reliable internet connection - and either a mobile device or webcam/microphone on your computer to communicate with teammates. You will need to be able to view live streams and connect globally - but other than that, you just need to bring yourself!
 
-## Organization
 
-This event is co-organized by the [Qiskit Community Team](https://community.qiskit.org/education/) from IBM and by the [Turku Quantum Technology Group](http://www.tqt.fi/) from the University of Turku, specifically Sabrina Maniscalco, Guillermo Garcia Perez, Matteo Rossi, and Boris Sokolov.
+### Do I need to download anything prior to the hackathon? 
+You will want to make sure and have Qiskit downloaded and installed prior to the hackathon start. Instructions for how to install Qiskit are available here. In the week leading up to the hackathon, researchers and staff will be available to provide live-support for installs, should you encounter any difficulty. 
 
+
+### I wasn't invited to the hackathon - how can I get an invitation? 
+Qiskit Hackathon Global is a relatively small hackathons with limited space. We traditionally go through a nomination process via local universities for these hackatons, and we also take self-nominations into consideration. 
+ 
+If you would like to be considered for an invite, please have your professor or colleague submit a nomination to [hello@qiskit.camp](mailto:hello@qiskit.camp) and tell us about your work (especially any experience you already have with Qiskit and/or IBM Q Experience) - or submit an inquiry below!
+
+
+### I wasn't invited to the hackathon - but I want to get connected to the Qiskit Community! How can I do that? 
+If you are looking for other opportunities to connect with the Quantum Community, there are lots of options available. You can participate in local [Qiskit or Quantum events](https://community.qiskit.org/events/) that may be available in your area or join the [Qiskit Slack Community](https://join.slack.com/t/qiskit/shared_invite/zt-e4sscbg2-p8NHTezPVkC3r8nV6BIUVw) or [Qiskit Github Community](https://urldefense.proofpoint.com/v2/url?u=https-3A__github.com_Qiskit&d=DwMFaQ&c=jf_iaSHvJObTbx-siA1ZOg&r=2BfE013HYdFKw8vNGtCg79pBdgDsfBDgu6a0AqcJQ98&m=FrECrt7i8PKvrNVL5vUxBzewU1vlo5bJw21XLYqm9ms&s=tyA_8sWFiqYnJ0It_SIHLtmAwRQbPyasq4aZd6EZwlc&e=). We also have our advocates program, for people like yourself that are passionate about quantum and want to be engaged with the larger community. You can find information about that online [here](https://community.qiskit.org/advocates/). 
+
+
+### I'm not in the US or North America - can I still participate? 
+Yes! This event is open to everyone around the world - don't let location stop you from joining!
+
+
+### Is there an age limit on participation? 
+The age-limit for Qiskit Hackathon Global is 16. If you are under the age limit, but still want to participate, please check out the other ways you can get connected to the community, and other events in your area that may be available!
 
 ## Code of Conduct
 
