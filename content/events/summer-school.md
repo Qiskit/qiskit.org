@@ -92,8 +92,8 @@ Each day of the Qiskit Global Summer School consists of 3 hours of lectures foll
 	_Lab Lead: Abhinav Kandala & Antonio Mezzacapo_
 
 -	Friday, July 31
-	- 9:00 - 12:00 EDT **Discussion**: Careers in Quantum Computing\
-	_Lecturer: Jay Gambetta, Scott Crowder, Jerry Chow, Liz Durst, IBM Q Network Members_
+	- 9:00 - 12:00 EDT **Panel Discussion**: Careers in Quantum Computing\
+	_Panel: Jay Gambetta, Scott Crowder, Jerry Chow, Liz Durst, IBM Q Network Members_
 
 ## Code of Conduct
 
