@@ -31,16 +31,10 @@ import AppLink from '~/components/ui/AppLink.vue'
 import FooterSection from '~/components/layouts/PageFooter/FooterSection.vue'
 import MenuMixin from '~/mixins/menu'
 
-import {
-  STAY_CONNECTED_LINKS
-} from '~/constants/menuLinks'
-
 @Component({
   components: { AppLink, FooterSection }
 })
-export default class extends Mixins(MenuMixin) {
-  stayConnectedElements = STAY_CONNECTED_LINKS
-}
+export default class extends Mixins(MenuMixin) {}
 </script>
 
 <style lang="scss" scoped>
