@@ -1,6 +1,6 @@
 ---
 title: Qiskit Global Summer School
-dates: Dates: July 20-30, 2020
+dates: July 20-30, 2020
 tagline: A two-week intensive summer school designed to empower the next generation of quantum developers with the knowledge to explore quantum applications on their own.
 description: Add your description here
 background: africa
