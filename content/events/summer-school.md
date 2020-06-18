@@ -50,16 +50,59 @@ _Lab Lead: Abraham Asfaw_
 
 ### Week 1: July 20-24
 -	July 20
-	- 9:00 - 12:00 EDT **Lecture**: Qubits and quantum states, quantum circuits, measurements\
+	- 9:00 - 12:00 EDT **Lecture**: Qubits and Quantum States, Quantum Circuits, Measurements\
 	_Lecturer: Elisa B&auml;umer_
-	-	13:00 - 14:00 **Hands-on Lab**\
+	-	13:00 - 14:00 EDT **Hands-on Lab**\
 	_Lab Lead: Abraham Asfaw_
 
 -	July 21
-	- 9:00 - 12:00 EDT **Lecture**: Qubits and quantum states, quantum circuits, measurements\
+	- 9:00 - 12:00 EDT **Lecture**: Writing and Running Quantum Programs\
 	_Lecturer: Elisa B&auml;umer_
-	-	13:00 - 14:00 **Hands-on Lab**\
+	-	13:00 - 14:00 EDT **Hands-on Lab**\
 	_Lab Lead: Abraham Asfaw_
+
+-	July 22
+	- 9:00 - 12:00 EDT **Lecture**: Shor's Algorithm I: Understanding Quantum Fourier Transform\
+	_Lecturer: Abraham Asfaw_
+	-	13:00 - 14:00 EDT **Hands-on Lab**\
+	_Lab Lead: Abraham Asfaw_
+
+-	July 23
+	- 9:00 - 12:00 EDT **Lecture**: Shor's algorithm II: Writing the Quantum Program\
+	_Lecturer: Abraham Asfaw_
+	-	13:00 - 14:00 EDT **Hands-on Lab**\
+	_Lab Lead: Abraham Asfaw_
+
+-	July 24
+	- 9:00 - 12:00 EDT **Lecture**: Quantum Error Correction using Repetition Codes\
+	_Lecturer: James Wootton_
+	-	13:00 - 14:00 EDT **Hands-on Lab**\
+	_Lab Lead: James Wootton_
+
+### Week 2: July 27-30
+-	July 27
+	- 9:00 - 12:00 EDT **Lecture**: Superconducting Qubits I: Quantizing a Harmonic Oscillator, Josephson Junctions\
+	_Lecturer: Zlatko Minev_
+	-	13:00 - 14:00 EDT **Hands-on Lab**\
+	_Lab Lead: Nick Bronn_
+
+-	July 28
+	- 9:00 - 12:00 EDT **Lecture**: Superconducting Qubits II: Circuit Quantum Electrodynamics, Readout and Calibration Methods\
+	_Lecturer: Zlatko Minev_
+	-	13:00 - 14:00 EDT **Hands-on Lab**\
+	_Lab Lead: Nick Bronn_
+
+-	July 29
+	- 9:00 - 12:00 EDT **Lecture**: Quantum Chemistry I: Obtaining the Qubit Hamiltonian for H<sub>2</sub> and LiH\
+	_Lecturer: Abhinav Kandala & Antonio Mezzacapo_
+	-	13:00 - 14:00 EDT **Hands-on Lab**\
+	_Lab Lead: Abhinav Kandala & Antonio Mezzacapo_
+
+-	July 30
+	- 9:00 - 12:00 EDT **Lecture**: Quantum Chemistry II: Finding the Ground States of H<sub>2</sub> and LiH Using a Variational Quantum Eigensolver\
+	_Lecturer: Abhinav Kandala & Antonio Mezzacapo_
+	-	13:00 - 14:00 EDT **Hands-on Lab**\
+	_Lab Lead: Abhinav Kandala & Antonio Mezzacapo_
 
 There will be short breaks during each lecture.
 
