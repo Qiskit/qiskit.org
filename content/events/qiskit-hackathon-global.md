@@ -37,19 +37,19 @@ _* times subject to change_
 
 
 ### August 6
-### Day 1: Welcome! Presentations and Project Pitches
+#### Day 1: Welcome! Presentations and Project Pitches
 4:00 PM - 6:30 PM EST
 _more details coming soon!_
 
 
 ### August 7
-### Day 2: Team Formation & Hackathon
+#### Day 2: Team Formation & Hackathon
 8:30 AM EST Start Time
 _more details coming soon!_
 
 
 ### August 8
-### Day 3: Hackathon, Awards, & Celebration
+#### Day 3: Hackathon, Awards, & Celebration
 - 1:45 PM EST Hackathon Ends
 - 3:00 PM EST Award Ceremony
 - 3:30 PM EST Celebration Begins!
