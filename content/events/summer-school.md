@@ -1,8 +1,8 @@
 ---
 title: Qiskit Global Summer School
-dates: July 20-30, 2020
+dates: July 20-31, 2020
 tagline: A two-week intensive summer school designed to empower the next generation of quantum developers with the knowledge to explore quantum applications on their own.
-description: Add your description here 
+description: Add your description here
 background: globalsummerschool
 nav:
   - text: Location
@@ -66,7 +66,7 @@ Each day of the Qiskit Global Summer School consists of 3 hours of lectures foll
 	-	13:00 - 14:00 EDT **Hands-on Programming with Qiskit**\
 	_Lab Lead: James Wootton_
 
-### Week 2: July 27-30
+### Week 2: July 27-31
 -	Monday, July 27
 	- 9:00 - 12:00 EDT **Lecture**: Superconducting Qubits I: Quantizing a Harmonic Oscillator, Josephson Junctions\
 	_Lecturer: Zlatko Minev_
@@ -92,8 +92,8 @@ Each day of the Qiskit Global Summer School consists of 3 hours of lectures foll
 	_Lab Lead: Abhinav Kandala & Antonio Mezzacapo_
 
 -	Friday, July 31
-	- 9:00 - 12:00 EDT **Discussion**: Careers in Quantum Computing\
-	_Lecturer: Jay Gambetta, Scott Crowder, Jerry Chow, Liz Durst, IBM Q Network Members_
+	- 9:00 - 12:00 EDT **Panel Discussion**: Careers in Quantum Computing\
+	_Panel: Jay Gambetta, Scott Crowder, Jerry Chow, Liz Durst, IBM Q Network Members_
 
 ## Code of Conduct
 
