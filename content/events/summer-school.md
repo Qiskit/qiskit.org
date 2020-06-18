@@ -1,56 +1,54 @@
 ---
 title: Qiskit Global Summer School
 dates: Dates July 20-30, 2020
-tagline: A two-week summer school to empower the next generation of quantum developers with the knowledge to explore quantum applications on their own.
+tagline: A two-week intensive summer school designed to empower the next generation of quantum developers with the knowledge to explore quantum applications on their own.
 description: Add your description here
 background: africa
 nav:
   - text: Location
     goTo: '#location'
-  - text: Agenda
-    goTo: '#agenda'
+  - text: Curriculum
+    goTo: '#curriculum'
   - text: Code of Conduct
     goTo: '#code-of-conduct'
 routeName: events
 ---
 
 ## What is the Qiskit Global Summer School?
-Qiskit Global Summer School is a two-week immersive summer school designed to empower the next generation of quantum developers with the knowledge to explore quantum applications on their own. The curriculum covers quantum computing preliminaries before focusing on two key areas: superconducting devices and quantum chemistry applications.
+Qiskit Global Summer School is a two-week intensive summer school designed to empower the next generation of quantum developers with the knowledge to explore quantum applications on their own. The curriculum covers quantum computing preliminaries before focusing on two key areas: superconducting devices and quantum chemistry applications.
 
 The lectures of the Qiskit Global Summer School will be thorough. Our team of quantum computing experts will cover all steps of the calculations.
+
+Each day of the Qiskit Global Summer School consists of three hours of lectures followed by an hour of hands-on quantum programming with Qiskit.
 
 ## Prerequisites
 The prerequisites for the Qiskit Global Summer School are minimal. If you know how to multiply two matrices, and have programming experience in Python, you are ready for the Qiskit Global Summer School.
 
-Attendees who are new to the field of quantum computation and Qiskit are recommended to follow the Coding With Qiskit video series and brush up on Linear Algebra and Python by following the Qiskit Textbook before attending the lectures.
+Attendees who are new to the field of quantum computation and Qiskit are recommended to follow the [Coding With Qiskit video series](http://qisk.it/cwq) and brush up on [Linear Algebra](https://qiskit.org/textbook/ch-prerequisites/linear_algebra.html) and [Python](https://qiskit.org/textbook/ch-prerequisites/python-and-jupyter-notebooks.html) by following the Qiskit Textbook before attending the lectures.
 
 ## Location
 
-The summer school will be hosted virtually. Invitations will be distributed prior to the event. Interested applicants should apply here.
+The summer school will be hosted virtually, and recordings will be made available following the lectures. Invitations will be distributed prior to the event. Interested applicants should [apply here]().
 
-## Agenda
+## Curriculum
 
-### December 11
--	10:00 - 12:30 Registration & Optional Johannesburg Lab Activities
--	12:30 Shuttles Depart
--	16:00 Arrival & Check In at Kwa Maritane Venue
--	18:00 Welcome Reception & Dinner
+### July 20
+-	9:00 - 12:00 EDT **Lecture**
+Qubits and quantum states, quantum circuits, measurements
+_Lecturer: Elisa Baumer_
 
-### December 12
--	8:00 Breakfast
--	9:00 Team Formation
--	10:00 Hackathon Begins
+-	13:00 - 14:00 **Hands-on Lab**
+_Lab Lead: Abraham Asfaw_
 
-### December 13
--	8:00 Breakfast
--	9:00 Hackathon Continues
--	15:00 Project Presentations
--	18:00 Award Ceremony
--	19:00 Celebration Dinner
+### July 21
+-	9:00 - 12:00 EDT **Lecture**
+Qubits and quantum states, quantum circuits, measurements
+_Lecturer: Elisa Baumer_
 
-### December 14
--	10:00 Shuttle # 1 Departure from Kwa Maritane Venue
--	15:00 Shuttle # 2 Departure from Kwa Maritane
+-	13:00 - 14:00 **Hands-on Lab**
+_Lab Lead: Abraham Asfaw_
+
+There will be short breaks during each lecture.
 
 ## Code of Conduct
 
