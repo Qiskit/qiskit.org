@@ -15,7 +15,7 @@ routeName: events
 ---
 
 ## What is the Qiskit Global Summer School?
-Qiskit Global Summer School is a two-week intensive summer school designed to empower the next generation of quantum developers with the knowledge to explore quantum applications on their own. The curriculum covers quantum computing preliminaries before focusing on two key areas: superconducting devices and quantum chemistry applications.
+Qiskit Global Summer School is a two-week intensive summer school designed to empower the next generation of quantum developers with the knowledge to explore quantum applications on their own. The curriculum covers quantum computing preliminaries before focusing on two key areas: **superconducting devices** and **quantum chemistry applications**.
 
 The Qiskit Global Summer School is based on premium training provided to our IBM Quantum interns. We are incredibly excited to make this educational opportunity open to a broad audience. The lectures of the Qiskit Global Summer School will be thorough, and our team of quantum computing experts with extensive teaching experience will cover all steps of the calculations.
 
@@ -28,7 +28,9 @@ You can [brush up on Python programming](https://qiskit.org/textbook/ch-prerequi
 
 ## Location
 
-The summer school will be hosted virtually, and recordings will be made available following the lectures. Invitations will be distributed prior to the event. Interested applicants should [apply here](https://www.eventbrite.com/e/qiskit-global-summer-school-tickets-108899074062).
+The Qiskit Global Summer School is invite-only, and will be hosted virtually. Limited recordings may be made available following the lectures. 
+
+Invitations will be distributed prior to the event. Interested applicants should [apply here](https://www.eventbrite.com/e/qiskit-global-summer-school-tickets-108899074062).
 
 ## Curriculum
 Each day of the Qiskit Global Summer School consists of 3 hours of lectures followed by an hour-long hands-on programming lab where we implement quantum programs in Qiskit.
