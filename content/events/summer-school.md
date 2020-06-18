@@ -1,7 +1,7 @@
 ---
 title: Qiskit Global Summer School
 dates: Dates July 20-30, 2020
-tagline: A two-week intensive summer school designed to <br/>**empower** the next generation <br/>of quantum developers with <br/>the **knowledge to explore** quantum applications <br/>**on their own**.
+tagline: A two-week intensive summer school designed to empower the next generation of quantum developers with the knowledge to explore quantum applications on their own.
 description: Add your description here
 background: africa
 nav:
@@ -24,7 +24,7 @@ Each day of the Qiskit Global Summer School consists of 3 hours of lectures foll
 ## Prerequisites
 The Qiskit Global Summer School is designed to have minimal prerequisites. If you know [how to multiply two matrices](https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:matrices/x9e81a4f98389efdf:multiplying-matrices-by-matrices/v/matrix-multiplication-intro), and have some programming experience in Python, you are ready for the Qiskit Global Summer School.
 
-You can brush up on [Python](https://qiskit.org/textbook/ch-prerequisites/python-and-jupyter-notebooks.html) programming before attending the lectures by using the [Qiskit Textbook](https://qiskit.org/textbook/ch-prerequisites/python-and-jupyter-notebooks.html). To make the most out of these lectures, you may also consider looking through the [linear algebra prerequisites](https://qiskit.org/textbook/ch-prerequisites/linear_algebra.html) section of the Qiskit Textbook.
+You can [brush up on Python programming](https://qiskit.org/textbook/ch-prerequisites/python-and-jupyter-notebooks.html) before attending the lectures by using the Qiskit Textbook. To make the most out of these lectures, you may also consider looking through the [linear algebra prerequisites](https://qiskit.org/textbook/ch-prerequisites/linear_algebra.html) section of the Qiskit Textbook.
 
 ## Location
 
@@ -34,56 +34,56 @@ The summer school will be hosted virtually, and recordings will be made availabl
 Each day of the Qiskit Global Summer School consists of 3 hours of lectures followed by an hour-long hands-on programming lab where we implement quantum programs in Qiskit.
 
 ### Week 1: July 20-24
--	July 20
+-	Monday, July 20
 	- 9:00 - 12:00 EDT **Lecture**: Qubits and Quantum States, Quantum Circuits, Measurements\
 	_Lecturer: Elisa B&auml;umer_
 	-	13:00 - 14:00 EDT **Hands-on Programming with Qiskit**\
 	_Lab Lead: Abraham Asfaw_
 
--	July 21
+-	Tuesday, July 21
 	- 9:00 - 12:00 EDT **Lecture**: Writing and Running Quantum Programs\
 	_Lecturer: Elisa B&auml;umer_
 	-	13:00 - 14:00 EDT **Hands-on Programming with Qiskit**\
 	_Lab Lead: Abraham Asfaw_
 
--	July 22
+-	Wednesday, July 22
 	- 9:00 - 12:00 EDT **Lecture**: Shor's Algorithm I: Understanding Quantum Fourier Transform\
 	_Lecturer: Abraham Asfaw_
 	-	13:00 - 14:00 EDT **Hands-on Programming with Qiskit**\
 	_Lab Lead: Abraham Asfaw_
 
--	July 23
+-	Thursday, July 23
 	- 9:00 - 12:00 EDT **Lecture**: Shor's algorithm II: Writing the Quantum Program\
 	_Lecturer: Abraham Asfaw_
 	-	13:00 - 14:00 EDT **Hands-on Programming with Qiskit**\
 	_Lab Lead: Abraham Asfaw_
 
--	July 24
+-	Friday, July 24
 	- 9:00 - 12:00 EDT **Lecture**: Quantum Error Correction using Repetition Codes\
 	_Lecturer: James Wootton_
 	-	13:00 - 14:00 EDT **Hands-on Programming with Qiskit**\
 	_Lab Lead: James Wootton_
 
 ### Week 2: July 27-30
--	July 27
+-	Monday, July 27
 	- 9:00 - 12:00 EDT **Lecture**: Superconducting Qubits I: Quantizing a Harmonic Oscillator, Josephson Junctions\
 	_Lecturer: Zlatko Minev_
 	-	13:00 - 14:00 EDT **Hands-on Programming with Qiskit**\
 	_Lab Lead: Nick Bronn_
 
--	July 28
+-	Tuesday, July 28
 	- 9:00 - 12:00 EDT **Lecture**: Superconducting Qubits II: Circuit Quantum Electrodynamics, Readout and Calibration Methods\
 	_Lecturer: Zlatko Minev_
 	-	13:00 - 14:00 EDT **Hands-on Programming with Qiskit**\
 	_Lab Lead: Nick Bronn_
 
--	July 29
+-	Wednesday, July 29
 	- 9:00 - 12:00 EDT **Lecture**: Quantum Chemistry I: Obtaining the Qubit Hamiltonian for H<sub>2</sub> and LiH\
 	_Lecturer: Abhinav Kandala & Antonio Mezzacapo_
 	-	13:00 - 14:00 EDT **Hands-on Programming with Qiskit**\
 	_Lab Lead: Abhinav Kandala & Antonio Mezzacapo_
 
--	July 30
+-	Thursday, July 30
 	- 9:00 - 12:00 EDT **Lecture**: Quantum Chemistry II: Finding the Ground States of H<sub>2</sub> and LiH Using a Variational Quantum Eigensolver\
 	_Lecturer: Abhinav Kandala & Antonio Mezzacapo_
 	-	13:00 - 14:00 EDT **Hands-on Programming with Qiskit**\
