@@ -17,7 +17,7 @@ routeName: events
 ## What is the Qiskit Global Summer School?
 Qiskit Global Summer School is a two-week intensive summer school designed to empower the next generation of quantum developers with the knowledge to explore quantum applications on their own. The curriculum covers quantum computing preliminaries before focusing on two key areas: superconducting devices and quantum chemistry applications.
 
-The lectures of the Qiskit Global Summer School will be thorough. Our team of quantum computing experts will cover all steps of the calculations.
+We are incredibly excited to provide this educational opportunity to a broad audience. The lectures of the Qiskit Global Summer School will be thorough, and our team of quantum computing experts will cover all steps of the calculations.
 
 Each day of the Qiskit Global Summer School consists of three hours of lectures followed by an hour of hands-on quantum programming with Qiskit.
 
@@ -28,25 +28,9 @@ Attendees who are new to the field of quantum computation and Qiskit are recomme
 
 ## Location
 
-The summer school will be hosted virtually, and recordings will be made available following the lectures. Invitations will be distributed prior to the event. Interested applicants should [apply here]().
+The summer school will be hosted virtually, and recordings will be made available following the lectures. Invitations will be distributed prior to the event. Interested applicants should [apply here](https://www.eventbrite.com/e/qiskit-global-summer-school-tickets-108899074062).
 
 ## Curriculum
-
-### July 20
--	9:00 - 12:00 EDT **Lecture**\
-Qubits and quantum states, quantum circuits, measurements\
-_Lecturer: Elisa B&auml;umer_
-
--	13:00 - 14:00 **Hands-on Lab**\
-_Lab Lead: Abraham Asfaw_
-
-### July 21
--	9:00 - 12:00 EDT **Lecture**\
-Qubits and quantum states, quantum circuits, measurements\
-_Lecturer: Elisa Baumer_
-
--	13:00 - 14:00 **Hands-on Lab**\
-_Lab Lead: Abraham Asfaw_
 
 ### Week 1: July 20-24
 -	July 20
@@ -54,7 +38,6 @@ _Lab Lead: Abraham Asfaw_
 	_Lecturer: Elisa B&auml;umer_
 	-	13:00 - 14:00 EDT **Hands-on Lab**\
 	_Lab Lead: Abraham Asfaw_
-
 -	July 21
 	- 9:00 - 12:00 EDT **Lecture**: Writing and Running Quantum Programs\
 	_Lecturer: Elisa B&auml;umer_
