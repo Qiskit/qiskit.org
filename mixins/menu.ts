@@ -27,11 +27,9 @@ export default class extends Vue {
   }
 
   isActive (link: NavLink): boolean {
-    const isCommunityLink = link.label === 'Community'
-
-    return isCommunityLink
-      ? this.communitySubLinks.some(communitySection => this.isPathStartingWith(communitySection.url))
-      : this.isPathStartingWith(link.url)
+    // TODO: Should remove after the new menu (second menu included) is
+    // completely done. #573
+    return this.isPathStartingWith(link.url)
   }
 
   isCommunityActive (): boolean {

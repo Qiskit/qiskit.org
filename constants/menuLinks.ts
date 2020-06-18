@@ -271,7 +271,7 @@ const HOME_LINK: NavLink = {
 
 const COMMUNITY_LINK: NavLink = {
   label: 'Community',
-  url: '/education'
+  url: '/advocates'
 }
 
 export {
