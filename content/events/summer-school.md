@@ -1,7 +1,7 @@
 ---
-title: Global Summer School
-dates: Dates December 11-14, 2019
-tagline: Bringing together the Qiskit community
+title: Qiskit Global Summer School
+dates: Dates July 20-30, 2020
+tagline: A two-week summer school to empower the next generation of quantum developers with the knowledge to explore quantum applications on their own.
 description: Add your description here
 background: africa
 nav:
@@ -14,19 +14,19 @@ nav:
 routeName: events
 ---
 
-## What is Qiskit Camp?
+## What is the Qiskit Global Summer School?
+Qiskit Global Summer School is a two-week immersive summer school designed to empower the next generation of quantum developers with the knowledge to explore quantum applications on their own. The curriculum covers quantum computing preliminaries before focusing on two key areas: superconducting devices and quantum chemistry applications.
 
-Qiskit Camps are an immersive experience that consists of training sessions, deep technical talks, and a hackathon alongside the Qiskit core development team. At Qiskit Camp, attendees can collaborate with both quantum researchers and computer scientists to connect with the larger global quantum community.
+The lectures of the Qiskit Global Summer School will be thorough. Our team of quantum computing experts will cover all steps of the calculations.
 
-2019 Qiskit Camp Africa will be hosted near Johannesberg, South Africa from 11-14 December. Invitations will be distributed prior to the event.
+## Prerequisites
+The prerequisites for the Qiskit Global Summer School are minimal. If you know how to multiply two matrices, and have programming experience in Python, you are ready for the Qiskit Global Summer School.
 
-Attendees that are new to Qiskit, or simply want to increase their proficiency in quantum computing should attend the week-long [Quantum Computing Summer School](http://www.wits.ac.za/quantum-computing/summer-school/) at Wits University from December 2-11 immediately preceding Qiskit Camp.
+Attendees who are new to the field of quantum computation and Qiskit are recommended to follow the Coding With Qiskit video series and brush up on Linear Algebra and Python by following the Qiskit Textbook before attending the lectures.
 
 ## Location
 
-Qiskit Camp Africa will take place at the Kwa Maritane Bush Lodge (https://www.legacyhotels.co.za/hotels/kwa-maritane-bush-lodge). The Kwa Maritane is located in the Pilanesberg National Park on the slopes of a 2-billion-year-old volcano, and is a wildlife refuge.
-
-<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2387.41265024288!2d27.144590812282576!3d-25.33368849087539!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1ebc2b59a4c3c811%3A0xfc839400fe45015f!2sKwa+Maritane+Bush+lodge!5e0!3m2!1sen!2sus!4v1562184701364!5m2!1sen!2sus" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+The summer school will be hosted virtually. Invitations will be distributed prior to the event. Interested applicants should apply here.
 
 ## Agenda
 
@@ -51,16 +51,6 @@ Qiskit Camp Africa will take place at the Kwa Maritane Bush Lodge (https://www.l
 ### December 14
 -	10:00 Shuttle # 1 Departure from Kwa Maritane Venue
 -	15:00 Shuttle # 2 Departure from Kwa Maritane
-
-_(People are welcome to extend the trip at their own expense)_
-
-## Prizes and Judging
-
-There are 3 ways to win this hackathon!
-
-1st & 2nd Prize - Decided by a panel of 3 judges, 1st and 2nd prize winners will be evaluated on 1) Originality and Uniqueness; 2) Live Pitch Presentation; 3) Usefulness; and 4) Technical complexity. 1st place winners will receive a paid trip to the annual flagship Qiskit Camp event near Yorktown Heights, NY.
-
-Community Choice - The community choice award will be given based on the highest scoring team voted on by the community.
 
 ## Code of Conduct
 
