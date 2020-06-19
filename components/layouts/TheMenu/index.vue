@@ -31,7 +31,7 @@
         class="menu__mobile-menu-toggle"
         type="checkbox"
       >
-      <SidebarMenu
+      <MobileMenu
         class="menu__mobile-menu"
         :class="{ 'menu__mobile-menu_visible': isMobileMenuVisible }"
       />
@@ -83,12 +83,12 @@
 
 <script lang="ts">
 import { Watch, Component, Mixins } from 'vue-property-decorator'
-import SidebarMenu from '~/components/layouts/TheMenu/SidebarMenu.vue'
+import MobileMenu from '~/components/layouts/TheMenu/MobileMenu.vue'
 import AppLink from '~/components/ui/AppLink.vue'
 import MenuMixin from '~/mixins/menu'
 
 @Component({
-  components: { SidebarMenu, AppLink }
+  components: { MobileMenu, AppLink }
 })
 export default class extends Mixins(MenuMixin) {
   isMobileMenuVisible: boolean = false

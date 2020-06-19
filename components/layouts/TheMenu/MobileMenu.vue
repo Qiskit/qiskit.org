@@ -28,11 +28,10 @@
 <script lang="ts">
 import { Component, Mixins } from 'vue-property-decorator'
 import AppLink from '~/components/ui/AppLink.vue'
-import FooterSection from '~/components/layouts/PageFooter/FooterSection.vue'
 import MenuMixin from '~/mixins/menu'
 
 @Component({
-  components: { AppLink, FooterSection }
+  components: { AppLink }
 })
 export default class extends Mixins(MenuMixin) {}
 </script>
@@ -69,7 +68,7 @@ export default class extends Mixins(MenuMixin) {}
     height: 4rem;
     border-bottom: 1px solid $cool-gray-10;
 
-    &.nuxt-link-active {
+    &_active {
       color: $cool-gray-10;
       background-color: $purple-70;
     }
