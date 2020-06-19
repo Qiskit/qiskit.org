@@ -136,7 +136,7 @@ const QISKIT_ADVOCATES: LabeledLinks = {
 
 const OVERVIEW_LINK: NavLink = {
   label: 'Overview',
-  url: '#',
+  url: '#overview',
   segment: {
     action: 'Overview'
   }
