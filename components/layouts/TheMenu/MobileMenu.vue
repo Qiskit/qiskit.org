@@ -74,10 +74,6 @@ export default class extends Mixins(MenuMixin) {}
     }
   }
 
-  &__stay-connected {
-    margin-bottom: $layout-01;
-  }
-
   &__footer {
     padding-top: $spacing-05;
     padding-bottom: $spacing-05 + 2.5rem; // make room for the "cookies preferences" button
