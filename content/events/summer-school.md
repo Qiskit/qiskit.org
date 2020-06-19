@@ -5,8 +5,8 @@ tagline: A two-week intensive summer school designed to empower the next generat
 description: Add your description here
 background: globalsummerschool
 nav:
-  - text: Logistics
-    goTo: '#logistics'
+  - text: Location
+    goTo: '#location'
   - text: Curriculum
     goTo: '#curriculum'
   - text: Code of Conduct
@@ -26,9 +26,9 @@ The Qiskit Global Summer School is designed to have minimal prerequisites. If yo
 
 You can [brush up on Python programming](https://qiskit.org/textbook/ch-prerequisites/python-and-jupyter-notebooks.html) before attending the lectures by using the Qiskit Textbook. To make the most out of these lectures, you may also consider looking through the [linear algebra prerequisites](https://qiskit.org/textbook/ch-prerequisites/linear_algebra.html) section of the Qiskit Textbook.
 
-## Logistics
+## Location
 
-The Qiskit Global Summer School is invite-only, and will be hosted virtually. Limited recordings may be made available following the lectures. 
+The Qiskit Global Summer School is invite-only, and will be hosted virtually. Limited recordings may be made available following the lectures.
 
 Invitations will be distributed prior to the event. Interested applicants should [apply here](https://www.eventbrite.com/e/qiskit-global-summer-school-tickets-110201256926).
 
