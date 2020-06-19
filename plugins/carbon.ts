@@ -6,6 +6,7 @@ import Calendar20 from '@carbon/icons-vue/lib/calendar/20'
 import Map20 from '@carbon/icons-vue/lib/map/20'
 import ArrowRight20 from '@carbon/icons-vue/lib/arrow--right/20'
 import Menu20 from '@carbon/icons-vue/lib/menu/20'
+import Close20 from '@carbon/icons-vue/lib/close/20'
 import LogoTwitter20 from '@carbon/icons-vue/lib/logo--twitter/20'
 import LogoSlack20 from '@carbon/icons-vue/lib/logo--slack/20'
 import LogoYouTube20 from '@carbon/icons-vue/lib/logo--youtube/20'
@@ -18,6 +19,7 @@ Vue.use(CarbonIconsVue, {
     Map20,
     ArrowRight20,
     Menu20,
+    Close20,
     LogoTwitter20,
     LogoSlack20,
     LogoYouTube20,

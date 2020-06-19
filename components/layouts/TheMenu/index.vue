@@ -1,12 +1,40 @@
 <template>
   <div class="menu">
     <section class="menu__mobile" tabindex="-1">
-      <Menu20 class="menu__hamburguer-link" />
-      <AppLink class="menu__link" v-bind="homeLink">
-        {{ homeLink.label }}
-      </AppLink>
-      <div class="menu__overlay" />
-      <SidebarMenu class="menu__side-menu" />
+      <div class="menu__mobile-inner-container">
+        <AppLink
+          class="
+            menu__link
+            menu__home-link
+          "
+          v-bind="homeLink"
+        >
+          <img
+            class="menu__logo"
+            src="/images/qiskit-new-logo-purple.svg"
+            alt="Qiskit logo"
+          >
+        </AppLink>
+        <label
+          class="
+            menu__hamburger-toggle
+            menu__hamburger-toggle_menu-hidden
+          "
+          for="mobile-menu-toggle"
+        >
+          <component :is="isMobileMenuVisible ? 'Close20' : 'Menu20'" />
+        </label>
+      </div>
+      <input
+        id="mobile-menu-toggle"
+        v-model="isMobileMenuVisible"
+        class="menu__mobile-menu-toggle"
+        type="checkbox"
+      >
+      <MobileMenu
+        class="menu__mobile-menu"
+        :class="{ 'menu__mobile-menu_visible': isMobileMenuVisible }"
+      />
     </section>
     <section class="menu__main-level">
       <nav class="menu__navigation-level">
@@ -54,24 +82,41 @@
 </template>
 
 <script lang="ts">
-import { Component, Mixins } from 'vue-property-decorator'
-import SidebarMenu from '~/components/layouts/TheMenu/SidebarMenu.vue'
+import { Watch, Component, Mixins } from 'vue-property-decorator'
+import MobileMenu from '~/components/layouts/TheMenu/MobileMenu.vue'
 import AppLink from '~/components/ui/AppLink.vue'
 import MenuMixin from '~/mixins/menu'
 
 @Component({
-  components: { SidebarMenu, AppLink }
+  components: { MobileMenu, AppLink }
 })
-export default class extends Mixins(MenuMixin) {}
+export default class extends Mixins(MenuMixin) {
+  isMobileMenuVisible: boolean = false
+
+  @Watch('isMobileMenuVisible')
+  toggleScroll () {
+    if (this.isMobileMenuVisible) {
+      this.$root.$el.classList.add('no-scroll')
+    } else {
+      this.$root.$el.classList.remove('no-scroll')
+    }
+  }
+
+  @Watch('$route')
+  hideMenu () {
+    this.isMobileMenuVisible = false
+  }
+}
 </script>
 
 <style lang="scss" scoped>
 @import '~carbon-components/scss/globals/scss/typography';
 
 .menu {
+  background-color: white;
+
   &__main-level {
     --link-color: #{$gray-80};
-    background-color: white;
   }
 
   &__second-level {
@@ -80,33 +125,47 @@ export default class extends Mixins(MenuMixin) {}
   }
 
   &__mobile {
-    display: none;
+    position: relative;
+    fill: $purple-70;
 
-    @include mq($until: large) {
-      display: flex;
-      height: 3.75rem;
-      cursor: pointer;
-      fill: white;
-    }
-
-    &:focus {
-      .menu__overlay {
-        opacity: 0.5;
-      }
-
-      .menu__side-menu {
-        transform: translateX(0);
-      }
+    @include mq($from: large) {
+      display: none;
     }
   }
 
+  &__mobile-menu-toggle {
+    // remove from page flow and hid
+    visibility: hidden;
+    position: absolute;
+  }
+
+  .menu__mobile-menu {
+    position: fixed;
+    top: 3.5rem; // taking into account the height of the top menu
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 150;
+
+    visibility: hidden;
+    pointer-events: none;
+
+    &_visible {
+      visibility: visible;
+      pointer-events: all;
+    }
+  }
+
+  &__mobile-inner-container,
   &__navigation-level {
     @include contained();
     padding-top: $spacing-05;
     padding-bottom: $spacing-05;
     display: flex;
     justify-content: flex-end;
+  }
 
+  &__navigation-level {
     @include mq($until: large) {
       display: none;
     }
@@ -148,21 +207,10 @@ export default class extends Mixins(MenuMixin) {}
     }
   }
 
-  &__hamburguer-link {
-    margin: 1.3rem -0.2rem 0 1.3rem;
-  }
-
-  &__overlay {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 1;
-    background-color: $ui-background;
-    opacity: 0;
-    transition: opacity 200ms;
-    pointer-events: none;
+  &__hamburger-toggle {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
   }
 }
 </style>
