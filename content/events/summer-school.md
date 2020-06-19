@@ -5,8 +5,8 @@ tagline: A two-week intensive summer school designed to empower the next generat
 description: Add your description here
 background: globalsummerschool
 nav:
-  - text: Location
-    goTo: '#location'
+  - text: Logistics
+    goTo: '#logistics'
   - text: Curriculum
     goTo: '#curriculum'
   - text: Code of Conduct
@@ -30,7 +30,7 @@ You can [brush up on Python programming](https://qiskit.org/textbook/ch-prerequi
 
 The Qiskit Global Summer School is invite-only, and will be hosted virtually. Limited recordings may be made available following the lectures. 
 
-Invitations will be distributed prior to the event. Interested applicants should [apply here](https://www.eventbrite.com/e/qiskit-global-summer-school-tickets-108899074062).
+Invitations will be distributed prior to the event. Interested applicants should [apply here](https://www.eventbrite.com/e/qiskit-global-summer-school-tickets-110201256926).
 
 ## Curriculum
 Each day of the Qiskit Global Summer School consists of 3 hours of lectures followed by an hour-long hands-on programming lab where we implement quantum programs in Qiskit.
@@ -94,6 +94,8 @@ Each day of the Qiskit Global Summer School consists of 3 hours of lectures foll
 -	Friday, July 31
 	- 9:00 - 12:00 EDT **Panel Discussion**: Careers in Quantum Computing\
 	_Panel: Jay Gambetta, Scott Crowder, Jerry Chow, Liz Durst, IBM Q Network Members_
+
+Following the summer school, we will also be hosting our first immersive and real-time 24-hour global hackathon experience August 6-8. More details coming soon.
 
 ## Code of Conduct
 
