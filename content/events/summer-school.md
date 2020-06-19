@@ -26,7 +26,7 @@ The Qiskit Global Summer School is designed to have minimal prerequisites. If yo
 
 You can [brush up on Python programming](https://qiskit.org/textbook/ch-prerequisites/python-and-jupyter-notebooks.html) before attending the lectures by using the Qiskit Textbook. To make the most out of these lectures, you may also consider looking through the [linear algebra prerequisites](https://qiskit.org/textbook/ch-prerequisites/linear_algebra.html) section of the Qiskit Textbook.
 
-## Location
+## Logistics
 
 The Qiskit Global Summer School is invite-only, and will be hosted virtually. Limited recordings may be made available following the lectures. 
 
