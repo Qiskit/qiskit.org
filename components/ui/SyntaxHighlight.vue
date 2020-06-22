@@ -4,12 +4,15 @@
       size="small"
       title="Copy to clipboard"
       class="syntax-highlight__copy-button"
-      :class="{ 'syntax-highlight__copy-button_bottom': btnOnBottom}"
+      :class="{ 'syntax-highlight__copy-button_bottom': btnOnBottom }"
       @click="copyToClipboard"
     >
       Copy
     </cv-button>
-    <pre v-highlightjs="code"><code class="syntax-highlight__code" :class="lang" /></pre>
+    <pre v-highlightjs="code"><code
+    class="syntax-highlight__code"
+    :class="[lang, { 'syntax-highlight__code_white-design': whiteDesign }]"
+    /></pre>
   </div>
 </template>
 
@@ -23,6 +26,7 @@ export default class extends Vue {
   @Prop(String) label
   @Prop({ type: String, default: '' }) code!: string
   @Prop({ type: Boolean, default: false }) btnOnBottom
+  @Prop({ type: Boolean, default: false }) whiteDesign
 
   copyToClipboard () {
     navigator.clipboard.writeText(this.code)
@@ -59,6 +63,14 @@ export default class extends Vue {
   &__code {
     @include type-style('code-02');
     padding: $spacing-07 $spacing-05 $spacing-05;
+
+    &_white-design {
+      background-color: $cool-gray-10;
+      color: black;
+      padding-top: $spacing-05;
+      padding-left: $spacing-07;
+      padding-bottom: 2 * $spacing-07;
+    }
   }
 }
 </style>
