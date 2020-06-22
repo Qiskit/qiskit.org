@@ -20,15 +20,11 @@ import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 import StartLocally from './StartLocally.vue'
 import StartOnTheCloud from './StartOnTheCloud.vue'
-import AppLink from '~/components/ui/AppLink.vue'
-import SyntaxHighlight from '~/components/ui/SyntaxHighlight.vue'
 
 @Component({
   components: {
     StartLocally,
-    StartOnTheCloud,
-    AppLink,
-    SyntaxHighlight
+    StartOnTheCloud
   }
 })
 export default class extends Vue {}
@@ -40,8 +36,8 @@ export default class extends Vue {}
 .quick-start {
   &__header {
     @include type-style('expressive-heading-05');
-    margin-bottom: $layout-03;
     color: $cool-gray-80;
+    margin-bottom: $layout-03;
   }
 
   &__description {

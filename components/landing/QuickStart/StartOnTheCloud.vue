@@ -25,10 +25,9 @@ import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 import { IBM_Q_EXPERIENCE } from '~/constants/appLinks'
 import AppLink from '~/components/ui/AppLink.vue'
-import SyntaxHighlight from '~/components/ui/SyntaxHighlight.vue'
 
 @Component({
-  components: { AppLink, SyntaxHighlight }
+  components: { AppLink }
 })
 export default class extends Vue {
   ibmQExperienceLink = IBM_Q_EXPERIENCE

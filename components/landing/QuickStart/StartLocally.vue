@@ -7,7 +7,7 @@
       Although it isn’t required we recommend using Anaconda for working
       environment for Qiskit, you can find it here.
     </p>
-    <div class="start-locally__content">
+    <div class="start-locally__options">
       <div
         v-for="optionsBlock in installOptions"
         :key="optionsBlock.alias"
@@ -15,7 +15,7 @@
         <h4 class="start-locally__option-title">
           {{ optionsBlock.title }}
         </h4>
-        <cv-button-set :class="`start-locally__options start-locally__options_${optionsBlock.alias}`">
+        <cv-button-set :class="`start-locally__options-group start-locally__options-group_${optionsBlock.alias}`">
           <cv-button
             v-for="option in optionsBlock.elements"
             :key="option.label"
@@ -44,12 +44,10 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import { IBM_Q_EXPERIENCE } from '~/constants/appLinks'
-import AppLink from '~/components/ui/AppLink.vue'
 import SyntaxHighlight from '~/components/ui/SyntaxHighlight.vue'
 
 @Component({
-  components: { AppLink, SyntaxHighlight },
+  components: { SyntaxHighlight },
   head () {
     return {
       link: [
@@ -59,7 +57,6 @@ import SyntaxHighlight from '~/components/ui/SyntaxHighlight.vue'
   }
 })
 export default class extends Vue {
-  ibmQExperienceLink = IBM_Q_EXPERIENCE
   installOptions = [
     {
       title: 'Languages',
@@ -120,7 +117,7 @@ export default class extends Vue {
 
   &__title {
     @include type-style('productive-heading-02');
-    padding-bottom: $spacing-05;
+    margin-bottom: $spacing-05;
   }
 
   &__description {
@@ -129,13 +126,13 @@ export default class extends Vue {
     margin-bottom: $spacing-07;
   }
 
-  &__content {
+  &__options {
     display: flex;
     flex-direction: column;
     row-gap: $spacing-07;
   }
 
-  &__options {
+  &__options-group {
     display: grid;
     column-gap: $spacing-07;
 
@@ -154,7 +151,7 @@ export default class extends Vue {
 
   &__option-title {
     @include type-style('body-long-01');
-    padding-bottom: $spacing-03;
+    margin-bottom: $spacing-03;
   }
 
   &__option {
