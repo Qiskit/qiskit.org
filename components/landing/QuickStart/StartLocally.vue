@@ -47,7 +47,14 @@ import AppLink from '~/components/ui/AppLink.vue'
 import SyntaxHighlight from '~/components/ui/SyntaxHighlight.vue'
 
 @Component({
-  components: { AppLink, SyntaxHighlight }
+  components: { AppLink, SyntaxHighlight },
+  head () {
+    return {
+      link: [
+        { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/atom-one-dark.min.css' }
+      ]
+    }
+  }
 })
 export default class extends Vue {
   ibmQExperienceLink = IBM_Q_EXPERIENCE
