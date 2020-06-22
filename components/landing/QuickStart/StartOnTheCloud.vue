@@ -1,13 +1,13 @@
 <template>
   <section class="start-on-the-cloud">
-    <h3 class="start-on-the-cloud__title">
-      Start on the cloud
-    </h3>
-    <p class="start-on-the-cloud__description">
-      Starting on the cloud will enable you to begin
-      without installing anything.
-    </p>
     <div class="start-on-the-cloud__content">
+      <h3 class="start-on-the-cloud__title">
+        Start on the cloud
+      </h3>
+      <p class="start-on-the-cloud__description">
+        Starting on the cloud will enable you to begin
+        without installing anything.
+      </p>
       <AppLink
         class="start-on-the-cloud__link"
         :url="ibmQExperienceLink.url"
@@ -16,6 +16,7 @@
         <ArrowRight16 />
       </AppLink>
     </div>
+    <img src="/images/white-grid.svg">
   </section>
 </template>
 
@@ -40,23 +41,24 @@ export default class extends Vue {
 .start-on-the-cloud {
   width: 35%;
   background-color: $cool-gray-10;
-  padding: $spacing-07;
+
+  &__content {
+    padding: $spacing-07;
+  }
 
   &__title {
     @include type-style('productive-heading-02');
-    padding-bottom: $spacing-05;
+    margin-bottom: $spacing-05;
   }
 
   &__description {
     @include type-style('body-long-01');
-  }
-
-  &__content {
-    margin-top: $spacing-07;
+    margin-bottom: $spacing-07;
   }
 
   &__link {
     padding-top: $spacing-04 + $spacing-07; //To align with locally block
+    padding-bottom: $spacing-07;
     text-decoration: none;
     color: $purple-70;;
     fill: $purple-70;;
