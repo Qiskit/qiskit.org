@@ -56,7 +56,7 @@ export default class extends Vue {
   }
 
   &__link {
-    padding-top: $spacing-02 + $spacing-07; //To align with locally block
+    padding-top: $spacing-04 + $spacing-07; //To align with locally block
     text-decoration: none;
     color: $purple-70;;
     fill: $purple-70;;
