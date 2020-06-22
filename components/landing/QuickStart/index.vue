@@ -47,7 +47,7 @@ export default class extends Vue {}
   &__description {
     @include type-style('body-long-01');
     max-width: 6 * $column-size-large;
-    margin-bottom: $layout-04;
+    margin-bottom: $layout-01;
   }
 
   &__sections {
