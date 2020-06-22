@@ -5,7 +5,13 @@
     </h3>
     <p class="start-locally__description">
       Although it isn’t required we recommend using Anaconda for working
-      environment for Qiskit, you can find it here.
+      environment for Qiskit, you can find it
+      <AppLink
+        class="start-locally__link"
+        url="https://www.anaconda.com/"
+      >
+        here
+      </AppLink>.
     </p>
     <div class="start-locally__options">
       <div
@@ -45,9 +51,10 @@
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 import SyntaxHighlight from '~/components/ui/SyntaxHighlight.vue'
+import AppLink from '~/components/ui/AppLink.vue'
 
 @Component({
-  components: { SyntaxHighlight },
+  components: { SyntaxHighlight, AppLink },
   head () {
     return {
       link: [
@@ -117,6 +124,7 @@ export default class extends Vue {
 
   &__title {
     @include type-style('productive-heading-02');
+    color: $cool-gray-80;
     margin-bottom: $spacing-05;
   }
 
@@ -124,6 +132,11 @@ export default class extends Vue {
     @include type-style('body-long-01');
     max-width: 7 * $column-size-large;
     margin-bottom: $spacing-07;
+  }
+
+  &__link {
+    text-decoration: none;
+    color: $purple-70;;
   }
 
   &__options {
@@ -151,6 +164,7 @@ export default class extends Vue {
 
   &__option-title {
     @include type-style('body-long-01');
+    color: $cool-gray-80;
     margin-bottom: $spacing-03;
   }
 
@@ -158,7 +172,7 @@ export default class extends Vue {
     @include type-style('body-long-01');
     background-color: $cool-gray-10;
     max-width: 100%;
-    color: $inverse-01;
+    color: $gray-60;
     padding-left: $spacing-07;
 
     &_active {

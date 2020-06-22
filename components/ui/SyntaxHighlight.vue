@@ -74,7 +74,7 @@ export default class extends Vue {
 
     &_white-design {
       background-color: $cool-gray-10;
-      color: black;
+      color: $gray-60;
       padding-top: $spacing-05;
       padding-left: $spacing-07;
       padding-bottom: 2 * $spacing-07;

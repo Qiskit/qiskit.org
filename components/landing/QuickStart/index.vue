@@ -34,6 +34,8 @@ export default class extends Vue {}
 @import '~carbon-components/scss/globals/scss/typography';
 
 .quick-start {
+  color: $gray-60;
+
   &__header {
     @include type-style('expressive-heading-05');
     color: $cool-gray-80;

@@ -47,6 +47,7 @@ export default class extends Vue {
 
   &__title {
     @include type-style('productive-heading-02');
+    color: $cool-gray-80;
     margin-bottom: $spacing-05;
   }
 
@@ -59,8 +60,8 @@ export default class extends Vue {
     padding-top: $spacing-04 + $spacing-07; //To align with locally block
     padding-bottom: $spacing-07;
     text-decoration: none;
-    color: $purple-70;;
-    fill: $purple-70;;
+    color: $purple-70;
+    fill: $purple-70;
     display: flex;
 
     :first-child {
