@@ -4,7 +4,8 @@
       size="small"
       title="Copy to clipboard"
       class="syntax-highlight__copy-button"
-      :class="{ 'syntax-highlight__copy-button_bottom': btnOnBottom }"
+      :class="{ 'syntax-highlight__copy-button_bottom': btnOnBottom,
+                'syntax-highlight__copy-button_white-design': whiteDesign }"
       @click="copyToClipboard"
     >
       Copy
@@ -52,6 +53,13 @@ export default class extends Vue {
 
     &_bottom {
       bottom: 0;
+    }
+
+    &_white-design {
+      text-transform: lowercase;
+      background-color: $purple-70;
+      padding-left: $spacing-05;
+      padding-right: $spacing-05;
     }
 
     &:hover {

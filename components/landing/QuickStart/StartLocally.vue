@@ -162,9 +162,9 @@ export default class extends Vue {
     padding-left: $spacing-07;
 
     &_active {
-      border-color: $purple-70;;
+      border-color: $purple-70;
       border-width: 2px;
-      color: $purple-70;;
+      color: $purple-70;
     }
   }
 }
