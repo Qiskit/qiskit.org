@@ -27,7 +27,6 @@ The Qiskit Global Summer School is designed to have minimal prerequisites. If yo
 You can [brush up on Python programming](https://qiskit.org/textbook/ch-prerequisites/python-and-jupyter-notebooks.html) before attending the lectures by using the Qiskit Textbook. To make the most out of these lectures, you may also consider looking through the [linear algebra prerequisites](https://qiskit.org/textbook/ch-prerequisites/linear_algebra.html) section of the Qiskit Textbook.
 
 ## Location
-
 The Qiskit Global Summer School is invite-only, and will be hosted virtually. Limited recordings may be made available following the lectures.
 
 Invitations will be distributed prior to the event. Interested applicants should [apply here](https://www.eventbrite.com/e/qiskit-global-summer-school-tickets-110201256926).
@@ -95,7 +94,10 @@ Each day of the Qiskit Global Summer School consists of 3 hours of lectures foll
 	- 9:00 - 12:00 EDT **Panel Discussion**: Careers in Quantum Computing\
 	_Panel: Jay Gambetta, Scott Crowder, Jerry Chow, Liz Durst, IBM Q Network Members_
 
-Following the summer school, we will also be hosting our first immersive and real-time 24-hour global hackathon experience August 6-8. More details coming soon.
+
+## Learn about Qiskit Hackathon Global!
+
+Following the Qiskit Global Summer School, IBM’s Qiskit Community Team will be hosting it’s first immersive and real-time 24-hour hackathon experience. Learn how you can be invited and take your Qiskit Global Summer School experience to the next level! Go to Qiskit Hackathon Global’s website here. (link coming soon!)
 
 ## Code of Conduct
 
