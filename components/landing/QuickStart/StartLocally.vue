@@ -105,9 +105,8 @@ export default class extends Vue {
 
   title = 'Qiskit Install'
   codeExample = `conda install qiskit macos -m qiskit
-  
-# MacOS Binaries dont support CUDA, install from
-# source if CUDA is needed`
+
+# MacOS Binaries dont support CUDA, install from source if CUDA is needed`
 }
 </script>
 
