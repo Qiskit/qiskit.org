@@ -4,6 +4,7 @@
       size="small"
       title="Copy to clipboard"
       class="syntax-highlight__copy-button"
+      :class="{ 'syntax-highlight__copy-button_bottom': btnOnBottom}"
       @click="copyToClipboard"
     >
       Copy
@@ -21,6 +22,7 @@ export default class extends Vue {
   @Prop({ type: String, default: 'python' }) lang!: string
   @Prop(String) label
   @Prop({ type: String, default: '' }) code!: string
+  @Prop({ type: Boolean, default: false }) btnOnBottom
 
   copyToClipboard () {
     navigator.clipboard.writeText(this.code)
@@ -43,6 +45,10 @@ export default class extends Vue {
     text-transform: uppercase;
     border: none;
     padding: 0.5rem;
+
+    &_bottom {
+      bottom: 0;
+    }
 
     &:hover {
       background-color: $interactive-01;
