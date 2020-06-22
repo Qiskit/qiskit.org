@@ -11,7 +11,7 @@
       <div
         v-for="optionsBlock in installOptions"
         :key="optionsBlock.alias"
-        class="start-locally__options-block">
+      >
         <h4 class="start-locally__option-title">
           {{ optionsBlock.title }}
         </h4>
@@ -20,14 +20,14 @@
             v-for="option in optionsBlock.elements"
             :key="option.label"
             :title="option.label"
-            class="start-locally__btn"
-            :class="{ 'start-locally__btn_active': option.active }"
+            class="start-locally__option"
+            :class="{ 'start-locally__option_active': option.active }"
           >
             {{ option.label }}
           </cv-button>
         </cv-button-set>
       </div>
-      <div class="start-locally__options-block">
+      <div>
         <h4 class="start-locally__option-title">Code Block</h4>
         <SyntaxHighlight
           :label="title"
@@ -115,14 +115,13 @@ export default class extends Vue {
   &__description {
     @include type-style('body-long-01');
     max-width: 7 * $column-size-large;
+    margin-bottom: $spacing-07;
   }
 
   &__content {
-    margin-top: $spacing-07;
-  }
-
-  &__options-block {
-    margin-top: $spacing-07;
+    display: flex;
+    flex-direction: column;
+    row-gap: $spacing-07;
   }
 
   &__options {
@@ -147,7 +146,7 @@ export default class extends Vue {
     padding-bottom: $spacing-03;
   }
 
-  &__btn {
+  &__option {
     @include type-style('body-long-01');
     background-color: $cool-gray-10;
     max-width: 100%;
