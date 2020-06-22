@@ -37,7 +37,7 @@
         <h4 class="start-locally__option-title">Code Block</h4>
         <SyntaxHighlight
           :label="title"
-          :code="codeExample"
+          :code="codeToInstallQiskit"
           lang="console"
           btn-on-bottom
           white-design
@@ -108,7 +108,7 @@ export default class extends Vue {
   ]
 
   title = 'Qiskit Install'
-  codeExample = `conda install qiskit macos -m qiskit
+  codeToInstallQiskit = `conda install qiskit macos -m qiskit
 
 # MacOS Binaries dont support CUDA, install from source if CUDA is needed`
 }
@@ -118,7 +118,7 @@ export default class extends Vue {
 @import '~carbon-components/scss/globals/scss/typography';
 
 .start-locally {
-  width: 65%;
+  width: 63%;
   padding-top: $spacing-07;
   padding-right: $spacing-07;
 

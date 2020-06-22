@@ -77,7 +77,7 @@ export default class extends Vue {
       color: $gray-60;
       padding-top: $spacing-05;
       padding-left: $spacing-07;
-      padding-bottom: 2 * $spacing-07;
+      padding-bottom: $spacing-09 + $spacing-06;
     }
   }
 }

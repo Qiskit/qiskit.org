@@ -38,7 +38,7 @@ export default class extends Vue {
 @import '~carbon-components/scss/globals/scss/typography';
 
 .start-on-the-cloud {
-  width: 35%;
+  width: 37%;
   background-color: $cool-gray-10;
 
   &__content {
@@ -58,7 +58,7 @@ export default class extends Vue {
 
   &__link {
     padding-top: $spacing-04 + $spacing-07; //To align with locally block
-    padding-bottom: $spacing-07;
+    margin-bottom: $spacing-04;
     text-decoration: none;
     color: $purple-70;
     fill: $purple-70;
