@@ -15,7 +15,7 @@
         <h4 class="start-locally__option-title">
           {{ optionsBlock.title }}
         </h4>
-        <cv-button-set :class="`start-locally__${optionsBlock.alias}-options`">
+        <cv-button-set :class="`start-locally__options start-locally__options_${optionsBlock.alias}`">
           <cv-button
             v-for="option in optionsBlock.elements"
             :key="option.label"
@@ -114,6 +114,7 @@ export default class extends Vue {
 
   &__description {
     @include type-style('body-long-01');
+    max-width: 7 * $column-size-large;
   }
 
   &__content {
@@ -124,22 +125,21 @@ export default class extends Vue {
     margin-top: $spacing-07;
   }
 
-  &__languages-options {
+  &__options {
     display: grid;
-    grid-template-columns: 1fr;
     column-gap: $spacing-07;
-  }
 
-  &__qiskit-install-options {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: $spacing-07;
-  }
+    &_languages {
+      grid-template-columns: 1fr;
+    }
 
-  &__os-options {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    column-gap: $spacing-07;
+    &_qiskit-install {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    &_os {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
   }
 
   &__option-title {
