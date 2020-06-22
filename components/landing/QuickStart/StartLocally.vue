@@ -32,6 +32,7 @@
         <SyntaxHighlight
           :label="title"
           :code="codeExample"
+          lang="console"
           btn-on-bottom
         />
       </div>
