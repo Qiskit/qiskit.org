@@ -109,7 +109,7 @@ export default class extends Vue {
 
   activeOptions = {
     languages: 'python',
-    'qiskit-install': 'source',
+    'qiskit-install': 'stable',
     os: 'mac'
   }
 
