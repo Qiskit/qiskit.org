@@ -24,13 +24,13 @@
         <cv-button-set :class="`start-locally__options-group`">
           <cv-button
             v-for="option in optionsBlock.elements"
-            :key="option.label"
-            :title="option.title"
+            :key="option"
+            :title="option"
             class="start-locally__option"
-            :class="{ 'start-locally__option_active': isActive (optionsBlock.alias, option.title) }"
-            @click="selectOption(optionsBlock.alias, option.title)"
+            :class="{ 'start-locally__option_active': isActive (optionsBlock.alias, option) }"
+            @click="selectOption(optionsBlock.alias, option)"
           >
-            {{ option.label }}
+            {{ option }}
           </cv-button>
         </cv-button-set>
       </div>
@@ -68,49 +68,24 @@ export default class extends Vue {
     {
       title: 'Languages',
       alias: 'languages',
-      elements: [{
-        label: 'Python 3.5+',
-        title: 'python'
-      }]
+      elements: ['Python 3.5+']
     },
     {
       title: 'Qiskit Install',
       alias: 'qiskit-install',
-      elements: [
-        {
-          label: 'Stable (Recommended)',
-          title: 'stable'
-        },
-        {
-          label: 'Source',
-          title: 'source'
-        }
-      ]
+      elements: ['Stable (Recommended)', 'Source']
     },
     {
       title: 'Operating System',
       alias: 'os',
-      elements: [
-        {
-          label: 'Linux',
-          title: 'linux'
-        },
-        {
-          label: 'Mac',
-          title: 'mac'
-        },
-        {
-          label: 'Windows',
-          title: 'windows'
-        }
-      ]
+      elements: ['Linux', 'Mac', 'Windows']
     }
   ]
 
   activeOptions = {
-    languages: 'python',
-    'qiskit-install': 'stable',
-    os: 'mac'
+    languages: 'Python 3.5+',
+    'qiskit-install': 'Stable (Recommended)',
+    os: 'Mac'
   }
 
   segmentLabel = 'Qiskit Install'
