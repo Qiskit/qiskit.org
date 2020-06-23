@@ -5,8 +5,7 @@
         Start on the cloud
       </h3>
       <p class="start-on-the-cloud__description">
-        Starting on the cloud will enable you to begin
-        without installing anything.
+        IBM's hosted Jupyter Notebooks let you get started without installing anything.
       </p>
       <AppLink
         class="start-on-the-cloud__link"

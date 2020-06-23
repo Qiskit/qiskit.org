@@ -4,14 +4,14 @@
       Start locally
     </h3>
     <p class="start-locally__description">
-      Although it isn’t required we recommend using Anaconda for working
-      environment for Qiskit, you can find it
+      Although it isn’t required we recommend using
       <AppLink
         class="start-locally__link"
-        url="https://www.anaconda.com/"
+        :url="downloadAnaconda.url"
       >
-        here
-      </AppLink>.
+        {{ downloadAnaconda.label }}
+      </AppLink>
+      to cleanly separate Qiskit from other applications and improve your experience.
     </p>
     <div class="start-locally__options">
       <div
@@ -34,7 +34,7 @@
         </cv-button-set>
       </div>
       <div>
-        <h4 class="start-locally__option-title">Code Block</h4>
+        <h4 class="start-locally__option-title">Terminal</h4>
         <SyntaxHighlight
           :label="title"
           :code="codeToInstallQiskit"
@@ -52,6 +52,7 @@ import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 import SyntaxHighlight from '~/components/ui/SyntaxHighlight.vue'
 import AppLink from '~/components/ui/AppLink.vue'
+import { DOWNLOAD_ANACONDA_LINK } from '~/constants/appLinks'
 
 @Component({
   components: { SyntaxHighlight, AppLink },
@@ -64,6 +65,7 @@ import AppLink from '~/components/ui/AppLink.vue'
   }
 })
 export default class extends Vue {
+  downloadAnaconda = DOWNLOAD_ANACONDA_LINK
   installOptions = [
     {
       title: 'Languages',
@@ -82,7 +84,7 @@ export default class extends Vue {
           active: true
         },
         {
-          label: 'Master',
+          label: 'Source',
           active: false
         }
       ]

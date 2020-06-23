@@ -80,6 +80,11 @@ const IBM_Q_EXPERIENCE: GeneralLink = {
   label: 'IBM Quantum Experience'
 }
 
+const DOWNLOAD_ANACONDA_LINK: GeneralLink = {
+  url: 'https://www.anaconda.com/products/individual',
+  label: 'Anaconda'
+}
+
 export {
   SegmentData,
   ACCESS_IBM_Q_SYSTEMS,
@@ -87,5 +92,6 @@ export {
   YOUTUBE_ALL_EPISODES_CTA,
   DISCOVER_TEXTBOOK_CTA,
   REQUEST_AN_EVENT_CTA,
-  IBM_Q_EXPERIENCE
+  IBM_Q_EXPERIENCE,
+  DOWNLOAD_ANACONDA_LINK
 }
