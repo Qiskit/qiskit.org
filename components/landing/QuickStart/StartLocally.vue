@@ -25,9 +25,10 @@
           <cv-button
             v-for="option in optionsBlock.elements"
             :key="option.label"
-            :title="option.label"
+            :title="option.title"
             class="start-locally__option"
-            :class="{ 'start-locally__option_active': option.active }"
+            :class="{ 'start-locally__option_active': isActive (optionsBlock.alias, option.title) }"
+            @click="selectOption(optionsBlock.alias, option.title)"
           >
             {{ option.label }}
           </cv-button>
@@ -69,7 +70,7 @@ export default class extends Vue {
       alias: 'languages',
       elements: [{
         label: 'Python 3.5+',
-        active: true
+        title: 'python'
       }]
     },
     {
@@ -78,11 +79,11 @@ export default class extends Vue {
       elements: [
         {
           label: 'Stable (Recommended)',
-          active: true
+          title: 'stable'
         },
         {
           label: 'Source',
-          active: false
+          title: 'source'
         }
       ]
     },
@@ -92,24 +93,38 @@ export default class extends Vue {
       elements: [
         {
           label: 'Linux',
-          active: false
+          title: 'linux'
         },
         {
           label: 'Mac',
-          active: true
+          title: 'mac'
         },
         {
           label: 'Windows',
-          active: false
+          title: 'windows'
         }
       ]
     }
   ]
 
-  segmentLabel = 'Quick Install'
+  activeOptions = {
+    languages: 'python',
+    'qiskit-install': 'source',
+    os: 'mac'
+  }
+
+  segmentLabel = 'Qiskit Install'
   codeToInstallQiskit = `conda install qiskit macos -m qiskit
 
 # MacOS Binaries dont support CUDA, install from source if CUDA is needed`
+
+  isActive (optionsBlock, option) {
+    return this.activeOptions[optionsBlock] === option
+  }
+
+  selectOption (optionsBlock, selectedOption) {
+    this.activeOptions[optionsBlock] = selectedOption
+  }
 }
 </script>
 
