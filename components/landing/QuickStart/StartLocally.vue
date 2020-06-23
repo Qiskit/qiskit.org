@@ -89,9 +89,7 @@ export default class extends Vue {
   }
 
   segmentLabel = 'Qiskit Install'
-  codeToInstallQiskit = `conda install qiskit macos -m qiskit
-
-# MacOS Binaries dont support CUDA, install from source if CUDA is needed`
+  codeToInstallQiskit = 'pip install qiskit'
 
   isActive (optionsBlock, option) {
     return this.activeOptions[optionsBlock] === option
