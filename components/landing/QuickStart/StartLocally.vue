@@ -38,7 +38,7 @@
         <h4 class="start-locally__option-title">Terminal</h4>
         <SyntaxHighlight
           :label="segmentLabel"
-          :code="codeToInstallQiskit"
+          :code="getCodeToInstallQiskit()"
         />
       </div>
     </div>
@@ -89,7 +89,10 @@ export default class extends Vue {
   }
 
   segmentLabel = 'Qiskit Install'
-  codeToInstallQiskit = 'pip install qiskit'
+
+  getCodeToInstallQiskit () : string {
+    return 'pip install qiskit'
+  }
 
   isActive (optionsBlock: string, option: string) : boolean {
     return this.activeOptions[optionsBlock] === option
