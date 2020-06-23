@@ -91,11 +91,11 @@ export default class extends Vue {
   segmentLabel = 'Qiskit Install'
   codeToInstallQiskit = 'pip install qiskit'
 
-  isActive (optionsBlock, option) {
+  isActive (optionsBlock: string, option: string) : boolean {
     return this.activeOptions[optionsBlock] === option
   }
 
-  selectOption (optionsBlock, selectedOption) {
+  selectOption (optionsBlock: string, selectedOption: string) {
     this.activeOptions[optionsBlock] = selectedOption
   }
 }
