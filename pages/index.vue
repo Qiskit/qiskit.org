@@ -171,7 +171,8 @@ export default class extends QiskitPage {
 
   &__paragraph {
     @include type-style('body-long-01');
-    max-width: 6 * $column-size-large;
+    color: $gray-60;
+    max-width: 6.25 * $column-size-large;
     margin-bottom: $layout-04;
 
     @include mq($from: medium, $until: large) {
