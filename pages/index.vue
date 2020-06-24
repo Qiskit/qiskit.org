@@ -31,6 +31,7 @@
         Full Overview
       </LandingCta>
     </article>
+    <QuickStart class="landing-page__section" />
   </main>
 </template>
 
@@ -42,12 +43,14 @@ import QiskitPage from '~/components/logic/QiskitPage.vue'
 import TheHeroMoment from '~/components/landing/TheHeroMoment.vue'
 import LandingCta from '~/components/landing/LandingCta.vue'
 import TheFeatureMosaic from '~/components/landing/TheFeatureMosaic.vue'
+import QuickStart from '~/components/landing/QuickStart/index.vue'
 
 @Component({
   components: {
     LandingCta,
     TheHeroMoment,
-    TheFeatureMosaic
+    TheFeatureMosaic,
+    QuickStart
   },
   head () {
     return { title: 'Qiskit' }
