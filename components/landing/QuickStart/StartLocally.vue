@@ -21,7 +21,7 @@
         <h4 class="start-locally__option-title">
           {{ optionsBlock.title }}
         </h4>
-        <cv-button-set :class="`start-locally__options-group start-locally__options-group_${optionsBlock.alias}`">
+        <cv-button-set :class="`start-locally__options-group`">
           <cv-button
             v-for="option in optionsBlock.elements"
             :key="option.label"
@@ -36,7 +36,7 @@
       <div>
         <h4 class="start-locally__option-title">Terminal</h4>
         <SyntaxHighlight
-          :label="title"
+          :label="segmentLabel"
           :code="codeToInstallQiskit"
         />
       </div>
@@ -106,7 +106,7 @@ export default class extends Vue {
     }
   ]
 
-  title = 'Qiskit Install'
+  segmentLabel = 'Quick Install'
   codeToInstallQiskit = `conda install qiskit macos -m qiskit
 
 # MacOS Binaries dont support CUDA, install from source if CUDA is needed`
@@ -147,18 +147,7 @@ export default class extends Vue {
   &__options-group {
     display: grid;
     column-gap: $spacing-07;
-
-    &_languages {
-      grid-template-columns: 1fr;
-    }
-
-    &_qiskit-install {
-      grid-template-columns: 1fr 1fr;
-    }
-
-    &_os {
-      grid-template-columns: 1fr 1fr 1fr;
-    }
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   }
 
   &__option-title {
