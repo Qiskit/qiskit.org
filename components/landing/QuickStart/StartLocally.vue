@@ -52,6 +52,14 @@ import SyntaxHighlight from '~/components/ui/SyntaxHighlight.vue'
 import AppLink from '~/components/ui/AppLink.vue'
 import { DOWNLOAD_ANACONDA_LINK } from '~/constants/appLinks'
 
+type ChoicesGroup = {
+  title: string,
+  id: string,
+  options: Array<string>
+}
+
+type InstallChoices = Array<ChoicesGroup>
+
 @Component({
   components: { SyntaxHighlight, AppLink },
   head () {
@@ -64,7 +72,7 @@ import { DOWNLOAD_ANACONDA_LINK } from '~/constants/appLinks'
 })
 export default class extends Vue {
   downloadAnacondaLink = DOWNLOAD_ANACONDA_LINK
-  installChoices = [
+  installChoices: InstallChoices = [
     {
       title: 'Languages',
       id: 'languages',
