@@ -34,6 +34,7 @@
           <SyntaxHighlight
             :label="title"
             :code="codeExample"
+            legacy
           />
         </article>
       </template>

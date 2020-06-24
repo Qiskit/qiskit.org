@@ -7,9 +7,9 @@
       Although it isn’t required we recommend using
       <AppLink
         class="start-locally__link"
-        :url="downloadAnaconda.url"
+        :url="downloadAnacondaLink.url"
       >
-        {{ downloadAnaconda.label }}
+        {{ downloadAnacondaLink.label }}
       </AppLink>
       to cleanly separate Qiskit from other applications and improve your experience.
     </p>
@@ -38,9 +38,6 @@
         <SyntaxHighlight
           :label="title"
           :code="codeToInstallQiskit"
-          lang="console"
-          btn-on-bottom
-          white-design
         />
       </div>
     </div>
@@ -65,7 +62,7 @@ import { DOWNLOAD_ANACONDA_LINK } from '~/constants/appLinks'
   }
 })
 export default class extends Vue {
-  downloadAnaconda = DOWNLOAD_ANACONDA_LINK
+  downloadAnacondaLink = DOWNLOAD_ANACONDA_LINK
   installOptions = [
     {
       title: 'Languages',

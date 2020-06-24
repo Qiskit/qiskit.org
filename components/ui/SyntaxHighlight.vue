@@ -4,15 +4,14 @@
       size="small"
       title="Copy to clipboard"
       class="syntax-highlight__copy-button"
-      :class="{ 'syntax-highlight__copy-button_bottom': btnOnBottom,
-                'syntax-highlight__copy-button_white-design': whiteDesign }"
+      :class="{ 'syntax-highlight__copy-button_legacy': legacy }"
       @click="copyToClipboard"
     >
       Copy
     </cv-button>
     <pre v-highlightjs="code"><code
     class="syntax-highlight__code"
-    :class="[lang, { 'syntax-highlight__code_white-design': whiteDesign }]"
+    :class="[lang, { 'syntax-highlight__code_white-design': !legacy }]"
     /></pre>
   </div>
 </template>
@@ -26,8 +25,7 @@ export default class extends Vue {
   @Prop({ type: String, default: 'python' }) lang!: string
   @Prop(String) label
   @Prop({ type: String, default: '' }) code!: string
-  @Prop({ type: Boolean, default: false }) btnOnBottom
-  @Prop({ type: Boolean, default: false }) whiteDesign
+  @Prop({ type: Boolean, default: false }) legacy
 
   copyToClipboard () {
     navigator.clipboard.writeText(this.code)
@@ -47,19 +45,16 @@ export default class extends Vue {
   &__copy-button {
     position: absolute;
     right: 0;
-    text-transform: uppercase;
+    bottom: 0;
     border: none;
-    padding: 0.5rem;
+    text-transform: lowercase;
+    background-color: $purple-70;
+    padding: $spacing-03 $spacing-05;
 
-    &_bottom {
-      bottom: 0;
-    }
-
-    &_white-design {
-      text-transform: lowercase;
-      background-color: $purple-70;
-      padding-left: $spacing-05;
-      padding-right: $spacing-05;
+    &_legacy {
+      top: 0;
+      bottom: auto;
+      text-transform: uppercase;
     }
 
     &:hover {
