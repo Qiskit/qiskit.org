@@ -90,16 +90,18 @@ export default class extends Vue {
 
   &__description {
     @include type-style('body-long-01');
-    color: $white-text-01;
+    color: $gray-60;
+    max-width: 5 * $column-size-large;
     margin: 0 0 $layout-06;
-    padding: 0 25% 0 0;
 
     @include mq($from: medium, $until: large) {
       @include type-style('label-01');
+      max-width: 3 * $column-size-medium;
     }
 
     @include mq($until: medium) {
       @include type-style('label-01');
+      max-width: 3 * $column-size-small;
     }
   }
 
