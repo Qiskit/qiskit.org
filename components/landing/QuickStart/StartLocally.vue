@@ -15,20 +15,20 @@
     </p>
     <div class="start-locally__options">
       <div
-        v-for="optionsBlock in installOptions"
-        :key="optionsBlock.alias"
+        v-for="choicesGroup in installChoices"
+        :key="choicesGroup.id"
       >
         <h4 class="start-locally__option-title">
-          {{ optionsBlock.title }}
+          {{ choicesGroup.title }}
         </h4>
         <cv-button-set :class="`start-locally__options-group`">
           <cv-button
-            v-for="option in optionsBlock.elements"
+            v-for="option in choicesGroup.options"
             :key="option"
             :title="option"
             class="start-locally__option"
-            :class="{ 'start-locally__option_active': isActive (optionsBlock.alias, option) }"
-            @click="selectOption(optionsBlock.alias, option)"
+            :class="{ 'start-locally__option_active': isActive (choicesGroup.id, option) }"
+            @click="selectOption(choicesGroup.id, option)"
           >
             {{ option }}
           </cv-button>
@@ -64,25 +64,25 @@ import { DOWNLOAD_ANACONDA_LINK } from '~/constants/appLinks'
 })
 export default class extends Vue {
   downloadAnacondaLink = DOWNLOAD_ANACONDA_LINK
-  installOptions = [
+  installChoices = [
     {
       title: 'Languages',
-      alias: 'languages',
-      elements: ['Python 3.5+']
+      id: 'languages',
+      options: ['Python 3.5+']
     },
     {
       title: 'Qiskit Install',
-      alias: 'qiskit-install',
-      elements: ['Stable (Recommended)', 'Source']
+      id: 'qiskit-install',
+      options: ['Stable (Recommended)', 'Source']
     },
     {
       title: 'Operating System',
-      alias: 'os',
-      elements: ['Linux', 'Mac', 'Windows']
+      id: 'os',
+      options: ['Linux', 'Mac', 'Windows']
     }
   ]
 
-  activeOptions = {
+  selectedOptions = {
     languages: 'Python 3.5+',
     'qiskit-install': 'Stable (Recommended)',
     os: 'Mac'
@@ -94,12 +94,12 @@ export default class extends Vue {
     return 'pip install qiskit'
   }
 
-  isActive (optionsBlock: string, option: string) : boolean {
-    return this.activeOptions[optionsBlock] === option
+  isActive (choicesGroup: string, option: string) : boolean {
+    return this.selectedOptions[choicesGroup] === option
   }
 
-  selectOption (optionsBlock: string, selectedOption: string) {
-    this.activeOptions[optionsBlock] = selectedOption
+  selectOption (choicesGroup: string, selectedOption: string) {
+    this.selectedOptions[choicesGroup] = selectedOption
   }
 }
 </script>
