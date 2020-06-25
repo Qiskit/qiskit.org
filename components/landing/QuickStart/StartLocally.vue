@@ -72,6 +72,18 @@ type InstallChoices = Array<ChoicesGroup>
 })
 export default class extends Vue {
   downloadAnacondaLink = DOWNLOAD_ANACONDA_LINK
+
+  OPERATING_SYSTEMS = {
+    linux: 'Linux',
+    mac: 'Mac',
+    windows: 'Windows'
+  }
+
+  QISKIT_INSTALL = {
+    stable: 'Stable (Recommended)',
+    master: 'Master'
+  }
+
   installChoices: InstallChoices = [
     {
       title: 'Languages',
@@ -81,19 +93,19 @@ export default class extends Vue {
     {
       title: 'Qiskit Install',
       id: 'qiskit-install',
-      options: ['Stable (Recommended)', 'Master']
+      options: Object.values(this.QISKIT_INSTALL)
     },
     {
       title: 'Operating System',
       id: 'os',
-      options: ['Linux', 'Mac', 'Windows']
+      options: Object.values(this.OPERATING_SYSTEMS)
     }
   ]
 
   selectedOptions = {
     languages: 'Python 3.5+',
-    'qiskit-install': 'Stable (Recommended)',
-    os: 'Mac'
+    'qiskit-install': this.QISKIT_INSTALL.stable,
+    os: this.OPERATING_SYSTEMS.mac
   }
 
   segmentLabel = 'Qiskit Install'
@@ -133,15 +145,15 @@ pip install 
 git+https://github.com/Qiskit/qiskit-terra git+https://github.com/Qiskit/qiskit-aer git+https://github.com/Qiskit/qiskit-ignis git+https://github.com/Qiskit/qiskit-aqua git+https://github.com/Qiskit/qiskit-ibmq-provider`
 
   codeToInstall = {
-    'Stable (Recommended)': {
-      Linux: this.codeToInstallStableOnLinux,
-      Mac: this.codeToInstallStableOnMac,
-      Windows: this.codeToInstallStableOnWindows
+    [this.QISKIT_INSTALL.stable]: {
+      [this.OPERATING_SYSTEMS.linux]: this.codeToInstallStableOnLinux,
+      [this.OPERATING_SYSTEMS.mac]: this.codeToInstallStableOnMac,
+      [this.OPERATING_SYSTEMS.windows]: this.codeToInstallStableOnWindows
     },
-    Master: {
-      Linux: this.codeToInstallMasterOnLinux,
-      Mac: this.codeToInstallMasterOnMac,
-      Windows: this.codeToInstallMasterOnWindows
+    [this.QISKIT_INSTALL.master]: {
+      [this.OPERATING_SYSTEMS.linux]: this.codeToInstallMasterOnLinux,
+      [this.OPERATING_SYSTEMS.mac]: this.codeToInstallMasterOnMac,
+      [this.OPERATING_SYSTEMS.windows]: this.codeToInstallMasterOnWindows
     }
   }
 
