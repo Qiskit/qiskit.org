@@ -27,8 +27,8 @@
             :key="option"
             :title="option"
             class="start-locally__option"
-            :class="{ 'start-locally__option_active': isActive (choicesGroup.id, option) }"
-            @click="selectOption(choicesGroup.id, option)"
+            :class="{ 'start-locally__option_active': isActive (choicesGroup, option) }"
+            @click="selectOption(choicesGroup, option)"
           >
             {{ option }}
           </cv-button>
@@ -163,12 +163,12 @@ git+https://github.com/Qiskit/qiskit-terra git+https://github.com/Qiskit/qiskit-
     return this.codeToInstall[qiskitInstall][os]
   }
 
-  isActive (choicesGroup: string, option: string) : boolean {
-    return this.selectedOptions[choicesGroup] === option
+  isActive (choicesGroup: ChoicesGroup, option: string) : boolean {
+    return this.selectedOptions[choicesGroup.id] === option
   }
 
-  selectOption (choicesGroup: string, selectedOption: string) {
-    this.selectedOptions[choicesGroup] = selectedOption
+  selectOption (choicesGroup: ChoicesGroup, selectedOption: string) {
+    this.selectedOptions[choicesGroup.id] = selectedOption
   }
 }
 </script>
