@@ -52,7 +52,7 @@ export default class extends Vue {}
 
     @include mq($until: large) {
       @include type-style('label-01');
-      padding: $spacing-03;
+      padding: $spacing-05;
       width: 10rem;
     }
   }
