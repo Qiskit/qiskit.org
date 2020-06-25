@@ -36,6 +36,10 @@ export default class extends Vue {}
 .quick-start {
   color: $gray-60;
 
+  @include mq($until: large) {
+    display: none;
+  }
+
   &__header {
     @include type-style('expressive-heading-05');
     color: $cool-gray-80;
