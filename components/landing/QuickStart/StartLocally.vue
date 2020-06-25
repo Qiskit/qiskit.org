@@ -15,21 +15,22 @@
     </p>
     <div class="start-locally__options">
       <div
-        v-for="optionsBlock in installOptions"
-        :key="optionsBlock.alias"
+        v-for="choicesGroup in installChoices"
+        :key="choicesGroup.id"
       >
         <h4 class="start-locally__option-title">
-          {{ optionsBlock.title }}
+          {{ choicesGroup.title }}
         </h4>
         <cv-button-set :class="`start-locally__options-group`">
           <cv-button
-            v-for="option in optionsBlock.elements"
-            :key="option.label"
-            :title="option.label"
+            v-for="option in choicesGroup.options"
+            :key="option"
+            :title="option"
             class="start-locally__option"
-            :class="{ 'start-locally__option_active': option.active }"
+            :class="{ 'start-locally__option_active': isActive (choicesGroup, option) }"
+            @click="selectOption(choicesGroup, option)"
           >
-            {{ option.label }}
+            {{ option }}
           </cv-button>
         </cv-button-set>
       </div>
@@ -37,7 +38,7 @@
         <h4 class="start-locally__option-title">Terminal</h4>
         <SyntaxHighlight
           :label="segmentLabel"
-          :code="codeToInstallQiskit"
+          :code="getCodeToInstallQiskit()"
         />
       </div>
     </div>
@@ -51,6 +52,14 @@ import SyntaxHighlight from '~/components/ui/SyntaxHighlight.vue'
 import AppLink from '~/components/ui/AppLink.vue'
 import { DOWNLOAD_ANACONDA_LINK } from '~/constants/appLinks'
 
+type ChoicesGroup = {
+  title: string,
+  id: string,
+  options: Array<string>
+}
+
+type InstallChoices = Array<ChoicesGroup>
+
 @Component({
   components: { SyntaxHighlight, AppLink },
   head () {
@@ -63,53 +72,104 @@ import { DOWNLOAD_ANACONDA_LINK } from '~/constants/appLinks'
 })
 export default class extends Vue {
   downloadAnacondaLink = DOWNLOAD_ANACONDA_LINK
-  installOptions = [
+
+  OPERATING_SYSTEMS = {
+    linux: 'Linux',
+    mac: 'Mac',
+    windows: 'Windows'
+  }
+
+  QISKIT_INSTALL = {
+    stable: 'Stable (Recommended)',
+    master: 'Master'
+  }
+
+  installChoices: InstallChoices = [
     {
       title: 'Languages',
-      alias: 'languages',
-      elements: [{
-        label: 'Python 3.5+',
-        active: true
-      }]
+      id: 'languages',
+      options: ['Python 3.5+']
     },
     {
       title: 'Qiskit Install',
-      alias: 'qiskit-install',
-      elements: [
-        {
-          label: 'Stable (Recommended)',
-          active: true
-        },
-        {
-          label: 'Source',
-          active: false
-        }
-      ]
+      id: 'qiskit-install',
+      options: Object.values(this.QISKIT_INSTALL)
     },
     {
       title: 'Operating System',
-      alias: 'os',
-      elements: [
-        {
-          label: 'Linux',
-          active: false
-        },
-        {
-          label: 'Mac',
-          active: true
-        },
-        {
-          label: 'Windows',
-          active: false
-        }
-      ]
+      id: 'os',
+      options: Object.values(this.OPERATING_SYSTEMS)
     }
   ]
 
-  segmentLabel = 'Quick Install'
-  codeToInstallQiskit = `conda install qiskit macos -m qiskit
+  selectedOptions = {
+    languages: 'Python 3.5+',
+    'qiskit-install': this.QISKIT_INSTALL.stable,
+    os: this.OPERATING_SYSTEMS.mac
+  }
 
-# MacOS Binaries dont support CUDA, install from source if CUDA is needed`
+  segmentLabel = 'Qiskit Install'
+
+  codeToInstallStableOnLinux = 'pip install -U pip\npip install qiskit'
+  codeToInstallStableOnMac = 'pip install qiskit'
+  codeToInstallStableOnWindows = 'pip install qiskit'
+
+  codeToInstallMasterOnLinux = `# Pre-Requisites
+# Install compiler requirements. Building Aer requires a C++ compiler and development headers. If you’re using Fedora or an equivalent Linux distribution, install using: dnf install @development-tools
+# For Ubuntu/Debian install it using: apt-get install build-essential
+# Install OpenBLAS development headers. If you’re using Fedora or an equivalent Linux distribution, install using: dnf install openblas-devel
+# For Ubuntu/Debian install it using: apt-get install libopenblas-dev
+
+pip install
+git+https://github.com/Qiskit/qiskit-terra git+https://github.com/Qiskit/qiskit-aer git+https://github.com/Qiskit/qiskit-ignis git+https://github.com/Qiskit/qiskit-aqua git+https://github.com/Qiskit/qiskit-ibmq-provider`
+
+  codeToInstallMasterOnMac = `# Install the Clang compiler by installing XCode. Check if you have XCode and Clang installed by opening a terminal window and entering the following.
+clang --version
+
+# Install XCode and Clang by using the following command:
+xcode-select --install
+
+# To use the Clang compiler on macOS, you need to install an extra library for supporting OpenMP. You can use brew to install this and other dependencies.
+brew install libomp
+
+# Then install a BLAS implementation; OpenBLAS is the default choice.
+brew install openblas
+
+pip install
+git+https://github.com/Qiskit/qiskit-terra git+https://github.com/Qiskit/qiskit-aer git+https://github.com/Qiskit/qiskit-ignis git+https://github.com/Qiskit/qiskit-aqua git+https://github.com/Qiskit/qiskit-ibmq-provider`
+
+  codeToInstallMasterOnWindows = `# On Windows, it is easiest to install the Visual C++ compiler from the Build Tools for Visual Studio 2017. You can instead install Visual Studio version 2015 or 2017, making sure to select the options for installing the C++ compiler.
+# On Windows you need to use Anaconda3 or Miniconda3 to install all the dependencies.
+
+pip install
+git+https://github.com/Qiskit/qiskit-terra git+https://github.com/Qiskit/qiskit-aer git+https://github.com/Qiskit/qiskit-ignis git+https://github.com/Qiskit/qiskit-aqua git+https://github.com/Qiskit/qiskit-ibmq-provider`
+
+  codeToInstall = {
+    [this.QISKIT_INSTALL.stable]: {
+      [this.OPERATING_SYSTEMS.linux]: this.codeToInstallStableOnLinux,
+      [this.OPERATING_SYSTEMS.mac]: this.codeToInstallStableOnMac,
+      [this.OPERATING_SYSTEMS.windows]: this.codeToInstallStableOnWindows
+    },
+    [this.QISKIT_INSTALL.master]: {
+      [this.OPERATING_SYSTEMS.linux]: this.codeToInstallMasterOnLinux,
+      [this.OPERATING_SYSTEMS.mac]: this.codeToInstallMasterOnMac,
+      [this.OPERATING_SYSTEMS.windows]: this.codeToInstallMasterOnWindows
+    }
+  }
+
+  getCodeToInstallQiskit () : string {
+    const { 'qiskit-install': qiskitInstall, os } = this.selectedOptions
+
+    return this.codeToInstall[qiskitInstall][os]
+  }
+
+  isActive (choicesGroup: ChoicesGroup, option: string) : boolean {
+    return this.selectedOptions[choicesGroup.id] === option
+  }
+
+  selectOption (choicesGroup: ChoicesGroup, selectedOption: string) {
+    this.selectedOptions[choicesGroup.id] = selectedOption
+  }
 }
 </script>
 
