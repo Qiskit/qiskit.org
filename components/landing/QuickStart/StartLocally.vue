@@ -120,7 +120,7 @@ export default class extends Vue {
 # Install OpenBLAS development headers. If you’re using Fedora or an equivalent Linux distribution, install using: dnf install openblas-devel
 # For Ubuntu/Debian install it using: apt-get install libopenblas-dev
 
-pip install 
+pip install
 git+https://github.com/Qiskit/qiskit-terra git+https://github.com/Qiskit/qiskit-aer git+https://github.com/Qiskit/qiskit-ignis git+https://github.com/Qiskit/qiskit-aqua git+https://github.com/Qiskit/qiskit-ibmq-provider`
 
   codeToInstallMasterOnMac = `# Install the Clang compiler by installing XCode. Check if you have XCode and Clang installed by opening a terminal window and entering the following.
@@ -135,13 +135,13 @@ brew install libomp
 # Then install a BLAS implementation; OpenBLAS is the default choice.
 brew install openblas
 
-pip install 
+pip install
 git+https://github.com/Qiskit/qiskit-terra git+https://github.com/Qiskit/qiskit-aer git+https://github.com/Qiskit/qiskit-ignis git+https://github.com/Qiskit/qiskit-aqua git+https://github.com/Qiskit/qiskit-ibmq-provider`
 
   codeToInstallMasterOnWindows = `# On Windows, it is easiest to install the Visual C++ compiler from the Build Tools for Visual Studio 2017. You can instead install Visual Studio version 2015 or 2017, making sure to select the options for installing the C++ compiler.
 # On Windows you need to use Anaconda3 or Miniconda3 to install all the dependencies.
 
-pip install 
+pip install
 git+https://github.com/Qiskit/qiskit-terra git+https://github.com/Qiskit/qiskit-aer git+https://github.com/Qiskit/qiskit-ignis git+https://github.com/Qiskit/qiskit-aqua git+https://github.com/Qiskit/qiskit-ibmq-provider`
 
   codeToInstall = {
