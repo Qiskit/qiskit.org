@@ -35,7 +35,9 @@
         </cv-button-set>
       </div>
       <div>
-        <h4 class="start-locally__option-title">Terminal</h4>
+        <h4 class="start-locally__option-title">
+          Terminal
+        </h4>
         <SyntaxHighlight
           :label="segmentLabel"
           :code="getCodeToInstallQiskit()"
@@ -81,7 +83,7 @@ export default class extends Vue {
 
   QISKIT_INSTALL = {
     stable: 'Stable (Recommended)',
-    master: 'Master'
+    master: 'Unstable'
   }
 
   installChoices: InstallChoices = [
