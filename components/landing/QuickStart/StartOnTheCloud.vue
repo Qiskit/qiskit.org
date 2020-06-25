@@ -66,7 +66,7 @@ export default class extends Vue {
     display: flex;
 
     :first-child {
-      margin-right: 24px;
+      margin-right: $spacing-06;
     }
   }
 
