@@ -1,7 +1,6 @@
 <template>
   <main class="element landing-page">
     <div class="landing-page__presentation-container">
-      <div class="landing-page__presentation-picture" />
       <div class="landing-page__section">
         <TheHeroMoment
           class="landing-page__presentation"
