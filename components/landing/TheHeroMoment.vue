@@ -44,6 +44,18 @@ export default class extends Vue {
 
 .the-hero-moment {
   position: relative;
+  background-image: url("/images/hero-illustration.png");
+  background-position: right center;
+  background-repeat: no-repeat;
+  background-size: 70% auto;
+
+  @include mq($from: medium, $until: large) {
+    background-size: contain;
+  }
+
+  @include mq($until: medium) {
+    background-image: none;
+  }
 
   &__content {
     position: relative;
