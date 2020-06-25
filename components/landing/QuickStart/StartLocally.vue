@@ -81,7 +81,7 @@ export default class extends Vue {
     {
       title: 'Qiskit Install',
       id: 'qiskit-install',
-      options: ['Stable (Recommended)', 'Source']
+      options: ['Stable (Recommended)', 'Master']
     },
     {
       title: 'Operating System',
@@ -98,8 +98,57 @@ export default class extends Vue {
 
   segmentLabel = 'Qiskit Install'
 
+  codeToInstallStableOnLinux = 'pip install -U pip\npip install qiskit'
+  codeToInstallStableOnMac = 'pip install qiskit'
+  codeToInstallStableOnWindows = 'pip install qiskit'
+
+  codeToInstallMasterOnLinux = `# Pre-Requisites
+# Install compiler requirements. Building Aer requires a C++ compiler and development headers. If you’re using Fedora or an equivalent Linux distribution, install using: dnf install @development-tools
+# For Ubuntu/Debian install it using: apt-get install build-essential
+# Install OpenBLAS development headers. If you’re using Fedora or an equivalent Linux distribution, install using: dnf install openblas-devel
+# For Ubuntu/Debian install it using: apt-get install libopenblas-dev
+
+pip install 
+git+https://github.com/Qiskit/qiskit-terra git+https://github.com/Qiskit/qiskit-aer git+https://github.com/Qiskit/qiskit-ignis git+https://github.com/Qiskit/qiskit-aqua git+https://github.com/Qiskit/qiskit-ibmq-provider`
+
+  codeToInstallMasterOnMac = `# Install the Clang compiler by installing XCode. Check if you have XCode and Clang installed by opening a terminal window and entering the following.
+clang --version
+
+# Install XCode and Clang by using the following command:
+xcode-select --install
+
+# To use the Clang compiler on macOS, you need to install an extra library for supporting OpenMP. You can use brew to install this and other dependencies.
+brew install libomp
+
+# Then install a BLAS implementation; OpenBLAS is the default choice.
+brew install openblas
+
+pip install 
+git+https://github.com/Qiskit/qiskit-terra git+https://github.com/Qiskit/qiskit-aer git+https://github.com/Qiskit/qiskit-ignis git+https://github.com/Qiskit/qiskit-aqua git+https://github.com/Qiskit/qiskit-ibmq-provider`
+
+  codeToInstallMasterOnWindows = `# On Windows, it is easiest to install the Visual C++ compiler from the Build Tools for Visual Studio 2017. You can instead install Visual Studio version 2015 or 2017, making sure to select the options for installing the C++ compiler.
+# On Windows you need to use Anaconda3 or Miniconda3 to install all the dependencies.
+
+pip install 
+git+https://github.com/Qiskit/qiskit-terra git+https://github.com/Qiskit/qiskit-aer git+https://github.com/Qiskit/qiskit-ignis git+https://github.com/Qiskit/qiskit-aqua git+https://github.com/Qiskit/qiskit-ibmq-provider`
+
+  codeToInstall = {
+    'Stable (Recommended)': {
+      Linux: this.codeToInstallStableOnLinux,
+      Mac: this.codeToInstallStableOnMac,
+      Windows: this.codeToInstallStableOnWindows
+    },
+    Master: {
+      Linux: this.codeToInstallMasterOnLinux,
+      Mac: this.codeToInstallMasterOnMac,
+      Windows: this.codeToInstallMasterOnWindows
+    }
+  }
+
   getCodeToInstallQiskit () : string {
-    return 'pip install qiskit'
+    const { 'qiskit-install': qiskitInstall, os } = this.selectedOptions
+
+    return this.codeToInstall[qiskitInstall][os]
   }
 
   isActive (choicesGroup: string, option: string) : boolean {
