@@ -1,16 +1,16 @@
 <template>
   <article class="learn-card">
     <div class="learn-card__content">
-      <p>
+      <p class="learn-card__copy">
         Gain access to a free, digital textbook to study the concepts of quantum
         computing using Qiskit.
       </p>
       <AppLink
         class="learn-card__link"
-        url="#"
+        url="/education"
         :segment="{ action: 'Get Learning' }"
       >
-        <span>Get Learning</span>
+        <span class="learn-card__copy">Get Learning</span>
         <ArrowRight16 />
       </AppLink>
     </div>
@@ -38,14 +38,31 @@ export default class extends Vue {}
   background-color: $cool-gray-10;
   display: flex;
 
+  @include mq($until: large) {
+    height: 10rem;
+  }
+
   &__content {
-    @include type-style('body-long-01');
     padding: $spacing-07;
     width: 16rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     color: $cool-gray-60;
+
+    @include mq($until: large) {
+      @include type-style('label-01');
+      padding: $spacing-03;
+      width: 10rem;
+    }
+  }
+
+  &__copy {
+    @include type-style('body-long-01');
+
+    @include mq($until: large) {
+      @include type-style('label-01');
+    }
   }
 
   &__link {
@@ -66,8 +83,12 @@ export default class extends Vue {}
     background-image: url('/images/learn-image.png');
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: left center;
+    background-position: right center;
     overflow: hidden;
+
+    @include mq($until: large) {
+      background-position: right -75px center;
+    }
   }
 }
 </style>
