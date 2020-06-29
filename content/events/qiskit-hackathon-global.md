@@ -19,58 +19,42 @@ routeName: events
 ---
 
 ## What is Qiskit Hackathon Global?
-
-Qiskit Hackathon Global will be the first immersive and live 24-hour hackathon experience hosted by IBM's Qiskit Community Team from August 6-8. This invitation-only hackathon brings together the quantum community for an exciting, fast-paced three days of training sessions, deep technical talks, and a hackathon with the Qiskit core development team. 
-
-
-Attendees be able to learn about new updates to Qiskit and meet the people building it hands-on, and not only create connections within the Qiskit community, but with the researchers and developers behind it. 
-
-
+Qiskit Hackathon Global is the first  real-time 24-hour hackathon experience hosted by IBM's Qiskit Community Team on August 6-8, 2020. This invitation-only hackathon brings together the quantum community for an immersive three days of training sessions, deep technical talks, and hacking alongside members of the Qiskit core development team.
+Attendees will have a chance to learn about the latest updates to Qiskit, to meet the researchers and developers behind the product, and to create connections within the Qiskit community.
 More updates to come as this virtual experience approaches!
 
 ## Location
-
-Qiskit Hackathon Global will be hosted 100% virtually! A central "location" will be provided as the event gets closer, and wherever you are in the world - you will be able to participate. 
+Qiskit Hackathon Global will be hosted 100% virtually! A central (virtual) "location" will be provided as the event gets closer, and you will be able to participate wherever you are in the world.
 
 ## Agenda
 _* times subject to change_
 ###### Qiskit Hackathon Global will be based in the Eastern Time Zone (EDT) for scheduling, activities, and communications. 
 
-
 #### August 6
-#### Day 1: *Welcome! Presentations and Project Pitches*
+#### *Welcome! Presentations and Project Pitches*
 4:00 PM - 6:30 PM EDT
 
 _more details coming soon!_
 
-
-
 #### August 7
-#### Day 2: *Team Formation & Hackathon*
+#### *Team Formation & Hackathon*
 8:30 AM EDT Start Time
 
 _more details coming soon!_
 
-
-
 #### August 8
-#### *Day 3: Hackathon, Awards, & Celebration*
+#### *Hackathon, Awards, & Celebration*
 - 1:45 PM EDT Hackathon Ends
 - 3:00 PM EDT Award Ceremony
 - 3:30 PM EDT Celebration Begins!
 
 _more details coming soon!_
 
-
-
 ## Learn about the Qiskit Global Summer School
 
-Learn more about the two week summer school that leads up to the hackathon - and how you may be able to get involved!
+Learn more about the two-week summer school that leads up to Qiskit Hackathon Global - and find out how you could get involved!
 
-
-Go to the Qiskit Global Summer School's website here. 
-
-_Website coming soon!_
+Go to the Qiskit Global Summer School's website [here](https://qiskit.org/events/summer-school/). 
 
 
 ## FAQ
@@ -79,10 +63,10 @@ _Website coming soon!_
 There is no cost to participate in Qiskit Hackathon Global.
 
 #### Will I need any supplies or equipment in order to participate? 
-You will need an operating computer with a reliable internet connection - and either a mobile device or webcam/microphone on your computer to communicate with teammates. You will need to be able to view live streams and connect globally - but other than that, you just need to bring yourself!
+You will need an operating computer with a reliable internet connection and either a mobile device or webcam/microphone on your computer to communicate with teammates. You will need to be able to view live streams and connect globally. Other than that, you just need to bring yourself!
 
 #### Do I need to download anything prior to the hackathon? 
-You will want to make sure and have Qiskit downloaded and installed prior to the hackathon start. Instructions for how to install Qiskit are available here. In the week leading up to the hackathon, researchers and staff will be available to provide live-support for installs, should you encounter any difficulty. 
+You will want to make sure and have Qiskit downloaded and installed prior to the hackathon start. Instructions for how to install Qiskit are available [here](https://qiskit.org/documentation/install.html). In the week leading up to the hackathon, researchers and staff will be available to provide live-support for installs, should you encounter any difficulty. 
 
 #### I wasn't invited to the hackathon - how can I get an invitation? 
 Qiskit Hackathon Global is a relatively small hackathons with limited space. We traditionally go through a nomination process via local universities for these hackatons, and we also take self-nominations into consideration. 
@@ -90,7 +74,7 @@ Qiskit Hackathon Global is a relatively small hackathons with limited space. We 
 If you would like to be considered for an invite, please have your professor or colleague submit a nomination to [hello@qiskit.camp](mailto:hello@qiskit.camp) and tell us about your work (especially any experience you already have with Qiskit and/or IBM Q Experience) - or submit an inquiry below!
 
 #### I wasn't invited to the hackathon - but I want to get connected to the Qiskit Community! How can I do that? 
-If you are looking for other opportunities to connect with the Quantum Community, there are lots of options available. You can participate in local [Qiskit or Quantum events](https://community.qiskit.org/events/) that may be available in your area or join the [Qiskit Slack Community](https://join.slack.com/t/qiskit/shared_invite/zt-e4sscbg2-p8NHTezPVkC3r8nV6BIUVw) or [Qiskit Github Community](https://urldefense.proofpoint.com/v2/url?u=https-3A__github.com_Qiskit&d=DwMFaQ&c=jf_iaSHvJObTbx-siA1ZOg&r=2BfE013HYdFKw8vNGtCg79pBdgDsfBDgu6a0AqcJQ98&m=FrECrt7i8PKvrNVL5vUxBzewU1vlo5bJw21XLYqm9ms&s=tyA_8sWFiqYnJ0It_SIHLtmAwRQbPyasq4aZd6EZwlc&e=). We also have our advocates program, for people like yourself that are passionate about quantum and want to be engaged with the larger community. You can find information about that online [here](https://community.qiskit.org/advocates/). 
+If you are looking for other opportunities to connect with the Quantum Community, there are lots of options available. You can participate in local [Qiskit or Quantum events](https://community.qiskit.org/events/) that may be available in your area or join the [Qiskit Slack Community](https://join.slack.com/t/qiskit/shared_invite/zt-e4sscbg2-p8NHTezPVkC3r8nV6BIUVw) or [Qiskit Github Community](https://urldefense.proofpoint.com/v2/url?u=https-3A__github.com_Qiskit&d=DwMFaQ&c=jf_iaSHvJObTbx-siA1ZOg&r=2BfE013HYdFKw8vNGtCg79pBdgDsfBDgu6a0AqcJQ98&m=FrECrt7i8PKvrNVL5vUxBzewU1vlo5bJw21XLYqm9ms&s=tyA_8sWFiqYnJ0It_SIHLtmAwRQbPyasq4aZd6EZwlc&e=). We also have our advocates program, for people like yourself that are passionate about quantum and want to be engaged with the larger community. You can find information about that online [here](https://community.qiskit.org/advocates/). If you want to host your own local community hackathon - please see below for more information!
 
 #### I'm not in the US or North America - can I still participate? 
 Yes! This event is open to everyone around the world - don't let location stop you from joining!
@@ -98,7 +82,7 @@ Yes! This event is open to everyone around the world - don't let location stop y
 #### Is there an age limit on participation? 
 The age-limit for Qiskit Hackathon Global is 16. If you are under the age limit, but still want to participate, please check out the other ways you can get connected to the community, and other events in your area that may be available!
 
-#### I keep seeing these virtual hackathons popping up - but am nervous to host one of my own (even though I want to!). Does the Qiskit Community Team offer any support or guidance for these events? 
+#### I'm interested in hosting my own hackathon - Where can I learn more?  
 If you want to host a virtual hackathon of your own, whether it's just a group of friends or a university group, we are still here to support your planning efforts. The IBM Community Team wants to share what we have learned so far and has created a [Virtual Event Planning Guide](https://github.ibm.com/Josie-Kies/QiskitCommunityEventsAssets/raw/master/Files/QiskitVirtualEventGuide_PDFversion_v1.pdf), along with other assets, that can make your planning experience easier than ever (and provide a few ideas along the way)!
 
 ## Code of Conduct
