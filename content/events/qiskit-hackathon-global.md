@@ -3,7 +3,7 @@ title: Qiskit Hackathon Global
 dates: August
 tagline: The first immersive and live 24-hour hackathon experience hosted by IBM's Qiskit Community Team
 description:
-background: finland-unconference
+background: hackathon-global
 nav:
   - text: Location
     goTo: '#location'
