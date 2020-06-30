@@ -28,6 +28,28 @@
   }
 }
 
+/*
+ * Adds the grid background at $url and size it to match
+ * $background-width x $background-height, placing it at $top-offset from top.
+ *
+ * The mixin assumes the grid is made of 64x64 after sizing and resize the
+ * background when in medium or small screens so the squares are 40x40.
+ */
+@mixin landing-page-grid($url, $background-width, $background-height, $top-offset: 0) {
+  background-image: url($url);
+  background-position: top $top-offset center;
+  background-repeat: repeat-x;
+  background-size: $background-width $background-height;
+
+  @include mq($until: large) {
+    $grid-small-scale: 40 / 64;
+    $background-width-scaled: $background-width * $grid-small-scale;
+    $background-height-scaled: $background-height * $grid-small-scale;
+    background-size: $background-width-scaled $background-height-scaled;
+  }
+}
+
+
 @mixin elegant-title() {
   text-align: center;
   text-transform: uppercase;
