@@ -134,14 +134,6 @@ const QISKIT_ADVOCATES: LabeledLinks = {
   }
 }
 
-const OVERVIEW_LINK: NavLink = {
-  label: 'Overview',
-  url: '#overview',
-  segment: {
-    action: 'Overview'
-  }
-}
-
 const LEARN_LINK: NavLink = {
   label: 'Learn',
   url: '/education',
@@ -284,7 +276,6 @@ export {
   TUTORIALS_LINK,
   DOCUMENTATION_LINK,
   STAY_CONNECTED_LINKS,
-  OVERVIEW_LINK,
   LEARN_LINK,
   NavLink
 }
