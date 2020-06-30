@@ -84,9 +84,8 @@ export default class extends QiskitPage {
 
   &__presentation-container {
     position: relative;
-    padding-top: $layout-06;
+    padding-top: $layout-05;
     padding-bottom: $layout-07;
-    margin-bottom: $layout-06;
     background-image: url('/images/grid/grid-hero.svg');
     background-position: top center;
     background-repeat: repeat-x;
@@ -94,36 +93,18 @@ export default class extends QiskitPage {
 
     overflow: hidden;
 
+    $grid-small-scale: 40 / 64;
+
     @include mq($from: medium, $until: large) {
       padding-top: $layout-05;
-      padding-bottom: $layout-06;
-      margin-bottom: $layout-05;
+      padding-bottom: 0;
+      background-size: (112rem * $grid-small-scale) (56rem * $grid-small-scale);
     }
 
     @include mq($until: medium) {
       padding-top: $layout-03;
-      padding-bottom: $layout-05;
-      margin-bottom: $layout-03;
-    }
-  }
-
-  &__presentation-picture {
-    position: absolute;
-    width: 100%;
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    background: url('/images/hero-illustration.png') no-repeat;
-    background-size: contain;
-
-    $picture-threshold-for-hiding: 0.75 * $medium;
-
-    @include mq($from: $picture-threshold-for-hiding, $until: large) {
-      left: 40%;
-    }
-
-    @include mq($until: $picture-threshold-for-hiding) {
-      display: none;
+      padding-bottom: 0;
+      background-size: (112rem * $grid-small-scale) (56rem * $grid-small-scale);
     }
   }
 
