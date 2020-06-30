@@ -196,7 +196,7 @@ export default class extends Vue {}
   &__feature-circuits {
     background-image: url('/images/library/circuit-01.png');
     background-position: right bottom;
-    background-size: auto;
+    background-size: 14rem auto;
     background-repeat: no-repeat;
     grid-area: a;
 
@@ -211,7 +211,7 @@ export default class extends Vue {}
   }
 
   &__feature-decoration-hardware {
-    background-image: url('/images/feature-hardware.png');
+    background-image: url('/images/landing-page/feature-hardware.png');
     background-position: center top;
     background-size: cover;
     background-repeat: no-repeat;
@@ -242,27 +242,27 @@ export default class extends Vue {}
   }
 
   &__feature-decoration-algorithms {
-    background-image: url('/images/feature-algorithms.png');
+    background-image: url('/images/landing-page/feature-algorithms.png');
     background-position: center bottom;
     background-size: cover;
     background-repeat: no-repeat;
     height: 25rem;
 
     @include mq($from: medium, $until: large) {
-      background-image: url('/images/feature-algorithms-medium.png');
+      background-image: url('/images/landing-page/feature-algorithms-medium.png');
       height: auto;
     }
 
     @include mq($until: medium) {
-      background-image: url('/images/feature-algorithms-medium.png');
+      background-image: url('/images/landing-page/feature-algorithms-medium.png');
       min-height: 4rem;
     }
   }
 
   &__feature-mitigation {
-    background-image: url('/images/feature-mitigation.png');
+    background-image: url('/images/landing-page/feature-mitigation.png');
     background-position: right 0 top calc(50% + 2rem);
-    background-size: auto;
+    background-size: 25rem auto;
     background-repeat: no-repeat;
     padding-bottom: 5rem;
     grid-area: d;
