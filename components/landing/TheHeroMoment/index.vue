@@ -44,32 +44,14 @@ export default class extends Vue {
 @import '~carbon-components/scss/globals/scss/typography';
 
 .the-hero-moment {
-  --background-width: 112rem;
-  --background-height: 56rem;
-  --padding-top: #{$layout-05};
+  @include landing-page-grid('/images/grid/grid-hero.svg', 112rem, 56rem);
 
   position: relative;
   overflow: hidden;
-  padding-top: var(--padding-top);
-  background-image: url('/images/grid/grid-hero.svg');
-  background-position: top center;
-  background-repeat: repeat-x;
-  background-size: var(--background-width) var(--background-height);
+  padding-top: $layout-05;
   // In Figma, the height is not enforced but the background is always
   // visible completely so we do it in the CSS.
-  height: var(--background-height);
-
-  $grid-small-scale: 40 / 64;
-
-  @include mq($from: medium, $until: large) {
-    --background-width: #{112rem * $grid-small-scale};
-    --background-height: #{56rem * $grid-small-scale};
-  }
-
-  @include mq($until: medium) {
-    --background-width: #{112rem * $grid-small-scale};
-    --background-height: #{56rem * $grid-small-scale};
-  }
+  height: 56rem;
 
   &__container {
     @include contained();
