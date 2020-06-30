@@ -57,7 +57,7 @@ export default class extends Vue {
     @include contained();
 
     position: relative;
-    background-image: url("/images/hero-illustration.png");
+    background-image: url("/images/landing-page/hero-illustration.png");
     background-position: right center;
     background-repeat: no-repeat;
     background-size: 70% auto;
