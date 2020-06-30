@@ -6,28 +6,7 @@
       class="landing-page__hero-moment"
       :version="qiskitVersion"
     />
-    <article class="landing-page__section">
-      <h2 class="landing-page__header">
-        What can Qiskit do
-      </h2>
-      <p class="landing-page__paragraph">
-        Qiskit accelerates the development of quantum applications by
-        providing the complete set of tools needed for interacting with
-        quantum systems and simulators.
-      </p>
-      <TheFeatureMosaic class="landing-page__feature-mosaic" />
-      <!-- TODO: Link to the overview page -->
-      <LandingCta
-        kind="secondary"
-        class="landing-page__full-overview-cta"
-        url="#"
-        @click="$trackClickEvent({
-          action: 'Visit Full Overview'
-        })"
-      >
-        Full Overview
-      </LandingCta>
-    </article>
+    <TheFeatures class="landing-page__section" />
     <QuickStart class="landing-page__section" />
     <article class="landing-page__section">
       <h2 class="landing-page__header">
@@ -44,16 +23,14 @@ import axios from 'axios'
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import TheHeroMoment from '~/components/landing/TheHeroMoment/index.vue'
-import LandingCta from '~/components/landing/LandingCta.vue'
-import TheFeatureMosaic from '~/components/landing/TheFeatureMosaic.vue'
+import TheFeatures from '~/components/landing/TheFeatures/index.vue'
 import QuickStart from '~/components/landing/QuickStart/index.vue'
 import LearnCard from '~/components/landing/LearnCard.vue'
 
 @Component({
   components: {
-    LandingCta,
     TheHeroMoment,
-    TheFeatureMosaic,
+    TheFeatures,
     QuickStart,
     LearnCard
   },
@@ -96,20 +73,7 @@ export default class extends QiskitPage {
     margin-bottom: $layout-07;
   }
 
-  &__feature-mosaic {
-    margin-top: $layout-01;
-    margin-bottom: $layout-03;
-
-    @include mq($from: medium, $until: large) {
-      margin-bottom: $layout-01;
-    }
-
-    @include mq($until: medium) {
-      margin-bottom: $layout-01;
-    }
-  }
-
-  &__header {
+  &__title {
     @include type-style('expressive-heading-05');
     margin-bottom: $layout-03;
     color: $cool-gray-80;
@@ -129,7 +93,7 @@ export default class extends QiskitPage {
     }
   }
 
-  &__paragraph {
+  &__copy {
     @include type-style('body-long-01');
     color: $gray-60;
     max-width: 6 * $column-size-large;
