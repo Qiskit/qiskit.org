@@ -1,13 +1,11 @@
 <template>
   <main class="element landing-page">
-    <div class="landing-page__presentation-container">
-      <div class="landing-page__section">
-        <TheHeroMoment
-          class="landing-page__presentation"
-          :version="qiskitVersion"
-        />
-      </div>
-    </div>
+    <!-- TheHeroMoment is not a section since it has not the same margin as
+    other sections. -->
+    <TheHeroMoment
+      class="landing-page__hero-moment"
+      :version="qiskitVersion"
+    />
     <article class="landing-page__section">
       <h2 class="landing-page__header">
         What can Qiskit do
@@ -45,7 +43,7 @@ import axios from 'axios'
 
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
-import TheHeroMoment from '~/components/landing/TheHeroMoment.vue'
+import TheHeroMoment from '~/components/landing/TheHeroMoment/index.vue'
 import LandingCta from '~/components/landing/LandingCta.vue'
 import TheFeatureMosaic from '~/components/landing/TheFeatureMosaic.vue'
 import QuickStart from '~/components/landing/QuickStart/index.vue'
@@ -82,34 +80,19 @@ export default class extends QiskitPage {
 .landing-page {
   background-color: $white-background-ui;
 
-  &__presentation-container {
-    position: relative;
-    padding-top: $layout-05;
-    padding-bottom: $layout-07;
-    background-image: url('/images/grid/grid-hero.svg');
-    background-position: top center;
-    background-repeat: repeat-x;
-    background-size: 112rem 56rem;
-
-    overflow: hidden;
-
-    $grid-small-scale: 40 / 64;
+  &__hero-moment {
+    margin-bottom: $layout-05;
 
     @include mq($from: medium, $until: large) {
-      padding-top: $layout-05;
-      padding-bottom: 0;
-      background-size: (112rem * $grid-small-scale) (56rem * $grid-small-scale);
+      margin-bottom: $layout-06;
     }
 
     @include mq($until: medium) {
-      padding-top: $layout-03;
-      padding-bottom: 0;
-      background-size: (112rem * $grid-small-scale) (56rem * $grid-small-scale);
+      margin-bottom: 0;
     }
   }
 
   &__section {
-    @include contained();
     margin-bottom: $layout-07;
   }
 
