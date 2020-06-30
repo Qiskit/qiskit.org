@@ -87,18 +87,10 @@ export default class extends QiskitPage {
     padding-top: $layout-06;
     padding-bottom: $layout-07;
     margin-bottom: $layout-06;
-    background-size:
-      5rem 5rem,
-      5rem 5rem;
-    background-image:
-      linear-gradient(to right, $cool-gray-10 1px, transparent 1px),
-      linear-gradient(to bottom, $cool-gray-10 1px, transparent 1px);
-    background-position:
-      -1rem center,
-      -1rem center;
-    background-repeat:
-      repeat,
-      repeat;
+    background-image: url('/images/grid/grid-hero.svg');
+    background-position: top center;
+    background-repeat: repeat-x;
+    background-size: 112rem 56rem;
 
     overflow: hidden;
 
@@ -106,18 +98,12 @@ export default class extends QiskitPage {
       padding-top: $layout-05;
       padding-bottom: $layout-06;
       margin-bottom: $layout-05;
-      background-size:
-        3rem 3rem,
-        3rem 3rem;
     }
 
     @include mq($until: medium) {
       padding-top: $layout-03;
       padding-bottom: $layout-05;
       margin-bottom: $layout-03;
-      background-size:
-        2rem 2rem,
-        2rem 2rem;
     }
   }
 
