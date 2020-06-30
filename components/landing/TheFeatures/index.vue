@@ -2,7 +2,13 @@
   <article
     class="the-features"
   >
-    <div class="the-features__container">
+    <div
+      class="
+        the-features__container
+        landing-page__util
+        landing-page__util_vertical-spacer
+      "
+    >
       <h2 class="landing-page__title">
         What can Qiskit do
       </h2>
@@ -33,6 +39,8 @@ export default class extends Vue { }
 @import '~carbon-components/scss/globals/scss/typography';
 
 .the-features {
+  @include landing-page-grid('/images/grid/grid-mosaic.svg', 112rem, 48rem, 16rem);
+
   &__container {
     @include contained();
   }

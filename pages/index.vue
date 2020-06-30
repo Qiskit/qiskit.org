@@ -6,8 +6,8 @@
       class="landing-page__hero-moment"
       :version="qiskitVersion"
     />
-    <TheFeatures class="landing-page__section" />
-    <QuickStart class="landing-page__section" />
+    <TheFeatures />
+    <QuickStart />
     <article class="landing-page__section">
       <h2 class="landing-page__header">
         Learn with Qiskit
@@ -69,10 +69,6 @@ export default class extends QiskitPage {
     }
   }
 
-  &__section {
-    margin-bottom: $layout-07;
-  }
-
   &__title {
     @include type-style('expressive-heading-05');
     margin-bottom: $layout-03;
@@ -109,6 +105,16 @@ export default class extends QiskitPage {
       @include type-style('label-01');
       max-width: 4 * $column-size-small;
       margin-bottom: $layout-03;
+    }
+  }
+
+  &__util {
+    &_vertical-spacer {
+      padding-bottom: $layout-07;
+
+      @include mq($until: medium) {
+        padding-bottom: $layout-05;
+      }
     }
   }
 }
