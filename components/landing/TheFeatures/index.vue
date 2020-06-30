@@ -12,17 +12,6 @@
         quantum systems and simulators.
       </p>
       <TheFeatureMosaic class="the-features__mosaic" />
-      <!-- TODO: Link to the overview page -->
-      <LandingCta
-        kind="secondary"
-        class="landing-page__full-overview-cta"
-        url="#"
-        @click="$trackClickEvent({
-          action: 'Visit Full Overview'
-        })"
-      >
-        Full Overview
-      </LandingCta>
     </div>
   </article>
 </template>
@@ -31,15 +20,12 @@
 import Vue from 'vue'
 
 import { Component } from 'vue-property-decorator'
-import LandingCta from '~/components/landing/LandingCta.vue'
 import TheFeatureMosaic from '~/components/landing/TheFeatures/TheFeatureMosaic.vue'
 
 @Component({
-  components: { LandingCta, TheFeatureMosaic }
+  components: { TheFeatureMosaic }
 })
-export default class extends Vue {
-  routeName = 'qiskit-landing-page'
-}
+export default class extends Vue { }
 </script>
 
 <style lang="scss">
