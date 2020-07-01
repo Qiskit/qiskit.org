@@ -10,13 +10,12 @@
         qiskit {{ version }}
       </p>
       <p class="qiskit-version-info__release-notes">
-        See
         <AppLink
-          class="qiskit-version-info__release-notes-link"
+          class="landing-page__link qiskit-version-info__release-notes-link"
           url="https://qiskit.org/documentation/release_notes.html#notable-changes"
           :segment="{ action: 'Release notes' }"
         >
-          release notes
+          see release notes
         </AppLink>
       </p>
     </div>
@@ -37,6 +36,7 @@ export default class extends Vue {
 </script>
 
 <style lang="scss" scoped>
+@import '~/assets/scss/blocks/landing-page.scss';
 @import '~carbon-components/scss/globals/scss/typography';
 
 .qiskit-version-info {
@@ -72,11 +72,6 @@ export default class extends Vue {
 
   &__release-notes {
     @include type-style('code-01');
-    color: $purple-50;
-  }
-
-  &__release-notes-link {
-    color: currentColor;
   }
 }
 </style>

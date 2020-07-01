@@ -6,7 +6,7 @@
         computing using Qiskit.
       </p>
       <AppLink
-        class="learn-card__link"
+        class="landing-page__link learn-card__link"
         url="/education"
         :segment="{ action: 'Get Learning' }"
       >
@@ -30,6 +30,7 @@ export default class extends Vue {}
 </script>
 
 <style lang="scss" scoped>
+@import '~/assets/scss/blocks/landing-page.scss';
 @import '~carbon-components/scss/globals/scss/typography';
 
 .learn-card {
@@ -67,8 +68,6 @@ export default class extends Vue {}
 
   &__link {
     margin-bottom: $spacing-04;
-    text-decoration: none;
-    color: $purple-70;
     fill: $purple-70;
     display: flex;
     align-items: center;

@@ -23,6 +23,24 @@
     }
   }
 
+  &__subtitle {
+    @include type-style('productive-heading-02');
+    color: $cool-gray-80;
+    margin-bottom: $spacing-05;
+
+    @include mq($from: medium, $until: large) {
+      @include type-style('productive-heading-01');
+      max-width: 4 * $column-size-medium;
+      margin-bottom: $spacing-03;
+    }
+
+    @include mq($until: medium) {
+      @include type-style('productive-heading-01');
+      max-width: 4 * $column-size-small;
+      margin-bottom: $spacing-03;
+    }
+  }
+
   &__copy {
     @include type-style('body-long-01');
     color: $gray-60;
@@ -40,6 +58,11 @@
       max-width: 4 * $column-size-small;
       margin-bottom: $layout-03;
     }
+  }
+
+  &__link {
+    color: $purple-70;
+    text-decoration: none;
   }
 
   &__util {

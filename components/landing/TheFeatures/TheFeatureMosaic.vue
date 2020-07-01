@@ -8,7 +8,7 @@
         "
       >
         <div class="feature-mosaic__feature-copy">
-          <dt class="feature-mosaic__feature-title">
+          <dt class="landing-page__subtitle">
             Access to circuits
           </dt>
           <dd class="feature-mosaic__feature-description">
@@ -36,7 +36,7 @@
             feature-mosaic__hardware-copy
           "
         >
-          <dt class="feature-mosaic__feature-title">
+          <dt class="landing-page__subtitle">
             Hardware Access
           </dt>
           <dd class="feature-mosaic__feature-description">
@@ -52,7 +52,7 @@
             feature-mosaic__algorithms-copy
           "
         >
-          <dt class="feature-mosaic__feature-title">
+          <dt class="landing-page__subtitle">
             Quantum Algorithms
           </dt>
           <dd class="feature-mosaic__feature-description">
@@ -74,7 +74,7 @@
         "
       >
         <div class="feature-mosaic__feature-copy">
-          <dt class="feature-mosaic__feature-title">
+          <dt class="landing-page__subtitle">
             Noise Mitigation
           </dt>
           <dd class="feature-mosaic__feature-description">
@@ -96,6 +96,7 @@ export default class extends Vue {}
 </script>
 
 <style lang="scss" scoped>
+@import '~/assets/scss/blocks/landing-page.scss';
 @import '~carbon-components/scss/globals/scss/typography';
 
 .feature-mosaic {
@@ -140,24 +141,6 @@ export default class extends Vue {}
       @include mq($until: medium) {
         margin-bottom: 0;
       }
-    }
-  }
-
-  &__feature-title {
-    @include type-style('productive-heading-02');
-    color: $cool-gray-60;
-    margin-bottom: $spacing-05;
-
-    @include mq($from: medium, $until: large) {
-      @include type-style('productive-heading-01');
-      max-width: 4 * $column-size-medium;
-      margin-bottom: $spacing-03;
-    }
-
-    @include mq($until: medium) {
-      @include type-style('productive-heading-01');
-      max-width: 4 * $column-size-small;
-      margin-bottom: $spacing-03;
     }
   }
 
