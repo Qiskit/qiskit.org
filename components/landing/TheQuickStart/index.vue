@@ -36,12 +36,7 @@ export default class extends Vue {}
 
 .quick-start {
   @include contained();
-
   color: $gray-60;
-
-  @include mq($until: large) {
-    display: none;
-  }
 
   &__header {
     @include type-style('expressive-heading-05');
@@ -52,6 +47,10 @@ export default class extends Vue {}
   &__sections {
     display: flex;
     flex-direction: row;
+
+    @include mq($until: medium) {
+      flex-direction: column;
+    }
   }
 }
 </style>

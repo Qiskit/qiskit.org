@@ -61,8 +61,17 @@
   }
 
   &__link {
+    @include type-style('body-long-01');
     color: $purple-70;
     text-decoration: none;
+
+    @include mq($from: medium, $until: large) {
+      @include type-style('label-01');
+    }
+
+    @include mq($until: medium) {
+      @include type-style('label-01');
+    }
   }
 
   &__util {

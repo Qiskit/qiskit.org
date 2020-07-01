@@ -107,7 +107,7 @@ export default class extends Vue {
   }
 
   QISKIT_INSTALL = {
-    stable: 'Stable (Recommended)',
+    stable: 'Stable (recommended)',
     master: 'Unstable'
   }
 
@@ -193,37 +193,42 @@ export default class extends Vue {
 
 .start-locally {
   width: 63%;
-  padding-top: $spacing-07;
   padding-right: $spacing-07;
 
-  &__title {
-    @include type-style('productive-heading-02');
-    color: $cool-gray-80;
-    margin-bottom: $spacing-05;
-  }
-
-  &__description {
-    @include type-style('body-long-01');
-    max-width: 7 * $column-size-large;
-    margin-bottom: $spacing-07;
+  @include mq($until: medium) {
+    width: auto;
+    padding-right: 0;
+    margin-bottom: $layout-01;
   }
 
   &__options {
     display: flex;
     flex-direction: column;
     row-gap: $spacing-07;
+
+    @include mq($until: large) {
+      row-gap: $spacing-05;
+    }
   }
 
   &__options-group {
     display: grid;
     column-gap: $spacing-07;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+
+    @include mq($until: large) {
+      column-gap: $spacing-05;
+    }
   }
 
   &__option-title {
     @include type-style('body-long-01');
     color: $cool-gray-80;
     margin-bottom: $spacing-03;
+
+    @include mq($until: large) {
+      @include type-style('label-01');
+    }
   }
 
   &__option {
@@ -232,6 +237,11 @@ export default class extends Vue {
     max-width: 100%;
     color: $gray-60;
     padding-left: $spacing-07;
+
+    @include mq($until: large) {
+      @include type-style('label-01');
+      padding-left: $spacing-05;
+    }
 
     &_active {
       border-color: $purple-70;
@@ -243,6 +253,8 @@ export default class extends Vue {
 </style>
 
 <style lang="scss">
+@import '~carbon-components/scss/globals/scss/typography';
+
 .start-locally {
   /**
    * TODO: Review if there is some mechanism, inside the Carbon Themes
@@ -267,6 +279,12 @@ export default class extends Vue {
         // To match default light theme UI hover, which is not among the Carbon
         // palette. 🤦
         background-color: #e5e5e5;
+      }
+    }
+
+    & .bx--accordion__title {
+      @include mq($until: large) {
+        @include type-style('label-01');
       }
     }
 
