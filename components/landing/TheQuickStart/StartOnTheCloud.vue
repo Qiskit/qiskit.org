@@ -15,7 +15,6 @@
         <ArrowRight16 />
       </AppLink>
     </div>
-    <img class="start-on-the-cloud__grid" src="/images/white-grid.svg">
   </section>
 </template>
 
@@ -37,9 +36,12 @@ export default class extends Vue {
 @import '~carbon-components/scss/globals/scss/typography';
 
 .start-on-the-cloud {
-  position: relative;
   width: 37%;
   background-color: $cool-gray-10;
+  background-image: url('/images/grid/grid-inverse.svg');
+  background-position: bottom right;
+  background-size: 36rem auto;
+  background-repeat: no-repeat;
 
   &__content {
     padding: $spacing-07;
@@ -68,11 +70,6 @@ export default class extends Vue {
     :first-child {
       margin-right: $spacing-06;
     }
-  }
-
-  &__grid {
-    position: absolute;
-    bottom: 0;
   }
 }
 </style>
