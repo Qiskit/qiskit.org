@@ -7,7 +7,7 @@
       :version="qiskitVersion"
     />
     <TheFeatures />
-    <QuickStart />
+    <TheQuickStart />
     <article class="landing-page__section">
       <h2 class="landing-page__header">
         Learn with Qiskit
@@ -24,14 +24,14 @@ import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import TheHeroMoment from '~/components/landing/TheHeroMoment/index.vue'
 import TheFeatures from '~/components/landing/TheFeatures/index.vue'
-import QuickStart from '~/components/landing/QuickStart/index.vue'
+import TheQuickStart from '~/components/landing/TheQuickStart/index.vue'
 import LearnCard from '~/components/landing/LearnCard.vue'
 
 @Component({
   components: {
     TheHeroMoment,
     TheFeatures,
-    QuickStart,
+    TheQuickStart,
     LearnCard
   },
   head () {
