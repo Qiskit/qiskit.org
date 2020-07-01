@@ -35,7 +35,6 @@ export default class extends Vue { }
 </script>
 
 <style lang="scss">
-@import '~/assets/scss/element.scss';
 @import '~carbon-components/scss/globals/scss/typography';
 
 .the-features {

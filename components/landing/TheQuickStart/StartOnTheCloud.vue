@@ -1,14 +1,14 @@
 <template>
   <section class="start-on-the-cloud">
     <div class="start-on-the-cloud__content">
-      <h3 class="start-on-the-cloud__title">
+      <h3 class="landing-page__subtitle">
         Start on the cloud
       </h3>
-      <p class="start-on-the-cloud__description">
+      <p class="landing-page__copy">
         IBM's hosted Jupyter Notebooks let you get started without installing anything.
       </p>
       <AppLink
-        class="start-on-the-cloud__link"
+        class="landing-page__link start-on-the-cloud__link"
         :url="ibmQExperienceLink.url"
       >
         <span>{{ ibmQExperienceLink.label }}</span>
@@ -33,6 +33,7 @@ export default class extends Vue {
 </script>
 
 <style lang="scss" scoped>
+@import '~/assets/scss/blocks/landing-page.scss';
 @import '~carbon-components/scss/globals/scss/typography';
 
 .start-on-the-cloud {
@@ -47,21 +48,8 @@ export default class extends Vue {
     padding: $spacing-07;
   }
 
-  &__title {
-    @include type-style('productive-heading-02');
-    color: $cool-gray-80;
-    margin-bottom: $spacing-05;
-  }
-
-  &__description {
-    @include type-style('body-long-01');
-    margin-bottom: $spacing-07;
-  }
-
   &__link {
     margin-top: $layout-05;
-    text-decoration: none;
-    color: $purple-70;
     fill: $purple-70;
     display: flex;
 
