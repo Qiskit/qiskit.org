@@ -1,9 +1,9 @@
 <template>
   <article class="quick-start landing-page__util_vertical-spacer">
-    <h2 class="quick-start__header">
+    <h2 class="landing-page__title">
       Quick Start
     </h2>
-    <p class="landing-page__copy">
+    <p class="landing-page__copy landing-page__copy_outstanding">
       When you are looking to start Qiskit you have two options. You can start
       Qiskit locally which is much more secure and private, or you get started
       online where you can immediately jump in and start working.
