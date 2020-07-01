@@ -176,15 +176,6 @@ type FooterStructure = Array<FooterSection>
 // Each entry represents a column
 const FOOTER_ELEMENTS: FooterStructure = [
   {
-    title: 'Overview',
-    elements: [
-      QISKIT_ELEMENTS.terra,
-      QISKIT_ELEMENTS.aqua,
-      QISKIT_ELEMENTS.aer,
-      QISKIT_ELEMENTS.ignis
-    ]
-  },
-  {
     title: 'Learn',
     elements: [
       QISKIT_EDUCATION.textbook,
