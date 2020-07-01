@@ -1,7 +1,7 @@
 <template>
   <article class="learn-card">
     <div class="learn-card__content">
-      <p class="learn-card__copy">
+      <p class="landing-page__copy">
         Gain access to a free, digital textbook to study the concepts of quantum
         computing using Qiskit.
       </p>
@@ -10,7 +10,7 @@
         url="/education"
         :segment="{ action: 'Get Learning' }"
       >
-        <span class="learn-card__copy">Get Learning</span>
+        <span>Get Learning</span>
         <ArrowRight16 />
       </AppLink>
     </div>
@@ -58,17 +58,9 @@ export default class extends Vue {}
     }
   }
 
-  &__copy {
-    @include type-style('body-long-01');
-
-    @include mq($until: large) {
-      @include type-style('label-01');
-    }
-  }
-
   &__link {
     margin-bottom: $spacing-04;
-    fill: $purple-70;
+    fill: currentColor;
     display: flex;
     align-items: center;
 
