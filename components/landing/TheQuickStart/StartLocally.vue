@@ -11,14 +11,13 @@
       >
         Python 3.5+
       </AppLink>.
-      Although it isn't required, we recommend using
+      Although it isn't required, we recommend using a
       <AppLink
         class="start-locally__link"
         url="https://www.anaconda.com/products/individual"
       >
-        virtual environments with Anaconda
+        virtual environment with Anaconda.
       </AppLink>
-      to cleanly separate Qiskit from other applications and improve your experience.
     </p>
     <div class="start-locally__options">
       <div
@@ -28,7 +27,7 @@
         <h4 class="start-locally__option-title">
           {{ choicesGroup.title }}
         </h4>
-        <cv-button-set :class="`start-locally__options-group`">
+        <cv-button-set class="start-locally__options-group">
           <cv-button
             v-for="option in choicesGroup.options"
             :key="option"
@@ -42,6 +41,19 @@
         </cv-button-set>
       </div>
       <div>
+        <cv-accordion
+          v-if="getPrerequisitesToInstallQiskit ()"
+          class="start-locally__prerequisites-section"
+        >
+          <cv-accordion-item>
+            <template #title>
+              Building Qiskit requires a C++ compiler and development headers
+            </template>
+            <template #content>
+              <component :is="getPrerequisitesToInstallQiskit ()" />
+            </template>
+          </cv-accordion-item>
+        </cv-accordion>
         <h4 class="start-locally__option-title">
           Terminal
         </h4>
@@ -57,6 +69,9 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
+import PrerequisitesForLinux from '~/components/landing/TheQuickStart/PrerequisitesForLinux.vue'
+import PrerequisitesForMac from '~/components/landing/TheQuickStart/PrerequisitesForMac.vue'
+import PrerequisitesForWindows from '~/components/landing/TheQuickStart/PrerequisitesForWindows.vue'
 import SyntaxHighlight from '~/components/ui/SyntaxHighlight.vue'
 import AppLink from '~/components/ui/AppLink.vue'
 
@@ -69,7 +84,13 @@ type ChoicesGroup = {
 type InstallChoices = Array<ChoicesGroup>
 
 @Component({
-  components: { SyntaxHighlight, AppLink },
+  components: {
+    PrerequisitesForLinux,
+    PrerequisitesForMac,
+    PrerequisitesForWindows,
+    SyntaxHighlight,
+    AppLink
+  },
   head () {
     return {
       link: [
@@ -114,35 +135,22 @@ export default class extends Vue {
   codeToInstallStableOnMac = 'pip install qiskit'
   codeToInstallStableOnWindows = 'pip install qiskit'
 
-  codeToInstallMasterOnLinux = `# Pre-Requisites
-# Install compiler requirements. Building Aer requires a C++ compiler and development headers. If you’re using Fedora or an equivalent Linux distribution, install using: dnf install @development-tools
-# For Ubuntu/Debian install it using: apt-get install build-essential
-# Install OpenBLAS development headers. If you’re using Fedora or an equivalent Linux distribution, install using: dnf install openblas-devel
-# For Ubuntu/Debian install it using: apt-get install libopenblas-dev
+  codeToInstallMasterOnLinux = 'pip install git+https://github.com/Qiskit/qiskit-terra git+https://github.com/Qiskit/qiskit-aer git+https://github.com/Qiskit/qiskit-ignis git+https://github.com/Qiskit/qiskit-aqua git+https://github.com/Qiskit/qiskit-ibmq-provider'
+  codeToInstallMasterOnMac = 'pip install git+https://github.com/Qiskit/qiskit-terra git+https://github.com/Qiskit/qiskit-aer git+https://github.com/Qiskit/qiskit-ignis git+https://github.com/Qiskit/qiskit-aqua git+https://github.com/Qiskit/qiskit-ibmq-provider'
+  codeToInstallMasterOnWindows = 'pip install git+https://github.com/Qiskit/qiskit-terra git+https://github.com/Qiskit/qiskit-aer git+https://github.com/Qiskit/qiskit-ignis git+https://github.com/Qiskit/qiskit-aqua git+https://github.com/Qiskit/qiskit-ibmq-provider'
 
-pip install
-git+https://github.com/Qiskit/qiskit-terra git+https://github.com/Qiskit/qiskit-aer git+https://github.com/Qiskit/qiskit-ignis git+https://github.com/Qiskit/qiskit-aqua git+https://github.com/Qiskit/qiskit-ibmq-provider`
-
-  codeToInstallMasterOnMac = `# Install the Clang compiler by installing XCode. Check if you have XCode and Clang installed by opening a terminal window and entering the following.
-clang --version
-
-# Install XCode and Clang by using the following command:
-xcode-select --install
-
-# To use the Clang compiler on macOS, you need to install an extra library for supporting OpenMP. You can use brew to install this and other dependencies.
-brew install libomp
-
-# Then install a BLAS implementation; OpenBLAS is the default choice.
-brew install openblas
-
-pip install
-git+https://github.com/Qiskit/qiskit-terra git+https://github.com/Qiskit/qiskit-aer git+https://github.com/Qiskit/qiskit-ignis git+https://github.com/Qiskit/qiskit-aqua git+https://github.com/Qiskit/qiskit-ibmq-provider`
-
-  codeToInstallMasterOnWindows = `# On Windows, it is easiest to install the Visual C++ compiler from the Build Tools for Visual Studio 2017. You can instead install Visual Studio version 2015 or 2017, making sure to select the options for installing the C++ compiler.
-# On Windows you need to use Anaconda3 or Miniconda3 to install all the dependencies.
-
-pip install
-git+https://github.com/Qiskit/qiskit-terra git+https://github.com/Qiskit/qiskit-aer git+https://github.com/Qiskit/qiskit-ignis git+https://github.com/Qiskit/qiskit-aqua git+https://github.com/Qiskit/qiskit-ibmq-provider`
+  prerequisites = {
+    [this.QISKIT_INSTALL.stable]: {
+      [this.OPERATING_SYSTEMS.linux]: null,
+      [this.OPERATING_SYSTEMS.mac]: null,
+      [this.OPERATING_SYSTEMS.windows]: null
+    },
+    [this.QISKIT_INSTALL.master]: {
+      [this.OPERATING_SYSTEMS.linux]: 'PrerequisitesForLinux',
+      [this.OPERATING_SYSTEMS.mac]: 'PrerequisitesForMac',
+      [this.OPERATING_SYSTEMS.windows]: 'PrerequisitesForWindows'
+    }
+  }
 
   codeToInstall = {
     [this.QISKIT_INSTALL.stable]: {
@@ -155,6 +163,12 @@ git+https://github.com/Qiskit/qiskit-terra git+https://github.com/Qiskit/qiskit-
       [this.OPERATING_SYSTEMS.mac]: this.codeToInstallMasterOnMac,
       [this.OPERATING_SYSTEMS.windows]: this.codeToInstallMasterOnWindows
     }
+  }
+
+  getPrerequisitesToInstallQiskit () : string | null {
+    const { 'qiskit-install': qiskitInstall, os } = this.selectedOptions
+
+    return this.prerequisites[qiskitInstall][os]
   }
 
   getCodeToInstallQiskit () : string {
@@ -195,7 +209,7 @@ git+https://github.com/Qiskit/qiskit-terra git+https://github.com/Qiskit/qiskit-
 
   &__link {
     text-decoration: none;
-    color: $purple-70;;
+    color: $purple-70;
   }
 
   &__options {
@@ -227,6 +241,41 @@ git+https://github.com/Qiskit/qiskit-terra git+https://github.com/Qiskit/qiskit-
       border-color: $purple-70;
       border-width: 2px;
       color: $purple-70;
+    }
+  }
+}
+</style>
+
+<style lang="scss">
+.start-locally {
+  /**
+   * TODO: Review if there is some mechanism, inside the Carbon Themes
+   * framework, for applying a different theme to an specific component (#703).
+   *
+   * If there is not, we need some alternative way of overriding component
+   * internal CSS. The following approach takes advantage of BEM methodology
+   * and CSS specificity to override the internal CSS.
+   */
+  &__prerequisites-section {
+    margin-bottom: $spacing-05;
+
+    & .bx--accordion__item {
+      border-bottom: none;
+      border-top-color: $gray-20;
+    }
+
+    & .bx--accordion__heading {
+      color: $gray-100;
+
+      &:hover::before {
+        // To match default light theme UI hover, which is not among the Carbon
+        // palette. 🤦
+        background-color: #e5e5e5;
+      }
+    }
+
+    & .bx--accordion__arrow {
+      fill: currentColor;
     }
   }
 }
