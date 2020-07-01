@@ -4,7 +4,7 @@
       Start locally
     </h3>
     <p class="landing-page__copy">
-      To install Qiskit locally you will need
+      To install Qiskit locally, you will need
       <AppLink
         class="landing-page__link"
         url="https://www.python.org/downloads/"
