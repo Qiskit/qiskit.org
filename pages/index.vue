@@ -1,9 +1,6 @@
 <template>
   <main class="element landing-page">
-    <TheHeroMoment
-      class="landing-page__hero-moment"
-      :version="qiskitVersion"
-    />
+    <TheHeroMoment :version="qiskitVersion" />
     <TheFeatures />
     <TheQuickStart />
     <TheLearnSection />
