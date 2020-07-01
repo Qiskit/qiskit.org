@@ -59,9 +59,7 @@ export default class extends Vue {
   }
 
   &__link {
-    margin-top: $spacing-04 + $spacing-07; /* To align it with the text of the
-      first options row of the Install Locally section. */
-    margin-bottom: $spacing-04;
+    margin-top: $layout-05;
     text-decoration: none;
     color: $purple-70;
     fill: $purple-70;
