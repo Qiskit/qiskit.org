@@ -13,8 +13,8 @@
           </dt>
           <dd class="feature-mosaic__feature-description">
             Access a rich set of well-studied circuits, which can be used as
-            benchmarks, building blocks in more complex circuits, or as a tool to
-            explore quantum computational advantage.
+            benchmarks, building blocks in more complex circuits, or as a tool
+            to explore quantum computational advantage.
           </dd>
         </div>
       </div>
@@ -41,7 +41,7 @@
           </dt>
           <dd class="feature-mosaic__feature-description">
             Execute code on multiple quantum hardware architectures, from
-            superconducting to trapped-ions.
+            superconductivity to trapped-ions.
           </dd>
         </div>
       </div>
@@ -79,7 +79,7 @@
           </dt>
           <dd class="feature-mosaic__feature-description">
             Study the impact of noise using built in modules such as quantum
-            hardware verification, noise characterization, and error mitigation.
+            hardware verification, noise characterization, and error correction.
           </dd>
         </div>
       </div>
