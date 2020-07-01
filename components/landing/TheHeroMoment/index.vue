@@ -50,8 +50,14 @@ export default class extends Vue {
   overflow: hidden;
   padding-top: $layout-05;
   // In Figma, the height is not enforced but the background is always
-  // visible completely so we do it in the CSS.
-  height: 56rem;
+  // visible completely so we do it in the CSS. A small correction is needed
+  // to be able of displaying the bottom lines of the grid.
+  height: calc(56rem + 2px);
+
+  @include mq($until: large) {
+    // To adjust to the size of the smaller grid.
+    height: calc(#{56rem * 40 / 64} + 2px);
+  }
 
   &__container {
     @include contained();
