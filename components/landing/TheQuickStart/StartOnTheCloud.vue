@@ -2,10 +2,11 @@
   <section class="start-on-the-cloud">
     <div class="start-on-the-cloud__content">
       <h3 class="landing-page__subtitle">
-        Start on the cloud
+        Start Online
       </h3>
       <p class="landing-page__copy">
-        IBM's hosted Jupyter Notebooks let you get started without installing anything.
+        Starting on the cloud will enable you to begin  without installing
+        anything.
       </p>
       <AppLink
         class="landing-page__link start-on-the-cloud__link"
