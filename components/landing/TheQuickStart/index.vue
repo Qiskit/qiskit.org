@@ -3,7 +3,7 @@
     <h2 class="quick-start__header">
       Quick Start
     </h2>
-    <p class="quick-start__description">
+    <p class="landing-page__copy">
       When you are looking to start with Qiskit you have two options. You can get started
       locally and use your favorite development environment, or you can get started online
       with IBM's hosted Jupyter Notebooks.
@@ -31,6 +31,7 @@ export default class extends Vue {}
 </script>
 
 <style lang="scss" scoped>
+@import '~/assets/scss/blocks/landing-page.scss';
 @import '~carbon-components/scss/globals/scss/typography';
 
 .quick-start {
@@ -46,12 +47,6 @@ export default class extends Vue {}
     @include type-style('expressive-heading-05');
     color: $cool-gray-80;
     margin-bottom: $layout-03;
-  }
-
-  &__description {
-    @include type-style('body-long-01');
-    max-width: 7 * $column-size-large;
-    margin-bottom: $layout-01;
   }
 
   &__sections {
