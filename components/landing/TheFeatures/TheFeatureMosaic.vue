@@ -184,7 +184,7 @@ export default class extends Vue {}
     grid-area: a;
 
     @include mq($until: medium) {
-      background-size: auto 8rem;
+      background-image: none;
       padding-bottom: 6rem;
     }
   }
