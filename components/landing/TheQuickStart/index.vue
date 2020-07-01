@@ -1,5 +1,5 @@
 <template>
-  <article class="quick-start">
+  <article class="quick-start landing-page__util_vertical-spacer">
     <h2 class="quick-start__header">
       Quick Start
     </h2>
@@ -34,6 +34,8 @@ export default class extends Vue {}
 @import '~carbon-components/scss/globals/scss/typography';
 
 .quick-start {
+  @include contained();
+
   color: $gray-60;
 
   @include mq($until: large) {
