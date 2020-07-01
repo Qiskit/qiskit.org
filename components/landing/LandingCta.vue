@@ -5,7 +5,7 @@
     v-bind="$attrs"
   >
     <slot />
-    <ArrowRight20 class="landing-cta__icon" />
+    <ArrowRight16 class="landing-cta__icon" />
   </AppLink>
 </template>
 
@@ -27,13 +27,7 @@ export default class extends Vue {
 
 .landing-cta {
   @include type-style('body-short-01');
-  position: relative;
-  width: 18rem;
-  max-width: 100%;
-  // From the Carbon component <cv-button>
-  padding: calc(.875rem - 3px) 3.75rem calc(.875rem - 3px) 0.75rem;
   text-decoration: none;
-  align-self: flex-start;
   display: inline-flex;
   flex-direction: row;
   align-items: center;
@@ -41,18 +35,21 @@ export default class extends Vue {
   &_kind_primary {
     color: $white;
     background-color: $purple-70;
-    min-height: 5rem;
+    padding: $spacing-07;
+    width: 15rem;
 
     &:hover {
       background-color: $purple-90;
     }
 
     @include mq($from: medium, $until: large) {
-      min-height: 3rem;
+      padding: $spacing-05 $spacing-07;
+      width: 13rem;
     }
 
     @include mq($until: medium) {
-      min-height: 2rem;
+      padding: $spacing-03 $spacing-05;
+      width: 11rem;
     }
   }
 
@@ -72,8 +69,7 @@ export default class extends Vue {
   }
 
   &__icon {
-    position: absolute;
-    right: 1rem;
+    margin-left: $spacing-06;
     fill: currentColor;
   }
 }
