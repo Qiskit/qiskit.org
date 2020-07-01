@@ -39,7 +39,7 @@ export default class extends Vue { }
 @import '~carbon-components/scss/globals/scss/typography';
 
 .the-features {
-  @include landing-page-grid('/images/grid/grid-mosaic.svg', 112rem, 48rem, 16rem);
+  @include responsive-grid-bg-strip('/images/grid/grid-mosaic.svg', 112rem, auto, 16rem);
 
   &__container {
     @include contained();
