@@ -75,9 +75,13 @@ export default class extends Vue {
     &_white-design {
       background-color: $cool-gray-10;
       color: $gray-60;
-      padding-top: $spacing-05;
-      padding-left: $spacing-07;
-      padding-bottom: $spacing-09 + $spacing-06;
+      padding: $spacing-05 $spacing-07;
+      min-height: 8rem;
+
+      @include mq($until: large) {
+        @include type-style('code-01');
+        padding: $spacing-03;
+      }
     }
   }
 }
