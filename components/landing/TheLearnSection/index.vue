@@ -28,10 +28,9 @@ export default class extends Vue {}
 @import '~/assets/scss/blocks/landing-page.scss';
 
 .the-learn-section {
-  background-image: url('/images/grid/grid-left.svg');
+  @include responsive-grid-bg('/images/grid/grid-left.svg', 36rem);
   background-repeat: no-repeat;
   background-position: left bottom -2px;
-  background-size: 36rem auto;
 
   &__container {
     @include contained();
