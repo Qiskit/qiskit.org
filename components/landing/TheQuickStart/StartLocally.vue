@@ -4,12 +4,19 @@
       Start locally
     </h3>
     <p class="start-locally__description">
-      Although it isn’t required we recommend using
+      To install Qiskit locally you will need
       <AppLink
         class="start-locally__link"
-        :url="downloadAnacondaLink.url"
+        url="https://www.python.org/downloads/"
       >
-        {{ downloadAnacondaLink.label }}
+        Python 3.5+
+      </AppLink>.
+      Although it isn't required, we recommend using
+      <AppLink
+        class="start-locally__link"
+        url="https://www.anaconda.com/products/individual"
+      >
+        virtual environments with Anaconda
       </AppLink>
       to cleanly separate Qiskit from other applications and improve your experience.
     </p>
@@ -52,7 +59,6 @@ import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 import SyntaxHighlight from '~/components/ui/SyntaxHighlight.vue'
 import AppLink from '~/components/ui/AppLink.vue'
-import { DOWNLOAD_ANACONDA_LINK } from '~/constants/appLinks'
 
 type ChoicesGroup = {
   title: string,
@@ -73,8 +79,6 @@ type InstallChoices = Array<ChoicesGroup>
   }
 })
 export default class extends Vue {
-  downloadAnacondaLink = DOWNLOAD_ANACONDA_LINK
-
   OPERATING_SYSTEMS = {
     linux: 'Linux',
     mac: 'Mac',
@@ -88,11 +92,6 @@ export default class extends Vue {
 
   installChoices: InstallChoices = [
     {
-      title: 'Languages',
-      id: 'languages',
-      options: ['Python 3.5+']
-    },
-    {
       title: 'Qiskit Install',
       id: 'qiskit-install',
       options: Object.values(this.QISKIT_INSTALL)
@@ -105,7 +104,6 @@ export default class extends Vue {
   ]
 
   selectedOptions = {
-    languages: 'Python 3.5+',
     'qiskit-install': this.QISKIT_INSTALL.stable,
     os: this.OPERATING_SYSTEMS.mac
   }
