@@ -42,7 +42,7 @@ export default class extends Vue {
 
   width: 37%;
   background-color: $cool-gray-10;
-  background-position: bottom right;
+  background-position: bottom left;
   background-repeat: no-repeat;
 
   @include mq($until: medium) {
