@@ -102,21 +102,22 @@ const SOCIAL_MEDIA: LabeledLinks = {
 const COMMUNITY_SUB_LINKS: LabeledLinks = {
   events: {
     label: 'Events',
-    url: '/events'
-  },
-  education: {
-    label: 'Education',
-    url: '/education'
+    url: '/events',
+    segment: {
+      action: 'Events'
+    }
   },
   advocates: {
     label: 'Advocates',
-    url: '/advocates'
+    url: '/advocates',
+    segment: {
+      action: 'Advocates'
+    }
   }
 }
 
 const ORDERED_COMMUNITY_SUB_LINKS: Array<NavLink> = [
   COMMUNITY_SUB_LINKS.events,
-  COMMUNITY_SUB_LINKS.education,
   COMMUNITY_SUB_LINKS.advocates
 ]
 
@@ -136,7 +137,7 @@ const QISKIT_ADVOCATES: LabeledLinks = {
 
 const LEARN_LINK: NavLink = {
   label: 'Learn',
-  url: '/education',
+  url: '/learn',
   segment: {
     action: 'Learn'
   }
