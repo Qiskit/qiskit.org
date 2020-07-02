@@ -41,7 +41,7 @@
           </dt>
           <dd class="feature-mosaic__feature-description">
             Execute code on multiple quantum hardware architectures, from
-            superconductivity to trapped-ions.
+            superconducting qubits to trapped-ions.
           </dd>
         </div>
       </div>
