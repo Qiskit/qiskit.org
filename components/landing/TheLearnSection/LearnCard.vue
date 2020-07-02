@@ -7,7 +7,7 @@
       </p>
       <AppLink
         class="landing-page__link learn-card__link"
-        url="/education"
+        url="/learn"
         :segment="{ action: 'Get Learning' }"
       >
         <span>Get Learning</span>
