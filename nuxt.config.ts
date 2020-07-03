@@ -70,6 +70,13 @@ const config: Configuration = {
   ],
 
   /*
+  ** Content
+  */
+  content: {
+    dir: 'new-content'
+  },
+
+  /*
   ** Plugins to load before mounting the App.
   */
   plugins: [
@@ -89,7 +96,8 @@ const config: Configuration = {
   */
   modules: [
     '@nuxtjs/style-resources',
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxt/content'
   ],
 
   styleResources: {
