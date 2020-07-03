@@ -44,7 +44,7 @@ export default class extends Vue {
 @import '~carbon-components/scss/globals/scss/typography';
 
 .the-hero-moment {
-  @include responsive-grid-bg-strip('/images/grid/grid-hero.svg', 112rem);
+  @include responsive-grid-bg-strip('/images/grid/grid-hero.svg', auto, 56rem);
 
   position: relative;
   overflow: hidden;
