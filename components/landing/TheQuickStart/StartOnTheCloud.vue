@@ -38,7 +38,7 @@ export default class extends Vue {
 @import '~carbon-components/scss/globals/scss/typography';
 
 .start-on-the-cloud {
-  @include responsive-grid-bg('/images/grid/grid-inverse.svg', 36rem);
+  @include responsive-grid-bg('/images/grid/grid-white.svg', 36rem);
 
   width: 37%;
   background-color: $cool-gray-10;

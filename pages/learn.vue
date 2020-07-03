@@ -1,99 +1,75 @@
 <template>
-  <div class="event-page">
-    <header class="header-video">
-      <client-only>
-        <video
-          v-if="isDesktop"
-          ref="video"
-          class="header-video__video"
-          loop
-          preload="none"
-          playsinline
-        >
-          <source src="@/assets/videos/qiskit-camp-africa-2019.mp4" type="video/mp4">
-          <source src="@/assets/videos/qiskit-camp-africa-2019.mp4" type="video/ogg">
-          Your browser does not support HTML5 video.
-        </video>
-      </client-only>
-      <div class="event-page__title">
-        <h1 class="wrapper">
-          Qiskit Events
+  <div class="learn-page">
+    <header class="the-learn-header">
+      <div class="the-learn-header__container">
+        <h1 class="the-learn-header__title">
+          Start your path towards<br>
+          learning
+          <span class="the-learn-header__relevant-word">
+            Qiskit
+          </span>
         </h1>
       </div>
     </header>
-    <div class="wrapper">
-      <div class="event-page__filters-time">
-        <client-only>
-          <cv-tabs aria-label="navigation tab label" @tab-selected="selectTab">
-            <cv-tab id="tab-1" label="Upcoming" />
-            <cv-tab id="tab-2" label="Past" />
-          </cv-tabs>
-        </client-only>
-      </div>
-      <div class="event-page__event-index">
-        <div class="event-page__filters-others">
-          <fieldset class="bx--fieldset">
-            <legend class="bx--label">
-              Region
-            </legend>
-            <div class="event-page__chrome-columns-fix">
-              <client-only>
-                <cv-checkbox
-                  v-for="region in regions"
-                  :key="region"
-                  :value="region"
-                  :label="region"
-                  :checked="isFilterChecked('regionFilters', region)"
-                  :aria-checked="`${isFilterChecked('regionFilters', region)}`"
-                  @change="updateFilter('regionFilters', region, $event)"
-                />
-              </client-only>
-            </div>
-          </fieldset>
-          <fieldset class="bx--fieldset">
-            <legend class="bx--label">
-              Type
-            </legend>
-            <div class="event-page__chrome-columns-fix">
-              <client-only>
-                <cv-checkbox
-                  v-for="type in types"
-                  :key="type"
-                  :value="type"
-                  :label="type"
-                  :checked="isFilterChecked('typeFilters', type)"
-                  :aria-checked="`${isFilterChecked('typeFilters', type)}`"
-                  @change="updateFilter('typeFilters', type, $event)"
-                />
-              </client-only>
-            </div>
-          </fieldset>
-        </div>
-        <div v-if="hasEvents" class="event-page__results">
-          <EventCard
-            v-for="event in filteredEvents"
-            :key="`${event.place}-${event.date}`"
-            :type="formatType(event.types)"
-            :title="event.title"
-            :image="event.image"
-            :location="event.location"
-            :date="event.date"
-            :to="event.to"
-          />
-        </div>
-        <div v-else class="event-page__results">
-          <p class="event-page__no-events-msg">
-            Nothing here yet -
-            <AppLink
-              class="experiment-header__source-code-link"
-              v-bind="eventRequestLink"
-            >
-              {{ eventRequestLink.label }}
-            </AppLink>
+    <section class="the-learning-resources-list">
+      <client-only>
+        <div class="the-learning-resources-list__container">
+          <h2 class="landing-page__title">
+            Learning resources
+          </h2>
+          <p
+            class="
+              landing-page__copy
+              landing-page__copy_outstanding
+            "
+          >
+            The below are designed and created by the Qiskit team. However, we
+            recommend a familiar with linear algebra and Python from these
+            trusted resources.
           </p>
+          <cv-tabs class="the-learning-resources-list__filter-level" aria-label="navigation tab label" @tab-selected="selectTab">
+            <cv-tab id="tab-1" label="All resources" />
+            <cv-tab id="tab-2" label="beginner resources" />
+            <cv-tab id="tab-3" label="advanced resources" />
+          </cv-tabs>
+          <div class="the-learning-resources-list__layout">
+            <fieldset class="the-learning-resources-list__filter-time">
+              <legend class="the-learning-resources-list__filter-time-label">
+                Time to spend learning
+              </legend>
+              <client-only>
+                <cv-radio-group vertical>
+                  <cv-radio-button
+                    v-for="region in regions"
+                    :key="region"
+                    name="time"
+                    :value="region"
+                    :label="region"
+                    :checked="isFilterChecked('regionFilters', region)"
+                    :aria-checked="`${isFilterChecked('regionFilters', region)}`"
+                    @change="updateFilter('regionFilters', region, $event)"
+                  />
+                </cv-radio-group>
+              </client-only>
+            </fieldset>
+            <section class="the-learning-resources-list__results">
+              <template v-if="hasEvents">
+                <LearningResourceCard
+                  v-for="event in filteredEvents"
+                  :key="`${event.place}-${event.date}`"
+                  :type="formatType(event.types)"
+                  :title="event.title"
+                  :image="event.image"
+                  :location="event.location"
+                  :date="event.date"
+                  :to="event.to"
+                />
+              </template>
+            </section>
+          </div>
         </div>
-      </div>
-    </div>
+      </client-only>
+    </section>
   </div>
 </template>
 
@@ -101,7 +77,7 @@
 import { mapGetters, mapActions } from 'vuex'
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
-import EventCard from '~/components/events/EventCard.vue'
+import LearningResourceCard from '~/components/learn/LearningResourceCard.vue'
 import AppLink from '~/components/ui/AppLink.vue'
 import {
   CommunityEvent,
@@ -111,10 +87,8 @@ import {
 import { EVENT_REQUEST_LINK } from '~/constants/appLinks'
 
 @Component({
-  layout: 'carbon',
-
   components: {
-    EventCard,
+    LearningResourceCard,
     AppLink
   },
 
@@ -160,26 +134,6 @@ export default class extends QiskitPage {
     return (this as any).filteredEvents.length !== 0
   }
 
-  autoplayVideo () {
-    if (!this.$refs.video) {
-      return
-    }
-
-    const video = this.$refs.video as HTMLMediaElement
-
-    video.load()
-    video.muted = true
-    video.play()
-  }
-
-  async mounted () {
-    const medium = '42em' // mq.scss medium value
-    this.isDesktop = window.matchMedia(`(min-width: ${medium})`).matches
-
-    await this.$nextTick()
-    this.autoplayVideo()
-  }
-
   isFilterChecked (filter: string, filterValue: string): Array<CommunityEvent> {
     const typeFilters = (this as any).typeFilters
     const regionFilters = (this as any).regionFilters
@@ -211,113 +165,103 @@ export default class extends QiskitPage {
 </script>
 
 <style lang="scss" scoped>
+@import '~/assets/scss/blocks/landing-page.scss';
 @import '~carbon-components/scss/globals/scss/typography';
 
-.event-page {
-  color: $text-01;
+.learn-page {
+  background-color: white;
+}
 
-  &__title {
-    bottom: 0;
-    width: 100%;
-    height: 100%;
+.the-learn-header {
+  @include responsive-grid-bg-strip('/images/grid/grid-hero-learn.svg', auto, 28rem);
+  min-height: 28rem;
+
+  &__container {
+    @include contained();
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    background: linear-gradient(0deg, #262626 0%, #26262600 100%);
-
-    @include mq($from: medium) {
-      position: absolute;
-    }
-
-    h1 {
-      @include type-style('productive-heading-07');
-      padding-left: $layout-01;
-
-      @include mq($until: medium) {
-        @include type-style('productive-heading-06');
-        margin-top: $layout-01;
-      }
-    }
+    justify-content: center;
+    height: 28rem;
   }
 
-  &__event-index {
+  &__title {
+    @include type-style('expressive-heading-05', true);
+    color: $white-text-01;
+  }
+
+  &__relevant-word {
+    font-style: italic;
+    background-color: $purple-70;
+    color: white;
+    padding: $spacing-01 $spacing-03;
+  }
+}
+
+.the-learning-resources-list {
+  @include responsive-grid-bg('/images/grid/grid-left-inverted.svg', 36rem);
+  background-repeat: no-repeat;
+  background-position: left bottom;
+
+  &__container {
+    @include contained();
+  }
+
+  &__layout {
     display: flex;
     justify-content: space-between;
-
-    @include mq($until: medium) {
-      flex-direction: column;
-    }
   }
 
-  &__filters-time {
-    margin-top: $layout-03;
+  &__filter-level {
+    margin-bottom: $layout-04;
   }
 
-  /*
-  It seems to be a problem with Chrome when trying to set the number of columns
-  to 2 inside a fieldset:
-  https://stackoverflow.com/questions/55819846/column-count-does-not-work-within-a-fieldst-in-chrome
-  https://stackoverflow.com/questions/3322891/why-is-chrome-cutting-off-text-in-my-css3-multi-column-layout
-  */
-  &__chrome-columns-fix {
-    @include mq($until: medium) {
-      column-count: 2;
-    }
+  &__filter-time {
+    color: $cool-gray-80;
+  }
 
-    & > * {
-      @include mq($until: medium) {
-        display: block;
-      }
-    }
+  &__filter-time-label {
+    margin-bottom: $layout-01;
   }
 
   &__results {
     width: 75%;
-
-    @include mq($until: medium) {
-      width: 100%;
-    }
-  }
-
-  &__no-events-msg {
-    @include type-style('body-short-02');
-
-    a {
-      color: $purple-30;
-    }
   }
 }
+</style>
 
-.header-video {
-  height: 20rem;
-  position: relative;
-  overflow: hidden;
+<style lang="scss">
+.the-learning-resources-list {
+  &__filter-level {
+    & a.bx--tabs__nav-link {
+      color: $cool-gray-80;
+      border-bottom-color: $cool-gray-20;
 
-  &__video {
-    position: relative;
-    width: 100%;
+      &:focus,
+      &:active {
+        outline: none;
+      }
 
-    @include mq($from: x-large) {
-      top: -60%;
+      &:not(.bx--tabs__nav-item--disabled) {
+        color: $cool-gray-80;
+      }
     }
 
-    @include mq($from: large, $until: x-large) {
-      top: -40%;
-    }
+    & .bx--tabs__nav-item {
+      &:hover:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link,
+      &:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled):not(.bx--tabs__nav-item--selected) .bx--tabs__nav-link:focus,
+      &:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled):not(.bx--tabs__nav-item--selected) a.bx--tabs__nav-link:active,
+      &:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link, .bx--tabs__nav-item--selected:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link:focus {
+        color: $cool-gray-80;
+      }
 
-    @include mq($from: medium, $until: large) {
-      top: -7%;
+      &--selected:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link {
+        border-bottom-color: $purple-70;
+      }
     }
   }
-}
 
-.wrapper {
-  max-width: 1056px;
-  margin: 0 auto;
-  width: 100%;
-
-  & > * {
-    margin: $layout-01;
+  & .bx--radio-button__appearance {
+    border-color: black;
   }
 }
 </style>
