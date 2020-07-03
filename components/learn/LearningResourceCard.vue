@@ -16,10 +16,9 @@
       <p class="landing-page__copy">
         {{ description }}Lipsum
       </p>
-      <AppLink class="landing-page__link" :url="to">
-        <span>{{ ctaLabel }}ss</span>
-        <ArrowRight16 />
-      </AppLink>
+      <AppCta class="landing-page__link" :url="to">
+        {{ ctaLabel }}Movidas
+      </AppCta>
     </div>
   </article>
 </template>
@@ -27,10 +26,10 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-import AppLink from '~/components/ui/AppLink.vue'
+import AppCta from '~/components/ui/AppCta.vue'
 
 @Component({
-  components: { AppLink }
+  components: { AppCta }
 })
 export default class extends Vue {
   @Prop(String) image

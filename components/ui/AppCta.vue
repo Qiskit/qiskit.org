@@ -1,9 +1,10 @@
 <template>
   <AppLink
-    class="cta"
+    class="app-cta landing-page__link"
     v-bind="$attrs"
   >
-    <slot />
+    <div><slot /></div>
+    <ArrowRight16 />
   </AppLink>
 </template>
 
@@ -19,21 +20,17 @@ export default class extends Vue {}
 </script>
 
 <style lang="scss" scoped>
+@import '~/assets/scss/blocks/landing-page.scss';
 @import '~carbon-components/scss/globals/scss/typography';
 
-.cta {
-  display: inline-block;
-  text-decoration: none;
-  border: 2px solid;
-
-  @include type-style('productive-heading-02');
-  padding: $spacing-04 $spacing-05;
-  border-color: $interactive-01;
-  text-transform: uppercase;
-  white-space: nowrap;
-  color: $text-01;
-  background-color: $ui-01;
-
+.app-cta {
+  display: flex;
+  justify-content: start;
+  align-items: center;
   fill: currentColor;
+
+  & :first-child {
+    margin-right: $layout-02;
+  }
 }
 </style>

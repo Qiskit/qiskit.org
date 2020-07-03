@@ -8,13 +8,11 @@
         Starting on the cloud will enable you to begin  without installing
         anything.
       </p>
-      <AppLink
-        class="landing-page__link start-on-the-cloud__link"
+      <AppCta
         :url="ibmQExperienceLink.url"
       >
-        <span>{{ ibmQExperienceLink.label }}</span>
-        <ArrowRight16 />
-      </AppLink>
+        {{ ibmQExperienceLink.label }}
+      </AppCta>
     </div>
   </section>
 </template>
@@ -23,10 +21,10 @@
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 import { IBM_Q_EXPERIENCE } from '~/constants/appLinks'
-import AppLink from '~/components/ui/AppLink.vue'
+import AppCta from '~/components/ui/AppCta.vue'
 
 @Component({
-  components: { AppLink }
+  components: { AppCta }
 })
 export default class extends Vue {
   ibmQExperienceLink = IBM_Q_EXPERIENCE
@@ -56,15 +54,6 @@ export default class extends Vue {
 
     @include mq($until: large) {
       padding: $spacing-05;
-    }
-  }
-
-  &__link {
-    fill: $purple-70;
-    display: flex;
-
-    :first-child {
-      margin-right: $spacing-06;
     }
   }
 }
