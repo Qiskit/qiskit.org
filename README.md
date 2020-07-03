@@ -51,7 +51,7 @@
 - [🚀 Get Up and Running](#-get-up-and-running)
 - [🏭 Content Generation](#-content-generation)
 - [🎚️Other environment flags](#️other-environment-flags)
-  - [Show cookies preferences](#show-cookies-preferences)
+  - [Enable analytics](#enable-analytics)
 - [🧐 Folder Structure](#-folder-structure)
 - [✏️ How to Contribute](#️-how-to-contribute)
 - [🛠 Available Scripts](#-available-scripts)
@@ -116,11 +116,11 @@ GENERATE_CONTENT=1 AIRTABLE_API_KEY=<your airtable api key> npm run dev
 
 ## 🎚️Other environment flags
 
-### Show cookies preferences
+### Enable analytics
 
-In production, a cookies settings dialog can be found for the user to customize
-her privacy settings. In development, it is disabled by default. To enable, set
-the `SHOW_COOKIES_SETTINGS` environment variable.
+In production, the user can authorize us to gather analytics so we can identify
+trends and improve our user experience. In development, analytics are disabled
+by default. To enable, set the `ENABLE_ANALYTICS` environment variable.
 
 ## 🧐 Folder Structure
 

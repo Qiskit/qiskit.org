@@ -12,7 +12,7 @@ import { Configuration } from '@nuxt/types'
 import pkg from './package.json'
 import fetchEvents from './hooks/update-events'
 
-const { NODE_ENV, SHOW_COOKIES_SETTINGS, GENERATE_CONTENT, AIRTABLE_API_KEY } = process.env
+const { NODE_ENV, ENABLE_ANALYTICS, GENERATE_CONTENT, AIRTABLE_API_KEY } = process.env
 
 const IS_PRODUCTION = NODE_ENV === 'production'
 
@@ -70,6 +70,13 @@ const config: Configuration = {
   ],
 
   /*
+  ** Content
+  */
+  content: {
+    dir: 'new-content'
+  },
+
+  /*
   ** Plugins to load before mounting the App.
   */
   plugins: [
@@ -77,24 +84,18 @@ const config: Configuration = {
     '~/plugins/highlight-js.ts',
     '~/plugins/carbon.ts',
     '~/plugins/deep-load.ts',
-    {
-      src: IS_PRODUCTION || SHOW_COOKIES_SETTINGS
-        ? '~/plugins/hotjar.ts'
-        : '',
-      mode: 'client'
-    },
-    {
-      src: IS_PRODUCTION || SHOW_COOKIES_SETTINGS
-        ? '~/plugins/segment-analytics.ts'
-        : '',
-      mode: 'client'
-    }
+    { src: '~/plugins/hotjar.ts', mode: 'client' },
+    ...optional(
+      IS_PRODUCTION || ENABLE_ANALYTICS,
+      { src: '~/plugins/segment-analytics.ts', mode: 'client' } as const
+    )
   ],
 
   /*
   ** Nuxt.js modules
   */
   modules: [
+    '@nuxt/content',
     '@nuxtjs/style-resources',
     '@nuxtjs/axios'
   ],
@@ -224,6 +225,10 @@ const config: Configuration = {
       }
     }
   }
+}
+
+function optional<T> (test: any, ...plugins: T[]): T[] {
+  return test ? plugins : []
 }
 
 async function generateContent () {
