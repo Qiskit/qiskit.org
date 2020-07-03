@@ -8,7 +8,7 @@
         "
       >
         <div class="feature-mosaic__feature-copy">
-          <dt class="landing-page__subtitle">
+          <dt class="copy__subtitle">
             Access to circuits
           </dt>
           <dd class="feature-mosaic__feature-description">
@@ -36,7 +36,7 @@
             feature-mosaic__hardware-copy
           "
         >
-          <dt class="landing-page__subtitle">
+          <dt class="copy__subtitle">
             Hardware Access
           </dt>
           <dd class="feature-mosaic__feature-description">
@@ -52,7 +52,7 @@
             feature-mosaic__algorithms-copy
           "
         >
-          <dt class="landing-page__subtitle">
+          <dt class="copy__subtitle">
             Quantum Algorithms
           </dt>
           <dd class="feature-mosaic__feature-description">
@@ -74,7 +74,7 @@
         "
       >
         <div class="feature-mosaic__feature-copy">
-          <dt class="landing-page__subtitle">
+          <dt class="copy__subtitle">
             Noise Mitigation
           </dt>
           <dd class="feature-mosaic__feature-description">
@@ -96,7 +96,7 @@ export default class extends Vue {}
 </script>
 
 <style lang="scss" scoped>
-@import '~/assets/scss/blocks/landing-page.scss';
+@import '~/assets/scss/blocks/copy.scss';
 @import '~carbon-components/scss/globals/scss/typography';
 
 .feature-mosaic {
