@@ -1,19 +1,19 @@
 <template>
   <section class="start-locally">
-    <h3 class="landing-page__subtitle">
+    <h3 class="copy__subtitle">
       Start locally
     </h3>
-    <p class="landing-page__copy">
+    <p class="copy__paragraph">
       To install Qiskit locally, you will need
       <AppLink
-        class="landing-page__link"
+        class="copy__link"
         url="https://www.python.org/downloads/"
       >
         Python 3.5+.
       </AppLink>
       Although it isn't required, we recommend using a
       <AppLink
-        class="landing-page__link"
+        class="copy__link"
         url="https://www.anaconda.com/products/individual"
       >
         virtual environment with Anaconda.
@@ -188,7 +188,7 @@ export default class extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '~/assets/scss/blocks/landing-page.scss';
+@import '~/assets/scss/blocks/copy.scss';
 @import '~carbon-components/scss/globals/scss/typography';
 
 .start-locally {

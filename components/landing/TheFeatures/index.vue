@@ -5,14 +5,14 @@
     <div
       class="
         the-features__container
-        landing-page__util
-        landing-page__util_vertical-spacer
+        copy__util
+        copy__util_vertical-spacer
       "
     >
-      <h2 class="landing-page__title">
+      <h2 class="copy__title">
         What can Qiskit do
       </h2>
-      <p class="landing-page__copy landing-page__copy_outstanding">
+      <p class="copy__paragraph copy__paragraph_outstanding">
         Qiskit accelerates the development of quantum applications by
         providing the complete set of tools needed for interacting with
         quantum systems and simulators.

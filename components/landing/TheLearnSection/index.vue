@@ -3,11 +3,11 @@
     <div
       class="
         the-learn-section__container
-        landing-page__util
-        landing-page__util_vertical-spacer
+        copy__util
+        copy__util_vertical-spacer
       "
     >
-      <h2 class="landing-page__title">
+      <h2 class="copy__title">
         Learn with Qiskit
       </h2>
       <LearnCard />
@@ -25,7 +25,7 @@ export default class extends Vue {}
 </script>
 
 <style lang="scss" scoped>
-@import '~/assets/scss/blocks/landing-page.scss';
+@import '~/assets/scss/blocks/copy.scss';
 
 .the-learn-section {
   @include responsive-grid-bg('/images/grid/grid-left.svg', 36rem);
