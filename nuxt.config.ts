@@ -12,7 +12,7 @@ import { Configuration } from '@nuxt/types'
 import pkg from './package.json'
 import fetchEvents from './hooks/update-events'
 
-const { NODE_ENV, SHOW_COOKIES_SETTINGS, GENERATE_CONTENT, AIRTABLE_API_KEY } = process.env
+const { NODE_ENV, ENABLE_ANALYTICS, GENERATE_CONTENT, AIRTABLE_API_KEY } = process.env
 
 const IS_PRODUCTION = NODE_ENV === 'production'
 
@@ -79,7 +79,7 @@ const config: Configuration = {
     '~/plugins/deep-load.ts',
     { src: '~/plugins/hotjar.ts', mode: 'client' },
     ...optional(
-      IS_PRODUCTION || SHOW_COOKIES_SETTINGS,
+      IS_PRODUCTION || ENABLE_ANALYTICS,
       { src: '~/plugins/segment-analytics.ts', mode: 'client' } as const
     )
   ],
