@@ -1,18 +1,16 @@
 <template>
   <article class="learn-card">
     <div class="learn-card__content">
-      <p class="landing-page__copy">
+      <p class="copy__paragraph">
         Gain access to a free, digital textbook to study the concepts of quantum
         computing using Qiskit.
       </p>
-      <AppLink
-        class="landing-page__link learn-card__link"
+      <AppCta
         url="/learn"
         :segment="{ action: 'Get Learning' }"
       >
-        <span>Get Learning</span>
-        <ArrowRight16 />
-      </AppLink>
+        Get Learning
+      </AppCta>
     </div>
     <div class="learn-card__media" />
   </article>
@@ -21,16 +19,16 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import AppLink from '~/components/ui/AppLink.vue'
+import AppCta from '~/components/ui/AppCta.vue'
 
 @Component({
-  components: { AppLink }
+  components: { AppCta }
 })
 export default class extends Vue {}
 </script>
 
 <style lang="scss" scoped>
-@import '~/assets/scss/blocks/landing-page.scss';
+@import '~/assets/scss/blocks/copy.scss';
 @import '~carbon-components/scss/globals/scss/typography';
 
 .learn-card {
@@ -55,17 +53,6 @@ export default class extends Vue {}
       @include type-style('label-01');
       padding: $spacing-05;
       width: 10rem;
-    }
-  }
-
-  &__link {
-    margin-bottom: $spacing-04;
-    fill: currentColor;
-    display: flex;
-    align-items: center;
-
-    :first-child {
-      margin-right: $spacing-06;
     }
   }
 

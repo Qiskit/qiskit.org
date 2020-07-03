@@ -1,9 +1,9 @@
 <template>
-  <article class="quick-start landing-page__util_vertical-spacer">
-    <h2 class="landing-page__title">
+  <article class="quick-start copy__util_vertical-spacer">
+    <h2 class="copy__title">
       Quick Start
     </h2>
-    <p class="landing-page__copy landing-page__copy_outstanding">
+    <p class="copy__paragraph copy__paragraph_outstanding">
       When you are looking to start Qiskit you have two options. You can start
       Qiskit locally which is much more secure and private, or you get started
       online where you can immediately jump in and start working.
@@ -31,7 +31,7 @@ export default class extends Vue {}
 </script>
 
 <style lang="scss" scoped>
-@import '~/assets/scss/blocks/landing-page.scss';
+@import '~/assets/scss/blocks/copy.scss';
 @import '~carbon-components/scss/globals/scss/typography';
 
 .quick-start {
