@@ -55,15 +55,15 @@
             <section class="the-learning-resources-list__results">
               <template v-if="hasEvents">
                 <LearningResourceCard
-                  v-for="event in filteredEvents"
-                  :key="`${event.place}-${event.date}`"
-                  :type="formatType(event.types)"
-                  :title="event.title"
-                  :image="event.image"
-                  :location="event.location"
-                  :date="event.date"
-                  :to="event.to"
-                />
+                  v-for="learningResource in resources"
+                  :key="learningResource.path"
+                  :title="learningResource.title"
+                  :image="learningResource.image"
+                  :cta-label="learningResource.ctaLabel"
+                  :to="learningResource.to"
+                >
+                  <nuxt-content class="copy" :document="learningResource" />
+                </LearningResourceCard>
               </template>
             </section>
           </div>
@@ -95,6 +95,12 @@ import { EVENT_REQUEST_LINK } from '~/constants/appLinks'
   head () {
     return {
       title: 'Qiskit Learn'
+    }
+  },
+
+  async asyncData ({ $content }) {
+    return {
+      resources: await $content('learning-resources').fetch()
     }
   },
 
@@ -230,6 +236,15 @@ export default class extends QiskitPage {
 </style>
 
 <style lang="scss">
+@import '~/assets/scss/blocks/copy.scss';
+/**
+ * TODO: Review if there is some mechanism, inside the Carbon Themes
+ * framework, for applying a different theme to an specific component (#703).
+ *
+ * If there is not, we need some alternative way of overriding component
+ * internal CSS. The following approach takes advantage of BEM methodology
+ * and CSS specificity to override the internal CSS.
+ */
 .the-learning-resources-list {
   &__filter-level {
     & a.bx--tabs__nav-link {
