@@ -77,18 +77,11 @@ const config: Configuration = {
     '~/plugins/highlight-js.ts',
     '~/plugins/carbon.ts',
     '~/plugins/deep-load.ts',
-    {
-      src: IS_PRODUCTION || SHOW_COOKIES_SETTINGS
-        ? '~/plugins/hotjar.ts'
-        : '',
-      mode: 'client'
-    },
-    {
-      src: IS_PRODUCTION || SHOW_COOKIES_SETTINGS
-        ? '~/plugins/segment-analytics.ts'
-        : '',
-      mode: 'client'
-    }
+    { src: '~/plugins/hotjar.ts', mode: 'client' },
+    ...optional(
+      IS_PRODUCTION || SHOW_COOKIES_SETTINGS,
+      { src: '~/plugins/segment-analytics.ts', mode: 'client' } as const
+    )
   ],
 
   /*
@@ -224,6 +217,10 @@ const config: Configuration = {
       }
     }
   }
+}
+
+function optional<T> (test: any, ...plugins: T[]): T[] {
+  return test ? plugins : []
 }
 
 async function generateContent () {
