@@ -25,7 +25,7 @@ export default class extends Vue {}
 
 .app-cta {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   fill: currentColor;
 

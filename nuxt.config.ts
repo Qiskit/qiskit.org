@@ -10,10 +10,9 @@ import Mode from 'frontmatter-markdown-loader/mode'
 
 import { Configuration } from '@nuxt/types'
 import pkg from './package.json'
-import generateTextbookToc from './hooks/generate-textbook-toc'
 import fetchEvents from './hooks/update-events'
 
-const { NODE_ENV, GENERATE_CONTENT, AIRTABLE_API_KEY } = process.env
+const { NODE_ENV, SHOW_COOKIES_SETTINGS, GENERATE_CONTENT, AIRTABLE_API_KEY } = process.env
 
 const IS_PRODUCTION = NODE_ENV === 'production'
 
@@ -78,8 +77,18 @@ const config: Configuration = {
     '~/plugins/highlight-js.ts',
     '~/plugins/carbon.ts',
     '~/plugins/deep-load.ts',
-    { src: '~/plugins/hotjar.ts', mode: 'client' },
-    { src: '~/plugins/segment-analytics.ts', mode: 'client' }
+    {
+      src: IS_PRODUCTION || SHOW_COOKIES_SETTINGS
+        ? '~/plugins/hotjar.ts'
+        : '',
+      mode: 'client'
+    },
+    {
+      src: IS_PRODUCTION || SHOW_COOKIES_SETTINGS
+        ? '~/plugins/segment-analytics.ts'
+        : '',
+      mode: 'client'
+    }
   ],
 
   /*
@@ -218,11 +227,6 @@ const config: Configuration = {
 }
 
 async function generateContent () {
-  consola.info('Generating Textbook TOC')
-  await generateTextbookToc(
-    'https://qiskit.org/textbook/preface.html',
-    './content/education/textbook-toc.md'
-  )
   if (AIRTABLE_API_KEY) {
     consola.info('Generating community event previews')
     await fetchEvents(AIRTABLE_API_KEY, './content/events')

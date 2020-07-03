@@ -6,7 +6,6 @@ The components directory contains the Vue.js Components. We are working with the
 - 📁 **logic/** : Components that only has logic inside, not `<template>` block
 - 📁 **[domain]/** : Components that belong to a specific domain. The folder name should be the "domain" it refers to, having one folder per domain. For example, an AdvocateCard is related to the advocates domain, even if it is used in more than one place. If we have a generic `card` that can be used for both `advocates` and `events` (for example) it should go to ui. At the moment, we have the following domains:
     - 📁 **advocates/**
-    - 📁 **education/**
     - 📁 **elements/** : The are `aer`, `ignis`, `terra` and `aqua`, but we also include `ibmqaccount`.
     - 📁 **events/**
 

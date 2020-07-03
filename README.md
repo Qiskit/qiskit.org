@@ -34,7 +34,7 @@
 <h3 align="center">
   <a href="https://qiskit.org/">Home page</a>
   <span> · </span>
-  <a href="https://qiskit.org/education/">Education</a>
+  <a href="https://qiskit.org/learn/">Learn</a>
   <span> · </span>
   <a href="https://qiskit.org/documentation/">Documentation</a>
   <span> · </span>
@@ -46,12 +46,14 @@
 ## What’s In This Document
 
 - [What’s In This Document](#whats-in-this-document)
-- [⚡️ Live](#-live)
+- [⚡️ Live](#️-live)
 - [💻 Technology Used](#-technology-used)
 - [🚀 Get Up and Running](#-get-up-and-running)
 - [🏭 Content Generation](#-content-generation)
+- [🎚️Other environment flags](#️other-environment-flags)
+  - [Show cookies preferences](#show-cookies-preferences)
 - [🧐 Folder Structure](#-folder-structure)
-- [✏️ How to Contribute](#f-how-to-contribute)
+- [✏️ How to Contribute](#️-how-to-contribute)
 - [🛠 Available Scripts](#-available-scripts)
 - [🗓 Open backlog](#-open-backlog)
 - [👩‍💻 Maintainers](#-maintainers)
@@ -111,6 +113,14 @@ Notice that, for communicating with the team tools, API keys may be required. It
 ```shell
 GENERATE_CONTENT=1 AIRTABLE_API_KEY=<your airtable api key> npm run dev
 ```
+
+## 🎚️Other environment flags
+
+### Show cookies preferences
+
+In production, a cookies settings dialog can be found for the user to customize
+her privacy settings. In development, it is disabled by default. To enable, set
+the `SHOW_COOKIES_SETTINGS` environment variable.
 
 ## 🧐 Folder Structure
 
