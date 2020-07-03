@@ -8,16 +8,12 @@
       alt=""
     >
     <div class="learning-resource-card__content">
-      <header>
-        <h3 class="copy__subtitle">
-          {{ title }}
-        </h3>
-      </header>
-      <p class="copy__paragraph">
-        {{ description }}Lipsum
-      </p>
+      <h3 class="copy__subtitle">
+        {{ title }}
+      </h3>
+      <slot />
       <AppCta class="copy__link" :url="to">
-        {{ ctaLabel }}Movidas
+        {{ ctaLabel }}
       </AppCta>
     </div>
   </article>
@@ -34,7 +30,6 @@ import AppCta from '~/components/ui/AppCta.vue'
 export default class extends Vue {
   @Prop(String) image
   @Prop(String) title
-  @Prop(String) description
   @Prop(String) ctaLabel
   @Prop(String) to
 }
@@ -74,6 +69,7 @@ export default class extends Vue {
   }
 
   &__content {
+    flex: 1;
     margin: 1rem;
     display: flex;
     flex-direction: column;

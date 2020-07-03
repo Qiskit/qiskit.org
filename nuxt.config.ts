@@ -95,9 +95,9 @@ const config: Configuration = {
   ** Nuxt.js modules
   */
   modules: [
+    '@nuxt/content',
     '@nuxtjs/style-resources',
-    '@nuxtjs/axios',
-    '@nuxt/content'
+    '@nuxtjs/axios'
   ],
 
   styleResources: {
