@@ -14,13 +14,13 @@
     <section class="the-learning-resources-list">
       <client-only>
         <div class="the-learning-resources-list__container">
-          <h2 class="landing-page__title">
+          <h2 class="copy__title">
             Learning resources
           </h2>
           <p
             class="
-              landing-page__copy
-              landing-page__copy_outstanding
+              copy__paragraph
+              copy__paragraph_outstanding
             "
           >
             The below are designed and created by the Qiskit team. However, we
@@ -165,7 +165,7 @@ export default class extends QiskitPage {
 </script>
 
 <style lang="scss" scoped>
-@import '~/assets/scss/blocks/landing-page.scss';
+@import '~/assets/scss/blocks/copy.scss';
 @import '~carbon-components/scss/globals/scss/typography';
 
 .learn-page {

@@ -1,7 +1,7 @@
 <template>
   <article class="learn-card">
     <div class="learn-card__content">
-      <p class="landing-page__copy">
+      <p class="copy__paragraph">
         Gain access to a free, digital textbook to study the concepts of quantum
         computing using Qiskit.
       </p>
@@ -28,7 +28,7 @@ export default class extends Vue {}
 </script>
 
 <style lang="scss" scoped>
-@import '~/assets/scss/blocks/landing-page.scss';
+@import '~/assets/scss/blocks/copy.scss';
 @import '~carbon-components/scss/globals/scss/typography';
 
 .learn-card {

@@ -1,6 +1,6 @@
 <template>
   <AppLink
-    class="app-cta landing-page__link"
+    class="app-cta copy__link"
     v-bind="$attrs"
   >
     <div><slot /></div>
@@ -20,7 +20,7 @@ export default class extends Vue {}
 </script>
 
 <style lang="scss" scoped>
-@import '~/assets/scss/blocks/landing-page.scss';
+@import '~/assets/scss/blocks/copy.scss';
 @import '~carbon-components/scss/globals/scss/typography';
 
 .app-cta {

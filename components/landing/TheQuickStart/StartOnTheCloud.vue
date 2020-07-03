@@ -1,10 +1,10 @@
 <template>
   <section class="start-on-the-cloud">
     <div class="start-on-the-cloud__content">
-      <h3 class="landing-page__subtitle">
+      <h3 class="copy__subtitle">
         Start Online
       </h3>
-      <p class="landing-page__copy">
+      <p class="copy__paragraph">
         Starting on the cloud will enable you to begin  without installing
         anything.
       </p>
@@ -32,7 +32,7 @@ export default class extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '~/assets/scss/blocks/landing-page.scss';
+@import '~/assets/scss/blocks/copy.scss';
 @import '~carbon-components/scss/globals/scss/typography';
 
 .start-on-the-cloud {
