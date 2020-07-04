@@ -1,5 +1,5 @@
 <template>
-  <main class="element landing-page">
+  <main class="landing-page">
     <TheHeroMoment :version="qiskitVersion" />
     <TheFeatures />
     <TheQuickStart />
@@ -41,7 +41,6 @@ export default class extends QiskitPage {
 </script>
 
 <style lang="scss">
-@import '~/assets/scss/element.scss';
 @import '~/assets/scss/blocks/copy.scss';
 
 .landing-page {
