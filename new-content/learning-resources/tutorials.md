@@ -1,7 +1,7 @@
 ---
 title: Tutorials
 to: https://github.com/Qiskit/qiskit-tutorials
-image: /images/landing-page/feature-hardware.png
+image: /images/landing-page/feature-hardware.jpg
 ctaLabel: Go to Khan Academy
 classifications:
   - level: advanced
