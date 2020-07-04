@@ -194,7 +194,7 @@ export default class extends Vue {}
   }
 
   &__feature-decoration-hardware {
-    background-image: url('/images/landing-page/feature-hardware.png');
+    background-image: url('/images/landing-page/feature-hardware.jpg');
     background-position: center top;
     background-size: cover;
     background-repeat: no-repeat;
@@ -225,19 +225,19 @@ export default class extends Vue {}
   }
 
   &__feature-decoration-algorithms {
-    background-image: url('/images/landing-page/feature-algorithms.png');
+    background-image: url('/images/landing-page/feature-algorithms.jpg');
     background-position: center bottom;
     background-size: cover;
     background-repeat: no-repeat;
     height: 25rem;
 
     @include mq($from: medium, $until: large) {
-      background-image: url('/images/landing-page/feature-algorithms-medium.png');
+      background-image: url('/images/landing-page/feature-algorithms-medium.jpg');
       height: auto;
     }
 
     @include mq($until: medium) {
-      background-image: url('/images/landing-page/feature-algorithms-medium.png');
+      background-image: url('/images/landing-page/feature-algorithms-medium.jpg');
       min-height: 4rem;
     }
   }

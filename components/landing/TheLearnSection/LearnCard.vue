@@ -58,7 +58,7 @@ export default class extends Vue {}
 
   &__media {
     flex: 1;
-    background-image: url('/images/learn-image.png');
+    background-image: url('/images/learn-image.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: right center;
