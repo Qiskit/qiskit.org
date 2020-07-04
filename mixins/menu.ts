@@ -2,7 +2,6 @@ import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 
 import {
-  ORDERED_QISKIT_ELEMENTS,
   ORDERED_COMMUNITY_SUB_LINKS,
   HOME_LINK,
   COMMUNITY_LINK,
@@ -15,7 +14,6 @@ import {
 @Component
 export default class extends Vue {
   homeLink: NavLink = HOME_LINK
-  qiskitElements: Array<NavLink> = ORDERED_QISKIT_ELEMENTS
   learnMore: Array<NavLink> = [TUTORIALS_LINK, DOCUMENTATION_LINK]
   mainLevelLinks: Array<NavLink> = [LEARN_LINK, COMMUNITY_LINK, DOCUMENTATION_LINK]
   communityLink: NavLink = COMMUNITY_LINK
