@@ -1,7 +1,7 @@
 ---
 title: Qiskit blog
 to: https://medium.com/qiskit
-image: /images/landing-page/feature-hardware.png
+image: /images/landing-page/feature-hardware.jpg
 ctaLabel: Read the docs
 classifications:
   - level: beginner

@@ -1,7 +1,7 @@
 ---
 title: Qiskit video series
 to: https://www.youtube.com/Qiskit
-image: /images/landing-page/feature-hardware.png
+image: /images/landing-page/feature-hardware.jpg
 ctaLabel: Watch the series
 classifications:
   - level: beginner

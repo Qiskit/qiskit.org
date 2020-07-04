@@ -12,71 +12,91 @@
       </div>
     </header>
     <section class="the-learning-resources-list">
-      <client-only>
-        <div class="the-learning-resources-list__container">
-          <h2 class="copy__title">
-            Learning resources
-          </h2>
-          <p
-            class="
+      <div class="the-learning-resources-list__container">
+        <h2 class="copy__title">
+          Learning resources
+        </h2>
+        <p
+          class="
               copy__paragraph
               copy__paragraph_outstanding
             "
-          >
-            The below are designed and created by the Qiskit team. However, we
-            recommend a familiar with linear algebra and Python from these
-            trusted resources.
-          </p>
+        >
+          The below are designed and created by the Qiskit team. However, we
+          recommend a familiar with linear algebra and Python from these
+          trusted resources.
+        </p>
+        <client-only>
           <cv-tabs
             class="the-learning-resources-list__filter-level"
             aria-label="navigation tab label"
             @tab-selected="setLearnLevel"
           >
             <cv-tab
-              v-for="(level, index) in learnLevels"
+              v-for="level in learnLevels"
               :key="level"
-              :ref="`learn-level-tab-${index}`"
               :label="level"
               :selected="level === learnLevel"
             />
           </cv-tabs>
-          <div class="the-learning-resources-list__layout">
-            <fieldset class="the-learning-resources-list__filter-time">
-              <legend class="the-learning-resources-list__filter-time-label">
-                Time to spend learning
-              </legend>
-              <client-only>
-                <cv-radio-group vertical>
-                  <cv-radio-button
-                    v-for="scale in timeScales"
-                    :key="scale"
-                    name="time"
-                    :value="scale"
-                    :label="scale"
-                    :checked="scale === timeScale"
-                    :aria-checked="scale === timeScale"
-                    @change="setTimeScale(scale)"
-                  />
-                </cv-radio-group>
-              </client-only>
-            </fieldset>
-            <section class="the-learning-resources-list__results">
-              <TheCarefulExplanationForBeginner v-if="isAMinuteForBeginner" />
-              <TheCarefulExplanationForAdvanced v-if="isAMinuteForAdvanced" />
-              <LearningResourceCard
-                v-for="resource in filteredLearningResources"
-                :key="resource.path"
-                :title="resource.title"
-                :image="resource.image"
-                :cta-label="resource.ctaLabel"
-                :to="resource.to"
+        </client-only>
+        <div class="the-learning-resources-list__layout">
+          <fieldset class="the-learning-resources-list__filter-time">
+            <legend
+              class="
+                the-learning-resources-list__filter-time-label
+                the-learning-resources-list__medium-large-only
+              "
+            >
+              Time to spend learning
+            </legend>
+            <client-only>
+              <cv-dropdown
+                class="the-learning-resources-list__small-only"
+                :value="timeScale"
+                @change="setTimeScale($event)"
               >
-                <nuxt-content class="copy" :document="resource" />
-              </LearningResourceCard>
-            </section>
-          </div>
+                <cv-dropdown-item
+                  v-for="scale in timeScales"
+                  :key="scale"
+                  :value="scale"
+                >
+                  {{ scale }}
+                </cv-dropdown-item>
+              </cv-dropdown>
+              <cv-radio-group
+                class="the-learning-resources-list__medium-large-only"
+                vertical
+              >
+                <cv-radio-button
+                  v-for="scale in timeScales"
+                  :key="scale"
+                  name="time"
+                  :value="scale"
+                  :label="scale"
+                  :checked="scale === timeScale"
+                  :aria-checked="scale === timeScale"
+                  @change="setTimeScale(scale)"
+                />
+              </cv-radio-group>
+            </client-only>
+          </fieldset>
+          <section class="the-learning-resources-list__results">
+            <TheCarefulExplanationForBeginner v-if="isAMinuteForBeginner" />
+            <TheCarefulExplanationForAdvanced v-if="isAMinuteForAdvanced" />
+            <LearningResourceCard
+              v-for="resource in filteredLearningResources"
+              :key="resource.path"
+              :title="resource.title"
+              :image="resource.image"
+              :cta-label="resource.ctaLabel"
+              :to="resource.to"
+            >
+              <nuxt-content class="copy" :document="resource" />
+            </LearningResourceCard>
+          </section>
         </div>
-      </client-only>
+      </div>
     </section>
   </div>
 </template>
@@ -134,7 +154,7 @@ export default class extends QiskitPage {
   }
 
   setLearnLevel (tabIndex: number) {
-    const level = this.$refs[`learn-level-tab-${tabIndex}`][0].label
+    const level = this.learnLevels[tabIndex]
     this.$store.commit('setLearnLevel', level)
   }
 
@@ -153,6 +173,7 @@ export default class extends QiskitPage {
 <style lang="scss" scoped>
 @import '~/assets/scss/blocks/copy.scss';
 @import '~carbon-components/scss/globals/scss/typography';
+@include carbon--theme($carbon--theme--white);
 
 .learn-page {
   background-color: white;
@@ -162,12 +183,20 @@ export default class extends QiskitPage {
   @include responsive-grid-bg-strip('/images/grid/grid-hero-learn.svg', auto, 28rem);
   min-height: 28rem;
 
+  @include mq($until: large) {
+    min-height: 28rem * 40 / 64;
+  }
+
   &__container {
     @include contained();
     display: flex;
     flex-direction: column;
     justify-content: center;
     height: 28rem;
+
+    @include mq($until: large) {
+      height: 28rem * 40 / 64;
+    }
   }
 
   &__title {
@@ -195,22 +224,56 @@ export default class extends QiskitPage {
   &__layout {
     display: flex;
     justify-content: space-between;
+
+    @include mq($until: medium) {
+      display: block;
+    }
   }
 
   &__filter-level {
     margin-bottom: $layout-04;
+
+    @include mq($until: medium) {
+      margin-bottom: $layout-01;
+    }
   }
 
   &__filter-time {
+    width: 25%;
+    margin-right: $layout-03;
     color: $cool-gray-80;
+    flex: initial;
+
+    @include mq($until: medium) {
+      width: auto;
+      margin-right: 0;
+      margin-bottom: $layout-03;
+    }
   }
 
   &__filter-time-label {
     margin-bottom: $layout-01;
+    white-space: nowrap;
+  }
+
+  &__small-only {
+    @include mq($from: medium) {
+      display: none;
+    }
+  }
+
+  &__medium-large-only {
+    @include mq($until: medium) {
+      display: none;
+    }
   }
 
   &__results {
-    width: 75%;
+    flex: auto;
+
+    @include mq($until: medium) {
+      width: 100%;
+    }
   }
 }
 </style>
@@ -252,6 +315,58 @@ export default class extends QiskitPage {
       &--selected:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link {
         border-bottom-color: $purple-70;
       }
+    }
+
+    & .bx--tabs__nav-item:hover:not(.bx--tabs__nav-item--disabled) {
+      box-shadow: none;
+    }
+
+    & .bx--tabs__nav-item:hover:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled),
+    & .bx--tabs__nav-item,
+    & .bx--tabs-trigger {
+      background-color: white;
+
+      svg {
+        fill: $gray-100;
+      }
+    }
+
+    & .bx--tabs__nav-link,
+    & .bx--tabs-trigger-text {
+      color: $gray-100;
+    }
+  }
+
+  &__filter-time {
+    & .bx--dropdown,
+    & .bx--dropdown-item {
+      background-color: white;
+
+        svg {
+          fill: $gray-100;
+        }
+    }
+
+    & .bx--dropdown-item:hover,
+    & .bx--dropdown--show-selected .bx--dropdown--selected:hover {
+      // To match default light theme UI hover, which is not among the Carbon
+      // palette. 🤦
+      background-color: #e5e5e5;
+    }
+
+    & .bx--dropdown-link,
+    & .bx--dropdown-text {
+      color: $gray-100;
+      border-top-color: #dde1e6;
+    }
+
+    & .bx--dropdown--show-selected .bx--dropdown--selected .bx--dropdown-link {
+      border-top-color: #dde1e6;
+      border-bottom-color: #dde1e6;
+    }
+
+    & .bx--dropdown-link:hover {
+      border-bottom-color: #dde1e6;
     }
   }
 
