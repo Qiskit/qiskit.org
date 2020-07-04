@@ -27,10 +27,18 @@
             recommend a familiar with linear algebra and Python from these
             trusted resources.
           </p>
-          <cv-tabs class="the-learning-resources-list__filter-level" aria-label="navigation tab label" @tab-selected="selectTab">
-            <cv-tab id="tab-1" label="All resources" />
-            <cv-tab id="tab-2" label="beginner resources" />
-            <cv-tab id="tab-3" label="advanced resources" />
+          <cv-tabs
+            class="the-learning-resources-list__filter-level"
+            aria-label="navigation tab label"
+            @tab-selected="setLearnLevel"
+          >
+            <cv-tab
+              v-for="(level, index) in learnLevels"
+              :key="level"
+              :ref="`learn-level-tab-${index}`"
+              :label="level"
+              :selected="level === learnLevel"
+            />
           </cv-tabs>
           <div class="the-learning-resources-list__layout">
             <fieldset class="the-learning-resources-list__filter-time">
@@ -40,31 +48,31 @@
               <client-only>
                 <cv-radio-group vertical>
                   <cv-radio-button
-                    v-for="region in regions"
-                    :key="region"
+                    v-for="scale in timeScales"
+                    :key="scale"
                     name="time"
-                    :value="region"
-                    :label="region"
-                    :checked="isFilterChecked('regionFilters', region)"
-                    :aria-checked="`${isFilterChecked('regionFilters', region)}`"
-                    @change="updateFilter('regionFilters', region, $event)"
+                    :value="scale"
+                    :label="scale"
+                    :checked="scale === timeScale"
+                    :aria-checked="scale === timeScale"
+                    @change="setTimeScale(scale)"
                   />
                 </cv-radio-group>
               </client-only>
             </fieldset>
             <section class="the-learning-resources-list__results">
-              <template v-if="hasEvents">
-                <LearningResourceCard
-                  v-for="learningResource in resources"
-                  :key="learningResource.path"
-                  :title="learningResource.title"
-                  :image="learningResource.image"
-                  :cta-label="learningResource.ctaLabel"
-                  :to="learningResource.to"
-                >
-                  <nuxt-content class="copy" :document="learningResource" />
-                </LearningResourceCard>
-              </template>
+              <TheCarefulExplanationForBeginner v-if="isAMinuteForBeginner" />
+              <TheCarefulExplanationForAdvanced v-if="isAMinuteForAdvanced" />
+              <LearningResourceCard
+                v-for="resource in filteredLearningResources"
+                :key="resource.path"
+                :title="resource.title"
+                :image="resource.image"
+                :cta-label="resource.ctaLabel"
+                :to="resource.to"
+              >
+                <nuxt-content class="copy" :document="resource" />
+              </LearningResourceCard>
             </section>
           </div>
         </div>
@@ -74,22 +82,25 @@
 </template>
 
 <script lang="ts">
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import LearningResourceCard from '~/components/learn/LearningResourceCard.vue'
-import AppLink from '~/components/ui/AppLink.vue'
+import TheCarefulExplanationForBeginner from '~/components/learn/TheCarefulExplanationForBeginner.vue'
+import TheCarefulExplanationForAdvanced from '~/components/learn/TheCarefulExplanationForAdvanced.vue'
 import {
-  CommunityEvent,
-  WORLD_REGION_OPTIONS,
-  COMMUNITY_EVENT_TYPE_OPTIONS
-} from '~/store/modules/events.ts'
-import { EVENT_REQUEST_LINK } from '~/constants/appLinks'
+  TimeScale,
+  LEARN_LEVELS,
+  TIME_SCALES,
+  LEARN_LEVEL_OPTIONS,
+  TIME_SCALE_OPTIONS
+} from '~/store/modules/learning-resources.ts'
 
 @Component({
   components: {
     LearningResourceCard,
-    AppLink
+    TheCarefulExplanationForAdvanced,
+    TheCarefulExplanationForBeginner
   },
 
   head () {
@@ -98,74 +109,43 @@ import { EVENT_REQUEST_LINK } from '~/constants/appLinks'
     }
   },
 
-  async asyncData ({ $content }) {
-    return {
-      resources: await $content('learning-resources').fetch()
-    }
-  },
-
   computed: {
     ...mapGetters([
-      'filteredEvents',
-      'typeFilters',
-      'regionFilters'
+      'filteredLearningResources',
+      'learnLevel',
+      'timeScale'
     ])
   },
 
-  methods: {
-    ...mapActions({
-      fetchEvents: 'fetchEvents'
-    })
-  },
-
-  async fetch ({ store }) {
-    const upcomingEvents = await store.dispatch('fetchUpcomingEvents')
-    const pastEvents = await store.dispatch('fetchPastEvents')
-
-    const upcomingEventsPayload = { events: 'upcomingCommunityEvents', eventsSet: upcomingEvents }
-    const pastEventsPayload = { events: 'pastCommunityEvents', eventsSet: pastEvents }
-    store.commit('setEvents', upcomingEventsPayload)
-    store.commit('setEvents', pastEventsPayload)
+  async middleware ({ $content, store }) {
+    const learningResources = await $content('learning-resources').fetch()
+    store.commit('setLearningResources', learningResources)
   }
 })
 
 export default class extends QiskitPage {
-  regions = WORLD_REGION_OPTIONS
-  types = COMMUNITY_EVENT_TYPE_OPTIONS
-  routeName: string = 'events'
-  eventRequestLink = EVENT_REQUEST_LINK
-  isDesktop: boolean = false
+  routeName = 'learn'
 
-  get hasEvents (): boolean {
-    return (this as any).filteredEvents.length !== 0
+  learnLevels = LEARN_LEVEL_OPTIONS
+  timeScales = TIME_SCALE_OPTIONS
+
+  setTimeScale (scale: TimeScale): void {
+    this.$store.commit('setTimeScale', scale)
   }
 
-  isFilterChecked (filter: string, filterValue: string): Array<CommunityEvent> {
-    const typeFilters = (this as any).typeFilters
-    const regionFilters = (this as any).regionFilters
-
-    return filter === 'regionFilters'
-      ? regionFilters.includes(filterValue)
-      : typeFilters.includes(filterValue)
+  setLearnLevel (tabIndex: number) {
+    const level = this.$refs[`learn-level-tab-${tabIndex}`][0].label
+    this.$store.commit('setLearnLevel', level)
   }
 
-  updateFilter (filter: string, filterValue: string, isSelected: boolean): void {
-    const payload = { filter, filterValue }
-    const { commit } = this.$store
-
-    isSelected
-      ? commit('addFilter', payload)
-      : commit('removeFilter', payload)
+  get isAMinuteForBeginner (): boolean {
+    return (this as any).timeScale === TIME_SCALES.minute &&
+      (this as any).learnLevel === LEARN_LEVELS.beginner
   }
 
-  selectTab (selectedTab: number) {
-    const activeSet = selectedTab === 0 ? 'upcoming' : 'past'
-
-    this.$store.commit('setActiveSet', activeSet)
-  }
-
-  formatType (types: CommunityEvent[]): string {
-    return types.join(', ')
+  get isAMinuteForAdvanced (): boolean {
+    return (this as any).timeScale === TIME_SCALES.minute &&
+      (this as any).learnLevel === LEARN_LEVELS.advanced
   }
 }
 </script>
