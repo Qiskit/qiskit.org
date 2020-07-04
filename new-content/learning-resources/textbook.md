@@ -1,7 +1,7 @@
 ---
 title: Textbook
 to: /textbook
-image: /images/landing-page/feature-hardware.png
+image: /images/landing-page/feature-hardware.jpg
 ctaLabel: Read the textbook
 classifications:
   - level: beginner
