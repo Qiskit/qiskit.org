@@ -143,6 +143,7 @@ export default class extends QiskitPage {
 </script>
 
 <style lang="scss">
+@import '~/assets/scss/community-page.scss';
 @import '~carbon-components/scss/globals/scss/typography';
 
 main {

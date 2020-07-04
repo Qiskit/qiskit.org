@@ -33,45 +33,6 @@ type LabeledLinks = {
   [key: string]: NavLink
 }
 
-type QiskitElements = {
-  terra: NavLink,
-  aer: NavLink,
-  aqua: NavLink,
-  ignis: NavLink,
-  ibmQAccount: NavLink
-}
-
-const QISKIT_ELEMENTS: QiskitElements = {
-  terra: {
-    label: 'Terra',
-    url: '/terra'
-  },
-  aer: {
-    label: 'Aer',
-    url: '/aer'
-  },
-  aqua: {
-    label: 'Aqua',
-    url: '/aqua'
-  },
-  ignis: {
-    label: 'Ignis',
-    url: '/ignis'
-  },
-  ibmQAccount: {
-    label: 'IBM Q Account',
-    url: '/ibmqaccount'
-  }
-}
-
-const ORDERED_QISKIT_ELEMENTS: Array<NavLink> = [
-  QISKIT_ELEMENTS.terra,
-  QISKIT_ELEMENTS.aer,
-  QISKIT_ELEMENTS.aqua,
-  QISKIT_ELEMENTS.ignis,
-  QISKIT_ELEMENTS.ibmQAccount
-]
-
 const SOCIAL_MEDIA: LabeledLinks = {
   github: {
     label: 'GitHub',
@@ -259,7 +220,6 @@ const COMMUNITY_LINK: NavLink = {
 }
 
 export {
-  ORDERED_QISKIT_ELEMENTS,
   ORDERED_COMMUNITY_SUB_LINKS,
   FOOTER_ELEMENTS,
   SECONDARY_FOOTER_LINKS,
