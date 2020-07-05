@@ -10,6 +10,7 @@ import {
   LEARN_LINK,
   NavLink
 } from '~/constants/menuLinks'
+import AppLink from '~/components/ui/AppLink.vue'
 
 @Component
 export default class extends Vue {
@@ -43,5 +44,16 @@ export default class extends Vue {
 
   getSubLinks (item: NavLink): NavLink[] {
     return typeof item.sublinks !== 'undefined' ? item.sublinks : []
+  }
+
+  isParent (item: NavLink): boolean {
+    return this.getSubLinks(item).length !== 0
+  }
+
+  appLinkFromNavLink (item: NavLink): any {
+    return {
+      url: item.url,
+      segment: item.segment
+    }
   }
 }

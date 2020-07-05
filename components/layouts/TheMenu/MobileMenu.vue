@@ -7,8 +7,11 @@
         <AppLink
           :key="link.url"
           class="mobile-menu__link"
-          :class="{ 'mobile-menu__link_active': isActive(link) }"
-          v-bind="link"
+          :class="{
+            'mobile-menu__link_active': isActive(link),
+            'mobile-menu__link_is-parent': isParent(link)
+          }"
+          v-bind="appLinkFromNavLink(link)"
         >
           <p class="mobile-menu__link-label">
             {{ link.label }}
@@ -21,8 +24,8 @@
           mobile-menu__link
           mobile-menu__link_second-level
         "
-          :class="{ 'mobile-menu__link_active': isActive(link) }"
-          v-bind="sublink"
+          :class="{ 'mobile-menu__link_active': isActive(sublink) }"
+          v-bind="appLinkFromNavLink(sublink)"
         >
           <p class="mobile-menu__link-label">
             {{ sublink.label }}
@@ -83,7 +86,7 @@ export default class extends Mixins(MenuMixin) {}
     height: 4rem;
     border-bottom: 1px solid $cool-gray-10;
 
-    &_active {
+    &_active:not(&_is-parent) {
       color: $cool-gray-10;
       background-color: $purple-70;
     }
