@@ -3,17 +3,32 @@
     <nav
       class="mobile-menu__navigation-links"
     >
-      <AppLink
-        v-for="link in mainLevelLinks"
-        :key="link.url"
-        class="mobile-menu__link"
-        :class="{ 'mobile-menu__link_active': isActive(link) }"
-        v-bind="link"
-      >
-        <p class="mobile-menu__link-label">
-          {{ link.label }}
-        </p>
-      </AppLink>
+      <template v-for="link in mainLevelLinks">
+        <AppLink
+          :key="link.url"
+          class="mobile-menu__link"
+          :class="{ 'mobile-menu__link_active': isActive(link) }"
+          v-bind="link"
+        >
+          <p class="mobile-menu__link-label">
+            {{ link.label }}
+          </p>
+        </AppLink>
+        <AppLink
+          v-for="sublink in getSubLinks(link)"
+          :key="sublink.url"
+          class="
+          mobile-menu__link
+          mobile-menu__link_second-level
+        "
+          :class="{ 'mobile-menu__link_active': isActive(link) }"
+          v-bind="sublink"
+        >
+          <p class="mobile-menu__link-label">
+            {{ sublink.label }}
+          </p>
+        </AppLink>
+      </template>
     </nav>
     <footer class="mobile-menu__footer">
       <div class="mobile-menu__footer-inner-container">
@@ -71,6 +86,10 @@ export default class extends Mixins(MenuMixin) {}
     &_active {
       color: $cool-gray-10;
       background-color: $purple-70;
+    }
+
+    &_second-level {
+      padding-left: $spacing-05;
     }
   }
 
