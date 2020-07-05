@@ -19,9 +19,9 @@ import { SegmentData } from '~/constants/appLinks'
 
 @Component
 export default class extends Vue {
-  @Prop({ type: String, default: '' }) url = ''
+  @Prop({ type: String, default: '' }) url!: string
   @Prop({ type: Object, required: false }) segment: SegmentData | undefined
-  @Prop({ type: Boolean, default: false }) isStatic = false
+  @Prop({ type: Boolean, default: false }) isStatic!: boolean
 
   get hasLink (): boolean {
     return !!this.url

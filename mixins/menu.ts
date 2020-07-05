@@ -10,7 +10,6 @@ import {
   LEARN_LINK,
   NavLink
 } from '~/constants/menuLinks'
-import AppLink from '~/components/ui/AppLink.vue'
 
 @Component
 export default class extends Vue {
