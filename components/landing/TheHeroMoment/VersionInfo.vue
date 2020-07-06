@@ -1,17 +1,21 @@
 <template>
-  <AppLink
-    class="qiskit-version-info"
-    url="https://github.com/Qiskit/qiskit"
-    :segment="{ action: 'GitHub repository' }"
-  >
-    <LogoGitHub32 class="qiskit-version-info__github-icon" />
+  <div class="qiskit-version-info">
+    <AppLink v-bind="githubRepoLink">
+      <LogoGitHub32 class="qiskit-version-info__github-icon" />
+    </AppLink>
     <div class="qiskit-version-info__content">
       <p class="qiskit-version-info__version-string">
-        qiskit {{ version }}
+        <AppLink
+          class="copy__link qiskit-version-info__link"
+          v-bind="githubRepoLink"
+        >
+          qiskit {{ version }}
+        </AppLink>
       </p>
       <p class="qiskit-version-info__release-notes">
         <AppLink
-          class="copy__link qiskit-version-info__release-notes-link"
+          class="copy__link"
+          v-bind="githubRepoLink"
           url="https://qiskit.org/documentation/release_notes.html#notable-changes"
           :segment="{ action: 'Release notes' }"
         >
@@ -19,18 +23,21 @@
         </AppLink>
       </p>
     </div>
-  </AppLink>
+  </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 import AppLink from '~/components/ui/AppLink.vue'
+import { GITHUB_REPOSITORY } from '~/constants/menuLinks'
 
 @Component({
   components: { AppLink }
 })
 export default class extends Vue {
+  githubRepoLink = GITHUB_REPOSITORY
+
   @Prop({ type: String, required: true }) version!: string
 }
 </script>
@@ -61,6 +68,10 @@ export default class extends Vue {
   &__content {
     display: flex;
     flex-direction: column;
+  }
+
+  &__link {
+    color: $gray-100;
   }
 
   &__version-string {
