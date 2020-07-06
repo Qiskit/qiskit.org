@@ -214,6 +214,12 @@ const HOME_LINK: NavLink = {
   url: '/'
 }
 
+const GITHUB_REPOSITORY: NavLink = {
+  label: 'GitHub',
+  url: 'https://github.com/Qiskit/qiskit',
+  segment: { action: 'GitHub repository' }
+}
+
 const COMMUNITY_LINK: NavLink = {
   label: 'Community',
   url: '/advocates'
@@ -224,6 +230,7 @@ export {
   FOOTER_ELEMENTS,
   SECONDARY_FOOTER_LINKS,
   HOME_LINK,
+  GITHUB_REPOSITORY,
   COMMUNITY_LINK,
   TUTORIALS_LINK,
   DOCUMENTATION_LINK,
