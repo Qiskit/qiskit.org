@@ -2,6 +2,7 @@
   <section class="feature-mosaic">
     <dl class="feature-mosaic__layout">
       <div
+        lazy-background
         class="
           feature-mosaic__feature
           feature-mosaic__feature-circuits
@@ -19,6 +20,7 @@
         </div>
       </div>
       <div
+        lazy-background
         class="
           feature-mosaic__feature
           feature-mosaic__feature-hardware
@@ -45,7 +47,13 @@
           </dd>
         </div>
       </div>
-      <div class="feature-mosaic__feature feature-mosaic__feature-algorithms">
+      <div
+        lazy-background
+        class="
+          feature-mosaic__feature
+          feature-mosaic__feature-algorithms
+        "
+      >
         <div
           class="
             feature-mosaic__feature-copy
@@ -68,6 +76,7 @@
         />
       </div>
       <div
+        lazy-background
         class="
           feature-mosaic__feature
           feature-mosaic__feature-mitigation
