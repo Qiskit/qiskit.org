@@ -97,7 +97,8 @@ const config: Configuration = {
   modules: [
     '@nuxt/content',
     '@nuxtjs/style-resources',
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    'nuxt-lazy-load'
   ],
 
   styleResources: {
