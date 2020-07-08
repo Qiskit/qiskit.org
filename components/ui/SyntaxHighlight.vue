@@ -4,15 +4,15 @@
       size="small"
       title="Copy to clipboard"
       class="syntax-highlight__copy-button"
-      :class="{ 'syntax-highlight__copy-button_legacy': legacy }"
-      @click="copyToClipboard"
+      @click="copyToClipboard(code) && $trackClickEvent({
+        action: segmentAction
+      })"
     >
       Copy
     </cv-button>
-    <pre v-highlightjs="code"><code
-    class="syntax-highlight__code"
-    :class="[lang, { 'syntax-highlight__code_white-design': !legacy }]"
-    /></pre>
+    <code class="syntax-highlight__code">
+      {{ code }}
+    </code>
   </div>
 </template>
 
@@ -22,16 +22,13 @@ import { Component, Prop } from 'vue-property-decorator'
 
 @Component
 export default class extends Vue {
-  @Prop({ type: String, default: 'python' }) lang!: string
   @Prop(String) label
   @Prop({ type: String, default: '' }) code!: string
-  @Prop({ type: Boolean, default: false }) legacy
 
-  copyToClipboard () {
-    navigator.clipboard.writeText(this.code)
-    this.$trackClickEvent({
-      action: `${this.label}: Copy Code Sample`
-    })
+  segmentAction = `${this.label}: Copy Code Sample`
+
+  copyToClipboard (code: string) {
+    navigator.clipboard.writeText(code)
   }
 }
 </script>
@@ -41,6 +38,12 @@ export default class extends Vue {
 
 .syntax-highlight {
   position: relative;
+  background-color: $cool-gray-10;
+  padding: $spacing-05 $spacing-07;
+
+  @include mq($until: large) {
+    padding: $spacing-05 $spacing-05;
+  }
 
   &__copy-button {
     position: absolute;
@@ -51,37 +54,18 @@ export default class extends Vue {
     background-color: $purple-70;
     padding: $spacing-03 $spacing-05;
 
-    &_legacy {
-      top: 0;
-      bottom: auto;
-      text-transform: uppercase;
-    }
-
     &:hover {
       background-color: $interactive-01;
-      color: white;
     }
   }
 
   &__code {
     @include type-style('code-02');
-    padding: $spacing-07 $spacing-05 $spacing-05;
+    color: $gray-60;
+    min-height: 8rem;
 
     @include mq($until: large) {
       @include type-style('code-01');
-      padding: $spacing-05 $spacing-03 $spacing-03;
-    }
-
-    &_white-design {
-      background-color: $cool-gray-10;
-      color: $gray-60;
-      padding: $spacing-05 $spacing-07;
-      min-height: 8rem;
-
-      @include mq($until: large) {
-        @include type-style('code-01');
-        padding: $spacing-03;
-      }
     }
   }
 }
