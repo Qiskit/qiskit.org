@@ -4,9 +4,7 @@
       size="small"
       title="Copy to clipboard"
       class="syntax-highlight__copy-button"
-      @click="copyToClipboard(code) && $trackClickEvent({
-        action: segmentAction
-      })"
+      @click="[copyToClipboard(code), $trackClickEvent(segmentAction)]"
     >
       Copy
     </cv-button>
@@ -25,7 +23,9 @@ export default class extends Vue {
   @Prop(String) label
   @Prop({ type: String, default: '' }) code!: string
 
-  segmentAction = `${this.label}: Copy Code Sample`
+  segmentAction = {
+    action: `${this.label}: Copy Code Sample`
+  }
 
   copyToClipboard (code: string) {
     navigator.clipboard.writeText(code)
