@@ -1,6 +1,9 @@
 <template>
   <article class="the-hero-moment">
-    <div class="the-hero-moment__container">
+    <div
+      lazy-background="/images/landing-page/hero-illustration.png"
+      class="the-hero-moment__container"
+    >
       <VersionInfo
         class="the-hero-moment__version-info"
         :version="version"
@@ -71,7 +74,6 @@ export default class extends Vue {
     @include contained();
 
     position: relative;
-    background-image: url("/images/landing-page/hero-illustration.png");
     background-position: right center;
     background-repeat: no-repeat;
     background-size: 70% auto;
