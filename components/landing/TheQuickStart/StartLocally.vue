@@ -90,13 +90,6 @@ type InstallChoices = Array<ChoicesGroup>
     PrerequisitesForWindows,
     SyntaxHighlight,
     AppLink
-  },
-  head () {
-    return {
-      link: [
-        { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/atom-one-dark.min.css' }
-      ]
-    }
   }
 })
 export default class extends Vue {
