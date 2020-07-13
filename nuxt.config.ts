@@ -155,6 +155,7 @@ const config: Configuration = {
   },
 
   router: {
+    prefetchLinks: false,
     scrollBehavior (to, from) {
       const nuxt = window.$nuxt
 
