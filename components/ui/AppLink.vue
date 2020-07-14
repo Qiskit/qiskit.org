@@ -22,7 +22,7 @@ export default class extends Vue {
   @Prop({ type: String, default: '' }) url!: string
   @Prop({ type: Object, required: false }) segment: SegmentData | undefined
   @Prop({ type: Boolean, default: false }) isStatic!: boolean
-  @Prop({ type: String, default: 'auto' }) target!: 'auto'|'blank'
+  @Prop({ type: String, default: 'auto' }) target!: 'auto'|'_blank'
 
   get hasLink (): boolean {
     return !!this.url
@@ -41,7 +41,11 @@ export default class extends Vue {
   }
 
   get isAnchor (): boolean {
-    return this.isExternal || this.isMail || this.isIdAnchor || this.isStatic
+    return this.target === '_blank' ||
+      this.isExternal ||
+      this.isMail ||
+      this.isIdAnchor ||
+      this.isStatic
   }
 
   get isNuxtLink (): boolean {
