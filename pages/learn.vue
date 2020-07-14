@@ -82,11 +82,20 @@
             </client-only>
           </fieldset>
           <section class="the-learning-resources-list__results">
-            <TheCarefulExplanationForBeginner v-if="isAMinuteForBeginner" />
-            <TheCarefulExplanationForAdvanced v-if="isAMinuteForAdvanced" />
+            <TheCarefulExplanationForBeginner
+              v-if="isBeginner"
+              class="the-learning-resources-list__item"
+              :compact="filteredLearningResources.length > 0"
+            />
+            <TheCarefulExplanationForAdvanced
+              v-if="isAdvanced"
+              class="the-learning-resources-list__item"
+              :compact="filteredLearningResources.length > 0"
+            />
             <LearningResourceCard
               v-for="resource in filteredLearningResources"
               :key="resource.path"
+              class="the-learning-resources-list__item"
               :title="resource.title"
               :image="resource.image"
               :cta-label="resource.ctaLabel"
@@ -111,7 +120,6 @@ import TheCarefulExplanationForAdvanced from '~/components/learn/TheCarefulExpla
 import {
   TimeScale,
   LEARN_LEVELS,
-  TIME_SCALES,
   LEARN_LEVEL_OPTIONS,
   TIME_SCALE_OPTIONS
 } from '~/store/modules/learning-resources.ts'
@@ -158,14 +166,12 @@ export default class extends QiskitPage {
     this.$store.commit('setLearnLevel', level)
   }
 
-  get isAMinuteForBeginner (): boolean {
-    return (this as any).timeScale === TIME_SCALES.minute &&
-      (this as any).learnLevel === LEARN_LEVELS.beginner
+  get isBeginner (): boolean {
+    return (this as any).learnLevel === LEARN_LEVELS.beginner
   }
 
-  get isAMinuteForAdvanced (): boolean {
-    return (this as any).timeScale === TIME_SCALES.minute &&
-      (this as any).learnLevel === LEARN_LEVELS.advanced
+  get isAdvanced (): boolean {
+    return (this as any).learnLevel === LEARN_LEVELS.advanced
   }
 }
 </script>
@@ -254,6 +260,14 @@ export default class extends QiskitPage {
   &__filter-time-label {
     margin-bottom: $layout-01;
     white-space: nowrap;
+  }
+
+  &__item {
+    margin-bottom: $layout-02;
+
+    @include mq($until: large) {
+      margin-bottom: $layout-01;
+    }
   }
 
   &__small-only {

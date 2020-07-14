@@ -1,11 +1,13 @@
 <template>
-  <div>
-    <h2 class="copy__subtitle">
-      A Carefully Worded Summary of Quantum Computing for Beginners
-    </h2>
-    <p class="copy__paragraph">
-      There are many misconceptions about quantum computers, this is understandable since the science is exciting and potentially very useful, but is unfortunately not easily accessible to someone without the appropriate background. Part of the problem is that some quantum mechanical concepts cannot be analogised to everyday experiences, so that has been avoided here.
-    </p>
+  <CarefulExplanation v-bind="$attrs">
+    <template #summary>
+      <h2 class="copy__subtitle">
+        A Carefully Worded Summary of Quantum Computing for Beginners
+      </h2>
+      <p class="copy__paragraph">
+        There are many misconceptions about quantum computers, this is understandable since the science is exciting and potentially very useful, but is unfortunately not easily accessible to someone without the appropriate background. Part of the problem is that some quantum mechanical concepts cannot be analogised to everyday experiences, so that has been avoided here.
+      </p>
+    </template>
     <p class="copy__paragraph">
       To understand why quantum computing is useful we need to explain how quantum mechanics came about. Before the development of quantum mechanics, physicists described the world around us using mathematical models that we now know as 'Classical Mechanics'.
     </p>
@@ -33,14 +35,15 @@
     <p class="copy__paragraph">
       Building a quantum computer would not only be useful to solve computational problems, but also to test our theories of quantum physics. And as with all scientific research, the process of building a working quantum computer helps advance technology and materials sciences.
     </p>
-  </div>
+  </CarefulExplanation>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
+import CarefulExplanation from '~/components/learn/CarefulExplanation.vue'
 
-@Component
+@Component({ components: { CarefulExplanation } })
 export default class extends Vue {}
 </script>
 
