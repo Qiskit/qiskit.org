@@ -95,7 +95,7 @@ const ORDERED_COMMUNITY_SUB_LINKS: Array<NavLink> = [
 const QISKIT_EDUCATION: LabeledLinks = {
   textbook: {
     label: 'Textbook',
-    url: 'https://qiskit.org/textbook/preface.html'
+    url: 'https://qiskit.org/textbook'
   }
 }
 
@@ -121,12 +121,12 @@ const DOCUMENTATION_LINK: NavLink = {
 
 const QISKIT_VIDEOS: NavLink = {
   label: 'Videos',
-  url: 'https://www.youtube.com/playlist?list=PLOFEBzvs-Vvp2xg9-POLJhQwtVktlYGbY'
+  url: 'https://www.youtube.com/qiskit'
 }
 
 const TUTORIALS_LINK: NavLink = {
   label: 'Tutorials',
-  url: 'https://qiskit.org/documentation/tutorials/circuits/index.html#',
+  url: 'https://github.com/Qiskit/qiskit-tutorials',
   segment: {
     action: 'Tutorials'
   }
