@@ -83,12 +83,12 @@
           </fieldset>
           <section class="the-learning-resources-list__results">
             <TheCarefulExplanationForBeginner
-              v-if="isBeginner"
+              v-if="isAMinuteForBeginner"
               class="the-learning-resources-list__item"
               :compact="filteredLearningResources.length > 0"
             />
             <TheCarefulExplanationForAdvanced
-              v-if="isAdvanced"
+              v-if="isAMinuteForAdvanced"
               class="the-learning-resources-list__item"
               :compact="filteredLearningResources.length > 0"
             />
@@ -120,6 +120,7 @@ import TheCarefulExplanationForAdvanced from '~/components/learn/TheCarefulExpla
 import {
   TimeScale,
   LEARN_LEVELS,
+  TIME_SCALES,
   LEARN_LEVEL_OPTIONS,
   TIME_SCALE_OPTIONS
 } from '~/store/modules/learning-resources.ts'
@@ -166,12 +167,16 @@ export default class extends QiskitPage {
     this.$store.commit('setLearnLevel', level)
   }
 
-  get isBeginner (): boolean {
-    return (this as any).learnLevel === LEARN_LEVELS.beginner
+  get isAMinuteForBeginner (): boolean {
+    const { learnLevel, timeScale } = (this as any)
+    return learnLevel === LEARN_LEVELS.beginner &&
+      (timeScale === TIME_SCALES.any || timeScale === TIME_SCALES.minute)
   }
 
-  get isAdvanced (): boolean {
-    return (this as any).learnLevel === LEARN_LEVELS.advanced
+  get isAMinuteForAdvanced (): boolean {
+    const { learnLevel, timeScale } = (this as any)
+    return learnLevel === LEARN_LEVELS.advanced &&
+      (timeScale === TIME_SCALES.any || timeScale === TIME_SCALES.minute)
   }
 }
 </script>
