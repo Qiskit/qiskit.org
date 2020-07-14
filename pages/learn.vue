@@ -85,15 +85,17 @@
           <section class="the-learning-resources-list__results">
             <TheCarefulExplanationForBeginner
               v-if="showingOneMinuteForBeginner && !showingEverything"
+              id="explanation-for-beginner"
               class="the-learning-resources-list__item"
               :compact="showingMoreResources"
-              url="/learn?learnLevel=beginner&amp;timeScale=1%20minute"
+              url="/learn?learnLevel=beginner&amp;timeScale=1%20minute#explanation-for-beginner"
             />
             <TheCarefulExplanationForAdvanced
               v-if="showingOneMinuteForAdvanced && !showingEverything"
+              id="explanation-for-advanced"
               class="the-learning-resources-list__item"
               :compact="showingMoreResources"
-              url="/learn?learnLevel=advanced&amp;timeScale=1%20minute"
+              url="/learn?learnLevel=advanced&amp;timeScale=1%20minute#explanation-for-advanced"
             />
             <LearningResourceCard
               v-for="resource in filteredLearningResources"
