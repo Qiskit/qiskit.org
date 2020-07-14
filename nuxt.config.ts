@@ -81,7 +81,6 @@ const config: Configuration = {
   */
   plugins: [
     '~/plugins/router-hooks.ts',
-    '~/plugins/highlight-js.ts',
     '~/plugins/carbon.ts',
     '~/plugins/deep-load.ts',
     { src: '~/plugins/hotjar.ts', mode: 'client' },
@@ -97,7 +96,8 @@ const config: Configuration = {
   modules: [
     '@nuxt/content',
     '@nuxtjs/style-resources',
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    'nuxt-lazy-load'
   ],
 
   styleResources: {
