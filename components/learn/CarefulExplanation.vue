@@ -2,9 +2,9 @@
   <article>
     <slot name="summary" />
     <template v-if="compact">
-      <AppCta :url="url" target="_blank">
+      <p class="copy__link" style="cursor: pointer" @click="$emit('ctaClick')">
         Read more
-      </AppCta>
+      </p>
     </template>
     <slot v-else />
   </article>
@@ -13,9 +13,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-import AppCta from '~/components/ui/AppCta.vue'
 
-@Component({ components: { AppCta } })
+@Component
 export default class extends Vue {
   @Prop({ type: Boolean, default: false }) compact!: boolean
   @Prop({ type: String, default: '#' }) url!: string

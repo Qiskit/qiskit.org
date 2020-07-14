@@ -82,19 +82,21 @@
               </cv-radio-group>
             </client-only>
           </fieldset>
-          <section class="the-learning-resources-list__results">
-            <TheCarefulExplanationForBeginner
-              v-if="isAMinuteForBeginner"
-              class="the-learning-resources-list__item"
-              :compact="filteredLearningResources.length > 0"
-              url="/learn?learnLevel=beginner&amp;timeScale=1%20minute"
-            />
-            <TheCarefulExplanationForAdvanced
-              v-if="isAMinuteForAdvanced"
-              class="the-learning-resources-list__item"
-              :compact="filteredLearningResources.length > 0"
-              url="/learn?learnLevel=advanced&amp;timeScale=1%20minute"
-            />
+          <section id="results" class="the-learning-resources-list__results">
+            <client-only>
+              <TheCarefulExplanationForBeginner
+                v-if="showingOneMinuteForBeginner && !showingEverything"
+                class="the-learning-resources-list__item"
+                :compact="showingMoreResources"
+                @ctaClick="showExplanation('advanced')"
+              />
+              <TheCarefulExplanationForAdvanced
+                v-if="showingOneMinuteForAdvanced && !showingEverything"
+                class="the-learning-resources-list__item"
+                :compact="showingMoreResources"
+                @ctaClick="showExplanation('advanced')"
+              />
+            </client-only>
             <LearningResourceCard
               v-for="resource in filteredLearningResources"
               :key="resource.path"
@@ -150,13 +152,9 @@ import {
     ])
   },
 
-  async middleware ({ $content, store, route }) {
+  async middleware ({ $content, store }) {
     const learningResources = await $content('learning-resources').fetch()
-    const timeScale = route.query.timeScale || TIME_SCALES.any
-    const learnLevel = route.query.learnLevel || LEARN_LEVELS.all
     store.commit('setLearningResources', learningResources)
-    store.commit('setTimeScale', timeScale)
-    store.commit('setLearnLevel', learnLevel)
   }
 })
 
@@ -167,47 +165,45 @@ export default class extends QiskitPage {
   timeScales = TIME_SCALE_OPTIONS
 
   setTimeScale (scale: TimeScale): void {
-    const { timeScale: currentScale } = this as any
-    if (currentScale === scale) {
-      return
-    }
-    this._updateQueryParameter('timeScale', scale)
+    this.$store.commit('setTimeScale', scale)
   }
 
   setLearnLevel (tabIndex: number) {
-    const { learnLevel: currentLevel } = this as any
     const level = this.learnLevels[tabIndex]
-    if (currentLevel === level) {
-      return
-    }
-    this._updateQueryParameter('learnLevel', level)
+    this.$store.commit('setLearnLevel', level)
   }
 
-  _updateQueryParameter (paramName: string, value: string) {
-    this.$router.push({
-      query: {
-        ...this.$route.query,
-        [paramName]: value
-      }
-    })
+  showExplanation (level: 'beginner'|'advanced') {
+    this.$store.commit('setTimeScale', TIME_SCALES.minute)
+    this.$store.commit('setLearnLevel', level)
   }
 
-  get isAMinuteForBeginner (): boolean {
-    return this.isAMinute && this.isLevel(LEARN_LEVELS.beginner)
+  get showingEverything (): boolean {
+    const { timeScale, learnLevel } = (this as any)
+    return timeScale === TIME_SCALES.any && learnLevel === LEARN_LEVELS.all
   }
 
-  get isAMinuteForAdvanced (): boolean {
-    return this.isAMinute && this.isLevel(LEARN_LEVELS.advanced)
+  get showingOneMinuteForBeginner (): boolean {
+    return this.showingOneMinute && this.showingLevel(LEARN_LEVELS.beginner)
   }
 
-  get isAMinute (): boolean {
+  get showingOneMinuteForAdvanced (): boolean {
+    return this.showingOneMinute && this.showingLevel(LEARN_LEVELS.advanced)
+  }
+
+  get showingOneMinute (): boolean {
     const { timeScale } = (this as any)
     return [TIME_SCALES.any, TIME_SCALES.minute].includes(timeScale)
   }
 
-  isLevel (level: LearnLevel): boolean {
+  showingLevel (level: LearnLevel): boolean {
     const { learnLevel } = (this as any)
     return [LEARN_LEVELS.all, level].includes(learnLevel)
+  }
+
+  get showingMoreResources () {
+    return (this as any).filteredLearningResources.length > 0 ||
+      (this.showingOneMinuteForAdvanced && this.showingOneMinuteForBeginner)
   }
 }
 </script>

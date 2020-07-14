@@ -1,5 +1,5 @@
 <template>
-  <CarefulExplanation v-bind="$attrs">
+  <CarefulExplanation v-bind="$attrs" v-on="$listeners">
     <template #summary>
       <h2 class="copy__subtitle">
         A Carefully Worded Summary of Quantum Computing for Beginners
