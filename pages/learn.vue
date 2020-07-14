@@ -84,15 +84,15 @@
           </fieldset>
           <section class="the-learning-resources-list__results">
             <TheCarefulExplanationForBeginner
-              v-if="isAMinuteForBeginner"
+              v-if="showingOneMinuteForBeginner && !showingEverything"
               class="the-learning-resources-list__item"
-              :compact="explanationInCompactMode"
+              :compact="showingMoreResources"
               url="/learn?learnLevel=beginner&amp;timeScale=1%20minute"
             />
             <TheCarefulExplanationForAdvanced
-              v-if="isAMinuteForAdvanced"
+              v-if="showingOneMinuteForAdvanced && !showingEverything"
               class="the-learning-resources-list__item"
-              :compact="explanationInCompactMode"
+              :compact="showingMoreResources"
               url="/learn?learnLevel=advanced&amp;timeScale=1%20minute"
             />
             <LearningResourceCard
@@ -150,13 +150,9 @@ import {
     ])
   },
 
-  async middleware ({ $content, store, route }) {
+  async middleware ({ $content, store }) {
     const learningResources = await $content('learning-resources').fetch()
-    const timeScale = route.query.timeScale || TIME_SCALES.any
-    const learnLevel = route.query.learnLevel || LEARN_LEVELS.all
     store.commit('setLearningResources', learningResources)
-    store.commit('setTimeScale', timeScale)
-    store.commit('setLearnLevel', learnLevel)
   }
 })
 
@@ -165,6 +161,22 @@ export default class extends QiskitPage {
 
   learnLevels = LEARN_LEVEL_OPTIONS
   timeScales = TIME_SCALE_OPTIONS
+
+  beforeRouteEnter (route, _, next) {
+    next(learnPage => learnPage._parseFilterFromUrl(route))
+  }
+
+  beforeRouteUpdate (route, _, next) {
+    this._parseFilterFromUrl(route)
+    next()
+  }
+
+  _parseFilterFromUrl (route) {
+    const timeScale = route.query.timeScale || TIME_SCALES.any
+    const learnLevel = route.query.learnLevel || LEARN_LEVELS.all
+    this.$store.commit('setTimeScale', timeScale)
+    this.$store.commit('setLearnLevel', learnLevel)
+  }
 
   setTimeScale (scale: TimeScale): void {
     const { timeScale: currentScale } = this as any
@@ -192,27 +204,32 @@ export default class extends QiskitPage {
     })
   }
 
-  get isAMinuteForBeginner (): boolean {
-    return this.isAMinute && this.isLevel(LEARN_LEVELS.beginner)
+  get showingEverything (): boolean {
+    const { timeScale, learnLevel } = (this as any)
+    return timeScale === TIME_SCALES.any && learnLevel === LEARN_LEVELS.all
   }
 
-  get isAMinuteForAdvanced (): boolean {
-    return this.isAMinute && this.isLevel(LEARN_LEVELS.advanced)
+  get showingOneMinuteForBeginner (): boolean {
+    return this.showingOneMinute && this.showingLevel(LEARN_LEVELS.beginner)
   }
 
-  get isAMinute (): boolean {
+  get showingOneMinuteForAdvanced (): boolean {
+    return this.showingOneMinute && this.showingLevel(LEARN_LEVELS.advanced)
+  }
+
+  get showingOneMinute (): boolean {
     const { timeScale } = (this as any)
     return [TIME_SCALES.any, TIME_SCALES.minute].includes(timeScale)
   }
 
-  isLevel (level: LearnLevel): boolean {
+  showingLevel (level: LearnLevel): boolean {
     const { learnLevel } = (this as any)
     return [LEARN_LEVELS.all, level].includes(learnLevel)
   }
 
-  get explanationInCompactMode () {
+  get showingMoreResources () {
     return (this as any).filteredLearningResources.length > 0 ||
-      (this.isAMinuteForAdvanced && this.isAMinuteForBeginner)
+      (this.showingOneMinuteForAdvanced && this.showingOneMinuteForBeginner)
   }
 }
 </script>
