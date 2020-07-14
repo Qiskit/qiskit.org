@@ -19,7 +19,7 @@
         <p
           class="
               copy__paragraph
-              copy__paragraph_outstanding
+              copy__paragraph_importance_outstanding
             "
         >
           The below are designed and created by the Qiskit team. However, we
