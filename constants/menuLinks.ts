@@ -121,7 +121,7 @@ const DOCUMENTATION_LINK: NavLink = {
 
 const QISKIT_VIDEOS: NavLink = {
   label: 'Videos',
-  url: 'https://www.youtube.com/playlist?list=PLOFEBzvs-Vvp2xg9-POLJhQwtVktlYGbY'
+  url: 'https://www.youtube.com/qiskit'
 }
 
 const TUTORIALS_LINK: NavLink = {
