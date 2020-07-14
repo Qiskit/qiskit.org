@@ -30,6 +30,7 @@
           <cv-tabs
             class="the-learning-resources-list__filter-level"
             aria-label="navigation tab label"
+            no-default-to-first
             @tab-selected="setLearnLevel"
           >
             <cv-tab
@@ -86,11 +87,13 @@
               v-if="isAMinuteForBeginner"
               class="the-learning-resources-list__item"
               :compact="filteredLearningResources.length > 0"
+              url="/learn?learnLevel=beginner&amp;timeScale=1%20minute"
             />
             <TheCarefulExplanationForAdvanced
               v-if="isAMinuteForAdvanced"
               class="the-learning-resources-list__item"
               :compact="filteredLearningResources.length > 0"
+              url="/learn?learnLevel=advanced&amp;timeScale=1%20minute"
             />
             <LearningResourceCard
               v-for="resource in filteredLearningResources"
@@ -122,7 +125,8 @@ import {
   LEARN_LEVELS,
   TIME_SCALES,
   LEARN_LEVEL_OPTIONS,
-  TIME_SCALE_OPTIONS
+  TIME_SCALE_OPTIONS,
+  LearnLevel
 } from '~/store/modules/learning-resources.ts'
 
 @Component({
@@ -146,9 +150,13 @@ import {
     ])
   },
 
-  async middleware ({ $content, store }) {
+  async middleware ({ $content, store, route }) {
     const learningResources = await $content('learning-resources').fetch()
+    const timeScale = route.query.timeScale || TIME_SCALES.any
+    const learnLevel = route.query.learnLevel || LEARN_LEVELS.all
     store.commit('setLearningResources', learningResources)
+    store.commit('setTimeScale', timeScale)
+    store.commit('setLearnLevel', learnLevel)
   }
 })
 
@@ -159,24 +167,47 @@ export default class extends QiskitPage {
   timeScales = TIME_SCALE_OPTIONS
 
   setTimeScale (scale: TimeScale): void {
-    this.$store.commit('setTimeScale', scale)
+    const { timeScale: currentScale } = this as any
+    if (currentScale === scale) {
+      return
+    }
+    this._updateQueryParameter('timeScale', scale)
   }
 
   setLearnLevel (tabIndex: number) {
+    const { learnLevel: currentLevel } = this as any
     const level = this.learnLevels[tabIndex]
-    this.$store.commit('setLearnLevel', level)
+    if (currentLevel === level) {
+      return
+    }
+    this._updateQueryParameter('learnLevel', level)
+  }
+
+  _updateQueryParameter (paramName: string, value: string) {
+    this.$router.push({
+      query: {
+        ...this.$route.query,
+        [paramName]: value
+      }
+    })
   }
 
   get isAMinuteForBeginner (): boolean {
-    const { learnLevel, timeScale } = (this as any)
-    return learnLevel === LEARN_LEVELS.beginner &&
-      (timeScale === TIME_SCALES.any || timeScale === TIME_SCALES.minute)
+    return this.isAMinute && this.isLevel(LEARN_LEVELS.beginner)
   }
 
   get isAMinuteForAdvanced (): boolean {
-    const { learnLevel, timeScale } = (this as any)
-    return learnLevel === LEARN_LEVELS.advanced &&
-      (timeScale === TIME_SCALES.any || timeScale === TIME_SCALES.minute)
+    return this.isAMinute && this.isLevel(LEARN_LEVELS.advanced)
+  }
+
+  get isAMinute (): boolean {
+    const { timeScale } = (this as any)
+    return [TIME_SCALES.any, TIME_SCALES.minute].includes(timeScale)
+  }
+
+  isLevel (level: LearnLevel): boolean {
+    const { learnLevel } = (this as any)
+    return [LEARN_LEVELS.all, level].includes(learnLevel)
   }
 }
 </script>
