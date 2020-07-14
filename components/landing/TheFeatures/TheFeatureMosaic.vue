@@ -2,6 +2,7 @@
   <section class="feature-mosaic">
     <dl class="feature-mosaic__layout">
       <div
+        lazy-background="/images/library/circuit-01.png"
         class="
           feature-mosaic__feature
           feature-mosaic__feature-circuits
@@ -25,6 +26,7 @@
         "
       >
         <div
+          lazy-background="/images/landing-page/feature-hardware.jpg"
           class="
             feature-mosaic__feature-decoration
             feature-mosaic__feature-decoration-hardware
@@ -45,7 +47,12 @@
           </dd>
         </div>
       </div>
-      <div class="feature-mosaic__feature feature-mosaic__feature-algorithms">
+      <div
+        class="
+          feature-mosaic__feature
+          feature-mosaic__feature-algorithms
+        "
+      >
         <div
           class="
             feature-mosaic__feature-copy
@@ -61,6 +68,7 @@
           </dd>
         </div>
         <div
+          lazy-background="/images/landing-page/feature-algorithms.jpg"
           class="
             feature-mosaic__feature-decoration
             feature-mosaic__feature-decoration-algorithms
@@ -68,6 +76,7 @@
         />
       </div>
       <div
+        lazy-background="/images/landing-page/feature-mitigation.png"
         class="
           feature-mosaic__feature
           feature-mosaic__feature-mitigation
@@ -177,7 +186,6 @@ export default class extends Vue {}
   }
 
   &__feature-circuits {
-    background-image: url('/images/library/circuit-01.png');
     background-position: right bottom;
     background-size: 14rem auto;
     background-repeat: no-repeat;
@@ -194,7 +202,6 @@ export default class extends Vue {}
   }
 
   &__feature-decoration-hardware {
-    background-image: url('/images/landing-page/feature-hardware.jpg');
     background-position: center top;
     background-size: cover;
     background-repeat: no-repeat;
@@ -225,7 +232,6 @@ export default class extends Vue {}
   }
 
   &__feature-decoration-algorithms {
-    background-image: url('/images/landing-page/feature-algorithms.jpg');
     background-position: center bottom;
     background-size: cover;
     background-repeat: no-repeat;
@@ -243,7 +249,6 @@ export default class extends Vue {}
   }
 
   &__feature-mitigation {
-    background-image: url('/images/landing-page/feature-mitigation.png');
     background-position: right 0 top calc(50% + 2rem);
     background-size: 25rem auto;
     background-repeat: no-repeat;
