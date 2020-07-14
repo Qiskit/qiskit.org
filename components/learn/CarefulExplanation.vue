@@ -2,7 +2,7 @@
   <article>
     <slot name="summary" />
     <template v-if="compact">
-      <AppCta :url="url">
+      <AppCta :url="url" target="_blank">
         Read more
       </AppCta>
     </template>
