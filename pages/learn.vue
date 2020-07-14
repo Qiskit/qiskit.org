@@ -86,13 +86,13 @@
             <TheCarefulExplanationForBeginner
               v-if="isAMinuteForBeginner"
               class="the-learning-resources-list__item"
-              :compact="filteredLearningResources.length > 0"
+              :compact="explanationInCompactMode"
               url="/learn?learnLevel=beginner&amp;timeScale=1%20minute"
             />
             <TheCarefulExplanationForAdvanced
               v-if="isAMinuteForAdvanced"
               class="the-learning-resources-list__item"
-              :compact="filteredLearningResources.length > 0"
+              :compact="explanationInCompactMode"
               url="/learn?learnLevel=advanced&amp;timeScale=1%20minute"
             />
             <LearningResourceCard
@@ -208,6 +208,11 @@ export default class extends QiskitPage {
   isLevel (level: LearnLevel): boolean {
     const { learnLevel } = (this as any)
     return [LEARN_LEVELS.all, level].includes(learnLevel)
+  }
+
+  get explanationInCompactMode () {
+    return (this as any).filteredLearningResources.length > 0 ||
+      (this.isAMinuteForAdvanced && this.isAMinuteForBeginner)
   }
 }
 </script>
