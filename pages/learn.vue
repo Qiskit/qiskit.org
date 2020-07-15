@@ -82,20 +82,18 @@
               </cv-radio-group>
             </client-only>
           </fieldset>
-          <section class="the-learning-resources-list__results">
+          <section id="results" class="the-learning-resources-list__results">
             <TheCarefulExplanationForBeginner
               v-if="showingOneMinuteForBeginner && !showingEverything"
-              id="explanation-for-beginner"
               class="the-learning-resources-list__item"
               :compact="showingMoreResources"
-              url="/learn/?summary=beginner#explanation-for-beginner"
+              url="/learn/?summary=beginner#results"
             />
             <TheCarefulExplanationForAdvanced
               v-if="showingOneMinuteForAdvanced && !showingEverything"
-              id="explanation-for-advanced"
               class="the-learning-resources-list__item"
               :compact="showingMoreResources"
-              url="/learn/?summary=advanced#explanation-for-advanced"
+              url="/learn/?summary=advanced#results"
             />
             <LearningResourceCard
               v-for="resource in filteredLearningResources"
@@ -179,15 +177,6 @@ export default class extends QiskitPage {
   setLearnLevel (tabIndex: number) {
     const level = this.learnLevels[tabIndex]
     this.$store.commit('setLearnLevel', level)
-  }
-
-  _updateQueryParameter (paramName: string, value: string) {
-    this.$router.push({
-      query: {
-        ...this.$route.query,
-        [paramName]: value
-      }
-    })
   }
 
   get showingEverything (): boolean {
