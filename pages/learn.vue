@@ -23,7 +23,11 @@
             "
         >
           The below are designed and created by the Qiskit team. However, we
-          recommend a familiar with linear algebra and Python from these
+          recommend a familiarity with <AppLink class="copy__link" url="https://www.khanacademy.org/math/linear-algebra">
+            linear algebra
+          </AppLink> and <AppLink class="copy__link" url="https://www.coursera.org/specializations/python">
+            Python
+          </AppLink> from these
           trusted resources.
         </p>
         <client-only>
@@ -89,7 +93,7 @@
               :compact="isShowingMoreResources"
               url="/learn/?learnLevel=beginner&amp;timeScale=1%20minute"
             />
-            <TheCarefulExplanationForAdvanced
+            <TheCarefulExplanationForExperts
               v-if="isShowingOneMinuteFor(learnLevels.advanced) && !isShowingEverything"
               class="the-learning-resources-list__item"
               :compact="isShowingMoreResources"
@@ -119,7 +123,8 @@ import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import LearningResourceCard from '~/components/learn/LearningResourceCard.vue'
 import TheCarefulExplanationForBeginner from '~/components/learn/TheCarefulExplanationForBeginner.vue'
-import TheCarefulExplanationForAdvanced from '~/components/learn/TheCarefulExplanationForAdvanced.vue'
+import TheCarefulExplanationForExperts from '~/components/learn/TheCarefulExplanationForExperts.vue'
+import AppLink from '~/components/ui/AppLink.vue'
 import {
   TimeScale,
   LEARN_LEVELS,
@@ -132,8 +137,9 @@ import {
 @Component({
   components: {
     LearningResourceCard,
-    TheCarefulExplanationForAdvanced,
-    TheCarefulExplanationForBeginner
+    TheCarefulExplanationForExperts,
+    TheCarefulExplanationForBeginner,
+    AppLink
   },
 
   head () {

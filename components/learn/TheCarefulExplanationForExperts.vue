@@ -2,7 +2,7 @@
   <CarefulExplanation v-bind="$attrs">
     <template #summary>
       <h2 class="copy__subtitle">
-        A Carefully Worded Summary of Quantum Computing for Advanced
+        A Carefully Worded Summary of Quantum Computing for Experts
       </h2>
       <p class="copy__paragraph">
         The ability to control and manipulate matter on an atomic scale was a dream first shared by Richard Feynman in his speech, “There’s Plenty of Room at the Bottom,” in 1959. By the 80’s, this idea really began to pick up speed, and a new subject called Quantum Computing had begun to emerge.

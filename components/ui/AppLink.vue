@@ -5,6 +5,7 @@
     :to="isNuxtLink && url"
     :style="hasLink && 'cursor:pointer'"
     :rel="isExternal && 'noopener'"
+    :target="isExternal && '_blank'"
     @click="segment && $trackClickEvent(segment)"
   >
     <slot />
