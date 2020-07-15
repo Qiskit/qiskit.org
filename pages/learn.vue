@@ -82,18 +82,18 @@
               </cv-radio-group>
             </client-only>
           </fieldset>
-          <section id="results" class="the-learning-resources-list__results">
+          <section class="the-learning-resources-list__results">
             <TheCarefulExplanationForBeginner
               v-if="isShowingOneMinuteFor(learnLevels.beginner) && !isShowingEverything"
               class="the-learning-resources-list__item"
               :compact="isShowingMoreResources"
-              url="/learn/?learnLevel=beginner&amp;timeScale=1%20minute#results"
+              url="/learn/?learnLevel=beginner&amp;timeScale=1%20minute"
             />
             <TheCarefulExplanationForAdvanced
               v-if="isShowingOneMinuteFor(learnLevels.advanced) && !isShowingEverything"
               class="the-learning-resources-list__item"
               :compact="isShowingMoreResources"
-              url="/learn/?learnLevel=advanced&amp;timeScale=1%20minute#results"
+              url="/learn/?learnLevel=advanced&amp;timeScale=1%20minute"
             />
             <LearningResourceCard
               v-for="resource in filteredLearningResources"
