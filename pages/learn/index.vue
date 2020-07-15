@@ -87,13 +87,13 @@
               v-if="isShowingOneMinuteFor(learnLevels.beginner) && !isShowingEverything"
               class="the-learning-resources-list__item"
               :compact="isShowingMoreResources"
-              @ctaClick="showExplanation('beginner')"
+              url="/learn/summary-beginner"
             />
             <TheCarefulExplanationForAdvanced
               v-if="isShowingOneMinuteFor(learnLevels.advanced) && !isShowingEverything"
               class="the-learning-resources-list__item"
               :compact="isShowingMoreResources"
-              @ctaClick="showExplanation('advanced')"
+              url="/learn/summary-advanced"
             />
             <LearningResourceCard
               v-for="resource in filteredLearningResources"

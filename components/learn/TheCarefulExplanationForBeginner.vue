@@ -1,9 +1,11 @@
 <template>
   <CarefulExplanation v-bind="$attrs" v-on="$listeners">
-    <template #summary>
+    <template #title>
       <h2 class="copy__subtitle">
         A Carefully Worded Summary of Quantum Computing for Beginners
       </h2>
+    </template>
+    <template #summary>
       <p class="copy__paragraph">
         There are many misconceptions about quantum computers, this is understandable since the science is exciting and potentially very useful, but is unfortunately not easily accessible to someone without the appropriate background. Part of the problem is that some quantum mechanical concepts cannot be analogised to everyday experiences, so that has been avoided here.
       </p>
