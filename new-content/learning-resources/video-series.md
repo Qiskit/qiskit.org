@@ -1,10 +1,10 @@
 ---
-title: Qiskit video series
-to: https://www.youtube.com/Qiskit
+title: Coding with Qiskit
+to: https://www.youtube.com/playlist?list=PLOFEBzvs-Vvp2xg9-POLJhQwtVktlYGbY
 image: /images/landing-page/feature-hardware.jpg
 ctaLabel: Watch the series
 classifications:
-  - level: beginner
+  - level: Beginner
     time: 1 week
 ---
-In this post, we will share an overview of our plans for Qiskit, including its four elements, each of which forms a pillar of quantum computing software.
+This video series starts at learning how to install Qiskit locally, understanding what gates to do quantum states and explores quantum algorithms and the latest research topics.
