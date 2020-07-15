@@ -10,8 +10,8 @@ const TIME_SCALES = Object.freeze({
 
 const LEARN_LEVELS = Object.freeze({
   all: 'All resources',
-  beginner: 'beginner',
-  advanced: 'advanced'
+  beginner: 'Beginner',
+  advanced: 'Advanced'
 } as const)
 
 type LearnLevel = typeof LEARN_LEVELS[keyof typeof LEARN_LEVELS]
