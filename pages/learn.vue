@@ -88,14 +88,14 @@
               id="explanation-for-beginner"
               class="the-learning-resources-list__item"
               :compact="showingMoreResources"
-              url="/learn?learnLevel=beginner&amp;timeScale=1%20minute#explanation-for-beginner"
+              url="/learn/?summary=beginner#explanation-for-beginner"
             />
             <TheCarefulExplanationForAdvanced
               v-if="showingOneMinuteForAdvanced && !showingEverything"
               id="explanation-for-advanced"
               class="the-learning-resources-list__item"
               :compact="showingMoreResources"
-              url="/learn?learnLevel=advanced&amp;timeScale=1%20minute#explanation-for-advanced"
+              url="/learn/?summary=advanced#explanation-for-advanced"
             />
             <LearningResourceCard
               v-for="resource in filteredLearningResources"
@@ -152,9 +152,17 @@ import {
     ])
   },
 
-  async middleware ({ $content, store }) {
+  async middleware ({ $content, store, route }) {
     const learningResources = await $content('learning-resources').fetch()
     store.commit('setLearningResources', learningResources)
+
+    const summaryType = route.query.summary as 'beginner'|'advanced'|null
+    if (!summaryType) {
+      return
+    }
+
+    store.commit('setTimeScale', TIME_SCALES.minute)
+    store.commit('setLearnLevel', LEARN_LEVELS[summaryType])
   }
 })
 
@@ -164,37 +172,13 @@ export default class extends QiskitPage {
   learnLevels = LEARN_LEVEL_OPTIONS
   timeScales = TIME_SCALE_OPTIONS
 
-  beforeRouteEnter (route, _, next) {
-    next(learnPage => learnPage._parseFilterFromUrl(route))
-  }
-
-  beforeRouteUpdate (route, _, next) {
-    this._parseFilterFromUrl(route)
-    next()
-  }
-
-  _parseFilterFromUrl (route) {
-    const timeScale = route.query.timeScale || TIME_SCALES.any
-    const learnLevel = route.query.learnLevel || LEARN_LEVELS.all
-    this.$store.commit('setTimeScale', timeScale)
-    this.$store.commit('setLearnLevel', learnLevel)
-  }
-
   setTimeScale (scale: TimeScale): void {
-    const { timeScale: currentScale } = this as any
-    if (currentScale === scale) {
-      return
-    }
-    this._updateQueryParameter('timeScale', scale)
+    this.$store.commit('setTimeScale', scale)
   }
 
   setLearnLevel (tabIndex: number) {
-    const { learnLevel: currentLevel } = this as any
     const level = this.learnLevels[tabIndex]
-    if (currentLevel === level) {
-      return
-    }
-    this._updateQueryParameter('learnLevel', level)
+    this.$store.commit('setLearnLevel', level)
   }
 
   _updateQueryParameter (paramName: string, value: string) {
