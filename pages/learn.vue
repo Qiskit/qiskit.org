@@ -84,17 +84,15 @@
           </fieldset>
           <section id="results" class="the-learning-resources-list__results">
             <TheCarefulExplanationForBeginner
-              v-if="showingOneMinuteForBeginner && !showingEverything"
-              id="explanation-for-beginner"
+              v-if="isShowingOneMinuteFor(LEARN_LEVELS.beginner) && !isShowingEverything"
               class="the-learning-resources-list__item"
-              :compact="showingMoreResources"
+              :compact="isShowingMoreResources"
               url="/learn/?learnLevel=beginner&amp;timeScale=1%20minute#results"
             />
             <TheCarefulExplanationForAdvanced
-              v-if="showingOneMinuteForAdvanced && !showingEverything"
-              id="explanation-for-advanced"
+              v-if="isShowingOneMinuteFor(LEARN_LEVELS.advanced) && !isShowingEverything"
               class="the-learning-resources-list__item"
-              :compact="showingMoreResources"
+              :compact="isShowingMoreResources"
               url="/learn/?learnLevel=advanced&amp;timeScale=1%20minute#results"
             />
             <LearningResourceCard
@@ -206,32 +204,29 @@ export default class extends QiskitPage {
     })
   }
 
-  get showingEverything (): boolean {
+  get isShowingEverything (): boolean {
     const { timeScale, learnLevel } = (this as any)
     return timeScale === TIME_SCALES.any && learnLevel === LEARN_LEVELS.all
   }
 
-  get showingOneMinuteForBeginner (): boolean {
-    return this.showingOneMinute && this.showingLevel(LEARN_LEVELS.beginner)
+  isShowingOneMinuteFor (level: LearnLevel): boolean {
+    return this.isShowingOneMinute && this.isShowingLevel(level)
   }
 
-  get showingOneMinuteForAdvanced (): boolean {
-    return this.showingOneMinute && this.showingLevel(LEARN_LEVELS.advanced)
-  }
-
-  get showingOneMinute (): boolean {
+  get isShowingOneMinute (): boolean {
     const { timeScale } = (this as any)
     return [TIME_SCALES.any, TIME_SCALES.minute].includes(timeScale)
   }
 
-  showingLevel (level: LearnLevel): boolean {
+  isShowingLevel (level: LearnLevel): boolean {
     const { learnLevel } = (this as any)
     return [LEARN_LEVELS.all, level].includes(learnLevel)
   }
 
-  get showingMoreResources () {
+  get isShowingMoreResources () {
+    const { advanced, beginner } = LEARN_LEVELS
     return (this as any).filteredLearningResources.length > 0 ||
-      (this.showingOneMinuteForAdvanced && this.showingOneMinuteForBeginner)
+      (this.isShowingOneMinuteFor(advanced) && this.isShowingOneMinuteFor(beginner))
   }
 }
 </script>
