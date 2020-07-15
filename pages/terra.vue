@@ -3,7 +3,7 @@
     <ElementPresentation
       class="element__presentation"
       :title="title"
-      image="/images/qiskit-terra-logo.svg"
+      logo="/images/qiskit-terra-logo.svg"
       :description="description"
       sources="https://github.com/Qiskit/qiskit-terra"
       segment-action="Qiskit Terra: GitHub Repository"
@@ -27,7 +27,7 @@
         </h2>
         <SoftwareStack :stack="elementStack" />
       </article>
-      <template #extra>
+      <template #aside>
         <article class="element_example">
           <h2 class="element__header">
             Example
@@ -49,11 +49,11 @@ import ElementPresentation from '~/components/elements/ElementPresentation.vue'
 import PageSection from '~/components/ui/PageSection.vue'
 import SoftwareStack, { StackLayer } from '~/components/ui/SoftwareStack.vue'
 import SyntaxHighlight from '~/components/ui/SyntaxHighlight.vue'
-import Cta from '~/components/ui/Cta.vue'
+import AppCta from '~/components/ui/AppCta.vue'
 
 @Component({
   components: {
-    Cta,
+    AppCta,
     ElementPresentation,
     PageSection,
     SoftwareStack,

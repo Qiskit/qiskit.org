@@ -12,7 +12,7 @@
           scientists and engineers worldwide to accelerate research towards
           practical applications for quantum computing.
         </p>
-        <template #extra>
+        <template #aside>
           <iframe
             class="header-video"
             width="560"
@@ -45,12 +45,12 @@
         </p>
         <ul class="actions">
           <li>
-            <Cta to="https://www.youtube.com/playlist?list=PLOFEBzvs-Vvp2xg9-POLJhQwtVktlYGbY">
-              View all episodes
-            </Cta>
+            <AppCta v-bind="youtubeAllEpisodesCtaLink">
+              {{ youtubeAllEpisodesCtaLink.label }}
+            </AppCta>
           </li>
         </ul>
-        <template #extra>
+        <template #aside>
           <iframe
             class="episode"
             width="560"
@@ -75,14 +75,14 @@
           </p>
           <ul class="actions">
             <li>
-              <Cta to="/textbook/" is-static>
-                Discover more
-              </Cta>
+              <AppCta v-bind="discoverTextbookCtaLink">
+                {{ discoverTextbookCtaLink.label }}
+              </AppCta>
             </li>
           </ul>
         </div>
 
-        <template #extra>
+        <template #aside>
           <TextbookPreview class="education-page__textbook-preview">
             <TextbookTOC />
           </TextbookPreview>
@@ -99,9 +99,9 @@
         </p>
         <ul class="actions">
           <li>
-            <Cta to="mailto:hello@qiskit.camp">
-              Request an event
-            </Cta>
+            <AppCta v-bind="requestAnEventCtaLink">
+              {{ requestAnEventCtaLink.label }}
+            </AppCta>
           </li>
         </ul>
       </PageSection>
@@ -117,9 +117,11 @@ import CommunityHeader from '~/components/ui/CommunityHeader.vue'
 import PageSection from '~/components/ui/PageSection.vue'
 // @ts-ignore: Cannot find module
 import TextbookPreview from '~/components/education/TextbookPreview.vue'
-import Cta from '~/components/ui/Cta.vue'
+import AppCta from '~/components/ui/AppCta.vue'
 // @ts-ignore: Cannot find module
 import TextbookTOC from '~/content/education/textbook-toc.md'
+
+import { YOUTUBE_ALL_EPISODES_CTA, DISCOVER_TEXTBOOK_CTA, REQUEST_AN_EVENT_CTA } from '~/constants/appLinks'
 
 @Component({
   components: {
@@ -127,7 +129,7 @@ import TextbookTOC from '~/content/education/textbook-toc.md'
     CommunityHeader,
     PageSection,
     TextbookPreview,
-    Cta,
+    AppCta,
     TextbookTOC: TextbookTOC.vue.component
   },
 
@@ -139,6 +141,9 @@ import TextbookTOC from '~/content/education/textbook-toc.md'
 })
 export default class extends QiskitPage {
   routeName: string = 'education'
+  youtubeAllEpisodesCtaLink = YOUTUBE_ALL_EPISODES_CTA
+  discoverTextbookCtaLink = DISCOVER_TEXTBOOK_CTA
+  requestAnEventCtaLink = REQUEST_AN_EVENT_CTA
 }
 </script>
 
@@ -156,7 +161,7 @@ main {
 }
 
 .actions {
-  margin-top: 1rem;
+  margin-top: $layout-01;
   list-style: none;
   display: flex;
   flex-direction: row;
@@ -164,7 +169,6 @@ main {
 
 #presentation {
   .header-video {
-    margin-right: 2rem;
     max-width: 35rem;
     height: 20rem;
     box-shadow: 0  0.75rem 1.75rem -0.25rem $gray-100-a30,
@@ -199,7 +203,7 @@ main {
   color: $text-01;
 
   .episode {
-    margin-left: 2rem;
+    margin-left: $layout-03;
     transform: perspective(75rem) rotateY(-20deg) rotateX(5deg);
     border-radius: 0.5rem;
     box-shadow: 1.5rem 2.25rem 1.75rem 0 $gray-100-a30;
@@ -209,15 +213,15 @@ main {
 #textbook {
   color: $inverse-01;
   background-color: $inverse-02;
-  padding-bottom: 4rem;
+  padding-bottom: $layout-05;
 
   .education-page__textbook-copy {
     position: sticky;
-    top: 7.5rem;
+    top: $layout-06;
     align-self: start;
     background-color: $inverse-02;
     padding: 0;
-    padding-left: 4rem;
+    padding-left: $layout-05;
 
     @include mq($until: medium) {
       width: 100%;
@@ -226,7 +230,7 @@ main {
   }
 
   .education-page__textbook-preview {
-    margin-top: -6rem;
+    margin-top: -$layout-06;
     margin-left: -10%;
   }
 

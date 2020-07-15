@@ -3,7 +3,7 @@
     <ElementPresentation
       class="element__presentation"
       :title="title"
-      image="/images/qiskit-ibmqp-logo.svg"
+      logo="/images/qiskit-ibmqp-logo.svg"
       :description="description"
       sources="https://github.com/Qiskit/qiskit-ibmq-provider"
       segment-action="IBM Q Account: GitHub Repository"
@@ -19,21 +19,16 @@
           and tracking to viewing detailed quantum device properties, the IBM Quantum
           Account connects the proven Qiskit software framework to the most
           advanced quantum computing platforms on the planet.
-          <a
+          <AppLink
             class="element__link"
-            href="https://qiskit.org/documentation/install.html#access-ibm-q-systems"
-            title="Link"
-            rel="noopener"
-            target="_blank"
-            @click="$trackClickEvent({
-              action: 'Link to Access IBMQ Systems'
-            })"
+            v-bind="linkToAccessIBMQSystems"
           >
-            Follow these steps</a>
+            {{ linkToAccessIBMQSystems.label }}
+          </AppLink>
           to set up your Qiskit environment to send jobs to IBM Quantum systems.
         </p>
       </article>
-      <template #extra>
+      <template #aside>
         <article class="element__example">
           <h2 class="element__header">
             Example
@@ -54,14 +49,16 @@ import QiskitElementPage from '~/components/logic/QiskitElementPage.vue'
 import ElementPresentation from '~/components/elements/ElementPresentation.vue'
 import PageSection from '~/components/ui/PageSection.vue'
 import SyntaxHighlight from '~/components/ui/SyntaxHighlight.vue'
-import Cta from '~/components/ui/Cta.vue'
+import AppLink from '~/components/ui/AppLink.vue'
+
+import { ACCESS_IBM_Q_SYSTEMS } from '~/constants/appLinks'
 
 @Component({
   components: {
-    Cta,
     ElementPresentation,
     PageSection,
-    SyntaxHighlight
+    SyntaxHighlight,
+    AppLink
   },
   head (this: QiskitElementPage) {
     return {
@@ -76,6 +73,7 @@ export default class extends QiskitElementPage {
   title = 'IBM Q Account'
   description = 'Access to world-leading quantum systems and simulators.'
   routeName = 'ibm-q-account'
+  linkToAccessIBMQSystems = ACCESS_IBM_Q_SYSTEMS
   codeExample = `from qiskit import IBMQ
 from qiskit.providers.ibmq import least_busy
 

@@ -33,12 +33,12 @@
         <ol>
           <li>Click on the "Apply now" button below.</li>
           <li>Complete the test in the application with at least a 70%.</li>
-          <li>Provide at least 3 contributions to the Qiskit community and complete application by <strong>October 9, 2019</strong>.</li>
+          <li>Provide at least 3 contributions to the Qiskit community and complete application by <strong>August 15, 2020</strong>.</li>
         </ol>
         <ul class="actions">
-          <li>
-            Closed
-          </li>
+          <AppCta url="https://airtable.com/shrm7eWJsKLf3WVrP">
+            Apply now
+          </AppCta>
         </ul>
       </PageSection>
       <MapSection
@@ -74,6 +74,7 @@ import PageSection from '~/components/ui/PageSection.vue'
 import MapSection from '~/components/advocates/MapSection.vue'
 import AdvocateCard from '~/components/advocates/AdvocateCard.vue'
 import CompactFeature from '~/components/ui/CompactFeature.vue'
+import AppCta from '~/components/ui/AppCta.vue'
 
 type Benefit = Pick<CompactFeature, 'icon'|'title'|'description'>
 
@@ -84,7 +85,8 @@ type Benefit = Pick<CompactFeature, 'icon'|'title'|'description'>
     PageSection,
     MapSection,
     AdvocateCard,
-    CompactFeature
+    CompactFeature,
+    AppCta
   },
 
   head () {
@@ -160,7 +162,7 @@ main {
 }
 
 .actions {
-  margin-top: 1rem;
+  margin-top: $layout-01;
   list-style: none;
   display: flex;
   flex-direction: row;
@@ -175,12 +177,12 @@ main {
 
     @include mq($until: medium) {
       text-align: center;
-      margin-top: 2rem;
+      margin-top: $layout-03;
     }
   }
 
   .compact-feature {
-    padding-right: 1rem;
+    padding-right: $layout-01;
 
     &:last-child {
       padding-right: 0;
@@ -198,7 +200,7 @@ main {
   background-color: $inverse-02;
 
   ol {
-    margin-top: 1rem;
+    margin-top: $layout-01;
     list-style-position: inside;
     list-style-type: decimal;
   }
@@ -216,14 +218,14 @@ main {
   color: $text-01;
 
   .advocate-cards-container {
-    margin-top: 3rem;
+    margin-top: $layout-04;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
+    gap: $spacing-05;
 
     & > * {
       @include mq($until: medium) {
-        margin-bottom: 1rem;
+        margin-bottom: $layout-01;
       }
     }
 

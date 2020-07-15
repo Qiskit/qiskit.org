@@ -183,8 +183,7 @@ const config: Configuration = {
   generate: {
     routes: (function () {
       const events = getContentUrls('events')
-      const experiments = getContentUrls('experiments')
-      return events.concat(experiments)
+      return events
 
       function getContentUrls (contentRoot: string): string[] {
         return fs.readdirSync(path.resolve(__dirname, 'content', contentRoot))

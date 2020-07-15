@@ -18,46 +18,48 @@
 @import '~carbon-components/scss/globals/scss/typography';
 
 .textbook-features {
+  $back-page-offset: 1rem;
+
   position: relative;
 
   &::before {
     content: "";
     display: block;
     position: absolute;
-    bottom: -1rem;
+    bottom: -$back-page-offset;
     z-index: 1;
     width: 100%;
-    height: 100px;
+    height: 6.25rem;
     box-shadow: 0 23px 35px 0 $gray-100-a30;
     border-radius: 8px;
     transform-origin: center bottom;
     transform: scale(0.95);
   }
-}
 
-.textbook-features__page {
-  position: relative;
-  width: 100%;
-  opacity: 0;
-  background: $inverse-02;
-  border-radius: 8px;
-  padding: 2rem;
-  transform-origin: center bottom;
-  transform: scale(0.95) translateY(1rem);
-  transition: transform 300ms, opacity 300ms;
-
-  &--active {
-    opacity: 1;
-    z-index: 2;
-    transform: scale(1);
-    box-shadow: 0 23px 35px 0 $gray-100-a30;
-  }
-
-  &--out {
+  &__page {
+    position: relative;
+    width: 100%;
     opacity: 0;
-    z-index: 2;
-    transform: scale(1.3) translateY(-2rem);
-    transition: transform 400ms, opacity 400ms;
+    background: $inverse-02;
+    border-radius: 8px;
+    padding: $spacing-07;
+    transform-origin: center bottom;
+    transform: scale(0.95) translateY($back-page-offset);
+    transition: transform 300ms, opacity 300ms;
+
+    &--active {
+      opacity: 1;
+      z-index: 2;
+      transform: scale(1);
+      box-shadow: 0 23px 35px 0 $gray-100-a30;
+    }
+
+    &--out {
+      opacity: 0;
+      z-index: 2;
+      transform: scale(1.3) translateY(-2 * $back-page-offset);
+      transition: transform 400ms, opacity 400ms;
+    }
   }
 }
 
@@ -68,37 +70,6 @@
   z-index: 3;
   width: 3.8rem;
   height: auto;
-}
-
-.marker {
-  position: absolute;
-  top: 5rem;
-  left: calc(100% - 2.8rem);
-  transition: transform 200ms;
-  cursor: pointer;
-
-  &:nth-child(2) {
-    bottom: 9rem;
-    left: calc(100% - 2.8rem);
-  }
-
-  &--active,
-  &:hover {
-    transform: translateX(1rem);
-  }
-
-  &--active {
-    .marker__decoration {
-      opacity: 1;
-    }
-  }
-}
-
-#live-code,
-#live-code * {
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
 }
 </style>
 

@@ -1,7 +1,12 @@
 <template>
   <nav>
     <section class="ibm-research">
-      <a href="https://qiskit.org" class="text-logo" target="_blank" rel="noopener"><img class="logo" alt="Qiskit logo" src="https://qiskit.camp/img/qiskit-logo.png">&nbsp;Qiskit</a>
+      <AppLink
+        class="text-logo"
+        url="/"
+      >
+        <img class="logo" alt="Qiskit logo" src="https://qiskit.camp/img/qiskit-logo.png">&nbsp;Qiskit
+      </AppLink>
     </section>
     <div class="convertible-menu">
       <input class="hamburger" type="checkbox">
@@ -14,6 +19,17 @@
     </div>
   </nav>
 </template>
+
+<script lang="ts">
+import Vue from 'vue'
+import { Component } from 'vue-property-decorator'
+import AppLink from '~/components/ui/AppLink.vue'
+
+@Component({
+  components: { AppLink }
+})
+export default class extends Vue {}
+</script>
 
 <style lang="scss" scoped>
 .logo {

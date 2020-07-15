@@ -37,17 +37,21 @@ export { StackLayer }
 @import '~carbon-components/scss/globals/scss/typography';
 
 .stack-list {
+  $layer-mark-width: 0.25rem;
+  $layer-mark-height: 0.6rem;
+  $text-top-position-fix: -0.4rem;
+
   &__layer {
     border-left: 2px solid $inverse-01;
-    padding-left: 1rem;
-    padding-bottom: 1.5rem;
+    padding-left: $spacing-05;
+    padding-bottom: $spacing-06;
     position: relative;
 
     &::before {
       content: '';
       position: absolute;
-      width: 0.25rem;
-      height: 0.6rem;
+      width: $layer-mark-width;
+      height: $layer-mark-height;
       background-color: $inverse-01;
       left: 0;
     }
@@ -56,8 +60,8 @@ export { StackLayer }
       border: none;
 
       &::before {
-        width: 0.6rem;
-        left: -0.25rem;
+        width: $layer-mark-height;
+        left: -$layer-mark-width;
         border-radius: 50%;
       }
     }
@@ -66,7 +70,7 @@ export { StackLayer }
   &__title,
   &__description {
     position: relative;
-    top: -0.4rem;
+    top: $text-top-position-fix;
   }
 
   &__title {

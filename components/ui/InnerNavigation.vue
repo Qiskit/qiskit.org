@@ -3,14 +3,14 @@
     <div class="menu-container">
       <div class="menu menu--framed">
         <nav class="navigation-group">
-          <a
-            v-for="(section, index) in sections"
-            :key="index"
+          <AppLink
+            v-for="section in sections"
+            :key="section.label"
             class="navigation-group__item"
-            :href="`#${section.anchor}`"
+            :url="`#${section.anchor}`"
           >
             {{ section.label }}
-          </a>
+          </AppLink>
         </nav>
       </div>
     </div>
@@ -20,8 +20,11 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
+import AppLink from '~/components/ui/AppLink.vue'
 
-@Component
+@Component({
+  components: { AppLink }
+})
 export default class extends Vue {
   @Prop({ type: Array, default: [] }) sections
 }
@@ -35,7 +38,9 @@ export default class extends Vue {
 }
 
 .menu {
-  height: 90px;
+  $submenu-height: 5rem;
+
+  height: $submenu-height;
   display: flex;
 
   & > * {
@@ -66,7 +71,7 @@ export default class extends Vue {
     text-transform: uppercase;
     border-right: 1px solid $ui-02;
     text-align: center;
-    padding: 0.5rem;
+    padding: $spacing-03;
 
     &:last-child {
       border-right: none;
@@ -75,7 +80,7 @@ export default class extends Vue {
     @include mq($until: medium) {
       border: none;
       border-bottom: 1px solid $ui-02;
-      padding: 1rem;
+      padding: $spacing-05;
       width: 100%;
     }
   }
