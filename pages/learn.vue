@@ -152,14 +152,9 @@ import {
     ])
   },
 
-  async middleware ({ $content, store, route }) {
+  async middleware ({ $content, store }) {
     const learningResources = await $content('learning-resources').fetch()
     store.commit('setLearningResources', learningResources)
-
-    const timeScale = route.query.timeScale || TIME_SCALES.any
-    const learnLevel = route.query.learnLevel || LEARN_LEVELS.all
-    store.commit('setTimeScale', timeScale)
-    store.commit('setLearnLevel', learnLevel)
   }
 })
 
