@@ -193,7 +193,11 @@ const config: Configuration = {
   generate: {
     routes: (function () {
       const events = getContentUrls('events')
-      return events
+      return events.concat([
+        // To improve performance in our (careful worded) summaries
+        '/learn/?learnLevel=beginner&timeScale=1%20minute',
+        '/learn/?learnLevel=advanced&timeScale=1%20minute'
+      ])
 
       function getContentUrls (contentRoot: string): string[] {
         return fs.readdirSync(path.resolve(__dirname, 'content', contentRoot))

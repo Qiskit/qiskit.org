@@ -82,20 +82,20 @@
               </cv-radio-group>
             </client-only>
           </fieldset>
-          <section class="the-learning-resources-list__results">
+          <section id="results" class="the-learning-resources-list__results">
             <TheCarefulExplanationForBeginner
               v-if="showingOneMinuteForBeginner && !showingEverything"
               id="explanation-for-beginner"
               class="the-learning-resources-list__item"
               :compact="showingMoreResources"
-              url="/learn?learnLevel=beginner&amp;timeScale=1%20minute#explanation-for-beginner"
+              url="/learn/?learnLevel=beginner&amp;timeScale=1%20minute#results"
             />
             <TheCarefulExplanationForAdvanced
               v-if="showingOneMinuteForAdvanced && !showingEverything"
               id="explanation-for-advanced"
               class="the-learning-resources-list__item"
               :compact="showingMoreResources"
-              url="/learn?learnLevel=advanced&amp;timeScale=1%20minute#explanation-for-advanced"
+              url="/learn/?learnLevel=advanced&amp;timeScale=1%20minute#results"
             />
             <LearningResourceCard
               v-for="resource in filteredLearningResources"
@@ -152,9 +152,14 @@ import {
     ])
   },
 
-  async middleware ({ $content, store }) {
+  async middleware ({ $content, store, route }) {
     const learningResources = await $content('learning-resources').fetch()
     store.commit('setLearningResources', learningResources)
+
+    const timeScale = route.query.timeScale || TIME_SCALES.any
+    const learnLevel = route.query.learnLevel || LEARN_LEVELS.all
+    store.commit('setTimeScale', timeScale)
+    store.commit('setLearnLevel', learnLevel)
   }
 })
 
