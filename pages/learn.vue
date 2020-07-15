@@ -309,10 +309,9 @@ export default class extends QiskitPage {
   }
 
   &__filter-time {
-    width: 25%;
     margin-right: $layout-03;
     color: $cool-gray-80;
-    flex: initial;
+    flex: 0 0 25%;
 
     @include mq($until: medium) {
       width: auto;
