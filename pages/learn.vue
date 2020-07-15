@@ -34,7 +34,7 @@
             @tab-selected="setLearnLevel"
           >
             <cv-tab
-              v-for="level in learnLevels"
+              v-for="level in learnLevelOptions"
               :key="level"
               :label="level"
               :selected="level === learnLevel"
@@ -58,7 +58,7 @@
                 @change="setTimeScale($event)"
               >
                 <cv-dropdown-item
-                  v-for="scale in timeScales"
+                  v-for="scale in timeScaleOptions"
                   :key="scale"
                   :value="scale"
                 >
@@ -70,7 +70,7 @@
                 vertical
               >
                 <cv-radio-button
-                  v-for="scale in timeScales"
+                  v-for="scale in timeScaleOptions"
                   :key="scale"
                   name="time"
                   :value="scale"
@@ -84,13 +84,13 @@
           </fieldset>
           <section id="results" class="the-learning-resources-list__results">
             <TheCarefulExplanationForBeginner
-              v-if="isShowingOneMinuteFor(LEARN_LEVELS.beginner) && !isShowingEverything"
+              v-if="isShowingOneMinuteFor(learnLevels.beginner) && !isShowingEverything"
               class="the-learning-resources-list__item"
               :compact="isShowingMoreResources"
               @ctaClick="showExplanation('beginner')"
             />
             <TheCarefulExplanationForAdvanced
-              v-if="isShowingOneMinuteFor(LEARN_LEVELS.advanced) && !isShowingEverything"
+              v-if="isShowingOneMinuteFor(learnLevels.advanced) && !isShowingEverything"
               class="the-learning-resources-list__item"
               :compact="isShowingMoreResources"
               @ctaClick="showExplanation('advanced')"
@@ -159,15 +159,18 @@ import {
 export default class extends QiskitPage {
   routeName = 'learn'
 
-  learnLevels = LEARN_LEVEL_OPTIONS
-  timeScales = TIME_SCALE_OPTIONS
+  learnLevelOptions = LEARN_LEVEL_OPTIONS
+  timeScaleOptions = TIME_SCALE_OPTIONS
+
+  learnLevels = LEARN_LEVELS
+  timeScales = TIME_SCALES
 
   setTimeScale (scale: TimeScale): void {
     this.$store.commit('setTimeScale', scale)
   }
 
   setLearnLevel (tabIndex: number) {
-    const level = this.learnLevels[tabIndex]
+    const level = this.learnLevelOptions[tabIndex]
     this.$store.commit('setLearnLevel', level)
   }
 
@@ -178,7 +181,7 @@ export default class extends QiskitPage {
 
   get isShowingEverything (): boolean {
     const { timeScale, learnLevel } = (this as any)
-    return timeScale === TIME_SCALES.any && learnLevel === LEARN_LEVELS.all
+    return timeScale === this.timeScales.any && learnLevel === this.learnLevels.all
   }
 
   isShowingOneMinuteFor (level: LearnLevel): boolean {
@@ -187,16 +190,16 @@ export default class extends QiskitPage {
 
   get isShowingOneMinute (): boolean {
     const { timeScale } = (this as any)
-    return [TIME_SCALES.any, TIME_SCALES.minute].includes(timeScale)
+    return [this.timeScales.any, this.timeScales.minute].includes(timeScale)
   }
 
   isShowingLevel (level: LearnLevel): boolean {
     const { learnLevel } = (this as any)
-    return [LEARN_LEVELS.all, level].includes(learnLevel)
+    return [this.learnLevels.all, level].includes(learnLevel)
   }
 
   get isShowingMoreResources () {
-    const { advanced, beginner } = LEARN_LEVELS
+    const { advanced, beginner } = this.learnLevels
     return (this as any).filteredLearningResources.length > 0 ||
       (this.isShowingOneMinuteFor(advanced) && this.isShowingOneMinuteFor(beginner))
   }
