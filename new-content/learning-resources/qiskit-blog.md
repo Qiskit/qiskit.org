@@ -4,7 +4,7 @@ to: https://medium.com/qiskit
 image: /images/learning-resources/blog.png
 ctaLabel: Read the blog
 classifications:
-  - level: Beginner
+  - level: beginner
     time: 1 day
 
 ---
