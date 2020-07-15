@@ -88,7 +88,7 @@
                 v-if="showingOneMinuteForBeginner && !showingEverything"
                 class="the-learning-resources-list__item"
                 :compact="showingMoreResources"
-                @ctaClick="showExplanation('advanced')"
+                @ctaClick="showExplanation('beginner')"
               />
               <TheCarefulExplanationForAdvanced
                 v-if="showingOneMinuteForAdvanced && !showingEverything"
