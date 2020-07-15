@@ -33,12 +33,12 @@
         <ol>
           <li>Click on the "Apply now" button below.</li>
           <li>Complete the test in the application with at least a 70%.</li>
-          <li>Provide at least 3 contributions to the Qiskit community and complete application by <strong>October 9, 2019</strong>.</li>
+          <li>Provide at least 3 contributions to the Qiskit community and complete application by <strong>August 15, 2020</strong>.</li>
         </ol>
         <ul class="actions">
-          <li>
-            Closed
-          </li>
+          <AppCta url="https://airtable.com/shrm7eWJsKLf3WVrP">
+            Apply now
+          </AppCta>
         </ul>
       </PageSection>
       <MapSection
@@ -74,6 +74,7 @@ import PageSection from '~/components/ui/PageSection.vue'
 import MapSection from '~/components/advocates/MapSection.vue'
 import AdvocateCard from '~/components/advocates/AdvocateCard.vue'
 import CompactFeature from '~/components/ui/CompactFeature.vue'
+import AppCta from '~/components/ui/AppCta.vue'
 
 type Benefit = Pick<CompactFeature, 'icon'|'title'|'description'>
 
@@ -84,7 +85,8 @@ type Benefit = Pick<CompactFeature, 'icon'|'title'|'description'>
     PageSection,
     MapSection,
     AdvocateCard,
-    CompactFeature
+    CompactFeature,
+    AppCta
   },
 
   head () {
