@@ -9,5 +9,5 @@ classifications:
   - level: Advanced
     time: 1 week
 ---
-By joining the Qiskit Global Summer School, you will learn how to explore quantum applications and algorithms through an intensive summer school designed by quantum researchers and developers.
+By joining the Qiskit Global Summer School, you will learn how to explore quantum applications and algorithms through an intensive summer school program designed by quantum researchers and developers.
 
