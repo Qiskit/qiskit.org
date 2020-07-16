@@ -38,7 +38,9 @@ import LandingCta from '~/components/landing/LandingCta.vue'
 export default class extends Vue {
   @Prop({ type: String, required: true }) version!: string
 
-  qiskitPronuntiation = Math.random() < 0.5 ? '[kiss-kit]' : '[cuis-kit]'
+  data () {
+    return { qiskitPronuntiation: Math.random() < 0.5 ? '[kiss-kit]' : '[cuis-kit]' }
+  }
 }
 </script>
 
