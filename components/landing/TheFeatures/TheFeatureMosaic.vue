@@ -192,7 +192,8 @@ export default class extends Vue {}
     grid-area: a;
 
     @include mq($until: medium) {
-      background-image: none;
+      // Adding important to beat the inlined background by the lazy-load directive
+      background-image: none !important;
       padding-bottom: 6rem;
     }
   }
