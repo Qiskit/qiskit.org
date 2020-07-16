@@ -121,7 +121,7 @@ export default class extends Vue {
 
   &__description {
     @include type-style('body-long-01');
-    color: $gray-60;
+    color: $cool-gray-80;
     max-width: 5 * $column-size-large;
     margin: 0 0 $layout-06;
 

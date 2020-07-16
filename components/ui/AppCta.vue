@@ -1,10 +1,11 @@
 <template>
   <AppLink
+    ref="link"
     class="app-cta copy__link"
     v-bind="$attrs"
   >
     <div><slot /></div>
-    <ArrowRight16 />
+    <component :is="isExternal ? 'Launch16' : 'ArrowRight16'" />
   </AppLink>
 </template>
 
@@ -16,7 +17,11 @@ import AppLink from '~/components/ui/AppLink.vue'
 @Component({
   components: { AppLink }
 })
-export default class extends Vue {}
+export default class extends Vue {
+  get isExternal () {
+    return AppLink.isExternal(this.$attrs.url)
+  }
+}
 </script>
 
 <style lang="scss" scoped>
