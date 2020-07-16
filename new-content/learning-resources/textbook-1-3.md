@@ -1,6 +1,6 @@
 ---
 title: Qiskit Textbook Chapters 1 - 3
-to: /textbook
+to: https://qiskit.org/textbook
 image: /images/learning-resources/textbook-1-3.png
 ctaLabel: Read the textbook
 classifications:

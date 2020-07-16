@@ -1,6 +1,6 @@
 ---
 title: Qiskit Textbook
-to: /textbook
+to: https://qiskit.org/textbook
 image: /images/learning-resources/textbook.png
 ctaLabel: Read the textbook
 classifications:
