@@ -1,7 +1,7 @@
 ---
 title: Qiskit Textbook
 to: https://qiskit.org/textbook
-image: /images/learning-resources/textbook.png
+image: /images/learning-resources/textbook.jpg
 ctaLabel: Read the textbook
 classifications:
   - level: Advanced

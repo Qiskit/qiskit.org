@@ -1,7 +1,7 @@
 ---
 title: Qiskit Textbook Chapters 1 - 3
 to: https://qiskit.org/textbook
-image: /images/learning-resources/textbook-1-3.png
+image: /images/learning-resources/textbook-1-3.jpg
 ctaLabel: Read the textbook
 classifications:
   - level: Beginner

@@ -1,7 +1,7 @@
 ---
 title: Princeton University
 to: https://quantum.princeton.edu/apply
-image: /images/learning-resources/princeton.png
+image: /images/learning-resources/princeton.jpg
 ctaLabel: Go to Princeton
 classifications:
   - level: Advanced

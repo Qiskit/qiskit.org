@@ -1,7 +1,7 @@
 ---
 title: Keio University
 to: https://quantum.keio.ac.jp/
-image: /images/learning-resources/keio.png
+image: /images/learning-resources/keio.jpg
 ctaLabel: Go to Keio
 classifications:
   - level: Advanced

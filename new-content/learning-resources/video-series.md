@@ -1,7 +1,7 @@
 ---
 title: Coding with Qiskit
 to: https://www.youtube.com/playlist?list=PLOFEBzvs-Vvp2xg9-POLJhQwtVktlYGbY
-image: /images/learning-resources/cwq.png
+image: /images/learning-resources/cwq.jpg
 ctaLabel: Watch the series
 classifications:
   - level: Beginner
