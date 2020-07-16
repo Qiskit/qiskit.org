@@ -87,8 +87,8 @@
             Noise Mitigation
           </dt>
           <dd class="feature-mosaic__feature-description">
-            Study the impact of noise using built in modules such as quantum
-            hardware verification, noise characterization, and error correction.
+            Study and reduce the impact of noise using built-in modules for
+            noise characterization and circuit optimization.
           </dd>
         </div>
       </div>
