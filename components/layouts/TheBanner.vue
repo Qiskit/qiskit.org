@@ -18,10 +18,12 @@ export default class extends Vue {}
 @import '~carbon-components/scss/globals/scss/typography';
 
 .banner {
+  box-sizing: border-box;
   display: flex;
+  text-align: center;
   flex-direction: column;
   justify-content: center;
-  height: 4rem;
+  padding: $spacing-05 0;
   background-color: black;
 
   &__layout {
