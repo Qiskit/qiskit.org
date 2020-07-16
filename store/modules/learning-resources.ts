@@ -29,6 +29,7 @@ const TIME_SCALE_OPTIONS = Object.freeze([
   TIME_SCALES.day,
   TIME_SCALES.week,
   TIME_SCALES.month,
+  TIME_SCALES.year,
   TIME_SCALES.fourYears
 ])
 
