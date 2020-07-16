@@ -9,4 +9,4 @@ classifications:
   - level: beginner
     time: 4 years
 ---
-Princeton University offers great programs for undergraduate and graduate students looking to study and enter the field of quantum computing. 
+Princeton University offers great programs for undergraduate and graduate students looking to study and enter the field of quantum computing supported by the Princeton Quantum Initiative. 

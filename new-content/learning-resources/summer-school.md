@@ -1,7 +1,7 @@
 ---
 title: Qiskit Global Summer School
 to: /events/summer-school/
-image: /images/events/learning-resources/globalsummerschool.jpg
+image: /images/learning-resources/globalsummerschool.jpg
 ctaLabel: Join the lecture
 classifications:
   - level: beginner

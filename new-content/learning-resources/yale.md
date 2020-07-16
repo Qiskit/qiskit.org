@@ -1,12 +1,12 @@
 ---
-title: Yale University
-to: http://quantum.yale.edu/
-image: /images/learning-resources/yale.png
-ctaLabel: Go to Yale
+title: Keio University
+to: https://quantum.keio.ac.jp/
+image: /images/learning-resources/keio.png
+ctaLabel: Go to Keio
 classifications:
   - level: advanced
     time: 4 years
   - level: beginner
     time: 4 years
 ---
-Princeton University offers great programs for undergraduate and graduate students looking to study and enter the field of quantum computing. 
+Keio University Quantum Computing Center offers great programs including training and education for undergraduate and graduate students looking to study and enter the field of quantum computing. 
