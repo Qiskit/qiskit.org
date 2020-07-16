@@ -197,11 +197,6 @@ export default class extends Vue {
   &__options {
     display: flex;
     flex-direction: column;
-    row-gap: $spacing-07;
-
-    @include mq($until: large) {
-      row-gap: $spacing-05;
-    }
   }
 
   &__options-group {
@@ -230,10 +225,12 @@ export default class extends Vue {
     max-width: 100%;
     color: $gray-60;
     padding-left: $spacing-07;
+    margin-bottom: $spacing-07;
 
     @include mq($until: large) {
       @include type-style('label-01');
       padding-left: $spacing-05;
+      margin-bottom: $spacing-05;
     }
 
     &_active {
