@@ -1,12 +1,10 @@
 ---
-title: Textbook
-to: /textbook
-image: /images/landing-page/feature-hardware.jpg
+title: Qiskit Textbook
+to: https://qiskit.org/textbook
+image: /images/learning-resources/textbook.jpg
 ctaLabel: Read the textbook
 classifications:
-  - level: Beginner
-    time: 1 year
   - level: Advanced
-    time: 1 month
+    time: 1 year
 ---
-Qiskit is a quantum computing SDK written in the python so you won’t need to learn a new language. If you need up your python skills before getting started, we recommend Khan Academy’s course.
+The Qiskit Textbook is a free digital open source textbook that will teach you the concepts of quantum computing while you learn to use Qiskit.
