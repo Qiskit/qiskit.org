@@ -9,7 +9,7 @@
         Open-Source Quantum Development
       </h1>
       <p class="the-hero-moment__description">
-        Qiskit [kiss-kit] is an open source SDK for working with quantum
+        Qiskit {{ qiskitPronuntiation }} is an open source SDK for working with quantum
         computers at the level of pulses, circuits and algorithms.
       </p>
       <LandingCta
@@ -37,6 +37,10 @@ import LandingCta from '~/components/landing/LandingCta.vue'
 })
 export default class extends Vue {
   @Prop({ type: String, required: true }) version!: string
+
+  data () {
+    return { qiskitPronuntiation: Math.random() < 0.5 ? '[kiss-kit]' : '[cuis-kit]' }
+  }
 }
 </script>
 
