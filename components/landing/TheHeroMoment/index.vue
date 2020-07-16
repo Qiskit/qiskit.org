@@ -39,7 +39,7 @@ export default class extends Vue {
   @Prop({ type: String, required: true }) version!: string
 
   data () {
-    return { qiskitPronuntiation: Math.random() < 0.5 ? '[kiss-kit]' : '[cuis-kit]' }
+    return { qiskitPronuntiation: Math.random() < 0.5 ? '[kiss-kit]' : '[quiss-kit]' }
   }
 }
 </script>
