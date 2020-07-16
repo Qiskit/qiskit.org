@@ -1,4 +1,5 @@
 ---
+order: 10
 title: Qiskit Textbook
 to: https://qiskit.org/textbook
 image: /images/learning-resources/textbook.jpg

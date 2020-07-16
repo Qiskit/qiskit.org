@@ -157,7 +157,9 @@ import {
   },
 
   async middleware ({ $content, store }) {
-    const learningResources = await $content('learning-resources').fetch()
+    const learningResources = await $content('learning-resources')
+      .sortBy('order', 'asc')
+      .fetch()
     store.commit('setLearningResources', learningResources)
   }
 })

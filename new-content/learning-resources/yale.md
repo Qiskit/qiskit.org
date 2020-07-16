@@ -1,4 +1,5 @@
 ---
+order: 200
 title: Keio University
 to: https://quantum.keio.ac.jp/
 image: /images/learning-resources/keio.jpg
