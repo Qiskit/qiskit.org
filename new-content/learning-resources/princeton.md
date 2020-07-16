@@ -1,4 +1,5 @@
 ---
+order: 200
 title: Princeton University
 to: https://quantum.princeton.edu/apply
 image: /images/learning-resources/princeton.jpg

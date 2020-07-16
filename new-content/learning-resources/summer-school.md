@@ -1,4 +1,5 @@
 ---
+order: 100
 title: Qiskit Global Summer School
 to: https://qiskit.org/events/summer-school/
 image: /images/learning-resources/globalsummerschool.jpg
