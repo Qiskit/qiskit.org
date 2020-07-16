@@ -2,8 +2,10 @@
   <!-- tabindex is needed to allow hiding the menu in iOS Safari -->
   <div class="default-layout content-root" tabindex="-1">
     <header id="navigation">
-      <TheBlackLivesMatterBanner />
-      <TheMenu />
+      <TheBlackLivesMatterBanner
+        :style="{ display: isMenuShown ? 'none' : 'block' }"
+      />
+      <TheMenu @changeVisibility="isMenuShown = $event === 'shown'" />
     </header>
     <nuxt />
     <PageFooter class="default-layout__footer" />
@@ -24,7 +26,9 @@ import PageFooter from '~/components/layouts/PageFooter/index.vue'
     PageFooter
   }
 })
-export default class extends Vue { }
+export default class extends Vue {
+  isMenuShown: boolean = false
+}
 </script>
 
 <style lang="scss">
