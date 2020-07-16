@@ -3,7 +3,7 @@
     <h2 class="copy__title">
       Quick Start
     </h2>
-    <p class="copy__paragraph copy__paragraph_outstanding">
+    <p class="copy__paragraph copy__paragraph_importance_outstanding">
       When you are looking to start Qiskit you have two options. You can start
       Qiskit locally which is much more secure and private, or you get started
       online where you can immediately jump in and start working.

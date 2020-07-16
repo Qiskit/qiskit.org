@@ -42,7 +42,6 @@ export default class extends Vue {
 .learning-resource-card {
   height: 13rem;
   width: 100%;
-  margin-bottom: $layout-01;
   background-color: $cool-gray-10;
   display: flex;
 
