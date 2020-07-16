@@ -3,7 +3,7 @@
     <h3 class="copy__subtitle">
       Start locally
     </h3>
-    <p class="copy__paragraph">
+    <p class="copy__paragraph copy__paragraph_importance_support">
       To install Qiskit locally, you will need
       <AppLink
         class="copy__link"
