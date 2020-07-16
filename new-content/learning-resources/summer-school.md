@@ -1,6 +1,6 @@
 ---
 title: Qiskit Global Summer School
-to: /events/summer-school/
+to: https://qiskit.org/events/summer-school/
 image: /images/learning-resources/globalsummerschool.jpg
 ctaLabel: Join the lecture
 classifications:
