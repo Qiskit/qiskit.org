@@ -132,6 +132,10 @@ export default class extends Mixins(MenuMixin) {
     @include mq($from: large) {
       display: none;
     }
+
+    &:focus {
+      outline: none;
+    }
   }
 
   &__mobile-menu-toggle {
