@@ -87,17 +87,17 @@
             </client-only>
           </fieldset>
           <section class="the-learning-resources-list__results">
-            <TheCarefulExplanationForBeginner
+            <TheCarefulExplanationForBeginners
               v-if="isShowingOneMinuteFor(learnLevels.beginner) && !isShowingEverything"
               class="the-learning-resources-list__item"
               :compact="isShowingMoreResources"
-              url="/learn/?learnLevel=beginner&amp;timeScale=1%20minute"
+              url="/learn/?learnLevel=Beginner&amp;timeScale=1%20minute"
             />
             <TheCarefulExplanationForExperts
               v-if="isShowingOneMinuteFor(learnLevels.advanced) && !isShowingEverything"
               class="the-learning-resources-list__item"
               :compact="isShowingMoreResources"
-              url="/learn/?learnLevel=advanced&amp;timeScale=1%20minute"
+              url="/learn/?learnLevel=Advanced&amp;timeScale=1%20minute"
             />
             <LearningResourceCard
               v-for="resource in filteredLearningResources"
@@ -122,7 +122,7 @@ import { mapGetters } from 'vuex'
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import LearningResourceCard from '~/components/learn/LearningResourceCard.vue'
-import TheCarefulExplanationForBeginner from '~/components/learn/TheCarefulExplanationForBeginner.vue'
+import TheCarefulExplanationForBeginners from '~/components/learn/TheCarefulExplanationForBeginners.vue'
 import TheCarefulExplanationForExperts from '~/components/learn/TheCarefulExplanationForExperts.vue'
 import AppLink from '~/components/ui/AppLink.vue'
 import {
@@ -138,7 +138,7 @@ import {
   components: {
     LearningResourceCard,
     TheCarefulExplanationForExperts,
-    TheCarefulExplanationForBeginner,
+    TheCarefulExplanationForBeginners,
     AppLink
   },
 
@@ -181,7 +181,7 @@ export default class extends QiskitPage {
   }
 
   _parseFilterFromUrl (route) {
-    const timeScale = route.query.timeScale || this.timeScales.any
+    const timeScale = route.query.timeScale || this.timeScales.all
     const learnLevel = route.query.learnLevel || this.learnLevels.all
     this.$store.commit('setTimeScale', timeScale)
     this.$store.commit('setLearnLevel', learnLevel)
@@ -215,7 +215,7 @@ export default class extends QiskitPage {
 
   get isShowingEverything (): boolean {
     const { timeScale, learnLevel } = (this as any)
-    return timeScale === this.timeScales.any && learnLevel === this.learnLevels.all
+    return timeScale === this.timeScales.all && learnLevel === this.learnLevels.all
   }
 
   isShowingOneMinuteFor (level: LearnLevel): boolean {
@@ -224,7 +224,7 @@ export default class extends QiskitPage {
 
   get isShowingOneMinute (): boolean {
     const { timeScale } = (this as any)
-    return [this.timeScales.any, this.timeScales.minute].includes(timeScale)
+    return [this.timeScales.all, this.timeScales.minute].includes(timeScale)
   }
 
   isShowingLevel (level: LearnLevel): boolean {
