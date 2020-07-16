@@ -4,7 +4,7 @@ to: https://medium.com/qiskit/qiskit-and-its-fundamental-elements-bcd7ead80492
 image: /images/learning-resources/blog.png
 ctaLabel: Read the blog
 classifications:
-  - level: beginner
+  - level: Beginner
     time: 1 day
 
 ---

@@ -4,9 +4,9 @@ to: https://quantum.keio.ac.jp/
 image: /images/learning-resources/keio.png
 ctaLabel: Go to Keio
 classifications:
-  - level: advanced
+  - level: Advanced
     time: 4 years
-  - level: beginner
+  - level: Beginner
     time: 4 years
 ---
-Keio University Quantum Computing Center offers great programs including training and education for undergraduate and graduate students looking to study and enter the field of quantum computing. 
+Keio University Quantum Computing Center offers great programs including training and education for undergraduate and graduate students looking to study and enter the field of quantum computing.
