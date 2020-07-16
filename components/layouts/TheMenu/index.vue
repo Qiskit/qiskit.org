@@ -95,6 +95,7 @@ export default class extends Mixins(MenuMixin) {
 
   @Watch('isMobileMenuVisible')
   toggleScroll () {
+    this.$emit('changeVisibility', this.isMobileMenuVisible ? 'shown' : 'hidden')
     if (this.isMobileMenuVisible) {
       this.$root.$el.classList.add('no-scroll')
     } else {
