@@ -4,7 +4,7 @@
       <h3 class="copy__subtitle">
         Start Online
       </h3>
-      <p class="copy__paragraph">
+      <p class="copy__paragraph copy__paragraph_importance_support">
         Starting on the cloud will enable you to begin  without installing
         anything.
       </p>

@@ -1,6 +1,6 @@
 <template>
   <div class="prerequisites">
-    <p class="copy__paragraph">
+    <p class="copy__paragraph copy__paragraph_importance_support">
       On Windows you need to use Anaconda3 or Miniconda3 to install all the dependencies.
     </p>
     <p class="copy__subtitle">

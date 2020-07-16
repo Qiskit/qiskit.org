@@ -12,7 +12,7 @@
       <h2 class="copy__title">
         What can Qiskit do
       </h2>
-      <p class="copy__paragraph copy__paragraph_outstanding">
+      <p class="copy__paragraph copy__paragraph_importance_outstanding">
         Qiskit accelerates the development of quantum applications by
         providing the complete set of tools needed for interacting with
         quantum systems and simulators.

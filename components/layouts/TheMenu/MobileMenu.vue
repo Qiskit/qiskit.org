@@ -19,7 +19,7 @@
         </AppLink>
         <AppLink
           v-for="sublink in getSubLinks(link)"
-          :key="sublink.url"
+          :key="`sublink:${sublink.url}`"
           class="
           mobile-menu__link
           mobile-menu__link_second-level

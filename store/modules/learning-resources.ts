@@ -1,5 +1,5 @@
 const TIME_SCALES = Object.freeze({
-  any: 'any',
+  all: 'any',
   minute: '1 minute',
   day: '1 day',
   week: '1 week',
@@ -10,8 +10,8 @@ const TIME_SCALES = Object.freeze({
 
 const LEARN_LEVELS = Object.freeze({
   all: 'All resources',
-  beginner: 'beginner',
-  advanced: 'advanced'
+  beginner: 'Beginner',
+  advanced: 'Advanced'
 } as const)
 
 type LearnLevel = typeof LEARN_LEVELS[keyof typeof LEARN_LEVELS]
@@ -24,7 +24,7 @@ const LEARN_LEVEL_OPTIONS = Object.freeze([
 ])
 
 const TIME_SCALE_OPTIONS = Object.freeze([
-  TIME_SCALES.any,
+  TIME_SCALES.all,
   TIME_SCALES.minute,
   TIME_SCALES.day,
   TIME_SCALES.week,
@@ -72,7 +72,7 @@ export default {
   state (): State {
     return {
       learnLevel: LEARN_LEVELS.all,
-      timeScale: TIME_SCALES.any,
+      timeScale: TIME_SCALES.all,
       learningResources: []
     }
   },
@@ -92,7 +92,7 @@ export default {
         const { level, time } = classification
         const matchesLevel = currentLearnLevel === LEARN_LEVELS.all ||
           level === currentLearnLevel
-        const matchesTime = currentTimeScale === TIME_SCALES.any ||
+        const matchesTime = currentTimeScale === TIME_SCALES.all ||
           time === currentTimeScale
         return matchesLevel && matchesTime
       }

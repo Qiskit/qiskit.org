@@ -19,21 +19,26 @@
         <p
           class="
               copy__paragraph
-              copy__paragraph_outstanding
+              copy__paragraph_importance_outstanding
             "
         >
           The below are designed and created by the Qiskit team. However, we
-          recommend a familiar with linear algebra and Python from these
+          recommend a familiarity with <AppLink class="copy__link" url="https://www.khanacademy.org/math/linear-algebra">
+            linear algebra
+          </AppLink> and <AppLink class="copy__link" url="https://www.coursera.org/specializations/python">
+            Python
+          </AppLink> from these
           trusted resources.
         </p>
         <client-only>
           <cv-tabs
             class="the-learning-resources-list__filter-level"
             aria-label="navigation tab label"
+            no-default-to-first
             @tab-selected="setLearnLevel"
           >
             <cv-tab
-              v-for="level in learnLevels"
+              v-for="level in learnLevelOptions"
               :key="level"
               :label="level"
               :selected="level === learnLevel"
@@ -57,7 +62,7 @@
                 @change="setTimeScale($event)"
               >
                 <cv-dropdown-item
-                  v-for="scale in timeScales"
+                  v-for="scale in timeScaleOptions"
                   :key="scale"
                   :value="scale"
                 >
@@ -69,7 +74,7 @@
                 vertical
               >
                 <cv-radio-button
-                  v-for="scale in timeScales"
+                  v-for="scale in timeScaleOptions"
                   :key="scale"
                   name="time"
                   :value="scale"
@@ -82,11 +87,22 @@
             </client-only>
           </fieldset>
           <section class="the-learning-resources-list__results">
-            <TheCarefulExplanationForBeginner v-if="isAMinuteForBeginner" />
-            <TheCarefulExplanationForAdvanced v-if="isAMinuteForAdvanced" />
+            <TheCarefulExplanationForBeginners
+              v-if="isShowingOneMinuteFor(learnLevels.beginner) && !isShowingEverything"
+              class="the-learning-resources-list__item"
+              :compact="isShowingMoreResources"
+              url="/learn/?learnLevel=Beginner&amp;timeScale=1%20minute"
+            />
+            <TheCarefulExplanationForExperts
+              v-if="isShowingOneMinuteFor(learnLevels.advanced) && !isShowingEverything"
+              class="the-learning-resources-list__item"
+              :compact="isShowingMoreResources"
+              url="/learn/?learnLevel=Advanced&amp;timeScale=1%20minute"
+            />
             <LearningResourceCard
               v-for="resource in filteredLearningResources"
               :key="resource.path"
+              class="the-learning-resources-list__item"
               :title="resource.title"
               :image="resource.image"
               :cta-label="resource.ctaLabel"
@@ -106,21 +122,24 @@ import { mapGetters } from 'vuex'
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import LearningResourceCard from '~/components/learn/LearningResourceCard.vue'
-import TheCarefulExplanationForBeginner from '~/components/learn/TheCarefulExplanationForBeginner.vue'
-import TheCarefulExplanationForAdvanced from '~/components/learn/TheCarefulExplanationForAdvanced.vue'
+import TheCarefulExplanationForBeginners from '~/components/learn/TheCarefulExplanationForBeginners.vue'
+import TheCarefulExplanationForExperts from '~/components/learn/TheCarefulExplanationForExperts.vue'
+import AppLink from '~/components/ui/AppLink.vue'
 import {
   TimeScale,
   LEARN_LEVELS,
   TIME_SCALES,
   LEARN_LEVEL_OPTIONS,
-  TIME_SCALE_OPTIONS
+  TIME_SCALE_OPTIONS,
+  LearnLevel
 } from '~/store/modules/learning-resources.ts'
 
 @Component({
   components: {
     LearningResourceCard,
-    TheCarefulExplanationForAdvanced,
-    TheCarefulExplanationForBeginner
+    TheCarefulExplanationForExperts,
+    TheCarefulExplanationForBeginners,
+    AppLink
   },
 
   head () {
@@ -146,26 +165,77 @@ import {
 export default class extends QiskitPage {
   routeName = 'learn'
 
-  learnLevels = LEARN_LEVEL_OPTIONS
-  timeScales = TIME_SCALE_OPTIONS
+  learnLevelOptions = LEARN_LEVEL_OPTIONS
+  timeScaleOptions = TIME_SCALE_OPTIONS
+
+  learnLevels = LEARN_LEVELS
+  timeScales = TIME_SCALES
+
+  beforeRouteEnter (route, _, next) {
+    next(learnPage => learnPage._parseFilterFromUrl(route))
+  }
+
+  beforeRouteUpdate (route, _, next) {
+    this._parseFilterFromUrl(route)
+    next()
+  }
+
+  _parseFilterFromUrl (route) {
+    const timeScale = route.query.timeScale || this.timeScales.all
+    const learnLevel = route.query.learnLevel || this.learnLevels.all
+    this.$store.commit('setTimeScale', timeScale)
+    this.$store.commit('setLearnLevel', learnLevel)
+  }
 
   setTimeScale (scale: TimeScale): void {
-    this.$store.commit('setTimeScale', scale)
+    const { timeScale: currentScale } = this as any
+    if (currentScale === scale) {
+      return
+    }
+    this._updateQueryParameter('timeScale', scale)
   }
 
   setLearnLevel (tabIndex: number) {
-    const level = this.learnLevels[tabIndex]
-    this.$store.commit('setLearnLevel', level)
+    const { learnLevel: currentLevel } = this as any
+    const level = this.learnLevelOptions[tabIndex]
+    if (currentLevel === level) {
+      return
+    }
+    this._updateQueryParameter('learnLevel', level)
   }
 
-  get isAMinuteForBeginner (): boolean {
-    return (this as any).timeScale === TIME_SCALES.minute &&
-      (this as any).learnLevel === LEARN_LEVELS.beginner
+  _updateQueryParameter (paramName: string, value: string) {
+    this.$router.push({
+      query: {
+        ...this.$route.query,
+        [paramName]: value
+      }
+    })
   }
 
-  get isAMinuteForAdvanced (): boolean {
-    return (this as any).timeScale === TIME_SCALES.minute &&
-      (this as any).learnLevel === LEARN_LEVELS.advanced
+  get isShowingEverything (): boolean {
+    const { timeScale, learnLevel } = (this as any)
+    return timeScale === this.timeScales.all && learnLevel === this.learnLevels.all
+  }
+
+  isShowingOneMinuteFor (level: LearnLevel): boolean {
+    return this.isShowingOneMinute && this.isShowingLevel(level)
+  }
+
+  get isShowingOneMinute (): boolean {
+    const { timeScale } = (this as any)
+    return [this.timeScales.all, this.timeScales.minute].includes(timeScale)
+  }
+
+  isShowingLevel (level: LearnLevel): boolean {
+    const { learnLevel } = (this as any)
+    return [this.learnLevels.all, level].includes(learnLevel)
+  }
+
+  get isShowingMoreResources () {
+    const { advanced, beginner } = this.learnLevels
+    return (this as any).filteredLearningResources.length > 0 ||
+      (this.isShowingOneMinuteFor(advanced) && this.isShowingOneMinuteFor(beginner))
   }
 }
 </script>
@@ -239,10 +309,9 @@ export default class extends QiskitPage {
   }
 
   &__filter-time {
-    width: 25%;
     margin-right: $layout-03;
     color: $cool-gray-80;
-    flex: initial;
+    flex: 0 0 25%;
 
     @include mq($until: medium) {
       width: auto;
@@ -254,6 +323,14 @@ export default class extends QiskitPage {
   &__filter-time-label {
     margin-bottom: $layout-01;
     white-space: nowrap;
+  }
+
+  &__item {
+    margin-bottom: $layout-02;
+
+    @include mq($until: large) {
+      margin-bottom: $layout-01;
+    }
   }
 
   &__small-only {
