@@ -1,12 +1,11 @@
 ---
-title: Qiskit blog
-to: https://medium.com/qiskit
-image: /images/landing-page/feature-hardware.jpg
-ctaLabel: Read the docs
+title: Qiskit Medium
+to: https://medium.com/qiskit/qiskit-and-its-fundamental-elements-bcd7ead80492
+image: /images/learning-resources/blog.jpg
+ctaLabel: Read the blog
 classifications:
   - level: Beginner
-    time: 1 week
-  - level: Advanced
     time: 1 day
+
 ---
-In this post, we will share an overview of our plans for Qiskit, including its four elements, each of which forms a pillar of quantum computing software.
+This blog provides a nice overview of Qiskit and its direction as we explore what applications can be done on today's quantum devices.

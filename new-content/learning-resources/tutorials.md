@@ -1,10 +1,10 @@
 ---
-title: Tutorials
-to: https://github.com/Qiskit/qiskit-tutorials
-image: /images/landing-page/feature-hardware.jpg
-ctaLabel: Go to Khan Academy
+title: Qiskit Tutorial
+to: https://qiskit.org/documentation/tutorials/circuits/1_getting_started_with_qiskit.html
+image: /images/learning-resources/tutorial.jpg
+ctaLabel: Go to tutorials
 classifications:
   - level: Advanced
-    time: 1 month
+    time: 1 day
 ---
-Qiskit is a quantum computing SDK written in the python so you won’t need to learn a new language. If you need up your python skills before getting started, we recommend Khan Academy’s course.
+Try out this hands on Qiskit tutorial that will provide an overview of working with Qiskit, building circuits, visualizing results and exploring more advanced features in the SDK.

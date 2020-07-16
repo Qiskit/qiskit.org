@@ -2,10 +2,9 @@
   <article class="learning-resource-card">
     <img
       class="learning-resource-card__image"
-      :style="{
-        backgroundImage: `url('${image}')`
-      }"
       alt=""
+      src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+      :lazy-background="image"
     >
     <div class="learning-resource-card__content">
       <h3 class="copy__subtitle">
