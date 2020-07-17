@@ -4,9 +4,9 @@
       Quick Start
     </h2>
     <p class="copy__paragraph copy__paragraph_importance_outstanding">
-      When you are looking to start Qiskit you have two options. You can start
-      Qiskit locally which is much more secure and private, or you get started
-      online where you can immediately jump in and start working.
+      When you are looking to start with Qiskit you have two options.
+      You can get started locally and use your favorite development environment,
+      or you can get started online with IBM’s hosted Jupyter Notebooks.
     </p>
     <div class="quick-start__sections">
       <StartLocally />
