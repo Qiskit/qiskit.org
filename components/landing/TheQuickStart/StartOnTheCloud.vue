@@ -5,8 +5,7 @@
         Start Online
       </h3>
       <p class="copy__paragraph copy__paragraph_importance_support">
-        Starting on the cloud will enable you to begin  without installing
-        anything.
+        IBM's hosted Jupyter Notebooks let you get started without installing anything.
       </p>
       <AppCta
         :url="ibmQExperienceLink.url"
