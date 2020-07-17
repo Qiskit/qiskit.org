@@ -92,7 +92,7 @@ Each day of the Qiskit Global Summer School consists of 3 hours of lectures foll
 
 -	Friday, July 31
 	- 9:00 - 12:00 EDT **Panel Discussion**: Careers in Quantum Computing\
-	_Panel: Jay Gambetta, Scott Crowder, Jerry Chow, Liz Durst, IBM Q Network Members_
+	_Presenter: Jay Gambetta
 
 
 ## Learn about Qiskit Hackathon Global!
