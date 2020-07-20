@@ -29,8 +29,9 @@ const TIME_SCALE_OPTIONS = Object.freeze([
   TIME_SCALES.day,
   TIME_SCALES.week,
   TIME_SCALES.month,
-  TIME_SCALES.year,
-  TIME_SCALES.fourYears
+  TIME_SCALES.year
+  // TODO: Re-enable 4years after discussing with Liz:
+  // https://github.com/Qiskit/qiskit.org/issues/757
 ])
 
 type Classification = {
