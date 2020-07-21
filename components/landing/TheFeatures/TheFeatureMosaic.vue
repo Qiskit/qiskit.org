@@ -60,7 +60,7 @@
           "
         >
           <dt class="copy__subtitle">
-            Quantum Algorithms
+            Quantum Algorithms {{getResolution()}}
           </dt>
           <dd class="feature-mosaic__feature-description">
             Research and prototype machine learning, optimization and chemistry
@@ -101,7 +101,11 @@ import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 
 @Component
-export default class extends Vue {}
+export default class extends Vue {
+  getResolution () {
+    return window.screen.width
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -239,12 +243,12 @@ export default class extends Vue {}
     height: 25rem;
 
     @include mq($from: medium, $until: large) {
-      background-image: url('/images/landing-page/feature-algorithms-medium.jpg');
+      background-image: url('/images/landing-page/feature-algorithms-medium.jpg') !important;;
       height: auto;
     }
 
     @include mq($until: medium) {
-      background-image: url('/images/landing-page/feature-algorithms-medium.jpg');
+      background-image: url('/images/landing-page/feature-algorithms-medium.jpg') !important;;
       min-height: 4rem;
     }
   }
