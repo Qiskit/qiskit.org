@@ -31,6 +31,10 @@ export default class extends Vue {
     return this.$route.path.startsWith(linkPath)
   }
 
+  isActiveHome (link: NavLink): boolean {
+    return this.$route.path === (link.url)
+  }
+
   isActive (link: NavLink): boolean {
     // TODO: Should remove after the new menu (second menu included) is
     // completely done. #573

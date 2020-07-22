@@ -10,8 +10,15 @@
           v-bind="homeLink"
         >
           <img
+            v-if="isActiveHome(homeLink)"
             class="menu__logo"
             src="/images/qiskit-new-logo-purple.svg"
+            alt="Qiskit logo"
+          >
+          <img
+            v-else
+            class="menu__logo"
+            src="/images/qiskit-new-logo.svg"
             alt="Qiskit logo"
           >
         </AppLink>
@@ -46,8 +53,15 @@
           v-bind="homeLink"
         >
           <img
+            v-if="isActiveHome(homeLink)"
             class="menu__logo"
             src="/images/qiskit-new-logo-purple.svg"
+            alt="Qiskit logo"
+          >
+          <img
+            v-else
+            class="menu__logo"
+            src="/images/qiskit-new-logo.svg"
             alt="Qiskit logo"
           >
         </AppLink>
