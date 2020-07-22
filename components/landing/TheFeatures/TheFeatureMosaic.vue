@@ -60,7 +60,7 @@
           "
         >
           <dt class="copy__subtitle">
-            Quantum Algorithms {{getResolution()}}
+            Quantum Algorithms
           </dt>
           <dd class="feature-mosaic__feature-description">
             Research and prototype machine learning, optimization and chemistry
@@ -101,11 +101,7 @@ import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 
 @Component
-export default class extends Vue {
-  getResolution () {
-    return window.screen.width
-  }
-}
+export default class extends Vue {}
 </script>
 
 <style lang="scss" scoped>
