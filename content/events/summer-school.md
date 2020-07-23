@@ -91,18 +91,10 @@ Each day of the Qiskit Global Summer School consists of 3 hours of lectures foll
 	_Lab Lead: Abhinav Kandala & Antonio Mezzacapo_
 
 -	Friday, July 31
-	- 9:00 - 12:00 EDT **Panel Discussion**: Careers in Quantum Computing\
-	_Current Panelists Include:
-  Jay Gambetta, IBM Fellow and Vice President of Quantum Computing
-  Marina Radulaski, Assistant Professor of Electrical & Computer Engineering at UC Davis
-  Steve Girvin, Eugene Higgins Professor of Physics at Yale University
-  Monika Schleier-Smith, Associate Professor of Physics at Stanford 
-  John Preskill, Professor of Theoretical Physics at California Institute of Technology and Amazon Scholar at the AWS Center for Quantum Computing
-
-
-## Learn about Qiskit Hackathon Global!
-
-Following the Qiskit Global Summer School, IBM’s Qiskit Community Team will be hosting it’s first immersive and real-time 24-hour hackathon experience. Learn how you can be invited and take your Qiskit Global Summer School experience to the next level! Go to Qiskit Hackathon Global’s website here. (link coming soon!)
+	- 9:00 - 12:00 EDT **Panel Discussion**: Commencement on Qiskit Live\
+  Wrapping up the two-week immersive Qiskit Global Summer school, we will be hosting a panel discussion showcasing the diverse perspectives and skills that are important for developing a career in quantum computing. Our panelists will discuss their journeys and how you can take advantage of your own interdisciplinary skills and perspectives to secure a job in quantum computing and build your career. The panel will include quantum experts such as Jay Gambetta, Marina Radulaski, Steve Girvin, Monika Schleier-Smith, and John Preskill.  
+    
+  **Watch the Commencement on [Qiskit Live!](https://www.youtube.com/qiskit)**
 
 ## Code of Conduct
 
