@@ -94,7 +94,7 @@ Each day of the Qiskit Global Summer School consists of 3 hours of lectures foll
 #### Friday, July 31 at 9:30 - 11:30 EDT 
 To commence our school, we will be hosting a panel discussion showcasing the diverse perspectives and skills that are important for developing a career in quantum computing. Our panelists will discuss their journeys and how you can take advantage of your own interdisciplinary skills and perspectives to secure a job in quantum computing and build your career. The panel will include quantum experts such as Jay Gambetta, Marina Radulaski, Steve Girvin, Monika Schleier-Smith, K. Birgitta Whaley, and John Preskill.
   
-  **Watch the Commencement on [Qiskit Live!](https://www.youtube.com/watch?v=2STKoNWSzqM&feature=youtu.be)**
+  **Subscribe to our YouTube channel and set a reminder to watch the Commencement on [Qiskit Live!](https://www.youtube.com/watch?v=2STKoNWSzqM&feature=youtu.be)**
 
 ## Code of Conduct
 
