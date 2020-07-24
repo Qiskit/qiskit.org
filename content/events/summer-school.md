@@ -1,7 +1,7 @@
 ---
 title: Qiskit Global Summer School
 dates: July 20-31, 2020
-tagline: A two-week intensive summer school designed to empower the next generation of quantum developers with the knowledge to explore quantum applications on their own.
+tagline: A two-week intensive summer school designed to empower the next generation of quantum developers and scientists with the knowledge to explore quantum applications on their own.
 description: Add your description here
 background: globalsummerschool
 nav:
@@ -90,11 +90,11 @@ Each day of the Qiskit Global Summer School consists of 3 hours of lectures foll
 	-	13:00 - 14:00 EDT **Hands-on Programming with Qiskit**\
 	_Lab Lead: Abhinav Kandala & Antonio Mezzacapo_
 
--	Friday, July 31
-	- 9:00 - 12:00 EDT **Panel Discussion**: Commencement on Qiskit Live\
-  Wrapping up the two-week immersive Qiskit Global Summer school, we will be hosting a panel discussion showcasing the diverse perspectives and skills that are important for developing a career in quantum computing. Our panelists will discuss their journeys and how you can take advantage of your own interdisciplinary skills and perspectives to secure a job in quantum computing and build your career. The panel will include quantum experts such as Jay Gambetta, Marina Radulaski, Steve Girvin, Monika Schleier-Smith, and John Preskill.  
-    
-  **Watch the Commencement on [Qiskit Live!](https://www.youtube.com/qiskit)**
+### Commencement on Qiskit Live
+#### Friday, July 31 at 9:30 - 11:30 EDT 
+To commence our school, we will be hosting a panel discussion showcasing the diverse perspectives and skills that are important for developing a career in quantum computing. Our panelists will discuss their journeys and how you can take advantage of your own interdisciplinary skills and perspectives to secure a job in quantum computing and build your career. The panel will include quantum experts such as Jay Gambetta, Marina Radulaski, Steve Girvin, Monika Schleier-Smith, K. Birgitta Whaley, and John Preskill.
+  
+  **Subscribe to our YouTube channel and set a reminder to watch the Commencement on [Qiskit Live!](https://www.youtube.com/watch?v=2STKoNWSzqM&feature=youtu.be)**
 
 ## Code of Conduct
 
