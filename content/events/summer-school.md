@@ -92,10 +92,10 @@ Each day of the Qiskit Global Summer School consists of 3 hours of lectures foll
 
 ### Commencement on Qiskit Live
 #### Friday, July 31 at 9:30 - 11:30 EDT 
-To commence our school, we will be hosting a panel discussion showcasing the diverse perspectives and skills that are important for developing a career in quantum computing. Our panelists will discuss their journeys and how you can take advantage of your own interdisciplinary skills and perspectives to secure a job in quantum computing and build your career. The panel will include quantum experts such as Jay Gambetta, Marina Radulaski, Steve Girvin, Monika Schleier-Smith, K. Birgitta Whaley, and John Preskill.
+To commence our school, we will be hosting a panel discussion showcasing the diverse perspectives and skills that are important for developing a career in quantum computing. Our panelists will discuss their journeys and how you can take advantage of your own interdisciplinary skills and perspectives to secure a job in quantum computing and build your career. The panel will include quantum experts such as Jay Gambetta, Marina Radulaski, Steve Girvin, Monika Schleier-Smith, K. Birgitta Whaley, and John Preskill. After the Commencement, stay tuned to hear from [Charlie Bennett](https://www.youtube.com/watch?v=rslt-LwtDK4&feature=youtu.be) on our weekly seminar series at 12 PM EDT!
   
-  **Subscribe to our YouTube channel and set a reminder to watch the Commencement on [Qiskit Live!](https://www.youtube.com/watch?v=2STKoNWSzqM&feature=youtu.be)**
-
+  **Subscribe to our YouTube channel and set a reminder to watch the Commencement on [Qiskit Live!](https://www.youtube.com/watch?v=7dfw8k2p1to&feature=youtu.be)**
+   
 ## Code of Conduct
 
 IBM Quantum is dedicated to providing an enjoyable and safe experience for all participants. In the interest of fostering an open and welcoming environment, all participants, including attendees, speakers, sponsors, volunteers, online contributors, and IBM employees are expected to show respect for each other and our community by creating a harassment-free experience for everyone, regardless of age, body size, disability, ethnicity, gender identity and expression, level of experience, nationality, personal appearance, race, religion, or sexual identity and orientation. Expected behavior applies to both online and offline engagement with the IBM Quantum Community.
