@@ -1,16 +1,12 @@
 <template>
   <div class="learn-page">
-    <header class="the-learn-header">
-      <div class="the-learn-header__container">
-        <h1 class="the-learn-header__title">
-          Start your path towards<br>
-          learning
-          <span class="the-learn-header__relevant-word">
-            Qiskit
-          </span>
-        </h1>
-      </div>
-    </header>
+    <PageHeader>
+      Start your path towards<br>
+      learning
+      <span class="page-header__relevant-word">
+        Qiskit
+      </span>
+    </PageHeader>
     <section class="the-learning-resources-list">
       <div class="the-learning-resources-list__container">
         <h2 class="copy__title">
@@ -121,6 +117,7 @@
 import { mapGetters } from 'vuex'
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
+import PageHeader from '~/components/ui/PageHeader.vue'
 import LearningResourceCard from '~/components/learn/LearningResourceCard.vue'
 import TheCarefulExplanationForBeginners from '~/components/learn/TheCarefulExplanationForBeginners.vue'
 import TheCarefulExplanationForExperts from '~/components/learn/TheCarefulExplanationForExperts.vue'
@@ -136,6 +133,7 @@ import {
 
 @Component({
   components: {
+    PageHeader,
     LearningResourceCard,
     TheCarefulExplanationForExperts,
     TheCarefulExplanationForBeginners,
