@@ -249,39 +249,6 @@ export default class extends QiskitPage {
   background-color: white;
 }
 
-.the-learn-header {
-  @include responsive-grid-bg-strip('/images/grid/grid-hero-learn.svg', auto, 28rem);
-  min-height: 28rem;
-
-  @include mq($until: large) {
-    min-height: 28rem * 40 / 64;
-  }
-
-  &__container {
-    @include contained();
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 28rem;
-
-    @include mq($until: large) {
-      height: 28rem * 40 / 64;
-    }
-  }
-
-  &__title {
-    @include type-style('expressive-heading-05', true);
-    color: $white-text-01;
-  }
-
-  &__relevant-word {
-    font-style: italic;
-    background-color: $purple-70;
-    color: white;
-    padding: $spacing-01 $spacing-03;
-  }
-}
-
 .the-learning-resources-list {
   @include responsive-grid-bg('/images/grid/grid-left-inverted.svg', 36rem);
   background-repeat: no-repeat;
