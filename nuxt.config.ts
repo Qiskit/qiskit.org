@@ -158,15 +158,30 @@ const config: Configuration = {
     scrollBehavior (to, from) {
       const nuxt = window.$nuxt
 
-      // Force `triggerScroll` when navigating through the page.
-      // Did not found the event `triggerScroll` documented but it is used in
-      // the default behaviour to ensure the page has loaded:
-      // https://github.com/nuxt/nuxt.js/blob/e3ba6c290dd60e1a8c5b7daec72982a667a7fe04/packages/vue-app/template/router.scrollBehavior.js
-      if (to.path === from.path && to.hash !== from.hash) {
-        nuxt.$nextTick(() => nuxt.$emit('triggerScroll'))
+      const isPageNavigation = to.name !== from.name
+
+      if (isPageNavigation) {
+        nuxt.$nextTick(() => nuxt.$emit('scrollToTop'))
+      } else {
+        // Force `triggerScroll` when navigating through the page.
+        // Did not found the event `triggerScroll` documented but it is used in
+        // the default behaviour to ensure the page has loaded:
+        // https://github.com/nuxt/nuxt.js/blob/e3ba6c290dd60e1a8c5b7daec72982a667a7fe04/packages/vue-app/template/router.scrollBehavior.js
+
+        const isInPageNavigation = to.path === from.path && to.hash !== from.hash
+
+        if (isInPageNavigation) {
+          nuxt.$nextTick(() => nuxt.$emit('triggerScroll'))
+        }
       }
 
       return new Promise((resolve) => {
+        nuxt.$once('scrollToTop', () => {
+          window.scrollTo(0, 0)
+
+          return resolve()
+        })
+
         nuxt.$once('triggerScroll', () => {
           if (!to.hash) {
             return resolve()
