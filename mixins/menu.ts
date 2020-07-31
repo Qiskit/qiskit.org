@@ -8,6 +8,7 @@ import {
   TUTORIALS_LINK,
   DOCUMENTATION_LINK,
   LEARN_LINK,
+  OVERVIEW_LINK,
   NavLink
 } from '~/constants/menuLinks'
 
@@ -18,6 +19,7 @@ export default class extends Vue {
   learnMore: Array<NavLink> = [TUTORIALS_LINK, DOCUMENTATION_LINK]
 
   mainLevelLinks: Array<NavLink> = [
+    OVERVIEW_LINK,
     LEARN_LINK,
     { ...COMMUNITY_LINK, sublinks: ORDERED_COMMUNITY_SUB_LINKS },
     DOCUMENTATION_LINK
