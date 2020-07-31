@@ -17,9 +17,7 @@ export default class extends Vue {}
 </script>
 
 <style lang="scss" scoped>
-@import '~/assets/scss/blocks/copy.scss';
 @import '~carbon-components/scss/globals/scss/typography';
-@include carbon--theme($carbon--theme--white);
 
 .page-header {
   @include responsive-grid-bg-strip('/images/grid/grid-hero-learn.svg', auto, 28rem);
@@ -44,13 +42,6 @@ export default class extends Vue {}
   &__title {
     @include type-style('expressive-heading-05', true);
     color: $white-text-01;
-  }
-
-  &__relevant-word {
-    font-style: italic;
-    background-color: $purple-70;
-    color: white;
-    padding: $spacing-01 $spacing-03;
   }
 }
 </style>
