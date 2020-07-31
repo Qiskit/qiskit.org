@@ -1,16 +1,12 @@
 <template>
   <div class="learn-page">
-    <header class="the-learn-header">
-      <div class="the-learn-header__container">
-        <h1 class="the-learn-header__title">
-          Start your path towards<br>
-          learning
-          <span class="the-learn-header__relevant-word">
-            Qiskit
-          </span>
-        </h1>
-      </div>
-    </header>
+    <PageHeader>
+      Start your path towards<br>
+      learning
+      <RelevantWord>
+        Qiskit
+      </RelevantWord>
+    </PageHeader>
     <section class="the-learning-resources-list">
       <div class="the-learning-resources-list__container">
         <h2 class="copy__title">
@@ -121,6 +117,8 @@
 import { mapGetters } from 'vuex'
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
+import PageHeader from '~/components/ui/PageHeader.vue'
+import RelevantWord from '~/components/ui/RelevantWord.vue'
 import LearningResourceCard from '~/components/learn/LearningResourceCard.vue'
 import TheCarefulExplanationForBeginners from '~/components/learn/TheCarefulExplanationForBeginners.vue'
 import TheCarefulExplanationForExperts from '~/components/learn/TheCarefulExplanationForExperts.vue'
@@ -136,6 +134,8 @@ import {
 
 @Component({
   components: {
+    PageHeader,
+    RelevantWord,
     LearningResourceCard,
     TheCarefulExplanationForExperts,
     TheCarefulExplanationForBeginners,
@@ -245,43 +245,9 @@ export default class extends QiskitPage {
 <style lang="scss" scoped>
 @import '~/assets/scss/blocks/copy.scss';
 @import '~carbon-components/scss/globals/scss/typography';
-@include carbon--theme($carbon--theme--white);
 
 .learn-page {
   background-color: white;
-}
-
-.the-learn-header {
-  @include responsive-grid-bg-strip('/images/grid/grid-hero-learn.svg', auto, 28rem);
-  min-height: 28rem;
-
-  @include mq($until: large) {
-    min-height: 28rem * 40 / 64;
-  }
-
-  &__container {
-    @include contained();
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 28rem;
-
-    @include mq($until: large) {
-      height: 28rem * 40 / 64;
-    }
-  }
-
-  &__title {
-    @include type-style('expressive-heading-05', true);
-    color: $white-text-01;
-  }
-
-  &__relevant-word {
-    font-style: italic;
-    background-color: $purple-70;
-    color: white;
-    padding: $spacing-01 $spacing-03;
-  }
 }
 
 .the-learning-resources-list {
