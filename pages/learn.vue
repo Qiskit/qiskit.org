@@ -3,9 +3,9 @@
     <PageHeader>
       Start your path towards<br>
       learning
-      <span class="page-header__relevant-word">
+      <RelevantWord>
         Qiskit
-      </span>
+      </RelevantWord>
     </PageHeader>
     <section class="the-learning-resources-list">
       <div class="the-learning-resources-list__container">
@@ -118,6 +118,7 @@ import { mapGetters } from 'vuex'
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import PageHeader from '~/components/ui/PageHeader.vue'
+import RelevantWord from '~/components/ui/RelevantWord.vue'
 import LearningResourceCard from '~/components/learn/LearningResourceCard.vue'
 import TheCarefulExplanationForBeginners from '~/components/learn/TheCarefulExplanationForBeginners.vue'
 import TheCarefulExplanationForExperts from '~/components/learn/TheCarefulExplanationForExperts.vue'
@@ -134,6 +135,7 @@ import {
 @Component({
   components: {
     PageHeader,
+    RelevantWord,
     LearningResourceCard,
     TheCarefulExplanationForExperts,
     TheCarefulExplanationForBeginners,
@@ -243,7 +245,6 @@ export default class extends QiskitPage {
 <style lang="scss" scoped>
 @import '~/assets/scss/blocks/copy.scss';
 @import '~carbon-components/scss/globals/scss/typography';
-@include carbon--theme($carbon--theme--white);
 
 .learn-page {
   background-color: white;

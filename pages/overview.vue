@@ -2,9 +2,9 @@
   <div class="overview-page">
     <PageHeader>
       The most
-      <span class="page-header__relevant-word">
+      <RelevantWord>
         feature rich
-      </span><br>
+      </RelevantWord><br>
       quantum computing SDK
     </PageHeader>
   </div>
@@ -14,9 +14,10 @@
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import PageHeader from '~/components/ui/PageHeader.vue'
+import RelevantWord from '~/components/ui/RelevantWord.vue'
 
 @Component({
-  components: { PageHeader },
+  components: { PageHeader, RelevantWord },
   head () {
     return {
       title: 'Qiskit Overview'
