@@ -49,13 +49,19 @@ export default class extends QiskitPage {
   &__table-of-contents {
     max-width: 3 * $column-size-large;
     padding-right: $spacing-07;
-    color: black;
+    background-color: black;
+
+    @include mq($from: medium, $until: large) {
+      max-width: 2 * $column-size-medium;
+    }
+
+    @include mq($until: medium) {
+      display: none;
+    }
   }
 
   &__list-of-contents {
-    width: auto;
-    color: black;
-
+    background-color: green;
   }
 }
 </style>
