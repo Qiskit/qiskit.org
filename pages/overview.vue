@@ -7,7 +7,7 @@
       </RelevantWord><br>
       quantum computing SDK
     </PageHeader>
-    <section class="overview-page__content-container copy__util_vertical-spacer">
+    <section class="overview-page__content-container">
       <div class="overview-page__table-of-contents">TABLE OF CONTENTS</div>
       <div class="overview-page__list-of-contents">
         <ContentSection>
@@ -49,6 +49,11 @@ export default class extends QiskitPage {
   &__content-container {
     @include contained();
     display: flex;
+    margin-bottom: $layout-07 / 2;
+
+    @include mq($until: medium) {
+      margin-bottom: 0;
+    }
   }
 
   &__table-of-contents {
