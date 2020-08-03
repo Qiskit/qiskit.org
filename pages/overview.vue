@@ -10,7 +10,9 @@
     <section class="overview-page__content-container copy__util_vertical-spacer">
       <div class="overview-page__table-of-contents">TABLE OF CONTENTS</div>
       <div class="overview-page__list-of-contents">
-        <ContentSection />
+        <ContentSection>
+          Content Section
+        </ContentSection>
       </div>
     </section>
     <TheQuickStart />
@@ -50,20 +52,17 @@ export default class extends QiskitPage {
   }
 
   &__table-of-contents {
-    max-width: 3 * $column-size-large;
+    width: 3 * $column-size-large;
     padding-right: $spacing-07;
     color: black;
 
     @include mq($from: medium, $until: large) {
-      max-width: 2 * $column-size-medium;
+      width: 2 * $column-size-medium;
     }
 
     @include mq($until: medium) {
       display: none;
     }
-  }
-
-  &__list-of-contents {
   }
 }
 </style>
