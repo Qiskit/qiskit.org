@@ -13,6 +13,9 @@
         <ContentSection>
           Content Section
         </ContentSection>
+        <ContentSection>
+          Content Section 2
+        </ContentSection>
       </div>
     </section>
     <TheQuickStart />
@@ -28,7 +31,12 @@ import TheQuickStart from '~/components/landing/TheQuickStart/index.vue'
 import ContentSection from '~/components/overview/ContentSection.vue'
 
 @Component({
-  components: { PageHeader, RelevantWord, ContentSection, TheQuickStart },
+  components: {
+    PageHeader,
+    RelevantWord,
+    ContentSection,
+    TheQuickStart
+  },
   head () {
     return {
       title: 'Qiskit Overview'
