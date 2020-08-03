@@ -4,7 +4,7 @@
       <h2 class="copy__title">
         {{ title }}
       </h2>
-      <p class="copy__paragraph content-section__description">
+      <p class="content-section__description">
         {{ description }}
       </p>
       <AppLink class="copy__link" :url="link.url">
@@ -38,7 +38,7 @@ export default class extends Vue {
 .content-section {
   width: 100%;
   display: flex;
-  margin-bottom: $layout-01 + $layout-05;
+  margin-bottom: $layout-07 / 2;
 
   @include mq($until: large) {
     flex-direction: column;
@@ -55,8 +55,13 @@ export default class extends Vue {
   }
 
   &__description {
-    @include mq($from: large) {
-      margin-bottom: $layout-05;
+    @include type-style('body-long-01');
+    color: $cool-gray-80;
+    margin-bottom: $layout-05;
+
+    @include mq($until: large) {
+      @include type-style('label-01');
+      margin-bottom: $layout-03;
     }
   }
 
