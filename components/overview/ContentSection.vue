@@ -4,7 +4,7 @@
       <h2 class="copy__title">
         Research Applications
       </h2>
-      <p class="copy__paragraph">
+      <p class="copy__paragraph content-section__description">
         Qiskit allows for easy research and development for specific industry use
         cases that have the highest potential for quantum advantage.
       </p>
@@ -48,9 +48,16 @@ export default class extends Vue {}
   &__overview {
     width: 40%;
     padding-right: $spacing-07;
+    margin-bottom: $layout-03;
 
     @include mq($until: large) {
       width: 100%;
+    }
+  }
+
+  &__description {
+    @include mq($from: large) {
+      margin-bottom: $layout-05;
     }
   }
 
