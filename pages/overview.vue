@@ -7,10 +7,24 @@
       </RelevantWord><br>
       quantum computing SDK
     </PageHeader>
-    <section class="overview-page__content-container">
-      <div class="overview-page__table-of-contents">TABLE OF CONTENTS</div>
+    <section id="contentContainer" class="overview-page__content-container">
+      <div class="overview-page__table-of-contents">
+        <ul>
+          Write quantum code
+          <li><a href="#applications">Applications</a></li>
+          <li><a href="#algorithms">Algorithms</a></li>
+          <li><a href="#benchmarking">Benchmarking</a></li>
+          <li><a href="#circuits">Circuits</a></li>
+        </ul>
+        <ul>
+          Run Quantum Code
+          <li><a href="#simulators">Simulators</a></li>
+          <li><a href="#hardware">Hardware</a></li>
+        </ul>
+      </div>
       <div class="overview-page__list-of-contents">
         <ContentSection
+          id="applications"
           :title="researchAppsSection.title"
           :description="researchAppsSection.description"
           :link="researchAppsSection.link"
@@ -18,6 +32,7 @@
           Content Section
         </ContentSection>
         <ContentSection
+          id="algorithms"
           :title="libraryOfAlgorithms.title"
           :description="libraryOfAlgorithms.description"
           :link="libraryOfAlgorithms.link"
@@ -83,6 +98,8 @@ export default class extends QiskitPage {
   &__content-container {
     @include contained();
     display: flex;
+    align-items: flex-start;
+    overflow: visible;
     margin-bottom: $layout-07 / 2;
 
     @include mq($until: medium) {
@@ -94,6 +111,10 @@ export default class extends QiskitPage {
     width: 20%;
     padding-right: $spacing-07;
     color: black;
+
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 0;
 
     @include mq($until: medium) {
       display: none;
