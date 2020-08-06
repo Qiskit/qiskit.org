@@ -8,20 +8,7 @@
       quantum computing SDK
     </PageHeader>
     <section id="contentContainer" class="overview-page__content-container">
-      <div class="overview-page__table-of-contents">
-        <ul>
-          Write quantum code
-          <li><a href="#applications">Applications</a></li>
-          <li><a href="#algorithms">Algorithms</a></li>
-          <li><a href="#benchmarking">Benchmarking</a></li>
-          <li><a href="#circuits">Circuits</a></li>
-        </ul>
-        <ul>
-          Run Quantum Code
-          <li><a href="#simulators">Simulators</a></li>
-          <li><a href="#hardware">Hardware</a></li>
-        </ul>
-      </div>
+      <TableOfContents />
       <div class="overview-page__list-of-contents">
         <ContentSection
           id="applications"
@@ -50,6 +37,7 @@ import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import PageHeader from '~/components/ui/PageHeader.vue'
 import RelevantWord from '~/components/ui/RelevantWord.vue'
+import TableOfContents from '~/components/overview/TableOfContents.vue'
 import TheQuickStart from '~/components/landing/TheQuickStart/index.vue'
 import ContentSection from '~/components/overview/ContentSection.vue'
 
@@ -57,6 +45,7 @@ import ContentSection from '~/components/overview/ContentSection.vue'
   components: {
     PageHeader,
     RelevantWord,
+    TableOfContents,
     ContentSection,
     TheQuickStart
   },
@@ -104,20 +93,6 @@ export default class extends QiskitPage {
 
     @include mq($until: medium) {
       margin-bottom: 0;
-    }
-  }
-
-  &__table-of-contents {
-    width: 20%;
-    padding-right: $spacing-07;
-    color: black;
-
-    position: -webkit-sticky; /* Safari */
-    position: sticky;
-    top: 0;
-
-    @include mq($until: medium) {
-      display: none;
     }
   }
 
