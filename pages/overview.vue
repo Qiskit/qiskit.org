@@ -8,7 +8,12 @@
       quantum computing SDK
     </PageHeader>
     <section id="contentContainer" class="overview-page__content-container">
-      <TableOfContents />
+      <div class="overview-page__main-nav-options">
+        <TableOfContents />
+        <AppCta class="overview-page__get-started" url="">
+          Get Started
+        </AppCta>
+      </div>
       <div class="overview-page__list-of-contents">
         <ContentSection
           id="applications"
@@ -40,6 +45,7 @@ import RelevantWord from '~/components/ui/RelevantWord.vue'
 import TableOfContents from '~/components/overview/TableOfContents.vue'
 import TheQuickStart from '~/components/landing/TheQuickStart/index.vue'
 import ContentSection from '~/components/overview/ContentSection.vue'
+import AppCta from '~/components/ui/AppCta.vue'
 
 @Component({
   components: {
@@ -47,7 +53,8 @@ import ContentSection from '~/components/overview/ContentSection.vue'
     RelevantWord,
     TableOfContents,
     ContentSection,
-    TheQuickStart
+    TheQuickStart,
+    AppCta
   },
   head () {
     return {
@@ -94,6 +101,23 @@ export default class extends QiskitPage {
     @include mq($until: medium) {
       margin-bottom: 0;
     }
+  }
+
+  &__main-nav-options {
+    width: 20%;
+    padding-right: $spacing-07;
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 0;
+
+    @include mq($until: medium) {
+      display: none;
+    }
+  }
+
+  &__get-started {
+    @include type-style('label-01');
+    margin-top: $layout-04;
   }
 
   &__list-of-contents {
