@@ -149,7 +149,6 @@ export default class extends QiskitPage {
   }
 
   &__get-started {
-    @include type-style('label-01');
     margin-top: $layout-04;
   }
 

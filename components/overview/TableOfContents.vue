@@ -72,10 +72,14 @@ export default class extends Vue {
   flex-direction: column;
 
   &__element {
-    @include type-style('label-01');
-    color: $gray-80;
+    @include type-style('body-long-01');
+    color: $cool-gray-80;
     text-decoration: none;
     margin-bottom: $layout-02;
+
+    @include mq($until: large) {
+      @include type-style('label-01');
+    }
 
     &:hover {
       text-decoration: underline;
