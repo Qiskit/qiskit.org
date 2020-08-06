@@ -23,7 +23,7 @@
           :description="section.description"
           :link="section.link"
         >
-          Content {{ section.label }}
+          Content {{ section.title }}
         </ContentSection>
       </div>
     </section>
