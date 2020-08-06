@@ -141,7 +141,7 @@ export default class extends QiskitPage {
     padding-right: $spacing-07;
     position: -webkit-sticky; /* Safari */
     position: sticky;
-    top: 0;
+    top: $layout-02;
 
     @include mq($until: medium) {
       display: none;
