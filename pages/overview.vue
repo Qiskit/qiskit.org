@@ -149,7 +149,7 @@ export default class extends QiskitPage {
   }
 
   &__get-started {
-    margin-top: $layout-04;
+    margin-top: $layout-02;
   }
 
   &__list-of-contents {
