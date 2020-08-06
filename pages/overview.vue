@@ -10,7 +10,7 @@
     <section id="contentContainer" class="overview-page__content-container">
       <div class="overview-page__main-nav-options">
         <TableOfContents />
-        <AppCta class="overview-page__get-started" url="">
+        <AppCta class="overview-page__get-started" url="#quick-start">
           Get Started
         </AppCta>
       </div>
@@ -27,7 +27,7 @@
         </ContentSection>
       </div>
     </section>
-    <TheQuickStart />
+    <TheQuickStart id="quick-start" />
   </div>
 </template>
 
