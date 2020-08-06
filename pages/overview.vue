@@ -16,20 +16,14 @@
       </div>
       <div class="overview-page__list-of-contents">
         <ContentSection
-          id="applications"
-          :title="researchAppsSection.title"
-          :description="researchAppsSection.description"
-          :link="researchAppsSection.link"
+          v-for="section in contentSections"
+          :id="section.id"
+          :key="section.id"
+          :title="section.title"
+          :description="section.description"
+          :link="section.link"
         >
-          Content Section
-        </ContentSection>
-        <ContentSection
-          id="algorithms"
-          :title="libraryOfAlgorithms.title"
-          :description="libraryOfAlgorithms.description"
-          :link="libraryOfAlgorithms.link"
-        >
-          Content Section 2
+          Content {{ section.label }}
         </ContentSection>
       </div>
     </section>
@@ -65,23 +59,62 @@ import AppCta from '~/components/ui/AppCta.vue'
 export default class extends QiskitPage {
   routeName = 'overview'
 
-  researchAppsSection = {
-    title: 'Research Applications',
-    description: 'Qiskit allows for easy research and development for specific industry use cases that have the highest potential for quantum advantage.',
-    link: {
-      label: 'See docs',
-      url: '/'
+  contentSections = [
+    {
+      id: 'applications',
+      title: 'Research Applications',
+      description: 'Qiskit allows for easy research and development for specific industry use cases that have the highest potential for quantum advantage.',
+      link: {
+        label: 'See docs',
+        url: '/'
+      }
+    },
+    {
+      id: 'algorithms',
+      title: 'Collection of Algorithms',
+      description: 'Qiskit contains a generic framework of cross-domain quantum algorithms upon which applications for near-term quantum computing can be built.',
+      link: {
+        label: 'See docs',
+        url: '/'
+      }
+    },
+    {
+      id: 'characterization',
+      title: 'Experimentalist Toolbox',
+      description: 'Qiskit provides a framework for understanding and mitigating noise in quantum circuits and systems. The experiments provided in Qiskit are grouped into the topics of characterization, verification and mitigation.',
+      link: {
+        label: 'See docs',
+        url: '/'
+      }
+    },
+    {
+      id: 'circuits',
+      title: 'Circuits',
+      description: 'Qiskit provides a set of tools for composing quantum programs at the level of circuits and pulses, optimizing them for the constraints of a particular physical quantum processor, and managing the batched execution of experiments on remote-access backends.',
+      link: {
+        label: 'See docs',
+        url: '/'
+      }
+    },
+    {
+      id: 'simulators',
+      title: 'Simulate Quantum Hardware',
+      description: 'Qiskit provides a framework for understanding and mitigating noise in quantum circuits and systems. The experiments provided in Qiskit are grouped into the topics of characterization, verification and mitigation.',
+      link: {
+        label: 'See docs',
+        url: '/'
+      }
+    },
+    {
+      id: 'hardware',
+      title: 'Run Circuits on Real Quantum Systems',
+      description: 'Circuits are the foundational roots for our software stack. Qiskit provides a set of tools for composing quantum programs at the level of circuits and pulses, optimizing them for the constraints of a particular physical quantum processor, and managing the batched execution of experiments on remote-access backends. Qiskit is modularly constructed, simplifying the addition of extensions for circuit optimizations and backends.',
+      link: {
+        label: 'See docs',
+        url: '/'
+      }
     }
-  }
-
-  libraryOfAlgorithms = {
-    title: 'Library of Algorithms',
-    description: 'Qiskit contains a library of cross-domain quantum algorithms upon which applications for near-term quantum computing can be built. These algorithms are designed to be extensible, and employs a pluggable framework where quantum algorithms can easily be added. It currently contains machine learning, optimization and core sets of algorithms.',
-    link: {
-      label: 'See docs',
-      url: '/'
-    }
-  }
+  ]
 }
 </script>
 

@@ -37,8 +37,8 @@ export default class extends Vue {
       isSecondary: true
     },
     {
-      url: '#benchmarking',
-      label: 'Benchmarking',
+      url: '#characterization',
+      label: 'Characterization',
       isSecondary: true
     },
     {
