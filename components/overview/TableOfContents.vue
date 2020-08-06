@@ -93,7 +93,12 @@ export default class extends Vue {
     }
 
     &_secondary {
-      margin-left: $layout-03;
+      &::before {
+        content: "-";
+        color: $purple-70;
+        font-weight: bold;
+        padding-right: $layout-02;
+      }
     }
   }
 }
