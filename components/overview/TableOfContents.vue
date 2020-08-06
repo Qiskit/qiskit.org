@@ -97,6 +97,7 @@ export default class extends Vue {
         content: "-";
         color: $purple-70;
         font-weight: bold;
+        display:inline-block;
         padding-right: $layout-02;
       }
     }
