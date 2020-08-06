@@ -9,6 +9,9 @@
     >
       {{ element.label }}
     </AppLink>
+    <AppCta class="table-of-contents__get-started" url="">
+      Get Started
+    </AppCta>
   </nav>
 </template>
 
@@ -16,11 +19,10 @@
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 import AppLink from '~/components/ui/AppLink.vue'
+import AppCta from '~/components/ui/AppCta.vue'
 
 @Component({
-  components: {
-    AppLink
-  }
+  components: { AppLink, AppCta }
 })
 export default class extends Vue {
   elements = [
@@ -101,6 +103,11 @@ export default class extends Vue {
         padding-right: $layout-02;
       }
     }
+  }
+
+  &__get-started {
+    @include type-style('label-01');
+    margin-top: $layout-04;
   }
 }
 </style>
