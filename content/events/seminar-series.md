@@ -3,23 +3,19 @@ title: Quantum Information Science Seminar Series
 dates: Every Friday at 12:00 PM EDT
 tagline: The Quantum Information Science Seminar Series is a deep dive into various academic and research topics within the quantum community. 
 description: Add your description here
-background: globalsummerschool
+background: seminarseries
 nav:
-  - text: What
-    goTo: '#what-is-the-quantum-information-science-seminar-series?'
-  - text: When
-    goTo: '#when-and-where-is-the-seminar-series?'
   - text: Schedule
     goTo: '#schedule'
   - text: Nominate
-    goTo: '#want-to-nominate-a-speaker?'
+    goTo: '#nominate'
   - text: Code of Conduct
     goTo: '#code-of-conduct'
 routeName: events
 ---
 
 ## What is the Quantum Information Science Seminar Series?
-The Quantum Information Science Seminar Series is a deep dive into various academic and research topics within the quantum community. This series is hosted by [Zlatko Minev, Ph.D.](https://twitter.com/zlatko_minev). 
+The Quantum Information Science Seminar Series is a deep dive into various academic and research topics within the quantum community. This series is hosted by [Zlatko Minev, Ph.D.](https://twitter.com/zlatko_minev). **Subscribe to our YouTube channel and set a reminder to watch [Quantum Information Science Seminar Series](https://www.youtube.com/watch?v=7dfw8k2p1to&feature=youtu.be)**
 
 ## When and where is the Seminar Series?
 The Quantum Information Science Seminar is hosted on the [Qiskit Youtube channel](https://www.youtube.com/watch?v=1JT3ei4CXgM&list=PLOFEBzvs-Vvr0uEoGFo08n4-WrM_8fft2) every Friday at 12:00 PM EDT! Join us in the live chat to have your questions answered! 
@@ -43,11 +39,8 @@ The Quantum Information Science Seminar is hosted on the [Qiskit Youtube channel
 | 05/01/20 |  Ramis Movassagh   | [Hamiltonian Density of States](https://youtu.be/yAqb6AsELek?list=PLOFEBzvs-Vvr0uEoGFo08n4-WrM_8fft2&t=2)|
 | 04/24/20 |   Sergey Bravyi    | [Quantum Advantage with Shallow Circuits](https://youtu.be/uwZjUI5eKAk?list=PLOFEBzvs-Vvr0uEoGFo08n4-WrM_8fft2&t=24)|
 | 04/17/20 | Antti Vepsäläinen  | [Impact of Ionizing Radiation on Superconducting Qubit Coherence](https://www.youtube.com/watch?v=iKgysY097Ok&list=PLOFEBzvs-Vvr0uEoGFo08n4-WrM_8fft2&t=355s)|
-
   
-  **Subscribe to our YouTube channel and set a reminder to watch [Quantum Information Science Seminar Series](https://www.youtube.com/watch?v=7dfw8k2p1to&feature=youtu.be)**
-  
-## Want to nominate a speaker? 
+## Nominate
 
 If you or someone you know might be interested in speaking in a future seminar, send us an email at hello@qiskit.org. Please include your name, topic and available dates. 
    
