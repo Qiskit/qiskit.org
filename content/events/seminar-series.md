@@ -1,100 +1,55 @@
 ---
-title: Qiskit Global Summer School
-dates: July 20-31, 2020
-tagline: A two-week intensive summer school designed to empower the next generation of quantum developers and scientists with the knowledge to explore quantum applications on their own.
+title: Quantum Information Science Seminar Series
+dates: Every Friday at 12:00 PM EDT
+tagline: The Quantum Information Science Seminar Series is a deep dive into various academic and research topics within the quantum community. 
 description: Add your description here
 background: globalsummerschool
 nav:
-  - text: Location
-    goTo: '#location'
-  - text: Curriculum
-    goTo: '#curriculum'
+  - text: What
+    goTo: '#what-is-the-quantum-information-science-seminar-series?'
+  - text: When
+    goTo: '#when-and-where-is-the-seminar-series?'
+  - text: Schedule
+    goTo: '#schedule'
+  - text: Nominate
+    goTo: '#want-to-nominate-a-speaker?'
   - text: Code of Conduct
     goTo: '#code-of-conduct'
 routeName: events
 ---
 
-## What is the Qiskit Global Summer School?
-Qiskit Global Summer School is a two-week intensive summer school designed to empower the next generation of quantum developers with the knowledge to explore quantum applications on their own. The curriculum covers quantum computing preliminaries before focusing on two key areas: **superconducting devices** and **quantum chemistry applications**.
+## What is the Quantum Information Science Seminar Series?
+The Quantum Information Science Seminar Series is a deep dive into various academic and research topics within the quantum community. This series is hosted by [Zlatko Minev, Ph.D.](https://twitter.com/zlatko_minev). 
 
-The Qiskit Global Summer School is based on premium training provided to our IBM Quantum interns. We are incredibly excited to make this educational opportunity open to a broad audience. The lectures of the Qiskit Global Summer School will be thorough, and our team of quantum computing experts with extensive teaching experience will cover all steps of the calculations.
+## When and where is the Seminar Series?
+The Quantum Information Science Seminar is hosted on the [Qiskit Youtube channel](https://www.youtube.com/watch?v=1JT3ei4CXgM&list=PLOFEBzvs-Vvr0uEoGFo08n4-WrM_8fft2) every Friday at 12:00 PM EDT! Join us in the live chat to have your questions answered! 
 
-Each day of the Qiskit Global Summer School consists of 3 hours of lectures followed by an hour-long hands-on programming lab where we implement quantum programs in Qiskit.
+## Schedule
 
-## Prerequisites
-Minimal prerequisites are required for the Qiskit Global Summer School. If you know [how to multiply two matrices](https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:matrices/x9e81a4f98389efdf:multiplying-matrices-by-matrices/v/matrix-multiplication-intro), and have some programming experience in Python, you are ready for the Qiskit Global Summer School.
+|   Date   |       Speaker      | Topic | 
+|   ----   |       -------      | ----- |
+| 08/28/20 |   Serge Rosenblum    | [Reversing the Effects of Errors During Quantum Operations](https://youtu.be/Pidnhi_nOC4?list=PLOFEBzvs-Vvr0uEoGFo08n4-WrM_8fft2)|
+| 08/21/20 |   Sergey Bravyi    | [Progress in Realizing Novel Qubits with Josephson Field Effect Transistors](https://youtu.be/tKU-dla3jI0?list=PLOFEBzvs-Vvr0uEoGFo08n4-WrM_8fft2)|
+| 08/14/20 |   Alexandre Blais   | [A Quantum Metamaterial for Broadband Detection of Single Microwave Photons](https://youtu.be/1JT3ei4CXgM?list=PLOFEBzvs-Vvr0uEoGFo08n4-WrM_8fft2)|
+| 08/07/20 |   Andreas Wallraff    | [Executing Deep Optimization Algorithms on a Superconducting Quantum Processor](https://youtu.be/SDPwfg0MBqc?list=PLOFEBzvs-Vvr0uEoGFo08n4-WrM_8fft2)|
+| 07/31/20 |   Charlie Bennett    | [Information is Quantum](https://youtu.be/rslt-LwtDK4?list=PLOFEBzvs-Vvr0uEoGFo08n4-WrM_8fft2)|
+| 07/24/20 |   Aggie Branczyk    | [Customizing Quantum Light Sources for Emerging Quantum Technologies](https://youtu.be/_rky-bqrlDo?list=PLOFEBzvs-Vvr0uEoGFo08n4-WrM_8fft2)|
+| 07/17/20 |   Antonio Mezzacapo | [Machine Learning at the Quantum/Classical Computational Frontier](https://youtu.be/dtLjvGqPoVM?list=PLOFEBzvs-Vvr0uEoGFo08n4-WrM_8fft2)|
+| 07/10/20 |   Guillaume Verdon | [Quantum-probabilistic Generative Models and Variational Quantum Thermalization](https://youtu.be/sS5ovtbXDGQ?list=PLOFEBzvs-Vvr0uEoGFo08n4-WrM_8fft2)|
+| 05/22/20 |   Sophia Economou  | [Efficient Variational Quantum Eigensolvers for NISQ Hardware](https://youtu.be/ptb5xdoXlsA?list=PLOFEBzvs-Vvr0uEoGFo08n4-WrM_8fft2)|
+| 05/29/20 |   Vlad Sivak       | [What can SNAILs do for Quantum-Limited Amplifiers?](https://youtu.be/HnF7iGA0H-0?list=PLOFEBzvs-Vvr0uEoGFo08n4-WrM_8fft2)|
+| 05/15/20 |   Benjamin Huard   | [Measuring a Superconducting Qubit Sequentially](https://youtu.be/8XMfxOxbKGg?list=PLOFEBzvs-Vvr0uEoGFo08n4-WrM_8fft2)|
+| 05/08/20 |   Francesco Valenti & Laura Cardani    | [Reducing the Impact of Radioactivity in Superconducting Circuits](https://youtu.be/Q8QJch6_M7I?list=PLOFEBzvs-Vvr0uEoGFo08n4-WrM_8fft2&t=2)|
+| 05/01/20 |  Ramis Movassagh   | [Hamiltonian Density of States](https://youtu.be/yAqb6AsELek?list=PLOFEBzvs-Vvr0uEoGFo08n4-WrM_8fft2&t=2)|
+| 04/24/20 |   Sergey Bravyi    | [Quantum Advantage with Shallow Circuits](https://youtu.be/uwZjUI5eKAk?list=PLOFEBzvs-Vvr0uEoGFo08n4-WrM_8fft2&t=24)|
+| 04/17/20 | Antti Vepsäläinen  | [Impact of Ionizing Radiation on Superconducting Qubit Coherence](https://www.youtube.com/watch?v=iKgysY097Ok&list=PLOFEBzvs-Vvr0uEoGFo08n4-WrM_8fft2&t=355s)|
 
-You can [brush up on Python programming](https://qiskit.org/textbook/ch-prerequisites/python-and-jupyter-notebooks.html) before attending the lectures by using the Qiskit Textbook. To make the most out of these lectures, you may also consider looking through the [linear algebra prerequisites](https://qiskit.org/textbook/ch-prerequisites/linear_algebra.html) section of the Qiskit Textbook.
-
-## Location
-The Qiskit Global Summer School is invite-only, and will be hosted virtually. Limited recordings may be made available following the lectures.
-
-Invitations will be distributed prior to the event. Interested applicants should [apply here](https://www.eventbrite.com/e/qiskit-global-summer-school-tickets-110201256926).
-
-## Curriculum
-Each day of the Qiskit Global Summer School consists of 3 hours of lectures followed by an hour-long hands-on programming lab where we implement quantum programs in Qiskit.
-
-### Week 1: July 20-24
--	Monday, July 20
-	- 9:00 - 12:00 EDT **Lecture**: Qubits and Quantum States, Quantum Circuits, Measurements\
-	_Lecturer: Elisa B&auml;umer_
-	-	13:00 - 14:00 EDT **Hands-on Programming with Qiskit**\
-	_Lab Lead: Abraham Asfaw_
-
--	Tuesday, July 21
-	- 9:00 - 12:00 EDT **Lecture**: Writing and Running Quantum Programs\
-	_Lecturer: Elisa B&auml;umer_
-	-	13:00 - 14:00 EDT **Hands-on Programming with Qiskit**\
-	_Lab Lead: Abraham Asfaw_
-
--	Wednesday, July 22
-	- 9:00 - 12:00 EDT **Lecture**: Shor's Algorithm I: Understanding Quantum Fourier Transform, Quantum Phase Estimation\
-	_Lecturer: Abraham Asfaw_
-	-	13:00 - 14:00 EDT **Hands-on Programming with Qiskit**\
-	_Lab Lead: Abraham Asfaw_
-
--	Thursday, July 23
-	- 9:00 - 12:00 EDT **Lecture**: Shor's algorithm II: From Factoring to Period-Finding, Writing the Quantum Program\
-	_Lecturer: Abraham Asfaw_
-	-	13:00 - 14:00 EDT **Hands-on Programming with Qiskit**\
-	_Lab Lead: Abraham Asfaw_
-
--	Friday, July 24
-	- 9:00 - 12:00 EDT **Lecture**: Quantum Error Correction using Repetition Codes\
-	_Lecturer: James Wootton_
-	-	13:00 - 14:00 EDT **Hands-on Programming with Qiskit**\
-	_Lab Lead: James Wootton_
-
-### Week 2: July 27-31
--	Monday, July 27
-	- 9:00 - 12:00 EDT **Lecture**: Superconducting Qubits I: Quantizing a Harmonic Oscillator, Josephson Junctions\
-	_Lecturer: Zlatko Minev_
-	-	13:00 - 14:00 EDT **Hands-on Programming with Qiskit**\
-	_Lab Lead: Nick Bronn_
-
--	Tuesday, July 28
-	- 9:00 - 12:00 EDT **Lecture**: Superconducting Qubits II: Circuit Quantum Electrodynamics, Readout and Calibration Methods\
-	_Lecturer: Zlatko Minev_
-	-	13:00 - 14:00 EDT **Hands-on Programming with Qiskit**\
-	_Lab Lead: Nick Bronn_
-
--	Wednesday, July 29
-	- 9:00 - 12:00 EDT **Lecture**: Quantum Chemistry I: Obtaining the Qubit Hamiltonian for H<sub>2</sub> and LiH\
-	_Lecturer: Abhinav Kandala & Antonio Mezzacapo_
-	-	13:00 - 14:00 EDT **Hands-on Programming with Qiskit**\
-	_Lab Lead: Abhinav Kandala & Antonio Mezzacapo_
-
--	Thursday, July 30
-	- 9:00 - 12:00 EDT **Lecture**: Quantum Chemistry II: Finding the Ground States of H<sub>2</sub> and LiH Using a Variational Quantum Eigensolver\
-	_Lecturer: Abhinav Kandala & Antonio Mezzacapo_
-	-	13:00 - 14:00 EDT **Hands-on Programming with Qiskit**\
-	_Lab Lead: Abhinav Kandala & Antonio Mezzacapo_
-
-### Commencement on Qiskit Live
-#### Friday, July 31 at 9:30 - 11:30 EDT 
-To commence our school, we will be hosting a panel discussion showcasing the diverse perspectives and skills that are important for developing a career in quantum computing. Our panelists will discuss their journeys and how you can take advantage of your own interdisciplinary skills and perspectives to secure a job in quantum computing and build your career. The panel will include quantum experts such as Jay Gambetta, Marina Radulaski, Steve Girvin, Monika Schleier-Smith, K. Birgitta Whaley, and John Preskill. After the Commencement, stay tuned to hear from [Charlie Bennett](https://www.youtube.com/watch?v=rslt-LwtDK4&feature=youtu.be) on our weekly seminar series at 12 PM EDT!
   
-  **Subscribe to our YouTube channel and set a reminder to watch the Commencement on [Qiskit Live!](https://www.youtube.com/watch?v=7dfw8k2p1to&feature=youtu.be)**
+  **Subscribe to our YouTube channel and set a reminder to watch [Quantum Information Science Seminar Series](https://www.youtube.com/watch?v=7dfw8k2p1to&feature=youtu.be)**
+  
+## Want to nominate a speaker? 
+
+If you or someone you know might be interested in speaking in a future seminar, send us an email at hello@qiskit.org. Please include your name, topic and available dates. 
    
 ## Code of Conduct
 
