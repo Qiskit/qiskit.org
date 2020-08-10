@@ -140,7 +140,6 @@ export default class extends QiskitPage {
   &__main-nav-options {
     width: 20%;
     padding-right: $spacing-07;
-    position: -webkit-sticky; /* Safari */
     position: sticky;
     top: $layout-02;
 
