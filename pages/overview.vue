@@ -19,6 +19,7 @@
           v-for="section in contentSections"
           :id="section.id"
           :key="section.id"
+          class="overview-page__content-section"
           :title="section.title"
           :description="section.description"
           :link="section.link"
@@ -158,6 +159,11 @@ export default class extends QiskitPage {
     @include mq($until: medium) {
       width: 100%;
     }
+  }
+
+  &__content-section {
+    width: 100%;
+    margin-bottom: $layout-07 / 2;
   }
 }
 </style>

@@ -36,9 +36,7 @@ export default class extends Vue {
 @import '~/assets/scss/blocks/copy.scss';
 
 .content-section {
-  width: 100%;
   display: flex;
-  margin-bottom: $layout-07 / 2;
 
   @include mq($until: large) {
     flex-direction: column;
