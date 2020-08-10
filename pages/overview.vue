@@ -1,12 +1,12 @@
 <template>
   <div class="overview-page">
-    <PageHeader>
+    <ThePageHeader>
       The most
       <RelevantWord>
         feature rich
       </RelevantWord><br>
       quantum computing SDK
-    </PageHeader>
+    </ThePageHeader>
     <section id="contentContainer" class="overview-page__content-container">
       <div class="overview-page__main-nav-options">
         <TableOfContents />
@@ -35,7 +35,7 @@
 <script lang="ts">
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
-import PageHeader from '~/components/ui/PageHeader.vue'
+import ThePageHeader from '~/components/ui/ThePageHeader.vue'
 import RelevantWord from '~/components/ui/RelevantWord.vue'
 import TableOfContents from '~/components/overview/TableOfContents.vue'
 import TheQuickStart from '~/components/landing/TheQuickStart/index.vue'
@@ -44,7 +44,7 @@ import AppCta from '~/components/ui/AppCta.vue'
 
 @Component({
   components: {
-    PageHeader,
+    ThePageHeader,
     RelevantWord,
     TableOfContents,
     ContentSection,
