@@ -15,5 +15,4 @@ jobs:
     - name: Build and Deploy
       if: (type = push OR type = cron) AND branch = master
       script:
-        - npm run generate
-        - cd deploy && bash ./deploy_cos.sh
+        - npm run generate && cd deploy && bash ./deploy_cos.sh
