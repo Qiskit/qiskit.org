@@ -24,7 +24,7 @@
           :description="section.description"
           :link="section.link"
         >
-          Content {{ section.title }}
+          <ContentAccordion />
         </ContentSection>
       </div>
     </section>
@@ -40,6 +40,7 @@ import RelevantWord from '~/components/ui/RelevantWord.vue'
 import TableOfContents from '~/components/overview/TableOfContents.vue'
 import TheQuickStart from '~/components/landing/TheQuickStart/index.vue'
 import ContentSection from '~/components/overview/ContentSection.vue'
+import ContentAccordion from '~/components/overview/ContentAccordion.vue'
 import AppCta from '~/components/ui/AppCta.vue'
 
 @Component({
@@ -48,6 +49,7 @@ import AppCta from '~/components/ui/AppCta.vue'
     RelevantWord,
     TableOfContents,
     ContentSection,
+    ContentAccordion,
     TheQuickStart,
     AppCta
   },
