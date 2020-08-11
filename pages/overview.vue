@@ -116,7 +116,14 @@ export default class extends QiskitPage {
       subSections: [
         {
           title: 'Optimization',
-          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+          content: {
+            image: '/images/overview/applications/optimization.png',
+            description: 'The Qiskit Optimization package covers the whole range from high-level modeling of optimization problems, with automatic conversion of problems to different required representations, to a suite of easy-to-use quantum optimization algorithms that are ready to run on classical simulators, as well as on real quantum.',
+            cta: {
+              label: 'Try the Max Cut Problem',
+              url: '/'
+            }
+          }
         },
         {
           title: 'Finance',

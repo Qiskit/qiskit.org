@@ -9,7 +9,8 @@
         {{ element.title }}
       </template>
       <template slot="content">
-        <p>{{ element.content }}</p>
+        <SubsectionDescription v-if="element.content.image" v-bind="element.content" />
+        <p v-else>{{ element.content }}</p>
       </template>
     </cv-accordion-item>
   </cv-accordion>
@@ -18,8 +19,11 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
+import SubsectionDescription from '~/components/overview/SubsectionDescription.vue'
 
-@Component
+@Component({
+  components: { SubsectionDescription }
+})
 export default class extends Vue {
   @Prop(Array) elements
 
