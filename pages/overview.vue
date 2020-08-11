@@ -24,7 +24,8 @@
           :description="section.description"
           :link="section.link"
         >
-          Content {{ section.title }}
+          <ContentAccordion v-if="section.subSections" :elements="section.subSections" />
+          <img v-else :src="section.image">
         </ContentSection>
       </div>
     </section>
@@ -40,6 +41,7 @@ import RelevantWord from '~/components/ui/RelevantWord.vue'
 import TableOfContents from '~/components/overview/TableOfContents.vue'
 import TheQuickStart from '~/components/landing/TheQuickStart/index.vue'
 import ContentSection from '~/components/overview/ContentSection.vue'
+import ContentAccordion from '~/components/overview/ContentAccordion.vue'
 import AppCta from '~/components/ui/AppCta.vue'
 
 @Component({
@@ -48,6 +50,7 @@ import AppCta from '~/components/ui/AppCta.vue'
     RelevantWord,
     TableOfContents,
     ContentSection,
+    ContentAccordion,
     TheQuickStart,
     AppCta
   },
@@ -109,7 +112,25 @@ export default class extends QiskitPage {
       link: {
         label: 'See docs',
         url: '/'
-      }
+      },
+      subSections: [
+        {
+          title: 'Optimization',
+          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+        },
+        {
+          title: 'Finance',
+          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+        },
+        {
+          title: 'Machine Learning',
+          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+        },
+        {
+          title: 'Chemistry',
+          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+        }
+      ]
     },
     {
       id: 'algorithms',
@@ -118,7 +139,25 @@ export default class extends QiskitPage {
       link: {
         label: 'See docs',
         url: '/'
-      }
+      },
+      subSections: [
+        {
+          title: 'Grover',
+          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+        },
+        {
+          title: 'VQE',
+          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+        },
+        {
+          title: 'QAOA',
+          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+        },
+        {
+          title: 'QSVM',
+          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+        }
+      ]
     },
     {
       id: 'characterization',
@@ -127,7 +166,21 @@ export default class extends QiskitPage {
       link: {
         label: 'See docs',
         url: '/'
-      }
+      },
+      subSections: [
+        {
+          title: 'Characterization',
+          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+        },
+        {
+          title: 'Verification',
+          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+        },
+        {
+          title: 'Calibration',
+          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+        }
+      ]
     },
     {
       id: 'circuits',
@@ -136,7 +189,21 @@ export default class extends QiskitPage {
       link: {
         label: 'See docs',
         url: '/'
-      }
+      },
+      subSections: [
+        {
+          title: 'Compiler',
+          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+        },
+        {
+          title: 'Circuit Library',
+          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+        },
+        {
+          title: 'Pulses',
+          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+        }
+      ]
     },
     {
       id: 'simulators',
@@ -145,7 +212,8 @@ export default class extends QiskitPage {
       link: {
         label: 'See docs',
         url: '/'
-      }
+      },
+      image: '/images/qiskit-logo.png'
     },
     {
       id: 'hardware',
@@ -154,7 +222,8 @@ export default class extends QiskitPage {
       link: {
         label: 'See docs',
         url: '/'
-      }
+      },
+      image: '/images/qiskit-logo.png'
     }
   ]
 }
