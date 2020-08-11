@@ -1,5 +1,5 @@
 <template>
-  <cv-accordion @change="actionChange" ref="acc">
+  <cv-accordion @change="actionChange" ref="acc" class="content-accordion">
     <cv-accordion-item :open="open[0]">
       <template slot="title">Section 1 title </template>
       <template slot="content">
@@ -41,5 +41,36 @@ export default class extends Vue {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+@import '~carbon-components/scss/globals/scss/typography';
+
+.content-accordion {
+  & .bx--accordion__item {
+    @include type-style('body-long-01');
+    border-bottom: none;
+    border-top-color: $gray-20;
+  }
+
+  & .bx--accordion__heading {
+    height: 2.5rem;
+    background-color: $cool-gray-20;
+  }
+
+  & .bx--accordion__title {
+    color: $gray-80;
+    padding-left: $spacing-07;
+    margin: 0;
+  }
+
+  & .bx--accordion__arrow {
+    fill: $gray-80;
+  }
+
+  & .bx--accordion__content {
+    height: 30.5rem;
+    padding: $spacing-06 $spacing-07;
+    background-color: $cool-gray-10;
+    color: $gray-80;
+  }
+}
 </style>
