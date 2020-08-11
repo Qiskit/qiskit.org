@@ -7,9 +7,9 @@
       <p class="content-section__description">
         {{ description }}
       </p>
-      <AppLink class="copy__link" :url="link.url">
+      <AppCta class="copy__link" :url="link.url">
         {{ link.label }}
-      </AppLink>
+      </AppCta>
     </div>
     <div class="content-section__detail">
       <slot />
@@ -20,10 +20,10 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-import AppLink from '~/components/ui/AppLink.vue'
+import AppCta from '~/components/ui/AppCta.vue'
 
 @Component({
-  components: { AppLink }
+  components: { AppCta }
 })
 export default class extends Vue {
   @Prop(String) title
