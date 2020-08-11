@@ -54,6 +54,12 @@ export default class extends Vue {
   & .bx--accordion__heading {
     height: 2.5rem;
     background-color: $cool-gray-20;
+
+    &:hover::before {
+      // To match default light theme UI hover, which is not among the Carbon
+      // palette. 🤦
+      background-color: #e5e5e5;
+    }
   }
 
   & .bx--accordion__title {
@@ -64,6 +70,19 @@ export default class extends Vue {
 
   & .bx--accordion__arrow {
     fill: $gray-80;
+  }
+
+  & button[aria-expanded="true"]{
+    color: $white;
+    background-color: $purple-70;
+  }
+
+  & button[aria-expanded="true"] > .bx--accordion__title{
+    color: $white;
+  }
+
+  & button[aria-expanded="true"] > .bx--accordion__arrow{
+    fill: $white;
   }
 
   & .bx--accordion__content {
