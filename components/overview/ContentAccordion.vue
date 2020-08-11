@@ -1,9 +1,9 @@
 <template>
-  <cv-accordion class="content-accordion">
+  <cv-accordion class="content-accordion" @change="actionChange">
     <cv-accordion-item
       v-for="(element, index) in elements"
       :key="element.title"
-      :open="index === 0"
+      :open="index === expandedItem"
     >
       <template slot="title">
         {{ element.title }}
@@ -22,6 +22,12 @@ import { Component, Prop } from 'vue-property-decorator'
 @Component
 export default class extends Vue {
   @Prop(Array) elements
+
+  expandedItem = 0
+
+  actionChange (ev: any) : void {
+    this.expandedItem = ev.changedIndex
+  }
 }
 </script>
 
