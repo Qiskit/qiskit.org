@@ -1,27 +1,15 @@
 <template>
   <cv-accordion class="content-accordion">
-    <cv-accordion-item :open="true">
-      <template slot="title">Section 1 title </template>
-      <template slot="content">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    <cv-accordion-item
+      v-for="(element, index) in elements"
+      :key="element.title"
+      :open="index === 0"
+    >
+      <template slot="title">
+        {{ element.title }}
       </template>
-    </cv-accordion-item>
-    <cv-accordion-item>
-      <template slot="title">Section 2 title</template>
       <template slot="content">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-      </template>
-    </cv-accordion-item>
-    <cv-accordion-item>
-      <template slot="title">Section 3 title</template>
-      <template slot="content">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-      </template>
-    </cv-accordion-item>
-    <cv-accordion-item>
-      <template slot="title">Section 4 title</template>
-      <template slot="content">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p>{{ element.content }}</p>
       </template>
     </cv-accordion-item>
   </cv-accordion>
@@ -29,10 +17,12 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
+import { Component, Prop } from 'vue-property-decorator'
 
 @Component
-export default class extends Vue {}
+export default class extends Vue {
+  @Prop(Array) elements
+}
 </script>
 
 <style lang="scss">
