@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 #install rclone
 curl https://downloads.rclone.org/rclone-current-linux-amd64.deb -o rclone.deb
