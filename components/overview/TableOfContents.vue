@@ -14,53 +14,14 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
+import { Component, Prop } from 'vue-property-decorator'
 import AppLink from '~/components/ui/AppLink.vue'
 
 @Component({
   components: { AppLink }
 })
 export default class extends Vue {
-  elements = [
-    {
-      url: '#applications',
-      label: 'Write quantum code'
-    },
-    {
-      url: '#applications',
-      label: 'Applications',
-      isSecondary: true
-    },
-    {
-      url: '#algorithms',
-      label: 'Algorithms',
-      isSecondary: true
-    },
-    {
-      url: '#characterization',
-      label: 'Characterization',
-      isSecondary: true
-    },
-    {
-      url: '#circuits',
-      label: 'Circuits',
-      isSecondary: true
-    },
-    {
-      url: '#simulators',
-      label: 'Run Quantum Code'
-    },
-    {
-      url: '#simulators',
-      label: 'Simulators',
-      isSecondary: true
-    },
-    {
-      url: '#hardware',
-      label: 'Hardware',
-      isSecondary: true
-    }
-  ]
+  @Prop(Array) elements
 }
 </script>
 

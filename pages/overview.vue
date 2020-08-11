@@ -9,7 +9,7 @@
     </ThePageHeader>
     <section id="contentContainer" class="overview-page__content-container">
       <div class="overview-page__main-nav-options">
-        <TableOfContents />
+        <TableOfContents :elements="tableOfContentsElements" />
         <AppCta class="overview-page__get-started" url="#quick-start">
           Get Started
         </AppCta>
@@ -59,6 +59,47 @@ import AppCta from '~/components/ui/AppCta.vue'
 })
 export default class extends QiskitPage {
   routeName = 'overview'
+
+  tableOfContentsElements = [
+    {
+      url: '#applications',
+      label: 'Write quantum code'
+    },
+    {
+      url: '#applications',
+      label: 'Applications',
+      isSecondary: true
+    },
+    {
+      url: '#algorithms',
+      label: 'Algorithms',
+      isSecondary: true
+    },
+    {
+      url: '#characterization',
+      label: 'Characterization',
+      isSecondary: true
+    },
+    {
+      url: '#circuits',
+      label: 'Circuits',
+      isSecondary: true
+    },
+    {
+      url: '#simulators',
+      label: 'Run Quantum Code'
+    },
+    {
+      url: '#simulators',
+      label: 'Simulators',
+      isSecondary: true
+    },
+    {
+      url: '#hardware',
+      label: 'Hardware',
+      isSecondary: true
+    }
+  ]
 
   contentSections = [
     {
