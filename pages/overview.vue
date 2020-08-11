@@ -1,15 +1,15 @@
 <template>
   <div class="overview-page">
-    <PageHeader>
+    <ThePageHeader>
       The most
       <RelevantWord>
         feature rich
       </RelevantWord><br>
       quantum computing SDK
-    </PageHeader>
+    </ThePageHeader>
     <section id="contentContainer" class="overview-page__content-container">
       <div class="overview-page__main-nav-options">
-        <TableOfContents />
+        <TableOfContents :elements="tableOfContentsElements" />
         <AppCta class="overview-page__get-started" url="#quick-start">
           Get Started
         </AppCta>
@@ -19,6 +19,7 @@
           v-for="section in contentSections"
           :id="section.id"
           :key="section.id"
+          class="overview-page__content-section"
           :title="section.title"
           :description="section.description"
           :link="section.link"
@@ -34,7 +35,7 @@
 <script lang="ts">
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
-import PageHeader from '~/components/ui/PageHeader.vue'
+import ThePageHeader from '~/components/ui/ThePageHeader.vue'
 import RelevantWord from '~/components/ui/RelevantWord.vue'
 import TableOfContents from '~/components/overview/TableOfContents.vue'
 import TheQuickStart from '~/components/landing/TheQuickStart/index.vue'
@@ -43,7 +44,7 @@ import AppCta from '~/components/ui/AppCta.vue'
 
 @Component({
   components: {
-    PageHeader,
+    ThePageHeader,
     RelevantWord,
     TableOfContents,
     ContentSection,
@@ -58,6 +59,47 @@ import AppCta from '~/components/ui/AppCta.vue'
 })
 export default class extends QiskitPage {
   routeName = 'overview'
+
+  tableOfContentsElements = [
+    {
+      url: '#applications',
+      label: 'Write quantum code'
+    },
+    {
+      url: '#applications',
+      label: 'Applications',
+      isSecondary: true
+    },
+    {
+      url: '#algorithms',
+      label: 'Algorithms',
+      isSecondary: true
+    },
+    {
+      url: '#characterization',
+      label: 'Characterization',
+      isSecondary: true
+    },
+    {
+      url: '#circuits',
+      label: 'Circuits',
+      isSecondary: true
+    },
+    {
+      url: '#simulators',
+      label: 'Run Quantum Code'
+    },
+    {
+      url: '#simulators',
+      label: 'Simulators',
+      isSecondary: true
+    },
+    {
+      url: '#hardware',
+      label: 'Hardware',
+      isSecondary: true
+    }
+  ]
 
   contentSections = [
     {
@@ -129,7 +171,7 @@ export default class extends QiskitPage {
     display: flex;
     align-items: flex-start;
     overflow: visible;
-    margin-bottom: $layout-07 / 2;
+    margin-bottom: $layout-05;
 
     @include mq($until: medium) {
       margin-bottom: 0;
@@ -139,7 +181,6 @@ export default class extends QiskitPage {
   &__main-nav-options {
     width: 20%;
     padding-right: $spacing-07;
-    position: -webkit-sticky; /* Safari */
     position: sticky;
     top: $layout-02;
 
@@ -158,6 +199,11 @@ export default class extends QiskitPage {
     @include mq($until: medium) {
       width: 100%;
     }
+  }
+
+  &__content-section {
+    width: 100%;
+    margin-bottom: $layout-07 / 2;
   }
 }
 </style>
