@@ -1,24 +1,24 @@
 <template>
-  <cv-accordion @change="actionChange" ref="acc" class="content-accordion">
-    <cv-accordion-item :open="open[0]">
+  <cv-accordion class="content-accordion">
+    <cv-accordion-item :open="true">
       <template slot="title">Section 1 title </template>
       <template slot="content">
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
       </template>
     </cv-accordion-item>
-    <cv-accordion-item :open="open[1]">
+    <cv-accordion-item>
       <template slot="title">Section 2 title</template>
       <template slot="content">
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
       </template>
     </cv-accordion-item>
-    <cv-accordion-item :open="open[2]">
+    <cv-accordion-item>
       <template slot="title">Section 3 title</template>
       <template slot="content">
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
       </template>
     </cv-accordion-item>
-    <cv-accordion-item :open="open[3]">
+    <cv-accordion-item>
       <template slot="title">Section 4 title</template>
       <template slot="content">
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
@@ -32,13 +32,7 @@ import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 
 @Component
-export default class extends Vue {
-  open = [true, false, false, false]
-
-  actionChange () {
-
-  }
-}
+export default class extends Vue {}
 </script>
 
 <style lang="scss">
@@ -75,6 +69,10 @@ export default class extends Vue {
   & button[aria-expanded="true"]{
     color: $white;
     background-color: $purple-70;
+
+    &:hover::before {
+      background-color: $purple-70;
+    }
   }
 
   & button[aria-expanded="true"] > .bx--accordion__title{
