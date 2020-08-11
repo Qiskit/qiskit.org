@@ -130,7 +130,7 @@ export default class extends QiskitPage {
     display: flex;
     align-items: flex-start;
     overflow: visible;
-    margin-bottom: $layout-07 / 2;
+    margin-bottom: $layout-05;
 
     @include mq($until: medium) {
       margin-bottom: 0;
