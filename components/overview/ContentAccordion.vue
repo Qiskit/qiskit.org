@@ -1,9 +1,9 @@
 <template>
-  <cv-accordion class="content-accordion" @change="actionChange">
+  <cv-accordion ref="acc" class="content-accordion" @change="actionChange">
     <cv-accordion-item
       v-for="(element, index) in elements"
       :key="element.title"
-      :open="index === expandedItem"
+      :open="open[index]"
     >
       <template slot="title">
         {{ element.title }}
@@ -27,10 +27,11 @@ import AccordionLayout from '~/components/overview/AccordionLayout.vue'
 export default class extends Vue {
   @Prop(Array) elements
 
-  expandedItem = 0
+  open = Array.from({ length: this.elements.length }, (_, i) => i === 0)
 
   actionChange (ev: any) : void {
-    this.expandedItem = ev.changedIndex
+    this.open = this.$refs.acc.state.map((_, index) => index === ev.changedIndex)
+    this.$refs.acc.state = this.open
   }
 }
 </script>
