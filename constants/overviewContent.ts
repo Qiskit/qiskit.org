@@ -1,5 +1,14 @@
 import { NavLink } from '~/constants/menuLinks'
 
+type TableOfContentItem = {
+  /** The visible name of the link */
+  label: string
+  /** Where we want to go */
+  url: string
+  /** Use when the link is on secondary level */
+  isSecondary?: boolean
+}
+
 type SubSection = {
   title: string
   content: {
@@ -25,8 +34,16 @@ interface ContentSection {
   subSections?: SubSection[]
 }
 
+const researchAppId: string = 'applications'
+
+const RESEARCH_APPS_IN_MENU: TableOfContentItem = {
+  url: `#${researchAppId}`,
+  label: 'Applications',
+  isSecondary: true
+}
+
 const RESEARCH_APPS: ContentSection = {
-  id: 'applications',
+  id: researchAppId,
   title: 'Research Applications',
   description: 'Qiskit allows for easy research and development for specific industry use cases that have the highest potential for quantum advantage.',
   link: {
@@ -82,5 +99,6 @@ const RESEARCH_APPS: ContentSection = {
 }
 
 export {
+  RESEARCH_APPS_IN_MENU,
   RESEARCH_APPS
 }

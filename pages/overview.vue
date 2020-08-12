@@ -41,7 +41,7 @@ import TableOfContents from '~/components/overview/TableOfContents.vue'
 import TheQuickStart from '~/components/landing/TheQuickStart/index.vue'
 import ContentSection from '~/components/overview/ContentSection.vue'
 import AppCta from '~/components/ui/AppCta.vue'
-import { RESEARCH_APPS } from '~/constants/overviewContent'
+import { RESEARCH_APPS_IN_MENU, RESEARCH_APPS } from '~/constants/overviewContent'
 
 @Component({
   components: {
@@ -60,6 +60,43 @@ import { RESEARCH_APPS } from '~/constants/overviewContent'
 })
 export default class extends QiskitPage {
   routeName = 'overview'
+
+  tableOfContentsElements = [
+    {
+      url: '#applications',
+      label: 'Write quantum code'
+    },
+    RESEARCH_APPS_IN_MENU,
+    {
+      url: '#algorithms',
+      label: 'Algorithms',
+      isSecondary: true
+    },
+    {
+      url: '#characterization',
+      label: 'Characterization',
+      isSecondary: true
+    },
+    {
+      url: '#circuits',
+      label: 'Circuits',
+      isSecondary: true
+    },
+    {
+      url: '#simulators',
+      label: 'Run Quantum Code'
+    },
+    {
+      url: '#simulators',
+      label: 'Simulators',
+      isSecondary: true
+    },
+    {
+      url: '#hardware',
+      label: 'Hardware',
+      isSecondary: true
+    }
+  ]
 
   contentSections = [
     RESEARCH_APPS,
