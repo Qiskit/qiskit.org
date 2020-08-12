@@ -68,7 +68,53 @@ export default class extends QiskitPage {
       link: {
         label: 'See docs',
         url: '/'
-      }
+      },
+      subSections: [
+        {
+          title: 'Optimization',
+          content: {
+            image: '/images/overview/applications/optimization.png',
+            description: 'The Qiskit Optimization package covers the whole range from high-level modeling of optimization problems, with automatic conversion of problems to different required representations, to a suite of easy-to-use quantum optimization algorithms that are ready to run on classical simulators, as well as on real quantum.',
+            cta: {
+              label: 'Try the Max Cut Problem',
+              url: '/'
+            }
+          }
+        },
+        {
+          title: 'Finance',
+          content: {
+            image: '/images/overview/applications/finance.png',
+            description: 'The Qiskit Finance package contains uncertainty components for stock/securities problems, Ising translators for portfolio optimizations and data providers to source real or random data to finance experiments.',
+            cta: {
+              label: 'Try Option Pricing with qGans',
+              url: '/'
+            }
+          }
+        },
+        {
+          title: 'Machine Learning',
+          content: {
+            image: '/images/overview/applications/machine-learning.png',
+            description: 'The Qiskit Machine Learning package simply contains sample datasets at present. Qiskit has some classification algorithms such as QSVM and VQC (Variational Quantum Classifier), where this data can be used for experiments, and there is also QGAN (Quantum Generative Adversarial Network) algorithm.',
+            cta: {
+              label: 'VQC with trained dataset',
+              url: '/'
+            }
+          }
+        },
+        {
+          title: 'Chemistry',
+          content: {
+            image: '/images/overview/applications/chemestry.png',
+            description: 'The Qiskit Chemistry package supports problems including ground state energy computations, excited states and dipole moments of molecule, both open and closed-shell.',
+            cta: {
+              label: 'Ground State energy of a Molecule',
+              url: '/'
+            }
+          }
+        }
+      ]
     },
     {
       id: 'algorithms',
