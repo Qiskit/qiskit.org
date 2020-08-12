@@ -87,6 +87,16 @@ export default class extends Vue {
     padding: $spacing-06 $spacing-07;
     background-color: $cool-gray-10;
     color: $gray-80;
+
+    @include mq($from: medium, $until: large) {
+      padding-left: $spacing-06;
+      padding-right: $spacing-06;
+    }
+
+    @include mq($until: medium) {
+      padding-left: $spacing-05;
+      padding-right: $spacing-05;
+    }
   }
 }
 </style>
