@@ -9,7 +9,8 @@
         {{ element.title }}
       </template>
       <template slot="content">
-        <p>{{ element.content }}</p>
+        <AccordionLayout v-if="element.content.image" v-bind="element.content" />
+        <p v-else>{{ element.content }}</p>
       </template>
     </cv-accordion-item>
   </cv-accordion>
@@ -18,8 +19,11 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
+import AccordionLayout from '~/components/overview/AccordionLayout.vue'
 
-@Component
+@Component({
+  components: { AccordionLayout }
+})
 export default class extends Vue {
   @Prop(Array) elements
 
@@ -80,7 +84,7 @@ export default class extends Vue {
   }
 
   & .bx--accordion__content {
-    height: 30.5rem;
+    min-height: 30.5rem;
     padding: $spacing-06 $spacing-07;
     background-color: $cool-gray-10;
     color: $gray-80;
