@@ -1,12 +1,12 @@
 <template>
   <div class="learn-page">
-    <PageHeader>
+    <ThePageHeader>
       Start your path towards<br>
       learning
       <RelevantWord>
         Qiskit
       </RelevantWord>
-    </PageHeader>
+    </ThePageHeader>
     <section class="the-learning-resources-list">
       <div class="the-learning-resources-list__container">
         <h2 class="copy__title">
@@ -117,7 +117,7 @@
 import { mapGetters } from 'vuex'
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
-import PageHeader from '~/components/ui/PageHeader.vue'
+import ThePageHeader from '~/components/ui/ThePageHeader.vue'
 import RelevantWord from '~/components/ui/RelevantWord.vue'
 import LearningResourceCard from '~/components/learn/LearningResourceCard.vue'
 import TheCarefulExplanationForBeginners from '~/components/learn/TheCarefulExplanationForBeginners.vue'
@@ -134,7 +134,7 @@ import {
 
 @Component({
   components: {
-    PageHeader,
+    ThePageHeader,
     RelevantWord,
     LearningResourceCard,
     TheCarefulExplanationForExperts,
