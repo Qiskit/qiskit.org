@@ -1,8 +1,10 @@
 <template>
-  <article>
-    <img :src="image">
-    <p>{{ description }}</p>
-    <AppCta :url="cta.url">
+  <article class="accordion-layout">
+    <img :src="image" class="accordion-layout__image">
+    <p class="accordion-layout__description">
+      {{ description }}
+    </p>
+    <AppCta :url="cta.url" class="accordion-layout__link">
       {{ cta.label }}
     </AppCta>
   </article>
@@ -23,5 +25,27 @@ export default class extends Vue {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+@import '~carbon-components/scss/globals/scss/typography';
+
+.accordion-layout {
+  display: flex;
+  flex-direction: column;
+
+  &__image {
+    align-self: center;
+    max-height: 17.5rem;
+    max-width: 26rem;
+    margin-bottom: $spacing-05;
+  }
+
+  &__description {
+    @include type-style('body-long-01');
+    margin-bottom: $spacing-06;
+  }
+
+  &__link {
+    @include type-style('body-long-01');
+  }
+}
 </style>
