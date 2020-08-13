@@ -1,15 +1,15 @@
 <template>
   <div class="overview-page">
-    <PageHeader>
+    <ThePageHeader>
       The most
       <RelevantWord>
         feature rich
       </RelevantWord><br>
       quantum computing SDK
-    </PageHeader>
+    </ThePageHeader>
     <section id="contentContainer" class="overview-page__content-container">
       <div class="overview-page__main-nav-options">
-        <TableOfContents />
+        <TableOfContents :elements="tableOfContentsElements" />
         <AppCta class="overview-page__get-started" url="#quick-start">
           Get Started
         </AppCta>
@@ -36,18 +36,18 @@
 <script lang="ts">
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
-import PageHeader from '~/components/ui/PageHeader.vue'
+import ThePageHeader from '~/components/ui/ThePageHeader.vue'
 import RelevantWord from '~/components/ui/RelevantWord.vue'
 import TableOfContents from '~/components/overview/TableOfContents.vue'
 import TheQuickStart from '~/components/landing/TheQuickStart/index.vue'
 import ContentSection from '~/components/overview/ContentSection.vue'
- import ContentAccordion from '~/components/overview/ContentAccordion.vue' 
+import ContentAccordion from '~/components/overview/ContentAccordion.vue' 
 import AppCta from '~/components/ui/AppCta.vue'
 import { RESEARCH_APPS_IN_MENU, RESEARCH_APPS } from '~/constants/overviewContent'
 
 @Component({
   components: {
-    PageHeader,
+    ThePageHeader,
     RelevantWord,
     TableOfContents,
     ContentSection,
@@ -211,7 +211,7 @@ export default class extends QiskitPage {
     display: flex;
     align-items: flex-start;
     overflow: visible;
-    margin-bottom: $layout-07 / 2;
+    margin-bottom: $layout-05;
 
     @include mq($until: medium) {
       margin-bottom: 0;
@@ -221,7 +221,6 @@ export default class extends QiskitPage {
   &__main-nav-options {
     width: 20%;
     padding-right: $spacing-07;
-    position: -webkit-sticky; /* Safari */
     position: sticky;
     top: $layout-02;
 
