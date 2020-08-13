@@ -41,7 +41,7 @@ import RelevantWord from '~/components/ui/RelevantWord.vue'
 import TableOfContents from '~/components/overview/TableOfContents.vue'
 import TheQuickStart from '~/components/landing/TheQuickStart/index.vue'
 import ContentSection from '~/components/overview/ContentSection.vue'
-import ContentAccordion from '~/components/overview/ContentAccordion.vue' 
+import ContentAccordion from '~/components/overview/ContentAccordion.vue'
 import AppCta from '~/components/ui/AppCta.vue'
 import { RESEARCH_APPS_IN_MENU, RESEARCH_APPS } from '~/constants/overviewContent'
 
