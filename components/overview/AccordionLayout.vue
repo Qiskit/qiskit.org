@@ -36,6 +36,7 @@ export default class extends Vue {
     align-self: center;
     max-height: 17.5rem;
     max-width: 26rem;
+    padding-right: $spacing-06;
     margin-bottom: $spacing-05;
   }
 

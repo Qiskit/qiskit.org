@@ -43,6 +43,7 @@ import TheQuickStart from '~/components/landing/TheQuickStart/index.vue'
 import ContentSection from '~/components/overview/ContentSection.vue'
 import ContentAccordion from '~/components/overview/ContentAccordion.vue'
 import AppCta from '~/components/ui/AppCta.vue'
+import { RESEARCH_APPS_IN_MENU, RESEARCH_APPS } from '~/constants/overviewContent'
 
 @Component({
   components: {
@@ -68,11 +69,7 @@ export default class extends QiskitPage {
       url: '#applications',
       label: 'Write quantum code'
     },
-    {
-      url: '#applications',
-      label: 'Applications',
-      isSecondary: true
-    },
+    RESEARCH_APPS_IN_MENU,
     {
       url: '#algorithms',
       label: 'Algorithms',
@@ -105,40 +102,7 @@ export default class extends QiskitPage {
   ]
 
   contentSections = [
-    {
-      id: 'applications',
-      title: 'Research Applications',
-      description: 'Qiskit allows for easy research and development for specific industry use cases that have the highest potential for quantum advantage.',
-      link: {
-        label: 'See docs',
-        url: '/'
-      },
-      subSections: [
-        {
-          title: 'Optimization',
-          content: {
-            image: '/images/overview/applications/optimization.png',
-            description: 'The Qiskit Optimization package covers the whole range from high-level modeling of optimization problems, with automatic conversion of problems to different required representations, to a suite of easy-to-use quantum optimization algorithms that are ready to run on classical simulators, as well as on real quantum.',
-            cta: {
-              label: 'Try the Max Cut Problem',
-              url: '/'
-            }
-          }
-        },
-        {
-          title: 'Finance',
-          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-        },
-        {
-          title: 'Machine Learning',
-          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-        },
-        {
-          title: 'Chemistry',
-          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-        }
-      ]
-    },
+    RESEARCH_APPS,
     {
       id: 'algorithms',
       title: 'Collection of Algorithms',
