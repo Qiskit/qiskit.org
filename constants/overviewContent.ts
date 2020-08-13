@@ -286,7 +286,7 @@ const SIMULATORS: ContentSection = {
     label: 'See docs',
     url: '/'
   },
-  image: '/images/qiskit-logo.png'
+  image: '/images/overview/simulators/laptop.png'
 }
 
 const hardwareId: string = 'hardware'
@@ -305,7 +305,7 @@ const HARDWARE: ContentSection = {
     label: 'See docs',
     url: '/'
   },
-  image: '/images/qiskit-logo.png'
+  image: '/images/overview/hardware/quantum-computer.png'
 }
 
 const TABLE_OF_CONTENTS: TableOfContentItem[] = [

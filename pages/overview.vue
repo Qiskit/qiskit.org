@@ -25,7 +25,7 @@
           :link="section.link"
         >
           <ContentAccordion v-if="section.subSections" :elements="section.subSections" />
-          <img v-else :src="section.image">
+          <img v-else :src="section.image" class="overview-page__content-section__image">
         </ContentSection>
       </div>
     </section>
@@ -113,6 +113,10 @@ export default class extends QiskitPage {
   &__content-section {
     width: 100%;
     margin-bottom: $layout-07 / 2;
+
+    &__image {
+      height: 30.5rem;
+    }
   }
 }
 </style>
