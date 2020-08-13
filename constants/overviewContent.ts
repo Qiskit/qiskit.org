@@ -58,7 +58,7 @@ const RESEARCH_APPS: ContentSection = {
         description: 'The Qiskit Optimization package covers the whole range from high-level modeling of optimization problems, with automatic conversion of problems to different required representations, to a suite of easy-to-use quantum optimization algorithms that are ready to run on classical simulators, as well as on real quantum.',
         cta: {
           label: 'Try the Max Cut Problem',
-          url: '/'
+          url: 'https://github.com/Qiskit/qiskit-aqua#creating-your-first-optimization-programming-experiment-in-qiskit'
         }
       }
     },
@@ -69,7 +69,7 @@ const RESEARCH_APPS: ContentSection = {
         description: 'The Qiskit Finance package contains uncertainty components for stock/securities problems, Ising translators for portfolio optimizations and data providers to source real or random data to finance experiments.',
         cta: {
           label: 'Try Option Pricing with qGans',
-          url: '/'
+          url: 'https://qiskit.org/documentation/tutorials/finance/10_qgan_option_pricing.html'
         }
       }
     },
@@ -80,7 +80,7 @@ const RESEARCH_APPS: ContentSection = {
         description: 'The Qiskit Machine Learning package simply contains sample datasets at present. Qiskit has some classification algorithms such as QSVM and VQC (Variational Quantum Classifier), where this data can be used for experiments, and there is also QGAN (Quantum Generative Adversarial Network) algorithm.',
         cta: {
           label: 'VQC with trained dataset',
-          url: '/'
+          url: 'https://github.com/Qiskit/qiskit-aqua#creating-your-first-machine-learning-programming-experiment-in-qiskit'
         }
       }
     },
@@ -91,7 +91,7 @@ const RESEARCH_APPS: ContentSection = {
         description: 'The Qiskit Chemistry package supports problems including ground state energy computations, excited states and dipole moments of molecule, both open and closed-shell.',
         cta: {
           label: 'Ground State energy of a Molecule',
-          url: '/'
+          url: 'https://github.com/Qiskit/qiskit-aqua#creating-your-first-chemistry-programming-experiment-in-qiskit'
         }
       }
     }
@@ -112,7 +112,7 @@ const ALGORITHMS_COLLECTION: ContentSection = {
   description: 'Qiskit contains a generic framework of cross-domain quantum algorithms upon which applications for near-term quantum computing can be built.',
   link: {
     label: 'See docs',
-    url: '/'
+    url: 'https://qiskit.org/documentation/apidoc/qiskit.aqua.algorithms.html#algorithms-qiskit-aqua-algorithms'
   },
   subSections: [
     {
@@ -122,7 +122,7 @@ const ALGORITHMS_COLLECTION: ContentSection = {
         description: 'Grover\'s algorithm is a well know quantum algorithm part of the amplitude amplifier category that provides quadratic speedup for searching through unstructured collections of records in search of particular targets.',
         cta: {
           label: 'Try it out',
-          url: '/'
+          url: 'https://qiskit.org/documentation/stubs/qiskit.aqua.algorithms.Grover.html#qiskit.aqua.algorithms.Grover'
         }
       }
     },
@@ -133,7 +133,7 @@ const ALGORITHMS_COLLECTION: ContentSection = {
         description: 'VQE is another well known quantum algorithm part of the minimum eigensolvers category. This algorithm uses variational techniques and interleaves quantum and classical computations in order to find the minimum eigenvalue of the hamiltonian of a given system.',
         cta: {
           label: 'Try it out',
-          url: '/'
+          url: 'https://qiskit.org/documentation/apidoc/qiskit.aqua.algorithms.html#minimum-eigensolvers'
         }
       }
     },
@@ -144,7 +144,7 @@ const ALGORITHMS_COLLECTION: ContentSection = {
         description: 'QAOA is also part of the minimum eigensolvers category. This algorithm extends VQE and inherits VQE\'s general optimization structure but uses its own fine-tuned variational form.',
         cta: {
           label: 'Try it out',
-          url: '/'
+          url: 'https://qiskit.org/documentation/apidoc/qiskit.aqua.algorithms.html#minimum-eigensolvers'
         }
       }
     },
@@ -155,7 +155,7 @@ const ALGORITHMS_COLLECTION: ContentSection = {
         description: 'QSVM is  part of the classifiers category and applies to problems that require a feature map for which computing the collection of inner products is not efficient classically. ',
         cta: {
           label: 'Try it out',
-          url: '/'
+          url: 'https://qiskit.org/documentation/apidoc/qiskit.aqua.algorithms.html#classifiers'
         }
       }
     }
