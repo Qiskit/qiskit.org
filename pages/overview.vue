@@ -43,16 +43,7 @@ import TheQuickStart from '~/components/landing/TheQuickStart/index.vue'
 import ContentSection from '~/components/overview/ContentSection.vue'
 import ContentAccordion from '~/components/overview/ContentAccordion.vue'
 import AppCta from '~/components/ui/AppCta.vue'
-import {
-  RESEARCH_APPS_IN_MENU,
-  RESEARCH_APPS,
-  ALGORITHMS_COLLECTION_IN_MENU,
-  ALGORITHMS_COLLECTION,
-  EXPERIMENTALIST_TOOLBOX_IN_MENU,
-  EXPERIMENTALIST_TOOLBOX,
-  CIRCUITS_IN_MENU,
-  CIRCUITS
-} from '~/constants/overviewContent'
+import { TABLE_OF_CONTENTS, CONTENT_SECTIONS } from '~/constants/overviewContent'
 
 @Component({
   components: {
@@ -73,57 +64,8 @@ import {
 export default class extends QiskitPage {
   routeName = 'overview'
 
-  tableOfContentsElements = [
-    {
-      url: '#applications',
-      label: 'Write quantum code'
-    },
-    RESEARCH_APPS_IN_MENU,
-    ALGORITHMS_COLLECTION_IN_MENU,
-    EXPERIMENTALIST_TOOLBOX_IN_MENU,
-    CIRCUITS_IN_MENU,
-    {
-      url: '#simulators',
-      label: 'Run Quantum Code'
-    },
-    {
-      url: '#simulators',
-      label: 'Simulators',
-      isSecondary: true
-    },
-    {
-      url: '#hardware',
-      label: 'Hardware',
-      isSecondary: true
-    }
-  ]
-
-  contentSections = [
-    RESEARCH_APPS,
-    ALGORITHMS_COLLECTION,
-    EXPERIMENTALIST_TOOLBOX,
-    CIRCUITS,
-    {
-      id: 'simulators',
-      title: 'Simulate Quantum Hardware',
-      description: 'Qiskit provides a framework for understanding and mitigating noise in quantum circuits and systems. The experiments provided in Qiskit are grouped into the topics of characterization, verification and mitigation.',
-      link: {
-        label: 'See docs',
-        url: '/'
-      },
-      image: '/images/qiskit-logo.png'
-    },
-    {
-      id: 'hardware',
-      title: 'Run Circuits on Real Quantum Systems',
-      description: 'Circuits are the foundational roots for our software stack. Qiskit provides a set of tools for composing quantum programs at the level of circuits and pulses, optimizing them for the constraints of a particular physical quantum processor, and managing the batched execution of experiments on remote-access backends. Qiskit is modularly constructed, simplifying the addition of extensions for circuit optimizations and backends.',
-      link: {
-        label: 'See docs',
-        url: '/'
-      },
-      image: '/images/qiskit-logo.png'
-    }
-  ]
+  tableOfContentsElements = TABLE_OF_CONTENTS
+  contentSections = CONTENT_SECTIONS
 }
 </script>
 

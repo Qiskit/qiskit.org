@@ -32,6 +32,8 @@ interface ContentSection {
   link: NavLink
   /** The sub sections inside the section */
   subSections?: SubSection[]
+  /** The image to show if the section doesn't have subsections */
+  image?: string
 }
 
 const researchAppId: string = 'applications'
@@ -268,13 +270,71 @@ const CIRCUITS: ContentSection = {
   ]
 }
 
-export {
+const simulatorsId: string = 'simulators'
+
+const SIMULATORS_IN_MENU: TableOfContentItem = {
+  url: `#${simulatorsId}`,
+  label: 'Simulators',
+  isSecondary: true
+}
+
+const SIMULATORS: ContentSection = {
+  id: 'simulators',
+  title: 'Simulate Quantum Hardware',
+  description: 'Qiskit provides a framework for understanding and mitigating noise in quantum circuits and systems. The experiments provided in Qiskit are grouped into the topics of characterization, verification and mitigation.',
+  link: {
+    label: 'See docs',
+    url: '/'
+  },
+  image: '/images/qiskit-logo.png'
+}
+
+const hardwareId: string = 'hardware'
+
+const HARDWARE_IN_MENU: TableOfContentItem = {
+  url: `#${hardwareId}`,
+  label: 'Hardware',
+  isSecondary: true
+}
+
+const HARDWARE: ContentSection = {
+  id: 'hardware',
+  title: 'Run Circuits on Real Quantum Systems',
+  description: 'Circuits are the foundational roots for our software stack. Qiskit provides a set of tools for composing quantum programs at the level of circuits and pulses, optimizing them for the constraints of a particular physical quantum processor, and managing the batched execution of experiments on remote-access backends. Qiskit is modularly constructed, simplifying the addition of extensions for circuit optimizations and backends.',
+  link: {
+    label: 'See docs',
+    url: '/'
+  },
+  image: '/images/qiskit-logo.png'
+}
+
+const TABLE_OF_CONTENTS: TableOfContentItem[] = [
+  {
+    url: '#applications',
+    label: 'Write quantum code'
+  },
   RESEARCH_APPS_IN_MENU,
-  RESEARCH_APPS,
   ALGORITHMS_COLLECTION_IN_MENU,
-  ALGORITHMS_COLLECTION,
   EXPERIMENTALIST_TOOLBOX_IN_MENU,
-  EXPERIMENTALIST_TOOLBOX,
   CIRCUITS_IN_MENU,
-  CIRCUITS
+  {
+    url: '#simulators',
+    label: 'Run Quantum Code'
+  },
+  SIMULATORS_IN_MENU,
+  HARDWARE_IN_MENU
+]
+
+const CONTENT_SECTIONS: ContentSection[] = [
+  RESEARCH_APPS,
+  ALGORITHMS_COLLECTION,
+  EXPERIMENTALIST_TOOLBOX,
+  CIRCUITS,
+  SIMULATORS,
+  HARDWARE
+]
+
+export {
+  TABLE_OF_CONTENTS,
+  CONTENT_SECTIONS
 }
