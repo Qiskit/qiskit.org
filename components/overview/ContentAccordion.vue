@@ -1,18 +1,25 @@
 <template>
   <cv-accordion ref="acc" class="content-accordion" @change="actionChange">
-    <cv-accordion-item
+    <div
       v-for="(element, index) in elements"
       :key="element.title"
-      :open="open[index]"
+      @click.capture="preventFromClosing(index, $event)"
     >
-      <template slot="title">
-        {{ element.title }}
-      </template>
-      <template slot="content">
-        <AccordionLayout v-if="element.content.image" v-bind="element.content" />
-        <p v-else>{{ element.content }}</p>
-      </template>
-    </cv-accordion-item>
+      <cv-accordion-item
+        :key="element.title"
+        :open="index === expandedItem"
+      >
+        <template slot="title">
+          {{ element.title }}
+        </template>
+        <template slot="content">
+          <AccordionLayout v-if="element.content.image" v-bind="element.content" />
+          <p v-else>
+            {{ element.content }}
+          </p>
+        </template>
+      </cv-accordion-item>
+    </div>
   </cv-accordion>
 </template>
 
@@ -27,13 +34,16 @@ import AccordionLayout from '~/components/overview/AccordionLayout.vue'
 export default class extends Vue {
   @Prop(Array) elements
 
-  open = Array.from({ length: this.elements.length }, (_, i) => i === 0)
+  expandedItem: number = 0
 
-  actionChange (ev: any) : void {
-    const accordionComponent = this.$refs.acc as any
+  preventFromClosing (index: number, event: MouseEvent) {
+    if (index === this.expandedItem) {
+      event.stopPropagation()
+    }
+  }
 
-    this.open = accordionComponent.state.map((_, index) => index === ev.changedIndex)
-    accordionComponent.state = this.open
+  actionChange (ev: { changedIndex: number }) : void {
+    this.expandedItem = ev.changedIndex
   }
 }
 </script>
