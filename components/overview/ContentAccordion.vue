@@ -1,18 +1,25 @@
 <template>
-  <cv-accordion class="content-accordion" @change="actionChange">
-    <cv-accordion-item
+  <cv-accordion ref="acc" class="content-accordion" @change="actionChange">
+    <div
       v-for="(element, index) in elements"
       :key="element.title"
-      :open="index === expandedItem"
+      @click.capture="preventFromClosing(index, $event)"
     >
-      <template slot="title">
-        {{ element.title }}
-      </template>
-      <template slot="content">
-        <AccordionLayout v-if="element.content.image" v-bind="element.content" />
-        <p v-else>{{ element.content }}</p>
-      </template>
-    </cv-accordion-item>
+      <cv-accordion-item
+        :key="element.title"
+        :open="index === expandedItem"
+      >
+        <template slot="title">
+          {{ element.title }}
+        </template>
+        <template slot="content">
+          <AccordionLayout v-if="element.content.image" v-bind="element.content" />
+          <p v-else>
+            {{ element.content }}
+          </p>
+        </template>
+      </cv-accordion-item>
+    </div>
   </cv-accordion>
 </template>
 
@@ -27,9 +34,15 @@ import AccordionLayout from '~/components/overview/AccordionLayout.vue'
 export default class extends Vue {
   @Prop(Array) elements
 
-  expandedItem = 0
+  expandedItem: number = 0
 
-  actionChange (ev: any) : void {
+  preventFromClosing (index: number, event: MouseEvent) {
+    if (index === this.expandedItem) {
+      event.stopPropagation()
+    }
+  }
+
+  actionChange (ev: { changedIndex: number }) : void {
     this.expandedItem = ev.changedIndex
   }
 }
@@ -50,9 +63,7 @@ export default class extends Vue {
     background-color: $cool-gray-20;
 
     &:hover::before {
-      // To match default light theme UI hover, which is not among the Carbon
-      // palette. 🤦
-      background-color: #e5e5e5;
+      background-color: $cool-gray-30;
     }
   }
 
@@ -88,6 +99,16 @@ export default class extends Vue {
     padding: $spacing-06 $spacing-07;
     background-color: $cool-gray-10;
     color: $gray-80;
+
+    @include mq($from: medium, $until: large) {
+      padding-left: $spacing-06;
+      padding-right: $spacing-06;
+    }
+
+    @include mq($until: medium) {
+      padding-left: $spacing-05;
+      padding-right: $spacing-05;
+    }
   }
 }
 </style>
