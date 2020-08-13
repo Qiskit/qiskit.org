@@ -310,7 +310,7 @@ const HARDWARE: ContentSection = {
 
 const TABLE_OF_CONTENTS: TableOfContentItem[] = [
   {
-    url: '#applications',
+    url: `#${researchAppId}`,
     label: 'Write quantum code'
   },
   RESEARCH_APPS_IN_MENU,
@@ -318,7 +318,7 @@ const TABLE_OF_CONTENTS: TableOfContentItem[] = [
   EXPERIMENTALIST_TOOLBOX_IN_MENU,
   CIRCUITS_IN_MENU,
   {
-    url: '#simulators',
+    url: `#${simulatorsId}`,
     label: 'Run Quantum Code'
   },
   SIMULATORS_IN_MENU,

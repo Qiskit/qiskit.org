@@ -13,10 +13,7 @@
           {{ element.title }}
         </template>
         <template slot="content">
-          <AccordionLayout v-if="element.content.image" v-bind="element.content" />
-          <p v-else>
-            {{ element.content }}
-          </p>
+          <AccordionLayout v-bind="element.content" />
         </template>
       </cv-accordion-item>
     </div>
