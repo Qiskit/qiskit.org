@@ -30,8 +30,10 @@ export default class extends Vue {
   open = Array.from({ length: this.elements.length }, (_, i) => i === 0)
 
   actionChange (ev: any) : void {
-    this.open = this.$refs.acc.state.map((_, index) => index === ev.changedIndex)
-    this.$refs.acc.state = this.open
+    const accordionComponent = this.$refs.acc as any
+
+    this.open = accordionComponent.state.map((_, index) => index === ev.changedIndex)
+    accordionComponent.state = this.open
   }
 }
 </script>
