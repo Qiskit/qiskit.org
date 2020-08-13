@@ -49,7 +49,9 @@ import {
   ALGORITHMS_COLLECTION_IN_MENU,
   ALGORITHMS_COLLECTION,
   EXPERIMENTALIST_TOOLBOX_IN_MENU,
-  EXPERIMENTALIST_TOOLBOX
+  EXPERIMENTALIST_TOOLBOX,
+  CIRCUITS_IN_MENU,
+  CIRCUITS
 } from '~/constants/overviewContent'
 
 @Component({
@@ -79,11 +81,7 @@ export default class extends QiskitPage {
     RESEARCH_APPS_IN_MENU,
     ALGORITHMS_COLLECTION_IN_MENU,
     EXPERIMENTALIST_TOOLBOX_IN_MENU,
-    {
-      url: '#circuits',
-      label: 'Circuits',
-      isSecondary: true
-    },
+    CIRCUITS_IN_MENU,
     {
       url: '#simulators',
       label: 'Run Quantum Code'
@@ -104,29 +102,7 @@ export default class extends QiskitPage {
     RESEARCH_APPS,
     ALGORITHMS_COLLECTION,
     EXPERIMENTALIST_TOOLBOX,
-    {
-      id: 'circuits',
-      title: 'Circuits',
-      description: 'Qiskit provides a set of tools for composing quantum programs at the level of circuits and pulses, optimizing them for the constraints of a particular physical quantum processor, and managing the batched execution of experiments on remote-access backends.',
-      link: {
-        label: 'See docs',
-        url: '/'
-      },
-      subSections: [
-        {
-          title: 'Compiler',
-          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-        },
-        {
-          title: 'Circuit Library',
-          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-        },
-        {
-          title: 'Pulses',
-          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-        }
-      ]
-    },
+    CIRCUITS,
     {
       id: 'simulators',
       title: 'Simulate Quantum Hardware',

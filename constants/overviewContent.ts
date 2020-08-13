@@ -215,11 +215,66 @@ const EXPERIMENTALIST_TOOLBOX: ContentSection = {
   ]
 }
 
+const circuitsId: string = 'circuits'
+
+const CIRCUITS_IN_MENU: TableOfContentItem = {
+  url: `#${circuitsId}`,
+  label: 'Circuits',
+  isSecondary: true
+}
+
+const CIRCUITS: ContentSection = {
+  id: 'circuits',
+  title: 'Circuits',
+  description: 'Qiskit provides a set of tools for composing quantum programs at the level of circuits and pulses, optimizing them for the constraints of a particular physical quantum processor, and managing the batched execution of experiments on remote-access backends.',
+  link: {
+    label: 'See docs',
+    url: '/'
+  },
+  subSections: [
+    {
+      title: 'Compiler',
+      content: {
+        image: '/images/overview/circuits/compiler.png',
+        description: 'Qiskit robust compiler provides users with the ability to explore how quantum circuits run on real hardware and optimize such circuits using modules such as pass managers.',
+        cta: {
+          label: 'Call to action',
+          url: '/'
+        }
+      }
+    },
+    {
+      title: 'Circuit Library',
+      content: {
+        image: '/images/overview/circuits/circuit-library.png',
+        description: 'Circuit Library is a collection of well studied circuits and gates that can be plugged into many experiments allowing users to program at higher levels of abstraction when developing and experimenting with circuits.',
+        cta: {
+          label: 'Call to action',
+          url: '/'
+        }
+      }
+    },
+    {
+      title: 'Pulses',
+      content: {
+        image: '/images/overview/circuits/pulses.png',
+        description: 'Pulse is a lower level quantum programming tool. This tool allows users more control over using quantum circuits when interacting with real quantum hardware.',
+        cta: {
+          label: 'Call to action',
+          url: '/'
+        }
+      }
+    }
+  ]
+}
+
 export {
   RESEARCH_APPS_IN_MENU,
   RESEARCH_APPS,
   ALGORITHMS_COLLECTION_IN_MENU,
   ALGORITHMS_COLLECTION,
   EXPERIMENTALIST_TOOLBOX_IN_MENU,
-  EXPERIMENTALIST_TOOLBOX
+  EXPERIMENTALIST_TOOLBOX,
+  CIRCUITS_IN_MENU,
+  CIRCUITS
 }
