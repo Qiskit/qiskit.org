@@ -43,7 +43,12 @@ import TheQuickStart from '~/components/landing/TheQuickStart/index.vue'
 import ContentSection from '~/components/overview/ContentSection.vue'
 import ContentAccordion from '~/components/overview/ContentAccordion.vue'
 import AppCta from '~/components/ui/AppCta.vue'
-import { RESEARCH_APPS_IN_MENU, RESEARCH_APPS } from '~/constants/overviewContent'
+import {
+  RESEARCH_APPS_IN_MENU,
+  RESEARCH_APPS,
+  ALGORITHMS_COLLECTION_IN_MENU,
+  ALGORITHMS_COLLECTION
+} from '~/constants/overviewContent'
 
 @Component({
   components: {
@@ -70,11 +75,7 @@ export default class extends QiskitPage {
       label: 'Write quantum code'
     },
     RESEARCH_APPS_IN_MENU,
-    {
-      url: '#algorithms',
-      label: 'Algorithms',
-      isSecondary: true
-    },
+    ALGORITHMS_COLLECTION_IN_MENU,
     {
       url: '#characterization',
       label: 'Characterization',
@@ -103,33 +104,7 @@ export default class extends QiskitPage {
 
   contentSections = [
     RESEARCH_APPS,
-    {
-      id: 'algorithms',
-      title: 'Collection of Algorithms',
-      description: 'Qiskit contains a generic framework of cross-domain quantum algorithms upon which applications for near-term quantum computing can be built.',
-      link: {
-        label: 'See docs',
-        url: '/'
-      },
-      subSections: [
-        {
-          title: 'Grover',
-          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-        },
-        {
-          title: 'VQE',
-          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-        },
-        {
-          title: 'QAOA',
-          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-        },
-        {
-          title: 'QSVM',
-          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-        }
-      ]
-    },
+    ALGORITHMS_COLLECTION,
     {
       id: 'characterization',
       title: 'Experimentalist Toolbox',
