@@ -65,6 +65,7 @@ export default class extends Vue {
 
   &__detail {
     width: 55%;
+    background-color: $cool-gray-10;
 
     @include mq($until: large) {
       width: 100%;
