@@ -47,7 +47,9 @@ import {
   RESEARCH_APPS_IN_MENU,
   RESEARCH_APPS,
   ALGORITHMS_COLLECTION_IN_MENU,
-  ALGORITHMS_COLLECTION
+  ALGORITHMS_COLLECTION,
+  EXPERIMENTALIST_TOOLBOX_IN_MENU,
+  EXPERIMENTALIST_TOOLBOX
 } from '~/constants/overviewContent'
 
 @Component({
@@ -76,11 +78,7 @@ export default class extends QiskitPage {
     },
     RESEARCH_APPS_IN_MENU,
     ALGORITHMS_COLLECTION_IN_MENU,
-    {
-      url: '#characterization',
-      label: 'Characterization',
-      isSecondary: true
-    },
+    EXPERIMENTALIST_TOOLBOX_IN_MENU,
     {
       url: '#circuits',
       label: 'Circuits',
@@ -105,29 +103,7 @@ export default class extends QiskitPage {
   contentSections = [
     RESEARCH_APPS,
     ALGORITHMS_COLLECTION,
-    {
-      id: 'characterization',
-      title: 'Experimentalist Toolbox',
-      description: 'Qiskit provides a framework for understanding and mitigating noise in quantum circuits and systems. The experiments provided in Qiskit are grouped into the topics of characterization, verification and mitigation.',
-      link: {
-        label: 'See docs',
-        url: '/'
-      },
-      subSections: [
-        {
-          title: 'Characterization',
-          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-        },
-        {
-          title: 'Verification',
-          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-        },
-        {
-          title: 'Calibration',
-          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-        }
-      ]
-    },
+    EXPERIMENTALIST_TOOLBOX,
     {
       id: 'circuits',
       title: 'Circuits',

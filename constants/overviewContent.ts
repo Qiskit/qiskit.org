@@ -162,9 +162,64 @@ const ALGORITHMS_COLLECTION: ContentSection = {
   ]
 }
 
+const experimentalistToolboxId: string = 'characterization'
+
+const EXPERIMENTALIST_TOOLBOX_IN_MENU: TableOfContentItem = {
+  url: `#${experimentalistToolboxId}`,
+  label: 'Characterization',
+  isSecondary: true
+}
+
+const EXPERIMENTALIST_TOOLBOX: ContentSection = {
+  id: 'characterization',
+  title: 'Experimentalist Toolbox',
+  description: 'Qiskit provides a framework for understanding and mitigating noise in quantum circuits and systems. The experiments provided in Qiskit are grouped into the topics of characterization, verification and mitigation.',
+  link: {
+    label: 'See docs',
+    url: '/'
+  },
+  subSections: [
+    {
+      title: 'Characterization',
+      content: {
+        image: '/images/overview/characterization/characterization.png',
+        description: 'Qiskit\'s characterization framework brings the analysis parameters and circuits to users in order to understand and characterize the source of noice that impacts our devices. Such parameters include T1, T2-start, T2, Hamiltonian parameters such as the ZZ interaction rate and control errors in the gates.',
+        cta: {
+          label: 'See Characterization framework',
+          url: '/'
+        }
+      }
+    },
+    {
+      title: 'Verification',
+      content: {
+        image: '/images/overview/characterization/verification.png',
+        description: 'Qiskit\'s verification framework provides experiments that are designed to verify gates and small circuit performance through tomography, quantum volume and randomized benchmarking.',
+        cta: {
+          label: 'See Verification framework',
+          url: '/'
+        }
+      }
+    },
+    {
+      title: 'Calibration',
+      content: {
+        image: '/images/overview/characterization/calibration.png',
+        description: 'Qiskit\'s calibration module allows users to perform proper calibration through rabi schedules and drag schedules in order to mitigate noise by producing the appropriate fitter for the experiment.',
+        cta: {
+          label: 'See Calibration module',
+          url: '/'
+        }
+      }
+    }
+  ]
+}
+
 export {
   RESEARCH_APPS_IN_MENU,
   RESEARCH_APPS,
   ALGORITHMS_COLLECTION_IN_MENU,
-  ALGORITHMS_COLLECTION
+  ALGORITHMS_COLLECTION,
+  EXPERIMENTALIST_TOOLBOX_IN_MENU,
+  EXPERIMENTALIST_TOOLBOX
 }
