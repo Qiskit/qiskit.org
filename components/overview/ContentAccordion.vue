@@ -1,21 +1,21 @@
 <template>
   <cv-accordion ref="acc" class="content-accordion" @change="actionChange">
     <div
-      v-for="(element, index) in elements"
-      :key="element.title"
+      v-for="(tab, index) in tabs"
+      :key="tab.title"
       @click.capture="preventFromClosing(index, $event)"
     >
       <cv-accordion-item
-        :key="element.title"
+        :key="tab.title"
         :open="index === expandedItem"
       >
         <template slot="title">
-          {{ element.title }}
+          {{ tab.title }}
         </template>
         <template slot="content">
-          <AccordionLayout v-if="element.content.image" v-bind="element.content" />
+          <AccordionLayout v-if="tab.content.image" v-bind="tab.content" />
           <p v-else>
-            {{ element.content }}
+            {{ tab.content }}
           </p>
         </template>
       </cv-accordion-item>
@@ -32,7 +32,7 @@ import AccordionLayout from '~/components/overview/AccordionLayout.vue'
   components: { AccordionLayout }
 })
 export default class extends Vue {
-  @Prop(Array) elements
+  @Prop(Array) tabs
 
   expandedItem: number = 0
 
