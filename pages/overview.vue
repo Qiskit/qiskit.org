@@ -9,7 +9,7 @@
     </ThePageHeader>
     <section id="contentContainer" class="overview-page__content-container">
       <div class="overview-page__main-nav-options">
-        <TableOfContents :elements="tableOfContentsElements" />
+        <TheTableOfContents :elements="tableOfContentsElements" />
         <AppCta class="overview-page__get-started" url="#quick-start">
           Get Started
         </AppCta>
@@ -38,7 +38,7 @@ import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import ThePageHeader from '~/components/ui/ThePageHeader.vue'
 import RelevantWord from '~/components/ui/RelevantWord.vue'
-import TableOfContents from '~/components/overview/TableOfContents.vue'
+import TheTableOfContents from '~/components/overview/TheTableOfContents.vue'
 import TheQuickStart from '~/components/landing/TheQuickStart/index.vue'
 import ContentSection from '~/components/overview/ContentSection.vue'
 import ContentAccordion from '~/components/overview/ContentAccordion.vue'
@@ -58,7 +58,7 @@ import {
   components: {
     ThePageHeader,
     RelevantWord,
-    TableOfContents,
+    TheTableOfContents,
     ContentSection,
     ContentAccordion,
     TheQuickStart,
