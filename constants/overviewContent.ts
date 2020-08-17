@@ -1,6 +1,6 @@
 import { NavLink } from '~/constants/menuLinks'
 
-type TableOfContentItem = {
+type TableOfContentEntry = {
   /** The visible name of the link */
   label: string
   /** Where we want to go */
@@ -9,7 +9,7 @@ type TableOfContentItem = {
   isSecondary?: boolean
 }
 
-type SubSection = {
+type OverviewSubSection = {
   title: string
   content: {
     image: string
@@ -21,7 +21,7 @@ type SubSection = {
 /**
  * Represent a content section for the overview page
  */
-interface ContentSection {
+interface OverviewSection {
   /** The identifier of the section */
   id: string
   /** The visible title of the section */
@@ -31,18 +31,20 @@ interface ContentSection {
   /** Where we want to go to get more info of the section */
   link: NavLink
   /** The sub sections inside the section */
-  subSections?: SubSection[]
+  subSections?: OverviewSubSection[],
+  /** The image of the section */
+  image?: string
 }
 
 const researchAppId: string = 'applications'
 
-const RESEARCH_APPS_IN_MENU: TableOfContentItem = {
+const RESEARCH_APPS_IN_MENU: TableOfContentEntry = {
   url: `#${researchAppId}`,
   label: 'Applications',
   isSecondary: true
 }
 
-const RESEARCH_APPS: ContentSection = {
+const RESEARCH_APPS: OverviewSection = {
   id: researchAppId,
   title: 'Research Applications',
   description: 'Qiskit allows for easy research and development for specific industry use cases that have the highest potential for quantum advantage.',
@@ -100,13 +102,13 @@ const RESEARCH_APPS: ContentSection = {
 
 const algorithmsCollectionId: string = 'algorithms'
 
-const ALGORITHMS_COLLECTION_IN_MENU: TableOfContentItem = {
+const ALGORITHMS_COLLECTION_IN_MENU: TableOfContentEntry = {
   url: `#${algorithmsCollectionId}`,
   label: 'Algorithms',
   isSecondary: true
 }
 
-const ALGORITHMS_COLLECTION: ContentSection = {
+const ALGORITHMS_COLLECTION: OverviewSection = {
   id: 'algorithms',
   title: 'Collection of Algorithms',
   description: 'Qiskit contains a generic framework of cross-domain quantum algorithms upon which applications for near-term quantum computing can be built.',
@@ -164,13 +166,13 @@ const ALGORITHMS_COLLECTION: ContentSection = {
 
 const experimentalistToolboxId: string = 'characterization'
 
-const EXPERIMENTALIST_TOOLBOX_IN_MENU: TableOfContentItem = {
+const EXPERIMENTALIST_TOOLBOX_IN_MENU: TableOfContentEntry = {
   url: `#${experimentalistToolboxId}`,
   label: 'Characterization',
   isSecondary: true
 }
 
-const EXPERIMENTALIST_TOOLBOX: ContentSection = {
+const EXPERIMENTALIST_TOOLBOX: OverviewSection = {
   id: 'characterization',
   title: 'Experimentalist Toolbox',
   description: 'Qiskit provides a framework for understanding and mitigating noise in quantum circuits and systems. The experiments provided in Qiskit are grouped into the topics of characterization, verification and mitigation.',
@@ -217,13 +219,13 @@ const EXPERIMENTALIST_TOOLBOX: ContentSection = {
 
 const circuitsId: string = 'circuits'
 
-const CIRCUITS_IN_MENU: TableOfContentItem = {
+const CIRCUITS_IN_MENU: TableOfContentEntry = {
   url: `#${circuitsId}`,
   label: 'Circuits',
   isSecondary: true
 }
 
-const CIRCUITS: ContentSection = {
+const CIRCUITS: OverviewSection = {
   id: 'circuits',
   title: 'Circuits',
   description: 'Qiskit provides a set of tools for composing quantum programs at the level of circuits and pulses, optimizing them for the constraints of a particular physical quantum processor, and managing the batched execution of experiments on remote-access backends.',
@@ -269,6 +271,9 @@ const CIRCUITS: ContentSection = {
 }
 
 export {
+  TableOfContentEntry,
+  OverviewSection,
+  OverviewSubSection,
   RESEARCH_APPS_IN_MENU,
   RESEARCH_APPS,
   ALGORITHMS_COLLECTION_IN_MENU,
