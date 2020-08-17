@@ -1,10 +1,7 @@
 <template>
   <div class="overview-page">
     <ThePageHeader>
-      The most
-      <RelevantWord>
-        feature rich
-      </RelevantWord><br>
+      The most <RelevantWord>feature&nbsp;rich</RelevantWord><br>
       quantum computing SDK
     </ThePageHeader>
     <section id="contentContainer" class="overview-page__content-container">
