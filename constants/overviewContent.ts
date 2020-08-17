@@ -31,8 +31,8 @@ interface OverviewSection {
   /** Where we want to go to get more info of the section */
   link: NavLink
   /** The sub sections inside the section */
-  subSections?: OverviewSubSection[],
-  /** The image of the section */
+  subSections?: OverviewSubSection[]
+  /** The image to show if the section doesn't have subsections */
   image?: string
 }
 
@@ -60,7 +60,7 @@ const RESEARCH_APPS: OverviewSection = {
         description: 'The Qiskit Optimization package covers the whole range from high-level modeling of optimization problems, with automatic conversion of problems to different required representations, to a suite of easy-to-use quantum optimization algorithms that are ready to run on classical simulators, as well as on real quantum.',
         cta: {
           label: 'Try the Max Cut Problem',
-          url: '/'
+          url: 'https://github.com/Qiskit/qiskit-aqua#creating-your-first-optimization-programming-experiment-in-qiskit'
         }
       }
     },
@@ -71,7 +71,7 @@ const RESEARCH_APPS: OverviewSection = {
         description: 'The Qiskit Finance package contains uncertainty components for stock/securities problems, Ising translators for portfolio optimizations and data providers to source real or random data to finance experiments.',
         cta: {
           label: 'Try Option Pricing with qGans',
-          url: '/'
+          url: 'https://qiskit.org/documentation/tutorials/finance/10_qgan_option_pricing.html'
         }
       }
     },
@@ -82,7 +82,7 @@ const RESEARCH_APPS: OverviewSection = {
         description: 'The Qiskit Machine Learning package simply contains sample datasets at present. Qiskit has some classification algorithms such as QSVM and VQC (Variational Quantum Classifier), where this data can be used for experiments, and there is also QGAN (Quantum Generative Adversarial Network) algorithm.',
         cta: {
           label: 'VQC with trained dataset',
-          url: '/'
+          url: 'https://github.com/Qiskit/qiskit-aqua#creating-your-first-machine-learning-programming-experiment-in-qiskit'
         }
       }
     },
@@ -93,7 +93,7 @@ const RESEARCH_APPS: OverviewSection = {
         description: 'The Qiskit Chemistry package supports problems including ground state energy computations, excited states and dipole moments of molecule, both open and closed-shell.',
         cta: {
           label: 'Ground State energy of a Molecule',
-          url: '/'
+          url: 'https://github.com/Qiskit/qiskit-aqua#creating-your-first-chemistry-programming-experiment-in-qiskit'
         }
       }
     }
@@ -114,7 +114,7 @@ const ALGORITHMS_COLLECTION: OverviewSection = {
   description: 'Qiskit contains a generic framework of cross-domain quantum algorithms upon which applications for near-term quantum computing can be built.',
   link: {
     label: 'See docs',
-    url: '/'
+    url: 'https://qiskit.org/documentation/apidoc/qiskit.aqua.algorithms.html#algorithms-qiskit-aqua-algorithms'
   },
   subSections: [
     {
@@ -124,7 +124,7 @@ const ALGORITHMS_COLLECTION: OverviewSection = {
         description: 'Grover\'s algorithm is a well know quantum algorithm part of the amplitude amplifier category that provides quadratic speedup for searching through unstructured collections of records in search of particular targets.',
         cta: {
           label: 'Try it out',
-          url: '/'
+          url: 'https://qiskit.org/documentation/stubs/qiskit.aqua.algorithms.Grover.html#qiskit.aqua.algorithms.Grover'
         }
       }
     },
@@ -135,7 +135,7 @@ const ALGORITHMS_COLLECTION: OverviewSection = {
         description: 'VQE is another well known quantum algorithm part of the minimum eigensolvers category. This algorithm uses variational techniques and interleaves quantum and classical computations in order to find the minimum eigenvalue of the hamiltonian of a given system.',
         cta: {
           label: 'Try it out',
-          url: '/'
+          url: 'https://qiskit.org/documentation/apidoc/qiskit.aqua.algorithms.html#minimum-eigensolvers'
         }
       }
     },
@@ -146,7 +146,7 @@ const ALGORITHMS_COLLECTION: OverviewSection = {
         description: 'QAOA is also part of the minimum eigensolvers category. This algorithm extends VQE and inherits VQE\'s general optimization structure but uses its own fine-tuned variational form.',
         cta: {
           label: 'Try it out',
-          url: '/'
+          url: 'https://qiskit.org/documentation/apidoc/qiskit.aqua.algorithms.html#minimum-eigensolvers'
         }
       }
     },
@@ -157,7 +157,7 @@ const ALGORITHMS_COLLECTION: OverviewSection = {
         description: 'QSVM is  part of the classifiers category and applies to problems that require a feature map for which computing the collection of inner products is not efficient classically. ',
         cta: {
           label: 'Try it out',
-          url: '/'
+          url: 'https://qiskit.org/documentation/apidoc/qiskit.aqua.algorithms.html#classifiers'
         }
       }
     }
@@ -270,16 +270,74 @@ const CIRCUITS: OverviewSection = {
   ]
 }
 
+const simulatorsId: string = 'simulators'
+
+const SIMULATORS_IN_MENU: TableOfContentEntry = {
+  url: `#${simulatorsId}`,
+  label: 'Simulators',
+  isSecondary: true
+}
+
+const SIMULATORS: OverviewSection = {
+  id: 'simulators',
+  title: 'Simulate Quantum Hardware',
+  description: 'Qiskit provides a framework for understanding and mitigating noise in quantum circuits and systems. The experiments provided in Qiskit are grouped into the topics of characterization, verification and mitigation.',
+  link: {
+    label: 'See docs',
+    url: '/'
+  },
+  image: '/images/overview/simulators/laptop.png'
+}
+
+const hardwareId: string = 'hardware'
+
+const HARDWARE_IN_MENU: TableOfContentEntry = {
+  url: `#${hardwareId}`,
+  label: 'Hardware',
+  isSecondary: true
+}
+
+const HARDWARE: OverviewSection = {
+  id: 'hardware',
+  title: 'Run Circuits on Real Quantum Systems',
+  description: 'Circuits are the foundational roots for our software stack. Qiskit provides a set of tools for composing quantum programs at the level of circuits and pulses, optimizing them for the constraints of a particular physical quantum processor, and managing the batched execution of experiments on remote-access backends. Qiskit is modularly constructed, simplifying the addition of extensions for circuit optimizations and backends.',
+  link: {
+    label: 'See docs',
+    url: '/'
+  },
+  image: '/images/overview/hardware/quantum-computer.png'
+}
+
+const TABLE_OF_CONTENTS: TableOfContentEntry[] = [
+  {
+    url: `#${researchAppId}`,
+    label: 'Write quantum code'
+  },
+  RESEARCH_APPS_IN_MENU,
+  ALGORITHMS_COLLECTION_IN_MENU,
+  EXPERIMENTALIST_TOOLBOX_IN_MENU,
+  CIRCUITS_IN_MENU,
+  {
+    url: `#${simulatorsId}`,
+    label: 'Run Quantum Code'
+  },
+  SIMULATORS_IN_MENU,
+  HARDWARE_IN_MENU
+]
+
+const CONTENT_SECTIONS: OverviewSection[] = [
+  RESEARCH_APPS,
+  ALGORITHMS_COLLECTION,
+  EXPERIMENTALIST_TOOLBOX,
+  CIRCUITS,
+  SIMULATORS,
+  HARDWARE
+]
+
 export {
   TableOfContentEntry,
   OverviewSection,
   OverviewSubSection,
-  RESEARCH_APPS_IN_MENU,
-  RESEARCH_APPS,
-  ALGORITHMS_COLLECTION_IN_MENU,
-  ALGORITHMS_COLLECTION,
-  EXPERIMENTALIST_TOOLBOX_IN_MENU,
-  EXPERIMENTALIST_TOOLBOX,
-  CIRCUITS_IN_MENU,
-  CIRCUITS
+  TABLE_OF_CONTENTS,
+  CONTENT_SECTIONS
 }

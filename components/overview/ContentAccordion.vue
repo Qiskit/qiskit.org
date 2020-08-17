@@ -14,14 +14,10 @@
         </template>
         <template slot="content">
           <AccordionLayout
-            v-if="typeof tab.content === 'object'"
             :image="tab.content.image"
             :description="tab.content.description"
             :cta="tab.content.cta"
           />
-          <p v-else>
-            {{ tab.content }}
-          </p>
         </template>
       </cv-accordion-item>
     </div>
@@ -35,7 +31,7 @@ import AccordionLayout, { AccordionLayoutProps } from '~/components/overview/Acc
 
 type ContentAccordionTab = {
   title: string,
-  content: string | AccordionLayoutProps
+  content: AccordionLayoutProps
 }
 
 export { ContentAccordionTab }
