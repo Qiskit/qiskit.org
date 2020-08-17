@@ -42,8 +42,8 @@ export default class extends Vue {
     }
   }
 
-  actionChange (ev: { changedIndex: number }) : void {
-    this.expandedItem = ev.changedIndex
+  actionChange ({ changedIndex }: { changedIndex: number }) : void {
+    this.expandedItem = changedIndex
   }
 }
 </script>

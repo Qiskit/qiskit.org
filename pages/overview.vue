@@ -44,6 +44,8 @@ import ContentSection from '~/components/overview/ContentSection.vue'
 import ContentAccordion from '~/components/overview/ContentAccordion.vue'
 import AppCta from '~/components/ui/AppCta.vue'
 import {
+  TableOfContentEntry,
+  OverviewSection,
   RESEARCH_APPS_IN_MENU,
   RESEARCH_APPS,
   ALGORITHMS_COLLECTION_IN_MENU,
@@ -73,7 +75,7 @@ import {
 export default class extends QiskitPage {
   routeName = 'overview'
 
-  tocEntries = [
+  tocEntries: Array<TableOfContentEntry> = [
     {
       url: '#applications',
       label: 'Write quantum code'
@@ -98,7 +100,7 @@ export default class extends QiskitPage {
     }
   ]
 
-  contentSections = [
+  contentSections: Array<OverviewSection> = [
     RESEARCH_APPS,
     ALGORITHMS_COLLECTION,
     EXPERIMENTALIST_TOOLBOX,
