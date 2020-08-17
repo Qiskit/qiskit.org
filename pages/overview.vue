@@ -1,10 +1,7 @@
 <template>
   <div class="overview-page">
     <ThePageHeader>
-      The most
-      <RelevantWord>
-        feature rich
-      </RelevantWord><br>
+      The most <RelevantWord>feature&nbsp;rich</RelevantWord><br>
       quantum computing SDK
     </ThePageHeader>
     <section id="contentContainer" class="overview-page__content-container">
@@ -128,6 +125,7 @@ export default class extends QiskitPage {
   &__content-section {
     width: 100%;
     margin-bottom: $layout-07 / 2;
+    overflow: hidden;
 
     &__image {
       height: 30.5rem;

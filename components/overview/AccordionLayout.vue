@@ -52,9 +52,9 @@ export default class extends Vue implements AccordionLayoutProps {
 
   &__image {
     align-self: center;
-    max-height: 17.5rem;
-    max-width: 26rem;
-    padding-right: $spacing-06;
+    height: auto;
+    width: 100%;
+    max-width: 18rem;
     margin-bottom: $spacing-05;
   }
 
