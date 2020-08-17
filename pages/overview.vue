@@ -24,7 +24,10 @@
           :description="section.description"
           :link="section.link"
         >
-          <ContentAccordion v-if="section.subSections" :tabs="section.subSections" />
+          <ContentAccordion
+            v-if="section.subSections"
+            :tabs="asTabs(section.subSections)"
+          />
           <img v-else :src="section.image">
         </ContentSection>
       </div>
@@ -41,11 +44,12 @@ import RelevantWord from '~/components/ui/RelevantWord.vue'
 import TheTableOfContents from '~/components/overview/TheTableOfContents.vue'
 import TheQuickStart from '~/components/landing/TheQuickStart/index.vue'
 import ContentSection from '~/components/overview/ContentSection.vue'
-import ContentAccordion from '~/components/overview/ContentAccordion.vue'
+import ContentAccordion, { ContentAccordionTab } from '~/components/overview/ContentAccordion.vue'
 import AppCta from '~/components/ui/AppCta.vue'
 import {
   TableOfContentEntry,
   OverviewSection,
+  OverviewSubSection,
   RESEARCH_APPS_IN_MENU,
   RESEARCH_APPS,
   ALGORITHMS_COLLECTION_IN_MENU,
@@ -126,6 +130,10 @@ export default class extends QiskitPage {
       image: '/images/qiskit-logo.png'
     }
   ]
+
+  asTabs (subsections: Array<OverviewSubSection>): Array<ContentAccordionTab> {
+    return subsections.map(subsection => subsection as ContentAccordionTab)
+  }
 }
 </script>
 
