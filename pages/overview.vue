@@ -24,7 +24,7 @@
           :description="section.description"
           :link="section.link"
         >
-          <ContentAccordion v-if="section.subSections" :elements="section.subSections" />
+          <ContentAccordion v-if="section.subSections" :tabs="section.subSections" />
           <img v-else :src="section.image">
         </ContentSection>
       </div>
