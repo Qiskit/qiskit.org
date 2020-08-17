@@ -1,10 +1,7 @@
 <template>
   <div class="overview-page">
     <ThePageHeader>
-      The most
-      <RelevantWord>
-        feature rich
-      </RelevantWord><br>
+      The most <RelevantWord>feature&nbsp;rich</RelevantWord><br>
       quantum computing SDK
     </ThePageHeader>
     <section id="contentContainer" class="overview-page__content-container">
@@ -28,7 +25,11 @@
             v-if="section.subSections"
             :tabs="asTabs(section.subSections)"
           />
-          <img v-else :src="section.image">
+          <img
+            v-else
+            class="overview-page__content-section__image"
+            :src="section.image"
+          >
         </ContentSection>
       </div>
     </section>
@@ -47,17 +48,9 @@ import ContentSection from '~/components/overview/ContentSection.vue'
 import ContentAccordion, { ContentAccordionTab } from '~/components/overview/ContentAccordion.vue'
 import AppCta from '~/components/ui/AppCta.vue'
 import {
-  TableOfContentEntry,
-  OverviewSection,
-  OverviewSubSection,
-  RESEARCH_APPS_IN_MENU,
-  RESEARCH_APPS,
-  ALGORITHMS_COLLECTION_IN_MENU,
-  ALGORITHMS_COLLECTION,
-  EXPERIMENTALIST_TOOLBOX_IN_MENU,
-  EXPERIMENTALIST_TOOLBOX,
-  CIRCUITS_IN_MENU,
-  CIRCUITS
+  TABLE_OF_CONTENTS,
+  CONTENT_SECTIONS,
+  OverviewSubSection
 } from '~/constants/overviewContent'
 
 @Component({
@@ -79,57 +72,8 @@ import {
 export default class extends QiskitPage {
   routeName = 'overview'
 
-  tocEntries: Array<TableOfContentEntry> = [
-    {
-      url: '#applications',
-      label: 'Write quantum code'
-    },
-    RESEARCH_APPS_IN_MENU,
-    ALGORITHMS_COLLECTION_IN_MENU,
-    EXPERIMENTALIST_TOOLBOX_IN_MENU,
-    CIRCUITS_IN_MENU,
-    {
-      url: '#simulators',
-      label: 'Run Quantum Code'
-    },
-    {
-      url: '#simulators',
-      label: 'Simulators',
-      isSecondary: true
-    },
-    {
-      url: '#hardware',
-      label: 'Hardware',
-      isSecondary: true
-    }
-  ]
-
-  contentSections: Array<OverviewSection> = [
-    RESEARCH_APPS,
-    ALGORITHMS_COLLECTION,
-    EXPERIMENTALIST_TOOLBOX,
-    CIRCUITS,
-    {
-      id: 'simulators',
-      title: 'Simulate Quantum Hardware',
-      description: 'Qiskit provides a framework for understanding and mitigating noise in quantum circuits and systems. The experiments provided in Qiskit are grouped into the topics of characterization, verification and mitigation.',
-      link: {
-        label: 'See docs',
-        url: '/'
-      },
-      image: '/images/qiskit-logo.png'
-    },
-    {
-      id: 'hardware',
-      title: 'Run Circuits on Real Quantum Systems',
-      description: 'Circuits are the foundational roots for our software stack. Qiskit provides a set of tools for composing quantum programs at the level of circuits and pulses, optimizing them for the constraints of a particular physical quantum processor, and managing the batched execution of experiments on remote-access backends. Qiskit is modularly constructed, simplifying the addition of extensions for circuit optimizations and backends.',
-      link: {
-        label: 'See docs',
-        url: '/'
-      },
-      image: '/images/qiskit-logo.png'
-    }
-  ]
+  tocEntries = TABLE_OF_CONTENTS
+  contentSections = CONTENT_SECTIONS
 
   asTabs (subsections: Array<OverviewSubSection>): Array<ContentAccordionTab> {
     return subsections.map(subsection => subsection as ContentAccordionTab)
@@ -181,6 +125,11 @@ export default class extends QiskitPage {
   &__content-section {
     width: 100%;
     margin-bottom: $layout-07 / 2;
+    overflow: hidden;
+
+    &__image {
+      height: 30.5rem;
+    }
   }
 }
 </style>
