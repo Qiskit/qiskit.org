@@ -124,7 +124,7 @@ export default class extends Vue {
 
   segmentLabel = 'Qiskit Install'
 
-  codeToInstallStableOnLinux = 'pip install -U pip\npip install qiskit'
+  codeToInstallStableOnLinux = 'pip install -U pip && pip install qiskit'
   codeToInstallStableOnMac = 'pip install qiskit'
   codeToInstallStableOnWindows = 'pip install qiskit'
 
