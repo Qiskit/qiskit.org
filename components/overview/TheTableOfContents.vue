@@ -3,8 +3,8 @@
     <AppLink
       v-for="element in elements"
       :key="element.label"
-      class="the-table-of-contents__element"
-      :class="{ 'the-table-of-contents__element_secondary': element.isSecondary }"
+      class="the-table-of-contents__entry"
+      :class="{ 'the-table-of-contents__entry_second-level': element.isSecondary }"
       :url="element.url"
     >
       {{ element.label }}
@@ -32,7 +32,7 @@ export default class extends Vue {
   display: flex;
   flex-direction: column;
 
-  &__element {
+  &__entry {
     @include type-style('body-long-01');
     color: $cool-gray-80;
     text-decoration: none;
@@ -46,7 +46,7 @@ export default class extends Vue {
       text-decoration: underline;
     }
 
-    &_secondary {
+    &_second-level {
       &::before {
         content: "-";
         color: $purple-70;
