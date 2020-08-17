@@ -13,7 +13,12 @@
           {{ tab.title }}
         </template>
         <template slot="content">
-          <AccordionLayout v-if="tab.content.image" v-bind="tab.content" />
+          <AccordionLayout
+            v-if="typeof tab.content === 'object'"
+            :image="tab.content.image"
+            :description="tab.content.description"
+            :cta="tab.content.cta"
+          />
           <p v-else>
             {{ tab.content }}
           </p>
@@ -26,15 +31,11 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-import AccordionLayout from '~/components/overview/AccordionLayout.vue'
+import AccordionLayout, { AccordionLayoutProps } from '~/components/overview/AccordionLayout.vue'
 
 type ContentAccordionTab = {
   title: string,
-  content: string | {
-    image: string,
-    description: string,
-    cta: object
-  }
+  content: string | AccordionLayoutProps
 }
 
 export { ContentAccordionTab }
