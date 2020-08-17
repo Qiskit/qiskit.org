@@ -1,10 +1,10 @@
 <template>
-  <nav class="table-of-contents">
+  <nav class="the-table-of-contents">
     <AppLink
       v-for="element in elements"
       :key="element.label"
-      class="table-of-contents__element"
-      :class="{ 'table-of-contents__element_secondary': element.isSecondary }"
+      class="the-table-of-contents__element"
+      :class="{ 'the-table-of-contents__element_secondary': element.isSecondary }"
       :url="element.url"
     >
       {{ element.label }}
@@ -28,7 +28,7 @@ export default class extends Vue {
 <style lang="scss" scoped>
 @import '~carbon-components/scss/globals/scss/typography';
 
-.table-of-contents {
+.the-table-of-contents {
   display: flex;
   flex-direction: column;
 
