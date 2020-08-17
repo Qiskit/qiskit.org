@@ -1,13 +1,13 @@
 <template>
   <nav class="the-table-of-contents">
     <AppLink
-      v-for="element in elements"
-      :key="element.label"
+      v-for="entry in entries"
+      :key="entry.label"
       class="the-table-of-contents__entry"
-      :class="{ 'the-table-of-contents__entry_second-level': element.isSecondary }"
-      :url="element.url"
+      :class="{ 'the-table-of-contents__entry_second-level': entry.isSecondary }"
+      :url="entry.url"
     >
-      {{ element.label }}
+      {{ entry.label }}
     </AppLink>
   </nav>
 </template>
@@ -21,7 +21,7 @@ import AppLink from '~/components/ui/AppLink.vue'
   components: { AppLink }
 })
 export default class extends Vue {
-  @Prop(Array) elements
+  @Prop(Array) entries
 }
 </script>
 
