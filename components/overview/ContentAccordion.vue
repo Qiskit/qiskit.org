@@ -28,11 +28,22 @@ import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 import AccordionLayout from '~/components/overview/AccordionLayout.vue'
 
+type ContentAccordionTab = {
+  title: string,
+  content: string | {
+    image: string,
+    description: string,
+    cta: object
+  }
+}
+
+export { ContentAccordionTab }
+
 @Component({
   components: { AccordionLayout }
 })
 export default class extends Vue {
-  @Prop(Array) tabs
+  @Prop(Array) tabs!: Array<ContentAccordionTab>
 
   expandedItem: number = 0
 
