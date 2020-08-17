@@ -125,6 +125,7 @@ export default class extends QiskitPage {
   &__content-section {
     width: 100%;
     margin-bottom: $layout-07 / 2;
+    overflow: hidden;
 
     &__image {
       height: 30.5rem;
