@@ -9,7 +9,7 @@
     </ThePageHeader>
     <section id="contentContainer" class="overview-page__content-container">
       <div class="overview-page__main-nav-options">
-        <TheTableOfContents :elements="tableOfContentsElements" />
+        <TheTableOfContents :entries="tocEntries" />
         <AppCta class="overview-page__get-started" url="#quick-start">
           Get Started
         </AppCta>
@@ -73,7 +73,7 @@ import {
 export default class extends QiskitPage {
   routeName = 'overview'
 
-  tableOfContentsElements = [
+  tocEntries = [
     {
       url: '#applications',
       label: 'Write quantum code'
