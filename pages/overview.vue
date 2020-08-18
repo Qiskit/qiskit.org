@@ -4,8 +4,15 @@
       The most <RelevantWord>feature&nbsp;rich</RelevantWord><br>
       quantum computing SDK
     </ThePageHeader>
-    <section id="contentContainer" class="overview-page__content-container">
-      <div class="overview-page__main-nav-options">
+    <section
+      id="contentContainer"
+      class="
+        copy__util
+        copy__util_vertical-spacer
+        overview-page__content-container
+      "
+    >
+      <div class="overview-page__table-of-contents">
         <TheTableOfContents :entries="tocEntries" />
         <AppCta class="overview-page__get-started" url="#quick-start">
           Get Started
@@ -27,7 +34,7 @@
           />
           <img
             v-else
-            class="overview-page__content-section__image"
+            class="overview-page__content-section-image"
             :src="section.image"
           >
         </ContentSection>
@@ -99,11 +106,14 @@ export default class extends QiskitPage {
     }
   }
 
-  &__main-nav-options {
-    width: 20%;
-    padding-right: $spacing-07;
+  &__table-of-contents {
     position: sticky;
     top: $layout-02;
+    flex: 0 0 (3 * $column-size-large);
+
+    @include mq($from: medium, $until: large) {
+      flex: 0 0 (2 * $column-size-medium);
+    }
 
     @include mq($until: medium) {
       display: none;
@@ -115,21 +125,16 @@ export default class extends QiskitPage {
   }
 
   &__list-of-contents {
-    width: 80%;
-
-    @include mq($until: medium) {
-      width: 100%;
-    }
+    flex: 1;
   }
 
   &__content-section {
-    width: 100%;
-    margin-bottom: $layout-07 / 2;
+    margin-bottom: $layout-05;
     overflow: hidden;
+  }
 
-    &__image {
-      height: 30.5rem;
-    }
+  &__content-section-image {
+    max-height: 30.5rem;
   }
 }
 </style>
