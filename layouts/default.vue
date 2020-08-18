@@ -8,7 +8,7 @@
       <TheMenu @changeVisibility="isMenuShown = $event === 'shown'" />
     </header>
     <nuxt />
-    <PageFooter class="default-layout__footer" />
+    <ThePageFooter class="default-layout__footer" />
   </div>
 </template>
 
@@ -17,13 +17,13 @@ import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 import TheMenu from '~/components/layouts/TheMenu/index.vue'
 import TheBlackLivesMatterBanner from '~/components/layouts/banners/TheBlackLivesMatterBanner.vue'
-import PageFooter from '~/components/layouts/PageFooter/index.vue'
+import ThePageFooter from '~/components/layouts/ThePageFooter/index.vue'
 
 @Component({
   components: {
     TheMenu,
     TheBlackLivesMatterBanner,
-    PageFooter
+    ThePageFooter
   }
 })
 export default class extends Vue {
