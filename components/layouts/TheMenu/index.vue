@@ -9,18 +9,10 @@
           "
           v-bind="homeLink"
         >
-          <img
-            v-if="isActiveHome(homeLink)"
+          <AppLogo
             class="menu__logo"
-            src="/images/qiskit-new-logo-purple.svg"
-            alt="Qiskit logo"
-          >
-          <img
-            v-else
-            class="menu__logo"
-            src="/images/qiskit-new-logo.svg"
-            alt="Qiskit logo"
-          >
+            :class="{ 'menu__logo_active': isActiveHome(homeLink) }"
+          />
         </AppLink>
         <label
           class="
@@ -52,18 +44,10 @@
           "
           v-bind="homeLink"
         >
-          <img
-            v-if="isActiveHome(homeLink)"
+          <AppLogo
             class="menu__logo"
-            src="/images/qiskit-new-logo-purple.svg"
-            alt="Qiskit logo"
-          >
-          <img
-            v-else
-            class="menu__logo"
-            src="/images/qiskit-new-logo.svg"
-            alt="Qiskit logo"
-          >
+            :class="{ 'menu__logo_active': isActiveHome(homeLink) }"
+          />
         </AppLink>
         <AppLink
           v-for="link in mainLevelLinks"
@@ -98,11 +82,12 @@
 <script lang="ts">
 import { Watch, Component, Mixins } from 'vue-property-decorator'
 import MobileMenu from '~/components/layouts/TheMenu/MobileMenu.vue'
+import AppLogo from '~/components/ui/AppLogo.vue'
 import AppLink from '~/components/ui/AppLink.vue'
 import MenuMixin from '~/mixins/menu'
 
 @Component({
-  components: { MobileMenu, AppLink }
+  components: { MobileMenu, AppLink, AppLogo }
 })
 export default class extends Mixins(MenuMixin) {
   isMobileMenuVisible: boolean = false
@@ -193,6 +178,11 @@ export default class extends Mixins(MenuMixin) {
   &__logo {
     height: 1.5rem;
     width: auto;
+    color: $cool-gray-60;
+
+    &_active {
+      color: $purple-70;
+    }
   }
 
   &__link {
