@@ -77,23 +77,20 @@ export default class extends Vue {
     padding-bottom: $spacing-07 + 2.5rem; // make room for the "cookies preferences" button
   }
 
-  .the-page-footer__primary-container,
-  .the-page-footer__secondary-container {
+  &__primary-container {
     @include contained();
     display: flex;
     justify-content: space-between;
-  }
 
-  &__primary-container {
     @include mq($until: medium) {
-      flex-direction: column;
+      display: block;
     }
   }
 
   &__logo {
-    color: $cool-gray-60;
     height: 32px;
-    width: 112px;
+    flex: 0 0 112px;
+    color: $cool-gray-60;
     margin-right: $layout-06;
 
     @include mq($from: medium, $until: large) {
@@ -101,6 +98,8 @@ export default class extends Vue {
     }
 
     @include mq($until: medium) {
+      height: auto;
+      width: 96px;
       margin-bottom: $spacing-07;
     }
   }
@@ -119,6 +118,12 @@ export default class extends Vue {
   &__secondary-link {
     @include type-style('caption-01');
     color: $cool-gray-60;
+  }
+
+  &__secondary-container {
+    @include contained();
+    display: flex;
+    justify-content: space-between;
   }
 
   &__secondary-links {
