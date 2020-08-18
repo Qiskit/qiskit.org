@@ -39,16 +39,17 @@ export default class extends Vue {
   display: flex;
 
   @include mq($until: large) {
-    flex-direction: column;
+    display: block;
   }
 
   &__overview {
-    width: 45%;
+    flex: 0 0 (4.5 * $column-size-large);
     padding-right: $spacing-07;
     margin-bottom: $layout-03;
 
     @include mq($until: large) {
-      width: 100%;
+      padding-right: 0;
+      display: block;
     }
   }
 
@@ -64,12 +65,8 @@ export default class extends Vue {
   }
 
   &__detail {
-    width: 55%;
+    flex: 1;
     background-color: $cool-gray-10;
-
-    @include mq($until: large) {
-      width: 100%;
-    }
   }
 }
 </style>
