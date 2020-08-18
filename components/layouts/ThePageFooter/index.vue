@@ -1,13 +1,9 @@
 <template>
-  <footer>
-    <section class="main-footer-container">
-      <div class="main-footer">
-        <img
-          class="main-footer__logo"
-          src="/images/qiskit-new-logo.svg"
-          alt="Qiskit logo"
-        >
-        <div class="main-footer__sections">
+  <footer class="the-page-footer">
+    <section class="the-page-footer__primary">
+      <div class="the-page-footer__primary-container">
+        <AppLogo class="the-page-footer__logo" />
+        <div class="the-page-footer__primary-sections">
           <FooterSection
             v-for="sectionElements in footerElements"
             :key="sectionElements.title"
@@ -17,16 +13,16 @@
         </div>
       </div>
     </section>
-    <section class="secondary-footer-container">
-      <div class="secondary-footer">
-        <div class="secondary-footer__copyright">
+    <section class="the-page-footer__secondary">
+      <div class="the-page-footer__secondary-container">
+        <div class="the-page-footer__copyright">
           ©Qiskit | All Rights Reserved
         </div>
-        <div class="secondary-footer__links">
+        <div class="the-page-footer__secondary-links">
           <AppLink
             v-for="link in secondaryFooterLinks"
             :key="link.label"
-            class="secondary-footer__link"
+            class="the-page-footer__secondary-link"
             v-bind="link"
           >
             {{ link.label }}
@@ -42,6 +38,7 @@ import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 import FooterSection from './FooterSection.vue'
 import AppLink from '~/components/ui/AppLink.vue'
+import AppLogo from '~/components/ui/AppLogo.vue'
 
 import {
   FOOTER_ELEMENTS,
@@ -52,7 +49,8 @@ import {
 @Component({
   components: {
     FooterSection,
-    AppLink
+    AppLink,
+    AppLogo
   }
 })
 export default class extends Vue {
@@ -65,32 +63,34 @@ export default class extends Vue {
 <style lang="scss" scoped>
 @import '~carbon-components/scss/globals/scss/typography';
 
-.main-footer-container {
-  background-color: $cool-gray-10;
-  padding: $spacing-07 0;
-}
+.the-page-footer {
 
-.secondary-footer-container {
-  background-color: $white;
-  padding-bottom: $spacing-08;
-  padding: $spacing-07 0;
-  padding-bottom: $spacing-07 + 2.5rem; // make room for the "cookies preferences" button
-}
+  .the-page-footer__primary {
+    background-color: $cool-gray-10;
+    padding: $spacing-07 0;
+  }
 
-.main-footer, .secondary-footer {
-  @include contained();
-  display: flex;
-  justify-content: space-between;
-}
+  .the-page-footer__secondary {
+    background-color: $white;
+    padding-bottom: $spacing-08;
+    padding: $spacing-07 0;
+    padding-bottom: $spacing-07 + 2.5rem; // make room for the "cookies preferences" button
+  }
 
-.main-footer {
-  @include mq($until: medium) {
-    flex-direction: column;
+  &__primary-container {
+    @include contained();
+    display: flex;
+    justify-content: space-between;
+
+    @include mq($until: medium) {
+      display: block;
+    }
   }
 
   &__logo {
     height: 32px;
-    width: 112px;
+    flex: 0 0 112px;
+    color: $cool-gray-60;
     margin-right: $layout-06;
 
     @include mq($from: medium, $until: large) {
@@ -98,11 +98,13 @@ export default class extends Vue {
     }
 
     @include mq($until: medium) {
+      height: auto;
+      width: 96px;
       margin-bottom: $spacing-07;
     }
   }
 
-  &__sections {
+  &__primary-sections {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     row-gap: $spacing-07;
@@ -111,15 +113,20 @@ export default class extends Vue {
       grid-template-columns: repeat(3, 1fr);
     }
   }
-}
 
-.secondary-footer {
-  &__copyright, &__link {
+  &__copyright,
+  &__secondary-link {
     @include type-style('caption-01');
     color: $cool-gray-60;
   }
 
-  &__links {
+  &__secondary-container {
+    @include contained();
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__secondary-links {
     display: flex;
     justify-content: space-between;
 
@@ -128,7 +135,7 @@ export default class extends Vue {
     }
   }
 
-  &__link {
+  &__secondary-link {
     margin-left: $spacing-07;
     text-decoration: none;
 
