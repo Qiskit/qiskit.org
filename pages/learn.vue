@@ -2,16 +2,14 @@
   <div class="learn-page">
     <TheLearnHeader />
     <TheLearningResourceList
-      :items="filteredLearningResources"
+      :top-filters="learnLevelOptions"
+      :active-top-filter="learnLevel"
 
-      :tab-filters="learnLevelOptions"
-      :active-tab-filter="learnLevel"
+      :aside-filters="timeScaleOptions"
+      :active-aside-filter="timeScale"
 
-      :radio-filters="timeScaleOptions"
-      :active-radio-filter="timeScale"
-
-      @tab-selected="setLearnLevel"
-      @radio-selected="setTimeScale"
+      @top-filter-changed="setLearnLevel"
+      @aside-filter-changed="setTimeScale"
     >
       <TheCarefulExplanationForBeginners
         v-if="isShowingOneMinuteFor(learnLevels.beginner) && !isShowingEverything"
@@ -46,14 +44,13 @@ import TheLearningResourceList from '~/components/learn/TheLearningResourceList.
 import LearningResourceCard from '~/components/learn/LearningResourceCard.vue'
 import TheCarefulExplanationForBeginners from '~/components/learn/TheCarefulExplanationForBeginners.vue'
 import TheCarefulExplanationForExperts from '~/components/learn/TheCarefulExplanationForExperts.vue'
-import AppLink from '~/components/ui/AppLink.vue'
 import {
   TimeScale,
+  LearnLevel,
   LEARN_LEVELS,
   TIME_SCALES,
   LEARN_LEVEL_OPTIONS,
   TIME_SCALE_OPTIONS,
-  LearnLevel
 } from '~/store/modules/learning-resources.ts'
 
 @Component({
@@ -62,8 +59,7 @@ import {
     TheLearningResourceList,
     LearningResourceCard,
     TheCarefulExplanationForExperts,
-    TheCarefulExplanationForBeginners,
-    AppLink
+    TheCarefulExplanationForBeginners
   },
 
   head () {
@@ -114,18 +110,10 @@ export default class extends QiskitPage {
   }
 
   setTimeScale (scale: TimeScale): void {
-    const { timeScale: currentScale } = this as any
-    if (currentScale === scale) {
-      return
-    }
     this._updateQueryParameter('timeScale', scale)
   }
 
   setLearnLevel (level: LearnLevel) {
-    const { learnLevel: currentLevel } = this as any
-    if (currentLevel === level) {
-      return
-    }
     this._updateQueryParameter('learnLevel', level)
   }
 

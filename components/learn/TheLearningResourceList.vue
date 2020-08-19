@@ -6,9 +6,9 @@
       </h2>
       <p
         class="
-              copy__paragraph
-              copy__paragraph_importance_outstanding
-            "
+          copy__paragraph
+          copy__paragraph_importance_outstanding
+        "
       >
         The below are designed and created by the Qiskit team. However, we
         recommend a familiarity with <AppLink class="copy__link" url="https://www.khanacademy.org/math/linear-algebra">
@@ -23,13 +23,13 @@
           class="the-learning-resources-list__filter-level"
           aria-label="navigation tab label"
           no-default-to-first
-          @tab-selected="selectTab"
+          @tab-selected="selectTopFilter"
         >
           <cv-tab
-            v-for="filter in tabFilters"
+            v-for="filter in topFilters"
             :key="filter"
             :label="filter"
-            :selected="filter === activeTabFilter"
+            :selected="filter === activeTopFilter"
           />
         </cv-tabs>
       </client-only>
@@ -46,11 +46,11 @@
           <client-only>
             <cv-dropdown
               class="the-learning-resources-list__small-only"
-              :value="activeRadioFilter"
-              @change="selectRadio($event)"
+              :value="activeAsideFilter"
+              @change="selectAsideFilter($event)"
             >
               <cv-dropdown-item
-                v-for="filter in radioFilters"
+                v-for="filter in asideFilters"
                 :key="filter"
                 :value="filter"
               >
@@ -62,14 +62,14 @@
               vertical
             >
               <cv-radio-button
-                v-for="filter in radioFilters"
+                v-for="filter in asideFilters"
                 :key="filter"
-                name="radio-filter"
+                name="aside-filter"
                 :value="filter"
                 :label="filter"
-                :checked="filter === activeRadioFilter"
-                :aria-checked="filter === activeRadioFilter"
-                @change="selectRadio(filter)"
+                :checked="filter === activeAsideFilter"
+                :aria-checked="filter === activeAsideFilter"
+                @change="selectAsideFilter(filter)"
               />
             </cv-radio-group>
           </client-only>
@@ -89,25 +89,25 @@ import AppLink from '~/components/ui/AppLink.vue'
 
 @Component({ components: { AppLink } })
 export default class extends Vue {
-  @Prop({ type: Array, default: [] }) tabFilters!: Array<string>
-  @Prop(String) activeTabFilter!: string
+  @Prop({ type: Array, default: [] }) topFilters!: Array<string>
+  @Prop(String) activeTopFilter!: string
 
-  @Prop({ type: Array, default: [] }) radioFilters!: Array<string>
-  @Prop(String) activeRadioFilter!: string
+  @Prop({ type: Array, default: [] }) asideFilters!: Array<string>
+  @Prop(String) activeAsideFilter!: string
 
-  selectTab (tabIndex: number) {
-    const tabValue = this.tabFilters[tabIndex]
-    if (this.activeTabFilter === tabValue) {
+  selectTopFilter (tabIndex: number) {
+    const topFilterValue = this.topFilters[tabIndex]
+    if (this.activeTopFilter === topFilterValue) {
       return
     }
-    this.$emit('tab-selected', tabValue)
+    this.$emit('top-filter-changed', topFilterValue)
   }
 
-  selectRadio (radioValue: string): void {
-    if (this.activeRadioFilter === radioValue) {
+  selectAsideFilter (asideFilterValue: string): void {
+    if (this.activeAsideFilter === asideFilterValue) {
       return
     }
-    this.$emit('radio-selected', radioValue)
+    this.$emit('aside-filter-changed', asideFilterValue)
   }
 }
 </script>
