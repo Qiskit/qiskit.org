@@ -50,7 +50,7 @@ import {
   LEARN_LEVELS,
   TIME_SCALES,
   LEARN_LEVEL_OPTIONS,
-  TIME_SCALE_OPTIONS,
+  TIME_SCALE_OPTIONS
 } from '~/store/modules/learning-resources.ts'
 
 @Component({
