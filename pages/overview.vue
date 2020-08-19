@@ -13,7 +13,10 @@
       "
     >
       <div class="overview-page__table-of-contents">
-        <TheTableOfContents :entries="tocEntries" />
+        <TheTableOfContents
+          :entries="tocEntries"
+          :active-section="activeSection"
+        />
         <AppCta class="overview-page__get-started" url="#quick-start">
           Get Started
         </AppCta>
@@ -81,6 +84,21 @@ export default class extends QiskitPage {
 
   tocEntries = TABLE_OF_CONTENTS
   contentSections = CONTENT_SECTIONS
+
+  activeSection = ''
+
+  beforeRouteEnter (route, _, next) {
+    next(overviewPage => overviewPage._parseSectionFromUrl(route))
+  }
+
+  beforeRouteUpdate (route, _, next) {
+    this._parseSectionFromUrl(route)
+    next()
+  }
+
+  _parseSectionFromUrl (route) {
+    this.activeSection = route.hash.substr(1)
+  }
 
   asTabs (subsections: Array<OverviewSubSection>): Array<ContentAccordionTab> {
     return subsections.map(subsection => subsection as ContentAccordionTab)
