@@ -22,10 +22,12 @@ The Quantum Information Science Seminar is hosted on the [Qiskit Youtube channel
 
 ## Schedule
 
+<div align="left">
+
 |   Date   |       Speaker      | Topic | 
 |   ----   |       -------      | ----- |
 | 08/28/20 |   Serge Rosenblum    | [Reversing the Effects of Errors During Quantum Operations](https://youtu.be/Pidnhi_nOC4?list=PLOFEBzvs-Vvr0uEoGFo08n4-WrM_8fft2)|
-| 08/21/20 |   Sergey Bravyi    | [Progress in Realizing Novel Qubits with Josephson Field Effect Transistors](https://youtu.be/tKU-dla3jI0?list=PLOFEBzvs-Vvr0uEoGFo08n4-WrM_8fft2)|
+| 08/21/20 |   Javad Shabani    | [Progress in Realizing Novel Qubits with Josephson Field Effect Transistors](https://youtu.be/tKU-dla3jI0?list=PLOFEBzvs-Vvr0uEoGFo08n4-WrM_8fft2)|
 | 08/14/20 |   Alexandre Blais   | [A Quantum Metamaterial for Broadband Detection of Single Microwave Photons](https://youtu.be/1JT3ei4CXgM?list=PLOFEBzvs-Vvr0uEoGFo08n4-WrM_8fft2)|
 | 08/07/20 |   Andreas Wallraff    | [Executing Deep Optimization Algorithms on a Superconducting Quantum Processor](https://youtu.be/SDPwfg0MBqc?list=PLOFEBzvs-Vvr0uEoGFo08n4-WrM_8fft2)|
 | 07/31/20 |   Charlie Bennett    | [Information is Quantum](https://youtu.be/rslt-LwtDK4?list=PLOFEBzvs-Vvr0uEoGFo08n4-WrM_8fft2)|
@@ -39,7 +41,9 @@ The Quantum Information Science Seminar is hosted on the [Qiskit Youtube channel
 | 05/01/20 |  Ramis Movassagh   | [Hamiltonian Density of States](https://youtu.be/yAqb6AsELek?list=PLOFEBzvs-Vvr0uEoGFo08n4-WrM_8fft2&t=2)|
 | 04/24/20 |   Sergey Bravyi    | [Quantum Advantage with Shallow Circuits](https://youtu.be/uwZjUI5eKAk?list=PLOFEBzvs-Vvr0uEoGFo08n4-WrM_8fft2&t=24)|
 | 04/17/20 | Antti Vepsäläinen  | [Impact of Ionizing Radiation on Superconducting Qubit Coherence](https://www.youtube.com/watch?v=iKgysY097Ok&list=PLOFEBzvs-Vvr0uEoGFo08n4-WrM_8fft2&t=355s)|
-  
+
+</div>
+
 ## Nominate
 
 If you or someone you know might be interested in speaking in a future seminar, send us an email at hello@qiskit.org. Please include your name, topic and available dates. 
