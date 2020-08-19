@@ -3,8 +3,8 @@ import { NavLink } from '~/constants/menuLinks'
 type TableOfContentEntry = {
   /** The visible name of the link */
   label: string
-  /** Where we want to go */
-  url: string
+  /** Id of the section we want to jump to */
+  sectionId?: string
   /** Use when the link is on secondary level */
   isSecondary?: boolean
 }
@@ -39,7 +39,7 @@ interface OverviewSection {
 const researchAppId: string = 'applications'
 
 const RESEARCH_APPS_IN_MENU: TableOfContentEntry = {
-  url: `#${researchAppId}`,
+  sectionId: researchAppId,
   label: 'Applications',
   isSecondary: true
 }
@@ -103,7 +103,7 @@ const RESEARCH_APPS: OverviewSection = {
 const algorithmsCollectionId: string = 'algorithms'
 
 const ALGORITHMS_COLLECTION_IN_MENU: TableOfContentEntry = {
-  url: `#${algorithmsCollectionId}`,
+  sectionId: algorithmsCollectionId,
   label: 'Algorithms',
   isSecondary: true
 }
@@ -167,7 +167,7 @@ const ALGORITHMS_COLLECTION: OverviewSection = {
 const experimentalistToolboxId: string = 'characterization'
 
 const EXPERIMENTALIST_TOOLBOX_IN_MENU: TableOfContentEntry = {
-  url: `#${experimentalistToolboxId}`,
+  sectionId: experimentalistToolboxId,
   label: 'Characterization',
   isSecondary: true
 }
@@ -220,7 +220,7 @@ const EXPERIMENTALIST_TOOLBOX: OverviewSection = {
 const circuitsId: string = 'circuits'
 
 const CIRCUITS_IN_MENU: TableOfContentEntry = {
-  url: `#${circuitsId}`,
+  sectionId: circuitsId,
   label: 'Circuits',
   isSecondary: true
 }
@@ -273,7 +273,7 @@ const CIRCUITS: OverviewSection = {
 const simulatorsId: string = 'simulators'
 
 const SIMULATORS_IN_MENU: TableOfContentEntry = {
-  url: `#${simulatorsId}`,
+  sectionId: simulatorsId,
   label: 'Simulators',
   isSecondary: true
 }
@@ -292,7 +292,7 @@ const SIMULATORS: OverviewSection = {
 const hardwareId: string = 'hardware'
 
 const HARDWARE_IN_MENU: TableOfContentEntry = {
-  url: `#${hardwareId}`,
+  sectionId: hardwareId,
   label: 'Hardware',
   isSecondary: true
 }
@@ -310,7 +310,6 @@ const HARDWARE: OverviewSection = {
 
 const TABLE_OF_CONTENTS: TableOfContentEntry[] = [
   {
-    url: `#${researchAppId}`,
     label: 'Write quantum code'
   },
   RESEARCH_APPS_IN_MENU,
@@ -318,7 +317,6 @@ const TABLE_OF_CONTENTS: TableOfContentEntry[] = [
   EXPERIMENTALIST_TOOLBOX_IN_MENU,
   CIRCUITS_IN_MENU,
   {
-    url: `#${simulatorsId}`,
     label: 'Run Quantum Code'
   },
   SIMULATORS_IN_MENU,
