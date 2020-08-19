@@ -22,6 +22,7 @@ export default class extends Vue { }
 
 <style lang="scss" scoped>
 @import '~/assets/scss/blocks/copy.scss';
+@import '~carbon-components/scss/globals/scss/typography';
 
 .the-learn-header {
   @include responsive-grid-bg-strip('/images/grid/grid-hero-learn.svg', auto, 28rem);
