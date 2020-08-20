@@ -130,7 +130,6 @@ export default class extends QiskitPage {
       } = entry
       if (!rootBounds) { return }
       const targetTop = boundingClientRect.top
-      const triggerWindowTop = rootBounds.top
       const triggerWindowBottom = rootBounds.bottom
       const onTop = targetTop >= 0 && targetTop <= triggerWindowBottom
       if (onTop && targetTop < highestTopValue) {
