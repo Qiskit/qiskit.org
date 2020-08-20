@@ -90,7 +90,7 @@ export default class extends QiskitPage {
   _observer: IntersectionObserver | null = null
 
   mounted () {
-    const threshold = [...Array(25).keys()].map(x => 4*x/100)
+    const threshold = [...Array(25).keys()].map(x => 4 * x / 100)
     const windowTriggerMargins = '-16px 0px -66% 0px'
     this._observer = new IntersectionObserver(
       this._onSectionAppearing,
@@ -102,12 +102,12 @@ export default class extends QiskitPage {
     );
     (this.$el as HTMLElement)
       .querySelectorAll('.overview-page__content-section')
-      .forEach(section => {
+      .forEach((section) => {
         (this._observer as IntersectionObserver).observe(section)
       })
   }
 
-  beforeDestroy() {
+  beforeDestroy () {
     this._observer && this._observer.disconnect()
   }
 
@@ -122,7 +122,7 @@ export default class extends QiskitPage {
 
   _onSectionAppearing (entries: Array<IntersectionObserverEntry>) {
     let highestTopValue = Infinity
-    entries.forEach(entry => {
+    entries.forEach((entry) => {
       const {
         target,
         boundingClientRect,
