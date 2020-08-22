@@ -195,6 +195,8 @@ export default class extends QiskitPage {
   }
 
   &__content-section-image {
+    position: relative;
+    right: -20%;
     max-width: 100%;
     max-height: 30.5rem;
   }
