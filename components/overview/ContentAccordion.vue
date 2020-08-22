@@ -3,6 +3,7 @@
     <div
       v-for="(tab, index) in tabs"
       :key="tab.title"
+      class="content-accordion__item"
       @click.capture="preventFromClosing(index, $event)"
     >
       <cv-accordion-item
@@ -52,6 +53,11 @@ export default class extends Vue {
 
   actionChange ({ changedIndex }: { changedIndex: number }) : void {
     this.expandedItem = changedIndex
+    this.$nextTick(() => {
+      const openTab = (this.$el as HTMLElement)
+        .querySelector(`.content-accordion__item:nth-child(${changedIndex + 1})`)
+      openTab && openTab.scrollIntoView()
+    })
   }
 }
 </script>
