@@ -64,6 +64,7 @@ export default class extends Vue {
     @include type-style('body-long-01');
     border-bottom: none;
     border-top-color: $gray-20;
+    overflow-anchor: none;
   }
 
   & .bx--accordion__heading {
