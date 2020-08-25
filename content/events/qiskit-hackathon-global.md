@@ -19,7 +19,7 @@ routeName: events
 ---
 
 ## What is Qiskit Hackathon Global?
-Qiskit Hackathon Global is the first  real-time 24-hour hackathon experience hosted by IBM's Qiskit Community Team on August 6-8, 2020. This invitation-only hackathon brings together the quantum community for an immersive three days of training sessions, deep technical talks, and hacking alongside members of the Qiskit core development team.
+Qiskit Hackathon Global is the first  real-time 24-hour hackathon experience hosted by IBM's Qiskit Community Team on October 5-9, 2020. This invitation-only hackathon brings together the quantum community for an immersive three days of training sessions, deep technical talks, and hacking alongside members of the Qiskit core development team.
 Attendees will have a chance to learn about the latest updates to Qiskit, to meet the researchers and developers behind the product, and to create connections within the Qiskit community.
 More updates to come as this virtual experience approaches!
 
@@ -32,7 +32,7 @@ _* times subject to change_
 
 
 
-#### August 6
+#### October 7
 #### *Welcome! Presentations and Project Pitches*
 
 4:00 PM - 6:30 PM EDT
@@ -41,7 +41,7 @@ _more details coming soon!_
 
 
 
-#### August 7
+#### October 8
 #### *Team Formation & Hackathon*
 
 8:30 AM EDT Start Time
@@ -50,7 +50,7 @@ _more details coming soon!_
 
 
 
-#### August 8
+#### October 9
 #### *Hackathon, Awards, & Celebration*
 
 - 1:45 PM EDT Hackathon Ends
@@ -58,12 +58,6 @@ _more details coming soon!_
 - 3:30 PM EDT Celebration Begins!
 
 _more details coming soon!_
-
-## Learn about the Qiskit Global Summer School
-
-Learn more about the two-week summer school that leads up to Qiskit Hackathon Global - and find out how you could get involved!
-
-Go to the Qiskit Global Summer School's website [here](https://qiskit.org/events/summer-school/). 
 
 
 ## FAQ
@@ -83,7 +77,7 @@ You will want to make sure and have Qiskit downloaded and installed prior to the
 #### I wasn't invited to the hackathon - how can I get an invitation? 
 Qiskit Hackathon Global is a relatively small hackathons with limited space. We traditionally go through a nomination process via local universities for these hackatons, and we also take self-nominations into consideration. 
  
-If you would like to be considered for an invite, please have your professor or colleague submit a nomination to [hello@qiskit.camp](mailto:hello@qiskit.camp) and tell us about your work (especially any experience you already have with Qiskit and/or IBM Q Experience) - or submit an inquiry below!
+If you would like to be considered for an invite, please have your professor or colleague submit a nomination to [hello@qiskit.camp](mailto:qiskit.events@us.ibm.com) and tell us about your work (especially any experience you already have with Qiskit and/or IBM Q Experience) - or submit an inquiry below!
 
 
 #### I wasn't invited to the hackathon - but I want to get connected to the Qiskit Community! How can I do that? 
@@ -130,11 +124,11 @@ Harassment will not be tolerated in any form. Participants in the IBM Quantum Co
 
 #### Pre-Event Concerns
 
-If you are planning to attend an upcoming event and you have concerns regarding another individual who may be present, please contact [hello@qiskit.camp](mailto:hello@qiskit.camp). Action will be taken to ensure the safety of you and others at the event.
+If you are planning to attend an upcoming event and you have concerns regarding another individual who may be present, please contact [qiskit.events@us.ibm.com](mailto:qiskit.events@us.ibm.com). Action will be taken to ensure the safety of you and others at the event.
 
 #### Reporting an Incident
 
-Instances of abusive, harassing, or otherwise unacceptable behavior should be reported immediately by contacting [hello@qiskit.camp](mailto:hello@qiskit.camp) or by speaking directly with any IBM employee. IBM Quantum will review and investigate all complaints and will respond in a way that it deems appropriate to the circumstances. The organizers will maintain confidentiality with regard to the reporter of an incident.
+Instances of abusive, harassing, or otherwise unacceptable behavior should be reported immediately by contacting [qiskit.events@us.ibm.com](mailto:qiskit.events@us.ibm.com) or by speaking directly with any IBM employee. IBM Quantum will review and investigate all complaints and will respond in a way that it deems appropriate to the circumstances. The organizers will maintain confidentiality with regard to the reporter of an incident.
 
 #### Incident Response
 
