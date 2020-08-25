@@ -57,6 +57,7 @@ export default class extends Vue {
     color: $purple-70;
     background-color: $cool-gray-10;
     min-height: 3rem;
+    padding: $spacing-05 $spacing-07;
 
     &:hover {
       color: $cool-gray-10;
@@ -64,6 +65,7 @@ export default class extends Vue {
     }
 
     @include mq($until: medium) {
+      padding: $spacing-03 $spacing-05;
       min-height: 2rem;
     }
   }
