@@ -36,9 +36,7 @@
           <li>Provide at least 3 contributions to the Qiskit community and complete application by <strong>August 15, 2020</strong>.</li>
         </ol>
         <ul class="actions">
-          <AppCta url="https://airtable.com/shrm7eWJsKLf3WVrP">
-            Apply now
-          </AppCta>
+          Closed
         </ul>
       </PageSection>
       <MapSection
