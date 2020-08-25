@@ -13,7 +13,7 @@
       </AppCta>
     </div>
     <div
-      lazy-background="/images/landing-page/learn-image.png"
+      lazy-background="/images/landing-page/learn-image.jpg"
       class="learn-card__media"
     />
   </article>
