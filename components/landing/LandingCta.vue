@@ -28,8 +28,7 @@ export default class extends Vue {
 .landing-cta {
   @include type-style('body-short-01');
   text-decoration: none;
-  display: inline-flex;
-  flex-direction: row;
+  display: flex;
   align-items: center;
   padding: 0 $spacing-07;
 
