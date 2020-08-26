@@ -38,6 +38,7 @@ export default class extends Vue {
   }
 
   @include mq($until: large) {
+    justify-content: space-between;
     padding: $spacing-03 $spacing-05;
     width: 12rem;
   }
