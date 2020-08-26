@@ -18,6 +18,15 @@
         quantum systems and simulators.
       </p>
       <TheFeatureMosaic class="the-features__mosaic" />
+      <LandingCta
+        url="/overview"
+        kind="secondary"
+        @click="$trackClickEvent({
+          action: 'Overview'
+        })"
+      >
+        Full Overview
+      </LandingCta>
     </div>
   </article>
 </template>
@@ -27,9 +36,10 @@ import Vue from 'vue'
 
 import { Component } from 'vue-property-decorator'
 import TheFeatureMosaic from '~/components/landing/TheFeatures/TheFeatureMosaic.vue'
+import LandingCta from '~/components/landing/LandingCta.vue'
 
 @Component({
-  components: { TheFeatureMosaic }
+  components: { TheFeatureMosaic, LandingCta }
 })
 export default class extends Vue { }
 </script>
