@@ -13,7 +13,6 @@
         computers at the level of pulses, circuits and algorithms.
       </p>
       <LandingCta
-        class="the-hero-moment__cta"
         url="https://qiskit.org/documentation/install.html"
         @click="$trackClickEvent({
           action: 'Get Started'
@@ -140,10 +139,6 @@ export default class extends Vue {
       max-width: 3 * $column-size-small;
       margin-bottom: $layout-03;
     }
-  }
-
-  &__cta {
-    @include type-style('body-short-01');
   }
 }
 </style>
