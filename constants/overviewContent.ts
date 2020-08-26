@@ -123,7 +123,7 @@ const ALGORITHMS_COLLECTION: OverviewSection = {
         image: '/images/overview/algorithms/grover.png',
         description: 'Grover\'s algorithm is a well know quantum algorithm part of the amplitude amplifier category that provides quadratic speedup for searching through unstructured collections of records in search of particular targets.',
         cta: {
-          label: 'Try it out',
+          label: 'Try out Grover’s',
           url: 'https://qiskit.org/documentation/stubs/qiskit.aqua.algorithms.Grover.html#qiskit.aqua.algorithms.Grover'
         }
       }
@@ -134,7 +134,7 @@ const ALGORITHMS_COLLECTION: OverviewSection = {
         image: '/images/overview/algorithms/vqe.png',
         description: 'VQE (Variational Quantum Eigensolver) is another well known quantum algorithm part of the minimum eigensolvers category. This algorithm uses variational techniques and interleaves quantum and classical computations in order to find the minimum eigenvalue of the Hamiltonian of a given system.',
         cta: {
-          label: 'Try it out',
+          label: 'Try out VQE',
           url: 'https://qiskit.org/documentation/stubs/qiskit.aqua.algorithms.VQE.html#qiskit.aqua.algorithms.VQE'
         }
       }
@@ -145,7 +145,7 @@ const ALGORITHMS_COLLECTION: OverviewSection = {
         image: '/images/overview/algorithms/qaoa.png',
         description: 'QAOA is also part of the minimum eigensolvers category. This algorithm extends VQE and inherits VQE\'s general optimization structure but uses its own fine-tuned variational form.',
         cta: {
-          label: 'Try it out',
+          label: 'Try out QAOA',
           url: 'https://qiskit.org/documentation/stubs/qiskit.aqua.algorithms.QAOA.html#qiskit.aqua.algorithms.QAOA'
         }
       }
@@ -156,7 +156,7 @@ const ALGORITHMS_COLLECTION: OverviewSection = {
         image: '/images/overview/algorithms/qsvm.png',
         description: 'QSVM is  part of the classifiers category and applies to problems that require a feature map for which computing the collection of inner products is not efficient classically. ',
         cta: {
-          label: 'Try it out',
+          label: 'Try out QSVM',
           url: 'https://qiskit.org/documentation/apidoc/qiskit.aqua.algorithms.html#classifiers'
         }
       }
@@ -175,7 +175,7 @@ const EXPERIMENTALIST_TOOLBOX_IN_MENU: TableOfContentEntry = {
 const EXPERIMENTALIST_TOOLBOX: OverviewSection = {
   id: 'characterization',
   title: 'Experimentalist Toolbox',
-  description: 'Qiskit provides a framework for understanding and mitigating noise in quantum circuits and systems. The experiments provided in Qiskit are grouped into the topics of characterization, verification and mitigation.',
+  description: 'Qiskit\'s characterization framework offers circuits and analysis methods to understand and characterize the source of noice that impacts our devices. Such parameters include T1, T₂* , T2, Hamiltonian parameters such as the ZZ interaction rate and control errors in the gates.',
   link: {
     label: 'See docs',
     url: 'https://qiskit.org/documentation/apidoc/ignis.html'
@@ -185,7 +185,7 @@ const EXPERIMENTALIST_TOOLBOX: OverviewSection = {
       title: 'Characterization',
       content: {
         image: '/images/overview/characterization/characterization.png',
-        description: 'Qiskit\'s characterization framework offers circuits and analysis methods to understand and characterize the source of noice that impacts our devices. Such parameters include T1, T₂* ,T2 , Hamiltonian parameters such as the ZZ interaction rate and control errors in the gates.',
+        description: 'Qiskit\'s characterization framework brings the analysis parameters and circuits to users in order to understand and characterize the source of noice that impacts our devices. Such parameters include T1, T₂*, T2, Hamiltonian parameters such as the ZZ interaction rate and control errors in the gates.',
         cta: {
           label: 'See Characterization framework',
           url: 'https://qiskit.org/documentation/apidoc/characterization.html'
@@ -227,7 +227,7 @@ const CIRCUITS_IN_MENU: TableOfContentEntry = {
 
 const CIRCUITS: OverviewSection = {
   id: 'circuits',
-  title: 'Library of Circuits',
+  title: 'Circuits',
   description: 'Qiskit provides a set of tools for composing quantum programs at the level of circuits and pulses, optimizing them for the constraints of a particular physical quantum processor, and managing the batched execution of experiments on remote-access backends.',
   link: {
     label: 'See docs',
@@ -262,7 +262,7 @@ const CIRCUITS: OverviewSection = {
         image: '/images/overview/circuits/pulses.png',
         description: 'Pulse is a lower level quantum programming tool. This tool allows users more control over using quantum circuits when interacting with real quantum hardware.',
         cta: {
-          label: 'See Pulse',
+          label: 'See OpenPulse',
           url: 'https://qiskit.org/documentation/apidoc/pulse.html'
         }
       }
@@ -281,7 +281,7 @@ const SIMULATORS_IN_MENU: TableOfContentEntry = {
 const SIMULATORS: OverviewSection = {
   id: 'simulators',
   title: 'Simulate Quantum Hardware',
-  description: 'Qiskit provides a framework for understanding and mitigating noise in quantum circuits and systems. The experiments provided in Qiskit are grouped into the topics of characterization, verification and mitigation.',
+  description: 'Qiskit provides a high performance simulator framework for the Qiskit software stack. It contains optimized C++ simulator backends for executing compiled circuits, and tools for constructing highly configurable noise models for performing realistic noisy simulations of the errors that occur during execution on real devices.',
   link: {
     label: 'See docs',
     url: 'https://qiskit.org/documentation/apidoc/aer.html'
