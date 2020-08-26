@@ -1,7 +1,7 @@
 <template>
   <AppLink
     class="landing-cta"
-    :class="`landing-cta_kind_${kind}`"
+    :class="`landing-cta_${kind}`"
     v-bind="$attrs"
   >
     <slot />
@@ -28,43 +28,46 @@ export default class extends Vue {
 .landing-cta {
   @include type-style('body-short-01');
   text-decoration: none;
-  display: inline-flex;
-  flex-direction: row;
+  display: flex;
   align-items: center;
+  padding: 0 $spacing-07;
 
-  &_kind_primary {
+  @include mq($from: large) {
+    width: 15rem;
+  }
+
+  @include mq($until: large) {
+    justify-content: space-between;
+    padding: $spacing-05;
+    width: 12rem;
+  }
+
+  &_primary {
     color: $white;
     background-color: $purple-70;
-    padding: $spacing-07;
-    width: 15rem;
 
     &:hover {
       background-color: $purple-90;
     }
 
-    @include mq($from: medium, $until: large) {
-      padding: $spacing-05 $spacing-07;
-      width: 13rem;
-    }
-
-    @include mq($until: medium) {
-      padding: $spacing-03 $spacing-05;
-      width: 11rem;
+    @include mq($from: large) {
+      padding-top: $spacing-07;
+      padding-bottom: $spacing-07;
     }
   }
 
-  &_kind_secondary {
+  &_secondary {
     color: $purple-70;
     background-color: $cool-gray-10;
-    min-height: 3rem;
 
     &:hover {
       color: $cool-gray-10;
       background-color: $purple-70;
     }
 
-    @include mq($until: medium) {
-      min-height: 2rem;
+    @include mq($from: large) {
+      padding-top: $spacing-05;
+      padding-bottom: $spacing-05;
     }
   }
 
