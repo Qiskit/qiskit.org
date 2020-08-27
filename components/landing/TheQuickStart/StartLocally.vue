@@ -213,10 +213,6 @@ export default class extends Vue {
     @include type-style('body-long-01');
     color: $cool-gray-80;
     margin-bottom: $spacing-03;
-
-    @include mq($until: large) {
-      @include type-style('label-01');
-    }
   }
 
   &__option {
@@ -228,7 +224,6 @@ export default class extends Vue {
     margin-bottom: $spacing-07;
 
     @include mq($until: large) {
-      @include type-style('label-01');
       padding-left: $spacing-05;
       margin-bottom: $spacing-05;
     }
@@ -269,12 +264,6 @@ export default class extends Vue {
         // To match default light theme UI hover, which is not among the Carbon
         // palette. 🤦
         background-color: #e5e5e5;
-      }
-    }
-
-    & .bx--accordion__title {
-      @include mq($until: large) {
-        @include type-style('label-01');
       }
     }
 
