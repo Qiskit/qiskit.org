@@ -129,13 +129,11 @@ export default class extends Vue {
     margin: 0 0 $layout-06;
 
     @include mq($from: medium, $until: large) {
-      @include type-style('label-01');
       max-width: 3 * $column-size-medium;
       margin-bottom: $layout-05;
     }
 
     @include mq($until: medium) {
-      @include type-style('label-01');
       max-width: 3 * $column-size-small;
       margin-bottom: $layout-03;
     }
