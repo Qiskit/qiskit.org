@@ -17,22 +17,9 @@ You can [brush up on Python programming](https://qiskit.org/textbook/ch-prerequi
 ## Curriculum
 Each day of the Qiskit Global Summer School consists of 3 hours of lectures followed by an hour-long hands-on programming lab where we implement quantum programs in Qiskit.
 
-### Lecture 1
-**Qubits and Quantum States, Quantum Circuits, Measurements**\
-*Lecturer: Elisa B&auml;umer*
 
--[![Qubits and Quantum States, Quantum Circuits, Measurements](https://res.cloudinary.com/marcomontalbano/image/upload/v1597795921/video_to_markdown/images/youtube--7dfw8k2p1to-c05b58ac6eb4c4700831b2b3070cd403.jpg)](https://www.youtube.com/watch?v=7dfw8k2p1to "Qubits and Quantum States, Quantum Circuits, Measurements") 
-
-<details>
-  <summary>Goodies in here</summary>
-  
-  [Lecture Notes](www.google.com) | [Lab](www.google.com) | [Additional Readings](www.google.com)
-</details>
-
-
-
-|   Lecture   |       Speaker      | Topic | 
-|     ----    |       -------      | ----- |
+|   Lecture   |       Speaker      | Topic |  Lab | 
+|     ----    |       -------      | ----- |  ----- |
 | 1  |   Elisa B&auml;umer    | [Qubits and Quantum States, Quantum Circuits, Measurements](https://youtu.be/NZD9APb7ZtY?list=PLOFEBzvs-VvrXTMy5Y2IqmSaUjfnhvBHR)|
 | 2  |   Elisa B&auml;umer    | [Qubits and Quantum States, Quantum Circuits, Measurements](https://www.youtube.com/watch?v=SlZoTjkPy7o&list=PLOFEBzvs-VvrXTMy5Y2IqmSaUjfnhvBHR&index=3)|
 | 3  |   Elisa B&auml;umer    | [Qubits and Quantum States, Quantum Circuits, Measurements](https://www.youtube.com/watch?v=9MpSQglnqI0&list=PLOFEBzvs-VvrXTMy5Y2IqmSaUjfnhvBHR&index=4)|
