@@ -5,7 +5,7 @@ description: Add your description here
 nav:
   - text: Curriculum
     goTo: '#curriculum'
-routeName: events
+routeName: learn
 ---
 
 ## Prerequisites
@@ -47,6 +47,10 @@ Each day of the Qiskit Global Summer School consists of 3 hours of lectures foll
 | 25  |   Abhinav Kandala    | [Quantum Chemistry II: Finding the Ground States of H2 and LiH ](https://youtu.be/p9gScAOvc5I?list=PLOFEBzvs-VvrXTMy5Y2IqmSaUjfnhvBHR)|
 | 26  |   Abhinav Kandala    | [Quantum Chemistry II: Finding the Ground States of H2 and LiH ](https://youtu.be/_UW6puuGa5E?list=PLOFEBzvs-VvrXTMy5Y2IqmSaUjfnhvBHR)|
 | 27  |   Abhinav Kandala    | [Quantum Chemistry II: Finding the Ground States of H2 and LiH ](https://youtu.be/o4BAOKbcd3o?list=PLOFEBzvs-VvrXTMy5Y2IqmSaUjfnhvBHR)|
+
+## Learn how to build your career on quantum computing!
+
+[![Qubits and Quantum States, Quantum Circuits, Measurements](https://res.cloudinary.com/marcomontalbano/image/upload/v1597795921/video_to_markdown/images/youtube--7dfw8k2p1to-c05b58ac6eb4c4700831b2b3070cd403.jpg)](https://www.youtube.com/watch?v=7dfw8k2p1to "Qubits and Quantum States, Quantum Circuits, Measurements") 
 
 
 
