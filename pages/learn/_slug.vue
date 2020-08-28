@@ -29,7 +29,6 @@ import QiskitPage from '~/components/logic/QiskitPage.vue'
       return
     }
     const pageContent = await import(`~/content/learn/${sourceName}.md`)
-    console.log('===', pageContent) 
     return { pageContent }
   }
 })
