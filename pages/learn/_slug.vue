@@ -1,6 +1,13 @@
 <template>
   <div class="learn-entry">
-    <main v-html="pageContent.html" />
+    <header class="learn-entry__header">
+      <div class="learn-entry__header__container">
+        <h1 class="learn-entry__header__title">
+          {{ pageContent.attributes.title }}
+        </h1>
+      </div>
+    </header>
+    <main class="learn-entry__content" v-html="pageContent.html" />
   </div>
 </template>
 
@@ -22,63 +29,94 @@ import QiskitPage from '~/components/logic/QiskitPage.vue'
       return
     }
     const pageContent = await import(`~/content/learn/${sourceName}.md`)
+    console.log('===', pageContent) 
     return { pageContent }
   }
 })
-export default class extends QiskitPage {}
+export default class extends QiskitPage {
+  routeName = 'learn-entry'
+}
 </script>
 
 <style lang="scss">
+@import '~carbon-components/scss/globals/scss/typography';
+
 .learn-entry {
   background-color: white;
-}
 
-.learn-entry a {
-  text-decoration: none;
-}
+  &__header {
+    @include responsive-grid-bg-strip('/images/grid/grid-hero-learn.svg', auto, 28rem);
+    min-height: 28rem;
 
-.learn-entry main {
-  @include contained();
-  background-color: transparent;
-  background-image: none;
-}
+    @include mq($until: large) {
+      min-height: 28rem * 40 / 64;
+    }
 
-.learn-entry h2 {
-  padding-top: 4rem;
-  margin: 0 0 2rem;
-  color: #0A1D8F;
+    &__container {
+      @include contained();
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 28rem;
 
-  &::before {
-    content: "";
-    float: left;
-    width: 5%;
-    margin-top: 0.5rem;
-    margin-right: 5%;
-    border-top: 1px solid #0A1D8F;
+      @include mq($until: large) {
+        height: 28rem * 40 / 64;
+      }
+    }
+
+    &__title {
+      @include type-style('expressive-heading-05', true);
+      color: $white-text-01;
+    }
   }
-}
 
-.learn-entry h3 {
-  font-weight: bold;
-  margin-top: 2.5rem;
-  margin-bottom: 1rem;
-}
+  &__content {
+    @include contained();
+      background-color: transparent;
+      background-image: none;
 
-.learn-entry h3 strong {
-  font-weight: bold;
-}
+    a {
+      text-decoration: none;
+    }
 
-.learn-entry table {
-  margin: $layout-05 5%;
-}
+    h2 {
+      padding-top: 4rem;
+      margin: 0 0 2rem;
+      color: #0A1D8F;
 
-.learn-entry table td {
-  text-align: center;
-  padding: 1.2rem 1.2rem 1rem 0;
-  border-bottom: 1px dotted #0A1D8F;
-}
+      &::before {
+        content: "";
+        float: left;
+        width: 5%;
+        margin-top: 0.5rem;
+        margin-right: 5%;
+        border-top: 1px solid #0A1D8F;
+      }
+    }
 
-.learn-entry table tr td:first-child {
-  text-align: left;
+    h3 {
+      font-weight: bold;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    h3 strong {
+      font-weight: bold;
+    }
+
+    table {
+      margin: $layout-05 5%;
+    }
+
+    table td {
+      text-align: center;
+      padding: 1.2rem 1.2rem 1rem 0;
+      border-bottom: 1px dotted #0A1D8F;
+    }
+
+    table tr td:first-child {
+      text-align: left;
+    }
+  }
 }
 </style>
