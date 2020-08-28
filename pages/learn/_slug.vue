@@ -116,6 +116,11 @@ export default class extends QiskitPage {
     table tr td:first-child {
       text-align: left;
     }
+
+    img {
+      width: 100%;
+      height: auto;
+    }
   }
 }
 </style>
