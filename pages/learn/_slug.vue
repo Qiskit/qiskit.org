@@ -104,7 +104,7 @@ export default class extends QiskitPage {
     }
 
     table {
-      margin: $layout-05 5%;
+      margin: $layout-05 5% 0 5%;
     }
 
     table td {
@@ -118,6 +118,7 @@ export default class extends QiskitPage {
     }
 
     img {
+      margin-bottom: $layout-05;
       width: 100%;
       height: auto;
     }
