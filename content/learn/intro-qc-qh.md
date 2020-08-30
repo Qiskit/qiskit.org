@@ -55,6 +55,7 @@ margin: 10px 7%;
 
 #resources {
   width: 120%;
+  margin-left: 0px;
 }
 
 </style>
