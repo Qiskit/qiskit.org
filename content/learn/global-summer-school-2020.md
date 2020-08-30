@@ -46,9 +46,9 @@ You can [brush up on Python programming](https://qiskit.org/textbook/ch-prerequi
 | __Careers in Quantum Computing__<br/>(Hosted by Amira Abbas) | [Discussion](https://www.youtube.com/watch?v=7dfw8k2p1to) | | |
 
 ## Contributors
-<p>The lectures and labs were prepared and delivered by Abraham Asfaw, Elisa B&auml;umer, James Wootton, Zlatko Minev, Antonio Mezzacapo and Abhinav Kandala. Nicholas Bronn created labs 6 and 7.</p>
-<p></p>
-<p>During the delivery of the lectures in 2020 as part of the Qiskit Global Summer School, Brian Ingmanson, Susan Kirschner and Josie Kies hosted the lectures. Amira Abbas hosted the discussion on careers in quantum computing, which included Jay Gambetta, Steve Girvin, John Preskill, Marina Radulaski, Monika Schleier-Smith, Brigitta Whaley. Paul Searle edited the videos as they appear above.</p>
+The lectures and labs were prepared and delivered by Abraham Asfaw, Elisa B&auml;umer, James Wootton, Zlatko Minev, Antonio Mezzacapo and Abhinav Kandala. Nicholas Bronn created labs 6 and 7.
+<br/><br/>
+During the delivery of the lectures in 2020 as part of the Qiskit Global Summer School, Brian Ingmanson, Susan Kirschner and Josie Kies hosted the lectures. Amira Abbas hosted the discussion on careers in quantum computing, which included Jay Gambetta, Steve Girvin, John Preskill, Marina Radulaski, Monika Schleier-Smith, Brigitta Whaley. Paul Searle edited the videos as they appear above.
 
 ## Usage and Citation
 If you use the lectures and labs in your course, you can gain access to the [IBM Quantum Educators Program](https://quantum-computing.ibm.com/programs/educators). Please cite the material as <br/><br/>
