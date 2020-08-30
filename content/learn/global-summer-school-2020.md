@@ -240,7 +240,7 @@ During the delivery of the lectures in 2020 as part of the Qiskit Global Summer 
 If you use the lectures and labs in your course, you can gain access to the [IBM Quantum Educators Program](https://quantum-computing.ibm.com/programs/educators). Please cite the material as <br/><br/>
 
 <blockquote>
-	Introduction to Quantum Computing and Quantum Hardware; IBM Quantum team (2020).
-<blockquote>
+	IBM Quantum team, Introduction to Quantum Computing and Quantum Hardware (2020). http://qiskit.org/learn/intro-qc-qh
+</blockquote>
 
 <br/><br/>
