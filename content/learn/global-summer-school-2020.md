@@ -16,12 +16,12 @@ You can [brush up on Python programming](https://qiskit.org/textbook/ch-prerequi
 ## Curriculum
 | | | | |
 |-|-|-|-|
-| Lecture 1<br/>__Qubits and Quantum States, Quantum Circuits, Measurements Part 1__<br/>(Lecturer: Elisa B&auml;umer) | [Lecture Video](https://youtu.be/NZD9APb7ZtY?list=PLOFEBzvs-VvrXTMy5Y2IqmSaUjfnhvBHR) | [Lecture Notes](#) | [Lab](#) |
-| Lecture 2<br/>__Qubits and Quantum States, Quantum Circuits, Measurements Part 2__<br/>(Elisa B&auml;umer) | [Lecture Video](https://youtu.be/SlZoTjkPy7o?list=PLOFEBzvs-VvrXTMy5Y2IqmSaUjfnhvBHR) | [Lecture Notes](#) | [Lab](#) |
-| Lecture 3<br/>__Qubits and Quantum States, Quantum Circuits, Measurements Part 3__<br/>(Elisa B&auml;umer) | [Lecture Video](https://youtu.be/9MpSQglnqI0?list=PLOFEBzvs-VvrXTMy5Y2IqmSaUjfnhvBHR) | [Lecture Notes](#) | [Lab](#) |
-| Lecture 4<br/>__Writing and Running Quantum Programs Part 1__<br/>(Elisa B&auml;umer) | [Lecture Video](https://youtu.be/qrYVO9-dxLE?list=PLOFEBzvs-VvrXTMy5Y2IqmSaUjfnhvBHR) | [Lecture Notes](#) | [Lab](#) |
-| Lecture 5<br/>__Writing and Running Quantum Programs Part 2__<br/>(Elisa B&auml;umer) | [Lecture Video](https://youtu.be/iJX794qJIpY?list=PLOFEBzvs-VvrXTMy5Y2IqmSaUjfnhvBHR) | [Lecture Notes](#) | [Lab](#) |
-| Lecture 6<br/>__Writing and Running Quantum Programs Part 3__<br/>(Elisa B&auml;umer) | [Lecture Video](https://youtu.be/enYP9TaDeJI?list=PLOFEBzvs-VvrXTMy5Y2IqmSaUjfnhvBHR) | [Lecture Notes](#) | [Lab](#) |
+| Lecture 1<br/>__Qubits and Quantum States, Quantum Circuits, Measurements Part 1__<br/>(Lecturer: Elisa B&auml;umer) | [Lecture Video](https://youtu.be/NZD9APb7ZtY?list=PLOFEBzvs-VvrXTMy5Y2IqmSaUjfnhvBHR) | [Lecture Notes 1](https://github.com/qiskit-community/intro-to-quantum-computing-and-quantum-hardware/blob/master/lectures/introqcqh-lecture-notes-1.pdf?raw=true) | [Lab 1](#) |
+| Lecture 2<br/>__Qubits and Quantum States, Quantum Circuits, Measurements Part 2__<br/>(Elisa B&auml;umer) | [Lecture Video](https://youtu.be/SlZoTjkPy7o?list=PLOFEBzvs-VvrXTMy5Y2IqmSaUjfnhvBHR) | | |
+| Lecture 3<br/>__Qubits and Quantum States, Quantum Circuits, Measurements Part 3__<br/>(Elisa B&auml;umer) | [Lecture Video](https://youtu.be/9MpSQglnqI0?list=PLOFEBzvs-VvrXTMy5Y2IqmSaUjfnhvBHR) | | |
+| Lecture 4<br/>__Writing and Running Quantum Programs Part 1__<br/>(Elisa B&auml;umer) | [Lecture Video](https://youtu.be/qrYVO9-dxLE?list=PLOFEBzvs-VvrXTMy5Y2IqmSaUjfnhvBHR) | [Lecture Notes 2](https://github.com/qiskit-community/intro-to-quantum-computing-and-quantum-hardware/blob/master/lectures/introqcqh-lecture-notes-2.pdf?raw=true) | [Lab 2](#) |
+| Lecture 5<br/>__Writing and Running Quantum Programs Part 2__<br/>(Elisa B&auml;umer) | [Lecture Video](https://youtu.be/iJX794qJIpY?list=PLOFEBzvs-VvrXTMy5Y2IqmSaUjfnhvBHR) | | |
+| Lecture 6<br/>__Writing and Running Quantum Programs Part 3__<br/>(Elisa B&auml;umer) | [Lecture Video](https://youtu.be/enYP9TaDeJI?list=PLOFEBzvs-VvrXTMy5Y2IqmSaUjfnhvBHR) | | |
 | Lecture 7<br/>__Shor's Algorithm I: Quantum Fourier Transform, Quantum Phase Estimation Part 1__<br/>(Abraham Asfaw) | [Lecture Video](https://youtu.be/mAHC1dWKNYE?list=PLOFEBzvs-VvrXTMy5Y2IqmSaUjfnhvBHR) | [Lecture Notes](#) | [Lab](#) |
 | Lecture 8<br/>__Shor's Algorithm I: Quantum Fourier Transform, Quantum Phase Estimation Part 2__<br/>(Abraham Asfaw) | [Lecture Video](https://youtu.be/pq2jkfJlLmY?list=PLOFEBzvs-VvrXTMy5Y2IqmSaUjfnhvBHR) | [Lecture Notes](#) | [Lab](#) |
 | Lecture 9<br/>__Shor's Algorithm I: Quantum Fourier Transform, Quantum Phase Estimation Part 3__<br/>(Abraham Asfaw) | [Lecture Video](https://youtu.be/5kcoaanYyZw?list=PLOFEBzvs-VvrXTMy5Y2IqmSaUjfnhvBHR) | [Lecture Notes](#) | [Lab](#) |
