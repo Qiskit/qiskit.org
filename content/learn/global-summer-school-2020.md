@@ -14,7 +14,14 @@ Minimal prerequisites are required for the Qiskit Global Summer School. If you k
 You can [brush up on Python programming](https://qiskit.org/textbook/ch-prerequisites/python-and-jupyter-notebooks.html) before attending the lectures by using the Qiskit Textbook. To make the most out of these lectures, you may also consider looking through the [linear algebra prerequisites](https://qiskit.org/textbook/ch-prerequisites/linear_algebra.html) section of the Qiskit Textbook.
 
 ## Curriculum
-<table>
+<style>
+#resources td, #resources th {
+  border: 1px solid #ddd;
+  padding: 8px;
+  vertical-align: middle;
+}
+</style>
+<table id='resources'>
     <thead>
         <tr>
             <th>Lecture</th>
