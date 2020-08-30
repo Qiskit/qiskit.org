@@ -8,10 +8,28 @@ nav:
 routeName: learn
 ---
 
-## Prerequisites
-Minimal prerequisites are required for the Qiskit Global Summer School. If you know [how to multiply two matrices](https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:matrices/x9e81a4f98389efdf:multiplying-matrices-by-matrices/v/matrix-multiplication-intro), and have some programming experience in Python, you are ready for the Qiskit Global Summer School.
+# About the Course
+This course is an introduction to the world of quantum computing, with an exploration of some of the key quantum algorithms and their implementations using quantum circuits, as well as the quantum hardware that is designed to run these algorithms. The course was first offered during the Qiskit Global Summer School in July 2020 as a two-week intensive summer school.
 
-You can [brush up on Python programming](https://qiskit.org/textbook/ch-prerequisites/python-and-jupyter-notebooks.html) before attending the lectures by using the Qiskit Textbook. To make the most out of these lectures, you may also consider looking through the [linear algebra prerequisites](https://qiskit.org/textbook/ch-prerequisites/linear_algebra.html) section of the Qiskit Textbook.
+There are 27 lectures in this course, which cover the material in 9 lecture notes and 9 associated labs. The textbook for the course is available online: [_Learn Quantum Computation using Qiskit_](http://qiskit.org/textbook).
+
+The structure of the course is as follows:
+
+<ul>
+  <li>Lectures 1 -- 6 provide an introduction to quantum computing and quantum algorithms using quantum circuits. The emphasis here is on understanding how to work with quantum states, and operate on them using quantum circuits. Labs 1 and 2 support the material in these lectures, and provide hands-on exercises in Qiskit. Lab 1 covers single-qubit and multi-qubit states and quantum teleportation.</li>
+  <li>Lectures 7 -- 12 are designed to teach Shor's algorithm. The first three lectures focus on building intuition for the quantum Fourier transform and quantum phase estimation, while the next three lectures focus on the implementation of Shor's algorithm using quantum circuits. Labs 3 and 4 support the material in these lectures, and provide hands-on exercises in Qiskit. Lab 3 asks students to implement the standard quantum phase estimation algorithm, and lab 4 asks students to implement Shor's algorithm to factor 15 into 3 and 5.</li>
+  <li>Lectures 13 -- 15 introduce quantum error correction using repetition and surface codes. The lectures show the kinds of errors that can happen during a quantum computation, and methods to do quantum computation in the presence of these errors. Lab 5 supports the material in these lectures, and provides hands-on exercises in Qiskit. Lab 5 provides a hands-on exercise on implementing repetition codes and seeing their performance in the presence of noise.</li>
+  <li>Lectures 16 -- 21 introduce the hardware used for quantum computation, with emphasis on superconducting qubits. The first three lectures discuss how to build a superconducting transmon quantum bit (qubit) out of an anharmonic oscillator using Josephson junctions, while the next three lectures focus on coupling to the qubit in a circuit quantum electrodynamics architecture. Labs 6 and 7 support the material in these lectures, and provide hands-on exercises in Qiskit. Lab 6 provides a hands-on exercise on driving qubits in Rabi and Ramsey experiments to calibrate the qubit's $\pi$ pulse drive strength and frequency. Lab 7 provides a hands-on exercise on qubit spectroscopy, showing how the qubit transitions 0-1 and 1-2 can be determined.</li>
+  <li>Lectures 22 -- 27 introduce the techniques used to solve quantum chemistry problems using gate-based quantum computers, with emphasis on superconducting qubits. The first three lectures describe the structure of quantum chemistry problems and discuss methods for converting these problems into ones that can be mapped onto a gate-based quantum computer, while the next three lectures focus on extracting the best performance from the quantum hardware to solve quantum chemistry problems by implementing variational quantum eigensolvers. Labs 8 and 9 support the material in these lectures, and provide hands-on exercises in Qiskit. Lab 8 provides a hands-on demonstration of obtaining the qubit operators for simulating the ground state of the molecule LiH. Lab 9 provides a hands-on exercise on preparing trial states for a variational quantum eigensolver, and computing the expectation values of the various Pauli operators from measurement outcomes.</li>  
+</ul>
+
+## Prerequisites
+In order to make the best out of these lectures, we strongly recommend reviewing matrix algebra and brushing up on Python. Here are some recommended materials:
+
+<ul>
+<li>Multiplying two matrices: [Khan Academy](https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:matrices/x9e81a4f98389efdf:multiplying-matrices-by-matrices/v/matrix-multiplication-intro) [Linear algebra prerequisites in the Qiskit Textbook](https://qiskit.org/textbook/ch-prerequisites/linear_algebra.html)</li>
+<li>Basic familiarity with Python: [Python prerequisites in the Qiskit Textbook](https://qiskit.org/textbook/ch-prerequisites/python-and-jupyter-notebooks.html)</li>
+</ul>
 
 ## Curriculum
 <style>
