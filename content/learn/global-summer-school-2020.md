@@ -16,33 +16,33 @@ You can [brush up on Python programming](https://qiskit.org/textbook/ch-prerequi
 ## Curriculum
 | | | | |
 |-|-|-|-|
-| __Lecture 1<br/>Qubits and Quantum States, Quantum Circuits, Measurements Part 1 (Elisa B&auml;umer)__ | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
-| __Lecture 2: Qubits and Quantum States, Quantum Circuits, Measurements Part 2 (Elisa B&auml;umer)__ | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
-| __Lecture 3: Qubits and Quantum States, Quantum Circuits, Measurements Part 3 (Elisa B&auml;umer)__ | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
-| __Lecture 4: Writing and Running Quantum Programs Part 1 (Elisa B&auml;umer)__ | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
-| __Lecture 5: Writing and Running Quantum Programs Part 2 (Elisa B&auml;umer)__ | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
-| __Lecture 6: Writing and Running Quantum Programs Part 3 (Elisa B&auml;umer)__ | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
-| __Lecture 7: Shor's Algorithm I: Understanding Quantum Fourier Transform, Quantum Phase Estimation Part 1 (Abraham Asfaw)__ | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
-| __Lecture 8: Shor's Algorithm I: Understanding Quantum Fourier Transform, Quantum Phase Estimation Part 2 (Abraham Asfaw)__ | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
-| __Lecture 9: Shor's Algorithm I: Understanding Quantum Fourier Transform, Quantum Phase Estimation Part 3 (Abraham Asfaw)__ | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
-| __Lecture 10: Shor's Algorithm II: From Factoring to Period-Finding, Writing the Quantum Program Part 1 (Abraham Asfaw)__ | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
-| __Lecture 11: Shor's Algorithm II: From Factoring to Period-Finding, Writing the Quantum Program Part 2 (Abraham Asfaw)__ | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
-| __Lecture 12: Shor's 	Algorithm II: From Factoring to Period-Finding, Writing the Quantum Program Part 3 (Abraham Asfaw)__ | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
-| __Lecture 13: Quantum Error Correction using Repetition Codes Part 1 (James Wootton)__ | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
-| __Lecture 14: Quantum Error Correction using Repetition Codes Part 2 (James Wootton)__ | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
-| __Lecture 15: Quantum Error Correction using Repetition Codes Part 3 (James Wootton)__ | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
-| __Lecture 16: Superconducting Qubits I: Quantizing a Harmonic Oscillator, Josephson Junctions Part 1 (Zlatko Minev)__ | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
-| __Lecture 17: Superconducting Qubits I: Quantizing a Harmonic Oscillator, Josephson Junctions Part 2 (Zlatko Minev)__ | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
-| __Lecture 18: Superconducting Qubits I: Quantizing a Harmonic Oscillator, Josephson Junctions Part 3 (Zlatko Minev)__ | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
-| __Lecture 19: Superconducting Qubits II: Circuit Quantum Electrodynamics, Readout and Calibration Methods Part 1 (Zlatko Minev)__ | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
-| __Lecture 20: Superconducting Qubits II: Circuit Quantum Electrodynamics, Readout and Calibration Methods Part 2 (Zlatko Minev)__ | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
-| __Lecture 21: Superconducting Qubits II: Circuit Quantum Electrodynamics, Readout and Calibration Methods Part 3 (Zlatko Minev)__ | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
-| __Lecture 22: Quantum Chemistry I: Obtaining the Qubit Hamiltonian for H2 and LiH Part 1 (Antonio Mezzacapo)__ | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
-| __Lecture 23: Quantum Chemistry I: Obtaining the Qubit Hamiltonian for H2 and LiH Part 2 (Antonio Mezzacapo)__ | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
-| __Lecture 24: Quantum Chemistry I: Obtaining the Qubit Hamiltonian for H2 and LiH Part 3 (Antonio Mezzacapo)__ | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
-| __Lecture 25: Quantum Chemistry II: Finding the Ground States of H2 and LiH Part 1 (Abhinav Kandala)__ | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
-| __Lecture 26: Quantum Chemistry II: Finding the Ground States of H2 and LiH Part 2 (Abhinav Kandala)__ | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
-| __Lecture 27: Quantum Chemistry II: Finding the Ground States of H2 and LiH Part 3 (Abhinav Kandala)__ | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
+| Lecture 1<br/>__Qubits and Quantum States, Quantum Circuits, Measurements Part 1__<br/>(Lecturer: Elisa B&auml;umer) | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
+| Lecture 2<br/>__Qubits and Quantum States, Quantum Circuits, Measurements Part 2__<br/>(Elisa B&auml;umer) | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
+| Lecture 3<br/>__Qubits and Quantum States, Quantum Circuits, Measurements Part 3__<br/>(Elisa B&auml;umer) | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
+| Lecture 4<br/>__Writing and Running Quantum Programs Part 1__<br/>(Elisa B&auml;umer) | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
+| Lecture 5<br/>__Writing and Running Quantum Programs Part 2__<br/>(Elisa B&auml;umer) | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
+| Lecture 6<br/>__Writing and Running Quantum Programs Part 3__<br/>(Elisa B&auml;umer) | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
+| Lecture 7<br/>__Shor's Algorithm I: Understanding Quantum Fourier Transform, Quantum Phase Estimation Part 1__<br/>(Abraham Asfaw) | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
+| Lecture 8<br/>__Shor's Algorithm I: Understanding Quantum Fourier Transform, Quantum Phase Estimation Part 2__<br/>(Abraham Asfaw) | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
+| Lecture 9<br/>__Shor's Algorithm I: Understanding Quantum Fourier Transform, Quantum Phase Estimation Part 3__<br/>(Abraham Asfaw) | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
+| Lecture 10<br/>__Shor's Algorithm II: From Factoring to Period-Finding, Writing the Quantum Program Part 1__<br/>(Abraham Asfaw) | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
+| Lecture 11<br/>__Shor's Algorithm II: From Factoring to Period-Finding, Writing the Quantum Program Part 2__<br/>(Abraham Asfaw) | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
+| Lecture 12<br/>__Shor's 	Algorithm II: From Factoring to Period-Finding, Writing the Quantum Program Part 3__<br/>(Abraham Asfaw) | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
+| Lecture 13<br/>__Quantum Error Correction using Repetition Codes Part 1__<br/>(James Wootton) | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
+| Lecture 14<br/>__Quantum Error Correction using Repetition Codes Part 2__<br/>(James Wootton) | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
+| Lecture 15<br/>__Quantum Error Correction using Repetition Codes Part 3__<br/>(James Wootton) | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
+| Lecture 16<br/>__Superconducting Qubits I: Quantizing a Harmonic Oscillator, Josephson Junctions Part 1__<br/>(Zlatko Minev) | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
+| Lecture 17<br/>__Superconducting Qubits I: Quantizing a Harmonic Oscillator, Josephson Junctions Part 2__<br/>(Zlatko Minev) | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
+| Lecture 18<br/>__Superconducting Qubits I: Quantizing a Harmonic Oscillator, Josephson Junctions Part 3__<br/>(Zlatko Minev) | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
+| Lecture 19<br/>__Superconducting Qubits II: Circuit Quantum Electrodynamics, Readout and Calibration Methods Part 1__<br/>(Zlatko Minev) | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
+| Lecture 20<br/>__Superconducting Qubits II: Circuit Quantum Electrodynamics, Readout and Calibration Methods Part 2__<br/>(Zlatko Minev) | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
+| Lecture 21<br/>__Superconducting Qubits II: Circuit Quantum Electrodynamics, Readout and Calibration Methods Part 3__<br/>(Zlatko Minev) | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
+| Lecture 22<br/>__Quantum Chemistry I: Obtaining the Qubit Hamiltonian for H2 and LiH Part 1__<br/>(Antonio Mezzacapo) | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
+| Lecture 23<br/>__Quantum Chemistry I: Obtaining the Qubit Hamiltonian for H2 and LiH Part 2__<br/>(Antonio Mezzacapo) | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
+| Lecture 24<br/>__Quantum Chemistry I: Obtaining the Qubit Hamiltonian for H2 and LiH Part 3__<br/>(Antonio Mezzacapo) | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
+| Lecture 25<br/>__Quantum Chemistry II: Finding the Ground States of H2 and LiH Part 1__<br/>(Abhinav Kandala) | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
+| Lecture 26<br/>__Quantum Chemistry II: Finding the Ground States of H2 and LiH Part 2__<br/>(Abhinav Kandala) | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
+| Lecture 27<br/>__Quantum Chemistry II: Finding the Ground States of H2 and LiH Part 3__<br/>(Abhinav Kandala) | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
 
 ## Learn how to build your career on quantum computing!
 
