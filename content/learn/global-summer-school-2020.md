@@ -1,7 +1,7 @@
 ---
-title: Qiskit Global Summer School
-tagline: Qiskit Global Summer School was a two-week intensive summer school designed to empower the next generation of quantum developers with the knowledge to explore quantum applications on their own. 
-description: Add your description here
+title: Introduction to Quantum Computing and Quantum Hardware
+tagline: An introduction to the world of quantum computing, with an exploration of some of the key quantum algorithms and their implementations, as well as the quantum hardware that is designed to run these algorithms. The course was first offered during the Qiskit Global Summer School in July 2020 as a two-week intensive summer school.
+description: An introduction to the world of quantum computing, with an exploration of some of the key quantum algorithms and their implementations, as well as the quantum hardware that is designed to run these algorithms. The course was first offered during the Qiskit Global Summer School in July 2020 as a two-week intensive summer school.
 nav:
   - text: Curriculum
     goTo: '#curriculum'
