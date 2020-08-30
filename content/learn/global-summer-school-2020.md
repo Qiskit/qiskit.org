@@ -206,7 +206,7 @@ ul.coursedesc {
   width: 100%;
 }
 ul.coursedesc li {
-margin: 10px 0;
+margin: 10px 10%;
 }
 </style>
 <ul class='coursedesc'>
