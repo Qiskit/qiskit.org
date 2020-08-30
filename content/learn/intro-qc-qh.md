@@ -72,7 +72,7 @@ margin: 10px 7%;
             <td>Lecture 1<br/><span class='lectitle'>Qubits and Quantum States, Quantum Circuits, Measurements Part 1</span><br/>(Lecturer: Elisa B&auml;umer)</td>
             <td><a href='https://youtu.be/NZD9APb7ZtY?list=PLOFEBzvs-VvrXTMy5Y2IqmSaUjfnhvBHR'>Lecture Video</a></td>
             <td rowspan=3><a href='https://github.com/qiskit-community/intro-to-quantum-computing-and-quantum-hardware/blob/master/lectures/introqcqh-lecture-notes-1.pdf?raw=true'>Lecture Notes 1</a></td>
-            <td rowspan=3><a href='#'>Lab 1</a></td>
+            <td rowspan=3><a href='https://github.com/qiskit-community/intro-to-quantum-computing-and-quantum-hardware/blob/master/labs/introqcqh-lab-1.zip?raw=true'>Lab 1</a></td>
         </tr>
         <tr>
             <td>Lecture 2<br/><span class='lectitle'>Qubits and Quantum States, Quantum Circuits, Measurements Part 2</span><br/>(Lecturer: Elisa B&auml;umer)</td>
@@ -86,7 +86,7 @@ margin: 10px 7%;
             <td>Lecture 4<br/><span class='lectitle'>Writing and Running Quantum Programs Part 1</span><br/>(Lecturer: Elisa B&auml;umer)</td>
             <td><a href='https://youtu.be/qrYVO9-dxLE?list=PLOFEBzvs-VvrXTMy5Y2IqmSaUjfnhvBHR'>Lecture Video</a></td>
             <td rowspan=3><a href='https://github.com/qiskit-community/intro-to-quantum-computing-and-quantum-hardware/blob/master/lectures/introqcqh-lecture-notes-2.pdf?raw=true'>Lecture Notes 2</a></td>
-            <td rowspan=3><a href='#'>Lab 2</a></td>
+            <td rowspan=3><a href='https://github.com/qiskit-community/intro-to-quantum-computing-and-quantum-hardware/blob/master/labs/introqcqh-lab-2.zip?raw=true'>Lab 2</a></td>
         </tr>
         <tr>
             <td>Lecture 5<br/><span class='lectitle'>Writing and Running Quantum Programs Part 2</span><br/>(Lecturer: Elisa B&auml;umer)</td>
@@ -100,7 +100,7 @@ margin: 10px 7%;
             <td>Lecture 7<br/><span class='lectitle'>Shor's Algorithm I: Quantum Fourier Transform, Quantum Phase Estimation Part 1</span><br/>(Lecturer: Abraham Asfaw)</td>
             <td><a href='https://youtu.be/mAHC1dWKNYE?list=PLOFEBzvs-VvrXTMy5Y2IqmSaUjfnhvBHR'>Lecture Video</a></td>
             <td rowspan=3><a href='https://github.com/qiskit-community/intro-to-quantum-computing-and-quantum-hardware/blob/master/lectures/introqcqh-lecture-notes-3.pdf?raw=true'>Lecture Notes 3</a></td>
-            <td rowspan=3><a href='#'>Lab 3</a></td>
+            <td rowspan=3><a href='https://github.com/qiskit-community/intro-to-quantum-computing-and-quantum-hardware/blob/master/labs/introqcqh-lab-3.zip?raw=true'>Lab 3</a></td>
         </tr>
         <tr>
             <td>Lecture 8<br/><span class='lectitle'>Shor's Algorithm I: Quantum Fourier Transform, Quantum Phase Estimation Part 2</span><br/>(Lecturer: Abraham Asfaw)</td>
@@ -114,7 +114,7 @@ margin: 10px 7%;
             <td>Lecture 10<br/><span class='lectitle'>Shor's Algorithm II: From Factoring to Period-Finding, Writing the Quantum Program Part 1</span><br/>(Lecturer: Abraham Asfaw)</td>
             <td><a href='https://youtu.be/YpcT8u2a2jc?list=PLOFEBzvs-VvrXTMy5Y2IqmSaUjfnhvBHR'>Lecture Video</a></td>
             <td rowspan=3><a href='https://github.com/qiskit-community/intro-to-quantum-computing-and-quantum-hardware/blob/master/lectures/introqcqh-lecture-notes-4.pdf?raw=true'>Lecture Notes 4</a></td>
-            <td rowspan=3><a href='#'>Lab 4</a></td>
+            <td rowspan=3><a href='https://github.com/qiskit-community/intro-to-quantum-computing-and-quantum-hardware/blob/master/labs/introqcqh-lab-4.zip?raw=true'>Lab 4</a></td>
         </tr>
         <tr>
             <td>Lecture 11<br/><span class='lectitle'>Shor's Algorithm II: From Factoring to Period-Finding, Writing the Quantum Program Part 2</span><br/>(Lecturer: Abraham Asfaw)</td>
@@ -128,7 +128,7 @@ margin: 10px 7%;
             <td>Lecture 13<br/><span class='lectitle'>Quantum Error Correction using Repetition Codes Part 1</span><br/>(Lecturer: James Wootton)</td>
             <td><a href='https://youtu.be/ZY8PddknCos?list=PLOFEBzvs-VvrXTMy5Y2IqmSaUjfnhvBHR'>Lecture Video</a></td>
             <td rowspan=3><a href='https://github.com/qiskit-community/intro-to-quantum-computing-and-quantum-hardware/blob/master/lectures/introqcqh-lecture-notes-5.pdf?raw=true'>Lecture Notes 5</a></td>
-            <td rowspan=3><a href='#'>Lab 5</a></td>
+            <td rowspan=3><a href='https://github.com/qiskit-community/intro-to-quantum-computing-and-quantum-hardware/blob/master/labs/introqcqh-lab-5.zip?raw=true'>Lab 5</a></td>
         </tr>
         <tr>
             <td>Lecture 14<br/><span class='lectitle'>Quantum Error Correction using Repetition Codes Part 2</span><br/>(Lecturer: James Wootton)</td>
@@ -142,7 +142,7 @@ margin: 10px 7%;
             <td>Lecture 16<br/><span class='lectitle'>Superconducting Qubits I: Quantizing a Harmonic Oscillator, Josephson Junctions Part 1</span><br/>(Lecturer: Zlatko Minev)</td>
             <td><a href='https://youtu.be/eZJjQGu85Ps?list=PLOFEBzvs-VvrXTMy5Y2IqmSaUjfnhvBHR'>Lecture Video</a></td>
             <td rowspan=3><a href='https://github.com/qiskit-community/intro-to-quantum-computing-and-quantum-hardware/blob/master/lectures/introqcqh-lecture-notes-6.pdf?raw=true'>Lecture Notes 6</a></td>
-            <td rowspan=3><a href='#'>Lab 6</a></td>
+            <td rowspan=3><a href='https://github.com/qiskit-community/intro-to-quantum-computing-and-quantum-hardware/blob/master/labs/introqcqh-lab-6.zip?raw=true'>Lab 6</a></td>
         </tr>
         <tr>
             <td>Lecture 17<br/><span class='lectitle'>Superconducting Qubits I: Quantizing a Harmonic Oscillator, Josephson Junctions Part 2</span><br/>(Lecturer: Zlatko Minev)</td>
@@ -156,7 +156,7 @@ margin: 10px 7%;
             <td>Lecture 19<br/><span class='lectitle'>Superconducting Qubits II: Circuit Quantum Electrodynamics, Readout and Calibration Methods Part 1</span><br/>(Lecturer: Zlatko Minev)</td>
             <td><a href='https://youtu.be/f1GpzZYIVIE?list=PLOFEBzvs-VvrXTMy5Y2IqmSaUjfnhvBHR'>Lecture Video</a></td>
             <td rowspan=3><a href='https://github.com/qiskit-community/intro-to-quantum-computing-and-quantum-hardware/blob/master/lectures/introqcqh-lecture-notes-7.pdf?raw=true'>Lecture Notes 7</a></td>
-            <td rowspan=3><a href='#'>Lab 7</a></td>
+            <td rowspan=3><a href='https://github.com/qiskit-community/intro-to-quantum-computing-and-quantum-hardware/blob/master/labs/introqcqh-lab-7.zip?raw=true'>Lab 7</a></td>
         </tr>
         <tr>
             <td>Lecture 20<br/><span class='lectitle'>Superconducting Qubits II: Circuit Quantum Electrodynamics, Readout and Calibration Methods Part 2</span><br/>(Lecturer: Zlatko Minev)</td>
@@ -170,7 +170,7 @@ margin: 10px 7%;
             <td>Lecture 22<br/><span class='lectitle'>Quantum Chemistry I: Obtaining the Qubit Hamiltonian for H2 and LiH Part 1</span><br/>(Lecturer: Antonio Mezzacapo)</td>
             <td><a href='https://youtu.be/2XEjrwWhr88?list=PLOFEBzvs-VvrXTMy5Y2IqmSaUjfnhvBHR'>Lecture Video</a></td>
             <td rowspan=3><a href='https://github.com/qiskit-community/intro-to-quantum-computing-and-quantum-hardware/blob/master/lectures/introqcqh-lecture-notes-8.pdf?raw=true'>Lecture Notes 8</a></td>
-            <td rowspan=3><a href='#'>Lab 8</a></td>
+            <td rowspan=3><a href='https://github.com/qiskit-community/intro-to-quantum-computing-and-quantum-hardware/blob/master/labs/introqcqh-lab-8.zip?raw=true'>Lab 8</a></td>
         </tr>
         <tr>
             <td>Lecture 23<br/><span class='lectitle'>Quantum Chemistry I: Obtaining the Qubit Hamiltonian for H2 and LiH Part 2</span><br/>(Lecturer: Antonio Mezzacapo)</td>
@@ -184,7 +184,7 @@ margin: 10px 7%;
             <td>Lecture 25<br/><span class='lectitle'>Quantum Chemistry II: Finding the Ground States of H2 and LiH Part 1</span><br/>(Lecturer: Abhinav Kandala)</td>
             <td><a href='https://youtu.be/p9gScAOvc5I?list=PLOFEBzvs-VvrXTMy5Y2IqmSaUjfnhvBHR'>Lecture Video</a></td>
             <td rowspan=3><a href='https://github.com/qiskit-community/intro-to-quantum-computing-and-quantum-hardware/blob/master/lectures/introqcqh-lecture-notes-9.pdf?raw=true'>Lecture Notes 9</a></td>
-            <td rowspan=3><a href='#'>Lab 9</a></td>
+            <td rowspan=3><a href='https://github.com/qiskit-community/intro-to-quantum-computing-and-quantum-hardware/blob/master/labs/introqcqh-lab-9.zip?raw=true'>Lab 9</a></td>
         </tr>
         <tr>
             <td>Lecture 26<br/><span class='lectitle'>Quantum Chemistry II: Finding the Ground States of H2 and LiH Part 2</span><br/>(Lecturer: Abhinav Kandala)</td>
@@ -221,7 +221,7 @@ margin: 10px 7%;
   <li>Lectures 22 &ndash; 27 introduce the techniques used to solve quantum chemistry problems using gate-based quantum computers, with emphasis on superconducting qubits. The first three lectures describe the structure of quantum chemistry problems and discuss methods for converting these problems into ones that can be mapped onto a gate-based quantum computer, while the next three lectures focus on extracting the best performance from the quantum hardware to solve quantum chemistry problems by implementing variational quantum eigensolvers.</li>  
 </ul>
 
-<p>The associated labs are structured as follows:</p><br/>
+<p>The associated labs are provided as zip files. Each lab comes in a zip file containing the exercises in a Jupyter notebook named <code>lab-x.ipynb</code> and solutions in another notebook named <code>lab-x-solutions.ipynb</code>. The labs are structured as follows:</p><br/>
 
 <ul class='coursedesc'>
   <li>Labs 1 and 2 support the material in lectures 1 &ndash; 6 with hands-on exercises in Qiskit. Lab 1 covers single-qubit and multi-qubit states and quantum teleportation. Lab 2 covers the implementation of Grover's algorithm using quantum circuits.</li>
