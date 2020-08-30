@@ -11,37 +11,7 @@ routeName: learn
 # About the Course
 <p>This course is an introduction to the world of quantum computing, with an exploration of some of the key quantum algorithms and their implementations using quantum circuits, as well as the quantum hardware that is designed to run these algorithms. The course was first offered during the Qiskit Global Summer School in July 2020 as a two-week intensive summer school.</p><br/><br/>
 
-<p>There are 27 lectures in this course, which cover the material in 9 lecture notes and 9 associated labs. The textbook for the course is available online: <a href='http://qiskit.org/textbook'>Learn Quantum Computation using Qiskit</a>.</p><br/><br/>
-
-<p>The structure of the course is as follows:</p><br/>
-
-<style>
-ul.coursedesc {
-  list-style-type: square;
-  line-height: 140%;
-  width: 100%;
-}
-ul.coursedesc li {
-margin: 10px 0;
-}
-</style>
-<ul class='coursedesc'>
-  <li>Lectures 1 &ndash; 6 provide an introduction to quantum computing and quantum algorithms using quantum circuits. The emphasis here is on understanding how to work with quantum states, and operate on them using quantum circuits.</li>
-  <li>Lectures 7 &ndash; 12 are designed to teach Shor's algorithm. The first three lectures focus on building intuition for the quantum Fourier transform and quantum phase estimation, while the next three lectures focus on the implementation of Shor's algorithm using quantum circuits.</li>
-  <li>Lectures 13 &ndash; 15 introduce quantum error correction using repetition and surface codes. The lectures show the kinds of errors that can happen during a quantum computation, and methods to do quantum computation in the presence of these errors.</li>
-  <li>Lectures 16 &ndash; 21 introduce the hardware used for quantum computation, with emphasis on superconducting qubits. The first three lectures discuss how to build a superconducting transmon quantum bit (qubit) out of an anharmonic oscillator using Josephson junctions, while the next three lectures focus on coupling to the qubit in a circuit quantum electrodynamics architecture.</li>
-  <li>Lectures 22 &ndash; 27 introduce the techniques used to solve quantum chemistry problems using gate-based quantum computers, with emphasis on superconducting qubits. The first three lectures describe the structure of quantum chemistry problems and discuss methods for converting these problems into ones that can be mapped onto a gate-based quantum computer, while the next three lectures focus on extracting the best performance from the quantum hardware to solve quantum chemistry problems by implementing variational quantum eigensolvers.</li>  
-</ul>
-
-<p>The associated labs are structured as follows:</p><br/>
-
-<ul class='coursedesc'>
-  <li>Labs 1 and 2 support the material in lectures 1 &ndash; 6 with hands-on exercises in Qiskit. Lab 1 covers single-qubit and multi-qubit states and quantum teleportation. Lab 2 covers the implementation of Grover's algorithm using quantum circuits.</li>
-  <li>Labs 3 and 4 support the material in lectures 7 &ndash; 12 with hands-on exercises in Qiskit. Lab 3 asks students to implement the standard quantum phase estimation algorithm, and lab 4 asks students to implement Shor's algorithm to factor 15 into 3 and 5.</li>
-  <li>Lab 5 supports the material in lectures 13 &ndash; 15 with hands-on exercises in Qiskit. It provides a hands-on exercise on implementing repetition codes and seeing their performance in the presence of noise.</li>
-  <li>Labs 6 and 7 support the material in lectures 16 &ndash; 21 with hands-on exercises in Qiskit. Lab 6 provides a hands-on exercise on driving qubits in Rabi and Ramsey experiments to calibrate the qubit's $\pi$ pulse drive strength and frequency. Lab 7 provides a hands-on exercise on qubit spectroscopy, showing how the qubit transitions 0-1 and 1-2 can be determined.</li>
-  <li>Labs 8 and 9 support the material in lectures 22 &ndash; 27 with hands-on exercises in Qiskit. Lab 8 provides a hands-on demonstration of obtaining the qubit operators for simulating the ground state of the molecule LiH. Lab 9 provides a hands-on exercise on preparing trial states for a variational quantum eigensolver, and computing the expectation values of the various Pauli operators from measurement outcomes.</li>  
-</ul>
+<p>There are 27 lectures in this course, which cover the material in 9 lecture notes and 9 associated labs. The textbook for the course is available online: <a href='http://qiskit.org/textbook'>Learn Quantum Computation using Qiskit</a>.</p>
 
 ## Prerequisites
 <p>In order to make the best out of these lectures, we strongly recommend reviewing linear algebra and brushing up on Python. Here are some recommended materials:</p><br/>
@@ -61,7 +31,7 @@ margin: 10px 0;
 <li>Basic familiarity with Python: <a href='https://qiskit.org/textbook/ch-prerequisites/python-and-jupyter-notebooks.html'>[Python prerequisites in the Qiskit Textbook]</a></li>
 </ul>
 
-## Curriculum
+# Curriculum
 <style>
 #resources td, #resources th {
   border: 1px solid #ddd;
@@ -225,6 +195,37 @@ margin: 10px 0;
         </tr>
     </tbody>
 </table>
+
+## Course Description
+<p>The structure of the course is as follows:</p><br/>
+
+<style>
+ul.coursedesc {
+  list-style-type: square;
+  line-height: 140%;
+  width: 100%;
+}
+ul.coursedesc li {
+margin: 10px 0;
+}
+</style>
+<ul class='coursedesc'>
+  <li>Lectures 1 &ndash; 6 provide an introduction to quantum computing and quantum algorithms using quantum circuits. The emphasis here is on understanding how to work with quantum states, and operate on them using quantum circuits.</li>
+  <li>Lectures 7 &ndash; 12 are designed to teach Shor's algorithm. The first three lectures focus on building intuition for the quantum Fourier transform and quantum phase estimation, while the next three lectures focus on the implementation of Shor's algorithm using quantum circuits.</li>
+  <li>Lectures 13 &ndash; 15 introduce quantum error correction using repetition and surface codes. The lectures show the kinds of errors that can happen during a quantum computation, and methods to do quantum computation in the presence of these errors.</li>
+  <li>Lectures 16 &ndash; 21 introduce the hardware used for quantum computation, with emphasis on superconducting qubits. The first three lectures discuss how to build a superconducting transmon quantum bit (qubit) out of an anharmonic oscillator using Josephson junctions, while the next three lectures focus on coupling to the qubit in a circuit quantum electrodynamics architecture.</li>
+  <li>Lectures 22 &ndash; 27 introduce the techniques used to solve quantum chemistry problems using gate-based quantum computers, with emphasis on superconducting qubits. The first three lectures describe the structure of quantum chemistry problems and discuss methods for converting these problems into ones that can be mapped onto a gate-based quantum computer, while the next three lectures focus on extracting the best performance from the quantum hardware to solve quantum chemistry problems by implementing variational quantum eigensolvers.</li>  
+</ul>
+
+<p>The associated labs are structured as follows:</p><br/>
+
+<ul class='coursedesc'>
+  <li>Labs 1 and 2 support the material in lectures 1 &ndash; 6 with hands-on exercises in Qiskit. Lab 1 covers single-qubit and multi-qubit states and quantum teleportation. Lab 2 covers the implementation of Grover's algorithm using quantum circuits.</li>
+  <li>Labs 3 and 4 support the material in lectures 7 &ndash; 12 with hands-on exercises in Qiskit. Lab 3 covers the implementation of standard quantum phase estimation, and lab 4 implements Shor's algorithm to factor 15 into 3 and 5.</li>
+  <li>Lab 5 supports the material in lectures 13 &ndash; 15 with hands-on exercises in Qiskit. It provides a hands-on exercise on implementing repetition codes and seeing their performance in the presence of noise.</li>
+  <li>Labs 6 and 7 support the material in lectures 16 &ndash; 21 with hands-on exercises in Qiskit. Lab 6 provides a hands-on exercise on driving qubits in Rabi and Ramsey experiments to calibrate the qubit's $\pi$ pulse drive strength and frequency. Lab 7 provides a hands-on exercise on qubit spectroscopy, showing how the qubit transitions 0-1 and 1-2 can be determined.</li>
+  <li>Labs 8 and 9 support the material in lectures 22 &ndash; 27 with hands-on exercises in Qiskit. Lab 8 provides a hands-on demonstration of obtaining the qubit operators for simulating the ground state of the molecule LiH. Lab 9 provides a hands-on exercise on preparing trial states for a variational quantum eigensolver, and computing the expectation values of the various Pauli operators from measurement outcomes.</li>  
+</ul>
 
 ## Contributors
 The lectures and labs were prepared and delivered by Abraham Asfaw, Elisa B&auml;umer, James Wootton, Zlatko Minev, Antonio Mezzacapo and Abhinav Kandala. Nicholas Bronn created labs 6 and 7.
