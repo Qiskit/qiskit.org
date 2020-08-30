@@ -31,7 +31,7 @@ You can [brush up on Python programming](https://qiskit.org/textbook/ch-prerequi
 }
 
 #resources {
-  width: 100%;
+  width: 120%;
 }
 
 </style>
