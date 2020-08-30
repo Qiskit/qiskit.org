@@ -8,7 +8,7 @@ nav:
 routeName: learn
 ---
 
-# About the Course
+## About the Course
 <p>This course is an introduction to the world of quantum computing, with an exploration of some of the key quantum algorithms and their implementations using quantum circuits, as well as the quantum hardware that is designed to run these algorithms. The course was first offered during the Qiskit Global Summer School in July 2020 as a two-week intensive summer school.</p><br/><br/>
 
 <p>There are 27 lectures in this course, which cover the material in 9 lecture notes and 9 associated labs. The textbook for the course is available online: <a href='http://qiskit.org/textbook'>Learn Quantum Computation using Qiskit</a>.</p>
@@ -30,7 +30,7 @@ margin: 10px 10%;
 <li>Basic familiarity with Python: <a href='https://qiskit.org/textbook/ch-prerequisites/python-and-jupyter-notebooks.html'>[Python prerequisites in the Qiskit Textbook]</a></li>
 </ul>
 
-# Curriculum
+## Curriculum
 <style>
 #resources td, #resources th {
   border: 1px solid #ddd;
@@ -204,7 +204,7 @@ ul.coursedesc {
   line-height: 140%;
 }
 ul.coursedesc li {
-margin: 10px 10%;
+margin: 10px 7%;
 }
 </style>
 <ul class='coursedesc'>
