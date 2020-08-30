@@ -14,6 +14,40 @@ Minimal prerequisites are required for the Qiskit Global Summer School. If you k
 You can [brush up on Python programming](https://qiskit.org/textbook/ch-prerequisites/python-and-jupyter-notebooks.html) before attending the lectures by using the Qiskit Textbook. To make the most out of these lectures, you may also consider looking through the [linear algebra prerequisites](https://qiskit.org/textbook/ch-prerequisites/linear_algebra.html) section of the Qiskit Textbook.
 
 ## Curriculum
+<table>
+    <thead>
+        <tr>
+            <th>Lecture</th>
+            <th>Notes</th>
+            <th>Lab</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>L1</td>
+            <td rowspan=3>L1-3 notes</td>
+            <td rowspan=3>L1-3 Lab</td>
+        </tr>
+        <tr>
+            <td>L2</td>
+        </tr>
+        <tr>
+            <td>L3</td>
+        </tr>
+        <tr>
+            <td>L4</td>
+            <td rowspan=3>L4-6 notes</td>
+            <td rowspan=3>L4-6 Lab</td>
+        </tr>
+        <tr>
+            <td>L5</td>
+        </tr>
+        <tr>
+            <td>L6</td>
+        </tr>
+    </tbody>
+</table>
+
 | | | | |
 |-|-|-|-|
 | Lecture 1<br/>__Qubits and Quantum States, Quantum Circuits, Measurements Part 1__<br/>(Lecturer: Elisa B&auml;umer) | [Lecture Video](https://youtu.be/NZD9APb7ZtY?list=PLOFEBzvs-VvrXTMy5Y2IqmSaUjfnhvBHR) | [Lecture Notes 1](https://github.com/qiskit-community/intro-to-quantum-computing-and-quantum-hardware/blob/master/lectures/introqcqh-lecture-notes-1.pdf?raw=true) | [Lab 1](#) |
