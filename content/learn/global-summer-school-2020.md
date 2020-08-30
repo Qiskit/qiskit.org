@@ -29,6 +29,11 @@ You can [brush up on Python programming](https://qiskit.org/textbook/ch-prerequi
 #resources td.hmerged {
   text-align: center;
 }
+
+#resources {
+  width: 100%;
+}
+
 </style>
 <table id='resources'>
     <thead>
@@ -168,7 +173,7 @@ You can [brush up on Python programming](https://qiskit.org/textbook/ch-prerequi
         </tr>
         <tr>
         	<td>Panel Discussion<br/><span class='lectitle'>Careers in Quantum Computing</span><br/>(Hosted by Amira Abbas)</td>
-            <td colspan=3 class='hmerged'><a href='https://www.youtube.com/watch?v=7dfw8k2p1to'>Video</a></td>
+            <td colspan=3 class='hmerged'><a href='https://youtu.be/7dfw8k2p1to?list=PLOFEBzvs-VvrXTMy5Y2IqmSaUjfnhvBHR'>Video</a></td>
         </tr>
     </tbody>
 </table>
