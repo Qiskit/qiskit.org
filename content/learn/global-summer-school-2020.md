@@ -19,10 +19,9 @@ routeName: learn
 <style>
 #prereqs {
   list-style-type: square;
-  width: 100%;
 }
 #prereqs li{
-margin: 10px 0;
+margin: 10px 10%;
 }
 
 </style>
@@ -203,7 +202,6 @@ margin: 10px 0;
 ul.coursedesc {
   list-style-type: square;
   line-height: 140%;
-  width: 100%;
 }
 ul.coursedesc li {
 margin: 10px 10%;
