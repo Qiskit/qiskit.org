@@ -13,13 +13,16 @@ routeName: learn
 
 <p>There are 27 lectures in this course, which cover the material in 9 lecture notes and 9 associated labs. The textbook for the course is available online: <a href='http://qiskit.org/textbook'>Learn Quantum Computation using Qiskit</a>.</p><br/><br/>
 
-<p>The structure of the course is as follows:</p>
+<p>The structure of the course is as follows:</p><br/>
 
 <style>
 #coursedesc {
   list-style-type: square;
   line-height: 140%;
   width: 100%;
+}
+#coursedesc li {
+margin: 10px 0;
 }
 </style>
 <ul id='coursedesc'>
@@ -36,9 +39,12 @@ routeName: learn
 <style>
 #prereqs {
   list-style-type: square;
-  line-height: 140%;
   width: 100%;
 }
+#prereqs li{
+margin: 10px 0;
+}
+
 </style>
 <ul id='prereqs'>
 <li>Multiplying two matrices, introductory linear algebra: <a href='https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:matrices/x9e81a4f98389efdf:multiplying-matrices-by-matrices/v/matrix-multiplication-intro'>[Khan Academy]</a> <a href='https://qiskit.org/textbook/ch-prerequisites/linear_algebra.html'>[Linear algebra prerequisites in the Qiskit Textbook]</a></li>
