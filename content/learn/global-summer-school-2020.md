@@ -3,8 +3,14 @@ title: Introduction to Quantum Computing and Quantum Hardware
 tagline: An introduction to the world of quantum computing, with an exploration of some of the key quantum algorithms and their implementations, as well as the quantum hardware that is designed to run these algorithms. The course was first offered during the Qiskit Global Summer School in July 2020 as a two-week intensive summer school.
 description: An introduction to the world of quantum computing, with an exploration of some of the key quantum algorithms and their implementations, as well as the quantum hardware that is designed to run these algorithms. The course was first offered during the Qiskit Global Summer School in July 2020 as a two-week intensive summer school.
 nav:
+  - text: About the Course
+    goTo: '#about-the-course'
   - text: Curriculum
     goTo: '#curriculum'
+  - text: Course Description
+    goTo: '#course-description'
+  - text: Contributors
+    goTo: '#contributors'
 routeName: learn
 ---
 
@@ -21,7 +27,7 @@ routeName: learn
   list-style-type: square;
 }
 #prereqs li{
-margin: 10px 10%;
+margin: 10px 7%;
 }
 
 </style>
@@ -226,13 +232,15 @@ margin: 10px 7%;
 </ul>
 
 ## Contributors
-The lectures and labs were prepared and delivered by Abraham Asfaw, Elisa B&auml;umer, James Wootton, Zlatko Minev, Antonio Mezzacapo and Abhinav Kandala. Nicholas Bronn created labs 6 and 7.
+The lectures and labs were prepared and delivered by Abraham Asfaw, Elisa B&auml;umer, James Wootton, Zlatko Minev, Nicholas Bronn, Antonio Mezzacapo and Abhinav Kandala.
 <br/><br/>
-During the delivery of the lectures in 2020 as part of the Qiskit Global Summer School, Brian Ingmanson, Susan Kirschner and Josie Kies hosted the lectures. Amira Abbas hosted the discussion on careers in quantum computing, which included Jay Gambetta, Steve Girvin, John Preskill, Marina Radulaski, Monika Schleier-Smith, Brigitta Whaley. Paul Searle edited the videos as they appear above.
+During the delivery of the lectures in 2020 as part of the Qiskit Global Summer School, Brian Ingmanson, Susan Kirschner and Josie Kies hosted the lectures. Amira Abbas hosted the discussion on careers in quantum computing, which included Jay Gambetta, Steve Girvin, John Preskill, Marina Radulaski, Monika Schleier-Smith, Brigitta Whaley. Paul Searle edited the videos.
 
 ## Usage and Citation
 If you use the lectures and labs in your course, you can gain access to the [IBM Quantum Educators Program](https://quantum-computing.ibm.com/programs/educators). Please cite the material as <br/><br/>
 
-> Introduction to Quantum Computing and Quantum Hardware; IBM Quantum team (2020).
+<blockquote>
+	Introduction to Quantum Computing and Quantum Hardware; IBM Quantum team (2020).
+<blockquote>
 
 <br/><br/>
