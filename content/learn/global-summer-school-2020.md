@@ -9,7 +9,7 @@ routeName: learn
 ---
 
 ## Prerequisites
-Minimal prerequisites are required for the Qiskit Global Summer School. If you know [how to multiply two matrices](https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:matrices/x9e81a4f98389efdf:multiplying-matrices-by-matrices/v/matrix-multiplication-intro), and have some programming experience in Python, you are ready for the Qiskit Global Summer School.
+Minimal prerequisites are required for the Qiskit Global Summer School. If you know [how to multiply two matrices](https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:matrices/x9e81a4f98389efdf:multiplying-matrices-by-matrices/v/matrix-multiplication-intro), and have some programming experience in Python, you are ready for the Qiskit Global Summer School. Test.
 
 You can [brush up on Python programming](https://qiskit.org/textbook/ch-prerequisites/python-and-jupyter-notebooks.html) before attending the lectures by using the Qiskit Textbook. To make the most out of these lectures, you may also consider looking through the [linear algebra prerequisites](https://qiskit.org/textbook/ch-prerequisites/linear_algebra.html) section of the Qiskit Textbook.
 
