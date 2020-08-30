@@ -9,11 +9,11 @@ routeName: learn
 ---
 
 # About the Course
-This course is an introduction to the world of quantum computing, with an exploration of some of the key quantum algorithms and their implementations using quantum circuits, as well as the quantum hardware that is designed to run these algorithms. The course was first offered during the Qiskit Global Summer School in July 2020 as a two-week intensive summer school.
+<p>This course is an introduction to the world of quantum computing, with an exploration of some of the key quantum algorithms and their implementations using quantum circuits, as well as the quantum hardware that is designed to run these algorithms. The course was first offered during the Qiskit Global Summer School in July 2020 as a two-week intensive summer school.</p>
 
-There are 27 lectures in this course, which cover the material in 9 lecture notes and 9 associated labs. The textbook for the course is available online: [_Learn Quantum Computation using Qiskit_](http://qiskit.org/textbook).
+<p>There are 27 lectures in this course, which cover the material in 9 lecture notes and 9 associated labs. The textbook for the course is available online: [_Learn Quantum Computation using Qiskit_](http://qiskit.org/textbook).</p>
 
-The structure of the course is as follows:
+<p>The structure of the course is as follows:</p>
 
 <ul>
   <li>Lectures 1 -- 6 provide an introduction to quantum computing and quantum algorithms using quantum circuits. The emphasis here is on understanding how to work with quantum states, and operate on them using quantum circuits. Labs 1 and 2 support the material in these lectures, and provide hands-on exercises in Qiskit. Lab 1 covers single-qubit and multi-qubit states and quantum teleportation.</li>
@@ -24,11 +24,11 @@ The structure of the course is as follows:
 </ul>
 
 ## Prerequisites
-In order to make the best out of these lectures, we strongly recommend reviewing matrix algebra and brushing up on Python. Here are some recommended materials:
+<p>In order to make the best out of these lectures, we strongly recommend reviewing linear algebra and brushing up on Python. Here are some recommended materials:</p>
 
 <ul>
-<li>Multiplying two matrices: [Khan Academy](https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:matrices/x9e81a4f98389efdf:multiplying-matrices-by-matrices/v/matrix-multiplication-intro) [Linear algebra prerequisites in the Qiskit Textbook](https://qiskit.org/textbook/ch-prerequisites/linear_algebra.html)</li>
-<li>Basic familiarity with Python: [Python prerequisites in the Qiskit Textbook](https://qiskit.org/textbook/ch-prerequisites/python-and-jupyter-notebooks.html)</li>
+<li>Multiplying two matrices, introductory linear algebra: <a href='https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:matrices/x9e81a4f98389efdf:multiplying-matrices-by-matrices/v/matrix-multiplication-intro'>[Khan Academy]</a> <a href='https://qiskit.org/textbook/ch-prerequisites/linear_algebra.html'>[Linear algebra prerequisites in the Qiskit Textbook]</a></li>
+<li>Basic familiarity with Python: <a href='https://qiskit.org/textbook/ch-prerequisites/python-and-jupyter-notebooks.html'>[Python prerequisites in the Qiskit Textbook]</a></li>
 </ul>
 
 ## Curriculum
