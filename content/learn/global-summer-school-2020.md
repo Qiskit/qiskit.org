@@ -19,38 +19,53 @@ You can [brush up on Python programming](https://qiskit.org/textbook/ch-prerequi
   border: 1px solid #ddd;
   padding: 8px;
   vertical-align: middle;
+  line-height: 120%;
+}
+
+#resources span.lectitle {
+  font-weight: bold;
 }
 </style>
 <table id='resources'>
     <thead>
         <tr>
             <th>Lecture</th>
+            <th>Video</th>
             <th>Notes</th>
             <th>Lab</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>L1</td>
-            <td rowspan=3>L1-3 notes</td>
-            <td rowspan=3>L1-3 Lab</td>
+            <td>Lecture 1<br/><span class='lectitle'>Qubits and Quantum States, Quantum Circuits, Measurements Part 1</span><br/>(Lecturer: Elisa B&auml;umer)</td>
+            <td><a href='#'>Lecture Video</a></td>
+            <td rowspan=3><a href='#'>Lecture Notes 1</a></td>
+            <td rowspan=3><a href='#'>Lab 1</a></td>
         </tr>
         <tr>
-            <td>L2</td>
+            <td>Lecture 2<br/><span class='lectitle'>Qubits and Quantum States, Quantum Circuits, Measurements Part 2</span><br/>(Lecturer: Elisa B&auml;umer)</td>
+            <td><a href='#'>Lecture Video</a></td>
         </tr>
         <tr>
-            <td>L3</td>
+            <td>Lecture 3<br/><span class='lectitle'>Qubits and Quantum States, Quantum Circuits, Measurements Part 3</span><br/>(Lecturer: Elisa B&auml;umer)</td>
+            <td><a href='#'>Lecture Video</a></td>
+        </tr>
+        <!-- 
+        
+        -->
+        <tr>
+            <td>Lecture 4<br/><span class='lectitle'>Writing and Running Quantum Programs Part 1</span><br/>(Lecturer: Elisa B&auml;umer)</td>
+            <td><a href='#'>Lecture Video</a></td>
+            <td rowspan=3><a href='#'>Lecture Notes 2</a></td>
+            <td rowspan=3><a href='#'>Lab 1</a></td>
         </tr>
         <tr>
-            <td>L4</td>
-            <td rowspan=3>L4-6 notes</td>
-            <td rowspan=3>L4-6 Lab</td>
+            <td>Lecture 5<br/><span class='lectitle'>Writing and Running Quantum Programs Part 2</span><br/>(Lecturer: Elisa B&auml;umer)</td>
+            <td><a href='#'>Lecture Video</a></td>
         </tr>
         <tr>
-            <td>L5</td>
-        </tr>
-        <tr>
-            <td>L6</td>
+            <td>Lecture 6<br/><span class='lectitle'>Writing and Running Quantum Programs Part 3</span><br/>(Lecturer: Elisa B&auml;umer)</td>
+            <td><a href='#'>Lecture Video</a></td>
         </tr>
     </tbody>
 </table>
