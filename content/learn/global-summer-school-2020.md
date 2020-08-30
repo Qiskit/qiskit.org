@@ -18,10 +18,8 @@ You can [brush up on Python programming](https://qiskit.org/textbook/ch-prerequi
 Each day of the Qiskit Global Summer School consists of 3 hours of lectures followed by an hour-long hands-on programming lab where we implement quantum programs in Qiskit.
 
 
-|   Lecture   | 
-|   -------   |
-| Lecture 1: Qubits and Quantum States, Quantum Circuits, Measurements (Elisa B&auml;umer)<br>
-[Lecture Video](https://www.youtube.com/watch?v=NZD9APb7ZtY) [Lecture Notes](#) [Lab](#)  |
+| | | | |
+| Lecture 1: Qubits and Quantum States, Quantum Circuits, Measurements (Elisa B&auml;umer) | [Lecture Video](https://www.youtube.com/watch?v=NZD9APb7ZtY) | [Lecture Notes](#) | [Lab](#) |
 
 ## Learn how to build your career on quantum computing!
 
