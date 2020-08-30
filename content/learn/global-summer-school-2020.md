@@ -50,8 +50,6 @@ You can [brush up on Python programming](https://qiskit.org/textbook/ch-prerequi
             <td>Lecture 3<br/><span class='lectitle'>Qubits and Quantum States, Quantum Circuits, Measurements Part 3</span><br/>(Lecturer: Elisa B&auml;umer)</td>
             <td><a href='#'>Lecture Video</a></td>
         </tr>
-
-
         <tr>
             <td>Lecture 4<br/><span class='lectitle'>Writing and Running Quantum Programs Part 1</span><br/>(Lecturer: Elisa B&auml;umer)</td>
             <td><a href='#'>Lecture Video</a></td>
