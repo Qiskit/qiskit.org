@@ -235,7 +235,7 @@ margin: 10px 7%;
 ## Contributors
 The lectures and labs were prepared and delivered by Abraham Asfaw, Elisa B&auml;umer, James Wootton, Zlatko Minev, Nicholas Bronn, Antonio Mezzacapo and Abhinav Kandala.
 <br/><br/>
-During the delivery of the lectures in 2020 as part of the Qiskit Global Summer School, Brian Ingmanson, Susan Kirschner and Josie Kies hosted the lectures. Amira Abbas hosted the discussion on careers in quantum computing, which included Jay Gambetta, Steve Girvin, John Preskill, Marina Radulaski, Monika Schleier-Smith, Brigitta Whaley. Paul Searle edited the videos.
+During the delivery of the lectures in 2020 as part of the Qiskit Global Summer School, Brian Ingmanson, Susan Kirschner and Josie Kies hosted the lectures. Amira Abbas hosted the discussion on careers in quantum computing, which included Jay Gambetta, Steve Girvin, John Preskill, Marina Radulaski, Monika Schleier-Smith, Birgitta Whaley. Paul Searle edited the videos.
 
 ## Usage and Citation
 If you use the lectures and labs in your course, you can gain access to the [IBM Quantum Educators Program](https://quantum-computing.ibm.com/programs/educators). Please cite the material as <br/><br/>
