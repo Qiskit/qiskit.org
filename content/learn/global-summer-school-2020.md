@@ -43,16 +43,14 @@ You can [brush up on Python programming](https://qiskit.org/textbook/ch-prerequi
 | Lecture 25<br/>__Quantum Chemistry II: Finding the Ground States of H2 and LiH Part 1__<br/>(Abhinav Kandala) | [Lecture Video](https://youtu.be/p9gScAOvc5I?list=PLOFEBzvs-VvrXTMy5Y2IqmSaUjfnhvBHR) | [Lecture Notes](#) | [Lab](#) |
 | Lecture 26<br/>__Quantum Chemistry II: Finding the Ground States of H2 and LiH Part 2__<br/>(Abhinav Kandala) | [Lecture Video](https://youtu.be/_UW6puuGa5E?list=PLOFEBzvs-VvrXTMy5Y2IqmSaUjfnhvBHR) | [Lecture Notes](#) | [Lab](#) |
 | Lecture 27<br/>__Quantum Chemistry II: Finding the Ground States of H2 and LiH Part 3__<br/>(Abhinav Kandala) | [Lecture Video](https://youtu.be/o4BAOKbcd3o?list=PLOFEBzvs-VvrXTMy5Y2IqmSaUjfnhvBHR) | [Lecture Notes](#) | [Lab](#) |
-
-## Learn how to build your career on quantum computing!
-[![Qubits and Quantum States, Quantum Circuits, Measurements](https://res.cloudinary.com/marcomontalbano/image/upload/v1597795921/video_to_markdown/images/youtube--7dfw8k2p1to-c05b58ac6eb4c4700831b2b3070cd403.jpg)](https://www.youtube.com/watch?v=7dfw8k2p1to "Qubits and Quantum States, Quantum Circuits, Measurements") 
+| __Careers in Quantum Computing__<br/>(Hosted by Amira Abbas) | [Discussion](https://www.youtube.com/watch?v=7dfw8k2p1to) | | |
 
 ## Contributors
-The lectures and labs were prepared and delivered by Abraham Asfaw, Elisa B&auml;umer, James Wootton, Zlatko Minev, Antonio Mezzacapo and Abhinav Kandala. Nicholas Bronn created labs 6 and 7. 
+<p>The lectures and labs were prepared and delivered by Abraham Asfaw, Elisa B&auml;umer, James Wootton, Zlatko Minev, Antonio Mezzacapo and Abhinav Kandala. Nicholas Bronn created labs 6 and 7.</p>
 
-During the delivery of the lectures in 2020 as part of the Qiskit Global Summer School, Brian Ingmanson, Susan Kirschner and Josie Kies hosted the lectures. Paul Searle edited the videos as they appear above.
+<p>During the delivery of the lectures in 2020 as part of the Qiskit Global Summer School, Brian Ingmanson, Susan Kirschner and Josie Kies hosted the lectures. Amira Abbas hosted the discussion on careers in quantum computing, which included Jay Gambetta, Steve Girvin, John Preskill, Marina Radulaski, Monika Schleier-Smith, Brigitta Whaley. Paul Searle edited the videos as they appear above.</p>
 
 ## Usage and Citation
-If you use the lectures and labs in your course, you can gain access to the [IBM Quantum Educators Program](https://quantum-computing.ibm.com/programs/educators). Please cite the material as
+If you use the lectures and labs in your course, you can gain access to the [IBM Quantum Educators Program](https://quantum-computing.ibm.com/programs/educators). Please cite the material as <br>
 
 > Introduction to Quantum Computing and Quantum Hardware; IBM Quantum team (2020).
