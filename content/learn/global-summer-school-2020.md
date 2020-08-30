@@ -16,7 +16,7 @@ You can [brush up on Python programming](https://qiskit.org/textbook/ch-prerequi
 ## Curriculum
 | | | | |
 |-|-|-|-|
-| __Lecture 1: Qubits and Quantum States, Quantum Circuits, Measurements Part 1 (Elisa B&auml;umer)__ | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
+| __Lecture 1<br/>Qubits and Quantum States, Quantum Circuits, Measurements Part 1 (Elisa B&auml;umer)__ | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
 | __Lecture 2: Qubits and Quantum States, Quantum Circuits, Measurements Part 2 (Elisa B&auml;umer)__ | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
 | __Lecture 3: Qubits and Quantum States, Quantum Circuits, Measurements Part 3 (Elisa B&auml;umer)__ | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
 | __Lecture 4: Writing and Running Quantum Programs Part 1 (Elisa B&auml;umer)__ | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
