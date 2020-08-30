@@ -22,9 +22,9 @@ You can [brush up on Python programming](https://qiskit.org/textbook/ch-prerequi
 | Lecture 4<br/>__Writing and Running Quantum Programs Part 1__<br/>(Elisa B&auml;umer) | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
 | Lecture 5<br/>__Writing and Running Quantum Programs Part 2__<br/>(Elisa B&auml;umer) | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
 | Lecture 6<br/>__Writing and Running Quantum Programs Part 3__<br/>(Elisa B&auml;umer) | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
-| Lecture 7<br/>__Shor's Algorithm I: Understanding Quantum Fourier Transform, Quantum Phase Estimation Part 1__<br/>(Abraham Asfaw) | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
-| Lecture 8<br/>__Shor's Algorithm I: Understanding Quantum Fourier Transform, Quantum Phase Estimation Part 2__<br/>(Abraham Asfaw) | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
-| Lecture 9<br/>__Shor's Algorithm I: Understanding Quantum Fourier Transform, Quantum Phase Estimation Part 3__<br/>(Abraham Asfaw) | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
+| Lecture 7<br/>__Shor's Algorithm I: Quantum Fourier Transform, Quantum Phase Estimation Part 1__<br/>(Abraham Asfaw) | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
+| Lecture 8<br/>__Shor's Algorithm I: Quantum Fourier Transform, Quantum Phase Estimation Part 2__<br/>(Abraham Asfaw) | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
+| Lecture 9<br/>__Shor's Algorithm I: Quantum Fourier Transform, Quantum Phase Estimation Part 3__<br/>(Abraham Asfaw) | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
 | Lecture 10<br/>__Shor's Algorithm II: From Factoring to Period-Finding, Writing the Quantum Program Part 1__<br/>(Abraham Asfaw) | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
 | Lecture 11<br/>__Shor's Algorithm II: From Factoring to Period-Finding, Writing the Quantum Program Part 2__<br/>(Abraham Asfaw) | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
 | Lecture 12<br/>__Shor's 	Algorithm II: From Factoring to Period-Finding, Writing the Quantum Program Part 3__<br/>(Abraham Asfaw) | [Lecture Video]() | [Lecture Notes](#) | [Lab](#) |
