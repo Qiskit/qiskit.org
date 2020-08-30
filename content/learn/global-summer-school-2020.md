@@ -24,12 +24,13 @@ routeName: learn
 </ul>
 
 ## Prerequisites
-<p>In order to make the best out of these lectures, we strongly recommend reviewing linear algebra and brushing up on Python. Here are some recommended materials:</p>
+<p>In order to make the best out of these lectures, we strongly recommend reviewing linear algebra and brushing up on Python. Here are some recommended materials:</p><br/>
 
 <style>
 #prereqs {
   list-style-type: square;
   line-height: 140%;
+  width: 100%;
 }
 
 </style>
