@@ -26,7 +26,14 @@ routeName: learn
 ## Prerequisites
 <p>In order to make the best out of these lectures, we strongly recommend reviewing linear algebra and brushing up on Python. Here are some recommended materials:</p>
 
-<ul>
+<style>
+#prereqs {
+  list-style-type: square;
+  line-height: 140%;
+}
+
+</style>
+<ul id='prereqs'>
 <li>Multiplying two matrices, introductory linear algebra: <a href='https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:matrices/x9e81a4f98389efdf:multiplying-matrices-by-matrices/v/matrix-multiplication-intro'>[Khan Academy]</a> <a href='https://qiskit.org/textbook/ch-prerequisites/linear_algebra.html'>[Linear algebra prerequisites in the Qiskit Textbook]</a></li>
 <li>Basic familiarity with Python: <a href='https://qiskit.org/textbook/ch-prerequisites/python-and-jupyter-notebooks.html'>[Python prerequisites in the Qiskit Textbook]</a></li>
 </ul>
