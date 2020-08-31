@@ -171,7 +171,7 @@ margin: 10px 7%;
             <td>Lecture 22<br/><span class='lectitle'>Quantum Chemistry I: Obtaining the Qubit Hamiltonian for H2 and LiH Part 1</span><br/>(Lecturer: Antonio Mezzacapo)</td>
             <td><a href='https://youtu.be/2XEjrwWhr88?list=PLOFEBzvs-VvrXTMy5Y2IqmSaUjfnhvBHR'>Lecture Video</a></td>
             <td rowspan=3><a href='https://github.com/qiskit-community/intro-to-quantum-computing-and-quantum-hardware/blob/master/lectures/introqcqh-lecture-notes-8.pdf?raw=true'>Lecture Notes 8</a></td>
-            <td rowspan=3><a href='https://github.com/qiskit-community/intro-to-quantum-computing-and-quantum-hardware/blob/master/labs/introqcqh-lab-8.zip?raw=true'>Lab 8</a><br/><a href='#'>Video</a></td>
+            <td rowspan=3><a href='https://github.com/qiskit-community/intro-to-quantum-computing-and-quantum-hardware/blob/master/labs/introqcqh-lab-8.zip?raw=true'>Lab 8</a><br/><a href='https://www.youtube.com/watch?v=DMosNL68b6Q&list=PLOFEBzvs-VvrXTMy5Y2IqmSaUjfnhvBHR&index=30'>Video</a></td>
         </tr>
         <tr>
             <td>Lecture 23<br/><span class='lectitle'>Quantum Chemistry I: Obtaining the Qubit Hamiltonian for H2 and LiH Part 2</span><br/>(Lecturer: Antonio Mezzacapo)</td>
