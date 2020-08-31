@@ -26,7 +26,7 @@ async function fetchCommunityEvents (apiKey: string, { days }): Promise<Communit
   const { startDate, published } = RECORD_FIELDS
   const communityEvents: CommunityEvent[] = []
   const base = new Airtable({ apiKey }).base('appkaaRF2QdwfusP1')
-  await base('Events Master View').select({
+  await base('Events Main View').select({
     fields: Object.values(RECORD_FIELDS),
     filterByFormula: `AND(
       DATETIME_DIFF({${startDate}}, TODAY(), 'days') ${days > 0 ? '<=' : '>='} ${days},
