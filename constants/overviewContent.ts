@@ -79,7 +79,7 @@ const RESEARCH_APPS: OverviewSection = {
       title: 'Machine Learning',
       content: {
         image: '/images/overview/applications/machine-learning.png',
-        description: 'The Qiskit Machine Learning package simply contains sample datasets at present. Qiskit has some classification algorithms such as QSVM and VQC (Variational Quantum Classifier), where this data can be used for experiments, and there is also QGAN (Quantum Generative Adversarial Network) algorithm.',
+        description: 'The Qiskit Machine Learning package simply contains sample datasets at present. Qiskit has some classification algorithms such as QSVM (Quantum Support Vector Machine) and VQC (Variational Quantum Classifier), where this data can be used for experiments, and there is also QGAN (Quantum Generative Adversarial Network) algorithm.',
         cta: {
           label: 'Classify data with a VQC',
           url: 'https://github.com/Qiskit/qiskit-aqua#creating-your-first-machine-learning-programming-experiment-in-qiskit'
@@ -143,7 +143,7 @@ const ALGORITHMS_COLLECTION: OverviewSection = {
       title: 'QAOA',
       content: {
         image: '/images/overview/algorithms/qaoa.png',
-        description: 'QAOA is also part of the minimum eigensolvers category. This algorithm extends VQE and inherits VQE\'s general optimization structure but uses its own fine-tuned variational form.',
+        description: 'QAOA (Quantum Approximate Optimization Algorithm) is also part of the minimum eigensolvers category. This algorithm extends VQE (Variational Quantum Eigensolver) and inherits VQE\'s general optimization structure but uses its own fine-tuned variational form.',
         cta: {
           label: 'Try out QAOA',
           url: 'https://qiskit.org/documentation/stubs/qiskit.aqua.algorithms.QAOA.html#qiskit.aqua.algorithms.QAOA'
@@ -154,7 +154,7 @@ const ALGORITHMS_COLLECTION: OverviewSection = {
       title: 'QSVM',
       content: {
         image: '/images/overview/algorithms/qsvm.png',
-        description: 'QSVM is  part of the classifiers category and applies to problems that require a feature map for which computing the collection of inner products is not efficient classically. ',
+        description: 'QSVM (Quantum Support Vector Machine) is  part of the classifiers category and applies to problems that require a feature map for which computing the collection of inner products is not efficient classically. ',
         cta: {
           label: 'Try out QSVM',
           url: 'https://qiskit.org/documentation/apidoc/qiskit.aqua.algorithms.html#classifiers'
