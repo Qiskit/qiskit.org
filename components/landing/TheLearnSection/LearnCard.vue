@@ -41,7 +41,7 @@ export default class extends Vue {}
   display: flex;
 
   @include mq($until: large) {
-    height: 10rem;
+    height: auto;
   }
 
   &__content {
