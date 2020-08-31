@@ -38,6 +38,7 @@ export default class extends QiskitPage {
 </script>
 
 <style lang="scss">
+@import '~/assets/scss/blocks/copy.scss';
 @import '~carbon-components/scss/globals/scss/typography';
 
 .learn-entry {
@@ -71,56 +72,134 @@ export default class extends QiskitPage {
 
   &__content {
     @include contained();
-      background-color: transparent;
-      background-image: none;
+    background-color: transparent;
+    background-image: none;
 
-    a {
-      text-decoration: none;
-    }
+    // Same as copy__paragraph
+    p {
+      @include type-style('body-long-01');
+      color: $cool-gray-80;
+      margin-bottom: $layout-03;
 
-    h2 {
-      padding-top: 4rem;
-      margin: 0 0 2rem;
-      color: #0A1D8F;
+      @include mq($from: medium, $until: large) {
+        @include type-style('label-01');
+        margin-bottom: $layout-01;
+      }
 
-      &::before {
-        content: "";
-        float: left;
-        width: 5%;
-        margin-top: 0.5rem;
-        margin-right: 5%;
-        border-top: 1px solid #0A1D8F;
+      @include mq($until: medium) {
+        @include type-style('label-01');
+        margin-bottom: $layout-01;
       }
     }
 
-    h3 {
-      font-weight: bold;
-      margin-top: 2.5rem;
-      margin-bottom: 1rem;
+    // Same as copy__link
+    a {
+      @include type-style('body-long-01');
+      color: $purple-70;
+      text-decoration: none;
+
+      @include mq($from: medium, $until: large) {
+        @include type-style('label-01');
+      }
+
+      @include mq($until: medium) {
+        @include type-style('label-01');
+      }
     }
 
-    h3 strong {
-      font-weight: bold;
+    code {
+      background-color: $purple-10;
+      padding: $spacing-01;
+    }
+
+    blockquote {
+      position: relative;
+      background-color: $purple-30;
+      padding: $spacing-07;
+      margin-bottom: $layout-03;
+
+      &::before {
+        @include type-style('display-02');
+        content: '”';
+        color: $purple-80;
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: $spacing-02 $spacing-03;
+      }
+
+      *:last-child {
+        margin-bottom: 0;
+      }
+
+      @include mq($from: medium, $until: large) {
+        margin-bottom: $layout-01;
+      }
+
+      @include mq($until: medium) {
+        margin-bottom: $layout-01;
+      }
+    }
+
+    // Same as copy__title
+    h2 {
+      @include type-style('expressive-heading-05');
+      margin-bottom: $layout-03;
+      color: $cool-gray-80;
+
+      @include mq($from: medium, $until: large) {
+        @include type-style('expressive-heading-03');
+        font-weight: 300;
+        margin-bottom: $layout-01;
+      }
+
+      @include mq($until: medium) {
+        @include type-style('expressive-heading-03');
+        font-weight: 300;
+        margin-bottom: $layout-01;
+      }
+    }
+
+    ul {
+      @include type-style('body-long-01');
+      list-style-type: square;
+      color: $cool-gray-80;
+      margin-bottom: $layout-03;
+
+      @include mq($from: medium, $until: large) {
+        @include type-style('label-01');
+        margin-bottom: $layout-01;
+      }
+
+      @include mq($until: medium) {
+        @include type-style('label-01');
+        margin-bottom: $layout-01;
+      }
+
+      li {
+        margin-left: $layout-04;
+        margin-top: $layout-01;
+
+        li {
+          margin-left: $layout-03;
+        }
+      }
     }
 
     table {
-      margin: $layout-05 5% 0 5%;
-    }
+      th {
+        text-align: center;
+        background-color: $purple-60;
+        color: white;
+        font-weight: bold;
+      }
 
-    table td {
-      text-align: center;
-      padding: 1.2rem 1.2rem 1rem 0;
-      border-bottom: 1px dotted #0A1D8F;
-    }
-
-    table tr td:first-child {
-      text-align: left;
-    }
-
-    img {
-      margin-bottom: $layout-05;
-      width: 100%;
-      height: auto;
+      td, th {
+        border: 1px solid #ddd;
+        padding: 8px;
+        vertical-align: middle;
+        line-height: 140%;
+      }
     }
   }
 }
