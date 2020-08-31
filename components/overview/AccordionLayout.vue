@@ -54,7 +54,7 @@ export default class extends Vue implements AccordionLayoutProps {
     align-self: center;
     height: auto;
     width: 100%;
-    max-width: 18rem;
+    max-width: 26rem;
     margin-bottom: $spacing-05;
   }
 
