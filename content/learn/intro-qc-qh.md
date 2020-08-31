@@ -171,7 +171,7 @@ margin: 10px 7%;
             <td>Lecture 22<br/><span class='lectitle'>Quantum Chemistry I: Obtaining the Qubit Hamiltonian for H2 and LiH Part 1</span><br/>(Lecturer: Antonio Mezzacapo)</td>
             <td><a href='https://youtu.be/2XEjrwWhr88?list=PLOFEBzvs-VvrXTMy5Y2IqmSaUjfnhvBHR'>Lecture Video</a></td>
             <td rowspan=3><a href='https://github.com/qiskit-community/intro-to-quantum-computing-and-quantum-hardware/blob/master/lectures/introqcqh-lecture-notes-8.pdf?raw=true'>Lecture Notes 8</a></td>
-            <td rowspan=3><a href='https://github.com/qiskit-community/intro-to-quantum-computing-and-quantum-hardware/blob/master/labs/introqcqh-lab-8.zip?raw=true'>Lab 8</a></td>
+            <td rowspan=3><a href='https://github.com/qiskit-community/intro-to-quantum-computing-and-quantum-hardware/blob/master/labs/introqcqh-lab-8.zip?raw=true'>Lab 8</a><br/><a href='#'>Video</a></td>
         </tr>
         <tr>
             <td>Lecture 23<br/><span class='lectitle'>Quantum Chemistry I: Obtaining the Qubit Hamiltonian for H2 and LiH Part 2</span><br/>(Lecturer: Antonio Mezzacapo)</td>
@@ -235,7 +235,9 @@ margin: 10px 7%;
 ## Contributors
 The lectures and labs were prepared and delivered by Abraham Asfaw, Elisa B&auml;umer, James Wootton, Zlatko Minev, Nicholas Bronn, Antonio Mezzacapo and Abhinav Kandala.
 <br/><br/>
-During the delivery of the lectures in 2020 as part of the Qiskit Global Summer School, Brian Ingmanson, Susan Kirschner and Josie Kies hosted the lectures. Salvador de la Puente Gonz&aacute;lez and Luciano Bello built the grading system used in the labs. Leron Gil and Yaiza Garcia built this website. Amira Abbas hosted the discussion on careers in quantum computing, which included Jay Gambetta, Steve Girvin, John Preskill, Marina Radulaski, Monika Schleier-Smith, Birgitta Whaley. Paul Searle edited the videos.
+During the delivery of the lectures in 2020 as part of the Qiskit Global Summer School, Brian Ingmanson, Suzie Kirschner and Josie Kies hosted the lectures. Salvador de la Puente Gonz&aacute;lez and Luciano Bello built the grading system used in the labs. Josie Kies built the Discord server that supported the community during the Qiskit Global Summer School. Leron Gil and Yaiza Garcia built this website. Amira Abbas hosted the discussion on careers in quantum computing, which included Jay Gambetta, Steve Girvin, John Preskill, Marina Radulaski, Monika Schleier-Smith, Birgitta Whaley. Paul Searle edited the videos.
+<br/><br/>
+Special thanks to the 2020 class of IBM Quantum interns and the entire community of the Qiskit Global Summer School 2020 for contributing to the quality of these lectures and labs.
 
 ## Usage and Citation
 If you use the lectures and labs in your course, you can gain access to the [IBM Quantum Educators Program](https://quantum-computing.ibm.com/programs/educators). Please cite the material as <br/><br/>
