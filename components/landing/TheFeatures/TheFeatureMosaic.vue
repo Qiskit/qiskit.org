@@ -159,12 +159,10 @@ export default class extends Vue {}
     max-width: 6 * $column-size-large;
 
     @include mq($from: medium, $until: large) {
-      @include type-style('label-01');
       max-width: 4 * $column-size-medium;
     }
 
     @include mq($until: medium) {
-      @include type-style('label-01');
       max-width: 4 * $column-size-small;
     }
   }

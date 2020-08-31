@@ -59,7 +59,6 @@ export default class extends Vue {
     margin-bottom: $layout-05;
 
     @include mq($until: large) {
-      @include type-style('label-01');
       margin-bottom: $layout-03;
     }
   }
