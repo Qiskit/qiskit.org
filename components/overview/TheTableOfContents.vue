@@ -45,10 +45,6 @@ export default class extends Vue {
     text-decoration: none;
     margin-bottom: $layout-02;
 
-    @include mq($until: large) {
-      @include type-style('label-01');
-    }
-
     &_second-level {
       &:hover {
         text-decoration: underline;
