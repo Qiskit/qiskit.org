@@ -80,6 +80,7 @@ export default class extends QiskitPage {
       @include type-style('body-long-01');
       color: $cool-gray-80;
       margin-bottom: $layout-03;
+      max-width: 9 * $column-size-large;
 
       @include mq($from: medium, $until: large) {
         @include type-style('label-01');
