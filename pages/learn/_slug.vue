@@ -191,18 +191,30 @@ export default class extends QiskitPage {
     table {
       margin-bottom: $layout-03;
 
+      td, th {
+        @include type-style('body-long-01');
+        border: 1px solid $cool-gray-20;
+        vertical-align: middle;
+        padding: $spacing-05;
+        max-width: 9 * $column-size-large;
+
+        @include mq($from: medium, $until: large) {
+          @include type-style('label-01');
+          margin-bottom: $layout-01;
+        }
+
+        @include mq($until: medium) {
+          @include type-style('label-01');
+          padding: $spacing-03;
+          margin-bottom: $layout-01;
+        }
+      }
+
       th {
         text-align: center;
         background-color: $purple-60;
         color: white;
         font-weight: bold;
-      }
-
-      td, th {
-        border: 1px solid #ddd;
-        padding: 8px;
-        vertical-align: middle;
-        line-height: 140%;
       }
     }
   }
