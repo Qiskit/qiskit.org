@@ -38,7 +38,6 @@ export default class extends QiskitPage {
 </script>
 
 <style lang="scss">
-@import '~/assets/scss/blocks/copy.scss';
 @import '~carbon-components/scss/globals/scss/typography';
 
 .learn-entry {
@@ -115,14 +114,14 @@ export default class extends QiskitPage {
 
     blockquote {
       position: relative;
-      background-color: $purple-30;
+      background-color: $purple-20;
       padding: $spacing-07;
       margin-bottom: $layout-03;
 
       &::before {
         @include type-style('display-02');
         content: '”';
-        color: $purple-80;
+        color: $purple-70;
         position: absolute;
         top: 0;
         left: 0;
@@ -163,9 +162,10 @@ export default class extends QiskitPage {
 
     ul {
       @include type-style('body-long-01');
-      list-style-type: square;
+      list-style-type: '-';
       color: $cool-gray-80;
       margin-bottom: $layout-03;
+      max-width: 9 * $column-size-large;
 
       @include mq($from: medium, $until: large) {
         @include type-style('label-01');
@@ -178,16 +178,19 @@ export default class extends QiskitPage {
       }
 
       li {
-        margin-left: $layout-04;
+        padding-left: $spacing-03;
+        margin-left: $spacing-03;
         margin-top: $layout-01;
 
         li {
-          margin-left: $layout-03;
+          margin-left: $spacing-03;
         }
       }
     }
 
     table {
+      margin-bottom: $layout-03;
+
       th {
         text-align: center;
         background-color: $purple-60;
