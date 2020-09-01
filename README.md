@@ -158,7 +158,7 @@ by default. To enable, set the `ENABLE_ANALYTICS` environment variable.
 
 8.  **`/mixins`**: Mixin functions shared through the whole project.
 
-9.  **`/new-content`**: Content for the learning resources cards
+9.  **`/new-content`**: This directory includes newer content that is used in various parts of the qiskit.org website, leveraging the [nuxt/content](https://content.nuxtjs.org/) module, along with standard markdown syntax.
 
 10.  **`/pages`**: This is a starting point because if you want to know what is the website structure, it's the same as this folder's structure. Nuxt reads all the `.vue` files inside this directory and creates the application router based on it. You can find information at [Nuxt's pages directory documentation](https://nuxtjs.org/guide/directory-structure#the-pages-directory). All `.vue` pages prefixed by an underscore are [dynamic routes](https://nuxtjs.org/guide/routing/#dynamic-routes) and we use them to create different pages based on the same template. We also use [nuxt-link](https://nuxtjs.org/guide/routing/) to keep the user inside our webapp router.
 
