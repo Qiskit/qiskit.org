@@ -133,12 +133,12 @@ by default. To enable, set the `ENABLE_ANALYTICS` environment variable.
     ├── hooks
     ├── layouts
     ├── mixins
+    ├── new-content
     ├── pages
     ├── plugins
     ├── static
     ├── store
     ├── tests
-    ├── textbook
     ├── nuxt.config.js
     ... other third-parties configuration files like ESLint, Jest or Travis
 
@@ -158,15 +158,15 @@ by default. To enable, set the `ENABLE_ANALYTICS` environment variable.
 
 8.  **`/mixins`**: Mixin functions shared through the whole project.
 
-9.  **`/pages`**: This is a starting point because if you want to know what is the website structure, it's the same as this folder's structure. Nuxt reads all the `.vue` files inside this directory and creates the application router based on it. You can find information at [Nuxt's pages directory documentation](https://nuxtjs.org/guide/directory-structure#the-pages-directory). All `.vue` pages prefixed by an underscore are [dynamic routes](https://nuxtjs.org/guide/routing/#dynamic-routes) and we use them to create different pages based on the same template. We also use [nuxt-link](https://nuxtjs.org/guide/routing/) to keep the user inside our webapp router.
+9.  **`/new-content`**: Content for the learning resources cards
 
-10.  **`/plugins`**: You can find information at [Nuxt's plugins directory documentation](https://nuxtjs.org/guide/directory-structure#the-plugins-directory)
+10.  **`/pages`**: This is a starting point because if you want to know what is the website structure, it's the same as this folder's structure. Nuxt reads all the `.vue` files inside this directory and creates the application router based on it. You can find information at [Nuxt's pages directory documentation](https://nuxtjs.org/guide/directory-structure#the-pages-directory). All `.vue` pages prefixed by an underscore are [dynamic routes](https://nuxtjs.org/guide/routing/#dynamic-routes) and we use them to create different pages based on the same template. We also use [nuxt-link](https://nuxtjs.org/guide/routing/) to keep the user inside our webapp router.
 
-11.  **`/statics`**: You can find information at [Nuxt's statics directory documentation](https://nuxtjs.org/guide/directory-structure#the-static-directory)
+11.  **`/plugins`**: You can find information at [Nuxt's plugins directory documentation](https://nuxtjs.org/guide/directory-structure#the-plugins-directory)
 
-12.  **`/tests`**: Unit tests made with Jest
+12.  **`/statics`**: You can find information at [Nuxt's statics directory documentation](https://nuxtjs.org/guide/directory-structure#the-static-directory)
 
-13.  **`/textbook`**: Redirect page for textbook
+13.  **`/tests`**: Unit tests made with Jest
 
 14. **`nuxt-config.js`**: This is the main configuration file for a Nuxt site. You can find information at [Nuxt's config documentation](https://nuxtjs.org/guide/configuration)
 
@@ -217,4 +217,6 @@ by alphabetical order:
 <td align="center"><a href="https://github.com/lerongil"><img src="https://avatars3.githubusercontent.com/u/9096989?s=460&v=4" width="120px;" alt="Leron Gil"/><br /><sub><b>Leron Gil</b></sub></a><br /><a href="https://github.com/qiskit/qiskit.org/issues?q=author%3Alerongil" title="Bug reports">🐛</a><a href="https://join.slack.com/t/qiskit/shared_invite/enQtODQ2NTIyOTgwMTQ3LTI0NzM2NzkzZjJhNDgzZjY5MTQzNDY3MGNiZGQzNTNkZTE4Nzg1MjMwMmFjY2UwZTgyNDlmYWQwYmZjMjE1ZTM" title="Answering Questions on Slack">💬</a></td>
 <td align="center"><a href="https://github.com/delapuente"><img src="https://avatars1.githubusercontent.com/u/757942?s=460&v=4" width="120px;" alt="Salvador de la Puente"/><br /><sub><b>Salvador de la Puente</b></sub></a><br /><a href="https://github.com/qiskit/qiskit.org/issues?q=author%3Adelapuente" title="Bug reports">🐛</a><a href="https://github.com/qiskit/qiskit.org/commits?author=delapuente" title="Code">💻</a><a href="https://join.slack.com/t/qiskit/shared_invite/enQtODQ2NTIyOTgwMTQ3LTI0NzM2NzkzZjJhNDgzZjY5MTQzNDY3MGNiZGQzNTNkZTE4Nzg1MjMwMmFjY2UwZTgyNDlmYWQwYmZjMjE1ZTM" title="Answering Questions on Slack">💬</a></td>
 <td align="center"><a href="https://github.com/y4izus"><img src="https://avatars2.githubusercontent.com/u/17231966?s=460&v=4" width="120px;" alt="Yaiza García"/><br /><sub><b>Yaiza García</b></sub></a><br /><a href="https://github.com/qiskit/qiskit.org/issues?q=author%3Ay4izus" title="Bug reports">🐛</a><a href="https://github.com/qiskit/qiskit.org/commits?author=y4izus" title="Code">💻</a><a href="https://join.slack.com/t/qiskit/shared_invite/enQtODQ2NTIyOTgwMTQ3LTI0NzM2NzkzZjJhNDgzZjY5MTQzNDY3MGNiZGQzNTNkZTE4Nzg1MjMwMmFjY2UwZTgyNDlmYWQwYmZjMjE1ZTM" title="Answering Questions on Slack">💬</a></td>
+<td align="center"><a href="https://github.com/techtolentino"><img src="https://avatars2.githubusercontent.com/u/6276074?s=460&v=4" width="120px;" alt="Randy Tolentino"/><br /><sub><b>Randy Tolentino</b></sub></a><br /><a href="https://github.com/qiskit/qiskit.org/issues?q=author%3Atechtolentino" title="Bug reports">🐛</a><a href="https://github.com/qiskit/qiskit.org/commits?author=techtolentino" title="Code">💻</a><a href="https://join.slack.com/t/qiskit/shared_invite/enQtODQ2NTIyOTgwMTQ3LTI0NzM2NzkzZjJhNDgzZjY5MTQzNDY3MGNiZGQzNTNkZTE4Nzg1MjMwMmFjY2UwZTgyNDlmYWQwYmZjMjE1ZTM" title="Answering Questions on Slack">💬</a></td>
+</tr>
 </tr></table>
