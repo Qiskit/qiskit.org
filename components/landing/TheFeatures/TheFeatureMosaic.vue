@@ -68,7 +68,7 @@
           </dd>
         </div>
         <div
-          lazy-background="/images/landing-page/feature-algorithms.jpg"
+          lazy-background="/images/landing-page/feature-quantum-algorithms.png"
           class="
             feature-mosaic__feature-decoration
             feature-mosaic__feature-decoration-algorithms
@@ -239,12 +239,10 @@ export default class extends Vue {}
     height: 25rem;
 
     @include mq($from: medium, $until: large) {
-      background-image: url('/images/landing-page/feature-algorithms-medium.jpg') !important;;
       height: auto;
     }
 
     @include mq($until: medium) {
-      background-image: url('/images/landing-page/feature-algorithms-medium.jpg') !important;;
       min-height: 4rem;
     }
   }
