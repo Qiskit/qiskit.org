@@ -68,7 +68,7 @@
           </dd>
         </div>
         <div
-          lazy-background="/images/landing-page/feature-algorithms.jpg"
+          lazy-background="/images/landing-page/feature-quantum-algorithms.png"
           class="
             feature-mosaic__feature-decoration
             feature-mosaic__feature-decoration-algorithms
@@ -142,7 +142,7 @@ export default class extends Vue {}
     flex-direction: column;
 
     @include mq($until: medium) {
-      height: 12rem;
+      height: 18.75rem;
       margin-bottom: $layout-03;
     }
 
@@ -187,14 +187,12 @@ export default class extends Vue {}
 
   &__feature-circuits {
     background-position: right bottom;
-    background-size: 14rem auto;
+    background-size: contain;
     background-repeat: no-repeat;
     grid-area: a;
 
-    @include mq($until: medium) {
-      // Adding important to beat the inlined background by the lazy-load directive
-      background-image: none !important;
-      padding-bottom: 6rem;
+    @include mq($until: large) {
+      background-size: 17rem auto;
     }
   }
 
@@ -239,12 +237,10 @@ export default class extends Vue {}
     height: 25rem;
 
     @include mq($from: medium, $until: large) {
-      background-image: url('/images/landing-page/feature-algorithms-medium.jpg') !important;;
       height: auto;
     }
 
     @include mq($until: medium) {
-      background-image: url('/images/landing-page/feature-algorithms-medium.jpg') !important;;
       min-height: 4rem;
     }
   }
