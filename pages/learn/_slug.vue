@@ -71,56 +71,151 @@ export default class extends QiskitPage {
 
   &__content {
     @include contained();
-      background-color: transparent;
-      background-image: none;
+    background-color: transparent;
+    background-image: none;
 
-    a {
-      text-decoration: none;
-    }
+    // Same as copy__paragraph
+    p {
+      @include type-style('body-long-01');
+      color: $cool-gray-80;
+      margin-bottom: $layout-03;
+      max-width: 9 * $column-size-large;
 
-    h2 {
-      padding-top: 4rem;
-      margin: 0 0 2rem;
-      color: #0A1D8F;
+      @include mq($from: medium, $until: large) {
+        @include type-style('label-01');
+        margin-bottom: $layout-01;
+      }
 
-      &::before {
-        content: "";
-        float: left;
-        width: 5%;
-        margin-top: 0.5rem;
-        margin-right: 5%;
-        border-top: 1px solid #0A1D8F;
+      @include mq($until: medium) {
+        @include type-style('label-01');
+        margin-bottom: $layout-01;
       }
     }
 
-    h3 {
-      font-weight: bold;
-      margin-top: 2.5rem;
-      margin-bottom: 1rem;
+    // Same as copy__link
+    a {
+      @include type-style('body-long-01');
+      color: $purple-70;
+      text-decoration: none;
+
+      @include mq($from: medium, $until: large) {
+        @include type-style('label-01');
+      }
+
+      @include mq($until: medium) {
+        @include type-style('label-01');
+      }
     }
 
-    h3 strong {
-      font-weight: bold;
+    code {
+      background-color: $purple-10;
+      padding: $spacing-01;
+    }
+
+    blockquote {
+      position: relative;
+      background-color: $purple-20;
+      padding: $spacing-07;
+      margin-bottom: $layout-03;
+
+      &::before {
+        @include type-style('display-02');
+        content: '”';
+        color: $purple-70;
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: $spacing-02 $spacing-03;
+      }
+
+      *:last-child {
+        margin-bottom: 0;
+      }
+
+      @include mq($from: medium, $until: large) {
+        margin-bottom: $layout-01;
+      }
+
+      @include mq($until: medium) {
+        margin-bottom: $layout-01;
+      }
+    }
+
+    // Same as copy__title
+    h2 {
+      @include type-style('expressive-heading-05');
+      margin-bottom: $layout-03;
+      color: $cool-gray-80;
+
+      @include mq($from: medium, $until: large) {
+        @include type-style('expressive-heading-03');
+        font-weight: 300;
+        margin-bottom: $layout-01;
+      }
+
+      @include mq($until: medium) {
+        @include type-style('expressive-heading-03');
+        font-weight: 300;
+        margin-bottom: $layout-01;
+      }
+    }
+
+    ul {
+      @include type-style('body-long-01');
+      list-style-type: '-';
+      color: $cool-gray-80;
+      margin-bottom: $layout-03;
+      max-width: 9 * $column-size-large;
+
+      @include mq($from: medium, $until: large) {
+        @include type-style('label-01');
+        margin-bottom: $layout-01;
+      }
+
+      @include mq($until: medium) {
+        @include type-style('label-01');
+        margin-bottom: $layout-01;
+      }
+
+      li {
+        padding-left: $spacing-03;
+        margin-left: $spacing-03;
+        margin-top: $layout-01;
+
+        li {
+          margin-left: $spacing-03;
+        }
+      }
     }
 
     table {
-      margin: $layout-05 5% 0 5%;
-    }
+      margin-bottom: $layout-03;
 
-    table td {
-      text-align: center;
-      padding: 1.2rem 1.2rem 1rem 0;
-      border-bottom: 1px dotted #0A1D8F;
-    }
+      td, th {
+        @include type-style('body-long-01');
+        border: 1px solid $cool-gray-20;
+        vertical-align: middle;
+        padding: $spacing-05;
+        max-width: 9 * $column-size-large;
 
-    table tr td:first-child {
-      text-align: left;
-    }
+        @include mq($from: medium, $until: large) {
+          @include type-style('label-01');
+          margin-bottom: $layout-01;
+        }
 
-    img {
-      margin-bottom: $layout-05;
-      width: 100%;
-      height: auto;
+        @include mq($until: medium) {
+          @include type-style('label-01');
+          padding: $spacing-03;
+          margin-bottom: $layout-01;
+        }
+      }
+
+      th {
+        text-align: center;
+        background-color: $purple-60;
+        color: white;
+        font-weight: bold;
+      }
     }
   }
 }
