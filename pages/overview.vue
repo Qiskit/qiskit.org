@@ -95,7 +95,7 @@ export default class extends QiskitPage {
     this._observer = new IntersectionObserver(
       this._onSectionAppearing,
       {
-        root: this.$root.$el,
+        root: null, // the viewport
         rootMargin: windowTriggerMargins,
         threshold
       }
