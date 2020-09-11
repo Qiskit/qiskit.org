@@ -1,6 +1,6 @@
 <template>
-  <div class="typed-text-container">
-    <span class="typed-text">{{typeValue}}</span>
+  <div class="typed-text__container" :class="{ 'typed-text__blink': showCursor }">
+    <span class="typed-text__content">{{typeValue}}</span>
   </div>
 </template>
 
@@ -13,14 +13,17 @@ export default {
       typeArray: ["Qiskit", "Python", "Quantum"],
       typingSpeed: 200,
       erasingSpeed: 100,
-      newTextDelay: 2000,
+      newTextDelay: 3000,
       eraseTextDelay: 5000,
       typeArrayIndex: 0,
       charIndex: 0,
+      showCursor: true,
     };
   },
   methods: {
     typeText() {
+      this.showCursor = false;
+
       if (this.charIndex < this.typeArray[this.typeArrayIndex].length) {
         this.typeValue += this.typeArray[this.typeArrayIndex].charAt(
           this.charIndex
@@ -43,6 +46,7 @@ export default {
         this.charIndex -= 1;
         setTimeout(this.eraseText, this.erasingSpeed);
       } else {
+        this.showCursor = true;
         this.typeStatus = false;
         this.typeArrayIndex += 1;
         if (this.typeArrayIndex >= this.typeArray.length)
@@ -59,13 +63,29 @@ export default {
 
 <style lang="scss" scoped>
 .typed-text {
-  font-style: italic;
-  color: white;
-  padding: $spacing-01 $spacing-03 $spacing-01 0;
-  margin-left: 0.5rem;
-  &-container {
+  &__content {
+    font-style: italic;
+    color: white;
+    padding: $spacing-01 $spacing-03 $spacing-01 0;
+    margin-left: 0.5rem;
+  }
+  &__container {
     background-color: $purple-70;
     display: inline-block;
+  }
+
+  &__blink {
+    animation: 0.75s blink step-end infinite;
+  }
+
+  @keyframes blink {
+    from,
+    to {
+      background-color: transparent;
+    }
+    50% {
+      background-color: $purple-70;
+    }
   }
 }
 </style>
