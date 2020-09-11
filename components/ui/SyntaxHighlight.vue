@@ -50,12 +50,16 @@ export default class extends Vue {
     right: 0;
     bottom: 0;
     border: none;
-    text-transform: lowercase;
-    background-color: $purple-70;
     padding: $spacing-03 $spacing-05;
 
+    text-transform: lowercase;
+    background-size: 200% 100%;
+    background-position-x: 100%;
+    background-image: linear-gradient(90deg, $interactive-01 0%, $interactive-01 50%, $purple-70 50%, $purple-70 100%);
+    transition: background-position-x 0.3s ease-out;
+
     &:hover {
-      background-color: $interactive-01;
+      background-position-x: 0%;
     }
   }
 

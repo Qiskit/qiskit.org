@@ -32,6 +32,10 @@ export default class extends Vue {
   align-items: center;
   padding: 0 $spacing-07;
 
+  background-size: 200% 100%;
+  background-position-x: 100%;
+  transition: background-position-x 0.3s ease-out, color 0.3s ease-out;
+
   @include mq($from: large) {
     width: 15rem;
   }
@@ -42,13 +46,13 @@ export default class extends Vue {
     width: 12rem;
   }
 
+  &:hover {
+    background-position-x: 0%;
+  }
+
   &_primary {
     color: $white;
-    background-color: $purple-70;
-
-    &:hover {
-      background-color: $purple-90;
-    }
+    background-image: linear-gradient(90deg, $purple-90 0%, $purple-90 50%, $purple-70 50%, $purple-70 100%);
 
     @include mq($from: large) {
       padding-top: $spacing-07;
@@ -58,11 +62,10 @@ export default class extends Vue {
 
   &_secondary {
     color: $purple-70;
-    background-color: $cool-gray-10;
+    background-image: linear-gradient(90deg, $purple-70 0%, $purple-70 50%, $cool-gray-10 50%, $cool-gray-10 100%);
 
     &:hover {
       color: $cool-gray-10;
-      background-color: $purple-70;
     }
 
     @include mq($from: large) {
