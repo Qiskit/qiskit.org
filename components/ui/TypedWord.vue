@@ -1,5 +1,5 @@
 <template>
-  <div class="typed-text__container" :class="{ 'typed-text__blink': showCursor }">
+  <div class="typed-text__container" :class="{ 'typed-text__cursor': showCursor }">
     <span class="typed-text__content">{{typeValue}}</span>
   </div>
 </template>
@@ -67,18 +67,18 @@ export default {
     font-style: italic;
     color: white;
     padding: $spacing-01 $spacing-03 $spacing-01 0;
-    margin-left: 0.5rem;
+    margin-left: $spacing-03;
   }
   &__container {
     background-color: $purple-70;
     display: inline-block;
   }
 
-  &__blink {
-    animation: 0.75s blink step-end infinite;
+  &__cursor {
+    animation: 0.75s flash step-end infinite;
   }
 
-  @keyframes blink {
+  @keyframes flash {
     from,
     to {
       background-color: transparent;
