@@ -37,5 +37,26 @@ export default class extends Vue {
   & :first-child {
     margin-right: $layout-02;
   }
+  svg {
+      overflow: visible;
+  }
+  &[target=_blank] {
+    path:nth-child(2) {
+      transform: translate(0, 0);
+      transition: transform 0.3s ease-in-out;
+    }
+    &:hover path:nth-child(2) {
+      transform: translate(2px, -2px);
+    }
+  }
+  &:not([target=_blank]) {
+    path:nth-child(1) {
+      transform: translate(0, 0);
+      transition: transform 0.2s ease-in-out;
+    }
+    &:hover path:nth-child(1) {
+      transform: translate(4px, 0);
+    }
+  }
 }
 </style>

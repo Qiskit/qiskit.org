@@ -79,5 +79,16 @@ export default class extends Vue {
     margin-left: $spacing-06;
     fill: currentColor;
   }
+
+  svg {
+      overflow: visible;
+  }
+  path:nth-child(1) {
+    transform: translate(0, 0);
+    transition: transform 0.2s ease-in-out;
+  }
+  &:hover path:nth-child(1) {
+    transform: translate(3px, 0);
+  }
 }
 </style>
