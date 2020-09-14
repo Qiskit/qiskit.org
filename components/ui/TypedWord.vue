@@ -67,7 +67,7 @@ export default {
     font-style: italic;
     color: white;
     padding: $spacing-01 $spacing-03 $spacing-01 0;
-    margin-left: $spacing-03;
+    margin-left: $spacing-02;
   }
   &__container {
     background-color: $purple-70;
@@ -76,6 +76,10 @@ export default {
 
   &__cursor {
     animation: 0.75s flash step-end infinite;
+
+    & .typed-text__content {
+      margin-left: 0;
+    }
   }
 
   @keyframes flash {
