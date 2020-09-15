@@ -7,7 +7,11 @@
       <p class="content-section__description">
         {{ description }}
       </p>
-      <AppCta class="copy__link" :url="link.url">
+      <AppCta
+        v-if="link"
+        class="copy__link"
+        :url="link.url"
+      >
         {{ link.label }}
       </AppCta>
     </div>
