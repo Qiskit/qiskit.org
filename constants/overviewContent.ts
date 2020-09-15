@@ -290,7 +290,7 @@ const EXTENSIONS: OverviewSection = {
         description: 'Cloud accessible generation of quantum certified random numbers using Qiskit and IBM Quantum systems.',
         cta: {
           label: 'Learn more',
-          url: 'https://github.com/qiskit-community/qiskit_rng'
+          url: 'https://qiskit-rng.readthedocs.io/en/latest/'
         }
       }
     },
