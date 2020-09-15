@@ -290,7 +290,7 @@ const EXTENSIONS: OverviewSection = {
         description: 'Cloud accessible generation of quantum certified random numbers using Qiskit and IBM Quantum systems.',
         cta: {
           label: 'Learn more',
-          url: 'https://qiskit_rng.readthedocs.io'
+          url: 'https://github.com/qiskit-community/qiskit_rng'
         }
       }
     },
@@ -301,7 +301,7 @@ const EXTENSIONS: OverviewSection = {
         description: 'A visualization package for Qiskit that focuses on interactive visualizations for quantum states, distributions, and device properties.',
         cta: {
           label: 'Learn more',
-          url: 'https://qiskit.org/documentation/apidoc/circuit_library.html'
+          url: 'https://nonhermitian.org/kaleido'
         }
       }
     },
