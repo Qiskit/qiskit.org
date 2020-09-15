@@ -1,68 +1,77 @@
 <template>
-  <div class="typed-text__container" :class="{ 'typed-text__cursor': showCursor }">
-    <span class="typed-text__content">{{typeValue}}</span>
+  <div class="typed-word__container" :class="{ 'typed-word__cursor': showCursor }">
+    <span class="typed-word__content">{{ typeValue }}</span>
   </div>
 </template>
 
 <script>
+// Implementation based on https://github.com/webnoobcodes/vuejs-typeeffect
+import Vue from 'vue'
+import { Component } from 'vue-property-decorator'
+
+@Component
+export default class extends Vue {}
+
 export default {
   data: () => {
     return {
-      typeValue: "",
+      typeValue: 'Qiskit',
       typeStatus: false,
-      typeArray: ["Qiskit", "Python", "Quantum"],
+      typeArray: ['Qiskit', 'Python', 'Quantum'],
       typingSpeed: 200,
       erasingSpeed: 100,
       newTextDelay: 3000,
-      eraseTextDelay: 5000,
+      eraseTextDelay: 3000,
       typeArrayIndex: 0,
       charIndex: 0,
-      showCursor: true,
-    };
+      showCursor: false
+    }
+  },
+  created () {
+    setTimeout(this.eraseText, this.newTextDelay + 200)
   },
   methods: {
-    typeText() {
-      this.showCursor = false;
+    typeText () {
+      this.showCursor = false
 
       if (this.charIndex < this.typeArray[this.typeArrayIndex].length) {
-        this.typeValue += this.typeArray[this.typeArrayIndex].charAt(
-          this.charIndex
-        );
-        this.charIndex += 1;
-        if (!this.typeStatus) this.typeStatus = true;
-        setTimeout(this.typeText, this.typingSpeed);
+        this.typeValue += this.typeArray[this.typeArrayIndex].charAt(this.charIndex)
+        this.charIndex += 1
+        if (!this.typeStatus) {
+          this.typeStatus = true
+        }
+
+        setTimeout(this.typeText, this.typingSpeed)
       } else {
-        this.typeStatus = false;
-        setTimeout(this.eraseText, this.eraseTextDelay);
+        this.typeStatus = false
+        setTimeout(this.eraseText, this.eraseTextDelay)
       }
     },
-    eraseText() {
+    eraseText () {
       if (this.charIndex > 0) {
-        if (!this.typeStatus) this.typeStatus = true;
-        this.typeValue = this.typeArray[this.typeArrayIndex].substring(
-          0,
-          this.charIndex - 1
-        );
-        this.charIndex -= 1;
-        setTimeout(this.eraseText, this.erasingSpeed);
+        if (!this.typeStatus) {
+          this.typeStatus = true
+        }
+        this.typeValue = this.typeArray[this.typeArrayIndex].substring(0, this.charIndex - 1)
+        this.charIndex -= 1
+        setTimeout(this.eraseText, this.erasingSpeed)
       } else {
-        this.showCursor = true;
-        this.typeStatus = false;
-        this.typeArrayIndex += 1;
-        if (this.typeArrayIndex >= this.typeArray.length)
-          this.typeArrayIndex = 0;
-        setTimeout(this.typeText, this.typingSpeed + 1000);
+        this.showCursor = true
+        this.typeStatus = false
+        this.typeArrayIndex += 1
+        if (this.typeArrayIndex >= this.typeArray.length) {
+          this.typeArrayIndex = 0
+        }
+
+        setTimeout(this.typeText, this.typingSpeed + 1000)
       }
-    },
-  },
-  created() {
-    setTimeout(this.typeText, this.newTextDelay + 200);
-  },
-};
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
-.typed-text {
+.typed-word {
   &__content {
     font-style: italic;
     color: white;
@@ -77,7 +86,7 @@ export default {
   &__cursor {
     animation: 0.75s flash step-end infinite;
 
-    & .typed-text__content {
+    & .typed-word__content {
       margin-left: 0;
     }
   }
