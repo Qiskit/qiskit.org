@@ -1,73 +1,85 @@
 <template>
   <div class="typed-word__container" :class="{ 'typed-word__cursor': showCursor }">
-    <span class="typed-word__content">{{ typeValue }}</span>
+    <span class="typed-word__content">{{ value }}</span>
   </div>
 </template>
 
 <script>
 // Implementation based on https://github.com/webnoobcodes/vuejs-typeeffect
 import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
+import { Component, Prop } from 'vue-property-decorator'
 
 @Component
-export default class extends Vue {}
+export default class extends Vue {
+  @Prop({ type: String, default: '' }) initialWord
+  @Prop({ type: Array, default: [] }) typeArray
+  @Prop({ type: Number, default: 200 }) typingSpeed
+  @Prop({ type: Number, default: 100 }) erasingSpeed
+  @Prop({ type: Number, default: 3000 }) eraseTextDelay
+  @Prop({ type: Number, default: 3000 }) newTextDelay
 
-export default {
-  data: () => {
-    return {
-      typeValue: 'Qiskit',
-      typeStatus: false,
-      typeArray: ['Qiskit', 'Python', 'Quantum'],
-      typingSpeed: 200,
-      erasingSpeed: 100,
-      newTextDelay: 3000,
-      eraseTextDelay: 3000,
-      typeArrayIndex: 0,
-      charIndex: 0,
-      showCursor: false
-    }
-  },
-  created () {
-    setTimeout(this.eraseText, this.newTextDelay + 200)
-  },
-  methods: {
-    typeText () {
-      this.showCursor = false
+  // Initial data
+  value = ''
+  typeStatus = false
+  typeArrayIndex = 0
+  charIndex = 0
+  showCursor = false
+  initialRender = true
 
-      if (this.charIndex < this.typeArray[this.typeArrayIndex].length) {
-        this.typeValue += this.typeArray[this.typeArrayIndex].charAt(this.charIndex)
-        this.charIndex += 1
-        if (!this.typeStatus) {
-          this.typeStatus = true
-        }
+  typeText () {
+    this.showCursor = false
+    this.initialRender = false
 
-        setTimeout(this.typeText, this.typingSpeed)
-      } else {
-        this.typeStatus = false
-        setTimeout(this.eraseText, this.eraseTextDelay)
+    if (this.charIndex < this.typeArray[this.typeArrayIndex].length) {
+      this.value += this.typeArray[this.typeArrayIndex].charAt(this.charIndex)
+      this.charIndex += 1
+
+      if (!this.typeStatus) {
+        this.typeStatus = true
       }
-    },
-    eraseText () {
-      if (this.charIndex > 0) {
-        if (!this.typeStatus) {
-          this.typeStatus = true
-        }
-        this.typeValue = this.typeArray[this.typeArrayIndex].substring(0, this.charIndex - 1)
-        this.charIndex -= 1
-        setTimeout(this.eraseText, this.erasingSpeed)
-      } else {
-        this.showCursor = true
-        this.typeStatus = false
-        this.typeArrayIndex += 1
-        if (this.typeArrayIndex >= this.typeArray.length) {
-          this.typeArrayIndex = 0
-        }
-
-        setTimeout(this.typeText, this.typingSpeed + 1000)
-      }
+      setTimeout(this.typeText, this.typingSpeed)
+    } else {
+      this.typeStatus = false
+      setTimeout(this.eraseText, this.eraseTextDelay)
     }
   }
+
+  eraseText () {
+    if (this.initialRender) {
+      this.charIndex = this.value.length
+    }
+
+    if (this.charIndex > 0) {
+      if (!this.typeStatus) {
+        this.typeStatus = true
+      }
+
+      this.value = this.typeArray[this.typeArrayIndex].substring(0, this.charIndex - 1)
+      this.charIndex -= 1
+
+      setTimeout(this.eraseText, this.erasingSpeed)
+    } else {
+      if (!this.initialRender) {
+        this.showCursor = true
+      }
+
+      this.typeStatus = false
+      this.typeArrayIndex += 1
+
+      if (this.typeArrayIndex >= this.typeArray.length) {
+        this.typeArrayIndex = 0
+      }
+
+      setTimeout(this.typeText, this.typingSpeed + 1000)
+    }
+  }
+
+  created () {
+    this.value = this.initialWord
+    setTimeout(this.eraseText, this.newTextDelay + 200)
+  }
 }
+
 </script>
 
 <style lang="scss" scoped>

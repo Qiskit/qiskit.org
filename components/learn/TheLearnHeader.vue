@@ -2,7 +2,10 @@
   <ThePageHeader class="the-learn-header">
     Start your path towards
     <br />learning
-    <TypedWord>Qiskit</TypedWord>
+    <TypedWord
+      :initialWord="'Qiskit'"
+      :typeArray="['Qiskit', 'Python', 'Quantum']"
+    />
   </ThePageHeader>
 </template>
 
