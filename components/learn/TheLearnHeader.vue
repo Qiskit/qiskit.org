@@ -3,8 +3,8 @@
     Start your path towards
     <br />learning
     <TypedWord
-      :initialWord="'Qiskit'"
-      :typeArray="['Qiskit', 'Python', 'Quantum']"
+      :initial-word="initialWord"
+      :type-array="['Qiskit', 'Python', 'Quantum']"
     />
   </ThePageHeader>
 </template>
@@ -16,5 +16,7 @@ import ThePageHeader from '~/components/ui/ThePageHeader.vue'
 import TypedWord from '~/components/ui/TypedWord.vue'
 
 @Component({ components: { ThePageHeader, TypedWord } })
-export default class extends Vue {}
+export default class extends Vue {
+  initialWord = 'Qiskit'
+}
 </script>

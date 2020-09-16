@@ -13,7 +13,7 @@ import { Component, Prop } from 'vue-property-decorator'
 export default class extends Vue {
   @Prop({ type: String, default: '' }) initialWord
   @Prop({ type: Array, default: [] }) typeArray
-  @Prop({ type: Number, default: 200 }) typingSpeed
+  @Prop({ type: Number, default: 150 }) typingSpeed
   @Prop({ type: Number, default: 100 }) erasingSpeed
   @Prop({ type: Number, default: 3000 }) eraseTextDelay
   @Prop({ type: Number, default: 3000 }) newTextDelay
@@ -55,11 +55,16 @@ export default class extends Vue {
       }
 
       this.value = this.typeArray[this.typeArrayIndex].substring(0, this.charIndex - 1)
+
+      // show cursor before empty string
+      if (this.charIndex === 1) {
+        this.showCursor = true
+      }
+
       this.charIndex -= 1
 
       setTimeout(this.eraseText, this.erasingSpeed)
     } else {
-      this.showCursor = true
       this.typeStatus = false
       this.typeArrayIndex += 1
 
@@ -95,7 +100,7 @@ export default class extends Vue {
   &__cursor {
     animation: 0.75s flash step-end infinite;
 
-    & .typed-word__content {
+    .typed-word__content {
       margin-left: 0;
     }
   }
