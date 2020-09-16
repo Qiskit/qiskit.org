@@ -59,10 +59,7 @@ export default class extends Vue {
 
       setTimeout(this.eraseText, this.erasingSpeed)
     } else {
-      if (!this.initialRender) {
-        this.showCursor = true
-      }
-
+      this.showCursor = true
       this.typeStatus = false
       this.typeArrayIndex += 1
 
