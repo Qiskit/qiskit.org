@@ -11,7 +11,7 @@ import { Component, Prop } from 'vue-property-decorator'
 
 @Component
 export default class extends Vue {
-  @Prop({ type: String, default: '' }) initialWord: string = ''
+  @Prop({ type: String, default: '' }) initialWord!: string
   @Prop({ type: Array, default: [] }) typeArray
   @Prop({ type: Number, default: 150 }) typingSpeed
   @Prop({ type: Number, default: 100 }) erasingSpeed
