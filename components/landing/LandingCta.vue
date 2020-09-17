@@ -46,8 +46,9 @@ export default class extends Vue {
     width: 12rem;
   }
 
-  &:hover {
-    background-position-x: 0%;
+  &:hover,
+  &:active {
+    background-position-x: 0;
   }
 
   &_primary {

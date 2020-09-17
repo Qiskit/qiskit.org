@@ -58,8 +58,9 @@ export default class extends Vue {
     background-image: linear-gradient(90deg, $interactive-01 0%, $interactive-01 50%, $purple-70 50%, $purple-70 100%);
     transition: background-position-x 0.3s ease-out;
 
-    &:hover {
-      background-position-x: 0%;
+    &:hover,
+    &:active {
+      background-position-x: 0;
     }
   }
 
