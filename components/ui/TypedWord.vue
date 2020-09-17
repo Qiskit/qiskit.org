@@ -1,17 +1,17 @@
 <template>
-  <div class="typed-word__container" :class="{ 'typed-word__cursor': showCursor }">
+  <div class="typed-word typed-word__container" :class="{ 'typed-word__cursor-visible': showCursor }">
     <span class="typed-word__content">{{ value }}</span>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 // Implementation based on https://github.com/webnoobcodes/vuejs-typeeffect
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 
 @Component
 export default class extends Vue {
-  @Prop({ type: String, default: '' }) initialWord
+  @Prop({ type: String, default: '' }) initialWord: string = ''
   @Prop({ type: Array, default: [] }) typeArray
   @Prop({ type: Number, default: 150 }) typingSpeed
   @Prop({ type: Number, default: 100 }) erasingSpeed
@@ -19,12 +19,12 @@ export default class extends Vue {
   @Prop({ type: Number, default: 3000 }) newTextDelay
 
   // Initial data
-  value = ''
-  typeStatus = false
-  typeArrayIndex = 0
-  charIndex = 0
-  showCursor = false
-  initialRender = true
+  value: string = ''
+  typeStatus: boolean = false
+  typeArrayIndex: number = 0
+  charIndex: number = 0
+  showCursor: boolean = false
+  initialRender: boolean = true
 
   typeText () {
     this.showCursor = false
@@ -92,12 +92,13 @@ export default class extends Vue {
     padding: $spacing-01 $spacing-03 $spacing-01 0;
     margin-left: $spacing-02;
   }
+
   &__container {
     background-color: $purple-70;
     display: inline-block;
   }
 
-  &__cursor {
+  &__cursor-visible {
     animation: 0.75s flash step-end infinite;
 
     .typed-word__content {
