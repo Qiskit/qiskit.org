@@ -1,21 +1,22 @@
 <template>
-  <AppLink
+  <AppCta
+    url="/learn"
+    v-bind="$attrs"
     class="landing-cta"
     :class="`landing-cta_${kind}`"
-    v-bind="$attrs"
+    :segment="{ action: 'Get Learning' }"
   >
     <slot />
-    <ArrowRight16 class="landing-cta__icon" />
-  </AppLink>
+  </AppCta>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-import AppLink from '~/components/ui/AppLink.vue'
+import AppCta from '~/components/ui/AppCta.vue'
 
 @Component({
-  components: { AppLink }
+  components: { AppCta }
 })
 export default class extends Vue {
   @Prop({ type: String, default: 'primary' }) kind!: 'primary'|'secondary';
