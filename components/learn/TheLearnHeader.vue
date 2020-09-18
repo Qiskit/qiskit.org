@@ -3,7 +3,15 @@
     Start your path towards
     <br>learning
     <TypewriterEffect
-      :values="['Qiskit', 'Python', 'Quantum']"
+      :values="[
+        'Qiskit',
+        'Python',
+        'Quantum Computing',
+        'Error Mitigation',
+        'Quantum Hardware',
+        'Quantum Algorithms',
+        'Quantum Applications'
+      ]"
     />
   </ThePageHeader>
 </template>

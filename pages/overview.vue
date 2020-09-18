@@ -3,7 +3,12 @@
     <ThePageHeader>
       The most
       <TypewriterEffect
-        :values="['feature-rich', 'starred', 'popular']"
+        :values="[
+          'feature-rich',
+          'modular',
+          'open',
+          'popular'
+        ]"
       /><br>
       quantum computing SDK
     </ThePageHeader>
