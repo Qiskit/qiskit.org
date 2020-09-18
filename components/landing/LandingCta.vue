@@ -65,7 +65,8 @@ export default class extends Vue {
     color: $purple-70;
     background-image: linear-gradient(90deg, $purple-70 0%, $purple-70 50%, $cool-gray-10 50%, $cool-gray-10 100%);
 
-    &:hover {
+    &:hover,
+    &:active {
       color: $cool-gray-10;
     }
 
@@ -78,6 +79,21 @@ export default class extends Vue {
   &__icon {
     margin-left: $spacing-06;
     fill: currentColor;
+    overflow: visible;
+  }
+
+  $arrow-path: "path:nth-child(1)";
+
+  #{$arrow-path} {
+    transform: translate(0, 0);
+    transition: transform 0.2s ease-in-out;
+  }
+
+  &:hover,
+  &:active {
+    #{$arrow-path} {
+      transform: translate(4px, 0);
+    }
   }
 }
 </style>
