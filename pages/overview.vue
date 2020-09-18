@@ -1,7 +1,15 @@
 <template>
   <div class="overview-page">
     <ThePageHeader>
-      The most <RelevantWord>feature&nbsp;rich</RelevantWord><br>
+      The most
+      <TypewriterEffect
+        :values="[
+          'feature-rich',
+          'modular',
+          'open',
+          'popular'
+        ]"
+      /><br>
       quantum computing SDK
     </ThePageHeader>
     <section
@@ -51,7 +59,7 @@
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import ThePageHeader from '~/components/ui/ThePageHeader.vue'
-import RelevantWord from '~/components/ui/RelevantWord.vue'
+import TypewriterEffect from '~/components/ui/TypewriterEffect.vue'
 import TheTableOfContents from '~/components/overview/TheTableOfContents.vue'
 import TheQuickStart from '~/components/landing/TheQuickStart/index.vue'
 import ContentSection from '~/components/overview/ContentSection.vue'
@@ -66,7 +74,7 @@ import {
 @Component({
   components: {
     ThePageHeader,
-    RelevantWord,
+    TypewriterEffect,
     TheTableOfContents,
     ContentSection,
     ContentAccordion,
