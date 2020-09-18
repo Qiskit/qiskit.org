@@ -16,10 +16,10 @@ import { Component, Prop } from 'vue-property-decorator'
 export default class extends Vue {
   @Prop({ type: Number, default: 0 }) startingIndex!: number
   @Prop({ type: Array, default: () => [] }) values!: string[]
-  @Prop({ type: Number, default: 150 }) typingDelay!: number
-  @Prop({ type: Number, default: 100 }) erasingDelay!: number
+  @Prop({ type: Number, default: 100 }) typingDelay!: number
+  @Prop({ type: Number, default: 75 }) erasingDelay!: number
   @Prop({ type: Number, default: 2000 }) persistence!: number
-  @Prop({ type: Number, default: 2000 }) newValueDelay!: number
+  @Prop({ type: Number, default: 600 }) newValueDelay!: number
 
   content: string = ''
   currentValueIdx: number = 0
