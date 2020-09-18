@@ -1,10 +1,9 @@
 <template>
   <ThePageHeader class="the-learn-header">
     Start your path towards
-    <br />learning
+    <br>learning
     <TypedWord
-      :initial-word="initialWord"
-      :type-array="['Qiskit', 'Python', 'Quantum']"
+      :values="['Qiskit', 'Python', 'Quantum']"
     />
   </ThePageHeader>
 </template>
@@ -16,7 +15,5 @@ import ThePageHeader from '~/components/ui/ThePageHeader.vue'
 import TypedWord from '~/components/ui/TypedWord.vue'
 
 @Component({ components: { ThePageHeader, TypedWord } })
-export default class extends Vue {
-  initialWord = 'Qiskit'
-}
+export default class extends Vue { }
 </script>

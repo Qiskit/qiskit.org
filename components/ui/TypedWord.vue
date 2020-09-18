@@ -1,6 +1,9 @@
 <template>
-  <div class="typed-word typed-word__container" :class="{ 'typed-word__cursor-visible': showCursor }">
-    <span class="typed-word__content">{{ value }}</span>
+  <div
+    class="typewriter-effect"
+    :class="{ 'typewriter-effect_cursor-visible': showCursor }"
+  >
+    <span class="typewriter-effect__content">{{ content }}</span>
   </div>
 </template>
 
@@ -11,81 +14,82 @@ import { Component, Prop } from 'vue-property-decorator'
 
 @Component
 export default class extends Vue {
-  @Prop({ type: String, default: '' }) initialWord!: string
-  @Prop({ type: Array, default: [] }) typeArray
-  @Prop({ type: Number, default: 150 }) typingSpeed
-  @Prop({ type: Number, default: 100 }) erasingSpeed
-  @Prop({ type: Number, default: 3000 }) eraseTextDelay
-  @Prop({ type: Number, default: 3000 }) newTextDelay
+  @Prop({ type: Number, default: 0 }) startingIndex!: number
+  @Prop({ type: Array, default: () => [] }) values!: string[]
+  @Prop({ type: Number, default: 150 }) typingDelay!: number
+  @Prop({ type: Number, default: 100 }) erasingDelay!: number
+  @Prop({ type: Number, default: 2000 }) persistence!: number
+  @Prop({ type: Number, default: 2000 }) newValueDelay!: number
 
-  // Initial data
-  value: string = ''
-  typeStatus: boolean = false
-  typeArrayIndex: number = 0
-  charIndex: number = 0
+  content: string = ''
+  currentValueIdx: number = 0
   showCursor: boolean = false
-  initialRender: boolean = true
+
+  get targetValue (): string {
+    return this.values[this.currentValueIdx]
+  }
+
+  get contentLength (): number {
+    return this.content.length
+  }
 
   typeText () {
-    this.showCursor = false
-    this.initialRender = false
+    const targetCompleted = this.contentLength === this.targetValue.length
 
-    if (this.charIndex < this.typeArray[this.typeArrayIndex].length) {
-      this.value += this.typeArray[this.typeArrayIndex].charAt(this.charIndex)
-      this.charIndex += 1
-
-      if (!this.typeStatus) {
-        this.typeStatus = true
-      }
-      setTimeout(this.typeText, this.typingSpeed)
+    if (targetCompleted) {
+      this.eraseCurrentValue()
     } else {
-      this.typeStatus = false
-      setTimeout(this.eraseText, this.eraseTextDelay)
+      this.content = this.targetValue.substring(0, this.contentLength + 1)
+      this.typeNextCharacter()
     }
   }
 
   eraseText () {
-    if (this.initialRender) {
-      this.charIndex = this.value.length
-    }
+    const noContent = this.contentLength === 0
 
-    if (this.charIndex > 0) {
-      if (!this.typeStatus) {
-        this.typeStatus = true
-      }
-
-      this.value = this.typeArray[this.typeArrayIndex].substring(0, this.charIndex - 1)
-
-      // show cursor before empty string
-      if (this.charIndex === 1) {
-        this.showCursor = true
-      }
-
-      this.charIndex -= 1
-
-      setTimeout(this.eraseText, this.erasingSpeed)
+    if (noContent) {
+      this.typeNextValue()
     } else {
-      this.typeStatus = false
-      this.typeArrayIndex += 1
-
-      if (this.typeArrayIndex >= this.typeArray.length) {
-        this.typeArrayIndex = 0
-      }
-
-      setTimeout(this.typeText, this.typingSpeed + 1000)
+      this.content = this.content.substring(0, this.contentLength - 1)
+      this.eraseNextCharacter()
     }
   }
 
+  typeNextValue () {
+    this.showCursor = true
+    this.currentValueIdx = (this.currentValueIdx + 1) % this.values.length
+    setTimeout(() => {
+      this.showCursor = false
+      this.typeText()
+    }, this.newValueDelay)
+  }
+
+  typeNextCharacter () {
+    setTimeout(this.typeText, this.typingDelay)
+  }
+
+  eraseCurrentValue () {
+    setTimeout(this.eraseText, this.persistence)
+  }
+
+  eraseNextCharacter () {
+    setTimeout(this.eraseText, this.erasingDelay)
+  }
+
   created () {
-    this.value = this.initialWord
-    setTimeout(this.eraseText, this.newTextDelay + 200)
+    this.content = this.values[this.startingIndex] || ''
+    this.currentValueIdx = this.startingIndex
+    this.eraseCurrentValue()
   }
 }
 
 </script>
 
 <style lang="scss" scoped>
-.typed-word {
+.typewriter-effect {
+  background-color: $purple-70;
+  display: inline-block;
+
   &__content {
     font-style: italic;
     color: white;
@@ -93,15 +97,10 @@ export default class extends Vue {
     margin-left: $spacing-02;
   }
 
-  &__container {
-    background-color: $purple-70;
-    display: inline-block;
-  }
-
-  &__cursor-visible {
+  &_cursor-visible {
     animation: 0.75s flash step-end infinite;
 
-    .typed-word__content {
+    .typewriter-effect__content {
       margin-left: 0;
     }
   }
