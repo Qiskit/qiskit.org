@@ -1,7 +1,7 @@
 <template>
   <div class="event-page">
     <TheEventsHeader />
-    <div class="wrapper">
+    <div class="event-page__wrapper">
       <client-only>
         <cv-tabs aria-label="navigation tab label" @tab-selected="selectTab">
           <cv-tab id="tab-1" label="Upcoming" />
@@ -62,7 +62,9 @@
         <div v-else class="event-page__results">
           <p class="event-page__no-events-msg">
             Nothing here yet -
-            <AppLink v-bind="eventRequestLink">
+            <AppLink
+              class="event-page__link"
+              v-bind="eventRequestLink">
               {{ eventRequestLink.label }}
             </AppLink>
           </p>
@@ -171,6 +173,14 @@ export default class extends QiskitPage {
 .event-page {
   color: $text-01;
 
+  &__wrapper {
+    @include contained();
+
+    & > * {
+      margin: $layout-01;
+    }
+  }
+
   &__event-index {
     display: flex;
     justify-content: space-between;
@@ -208,20 +218,10 @@ export default class extends QiskitPage {
 
   &__no-events-msg {
     @include type-style('body-short-02');
-
-    a {
-      color: $purple-30;
-    }
   }
-}
 
-.wrapper {
-  max-width: 1056px;
-  margin: 0 auto;
-  width: 100%;
-
-  & > * {
-    margin: $layout-01;
+  &__link {
+    color: $purple-30;
   }
 }
 </style>
