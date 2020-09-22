@@ -2,14 +2,12 @@
   <div class="event-page">
     <TheEventsHeader />
     <div class="wrapper">
-      <div class="event-page__filters-time">
-        <client-only>
-          <cv-tabs aria-label="navigation tab label" @tab-selected="selectTab">
-            <cv-tab id="tab-1" label="Upcoming" />
-            <cv-tab id="tab-2" label="Past" />
-          </cv-tabs>
-        </client-only>
-      </div>
+      <client-only>
+        <cv-tabs aria-label="navigation tab label" @tab-selected="selectTab">
+          <cv-tab id="tab-1" label="Upcoming" />
+          <cv-tab id="tab-2" label="Past" />
+        </cv-tabs>
+      </client-only>
       <div class="event-page__event-index">
         <div class="event-page__filters-others">
           <fieldset class="bx--fieldset">
@@ -64,10 +62,7 @@
         <div v-else class="event-page__results">
           <p class="event-page__no-events-msg">
             Nothing here yet -
-            <AppLink
-              class="experiment-header__source-code-link"
-              v-bind="eventRequestLink"
-            >
+            <AppLink v-bind="eventRequestLink">
               {{ eventRequestLink.label }}
             </AppLink>
           </p>
@@ -93,8 +88,6 @@ import {
 import { EVENT_REQUEST_LINK } from '~/constants/appLinks'
 
 @Component({
-  layout: 'carbon',
-
   components: {
     EventCard,
     AppLink,
@@ -176,7 +169,6 @@ export default class extends QiskitPage {
 @import '~carbon-components/scss/globals/scss/typography';
 
 .event-page {
-  background-color: white;
   color: $text-01;
 
   &__event-index {
@@ -186,10 +178,6 @@ export default class extends QiskitPage {
     @include mq($until: medium) {
       flex-direction: column;
     }
-  }
-
-  &__filters-time {
-    margin-top: $layout-03;
   }
 
   /*
