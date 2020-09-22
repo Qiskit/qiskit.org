@@ -45,7 +45,7 @@ export default class extends Vue {}
     max-width: 10 * $column-size-large;
 
     @include mq($from: medium, $until: large) {
-      max-width: 4 * $column-size-medium;
+      max-width: 6 * $column-size-medium;
     }
 
     @include mq($until: medium) {
