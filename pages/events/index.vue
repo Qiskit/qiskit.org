@@ -273,6 +273,10 @@ export default class extends QiskitPage {
       border: 1px solid $black-100;
     }
 
+    ::v-deep .bx--checkbox:focus + .bx--checkbox-label::before {
+      box-shadow: 0 0 0 2px $white, 0 0 0 4px $purple-60;
+    }
+
     ::v-deep .bx--label {
       color: $cool-gray-80;
     }
