@@ -224,7 +224,7 @@ export default class extends QiskitPage {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    background: $white;
+    background-color: $white;
 
     @include mq($from: medium) {
       position: absolute;
