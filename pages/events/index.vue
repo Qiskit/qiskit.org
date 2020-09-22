@@ -1,26 +1,6 @@
 <template>
   <div class="event-page">
-    <header class="header-video">
-      <client-only>
-        <video
-          v-if="isDesktop"
-          ref="video"
-          class="header-video__video"
-          loop
-          preload="none"
-          playsinline
-        >
-          <source src="@/assets/videos/qiskit-camp-africa-2019.mp4" type="video/mp4">
-          <source src="@/assets/videos/qiskit-camp-africa-2019.mp4" type="video/ogg">
-          Your browser does not support HTML5 video.
-        </video>
-      </client-only>
-      <div class="event-page__title">
-        <h1 class="wrapper">
-          Qiskit Events
-        </h1>
-      </div>
-    </header>
+    <TheEventsHeader />
     <div class="wrapper">
       <div class="event-page__filters-time">
         <client-only>
@@ -103,6 +83,8 @@ import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import EventCard from '~/components/events/EventCard.vue'
 import AppLink from '~/components/ui/AppLink.vue'
+import TheEventsHeader from '~/components/events/TheEventsHeader.vue'
+
 import {
   CommunityEvent,
   WORLD_REGION_OPTIONS,
@@ -115,7 +97,8 @@ import { EVENT_REQUEST_LINK } from '~/constants/appLinks'
 
   components: {
     EventCard,
-    AppLink
+    AppLink,
+    TheEventsHeader
   },
 
   head () {
@@ -154,30 +137,9 @@ export default class extends QiskitPage {
   types = COMMUNITY_EVENT_TYPE_OPTIONS
   routeName: string = 'events'
   eventRequestLink = EVENT_REQUEST_LINK
-  isDesktop: boolean = false
 
   get hasEvents (): boolean {
     return (this as any).filteredEvents.length !== 0
-  }
-
-  autoplayVideo () {
-    if (!this.$refs.video) {
-      return
-    }
-
-    const video = this.$refs.video as HTMLMediaElement
-
-    video.load()
-    video.muted = true
-    video.play()
-  }
-
-  async mounted () {
-    const medium = '42em' // mq.scss medium value
-    this.isDesktop = window.matchMedia(`(min-width: ${medium})`).matches
-
-    await this.$nextTick()
-    this.autoplayVideo()
   }
 
   isFilterChecked (filter: string, filterValue: string): Array<CommunityEvent> {
@@ -214,31 +176,8 @@ export default class extends QiskitPage {
 @import '~carbon-components/scss/globals/scss/typography';
 
 .event-page {
+  background-color: white;
   color: $text-01;
-
-  &__title {
-    bottom: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    background: linear-gradient(0deg, #262626 0%, #26262600 100%);
-
-    @include mq($from: medium) {
-      position: absolute;
-    }
-
-    h1 {
-      @include type-style('productive-heading-07');
-      padding-left: $layout-01;
-
-      @include mq($until: medium) {
-        @include type-style('productive-heading-06');
-        margin-top: $layout-01;
-      }
-    }
-  }
 
   &__event-index {
     display: flex;
@@ -284,29 +223,6 @@ export default class extends QiskitPage {
 
     a {
       color: $purple-30;
-    }
-  }
-}
-
-.header-video {
-  height: 20rem;
-  position: relative;
-  overflow: hidden;
-
-  &__video {
-    position: relative;
-    width: 100%;
-
-    @include mq($from: x-large) {
-      top: -60%;
-    }
-
-    @include mq($from: large, $until: x-large) {
-      top: -40%;
-    }
-
-    @include mq($from: medium, $until: large) {
-      top: -7%;
     }
   }
 }
