@@ -42,6 +42,15 @@ export default class extends Vue {}
   &__title {
     @include type-style('expressive-heading-05', true);
     color: $white-text-01;
+    max-width: 10 * $column-size-large;
+
+    @include mq($from: medium, $until: large) {
+      max-width: 4 * $column-size-medium;
+    }
+
+    @include mq($until: medium) {
+      max-width: 5 * $column-size-medium;
+    }
   }
 }
 </style>
