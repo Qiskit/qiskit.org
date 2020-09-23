@@ -214,7 +214,8 @@ export default class extends QiskitPage {
 @import '~carbon-components/scss/globals/scss/typography';
 
 .event-page {
-  color: $text-01;
+  background-color: $white;
+  color: $white-text-01;
 
   &__title {
     bottom: 0;
@@ -223,7 +224,7 @@ export default class extends QiskitPage {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    background: linear-gradient(0deg, #262626 0%, #26262600 100%);
+    background-color: $white;
 
     @include mq($from: medium) {
       position: absolute;
@@ -251,6 +252,34 @@ export default class extends QiskitPage {
 
   &__filters-time {
     margin-top: $layout-03;
+    // deep selector idea taken from
+    // https://vue-loader.vuejs.org/guide/scoped-css.html#deep-selectors
+    ::v-deep .bx--tabs__nav-link {
+      color: $black-100;
+      border-bottom-color: $gray-20;
+    }
+
+    ::v-deep .bx--tabs__nav-item:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link {
+      color: $cool-gray-80;
+    }
+
+    ::v-deep .bx--tabs__nav-item--selected:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link {
+        border-bottom-color: $purple-70;
+    }
+  }
+
+  &__filters-others {
+    ::v-deep .bx--checkbox-label::before {
+      border: 1px solid $black-100;
+    }
+
+    ::v-deep .bx--checkbox:focus + .bx--checkbox-label::before {
+      box-shadow: 0 0 0 2px $white, 0 0 0 4px $purple-60;
+    }
+
+    ::v-deep .bx--label {
+      color: $cool-gray-80;
+    }
   }
 
   /*
