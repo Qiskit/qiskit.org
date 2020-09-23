@@ -1,54 +1,58 @@
 <template>
-  <AppLink
-    class="card-link"
-    :url="to"
-  >
-    <article class="event-card">
-      <img
-        class="event-card__image"
-        :src="image"
-        alt=""
-      >
-      <div class="event-card__content">
-        <header class="event-card__header">
-          <h3 class="event-card__title">
-            {{ title }}
-          </h3>
-          <div class="event-card__tags">
-            <cv-tag
-              v-for="type in types"
-              :key="type"
-              :label="type"
-              kind="purple"
-            />
-          </div>
-        </header>
+  <article class="event-card">
+    <img
+      class="event-card__image"
+      :src="image"
+      alt=""
+    >
+    <div class="event-card__content">
+      <header class="event-card__header">
+        <h3 class="event-card__title">
+          {{ title }}
+        </h3>
+        <div class="event-card__tags">
+          <cv-tag
+            v-for="type in types"
+            :key="type"
+            :label="type"
+            kind="purple"
+          />
+        </div>
+      </header>
 
-        <footer>
+      <div>
+        <div class="event-card__info-detail">
+          <Map20 class="event-card__icon" />
+          <span class="event-card__location">{{ location }}</span>
+        </div>
+        <div class="event-card__date-and-arrow">
           <div class="event-card__info-detail">
-            <Map20 class="event-card__icon" />
-            <span class="event-card__location">{{ location }}</span>
+            <Calendar20 class="event-card__icon" />
+            <span class="event-card__date"><time>{{ date }}</time></span>
           </div>
-          <div class="event-card__date-and-arrow">
-            <div class="event-card__info-detail">
-              <Calendar20 class="event-card__icon" />
-              <span class="event-card__date"><time>{{ date }}</time></span>
-            </div>
-            <ArrowRight20 v-if="hasWebsite" class="event-card__icon event-card__icon--purple" />
-          </div>
-        </footer>
+        </div>
       </div>
-    </article>
-  </AppLink>
+
+      <footer>
+        <AppCta
+          v-if="hasWebsite"
+          class="event-card__link"
+          :url="to"
+        >
+          Join the event
+        </AppCta>
+      </footer>
+    </div>
+  </article>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-import AppLink from '~/components/ui/AppLink.vue'
+import AppCta from '~/components/ui/AppCta.vue'
 
 @Component({
-  components: { AppLink }
+  components: { AppCta }
 })
 export default class extends Vue {
   @Prop(Array) types
