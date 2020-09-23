@@ -1,7 +1,6 @@
 <template>
   <ThePageHeader class="the-learn-header">
-    Start your path towards
-    <br>learning
+    Start your path towards learning
     <TypewriterEffect
       :values="[
         'Qiskit',
