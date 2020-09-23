@@ -86,6 +86,8 @@
             :key="`empty`"
             :title="noResultsTitle"
             :image="noResultsImg"
+            :placeholder="true"
+            :placeholder-copy="placeholderCopy"
           />
         </div>
       </div>
@@ -153,6 +155,7 @@ export default class extends QiskitPage {
   isDesktop: boolean = false
   noResultsTitle: string = 'No events found'
   noResultsImg: string = '/images/events/no-events.jpg'
+  placeholderCopy: string = 'Trying doing a wider search criteria, or consider starting your own event.'
 
   get hasEvents (): boolean {
     return (this as any).filteredEvents.length !== 0

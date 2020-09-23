@@ -12,8 +12,8 @@
           <h3 class="event-card__title">
             {{ title }}
           </h3>
-          <p v-if="!hasWebsite" class="copy__paragraph">
-            Trying doing a wider search criteria, or consider starting your own event.
+          <p v-if="isPlaceholder" class="copy__paragraph">
+            {{ placeholderCopy }}
           </p>
         </header>
 
@@ -60,8 +60,11 @@ export default class extends Vue {
   @Prop(String) location
   @Prop(String) date
   @Prop(String) to
+  @Prop(Boolean) placeholder
+  @Prop(String) placeholderCopy
 
   hasWebsite: boolean = !!this.to
+  isPlaceholder: boolean = !!this.placeholder
 }
 </script>
 
