@@ -1,27 +1,7 @@
 <template>
   <div class="event-page">
-    <header class="header-video">
-      <client-only>
-        <video
-          v-if="isDesktop"
-          ref="video"
-          class="header-video__video"
-          loop
-          preload="none"
-          playsinline
-        >
-          <source src="@/assets/videos/qiskit-camp-africa-2019.mp4" type="video/mp4">
-          <source src="@/assets/videos/qiskit-camp-africa-2019.mp4" type="video/ogg">
-          Your browser does not support HTML5 video.
-        </video>
-      </client-only>
-      <div class="event-page__title">
-        <h1 class="wrapper">
-          Qiskit Events
-        </h1>
-      </div>
-    </header>
-    <div class="wrapper">
+    <TheEventsHeader />
+    <div class="event-page__wrapper">
       <div class="event-page__filters-time">
         <client-only>
           <cv-tabs aria-label="navigation tab label" @tab-selected="selectTab">
@@ -89,6 +69,14 @@
             :placeholder="true"
             :placeholder-copy="placeholderCopy"
           />
+          <p class="event-page__no-events-msg">
+            Nothing here yet -
+            <AppLink
+              class="event-page__link"
+              v-bind="eventRequestLink">
+              {{ eventRequestLink.label }}
+            </AppLink>
+          </p>
         </div>
       </div>
     </div>
@@ -101,6 +89,8 @@ import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import EventCard from '~/components/events/EventCard.vue'
 import AppLink from '~/components/ui/AppLink.vue'
+import TheEventsHeader from '~/components/events/TheEventsHeader.vue'
+
 import {
   CommunityEvent,
   WORLD_REGION_OPTIONS,
@@ -109,11 +99,10 @@ import {
 import { EVENT_REQUEST_LINK } from '~/constants/appLinks'
 
 @Component({
-  layout: 'carbon',
-
   components: {
     EventCard,
-    AppLink
+    AppLink,
+    TheEventsHeader
   },
 
   head () {
@@ -161,26 +150,6 @@ export default class extends QiskitPage {
     return (this as any).filteredEvents.length !== 0
   }
 
-  autoplayVideo () {
-    if (!this.$refs.video) {
-      return
-    }
-
-    const video = this.$refs.video as HTMLMediaElement
-
-    video.load()
-    video.muted = true
-    video.play()
-  }
-
-  async mounted () {
-    const medium = '42em' // mq.scss medium value
-    this.isDesktop = window.matchMedia(`(min-width: ${medium})`).matches
-
-    await this.$nextTick()
-    this.autoplayVideo()
-  }
-
   isFilterChecked (filter: string, filterValue: string): Array<CommunityEvent> {
     const typeFilters = (this as any).typeFilters
     const regionFilters = (this as any).regionFilters
@@ -218,27 +187,11 @@ export default class extends QiskitPage {
   background-color: $white;
   color: $white-text-01;
 
-  &__title {
-    bottom: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    background-color: $white;
+  &__wrapper {
+    @include contained();
 
-    @include mq($from: medium) {
-      position: absolute;
-    }
-
-    h1 {
-      @include type-style('productive-heading-07');
-      padding-left: $layout-01;
-
-      @include mq($until: medium) {
-        @include type-style('productive-heading-06');
-        margin-top: $layout-01;
-      }
+    & > * {
+      margin: $layout-01;
     }
   }
 
@@ -311,43 +264,10 @@ export default class extends QiskitPage {
 
   &__no-events-msg {
     @include type-style('body-short-02');
-
-    a {
-      color: $purple-30;
-    }
   }
-}
 
-.header-video {
-  height: 20rem;
-  position: relative;
-  overflow: hidden;
-
-  &__video {
-    position: relative;
-    width: 100%;
-
-    @include mq($from: x-large) {
-      top: -60%;
-    }
-
-    @include mq($from: large, $until: x-large) {
-      top: -40%;
-    }
-
-    @include mq($from: medium, $until: large) {
-      top: -7%;
-    }
-  }
-}
-
-.wrapper {
-  max-width: 1056px;
-  margin: 0 auto;
-  width: 100%;
-
-  & > * {
-    margin: $layout-01;
+  &__link {
+    color: $purple-30;
   }
 }
 </style>
