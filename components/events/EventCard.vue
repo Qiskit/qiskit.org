@@ -12,9 +12,12 @@
           <h3 class="event-card__title">
             {{ title }}
           </h3>
+          <p v-if="!hasWebsite" class="copy__paragraph">
+            Trying doing a wider search criteria, or consider starting your own event.
+          </p>
         </header>
 
-        <footer>
+        <footer v-if="hasWebsite">
           <div class="event-card__info-detail">
             <Map20 class="event-card__icon" />
             <span class="event-card__location">{{ location }}</span>
@@ -155,6 +158,10 @@ export default class extends Vue {
       width: 100%;
       height: auto;
     }
+  }
+
+  .copy__paragraph {
+    color: $text-01;
   }
 }
 </style>

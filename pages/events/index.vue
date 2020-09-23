@@ -82,15 +82,11 @@
           />
         </div>
         <div v-else class="event-page__results">
-          <p class="event-page__no-events-msg">
-            Nothing here yet -
-            <AppLink
-              class="experiment-header__source-code-link"
-              v-bind="eventRequestLink"
-            >
-              {{ eventRequestLink.label }}
-            </AppLink>
-          </p>
+          <EventCard
+            :key="`empty`"
+            :title="noResultsTitle"
+            :image="noResultsImg"
+          />
         </div>
       </div>
     </div>
@@ -155,6 +151,8 @@ export default class extends QiskitPage {
   routeName: string = 'events'
   eventRequestLink = EVENT_REQUEST_LINK
   isDesktop: boolean = false
+  noResultsTitle: string = 'No events found'
+  noResultsImg: string = '/images/events/no-events.jpg'
 
   get hasEvents (): boolean {
     return (this as any).filteredEvents.length !== 0
