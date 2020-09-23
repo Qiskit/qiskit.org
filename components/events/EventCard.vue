@@ -17,7 +17,7 @@
           </p>
         </header>
 
-        <footer v-if="hasWebsite">
+        <footer v-if="!isPlaceholder">
           <div class="event-card__info-detail">
             <Map20 class="event-card__icon" />
             <span class="event-card__location">{{ location }}</span>
