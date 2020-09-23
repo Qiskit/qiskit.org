@@ -10,13 +10,11 @@
         alt=""
       >
       <div class="event-card__content">
-        <header>
-          <span class="event-card__subtitle">
-            {{ type }}
-          </span>
+        <header class="event-card__header">
           <h3 class="event-card__title">
             {{ title }}
           </h3>
+          <cv-tag :label="type" kind="purple" />
         </header>
 
         <footer>
@@ -102,13 +100,24 @@ export default class extends Vue {
     justify-content: space-between;
   }
 
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @include mq($until: large) {
+      flex-direction: column;
+    }
+
+    .bx--tag--purple {
+      background-color: $purple-70;
+      color: $white;
+    }
+  }
+
   &__title {
     @include type-style('productive-heading-03');
     margin-top: 0.31rem;
-  }
-
-  &__subtitle {
-    @include type-style('productive-heading-02');
   }
 
   &__location, &__date {
