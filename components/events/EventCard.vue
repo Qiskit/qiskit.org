@@ -16,7 +16,7 @@
           </h3>
           <div class="event-card__tags">
             <cv-tag
-              v-for="type in [...types, 'Unconference', 'Hackathon', 'Workshop', 'Talk']"
+              v-for="type in types"
               :key="type"
               :label="type"
               kind="purple"
@@ -87,7 +87,6 @@ export default class extends Vue {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    overflow: hidden;
 
     @include mq($from: medium, $until: large) {
       width: 13rem;
@@ -100,7 +99,6 @@ export default class extends Vue {
   }
 
   &__content {
-    flex: 1;
     margin: 1rem;
     display: flex;
     flex-direction: column;
