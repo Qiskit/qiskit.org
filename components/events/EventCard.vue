@@ -14,7 +14,14 @@
           <h3 class="event-card__title">
             {{ title }}
           </h3>
-          <cv-tag :label="type" kind="purple" />
+          <div class="event-card__tags">
+            <cv-tag
+              v-for="type in [...types, 'Unconference', 'Hackathon', 'Workshop', 'Talk']"
+              :key="type"
+              :label="type"
+              kind="purple"
+            />
+          </div>
         </header>
 
         <footer>
@@ -44,7 +51,7 @@ import AppLink from '~/components/ui/AppLink.vue'
   components: { AppLink }
 })
 export default class extends Vue {
-  @Prop(String) type
+  @Prop(Array) types
   @Prop(String) title
   @Prop(String) image
   @Prop(String) location
@@ -103,21 +110,41 @@ export default class extends Vue {
   &__header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
 
     @include mq($until: large) {
       flex-direction: column;
+    }
+  }
+
+  &__title {
+    @include type-style('productive-heading-03');
+    width: 100%;
+  }
+
+  &__tags {
+    width: 20rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+
+    @include mq($until: large) {
+      justify-content: flex-start;
+      margin-top: $spacing-03;
+    }
+
+    @include mq($until: medium) {
+      width: 100%;
     }
 
     .bx--tag--purple {
       background-color: $purple-70;
       color: $white;
     }
-  }
 
-  &__title {
-    @include type-style('productive-heading-03');
-    margin-top: 0.31rem;
+    .bx--tag:first-child {
+      margin-left: 0;
+    }
   }
 
   &__location, &__date {
