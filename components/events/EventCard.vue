@@ -69,16 +69,12 @@ export default class extends Vue {
 <style lang="scss" scoped>
 @import '~carbon-components/scss/globals/scss/typography';
 
-.card-link {
-  text-decoration: none;
-}
-
 .event-card {
   height: 13rem;
   width: 100%;
   margin-bottom: 1rem;
-  background-color: $ui-01;
-  color: $text-01;
+  background-color: $cool-gray-10;
+  color: $cool-gray-80;
   display: flex;
 
   @include mq($until: medium) {
