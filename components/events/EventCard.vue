@@ -31,10 +31,9 @@
         </p>
       </div>
 
-      <footer>
+      <footer class="event-card__link">
         <AppCta
           v-if="hasWebsite"
-          class="event-card__link"
           :url="to"
         >
           Join the event
@@ -68,9 +67,9 @@ export default class extends Vue {
 @import '~carbon-components/scss/globals/scss/typography';
 
 .event-card {
-  height: 13rem;
+  min-height: 13rem;
   width: 100%;
-  margin-bottom: 1rem;
+  margin-bottom: $layout-03;
   background-color: $cool-gray-10;
   color: $cool-gray-80;
   display: flex;
@@ -99,8 +98,6 @@ export default class extends Vue {
   &__content {
     @include type-style('body-long-01');
     padding: $spacing-05 $spacing-05 $spacing-05 $spacing-07;
-    display: flex;
-    flex-direction: column;
   }
 
   &__header {
@@ -157,6 +154,11 @@ export default class extends Vue {
   &__icon {
     margin-right: $spacing-03;
     fill: currentColor;
+  }
+
+  &__link {
+    margin-top: $layout-03;
+    margin-bottom: $layout-01;
   }
 }
 </style>
