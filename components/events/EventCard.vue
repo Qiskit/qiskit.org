@@ -20,17 +20,15 @@
         </div>
       </header>
 
-      <div>
-        <div class="event-card__info-detail">
+      <div class="event-card__info-detail">
+        <p class="event-card__location">
           <Map20 class="event-card__icon" />
-          <span class="event-card__location">{{ location }}</span>
-        </div>
-        <div class="event-card__date-and-arrow">
-          <div class="event-card__info-detail">
-            <Calendar20 class="event-card__icon" />
-            <span class="event-card__date"><time>{{ date }}</time></span>
-          </div>
-        </div>
+          {{ location }}
+        </p>
+        <p class="event-card__date">
+          <Calendar20 class="event-card__icon" />
+          <time>{{ date }}</time>
+        </p>
       </div>
 
       <footer>
@@ -78,7 +76,7 @@ export default class extends Vue {
   display: flex;
 
   @include mq($until: medium) {
-    height: 24rem;
+    height: auto;
     flex-direction: column;
   }
 
@@ -99,10 +97,10 @@ export default class extends Vue {
   }
 
   &__content {
-    margin: 1rem;
+    @include type-style('body-long-01');
+    padding: $spacing-05 $spacing-05 $spacing-05 $spacing-07;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
   }
 
   &__header {
@@ -116,7 +114,7 @@ export default class extends Vue {
   }
 
   &__title {
-    @include type-style('productive-heading-03');
+    @include type-style('productive-heading-02');
     width: 100%;
   }
 
@@ -145,34 +143,20 @@ export default class extends Vue {
     }
   }
 
-  &__location, &__date {
-    @include type-style('body-short-01');
-  }
-
-  &__location, &__date {
-    padding-left: 0.31rem;
-  }
-
   &__info-detail {
-    margin-top: 0.63rem;
+    margin-top: $spacing-06;
+  }
+
+  &__location, &__date {
+    @include type-style('body-long-01');
+    margin-bottom: $spacing-03;
+    display: flex;
+    align-items: center;
   }
 
   &__icon {
+    margin-right: $spacing-03;
     fill: currentColor;
-    position: relative;
-    top: .3em;
-    width: 1.25rem;
-    height: 1.25rem;
-
-    &--purple {
-      color: $icon-01;
-    }
-  }
-
-  &__date-and-arrow {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
   }
 }
 </style>
