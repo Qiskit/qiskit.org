@@ -141,7 +141,6 @@ export default class extends QiskitPage {
   types = COMMUNITY_EVENT_TYPE_OPTIONS
   routeName: string = 'events'
   eventRequestLink = EVENT_REQUEST_LINK
-  isDesktop: boolean = false
   noResultsTitle: string = 'No events found'
   noResultsImg: string = '/images/events/no-events.jpg'
   placeholderCopy: string = 'Trying doing a wider search criteria, or consider starting your own event.'
