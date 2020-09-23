@@ -1,6 +1,6 @@
 <template>
   <ThePageHeader class="the-learn-header">
-    Join events from the worlds
+    Join events from the world's
     <TypewriterEffect
       :values="[
         'largest',
