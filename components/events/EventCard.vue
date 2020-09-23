@@ -80,19 +80,11 @@ export default class extends Vue {
   }
 
   &__image {
-    width: 14rem;
+    min-height: 13rem;
+    width: 100%;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-
-    @include mq($from: medium, $until: large) {
-      width: 13rem;
-    }
-
-    @include mq($until: medium) {
-      height: 13rem;
-      width: auto;
-    }
   }
 
   &__content {
