@@ -4,6 +4,11 @@
     :url="to"
   >
     <article class="event-card">
+      <img
+        class="event-card__image"
+        :src="image"
+        alt=""
+      >
       <div class="event-card__content">
         <header>
           <span class="event-card__subtitle">
@@ -27,16 +32,6 @@
             <ArrowRight20 v-if="hasWebsite" class="event-card__icon event-card__icon--purple" />
           </div>
         </footer>
-      </div>
-
-      <div
-        class="event-card__media"
-      >
-        <img
-          class="event-card__media-image"
-          :src="image"
-          alt=""
-        >
       </div>
     </article>
   </AppLink>
@@ -70,17 +65,33 @@ export default class extends Vue {
 }
 
 .event-card {
-  height: 15.88rem;
+  height: 13rem;
   width: 100%;
   margin-bottom: 1rem;
   background-color: $ui-01;
   color: $text-01;
-  border-top: 1px solid $ui-03;
   display: flex;
 
   @include mq($until: medium) {
-    height: auto;
-    flex-direction: column-reverse;
+    height: 24rem;
+    flex-direction: column;
+  }
+
+  &__image {
+    width: 14rem;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+
+    @include mq($from: medium, $until: large) {
+      width: 13rem;
+    }
+
+    @include mq($until: medium) {
+      height: 13rem;
+      width: auto;
+    }
   }
 
   &__content {
@@ -128,33 +139,6 @@ export default class extends Vue {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-  }
-
-  &__media {
-    flex: 1;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    overflow: hidden;
-
-    @include mq($until: medium) {
-
-    }
-  }
-
-  &__media-image {
-    width: auto;
-    height: 100%;
-    /*
-    Safari ignores width: auto when height is 100%.
-    TODO: Find a better/more standard solution.
-    */
-    height: -webkit-fill-available;
-
-    @include mq($until: medium) {
-      width: 100%;
-      height: auto;
-    }
   }
 }
 </style>
