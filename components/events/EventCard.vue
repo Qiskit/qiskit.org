@@ -2,8 +2,9 @@
   <article class="event-card">
     <img
       class="event-card__image"
-      :src="image"
       alt=""
+      src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+      :lazy-background="image"
     >
     <div class="event-card__content">
       <header class="event-card__header">
@@ -80,15 +81,25 @@ export default class extends Vue {
   }
 
   &__image {
-    min-height: 13rem;
-    width: 100%;
+    width: 30%;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+    overflow: hidden;
+
+    @include mq($from: medium, $until: large) {
+      width: 45%;
+    }
+
+    @include mq($until: medium) {
+      height: 50%;
+      width: auto;
+    }
   }
 
   &__content {
     @include type-style('body-long-01');
+    flex: 1;
     padding: $spacing-05 $spacing-05 $spacing-05 $spacing-07;
   }
 
