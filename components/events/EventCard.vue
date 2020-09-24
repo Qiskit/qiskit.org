@@ -12,9 +12,12 @@
           <h3 class="event-card__title">
             {{ title }}
           </h3>
+          <p v-if="isPlaceholder" class="copy__paragraph">
+            {{ placeholderCopy }}
+          </p>
         </header>
 
-        <footer>
+        <footer v-if="!isPlaceholder">
           <div class="event-card__info-detail">
             <Map20 class="event-card__icon" />
             <span class="event-card__location">{{ location }}</span>
@@ -57,8 +60,11 @@ export default class extends Vue {
   @Prop(String) location
   @Prop(String) date
   @Prop(String) to
+  @Prop(Boolean) placeholder
+  @Prop(String) placeholderCopy
 
   hasWebsite: boolean = !!this.to
+  isPlaceholder: boolean = !!this.placeholder
 }
 </script>
 
@@ -155,6 +161,10 @@ export default class extends Vue {
       width: 100%;
       height: auto;
     }
+  }
+
+  .copy__paragraph {
+    color: $text-01;
   }
 }
 </style>
