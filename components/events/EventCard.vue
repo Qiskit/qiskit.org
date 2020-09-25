@@ -98,8 +98,11 @@ export default class extends Vue {
 
   &__content {
     @include type-style('body-long-01');
-    flex: 1;
     padding: $spacing-05 $spacing-05 $spacing-05 $spacing-07;
+
+    @include mq($from: medium, $until: large) {
+      width: 55%;
+    }
   }
 
   &__header {
