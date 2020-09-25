@@ -11,7 +11,7 @@
         </h3>
         <div class="event-card__tags">
           <cv-tag
-            v-for="type in types"
+            v-for="type in [...types, 'Unconference', 'Talk', 'Business Conference', 'Hackathon']"
             :key="type"
             :label="type"
             kind="purple"
@@ -130,6 +130,10 @@ $img-medium-width: 13rem;
     @include mq($until: large) {
       justify-content: flex-start;
       margin-top: $spacing-03;
+    }
+
+    @include mq($from: medium, $until: large) {
+      width: auto;
     }
 
     @include mq($until: medium) {
