@@ -162,7 +162,6 @@ export default class extends Vue {
 
   &__link {
     margin-top: $layout-03;
-    margin-bottom: $layout-01;
   }
 }
 </style>
