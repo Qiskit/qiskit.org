@@ -1,11 +1,9 @@
 <template>
   <article class="event-card">
-    <img
+    <div
       class="event-card__image"
-      alt=""
-      src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
       :lazy-background="image"
-    >
+    />
     <div class="event-card__content">
       <header class="event-card__header">
         <h3 class="event-card__title">
