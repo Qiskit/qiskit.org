@@ -101,7 +101,7 @@ export default class extends Vue {
     padding: $spacing-05 $spacing-05 $spacing-05 $spacing-07;
 
     @include mq($from: medium, $until: large) {
-      width: 55%;
+      width: calc(100% - 13rem);
     }
   }
 
@@ -117,7 +117,6 @@ export default class extends Vue {
 
   &__title {
     @include type-style('productive-heading-02');
-    width: 100%;
   }
 
   &__tags {
