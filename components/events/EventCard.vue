@@ -65,6 +65,8 @@ export default class extends Vue {
 <style lang="scss" scoped>
 @import '~carbon-components/scss/globals/scss/typography';
 
+$img-medium-width: 13rem;
+
 .event-card {
   min-height: 13rem;
   width: 100%;
@@ -101,7 +103,7 @@ export default class extends Vue {
     padding: $spacing-05 $spacing-05 $spacing-05 $spacing-07;
 
     @include mq($from: medium, $until: large) {
-      width: calc(100% - 13rem);
+      width: calc(100% - #{$img-medium-width});
     }
   }
 
