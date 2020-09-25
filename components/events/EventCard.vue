@@ -11,7 +11,7 @@
         </h3>
         <div class="event-card__tags">
           <cv-tag
-            v-for="type in [...types, 'Unconference', 'Talk', 'Business Conference', 'Hackathon']"
+            v-for="type in types"
             :key="type"
             :label="type"
             kind="purple"
@@ -82,7 +82,6 @@ $img-medium-width: 13rem;
 
   &__image {
     flex: 0 0 14rem;
-    background-color: transparent;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -151,7 +150,7 @@ $img-medium-width: 13rem;
   }
 
   &__info-detail {
-    margin-top: $spacing-06;
+    margin-top: $layout-02;
   }
 
   &__location, &__date {
