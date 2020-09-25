@@ -25,8 +25,6 @@ import { Component, Prop } from 'vue-property-decorator'
 export default class extends Vue {
   @Prop(String) title
   @Prop(String) description
-
-  placeholderImg: string = '/images/events/no-events.jpg'
 }
 </script>
 
