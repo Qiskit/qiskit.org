@@ -49,10 +49,6 @@ export default class extends Vue {
 
   &__image {
     width: carbon--mini-units(28);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    overflow: hidden;
     background-color: $cool-gray-30;
 
     @include mq($from: medium, $until: large) {
