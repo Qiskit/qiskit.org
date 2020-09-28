@@ -196,50 +196,54 @@ export default class extends QiskitPage {
 
   &__filters-time {
     margin-top: $layout-03;
-    & .bx--tabs__nav-link {
+    .bx--tabs__nav-link {
       color: $black-100;
       border-bottom-color: $gray-20;
     }
 
-    & .bx--tabs__nav-item:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link,
+    .bx--tabs__nav-item:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link,
     .bx--tabs__nav-item:hover:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link {
       color: $cool-gray-80;
     }
 
-    & .bx--tabs__nav-item--selected:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link {
+    .bx--tabs__nav-item--selected:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link {
         border-bottom-color: $purple-70;
     }
 
     @include mq($until: medium) {
-      & .bx--tabs__nav-item,
-      & .bx--tabs-trigger {
-        background-color: $white;
+      .bx--tabs__nav-item,
+      .bx--tabs-trigger {
+        background-color: $cool-gray-10;
       }
 
-      & .bx--tabs-trigger-text {
+      .bx--tabs-trigger svg {
+        fill: $cool-gray-80;
+      }
+
+      .bx--tabs-trigger-text {
         color: $white-text-01;
       }
 
-      & .bx--tabs__nav-link {
+      .bx--tabs__nav-link {
         border-bottom: none;
       }
 
-      & .bx--tabs__nav-item:hover:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link {
-      color: $white;
-    }
+      .bx--tabs__nav-item:hover:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled) {
+        background-color: #e5e5e5;
+      }
     }
   }
 
   &__filters-others {
-    & .bx--checkbox-label::before {
+    .bx--checkbox-label::before {
       border: 1px solid $black-100;
     }
 
-    & .bx--checkbox:focus + .bx--checkbox-label::before {
+    .bx--checkbox:focus + .bx--checkbox-label::before {
       box-shadow: 0 0 0 2px $white, 0 0 0 4px $purple-60;
     }
 
-    & .bx--label {
+    .bx--label {
       color: $cool-gray-80;
     }
   }
