@@ -66,7 +66,8 @@
             Nothing here yet -
             <AppLink
               class="event-page__link"
-              v-bind="eventRequestLink">
+              v-bind="eventRequestLink"
+            >
               {{ eventRequestLink.label }}
             </AppLink>
           </p>
@@ -169,7 +170,7 @@ export default class extends QiskitPage {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '~carbon-components/scss/globals/scss/typography';
 
 .event-page {
@@ -195,32 +196,50 @@ export default class extends QiskitPage {
 
   &__filters-time {
     margin-top: $layout-03;
-    // deep selector idea taken from
-    // https://vue-loader.vuejs.org/guide/scoped-css.html#deep-selectors
-    ::v-deep .bx--tabs__nav-link {
+    & .bx--tabs__nav-link {
       color: $black-100;
       border-bottom-color: $gray-20;
     }
 
-    ::v-deep .bx--tabs__nav-item:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link {
+    & .bx--tabs__nav-item:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link,
+    .bx--tabs__nav-item:hover:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link {
       color: $cool-gray-80;
     }
 
-    ::v-deep .bx--tabs__nav-item--selected:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link {
+    & .bx--tabs__nav-item--selected:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link {
         border-bottom-color: $purple-70;
+    }
+
+    @include mq($until: medium) {
+      & .bx--tabs__nav-item,
+      & .bx--tabs-trigger {
+        background-color: $white;
+      }
+
+      & .bx--tabs-trigger-text {
+        color: $white-text-01;
+      }
+
+      & .bx--tabs__nav-link {
+        border-bottom: none;
+      }
+
+      & .bx--tabs__nav-item:hover:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link {
+      color: $white;
+    }
     }
   }
 
   &__filters-others {
-    ::v-deep .bx--checkbox-label::before {
+    & .bx--checkbox-label::before {
       border: 1px solid $black-100;
     }
 
-    ::v-deep .bx--checkbox:focus + .bx--checkbox-label::before {
+    & .bx--checkbox:focus + .bx--checkbox-label::before {
       box-shadow: 0 0 0 2px $white, 0 0 0 4px $purple-60;
     }
 
-    ::v-deep .bx--label {
+    & .bx--label {
       color: $cool-gray-80;
     }
   }
