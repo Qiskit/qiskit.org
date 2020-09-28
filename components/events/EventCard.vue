@@ -118,6 +118,7 @@ $img-medium-width: 13rem;
 
   &__title {
     @include type-style('productive-heading-02');
+    flex: 0 0 auto;
   }
 
   &__tags {
