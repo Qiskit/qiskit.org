@@ -6,10 +6,10 @@
       alt=""
     >
     <div class="empty-card__content">
-      <h3 class="copy__subtitle">
+      <h3 class="empty-card__title">
         {{ title }}
       </h3>
-      <p class="copy__paragraph copy__paragraph_importance_support">
+      <p class="copy__paragraph">
         {{ description }}
       </p>
     </div>
@@ -20,8 +20,7 @@
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 
-@Component({})
-
+@Component
 export default class extends Vue {
   @Prop(String) title
   @Prop(String) description
@@ -32,7 +31,7 @@ export default class extends Vue {
 @import '~carbon-components/scss/globals/scss/typography';
 
 .empty-card {
-  height: carbon--mini-units(26);
+  height: 13rem;
   width: 100%;
   background-color: $cool-gray-10;
   margin-bottom: $layout-02;
@@ -48,24 +47,28 @@ export default class extends Vue {
   }
 
   &__image {
-    width: carbon--mini-units(28);
+    width: 14rem;
     background-color: $cool-gray-30;
 
     @include mq($from: medium, $until: large) {
-      width: carbon--mini-units(26);
+      width: 13rem;
     }
 
     @include mq($until: medium) {
-      height: carbon--mini-units(22);
+      height: 11rem;
       width: auto;
     }
   }
 
   &__content {
     flex: 1;
-    margin: $spacing-05;
+    margin: $spacing-05 $spacing-05 $spacing-05 $spacing-07;
     display: flex;
     flex-direction: column;
+  }
+
+  &__title {
+    @include type-style('productive-heading-02');
   }
 }
 </style>
