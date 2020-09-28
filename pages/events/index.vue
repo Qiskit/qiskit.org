@@ -213,7 +213,7 @@ export default class extends QiskitPage {
     @include mq($until: medium) {
       .bx--tabs__nav-item,
       .bx--tabs-trigger {
-        background-color: $cool-gray-10;
+        background-color: $white;
       }
 
       .bx--tabs-trigger svg {
