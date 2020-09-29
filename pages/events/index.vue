@@ -62,11 +62,13 @@
           />
         </div>
         <div v-else class="event-page__results">
+          <EmptyCard :title="emptyCardTitle" :description="emptyCardDescription" />
           <p class="event-page__no-events-msg">
             Nothing here yet -
             <AppLink
               class="event-page__link"
-              v-bind="eventRequestLink">
+              v-bind="eventRequestLink"
+            >
               {{ eventRequestLink.label }}
             </AppLink>
           </p>
@@ -81,6 +83,7 @@ import { mapGetters, mapActions } from 'vuex'
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import EventCard from '~/components/events/EventCard.vue'
+import EmptyCard from '~/components/events/EmptyCard.vue'
 import AppLink from '~/components/ui/AppLink.vue'
 import TheEventsHeader from '~/components/events/TheEventsHeader.vue'
 
@@ -94,6 +97,7 @@ import { EVENT_REQUEST_LINK } from '~/constants/appLinks'
 @Component({
   components: {
     EventCard,
+    EmptyCard,
     AppLink,
     TheEventsHeader
   },
@@ -134,6 +138,8 @@ export default class extends QiskitPage {
   types = COMMUNITY_EVENT_TYPE_OPTIONS
   routeName: string = 'events'
   eventRequestLink = EVENT_REQUEST_LINK
+  emptyCardTitle: string = 'No events found'
+  emptyCardDescription: string = 'Trying doing a wider search criteria, or consider starting your own event.'
 
   get hasEvents (): boolean {
     return (this as any).filteredEvents.length !== 0
@@ -256,7 +262,8 @@ export default class extends QiskitPage {
   }
 
   &__link {
-    color: $purple-30;
+    color: $purple-70;
+    text-decoration: none;
   }
 }
 </style>
