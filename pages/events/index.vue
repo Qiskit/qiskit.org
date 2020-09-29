@@ -53,7 +53,7 @@
           <EventCard
             v-for="event in filteredEvents"
             :key="`${event.place}-${event.date}`"
-            :type="formatType(event.types)"
+            :types="event.types"
             :title="event.title"
             :image="event.image"
             :location="event.location"
@@ -167,10 +167,6 @@ export default class extends QiskitPage {
     const activeSet = selectedTab === 0 ? 'upcoming' : 'past'
 
     this.$store.commit('setActiveSet', activeSet)
-  }
-
-  formatType (types: CommunityEvent[]): string {
-    return types.join(', ')
   }
 }
 </script>
