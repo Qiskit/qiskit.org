@@ -82,8 +82,9 @@ $img-medium-width: 13rem;
 
   &__image {
     flex: 0 0 14rem;
+    background-color: $cool-gray-80;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: 100%;
     background-position: center;
     overflow: hidden;
 
