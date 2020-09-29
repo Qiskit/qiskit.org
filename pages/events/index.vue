@@ -5,8 +5,8 @@
       <div class="event-page__filters-time">
         <client-only>
           <cv-tabs aria-label="navigation tab label" @tab-selected="selectTab">
-            <cv-tab id="tab-1" label="Upcoming" />
-            <cv-tab id="tab-2" label="Past" />
+            <cv-tab id="tab-1" label="Upcoming events" />
+            <cv-tab id="tab-2" label="Past events" />
           </cv-tabs>
         </client-only>
       </div>
@@ -211,25 +211,42 @@ export default class extends QiskitPage {
     }
 
     @include mq($until: medium) {
-      .bx--tabs__nav-item,
       .bx--tabs-trigger {
         background-color: $white;
       }
 
+      .bx--tabs-trigger {
+        border-bottom: 1px solid #E0E0E0;
+      }
+
       .bx--tabs-trigger svg {
-        fill: $cool-gray-80;
+        fill: $black-100;
       }
 
       .bx--tabs-trigger-text {
-        color: $white-text-01;
+        color: $gray-100;
       }
 
-      .bx--tabs__nav-link {
+      .bx--tabs-trigger--open {
+        border-bottom: 1px solid $gray-60;
+      }
+
+      .bx--tabs-trigger--open,
+      .bx--tabs__nav-item {
+        background-color: $cool-gray-10;
+      }
+
+      .bx--tabs__nav {
+        box-shadow: initial;
+      }
+
+      .bx--tabs__nav-item:last-child .bx--tabs__nav-link {
         border-bottom: none;
       }
 
       .bx--tabs__nav-item:hover:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled) {
         background-color: #e5e5e5;
+        box-shadow: initial;
       }
     }
   }
