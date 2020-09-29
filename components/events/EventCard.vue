@@ -101,10 +101,6 @@ $img-medium-width: 13rem;
   &__content {
     @include type-style('body-long-01');
     padding: $spacing-05 $spacing-05 $spacing-05 $spacing-07;
-
-    @include mq($from: medium, $until: large) {
-      width: calc(100% - #{$img-medium-width});
-    }
   }
 
   &__header {
