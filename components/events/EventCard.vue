@@ -1,57 +1,57 @@
 <template>
-  <AppLink
-    class="card-link"
-    :url="to"
-  >
-    <article class="event-card">
-      <div class="event-card__content">
-        <header>
-          <span class="event-card__subtitle">
-            {{ type }}
-          </span>
-          <h3 class="event-card__title">
-            {{ title }}
-          </h3>
-        </header>
+  <article class="event-card">
+    <div
+      class="event-card__image"
+      :lazy-background="image"
+    />
+    <div class="event-card__content">
+      <header class="event-card__header">
+        <h3 class="event-card__title">
+          {{ title }}
+        </h3>
+        <div class="event-card__tags">
+          <cv-tag
+            v-for="type in types"
+            :key="type"
+            :label="type"
+            kind="purple"
+          />
+        </div>
+      </header>
 
-        <footer>
-          <div class="event-card__info-detail">
-            <Map20 class="event-card__icon" />
-            <span class="event-card__location">{{ location }}</span>
-          </div>
-          <div class="event-card__date-and-arrow">
-            <div class="event-card__info-detail">
-              <Calendar20 class="event-card__icon" />
-              <span class="event-card__date"><time>{{ date }}</time></span>
-            </div>
-            <ArrowRight20 v-if="hasWebsite" class="event-card__icon event-card__icon--purple" />
-          </div>
-        </footer>
+      <div class="event-card__info-detail">
+        <p class="event-card__location">
+          <Map20 class="event-card__icon" />
+          {{ location }}
+        </p>
+        <p class="event-card__date">
+          <Calendar20 class="event-card__icon" />
+          <time>{{ date }}</time>
+        </p>
       </div>
 
-      <div
-        class="event-card__media"
-      >
-        <img
-          class="event-card__media-image"
-          :src="image"
-          alt=""
+      <footer class="event-card__link">
+        <AppCta
+          v-if="hasWebsite"
+          :url="to"
         >
-      </div>
-    </article>
-  </AppLink>
+          Join the event
+        </AppCta>
+      </footer>
+    </div>
+  </article>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-import AppLink from '~/components/ui/AppLink.vue'
+import AppCta from '~/components/ui/AppCta.vue'
 
 @Component({
-  components: { AppLink }
+  components: { AppCta }
 })
 export default class extends Vue {
-  @Prop(String) type!: any
+  @Prop(Array) types!: any
   @Prop(String) title!: any
   @Prop(String) image!: any
   @Prop(String) location!: any
@@ -65,96 +65,106 @@ export default class extends Vue {
 <style lang="scss" scoped>
 @import '~carbon-components/scss/globals/scss/typography';
 
-.card-link {
-  text-decoration: none;
-}
+$img-medium-width: 13rem;
 
 .event-card {
-  height: 15.88rem;
+  min-height: 13rem;
   width: 100%;
-  margin-bottom: 1rem;
-  background-color: $ui-01;
-  color: $text-01;
-  border-top: 1px solid $ui-03;
+  margin-bottom: $layout-03;
+  background-color: $cool-gray-10;
+  color: $cool-gray-80;
   display: flex;
 
   @include mq($until: medium) {
     height: auto;
-    flex-direction: column-reverse;
-  }
-
-  &__content {
-    flex: 1;
-    margin: 1rem;
-    display: flex;
     flex-direction: column;
-    justify-content: space-between;
   }
 
-  &__title {
-    @include type-style('productive-heading-03');
-    margin-top: 0.31rem;
-  }
-
-  &__subtitle {
-    @include type-style('productive-heading-02');
-  }
-
-  &__location, &__date {
-    @include type-style('body-short-01');
-  }
-
-  &__location, &__date {
-    padding-left: 0.31rem;
-  }
-
-  &__info-detail {
-    margin-top: 0.63rem;
-  }
-
-  &__icon {
-    fill: currentColor;
-    position: relative;
-    top: .3em;
-    width: 1.25rem;
-    height: 1.25rem;
-
-    &--purple {
-      color: $icon-01;
-    }
-  }
-
-  &__date-and-arrow {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-  }
-
-  &__media {
-    flex: 1;
+  &__image {
+    flex: 0 0 14rem;
+    background-color: $cool-gray-80;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: 100%;
     background-position: center;
     overflow: hidden;
 
-    @include mq($until: medium) {
+    @include mq($from: medium, $until: large) {
+      flex: 0 0 13rem;
+    }
 
+    @include mq($until: medium) {
+      height: 13rem;
+      width: auto;
     }
   }
 
-  &__media-image {
-    width: auto;
-    height: 100%;
-    /*
-    Safari ignores width: auto when height is 100%.
-    TODO: Find a better/more standard solution.
-    */
-    height: -webkit-fill-available;
+  &__content {
+    @include type-style('body-long-01');
+    padding: $spacing-05 $spacing-05 $spacing-05 $spacing-07;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    @include mq($until: large) {
+      flex-direction: column;
+    }
+  }
+
+  &__title {
+    @include type-style('productive-heading-02');
+    flex: 0 0 auto;
+  }
+
+  &__tags {
+    width: 20rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+
+    @include mq($until: large) {
+      justify-content: flex-start;
+      margin-top: $spacing-03;
+    }
+
+    @include mq($from: medium, $until: large) {
+      width: auto;
+    }
 
     @include mq($until: medium) {
       width: 100%;
-      height: auto;
     }
+
+    .bx--tag--purple {
+      background-color: $purple-70;
+      color: $white;
+    }
+
+    .bx--tag:first-child {
+      margin-left: 0;
+    }
+  }
+
+  &__info-detail {
+    margin-top: $layout-02;
+  }
+
+  &__location, &__date {
+    @include type-style('body-long-01');
+    margin-bottom: $spacing-03;
+    display: flex;
+    align-items: center;
+  }
+
+  &__icon {
+    margin-right: $spacing-03;
+    fill: currentColor;
+  }
+
+  &__link {
+    margin-top: $layout-03;
   }
 }
 </style>
