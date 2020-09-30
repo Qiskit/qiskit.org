@@ -217,7 +217,7 @@ export default class extends QiskitPage {
       }
 
       .bx--tabs-trigger {
-        border-bottom: 1px solid #E0E0E0;
+        border-bottom: 1px solid $gray-20;
       }
 
       .bx--tabs-trigger svg {
@@ -246,7 +246,7 @@ export default class extends QiskitPage {
       }
 
       .bx--tabs__nav-item:hover:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled) {
-        background-color: #e5e5e5;
+        background-color: $cool-gray-20;
         box-shadow: initial;
       }
     }
