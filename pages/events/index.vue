@@ -62,13 +62,12 @@
           />
         </div>
         <div v-else class="event-page__results">
-          <AppBasicCard :image="emptyCard.img" class="event-page__no-events-card">
-            <h3 class="app-card__title">
-              {{ emptyCard.title }}
-            </h3>
-            <p class="app-card__description">
-              {{ emptyCard.description }}
-            </p>
+          <AppBasicCard
+            class="event-page__no-events-card"
+            :image="emptyCard.img"
+            :title="emptyCard.title"
+          >
+            {{ emptyCard.description }}
           </AppBasicCard>
           <p class="event-page__no-events-msg">
             Nothing here yet -
