@@ -1,11 +1,14 @@
 <template>
   <ThePageHeader class="the-learn-header">
-    Join events from the world&rsquo;s
-    <TypewriterEffect
+    Join <TypewriterEffect
       :values="[
-        'largest',
+        'events',
+        'hackathons',
+        'camps',
+        'unconferences',
+        'talks'
       ]"
-    />
+    /> from the world&rsquo;s largest
     quantum computing community
   </ThePageHeader>
 </template>
