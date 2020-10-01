@@ -5,8 +5,8 @@
       <div class="event-page__filters-time">
         <client-only>
           <cv-tabs aria-label="navigation tab label" @tab-selected="selectTab">
-            <cv-tab id="tab-1" label="Upcoming" />
-            <cv-tab id="tab-2" label="Past" />
+            <cv-tab id="tab-1" label="Upcoming events" />
+            <cv-tab id="tab-2" label="Past events" />
           </cv-tabs>
         </client-only>
       </div>
@@ -171,7 +171,7 @@ export default class extends QiskitPage {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '~carbon-components/scss/globals/scss/typography';
 
 .event-page {
@@ -197,32 +197,71 @@ export default class extends QiskitPage {
 
   &__filters-time {
     margin-top: $layout-03;
-    // deep selector idea taken from
-    // https://vue-loader.vuejs.org/guide/scoped-css.html#deep-selectors
-    ::v-deep .bx--tabs__nav-link {
+    .bx--tabs__nav-link {
       color: $black-100;
       border-bottom-color: $gray-20;
     }
 
-    ::v-deep .bx--tabs__nav-item:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link {
+    .bx--tabs__nav-item:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link,
+    .bx--tabs__nav-item:hover:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link {
       color: $cool-gray-80;
     }
 
-    ::v-deep .bx--tabs__nav-item--selected:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link {
+    .bx--tabs__nav-item--selected:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link {
         border-bottom-color: $purple-70;
+    }
+
+    @include mq($until: medium) {
+      .bx--tabs-trigger {
+        background-color: $white;
+      }
+
+      .bx--tabs-trigger {
+        border-bottom: 1px solid $gray-20;
+      }
+
+      .bx--tabs-trigger svg {
+        fill: $black-100;
+      }
+
+      .bx--tabs-trigger-text {
+        color: $gray-100;
+      }
+
+      .bx--tabs-trigger--open {
+        border-bottom: 1px solid $gray-60;
+      }
+
+      .bx--tabs-trigger--open,
+      .bx--tabs__nav-item {
+        background-color: $cool-gray-10;
+      }
+
+      .bx--tabs__nav {
+        box-shadow: initial;
+      }
+
+      .bx--tabs__nav-item:last-child .bx--tabs__nav-link {
+        border-bottom: none;
+      }
+
+      .bx--tabs__nav-item:hover:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled) {
+        background-color: $cool-gray-20;
+        box-shadow: initial;
+      }
     }
   }
 
   &__filters-others {
-    ::v-deep .bx--checkbox-label::before {
+    .bx--checkbox-label::before {
       border: 1px solid $black-100;
     }
 
-    ::v-deep .bx--checkbox:focus + .bx--checkbox-label::before {
+    .bx--checkbox:focus + .bx--checkbox-label::before {
       box-shadow: 0 0 0 2px $white, 0 0 0 4px $purple-60;
     }
 
-    ::v-deep .bx--label {
+    .bx--label {
       color: $cool-gray-80;
     }
   }
