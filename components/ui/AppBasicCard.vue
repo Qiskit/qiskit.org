@@ -9,7 +9,7 @@
         {{ title }}
       </h3>
       <slot class="app-card__description" />
-      <AppCta v-if="to" :url="to">
+      <AppCta v-if="to" :url="to" class="app-card__link">
         {{ ctaLabel }}
       </AppCta>
     </div>
@@ -65,6 +65,8 @@ export default class extends Vue {
 
   &__content {
     padding: $spacing-05 $spacing-05 $spacing-05 $spacing-07;
+    display: flex;
+    flex-direction: column;
   }
 
   &__title {
@@ -74,6 +76,10 @@ export default class extends Vue {
 
   &__description {
     @include type-style('body-long-01');
+  }
+
+  &__link {
+    margin-top: auto;
   }
 }
 </style>
