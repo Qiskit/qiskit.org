@@ -21,18 +21,16 @@
         :compact="isShowingMoreResources"
         url="/learn/?learnLevel=Advanced&amp;timeScale=1%20minute"
       />
-      <AppCard
+      <AppBasicCard
         v-for="resource in filteredLearningResources"
         :key="resource.path"
-        :image="resource.image">
-        <h3 class="app-card__title">
-          {{ resource.title }}
-        </h3>
+        :image="resource.image"
+        :title="resource.title"
+        :to="resource.to"
+        :cta-label="resource.ctaLabel"
+      >
         <nuxt-content class="copy" :document="resource" />
-        <AppCta :url="resource.to">
-          {{ resource.ctaLabel }}
-        </AppCta>
-      </AppCard>
+      </AppBasicCard>
     </TheLearningResourceList>
   </div>
 </template>
@@ -43,8 +41,7 @@ import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import TheLearnHeader from '~/components/learn/TheLearnHeader.vue'
 import TheLearningResourceList from '~/components/learn/TheLearningResourceList.vue'
-import AppCard from '~/components/ui/AppCard.vue'
-import AppCta from '~/components/ui/AppCta.vue'
+import AppBasicCard from '~/components/ui/AppBasicCard.vue'
 import TheCarefulExplanationForBeginners from '~/components/learn/TheCarefulExplanationForBeginners.vue'
 import TheCarefulExplanationForExperts from '~/components/learn/TheCarefulExplanationForExperts.vue'
 import {
@@ -62,8 +59,7 @@ import {
     TheLearningResourceList,
     TheCarefulExplanationForExperts,
     TheCarefulExplanationForBeginners,
-    AppCard,
-    AppCta
+    AppBasicCard
   },
 
   head () {

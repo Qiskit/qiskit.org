@@ -5,7 +5,13 @@
       :lazy-background="image"
     />
     <div class="app-card__content">
-      <slot />
+      <h3 class="app-card__title">
+        {{ title }}
+      </h3>
+      <slot class="app-card__description" />
+      <AppCta v-if="to" :url="to">
+        {{ ctaLabel }}
+      </AppCta>
     </div>
   </article>
 </template>
@@ -13,10 +19,14 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
+import AppCta from '~/components/ui/AppCta.vue'
 
-@Component
+@Component({ components: { AppCta } })
 export default class extends Vue {
   @Prop(String) image
+  @Prop(String) title
+  @Prop(String) to
+  @Prop(String) ctaLabel
 }
 </script>
 

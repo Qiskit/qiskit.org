@@ -62,14 +62,14 @@
           />
         </div>
         <div v-else class="event-page__results">
-          <AppCard :image="emptyCard.img" class="event-page__no-events-card">
+          <AppBasicCard :image="emptyCard.img" class="event-page__no-events-card">
             <h3 class="app-card__title">
               {{ emptyCard.title }}
             </h3>
             <p class="app-card__description">
               {{ emptyCard.description }}
             </p>
-          </AppCard>
+          </AppBasicCard>
           <p class="event-page__no-events-msg">
             Nothing here yet -
             <AppLink
@@ -91,7 +91,7 @@ import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import EventCard from '~/components/events/EventCard.vue'
 import AppLink from '~/components/ui/AppLink.vue'
-import AppCard from '~/components/ui/AppCard.vue'
+import AppBasicCard from '~/components/ui/AppBasicCard.vue'
 import TheEventsHeader from '~/components/events/TheEventsHeader.vue'
 
 import {
@@ -105,7 +105,7 @@ import { EVENT_REQUEST_LINK } from '~/constants/appLinks'
   components: {
     EventCard,
     AppLink,
-    AppCard,
+    AppBasicCard,
     TheEventsHeader
   },
 
