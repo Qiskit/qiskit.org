@@ -8,7 +8,9 @@
       <h3 class="app-card__title">
         {{ title }}
       </h3>
-      <slot class="app-card__description" />
+      <div class="app-card__description">
+        <slot />
+      </div>
       <AppCta v-if="to" :url="to" class="app-card__link">
         {{ ctaLabel }}
       </AppCta>
