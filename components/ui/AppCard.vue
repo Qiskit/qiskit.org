@@ -23,8 +23,6 @@ export default class extends Vue {
 <style lang="scss" scoped>
 @import '~carbon-components/scss/globals/scss/typography';
 
-$img-medium-width: 13rem;
-
 .app-card {
   min-height: 13rem;
   width: 100%;
@@ -56,8 +54,16 @@ $img-medium-width: 13rem;
   }
 
   &__content {
-    @include type-style('body-long-01');
     padding: $spacing-05 $spacing-05 $spacing-05 $spacing-07;
+  }
+
+  &__title {
+    @include type-style('productive-heading-02');
+    margin-bottom: $layout-02;
+  }
+
+  &__description {
+    @include type-style('body-long-01');
   }
 }
 </style>
