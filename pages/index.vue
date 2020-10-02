@@ -1,5 +1,6 @@
 <template>
   <main class="landing-page">
+    <TheMetalGrid />
     <TheHeroMoment :version="qiskitVersion" />
     <TheFeatures />
     <TheQuickStart />
@@ -16,13 +17,15 @@ import TheHeroMoment from '~/components/landing/TheHeroMoment/index.vue'
 import TheFeatures from '~/components/landing/TheFeatures/index.vue'
 import TheQuickStart from '~/components/landing/TheQuickStart/index.vue'
 import TheLearnSection from '~/components/landing/TheLearnSection/index.vue'
+import TheMetalGrid from '~/components/ui/TheMetalGrid.vue'
 
 @Component({
   components: {
     TheHeroMoment,
     TheFeatures,
     TheQuickStart,
-    TheLearnSection
+    TheLearnSection,
+    TheMetalGrid
   },
   head () {
     return { title: 'Qiskit' }
