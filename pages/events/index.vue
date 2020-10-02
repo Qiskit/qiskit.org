@@ -62,7 +62,13 @@
           />
         </div>
         <div v-else class="event-page__results">
-          <EmptyCard :title="emptyCardTitle" :description="emptyCardDescription" />
+          <AppCard
+            class="event-page__no-events-card"
+            :image="emptyCard.img"
+            :title="emptyCard.title"
+          >
+            {{ emptyCard.description }}
+          </AppCard>
           <p class="event-page__no-events-msg">
             Nothing here yet -
             <AppLink
@@ -83,8 +89,8 @@ import { mapGetters, mapActions } from 'vuex'
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import EventCard from '~/components/events/EventCard.vue'
-import EmptyCard from '~/components/events/EmptyCard.vue'
 import AppLink from '~/components/ui/AppLink.vue'
+import AppCard from '~/components/ui/AppCard.vue'
 import TheEventsHeader from '~/components/events/TheEventsHeader.vue'
 
 import {
@@ -97,8 +103,8 @@ import { EVENT_REQUEST_LINK } from '~/constants/appLinks'
 @Component({
   components: {
     EventCard,
-    EmptyCard,
     AppLink,
+    AppCard,
     TheEventsHeader
   },
 
@@ -132,14 +138,16 @@ import { EVENT_REQUEST_LINK } from '~/constants/appLinks'
     store.commit('setEvents', pastEventsPayload)
   }
 })
-
 export default class extends QiskitPage {
   regions = WORLD_REGION_OPTIONS
   types = COMMUNITY_EVENT_TYPE_OPTIONS
   routeName: string = 'events'
   eventRequestLink = EVENT_REQUEST_LINK
-  emptyCardTitle: string = 'No events found'
-  emptyCardDescription: string = 'Trying doing a wider search criteria, or consider starting your own event.'
+  emptyCard = {
+    title: 'No events found',
+    description: 'Trying doing a wider search criteria, or consider starting your own event.',
+    img: '/images/events/no-events.svg'
+  }
 
   get hasEvents (): boolean {
     return (this as any).filteredEvents.length !== 0
@@ -290,6 +298,10 @@ export default class extends QiskitPage {
     @include mq($until: medium) {
       width: 100%;
     }
+  }
+
+  &__no-events-card {
+    margin-bottom: $layout-04;
   }
 
   &__no-events-msg {
