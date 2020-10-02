@@ -5,9 +5,19 @@
       :lazy-background="image"
     />
     <div class="app-card__content">
-      <h3 class="app-card__title">
-        {{ title }}
-      </h3>
+      <header class="app-card__header">
+        <h3 class="app-card__title">
+          {{ title }}
+        </h3>
+        <div v-if="to" class="app-card__tags">
+          <cv-tag
+            v-for="tag in tags"
+            :key="tag"
+            :label="tag"
+            kind="purple"
+          />
+        </div>
+      </header>
       <div class="app-card__description">
         <slot />
       </div>
@@ -27,6 +37,7 @@ import AppCta from '~/components/ui/AppCta.vue'
 export default class extends Vue {
   @Prop(String) image
   @Prop(String) title
+  @Prop(Array) tags
   @Prop(String) to
   @Prop(String) ctaLabel
 }
@@ -71,13 +82,53 @@ export default class extends Vue {
     flex-direction: column;
   }
 
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    @include mq($until: large) {
+      flex-direction: column;
+    }
+  }
+
   &__title {
+    flex: 0 0 auto;
     @include type-style('productive-heading-02');
-    margin-bottom: $layout-02;
+  }
+
+   &__tags {
+    width: 20rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+
+    @include mq($until: large) {
+      justify-content: flex-start;
+      margin-top: $spacing-03;
+    }
+
+    @include mq($from: medium, $until: large) {
+      width: auto;
+    }
+
+    @include mq($until: medium) {
+      width: 100%;
+    }
+
+    .bx--tag--purple {
+      background-color: $purple-70;
+      color: $white;
+    }
+
+    .bx--tag:first-child {
+      margin-left: 0;
+    }
   }
 
   &__description {
     @include type-style('body-long-01');
+    margin-top: $layout-02;
   }
 
   &__link {
