@@ -188,10 +188,6 @@ export default class extends QiskitPage {
 
   &__wrapper {
     @include contained();
-
-    & > * {
-      margin: $layout-01;
-    }
   }
 
   &__event-index {
@@ -205,6 +201,7 @@ export default class extends QiskitPage {
 
   &__filters-time {
     margin-top: $layout-03;
+    margin-bottom: $layout-04;
     .bx--tabs__nav-link {
       color: $black-100;
       border-bottom-color: $gray-20;
@@ -306,6 +303,10 @@ export default class extends QiskitPage {
 
   &__no-events-msg {
     @include type-style('body-short-02');
+
+    @include mq($until: medium) {
+      margin-bottom: $layout-01;
+    }
   }
 
   &__link {
