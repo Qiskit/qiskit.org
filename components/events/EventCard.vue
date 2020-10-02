@@ -46,9 +46,12 @@ export default class extends Vue {
 
   &__location, &__date {
     @include type-style('body-long-01');
-    margin-bottom: $spacing-03;
     display: flex;
     align-items: center;
+  }
+
+  &__location {
+    margin-bottom: $spacing-03;
   }
 
   &__icon {
