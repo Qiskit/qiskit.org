@@ -42,7 +42,11 @@ export default class extends Vue {
 @import '~carbon-components/scss/globals/scss/typography';
 
 .event-card {
-  margin-bottom: $layout-03;
+  margin-bottom: $layout-02;
+
+  @include mq($until: large) {
+    margin-bottom: $layout-01;
+  }
 
   &__location, &__date {
     @include type-style('body-long-01');
