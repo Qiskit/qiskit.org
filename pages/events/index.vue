@@ -53,7 +53,6 @@
           <div>
             <AppCard
               v-if="noEvents"
-              class="event-page__no-events-card"
               :image="emptyCard.img"
               :title="emptyCard.title"
             >
@@ -96,7 +95,6 @@ import { mapGetters, mapActions } from 'vuex'
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import EventCard from '~/components/events/EventCard.vue'
-import AppLink from '~/components/ui/AppLink.vue'
 import AppCard from '~/components/ui/AppCard.vue'
 import TheEventsHeader from '~/components/events/TheEventsHeader.vue'
 import AppCta from '~/components/ui/AppCta.vue'
@@ -112,7 +110,6 @@ import { EVENT_REQUEST_LINK } from '~/constants/appLinks'
 @Component({
   components: {
     EventCard,
-    AppLink,
     AppCta,
     LandingCta,
     AppCard,
@@ -327,10 +324,6 @@ export default class extends QiskitPage {
       padding: $spacing-05;
       width: fit-content !important;
     }
-  }
-
-  &__no-events-card {
-    margin-bottom: $layout-04;
   }
 }
 </style>
