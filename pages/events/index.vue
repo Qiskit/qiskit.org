@@ -49,26 +49,28 @@
             </div>
           </fieldset>
         </div>
-        <div v-if="hasEvents" class="event-page__results">
-          <EventCard
-            v-for="event in filteredEvents"
-            :key="`${event.place}-${event.date}`"
-            :types="event.types"
-            :title="event.title"
-            :image="event.image"
-            :location="event.location"
-            :date="event.date"
-            :to="event.to"
-          />
-        </div>
-        <div v-else class="event-page__results">
-          <AppCard
-            class="event-page__no-events-card"
-            :image="emptyCard.img"
-            :title="emptyCard.title"
-          >
-            {{ emptyCard.description }}
-          </AppCard>
+        <div class="event-page__main-content">
+          <div>
+            <AppCard
+              v-if="noEvents"
+              class="event-page__no-events-card"
+              :image="emptyCard.img"
+              :title="emptyCard.title"
+            >
+              {{ emptyCard.description }}
+            </AppCard>
+            <EventCard
+              v-for="event in filteredEvents"
+              v-else
+              :key="`${event.place}-${event.date}`"
+              :types="event.types"
+              :title="event.title"
+              :image="event.image"
+              :location="event.location"
+              :date="event.date"
+              :to="event.to"
+            />
+          </div>
           <p class="event-page__no-events-msg">
             Nothing here yet -
             <AppLink
@@ -149,8 +151,8 @@ export default class extends QiskitPage {
     img: '/images/events/no-events.svg'
   }
 
-  get hasEvents (): boolean {
-    return (this as any).filteredEvents.length !== 0
+  get noEvents (): boolean {
+    return (this as any).filteredEvents.length === 0
   }
 
   isFilterChecked (filter: string, filterValue: string): Array<CommunityEvent> {
@@ -289,7 +291,7 @@ export default class extends QiskitPage {
     }
   }
 
-  &__results {
+  &__main-content {
     width: 75%;
 
     @include mq($until: medium) {
