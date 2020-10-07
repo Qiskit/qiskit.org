@@ -3,14 +3,21 @@
     <header>
       Metal
     </header>
+    <FeatureCard
+      :title="automationCard.title"
+      :description="automationCard.description"
+      :image="automationCard.image"
+    />
   </div>
 </template>
 
 <script lang="ts">
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
+import FeatureCard from '~/components/metal/FeatureCard.vue'
 
 @Component({
+  components: { FeatureCard },
   layout: 'metal',
   head () {
     return {
@@ -20,6 +27,12 @@ import QiskitPage from '~/components/logic/QiskitPage.vue'
 })
 export default class extends QiskitPage {
   routeName = 'metal'
+
+  automationCard = {
+    title: 'Automation',
+    description: 'Metal is designed with the vision to seamlessly automate classical and quantum analysis. Choose from a list of available tools or connect your own through a flexible plug-in interface that allows you to orchestrate device design from within Metal. When you are ready, with the click of a button, export the design for fabrication, and you are done.',
+    image: '/images/metal/automation.png'
+  }
 }
 </script>
 
