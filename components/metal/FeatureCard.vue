@@ -29,7 +29,7 @@ export default class extends Vue {
 @import '~carbon-components/scss/globals/scss/typography';
 
 .feature-card {
-  min-height: 13rem;
+  min-height: 11rem;
   width: 100%;
   display: flex;
 
@@ -40,31 +40,31 @@ export default class extends Vue {
 
   &__image {
     flex: 0 0 14rem;
-    background-color: $cool-gray-100;
+    background-color: $cool-gray-90;
     background-repeat: no-repeat;
     background-size: 100%;
     background-position: center;
     overflow: hidden;
 
-    @include mq($from: medium, $until: large) {
-      flex: 0 0 13rem;
-    }
-
     @include mq($until: medium) {
-      height: 13rem;
+      height: 11rem;
       width: auto;
     }
   }
 
   &__title {
-    flex: 0 0 auto;
     @include type-style('productive-heading-02');
+    padding-right: $spacing-07;
+    padding-bottom: $spacing-07;
   }
 
   &__description {
     @include type-style('body-long-01');
-    margin-top: $layout-02;
-    margin-bottom: $layout-02;
+    padding: $spacing-05 $spacing-05 $spacing-05 $spacing-07;
+
+    @include mq($until: medium) {
+      padding: $spacing-06 0;
+    }
   }
 }
 </style>
