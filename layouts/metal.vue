@@ -1,6 +1,6 @@
 <template>
   <!-- tabindex is needed to allow hiding the menu in iOS Safari -->
-  <div class="default-layout content-root" tabindex="-1">
+  <div class="content-root" tabindex="-1">
     <header id="navigation">
       <TheBlackLivesMatterBanner
         :style="{ display: isMenuShown ? 'none' : 'block' }"
