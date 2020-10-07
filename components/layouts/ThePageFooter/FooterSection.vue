@@ -1,13 +1,21 @@
 <template>
   <section class="footer-section">
-    <h2 class="footer-section__title">
+    <h2
+      class="footer-section__title"
+      :class="{'footer-section__title_dark-mode': darkMode }"
+    >
       {{ title }}
     </h2>
     <nav :class="{ 'footer-section__icons-group': iconsOnly }">
       <AppLink
         v-for="element in elements"
         :key="element.url"
-        :class="iconsOnly ? 'footer-section__icon-link' : 'footer-section__link'"
+        :class="{
+          'footer-section__icon-link': iconsOnly,
+          'footer-section__icon-link_dark-mode': darkMode,
+          'footer-section__link': !iconsOnly,
+          'footer-section__link_dark-mode': darkMode
+        }"
         v-bind="element"
       >
         <component :is="element.icon" v-if="iconsOnly" />
@@ -29,6 +37,7 @@ export default class extends Vue {
   @Prop(String) title
   @Prop(Array) elements
   @Prop({ type: Boolean, default: false }) iconsOnly
+  @Prop({ type: Boolean, default: false }) darkMode!: boolean
 }
 </script>
 
@@ -40,6 +49,10 @@ export default class extends Vue {
     @include type-style('expressive-heading-01');
     color: $cool-gray-60;
     padding-bottom: $spacing-07;
+
+    &_dark-mode {
+      color: $white;
+    }
   }
 
   &__link {
@@ -49,6 +62,10 @@ export default class extends Vue {
     display: inline-block;
     width: 100%;
     padding-bottom: $spacing-03;
+
+    &_dark-mode {
+      color: $white;
+    }
 
     &:hover {
       text-decoration: underline;
@@ -65,6 +82,10 @@ export default class extends Vue {
 
   &__icon-link {
     fill: $cool-gray-60;
+
+    &_dark-mode {
+      fill: $white;
+    }
   }
 
 }
