@@ -1,21 +1,34 @@
 <template>
   <footer class="the-page-footer">
-    <section class="the-page-footer__primary">
+    <section
+      class="the-page-footer__primary"
+      :class="{'the-page-footer__primary_dark-mode': darkMode }"
+    >
       <div class="the-page-footer__primary-container">
-        <AppLogo class="the-page-footer__logo" />
+        <AppLogo
+          class="the-page-footer__logo"
+          :class="{'the-page-footer__logo_dark-mode': darkMode }"
+        />
         <div class="the-page-footer__primary-sections">
           <FooterSection
             v-for="sectionElements in footerElements"
             :key="sectionElements.title"
             v-bind="sectionElements"
+            dark-mode
           />
-          <FooterSection v-bind="stayConnectedElements" icons-only />
+          <FooterSection v-bind="stayConnectedElements" icons-only dark-mode />
         </div>
       </div>
     </section>
-    <section class="the-page-footer__secondary">
+    <section
+      class="the-page-footer__secondary"
+      :class="{'the-page-footer__secondary_dark-mode': darkMode }"
+    >
       <div class="the-page-footer__secondary-container">
-        <div class="the-page-footer__copyright">
+        <div
+          class="the-page-footer__copyright"
+          :class="{'the-page-footer__copyright_dark-mode': darkMode }"
+        >
           ©Qiskit | All Rights Reserved
         </div>
         <div class="the-page-footer__secondary-links">
@@ -23,6 +36,7 @@
             v-for="link in secondaryFooterLinks"
             :key="link.label"
             class="the-page-footer__secondary-link"
+            :class="{'the-page-footer__secondary-link_dark-mode': darkMode }"
             v-bind="link"
           >
             {{ link.label }}
@@ -35,7 +49,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
+import { Component, Prop } from 'vue-property-decorator'
 import FooterSection from './FooterSection.vue'
 import AppLink from '~/components/ui/AppLink.vue'
 import AppLogo from '~/components/ui/AppLogo.vue'
@@ -54,6 +68,8 @@ import {
   }
 })
 export default class extends Vue {
+  @Prop({ type: Boolean, default: false }) darkMode!: boolean
+
   footerElements = FOOTER_ELEMENTS
   stayConnectedElements = STAY_CONNECTED_LINKS
   secondaryFooterLinks = SECONDARY_FOOTER_LINKS
@@ -68,6 +84,10 @@ export default class extends Vue {
   .the-page-footer__primary {
     background-color: $cool-gray-10;
     padding: $spacing-07 0;
+
+    &_dark-mode {
+      background-color: $cool-gray-90;
+    }
   }
 
   .the-page-footer__secondary {
@@ -75,6 +95,10 @@ export default class extends Vue {
     padding-bottom: $spacing-08;
     padding: $spacing-07 0;
     padding-bottom: $spacing-07 + 2.5rem; // make room for the "cookies preferences" button
+
+    &_dark-mode {
+      background-color: $cool-gray-100;
+    }
   }
 
   &__primary-container {
@@ -102,6 +126,10 @@ export default class extends Vue {
       width: 96px;
       margin-bottom: $spacing-07;
     }
+
+    &_dark-mode {
+      color: $white;
+    }
   }
 
   &__primary-sections {
@@ -118,6 +146,10 @@ export default class extends Vue {
   &__secondary-link {
     @include type-style('caption-01');
     color: $cool-gray-60;
+
+    &_dark-mode {
+      color: $white;
+    }
   }
 
   &__secondary-container {
