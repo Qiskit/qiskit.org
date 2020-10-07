@@ -1,26 +1,28 @@
 <template>
   <article class="the-hero-moment">
-    <div class="the-hero-moment__container">
-      <VersionInfo
-        class="the-hero-moment__version-info"
-        :version="version"
-      />
-      <h1 class="the-hero-moment__title">
-        Open-Source Quantum Development
-      </h1>
-      <p class="the-hero-moment__description">
-        Qiskit {{ qiskitPronuntiation }} is an open source SDK for working with quantum
-        computers at the level of pulses, circuits and algorithms.
-      </p>
-      <LandingCta
-        url="https://qiskit.org/documentation/install.html"
-        @click="$trackClickEvent({
-          action: 'Get Started'
-        })"
-      >
-        Get started
-      </LandingCta>
-    </div>
+    <TheMetalGrid>
+      <div class="the-hero-moment__container">
+        <VersionInfo
+          class="the-hero-moment__version-info"
+          :version="version"
+        />
+        <h1 class="the-hero-moment__title">
+          Open-Source Quantum Development
+        </h1>
+        <p class="the-hero-moment__description">
+          Qiskit {{ qiskitPronuntiation }} is an open source SDK for working with quantum
+          computers at the level of pulses, circuits and algorithms.
+        </p>
+        <LandingCta
+          url="https://qiskit.org/documentation/install.html"
+          @click="$trackClickEvent({
+            action: 'Get Started'
+          })"
+        >
+          Get started
+        </LandingCta>
+      </div>
+    </TheMetalGrid>
   </article>
 </template>
 
@@ -30,9 +32,10 @@ import Vue from 'vue'
 import { Prop, Component } from 'vue-property-decorator'
 import VersionInfo from '~/components/landing/TheHeroMoment/VersionInfo.vue'
 import LandingCta from '~/components/landing/LandingCta.vue'
+import TheMetalGrid from '~/components/ui/TheMetalGrid.vue'
 
 @Component({
-  components: { VersionInfo, LandingCta }
+  components: { VersionInfo, LandingCta, TheMetalGrid }
 })
 export default class extends Vue {
   @Prop({ type: String, required: true }) version!: string
@@ -47,11 +50,8 @@ export default class extends Vue {
 @import '~carbon-components/scss/globals/scss/typography';
 
 .the-hero-moment {
-  @include responsive-grid-bg-strip('/images/grid/grid-hero.svg', auto, 56rem);
-
   position: relative;
   overflow: hidden;
-  padding-top: $layout-05;
   margin-bottom: $layout-05;
   // In Figma, the height is not enforced but the background is always
   // visible completely so we do it in the CSS. A small correction is needed
@@ -78,6 +78,9 @@ export default class extends Vue {
     background-position: right center;
     background-repeat: no-repeat;
     background-size: 70% auto;
+    padding-top: $layout-05;
+
+    pointer-events: none;
 
     @include mq($from: medium, $until: large) {
       background-size: contain;
