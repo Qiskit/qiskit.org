@@ -21,6 +21,7 @@
         Get started
       </LandingCta>
     </div>
+    <AppLink class="the-hero-moment__square-link" url="/metal" />
   </article>
 </template>
 
@@ -30,9 +31,10 @@ import Vue from 'vue'
 import { Prop, Component } from 'vue-property-decorator'
 import VersionInfo from '~/components/landing/TheHeroMoment/VersionInfo.vue'
 import LandingCta from '~/components/landing/LandingCta.vue'
+import AppLink from '~/components/ui/AppLink.vue'
 
 @Component({
-  components: { VersionInfo, LandingCta }
+  components: { VersionInfo, LandingCta, AppLink }
 })
 export default class extends Vue {
   @Prop({ type: String, required: true }) version!: string
@@ -68,6 +70,15 @@ export default class extends Vue {
     margin-bottom: 0;
     // To adjust to the size of the smaller grid.
     height: calc(#{56rem * 40 / 64} + 2px);
+  }
+
+  &__square-link {
+    width: 4rem;
+    height: 4rem;
+    background-color: $cool-gray-100;
+    position: absolute;
+    top: 21%;
+    left: 43%;
   }
 
   &__container {
