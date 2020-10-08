@@ -19,14 +19,14 @@ const METAL_FEATURES: Array<MetalFeature> = [
   },
   {
     title: 'Flexible & extensible',
-    description: `<strong>Flexible interface:</strong> GUI view, Jupyter notebook view, Simulator view, Physical output view.</br></br>
-                  <strong>Extensible:</strong> User-friendly python API and library of tools allow you to define your own custom quantum components.</br></br>
+    description: `<strong>Flexible interface:</strong> GUI view, Jupyter notebook view, Simulator view, Physical output view.<br><br>
+                  <strong>Extensible:</strong> User-friendly python API and library of tools allow you to define your own custom quantum components.<br><br>
                   <strong>Co-development:</strong> Linked with leading simulation and export/import interoperability with commercial-tool backends.`,
     image: '/images/metal/automation.png'
   },
   {
     title: 'Integrated functionality',
-    description: `All-in-one platform powerful programming paradigm to unify design, simulation, and quantum analysis.</br>
+    description: `All-in-one platform powerful programming paradigm to unify design, simulation, and quantum analysis.<br>
     Metal helps bridges the world of classical electronic design automation (EDA) and electromagnetic simulation tools with that of quantum analysis.
     Metal defines the abstraction of a quantum device design, needed for closed-loop optimization between design & analysis. Over time, our vision is to also develop metal to be usable by a front-end user with little to no programming knowledge, using available libraries of quantum components & renderers.`,
     image: '/images/metal/automation.png'
