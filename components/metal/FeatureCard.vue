@@ -77,7 +77,7 @@ export default class extends Vue {
     padding: $spacing-05 $spacing-05 $spacing-05 $spacing-07;
 
     @include mq($until: medium) {
-      padding: $spacing-06 0;
+      padding: $spacing-06 0 0 0;
     }
   }
 }
