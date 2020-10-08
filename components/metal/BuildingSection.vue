@@ -4,7 +4,7 @@
       <h2 class="building-section__title">
         Building together
       </h2>
-      <p class="building-section__description">
+      <p class="building-section__description copy__paragraph_importance_outstanding">
         Whether you are learning, teaching or performing scientific research, we hope Metal will get you there faster.
       </p>
 
@@ -91,7 +91,7 @@ export default class extends Vue {
 
   &__description {
     @include type-style("body-long-01");
-    max-width: 9 * $column-size-large;
+    max-width: 7.5 * $column-size-large;
     margin-bottom: $layout-06;
 
     @include mq($until: large) {
