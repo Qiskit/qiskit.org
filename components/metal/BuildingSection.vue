@@ -42,7 +42,7 @@
 
       <LandingCta
         class="card-link"
-        :url="routeName"
+        :url="stayInTouchLink"
         kind="dark"
       >
         Stay in touch
@@ -61,6 +61,7 @@ import LandingCta from '~/components/landing/LandingCta.vue'
 })
 
 export default class extends Vue {
+  stayInTouchLink = ''
 }
 </script>
 

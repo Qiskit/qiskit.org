@@ -83,6 +83,7 @@ export default class extends Vue {
 
     &:hover,
     &:active {
+      cursor: pointer;
       color: $cool-gray-10;
     }
 
