@@ -3,12 +3,14 @@
     <h3 class="feature-card__title">
       {{ title }}
     </h3>
-    <div
-      class="feature-card__image"
-      :lazy-background="image"
-    />
-    <div class="feature-card__description">
-      {{ description }}
+    <div class="feature-card__content">
+      <div
+        class="feature-card__image"
+        :lazy-background="image"
+      />
+      <div class="feature-card__description">
+        {{ description }}
+      </div>
     </div>
   </article>
 </template>
@@ -29,13 +31,31 @@ export default class extends Vue {
 @import '~carbon-components/scss/globals/scss/typography';
 
 .feature-card {
-  min-height: 11rem;
   width: 100%;
   display: flex;
 
-  @include mq($until: medium) {
-    height: auto;
+  @include mq($until: large) {
     flex-direction: column;
+  }
+
+  &__title {
+    flex: 0 0 12rem;
+    @include type-style('productive-heading-02');
+    padding-right: $spacing-07;
+    padding-bottom: $spacing-07;
+
+    @include mq($until: large) {
+      flex: 0 0 auto;
+    }
+  }
+
+  &__content {
+    min-height: 11rem;
+    display: flex;
+
+    @include mq($until: medium) {
+      flex-direction: column;
+    }
   }
 
   &__image {
@@ -50,12 +70,6 @@ export default class extends Vue {
       height: 11rem;
       width: auto;
     }
-  }
-
-  &__title {
-    @include type-style('productive-heading-02');
-    padding-right: $spacing-07;
-    padding-bottom: $spacing-07;
   }
 
   &__description {
