@@ -10,7 +10,7 @@
       </p>
       <FeatureCard
         v-for="feature in metalFeatures"
-        :key="feature"
+        :key="feature.title"
         class="features-section__card"
         :title="feature.title"
         :description="feature.description"

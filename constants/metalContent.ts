@@ -1,4 +1,3 @@
-
 /**
  * Represent a feature for the metal page
  */
