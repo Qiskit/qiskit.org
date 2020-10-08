@@ -4,6 +4,7 @@
       Metal
     </header>
     <IntroSection />
+    <FeaturesSection />
   </div>
 </template>
 
@@ -11,9 +12,10 @@
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import IntroSection from '~/components/metal/IntroSection.vue'
+import FeaturesSection from '~/components/metal/FeaturesSection.vue'
 
 @Component({
-  components: { IntroSection },
+  components: { IntroSection, FeaturesSection },
   layout: 'metal',
   head () {
     return {
