@@ -3,21 +3,17 @@
     <header>
       Metal
     </header>
-    <FeatureCard
-      :title="automationCard.title"
-      :description="automationCard.description"
-      :image="automationCard.image"
-    />
+    <FeaturesSection />
   </div>
 </template>
 
 <script lang="ts">
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
-import FeatureCard from '~/components/metal/FeatureCard.vue'
+import FeaturesSection from '~/components/metal/FeaturesSection.vue'
 
 @Component({
-  components: { FeatureCard },
+  components: { FeaturesSection },
   layout: 'metal',
   head () {
     return {
