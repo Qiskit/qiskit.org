@@ -36,7 +36,6 @@ export default class extends Vue {
 
 <style lang="scss" scoped>
 @import '~carbon-components/scss/globals/scss/typography';
-@import '~/assets/scss/blocks/copy.scss';
 
 .features-section {
   background-color: $cool-gray-80;
