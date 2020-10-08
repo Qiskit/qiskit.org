@@ -8,18 +8,23 @@
         <span v-text="description" />
       </div>
     </div>
-    <div
-      class="capability-card__image"
-      :lazy-background="image"
-    />
+    <FakeUI class="capability-card__fake-ui">
+      <div
+        class="capability-card__image"
+        :lazy-background="image"
+      />
+    </FakeUI>
   </article>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
+import FakeUI from '~/components/metal/FakeUI.vue'
 
-@Component
+@Component({
+  components: { FakeUI }
+})
 export default class extends Vue {
   @Prop(String) image
   @Prop(String) title
@@ -32,7 +37,6 @@ export default class extends Vue {
 
 .capability-card {
   display: flex;
-  width: 100%;
   min-height: 20rem;
 
   @include mq($until: medium) {
@@ -69,7 +73,7 @@ export default class extends Vue {
     }
 
   }
-  &__image {
+  &__fake-ui {
     flex: 0 0 32rem;
     @include type-style('body-long-01');
     background-size: contain;
@@ -80,11 +84,22 @@ export default class extends Vue {
       flex: 1.5;
     }
 
+    @include mq($from: medium) {
+      display: none;
+    }
+
     @include mq($until: medium) {
       flex: 0 0 16rem;
       margin: $spacing-06 0 0 0;
     }
+  }
 
+  &__image {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
   }
 }
 </style>

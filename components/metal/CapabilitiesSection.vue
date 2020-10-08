@@ -1,14 +1,30 @@
 <template>
   <section class="capabilities-section">
     <div class="capabilities-section__container">
-      <CapabilityCard
-        v-for="item in capabilities"
-        :key="item.title"
-        class="capabilities-section__card"
-        :title="item.title"
-        :description="item.description"
-        :image="item.image"
-      />
+      <div class="capabilities-section__content-wrapper">
+        <CapabilityCard
+          v-for="item in capabilities"
+          :id="item.title"
+          :key="item.title"
+          class="capabilities-section__card"
+          :title="item.title"
+          :description="item.description"
+          :image="item.image"
+        />
+      </div>
+      <div class="capabilities-section__scrolling-ui">
+        <FakeUI class="capabilities-section__scrolling-ui-element">
+          <div
+            v-for="item in capabilities"
+            :key="item.image"
+            class="capabilities-section__image"
+            :class="{
+              'capabilities-section__active-image' : item.title === activeSection
+            }"
+            :lazy-background="item.image"
+          />
+        </FakeUI>
+      </div>
     </div>
   </section>
 </template>
@@ -17,10 +33,11 @@
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 import CapabilityCard from '~/components/metal/CapabilityCard.vue'
+import FakeUI from '~/components/metal/FakeUI.vue'
 import { METAL_CAPABILITIES } from '~/constants/metalContent'
 
 @Component({
-  components: { CapabilityCard }
+  components: { CapabilityCard, FakeUI }
 })
 export default class extends Vue {
   capabilities = METAL_CAPABILITIES
@@ -41,7 +58,7 @@ export default class extends Vue {
       }
     );
     (this.$el as HTMLElement)
-      .querySelectorAll('.overview-page__content-section')
+      .querySelectorAll('.capabilities-section__card')
       .forEach((section) => {
         (this._observer as IntersectionObserver).observe(section)
       })
@@ -89,15 +106,52 @@ export default class extends Vue {
 @import '~carbon-components/scss/globals/scss/typography';
 
 .capabilities-section {
+  display: flex;
 
   &__container {
     @include contained();
+    display: flex;
+    align-items: flex-start;
     padding-top: $layout-05;
     padding-bottom: $layout-06;
   }
 
-  &__card {
+  &__content-wrapper {
+    flex: 1;
+  }
+
+  &__card ~ &__card{
     margin-top: $layout-04;
+  }
+
+  &__scrolling-ui {
+    position: sticky;
+    top: $layout-02;
+    flex: 0 0 32rem;
+
+    @include mq($from: medium, $until: large) {
+      flex: 1.5;
+    }
+
+    @include mq($until: medium) {
+      display: none;
+    }
+  }
+
+  &__image {
+    position: absolute;
+    top: 0;
+    opacity: 0;
+    transition: opacity 0.2s linear;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  &__active-image {
+    opacity: 1;
   }
 }
 </style>
