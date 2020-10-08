@@ -32,8 +32,9 @@
             The early-access program will start in November and proceed through March, 2021, during which time we will work closely to develop Metal and design quantum devices with it.
           </p>
         </div>
-        <div class="building-section__img">
+        <div class="building-section__media">
           <img
+            class="building-section__media-img"
             src="/images/metal/whiteboard-dark.png"
             alt="Sketched illustration of a group standing in front of a whiteboard."
           >
@@ -124,7 +125,7 @@ export default class extends Vue {
     color: $white;
   }
 
-  &__img img {
+  &__media-img {
     @include mq($until: large) {
       display: none;
     }
