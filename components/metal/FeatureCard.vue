@@ -9,7 +9,7 @@
         :lazy-background="image"
       />
       <div class="feature-card__description">
-        {{ description }}
+        <span v-html="description" />
       </div>
     </div>
   </article>
