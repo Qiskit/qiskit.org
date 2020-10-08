@@ -41,13 +41,12 @@
         </div>
       </div>
 
-      <LandingCta
-        class="card-link"
+      <AppCta
+        class="building-section__cta"
         :url="stayInTouchLink"
-        kind="dark"
       >
-        Stay in touch
-      </LandingCta>
+        Sign up to stay in touch
+      </AppCta>
     </div>
   </section>
 </template>
@@ -55,14 +54,15 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import LandingCta from '~/components/landing/LandingCta.vue'
+import AppCta from '~/components/ui/AppCta.vue'
 
 @Component({
-  components: { LandingCta }
+  components: { AppCta }
 })
 
 export default class extends Vue {
-  stayInTouchLink = ''
+  // TODO: update with url
+  stayInTouchLink = 'https://qiskit.org'
 }
 </script>
 
@@ -129,6 +129,13 @@ export default class extends Vue {
     @include mq($until: large) {
       display: none;
     }
+  }
+
+  &__cta {
+    color: $white !important;
+    background-color: $purple-70;
+    padding: $spacing-05;
+    width: fit-content !important;
   }
 }
 </style>

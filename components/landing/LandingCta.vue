@@ -18,7 +18,7 @@ import AppLink from '~/components/ui/AppLink.vue'
   components: { AppLink }
 })
 export default class extends Vue {
-  @Prop({ type: String, default: 'primary' }) kind!: 'primary'|'secondary'|'dark';
+  @Prop({ type: String, default: 'primary' }) kind!: 'primary'|'secondary';
 }
 </script>
 
@@ -74,19 +74,6 @@ export default class extends Vue {
       padding-top: $spacing-05;
       padding-bottom: $spacing-05;
     }
-  }
-
-  &_dark {
-    color: $white;
-    background-image: linear-gradient(90deg, $purple-90 0%, $purple-90 50%, $purple-70 50%, $purple-70 100%);
-    padding: $spacing-05;
-
-    &:hover,
-    &:active {
-      cursor: pointer;
-      color: $cool-gray-10;
-    }
-
   }
 
   &__icon {
