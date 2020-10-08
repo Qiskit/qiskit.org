@@ -1,8 +1,5 @@
 <template>
   <div class="metal-page">
-    <header>
-      Metal
-    </header>
     <IntroSection />
     <FeaturesSection />
     <BuildingSection />
