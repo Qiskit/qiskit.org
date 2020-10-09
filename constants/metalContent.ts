@@ -47,6 +47,39 @@ const METAL_FEATURES: Array<MetalFeature> = [
   }
 ]
 
+/**
+ * Represent a feature for the metal page
+ */
+interface MetalCapability {
+  /** The visible title of the feature */
+  title: string
+  /** The visible description of the feature */
+  description: string
+  /** The image of the feature */
+  image: string
+}
+
+const METAL_CAPABILITIES: Array<MetalCapability> = [
+  {
+    title: 'Design quantum systems',
+    description: 'Metal enables chip prototyping in a matter of minutes. You can start from a convenient Jupyter notebook, and then take advantage of the user-friendly python front-end interface. Simply, choose from a list of predefined quantum components and customize their parameters to fit your needs and connect them. Easily implement new experimental components using python templates and examples.',
+    image: '/images/metal/fake-ui-content-placeholder1.png'
+  },
+  {
+    title: 'Modeling quantum system',
+    description: 'A quantum element is modeled differently based on the renderer/analysis being used.  Such as for a transmon, the Josephson junction in Metal is a vector with a width, but in HFSS - EPR Analysis it is a 2D square with a sheet inductance, or exported as a GDS file it becomes a cell with multiple layers for the appropriate e-beam fabrication of said junction. All of these transitions are managed by Metal based on values the renderer/user provides.',
+    image: '/images/metal/fake-ui-content-placeholder2.png'
+  },
+  {
+    title: 'Analysis design performance',
+    description: 'Analysis Tools, which if follow basic interface requirements, can function with in Metal and expand its capabilities. Include text about hamiltonian.',
+    image: '/images/metal/fake-ui-content-placeholder3.png'
+  }
+]
+
 export {
-  METAL_FEATURES
+  MetalFeature,
+  METAL_FEATURES,
+  MetalCapability,
+  METAL_CAPABILITIES
 }
