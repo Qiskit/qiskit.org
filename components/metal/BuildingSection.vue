@@ -40,16 +40,6 @@
             </AppLink> chapters we are building on quantum devices and their control.
           </p>
           <!-- eslint-enable -->
-
-          <h3 class="copy__subtitle">
-            Early access
-          </h3>
-          <p class="copy__paragraph">
-            Through an early-access program, we are thrilled to ask you to join this journey to revolutionize quantum devices.
-            <br>
-            <br>
-            The early-access program will start in November and proceed through March, 2021, during which time we will work closely to develop Metal and design quantum devices with it.
-          </p>
         </div>
         <div class="building-section__media">
           <img
@@ -59,13 +49,6 @@
           >
         </div>
       </div>
-
-      <AppCta
-        class="building-section__cta"
-        :url="stayInTouchLink"
-      >
-        Sign up to stay in touch
-      </AppCta>
     </div>
   </section>
 </template>
@@ -73,16 +56,10 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import AppCta from '~/components/ui/AppCta.vue'
 
-@Component({
-  components: { AppCta }
-})
+@Component({})
 
-export default class extends Vue {
-  // TODO: update with url
-  stayInTouchLink = 'https://qiskit.org'
-}
+export default class extends Vue {}
 </script>
 
 <style lang="scss" scoped>
@@ -95,7 +72,6 @@ export default class extends Vue {
   &__container {
     @include contained();
     padding-top: $layout-05;
-    padding-bottom: $layout-06;
   }
 
   &__title {
@@ -128,11 +104,7 @@ export default class extends Vue {
 
   &__content {
     display: flex;
-    margin-bottom: $layout-06;
-
-    @include mq($until: medium) {
-      margin-bottom: $layout-05;
-    }
+    margin-bottom: $layout-05;
   }
 
   &__copy {
