@@ -107,11 +107,13 @@ export default class extends Vue {}
   &__copy {
     flex: 0 0 28rem;
 
+    @include mq($until: medium) {
+      flex: 1;
+    }
+
     &-link {
       color: $purple-50;
       text-decoration: underline;
-    @include mq($until: medium) {
-      flex: 1;
     }
   }
 
