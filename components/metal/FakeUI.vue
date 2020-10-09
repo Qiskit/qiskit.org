@@ -1,7 +1,7 @@
 <template>
   <article class="fake-ui">
     <div class="fake-ui__wrapper">
-      <img src="images/metal/fake-ui.svg" alt="fake software user interface" class="fake-ui__bg">
+      <img src="images/metal/fake-ui.png" alt="fake software user interface" class="fake-ui__bg">
       <div class="fake-ui__content-container">
         <slot />
       </div>
@@ -29,10 +29,10 @@ export default class extends Vue {}
     }
     &__content-container {
       position: absolute;
-      width: 67.4%;
-      top: 15.5%;
-      left: 32.6%;
-      height: 65.3%;
+      width: 69.3%;
+      top: 13.1%;
+      left: 30.7%;
+      height: 69%;
     }
   }
 </style>
