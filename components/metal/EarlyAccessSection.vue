@@ -10,13 +10,7 @@
         <br>
         The early-access program will start in November and proceed through March, 2021, during which time we will work closely to develop Metal and design quantum devices with it.
       </p>
-
-      <AppCta
-        class="early-access-section__cta"
-        :url="stayInTouchLink"
-      >
-        Sign up to stay in touch
-      </AppCta>
+      <AppCtaBtn v-bind="stayInTouchLink" />
     </div>
   </section>
 </template>
@@ -24,15 +18,18 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import AppCta from '~/components/ui/AppCta.vue'
+import AppCtaBtn from '~/components/metal/AppCtaBtn.vue'
 
 @Component({
-  components: { AppCta }
+  components: { AppCtaBtn }
 })
 
 export default class extends Vue {
   // TODO: update with url
-  stayInTouchLink = 'https://qiskit.org'
+  stayInTouchLink = {
+    url: 'https://qiskit.org',
+    label: 'Sign up to stay in touch'
+  }
 }
 </script>
 
@@ -75,19 +72,6 @@ export default class extends Vue {
     @include mq($until: medium) {
       width: 100%;
       max-width: initial;
-    }
-  }
-
-  &__cta {
-    color: $white !important;
-    background-color: $purple-70;
-    padding: $spacing-05;
-    width: fit-content !important;
-
-    @include mq($until: medium) {
-      width: 100% !important;
-      display: flex;
-      justify-content: space-between;
     }
   }
 }
