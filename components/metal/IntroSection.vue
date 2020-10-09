@@ -111,6 +111,12 @@ export default class extends Vue {
       top: 0;
       margin-top: $layout-03;
     }
+
+    @include mq($until: medium) {
+      width: 100% !important;
+      display: flex;
+      justify-content: space-between;
+    }
   }
 }
 </style>
