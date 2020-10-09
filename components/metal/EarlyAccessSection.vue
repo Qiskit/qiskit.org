@@ -82,6 +82,12 @@ export default class extends Vue {
     background-color: $purple-70;
     padding: $spacing-05;
     width: fit-content !important;
+
+    @include mq($until: medium) {
+      width: 100% !important;
+      display: flex;
+      justify-content: space-between;
+    }
   }
 }
 </style>
