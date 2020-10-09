@@ -77,10 +77,6 @@ export default class extends Vue {
     }
   }
 
-  .copy__paragraph {
-    color: $white;
-  }
-
   &__media-img {
     @include mq($until: large) {
       display: none;
