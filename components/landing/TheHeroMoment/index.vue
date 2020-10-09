@@ -23,6 +23,7 @@
         </LandingCta>
       </div>
     </TheMetalGrid>
+    <!--AppLink class="the-hero-moment__square-link" url="/metal" /-->
   </article>
 </template>
 
@@ -33,9 +34,10 @@ import { Prop, Component } from 'vue-property-decorator'
 import VersionInfo from '~/components/landing/TheHeroMoment/VersionInfo.vue'
 import LandingCta from '~/components/landing/LandingCta.vue'
 import TheMetalGrid from '~/components/ui/TheMetalGrid.vue'
+import AppLink from '~/components/ui/AppLink.vue'
 
 @Component({
-  components: { VersionInfo, LandingCta, TheMetalGrid }
+  components: { VersionInfo, LandingCta, TheMetalGrid, AppLink }
 })
 export default class extends Vue {
   @Prop({ type: String, required: true }) version!: string
@@ -50,8 +52,11 @@ export default class extends Vue {
 @import '~carbon-components/scss/globals/scss/typography';
 
 .the-hero-moment {
+  @include responsive-grid-bg-strip('/images/grid/grid-hero.svg', auto, 56rem);
+
   position: relative;
   overflow: hidden;
+  padding-top: $layout-05;
   margin-bottom: $layout-05;
   // In Figma, the height is not enforced but the background is always
   // visible completely so we do it in the CSS. A small correction is needed
@@ -68,6 +73,15 @@ export default class extends Vue {
     margin-bottom: 0;
     // To adjust to the size of the smaller grid.
     height: calc(#{56rem * 40 / 64} + 2px);
+  }
+
+  &__square-link {
+    width: 4rem;
+    height: 4rem;
+    background-color: $cool-gray-100;
+    position: absolute;
+    top: 21%;
+    left: 43%;
   }
 
   &__container {
