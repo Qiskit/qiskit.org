@@ -96,6 +96,7 @@ export default class extends Vue {}
 
     @include mq($until: medium) {
       width: 100%;
+      max-width: initial;
     }
   }
 
