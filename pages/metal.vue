@@ -3,6 +3,7 @@
     <IntroSection />
     <FeaturesSection />
     <BuildingSection />
+    <EarlyAccessSection />
   </div>
 </template>
 
@@ -12,9 +13,10 @@ import QiskitPage from '~/components/logic/QiskitPage.vue'
 import IntroSection from '~/components/metal/IntroSection.vue'
 import FeaturesSection from '~/components/metal/FeaturesSection.vue'
 import BuildingSection from '~/components/metal/BuildingSection.vue'
+import EarlyAccessSection from '~/components/metal/EarlyAccessSection.vue'
 
 @Component({
-  components: { IntroSection, FeaturesSection, BuildingSection },
+  components: { IntroSection, FeaturesSection, BuildingSection, EarlyAccessSection },
   layout: 'metal',
   head () {
     return {
