@@ -77,12 +77,6 @@ export default class extends Vue {
     }
   }
 
-  &__media-img {
-    @include mq($until: large) {
-      display: none;
-    }
-  }
-
   &__cta {
     color: $white !important;
     background-color: $purple-70;
