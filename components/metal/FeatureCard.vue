@@ -62,7 +62,7 @@ export default class extends Vue {
     flex: 0 0 14rem;
     background-color: $cool-gray-90;
     background-repeat: no-repeat;
-    background-size: 100%;
+    background-size: cover;
     background-position: center;
     overflow: hidden;
 
