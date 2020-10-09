@@ -20,8 +20,27 @@
             Open source
           </h3>
           <p class="copy__paragraph">
-            Qiskit Metal is a visionary work in progress in its early development stages. We're working toward a vision—a quantum design & analysis platform built from the ground up specifically for quantum hardware. It is crucial that we keep this product open source in order to grow Qiskit Metal into the software that will be most useful for quantum hardware engineers around the world and for the innovation in and growth of the field as a whole. If Qiskit Metal doesn't have what you want, then you extend Metal to build it!
+            Qiskit Metal is a visionary work in progress in its early development stages. We‘re working toward a vision—a quantum design & analysis platform built from the ground up specifically for quantum hardware. It is crucial that we keep this product open source in order to grow Qiskit Metal into the software that will be most useful for quantum hardware engineers around the world and for the innovation in and growth of the field as a whole. If Qiskit Metal doesn't have what you want, then you extend Metal to build it!
           </p>
+          <h3 class="copy__subtitle">
+            Education
+          </h3>
+          <!-- eslint-disable to avoide whitespace injection -->
+          <p class="copy__paragraph">
+            A few sentences here about educational material. The first link is to “<AppLink
+              class="building-section__copy-link copy__link "
+              url="https://qiskit.org/learn/intro-qc-qh/"
+            >
+              Introduction to Quantum Computing and Quantum Hardware
+            </AppLink>“ summer school lectures series by Zlatko Minev on Superconducting Qubits. The second link is to the “<AppLink
+              class="building-section__copy-link copy__link "
+              url="https://qiskit.org/textbook/ch-quantum-hardware/transmon-physics.html"
+            >
+              Qiskit textbook
+            </AppLink> chapters we are building on quantum devices and their control.
+          </p>
+          <!-- eslint-enable -->
+
           <h3 class="copy__subtitle">
             Early access
           </h3>
@@ -118,6 +137,11 @@ export default class extends Vue {
 
   &__copy {
     flex: 0 0 28rem;
+
+    &-link {
+      color: $purple-50;
+      text-decoration: underline;
+    }
   }
 
   .copy__paragraph,
