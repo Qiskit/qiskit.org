@@ -4,7 +4,7 @@
       <h2 class="early-access-section__title">
         Early Access
       </h2>
-      <p class="early-access-section__description copy__paragraph_importance_outstanding">
+      <p class="early-access-section__description">
         Through an early-access program, we are thrilled to ask you to join this journey to revolutionize quantum devices.
         <br>
         <br>
