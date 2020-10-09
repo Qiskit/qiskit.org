@@ -69,7 +69,7 @@ export default class extends Vue {
     }
 
     @include mq($from: medium, $until: large) {
-      max-width: 6.5 * $column-size-medium;
+      max-width: 5.5 * $column-size-medium;
     }
 
     @include mq($until: medium) {
@@ -77,26 +77,7 @@ export default class extends Vue {
     }
   }
 
-  &__content {
-    display: flex;
-    margin-bottom: $layout-06;
-
-    @include mq($until: medium) {
-      margin-bottom: $layout-05;
-    }
-  }
-
-  &__copy {
-    flex: 0 0 28rem;
-
-    &-link {
-      color: $purple-50;
-      text-decoration: underline;
-    }
-  }
-
-  .copy__paragraph,
-  .copy__subtitle {
+  .copy__paragraph {
     color: $white;
   }
 

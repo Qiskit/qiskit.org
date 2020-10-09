@@ -52,8 +52,9 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
+import AppLink from '~/components/ui/AppLink.vue'
 
-@Component({})
+@Component({ components: {AppLink}})
 
 export default class extends Vue {}
 </script>
@@ -121,13 +122,6 @@ export default class extends Vue {}
     @include mq($until: large) {
       display: none;
     }
-  }
-
-  &__cta {
-    color: $white !important;
-    background-color: $purple-70;
-    padding: $spacing-05;
-    width: fit-content !important;
   }
 }
 </style>
