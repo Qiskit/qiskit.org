@@ -71,26 +71,6 @@ export default class extends Vue {
     }
 
   }
-  &__fake-ui {
-    flex: 0 0 32rem;
-    @include type-style('body-long-01');
-    background-size: contain;
-    background-position: center top;
-    background-repeat: no-repeat;
-
-    @include mq($from: medium, $until: large) {
-      flex: 1.5;
-    }
-
-    @include mq($from: medium) {
-      display: none;
-    }
-
-    @include mq($until: medium) {
-      flex: 0 0 16rem;
-      margin: $spacing-06 0 0 0;
-    }
-  }
 
   &__image {
     flex: 0 0 32rem;
