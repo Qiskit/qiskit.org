@@ -13,17 +13,15 @@
         />
       </div>
       <div class="capabilities-section__scrolling-ui">
-        <FakeUI class="capabilities-section__scrolling-ui-element">
-          <div
-            v-for="item in capabilities"
-            :key="item.image"
-            class="capabilities-section__image"
-            :class="{
-              'capabilities-section__active-image' : item.title === activeSection
-            }"
-            :lazy-background="item.image"
-          />
-        </FakeUI>
+        <div
+          v-for="(item, index) in capabilities"
+          :key="item.image"
+          class="capabilities-section__image"
+          :class="{
+            'capabilities-section__active-image' : isActiveImage(item, index)
+          }"
+          :lazy-background="item.image"
+        />
       </div>
     </div>
   </section>
@@ -34,7 +32,7 @@ import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 import CapabilityCard from '~/components/metal/CapabilityCard.vue'
 import FakeUI from '~/components/metal/FakeUI.vue'
-import { METAL_CAPABILITIES } from '~/constants/metalContent'
+import { MetalCapability, METAL_CAPABILITIES } from '~/constants/metalContent'
 
 @Component({
   components: { CapabilityCard, FakeUI }
@@ -75,6 +73,10 @@ export default class extends Vue {
   beforeRouteUpdate (route, _, next) {
     this._parseSectionFromUrl(route)
     next()
+  }
+
+  isActiveImage (item: MetalCapability, index: number): boolean {
+    return item.title === this.activeSection || (this.activeSection === '' && index === 0)
   }
 
   _onSectionAppearing (entries: Array<IntersectionObserverEntry>) {
@@ -120,14 +122,16 @@ export default class extends Vue {
     flex: 1;
   }
 
-  &__card ~ &__card{
-    margin-top: $layout-04;
+  &__card {
+    margin-bottom: $layout-06;
   }
 
   &__scrolling-ui {
     position: sticky;
     top: $layout-02;
     flex: 0 0 32rem;
+    min-height: 20rem;
+    margin-bottom: $layout-06;
 
     @include mq($from: medium, $until: large) {
       flex: 1.5;
@@ -142,11 +146,11 @@ export default class extends Vue {
     position: absolute;
     top: 0;
     opacity: 0;
-    transition: opacity 0.2s linear;
+    transition: opacity 0.3s linear;
     width: 100%;
     height: 100%;
-    background-size: cover;
-    background-position: center;
+    background-size: contain;
+    background-position: center top;
     background-repeat: no-repeat;
   }
 

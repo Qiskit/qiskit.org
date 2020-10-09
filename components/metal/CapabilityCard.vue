@@ -8,12 +8,10 @@
         <span v-text="description" />
       </div>
     </div>
-    <FakeUI class="capability-card__fake-ui">
-      <div
-        class="capability-card__image"
-        :lazy-background="image"
-      />
-    </FakeUI>
+    <div
+      class="capability-card__image"
+      :lazy-background="image"
+    />
   </article>
 </template>
 
@@ -95,11 +93,25 @@ export default class extends Vue {
   }
 
   &__image {
+    flex: 0 0 32rem;
     width: 100%;
     height: 100%;
-    background-size: cover;
-    background-position: center;
+    background-size: contain;
+    background-position: center top;
     background-repeat: no-repeat;
+
+    @include mq($from: medium, $until: large) {
+      flex: 1.5;
+    }
+
+    @include mq($from: medium) {
+      display: none;
+    }
+
+    @include mq($until: medium) {
+      flex: 0 0 16rem;
+      margin: $spacing-06 0 0 0;
+    }
   }
 }
 </style>

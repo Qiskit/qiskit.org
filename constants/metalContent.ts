@@ -78,6 +78,8 @@ const METAL_CAPABILITIES: Array<MetalCapability> = [
 ]
 
 export {
+  MetalFeature,
   METAL_FEATURES,
+  MetalCapability,
   METAL_CAPABILITIES
 }
