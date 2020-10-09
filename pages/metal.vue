@@ -4,6 +4,7 @@
     <CapabilitiesSection />
     <FeaturesSection />
     <BuildingSection />
+    <EarlyAccessSection />
   </div>
 </template>
 
@@ -14,9 +15,10 @@ import IntroSection from '~/components/metal/IntroSection.vue'
 import FeaturesSection from '~/components/metal/FeaturesSection.vue'
 import BuildingSection from '~/components/metal/BuildingSection.vue'
 import CapabilitiesSection from '~/components/metal/CapabilitiesSection.vue'
+import EarlyAccessSection from '~/components/metal/EarlyAccessSection.vue'
 
 @Component({
-  components: { IntroSection, CapabilitiesSection, FeaturesSection, BuildingSection },
+  components: { IntroSection, CapabilitiesSection, FeaturesSection, EarlyAccessSection, BuildingSection },
   layout: 'metal',
   head () {
     return {

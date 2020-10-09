@@ -20,17 +20,22 @@
             Open source
           </h3>
           <p class="copy__paragraph">
-            Qiskit Metal is a visionary work in progress in its early development stages. We're working toward a vision—a quantum design & analysis platform built from the ground up specifically for quantum hardware. It is crucial that we keep this product open source in order to grow Qiskit Metal into the software that will be most useful for quantum hardware engineers around the world and for the innovation in and growth of the field as a whole. If Qiskit Metal doesn't have what you want, then you extend Metal to build it!
+            Qiskit Metal is a visionary work in progress in its early development stages. We‘re working toward a vision—a quantum design & analysis platform built from the ground up specifically for quantum hardware. It is crucial that we keep this product open source in order to grow Qiskit Metal into the software that will be most useful for quantum hardware engineers around the world and for the innovation in and growth of the field as a whole. If Qiskit Metal doesn't have what you want, then you extend Metal to build it!
           </p>
           <h3 class="copy__subtitle">
-            Early access
+            Education
           </h3>
+          <!-- eslint-disable vue/multiline-html-element-content-newline -->
           <p class="copy__paragraph">
-            Through an early-access program, we are thrilled to ask you to join this journey to revolutionize quantum devices.
-            <br>
-            <br>
-            The early-access program will start in November and proceed through March, 2021, during which time we will work closely to develop Metal and design quantum devices with it.
+            A few sentences here about educational material. The first link is to “<AppLink
+              class="building-section__copy-link copy__link "
+              url="https://qiskit.org/learn/intro-qc-qh/"
+            >Introduction to Quantum Computing and Quantum Hardware</AppLink>“ summer school lectures series by Zlatko Minev on Superconducting Qubits. The second link is to the “<AppLink
+              class="building-section__copy-link copy__link "
+              url="https://qiskit.org/textbook/ch-quantum-hardware/transmon-physics.html"
+            >Qiskit textbook</AppLink>“ chapters we are building on quantum devices and their control.
           </p>
+          <!-- eslint-enable -->
         </div>
         <div class="building-section__media">
           <img
@@ -40,13 +45,6 @@
           >
         </div>
       </div>
-
-      <AppCta
-        class="building-section__cta"
-        :url="stayInTouchLink"
-      >
-        Sign up to stay in touch
-      </AppCta>
     </div>
   </section>
 </template>
@@ -54,16 +52,11 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import AppCta from '~/components/ui/AppCta.vue'
+import AppLink from '~/components/ui/AppLink.vue'
 
-@Component({
-  components: { AppCta }
-})
+@Component({ components: { AppLink } })
 
-export default class extends Vue {
-  // TODO: update with url
-  stayInTouchLink = 'https://qiskit.org'
-}
+export default class extends Vue {}
 </script>
 
 <style lang="scss" scoped>
@@ -76,7 +69,6 @@ export default class extends Vue {
   &__container {
     @include contained();
     padding-top: $layout-05;
-    padding-bottom: $layout-06;
   }
 
   &__title {
@@ -104,16 +96,13 @@ export default class extends Vue {
 
     @include mq($until: medium) {
       width: 100%;
+      max-width: initial;
     }
   }
 
   &__content {
     display: flex;
-    margin-bottom: $layout-06;
-
-    @include mq($until: medium) {
-      margin-bottom: $layout-05;
-    }
+    margin-bottom: $layout-05;
   }
 
   &__copy {
@@ -122,6 +111,11 @@ export default class extends Vue {
     @include mq($until: medium) {
       flex: 1;
     }
+
+    &-link {
+      color: $purple-50;
+      text-decoration: underline;
+    }
   }
 
   .copy__paragraph,
@@ -129,17 +123,14 @@ export default class extends Vue {
     color: $white;
   }
 
+  .copy__paragraph {
+    margin-bottom: $layout-04;
+  }
+
   &__media-img {
     @include mq($until: large) {
       display: none;
     }
-  }
-
-  &__cta {
-    color: $white !important;
-    background-color: $purple-70;
-    padding: $spacing-05;
-    width: fit-content !important;
   }
 }
 </style>
