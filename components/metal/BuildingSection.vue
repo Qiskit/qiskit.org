@@ -118,6 +118,10 @@ export default class extends Vue {
 
   &__copy {
     flex: 0 0 28rem;
+
+    @include mq($until: medium) {
+      flex: 1;
+    }
   }
 
   .copy__paragraph,
