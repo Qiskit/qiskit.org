@@ -19,12 +19,10 @@
           allowfullscreen
         />
       </div>
-      <AppCta
+      <AppCtaBtn
         class="intro-section__cta"
         v-bind="accessRequest"
-      >
-        {{ accessRequest.label }}
-      </AppCta>
+      />
     </div>
   </section>
 </template>
@@ -32,9 +30,9 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import AppCta from '~/components/ui/AppCta.vue'
+import AppCtaBtn from '~/components/metal/AppCtaBtn.vue'
 
-@Component({ components: { AppCta } })
+@Component({ components: { AppCtaBtn } })
 export default class extends Vue {
   accessRequest = {
     url: 'https://qiskit.org',
@@ -100,22 +98,12 @@ export default class extends Vue {
   }
 
   &__cta {
-    color: $white !important;
-    background-color: $purple-70;
-    padding: $spacing-05;
-    width: fit-content !important;
     position: relative;
     top: -3.2rem;
 
     @include mq($until: large) {
       top: 0;
       margin-top: $layout-03;
-    }
-
-    @include mq($until: medium) {
-      width: 100% !important;
-      display: flex;
-      justify-content: space-between;
     }
   }
 }
