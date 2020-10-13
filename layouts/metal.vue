@@ -7,7 +7,7 @@
       />
     </header>
     <nuxt />
-    <ThePageFooter dark-mode />
+    <ThePageFooter mode="dark" />
   </div>
 </template>
 
