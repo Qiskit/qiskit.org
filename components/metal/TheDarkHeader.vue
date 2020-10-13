@@ -175,6 +175,10 @@ export default class extends Vue {}
     bottom: 0;
     width: 56rem;
 
+    @media (max-width: 1440px) {
+      right: -4rem;
+    }
+
     @include mq($until: medium) {
       width: 26rem;
       right: -8rem;
@@ -189,10 +193,6 @@ export default class extends Vue {}
       width: 64rem;
       margin-top: -8rem;
       right: 0;
-    }
-
-    @media (max-width: 1440px) {
-      right: -4rem;
     }
 
     @media (min-width: 1056px) and (max-width: 1192px) {
