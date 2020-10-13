@@ -5,7 +5,7 @@
         {{ title }}
       </h3>
       <div class="capability-card__description">
-        <span v-text="description" />
+        {{ description }}
       </div>
     </div>
     <div
@@ -49,8 +49,8 @@ export default class extends Vue {
   }
 
   &__title {
-    flex: 0 0 12rem;
     @include type-style('productive-heading-02');
+    flex: 0 0 12rem;
     padding-right: $spacing-07;
 
     @include mq($until: large) {
@@ -66,7 +66,6 @@ export default class extends Vue {
     @include mq($until: large) {
       padding-bottom: $spacing-05;
     }
-
   }
 
   &__image {
