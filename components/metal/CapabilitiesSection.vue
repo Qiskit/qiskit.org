@@ -31,11 +31,10 @@
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 import CapabilityCard from '~/components/metal/CapabilityCard.vue'
-import FakeUI from '~/components/metal/FakeUI.vue'
 import { MetalCapability, METAL_CAPABILITIES } from '~/constants/metalContent'
 
 @Component({
-  components: { CapabilityCard, FakeUI }
+  components: { CapabilityCard }
 })
 export default class extends Vue {
   capabilities = METAL_CAPABILITIES

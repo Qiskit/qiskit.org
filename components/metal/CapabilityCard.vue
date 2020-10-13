@@ -18,11 +18,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-import FakeUI from '~/components/metal/FakeUI.vue'
 
-@Component({
-  components: { FakeUI }
-})
+@Component
 export default class extends Vue {
   @Prop(String) image
   @Prop(String) title
