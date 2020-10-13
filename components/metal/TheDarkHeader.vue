@@ -181,7 +181,7 @@ export default class extends Vue {}
 
     @include mq($until: medium) {
       width: 26rem;
-      right: -8rem;
+      right: -6rem;
     }
 
     @include mq($from: medium, $until: large) {
@@ -208,6 +208,7 @@ export default class extends Vue {}
       top: 35rem;
       right: 14rem;
       z-index: 1;
+      width: initial;
 
       @include mq($until: medium) {
         top: 16.65rem;
@@ -221,6 +222,7 @@ export default class extends Vue {}
         z-index: 1;
         max-width: 16rem;
       }
+
       @include mq($from: x-large) {
         top: 42rem;
         right: 17.5rem;
