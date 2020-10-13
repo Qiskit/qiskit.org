@@ -7,7 +7,7 @@
       />
     </header>
     <nuxt />
-    <ThePageFooter mode="dark" />
+    <PageFooter mode="dark" />
   </div>
 </template>
 
@@ -15,12 +15,12 @@
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 import TheBlackLivesMatterBanner from '~/components/layouts/banners/TheBlackLivesMatterBanner.vue'
-import ThePageFooter from '~/components/layouts/ThePageFooter/index.vue'
+import PageFooter from '~/components/layouts/PageFooter/index.vue'
 
 @Component({
   components: {
     TheBlackLivesMatterBanner,
-    ThePageFooter
+    PageFooter
   }
 })
 export default class extends Vue {
