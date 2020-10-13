@@ -65,12 +65,12 @@
       </svg>
 
       <h1 class="the-dark-header__title">
-        M<span class="the-dark-header__title-10">e</span><span class="the-dark-header__title-20">t</span><span class="the-dark-header__title-30">a</span><span class="the-dark-header__title-40">l</span>
+        Qiskit
       </h1>
     </div>
     <div class="the-dark-header__media">
-      <img class="the-dark-header__media-cryo" src="/images/metal/hero/cryo-sketch.png">
-      <img class="the-dark-header__media-transmon" src="/images/metal/hero/transmon.svg">
+      <img class="the-dark-header__media-cryo" src="/images/metal/hero/cryo-sketch.png" alt="">
+      <img class="the-dark-header__media-transmon" src="/images/metal/hero/transmon.svg" alt="">
     </div>
   </header>
 </template>
@@ -103,22 +103,20 @@ export default class extends Vue {
 
   position: relative;
   overflow: hidden;
-  padding-top: $layout-07;
+  padding-top: 7.75rem;
   // In Figma, the height is not enforced but the background is always
   // visible completely so we do it in the CSS. A small correction is needed
   // to be able of displaying the bottom lines of the grid.
   height: calc(56rem + 2px);
 
   @include mq($from: medium, $until: large) {
-    margin-bottom: $layout-06;
-    padding-top: 23rem;
+    padding-top: 4rem;
     // To adjust to the size of the smaller grid.
     height: calc(#{56rem * 40 / 64} + 2px);
   }
 
   @include mq($until: medium) {
-    margin-bottom: 0;
-    // To adjust to the size of the smaller grid.
+    padding-top: 6rem;
     height: calc(#{56rem * 40 / 64} + 2px);
   }
 
@@ -128,55 +126,71 @@ export default class extends Vue {
     position: relative;
     display: flex;
     align-items: center;
-    padding-top: 22.5rem;
+    padding-top: 25rem;
+
+    @include mq($until: medium) {
+      padding-top: 11.5rem;
+    }
+
+    @include mq($from: medium, $until: large) {
+      padding-top: 8.75rem;
+    }
   }
 
   &__icon {
-    margin-right: $spacing-04;
+    margin-right: $spacing-05;
+    width: 8.25rem;
+    height: auto;
+
+    @include mq($until: medium) {
+      width: 2.5rem;
+      margin-right: $spacing-03;
+    }
+
+    @include mq($from: medium, $until: large) {
+      width: initial;
+    }
   }
 
   &__title {
     @include type-style('display-04');
     color: $white;
     font-weight: 600;
-    line-height: 1;
+    line-height: 1.3;
     font-size: 122px;
-    width: 100%;
-    border-bottom: 2px solid $cool-gray-30;
-    max-width: calc(100vw / 2.95);
-    margin-top: 1px;
+    position: relative;
+    z-index: 1;
 
-    &-10 {
-      color: $cool-gray-10;
+    @include mq($until: medium) {
+      font-size: 2rem;
     }
 
-    &-20 {
-      color: $cool-gray-20;
-    }
-
-    &-30 {
-      color: $cool-gray-30;
-    }
-
-    &-40 {
-      color: $cool-gray-40;
+    @include mq($from: medium, $until: large) {
+      font-size: 84px;
     }
   }
 
   &__media {
     position: absolute;
     top: 0;
-    right: 0;
+    right: -8rem;
     left: auto;
     bottom: 0;
     width: 56rem;
 
-    @include mq($from: medium, $until: large) {
-      // width: 36.5rem;
+    @include mq($until: medium) {
+      width: 26rem;
+      right: -6rem;
     }
 
-    @include mq($until: medium) {
-      // width: 18.5rem;
+    @include mq($from: medium, $until: large) {
+      width: 26rem;
+      right: -2rem;
+    }
+
+    @include mq($from: x-large) {
+      width: 62rem;
+      right: 0;
     }
 
     &-cryo {
@@ -188,6 +202,19 @@ export default class extends Vue {
       top: 35rem;
       right: 14rem;
       z-index: 1;
+
+      @include mq($until: medium) {
+        top: 16.65rem;
+        max-width: 14rem;
+        right: 7.5rem;
+      }
+
+      @include mq($from: medium, $until: large) {
+        top: 15rem;
+        right: 5.5rem;
+        z-index: 1;
+        max-width: 16rem;
+      }
     }
   }
 }
