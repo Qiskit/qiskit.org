@@ -184,7 +184,7 @@ export default class extends Vue {
 
     @include mq($until: medium) {
       width: 26rem;
-      right: -6rem;
+      right: -8rem;
     }
 
     @include mq($from: medium, $until: large) {
@@ -194,8 +194,7 @@ export default class extends Vue {
 
     @include mq($from: x-large) {
       width: 64rem;
-      right: 0;
-      top: -8rem;
+      margin-top: -8rem;
     }
 
     &-cryo {
