@@ -195,6 +195,15 @@ export default class extends Vue {
     @include mq($from: x-large) {
       width: 64rem;
       margin-top: -8rem;
+      right: 0;
+    }
+
+    @media (max-width: 1440px) {
+      right: -4rem;
+    }
+
+    @media (min-width: 1056px) and (max-width: 1192px) {
+      right: -8rem;
     }
 
     &-cryo {
