@@ -1,5 +1,14 @@
 <template>
   <header class="the-dark-header">
+    <nav class="the-dark-header__nav">
+      <AppLink
+        class="the-dark-header__nav-link"
+        :url="`/`"
+      >
+        <ArrowLeft16 class="the-dark-header__nav-icon" />
+        Back to Qiskit.org
+      </AppLink>
+    </nav>
     <div class="the-dark-header__container">
       <svg
         class="the-dark-header__icon"
@@ -111,6 +120,24 @@ export default class extends Vue {}
   @include mq($until: medium) {
     padding-top: 6rem;
     height: calc(#{56rem * 40 / 64} + 2px);
+  }
+
+  &__nav {
+    @include contained();
+
+    &-link {
+      color: $white;
+      display: flex;
+      font-size: 1rem;
+      position: absolute;
+      top: $layout-01;
+      z-index: 2;
+    }
+
+    &-icon {
+      fill: currentColor;
+      margin-right: $spacing-05;
+    }
   }
 
   &__container {
