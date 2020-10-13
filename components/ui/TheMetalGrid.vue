@@ -6,31 +6,23 @@
           Introducing
         </p>
         <p class="the-metal-grid__title">
-          <span
-            class="the-metal-grid__metal-word-letter_letter-M"
-          >M</span><span
-            class="the-metal-grid__metal-word-letter_letter-e"
-          >e</span><span
-            class="the-metal-grid__metal-word-letter_letter-t"
-          >t</span><span
-            class="the-metal-grid__metal-word-letter_letter-a"
-          >a</span><span
-            class="the-metal-grid__metal-word-letter_letter-l"
-          >l</span>
+          <span class="the-metal-grid__metal-word-letter_letter-M">M</span>
+          <span class="the-metal-grid__metal-word-letter_letter-e">e</span>
+          <span class="the-metal-grid__metal-word-letter_letter-t">t</span>
+          <span class="the-metal-grid__metal-word-letter_letter-a">a</span>
+          <span class="the-metal-grid__metal-word-letter_letter-l">l</span>
         </p>
       </div>
     </header>
-    <div
-      class="the-metal-grid__container"
-    >
+    <div class="the-metal-grid__container">
       <div
         v-for="pos in positions"
         :key="posId(pos)"
         :style="{
-          left: `${pos.c * width - pos.c}px`,
-          top: `${pos.r * height - pos.r}px`,
-          width: `${width}px`,
-          height: `${height}px`
+          left: `${pos.c * width - (columnCount - columnCount % 2) * width/2}px`,
+          top: `${pos.r * height - 1}px`,
+          width: `${width + 1}px`,
+          height: `${height + 1}px`
         }"
         class="the-metal-grid__cell"
         :class="{
@@ -59,8 +51,9 @@ import { Component } from 'vue-property-decorator'
 @Component
 export default class extends Vue {
   width: number = 64
-
   height: number = 64
+
+  columnCount: number = 0
 
   decoherence = {
     11: 0.5,
@@ -75,7 +68,7 @@ export default class extends Vue {
   positions = Array.from((() => {
     const { decoherence } = this
     const rowCount = 14
-    const columnCount = 21
+    const columnCount = this.columnCount = 20
 
     function* gen () {
       for (let r = 0; r < rowCount; r++) {
@@ -87,6 +80,8 @@ export default class extends Vue {
         }
       }
     }
+
+    // columnWidth = columnCount * this.width
     return gen()
   })())
 
@@ -107,7 +102,8 @@ export default class extends Vue {
   }
 
   isTrigger (pos) {
-    return pos.c === 6 && pos.r === 1
+    const centralColumn = Math.floor(this.columnCount / 2)
+    return pos.c === centralColumn - 3 && pos.r === 1
   }
 
   triggerAnimation (pos) {
@@ -149,11 +145,13 @@ export default class extends Vue {
   }
 
   &__underlayer {
+    @include contained();
     background-color: $cool-gray-100;
     min-height: 28rem;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 1px;
   }
 
   &__intro {
@@ -172,6 +170,8 @@ export default class extends Vue {
   }
 
   &__container {
+    width: 0;
+    margin: 0 auto;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -187,12 +187,11 @@ export default class extends Vue {
       content: "";
       border: 1px solid #E1E1E2;
       position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
+      width: 100%;
+      height: 100%;
       background-color: white;
       transition: transform 500ms ease-in, opacity 800ms;
+      box-sizing: border-box;
     }
 
     &_hidden::before {
@@ -203,6 +202,7 @@ export default class extends Vue {
     &_trigger::before {
       border: none;
       background-color: transparent;
+      /* box-shadow: inset 0px 0px 5px 5px black, inset 0px 0px 5px 5px black; */
       z-index: 200;
     }
   }
