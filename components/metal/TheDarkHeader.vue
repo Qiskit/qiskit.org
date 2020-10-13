@@ -78,21 +78,14 @@
 <script lang="ts">
 import Vue from 'vue'
 
-import { Prop, Component } from 'vue-property-decorator'
-import VersionInfo from '~/components/landing/TheHeroMoment/VersionInfo.vue'
+import { Component } from 'vue-property-decorator'
 import LandingCta from '~/components/landing/LandingCta.vue'
 import AppLink from '~/components/ui/AppLink.vue'
 
 @Component({
-  components: { VersionInfo, LandingCta, AppLink }
+  components: { LandingCta, AppLink }
 })
-export default class extends Vue {
-  @Prop({ type: String, required: true }) version!: string
-
-  data () {
-    return { qiskitPronuntiation: Math.random() < 0.5 ? '[kiss-kit]' : '[quiss-kit]' }
-  }
-}
+export default class extends Vue {}
 </script>
 
 <style lang="scss">
