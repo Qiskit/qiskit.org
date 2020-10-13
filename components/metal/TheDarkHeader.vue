@@ -168,6 +168,10 @@ export default class extends Vue {
     @include mq($from: medium, $until: large) {
       font-size: 84px;
     }
+
+    @include mq($from: x-large) {
+      margin-top: -18px;
+    }
   }
 
   &__media {
@@ -189,8 +193,9 @@ export default class extends Vue {
     }
 
     @include mq($from: x-large) {
-      width: 62rem;
+      width: 64rem;
       right: 0;
+      top: -8rem;
     }
 
     &-cryo {
@@ -214,6 +219,10 @@ export default class extends Vue {
         right: 5.5rem;
         z-index: 1;
         max-width: 16rem;
+      }
+      @include mq($from: x-large) {
+        top: 42rem;
+        right: 17.5rem;
       }
     }
   }
