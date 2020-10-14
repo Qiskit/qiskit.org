@@ -5,32 +5,40 @@
         <p class="the-metal-grid__intro">
           Introducing
         </p>
+        <AppIcon class="the-metal-grid__logo" />
         <p class="the-metal-grid__title">
-          <span class="the-metal-grid__metal-word-letter_letter-M">M</span>
-          <span class="the-metal-grid__metal-word-letter_letter-e">e</span>
-          <span class="the-metal-grid__metal-word-letter_letter-t">t</span>
-          <span class="the-metal-grid__metal-word-letter_letter-a">a</span>
-          <span class="the-metal-grid__metal-word-letter_letter-l">l</span>
+          <span
+            class="the-metal-grid__metal-word-letter_letter-M"
+          >M</span><span
+            class="the-metal-grid__metal-word-letter_letter-e"
+          >e</span><span
+            class="the-metal-grid__metal-word-letter_letter-t"
+          >t</span><span
+            class="the-metal-grid__metal-word-letter_letter-a"
+          >a</span><span
+            class="the-metal-grid__metal-word-letter_letter-l"
+          >l</span>
         </p>
       </div>
     </header>
     <div class="the-metal-grid__container">
       <div
-        v-for="pos in positions"
-        :key="posId(pos)"
-        :style="{
-          left: `${pos.c * width - (columnCount - columnCount % 2) * width/2}px`,
-          top: `${pos.r * height - 1}px`,
-          width: `${width + 1}px`,
-          height: `${height + 1}px`
-        }"
-        class="the-metal-grid__cell"
-        :class="{
-          'the-metal-grid__cell_trigger': isTrigger(pos),
-          'the-metal-grid__cell_hidden': isHidden(pos)
-        }"
-        @click="triggerAnimation(pos)"
-      />
+        v-for="(row, index) in positions"
+        :key="rowId(row, index)"
+        class="the-metal-grid__row"
+      >
+        <div
+          v-for="pos in row"
+          :key="posId(pos)"
+          class="the-metal-grid__cell"
+          :class="{
+            'the-metal-grid__cell_trigger': isTrigger(pos),
+            'the-metal-grid__cell_hidden': isHidden(pos),
+            'the-metal-grid__cell_decoherent': pos.decoherent
+          }"
+          @click="triggerAnimation(pos)"
+        />
+      </div>
     </div>
     <div
       ref="slot-container"
@@ -47,13 +55,50 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
+import AppIcon from '~/components/ui/AppIcon.vue'
 
-@Component
+@Component({
+  components: { AppIcon }
+})
 export default class extends Vue {
   width: number = 64
   height: number = 64
 
-  columnCount: number = 0
+  columnCount: number = 40
+  rowCount: number = 14
+  /*
+  pattern = [
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+  ]
+  */
+
+  pattern = [
+    [0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0],
+    [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0],
+    [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+    [1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
+    [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
+    [0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0],
+    [0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  ]
+
+  /*
+  pattern = [
+    [1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+  ]
+  */
 
   decoherence = {
     11: 0.5,
@@ -66,30 +111,39 @@ export default class extends Vue {
   slotContainerIsHidden: boolean = false
 
   positions = Array.from((() => {
-    const { decoherence } = this
-    const rowCount = 14
-    const columnCount = this.columnCount = 20
+    const { decoherence, columnCount, rowCount } = this
 
-    function* gen () {
+    function* genRows () {
       for (let r = 0; r < rowCount; r++) {
-        for (let c = 0; c < columnCount; c++) {
-          if (r in decoherence && Math.random() < decoherence[r]) {
-            continue
+        yield Array.from((() => {
+          function* genColumns () {
+            for (let c = 0; c < columnCount; c++) {
+              const decoherent = r in decoherence && Math.random() < decoherence[r]
+              yield { c, r, decoherent }
+            }
           }
-          yield { c, r }
-        }
+          return genColumns()
+        })())
       }
     }
 
     // columnWidth = columnCount * this.width
-    return gen()
+    return genRows()
   })())
 
   visibleCells = Array.from((() => {
+    const { columnCount, pattern } = this
     const self = this
+    const rows = { init: 1, end: pattern.length + 1 }
+    const centralColumn = Math.floor(columnCount / 2)
+    const columns = { init: centralColumn - pattern[0].length / 2, end: centralColumn + pattern[0].length / 2 }
+
     function* gen () {
-      for (let r = 1; r < 6; r++) {
-        for (let c = 4; c < 16; c++) {
+      for (let r = rows.init; r < rows.end; r++) {
+        for (let c = columns.init; c < columns.end; c++) {
+          if (pattern[r - rows.init][c - columns.init] === 0) {
+            continue
+          }
           yield self.posId({ c, r })
         }
       }
@@ -103,7 +157,7 @@ export default class extends Vue {
 
   isTrigger (pos) {
     const centralColumn = Math.floor(this.columnCount / 2)
-    return pos.c === centralColumn - 3 && pos.r === 1
+    return pos.c === centralColumn - 3 && pos.r === 2
   }
 
   triggerAnimation (pos) {
@@ -116,7 +170,7 @@ export default class extends Vue {
     const length = this.visibleCells.length
     if (!length) {
       setTimeout(() => {
-        this.$router.push({ path: '/metal' })
+        // this.$router.push({ path: '/metal' })
       }, 1000)
       return
     }
@@ -129,16 +183,23 @@ export default class extends Vue {
   posId (pos) {
     return `cell-${pos.c}-${pos.r}`
   }
+
+  rowId (row, index) {
+    return `row-${index}`
+  }
 }
 </script>
 
 <style lang="scss">
 @import '~carbon-components/scss/globals/scss/typography';
 
+$large-cell: 64px;
+$medium-cell: 40px;
+
 .the-metal-grid {
   position: relative;
   width: 100%;
-  min-height: 28rem;
+  min-height: 42rem;
 
   @include mq($until: large) {
     min-height: 28rem * 40 / 64;
@@ -147,63 +208,129 @@ export default class extends Vue {
   &__underlayer {
     @include contained();
     background-color: $cool-gray-100;
-    min-height: 28rem;
+    min-height: 42rem;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 1px;
+
+    @include mq($until: large) {
+      min-height: 26.5rem;
+    }
   }
 
   &__intro {
-    @include type-style('display-04');
+    @include type-style('display-03');
     font-size: 2.5rem;
+    margin-left: 14rem;
     color: white;
+
+    @include mq($until: large) {
+      font-size: 1.5rem;
+      margin-left: 10rem;
+    }
+  }
+
+  &__logo {
+    display: inline-block;
+    position: relative;
+    width: 12rem;
+    height: 12rem;
+    color: $cool-gray-10;
+    vertical-align: middle;
+    margin-right: 2rem;
+
+    @include mq($until: large) {
+      width: 8rem;
+      height: 8rem;
+      margin-right: 2rem;
+    }
   }
 
   &__title {
     @include type-style('display-04');
-    line-height: 12rem;
-    font-size: 15rem;
+    display: inline-block;
+    line-height: 10rem;
+    font-size: 10rem;
     color: white;
     position: relative;
     left: -0.075em;
+    vertical-align: middle;
+
+    @include mq($until: large) {
+      line-height: 6rem;
+      font-size: 6rem;
+    }
   }
 
   &__container {
-    width: 0;
-    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
-    //filter: drop-shadow(5px 5px 10px black);
+  }
+
+  &__row {
+    display: flex;
+    flex: 0 0 $large-cell;
+    justify-content: center;
+    width: 100vw;
+    height: $large-cell;
+
+    @include mq($until: large) {
+      flex: 0 0 $medium-cell;
+      height: $medium-cell;
+    }
   }
 
   &__cell {
-    position: absolute;
+    position: relative;
+    flex: 0 0 $large-cell;
+
+    @include mq($until: large) {
+      flex: 0 0 $medium-cell;
+    }
 
     &::before {
       content: "";
       border: 1px solid #E1E1E2;
       position: absolute;
-      width: 100%;
-      height: 100%;
+      width: $large-cell - 1px;
+      height: $large-cell - 1px;
       background-color: white;
-      transition: transform 500ms ease-in, opacity 800ms;
-      box-sizing: border-box;
+      transition: transform 700ms ease-in, opacity 700ms, border-radius 700ms;
+      box-sizing: content-box;
+
+      @include mq($until: large) {
+        width: $medium-cell - 1px;
+        height: $medium-cell - 1px;
+      }
     }
 
     &_hidden::before {
-      transform: translateY(150%);
+      // transform: translateY(150%);
+      transform: scale(0.3, 0.3);
+      border-radius: 100%;
       opacity: 0;
     }
 
     &_trigger::before {
       border: none;
       background-color: transparent;
-      /* box-shadow: inset 0px 0px 5px 5px black, inset 0px 0px 5px 5px black; */
+      cursor: pointer;
+      /*
+      background-color: $cool-gray-90;
+      box-shadow: inset 0px 0px 20px 2px black, inset 0px 0px 10px 1px black;
+      */
       z-index: 200;
+    }
+
+    &_decoherent::before {
+      opacity: 0;
     }
   }
 
@@ -232,6 +359,7 @@ export default class extends Vue {
   &__slot-container {
     pointer-events: none;
     position: absolute;
+    padding-top: $layout-05;
     top: 0;
     left: 0;
     right: 0;
