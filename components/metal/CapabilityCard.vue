@@ -5,7 +5,7 @@
         {{ title }}
       </h3>
       <div class="capability-card__description">
-        {{ description }}
+        <span v-html="description" />
       </div>
     </div>
     <div
