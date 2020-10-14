@@ -51,9 +51,14 @@ export default class extends Vue {
   flex-direction: row;
   align-items: center;
   text-decoration: none;
+  // TODO: Force pointer events to pass through to avoid covering the trigger
+  // tile to the Metal page. Remove when decomissioning the Metal page.
   pointer-events: none;
 
   * {
+    // TODO: Force pointer events to allow the user to select text and
+    // click links in the internal elements. Remove when decomissioning the
+    // Metal page.
     pointer-events: auto;
   }
 

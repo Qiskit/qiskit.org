@@ -14,6 +14,7 @@
           computers at the level of pulses, circuits and algorithms.
         </p>
         <LandingCta
+          class="the-hero-moment__cta"
           url="https://qiskit.org/documentation/install.html"
           @click="$trackClickEvent({
             action: 'Get Started'
@@ -121,6 +122,9 @@ export default class extends Vue {
     color: $white-text-01;
     margin: 0 0 $layout-05;
     max-width: 6 * $column-size-large;
+    // TODO: Force pointer events to allow the user to select text. Remove
+    // when decomissioning the Metal page.
+    pointer-events: auto;
 
     @include mq($from: medium, $until: large) {
       @include type-style('productive-heading-06');
@@ -142,6 +146,9 @@ export default class extends Vue {
     color: $cool-gray-80;
     max-width: 5 * $column-size-large;
     margin: 0 0 $layout-06;
+    // TODO: Force pointer events to allow the user to select text. Remove
+    // when decomissioning the Metal page.
+    pointer-events: auto;
 
     @include mq($from: medium, $until: large) {
       max-width: 3 * $column-size-medium;
@@ -152,6 +159,12 @@ export default class extends Vue {
       max-width: 3 * $column-size-small;
       margin-bottom: $layout-03;
     }
+  }
+
+  &__cta {
+    // TODO: Force pointer events to allow the user to select text. Remove
+    // when decomissioning the Metal page.
+    pointer-events: auto;
   }
 }
 </style>

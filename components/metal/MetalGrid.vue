@@ -469,10 +469,6 @@ $medium-cell: 40px;
     z-index: 110;
     transition: opacity 500ms ease-out;
 
-    * {
-      pointer-events: auto;
-    }
-
     &_hidden {
       opacity: 0;
     }
