@@ -65,9 +65,6 @@ export default class extends Vue {
   timeToLoadMetal = 1000 // in ms
   triggerPositionFromTopCenter = { x: -3, y: 2 } // y: 0 is the first line
 
-  width: number = 64
-  height: number = 64
-
   // this is the solid part
   columnCount: number = 30
   rowCount: number = 11
