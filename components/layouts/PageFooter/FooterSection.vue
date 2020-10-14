@@ -2,7 +2,7 @@
   <section class="footer-section">
     <h2
       class="footer-section__title"
-      :class="`footer-section__title_${mode}-mode`"
+      :class="`footer-section__title_theme_${theme}`"
     >
       {{ title }}
     </h2>
@@ -12,8 +12,8 @@
         :key="element.url"
         :class="
           iconsOnly
-            ? `footer-section__icon-link_${mode}-mode`
-            : `footer-section__link footer-section__link_${mode}-mode`
+            ? `footer-section__icon-link_theme_${theme}`
+            : `footer-section__link footer-section__link_theme_${theme}`
         "
         v-bind="element"
       >
@@ -36,7 +36,7 @@ export default class extends Vue {
   @Prop(String) title
   @Prop(Array) elements
   @Prop({ type: Boolean, default: false }) iconsOnly
-  @Prop({ type: String, default: 'light' }) mode!: string
+  @Prop({ type: String, default: 'light' }) theme!: string
 }
 </script>
 
@@ -48,11 +48,11 @@ export default class extends Vue {
     @include type-style('expressive-heading-01');
     padding-bottom: $spacing-07;
 
-    &_light-mode {
+    &_theme_light {
       color: $cool-gray-60;
     }
 
-    &_dark-mode {
+    &_theme_dark {
       color: $white;
     }
   }
@@ -64,11 +64,11 @@ export default class extends Vue {
     width: 100%;
     padding-bottom: $spacing-03;
 
-    &_light-mode {
+    &_theme_light {
       color: $cool-gray-60;
     }
 
-    &_dark-mode {
+    &_theme_dark {
       color: $white;
     }
 
@@ -86,11 +86,11 @@ export default class extends Vue {
   }
 
   &__icon-link {
-    &_light-mode {
+    &_theme_light {
       fill: $cool-gray-60;
     }
 
-    &_dark-mode {
+    &_theme_dark {
       fill: $white;
     }
   }

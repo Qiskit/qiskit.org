@@ -8,7 +8,7 @@
       <TheMenu @changeVisibility="isMenuShown = $event === 'shown'" />
     </header>
     <nuxt />
-    <PageFooter mode="light" />
+    <PageFooter theme="light" />
   </div>
 </template>
 
