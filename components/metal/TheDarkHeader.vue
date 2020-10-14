@@ -72,7 +72,6 @@
           </radialGradient>
         </defs>
       </svg>
-
       <h1 class="the-dark-header__title">
         Qiskit
       </h1>
@@ -119,7 +118,7 @@ export default class extends Vue {}
   }
 
   @include mq($until: medium) {
-    padding-top: 6rem;
+    padding-top: $layout-06;
     height: calc(#{56rem * 40 / 64} + 2px);
   }
 
@@ -156,6 +155,10 @@ export default class extends Vue {}
     @include mq($from: medium, $until: large) {
       padding-top: 8.75rem;
     }
+
+    @include mq($from: x-large) {
+      padding-top: 23.75rem;
+    }
   }
 
   &__icon {
@@ -187,11 +190,7 @@ export default class extends Vue {}
     }
 
     @include mq($from: medium, $until: large) {
-      font-size: 84px;
-    }
-
-    @include mq($from: x-large) {
-      margin-top: -18px;
+      font-size: 5.25rem;
     }
   }
 
