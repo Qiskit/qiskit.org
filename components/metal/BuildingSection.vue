@@ -24,23 +24,18 @@
           <h3 class="copy__subtitle">
             Education
           </h3>
+          <!-- Disabling linter to keep the quotations and phrasing content together. -->
+          <!-- eslint-disable vue/multiline-html-element-content-newline -->
           <p class="building-section__text">
-            A few sentences here about educational material. The first link is to
-            “<AppLink
-              class="building-section__copy-link"
+            A few sentences here about educational material. The first link is to “<AppLink
+              class="building-section__copy-link copy__link "
               url="https://qiskit.org/learn/intro-qc-qh/"
-            >
-              Introduction to Quantum Computing and Quantum Hardware
-            </AppLink>“
-            summer school lectures series by Zlatko Minev on Superconducting Qubits. The second link is to the “
-            <AppLink
-              class="building-section__copy-link"
+            >Introduction to Quantum Computing and Quantum Hardware</AppLink>“ summer school lectures series by Zlatko Minev on Superconducting Qubits. The second link is to the “<AppLink
+              class="building-section__copy-link copy__link "
               url="https://qiskit.org/textbook/ch-quantum-hardware/transmon-physics.html"
-            >
-              Qiskit textbook
-            </AppLink>
-            “ chapters we are building on quantum devices and their control.
+            >Qiskit textbook</AppLink>“ chapters we are building on quantum devices and their control.
           </p>
+          <!-- eslint-enable -->
         </div>
         <div class="building-section__media">
           <img
