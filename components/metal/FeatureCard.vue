@@ -60,13 +60,13 @@ export default class extends Vue {
 
   &__image {
     flex: 0 0 14rem;
-    background-color: $cool-gray-90;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: 100%;
     background-position: center;
     overflow: hidden;
 
     @include mq($until: medium) {
+      background-size: contain;
       height: 11rem;
       width: auto;
     }
