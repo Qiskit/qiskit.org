@@ -12,7 +12,7 @@
         :key="element.url"
         :class="
           iconsOnly
-            ? `footer-section__icon-link_theme_${theme}`
+            ? `footer-section__icon-link footer-section__icon-link_theme_${theme}`
             : `footer-section__link footer-section__link_theme_${theme}`
         "
         v-bind="element"
