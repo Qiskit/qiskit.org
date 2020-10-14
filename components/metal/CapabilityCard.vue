@@ -1,6 +1,6 @@
 <template>
   <article class="capability-card">
-    <div class="capability-card__info-wrapper">
+    <div class="capability-card__container">
       <h3 class="capability-card__title">
         {{ title }}
       </h3>
@@ -18,11 +18,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-import FakeUI from '~/components/metal/FakeUI.vue'
 
-@Component({
-  components: { FakeUI }
-})
+@Component
 export default class extends Vue {
   @Prop(String) image
   @Prop(String) title
@@ -41,7 +38,7 @@ export default class extends Vue {
     flex-direction: column;
   }
 
-  &__info-wrapper {
+  &__container {
     display: flex;
     flex: 1;
     padding-right: $spacing-07;
@@ -52,8 +49,8 @@ export default class extends Vue {
   }
 
   &__title {
-    flex: 0 0 12rem;
     @include type-style('productive-heading-02');
+    flex: 0 0 12rem;
     padding-right: $spacing-07;
 
     @include mq($until: large) {
@@ -63,13 +60,12 @@ export default class extends Vue {
     }
   }
   &__description {
-    flex: 1;
     @include type-style('body-long-01');
+    flex: 1;
 
     @include mq($until: large) {
       padding-bottom: $spacing-05;
     }
-
   }
 
   &__image {

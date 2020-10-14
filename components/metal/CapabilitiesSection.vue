@@ -1,12 +1,12 @@
 <template>
   <section class="capabilities-section">
     <div class="capabilities-section__container">
-      <div class="capabilities-section__content-wrapper">
+      <div class="capabilities-section__content">
         <CapabilityCard
           v-for="item in capabilities"
           :id="item.title"
           :key="item.title"
-          class="capabilities-section__card"
+          class="capabilities-section__card scrollable"
           :title="item.title"
           :description="item.description"
           :image="item.image"
@@ -28,78 +28,19 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
+import { Component, Mixins } from 'vue-property-decorator'
 import CapabilityCard from '~/components/metal/CapabilityCard.vue'
-import FakeUI from '~/components/metal/FakeUI.vue'
 import { MetalCapability, METAL_CAPABILITIES } from '~/constants/metalContent'
+import ScrollSectionsMixin from '~/mixins/scrollBetweenSections'
 
 @Component({
-  components: { CapabilityCard, FakeUI }
+  components: { CapabilityCard }
 })
-export default class extends Vue {
+export default class extends Mixins(ScrollSectionsMixin) {
   capabilities = METAL_CAPABILITIES
-
-  activeSection = ''
-
-  _observer: IntersectionObserver | null = null
-
-  mounted () {
-    const threshold = [...Array(25).keys()].map(x => 4 * x / 100)
-    const windowTriggerMargins = '-16px 0px -66% 0px'
-    this._observer = new IntersectionObserver(
-      this._onSectionAppearing,
-      {
-        root: null, // the viewport
-        rootMargin: windowTriggerMargins,
-        threshold
-      }
-    );
-    (this.$el as HTMLElement)
-      .querySelectorAll('.capabilities-section__card')
-      .forEach((section) => {
-        (this._observer as IntersectionObserver).observe(section)
-      })
-  }
-
-  beforeDestroy () {
-    this._observer && this._observer.disconnect()
-  }
-
-  beforeRouteEnter (route, _, next) {
-    next(overviewPage => overviewPage._parseSectionFromUrl(route))
-  }
-
-  beforeRouteUpdate (route, _, next) {
-    this._parseSectionFromUrl(route)
-    next()
-  }
 
   isActiveImage (item: MetalCapability, index: number): boolean {
     return item.title === this.activeSection || (this.activeSection === '' && index === 0)
-  }
-
-  _onSectionAppearing (entries: Array<IntersectionObserverEntry>) {
-    let highestTopValue = Infinity
-    entries.forEach((entry) => {
-      const {
-        target,
-        boundingClientRect,
-        rootBounds
-      } = entry
-      if (!rootBounds) { return }
-      const targetTop = boundingClientRect.top
-      const triggerWindowBottom = rootBounds.bottom
-      const onTop = targetTop >= 0 && targetTop <= triggerWindowBottom
-      if (onTop && targetTop < highestTopValue) {
-        this.activeSection = target.id
-        highestTopValue = targetTop
-      }
-    })
-  }
-
-  _parseSectionFromUrl (route) {
-    this.activeSection = route.hash.substr(1)
   }
 }
 </script>
@@ -118,7 +59,7 @@ export default class extends Vue {
     padding-bottom: $layout-06;
   }
 
-  &__content-wrapper {
+  &__content {
     flex: 1;
   }
 

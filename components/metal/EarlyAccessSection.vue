@@ -25,9 +25,8 @@ import AppCtaBtn from '~/components/metal/AppCtaBtn.vue'
 })
 
 export default class extends Vue {
-  // TODO: update with url
   stayInTouchLink = {
-    url: 'https://qiskit.org',
+    url: 'http://qisk.it/metal',
     label: 'Sign up to stay in touch'
   }
 }

@@ -35,7 +35,7 @@ import AppCtaBtn from '~/components/metal/AppCtaBtn.vue'
 @Component({ components: { AppCtaBtn } })
 export default class extends Vue {
   accessRequest = {
-    url: 'https://qiskit.org',
+    url: 'http://qisk.it/metal',
     label: 'Request early access'
   }
 }
