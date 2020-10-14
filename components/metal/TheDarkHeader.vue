@@ -89,7 +89,13 @@ export default class extends Vue {}
   }
 
   @include mq($until: medium) {
-    height: calc(#{56rem * 40 / 64} + 2px);
+    background-position: top -5rem center;
+    height: calc(#{48rem * 40 / 64} + 2px);
+  }
+
+  @include mq($until: small) {
+    background-position: top -12rem center;
+    height: calc(#{36rem * 40 / 64} + 2px);
   }
 
   &__nav {
