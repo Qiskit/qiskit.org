@@ -62,17 +62,19 @@ interface MetalCapability {
 const METAL_CAPABILITIES: Array<MetalCapability> = [
   {
     title: 'Design quantum systems',
-    description: 'Metal enables chip prototyping in a matter of minutes. You can start from a convenient Jupyter notebook, and then take advantage of the user-friendly python front-end interface. Simply, choose from a list of predefined quantum components and customize their parameters to fit your needs and connect them. Easily implement new experimental components using python templates and examples.',
+    description: 'Qiskit Metal enables chip prototyping in a matter of minutes. You can start from a convenient python Jupyter notebook or take advantage of the user-friendly graphical user interface (GUI). Simply, choose from a library of predefined quantum components, such as transmon qubits and coplanar resonators, and customize their parameters in real-time to fit your needs. Use the built-in algorithms to automatically connect components. Easily implement new experimental components using python templates and examples.',
     image: '/images/metal/fake-ui-content-placeholder1.png'
   },
   {
     title: 'Modeling quantum system',
-    description: 'A quantum element is modeled differently based on the renderer/analysis being used.  Such as for a transmon, the Josephson junction in Metal is a vector with a width, but in HFSS - EPR Analysis it is a 2D square with a sheet inductance, or exported as a GDS file it becomes a cell with multiple layers for the appropriate e-beam fabrication of said junction. All of these transitions are managed by Metal based on values the renderer/user provides.',
+    description: 'Metal helps automate the quantum electrodynamics modeling of quantum devices to predict their performance  and parameters, such as qubit frequencies, anharmonicities, couplings, and dissipation. Metal’s vision is to provide the abstraction layer needed to seamlessly interconnect with your favorite electromagnetic analysis tool (HFSS, Sonnet, CST, AWR, Comsol, …) , dynamically rendering and co-simulating your design, at the whim of a click.',
     image: '/images/metal/fake-ui-content-placeholder2.png'
   },
   {
     title: 'Analysis design performance',
-    description: 'Analysis Tools, which if follow basic interface requirements, can function with in Metal and expand its capabilities. Include text about hamiltonian.',
+    description: `Metal aims to give access to advanced quantum analyses techniques to calculate qubit frequencies, anharmonicities, and to extract non-linear couplings, dissipation, and the full Hamiltonian of the quantum device, with percent-level accuracy.<br><br>
+                  Methods include the Energy Participation Ratio (EPR), impedance analysis, the lumped-oscillator model, …<br><br>
+                  We hope to build up the quantum analysis library with the community.`,
     image: '/images/metal/fake-ui-content-placeholder3.png'
   }
 ]
