@@ -49,13 +49,23 @@ export default class extends Mixins(ScrollSectionsMixin) {
 @import '~carbon-components/scss/globals/scss/typography';
 
 .capabilities-section {
+  // multiple backgrounds in one section
+  background-image: url('/images/grid/grid-right-dark.svg'), url('/images/grid/grid-left-dark.svg');
+  background-size: 36rem auto, 36rem auto;
+  background-position: right -1rem top, left 0 bottom 16rem;
+  background-repeat: no-repeat, no-repeat;
   display: flex;
+
+  @include mq($until: large) {
+    background-size: 22.5rem auto;
+    background-position: right -.5rem top, left 0 bottom 16rem;
+  }
 
   &__container {
     @include contained();
     display: flex;
     align-items: flex-start;
-    padding-top: $layout-05;
+    padding-top: 10rem;
     padding-bottom: $layout-06;
   }
 
