@@ -64,8 +64,24 @@ export default class extends Vue {
   width: number = 64
   height: number = 64
 
-  columnCount: number = 40
-  rowCount: number = 14
+  // this is the solid part
+  columnCount: number = 30
+  rowCount: number = 11
+
+  // decoherenceSize will add rows and columns
+  decoherenceSize: number = 3
+  rowDecoherence = {
+    0: 0.5,
+    1: 0.7,
+    2: 0.8
+  }
+
+  columnDecoherence = {
+    0: 0.5,
+    1: 0.7,
+    2: 0.8
+  }
+
   /*
   pattern = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -77,7 +93,7 @@ export default class extends Vue {
   ]
   */
 
-  pattern = [
+  pattern = [ // length [9, 16]
     [0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0],
     [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0],
@@ -100,25 +116,22 @@ export default class extends Vue {
   ]
   */
 
-  decoherence = {
-    11: 0.5,
-    12: 0.7,
-    13: 0.8
-  }
-
   hiddenCells: string[] = []
 
   slotContainerIsHidden: boolean = false
 
   positions = Array.from((() => {
-    const { decoherence, columnCount, rowCount } = this
+    const { rowDecoherence, columnDecoherence, decoherenceSize, columnCount, rowCount } = this
 
     function* genRows () {
-      for (let r = 0; r < rowCount; r++) {
+      for (let r = 0; r < rowCount + decoherenceSize; r++) {
         yield Array.from((() => {
           function* genColumns () {
-            for (let c = 0; c < columnCount; c++) {
-              const decoherent = r in decoherence && Math.random() < decoherence[r]
+            for (let c = -decoherenceSize; c < columnCount + decoherenceSize; c++) {
+              const decoherent = (r >= rowCount && Math.random() < rowDecoherence[r - rowCount]) ||
+                                  (c < 0 && Math.random() < columnDecoherence[-c - 1]) ||
+                                  (c >= columnCount && Math.random() < columnDecoherence[c - columnCount])
+
               yield { c, r, decoherent }
             }
           }
