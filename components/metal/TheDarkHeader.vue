@@ -78,8 +78,9 @@
       </h1>
     </div>
     <div class="the-dark-header__media">
-      <img class="the-dark-header__media-cryo" src="/images/metal/hero/cryo-sketch.png" alt="">
-      <img class="the-dark-header__media-transmon" src="/images/metal/hero/transmon.svg" alt="">
+      <img class="the-dark-header__media-cryo" src="/images/metal/hero/cryo.png" alt="">
+      <img class="the-dark-header__media-transmon-outline" src="/images/metal/hero/transmon.svg" alt="">
+      <img class="the-dark-header__media-transmon" src="/images/metal/hero/transmon.png" alt="">
     </div>
   </header>
 </template>
@@ -218,19 +219,50 @@ export default class extends Vue {}
 
     @include mq($from: x-large) {
       width: 64rem;
-      margin-top: -8rem;
       right: 0;
     }
 
-    @media (min-width: 1056px) and (max-width: 1192px) {
+    // custom breakpoints to handle hero transmon positioning
+    @media (min-width: 1056px) and (max-width: 1610px) {
       right: -8rem;
     }
 
     &-cryo {
       width: 100%;
+
+      @include mq($from: x-large) {
+        margin-top: -8rem;
+      }
     }
 
     &-transmon {
+      position: absolute;
+      top: 35rem;
+      right: 14rem;
+      width: 19rem;
+      z-index: 1;
+
+      @include mq($until: medium) {
+        top: 17rem;
+        right: 6.5rem;
+        width: 9rem;
+      }
+
+      @include mq($from: medium, $until: large) {
+        top: 14.5rem;
+        right: 4.75rem;
+        width: 12rem;
+      }
+
+      @include mq($from: x-large) {
+        top: 33rem;
+        right: 16rem;
+        width: 22rem;
+      }
+
+    }
+
+    &-transmon-outline {
       position: absolute;
       top: 35rem;
       right: 14rem;
@@ -238,7 +270,7 @@ export default class extends Vue {}
       width: initial;
 
       @include mq($until: medium) {
-        top: 16.65rem;
+        top: 16.85rem;
         max-width: 14rem;
         right: 6.25rem;
       }
@@ -251,8 +283,9 @@ export default class extends Vue {}
       }
 
       @include mq($from: x-large) {
-        top: 42rem;
-        right: 17.5rem;
+        top: 32.5rem;
+        right: 14.5rem;
+        width: 36rem;
       }
     }
   }
