@@ -194,8 +194,8 @@ export default class extends Vue {}
   &__media {
     position: absolute;
     top: 0;
-    right: -6rem;
-    left: auto;
+    right: auto;
+    left: 26rem;
     bottom: 0;
     width: 44rem;
 
@@ -205,17 +205,20 @@ export default class extends Vue {}
 
     @include mq($from: medium, $until: large) {
       width: 26rem;
-      right: -4rem;
+      right: auto;
+      left: 19rem;
     }
 
     @include mq($until: medium) {
       width: 22rem;
-      right: -5rem;
+      right: auto;
+      left: 5rem;
     }
 
     @include mq($until: small) {
       width: 20rem;
-      right: -5rem;
+      right: auto;
+      left: 4rem;
     }
 
     &-cryo {
