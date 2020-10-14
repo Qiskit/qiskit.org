@@ -51,6 +51,11 @@ export default class extends Vue {
   flex-direction: row;
   align-items: center;
   text-decoration: none;
+  pointer-events: none;
+
+  * {
+    pointer-events: auto;
+  }
 
   &__github-icon {
     fill: $purple-70;

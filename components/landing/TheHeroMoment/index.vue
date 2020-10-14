@@ -1,6 +1,6 @@
 <template>
   <article class="the-hero-moment">
-    <TheMetalGrid>
+    <MetalGrid>
       <div class="the-hero-moment__container">
         <VersionInfo
           class="the-hero-moment__version-info"
@@ -22,8 +22,7 @@
           Get started
         </LandingCta>
       </div>
-    </TheMetalGrid>
-    <!--AppLink class="the-hero-moment__square-link" url="/metal" /-->
+    </MetalGrid>
   </article>
 </template>
 
@@ -33,11 +32,10 @@ import Vue from 'vue'
 import { Prop, Component } from 'vue-property-decorator'
 import VersionInfo from '~/components/landing/TheHeroMoment/VersionInfo.vue'
 import LandingCta from '~/components/landing/LandingCta.vue'
-import TheMetalGrid from '~/components/ui/TheMetalGrid.vue'
-import AppLink from '~/components/ui/AppLink.vue'
+import MetalGrid from '~/components/metal/MetalGrid.vue'
 
 @Component({
-  components: { VersionInfo, LandingCta, TheMetalGrid, AppLink }
+  components: { VersionInfo, LandingCta, MetalGrid }
 })
 export default class extends Vue {
   @Prop({ type: String, required: true }) version!: string

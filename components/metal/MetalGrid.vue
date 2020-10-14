@@ -1,40 +1,22 @@
 <template>
-  <section class="the-metal-grid">
-    <header class="the-metal-grid__underlayer">
-      <div class="the-metal-grid__copy">
-        <p class="the-metal-grid__intro">
-          Introducing
-        </p>
-        <AppIcon class="the-metal-grid__logo" />
-        <p class="the-metal-grid__title">
-          <span
-            class="the-metal-grid__metal-word-letter_letter-M"
-          >M</span><span
-            class="the-metal-grid__metal-word-letter_letter-e"
-          >e</span><span
-            class="the-metal-grid__metal-word-letter_letter-t"
-          >t</span><span
-            class="the-metal-grid__metal-word-letter_letter-a"
-          >a</span><span
-            class="the-metal-grid__metal-word-letter_letter-l"
-          >l</span>
-        </p>
-      </div>
-    </header>
-    <div class="the-metal-grid__container">
+  <section class="metal-grid">
+    <div class="metal-grid__underlayer">
+      <TheDarkHeader class="metal-grid__header" />
+    </div>
+    <div class="metal-grid__container">
       <div
         v-for="(row, index) in positions"
         :key="rowId(row, index)"
-        class="the-metal-grid__row"
+        class="metal-grid__row"
       >
         <div
           v-for="pos in row"
           :key="posId(pos)"
-          class="the-metal-grid__cell"
+          class="metal-grid__cell"
           :class="{
-            'the-metal-grid__cell_trigger': isTrigger(pos),
-            'the-metal-grid__cell_hidden': isHidden(pos),
-            'the-metal-grid__cell_decoherent': pos.decoherent
+            'metal-grid__cell_trigger': isTrigger(pos),
+            'metal-grid__cell_hidden': isHidden(pos),
+            'metal-grid__cell_decoherent': pos.decoherent
           }"
           @click="triggerAnimation(pos)"
         />
@@ -42,9 +24,9 @@
     </div>
     <div
       ref="slot-container"
-      class="the-metal-grid__slot-container"
+      class="metal-grid__slot-container"
       :class="{
-        'the-metal-grid__slot-container_hidden': slotContainerIsHidden
+        'metal-grid__slot-container_hidden': slotContainerIsHidden
       }"
     >
       <slot />
@@ -55,14 +37,15 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
+import TheDarkHeader from './TheDarkHeader.vue'
 import AppIcon from '~/components/ui/AppIcon.vue'
 
 @Component({
-  components: { AppIcon }
+  components: { AppIcon, TheDarkHeader }
 })
 export default class extends Vue {
-  timeToRemoveCell = 10 // in ms
-  timeToLoadMetal = 1000 // in ms
+  timeToRemoveCell = 5 // in ms
+  timeToLoadMetal = 2000 // in ms
   triggerPositionFromTopCenter = { x: -3, y: 2 } // y: 0 is the first line
 
   // this is the solid part
@@ -96,15 +79,15 @@ export default class extends Vue {
 
   // TODO: This currently only works with an even number of columns
   pattern = [ // length [9, 16]
-    [0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0],
-    [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0],
-    [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
-    [1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
-    [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
-    [0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0],
-    [0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0],
+    [0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0],
+    [0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+    [0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0]
   ]
 
   /*
@@ -210,7 +193,7 @@ export default class extends Vue {
 $large-cell: 64px;
 $medium-cell: 40px;
 
-.the-metal-grid {
+.metal-grid {
   position: relative;
   width: 100%;
   min-height: 42rem;
@@ -220,17 +203,28 @@ $medium-cell: 40px;
   }
 
   &__underlayer {
-    @include contained();
+    overflow: hidden;
     background-color: $cool-gray-100;
-    min-height: 42rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    height: 42rem;
     margin-top: 1px;
 
     @include mq($until: large) {
-      min-height: 26.5rem;
+      height: 26.5rem;
     }
+  }
+
+  &__header {
+    position: relative;
+
+    @include mq($from: small, $until: medium) {
+      top: 2rem;
+    }
+
+    @include mq($from: medium, $until: large) {
+      top: -5rem;
+      // left: 12rem;
+    }
+
   }
 
   &__intro {
@@ -299,6 +293,7 @@ $medium-cell: 40px;
     bottom: 0;
     left: 0;
     right: 0;
+    z-index: 100;
   }
 
   &__row {
@@ -331,7 +326,7 @@ $medium-cell: 40px;
       background-color: white;
       box-sizing: content-box;
       // Transition speed and function
-      transition: transform 700ms ease-in, opacity 700ms, border-radius 700ms;
+      transition: transform 300ms ease-in, opacity 300ms, border-radius 300ms;
 
       @include mq($until: large) {
         width: $medium-cell - 1px;
@@ -348,7 +343,7 @@ $medium-cell: 40px;
 
       // semi-rounded scale and rotate
       transform: scale(0.3, 0.3) rotate(45deg);
-      border-radius: 20%;
+      border-radius: 50%;
       /*/
       // fully-rounded and scale
       transform: scale(0.3, 0.3);
@@ -399,24 +394,25 @@ $medium-cell: 40px;
       10%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate( 0deg); }
       18%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate(-3deg * $anxiousTile_RotationAmount); }
       26%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate( 4deg * $anxiousTile_RotationAmount); }
-      34%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate(-3deg * $anxiousTile_RotationAmount); }
+      34%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate(-3deg * $anxiousTile_RotationAmount); background-color: white;}
       45%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate( 1deg * $anxiousTile_RotationAmount); }
       55%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate( 0deg); }
       65%   { box-shadow: 0px 0px 0px 0px $cool-gray-60; transform: rotate( 0deg); }
       100%  { box-shadow: 0px 0px 0px 0px $cool-gray-70; transform: rotate( 0deg); }
     }
     @keyframes veryAnxiousTile {
-      0%    { box-shadow: 0px 0px 0px 0px $cool-gray-70; transform: rotate( 0deg) scale(1);  }
-      10%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate( 0deg) scale($veryAnxiousTile_Scaling); }
+      0%    { box-shadow: 0px 0px 0px 0px $cool-gray-70; transform: rotate( 0deg) scale(1); background-color: $cool-gray-100; }
+      10%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate( 0deg) scale($veryAnxiousTile_Scaling); background-color: $cool-gray-100; }
       18%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate(-5deg * $anxiousTile_RotationAmount) scale($veryAnxiousTile_Scaling); }
       26%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate( 7deg * $anxiousTile_RotationAmount) scale($veryAnxiousTile_Scaling); }
       34%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate(-5deg * $anxiousTile_RotationAmount) scale($veryAnxiousTile_Scaling); }
       45%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate( 3deg * $anxiousTile_RotationAmount) scale($veryAnxiousTile_Scaling); }
       55%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate( 0deg) scale($veryAnxiousTile_Scaling); }
-      65%   { box-shadow: 0px 0px 0px 0px $cool-gray-60; transform: rotate( 0deg) scale(1); }
-      100%  { box-shadow: 0px 0px 0px 0px $cool-gray-70; transform: rotate( 0deg) scale(1); }
+      65%   { box-shadow: 0px 0px 0px 0px $cool-gray-60; transform: rotate( 0deg) scale($veryAnxiousTile_Scaling); background-color: $cool-gray-100; }
+      100%  { box-shadow: 0px 0px 0px 0px $cool-gray-70; transform: rotate( 0deg) scale(1); background-color: $cool-gray-100; }
     }
     &_trigger{
+
       &::before {
         cursor: pointer;
         z-index: 200;
@@ -470,6 +466,7 @@ $medium-cell: 40px;
     left: 0;
     right: 0;
     bottom: 0;
+    z-index: 110;
     transition: opacity 500ms ease-out;
 
     * {
