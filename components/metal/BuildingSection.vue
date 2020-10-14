@@ -64,7 +64,11 @@ export default class extends Vue {}
 @import '~/assets/scss/blocks/copy.scss';
 
 .building-section {
+  @include responsive-grid-bg('/images/grid/grid-right-dark.svg', 36rem);
+  background-position: right bottom;
+  background-repeat: no-repeat;
   background-color: $cool-gray-100;
+  padding-bottom: $layout-05;
 
   &__container {
     @include contained();
@@ -102,7 +106,6 @@ export default class extends Vue {}
 
   &__content {
     display: flex;
-    margin-bottom: $layout-05;
   }
 
   &__copy {
