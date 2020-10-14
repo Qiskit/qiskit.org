@@ -93,6 +93,7 @@ export default class extends Vue {
   ]
   */
 
+  // TODO: This currently only works with an even number of columns
   pattern = [ // length [9, 16]
     [0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0],
