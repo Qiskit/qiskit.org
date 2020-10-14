@@ -1,15 +1,15 @@
 <template>
-  <footer class="the-page-footer">
+  <footer class="page-footer">
     <section
-      class="the-page-footer__primary"
-      :class="`the-page-footer__primary_theme_${theme}`"
+      class="page-footer__primary"
+      :class="`page-footer__primary_theme_${theme}`"
     >
-      <div class="the-page-footer__primary-container">
+      <div class="page-footer__primary-container">
         <AppLogo
-          class="the-page-footer__logo"
-          :class="`the-page-footer__logo_theme_${theme}`"
+          class="page-footer__logo"
+          :class="`page-footer__logo_theme_${theme}`"
         />
-        <div class="the-page-footer__primary-sections">
+        <div class="page-footer__primary-sections">
           <FooterSection
             v-for="sectionElements in footerElements"
             :key="sectionElements.title"
@@ -21,22 +21,22 @@
       </div>
     </section>
     <section
-      class="the-page-footer__secondary"
-      :class="`the-page-footer__secondary_theme_${theme}`"
+      class="page-footer__secondary"
+      :class="`page-footer__secondary_theme_${theme}`"
     >
-      <div class="the-page-footer__secondary-container">
+      <div class="page-footer__secondary-container">
         <div
-          class="the-page-footer__copyright"
-          :class="`the-page-footer__copyright_theme_${theme}`"
+          class="page-footer__copyright"
+          :class="`page-footer__copyright_theme_${theme}`"
         >
           ©Qiskit | All Rights Reserved
         </div>
-        <div class="the-page-footer__secondary-links">
+        <div class="page-footer__secondary-links">
           <AppLink
             v-for="link in secondaryFooterLinks"
             :key="link.label"
-            class="the-page-footer__secondary-link"
-            :class="`the-page-footer__secondary-link_theme_${theme}`"
+            class="page-footer__secondary-link"
+            :class="`page-footer__secondary-link_theme_${theme}`"
             v-bind="link"
           >
             {{ link.label }}
@@ -79,9 +79,9 @@ export default class extends Vue {
 <style lang="scss" scoped>
 @import '~carbon-components/scss/globals/scss/typography';
 
-.the-page-footer {
+.page-footer {
 
-  .the-page-footer__primary {
+  .page-footer__primary {
     padding: $spacing-07 0;
 
     &_theme_light {
@@ -93,7 +93,7 @@ export default class extends Vue {
     }
   }
 
-  .the-page-footer__secondary {
+  .page-footer__secondary {
     padding-bottom: $spacing-08;
     padding: $spacing-07 0;
     padding-bottom: $spacing-07 + 2.5rem; // make room for the "cookies preferences" button
