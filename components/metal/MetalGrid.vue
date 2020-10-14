@@ -45,7 +45,7 @@ import AppIcon from '~/components/ui/AppIcon.vue'
 })
 export default class extends Vue {
   timeToRemoveCell = 5 // in ms
-  timeToLoadMetal = 2000 // in ms
+  timeToLoadMetal = 0 // in ms
   triggerPositionFromTopCenter = { x: -3, y: 2 } // y: 0 is the first line
 
   // this is the solid part
