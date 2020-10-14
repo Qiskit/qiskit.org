@@ -8,9 +8,7 @@
         class="feature-card__image"
         :lazy-background="image"
       />
-      <div class="feature-card__description">
-        <span v-html="description" />
-      </div>
+      <div class="feature-card__description" v-html="description" />
     </div>
   </article>
 </template>
