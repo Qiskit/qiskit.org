@@ -75,11 +75,12 @@
       <h1 class="the-dark-header__title">
         Qiskit
       </h1>
-    </div>
-    <div class="the-dark-header__media">
-      <img class="the-dark-header__media-cryo" src="/images/metal/hero/cryo.png" alt="">
-      <img class="the-dark-header__media-transmon-outline" src="/images/metal/hero/transmon.svg" alt="">
-      <img class="the-dark-header__media-transmon" src="/images/metal/hero/transmon.png" alt="">
+
+      <div class="the-dark-header__media">
+        <img class="the-dark-header__media-cryo" src="/images/metal/hero/cryo.png" alt="">
+        <img class="the-dark-header__media-transmon-outline" src="/images/metal/hero/transmon.svg" alt="">
+        <img class="the-dark-header__media-transmon" src="/images/metal/hero/transmon.png" alt="">
+      </div>
     </div>
   </header>
 </template>
@@ -105,20 +106,17 @@ export default class extends Vue {}
 
   position: relative;
   overflow: hidden;
-  padding-top: 7.75rem;
   // In Figma, the height is not enforced but the background is always
   // visible completely so we do it in the CSS. A small correction is needed
   // to be able of displaying the bottom lines of the grid.
   height: calc(56rem + 2px);
 
   @include mq($from: medium, $until: large) {
-    padding-top: 4rem;
     // To adjust to the size of the smaller grid.
     height: calc(#{56rem * 40 / 64} + 2px);
   }
 
   @include mq($until: medium) {
-    padding-top: $layout-06;
     height: calc(#{56rem * 40 / 64} + 2px);
   }
 
@@ -146,18 +144,17 @@ export default class extends Vue {}
     position: relative;
     display: flex;
     align-items: center;
-    padding-top: 25rem;
-
-    @include mq($until: medium) {
-      padding-top: 11.5rem;
-    }
+    padding-top: 23rem;
 
     @include mq($from: medium, $until: large) {
-      padding-top: 8.75rem;
+      padding-top: 12.75rem;
     }
 
-    @include mq($from: x-large) {
-      padding-top: 23.75rem;
+    @include mq($until: medium) {
+      padding-top: 14.15rem;
+    }
+    @include mq($until: small) {
+      padding-top: 13.15rem;
     }
   }
 
@@ -197,55 +194,40 @@ export default class extends Vue {}
   &__media {
     position: absolute;
     top: 0;
-    right: -8rem;
+    right: -6rem;
     left: auto;
     bottom: 0;
-    width: 56rem;
+    width: 44rem;
 
-    @media (max-width: 1440px) {
-      right: -4rem;
-    }
-
-    @include mq($until: medium) {
-      width: 26rem;
-      right: -6rem;
+    @include mq($from: x-large) {
+      right: -8rem;
     }
 
     @include mq($from: medium, $until: large) {
       width: 26rem;
-      right: -2rem;
+      right: -4rem;
     }
 
-    @include mq($from: x-large) {
-      width: 64rem;
-      right: 0;
+    @include mq($until: medium) {
+      width: 22rem;
+      right: -5rem;
     }
 
-    // custom breakpoints to handle hero transmon positioning
-    @media (min-width: 1056px) and (max-width: 1610px) {
-      right: -8rem;
+    @include mq($until: small) {
+      width: 20rem;
+      right: -5rem;
     }
 
     &-cryo {
       width: 100%;
-
-      @include mq($from: x-large) {
-        margin-top: -8rem;
-      }
     }
 
     &-transmon {
       position: absolute;
-      top: 35rem;
-      right: 14rem;
-      width: 19rem;
+      top: 25.5rem;
+      right: 8.5rem;
+      width: 20rem;
       z-index: 1;
-
-      @include mq($until: medium) {
-        top: 17rem;
-        right: 6.5rem;
-        width: 9rem;
-      }
 
       @include mq($from: medium, $until: large) {
         top: 14.5rem;
@@ -253,26 +235,25 @@ export default class extends Vue {}
         width: 12rem;
       }
 
-      @include mq($from: x-large) {
-        top: 33rem;
-        right: 16rem;
-        width: 22rem;
+      @include mq($until: medium) {
+        top: 14rem;
+        right: 5.5rem;
+        width: 8rem;
       }
-
+      @include mq($until: small) {
+        top: 13.25rem;
+        right: 5.5rem;
+        width: 6rem;
+      }
     }
 
     &-transmon-outline {
       position: absolute;
-      top: 35rem;
-      right: 14rem;
+      top: 25.5rem;
+      right: 8.5rem;
+      width: 30rem;
       z-index: 1;
       width: initial;
-
-      @include mq($until: medium) {
-        top: 16.85rem;
-        max-width: 14rem;
-        right: 6.25rem;
-      }
 
       @include mq($from: medium, $until: large) {
         top: 15rem;
@@ -281,11 +262,17 @@ export default class extends Vue {}
         max-width: 16rem;
       }
 
-      @include mq($from: x-large) {
-        top: 32.5rem;
-        right: 14.5rem;
-        width: 36rem;
+      @include mq($until: medium) {
+        top: 13.85rem;
+        max-width: 12rem;
+        right: 5.25rem;
       }
+
+     @include mq($until: small) {
+      top: 13.5rem;
+      max-width: 8rem;
+      right: 5.75rem;
+     }
     }
   }
 }
