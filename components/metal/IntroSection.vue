@@ -48,7 +48,7 @@ export default class extends Vue {
   &__container {
     @include contained();
     padding-top: $layout-05;
-    padding-bottom: $layout-06;
+    padding-bottom: 0;
   }
 
   &__title {
