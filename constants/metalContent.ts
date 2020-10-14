@@ -12,9 +12,9 @@ interface MetalFeature {
 
 const METAL_FEATURES: Array<MetalFeature> = [
   {
-    title: 'Automation',
+    title: 'End-to-end automation',
     description: 'Metal is designed with the vision to seamlessly automate classical and quantum analysis. Choose from a list of available tools or connect your own through a flexible plug-in interface that allows you to orchestrate device design from within Metal. When you are ready, with the click of a button, export the design for fabrication, and you are done.',
-    image: '/images/metal/features/automation.png'
+    image: '/images/metal/features/end-to-end-automation.png'
   },
   {
     title: 'Flexible & extensible',
@@ -24,15 +24,15 @@ const METAL_FEATURES: Array<MetalFeature> = [
     image: '/images/metal/features/flexible-extensible.png'
   },
   {
-    title: 'Integrated functionality',
+    title: 'Light-weight interoperability',
     description: `All-in-one platform powerful programming paradigm to unify design, simulation, and quantum analysis.<br>
-    Metal helps bridges the world of classical electronic design automation (EDA) and electromagnetic simulation tools with that of quantum analysis.
+    Metal helps bridges the world of classical electronic design automation (EDA) and electromagnetic simulation tools with that of quantum analysis.<br>
     Metal defines the abstraction of a quantum device design, needed for closed-loop optimization between design & analysis. Over time, our vision is to also develop metal to be usable by a front-end user with little to no programming knowledge, using available libraries of quantum components & renderers.`,
-    image: '/images/metal/features/integrated-functionality.png'
+    image: '/images/metal/features/light-weight-interoperability.png'
   },
   {
     title: 'Experimentally tested',
-    description: 'Metal utilizes quantization methods and techniques from the community and that we are developing. In an upcoming publication, Minev, McConkey & Gambetta will share some early results that demonstrate percent-level agreement between design & analysis and experimental hardware. ',
+    description: 'Metal utilizes quantization methods and techniques from the community and that we are developing. In an upcoming publication, Minev, McConkey & Gambetta will share some early results that demonstrate percent-level agreement between design & analysis and experimental hardware.',
     image: '/images/metal/features/experimetally-tested.png'
   },
   {
@@ -42,7 +42,7 @@ const METAL_FEATURES: Array<MetalFeature> = [
   },
   {
     title: 'Cutting edge resources',
-    description: 'Tap into built-in best practices and the latest simulation and analysis techniques. Help us test and build a shared set of cutting edge resources to help power the innovation of quantum hardware. ',
+    description: 'Tap into built-in best practices and the latest simulation and analysis techniques. Help us test and build a shared set of cutting edge resources to help power the innovation of quantum hardware.',
     image: '/images/metal/features/cutting-edge-resources.png'
   }
 ]
@@ -62,17 +62,19 @@ interface MetalCapability {
 const METAL_CAPABILITIES: Array<MetalCapability> = [
   {
     title: 'Design quantum systems',
-    description: 'Metal enables chip prototyping in a matter of minutes. You can start from a convenient Jupyter notebook, and then take advantage of the user-friendly python front-end interface. Simply, choose from a list of predefined quantum components and customize their parameters to fit your needs and connect them. Easily implement new experimental components using python templates and examples.',
+    description: 'Qiskit Metal enables chip prototyping in a matter of minutes. You can start from a convenient python Jupyter notebook or take advantage of the user-friendly graphical user interface (GUI). Simply, choose from a library of predefined quantum components, such as transmon qubits and coplanar resonators, and customize their parameters in real-time to fit your needs. Use the built-in algorithms to automatically connect components. Easily implement new experimental components using python templates and examples.',
     image: '/images/metal/capabilities/design-quantum-systems.png'
   },
   {
     title: 'Modeling quantum system',
-    description: 'A quantum element is modeled differently based on the renderer/analysis being used.  Such as for a transmon, the Josephson junction in Metal is a vector with a width, but in HFSS - EPR Analysis it is a 2D square with a sheet inductance, or exported as a GDS file it becomes a cell with multiple layers for the appropriate e-beam fabrication of said junction. All of these transitions are managed by Metal based on values the renderer/user provides.',
+    description: 'Metal helps automate the quantum electrodynamics modeling of quantum devices to predict their performance  and parameters, such as qubit frequencies, anharmonicities, couplings, and dissipation. Metal’s vision is to provide the abstraction layer needed to seamlessly interconnect with your favorite electromagnetic analysis tool (HFSS, Sonnet, CST, AWR, Comsol, …) , dynamically rendering and co-simulating your design, at the whim of a click.',
     image: '/images/metal/capabilities/modeling-quantum-systems.png'
   },
   {
     title: 'Analysis design performance',
-    description: 'Analysis Tools, which if follow basic interface requirements, can function with in Metal and expand its capabilities. Include text about hamiltonian.',
+    description: `Metal aims to give access to advanced quantum analyses techniques to calculate qubit frequencies, anharmonicities, and to extract non-linear couplings, dissipation, and the full Hamiltonian of the quantum device, with percent-level accuracy.<br><br>
+                  Methods include the Energy Participation Ratio (EPR), impedance analysis, the lumped-oscillator model, …<br><br>
+                  We hope to build up the quantum analysis library with the community.`,
     image: '/images/metal/capabilities/analysis-design-performance.png'
   }
 ]
