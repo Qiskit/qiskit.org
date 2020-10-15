@@ -301,7 +301,7 @@ export default class extends Vue {
         z-index: 200;
         animation: anxious-tile 2s linear 0s infinite normal;
 
-        @include mq($until: medium) { // Mobile animation
+        @include mq($until: large) {
           animation: very-anxious-tile 2s linear 0s infinite normal;
         }
       }
@@ -332,15 +332,15 @@ export default class extends Vue {
       }
 
       @keyframes very-anxious-tile {
-        0%    { box-shadow: 0px 0px 0px 0px $cool-gray-70; transform: rotate( 0deg) scale(1); background-color: $cool-gray-100; }
-        10%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate( 0deg) scale($magnification); background-color: $cool-gray-100; }
+        0%    { box-shadow: 0px 0px 0px 0px $cool-gray-70; transform: rotate( 0deg) scale(1); background-color: white; }
+        10%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate( 0deg) scale($magnification); background-color: white; }
         18%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate(-5deg * $rotation-multiplier) scale($magnification); }
         26%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate( 7deg * $rotation-multiplier) scale($magnification); }
         34%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate(-5deg * $rotation-multiplier) scale($magnification); }
         45%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate( 3deg * $rotation-multiplier) scale($magnification); }
         55%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate( 0deg) scale($magnification); }
-        65%   { box-shadow: 0px 0px 0px 0px $cool-gray-60; transform: rotate( 0deg) scale($magnification); background-color: $cool-gray-100; }
-        100%  { box-shadow: 0px 0px 0px 0px $cool-gray-70; transform: rotate( 0deg) scale(1); background-color: $cool-gray-100; }
+        65%   { box-shadow: 0px 0px 0px 0px $cool-gray-60; transform: rotate( 0deg) scale($magnification); background-color: white; }
+        100%  { box-shadow: 0px 0px 0px 0px $cool-gray-70; transform: rotate( 0deg) scale(1); background-color: white; }
       }
     }
   }
