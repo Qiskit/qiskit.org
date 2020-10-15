@@ -6,8 +6,7 @@
       </h2>
       <p class="early-access-section__description">
         Through an early-access program, we are thrilled to ask you to join this journey to revolutionize quantum devices.
-        <br>
-        <br>
+        <br><br>
         The early-access program will start in November and proceed through March, 2021, during which time we will work closely to develop Metal and design quantum devices with it.
       </p>
       <AppCtaBtn v-bind="stayInTouchLink" />

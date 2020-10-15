@@ -18,16 +18,20 @@ const METAL_FEATURES: Array<MetalFeature> = [
   },
   {
     title: 'Flexible & extensible',
-    description: `<strong>Flexible interface:</strong> GUI view, Jupyter notebook view, Simulator view, Physical output view.<br><br>
-                  <strong>Extensible:</strong> User-friendly python API and library of tools allow you to define your own custom quantum components.<br><br>
+    description: `<strong>Flexible interface:</strong> GUI view, Jupyter notebook view, Simulator view, Physical output view.
+                  <br><br>
+                  <strong>Extensible:</strong> User-friendly python API and library of tools allow you to define your own custom quantum components.
+                  <br><br>
                   <strong>Co-development:</strong> Linked with leading simulation and export/import interoperability with commercial-tool backends.`,
     image: '/images/metal/features/flexible-extensible.png'
   },
   {
     title: 'Light-weight interoperability',
-    description: `All-in-one platform powerful programming paradigm to unify design, simulation, and quantum analysis.<br>
-    Metal helps bridges the world of classical electronic design automation (EDA) and electromagnetic simulation tools with that of quantum analysis.<br>
-    Metal defines the abstraction of a quantum device design, needed for closed-loop optimization between design & analysis. Over time, our vision is to also develop metal to be usable by a front-end user with little to no programming knowledge, using available libraries of quantum components & renderers.`,
+    description: `All-in-one platform powerful programming paradigm to unify design, simulation, and quantum analysis.
+                  <br><br>
+                  Metal helps bridges the world of classical electronic design automation (EDA) and electromagnetic simulation tools with that of quantum analysis.
+                  <br><br>
+                  Metal defines the abstraction of a quantum device design, needed for closed-loop optimization between design & analysis. Over time, our vision is to also develop metal to be usable by a front-end user with little to no programming knowledge, using available libraries of quantum components & renderers.`,
     image: '/images/metal/features/light-weight-interoperability.png'
   },
   {
@@ -37,7 +41,7 @@ const METAL_FEATURES: Array<MetalFeature> = [
   },
   {
     title: 'Library of components',
-    description: 'Benefit from built-in and community-developed library of quantum device components.  This library is in its early stages, and we are looking for members of the community to work with to develop this together',
+    description: 'Benefit from built-in and community-developed library of quantum device components.  This library is in its early stages, and we are looking for members of the community to work with to develop this together.',
     image: '/images/metal/features/library-of-components.png'
   },
   {
@@ -68,13 +72,14 @@ const METAL_CAPABILITIES: Array<MetalCapability> = [
   {
     title: 'Modeling quantum system',
     description: 'Metal helps automate the quantum electrodynamics modeling of quantum devices to predict their performance  and parameters, such as qubit frequencies, anharmonicities, couplings, and dissipation. Metal’s vision is to provide the abstraction layer needed to seamlessly interconnect with your favorite electromagnetic analysis tool (HFSS, Sonnet, CST, AWR, Comsol, …) , dynamically rendering and co-simulating your design, at the whim of a click.',
-    // image: '/images/metal/capabilities/modeling-quantum-systems.png'
     visualResource: 'videos/metal/transmon-animated.mp4'
   },
   {
     title: 'Analysis design performance',
-    description: `Metal aims to give access to advanced quantum analyses techniques to calculate qubit frequencies, anharmonicities, and to extract non-linear couplings, dissipation, and the full Hamiltonian of the quantum device, with percent-level accuracy.<br><br>
-                  Methods include the Energy Participation Ratio (EPR), impedance analysis, the lumped-oscillator model, …<br><br>
+    description: `Metal aims to give access to advanced quantum analyses techniques to calculate qubit frequencies, anharmonicities, and to extract non-linear couplings, dissipation, and the full Hamiltonian of the quantum device, with percent-level accuracy.
+                  <br><br>
+                  Methods include the Energy Participation Ratio (EPR), impedance analysis, the lumped-oscillator model, …
+                  <br><br>
                   We hope to build up the quantum analysis library with the community.`,
     visualResource: '/images/metal/capabilities/analysis-design-performance.png'
   }

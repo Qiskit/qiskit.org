@@ -2,12 +2,13 @@
   <section class="intro-section">
     <div class="intro-section__container">
       <h2 class="intro-section__title">
-        Early access for quantum device design now open
+        Early access for quantum device design project now open
       </h2>
       <div class="intro-section__content">
         <p class="intro-section__description">
-          Our vision is to develop a community-driven universal toolkit capable of orchestrating quantum chip development from concept to fabrication in a simple, scalable, and open framework <br><br>
-          A first-of-its-kind, open-source project for engineers and scientists to design superconducting quantum device with ease: Qiskit Metal.
+          Our vision is to develop a community-driven universal toolkit capable of orchestrating quantum chip development from concept to fabrication in a simple, scalable, and open framework.
+          <br><br>
+          A first-of-its-kind, open-source project for engineers and scientists to design superconducting quantum devices with ease: Qiskit Metal.
         </p>
         <iframe
           class="intro-section__video"
