@@ -16,7 +16,7 @@
           :class="{
             'metal-grid__cell_trigger': isTrigger(pos),
             'metal-grid__cell_hidden': isHidden(pos),
-            'metal-grid__cell_decoherent': pos.decoherent
+            'metal-grid__cell_decoherent': pos.isDecoherent
           }"
           @click="triggerAnimation(pos)"
         />
@@ -40,45 +40,37 @@ import { Component } from 'vue-property-decorator'
 import TheDarkHeader from './TheDarkHeader.vue'
 import AppIcon from '~/components/ui/AppIcon.vue'
 
+type CellCoordinates = { x: number, y: number }
+type CellSpecification = { c: number, r: number, isDecoherent?: boolean }
+type Decoherences = { [key: number]: number }
+
 @Component({
   components: { AppIcon, TheDarkHeader }
 })
 export default class extends Vue {
-  timeToRemoveCell = 5 // in ms
-  timeToLoadMetal = 0 // in ms
-  triggerPositionFromTopCenter = { x: -3, y: 2 } // y: 0 is the first line
+  timeToRemoveNextCell: number = 5 // in ms
+  timeToLoadMetal: number = 50 // in ms
+  triggerPositionFromTopCenter: CellCoordinates = { x: -3, y: 2 }
 
-  // this is the solid part
-  columnCount: number = 30
-  rowCount: number = 11
+  noDecoherenceColumnCount: number = 30
+  noDecoherenceRowCount: number = 11
 
-  // decoherenceSize will add rows and columns
-  decoherenceSize: number = 3
-  rowDecoherence = {
+  decoherenceExtraCount: number = 3
+
+  rowDecoherenceChance: Decoherences = {
     0: 0.5,
     1: 0.7,
     2: 0.8
   }
 
-  columnDecoherence = {
+  columnDecoherenceChance: Decoherences = {
     0: 0.5,
     1: 0.7,
     2: 0.8
   }
 
-  /*
-  pattern = [
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-  ]
-  */
-
-  // TODO: This currently only works with an even number of columns
-  pattern = [ // length [9, 16]
+  // XXX: Column count must be even
+  pattern: number[][] = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0],
     [0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0],
@@ -88,100 +80,114 @@ export default class extends Vue {
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
     [0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0]
-  ]
-
-  /*
-  pattern = [
-    [1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-  ]
-  */
+  ] // size 16x9
 
   hiddenCells: string[] = []
 
   slotContainerIsHidden: boolean = false
 
-  positions = Array.from((() => {
-    const { rowDecoherence, columnDecoherence, decoherenceSize, columnCount, rowCount } = this
+  positions: CellSpecification[][] = Array.from((() => {
+    const {
+      rowDecoherenceChance,
+      columnDecoherenceChance,
+      decoherenceExtraCount,
+      noDecoherenceColumnCount,
+      noDecoherenceRowCount
+    } = this
 
-    function* genRows () {
-      for (let r = 0; r < rowCount + decoherenceSize; r++) {
-        yield Array.from((() => {
-          function* genColumns () {
-            for (let c = -decoherenceSize; c < columnCount + decoherenceSize; c++) {
-              const decoherent = (r >= rowCount && Math.random() < rowDecoherence[r - rowCount]) ||
-                                  (c < 0 && Math.random() < columnDecoherence[-c - 1]) ||
-                                  (c >= columnCount && Math.random() < columnDecoherence[c - columnCount])
-
-              yield { c, r, decoherent }
-            }
-          }
-          return genColumns()
-        })())
+    function* generateRows (): Iterable<CellSpecification[]> {
+      const totalRowCount = noDecoherenceRowCount + decoherenceExtraCount
+      for (let r = 0; r < totalRowCount; r++) {
+        yield Array.from(genColumns(r))
       }
     }
 
-    return genRows()
+    function* genColumns (currentRow: number): Iterable<CellSpecification> {
+      const totalColumnCount = noDecoherenceColumnCount + decoherenceExtraCount
+      for (let c = -decoherenceExtraCount; c < totalColumnCount; c++) {
+        const isInDecoherenceRowZone = currentRow >= noDecoherenceRowCount
+        const rowIsDecoherent = Math.random() < rowDecoherenceChance[currentRow - noDecoherenceRowCount]
+        const isInDecoherenceLeftColumnZone = c < 0
+        const leftColumnIsDecoherent = Math.random() < columnDecoherenceChance[-c - 1]
+        const isInDecoherenceRightColumnZone = c >= noDecoherenceColumnCount
+        const rightColumnIsDecoherent = Math.random() < columnDecoherenceChance[c - noDecoherenceColumnCount]
+        const isDecoherent =
+          (isInDecoherenceRowZone && rowIsDecoherent) ||
+          (isInDecoherenceLeftColumnZone && leftColumnIsDecoherent) ||
+          (isInDecoherenceRightColumnZone && rightColumnIsDecoherent)
+
+        yield { c, r: currentRow, isDecoherent }
+      }
+    }
+
+    return generateRows()
   })())
 
-  visibleCells = Array.from((() => {
-    const { columnCount, pattern } = this
+  fallingCells: string[] = Array.from((() => {
+    const { noDecoherenceColumnCount, pattern } = this
     const self = this
-    const rows = { init: 1, end: pattern.length + 1 }
-    const centralColumn = Math.floor(columnCount / 2)
-    const columns = { init: centralColumn - pattern[0].length / 2, end: centralColumn + pattern[0].length / 2 }
+    const centralColumn = Math.floor(noDecoherenceColumnCount / 2)
+    const [rowStart, rowEnd] = [1, pattern.length + 1]
+    const [columnStart, columnEnd] = [
+      centralColumn - pattern[0].length / 2,
+      centralColumn + pattern[0].length / 2
+    ]
 
-    function* gen () {
-      for (let r = rows.init; r < rows.end; r++) {
-        for (let c = columns.init; c < columns.end; c++) {
-          if (pattern[r - rows.init][c - columns.init] === 0) {
+    function* gen (): Iterable<string> {
+      for (let r = rowStart; r < rowEnd; r++) {
+        for (let c = columnStart; c < columnEnd; c++) {
+          const cellIsAlwaysVisible = pattern[r - rowStart][c - columnStart] === 0
+          if (cellIsAlwaysVisible) {
             continue
           }
           yield self.posId({ c, r })
         }
       }
     }
+
     return gen()
   })())
 
-  isHidden (pos) {
+  isHidden (pos: CellSpecification) {
     return this.hiddenCells.includes(this.posId(pos))
   }
 
-  isTrigger (pos) {
-    const centralColumn = Math.floor(this.columnCount / 2)
-    return pos.c === centralColumn + this.triggerPositionFromTopCenter.x && pos.r === this.triggerPositionFromTopCenter.y
+  isTrigger (pos: CellSpecification) {
+    const centralColumn = Math.floor(this.noDecoherenceColumnCount / 2)
+    const { x: triggerX, y: triggerY } = this.triggerPositionFromTopCenter
+    const { c, r } = pos
+    return c === centralColumn + triggerX && r === triggerY
   }
 
-  triggerAnimation (pos) {
+  triggerAnimation (pos: CellSpecification) {
     if (!this.isTrigger(pos)) { return }
     this.slotContainerIsHidden = true
     this.removeCell()
   }
 
   removeCell () {
-    const length = this.visibleCells.length
-    if (!length) {
+    const length = this.fallingCells.length
+    const noMoreCells = length === 0
+
+    if (noMoreCells) {
       setTimeout(() => {
         this.$router.push({ path: '/metal' })
       }, this.timeToLoadMetal)
       return
     }
+
     const index = Math.floor(Math.random() * length)
-    const posId = this.visibleCells.splice(index, 1)[0]
-    this.hiddenCells.splice(0, 0, posId)
-    setTimeout(this.removeCell, this.timeToRemoveCell)
+    const cellToHideId = this.fallingCells.splice(index, 1)[0]
+    this.hiddenCells.splice(0, 0, cellToHideId)
+
+    setTimeout(this.removeCell, this.timeToRemoveNextCell)
   }
 
-  posId (pos) {
+  posId (pos: CellSpecification): string {
     return `cell-${pos.c}-${pos.r}`
   }
 
-  rowId (row, index) {
+  rowId (index: number): string {
     return `row-${index}`
   }
 }
@@ -189,9 +195,6 @@ export default class extends Vue {
 
 <style lang="scss">
 @import '~carbon-components/scss/globals/scss/typography';
-
-$large-cell: 64px;
-$medium-cell: 40px;
 
 .metal-grid {
   position: relative;
@@ -222,79 +225,24 @@ $medium-cell: 40px;
 
     @include mq($from: medium, $until: large) {
       top: -5rem;
-      // left: 12rem;
     }
 
-  }
-
-  &__intro {
-    @include type-style('display-03');
-    font-size: 2.5rem;
-    margin-left: 14rem;
-    color: white;
-
-    @include mq($until: large) {
-      font-size: 1.5rem;
-      margin-left: 10rem;
-    }
-    @include mq($until: medium) {
-      font-size: 1rem;
-      margin-left: 6rem;
-    }
-  }
-
-  &__logo {
-    display: inline-block;
-    position: relative;
-    width: 12rem;
-    height: 12rem;
-    color: $cool-gray-10;
-    vertical-align: middle;
-    margin-right: 2rem;
-
-    @include mq($until: large) {
-      width: 8rem;
-      height: 8rem;
-      margin-right: 2rem;
-    }
-    @include mq($until: medium) {
-      width: 5rem;
-      height: 5rem;
-      margin-right: 1rem;
-    }
-  }
-
-  &__title {
-    @include type-style('display-04');
-    display: inline-block;
-    line-height: 10rem;
-    font-size: 10rem;
-    color: white;
-    position: relative;
-    left: -0.075em;
-    vertical-align: middle;
-
-    @include mq($until: large) {
-      line-height: 6rem;
-      font-size: 6rem;
-    }
-    @include mq($until: medium) {
-      line-height: 4rem;
-      font-size: 4rem;
-    }
   }
 
   &__container {
-    display: flex;
-    flex-direction: column;
-    width: 100vw;
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     z-index: 100;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
   }
+
+  $large-cell: 64px;
+  $medium-cell: 40px;
 
   &__row {
     display: flex;
@@ -325,8 +273,10 @@ $medium-cell: 40px;
       height: $large-cell - 1px;
       background-color: white;
       box-sizing: content-box;
-      // Transition speed and function
-      transition: transform 300ms ease-in, opacity 300ms, border-radius 300ms;
+      transition:
+        transform 300ms ease-in,
+        opacity 300ms,
+        border-radius 300ms;
 
       @include mq($until: large) {
         width: $medium-cell - 1px;
@@ -334,127 +284,64 @@ $medium-cell: 40px;
       }
     }
 
-    // This is the final state of each tile
-    // if you want to change the speed look at 9 lines above
     &_hidden::before {
-      /* // falling transition
-      transform: translateY(150%);
-      */
-
-      // semi-rounded scale and rotate
       transform: scale(0.3, 0.3) rotate(45deg);
       border-radius: 50%;
-      /*/
-      // fully-rounded and scale
-      transform: scale(0.3, 0.3);
-      border-radius: 20%;
-      //*/
-
-      // Common CSS for all transitions
       opacity: 0;
-    }
-
-    // NO EFFECT ON HOLE
-    /*
-    &_trigger::before {
-      border: none;
-      background-color: transparent;
-      cursor: pointer;
-      z-index: 200;
-    }
-    */
-
-    // PUMPING BACKGROUND HOLE EFFECT
-    /*
-    @keyframes pumpingBackground {
-      0%   { background-color: $cool-gray-80; }
-      30%  { background-color: $cool-gray-70; }
-      100% { background-color: $cool-gray-80; }
-    }
-
-    &_trigger::before {
-      border: none;
-      cursor: pointer;
-      z-index: 200;
-
-      background-color: $cool-gray-80;
-      box-shadow: inset 0px 0px 20px 2px black, inset 0px 0px 10px 1px black;
-
-      animation: pumpingBackground 1.5s linear 0s infinite normal;
-    }
-    */
-
-    // ANXIOUS TILE EFFECT
-    // this variables can be changed to tweak the effect.
-    // also you can change the degrees directly.
-    $anxiousTile_RotationAmount: 1;
-    $veryAnxiousTile_Scaling: 1.1;
-    @keyframes anxiousTile {
-      0%    { box-shadow: 0px 0px 0px 0px $cool-gray-70; transform: rotate( 0deg); }
-      10%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate( 0deg); }
-      18%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate(-3deg * $anxiousTile_RotationAmount); }
-      26%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate( 4deg * $anxiousTile_RotationAmount); }
-      34%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate(-3deg * $anxiousTile_RotationAmount); background-color: white;}
-      45%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate( 1deg * $anxiousTile_RotationAmount); }
-      55%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate( 0deg); }
-      65%   { box-shadow: 0px 0px 0px 0px $cool-gray-60; transform: rotate( 0deg); }
-      100%  { box-shadow: 0px 0px 0px 0px $cool-gray-70; transform: rotate( 0deg); }
-    }
-    @keyframes veryAnxiousTile {
-      0%    { box-shadow: 0px 0px 0px 0px $cool-gray-70; transform: rotate( 0deg) scale(1); background-color: $cool-gray-100; }
-      10%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate( 0deg) scale($veryAnxiousTile_Scaling); background-color: $cool-gray-100; }
-      18%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate(-5deg * $anxiousTile_RotationAmount) scale($veryAnxiousTile_Scaling); }
-      26%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate( 7deg * $anxiousTile_RotationAmount) scale($veryAnxiousTile_Scaling); }
-      34%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate(-5deg * $anxiousTile_RotationAmount) scale($veryAnxiousTile_Scaling); }
-      45%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate( 3deg * $anxiousTile_RotationAmount) scale($veryAnxiousTile_Scaling); }
-      55%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate( 0deg) scale($veryAnxiousTile_Scaling); }
-      65%   { box-shadow: 0px 0px 0px 0px $cool-gray-60; transform: rotate( 0deg) scale($veryAnxiousTile_Scaling); background-color: $cool-gray-100; }
-      100%  { box-shadow: 0px 0px 0px 0px $cool-gray-70; transform: rotate( 0deg) scale(1); background-color: $cool-gray-100; }
-    }
-    &_trigger{
-
-      &::before {
-        cursor: pointer;
-        z-index: 200;
-        animation: anxiousTile 2s linear 0s infinite normal;
-
-        @include mq($until: medium) { // Mobile animation
-          animation: veryAnxiousTile 2s linear 0s infinite normal;
-        }
-      }
-      &:hover::before {
-        animation: veryAnxiousTile 2s linear 0s infinite normal;
-      }
-      &_triggered::before,
-      &_triggered:hover::before {
-        animation: none;
-      }
     }
 
     &_decoherent::before {
       opacity: 0;
     }
-  }
 
-  &__metal-word-letter {
-    &_letter-M {
-      color: white;
-    }
+    &_trigger {
 
-    &_letter-e {
-      color: $cool-gray-10;
-    }
+      &::before {
+        cursor: pointer;
+        z-index: 200;
+        animation: anxious-tile 2s linear 0s infinite normal;
 
-    &_letter-t {
-      color: $cool-gray-20;
-    }
+        @include mq($until: medium) { // Mobile animation
+          animation: very-anxious-tile 2s linear 0s infinite normal;
+        }
+      }
 
-    &_letter-a {
-      color: $cool-gray-30;
-    }
+      &:hover::before {
+        animation: very-anxious-tile 2s linear 0s infinite normal;
+      }
 
-    &_letter-l {
-      color: $cool-gray-40;
+      &_triggered::before,
+      &_triggered:hover::before {
+        animation: none;
+      }
+
+      // Shaking effects
+      $rotation-multiplier: 1;
+      $magnification: 1.1;
+
+      @keyframes anxious-tile {
+        0%    { box-shadow: 0px 0px 0px 0px $cool-gray-70; transform: rotate( 0deg); }
+        10%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate( 0deg); }
+        18%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate(-3deg * $rotation-multiplier); }
+        26%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate( 4deg * $rotation-multiplier); }
+        34%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate(-3deg * $rotation-multiplier); background-color: white;}
+        45%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate( 1deg * $rotation-multiplier); }
+        55%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate( 0deg); }
+        65%   { box-shadow: 0px 0px 0px 0px $cool-gray-60; transform: rotate( 0deg); }
+        100%  { box-shadow: 0px 0px 0px 0px $cool-gray-70; transform: rotate( 0deg); }
+      }
+
+      @keyframes very-anxious-tile {
+        0%    { box-shadow: 0px 0px 0px 0px $cool-gray-70; transform: rotate( 0deg) scale(1); background-color: $cool-gray-100; }
+        10%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate( 0deg) scale($magnification); background-color: $cool-gray-100; }
+        18%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate(-5deg * $rotation-multiplier) scale($magnification); }
+        26%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate( 7deg * $rotation-multiplier) scale($magnification); }
+        34%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate(-5deg * $rotation-multiplier) scale($magnification); }
+        45%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate( 3deg * $rotation-multiplier) scale($magnification); }
+        55%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate( 0deg) scale($magnification); }
+        65%   { box-shadow: 0px 0px 0px 0px $cool-gray-60; transform: rotate( 0deg) scale($magnification); background-color: $cool-gray-100; }
+        100%  { box-shadow: 0px 0px 0px 0px $cool-gray-70; transform: rotate( 0deg) scale(1); background-color: $cool-gray-100; }
+      }
     }
   }
 
