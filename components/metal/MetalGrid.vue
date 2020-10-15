@@ -6,7 +6,7 @@
     <div class="metal-grid__container">
       <div
         v-for="(row, index) in positions"
-        :key="rowId(row, index)"
+        :key="rowId(index)"
         class="metal-grid__row"
       >
         <div
