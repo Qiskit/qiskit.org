@@ -104,6 +104,7 @@ export default class extends Vue {}
     @include contained();
     position: absolute;
     top: $layout-01;
+    z-index: 10;
   }
 
   &__nav-link {
