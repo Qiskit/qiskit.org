@@ -67,12 +67,12 @@ const METAL_CAPABILITIES: Array<MetalCapability> = [
   {
     title: 'Design quantum systems',
     description: 'Qiskit Metal enables chip prototyping in a matter of minutes. You can start from a convenient python Jupyter notebook or take advantage of the user-friendly graphical user interface (GUI). Simply, choose from a library of predefined quantum components, such as transmon qubits and coplanar resonators, and customize their parameters in real-time to fit your needs. Use the built-in algorithms to automatically connect components. Easily implement new experimental components using python templates and examples.',
-    visualResource: '/images/metal/capabilities/design-quantum-systems.png'
+    visualResource: '/videos/metal/design-quantum-systems.mp4'
   },
   {
     title: 'Modeling quantum system',
     description: 'Metal helps automate the quantum electrodynamics modeling of quantum devices to predict their performance  and parameters, such as qubit frequencies, anharmonicities, couplings, and dissipation. Metal’s vision is to provide the abstraction layer needed to seamlessly interconnect with your favorite electromagnetic analysis tool (HFSS, Sonnet, CST, AWR, Comsol, …) , dynamically rendering and co-simulating your design, at the whim of a click.',
-    visualResource: 'videos/metal/transmon-animated.mp4'
+    visualResource: '/videos/metal/modeling-quantum-system.mp4'
   },
   {
     title: 'Analysis design performance',
@@ -81,7 +81,7 @@ const METAL_CAPABILITIES: Array<MetalCapability> = [
                   Methods include the Energy Participation Ratio (EPR), impedance analysis, the lumped-oscillator model, …
                   <br><br>
                   We hope to build up the quantum analysis library with the community.`,
-    visualResource: '/images/metal/capabilities/analysis-design-performance.png'
+    visualResource: '/videos/metal/analysis-design-performance.mp4'
   }
 ]
 
