@@ -76,11 +76,9 @@ const METAL_CAPABILITIES: Array<MetalCapability> = [
   },
   {
     title: 'Analysis design performance',
-    description: `Metal aims to give access to advanced quantum analyses techniques to calculate qubit frequencies, anharmonicities, and to extract non-linear couplings, dissipation, and the full Hamiltonian of the quantum device, with percent-level accuracy.
+    description: `Metal aims to give access to advanced quantum analysis techniques to calculate qubit frequencies, anharmonicities, and to extract non-linear couplings, dissipation, and the full Hamiltonian of the quantum device, with percent-level accuracy.
                   <br><br>
-                  Methods include the Energy Participation Ratio (EPR), impedance analysis, the lumped-oscillator model, …
-                  <br><br>
-                  We hope to build up the quantum analysis library with the community.`,
+                  We plan to include the Energy Participation Ratio (EPR), impedance analysis, and the lumped-oscillator model. We hope to further build up the quantum analysis library in collaboration with the community.`,
     visualResource: '/videos/metal/analysis-design-performance.mp4'
   }
 ]
