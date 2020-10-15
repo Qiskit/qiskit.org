@@ -5,8 +5,9 @@
         Why Qiskit Metal
       </h2>
       <p class="features-section__description">
-        Designing quantum devices is the bedrock of the quantum ecosystem, but it is a difficult, multi-step process that connects traditionally disparate worlds. <br><br>
-        Metal is automating and streaming this process. Our vision is to develop a community-driven universal platform capable of orchestrating quantum chip development from concept to fabrication in a simple and open framework.
+        Designing quantum devices is the bedrock of the quantum ecosystem, but it is a difficult, multi-step process that connects traditionally disparate worlds.
+        <br><br>
+        Metal is automating and streamlining this process. Our vision is to develop a community-driven universal platform capable of orchestrating quantum chip development from concept to fabrication in a simple and open framework.
       </p>
       <FeatureCard
         v-for="feature in metalFeatures"

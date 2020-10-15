@@ -31,16 +31,12 @@
             <AppLink
               class="building-section__copy-link copy__link "
               url="https://qiskit.org/learn/intro-qc-qh/"
-            >
-              Introduction to Quantum Computing and Quantum Hardware
-            </AppLink>
+            >Introduction to Quantum Computing and Quantum Hardware</AppLink>
             summer school lectures series by Zlatko Minev on superconducting qubits. Also, check out the open source
             <AppLink
               class="building-section__copy-link copy__link "
               url="https://qiskit.org/textbook/ch-quantum-hardware/transmon-physics.html"
-            >
-              Qiskit textbook
-            </AppLink>
+            >Qiskit textbook</AppLink>
             chapters on quantum devices and their control.
           </p>
           <!-- eslint-enable -->
