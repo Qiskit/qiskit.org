@@ -1,6 +1,6 @@
 <template>
   <!-- tabindex is needed to allow hiding the menu in iOS Safari -->
-  <div class="default-layout content-root" tabindex="-1">
+  <div class="default-layout content-root_theme_dark" tabindex="-1">
     <header id="navigation">
       <TheBlackLivesMatterBanner
         :style="{ display: isMenuShown ? 'none' : 'block' }"
@@ -33,12 +33,4 @@ export default class extends Vue {
 
 <style lang="scss">
 @import '~/assets/scss/layout.scss';
-
-.content-root {
-  background-color: $ui-background;
-}
-
-main {
-  color: $inverse-01;
-}
 </style>
