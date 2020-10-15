@@ -102,20 +102,20 @@ export default class extends Vue {}
 
   &__nav {
     @include contained();
+    position: absolute;
+    top: $layout-01;
+  }
 
-    &-link {
-      @include type-style('body-short-01');
-      color: $white;
-      display: flex;
-      position: absolute;
-      top: $layout-01;
-      z-index: 2;
-    }
+  &__nav-link {
+    @include type-style('body-short-01');
+    color: $white;
+    display: flex;
+    align-items: center;
+  }
 
-    &-icon {
-      fill: currentColor;
-      margin-right: $spacing-05;
-    }
+  &__nav-icon {
+    fill: currentColor;
+    margin-right: $spacing-05;
   }
 
   &__container {
@@ -133,6 +133,7 @@ export default class extends Vue {}
     @include mq($until: medium) {
       padding-top: 12.5rem;
     }
+
     @include mq($until: small) {
       padding-top: 11rem;
     }
@@ -184,63 +185,64 @@ export default class extends Vue {}
       right: auto;
       left: 6rem;
     }
+  }
 
-    &-cryo {
-      width: 100%;
+  &__media-cryo {
+    width: 100%;
+  }
+
+  &__media-transmon {
+    position: absolute;
+    top: 24.5rem;
+    right: 9.25rem;
+    width: 19rem;
+    z-index: 1;
+
+    @include mq($from: medium, $until: large) {
+      top: 19.5rem;
+      right: 7.5rem;
+      width: 12rem;
     }
 
-    &-transmon {
-      position: absolute;
-      top: 24.5rem;
-      right: 9.25rem;
-      width: 19rem;
-      z-index: 1;
-
-      @include mq($from: medium, $until: large) {
-        top: 19.5rem;
-        right: 7.5rem;
-        width: 12rem;
-      }
-
-      @include mq($until: medium) {
-        top: 14rem;
-        right: 5.5rem;
-        width: 8rem;
-      }
-      @include mq($until: small) {
-        top: 12.75rem;
-        right: auto;
-        width: 6rem;
-        left: 7.5rem;
-      }
+    @include mq($until: medium) {
+      top: 14rem;
+      right: 5.5rem;
+      width: 8rem;
     }
 
-    &-transmon-outline {
-      position: absolute;
-      top: 24.5rem;
-      right: 9rem;
-      width: initial;
+    @include mq($until: small) {
+      top: 12.75rem;
+      right: auto;
+      width: 6rem;
+      left: 7.5rem;
+    }
+  }
+
+  &__media-transmon-outline {
+    position: absolute;
+    top: 24.5rem;
+    right: 9rem;
+    width: initial;
+    z-index: 1;
+
+    @include mq($from: medium, $until: large) {
+      top: 20rem;
+      right: 8rem;
       z-index: 1;
+      max-width: 16rem;
+    }
 
-      @include mq($from: medium, $until: large) {
-        top: 20rem;
-        right: 8rem;
-        z-index: 1;
-        max-width: 16rem;
-      }
+    @include mq($until: medium) {
+      top: 13.85rem;
+      max-width: 12rem;
+      right: 5.25rem;
+    }
 
-      @include mq($until: medium) {
-        top: 13.85rem;
-        max-width: 12rem;
-        right: 5.25rem;
-      }
-
-     @include mq($until: small) {
-        top: 13rem;
-        max-width: 8rem;
-        right: auto;
-        left: 5.15rem;
-     }
+    @include mq($until: small) {
+      top: 13rem;
+      max-width: 8rem;
+      right: auto;
+      left: 5.15rem;
     }
   }
 }
