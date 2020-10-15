@@ -70,9 +70,9 @@ const METAL_CAPABILITIES: Array<MetalCapability> = [
     visualResource: '/videos/metal/design-quantum-systems.mp4'
   },
   {
-    title: 'Modeling quantum system',
+    title: 'Modeling quantum systems',
     description: 'Metal helps automate the quantum electrodynamics modeling of quantum devices to predict their performance  and parameters, such as qubit frequencies, anharmonicities, couplings, and dissipation. Metal’s vision is to provide the abstraction layer needed to seamlessly interconnect with your favorite electromagnetic analysis tool (HFSS, Sonnet, CST, AWR, Comsol, …) , dynamically rendering and co-simulating your design, at the whim of a click.',
-    visualResource: '/videos/metal/modeling-quantum-system.mp4'
+    visualResource: '/videos/metal/modeling-quantum-systems.mp4'
   },
   {
     title: 'Analysis design performance',
