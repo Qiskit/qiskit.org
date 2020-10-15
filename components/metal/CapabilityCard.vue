@@ -8,9 +8,22 @@
         <span v-html="description" />
       </div>
     </div>
+    <video
+      v-if="isVideo()"
+      class="capability-card__visual-resource"
+      loop
+      autoplay
+      muted
+      playsinline
+    >
+      <source :src="visualResource" type="video/mp4">
+      <source :src="visualResource" type="video/ogg">
+      Your browser does not support video.
+    </video>
     <div
-      class="capability-card__image"
-      :lazy-background="image"
+      v-else
+      class="capability-card__visual-resource"
+      :lazy-background="visualResource"
     />
   </article>
 </template>
@@ -21,9 +34,14 @@ import { Component, Prop } from 'vue-property-decorator'
 
 @Component
 export default class extends Vue {
-  @Prop(String) image
+  @Prop(String) visualResource
   @Prop(String) title
   @Prop(String) description
+
+  isVideo (): boolean {
+    const extension = this.visualResource.substring(this.visualResource.length - 4)
+    return extension === '.mp4'
+  }
 }
 </script>
 
@@ -68,7 +86,7 @@ export default class extends Vue {
     }
   }
 
-  &__image {
+  &__visual-resource {
     flex: 0 0 32rem;
     width: 100%;
     height: 100%;
