@@ -1,39 +1,53 @@
 <template>
   <section class="capabilities-section">
     <div class="capabilities-section__container">
-      <div class="capabilities-section__content">
-        <CapabilityCard
-          v-for="item in capabilities"
-          :id="item.title"
-          :key="item.title"
-          class="capabilities-section__card scrollable"
-          :title="item.title"
-          :description="item.description"
-          :visual-resource="item.visualResource"
-        />
-      </div>
-      <div class="capabilities-section__scrolling-ui">
-        <div
-          v-for="(item, index) in capabilities"
-          :key="item.visualResource"
-          class="capabilities-section__visual-resource-container"
-          :class="{
-            'capabilities-section__visual-resource-container_active' : isActiveImage(item, index)
-          }"
-        >
-          <video
-            v-if="isVideo(item.visualResource)"
-            class="capabilities-section__visual-resource capabilities-section__visual-resource_video"
-            loop
-            autoplay
-            muted
-            playsinline
+      <h2 class="capabilities-section__title">
+        Our vision
+      </h2>
+      <div class="capabilities-section__capabilities">
+        <div class="capabilities-section__content">
+          <CapabilityCard
+            v-for="item in capabilities"
+            :id="item.title"
+            :key="item.title"
+            class="capabilities-section__card scrollable"
+            :title="item.title"
+            :description="item.description"
+            :visual-resource="item.visualResource"
+          />
+        </div>
+        <div class="capabilities-section__scrolling-ui">
+          <div
+            v-for="(item, index) in capabilities"
+            :key="item.visualResource"
+            class="capabilities-section__visual-resource-container"
+            :class="{
+              'capabilities-section__visual-resource-container_active' : isActiveImage(item, index)
+            }"
           >
-            <source :src="item.visualResource" type="video/mp4">
-            <source :src="item.visualResource" type="video/ogg">
-            Your browser does not support video.
-          </video>
-          <div v-else class="capabilities-section__visual-resource capabilities-section__visual-resource_image" :lazy-background="item.visualResource" />
+            <video
+              v-if="isVideo(item.visualResource)"
+              class="
+                capabilities-section__visual-resource
+                capabilities-section__visual-resource_type_video"
+              loop
+              autoplay
+              muted
+              playsinline
+            >
+              <source :src="item.visualResource" type="video/mp4">
+              <source :src="item.visualResource" type="video/ogg">
+              Your browser does not support video.
+            </video>
+            <div
+              v-else
+              class="
+                capabilities-section__visual-resource
+                capabilities-section__visual-resource_type_image
+              "
+              :lazy-background="item.visualResource"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -81,10 +95,24 @@ export default class extends Mixins(ScrollSectionsMixin) {
 
   &__container {
     @include contained();
-    display: flex;
-    align-items: flex-start;
     padding-top: 10rem;
     padding-bottom: $layout-06;
+  }
+
+  &__capabilities {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  &__title {
+    @include type-style("expressive-heading-05");
+    margin-bottom: $layout-03;
+    font-weight: 300;
+
+    @include mq($until: large) {
+      @include type-style("expressive-heading-04");
+    }
   }
 
   &__content {
@@ -125,16 +153,19 @@ export default class extends Mixins(ScrollSectionsMixin) {
   }
 
   &__visual-resource {
-    &_image {
-      width: 100%;
-      height: 100%;
-      background-size: contain;
-      background-position: center top;
-      background-repeat: no-repeat;
-    }
 
-    &_video {
-      width: 100%;
+    &_type {
+      &_image {
+        width: 100%;
+        height: 100%;
+        background-size: contain;
+        background-position: center top;
+        background-repeat: no-repeat;
+      }
+
+      &_video {
+        width: 100%;
+      }
     }
   }
 }
