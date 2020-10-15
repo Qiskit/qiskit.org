@@ -6,7 +6,7 @@
         :url="`/`"
       >
         <ArrowLeft16 class="the-dark-header__nav-icon" />
-        Back to Qiskit.org
+        <span>Back to Qiskit.org</span>
       </AppLink>
     </nav>
     <div class="the-dark-header__container">
@@ -102,15 +102,15 @@ export default class extends Vue {}
 
   &__nav {
     @include contained();
-    position: absolute;
-    top: $layout-01;
-    z-index: 10;
   }
 
   &__nav-link {
     @include type-style('body-short-01');
     color: $white;
     display: flex;
+    position: absolute;
+    top: $layout-01;
+    z-index: 2;
     align-items: center;
   }
 
