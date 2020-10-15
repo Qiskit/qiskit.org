@@ -9,19 +9,32 @@
           class="capabilities-section__card scrollable"
           :title="item.title"
           :description="item.description"
-          :image="item.image"
+          :visual-resource="item.visualResource"
         />
       </div>
       <div class="capabilities-section__scrolling-ui">
         <div
           v-for="(item, index) in capabilities"
-          :key="item.image"
-          class="capabilities-section__image"
+          :key="item.visualResource"
+          class="capabilities-section__visual-resource-container"
           :class="{
-            'capabilities-section__active-image' : isActiveImage(item, index)
+            'capabilities-section__visual-resource-container_active' : isActiveImage(item, index)
           }"
-          :lazy-background="item.image"
-        />
+        >
+          <video
+            v-if="isVideo(item.visualResource)"
+            class="capabilities-section__visual-resource capabilities-section__visual-resource_video"
+            loop
+            autoplay
+            muted
+            playsinline
+          >
+            <source :src="item.visualResource" type="video/mp4">
+            <source :src="item.visualResource" type="video/ogg">
+            Your browser does not support video.
+          </video>
+          <div v-else class="capabilities-section__visual-resource capabilities-section__visual-resource_image" :lazy-background="item.visualResource" />
+        </div>
       </div>
     </div>
   </section>
@@ -41,6 +54,11 @@ export default class extends Mixins(ScrollSectionsMixin) {
 
   isActiveImage (item: MetalCapability, index: number): boolean {
     return item.title === this.activeSection || (this.activeSection === '' && index === 0)
+  }
+
+  isVideo (url: string): boolean {
+    const extension = url.substring(url.length - 4)
+    return extension === '.mp4'
   }
 }
 </script>
@@ -93,20 +111,31 @@ export default class extends Mixins(ScrollSectionsMixin) {
     }
   }
 
-  &__image {
+  &__visual-resource-container {
     position: absolute;
     top: 0;
     opacity: 0;
     transition: opacity 0.3s linear;
     width: 100%;
     height: 100%;
-    background-size: contain;
-    background-position: center top;
-    background-repeat: no-repeat;
+
+    &_active {
+      opacity: 1;
+    }
   }
 
-  &__active-image {
-    opacity: 1;
+  &__visual-resource {
+    &_image {
+      width: 100%;
+      height: 100%;
+      background-size: contain;
+      background-position: center top;
+      background-repeat: no-repeat;
+    }
+
+    &_video {
+      width: 100%;
+    }
   }
 }
 </style>
