@@ -45,6 +45,11 @@ export default class extends Vue {
     @include contained();
     padding-top: $layout-05;
     padding-bottom: $layout-06;
+
+    @include mq($until: medium) {
+      padding-top: $layout-02;
+      padding-bottom: $layout-02;
+    }
   }
 
   &__title {
