@@ -12,8 +12,8 @@
         </p>
         <iframe
           class="intro-section__video"
-          width="608"
-          height="341"
+          width="560"
+          height="315"
           src="https://www.youtube.com/embed/A4g2RbVffTM"
           frameborder="0"
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
