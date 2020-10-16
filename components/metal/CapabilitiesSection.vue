@@ -97,6 +97,11 @@ export default class extends Mixins(ScrollSectionsMixin) {
     @include contained();
     padding-top: 10rem;
     padding-bottom: $layout-06;
+
+    @include mq($until: medium) {
+      padding-top: $layout-05;
+      padding-bottom: $layout-04;
+    }
   }
 
   &__capabilities {
@@ -121,6 +126,10 @@ export default class extends Mixins(ScrollSectionsMixin) {
 
   &__card {
     margin-bottom: $layout-06;
+
+    @include mq($until: medium) {
+      margin-bottom: $layout-03;
+    }
   }
 
   &__scrolling-ui {

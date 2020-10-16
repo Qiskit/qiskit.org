@@ -76,13 +76,24 @@ export default class extends Vue {
       padding-right: 0;
       padding-bottom: $spacing-07;
     }
+
+    @include mq($until: medium) {
+      padding-bottom: 0;
+      margin-bottom: $layout-01;
+    }
   }
+
   &__description {
     @include type-style('body-long-01');
     flex: 1;
 
     @include mq($until: large) {
       padding-bottom: $spacing-05;
+    }
+
+    @include mq($until: medium) {
+      padding-bottom: 0;
+      margin-bottom: $layout-01;
     }
   }
 
@@ -104,7 +115,7 @@ export default class extends Vue {
 
     @include mq($until: medium) {
       flex: 0 0 16rem;
-      margin: $spacing-06 0 0 0;
+      margin: 0;
     }
   }
 }
