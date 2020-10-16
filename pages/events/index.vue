@@ -49,35 +49,41 @@
             </div>
           </fieldset>
         </div>
-        <div v-if="hasEvents" class="event-page__results">
-          <EventCard
-            v-for="event in filteredEvents"
-            :key="`${event.place}-${event.date}`"
-            :types="event.types"
-            :title="event.title"
-            :image="event.image"
-            :location="event.location"
-            :date="event.date"
-            :to="event.to"
-          />
-        </div>
-        <div v-else class="event-page__results">
-          <AppCard
-            class="event-page__no-events-card"
-            :image="emptyCard.img"
-            :title="emptyCard.title"
-          >
-            {{ emptyCard.description }}
-          </AppCard>
-          <p class="event-page__no-events-msg">
-            Nothing here yet -
-            <AppLink
-              class="event-page__link"
+        <div class="event-page__main-content">
+          <div>
+            <AppCard
+              v-if="noEvents"
+              :image="emptyCard.img"
+              :title="emptyCard.title"
+            >
+              {{ emptyCard.description }}
+            </AppCard>
+            <EventCard
+              v-for="event in filteredEvents"
+              v-else
+              :key="`${event.place}-${event.date}`"
+              :types="event.types"
+              :title="event.title"
+              :image="event.image"
+              :location="event.location"
+              :date="event.date"
+              :to="event.to"
+            />
+          </div>
+          <div class="event-page__start-an-event">
+            <h3 class="event-page__start-an-event__title">
+              Start an event
+            </h3>
+            <p class="copy__paragraph copy__paragraph_importance_outstanding event-page__start-an-event__description">
+              We can help you bring Qiskit experts to your campus for guest lectures, hackathons, and other events.
+            </p>
+            <AppCta
+              class="event-page__start-an-event__cta"
               v-bind="eventRequestLink"
             >
               {{ eventRequestLink.label }}
-            </AppLink>
-          </p>
+            </AppCta>
+          </div>
         </div>
       </div>
     </div>
@@ -89,9 +95,10 @@ import { mapGetters, mapActions } from 'vuex'
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import EventCard from '~/components/events/EventCard.vue'
-import AppLink from '~/components/ui/AppLink.vue'
 import AppCard from '~/components/ui/AppCard.vue'
 import TheEventsHeader from '~/components/events/TheEventsHeader.vue'
+import AppCta from '~/components/ui/AppCta.vue'
+import LandingCta from '~/components/landing/LandingCta.vue'
 
 import {
   CommunityEvent,
@@ -103,7 +110,8 @@ import { EVENT_REQUEST_LINK } from '~/constants/appLinks'
 @Component({
   components: {
     EventCard,
-    AppLink,
+    AppCta,
+    LandingCta,
     AppCard,
     TheEventsHeader
   },
@@ -149,8 +157,8 @@ export default class extends QiskitPage {
     img: '/images/events/no-events.svg'
   }
 
-  get hasEvents (): boolean {
-    return (this as any).filteredEvents.length !== 0
+  get noEvents (): boolean {
+    return (this as any).filteredEvents.length === 0
   }
 
   isFilterChecked (filter: string, filterValue: string): Array<CommunityEvent> {
@@ -289,7 +297,7 @@ export default class extends QiskitPage {
     }
   }
 
-  &__results {
+  &__main-content {
     width: 75%;
 
     @include mq($until: medium) {
@@ -297,21 +305,25 @@ export default class extends QiskitPage {
     }
   }
 
-  &__no-events-card {
-    margin-bottom: $layout-04;
-  }
+  &__start-an-event {
+    margin-top: $layout-05;
+    margin-bottom: $layout-05;
 
-  &__no-events-msg {
-    @include type-style('body-short-02');
-
-    @include mq($until: medium) {
-      margin-bottom: $layout-01;
+    &__title {
+      @include type-style('productive-heading-02');
     }
-  }
 
-  &__link {
-    color: $purple-70;
-    text-decoration: none;
+    &__description {
+      margin-top: $layout-02;
+      margin-bottom: $layout-03;
+    }
+
+    &__cta {
+      color: $white !important;
+      background-color: $purple-70;
+      padding: $spacing-05;
+      width: fit-content !important;
+    }
   }
 }
 </style>
