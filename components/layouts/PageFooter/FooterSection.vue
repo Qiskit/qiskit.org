@@ -1,13 +1,20 @@
 <template>
   <section class="footer-section">
-    <h2 class="footer-section__title">
+    <h2
+      class="footer-section__title"
+      :class="`footer-section__title_theme_${theme}`"
+    >
       {{ title }}
     </h2>
     <nav :class="{ 'footer-section__icons-group': iconsOnly }">
       <AppLink
         v-for="element in elements"
         :key="element.url"
-        :class="iconsOnly ? 'footer-section__icon-link' : 'footer-section__link'"
+        :class="
+          iconsOnly
+            ? `footer-section__icon-link footer-section__icon-link_theme_${theme}`
+            : `footer-section__link footer-section__link_theme_${theme}`
+        "
         v-bind="element"
       >
         <component :is="element.icon" v-if="iconsOnly" />
@@ -29,6 +36,7 @@ export default class extends Vue {
   @Prop(String) title
   @Prop(Array) elements
   @Prop({ type: Boolean, default: false }) iconsOnly
+  @Prop({ type: String, default: 'light' }) theme!: string
 }
 </script>
 
@@ -38,17 +46,31 @@ export default class extends Vue {
 .footer-section {
   &__title {
     @include type-style('expressive-heading-01');
-    color: $cool-gray-60;
     padding-bottom: $spacing-07;
+
+    &_theme_light {
+      color: $cool-gray-60;
+    }
+
+    &_theme_dark {
+      color: $white;
+    }
   }
 
   &__link {
     @include type-style('caption-01');
-    color: $cool-gray-60;
     text-decoration: none;
     display: inline-block;
     width: 100%;
     padding-bottom: $spacing-03;
+
+    &_theme_light {
+      color: $cool-gray-60;
+    }
+
+    &_theme_dark {
+      color: $white;
+    }
 
     &:hover {
       text-decoration: underline;
@@ -64,7 +86,13 @@ export default class extends Vue {
   }
 
   &__icon-link {
-    fill: $cool-gray-60;
+    &_theme_light {
+      fill: $cool-gray-60;
+    }
+
+    &_theme_dark {
+      fill: $white;
+    }
   }
 
 }
