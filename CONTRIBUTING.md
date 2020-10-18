@@ -1,7 +1,7 @@
 # CONTRIBUTING
 
 Regardless if you are part of the core team or an external contributor, welcome and
-thank you for contributing to qiskit.org!
+thank you for contributing to https://qiskit.org!
 
 In qiskit.org we aim at creating an excellent work-space where all of us can feel
 welcomed, useful, respected and valued. If you are thinking to contribute to
@@ -9,13 +9,201 @@ qiskit.org, you agree to abide by our [code of conduct](CODE_OF_CONDUCT.md) whic
 we strongly recommend you read before continuing.
 
 Following these guidelines communicates you value the time and effort of the core
-contributors and maintainers of this site.
+contributors and maintainers of this site and so, thank you!
 
-## Pull Requests
+## Start contributing
+
+This repository is for developing and maintaining https://qiskit.org, the website.
+If you want to contribute to Qiskit, the open-source Python library, you should go
+visit the [Qiskit repository](https://github.com/Qiskit/qiskit) instead.
+
+There are many ways of contributing: from catching a typo to coming up with a way
+of improving performance or accessibility; you can open an issue or you can prepare
+a patch. In any case, read the contribution guidelines for opening new issues and
+submitting pull requests.
+
+Please, don't use this repository for asking questions about Qiskit: there are
+better ways to do it. Refer to our public [Slack](https://ibm.co/joinqiskitslack)
+or post a question in [stack overflow](https://stackoverflow.com/questions/tagged/qiskit).
+
+## Opening issues
+
+You can [open 4 types of issues](https://github.com/Qiskit/qiskit.org/issues/new/choose):
+
+* Bug reports: for reporting a misfunction. Provide steps to reproduce and expected behavior.
+* Content issues: for noticing content-related problems such as typos or rewordings.
+* Tasks: a general "to do", in case none of the other templates suit you.
+* User stories: for identifying new value for the user.
+
+In addition to these 4 templates, the most commont types of tasks are:
+
+* Plain tasks: these are the things that a core contributor usually work on during the sprint.
+* [Refactors](https://github.com/Qiskit/qiskit.org/issues?q=label%3A%22type%3A+refactor%22+): these aim at improving our code base and reducing technical debt.
+* [Discussions](https://github.com/Qiskit/qiskit.org/issues?q=label%3A%22type%3A+discussion%22): these provide a central hub for talking about something in order to [reach a consensus](https://github.com/Qiskit/qiskit.org/issues?q=label%3ADecided+).
+
+Core contributors classify the tasks according to its nature and prioritize them
+from sprint to sprint. Types are not mutually exclusive and can change over time
+if needed.
+
+## Contributing code
+
+### Setup
+
+So you decided to get your hands dirty and start working on a patch? Then you
+need to know that qiskit.org follows the
+[Forking Workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/forking-workflow)
+with [Feature Branches](https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow).
+
+Regardless if you are a core contributor or not, the above means we expect you to fork
+the project on your own GitHub account and make your `master` branch to track this
+repository. A typical Git setup after
+[forking the project](https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo) is:
+
+```sh
+# After forking the repository in GitHub
+git clone https://github.com/<your_username>/qiskit.org.git
+cd qiskit.org
+git remote add upstream https://github.com/qiskit/qiskit.org.git
+git remote update upstream
+git checkout master
+git branch -u upstream/master
+git pull
+```
+
+### Working on an issue
+
+When you are going to start working on an issue, make sure you are in your `master`
+branch and that it is completely up to date and create a new branch with a
+meaningful name. The typical terminal code for this is:
+
+```sh
+git checkout master
+git pull upstream master
+git checkout -b issue-1234-new-header
+```
+
+Now start adding your changes and remember to commit often:
+
+```sh
+git commit
+```
+
+And include a summary and some notes or clarifications if needed:
+
+```
+Create new header layout.
+
+Includes a new component factoring out the header of this new page and others.
+```
+
+From time to time, you want to check if your `master` branch is still up to
+date. If not, you will need to
+[rebase](https://www.atlassian.com/git/tutorials/merging-vs-rebasing) and
+continue working:
+
+```sh
+git checkout master
+git pull
+git checkout issue-1234-new-header
+git rebase -i master
+```
+
+Use the interactive `-i` option of rebase to polish the history of your branch.
+
+### Pull requests
+
+Pull requests serve a double purpose:
+1. Share the code with the team. So almost everybody is aware of how the code base is evolving.
+2. Provide an opportunity for improving code quality.
+
+When you think your work is done, push the branch to your repository:
+
+```sh
+git push origin issue-1234-new-header
+# Start a pull request in GitHub
+```
+
+And
+[create a pull request](https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
+When creating the pull request, provide a description and
+[link with the issue that is being solved](https://docs.github.com/en/free-pro-team@latest/github/managing-your-work-on-github/linking-a-pull-request-to-an-issue).
+
+### Code review
+
+Once you have sent a PR, the code contributors get notified and there may be a code
+review. The code review helps solving implementation, semantic and maintainability issues.
+
+The repository also contains some automated checks such as tests and linting. For a 
+pull request to be ready to be merged it needs to **pass the automated checks and have,
+at least, one positive review**.
+
+
+
+
+### Team best practices
+
+#### Apply the Scout Rule
+
+[Leave the code better than you found it...](https://martinfowler.com/bliki/OpportunisticRefactoring.html)
+in the context of what you're addressing.
+
+Boy Scouts have a rule that says: "Always leave the campground cleaner than you found it",
+which does not mean, "leave the whole forest cleaner than you found it". 
+
+#### Keep the pull request focused
+
+A pull request should solve only one thing. This makes it easier to review and share, reduce
+risk and criticallity and improve understanding of the changes. If you find yourself in
+a position of doing more than needed, even if this is something trivial but not directly
+related to your current work, come back later! Open a new issue and come back later to address
+that problem. Follow-ups are welcome!
+
+#### Open follow-ups
+
+We know it. It is hard just to ignore that something else can be improved. Don't ignore it.
+
+When you foresee that addressing a problem will take more effort than documenting it,
+choose the latter and open a follow-up. Think twice when assessing the effort:
+1. Once for you to make the change.
+2. Another for the reviewer to switch context and review the change.
+
+#### Review in layers
+
+When reviewing, highlighting all the things that you consider can be improved may be
+exhausting for the contributor. Instead of noticing everything at the same time, try to layer
+your review.
+
+1. Start by testing the branch and indicating errors in the implementation.
+2. Continue asking for clarifications aboout what you don't understand.
+3. Then, address semantic and architectural problems including type annotations that will result in the hardest-to-remove technical debt in the future.
+4. Now you can focus on readability: typos, variable names, team idioms, style violations not caught by the automated checks.
+5. Finally, go for other less important code smells.
+
+#### Make branch names meaningful
+
+Include your initials, the number of the issue or both. That helps idenifying who started
+the branch and what issue is being addressed:
+
+```
+sp-issue-1234-implement-new-header
+```
+
+#### Sanitize your branch history
+
+Rebase on your own history to reorder, fix and squash your history. Remember that each commit
+should represent a meaningful atomic change. For instance, if you commit a new functionality
+just to realize it is broken because you mispelled a variable, add another commit for fixing it,
+then rebase and combine both commits together.
+
+### Feature branches
+
+### Code reviews
+
+### Merging
 
 We actively welcome your pull requests!
 
-Qiskit.org uses the [Forking Workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/forking-workflow) + [Feature Branches](https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow). Additionally, PR's should be [rebased](https://www.atlassian.com/git/tutorials/merging-vs-rebasing) on master when opened, and again before merging.
+
 
 1. Fork the repo.
 2. Create a branch from `master`. If you're addressing a specific issue, prefix your branch name with the issue number.
@@ -25,6 +213,12 @@ Qiskit.org uses the [Forking Workflow](https://www.atlassian.com/git/tutorials/c
 6. PR's must be rebased before merge (feel free to ask for help).
 7. PR should be reviewed by one maintainer prior to merging.
 
+## Code style
+
+### Writing components
+
+### 
+
 ## Project management
 
 In Qiskit, we take open-source seriously and want to be open and transparent to
@@ -33,7 +227,8 @@ of [projects](https://github.com/Qiskit/qiskit.org/projects) for sprint planning
 [issues](https://github.com/Qiskit/qiskit.org/issues) for tracking what needs to
 be done.
 
-We use a customized version of scrum with 2-weeks sprints and online dailies:
+We use a customized version of [scrum](https://www.atlassian.com/agile/scrum) with
+2-weeks sprints and online dailies:
 
 | What?                | Why?                                                           | When?                                            | Where?                    |
 |----------------------|----------------------------------------------------------------|--------------------------------------------------|---------------------------|
@@ -77,25 +272,25 @@ make decisions. Some solutions will seem better than others and you will make
 compromises... Track them!
 
 If you are delaying work, create a follow-up, if you find unnoted technical debt, open an
-issue visibilize it, if you got stuck in a discussion, open a discussion issue and ask
+issue and visibilize it, if you got stuck in a discussion, open a discussion issue and ask
 for participation.
 
 #### Split the tasks
 
-Splitting tasks has the benefit of enabling fast value delivering and resolving locks
-and conflict issues so, if you feel stuck in an issue, try splitting it into the part
-you already solved and that causing the blockage.
+The issues are not set in stone. If you are part of the core dev/design team, the sprint
+backlog is yours. Splitting tasks helps in keeping issues small, focused and independent so
+**more people can work in parallel without waiting times**.
 
 #### Estimate issues
 
-Estimating issues allow us to learn, improve our time estimations and balance technical
-effort with sprint size and project deadlines. We use a simple scale based more in some
-shared intuition rather than specific definitions but if you are new to the team, we
-hope this will help you:
+Estimating issues enables the team to known their limits, prepare for the future and
+balance the technical effort with the sprint size and project deadlines. We use a simple
+scale based more in some shared intuition rather than specific definitions but if you
+are new to the team, we hope this will help you:
 
-| Effort      | Time scale         |
-|-------------|--------------------|
-| Small       | Day scale          |
-| Medium      | Several-days scale |
-| Large       | Week scale         |
-| Extra large | Sprint scale       |
+| Effort      | Time scale   |
+|-------------|--------------|
+| Small       | Hour scale   |
+| Medium      | Day scale    |
+| Large       | Week scale   |
+| Extra large | Sprint scale |
