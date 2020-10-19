@@ -119,6 +119,31 @@ git rebase -i master
 
 Use the interactive `-i` option of rebase to polish the history of your branch.
 
+### Feature branches
+
+Very often, implementing a user story implies publishing several features in an atomic
+batch. When it happens, we use a feature branch in the main repository for integrating
+all the needed changes before merging to `master`.
+
+When working against a feature branch, you consider the feature branch to be the
+`master` branch and so, when about to start a new task, you do:
+
+```sh
+git checkout feature-branch
+git pull upstream feature-branch
+git checkout -b issue-1234-new-header
+```
+
+And keep an eye on `feature-branch` to always rebase your code on top of the most
+updated version of the `feature-branch`:
+
+```sh
+git checkout feature-branch
+git pull upstream feature-branch
+git checkout issue-1234-new-header
+git rebase -i feature-branch
+```
+
 ### Pull requests
 
 Pull requests serve a double purpose:
@@ -133,9 +158,23 @@ git push origin issue-1234-new-header
 ```
 
 And
-[create a pull request](https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
+[create a pull request](https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request)
+against `master` (or a feature branch).
 When creating the pull request, provide a description and
 [link with the issue that is being solved](https://docs.github.com/en/free-pro-team@latest/github/managing-your-work-on-github/linking-a-pull-request-to-an-issue).
+
+Linking the issue has the advantage of automatically closing the related issue when the pull
+request is merged. Unfortunately, this does not work when merging pull requests agains a feature
+branch. In these occassions, remember to manually close the related pull requests after
+[merging the pull request](#merging).
+
+### Live previews
+
+As part of our continuous integration infrastructure, every pull request receives a
+dedicated URL by [Vercel](https://vercel.com/) to preview the changes in it.
+
+When the contribution comes from an external contributor, previews require authorization
+from one of the core members of the team.
 
 ### Code review
 
@@ -166,9 +205,32 @@ Once all automated checks are passing and there is a positive review, the pull r
 can be merged. It does not matter if it is the author or the reviewer who merges the
 PR.
 
-When merging against `master`, the PR should be merged with the
+When merging a regular pull request against `master` or a feature branch, the PR should
+be merged with the
 [Squash and Merge](https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/about-pull-request-merges#squash-and-merge-your-pull-request-commits)
 option.
+
+When merging a feature branch against `master`, its history should be sanitized and
+merge with [Rebase and Merge](https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/about-pull-request-merges#rebase-and-merge-your-pull-request-commits) to preserve all the intermediate commits.
+
+### Continuous integration
+
+Once a pull request is merged into `master`, a new version of the site is published and
+becomes online in about 5 minutes, depending on how busy is
+[the queue of Travis](https://travis-ci.com/qiskit/qiskit.org).
+
+### Delayed reviews
+
+A delayed code review is a code review that happens after the PR is merged. It is intended to
+reduce waiting times for implementers and maximize short-term productivity at the expense
+of fixing technical debt by the end of the sprint.
+
+They can only happen when the pull request is created against a feature branch. The delayed code
+review is required to be addressed in the same sprint, and a final review of the feature branch is
+required before merging. **No code can be merged into `master` without revision**.
+
+Delayed reviews can only happen for pull requests authored by core members of the team and the
+strategy needs to be agreed in advance.
 
 ### Team best practices
 
@@ -225,13 +287,11 @@ should represent a meaningful atomic change. For instance, if you commit a new f
 just to realize it is broken because you misspelt a variable, add another commit for fixing it,
 then rebase and combine both commits together.
 
-### Feature branches
-
 ## Code style
 
-### Writing components
+### Type annotations
 
-### 
+### Writing components
 
 ## Project management
 
