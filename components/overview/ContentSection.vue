@@ -30,9 +30,9 @@ import AppCta from '~/components/ui/AppCta.vue'
   components: { AppCta }
 })
 export default class extends Vue {
-  @Prop(String) title
-  @Prop(String) description
-  @Prop(Object) link
+  @Prop(String) title!: any
+  @Prop(String) description!: any
+  @Prop(Object) link!: any
 }
 </script>
 

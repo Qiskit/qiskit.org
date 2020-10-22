@@ -27,10 +27,10 @@ import AppCta from '~/components/ui/AppCta.vue'
   components: { AppCta }
 })
 export default class extends Vue {
-  @Prop(String) image
-  @Prop(String) title
-  @Prop(String) ctaLabel
-  @Prop(String) to
+  @Prop(String) image!: any
+  @Prop(String) title!: any
+  @Prop(String) ctaLabel!: any
+  @Prop(String) to!: any
 }
 </script>
 

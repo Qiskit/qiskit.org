@@ -23,9 +23,9 @@ import { Component, Prop } from 'vue-property-decorator'
 
 @Component
 export default class extends Vue {
-  @Prop(String) image
-  @Prop(String) title
-  @Prop(String) description
+  @Prop(String) image!: any
+  @Prop(String) title!: any
+  @Prop(String) description!: any
 }
 </script>
 

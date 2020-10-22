@@ -132,7 +132,7 @@ export default class extends QiskitPage {
   ]
 
   cities () {
-    const cityIndex = this.$data.profiles.reduce((cityIndex, card) => {
+    const cityIndex = this.$data.profiles.reduce((cityIndex: any, card: any) => {
       const { location, latitude, longitude } = card.attributes
       cityIndex[location] = { name: location, latitude, longitude }
       return cityIndex
