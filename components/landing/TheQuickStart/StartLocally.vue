@@ -171,11 +171,11 @@ export default class extends Vue {
   }
 
   isActive (choicesGroup: ChoicesGroup, option: string) : boolean {
-    return this.selectedOptions[choicesGroup.id] === option
+    return (this.selectedOptions as any)[choicesGroup.id] === option
   }
 
   selectOption (choicesGroup: ChoicesGroup, selectedOption: string) {
-    this.selectedOptions[choicesGroup.id] = selectedOption
+    (this.selectedOptions as any)[choicesGroup.id] = selectedOption
   }
 }
 </script>

@@ -28,11 +28,11 @@ export default class extends Vue {
     this._observer && this._observer.disconnect()
   }
 
-  beforeRouteEnter (route, _, next) {
-    next(overviewPage => overviewPage._parseSectionFromUrl(route))
+  beforeRouteEnter (route: any, _: any, next: any) {
+    next((overviewPage: any) => overviewPage._parseSectionFromUrl(route))
   }
 
-  beforeRouteUpdate (route, _, next) {
+  beforeRouteUpdate (route: any, _: any, next: any) {
     this._parseSectionFromUrl(route)
     next()
   }
@@ -56,7 +56,7 @@ export default class extends Vue {
     })
   }
 
-  _parseSectionFromUrl (route) {
+  _parseSectionFromUrl (route: any) {
     this.activeSection = route.hash.substr(1)
   }
 }
