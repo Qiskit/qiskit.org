@@ -37,7 +37,7 @@ md.use(miLinkAttributes, {
 })
 
 md.use(miAnchor, {
-  slugify (id) { return uslug(id) }
+  slugify (id: any) { return uslug(id) }
 })
 
 const config: NuxtConfig = {
@@ -149,7 +149,7 @@ const config: NuxtConfig = {
           vue: {
             root: 'content'
           },
-          markdown: (body) => {
+          markdown: (body: any) => {
             return md.render(body)
           }
         }
