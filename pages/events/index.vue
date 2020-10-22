@@ -10,11 +10,35 @@
           </cv-tabs>
         </client-only>
       </div>
+      <div class="event-page__filters-region">
+        <client-only>
+          <cv-multi-select
+            class="event-age__filters-region_dropdown"
+            :theme="`light`"
+            :label="`All locations`"
+            :inline="false"
+            :options="optionsList('regions')"
+            @change="updateRegionsFilter"
+          />
+        </client-only>
+      </div>
+      <div class="event-page__filters-type">
+        <client-only>
+          <cv-multi-select
+            class="event-age__filters-type_dropdown"
+            :theme="`light`"
+            :label="`All types`"
+            :inline="false"
+            :options="optionsList('types')"
+            @change="updateTypesFilter"
+          />
+        </client-only>
+      </div>
       <div class="event-page__event-index">
         <div class="event-page__filters-others">
           <fieldset class="bx--fieldset">
             <legend class="bx--label">
-              Region
+              Location
             </legend>
             <div class="event-page__chrome-columns-fix">
               <client-only>
@@ -161,6 +185,60 @@ export default class extends QiskitPage {
     return (this as any).filteredEvents.length === 0
   }
 
+  get optionsList (): any {
+    return (listType: string) => {
+      return this[listType].map((item) => {
+        return {
+          label: item,
+          value: item,
+          name: item
+        }
+      })
+    }
+  }
+
+  get filteredEventsList (): any {
+    return (this as any).filteredEvents
+  }
+
+  updateRegionsFilter (selectedRegions) {
+    // onChange only ever returns an array of checked items
+    // for each item in array, commit to store
+    const { commit } = this.$store
+
+
+    for (const regionOption of selectedRegions) {
+      console.log('clicked')
+
+      const payload = {
+        filter: 'regionFilters',
+        filterValue: regionOption
+      }
+
+      const isChecked = this.isFilterChecked('regionFilters', regionOption)
+      if (!isChecked) {
+        this.updateFilter('regionFilters', regionOption, true)
+        commit('addFilter', payload)
+      } else {
+        this.updateFilter('regionFilters', regionOption, false)
+        commit('removeFilter', payload)
+      }
+      console.log(this.filteredEventsList, 'this.filteredEventsList')
+    }
+
+  }
+
+  updateTypesFilter (values) {
+    const checkedType = values[values.length - 1] || ''
+    const { commit } = this.$store
+
+    const payload = {
+      filter: 'typeFilters',
+      filterValue: checkedType
+    }
+    commit('addFilter', payload)
+  }
+
   isFilterChecked (filter: string, filterValue: string): Array<CommunityEvent> {
     const typeFilters = (this as any).typeFilters
     const regionFilters = (this as any).regionFilters
@@ -225,6 +303,7 @@ export default class extends QiskitPage {
     }
 
     @include mq($until: medium) {
+      margin-bottom: 0;
       .bx--tabs-trigger {
         background-color: $white;
       }
@@ -259,7 +338,7 @@ export default class extends QiskitPage {
       }
 
       .bx--tabs__nav-item:hover:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled) {
-        background-color: $cool-gray-20;
+        background-color: $cool-gray-10;
         box-shadow: initial;
       }
     }
@@ -276,6 +355,83 @@ export default class extends QiskitPage {
 
     .bx--label {
       color: $cool-gray-80;
+    }
+
+    @include mq($until: medium) {
+      display: none;
+    }
+
+  }
+
+  &__filters-region,
+  &__filters-type {
+    @include mq($from: medium) {
+      display: none;
+    }
+
+    .bx--list-box--light,
+    .bx--list-box__menu {
+      background-color: $white;
+      border-bottom-color: $gray-20;
+    }
+
+    .bx--list-box__label,
+    .bx--list-box__menu-item,
+    .bx--list-box__menu-item--highlighted .bx--list-box__menu-item__option,
+    .bx--list-box__menu-item__option {
+      color: $white-text-01;
+    }
+
+    .bx--list-box__menu-item {
+      background-color: $cool-gray-10;
+      color: $white-text-01;
+    }
+
+    .bx--list-box__menu-icon > svg {
+      fill: $black-100;
+    }
+
+    .bx--list-box--expanded:hover.bx--list-box--light:hover {
+      background-color: $cool-gray-20;
+      box-shadow: initial;
+    }
+
+    .bx--checkbox-label::before {
+      border: 1px solid $black-100;
+    }
+
+    .bx--list-box__menu-item--highlighted {
+      background-color: $cool-gray-20;
+    }
+
+    .bx--tag--filter {
+      background-color: $purple-70;
+      color: $white;
+    }
+
+    .bx--tag--high-contrast .bx--tag__close-icon:hover {
+      background-color: $purple-70;
+    }
+
+    .bx--checkbox:checked + .bx--checkbox-label::before {
+      background-color: $black-100;
+      border-color: $black-100;
+      border-width: 1px;
+    }
+
+    .bx--checkbox:checked + .bx--checkbox-label::after {
+      border-left: 2px solid $white;
+      border-bottom: 2px solid $white;
+    }
+
+    .bx--list-box__menu-item:hover .bx--list-box__menu-item__option {
+      color: $black-100;
+    }
+  }
+
+  &__filters-type {
+    @include mq($until: medium) {
+      margin-bottom: $layout-04;
     }
   }
 
