@@ -7,7 +7,10 @@
         </h1>
       </div>
     </header>
+    <!-- TODO: We should migrate to nuxt-content and get rid of this. -->
+    <!-- eslint-disable vue/no-v-html -->
     <main class="learn-entry__content" v-html="pageContent.html" />
+    <!-- eslint-enable -->
   </div>
 </template>
 
