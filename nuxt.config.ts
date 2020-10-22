@@ -1,3 +1,5 @@
+/// <reference path="types/index.d.ts" />
+
 import path from 'path'
 import fs from 'fs'
 import consola from 'consola'
@@ -8,11 +10,16 @@ import miAnchor from 'markdown-it-anchor'
 import uslug from 'uslug'
 import Mode from 'frontmatter-markdown-loader/mode'
 
-import { Configuration } from '@nuxt/types'
+import { NuxtConfig } from '@nuxt/types'
 import pkg from './package.json'
 import fetchEvents from './hooks/update-events'
 
-const { NODE_ENV, ENABLE_ANALYTICS, GENERATE_CONTENT, AIRTABLE_API_KEY } = process.env
+const {
+  NODE_ENV,
+  ENABLE_ANALYTICS,
+  GENERATE_CONTENT,
+  AIRTABLE_API_KEY
+} = process.env
 
 const IS_PRODUCTION = NODE_ENV === 'production'
 
@@ -20,6 +27,7 @@ const md = markdownIt({
   linkify: true,
   html: true
 })
+
 md.use(miLinkAttributes, {
   pattern: /^https?:/,
   attrs: {
@@ -27,11 +35,12 @@ md.use(miLinkAttributes, {
     rel: 'noopener'
   }
 })
+
 md.use(miAnchor, {
   slugify (id) { return uslug(id) }
 })
 
-const config: Configuration = {
+const config: NuxtConfig = {
   mode: 'universal',
   env: {
     analyticsScriptUrl: IS_PRODUCTION
