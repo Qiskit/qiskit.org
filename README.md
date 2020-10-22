@@ -172,7 +172,9 @@ the scroll when navigating.
 
 15. **`/tests`**: Unit tests made with Jest
 
-16. **`nuxt-config.js`**: This is the main configuration file for a Nuxt site. You can find information at [Nuxt's config documentation](https://nuxtjs.org/guide/configuration)
+16. **`/types`**: Additional types for non-typed libraries or global definitions.
+
+17. **`nuxt-config.js`**: This is the main configuration file for a Nuxt site. You can find information at [Nuxt's config documentation](https://nuxtjs.org/guide/configuration)
 
 ## ✏️ How to Contribute
 
