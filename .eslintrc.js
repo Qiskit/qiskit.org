@@ -1,16 +1,13 @@
 module.exports = {
-  plugins: ['@typescript-eslint'],
-  parserOptions: {
-    parser: '@typescript-eslint/parser'
-  },
   extends: [
-    '@nuxtjs'
+    '@nuxtjs/eslint-config-typescript'
   ],
   rules: {
-    // TODO: Remove when fixing:
+    // TODO: Per recommendation here:
     // https://github.com/typescript-eslint/typescript-eslint/issues/342
-    // More info:
-    // https://github.com/typescript-eslint/typescript-eslint/issues/342#issuecomment-484739065
+    // The repo seems to indicate this is solved but updating to the latest
+    // version does not solve it:
+    // https://github.com/typescript-eslint/typescript-eslint/issues/1856
     'no-undef': 'off',
     '@typescript-eslint/no-unused-vars': ['error', {
       "argsIgnorePattern": "^_"
