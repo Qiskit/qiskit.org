@@ -130,14 +130,30 @@ export default {
     addFilter (state, payload) {
       const { filter, filterValue } = payload
 
-      console.log(payload, 'payload')
-
       const filterIndex = state[filter].indexOf(filterValue)
       const noFilterFound = filterIndex === -1
 
       noFilterFound && state[filter].push(filterValue)
+    },
+    addFilterSet (state, payload) {
+      const { filter, filterValues } = payload
 
-      console.log(state[filter], 'STATE filter')
+      for (const item in filterValues) {
+        const regionOption = filterValues[item]
+        const filterIndex = state[filter].indexOf(regionOption)
+        const noFilterFound = filterIndex === -1
+
+        if (noFilterFound) {
+          console.log(regionOption, ' not found, ADDING')
+          state[filter].push(regionOption)
+        } else {
+          console.log(regionOption, ' found, REMOVING')
+          state[filter].splice(filterIndex, 1)
+        }
+
+      }
+
+      console.log(state[filter], 'filter')
     },
     removeFilter (state, payload) {
       const { filter, filterValue } = payload

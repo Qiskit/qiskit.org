@@ -18,7 +18,7 @@
             :label="`All locations`"
             :inline="false"
             :options="optionsList('regions')"
-            @change="updateRegionsFilter"
+            @change="updateRegionFilters"
           />
         </client-only>
       </div>
@@ -30,7 +30,6 @@
             :label="`All types`"
             :inline="false"
             :options="optionsList('types')"
-            @change="updateTypesFilter"
           />
         </client-only>
       </div>
@@ -201,42 +200,16 @@ export default class extends QiskitPage {
     return (this as any).filteredEvents
   }
 
-  updateRegionsFilter (selectedRegions) {
-    // onChange only ever returns an array of checked items
-    // for each item in array, commit to store
+  updateRegionFilters (selectedRegions) {
     const { commit } = this.$store
-
-
-    for (const regionOption of selectedRegions) {
-      console.log('clicked')
-
-      const payload = {
-        filter: 'regionFilters',
-        filterValue: regionOption
-      }
-
-      const isChecked = this.isFilterChecked('regionFilters', regionOption)
-      if (!isChecked) {
-        this.updateFilter('regionFilters', regionOption, true)
-        commit('addFilter', payload)
-      } else {
-        this.updateFilter('regionFilters', regionOption, false)
-        commit('removeFilter', payload)
-      }
-      console.log(this.filteredEventsList, 'this.filteredEventsList')
-    }
-
-  }
-
-  updateTypesFilter (values) {
-    const checkedType = values[values.length - 1] || ''
-    const { commit } = this.$store
-
     const payload = {
-      filter: 'typeFilters',
-      filterValue: checkedType
+      filter: 'regionFilters',
+      filterValues: selectedRegions
     }
-    commit('addFilter', payload)
+
+    console.log('something changed: ', selectedRegions)
+
+    commit('addFilterSet', payload)
   }
 
   isFilterChecked (filter: string, filterValue: string): Array<CommunityEvent> {
