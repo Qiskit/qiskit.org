@@ -14,10 +14,11 @@
         <client-only>
           <cv-multi-select
             class="event-age__filters-region_dropdown"
-            :theme="`light`"
-            :label="`All locations`"
+            :theme="'light'"
+            :label="'All locations'"
             :inline="false"
             :options="optionsList('regions')"
+            :selection-feedback="'fixed'"
             @change="updateRegionFilters"
           />
         </client-only>
@@ -26,10 +27,11 @@
         <client-only>
           <cv-multi-select
             class="event-age__filters-type_dropdown"
-            :theme="`light`"
-            :label="`All types`"
+            :theme="'light'"
+            :label="'All types'"
             :inline="false"
             :options="optionsList('types')"
+            :selection-feedback="'fixed'"
             @change="updateTypeFilters"
           />
         </client-only>
