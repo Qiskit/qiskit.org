@@ -199,10 +199,6 @@ export default class extends QiskitPage {
     }
   }
 
-  get filteredEventsList (): any {
-    return (this as any).filteredEvents
-  }
-
   updateRegionFilters (selectedRegions) {
     const { commit } = this.$store
     const payload = {
