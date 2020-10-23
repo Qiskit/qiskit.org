@@ -8,7 +8,11 @@
         class="feature-card__image"
         :lazy-background="image"
       />
+      <!-- TODO: HTML content should not be in strings but in components
+      but lacking of a better solution given time constraints. -->
+      <!-- eslint-disable vue/no-v-html -->
       <div class="feature-card__description" v-html="description" />
+      <!-- eslint-enable -->
     </div>
   </article>
 </template>
