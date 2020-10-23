@@ -129,7 +129,6 @@ export default {
     },
     addFilter (state, payload) {
       const { filter, filterValue } = payload
-
       const filterIndex = state[filter].indexOf(filterValue)
       const noFilterFound = filterIndex === -1
 
