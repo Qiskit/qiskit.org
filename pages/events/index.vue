@@ -311,17 +311,12 @@ export default class extends QiskitPage {
         background-color: $cool-gray-10;
       }
 
-      .bx--tabs__nav {
-        box-shadow: initial;
-      }
-
       .bx--tabs__nav-item:last-child .bx--tabs__nav-link {
         border-bottom: none;
       }
 
       .bx--tabs__nav-item:hover:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled) {
         background-color: $cool-gray-10;
-        box-shadow: initial;
       }
     }
   }
@@ -375,7 +370,6 @@ export default class extends QiskitPage {
 
     .bx--list-box--expanded:hover.bx--list-box--light:hover {
       background-color: $cool-gray-20;
-      box-shadow: initial;
     }
 
     .bx--checkbox-label::before {
