@@ -30,6 +30,7 @@
             :label="`All types`"
             :inline="false"
             :options="optionsList('types')"
+            @change="updateTypeFilters"
           />
         </client-only>
       </div>
@@ -207,7 +208,17 @@ export default class extends QiskitPage {
       filterValues: selectedRegions
     }
 
-    commit('addFilterSet', payload)
+    commit('updateFilterSet', payload)
+  }
+
+  updateTypeFilters (selectedRegions) {
+    const { commit } = this.$store
+    const payload = {
+      filter: 'typeFilters',
+      filterValues: selectedRegions
+    }
+
+    commit('updateFilterSet', payload)
   }
 
   isFilterChecked (filter: string, filterValue: string): Array<CommunityEvent> {
