@@ -207,8 +207,6 @@ export default class extends QiskitPage {
       filterValues: selectedRegions
     }
 
-    console.log('something changed: ', selectedRegions)
-
     commit('addFilterSet', payload)
   }
 

@@ -144,16 +144,11 @@ export default {
         const noFilterFound = filterIndex === -1
 
         if (noFilterFound) {
-          console.log(regionOption, ' not found, ADDING')
           state[filter].push(regionOption)
         } else {
-          console.log(regionOption, ' found, REMOVING')
           state[filter].splice(filterIndex, 1)
         }
-
       }
-
-      console.log(state[filter], 'filter')
     },
     removeFilter (state, payload) {
       const { filter, filterValue } = payload
