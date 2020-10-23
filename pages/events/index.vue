@@ -277,7 +277,7 @@ export default class extends QiskitPage {
 
     .bx--tabs__nav-item:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link,
     .bx--tabs__nav-item:hover:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link {
-      color: $cool-gray-80;
+      color: $gray-100;
     }
 
     .bx--tabs__nav-item--selected:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link {
@@ -288,10 +288,11 @@ export default class extends QiskitPage {
       margin-bottom: 0;
       .bx--tabs-trigger {
         background-color: $white;
-      }
-
-      .bx--tabs-trigger {
         border-bottom: 1px solid $gray-20;
+
+        &[class*="--open"] {
+          background-color: $cool-gray-10;
+        }
       }
 
       .bx--tabs-trigger svg {
@@ -316,7 +317,7 @@ export default class extends QiskitPage {
       }
 
       .bx--tabs__nav-item:hover:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled) {
-        background-color: $cool-gray-10;
+        background-color: $cool-gray-20;
       }
     }
   }
@@ -369,7 +370,7 @@ export default class extends QiskitPage {
     }
 
     .bx--list-box--expanded:hover.bx--list-box--light:hover {
-      background-color: $cool-gray-20;
+      background-color: $cool-gray-10;
     }
 
     .bx--checkbox-label::before {
