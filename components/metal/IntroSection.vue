@@ -46,6 +46,16 @@ export default class extends Vue {
 @import '~carbon-components/scss/globals/scss/typography';
 
 .intro-section {
+  position: relative;
+  margin-top: -18.5rem;
+
+  @include mq($until: large) {
+    margin-top: -8rem;
+  }
+  @include mq($until: medium) {
+    margin-top: -5rem;
+  }
+  
   &__container {
     @include contained();
     padding-top: $layout-05;
@@ -54,6 +64,7 @@ export default class extends Vue {
 
   &__title {
     @include type-style('expressive-heading-05');
+    max-width: 500px;
     margin-bottom: $layout-03;
     font-weight: 300;
 
