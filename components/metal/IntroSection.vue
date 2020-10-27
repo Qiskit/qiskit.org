@@ -64,7 +64,7 @@ export default class extends Vue {
 
   &__title {
     @include type-style('expressive-heading-05');
-    max-width: 500px;
+    max-width: 32rem;
     margin-bottom: $layout-03;
     font-weight: 300;
 
