@@ -17,7 +17,7 @@
             :theme="'light'"
             :label="'All locations'"
             :inline="false"
-            :options="optionsList('regions')"
+            :options="getOptions('regions')"
             :selection-feedback="'fixed'"
             @change="updateRegionFilters"
           />
@@ -30,7 +30,7 @@
             :theme="'light'"
             :label="'All types'"
             :inline="false"
-            :options="optionsList('types')"
+            :options="getOptions('types')"
             :selection-feedback="'fixed'"
             @change="updateTypeFilters"
           />
@@ -187,16 +187,14 @@ export default class extends QiskitPage {
     return (this as any).filteredEvents.length === 0
   }
 
-  get optionsList (): any {
-    return (listType: string) => {
-      return this[listType].map((item) => {
-        return {
-          label: item,
-          value: item,
-          name: item
-        }
-      })
-    }
+  getOptions (type) {
+    return this[type].map((item) => {
+      return {
+        label: item,
+        value: item,
+        name: item
+      }
+    })
   }
 
   updateRegionFilters (selectedRegions) {
