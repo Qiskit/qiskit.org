@@ -19,7 +19,7 @@
             :inline="false"
             :options="getOptions('regions')"
             :selection-feedback="'fixed'"
-            @change="updateRegionFilters"
+            @change="options => updateFilters('regionFilters', options)"
           />
         </client-only>
       </div>
@@ -32,7 +32,7 @@
             :inline="false"
             :options="getOptions('types')"
             :selection-feedback="'fixed'"
-            @change="updateTypeFilters"
+            @change="options => updateFilters('typeFilters', options)"
           />
         </client-only>
       </div>
@@ -197,21 +197,11 @@ export default class extends QiskitPage {
     })
   }
 
-  updateRegionFilters (selectedRegions) {
+  updateFilters (filter: string, filterValues: object) {
     const { commit } = this.$store
     const payload = {
-      filter: 'regionFilters',
-      filterValues: selectedRegions
-    }
-
-    commit('updateFilterSet', payload)
-  }
-
-  updateTypeFilters (selectedRegions) {
-    const { commit } = this.$store
-    const payload = {
-      filter: 'typeFilters',
-      filterValues: selectedRegions
+      filter,
+      filterValues
     }
 
     commit('updateFilterSet', payload)
