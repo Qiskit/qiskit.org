@@ -55,7 +55,7 @@ export default class extends Vue {
   @include mq($until: medium) {
     margin-top: -5rem;
   }
-  
+
   &__container {
     @include contained();
     padding-top: $layout-05;
