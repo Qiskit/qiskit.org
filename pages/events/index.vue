@@ -17,7 +17,7 @@
             :theme="theme"
             :label="labelRegions"
             :inline="inline"
-            :options="getOptions('regions')"
+            :options="regionOptions"
             :selection-feedback="feedback"
             @change="selectedOptions => updateWholeFilter('regionFilters', selectedOptions)"
           />
@@ -30,7 +30,7 @@
             :theme="theme"
             :label="labelTypes"
             :inline="inline"
-            :options="getOptions('types')"
+            :options="typeOptions"
             :selection-feedback="feedback"
             @change="selectedOptions => updateWholeFilter('typeFilters', selectedOptions)"
           />
@@ -184,6 +184,8 @@ export default class extends QiskitPage {
   }
 
   // multiselect
+  regionOptions = this.getOptions(this.regions)
+  typeOptions = this.getOptions(this.types)
   theme: string = 'light'
   labelRegions: string = 'All locations'
   labelTypes: string = 'All types'
@@ -194,8 +196,8 @@ export default class extends QiskitPage {
     return (this as any).filteredEvents.length === 0
   }
 
-  getOptions (type) {
-    return this[type].map((item) => {
+  getOptions (optionsList) {
+    return optionsList.map((item) => {
       return {
         label: item,
         value: item,
