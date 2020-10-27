@@ -13,12 +13,12 @@
       <div class="event-page__filters-region">
         <client-only>
           <cv-multi-select
-            class="event-age__filters-region_dropdown"
+            class="event-page__filters-region_dropdown"
             :theme="theme"
             :label="labelRegions"
             :inline="inline"
             :options="getOptions('regions')"
-            :selection-feedback="multiSelectFeedback"
+            :selection-feedback="feedback"
             @change="selectedOptions => updateWholeFilter('regionFilters', selectedOptions)"
           />
         </client-only>
@@ -26,7 +26,7 @@
       <div class="event-page__filters-type">
         <client-only>
           <cv-multi-select
-            class="event-age__filters-type_dropdown"
+            class="event-page__filters-type_dropdown"
             :theme="theme"
             :label="labelTypes"
             :inline="inline"
