@@ -95,13 +95,8 @@ export default class extends Mixins(ScrollSectionsMixin) {
 
   &__container {
     @include contained();
-    padding-top: 10rem;
-    padding-bottom: $layout-06;
-
-    @include mq($until: medium) {
-      padding-top: $layout-05;
-      padding-bottom: $layout-04;
-    }
+    padding-top: $layout-05;
+    padding-bottom: $layout-04;
   }
 
   &__capabilities {
