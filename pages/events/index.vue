@@ -14,12 +14,12 @@
         <client-only>
           <cv-multi-select
             class="event-age__filters-region_dropdown"
-            :theme="'light'"
-            :label="'All locations'"
-            :inline="false"
+            :theme="theme"
+            :label="labelRegions"
+            :inline="inline"
             :options="getOptions('regions')"
-            :selection-feedback="'fixed'"
-            @change="options => updateFilters('regionFilters', options)"
+            :selection-feedback="multiSelectFeedback"
+            @change="selectedOptions => updateWholeFilter('regionFilters', selectedOptions)"
           />
         </client-only>
       </div>
@@ -27,12 +27,12 @@
         <client-only>
           <cv-multi-select
             class="event-age__filters-type_dropdown"
-            :theme="'light'"
-            :label="'All types'"
-            :inline="false"
+            :theme="theme"
+            :label="labelTypes"
+            :inline="inline"
             :options="getOptions('types')"
-            :selection-feedback="'fixed'"
-            @change="options => updateFilters('typeFilters', options)"
+            :selection-feedback="feedback"
+            @change="selectedOptions => updateWholeFilter('typeFilters', selectedOptions)"
           />
         </client-only>
       </div>
@@ -183,6 +183,13 @@ export default class extends QiskitPage {
     img: '/images/events/no-events.svg'
   }
 
+  // multiselect
+  theme: string = 'light'
+  labelRegions: string = 'All locations'
+  labelTypes: string = 'All types'
+  inline: boolean = false
+  feedback: string = 'fixed'
+
   get noEvents (): boolean {
     return (this as any).filteredEvents.length === 0
   }
@@ -197,7 +204,7 @@ export default class extends QiskitPage {
     })
   }
 
-  updateFilters (filter: string, filterValues: object) {
+  updateWholeFilter (filter: string, filterValues: object) {
     const { commit } = this.$store
     const payload = {
       filter,
