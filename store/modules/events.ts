@@ -43,6 +43,12 @@ type CommunityEvent = {
   to: string
 }
 
+type EventOption = {
+  label: string,
+  value: string,
+  name: string
+}
+
 const WORLD_REGION_OPTIONS = Object.freeze([
   WORLD_REGIONS.americas,
   WORLD_REGIONS.asiaPacific,
@@ -66,7 +72,8 @@ export {
   COMMUNITY_EVENT_TYPES,
   WORLD_REGIONS,
   WORLD_REGION_OPTIONS,
-  COMMUNITY_EVENT_TYPE_OPTIONS
+  COMMUNITY_EVENT_TYPE_OPTIONS,
+  EventOption
 }
 
 export default {
