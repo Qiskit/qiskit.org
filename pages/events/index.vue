@@ -193,7 +193,7 @@ export default class extends QiskitPage {
     return (this as any).filteredEvents.length === 0
   }
 
-  getOptions (optionsList: string[]) {
+  getOptions (optionsList) {
     return optionsList.map(item => ({ label: item, value: item, name: item }))
   }
 
