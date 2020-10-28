@@ -16,7 +16,6 @@
             class="event-page__filters-region_dropdown"
             :theme="theme"
             :label="labelRegions"
-            :inline="inline"
             :options="regionOptions"
             :selection-feedback="feedback"
             @change="selectedOptions => updateWholeFilter('regionFilters', selectedOptions)"
@@ -29,7 +28,6 @@
             class="event-page__filters-type_dropdown"
             :theme="theme"
             :label="labelTypes"
-            :inline="inline"
             :options="typeOptions"
             :selection-feedback="feedback"
             @change="selectedOptions => updateWholeFilter('typeFilters', selectedOptions)"
@@ -189,24 +187,17 @@ export default class extends QiskitPage {
   theme: string = 'light'
   labelRegions: string = 'All locations'
   labelTypes: string = 'All types'
-  inline: boolean = false
   feedback: string = 'fixed'
 
   get noEvents (): boolean {
     return (this as any).filteredEvents.length === 0
   }
 
-  getOptions (optionsList) {
-    return optionsList.map((item) => {
-      return {
-        label: item,
-        value: item,
-        name: item
-      }
-    })
+  getOptions (optionsList: string[]) {
+    return optionsList.map(item => ({ label: item, value: item, name: item }))
   }
 
-  updateWholeFilter (filter: string, filterValues: object) {
+  updateWholeFilter (filter: string, filterValues: string[]): void {
     const { commit } = this.$store
     const payload = {
       filter,
