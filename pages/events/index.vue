@@ -16,6 +16,7 @@
             :theme="theme"
             :label="labelRegions"
             :options="regionOptions"
+            :value="getCheckedFilters('regionFilters')"
             :selection-feedback="feedback"
             @change="selectedOptions => updateWholeFilter('regionFilters', selectedOptions)"
           />
@@ -27,6 +28,7 @@
             :theme="theme"
             :label="labelTypes"
             :options="typeOptions"
+            :value="getCheckedFilters('typeFilters')"
             :selection-feedback="feedback"
             @change="selectedOptions => updateWholeFilter('typeFilters', selectedOptions)"
           />
@@ -193,6 +195,10 @@ export default class extends QiskitPage {
 
   getOptions (optionsList): Array<object> {
     return optionsList.map(item => ({ label: item, value: item, name: item }))
+  }
+
+  getCheckedFilters (filter) {
+    return (this as any)[filter]
   }
 
   updateWholeFilter (filter: string, filterValues: string[]): void {
