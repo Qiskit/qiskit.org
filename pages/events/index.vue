@@ -13,7 +13,6 @@
       <div class="event-page__filters-region">
         <client-only>
           <cv-multi-select
-            class="event-page__filters-region_dropdown"
             :theme="theme"
             :label="labelRegions"
             :options="regionOptions"
@@ -25,7 +24,6 @@
       <div class="event-page__filters-type">
         <client-only>
           <cv-multi-select
-            class="event-page__filters-type_dropdown"
             :theme="theme"
             :label="labelTypes"
             :options="typeOptions"
