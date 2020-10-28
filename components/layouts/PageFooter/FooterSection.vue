@@ -33,9 +33,9 @@ import AppLink from '~/components/ui/AppLink.vue'
   components: { AppLink }
 })
 export default class extends Vue {
-  @Prop(String) title
-  @Prop(Array) elements
-  @Prop({ type: Boolean, default: false }) iconsOnly
+  @Prop(String) title!: any
+  @Prop(Array) elements!: any
+  @Prop({ type: Boolean, default: false }) iconsOnly!: any
   @Prop({ type: String, default: 'light' }) theme!: string
 }
 </script>

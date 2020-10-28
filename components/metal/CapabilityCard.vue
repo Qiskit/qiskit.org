@@ -38,9 +38,9 @@ import { Component, Prop } from 'vue-property-decorator'
 
 @Component
 export default class extends Vue {
-  @Prop(String) visualResource
-  @Prop(String) title
-  @Prop(String) description
+  @Prop(String) visualResource!: any
+  @Prop(String) title!: any
+  @Prop(String) description!: any
 
   isVideo (): boolean {
     const extension = this.visualResource.substring(this.visualResource.length - 4)

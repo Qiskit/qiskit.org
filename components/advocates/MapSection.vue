@@ -33,7 +33,7 @@ import { Component, Prop } from 'vue-property-decorator'
         borderWidth: 0,
         highlightBorderWidth: 0,
         highlightFillColor: 'var(--bubble-color)',
-        popupTemplate (_, data) {
+        popupTemplate (_: any, data: any) {
           return `<div class="map-tip">${data.name}</div>`
         }
       },
@@ -42,7 +42,7 @@ import { Component, Prop } from 'vue-property-decorator'
         this.element.style.paddingBottom = '60%'
       }
     })
-    const advocateLocations = this.$props.points.map((location) => {
+    const advocateLocations = this.$props.points.map((location: any) => {
       return { ...location, fillKey: 'city', radius: 5 }
     })
     map.bubbles(advocateLocations)
@@ -54,8 +54,8 @@ import { Component, Prop } from 'vue-property-decorator'
   }
 })
 export default class extends Vue {
-  @Prop({ type: String, default: 'end' }) extraPosition
-  @Prop(Array) points
+  @Prop({ type: String, default: 'end' }) extraPosition!: any
+  @Prop(Array) points!: any
 }
 </script>
 

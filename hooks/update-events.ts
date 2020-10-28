@@ -3,7 +3,7 @@ import util from 'util'
 
 import { fetchCommunityEvents } from './event-conversion-utils'
 
-export default async function (apiKey, outputFolder: string) {
+export default async function (apiKey: any, outputFolder: string) {
   const upcomingCommunityEvents = await fetchCommunityEvents(apiKey, { days: 31 })
   const pastCommunityEvents = await fetchCommunityEvents(apiKey, { days: -31 })
 

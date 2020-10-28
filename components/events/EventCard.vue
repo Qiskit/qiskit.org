@@ -51,12 +51,12 @@ import AppLink from '~/components/ui/AppLink.vue'
   components: { AppLink }
 })
 export default class extends Vue {
-  @Prop(String) type
-  @Prop(String) title
-  @Prop(String) image
-  @Prop(String) location
-  @Prop(String) date
-  @Prop(String) to
+  @Prop(String) type!: any
+  @Prop(String) title!: any
+  @Prop(String) image!: any
+  @Prop(String) location!: any
+  @Prop(String) date!: any
+  @Prop(String) to!: any
 
   hasWebsite: boolean = !!this.to
 }
