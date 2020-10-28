@@ -203,10 +203,7 @@ export default class extends QiskitPage {
 
   updateWholeFilter (filter: string, filterValues: string[]): void {
     const { commit } = this.$store
-    const payload = {
-      filter,
-      filterValues
-    }
+    const payload = { filter, filterValues }
 
     commit('updateFilterSet', payload)
   }
