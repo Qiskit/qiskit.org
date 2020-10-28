@@ -186,8 +186,8 @@ export default class extends QiskitPage {
   regionOptions = this.getOptions(this.regions)
   typeOptions = this.getOptions(this.types)
   theme: string = 'light'
-  labelRegions: string = 'All locations'
-  labelTypes: string = 'All types'
+  labelRegions: string = 'Locations'
+  labelTypes: string = 'Types'
   feedback: string = 'fixed'
 
   get noEvents (): boolean {
