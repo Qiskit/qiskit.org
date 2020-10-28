@@ -26,7 +26,7 @@ import AppLink from '~/components/ui/AppLink.vue'
   components: { AppLink }
 })
 export default class extends Vue {
-  @Prop({ type: Array, default: [] }) sections
+  @Prop({ type: Array, default: [] }) sections!: any
 }
 </script>
 

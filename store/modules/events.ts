@@ -80,13 +80,13 @@ export default {
     }
   },
   getters: {
-    typeFilters (state) {
+    typeFilters (state: any) {
       return state.typeFilters
     },
-    regionFilters (state) {
+    regionFilters (state: any) {
       return state.regionFilters
     },
-    filteredEvents (state) {
+    filteredEvents (state: any) {
       const {
         activeSet,
         upcomingCommunityEvents,
@@ -119,22 +119,22 @@ export default {
     }
   },
   mutations: {
-    setEvents (state, payload) {
+    setEvents (state: any, payload: any) {
       const { events, eventsSet } = payload
 
       state[events] = eventsSet
     },
-    setActiveSet (state, payload: CommunityEventSet) {
+    setActiveSet (state: any, payload: CommunityEventSet) {
       state.activeSet = payload
     },
-    addFilter (state, payload) {
+    addFilter (state: any, payload: any) {
       const { filter, filterValue } = payload
       const filterIndex = state[filter].indexOf(filterValue)
       const noFilterFound = filterIndex === -1
 
       noFilterFound && state[filter].push(filterValue)
     },
-    removeFilter (state, payload) {
+    removeFilter (state: any, payload: any) {
       const { filter, filterValue } = payload
       const filterIndex = state[filter].indexOf(filterValue)
       const isFilterFound = filterIndex !== -1
