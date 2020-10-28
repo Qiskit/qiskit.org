@@ -128,7 +128,7 @@ import {
   CommunityEvent,
   WORLD_REGION_OPTIONS,
   COMMUNITY_EVENT_TYPE_OPTIONS,
-  EventOption
+  EventMultiSelectOption
 } from '~/store/modules/events.ts'
 import { EVENT_REQUEST_LINK } from '~/constants/appLinks'
 
@@ -194,7 +194,7 @@ export default class extends QiskitPage {
     return (this as any).filteredEvents.length === 0
   }
 
-  getOptions (optionsList): Array<EventOption> {
+  getOptions (optionsList): Array<EventMultiSelectOption> {
     return optionsList.map(item => ({ label: item, value: item, name: item }))
   }
 

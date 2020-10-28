@@ -43,7 +43,7 @@ type CommunityEvent = {
   to: string
 }
 
-type EventOption = {
+type EventMultiSelectOption = {
   label: string,
   value: string,
   name: string
@@ -73,7 +73,7 @@ export {
   WORLD_REGIONS,
   WORLD_REGION_OPTIONS,
   COMMUNITY_EVENT_TYPE_OPTIONS,
-  EventOption
+  EventMultiSelectOption
 }
 
 export default {
