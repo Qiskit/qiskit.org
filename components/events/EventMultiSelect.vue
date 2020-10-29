@@ -1,6 +1,6 @@
 <template>
   <cv-multi-select
-    class="event-dropdown"
+    class="event-multi-select"
     :theme="theme"
     :label="label"
     :options="options"
@@ -20,7 +20,6 @@ export default class extends Vue {
   @Prop(String) filterType
   @Prop(String) label
 
-  // multiselect
   theme: string = 'light'
   feedback: string = 'fixed'
 
@@ -34,7 +33,7 @@ export default class extends Vue {
 </script>
 
 <style lang="scss">
-  .event-dropdown {
+  .event-multi-select {
     @include mq($from: medium) {
       display: none;
     }
