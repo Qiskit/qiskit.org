@@ -97,7 +97,8 @@ describe('module events', () => {
         filter: 'regionFilters',
         filterValue: 'Africa'
       })
-      expect(store.getters.filteredEvents).toEqual([campInAfrica])
+      expect(store.getters.regionFilters).toEqual(['Africa'])
+
       // update entire active-set
       store.commit('updateFilterSet', {
         filter: 'regionFilters',
