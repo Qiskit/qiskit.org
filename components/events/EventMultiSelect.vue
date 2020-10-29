@@ -1,0 +1,100 @@
+<template>
+  <cv-multi-select
+    class="event-multi-select"
+    :theme="theme"
+    :label="label"
+    :options="options"
+    :selection-feedback="feedback"
+    @change="selectedOptions => updateWholeFilter(filterType, selectedOptions)"
+  />
+</template>
+
+<script lang="ts">
+import Vue from 'vue'
+import { Component, Prop } from 'vue-property-decorator'
+
+@Component({})
+
+export default class extends Vue {
+  @Prop(Array) options
+  @Prop(String) filterType
+  @Prop(String) label
+
+  // multiselect
+  theme: string = 'light'
+  feedback: string = 'fixed'
+
+  updateWholeFilter (filter: string, filterValues: string[]): void {
+    const { commit } = this.$store
+    const payload = { filter, filterValues }
+
+    commit('updateFilterSet', payload)
+  }
+}
+</script>
+
+<style lang="scss">
+  .event-multi-select {
+    @include mq($from: medium) {
+      display: none;
+    }
+
+    & .bx--list-box--light,
+    & .bx--list-box__menu {
+      background-color: $white;
+      border-bottom-color: $gray-20;
+    }
+
+    .bx--list-box__label,
+    .bx--list-box__menu-item,
+    .bx--list-box__menu-item--highlighted .bx--list-box__menu-item__option,
+    .bx--list-box__menu-item__option {
+      color: $white-text-01;
+    }
+
+    .bx--list-box__menu-item {
+      background-color: $cool-gray-10;
+      color: $white-text-01;
+    }
+
+    .bx--list-box__menu-icon > svg {
+      fill: $black-100;
+    }
+
+    .bx--list-box--expanded:hover.bx--list-box--light:hover {
+      background-color: $cool-gray-10;
+    }
+
+    .bx--checkbox-label::before {
+      border: 1px solid $black-100;
+    }
+
+    .bx--list-box__menu-item--highlighted {
+      background-color: $cool-gray-20;
+    }
+
+    .bx--tag--filter {
+      background-color: $purple-70;
+      color: $white;
+    }
+
+    .bx--tag--high-contrast .bx--tag__close-icon:hover {
+      background-color: $purple-70;
+    }
+
+    .bx--checkbox:checked + .bx--checkbox-label::before {
+      background-color: $black-100;
+      border-color: $black-100;
+      border-width: 1px;
+    }
+
+    .bx--checkbox:checked + .bx--checkbox-label::after {
+      border-left: 2px solid $white;
+      border-bottom: 2px solid $white;
+    }
+
+    .bx--list-box__menu-item:hover .bx--list-box__menu-item__option {
+      color: $black-100;
+    }
+  }
+</style>
