@@ -12,26 +12,27 @@
       </div>
       <div class="event-page__filters-region">
         <client-only>
-          <cv-multi-select
+          <!-- <cv-multi-select
             :theme="theme"
             :label="labelRegions"
             :options="regionOptions"
             :value="getCheckedFilters('regionFilters')"
             :selection-feedback="feedback"
             @change="selectedOptions => updateWholeFilter('regionFilters', selectedOptions)"
-          />
+          /> -->
+          <EventDropdown />
         </client-only>
       </div>
       <div class="event-page__filters-type">
         <client-only>
-          <cv-multi-select
+          <!-- <cv-multi-select
             :theme="theme"
             :label="labelTypes"
             :options="typeOptions"
             :value="getCheckedFilters('typeFilters')"
             :selection-feedback="feedback"
             @change="selectedOptions => updateWholeFilter('typeFilters', selectedOptions)"
-          />
+          /> -->
         </client-only>
       </div>
       <div class="event-page__event-index">
@@ -123,6 +124,7 @@ import AppCard from '~/components/ui/AppCard.vue'
 import TheEventsHeader from '~/components/events/TheEventsHeader.vue'
 import AppCta from '~/components/ui/AppCta.vue'
 import LandingCta from '~/components/landing/LandingCta.vue'
+import EventDropdown from '~/components/events/EventDropdown.vue'
 
 import {
   CommunityEvent,
@@ -138,7 +140,8 @@ import { EVENT_REQUEST_LINK } from '~/constants/appLinks'
     AppCta,
     LandingCta,
     AppCard,
-    TheEventsHeader
+    TheEventsHeader,
+    EventDropdown
   },
 
   head () {
