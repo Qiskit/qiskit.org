@@ -289,9 +289,73 @@ then rebase and combine both commits together.
 
 ## Code style
 
+We try to be compliant with Nuxt.js and Vue.js code conventions which are mostly enforced by
+the Vetur extension of Visual Studio Code. We highly recommend installing the
+[Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur) extension when working
+with Vue.js and to enable `Vetur > Validation: Interpolation` and `Vetur > Validation: Template Props`.
+
+**Readability** is what we value most. We expect reviewers to pay special attention on readability
+so at least they can understand new contributions to the codebase.
+
 ### Type annotations
 
-### Writing components
+Regarding type checking, we aim at being compliant with
+[Tyepscript strict checks](https://www.typescriptlang.org/tsconfig#strict). That means, no implicit
+`any` annotations, for instance although does not enforce any particular style in typing.
+
+The golden rule is: **declare your intentions and let type inference do the rest**. Annotate function
+and method signatures, also class/object properties and module declarations, and rely on type inference
+for intermediate values.
+
+Don't do:
+
+```ts
+function max(a, b) {
+  return a > b ? a : b
+}
+```
+
+But instead:
+
+```ts
+function max(a: number, b: number): number {
+  return a > b ? a : b
+}
+```
+
+When working with pure JavaScript objects, consider declaring an interface with the methods and
+properties you want, then implement a factory function returning an implementation of the interface.
+
+Don't do:
+
+```ts
+export default {
+  scale: 2,
+  magnify (v) {
+    return v * this.scale
+  }
+}
+```
+
+But instead:
+
+```ts
+interface MyType {
+  scale: number
+  magnify (v: number): number
+}
+
+function _factory () : MyType {
+  return {
+    scale: 2,
+    magnify (v) {
+      return v * this.scale
+    }
+  }
+}
+
+export default _factory()
+```
 
 ## Project management
 
