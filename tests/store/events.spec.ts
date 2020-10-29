@@ -89,5 +89,21 @@ describe('module events', () => {
       })
       expect(store.getters.filteredEvents).toEqual([campInAfrica])
     })
+
+    it('can update entire active-set, given a list of filters', () => {
+      const regionsList = ['Americas', 'Africa', 'Europe']
+      // add initial region filter
+      store.commit('addFilter', {
+        filter: 'regionFilters',
+        filterValue: 'Africa'
+      })
+      expect(store.getters.filteredEvents).toEqual([campInAfrica])
+      // update entire active-set
+      store.commit('updateFilterSet', {
+        filter: 'regionFilters',
+        filterValues: regionsList
+      })
+      expect(store.getters.regionFilters).toEqual(regionsList)
+    })
   })
 })
