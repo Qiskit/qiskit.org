@@ -12,25 +12,19 @@
       </div>
       <div class="event-page__filters-region">
         <client-only>
-          <cv-multi-select
-            :theme="theme"
-            :label="labelRegions"
-            :options="regionOptions"
-            :value="getCheckedFilters('regionFilters')"
-            :selection-feedback="feedback"
-            @change="selectedOptions => updateWholeFilter('regionFilters', selectedOptions)"
+          <AppMultiSelect
+            :label="regionsLabel"
+            :options="regionsOptions"
+            @change-on-multi-select="updateWholeFilter(regionsFilters, $event)"
           />
         </client-only>
       </div>
       <div class="event-page__filters-type">
         <client-only>
-          <cv-multi-select
-            :theme="theme"
-            :label="labelTypes"
-            :options="typeOptions"
-            :value="getCheckedFilters('typeFilters')"
-            :selection-feedback="feedback"
-            @change="selectedOptions => updateWholeFilter('typeFilters', selectedOptions)"
+          <AppMultiSelect
+            :label="typesLabel"
+            :options="typesOptions"
+            @change-on-multi-select="updateWholeFilter(typesFilters, $event)"
           />
         </client-only>
       </div>
@@ -47,9 +41,9 @@
                   :key="region"
                   :value="region"
                   :label="region"
-                  :checked="isFilterChecked('regionFilters', region)"
-                  :aria-checked="`${isFilterChecked('regionFilters', region)}`"
-                  @change="updateFilter('regionFilters', region, $event)"
+                  :checked="isFilterChecked(regionsFilters, region)"
+                  :aria-checked="isFilterChecked(regionsFilters, region)"
+                  @change="updateFilter(regionsFilters, region, $event)"
                 />
               </client-only>
             </div>
@@ -65,9 +59,9 @@
                   :key="type"
                   :value="type"
                   :label="type"
-                  :checked="isFilterChecked('typeFilters', type)"
-                  :aria-checked="`${isFilterChecked('typeFilters', type)}`"
-                  @change="updateFilter('typeFilters', type, $event)"
+                  :checked="isFilterChecked(typesFilters, type)"
+                  :aria-checked="isFilterChecked(typesFilters, type)"
+                  @change="updateFilter(typesFilters, type, $event)"
                 />
               </client-only>
             </div>
@@ -123,7 +117,7 @@ import AppCard from '~/components/ui/AppCard.vue'
 import TheEventsHeader from '~/components/events/TheEventsHeader.vue'
 import AppCta from '~/components/ui/AppCta.vue'
 import LandingCta from '~/components/landing/LandingCta.vue'
-
+import AppMultiSelect from '~/components/ui/AppMultiSelect.vue'
 import {
   CommunityEvent,
   WORLD_REGION_OPTIONS,
@@ -138,7 +132,8 @@ import { EVENT_REQUEST_LINK } from '~/constants/appLinks'
     AppCta,
     LandingCta,
     AppCard,
-    TheEventsHeader
+    TheEventsHeader,
+    AppMultiSelect
   },
 
   head () {
@@ -183,12 +178,12 @@ export default class extends QiskitPage {
   }
 
   // multiselect
-  regionOptions = this.getOptions(this.regions)
-  typeOptions = this.getOptions(this.types)
-  theme: string = 'light'
-  labelRegions: string = 'Locations'
-  labelTypes: string = 'Types'
-  feedback: string = 'fixed'
+  regionsOptions = this.getOptions(this.regions)
+  typesOptions = this.getOptions(this.types)
+  regionsLabel: string = 'Locations'
+  typesLabel: string = 'Types'
+  regionsFilters: string = 'regionFilters'
+  typesFilters: string = 'typeFilters'
 
   get noEvents (): boolean {
     return (this as any).filteredEvents.length === 0
@@ -196,10 +191,6 @@ export default class extends QiskitPage {
 
   getOptions (optionsList): Array<EventMultiSelectOption> {
     return optionsList.map(item => ({ label: item, value: item, name: item }))
-  }
-
-  getCheckedFilters (filter) {
-    return (this as any)[filter]
   }
 
   updateWholeFilter (filter: string, filterValues: string[]): void {
@@ -329,78 +320,18 @@ export default class extends QiskitPage {
 
   }
 
-  &__filters-region,
-  &__filters-type {
-    @include mq($from: medium) {
-      display: none;
-    }
-
-    .bx--list-box--light,
-    .bx--list-box__menu {
-      background-color: $white;
-      border-bottom-color: $gray-20;
-    }
-
-    .bx--list-box__label,
-    .bx--list-box__menu-item,
-    .bx--list-box__menu-item--highlighted .bx--list-box__menu-item__option,
-    .bx--list-box__menu-item__option {
-      color: $white-text-01;
-    }
-
-    .bx--list-box__menu-item {
-      background-color: $cool-gray-10;
-      color: $white-text-01;
-    }
-
-    .bx--list-box__menu-icon {
-      right: 0.8rem;
-    }
-
-    .bx--list-box__menu-icon > svg {
-      fill: $black-100;
-    }
-
-    .bx--list-box--expanded:hover.bx--list-box--light:hover {
-      background-color: $cool-gray-10;
-    }
-
-    .bx--checkbox-label::before {
-      border: 1px solid $black-100;
-    }
-
-    .bx--list-box__menu-item--highlighted {
-      background-color: $cool-gray-20;
-    }
-
-    .bx--tag--filter {
-      background-color: $purple-70;
-      color: $white;
-    }
-
-    .bx--tag--high-contrast .bx--tag__close-icon:hover {
-      background-color: $purple-70;
-    }
-
-    .bx--checkbox:checked + .bx--checkbox-label::before {
-      background-color: $black-100;
-      border-color: $black-100;
-      border-width: 1px;
-    }
-
-    .bx--checkbox:checked + .bx--checkbox-label::after {
-      border-left: 2px solid $white;
-      border-bottom: 2px solid $white;
-    }
-
-    .bx--list-box__menu-item:hover .bx--list-box__menu-item__option {
-      color: $black-100;
-    }
-  }
-
   &__filters-type {
     @include mq($until: medium) {
       margin-bottom: $layout-04;
+    }
+    @include mq($from: medium) {
+      display: none;
+    }
+  }
+
+  &__filters-region {
+    @include mq($from: medium) {
+      display: none;
     }
   }
 
