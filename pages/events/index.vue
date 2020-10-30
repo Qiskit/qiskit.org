@@ -1,7 +1,7 @@
 <template>
   <div class="event-page">
     <TheEventsHeader />
-    <div class="event-page__wrapper">
+    <div class="event-page__container">
       <div class="event-page__filters-time">
         <client-only>
           <cv-tabs aria-label="navigation tab label" @tab-selected="selectTab">
@@ -230,7 +230,7 @@ export default class extends QiskitPage {
   background-color: $white;
   color: $white-text-01;
 
-  &__wrapper {
+  &__container {
     @include contained();
   }
 
