@@ -68,6 +68,8 @@ export default class extends Vue {
     .bx--tag--filter {
       background-color: $purple-70;
       color: $white;
+      margin-left: 0;
+      margin-right: $spacing-05;
     }
 
     .bx--tag--high-contrast .bx--tag__close-icon:hover {
