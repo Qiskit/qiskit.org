@@ -15,6 +15,7 @@
           <AppMultiSelect
             :label="regionsLabel"
             :options="regionsOptions"
+            :value="getCheckedFilters(regionsFilters)"
             @change-on-multi-select="updateWholeFilter(regionsFilters, $event)"
           />
         </client-only>
@@ -24,6 +25,7 @@
           <AppMultiSelect
             :label="typesLabel"
             :options="typesOptions"
+            :value="getCheckedFilters(typesFilters)"
             @change-on-multi-select="updateWholeFilter(typesFilters, $event)"
           />
         </client-only>

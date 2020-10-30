@@ -4,6 +4,7 @@
     :theme="theme"
     :label="label"
     :options="options"
+    :value="value"
     :selection-feedback="feedback"
     @change="$emit('change-on-multi-select', $event)"
   />
@@ -17,6 +18,7 @@ import { Component, Prop } from 'vue-property-decorator'
 export default class extends Vue {
   @Prop(Array) options!: any
   @Prop(String) label!: any
+  @Prop(Array) value!: any
 
   theme: string = 'light'
   feedback: string = 'fixed'
