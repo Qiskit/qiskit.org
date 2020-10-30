@@ -13,7 +13,8 @@
       <div
         v-for="filter in extraFilters"
         :key="filter.label"
-        class="event-page__extra-filters">
+        class="event-page__extra-filters"
+      >
         <client-only>
           <AppMultiSelect
             :label="filter.label"
@@ -28,7 +29,8 @@
           <fieldset
             v-for="filter in extraFilters"
             :key="filter.label"
-            class="bx--fieldset">
+            class="bx--fieldset"
+          >
             <legend class="bx--label">
               {{ filter.label }}
             </legend>
@@ -169,7 +171,7 @@ export default class extends QiskitPage {
     {
       label: this.regionsLabel,
       options: this.regionsOptions,
-      filterType: this.regionsFilters,
+      filterType: this.regionsFilters
     },
     {
       label: this.typesLabel,
