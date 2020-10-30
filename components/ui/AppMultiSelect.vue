@@ -13,8 +13,7 @@
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 
-@Component({})
-
+@Component
 export default class extends Vue {
   @Prop(Array) options
   @Prop(String) filterType

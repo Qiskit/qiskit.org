@@ -41,9 +41,9 @@
                   :key="region"
                   :value="region"
                   :label="region"
-                  :checked="isFilterChecked('regionFilters', region)"
-                  :aria-checked="`${isFilterChecked('regionFilters', region)}`"
-                  @change="updateFilter('regionFilters', region, $event)"
+                  :checked="isFilterChecked(regionsFilters, region)"
+                  :aria-checked="isFilterChecked(regionsFilters, region)"
+                  @change="updateFilter(regionsFilters, region, $event)"
                 />
               </client-only>
             </div>
@@ -59,9 +59,9 @@
                   :key="type"
                   :value="type"
                   :label="type"
-                  :checked="isFilterChecked('typeFilters', type)"
-                  :aria-checked="`${isFilterChecked('typeFilters', type)}`"
-                  @change="updateFilter('typeFilters', type, $event)"
+                  :checked="isFilterChecked(typesFilters, type)"
+                  :aria-checked="isFilterChecked(typesFilters, type)"
+                  @change="updateFilter(typesFilters, type, $event)"
                 />
               </client-only>
             </div>
