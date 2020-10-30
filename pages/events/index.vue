@@ -189,8 +189,12 @@ export default class extends QiskitPage {
     return (this as any).filteredEvents.length === 0
   }
 
-  getOptions (optionsList): Array<EventMultiSelectOption> {
-    return optionsList.map(item => ({ label: item, value: item, name: item }))
+  getOptions (optionsList: any): Array<EventMultiSelectOption> {
+    return optionsList.map((item: string)=> ({ label: item, value: item, name: item }))
+  }
+
+  getCheckedFilters (filter: string) {
+    return (this as any)[filter]
   }
 
   updateWholeFilter (filter: string, filterValues: string[]): void {
