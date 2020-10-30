@@ -168,7 +168,7 @@ Notice we don't expect the contributors to address **all** the comments, nor
 the reviewer highlight **all** the issues, we hope both take some compromises to provide
 as much value and quality as it fits in the estimated effort.
 
-We don't expect discussions happen in the pull requests. If there is a disagreement,
+We don't expect discussions to happen in the pull requests. If there is a disagreement,
 our recommendation is for the contributor to yield to the reviewer and for the reviewer
 to suggest other alternatives.
 
