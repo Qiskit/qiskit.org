@@ -10,23 +10,16 @@
           </cv-tabs>
         </client-only>
       </div>
-      <div class="event-page__filters-region">
+      <div
+        v-for="filter in multiSelectFilters"
+        :key="filter.label"
+        class="event-page__extra-filters">
         <client-only>
           <AppMultiSelect
-            :label="regionsLabel"
-            :options="regionsOptions"
-            :value="getCheckedFilters(regionsFilters)"
-            @change-on-multi-select="updateWholeFilter(regionsFilters, $event)"
-          />
-        </client-only>
-      </div>
-      <div class="event-page__filters-type">
-        <client-only>
-          <AppMultiSelect
-            :label="typesLabel"
-            :options="typesOptions"
-            :value="getCheckedFilters(typesFilters)"
-            @change-on-multi-select="updateWholeFilter(typesFilters, $event)"
+            :label="filter.label"
+            :options="filter.options"
+            :value="getCheckedFilters(filter.filterType)"
+            @change-on-multi-select="updateWholeFilter(filter.filterType, $event)"
           />
         </client-only>
       </div>
@@ -187,6 +180,19 @@ export default class extends QiskitPage {
   regionsFilters: string = 'regionFilters'
   typesFilters: string = 'typeFilters'
 
+  multiSelectFilters = [
+    {
+      label: this.regionsLabel,
+      options: this.regionsOptions,
+      filterType: this.regionsFilters
+    },
+    {
+      label: this.typesLabel,
+      options: this.typesOptions,
+      filterType: this.typesFilters
+    }
+  ]
+
   get noEvents (): boolean {
     return (this as any).filteredEvents.length === 0
   }
@@ -326,16 +332,7 @@ export default class extends QiskitPage {
 
   }
 
-  &__filters-type {
-    @include mq($until: medium) {
-      margin-bottom: $layout-04;
-    }
-    @include mq($from: medium) {
-      display: none;
-    }
-  }
-
-  &__filters-region {
+  &__extra-filters {
     @include mq($from: medium) {
       display: none;
     }
@@ -364,6 +361,7 @@ export default class extends QiskitPage {
 
     @include mq($until: medium) {
       width: 100%;
+      margin-top: $layout-04;
     }
   }
 
