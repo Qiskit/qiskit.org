@@ -15,7 +15,6 @@
           <AppMultiSelect
             :label="regionsLabel"
             :options="regionsOptions"
-            :filter-type="regionsFilters"
             @change-on-multi-select="updateWholeFilter(regionsFilters, $event)"
           />
         </client-only>
@@ -25,7 +24,6 @@
           <AppMultiSelect
             :label="typesLabel"
             :options="typesOptions"
-            :filter-type="typesFilters"
             @change-on-multi-select="updateWholeFilter(typesFilters, $event)"
           />
         </client-only>
