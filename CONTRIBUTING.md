@@ -11,6 +11,21 @@ we strongly recommend you read before continuing.
 Following these guidelines communicates you value the time and effort of the core
 contributors and maintainers of this site and so, thank you!
 
+- [CONTRIBUTING](#contributing)
+  - [Start contributing](#start-contributing)
+  - [Before you start](#before-you-start)
+  - [Opening issues](#opening-issues)
+  - [Contributing code](#contributing-code)
+    - [Setup](#setup)
+    - [Working on an issue](#working-on-an-issue)
+    - [Pull requests](#pull-requests)
+    - [Live previews](#live-previews)
+    - [Code review](#code-review)
+    - [Merging](#merging)
+  - [Code style](#code-style)
+    - [Solving linting issues](#solving-linting-issues)
+    - [Type annotations](#type-annotations)
+
 ## Start contributing
 
 This repository is for developing and maintaining https://qiskit.org, the website.
