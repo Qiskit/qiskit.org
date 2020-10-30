@@ -1,6 +1,6 @@
 <template>
   <cv-multi-select
-    class="event-multi-select"
+    class="app-multi-select"
     :theme="theme"
     :label="label"
     :options="options"
@@ -33,7 +33,7 @@ export default class extends Vue {
 </script>
 
 <style lang="scss">
-  .event-multi-select {
+  .app-multi-select {
     @include mq($from: medium) {
       display: none;
     }

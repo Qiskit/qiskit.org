@@ -12,7 +12,7 @@
       </div>
       <div class="event-page__filters-region">
         <client-only>
-          <EventMultiSelect
+          <AppMultiSelect
             :label="regionsLabel"
             :options="regionsOptions"
             :filter-type="regionsFilters"
@@ -21,7 +21,7 @@
       </div>
       <div class="event-page__filters-type">
         <client-only>
-          <EventMultiSelect
+          <AppMultiSelect
             :label="typesLabel"
             :options="typesOptions"
             :filter-type="typesFilters"
@@ -117,7 +117,7 @@ import AppCard from '~/components/ui/AppCard.vue'
 import TheEventsHeader from '~/components/events/TheEventsHeader.vue'
 import AppCta from '~/components/ui/AppCta.vue'
 import LandingCta from '~/components/landing/LandingCta.vue'
-import EventMultiSelect from '~/components/events/EventMultiSelect.vue'
+import AppMultiSelect from '~/components/ui/AppMultiSelect.vue'
 import {
   CommunityEvent,
   WORLD_REGION_OPTIONS,
@@ -133,7 +133,7 @@ import { EVENT_REQUEST_LINK } from '~/constants/appLinks'
     LandingCta,
     AppCard,
     TheEventsHeader,
-    EventMultiSelect
+    AppMultiSelect
   },
 
   head () {
