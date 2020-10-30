@@ -93,16 +93,16 @@ export default class extends QiskitPage {
   learnLevels = LEARN_LEVELS
   timeScales = TIME_SCALES
 
-  beforeRouteEnter (route, _, next) {
-    next(learnPage => learnPage._parseFilterFromUrl(route))
+  beforeRouteEnter (route: any, _: any, next: any) {
+    next((learnPage: any) => learnPage._parseFilterFromUrl(route))
   }
 
-  beforeRouteUpdate (route, _, next) {
+  beforeRouteUpdate (route: any, _: any, next: any) {
     this._parseFilterFromUrl(route)
     next()
   }
 
-  _parseFilterFromUrl (route) {
+  _parseFilterFromUrl (route: any) {
     const timeScale = route.query.timeScale || this.timeScales.all
     const learnLevel = route.query.learnLevel || this.learnLevels.all
     this.$store.commit('setTimeScale', timeScale)

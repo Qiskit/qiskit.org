@@ -20,7 +20,7 @@ import { Component, Prop } from 'vue-property-decorator'
 
 @Component
 export default class extends Vue {
-  @Prop(String) label
+  @Prop(String) label!: any
   @Prop({ type: String, default: '' }) code!: string
 
   segmentAction = {

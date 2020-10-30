@@ -40,7 +40,7 @@ class FakeRecord {
   }
 
   get (key: string): string {
-    return this._fields[key]
+    return (this._fields as any)[key]
   }
 }
 

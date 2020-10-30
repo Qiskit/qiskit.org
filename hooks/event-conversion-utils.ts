@@ -22,7 +22,7 @@ const RECORD_FIELDS = Object.freeze({
   published: 'SUZIE - for website?'
 } as const)
 
-async function fetchCommunityEvents (apiKey: string, { days }): Promise<CommunityEvent[]> {
+async function fetchCommunityEvents (apiKey: string, { days }: { days: any }): Promise<CommunityEvent[]> {
   const { startDate, published } = RECORD_FIELDS
   const communityEvents: CommunityEvent[] = []
   const base = new Airtable({ apiKey }).base('appkaaRF2QdwfusP1')
@@ -34,7 +34,7 @@ async function fetchCommunityEvents (apiKey: string, { days }): Promise<Communit
       {${published}}
     )`,
     sort: [{ field: startDate, direction: days > 0 ? 'asc' : 'desc' }]
-  }).eachPage((records: any[], nextPage: () => void) => {
+  }).eachPage((records, nextPage) => {
     for (const record of records) {
       const communityEvent = convertToCommunityEvent(record)
       communityEvents.push(communityEvent)

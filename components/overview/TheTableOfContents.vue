@@ -1,5 +1,7 @@
 <template>
   <nav class="the-table-of-contents">
+    <!-- Needed to avoid multiline to remove blank space around the content. -->
+    <!-- eslint-disable vue/multiline-html-element-content-newline -->
     <AppLink
       v-for="entry in entries"
       :key="entry.sectionId || entry.label"
@@ -10,6 +12,7 @@
       }"
       :url="entry.sectionId && `#${entry.sectionId}`"
     >{{ entry.label }}</AppLink>
+    <!-- eslint-enable -->
   </nav>
 </template>
 

@@ -7,7 +7,10 @@
         </h1>
       </div>
     </header>
+    <!-- TODO: We should migrate to nuxt-content and get rid of this. -->
+    <!-- eslint-disable vue/no-v-html -->
     <main class="learn-entry__content" v-html="pageContent.html" />
+    <!-- eslint-enable -->
   </div>
 </template>
 
@@ -17,7 +20,6 @@ import { Context } from '@nuxt/types'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 
 @Component({
-  layout: 'learn',
   head () {
     const self = this as any
 
@@ -194,6 +196,7 @@ export default class extends QiskitPage {
       td, th {
         @include type-style('body-long-01');
         border: 1px solid $cool-gray-20;
+        color: $cool-gray-80;
         vertical-align: middle;
         padding: $spacing-05;
         max-width: 9 * $column-size-large;
