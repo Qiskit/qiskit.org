@@ -5,7 +5,7 @@
     :label="label"
     :options="options"
     :selection-feedback="feedback"
-    @change="selectedOptions => updateWholeFilter(filterType, selectedOptions)"
+    @change="$emit('change-on-multi-select', $event)"
   />
 </template>
 
@@ -21,13 +21,6 @@ export default class extends Vue {
 
   theme: string = 'light'
   feedback: string = 'fixed'
-
-  updateWholeFilter (filter: string, filterValues: string[]): void {
-    const { commit } = this.$store
-    const payload = { filter, filterValues }
-
-    commit('updateFilterSet', payload)
-  }
 }
 </script>
 

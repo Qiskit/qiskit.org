@@ -16,6 +16,7 @@
             :label="regionsLabel"
             :options="regionsOptions"
             :filter-type="regionsFilters"
+            @change-on-multi-select="updateWholeFilter(regionsFilters, $event)"
           />
         </client-only>
       </div>
@@ -25,6 +26,7 @@
             :label="typesLabel"
             :options="typesOptions"
             :filter-type="typesFilters"
+            @change-on-multi-select="updateWholeFilter(typesFilters, $event)"
           />
         </client-only>
       </div>
@@ -191,6 +193,13 @@ export default class extends QiskitPage {
 
   getOptions (optionsList): Array<EventMultiSelectOption> {
     return optionsList.map(item => ({ label: item, value: item, name: item }))
+  }
+
+  updateWholeFilter (filter: string, filterValues: string[]): void {
+    const { commit } = this.$store
+    const payload = { filter, filterValues }
+
+    commit('updateFilterSet', payload)
   }
 
   isFilterChecked (filter: string, filterValue: string): Array<CommunityEvent> {
