@@ -154,9 +154,9 @@ from one of the core members of the team.
 Once you have sent a PR, the code contributors get notified, and there may be a code
 review. The code review helps solving implementation, semantic and maintainability issues.
 
-The repository also contains some automated checks such as tests and linting. For a 
-pull request to be ready for merging it needs to **pass automatic checks and have,
-at least, one positive review**.
+The repository also contains some automated checks such as tests and
+[linting](#solving-linting-issues). For a pull request to be ready for merging it needs to
+**pass automatic checks and have, at least, one positive review**.
 
 During code reviews, there are two prominent roles: the reviewer and the contributor.
 The reviewer acts as the keeper of best-practices and code quality, asking 
@@ -187,6 +187,17 @@ with Vue.js and to enable `Vetur > Validation: Interpolation` and `Vetur > Valid
 
 **Readability** is what we value most. We expect reviewers to pay special attention on readability
 so at least they can understand new contributions to the codebase.
+
+### Solving linting issues
+
+While developing, you can check linting issues by running `npm run lint`. Notice that, although
+some linting issues are reported as warnings, we don't allow any warning in our code base so
+you will need to solve those problems or disable the linter for your contribution to pass the checks.
+
+There are some linting issues that can be automatically fixed by running `npm run fix-lint`.
+
+In the case you need to [disable a rule](https://eslint.org/docs/user-guide/configuring#disabling-rules-with-inline-comments),
+please provide an explanation supporting why the exception.
 
 ### Type annotations
 
