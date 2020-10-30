@@ -15,8 +15,8 @@ import { Component, Prop } from 'vue-property-decorator'
 
 @Component
 export default class extends Vue {
-  @Prop(Array) options
-  @Prop(String) label
+  @Prop(Array) options!: any
+  @Prop(String) label!: any
 
   theme: string = 'light'
   feedback: string = 'fixed'
