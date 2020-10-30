@@ -317,6 +317,15 @@ export default class extends QiskitPage {
     @include mq($until: medium) {
       margin-bottom: $layout-04;
     }
+    @include mq($from: medium) {
+      display: none;
+    }
+  }
+
+  &__filters-region {
+    @include mq($from: medium) {
+      display: none;
+    }
   }
 
   /*

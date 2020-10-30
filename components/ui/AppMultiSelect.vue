@@ -34,9 +34,6 @@ export default class extends Vue {
 
 <style lang="scss">
   .app-multi-select {
-    @include mq($from: medium) {
-      display: none;
-    }
 
     & .bx--list-box--light,
     & .bx--list-box__menu {
