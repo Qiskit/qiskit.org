@@ -11,6 +11,8 @@ we strongly recommend you read before continuing.
 Following these guidelines communicates you value the time and effort of the core
 contributors and maintainers of this site and so, thank you!
 
+## Table of contents
+
 - [Start contributing](#start-contributing)
 - [Before you start](#before-you-start)
 - [Opening issues](#opening-issues)
@@ -272,3 +274,12 @@ function _factory () : MyType {
 
 export default _factory()
 ```
+
+## Final words
+
+Thank you for reading until the end of the document! Abiding by these guidelines you
+express your willing in collaborating and contributing in a healthy way. Thanks for 
+that too!
+
+Now if you are a core contributor, perhaps you're interested in knowing more about
+[our procedures in the Wiki](https://github.com/Qiskit/qiskit.org/wiki).
