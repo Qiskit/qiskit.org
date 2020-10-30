@@ -29,7 +29,7 @@ import AppCard from '~/components/ui/AppCard.vue'
   components: { AppCard }
 })
 export default class extends Vue {
-  @Prop(String) type!: any
+  @Prop(Array) types!: any
   @Prop(String) title!: any
   @Prop(String) image!: any
   @Prop(String) location!: any
