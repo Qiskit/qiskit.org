@@ -11,7 +11,7 @@
         </client-only>
       </div>
       <div
-        v-for="filter in multiSelectFilters"
+        v-for="filter in extraFilters"
         :key="filter.label"
         class="event-page__extra-filters">
         <client-only>
@@ -25,38 +25,23 @@
       </div>
       <div class="event-page__event-index">
         <div class="event-page__filters-others">
-          <fieldset class="bx--fieldset">
+          <fieldset
+            v-for="filter in extraFilters"
+            :key="filter.label"
+            class="bx--fieldset">
             <legend class="bx--label">
-              Location
+              {{ filter.label }}
             </legend>
             <div class="event-page__chrome-columns-fix">
               <client-only>
                 <cv-checkbox
-                  v-for="region in regions"
-                  :key="region"
-                  :value="region"
-                  :label="region"
-                  :checked="isFilterChecked(regionsFilters, region)"
-                  :aria-checked="isFilterChecked(regionsFilters, region)"
-                  @change="updateFilter(regionsFilters, region, $event)"
-                />
-              </client-only>
-            </div>
-          </fieldset>
-          <fieldset class="bx--fieldset">
-            <legend class="bx--label">
-              Type
-            </legend>
-            <div class="event-page__chrome-columns-fix">
-              <client-only>
-                <cv-checkbox
-                  v-for="type in types"
-                  :key="type"
-                  :value="type"
-                  :label="type"
-                  :checked="isFilterChecked(typesFilters, type)"
-                  :aria-checked="isFilterChecked(typesFilters, type)"
-                  @change="updateFilter(typesFilters, type, $event)"
+                  v-for="option in filter.options"
+                  :key="option.label"
+                  :value="option.value"
+                  :label="option.label"
+                  :checked="isFilterChecked(filter.filterType, option.value)"
+                  :aria-checked="isFilterChecked(filter.filterType, option.value)"
+                  @change="updateFilter(filter.filterType, option.value, $event)"
                 />
               </client-only>
             </div>
@@ -180,11 +165,11 @@ export default class extends QiskitPage {
   regionsFilters: string = 'regionFilters'
   typesFilters: string = 'typeFilters'
 
-  multiSelectFilters = [
+  extraFilters = [
     {
       label: this.regionsLabel,
       options: this.regionsOptions,
-      filterType: this.regionsFilters
+      filterType: this.regionsFilters,
     },
     {
       label: this.typesLabel,
