@@ -353,6 +353,10 @@ export default class extends QiskitPage {
       color: $white-text-01;
     }
 
+    .bx--list-box__menu-icon {
+      right: 0.8rem;
+    }
+
     .bx--list-box__menu-icon > svg {
       fill: $black-100;
     }
