@@ -3,7 +3,7 @@
     <img
       v-if="icon"
       class="compact-feature__icon"
-      :src="`/images/icons/icon${icon}White@3x.png`"
+      :src="`/images/icons/${icon}.svg`"
     >
     <h2 v-if="title" class="compact-feature__title copy__subtitle">
       {{ title }}
@@ -29,17 +29,17 @@ export default class extends Vue {
 <style lang="scss" scoped>
 @import '~carbon-components/scss/globals/scss/typography';
 
-$feature-icon-size: 2.25rem;
+$feature-icon-size: 3rem;
 
 .compact-feature {
   background-color: $purple-70;
   padding: $spacing-03;
 
   &__icon {
-    position: relative;
-    width: $feature-icon-size;
     height: $feature-icon-size;
     margin-bottom: $spacing-05 + .75rem;
+    margin-bottom: 1.5rem;
+    margin-left: -.5rem;
   }
 
   &__title {
