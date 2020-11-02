@@ -309,7 +309,7 @@ export default class extends QiskitPage {
         box-shadow: 0 0 0 2px $white, 0 0 0 4px $purple-60;
       }
     }
-    
+
     &_on-large-screen {
       @include mq($until: medium) {
         display: none;
