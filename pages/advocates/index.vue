@@ -5,6 +5,9 @@
       <TypewriterEffect
         :values="[
           'enthusiasts',
+          'advocates',
+          'mentors',
+          'experts'
         ]"
       /><br>
       from within the Qiskit community
