@@ -34,7 +34,7 @@
             <legend class="bx--label">
               {{ filter.label }}
             </legend>
-            <div class="event-page__chrome-columns-fix">
+            <div>
               <client-only>
                 <cv-checkbox
                   v-for="option in filter.options"
@@ -322,24 +322,6 @@ export default class extends QiskitPage {
   &__extra-filters {
     @include mq($from: medium) {
       display: none;
-    }
-  }
-
-  /*
-  It seems to be a problem with Chrome when trying to set the number of columns
-  to 2 inside a fieldset:
-  https://stackoverflow.com/questions/55819846/column-count-does-not-work-within-a-fieldst-in-chrome
-  https://stackoverflow.com/questions/3322891/why-is-chrome-cutting-off-text-in-my-css3-multi-column-layout
-  */
-  &__chrome-columns-fix {
-    @include mq($until: medium) {
-      column-count: 2;
-    }
-
-    & > * {
-      @include mq($until: medium) {
-        display: block;
-      }
     }
   }
 
