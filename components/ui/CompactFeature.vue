@@ -5,10 +5,10 @@
       class="compact-feature__icon"
       :src="`/images/icons/icon${icon}White@3x.png`"
     >
-    <h2 v-if="title" class="compact-feature__title">
+    <h2 v-if="title" class="compact-feature__title copy__subtitle">
       {{ title }}
     </h2>
-    <p v-if="description" class="compact-feature__description">
+    <p v-if="description" class="compact-feature__description copy__paragraph">
       {{ description }}
     </p>
   </section>
@@ -29,22 +29,26 @@ export default class extends Vue {
 <style lang="scss" scoped>
 @import '~carbon-components/scss/globals/scss/typography';
 
+$feature-icon-size: 2.25rem;
+
 .compact-feature {
-  $feature-icon-size: 3.75rem;
+  background-color: $purple-70;
+  padding: $spacing-03;
 
   &__icon {
     position: relative;
     width: $feature-icon-size;
     height: $feature-icon-size;
-    margin-bottom: $spacing-05;
+    margin-bottom: $spacing-05 + .75rem;
   }
 
   &__title {
-    @include productive-heading-04_5();
+    color: $white;
+    margin-bottom: .75rem;
   }
 
   &__description {
-    @include body-long-04();
+    color: $white;
     margin-top: $spacing-03;
   }
 }
