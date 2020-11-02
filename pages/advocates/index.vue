@@ -175,7 +175,6 @@ main {
     flex: 1;
 
     @include mq($until: medium) {
-      text-align: center;
       margin-top: $layout-03;
     }
   }
