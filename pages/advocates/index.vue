@@ -94,22 +94,17 @@ export default class AdvocatesPage extends QiskitPage {
   routeName: string = 'advocates'
   advocateBenefits: Array<Benefit> = [
     {
-      icon: 'Community',
+      icon: 'high-five',
       title: 'Network with experts and enthusiasts',
       description: 'Advocates will be added to a group of quantum experts and will be a part of regular information sharing sessions.'
     },
     {
-      icon: 'Qiskit',
+      icon: 'global-network',
       title: 'Access to Qiskit core members and projects',
       description: 'Advocates will receive special access to core members of the Qiskit team for questions and brainstorming ideas.'
     },
     {
-      icon: 'Visibility',
-      title: 'Increased visibility for your work',
-      description: 'All advocates will have the opportunity to have their work supported and highlighted by IBM.'
-    },
-    {
-      icon: 'Events',
+      icon: 'location',
       title: 'Invitation to events',
       description: 'Active Qiskit Advocates will be invited to attend global events created for the quantum computing community.'
     }
