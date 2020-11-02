@@ -2,7 +2,7 @@
   <div class="event-page">
     <TheEventsHeader />
     <div class="event-page__container">
-      <div class="event-page__filters-time">
+      <div class="event-page__time-filters">
         <client-only>
           <cv-tabs aria-label="navigation tab label" @tab-selected="selectTab">
             <cv-tab id="tab-1" label="Upcoming events" />
@@ -13,7 +13,7 @@
       <div
         v-for="filter in extraFilters"
         :key="filter.label"
-        class="event-page__extra-filters"
+        class="event-page__extra-filters event-page__extra-filters_on-small-screen"
       >
         <client-only>
           <AppMultiSelect
@@ -25,7 +25,7 @@
         </client-only>
       </div>
       <div class="event-page__event-index">
-        <div class="event-page__filters-others">
+        <div class="event-page__extra-filters event-page__extra-filters_on-large-screen">
           <AppFieldset
             v-for="filter in extraFilters"
             :key="filter.label"
@@ -35,6 +35,7 @@
               <cv-checkbox
                 v-for="option in filter.options"
                 :key="option.label"
+                class="event-page__extra-filters__checkboxes"
                 :value="option.value"
                 :label="option.label"
                 :checked="isFilterChecked(filter.filterType, option.value)"
@@ -243,7 +244,7 @@ export default class extends QiskitPage {
     }
   }
 
-  &__filters-time {
+  &__time-filters {
     margin-top: $layout-03;
     margin-bottom: $layout-04;
     .bx--tabs__nav-link {
@@ -298,24 +299,27 @@ export default class extends QiskitPage {
     }
   }
 
-  &__filters-others {
-    .bx--checkbox-label::before {
-      border: 1px solid $black-100;
-    }
-
-    .bx--checkbox:focus + .bx--checkbox-label::before {
-      box-shadow: 0 0 0 2px $white, 0 0 0 4px $purple-60;
-    }
-
-    @include mq($until: medium) {
-      display: none;
-    }
-
-  }
-
   &__extra-filters {
-    @include mq($from: medium) {
-      display: none;
+    &__checkboxes {
+      .bx--checkbox-label::before {
+        border: 1px solid $black-100;
+      }
+
+      .bx--checkbox:focus + .bx--checkbox-label::before {
+        box-shadow: 0 0 0 2px $white, 0 0 0 4px $purple-60;
+      }
+    }
+
+    &_on-large-screen {
+      @include mq($until: medium) {
+        display: none;
+      }
+    }
+
+    &_on-small-screen {
+      @include mq($from: medium) {
+        display: none;
+      }
     }
   }
 
