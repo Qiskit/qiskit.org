@@ -37,21 +37,7 @@ export default class extends QiskitPage {
 </script>
 
 <style lang="scss" scoped>
-@import '~/assets/scss/blocks/copy.scss';
-
 .advocates-page {
-  background-color: white;
-
-  &__content-container {
-    @include contained();
-    display: flex;
-    align-items: flex-start;
-    overflow: visible;
-    margin-bottom: $layout-05;
-
-    @include mq($until: medium) {
-      margin-bottom: 0;
-    }
-  }
+  background-color: $white;
 }
 </style>
