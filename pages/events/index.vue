@@ -26,28 +26,23 @@
       </div>
       <div class="event-page__event-index">
         <div class="event-page__filters-others">
-          <fieldset
+          <AppFieldset
             v-for="filter in extraFilters"
             :key="filter.label"
-            class="bx--fieldset"
+            :label="filter.label"
           >
-            <legend class="bx--label">
-              {{ filter.label }}
-            </legend>
-            <div>
-              <client-only>
-                <cv-checkbox
-                  v-for="option in filter.options"
-                  :key="option.label"
-                  :value="option.value"
-                  :label="option.label"
-                  :checked="isFilterChecked(filter.filterType, option.value)"
-                  :aria-checked="isFilterChecked(filter.filterType, option.value)"
-                  @change="updateFilter(filter.filterType, option.value, $event)"
-                />
-              </client-only>
-            </div>
-          </fieldset>
+            <client-only>
+              <cv-checkbox
+                v-for="option in filter.options"
+                :key="option.label"
+                :value="option.value"
+                :label="option.label"
+                :checked="isFilterChecked(filter.filterType, option.value)"
+                :aria-checked="isFilterChecked(filter.filterType, option.value)"
+                @change="updateFilter(filter.filterType, option.value, $event)"
+              />
+            </client-only>
+          </AppFieldset>
         </div>
         <div class="event-page__main-content">
           <div>
@@ -100,6 +95,8 @@ import TheEventsHeader from '~/components/events/TheEventsHeader.vue'
 import AppCta from '~/components/ui/AppCta.vue'
 import LandingCta from '~/components/landing/LandingCta.vue'
 import AppMultiSelect from '~/components/ui/AppMultiSelect.vue'
+import AppFieldset from '~/components/ui/AppFieldset.vue'
+
 import {
   CommunityEvent,
   WORLD_REGION_OPTIONS,
@@ -115,7 +112,8 @@ import { EVENT_REQUEST_LINK } from '~/constants/appLinks'
     LandingCta,
     AppCard,
     TheEventsHeader,
-    AppMultiSelect
+    AppMultiSelect,
+    AppFieldset
   },
 
   head () {
@@ -307,10 +305,6 @@ export default class extends QiskitPage {
 
     .bx--checkbox:focus + .bx--checkbox-label::before {
       box-shadow: 0 0 0 2px $white, 0 0 0 4px $purple-60;
-    }
-
-    .bx--label {
-      color: $cool-gray-80;
     }
 
     @include mq($until: medium) {
