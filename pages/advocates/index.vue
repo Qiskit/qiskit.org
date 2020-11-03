@@ -1,8 +1,6 @@
 <template>
   <main class="community-page advocates-page">
-    <header>
-      <TheAdvocatesHeader />
-    </header>
+    <TheAdvocatesHeader />
     <div class="inner-navigation-scope">
       <InnerNavigation
         class="inner-navigation"
