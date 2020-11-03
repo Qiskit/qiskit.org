@@ -5,7 +5,7 @@
         Building together
       </h2>
       <p class="building-section__text">
-        Whether you are learning, teaching or performing scientific research, we hope Metal will get you there faster.
+        Whether you are learning, teaching, or performing scientific research, we hope Metal will get you there faster.
       </p>
       <div class="building-section__content">
         <div class="building-section__copy">
