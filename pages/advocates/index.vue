@@ -1,32 +1,18 @@
 <template>
   <div class="advocates-page">
-    <ThePageHeader>
-      Connect with the
-      <TypewriterEffect
-        :values="[
-          'enthusiasts',
-          'advocates',
-          'mentors',
-          'experts'
-        ]"
-      /><br>
-      from within the Qiskit community
-    </ThePageHeader>
+    <TheAdvocatesHeader />
   </div>
 </template>
 
 <script lang="ts">
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
-import ThePageHeader from '~/components/ui/ThePageHeader.vue'
-import TypewriterEffect from '~/components/ui/TypewriterEffect.vue'
+import TheAdvocatesHeader from '~/components/advocates/TheAdvocatesHeader.vue'
 
 @Component({
   components: {
-    ThePageHeader,
-    TypewriterEffect
+    TheAdvocatesHeader
   },
-
   head () {
     return {
       title: 'Qiskit Advocates'
