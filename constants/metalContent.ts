@@ -36,7 +36,7 @@ const METAL_FEATURES: Array<MetalFeature> = [
   },
   {
     title: 'Experimentally tested',
-    description: 'Metal utilizes quantization methods and techniques from the community and that we are developing. In an upcoming publication, Minev, McConkey & Gambetta will share some early results that demonstrate percent-level agreement between design and analysis and experimental hardware.',
+    description: 'Metal utilizes quantization methods and techniques from both the community and our own development. In an upcoming publication, Minev, McConkey & Gambetta will share some early results that demonstrate percent-level agreement between design and analysis and experimental hardware.',
     image: '/images/metal/features/experimetally-tested.png'
   },
   {
