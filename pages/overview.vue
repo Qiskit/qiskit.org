@@ -9,7 +9,7 @@
           'open',
           'popular'
         ]"
-      /><br>
+      />
       quantum computing SDK
     </ThePageHeader>
     <section
