@@ -1,13 +1,15 @@
 <template>
-  <cv-multi-select
-    class="app-multi-select"
-    :theme="theme"
-    :label="label"
-    :options="options"
-    :value="value"
-    :selection-feedback="feedback"
-    @change="$emit('change-on-multi-select', $event)"
-  />
+  <client-only>
+    <cv-multi-select
+      class="app-multi-select"
+      :theme="theme"
+      :label="label"
+      :options="options"
+      :value="value"
+      :selection-feedback="feedback"
+      @change="$emit('change-on-multi-select', $event)"
+    />
+  </client-only>
 </template>
 
 <script lang="ts">
