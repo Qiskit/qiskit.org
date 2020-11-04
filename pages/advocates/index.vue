@@ -68,7 +68,7 @@ import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import CompactFeature from '~/components/ui/CompactFeature.vue'
 
-type Benefit = Pick<CompactFeature, 'icon'|'fileType'|'title'|'description'>
+type Benefit = Pick<CompactFeature, 'icon'|'title'|'description'>
 
 @Component({
   head () {
@@ -94,20 +94,17 @@ export default class AdvocatesPage extends QiskitPage {
   routeName: string = 'advocates'
   advocateBenefits: Array<Benefit> = [
     {
-      icon: 'high-five',
-      fileType: 'svg',
+      icon: 'high-five.svg',
       title: 'Network with experts and enthusiasts',
       description: 'Advocates will be added to a group of quantum experts and will be a part of regular information sharing sessions.'
     },
     {
-      icon: 'global-network',
-      fileType: 'svg',
+      icon: 'global-network.svg',
       title: 'Access to Qiskit core members and projects',
       description: 'Advocates will receive special access to core members of the Qiskit team for questions and brainstorming ideas.'
     },
     {
-      icon: 'location',
-      fileType: 'svg',
+      icon: 'location.svg',
       title: 'Invitation to events',
       description: 'Active Qiskit Advocates will be invited to attend global events created for the quantum computing community.'
     }
