@@ -279,6 +279,11 @@ export default class extends Vue {
     & .bx--dropdown-link:hover {
       border-bottom-color: #dde1e6;
     }
+
+    // update color
+    & .bx--list-box__label {
+      color: $white-text-01;
+    }
   }
 
   & .bx--radio-button__appearance {
