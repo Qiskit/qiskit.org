@@ -57,7 +57,7 @@ const ACCESS_IBM_Q_SYSTEMS: GeneralLink = {
 
 const EVENT_REQUEST_LINK: GeneralLink = {
   url: 'https://airtable.com/shrP84QQiqzC3aWMF',
-  label: ' let’s make it happen!'
+  label: 'Request an event'
 }
 
 const YOUTUBE_ALL_EPISODES_CTA: GeneralLink = {
