@@ -4,6 +4,7 @@
       v-if="icon"
       class="compact-feature__icon"
       :src="`/images/icons/${icon}`"
+      alt=""
     >
     <h3 v-if="title" class="compact-feature__title">
       {{ title }}
