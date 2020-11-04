@@ -9,7 +9,7 @@
     <h3 v-if="title" class="compact-feature__title">
       {{ title }}
     </h3>
-    <p v-if="description" class="compact-feature__description copy__paragraph">
+    <p v-if="description" class="compact-feature__description">
       {{ description }}
     </p>
   </section>
@@ -35,6 +35,7 @@ $feature-icon-size: 2.25rem;
 .compact-feature {
   background-color: $purple-70;
   padding: $spacing-05;
+  padding-bottom: $layout-04;
 
   &__icon {
     height: $feature-icon-size;
@@ -45,11 +46,17 @@ $feature-icon-size: 2.25rem;
     @include type-style('productive-heading-02');
     color: $white;
     margin-bottom: .75rem;
+    height: 2.5rem;
   }
 
   &__description {
+    @include type-style('body-long-01');
     color: $white;
     margin-top: $spacing-03;
+
+    @include mq($until: large) {
+      margin-bottom: $layout-01;
+    }
   }
 }
 </style>
