@@ -1,22 +1,6 @@
 <template>
   <main class="community-page advocates-page">
-    <header>
-      <CommunityHeader
-        id="presentation"
-        main-title="Qiskit Advocates"
-      >
-        <p>A global program that provides support to the individuals who actively contribute to the Qiskit Community.</p>
-        <template #features>
-          <div id="advocates-benefits">
-            <CompactFeature
-              v-for="benefit in advocateBenefits"
-              :key="`benefit-${benefit.icon}`"
-              v-bind="benefit"
-            />
-          </div>
-        </template>
-      </CommunityHeader>
-    </header>
+    <TheAdvocatesHeader />
     <div class="inner-navigation-scope">
       <InnerNavigation
         class="inner-navigation"
@@ -124,6 +108,10 @@ export default class AdvocatesPage extends QiskitPage {
 <style lang="scss">
 @import '~/assets/scss/community-page.scss';
 @import '~carbon-components/scss/globals/scss/typography';
+
+.advocates-page {
+  background-color: $white;
+}
 
 main {
   background-color: $ui-background;
