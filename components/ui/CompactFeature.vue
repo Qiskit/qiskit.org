@@ -3,7 +3,7 @@
     <img
       v-if="icon"
       class="compact-feature__icon"
-      :src="`/images/icons/${icon}.${fileType}`"
+      :src="`/images/icons/${icon}`"
     >
     <h3 v-if="title" class="compact-feature__title copy__subtitle">
       {{ title }}
@@ -21,7 +21,6 @@ import { Component, Prop } from 'vue-property-decorator'
 @Component
 export default class extends Vue {
   @Prop(String) icon: string | undefined
-  @Prop(String) fileType: string | undefined
   @Prop(String) title: string | undefined
   @Prop(String) description: string | undefined
 }
