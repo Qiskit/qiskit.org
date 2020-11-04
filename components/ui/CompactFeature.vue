@@ -1,15 +1,14 @@
 <template>
   <section class="compact-feature">
     <img
-      v-if="icon"
       class="compact-feature__icon"
       :src="`/images/icons/${icon}`"
       alt=""
     >
-    <h3 v-if="title" class="compact-feature__title">
+    <h3 class="compact-feature__title">
       {{ title }}
     </h3>
-    <p v-if="description" class="compact-feature__description">
+    <p class="compact-feature__description">
       {{ description }}
     </p>
   </section>
@@ -35,7 +34,11 @@ $feature-icon-size: 2.25rem;
 .compact-feature {
   background-color: $purple-70;
   padding: $spacing-05;
-  padding-bottom: $layout-04;
+  padding-bottom: $spacing-09;
+
+  @include mq($until: large) {
+    padding-bottom: $spacing-06;
+  }
 
   &__icon {
     height: $feature-icon-size;
@@ -45,18 +48,18 @@ $feature-icon-size: 2.25rem;
   &__title {
     @include type-style('productive-heading-02');
     color: $white;
-    margin-bottom: .75rem;
-    height: 2.5rem;
+    margin-bottom: $spacing-04;
+    min-height: 2.5rem; // for consistent alignment
+
+    @include mq($until: large) {
+      min-height: initial;
+    }
   }
 
   &__description {
     @include type-style('body-long-01');
     color: $white;
     margin-top: $spacing-03;
-
-    @include mq($until: large) {
-      margin-bottom: $layout-01;
-    }
   }
 }
 </style>
