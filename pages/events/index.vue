@@ -99,7 +99,7 @@ import AppFieldset from '~/components/ui/AppFieldset.vue'
 import {
   CommunityEvent,
   WORLD_REGION_OPTIONS,
-  COMMUNITY_EVENT_TYPE_OPTIONS,
+  COMMUNITY_EVENT_TYPE_OPTIONS
 } from '~/store/modules/events.ts'
 import { EVENT_REQUEST_LINK } from '~/constants/appLinks'
 
