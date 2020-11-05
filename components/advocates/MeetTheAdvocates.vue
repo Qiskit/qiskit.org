@@ -21,7 +21,7 @@
         </AppFieldset>
       </template>
       <template slot="filters-on-s-screen">
-        <AppMultiSelect v-bind="filter.label" />
+        <AppMultiSelect v-bind="filter" />
       </template>
       <template slot="results">
         <AdvocateCard
