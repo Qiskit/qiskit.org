@@ -21,12 +21,10 @@
         <div class="meet-the-advocates__extra-filters meet-the-advocates__extra-filters_on-large-screen">
           <AppFieldset :label="extraFilter.label">
             <client-only>
-              <cv-checkbox
+              <AppCheckbox
                 v-for="option in extraFilter.options"
                 :key="option.label"
-                class="meet-the-advocates__extra-filters__checkboxes"
-                :value="option.value"
-                :label="option.label"
+                v-bind="option"
               />
             </client-only>
           </AppFieldset>
@@ -50,6 +48,7 @@ import AppCard from '~/components/ui/AppCard.vue'
 import AdvocateCard from '~/components/advocates/AdvocateCard.vue'
 import AppMultiSelect from '~/components/ui/AppMultiSelect.vue'
 import AppFieldset from '~/components/ui/AppFieldset.vue'
+import AppCheckbox from '~/components/ui/AppCheckbox.vue'
 
 type multiSelectOption = {
   label: string,
@@ -62,7 +61,8 @@ type multiSelectOption = {
     AdvocateCard,
     AppCard,
     AppMultiSelect,
-    AppFieldset
+    AppFieldset,
+    AppCheckbox
   }
 })
 export default class extends Vue {
@@ -113,16 +113,6 @@ export default class extends Vue {
   }
 
   &__extra-filters {
-    &__checkboxes {
-      .bx--checkbox-label::before {
-        border: 1px solid $black-100;
-      }
-
-      .bx--checkbox:focus + .bx--checkbox-label::before {
-        box-shadow: 0 0 0 2px $white, 0 0 0 4px $purple-60;
-      }
-    }
-
     &_on-large-screen {
       @include mq($until: medium) {
         display: none;
