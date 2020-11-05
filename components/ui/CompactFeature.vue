@@ -58,7 +58,6 @@ $feature-icon-size: 2.25rem;
   &__description {
     @include type-style('body-long-01');
     color: $white;
-    margin-top: $spacing-03;
   }
 }
 </style>
