@@ -14,8 +14,8 @@
           <client-only>
             <AppCheckbox
               v-for="option in filter.options"
-              :key="option.label"
-              v-bind="option"
+              :key="option"
+              :option="option"
             />
           </client-only>
         </AppFieldset>
@@ -43,12 +43,6 @@ import AppFieldset from '~/components/ui/AppFieldset.vue'
 import AppCheckbox from '~/components/ui/AppCheckbox.vue'
 import AppFiltersResultsLayout from '~/components/ui/AppFiltersResultsLayout.vue'
 
-type multiSelectOption = {
-  label: string,
-  value: string,
-  name: string
-}
-
 @Component({
   components: {
     AdvocateCard,
@@ -61,20 +55,10 @@ type multiSelectOption = {
 export default class extends Vue {
   @Prop(Array) advocates!: any
 
-  regions = ['Europe', 'Asia', 'Africa', 'America']
-
-  regionsOptions = this.getOptions(this.regions)
-  regionsLabel: string = 'Locations'
-  regionsFilters: string = 'regionFilters'
-
   filter = {
-    label: this.regionsLabel,
-    options: this.regionsOptions,
-    filterType: this.regionsFilters
-  }
-
-  getOptions (optionsList: any): Array<multiSelectOption> {
-    return optionsList.map((item: string) => ({ label: item, value: item, name: item }))
+    label: 'Locations',
+    options: ['Europe', 'Asia', 'Africa', 'America'],
+    filterType: 'regionFilters'
   }
 }
 </script>
