@@ -14,6 +14,8 @@ import { Component, Prop } from 'vue-property-decorator'
 export default class extends Vue {
   @Prop(String) value!: string
   @Prop(String) label!: string
+  // TODO: Add checked, aria-checked and @change when doing the filter behaviour. Also
+  // reuse this component on events page
 }
 </script>
 
