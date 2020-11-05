@@ -4,7 +4,7 @@
       class="app-multi-select"
       :theme="theme"
       :label="label"
-      :options="options"
+      :options="formatedOptions"
       :value="value"
       :selection-feedback="feedback"
       @change="$emit('change-on-multi-select', $event)"
@@ -16,14 +16,26 @@
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 
+type multiSelectOption = {
+  label: string,
+  value: string,
+  name: string
+}
+
 @Component
 export default class AppMultiSelect extends Vue {
   @Prop(Array) options!: string[]
   @Prop(String) label!: string
   @Prop(Array) value!: string[]
 
+  formatedOptions = this.formatOptions(this.options)
+
   theme: string = 'light'
   feedback: string = 'fixed'
+
+  formatOptions (optionsList: any): Array<multiSelectOption> {
+    return optionsList.map((item: string) => ({ label: item, value: item, name: item }))
+  }
 }
 </script>
 

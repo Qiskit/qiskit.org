@@ -16,8 +16,7 @@ type checkboxOption = {
 
 @Component
 export default class extends Vue {
-  @Prop(String) value!: string
-  @Prop(String) label!: string
+  @Prop(String) option!: string
   // TODO: Add checked, aria-checked and @change when doing the filter behaviour. Also
   // reuse this component on events page
 
