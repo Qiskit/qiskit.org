@@ -34,7 +34,6 @@ $feature-icon-size: 2.25rem;
 .compact-feature {
   background-color: $purple-70;
   padding: $spacing-05;
-  padding-bottom: $spacing-09;
 
   @include mq($until: large) {
     padding-bottom: $spacing-06;
@@ -49,10 +48,10 @@ $feature-icon-size: 2.25rem;
     @include type-style('productive-heading-02');
     color: $white;
     margin-bottom: $spacing-04;
-    min-height: 2.5rem; // for consistent alignment
+    height: 2.5rem; // for consistent alignment
 
-    @include mq($until: large) {
-      min-height: initial;
+    @include mq($until: medium) {
+      height: initial;
     }
   }
 
