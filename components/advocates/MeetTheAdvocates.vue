@@ -17,8 +17,8 @@
           :options="extraFilter.options"
         />
       </div>
-      <div class="meet-the-advocates__index">
-        <div class="meet-the-advocates__extra-filters meet-the-advocates__extra-filters_on-large-screen">
+      <AppFiltersResultsLayout>
+        <template slot="filters">
           <AppFieldset :label="extraFilter.label">
             <client-only>
               <AppCheckbox
@@ -28,15 +28,15 @@
               />
             </client-only>
           </AppFieldset>
-        </div>
-        <div class="meet-the-advocates__main-content">
+        </template>
+        <template slot="results">
           <AdvocateCard
             v-for="advocate in advocates"
             :key="`advocate-${advocate.attributes.name}`"
             v-bind="advocate.attributes"
           />
-        </div>
-      </div>
+        </template>
+      </AppFiltersResultsLayout>
     </div>
   </div>
 </template>
@@ -49,6 +49,7 @@ import AdvocateCard from '~/components/advocates/AdvocateCard.vue'
 import AppMultiSelect from '~/components/ui/AppMultiSelect.vue'
 import AppFieldset from '~/components/ui/AppFieldset.vue'
 import AppCheckbox from '~/components/ui/AppCheckbox.vue'
+import AppFiltersResultsLayout from '~/components/ui/AppFiltersResultsLayout.vue'
 
 type multiSelectOption = {
   label: string,
@@ -62,7 +63,8 @@ type multiSelectOption = {
     AppCard,
     AppMultiSelect,
     AppFieldset,
-    AppCheckbox
+    AppCheckbox,
+    AppFiltersResultsLayout
   }
 })
 export default class extends Vue {
@@ -102,16 +104,6 @@ export default class extends Vue {
     @include contained();
   }
 
-  &__index {
-    display: flex;
-    justify-content: space-between;
-    margin-top: $layout-05;
-
-    @include mq($until: medium) {
-      flex-direction: column;
-    }
-  }
-
   &__extra-filters {
     &_on-large-screen {
       @include mq($until: medium) {
@@ -123,15 +115,6 @@ export default class extends Vue {
       @include mq($from: medium) {
         display: none;
       }
-    }
-  }
-
-  &__main-content {
-    width: 75%;
-
-    @include mq($until: medium) {
-      width: 100%;
-      margin-top: $layout-04;
     }
   }
 }
