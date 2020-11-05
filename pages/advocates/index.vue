@@ -1,22 +1,6 @@
 <template>
   <main class="community-page advocates-page">
-    <header>
-      <CommunityHeader
-        id="presentation"
-        main-title="Qiskit Advocates"
-      >
-        <p>A global program that provides support to the individuals who actively contribute to the Qiskit Community.</p>
-        <template #features>
-          <div id="advocates-benefits">
-            <CompactFeature
-              v-for="benefit in advocateBenefits"
-              :key="`benefit-${benefit.icon}`"
-              v-bind="benefit"
-            />
-          </div>
-        </template>
-      </CommunityHeader>
-    </header>
+    <TheAdvocatesHeader />
     <div class="inner-navigation-scope">
       <InnerNavigation
         class="inner-navigation"
@@ -67,24 +51,24 @@
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import InnerNavigation from '~/components/ui/InnerNavigation.vue'
-import CommunityHeader from '~/components/ui/CommunityHeader.vue'
 import PageSection from '~/components/ui/PageSection.vue'
 import MapSection from '~/components/advocates/MapSection.vue'
 import AdvocateCard from '~/components/advocates/AdvocateCard.vue'
 import CompactFeature from '~/components/ui/CompactFeature.vue'
 import AppCta from '~/components/ui/AppCta.vue'
+import TheAdvocatesHeader from '~/components/advocates/TheAdvocatesHeader.vue'
 
 type Benefit = Pick<CompactFeature, 'icon'|'title'|'description'>
 
 @Component({
   components: {
     InnerNavigation,
-    CommunityHeader,
     PageSection,
     MapSection,
     AdvocateCard,
     CompactFeature,
-    AppCta
+    AppCta,
+    TheAdvocatesHeader
   },
 
   head () {
@@ -140,6 +124,10 @@ export default class extends QiskitPage {
 <style lang="scss">
 @import '~/assets/scss/community-page.scss';
 @import '~carbon-components/scss/globals/scss/typography';
+
+.advocates-page {
+  background-color: $white;
+}
 
 main {
   background-color: $ui-background;

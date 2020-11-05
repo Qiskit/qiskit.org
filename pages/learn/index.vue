@@ -21,16 +21,16 @@
         :compact="isShowingMoreResources"
         url="/learn/?learnLevel=Advanced&amp;timeScale=1%20minute"
       />
-      <LearningResourceCard
+      <AppCard
         v-for="resource in filteredLearningResources"
         :key="resource.path"
-        :title="resource.title"
         :image="resource.image"
-        :cta-label="resource.ctaLabel"
+        :title="resource.title"
         :to="resource.to"
+        :cta-label="resource.ctaLabel"
       >
         <nuxt-content class="copy" :document="resource" />
-      </LearningResourceCard>
+      </AppCard>
     </TheLearningResourceList>
   </div>
 </template>
@@ -41,7 +41,7 @@ import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import TheLearnHeader from '~/components/learn/TheLearnHeader.vue'
 import TheLearningResourceList from '~/components/learn/TheLearningResourceList.vue'
-import LearningResourceCard from '~/components/learn/LearningResourceCard.vue'
+import AppCard from '~/components/ui/AppCard.vue'
 import TheCarefulExplanationForBeginners from '~/components/learn/TheCarefulExplanationForBeginners.vue'
 import TheCarefulExplanationForExperts from '~/components/learn/TheCarefulExplanationForExperts.vue'
 import {
@@ -57,9 +57,9 @@ import {
   components: {
     TheLearnHeader,
     TheLearningResourceList,
-    LearningResourceCard,
     TheCarefulExplanationForExperts,
-    TheCarefulExplanationForBeginners
+    TheCarefulExplanationForBeginners,
+    AppCard
   },
 
   head () {

@@ -206,6 +206,7 @@ export default class extends Vue {
   }
 
   &__underlayer {
+    @include contained();
     overflow: hidden;
     background-color: $cool-gray-100;
     height: 42rem;
