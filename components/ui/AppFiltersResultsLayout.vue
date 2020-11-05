@@ -1,12 +1,13 @@
 <template>
   <div class="app-filters-results-layout">
-    <div class="app-filters-results-layout__container">
-      <div class="app-filters-results-layout__filters app-filters-results-layout__filters_on-large-screen">
-        <slot name="filters" />
-      </div>
-      <div class="app-filters-results-layout__results">
-        <slot name="results" />
-      </div>
+    <div class="app-filters-results-layout__filters app-filters-results-layout__filters_on-large-screen">
+      <slot name="filters-on-m-l-screen" />
+    </div>
+    <div class="app-filters-results-layout__filters app-filters-results-layout__filters_on-small-screen">
+      <slot name="filters-on-s-screen" />
+    </div>
+    <div class="app-filters-results-layout__results">
+      <slot name="results" />
     </div>
   </div>
 </template>
@@ -20,24 +21,18 @@ export default class extends Vue {}
 </script>
 
 <style lang="scss">
-@import '~carbon-components/scss/globals/scss/typography';
-
 .app-filters-results-layout {
-  background-color: $white;
-  color: $white-text-01;
+  display: flex;
+  justify-content: space-between;
+  margin-top: $layout-05;
 
-  &__container {
-    @include contained();
-    display: flex;
-    justify-content: space-between;
-    margin-top: $layout-05;
-
-    @include mq($until: medium) {
-      flex-direction: column;
-    }
+  @include mq($until: medium) {
+    flex-direction: column;
   }
 
   &__filters {
+    color: $gray-100;
+
     &_on-large-screen {
       @include mq($until: medium) {
         display: none;
