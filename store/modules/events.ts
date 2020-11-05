@@ -43,6 +43,12 @@ type CommunityEvent = {
   to: string
 }
 
+type EventMultiSelectOption = {
+  label: string,
+  value: string,
+  name: string
+}
+
 const WORLD_REGION_OPTIONS = Object.freeze([
   WORLD_REGIONS.americas,
   WORLD_REGIONS.asiaPacific,
@@ -66,7 +72,8 @@ export {
   COMMUNITY_EVENT_TYPES,
   WORLD_REGIONS,
   WORLD_REGION_OPTIONS,
-  COMMUNITY_EVENT_TYPE_OPTIONS
+  COMMUNITY_EVENT_TYPE_OPTIONS,
+  EventMultiSelectOption
 }
 
 export default {
@@ -133,6 +140,11 @@ export default {
       const noFilterFound = filterIndex === -1
 
       noFilterFound && state[filter].push(filterValue)
+    },
+    updateFilterSet (state: any, payload: any) {
+      const { filter, filterValues } = payload
+
+      state[filter] = filterValues
     },
     removeFilter (state: any, payload: any) {
       const { filter, filterValue } = payload
