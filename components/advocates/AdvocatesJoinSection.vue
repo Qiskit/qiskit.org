@@ -92,7 +92,8 @@ export default class extends Vue {
       }
 
       &-cta {
-        width: 100%;
+        width: 100% !important;
+        justify-content: space-between;
       }
     }
 
@@ -105,7 +106,6 @@ export default class extends Vue {
         width: 45%;
         margin: $spacing-05;
       }
-
 
       @include mq($until: medium) {
         width: 100%;
