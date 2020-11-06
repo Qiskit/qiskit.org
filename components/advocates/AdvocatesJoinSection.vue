@@ -72,10 +72,10 @@ export default class extends Vue {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      width: 4 * $column-size-large;
+      flex: 1 1 4 * $column-size-large;
 
       @include mq($until: large) {
-        width: 45%;
+        flex: 1 1 45%;
         margin: $spacing-05;
       }
 
@@ -98,12 +98,12 @@ export default class extends Vue {
     }
 
     &__feature {
-      width: 4 * $column-size-large;
+      flex: 1 1 4 * $column-size-large;
       margin-left: $spacing-05;
       padding-bottom: $spacing-09;
 
       @include mq($until: large) {
-        width: 45%;
+        flex: 1 1 45%;
         margin: $spacing-05;
       }
 
