@@ -1,7 +1,7 @@
 <template>
   <cv-checkbox
     class="app-checkbox"
-    v-bind="formatedOption"
+    v-bind="formattedOption"
   />
 </template>
 
@@ -9,7 +9,7 @@
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 
-type ckeckboxOption = {
+type checkboxOption = {
   label: string,
   value: string
 }
@@ -20,9 +20,9 @@ export default class extends Vue {
   // TODO: Add checked, aria-checked and @change when doing the filter behaviour. Also
   // reuse this component on events page
 
-  formatedOption = this.formatOption(this.option)
+  formattedOption = this.formatOption(this.option)
 
-  formatOption (option: string): ckeckboxOption {
+  formatOption (option: string): checkboxOption {
     return { label: option, value: option }
   }
 }
