@@ -57,7 +57,7 @@ export default class extends Vue {
 
   filter = {
     label: 'Locations',
-    options: ['Europe', 'Asia', 'Africa', 'America'],
+    options: ['Americas', 'Asia Pacific', 'Europe', 'Africa'],
     filterType: 'regionFilters'
   }
 }
