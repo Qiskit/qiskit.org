@@ -19,7 +19,7 @@
           :label="filter.label"
           :options="filter.options"
           :value="getCheckedFilters(filter.filterType)"
-          @change-on-multi-select="updateWholeFilter(filter.filterType, $event)"
+          @change-selection="updateWholeFilter(filter.filterType, $event)"
         />
       </div>
       <div class="event-page__event-index">
