@@ -1,5 +1,5 @@
 <template>
-  <ThePageHeader class="advocates-header">
+  <ThePageHeader>
     Connect with the
     <TypewriterEffect
       :values="[
@@ -24,9 +24,4 @@ export default class extends Vue { }
 </script>
 
 <style lang="scss">
-.advocates-header {
-  .page-header__title {
-    max-width: initial;
-  }
-}
 </style>
