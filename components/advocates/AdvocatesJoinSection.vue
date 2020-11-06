@@ -2,7 +2,7 @@
   <section class="join-section">
     <div class="join-section__access">
       <p class="join-section__access-description">
-        The qiskit advocate program is a global program that provides support to the individuals who actively contribute to the Qiskit Community.
+        The Qiskit advocate program is a global program that provides support to the individuals who actively contribute to the Qiskit Community.
       </p>
       <AppCtaBtn
         class="join-section__access-cta"
