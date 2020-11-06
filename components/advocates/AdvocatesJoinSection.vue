@@ -1,7 +1,9 @@
 <template>
   <section class="join-section">
     <div class="join-section__access">
-      <p>The qiskit advocate program is a global program that provides support to the individuals who actively contribute to the Qiskit Community.</p>
+      <p class="join-section__access-description">
+        The qiskit advocate program is a global program that provides support to the individuals who actively contribute to the Qiskit Community.
+      </p>
       <AppCtaBtn
         class="join-section__access-cta"
         v-bind="joinAction"
@@ -45,8 +47,7 @@ export default class extends Vue {
   ]
 
   joinAction = {
-    url: '#advocates-section',
-    scroll: true,
+    url: '#meet-the-advocates',
     label: 'Find an advocate'
   }
 }
@@ -59,13 +60,36 @@ export default class extends Vue {
     display: flex;
     justify-content: space-between;
 
+    @include mq($until: large) {
+      flex-wrap: wrap;
+      justify-content: initial;
+      padding-left: $spacing-05;
+    }
+
     &__access {
       @include type-style('body-long-01');
       color: $white-text-01;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      max-width: 4 * $column-size-large;
+      width: 4 * $column-size-large;
+
+      @include mq($until: large) {
+        width: 45%;
+        margin: $spacing-05;
+      }
+
+      @include mq($until: medium) {
+        width: 100%;
+        margin-bottom: $spacing-05;
+        margin-left: initial;
+      }
+
+      &-description {
+        @include mq($until: medium) {
+          margin-bottom: $spacing-07;
+        }
+      }
 
       &-cta {
         width: 100%;
@@ -73,8 +97,21 @@ export default class extends Vue {
     }
 
     &__feature {
-      max-width: 4 * $column-size-large;
+      width: 4 * $column-size-large;
       margin-left: $spacing-05;
+      padding-bottom: $spacing-09;
+
+      @include mq($until: large) {
+        width: 45%;
+        margin: $spacing-05;
+      }
+
+
+      @include mq($until: medium) {
+        width: 100%;
+        margin-left: initial;
+        margin-bottom: $spacing-05;
+      }
     }
   }
 </style>
