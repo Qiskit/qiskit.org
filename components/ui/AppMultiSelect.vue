@@ -7,7 +7,7 @@
       :options="formatedOptions"
       :value="value"
       :selection-feedback="feedback"
-      @change="$emit('change-on-multi-select', $event)"
+      @change="$emit('change-selection', $event)"
     />
   </client-only>
 </template>
