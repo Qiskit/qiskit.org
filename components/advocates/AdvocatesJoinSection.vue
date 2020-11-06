@@ -60,6 +60,11 @@ export default class extends Vue {
     display: flex;
     justify-content: space-between;
 
+    @include mq($until: medium) {
+      flex-wrap: initial;
+      flex-direction: column;
+    }
+
     @include mq($until: large) {
       flex-wrap: wrap;
       justify-content: initial;
@@ -73,6 +78,7 @@ export default class extends Vue {
       flex-direction: column;
       justify-content: space-between;
       flex: 1 1 4 * $column-size-large;
+      margin-right: $spacing-05;
 
       @include mq($until: large) {
         flex: 1 1 45%;
@@ -80,7 +86,7 @@ export default class extends Vue {
       }
 
       @include mq($until: medium) {
-        width: 100%;
+        flex: 1 1 100%;
         margin-bottom: $spacing-05;
         margin-left: initial;
       }
@@ -99,7 +105,7 @@ export default class extends Vue {
 
     &__feature {
       flex: 1 1 4 * $column-size-large;
-      margin-left: $spacing-05;
+      margin: 0 $spacing-05;
       padding-bottom: $spacing-09;
 
       @include mq($until: large) {
@@ -108,7 +114,7 @@ export default class extends Vue {
       }
 
       @include mq($until: medium) {
-        width: 100%;
+        flex: 1 1 auto;
         margin-left: initial;
         margin-bottom: $spacing-05;
       }
