@@ -15,14 +15,12 @@
         :key="filter.label"
         class="event-page__extra-filters event-page__extra-filters_on-small-screen"
       >
-        <client-only>
-          <AppMultiSelect
-            :label="filter.label"
-            :options="filter.options"
-            :value="getCheckedFilters(filter.filterType)"
-            @change-on-multi-select="updateWholeFilter(filter.filterType, $event)"
-          />
-        </client-only>
+        <AppMultiSelect
+          :label="filter.label"
+          :options="filter.options"
+          :value="getCheckedFilters(filter.filterType)"
+          @change-selection="updateWholeFilter(filter.filterType, $event)"
+        />
       </div>
       <div class="event-page__event-index">
         <div class="event-page__extra-filters event-page__extra-filters_on-large-screen">
@@ -34,13 +32,13 @@
             <client-only>
               <cv-checkbox
                 v-for="option in filter.options"
-                :key="option.label"
+                :key="option"
                 class="event-page__extra-filters__checkboxes"
-                :value="option.value"
-                :label="option.label"
-                :checked="isFilterChecked(filter.filterType, option.value)"
-                :aria-checked="isFilterChecked(filter.filterType, option.value)"
-                @change="updateFilter(filter.filterType, option.value, $event)"
+                :value="option"
+                :label="option"
+                :checked="isFilterChecked(filter.filterType, option)"
+                :aria-checked="isFilterChecked(filter.filterType, option)"
+                @change="updateFilter(filter.filterType, option, $event)"
               />
             </client-only>
           </AppFieldset>
@@ -101,8 +99,7 @@ import AppFieldset from '~/components/ui/AppFieldset.vue'
 import {
   CommunityEvent,
   WORLD_REGION_OPTIONS,
-  COMMUNITY_EVENT_TYPE_OPTIONS,
-  EventMultiSelectOption
+  COMMUNITY_EVENT_TYPE_OPTIONS
 } from '~/store/modules/events.ts'
 import { EVENT_REQUEST_LINK } from '~/constants/appLinks'
 
@@ -148,8 +145,6 @@ import { EVENT_REQUEST_LINK } from '~/constants/appLinks'
   }
 })
 export default class extends QiskitPage {
-  regions = WORLD_REGION_OPTIONS
-  types = COMMUNITY_EVENT_TYPE_OPTIONS
   routeName: string = 'events'
   eventRequestLink = EVENT_REQUEST_LINK
   emptyCard = {
@@ -158,33 +153,21 @@ export default class extends QiskitPage {
     img: '/images/events/no-events.svg'
   }
 
-  // multiselect
-  regionsOptions = this.getOptions(this.regions)
-  typesOptions = this.getOptions(this.types)
-  regionsLabel: string = 'Locations'
-  typesLabel: string = 'Types'
-  regionsFilters: string = 'regionFilters'
-  typesFilters: string = 'typeFilters'
-
   extraFilters = [
     {
-      label: this.regionsLabel,
-      options: this.regionsOptions,
-      filterType: this.regionsFilters
+      label: 'Locations',
+      options: WORLD_REGION_OPTIONS,
+      filterType: 'regionFilters'
     },
     {
-      label: this.typesLabel,
-      options: this.typesOptions,
-      filterType: this.typesFilters
+      label: 'Types',
+      options: COMMUNITY_EVENT_TYPE_OPTIONS,
+      filterType: 'typeFilters'
     }
   ]
 
   get noEvents (): boolean {
     return (this as any).filteredEvents.length === 0
-  }
-
-  getOptions (optionsList: any): Array<EventMultiSelectOption> {
-    return optionsList.map((item: string) => ({ label: item, value: item, name: item }))
   }
 
   getCheckedFilters (filter: string) {
