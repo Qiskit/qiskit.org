@@ -1,11 +1,11 @@
 <template>
   <section class="join-section">
-    <div class="join-section__feature">
-      <p class="join-section__feature-access-description">
+    <div class="join-section__feature join-section__feature_intro">
+      <p class="join-section__feature_intro-copy">
         The Qiskit advocate program is a global program that provides support to the individuals who actively contribute to the Qiskit Community.
       </p>
       <AppCtaBtn
-        class="join-section__access-cta"
+        class="join-section__feature_intro-cta"
         v-bind="joinAction"
       />
     </div>
@@ -72,38 +72,6 @@ export default class extends Vue {
       padding-left: $spacing-05;
     }
 
-    &__access {
-      @include type-style('body-long-01');
-      color: $white-text-01;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      flex: 1 1 4 * $column-size-large;
-      // margin-right: $spacing-05;
-
-      @include mq($until: large) {
-        flex: 1 1 45%;
-        margin: $spacing-05;
-      }
-
-      @include mq($until: medium) {
-        flex: 1 1 100%;
-        margin-bottom: $spacing-05;
-        margin-left: initial;
-      }
-
-      &-description {
-        @include mq($until: medium) {
-          margin-bottom: $spacing-07;
-        }
-      }
-
-      &-cta {
-        min-width: 100;
-        justify-content: space-between;
-      }
-    }
-
     &__feature {
       flex: 1 1 4 * $column-size-large;
       margin: 0 $spacing-05;
@@ -118,6 +86,27 @@ export default class extends Vue {
         flex: 1 1 auto;
         margin-left: initial;
         margin-bottom: $spacing-05;
+      }
+
+      &_intro {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding-bottom: 0;
+
+        &-copy {
+          @include type-style('body-long-01');
+          color: $white-text-01;
+
+          @include mq($until: medium) {
+            margin-bottom: $spacing-07;
+          }
+        }
+
+        &-cta {
+          min-width: 100%;
+          justify-content: space-between;
+        }
       }
     }
   }
