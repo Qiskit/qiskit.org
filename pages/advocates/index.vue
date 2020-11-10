@@ -6,7 +6,6 @@
         class="inner-navigation"
         :sections="[
           { anchor: 'become-an-advocate', label: 'Become an Advocate' },
-          { anchor: 'global-community' , label: 'Global Community' },
           { anchor: 'meet-the-advocates', label: 'Meet the Advocates' },
         ]"
       />
@@ -36,7 +35,6 @@ import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import InnerNavigation from '~/components/ui/InnerNavigation.vue'
 import PageSection from '~/components/ui/PageSection.vue'
-import MapSection from '~/components/advocates/MapSection.vue'
 import AdvocateCard from '~/components/advocates/AdvocateCard.vue'
 import CompactFeature from '~/components/ui/CompactFeature.vue'
 import AppCta from '~/components/ui/AppCta.vue'
@@ -49,7 +47,6 @@ type Benefit = Pick<CompactFeature, 'icon'|'title'|'description'>
   components: {
     InnerNavigation,
     PageSection,
-    MapSection,
     AdvocateCard,
     CompactFeature,
     AppCta,
@@ -77,7 +74,6 @@ type Benefit = Pick<CompactFeature, 'icon'|'title'|'description'>
 
   async fetch ({ store }) {
     const advocates = await store.dispatch('fetchAdvocates')
-    console.log('====', advocates)
 
     store.commit('setAdvocates', advocates)
   }
