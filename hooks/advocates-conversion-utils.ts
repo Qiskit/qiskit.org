@@ -2,8 +2,8 @@ import Airtable from 'airtable'
 
 // TODO: Understand why this import works with '../' and not with '~/'
 import {
-  Advocate,
-  WorldRegion
+  Advocate
+  // WorldRegion
 } from '../store/modules/advocates'
 
 const RECORD_FIELDS = Object.freeze({
