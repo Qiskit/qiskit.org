@@ -28,9 +28,9 @@
           v-slot="advocate"
           :items="advocates"
           :min-items="5"
-          :key-generator="(advocate) => advocate.attributes.name"
+          :key-generator="(advocate) => advocate.name"
         >
-          <AdvocateCard v-bind="advocate.attributes" />
+          <AdvocateCard v-bind="advocate" />
         </InfiniteScroll>
       </template>
     </AppFiltersResultsLayout>
@@ -67,3 +67,7 @@ export default class extends Vue {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+@import '~/assets/scss/blocks/copy.scss';
+</style>
