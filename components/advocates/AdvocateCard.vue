@@ -36,7 +36,7 @@ export default class extends Vue {
     const bgEffects = [
       'linear-gradient(170deg, #0000 0%, #0000 90%, var(--component-bg) 90.3%)',
       'linear-gradient(-170deg, #0000 0%, #0000 90%, var(--component-bg) 90.3%)',
-      `url(/images/advocates/${image})`
+      `url(${image})`
     ]
     return bgEffects.join(', ')
   }

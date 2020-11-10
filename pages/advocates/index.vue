@@ -12,13 +12,14 @@
         </h2>
       </MapSection>
       <PageSection id="meet-the-advocates" framed>
-        <MeetTheAdvocates :advocates="profiles" />
+        <MeetTheAdvocates :advocates="filteredAdvocates" />
       </PageSection>
     </div>
   </main>
 </template>
 
 <script lang="ts">
+import { mapGetters, mapActions } from 'vuex'
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import PageSection from '~/components/ui/PageSection.vue'
@@ -46,17 +47,22 @@ type Benefit = Pick<CompactFeature, 'icon'|'title'|'description'>
     }
   },
 
-  async asyncData (ctx) {
-    const index = await import(`~/content/advocates/index/${'master.md'}`)
-    const sections = await ctx.app.deepLoadCardToc('profiles.md', {
-      basePath: 'advocates/index/'
+  computed: {
+    ...mapGetters([
+      'filteredAdvocates'
+    ])
+  },
+
+  methods: {
+    ...mapActions({
+      fetchAdvocates: 'fetchAdvocates'
     })
-    return {
-      profiles: sections[0].collections.regular,
-      attributes: index.attributes,
-      renderFn: index.vue.render,
-      staticRenderFns: index.vue.staticRenderFns
-    }
+  },
+
+  async fetch ({ store }) {
+    const advocates = await store.dispatch('fetchAdvocates')
+
+    store.commit('setAdvocates', advocates)
   }
 })
 export default class extends QiskitPage {
@@ -137,9 +143,5 @@ main {
   li {
     @include body-long-04();
   }
-}
-
-#global-community {
-  color: $text-01;
 }
 </style>
