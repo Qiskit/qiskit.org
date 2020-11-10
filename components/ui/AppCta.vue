@@ -4,7 +4,8 @@
     class="app-cta copy__link"
     :class="{
       'app-cta_is-external': isExternal,
-      'app-cta_is-internal': !isExternal
+      'app-cta_is-internal': !isExternal,
+      'app-cta_is-id-anchor': isIdAnchor,
     }"
     v-bind="$attrs"
   >
@@ -12,7 +13,7 @@
       <slot />
     </div>
     <component
-      :is="isExternal ? 'Launch16' : 'ArrowRight16'"
+      :is="isExternal ? 'Launch16' : isIdAnchor ? 'ArrowDown16' : 'ArrowRight16'"
       class="app-cta__icon"
     />
   </AppLink>
@@ -29,6 +30,10 @@ import AppLink from '~/components/ui/AppLink.vue'
 export default class extends Vue {
   get isExternal () {
     return AppLink.isExternal(this.$attrs.url)
+  }
+
+  get isIdAnchor () {
+    return AppLink.isIdAnchor(this.$attrs.url)
   }
 }
 </script>
@@ -79,6 +84,22 @@ export default class extends Vue {
     &:active {
       #{$arrow-path} {
         transform: translate(4px, 0);
+      }
+    }
+  }
+
+  &_is-id-anchor {
+    $arrow-path: "path:nth-child(1)";
+
+    #{$arrow-path} {
+      transform: translate(0, 0);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    &:hover,
+    &:active {
+      #{$arrow-path} {
+        transform: translate(0, 2px);
       }
     }
   }

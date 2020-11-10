@@ -1,28 +1,8 @@
 <template>
   <main class="community-page advocates-page">
     <TheAdvocatesHeader />
+    <AdvocatesJoinSection />
     <div class="inner-navigation-scope">
-      <InnerNavigation
-        class="inner-navigation"
-        :sections="[
-          { anchor: 'become-an-advocate', label: 'Become an Advocate' },
-          { anchor: 'global-community' , label: 'Global Community' },
-          { anchor: 'meet-the-advocates', label: 'Meet the Advocates' },
-        ]"
-      />
-      <PageSection id="become-an-advocate" framed>
-        <h2 class="community-page__header">
-          Become an Advocate
-        </h2>
-        <ol>
-          <li>Click on the "Apply now" button below.</li>
-          <li>Complete the test in the application with at least a 70%.</li>
-          <li>Provide at least 3 contributions to the Qiskit community and complete application by <strong>August 15, 2020</strong>.</li>
-        </ol>
-        <ul class="actions">
-          Closed
-        </ul>
-      </PageSection>
       <MapSection
         id="global-community"
         :points="cities()"
@@ -41,26 +21,22 @@
 <script lang="ts">
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
-import InnerNavigation from '~/components/ui/InnerNavigation.vue'
 import PageSection from '~/components/ui/PageSection.vue'
 import MapSection from '~/components/advocates/MapSection.vue'
-import AdvocateCard from '~/components/advocates/AdvocateCard.vue'
 import CompactFeature from '~/components/ui/CompactFeature.vue'
-import AppCta from '~/components/ui/AppCta.vue'
 import TheAdvocatesHeader from '~/components/advocates/TheAdvocatesHeader.vue'
+import AdvocatesJoinSection from '~/components/advocates/AdvocatesJoinSection.vue'
 import MeetTheAdvocates from '~/components/advocates/MeetTheAdvocates.vue'
 
 type Benefit = Pick<CompactFeature, 'icon'|'title'|'description'>
 
 @Component({
   components: {
-    InnerNavigation,
     PageSection,
     MapSection,
-    AdvocateCard,
     CompactFeature,
-    AppCta,
     TheAdvocatesHeader,
+    AdvocatesJoinSection,
     MeetTheAdvocates
   },
 
@@ -85,23 +61,6 @@ type Benefit = Pick<CompactFeature, 'icon'|'title'|'description'>
 })
 export default class extends QiskitPage {
   routeName: string = 'advocates'
-  advocateBenefits: Array<Benefit> = [
-    {
-      icon: 'high-five.svg',
-      title: 'Network with experts and enthusiasts',
-      description: 'Advocates will be added to a group of quantum experts and will be a part of regular information sharing sessions.'
-    },
-    {
-      icon: 'global-network.svg',
-      title: 'Access to Qiskit core members and projects',
-      description: 'Advocates will receive special access to core members of the Qiskit team for questions and brainstorming ideas.'
-    },
-    {
-      icon: 'location.svg',
-      title: 'Invitation to events',
-      description: 'Active Qiskit Advocates will be invited to attend global events created for the quantum computing community.'
-    }
-  ]
 
   cities () {
     const cityIndex = this.$data.profiles.reduce((cityIndex: any, card: any) => {

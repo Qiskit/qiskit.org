@@ -1,5 +1,5 @@
 <template>
-  <section class="compact-feature">
+  <article class="compact-feature">
     <img
       class="compact-feature__icon"
       :src="`/images/icons/${icon}`"
@@ -11,7 +11,7 @@
     <p class="compact-feature__description">
       {{ description }}
     </p>
-  </section>
+  </article>
 </template>
 
 <script lang="ts">
