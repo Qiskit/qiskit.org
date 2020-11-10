@@ -26,7 +26,9 @@ export default class extends Vue { }
 <style lang="scss">
 .advocates-header {
   .page-header__title {
-    max-width: none;
+    @include mq($from: large) {
+      max-width: none;
+    }
   }
 }
 </style>
