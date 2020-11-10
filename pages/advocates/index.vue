@@ -1,8 +1,8 @@
 <template>
   <main class="community-page advocates-page">
     <TheAdvocatesHeader />
+    <AdvocatesJoinSection />
     <div class="inner-navigation-scope">
-      <AdvocatesJoinSection />
       <MapSection
         id="global-community"
         :points="cities()"
