@@ -1,7 +1,7 @@
 <template>
   <section class="join-section">
-    <div class="join-section__access">
-      <p class="join-section__access-description">
+    <div class="join-section__feature">
+      <p class="join-section__feature-access-description">
         The Qiskit advocate program is a global program that provides support to the individuals who actively contribute to the Qiskit Community.
       </p>
       <AppCtaBtn
@@ -57,6 +57,7 @@ export default class extends Vue {
   @import '~carbon-components/scss/globals/scss/typography';
   .join-section {
     @include contained();
+    padding: 0 $spacing-05;
     display: flex;
     justify-content: space-between;
 
@@ -78,7 +79,7 @@ export default class extends Vue {
       flex-direction: column;
       justify-content: space-between;
       flex: 1 1 4 * $column-size-large;
-      margin-right: $spacing-05;
+      // margin-right: $spacing-05;
 
       @include mq($until: large) {
         flex: 1 1 45%;
@@ -98,7 +99,7 @@ export default class extends Vue {
       }
 
       &-cta {
-        width: 100% !important;
+        min-width: 100;
         justify-content: space-between;
       }
     }
