@@ -22,6 +22,3 @@ import TypewriterEffect from '~/components/ui/TypewriterEffect.vue'
 @Component({ components: { ThePageHeader, TypewriterEffect } })
 export default class extends Vue { }
 </script>
-
-<style lang="scss">
-</style>
