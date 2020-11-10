@@ -23,22 +23,15 @@
           Closed
         </ul>
       </PageSection>
-      <MapSection
-        id="global-community"
-        :points="cities()"
-      >
-        <h2 class="community-page__header community-page__header_elegant">
-          Global Community
-        </h2>
-      </MapSection>
       <PageSection id="meet-the-advocates" framed>
-        <MeetTheAdvocates :advocates="profiles" />
+        <MeetTheAdvocates :advocates="filteredAdvocates" />
       </PageSection>
     </div>
   </main>
 </template>
 
 <script lang="ts">
+import { mapGetters, mapActions } from 'vuex'
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import InnerNavigation from '~/components/ui/InnerNavigation.vue'
@@ -70,17 +63,23 @@ type Benefit = Pick<CompactFeature, 'icon'|'title'|'description'>
     }
   },
 
-  async asyncData (ctx) {
-    const index = await import(`~/content/advocates/index/${'master.md'}`)
-    const sections = await ctx.app.deepLoadCardToc('profiles.md', {
-      basePath: 'advocates/index/'
+  computed: {
+    ...mapGetters([
+      'filteredAdvocates'
+    ])
+  },
+
+  methods: {
+    ...mapActions({
+      fetchAdvocates: 'fetchAdvocates'
     })
-    return {
-      profiles: sections[0].collections.regular,
-      attributes: index.attributes,
-      renderFn: index.vue.render,
-      staticRenderFns: index.vue.staticRenderFns
-    }
+  },
+
+  async fetch ({ store }) {
+    const advocates = await store.dispatch('fetchAdvocates')
+    console.log('====', advocates)
+
+    store.commit('setAdvocates', advocates)
   }
 })
 export default class extends QiskitPage {
@@ -102,15 +101,6 @@ export default class extends QiskitPage {
       description: 'Active Qiskit Advocates will be invited to attend global events created for the quantum computing community.'
     }
   ]
-
-  cities () {
-    const cityIndex = this.$data.profiles.reduce((cityIndex: any, card: any) => {
-      const { location, latitude, longitude } = card.attributes
-      cityIndex[location] = { name: location, latitude, longitude }
-      return cityIndex
-    }, {})
-    return Object.values(cityIndex)
-  }
 }
 </script>
 
@@ -178,9 +168,5 @@ main {
   li {
     @include body-long-04();
   }
-}
-
-#global-community {
-  color: $text-01;
 }
 </style>
