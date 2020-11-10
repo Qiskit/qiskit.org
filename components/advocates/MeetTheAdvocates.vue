@@ -26,8 +26,8 @@
       <template slot="results">
         <AdvocateCard
           v-for="advocate in advocates"
-          :key="`advocate-${advocate.attributes.name}`"
-          v-bind="advocate.attributes"
+          :key="`advocate-${advocate.name}`"
+          v-bind="advocate"
         />
       </template>
     </AppFiltersResultsLayout>
@@ -62,3 +62,7 @@ export default class extends Vue {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+@import '~/assets/scss/blocks/copy.scss';
+</style>
