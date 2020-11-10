@@ -10,8 +10,8 @@ const RECORD_FIELDS = Object.freeze({
   name: 'Name',
   location: 'Country',
   // region: 'Region',
-  image: 'Please upload your photo for the Advocates Website',
-  slackId: 'Slack ID'
+  image: 'Please upload your photo for the Advocates Website'
+  // slackId: 'Slack ID'
 } as const)
 
 async function fetchAdvocates (apiKey: string): Promise<Advocate[]> {
@@ -34,8 +34,8 @@ function convertToAdvocate (record: any): Advocate {
     name: getName(record),
     image: getImage(record),
     // region: getRegion(record),
-    location: getLocation(record),
-    slackId: getSlackId(record)
+    location: getLocation(record)
+    // slackId: getSlackId(record)
   }
 }
 
@@ -84,9 +84,9 @@ function getLocation (record: any): string {
 //   return record.get(RECORD_FIELDS.region) || 'Americas'
 // }
 
-function getSlackId (record: any): string {
-  return record.get(RECORD_FIELDS.slackId)
-}
+// function getSlackId (record: any): string {
+//   return record.get(RECORD_FIELDS.slackId)
+// }
 
 export {
   RECORD_FIELDS,
@@ -96,6 +96,6 @@ export {
   getImage,
   getLocation,
   // getRegion,
-  getSlackId,
+  // getSlackId,
   filterWithWhitelist
 }

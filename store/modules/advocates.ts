@@ -10,9 +10,9 @@ type WorldRegion = typeof WORLD_REGIONS[keyof typeof WORLD_REGIONS]
 type Advocate = {
   name: string,
   image: string,
-  location: string,
+  location: string
   // region: WorldRegion,
-  slackId: string
+  // slackId: string
 }
 
 const WORLD_REGION_OPTIONS = Object.freeze([
