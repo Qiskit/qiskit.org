@@ -1,6 +1,6 @@
 <template>
   <section class="join-section">
-    <div class="join-section__feature join-section__feature_intro">
+    <article class="join-section__feature join-section__feature_intro">
       <p class="join-section__feature_intro-copy">
         The Qiskit advocate program is a global program that provides support to the individuals who actively contribute to the Qiskit Community.
       </p>
@@ -8,7 +8,7 @@
         class="join-section__feature_intro-cta"
         v-bind="joinAction"
       />
-    </div>
+    </article>
     <CompactFeature
       v-for="benefit in advocateBenefits"
       :key="`benefit-${benefit.icon}`"
