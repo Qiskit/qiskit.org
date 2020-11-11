@@ -10,14 +10,12 @@
 import { mapGetters, mapActions } from 'vuex'
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
-import PageSection from '~/components/ui/PageSection.vue'
 import TheAdvocatesHeader from '~/components/advocates/TheAdvocatesHeader.vue'
 import AdvocatesJoinSection from '~/components/advocates/AdvocatesJoinSection.vue'
 import MeetTheAdvocates from '~/components/advocates/MeetTheAdvocates.vue'
 
 @Component({
   components: {
-    PageSection,
     TheAdvocatesHeader,
     AdvocatesJoinSection,
     MeetTheAdvocates
