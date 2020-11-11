@@ -24,11 +24,14 @@
         <AppMultiSelect v-bind="filter" />
       </template>
       <template slot="results">
-        <AdvocateCard
-          v-for="advocate in advocates"
-          :key="`advocate-${advocate.attributes.name}`"
-          v-bind="advocate.attributes"
-        />
+        <InfiniteScroll
+          v-slot="advocate"
+          :items="advocates"
+          :min-items="5"
+          :key-generator="(advocate) => advocate.attributes.name"
+        >
+          <AdvocateCard v-bind="advocate.attributes" />
+        </InfiniteScroll>
       </template>
     </AppFiltersResultsLayout>
   </div>
@@ -42,6 +45,7 @@ import AppMultiSelect from '~/components/ui/AppMultiSelect.vue'
 import AppFieldset from '~/components/ui/AppFieldset.vue'
 import AppCheckbox from '~/components/ui/AppCheckbox.vue'
 import AppFiltersResultsLayout from '~/components/ui/AppFiltersResultsLayout.vue'
+import InfiniteScroll from '~/components/ui/InfiniteScroll.vue'
 
 @Component({
   components: {
@@ -49,7 +53,8 @@ import AppFiltersResultsLayout from '~/components/ui/AppFiltersResultsLayout.vue
     AppMultiSelect,
     AppFieldset,
     AppCheckbox,
-    AppFiltersResultsLayout
+    AppFiltersResultsLayout,
+    InfiniteScroll
   }
 })
 export default class extends Vue {

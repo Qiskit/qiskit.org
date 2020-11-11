@@ -24,6 +24,14 @@ export default class extends Vue {
       })
   }
 
+  updateObserved () {
+    (this.$el as HTMLElement)
+      .querySelectorAll('.scrollable')
+      .forEach((section) => {
+        (this._observer as IntersectionObserver).observe(section)
+      })
+  }
+
   beforeDestroy () {
     this._observer && this._observer.disconnect()
   }
@@ -50,11 +58,16 @@ export default class extends Vue {
       const triggerWindowBottom = rootBounds.bottom
       const onTop = targetTop >= 0 && targetTop <= triggerWindowBottom
       if (onTop && targetTop < highestTopValue) {
-        this.activeSection = target.id
+        if (this.activeSection !== target.id) {
+          this.activeSection = target.id
+          this.activeSectionChanged()
+        }
         highestTopValue = targetTop
       }
     })
   }
+
+  activeSectionChanged () {}
 
   _parseSectionFromUrl (route: any) {
     this.activeSection = route.hash.substr(1)
