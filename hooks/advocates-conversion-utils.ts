@@ -6,6 +6,11 @@ import {
   AdvocatesWorldRegion
 } from '../store/modules/advocates'
 
+import {
+  getImageUrl,
+  findImageAttachment
+} from './airtable-conversion-utils'
+
 const RECORD_FIELDS = Object.freeze({
   name: 'Name',
   location: 'Country',
@@ -55,26 +60,6 @@ function getImage (record: any): string {
   return imageUrl || fallbackImage
 }
 
-function getImageUrl (imageAttachment: any): string {
-  return getThumbnailUrl(imageAttachment) || imageAttachment.url
-}
-
-function findImageAttachment (attachments: any[]): any|null {
-  for (const oneAttachment of attachments) {
-    const isImage = oneAttachment.type.startsWith('image')
-    if (isImage) {
-      return oneAttachment
-    }
-  }
-  return null
-}
-
-function getThumbnailUrl (imageAttachment: any): string|null {
-  const { thumbnails } = imageAttachment
-  const { large: largeThumbnail } = thumbnails || {}
-  return largeThumbnail ? largeThumbnail.url : null
-}
-
 function getLocation (record: any): string {
   return record.get(RECORD_FIELDS.location)
 }
@@ -94,7 +79,7 @@ export {
   getName,
   getImage,
   getLocation,
-  // getRegion,
+  getRegion,
   // getSlackId,
   filterWithWhitelist
 }
