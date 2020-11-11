@@ -16,6 +16,8 @@ type RecordFields = {
   // slackId: string
 }
 
+// TODO: Add tests for slackId
+
 class FakeRecord {
   _fields: object = {}
 
