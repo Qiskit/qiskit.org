@@ -67,6 +67,9 @@ export default class extends Vue {
     })
   }
 
+  /**
+   * This methods gets called when the active section changes.
+   */
   activeSectionChanged () {}
 
   _parseSectionFromUrl (route: any) {

@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <div>
     <div
       v-for="(item, index) in items.slice(0, lastShown)"
       :id="index + '-' + keyGenerator(item)"
@@ -8,7 +8,7 @@
     >
       <slot v-bind="item" />
     </div>
-  </section>
+  </div>
 </template>
 
 <script lang="ts">
@@ -23,6 +23,10 @@ export default class extends Mixins(ScrollSectionsMixin) {
 
   lastShown: number = Math.min(this.minItems, this.items.length)
 
+  /**
+   * This methods gets called when the active section changes.
+   * Inherited from ScrollSectionsMixin
+   */
   activeSectionChanged () : void {
     const current: number = this.activeSection ? parseInt(this.activeSection.split('-', 2)[0]) : 0
     const oldLastShown = this.lastShown
