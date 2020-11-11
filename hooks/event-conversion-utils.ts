@@ -10,6 +10,11 @@ import {
   WORLD_REGIONS
 } from '../store/modules/events'
 
+import {
+  getImageUrl,
+  findImageAttachment
+} from './airtable-conversion-utils'
+
 const RECORD_FIELDS = Object.freeze({
   name: 'Name',
   startDate: 'Start Date',
@@ -90,26 +95,6 @@ function getImage (record: any): string {
   const imageAttachment = attachments && findImageAttachment(attachments)
   const imageUrl = imageAttachment && getImageUrl(imageAttachment)
   return imageUrl || fallbackImage
-}
-
-function getImageUrl (imageAttachment: any): string {
-  return getThumbnailUrl(imageAttachment) || imageAttachment.url
-}
-
-function findImageAttachment (attachments: any[]): any|null {
-  for (const oneAttachment of attachments) {
-    const isImage = oneAttachment.type.startsWith('image')
-    if (isImage) {
-      return oneAttachment
-    }
-  }
-  return null
-}
-
-function getThumbnailUrl (imageAttachment: any): string|null {
-  const { thumbnails } = imageAttachment
-  const { large: largeThumbnail } = thumbnails || {}
-  return largeThumbnail ? largeThumbnail.url : null
 }
 
 function getLocation (record: any): string {
