@@ -48,10 +48,6 @@ function getName (record: any): string {
   return record.get(RECORD_FIELDS.name)
 }
 
-function filterWithWhitelist<W> (list: any[], whitelist: readonly W[]): W[] {
-  return list.filter((type): type is W => whitelist.includes(type))
-}
-
 function getImage (record: any): string {
   const fallbackImage = '/images/advocates/no-advocate-photo.png'
   const attachments = record.get(RECORD_FIELDS.image)
@@ -79,7 +75,6 @@ export {
   getName,
   getImage,
   getLocation,
-  getRegion,
-  // getSlackId,
-  filterWithWhitelist
+  getRegion
+  // getSlackId
 }
