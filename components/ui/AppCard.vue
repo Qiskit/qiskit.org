@@ -83,6 +83,7 @@ export default class extends Vue {
     flex: 1;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
   }
 
   &__header {
