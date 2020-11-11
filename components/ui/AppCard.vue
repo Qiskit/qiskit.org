@@ -9,7 +9,7 @@
         <h3 class="app-card__title">
           {{ title }}
         </h3>
-        <div v-if="to" class="app-card__tags">
+        <div v-if="hasTags" class="app-card__tags">
           <cv-tag
             v-for="tag in tags"
             :key="tag"
@@ -40,6 +40,8 @@ export default class extends Vue {
   @Prop(Array) tags!: any
   @Prop(String) to!: any
   @Prop(String) ctaLabel!: any
+
+  hasTags = this.tags && this.tags.length > 0
 }
 </script>
 
