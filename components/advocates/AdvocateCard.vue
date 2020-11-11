@@ -3,9 +3,9 @@
     class="advocate-card"
     :image="image"
     :title="name"
-    :tags="[region]"
+    :tags="formattedRegion"
   >
-    <div class="advocate-card__content">
+    <div>
       <p class="advocate-card__location">
         <Map20 class="advocate-card__icon" />
         {{ location }}
@@ -32,6 +32,9 @@ export default class extends Vue {
   @Prop(String) location!: any
   @Prop(String) region!: any
   @Prop(String) slackId!: any
+
+  // Tags on AppCard is an Array
+  formattedRegion = this.region ? [this.region] : []
 }
 </script>
 
@@ -40,28 +43,15 @@ export default class extends Vue {
 
 .advocate-card {
   margin-bottom: $layout-02;
-  position: relative;
 
   @include mq($until: large) {
     margin-bottom: $layout-01;
-  }
-
-  &__content {
-    position: absolute;
-    margin-top: $layout-02;
-    bottom: $layout-02;
-
-    @include mq($until: medium) {
-      position: relative;
-      margin-bottom: 0;
-    }
   }
 
   &__location, &__contact {
     @include type-style('body-long-01');
     display: flex;
     align-items: center;
-    width: max-content;
   }
 
   &__location {
