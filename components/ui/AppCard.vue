@@ -129,11 +129,10 @@ export default class extends Vue {
   &__description {
     @include type-style('body-long-01');
     margin-top: $layout-02;
-    margin-bottom: $layout-02;
   }
 
   &__link {
-    margin-top: auto;
+    margin-top: $layout-02;
   }
 }
 </style>
