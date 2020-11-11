@@ -2,14 +2,14 @@ import Airtable from 'airtable'
 
 // TODO: Understand why this import works with '../' and not with '~/'
 import {
-  Advocate
-  // WorldRegion
+  Advocate,
+  AdvocatesWorldRegion
 } from '../store/modules/advocates'
 
 const RECORD_FIELDS = Object.freeze({
   name: 'Name',
   location: 'Country',
-  // region: 'Region',
+  region: 'Continents',
   image: 'Please upload your photo for the Advocates Website'
   // slackId: 'Slack ID'
 } as const)
@@ -33,7 +33,7 @@ function convertToAdvocate (record: any): Advocate {
   return {
     name: getName(record),
     image: getImage(record),
-    // region: getRegion(record),
+    region: getRegion(record),
     location: getLocation(record)
     // slackId: getSlackId(record)
   }
@@ -79,10 +79,9 @@ function getLocation (record: any): string {
   return record.get(RECORD_FIELDS.location)
 }
 
-// function getRegion (record: any): WorldRegion {
-//   // TODO: get regions. Now they are not on the Airtable
-//   return record.get(RECORD_FIELDS.region) || 'Americas'
-// }
+function getRegion (record: any): AdvocatesWorldRegion {
+  return record.get(RECORD_FIELDS.region)
+}
 
 // function getSlackId (record: any): string {
 //   return record.get(RECORD_FIELDS.slackId)

@@ -1,31 +1,35 @@
-const WORLD_REGIONS = Object.freeze({
-  americas: 'Americas',
-  asiaPacific: 'Asia Pacific',
+const ADVOCATES_WORLD_REGIONS = Object.freeze({
+  northAmerica: 'North America',
+  southAmerica: 'South America',
+  australia: 'Australia',
+  africa: 'Africa',
   europe: 'Europe',
-  africa: 'Africa'
+  asia: 'Asia'
 } as const)
 
-type WorldRegion = typeof WORLD_REGIONS[keyof typeof WORLD_REGIONS]
+type AdvocatesWorldRegion = typeof ADVOCATES_WORLD_REGIONS[keyof typeof ADVOCATES_WORLD_REGIONS]
 
 type Advocate = {
   name: string,
   image: string,
   location: string
-  // region: WorldRegion,
+  region: AdvocatesWorldRegion
   // slackId: string
 }
 
-const WORLD_REGION_OPTIONS = Object.freeze([
-  WORLD_REGIONS.americas,
-  WORLD_REGIONS.asiaPacific,
-  WORLD_REGIONS.europe,
-  WORLD_REGIONS.africa
+const ADVOCATES_WORLD_REGION_OPTIONS = Object.freeze([
+  ADVOCATES_WORLD_REGIONS.northAmerica,
+  ADVOCATES_WORLD_REGIONS.southAmerica,
+  ADVOCATES_WORLD_REGIONS.australia,
+  ADVOCATES_WORLD_REGIONS.africa,
+  ADVOCATES_WORLD_REGIONS.europe,
+  ADVOCATES_WORLD_REGIONS.asia
 ])
 
 export {
-  WorldRegion,
-  WORLD_REGIONS,
-  WORLD_REGION_OPTIONS,
+  AdvocatesWorldRegion,
+  ADVOCATES_WORLD_REGIONS,
+  ADVOCATES_WORLD_REGION_OPTIONS,
   Advocate
 }
 
@@ -36,9 +40,6 @@ export default {
     }
   },
   getters: {
-    regionFiltersForAdvocates (state: any) {
-      return state.regionFiltersForAdvocates
-    },
     filteredAdvocates (state: any) {
       const { advocates } = state
 
