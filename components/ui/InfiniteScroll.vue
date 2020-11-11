@@ -21,7 +21,7 @@ export default class extends Mixins(ScrollSectionsMixin) {
   @Prop(Function) keyGenerator!: Function
   @Prop({ type: Number, default: 5 }) minItems!: number
 
-  lastShown: number = this.minItems
+  lastShown: number = Math.min(this.minItems, this.items.length)
 
   activeSectionChanged () : void {
     const current: number = this.activeSection ? parseInt(this.activeSection.split('-', 2)[0]) : 0
