@@ -36,8 +36,6 @@ export default class extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '~carbon-components/scss/globals/scss/typography';
-
 .advocate-card {
   margin-bottom: $layout-02;
 
