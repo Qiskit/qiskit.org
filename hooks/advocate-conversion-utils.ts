@@ -57,7 +57,7 @@ function getImage (record: any): string {
 }
 
 function getLocation (record: any): string {
-  return record.get(RECORD_FIELDS.location)
+  return record.get(RECORD_FIELDS.location) || getRegion(record)
 }
 
 function getRegion (record: any): AdvocatesWorldRegion {
