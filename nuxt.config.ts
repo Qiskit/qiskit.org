@@ -13,6 +13,7 @@ import Mode from 'frontmatter-markdown-loader/mode'
 import { NuxtConfig } from '@nuxt/types'
 import pkg from './package.json'
 import fetchEvents from './hooks/update-events'
+import fetchAdvocates from './hooks/update-advocates'
 
 const {
   NODE_ENV,
@@ -210,6 +211,9 @@ async function generateContent () {
   if (AIRTABLE_API_KEY) {
     consola.info('Generating community event previews')
     await fetchEvents(AIRTABLE_API_KEY, './content/events')
+
+    consola.info('Generating advocates previews')
+    await fetchAdvocates(AIRTABLE_API_KEY, './content/advocates')
   } else {
     consola.warn('Cannot generate events: missing AIRTABLE_API_KEY environment variable')
   }
