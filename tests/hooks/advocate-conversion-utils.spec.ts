@@ -62,11 +62,11 @@ describe('convertToAdvocate', () => {
 describe('getRegion', () => {
   it('gets the region from the record', () => {
     const { northAmerica } = ADVOCATES_WORLD_REGIONS
-    const fakeEvent = new FakeRecord({
-      name: 'Fake Conference',
+    const fakeAdvocate = new FakeRecord({
+      name: 'Fake Advocate',
       region: northAmerica
     })
-    expect(getRegion(fakeEvent)).toBe(northAmerica)
+    expect(getRegion(fakeAdvocate)).toBe(northAmerica)
   })
 })
 
@@ -74,7 +74,7 @@ describe('getLocation', () => {
   it('defaults in region if there is no location', () => {
     const { northAmerica } = ADVOCATES_WORLD_REGIONS
     const noLocationEvent = new FakeRecord({
-      name: 'Fake Conference',
+      name: 'Fake Advocate',
       region: northAmerica
     })
     expect(getLocation(noLocationEvent)).toBe(northAmerica)
@@ -82,62 +82,62 @@ describe('getLocation', () => {
 
   it('gets the location from the record', () => {
     const { northAmerica } = ADVOCATES_WORLD_REGIONS
-    const fakeEvent = new FakeRecord({
-      name: 'Fake Conference',
+    const fakeAdvocate = new FakeRecord({
+      name: 'Fake Advocate',
       location: 'Gotham',
       region: northAmerica
     })
-    expect(getLocation(fakeEvent)).toBe('Gotham')
+    expect(getLocation(fakeAdvocate)).toBe('Gotham')
   })
 })
 
 describe('getImage', () => {
   it('defaults in a no-advocate-photo.png value if there is no attachment', () => {
     const noPictureAdvocate = new FakeRecord({
-      name: 'Fake Conference'
+      name: 'Fake Advocate'
     })
     expect(getImage(noPictureAdvocate)).toBe('/images/advocates/no-advocate-photo.png')
   })
 
   it('defaults in a no-advocate-photo.png value if the attachment is of no image type', () => {
-    const invalidPictureEvent = new FakeRecord({
-      name: 'Fake Conference',
+    const invalidPictureAdvocate = new FakeRecord({
+      name: 'Fake Advocate',
       image: [{
         type: 'application/json'
       }]
     })
-    expect(getImage(invalidPictureEvent)).toBe('/images/advocates/no-advocate-photo.png')
+    expect(getImage(invalidPictureAdvocate)).toBe('/images/advocates/no-advocate-photo.png')
   })
 
   it('uses the attachment URL if there are no thumbnails', () => {
     const expectedUrl = 'http://url.to/image.jpg'
-    const noPictureThumbnailsEvent = new FakeRecord({
-      name: 'Fake Conference',
+    const noPictureThumbnailsAdvocate = new FakeRecord({
+      name: 'Fake Advocate',
       image: [{
         url: expectedUrl,
         type: 'image/jpg'
       }]
     })
-    expect(getImage(noPictureThumbnailsEvent)).toBe(expectedUrl)
+    expect(getImage(noPictureThumbnailsAdvocate)).toBe(expectedUrl)
   })
 
   it('uses the attachment URL if there is no large thumbnail', () => {
     const expectedUrl = 'http://url.to/image.jpg'
-    const noLargeThumbnailEvent = new FakeRecord({
-      name: 'Fake Conference',
+    const noLargeThumbnailAdvocate = new FakeRecord({
+      name: 'Fake Advocate',
       image: [{
         url: expectedUrl,
         type: 'image/jpg',
         thumbnails: { }
       }]
     })
-    expect(getImage(noLargeThumbnailEvent)).toBe(expectedUrl)
+    expect(getImage(noLargeThumbnailAdvocate)).toBe(expectedUrl)
   })
 
   it('uses the thumbnail URL if there is a large thumbnail available', () => {
     const expectedUrl = 'http://url.to/thumbnails/large.jpg'
-    const thumbnailPictureEvent = new FakeRecord({
-      name: 'Fake Conference',
+    const thumbnailPictureAdvocate = new FakeRecord({
+      name: 'Fake Advocate',
       image: [{
         url: 'http://url.to/image.jpg',
         type: 'image/jpg',
@@ -146,6 +146,6 @@ describe('getImage', () => {
         }
       }]
     })
-    expect(getImage(thumbnailPictureEvent)).toBe(expectedUrl)
+    expect(getImage(thumbnailPictureAdvocate)).toBe(expectedUrl)
   })
 })
