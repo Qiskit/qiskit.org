@@ -53,8 +53,8 @@ export default {
   },
   actions: {
     async fetchAdvocates () {
-      const eventsModule = await import('~/content/advocates/advocates.json')
-      return eventsModule.default || []
+      const advocatesModule = await import('~/content/advocates/advocates.json')
+      return advocatesModule.default || []
     }
   }
 }
