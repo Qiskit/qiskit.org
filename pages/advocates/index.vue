@@ -42,6 +42,9 @@ import MeetTheAdvocates from '~/components/advocates/MeetTheAdvocates.vue'
   async fetch ({ store }) {
     const advocates = await store.dispatch('fetchAdvocates')
 
+    // only commit to store, advocates
+    // who have filled out the approval form
+    // and provided their Slack ID
     const advocatesWithApproval = advocates.filter((advocate: any) => {
       return advocate.slackId && advocate.slackId.length !== 0
     })
