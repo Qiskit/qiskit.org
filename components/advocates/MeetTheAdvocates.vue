@@ -69,8 +69,6 @@ export default class extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '~/assets/scss/blocks/copy.scss';
-
 .meet-the-advocates {
   @include contained();
   margin-top: $layout-06;
