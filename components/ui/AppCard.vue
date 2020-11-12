@@ -9,7 +9,7 @@
         <h3 class="app-card__title">
           {{ title }}
         </h3>
-        <div v-if="to" class="app-card__tags">
+        <div v-if="hasTags" class="app-card__tags">
           <cv-tag
             v-for="tag in tags"
             :key="tag"
@@ -46,6 +46,8 @@ export default class AppCard extends Vue {
     url: this.to,
     label: this.ctaLabel
   }
+
+  hasTags = this.tags && this.tags.length > 0
 }
 </script>
 
@@ -87,6 +89,7 @@ export default class AppCard extends Vue {
     flex: 1;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
   }
 
   &__header {
@@ -130,7 +133,6 @@ export default class AppCard extends Vue {
   &__description {
     @include type-style('body-long-01');
     margin-top: $layout-02;
-    margin-bottom: $layout-02;
   }
 }
 </style>

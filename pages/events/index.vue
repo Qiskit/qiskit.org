@@ -50,7 +50,9 @@
               :image="emptyCard.img"
               :title="emptyCard.title"
             >
-              {{ emptyCard.description }}
+              <div class="event-page__empty-card-description">
+                {{ emptyCard.description }}
+              </div>
             </AppCard>
             <EventCard
               v-for="event in filteredEvents"
@@ -295,6 +297,14 @@ export default class EventsPage extends QiskitPage {
     @include mq($until: medium) {
       width: 100%;
       margin-top: $layout-04;
+    }
+  }
+
+  &__empty-card-description {
+    height: 8rem;
+
+    @include mq($until: medium) {
+      height: auto;
     }
   }
 
