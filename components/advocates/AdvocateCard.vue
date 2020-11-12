@@ -5,16 +5,14 @@
     :title="name"
     :tags="formattedRegion"
   >
-    <div>
-      <p class="advocate-card__location">
-        <Map20 class="advocate-card__icon" />
-        {{ location }}
-      </p>
-      <p class="advocate-card__contact">
-        <LogoSlack20 class="advocate-card__icon" />
-        {{ slackId }}
-      </p>
-    </div>
+    <p class="advocate-card__location">
+      <Map20 class="advocate-card__icon" />
+      {{ location }}
+    </p>
+    <p class="advocate-card__contact">
+      <LogoSlack20 class="advocate-card__icon" />
+      {{ slackId }}
+    </p>
   </AppCard>
 </template>
 
