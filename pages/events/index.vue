@@ -50,9 +50,9 @@
               :image="emptyCard.img"
               :title="emptyCard.title"
             >
-              <p class="event-page__empty-card-description">
+              <div class="event-page__empty-card-description">
                 {{ emptyCard.description }}
-              </p>
+              </div>
             </AppCard>
             <EventCard
               v-for="event in filteredEvents"
