@@ -15,22 +15,24 @@ type RecordFields = {
   city?: string,
   country?: string,
   region?: AdvocatesWorldRegion
-  // slackId: string
+  slackId: string,
+  slackUsername: string
 }
 
-// TODO: Add tests for slackId
+// TODO: Add tests for slackId, slackUsername
 
 class FakeRecord {
   _fields: object = {}
 
-  constructor ({ name, image, city, country, region /* ,slackId */ }: RecordFields) {
+  constructor ({ name, image, city, country, region, slackId, slackUsername }: RecordFields) {
     this._fields = {
       [RECORD_FIELDS.name]: name,
       [RECORD_FIELDS.image]: image,
       [RECORD_FIELDS.city]: city,
       [RECORD_FIELDS.country]: country,
-      [RECORD_FIELDS.region]: region
-      // // [RECORD_FIELDS.slackId]: slackId
+      [RECORD_FIELDS.region]: region,
+      [RECORD_FIELDS.slackId]: slackId,
+      [RECORD_FIELDS.slackUsername]: slackUsername
     }
   }
 
@@ -50,7 +52,9 @@ describe('convertToAdvocate', () => {
       }
     ],
     city: 'Someplace',
-    region: 'North America'
+    region: 'North America',
+    slackId: 'FAKEID123',
+    slackUsername: 'fakename'
   })
 
   it('extracts and format information from the record', () => {
@@ -69,7 +73,9 @@ describe('getRegion', () => {
     const { northAmerica } = ADVOCATES_WORLD_REGIONS
     const fakeAdvocate = new FakeRecord({
       name: 'Fake Advocate',
-      region: northAmerica
+      region: northAmerica,
+      slackId: 'FAKEID123',
+      slackUsername: 'fakename'
     })
     expect(getRegion(fakeAdvocate)).toBe(northAmerica)
   })
@@ -81,7 +87,9 @@ describe('getCity', () => {
     const fakeAdvocate = new FakeRecord({
       name: 'Fake Advocate',
       city: 'Gotham',
-      region: northAmerica
+      region: northAmerica,
+      slackId: 'FAKEID123',
+      slackUsername: 'fakename'
     })
     expect(getCity(fakeAdvocate)).toBe('Gotham')
   })
@@ -93,7 +101,9 @@ describe('getCountry', () => {
     const fakeAdvocate = new FakeRecord({
       name: 'Fake Advocate',
       country: 'Canada',
-      region: northAmerica
+      region: northAmerica,
+      slackId: 'FAKEID123',
+      slackUsername: 'fakename'
     })
     expect(getCountry(fakeAdvocate)).toBe('Canada')
   })
@@ -102,7 +112,9 @@ describe('getCountry', () => {
 describe('getImage', () => {
   it('defaults in a no-advocate-photo.png value if there is no attachment', () => {
     const noPictureAdvocate = new FakeRecord({
-      name: 'Fake Advocate'
+      name: 'Fake Advocate',
+      slackId: 'FAKEID123',
+      slackUsername: 'fakename'
     })
     expect(getImage(noPictureAdvocate)).toBe('/images/advocates/no-advocate-photo.png')
   })
@@ -112,7 +124,9 @@ describe('getImage', () => {
       name: 'Fake Advocate',
       image: [{
         type: 'application/json'
-      }]
+      }],
+      slackId: 'FAKEID123',
+      slackUsername: 'fakename'
     })
     expect(getImage(invalidPictureAdvocate)).toBe('/images/advocates/no-advocate-photo.png')
   })
@@ -124,7 +138,9 @@ describe('getImage', () => {
       image: [{
         url: expectedUrl,
         type: 'image/jpg'
-      }]
+      }],
+      slackId: 'FAKEID123',
+      slackUsername: 'fakename'
     })
     expect(getImage(noPictureThumbnailsAdvocate)).toBe(expectedUrl)
   })
@@ -137,7 +153,9 @@ describe('getImage', () => {
         url: expectedUrl,
         type: 'image/jpg',
         thumbnails: { }
-      }]
+      }],
+      slackId: 'FAKEID123',
+      slackUsername: 'fakename'
     })
     expect(getImage(noLargeThumbnailAdvocate)).toBe(expectedUrl)
   })
@@ -152,7 +170,9 @@ describe('getImage', () => {
         thumbnails: {
           large: { url: expectedUrl }
         }
-      }]
+      }],
+      slackId: 'FAKEID123',
+      slackUsername: 'fakename'
     })
     expect(getImage(thumbnailPictureAdvocate)).toBe(expectedUrl)
   })

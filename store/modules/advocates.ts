@@ -14,8 +14,9 @@ type Advocate = {
   image: string,
   city: string,
   country: string,
-  region: AdvocatesWorldRegion
-  // slackId: string
+  region: AdvocatesWorldRegion,
+  slackId: string,
+  slackUsername: string
 }
 
 const ADVOCATES_WORLD_REGION_OPTIONS = Object.freeze([

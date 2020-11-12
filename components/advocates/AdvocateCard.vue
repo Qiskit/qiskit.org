@@ -5,14 +5,14 @@
     :title="name"
     :tags="formattedRegion"
   >
-    <p v-if="location" class="advocate-card__location">
+    <p class="advocate-card__location">
       <Map20 class="advocate-card__icon" />
       {{ location }}
     </p>
-    <p v-if="slackId" class="advocate-card__contact">
+    <p class="advocate-card__contact">
       <LogoSlack20 class="advocate-card__icon" />
-      <AppLink :url="`https://qiskit.slack.com/team/${slackId}`">
-        Contact on Slack
+      <AppLink class="copy__link" :url="`https://qiskit.slack.com/team/${slackId}`">
+        @{{ slackUsername }}
       </AppLink>
     </p>
   </AppCard>
@@ -37,9 +37,10 @@ export default class extends Vue {
   @Prop(String) country!: any
   @Prop(String) region!: any
   @Prop(String) slackId!: any
+  @Prop(String) slackUsername!: any
 
   // Tags on AppCard is an Array
-  formattedRegion = this.region ? [this.region] : []
+  formattedRegion = this.region ? [this.region] : [];
 
   location = [this.city, this.country].filter(e => !!e).join(', ')
 }

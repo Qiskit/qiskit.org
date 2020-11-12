@@ -42,7 +42,11 @@ import MeetTheAdvocates from '~/components/advocates/MeetTheAdvocates.vue'
   async fetch ({ store }) {
     const advocates = await store.dispatch('fetchAdvocates')
 
-    store.commit('setAdvocates', advocates)
+    const advocatesWithApproval = advocates.filter((advocate: any) => {
+      return advocate.slackId && advocate.slackId.length !== 0
+    })
+
+    store.commit('setAdvocates', advocatesWithApproval)
   }
 })
 export default class extends QiskitPage {
