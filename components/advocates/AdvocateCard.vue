@@ -5,7 +5,7 @@
     :title="name"
     :tags="formattedRegion"
   >
-    <p class="advocate-card__location">
+    <p v-if="location" class="advocate-card__location">
       <Map20 class="advocate-card__icon" />
       {{ location }}
     </p>
