@@ -8,6 +8,11 @@
       all over the world. If you are interested in getting involved with the
       quantum computing community, reach out to an advocate local to your area.
     </p>
+    <p class="copy__paragraph copy__paragraph_importance_support">
+      <strong>Note:</strong> you must have a <AppLink class="copy__link" :url="'https://ibm.co/joinqiskitslack'">
+        Slack account
+      </AppLink> in the Qiskit workspace order to contact advocates.
+    </p>
     <AppFiltersResultsLayout>
       <template slot="filters-on-m-l-screen">
         <AppFieldset :label="filter.label">
@@ -46,6 +51,7 @@ import AppFieldset from '~/components/ui/AppFieldset.vue'
 import AppCheckbox from '~/components/ui/AppCheckbox.vue'
 import AppFiltersResultsLayout from '~/components/ui/AppFiltersResultsLayout.vue'
 import InfiniteScroll from '~/components/ui/InfiniteScroll.vue'
+import AppLink from '~/components/ui/AppLink.vue'
 
 @Component({
   components: {
@@ -54,7 +60,8 @@ import InfiniteScroll from '~/components/ui/InfiniteScroll.vue'
     AppFieldset,
     AppCheckbox,
     AppFiltersResultsLayout,
-    InfiniteScroll
+    InfiniteScroll,
+    AppLink
   }
 })
 export default class extends Vue {
