@@ -11,7 +11,7 @@
     </p>
     <p v-if="slackId" class="advocate-card__contact">
       <LogoSlack20 class="advocate-card__icon" />
-      <AppLink :url="'https://qiskit.slack.com/team/' + slackId">
+      <AppLink :url="`https://qiskit.slack.com/team/${slackId}`">
         Contact on Slack
       </AppLink>
     </p>
