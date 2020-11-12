@@ -40,7 +40,7 @@ export default class extends Vue {
   @Prop(String) slackUsername!: any
 
   // Tags on AppCard is an Array
-  formattedRegion = this.region ? [this.region] : [];
+  formattedRegion = this.region ? [this.region] : []
 
   location = [this.city, this.country].filter(e => !!e).join(', ')
 }
