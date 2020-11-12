@@ -1,5 +1,5 @@
 <template>
-  <div class="meet-the-advocates">
+  <section id="meet-the-advocates" class="meet-the-advocates">
     <h2 class="copy__title">
       Meet the Advocates
     </h2>
@@ -39,7 +39,7 @@
         </InfiniteScroll>
       </template>
     </AppFiltersResultsLayout>
-  </div>
+  </section>
 </template>
 
 <script lang="ts">
