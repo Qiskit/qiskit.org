@@ -23,15 +23,18 @@ import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 
 @Component
-export default class AdvocateCard extends Vue {
+export default class extends Vue {
   @Prop(String) name!: string
   @Prop(String) image!: string
-  @Prop(String) location!: string
+  @Prop(String) city!: string
+  @Prop(String) country!: string
   @Prop(String) region!: string
   @Prop(String) slackId!: string
 
   // Tags on AppCard is an Array
   formattedRegion = this.region ? [this.region] : []
+
+  location = [this.city, this.country].filter(e => !!e).join(', ')
 }
 </script>
 
