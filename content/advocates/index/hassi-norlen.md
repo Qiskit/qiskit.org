@@ -1,6 +1,6 @@
 ---
 name: Hassi Norlen
-image: hassi-norlen.png
+image: /images/advocates/hassi-norlen.png
 location: Washington D.C.
 latitude: 38.89
 longitude: -77.01
