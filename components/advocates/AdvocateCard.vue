@@ -33,12 +33,15 @@ import AppLink from '~/components/ui/AppLink.vue'
 export default class extends Vue {
   @Prop(String) name!: any
   @Prop(String) image!: any
-  @Prop(String) location!: any
+  @Prop(String) city!: any
+  @Prop(String) country!: any
   @Prop(String) region!: any
   @Prop(String) slackId!: any
 
   // Tags on AppCard is an Array
   formattedRegion = this.region ? [this.region] : []
+
+  location = [this.city, this.country].filter(e => !!e).join(', ')
 }
 </script>
 
