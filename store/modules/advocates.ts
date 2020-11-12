@@ -12,7 +12,8 @@ type AdvocatesWorldRegion = typeof ADVOCATES_WORLD_REGIONS[keyof typeof ADVOCATE
 type Advocate = {
   name: string,
   image: string,
-  location: string
+  city: string,
+  country: string,
   region: AdvocatesWorldRegion
   // slackId: string
 }

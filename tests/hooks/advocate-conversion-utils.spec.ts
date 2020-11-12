@@ -1,6 +1,7 @@
 import {
   RECORD_FIELDS,
-  getLocation,
+  getCity,
+  getCountry,
   getRegion,
   getImage,
   convertToAdvocate
@@ -11,7 +12,8 @@ import { AdvocatesWorldRegion, ADVOCATES_WORLD_REGIONS } from '~/store/modules/a
 type RecordFields = {
   name: string,
   image?: object[],
-  location?: string
+  city?: string,
+  country?: string,
   region?: AdvocatesWorldRegion
   // slackId: string
 }
@@ -21,11 +23,12 @@ type RecordFields = {
 class FakeRecord {
   _fields: object = {}
 
-  constructor ({ name, image, location, region /* ,slackId */ }: RecordFields) {
+  constructor ({ name, image, city, country, region /* ,slackId */ }: RecordFields) {
     this._fields = {
       [RECORD_FIELDS.name]: name,
       [RECORD_FIELDS.image]: image,
-      [RECORD_FIELDS.location]: location,
+      [RECORD_FIELDS.city]: city,
+      [RECORD_FIELDS.country]: country,
       [RECORD_FIELDS.region]: region
       // // [RECORD_FIELDS.slackId]: slackId
     }
@@ -46,16 +49,16 @@ describe('convertToAdvocate', () => {
         thumbnails: {}
       }
     ],
-    location: 'Someplace',
+    city: 'Someplace',
     region: 'North America'
   })
 
   it('extracts and format information from the record', () => {
-    const { name, image, location, region } = convertToAdvocate(fakeRecord)
-    expect({ name, image, location, region }).toEqual({
+    const { name, image, city, region } = convertToAdvocate(fakeRecord)
+    expect({ name, image, city, region }).toEqual({
       name: 'Fake advocate',
       image: '/image.jpeg',
-      location: 'Someplace',
+      city: 'Someplace',
       region: 'North America'
     })
   })
@@ -72,24 +75,27 @@ describe('getRegion', () => {
   })
 })
 
-describe('getLocation', () => {
-  it('defaults in region if there is no location', () => {
-    const { northAmerica } = ADVOCATES_WORLD_REGIONS
-    const noLocationEvent = new FakeRecord({
-      name: 'Fake Advocate',
-      region: northAmerica
-    })
-    expect(getLocation(noLocationEvent)).toBe(northAmerica)
-  })
-
-  it('gets the location from the record', () => {
+describe('getCity', () => {
+  it('gets the city from the record', () => {
     const { northAmerica } = ADVOCATES_WORLD_REGIONS
     const fakeAdvocate = new FakeRecord({
       name: 'Fake Advocate',
-      location: 'Gotham',
+      city: 'Gotham',
       region: northAmerica
     })
-    expect(getLocation(fakeAdvocate)).toBe('Gotham')
+    expect(getCity(fakeAdvocate)).toBe('Gotham')
+  })
+})
+
+describe('getCountry', () => {
+  it('gets the city from the record', () => {
+    const { northAmerica } = ADVOCATES_WORLD_REGIONS
+    const fakeAdvocate = new FakeRecord({
+      name: 'Fake Advocate',
+      country: 'Canada',
+      region: northAmerica
+    })
+    expect(getCountry(fakeAdvocate)).toBe('Canada')
   })
 })
 

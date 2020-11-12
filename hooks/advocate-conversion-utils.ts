@@ -13,10 +13,11 @@ import {
 
 const RECORD_FIELDS = Object.freeze({
   name: 'Name',
-  location: 'Country',
+  city: 'City',
+  country: 'Country',
   region: 'Continents',
   image: 'Please upload your photo for the Advocates Website'
-  // slackId: 'Slack ID'
+  // slackId: 'Slack Member Id'
 } as const)
 
 async function fetchAdvocates (apiKey: string): Promise<Advocate[]> {
@@ -39,7 +40,8 @@ function convertToAdvocate (record: any): Advocate {
     name: getName(record),
     image: getImage(record),
     region: getRegion(record),
-    location: getLocation(record)
+    city: getCity(record),
+    country: getCountry(record)
     // slackId: getSlackId(record)
   }
 }
@@ -56,8 +58,12 @@ function getImage (record: any): string {
   return imageUrl || fallbackImage
 }
 
-function getLocation (record: any): string {
-  return record.get(RECORD_FIELDS.location) || getRegion(record)
+function getCity (record: any): string {
+  return record.get(RECORD_FIELDS.city)
+}
+
+function getCountry (record: any): string {
+  return record.get(RECORD_FIELDS.country)
 }
 
 function getRegion (record: any): AdvocatesWorldRegion {
@@ -74,7 +80,8 @@ export {
   convertToAdvocate,
   getName,
   getImage,
-  getLocation,
+  getCity,
+  getCountry,
   getRegion
   // getSlackId
 }
