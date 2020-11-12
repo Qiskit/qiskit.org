@@ -175,7 +175,7 @@ const EXPERIMENTALIST_TOOLBOX_IN_MENU: TableOfContentEntry = {
 const EXPERIMENTALIST_TOOLBOX: OverviewSection = {
   id: experimentalistToolboxId,
   title: 'Experimentalist Toolbox',
-  description: 'Qiskit\'s characterization framework offers circuits and analysis methods to understand and characterize the source of noice that impacts our devices. Such parameters include T1, T₂* , T2, Hamiltonian parameters such as the ZZ interaction rate and control errors in the gates.',
+  description: 'Qiskit\'s characterization framework offers circuits and analysis methods to understand and characterize the source of noise that impacts our devices. Such parameters include T1, T₂* , T2, Hamiltonian parameters such as the ZZ interaction rate and control errors in the gates.',
   link: {
     label: 'See docs',
     url: 'https://qiskit.org/documentation/apidoc/ignis.html'
@@ -185,7 +185,7 @@ const EXPERIMENTALIST_TOOLBOX: OverviewSection = {
       title: 'Characterization',
       content: {
         image: '/images/overview/characterization/characterization.png',
-        description: 'Qiskit\'s characterization framework brings the analysis parameters and circuits to users in order to understand and characterize the source of noice that impacts our devices. Such parameters include T1, T₂*, T2, Hamiltonian parameters such as the ZZ interaction rate and control errors in the gates.',
+        description: 'Qiskit\'s characterization framework brings the analysis parameters and circuits to users in order to understand and characterize the source of noise that impacts our devices. Such parameters include T1, T₂*, T2, Hamiltonian parameters such as the ZZ interaction rate and control errors in the gates.',
         cta: {
           label: 'See Characterization framework',
           url: 'https://qiskit.org/documentation/apidoc/characterization.html'
