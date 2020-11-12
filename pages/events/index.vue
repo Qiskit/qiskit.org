@@ -318,7 +318,7 @@ export default class extends QiskitPage {
   }
 
   &__empty-card-description {
-    height: 9rem;
+    height: 8rem;
 
     @include mq($until: medium) {
       height: auto;
