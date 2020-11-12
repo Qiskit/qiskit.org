@@ -9,7 +9,7 @@
         <h3 class="app-card__title">
           {{ title }}
         </h3>
-        <div v-if="to" class="app-card__tags">
+        <div v-if="hasTags" class="app-card__tags">
           <cv-tag
             v-for="tag in tags"
             :key="tag"
@@ -40,6 +40,8 @@ export default class extends Vue {
   @Prop(Array) tags!: any
   @Prop(String) to!: any
   @Prop(String) ctaLabel!: any
+
+  hasTags = this.tags && this.tags.length > 0
 }
 </script>
 
@@ -78,8 +80,10 @@ export default class extends Vue {
 
   &__content {
     padding: $spacing-05 $spacing-05 $spacing-05 $spacing-07;
+    flex: 1;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
   }
 
   &__header {
@@ -93,14 +97,15 @@ export default class extends Vue {
   }
 
   &__title {
-    flex: 0 0 auto;
+    flex: 1;
     @include type-style('productive-heading-02');
   }
 
-   &__tags {
+  &__tags {
     width: 20rem;
     display: flex;
     flex-wrap: wrap;
+    flex: 1;
     justify-content: flex-end;
 
     @include mq($until: large) {
@@ -129,11 +134,10 @@ export default class extends Vue {
   &__description {
     @include type-style('body-long-01');
     margin-top: $layout-02;
-    margin-bottom: $layout-02;
   }
 
   &__link {
-    margin-top: auto;
+    margin-top: $layout-02;
   }
 }
 </style>
