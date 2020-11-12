@@ -5,13 +5,15 @@
     :title="name"
     :tags="formattedRegion"
   >
-    <p class="advocate-card__location">
+    <p v-if="location" class="advocate-card__location">
       <Map20 class="advocate-card__icon" />
       {{ location }}
     </p>
-    <p class="advocate-card__contact">
+    <p v-if="slackId" class="advocate-card__contact">
       <LogoSlack20 class="advocate-card__icon" />
-      {{ slackId }}
+      <AppLink :url="'https://qiskit.slack.com/team/' + slackId">
+        Contact on Slack
+      </AppLink>
     </p>
   </AppCard>
 </template>
@@ -20,9 +22,13 @@
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 import AppCard from '~/components/ui/AppCard.vue'
+import AppLink from '~/components/ui/AppLink.vue'
 
 @Component({
-  components: { AppCard }
+  components: {
+    AppCard,
+    AppLink
+  }
 })
 export default class extends Vue {
   @Prop(String) name!: any
