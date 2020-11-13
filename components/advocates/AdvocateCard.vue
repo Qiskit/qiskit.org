@@ -37,7 +37,7 @@ export default class extends Vue {
   @Prop(String) country!: any
   @Prop(String) region!: any
   @Prop(String) slackId!: any
-  @Prop(String) slackUsername!: any
+  @Prop(String) slackUsername!: string
 
   // Tags on AppCard is an Array
   formattedRegion = this.region ? [this.region] : []

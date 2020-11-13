@@ -22,19 +22,18 @@ const RECORD_FIELDS = Object.freeze({
 } as const)
 
 async function fetchAdvocates (apiKey: string): Promise<Advocate[]> {
+  const { slackId } = RECORD_FIELDS
   const advocates: Advocate[] = []
   const base = new Airtable({ apiKey }).base('app8koO4BZifGFhCV')
   await base('Advocates').select({
-    fields: Object.values(RECORD_FIELDS)
+    fields: Object.values(RECORD_FIELDS),
+    filterByFormula: `AND(
+      NOT({${slackId}} = '')
+    )`
   }).eachPage((records, nextPage) => {
     for (const record of records) {
       const advocate = convertToAdvocate(record)
-      // only commit to store, advocates
-      // who have filled out the approval form
-      // and provided their Slack ID
-      if (advocate.slackId && advocate.slackId.length !== 0) {
-        advocates.push(advocate)
-      }
+      advocates.push(advocate)
     }
     nextPage()
   })
