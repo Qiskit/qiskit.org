@@ -29,7 +29,12 @@ async function fetchAdvocates (apiKey: string): Promise<Advocate[]> {
   }).eachPage((records, nextPage) => {
     for (const record of records) {
       const advocate = convertToAdvocate(record)
-      advocates.push(advocate)
+      // only commit to store, advocates
+      // who have filled out the approval form
+      // and provided their Slack ID
+      if (advocate.slackId.length !== 0) {
+        advocates.push(advocate)
+      }
     }
     nextPage()
   })
