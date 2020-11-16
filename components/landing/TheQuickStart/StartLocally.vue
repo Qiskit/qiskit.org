@@ -9,7 +9,7 @@
         class="copy__link"
         url="https://www.python.org/downloads/"
       >
-        Python 3.5+.
+        Python 3.6+.
       </AppLink>
       Although it isn't required, we recommend using a
       <AppLink
