@@ -9,7 +9,7 @@
       quantum computing community, reach out to an advocate local to your area.
     </p>
     <p class="copy__paragraph copy__paragraph_importance_support">
-      <strong>Note:</strong> you must have a <AppLink class="copy__link" :url="'https://ibm.co/joinqiskitslack'">
+      <strong>Note:</strong> you must have a <AppLink class="copy__link" :url="joinSlackLink">
         Slack account
       </AppLink> in the Qiskit workspace order to contact advocates.
     </p>
@@ -72,6 +72,8 @@ export default class extends Vue {
     options: ['Americas', 'Asia Pacific', 'Europe', 'Africa'],
     filterType: 'regionFilters'
   }
+
+  joinSlackLink: string = 'https://ibm.co/joinqiskitslack'
 }
 </script>
 
