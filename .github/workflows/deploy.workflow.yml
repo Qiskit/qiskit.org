@@ -1,11 +1,14 @@
 name: qiskit.org - build and deploy
 
 on:
+  # run when action is manually triggered
   workflow_dispatch:
   push:
+    # run on pushes to master branch
     branches: [ master ]
   schedule:
-    # schedule daily at 08:00am UTC (on the default or base branch)
+    # run daily at 08:00am UTC (on the default or base branch)
+    # https://crontab.guru/#0_8_*_*_*
     - cron: '0 8 * * *'
 
 env:
@@ -20,7 +23,9 @@ env:
   encrypted_rclone_key: ${{ secrets.encrypted_rclone_key }}
 
 jobs:
+  # job id/key
   build-and-deploy:
+    # job name
     name: Build and Deploy
     runs-on: ubuntu-latest
 
