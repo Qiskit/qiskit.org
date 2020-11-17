@@ -203,5 +203,3 @@ describe('getSlackUsername', () => {
     expect(getSlackUsername(fakeAdvocate)).toBe(fakeSlackUsername)
   })
 })
-
-
