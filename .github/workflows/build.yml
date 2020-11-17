@@ -45,10 +45,9 @@ jobs:
             ${{ runner.os }}-node-
 
       - run: npm ci
-      - run: |
-          npm run lint
-          npm test
-          npm run generate
+      - run: npm run lint
+      - run: npm test
+      - run: npm run generate
 
   build-and-deploy:
     name: Build and Deploy
@@ -73,8 +72,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
-      - run: |
-          npm ci
-          npm run generate
+      - run: npm ci
+      - run: npm run generate
       - run: cd deploy && ./deploy_cos.sh
         shell: bash
