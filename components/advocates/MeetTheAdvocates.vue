@@ -52,8 +52,8 @@ import AppMultiSelect from '~/components/ui/AppMultiSelect.vue'
 import AppFieldset from '~/components/ui/AppFieldset.vue'
 import AppFiltersResultsLayout from '~/components/ui/AppFiltersResultsLayout.vue'
 import InfiniteScroll from '~/components/ui/InfiniteScroll.vue'
-import { Advocate } from '~/constants/advocate'
 import { ADVOCATES_WORLD_REGION_OPTIONS } from '~/store/modules/advocates.ts'
+import { Advocate } from '~/types/advocate'
 
 @Component({
   components: {
