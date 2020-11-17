@@ -12,10 +12,11 @@
       <template slot="filters-on-m-l-screen">
         <AppFieldset :label="filter.label">
           <client-only>
-            <AppCheckbox
+            <cv-checkbox
               v-for="option in filter.options"
               :key="option"
-              :option="option"
+              :label="option"
+              :value="option"
             />
           </client-only>
         </AppFieldset>
@@ -43,7 +44,6 @@ import { Component, Prop } from 'vue-property-decorator'
 import AdvocateCard from '~/components/advocates/AdvocateCard.vue'
 import AppMultiSelect from '~/components/ui/AppMultiSelect.vue'
 import AppFieldset from '~/components/ui/AppFieldset.vue'
-import AppCheckbox from '~/components/ui/AppCheckbox.vue'
 import AppFiltersResultsLayout from '~/components/ui/AppFiltersResultsLayout.vue'
 import InfiniteScroll from '~/components/ui/InfiniteScroll.vue'
 
@@ -52,7 +52,6 @@ import InfiniteScroll from '~/components/ui/InfiniteScroll.vue'
     AdvocateCard,
     AppMultiSelect,
     AppFieldset,
-    AppCheckbox,
     AppFiltersResultsLayout,
     InfiniteScroll
   }

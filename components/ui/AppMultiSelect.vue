@@ -72,10 +72,6 @@ export default class extends Vue {
       background-color: $cool-gray-10;
     }
 
-    .bx--checkbox-label::before {
-      border: 1px solid $black-100;
-    }
-
     .bx--list-box__menu-item--highlighted {
       background-color: $cool-gray-20;
     }
