@@ -4,7 +4,8 @@ import {
   getCountry,
   getRegion,
   getImage,
-  convertToAdvocate
+  convertToAdvocate,
+  getSlackId
 } from '~/hooks/advocate-conversion-utils'
 
 import { AdvocatesWorldRegion, ADVOCATES_WORLD_REGIONS } from '~/store/modules/advocates'
@@ -18,8 +19,6 @@ type RecordFields = {
   slackId: string,
   slackUsername: string
 }
-
-// TODO: Add tests for slackId, slackUsername
 
 class FakeRecord {
   _fields: object = {}
@@ -177,3 +176,31 @@ describe('getImage', () => {
     expect(getImage(thumbnailPictureAdvocate)).toBe(expectedUrl)
   })
 })
+
+describe('getSlackId', () => {
+  it('gets the slackId from the record', () => {
+    const fakeSlackId = 'FAKEID123'
+    const fakeAdvocate = new FakeRecord({
+      name: 'Fake Advocate',
+      region: 'North America',
+      slackId: 'FAKEID123',
+      slackUsername: 'fakename'
+    })
+    expect(getSlackId(fakeAdvocate)).toBe(fakeSlackId)
+  })
+})
+
+describe('getSlackUsername', () => {
+  it('gets the slackUsername from the record', () => {
+    const fakeSlackUsername = 'fakename'
+    const fakeAdvocate = new FakeRecord({
+      name: 'Fake Advocate',
+      region: 'North America',
+      slackId: 'FAKEID123',
+      slackUsername: 'fakename'
+    })
+    expect(getSlackId(fakeAdvocate)).toBe(fakeSlackUsername)
+  })
+})
+
+
