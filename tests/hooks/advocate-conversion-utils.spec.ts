@@ -5,7 +5,8 @@ import {
   getRegion,
   getImage,
   convertToAdvocate,
-  getSlackId
+  getSlackId,
+  getSlackUsername
 } from '~/hooks/advocate-conversion-utils'
 
 import { AdvocatesWorldRegion, ADVOCATES_WORLD_REGIONS } from '~/store/modules/advocates'
@@ -199,7 +200,7 @@ describe('getSlackUsername', () => {
       slackId: 'FAKEID123',
       slackUsername: 'fakename'
     })
-    expect(getSlackId(fakeAdvocate)).toBe(fakeSlackUsername)
+    expect(getSlackUsername(fakeAdvocate)).toBe(fakeSlackUsername)
   })
 })
 
