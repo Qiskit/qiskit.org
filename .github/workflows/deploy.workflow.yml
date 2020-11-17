@@ -3,24 +3,13 @@ name: qiskit.org - build and deploy
 on:
   # run when action is manually triggered
   workflow_dispatch:
+  # run on pushes to master branch
   push:
-    # run on pushes to master branch
     branches: [ master ]
+  # run daily at 08:00am UTC (on the default or base branch)
+  # https://crontab.guru/#0_8_*_*_*
   schedule:
-    # run daily at 08:00am UTC (on the default or base branch)
-    # https://crontab.guru/#0_8_*_*_*
     - cron: '0 8 * * *'
-
-env:
-  AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  IBM_CLOUD_API_KEY: ${{ secrets.IBM_CLOUD_API_KEY }}
-  IBM_CLOUD_ORGANIZATION: ${{ secrets.IBM_CLOUD_ORGANIZATION }}
-  IBM_CLOUD_SPACE: ${{ secrets.IBM_CLOUD_SPACE }}
-  QISKIT_SEGMENT_APP_KEY: ${{ secrets.QISKIT_SEGMENT_APP_KEY }}
-  QISKIT_SEGMENT_SCRIPT: ${{ secrets.QISKIT_SEGMENT_SCRIPT }}
-  encrypted_rclone_iv: ${{ secrets.encrypted_rclone_iv }}
-  encrypted_rclone_key: ${{ secrets.encrypted_rclone_key }}
 
 jobs:
   # job id/key
@@ -44,5 +33,17 @@ jobs:
 
       - run: npm ci
       - run: npm run generate
-      - run: cd deploy && ./deploy_cos.sh
+
+      - name: Deploy
+        run: cd deploy && ./deploy_cos.sh
         shell: bash
+        env:
+          AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          IBM_CLOUD_API_KEY: ${{ secrets.IBM_CLOUD_API_KEY }}
+          IBM_CLOUD_ORGANIZATION: ${{ secrets.IBM_CLOUD_ORGANIZATION }}
+          IBM_CLOUD_SPACE: ${{ secrets.IBM_CLOUD_SPACE }}
+          QISKIT_SEGMENT_APP_KEY: ${{ secrets.QISKIT_SEGMENT_APP_KEY }}
+          QISKIT_SEGMENT_SCRIPT: ${{ secrets.QISKIT_SEGMENT_SCRIPT }}
+          encrypted_rclone_iv: ${{ secrets.encrypted_rclone_iv }}
+          encrypted_rclone_key: ${{ secrets.encrypted_rclone_key }}
