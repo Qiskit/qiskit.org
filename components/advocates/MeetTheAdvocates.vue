@@ -23,7 +23,12 @@
         </AppFieldset>
       </template>
       <template slot="filters-on-s-screen">
-        <AppMultiSelect v-bind="filter" />
+        <AppMultiSelect
+          :label="filter.label"
+          :options="filter.options"
+          :value="activeFilters"
+          @change-selection="updateActiveFilters($event)"
+        />
       </template>
       <template slot="results">
         <InfiniteScroll
@@ -62,7 +67,7 @@ import { ADVOCATES_WORLD_REGION_OPTIONS } from '~/store/modules/advocates.ts'
 export default class MeetTheAdvocates extends Vue {
   @Prop(Array) advocates!: Advocate[]
 
-  private activeFilters: Array<string> = [];
+  private activeFilters: string[] = [];
 
   private filter = {
     label: 'Locations',
@@ -80,6 +85,13 @@ export default class MeetTheAdvocates extends Vue {
     }
 
     return this.advocates.filter(advocate => this.activeFilters.includes(advocate.region))
+  }
+
+  /**
+   * Updates the active filters.
+   */
+  updateActiveFilters (activeFilters: string[]): void {
+    this.activeFilters = activeFilters
   }
 }
 </script>

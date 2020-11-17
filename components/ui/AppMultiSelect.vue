@@ -23,10 +23,10 @@ type multiSelectOption = {
 }
 
 @Component
-export default class extends Vue {
+export default class AppMultiSelect extends Vue {
   @Prop(Array) options!: Array<string>
-  @Prop(String) label!: any
-  @Prop(Array) value!: any
+  @Prop(String) label!: string
+  @Prop(Array) value!: string[]
 
   formatedOptions = this.formatOptions(this.options)
 
