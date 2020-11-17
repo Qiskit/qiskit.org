@@ -1,0 +1,80 @@
+name: qiskit.org build
+
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches: [ master ]
+  schedule:
+    # schedule daily at 08:00am UTC
+    - cron: '0 8 * * *'
+
+env:
+  AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  IBM_CLOUD_API_KEY: ${{ secrets.IBM_CLOUD_API_KEY }}
+  IBM_CLOUD_ORGANIZATION: ${{ secrets.IBM_CLOUD_ORGANIZATION }}
+  IBM_CLOUD_SPACE: ${{ secrets.IBM_CLOUD_SPACE }}
+  QISKIT_SEGMENT_APP_KEY: ${{ secrets.QISKIT_SEGMENT_APP_KEY }}
+  QISKIT_SEGMENT_SCRIPT: ${{ secrets.QISKIT_SEGMENT_SCRIPT }}
+  encrypted_rclone_iv: ${{ secrets.encrypted_rclone_iv }}
+  encrypted_rclone_key: ${{ secrets.encrypted_rclone_key }}
+
+jobs:
+  lint-tests-and-build:
+    name: Lint, Tests, and Build
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x]
+
+    if: ${{ github.event_name == 'pull_request' }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+          check-latest: true
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - run: npm ci
+      - run: |
+          npm run lint
+          npm test
+          npm run generate
+
+  build-and-deploy:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x]
+
+    if: ${{ github.event_name == 'push' OR github.event_name == 'schedule' }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+          check-latest: true
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - run: |
+          npm ci
+          npm run generate
+      - run: cd deploy && ./deploy_cos.sh
+        shell: bash
