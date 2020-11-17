@@ -15,6 +15,7 @@
             <cv-checkbox
               v-for="option in filter.options"
               :key="option"
+              v-model="activeFilters"
               :label="option"
               :value="option"
             />
@@ -27,7 +28,7 @@
       <template slot="results">
         <InfiniteScroll
           v-slot="advocate"
-          :items="advocates"
+          :items="filteredAdvocates"
           :min-items="5"
           :key-generator="(advocate) => advocate.name"
         >
@@ -46,6 +47,8 @@ import AppMultiSelect from '~/components/ui/AppMultiSelect.vue'
 import AppFieldset from '~/components/ui/AppFieldset.vue'
 import AppFiltersResultsLayout from '~/components/ui/AppFiltersResultsLayout.vue'
 import InfiniteScroll from '~/components/ui/InfiniteScroll.vue'
+import { Advocate } from '~/constants/advocate'
+import { ADVOCATES_WORLD_REGION_OPTIONS } from '~/store/modules/advocates.ts'
 
 @Component({
   components: {
@@ -56,13 +59,27 @@ import InfiniteScroll from '~/components/ui/InfiniteScroll.vue'
     InfiniteScroll
   }
 })
-export default class extends Vue {
-  @Prop(Array) advocates!: any
+export default class MeetTheAdvocates extends Vue {
+  @Prop(Array) advocates!: Advocate[]
 
-  filter = {
+  private activeFilters: Array<string> = [];
+
+  private filter = {
     label: 'Locations',
-    options: ['Americas', 'Asia Pacific', 'Europe', 'Africa'],
-    filterType: 'regionFilters'
+    options: ADVOCATES_WORLD_REGION_OPTIONS
+  }
+
+  /**
+   * List of advocates filtered by selected locations.
+   * The selected filter locations correspond to advocate regions.
+   * If no location is selected in the filter, all advocates shall be shown.
+   */
+  get filteredAdvocates (): Advocate[] {
+    if (this.activeFilters.length === 0) {
+      return this.advocates
+    }
+
+    return this.advocates.filter(advocate => this.activeFilters.includes(advocate.region))
   }
 }
 </script>
