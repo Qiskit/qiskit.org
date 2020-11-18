@@ -31,11 +31,11 @@ import AppLink from '~/components/ui/AppLink.vue'
   }
 })
 export default class extends Vue {
-  @Prop(String) name!: any
-  @Prop(String) image!: any
-  @Prop(String) city!: any
-  @Prop(String) country!: any
-  @Prop(String) region!: any
+  @Prop(String) name!: string
+  @Prop(String) image!: string
+  @Prop(String) city!: string
+  @Prop(String) country!: string
+  @Prop(String) region!: string
   @Prop(String) slackId!: string
   @Prop(String) slackUsername!: string
 
