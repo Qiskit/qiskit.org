@@ -89,7 +89,7 @@ import MenuMixin from '~/mixins/menu'
 @Component({
   components: { MobileMenu, AppLink, AppLogo }
 })
-export default class extends Mixins(MenuMixin) {
+export default class TheMenu extends Mixins(MenuMixin) {
   isMobileMenuVisible: boolean = false
 
   @Watch('isMobileMenuVisible')

@@ -47,7 +47,7 @@ type Decoherences = { [key: number]: number }
 @Component({
   components: { AppIcon, TheDarkHeader }
 })
-export default class extends Vue {
+export default class MetalGrid extends Vue {
   timeToRemoveNextCell: number = 5 // in ms
   timeToLoadMetal: number = 50 // in ms
   triggerPositionFromTopCenter: CellCoordinates = { x: -3, y: 2 }

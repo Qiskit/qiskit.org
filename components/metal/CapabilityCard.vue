@@ -37,7 +37,7 @@ import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 
 @Component
-export default class extends Vue {
+export default class CapabilityCard extends Vue {
   @Prop(String) visualResource!: any
   @Prop(String) title!: any
   @Prop(String) description!: any

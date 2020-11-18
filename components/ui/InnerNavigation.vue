@@ -25,7 +25,7 @@ import AppLink from '~/components/ui/AppLink.vue'
 @Component({
   components: { AppLink }
 })
-export default class extends Vue {
+export default class InnerNavigation extends Vue {
   @Prop({ type: Array, default: [] }) sections!: any
 }
 </script>

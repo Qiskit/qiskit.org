@@ -2,7 +2,7 @@ import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 
 @Component
-export default class extends Vue {
+export default class ScrollBetweenSections extends Vue {
   activeSection = ''
   _observer: IntersectionObserver | null = null
 

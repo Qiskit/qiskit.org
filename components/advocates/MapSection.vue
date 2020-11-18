@@ -53,7 +53,7 @@ import { Component, Prop } from 'vue-property-decorator'
     }
   }
 })
-export default class extends Vue {
+export default class MapSection extends Vue {
   @Prop({ type: String, default: 'end' }) extraPosition!: any
   @Prop(Array) points!: any
 }

@@ -15,7 +15,7 @@ import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 
 @Component
-export default class extends Vue {
+export default class AppMultiSelect extends Vue {
   @Prop(Array) options!: any
   @Prop(String) label!: any
   @Prop(Array) value!: any

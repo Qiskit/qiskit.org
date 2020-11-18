@@ -41,7 +41,7 @@ import LandingCta from '~/components/landing/LandingCta.vue'
 @Component({
   components: { TheFeatureMosaic, LandingCta }
 })
-export default class extends Vue { }
+export default class TheFeatures extends Vue { }
 </script>
 
 <style lang="scss">

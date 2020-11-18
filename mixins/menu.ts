@@ -13,7 +13,7 @@ import {
 } from '~/constants/menuLinks'
 
 @Component
-export default class extends Vue {
+export default class Menu extends Vue {
   homeLink: NavLink = HOME_LINK
 
   learnMore: Array<NavLink> = [TUTORIALS_LINK, DOCUMENTATION_LINK]

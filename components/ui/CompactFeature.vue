@@ -19,7 +19,7 @@ import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 
 @Component
-export default class extends Vue {
+export default class CompactFeature extends Vue {
   @Prop(String) icon: string | undefined
   @Prop(String) title: string | undefined
   @Prop(String) description: string | undefined

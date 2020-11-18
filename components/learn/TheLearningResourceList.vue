@@ -88,7 +88,7 @@ import { Component, Prop } from 'vue-property-decorator'
 import AppLink from '~/components/ui/AppLink.vue'
 
 @Component({ components: { AppLink } })
-export default class extends Vue {
+export default class TheLearningResourceList extends Vue {
   @Prop({ type: Array, default: [] }) topFilters!: Array<string>
   @Prop(String) activeTopFilter!: string
 

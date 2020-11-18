@@ -33,7 +33,7 @@ export { AccordionLayoutProps }
 @Component({
   components: { AppCta }
 })
-export default class extends Vue implements AccordionLayoutProps {
+export default class AccordionLayout extends Vue implements AccordionLayoutProps {
   @Prop(String) image!: string
   @Prop(String) description!: string
   @Prop(Object) cta!: {

@@ -60,7 +60,7 @@ import AppLink from '~/components/ui/AppLink.vue'
 
 @Component({ components: { AppLink } })
 
-export default class extends Vue {}
+export default class BuildingSection extends Vue {}
 </script>
 
 <style lang="scss" scoped>

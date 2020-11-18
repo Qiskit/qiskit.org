@@ -80,7 +80,7 @@ function getBackgroundUris (background: string): [string, string] {
     }
   }
 })
-export default class extends QiskitPage {
+export default class EventsPage extends QiskitPage {
   routeName = 'events-entry'
 }
 </script>

@@ -38,7 +38,7 @@ import MetalGrid from '~/components/metal/MetalGrid.vue'
 @Component({
   components: { VersionInfo, LandingCta, MetalGrid }
 })
-export default class extends Vue {
+export default class TheHeroMoment extends Vue {
   @Prop({ type: String, required: true }) version!: string
 
   data () {

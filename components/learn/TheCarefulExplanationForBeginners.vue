@@ -23,7 +23,7 @@ import { Component } from 'vue-property-decorator'
 import CarefulExplanation from '~/components/learn/CarefulExplanation.vue'
 
 @Component({ components: { CarefulExplanation } })
-export default class extends Vue {}
+export default class TheCarefulExplanationForBeginners extends Vue {}
 </script>
 
 <style lang="scss" scoped>

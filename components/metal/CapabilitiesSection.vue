@@ -63,7 +63,7 @@ import ScrollSectionsMixin from '~/mixins/scrollBetweenSections'
 @Component({
   components: { CapabilityCard }
 })
-export default class extends Mixins(ScrollSectionsMixin) {
+export default class CapabilitiesSection extends Mixins(ScrollSectionsMixin) {
   capabilities = METAL_CAPABILITIES
 
   isActiveImage (item: MetalCapability, index: number): boolean {

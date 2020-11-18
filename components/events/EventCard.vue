@@ -28,7 +28,7 @@ import AppCard from '~/components/ui/AppCard.vue'
 @Component({
   components: { AppCard }
 })
-export default class extends Vue {
+export default class EventCard extends Vue {
   @Prop(Array) types!: any
   @Prop(String) title!: any
   @Prop(String) image!: any

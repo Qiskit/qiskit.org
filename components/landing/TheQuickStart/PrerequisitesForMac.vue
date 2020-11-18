@@ -30,7 +30,7 @@ import { Component } from 'vue-property-decorator'
 import AppLink from '~/components/ui/AppLink.vue'
 
 @Component({ components: { AppLink } })
-export default class extends Vue { }
+export default class PrerequisitesForMac extends Vue { }
 </script>
 
 <style lang="scss" scoped>
