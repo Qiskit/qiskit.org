@@ -1,5 +1,5 @@
 <template>
-  <div class="meet-the-advocates">
+  <section id="meet-the-advocates" class="meet-the-advocates">
     <h2 class="copy__title">
       Meet the Advocates
     </h2>
@@ -7,6 +7,11 @@
       Qiskit advocates are some of the finest minds in quantum computing,
       all over the world. If you are interested in getting involved with the
       quantum computing community, reach out to an advocate local to your area.
+    </p>
+    <p class="copy__paragraph copy__paragraph_importance_support">
+      <strong>Note:</strong> you must have a <AppLink class="copy__link" :url="joinSlackLink">
+        Slack account
+      </AppLink> in the Qiskit workspace order to contact advocates.
     </p>
     <AppFiltersResultsLayout>
       <template slot="filters-on-m-l-screen">
@@ -34,7 +39,7 @@
         </InfiniteScroll>
       </template>
     </AppFiltersResultsLayout>
-  </div>
+  </section>
 </template>
 
 <script lang="ts">
@@ -46,6 +51,7 @@ import AppFieldset from '~/components/ui/AppFieldset.vue'
 import AppCheckbox from '~/components/ui/AppCheckbox.vue'
 import AppFiltersResultsLayout from '~/components/ui/AppFiltersResultsLayout.vue'
 import InfiniteScroll from '~/components/ui/InfiniteScroll.vue'
+import AppLink from '~/components/ui/AppLink.vue'
 
 @Component({
   components: {
@@ -54,7 +60,8 @@ import InfiniteScroll from '~/components/ui/InfiniteScroll.vue'
     AppFieldset,
     AppCheckbox,
     AppFiltersResultsLayout,
-    InfiniteScroll
+    InfiniteScroll,
+    AppLink
   }
 })
 export default class extends Vue {
@@ -65,6 +72,8 @@ export default class extends Vue {
     options: ['Americas', 'Asia Pacific', 'Europe', 'Africa'],
     filterType: 'regionFilters'
   }
+
+  joinSlackLink: string = 'https://ibm.co/joinqiskitslack'
 }
 </script>
 
