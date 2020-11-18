@@ -20,8 +20,8 @@
   <a href="https://github.com/Qiskit/qiskit.org/blob/master/LICENSE.txt">
     <img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="Qiskit.org is released under the Apache 2.0 License." />
   </a>
-  <a href="https://travis-ci.com/Qiskit/qiskit.org">
-    <img src="https://travis-ci.com/Qiskit/qiskit.org.svg?branch=master" alt="Current CircleCI build status." />
+  <a href="https://github.com/Qiskit/qiskit.org/actions">
+    <img src="https://github.com/Qiskit/qiskit.org/workflows/build%20and%20deploy/badge.svg?branch=master" alt="Current GitHub Action build status." />
   </a>
   <a href="https://github.com/Qiskit/qiskit.org/blob/master/CONTRIBUTING.rst">
     <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs welcome!" />
