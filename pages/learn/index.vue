@@ -84,7 +84,7 @@ import {
   }
 })
 
-export default class Learn extends QiskitPage {
+export default class LearnPage extends QiskitPage {
   routeName = 'learn'
 
   learnLevelOptions = LEARN_LEVEL_OPTIONS
