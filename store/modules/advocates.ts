@@ -29,7 +29,7 @@ export {
 
 class State {
   advocates: Advocate[] = []
-  regionFilter: string[] = []
+  regionFilters: string[] = []
 }
 
 const actions = <ActionTree<State, any>> {
@@ -37,20 +37,34 @@ const actions = <ActionTree<State, any>> {
     const advocatesModule = await import('~/content/advocates/advocates.json')
     const advocates = advocatesModule.default || []
     commit('setAdvocates', advocates)
+  },
+
+  updateRegionFilters ({ commit }, regionFilters: string[]): void {
+    commit('setRegionFilters', regionFilters)
   }
 }
 
 const mutations = <MutationTree<State>> {
-  setAdvocates (state, payload: Advocate[]) {
-    state.advocates = payload
+  setAdvocates (state, advocates: Advocate[]) {
+    state.advocates = advocates
+  },
+
+  setRegionFilters (state, regionFilters: string[]) {
+    state.regionFilters = regionFilters
   }
 }
 
 const getters = <GetterTree<State, any>> {
-  filteredAdvocates (state) {
-    const { advocates } = state
+  /**
+   * List of advocates filtered by selected regions.
+   * If no region is selected to filter, all advocates shall be shown.
+   */
+  filteredAdvocates ({ advocates, regionFilters }): Advocate[] {
+    if (regionFilters.length === 0) {
+      return advocates
+    }
 
-    return advocates
+    return advocates.filter(advocate => regionFilters.includes(advocate.region))
   }
 }
 

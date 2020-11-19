@@ -33,7 +33,7 @@
       <template slot="results">
         <InfiniteScroll
           v-slot="advocate"
-          :items="filteredAdvocates"
+          :items="advocates"
           :min-items="5"
           :key-generator="(advocate) => advocate.name"
         >
@@ -75,23 +75,12 @@ export default class MeetTheAdvocates extends Vue {
   }
 
   /**
-   * List of advocates filtered by selected locations.
-   * The selected filter locations correspond to advocate regions.
-   * If no location is selected in the filter, all advocates shall be shown.
-   */
-  get filteredAdvocates (): Advocate[] {
-    if (this.activeFilters.length === 0) {
-      return this.advocates
-    }
-
-    return this.advocates.filter(advocate => this.activeFilters.includes(advocate.region))
-  }
-
-  /**
    * Updates the active filters.
    */
   updateActiveFilters (activeFilters: string[]): void {
     this.activeFilters = activeFilters
+    this.$store.dispatch('advocates/updateRegionFilters', activeFilters)
+  }
   }
 }
 </script>
