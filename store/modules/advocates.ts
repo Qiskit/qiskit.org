@@ -1,3 +1,5 @@
+import { Advocate } from '~/types/advocate'
+
 const ADVOCATES_WORLD_REGIONS = Object.freeze({
   northAmerica: 'North America',
   southAmerica: 'South America',
@@ -8,15 +10,6 @@ const ADVOCATES_WORLD_REGIONS = Object.freeze({
 } as const)
 
 type AdvocatesWorldRegion = typeof ADVOCATES_WORLD_REGIONS[keyof typeof ADVOCATES_WORLD_REGIONS]
-
-type Advocate = {
-  name: string,
-  image: string,
-  city: string,
-  country: string,
-  region: AdvocatesWorldRegion
-  // slackId: string
-}
 
 const ADVOCATES_WORLD_REGION_OPTIONS = Object.freeze([
   ADVOCATES_WORLD_REGIONS.northAmerica,
