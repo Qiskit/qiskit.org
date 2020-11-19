@@ -66,27 +66,11 @@
 <script lang="ts">
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
-import InnerNavigation from '~/components/ui/InnerNavigation.vue'
-import CommunityHeader from '~/components/ui/CommunityHeader.vue'
-import PageSection from '~/components/ui/PageSection.vue'
-import MapSection from '~/components/advocates/MapSection.vue'
-import AdvocateCard from '~/components/advocates/AdvocateCard.vue'
 import CompactFeature from '~/components/ui/CompactFeature.vue'
-import AppCta from '~/components/ui/AppCta.vue'
 
 type Benefit = Pick<CompactFeature, 'icon'|'title'|'description'>
 
 @Component({
-  components: {
-    InnerNavigation,
-    CommunityHeader,
-    PageSection,
-    MapSection,
-    AdvocateCard,
-    CompactFeature,
-    AppCta
-  },
-
   head () {
     return {
       title: 'Qiskit Advocates'

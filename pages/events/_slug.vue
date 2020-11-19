@@ -37,8 +37,6 @@
 import { Component } from 'vue-property-decorator'
 import { Context } from '@nuxt/types'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
-import EventMenu from '~/components/events/EventMenu.vue'
-import EventFooter from '~/components/events/EventFooter.vue'
 
 function getBackgroundUris (background: string): [string, string] {
   const bgRoute = '/images/events/headers/'
@@ -49,10 +47,6 @@ function getBackgroundUris (background: string): [string, string] {
 
 @Component({
   layout: 'event',
-  components: {
-    EventMenu,
-    EventFooter
-  },
   head () {
     const self = this as any
 

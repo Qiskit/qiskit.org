@@ -58,13 +58,7 @@
 <script lang="ts">
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
-import ThePageHeader from '~/components/ui/ThePageHeader.vue'
-import TypewriterEffect from '~/components/ui/TypewriterEffect.vue'
-import TheTableOfContents from '~/components/overview/TheTableOfContents.vue'
-import TheQuickStart from '~/components/landing/TheQuickStart/index.vue'
-import ContentSection from '~/components/overview/ContentSection.vue'
-import ContentAccordion, { ContentAccordionTab } from '~/components/overview/ContentAccordion.vue'
-import AppCta from '~/components/ui/AppCta.vue'
+import { ContentAccordionTab } from '~/components/overview/ContentAccordion.vue'
 import {
   TABLE_OF_CONTENTS,
   CONTENT_SECTIONS,
@@ -74,15 +68,6 @@ import ScrollSectionsMixin from '~/mixins/scrollBetweenSections'
 
 @Component({
   mixins: [ScrollSectionsMixin],
-  components: {
-    ThePageHeader,
-    TypewriterEffect,
-    TheTableOfContents,
-    ContentSection,
-    ContentAccordion,
-    TheQuickStart,
-    AppCta
-  },
   head () {
     return {
       title: 'Qiskit Overview'
