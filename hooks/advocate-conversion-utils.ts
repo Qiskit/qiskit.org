@@ -16,15 +16,18 @@ const RECORD_FIELDS = Object.freeze({
   city: 'City',
   country: 'Country',
   region: 'Continents',
-  image: 'Please upload your photo for the Advocates Website'
-  // slackId: 'Slack Member Id'
+  image: 'Please upload your photo for the Advocates Website',
+  slackId: 'Slack Member Id',
+  slackUsername: 'Slack Username'
 } as const)
 
 async function fetchAdvocates (apiKey: string): Promise<Advocate[]> {
+  const { slackId } = RECORD_FIELDS
   const advocates: Advocate[] = []
   const base = new Airtable({ apiKey }).base('app8koO4BZifGFhCV')
   await base('Advocates').select({
-    fields: Object.values(RECORD_FIELDS)
+    fields: Object.values(RECORD_FIELDS),
+    filterByFormula: `AND({${slackId}})`
   }).eachPage((records, nextPage) => {
     for (const record of records) {
       const advocate = convertToAdvocate(record)
@@ -41,8 +44,9 @@ function convertToAdvocate (record: any): Advocate {
     image: getImage(record),
     region: getRegion(record),
     city: getCity(record),
-    country: getCountry(record)
-    // slackId: getSlackId(record)
+    country: getCountry(record),
+    slackId: getSlackId(record),
+    slackUsername: getSlackUsername(record)
   }
 }
 
@@ -70,9 +74,13 @@ function getRegion (record: any): AdvocatesWorldRegion {
   return record.get(RECORD_FIELDS.region)
 }
 
-// function getSlackId (record: any): string {
-//   return record.get(RECORD_FIELDS.slackId)
-// }
+function getSlackId (record: any): string {
+  return record.get(RECORD_FIELDS.slackId)
+}
+
+function getSlackUsername (record: any): string {
+  return record.get(RECORD_FIELDS.slackUsername)
+}
 
 export {
   RECORD_FIELDS,
@@ -82,6 +90,7 @@ export {
   getImage,
   getCity,
   getCountry,
-  getRegion
-  // getSlackId
+  getRegion,
+  getSlackId,
+  getSlackUsername
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="meet-the-advocates">
+  <section id="meet-the-advocates" class="meet-the-advocates">
     <h2 class="copy__title">
       Meet the Advocates
     </h2>
@@ -7,6 +7,11 @@
       Qiskit advocates are some of the finest minds in quantum computing,
       all over the world. If you are interested in getting involved with the
       quantum computing community, reach out to an advocate local to your area.
+    </p>
+    <p class="copy__paragraph copy__paragraph_importance_support">
+      <strong>Note:</strong> you must have a <AppLink class="copy__link" :url="joinSlackLink">
+        Slack account
+      </AppLink> in the Qiskit workspace order to contact advocates.
     </p>
     <AppFiltersResultsLayout>
       <template slot="filters-on-m-l-screen">
@@ -42,7 +47,7 @@
         </InfiniteScroll>
       </template>
     </AppFiltersResultsLayout>
-  </div>
+  </section>
 </template>
 
 <script lang="ts">
@@ -53,6 +58,7 @@ import AdvocateCard from '~/components/advocates/AdvocateCard.vue'
 import AppMultiSelect from '~/components/ui/AppMultiSelect.vue'
 import AppFieldset from '~/components/ui/AppFieldset.vue'
 import AppFiltersResultsLayout from '~/components/ui/AppFiltersResultsLayout.vue'
+import AppLink from '~/components/ui/AppLink.vue'
 import InfiniteScroll from '~/components/ui/InfiniteScroll.vue'
 import { ADVOCATES_WORLD_REGION_OPTIONS } from '~/store/modules/advocates.ts'
 import { Advocate } from '~/types/advocate'
@@ -63,6 +69,7 @@ import { Advocate } from '~/types/advocate'
     AppMultiSelect,
     AppFieldset,
     AppFiltersResultsLayout,
+    AppLink,
     InfiniteScroll
   },
 
@@ -103,6 +110,8 @@ export default class MeetTheAdvocates extends Vue {
   updateActiveFilters (activeFilters: string[]): void {
     this.$store.dispatch('advocates/updateRegionFilters', activeFilters)
   }
+
+  joinSlackLink: string = 'https://ibm.co/joinqiskitslack'
 }
 </script>
 

@@ -9,10 +9,10 @@
       <Map20 class="advocate-card__icon" />
       {{ location }}
     </p>
-    <p v-if="slackId" class="advocate-card__contact">
+    <p class="advocate-card__contact">
       <LogoSlack20 class="advocate-card__icon" />
-      <AppLink :url="`https://qiskit.slack.com/team/${slackId}`">
-        Contact on Slack
+      <AppLink class="copy__link" :url="`https://qiskit.slack.com/team/${slackId}`">
+        @{{ slackUsername }}
       </AppLink>
     </p>
   </AppCard>
@@ -31,12 +31,13 @@ import AppLink from '~/components/ui/AppLink.vue'
   }
 })
 export default class extends Vue {
-  @Prop(String) name!: any
-  @Prop(String) image!: any
-  @Prop(String) city!: any
-  @Prop(String) country!: any
-  @Prop(String) region!: any
-  @Prop(String) slackId!: any
+  @Prop(String) name!: string
+  @Prop(String) image!: string
+  @Prop(String) city!: string
+  @Prop(String) country!: string
+  @Prop(String) region!: string
+  @Prop(String) slackId!: string
+  @Prop(String) slackUsername!: string
 
   // Tags on AppCard is an Array
   formattedRegion = this.region ? [this.region] : []
