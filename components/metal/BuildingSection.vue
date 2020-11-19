@@ -56,10 +56,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import AppLink from '~/components/ui/AppLink.vue'
 
-@Component({ components: { AppLink } })
-
+@Component
 export default class BuildingSection extends Vue {}
 </script>
 

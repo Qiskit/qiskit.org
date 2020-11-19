@@ -17,12 +17,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import AppCtaBtn from '~/components/metal/AppCtaBtn.vue'
 
-@Component({
-  components: { AppCtaBtn }
-})
-
+@Component
 export default class EarlyAccessSection extends Vue {
   stayInTouchLink = {
     url: 'http://qisk.it/metal',

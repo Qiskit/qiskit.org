@@ -69,11 +69,6 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import PrerequisitesForLinux from '~/components/landing/TheQuickStart/PrerequisitesForLinux.vue'
-import PrerequisitesForMac from '~/components/landing/TheQuickStart/PrerequisitesForMac.vue'
-import PrerequisitesForWindows from '~/components/landing/TheQuickStart/PrerequisitesForWindows.vue'
-import SyntaxHighlight from '~/components/ui/SyntaxHighlight.vue'
-import AppLink from '~/components/ui/AppLink.vue'
 
 type ChoicesGroup = {
   title: string,
@@ -83,15 +78,7 @@ type ChoicesGroup = {
 
 type InstallChoices = Array<ChoicesGroup>
 
-@Component({
-  components: {
-    PrerequisitesForLinux,
-    PrerequisitesForMac,
-    PrerequisitesForWindows,
-    SyntaxHighlight,
-    AppLink
-  }
-})
+@Component
 export default class StartLocally extends Vue {
   OPERATING_SYSTEMS = {
     linux: 'Linux',

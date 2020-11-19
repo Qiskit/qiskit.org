@@ -63,12 +63,8 @@
 import Vue from 'vue'
 
 import { Component } from 'vue-property-decorator'
-import LandingCta from '~/components/landing/LandingCta.vue'
-import AppLink from '~/components/ui/AppLink.vue'
 
-@Component({
-  components: { LandingCta, AppLink }
-})
+@Component
 export default class TheDarkHeader extends Vue {}
 </script>
 

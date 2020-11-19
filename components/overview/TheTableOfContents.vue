@@ -19,12 +19,9 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-import AppLink from '~/components/ui/AppLink.vue'
 import { TableOfContentEntry } from '~/constants/overviewContent'
 
-@Component({
-  components: { AppLink }
-})
+@Component
 export default class TheTableOfContents extends Vue {
   @Prop({ type: Array, default: [] }) entries!: Array<TableOfContentEntry>
   @Prop(String) activeSection!: string

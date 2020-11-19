@@ -20,11 +20,8 @@
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 import { IBM_Q_EXPERIENCE } from '~/constants/appLinks'
-import AppCta from '~/components/ui/AppCta.vue'
 
-@Component({
-  components: { AppCta }
-})
+@Component
 export default class StartOnTheCloud extends Vue {
   ibmQExperienceLink = IBM_Q_EXPERIENCE
 }

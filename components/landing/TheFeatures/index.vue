@@ -35,12 +35,8 @@
 import Vue from 'vue'
 
 import { Component } from 'vue-property-decorator'
-import TheFeatureMosaic from '~/components/landing/TheFeatures/TheFeatureMosaic.vue'
-import LandingCta from '~/components/landing/LandingCta.vue'
 
-@Component({
-  components: { TheFeatureMosaic, LandingCta }
-})
+@Component
 export default class TheFeatures extends Vue { }
 </script>
 

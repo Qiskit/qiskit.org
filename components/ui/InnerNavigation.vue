@@ -20,11 +20,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-import AppLink from '~/components/ui/AppLink.vue'
 
-@Component({
-  components: { AppLink }
-})
+@Component
 export default class InnerNavigation extends Vue {
   @Prop({ type: Array, default: [] }) sections!: any
 }
