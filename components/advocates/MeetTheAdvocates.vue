@@ -18,6 +18,7 @@
               v-model="activeFilters"
               :label="option"
               :value="option"
+              @change="updateActiveFilters(activeFilters)"
             />
           </client-only>
         </AppFieldset>
@@ -46,7 +47,8 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
+import { mapState, MapperForStateWithNamespace } from 'vuex'
+import { Component, Prop, Watch } from 'vue-property-decorator'
 import AdvocateCard from '~/components/advocates/AdvocateCard.vue'
 import AppMultiSelect from '~/components/ui/AppMultiSelect.vue'
 import AppFieldset from '~/components/ui/AppFieldset.vue'
@@ -62,10 +64,22 @@ import { Advocate } from '~/types/advocate'
     AppFieldset,
     AppFiltersResultsLayout,
     InfiniteScroll
+  },
+
+  computed: {
+    ...mapState<MapperForStateWithNamespace>('advocates', {
+      regionFilters: (state: any) => state.regionFilters
+    })
   }
 })
 export default class MeetTheAdvocates extends Vue {
   @Prop(Array) advocates!: Advocate[]
+
+  /**
+   * Region filters from Vuex store.
+   * Initialized with mapState.
+   */
+  public regionFilters!: string[]
 
   private activeFilters: string[] = [];
 
@@ -74,13 +88,20 @@ export default class MeetTheAdvocates extends Vue {
     options: ADVOCATES_WORLD_REGION_OPTIONS
   }
 
+  mounted () {
+    this.activeFilters = this.regionFilters
+  }
+
+  @Watch('regionFilters')
+  onRegionFiltersChanged (regionFilters: string[]) {
+    this.activeFilters = regionFilters
+  }
+
   /**
    * Updates the active filters.
    */
   updateActiveFilters (activeFilters: string[]): void {
-    this.activeFilters = activeFilters
     this.$store.dispatch('advocates/updateRegionFilters', activeFilters)
-  }
   }
 }
 </script>
