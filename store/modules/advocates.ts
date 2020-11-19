@@ -1,3 +1,4 @@
+import { ActionTree, GetterTree, MutationTree } from 'vuex'
 import { Advocate } from '~/types/advocate'
 
 const ADVOCATES_WORLD_REGIONS = Object.freeze({
@@ -23,32 +24,40 @@ const ADVOCATES_WORLD_REGION_OPTIONS = Object.freeze([
 export {
   AdvocatesWorldRegion,
   ADVOCATES_WORLD_REGIONS,
-  ADVOCATES_WORLD_REGION_OPTIONS,
-  Advocate
+  ADVOCATES_WORLD_REGION_OPTIONS
+}
+
+class State {
+  advocates: Advocate[] = []
+  regionFilter: string[] = []
+}
+
+const actions = <ActionTree<State, any>> {
+  async fetchAdvocates ({ commit }): Promise<void> {
+    const advocatesModule = await import('~/content/advocates/advocates.json')
+    const advocates = advocatesModule.default || []
+    commit('setAdvocates', advocates)
+  }
+}
+
+const mutations = <MutationTree<State>> {
+  setAdvocates (state, payload: Advocate[]) {
+    state.advocates = payload
+  }
+}
+
+const getters = <GetterTree<State, any>> {
+  filteredAdvocates (state) {
+    const { advocates } = state
+
+    return advocates
+  }
 }
 
 export default {
-  state () {
-    return {
-      advocates: []
-    }
-  },
-  getters: {
-    filteredAdvocates (state: any) {
-      const { advocates } = state
-
-      return advocates
-    }
-  },
-  mutations: {
-    setAdvocates (state: any, payload: any) {
-      state.advocates = payload
-    }
-  },
-  actions: {
-    async fetchAdvocates () {
-      const advocatesModule = await import('~/content/advocates/advocates.json')
-      return advocatesModule.default || []
-    }
-  }
+  namespaced: true,
+  state: new State(),
+  actions,
+  mutations,
+  getters
 }
