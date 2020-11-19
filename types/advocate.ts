@@ -11,4 +11,5 @@ export interface Advocate {
   name: string,
   region: AdvocatesWorldRegion,
   slackId?: string
+  slackUsername?: string
 }
