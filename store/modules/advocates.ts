@@ -1,5 +1,4 @@
 import { ActionTree, GetterTree, MutationTree } from 'vuex'
-import { Advocate } from '~/types/advocate'
 
 const ADVOCATES_WORLD_REGIONS = Object.freeze({
   northAmerica: 'North America',
@@ -11,6 +10,20 @@ const ADVOCATES_WORLD_REGIONS = Object.freeze({
 } as const)
 
 type AdvocatesWorldRegion = typeof ADVOCATES_WORLD_REGIONS[keyof typeof ADVOCATES_WORLD_REGIONS]
+
+/**
+ * Interface for a Qiskit advocate.
+ */
+interface Advocate {
+  city: string,
+  country: string,
+  image: string,
+  location?: string,
+  name: string,
+  region: AdvocatesWorldRegion,
+  slackId?: string
+  slackUsername?: string
+}
 
 const ADVOCATES_WORLD_REGION_OPTIONS = Object.freeze([
   ADVOCATES_WORLD_REGIONS.northAmerica,
@@ -24,7 +37,8 @@ const ADVOCATES_WORLD_REGION_OPTIONS = Object.freeze([
 export {
   AdvocatesWorldRegion,
   ADVOCATES_WORLD_REGIONS,
-  ADVOCATES_WORLD_REGION_OPTIONS
+  ADVOCATES_WORLD_REGION_OPTIONS,
+  Advocate
 }
 
 class State {

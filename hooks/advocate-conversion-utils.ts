@@ -2,6 +2,7 @@ import Airtable from 'airtable'
 
 // TODO: Understand why this import works with '../' and not with '~/'
 import {
+  Advocate,
   AdvocatesWorldRegion
 } from '../store/modules/advocates'
 
@@ -9,7 +10,6 @@ import {
   getImageUrl,
   findImageAttachment
 } from './airtable-conversion-utils'
-import { Advocate } from '~/types/advocate'
 
 const RECORD_FIELDS = Object.freeze({
   name: 'Name',
