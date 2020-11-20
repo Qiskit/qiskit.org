@@ -14,7 +14,7 @@ module.exports = {
     },
   ],
 
-  stories: ['../components/**/*.stories.@(js|mdx|ts)'],
+  stories: ['../components/**/*.stories.ts'],
 
   typescript: {
     check: false,
