@@ -1,5 +1,8 @@
-export default {
-  title: 'AppCard'
-}
+import AppCard from './AppCard.vue'
 
-export const Default = () => '<div>Hello World</div>'
+export default { title: 'AppCard' }
+
+export const Default = () => ({
+  components: { AppCard },
+  template: '<AppCard>Hello world!</AppCard>'
+})
