@@ -78,6 +78,7 @@ export default class extends Vue {
 
   &__content {
     padding: $spacing-05 $spacing-05 $spacing-05 $spacing-07;
+    flex: 1;
     display: flex;
     flex-direction: column;
   }
@@ -93,27 +94,21 @@ export default class extends Vue {
   }
 
   &__title {
-    flex: 0 0 auto;
+    flex: 1;
     @include type-style('productive-heading-02');
   }
 
-   &__tags {
-    width: 20rem;
+  &__tags {
     display: flex;
     flex-wrap: wrap;
+    flex: 0;
     justify-content: flex-end;
+    margin-left: $spacing-06;
 
     @include mq($until: large) {
       justify-content: flex-start;
       margin-top: $spacing-03;
-    }
-
-    @include mq($from: medium, $until: large) {
-      width: auto;
-    }
-
-    @include mq($until: medium) {
-      width: 100%;
+      margin-left: 0;
     }
 
     .bx--tag--purple {
