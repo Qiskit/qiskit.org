@@ -3,5 +3,21 @@ module.exports = {
     config = options.nuxtStorybookConfig.webpackFinal(config, options)
     return config;
   },
-  stories: ['~/components/**/*.stories.@(js|mdx|ts)'],
+
+  addons: [
+    {
+      name: '@storybook/addon-essentials',
+      options: {
+        // TODO: Resolve path issues with aliases in docs addon
+        docs: false,
+      }
+    },
+  ],
+
+  stories: ['../components/**/*.stories.@(js|mdx|ts)'],
+
+  typescript: {
+    check: false,
+    checkOptions: {},
+  },
 }
