@@ -1,8 +1,12 @@
+import { Meta, Story } from '@storybook/vue/types-6-0'
 import AdvocateCard from './AdvocateCard.vue'
 
-export default { title: 'components/AdvocateCard' }
+export default {
+  title: 'Components/Advocate card',
+  component: AdvocateCard
+} as Meta
 
-const Template: any = (args: any, { argTypes }: {argTypes: any}) => ({
+const Template: Story = (args, { argTypes }) => ({
   components: { AdvocateCard },
   props: Object.keys(argTypes),
   template: '<AdvocateCard :areas="areas" :image="image" :location="location" :name="name" />'

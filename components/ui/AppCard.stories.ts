@@ -1,8 +1,12 @@
+import { Meta, Story } from '@storybook/vue/types-6-0'
 import AppCard from './AppCard.vue'
 
-export default { title: 'ui/AppCard' }
+export default {
+  title: 'UI/App/Card',
+  component: AppCard
+} as Meta
 
-const Template: any = (args: any, { argTypes }: {argTypes: any}) => ({
+const Template: Story = (args, { argTypes }) => ({
   components: { AppCard },
   props: Object.keys(argTypes),
   template: '<AppCard :cta-label="ctaLabel" :image="image" :tags="tags" :title="title" :to="to">{{ vSlot }}</AppCard>'
