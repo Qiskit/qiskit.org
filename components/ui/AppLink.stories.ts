@@ -1,8 +1,12 @@
+import { Meta, Story } from '@storybook/vue/types-6-0'
 import AppLink from './AppLink.vue'
 
-export default { title: 'ui/AppLink' }
+export default {
+  title: 'UI/App/Link',
+  component: AppLink
+} as Meta
 
-const Template: any = (args: any, { argTypes }: {argTypes: any}) => ({
+const Template: Story = (args, { argTypes }) => ({
   components: { AppLink },
   props: Object.keys(argTypes),
   template: '<AppLink :is-static="isStatic" :segment="segment" :url="url">{{ vSlot }}</AppLink>'
