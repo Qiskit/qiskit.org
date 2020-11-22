@@ -8,8 +8,12 @@ module.exports = {
     {
       name: '@storybook/addon-essentials',
       options: {
-        // TODO: Resolve path issues with aliases in docs addon
-        docs: false,
+        /**
+         * TODO: Resolve path issues with aliases in docs add-on.
+         * Uncommenting the next line turns the log errors off by deactivating
+         * the docs add-on.
+         */
+        // docs: false,
       }
     },
   ],
