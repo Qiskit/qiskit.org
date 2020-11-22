@@ -2,17 +2,18 @@ import AppCard from './AppCard.vue'
 
 export default { title: 'AppCard' }
 
-export const Default = () => ({
+const Template: any = (args: any, { argTypes }: {argTypes: any}) => ({
   components: { AppCard },
-  template: `
-    <AppCard
-      ctaLabel="Learn more"
-      image="https://via.placeholder.com/300"
-      :tags="['documentation', 'news']"
-      title="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-      to="#"
-    >
-      Hello world!
-    </AppCard>
-  `
+  props: Object.keys(argTypes),
+  template: '<AppCard :cta-label="ctaLabel" :image="image" :tags="tags" :title="title" :to="to">{{ vSlot }}</AppCard>'
 })
+
+export const Default = Template.bind({})
+Default.args = {
+  ctaLabel: 'Learn more',
+  image: 'https://via.placeholder.com/300',
+  tags: ['documentation', 'news'],
+  title: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+  to: 'https://example.com',
+  vSlot: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+}
