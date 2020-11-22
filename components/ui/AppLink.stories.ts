@@ -1,6 +1,6 @@
 import AppLink from './AppLink.vue'
 
-export default { title: 'AppLink' }
+export default { title: 'ui/AppLink' }
 
 const Template: any = (args: any, { argTypes }: {argTypes: any}) => ({
   components: { AppLink },
