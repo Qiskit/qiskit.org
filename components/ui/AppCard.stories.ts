@@ -1,6 +1,6 @@
 import AppCard from './AppCard.vue'
 
-export default { title: 'AppCard' }
+export default { title: 'ui/AppCard' }
 
 const Template: any = (args: any, { argTypes }: {argTypes: any}) => ({
   components: { AppCard },
