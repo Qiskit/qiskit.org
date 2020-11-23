@@ -20,7 +20,7 @@ import { Component, Prop } from 'vue-property-decorator'
 
 @Component
 export default class SyntaxHighlight extends Vue {
-  @Prop(String) label!: any
+  @Prop(String) label!: string
   @Prop({ type: String, default: '' }) code!: string
 
   segmentAction = {
