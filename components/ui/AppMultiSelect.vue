@@ -16,9 +16,9 @@ import { Component, Prop } from 'vue-property-decorator'
 
 @Component
 export default class AppMultiSelect extends Vue {
-  @Prop(Array) options!: any
-  @Prop(String) label!: any
-  @Prop(Array) value!: any
+  @Prop(Array) options!: string[]
+  @Prop(String) label!: string
+  @Prop(Array) value!: string[]
 
   theme: string = 'light'
   feedback: string = 'fixed'

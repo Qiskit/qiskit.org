@@ -30,9 +30,9 @@ import AppCta from '~/components/ui/AppCta.vue'
   components: { AppCta }
 })
 export default class ContentSection extends Vue {
-  @Prop(String) title!: any
-  @Prop(String) description!: any
-  @Prop(Object) link!: any
+  @Prop(String) title!: string
+  @Prop(String) description!: string
+  @Prop(Object) link!: object
 }
 </script>
 

@@ -4,8 +4,8 @@ import { Component, Prop } from 'vue-property-decorator'
 
 @Component
 export default class MdContent extends Vue {
-  @Prop(String) renderFn!: any
-  @Prop(String) staticRenderFns!: any
+  @Prop(String) renderFn!: string
+  @Prop(String) staticRenderFns!: string
 
   templateRender: Function | null = null
 

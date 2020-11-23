@@ -35,11 +35,11 @@ import AppCta from '~/components/ui/AppCta.vue'
 
 @Component({ components: { AppCta } })
 export default class AppCard extends Vue {
-  @Prop(String) image!: any
-  @Prop(String) title!: any
-  @Prop(Array) tags!: any
-  @Prop(String) to!: any
-  @Prop(String) ctaLabel!: any
+  @Prop(String) image!: string
+  @Prop(String) title!: string
+  @Prop(Array) tags!: string[]
+  @Prop(String) to!: string
+  @Prop(String) ctaLabel!: string
 }
 </script>
 
