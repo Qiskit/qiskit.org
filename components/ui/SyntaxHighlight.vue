@@ -19,7 +19,7 @@ import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 
 @Component
-export default class extends Vue {
+export default class SyntaxHighlight extends Vue {
   @Prop(String) label!: any
   @Prop({ type: String, default: '' }) code!: string
 

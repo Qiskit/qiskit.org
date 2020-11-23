@@ -147,7 +147,7 @@ import { EVENT_REQUEST_LINK } from '~/constants/appLinks'
     store.commit('setEvents', pastEventsPayload)
   }
 })
-export default class extends QiskitPage {
+export default class EventsPage extends QiskitPage {
   regions = WORLD_REGION_OPTIONS
   types = COMMUNITY_EVENT_TYPE_OPTIONS
   routeName: string = 'events'

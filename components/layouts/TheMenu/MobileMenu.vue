@@ -51,7 +51,7 @@ import MenuMixin from '~/mixins/menu'
 @Component({
   components: { AppLink }
 })
-export default class extends Mixins(MenuMixin) {}
+export default class MobileMenu extends Mixins(MenuMixin) {}
 </script>
 
 <style lang="scss" scoped>

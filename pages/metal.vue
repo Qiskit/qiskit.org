@@ -28,7 +28,7 @@ import EarlyAccessSection from '~/components/metal/EarlyAccessSection.vue'
     }
   }
 })
-export default class extends QiskitPage {
+export default class MetalPage extends QiskitPage {
   routeName = 'metal'
 }
 </script>

@@ -30,7 +30,7 @@ import { METAL_FEATURES } from '~/constants/metalContent'
 @Component({
   components: { FeatureCard }
 })
-export default class extends Vue {
+export default class FeaturesSection extends Vue {
   metalFeatures = METAL_FEATURES
 }
 </script>

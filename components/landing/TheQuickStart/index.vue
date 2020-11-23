@@ -27,7 +27,7 @@ import StartOnTheCloud from './StartOnTheCloud.vue'
     StartOnTheCloud
   }
 })
-export default class extends Vue {}
+export default class TheQuickStart extends Vue {}
 </script>
 
 <style lang="scss" scoped>

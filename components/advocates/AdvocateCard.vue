@@ -26,7 +26,7 @@ import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 
 @Component
-export default class extends Vue {
+export default class AdvocateCard extends Vue {
   @Prop(String) name!: any
   @Prop(String) image!: any
   @Prop(String) location!: any

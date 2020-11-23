@@ -28,7 +28,7 @@ import AppLink from '~/components/ui/AppLink.vue'
 @Component({
   components: { AppLink }
 })
-export default class extends Vue {}
+export default class EventMenu extends Vue {}
 </script>
 
 <style lang="scss" scoped>

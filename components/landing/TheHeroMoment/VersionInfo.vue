@@ -35,7 +35,7 @@ import { GITHUB_REPOSITORY } from '~/constants/menuLinks'
 @Component({
   components: { AppLink }
 })
-export default class extends Vue {
+export default class VersionInfo extends Vue {
   githubRepoLink = GITHUB_REPOSITORY
 
   @Prop({ type: String, required: true }) version!: string

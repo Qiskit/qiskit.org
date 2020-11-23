@@ -23,7 +23,7 @@ import AppCtaBtn from '~/components/metal/AppCtaBtn.vue'
   components: { AppCtaBtn }
 })
 
-export default class extends Vue {
+export default class EarlyAccessSection extends Vue {
   stayInTouchLink = {
     url: 'http://qisk.it/metal',
     label: 'Sign up to stay in touch'

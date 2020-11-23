@@ -19,7 +19,7 @@ import TheBanner from '~/components/layouts/TheBanner.vue'
 import AppLink from '~/components/ui/AppLink.vue'
 
 @Component({ components: { AppLink, TheBanner } })
-export default class extends Vue {}
+export default class TheBlackLivesMatterBanner extends Vue {}
 </script>
 
 <style lang="scss" scoped>

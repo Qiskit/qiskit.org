@@ -25,7 +25,7 @@ import AppCta from '~/components/ui/AppCta.vue'
 @Component({
   components: { AppCta }
 })
-export default class extends Vue {
+export default class StartOnTheCloud extends Vue {
   ibmQExperienceLink = IBM_Q_EXPERIENCE
 }
 </script>

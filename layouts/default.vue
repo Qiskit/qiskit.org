@@ -26,7 +26,7 @@ import PageFooter from '~/components/layouts/PageFooter/index.vue'
     PageFooter
   }
 })
-export default class extends Vue {
+export default class DefaultLayout extends Vue {
   isMenuShown: boolean = false
 }
 </script>

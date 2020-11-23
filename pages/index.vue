@@ -35,7 +35,7 @@ import TheLearnSection from '~/components/landing/TheLearnSection/index.vue'
     }
   }
 })
-export default class extends QiskitPage {
+export default class LandingPage extends QiskitPage {
   routeName = 'qiskit-landing-page'
 }
 </script>

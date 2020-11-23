@@ -13,7 +13,7 @@ import { Component } from 'vue-property-decorator'
 import AppCta from '~/components/ui/AppCta.vue'
 
 @Component({ components: { AppCta } })
-export default class extends Vue {}
+export default class AppCtaBtn extends Vue {}
 </script>
 
 <style lang="scss" scoped>

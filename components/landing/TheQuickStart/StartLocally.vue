@@ -92,7 +92,7 @@ type InstallChoices = Array<ChoicesGroup>
     AppLink
   }
 })
-export default class extends Vue {
+export default class StartLocally extends Vue {
   OPERATING_SYSTEMS = {
     linux: 'Linux',
     mac: 'Mac',

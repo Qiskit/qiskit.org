@@ -17,7 +17,7 @@ import AppLink from '~/components/ui/AppLink.vue'
 @Component({
   components: { AppLink }
 })
-export default class extends Vue {
+export default class LandingCta extends Vue {
   @Prop({ type: String, default: 'primary' }) kind!: 'primary'|'secondary';
 }
 </script>

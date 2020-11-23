@@ -32,7 +32,7 @@ import AppLink from '~/components/ui/AppLink.vue'
 @Component({
   components: { AppLink }
 })
-export default class extends Vue {
+export default class FooterSection extends Vue {
   @Prop(String) title!: any
   @Prop(Array) elements!: any
   @Prop({ type: Boolean, default: false }) iconsOnly!: any

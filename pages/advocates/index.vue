@@ -106,7 +106,7 @@ type Benefit = Pick<CompactFeature, 'icon'|'title'|'description'>
     }
   }
 })
-export default class extends QiskitPage {
+export default class AdvocatesPage extends QiskitPage {
   routeName: string = 'advocates'
   advocateBenefits: Array<Benefit> = [
     {

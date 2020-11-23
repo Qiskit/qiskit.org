@@ -67,7 +67,7 @@ import {
     AppLogo
   }
 })
-export default class extends Vue {
+export default class PageFooter extends Vue {
   @Prop({ type: String, default: 'light' }) theme!: string
 
   footerElements = FOOTER_ELEMENTS

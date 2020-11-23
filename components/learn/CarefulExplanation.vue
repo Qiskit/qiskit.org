@@ -16,7 +16,7 @@ import { Component, Prop } from 'vue-property-decorator'
 import AppCta from '~/components/ui/AppCta.vue'
 
 @Component({ components: { AppCta } })
-export default class extends Vue {
+export default class CarefulExplanation extends Vue {
   @Prop({ type: Boolean, default: false }) compact!: boolean
   @Prop({ type: String, default: '#' }) url!: string
 }

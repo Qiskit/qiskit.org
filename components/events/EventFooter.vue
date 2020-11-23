@@ -11,7 +11,7 @@ import { Component } from 'vue-property-decorator'
 const today = new Date()
 
 @Component
-export default class extends Vue {
+export default class EventFooter extends Vue {
   currentYear = today.getFullYear()
 }
 </script>

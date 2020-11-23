@@ -69,7 +69,7 @@ import AppLink from '~/components/ui/AppLink.vue'
 @Component({
   components: { LandingCta, AppLink }
 })
-export default class extends Vue {}
+export default class TheDarkHeader extends Vue {}
 </script>
 
 <style lang="scss">
