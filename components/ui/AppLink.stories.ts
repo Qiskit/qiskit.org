@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/vue/types-6-0'
+import { Meta, Story } from '../../node_modules/@storybook/vue/types-6-0'
 import AppLink from './AppLink.vue'
 
 export default {
