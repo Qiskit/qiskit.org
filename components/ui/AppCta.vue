@@ -2,7 +2,10 @@
   <AppLink
     ref="link"
     class="app-cta copy__link"
-    :class="`app-cta_${kind}`"
+    :class="[
+      `app-cta_${kind}`,
+      `app-cta_${kind}_theme_${theme}`
+    ]"
     v-bind="$attrs"
   >
     <div class="app-cta__content">
@@ -23,7 +26,8 @@ import AppLink from '~/components/ui/AppLink.vue'
 
 @Component
 export default class AppCta extends Vue {
-  @Prop({ type: String, default: 'primary' }) kind!: 'primary'|'secondary'|'ghost';
+  @Prop({ type: String, default: 'primary' }) kind!: 'primary'|'secondary'|'ghost'
+  @Prop({ type: String, default: 'light' }) theme!: 'light'|'dark'
 
   get iconPerLinkType (): string {
     if (AppLink.isExternal(this.$attrs.url)) {
@@ -70,7 +74,7 @@ export default class AppCta extends Vue {
   }
 
   /*
-    Per kind styles
+    Per kind and theming styles
   */
   &,
   &_primary {
@@ -86,6 +90,10 @@ export default class AppCta extends Vue {
     &:active {
       color: white;
     }
+
+    &_theme_dark {
+      @include bicolor-background($purple-70, $cool-gray-90);
+    }
   }
 
   &_ghost {
@@ -98,6 +106,13 @@ export default class AppCta extends Vue {
     &:hover,
     &:active {
       color: $purple-80;
+    }
+
+    &_theme_dark {
+      &:hover,
+      &:active {
+        color: $purple-40;
+      }
     }
   }
 
