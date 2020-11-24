@@ -76,8 +76,16 @@ export {
   EventMultiSelectOption
 }
 
+type State = {
+  activeSet: string,
+  upcomingCommunityEvents: any,
+  pastCommunityEvents: any,
+  typeFilters: string[],
+  regionFilters: string[]
+}
+
 export default {
-  state () {
+  state (): State {
     return {
       activeSet: 'upcoming',
       upcomingCommunityEvents: [],
@@ -87,13 +95,13 @@ export default {
     }
   },
   getters: {
-    typeFilters (state: any) {
+    typeFilters (state: State) {
       return state.typeFilters
     },
-    regionFilters (state: any) {
+    regionFilters (state: State) {
       return state.regionFilters
     },
-    filteredEvents (state: any) {
+    filteredEvents (state: State) {
       const {
         activeSet,
         upcomingCommunityEvents,
