@@ -36,9 +36,7 @@
           <li>Provide at least 3 contributions to the Qiskit community and complete application by <strong>August 15, 2020</strong>.</li>
         </ol>
         <ul class="actions">
-          <AppCta url="https://airtable.com/shrm7eWJsKLf3WVrP">
-            Apply now
-          </AppCta>
+          Closed
         </ul>
       </PageSection>
       <MapSection
@@ -108,7 +106,7 @@ type Benefit = Pick<CompactFeature, 'icon'|'title'|'description'>
     }
   }
 })
-export default class extends QiskitPage {
+export default class AdvocatesPage extends QiskitPage {
   routeName: string = 'advocates'
   advocateBenefits: Array<Benefit> = [
     {
@@ -134,7 +132,7 @@ export default class extends QiskitPage {
   ]
 
   cities () {
-    const cityIndex = this.$data.profiles.reduce((cityIndex, card) => {
+    const cityIndex = this.$data.profiles.reduce((cityIndex: any, card: any) => {
       const { location, latitude, longitude } = card.attributes
       cityIndex[location] = { name: location, latitude, longitude }
       return cityIndex
@@ -145,6 +143,7 @@ export default class extends QiskitPage {
 </script>
 
 <style lang="scss">
+@import '~/assets/scss/community-page.scss';
 @import '~carbon-components/scss/globals/scss/typography';
 
 main {

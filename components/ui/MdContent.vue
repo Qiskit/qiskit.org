@@ -3,13 +3,13 @@ import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 
 @Component
-export default class extends Vue {
-  @Prop(String) renderFn
-  @Prop(String) staticRenderFns
+export default class MdContent extends Vue {
+  @Prop(String) renderFn!: any
+  @Prop(String) staticRenderFns!: any
 
   templateRender: Function | null = null
 
-  render (createElement) {
+  render (createElement: any) {
     return this.templateRender ? this.templateRender() : createElement('div', 'Rendering...')
   }
 

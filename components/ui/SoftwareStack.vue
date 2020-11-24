@@ -21,8 +21,8 @@ import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 
 @Component
-export default class extends Vue {
-  @Prop({ type: Array, default: [] }) stack;
+export default class SoftwareStack extends Vue {
+  @Prop({ type: Array, default: [] }) stack!: any
 }
 
 type StackLayer = {

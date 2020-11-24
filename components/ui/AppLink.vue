@@ -15,31 +15,40 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
+import { SegmentData } from '~/constants/appLinks'
 
 @Component
-export default class extends Vue {
-  @Prop({ type: String, default: '' }) url
-  @Prop(Object) segment
-  @Prop({ type: Boolean, default: false }) isStatic
+export default class AppLink extends Vue {
+  @Prop({ type: String, default: '' }) url!: string
+  @Prop({ type: Object, required: false }) segment: SegmentData | undefined
+  @Prop({ type: Boolean, default: false }) isStatic!: boolean
+
+  static isExternal (url: string): boolean {
+    return url.startsWith('http')
+  }
+
+  static isMail (url: string): boolean {
+    return url.startsWith('mailto')
+  }
+
+  static isIdAnchor (url: string): boolean {
+    return url.startsWith('#')
+  }
 
   get hasLink (): boolean {
-    return this.url
-  }
-
-  get isExternal (): boolean {
-    return this.url.startsWith('http')
-  }
-
-  get isMail (): boolean {
-    return this.url.startsWith('mailto')
-  }
-
-  get isIdAnchor (): boolean {
-    return this.url.startsWith('#')
+    return !!this.url
   }
 
   get isAnchor (): boolean {
-    return this.isExternal || this.isMail || this.isIdAnchor || this.isStatic
+    const url = this.url
+    return AppLink.isExternal(url) ||
+      AppLink.isMail(url) ||
+      AppLink.isIdAnchor(url) ||
+      this.isStatic
+  }
+
+  get isExternal (): boolean {
+    return AppLink.isExternal(this.url)
   }
 
   get isNuxtLink (): boolean {

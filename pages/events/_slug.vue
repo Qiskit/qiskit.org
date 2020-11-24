@@ -25,7 +25,10 @@
         <p>Scroll-down for further info</p>
       </section>
     </header>
+    <!-- TODO: We should migrate to nuxt-content and get rid of this. -->
+    <!-- eslint-disable vue/no-v-html -->
     <main v-html="event.html" />
+    <!-- eslint-enable -->
     <EventFooter />
   </div>
 </template>
@@ -77,7 +80,7 @@ function getBackgroundUris (background: string): [string, string] {
     }
   }
 })
-export default class extends QiskitPage {
+export default class EventEntry extends QiskitPage {
   routeName = 'events-entry'
 }
 </script>

@@ -11,17 +11,19 @@ import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 
 @Component
-export default class extends Vue {}
+export default class TheBanner extends Vue {}
 </script>
 
 <style lang="scss" scoped>
 @import '~carbon-components/scss/globals/scss/typography';
 
 .banner {
+  box-sizing: border-box;
   display: flex;
+  text-align: center;
   flex-direction: column;
   justify-content: center;
-  height: 4rem;
+  padding: $spacing-05 0;
   background-color: black;
 
   &__layout {

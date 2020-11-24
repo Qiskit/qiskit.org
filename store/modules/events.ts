@@ -43,6 +43,12 @@ type CommunityEvent = {
   to: string
 }
 
+type EventMultiSelectOption = {
+  label: string,
+  value: string,
+  name: string
+}
+
 const WORLD_REGION_OPTIONS = Object.freeze([
   WORLD_REGIONS.americas,
   WORLD_REGIONS.asiaPacific,
@@ -66,7 +72,8 @@ export {
   COMMUNITY_EVENT_TYPES,
   WORLD_REGIONS,
   WORLD_REGION_OPTIONS,
-  COMMUNITY_EVENT_TYPE_OPTIONS
+  COMMUNITY_EVENT_TYPE_OPTIONS,
+  EventMultiSelectOption
 }
 
 export default {
@@ -80,13 +87,13 @@ export default {
     }
   },
   getters: {
-    typeFilters (state) {
+    typeFilters (state: any) {
       return state.typeFilters
     },
-    regionFilters (state) {
+    regionFilters (state: any) {
       return state.regionFilters
     },
-    filteredEvents (state) {
+    filteredEvents (state: any) {
       const {
         activeSet,
         upcomingCommunityEvents,
@@ -119,22 +126,27 @@ export default {
     }
   },
   mutations: {
-    setEvents (state, payload) {
+    setEvents (state: any, payload: any) {
       const { events, eventsSet } = payload
 
       state[events] = eventsSet
     },
-    setActiveSet (state, payload: CommunityEventSet) {
+    setActiveSet (state: any, payload: CommunityEventSet) {
       state.activeSet = payload
     },
-    addFilter (state, payload) {
+    addFilter (state: any, payload: any) {
       const { filter, filterValue } = payload
       const filterIndex = state[filter].indexOf(filterValue)
       const noFilterFound = filterIndex === -1
 
       noFilterFound && state[filter].push(filterValue)
     },
-    removeFilter (state, payload) {
+    updateFilterSet (state: any, payload: any) {
+      const { filter, filterValues } = payload
+
+      state[filter] = filterValues
+    },
+    removeFilter (state: any, payload: any) {
       const { filter, filterValue } = payload
       const filterIndex = state[filter].indexOf(filterValue)
       const isFilterFound = filterIndex !== -1

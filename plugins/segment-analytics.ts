@@ -142,7 +142,7 @@ function assertCanGet<T> (getter: () => T, error: string): T {
   return result
 }
 
-function afterAnalyticsReady<S extends any[]> (callback: (...S) => void) {
+function afterAnalyticsReady<S extends any[]> (callback: (...S: any[]) => void) {
   return async function (...args: S): Promise<void> {
     try {
       await window._analyticsReady
@@ -161,7 +161,7 @@ declare module 'vue/types/vue' {
   }
 }
 
-export default (_, inject) => {
+export default (_: any, inject: any) => {
   configureAnalytics()
   installAnalyticsOnce()
   inject('trackPage', afterAnalyticsReady(trackPage))

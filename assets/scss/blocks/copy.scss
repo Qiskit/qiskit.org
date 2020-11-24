@@ -1,0 +1,98 @@
+@import '~carbon-components/scss/globals/scss/typography';
+
+.copy {
+  &__title {
+    @include type-style('expressive-heading-05');
+    margin-bottom: $layout-03;
+    color: $cool-gray-80;
+
+    @include mq($from: medium, $until: large) {
+      @include type-style('expressive-heading-03');
+      font-weight: 300;
+      margin-bottom: $layout-01;
+      max-width: 4 * $column-size-medium;
+    }
+
+    @include mq($until: medium) {
+      @include type-style('expressive-heading-03');
+      font-weight: 300;
+      max-width: 4 * $column-size-small;
+      margin-bottom: $layout-01;
+    }
+  }
+
+  &__subtitle {
+    @include type-style('productive-heading-02');
+    color: $cool-gray-80;
+    margin-bottom: $spacing-05;
+
+    @include mq($from: medium, $until: large) {
+      @include type-style('productive-heading-01');
+      max-width: 4 * $column-size-medium;
+      margin-bottom: $spacing-03;
+    }
+
+    @include mq($until: medium) {
+      @include type-style('productive-heading-01');
+      max-width: 4 * $column-size-small;
+      margin-bottom: $spacing-03;
+    }
+  }
+
+  &.nuxt-content p,
+  &__paragraph {
+    @include type-style('body-long-01');
+    color: $cool-gray-80;
+    max-width: 9 * $column-size-large;
+    margin-bottom: $layout-03;
+
+    @include mq($until: large) {
+      margin-bottom: $layout-01;
+    }
+
+    &_importance {
+      &_support {
+        max-width: 6 * $column-size-large;
+
+        @include mq($from: medium, $until: large) {
+          max-width: 5 * $column-size-medium;
+        }
+
+        @include mq($until: medium) {
+          max-width: 5 * $column-size-small;
+        }
+      }
+
+      &_outstanding {
+        max-width: 6 * $column-size-large;
+        margin-bottom: $layout-04;
+
+        @include mq($from: medium, $until: large) {
+          max-width: 4 * $column-size-medium;
+          margin-bottom: $layout-03;
+        }
+
+        @include mq($until: medium) {
+          max-width: 4 * $column-size-small;
+          margin-bottom: $layout-03;
+        }
+      }
+    }
+  }
+
+  &__link {
+    @include type-style('body-long-01');
+    color: $purple-70;
+    text-decoration: none;
+  }
+
+  &__util {
+    &_vertical-spacer {
+      padding-bottom: $layout-07;
+
+      @include mq($until: medium) {
+        padding-bottom: $layout-05;
+      }
+    }
+  }
+}

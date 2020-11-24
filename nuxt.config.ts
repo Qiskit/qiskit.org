@@ -1,3 +1,5 @@
+/// <reference path="types/index.d.ts" />
+
 import path from 'path'
 import fs from 'fs'
 import consola from 'consola'
@@ -8,12 +10,16 @@ import miAnchor from 'markdown-it-anchor'
 import uslug from 'uslug'
 import Mode from 'frontmatter-markdown-loader/mode'
 
-import { Configuration } from '@nuxt/types'
+import { NuxtConfig } from '@nuxt/types'
 import pkg from './package.json'
-import generateTextbookToc from './hooks/generate-textbook-toc'
 import fetchEvents from './hooks/update-events'
 
-const { NODE_ENV, GENERATE_CONTENT, AIRTABLE_API_KEY } = process.env
+const {
+  NODE_ENV,
+  ENABLE_ANALYTICS,
+  GENERATE_CONTENT,
+  AIRTABLE_API_KEY
+} = process.env
 
 const IS_PRODUCTION = NODE_ENV === 'production'
 
@@ -21,6 +27,7 @@ const md = markdownIt({
   linkify: true,
   html: true
 })
+
 md.use(miLinkAttributes, {
   pattern: /^https?:/,
   attrs: {
@@ -28,11 +35,12 @@ md.use(miLinkAttributes, {
     rel: 'noopener'
   }
 })
+
 md.use(miAnchor, {
-  slugify (id) { return uslug(id) }
+  slugify (id: any) { return uslug(id) }
 })
 
-const config: Configuration = {
+const config: NuxtConfig = {
   mode: 'universal',
   env: {
     analyticsScriptUrl: IS_PRODUCTION
@@ -71,23 +79,34 @@ const config: Configuration = {
   ],
 
   /*
+  ** Content
+  */
+  content: {
+    dir: 'new-content'
+  },
+
+  /*
   ** Plugins to load before mounting the App.
   */
   plugins: [
     '~/plugins/router-hooks.ts',
-    '~/plugins/highlight-js.ts',
     '~/plugins/carbon.ts',
     '~/plugins/deep-load.ts',
     { src: '~/plugins/hotjar.ts', mode: 'client' },
-    { src: '~/plugins/segment-analytics.ts', mode: 'client' }
+    ...optional(
+      IS_PRODUCTION || ENABLE_ANALYTICS,
+      { src: '~/plugins/segment-analytics.ts', mode: 'client' } as const
+    )
   ],
 
   /*
   ** Nuxt.js modules
   */
   modules: [
+    '@nuxt/content',
     '@nuxtjs/style-resources',
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    'nuxt-lazy-load'
   ],
 
   styleResources: {
@@ -130,7 +149,7 @@ const config: Configuration = {
           vue: {
             root: 'content'
           },
-          markdown: (body) => {
+          markdown: (body: any) => {
             return md.render(body)
           }
         }
@@ -144,46 +163,12 @@ const config: Configuration = {
     }
   },
 
-  router: {
-    scrollBehavior (to, from) {
-      const nuxt = window.$nuxt
-
-      // Force `triggerScroll` when navigating through the page.
-      // Did not found the event `triggerScroll` documented but it is used in
-      // the default behaviour to ensure the page has loaded:
-      // https://github.com/nuxt/nuxt.js/blob/e3ba6c290dd60e1a8c5b7daec72982a667a7fe04/packages/vue-app/template/router.scrollBehavior.js
-      if (to.path === from.path && to.hash !== from.hash) {
-        nuxt.$nextTick(() => nuxt.$emit('triggerScroll'))
-      }
-
-      return new Promise((resolve) => {
-        nuxt.$once('triggerScroll', () => {
-          if (!to.hash) {
-            return resolve()
-          }
-
-          const el: HTMLElement | null = document.querySelector(to.hash)
-          if (!el) {
-            console.warn('Trying to navigate to a missing element', to.hash)
-            return resolve()
-          }
-
-          if ('scrollBehavior' in document.documentElement.style) {
-            window.scrollTo({ top: el.offsetTop, behavior: 'smooth' })
-          } else {
-            window.scrollTo(0, el.offsetTop)
-          }
-
-          return resolve()
-        })
-      })
-    }
-  },
-
   generate: {
     routes: (function () {
       const events = getContentUrls('events')
-      return events
+      const learnPages = getContentUrls('learn')
+
+      return [...events, ...learnPages]
 
       function getContentUrls (contentRoot: string): string[] {
         return fs.readdirSync(path.resolve(__dirname, 'content', contentRoot))
@@ -217,12 +202,11 @@ const config: Configuration = {
   }
 }
 
+function optional<T> (test: any, ...plugins: T[]): T[] {
+  return test ? plugins : []
+}
+
 async function generateContent () {
-  consola.info('Generating Textbook TOC')
-  await generateTextbookToc(
-    'https://qiskit.org/textbook/preface.html',
-    './content/education/textbook-toc.md'
-  )
   if (AIRTABLE_API_KEY) {
     consola.info('Generating community event previews')
     await fetchEvents(AIRTABLE_API_KEY, './content/events')

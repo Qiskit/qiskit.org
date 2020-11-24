@@ -20,8 +20,8 @@
   <a href="https://github.com/Qiskit/qiskit.org/blob/master/LICENSE.txt">
     <img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="Qiskit.org is released under the Apache 2.0 License." />
   </a>
-  <a href="https://travis-ci.com/Qiskit/qiskit.org">
-    <img src="https://travis-ci.com/Qiskit/qiskit.org.svg?branch=master" alt="Current CircleCI build status." />
+  <a href="https://github.com/Qiskit/qiskit.org/actions">
+    <img src="https://github.com/Qiskit/qiskit.org/workflows/build%20and%20deploy/badge.svg?branch=master" alt="Current GitHub Action build status." />
   </a>
   <a href="https://github.com/Qiskit/qiskit.org/blob/master/CONTRIBUTING.rst">
     <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs welcome!" />
@@ -34,7 +34,7 @@
 <h3 align="center">
   <a href="https://qiskit.org/">Home page</a>
   <span> · </span>
-  <a href="https://qiskit.org/education/">Education</a>
+  <a href="https://qiskit.org/learn/">Learn</a>
   <span> · </span>
   <a href="https://qiskit.org/documentation/">Documentation</a>
   <span> · </span>
@@ -46,12 +46,14 @@
 ## What’s In This Document
 
 - [What’s In This Document](#whats-in-this-document)
-- [⚡️ Live](#-live)
+- [⚡️ Live](#️-live)
 - [💻 Technology Used](#-technology-used)
 - [🚀 Get Up and Running](#-get-up-and-running)
 - [🏭 Content Generation](#-content-generation)
+- [🎚️Other environment flags](#️other-environment-flags)
+  - [Enable analytics](#enable-analytics)
 - [🧐 Folder Structure](#-folder-structure)
-- [✏️ How to Contribute](#f-how-to-contribute)
+- [✏️ How to Contribute](#️-how-to-contribute)
 - [🛠 Available Scripts](#-available-scripts)
 - [🗓 Open backlog](#-open-backlog)
 - [👩‍💻 Maintainers](#-maintainers)
@@ -112,9 +114,18 @@ Notice that, for communicating with the team tools, API keys may be required. It
 GENERATE_CONTENT=1 AIRTABLE_API_KEY=<your airtable api key> npm run dev
 ```
 
+## 🎚️Other environment flags
+
+### Enable analytics
+
+In production, the user can authorize us to gather analytics so we can identify
+trends and improve our user experience. In development, analytics are disabled
+by default. To enable, set the `ENABLE_ANALYTICS` environment variable.
+
 ## 🧐 Folder Structure
 
     .
+    ├── app
     ├── assets
     ├── components
     ├── constants
@@ -123,42 +134,47 @@ GENERATE_CONTENT=1 AIRTABLE_API_KEY=<your airtable api key> npm run dev
     ├── hooks
     ├── layouts
     ├── mixins
+    ├── new-content
     ├── pages
     ├── plugins
     ├── static
     ├── store
     ├── tests
-    ├── textbook
     ├── nuxt.config.js
     ... other third-parties configuration files like ESLint, Jest or Travis
 
-1.  **`/assets`**: Images and assets for the project. You can find more information at [Nuxt's assets directory documentation](https://nuxtjs.org/guide/assets/)
+1.  **`/app`**: contains `router.ScrollBehavior.js` controlling the behavior of
+the scroll when navigating.
 
-2.  **`/components`**: Vue components for the project. You can find more information at [Nuxt's components directory documentation](https://nuxtjs.org/guide/directory-structure#the-components-directory)
+3.  **`/assets`**: Images and assets for the project. You can find more information at [Nuxt's assets directory documentation](https://nuxtjs.org/guide/assets/)
 
-3.  **`/constants`**: Constants shared through the whole project.
+4.  **`/components`**: Vue components for the project. You can find more information at [Nuxt's components directory documentation](https://nuxtjs.org/guide/directory-structure#the-components-directory)
 
-4.  **`/content`**: Markdown files, website's editable content. They are divided in folders by sections.
+5.  **`/constants`**: Constants shared through the whole project.
 
-5.  **`/deploy`**: Deploy configuration.
+6.  **`/content`**: Markdown files, website's editable content. They are divided in folders by sections.
 
-6.  **`/hooks`**: Hook functions shared through the whole project.
+7.  **`/deploy`**: Deploy configuration.
 
-7.  **`/layouts`**: You can find information at [Nuxt's layout directory documentation](https://nuxtjs.org/guide/directory-structure#the-layouts-directory)
+8.  **`/hooks`**: Hook functions shared through the whole project.
 
-8.  **`/mixins`**: Mixin functions shared through the whole project.
+9.  **`/layouts`**: You can find information at [Nuxt's layout directory documentation](https://nuxtjs.org/guide/directory-structure#the-layouts-directory)
 
-9.  **`/pages`**: This is a starting point because if you want to know what is the website structure, it's the same as this folder's structure. Nuxt reads all the `.vue` files inside this directory and creates the application router based on it. You can find information at [Nuxt's pages directory documentation](https://nuxtjs.org/guide/directory-structure#the-pages-directory). All `.vue` pages prefixed by an underscore are [dynamic routes](https://nuxtjs.org/guide/routing/#dynamic-routes) and we use them to create different pages based on the same template. We also use [nuxt-link](https://nuxtjs.org/guide/routing/) to keep the user inside our webapp router.
+10. **`/mixins`**: Mixin functions shared through the whole project.
 
-10.  **`/plugins`**: You can find information at [Nuxt's plugins directory documentation](https://nuxtjs.org/guide/directory-structure#the-plugins-directory)
+11. **`/new-content`**: This directory includes newer content that is used in various parts of the qiskit.org website, leveraging the [nuxt/content](https://content.nuxtjs.org/) module, along with standard markdown syntax.
 
-11.  **`/statics`**: You can find information at [Nuxt's statics directory documentation](https://nuxtjs.org/guide/directory-structure#the-static-directory)
+12. **`/pages`**: This is a starting point because if you want to know what is the website structure, it's the same as this folder's structure. Nuxt reads all the `.vue` files inside this directory and creates the application router based on it. You can find information at [Nuxt's pages directory documentation](https://nuxtjs.org/guide/directory-structure#the-pages-directory). All `.vue` pages prefixed by an underscore are [dynamic routes](https://nuxtjs.org/guide/routing/#dynamic-routes) and we use them to create different pages based on the same template. We also use [nuxt-link](https://nuxtjs.org/guide/routing/) to keep the user inside our webapp router.
 
-12.  **`/tests`**: Unit tests made with Jest
+13. **`/plugins`**: You can find information at [Nuxt's plugins directory documentation](https://nuxtjs.org/guide/directory-structure#the-plugins-directory)
 
-13.  **`/textbook`**: Redirect page for textbook
+14. **`/statics`**: You can find information at [Nuxt's statics directory documentation](https://nuxtjs.org/guide/directory-structure#the-static-directory)
 
-14. **`nuxt-config.js`**: This is the main configuration file for a Nuxt site. You can find information at [Nuxt's config documentation](https://nuxtjs.org/guide/configuration)
+15. **`/tests`**: Unit tests made with Jest
+
+16. **`/types`**: Additional types for non-typed libraries or global definitions.
+
+17. **`nuxt-config.js`**: This is the main configuration file for a Nuxt site. You can find information at [Nuxt's config documentation](https://nuxtjs.org/guide/configuration)
 
 ## ✏️ How to Contribute
 
@@ -205,6 +221,8 @@ You can see our backlog [here](https://github.com/Qiskit/qiskit.org/projects/2).
 by alphabetical order:
 <table><tr>
 <td align="center"><a href="https://github.com/lerongil"><img src="https://avatars3.githubusercontent.com/u/9096989?s=460&v=4" width="120px;" alt="Leron Gil"/><br /><sub><b>Leron Gil</b></sub></a><br /><a href="https://github.com/qiskit/qiskit.org/issues?q=author%3Alerongil" title="Bug reports">🐛</a><a href="https://join.slack.com/t/qiskit/shared_invite/enQtODQ2NTIyOTgwMTQ3LTI0NzM2NzkzZjJhNDgzZjY5MTQzNDY3MGNiZGQzNTNkZTE4Nzg1MjMwMmFjY2UwZTgyNDlmYWQwYmZjMjE1ZTM" title="Answering Questions on Slack">💬</a></td>
+<td align="center"><a href="https://github.com/techtolentino"><img src="https://avatars2.githubusercontent.com/u/6276074?s=460&v=4" width="120px;" alt="Randy Tolentino"/><br /><sub><b>Randy Tolentino</b></sub></a><br /><a href="https://github.com/qiskit/qiskit.org/issues?q=author%3Atechtolentino" title="Bug reports">🐛</a><a href="https://github.com/qiskit/qiskit.org/commits?author=techtolentino" title="Code">💻</a><a href="https://join.slack.com/t/qiskit/shared_invite/enQtODQ2NTIyOTgwMTQ3LTI0NzM2NzkzZjJhNDgzZjY5MTQzNDY3MGNiZGQzNTNkZTE4Nzg1MjMwMmFjY2UwZTgyNDlmYWQwYmZjMjE1ZTM" title="Answering Questions on Slack">💬</a></td>
 <td align="center"><a href="https://github.com/delapuente"><img src="https://avatars1.githubusercontent.com/u/757942?s=460&v=4" width="120px;" alt="Salvador de la Puente"/><br /><sub><b>Salvador de la Puente</b></sub></a><br /><a href="https://github.com/qiskit/qiskit.org/issues?q=author%3Adelapuente" title="Bug reports">🐛</a><a href="https://github.com/qiskit/qiskit.org/commits?author=delapuente" title="Code">💻</a><a href="https://join.slack.com/t/qiskit/shared_invite/enQtODQ2NTIyOTgwMTQ3LTI0NzM2NzkzZjJhNDgzZjY5MTQzNDY3MGNiZGQzNTNkZTE4Nzg1MjMwMmFjY2UwZTgyNDlmYWQwYmZjMjE1ZTM" title="Answering Questions on Slack">💬</a></td>
 <td align="center"><a href="https://github.com/y4izus"><img src="https://avatars2.githubusercontent.com/u/17231966?s=460&v=4" width="120px;" alt="Yaiza García"/><br /><sub><b>Yaiza García</b></sub></a><br /><a href="https://github.com/qiskit/qiskit.org/issues?q=author%3Ay4izus" title="Bug reports">🐛</a><a href="https://github.com/qiskit/qiskit.org/commits?author=y4izus" title="Code">💻</a><a href="https://join.slack.com/t/qiskit/shared_invite/enQtODQ2NTIyOTgwMTQ3LTI0NzM2NzkzZjJhNDgzZjY5MTQzNDY3MGNiZGQzNTNkZTE4Nzg1MjMwMmFjY2UwZTgyNDlmYWQwYmZjMjE1ZTM" title="Answering Questions on Slack">💬</a></td>
+</tr>
 </tr></table>

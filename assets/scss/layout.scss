@@ -5,10 +5,26 @@
 }
 
 html,
-body,
-#__nuxt,
-#__layout {
-  min-height: 100%;
+body {
+  // Root element `#__nuxt.no-scroll` would require ancestors to be height 100%
+  // too. Since it is not possible to target ancestors based on children state,
+  // and want to avoid rendering to root elements [1][2], we do it always and
+  // set `display: flow-root` [3] in the `#__nuxt` element in order to hand the
+  // layout responsibilities over to Vue's root.
+  //
+  // [1]: https://forum.vuejs.org/t/what-is-the-recommended-way-to-make-the-body-element-reactive/759/3
+  // [2]: https://medium.com/@dan_abramov/two-weird-tricks-that-fix-react-7cf9bbdef375#486f
+  // [3]: https://developer.mozilla.org/en-US/docs/Web/CSS/display#inside
+  height: 100%;
+}
+
+#__nuxt {
+  display: flow-root;
+
+  &.no-scroll {
+    height: 100%;
+    overflow: hidden;
+  }
 }
 
 .content-root * {
@@ -20,8 +36,20 @@ body,
   flex-direction: column;
   height: 100%;
   min-height: 100%;
+
+  &:focus {
+    outline: none;
+  }
+
+  &_theme_light {
+    background-color: $ui-background;
+  }
+
+  &_theme_dark {
+    background-color: $cool-gray-100;
+  }
 }
 
-.content-root > main {
+main {
   flex-grow: 1;
 }

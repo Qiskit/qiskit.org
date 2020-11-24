@@ -1,96 +1,85 @@
 <template>
   <div class="event-page">
-    <header class="header-video">
-      <client-only>
-        <video
-          v-if="isDesktop"
-          ref="video"
-          class="header-video__video"
-          loop
-          preload="none"
-          playsinline
-        >
-          <source src="@/assets/videos/qiskit-camp-africa-2019.mp4" type="video/mp4">
-          <source src="@/assets/videos/qiskit-camp-africa-2019.mp4" type="video/ogg">
-          Your browser does not support HTML5 video.
-        </video>
-      </client-only>
-      <div class="event-page__title">
-        <h1 class="wrapper">
-          Qiskit Events
-        </h1>
-      </div>
-    </header>
-    <div class="wrapper">
-      <div class="event-page__filters-time">
+    <TheEventsHeader />
+    <div class="event-page__container">
+      <div class="event-page__time-filters">
         <client-only>
           <cv-tabs aria-label="navigation tab label" @tab-selected="selectTab">
-            <cv-tab id="tab-1" label="Upcoming" />
-            <cv-tab id="tab-2" label="Past" />
+            <cv-tab id="tab-1" label="Upcoming events" />
+            <cv-tab id="tab-2" label="Past events" />
           </cv-tabs>
         </client-only>
       </div>
-      <div class="event-page__event-index">
-        <div class="event-page__filters-others">
-          <fieldset class="bx--fieldset">
-            <legend class="bx--label">
-              Region
-            </legend>
-            <div class="event-page__chrome-columns-fix">
-              <client-only>
-                <cv-checkbox
-                  v-for="region in regions"
-                  :key="region"
-                  :value="region"
-                  :label="region"
-                  :checked="isFilterChecked('regionFilters', region)"
-                  :aria-checked="`${isFilterChecked('regionFilters', region)}`"
-                  @change="updateFilter('regionFilters', region, $event)"
-                />
-              </client-only>
-            </div>
-          </fieldset>
-          <fieldset class="bx--fieldset">
-            <legend class="bx--label">
-              Type
-            </legend>
-            <div class="event-page__chrome-columns-fix">
-              <client-only>
-                <cv-checkbox
-                  v-for="type in types"
-                  :key="type"
-                  :value="type"
-                  :label="type"
-                  :checked="isFilterChecked('typeFilters', type)"
-                  :aria-checked="`${isFilterChecked('typeFilters', type)}`"
-                  @change="updateFilter('typeFilters', type, $event)"
-                />
-              </client-only>
-            </div>
-          </fieldset>
-        </div>
-        <div v-if="hasEvents" class="event-page__results">
-          <EventCard
-            v-for="event in filteredEvents"
-            :key="`${event.place}-${event.date}`"
-            :type="formatType(event.types)"
-            :title="event.title"
-            :image="event.image"
-            :location="event.location"
-            :date="event.date"
-            :to="event.to"
+      <div
+        v-for="filter in extraFilters"
+        :key="filter.label"
+        class="event-page__extra-filters event-page__extra-filters_on-small-screen"
+      >
+        <client-only>
+          <AppMultiSelect
+            :label="filter.label"
+            :options="filter.options"
+            :value="getCheckedFilters(filter.filterType)"
+            @change-on-multi-select="updateWholeFilter(filter.filterType, $event)"
           />
+        </client-only>
+      </div>
+      <div class="event-page__event-index">
+        <div class="event-page__extra-filters event-page__extra-filters_on-large-screen">
+          <AppFieldset
+            v-for="filter in extraFilters"
+            :key="filter.label"
+            :label="filter.label"
+          >
+            <client-only>
+              <cv-checkbox
+                v-for="option in filter.options"
+                :key="option.label"
+                class="event-page__extra-filters__checkboxes"
+                :value="option.value"
+                :label="option.label"
+                :checked="isFilterChecked(filter.filterType, option.value)"
+                :aria-checked="isFilterChecked(filter.filterType, option.value)"
+                @change="updateFilter(filter.filterType, option.value, $event)"
+              />
+            </client-only>
+          </AppFieldset>
         </div>
-        <div v-else class="event-page__results">
-          <p class="event-page__no-events-msg">
-            Nothing here yet -
-            <AppLink
-              class="experiment-header__source-code-link"
+        <div class="event-page__main-content">
+          <div>
+            <AppCard
+              v-if="noEvents"
+              :image="emptyCard.img"
+              :title="emptyCard.title"
+            >
+              {{ emptyCard.description }}
+            </AppCard>
+            <EventCard
+              v-for="event in filteredEvents"
+              v-else
+              :key="`${event.title}-${event.place}-${event.date}`"
+              :types="event.types"
+              :title="event.title"
+              :image="event.image"
+              :location="event.location"
+              :date="event.date"
+              :to="event.to"
+            />
+          </div>
+          <div class="event-page__start-an-event">
+            <h3 class="event-page__start-an-event__title">
+              Start an event
+            </h3>
+            <p class="copy__paragraph copy__paragraph_importance_outstanding event-page__start-an-event__description">
+              We can help you bring Qiskit experts to your campus for guest lectures, hackathons, and other events.
+            </p>
+            <AppCta
+              class="event-page__start-an-event__cta"
               v-bind="eventRequestLink"
             >
               {{ eventRequestLink.label }}
-            </AppLink>
-          </p>
+            </AppCta>
+          </div>
         </div>
       </div>
     </div>
@@ -102,20 +91,30 @@ import { mapGetters, mapActions } from 'vuex'
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import EventCard from '~/components/events/EventCard.vue'
-import AppLink from '~/components/ui/AppLink.vue'
+import AppCard from '~/components/ui/AppCard.vue'
+import TheEventsHeader from '~/components/events/TheEventsHeader.vue'
+import AppCta from '~/components/ui/AppCta.vue'
+import LandingCta from '~/components/landing/LandingCta.vue'
+import AppMultiSelect from '~/components/ui/AppMultiSelect.vue'
+import AppFieldset from '~/components/ui/AppFieldset.vue'
+
 import {
   CommunityEvent,
   WORLD_REGION_OPTIONS,
-  COMMUNITY_EVENT_TYPE_OPTIONS
+  COMMUNITY_EVENT_TYPE_OPTIONS,
+  EventMultiSelectOption
 } from '~/store/modules/events.ts'
 import { EVENT_REQUEST_LINK } from '~/constants/appLinks'
 
 @Component({
-  layout: 'carbon',
-
   components: {
     EventCard,
-    AppLink
+    AppCta,
+    LandingCta,
+    AppCard,
+    TheEventsHeader,
+    AppMultiSelect,
+    AppFieldset
   },
 
   head () {
@@ -148,36 +147,55 @@ import { EVENT_REQUEST_LINK } from '~/constants/appLinks'
     store.commit('setEvents', pastEventsPayload)
   }
 })
-
-export default class extends QiskitPage {
+export default class EventsPage extends QiskitPage {
   regions = WORLD_REGION_OPTIONS
   types = COMMUNITY_EVENT_TYPE_OPTIONS
   routeName: string = 'events'
   eventRequestLink = EVENT_REQUEST_LINK
-  isDesktop: boolean = false
-
-  get hasEvents (): boolean {
-    return (this as any).filteredEvents.length !== 0
+  emptyCard = {
+    title: 'No events found',
+    description: 'Trying doing a wider search criteria, or consider starting your own event.',
+    img: '/images/events/no-events.svg'
   }
 
-  autoplayVideo () {
-    if (!this.$refs.video) {
-      return
+  // multiselect
+  regionsOptions = this.getOptions(this.regions)
+  typesOptions = this.getOptions(this.types)
+  regionsLabel: string = 'Locations'
+  typesLabel: string = 'Types'
+  regionsFilters: string = 'regionFilters'
+  typesFilters: string = 'typeFilters'
+
+  extraFilters = [
+    {
+      label: this.regionsLabel,
+      options: this.regionsOptions,
+      filterType: this.regionsFilters
+    },
+    {
+      label: this.typesLabel,
+      options: this.typesOptions,
+      filterType: this.typesFilters
     }
+  ]
 
-    const video = this.$refs.video as HTMLMediaElement
-
-    video.load()
-    video.muted = true
-    video.play()
+  get noEvents (): boolean {
+    return (this as any).filteredEvents.length === 0
   }
 
-  async mounted () {
-    const medium = '42em' // mq.scss medium value
-    this.isDesktop = window.matchMedia(`(min-width: ${medium})`).matches
+  getOptions (optionsList: any): Array<EventMultiSelectOption> {
+    return optionsList.map((item: string) => ({ label: item, value: item, name: item }))
+  }
 
-    await this.$nextTick()
-    this.autoplayVideo()
+  getCheckedFilters (filter: string) {
+    return (this as any)[filter]
+  }
+
+  updateWholeFilter (filter: string, filterValues: string[]): void {
+    const { commit } = this.$store
+    const payload = { filter, filterValues }
+
+    commit('updateFilterSet', payload)
   }
 
   isFilterChecked (filter: string, filterValue: string): Array<CommunityEvent> {
@@ -203,41 +221,18 @@ export default class extends QiskitPage {
 
     this.$store.commit('setActiveSet', activeSet)
   }
-
-  formatType (types: CommunityEvent[]): string {
-    return types.join(', ')
-  }
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '~carbon-components/scss/globals/scss/typography';
 
 .event-page {
-  color: $text-01;
+  background-color: $white;
+  color: $white-text-01;
 
-  &__title {
-    bottom: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    background: linear-gradient(0deg, #262626 0%, #26262600 100%);
-
-    @include mq($from: medium) {
-      position: absolute;
-    }
-
-    h1 {
-      @include type-style('productive-heading-07');
-      padding-left: $layout-01;
-
-      @include mq($until: medium) {
-        @include type-style('productive-heading-06');
-        margin-top: $layout-01;
-      }
-    }
+  &__container {
+    @include contained();
   }
 
   &__event-index {
@@ -249,75 +244,113 @@ export default class extends QiskitPage {
     }
   }
 
-  &__filters-time {
+  &__time-filters {
     margin-top: $layout-03;
-  }
-
-  /*
-  It seems to be a problem with Chrome when trying to set the number of columns
-  to 2 inside a fieldset:
-  https://stackoverflow.com/questions/55819846/column-count-does-not-work-within-a-fieldst-in-chrome
-  https://stackoverflow.com/questions/3322891/why-is-chrome-cutting-off-text-in-my-css3-multi-column-layout
-  */
-  &__chrome-columns-fix {
-    @include mq($until: medium) {
-      column-count: 2;
+    margin-bottom: $layout-04;
+    .bx--tabs__nav-link {
+      color: $black-100;
+      border-bottom-color: $gray-20;
     }
 
-    & > * {
-      @include mq($until: medium) {
-        display: block;
+    .bx--tabs__nav-item:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link,
+    .bx--tabs__nav-item:hover:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link {
+      color: $gray-100;
+    }
+
+    .bx--tabs__nav-item--selected:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link {
+        border-bottom-color: $purple-70;
+    }
+
+    @include mq($until: medium) {
+      margin-bottom: 0;
+      .bx--tabs-trigger {
+        background-color: $white;
+        border-bottom: 1px solid $gray-20;
+
+        &[class*="--open"] {
+          background-color: $cool-gray-10;
+        }
+      }
+
+      .bx--tabs-trigger svg {
+        fill: $black-100;
+      }
+
+      .bx--tabs-trigger-text {
+        color: $gray-100;
+      }
+
+      .bx--tabs-trigger--open {
+        border-bottom: 1px solid $gray-60;
+      }
+
+      .bx--tabs-trigger--open,
+      .bx--tabs__nav-item {
+        background-color: $cool-gray-10;
+      }
+
+      .bx--tabs__nav-item:last-child .bx--tabs__nav-link {
+        border-bottom: none;
+      }
+
+      .bx--tabs__nav-item:hover:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled) {
+        background-color: $cool-gray-20;
       }
     }
   }
 
-  &__results {
+  &__extra-filters {
+    &__checkboxes {
+      .bx--checkbox-label::before {
+        border: 1px solid $black-100;
+      }
+
+      .bx--checkbox:focus + .bx--checkbox-label::before {
+        box-shadow: 0 0 0 2px $white, 0 0 0 4px $purple-60;
+      }
+    }
+
+    &_on-large-screen {
+      @include mq($until: medium) {
+        display: none;
+      }
+    }
+
+    &_on-small-screen {
+      @include mq($from: medium) {
+        display: none;
+      }
+    }
+  }
+
+  &__main-content {
     width: 75%;
 
     @include mq($until: medium) {
       width: 100%;
+      margin-top: $layout-04;
     }
   }
 
-  &__no-events-msg {
-    @include type-style('body-short-02');
+  &__start-an-event {
+    margin-top: $layout-05;
+    margin-bottom: $layout-05;
 
-    a {
-      color: $purple-30;
-    }
-  }
-}
-
-.header-video {
-  height: 20rem;
-  position: relative;
-  overflow: hidden;
-
-  &__video {
-    position: relative;
-    width: 100%;
-
-    @include mq($from: x-large) {
-      top: -60%;
+    &__title {
+      @include type-style('productive-heading-02');
     }
 
-    @include mq($from: large, $until: x-large) {
-      top: -40%;
+    &__description {
+      margin-top: $layout-02;
+      margin-bottom: $layout-03;
     }
 
-    @include mq($from: medium, $until: large) {
-      top: -7%;
+    &__cta {
+      color: $white !important;
+      background-color: $purple-70;
+      padding: $spacing-05;
+      width: fit-content !important;
     }
-  }
-}
-
-.wrapper {
-  max-width: 1056px;
-  margin: 0 auto;
-  width: 100%;
-
-  & > * {
-    margin: $layout-01;
   }
 }
 </style>
