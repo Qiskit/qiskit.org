@@ -18,7 +18,7 @@
         quantum systems and simulators.
       </p>
       <TheFeatureMosaic class="the-features__mosaic" />
-      <LandingCta
+      <AppCta
         url="/overview"
         kind="secondary"
         @click="$trackClickEvent({
@@ -26,7 +26,7 @@
         })"
       >
         Full Overview
-      </LandingCta>
+      </AppCta>
     </div>
   </article>
 </template>

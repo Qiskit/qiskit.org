@@ -13,15 +13,15 @@
           Qiskit {{ qiskitPronuntiation }} is an open source SDK for working with quantum
           computers at the level of pulses, circuits and application modules.
         </p>
-        <LandingCta
+        <AppCta
           class="the-hero-moment__cta"
-          url="https://qiskit.org/documentation/install.html"
+          url="documentation/install.html"
           @click="$trackClickEvent({
             action: 'Get Started'
           })"
         >
           Get started
-        </LandingCta>
+        </AppCta>
       </div>
     </MetalGrid>
   </article>
