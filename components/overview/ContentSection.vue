@@ -9,7 +9,7 @@
       </p>
       <AppCta
         v-if="link"
-        class="copy__link"
+        kind="ghost"
         :url="link.url"
       >
         {{ link.label }}

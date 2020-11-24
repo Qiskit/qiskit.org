@@ -21,7 +21,12 @@
       <div class="app-card__description">
         <slot />
       </div>
-      <AppCta v-if="to" :url="to" class="app-card__link">
+      <AppCta
+        v-if="to"
+        :url="to"
+        kind="ghost"
+        class="app-card__link"
+      >
         {{ ctaLabel }}
       </AppCta>
     </div>

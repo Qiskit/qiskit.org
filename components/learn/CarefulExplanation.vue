@@ -2,7 +2,10 @@
   <article>
     <slot name="summary" />
     <template v-if="compact">
-      <AppCta :url="url">
+      <AppCta
+        kind="ghost"
+        :url="url"
+      >
         Read more
       </AppCta>
     </template>

@@ -20,10 +20,12 @@
           allowfullscreen
         />
       </div>
-      <AppCtaBtn
+      <AppCta
         class="intro-section__cta"
-        v-bind="accessRequest"
-      />
+        url="http://qisk.it/metal"
+      >
+        Request early access
+      </AppCta>
     </div>
   </section>
 </template>
@@ -33,12 +35,7 @@ import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 
 @Component
-export default class IntroSection extends Vue {
-  accessRequest = {
-    url: 'http://qisk.it/metal',
-    label: 'Request early access'
-  }
-}
+export default class IntroSection extends Vue {}
 </script>
 
 <style lang="scss" scoped>

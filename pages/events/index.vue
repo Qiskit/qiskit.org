@@ -327,13 +327,6 @@ export default class EventsPage extends QiskitPage {
       margin-top: $layout-02;
       margin-bottom: $layout-03;
     }
-
-    &__cta {
-      color: $white !important;
-      background-color: $purple-70;
-      padding: $spacing-05;
-      width: fit-content !important;
-    }
   }
 }
 </style>

@@ -25,7 +25,10 @@
           :entries="tocEntries"
           :active-section="activeSection"
         />
-        <AppCta class="overview-page__get-started" url="#quick-start">
+        <AppCta
+          url="#quick-start"
+          kind="ghost"
+        >
           Get Started
         </AppCta>
       </div>
@@ -116,10 +119,6 @@ export default class OverviewPage extends QiskitPage {
     @include mq($until: medium) {
       display: none;
     }
-  }
-
-  &__get-started {
-    margin-top: $layout-02;
   }
 
   &__list-of-contents {

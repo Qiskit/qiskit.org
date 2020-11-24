@@ -4,7 +4,11 @@
     <p class="accordion-layout__description">
       {{ description }}
     </p>
-    <AppCta :url="cta.url" class="accordion-layout__link">
+    <AppCta
+      :url="cta.url"
+      kind="ghost"
+      class="accordion-layout__link"
+    >
       {{ cta.label }}
     </AppCta>
   </article>
@@ -58,10 +62,6 @@ export default class AccordionLayout extends Vue implements AccordionLayoutProps
   &__description {
     @include type-style('body-long-01');
     margin-bottom: $spacing-06;
-  }
-
-  &__link {
-    @include type-style('body-long-01');
   }
 }
 </style>

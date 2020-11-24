@@ -7,6 +7,7 @@
       </p>
       <AppCta
         url="/learn"
+        kind="ghost"
         :segment="{ action: 'Get Learning' }"
       >
         Get Learning
