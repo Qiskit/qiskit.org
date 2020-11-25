@@ -5,6 +5,7 @@ type SegmentData = {
 /**
  * Represent a navigation link for the social media community links of the site
  */
+// eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
 interface SocialMediaCommunityLink {
   /** The visible name of the link */
   name: string
