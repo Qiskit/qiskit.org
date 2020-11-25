@@ -27,9 +27,7 @@
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 
-import AppLink from '~/components/ui/AppLink.vue'
-
-@Component({ components: { AppLink } })
+@Component
 export default class PrerequisitesForMac extends Vue { }
 </script>
 

@@ -45,12 +45,9 @@
 
 <script lang="ts">
 import { Component, Mixins } from 'vue-property-decorator'
-import AppLink from '~/components/ui/AppLink.vue'
 import MenuMixin from '~/mixins/menu'
 
-@Component({
-  components: { AppLink }
-})
+@Component
 export default class MobileMenu extends Mixins(MenuMixin) {}
 </script>
 

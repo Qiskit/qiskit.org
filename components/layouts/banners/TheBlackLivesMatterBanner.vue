@@ -15,10 +15,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import TheBanner from '~/components/layouts/TheBanner.vue'
-import AppLink from '~/components/ui/AppLink.vue'
 
-@Component({ components: { AppLink, TheBanner } })
+@Component
 export default class TheBlackLivesMatterBanner extends Vue {}
 </script>
 

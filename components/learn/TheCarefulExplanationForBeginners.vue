@@ -20,9 +20,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import CarefulExplanation from '~/components/learn/CarefulExplanation.vue'
 
-@Component({ components: { CarefulExplanation } })
+@Component
 export default class TheCarefulExplanationForBeginners extends Vue {}
 </script>
 

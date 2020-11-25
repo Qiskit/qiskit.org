@@ -13,9 +13,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-import AppCta from '~/components/ui/AppCta.vue'
 
-@Component({ components: { AppCta } })
+@Component
 export default class CarefulExplanation extends Vue {
   @Prop({ type: Boolean, default: false }) compact!: boolean
   @Prop({ type: String, default: '#' }) url!: string

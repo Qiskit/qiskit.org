@@ -29,12 +29,9 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-import AppLink from '~/components/ui/AppLink.vue'
 import { GITHUB_REPOSITORY } from '~/constants/menuLinks'
 
-@Component({
-  components: { AppLink }
-})
+@Component
 export default class VersionInfo extends Vue {
   githubRepoLink = GITHUB_REPOSITORY
 

@@ -18,9 +18,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import LearnCard from '~/components/landing/TheLearnSection/LearnCard.vue'
 
-@Component({ components: { LearnCard } })
+@Component
 export default class TheLearnSection extends Vue {}
 </script>
 

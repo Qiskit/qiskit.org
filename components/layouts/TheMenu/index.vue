@@ -81,14 +81,9 @@
 
 <script lang="ts">
 import { Watch, Component, Mixins } from 'vue-property-decorator'
-import MobileMenu from '~/components/layouts/TheMenu/MobileMenu.vue'
-import AppLogo from '~/components/ui/AppLogo.vue'
-import AppLink from '~/components/ui/AppLink.vue'
 import MenuMixin from '~/mixins/menu'
 
-@Component({
-  components: { MobileMenu, AppLink, AppLogo }
-})
+@Component
 export default class TheMenu extends Mixins(MenuMixin) {
   isMobileMenuVisible: boolean = false
 

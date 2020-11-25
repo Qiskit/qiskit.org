@@ -90,13 +90,6 @@
 import { mapGetters, mapActions } from 'vuex'
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
-import EventCard from '~/components/events/EventCard.vue'
-import AppCard from '~/components/ui/AppCard.vue'
-import TheEventsHeader from '~/components/events/TheEventsHeader.vue'
-import AppCta from '~/components/ui/AppCta.vue'
-import LandingCta from '~/components/landing/LandingCta.vue'
-import AppMultiSelect from '~/components/ui/AppMultiSelect.vue'
-import AppFieldset from '~/components/ui/AppFieldset.vue'
 
 import {
   CommunityEvent,
@@ -107,16 +100,6 @@ import {
 import { EVENT_REQUEST_LINK } from '~/constants/appLinks'
 
 @Component({
-  components: {
-    EventCard,
-    AppCta,
-    LandingCta,
-    AppCard,
-    TheEventsHeader,
-    AppMultiSelect,
-    AppFieldset
-  },
-
   head () {
     return {
       title: 'Qiskit Events'

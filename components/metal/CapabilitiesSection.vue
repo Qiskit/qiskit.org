@@ -56,13 +56,10 @@
 
 <script lang="ts">
 import { Component, Mixins } from 'vue-property-decorator'
-import CapabilityCard from '~/components/metal/CapabilityCard.vue'
 import { MetalCapability, METAL_CAPABILITIES } from '~/constants/metalContent'
 import ScrollSectionsMixin from '~/mixins/scrollBetweenSections'
 
-@Component({
-  components: { CapabilityCard }
-})
+@Component
 export default class CapabilitiesSection extends Mixins(ScrollSectionsMixin) {
   capabilities = METAL_CAPABILITIES
 

@@ -31,9 +31,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-import AppCta from '~/components/ui/AppCta.vue'
 
-@Component({ components: { AppCta } })
+@Component
 export default class AppCard extends Vue {
   @Prop(String) image!: any
   @Prop(String) title!: any

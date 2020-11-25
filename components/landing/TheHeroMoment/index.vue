@@ -31,13 +31,8 @@
 import Vue from 'vue'
 
 import { Prop, Component } from 'vue-property-decorator'
-import VersionInfo from '~/components/landing/TheHeroMoment/VersionInfo.vue'
-import LandingCta from '~/components/landing/LandingCta.vue'
-import MetalGrid from '~/components/metal/MetalGrid.vue'
 
-@Component({
-  components: { VersionInfo, LandingCta, MetalGrid }
-})
+@Component
 export default class TheHeroMoment extends Vue {
   @Prop({ type: String, required: true }) version!: string
 

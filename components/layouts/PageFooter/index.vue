@@ -50,9 +50,6 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-import FooterSection from './FooterSection.vue'
-import AppLink from '~/components/ui/AppLink.vue'
-import AppLogo from '~/components/ui/AppLogo.vue'
 
 import {
   FOOTER_ELEMENTS,
@@ -60,13 +57,7 @@ import {
   STAY_CONNECTED_LINKS
 } from '~/constants/menuLinks'
 
-@Component({
-  components: {
-    FooterSection,
-    AppLink,
-    AppLogo
-  }
-})
+@Component
 export default class PageFooter extends Vue {
   @Prop({ type: String, default: 'light' }) theme!: string
 

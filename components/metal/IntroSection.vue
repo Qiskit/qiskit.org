@@ -31,9 +31,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import AppCtaBtn from '~/components/metal/AppCtaBtn.vue'
 
-@Component({ components: { AppCtaBtn } })
+@Component
 export default class IntroSection extends Vue {
   accessRequest = {
     url: 'http://qisk.it/metal',

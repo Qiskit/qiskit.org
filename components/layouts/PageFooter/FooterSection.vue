@@ -27,11 +27,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-import AppLink from '~/components/ui/AppLink.vue'
 
-@Component({
-  components: { AppLink }
-})
+@Component
 export default class FooterSection extends Vue {
   @Prop(String) title!: any
   @Prop(Array) elements!: any
