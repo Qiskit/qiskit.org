@@ -1,7 +1,7 @@
 <template>
   <AppLink
     ref="link"
-    class="app-cta copy__link"
+    class="app-cta"
     :class="[
       `app-cta_${kind}`,
       `app-cta_${kind}_theme_${theme}`
@@ -42,7 +42,6 @@ export default class AppCta extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '~/assets/scss/blocks/copy.scss';
 @import '~carbon-components/scss/globals/scss/typography';
 
 @mixin bicolor-background($colorLeft, $colorRight) {
@@ -50,9 +49,11 @@ export default class AppCta extends Vue {
 }
 
 .app-cta {
+  @include type-style('body-long-01');
   display: flex;
   justify-content: space-between;
   align-items: center;
+  text-decoration: none;
 
   padding: $layout-01;
   width: 4 * $column-size-large;
