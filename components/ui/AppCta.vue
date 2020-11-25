@@ -55,7 +55,7 @@ export default class AppCta extends Vue {
   align-items: center;
   text-decoration: none;
 
-  padding: $layout-01;
+  padding: $spacing-05;
   width: 4 * $column-size-large;
 
   @include mq($from: medium, $until: large) {
@@ -98,7 +98,8 @@ export default class AppCta extends Vue {
   }
 
   &_ghost {
-    padding: $layout-01 0;
+    padding-right: 0;
+    padding-left: 0;
     justify-content: flex-start;
 
     background-image: none;
