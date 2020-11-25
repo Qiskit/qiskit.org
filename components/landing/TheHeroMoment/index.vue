@@ -11,7 +11,7 @@
         </h1>
         <p class="the-hero-moment__description">
           Qiskit {{ qiskitPronuntiation }} is an open source SDK for working with quantum
-          computers at the level of pulses, circuits and algorithms.
+          computers at the level of pulses, circuits and application modules.
         </p>
         <LandingCta
           class="the-hero-moment__cta"
