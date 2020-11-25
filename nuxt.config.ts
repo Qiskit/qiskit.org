@@ -127,7 +127,6 @@ const config: NuxtConfig = {
   ** https://typescript.nuxtjs.org/migration.html
   */
   buildModules: [
-    '@nuxt/components',
     ['@nuxt/typescript-build', {
       typeCheck: true,
       ignoreNotFoundWarnings: true
