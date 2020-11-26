@@ -5,7 +5,18 @@ module.exports = {
   },
 
   addons: [
+    /**
+     * Accessibility
+     * https://github.com/storybookjs/storybook/tree/master/addons/a11y
+     */
+    '@storybook/addon-a11y',
+
+    /**
+     * Paddings
+     * https://github.com/rbardini/storybook-addon-paddings
+     */
     'storybook-addon-paddings',
+
     {
       name: '@storybook/addon-essentials',
       options: {
