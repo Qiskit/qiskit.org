@@ -74,7 +74,6 @@
               We can help you bring Qiskit experts to your campus for guest lectures, hackathons, and other events.
             </p>
             <AppCta
-              class="event-page__start-an-event__cta"
               v-bind="eventRequestLink"
             >
               {{ eventRequestLink.label }}
