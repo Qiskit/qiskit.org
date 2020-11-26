@@ -3,31 +3,6 @@ type SegmentData = {
 }
 
 /**
- * Represent a navigation link for the social media community links of the site
- */
-// eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
-interface SocialMediaCommunityLink {
-  /** The visible name of the link */
-  name: string
-  /** Where we want to go */
-  url: string
-  /** Includes an object with the information of the action. Example:
-   * ```ts
-   * {
-      action: 'Qiskit Community: GitHub'
-     }
-    ```
-   */
-  segment: SegmentData
-  /** Text shown when leaving the cursor on the link */
-  title: string,
-  /** Icon definition */
-  iconPath: string,
-  /** Use when a second path for the icon is needed */
-  iconPathSecondPart?: string
-}
-
-/**
  * Represent a general link use on the site
  */
 interface GeneralLink {
