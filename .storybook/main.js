@@ -5,6 +5,7 @@ module.exports = {
   },
 
   addons: [
+    'storybook-addon-paddings',
     {
       name: '@storybook/addon-essentials',
       options: {
