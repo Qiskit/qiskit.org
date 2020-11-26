@@ -5,7 +5,7 @@
       <TheBlackLivesMatterBanner
         :style="{ display: isMenuShown ? 'none' : 'block' }"
       />
-      <TheMenu @changeVisibility="isMenuShown = $event === 'shown'" />
+      <TheMenu @change-visibility="isMenuShown = $event === 'shown'" />
     </header>
     <nuxt />
     <PageFooter theme="light" />
