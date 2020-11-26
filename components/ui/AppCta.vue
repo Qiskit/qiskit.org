@@ -8,9 +8,9 @@
     ]"
     v-bind="$attrs"
   >
-    <div class="app-cta__content">
-      <slot />
-    </div>
+    <span class="app-cta__content">
+      {{ label }}
+    </span>
     <component
       :is="iconPerLinkType"
       class="app-cta__icon"
@@ -28,11 +28,13 @@ import AppLink from '~/components/ui/AppLink.vue'
 export default class AppCta extends Vue {
   @Prop({ type: String, default: 'primary' }) kind!: 'primary'|'secondary'|'ghost'
   @Prop({ type: String, default: 'light' }) theme!: 'light'|'dark'
+  @Prop({ type: String }) label!: string
 
   get iconPerLinkType (): string {
-    if (AppLink.isExternal(this.$attrs.url)) {
+    const url = this.$attrs.url
+    if (AppLink.isExternal(url)) {
       return 'launch-16'
-    } else if (AppLink.isIdAnchor(this.$attrs.url)) {
+    } else if (AppLink.isIdAnchor(url)) {
       return 'arrow-down-16'
     } else {
       return 'arrow-right-16'

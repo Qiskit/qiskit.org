@@ -19,14 +19,9 @@
       </p>
       <TheFeatureMosaic class="the-features__mosaic" />
       <AppCta
-        url="/overview"
         kind="secondary"
-        @click="$trackClickEvent({
-          action: 'Overview'
-        })"
-      >
-        Full Overview
-      </AppCta>
+        v-bind="fullOverviewLink"
+      />
     </div>
   </article>
 </template>
@@ -37,7 +32,13 @@ import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 
 @Component
-export default class TheFeatures extends Vue { }
+export default class TheFeatures extends Vue {
+  fullOverviewLink = {
+    url: '/overview',
+    label: 'Full Overview',
+    segment: { action: 'Overview' }
+  }
+}
 </script>
 
 <style lang="scss">

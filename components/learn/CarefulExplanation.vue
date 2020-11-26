@@ -4,10 +4,8 @@
     <template v-if="compact">
       <AppCta
         kind="ghost"
-        :url="url"
-      >
-        Read more
-      </AppCta>
+        v-bind="readMoreLink"
+      />
     </template>
     <slot v-else />
   </article>
@@ -21,6 +19,11 @@ import { Component, Prop } from 'vue-property-decorator'
 export default class CarefulExplanation extends Vue {
   @Prop({ type: Boolean, default: false }) compact!: boolean
   @Prop({ type: String, default: '#' }) url!: string
+
+  readMoreLink = {
+    url: this.url,
+    label: 'Read more'
+  }
 }
 </script>
 

@@ -26,11 +26,9 @@
           :active-section="activeSection"
         />
         <AppCta
-          url="#quick-start"
+          v-bind="quickStartLink"
           kind="ghost"
-        >
-          Get Started
-        </AppCta>
+        />
       </div>
       <div class="overview-page__list-of-contents">
         <ContentSection
@@ -82,6 +80,11 @@ export default class OverviewPage extends QiskitPage {
 
   tocEntries = TABLE_OF_CONTENTS
   contentSections = CONTENT_SECTIONS
+
+  quickStartLink = {
+    url: '#quick-start',
+    label: 'Get Started'
+  }
 
   asTabs (subsections: Array<OverviewSubSection>): Array<ContentAccordionTab> {
     return subsections.map(subsection => subsection as ContentAccordionTab)

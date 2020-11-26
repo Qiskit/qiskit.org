@@ -9,10 +9,8 @@
       </p>
       <AppCta
         kind="ghost"
-        :url="ibmQExperienceLink.url"
-      >
-        {{ ibmQExperienceLink.label }}
-      </AppCta>
+        v-bind="ibmQExperienceLink"
+      />
     </div>
   </section>
 </template>

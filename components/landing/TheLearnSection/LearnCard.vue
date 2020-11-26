@@ -6,12 +6,9 @@
         computing using Qiskit.
       </p>
       <AppCta
-        url="/learn"
         kind="ghost"
-        :segment="{ action: 'Get Learning' }"
-      >
-        Get Learning
-      </AppCta>
+        v-bind="learnLink"
+      />
     </div>
     <div
       lazy-background="/images/landing-page/learn-image.jpg"
@@ -25,7 +22,13 @@ import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 
 @Component
-export default class LearnCard extends Vue {}
+export default class LearnCard extends Vue {
+  learnLink = {
+    url: 'learn',
+    label: 'Get Learning',
+    segment: { action: 'Get Learning' }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

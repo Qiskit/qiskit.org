@@ -23,11 +23,9 @@
       </div>
       <AppCta
         v-if="to"
-        :url="to"
+        v-bind="ctaLink"
         kind="ghost"
-      >
-        {{ ctaLabel }}
-      </AppCta>
+      />
     </div>
   </article>
 </template>
@@ -43,6 +41,11 @@ export default class AppCard extends Vue {
   @Prop(Array) tags!: any
   @Prop(String) to!: any
   @Prop(String) ctaLabel!: any
+
+  ctaLink = {
+    url: this.to,
+    label: this.ctaLabel
+  }
 }
 </script>
 

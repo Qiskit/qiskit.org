@@ -22,10 +22,8 @@
       </div>
       <AppCta
         class="intro-section__cta"
-        url="http://qisk.it/metal"
-      >
-        Request early access
-      </AppCta>
+        v-bind="requestEarlyAccessLink"
+      />
     </div>
   </section>
 </template>
@@ -35,7 +33,12 @@ import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 
 @Component
-export default class IntroSection extends Vue {}
+export default class IntroSection extends Vue {
+  requestEarlyAccessLink = {
+    url: 'http://qisk.it/metal',
+    label: 'Request early access'
+  }
+}
 </script>
 
 <style lang="scss" scoped>

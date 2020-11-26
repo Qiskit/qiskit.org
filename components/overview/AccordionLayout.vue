@@ -5,11 +5,9 @@
       {{ description }}
     </p>
     <AppCta
-      :url="cta.url"
       kind="ghost"
-    >
-      {{ cta.label }}
-    </AppCta>
+      v-bind="cta"
+    />
   </article>
 </template>
 
