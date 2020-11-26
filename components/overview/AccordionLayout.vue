@@ -7,7 +7,6 @@
     <AppCta
       :url="cta.url"
       kind="ghost"
-      class="accordion-layout__link"
     >
       {{ cta.label }}
     </AppCta>

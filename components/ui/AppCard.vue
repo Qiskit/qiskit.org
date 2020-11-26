@@ -25,7 +25,6 @@
         v-if="to"
         :url="to"
         kind="ghost"
-        class="app-card__link"
       >
         {{ ctaLabel }}
       </AppCta>
@@ -129,10 +128,6 @@ export default class AppCard extends Vue {
     @include type-style('body-long-01');
     margin-top: $layout-02;
     margin-bottom: $layout-02;
-  }
-
-  &__link {
-    margin-top: auto;
   }
 }
 </style>
