@@ -57,6 +57,7 @@ export default class AppCta extends Vue {
 
   padding: $spacing-05;
   width: 4 * $column-size-large;
+  max-width: 100%;
 
   @include mq($from: medium, $until: large) {
     width: 3 * $column-size-medium;
