@@ -84,11 +84,11 @@ export default class FooterSection extends Vue {
 
   &__icon-link {
     &_theme_light {
-      fill: $cool-gray-60;
+      color: $cool-gray-60;
     }
 
     &_theme_dark {
-      fill: $white;
+      color: $white;
     }
   }
 

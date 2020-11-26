@@ -171,6 +171,10 @@ export default class StartLocally extends Vue {
 @import '~/assets/scss/blocks/copy.scss';
 @import '~carbon-components/scss/globals/scss/typography';
 
+.bx--btn-set .bx--btn:not(:focus) {
+  box-shadow: none;
+}
+
 .start-locally {
   width: 63%;
   padding-right: $spacing-07;

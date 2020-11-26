@@ -121,7 +121,7 @@ export default class TheMenu extends Mixins(MenuMixin) {
 
   &__mobile {
     position: relative;
-    fill: $purple-70;
+    color: $purple-70;
 
     @include mq($from: large) {
       display: none;
