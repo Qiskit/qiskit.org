@@ -63,18 +63,6 @@ function getName (record: any): string {
 function getTypes (record: any): CommunityEventType[] {
   const value = record.get(RECORD_FIELDS.typeOfEvent) || []
   const valueList = (Array.isArray(value) ? value : [value]) as string[]
-
-  // TODO: Remove when the Online type is under the "Type of Event" column in
-  // Airtable. Right now, it is in the "Region" column and we need to include
-  // it as a type.
-  //
-  // See also:
-  // https://github.com/Qiskit/qiskit.org/issues/526
-  const region = getRegion(record)
-  if (region) {
-    valueList.push(region)
-  }
-
   const communityEventTypes = filterWithWhitelist(valueList, COMMUNITY_EVENT_TYPE_OPTIONS)
   const noTypes = communityEventTypes.length === 0
   return noTypes ? [COMMUNITY_EVENT_TYPES.talks] : communityEventTypes
