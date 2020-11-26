@@ -291,6 +291,11 @@ export default class EventsPage extends QiskitPage {
       .bx--checkbox:focus + .bx--checkbox-label::before {
         box-shadow: 0 0 0 2px $white, 0 0 0 4px $purple-60;
       }
+
+      .bx--checkbox:checked + .bx--checkbox-label::before {
+        background-color: $gray-10;
+        border-color: $gray-10;
+      }
     }
 
     &_on-large-screen {
