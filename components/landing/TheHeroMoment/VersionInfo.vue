@@ -6,7 +6,7 @@
     <div class="qiskit-version-info__content">
       <p class="qiskit-version-info__version-string">
         <AppLink
-          class="qiskit-version-info__link"
+          class="copy__link copy__link_gray"
           v-bind="githubRepoLink"
         >
           qiskit {{ version }}
@@ -75,12 +75,6 @@ export default class VersionInfo extends Vue {
   &__content {
     display: flex;
     flex-direction: column;
-  }
-
-  &__link {
-    @include type-style('body-long-01');
-    color: $gray-100;
-    text-decoration: none;
   }
 
   &__version-string {
