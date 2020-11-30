@@ -26,7 +26,3 @@ export default class CarefulExplanation extends Vue {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-@import '~/assets/scss/blocks/copy.scss';
-</style>
