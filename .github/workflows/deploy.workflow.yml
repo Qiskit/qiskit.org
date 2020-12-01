@@ -32,12 +32,15 @@ jobs:
             ${{ runner.os }}-node-
 
       - run: npm ci
-      - run: npm run generate
+
+      - name: Generate
+        run: npm run generate
+        env:
+          AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
 
       - name: Deploy
         run: cd deploy && ./deploy_cos.sh
         shell: bash
         env:
-          AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
           encrypted_rclone_iv: ${{ secrets.ENCRYPTED_RCLONE_IV }}
           encrypted_rclone_key: ${{ secrets.ENCRYPTED_RCLONE_KEY }}
