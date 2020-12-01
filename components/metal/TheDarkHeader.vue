@@ -4,6 +4,7 @@
       <AppLink
         class="the-dark-header__nav-link"
         :url="`/`"
+        kind="none"
       >
         <ArrowLeft16 class="the-dark-header__nav-icon" />
         <span>Back to Qiskit.org</span>

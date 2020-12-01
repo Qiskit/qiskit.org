@@ -23,6 +23,7 @@
       <AppCta
         class="intro-section__cta"
         v-bind="requestEarlyAccessLink"
+        theme="dark"
       />
     </div>
   </section>

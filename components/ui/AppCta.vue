@@ -55,7 +55,7 @@ export default class AppCta extends Vue {
   @include type-style('body-long-01');
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   text-decoration: none;
 
   padding: $spacing-05;
@@ -98,6 +98,7 @@ export default class AppCta extends Vue {
 
     &_theme_dark {
       @include bicolor-background($purple-70, $cool-gray-90);
+      color: $purple-50;
     }
   }
 
@@ -115,6 +116,7 @@ export default class AppCta extends Vue {
     }
 
     &_theme_dark {
+      color: $purple-50;
       &:hover,
       &:active {
         color: $purple-40;
@@ -133,6 +135,7 @@ export default class AppCta extends Vue {
     fill: currentColor;
     margin-left: $spacing-05;
     overflow: visible;
+    margin-top: $spacing-02;
 
     &_arrow-right-16 {
       margin-right: $spacing-02;

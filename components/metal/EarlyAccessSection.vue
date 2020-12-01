@@ -9,7 +9,7 @@
         <br><br>
         The early-access program will start in November and proceed through March, 2021, during which time we will work closely to develop Metal and design quantum devices with it.
       </p>
-      <AppCta v-bind="stayInTouchLink" />
+      <AppCta v-bind="stayInTouchLink" theme="dark" />
     </div>
   </section>
 </template>
