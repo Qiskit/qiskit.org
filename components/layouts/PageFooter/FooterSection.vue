@@ -66,7 +66,8 @@ export default class FooterSection extends Vue {
       color: $cool-gray-60;
 
       &:active,
-      &:visited {
+      &:visited,
+      &:hover {
         color: $cool-gray-60;
       }
     }
@@ -75,7 +76,8 @@ export default class FooterSection extends Vue {
       color: $white;
 
       &:active,
-      &:visited {
+      &:visited,
+      &:hover {
         color: $white;
       }
     }
