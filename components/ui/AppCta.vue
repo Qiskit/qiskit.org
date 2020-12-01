@@ -6,6 +6,7 @@
       `app-cta_${kind}`,
       `app-cta_${kind}_theme_${theme}`
     ]"
+    kind="none"
     v-bind="$attrs"
   >
     <span class="app-cta__content">

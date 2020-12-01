@@ -6,6 +6,8 @@
     :style="hasLink && 'cursor:pointer'"
     :rel="isExternal && 'noopener'"
     :target="isExternal && '_blank'"
+    class="app-link"
+    :class="`app-link_${kind}`"
     @click="segment && $trackClickEvent(segment)"
   >
     <slot />
@@ -22,6 +24,7 @@ export default class AppLink extends Vue {
   @Prop({ type: String, default: '' }) url!: string
   @Prop({ type: Object, required: false }) segment: SegmentData | undefined
   @Prop({ type: Boolean, default: false }) isStatic!: boolean
+  @Prop({ type: String, default: 'primary' }) kind!: 'primary'|'secondary'|'none'
 
   static isExternal (url: string): boolean {
     return url.startsWith('http')
@@ -56,3 +59,44 @@ export default class AppLink extends Vue {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+@import '~carbon-components/scss/globals/scss/typography';
+
+.app-link {
+  // &_none is intentionally not resolved
+
+  &_primary,
+  &_secondary {
+    @include type-style('body-long-01');
+    text-decoration: none;
+  }
+
+  &_primary {
+    color: $blue-50;
+
+    &:hover,
+    &:active {
+      color: $blue-60;
+    }
+    &:visited {
+      color: $purple-70;
+    }
+  }
+
+  &_secondary {
+    color: $gray-80;
+
+    &:hover,
+    &:active {
+      color: $gray-80;
+      text-decoration: underline;
+    }
+    &:visited {
+      color: $gray-80;
+    }
+  }
+
+}
+
+</style>

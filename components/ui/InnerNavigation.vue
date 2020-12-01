@@ -8,6 +8,7 @@
             :key="section.label"
             class="navigation-group__item"
             :url="`#${section.anchor}`"
+            kind="secondary"
           >
             {{ section.label }}
           </AppLink>
