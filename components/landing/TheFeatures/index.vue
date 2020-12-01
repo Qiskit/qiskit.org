@@ -35,7 +35,7 @@ import { Component } from 'vue-property-decorator'
 export default class TheFeatures extends Vue {
   fullOverviewLink = {
     url: '/overview',
-    label: 'Full Overview',
+    label: 'Full overview',
     segment: { action: 'Overview' }
   }
 }

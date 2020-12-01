@@ -25,7 +25,7 @@ import { Component } from 'vue-property-decorator'
 export default class LearnCard extends Vue {
   learnLink = {
     url: 'learn',
-    label: 'Get Learning',
+    label: 'Get learning',
     segment: { action: 'Get Learning' }
   }
 }
