@@ -29,6 +29,7 @@ export default class TheBlackLivesMatterBanner extends Vue {}
   }
 
   &__link {
+    font-size: 1rem;
     color: #8A3FFC;
   }
 }
