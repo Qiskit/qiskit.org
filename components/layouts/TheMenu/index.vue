@@ -196,7 +196,8 @@ export default class TheMenu extends Mixins(MenuMixin) {
       margin-right: 0;
     }
 
-    &_active {
+    &_active,
+    &_active:hover {
       color: $purple-70;
     }
   }
