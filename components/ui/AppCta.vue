@@ -131,8 +131,12 @@ export default class AppCta extends Vue {
 
   &__icon {
     fill: currentColor;
-    margin-left: $layout-01;
+    margin-left: $spacing-05;
     overflow: visible;
+
+    &_arrow-right-16 {
+      margin-right: $spacing-02;
+    }
 
     &#{$arrow-right_path},
     &#{$arrow-down_path},
