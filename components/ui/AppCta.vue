@@ -98,7 +98,7 @@ export default class AppCta extends Vue {
 
     &_theme_dark {
       @include bicolor-background($purple-70, $cool-gray-90);
-      color: $purple-50;
+      color: $purple-40;
     }
   }
 
