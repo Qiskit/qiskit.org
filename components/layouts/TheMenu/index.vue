@@ -78,22 +78,6 @@
         </ul>
       </nav>
     </section>
-    <section
-      v-if="isCommunityActive()"
-      class="menu__second-level"
-    >
-      <nav class="menu__navigation-level">
-        <AppLink
-          v-for="link in communitySubLinks"
-          :key="link.url"
-          class="menu__link"
-          :class="{ 'menu__link_active': isActive(link) }"
-          v-bind="link"
-        >
-          {{ link.label }}
-        </AppLink>
-      </nav>
-    </section>
   </div>
 </template>
 
@@ -214,7 +198,7 @@ export default class TheMenu extends Mixins(MenuMixin) {
 
     .bx--dropdown {
       background: $white;
-      border-bottom: none;
+      border-bottom: 1px solid transparent;
     }
 
     .bx--dropdown--open {
