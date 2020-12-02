@@ -262,7 +262,6 @@ export default class TheMenu extends Mixins(MenuMixin) {
       color: $purple-70;
     }
 
-
     &_secondary {
       display: block;
       padding: $spacing-03 $spacing-05;
