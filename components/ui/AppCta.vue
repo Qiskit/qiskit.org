@@ -65,7 +65,7 @@ export default class AppCta extends Vue {
     width: 3 * $column-size-medium;
   }
   @include mq($until: medium) {
-    width: 4 * $column-size-small;
+    width: 100%;
   }
 
   background-size: 200% 100%;
