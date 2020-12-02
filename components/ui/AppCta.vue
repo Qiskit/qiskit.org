@@ -1,12 +1,11 @@
 <template>
-  <AppLink
+  <BasicLink
     ref="link"
     class="app-cta"
     :class="[
       `app-cta_${kind}`,
       `app-cta_${kind}_theme_${theme}`
     ]"
-    kind="none"
     v-bind="$attrs"
   >
     <span class="app-cta__content">
@@ -17,13 +16,13 @@
       class="app-cta__icon"
       :class="`app-cta__icon_${iconPerLinkType}`"
     />
-  </AppLink>
+  </BasicLink>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-import AppLink from '~/components/ui/AppLink.vue'
+import BasicLink from '~/components/ui/BasicLink.vue'
 
 @Component
 export default class AppCta extends Vue {
@@ -33,9 +32,9 @@ export default class AppCta extends Vue {
 
   get iconPerLinkType (): string {
     const url = this.$attrs.url
-    if (AppLink.isExternal(url)) {
+    if (BasicLink.isExternal(url)) {
       return 'launch-16'
-    } else if (AppLink.isIdAnchor(url)) {
+    } else if (BasicLink.isIdAnchor(url)) {
       return 'arrow-down-16'
     } else {
       return 'arrow-right-16'
@@ -55,8 +54,8 @@ export default class AppCta extends Vue {
   @include type-style('body-long-01');
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
   text-decoration: none;
+  align-items: center;
 
   padding: $spacing-05;
   width: 4 * $column-size-large;
@@ -106,6 +105,7 @@ export default class AppCta extends Vue {
     padding-right: 0;
     padding-left: 0;
     justify-content: flex-start;
+    align-items: flex-start;
 
     background-image: none;
     color: $purple-70;
@@ -131,11 +131,14 @@ export default class AppCta extends Vue {
   $arrow-down_path: "_arrow-down-16 path:nth-child(1)";
   $launch_path: "_launch-16 path:nth-child(2)";
 
+  &_ghost &__icon {
+    margin-top: $spacing-02;
+  }
+
   &__icon {
     fill: currentColor;
     margin-left: $spacing-05;
     overflow: visible;
-    margin-top: $spacing-02;
 
     &_arrow-right-16 {
       margin-right: $spacing-02;

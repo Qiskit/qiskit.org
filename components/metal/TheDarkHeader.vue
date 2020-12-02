@@ -1,14 +1,13 @@
 <template>
   <header class="the-dark-header">
     <nav class="the-dark-header__nav">
-      <AppLink
+      <BasicLink
         class="the-dark-header__nav-link"
         :url="`/`"
-        kind="none"
       >
         <ArrowLeft16 class="the-dark-header__nav-icon" />
         <span>Back to Qiskit.org</span>
-      </AppLink>
+      </BasicLink>
     </nav>
     <div class="the-dark-header__container">
       <svg

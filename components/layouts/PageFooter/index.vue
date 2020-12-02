@@ -32,16 +32,15 @@
           ©Qiskit | All Rights Reserved
         </div>
         <div class="page-footer__secondary-links">
-          <AppLink
+          <BasicLink
             v-for="link in secondaryFooterLinks"
             :key="link.label"
             class="page-footer__secondary-link"
             :class="`page-footer__secondary-link_theme_${theme}`"
             v-bind="link"
-            kind="none"
           >
             {{ link.label }}
-          </AppLink>
+          </BasicLink>
         </div>
       </div>
     </section>

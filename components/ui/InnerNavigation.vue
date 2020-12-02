@@ -3,15 +3,14 @@
     <div class="menu-container">
       <div class="menu menu--framed">
         <nav class="navigation-group">
-          <AppLink
+          <BasicLink
             v-for="section in sections"
             :key="section.label"
             class="navigation-group__item"
             :url="`#${section.anchor}`"
-            kind="none"
           >
             {{ section.label }}
-          </AppLink>
+          </BasicLink>
         </nav>
       </div>
     </div>
