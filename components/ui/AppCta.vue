@@ -73,6 +73,7 @@ export default class AppCta extends Vue {
   transition: background-position-x 0.3s ease-out, color 0.3s ease-out;
 
   &:hover,
+  &:focus,
   &:active {
     background-position-x: 0;
   }
@@ -91,6 +92,7 @@ export default class AppCta extends Vue {
     color: $purple-70;
 
     &:hover,
+    &:focus,
     &:active {
       color: white;
     }
@@ -111,6 +113,7 @@ export default class AppCta extends Vue {
     color: $purple-70;
 
     &:hover,
+    &:focus,
     &:active {
       color: $purple-80;
     }
@@ -118,6 +121,7 @@ export default class AppCta extends Vue {
     &_theme_dark {
       color: $purple-50;
       &:hover,
+      &:focus,
       &:active {
         color: $purple-40;
       }
@@ -153,6 +157,7 @@ export default class AppCta extends Vue {
   }
 
   &:hover &__icon,
+  &:focus &__icon,
   &:active &__icon {
     &#{$arrow-right_path} {
       transform: translate(4px, 0px);

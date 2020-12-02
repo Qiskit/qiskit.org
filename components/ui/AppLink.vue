@@ -34,6 +34,7 @@ export default class AppLink extends Vue {
     color: $blue-50;
 
     &:hover,
+    &:focus,
     &:active {
       color: $blue-60;
     }
@@ -46,6 +47,7 @@ export default class AppLink extends Vue {
     color: $gray-80;
 
     &:hover,
+    &:focus,
     &:active {
       color: $gray-80;
       text-decoration: underline;
