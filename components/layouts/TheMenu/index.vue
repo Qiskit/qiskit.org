@@ -49,15 +49,33 @@
             :class="{ 'menu__logo_active': isActiveHome(homeLink) }"
           />
         </AppLink>
-        <AppLink
-          v-for="link in mainLevelLinks"
-          :key="link.url"
-          class="menu__link"
-          :class="{ 'menu__link_active': isActive(link) }"
-          v-bind="link"
-        >
-          {{ link.label }}
-        </AppLink>
+        <ul class="menu__navigation-level__list">
+          <li v-for="link in mainLevelLinks" :key="link.url" class="menu__navigation-level__list-item">
+            <AppLink
+              v-if="!link.sublinks"
+              class="menu__link"
+              :class="{ 'menu__link_active': isActive(link) }"
+              v-bind="link"
+            >
+              {{ link.label }}
+            </AppLink>
+            <cv-dropdown v-else class="cv-dropdown menu__navigation__dropdown" placeholder="Community">
+              <li
+                v-for="sublink in link.sublinks"
+                :key="sublink.url"
+                class="cv-dropdown-item bx--dropdown-item"
+              >
+                <AppLink
+                  class="menu__link menu__link_secondary"
+                  :class="{ 'menu__link_active': isActive(link) }"
+                  v-bind="sublink"
+                >
+                  {{ sublink.label }}
+                </AppLink>
+              </li>
+            </cv-dropdown>
+          </li>
+        </ul>
       </nav>
     </section>
     <section
@@ -104,11 +122,11 @@ export default class TheMenu extends Mixins(MenuMixin) {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '~carbon-components/scss/globals/scss/typography';
 
 .menu {
-  background-color: white;
+  background-color: $white;
 
   &__main-level {
     --link-color: #{$gray-80};
@@ -162,11 +180,74 @@ export default class TheMenu extends Mixins(MenuMixin) {
     padding-bottom: $spacing-05;
     display: flex;
     justify-content: flex-end;
+    align-items: center;
   }
 
   &__navigation-level {
     @include mq($until: large) {
       display: none;
+    }
+
+    &__list {
+      display: flex;
+      align-items: center;
+
+      &-item:hover {
+        cursor: none;
+      }
+
+      // targeting specific links to
+      // handle spacing for consistency
+      &-item:last-child .menu__link {
+        margin-right: 0;
+      }
+
+      &-item:nth-child(2) .menu__link {
+        margin-right: $spacing-07;
+      }
+    }
+
+    // menu dropdown overrides
+    .bx--form-item {
+      margin-right: $spacing-07;
+    }
+
+    .bx--dropdown {
+      background: $white;
+      border-bottom: none;
+    }
+
+    .bx--dropdown--open {
+      border-bottom: 1px solid $cool-gray-30;
+    }
+
+    .bx--dropdown--open,
+    .bx--dropdown--open .bx--list-box__menu {
+      background: $cool-gray-10;
+    }
+
+    .bx--list-box__menu {
+      background-color: $white;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    .bx--dropdown-item {
+      margin: 0 1rem;
+      &:not(:last-child) {
+        border-bottom: 1px solid $cool-gray-30;
+      }
+    }
+
+    .bx--list-box__label {
+      @include type-style('body-long-02');
+      color: $white-text-01;
+    }
+
+    .bx--list-box__menu-icon > svg {
+      fill: $white-text-01;
     }
   }
 
@@ -193,12 +274,14 @@ export default class TheMenu extends Mixins(MenuMixin) {
       text-decoration: underline;
     }
 
-    &:last-child {
-      margin-right: 0;
-    }
-
     &_active {
       color: $purple-70;
+    }
+
+
+    &_secondary {
+      display: block;
+      padding: $spacing-03 $spacing-05;
     }
   }
 
