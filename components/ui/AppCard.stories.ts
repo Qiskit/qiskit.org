@@ -3,7 +3,13 @@ import AppCard from './AppCard.vue'
 
 export default {
   title: 'UI/App/Card',
-  component: AppCard
+  component: AppCard,
+  parameters: {
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/xh0oqTfxDeCMsMmoBAYHWW/Qiskit-components?node-id=6%3A86'
+    }
+  }
 } as Meta
 
 const Template: Story = (args, { argTypes }) => ({

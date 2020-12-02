@@ -12,6 +12,12 @@ module.exports = {
     '@storybook/addon-a11y',
 
     /**
+     * Designs (Figma)
+     * https://github.com/pocka/storybook-addon-designs
+     */
+    'storybook-addon-designs',
+
+    /**
      * Paddings
      * https://github.com/rbardini/storybook-addon-paddings
      */
