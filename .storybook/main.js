@@ -17,12 +17,6 @@ module.exports = {
      */
     'storybook-addon-designs',
 
-    /**
-     * Paddings
-     * https://github.com/rbardini/storybook-addon-paddings
-     */
-    'storybook-addon-paddings',
-
     {
       name: '@storybook/addon-essentials',
       options: {
