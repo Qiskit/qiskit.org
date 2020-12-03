@@ -1,6 +1,22 @@
 import advocatesModule from "~/store/modules/advocates";
 
 /**
+ * ACTIONS
+ * -----------------------------------------------------------------------------
+ */
+
+describe('fetchAdvocates', () => {
+  it('fetches the list of advocates', async () => {
+    const commit = jest.fn()
+
+    const fetchAdvocates = advocatesModule.actions.fetchAdvocates as Function
+    await fetchAdvocates({ commit })
+
+    expect(commit).toHaveBeenCalledWith('setAdvocates', expect.arrayContaining([expect.anything()]))
+  })
+})
+
+/**
  * MUTATIONS
  * -----------------------------------------------------------------------------
  */
