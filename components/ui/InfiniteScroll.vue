@@ -24,8 +24,9 @@ export default class extends Mixins(ScrollSectionsMixin) {
   lastShown: number = Math.min(this.minItems, this.items.length)
 
   @Watch('items')
-  onItemsChanged () : void {
-    this.updateObserved()
+  onItemsChanged (newItems: Array<any>) : void {
+    this.lastShown = Math.min(this.minItems, newItems.length)
+    this.$nextTick(() => this.updateObserved())
   }
 
   /**
