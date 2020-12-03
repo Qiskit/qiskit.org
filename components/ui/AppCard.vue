@@ -36,10 +36,29 @@ import { Component, Prop } from 'vue-property-decorator'
 
 @Component
 export default class AppCard extends Vue {
+  /**
+   * Card image's URL.
+   */
   @Prop(String) image!: string
+
+  /**
+   * Card title.
+   */
   @Prop(String) title!: string
+
+  /**
+   * List of tags.
+   */
   @Prop(Array) tags!: string[]
+
+  /**
+   * CTA button's target URL.
+   */
   @Prop(String) to!: string
+
+  /**
+   * CTA button's label.
+   */
   @Prop(String) ctaLabel!: string
 
   ctaLink = {
