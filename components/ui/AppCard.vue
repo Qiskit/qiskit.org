@@ -19,6 +19,7 @@
         </div>
       </header>
       <div class="app-card__description">
+        <!-- @slot Card description. -->
         <slot />
       </div>
       <AppCta v-if="to" :url="to" class="app-card__link">
