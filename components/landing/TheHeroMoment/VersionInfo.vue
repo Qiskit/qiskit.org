@@ -6,7 +6,7 @@
     <div class="qiskit-version-info__content">
       <p class="qiskit-version-info__version-string">
         <AppLink
-          class="copy__link qiskit-version-info__link"
+          kind="secondary"
           v-bind="githubRepoLink"
         >
           qiskit {{ version }}
@@ -14,7 +14,6 @@
       </p>
       <p class="qiskit-version-info__release-notes">
         <AppLink
-          class="copy__link"
           v-bind="githubRepoLink"
           url="https://qiskit.org/documentation/release_notes.html#notable-changes"
           :segment="{ action: 'Release notes' }"
@@ -29,12 +28,9 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-import AppLink from '~/components/ui/AppLink.vue'
 import { GITHUB_REPOSITORY } from '~/constants/menuLinks'
 
-@Component({
-  components: { AppLink }
-})
+@Component
 export default class VersionInfo extends Vue {
   githubRepoLink = GITHUB_REPOSITORY
 
@@ -78,10 +74,6 @@ export default class VersionInfo extends Vue {
   &__content {
     display: flex;
     flex-direction: column;
-  }
-
-  &__link {
-    color: $gray-100;
   }
 
   &__version-string {

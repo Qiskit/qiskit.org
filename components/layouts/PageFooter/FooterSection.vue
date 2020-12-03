@@ -16,6 +16,7 @@
             : `footer-section__link footer-section__link_theme_${theme}`
         "
         v-bind="element"
+        kind="secondary"
       >
         <component :is="element.icon" v-if="iconsOnly" />
         <span v-else>{{ element.label }}</span>
@@ -27,12 +28,9 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-import AppLink from '~/components/ui/AppLink.vue'
 import { NavLink } from '~/constants/menuLinks'
 
-@Component({
-  components: { AppLink }
-})
+@Component
 export default class FooterSection extends Vue {
   @Prop(String) title!: string
   @Prop(Array) elements!: NavLink[]
@@ -67,14 +65,22 @@ export default class FooterSection extends Vue {
 
     &_theme_light {
       color: $cool-gray-60;
+
+      &:active,
+      &:visited,
+      &:hover {
+        color: $cool-gray-60;
+      }
     }
 
     &_theme_dark {
       color: $white;
-    }
 
-    &:hover {
-      text-decoration: underline;
+      &:active,
+      &:visited,
+      &:hover {
+        color: $white;
+      }
     }
   }
 
@@ -88,11 +94,11 @@ export default class FooterSection extends Vue {
 
   &__icon-link {
     &_theme_light {
-      fill: $cool-gray-60;
+      color: $cool-gray-60;
     }
 
     &_theme_dark {
-      fill: $white;
+      color: $white;
     }
   }
 

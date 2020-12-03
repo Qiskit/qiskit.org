@@ -18,9 +18,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import ThePageHeader from '~/components/ui/ThePageHeader.vue'
-import TypewriterEffect from '~/components/ui/TypewriterEffect.vue'
 
-@Component({ components: { ThePageHeader, TypewriterEffect } })
+@Component
 export default class TheLearnHeader extends Vue { }
 </script>

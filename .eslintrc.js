@@ -10,8 +10,8 @@ module.exports = {
     // https://github.com/typescript-eslint/typescript-eslint/issues/1856
     'no-undef': 'off',
     '@typescript-eslint/no-unused-vars': ['error', {
-      "argsIgnorePattern": "^_"
+      argsIgnorePattern: '^_'
     }],
-    "no-console": ['error', { allow: ['warn', 'error'] }]
+    'no-console': ['error', { allow: ['warn', 'error'] }]
   }
 }

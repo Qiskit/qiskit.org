@@ -1,13 +1,13 @@
 <template>
   <header class="the-dark-header">
     <nav class="the-dark-header__nav">
-      <AppLink
+      <BasicLink
         class="the-dark-header__nav-link"
         :url="`/`"
       >
         <ArrowLeft16 class="the-dark-header__nav-icon" />
         <span>Back to Qiskit.org</span>
-      </AppLink>
+      </BasicLink>
     </nav>
     <div class="the-dark-header__container">
       <svg
@@ -63,12 +63,8 @@
 import Vue from 'vue'
 
 import { Component } from 'vue-property-decorator'
-import LandingCta from '~/components/landing/LandingCta.vue'
-import AppLink from '~/components/ui/AppLink.vue'
 
-@Component({
-  components: { LandingCta, AppLink }
-})
+@Component
 export default class TheDarkHeader extends Vue {}
 </script>
 

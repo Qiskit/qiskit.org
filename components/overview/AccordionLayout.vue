@@ -4,16 +4,16 @@
     <p class="accordion-layout__description">
       {{ description }}
     </p>
-    <AppCta :url="cta.url" class="accordion-layout__link">
-      {{ cta.label }}
-    </AppCta>
+    <AppCta
+      kind="ghost"
+      v-bind="cta"
+    />
   </article>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-import AppCta from '~/components/ui/AppCta.vue'
 
 // TODO: It is not possible to extract the interface of the component props
 // so we need this redundant interface to do it. Explore if it is worth
@@ -30,9 +30,7 @@ interface AccordionLayoutProps {
 
 export { AccordionLayoutProps }
 
-@Component({
-  components: { AppCta }
-})
+@Component
 export default class AccordionLayout extends Vue implements AccordionLayoutProps {
   @Prop(String) image!: string
   @Prop(String) description!: string
@@ -61,10 +59,6 @@ export default class AccordionLayout extends Vue implements AccordionLayoutProps
   &__description {
     @include type-style('body-long-01');
     margin-bottom: $spacing-06;
-  }
-
-  &__link {
-    @include type-style('body-long-01');
   }
 }
 </style>

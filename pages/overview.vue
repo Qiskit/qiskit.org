@@ -25,9 +25,10 @@
           :entries="tocEntries"
           :active-section="activeSection"
         />
-        <AppCta class="overview-page__get-started" url="#quick-start">
-          Get Started
-        </AppCta>
+        <AppCta
+          v-bind="quickStartLink"
+          kind="ghost"
+        />
       </div>
       <div class="overview-page__list-of-contents">
         <ContentSection
@@ -58,13 +59,7 @@
 <script lang="ts">
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
-import ThePageHeader from '~/components/ui/ThePageHeader.vue'
-import TypewriterEffect from '~/components/ui/TypewriterEffect.vue'
-import TheTableOfContents from '~/components/overview/TheTableOfContents.vue'
-import TheQuickStart from '~/components/landing/TheQuickStart/index.vue'
-import ContentSection from '~/components/overview/ContentSection.vue'
-import ContentAccordion, { ContentAccordionTab } from '~/components/overview/ContentAccordion.vue'
-import AppCta from '~/components/ui/AppCta.vue'
+import { ContentAccordionTab } from '~/components/overview/ContentAccordion.vue'
 import {
   TABLE_OF_CONTENTS,
   CONTENT_SECTIONS,
@@ -74,15 +69,6 @@ import ScrollSectionsMixin from '~/mixins/scrollBetweenSections'
 
 @Component({
   mixins: [ScrollSectionsMixin],
-  components: {
-    ThePageHeader,
-    TypewriterEffect,
-    TheTableOfContents,
-    ContentSection,
-    ContentAccordion,
-    TheQuickStart,
-    AppCta
-  },
   head () {
     return {
       title: 'Qiskit Overview'
@@ -94,6 +80,11 @@ export default class OverviewPage extends QiskitPage {
 
   tocEntries = TABLE_OF_CONTENTS
   contentSections = CONTENT_SECTIONS
+
+  quickStartLink = {
+    url: '#quick-start',
+    label: 'Get Started'
+  }
 
   asTabs (subsections: Array<OverviewSubSection>): Array<ContentAccordionTab> {
     return subsections.map(subsection => subsection as ContentAccordionTab)
@@ -131,10 +122,6 @@ export default class OverviewPage extends QiskitPage {
     @include mq($until: medium) {
       display: none;
     }
-  }
-
-  &__get-started {
-    margin-top: $layout-02;
   }
 
   &__list-of-contents {

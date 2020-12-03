@@ -23,11 +23,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-import AppCard from '~/components/ui/AppCard.vue'
 
-@Component({
-  components: { AppCard }
-})
+@Component
 export default class EventCard extends Vue {
   @Prop(Array) types!: string[]
   @Prop(String) title!: string

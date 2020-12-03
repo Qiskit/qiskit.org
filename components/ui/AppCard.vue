@@ -21,9 +21,11 @@
       <div class="app-card__description">
         <slot />
       </div>
-      <AppCta v-if="to" :url="to" class="app-card__link">
-        {{ ctaLabel }}
-      </AppCta>
+      <AppCta
+        v-if="to"
+        v-bind="ctaLink"
+        kind="ghost"
+      />
     </div>
   </article>
 </template>
@@ -31,15 +33,19 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-import AppCta from '~/components/ui/AppCta.vue'
 
-@Component({ components: { AppCta } })
+@Component
 export default class AppCard extends Vue {
   @Prop(String) image!: string
   @Prop(String) title!: string
   @Prop(Array) tags!: string[]
   @Prop(String) to!: string
   @Prop(String) ctaLabel!: string
+
+  ctaLink = {
+    url: this.to,
+    label: this.ctaLabel
+  }
 }
 </script>
 
@@ -125,10 +131,6 @@ export default class AppCard extends Vue {
     @include type-style('body-long-01');
     margin-top: $layout-02;
     margin-bottom: $layout-02;
-  }
-
-  &__link {
-    margin-top: auto;
   }
 }
 </style>
