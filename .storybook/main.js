@@ -5,6 +5,18 @@ module.exports = {
   },
 
   addons: [
+    /**
+     * Accessibility
+     * https://github.com/storybookjs/storybook/tree/master/addons/a11y
+     */
+    '@storybook/addon-a11y',
+
+    /**
+     * Designs (Figma)
+     * https://github.com/pocka/storybook-addon-designs
+     */
+    'storybook-addon-designs',
+
     {
       name: '@storybook/addon-essentials',
       options: {
