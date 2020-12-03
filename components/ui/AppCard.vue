@@ -35,11 +35,30 @@ import AppCta from '~/components/ui/AppCta.vue'
 
 @Component({ components: { AppCta } })
 export default class AppCard extends Vue {
-  @Prop(String) image!: any
-  @Prop(String) title!: any
-  @Prop(Array) tags!: any
-  @Prop(String) to!: any
-  @Prop(String) ctaLabel!: any
+  /**
+   * Card image's URL.
+   */
+  @Prop(String) image!: string
+
+  /**
+   * Card title.
+   */
+  @Prop(String) title!: string
+
+  /**
+   * List of tags.
+   */
+  @Prop(Array) tags!: Array<string>
+
+  /**
+   * CTA button's target URL.
+   */
+  @Prop(String) to!: string
+
+  /**
+   * CTA button's label.
+   */
+  @Prop(String) ctaLabel!: string
 }
 </script>
 
