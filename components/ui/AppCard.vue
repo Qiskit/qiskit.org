@@ -36,7 +36,7 @@ import AppCta from '~/components/ui/AppCta.vue'
 /**
  * Card component.
  * 
- * A card is a flexible content container. It includes an image, a title and a
+ * A card is a flexible content container that includes an image, a title and a
  * description.
  * 
  * Optionally, a card can also include a list of tags and a CTA button.
