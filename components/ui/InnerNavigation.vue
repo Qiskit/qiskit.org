@@ -21,12 +21,13 @@
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 import AppLink from '~/components/ui/AppLink.vue'
+import { InnerNavLink } from '~/constants/menuLinks'
 
 @Component({
   components: { AppLink }
 })
 export default class InnerNavigation extends Vue {
-  @Prop({ type: Array, default: [] }) sections!: object[]
+  @Prop({ type: Array, default: [] }) sections!: InnerNavLink[]
 }
 </script>
 
