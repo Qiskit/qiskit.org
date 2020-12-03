@@ -1,4 +1,4 @@
-import advocatesModule from "~/store/modules/advocates";
+import advocatesModule from '~/store/modules/advocates'
 
 /**
  * ACTIONS
@@ -21,32 +21,32 @@ describe('fetchAdvocates', () => {
  * -----------------------------------------------------------------------------
  */
 
-describe("setAdvocates", () => {
-  it("sets the list of advocates", () => {
+describe('setAdvocates', () => {
+  it('sets the list of advocates', () => {
     const state = {
       advocates: [],
       regionFilters: []
-    };
+    }
     const advocate1 = [
       {
-        city: "Lima",
-        country: "Peru",
-        image: "https://example.com/img/1.jpg",
-        name: "John Doe",
-        region: "South America"
+        city: 'Lima',
+        country: 'Peru',
+        image: 'https://example.com/img/1.jpg',
+        name: 'John Doe',
+        region: 'South America'
       }
-    ];
+    ]
     const advocate2 = [
       {
-        city: "Munich",
-        country: "Germany",
-        image: "https://example.com/img/2.jpg",
-        name: "Max Mustermann",
-        region: "Europe"
+        city: 'Munich',
+        country: 'Germany',
+        image: 'https://example.com/img/2.jpg',
+        name: 'Max Mustermann',
+        region: 'Europe'
       }
-    ];
+    ]
 
-    advocatesModule.mutations.setAdvocates(state, advocate1);
+    advocatesModule.mutations.setAdvocates(state, advocate1)
 
     expect(state).toMatchInlineSnapshot(`
       Object {
@@ -61,9 +61,9 @@ describe("setAdvocates", () => {
         ],
         "regionFilters": Array [],
       }
-    `);
+    `)
 
-    advocatesModule.mutations.setAdvocates(state, advocate2);
+    advocatesModule.mutations.setAdvocates(state, advocate2)
 
     expect(state).toMatchInlineSnapshot(`
       Object {
@@ -78,9 +78,9 @@ describe("setAdvocates", () => {
         ],
         "regionFilters": Array [],
       }
-    `);
+    `)
 
-    advocatesModule.mutations.setAdvocates(state, [...advocate1, ...advocate2]);
+    advocatesModule.mutations.setAdvocates(state, [...advocate1, ...advocate2])
 
     expect(state).toMatchInlineSnapshot(`
       Object {
@@ -102,29 +102,29 @@ describe("setAdvocates", () => {
         ],
         "regionFilters": Array [],
       }
-    `);
+    `)
 
-    advocatesModule.mutations.setAdvocates(state, []);
+    advocatesModule.mutations.setAdvocates(state, [])
 
     expect(state).toMatchInlineSnapshot(`
       Object {
         "advocates": Array [],
         "regionFilters": Array [],
       }
-    `);
-  });
-});
+    `)
+  })
+})
 
-describe("setRegionFilters", () => {
-  it("sets the region filters", () => {
+describe('setRegionFilters', () => {
+  it('sets the region filters', () => {
     const state = {
       advocates: [],
       regionFilters: []
-    };
-    const regionFilter1 = ["South America"];
-    const regionFilter2 = ["Europe"];
+    }
+    const regionFilter1 = ['South America']
+    const regionFilter2 = ['Europe']
 
-    advocatesModule.mutations.setRegionFilters(state, regionFilter1);
+    advocatesModule.mutations.setRegionFilters(state, regionFilter1)
 
     expect(state).toMatchInlineSnapshot(`
       Object {
@@ -133,9 +133,9 @@ describe("setRegionFilters", () => {
           "South America",
         ],
       }
-    `);
+    `)
 
-    advocatesModule.mutations.setRegionFilters(state, regionFilter2);
+    advocatesModule.mutations.setRegionFilters(state, regionFilter2)
 
     expect(state).toMatchInlineSnapshot(`
       Object {
@@ -144,12 +144,12 @@ describe("setRegionFilters", () => {
           "Europe",
         ],
       }
-    `);
+    `)
 
     advocatesModule.mutations.setRegionFilters(state, [
       ...regionFilter1,
       ...regionFilter2
-    ]);
+    ])
 
     expect(state).toMatchInlineSnapshot(`
       Object {
@@ -159,15 +159,15 @@ describe("setRegionFilters", () => {
           "Europe",
         ],
       }
-    `);
+    `)
 
-    advocatesModule.mutations.setRegionFilters(state, []);
+    advocatesModule.mutations.setRegionFilters(state, [])
 
     expect(state).toMatchInlineSnapshot(`
       Object {
         "advocates": Array [],
         "regionFilters": Array [],
       }
-    `);
-  });
-});
+    `)
+  })
+})
