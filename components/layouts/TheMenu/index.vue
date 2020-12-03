@@ -67,7 +67,7 @@
               >
                 <AppLink
                   class="menu__link menu__link_secondary"
-                  :class="{ 'menu__link_active': isActive(link) }"
+                  :class="{ 'menu__link_active': isActive(sublink) }"
                   v-bind="sublink"
                 >
                   {{ sublink.label }}
@@ -219,9 +219,12 @@ export default class TheMenu extends Mixins(MenuMixin) {
     }
 
     .bx--dropdown-item {
-      margin: 0 1rem;
       &:not(:last-child) {
         border-bottom: 1px solid $cool-gray-30;
+      }
+
+      &:hover {
+        background-color: $cool-gray-20;
       }
     }
 
@@ -263,7 +266,7 @@ export default class TheMenu extends Mixins(MenuMixin) {
     }
 
     &_secondary {
-      display: block;
+      width: 100%;
       padding: $spacing-03 $spacing-05;
     }
   }
