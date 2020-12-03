@@ -24,7 +24,7 @@ const Template: Story = (args, { argTypes }) => ({
 export const Default = Template.bind({})
 Default.args = {
   ctaLabel: 'Learn more',
-  image: 'https://via.placeholder.com/300',
+  image: '/images/events/no-events.svg',
   tags: ['documentation', 'news'],
   title: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
   to: 'https://example.com',
