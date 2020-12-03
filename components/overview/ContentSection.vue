@@ -25,6 +25,7 @@
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 import AppCta from '~/components/ui/AppCta.vue'
+import { NavLink } from '~/constants/menuLinks'
 
 @Component({
   components: { AppCta }
@@ -32,7 +33,7 @@ import AppCta from '~/components/ui/AppCta.vue'
 export default class ContentSection extends Vue {
   @Prop(String) title!: string
   @Prop(String) description!: string
-  @Prop(Object) link!: object
+  @Prop(Object) link!: NavLink
 }
 </script>
 

@@ -28,13 +28,14 @@
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 import AppLink from '~/components/ui/AppLink.vue'
+import { NavLink } from '~/constants/menuLinks'
 
 @Component({
   components: { AppLink }
 })
 export default class FooterSection extends Vue {
   @Prop(String) title!: string
-  @Prop(Array) elements!: object[]
+  @Prop(Array) elements!: NavLink[]
   @Prop({ type: Boolean, default: false }) iconsOnly!: boolean
   @Prop({ type: String, default: 'light' }) theme!: string
 }
