@@ -11,9 +11,9 @@
         "
       >
         The below are designed and created by the Qiskit team. However, we
-        recommend a familiarity with <AppLink class="copy__link" url="https://www.khanacademy.org/math/linear-algebra">
+        recommend a familiarity with <AppLink url="https://www.khanacademy.org/math/linear-algebra">
           linear algebra
-        </AppLink> and <AppLink class="copy__link" url="https://www.coursera.org/specializations/python">
+        </AppLink> and <AppLink url="https://www.coursera.org/specializations/python">
           Python
         </AppLink> from these
         trusted resources.

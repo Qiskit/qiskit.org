@@ -7,6 +7,7 @@ import Map20 from '@carbon/icons-vue/lib/map/20'
 import ArrowRight20 from '@carbon/icons-vue/lib/arrow--right/20'
 import ArrowRight16 from '@carbon/icons-vue/lib/arrow--right/16'
 import ArrowLeft16 from '@carbon/icons-vue/lib/arrow--left/16'
+import ArrowDown16 from '@carbon/icons-vue/lib/arrow--down/16'
 import Menu20 from '@carbon/icons-vue/lib/menu/20'
 import Close20 from '@carbon/icons-vue/lib/close/20'
 import LogoTwitter20 from '@carbon/icons-vue/lib/logo--twitter/20'
@@ -24,6 +25,7 @@ Vue.use(CarbonIconsVue, {
     ArrowRight20,
     ArrowRight16,
     ArrowLeft16,
+    ArrowDown16,
     Menu20,
     Close20,
     LogoTwitter20,

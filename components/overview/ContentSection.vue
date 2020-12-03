@@ -9,11 +9,9 @@
       </p>
       <AppCta
         v-if="link"
-        class="copy__link"
-        :url="link.url"
-      >
-        {{ link.label }}
-      </AppCta>
+        v-bind="link"
+        kind="ghost"
+      />
     </div>
     <div class="content-section__detail">
       <slot />

@@ -6,14 +6,12 @@
     <p class="copy__paragraph copy__paragraph_importance_support">
       To install Qiskit locally, you will need
       <AppLink
-        class="copy__link"
         url="https://www.python.org/downloads/"
       >
         Python 3.6+.
       </AppLink>
       Although it isn't required, we recommend using a
       <AppLink
-        class="copy__link"
         url="https://www.anaconda.com/products/individual"
       >
         virtual environment with Anaconda.

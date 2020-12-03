@@ -28,7 +28,11 @@ export default class TheBlackLivesMatterBanner extends Vue {}
     @include type-style('body-short-02');
   }
 
-  &__link {
+  // Rely on BEM specifity because of the problems of css inconsistent ordering on nuxt compilation.
+  // https://github.com/nuxt/nuxt.js/issues/4204
+  // https://github.com/nuxt/nuxt.js/issues/4219
+  .app-link#{&}__link {
+    font-size: 1rem;
     color: #8A3FFC;
   }
 }

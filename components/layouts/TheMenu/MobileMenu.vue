@@ -12,6 +12,7 @@
             'mobile-menu__link_is-parent': isParent(link)
           }"
           v-bind="appLinkFromNavLink(link)"
+          kind="secondary"
         >
           <p class="mobile-menu__link-label">
             {{ link.label }}
@@ -26,6 +27,7 @@
         "
           :class="{ 'mobile-menu__link_active': isActive(sublink) }"
           v-bind="appLinkFromNavLink(sublink)"
+          kind="secondary"
         >
           <p class="mobile-menu__link-label">
             {{ sublink.label }}

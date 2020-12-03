@@ -7,6 +7,7 @@
             menu__link
             menu__home-link
           "
+          kind="secondary"
           v-bind="homeLink"
         >
           <AppLogo
@@ -42,6 +43,7 @@
             menu__link
             menu__home-link
           "
+          kind="secondary"
           v-bind="homeLink"
         >
           <AppLogo
@@ -55,6 +57,7 @@
           class="menu__link"
           :class="{ 'menu__link_active': isActive(link) }"
           v-bind="link"
+          kind="secondary"
         >
           {{ link.label }}
         </AppLink>
@@ -71,6 +74,7 @@
           class="menu__link"
           :class="{ 'menu__link_active': isActive(link) }"
           v-bind="link"
+          kind="secondary"
         >
           {{ link.label }}
         </AppLink>
@@ -186,18 +190,14 @@ export default class TheMenu extends Mixins(MenuMixin) {
     flex-direction: column;
     justify-content: center;
     color: var(--link-color);
-    text-decoration: none;
     margin-right: $spacing-09;
-
-    &:hover {
-      text-decoration: underline;
-    }
 
     &:last-child {
       margin-right: 0;
     }
 
-    &_active {
+    &_active,
+    &_active:hover {
       color: $purple-70;
     }
   }

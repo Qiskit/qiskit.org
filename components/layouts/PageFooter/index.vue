@@ -32,7 +32,7 @@
           ©Qiskit | All Rights Reserved
         </div>
         <div class="page-footer__secondary-links">
-          <AppLink
+          <BasicLink
             v-for="link in secondaryFooterLinks"
             :key="link.label"
             class="page-footer__secondary-link"
@@ -40,7 +40,7 @@
             v-bind="link"
           >
             {{ link.label }}
-          </AppLink>
+          </BasicLink>
         </div>
       </div>
     </section>
