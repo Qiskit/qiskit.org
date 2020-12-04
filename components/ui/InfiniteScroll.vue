@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Mixins, Prop } from 'vue-property-decorator'
+import { Component, Mixins, Prop, Watch } from 'vue-property-decorator'
 import ScrollSectionsMixin from '~/mixins/scrollBetweenSections'
 
 @Component
@@ -22,6 +22,12 @@ export default class extends Mixins(ScrollSectionsMixin) {
   @Prop({ type: Number, default: 5 }) minItems!: number
 
   lastShown: number = Math.min(this.minItems, this.items.length)
+
+  @Watch('items')
+  onItemsChanged (newItems: Array<any>) : void {
+    this.lastShown = Math.min(this.minItems, newItems.length)
+    this.$nextTick(() => this.updateObserved())
+  }
 
   /**
    * This methods gets called when the active section changes.
