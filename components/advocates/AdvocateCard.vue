@@ -27,12 +27,12 @@ import { Component, Prop } from 'vue-property-decorator'
 
 @Component
 export default class AdvocateCard extends Vue {
-  @Prop(String) name!: any
-  @Prop(String) image!: any
-  @Prop(String) location!: any
-  @Prop(String) areas!: any
+  @Prop(String) name!: string
+  @Prop(String) image!: string
+  @Prop(String) location!: string
+  @Prop(String) areas!: string
 
-  decorate (image: any) {
+  decorate (image: string) {
     const bgEffects = [
       'linear-gradient(170deg, #0000 0%, #0000 90%, var(--component-bg) 90.3%)',
       'linear-gradient(-170deg, #0000 0%, #0000 90%, var(--component-bg) 90.3%)',

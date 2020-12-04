@@ -7,6 +7,7 @@
             menu__link
             menu__home-link
           "
+          kind="secondary"
           v-bind="homeLink"
         >
           <AppLogo
@@ -42,6 +43,7 @@
             menu__link
             menu__home-link
           "
+          kind="secondary"
           v-bind="homeLink"
         >
           <AppLogo
@@ -179,6 +181,7 @@ export default class TheMenu extends Mixins(MenuMixin) {
       display: flex;
       align-items: center;
 
+
       &-item:hover {
         cursor: none;
       }
@@ -273,20 +276,31 @@ export default class TheMenu extends Mixins(MenuMixin) {
     flex-direction: column;
     justify-content: center;
     color: var(--link-color);
-    text-decoration: none;
     margin-right: $spacing-09;
-
-    &:hover {
-      text-decoration: underline;
-    }
-
-    &_active {
-      color: $purple-70;
-    }
 
     &_secondary {
       width: 100%;
       padding: $spacing-03 $spacing-05;
+    }
+  }
+
+  // override applink
+  .app-link {
+    color: var(--link-color);
+    @include type-style('body-long-02');
+
+    &.menu__link_active,
+    &.menu__link_active:hover {
+      color: $purple-70;
+    }
+
+    &:hover {
+      color: var(--link-color);
+      text-decoration: underline;
+    }
+
+    &:visited  {
+      color: var(--link-color);
     }
   }
 

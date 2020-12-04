@@ -38,9 +38,9 @@ import { Component, Prop } from 'vue-property-decorator'
 
 @Component
 export default class CapabilityCard extends Vue {
-  @Prop(String) visualResource!: any
-  @Prop(String) title!: any
-  @Prop(String) description!: any
+  @Prop(String) visualResource!: string
+  @Prop(String) title!: string
+  @Prop(String) description!: string
 
   isVideo (): boolean {
     const extension = this.visualResource.substring(this.visualResource.length - 4)

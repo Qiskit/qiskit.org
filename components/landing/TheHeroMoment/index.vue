@@ -13,15 +13,10 @@
           Qiskit {{ qiskitPronuntiation }} is an open source SDK for working with quantum
           computers at the level of pulses, circuits and application modules.
         </p>
-        <LandingCta
+        <AppCta
           class="the-hero-moment__cta"
-          url="https://qiskit.org/documentation/install.html"
-          @click="$trackClickEvent({
-            action: 'Get Started'
-          })"
-        >
-          Get started
-        </LandingCta>
+          v-bind="getStartedLink"
+        />
       </div>
     </MetalGrid>
   </article>
@@ -35,6 +30,11 @@ import { Prop, Component } from 'vue-property-decorator'
 @Component
 export default class TheHeroMoment extends Vue {
   @Prop({ type: String, required: true }) version!: string
+  getStartedLink = {
+    url: 'documentation/install.html',
+    label: 'Get started',
+    segment: { action: 'Get started' }
+  }
 
   data () {
     return { qiskitPronuntiation: Math.random() < 0.5 ? '[kiss-kit]' : '[quiss-kit]' }

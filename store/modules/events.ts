@@ -49,6 +49,21 @@ type EventMultiSelectOption = {
   name: string
 }
 
+type EventPayload = {
+  events: string,
+  eventsSet: CommunityEvent[]
+}
+
+type FilterPayload = {
+  filter: string,
+  filterValue: string
+}
+
+type FilterSetPayload = {
+  filter: string,
+  filterValues: string[]
+}
+
 const WORLD_REGION_OPTIONS = Object.freeze([
   WORLD_REGIONS.americas,
   WORLD_REGIONS.asiaPacific,
@@ -76,8 +91,16 @@ export {
   EventMultiSelectOption
 }
 
+type State = {
+  activeSet: string,
+  [upcomingCommunityEvents: string]: any,
+  pastCommunityEvents: CommunityEvent[],
+  typeFilters: string[],
+  regionFilters: string[]
+}
+
 export default {
-  state () {
+  state (): State {
     return {
       activeSet: 'upcoming',
       upcomingCommunityEvents: [],
@@ -87,13 +110,13 @@ export default {
     }
   },
   getters: {
-    typeFilters (state: any) {
+    typeFilters (state: State) {
       return state.typeFilters
     },
-    regionFilters (state: any) {
+    regionFilters (state: State) {
       return state.regionFilters
     },
-    filteredEvents (state: any) {
+    filteredEvents (state: State) {
       const {
         activeSet,
         upcomingCommunityEvents,
@@ -126,27 +149,27 @@ export default {
     }
   },
   mutations: {
-    setEvents (state: any, payload: any) {
+    setEvents (state: State, payload: EventPayload) {
       const { events, eventsSet } = payload
 
       state[events] = eventsSet
     },
-    setActiveSet (state: any, payload: CommunityEventSet) {
+    setActiveSet (state: State, payload: CommunityEventSet) {
       state.activeSet = payload
     },
-    addFilter (state: any, payload: any) {
+    addFilter (state: State, payload: FilterPayload) {
       const { filter, filterValue } = payload
       const filterIndex = state[filter].indexOf(filterValue)
       const noFilterFound = filterIndex === -1
 
       noFilterFound && state[filter].push(filterValue)
     },
-    updateFilterSet (state: any, payload: any) {
+    updateFilterSet (state: State, payload: FilterSetPayload) {
       const { filter, filterValues } = payload
 
       state[filter] = filterValues
     },
-    removeFilter (state: any, payload: any) {
+    removeFilter (state: State, payload: FilterPayload) {
       const { filter, filterValue } = payload
       const filterIndex = state[filter].indexOf(filterValue)
       const isFilterFound = filterIndex !== -1

@@ -8,10 +8,9 @@
         IBM's hosted Jupyter Notebooks let you get started without installing anything.
       </p>
       <AppCta
-        :url="ibmQExperienceLink.url"
-      >
-        {{ ibmQExperienceLink.label }}
-      </AppCta>
+        kind="ghost"
+        v-bind="ibmQExperienceLink"
+      />
     </div>
   </section>
 </template>

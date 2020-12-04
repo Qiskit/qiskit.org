@@ -29,12 +29,10 @@
           <p class="building-section__text">
             Learn more about the physics behind Qiskit Metal and qubit design from the
             <AppLink
-              class="building-section__copy-link copy__link "
               url="/learn/intro-qc-qh/"
             >Introduction to Quantum Computing and Quantum Hardware</AppLink>
             summer school lectures series by Zlatko Minev on superconducting qubits. Also, check out the open source
             <AppLink
-              class="building-section__copy-link copy__link "
               url="https://qiskit.org/textbook/ch-quantum-hardware/transmon-physics.html"
             >Qiskit textbook</AppLink>
             chapters on quantum devices and their control.
@@ -130,12 +128,6 @@ export default class BuildingSection extends Vue {}
 
     @include mq($until: medium) {
       flex: 1;
-    }
-
-    &-link {
-      @include type-style('body-long-01');
-      color: $purple-50;
-      text-decoration: underline;
     }
   }
 
