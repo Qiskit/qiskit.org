@@ -243,7 +243,7 @@ export default class TheMenu extends Mixins(MenuMixin) {
 
     .bx--list-box__label {
       @include type-style('body-long-02');
-      color: $white-text-01;
+      color: var(--link-color);
     }
 
     .bx--list-box__menu {
@@ -251,7 +251,7 @@ export default class TheMenu extends Mixins(MenuMixin) {
     }
 
     .bx--list-box__menu-icon > svg {
-      fill: $white-text-01;
+      fill: var(--link-color);
     }
   }
 
