@@ -227,7 +227,7 @@ export default class TheMenu extends Mixins(MenuMixin) {
       height: calc(3.25rem);
 
       &:focus {
-        outline-offset: -1px;
+        outline: none;
       }
     }
 
