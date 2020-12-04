@@ -274,7 +274,7 @@ export default class TheMenu extends Mixins(MenuMixin) {
     margin-right: $spacing-09;
 
     &_secondary {
-      width: 100%;
+      display: block;
       padding: $spacing-03 $spacing-05;
     }
   }
