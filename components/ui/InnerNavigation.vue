@@ -20,10 +20,11 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
+import { InnerNavLink } from '~/constants/menuLinks'
 
 @Component
 export default class InnerNavigation extends Vue {
-  @Prop({ type: Array, default: [] }) sections!: any
+  @Prop({ type: Array, default: [] }) sections!: InnerNavLink[]
 }
 </script>
 

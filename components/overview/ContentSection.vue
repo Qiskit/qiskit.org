@@ -22,12 +22,13 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
+import { NavLink } from '~/constants/menuLinks'
 
 @Component
 export default class ContentSection extends Vue {
-  @Prop(String) title!: any
-  @Prop(String) description!: any
-  @Prop(Object) link!: any
+  @Prop(String) title!: string
+  @Prop(String) description!: string
+  @Prop(Object) link!: NavLink
 }
 </script>
 

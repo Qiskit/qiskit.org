@@ -13,7 +13,7 @@ import { Component, Prop } from 'vue-property-decorator'
 
 @Component
 export default class AppFieldset extends Vue {
-  @Prop(String) label!: any
+  @Prop(String) label!: string
 }
 </script>
 
