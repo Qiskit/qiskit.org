@@ -52,7 +52,7 @@
           />
         </AppLink>
         <ul class="menu__navigation-level__list">
-          <li v-for="link in mainLevelLinks" :key="link.url" class="menu__navigation-level__list-item" >
+          <li v-for="link in mainLevelLinks" :key="link.url" class="menu__navigation-level__list-item">
             <AppLink
               v-if="!link.sublinks"
               class="menu__link"
@@ -180,11 +180,6 @@ export default class TheMenu extends Mixins(MenuMixin) {
     &__list {
       display: flex;
       align-items: center;
-
-
-      &-item:hover {
-        cursor: none;
-      }
 
       // targeting specific links to
       // handle spacing for consistency
