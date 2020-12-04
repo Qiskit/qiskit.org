@@ -181,8 +181,7 @@ export default class TheMenu extends Mixins(MenuMixin) {
       display: flex;
       align-items: center;
 
-      // targeting specific links to
-      // handle spacing for consistency
+      // targeting specific links for consistent spacing
       &-item:last-child .menu__link {
         margin-right: 0;
       }
@@ -232,8 +231,16 @@ export default class TheMenu extends Mixins(MenuMixin) {
     }
 
     .bx--dropdown-item {
-      &:not(:last-child) {
+      position: relative;
+
+      // using pseudo element to achieve partial underline
+      &:first-child:after {
+        content: '';
         border-bottom: 1px solid $cool-gray-30;
+        position: absolute;
+        width: 80%;
+        left: 10%;
+        bottom: 0;
       }
 
       &:hover {
@@ -276,6 +283,11 @@ export default class TheMenu extends Mixins(MenuMixin) {
     &_secondary {
       display: block;
       padding: $spacing-03 $spacing-05;
+      margin-right: 0;
+
+      &:hover {
+        text-decoration: none;
+      }
     }
   }
 
