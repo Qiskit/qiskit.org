@@ -168,6 +168,9 @@ export default class TheMenu extends Mixins(MenuMixin) {
   }
 
   &__navigation-level {
+    padding-top: 0;
+    padding-bottom: 0;
+
     @include mq($until: large) {
       display: none;
     }
@@ -198,6 +201,8 @@ export default class TheMenu extends Mixins(MenuMixin) {
 
     .bx--dropdown {
       background: $white;
+      height: initial;
+      max-height: initial;
       border-bottom: 1px solid transparent;
     }
 
@@ -218,6 +223,12 @@ export default class TheMenu extends Mixins(MenuMixin) {
       }
     }
 
+    // Dropdown button
+    .bx--list-box__field {
+      display: flex;
+      height: calc(3.25rem);
+    }
+
     .bx--dropdown-item {
       &:not(:last-child) {
         border-bottom: 1px solid $cool-gray-30;
@@ -231,6 +242,10 @@ export default class TheMenu extends Mixins(MenuMixin) {
     .bx--list-box__label {
       @include type-style('body-long-02');
       color: $white-text-01;
+    }
+
+    .bx--list-box__menu {
+      top: calc(3.25rem + 1px);
     }
 
     .bx--list-box__menu-icon > svg {
