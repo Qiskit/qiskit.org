@@ -50,7 +50,7 @@
           />
         </AppLink>
         <ul class="menu__navigation-level__list">
-          <li v-for="link in mainLevelLinks" :key="link.url" class="menu__navigation-level__list-item">
+          <li v-for="link in mainLevelLinks" :key="link.url" class="menu__navigation-level__list-item" >
             <AppLink
               v-if="!link.sublinks"
               class="menu__link"
@@ -227,6 +227,10 @@ export default class TheMenu extends Mixins(MenuMixin) {
     .bx--list-box__field {
       display: flex;
       height: calc(3.25rem);
+
+      &:focus {
+        outline-offset: -1px;
+      }
     }
 
     .bx--dropdown-item {
