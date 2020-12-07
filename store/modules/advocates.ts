@@ -15,12 +15,12 @@ type AdvocatesWorldRegion = typeof ADVOCATES_WORLD_REGIONS[keyof typeof ADVOCATE
  * Interface for a Qiskit advocate.
  */
 interface Advocate {
-  city: string,
-  country: string,
-  image: string,
-  location?: string,
-  name: string,
-  region: AdvocatesWorldRegion,
+  city: string
+  country: string
+  image: string
+  location?: string
+  name: string
+  region: AdvocatesWorldRegion
   slackId?: string
   slackUsername?: string
 }
