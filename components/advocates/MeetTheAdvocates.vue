@@ -20,10 +20,10 @@
             <cv-checkbox
               v-for="option in filter.options"
               :key="option"
-              v-model="activeFilters"
+              v-model="regionFilters"
               :label="option"
               :value="option"
-              @change="updateActiveFilters(activeFilters)"
+              @change="updateRegionFilters(regionFilters)"
             />
           </client-only>
         </AppFieldset>
@@ -32,8 +32,8 @@
         <AppMultiSelect
           :label="filter.label"
           :options="filter.options"
-          :value="activeFilters"
-          @change-selection="updateActiveFilters($event)"
+          :value="regionFilters"
+          @change-selection="updateRegionFilters($event)"
         />
       </template>
       <template slot="results">
@@ -74,7 +74,7 @@ import { Advocate, ADVOCATES_WORLD_REGION_OPTIONS, State } from '~/store/modules
 
   computed: {
     ...mapState<MapperForStateWithNamespace>('advocates', {
-      regionFilters: (state: State) => state.regionFilters
+      regionFiltersFromStore: (state: State) => state.regionFilters
     })
   }
 })
@@ -83,11 +83,23 @@ export default class MeetTheAdvocates extends Vue {
 
   /**
    * Region filters from Vuex store.
+   * 
    * Initialized with mapState.
    */
-  public regionFilters!: string[]
+  public regionFiltersFromStore!: string[]
 
-  private activeFilters: string[] = [];
+  /**
+   * Region filters.
+   * 
+   * Reflects the component local state of the region filters, which syncs with
+   * the region filters state from the Vuex store.
+   * 
+   * This variable is necessary in order to bind its value to `cv-checkbox`. If
+   * we were to bind the region filters value from the Vuex store directly, it
+   * would result in store mutations when the active elements in the checkbox
+   * group change.
+   */
+  private regionFilters: string[] = [];
 
   private filter = {
     label: 'Locations',
@@ -95,19 +107,19 @@ export default class MeetTheAdvocates extends Vue {
   }
 
   mounted () {
-    this.activeFilters = this.regionFilters
+    this.regionFilters = this.regionFiltersFromStore
   }
 
-  @Watch('regionFilters')
-  onRegionFiltersChanged (regionFilters: string[]) {
-    this.activeFilters = regionFilters
+  @Watch('regionFiltersFromStore')
+  onRegionFiltersFromStoreChanged (regionFiltersFromStore: string[]) {
+    this.regionFilters = regionFiltersFromStore
   }
 
   /**
-   * Updates the active filters.
+   * Updates the region filters in the Vuex store.
    */
-  updateActiveFilters (activeFilters: string[]): void {
-    this.$store.dispatch('advocates/updateRegionFilters', activeFilters)
+  updateRegionFilters (regionFilters: string[]): void {
+    this.$store.dispatch('advocates/updateRegionFilters', regionFilters)
   }
 
   joinSlackLink: string = 'https://ibm.co/joinqiskitslack'
