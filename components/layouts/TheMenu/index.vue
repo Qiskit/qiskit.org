@@ -61,7 +61,7 @@
             >
               {{ link.label }}
             </AppLink>
-            <cv-dropdown v-else class="cv-dropdown menu__navigation__dropdown" placeholder="Community">
+            <cv-dropdown v-else class="cv-dropdown menu__navigation__dropdown" :class="{ 'menu__link_active': isCommunityActive() }" placeholder="Community">
               <li
                 v-for="sublink in link.sublinks"
                 :key="sublink.url"
@@ -279,6 +279,10 @@ export default class TheMenu extends Mixins(MenuMixin) {
     justify-content: center;
     color: var(--link-color);
     margin-right: $spacing-09;
+
+    &_active .bx--list-box__label {
+      color: $purple-70;
+    }
 
     &_secondary {
       display: block;
