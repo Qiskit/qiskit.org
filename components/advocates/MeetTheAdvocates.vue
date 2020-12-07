@@ -60,7 +60,7 @@ import AppFieldset from '~/components/ui/AppFieldset.vue'
 import AppFiltersResultsLayout from '~/components/ui/AppFiltersResultsLayout.vue'
 import AppLink from '~/components/ui/AppLink.vue'
 import InfiniteScroll from '~/components/ui/InfiniteScroll.vue'
-import { Advocate, ADVOCATES_WORLD_REGION_OPTIONS } from '~/store/modules/advocates.ts'
+import { Advocate, ADVOCATES_WORLD_REGION_OPTIONS, State } from '~/store/modules/advocates.ts'
 
 @Component({
   components: {
@@ -74,7 +74,7 @@ import { Advocate, ADVOCATES_WORLD_REGION_OPTIONS } from '~/store/modules/advoca
 
   computed: {
     ...mapState<MapperForStateWithNamespace>('advocates', {
-      regionFilters: (state: any) => state.regionFilters
+      regionFilters: (state: State) => state.regionFilters
     })
   }
 })

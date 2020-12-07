@@ -41,7 +41,7 @@ export {
   Advocate
 }
 
-class State {
+export class State {
   advocates: Advocate[] = []
   regionFilters: string[] = []
 }
