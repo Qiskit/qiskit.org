@@ -88,7 +88,7 @@ export default class AppCta extends Vue {
   }
 
   &_secondary {
-    @include bicolor-background($purple-70, $gray-10);
+    @include bicolor-background($purple-70, $cool-gray-10);
     color: $purple-70;
 
     &:hover,
@@ -136,7 +136,7 @@ export default class AppCta extends Vue {
   $launch_path: "_launch-16 path:nth-child(2)";
 
   &_ghost &__icon {
-    margin-top: $spacing-02;
+    margin-top: $spacing-01;
   }
 
   &__icon {
