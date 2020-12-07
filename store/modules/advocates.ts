@@ -71,10 +71,11 @@ const mutations = <MutationTree<State>> {
 const getters = <GetterTree<State, any>> {
   /**
    * List of advocates filtered by selected regions.
-   * If no region is selected to filter, all advocates shall be shown.
    */
   filteredAdvocates ({ advocates, regionFilters }): Advocate[] {
-    if (regionFilters.length === 0) {
+    const noRegionFilters = regionFilters.length === 0
+
+    if (noRegionFilters) {
       return advocates
     }
 

@@ -83,17 +83,17 @@ export default class MeetTheAdvocates extends Vue {
 
   /**
    * Region filters from Vuex store.
-   * 
+   *
    * Initialized with mapState.
    */
   public regionFiltersFromStore!: string[]
 
   /**
    * Region filters.
-   * 
+   *
    * Reflects the component local state of the region filters, which syncs with
    * the region filters state from the Vuex store.
-   * 
+   *
    * This variable is necessary in order to bind its value to `cv-checkbox`. If
    * we were to bind the region filters value from the Vuex store directly, it
    * would result in store mutations when the active elements in the checkbox
