@@ -35,13 +35,6 @@
         </AppLink>
       </template>
     </nav>
-    <footer class="mobile-menu__footer">
-      <div class="mobile-menu__footer-inner-container">
-        <p class="mobile-menu__footer-text">
-          ©Qiskit | All Rights Reserverd
-        </p>
-      </div>
-    </footer>
   </section>
 </template>
 

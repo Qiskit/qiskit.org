@@ -145,10 +145,12 @@ export default class TheMenu extends Mixins(MenuMixin) {
   .menu__mobile-menu {
     position: fixed;
     top: 3.5rem; // taking into account the height of the top menu
-    left: 0;
+    left: auto;
     bottom: 0;
     right: 0;
     z-index: 150;
+    width: 12rem;
+    box-shadow: 0 .5rem .5rem rgba(0,0,0,.25);
 
     visibility: hidden;
     pointer-events: none;
