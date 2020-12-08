@@ -145,61 +145,61 @@ by default. To enable, set the `ENABLE_ANALYTICS` environment variable.
     ├─ nuxt.config.js
     ├─ ... other third-parties configuration files like ESLint, Jest or Travis
 
-1.  **`app/`**: Global scripts.
+-  **`app/`**: Global scripts.
 
     Currently only contains `router.ScrollBehavior.js` for controlling the behavior of the scroll when navigating.
 
-2.  **`assets/`**: Un-compiled Sass files.
+-  **`assets/`**: Un-compiled Sass files.
 
     More information: [NuxtJS documentation on the _assets_ directory](https://nuxtjs.org/docs/2.x/directory-structure/assets)
 
-3.  **`components/`**: Vue.js components.
+-  **`components/`**: Vue.js components.
 
     More information: [NuxtJS documentation on the _components_ directory](https://nuxtjs.org/docs/2.x/directory-structure/components)
 
-4.  **`constants/`**: Shared constants.
+-  **`constants/`**: Shared constants.
 
-5.  **`content/`**: Content Markdown and JSON files included via the [`generate` property](https://nuxtjs.org/docs/2.x/configuration-glossary/configuration-generate/#routes).
+-  **`content/`**: Content Markdown and JSON files included via the [`generate` property](https://nuxtjs.org/docs/2.x/configuration-glossary/configuration-generate/#routes).
 
     The files are organized in folders matching the website's information architecture.
 
-6.  **`deploy/`**: Deployment configuration.
+-  **`deploy/`**: Deployment configuration.
 
-7.  **`hooks/`**: Shared hook functions.
+-  **`hooks/`**: Shared hook functions.
 
-8.  **`layouts/`**: Nuxt layout components.
+-  **`layouts/`**: Nuxt layout components.
 
     More information: [NuxtJS documentation on the _layouts_ directory](https://nuxtjs.org/docs/2.x/directory-structure/layouts)
 
-9. **`mixins/`**: Shared Vue.js mixins.
+- **`mixins/`**: Shared Vue.js mixins.
 
-10. **`new-content/`**: Content Markdown files included via `@nuxtjs/content`.
+- **`new-content/`**: Content Markdown files included via `@nuxtjs/content`.
 
     This directory would usually be named `content`, but that name was already in use in our project.
 
     More information: [NuxtJS documentation on the _content_ directory](https://nuxtjs.org/docs/2.x/directory-structure/content)
 
-11. **`pages/`**: The base application views and routes.
+- **`pages/`**: The base application views and routes.
 
     More information: [NuxtJS documentation on the _pages_ directory](https://nuxtjs.org/docs/2.x/directory-structure/pages)
 
-12. **`plugins/`**: JavaScript plugins that run before instantiating the root Vue.js application.
+- **`plugins/`**: JavaScript plugins that run before instantiating the root Vue.js application.
 
     More information: [NuxtJS documentation on the _pages_ directory](https://nuxtjs.org/docs/2.x/directory-structure/plugins)
 
-13. **`static/`**: Files that will be automatically served by Nuxt and will be accessible through the project root URL.
+- **`static/`**: Files that will be automatically served by Nuxt and will be accessible through the project root URL.
 
     More information: [NuxtJS documentation on the _static_ directory](https://nuxtjs.org/docs/2.x/directory-structure/static)
 
-14. **`store/`**: Vuex store files.
+- **`store/`**: Vuex store files.
 
     More information: [NuxtJS documentation on the _store_ directory](https://nuxtjs.org/docs/2.x/directory-structure/store)
 
-15. **`tests/`**: Jest unit tests.
+- **`tests/`**: Jest unit tests.
 
-16. **`types/`**: Additional types for non-typed libraries or global definitions.
+- **`types/`**: Additional types for non-typed libraries or global definitions.
 
-17. **`nuxt.config.js`**: Main NuxtJS configuration.
+- **`nuxt.config.js`**: Main NuxtJS configuration.
 
     More information: [NuxtJS documentation on the _nuxt.config_ file](https://nuxtjs.org/docs/2.x/directory-structure/nuxt-config)
 
