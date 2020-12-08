@@ -124,43 +124,53 @@ by default. To enable, set the `ENABLE_ANALYTICS` environment variable.
 
 ## 🧐 Folder Structure
 
-    .
-    ├── app
-    ├── assets
-    ├── components
-    ├── constants
-    ├── content
-    ├── deploy
-    ├── hooks
-    ├── layouts
-    ├── mixins
-    ├── new-content
-    ├── pages
-    ├── plugins
-    ├── static
-    ├── store
-    ├── tests
-    ├── nuxt.config.js
-    ... other third-parties configuration files like ESLint, Jest or Travis
 
-1.  **`/app`**: contains `router.ScrollBehavior.js` controlling the behavior of
-the scroll when navigating.
+    qiskit.org/
+    ├─ app/
+    ├─ assets/
+    ├─ components/
+    ├─ constants/
+    ├─ content/
+    ├─ deploy/
+    ├─ hooks/
+    ├─ layouts/
+    ├─ mixins/
+    ├─ new-content/
+    ├─ pages/
+    ├─ plugins/
+    ├─ static/
+    ├─ store/
+    ├─ tests/
+    ├─ types/
+    ├─ nuxt.config.js
+    ├─ ... other third-parties configuration files like ESLint, Jest or Travis
 
-3.  **`/assets`**: Images and assets for the project. You can find more information at [Nuxt's assets directory documentation](https://nuxtjs.org/guide/assets/)
+1.  **`app/`**: Global scripts.
 
-4.  **`/components`**: Vue components for the project. You can find more information at [Nuxt's components directory documentation](https://nuxtjs.org/guide/directory-structure#the-components-directory)
+    Currently only contains `router.ScrollBehavior.js` for controlling the behavior of the scroll when navigating.
 
-5.  **`/constants`**: Constants shared through the whole project.
+2.  **`assets/`**: Un-compiled Sass files.
 
-6.  **`/content`**: Markdown files, website's editable content. They are divided in folders by sections.
+    More information: [NuxtJS documentation on the _assets_ directory](https://nuxtjs.org/docs/2.x/directory-structure/assets)
 
-7.  **`/deploy`**: Deploy configuration.
+3.  **`components/`**: Vue.js components.
 
-8.  **`/hooks`**: Hook functions shared through the whole project.
+    More information: [NuxtJS documentation on the _components_ directory](https://nuxtjs.org/docs/2.x/directory-structure/components)
 
-9.  **`/layouts`**: You can find information at [Nuxt's layout directory documentation](https://nuxtjs.org/guide/directory-structure#the-layouts-directory)
+4.  **`constants/`**: Shared constants.
 
 10. **`/mixins`**: Mixin functions shared through the whole project.
+5.  **`content/`**: Content Markdown and JSON files included via the [`generate` property](https://nuxtjs.org/docs/2.x/configuration-glossary/configuration-generate/#routes).
+
+    The files are organized in folders matching the website's information architecture.
+
+6.  **`deploy/`**: Deployment configuration.
+
+7.  **`hooks/`**: Shared hook functions.
+
+8.  **`layouts/`**: Nuxt layout components.
+
+    More information: [NuxtJS documentation on the _layouts_ directory](https://nuxtjs.org/docs/2.x/directory-structure/layouts)
 
 11. **`/new-content`**: This directory includes newer content that is used in various parts of the qiskit.org website, leveraging the [nuxt/content](https://content.nuxtjs.org/) module, along with standard markdown syntax.
 
