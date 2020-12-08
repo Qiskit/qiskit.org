@@ -228,6 +228,10 @@ export default class TheMenu extends Mixins(MenuMixin) {
       &:focus {
         outline: none;
       }
+
+      &:hover .bx--list-box__label {
+        text-decoration: underline;
+      }
     }
 
     .bx--dropdown-item {
@@ -255,6 +259,7 @@ export default class TheMenu extends Mixins(MenuMixin) {
 
     .bx--list-box__menu {
       top: calc(3.25rem + 1px);
+      box-shadow: initial;
     }
 
     .bx--list-box__menu-icon > svg {
