@@ -316,13 +316,6 @@ export default class TheMenu extends Mixins(MenuMixin) {
     }
   }
 
-  // override applink
-  .basic-link {
-    &:visited  {
-      color: var(--link-color);
-    }
-  }
-
   &__home-link {
     margin-left: 0;
     margin-right: auto;
