@@ -53,18 +53,19 @@
         </AppLink>
         <ul class="menu__navigation-level__list">
           <li v-for="link in mainLevelLinks" :key="link.url" class="menu__navigation-level__list-item">
-            <AppLink
+            <BasicLink
               v-if="!link.sublinks"
               class="menu__link"
               :class="{ 'menu__link_active': isActive(link) }"
               v-bind="link"
             >
               {{ link.label }}
-            </AppLink>
+            </BasicLink>
             <cv-dropdown v-else class="cv-dropdown menu__navigation__dropdown" :class="{ 'menu__link_active': isCommunityActive() }" placeholder="Community">
               <li
                 v-for="sublink in link.sublinks"
                 :key="sublink.url"
+                value="sublink.url"
                 class="cv-dropdown-item bx--dropdown-item"
               >
                 <AppLink
@@ -284,37 +285,39 @@ export default class TheMenu extends Mixins(MenuMixin) {
     justify-content: center;
     color: var(--link-color);
     margin-right: $spacing-09;
+    text-decoration: none;
 
+    &_active,
     &_active .bx--list-box__label {
       color: $purple-70;
     }
 
-    &_secondary {
+    &_secondary.app-link_primary {
+      color: var(--link-color);
+      @include type-style('body-long-02');
       display: block;
       padding: $spacing-03 $spacing-05;
       margin-right: 0;
-
-      &:hover {
-        text-decoration: none;
-      }
     }
-  }
-
-  // override applink
-  .app-link {
-    color: var(--link-color);
-    @include type-style('body-long-02');
 
     &.menu__link_active,
     &.menu__link_active:hover {
       color: $purple-70;
     }
 
-    &:hover {
+    &:hover,
+    &:hover.app-link_primary {
       color: var(--link-color);
       text-decoration: underline;
     }
 
+    &:visited  {
+      color: var(--link-color);
+    }
+  }
+
+  // override applink
+  .basic-link {
     &:visited  {
       color: var(--link-color);
     }
