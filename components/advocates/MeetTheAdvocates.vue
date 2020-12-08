@@ -23,7 +23,7 @@
               v-model="regionFilters"
               :label="option"
               :value="option"
-              @change="updateRegionFilters(regionFilters)"
+              @change="setRegionFilters(regionFilters)"
             />
           </client-only>
         </AppFieldset>
@@ -33,7 +33,7 @@
           :label="filter.label"
           :options="filter.options"
           :value="regionFilters"
-          @change-selection="updateRegionFilters($event)"
+          @change-selection="setRegionFilters($event)"
         />
       </template>
       <template slot="results">
@@ -118,8 +118,8 @@ export default class MeetTheAdvocates extends Vue {
   /**
    * Updates the region filters in the Vuex store.
    */
-  updateRegionFilters (regionFilters: string[]): void {
-    this.$store.dispatch('advocates/updateRegionFilters', regionFilters)
+  setRegionFilters (regionFilters: string[]): void {
+    this.$store.commit('advocates/setRegionFilters', regionFilters)
   }
 
   joinSlackLink: string = 'https://ibm.co/joinqiskitslack'

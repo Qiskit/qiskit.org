@@ -51,10 +51,6 @@ const actions = <ActionTree<State, any>> {
     const advocatesModule = await import('~/content/advocates/advocates.json')
     const advocates = advocatesModule.default || []
     commit('setAdvocates', advocates)
-  },
-
-  updateRegionFilters ({ commit }, regionFilters: string[]): void {
-    commit('setRegionFilters', regionFilters)
   }
 }
 

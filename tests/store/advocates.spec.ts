@@ -19,19 +19,6 @@ describe('fetchAdvocates', () => {
   })
 })
 
-describe('updateRegionFilters', () => {
-  it('updates the region filters', async () => {
-    const commit = jest.fn()
-    const regionFilters = ['South America', 'Europe']
-
-    const updateRegionFilters = advocatesModule.actions
-      .updateRegionFilters as Function
-    await updateRegionFilters({ commit }, regionFilters)
-
-    expect(commit).toHaveBeenCalledWith('setRegionFilters', regionFilters)
-  })
-})
-
 /**
  * MUTATIONS
  * -----------------------------------------------------------------------------
