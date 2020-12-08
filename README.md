@@ -73,7 +73,7 @@ We create and run unit tests using [Jest](https://jestjs.io/), ensure avoiding s
 
 With this technology we want to **achieve**:
 - Separation between content edition and development concerns.
-- Use a component based framework like Vue that allow us to reuse part of the UI code in different parts of the application.
+- Use a component-based framework like Vue that allow us to reuse part of the UI code in different parts of the application.
 - Fast initial page load.
 - Index content on Search Engines.
 - Test JS unit functions.
@@ -102,7 +102,7 @@ With this technology we want to **achieve**:
     ```
 ## 🏭 Content Generation
 
-qiskit.org integrates with the tools used by the IBM Quantum Community Team and generate some content based on 3rd party APIs such as Airtable. Part of this content is prefetched during building time. While developing, it is disabled by default. If you want enable content generation, you must set the environment variable `GENERATE_CONTENT`. For instance:
+qiskit.org integrates with the tools used by the IBM Quantum Community Team and generates some content based on 3rd party APIs such as Airtable. Part of this content is prefetched during building time. While developing, it is disabled by default. If you want enable content generation, you must set the environment variable `GENERATE_CONTENT`. For instance:
 
 ```shell
 GENERATE_CONTENT=1 npm run dev
@@ -192,7 +192,7 @@ Run unit tests made with [Jest](https://jestjs.io/):
   npm run test
 ```
 
-Build static version ready for production, output will generated inside a new folder called `dist`:
+Build static version ready for production, output will be generated inside a new folder called `dist`:
 ```shell
   npm run build
 ```
