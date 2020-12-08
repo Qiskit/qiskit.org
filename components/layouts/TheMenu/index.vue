@@ -191,81 +191,6 @@ export default class TheMenu extends Mixins(MenuMixin) {
         margin-right: $spacing-07;
       }
     }
-
-    // menu dropdown overrides
-    .bx--form-item {
-      margin-right: $spacing-07;
-    }
-
-    .bx--dropdown {
-      background: $white;
-      height: initial;
-      max-height: initial;
-      border-bottom: 1px solid transparent;
-    }
-
-    .bx--dropdown--open {
-      border-bottom: 1px solid $cool-gray-30;
-    }
-
-    .bx--dropdown--open,
-    .bx--dropdown--open .bx--list-box__menu {
-      background: $cool-gray-10;
-    }
-
-    .bx--list-box__menu {
-      background-color: $white;
-
-      &:focus {
-        outline: none;
-      }
-    }
-
-    // Dropdown button
-    .bx--list-box__field {
-      display: flex;
-      height: calc(3.25rem);
-
-      &:focus {
-        outline: none;
-      }
-
-      &:hover .bx--list-box__label {
-        text-decoration: underline;
-      }
-    }
-
-    .bx--dropdown-item {
-      position: relative;
-
-      // using pseudo element to achieve partial underline
-      &:first-child:after {
-        content: '';
-        border-bottom: 1px solid $cool-gray-30;
-        position: absolute;
-        width: 80%;
-        left: 10%;
-        bottom: 0;
-      }
-
-      &:hover {
-        background-color: $cool-gray-20;
-      }
-    }
-
-    .bx--list-box__label {
-      @include type-style('body-long-02');
-      color: var(--link-color);
-    }
-
-    .bx--list-box__menu {
-      top: calc(3.25rem + 1px);
-      box-shadow: initial;
-    }
-
-    .bx--list-box__menu-icon > svg {
-      fill: var(--link-color);
-    }
   }
 
   &__logo {
@@ -329,6 +254,86 @@ export default class TheMenu extends Mixins(MenuMixin) {
     display: inline-flex;
     flex-direction: column;
     justify-content: center;
+  }
+}
+</style>
+
+<style lang="scss">
+@import '~carbon-components/scss/globals/scss/typography';
+// Override component styling to match qiskit design
+.menu {
+  .bx--form-item {
+    margin-right: $spacing-07;
+  }
+
+  .bx--dropdown {
+    background: $white;
+    height: initial;
+    max-height: initial;
+    border-bottom: 1px solid transparent;
+  }
+
+  .bx--dropdown--open {
+    border-bottom: 1px solid $cool-gray-30;
+  }
+
+  .bx--dropdown--open,
+  .bx--dropdown--open .bx--list-box__menu {
+    background: $cool-gray-10;
+  }
+
+  .bx--list-box__menu {
+    background-color: $white;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  // Dropdown button
+  .bx--list-box__field {
+    display: flex;
+    height: calc(3.25rem);
+
+    &:focus {
+      outline: none;
+    }
+
+    &:hover .bx--list-box__label {
+      text-decoration: underline;
+    }
+  }
+
+  .bx--dropdown-item {
+    position: relative;
+
+    // using pseudo element to achieve partial underline
+    &:first-child:after {
+      content: '';
+      border-bottom: 1px solid $cool-gray-30;
+      position: absolute;
+      width: 80%;
+      left: 10%;
+      bottom: 0;
+    }
+
+    &:hover {
+      background-color: $cool-gray-20;
+    }
+  }
+
+  .bx--list-box__label {
+    @include type-style('body-long-02');
+    color: var(--link-color);
+  }
+
+  .bx--list-box__menu {
+    top: calc(3.25rem + 1px);
+    box-shadow: initial;
+  }
+
+  .bx--list-box__menu-icon > svg {
+    fill: var(--link-color);
   }
 }
 </style>
