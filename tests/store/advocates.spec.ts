@@ -21,7 +21,7 @@ const advocate2 = {
  */
 
 describe('fetchAdvocates', () => {
-  it('fetches the list of advocates', async () => {
+  it('commits "setAdvocates" with a list of fetched elements', async () => {
     const commit = jest.fn()
 
     const fetchAdvocates = advocatesModule.actions.fetchAdvocates as Function
