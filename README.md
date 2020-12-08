@@ -159,7 +159,6 @@ by default. To enable, set the `ENABLE_ANALYTICS` environment variable.
 
 4.  **`constants/`**: Shared constants.
 
-10. **`/mixins`**: Mixin functions shared through the whole project.
 5.  **`content/`**: Content Markdown and JSON files included via the [`generate` property](https://nuxtjs.org/docs/2.x/configuration-glossary/configuration-generate/#routes).
 
     The files are organized in folders matching the website's information architecture.
@@ -172,19 +171,37 @@ by default. To enable, set the `ENABLE_ANALYTICS` environment variable.
 
     More information: [NuxtJS documentation on the _layouts_ directory](https://nuxtjs.org/docs/2.x/directory-structure/layouts)
 
-11. **`/new-content`**: This directory includes newer content that is used in various parts of the qiskit.org website, leveraging the [nuxt/content](https://content.nuxtjs.org/) module, along with standard markdown syntax.
+9. **`mixins/`**: Shared Vue.js mixins.
 
-12. **`/pages`**: This is a starting point because if you want to know what is the website structure, it's the same as this folder's structure. Nuxt reads all the `.vue` files inside this directory and creates the application router based on it. You can find information at [Nuxt's pages directory documentation](https://nuxtjs.org/guide/directory-structure#the-pages-directory). All `.vue` pages prefixed by an underscore are [dynamic routes](https://nuxtjs.org/guide/routing/#dynamic-routes) and we use them to create different pages based on the same template. We also use [nuxt-link](https://nuxtjs.org/guide/routing/) to keep the user inside our webapp router.
+10. **`new-content/`**: Content Markdown files included via `@nuxtjs/content`.
 
-13. **`/plugins`**: You can find information at [Nuxt's plugins directory documentation](https://nuxtjs.org/guide/directory-structure#the-plugins-directory)
+    This directory would usually be named `content`, but that name was already in use in our project.
 
-14. **`/statics`**: You can find information at [Nuxt's statics directory documentation](https://nuxtjs.org/guide/directory-structure#the-static-directory)
+    More information: [NuxtJS documentation on the _content_ directory](https://nuxtjs.org/docs/2.x/directory-structure/content)
 
-15. **`/tests`**: Unit tests made with Jest
+11. **`pages/`**: The base application views and routes.
 
-16. **`/types`**: Additional types for non-typed libraries or global definitions.
+    More information: [NuxtJS documentation on the _pages_ directory](https://nuxtjs.org/docs/2.x/directory-structure/pages)
 
-17. **`nuxt-config.js`**: This is the main configuration file for a Nuxt site. You can find information at [Nuxt's config documentation](https://nuxtjs.org/guide/configuration)
+12. **`plugins/`**: JavaScript plugins that run before instantiating the root Vue.js application.
+
+    More information: [NuxtJS documentation on the _pages_ directory](https://nuxtjs.org/docs/2.x/directory-structure/plugins)
+
+13. **`static/`**: Files that will be automatically served by Nuxt and will be accessible through the project root URL.
+
+    More information: [NuxtJS documentation on the _static_ directory](https://nuxtjs.org/docs/2.x/directory-structure/static)
+
+14. **`store/`**: Vuex store files.
+
+    More information: [NuxtJS documentation on the _store_ directory](https://nuxtjs.org/docs/2.x/directory-structure/store)
+
+15. **`tests/`**: Jest unit tests.
+
+16. **`types/`**: Additional types for non-typed libraries or global definitions.
+
+17. **`nuxt.config.js`**: Main NuxtJS configuration.
+
+    More information: [NuxtJS documentation on the _nuxt.config_ file](https://nuxtjs.org/docs/2.x/directory-structure/nuxt-config)
 
 ## ✏️ How to Contribute
 
