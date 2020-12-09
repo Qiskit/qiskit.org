@@ -63,3 +63,21 @@ For each route, the content gets extracted from the corresponding Markdown file 
 ### new-content (new)
 
 The new approach leverages the [**@nuxt/content** module](https://content.nuxtjs.org/), parsing the Markdown files inside the `new-content` directory and making their content fetchable via the `$content` instance.
+
+## Testing
+
+We test our codebase with static and unit tests. These are integrated into our CI/CD pipeline, preventing code changes containing non-passing tests to be integrated into our main branch.
+
+### Static tests
+
+We use [TypeScript](https://www.typescriptlang.org/) and [ESLint](https://eslint.org/) to validate our JavaScript code.
+
+### Unit tests
+
+We write unit tests with Jest to target critical behavior and functionality.
+
+Changes to one of the following must include new or update existing tests:
+
+- hooks
+- plugins
+- store
