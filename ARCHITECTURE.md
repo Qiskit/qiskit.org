@@ -18,7 +18,7 @@ Here is an example of a component called `GreetigMessage.vue`:
   <p class="message">{{ greeting }}, World!</p>
 </template>
 
-<script>
+<script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 
