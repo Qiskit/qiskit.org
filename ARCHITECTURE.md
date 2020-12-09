@@ -11,7 +11,7 @@ The **script section** is written in [class-style syntax](https://class-componen
 
 The **style section** is written in SCSS.
 
-Here is an example of a component called `GreetigMessage.vue`:
+Here is an example of a component called `GreetingMessage.vue`:
 
 ```vue
 <template>
