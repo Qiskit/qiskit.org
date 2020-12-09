@@ -19,7 +19,7 @@
             {{ link.label }}
           </p>
         </AppLink>
-        <cv-dropdown v-else class="cv-dropdown menu__navigation__dropdown" :class="{ 'menu__link_active': isCommunityActive() }" placeholder="Community">
+        <cv-dropdown v-else :key="link.url" class="cv-dropdown menu__navigation__dropdown" :class="{ 'menu__link_active': isCommunityActive() }" placeholder="Community">
           <AppLink
             v-for="sublink in getSubLinks(link)"
             :key="`sublink:${sublink.url}`"
