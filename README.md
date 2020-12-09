@@ -52,7 +52,7 @@
 - [🏭 Content Generation](#-content-generation)
 - [🎚️Other environment flags](#️other-environment-flags)
   - [Enable analytics](#enable-analytics)
-- [🧐 Folder Structure](#-folder-structure)
+- [🧐 Directory structure](#-directory-structure)
 - [✏️ How to Contribute](#️-how-to-contribute)
 - [🛠 Available Scripts](#-available-scripts)
 - [🗓 Open backlog](#-open-backlog)
@@ -122,8 +122,7 @@ In production, the user can authorize us to gather analytics so we can identify
 trends and improve our user experience. In development, analytics are disabled
 by default. To enable, set the `ENABLE_ANALYTICS` environment variable.
 
-## 🧐 Folder Structure
-
+## 🧐 Directory structure
 
     qiskit.org/
     ├─ app/
