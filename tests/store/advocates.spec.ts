@@ -16,25 +16,6 @@ const mockAdvocate2 = () => ({
 })
 
 /**
- * ACTIONS
- * -----------------------------------------------------------------------------
- */
-
-describe('fetchAdvocates', () => {
-  it('commits "setAdvocates" with a list of fetched elements', async () => {
-    const commit = jest.fn()
-
-    const fetchAdvocates = advocatesModule.actions.fetchAdvocates as Function
-    await fetchAdvocates({ commit })
-
-    expect(commit).toHaveBeenCalledWith(
-      'setAdvocates',
-      expect.arrayContaining([expect.anything()])
-    )
-  })
-})
-
-/**
  * MUTATIONS
  * -----------------------------------------------------------------------------
  */
