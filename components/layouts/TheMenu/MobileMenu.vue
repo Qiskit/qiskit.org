@@ -5,6 +5,7 @@
     >
       <template v-for="link in mainLevelLinks">
         <AppLink
+          v-if="!link.sublinks"
           :key="link.url"
           class="mobile-menu__link"
           :class="{
@@ -18,21 +19,23 @@
             {{ link.label }}
           </p>
         </AppLink>
-        <AppLink
-          v-for="sublink in getSubLinks(link)"
-          :key="`sublink:${sublink.url}`"
-          class="
-          mobile-menu__link
-          mobile-menu__link_second-level
-        "
-          :class="{ 'mobile-menu__link_active': isActive(sublink) }"
-          v-bind="appLinkFromNavLink(sublink)"
-          kind="secondary"
-        >
-          <p class="mobile-menu__link-label">
-            {{ sublink.label }}
-          </p>
-        </AppLink>
+        <cv-dropdown v-else class="cv-dropdown menu__navigation__dropdown" :class="{ 'menu__link_active': isCommunityActive() }" placeholder="Community">
+          <AppLink
+            v-for="sublink in getSubLinks(link)"
+            :key="`sublink:${sublink.url}`"
+            class="
+            mobile-menu__link
+            mobile-menu__link_second-level
+          "
+            :class="{ 'mobile-menu__link_active': isActive(sublink) }"
+            v-bind="appLinkFromNavLink(sublink)"
+            kind="secondary"
+          >
+            <p class="mobile-menu__link-label">
+              {{ sublink.label }}
+            </p>
+          </AppLink>
+        </cv-dropdown>
       </template>
     </nav>
   </section>
