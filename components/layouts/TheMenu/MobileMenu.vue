@@ -103,3 +103,58 @@ export default class MobileMenu extends Mixins(MenuMixin) {}
   }
 }
 </style>
+
+<style lang="scss">
+@import '~carbon-components/scss/globals/scss/typography';
+
+.mobile-menu {
+  & .bx--form-item {
+    display: block;
+    flex: initial;
+  }
+
+  .bx--list-box__label {
+    @include type-style('body-long-02');
+    color: $cool-gray-80;
+  }
+
+  .bx--dropdown {
+    background-color: $white;
+    height: 4rem;
+    max-height: initial;
+    border-bottom: 1px solid $cool-gray-10;
+  }
+
+  .bx--list-box__field {
+    padding: 0 3rem 0 2rem;
+    height: 4rem;
+    border-bottom: 1px solid $cool-gray-10;
+
+    &:focus {
+      outline: none;
+      outline-offset: initial;
+    }
+
+    svg {
+      fill: $cool-gray-60;
+    }
+  }
+
+  .bx--list-box__menu:focus {
+    outline: initial;
+  }
+
+  .bx--list-box--expanded .bx--list-box__menu {
+    position: relative;
+    max-height: unset;
+    background-color: $white;
+    box-shadow: initial;
+    z-index: initial;
+  }
+
+  .bx--dropdown.bx--list-box.bx--dropdown--open.bx--list-box--expanded.bx--dropdown--show-selected {
+    height: auto;
+    min-height: 4rem;
+  }
+}
+</style>
