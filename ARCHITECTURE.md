@@ -34,3 +34,13 @@ export default class GreetingMessage extends Vue {
 }
 </style>
 ```
+
+## Vuex store
+
+We divide our store into [modules](https://vuex.vuejs.org/guide/modules.html).
+
+To avoid unnecessary boilerplate, we commit _mutations_ directly from Vue.js components and only create _actions_ to dispatch if:
+
+- we need to commit multiple mutations,
+- we can reduce complexity by reusing mutations, or
+- we need to perform asynchronous operations.
