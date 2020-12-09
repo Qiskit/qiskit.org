@@ -130,6 +130,10 @@ export default class MobileMenu extends Mixins(MenuMixin) {}
     height: 4rem;
     border-bottom: 1px solid $cool-gray-10;
 
+    &:hover .bx--list-box__label {
+      text-decoration: underline;
+    }
+
     &:focus,
     &:active,
     &[aria-expanded="true"] {
@@ -139,7 +143,7 @@ export default class MobileMenu extends Mixins(MenuMixin) {}
     }
 
     svg {
-      fill: $cool-gray-60;
+      fill: $cool-gray-80;
     }
   }
 
