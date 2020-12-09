@@ -3,13 +3,15 @@
 
 Technical overview of how the code is structured and how it all comes together.
 
-## Vue.js Components
+## Vue.js components
 
 We write our components as [single file components](https://vuejs.org/v2/guide/single-file-components.html).
 
 The **script section** is written in [class-style syntax](https://class-component.vuejs.org/) with TypeScript and uses decorators provided by [**vue-property-decorator**](https://github.com/kaorun343/vue-property-decorator).
 
 The **style section** is written in SCSS.
+
+Here is an example of a component called `GreetigMessage.vue`:
 
 ```vue
 <template>
@@ -26,21 +28,9 @@ export default class GreetingMessage extends Vue {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .message {
   font-size: 2em;
 }
 </style>
 ```
-  
-  - [Directory Structure](#directory-structure)
-  - [Components](#-directory-structure)
-  - [Constants](#-directory-structure)
-  - [Store](#-directory-structure)
-  - [CSS](#-directory-structure)
-  - [Testing](#-directory-structure)
-  - [Storybook](#-directory-structure)
-  - [TypeScript](#-directory-structure)
-  - [External services](#-directory-structure)
-  - [Markdown content](#-directory-structure)
-  - [Design system](#-directory-structure)
