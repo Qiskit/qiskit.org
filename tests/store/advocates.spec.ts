@@ -1,19 +1,19 @@
 import advocatesModule from '~/store/modules/advocates'
 
-const advocate1 = {
+const mockAdvocate1 = () => ({
   city: 'Lima',
   country: 'Peru',
   image: 'https://example.com/img/1.jpg',
   name: 'John Doe',
   region: 'South America'
-}
-const advocate2 = {
+})
+const mockAdvocate2 = () => ({
   city: 'Munich',
   country: 'Germany',
   image: 'https://example.com/img/2.jpg',
   name: 'Max Mustermann',
   region: 'Europe'
-}
+})
 
 /**
  * ACTIONS
@@ -46,25 +46,25 @@ describe('setAdvocates', () => {
   }
 
   it('sets the list of advocates with one advocate', () => {
-    advocatesModule.mutations.setAdvocates(state, [advocate1])
+    advocatesModule.mutations.setAdvocates(state, [mockAdvocate1()])
     expect(state).toEqual({
-      advocates: [advocate1],
+      advocates: [mockAdvocate1()],
       regionFilters: []
     })
   })
 
   it('sets the list of advocates with one different advocate', () => {
-    advocatesModule.mutations.setAdvocates(state, [advocate2])
+    advocatesModule.mutations.setAdvocates(state, [mockAdvocate2()])
     expect(state).toEqual({
-      advocates: [advocate2],
+      advocates: [mockAdvocate2()],
       regionFilters: []
     })
   })
 
   it('sets the list of advocates with multiple advocates', () => {
-    advocatesModule.mutations.setAdvocates(state, [advocate1, advocate2])
+    advocatesModule.mutations.setAdvocates(state, [mockAdvocate1(), mockAdvocate2()])
     expect(state).toEqual({
-      advocates: [advocate1, advocate2],
+      advocates: [mockAdvocate1(), mockAdvocate2()],
       regionFilters: []
     })
   })
@@ -127,18 +127,18 @@ describe('setRegionFilters', () => {
 describe('filteredAdvocates', () => {
   const filteredAdvocates = advocatesModule.getters.filteredAdvocates as Function
   const state = {
-    advocates: [advocate1, advocate2],
+    advocates: [mockAdvocate1(), mockAdvocate2()],
     regionFilters: ['']
   }
 
   it('returns a filtered list of advocates for 1 matching filter', () => {
     state.regionFilters = ['Europe']
-    expect(filteredAdvocates(state)).toEqual([advocate2])
+    expect(filteredAdvocates(state)).toEqual([mockAdvocate2()])
   })
 
   it('returns a filtered list of advocates for 2 matching filters', () => {
     state.regionFilters = ['Europe', 'South America']
-    expect(filteredAdvocates(state)).toEqual([advocate1, advocate2])
+    expect(filteredAdvocates(state)).toEqual([mockAdvocate1(), mockAdvocate2()])
   })
 
   it('returns an empty filtered list of advocates for no matching filters', () => {
@@ -148,6 +148,6 @@ describe('filteredAdvocates', () => {
 
   it('returns the complete list of advocates when there are no filters', () => {
     state.regionFilters = []
-    expect(filteredAdvocates(state)).toEqual([advocate1, advocate2])
+    expect(filteredAdvocates(state)).toEqual([mockAdvocate1(), mockAdvocate2()])
   })
 })
