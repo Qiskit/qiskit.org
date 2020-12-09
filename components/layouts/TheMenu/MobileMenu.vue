@@ -19,7 +19,7 @@
             {{ link.label }}
           </p>
         </AppLink>
-        <cv-dropdown v-else :key="link.url" class="cv-dropdown menu__navigation__dropdown" :class="{ 'menu__link_active': isCommunityActive() }" placeholder="Community">
+        <cv-dropdown v-else :key="link.url" class="cv-dropdown mobile-menu__navigation__dropdown" :class="{ 'mobile-menu__link_active': isCommunityActive() }" placeholder="Community">
           <AppLink
             v-for="sublink in getSubLinks(link)"
             :key="`sublink:${sublink.url}`"
@@ -81,9 +81,9 @@ export default class MobileMenu extends Mixins(MenuMixin) {}
     height: 4rem;
     border-bottom: 1px solid $cool-gray-10;
 
-    &_active:not(&_is-parent) {
-      color: $cool-gray-10;
-      background-color: $purple-70;
+    &_active:not(&_is-parent),
+    &_active .bx--list-box__label {
+      color: $purple-70;
     }
 
     &_second-level {
@@ -106,7 +106,7 @@ export default class MobileMenu extends Mixins(MenuMixin) {}
 
 <style lang="scss">
 @import '~carbon-components/scss/globals/scss/typography';
-
+// component overrides
 .mobile-menu {
   & .bx--form-item {
     display: block;
@@ -130,9 +130,12 @@ export default class MobileMenu extends Mixins(MenuMixin) {}
     height: 4rem;
     border-bottom: 1px solid $cool-gray-10;
 
-    &:focus {
+    &:focus,
+    &:active,
+    &[aria-expanded="true"] {
       outline: none;
       outline-offset: initial;
+      border-bottom: 1px solid $cool-gray-20;
     }
 
     svg {
@@ -144,17 +147,28 @@ export default class MobileMenu extends Mixins(MenuMixin) {}
     outline: initial;
   }
 
-  .bx--list-box--expanded .bx--list-box__menu {
-    position: relative;
-    max-height: unset;
-    background-color: $white;
-    box-shadow: initial;
-    z-index: initial;
-  }
-
-  .bx--dropdown.bx--list-box.bx--dropdown--open.bx--list-box--expanded.bx--dropdown--show-selected {
+  .bx--list-box--expanded {
     height: auto;
     min-height: 4rem;
+    background-color: $cool-gray-10;
+
+    .bx--list-box__menu {
+      position: relative;
+      max-height: unset;
+      background-color: $cool-gray-10;
+      box-shadow: initial;
+      z-index: initial;
+     }
+
+     & .mobile-menu__link:not(:last-child) {
+      border-bottom: 1px solid $cool-gray-20;
+    }
+  }
+
+  &__link {
+    &_active .bx--list-box__label {
+      color: $purple-70;
+    }
   }
 }
 </style>
