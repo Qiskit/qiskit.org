@@ -89,3 +89,11 @@ Changes to one of the following must include new or update existing tests:
 We fetch content from [Airtable](https://airtable.com/) before the NuxtJS build starts, as configured in the **hooks** property in `nuxt.config.ts`.
 
 This content is then stored in JSON files and those files are later fetched via Vuex actions.
+
+### Hotjar
+
+We use Hotjar for analytics and integrate it by loading the plugin in `/plugins/hotjar.ts`.
+
+### IBM Cloud Analytics
+
+We use IBM Cloud Analytics for analytics and integrate it by loading the plugin in `/plugins/segment-analytics` when on production or when we enable analytics via an environment flag, as configured in the **plugins** property in `nuxt.config.ts`.
