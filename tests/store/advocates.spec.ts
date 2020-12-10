@@ -1,5 +1,5 @@
 import Vuex, { Store } from 'vuex'
-import _cloneDeep from 'lodash/cloneDeep'
+import cloneDeep from 'lodash/cloneDeep'
 import { storeOptions } from '~/store'
 
 let store: Store<any>
@@ -31,7 +31,7 @@ describe('filteredAdvocates', () => {
   const mockNonMatchingRegionFilter = () => 'Moon'
 
   beforeEach(() => {
-    const initialStoreOptions = _cloneDeep(storeOptions)
+    const initialStoreOptions = cloneDeep(storeOptions)
     store = new Vuex.Store(initialStoreOptions)
     store.commit('advocates/setAdvocates', [mockAdvocate1(), mockAdvocate2()])
   })
@@ -66,7 +66,7 @@ describe('setAdvocates', () => {
   const mutationType = 'advocates/setAdvocates'
 
   beforeEach(() => {
-    const initialStoreOptions = _cloneDeep(storeOptions)
+    const initialStoreOptions = cloneDeep(storeOptions)
     store = new Vuex.Store(initialStoreOptions)
   })
 
@@ -98,7 +98,7 @@ describe('setRegionFilters', () => {
   const mockRegionFilter2 = 'Europe'
 
   beforeEach(() => {
-    const initialStoreOptions = _cloneDeep(storeOptions)
+    const initialStoreOptions = cloneDeep(storeOptions)
     store = new Vuex.Store(initialStoreOptions)
   })
 
