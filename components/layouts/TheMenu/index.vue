@@ -151,13 +151,16 @@ export default class TheMenu extends Mixins(MenuMixin) {
     z-index: 150;
     width: 12rem;
     box-shadow: 0 .5rem .5rem rgba(0,0,0,.25);
-
     visibility: hidden;
     pointer-events: none;
 
     &_visible {
       visibility: visible;
       pointer-events: all;
+    }
+
+    @include mq($until: medium) {
+      width: 100%;
     }
   }
 

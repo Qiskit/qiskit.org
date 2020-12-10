@@ -38,6 +38,14 @@
         </cv-dropdown>
       </template>
     </nav>
+    <footer class="mobile-menu__footer">
+      <div class="mobile-menu__footer-inner-container">
+        <FooterSection class="mobile-menu__footer-contact" v-bind="stayConnectedElements" icons-only :theme="theme" />
+      </div>
+      <p class="mobile-menu__footer-text">
+        ©Qiskit | All Rights Reserved
+      </p>
+    </footer>
   </section>
 </template>
 
@@ -45,8 +53,15 @@
 import { Component, Mixins } from 'vue-property-decorator'
 import MenuMixin from '~/mixins/menu'
 
+import {
+  STAY_CONNECTED_LINKS
+} from '~/constants/menuLinks'
+
 @Component
-export default class MobileMenu extends Mixins(MenuMixin) {}
+export default class MobileMenu extends Mixins(MenuMixin) {
+  stayConnectedElements = STAY_CONNECTED_LINKS
+  theme = 'light'
+}
 </script>
 
 <style lang="scss" scoped>
@@ -62,6 +77,11 @@ export default class MobileMenu extends Mixins(MenuMixin) {}
   &__footer-inner-container {
     @include contained();
     width: 100%;
+  }
+
+  &__footer-inner-container {
+    margin-bottom: $spacing-05;
+    padding-left: $spacing-05;
   }
 
   &__navigation-links {
@@ -94,18 +114,21 @@ export default class MobileMenu extends Mixins(MenuMixin) {}
   &__footer {
     padding-top: $spacing-05;
     padding-bottom: $spacing-05 + 2.5rem; // make room for the "cookies preferences" button
-    background-color: $cool-gray-10;
+    background-color: $white;
   }
 
   &__footer-text {
     @include type-style('caption-01');
-    color: $cool-gray-60;
+    background-color: $cool-gray-10;
+    padding: $spacing-05 $spacing-07;
+    color: $mobile-footer-text-color;
   }
 }
 </style>
 
 <style lang="scss">
 @import '~carbon-components/scss/globals/scss/typography';
+
 // component overrides
 .mobile-menu {
   & .bx--form-item {
@@ -126,7 +149,7 @@ export default class MobileMenu extends Mixins(MenuMixin) {}
   }
 
   .bx--list-box__field {
-    padding: 0 3rem 0 2rem;
+    padding: 0 $spacing-09 0 $spacing-07;
     height: 4rem;
     border-bottom: 1px solid $cool-gray-10;
 
@@ -145,10 +168,16 @@ export default class MobileMenu extends Mixins(MenuMixin) {}
     svg {
       fill: $cool-gray-80;
     }
+
+    @include mq($until: medium) {
+      padding: 0 $spacing-09 0 $spacing-05;
+    }
   }
 
-  .bx--list-box__menu:focus {
-    outline: initial;
+  .bx--list-box__menu {
+    &:focus {
+      outline: initial;
+    }
   }
 
   .bx--list-box--expanded {
@@ -172,6 +201,19 @@ export default class MobileMenu extends Mixins(MenuMixin) {}
   &__link {
     &_active .bx--list-box__label {
       color: $purple-70;
+    }
+  }
+
+  &__footer-contact {
+    & .footer-section__title.footer-section__title_theme_light {
+      @include type-style('caption-01');
+      font-weight: 600;
+      color: $mobile-footer-text-color;
+      padding-bottom: $spacing-05;
+    }
+
+    svg {
+      fill: $mobile-footer-text-color;
     }
   }
 }
