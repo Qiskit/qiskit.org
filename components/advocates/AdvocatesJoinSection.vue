@@ -22,11 +22,10 @@
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 import CompactFeature from '~/components/ui/CompactFeature.vue'
-import AppCtaBtn from '~/components/metal/AppCtaBtn.vue'
 
 type Benefit = Pick<CompactFeature, 'icon'|'title'|'description'>
 
-@Component({ components: { CompactFeature, AppCtaBtn } })
+@Component
 export default class extends Vue {
   advocateBenefits: Array<Benefit> = [
     {
