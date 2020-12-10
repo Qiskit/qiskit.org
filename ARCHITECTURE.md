@@ -1,4 +1,3 @@
-
 # Qiskit.org architecture overview
 
 Technical overview of how the code is structured and how it all comes together.
