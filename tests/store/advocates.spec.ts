@@ -94,8 +94,8 @@ describe('setAdvocates', () => {
 
 describe('setRegionFilters', () => {
   const mutationType = 'advocates/setRegionFilters'
-  const mockRegionFilter1 = () => 'South America'
-  const mockRegionFilter2 = () => 'Europe'
+  const mockRegionFilter1 = 'South America'
+  const mockRegionFilter2 = 'Europe'
 
   beforeEach(() => {
     const initialStoreOptions = _cloneDeep(storeOptions)
@@ -103,19 +103,19 @@ describe('setRegionFilters', () => {
   })
 
   it('sets the region filters with one filter', () => {
-    store.commit(mutationType, [mockRegionFilter1()])
-    expect(store.state.advocates.regionFilters).toEqual([mockRegionFilter1()])
+    store.commit(mutationType, [mockRegionFilter1])
+    expect(store.state.advocates.regionFilters).toEqual([mockRegionFilter1])
   })
 
   it('sets the region filters twice and keeps only the latest filters', () => {
-    store.commit(mutationType, [mockRegionFilter1()])
-    store.commit(mutationType, [mockRegionFilter2()])
-    expect(store.state.advocates.regionFilters).toEqual([mockRegionFilter2()])
+    store.commit(mutationType, [mockRegionFilter1])
+    store.commit(mutationType, [mockRegionFilter2])
+    expect(store.state.advocates.regionFilters).toEqual([mockRegionFilter2])
   })
 
   it('sets the region filters with multiple filters', () => {
-    store.commit(mutationType, [mockRegionFilter1(), mockRegionFilter2()])
-    expect(store.state.advocates.regionFilters).toEqual([mockRegionFilter1(), mockRegionFilter2()])
+    store.commit(mutationType, [mockRegionFilter1, mockRegionFilter2])
+    expect(store.state.advocates.regionFilters).toEqual([mockRegionFilter1, mockRegionFilter2])
   })
 
   it('unsets the region filters', () => {
