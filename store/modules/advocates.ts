@@ -46,11 +46,18 @@ export class State {
   regionFilters: string[] = []
 }
 
-const actions = <ActionTree<State, any>> {
-  async fetchAdvocates ({ commit }): Promise<void> {
-    const advocatesModule = await import('~/content/advocates/advocates.json')
-    const advocates = advocatesModule.default || []
-    commit('setAdvocates', advocates)
+const getters = <GetterTree<State, any>> {
+  /**
+   * List of advocates filtered by selected regions.
+   */
+  filteredAdvocates ({ advocates, regionFilters }): Advocate[] {
+    const noRegionFilters = regionFilters.length === 0
+
+    if (noRegionFilters) {
+      return advocates
+    }
+
+    return advocates.filter(advocate => regionFilters.includes(advocate.region))
   }
 }
 
@@ -64,18 +71,11 @@ const mutations = <MutationTree<State>> {
   }
 }
 
-const getters = <GetterTree<State, any>> {
-  /**
-   * List of advocates filtered by selected regions.
-   */
-  filteredAdvocates ({ advocates, regionFilters }): Advocate[] {
-    const noRegionFilters = regionFilters.length === 0
-
-    if (noRegionFilters) {
-      return advocates
-    }
-
-    return advocates.filter(advocate => regionFilters.includes(advocate.region))
+const actions = <ActionTree<State, any>> {
+  async fetchAdvocates ({ commit }): Promise<void> {
+    const advocatesModule = await import('~/content/advocates/advocates.json')
+    const advocates = advocatesModule.default || []
+    commit('setAdvocates', advocates)
   }
 }
 
