@@ -1,4 +1,8 @@
-import advocatesModule from '~/store/modules/advocates'
+import Vuex, { Store } from 'vuex'
+import _cloneDeep from 'lodash/cloneDeep'
+import { storeOptions } from '~/store'
+
+let store: Store<any>
 
 const mockAdvocate1 = () => ({
   city: 'Lima',
@@ -21,82 +25,64 @@ const mockAdvocate2 = () => ({
  */
 
 describe('setAdvocates', () => {
-  const state = {
-    advocates: [],
-    regionFilters: []
-  }
+  const mutationType = 'advocates/setAdvocates'
 
-  it('sets the list of advocates with one advocate', () => {
-    advocatesModule.mutations.setAdvocates(state, [mockAdvocate1()])
-    expect(state).toEqual({
-      advocates: [mockAdvocate1()],
-      regionFilters: []
-    })
+  beforeEach(() => {
+    const initialStoreOptions = _cloneDeep(storeOptions)
+    store = new Vuex.Store(initialStoreOptions)
   })
 
-  it('sets the list of advocates with one different advocate', () => {
-    advocatesModule.mutations.setAdvocates(state, [mockAdvocate2()])
-    expect(state).toEqual({
-      advocates: [mockAdvocate2()],
-      regionFilters: []
-    })
+  it('sets the list of advocates with one advocate', () => {
+    store.commit(mutationType, [mockAdvocate1()])
+    expect(store.state.advocates.advocates).toEqual([mockAdvocate1()])
+  })
+
+  it('sets the list of advocates twice and keeps only the latest list', () => {
+    store.commit(mutationType, [mockAdvocate1()])
+    store.commit(mutationType, [mockAdvocate2()])
+    expect(store.state.advocates.advocates).toEqual([mockAdvocate2()])
   })
 
   it('sets the list of advocates with multiple advocates', () => {
-    advocatesModule.mutations.setAdvocates(state, [mockAdvocate1(), mockAdvocate2()])
-    expect(state).toEqual({
-      advocates: [mockAdvocate1(), mockAdvocate2()],
-      regionFilters: []
-    })
+    store.commit(mutationType, [mockAdvocate1(), mockAdvocate2()])
+    expect(store.state.advocates.advocates).toEqual([mockAdvocate1(), mockAdvocate2()])
   })
 
-  it('unsets the empty list of advocates', () => {
-    advocatesModule.mutations.setAdvocates(state, [])
-    expect(state).toEqual({
-      advocates: [],
-      regionFilters: []
-    })
+  it('unsets the list of advocates', () => {
+    store.commit(mutationType, [])
+    expect(store.state.advocates.advocates).toEqual([])
   })
 })
 
 describe('setRegionFilters', () => {
-  const state = {
-    advocates: [],
-    regionFilters: []
-  }
-  const regionFilter1 = 'South America'
-  const regionFilter2 = 'Europe'
+  const mutationType = 'advocates/setRegionFilters'
+  const mockRegionFilter1 = () => 'South America'
+  const mockRegionFilter2 = () => 'Europe'
 
-  it('sets the region filters with one filter', () => {
-    advocatesModule.mutations.setRegionFilters(state, [regionFilter1])
-    expect(state).toEqual({
-      advocates: [],
-      regionFilters: [regionFilter1]
-    })
+  beforeEach(() => {
+    const initialStoreOptions = _cloneDeep(storeOptions)
+    store = new Vuex.Store(initialStoreOptions)
   })
 
-  it('sets the region filters with one different filter', () => {
-    advocatesModule.mutations.setRegionFilters(state, [regionFilter2])
-    expect(state).toEqual({
-      advocates: [],
-      regionFilters: [regionFilter2]
-    })
+  it('sets the region filters with one filter', () => {
+    store.commit(mutationType, [mockRegionFilter1()])
+    expect(store.state.advocates.regionFilters).toEqual([mockRegionFilter1()])
+  })
+
+  it('sets the region filters twice and keeps only the latest filters', () => {
+    store.commit(mutationType, [mockRegionFilter1()])
+    store.commit(mutationType, [mockRegionFilter2()])
+    expect(store.state.advocates.regionFilters).toEqual([mockRegionFilter2()])
   })
 
   it('sets the region filters with multiple filters', () => {
-    advocatesModule.mutations.setRegionFilters(state, [regionFilter1, regionFilter2])
-    expect(state).toEqual({
-      advocates: [],
-      regionFilters: [regionFilter1, regionFilter2]
-    })
+    store.commit(mutationType, [mockRegionFilter1(), mockRegionFilter2()])
+    expect(store.state.advocates.regionFilters).toEqual([mockRegionFilter1(), mockRegionFilter2()])
   })
 
   it('unsets the region filters', () => {
-    advocatesModule.mutations.setRegionFilters(state, [])
-    expect(state).toEqual({
-      advocates: [],
-      regionFilters: []
-    })
+    store.commit(mutationType, [])
+    expect(store.state.advocates.regionFilters).toEqual([])
   })
 })
 
@@ -106,29 +92,34 @@ describe('setRegionFilters', () => {
  */
 
 describe('filteredAdvocates', () => {
-  const filteredAdvocates = advocatesModule.getters.filteredAdvocates as Function
-  const state = {
-    advocates: [mockAdvocate1(), mockAdvocate2()],
-    regionFilters: ['']
-  }
+  const getter = 'advocates/filteredAdvocates'
+  const mockMatchingRegionFilter1 = () => 'South America'
+  const mockMatchingRegionFilter2 = () => 'Europe'
+  const mockNonMatchingRegionFilter = () => 'Moon'
+
+  beforeEach(() => {
+    const initialStoreOptions = _cloneDeep(storeOptions)
+    store = new Vuex.Store(initialStoreOptions)
+    store.commit('advocates/setAdvocates', [mockAdvocate1(), mockAdvocate2()])
+  })
 
   it('returns a filtered list of advocates for 1 matching filter', () => {
-    state.regionFilters = ['Europe']
-    expect(filteredAdvocates(state)).toEqual([mockAdvocate2()])
+    store.commit('advocates/setRegionFilters', [mockMatchingRegionFilter1()])
+    expect(store.getters[getter]).toEqual([mockAdvocate1()])
   })
 
   it('returns a filtered list of advocates for 2 matching filters', () => {
-    state.regionFilters = ['Europe', 'South America']
-    expect(filteredAdvocates(state)).toEqual([mockAdvocate1(), mockAdvocate2()])
+    store.commit('advocates/setRegionFilters', [mockMatchingRegionFilter1(), mockMatchingRegionFilter2()])
+    expect(store.getters[getter]).toEqual([mockAdvocate1(), mockAdvocate2()])
   })
 
   it('returns an empty filtered list of advocates for no matching filters', () => {
-    state.regionFilters = ['Moon']
-    expect(filteredAdvocates(state)).toEqual([])
+    store.commit('advocates/setRegionFilters', [mockNonMatchingRegionFilter()])
+    expect(store.getters[getter]).toEqual([])
   })
 
   it('returns the complete list of advocates when there are no filters', () => {
-    state.regionFilters = []
-    expect(filteredAdvocates(state)).toEqual([mockAdvocate1(), mockAdvocate2()])
+    store.commit('advocates/setRegionFilters', [])
+    expect(store.getters[getter]).toEqual([mockAdvocate1(), mockAdvocate2()])
   })
 })

@@ -6,6 +6,8 @@ import learningResources from './modules/learning-resources'
 
 Vue.use(Vuex)
 
-export default () => new Vuex.Store({
+export const storeOptions = {
   modules: { events, advocates, learningResources }
-})
+}
+
+export default () => new Vuex.Store(storeOptions)
