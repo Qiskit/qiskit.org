@@ -18,10 +18,9 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import LearnCard from '~/components/landing/TheLearnSection/LearnCard.vue'
 
-@Component({ components: { LearnCard } })
-export default class extends Vue {}
+@Component
+export default class TheLearnSection extends Vue {}
 </script>
 
 <style lang="scss" scoped>

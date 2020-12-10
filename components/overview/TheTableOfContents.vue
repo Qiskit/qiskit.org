@@ -2,7 +2,7 @@
   <nav class="the-table-of-contents">
     <!-- Needed to avoid multiline to remove blank space around the content. -->
     <!-- eslint-disable vue/multiline-html-element-content-newline -->
-    <AppLink
+    <BasicLink
       v-for="entry in entries"
       :key="entry.sectionId || entry.label"
       class="the-table-of-contents__entry"
@@ -11,7 +11,7 @@
         'the-table-of-contents__entry_second-level': entry.isSecondary
       }"
       :url="entry.sectionId && `#${entry.sectionId}`"
-    >{{ entry.label }}</AppLink>
+    >{{ entry.label }}</BasicLink>
     <!-- eslint-enable -->
   </nav>
 </template>
@@ -19,13 +19,10 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-import AppLink from '~/components/ui/AppLink.vue'
 import { TableOfContentEntry } from '~/constants/overviewContent'
 
-@Component({
-  components: { AppLink }
-})
-export default class extends Vue {
+@Component
+export default class TheTableOfContents extends Vue {
   @Prop({ type: Array, default: [] }) entries!: Array<TableOfContentEntry>
   @Prop(String) activeSection!: string
 

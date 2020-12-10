@@ -12,6 +12,7 @@
             'mobile-menu__link_is-parent': isParent(link)
           }"
           v-bind="appLinkFromNavLink(link)"
+          kind="secondary"
         >
           <p class="mobile-menu__link-label">
             {{ link.label }}
@@ -26,6 +27,7 @@
         "
           :class="{ 'mobile-menu__link_active': isActive(sublink) }"
           v-bind="appLinkFromNavLink(sublink)"
+          kind="secondary"
         >
           <p class="mobile-menu__link-label">
             {{ sublink.label }}
@@ -45,13 +47,10 @@
 
 <script lang="ts">
 import { Component, Mixins } from 'vue-property-decorator'
-import AppLink from '~/components/ui/AppLink.vue'
 import MenuMixin from '~/mixins/menu'
 
-@Component({
-  components: { AppLink }
-})
-export default class extends Mixins(MenuMixin) {}
+@Component
+export default class MobileMenu extends Mixins(MenuMixin) {}
 </script>
 
 <style lang="scss" scoped>

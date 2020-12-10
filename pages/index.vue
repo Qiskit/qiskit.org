@@ -12,18 +12,8 @@ import axios from 'axios'
 
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
-import TheHeroMoment from '~/components/landing/TheHeroMoment/index.vue'
-import TheFeatures from '~/components/landing/TheFeatures/index.vue'
-import TheQuickStart from '~/components/landing/TheQuickStart/index.vue'
-import TheLearnSection from '~/components/landing/TheLearnSection/index.vue'
 
 @Component({
-  components: {
-    TheHeroMoment,
-    TheFeatures,
-    TheQuickStart,
-    TheLearnSection
-  },
   head () {
     return { title: 'Qiskit' }
   },
@@ -35,7 +25,7 @@ import TheLearnSection from '~/components/landing/TheLearnSection/index.vue'
     }
   }
 })
-export default class extends QiskitPage {
+export default class LandingPage extends QiskitPage {
   routeName = 'qiskit-landing-page'
 }
 </script>

@@ -27,7 +27,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-import AccordionLayout, { AccordionLayoutProps } from '~/components/overview/AccordionLayout.vue'
+import { AccordionLayoutProps } from '~/components/overview/AccordionLayout.vue'
 
 type ContentAccordionTab = {
   title: string,
@@ -36,10 +36,8 @@ type ContentAccordionTab = {
 
 export { ContentAccordionTab }
 
-@Component({
-  components: { AccordionLayout }
-})
-export default class extends Vue {
+@Component
+export default class ContentAccordion extends Vue {
   @Prop(Array) tabs!: Array<ContentAccordionTab>
 
   expandedItem: number = 0

@@ -39,11 +39,6 @@
 import { mapGetters } from 'vuex'
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
-import TheLearnHeader from '~/components/learn/TheLearnHeader.vue'
-import TheLearningResourceList from '~/components/learn/TheLearningResourceList.vue'
-import AppCard from '~/components/ui/AppCard.vue'
-import TheCarefulExplanationForBeginners from '~/components/learn/TheCarefulExplanationForBeginners.vue'
-import TheCarefulExplanationForExperts from '~/components/learn/TheCarefulExplanationForExperts.vue'
 import {
   TimeScale,
   LearnLevel,
@@ -54,14 +49,6 @@ import {
 } from '~/store/modules/learning-resources.ts'
 
 @Component({
-  components: {
-    TheLearnHeader,
-    TheLearningResourceList,
-    TheCarefulExplanationForExperts,
-    TheCarefulExplanationForBeginners,
-    AppCard
-  },
-
   head () {
     return {
       title: 'Qiskit Learn'
@@ -84,7 +71,7 @@ import {
   }
 })
 
-export default class extends QiskitPage {
+export default class LearnPage extends QiskitPage {
   routeName = 'learn'
 
   learnLevelOptions = LEARN_LEVEL_OPTIONS

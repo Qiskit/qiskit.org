@@ -3,7 +3,7 @@
     <p class="copy__paragraph copy__paragraph_importance_support">
       To use the Clang compiler on macOS, you need to install
       an extra library for supporting OpenMP. You can use
-      <AppLink class="copy__link" url="https://brew.sh/">
+      <AppLink url="https://brew.sh/">
         brew
       </AppLink>
       to install this and other dependencies.
@@ -27,10 +27,8 @@
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 
-import AppLink from '~/components/ui/AppLink.vue'
-
-@Component({ components: { AppLink } })
-export default class extends Vue { }
+@Component
+export default class PrerequisitesForMac extends Vue { }
 </script>
 
 <style lang="scss" scoped>

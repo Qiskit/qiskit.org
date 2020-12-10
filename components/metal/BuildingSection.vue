@@ -5,7 +5,7 @@
         Building together
       </h2>
       <p class="building-section__text">
-        Whether you are learning, teaching or performing scientific research, we hope Metal will get you there faster.
+        Whether you are learning, teaching, or performing scientific research, we hope Metal will get you there faster.
       </p>
       <div class="building-section__content">
         <div class="building-section__copy">
@@ -13,13 +13,13 @@
             Call for community participation
           </h3>
           <p class="building-section__text">
-            This may just be the beginning, but we think Qiskit Metal has immense potential. We hope to form this software into one usable by superconducting quantum hardware designers across industry and academia, and perhaps even for other qubit architectures. Over time, we hope this project will become the gateway for conventional microchip designers to get their feet wet designing quantum processors. And we hope that soon, quantum hardware experts will be able to write their own quantum analysis plugins and run them as their own Qiskit Metal backends.
+            This may just be the beginning, but we think Qiskit Metal has immense potential. We hope to form this software into something that is usable by superconducting quantum hardware designers across industry and academia, and perhaps even for other qubit architectures. Over time, we hope this project will become the gateway for conventional microchip designers to get their feet wet designing quantum processors. And we hope that soon, quantum hardware experts will be able to write their own quantum analysis plugins and run them as their own Qiskit Metal backends.
           </p>
           <h3 class="building-section__subtitle copy__subtitle">
             Open source
           </h3>
           <p class="building-section__text">
-            Qiskit Metal is a visionary work in progress in its early development stages. We're working toward a vision—a quantum design & analysis platform built from the ground up specifically for quantum hardware. It is crucial that we keep this project open source in order to grow Qiskit Metal into the software that will be most useful for quantum hardware engineers around the world and for the innovation in and growth of the field as a whole. If Qiskit Metal doesn't have what you want, then you extend Metal to build it!
+            Qiskit Metal is a visionary work in progress in its early development stages. We're working toward a vision—a quantum design and analysis platform built from the ground up specifically for quantum hardware. It is crucial that we keep this project open source in order to grow Qiskit Metal into the software that will be most useful for quantum hardware engineers around the world and for the innovation in and growth of the field as a whole. If Qiskit Metal doesn't have what you want, then you extend Metal to build it!
           </p>
           <h3 class="building-section__subtitle copy__subtitle">
             Education
@@ -29,12 +29,10 @@
           <p class="building-section__text">
             Learn more about the physics behind Qiskit Metal and qubit design from the
             <AppLink
-              class="building-section__copy-link copy__link "
               url="/learn/intro-qc-qh/"
             >Introduction to Quantum Computing and Quantum Hardware</AppLink>
             summer school lectures series by Zlatko Minev on superconducting qubits. Also, check out the open source
             <AppLink
-              class="building-section__copy-link copy__link "
               url="https://qiskit.org/textbook/ch-quantum-hardware/transmon-physics.html"
             >Qiskit textbook</AppLink>
             chapters on quantum devices and their control.
@@ -56,11 +54,9 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import AppLink from '~/components/ui/AppLink.vue'
 
-@Component({ components: { AppLink } })
-
-export default class extends Vue {}
+@Component
+export default class BuildingSection extends Vue {}
 </script>
 
 <style lang="scss" scoped>
@@ -132,12 +128,6 @@ export default class extends Vue {}
 
     @include mq($until: medium) {
       flex: 1;
-    }
-
-    &-link {
-      @include type-style('body-long-01');
-      color: $purple-50;
-      text-decoration: underline;
     }
   }
 

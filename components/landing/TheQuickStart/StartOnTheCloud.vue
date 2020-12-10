@@ -8,10 +8,9 @@
         IBM's hosted Jupyter Notebooks let you get started without installing anything.
       </p>
       <AppCta
-        :url="ibmQExperienceLink.url"
-      >
-        {{ ibmQExperienceLink.label }}
-      </AppCta>
+        kind="ghost"
+        v-bind="ibmQExperienceLink"
+      />
     </div>
   </section>
 </template>
@@ -20,12 +19,9 @@
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 import { IBM_Q_EXPERIENCE } from '~/constants/appLinks'
-import AppCta from '~/components/ui/AppCta.vue'
 
-@Component({
-  components: { AppCta }
-})
-export default class extends Vue {
+@Component
+export default class StartOnTheCloud extends Vue {
   ibmQExperienceLink = IBM_Q_EXPERIENCE
 }
 </script>

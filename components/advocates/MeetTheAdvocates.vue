@@ -68,8 +68,8 @@ import { Advocate, ADVOCATES_WORLD_REGION_OPTIONS, State } from '~/store/modules
     AppMultiSelect,
     AppFieldset,
     AppFiltersResultsLayout,
-    AppLink,
-    InfiniteScroll
+    InfiniteScroll,
+    AppLink
   },
 
   computed: {

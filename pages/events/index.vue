@@ -33,6 +33,7 @@
               <cv-checkbox
                 v-for="option in filter.options"
                 :key="option"
+                class="event-page__extra-filters__checkboxes"
                 :value="option"
                 :label="option"
                 :checked="isFilterChecked(filter.filterType, option)"
@@ -72,12 +73,7 @@
             <p class="copy__paragraph copy__paragraph_importance_outstanding event-page__start-an-event__description">
               We can help you bring Qiskit experts to your campus for guest lectures, hackathons, and other events.
             </p>
-            <AppCta
-              class="event-page__start-an-event__cta"
-              v-bind="eventRequestLink"
-            >
-              {{ eventRequestLink.label }}
-            </AppCta>
+            <AppCta v-bind="eventRequestLink" />
           </div>
         </div>
       </div>
@@ -89,13 +85,6 @@
 import { mapGetters, mapActions } from 'vuex'
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
-import EventCard from '~/components/events/EventCard.vue'
-import AppCard from '~/components/ui/AppCard.vue'
-import TheEventsHeader from '~/components/events/TheEventsHeader.vue'
-import AppCta from '~/components/ui/AppCta.vue'
-import LandingCta from '~/components/landing/LandingCta.vue'
-import AppMultiSelect from '~/components/ui/AppMultiSelect.vue'
-import AppFieldset from '~/components/ui/AppFieldset.vue'
 
 import {
   CommunityEvent,
@@ -105,16 +94,6 @@ import {
 import { EVENT_REQUEST_LINK } from '~/constants/appLinks'
 
 @Component({
-  components: {
-    EventCard,
-    AppCta,
-    LandingCta,
-    AppCard,
-    TheEventsHeader,
-    AppMultiSelect,
-    AppFieldset
-  },
-
   head () {
     return {
       title: 'Qiskit Events'
@@ -145,7 +124,7 @@ import { EVENT_REQUEST_LINK } from '~/constants/appLinks'
     store.commit('setEvents', pastEventsPayload)
   }
 })
-export default class extends QiskitPage {
+export default class EventsPage extends QiskitPage {
   routeName: string = 'events'
   eventRequestLink = EVENT_REQUEST_LINK
   emptyCard = {
@@ -284,6 +263,21 @@ export default class extends QiskitPage {
   }
 
   &__extra-filters {
+    &__checkboxes {
+      .bx--checkbox-label::before {
+        border: 1px solid $black-100;
+      }
+
+      .bx--checkbox:focus + .bx--checkbox-label::before {
+        box-shadow: 0 0 0 2px $white, 0 0 0 4px $purple-60;
+      }
+
+      .bx--checkbox:checked + .bx--checkbox-label::before {
+        background-color: $gray-10;
+        border-color: $gray-10;
+      }
+    }
+
     &_on-large-screen {
       @include mq($until: medium) {
         display: none;
@@ -325,13 +319,6 @@ export default class extends QiskitPage {
     &__description {
       margin-top: $layout-02;
       margin-bottom: $layout-03;
-    }
-
-    &__cta {
-      color: $white !important;
-      background-color: $purple-70;
-      padding: $spacing-05;
-      width: fit-content !important;
     }
   }
 }

@@ -37,17 +37,13 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import TheDarkHeader from './TheDarkHeader.vue'
-import AppIcon from '~/components/ui/AppIcon.vue'
 
 type CellCoordinates = { x: number, y: number }
 type CellSpecification = { c: number, r: number, isDecoherent?: boolean }
 type Decoherences = { [key: number]: number }
 
-@Component({
-  components: { AppIcon, TheDarkHeader }
-})
-export default class extends Vue {
+@Component
+export default class MetalGrid extends Vue {
   timeToRemoveNextCell: number = 5 // in ms
   timeToLoadMetal: number = 50 // in ms
   triggerPositionFromTopCenter: CellCoordinates = { x: -3, y: 2 }

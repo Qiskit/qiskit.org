@@ -13,7 +13,7 @@ import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 
 @Component
-export default class extends Vue {
+export default class TypewriterEffect extends Vue {
   @Prop({ type: Number, default: 0 }) startingIndex!: number
   @Prop({ type: Array, default: () => [] }) values!: string[]
   @Prop({ type: Number, default: 100 }) typingDelay!: number

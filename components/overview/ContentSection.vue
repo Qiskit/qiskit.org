@@ -9,11 +9,9 @@
       </p>
       <AppCta
         v-if="link"
-        class="copy__link"
-        :url="link.url"
-      >
-        {{ link.label }}
-      </AppCta>
+        v-bind="link"
+        kind="ghost"
+      />
     </div>
     <div class="content-section__detail">
       <slot />
@@ -24,15 +22,13 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-import AppCta from '~/components/ui/AppCta.vue'
+import { NavLink } from '~/constants/menuLinks'
 
-@Component({
-  components: { AppCta }
-})
-export default class extends Vue {
-  @Prop(String) title!: any
-  @Prop(String) description!: any
-  @Prop(Object) link!: any
+@Component
+export default class ContentSection extends Vue {
+  @Prop(String) title!: string
+  @Prop(String) description!: string
+  @Prop(Object) link!: NavLink
 }
 </script>
 

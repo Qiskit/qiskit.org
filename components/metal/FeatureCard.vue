@@ -22,10 +22,10 @@ import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 
 @Component
-export default class extends Vue {
-  @Prop(String) image!: any
-  @Prop(String) title!: any
-  @Prop(String) description!: any
+export default class FeatureCard extends Vue {
+  @Prop(String) image!: string
+  @Prop(String) title!: string
+  @Prop(String) description!: string
 }
 </script>
 

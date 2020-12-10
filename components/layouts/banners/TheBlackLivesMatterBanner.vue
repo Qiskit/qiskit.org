@@ -15,11 +15,9 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import TheBanner from '~/components/layouts/TheBanner.vue'
-import AppLink from '~/components/ui/AppLink.vue'
 
-@Component({ components: { AppLink, TheBanner } })
-export default class extends Vue {}
+@Component
+export default class TheBlackLivesMatterBanner extends Vue {}
 </script>
 
 <style lang="scss" scoped>
@@ -30,7 +28,11 @@ export default class extends Vue {}
     @include type-style('body-short-02');
   }
 
-  &__link {
+  // Rely on BEM specifity because of the problems of css inconsistent ordering on nuxt compilation.
+  // https://github.com/nuxt/nuxt.js/issues/4204
+  // https://github.com/nuxt/nuxt.js/issues/4219
+  .app-link#{&}__link {
+    font-size: 1rem;
     color: #8A3FFC;
   }
 }

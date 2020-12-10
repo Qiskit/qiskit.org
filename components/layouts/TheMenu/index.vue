@@ -7,6 +7,7 @@
             menu__link
             menu__home-link
           "
+          kind="secondary"
           v-bind="homeLink"
         >
           <AppLogo
@@ -42,6 +43,7 @@
             menu__link
             menu__home-link
           "
+          kind="secondary"
           v-bind="homeLink"
         >
           <AppLogo
@@ -55,6 +57,7 @@
           class="menu__link"
           :class="{ 'menu__link_active': isActive(link) }"
           v-bind="link"
+          kind="secondary"
         >
           {{ link.label }}
         </AppLink>
@@ -71,6 +74,7 @@
           class="menu__link"
           :class="{ 'menu__link_active': isActive(link) }"
           v-bind="link"
+          kind="secondary"
         >
           {{ link.label }}
         </AppLink>
@@ -81,20 +85,15 @@
 
 <script lang="ts">
 import { Watch, Component, Mixins } from 'vue-property-decorator'
-import MobileMenu from '~/components/layouts/TheMenu/MobileMenu.vue'
-import AppLogo from '~/components/ui/AppLogo.vue'
-import AppLink from '~/components/ui/AppLink.vue'
 import MenuMixin from '~/mixins/menu'
 
-@Component({
-  components: { MobileMenu, AppLink, AppLogo }
-})
-export default class extends Mixins(MenuMixin) {
+@Component
+export default class TheMenu extends Mixins(MenuMixin) {
   isMobileMenuVisible: boolean = false
 
   @Watch('isMobileMenuVisible')
   toggleScroll () {
-    this.$emit('changeVisibility', this.isMobileMenuVisible ? 'shown' : 'hidden')
+    this.$emit('change-visibility', this.isMobileMenuVisible ? 'shown' : 'hidden')
     if (this.isMobileMenuVisible) {
       this.$root.$el.classList.add('no-scroll')
     } else {
@@ -126,7 +125,7 @@ export default class extends Mixins(MenuMixin) {
 
   &__mobile {
     position: relative;
-    fill: $purple-70;
+    color: $purple-70;
 
     @include mq($from: large) {
       display: none;
@@ -191,18 +190,14 @@ export default class extends Mixins(MenuMixin) {
     flex-direction: column;
     justify-content: center;
     color: var(--link-color);
-    text-decoration: none;
     margin-right: $spacing-09;
-
-    &:hover {
-      text-decoration: underline;
-    }
 
     &:last-child {
       margin-right: 0;
     }
 
-    &_active {
+    &_active,
+    &_active:hover {
       color: $purple-70;
     }
   }

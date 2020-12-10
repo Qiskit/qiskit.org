@@ -91,7 +91,7 @@ function nextUniqueSuffix (): string {
 }
 
 @Component
-export default class extends Vue {
+export default class AppLogo extends Vue {
   @Prop({ type: String, default: 'black' }) color!: string
 
   uniqueSuffix: string = nextUniqueSuffix()

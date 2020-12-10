@@ -243,6 +243,11 @@ const COMMUNITY_LINK: NavLink = {
   url: '/advocates'
 }
 
+type InnerNavLink = {
+  anchor: string,
+  label: string,
+}
+
 export {
   ORDERED_COMMUNITY_SUB_LINKS,
   FOOTER_ELEMENTS,
@@ -255,5 +260,6 @@ export {
   STAY_CONNECTED_LINKS,
   LEARN_LINK,
   OVERVIEW_LINK,
-  NavLink
+  NavLink,
+  InnerNavLink
 }

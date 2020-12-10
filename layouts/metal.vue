@@ -9,16 +9,9 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import TheBlackLivesMatterBanner from '~/components/layouts/banners/TheBlackLivesMatterBanner.vue'
-import PageFooter from '~/components/layouts/PageFooter/index.vue'
 
-@Component({
-  components: {
-    TheBlackLivesMatterBanner,
-    PageFooter
-  }
-})
-export default class extends Vue {
+@Component
+export default class MetalLayout extends Vue {
   isMenuShown: boolean = false
 }
 </script>

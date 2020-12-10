@@ -18,16 +18,9 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import StartLocally from './StartLocally.vue'
-import StartOnTheCloud from './StartOnTheCloud.vue'
 
-@Component({
-  components: {
-    StartLocally,
-    StartOnTheCloud
-  }
-})
-export default class extends Vue {}
+@Component
+export default class TheQuickStart extends Vue {}
 </script>
 
 <style lang="scss" scoped>

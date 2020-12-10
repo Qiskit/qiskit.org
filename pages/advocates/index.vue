@@ -10,17 +10,8 @@
 import { mapGetters } from 'vuex'
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
-import TheAdvocatesHeader from '~/components/advocates/TheAdvocatesHeader.vue'
-import AdvocatesJoinSection from '~/components/advocates/AdvocatesJoinSection.vue'
-import MeetTheAdvocates from '~/components/advocates/MeetTheAdvocates.vue'
 
 @Component({
-  components: {
-    TheAdvocatesHeader,
-    AdvocatesJoinSection,
-    MeetTheAdvocates
-  },
-
   head () {
     return {
       title: 'Qiskit Advocates'
@@ -37,7 +28,7 @@ import MeetTheAdvocates from '~/components/advocates/MeetTheAdvocates.vue'
     await store.dispatch('advocates/fetchAdvocates')
   }
 })
-export default class extends QiskitPage {
+export default class AdvocatesPage extends QiskitPage {
   routeName: string = 'advocates'
 }
 </script>

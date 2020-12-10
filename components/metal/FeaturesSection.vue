@@ -24,13 +24,10 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import FeatureCard from '~/components/metal/FeatureCard.vue'
 import { METAL_FEATURES } from '~/constants/metalContent'
 
-@Component({
-  components: { FeatureCard }
-})
-export default class extends Vue {
+@Component
+export default class FeaturesSection extends Vue {
   metalFeatures = METAL_FEATURES
 }
 </script>

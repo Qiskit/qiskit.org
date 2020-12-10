@@ -9,7 +9,7 @@
         <br><br>
         The early-access program will start in November and proceed through March, 2021, during which time we will work closely to develop Metal and design quantum devices with it.
       </p>
-      <AppCtaBtn v-bind="stayInTouchLink" />
+      <AppCta v-bind="stayInTouchLink" theme="dark" />
     </div>
   </section>
 </template>
@@ -17,13 +17,9 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import AppCtaBtn from '~/components/metal/AppCtaBtn.vue'
 
-@Component({
-  components: { AppCtaBtn }
-})
-
-export default class extends Vue {
+@Component
+export default class EarlyAccessSection extends Vue {
   stayInTouchLink = {
     url: 'http://qisk.it/metal',
     label: 'Sign up to stay in touch'
@@ -33,7 +29,6 @@ export default class extends Vue {
 
 <style lang="scss" scoped>
 @import "~carbon-components/scss/globals/scss/typography";
-@import '~/assets/scss/blocks/copy.scss';
 
 .early-access-section {
   background-color: $cool-gray-80;

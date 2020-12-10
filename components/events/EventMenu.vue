@@ -23,12 +23,9 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import AppLink from '~/components/ui/AppLink.vue'
 
-@Component({
-  components: { AppLink }
-})
-export default class extends Vue {}
+@Component
+export default class EventMenu extends Vue {}
 </script>
 
 <style lang="scss" scoped>

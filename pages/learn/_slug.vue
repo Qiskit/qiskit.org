@@ -34,7 +34,7 @@ import QiskitPage from '~/components/logic/QiskitPage.vue'
     return { pageContent }
   }
 })
-export default class extends QiskitPage {
+export default class LearnEntry extends QiskitPage {
   routeName = 'learn-entry'
 }
 </script>

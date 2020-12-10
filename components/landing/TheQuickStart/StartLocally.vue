@@ -6,14 +6,12 @@
     <p class="copy__paragraph copy__paragraph_importance_support">
       To install Qiskit locally, you will need
       <AppLink
-        class="copy__link"
         url="https://www.python.org/downloads/"
       >
-        Python 3.5+.
+        Python 3.6+.
       </AppLink>
       Although it isn't required, we recommend using a
       <AppLink
-        class="copy__link"
         url="https://www.anaconda.com/products/individual"
       >
         virtual environment with Anaconda.
@@ -69,11 +67,6 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import PrerequisitesForLinux from '~/components/landing/TheQuickStart/PrerequisitesForLinux.vue'
-import PrerequisitesForMac from '~/components/landing/TheQuickStart/PrerequisitesForMac.vue'
-import PrerequisitesForWindows from '~/components/landing/TheQuickStart/PrerequisitesForWindows.vue'
-import SyntaxHighlight from '~/components/ui/SyntaxHighlight.vue'
-import AppLink from '~/components/ui/AppLink.vue'
 
 type ChoicesGroup = {
   title: string,
@@ -83,16 +76,8 @@ type ChoicesGroup = {
 
 type InstallChoices = Array<ChoicesGroup>
 
-@Component({
-  components: {
-    PrerequisitesForLinux,
-    PrerequisitesForMac,
-    PrerequisitesForWindows,
-    SyntaxHighlight,
-    AppLink
-  }
-})
-export default class extends Vue {
+@Component
+export default class StartLocally extends Vue {
   OPERATING_SYSTEMS = {
     linux: 'Linux',
     mac: 'Mac',
@@ -183,6 +168,10 @@ export default class extends Vue {
 <style lang="scss" scoped>
 @import '~/assets/scss/blocks/copy.scss';
 @import '~carbon-components/scss/globals/scss/typography';
+
+.bx--btn-set .bx--btn:not(:focus) {
+  box-shadow: none;
+}
 
 .start-locally {
   width: 63%;

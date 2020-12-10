@@ -12,8 +12,8 @@ import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 
 @Component
-export default class extends Vue {
-  @Prop(String) label!: any
+export default class AppFieldset extends Vue {
+  @Prop(String) label!: string
 }
 </script>
 

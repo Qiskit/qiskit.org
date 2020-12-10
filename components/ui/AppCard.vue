@@ -21,9 +21,11 @@
       <div class="app-card__description">
         <slot />
       </div>
-      <AppCta v-if="to" :url="to" class="app-card__link">
-        {{ ctaLabel }}
-      </AppCta>
+      <AppCta
+        v-if="to"
+        v-bind="ctaLink"
+        kind="ghost"
+      />
     </div>
   </article>
 </template>
@@ -31,15 +33,19 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-import AppCta from '~/components/ui/AppCta.vue'
 
-@Component({ components: { AppCta } })
-export default class extends Vue {
-  @Prop(String) image!: any
-  @Prop(String) title!: any
-  @Prop(Array) tags!: any
-  @Prop(String) to!: any
-  @Prop(String) ctaLabel!: any
+@Component
+export default class AppCard extends Vue {
+  @Prop(String) image!: string
+  @Prop(String) title!: string
+  @Prop(Array) tags!: string[]
+  @Prop(String) to!: string
+  @Prop(String) ctaLabel!: string
+
+  ctaLink = {
+    url: this.to,
+    label: this.ctaLabel
+  }
 
   hasTags = this.tags && this.tags.length > 0
 }
@@ -102,23 +108,16 @@ export default class extends Vue {
   }
 
   &__tags {
-    width: 20rem;
     display: flex;
     flex-wrap: wrap;
-    flex: 1;
+    flex: 0;
     justify-content: flex-end;
+    margin-left: $spacing-06;
 
     @include mq($until: large) {
       justify-content: flex-start;
       margin-top: $spacing-03;
-    }
-
-    @include mq($from: medium, $until: large) {
-      width: auto;
-    }
-
-    @include mq($until: medium) {
-      width: 100%;
+      margin-left: 0;
     }
 
     .bx--tag--purple {
@@ -133,10 +132,6 @@ export default class extends Vue {
 
   &__description {
     @include type-style('body-long-01');
-    margin-top: $layout-02;
-  }
-
-  &__link {
     margin-top: $layout-02;
   }
 }

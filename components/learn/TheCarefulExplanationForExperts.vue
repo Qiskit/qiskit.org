@@ -26,8 +26,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import CarefulExplanation from '~/components/learn/CarefulExplanation.vue'
 
-@Component({ components: { CarefulExplanation } })
-export default class extends Vue { }
+@Component
+export default class TheCarefulExplanationForExperts extends Vue { }
 </script>

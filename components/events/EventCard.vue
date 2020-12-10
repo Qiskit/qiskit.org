@@ -23,18 +23,15 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-import AppCard from '~/components/ui/AppCard.vue'
 
-@Component({
-  components: { AppCard }
-})
-export default class extends Vue {
-  @Prop(Array) types!: any
-  @Prop(String) title!: any
-  @Prop(String) image!: any
-  @Prop(String) location!: any
-  @Prop(String) date!: any
-  @Prop(String) to!: any
+@Component
+export default class EventCard extends Vue {
+  @Prop(Array) types!: string[]
+  @Prop(String) title!: string
+  @Prop(String) image!: string
+  @Prop(String) location!: string
+  @Prop(String) date!: string
+  @Prop(String) to!: string
 }
 </script>
 

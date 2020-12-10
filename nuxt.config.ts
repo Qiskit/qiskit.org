@@ -110,6 +110,8 @@ const config: NuxtConfig = {
     'nuxt-lazy-load'
   ],
 
+  components: true,
+
   styleResources: {
     /*
     ** Do not include styles! Only variables, mixins and functions.
