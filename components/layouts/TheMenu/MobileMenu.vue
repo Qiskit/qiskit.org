@@ -20,21 +20,23 @@
           </p>
         </AppLink>
         <cv-dropdown v-else :key="link.url" class="cv-dropdown mobile-menu__navigation__dropdown" :class="{ 'mobile-menu__link_active': isCommunityActive() }" placeholder="Community">
-          <AppLink
-            v-for="sublink in getSubLinks(link)"
-            :key="`sublink:${sublink.url}`"
-            class="
-            mobile-menu__link
-            mobile-menu__link_second-level
-          "
-            :class="{ 'mobile-menu__link_active': isActive(sublink) }"
-            v-bind="appLinkFromNavLink(sublink)"
-            kind="secondary"
-          >
-            <p class="mobile-menu__link-label">
-              {{ sublink.label }}
-            </p>
-          </AppLink>
+          <li>
+            <AppLink
+              v-for="sublink in getSubLinks(link)"
+              :key="`sublink:${sublink.url}`"
+              class="
+              mobile-menu__link
+              mobile-menu__link_second-level
+            "
+              :class="{ 'mobile-menu__link_active': isActive(sublink) }"
+              v-bind="appLinkFromNavLink(sublink)"
+              kind="secondary"
+            >
+              <p class="mobile-menu__link-label">
+                {{ sublink.label }}
+              </p>
+            </AppLink>
+          </li>
         </cv-dropdown>
       </template>
     </nav>
@@ -104,6 +106,7 @@ export default class MobileMenu extends Mixins(MenuMixin) {
     &_active:not(&_is-parent),
     &_active .bx--list-box__label {
       color: $purple-70;
+      background-color: $cool-gray-10;
     }
 
     &_second-level {
@@ -199,8 +202,28 @@ export default class MobileMenu extends Mixins(MenuMixin) {
   }
 
   &__link {
-    &_active .bx--list-box__label {
-      color: $purple-70;
+    &_active {
+      & .bx--list-box__label,
+      & .bx--dropdown {
+        color: $purple-70;
+        background-color: $cool-gray-10;
+        min-height: 4rem;
+        max-height: none;
+        height: auto;
+      }
+
+      & .bx--list-box__menu {
+        position: relative;
+        max-height: unset;
+        background-color: $cool-gray-10;
+        box-shadow: initial;
+        z-index: initial;
+      }
+
+      // if Community page is active, open dropdown
+      & .bx--list-box .bx--list-box__field[aria-expanded='false'] + .bx--list-box__menu {
+        max-height: unset;
+      }
     }
   }
 
