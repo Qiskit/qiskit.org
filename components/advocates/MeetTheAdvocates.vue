@@ -58,8 +58,8 @@ import AdvocateCard from '~/components/advocates/AdvocateCard.vue'
 import AppMultiSelect from '~/components/ui/AppMultiSelect.vue'
 import AppFieldset from '~/components/ui/AppFieldset.vue'
 import AppFiltersResultsLayout from '~/components/ui/AppFiltersResultsLayout.vue'
-import AppLink from '~/components/ui/AppLink.vue'
 import InfiniteScroll from '~/components/ui/InfiniteScroll.vue'
+import AppLink from '~/components/ui/AppLink.vue'
 import { Advocate, ADVOCATES_WORLD_REGION_OPTIONS, State } from '~/store/modules/advocates.ts'
 
 @Component({

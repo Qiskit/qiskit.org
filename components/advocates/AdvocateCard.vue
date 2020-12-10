@@ -21,15 +21,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-import AppCard from '~/components/ui/AppCard.vue'
-import AppLink from '~/components/ui/AppLink.vue'
 
-@Component({
-  components: {
-    AppCard,
-    AppLink
-  }
-})
+@Component
 export default class extends Vue {
   @Prop(String) name!: string
   @Prop(String) image!: string

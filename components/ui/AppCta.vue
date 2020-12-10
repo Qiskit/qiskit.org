@@ -44,10 +44,6 @@ export default class AppCta extends Vue {
   get isIdAnchor () {
     return BasicLink.isIdAnchor(this.$attrs.url)
   }
-
-  get isIdAnchor () {
-    return AppLink.isIdAnchor(this.$attrs.url)
-  }
 }
 </script>
 
@@ -175,22 +171,6 @@ export default class AppCta extends Vue {
     }
     &#{$launch_path} {
       transform: translate(2px, -2px);
-    }
-  }
-
-  &_is-id-anchor {
-    $arrow-path: "path:nth-child(1)";
-
-    #{$arrow-path} {
-      transform: translate(0, 0);
-      transition: transform 0.3s ease-in-out;
-    }
-
-    &:hover,
-    &:active {
-      #{$arrow-path} {
-        transform: translate(0, 2px);
-      }
     }
   }
 
