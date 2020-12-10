@@ -4,10 +4,7 @@
       <p class="join-section__feature_intro-copy">
         The Qiskit advocate program is a global program that provides support to the individuals who actively contribute to the Qiskit Community.
       </p>
-      <AppCtaBtn
-        class="join-section__feature_intro-cta"
-        v-bind="joinAction"
-      />
+      <AppCta v-bind="joinAction" />
     </article>
     <CompactFeature
       v-for="benefit in advocateBenefits"
@@ -100,11 +97,6 @@ export default class extends Vue {
           @include mq($until: medium) {
             margin-bottom: $spacing-07;
           }
-        }
-
-        &-cta {
-          min-width: 100%;
-          justify-content: space-between;
         }
       }
     }
