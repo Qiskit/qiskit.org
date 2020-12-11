@@ -1,3 +1,5 @@
+import { ActionTree, GetterTree, MutationTree } from 'vuex'
+
 const ADVOCATES_WORLD_REGIONS = Object.freeze({
   northAmerica: 'North America',
   southAmerica: 'South America',
@@ -9,14 +11,18 @@ const ADVOCATES_WORLD_REGIONS = Object.freeze({
 
 type AdvocatesWorldRegion = typeof ADVOCATES_WORLD_REGIONS[keyof typeof ADVOCATES_WORLD_REGIONS]
 
-type Advocate = {
-  name: string,
-  image: string,
-  city: string,
-  country: string,
-  region: AdvocatesWorldRegion,
-  slackId: string,
-  slackUsername: string
+/**
+ * Interface for a Qiskit advocate.
+ */
+interface Advocate {
+  city: string
+  country: string
+  image: string
+  location?: string
+  name: string
+  region: AdvocatesWorldRegion
+  slackId?: string
+  slackUsername?: string
 }
 
 const ADVOCATES_WORLD_REGION_OPTIONS = Object.freeze([
@@ -35,28 +41,48 @@ export {
   Advocate
 }
 
-export default {
-  state () {
-    return {
-      advocates: []
-    }
-  },
-  getters: {
-    filteredAdvocates (state: any) {
-      const { advocates } = state
+export class State {
+  advocates: Advocate[] = []
+  regionFilters: string[] = []
+}
 
+const getters = <GetterTree<State, any>> {
+  /**
+   * List of advocates filtered by selected regions.
+   */
+  filteredAdvocates ({ advocates, regionFilters }): Advocate[] {
+    const noRegionFilters = regionFilters.length === 0
+
+    if (noRegionFilters) {
       return advocates
     }
-  },
-  mutations: {
-    setAdvocates (state: any, payload: any) {
-      state.advocates = payload
-    }
-  },
-  actions: {
-    async fetchAdvocates () {
-      const advocatesModule = await import('~/content/advocates/advocates.json')
-      return advocatesModule.default || []
-    }
+
+    return advocates.filter(advocate => regionFilters.includes(advocate.region))
   }
+}
+
+const mutations = <MutationTree<State>> {
+  setAdvocates (state, advocates: Advocate[]) {
+    state.advocates = advocates
+  },
+
+  setRegionFilters (state, regionFilters: string[]) {
+    state.regionFilters = regionFilters
+  }
+}
+
+const actions = <ActionTree<State, any>> {
+  async fetchAdvocates ({ commit }): Promise<void> {
+    const advocatesModule = await import('~/content/advocates/advocates.json')
+    const advocates = advocatesModule.default || []
+    commit('setAdvocates', advocates)
+  }
+}
+
+export default {
+  namespaced: true,
+  state: new State(),
+  actions,
+  mutations,
+  getters
 }
