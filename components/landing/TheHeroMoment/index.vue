@@ -31,7 +31,7 @@ import { Prop, Component } from 'vue-property-decorator'
 export default class TheHeroMoment extends Vue {
   @Prop({ type: String, required: true }) version!: string
   getStartedLink = {
-    url: 'documentation/install.html',
+    url: 'https://qiskit.org/documentation/install.html',
     label: 'Get started',
     segment: { action: 'Get started' }
   }
