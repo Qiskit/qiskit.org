@@ -108,7 +108,7 @@ export default class TheMenu extends Mixins(MenuMixin) {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '~carbon-components/scss/globals/scss/typography';
 
 .menu {
