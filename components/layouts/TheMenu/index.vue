@@ -65,7 +65,6 @@
               <li
                 v-for="sublink in link.sublinks"
                 :key="sublink.url"
-                value="sublink.url"
                 class="bx--dropdown-item"
               >
                 <BasicLink
