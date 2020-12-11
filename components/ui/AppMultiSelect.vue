@@ -72,10 +72,6 @@ export default class AppMultiSelect extends Vue {
       background-color: $cool-gray-10;
     }
 
-    .bx--checkbox-label::before {
-      border: 1px solid $black-100;
-    }
-
     .bx--list-box__menu-item--highlighted {
       background-color: $cool-gray-20;
     }
@@ -89,17 +85,6 @@ export default class AppMultiSelect extends Vue {
 
     .bx--tag--high-contrast .bx--tag__close-icon:hover {
       background-color: $purple-70;
-    }
-
-    .bx--checkbox:checked + .bx--checkbox-label::before {
-      background-color: $black-100;
-      border-color: $black-100;
-      border-width: 1px;
-    }
-
-    .bx--checkbox:checked + .bx--checkbox-label::after {
-      border-left: 2px solid $white;
-      border-bottom: 2px solid $white;
     }
 
     .bx--list-box__menu-item:hover .bx--list-box__menu-item__option {
