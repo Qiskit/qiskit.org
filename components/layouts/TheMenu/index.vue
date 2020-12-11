@@ -66,7 +66,7 @@
                 v-for="sublink in link.sublinks"
                 :key="sublink.url"
                 value="sublink.url"
-                class="cv-dropdown-item bx--dropdown-item"
+                class="bx--dropdown-item"
               >
                 <AppLink
                   class="menu__link menu__link_secondary"
