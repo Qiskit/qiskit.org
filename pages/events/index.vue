@@ -33,7 +33,6 @@
               <cv-checkbox
                 v-for="option in filter.options"
                 :key="option"
-                class="event-page__extra-filters__checkboxes"
                 :value="option"
                 :label="option"
                 :checked="isFilterChecked(filter.filterType, option)"
@@ -263,21 +262,6 @@ export default class EventsPage extends QiskitPage {
   }
 
   &__extra-filters {
-    &__checkboxes {
-      .bx--checkbox-label::before {
-        border: 1px solid $black-100;
-      }
-
-      .bx--checkbox:focus + .bx--checkbox-label::before {
-        box-shadow: 0 0 0 2px $white, 0 0 0 4px $purple-60;
-      }
-
-      .bx--checkbox:checked + .bx--checkbox-label::before {
-        background-color: $gray-10;
-        border-color: $gray-10;
-      }
-    }
-
     &_on-large-screen {
       @include mq($until: medium) {
         display: none;
