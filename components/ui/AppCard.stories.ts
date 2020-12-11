@@ -15,15 +15,18 @@ export default {
 const Template: Story = (args, { argTypes }) => ({
   components: { AppCard },
   props: Object.keys(argTypes),
-  template: '<AppCard :cta-label="ctaLabel" :image="image" :tags="tags" :title="title" :to="to">{{ vSlot }}</AppCard>'
+  template: `
+    <AppCard :cta-label="ctaLabel" :image="image" :tags="tags" :title="title" :to="to">
+      {{slotDefault}}
+    </AppCard>`
 })
 
 export const Default = Template.bind({})
 Default.args = {
   ctaLabel: 'Learn more',
-  image: 'https://via.placeholder.com/300',
+  image: '/images/events/no-events.svg',
   tags: ['documentation', 'news'],
   title: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
   to: 'https://example.com',
-  vSlot: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+  slotDefault: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
 }

@@ -19,6 +19,7 @@
         </div>
       </header>
       <div class="app-card__description">
+        <!-- @slot Card description. -->
         <slot />
       </div>
       <AppCta
@@ -36,10 +37,10 @@ import { Component, Prop } from 'vue-property-decorator'
 
 /**
  * Card component.
- * 
+ *
  * A card is a flexible content container that includes an image, a title and a
  * description.
- * 
+ *
  * Optionally, a card can also include a list of tags and a CTA button.
  */
 @Component
