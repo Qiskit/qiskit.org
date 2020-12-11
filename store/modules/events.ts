@@ -43,12 +43,6 @@ type CommunityEvent = {
   to: string
 }
 
-type EventMultiSelectOption = {
-  label: string,
-  value: string,
-  name: string
-}
-
 type EventPayload = {
   events: string,
   eventsSet: CommunityEvent[]

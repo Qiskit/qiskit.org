@@ -17,16 +17,24 @@
       <template slot="filters-on-m-l-screen">
         <AppFieldset :label="filter.label">
           <client-only>
-            <AppCheckbox
+            <cv-checkbox
               v-for="option in filter.options"
               :key="option"
-              :option="option"
+              :checked="isRegionFilterChecked(option)"
+              :label="option"
+              :value="option"
+              @change="updateRegionFilter(option, $event)"
             />
           </client-only>
         </AppFieldset>
       </template>
       <template slot="filters-on-s-screen">
-        <AppMultiSelect v-bind="filter" />
+        <AppMultiSelect
+          :label="filter.label"
+          :options="filter.options"
+          :value="regionFilters"
+          @change-selection="updateRegionFilters($event)"
+        />
       </template>
       <template slot="results">
         <InfiniteScroll
@@ -44,33 +52,63 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { mapState, MapperForStateWithNamespace } from 'vuex'
 import { Component, Prop } from 'vue-property-decorator'
 import AdvocateCard from '~/components/advocates/AdvocateCard.vue'
 import AppMultiSelect from '~/components/ui/AppMultiSelect.vue'
 import AppFieldset from '~/components/ui/AppFieldset.vue'
-import AppCheckbox from '~/components/ui/AppCheckbox.vue'
 import AppFiltersResultsLayout from '~/components/ui/AppFiltersResultsLayout.vue'
 import InfiniteScroll from '~/components/ui/InfiniteScroll.vue'
 import AppLink from '~/components/ui/AppLink.vue'
+import { Advocate, ADVOCATES_WORLD_REGION_OPTIONS, State } from '~/store/modules/advocates.ts'
 
 @Component({
   components: {
     AdvocateCard,
     AppMultiSelect,
     AppFieldset,
-    AppCheckbox,
     AppFiltersResultsLayout,
     InfiniteScroll,
     AppLink
+  },
+
+  computed: {
+    ...mapState<MapperForStateWithNamespace>('advocates', {
+      regionFilters: (state: State) => state.regionFilters
+    })
   }
 })
-export default class extends Vue {
-  @Prop(Array) advocates!: any
+export default class MeetTheAdvocates extends Vue {
+  @Prop(Array) advocates!: Advocate[]
 
-  filter = {
+  /**
+   * Region filters from Vuex store.
+   *
+   * Initialized with mapState.
+   */
+  public regionFilters!: string[]
+
+  private filter = {
     label: 'Locations',
-    options: ['Americas', 'Asia Pacific', 'Europe', 'Africa'],
-    filterType: 'regionFilters'
+    options: ADVOCATES_WORLD_REGION_OPTIONS
+  }
+
+  isRegionFilterChecked (filterValue: string): boolean {
+    return this.regionFilters.includes(filterValue)
+  }
+
+  updateRegionFilter (option: string, isChecked: boolean): void {
+    const regionFilters = this.regionFilters.filter(oldOption => oldOption !== option)
+
+    if (isChecked) {
+      regionFilters.push(option)
+    }
+
+    this.updateRegionFilters(regionFilters)
+  }
+
+  updateRegionFilters (regionFilters: string[]): void {
+    this.$store.commit('advocates/setRegionFilters', regionFilters)
   }
 
   joinSlackLink: string = 'https://ibm.co/joinqiskitslack'
