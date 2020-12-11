@@ -68,13 +68,13 @@
                 value="sublink.url"
                 class="bx--dropdown-item"
               >
-                <AppLink
+                <BasicLink
                   class="menu__link menu__link_secondary"
                   :class="{ 'menu__link_active': isActive(sublink) }"
                   v-bind="sublink"
                 >
                   {{ sublink.label }}
-                </AppLink>
+                </BasicLink>
               </li>
             </cv-dropdown>
           </li>
@@ -216,7 +216,7 @@ export default class TheMenu extends Mixins(MenuMixin) {
       color: $purple-70;
     }
 
-    &_secondary.app-link_primary {
+    &_secondary {
       color: var(--link-color);
       @include type-style('body-long-02');
       display: block;
@@ -229,8 +229,7 @@ export default class TheMenu extends Mixins(MenuMixin) {
       color: $purple-70;
     }
 
-    &:hover,
-    &:hover.app-link_primary {
+    &:hover {
       color: var(--link-color);
       text-decoration: underline;
     }
