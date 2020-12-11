@@ -61,7 +61,7 @@
             >
               {{ link.label }}
             </BasicLink>
-            <cv-dropdown v-else class="cv-dropdown menu__navigation__dropdown" :class="{ 'menu__link_active': isCommunityActive() }" placeholder="Community">
+            <cv-dropdown v-else :class="{ 'menu__link_active': isCommunityActive() }" placeholder="Community">
               <li
                 v-for="sublink in link.sublinks"
                 :key="sublink.url"
@@ -212,8 +212,7 @@ export default class TheMenu extends Mixins(MenuMixin) {
     margin-right: $spacing-09;
     text-decoration: none;
 
-    &_active,
-    &_active .bx--list-box__label {
+    &_active {
       color: $purple-70;
     }
 
@@ -334,6 +333,12 @@ export default class TheMenu extends Mixins(MenuMixin) {
 
   .bx--list-box__menu-icon > svg {
     fill: var(--link-color);
+  }
+
+  &__link {
+    &_active .bx--list-box__label {
+      color: $purple-70;
+    }
   }
 }
 </style>
