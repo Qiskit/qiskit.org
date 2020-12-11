@@ -2,7 +2,7 @@
   <div class="menu">
     <section class="menu__mobile" tabindex="-1">
       <div class="menu__mobile-inner-container">
-        <AppLink
+        <BasicLink
           class="
             menu__link
             menu__home-link
@@ -14,7 +14,7 @@
             class="menu__logo"
             :class="{ 'menu__logo_active': isActiveHome(homeLink) }"
           />
-        </AppLink>
+        </BasicLink>
         <label
           class="
             menu__hamburger-toggle
@@ -38,7 +38,7 @@
     </section>
     <section class="menu__main-level">
       <nav class="menu__navigation-level">
-        <AppLink
+        <BasicLink
           class="
             menu__link
             menu__home-link
@@ -50,7 +50,7 @@
             class="menu__logo"
             :class="{ 'menu__logo_active': isActiveHome(homeLink) }"
           />
-        </AppLink>
+        </BasicLink>
         <ul class="menu__navigation-level__list">
           <li v-for="link in mainLevelLinks" :key="link.url" class="menu__navigation-level__list-item">
             <BasicLink
