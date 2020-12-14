@@ -2,9 +2,9 @@
   <div class="menu">
     <section class="menu__mobile" tabindex="-1">
       <div class="menu__mobile-inner-container">
-        <AppLink
+        <BasicLink
           class="
-            menu__link
+            menu__entry
             menu__home-link
           "
           kind="secondary"
@@ -14,7 +14,7 @@
             class="menu__logo"
             :class="{ 'menu__logo_active': isActiveHome(homeLink) }"
           />
-        </AppLink>
+        </BasicLink>
         <label
           class="
             menu__hamburger-toggle
@@ -38,9 +38,9 @@
     </section>
     <section class="menu__main-level">
       <nav class="menu__navigation-level">
-        <AppLink
+        <BasicLink
           class="
-            menu__link
+            menu__entry
             menu__home-link
           "
           kind="secondary"
@@ -50,34 +50,42 @@
             class="menu__logo"
             :class="{ 'menu__logo_active': isActiveHome(homeLink) }"
           />
-        </AppLink>
-        <AppLink
-          v-for="link in mainLevelLinks"
-          :key="link.url"
-          class="menu__link"
-          :class="{ 'menu__link_active': isActive(link) }"
-          v-bind="link"
-          kind="secondary"
-        >
-          {{ link.label }}
-        </AppLink>
-      </nav>
-    </section>
-    <section
-      v-if="isCommunityActive()"
-      class="menu__second-level"
-    >
-      <nav class="menu__navigation-level">
-        <AppLink
-          v-for="link in communitySubLinks"
-          :key="link.url"
-          class="menu__link"
-          :class="{ 'menu__link_active': isActive(link) }"
-          v-bind="link"
-          kind="secondary"
-        >
-          {{ link.label }}
-        </AppLink>
+        </BasicLink>
+        <template v-for="link in mainLevelLinks">
+          <BasicLink
+            v-if="!link.sublinks"
+            :key="link.url"
+            class="menu__entry"
+            :class="{ 'menu__entry_active': isActive(link) }"
+            v-bind="link"
+          >
+            {{ link.label }}
+          </BasicLink>
+          <cv-dropdown
+            v-else
+            :key="link.url"
+            class="menu__entry"
+            :class="{ 'menu__entry_active': isCommunityActive() }"
+            placeholder="Community"
+          >
+            <li
+              v-for="sublink in link.sublinks"
+              :key="sublink.url"
+              class="bx--dropdown-item"
+            >
+              <BasicLink
+                class="
+                  menu__entry
+                  menu__entry_second-level
+                "
+                :class="{ 'menu__entry_active': isActive(sublink) }"
+                v-bind="sublink"
+              >
+                {{ sublink.label }}
+              </BasicLink>
+            </li>
+          </cv-dropdown>
+        </template>
       </nav>
     </section>
   </div>
@@ -112,7 +120,7 @@ export default class TheMenu extends Mixins(MenuMixin) {
 @import '~carbon-components/scss/globals/scss/typography';
 
 .menu {
-  background-color: white;
+  background-color: $white;
 
   &__main-level {
     --link-color: #{$gray-80};
@@ -166,9 +174,13 @@ export default class TheMenu extends Mixins(MenuMixin) {
     padding-bottom: $spacing-05;
     display: flex;
     justify-content: flex-end;
+    align-items: center;
   }
 
   &__navigation-level {
+    padding-top: 0;
+    padding-bottom: 0;
+
     @include mq($until: large) {
       display: none;
     }
@@ -184,21 +196,52 @@ export default class TheMenu extends Mixins(MenuMixin) {
     }
   }
 
-  &__link {
+  &__entry {
     @include type-style('body-long-02');
+    flex: 0 0 auto;
     display: inline-flex;
     flex-direction: column;
     justify-content: center;
     color: var(--link-color);
+    text-decoration: none;
     margin-right: $spacing-09;
 
     &:last-child {
       margin-right: 0;
     }
 
-    &_active,
-    &_active:hover {
-      color: $purple-70;
+    // targeting specific links for consistent spacing
+    &:nth-child(3) {
+      margin-right: $spacing-07;
+    }
+
+    &:hover {
+      color: var(--link-color);
+      text-decoration: underline;
+    }
+
+    &:visited  {
+      color: var(--link-color);
+    }
+
+    &_second-level {
+      color: var(--link-color);
+      @include type-style('body-long-02');
+      display: block;
+      padding: $spacing-03 $spacing-05;
+      margin-right: 0;
+    }
+
+    // Like in TheTableOfContents component for combining modifiers.
+    // TODO: make a function of this kind of constructions, something like
+    // mod-combinator(&_active) {
+    //  ...
+    // }
+    &_active#{&} {
+      &_second-level,
+      &_second-level:hover {
+        color: $purple-70;
+      }
     }
   }
 
@@ -215,6 +258,86 @@ export default class TheMenu extends Mixins(MenuMixin) {
     display: inline-flex;
     flex-direction: column;
     justify-content: center;
+  }
+}
+</style>
+
+<style lang="scss">
+@import '~carbon-components/scss/globals/scss/typography';
+// Override component styling to match qiskit design
+.menu {
+  .bx--form-item {
+    margin-right: $spacing-07;
+  }
+
+  .bx--dropdown {
+    background: $white;
+    height: initial;
+    max-height: initial;
+    border-bottom: 1px solid transparent;
+  }
+
+  .bx--dropdown--open {
+    border-bottom: 1px solid $cool-gray-30;
+  }
+
+  .bx--dropdown--open,
+  .bx--dropdown--open .bx--list-box__menu {
+    background: $cool-gray-10;
+  }
+
+  .bx--list-box__menu {
+    background-color: $white;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  // Dropdown button
+  .bx--list-box__field {
+    display: flex;
+    height: calc(3.25rem);
+
+    &:focus {
+      outline: none;
+    }
+
+    &:hover .bx--list-box__label {
+      text-decoration: underline;
+    }
+  }
+
+  .bx--dropdown-item {
+    position: relative;
+
+    // using pseudo element to achieve partial underline
+    &:first-child:after {
+      content: '';
+      border-bottom: 1px solid $cool-gray-30;
+      position: absolute;
+      width: 80%;
+      left: 10%;
+      bottom: 0;
+    }
+
+    &:hover {
+      background-color: $cool-gray-20;
+    }
+  }
+
+  .bx--list-box__label {
+    @include type-style('body-long-02');
+    color: var(--link-color);
+  }
+
+  .bx--list-box__menu {
+    top: calc(3.25rem + 1px);
+    box-shadow: initial;
+  }
+
+  .bx--list-box__menu-icon > svg {
+    fill: var(--link-color);
   }
 }
 </style>
