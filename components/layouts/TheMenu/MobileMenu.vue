@@ -106,7 +106,6 @@ export default class MobileMenu extends Mixins(MenuMixin) {
     &_active:not(&_is-parent),
     &_active .bx--list-box__label {
       color: $purple-70;
-      background-color: $cool-gray-10;
     }
 
     &_second-level {
@@ -206,23 +205,9 @@ export default class MobileMenu extends Mixins(MenuMixin) {
       & .bx--list-box__label,
       & .bx--dropdown {
         color: $purple-70;
-        background-color: $cool-gray-10;
         min-height: 4rem;
         max-height: none;
         height: auto;
-      }
-
-      & .bx--list-box__menu {
-        position: relative;
-        max-height: unset;
-        background-color: $cool-gray-10;
-        box-shadow: initial;
-        z-index: initial;
-      }
-
-      // if Community page is active, open dropdown
-      & .bx--list-box .bx--list-box__field[aria-expanded='false'] + .bx--list-box__menu {
-        max-height: unset;
       }
     }
   }
