@@ -4,7 +4,7 @@
       <div class="menu__mobile-inner-container">
         <BasicLink
           class="
-            menu__link
+            menu__entry
             menu__home-link
           "
           kind="secondary"
@@ -40,7 +40,7 @@
       <nav class="menu__navigation-level">
         <BasicLink
           class="
-            menu__link
+            menu__entry
             menu__home-link
           "
           kind="secondary"
@@ -51,33 +51,41 @@
             :class="{ 'menu__logo_active': isActiveHome(homeLink) }"
           />
         </BasicLink>
-        <ul class="menu__navigation-level__list">
-          <li v-for="link in mainLevelLinks" :key="link.url" class="menu__navigation-level__list-item">
-            <BasicLink
-              v-if="!link.sublinks"
-              class="menu__link"
-              :class="{ 'menu__link_active': isActive(link) }"
-              v-bind="link"
+        <template v-for="link in mainLevelLinks">
+          <BasicLink
+            v-if="!link.sublinks"
+            :key="link.url"
+            class="menu__entry"
+            :class="{ 'menu__entry_active': isActive(link) }"
+            v-bind="link"
+          >
+            {{ link.label }}
+          </BasicLink>
+          <cv-dropdown
+            v-else
+            :key="link.url"
+            class="menu__entry"
+            :class="{ 'menu__entry_active': isCommunityActive() }"
+            placeholder="Community"
+          >
+            <li
+              v-for="sublink in link.sublinks"
+              :key="sublink.url"
+              class="bx--dropdown-item"
             >
-              {{ link.label }}
-            </BasicLink>
-            <cv-dropdown v-else :class="{ 'menu__link_active': isCommunityActive() }" placeholder="Community">
-              <li
-                v-for="sublink in link.sublinks"
-                :key="sublink.url"
-                class="bx--dropdown-item"
+              <BasicLink
+                class="
+                  menu__entry
+                  menu__entry_second-level
+                "
+                :class="{ 'menu__entry_active': isActive(sublink) }"
+                v-bind="sublink"
               >
-                <BasicLink
-                  class="menu__link menu__link_secondary"
-                  :class="{ 'menu__link_active': isActive(sublink) }"
-                  v-bind="sublink"
-                >
-                  {{ sublink.label }}
-                </BasicLink>
-              </li>
-            </cv-dropdown>
-          </li>
-        </ul>
+                {{ sublink.label }}
+              </BasicLink>
+            </li>
+          </cv-dropdown>
+        </template>
       </nav>
     </section>
   </div>
@@ -176,20 +184,6 @@ export default class TheMenu extends Mixins(MenuMixin) {
     @include mq($until: large) {
       display: none;
     }
-
-    &__list {
-      display: flex;
-      align-items: center;
-
-      // targeting specific links for consistent spacing
-      &-item:last-child .menu__link {
-        margin-right: 0;
-      }
-
-      &-item:nth-child(2) .menu__link {
-        margin-right: $spacing-07;
-      }
-    }
   }
 
   &__logo {
@@ -202,30 +196,23 @@ export default class TheMenu extends Mixins(MenuMixin) {
     }
   }
 
-  &__link {
+  &__entry {
     @include type-style('body-long-02');
+    flex: 0 0 auto;
     display: inline-flex;
     flex-direction: column;
     justify-content: center;
     color: var(--link-color);
-    margin-right: $spacing-09;
     text-decoration: none;
+    margin-right: $spacing-09;
 
-    &_active {
-      color: $purple-70;
-    }
-
-    &_secondary {
-      color: var(--link-color);
-      @include type-style('body-long-02');
-      display: block;
-      padding: $spacing-03 $spacing-05;
+    &:last-child {
       margin-right: 0;
     }
 
-    &.menu__link_active,
-    &.menu__link_active:hover {
-      color: $purple-70;
+    // targeting specific links for consistent spacing
+    &:nth-child(3) {
+      margin-right: $spacing-07;
     }
 
     &:hover {
@@ -235,6 +222,26 @@ export default class TheMenu extends Mixins(MenuMixin) {
 
     &:visited  {
       color: var(--link-color);
+    }
+
+    &_second-level {
+      color: var(--link-color);
+      @include type-style('body-long-02');
+      display: block;
+      padding: $spacing-03 $spacing-05;
+      margin-right: 0;
+    }
+
+    // Like in TheTableOfContents component for combining modifiers.
+    // TODO: make a function of this kind of constructions, something like
+    // mod-combinator(&_active) {
+    //  ...
+    // }
+    &_active#{&} {
+      &_second-level,
+      &_second-level:hover {
+        color: $purple-70;
+      }
     }
   }
 
@@ -331,12 +338,6 @@ export default class TheMenu extends Mixins(MenuMixin) {
 
   .bx--list-box__menu-icon > svg {
     fill: var(--link-color);
-  }
-
-  &__link {
-    &_active .bx--list-box__label {
-      color: $purple-70;
-    }
   }
 }
 </style>
