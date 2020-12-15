@@ -16,7 +16,7 @@ import { Component, Mixins, Prop, Watch } from 'vue-property-decorator'
 import ScrollSectionsMixin from '~/mixins/scrollBetweenSections'
 
 @Component
-export default class extends Mixins(ScrollSectionsMixin) {
+export default class InfiniteScroll extends Mixins(ScrollSectionsMixin) {
   @Prop(Array) items!: Array<any>
   @Prop(Function) keyGenerator!: Function
   @Prop({ type: Number, default: 5 }) minItems!: number
