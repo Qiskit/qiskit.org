@@ -24,13 +24,13 @@ import { Component, Prop } from 'vue-property-decorator'
 
 @Component
 export default class AdvocateCard extends Vue {
-  @Prop(String) name!: string
-  @Prop(String) image!: string
-  @Prop(String) city!: string
-  @Prop(String) country!: string
-  @Prop(String) region!: string
-  @Prop(String) slackId!: string
-  @Prop(String) slackUsername!: string
+  @Prop({ type: String, default: '' }) name!: string
+  @Prop({ type: String, default: '' }) image!: string
+  @Prop({ type: String, default: '' }) city!: string
+  @Prop({ type: String, default: '' }) country!: string
+  @Prop({ type: String, default: '' }) region!: string
+  @Prop({ type: String, default: '' }) slackId!: string
+  @Prop({ type: String, default: '' }) slackUsername!: string
 
   // Tags on AppCard is an Array
   get formattedRegion () {

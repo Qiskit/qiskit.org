@@ -36,19 +36,21 @@ import { Component, Prop } from 'vue-property-decorator'
 
 @Component
 export default class AppCard extends Vue {
-  @Prop(String) image!: string
-  @Prop(String) title!: string
-  @Prop(Array) tags!: string[]
-  @Prop(String) to!: string
-  @Prop(String) ctaLabel!: string
+  @Prop({ type: String, default: '' }) image!: string
+  @Prop({ type: String, default: '' }) title!: string
+  @Prop({ type: Array, default: [] }) tags!: string[]
+  @Prop({ type: String, default: '' }) to!: string
+  @Prop({ type: String, default: '' }) ctaLabel!: string
 
-  ctaLink = {
-    url: this.to,
-    label: this.ctaLabel
+  get ctaLink () {
+    return {
+      url: this.to,
+      label: this.ctaLabel
+    }
   }
 
   get hasTags () {
-    return this.tags && this.tags.length > 0
+    return Array.isArray(this.tags) && this.tags.length > 0
   }
 }
 </script>

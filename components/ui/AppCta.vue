@@ -28,7 +28,7 @@ import BasicLink from '~/components/ui/BasicLink.vue'
 export default class AppCta extends Vue {
   @Prop({ type: String, default: 'primary' }) kind!: 'primary'|'secondary'|'ghost'
   @Prop({ type: String, default: 'light' }) theme!: 'light'|'dark'
-  @Prop({ type: String }) label!: string
+  @Prop({ type: String, default: '' }) label!: string
 
   get iconPerLinkType (): string {
     const url = this.$attrs.url

@@ -20,9 +20,9 @@ import { Component, Prop } from 'vue-property-decorator'
 
 @Component
 export default class CompactFeature extends Vue {
-  @Prop(String) icon!: string
-  @Prop(String) title!: string
-  @Prop(String) description!: string
+  @Prop({ type: String, default: '' }) icon!: string
+  @Prop({ type: String, default: '' }) title!: string
+  @Prop({ type: String, default: '' }) description!: string
 }
 </script>
 

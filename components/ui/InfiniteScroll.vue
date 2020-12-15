@@ -17,8 +17,8 @@ import ScrollSectionsMixin from '~/mixins/scrollBetweenSections'
 
 @Component
 export default class InfiniteScroll extends Mixins(ScrollSectionsMixin) {
-  @Prop(Array) items!: Array<any>
-  @Prop(Function) keyGenerator!: Function
+  @Prop({ type: Array, default: [] }) items!: any[]
+  @Prop({ type: Function, default: () => {} }) keyGenerator!: Function
   @Prop({ type: Number, default: 5 }) minItems!: number
 
   lastShown: number = Math.min(this.minItems, this.items.length)
