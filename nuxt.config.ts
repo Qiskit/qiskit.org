@@ -214,7 +214,7 @@ async function generateContent () {
     consola.info('Generating community event previews')
     await fetchEvents(AIRTABLE_API_KEY, './content/events')
 
-    consola.info('Generating advocates previews')
+    consola.info('Generating advocate previews')
     await fetchAdvocates(AIRTABLE_API_KEY, './content/advocates')
   } else {
     consola.warn('Cannot generate events: missing AIRTABLE_API_KEY environment variable')

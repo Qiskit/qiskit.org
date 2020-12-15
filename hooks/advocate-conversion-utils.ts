@@ -27,7 +27,8 @@ async function fetchAdvocates (apiKey: string): Promise<Advocate[]> {
   const base = new Airtable({ apiKey }).base('app8koO4BZifGFhCV')
   await base('Advocates').select({
     fields: Object.values(RECORD_FIELDS),
-    filterByFormula: `AND({${slackId}})`
+    filterByFormula: `AND({${slackId}})`,
+    sort: [{ field: RECORD_FIELDS.name, direction: 'asc' }]
   }).eachPage((records, nextPage) => {
     for (const record of records) {
       const advocate = convertToAdvocate(record)
