@@ -9,9 +9,10 @@
       quantum computing community, reach out to an advocate local to your area.
     </p>
     <p class="copy__paragraph copy__paragraph_importance_support">
-      <strong>Note:</strong> you must have a <AppLink class="copy__link" :url="joinSlackLink">
-        Slack account
-      </AppLink> in the Qiskit workspace order to contact advocates.
+      <AppLink class="copy__link" :url="joinSlackLink">
+        Sign-up into the Qiskit Slack workspace
+      </AppLink>
+      to reach the advocates and join the conversation.
     </p>
     <AppFiltersResultsLayout>
       <template slot="filters-on-m-l-screen">
