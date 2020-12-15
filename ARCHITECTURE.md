@@ -2,6 +2,14 @@
 
 Technical overview of how the code is structured and how it all comes together.
 
+## Table of contents
+
+- [Vue.js components](#vue-js-components)
+- [Vuex store](#vuex-store)
+- [Markdown content](#markdown-content)
+- [Testing](#testing)
+- [Third-party integrations](#third-party-integrations)
+
 ## Vue.js components
 
 We write our components as [single file components](https://vuejs.org/v2/guide/single-file-components.html).
