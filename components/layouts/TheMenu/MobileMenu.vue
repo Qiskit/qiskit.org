@@ -7,32 +7,27 @@
         <AppLink
           v-if="!link.sublinks"
           :key="link.url"
-          class="mobile-menu__link"
+          class="mobile-menu__entry"
           :class="{
-            'mobile-menu__link_active': isActive(link),
-            'mobile-menu__link_is-parent': isParent(link)
+            'mobile-menu__entry_active': isActive(link),
+            'mobile-menu__entry_is-parent': isParent(link)
           }"
           v-bind="appLinkFromNavLink(link)"
           kind="secondary"
         >
-          <p class="mobile-menu__link-label">
+          <p class="mobile-menu__entry-label">
             {{ link.label }}
           </p>
         </AppLink>
-        <cv-dropdown v-else :key="link.url" class="cv-dropdown mobile-menu__navigation__dropdown" :class="{ 'mobile-menu__link_active': isCommunityActive() }" placeholder="Community">
-          <li>
+        <cv-dropdown v-else :key="link.url" class="mobile-menu__entry" :class="{ 'mobile-menu__entry_active': isCommunityActive() }" placeholder="Community">
+          <li v-for="sublink in getSubLinks(link)" :key="`sublink:${sublink.url}`">
             <AppLink
-              v-for="sublink in getSubLinks(link)"
-              :key="`sublink:${sublink.url}`"
-              class="
-              mobile-menu__link
-              mobile-menu__link_second-level
-            "
-              :class="{ 'mobile-menu__link_active': isActive(sublink) }"
+              class=" mobile-menu__entry mobile-menu__entry_second-level"
+              :class="{ 'mobile-menu__entry_active': isActive(sublink) }"
               v-bind="appLinkFromNavLink(sublink)"
               kind="secondary"
             >
-              <p class="mobile-menu__link-label">
+              <p class="mobile-menu__entry-label">
                 {{ sublink.label }}
               </p>
             </AppLink>
@@ -74,8 +69,9 @@ export default class MobileMenu extends Mixins(MenuMixin) {
   flex-direction: column;
   background-color: white;
   overflow-y: auto;
+  justify-content: space-between;
 
-  &__link-label,
+  &__entry-label,
   &__footer-inner-container {
     @include contained();
     width: 100%;
@@ -87,13 +83,12 @@ export default class MobileMenu extends Mixins(MenuMixin) {
   }
 
   &__navigation-links {
-    flex: auto;
     display: flex;
     flex-direction: column;
     margin-bottom: $spacing-07;
   }
 
-  &__link {
+  &__entry {
     @include type-style('expressive-paragraph-01');
     display: flex;
     flex-direction: column;
@@ -134,8 +129,8 @@ export default class MobileMenu extends Mixins(MenuMixin) {
 // component overrides
 .mobile-menu {
   & .bx--form-item {
-    display: block;
-    flex: initial;
+    margin-right: 0;
+    border-bottom: none;
   }
 
   .bx--list-box__label {
@@ -153,7 +148,6 @@ export default class MobileMenu extends Mixins(MenuMixin) {
   .bx--list-box__field {
     padding: 0 $spacing-09 0 $spacing-07;
     height: 4rem;
-    border-bottom: 1px solid $cool-gray-10;
 
     &:hover .bx--list-box__label {
       text-decoration: underline;
@@ -183,8 +177,8 @@ export default class MobileMenu extends Mixins(MenuMixin) {
   }
 
   .bx--list-box--expanded {
-    height: auto;
     min-height: 4rem;
+    height: 100%;
     background-color: $cool-gray-10;
 
     .bx--list-box__menu {
@@ -193,20 +187,22 @@ export default class MobileMenu extends Mixins(MenuMixin) {
       background-color: $cool-gray-10;
       box-shadow: initial;
       z-index: initial;
+      top: 0;
      }
 
-     & .mobile-menu__link:not(:last-child) {
+    & .bx--list-box__menu li:not(:last-child) {
       border-bottom: 1px solid $cool-gray-20;
     }
   }
 
-  &__link {
+  &__entry {
     &_active {
       & .bx--list-box__label,
       & .bx--dropdown {
         color: $purple-70;
-        min-height: 4rem;
-        max-height: none;
+      }
+
+      &.bx--form-item {
         height: auto;
       }
     }
