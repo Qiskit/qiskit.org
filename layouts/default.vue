@@ -2,9 +2,6 @@
   <!-- tabindex is needed to allow hiding the menu in iOS Safari -->
   <div class="default-layout content-root_theme_dark" tabindex="-1">
     <header id="navigation">
-      <TheBlackLivesMatterBanner
-        :style="{ display: isMenuShown ? 'none' : 'block' }"
-      />
       <TheMenu @change-visibility="isMenuShown = $event === 'shown'" />
     </header>
     <nuxt />
