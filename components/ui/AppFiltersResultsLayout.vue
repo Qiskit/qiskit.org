@@ -1,9 +1,19 @@
 <template>
   <div class="app-filters-results-layout">
-    <div class="app-filters-results-layout__filters app-filters-results-layout__filters_on-large-screen">
+    <div
+      class="
+        app-filters-results-layout__filters
+        app-filters-results-layout__filters_on-large-screen
+      "
+    >
       <slot name="filters-on-m-l-screen" />
     </div>
-    <div class="app-filters-results-layout__filters app-filters-results-layout__filters_on-small-screen">
+    <div
+      class="
+        app-filters-results-layout__filters
+        app-filters-results-layout__filters_on-small-screen
+      "
+    >
       <slot name="filters-on-s-screen" />
     </div>
     <div class="app-filters-results-layout__results">
@@ -17,7 +27,7 @@ import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 
 @Component
-export default class extends Vue {}
+export default class AppFiltersResultsLayouts extends Vue {}
 </script>
 
 <style lang="scss">
