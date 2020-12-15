@@ -1,6 +1,6 @@
 <template>
   <ThePageHeader>
-    Connect with the
+    Connect with the<br>
     <TypewriterEffect
       :values="[
         'enthusiasts',
@@ -8,8 +8,9 @@
         'mentors',
         'experts'
       ]"
-    /><br>
-    from within the Qiskit community
+    />
+    from within<br>
+    the Qiskit community
   </ThePageHeader>
 </template>
 
