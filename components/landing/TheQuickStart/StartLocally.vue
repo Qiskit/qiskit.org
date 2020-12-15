@@ -48,7 +48,9 @@
               Building Qiskit requires a C++ compiler and development headers
             </template>
             <template #content>
-              <component :is="getPrerequisitesToInstallQiskit ()" />
+              <lazy-prerequisites-for-linux v-if="selectedOs === OPERATING_SYSTEMS.linux" />
+              <lazy-prerequisites-for-mac v-else-if="selectedOs === OPERATING_SYSTEMS.mac" />
+              <lazy-prerequisites-for-windows v-else-if="selectedOs === OPERATING_SYSTEMS.windows" />
             </template>
           </cv-accordion-item>
         </cv-accordion>
@@ -141,6 +143,10 @@ export default class StartLocally extends Vue {
       [this.OPERATING_SYSTEMS.mac]: this.codeToInstallMasterOnMac,
       [this.OPERATING_SYSTEMS.windows]: this.codeToInstallMasterOnWindows
     }
+  }
+
+  get selectedOs () : string {
+    return this.selectedOptions.os
   }
 
   getPrerequisitesToInstallQiskit () : string | null {
