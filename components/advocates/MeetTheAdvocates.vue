@@ -10,7 +10,7 @@
     </p>
     <p class="copy__paragraph copy__paragraph_importance_support">
       <AppLink class="copy__link" :url="joinSlackLink">
-        Sign-up into the Qiskit Slack workspace
+        Sign-up for the Qiskit Slack workspace
       </AppLink>
       to reach the advocates and join the conversation.
     </p>

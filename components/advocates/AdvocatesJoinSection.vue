@@ -1,8 +1,19 @@
 <template>
   <section class="join-section">
-    <article class="join-section__feature join-section__feature_intro">
-      <p class="join-section__feature_intro-copy">
-        The Qiskit advocate program is a global program that provides support to the individuals who actively contribute to the Qiskit Community.
+    <article
+      class="
+        join-section__feature
+        join-section__intro
+      "
+    >
+      <p
+        class="
+          copy__paragraph
+          join-section__intro-copy
+        "
+      >
+        The Qiskit advocate program is a global program that provides support to
+        the individuals who actively contribute to the Qiskit Community.
       </p>
       <AppCta v-bind="joinAction" />
     </article>
@@ -23,7 +34,7 @@ import CompactFeature from '~/components/ui/CompactFeature.vue'
 type Benefit = Pick<CompactFeature, 'icon'|'title'|'description'>
 
 @Component
-export default class extends Vue {
+export default class JoinSection extends Vue {
   advocateBenefits: Array<Benefit> = [
     {
       icon: 'high-five.svg',
@@ -50,55 +61,55 @@ export default class extends Vue {
 </script>
 
 <style lang="scss" scoped>
-  @import '~carbon-components/scss/globals/scss/typography';
-  .join-section {
-    @include contained();
-    padding: 0 $spacing-05;
-    display: flex;
-    justify-content: space-between;
+@import '~carbon-components/scss/globals/scss/typography';
 
-    @include mq($until: medium) {
-      flex-wrap: initial;
-      flex-direction: column;
-    }
+.join-section {
+  @include contained();
+  padding: 0 $spacing-05;
+  display: flex;
+  justify-content: space-between;
+
+  @include mq($until: medium) {
+    flex-wrap: initial;
+    flex-direction: column;
+  }
+
+  @include mq($until: large) {
+    flex-wrap: wrap;
+    justify-content: initial;
+    padding-left: $spacing-05;
+  }
+
+  &__feature {
+    flex: 1 1 4 * $column-size-large;
+    margin: 0 $spacing-05;
+    padding-bottom: $spacing-09;
 
     @include mq($until: large) {
-      flex-wrap: wrap;
-      justify-content: initial;
-      padding-left: $spacing-05;
+      flex: 1 1 45%;
+      margin: $spacing-05;
     }
 
-    &__feature {
-      flex: 1 1 4 * $column-size-large;
-      margin: 0 $spacing-05;
-      padding-bottom: $spacing-09;
-
-      @include mq($until: large) {
-        flex: 1 1 45%;
-        margin: $spacing-05;
-      }
-
-      @include mq($until: medium) {
-        flex: 1 1 auto;
-        margin-left: initial;
-        margin-bottom: $spacing-05;
-      }
-
-      &_intro {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        padding-bottom: 0;
-
-        &-copy {
-          @include type-style('body-long-01');
-          color: $white-text-01;
-
-          @include mq($until: medium) {
-            margin-bottom: $spacing-07;
-          }
-        }
-      }
+    @include mq($until: medium) {
+      flex: 1 1 auto;
+      margin-left: initial;
+      margin-bottom: $spacing-05;
     }
   }
+
+  &__intro {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 0;
+  }
+
+  &__copy {
+    @include type-style('body-long-01');
+
+    @include mq($until: medium) {
+      margin-bottom: $spacing-07;
+    }
+  }
+}
 </style>
