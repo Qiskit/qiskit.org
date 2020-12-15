@@ -4,8 +4,9 @@ Technical overview of how the code is structured and how it all comes together.
 
 ## Table of contents
 
-- [Vue.js components](#vue-js-components)
+- [Vue.js components](#vuejs-components)
 - [Vuex store](#vuex-store)
+- [CSS](#css)
 - [Markdown content](#markdown-content)
 - [Testing](#testing)
 - [Third-party integrations](#third-party-integrations)
@@ -51,6 +52,10 @@ To avoid unnecessary boilerplate, we commit _mutations_ directly from Vue.js com
 - we need to commit multiple mutations,
 - we can reduce complexity by reusing mutations, or
 - we need to perform asynchronous operations.
+
+## CSS
+
+We write our CSS following BEM.
 
 ## Markdown content
 
