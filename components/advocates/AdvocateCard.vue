@@ -33,9 +33,13 @@ export default class AdvocateCard extends Vue {
   @Prop(String) slackUsername!: string
 
   // Tags on AppCard is an Array
-  formattedRegion = this.region ? [this.region] : []
+  get formattedRegion () {
+    return this.region || []
+  }
 
-  location = [this.city, this.country].filter(e => !!e).join(', ')
+  get location () {
+    return [this.city, this.country].filter(e => !!e).join(', ')
+  }
 }
 </script>
 
