@@ -70,7 +70,7 @@ export default class AppCard extends Vue {
     flex: 0 0 14rem;
     background-color: $cool-gray-80;
     background-repeat: no-repeat;
-    background-size: 100%;
+    background-size: cover;
     background-position: center;
     overflow: hidden;
 
@@ -81,6 +81,7 @@ export default class AppCard extends Vue {
     @include mq($until: medium) {
       height: 13rem;
       width: auto;
+      background-size: contain;
     }
   }
 
