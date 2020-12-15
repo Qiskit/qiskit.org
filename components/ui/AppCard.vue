@@ -47,7 +47,9 @@ export default class AppCard extends Vue {
     label: this.ctaLabel
   }
 
-  hasTags = this.tags && this.tags.length > 0
+  get hasTags () {
+    return this.tags && this.tags.length > 0
+  }
 }
 </script>
 
