@@ -34,7 +34,7 @@ export default class AdvocateCard extends Vue {
 
   // Tags on AppCard is an Array
   get formattedRegion () {
-    return this.region || []
+    return this.region ? [this.region] : []
   }
 
   get location () {
@@ -66,6 +66,17 @@ export default class AdvocateCard extends Vue {
   &__icon {
     margin-right: $spacing-03;
     fill: currentColor;
+  }
+}
+</style>
+
+<style lang="scss">
+.advocate-card {
+
+  @include mq($until: medium) {
+    .app-card__image {
+      background-size: contain;
+    }
   }
 }
 </style>
