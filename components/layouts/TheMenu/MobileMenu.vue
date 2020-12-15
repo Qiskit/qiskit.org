@@ -19,7 +19,14 @@
             {{ link.label }}
           </p>
         </AppLink>
-        <cv-dropdown v-else ref="communityDropdown" :key="link.url" class="mobile-menu__entry" :class="{ 'mobile-menu__entry_active': isCommunityActive() }" placeholder="Community">
+        <cv-dropdown
+          v-else
+          ref="communityDropdown"
+          :key="link.url"
+          class="mobile-menu__entry"
+          :class="{ 'mobile-menu__entry_active': isCommunityActive() }"
+          placeholder="Community"
+        >
           <li v-for="sublink in getSubLinks(link)" :key="`sublink:${sublink.url}`">
             <AppLink
               class=" mobile-menu__entry mobile-menu__entry_second-level"
