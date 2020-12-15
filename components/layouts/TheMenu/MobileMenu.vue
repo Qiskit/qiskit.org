@@ -67,7 +67,7 @@ export default class MobileMenu extends Mixins(MenuMixin) {
 .mobile-menu {
   display: flex;
   flex-direction: column;
-  background-color: white;
+  background-color: $white;
   overflow-y: auto;
   justify-content: space-between;
 
