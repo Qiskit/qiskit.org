@@ -1,5 +1,5 @@
 <template>
-  <div class="menu">
+  <div :key="this.$route.path" class="menu">
     <section class="menu__mobile" tabindex="-1">
       <div class="menu__mobile-inner-container">
         <BasicLink
