@@ -1,17 +1,17 @@
 <template>
-  <section class="compact-feature">
+  <article class="compact-feature">
     <img
-      v-if="icon"
       class="compact-feature__icon"
-      :src="`/images/icons/icon${icon}White@3x.png`"
+      :src="`/images/icons/${icon}`"
+      alt=""
     >
-    <h2 v-if="title" class="compact-feature__title">
+    <h3 class="compact-feature__title">
       {{ title }}
-    </h2>
-    <p v-if="description" class="compact-feature__description">
+    </h3>
+    <p class="compact-feature__description">
       {{ description }}
     </p>
-  </section>
+  </article>
 </template>
 
 <script lang="ts">
@@ -20,32 +20,44 @@ import { Component, Prop } from 'vue-property-decorator'
 
 @Component
 export default class CompactFeature extends Vue {
-  @Prop(String) icon: string | undefined
-  @Prop(String) title: string | undefined
-  @Prop(String) description: string | undefined
+  @Prop({ type: String, default: '' }) icon!: string
+  @Prop({ type: String, default: '' }) title!: string
+  @Prop({ type: String, default: '' }) description!: string
 }
 </script>
 
 <style lang="scss" scoped>
 @import '~carbon-components/scss/globals/scss/typography';
 
+$feature-icon-size: 2.25rem;
+
 .compact-feature {
-  $feature-icon-size: 3.75rem;
+  background-color: $purple-70;
+  padding: $spacing-05;
+
+  @include mq($until: large) {
+    padding-bottom: $spacing-06;
+  }
 
   &__icon {
-    position: relative;
-    width: $feature-icon-size;
     height: $feature-icon-size;
-    margin-bottom: $spacing-05;
+    margin-bottom: $spacing-06;
   }
 
   &__title {
-    @include productive-heading-04_5();
+    @include type-style('productive-heading-02');
+    color: $white;
+    margin-bottom: $spacing-04;
+    height: 2.5rem; // for consistent alignment
+
+    @include mq($until: medium) {
+      height: initial;
+    }
   }
 
   &__description {
-    @include body-long-04();
-    margin-top: $spacing-03;
+    @include type-style('body-long-01');
+    color: $white;
   }
 }
 </style>

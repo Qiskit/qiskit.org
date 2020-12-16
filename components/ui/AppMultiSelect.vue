@@ -1,18 +1,26 @@
 <template>
-  <cv-multi-select
-    class="app-multi-select"
-    :theme="theme"
-    :label="label"
-    :options="options"
-    :value="value"
-    :selection-feedback="feedback"
-    @change="$emit('change-on-multi-select', $event)"
-  />
+  <client-only>
+    <cv-multi-select
+      class="app-multi-select"
+      :theme="theme"
+      :label="label"
+      :options="formatedOptions"
+      :value="value"
+      :selection-feedback="feedback"
+      @change="$emit('change-selection', $event)"
+    />
+  </client-only>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
+
+type multiSelectOption = {
+  label: string,
+  value: string,
+  name: string
+}
 
 @Component
 export default class AppMultiSelect extends Vue {
@@ -20,8 +28,14 @@ export default class AppMultiSelect extends Vue {
   @Prop(String) label!: string
   @Prop(Array) value!: string[]
 
+  formatedOptions = this.formatOptions(this.options)
+
   theme: string = 'light'
   feedback: string = 'fixed'
+
+  formatOptions (optionsList: any): Array<multiSelectOption> {
+    return optionsList.map((item: string) => ({ label: item, value: item, name: item }))
+  }
 }
 </script>
 
@@ -58,10 +72,6 @@ export default class AppMultiSelect extends Vue {
       background-color: $cool-gray-10;
     }
 
-    .bx--checkbox-label::before {
-      border: 1px solid $black-100;
-    }
-
     .bx--list-box__menu-item--highlighted {
       background-color: $cool-gray-20;
     }
@@ -75,17 +85,6 @@ export default class AppMultiSelect extends Vue {
 
     .bx--tag--high-contrast .bx--tag__close-icon:hover {
       background-color: $purple-70;
-    }
-
-    .bx--checkbox:checked + .bx--checkbox-label::before {
-      background-color: $black-100;
-      border-color: $black-100;
-      border-width: 1px;
-    }
-
-    .bx--checkbox:checked + .bx--checkbox-label::after {
-      border-left: 2px solid $white;
-      border-bottom: 2px solid $white;
     }
 
     .bx--list-box__menu-item:hover .bx--list-box__menu-item__option {

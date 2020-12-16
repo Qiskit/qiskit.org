@@ -9,7 +9,7 @@
         <h3 class="app-card__title">
           {{ title }}
         </h3>
-        <div v-if="to" class="app-card__tags">
+        <div v-if="hasTags" class="app-card__tags">
           <cv-tag
             v-for="tag in tags"
             :key="tag"
@@ -36,15 +36,21 @@ import { Component, Prop } from 'vue-property-decorator'
 
 @Component
 export default class AppCard extends Vue {
-  @Prop(String) image!: string
-  @Prop(String) title!: string
-  @Prop(Array) tags!: string[]
-  @Prop(String) to!: string
-  @Prop(String) ctaLabel!: string
+  @Prop({ type: String, default: '' }) image!: string
+  @Prop({ type: String, default: '' }) title!: string
+  @Prop({ type: Array, default: [] }) tags!: string[]
+  @Prop({ type: String, default: '' }) to!: string
+  @Prop({ type: String, default: '' }) ctaLabel!: string
 
-  ctaLink = {
-    url: this.to,
-    label: this.ctaLabel
+  get ctaLink () {
+    return {
+      url: this.to,
+      label: this.ctaLabel
+    }
+  }
+
+  get hasTags () {
+    return Array.isArray(this.tags) && this.tags.length > 0
   }
 }
 </script>
@@ -66,9 +72,9 @@ export default class AppCard extends Vue {
 
   &__image {
     flex: 0 0 14rem;
-    background-color: $cool-gray-80;
+    background-color: $cool-gray-20;
     background-repeat: no-repeat;
-    background-size: 100%;
+    background-size: cover;
     background-position: center;
     overflow: hidden;
 
@@ -87,6 +93,7 @@ export default class AppCard extends Vue {
     flex: 1;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
   }
 
   &__header {
@@ -130,7 +137,6 @@ export default class AppCard extends Vue {
   &__description {
     @include type-style('body-long-01');
     margin-top: $layout-02;
-    margin-bottom: $layout-02;
   }
 }
 </style>

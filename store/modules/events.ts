@@ -43,12 +43,6 @@ type CommunityEvent = {
   to: string
 }
 
-type EventMultiSelectOption = {
-  label: string,
-  value: string,
-  name: string
-}
-
 type EventPayload = {
   events: string,
   eventsSet: CommunityEvent[]
@@ -87,8 +81,7 @@ export {
   COMMUNITY_EVENT_TYPES,
   WORLD_REGIONS,
   WORLD_REGION_OPTIONS,
-  COMMUNITY_EVENT_TYPE_OPTIONS,
-  EventMultiSelectOption
+  COMMUNITY_EVENT_TYPE_OPTIONS
 }
 
 type State = {
