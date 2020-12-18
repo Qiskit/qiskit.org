@@ -54,7 +54,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Mixins } from 'vue-property-decorator'
+import { Component, Mixins, Prop, Watch } from 'vue-property-decorator'
 import MenuMixin from '~/mixins/menu'
 
 import {
@@ -63,14 +63,23 @@ import {
 
 @Component
 export default class MobileMenu extends Mixins(MenuMixin) {
+  @Prop({ type: Boolean, default: false })
+  isMobileMenuVisible: boolean=false
+
   stayConnectedElements = STAY_CONNECTED_LINKS
   theme = 'light'
 
-  mounted () {
+  @Watch('isMobileMenuVisible')
+  showDropdown () {
+  /**
+   * When mobile-menu is visible
+   * set dropdown open state, based on
+   * if Community pages are active
+   */
+    const showDropdown: boolean = this.isCommunityActive()
     const communityMenu: any = this.$refs.communityDropdown
-    if (this.isCommunityActive()) {
-      communityMenu[0].open = true
-    }
+
+    communityMenu[0].open = showDropdown
   }
 }
 </script>

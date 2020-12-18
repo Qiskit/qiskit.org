@@ -1,5 +1,5 @@
 <template>
-  <div :key="this.$route.path" class="menu">
+  <div class="menu">
     <section class="menu__mobile" tabindex="-1">
       <div class="menu__mobile-inner-container">
         <BasicLink
@@ -34,6 +34,7 @@
       <MobileMenu
         class="menu__mobile-menu"
         :class="{ 'menu__mobile-menu_visible': isMobileMenuVisible }"
+        :is-mobile-menu-visible="isMobileMenuVisible"
       />
     </section>
     <section class="menu__main-level">
@@ -98,6 +99,7 @@ import MenuMixin from '~/mixins/menu'
 @Component
 export default class TheMenu extends Mixins(MenuMixin) {
   isMobileMenuVisible: boolean = false
+  isCommunityDropdownVisible = false
 
   @Watch('isMobileMenuVisible')
   toggleScroll () {
