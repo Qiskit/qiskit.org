@@ -214,7 +214,7 @@ export default class StartLocally extends Vue {
     @include type-style('body-long-01');
     background-color: $cool-gray-10;
     max-width: 100%;
-    color: $gray-60;
+    color: $cool-gray-80;
     padding-left: $spacing-07;
     margin-bottom: $spacing-07;
 
