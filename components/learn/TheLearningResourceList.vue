@@ -171,6 +171,7 @@ export default class TheLearningResourceList extends Vue {
   }
 
   &__results {
+    display: inline-block;
     flex: auto;
 
     @include mq($until: medium) {
