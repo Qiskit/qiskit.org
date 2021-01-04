@@ -55,7 +55,14 @@ To avoid unnecessary boilerplate, we commit _mutations_ directly from Vue.js com
 
 ## CSS
 
-We write our CSS following BEM.
+We write our CSS in SCSS and employ [BEM's naming convention](https://getbem.com/).
+
+Global and reusable styles are stored in `assets/scss`.
+
+- `assets/scss/blocks/copy.scss` defines the typography styles
+- `assets/scss/layout.scss` contains core layout definitions
+- `assets/scss/mixins.scss` contains the mixins
+- `assets/scss/mq.scss` defines the layout breakpoints
 
 ## Markdown content
 
