@@ -6,6 +6,7 @@ Technical overview of how the code is structured and how it all comes together.
 
 - [Vue.js components](#vuejs-components)
 - [Vuex store](#vuex-store)
+- [Design system](#design-system)
 - [CSS](#css)
 - [Markdown content](#markdown-content)
 - [Testing](#testing)
@@ -52,6 +53,10 @@ To avoid unnecessary boilerplate, we commit _mutations_ directly from Vue.js com
 - we need to commit multiple mutations,
 - we can reduce complexity by reusing mutations, or
 - we need to perform asynchronous operations.
+
+## Design system
+
+Our design is based on the [Carbon Design System](https://www.carbondesignsystem.com/), which is integrated in `/plugins/carbon.ts`.
 
 ## CSS
 
