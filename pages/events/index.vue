@@ -81,7 +81,7 @@
 </template>
 
 <script lang="ts">
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 
@@ -105,12 +105,6 @@ import { EVENT_REQUEST_LINK } from '~/constants/appLinks'
       'typeFilters',
       'regionFilters'
     ])
-  },
-
-  methods: {
-    ...mapActions({
-      fetchEvents: 'fetchEvents'
-    })
   },
 
   async fetch ({ store }) {
