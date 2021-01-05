@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex, { Store } from 'vuex'
 import storeOptions from './_store-options'
 
-Vue.use(Vuex);
+Vue.use(Vuex)
 
 let store: Store<any>
 

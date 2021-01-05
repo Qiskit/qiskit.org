@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import storeOptions from './_store-options'
 
-Vue.use(Vuex);
+Vue.use(Vuex)
 
 describe('module events', () => {
   let store: any
@@ -37,7 +37,7 @@ describe('module events', () => {
   const pastEvents = [hackathonInAmericas, unconferenceOnline]
 
   beforeEach(() => {
-    store = new Vuex.Store(storeOptions());
+    store = new Vuex.Store(storeOptions())
     store.commit('setEvents', {
       events: 'upcomingCommunityEvents',
       eventsSet: futureEvents
