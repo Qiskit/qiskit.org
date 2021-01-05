@@ -10,7 +10,7 @@ import {
   getImage
 } from '~/hooks/event-conversion-utils'
 
-import { COMMUNITY_EVENT_TYPES, WORLD_REGIONS } from '~/store/modules/events'
+import { COMMUNITY_EVENT_TYPES, WORLD_REGIONS } from '~/store/events'
 
 type RecordFields = {
   name: string,

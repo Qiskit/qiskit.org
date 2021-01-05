@@ -61,7 +61,7 @@ import AppFieldset from '~/components/ui/AppFieldset.vue'
 import AppFiltersResultsLayout from '~/components/ui/AppFiltersResultsLayout.vue'
 import InfiniteScroll from '~/components/ui/InfiniteScroll.vue'
 import AppLink from '~/components/ui/AppLink.vue'
-import { Advocate, ADVOCATES_WORLD_REGION_OPTIONS, State } from '~/store/modules/advocates.ts'
+import { Advocate, ADVOCATES_WORLD_REGION_OPTIONS, State } from '~/store/advocates.ts'
 
 @Component({
   components: {

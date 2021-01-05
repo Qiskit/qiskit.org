@@ -8,7 +8,7 @@ import {
   COMMUNITY_EVENT_TYPES,
   COMMUNITY_EVENT_TYPE_OPTIONS,
   WORLD_REGIONS
-} from '../store/modules/events'
+} from '../store/events'
 
 import {
   getImageUrl,
