@@ -32,13 +32,6 @@
         "
       >
         <div
-          lazy-background="/images/landing-page/feature-hardware.jpg"
-          class="
-            feature-mosaic__feature-decoration
-            feature-mosaic__feature-decoration-hardware
-          "
-        />
-        <div
           class="
             feature-mosaic__feature-copy
             feature-mosaic__hardware-copy
@@ -52,6 +45,13 @@
             superconducting qubits to trapped-ions.
           </dd>
         </div>
+        <div
+          lazy-background="/images/landing-page/feature-hardware.jpg"
+          class="
+            feature-mosaic__feature-decoration
+            feature-mosaic__feature-decoration-hardware
+          "
+        />
       </div>
       <div
         class="
@@ -179,6 +179,7 @@ export default class TheFeatureMosaic extends Vue {}
 
   &__feature-hardware {
     grid-area: b;
+    flex-direction: column-reverse;
   }
 
   &__feature-decoration-hardware {
