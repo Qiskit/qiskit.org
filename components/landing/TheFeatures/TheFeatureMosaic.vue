@@ -240,10 +240,6 @@ export default class TheFeatureMosaic extends Vue {}
     @include mq($until: medium) {
       flex-direction: column;
     }
-
-    &-description {
-      margin-bottom: 0;
-    }
   }
 
   &__feature-decoration-mitigation {
@@ -251,13 +247,8 @@ export default class TheFeatureMosaic extends Vue {}
     background-size: 12rem auto;
     background-repeat: no-repeat;
 
-    @include mq($from: medium, $until: large) {
+    @include mq($until: large) {
       background-size: 10rem auto;
-    }
-
-    @include mq($until: medium) {
-      background-size: auto 100%;
-      background-position: right bottom;
     }
   }
 }
