@@ -1,7 +1,12 @@
 <template>
-  <div>
-    <!-- TODO: Add Seminar Series content -->
-  </div>
+  <main class="event-page">
+    <section class="event-page__container">
+      <h2 class="copy__title">
+        What is the Quantum Information Science Seminar Series?
+      </h2>
+      <!-- TODO: Add mosaic when #628 is done -->
+    </section>
+  </main>
 </template>
 
 <script lang="ts">
