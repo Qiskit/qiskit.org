@@ -31,12 +31,7 @@
           feature-mosaic__feature-hardware
         "
       >
-        <div
-          class="
-            feature-mosaic__feature-copy
-            feature-mosaic__hardware-copy
-          "
-        >
+        <div class="feature-mosaic__feature-copy">
           <dt class="copy__subtitle">
             Hardware Access
           </dt>
@@ -59,12 +54,7 @@
           feature-mosaic__feature-algorithms
         "
       >
-        <div
-          class="
-            feature-mosaic__feature-copy
-            feature-mosaic__algorithms-copy
-          "
-        >
+        <div class="feature-mosaic__feature-copy">
           <dt class="copy__subtitle">
             Quantum Algorithms
           </dt>
