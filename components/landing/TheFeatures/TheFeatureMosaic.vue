@@ -76,7 +76,7 @@
         />
       </div>
       <div
-        lazy-background="/images/landing-page/feature-mitigation.png"
+        lazy-background="/images/landing-page/feature-noise-mitigation.png"
         class="
           feature-mosaic__feature
           feature-mosaic__feature-mitigation
@@ -156,14 +156,14 @@ export default class TheFeatureMosaic extends Vue {}
   &__feature-description {
     @include type-style('body-long-01', true);
     color: $cool-gray-60;
-    max-width: 6 * $column-size-large;
+    max-width: 5 * $column-size-large;
 
     @include mq($from: medium, $until: large) {
       max-width: 4 * $column-size-medium;
     }
 
     @include mq($until: medium) {
-      max-width: 4 * $column-size-small;
+      max-width: 100%;
     }
   }
 
@@ -244,22 +244,19 @@ export default class TheFeatureMosaic extends Vue {}
   }
 
   &__feature-mitigation {
-    background-position: right 0 top calc(50% + 2rem);
-    background-size: 25rem auto;
+    background-position: right;
+    background-size: 13rem auto;
     background-repeat: no-repeat;
-    padding-bottom: 5rem;
+    padding-bottom: $spacing-09;
     grid-area: d;
 
     @include mq($from: medium, $until: large) {
-      background-size: 18rem auto;
-      padding-bottom: unset;
-      background-position: right center;
+      background-size: 11rem auto;
     }
 
     @include mq($until: medium) {
       background-size: auto 60%;
-      padding-bottom: 6rem;
-      background-position: right bottom -30%;
+      background-position: right bottom;
     }
   }
 }
