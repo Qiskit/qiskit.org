@@ -76,7 +76,7 @@
         />
       </div>
       <div
-        lazy-background="/images/landing-page/feature-mitigation.png"
+        lazy-background="/images/landing-page/feature-noise-mitigation.png"
         class="
           feature-mosaic__feature
           feature-mosaic__feature-mitigation
