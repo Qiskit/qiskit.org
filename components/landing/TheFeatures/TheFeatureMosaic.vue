@@ -2,7 +2,6 @@
   <section class="feature-mosaic">
     <dl class="feature-mosaic__layout">
       <div
-        lazy-background="/images/library/circuit-01.png"
         class="
           feature-mosaic__feature
           feature-mosaic__feature-circuits
@@ -18,6 +17,13 @@
             to explore quantum computational advantage.
           </dd>
         </div>
+        <div
+          lazy-background="/images/library/circuit-01.png"
+          class="
+            feature-mosaic__feature-decoration
+            feature-mosaic__feature-decoration-circuits
+          "
+        />
       </div>
       <div
         class="
@@ -158,10 +164,13 @@ export default class TheFeatureMosaic extends Vue {}
   }
 
   &__feature-circuits {
+    grid-area: a;
+  }
+
+  &__feature-decoration-circuits {
     background-position: right bottom;
     background-size: contain;
     background-repeat: no-repeat;
-    grid-area: a;
 
     @include mq($until: large) {
       background-size: 17rem auto;
