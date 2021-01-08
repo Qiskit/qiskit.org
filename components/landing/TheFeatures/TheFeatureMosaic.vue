@@ -82,7 +82,6 @@
         />
       </div>
       <div
-        lazy-background="/images/landing-page/feature-noise-mitigation.png"
         class="
           feature-mosaic__feature
           feature-mosaic__feature-mitigation
@@ -97,6 +96,13 @@
             noise characterization and circuit optimization.
           </dd>
         </div>
+        <div
+          lazy-background="/images/landing-page/feature-noise-mitigation.png"
+          class="
+            feature-mosaic__feature-decoration
+            feature-mosaic__feature-decoration-mitigation
+          "
+        />
       </div>
     </dl>
   </section>
@@ -228,18 +234,29 @@ export default class TheFeatureMosaic extends Vue {}
   }
 
   &__feature-mitigation {
-    background-position: right;
-    background-size: 13rem auto;
-    background-repeat: no-repeat;
-    padding-bottom: $spacing-09;
+    flex-direction: row;
     grid-area: d;
 
+    @include mq($until: medium) {
+      flex-direction: column;
+    }
+
+    &-description {
+      margin-bottom: 0;
+    }
+  }
+
+  &__feature-decoration-mitigation {
+    background-position: right bottom;
+    background-size: 12rem auto;
+    background-repeat: no-repeat;
+
     @include mq($from: medium, $until: large) {
-      background-size: 11rem auto;
+      background-size: 10rem auto;
     }
 
     @include mq($until: medium) {
-      background-size: auto 60%;
+      background-size: auto 100%;
       background-position: right bottom;
     }
   }
