@@ -4,7 +4,7 @@
       <div
         class="
           feature-mosaic__feature
-          feature-mosaic__feature-circuits
+          feature-mosaic__feature_first
         "
       >
         <div class="feature-mosaic__feature-copy">
@@ -21,14 +21,14 @@
           lazy-background="/images/library/circuit-01.png"
           class="
             feature-mosaic__feature-decoration
-            feature-mosaic__feature-decoration-circuits
+            feature-mosaic__feature-decoration_first
           "
         />
       </div>
       <div
         class="
           feature-mosaic__feature
-          feature-mosaic__feature-hardware
+          feature-mosaic__feature_second
         "
       >
         <div class="feature-mosaic__feature-copy">
@@ -44,14 +44,14 @@
           lazy-background="/images/landing-page/feature-hardware.jpg"
           class="
             feature-mosaic__feature-decoration
-            feature-mosaic__feature-decoration-hardware
+            feature-mosaic__feature-decoration_second
           "
         />
       </div>
       <div
         class="
           feature-mosaic__feature
-          feature-mosaic__feature-algorithms
+          feature-mosaic__feature_third
         "
       >
         <div class="feature-mosaic__feature-copy">
@@ -67,14 +67,14 @@
           lazy-background="/images/landing-page/feature-quantum-algorithms.png"
           class="
             feature-mosaic__feature-decoration
-            feature-mosaic__feature-decoration-algorithms
+            feature-mosaic__feature-decoration_third
           "
         />
       </div>
       <div
         class="
           feature-mosaic__feature
-          feature-mosaic__feature-mitigation
+          feature-mosaic__feature_fourth
         "
       >
         <div class="feature-mosaic__feature-copy">
@@ -90,7 +90,7 @@
           lazy-background="/images/landing-page/feature-noise-mitigation.png"
           class="
             feature-mosaic__feature-decoration
-            feature-mosaic__feature-decoration-mitigation
+            feature-mosaic__feature-decoration_fourth
           "
         />
       </div>
@@ -159,11 +159,11 @@ export default class TheFeatureMosaic extends Vue {}
     }
   }
 
-  &__feature-circuits {
+  &__feature_first {
     grid-area: a;
   }
 
-  &__feature-decoration-circuits {
+  &__feature-decoration_first {
     background-position: right bottom;
     background-size: contain;
     background-repeat: no-repeat;
@@ -173,12 +173,12 @@ export default class TheFeatureMosaic extends Vue {}
     }
   }
 
-  &__feature-hardware {
+  &__feature_second {
     grid-area: b;
     flex-direction: column-reverse;
   }
 
-  &__feature-decoration-hardware {
+  &__feature-decoration_second {
     background-position: center top;
     background-size: cover;
     background-repeat: no-repeat;
@@ -193,7 +193,7 @@ export default class TheFeatureMosaic extends Vue {}
     }
   }
 
-  &__feature-algorithms {
+  &__feature_third {
     grid-area: c;
 
     @include mq($from: medium, $until: large) {
@@ -208,7 +208,7 @@ export default class TheFeatureMosaic extends Vue {}
     }
   }
 
-  &__feature-decoration-algorithms {
+  &__feature-decoration_third {
     background-position: center bottom;
     background-size: cover;
     background-repeat: no-repeat;
@@ -223,7 +223,7 @@ export default class TheFeatureMosaic extends Vue {}
     }
   }
 
-  &__feature-mitigation {
+  &__feature_fourth {
     flex-direction: row;
     grid-area: d;
 
@@ -232,7 +232,7 @@ export default class TheFeatureMosaic extends Vue {}
     }
   }
 
-  &__feature-decoration-mitigation {
+  &__feature-decoration_fourth {
     background-position: right bottom;
     background-size: 12rem auto;
     background-repeat: no-repeat;
