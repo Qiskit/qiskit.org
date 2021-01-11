@@ -17,7 +17,7 @@
         providing the complete set of tools needed for interacting with
         quantum systems and simulators.
       </p>
-      <TheFeatureMosaic class="the-features__mosaic" />
+      <AppMosaic class="the-features__mosaic" />
       <AppCta
         kind="secondary"
         v-bind="fullOverviewLink"
