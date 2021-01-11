@@ -1,6 +1,6 @@
 <template>
   <main class="event-page seminar-series-page">
-    <ThePageHeader class="seminar-page__header" :cta="cta">
+    <ThePageHeader class="seminar-series-page__header" :cta="cta">
       Quantum Information Science Seminar Series
       <template #description>
         <p>
