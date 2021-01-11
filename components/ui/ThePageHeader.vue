@@ -39,10 +39,10 @@ export default class ThePageHeader extends Vue {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 28rem;
+    min-height: 28rem;
 
     @include mq($until: large) {
-      height: 28rem * 40 / 64;
+      min-height: 28rem * 40 / 64;
     }
   }
 
