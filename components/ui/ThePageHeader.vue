@@ -7,16 +7,20 @@
       <div v-if="this.$slots.description" class="page-header__description">
         <slot name="description" />
       </div>
+      <AppCta v-if="cta" v-bind="cta" class="page-header__cta" />
     </div>
   </header>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
+import { Component, Prop } from 'vue-property-decorator'
+import { GeneralLink } from '~/constants/appLinks.ts'
 
 @Component
-export default class ThePageHeader extends Vue {}
+export default class ThePageHeader extends Vue {
+  @Prop({ type: Object, required: false }) cta: GeneralLink | undefined;
+}
 </script>
 
 <style lang="scss" scoped>
@@ -42,12 +46,16 @@ export default class ThePageHeader extends Vue {}
     }
   }
 
+  &__cta {
+    margin: $layout-06 0 0;
+  }
+
   &__description {
     @include type-style('body-long-01');
     margin: $layout-05 0 0;
     max-width: 6 * $column-size-large;
 
-    p {
+    p:not(:last-child) {
       margin-bottom: $layout-03;
     }
   }

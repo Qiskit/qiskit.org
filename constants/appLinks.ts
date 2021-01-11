@@ -41,6 +41,11 @@ const YOUTUBE_ALL_EPISODES_CTA: GeneralLink = {
   label: 'View all episodes'
 }
 
+const SEMINAR_SERIES_ALL_EPISODES_CTA: GeneralLink = {
+  url: 'https://www.youtube.com/playlist?list=PLOFEBzvs-Vvr0uEoGFo08n4-WrM_8fft2',
+  label: 'Go to playlist'
+}
+
 const DISCOVER_TEXTBOOK_CTA: GeneralLink = {
   url: 'https://qiskit.org/textbook',
   label: 'Discover more'
@@ -64,5 +69,6 @@ export {
   YOUTUBE_ALL_EPISODES_CTA,
   DISCOVER_TEXTBOOK_CTA,
   REQUEST_AN_EVENT_CTA,
+  SEMINAR_SERIES_ALL_EPISODES_CTA,
   IBM_Q_EXPERIENCE
 }
