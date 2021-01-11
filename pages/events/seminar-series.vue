@@ -1,6 +1,15 @@
 <template>
   <main class="seminar-series-page">
-    <ThePageHeader>Quantum Information Science Seminar Series</ThePageHeader>
+    <ThePageHeader>
+      Quantum Information Science Seminar Series
+      <template #description>
+        <p>
+          The Quantum Information Science Seminar Series is a deep dive into
+          various academic and research topics within the quantum community.
+        </p>
+        <p>Join every Friday at 12:00 PM EDT</p>
+      </template>
+    </ThePageHeader>
     <WhatIsThisEventSection class="seminar-series-page__section" />
     <UpcomingSeminarSeriesSection class="seminar-series-page__section" />
     <HelpfulResourcesSection class="seminar-series-page__section" :resources="helpfulResources" />
