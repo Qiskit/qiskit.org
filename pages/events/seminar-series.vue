@@ -1,6 +1,6 @@
 <template>
-  <main class="seminar-series-page">
-    <ThePageHeader :cta="cta">
+  <main class="event-page seminar-series-page">
+    <ThePageHeader class="seminar-page__header" :cta="cta">
       Quantum Information Science Seminar Series
       <template #description>
         <p>
@@ -38,6 +38,11 @@ export default class SeminarSeriesPage extends QiskitPage {
   background-color: $white;
   color: $white-text-01;
   display: flex;
+
+  &__header {
+    padding-bottom: $layout-05;
+    padding-top: $layout-06;
+  }
 
   &__section {
     @include contained();
