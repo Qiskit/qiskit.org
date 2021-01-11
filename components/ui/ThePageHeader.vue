@@ -41,7 +41,7 @@ export default class ThePageHeader extends Vue {
 
   &__aside {
     align-self: start;
-    max-width: 3 * $column-size-large;
+    width: 5 * $column-size-large;
   }
 
   &__container {
@@ -49,6 +49,7 @@ export default class ThePageHeader extends Vue {
     align-items: center;
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     min-height: 28rem;
 
     @include mq($until: large) {

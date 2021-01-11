@@ -12,7 +12,15 @@
       </template>
 
       <template #aside>
-        Aside content.
+        <div>Up next:</div>
+        <div class="seminar-series-page__header__card">
+          <div class="seminar-series-page__header__card__image">
+            Image
+          </div>
+          <div class="seminar-series-page__header__card__content">
+            body
+          </div>
+        </div>
       </template>
     </ThePageHeader>
     <WhatIsThisEventSection class="seminar-series-page__section" />
@@ -47,6 +55,14 @@ export default class SeminarSeriesPage extends QiskitPage {
   &__header {
     padding-bottom: $layout-05;
     padding-top: $layout-06;
+
+    &__card {
+      background-color: $cool-gray-10;
+
+      &__image {
+        min-height: 5 * $column-size-large;
+      }
+    }
   }
 
   &__section {
