@@ -2,26 +2,26 @@
   <section class="app-mosaic">
     <dl class="app-mosaic__layout">
       <div
-        v-for="element in mosaicElements"
-        :key="element.title"
+        v-for="{ position, title, description, image} in mosaicElements"
+        :key="title"
         class="app-mosaic__element"
-        :class="`app-mosaic__element_${element.position}`"
+        :class="`app-mosaic__element_${position}`"
       >
         <div class="app-mosaic__element-copy">
           <dt class="copy__subtitle">
-            {{ element.title }}
+            {{ title }}
           </dt>
           <dd
             class="app-mosaic__element-copy-description"
-            :class="`app-mosaic__element-copy-description_${element.position}`"
+            :class="`app-mosaic__element-copy-description_${position}`"
           >
-            {{ element.description }}
+            {{ description }}
           </dd>
         </div>
         <div
-          :lazy-background="element.image"
+          :lazy-background="image"
           class="app-mosaic__element-image"
-          :class="`app-mosaic__element-image_${element.position}`"
+          :class="`app-mosaic__element-image_${position}`"
         />
       </div>
     </dl>
