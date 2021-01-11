@@ -33,7 +33,7 @@ import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 
 @Component
-export default class TheFeatureMosaic extends Vue {
+export default class AppMosaic extends Vue {
   features = [
     {
       position: 'first',
