@@ -4,6 +4,9 @@
       <h1 class="page-header__title">
         <slot />
       </h1>
+      <div v-if="this.$slots.description" class="page-header__description">
+        <slot name="description" />
+      </div>
     </div>
   </header>
 </template>
@@ -37,6 +40,10 @@ export default class ThePageHeader extends Vue {}
     @include mq($until: large) {
       height: 28rem * 40 / 64;
     }
+  }
+
+  &__description {
+    margin: $layout-05 0 0;
   }
 
   &__title {
