@@ -13,7 +13,7 @@ nav:
     goTo: '#code-of-conduct'
 routeName: events
 ---
-
+[//]: # "TODO: Remove once the new Seminar Series Page is done."
 ## What is the Quantum Information Science Seminar Series?
 The Quantum Information Science Seminar Series is a deep dive into various academic and research topics within the quantum community. This series is hosted by [Zlatko Minev, Ph.D.](https://twitter.com/zlatko_minev). **Subscribe to our YouTube channel and set a reminder to watch [Quantum Information Science Seminar Series](https://www.youtube.com/watch?v=7dfw8k2p1to&feature=youtu.be)**
 
