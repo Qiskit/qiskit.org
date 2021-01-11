@@ -81,7 +81,7 @@
           <dt class="copy__subtitle">
             Noise Mitigation
           </dt>
-          <dd class="copy__paragraph copy__paragraph_importance_outstanding">
+          <dd class="feature-mosaic__feature-copy-description">
             Study and reduce the impact of noise using built-in modules for
             noise characterization and circuit optimization.
           </dd>
@@ -173,7 +173,6 @@ export default class TheFeatureMosaic extends Vue {}
     &_fourth {
       grid-area: d;
       flex-direction: row;
-      padding-bottom: $spacing-09;
 
       @include mq($until: medium) {
         flex-direction: column;
@@ -235,6 +234,22 @@ export default class TheFeatureMosaic extends Vue {}
 
       @include mq($until: large) {
         padding: $spacing-05;
+      }
+
+      &-description {
+        @include type-style('body-long-01');
+        color: $cool-gray-80;
+        padding-bottom: $spacing-09;
+        max-width: 6 * $column-size-large;
+
+        @include mq($from: medium, $until: large) {
+          max-width: 4 * $column-size-medium;
+        }
+
+        @include mq($until: medium) {
+          max-width: 100%;
+          padding-bottom: $spacing-05;
+        }
       }
     }
   }
