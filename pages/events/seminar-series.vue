@@ -1,6 +1,6 @@
 <template>
-  <div class="event-page seminar-page">
-    <ThePageHeader class="seminar-page__header" :cta="cta">
+  <div class="event-page seminar-series-page">
+    <ThePageHeader class="seminar-series-page__header" :cta="cta">
       Quantum Information Science Seminar Series
       <template #description>
         <p>
@@ -33,7 +33,7 @@ export default class SeminarSeriesPage extends QiskitPage {
 </script>
 
 <style lang="scss" scoped>
-.seminar-page {
+.seminar-series-page {
   &__header {
     padding-bottom: $layout-05;
     padding-top: $layout-06;
