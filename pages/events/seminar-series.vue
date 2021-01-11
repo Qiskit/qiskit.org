@@ -2,12 +2,17 @@
   <div class="event-page seminar-series-page">
     <ThePageHeader class="seminar-series-page__header" :cta="cta">
       Quantum Information Science Seminar Series
+
       <template #description>
         <p>
           The Quantum Information Science Seminar Series is a deep dive into
           various academic and research topics within the quantum community.
         </p>
         <p>Join every Friday at 12:00 PM EDT</p>
+      </template>
+
+      <template #aside>
+        Aside content.
       </template>
     </ThePageHeader>
   </div>
