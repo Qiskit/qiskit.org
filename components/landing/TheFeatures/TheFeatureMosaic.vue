@@ -11,7 +11,7 @@
           <dt class="copy__subtitle">
             Access to circuits
           </dt>
-          <dd class="copy__paragraph copy__paragraph_importance_outstanding">
+          <dd class="feature-mosaic__feature-copy-description">
             Access a rich set of well-studied circuits, which can be used as
             benchmarks, building blocks in more complex circuits, or as a tool
             to explore quantum computational advantage.
@@ -35,7 +35,7 @@
           <dt class="copy__subtitle">
             Hardware Access
           </dt>
-          <dd class="copy__paragraph copy__paragraph_importance_outstanding">
+          <dd class="feature-mosaic__feature-copy-description">
             Execute code on multiple quantum hardware architectures, from
             superconducting qubits to trapped-ions.
           </dd>
@@ -58,7 +58,7 @@
           <dt class="copy__subtitle">
             Quantum Algorithms
           </dt>
-          <dd class="copy__paragraph copy__paragraph_importance_outstanding">
+          <dd class="feature-mosaic__feature-copy-description">
             Research and prototype machine learning, optimization and chemistry
             applications by building upon a library of quantum algorithms.
           </dd>
@@ -81,7 +81,12 @@
           <dt class="copy__subtitle">
             Noise Mitigation
           </dt>
-          <dd class="feature-mosaic__feature-copy-description">
+          <dd
+            class="
+              feature-mosaic__feature-copy-description
+              feature-mosaic__feature-copy-description_fourth
+            "
+          >
             Study and reduce the impact of noise using built-in modules for
             noise characterization and circuit optimization.
           </dd>
@@ -239,16 +244,22 @@ export default class TheFeatureMosaic extends Vue {}
       &-description {
         @include type-style('body-long-01');
         color: $cool-gray-80;
-        padding-bottom: $spacing-09;
         max-width: 6 * $column-size-large;
 
         @include mq($from: medium, $until: large) {
-          max-width: 4 * $column-size-medium;
+          max-width: 5 * $column-size-medium;
         }
 
         @include mq($until: medium) {
           max-width: 100%;
-          padding-bottom: $spacing-05;
+        }
+
+        &_fourth {
+          padding-bottom: $spacing-09;
+
+          @include mq($until: medium) {
+            padding-bottom: 0;
+          }
         }
       }
     }
