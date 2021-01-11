@@ -20,8 +20,8 @@
         </div>
         <div
           :lazy-background="element.image"
-          class="app-mosaic__element-decoration"
-          :class="`app-mosaic__element-decoration_${element.position}`"
+          class="app-mosaic__element-image"
+          :class="`app-mosaic__element-image_${element.position}`"
         />
       </div>
     </dl>
@@ -118,7 +118,7 @@ export default class AppMosaic extends Vue {
       }
     }
 
-    &-decoration {
+    &-image {
       flex: 1 0 0;
 
       &_first {
