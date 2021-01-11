@@ -43,7 +43,13 @@ export default class ThePageHeader extends Vue {}
   }
 
   &__description {
+    @include type-style('body-long-01');
     margin: $layout-05 0 0;
+    max-width: 6 * $column-size-large;
+
+    p {
+      margin-bottom: $layout-03;
+    }
   }
 
   &__title {
