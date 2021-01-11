@@ -2,26 +2,26 @@
   <section class="app-mosaic">
     <dl class="app-mosaic__layout">
       <div
-        v-for="feature in features"
-        :key="feature.title"
-        class="app-mosaic__feature"
-        :class="`app-mosaic__feature_${feature.position}`"
+        v-for="element in mosaicElements"
+        :key="element.title"
+        class="app-mosaic__element"
+        :class="`app-mosaic__element_${element.position}`"
       >
-        <div class="app-mosaic__feature-copy">
+        <div class="app-mosaic__element-copy">
           <dt class="copy__subtitle">
-            {{ feature.title }}
+            {{ element.title }}
           </dt>
           <dd
-            class="app-mosaic__feature-copy-description"
-            :class="`app-mosaic__feature-copy-description_${feature.position}`"
+            class="app-mosaic__element-copy-description"
+            :class="`app-mosaic__element-copy-description_${element.position}`"
           >
-            {{ feature.description }}
+            {{ element.description }}
           </dd>
         </div>
         <div
-          :lazy-background="feature.image"
-          class="app-mosaic__feature-decoration"
-          :class="`app-mosaic__feature-decoration_${feature.position}`"
+          :lazy-background="element.image"
+          class="app-mosaic__element-decoration"
+          :class="`app-mosaic__element-decoration_${element.position}`"
         />
       </div>
     </dl>
@@ -34,7 +34,7 @@ import { Component } from 'vue-property-decorator'
 
 @Component
 export default class AppMosaic extends Vue {
-  features = [
+  mosaicElements = [
     {
       position: 'first',
       title: 'Access to circuits',
@@ -94,7 +94,7 @@ export default class AppMosaic extends Vue {
     }
   }
 
-  &__feature {
+  &__element {
     background-color: $cool-gray-10;
     display: flex;
     flex-direction: column;
