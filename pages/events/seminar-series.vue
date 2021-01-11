@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <!-- TODO: Add Seminar Series content -->
+  <div class="event-page">
+    <ThePageHeader>Quantum Information Science Seminar Series</ThePageHeader>
   </div>
 </template>
 
