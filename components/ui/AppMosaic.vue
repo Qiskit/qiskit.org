@@ -1,27 +1,27 @@
 <template>
-  <section class="feature-mosaic">
-    <dl class="feature-mosaic__layout">
+  <section class="app-mosaic">
+    <dl class="app-mosaic__layout">
       <div
         v-for="feature in features"
         :key="feature.title"
-        class="feature-mosaic__feature"
-        :class="`feature-mosaic__feature_${feature.position}`"
+        class="app-mosaic__feature"
+        :class="`app-mosaic__feature_${feature.position}`"
       >
-        <div class="feature-mosaic__feature-copy">
+        <div class="app-mosaic__feature-copy">
           <dt class="copy__subtitle">
             {{ feature.title }}
           </dt>
           <dd
-            class="feature-mosaic__feature-copy-description"
-            :class="`feature-mosaic__feature-copy-description_${feature.position}`"
+            class="app-mosaic__feature-copy-description"
+            :class="`app-mosaic__feature-copy-description_${feature.position}`"
           >
             {{ feature.description }}
           </dd>
         </div>
         <div
           :lazy-background="feature.image"
-          class="feature-mosaic__feature-decoration"
-          :class="`feature-mosaic__feature-decoration_${feature.position}`"
+          class="app-mosaic__feature-decoration"
+          :class="`app-mosaic__feature-decoration_${feature.position}`"
         />
       </div>
     </dl>
@@ -67,7 +67,7 @@ export default class TheFeatureMosaic extends Vue {
 @import '~/assets/scss/blocks/copy.scss';
 @import '~carbon-components/scss/globals/scss/typography';
 
-.feature-mosaic {
+.app-mosaic {
   &__layout {
     display: grid;
     gap: $spacing-07;
