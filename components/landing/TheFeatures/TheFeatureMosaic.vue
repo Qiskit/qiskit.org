@@ -2,101 +2,26 @@
   <section class="feature-mosaic">
     <dl class="feature-mosaic__layout">
       <div
-        class="
-          feature-mosaic__feature
-          feature-mosaic__feature_first
-        "
+        v-for="feature in features"
+        :key="feature.title"
+        class="feature-mosaic__feature"
+        :class="`feature-mosaic__feature_${feature.position}`"
       >
         <div class="feature-mosaic__feature-copy">
           <dt class="copy__subtitle">
-            Access to circuits
-          </dt>
-          <dd class="feature-mosaic__feature-copy-description">
-            Access a rich set of well-studied circuits, which can be used as
-            benchmarks, building blocks in more complex circuits, or as a tool
-            to explore quantum computational advantage.
-          </dd>
-        </div>
-        <div
-          lazy-background="/images/library/circuit-01.png"
-          class="
-            feature-mosaic__feature-decoration
-            feature-mosaic__feature-decoration_first
-          "
-        />
-      </div>
-      <div
-        class="
-          feature-mosaic__feature
-          feature-mosaic__feature_second
-        "
-      >
-        <div class="feature-mosaic__feature-copy">
-          <dt class="copy__subtitle">
-            Hardware Access
-          </dt>
-          <dd class="feature-mosaic__feature-copy-description">
-            Execute code on multiple quantum hardware architectures, from
-            superconducting qubits to trapped-ions.
-          </dd>
-        </div>
-        <div
-          lazy-background="/images/landing-page/feature-hardware.jpg"
-          class="
-            feature-mosaic__feature-decoration
-            feature-mosaic__feature-decoration_second
-          "
-        />
-      </div>
-      <div
-        class="
-          feature-mosaic__feature
-          feature-mosaic__feature_third
-        "
-      >
-        <div class="feature-mosaic__feature-copy">
-          <dt class="copy__subtitle">
-            Quantum Algorithms
-          </dt>
-          <dd class="feature-mosaic__feature-copy-description">
-            Research and prototype machine learning, optimization and chemistry
-            applications by building upon a library of quantum algorithms.
-          </dd>
-        </div>
-        <div
-          lazy-background="/images/landing-page/feature-quantum-algorithms.png"
-          class="
-            feature-mosaic__feature-decoration
-            feature-mosaic__feature-decoration_third
-          "
-        />
-      </div>
-      <div
-        class="
-          feature-mosaic__feature
-          feature-mosaic__feature_fourth
-        "
-      >
-        <div class="feature-mosaic__feature-copy">
-          <dt class="copy__subtitle">
-            Noise Mitigation
+            {{ feature.title }}
           </dt>
           <dd
-            class="
-              feature-mosaic__feature-copy-description
-              feature-mosaic__feature-copy-description_fourth
-            "
+            class="feature-mosaic__feature-copy-description"
+            :class="`feature-mosaic__feature-copy-description_${feature.position}`"
           >
-            Study and reduce the impact of noise using built-in modules for
-            noise characterization and circuit optimization.
+            {{ feature.description }}
           </dd>
         </div>
         <div
-          lazy-background="/images/landing-page/feature-noise-mitigation.png"
-          class="
-            feature-mosaic__feature-decoration
-            feature-mosaic__feature-decoration_fourth
-          "
+          :lazy-background="feature.image"
+          class="feature-mosaic__feature-decoration"
+          :class="`feature-mosaic__feature-decoration_${feature.position}`"
         />
       </div>
     </dl>
@@ -108,7 +33,34 @@ import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 
 @Component
-export default class TheFeatureMosaic extends Vue {}
+export default class TheFeatureMosaic extends Vue {
+  features = [
+    {
+      position: 'first',
+      title: 'Access to circuits',
+      description: 'Access a rich set of well-studied circuits, which can be used as benchmarks, building blocks in more complex circuits, or as a tool to explore quantum computational advantage.',
+      image: '/images/library/circuit-01.png'
+    },
+    {
+      position: 'second',
+      title: 'Hardware Access',
+      description: 'Execute code on multiple quantum hardware architectures, from superconducting qubits to trapped-ions.',
+      image: '/images/landing-page/feature-hardware.jpg'
+    },
+    {
+      position: 'third',
+      title: 'Quantum Algorithms',
+      description: 'Research and prototype machine learning, optimization and chemistry applications by building upon a library of quantum algorithms.',
+      image: '/images/landing-page/feature-quantum-algorithms.png'
+    },
+    {
+      position: 'fourth',
+      title: 'Noise Mitigation',
+      description: 'Study and reduce the impact of noise using built-in modules for noise characterization and circuit optimization.',
+      image: '/images/landing-page/feature-noise-mitigation.png'
+    }
+  ]
+}
 </script>
 
 <style lang="scss" scoped>
@@ -264,9 +216,5 @@ export default class TheFeatureMosaic extends Vue {}
       }
     }
   }
-}
-
-.copy__paragraph_importance_outstanding {
-  margin-bottom: 0;
 }
 </style>
