@@ -1,5 +1,6 @@
 <template>
   <main class="seminar-series-page">
+    <ThePageHeader>Quantum Information Science Seminar Series</ThePageHeader>
     <WhatIsThisEventSection class="seminar-series-page__section" />
     <UpcomingSeminarSeriesSection class="seminar-series-page__section" />
     <HelpfulResourcesSection class="seminar-series-page__section" :resources="helpfulResources" />
