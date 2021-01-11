@@ -13,6 +13,7 @@
       <div v-if="this.$slots.aside" class="page-header__aside">
         <slot name="aside" />
       </div>
+      <AppCta v-if="cta" v-bind="cta" class="page-header__cta" />
     </div>
   </header>
 </template>
@@ -61,6 +62,10 @@ export default class ThePageHeader extends Vue {
       flex-direction: column;
       justify-content: center;
     }
+  }
+
+  &__cta {
+    margin: $layout-06 0 0;
   }
 
   &__cta {
