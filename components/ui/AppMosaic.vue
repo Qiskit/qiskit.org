@@ -30,36 +30,18 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
+import { Component, Prop } from 'vue-property-decorator'
+
+type MosaicElement = {
+  position: string,
+  title: string,
+  description: string,
+  image: string
+}
 
 @Component
 export default class AppMosaic extends Vue {
-  mosaicElements = [
-    {
-      position: 'first',
-      title: 'Access to circuits',
-      description: 'Access a rich set of well-studied circuits, which can be used as benchmarks, building blocks in more complex circuits, or as a tool to explore quantum computational advantage.',
-      image: '/images/library/circuit-01.png'
-    },
-    {
-      position: 'second',
-      title: 'Hardware Access',
-      description: 'Execute code on multiple quantum hardware architectures, from superconducting qubits to trapped-ions.',
-      image: '/images/landing-page/feature-hardware.jpg'
-    },
-    {
-      position: 'third',
-      title: 'Quantum Algorithms',
-      description: 'Research and prototype machine learning, optimization and chemistry applications by building upon a library of quantum algorithms.',
-      image: '/images/landing-page/feature-quantum-algorithms.png'
-    },
-    {
-      position: 'fourth',
-      title: 'Noise Mitigation',
-      description: 'Study and reduce the impact of noise using built-in modules for noise characterization and circuit optimization.',
-      image: '/images/landing-page/feature-noise-mitigation.png'
-    }
-  ]
+  @Prop(Array) mosaicElements!: MosaicElement[]
 }
 </script>
 
