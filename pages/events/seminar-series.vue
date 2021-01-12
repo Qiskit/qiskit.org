@@ -1,6 +1,6 @@
 <template>
-  <main class="event-page">
-    <section class="event-page__container">
+  <main class="seminar-series-page">
+    <section class="seminar-series-page__container">
       <h2 class="copy__title">
         What is the Quantum Information Science Seminar Series?
       </h2>
@@ -57,10 +57,13 @@ export default class SeminarSeriesPage extends QiskitPage {
 </script>
 
 <style lang="scss" scoped>
-.event-page {
+.seminar-series-page {
+  background-color: $white;
+  color: $white-text-01;
   display: flex;
 
   &__container {
+    @include contained();
     margin-bottom: $layout-03;
 
     @include mq($until: large) {
