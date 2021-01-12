@@ -16,3 +16,7 @@ export default class WhatIsThisEvent extends Vue {
   @Prop(String) title!: string
 }
 </script>
+
+<style lang="scss" scoped>
+@import '~/assets/scss/blocks/copy.scss';
+</style>
