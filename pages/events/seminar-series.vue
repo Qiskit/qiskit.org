@@ -1,6 +1,7 @@
 <template>
   <main class="seminar-series-page">
     <WhatIsThisEventSection class="seminar-series-page__section" />
+    <UpcomingSeminarSeriesSection />
   </main>
 </template>
 
