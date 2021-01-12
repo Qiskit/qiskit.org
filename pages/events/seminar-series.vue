@@ -4,7 +4,7 @@
       <h2 class="copy__title">
         What is the Quantum Information Science Seminar Series?
       </h2>
-      <!-- TODO: Add mosaic when #628 is done -->
+      <AppMosaic :mosaic-elements="mosaicElements" />
     </section>
   </main>
 </template>
@@ -22,5 +22,50 @@ import QiskitPage from '~/components/logic/QiskitPage.vue'
 })
 export default class SeminarSeriesPage extends QiskitPage {
   routeName = 'seminar-series';
+
+  mosaicElements = [
+    {
+      position: 'first',
+      title: 'Learn from experts',
+      description:
+        'This series is a deep dive into various academic and research topics within the quantum community.',
+      image: '/images/library/circuit-01.png'
+    },
+    {
+      position: 'second',
+      title: 'About the host',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.',
+      image: '/images/landing-page/feature-hardware.jpg'
+    },
+    {
+      position: 'third',
+      title: 'About the speakers',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.',
+      image: '/images/landing-page/feature-quantum-algorithms.png'
+    },
+    {
+      position: 'fourth',
+      title: 'Interactivity headline',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.',
+      image: '/images/landing-page/feature-noise-mitigation.png'
+    }
+  ];
 }
 </script>
+
+<style lang="scss" scoped>
+.event-page {
+  display: flex;
+
+  &__container {
+    margin-bottom: $layout-03;
+
+    @include mq($until: large) {
+      margin-bottom: $layout-01;
+    }
+  }
+}
+</style>
