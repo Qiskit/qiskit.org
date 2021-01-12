@@ -159,12 +159,8 @@ export default class AppMosaic extends Vue {
 
       &_fourth {
         background-position: right bottom;
-        background-size: 12rem auto;
+        background-size: contain;
         background-repeat: no-repeat;
-
-        @include mq($until: large) {
-          background-size: 10rem auto;
-        }
       }
     }
 
