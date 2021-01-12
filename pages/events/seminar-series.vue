@@ -1,17 +1,17 @@
 <template>
   <main class="seminar-series-page">
-    <section class="seminar-series-page__container">
-      <h2 class="copy__title">
-        What is the Quantum Information Science Seminar Series?
-      </h2>
-      <AppMosaic :mosaic-elements="mosaicElements" />
-    </section>
+    <WhatIsThisEvent
+      class="seminar-series-page__container"
+      :mosaic-elements="mosaicElements"
+      title="What is the Quantum Information Science Seminar Series?"
+    />
   </main>
 </template>
 
 <script lang="ts">
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
+import { MosaicElement } from '~/components/ui/AppMosaic.vue'
 
 @Component({
   head () {
@@ -23,7 +23,7 @@ import QiskitPage from '~/components/logic/QiskitPage.vue'
 export default class SeminarSeriesPage extends QiskitPage {
   routeName = 'seminar-series';
 
-  mosaicElements = [
+  mosaicElements : MosaicElement[] = [
     {
       position: 'first',
       title: 'Learn from experts',

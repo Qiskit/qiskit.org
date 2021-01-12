@@ -32,7 +32,7 @@
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 
-type MosaicElement = {
+export type MosaicElement = {
   position: string,
   title: string,
   description: string,
