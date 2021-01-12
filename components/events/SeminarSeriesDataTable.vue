@@ -3,7 +3,6 @@
     ref="table"
     class="seminar-series-data-table"
     :columns="columns"
-    zebra="zebra"
   >
     <template slot="data">
       <cv-data-table-row v-for="({ speaker, nameOfTalk, institution, dateOfTalk, linkToTalk }, rowIndex) in data" :key="`${rowIndex}`">
@@ -39,8 +38,22 @@ export default class AppFieldset extends Vue {
 </script>
 
 <style lang="scss">
+.bx--data-table th {
+  color: $black-100;
+  background-color: $cool-gray-20;
+}
 
-.seminar-series-data-table {
+.bx--data-table tbody tr td, .bx--data-table tbody tr:hover td {
+  color: $cool-gray-80;
+  border-top: none;
+  border-bottom: none;
+}
 
+.bx--data-table tbody tr:not(.bx--parent-row):nth-child(2n+1) td {
+  background-color: $white;
+}
+
+.bx--data-table tbody tr:not(.bx--parent-row):nth-child(2n) td {
+  background-color: $cool-gray-10;
 }
 </style>
