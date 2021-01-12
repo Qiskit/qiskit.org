@@ -37,6 +37,13 @@ export default class AppFieldset extends Vue {
 }
 </script>
 
+<style lang="scss" scoped>
+.seminar-series-data-table {
+  margin-bottom: $layout-03;
+}
+
+</style>
+
 <style lang="scss">
 .bx--data-table th {
   color: $black-100;
