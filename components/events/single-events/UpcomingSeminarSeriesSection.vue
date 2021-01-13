@@ -37,3 +37,7 @@ export default class UpcomingSeminarSeriesSection extends Vue {
   ]
 }
 </script>
+
+<style lang="scss" scoped>
+@import "~/assets/scss/blocks/copy.scss";
+</style>
