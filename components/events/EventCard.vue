@@ -6,7 +6,7 @@
     :tags="types"
     :to="to"
     cta-label="Join the event"
-    :verticalLayout="verticalLayout"
+    :vertical-layout="verticalLayout"
   >
     <div class="event-card__description">
       <slot v-if="this.$slots.default" />

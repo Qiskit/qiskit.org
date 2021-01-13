@@ -148,6 +148,10 @@ export default class AppCard extends Vue {
   flex-direction: column;
 
   .app-card {
+    &__content {
+      padding: $spacing-05;
+    }
+
     &__description {
       margin-bottom: $spacing-03;
       margin-top: $spacing-03;
