@@ -14,9 +14,10 @@
       <template #aside>
         <div>Up next:</div>
         <div class="seminar-series-page__header__card">
-          <div class="seminar-series-page__header__card__image">
-            Image
-          </div>
+          <div
+            class="seminar-series-page__header__card__image"
+            :lazy-background="nextSpeakerImage"
+          />
           <div class="seminar-series-page__header__card__content">
             body
           </div>
@@ -44,6 +45,8 @@ export default class SeminarSeriesPage extends QiskitPage {
   routeName = 'seminar-series';
 
   cta = SEMINAR_SERIES_ALL_EPISODES_CTA;
+
+  nextSpeakerImage = "/images/events/seminar-series/speakers/abraham-asfaw.jpg";
 }
 </script>
 
@@ -62,6 +65,8 @@ export default class SeminarSeriesPage extends QiskitPage {
       background-color: $cool-gray-10;
 
       &__image {
+        background-position: center;
+        background-size: cover;
         min-height: 5 * $column-size-large;
       }
     }
