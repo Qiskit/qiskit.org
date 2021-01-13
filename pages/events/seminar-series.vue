@@ -12,7 +12,11 @@
       </template>
 
       <template #aside>
-        <div>Up next:</div>
+        <div class="seminar-series-page__up-next__title-wrapper">
+          <div class="seminar-series-page__up-next__title">
+            Up next:
+          </div>
+        </div>
         <EventCard
           date="January 13, 2021"
           image="/images/events/seminar-series/speakers/abraham-asfaw.jpg"
@@ -50,6 +54,8 @@ export default class SeminarSeriesPage extends QiskitPage {
 </script>
 
 <style lang="scss" scoped>
+@import '~carbon-components/scss/globals/scss/typography';
+
 .seminar-series-page {
   background-color: $white;
   color: $white-text-01;
@@ -71,6 +77,20 @@ export default class SeminarSeriesPage extends QiskitPage {
 
     @include mq($until: large) {
       margin-bottom: $layout-01;
+    }
+  }
+
+  &__up-next {
+    &__title {
+      @include type-style('productive-heading-01');
+      border-bottom: 4px solid $purple-60;
+      display: inline;
+      padding-bottom: $spacing-02;
+      padding-right: $spacing-03;
+    }
+
+    &__title-wrapper {
+      margin-bottom: $spacing-06;
     }
   }
 }
