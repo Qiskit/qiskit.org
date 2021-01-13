@@ -38,8 +38,9 @@ export default class SeminarSeriesDataTable extends Vue {
 
 <style lang="scss" scoped>
 .seminar-series-data-table {
-  margin-bottom: $layout-03;
+  overflow-x: scroll;
 }
+
 </style>
 
 <style lang="scss">
