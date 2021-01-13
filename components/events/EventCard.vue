@@ -6,6 +6,7 @@
     :tags="types"
     :to="to"
     cta-label="Join the event"
+    :verticalLayout="verticalLayout"
   >
     <div>
       <p class="event-card__location">
@@ -32,6 +33,7 @@ export default class EventCard extends Vue {
   @Prop(String) location!: string
   @Prop(String) date!: string
   @Prop(String) to!: string
+  @Prop({ type: Boolean, default: false }) verticalLayout!: Boolean
 }
 </script>
 

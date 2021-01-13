@@ -1,5 +1,8 @@
 <template>
-  <article class="app-card">
+  <article
+    class="app-card"
+    :class="{'app-card--vertical': verticalLayout}"
+  >
     <div
       class="app-card__image"
       :lazy-background="image"
@@ -41,6 +44,7 @@ export default class AppCard extends Vue {
   @Prop({ type: Array, default: () => [] }) tags!: string[]
   @Prop({ type: String, default: '' }) to!: string
   @Prop({ type: String, default: '' }) ctaLabel!: string
+  @Prop({ type: Boolean, default: false }) verticalLayout!: Boolean
 
   get ctaLink () {
     return {
@@ -67,6 +71,10 @@ export default class AppCard extends Vue {
 
   @include mq($until: medium) {
     height: auto;
+    flex-direction: column;
+  }
+
+  &--vertical {
     flex-direction: column;
   }
 
