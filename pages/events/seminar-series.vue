@@ -13,15 +13,13 @@
 
       <template #aside>
         <div>Up next:</div>
-        <div class="seminar-series-page__header__card">
-          <div
-            class="seminar-series-page__header__card__image"
-            :lazy-background="nextSpeakerImage"
-          />
-          <div class="seminar-series-page__header__card__content">
-            body
-          </div>
-        </div>
+        <EventCard
+          date="January 13, 2021"
+          image="/images/events/seminar-series/speakers/abraham-asfaw.jpg"
+          location="YouTube"
+          title="Will Oliver"
+          to="https://www.youtube.com/watch?v=miK5y8BYlwQ&list=PLOFEBzvs-Vvr0uEoGFo08n4-WrM_8fft2&index=1"
+        />
       </template>
     </ThePageHeader>
 
@@ -45,8 +43,6 @@ export default class SeminarSeriesPage extends QiskitPage {
   routeName = 'seminar-series';
 
   cta = SEMINAR_SERIES_ALL_EPISODES_CTA;
-
-  nextSpeakerImage = "/images/events/seminar-series/speakers/abraham-asfaw.jpg";
 }
 </script>
 
@@ -63,12 +59,6 @@ export default class SeminarSeriesPage extends QiskitPage {
 
     &__card {
       background-color: $cool-gray-10;
-
-      &__image {
-        background-position: center;
-        background-size: cover;
-        min-height: 5 * $column-size-large;
-      }
     }
   }
 
