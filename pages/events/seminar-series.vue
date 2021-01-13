@@ -1,7 +1,7 @@
 <template>
   <main class="seminar-series-page">
     <WhatIsThisEventSection class="seminar-series-page__section" />
-    <UpcomingSeminarSeriesSection />
+    <UpcomingSeminarSeriesSection class="seminar-series-page__section" />
   </main>
 </template>
 
@@ -27,6 +27,7 @@ export default class SeminarSeriesPage extends QiskitPage {
 
   &__section {
     @include contained();
+    margin-top: $layout-05;
     margin-bottom: $layout-03;
 
     @include mq($until: large) {
