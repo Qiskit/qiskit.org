@@ -19,6 +19,7 @@
           location="YouTube"
           title="Will Oliver"
           to="https://www.youtube.com/watch?v=miK5y8BYlwQ&list=PLOFEBzvs-Vvr0uEoGFo08n4-WrM_8fft2&index=1"
+          verticalLayout
         />
       </template>
     </ThePageHeader>
