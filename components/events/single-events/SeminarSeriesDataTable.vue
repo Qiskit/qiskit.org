@@ -53,6 +53,6 @@ export default class SeminarSeriesDataTable extends Vue {
   color: $cool-gray-80;
   background-color: $white;
   border-top: none;
-  border-bottom: none;
+  border-bottom: 1px solid $cool-gray-20;
 }
 </style>
