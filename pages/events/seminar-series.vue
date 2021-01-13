@@ -23,6 +23,7 @@
         </div>
       </template>
     </ThePageHeader>
+
     <WhatIsThisEventSection class="seminar-series-page__section" />
   </main>
 </template>
@@ -51,6 +52,7 @@ export default class SeminarSeriesPage extends QiskitPage {
   background-color: $white;
   color: $white-text-01;
   display: flex;
+  flex-flow: column;
 
   &__header {
     padding-bottom: $layout-05;
