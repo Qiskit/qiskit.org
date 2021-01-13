@@ -74,10 +74,6 @@ export default class AppCard extends Vue {
     flex-direction: column;
   }
 
-  &--vertical {
-    flex-direction: column;
-  }
-
   &__image {
     flex: 0 0 14rem;
     background-color: $cool-gray-20;
@@ -145,6 +141,16 @@ export default class AppCard extends Vue {
   &__description {
     @include type-style('body-long-01');
     margin-top: $layout-02;
+  }
+}
+
+.app-card--vertical {
+  flex-direction: column;
+
+  .app-card {
+    &__image {
+      min-height: 5 * $column-size-large;
+    }
   }
 }
 </style>
