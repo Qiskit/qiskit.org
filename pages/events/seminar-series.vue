@@ -23,6 +23,7 @@
         </div>
       </template>
     </ThePageHeader>
+
     <WhatIsThisEventSection class="seminar-series-page__section" />
     <UpcomingSeminarSeriesSection class="seminar-series-page__section" />
     <HelpfulResourcesSection class="seminar-series-page__section" :resources="helpfulResources" />
