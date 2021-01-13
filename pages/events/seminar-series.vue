@@ -1,17 +1,12 @@
 <template>
   <main class="seminar-series-page">
-    <WhatIsThisEvent
-      class="seminar-series-page__container"
-      :mosaic-elements="mosaicElements"
-      title="What is the Quantum Information Science Seminar Series?"
-    />
+    <WhatIsThisEventSection class="seminar-series-page__section" />
   </main>
 </template>
 
 <script lang="ts">
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
-import { MosaicElement } from '~/components/ui/AppMosaic.vue'
 
 @Component({
   head () {
@@ -22,37 +17,6 @@ import { MosaicElement } from '~/components/ui/AppMosaic.vue'
 })
 export default class SeminarSeriesPage extends QiskitPage {
   routeName = 'seminar-series';
-
-  mosaicElements : MosaicElement[] = [
-    {
-      position: 'first',
-      title: 'Learn from experts',
-      description:
-        'This series is a deep dive into various academic and research topics within the quantum community.',
-      image: '/images/events/seminar-series/mosaic-experts.png'
-    },
-    {
-      position: 'second',
-      title: 'About the host',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.',
-      image: '/images/events/seminar-series/mosaic-host.jpg'
-    },
-    {
-      position: 'third',
-      title: 'About the speakers',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.',
-      image: '/images/events/seminar-series/mosaic-speakers.jpg'
-    },
-    {
-      position: 'fourth',
-      title: 'Interactivity headline',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.',
-      image: '/images/events/seminar-series/mosaic-interactivity.png'
-    }
-  ];
 }
 </script>
 
@@ -62,7 +26,7 @@ export default class SeminarSeriesPage extends QiskitPage {
   color: $white-text-01;
   display: flex;
 
-  &__container {
+  &__section {
     @include contained();
     margin-bottom: $layout-03;
 
