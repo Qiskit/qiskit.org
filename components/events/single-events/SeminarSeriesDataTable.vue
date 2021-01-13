@@ -1,6 +1,5 @@
 <template>
   <cv-data-table
-    ref="table"
     class="seminar-series-data-table"
     :columns="columns"
   >
@@ -41,7 +40,6 @@ export default class AppFieldset extends Vue {
 .seminar-series-data-table {
   margin-bottom: $layout-03;
 }
-
 </style>
 
 <style lang="scss">
