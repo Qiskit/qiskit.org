@@ -8,6 +8,9 @@
     cta-label="Join the event"
     :verticalLayout="verticalLayout"
   >
+    <div class="event-card__description">
+      <slot v-if="this.$slots.default" />
+    </div>
     <div>
       <p class="event-card__location">
         <Map20 class="event-card__icon" />
@@ -45,6 +48,10 @@ export default class EventCard extends Vue {
 
   @include mq($until: large) {
     margin-bottom: $layout-01;
+  }
+
+  &__description {
+    margin-bottom: $spacing-06;
   }
 
   &__location, &__date {
