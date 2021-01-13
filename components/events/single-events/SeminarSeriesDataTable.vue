@@ -52,15 +52,8 @@ export default class AppFieldset extends Vue {
 
 .bx--data-table tbody tr td, .bx--data-table tbody tr:hover td {
   color: $cool-gray-80;
+  background-color: $white;
   border-top: none;
   border-bottom: none;
-}
-
-.bx--data-table tbody tr:not(.bx--parent-row):nth-child(2n+1) td {
-  background-color: $white;
-}
-
-.bx--data-table tbody tr:not(.bx--parent-row):nth-child(2n) td {
-  background-color: $cool-gray-10;
 }
 </style>
