@@ -1,31 +1,19 @@
 <template>
   <header class="page-header">
     <div class="page-header__container">
-      <div class="page-header__main">
-        <h1 class="page-header__title">
-          <slot />
-        </h1>
-        <div v-if="this.$slots.description" class="page-header__description">
-          <slot name="description" />
-        </div>
-        <AppCta v-if="cta" v-bind="cta" class="page-header__cta" />
-      </div>
-      <div v-if="this.$slots.aside" class="page-header__aside">
-        <slot name="aside" />
-      </div>
+      <h1 class="page-header__title">
+        <slot />
+      </h1>
     </div>
   </header>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
-import { GeneralLink } from '~/constants/appLinks.ts'
+import { Component } from 'vue-property-decorator'
 
 @Component
-export default class ThePageHeader extends Vue {
-  @Prop({ type: Object, required: false }) cta: GeneralLink | undefined;
-}
+export default class ThePageHeader extends Vue {}
 </script>
 
 <style lang="scss" scoped>
@@ -39,18 +27,12 @@ export default class ThePageHeader extends Vue {
     min-height: 28rem * 40 / 64;
   }
 
-  &__aside {
-    align-self: start;
-    width: 5 * $column-size-large;
-  }
-
   &__container {
     @include contained();
-    align-items: center;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    min-height: 28rem;
+    flex-direction: column;
+    justify-content: center;
+    height: 28rem;
 
     @include mq($until: large) {
       min-height: 28rem * 40 / 64;
@@ -81,7 +63,9 @@ export default class ThePageHeader extends Vue {
     }
   }
 
-  &__main {
+  &__title {
+    @include type-style('expressive-heading-05', true);
+    color: $white-text-01;
     max-width: 10 * $column-size-large;
 
     @include mq($from: medium, $until: large) {
@@ -91,11 +75,6 @@ export default class ThePageHeader extends Vue {
     @include mq($until: medium) {
       max-width: 5 * $column-size-medium;
     }
-  }
-
-  &__title {
-    @include type-style('expressive-heading-05', true);
-    color: $white-text-01;
   }
 }
 </style>
