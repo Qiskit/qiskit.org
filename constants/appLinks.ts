@@ -57,6 +57,7 @@ const IBM_Q_EXPERIENCE: GeneralLink = {
 }
 
 export {
+  GeneralLink,
   SegmentData,
   ACCESS_IBM_Q_SYSTEMS,
   EVENT_REQUEST_LINK,
