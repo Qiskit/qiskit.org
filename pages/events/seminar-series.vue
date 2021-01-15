@@ -65,6 +65,10 @@ export default class SeminarSeriesPage extends QiskitPage {
     padding-bottom: $layout-05;
     padding-top: $layout-06;
 
+    @include mq($until: medium) {
+      padding-top: $layout-04;
+    }
+
     &__card {
       background-color: $cool-gray-10;
     }
