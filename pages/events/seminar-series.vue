@@ -1,6 +1,6 @@
 <template>
   <main class="event-page seminar-series-page">
-    <ThePageHeader class="seminar-series-page__header" :cta="cta">
+    <SeminarSeriesHeader class="seminar-series-page__header" :cta="cta">
       Quantum Information Science Seminar Series
 
       <template #description>
@@ -28,7 +28,7 @@
           Quantum Engineering of Superconducting Qubits
         </EventCard>
       </template>
-    </ThePageHeader>
+    </SeminarSeriesHeader>
 
     <WhatIsThisEventSection class="seminar-series-page__section" />
     <UpcomingSeminarSeriesSection class="seminar-series-page__section" />
