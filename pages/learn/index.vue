@@ -46,7 +46,7 @@ import {
   TIME_SCALES,
   LEARN_LEVEL_OPTIONS,
   TIME_SCALE_OPTIONS
-} from '~/store/modules/learning-resources.ts'
+} from '~/store/learning-resources.ts'
 
 @Component({
   head () {
@@ -56,7 +56,7 @@ import {
   },
 
   computed: {
-    ...mapGetters([
+    ...mapGetters('learning-resources', [
       'filteredLearningResources',
       'learnLevel',
       'timeScale'
@@ -67,7 +67,7 @@ import {
     const learningResources = await $content('learning-resources')
       .sortBy('order', 'asc')
       .fetch()
-    store.commit('setLearningResources', learningResources)
+    store.commit('learning-resources/setLearningResources', learningResources)
   }
 })
 
@@ -92,8 +92,8 @@ export default class LearnPage extends QiskitPage {
   _parseFilterFromUrl (route: any) {
     const timeScale = route.query.timeScale || this.timeScales.all
     const learnLevel = route.query.learnLevel || this.learnLevels.all
-    this.$store.commit('setTimeScale', timeScale)
-    this.$store.commit('setLearnLevel', learnLevel)
+    this.$store.commit('learning-resources/setTimeScale', timeScale)
+    this.$store.commit('learning-resources/setLearnLevel', learnLevel)
   }
 
   setTimeScale (scale: TimeScale): void {

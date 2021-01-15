@@ -9,7 +9,7 @@ import {
   getSlackUsername
 } from '~/hooks/advocate-conversion-utils'
 
-import { AdvocatesWorldRegion, ADVOCATES_WORLD_REGIONS } from '~/store/modules/advocates'
+import { AdvocatesWorldRegion, ADVOCATES_WORLD_REGIONS } from '~/store/advocates'
 
 type RecordFields = {
   name: string,

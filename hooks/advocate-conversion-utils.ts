@@ -4,7 +4,7 @@ import Airtable from 'airtable'
 import {
   Advocate,
   AdvocatesWorldRegion
-} from '../store/modules/advocates'
+} from '../store/advocates'
 
 import {
   getImageUrl,

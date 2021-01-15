@@ -81,7 +81,7 @@
 </template>
 
 <script lang="ts">
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 
@@ -89,7 +89,7 @@ import {
   CommunityEvent,
   WORLD_REGION_OPTIONS,
   COMMUNITY_EVENT_TYPE_OPTIONS
-} from '~/store/modules/events.ts'
+} from '~/store/events.ts'
 import { EVENT_REQUEST_LINK } from '~/constants/appLinks'
 
 @Component({
@@ -100,27 +100,21 @@ import { EVENT_REQUEST_LINK } from '~/constants/appLinks'
   },
 
   computed: {
-    ...mapGetters([
+    ...mapGetters('events', [
       'filteredEvents',
       'typeFilters',
       'regionFilters'
     ])
   },
 
-  methods: {
-    ...mapActions({
-      fetchEvents: 'fetchEvents'
-    })
-  },
-
   async fetch ({ store }) {
-    const upcomingEvents = await store.dispatch('fetchUpcomingEvents')
-    const pastEvents = await store.dispatch('fetchPastEvents')
+    const upcomingEvents = await store.dispatch('events/fetchUpcomingEvents')
+    const pastEvents = await store.dispatch('events/fetchPastEvents')
 
     const upcomingEventsPayload = { events: 'upcomingCommunityEvents', eventsSet: upcomingEvents }
     const pastEventsPayload = { events: 'pastCommunityEvents', eventsSet: pastEvents }
-    store.commit('setEvents', upcomingEventsPayload)
-    store.commit('setEvents', pastEventsPayload)
+    store.commit('events/setEvents', upcomingEventsPayload)
+    store.commit('events/setEvents', pastEventsPayload)
   }
 })
 export default class EventsPage extends QiskitPage {
@@ -157,7 +151,7 @@ export default class EventsPage extends QiskitPage {
     const { commit } = this.$store
     const payload = { filter, filterValues }
 
-    commit('updateFilterSet', payload)
+    commit('events/updateFilterSet', payload)
   }
 
   isFilterChecked (filter: string, filterValue: string): Array<CommunityEvent> {
@@ -174,14 +168,14 @@ export default class EventsPage extends QiskitPage {
     const { commit } = this.$store
 
     isSelected
-      ? commit('addFilter', payload)
-      : commit('removeFilter', payload)
+      ? commit('events/addFilter', payload)
+      : commit('events/removeFilter', payload)
   }
 
   selectTab (selectedTab: number) {
     const activeSet = selectedTab === 0 ? 'upcoming' : 'past'
 
-    this.$store.commit('setActiveSet', activeSet)
+    this.$store.commit('events/setActiveSet', activeSet)
   }
 }
 </script>

@@ -1,6 +1,8 @@
+import Vue from 'vue'
 import Vuex, { Store } from 'vuex'
-import cloneDeep from 'lodash/cloneDeep'
-import { storeOptions } from '~/store'
+import storeOptions from './_store-options'
+
+Vue.use(Vuex)
 
 let store: Store<any>
 
@@ -31,8 +33,7 @@ describe('filteredAdvocates', () => {
   const mockNonMatchingRegionFilter = () => 'Moon'
 
   beforeEach(() => {
-    const initialStoreOptions = cloneDeep(storeOptions)
-    store = new Vuex.Store(initialStoreOptions)
+    store = new Vuex.Store(storeOptions())
     store.commit('advocates/setAdvocates', [mockAdvocate1(), mockAdvocate2()])
   })
 
@@ -66,8 +67,7 @@ describe('setAdvocates', () => {
   const mutationType = 'advocates/setAdvocates'
 
   beforeEach(() => {
-    const initialStoreOptions = cloneDeep(storeOptions)
-    store = new Vuex.Store(initialStoreOptions)
+    store = new Vuex.Store(storeOptions())
   })
 
   it('sets the list of advocates with one advocate', () => {
@@ -98,8 +98,7 @@ describe('setRegionFilters', () => {
   const mockRegionFilter2 = 'Europe'
 
   beforeEach(() => {
-    const initialStoreOptions = cloneDeep(storeOptions)
-    store = new Vuex.Store(initialStoreOptions)
+    store = new Vuex.Store(storeOptions())
   })
 
   it('sets the region filters with one filter', () => {
