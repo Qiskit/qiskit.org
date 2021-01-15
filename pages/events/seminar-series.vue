@@ -1,6 +1,7 @@
 <template>
   <main class="seminar-series-page">
     <WhatIsThisEventSection class="seminar-series-page__section" />
+    <HelpfulResourcesSection class="seminar-series-page__section" />
   </main>
 </template>
 
@@ -24,7 +25,6 @@ export default class SeminarSeriesPage extends QiskitPage {
 .seminar-series-page {
   background-color: $white;
   color: $white-text-01;
-  display: flex;
 
   &__section {
     @include contained();
