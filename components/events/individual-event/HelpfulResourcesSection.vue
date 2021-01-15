@@ -6,7 +6,6 @@
         v-for="resource in resources"
         :key="resource.title"
         v-bind="resource"
-        class=""
       />
     </div>
   </section>
