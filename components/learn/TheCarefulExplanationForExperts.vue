@@ -1,12 +1,7 @@
 <template>
   <CarefulExplanation v-bind="$attrs">
     <template #summary>
-      <h2 class="copy__subtitle">
-        A Carefully Worded Summary of Quantum Computing for Experts
-      </h2>
-      <p class="copy__paragraph">
-        The ability to control and manipulate matter on an atomic scale was a dream first shared by Richard Feynman in his speech, “There’s Plenty of Room at the Bottom,” in 1959. By the 80’s, this idea really began to pick up speed, and a new subject called Quantum Computing had begun to emerge.
-      </p>
+      <AppDescriptionCard :title="title" :description="preliminaryDescription" />
     </template>
     <p class="copy__paragraph">
       In the 90’s, Peter Shor presented, for the first time, an algorithm that if run on a quantum processor, could provide a substantial speedup to the fundamental computational limits set by classical physics. The possibilities of a quantum computer, from being able to speed up algorithms, to their ability to more reliably simulate quantum systems themselves, was enough of an incentive for scientists and engineers across multiple disciplines to begin to dedicate their professional lives to this end goal.
@@ -28,5 +23,8 @@ import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 
 @Component
-export default class TheCarefulExplanationForExperts extends Vue { }
+export default class TheCarefulExplanationForExperts extends Vue {
+  title = 'A Carefully Worded Summary of Quantum Computing for Experts'
+  preliminaryDescription = 'The ability to control and manipulate matter on an atomic scale was a dream first shared by Richard Feynman in his speech, “There’s Plenty of Room at the Bottom,” in 1959. By the 80’s, this idea really began to pick up speed, and a new subject called Quantum Computing had begun to emerge.'
+}
 </script>
