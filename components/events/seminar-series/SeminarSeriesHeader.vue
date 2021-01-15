@@ -61,6 +61,10 @@ export default class SeminarSeriesHeader extends Vue {
 
   &__cta {
     margin: $layout-06 0 0;
+
+    @include mq($until: medium) {
+      margin-top: $layout-03;
+    }
   }
 
   &__description {
@@ -70,6 +74,10 @@ export default class SeminarSeriesHeader extends Vue {
 
     p:not(:last-child) {
       margin-bottom: $layout-03;
+    }
+
+    @include mq($until: medium) {
+      margin-top: $layout-03;
     }
   }
 
