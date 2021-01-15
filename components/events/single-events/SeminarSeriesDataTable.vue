@@ -32,7 +32,7 @@ type tableRow = {
 export default class SeminarSeriesDataTable extends Vue {
   @Prop(Array) data!: tableRow[]
 
-  columns = ['Speaker', 'Name of talk', 'Institution', 'Date of talk', 'Link to talk']
+  columns = ['Speaker', 'Seminar title', 'Institution', 'Date of talk', 'Link to talk']
 }
 </script>
 
