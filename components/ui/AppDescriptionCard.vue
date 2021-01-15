@@ -12,7 +12,6 @@
       v-if="cta && cta.url"
       v-bind="cta"
       kind="ghost"
-      class="app-description-card__link"
     />
   </article>
 </template>
