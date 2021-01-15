@@ -4,12 +4,17 @@
     :columns="columns"
   >
     <template slot="data">
-      <cv-data-table-row v-for="({ speaker, nameOfTalk, institution, dateOfTalk, linkToTalk }, rowIndex) in data" :key="`${rowIndex}`">
-        <cv-data-table-cell>{{ speaker }}</cv-data-table-cell>
-        <cv-data-table-cell>{{ nameOfTalk }}</cv-data-table-cell>
-        <cv-data-table-cell>{{ institution }}</cv-data-table-cell>
-        <cv-data-table-cell>{{ dateOfTalk }}</cv-data-table-cell>
-        <cv-data-table-cell><AppCta kind="ghost" v-bind="linkToTalk" /></cv-data-table-cell>
+      <cv-data-table-row v-for="(row, rowIndex) in dataPerRow" :key="`${rowIndex}`">
+        <cv-data-table-cell v-for="({ component, styles, data}, elementIndex) in row" :key="`${elementIndex}`">
+          <AppCta v-if="isAppCtaComponent(component)" kind="ghost" v-bind="data" :style="styles" />
+          <component
+            :is="component"
+            v-else
+            :style="styles"
+          >
+            {{ data }}
+          </component>
+        </cv-data-table-cell>
       </cv-data-table-row>
     </template>
   </cv-data-table>
@@ -20,19 +25,22 @@ import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 import { GeneralLink } from '~/constants/appLinks'
 
-type tableRow = {
-  speaker: string,
-  nameOfTalk: string,
-  institution: string,
-  dateOfTalk: string,
-  linkToTalk: GeneralLink
-}
+type tableRow = [
+  {
+    component: string,
+    styles: string,
+    data: string | GeneralLink,
+  }
+]
 
 @Component
 export default class SeminarSeriesDataTable extends Vue {
-  @Prop(Array) data!: tableRow[]
+  @Prop(Array) columns!: string[]
+  @Prop(Array) dataPerRow!: tableRow[]
 
-  columns = ['Speaker', 'Seminar title', 'Institution', 'Date of talk', 'Link to talk']
+  isAppCtaComponent (component: string) : boolean {
+    return component === 'AppCta'
+  }
 }
 </script>
 

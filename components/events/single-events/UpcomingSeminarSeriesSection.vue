@@ -3,7 +3,7 @@
     <h2 class="copy__title">
       Upcoming Seminar Schedule
     </h2>
-    <SeminarSeriesDataTable :data="tableData" />
+    <SeminarSeriesDataTable :columns="tableData.columns" :data-per-row="tableData.dataPerRow" />
   </section>
 </template>
 
@@ -13,28 +13,71 @@ import { Component } from 'vue-property-decorator'
 
 @Component
 export default class UpcomingSeminarSeriesSection extends Vue {
-  tableData = [
-    {
-      speaker: 'Javad Shabani',
-      nameOfTalk: 'Progress in Realizing Novel Qubits with Josephson Field Effect Transistors',
-      institution: 'MIT',
-      dateOfTalk: '2021/01/25',
-      linkToTalk: {
-        url: 'https://qiskit.org',
-        label: 'Join the event'
-      }
-    },
-    {
-      speaker: 'Javad Shabani 2',
-      nameOfTalk: 'Progress in Realizing Novel Qubits with Josephson Field Effect Transistors 2',
-      institution: 'MIT 2',
-      dateOfTalk: '2021/01/25',
-      linkToTalk: {
-        url: 'https://qiskit.org',
-        label: 'Join the event'
-      }
-    }
-  ]
+  tableData = {
+    columns: ['Speaker', 'Institution', 'Seminar title', 'Date of talk', 'Link to talk'],
+    dataPerRow: [
+      [
+        {
+          component: 'span',
+          styles: 'min-width: 8rem; display: inline-block;',
+          data: 'Javad Shabani'
+        },
+        {
+          component: 'span',
+          styles: 'min-width: 9rem; display: inline-block;',
+          data: 'University of Waterloo'
+        },
+        {
+          component: 'span',
+          styles: 'min-width: 21rem; display: inline-block;',
+          data: 'Progress in Realizing Novel Qubits with Josephson Field Effect Transistors'
+        },
+        {
+          component: 'span',
+          styles: 'min-width: 5rem; display: inline-block;',
+          data: '2021/01/25'
+        },
+        {
+          component: 'AppCta',
+          styles: 'min-width: 6rem;',
+          data: {
+            url: 'https://qiskit.org',
+            label: 'Join the event'
+          }
+        }
+      ],
+      [
+        {
+          component: 'span',
+          styles: 'min-width: 8rem; display: inline-block;',
+          data: 'Javad Shabani'
+        },
+        {
+          component: 'span',
+          styles: 'min-width: 9rem; display: inline-block;',
+          data: 'MIT'
+        },
+        {
+          component: 'span',
+          styles: 'min-width: 21rem; display: inline-block;',
+          data: 'Progress in Realizing Novel Qubits with Josephson Field Effect Transistors'
+        },
+        {
+          component: 'span',
+          styles: 'min-width: 5rem; display: inline-block;',
+          data: '2021/01/25'
+        },
+        {
+          component: 'AppCta',
+          styles: 'min-width: 6rem;',
+          data: {
+            url: 'https://qiskit.org',
+            label: 'Join the event'
+          }
+        }
+      ]
+    ]
+  }
 }
 </script>
 
