@@ -59,8 +59,6 @@ export default class SeminarSeriesPage extends QiskitPage {
 .seminar-series-page {
   background-color: $white;
   color: $white-text-01;
-  display: flex;
-  flex-flow: column;
 
   &__header {
     padding-bottom: $layout-05;
