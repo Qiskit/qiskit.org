@@ -15,6 +15,16 @@ import {
   findImageAttachment
 } from './airtable-conversion-utils'
 
+type SeminarSeriesEvent = {
+  date: string,
+  image: string,
+  institution: string,
+  location: string,
+  speaker: string,
+  title: string,
+  to: string
+}
+
 const RECORD_FIELDS = Object.freeze({
   name: 'Name',
   startDate: 'Start Date',
@@ -24,7 +34,10 @@ const RECORD_FIELDS = Object.freeze({
   location: 'Event Location',
   region: 'Region',
   image: 'Picture?',
-  published: 'SUZIE - for website?'
+  institution: 'Institution',
+  published: 'SUZIE - for website?',
+  showOnSeminarSeriesPage: 'PAUL - Seminar Site',
+  speaker: 'Speaker'
 } as const)
 
 async function fetchCommunityEvents (apiKey: string, { days }: { days: any }): Promise<CommunityEvent[]> {
@@ -49,6 +62,30 @@ async function fetchCommunityEvents (apiKey: string, { days }: { days: any }): P
   return Promise.resolve(communityEvents)
 }
 
+async function fetchSeminarSeriesEvents (apiKey: string, { days }: { days: any }): Promise<SeminarSeriesEvent[]> {
+  const events: SeminarSeriesEvent[] = []
+  const { startDate, published, showOnSeminarSeriesPage } = RECORD_FIELDS
+  const base = new Airtable({ apiKey }).base('appkaaRF2QdwfusP1')
+
+  await base('Events Main View').select({
+    filterByFormula: `AND(
+      DATETIME_DIFF({${startDate}}, TODAY(), 'days') ${days > 0 ? '<=' : '>='} ${days},
+      DATETIME_DIFF({${startDate}}, TODAY(), 'days') ${days > 0 ? '>=' : '<'} 0,
+      {${published}},
+      {${showOnSeminarSeriesPage}}
+    )`,
+    sort: [{ field: startDate, direction: days > 0 ? 'asc' : 'desc' }],
+    view: 'Seminar Series Website'
+  }).eachPage((records, nextPage) => {
+    for (const record of records) {
+      const event = convertToSeminarSeriesEvent(record)
+      events.push(event)
+    }
+    nextPage()
+  })
+  return Promise.resolve(events)
+}
+
 function convertToCommunityEvent (record: any): CommunityEvent {
   return {
     title: getName(record),
@@ -61,8 +98,28 @@ function convertToCommunityEvent (record: any): CommunityEvent {
   }
 }
 
+function convertToSeminarSeriesEvent (record: any): SeminarSeriesEvent {
+  return {
+    date: formatDates(...getDates(record)),
+    image: getImage(record),
+    institution: getInstitution(record),
+    location: getLocation(record),
+    speaker: getSpeaker(record),
+    title: getName(record),
+    to: getWebsite(record)
+  }
+}
+
+function getInstitution (record: any): string {
+  return record.get(RECORD_FIELDS.institution)
+}
+
 function getName (record: any): string {
   return record.get(RECORD_FIELDS.name)
+}
+
+function getSpeaker (record: any): string {
+  return record.get(RECORD_FIELDS.speaker)
 }
 
 function getTypes (record: any): CommunityEventType[] {
@@ -137,6 +194,7 @@ function getWebsite (record: any): string {
 export {
   RECORD_FIELDS,
   fetchCommunityEvents,
+  fetchSeminarSeriesEvents,
   convertToCommunityEvent,
   getName,
   getTypes,
