@@ -58,7 +58,7 @@ function configureAnalytics () {
 }
 
 function installAnalyticsOnce () {
-  window._analyticsReady = window._analyticsReady || new Promise((resolve) => {
+  window._analyticsReady = window._analyticsReady || new Promise<Event>((resolve) => {
     const script = document.createElement('script')
     script.async = true
     script.src = process.env.analyticsScriptUrl || ''
