@@ -40,50 +40,53 @@ const RECORD_FIELDS = Object.freeze({
   speaker: 'Speaker'
 } as const)
 
-async function fetchCommunityEvents (apiKey: string, { days }: { days: any }): Promise<CommunityEvent[]> {
+function getEventsQuery (apiKey: string, days: number, view: string, filters: string[] = []): Airtable.Query<{}> {
   const { startDate, published } = RECORD_FIELDS
-  const communityEvents: CommunityEvent[] = []
   const base = new Airtable({ apiKey }).base('appkaaRF2QdwfusP1')
-  await base('Events Main View').select({
-    fields: Object.values(RECORD_FIELDS),
-    filterByFormula: `AND(
-      DATETIME_DIFF({${startDate}}, TODAY(), 'days') ${days > 0 ? '<=' : '>='} ${days},
-      DATETIME_DIFF({${startDate}}, TODAY(), 'days') ${days > 0 ? '>=' : '<'} 0,
-      {${published}}
-    )`,
-    sort: [{ field: startDate, direction: days > 0 ? 'asc' : 'desc' }]
-  }).eachPage((records, nextPage) => {
+
+  const standardFilters = [
+    `DATETIME_DIFF({${startDate}}, TODAY(), 'days') ${days > 0 ? '<=' : '>='} ${days}`,
+    `DATETIME_DIFF({${startDate}}, TODAY(), 'days') ${days > 0 ? '>=' : '<'} 0`,
+    `{${published}}`,
+    ...filters
+  ]
+
+  const filterByFormula = `AND(${standardFilters.join(',')})`
+
+  return base('Events Main View').select({
+    filterByFormula,
+    sort: [{ field: startDate, direction: days > 0 ? 'asc' : 'desc' }],
+    view
+  })
+}
+
+async function fetchCommunityEvents (apiKey: string, { days }: { days: any }): Promise<CommunityEvent[]> {
+  const communityEvents: CommunityEvent[] = []
+
+  await getEventsQuery(apiKey, days, 'Main List').eachPage((records, nextPage) => {
     for (const record of records) {
       const communityEvent = convertToCommunityEvent(record)
       communityEvents.push(communityEvent)
     }
     nextPage()
   })
+
   return Promise.resolve(communityEvents)
 }
 
 async function fetchSeminarSeriesEvents (apiKey: string, { days }: { days: any }): Promise<SeminarSeriesEvent[]> {
-  const events: SeminarSeriesEvent[] = []
-  const { startDate, published, showOnSeminarSeriesPage } = RECORD_FIELDS
-  const base = new Airtable({ apiKey }).base('appkaaRF2QdwfusP1')
+  const { showOnSeminarSeriesPage } = RECORD_FIELDS
+  const seminarSeriesEvents: SeminarSeriesEvent[] = []
 
-  await base('Events Main View').select({
-    filterByFormula: `AND(
-      DATETIME_DIFF({${startDate}}, TODAY(), 'days') ${days > 0 ? '<=' : '>='} ${days},
-      DATETIME_DIFF({${startDate}}, TODAY(), 'days') ${days > 0 ? '>=' : '<'} 0,
-      {${published}},
-      {${showOnSeminarSeriesPage}}
-    )`,
-    sort: [{ field: startDate, direction: days > 0 ? 'asc' : 'desc' }],
-    view: 'Seminar Series Website'
-  }).eachPage((records, nextPage) => {
+  await getEventsQuery(apiKey, days, 'Seminar Series Website', [`{${showOnSeminarSeriesPage}}`]).eachPage((records, nextPage) => {
     for (const record of records) {
-      const event = convertToSeminarSeriesEvent(record)
-      events.push(event)
+      const seminarSeriesEvent = convertToSeminarSeriesEvent(record)
+      seminarSeriesEvents.push(seminarSeriesEvent)
     }
     nextPage()
   })
-  return Promise.resolve(events)
+
+  return Promise.resolve(seminarSeriesEvents)
 }
 
 function convertToCommunityEvent (record: any): CommunityEvent {
