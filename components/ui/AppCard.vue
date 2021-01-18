@@ -26,6 +26,7 @@
       </div>
       <AppCta
         v-if="to"
+        class="app-card__cta"
         v-bind="ctaLink"
         kind="ghost"
       />
@@ -152,13 +153,25 @@ export default class AppCard extends Vue {
       padding: $spacing-05;
     }
 
+    &__cta {
+      padding-bottom: 0;
+    }
+
     &__description {
       margin-bottom: $spacing-03;
       margin-top: $spacing-03;
     }
 
     &__image {
-      min-height: 5 * $column-size-large;
+      min-height: 4 * $column-size-large;
+
+      @include mq($until: large) {
+        min-height: 5 * $column-size-large;
+      }
+
+      @include mq($from: small, $until: medium) {
+        min-height: 6 * $column-size-large;
+      }
     }
   }
 }
