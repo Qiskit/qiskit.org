@@ -2,11 +2,13 @@
   <header class="seminar-series-header">
     <div class="seminar-series-header__container">
       <div class="seminar-series-header__main">
-        <h1 class="seminar-series-header__title">
-          <slot />
-        </h1>
-        <div class="seminar-series-header__description">
-          <slot name="description" />
+        <div>
+          <h1 class="seminar-series-header__title">
+            <slot />
+          </h1>
+          <div class="seminar-series-header__description">
+            <slot name="description" />
+          </div>
         </div>
         <AppCta v-bind="cta" class="seminar-series-header__cta" />
       </div>
@@ -60,7 +62,7 @@ export default class SeminarSeriesHeader extends Vue {
   }
 
   &__cta {
-    margin: $layout-06 0 0;
+    margin: 0 0 $layout-02;
 
     @include mq($until: medium) {
       margin-top: $layout-03;
@@ -82,7 +84,10 @@ export default class SeminarSeriesHeader extends Vue {
   }
 
   &__main {
+    display: flex;
+    flex-flow: column;
     grid-area: main;
+    justify-content: space-between;
     margin-top: $spacing-07;
   }
 
