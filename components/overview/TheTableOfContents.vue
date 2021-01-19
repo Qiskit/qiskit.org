@@ -23,7 +23,7 @@ import { TableOfContentEntry } from '~/constants/overviewContent'
 
 @Component
 export default class TheTableOfContents extends Vue {
-  @Prop({ type: Array, default: [] }) entries!: Array<TableOfContentEntry>
+  @Prop({ type: Array, default: () => [] }) entries!: TableOfContentEntry[]
   @Prop(String) activeSection!: string
 
   isActive (entry: TableOfContentEntry): boolean {

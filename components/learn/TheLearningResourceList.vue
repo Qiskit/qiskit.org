@@ -88,10 +88,10 @@ import { Component, Prop } from 'vue-property-decorator'
 
 @Component
 export default class TheLearningResourceList extends Vue {
-  @Prop({ type: Array, default: [] }) topFilters!: Array<string>
+  @Prop({ type: Array, default: () => [] }) topFilters!: string[]
   @Prop(String) activeTopFilter!: string
 
-  @Prop({ type: Array, default: [] }) asideFilters!: Array<string>
+  @Prop({ type: Array, default: () => [] }) asideFilters!: string[]
   @Prop(String) activeAsideFilter!: string
 
   selectTopFilter (tabIndex: number) {
