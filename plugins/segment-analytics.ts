@@ -58,7 +58,7 @@ function configureAnalytics () {
 }
 
 function installAnalyticsOnce () {
-  window._analyticsReady = window._analyticsReady || new Promise<Event>((resolve) => {
+  window._analyticsReady = window._analyticsReady || new Promise<Event>((resolve, reject) => {
     const script = document.createElement('script')
     script.async = true
     script.src = process.env.analyticsScriptUrl || ''
@@ -66,7 +66,7 @@ function installAnalyticsOnce () {
     script.onload = resolve
     script.onerror = (err) => {
       console.warn('Error loading Bluemix Analytics script:', err)
-      resolve()
+      reject(err)
     }
   })
 }
