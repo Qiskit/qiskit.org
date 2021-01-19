@@ -44,14 +44,14 @@ function getEventsQuery (apiKey: string, days: number, view: string, filters: st
   const { startDate, published } = RECORD_FIELDS
   const base = new Airtable({ apiKey }).base('appkaaRF2QdwfusP1')
 
-  const standardFilters = [
+  const formulaFilters = [
     `DATETIME_DIFF({${startDate}}, TODAY(), 'days') ${days > 0 ? '<=' : '>='} ${days}`,
     `DATETIME_DIFF({${startDate}}, TODAY(), 'days') ${days > 0 ? '>=' : '<'} 0`,
     `{${published}}`,
     ...filters
   ]
 
-  const filterByFormula = `AND(${standardFilters.join(',')})`
+  const filterByFormula = `AND(${formulaFilters.join(',')})`
 
   return base('Events Main View').select({
     filterByFormula,
