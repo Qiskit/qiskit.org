@@ -34,7 +34,7 @@
       <MobileMenu
         class="menu__mobile-menu"
         :class="{ 'menu__mobile-menu_visible': isMobileMenuVisible }"
-        :is-mobile-menu-visible="isMobileMenuVisible"
+        :is-visible="isMobileMenuVisible"
       />
     </section>
     <section class="menu__main-level">
@@ -99,7 +99,6 @@ import MenuMixin from '~/mixins/menu'
 @Component
 export default class TheMenu extends Mixins(MenuMixin) {
   isMobileMenuVisible: boolean = false
-  isCommunityDropdownVisible = false
 
   @Watch('isMobileMenuVisible')
   toggleScroll () {

@@ -63,23 +63,17 @@ import {
 
 @Component
 export default class MobileMenu extends Mixins(MenuMixin) {
-  @Prop({ type: Boolean, default: false })
-  isMobileMenuVisible: boolean=false
+  @Prop({ type: Boolean, default: false }) isVisible!: boolean
 
   stayConnectedElements = STAY_CONNECTED_LINKS
   theme = 'light'
 
-  @Watch('isMobileMenuVisible')
-  showDropdown () {
-  /**
-   * When mobile-menu is visible
-   * set dropdown open state, based on
-   * if Community pages are active
-   */
-    const showDropdown: boolean = this.isCommunityActive()
+  @Watch('isVisible')
+  openDropdown () {
+    const openDropdown: boolean = this.isCommunityActive()
     const communityMenu: any = this.$refs.communityDropdown
 
-    communityMenu[0].open = showDropdown
+    communityMenu[0].open = openDropdown
   }
 }
 </script>
