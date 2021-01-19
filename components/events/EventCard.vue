@@ -30,7 +30,7 @@ import { Component, Prop } from 'vue-property-decorator'
 
 @Component
 export default class EventCard extends Vue {
-  @Prop({ type: Array, default: () => [] }) types!: string[]
+  @Prop(Array) types!: string[]
   @Prop(String) title!: string
   @Prop(String) image!: string
   @Prop(String) location!: string
