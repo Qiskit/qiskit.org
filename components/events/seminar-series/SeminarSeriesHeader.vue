@@ -7,9 +7,9 @@
             Quantum Information Science Seminar Series
           </h1>
           <div class="seminar-series-header__description">
-            <p>The Qiskit Quantum Information Science Seminar Series is dedicated to the research and academic communities as a broad and deep dive into the latest cutting edge quantum research.</p>
-            <p>The seminar is live and interactive, you can discuss and ask questions as you watch, and is streamed on YouTube.</p>
-            <p>Join us live every Friday at 12:00 PM ET.</p>
+            <div>The Qiskit Quantum Information Science Seminar Series is dedicated to the research and academic communities as a broad and deep dive into the latest cutting edge quantum research.</div>
+            <div>The seminar is live and interactive, you can discuss and ask questions as you watch, and is streamed on YouTube.</div>
+            <div>Join us live every Friday at 12:00 PM ET.</div>
           </div>
         </div>
         <AppCta v-bind="cta" class="seminar-series-header__cta" />
@@ -90,8 +90,8 @@ export default class SeminarSeriesHeader extends Vue {
     margin: $layout-05 0 0;
     max-width: 6 * $column-size-large;
 
-    p:not(:last-child) {
-      margin-bottom: $layout-03;
+    > div:not(:last-child) {
+      margin-bottom: $spacing-06;
     }
 
     @include mq($until: medium) {
