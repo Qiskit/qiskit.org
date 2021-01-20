@@ -31,7 +31,7 @@ export default class HelpfulResourcesSection extends Vue {
   &__resources {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-gap: 2rem;
+    column-gap: 2rem;
 
     @include mq($from: medium, $until: large) {
       grid-template-columns: repeat(2, 1fr);
