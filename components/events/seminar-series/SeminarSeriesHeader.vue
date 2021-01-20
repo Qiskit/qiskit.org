@@ -23,6 +23,7 @@
         <EventCard
           date="January 13, 2021"
           image="/images/events/seminar-series/speakers/abraham-asfaw.jpg"
+          institution="Georgia Tech"
           location="YouTube"
           title="Will Oliver"
           to="https://www.youtube.com/watch?v=miK5y8BYlwQ&list=PLOFEBzvs-Vvr0uEoGFo08n4-WrM_8fft2&index=1"
