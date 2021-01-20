@@ -12,6 +12,7 @@
       v-if="cta && cta.url"
       v-bind="cta"
       kind="ghost"
+      class="app-description-card__cta"
     />
   </article>
 </template>
@@ -42,5 +43,9 @@ export default class AppDescriptionCard extends Vue {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  &__cta {
+    width: 100%;
+  }
 }
 </style>
