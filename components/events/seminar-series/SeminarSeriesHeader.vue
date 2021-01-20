@@ -95,7 +95,7 @@ export default class SeminarSeriesHeader extends Vue {
       margin-bottom: $spacing-06;
     }
 
-    @include mq($until: medium) {
+    @include mq($from: medium, $until: large) {
       margin-top: $layout-03;
     }
   }
