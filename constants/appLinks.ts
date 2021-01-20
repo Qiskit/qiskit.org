@@ -43,7 +43,7 @@ const YOUTUBE_ALL_EPISODES_CTA: GeneralLink = {
 
 const SEMINAR_SERIES_ALL_EPISODES_CTA: GeneralLink = {
   url: 'https://www.youtube.com/playlist?list=PLOFEBzvs-Vvr0uEoGFo08n4-WrM_8fft2',
-  label: 'Go to series'
+  label: 'Go to YouTube playlist'
 }
 
 const DISCOVER_TEXTBOOK_CTA: GeneralLink = {
