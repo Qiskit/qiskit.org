@@ -7,11 +7,9 @@
             Quantum Information Science Seminar Series
           </h1>
           <div class="seminar-series-header__description">
-            <p>
-              The Quantum Information Science Seminar Series is a deep dive into
-              various academic and research topics within the quantum community.
-            </p>
-            <p>Join every Friday at 12:00 PM EDT</p>
+            <p>The Qiskit Quantum Information Science Seminar Series is dedicated to the research and academic communities as a broad and deep dive into the latest cutting edge quantum research.</p>
+            <p>The seminar is live and interactive, you can discuss and ask questions as you watch, and is streamed on YouTube.</p>
+            <p>Join us live every Friday at 12:00 PM ET.</p>
           </div>
         </div>
         <AppCta v-bind="cta" class="seminar-series-header__cta" />
