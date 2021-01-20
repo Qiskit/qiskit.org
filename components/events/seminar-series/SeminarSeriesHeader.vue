@@ -4,16 +4,34 @@
       <div class="seminar-series-header__main">
         <div>
           <h1 class="seminar-series-header__title">
-            <slot />
+            Quantum Information Science Seminar Series
           </h1>
           <div class="seminar-series-header__description">
-            <slot name="description" />
+            <p>
+              The Quantum Information Science Seminar Series is a deep dive into
+              various academic and research topics within the quantum community.
+            </p>
+            <p>Join every Friday at 12:00 PM EDT</p>
           </div>
         </div>
         <AppCta v-bind="cta" class="seminar-series-header__cta" />
       </div>
-      <div v-if="this.$slots.aside" class="seminar-series-header__aside">
-        <slot name="aside" />
+      <div class="seminar-series-header__aside">
+        <div class="seminar-series-header__up-next__title-wrapper">
+          <div class="seminar-series-header__up-next__title">
+            Up next:
+          </div>
+        </div>
+        <EventCard
+          date="January 13, 2021"
+          image="/images/events/seminar-series/speakers/abraham-asfaw.jpg"
+          location="YouTube"
+          title="Will Oliver"
+          to="https://www.youtube.com/watch?v=miK5y8BYlwQ&list=PLOFEBzvs-Vvr0uEoGFo08n4-WrM_8fft2&index=1"
+          vertical-layout
+        >
+          Quantum Engineering of Superconducting Qubits
+        </EventCard>
       </div>
     </div>
   </header>
@@ -21,12 +39,12 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
-import { GeneralLink } from '~/constants/appLinks.ts'
+import { Component } from 'vue-property-decorator'
+import { SEMINAR_SERIES_ALL_EPISODES_CTA } from '~/constants/appLinks.ts'
 
 @Component
 export default class SeminarSeriesHeader extends Vue {
-  @Prop({ type: Object, required: true }) cta!: GeneralLink;
+  cta = SEMINAR_SERIES_ALL_EPISODES_CTA;
 }
 </script>
 
@@ -94,6 +112,20 @@ export default class SeminarSeriesHeader extends Vue {
   &__title {
     @include type-style('expressive-heading-05', true);
     color: $white-text-01;
+  }
+
+  &__up-next {
+    &__title {
+      @include type-style('productive-heading-01');
+      border-bottom: 4px solid $purple-60;
+      display: inline;
+      padding-bottom: $spacing-02;
+      padding-right: $spacing-03;
+    }
+
+    &__title-wrapper {
+      margin-bottom: $spacing-06;
+    }
   }
 }
 </style>
