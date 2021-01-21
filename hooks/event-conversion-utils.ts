@@ -35,19 +35,18 @@ const RECORD_FIELDS = Object.freeze({
   region: 'Region',
   image: 'Picture?',
   institution: 'Institution',
-  published: 'SUZIE - for website?',
+  showOnEventsPage: 'SUZIE - for website?',
   showOnSeminarSeriesPage: 'PAUL - Seminar Site',
   speaker: 'Speaker'
 } as const)
 
 function getEventsQuery (apiKey: string, days: number, view: string, filters: string[] = []): Airtable.Query<{}> {
-  const { startDate, published } = RECORD_FIELDS
+  const { startDate } = RECORD_FIELDS
   const base = new Airtable({ apiKey }).base('appkaaRF2QdwfusP1')
 
   const formulaFilters = [
     `DATETIME_DIFF({${startDate}}, TODAY(), 'days') ${days > 0 ? '<=' : '>='} ${days}`,
     `DATETIME_DIFF({${startDate}}, TODAY(), 'days') ${days > 0 ? '>=' : '<'} 0`,
-    `{${published}}`,
     ...filters
   ]
 
@@ -61,9 +60,10 @@ function getEventsQuery (apiKey: string, days: number, view: string, filters: st
 }
 
 async function fetchCommunityEvents (apiKey: string, { days }: { days: any }): Promise<CommunityEvent[]> {
+  const { showOnEventsPage } = RECORD_FIELDS
   const communityEvents: CommunityEvent[] = []
 
-  await getEventsQuery(apiKey, days, 'Main List').eachPage((records, nextPage) => {
+  await getEventsQuery(apiKey, days, 'Main List', [`{${showOnEventsPage}}`]).eachPage((records, nextPage) => {
     for (const record of records) {
       const communityEvent = convertToCommunityEvent(record)
       communityEvents.push(communityEvent)
