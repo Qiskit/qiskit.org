@@ -8,7 +8,7 @@ export default async function (apiKey: any, outputFolder: string) {
   const pastCommunityEvents = await fetchCommunityEvents(apiKey, { days: -31 })
 
   const upcomingSeminarSeriesEvents = await fetchSeminarSeriesEvents(apiKey, { days: 31 })
-  const pastSeminarSeriesEvents = await fetchSeminarSeriesEvents(apiKey, { days: -31 })
+  const pastSeminarSeriesEvents = await fetchSeminarSeriesEvents(apiKey, { days: -62 })
   const nextSeminarSeriesEvent = upcomingSeminarSeriesEvents[0]
 
   const writeFile = util.promisify(fs.writeFile)
