@@ -13,18 +13,11 @@ export default async function (apiKey: any, outputFolder: string) {
 
   const writeFile = util.promisify(fs.writeFile)
 
-  const writeUpcomingEvents = writeFile(`${outputFolder}/upcoming-community-events.json`, JSON.stringify(upcomingCommunityEvents, null, 2))
-  const writePastEvents = writeFile(`${outputFolder}/past-community-events.json`, JSON.stringify(pastCommunityEvents, null, 2))
-
-  const writeUpcomingSeminarSeriesEvents = writeFile(`${outputFolder}/upcoming-seminar-series-events.json`, JSON.stringify(upcomingSeminarSeriesEvents, null, 2))
-  const writePastSeminarSeriesEvents = writeFile(`${outputFolder}/past-seminar-series-events.json`, JSON.stringify(pastSeminarSeriesEvents, null, 2))
-  const writeNextSeminarSeriesEvents = writeFile(`${outputFolder}/next-seminar-series-event.json`, JSON.stringify(nextSeminarSeriesEvent, null, 2))
-
   await Promise.all([
-    writeUpcomingEvents,
-    writePastEvents,
-    writeUpcomingSeminarSeriesEvents,
-    writePastSeminarSeriesEvents,
-    writeNextSeminarSeriesEvents
-  ])
+    { events: upcomingCommunityEvents, outputFilename: 'upcoming-community-events.json' },
+    { events: pastCommunityEvents, outputFilename: 'past-community-events.json' },
+    { events: upcomingSeminarSeriesEvents, outputFilename: 'upcoming-seminar-series-events.json' },
+    { events: pastSeminarSeriesEvents, outputFilename: 'past-seminar-series-events.json' },
+    { events: nextSeminarSeriesEvent, outputFilename: 'next-seminar-series-event.json' }
+  ].map(curr => writeFile(`${outputFolder}/${curr.outputFilename}`, JSON.stringify(curr.events, null, 2))))
 }
