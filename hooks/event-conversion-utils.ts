@@ -15,6 +15,16 @@ import {
   findImageAttachment
 } from './airtable-conversion-utils'
 
+type SeminarSeriesEvent = {
+  date: string,
+  image: string,
+  institution: string,
+  location: string,
+  speaker: string,
+  title: string,
+  to: string
+}
+
 const RECORD_FIELDS = Object.freeze({
   name: 'Name',
   startDate: 'Start Date',
@@ -24,29 +34,59 @@ const RECORD_FIELDS = Object.freeze({
   location: 'Event Location',
   region: 'Region',
   image: 'Picture?',
-  published: 'SUZIE - for website?'
+  institution: 'Institution',
+  showOnEventsPage: 'SUZIE - for website?',
+  showOnSeminarSeriesPage: 'PAUL - Seminar Site',
+  speaker: 'Speaker'
 } as const)
 
-async function fetchCommunityEvents (apiKey: string, { days }: { days: any }): Promise<CommunityEvent[]> {
-  const { startDate, published } = RECORD_FIELDS
-  const communityEvents: CommunityEvent[] = []
+function getEventsQuery (apiKey: string, days: number, view: string, filters: string[] = []): Airtable.Query<{}> {
+  const { startDate } = RECORD_FIELDS
   const base = new Airtable({ apiKey }).base('appkaaRF2QdwfusP1')
-  await base('Events Main View').select({
-    fields: Object.values(RECORD_FIELDS),
-    filterByFormula: `AND(
-      DATETIME_DIFF({${startDate}}, TODAY(), 'days') ${days > 0 ? '<=' : '>='} ${days},
-      DATETIME_DIFF({${startDate}}, TODAY(), 'days') ${days > 0 ? '>=' : '<'} 0,
-      {${published}}
-    )`,
-    sort: [{ field: startDate, direction: days > 0 ? 'asc' : 'desc' }]
-  }).eachPage((records, nextPage) => {
+
+  const formulaFilters = [
+    `DATETIME_DIFF({${startDate}}, TODAY(), 'days') ${days > 0 ? '<=' : '>='} ${days}`,
+    `DATETIME_DIFF({${startDate}}, TODAY(), 'days') ${days > 0 ? '>=' : '<'} 0`,
+    ...filters
+  ]
+
+  const filterByFormula = `AND(${formulaFilters.join(',')})`
+
+  return base('Events Main View').select({
+    filterByFormula,
+    sort: [{ field: startDate, direction: days > 0 ? 'asc' : 'desc' }],
+    view
+  })
+}
+
+async function fetchCommunityEvents (apiKey: string, { days }: { days: any }): Promise<CommunityEvent[]> {
+  const { showOnEventsPage } = RECORD_FIELDS
+  const communityEvents: CommunityEvent[] = []
+
+  await getEventsQuery(apiKey, days, 'Main List', [`{${showOnEventsPage}}`]).eachPage((records, nextPage) => {
     for (const record of records) {
       const communityEvent = convertToCommunityEvent(record)
       communityEvents.push(communityEvent)
     }
     nextPage()
   })
+
   return Promise.resolve(communityEvents)
+}
+
+async function fetchSeminarSeriesEvents (apiKey: string, { days }: { days: any }): Promise<SeminarSeriesEvent[]> {
+  const { showOnSeminarSeriesPage } = RECORD_FIELDS
+  const seminarSeriesEvents: SeminarSeriesEvent[] = []
+
+  await getEventsQuery(apiKey, days, 'Seminar Series Website', [`{${showOnSeminarSeriesPage}}`]).eachPage((records, nextPage) => {
+    for (const record of records) {
+      const seminarSeriesEvent = convertToSeminarSeriesEvent(record)
+      seminarSeriesEvents.push(seminarSeriesEvent)
+    }
+    nextPage()
+  })
+
+  return Promise.resolve(seminarSeriesEvents)
 }
 
 function convertToCommunityEvent (record: any): CommunityEvent {
@@ -61,8 +101,28 @@ function convertToCommunityEvent (record: any): CommunityEvent {
   }
 }
 
+function convertToSeminarSeriesEvent (record: any): SeminarSeriesEvent {
+  return {
+    date: formatDates(...getDates(record)),
+    image: getImage(record),
+    institution: getInstitution(record),
+    location: getLocation(record),
+    speaker: getSpeaker(record),
+    title: getName(record),
+    to: getWebsite(record)
+  }
+}
+
+function getInstitution (record: any): string {
+  return record.get(RECORD_FIELDS.institution)
+}
+
 function getName (record: any): string {
   return record.get(RECORD_FIELDS.name)
+}
+
+function getSpeaker (record: any): string {
+  return record.get(RECORD_FIELDS.speaker)
 }
 
 function getTypes (record: any): CommunityEventType[] {
@@ -137,6 +197,7 @@ function getWebsite (record: any): string {
 export {
   RECORD_FIELDS,
   fetchCommunityEvents,
+  fetchSeminarSeriesEvents,
   convertToCommunityEvent,
   getName,
   getTypes,
