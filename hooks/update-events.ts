@@ -13,11 +13,13 @@ export default async function (apiKey: any, outputFolder: string) {
 
   const writeFile = util.promisify(fs.writeFile)
 
-  await Promise.all([
+  const eventsAndOutputFilename = [
     { events: upcomingCommunityEvents, outputFilename: 'upcoming-community-events.json' },
     { events: pastCommunityEvents, outputFilename: 'past-community-events.json' },
     { events: upcomingSeminarSeriesEvents, outputFilename: 'upcoming-seminar-series-events.json' },
     { events: pastSeminarSeriesEvents, outputFilename: 'past-seminar-series-events.json' },
     { events: nextSeminarSeriesEvent, outputFilename: 'next-seminar-series-event.json' }
-  ].map(curr => writeFile(`${outputFolder}/${curr.outputFilename}`, JSON.stringify(curr.events, null, 2))))
+  ]
+
+  await Promise.all(eventsAndOutputFilename.map(curr => writeFile(`${outputFolder}/${curr.outputFilename}`, JSON.stringify(curr.events, null, 2))))
 }
