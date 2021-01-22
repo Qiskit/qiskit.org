@@ -15,7 +15,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import { SEMINAR_SERIES_ALL_EPISODES_CTA } from '~/constants/appLinks.ts'
+import { SEMINAR_SERIES_FULL_ARCHIVE_CTA } from '~/constants/appLinks.ts'
 import events from '~/content/events/past-seminar-series-events.json'
 
 @Component
@@ -56,10 +56,7 @@ export default class PastSeminarSeriesSection extends Vue {
     dataPerRow: this.tableDataPerRow
   }
 
-  showMoreCta = {
-    ...SEMINAR_SERIES_ALL_EPISODES_CTA,
-    label: 'Explore Full Seminar Archive'
-  }
+  showMoreCta = SEMINAR_SERIES_FULL_ARCHIVE_CTA
 }
 </script>
 
