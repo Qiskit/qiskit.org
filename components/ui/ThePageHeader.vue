@@ -24,7 +24,7 @@ export default class ThePageHeader extends Vue {}
   min-height: 28rem;
 
   @include mq($until: large) {
-    min-height: 28rem * 40 / 64;
+    height: 28rem * 40 / 64;
   }
 
   &__container {
@@ -42,24 +42,6 @@ export default class ThePageHeader extends Vue {}
       align-items: initial;
       flex-direction: column;
       justify-content: center;
-    }
-  }
-
-  &__cta {
-    margin: $layout-06 0 0;
-  }
-
-  &__cta {
-    margin: $layout-06 0 0;
-  }
-
-  &__description {
-    @include type-style('body-long-01');
-    margin: $layout-05 0 0;
-    max-width: 6 * $column-size-large;
-
-    p:not(:last-child) {
-      margin-bottom: $layout-03;
     }
   }
 
