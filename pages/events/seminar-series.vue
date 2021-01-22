@@ -2,6 +2,7 @@
   <main class="seminar-series-page">
     <WhatIsThisEventSection class="seminar-series-page__section" />
     <UpcomingSeminarSeriesSection class="seminar-series-page__section" />
+    <PastSeminarSeriesSection class="seminar-series-page__section" />
     <HelpfulResourcesSection class="seminar-series-page__section" :resources="helpfulResources" />
   </main>
 </template>
