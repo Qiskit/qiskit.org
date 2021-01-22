@@ -21,12 +21,12 @@
           </div>
         </div>
         <EventCard
-          date="January 13, 2021"
-          image="/images/events/seminar-series/speakers/abraham-asfaw.jpg"
-          institution="Georgia Tech"
-          location="YouTube"
-          title="Will Oliver"
-          to="https://www.youtube.com/watch?v=miK5y8BYlwQ&list=PLOFEBzvs-Vvr0uEoGFo08n4-WrM_8fft2&index=1"
+          :date="nextEvent.date"
+          :image="nextEvent.image"
+          :institution="nextEvent.institution"
+          :location="nextEvent.location"
+          :title="nextEvent.title"
+          :to="nextEvent.to"
           vertical-layout
         >
           Quantum Engineering of Superconducting Qubits
@@ -40,10 +40,12 @@
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 import { SEMINAR_SERIES_ALL_EPISODES_CTA } from '~/constants/appLinks.ts'
+import event from '~/content/events/next-seminar-series-event.json'
 
 @Component
 export default class SeminarSeriesHeader extends Vue {
-  cta = SEMINAR_SERIES_ALL_EPISODES_CTA;
+  cta = SEMINAR_SERIES_ALL_EPISODES_CTA
+  nextEvent = event
 }
 </script>
 
