@@ -1,7 +1,7 @@
 <template>
   <section class="past-seminar-series-section">
     <h2 class="copy__title">
-      Past Seminars
+      Past Quantum Seminars
     </h2>
     <SeminarSeriesDataTable :columns="tableData.columns" :data-per-row="tableData.dataPerRow" />
     <AppCta
@@ -23,7 +23,7 @@ export default class PastSeminarSeriesSection extends Vue {
   tableDataPerRow = events.map(event => ([
     {
       component: 'span',
-      styles: 'min-width: 8rem; display: inline-block;',
+      styles: 'min-width: 9rem; display: inline-block;',
       data: event.speaker
     },
     {
@@ -43,22 +43,22 @@ export default class PastSeminarSeriesSection extends Vue {
     },
     {
       component: 'AppCta',
-      styles: 'min-width: 6rem;',
+      styles: 'min-width: 5rem;',
       data: {
         url: event.to,
-        label: 'Join the event'
+        label: 'Join event'
       }
     }
   ]));
 
   tableData = {
-    columns: ['Speaker', 'Institution', 'Seminar title', 'Date of talk', 'Link to talk'],
+    columns: ['Speaker', 'Institution', 'Name of talk', 'Date of talk', 'Link to talk'],
     dataPerRow: this.tableDataPerRow
   }
 
   showMoreCta = {
     ...SEMINAR_SERIES_ALL_EPISODES_CTA,
-    label: 'Show more'
+    label: 'Explore Full Seminar Archive'
   }
 }
 </script>

@@ -1,7 +1,7 @@
 <template>
   <section class="upcoming-seminar-series-section">
     <h2 class="copy__title">
-      Upcoming Seminar Schedule
+      Upcoming Quantum Seminar Schedule
     </h2>
     <SeminarSeriesDataTable :columns="tableData.columns" :data-per-row="tableData.dataPerRow" />
   </section>
@@ -17,7 +17,7 @@ export default class UpcomingSeminarSeriesSection extends Vue {
   tableDataPerRow = events.map(event => ([
     {
       component: 'span',
-      styles: 'min-width: 8rem; display: inline-block;',
+      styles: 'min-width: 9rem; display: inline-block;',
       data: event.speaker
     },
     {
@@ -37,16 +37,16 @@ export default class UpcomingSeminarSeriesSection extends Vue {
     },
     {
       component: 'AppCta',
-      styles: 'min-width: 6rem;',
+      styles: 'min-width: 5rem;',
       data: {
         url: event.to,
-        label: 'Join the event'
+        label: 'Join event'
       }
     }
   ]));
 
   tableData = {
-    columns: ['Speaker', 'Institution', 'Seminar title', 'Date of talk', 'Link to talk'],
+    columns: ['Speaker', 'Institution', 'Name of talk', 'Date of talk', 'Link to talk'],
     dataPerRow: this.tableDataPerRow
   }
 }
@@ -54,4 +54,10 @@ export default class UpcomingSeminarSeriesSection extends Vue {
 
 <style lang="scss" scoped>
 @import "~/assets/scss/blocks/copy.scss";
+
+.upcoming-seminar-series-section {
+  .copy__title {
+    max-width: initial;
+  }
+}
 </style>
