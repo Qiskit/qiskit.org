@@ -65,7 +65,6 @@ export default class SeminarSeriesPage extends QiskitPage {
   color: $white-text-01;
 
   &__header {
-    padding-bottom: $layout-05;
     padding-top: $layout-06;
 
     @include mq($until: medium) {

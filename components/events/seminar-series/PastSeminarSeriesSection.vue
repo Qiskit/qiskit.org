@@ -65,7 +65,7 @@ export default class PastSeminarSeriesSection extends Vue {
 
 .past-seminar-series-section {
   &__cta {
-    margin-top: $spacing-03;
+    padding-bottom: 0;
   }
 }
 </style>
