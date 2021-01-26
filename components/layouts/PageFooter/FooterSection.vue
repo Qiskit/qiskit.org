@@ -10,15 +10,15 @@
       <AppLink
         v-for="element in elements"
         :key="element.url"
-        :class="
-          iconsOnly
-            ? `footer-section__icon-link footer-section__icon-link_theme_${theme}`
-            : `footer-section__link footer-section__link_theme_${theme}`
-        "
+        :class="`footer-section__link footer-section__link_theme_${theme}`"
         v-bind="element"
         kind="secondary"
       >
-        <component :is="element.icon" v-if="iconsOnly" />
+        <component
+          :is="element.icon"
+          v-if="iconsOnly"
+          :class="`footer-section__icon-link footer-section__icon-link_theme_${theme}`"
+        />
         <span v-else>{{ element.label }}</span>
       </AppLink>
     </nav>
