@@ -6,15 +6,23 @@
     :tags="types"
     :to="to"
     cta-label="Join the event"
+    :vertical-layout="verticalLayout"
   >
+    <div class="event-card__description">
+      <slot v-if="this.$slots.default" />
+    </div>
     <div>
-      <p class="event-card__location">
+      <p class="event-card__detail">
         <Map20 class="event-card__icon" />
         {{ location }}
       </p>
-      <p class="event-card__date">
+      <p class="event-card__detail">
         <Calendar20 class="event-card__icon" />
         <time>{{ date }}</time>
+      </p>
+      <p v-if="institution" class="event-card__detail">
+        <Education20 class="event-card__icon" />
+        {{ institution }}
       </p>
     </div>
   </AppCard>
@@ -29,9 +37,11 @@ export default class EventCard extends Vue {
   @Prop({ type: Array, default: () => [] }) types!: string[]
   @Prop(String) title!: string
   @Prop(String) image!: string
+  @Prop({ type: String, default: '' }) institution!: string
   @Prop(String) location!: string
   @Prop(String) date!: string
   @Prop(String) to!: string
+  @Prop({ type: Boolean, default: false }) verticalLayout!: Boolean
 }
 </script>
 
@@ -45,14 +55,19 @@ export default class EventCard extends Vue {
     margin-bottom: $layout-01;
   }
 
-  &__location, &__date {
+  &__description {
+    margin-bottom: $spacing-06;
+  }
+
+  &__detail {
     @include type-style('body-long-01');
     display: flex;
     align-items: center;
-  }
-
-  &__location {
     margin-bottom: $spacing-03;
+
+    &:last-child {
+      margin-bottom: initial;
+    }
   }
 
   &__icon {

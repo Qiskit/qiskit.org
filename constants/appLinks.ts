@@ -45,7 +45,7 @@ const seminarSeriesPlaylistUrl = 'https://www.youtube.com/playlist?list=PLOFEBzv
 
 const SEMINAR_SERIES_ALL_EPISODES_CTA: GeneralLink = {
   url: seminarSeriesPlaylistUrl,
-  label: 'Go to series'
+  label: 'Go to YouTube playlist'
 }
 
 const SEMINAR_SERIES_FULL_ARCHIVE_CTA: GeneralLink = {
