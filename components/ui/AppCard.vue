@@ -1,7 +1,7 @@
 <template>
   <article
     class="app-card"
-    :class="{'app-card--vertical': verticalLayout}"
+    :class="{'app-card_vertical': verticalLayout}"
   >
     <div
       class="app-card__image"
@@ -145,7 +145,7 @@ export default class AppCard extends Vue {
   }
 }
 
-.app-card--vertical {
+.app-card_vertical {
   flex-direction: column;
 
   .app-card {
