@@ -16,7 +16,7 @@
       </div>
       <div class="seminar-series-header__aside">
         <div class="seminar-series-header__up-next__title-wrapper">
-          <div class="seminar-series-header__up-next__title">
+          <div class="seminar-series-header__up-next__title copy__subtitle">
             Up next:
           </div>
         </div>
@@ -115,7 +115,6 @@ export default class SeminarSeriesHeader extends Vue {
 
   &__up-next {
     &__title {
-      @include type-style('productive-heading-01');
       border-bottom: 4px solid $purple-60;
       display: inline;
       padding-bottom: $spacing-02;
