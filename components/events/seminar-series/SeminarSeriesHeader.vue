@@ -25,11 +25,11 @@
           :image="nextEvent.image"
           :institution="nextEvent.institution"
           :location="nextEvent.location"
-          :title="nextEvent.title"
+          :title="nextEvent.speaker"
           :to="nextEvent.to"
           vertical-layout
         >
-          Quantum Engineering of Superconducting Qubits
+          {{ nextEvent.title }}
         </EventCard>
       </div>
     </div>
