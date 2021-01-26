@@ -62,7 +62,6 @@ export default class SeminarSeriesPage extends QiskitPage {
 
 <style lang="scss" scoped>
 .seminar-series-page {
-  background-color: $white;
   color: $white-text-01;
 
   &__header {

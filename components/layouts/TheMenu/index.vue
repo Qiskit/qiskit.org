@@ -120,8 +120,6 @@ export default class TheMenu extends Mixins(MenuMixin) {
 @import '~carbon-components/scss/globals/scss/typography';
 
 .menu {
-  background-color: $white;
-
   &__main-level {
     --link-color: #{$gray-80};
   }

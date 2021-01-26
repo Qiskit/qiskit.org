@@ -32,9 +32,3 @@ export default class AdvocatesPage extends QiskitPage {
   routeName: string = 'advocates'
 }
 </script>
-
-<style lang="scss">
-.advocates-page {
-  background-color: $white;
-}
-</style>
