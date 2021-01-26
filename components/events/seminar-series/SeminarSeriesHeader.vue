@@ -3,9 +3,9 @@
     <div class="seminar-series-header__container">
       <div class="seminar-series-header__main">
         <div>
-          <h1 class="seminar-series-header__title">
+          <AppPageHeaderTitle>
             Quantum Information Science Seminar Series
-          </h1>
+          </AppPageHeaderTitle>
           <div class="seminar-series-header__description">
             <p>The Qiskit Quantum Information Science Seminar Series is dedicated to the research and academic communities as a broad and deep dive into the latest cutting edge quantum research.</p>
             <p>The seminar is live and interactive, you can discuss and ask questions as you watch, and is streamed on YouTube.</p>
@@ -111,11 +111,6 @@ export default class SeminarSeriesHeader extends Vue {
     grid-area: main;
     justify-content: space-between;
     margin-top: $spacing-07;
-  }
-
-  &__title {
-    @include type-style('expressive-heading-05', true);
-    color: $white-text-01;
   }
 
   &__up-next {
