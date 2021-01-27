@@ -53,7 +53,8 @@ export default class AppMosaic extends Vue {
   &__layout {
     display: grid;
     gap: $spacing-07;
-    grid-template-columns: 3fr 4fr 3fr;
+    grid-template-columns: 2.5fr 4fr 3fr;
+    grid-template-rows: 26rem 16rem;
     grid-template-areas:
       "a b c"
       "d d c"
@@ -62,8 +63,7 @@ export default class AppMosaic extends Vue {
 
     @include mq($from: medium, $until: large) {
       grid-template-columns: 1fr 1fr;
-      // grid-template-rows: repeat(3, minmax(12rem, auto));
-      grid-template-rows: 20rem 15rem 12rem;
+      grid-template-rows: 18rem 13rem 12rem;
       grid-template-areas:
         "a b"
         "c c"
@@ -147,11 +147,6 @@ export default class AppMosaic extends Vue {
         background-position: center;
         background-size: cover;
         background-repeat: no-repeat;
-        height: 25rem;
-
-        @include mq($from: medium, $until: large) {
-          height: auto;
-        }
 
         @include mq($until: medium) {
           min-height: 12rem;
@@ -166,7 +161,6 @@ export default class AppMosaic extends Vue {
     }
 
     &-copy {
-      // flex-grow: 1;
       padding: $spacing-07;
 
       @include mq($until: large) {
@@ -184,14 +178,6 @@ export default class AppMosaic extends Vue {
 
         @include mq($until: medium) {
           max-width: 100%;
-        }
-
-        &_fourth {
-          padding-bottom: $spacing-09;
-
-          @include mq($until: medium) {
-            padding-bottom: 0;
-          }
         }
       }
     }
