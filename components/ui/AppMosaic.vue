@@ -61,8 +61,9 @@ export default class AppMosaic extends Vue {
     justify-items: stretch;
 
     @include mq($from: medium, $until: large) {
-      grid-template-columns: 2fr 3fr;
-      grid-template-rows: repeat(3, minmax(10rem, auto));
+      grid-template-columns: 1fr 1fr;
+      // grid-template-rows: repeat(3, minmax(12rem, auto));
+      grid-template-rows: 20rem 15rem 12rem;
       grid-template-areas:
         "a b"
         "c c"
@@ -71,22 +72,24 @@ export default class AppMosaic extends Vue {
     }
 
     @include mq($until: medium) {
-      display: flex;
-      flex-direction: column;
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(4, minmax(18.75rem, auto));
+      grid-template-areas:
+        "a"
+        "b"
+        "c"
+        "d"
+      ;
     }
   }
 
   &__element {
     background-color: $cool-gray-10;
     display: flex;
-    flex-direction: column;
-
-    @include mq($until: medium) {
-      height: 18.75rem;
-    }
 
     &_first {
       grid-area: a;
+      flex-direction: column;
     }
 
     &_second {
@@ -96,15 +99,13 @@ export default class AppMosaic extends Vue {
 
     &_third {
       grid-area: c;
+      flex-direction: column;
 
       @include mq($from: medium, $until: large) {
-        display: grid;
-        grid-template-columns: 2fr 3fr;
-        gap: $spacing-07;
+        flex-direction: row-reverse;
       }
 
       @include mq($until: medium) {
-        display: flex;
         flex-direction: column-reverse;
       }
     }
@@ -138,12 +139,12 @@ export default class AppMosaic extends Vue {
         }
 
         @include mq($until: medium) {
-          min-height: 4rem;
+          min-height: 12rem;
         }
       }
 
       &_third {
-        background-position: center bottom;
+        background-position: center;
         background-size: cover;
         background-repeat: no-repeat;
         height: 25rem;
@@ -153,7 +154,7 @@ export default class AppMosaic extends Vue {
         }
 
         @include mq($until: medium) {
-          min-height: 4rem;
+          min-height: 12rem;
         }
       }
 
@@ -165,6 +166,7 @@ export default class AppMosaic extends Vue {
     }
 
     &-copy {
+      // flex-grow: 1;
       padding: $spacing-07;
 
       @include mq($until: large) {
