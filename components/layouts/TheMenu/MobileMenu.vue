@@ -126,6 +126,10 @@ export default class MobileMenu extends Mixins(MenuMixin) {
   }
 
   &__footer {
+    @include mq ($from: small) {
+      display: none;
+    }
+
     padding-top: $spacing-05;
     padding-bottom: $spacing-05 + 2.5rem; // make room for the "cookies preferences" button
     background-color: $white;
