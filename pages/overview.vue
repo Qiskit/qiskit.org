@@ -96,8 +96,6 @@ export default class OverviewPage extends QiskitPage {
 @import '~/assets/scss/blocks/copy.scss';
 
 .overview-page {
-  background-color: white;
-
   &__content-container {
     @include contained();
     display: flex;
