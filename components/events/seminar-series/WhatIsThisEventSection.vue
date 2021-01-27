@@ -40,7 +40,7 @@ export default class WhatIsThisEventSection extends Vue {
       position: 'fourth',
       title: 'Real time questions & discussion',
       description:
-        'Discuss in real time with other researchers, students, and folks in quantum, while having the ability to ask questions of the speaker in real time via the comment chat box on youtube. ',
+        'Discuss in real time with other researchers, students, and folks in quantum, while having the ability to ask questions of the speaker in real time via the comment chat box on YouTube. ',
       image: '/images/events/seminar-series/mosaic-interactivity.png'
     }
   ]
