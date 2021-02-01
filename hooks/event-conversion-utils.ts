@@ -207,5 +207,6 @@ export {
   getWebsite,
   getDates,
   formatDates,
-  filterWithWhitelist
+  filterWithWhitelist,
+  SeminarSeriesEvent
 }
