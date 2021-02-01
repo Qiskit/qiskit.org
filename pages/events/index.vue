@@ -190,7 +190,6 @@ export default class EventsPage extends QiskitPage {
 @import '~carbon-components/scss/globals/scss/typography';
 
 .event-page {
-  background-color: $white;
   color: $white-text-01;
 
   &__container {

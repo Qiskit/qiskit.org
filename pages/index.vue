@@ -32,8 +32,4 @@ export default class LandingPage extends QiskitPage {
 
 <style lang="scss">
 @import '~/assets/scss/blocks/copy.scss';
-
-.landing-page {
-  background-color: white;
-}
 </style>

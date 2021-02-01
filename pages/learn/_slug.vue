@@ -43,8 +43,6 @@ export default class LearnEntry extends QiskitPage {
 @import '~carbon-components/scss/globals/scss/typography';
 
 .learn-entry {
-  background-color: white;
-
   &__header {
     @include responsive-grid-bg-strip('/images/grid/grid-hero-learn.svg', auto, 28rem);
     min-height: 28rem;
