@@ -24,23 +24,23 @@ export default class WhatIsThisEventSection extends Vue {
     },
     {
       position: 'second',
-      title: 'About the team',
+      title: 'About the host',
       description:
-        'Our savvy producer is Paul Searle and our seminar co-host is Dr. Olivia Lanes.',
-      image: '/images/events/seminar-series/mosaic-team.png'
+        'Dr. Zlatko K. Minev, from IBM Quantum, is our lead host, whose quantum research earned him MIT Tech Review’s 35 under 35 Global Innovator award, and a spot on Discover’s Top 50 Stories of the Year.',
+      image: '/images/events/seminar-series/mosaic-host.png'
     },
     {
       position: 'third',
-      title: 'About the host',
+      title: 'The latest in quantum computing',
       description:
-        'Dr. Zlatko K. Minev, from IBM Quantum, is our lead host, whose quantum research earned him MIT Tech Review’s 35 under 35 Global Innovator award, a spot on Discover’s Top 50 Stories of the Year, and the JVA Presidential Award. Minev loves sharing science and is also the recipient of the Yale-Jefferson Award for Public Service.',
-      image: '/images/events/seminar-series/mosaic-host.png'
+        'This series will discuss all the most current research and new developements across the field of quantum computing.',
+      image: '/images/events/seminar-series/mosaic-team.png'
     },
     {
       position: 'fourth',
       title: 'Real time questions & discussion',
       description:
-        'Discuss in real time with other researchers, students, and folks in quantum, while having the ability to ask questions of the speaker in real time via the comment chat box on YouTube. ',
+        'Discuss in real time with other researchers, students, and folks in quantum, while having the ability to ask questions of the speaker in real time via the comment chat box on YouTube.',
       image: '/images/events/seminar-series/mosaic-interactivity.png'
     }
   ]
