@@ -15,8 +15,8 @@
         <AppCta v-bind="cta" class="seminar-series-header__cta" />
       </div>
       <div class="seminar-series-header__aside">
-        <div class="seminar-series-header__up-next__title-wrapper">
-          <div class="seminar-series-header__up-next__title copy__subtitle">
+        <div class="seminar-series-header__card-up-title-wrapper">
+          <div class="seminar-series-header__card-up-title copy__subtitle">
             {{ cardTitle }}
           </div>
         </div>
@@ -109,15 +109,13 @@ export default class SeminarSeriesHeader extends Vue {
     margin-top: $spacing-07;
   }
 
-  &__up-next {
-    &__title {
-      border-bottom: 4px solid $purple-60;
-      display: inline;
-      padding-bottom: $spacing-02;
-      padding-right: $spacing-03;
-    }
+  &__card-up-title {
+    border-bottom: 4px solid $purple-60;
+    display: inline;
+    padding-bottom: $spacing-02;
+    padding-right: $spacing-03;
 
-    &__title-wrapper {
+    &-wrapper {
       margin-bottom: $spacing-06;
     }
   }
