@@ -63,7 +63,7 @@ export default class AppMosaic extends Vue {
 
     @include mq($from: medium, $until: large) {
       grid-template-columns: 1fr 1fr;
-      grid-template-rows: 18rem 13rem 12rem;
+      grid-template-rows: 23rem 13rem 12rem;
       grid-template-areas:
         "a b"
         "c c"
@@ -134,11 +134,7 @@ export default class AppMosaic extends Vue {
         background-repeat: no-repeat;
         min-height: 15rem;
 
-        @include mq($from: medium, $until: large) {
-          min-height: 10rem;
-        }
-
-        @include mq($until: medium) {
+        @include mq($until: large) {
           min-height: 12rem;
         }
       }
