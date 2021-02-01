@@ -9,12 +9,14 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
-import events from '~/content/events/upcoming-seminar-series-events.json'
+import { Component, Prop } from 'vue-property-decorator'
+import { SeminarSeriesEvent } from '~/hooks/event-conversion-utils'
 
 @Component
 export default class UpcomingSeminarSeriesSection extends Vue {
-  tableDataPerRow = events.map(event => ([
+  @Prop({ type: Array, default: () => [] }) events!: SeminarSeriesEvent[]
+
+  tableDataPerRow = this.events.map(event => ([
     {
       component: 'span',
       styles: 'min-width: 9rem; display: inline-block;',
