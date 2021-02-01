@@ -17,19 +17,11 @@
       <div class="seminar-series-header__aside">
         <div class="seminar-series-header__up-next__title-wrapper">
           <div class="seminar-series-header__up-next__title copy__subtitle">
-            Up next:
+            {{ cardTitle }}
           </div>
         </div>
-        <EventCard
-          :date="nextEvent.date"
-          :image="nextEvent.image"
-          :institution="nextEvent.institution"
-          :location="nextEvent.location"
-          :title="nextEvent.speaker"
-          :to="nextEvent.to"
-          vertical-layout
-        >
-          {{ nextEvent.title }}
+        <EventCard v-bind="cardContent" :title="cardContent.speaker" vertical-layout>
+          {{ cardContent.title }}
         </EventCard>
       </div>
     </div>
@@ -41,11 +33,15 @@ import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 import { SEMINAR_SERIES_ALL_EPISODES_CTA } from '~/constants/appLinks.ts'
 import event from '~/content/events/next-seminar-series-event.json'
+import pastEvents from '~/content/events/past-seminar-series-events.json'
 
 @Component
 export default class SeminarSeriesHeader extends Vue {
   cta = SEMINAR_SERIES_ALL_EPISODES_CTA
   nextEvent = event
+  noNextEvent = JSON.stringify(this.nextEvent) === '{}'
+  cardTitle = this.noNextEvent ? 'Featured seminar:' : 'Up next:'
+  cardContent = this.noNextEvent ? pastEvents[Math.floor(Math.random() * pastEvents.length)] : this.nextEvent
 }
 </script>
 
