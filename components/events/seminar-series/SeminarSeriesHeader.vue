@@ -32,16 +32,15 @@
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 import { SEMINAR_SERIES_ALL_EPISODES_CTA } from '~/constants/appLinks.ts'
-import event from '~/content/events/next-seminar-series-event.json'
 import pastEvents from '~/content/events/past-seminar-series-events.json'
+import upcomingEvents from '~/content/events/upcoming-seminar-series-events.json'
 
 @Component
 export default class SeminarSeriesHeader extends Vue {
   cta = SEMINAR_SERIES_ALL_EPISODES_CTA
-  nextEvent = event
-  noNextEvent = JSON.stringify(this.nextEvent) === '{}'
-  cardTitle = this.noNextEvent ? 'Featured seminar:' : 'Up next:'
-  cardContent = this.noNextEvent ? pastEvents[Math.floor(Math.random() * pastEvents.length)] : this.nextEvent
+  nextEvent = upcomingEvents[0] || null
+  cardTitle = !this.nextEvent ? 'Featured seminar:' : 'Up next:'
+  cardContent = !this.nextEvent ? pastEvents[Math.floor(Math.random() * pastEvents.length)] : this.nextEvent
 }
 </script>
 
