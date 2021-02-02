@@ -126,7 +126,7 @@ export default class MobileMenu extends Mixins(MenuMixin) {
   }
 
   &__footer {
-    @include mq ($from: small) {
+    @include mq ($from: medium) {
       display: none;
     }
 
