@@ -31,7 +31,7 @@ export default class SeminarSeriesPage extends QiskitPage {
       title: 'Stay informed',
       description: 'Want to keep up to date with upcoming seminars? Click here to subscribe to our calendar for all upcoming events.',
       cta: {
-        url: '',
+        url: 'https://calendar.google.com/calendar/ical/c12g9fqo0mkvp9bo26dhm3u1rs%40group.calendar.google.com/public/basic.ics',
         label: 'Get calendar updates'
       }
     },
@@ -39,7 +39,7 @@ export default class SeminarSeriesPage extends QiskitPage {
       title: 'Nominate',
       description: 'If you or someone you know might be interested in speaking in a future seminar, we would love to include them. Please include your name, topic and available dates.',
       cta: {
-        url: '',
+        url: 'https://airtable.com/shrB5wy8SCaMMtKop',
         label: 'Contact us'
       }
     },
