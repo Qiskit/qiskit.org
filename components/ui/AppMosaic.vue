@@ -132,7 +132,6 @@ export default class AppMosaic extends Vue {
         background-position: center top;
         background-size: cover;
         background-repeat: no-repeat;
-        min-height: 15rem;
 
         @include mq($until: large) {
           min-height: 12rem;
