@@ -20,9 +20,9 @@ import { SeminarSeriesEvent } from '~/hooks/event-conversion-utils.ts'
 
 @Component
 export default class PastSeminarSeriesSection extends Vue {
-  @Prop({ type: Array, required: true }) pastEvents!: SeminarSeriesEvent[]
+  @Prop({ type: Array, required: true }) events!: SeminarSeriesEvent[]
 
-  tableDataPerRow = this.pastEvents.map(event => ([
+  tableDataPerRow = this.events.map(event => ([
     {
       component: 'span',
       styles: 'min-width: 9rem; display: inline-block;',

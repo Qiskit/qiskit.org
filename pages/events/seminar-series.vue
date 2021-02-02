@@ -3,7 +3,7 @@
     <SeminarSeriesHeader class="seminar-series-page__header" :next-event="nextEvent" :past-events="pastEvents" />
     <WhatIsThisEventSection class="seminar-series-page__section" />
     <UpcomingSeminarSeriesSection v-if="hasUpcomingEvents" :events="upcomingEvents" class="seminar-series-page__section" />
-    <PastSeminarSeriesSection class="seminar-series-page__section" :past-events="pastEvents" />
+    <PastSeminarSeriesSection class="seminar-series-page__section" :events="pastEvents" />
     <HelpfulResourcesSection class="seminar-series-page__section" :resources="helpfulResources" />
   </main>
 </template>
