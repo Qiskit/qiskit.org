@@ -1,9 +1,9 @@
 <template>
   <main class="event-page seminar-series-page">
-    <SeminarSeriesHeader class="seminar-series-page__header" :next-event="nextEvent" />
+    <SeminarSeriesHeader class="seminar-series-page__header" :next-event="nextEvent" :past-events="pastEvents" />
     <WhatIsThisEventSection class="seminar-series-page__section" />
     <UpcomingSeminarSeriesSection v-if="hasUpcomingEvents" :events="upcomingEvents" class="seminar-series-page__section" />
-    <PastSeminarSeriesSection class="seminar-series-page__section" />
+    <PastSeminarSeriesSection class="seminar-series-page__section" :past-events="pastEvents" />
     <HelpfulResourcesSection class="seminar-series-page__section" :resources="helpfulResources" />
   </main>
 </template>
@@ -12,6 +12,7 @@
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import { DescriptionCard } from '~/components/ui/AppDescriptionCard.vue'
+import pastSeminarSeriesEvents from '~/content/events/past-seminar-series-events.json'
 import upcomingSeminarSerieEvents from '~/content/events/upcoming-seminar-series-events.json'
 
 @Component({
@@ -24,6 +25,7 @@ import upcomingSeminarSerieEvents from '~/content/events/upcoming-seminar-series
 export default class SeminarSeriesPage extends QiskitPage {
   routeName = 'seminar-series'
   upcomingEvents = upcomingSeminarSerieEvents
+  pastEvents = pastSeminarSeriesEvents
   hasUpcomingEvents = JSON.stringify(this.upcomingEvents) !== '[]'
   nextEvent = upcomingSeminarSerieEvents[0] || null
 
