@@ -33,10 +33,11 @@ import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 import { SEMINAR_SERIES_ALL_EPISODES_CTA } from '~/constants/appLinks.ts'
 import pastEvents from '~/content/events/past-seminar-series-events.json'
+import { SeminarSeriesEvent } from '~/hooks/event-conversion-utils.ts'
 
 @Component
 export default class SeminarSeriesHeader extends Vue {
-  @Prop({ type: Object, required: false }) nextEvent!: Object|null
+  @Prop({ type: Object, required: false }) nextEvent!: SeminarSeriesEvent|null
 
   cta = SEMINAR_SERIES_ALL_EPISODES_CTA
   cardTitle = !this.nextEvent ? 'Featured seminar:' : 'Up next:'
