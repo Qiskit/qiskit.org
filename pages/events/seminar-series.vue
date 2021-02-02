@@ -29,7 +29,7 @@ export default class SeminarSeriesPage extends QiskitPage {
   helpfulResources: DescriptionCard[] = [
     {
       title: 'Stay informed',
-      description: 'Want to keep up to date with upcoming seminars? Click here to subscribe to our calendar for all upcoming events. This section needs copy review.',
+      description: 'Want to keep up to date with upcoming seminars? Click here to subscribe to our calendar for all upcoming events.',
       cta: {
         url: '',
         label: 'Get calendar updates'
