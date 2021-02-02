@@ -1,6 +1,6 @@
 <template>
   <main class="event-page seminar-series-page">
-    <SeminarSeriesHeader class="seminar-series-page__header" />
+    <SeminarSeriesHeader class="seminar-series-page__header" :next-event="nextEvent" />
     <WhatIsThisEventSection class="seminar-series-page__section" />
     <UpcomingSeminarSeriesSection v-if="hasUpcomingEvents" :events="upcomingEvents" class="seminar-series-page__section" />
     <PastSeminarSeriesSection class="seminar-series-page__section" />
@@ -25,6 +25,7 @@ export default class SeminarSeriesPage extends QiskitPage {
   routeName = 'seminar-series'
   upcomingEvents = upcomingSeminarSerieEvents
   hasUpcomingEvents = JSON.stringify(this.upcomingEvents) !== '[]'
+  nextEvent = upcomingSeminarSerieEvents[0] || null
 
   helpfulResources: DescriptionCard[] = [
     {
