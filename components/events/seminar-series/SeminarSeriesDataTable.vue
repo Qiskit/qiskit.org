@@ -24,19 +24,50 @@
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 import { GeneralLink } from '~/constants/appLinks'
+import { SeminarSeriesEvent } from '~/hooks/event-conversion-utils'
 
-type tableRow = [
-  {
-    component: string,
-    styles: string,
-    data: string | GeneralLink,
-  }
-]
+interface tableRowElement {
+  component: string,
+  styles: string,
+  data: string | GeneralLink,
+}
 
 @Component
 export default class SeminarSeriesDataTable extends Vue {
-  @Prop(Array) columns!: string[]
-  @Prop(Array) dataPerRow!: tableRow[]
+  @Prop({ type: Array, default: () => [] }) events!: SeminarSeriesEvent[]
+
+  dataPerRow: tableRowElement[][] = this.events.map(event => ([
+    {
+      component: 'span',
+      styles: 'min-width: 9rem; display: inline-block;',
+      data: event.speaker
+    },
+    {
+      component: 'span',
+      styles: 'min-width: 9rem; display: inline-block;',
+      data: event.institution
+    },
+    {
+      component: 'span',
+      styles: 'min-width: 19rem; display: inline-block;',
+      data: event.title
+    },
+    {
+      component: 'span',
+      styles: 'min-width: 8rem; display: inline-block;',
+      data: event.date
+    },
+    {
+      component: 'AppCta',
+      styles: 'min-width: 5rem;',
+      data: {
+        url: event.to,
+        label: 'Join event'
+      }
+    }
+  ]))
+
+  columns = ['Speaker', 'Institution', 'Name of talk', 'Date of talk', 'Link to talk']
 
   isAppCtaComponent (component: string) : boolean {
     return component === 'AppCta'

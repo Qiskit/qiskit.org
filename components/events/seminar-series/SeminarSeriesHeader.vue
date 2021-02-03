@@ -30,18 +30,18 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
+import { Component, Prop } from 'vue-property-decorator'
 import { SEMINAR_SERIES_ALL_EPISODES_CTA } from '~/constants/appLinks.ts'
-import event from '~/content/events/next-seminar-series-event.json'
-import pastEvents from '~/content/events/past-seminar-series-events.json'
+import { SeminarSeriesEvent } from '~/hooks/event-conversion-utils.ts'
 
 @Component
 export default class SeminarSeriesHeader extends Vue {
+  @Prop({ type: Object, required: false }) nextEvent!: SeminarSeriesEvent|null
+  @Prop({ type: Array, required: true }) pastEvents!: SeminarSeriesEvent[]
+
   cta = SEMINAR_SERIES_ALL_EPISODES_CTA
-  nextEvent = event
-  noNextEvent = JSON.stringify(this.nextEvent) === '{}'
-  cardTitle = this.noNextEvent ? 'Featured seminar:' : 'Up next:'
-  cardContent = this.noNextEvent ? pastEvents[Math.floor(Math.random() * pastEvents.length)] : this.nextEvent
+  cardTitle = !this.nextEvent ? 'Featured seminar:' : 'Up next:'
+  cardContent = !this.nextEvent ? this.pastEvents[Math.floor(Math.random() * this.pastEvents.length)] : this.nextEvent
 }
 </script>
 
