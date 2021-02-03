@@ -27,7 +27,7 @@ export default class SeminarSeriesPage extends QiskitPage {
   upcomingEvents = upcomingSeminarSerieEvents
   pastEvents = pastSeminarSeriesEvents
   hasUpcomingEvents = JSON.stringify(this.upcomingEvents) !== '[]'
-  nextEvent = upcomingSeminarSerieEvents[0] || null
+  nextEvent = this.hasUpcomingEvents ? upcomingSeminarSerieEvents[0] : null
 
   helpfulResources: DescriptionCard[] = [
     {
