@@ -49,6 +49,7 @@ export default class SeminarSeriesHeader extends Vue {
 
 <style lang="scss" scoped>
 @import '~carbon-components/scss/globals/scss/typography';
+@import "~/assets/scss/blocks/copy.scss";
 
 .seminar-series-header {
   @include responsive-grid-bg-strip('/images/grid/grid-hero-learn.svg', auto, 28rem);
