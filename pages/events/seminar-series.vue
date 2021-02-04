@@ -24,8 +24,10 @@ import upcomingSeminarSerieEvents from '~/content/events/upcoming-seminar-series
 })
 export default class SeminarSeriesPage extends QiskitPage {
   routeName = 'seminar-series'
+  // Assign the imported variable to a local one to be able to use it on the template
   upcomingEvents = upcomingSeminarSerieEvents
   pastEvents = pastSeminarSeriesEvents
+  // When there are no upcoming events, the JSON file is filled with []
   hasUpcomingEvents = JSON.stringify(this.upcomingEvents) !== '[]'
   nextEvent = this.hasUpcomingEvents ? upcomingSeminarSerieEvents[0] : null
 
