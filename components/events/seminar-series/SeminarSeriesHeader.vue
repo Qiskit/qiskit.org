@@ -41,7 +41,9 @@ export default class SeminarSeriesHeader extends Vue {
 
   cta = SEMINAR_SERIES_ALL_EPISODES_CTA
   cardTitle = !this.nextEvent ? 'Featured seminar:' : 'Up next:'
-  cardContent = !this.nextEvent ? this.pastEvents[Math.floor(Math.random() * this.pastEvents.length)] : this.nextEvent
+  randomNumber = Math.random()
+  randomIndex = Math.floor(this.randomNumber * this.pastEvents.length)
+  cardContent = !this.nextEvent ? this.pastEvents[this.randomIndex] : this.nextEvent
 }
 </script>
 
