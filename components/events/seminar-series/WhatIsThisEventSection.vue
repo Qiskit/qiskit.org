@@ -24,10 +24,10 @@ export default class WhatIsThisEventSection extends Vue {
     },
     {
       position: 'second',
-      title: 'About the host',
+      title: 'About the hosts',
       description:
-        'Dr. Zlatko K. Minev, from IBM Quantum, is our lead host, whose quantum research earned him MIT Tech Review’s 35 under 35 Global Innovator award, and a spot on Discover’s Top 50 Stories of the Year.',
-      image: '/images/events/seminar-series/mosaic-host.png'
+        'Dr. Zlatko K. Minev, research staff member at IBM Quantum and recipient of MIT Tech Review’s 35 under 35 Global Innovator award, is our lead host. He is joined by Dr. Olivia Lanes, an experimental researcher and education developer at IBM, working to bridge the gap between the hardware and software communities.',
+      image: '/images/events/seminar-series/mosaic-hosts.png'
     },
     {
       position: 'third',
