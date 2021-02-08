@@ -6,6 +6,7 @@
     :tags="types"
     :to="to"
     cta-label="Join the event"
+    :segment="segment"
     :vertical-layout="verticalLayout"
   >
     <div class="event-card__description">
@@ -31,6 +32,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
+import { SegmentData } from '~/constants/appLinks'
 
 @Component
 export default class EventCard extends Vue {
@@ -41,6 +43,7 @@ export default class EventCard extends Vue {
   @Prop(String) location!: string
   @Prop(String) date!: string
   @Prop(String) to!: string
+  @Prop({ type: Object, required: false }) segment: SegmentData | undefined
   @Prop({ type: Boolean, default: false }) verticalLayout!: Boolean
 }
 </script>
