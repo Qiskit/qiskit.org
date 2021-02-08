@@ -3,7 +3,7 @@
     <h2 class="copy__title">
       Past Quantum Seminars
     </h2>
-    <SeminarSeriesDataTable :events="events" />
+    <SeminarSeriesDataTable :events="events" events-section="past-events-section" />
     <AppCta
       class="past-seminar-series-section__cta"
       kind="ghost"

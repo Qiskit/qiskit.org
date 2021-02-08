@@ -20,7 +20,7 @@
             {{ cardTitle }}
           </div>
         </div>
-        <EventCard v-bind="cardContent" :title="cardContent.speaker" vertical-layout>
+        <EventCard v-bind="cardContent" :title="cardContent.speaker" :segment="segment" vertical-layout>
           {{ cardContent.title }}
         </EventCard>
       </div>
@@ -40,10 +40,12 @@ export default class SeminarSeriesHeader extends Vue {
   @Prop({ type: Array, required: true }) pastEvents!: SeminarSeriesEvent[]
 
   cta = SEMINAR_SERIES_ALL_EPISODES_CTA
-  cardTitle = !this.nextEvent ? 'Featured seminar:' : 'Up next:'
+  hasNextEvent = this.nextEvent
+  cardTitle = this.hasNextEvent ? 'Up next:' : 'Featured seminar:'
   randomNumber = Math.random()
   randomIndex = Math.floor(this.randomNumber * this.pastEvents.length)
-  cardContent = !this.nextEvent ? this.pastEvents[this.randomIndex] : this.nextEvent
+  cardContent = this.hasNextEvent ? this.nextEvent : this.pastEvents[this.randomIndex]
+  segment = { action: 'seminar-series > header > talk-on-youtube' }
 }
 </script>
 
