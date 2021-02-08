@@ -70,7 +70,7 @@ export default class SeminarSeriesPage extends QiskitPage {
       description: 'Qiskit is dedicated to providing an enjoyable and safe experience for all participants. We have a code of conduct that all events adhere to.',
       cta: {
         url: 'https://github.com/Qiskit/qiskit/blob/master/CODE_OF_CONDUCT.md',
-        label: 'See code of  conduct',
+        label: 'See code of conduct',
         segment: {
           action: `${this.routeName} > helpful-resources > code-of-conduct`
         }
