@@ -45,12 +45,18 @@ const seminarSeriesPlaylistUrl = 'https://www.youtube.com/playlist?list=PLOFEBzv
 
 const SEMINAR_SERIES_ALL_EPISODES_CTA: GeneralLink = {
   url: seminarSeriesPlaylistUrl,
-  label: 'Go to YouTube playlist'
+  label: 'Go to YouTube playlist',
+  segment: {
+    action: 'seminar-series > header > youtube-playlist'
+  }
 }
 
 const SEMINAR_SERIES_FULL_ARCHIVE_CTA: GeneralLink = {
   url: seminarSeriesPlaylistUrl,
-  label: 'Explore Full Seminar Archive'
+  label: 'Explore Full Seminar Archive',
+  segment: {
+    action: 'seminar-series > past-events-section > youtube-playlist'
+  }
 }
 
 const DISCOVER_TEXTBOOK_CTA: GeneralLink = {
