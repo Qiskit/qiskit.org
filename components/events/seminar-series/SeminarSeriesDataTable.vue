@@ -35,6 +35,7 @@ interface tableRowElement {
 @Component
 export default class SeminarSeriesDataTable extends Vue {
   @Prop({ type: Array, default: () => [] }) events!: SeminarSeriesEvent[]
+  @Prop({ type: String, required: true }) eventsSection!: string
 
   dataPerRow: tableRowElement[][] = this.events.map(event => ([
     {
@@ -62,7 +63,10 @@ export default class SeminarSeriesDataTable extends Vue {
       styles: 'min-width: 5rem;',
       data: {
         url: event.to,
-        label: 'Join event'
+        label: 'Join event',
+        segment: {
+          action: `seminar-series > ${this.eventsSection} > talk-on-youtube`
+        }
       }
     }
   ]))

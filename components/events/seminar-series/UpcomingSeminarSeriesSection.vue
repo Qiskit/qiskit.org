@@ -3,7 +3,7 @@
     <h2 class="copy__title">
       Upcoming Quantum Seminar Schedule
     </h2>
-    <SeminarSeriesDataTable :events="events" />
+    <SeminarSeriesDataTable :events="events" events-section="upcoming-events-section" />
   </section>
 </template>
 
