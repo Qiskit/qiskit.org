@@ -7,7 +7,10 @@
         class="app-mosaic__element"
         :class="`app-mosaic__element_${position}`"
       >
-        <div class="app-mosaic__element-copy">
+        <div
+          class="app-mosaic__element-copy"
+          :class="`app-mosaic__element-copy_${position}`"
+        >
           <dt class="copy__subtitle">
             {{ title }}
           </dt>
@@ -54,7 +57,7 @@ export default class AppMosaic extends Vue {
     display: grid;
     gap: $spacing-07;
     grid-template-columns: 2.5fr 4fr 3fr;
-    grid-template-rows: 26rem 16rem;
+    grid-template-rows: 29.5rem 16rem;
     grid-template-areas:
       "a b c"
       "d d c"
@@ -63,7 +66,7 @@ export default class AppMosaic extends Vue {
 
     @include mq($from: medium, $until: large) {
       grid-template-columns: 1fr 1fr;
-      grid-template-rows: 23rem 13rem 12rem;
+      grid-template-rows: 26rem 13rem 12rem;
       grid-template-areas:
         "a b"
         "c c"
@@ -160,6 +163,10 @@ export default class AppMosaic extends Vue {
 
       @include mq($until: large) {
         padding: $spacing-05;
+      }
+
+      &_fourth {
+        flex: 1 0 0;
       }
 
       &-description {
