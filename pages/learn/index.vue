@@ -139,9 +139,3 @@ export default class LearnPage extends QiskitPage {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.learn-page {
-  background-color: white;
-}
-</style>

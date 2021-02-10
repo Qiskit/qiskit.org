@@ -1,15 +1,23 @@
 import fs from 'fs'
 import util from 'util'
 
-import { fetchCommunityEvents } from './event-conversion-utils'
+import { fetchCommunityEvents, fetchSeminarSeriesEvents } from './event-conversion-utils'
 
 export default async function (apiKey: any, outputFolder: string) {
   const upcomingCommunityEvents = await fetchCommunityEvents(apiKey, { days: 31 })
   const pastCommunityEvents = await fetchCommunityEvents(apiKey, { days: -31 })
 
-  const writeFile = util.promisify(fs.writeFile)
-  const writeUpcomingEvents = writeFile(`${outputFolder}/upcoming-community-events.json`, JSON.stringify(upcomingCommunityEvents, null, 2))
-  const writePastEvents = writeFile(`${outputFolder}/past-community-events.json`, JSON.stringify(pastCommunityEvents, null, 2))
+  const upcomingSeminarSeriesEvents = await fetchSeminarSeriesEvents(apiKey, { days: 31 })
+  const pastSeminarSeriesEvents = await fetchSeminarSeriesEvents(apiKey, { days: -62 })
 
-  await Promise.all([writeUpcomingEvents, writePastEvents])
+  const writeFile = util.promisify(fs.writeFile)
+
+  const eventsAndOutputFilename = [
+    { events: upcomingCommunityEvents, outputFilename: 'upcoming-community-events.json' },
+    { events: pastCommunityEvents, outputFilename: 'past-community-events.json' },
+    { events: upcomingSeminarSeriesEvents, outputFilename: 'upcoming-seminar-series-events.json' },
+    { events: pastSeminarSeriesEvents, outputFilename: 'past-seminar-series-events.json' }
+  ]
+
+  await Promise.all(eventsAndOutputFilename.map(curr => writeFile(`${outputFolder}/${curr.outputFilename}`, JSON.stringify(curr.events, null, 2))))
 }
