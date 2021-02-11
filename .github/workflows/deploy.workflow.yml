@@ -39,7 +39,7 @@ jobs:
           AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
 
       - name: Deploy
-        run: cat content/advocates/advocates.json && cd deploy && ./deploy_cos.sh
+        run: cd deploy && ./deploy_cos.sh
         shell: bash
         env:
           encrypted_rclone_iv: ${{ secrets.ENCRYPTED_RCLONE_IV }}
