@@ -32,7 +32,7 @@ const ACCESS_IBM_Q_SYSTEMS: GeneralLink = {
 }
 
 const EVENT_REQUEST_LINK: GeneralLink = {
-  url: 'https://airtable.com/shrP84QQiqzC3aWMF',
+  url: 'https://airtable.com/shrRP0Td8TN4ttlFx',
   label: 'Request an event'
 }
 
