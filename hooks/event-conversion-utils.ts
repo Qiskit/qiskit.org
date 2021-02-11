@@ -78,7 +78,7 @@ async function fetchSeminarSeriesEvents (apiKey: string, { days }: { days: any }
   const { showOnSeminarSeriesPage } = RECORD_FIELDS
   const seminarSeriesEvents: SeminarSeriesEvent[] = []
 
-  await getEventsQuery(apiKey, days, 'Seminar Series Website', [`{${showOnSeminarSeriesPage}}`]).eachPage((records, nextPage) => {
+  await getEventsQuery(apiKey, days, 'Seminar Series Website DO NOT MODIFY', [`{${showOnSeminarSeriesPage}}`]).eachPage((records, nextPage) => {
     for (const record of records) {
       const seminarSeriesEvent = convertToSeminarSeriesEvent(record)
       seminarSeriesEvents.push(seminarSeriesEvent)
