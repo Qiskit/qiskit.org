@@ -1,3 +1,13 @@
+**IMPORTANT NOTE:**
+
+We renamed the `master` branch to `main` and GitHub is displaying a notice for the contributors visiting the repository. However, this is not compatible with the [Forking Workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/forking-workflow) we follow in the team. If you are contributing to qiskit.org, chances are that you have a fork of this project and your `origin` remote is pointing to it. The [Qiskit/qiskit.org](https://github.com/Qiskit/qiskit.org) repository should be your `upstream` remote and so, the instructions provided by GitHub should be directed towards your `upstream` remote:
+
+```
+git branch -m master main
+git fetch upstream
+git branch -u upstream/main main
+```
+
 <p align="center">
   <a href="https://qiskit.org/">
     <img alt="Qiskit" src="https://qiskit.org/images/qiskit-logo.png" width="70" />
