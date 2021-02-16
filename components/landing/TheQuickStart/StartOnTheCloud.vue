@@ -5,7 +5,7 @@
         Start Online
       </h3>
       <p class="copy__paragraph copy__paragraph_importance_support">
-        IBM's hosted Jupyter Notebooks let you get started without installing anything.
+        Get started in the cloud without installing anything with IBM Quantum Lab.
       </p>
       <AppCta
         kind="ghost"
