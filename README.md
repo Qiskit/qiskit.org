@@ -17,13 +17,13 @@
   Qiskit is an open-source quantum computing software development framework for leveraging today's quantum processors in research, education, and business.
 </p>
 <p align="center">
-  <a href="https://github.com/Qiskit/qiskit.org/blob/master/LICENSE.txt">
+  <a href="https://github.com/Qiskit/qiskit.org/blob/main/LICENSE.txt">
     <img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="Qiskit.org is released under the Apache 2.0 License." />
   </a>
   <a href="https://github.com/Qiskit/qiskit.org/actions">
-    <img src="https://github.com/Qiskit/qiskit.org/workflows/build%20and%20deploy/badge.svg?branch=master" alt="Current GitHub Action build status." />
+    <img src="https://github.com/Qiskit/qiskit.org/workflows/build%20and%20deploy/badge.svg?branch=main" alt="Current GitHub Action build status." />
   </a>
-  <a href="https://github.com/Qiskit/qiskit.org/blob/master/CONTRIBUTING.rst">
+  <a href="https://github.com/Qiskit/qiskit.org/blob/main/CONTRIBUTING.rst">
     <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs welcome!" />
   </a>
   <a href="https://twitter.com/intent/follow?screen_name=qiskit">
