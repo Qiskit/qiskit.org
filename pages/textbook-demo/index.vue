@@ -5,17 +5,17 @@
 </template>
 
 <script lang="ts">
-import { Component } from "vue-property-decorator";
-import QiskitPage from "~/components/logic/QiskitPage.vue";
+import { Component } from 'vue-property-decorator'
+import QiskitPage from '~/components/logic/QiskitPage.vue'
 
 @Component({
-  head() {
+  head () {
     return {
-      title: "Qiskit Textbook",
-    };
-  },
+      title: 'Qiskit Textbook'
+    }
+  }
 })
 export default class TextbookPage extends QiskitPage {
-  routeName: string = "textbook-demo";
+  routeName: string = 'textbook-demo'
 }
 </script>
