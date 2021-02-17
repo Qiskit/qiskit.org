@@ -1,10 +1,10 @@
 <template>
-  <article class="content-section">
-    <div class="content-section__overview">
+  <article class="app-content-section">
+    <div class="app-content-section__overview">
       <h2 class="copy__title">
         {{ title }}
       </h2>
-      <p class="content-section__description">
+      <p class="app-content-section__description">
         {{ description }}
       </p>
       <AppCta
@@ -13,7 +13,7 @@
         kind="ghost"
       />
     </div>
-    <div class="content-section__detail">
+    <div class="app-content-section__detail">
       <slot />
     </div>
   </article>
@@ -35,7 +35,7 @@ export default class AppContentSection extends Vue {
 <style lang="scss" scoped>
 @import '~/assets/scss/blocks/copy.scss';
 
-.content-section {
+.app-content-section {
   display: flex;
 
   @include mq($until: large) {
