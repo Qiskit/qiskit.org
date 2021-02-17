@@ -31,6 +31,10 @@ export default class AppLink extends Vue {
     return url.startsWith('mailto')
   }
 
+  static isButtonTrigger (url: string): boolean {
+    return url.startsWith('#mega-dropdown')
+  }
+
   static isIdAnchor (url: string): boolean {
     return url.startsWith('#')
   }
