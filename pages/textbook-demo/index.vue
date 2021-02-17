@@ -1,7 +1,7 @@
 <template>
-  <main class="textbook-page">
+  <main class="textbook-demo-page">
     <HelpfulResourcesSection
-      class="textbook-page__section"
+      class="textbook-demo-page__section"
       :resources="helpfulResources"
     />
   </main>
@@ -64,7 +64,7 @@ export default class TextbookPage extends QiskitPage {
 </script>
 
 <style lang="scss" scoped>
-.textbook-page {
+.textbook-demo-page {
   &__section {
     @include contained();
     margin-bottom: $layout-03;
