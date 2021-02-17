@@ -9,6 +9,7 @@ import {
   DOCUMENTATION_LINK,
   LEARN_LINK,
   OVERVIEW_LINK,
+  TEXTBOOK_DEMO_LINK,
   NavLink
 } from '~/constants/menuLinks'
 
@@ -21,6 +22,7 @@ export default class Menu extends Vue {
   mainLevelLinks: Array<NavLink> = [
     OVERVIEW_LINK,
     LEARN_LINK,
+    TEXTBOOK_DEMO_LINK,
     { ...COMMUNITY_LINK, sublinks: ORDERED_COMMUNITY_SUB_LINKS },
     DOCUMENTATION_LINK
   ]
