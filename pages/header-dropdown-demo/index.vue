@@ -19,8 +19,41 @@
           <li>Potential menu item</li>
         </ul>
       </div>
-      <div><p class="copy__subtitle">Heading 2</p></div>
-      <div><p class="copy__subtitle">Heading 3</p></div>
+
+      <div>
+        <p class="copy__subtitle">Heading 1</p>
+        <ul>
+          <li>Potential menu item</li>
+          <li>Potential menu item</li>
+          <li>Potential menu item</li>
+          <li>Potential menu item</li>
+          <li>Potential menu item</li>
+          <li>Potential menu item</li>
+        </ul>
+      </div>
+      <div>
+        <p class="copy__subtitle">Heading 1</p>
+        <ul>
+          <li>Potential menu item</li>
+          <li>Potential menu item</li>
+          <li>Potential menu item</li>
+          <li>Potential menu item</li>
+          <li>Potential menu item</li>
+          <li>Potential menu item</li>
+        </ul>
+      </div>
+      <div>
+        <p class="copy__subtitle">Heading 1</p>
+        <ul>
+          <li>Potential menu item</li>
+          <li>Potential menu item</li>
+          <li>Potential menu item</li>
+          <li>Potential menu item</li>
+          <li>Potential menu item</li>
+          <li>Potential menu item</li>
+        </ul>
+      </div>
+      <img src="https://placehold.it/800x300"/>
     </section>
   </div>
 </template>
@@ -58,7 +91,7 @@ export default class HeaderDropDown extends Vue {
     width: 12rem;
     display: flex;
     justify-content: space-between;
-    padding: $spacing-01;
+    padding: $spacing-03 $spacing-01;
   }
 
   &__icon {
@@ -68,11 +101,13 @@ export default class HeaderDropDown extends Vue {
   &__content {
     display: none;
     position: absolute;
-    top: 1.5rem;
+    top: 2.2rem;
     padding: 2rem 1rem;
     width: 32rem;
-    background-color: white;
+    background-color: $white;
+    box-shadow: -4px 4px 4px rgba(0, 0, 0,.25);
     height: 32rem;
+    overflow: scroll;
 
     &_active {
       display: block;
