@@ -1,5 +1,17 @@
 <template>
   <main class="textbook-demo-page">
+    <section class="textbook-demo-page__section">
+      <ContentSection
+        v-for="{ headline, description } in learningPaths"
+        :key="headline"
+        class="textbook-demo-page__learning-paths__section"
+        :description="description"
+        :title="headline"
+      >
+        <!-- TODO: Add path cards -->
+      </ContentSection>
+    </section>
+
     <HelpfulResourcesSection
       class="textbook-demo-page__section"
       :resources="helpfulResources"
@@ -60,6 +72,21 @@ export default class TextbookPage extends QiskitPage {
       }
     }
   ]
+
+  learningPaths = [
+    {
+      headline: 'Learning paths',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tempus et malesuada ipsum aenean imperdiet risus. Turpis morbi turpis fermentum tellus semper egestas amet, dictumst ipsum. Ut tincidunt amet quis donec tempus.',
+      paths: []
+    },
+    {
+      headline: 'University supplements',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tempus et malesuada ipsum aenean imperdiet risus. Turpis morbi turpis fermentum tellus semper egestas amet, dictumst ipsum. Ut tincidunt amet quis donec tempus.',
+      paths: []
+    }
+  ];
 }
 </script>
 
@@ -69,6 +96,12 @@ export default class TextbookPage extends QiskitPage {
     @include contained();
     margin-bottom: $layout-03;
     margin-top: $layout-05;
+  }
+
+  &__learning-paths {
+    &__section {
+      margin-bottom: $layout-03;
+    }
   }
 }
 </style>
