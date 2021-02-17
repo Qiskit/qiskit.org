@@ -29,7 +29,7 @@ export default class TextbookPage extends QiskitPage {
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Molestie ipsum eget id id hendrerit quis euismod eleifend urna.',
       cta: {
         url:
-          'https://calendar.google.com/calendar/ical/c12g9fqo0mkvp9bo26dhm3u1rs%40group.calendar.google.com/public/basic.ics',
+          '#',
         label: 'Lorem ipsum'
       }
     },
@@ -38,7 +38,7 @@ export default class TextbookPage extends QiskitPage {
       description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Risus morbi sodales euismod faucibus ut turpis sem.',
       cta: {
-        url: 'https://airtable.com/shrB5wy8SCaMMtKop',
+        url: '#',
         label: 'Lorem ipsum'
       }
     },
@@ -47,7 +47,7 @@ export default class TextbookPage extends QiskitPage {
       description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mollis turpis pulvinar morbi consequat pulvinar sit.',
       cta: {
-        url: 'https://qiskit.org/learn',
+        url: '#',
         label: 'Lorem ipsum'
       }
     },
@@ -56,7 +56,7 @@ export default class TextbookPage extends QiskitPage {
       description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Justo vestibulum urna sit est pellentesque tincidunt nisi, enim tincidunt.',
       cta: {
-        url: 'https://github.com/Qiskit/qiskit/blob/master/CODE_OF_CONDUCT.md',
+        url: '#',
         label: 'Lorem ipsum'
       }
     }
