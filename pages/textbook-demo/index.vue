@@ -2,13 +2,23 @@
   <main class="textbook-demo-page">
     <section class="textbook-demo-page__section">
       <ContentSection
-        v-for="{ headline, description } in learningPaths"
-        :key="headline"
+        v-for="{ title, description, paths } in learningPaths"
+        :key="title"
         class="textbook-demo-page__learning-paths__section"
         :description="description"
-        :title="headline"
+        :title="title"
       >
-        <!-- TODO: Add path cards -->
+        <AppCard
+          v-for="{ description: pathDescription, image, title: pathTitle, to } in paths"
+          :key="pathTitle"
+          class="textbook-demo-page__learning-paths__path-card"
+          cta-label="Go to this learning path"
+          :image="image"
+          :title="title"
+          :to="to"
+        >
+          {{ pathDescription }}
+        </AppCard>
       </ContentSection>
     </section>
 
@@ -75,18 +85,62 @@ export default class TextbookPage extends QiskitPage {
 
   learningPaths = [
     {
-      headline: 'Learning paths',
+      title: 'Learning paths',
       description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tempus et malesuada ipsum aenean imperdiet risus. Turpis morbi turpis fermentum tellus semper egestas amet, dictumst ipsum. Ut tincidunt amet quis donec tempus.',
-      paths: []
+      paths: [
+        {
+          image: 'image',
+          title: 'Introduction course',
+          description:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tempus et malesuada ipsum aenean imperdiet risus. Turpis morbi turpis fermentum tellus semper egestas amet, dictumst ipsum. Ut tincidunt amet quis donec tempus.',
+          to: '#'
+        },
+        {
+          image: 'image',
+          title: 'Traditional Algorithms',
+          description:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tempus et malesuada ipsum aenean imperdiet risus. Turpis morbi turpis fermentum tellus semper egestas amet, dictumst ipsum. Ut tincidunt amet quis donec tempus.',
+          to: '#'
+        },
+        {
+          image: 'image',
+          title: 'Quantum hardware',
+          description:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tempus et malesuada ipsum aenean imperdiet risus. Turpis morbi turpis fermentum tellus semper egestas amet, dictumst ipsum. Ut tincidunt amet quis donec tempus.',
+          to: '#'
+        },
+        {
+          image: 'image',
+          title: 'Quantum machine learning',
+          description:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tempus et malesuada ipsum aenean imperdiet risus. Turpis morbi turpis fermentum tellus semper egestas amet, dictumst ipsum. Ut tincidunt amet quis donec tempus.',
+          to: '#'
+        }
+      ]
     },
     {
-      headline: 'University supplements',
+      title: 'University supplements',
       description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tempus et malesuada ipsum aenean imperdiet risus. Turpis morbi turpis fermentum tellus semper egestas amet, dictumst ipsum. Ut tincidunt amet quis donec tempus.',
-      paths: []
+      paths: [
+        {
+          image: 'image',
+          title: 'Labs',
+          description:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tempus et malesuada ipsum aenean imperdiet risus. Turpis morbi turpis fermentum tellus semper egestas amet, dictumst ipsum. Ut tincidunt amet quis donec tempus.',
+          to: '#'
+        },
+        {
+          image: 'image',
+          title: 'Problem sets',
+          description:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tempus et malesuada ipsum aenean imperdiet risus. Turpis morbi turpis fermentum tellus semper egestas amet, dictumst ipsum. Ut tincidunt amet quis donec tempus.',
+          to: '#'
+        }
+      ]
     }
-  ];
+  ]
 }
 </script>
 
@@ -100,6 +154,10 @@ export default class TextbookPage extends QiskitPage {
 
   &__learning-paths {
     &__section {
+      margin-bottom: $layout-03;
+    }
+
+    &__path-card {
       margin-bottom: $layout-03;
     }
   }
