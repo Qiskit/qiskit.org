@@ -25,7 +25,7 @@ import { Component, Prop } from 'vue-property-decorator'
 import { NavLink } from '~/constants/menuLinks'
 
 @Component
-export default class ContentSection extends Vue {
+export default class AppContentSection extends Vue {
   @Prop(String) title!: string
   @Prop(String) description!: string
   @Prop(Object) link!: NavLink
