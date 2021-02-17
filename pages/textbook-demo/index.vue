@@ -1,7 +1,7 @@
 <template>
   <main class="textbook-demo-page">
     <section class="textbook-demo-page__section">
-      <ContentSection
+      <AppContentSection
         v-for="{ title, description, paths } in learningPaths"
         :key="title"
         class="textbook-demo-page__learning-paths__section"
@@ -19,7 +19,7 @@
         >
           {{ pathDescription }}
         </AppCard>
-      </ContentSection>
+      </AppContentSection>
     </section>
 
     <HelpfulResourcesSection

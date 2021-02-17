@@ -31,7 +31,7 @@
         />
       </div>
       <div class="overview-page__list-of-contents">
-        <ContentSection
+        <AppContentSection
           v-for="section in contentSections"
           :id="section.id"
           :key="section.id"
@@ -49,7 +49,7 @@
             class="overview-page__content-section-image"
             :src="section.image"
           >
-        </ContentSection>
+        </AppContentSection>
       </div>
     </section>
     <TheQuickStart id="quick-start" />
