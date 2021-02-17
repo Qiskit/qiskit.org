@@ -42,13 +42,15 @@
         >
           <ContentAccordion
             v-if="section.subSections"
+            class="overview-page__content-section-details"
             :tabs="asTabs(section.subSections)"
           />
-          <img
-            v-else
-            class="overview-page__content-section-image"
-            :src="section.image"
-          >
+          <div v-else class="overview-page__content-section-details">
+            <img
+              class="overview-page__content-section-image"
+              :src="section.image"
+            >
+          </div>
         </AppContentSection>
       </div>
     </section>
@@ -129,6 +131,11 @@ export default class OverviewPage extends QiskitPage {
   &__content-section {
     margin-bottom: $layout-05;
     overflow: hidden;
+  }
+
+  &__content-section-details {
+    background-color: $cool-gray-10;
+    height: 100%;
   }
 
   &__content-section-image {

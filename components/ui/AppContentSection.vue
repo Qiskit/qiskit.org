@@ -13,7 +13,7 @@
         kind="ghost"
       />
     </div>
-    <div class="app-content-section__detail">
+    <div>
       <slot />
     </div>
   </article>
@@ -61,11 +61,6 @@ export default class AppContentSection extends Vue {
     @include mq($until: large) {
       margin-bottom: $layout-03;
     }
-  }
-
-  &__detail {
-    flex: 1;
-    background-color: $cool-gray-10;
   }
 }
 </style>
