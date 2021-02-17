@@ -28,8 +28,7 @@ export default class TextbookPage extends QiskitPage {
       description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Molestie ipsum eget id id hendrerit quis euismod eleifend urna.',
       cta: {
-        url:
-          '#',
+        url: '#',
         label: 'Lorem ipsum'
       }
     },
