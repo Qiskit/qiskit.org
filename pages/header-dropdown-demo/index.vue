@@ -1,144 +1,25 @@
 <template>
   <div class="mega-dropdown">
     <button class="mega-dropdown__button" @click="isOpen">
-      browse content
+      Browse content
       <svg class="mega-dropdown__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><defs /><path d="M16 22L6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z" /><path fill="none" d="M0 0h32v32H0z" /></svg>
     </button>
     <section
       class="mega-dropdown__content"
       :class="{ 'mega-dropdown__content_active': showContent }"
     >
-      <div class="mega-dropdown__column">
-        <div class="mega-dropdown__menu">
-          <h4 class="copy__subtitle">
-            Prerequisites
-          </h4>
-          <ul class="mega-dropdown__menu-list">
-            <li class="mega-dropdown__menu-list-item">
-              Setting Up Your Environment
-            </li>
-            <li class="mega-dropdown__menu-list-item">
-              Python and Jupyter Notebooks
-            </li>
-          </ul>
-        </div>
-        <div class="mega-dropdown__menu">
-          <h4 class="copy__subtitle">
-            Quantum states and qubits
-          </h4>
-          <ul class="mega-dropdown__menu-list">
-            <li class="mega-dropdown__menu-list-item">
-              Introduction
-            </li>
-            <li class="mega-dropdown__menu-list-item">
-              The Atoms of Computation
-            </li>
-            <li class="mega-dropdown__menu-list-item">
-              Representing Qubit States
-            </li>
-            <li class="mega-dropdown__menu-list-item">
-              Single Qubit Gates
-            </li>
-            <li class="mega-dropdown__menu-list-item">
-              The Case for Quantum
-            </li>
-          </ul>
-        </div>
-        <div class="mega-dropdown__menu">
-          <h4 class="copy__subtitle">
-            Multiple qubits and entanglement
-          </h4>
-          <ul class="mega-dropdown__menu-list">
-            <li class="mega-dropdown__menu-list-item">
-              Introduction
-            </li>
-            <li class="mega-dropdown__menu-list-item">
-              Multiple Qubits and Entangled States
-            </li>
-            <li class="mega-dropdown__menu-list-item">
-              More Circuit Identities
-            </li>
-            <li class="mega-dropdown__menu-list-item">
-              Proving Universality
-            </li>
-            <li class="mega-dropdown__menu-list-item">
-              Classical Computation on a Quantum Computer
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="mega-dropdown__column">
-        <div class="mega-dropdown__menu">
-          <h4 class="copy__subtitle">
-            Quantum Protocols and Quantum Algorithms
-          </h4>
-          <ul class="mega-dropdown__menu-list">
-            <li class="mega-dropdown__menu-list-item">
-              Defining Quantum Circuits
-            </li>
-            <li class="mega-dropdown__menu-list-item">
-              Deutsch-Jozsa Algorithm
-            </li>
-          </ul>
-        </div>
-        <div class="mega-dropdown__menu">
-          <h4 class="copy__subtitle">
-            Quantum states and qubits
-          </h4>
-          <ul class="mega-dropdown__menu-list">
-            <li class="mega-dropdown__menu-list-item">
-              Introduction
-            </li>
-            <li class="mega-dropdown__menu-list-item">
-              The Atoms of Computation
-            </li>
-            <li class="mega-dropdown__menu-list-item">
-              Representing Qubit States
-            </li>
-            <li class="mega-dropdown__menu-list-item">
-              Single Qubit Gates
-            </li>
-            <li class="mega-dropdown__menu-list-item">
-              The Case for Quantum
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="mega-dropdown__column">
-        <div class="mega-dropdown__menu">
-          <h4 class="copy__subtitle">
-            Prerequisites
-          </h4>
-          <ul class="mega-dropdown__menu-list">
-            <li class="mega-dropdown__menu-list-item">
-              Setting Up Your Environment
-            </li>
-            <li class="mega-dropdown__menu-list-item">
-              Python and Jupyter Notebooks
-            </li>
-          </ul>
-        </div>
-        <div class="mega-dropdown__menu">
-          <h4 class="copy__subtitle">
-            Quantum states and qubits
-          </h4>
-          <ul class="mega-dropdown__menu-list">
-            <li class="mega-dropdown__menu-list-item">
-              Introduction
-            </li>
-            <li class="mega-dropdown__menu-list-item">
-              The Atoms of Computation
-            </li>
-            <li class="mega-dropdown__menu-list-item">
-              Representing Qubit States
-            </li>
-            <li class="mega-dropdown__menu-list-item">
-              Single Qubit Gates
-            </li>
-            <li class="mega-dropdown__menu-list-item">
-              The Case for Quantum
-            </li>
-          </ul>
+      <div v-for="group in megaMenuLinks" :key="group.title">
+        <div v-for="linkGroup in group" :key="linkGroup.title" class="mega-dropdown__group">
+          <div class="mega-dropdown__menu">
+            <h4 class="copy__subtitle">
+              {{ linkGroup.title }}
+            </h4>
+            <ul class="mega-dropdown__menu-list">
+              <li v-for="link in linkGroup.links" :key="link.label" class="mega-dropdown__menu-list-item">
+                {{ link.label }}
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
@@ -149,11 +30,15 @@
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 
+import { MEGA_MENU_LINKS_COLUMNS } from '~/constants/megaMenuLinks'
+
 @Component
 export default class HeaderDropDown extends Vue {
+  megaMenuLinks = MEGA_MENU_LINKS_COLUMNS
   showContent = false;
 
   isOpen () : void {
+    console.log(MEGA_MENU_LINKS_COLUMNS, "links")
     this.showContent = !this.showContent
   }
 }
@@ -178,6 +63,7 @@ export default class HeaderDropDown extends Vue {
     width: 12rem;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: $spacing-03 $spacing-01;
   }
 
@@ -190,7 +76,7 @@ export default class HeaderDropDown extends Vue {
     position: absolute;
     top: 2.2rem;
     padding: 2rem 1rem;
-    min-width: 32rem;
+    width: 48rem;
     background-color: $white;
     box-shadow: -4px 4px 4px rgba(0, 0, 0,.25);
     height: 32rem;
@@ -209,12 +95,12 @@ export default class HeaderDropDown extends Vue {
       right: 0;
       padding: 2rem;
       height: initial;
+      width: 100%;
     }
   }
 
-  &__column {
-    padding-right: $spacing-05;
-    max-width: 15rem;
+  &__group {
+    padding-right: $spacing-09;
 
     @include mq($until: medium) {
       max-width: initial;
@@ -223,10 +109,10 @@ export default class HeaderDropDown extends Vue {
   }
 
   &__menu {
-    margin-bottom: $spacing-05;
+    padding-bottom: $spacing-05;
 
     &-list-item {
-      padding-bottom: $spacing-03;
+      padding-bottom: $spacing-05;
     }
   }
 }
