@@ -22,7 +22,7 @@
       </div>
       <AppCta
         class="intro-section__cta"
-        v-bind="requestEarlyAccessLink"
+        v-bind="joinWaitingListLink"
         theme="dark"
       />
     </div>
@@ -35,9 +35,9 @@ import { Component } from 'vue-property-decorator'
 
 @Component
 export default class IntroSection extends Vue {
-  requestEarlyAccessLink = {
+  joinWaitingListLink = {
     url: 'http://qisk.it/metal',
-    label: 'Request early access'
+    label: 'Join waiting list'
   }
 }
 </script>
