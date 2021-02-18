@@ -2,7 +2,13 @@
   <main class="event-page seminar-series-page">
     <SeminarSeriesHeader class="seminar-series-page__header" :next-event="nextEvent" :past-events="pastEvents" />
     <WhatIsThisEventSection class="seminar-series-page__section" />
-    <UpcomingSeminarSeriesSection v-if="hasUpcomingEvents" :events="upcomingEvents" class="seminar-series-page__section" />
+    <AppDataTableSection
+      v-if="hasUpcomingEvents"
+      class="seminar-series-page__section"
+      :section-title="upcomingEventsSectionTitle"
+      :data-table-columns="seminarSeriesDataTableColumns"
+      :data-table-elements="upcomingEventsDataTable"
+    />
     <PastSeminarSeriesSection class="seminar-series-page__section" :events="pastEvents" />
     <HelpfulResourcesSection class="seminar-series-page__section" :resources="helpfulResources" />
   </main>
@@ -12,6 +18,8 @@
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import { DescriptionCard } from '~/components/ui/AppDescriptionCard.vue'
+import { SeminarSeriesEvent } from '~/hooks/event-conversion-utils'
+import { TableRowElement } from '~/components/ui/AppDataTable.vue'
 import pastSeminarSeriesEvents from '~/content/events/past-seminar-series-events.json'
 import upcomingSeminarSerieEvents from '~/content/events/upcoming-seminar-series-events.json'
 
@@ -24,12 +32,15 @@ import upcomingSeminarSerieEvents from '~/content/events/upcoming-seminar-series
 })
 export default class SeminarSeriesPage extends QiskitPage {
   routeName = 'seminar-series'
-  // Assign the imported variable to a local one to be able to use it on the template
-  upcomingEvents = upcomingSeminarSerieEvents
+
+  upcomingEventsSectionTitle = 'Upcoming Quantum Seminar Schedule'
+  seminarSeriesDataTableColumns = ['Speaker', 'Institution', 'Name of talk', 'Date of talk', 'Link to talk']
+  upcomingEventsDataTable = this.dataPerRow(upcomingSeminarSerieEvents, 'upcoming-events-section')
   pastEvents = pastSeminarSeriesEvents
+
   // When there are no upcoming events, the JSON file is filled with []
-  hasUpcomingEvents = JSON.stringify(this.upcomingEvents) !== '[]'
-  nextEvent = this.hasUpcomingEvents ? this.upcomingEvents[0] : null
+  hasUpcomingEvents = JSON.stringify(upcomingSeminarSerieEvents) !== '[]'
+  nextEvent = this.hasUpcomingEvents ? upcomingSeminarSerieEvents[0] : null
 
   helpfulResources: DescriptionCard[] = [
     {
@@ -77,6 +88,42 @@ export default class SeminarSeriesPage extends QiskitPage {
       }
     }
   ]
+
+  dataPerRow (events: SeminarSeriesEvent[], eventsSection: string) : TableRowElement[][] {
+    return events.map(event => ([
+      {
+        component: 'span',
+        styles: 'min-width: 9rem; display: inline-block;',
+        data: event.speaker
+      },
+      {
+        component: 'span',
+        styles: 'min-width: 9rem; display: inline-block;',
+        data: event.institution
+      },
+      {
+        component: 'span',
+        styles: 'min-width: 19rem; display: inline-block;',
+        data: event.title
+      },
+      {
+        component: 'span',
+        styles: 'min-width: 8rem; display: inline-block;',
+        data: event.date
+      },
+      {
+        component: 'AppCta',
+        styles: 'min-width: 5rem;',
+        data: {
+          url: event.to,
+          label: 'Join event',
+          segment: {
+            action: `seminar-series > ${eventsSection} > talk-on-youtube`
+          }
+        }
+      }
+    ]))
+  }
 }
 </script>
 
