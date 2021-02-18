@@ -14,7 +14,7 @@
           class="textbook-demo-page__learning-paths__path-card"
           cta-label="Go to this learning path"
           :image="image"
-          :title="title"
+          :title="pathTitle"
           :to="to"
         >
           {{ pathDescription }}
@@ -90,28 +90,28 @@ export default class TextbookPage extends QiskitPage {
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tempus et malesuada ipsum aenean imperdiet risus. Turpis morbi turpis fermentum tellus semper egestas amet, dictumst ipsum. Ut tincidunt amet quis donec tempus.',
       paths: [
         {
-          image: 'image',
+          image: '/images/textbook-demo/introduction-course.png',
           title: 'Introduction course',
           description:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tempus et malesuada ipsum aenean imperdiet risus. Turpis morbi turpis fermentum tellus semper egestas amet, dictumst ipsum. Ut tincidunt amet quis donec tempus.',
           to: '#'
         },
         {
-          image: 'image',
+          image: '/images/textbook-demo/traditional-algorithms.png',
           title: 'Traditional Algorithms',
           description:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tempus et malesuada ipsum aenean imperdiet risus. Turpis morbi turpis fermentum tellus semper egestas amet, dictumst ipsum. Ut tincidunt amet quis donec tempus.',
           to: '#'
         },
         {
-          image: 'image',
+          image: '/images/textbook-demo/quantum-hardware.png',
           title: 'Quantum hardware',
           description:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tempus et malesuada ipsum aenean imperdiet risus. Turpis morbi turpis fermentum tellus semper egestas amet, dictumst ipsum. Ut tincidunt amet quis donec tempus.',
           to: '#'
         },
         {
-          image: 'image',
+          image: '/images/textbook-demo/quantum-machine-learning.png',
           title: 'Quantum machine learning',
           description:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tempus et malesuada ipsum aenean imperdiet risus. Turpis morbi turpis fermentum tellus semper egestas amet, dictumst ipsum. Ut tincidunt amet quis donec tempus.',
@@ -125,14 +125,14 @@ export default class TextbookPage extends QiskitPage {
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tempus et malesuada ipsum aenean imperdiet risus. Turpis morbi turpis fermentum tellus semper egestas amet, dictumst ipsum. Ut tincidunt amet quis donec tempus.',
       paths: [
         {
-          image: 'image',
+          image: '/images/textbook-demo/labs.png',
           title: 'Labs',
           description:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tempus et malesuada ipsum aenean imperdiet risus. Turpis morbi turpis fermentum tellus semper egestas amet, dictumst ipsum. Ut tincidunt amet quis donec tempus.',
           to: '#'
         },
         {
-          image: 'image',
+          image: '/images/textbook-demo/problem-sets.png',
           title: 'Problem sets',
           description:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tempus et malesuada ipsum aenean imperdiet risus. Turpis morbi turpis fermentum tellus semper egestas amet, dictumst ipsum. Ut tincidunt amet quis donec tempus.',
