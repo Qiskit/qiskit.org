@@ -30,9 +30,22 @@
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 
+type Path = {
+  image: string,
+  title: string,
+  description: string,
+  to: string,
+}
+
+type LearningPath = {
+  title: string,
+  description: string,
+  paths: Path[],
+}
+
 @Component
 export default class StartLearningSection extends Vue {
-  learningPaths = [
+  learningPaths: LearningPath[] = [
     {
       title: 'Learning paths',
       description:
