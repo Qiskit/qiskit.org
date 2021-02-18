@@ -39,6 +39,10 @@ export default class TextbookDemoHeader extends Vue {
     height: 100%;
     justify-content: space-between;
     padding-top: $spacing-09;
+
+    @include mq($until: large) {
+      padding-top: $layout-06;
+    }
   }
 
   &__dropdown-container {
