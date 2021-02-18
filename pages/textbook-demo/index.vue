@@ -1,6 +1,9 @@
 <template>
   <main class="textbook-demo-page">
     <section class="textbook-demo-page__section">
+      <h2 class="copy__title">
+        Start learning in the way best for you
+      </h2>
       <AppContentSection
         v-for="{ title, description, paths } in learningPaths"
         :key="title"
@@ -146,7 +149,13 @@ export default class TextbookPage extends QiskitPage {
 </script>
 
 <style lang="scss" scoped>
+@import "~/assets/scss/blocks/copy.scss";
+
 .textbook-demo-page {
+  .copy__title {
+    max-width: initial;
+  }
+
   &__section {
     @include contained();
     margin-bottom: $layout-03;
