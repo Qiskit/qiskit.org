@@ -14,6 +14,7 @@
           class="textbook-demo-page__learning-paths__path-card"
           cta-label="Go to this learning path"
           :image="image"
+          image-contain
           :title="pathTitle"
           :to="to"
         >
