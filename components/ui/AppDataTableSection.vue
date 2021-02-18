@@ -4,6 +4,7 @@
       {{ sectionTitle }}
     </h2>
     <AppDataTable :columns="dataTableColumns" :elements="dataTableElements" />
+    <slot />
   </section>
 </template>
 

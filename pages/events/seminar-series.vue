@@ -9,7 +9,19 @@
       :data-table-columns="seminarSeriesDataTableColumns"
       :data-table-elements="upcomingEventsDataTable"
     />
-    <PastSeminarSeriesSection class="seminar-series-page__section" :events="pastEvents" />
+    <AppDataTableSection
+      v-if="hasUpcomingEvents"
+      class="seminar-series-page__section"
+      :section-title="pastEventsSectionTitle"
+      :data-table-columns="seminarSeriesDataTableColumns"
+      :data-table-elements="pastEventsDataTable"
+    >
+      <AppCta
+        class="seminar-series-page__past-events-cta"
+        kind="ghost"
+        v-bind="showMorePastEventsCta"
+      />
+    </AppDataTableSection>
     <HelpfulResourcesSection class="seminar-series-page__section" :resources="helpfulResources" />
   </main>
 </template>
@@ -20,8 +32,9 @@ import QiskitPage from '~/components/logic/QiskitPage.vue'
 import { DescriptionCard } from '~/components/ui/AppDescriptionCard.vue'
 import { SeminarSeriesEvent } from '~/hooks/event-conversion-utils'
 import { TableRowElement } from '~/components/ui/AppDataTable.vue'
-import pastSeminarSeriesEvents from '~/content/events/past-seminar-series-events.json'
 import upcomingSeminarSerieEvents from '~/content/events/upcoming-seminar-series-events.json'
+import pastSeminarSeriesEvents from '~/content/events/past-seminar-series-events.json'
+import { SEMINAR_SERIES_FULL_ARCHIVE_CTA } from '~/constants/appLinks.ts'
 
 @Component({
   head () {
@@ -34,8 +47,12 @@ export default class SeminarSeriesPage extends QiskitPage {
   routeName = 'seminar-series'
 
   upcomingEventsSectionTitle = 'Upcoming Quantum Seminar Schedule'
+  pastEventsSectionTitle = 'Past Quantum Seminars'
   seminarSeriesDataTableColumns = ['Speaker', 'Institution', 'Name of talk', 'Date of talk', 'Link to talk']
   upcomingEventsDataTable = this.dataPerRow(upcomingSeminarSerieEvents, 'upcoming-events-section')
+  pastEventsDataTable = this.dataPerRow(pastSeminarSeriesEvents, 'past-events-section')
+  showMorePastEventsCta = SEMINAR_SERIES_FULL_ARCHIVE_CTA
+
   pastEvents = pastSeminarSeriesEvents
 
   // When there are no upcoming events, the JSON file is filled with []
@@ -147,6 +164,10 @@ export default class SeminarSeriesPage extends QiskitPage {
     @include mq($until: large) {
       margin-bottom: $layout-01;
     }
+  }
+
+  &__past-events-cta {
+    padding-bottom: 0;
   }
 }
 </style>
