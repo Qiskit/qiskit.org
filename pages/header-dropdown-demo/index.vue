@@ -198,12 +198,28 @@ export default class HeaderDropDown extends Vue {
 
     &_active {
       display: flex;
+
+      @include mq($until: medium) {
+        flex-direction: column;
+      }
+    }
+
+    @include mq($until: large) {
+      left: 0;
+      right: 0;
+      padding: 2rem;
+      height: initial;
     }
   }
 
   &__column {
     padding-right: $spacing-05;
     max-width: 15rem;
+
+    @include mq($until: medium) {
+      max-width: initial;
+      width: 100%;
+    }
   }
 
   &__menu {
