@@ -71,7 +71,7 @@ const REQUEST_AN_EVENT_CTA: GeneralLink = {
 
 const TEXTBOOK_DEMO_START_LEARNING: GeneralLink = {
   url: '#',
-  label: 'Start learning',
+  label: 'Start learning'
 }
 
 const IBM_Q_EXPERIENCE: GeneralLink = {
@@ -90,5 +90,5 @@ export {
   SEMINAR_SERIES_ALL_EPISODES_CTA,
   SEMINAR_SERIES_FULL_ARCHIVE_CTA,
   TEXTBOOK_DEMO_START_LEARNING,
-  IBM_Q_EXPERIENCE,
+  IBM_Q_EXPERIENCE
 }

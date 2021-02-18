@@ -30,7 +30,20 @@ export default class TextbookDemoHeader extends Vue {
 <style lang="scss" scoped>
 .textbook-demo-header {
   background-color: $cool-gray-10;
+  background-image: url("/images/textbook-demo/header.png");
+  background-position: right top;
+  background-repeat: no-repeat;
+  background-size: 60% auto;
   height: 34rem;
+
+  @include mq($until: large) {
+    background-position: right bottom;
+    background-size: 70% auto;
+  }
+
+  @include mq($until: medium) {
+    background-size: contain;
+  }
 
   &__container {
     @include contained();
