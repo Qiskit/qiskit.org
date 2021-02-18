@@ -33,7 +33,7 @@ interface AgendaSlot {
     }
   }
 })
-export default class SeminarSeriesPage extends QiskitPage {
+export default class MITEndicottPage extends QiskitPage {
   routeName = 'mit-endicott'
 
   // Data for the mosaic section
