@@ -13,7 +13,7 @@ import { Component, Prop } from 'vue-property-decorator'
 import { TableRowElement } from '~/components/ui/AppDataTable.vue'
 
 @Component
-export default class UpcomingSeminarSeriesSection extends Vue {
+export default class AppDataTableSection extends Vue {
   @Prop({ type: String, required: true }) sectionTitle!: string
   @Prop({ type: Array, default: () => [] }) dataTableColumns!: string[]
   @Prop({ type: Array, default: () => [] }) dataTableElements!: TableRowElement[]
