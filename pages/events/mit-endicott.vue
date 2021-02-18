@@ -1,5 +1,10 @@
 <template>
   <main class="mit-endicott-page">
+    <AppMosaicSection
+      class="mit-endicott-page__section"
+      :title="mosaicSectionTitle"
+      :elements="mosaicElements"
+    />
     <AppDataTableSection
       class="mit-endicott-page__section"
       :section-title="agendaSectionTitle"
@@ -31,6 +36,37 @@ interface AgendaSlot {
 export default class SeminarSeriesPage extends QiskitPage {
   routeName = 'mit-endicott'
 
+  // Data for the mosaic section
+  mosaicSectionTitle = 'What is the Physics of Computation conference 40 Anniversary event?'
+  mosaicElements = [
+    {
+      position: 'first',
+      title: 'Hear from renown 1981 attendees ',
+      description: 'Listen to the what 1981 key attendees have to say about the first-ever Physics of Computation conference, hosted at the MIT Endicott House.',
+      image: '/images/events/seminar-series/mosaic-experts.png'
+    },
+    {
+      position: 'second',
+      title: 'Title Text',
+      description: 'blurb here on MIT and IBM hosting the 1981 conference and collaborating',
+      image: '/images/events/mit-endicott/mosaic-mit-endicott-house.png'
+    },
+    {
+      position: 'third',
+      title: 'The latest in quantum information science ',
+      description: 'This event will offer a wide range of talks that will illustrate the most current research and new developments across the field of quantum computing. ',
+      image: '/images/events/seminar-series/mosaic-team.png'
+    },
+    {
+      position: 'fourth',
+      title: 'Title Text',
+      description: `In the morning, follow our live panel and ask questions in real time via the comment chat box on YouTube.</br>
+                    In the afternoon, participate in live Q&As after each talk and engage in real time with other researchers and quantum experts and enthusiasts.`,
+      image: '/images/events/seminar-series/mosaic-interactivity.png'
+    }
+  ]
+
+  // Data for the agenda section
   agendaSectionTitle: string = 'Event schedule'
 
   agenda: AgendaSlot[] = [
