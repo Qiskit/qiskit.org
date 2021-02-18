@@ -2,58 +2,145 @@
   <div class="mega-dropdown">
     <button class="mega-dropdown__button" @click="isOpen">
       browse content
-      <svg class="mega-dropdown__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><defs/><path d="M16 22L6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"/><path fill="none" d="M0 0h32v32H0z"/></svg>
+      <svg class="mega-dropdown__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><defs /><path d="M16 22L6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z" /><path fill="none" d="M0 0h32v32H0z" /></svg>
     </button>
     <section
       class="mega-dropdown__content"
       :class="{ 'mega-dropdown__content_active': showContent }"
     >
-      <div>
-        <p class="copy__subtitle">Heading 1</p>
-        <ul>
-          <li>Potential menu item</li>
-          <li>Potential menu item</li>
-          <li>Potential menu item</li>
-          <li>Potential menu item</li>
-          <li>Potential menu item</li>
-          <li>Potential menu item</li>
-        </ul>
+      <div class="mega-dropdown__column">
+        <div class="mega-dropdown__menu">
+          <h4 class="copy__subtitle">
+            Prerequisites
+          </h4>
+          <ul class="mega-dropdown__menu-list">
+            <li class="mega-dropdown__menu-list-item">
+              Setting Up Your Environment
+            </li>
+            <li class="mega-dropdown__menu-list-item">
+              Python and Jupyter Notebooks
+            </li>
+          </ul>
+        </div>
+        <div class="mega-dropdown__menu">
+          <h4 class="copy__subtitle">
+            Quantum states and qubits
+          </h4>
+          <ul class="mega-dropdown__menu-list">
+            <li class="mega-dropdown__menu-list-item">
+              Introduction
+            </li>
+            <li class="mega-dropdown__menu-list-item">
+              The Atoms of Computation
+            </li>
+            <li class="mega-dropdown__menu-list-item">
+              Representing Qubit States
+            </li>
+            <li class="mega-dropdown__menu-list-item">
+              Single Qubit Gates
+            </li>
+            <li class="mega-dropdown__menu-list-item">
+              The Case for Quantum
+            </li>
+          </ul>
+        </div>
+        <div class="mega-dropdown__menu">
+          <h4 class="copy__subtitle">
+            Multiple qubits and entanglement
+          </h4>
+          <ul class="mega-dropdown__menu-list">
+            <li class="mega-dropdown__menu-list-item">
+              Introduction
+            </li>
+            <li class="mega-dropdown__menu-list-item">
+              Multiple Qubits and Entangled States
+            </li>
+            <li class="mega-dropdown__menu-list-item">
+              More Circuit Identities
+            </li>
+            <li class="mega-dropdown__menu-list-item">
+              Proving Universality
+            </li>
+            <li class="mega-dropdown__menu-list-item">
+              Classical Computation on a Quantum Computer
+            </li>
+          </ul>
+        </div>
       </div>
-
-      <div>
-        <p class="copy__subtitle">Heading 1</p>
-        <ul>
-          <li>Potential menu item</li>
-          <li>Potential menu item</li>
-          <li>Potential menu item</li>
-          <li>Potential menu item</li>
-          <li>Potential menu item</li>
-          <li>Potential menu item</li>
-        </ul>
+      <div class="mega-dropdown__column">
+        <div class="mega-dropdown__menu">
+          <h4 class="copy__subtitle">
+            Quantum Protocols and Quantum Algorithms
+          </h4>
+          <ul class="mega-dropdown__menu-list">
+            <li class="mega-dropdown__menu-list-item">
+              Defining Quantum Circuits
+            </li>
+            <li class="mega-dropdown__menu-list-item">
+              Deutsch-Jozsa Algorithm
+            </li>
+          </ul>
+        </div>
+        <div class="mega-dropdown__menu">
+          <h4 class="copy__subtitle">
+            Quantum states and qubits
+          </h4>
+          <ul class="mega-dropdown__menu-list">
+            <li class="mega-dropdown__menu-list-item">
+              Introduction
+            </li>
+            <li class="mega-dropdown__menu-list-item">
+              The Atoms of Computation
+            </li>
+            <li class="mega-dropdown__menu-list-item">
+              Representing Qubit States
+            </li>
+            <li class="mega-dropdown__menu-list-item">
+              Single Qubit Gates
+            </li>
+            <li class="mega-dropdown__menu-list-item">
+              The Case for Quantum
+            </li>
+          </ul>
+        </div>
       </div>
-      <div>
-        <p class="copy__subtitle">Heading 1</p>
-        <ul>
-          <li>Potential menu item</li>
-          <li>Potential menu item</li>
-          <li>Potential menu item</li>
-          <li>Potential menu item</li>
-          <li>Potential menu item</li>
-          <li>Potential menu item</li>
-        </ul>
+      <div class="mega-dropdown__column">
+        <div class="mega-dropdown__menu">
+          <h4 class="copy__subtitle">
+            Prerequisites
+          </h4>
+          <ul class="mega-dropdown__menu-list">
+            <li class="mega-dropdown__menu-list-item">
+              Setting Up Your Environment
+            </li>
+            <li class="mega-dropdown__menu-list-item">
+              Python and Jupyter Notebooks
+            </li>
+          </ul>
+        </div>
+        <div class="mega-dropdown__menu">
+          <h4 class="copy__subtitle">
+            Quantum states and qubits
+          </h4>
+          <ul class="mega-dropdown__menu-list">
+            <li class="mega-dropdown__menu-list-item">
+              Introduction
+            </li>
+            <li class="mega-dropdown__menu-list-item">
+              The Atoms of Computation
+            </li>
+            <li class="mega-dropdown__menu-list-item">
+              Representing Qubit States
+            </li>
+            <li class="mega-dropdown__menu-list-item">
+              Single Qubit Gates
+            </li>
+            <li class="mega-dropdown__menu-list-item">
+              The Case for Quantum
+            </li>
+          </ul>
+        </div>
       </div>
-      <div>
-        <p class="copy__subtitle">Heading 1</p>
-        <ul>
-          <li>Potential menu item</li>
-          <li>Potential menu item</li>
-          <li>Potential menu item</li>
-          <li>Potential menu item</li>
-          <li>Potential menu item</li>
-          <li>Potential menu item</li>
-        </ul>
-      </div>
-      <img src="https://placehold.it/800x300"/>
     </section>
   </div>
 </template>
@@ -103,14 +190,27 @@ export default class HeaderDropDown extends Vue {
     position: absolute;
     top: 2.2rem;
     padding: 2rem 1rem;
-    width: 32rem;
+    min-width: 32rem;
     background-color: $white;
     box-shadow: -4px 4px 4px rgba(0, 0, 0,.25);
     height: 32rem;
     overflow: scroll;
 
     &_active {
-      display: block;
+      display: flex;
+    }
+  }
+
+  &__column {
+    padding-right: $spacing-05;
+    max-width: 15rem;
+  }
+
+  &__menu {
+    margin-bottom: $spacing-05;
+
+    &-list-item {
+      padding-bottom: $spacing-03;
     }
   }
 }
