@@ -11,7 +11,10 @@
       :data-table-columns="agendaColumnsDataTable"
       :data-table-elements="agendaElementsDataTable"
     />
-    <HelpfulResourcesSection class="mit-endicott-page__section" :resources="helpfulResources" />
+    <AppHelpfulResourcesSection
+      class="mit-endicott-page__section"
+      :resources="helpfulResources"
+    />
   </main>
 </template>
 

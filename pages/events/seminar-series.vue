@@ -27,7 +27,10 @@
         v-bind="showMorePastEventsCta"
       />
     </AppDataTableSection>
-    <HelpfulResourcesSection class="seminar-series-page__section" :resources="helpfulResources" />
+    <AppHelpfulResourcesSection
+      class="seminar-series-page__section"
+      :resources="helpfulResources"
+    />
   </main>
 </template>
 
