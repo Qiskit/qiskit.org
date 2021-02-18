@@ -6,7 +6,8 @@
           Qiskit Textbook (beta)
         </AppPageHeaderTitle>
         <div class="textbook-demo-header__dropdown-container">
-          "Browse Content Dropdown"
+          <!-- TODO: Replace with "Content Dropdown" -->
+          <span style="color: black;">Browse Content Dropdown</span>
         </div>
       </div>
       <div class="textbook-demo-header__cta-container">
