@@ -1,5 +1,11 @@
 <template>
   <main class="mit-endicott-page">
+    <AppDataTableSection
+      class="mit-endicott-page__section"
+      :section-title="agendaSectionTitle"
+      :data-table-columns="agendaColumnsDataTable"
+      :data-table-elements="agendaElementsDataTable"
+    />
     <HelpfulResourcesSection class="mit-endicott-page__section" :resources="helpfulResources" />
   </main>
 </template>
@@ -8,6 +14,12 @@
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import { DescriptionCard } from '~/components/ui/AppDescriptionCard.vue'
+import { TableRowElement } from '~/components/ui/AppDataTable.vue'
+
+interface AgendaSlot {
+  time: string,
+  event: string
+}
 
 @Component({
   head () {
@@ -18,6 +30,50 @@ import { DescriptionCard } from '~/components/ui/AppDescriptionCard.vue'
 })
 export default class SeminarSeriesPage extends QiskitPage {
   routeName = 'mit-endicott'
+
+  agendaSectionTitle: string = 'Event schedule'
+
+  agenda: AgendaSlot[] = [
+    {
+      time: '08:30 AM (EST)',
+      event: 'An introduction from Olivia Lanes - an experimental researcher and education developer at IBM, Charlie Bennett - and Susannah Glickman.'
+    },
+    {
+      time: '09:00 AM (EST)',
+      event: 'A series of keynote addresses about quantum information science in the 1980s'
+    },
+    {
+      time: '10:30 AM (EST)',
+      event: 'A live panel that will bridge the Then and Now'
+    },
+    {
+      time: '11:30 AM (EST)',
+      event: 'IBM Hardware in the Future'
+    },
+    {
+      time: '01:00 AM (EST)',
+      event: 'Introduction to a series of talks on Hardware and Architecture in the 2020s '
+    },
+    {
+      time: '01:30 AM (EST)',
+      event: 'Introduction to a series of talks on Theory and Applications in the 2020s'
+    }
+  ]
+
+  agendaElementsDataTable: TableRowElement[][] = this.agenda.map(slot => ([
+    {
+      component: 'span',
+      styles: 'min-width: 3rem; display: inline-block;',
+      data: slot.time
+    },
+    {
+      component: 'span',
+      styles: 'min-width: 9rem; display: inline-block;',
+      data: slot.event
+    }
+  ]))
+
+  agendaColumnsDataTable: string[] = ['Time', 'Event']
 
   // TODO: Replace with the final content
   helpfulResources: DescriptionCard[] = [
