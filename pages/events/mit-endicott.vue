@@ -1,5 +1,13 @@
 <template>
   <main class="mit-endicott-page">
+    <EventsHeader
+      class="mit-endicott-page__header"
+      :title="headerTitle"
+      :description="headerDescription"
+      :cta="headerCTA"
+      :card-title="headerCardTitle"
+      :card-content="headerCardContent"
+    />
     <AppMosaicSection
       class="mit-endicott-page__section"
       :title="mosaicSectionTitle"
@@ -38,6 +46,40 @@ interface AgendaSlot {
 })
 export default class MITEndicottPage extends QiskitPage {
   routeName = 'mit-endicott'
+
+  // Data for the header section
+  headerTitle = 'Physics of Computation Conference 40th Anniversary'
+  headerDescription = [
+    `The 2021 Physics of Computation Conference is a 1-day virtual event that
+    will celebrate the 40th anniversary of the very first Physics of Computation
+    Conference held by IBM and MIT at the MIT Endicott House in 1981.`,
+    `With this new edition, we will take a look at the historical timeline of
+    quantum computing information science: we will hear keynotes from some of the
+    1981 attendees and pioneers in the field of quantum computing, and will then
+    shift our focus on the latest research to highlight where quantum is today and
+    where it is headed.`,
+    `The event will be streamed on YouTube and also offer opportunities for live
+    interactions, where you can ask questions and mingle with quantum researchers.`,
+    'Join us live on May 6, 2021 at 08:30 AM EST.'
+  ]
+
+  headerCTA = {
+    label: 'Register now',
+    url: '#',
+    segment: {
+      action: `${this.routeName} > header > register`
+    }
+  }
+
+  headerCardTitle = 'Event details'
+
+  headerCardContent = {
+    date: 'May 6, 2021',
+    image: '/images/events/mit-endicott/card-image-endicott-house-1981.png',
+    location: 'Online',
+    title: 'MIT Endicott House',
+    to: '#'
+  }
 
   // Data for the mosaic section
   mosaicSectionTitle = 'What is the Physics of Computation conference 40 Anniversary event?'
@@ -167,6 +209,14 @@ export default class MITEndicottPage extends QiskitPage {
 <style lang="scss" scoped>
 .mit-endicott-page {
   color: $white-text-01;
+
+  &__header {
+    padding-top: $layout-06;
+
+    @include mq($until: medium) {
+      padding-top: $layout-04;
+    }
+  }
 
   &__section {
     @include contained();
