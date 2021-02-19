@@ -10,6 +10,7 @@
       {{ description }}
     </p>
     <AppMosaic class="app-mosaic-section__mosaic" :mosaic-elements="elements" />
+    <slot />
   </section>
 </template>
 
