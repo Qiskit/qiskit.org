@@ -51,8 +51,8 @@ export default class MITEndicottPage extends QiskitPage {
     {
       position: 'second',
       title: 'Title Text',
-      description: 'blurb here on MIT and IBM hosting the 1981 conference and collaborating',
-      image: '/images/events/mit-endicott/mosaic-mit-endicott-house.png'
+      description: 'blurb here on MIT and IBM hosting the 1981 conference and collaborating blurb here on MIT and IBM hosting the 1981 conference and collaborating blurb here on MIT and IBM hosting the 1981 conference and collaborating blurb here on MIT and IBM hosting the 1981 conference and collaborating',
+      image: '/images/events/mit-endicott/mosaic-mit-endicott-house-1981.png'
     },
     {
       position: 'third',
