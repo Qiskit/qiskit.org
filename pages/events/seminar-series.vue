@@ -1,12 +1,18 @@
 <template>
   <main class="event-page seminar-series-page">
-    <SeminarSeriesHeader class="seminar-series-page__header" :next-event="nextEvent" :past-events="pastEvents" />
+    <EventsHeader
+      class="seminar-series-page__header"
+      :title="headerTitle"
+      :description="headerDescription"
+      :cta="headerCTA"
+      :card-title="headerCardTitle"
+      :card-content="headerCardContent"
+    />
     <AppMosaicSection
       class="seminar-series-page__section"
       :title="mosaicSectionTitle"
       :elements="mosaicElements"
     />
-    <WhatIsThisEventSection class="seminar-series-page__section" />
     <AppDataTableSection
       v-if="hasUpcomingEvents"
       class="seminar-series-page__section"
@@ -43,7 +49,10 @@ import { SeminarSeriesEvent } from '~/hooks/event-conversion-utils'
 import { TableRowElement } from '~/components/ui/AppDataTable.vue'
 import upcomingSeminarSerieEvents from '~/content/events/upcoming-seminar-series-events.json'
 import pastSeminarSeriesEvents from '~/content/events/past-seminar-series-events.json'
-import { SEMINAR_SERIES_FULL_ARCHIVE_CTA } from '~/constants/appLinks.ts'
+import {
+  SEMINAR_SERIES_ALL_EPISODES_CTA,
+  SEMINAR_SERIES_FULL_ARCHIVE_CTA
+} from '~/constants/appLinks.ts'
 
 @Component({
   head () {
@@ -54,6 +63,42 @@ import { SEMINAR_SERIES_FULL_ARCHIVE_CTA } from '~/constants/appLinks.ts'
 })
 export default class SeminarSeriesPage extends QiskitPage {
   routeName = 'seminar-series'
+
+  // Data for the header section
+  headerTitle = 'Quantum Information Science Seminar Series'
+  headerDescription = [
+    `The Qiskit Quantum Information Science Seminar Series is dedicated to the
+    research and academic communities as a broad and deep dive into the latest
+    cutting edge quantum research.`,
+    `The seminar is live and interactive, you can discuss and ask questions as
+    you watch, and is streamed on YouTube.`,
+    'Join us live every Friday at 12:00 PM ET.'
+  ]
+
+  headerCTA = {
+    ...SEMINAR_SERIES_ALL_EPISODES_CTA,
+    segment: {
+      action: `${this.routeName} > header > talk-on-youtube`
+    }
+  }
+
+  // When there are no upcoming events, the JSON file is filled with []
+  // hasUpcomingEvents = JSON.stringify(upcomingSeminarSerieEvents) !== '[]'
+  hasUpcomingEvents = false
+  randomNumber = Math.random()
+  randomIndex = Math.floor(this.randomNumber * pastSeminarSeriesEvents.length)
+
+  headerCardTitle = this.hasUpcomingEvents ? 'Up next:' : 'Featured seminar:'
+
+  cardContent = this.hasUpcomingEvents
+    ? upcomingSeminarSerieEvents[0]
+    : pastSeminarSeriesEvents[this.randomIndex]
+
+  headerCardContent = {
+    ...this.cardContent,
+    title: this.cardContent.speaker,
+    description: this.cardContent.title
+  }
 
   // Data for the mosaic section
   mosaicSectionTitle = 'What is the Quantum Information Science Seminar Series?'
@@ -98,10 +143,7 @@ export default class SeminarSeriesPage extends QiskitPage {
 
   pastEvents = pastSeminarSeriesEvents
 
-  // When there are no upcoming events, the JSON file is filled with []
-  hasUpcomingEvents = JSON.stringify(upcomingSeminarSerieEvents) !== '[]'
-  nextEvent = this.hasUpcomingEvents ? upcomingSeminarSerieEvents[0] : null
-
+  // Data for the helpful resources section
   helpfulResources: DescriptionCard[] = [
     {
       title: 'Stay informed',

@@ -24,7 +24,9 @@
             {{ cardTitle }}
           </div>
         </div>
-        <EventCard v-bind="cardContent" vertical-layout />
+        <EventCard v-bind="cardContent" vertical-layout>
+          {{ cardContent.description }}
+        </EventCard>
       </div>
     </div>
   </header>
