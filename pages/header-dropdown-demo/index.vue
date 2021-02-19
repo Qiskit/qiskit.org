@@ -74,7 +74,7 @@ export default class HeaderDropDown extends Vue {
     position: absolute;
     top: 2.2rem;
     padding: $spacing-07 $spacing-05;
-    width: 48rem;
+    width: 12 * $column-size-large;
     background-color: $white;
     box-shadow: -4px 4px 4px rgba(0, 0, 0,.25);
     height: 32rem;
@@ -91,7 +91,7 @@ export default class HeaderDropDown extends Vue {
     @include mq($until: large) {
       left: 0;
       right: 0;
-      padding: 2rem;
+      padding: $spacing-05;
       height: initial;
       width: 100%;
     }
