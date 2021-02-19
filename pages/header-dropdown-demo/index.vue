@@ -38,7 +38,6 @@ export default class HeaderDropDown extends Vue {
   showContent = false;
 
   isOpen () : void {
-    console.log(MEGA_MENU_LINKS_COLUMNS, "links")
     this.showContent = !this.showContent
   }
 }
