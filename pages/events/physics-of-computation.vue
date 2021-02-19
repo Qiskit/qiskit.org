@@ -45,7 +45,7 @@ interface AgendaSlot {
   }
 })
 export default class MITEndicottPage extends QiskitPage {
-  routeName = 'mit-endicott'
+  routeName = 'physics-of-computation'
 
   // Data for the header section
   headerTitle = 'Physics of Computation Conference 40th Anniversary'
