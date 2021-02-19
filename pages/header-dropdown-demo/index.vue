@@ -119,8 +119,6 @@ export default class HeaderDropDown extends Vue {
     &-link {
       color: $cool-gray-80;
     }
-
-
   }
 }
 </style>
