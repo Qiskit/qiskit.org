@@ -11,12 +11,11 @@
       <div v-for="group in megaMenuLinks" :key="group.title">
         <div v-for="linkGroup in group" :key="linkGroup.title" class="mega-dropdown__group">
           <div class="mega-dropdown__menu">
-            <h4 class="copy__subtitle">
-              {{ linkGroup.title }}
-            </h4>
             <ul class="mega-dropdown__menu-list">
               <li v-for="link in linkGroup.links" :key="link.label" class="mega-dropdown__menu-list-item">
-                {{ link.label }}
+                <BasicLink class="mega-dropdown__menu-link" :url="link.target">
+                  {{ link.label }}
+                </BasicLink>
               </li>
             </ul>
           </div>
@@ -74,7 +73,7 @@ export default class HeaderDropDown extends Vue {
     display: none;
     position: absolute;
     top: 2.2rem;
-    padding: 2rem 1rem;
+    padding: $spacing-07 $spacing-03;
     width: 48rem;
     background-color: $white;
     box-shadow: -4px 4px 4px rgba(0, 0, 0,.25);
@@ -108,11 +107,20 @@ export default class HeaderDropDown extends Vue {
   }
 
   &__menu {
-    padding-bottom: $spacing-05;
+    padding-bottom: $spacing-07;
 
     &-list-item {
       padding-bottom: $spacing-05;
+      &:first-child {
+        font-weight: 600;
+      }
     }
+
+    &-link {
+      color: $cool-gray-80;
+    }
+
+
   }
 }
 </style>
