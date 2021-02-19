@@ -3,7 +3,7 @@
     <h2 class="copy__title">
       Start learning in the way best for you
     </h2>
-    <AppContentSection
+    <AppIntroductoryContent
       v-for="{ title, description, paths } in learningPaths"
       :key="title"
       class="start-learning-section__learning-paths__section"
@@ -22,7 +22,7 @@
       >
         {{ pathDescription }}
       </AppCard>
-    </AppContentSection>
+    </AppIntroductoryContent>
   </section>
 </template>
 
