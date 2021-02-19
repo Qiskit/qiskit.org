@@ -82,8 +82,7 @@ export default class SeminarSeriesPage extends QiskitPage {
   }
 
   // When there are no upcoming events, the JSON file is filled with []
-  // hasUpcomingEvents = JSON.stringify(upcomingSeminarSerieEvents) !== '[]'
-  hasUpcomingEvents = false
+  hasUpcomingEvents = JSON.stringify(upcomingSeminarSerieEvents) !== '[]'
   randomNumber = Math.random()
   randomIndex = Math.floor(this.randomNumber * pastSeminarSeriesEvents.length)
 
