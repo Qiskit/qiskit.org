@@ -10,6 +10,19 @@
 <h3 align="center">
   ⚛️ 💻
 </h3>
+
+<h3 align="center">
+  ⚠️ IMPORTANT UPDATE
+</h3>
+
+We renamed the `master` branch to `main` and GitHub is displaying a notice for the contributors visiting the repository. However, this is not compatible with the [Forking Workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/forking-workflow) we follow in the team. If you are contributing to qiskit.org, chances are that you have a fork of this project and your `origin` remote is pointing to it. The [Qiskit/qiskit.org](https://github.com/Qiskit/qiskit.org) repository should be your `upstream` remote and so, the instructions provided by GitHub should be directed towards your `upstream` remote:
+
+```
+git branch -m master main
+git fetch upstream
+git branch -u upstream/main main
+```
+
 <h3 align="center">
   Welcome to Quantum
 </h3>
@@ -17,13 +30,13 @@
   Qiskit is an open-source quantum computing software development framework for leveraging today's quantum processors in research, education, and business.
 </p>
 <p align="center">
-  <a href="https://github.com/Qiskit/qiskit.org/blob/master/LICENSE.txt">
+  <a href="https://github.com/Qiskit/qiskit.org/blob/main/LICENSE.txt">
     <img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="Qiskit.org is released under the Apache 2.0 License." />
   </a>
   <a href="https://github.com/Qiskit/qiskit.org/actions">
-    <img src="https://github.com/Qiskit/qiskit.org/workflows/build%20and%20deploy/badge.svg?branch=master" alt="Current GitHub Action build status." />
+    <img src="https://github.com/Qiskit/qiskit.org/workflows/build%20and%20deploy/badge.svg?branch=main" alt="Current GitHub Action build status." />
   </a>
-  <a href="https://github.com/Qiskit/qiskit.org/blob/master/CONTRIBUTING.rst">
+  <a href="https://github.com/Qiskit/qiskit.org/blob/main/CONTRIBUTING.rst">
     <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs welcome!" />
   </a>
   <a href="https://twitter.com/intent/follow?screen_name=qiskit">

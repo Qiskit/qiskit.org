@@ -80,7 +80,7 @@ need to know that qiskit.org follows the
 with [Feature Branches](https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow).
 
 Regardless if you are a core contributor or not, the above means we expect you to fork
-the project on your own GitHub account and make your `master` branch to track this
+the project on your own GitHub account and make your `main` branch to track this
 repository. A typical Git setup after
 [forking the project](https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo) is:
 
@@ -90,20 +90,20 @@ git clone https://github.com/<your_username>/qiskit.org.git
 cd qiskit.org
 git remote add upstream https://github.com/qiskit/qiskit.org.git
 git remote update upstream
-git checkout master
-git branch -u upstream/master
+git checkout main
+git branch -u upstream/main
 git pull
 ```
 
 ### Working on an issue
 
-When you are going to start working on an issue, make sure you are in your `master`
+When you are going to start working on an issue, make sure you are in your `main`
 branch and that it is entirely up to date and create a new branch with a
 meaningful name. The typical terminal code for this is:
 
 ```sh
-git checkout master
-git pull upstream master
+git checkout main
+git pull upstream main
 git checkout -b issue-1234-new-header
 ```
 
@@ -121,16 +121,16 @@ Create a new header layout.
 Includes a new component factoring out the header of this new page and others.
 ```
 
-From time to time, you want to check if your `master` branch is still up to
+From time to time, you want to check if your `main` branch is still up to
 date. If not, you will need to merge
 (or [rebase](https://www.atlassian.com/git/tutorials/rewriting-history/git-rebase)),
 then continue working:
 
 ```sh
-git checkout master
+git checkout main
 git pull
 git checkout issue-1234-new-header
-git merge master
+git merge main
 ```
 
 ### Pull requests
@@ -148,7 +148,7 @@ git push origin issue-1234-new-header
 
 And
 [create a pull request](https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request)
-against `master` (or a feature branch).
+against `main` (or a feature branch).
 When creating the pull request, provide a description and
 [link with the issue that is being solved](https://docs.github.com/en/free-pro-team@latest/github/managing-your-work-on-github/linking-a-pull-request-to-an-issue).
 
@@ -175,7 +175,7 @@ The repository also contains some automated checks such as tests and
 **pass automatic checks and have, at least, one positive review**.
 
 During code reviews, there are two prominent roles: the reviewer and the contributor.
-The reviewer acts as the keeper of best-practices and code quality, asking 
+The reviewer acts as the keeper of best-practices and code quality, asking
 clarifying questions, highlighting implementation errors and recommending changes.
 We expect the contributor to take recommendations seriously and be willing to
 implement suggested changes or take some other action instead.
@@ -278,7 +278,7 @@ export default _factory()
 ## Final words
 
 Thank you for reading until the end of the document! Abiding by these guidelines you
-express your willing in collaborating and contributing in a healthy way. Thanks for 
+express your willing in collaborating and contributing in a healthy way. Thanks for
 that too!
 
 Now if you are a core contributor, perhaps you're interested in knowing more about
