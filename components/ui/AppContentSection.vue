@@ -1,10 +1,10 @@
 <template>
-  <article class="content-section">
-    <div class="content-section__overview">
+  <article class="app-content-section">
+    <div class="app-content-section__overview">
       <h2 class="copy__title">
         {{ title }}
       </h2>
-      <p class="content-section__description">
+      <p class="app-content-section__description">
         {{ description }}
       </p>
       <AppCta
@@ -13,7 +13,7 @@
         kind="ghost"
       />
     </div>
-    <div class="content-section__detail">
+    <div>
       <slot />
     </div>
   </article>
@@ -25,7 +25,7 @@ import { Component, Prop } from 'vue-property-decorator'
 import { NavLink } from '~/constants/menuLinks'
 
 @Component
-export default class ContentSection extends Vue {
+export default class AppContentSection extends Vue {
   @Prop(String) title!: string
   @Prop(String) description!: string
   @Prop(Object) link!: NavLink
@@ -35,7 +35,7 @@ export default class ContentSection extends Vue {
 <style lang="scss" scoped>
 @import '~/assets/scss/blocks/copy.scss';
 
-.content-section {
+.app-content-section {
   display: flex;
 
   @include mq($until: large) {
@@ -61,11 +61,6 @@ export default class ContentSection extends Vue {
     @include mq($until: large) {
       margin-bottom: $layout-03;
     }
-  }
-
-  &__detail {
-    flex: 1;
-    background-color: $cool-gray-10;
   }
 }
 </style>
