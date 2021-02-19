@@ -34,8 +34,6 @@ export default class AppCta extends Vue {
     const url = this.$attrs.url
     if (BasicLink.isExternal(url)) {
       return 'launch-16'
-    } else if (url === '#mega-dropdown') {
-      return 'chevron-down-16'
     } else if (BasicLink.isIdAnchor(url)) {
       return 'arrow-down-16'
     } else {

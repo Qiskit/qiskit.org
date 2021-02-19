@@ -32,7 +32,7 @@ import { Component } from 'vue-property-decorator'
 import { MEGA_MENU_LINKS_COLUMNS } from '~/constants/megaMenuLinks'
 
 @Component
-export default class HeaderDropDown extends Vue {
+export default class TheMegaDropdownMenu extends Vue {
   megaMenuLinks = MEGA_MENU_LINKS_COLUMNS
   showContent = false;
 
