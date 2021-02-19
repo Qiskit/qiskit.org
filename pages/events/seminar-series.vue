@@ -21,7 +21,6 @@
       :data-table-elements="upcomingEventsDataTable"
     />
     <AppDataTableSection
-      v-if="hasUpcomingEvents"
       class="seminar-series-page__section"
       :section-title="pastEventsSectionTitle"
       :data-table-columns="seminarSeriesDataTableColumns"
