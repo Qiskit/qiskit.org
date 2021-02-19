@@ -71,7 +71,7 @@ export default class MITEndicottPage extends QiskitPage {
     }
   }
 
-  headerCardTitle = 'Event details'
+  headerCardTitle = 'Event details:'
 
   headerCardContent = {
     date: 'May 6, 2021',
@@ -144,7 +144,7 @@ export default class MITEndicottPage extends QiskitPage {
   agendaElementsDataTable: TableRowElement[][] = this.agenda.map(slot => ([
     {
       component: 'span',
-      styles: 'min-width: 3rem; display: inline-block;',
+      styles: 'min-width: 3rem; display: inline-block; font-weight: bold;',
       data: slot.time
     },
     {
