@@ -124,7 +124,7 @@ export default class MITEndicottPage extends QiskitPage {
   agenda: AgendaSlot[] = [
     {
       time: '08:30 AM (EST)',
-      event: 'An introduction from Olivia Lanes - an experimental researcher and education developer at IBM, Charlie Bennett - and Susannah Glickman.'
+      event: 'An introduction from Olivia Lanes PhD, an experimental researcher and education developer at IBM and Charlie Bennett, physicist, information theorist and IBM Fellow at IBM Research.'
     },
     {
       time: '09:00 AM (EST)',
@@ -132,19 +132,19 @@ export default class MITEndicottPage extends QiskitPage {
     },
     {
       time: '10:30 AM (EST)',
-      event: 'A live panel that will bridge the Then and Now'
+      event: 'A live panel that will bridge Then and Now'
     },
     {
       time: '11:30 AM (EST)',
-      event: 'IBM Hardware in the Future'
+      event: 'The future of quantum hardware'
     },
     {
       time: '01:00 AM (EST)',
-      event: 'Introduction to a series of talks on Hardware and Architecture in the 2020s '
+      event: 'Talk Series 1: Hardware and Architecture'
     },
     {
-      time: '01:30 AM (EST)',
-      event: 'Introduction to a series of talks on Theory and Applications in the 2020s'
+      time: '01:00 AM (EST)',
+      event: 'Talk Series 2: Theory and Applications'
     }
   ]
 
@@ -167,32 +167,32 @@ export default class MITEndicottPage extends QiskitPage {
   helpfulResources: DescriptionCard[] = [
     {
       title: 'Stay informed',
-      description: 'Want to keep up to date with upcoming seminars? Click here to subscribe to our calendar for all upcoming events.',
+      description: 'Click on the link below to get an email notification when registration for QC40 opens.',
       cta: {
         url: '/',
-        label: 'Get calendar updates',
+        label: 'Join mailing list',
         segment: {
-          action: `${this.routeName} > helpful-resources > get-calendar`
+          action: `${this.routeName} > helpful-resources > join-mailing-list`
         }
       }
     },
     {
-      title: 'Nominate',
-      description: 'If you or someone you know might be interested in speaking in a future seminar, we would love to include them. Please include your name, topic and available dates.',
+      title: 'Learn more about Quantum',
+      description: 'Link to IBM Quantum page',
       cta: {
         url: '/',
-        label: 'Contact us',
+        label: 'Call to action here',
         segment: {
           action: `${this.routeName} > helpful-resources > contact`
         }
       }
     },
     {
-      title: 'Get up to speed',
-      description: 'If the content of the seminar series is too dense or technical, we have a host of content to help you get up to speed.',
+      title: 'Learn more about Qiskit',
+      description: 'Link to Qiskit page',
       cta: {
         url: '/',
-        label: 'Start learning',
+        label: 'Call to action here',
         segment: {
           action: `${this.routeName} > helpful-resources > qiskit-org-learn`
         }
@@ -200,9 +200,9 @@ export default class MITEndicottPage extends QiskitPage {
     },
     {
       title: 'Code of conduct',
-      description: 'Qiskit is dedicated to providing an enjoyable and safe experience for all participants. We have a code of conduct that all events adhere to.',
+      description: 'We are dedicated to providing an enjoyable and safe experience for all participants. We have a code of conduct that all events adhere to.',
       cta: {
-        url: '/',
+        url: 'https://github.com/Qiskit/qiskit/blob/master/CODE_OF_CONDUCT.md',
         label: 'See code of conduct',
         segment: {
           action: `${this.routeName} > helpful-resources > code-of-conduct`
