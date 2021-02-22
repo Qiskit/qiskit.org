@@ -104,10 +104,16 @@ export default class MITEndicottPage extends QiskitPage {
     },
     {
       position: 'fourth',
-      title: 'Title Text',
-      description: `In the morning, follow our live panel and ask questions in real time via the comment chat box on YouTube.</br>
-                    In the afternoon, participate in live Q&As after each talk and engage in real time with other researchers and quantum experts and enthusiasts.`,
-      image: '/images/events/seminar-series/mosaic-interactivity.png'
+      title: 'Call for Submissions ',
+      description: `<strong>Format:</strong> Submit a clear abstract here (each presenter will have 15 minutes plus a 5-minute Q&A)<br/>
+        <strong>Review criteria:</strong> <em>(scored with equal weight)</em><br/>
+        • Problem and application - Measures future influence in quantum information science<br/>
+        • Technical approach and novelty - Rates innovative aspect of your approach to the problem<br/>
+        • Significance of research contribution - Evaluates progress towards a solution<br/>
+        • Clarity of the proposed topic<br/>
+        <strong>Reviewers:</strong> Quantum experts serving on the IBM Academic Steering Committee<br/>
+        <strong>Deadline for submission:</strong> March 22, 2021<br/>
+        <strong>Decision date:</strong> April 15, 2021`
     }
   ]
 

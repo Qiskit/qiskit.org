@@ -17,11 +17,11 @@
           <dd
             class="app-mosaic__element-copy-description"
             :class="`app-mosaic__element-copy-description_${position}`"
-          >
-            {{ description }}
-          </dd>
+            v-html="description"
+          />
         </div>
         <div
+          v-if="image"
           :lazy-background="image"
           class="app-mosaic__element-image"
           :class="`app-mosaic__element-image_${position}`"
@@ -57,7 +57,7 @@ export default class AppMosaic extends Vue {
     display: grid;
     gap: $spacing-07;
     grid-template-columns: 2.5fr 4fr 3fr;
-    grid-template-rows: 29.5rem 16rem;
+    grid-template-rows: 29.5rem minmax(16rem, auto);
     grid-template-areas:
       "a b c"
       "d d c"
@@ -172,7 +172,7 @@ export default class AppMosaic extends Vue {
       &-description {
         @include type-style('body-long-01');
         color: $cool-gray-80;
-        max-width: 6 * $column-size-large;
+        // max-width: 6 * $column-size-large;
 
         @include mq($from: medium, $until: large) {
           max-width: 5 * $column-size-medium;
