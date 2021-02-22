@@ -14,11 +14,13 @@
           <dt class="copy__subtitle">
             {{ title }}
           </dt>
+          <!-- eslint-disable vue/no-v-html -->
           <dd
             class="app-mosaic__element-copy-description"
             :class="`app-mosaic__element-copy-description_${position}`"
             v-html="description"
           />
+          <!-- estlint-enable -->
         </div>
         <div
           v-if="image"
