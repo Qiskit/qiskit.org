@@ -49,14 +49,13 @@ export default class TheMegaDropdownMenu extends Vue {
   @include type-style('body-short-01');
   color: $cool-gray-80;
   position: relative;
-  width: 18rem;
 
   &__button {
     background-color: transparent;
     outline: none;
     border: none;
     border-bottom: 1px solid $cool-gray-80;
-    width: 100%;
+    width: 18rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
