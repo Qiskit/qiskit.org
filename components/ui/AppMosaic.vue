@@ -66,7 +66,7 @@ export default class AppMosaic extends Vue {
 
     @include mq($from: medium, $until: large) {
       grid-template-columns: 1fr 1fr;
-      grid-template-rows: 26rem 13rem 12rem;
+      grid-template-rows: 26rem 13rem minmax(12rem, auto);
       grid-template-areas:
         "a b"
         "c c"
@@ -163,6 +163,10 @@ export default class AppMosaic extends Vue {
 
       @include mq($until: large) {
         padding: $spacing-05;
+
+        &_third, &_fourth {
+          flex: 1 0 0;
+        }
       }
 
       &_fourth {
@@ -172,15 +176,6 @@ export default class AppMosaic extends Vue {
       &-description {
         @include type-style('body-long-01');
         color: $cool-gray-80;
-        // max-width: 6 * $column-size-large;
-
-        @include mq($from: medium, $until: large) {
-          max-width: 5 * $column-size-medium;
-        }
-
-        @include mq($until: medium) {
-          max-width: 100%;
-        }
       }
     }
   }
