@@ -6,7 +6,7 @@
           Qiskit Textbook (beta)
         </AppPageHeaderTitle>
         <div class="textbook-demo-header__dropdown-container">
-          <TheMegaDropdownMenu/>
+          <TheMegaDropdownMenu />
         </div>
       </div>
       <div class="textbook-demo-header__cta-container">
