@@ -5,7 +5,7 @@
     :title="title"
     :tags="types"
     :to="to"
-    cta-label="Join the event"
+    :cta-label="ctaLabel"
     :segment="segment"
     :vertical-layout="verticalLayout"
   >
@@ -43,6 +43,7 @@ export default class EventCard extends Vue {
   @Prop(String) location!: string
   @Prop(String) date!: string
   @Prop(String) to!: string
+  @Prop({ type: String, default: 'Join the event' }) ctaLabel!: string
   @Prop({ type: Object, required: false }) segment: SegmentData | undefined
   @Prop({ type: Boolean, default: false }) verticalLayout!: Boolean
 }
