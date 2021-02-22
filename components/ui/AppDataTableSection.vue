@@ -1,5 +1,5 @@
 <template>
-  <section class="data-table-section">
+  <section class="app-data-table-section">
     <h2 class="copy__title">
       {{ sectionTitle }}
     </h2>
@@ -24,7 +24,7 @@ export default class AppDataTableSection extends Vue {
 <style lang="scss" scoped>
 @import "~/assets/scss/blocks/copy.scss";
 
-.data-table-section {
+.app-data-table-section {
   .copy__title {
     max-width: initial;
   }
