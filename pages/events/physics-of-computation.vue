@@ -79,7 +79,8 @@ export default class MITEndicottPage extends QiskitPage {
     image: '/images/events/mit-endicott/card-image-endicott-house-1981.png',
     location: 'Online',
     title: 'Hosted by IBM',
-    to: '#'
+    to: '#',
+    ctaLabel: 'Add to calendar'
   }
 
   // Data for the mosaic section
