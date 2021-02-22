@@ -46,23 +46,21 @@ export default class TheMegaDropdownMenu extends Vue {
 @import '~carbon-components/scss/globals/scss/typography';
 
 .mega-dropdown {
-  @include contained();
   @include type-style('body-short-01');
   color: $cool-gray-80;
   position: relative;
+  width: 18rem;
 
   &__button {
-    background-color: $white;
+    background-color: transparent;
     outline: none;
     border: none;
     border-bottom: 1px solid $cool-gray-80;
-    padding-right: 0;
-    padding-left: 0;
-    width: 12rem;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: $spacing-03 $spacing-01;
+    padding: $spacing-03;
 
     .mega-dropdown__icon > path {
       transform: translate(0, 0);

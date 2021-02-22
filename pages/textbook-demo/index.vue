@@ -1,6 +1,6 @@
 <template>
   <main class="textbook-demo-page">
-    <TheMegaDropdownMenu />
+    <TextbookDemoHeader />
     <HelpfulResourcesSection
       class="textbook-demo-page__section"
       :resources="helpfulResources"
@@ -12,16 +12,12 @@
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import { DescriptionCard } from '~/components/ui/AppDescriptionCard.vue'
-import TheMegaDropdownMenu from '~/components/ui/TheMegaDropdownMenu.vue'
 
 @Component({
   head () {
     return {
       title: 'Qiskit Textbook'
     }
-  },
-  components: {
-    TheMegaDropdownMenu
   }
 })
 export default class TextbookPage extends QiskitPage {
