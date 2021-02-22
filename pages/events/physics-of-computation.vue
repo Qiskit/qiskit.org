@@ -48,58 +48,59 @@ export default class MITEndicottPage extends QiskitPage {
   routeName = 'physics-of-computation'
 
   // Data for the header section
-  headerTitle = 'Physics of Computation Conference 40th Anniversary'
+  headerTitle = 'QC40: Physics of Computation Conference, 40th Anniversary'
   headerDescription = [
-    `The 2021 Physics of Computation Conference is a 1-day virtual event that
-    will celebrate the 40th anniversary of the very first Physics of Computation
-    Conference held by IBM and MIT at the MIT Endicott House in 1981.`,
-    `With this new edition, we will take a look at the historical timeline of
-    quantum computing information science: we will hear keynotes from some of the
-    1981 attendees and pioneers in the field of quantum computing, and will then
-    shift our focus on the latest research to highlight where quantum is today and
+    `QC40 is a one-day virtual event that will celebrate the 40th anniversary
+    of the original Physics of Computation Conference, held at the MIT Endicott House
+    in 1981.`,
+    `The 1981 event was a defining moment in the history of quantum computing and the
+    physics of computation. At QC40, we will take a close look at the changes in quantum
+    computing over the past 40 years, with keynote addresses by attendees from the original
+    conference and pioneers in the field of quantum computing, followed by a panel
+    discussion and talks focused on where quantum information science is today and
     where it is headed.`,
-    `The event will be streamed on YouTube and also offer opportunities for live
-    interactions, where you can ask questions and mingle with quantum researchers.`,
-    'Join us live on May 6, 2021 at 08:30 AM EST.'
+    `The day will also feature academic talks highlighting recent work in quantum
+    information science. The top outstanding talk submissions will be recognized with up
+    to $5,000 grants as a way to contribute to future research.`
   ]
 
   headerCTA = {
-    label: 'Register now',
+    label: 'Submit a talk',
     url: '#',
     segment: {
-      action: `${this.routeName} > header > register`
+      action: `${this.routeName} > header > submit-a-talk`
     }
   }
 
-  headerCardTitle = 'Event details:'
+  headerCardTitle = 'About the event:'
 
   headerCardContent = {
     date: 'May 6, 2021',
     image: '/images/events/mit-endicott/card-image-endicott-house-1981.png',
     location: 'Online',
-    title: 'MIT Endicott House',
+    title: 'Hosted by IBM',
     to: '#'
   }
 
   // Data for the mosaic section
-  mosaicSectionTitle = 'What is the Physics of Computation conference 40 Anniversary event?'
+  mosaicSectionTitle = 'What is QC40?'
   mosaicElements = [
     {
       position: 'first',
-      title: 'Hear from renown 1981 attendees ',
-      description: 'Listen to the what 1981 key attendees have to say about the first-ever Physics of Computation conference, hosted at the MIT Endicott House.',
-      image: '/images/events/seminar-series/mosaic-experts.png'
+      title: 'Hear from renowned 1981 attendees',
+      description: 'Listen to what some of the 1981 key attendees have to say about the original Physics of Computation conference.',
+      image: '/images/events/mit-endicott/mosaic-charles-bennet.png'
     },
     {
       position: 'second',
-      title: 'Title Text',
-      description: 'blurb here on MIT and IBM hosting the 1981 conference and collaborating blurb here on MIT and IBM hosting the 1981 conference and collaborating blurb here on MIT and IBM hosting the 1981 conference and collaborating blurb here on MIT and IBM hosting the 1981 conference and collaborating',
-      image: '/images/events/mit-endicott/mosaic-mit-endicott-house-1981.png'
+      title: 'Panel discussion',
+      description: 'Take this opportunity to ask questions to a diverse panel of experts in the field of quantum information science and computation.',
+      image: '/images/events/mit-endicott/mosaic-people-on-discussion.png'
     },
     {
       position: 'third',
-      title: 'The latest in quantum information science ',
-      description: 'This event will offer a wide range of talks that will illustrate the most current research and new developments across the field of quantum computing. ',
+      title: 'The latest in quantum information science',
+      description: 'This event will offer a wide range of talks illustrating current research and new developments across the field of quantum information science.',
       image: '/images/events/seminar-series/mosaic-team.png'
     },
     {
