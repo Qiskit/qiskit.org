@@ -1,7 +1,7 @@
 <template>
-  <section class="helpful-resources-section">
+  <section class="app-helpful-resources-section">
     <h2 class="copy__title" v-text="title" />
-    <div class="helpful-resources-section__resources">
+    <div class="app-helpful-resources-section__resources">
       <AppDescriptionCard
         v-for="resource in resources"
         :key="resource.title"
@@ -17,7 +17,7 @@ import { Component, Prop } from 'vue-property-decorator'
 import { DescriptionCard } from '~/components/ui/AppDescriptionCard.vue'
 
 @Component
-export default class HelpfulResourcesSection extends Vue {
+export default class AppHelpfulResourcesSection extends Vue {
   @Prop(Array) resources!: DescriptionCard[]
 
   title = 'Helpful Resources';
@@ -27,7 +27,7 @@ export default class HelpfulResourcesSection extends Vue {
 <style lang="scss" scoped>
 @import "~/assets/scss/blocks/copy.scss";
 
-.helpful-resources-section {
+.app-helpful-resources-section {
   &__resources {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
