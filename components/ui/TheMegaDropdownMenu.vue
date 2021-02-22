@@ -102,7 +102,6 @@ export default class TheMegaDropdownMenu extends Vue {
     @include mq($until: large) {
       left: 0;
       right: 0;
-      padding: $spacing-05;
       height: initial;
       width: 100%;
     }
