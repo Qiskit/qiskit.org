@@ -1,8 +1,8 @@
 <template>
   <div class="mega-dropdown">
     <button class="mega-dropdown__button" @click="isOpen">
-      Browse content
-      <svg class="mega-dropdown__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><defs /><path d="M16 22L6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z" /><path fill="none" d="M0 0h32v32H0z" /></svg>
+      <span>Browse content</span>
+      <svg class="mega-dropdown__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M16 22L6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z" /></svg>
     </button>
     <section
       class="mega-dropdown__content"
@@ -63,6 +63,20 @@ export default class TheMegaDropdownMenu extends Vue {
     justify-content: space-between;
     align-items: center;
     padding: $spacing-03 $spacing-01;
+
+    .mega-dropdown__icon > path {
+      transform: translate(0, 0);
+      transition: transform 0.2s ease-in-out;
+    }
+
+    &:hover {
+      cursor: pointer;
+
+      .mega-dropdown__icon > path {
+        transform: translate(0, 4px);
+        transition: transform 0.2s ease-in-out;
+      }
+    }
   }
 
   &__icon {
@@ -76,7 +90,7 @@ export default class TheMegaDropdownMenu extends Vue {
     padding: $spacing-07 $spacing-05;
     width: 12 * $column-size-large;
     background-color: $white;
-    box-shadow: -4px 4px 4px rgba(0, 0, 0,.25);
+    box-shadow: -4px 4px 12px rgba(0, 0, 0, .1);
     height: 32rem;
     overflow: scroll;
 
