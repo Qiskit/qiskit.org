@@ -1,10 +1,8 @@
 <template>
-  <article class="content-section">
-    <div class="content-section__overview">
-      <h2 class="copy__title">
-        {{ title }}
-      </h2>
-      <p class="content-section__description">
+  <article class="app-introductory-content">
+    <div class="app-introductory-content__overview">
+      <slot name="title" />
+      <p class="app-introductory-content__description">
         {{ description }}
       </p>
       <AppCta
@@ -25,8 +23,7 @@ import { Component, Prop } from 'vue-property-decorator'
 import { NavLink } from '~/constants/menuLinks'
 
 @Component
-export default class ContentSection extends Vue {
-  @Prop(String) title!: string
+export default class AppIntroductoryContent extends Vue {
   @Prop(String) description!: string
   @Prop(Object) link!: NavLink
 }

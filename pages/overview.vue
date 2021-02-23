@@ -36,10 +36,14 @@
           :id="section.id"
           :key="section.id"
           class="overview-page__content-section scrollable"
-          :title="section.title"
           :description="section.description"
           :link="section.link"
         >
+          <template #title>
+            <h2 class="copy__title">
+              {{ section.title }}
+            </h2>
+          </template>
           <ContentAccordion
             v-if="section.subSections"
             :tabs="asTabs(section.subSections)"
