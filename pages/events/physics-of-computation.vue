@@ -39,8 +39,61 @@ interface AgendaSlot {
 
 @Component({
   head () {
+    const title = 'QC40 - Physics of Computation'
+    const description = `QC40 is a one-day virtual event that will celebrate the 40th anniversary
+    of the original Physics of Computation Conference, held at the MIT Endicott House
+    in 1981.`
+    const image = '/images/events/mit-endicott/card-image-endicott-house-1981.png'
+
     return {
-      title: 'MIT Endicott Event'
+      title,
+      meta: [
+        {
+          hid: 'twitter:title',
+          name: 'twitter:title',
+          content: title
+        },
+        {
+          hid: 'twitter:description',
+          name: 'twitter:description',
+          content: description
+        },
+        {
+          hid: 'twitter:image',
+          name: 'twitter:image',
+          content: image
+        },
+        {
+          hid: 'twitter:image:alt',
+          name: 'twitter:image:alt',
+          content: title
+        },
+        {
+          hid: 'og:title',
+          property: 'og:title',
+          content: title
+        },
+        {
+          hid: 'og:description',
+          property: 'og:description',
+          content: description
+        },
+        {
+          hid: 'og:image',
+          property: 'og:image',
+          content: image
+        },
+        {
+          hid: 'og:image:secure_url',
+          property: 'og:image:secure_url',
+          content: image
+        },
+        {
+          hid: 'og:image:alt',
+          property: 'og:image:alt',
+          content: title
+        }
+      ]
     }
   }
 })
