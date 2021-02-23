@@ -69,6 +69,11 @@ const REQUEST_AN_EVENT_CTA: GeneralLink = {
   label: 'Request an event'
 }
 
+const TEXTBOOK_DEMO_START_LEARNING: GeneralLink = {
+  url: '#',
+  label: 'Start learning'
+}
+
 const IBM_Q_EXPERIENCE: GeneralLink = {
   url: 'https://quantum-computing.ibm.com/login',
   label: 'IBM Quantum Lab'
@@ -84,5 +89,6 @@ export {
   REQUEST_AN_EVENT_CTA,
   SEMINAR_SERIES_ALL_EPISODES_CTA,
   SEMINAR_SERIES_FULL_ARCHIVE_CTA,
+  TEXTBOOK_DEMO_START_LEARNING,
   IBM_Q_EXPERIENCE
 }
