@@ -5,6 +5,7 @@
   >
     <div
       class="app-card__image"
+      :class="imageContain ? 'app-card__image_contain' : null"
       :lazy-background="image"
     />
     <div class="app-card__content">
@@ -45,6 +46,7 @@ import { SegmentData } from '~/constants/appLinks'
 @Component
 export default class AppCard extends Vue {
   @Prop({ type: String, default: '' }) image!: string
+  @Prop({ type: Boolean, required: false, default: false }) imageContain!: boolean
   @Prop({ type: String, default: '' }) title!: string
   @Prop({ type: Array, default: () => [] }) tags!: string[]
   @Prop({ type: String, default: '' }) to!: string
@@ -93,6 +95,11 @@ export default class AppCard extends Vue {
     @include mq($until: medium) {
       height: 13rem;
       width: auto;
+    }
+
+    &_contain {
+      background-color: transparent;
+      background-size: contain;
     }
   }
 
