@@ -128,27 +128,27 @@ export default class MITEndicottPage extends QiskitPage {
 
   agenda: AgendaSlot[] = [
     {
-      time: '08:30 AM (EST)',
+      time: '08:30 AM',
       event: 'An introduction from Olivia Lanes PhD, an experimental researcher and education developer at IBM and Charlie Bennett, physicist, information theorist and IBM Fellow at IBM Research.'
     },
     {
-      time: '09:00 AM (EST)',
+      time: '09:00 AM',
       event: 'A series of keynote addresses about quantum information science in the 1980s'
     },
     {
-      time: '10:30 AM (EST)',
+      time: '10:30 AM',
       event: 'A live panel that will bridge Then and Now'
     },
     {
-      time: '11:30 AM (EST)',
+      time: '11:30 AM',
       event: 'The future of quantum hardware'
     },
     {
-      time: '01:00 AM (EST)',
+      time: '01:00 AM',
       event: 'Talk Series 1: Hardware and Architecture'
     },
     {
-      time: '01:00 AM (EST)',
+      time: '01:00 AM',
       event: 'Talk Series 2: Theory and Applications'
     }
   ]
@@ -156,17 +156,17 @@ export default class MITEndicottPage extends QiskitPage {
   agendaElementsDataTable: TableRowElement[][] = this.agenda.map(slot => ([
     {
       component: 'span',
-      styles: 'min-width: 3rem; display: inline-block; font-weight: bold;',
+      styles: 'min-width: 5rem; display: inline-block; font-weight: bold;',
       data: slot.time
     },
     {
       component: 'span',
-      styles: 'min-width: 9rem; display: inline-block;',
+      styles: 'min-width: 20rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
       data: slot.event
     }
   ]))
 
-  agendaColumnsDataTable: string[] = ['Time', 'Event']
+  agendaColumnsDataTable: string[] = ['Time (EDT)', 'Event']
 
   // TODO: Replace with the final content
   helpfulResources: DescriptionCard[] = [
