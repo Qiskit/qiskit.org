@@ -171,33 +171,33 @@ export default class MITEndicottPage extends QiskitPage {
   // TODO: Replace with the final content
   helpfulResources: DescriptionCard[] = [
     {
-      title: 'Stay informed',
-      description: 'Click on the link below to get an email notification when registration for QC40 opens.',
+      title: 'Register',
+      description: 'Click on the link below to stay informed about and attend QC40.',
       cta: {
-        url: '/',
-        label: 'Join mailing list',
+        url: 'https://airtable.com/shrvAA05xkYgSKajc',
+        label: 'Register',
         segment: {
-          action: `${this.routeName} > helpful-resources > join-mailing-list`
+          action: `${this.routeName} > helpful-resources > register`
         }
       }
     },
     {
-      title: 'Learn more about Quantum',
-      description: 'Link to IBM Quantum page',
+      title: 'Submit a talk',
+      description: 'Abstract submissions for contributed talks will be accepted through March 31. Click below for an opportunity to share your research project at QC40.',
       cta: {
-        url: '/',
-        label: 'Call to action here',
+        url: 'https://airtable.com/shr6UbEsEvinHfjct',
+        label: 'Submit a talk',
         segment: {
-          action: `${this.routeName} > helpful-resources > contact`
+          action: `${this.routeName} > helpful-resources > submit-a-talk`
         }
       }
     },
     {
-      title: 'Learn more about Qiskit',
-      description: 'Link to Qiskit page',
+      title: 'Learning resources',
+      description: 'Start your path towards learning Qiskit, Python, Quantum Computing, Error Mitigation, Quantum Hardware, Quantum Algorithms and Quantum Applications',
       cta: {
-        url: '/',
-        label: 'Call to action here',
+        url: 'https://qiskit.org/learn',
+        label: 'Learn Qiskit and more',
         segment: {
           action: `${this.routeName} > helpful-resources > qiskit-org-learn`
         }
