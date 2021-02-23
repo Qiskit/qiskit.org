@@ -6,7 +6,7 @@
           Qiskit Textbook (beta)
         </AppPageHeaderTitle>
         <div class="textbook-demo-header__dropdown-container">
-          <TheMegaDropdownMenu />
+          <AppMegaDropdownMenu />
         </div>
       </div>
       <div class="textbook-demo-header__cta-container">
@@ -20,11 +20,11 @@
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 import { TEXTBOOK_DEMO_START_LEARNING as CTA } from '~/constants/appLinks.ts'
-import TheMegaDropdownMenu from '~/components/ui/TheMegaDropdownMenu.vue'
+import AppMegaDropdownMenu from '~/components/ui/AppMegaDropdownMenu.vue'
 
 @Component({
   components: {
-    TheMegaDropdownMenu
+    AppMegaDropdownMenu
   }
 })
 export default class TextbookDemoHeader extends Vue {

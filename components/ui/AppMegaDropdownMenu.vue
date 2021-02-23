@@ -1,19 +1,19 @@
 <template>
-  <div class="mega-dropdown">
-    <button class="mega-dropdown__button" @click="isOpen">
+  <div class="app-mega-dropdown">
+    <button class="app-mega-dropdown__button" @click="toggleOpen">
       <span>Browse content</span>
-      <svg class="mega-dropdown__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M16 22L6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z" /></svg>
+      <svg class="app-mega-dropdown__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M16 22L6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z" /></svg>
     </button>
     <section
-      class="mega-dropdown__content"
-      :class="{ 'mega-dropdown__content_active': showContent }"
+      class="app-mega-dropdown__content"
+      :class="{ 'app-mega-dropdown__content_active': showContent }"
     >
-      <div v-for="group in megaMenuLinks" :key="group.title">
-        <div v-for="linkGroup in group" :key="linkGroup.title" class="mega-dropdown__group">
-          <div class="mega-dropdown__menu">
-            <ul class="mega-dropdown__menu-list">
-              <li v-for="link in linkGroup.links" :key="link.label" class="mega-dropdown__menu-list-item">
-                <BasicLink class="mega-dropdown__menu-link" :url="link.target">
+      <div v-for="(column, columnIndex) in megaMenuLinks" :key="`${columnIndex}`" class="app-mega-dropdown__column">
+        <div v-for="(group, groupIndex) in column" :key="`${groupIndex}`" class="app-mega-dropdown__group">
+          <div class="app-mega-dropdown__menu">
+            <ul class="app-mega-dropdown__menu-list">
+              <li v-for="link in group" :key="link.label" class="app-mega-dropdown__menu-list-item">
+                <BasicLink class="app-mega-dropdown__menu-link" :url="link.url">
                   {{ link.label }}
                 </BasicLink>
               </li>
@@ -29,14 +29,14 @@
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 
-import { MEGA_MENU_LINKS_COLUMNS } from '~/constants/megaMenuLinks'
+import { MEGA } from '~/constants/megaMenuLinks'
 
 @Component
 export default class TheMegaDropdownMenu extends Vue {
-  megaMenuLinks = MEGA_MENU_LINKS_COLUMNS
+  megaMenuLinks = MEGA
   showContent = false;
 
-  isOpen () : void {
+  toggleOpen () : void {
     this.showContent = !this.showContent
   }
 }
@@ -45,7 +45,7 @@ export default class TheMegaDropdownMenu extends Vue {
 <style lang="scss">
 @import '~carbon-components/scss/globals/scss/typography';
 
-.mega-dropdown {
+.app-mega-dropdown {
   @include type-style('body-short-01');
   color: $cool-gray-80;
   position: relative;
@@ -61,7 +61,7 @@ export default class TheMegaDropdownMenu extends Vue {
     align-items: center;
     padding: $spacing-03;
 
-    .mega-dropdown__icon > path {
+    .app-mega-dropdown__icon > path {
       transform: translate(0, 0);
       transition: transform 0.2s ease-in-out;
     }
@@ -69,7 +69,7 @@ export default class TheMegaDropdownMenu extends Vue {
     &:hover {
       cursor: pointer;
 
-      .mega-dropdown__icon > path {
+      .app-mega-dropdown__icon > path {
         transform: translate(0, 4px);
         transition: transform 0.2s ease-in-out;
       }
@@ -128,6 +128,7 @@ export default class TheMegaDropdownMenu extends Vue {
 
     &-link {
       color: $cool-gray-80;
+      text-decoration: none;
     }
   }
 }
