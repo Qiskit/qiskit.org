@@ -107,7 +107,11 @@ export default class MITEndicottPage extends QiskitPage {
     {
       position: 'fourth',
       title: 'Call for Submissions ',
-      description: `<strong>Format:</strong> Submit a clear abstract here (each presenter will have 15 minutes plus a 5-minute Q&A)<br/>
+      description: `<strong>Format:</strong> Submit a clear abstract
+        <a href="https://airtable.com/shr6UbEsEvinHfjct" target="_blank"
+        style="cursor:pointer; text-decoration: none; color: #4589ff;
+        :hover: #ffffff;">here</a> (each presenter
+        will have 15 minutes plus a 5-minute Q&A)<br/>
         <strong>Review criteria:</strong> <em>(scored with equal weight)</em><br/>
         • Problem and application - Measures future influence in quantum information science<br/>
         • Technical approach and novelty - Rates innovative aspect of your approach to the problem<br/>
