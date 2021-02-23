@@ -1,6 +1,5 @@
 <template>
   <main class="textbook-demo-page">
-    <StartLearningSection class="textbook-demo-page__section" />
     <TextbookDemoHeader />
     <StartLearningSection class="textbook-demo-page__section" />
     <HelpfulResourcesSection
