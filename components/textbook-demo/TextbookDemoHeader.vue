@@ -5,13 +5,9 @@
         <AppPageHeaderTitle>
           Qiskit Textbook (beta)
         </AppPageHeaderTitle>
-        <div class="textbook-demo-header__dropdown-container">
-          <AppMegaDropdownMenu />
-        </div>
+        <AppMegaDropdownMenu class="textbook-demo-header__dropdown" />
       </div>
-      <div class="textbook-demo-header__cta-container">
-        <AppCta v-bind="startLearningCTA" />
-      </div>
+      <AppCta v-bind="startLearningCTA" class="textbook-demo-header__cta" />
     </div>
   </header>
 </template>
@@ -54,8 +50,8 @@ export default class TextbookDemoHeader extends Vue {
     @include contained();
     display: flex;
     flex-direction: column;
-    height: 100%;
     justify-content: space-between;
+    height: 100%;
     padding-top: $spacing-09;
 
     @include mq($until: large) {
@@ -63,13 +59,12 @@ export default class TextbookDemoHeader extends Vue {
     }
   }
 
-  &__dropdown-container {
+  &__dropdown {
     margin-top: $layout-03;
   }
 
-  &__cta-container {
-    display: flex;
-    justify-content: flex-end;
+  &__cta {
+    align-self: flex-end;
   }
 }
 </style>
