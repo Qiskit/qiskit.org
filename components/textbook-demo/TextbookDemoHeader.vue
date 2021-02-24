@@ -10,7 +10,7 @@
         </div>
       </div>
       <div class="textbook-demo-header__cta-container">
-        <AppCta v-bind="cta" />
+        <AppCta v-bind="startLearningCTA" />
       </div>
     </div>
   </header>
@@ -19,7 +19,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import { TEXTBOOK_DEMO_START_LEARNING as CTA } from '~/constants/appLinks.ts'
+import { TEXTBOOK_DEMO_START_LEARNING } from '~/constants/appLinks.ts'
 import AppMegaDropdownMenu from '~/components/ui/AppMegaDropdownMenu.vue'
 
 @Component({
@@ -28,7 +28,7 @@ import AppMegaDropdownMenu from '~/components/ui/AppMegaDropdownMenu.vue'
   }
 })
 export default class TextbookDemoHeader extends Vue {
-  cta = CTA
+  startLearningCTA = TEXTBOOK_DEMO_START_LEARNING
 }
 </script>
 
