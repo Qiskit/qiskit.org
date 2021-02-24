@@ -8,17 +8,20 @@
       class="app-mega-dropdown__content"
       :class="{ 'app-mega-dropdown__content_active': showContent }"
     >
-      <div v-for="(column, columnIndex) in megaMenuLinks" :key="`${columnIndex}`" class="app-mega-dropdown__column">
-        <div v-for="(group, groupIndex) in column" :key="`${groupIndex}`" class="app-mega-dropdown__group">
-          <div class="app-mega-dropdown__menu">
-            <ul class="app-mega-dropdown__menu-list">
-              <li v-for="link in group" :key="link.label" class="app-mega-dropdown__menu-list-item">
-                <BasicLink class="app-mega-dropdown__menu-link" :url="link.url">
-                  {{ link.label }}
-                </BasicLink>
-              </li>
-            </ul>
-          </div>
+      <div v-for="(textbookMenuColumn, columnIndex) in textbookMenuContent" :key="`${columnIndex}`" class="app-mega-dropdown__column">
+        <div v-for="(textbookMenuGroup, groupIndex) in textbookMenuColumn" :key="`${groupIndex}`" class="app-mega-dropdown__group">
+          <ul class="app-mega-dropdown__menu">
+            <li>
+              <BasicLink class="app-mega-dropdown__menu-link app-mega-dropdown__menu-link_title" :url="textbookMenuGroup.title.url">
+                {{ textbookMenuGroup.title.label }}
+              </BasicLink>
+            </li>
+            <li v-for="chapter in textbookMenuGroup.content" :key="chapter.label">
+              <BasicLink class="app-mega-dropdown__menu-link" :url="chapter.url">
+                {{ chapter.label }}
+              </BasicLink>
+            </li>
+          </ul>
         </div>
       </div>
     </section>
@@ -29,11 +32,11 @@
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 
-import { MEGA } from '~/constants/megaMenuLinks'
+import { TEXTBOOK_DEMO_MEGA_MENU } from '~/constants/megaMenuLinks'
 
 @Component
 export default class TheMegaDropdownMenu extends Vue {
-  megaMenuLinks = MEGA
+  textbookMenuContent = TEXTBOOK_DEMO_MEGA_MENU
   showContent = false;
 
   toggleOpen () : void {
@@ -119,16 +122,15 @@ export default class TheMegaDropdownMenu extends Vue {
   &__menu {
     padding-bottom: $spacing-07;
 
-    &-list-item {
-      padding-bottom: $spacing-05;
-      &:first-child {
-        font-weight: 600;
-      }
-    }
-
     &-link {
+      display:inline-block;
+      padding-bottom: $spacing-05;
       color: $cool-gray-80;
       text-decoration: none;
+
+      &_title {
+        font-weight: 600;
+      }
     }
   }
 }
