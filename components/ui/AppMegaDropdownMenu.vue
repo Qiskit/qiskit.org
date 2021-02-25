@@ -5,8 +5,8 @@
       <svg class="app-mega-dropdown__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M16 22L6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z" /></svg>
     </button>
     <div
+      v-if="showContent"
       class="app-mega-dropdown__content-container"
-      :class="{ 'app-mega-dropdown__content-container_active': showContent }"
     >
       <nav class="app-mega-dropdown__content">
         <div v-for="(column, columnIndex) in content" :key="`${columnIndex}`" class="app-mega-dropdown__content-column">
@@ -40,7 +40,7 @@ import { MegaDropdownMenu } from '~/constants/megaMenuLinks'
 @Component
 export default class TheMegaDropdownMenu extends Vue {
   @Prop({ type: String, default: 'Browse content' }) placeholder!: string
-  @Prop(Object) content!: MegaDropdownMenu
+  @Prop(Array) content!: MegaDropdownMenu
 
   showContent = false;
 
@@ -89,7 +89,6 @@ export default class TheMegaDropdownMenu extends Vue {
   }
 
   &__content-container {
-    display: none;
     position: absolute;
     top: 2.2rem;
     padding: $spacing-07 $spacing-05;
@@ -98,10 +97,6 @@ export default class TheMegaDropdownMenu extends Vue {
     box-shadow: -4px 4px 12px rgba(0, 0, 0, .1);
     height: 32rem;
     overflow: scroll;
-
-    &_active {
-      display: flex;
-    }
 
     @include mq($until: large) {
       left: 0;
