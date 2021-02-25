@@ -1,11 +1,11 @@
 import { NavLink } from '~/constants/menuLinks.ts'
 
-type MegaMenuGroup = {
+type MegaDropdownMenuGroup = {
   title: NavLink,
   content: NavLink[]
 }
 
-const PREREQUISITES: MegaMenuGroup = {
+const PREREQUISITES: MegaDropdownMenuGroup = {
   title: {
     label: 'Prerequisites',
     url: 'https://qiskit.org/textbook/ch-prerequisites/setting-the-environment.html'
@@ -22,7 +22,7 @@ const PREREQUISITES: MegaMenuGroup = {
   ]
 }
 
-const QUANTUM_STATES_AND_QUBITS: MegaMenuGroup = {
+const QUANTUM_STATES_AND_QUBITS: MegaDropdownMenuGroup = {
   title: {
     label: 'Quantum States and Qubits',
     url: 'https://qiskit.org/textbook/ch-states/introduction.html'
@@ -51,7 +51,7 @@ const QUANTUM_STATES_AND_QUBITS: MegaMenuGroup = {
   ]
 }
 
-const MULTIPLE_QUBITS_AND_ENTANGLEMENT: MegaMenuGroup = {
+const MULTIPLE_QUBITS_AND_ENTANGLEMENT: MegaDropdownMenuGroup = {
   title: {
     label: 'Multiple Qubits and Entanglement',
     url: 'https://qiskit.org/textbook/ch-gates/introduction.html'
@@ -84,7 +84,7 @@ const MULTIPLE_QUBITS_AND_ENTANGLEMENT: MegaMenuGroup = {
   ]
 }
 
-const GAMES_AND_DEMOS: MegaMenuGroup = {
+const GAMES_AND_DEMOS: MegaDropdownMenuGroup = {
   title: {
     label: 'Games & Demos',
     url: 'https://qiskit.org/textbook/ch-demos/index.html'
@@ -105,7 +105,7 @@ const GAMES_AND_DEMOS: MegaMenuGroup = {
   ]
 }
 
-const QUANTUM_PROTOCOLS_AND_ALGORITHMS: MegaMenuGroup = {
+const QUANTUM_PROTOCOLS_AND_ALGORITHMS: MegaDropdownMenuGroup = {
   title: {
     label: 'Quantum Protocols and Quantum Algorithms',
     url: 'https://qiskit.org/textbook/ch-algorithms/index.html'
@@ -162,7 +162,7 @@ const QUANTUM_PROTOCOLS_AND_ALGORITHMS: MegaMenuGroup = {
   ]
 }
 
-const INVESTIGATING_Q_HW_USING_MICROWAVE_PULSES : MegaMenuGroup = {
+const INVESTIGATING_Q_HW_USING_MICROWAVE_PULSES : MegaDropdownMenuGroup = {
   title: {
     label: 'Investigating Quantum Hardware Using Microwave Pulses',
     url: 'https://qiskit.org/textbook/ch-quantum-hardware/index-pulses.html'
@@ -199,7 +199,7 @@ const INVESTIGATING_Q_HW_USING_MICROWAVE_PULSES : MegaMenuGroup = {
   ]
 }
 
-const QUANTUM_ALGORITHMS_FOR_APPS : MegaMenuGroup = {
+const QUANTUM_ALGORITHMS_FOR_APPS : MegaDropdownMenuGroup = {
   title: {
     label: 'Quantum Algorithms for Applications',
     url: 'https://qiskit.org/textbook/ch-applications/algs_for_apps_index.html'
@@ -244,7 +244,7 @@ const QUANTUM_ALGORITHMS_FOR_APPS : MegaMenuGroup = {
   ]
 }
 
-const INVESTIGATING_Q_HW_USING_Q_CIRCUITS : MegaMenuGroup = {
+const INVESTIGATING_Q_HW_USING_Q_CIRCUITS : MegaDropdownMenuGroup = {
   title: {
     label: 'Investigating Quantum Hardware Using Quantum Circuits',
     url: 'https://qiskit.org/textbook/ch-quantum-hardware/index-circuits.html'
@@ -269,7 +269,7 @@ const INVESTIGATING_Q_HW_USING_Q_CIRCUITS : MegaMenuGroup = {
   ]
 }
 
-const QUANTUM_COMPUTING_LABS : MegaMenuGroup = {
+const QUANTUM_COMPUTING_LABS : MegaDropdownMenuGroup = {
   title: {
     label: 'Quantum Computing Labs',
     url: 'https://qiskit.org/textbook/ch-labs/index.html'
@@ -306,32 +306,33 @@ const QUANTUM_COMPUTING_LABS : MegaMenuGroup = {
   ]
 }
 
-type MegaMenuColumn = MegaMenuGroup[]
-const COLUMN_1: MegaMenuColumn = [
+type MegaDropdownMenuColumn = MegaDropdownMenuGroup[]
+const COLUMN_1: MegaDropdownMenuColumn = [
   PREREQUISITES,
   QUANTUM_STATES_AND_QUBITS,
   MULTIPLE_QUBITS_AND_ENTANGLEMENT,
   GAMES_AND_DEMOS
 ]
 
-const COLUMN_2: MegaMenuColumn = [
+const COLUMN_2: MegaDropdownMenuColumn = [
   QUANTUM_PROTOCOLS_AND_ALGORITHMS,
   INVESTIGATING_Q_HW_USING_MICROWAVE_PULSES
 ]
 
-const COLUMN_3: MegaMenuColumn = [
+const COLUMN_3: MegaDropdownMenuColumn = [
   QUANTUM_ALGORITHMS_FOR_APPS,
   INVESTIGATING_Q_HW_USING_Q_CIRCUITS,
   QUANTUM_COMPUTING_LABS
 ]
 
-type MegaMenu = MegaMenuColumn[]
-const TEXTBOOK_DEMO_MEGA_MENU: MegaMenu = [
+type MegaDropdownMenu = MegaDropdownMenuColumn[]
+const TEXTBOOK_DEMO_MEGA_MENU: MegaDropdownMenu = [
   COLUMN_1,
   COLUMN_2,
   COLUMN_3
 ]
 
 export {
+  MegaDropdownMenu,
   TEXTBOOK_DEMO_MEGA_MENU
 }
