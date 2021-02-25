@@ -101,10 +101,6 @@ export default class TheMegaDropdownMenu extends Vue {
 
     &_active {
       display: flex;
-
-      @include mq($until: medium) {
-        flex-direction: column;
-      }
     }
 
     @include mq($until: large) {
