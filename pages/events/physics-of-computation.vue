@@ -126,14 +126,18 @@ export default class MITEndicottPage extends QiskitPage {
   }
 
   headerCardTitle = 'About the event:'
-
   headerCardContent = {
-    date: 'May 6, 2021',
     image: '/images/events/mit-endicott/card-image-endicott-house-1981.png',
-    location: 'Online',
-    title: 'Hosted by IBM',
-    to: '#',
-    ctaLabel: 'Add to calendar'
+    title: 'Celebrate 40 years of quantum',
+    description: 'Keynotes, contributed talks, and more bridging the 1981 Physics of Computation conference with current research.',
+    location: 'Virtual event open to the public',
+    date: 'May 6, 2021',
+    time: '8:30am - 5:00pm EST',
+    to: 'https://airtable.com/shrvAA05xkYgSKajc',
+    ctaLabel: 'Stay informed',
+    segment: {
+      action: `${this.routeName} > header > stay-informed`
+    }
   }
 
   // Data for the mosaic section

@@ -21,6 +21,10 @@
         <Calendar20 class="event-card__icon" />
         <time>{{ date }}</time>
       </p>
+      <p v-if="time" class="event-card__detail">
+        <Time20 class="event-card__icon" />
+        <time>{{ time }}</time>
+      </p>
       <p v-if="institution" class="event-card__detail">
         <Education20 class="event-card__icon" />
         {{ institution }}
@@ -42,6 +46,7 @@ export default class EventCard extends Vue {
   @Prop({ type: String, default: '' }) institution!: string
   @Prop(String) location!: string
   @Prop(String) date!: string
+  @Prop(String) time!: string
   @Prop(String) to!: string
   @Prop({ type: String, default: 'Join the event' }) ctaLabel!: string
   @Prop({ type: Object, required: false }) segment: SegmentData | undefined
