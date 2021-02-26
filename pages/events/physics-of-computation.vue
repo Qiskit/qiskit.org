@@ -21,6 +21,7 @@
     />
     <AppHelpfulResourcesSection
       class="mit-endicott-page__section"
+      :title="helpfulResourcesSectionTitle"
       :resources="helpfulResources"
     />
   </main>
@@ -235,22 +236,24 @@ export default class MITEndicottPage extends QiskitPage {
 
   agendaColumnsDataTable: string[] = ['Time (EDT)', 'Event']
 
-  // TODO: Replace with the final content
+  // Data for the helpful resources section
+  helpfulResourcesSectionTitle = 'Take action now'
   helpfulResources: DescriptionCard[] = [
     {
-      title: 'Register',
+      title: 'Stay informed',
       description: 'Click on the link below to stay informed about and attend QC40.',
       cta: {
         url: 'https://airtable.com/shrvAA05xkYgSKajc',
-        label: 'Register',
+        label: 'Stay informed',
         segment: {
-          action: `${this.routeName} > helpful-resources > register`
+          action: `${this.routeName} > helpful-resources > stay-informed`
         }
       }
     },
     {
       title: 'Submit a talk',
-      description: 'Abstract submissions for contributed talks will be accepted through March 31. Click below for an opportunity to share your research project at QC40.',
+      description: `Abstract submissions for contributed talks will be accepted through
+      March 31. Click below for an opportunity to share your research project at QC40.`,
       cta: {
         url: 'https://airtable.com/shr6UbEsEvinHfjct',
         label: 'Submit a talk',
@@ -261,7 +264,7 @@ export default class MITEndicottPage extends QiskitPage {
     },
     {
       title: 'Learning resources',
-      description: 'Start your path towards learning Qiskit, Python, Quantum Computing, Error Mitigation, Quantum Hardware, Quantum Algorithms and Quantum Applications',
+      description: 'Start your path towards learning Quantum Information Science',
       cta: {
         url: 'https://qiskit.org/learn',
         label: 'Learn Qiskit and more',
@@ -272,7 +275,8 @@ export default class MITEndicottPage extends QiskitPage {
     },
     {
       title: 'Code of conduct',
-      description: 'We are dedicated to providing an enjoyable and safe experience for all participants. We have a code of conduct that all events adhere to.',
+      description: `We are dedicated to providing an enjoyable and safe experience for
+      all participants. We have a code of conduct that all events adhere to.`,
       cta: {
         url: 'https://github.com/Qiskit/qiskit/blob/master/CODE_OF_CONDUCT.md',
         label: 'See code of conduct',
