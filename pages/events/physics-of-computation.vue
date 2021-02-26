@@ -103,23 +103,22 @@ export default class MITEndicottPage extends QiskitPage {
   // Data for the header section
   headerTitle = 'QC40: Physics of Computation Conference, 40th Anniversary'
   headerDescription = [
-    `QC40 is a one-day virtual event that will celebrate the 40th anniversary
-    of the original Physics of Computation Conference, held at the MIT Endicott House
-    in 1981.`,
-    `The 1981 event was a defining moment in the history of quantum computing and the
-    physics of computation. At QC40, we will take a close look at the changes in quantum
-    computing over the past 40 years, with keynote addresses by attendees from the original
-    conference and pioneers in the field of quantum computing, followed by a panel
-    discussion and talks focused on where quantum information science is today and
-    where it is headed.`,
+    `QC40 is a one-day virtual event that will celebrate the 40th anniversary of the
+    Physics of Computation Conference which was jointly organized by MIT and IBM, and
+    held at the MIT campus (Endicott House) in 1981.`,
+    `The conference was a defining moment in the history of quantum computation. At
+    QC40, we will take a close look at the changes in quantum computing over the past
+    40 years, with a panel discussion and keynote addresses by attendees from the original
+    conference and pioneers in the field of quantum computing.`,
     `The day will also feature academic talks highlighting recent work in quantum
-    information science. The top outstanding talk submissions will be recognized with up
-    to $5,000 grants as a way to contribute to future research.`
+    information science (more details under “What is QC40?”). The top outstanding talk
+    submissions will be recognized with up to $5,000 grants as a way to contribute to
+    future research.`
   ]
 
   headerCTA = {
     label: 'Submit a talk',
-    url: '#',
+    url: 'https://airtable.com/shr6UbEsEvinHfjct',
     segment: {
       action: `${this.routeName} > header > submit-a-talk`
     }
