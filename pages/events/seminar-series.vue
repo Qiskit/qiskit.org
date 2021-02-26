@@ -2,12 +2,13 @@
   <main class="event-page seminar-series-page">
     <EventsHeader
       class="seminar-series-page__header"
-      :title="headerTitle"
       :description="headerDescription"
       :cta="headerCTA"
       :card-title="headerCardTitle"
       :card-content="headerCardContent"
-    />
+    >
+      {{ headerTitle }}
+    </EventsHeader>
     <AppMosaicSection
       class="seminar-series-page__section"
       :title="mosaicSectionTitle"
