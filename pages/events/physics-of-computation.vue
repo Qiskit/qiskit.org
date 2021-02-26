@@ -194,7 +194,9 @@ export default class MITEndicottPage extends QiskitPage {
   agenda: AgendaSlot[] = [
     {
       time: '08:30 AM',
-      event: 'An introduction from Olivia Lanes PhD, an experimental researcher and education developer at IBM and Charlie Bennett, physicist, information theorist and IBM Fellow at IBM Research.'
+      event: `An introduction from Olivia Lanes PhD, an experimental researcher and
+      education developer at IBM and Charlie Bennett, physicist, information theorist
+      and IBM Fellow at IBM Research.`
     },
     {
       time: '09:00 AM',
@@ -210,11 +212,11 @@ export default class MITEndicottPage extends QiskitPage {
     },
     {
       time: '01:00 AM',
-      event: 'Talk Series 1: Hardware and Architecture'
+      event: 'Conference Track 1: Series of contributed talks focusing on Hardware and Experiment'
     },
     {
       time: '01:00 AM',
-      event: 'Talk Series 2: Theory and Applications'
+      event: 'Conference Track 2: Series of contributed talks focusing on Theory and Applications'
     }
   ]
 
