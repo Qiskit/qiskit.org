@@ -114,7 +114,7 @@ function convertToSeminarSeriesEvent (record: any): SeminarSeriesEvent {
 }
 
 function getInstitution (record: any): string {
-  return record.get(RECORD_FIELDS.institution)
+  return record.get(RECORD_FIELDS.institution) || ''
 }
 
 function getName (record: any): string {
