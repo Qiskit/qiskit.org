@@ -144,37 +144,47 @@ export default class MITEndicottPage extends QiskitPage {
   mosaicElements = [
     {
       position: 'first',
-      title: 'Hear from renowned 1981 attendees',
-      description: 'Listen to what some of the 1981 key attendees have to say about the original Physics of Computation conference.',
+      title: 'Keynotes from renowned 1981 attendees ',
+      description: `Listen to what some of the 1981 key attendees have to say about
+      the original conference and what the state of the field was like 40 years ago.`,
       image: '/images/events/mit-endicott/mosaic-charles-bennet.png'
     },
     {
       position: 'second',
-      title: 'Panel discussion',
-      description: 'Take this opportunity to ask questions to a diverse panel of experts in the field of quantum information science and computation.',
+      title: 'A diverse panel of experts: Then and Now ',
+      description: `Watch a lively discussion between recognized scientists who will
+      bridge the gap between the past and the future of quantum information science and
+      computation.`,
       image: '/images/events/mit-endicott/mosaic-people-on-discussion.png'
     },
     {
       position: 'third',
-      title: 'The latest in quantum information science',
-      description: 'This event will offer a wide range of talks illustrating current research and new developments across the field of quantum information science.',
-      image: '/images/events/seminar-series/mosaic-team.png'
+      title: 'Contributed talks: The latest in quantum information science ',
+      description: `The afternoon will be packed with a wide range of talks illustrating
+      current research and new developments across the field of quantum information
+      science.<br/><br/>
+      <ul>
+        <li style="list-style-type: disc; margin-left: 1.2rem">Aram Harrow from MIT will chair the track dedicated to Theory and Applications.</li>
+        <li style="list-style-type: disc; margin-left: 1.2rem">Sarah Sheldon from IBM will chair the track dedicated to Hardware and Experiment.</li>
+      </ul>`,
+      image: '/images/events/mit-endicott/mosaic-ibm-quantum-chip.png'
     },
     {
       position: 'fourth',
-      title: 'Call for Submissions ',
+      title: 'Call for Submissions',
       description: `<strong>Format:</strong> Submit a clear abstract
         <a href="https://airtable.com/shr6UbEsEvinHfjct" target="_blank"
         style="cursor:pointer; text-decoration: none; color: #0f62fe;">here</a>
         (each presenter will have 15 minutes plus a 5-minute Q&A)<br/>
         <strong>Review criteria:</strong> <em>(scored with equal weight)</em><br/>
-        • Problem and application - Measures future influence in quantum information science<br/>
-        • Technical approach and novelty - Rates innovative aspect of your approach to the problem<br/>
-        • Significance of research contribution - Evaluates progress towards a solution<br/>
-        • Clarity of the proposed topic<br/>
-        <strong>Reviewers:</strong> Quantum experts serving on the IBM Academic Steering Committee<br/>
-        <strong>Deadline for submission:</strong> March 22, 2021<br/>
-        <strong>Decision date:</strong> April 15, 2021`
+        <ul>
+          <li style="list-style-type: disc; margin-left: 1.2rem">Problem and potential influence on quantum information science</li>
+          <li style="list-style-type: disc; margin-left: 1.2rem">Technical approach and novelty</li>
+          <li style="list-style-type: disc; margin-left: 1.2rem">Clarity of abstract</li>
+        </ul>
+        <strong>Reviewers:</strong> Quantum researchers from IBM and MIT<br/>
+        <strong>Deadline for submission:</strong> March 31, 2021<br/>
+        <strong>Decision date:</strong> April 20, 2021`
     }
   ]
 
