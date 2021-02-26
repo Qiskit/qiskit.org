@@ -41,9 +41,9 @@ interface AgendaSlot {
 @Component({
   head () {
     const title = 'QC40 - Physics of Computation'
-    const description = `QC40 is a one-day virtual event that will celebrate the 40th anniversary
-    of the original Physics of Computation Conference, held at the MIT Endicott House
-    in 1981.`
+    const description = `One-day virtual event to celebrate the 40th anniversary of a
+    defining moment in the history of quantum computation, the Physics of Computation
+    Conference (1981)`
     const image = '/images/events/mit-endicott/card-image-endicott-house-1981.png'
 
     return {
