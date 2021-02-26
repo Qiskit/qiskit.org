@@ -4,7 +4,7 @@
       <div class="events-header__main">
         <div>
           <AppPageHeaderTitle>
-            <slot/>
+            <slot />
           </AppPageHeaderTitle>
           <div class="events-header__description">
             <p

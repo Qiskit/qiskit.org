@@ -19,7 +19,7 @@ import { DescriptionCard } from '~/components/ui/AppDescriptionCard.vue'
 @Component
 export default class AppHelpfulResourcesSection extends Vue {
   @Prop(Array) resources!: DescriptionCard[]
-  @Prop({ type: String, default: 'Helpful Resources'}) title!: string
+  @Prop({ type: String, default: 'Helpful Resources' }) title!: string
 }
 </script>
 
