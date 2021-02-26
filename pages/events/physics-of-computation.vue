@@ -2,12 +2,15 @@
   <main class="physics-of-computation-page">
     <EventsHeader
       class="physics-of-computation-page__header"
-      :title="headerTitle"
       :description="headerDescription"
       :cta="headerCTA"
       :card-title="headerCardTitle"
       :card-content="headerCardContent"
-    />
+    >
+      {{ headerPrimaryTitle }}
+      <br>
+      {{ headerSecondaryTitle }}
+    </EventsHeader>
     <AppMosaicSection
       class="physics-of-computation-page__section"
       :title="mosaicSectionTitle"
@@ -102,7 +105,8 @@ export default class PhysicsOfComputationPage extends QiskitPage {
   routeName = 'physics-of-computation'
 
   // Data for the header section
-  headerTitle = 'QC40: Physics of Computation Conference, 40th Anniversary'
+  headerPrimaryTitle = 'QC40: Physics of Computation Conference'
+  headerSecondaryTitle = '40th Anniversary'
   headerDescription = [
     `QC40 is a one-day virtual event that will celebrate the 40th anniversary of the
     Physics of Computation Conference which was jointly organized by MIT and IBM, and
@@ -132,7 +136,7 @@ export default class PhysicsOfComputationPage extends QiskitPage {
     description: 'Keynotes, contributed talks, and more bridging the 1981 Physics of Computation conference with current research.',
     location: 'Virtual event open to the public',
     date: 'May 6, 2021',
-    time: '8:30am - 5:00pm EST',
+    time: '8:30am - 5:00pm EDT',
     to: 'https://airtable.com/shrvAA05xkYgSKajc',
     ctaLabel: 'Stay informed',
     segment: {
@@ -152,7 +156,7 @@ export default class PhysicsOfComputationPage extends QiskitPage {
     },
     {
       position: 'second',
-      title: 'A diverse panel of experts: Then and Now ',
+      title: 'A panel of experts: Then and Now',
       description: `Watch a lively discussion between recognized scientists who will
       bridge the gap between the past and the future of quantum information science and
       computation.`,
@@ -176,7 +180,7 @@ export default class PhysicsOfComputationPage extends QiskitPage {
       description: `<strong>Format:</strong> Submit a clear abstract
         <a href="https://airtable.com/shr6UbEsEvinHfjct" target="_blank"
         style="cursor:pointer; text-decoration: none; color: #0f62fe;">here</a>
-        (each presenter will have 15 minutes plus a 5-minute Q&A)<br/>
+        (talks will be 15 minutes plus a 5-minute Q&A)<br/>
         <strong>Review criteria:</strong> <em>(scored with equal weight)</em><br/>
         <ul>
           <li style="list-style-type: disc; margin-left: 1.2rem">Problem and potential influence on quantum information science</li>
@@ -195,7 +199,7 @@ export default class PhysicsOfComputationPage extends QiskitPage {
   agenda: AgendaSlot[] = [
     {
       time: '08:30 AM',
-      event: `An introduction from Olivia Lanes PhD, an experimental researcher and
+      event: `An introduction from Olivia Lanes PhD, experimental researcher and
       education developer at IBM and Charlie Bennett, physicist, information theorist
       and IBM Fellow at IBM Research.`
     },
@@ -212,11 +216,11 @@ export default class PhysicsOfComputationPage extends QiskitPage {
       event: 'The future of quantum hardware'
     },
     {
-      time: '01:00 AM',
+      time: '01:00 PM',
       event: 'Conference Track 1: Series of contributed talks focusing on Hardware and Experiment'
     },
     {
-      time: '01:00 AM',
+      time: '01:00 PM',
       event: 'Conference Track 2: Series of contributed talks focusing on Theory and Applications'
     }
   ]

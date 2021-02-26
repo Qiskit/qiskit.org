@@ -4,7 +4,7 @@
       <div class="events-header__main">
         <div>
           <AppPageHeaderTitle>
-            {{ title }}
+            <slot/>
           </AppPageHeaderTitle>
           <div class="events-header__description">
             <p
@@ -39,7 +39,6 @@ import { GeneralLink } from '~/constants/appLinks'
 
 @Component
 export default class EventsHeader extends Vue {
-  @Prop({ type: String, required: true }) title!: string
   @Prop({ type: Array, required: true }) description!: string[]
   @Prop({ type: Object, required: true }) cta!: GeneralLink
   @Prop({ type: String, required: true }) cardTitle!: string
