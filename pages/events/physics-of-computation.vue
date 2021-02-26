@@ -1,7 +1,7 @@
 <template>
-  <main class="mit-endicott-page">
+  <main class="physics-of-computation-page">
     <EventsHeader
-      class="mit-endicott-page__header"
+      class="physics-of-computation-page__header"
       :title="headerTitle"
       :description="headerDescription"
       :cta="headerCTA"
@@ -9,18 +9,18 @@
       :card-content="headerCardContent"
     />
     <AppMosaicSection
-      class="mit-endicott-page__section"
+      class="physics-of-computation-page__section"
       :title="mosaicSectionTitle"
       :elements="mosaicElements"
     />
     <AppDataTableSection
-      class="mit-endicott-page__section"
+      class="physics-of-computation-page__section"
       :section-title="agendaSectionTitle"
       :data-table-columns="agendaColumnsDataTable"
       :data-table-elements="agendaElementsDataTable"
     />
     <AppHelpfulResourcesSection
-      class="mit-endicott-page__section"
+      class="physics-of-computation-page__section"
       :title="helpfulResourcesSectionTitle"
       :resources="helpfulResources"
     />
@@ -44,7 +44,7 @@ interface AgendaSlot {
     const description = `One-day virtual event to celebrate the 40th anniversary of a
     defining moment in the history of quantum computation, the Physics of Computation
     Conference (1981)`
-    const image = '/images/events/mit-endicott/card-image-endicott-house-1981.png'
+    const image = '/images/events/physics-of-computation/card-image-endicott-house-1981.png'
 
     return {
       title,
@@ -98,7 +98,7 @@ interface AgendaSlot {
     }
   }
 })
-export default class MITEndicottPage extends QiskitPage {
+export default class PhysicsOfComputationPage extends QiskitPage {
   routeName = 'physics-of-computation'
 
   // Data for the header section
@@ -127,7 +127,7 @@ export default class MITEndicottPage extends QiskitPage {
 
   headerCardTitle = 'About the event:'
   headerCardContent = {
-    image: '/images/events/mit-endicott/card-image-endicott-house-1981.png',
+    image: '/images/events/physics-of-computation/card-image-endicott-house-1981.png',
     title: 'Celebrate 40 years of quantum',
     description: 'Keynotes, contributed talks, and more bridging the 1981 Physics of Computation conference with current research.',
     location: 'Virtual event open to the public',
@@ -148,7 +148,7 @@ export default class MITEndicottPage extends QiskitPage {
       title: 'Keynotes from renowned 1981 attendees ',
       description: `Listen to what some of the 1981 key attendees have to say about
       the original conference and what the state of the field was like 40 years ago.`,
-      image: '/images/events/mit-endicott/mosaic-charles-bennet.png'
+      image: '/images/events/physics-of-computation/mosaic-charles-bennet.png'
     },
     {
       position: 'second',
@@ -156,7 +156,7 @@ export default class MITEndicottPage extends QiskitPage {
       description: `Watch a lively discussion between recognized scientists who will
       bridge the gap between the past and the future of quantum information science and
       computation.`,
-      image: '/images/events/mit-endicott/mosaic-people-on-discussion.png'
+      image: '/images/events/physics-of-computation/mosaic-people-on-discussion.png'
     },
     {
       position: 'third',
@@ -168,7 +168,7 @@ export default class MITEndicottPage extends QiskitPage {
         <li style="list-style-type: disc; margin-left: 1.2rem">Aram Harrow from MIT will chair the track dedicated to Theory and Applications.</li>
         <li style="list-style-type: disc; margin-left: 1.2rem">Sarah Sheldon from IBM will chair the track dedicated to Hardware and Experiment.</li>
       </ul>`,
-      image: '/images/events/mit-endicott/mosaic-ibm-quantum-chip.png'
+      image: '/images/events/physics-of-computation/mosaic-ibm-quantum-chip.png'
     },
     {
       position: 'fourth',
@@ -290,7 +290,7 @@ export default class MITEndicottPage extends QiskitPage {
 </script>
 
 <style lang="scss" scoped>
-.mit-endicott-page {
+.physics-of-computation-page {
   color: $white-text-01;
 
   &__header {
