@@ -99,10 +99,13 @@ export default class TheMegaDropdownMenu extends Vue {
     overflow: scroll;
 
     @include mq($until: large) {
+      width: 100%;
+    }
+
+    @include mq($until: medium) {
       left: 0;
       right: 0;
       height: initial;
-      width: 100%;
     }
   }
 
