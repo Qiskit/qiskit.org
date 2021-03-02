@@ -82,7 +82,7 @@ async function fetchSeminarSeriesEvents (apiKey: string, { days }: { days: any }
     for (const record of records) {
       const seminarSeriesEvent = convertToSeminarSeriesEvent(record)
 
-      if (seminarSeriesEvent !== null) {
+      if (typeof (seminarSeriesEvent.to) !== 'undefined') {
         seminarSeriesEvents.push(seminarSeriesEvent)
       }
     }
@@ -104,8 +104,8 @@ function convertToCommunityEvent (record: any): CommunityEvent {
   }
 }
 
-function convertToSeminarSeriesEvent (record: any): SeminarSeriesEvent|null {
-  const seminarSeriesEvent = {
+function convertToSeminarSeriesEvent (record: any): SeminarSeriesEvent {
+  return {
     date: formatDates(...getDates(record)),
     image: getImage(record),
     institution: getInstitution(record),
@@ -114,14 +114,6 @@ function convertToSeminarSeriesEvent (record: any): SeminarSeriesEvent|null {
     title: getName(record),
     to: getWebsite(record)
   }
-
-  for (const value of Object.values(seminarSeriesEvent)) {
-    if (typeof (value) === 'undefined') {
-      return null
-    }
-  }
-
-  return seminarSeriesEvent
 }
 
 function getInstitution (record: any): string {
