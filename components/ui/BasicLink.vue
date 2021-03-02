@@ -24,15 +24,15 @@ export default class BasicLink extends Vue {
   @Prop({ type: Boolean, default: false }) isStatic!: boolean
 
   static isExternal (url: string): boolean {
-    return url.startsWith('http')
+    return !!url && url.startsWith('http')
   }
 
   static isMail (url: string): boolean {
-    return url.startsWith('mailto')
+    return !!url && url.startsWith('mailto')
   }
 
   static isIdAnchor (url: string): boolean {
-    return url.startsWith('#')
+    return !!url && url.startsWith('#')
   }
 
   get hasLink (): boolean {
