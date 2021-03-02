@@ -1,39 +1,47 @@
 <template>
-  <div class="app-mega-dropdown">
+  <article class="app-mega-dropdown">
     <button class="app-mega-dropdown__button" @click="toggleOpen">
-      <span>Browse content</span>
+      <span>{{ placeholder }}</span>
       <svg class="app-mega-dropdown__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M16 22L6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z" /></svg>
     </button>
-    <section
-      class="app-mega-dropdown__content"
-      :class="{ 'app-mega-dropdown__content_active': showContent }"
+    <div
+      v-if="showContent"
+      class="app-mega-dropdown__content-container"
     >
-      <div v-for="(column, columnIndex) in megaMenuLinks" :key="`${columnIndex}`" class="app-mega-dropdown__column">
-        <div v-for="(group, groupIndex) in column" :key="`${groupIndex}`" class="app-mega-dropdown__group">
-          <div class="app-mega-dropdown__menu">
-            <ul class="app-mega-dropdown__menu-list">
-              <li v-for="link in group" :key="link.label" class="app-mega-dropdown__menu-list-item">
-                <BasicLink class="app-mega-dropdown__menu-link" :url="link.url">
-                  {{ link.label }}
-                </BasicLink>
-              </li>
-            </ul>
+      <nav class="app-mega-dropdown__content">
+        <div v-for="(column, columnIndex) in content" :key="`${columnIndex}`" class="app-mega-dropdown__content-column">
+          <div v-for="(group, groupIndex) in column" :key="`${groupIndex}`">
+            <BasicLink
+              class="app-mega-dropdown__content-link app-mega-dropdown__content-link_title"
+              :url="group.title.url"
+            >
+              {{ group.title.label }}
+            </BasicLink>
+            <BasicLink
+              v-for="chapter in group.content"
+              :key="chapter.label"
+              class="app-mega-dropdown__content-link"
+              :url="chapter.url"
+            >
+              {{ chapter.label }}
+            </BasicLink>
           </div>
         </div>
-      </div>
-    </section>
-  </div>
+      </nav>
+    </div>
+  </article>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
-
-import { MEGA } from '~/constants/megaMenuLinks'
+import { Component, Prop } from 'vue-property-decorator'
+import { MegaDropdownMenu } from '~/constants/megaMenuLinks'
 
 @Component
 export default class TheMegaDropdownMenu extends Vue {
-  megaMenuLinks = MEGA
+  @Prop({ type: String, default: 'Browse content' }) placeholder!: string
+  @Prop(Array) content!: MegaDropdownMenu
+
   showContent = false;
 
   toggleOpen () : void {
@@ -80,8 +88,7 @@ export default class TheMegaDropdownMenu extends Vue {
     width: 1rem;
   }
 
-  &__content {
-    display: none;
+  &__content-container {
     position: absolute;
     top: 2.2rem;
     padding: $spacing-07 $spacing-05;
@@ -91,44 +98,42 @@ export default class TheMegaDropdownMenu extends Vue {
     height: 32rem;
     overflow: scroll;
 
-    &_active {
-      display: flex;
-
-      @include mq($until: medium) {
-        flex-direction: column;
-      }
+    @include mq($until: large) {
+      width: 100%;
     }
 
-    @include mq($until: large) {
+    @include mq($until: medium) {
       left: 0;
       right: 0;
       height: initial;
-      width: 100%;
     }
   }
 
-  &__group {
-    padding-right: $spacing-09;
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    gap: $spacing-09;
 
     @include mq($until: medium) {
-      max-width: initial;
-      width: 100%;
+      flex-direction: column;
     }
-  }
 
-  &__menu {
-    padding-bottom: $spacing-07;
-
-    &-list-item {
-      padding-bottom: $spacing-05;
-      &:first-child {
-        font-weight: 600;
-      }
+    &-column {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-09;
     }
 
     &-link {
+      display:block;
+      padding-bottom: $spacing-05;
       color: $cool-gray-80;
       text-decoration: none;
+
+      &_title {
+        font-weight: 600;
+      }
     }
   }
 }
