@@ -70,7 +70,7 @@ const REQUEST_AN_EVENT_CTA: GeneralLink = {
 }
 
 const IBM_Q_EXPERIENCE: GeneralLink = {
-  url: 'https://quantum-computing.ibm.com/login',
+  url: 'https://quantum-computing.ibm.com/lab',
   label: 'IBM Quantum Lab'
 }
 
