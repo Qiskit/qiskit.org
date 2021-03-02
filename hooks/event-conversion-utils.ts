@@ -81,7 +81,10 @@ async function fetchSeminarSeriesEvents (apiKey: string, { days }: { days: any }
   await getEventsQuery(apiKey, days, 'Seminar Series Website DO NOT MODIFY', [`{${showOnSeminarSeriesPage}}`]).eachPage((records, nextPage) => {
     for (const record of records) {
       const seminarSeriesEvent = convertToSeminarSeriesEvent(record)
-      seminarSeriesEvents.push(seminarSeriesEvent)
+
+      if (typeof (seminarSeriesEvent.to) !== 'undefined') {
+        seminarSeriesEvents.push(seminarSeriesEvent)
+      }
     }
     nextPage()
   })
