@@ -26,7 +26,7 @@ export default class TextbookDemoPage extends QiskitPage {
 
   helpfulResources: DescriptionCard[] = [
     {
-      title: 'Other learning material',
+      title: 'Documentation',
       description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Molestie ipsum eget id id hendrerit quis euismod eleifend urna.',
       cta: {
@@ -35,7 +35,7 @@ export default class TextbookDemoPage extends QiskitPage {
       }
     },
     {
-      title: 'Docs',
+      title: 'Tutorials',
       description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Risus morbi sodales euismod faucibus ut turpis sem.',
       cta: {
@@ -53,7 +53,7 @@ export default class TextbookDemoPage extends QiskitPage {
       }
     },
     {
-      title: 'Games and Demos',
+      title: 'Other learning material',
       description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Justo vestibulum urna sit est pellentesque tincidunt nisi, enim tincidunt.',
       cta: {
