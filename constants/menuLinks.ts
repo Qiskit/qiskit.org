@@ -133,7 +133,7 @@ const LEARN_LINK: NavLink = {
 }
 
 const TEXTBOOK_DEMO_LINK: NavLink = {
-  label: 'Textbook',
+  label: 'Textbook-Demo',
   url: '/textbook-demo',
   segment: {
     action: 'Textbook demo'
