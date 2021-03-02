@@ -18,21 +18,21 @@ import { Component, Prop } from 'vue-property-decorator'
 import { SegmentData } from '~/constants/appLinks'
 
 @Component
-export default class AppLink extends Vue {
+export default class BasicLink extends Vue {
   @Prop({ type: String, default: '' }) url!: string
   @Prop({ type: Object, required: false }) segment: SegmentData | undefined
   @Prop({ type: Boolean, default: false }) isStatic!: boolean
 
   static isExternal (url: string): boolean {
-    return url.startsWith('http')
+    return !!url && url.startsWith('http')
   }
 
   static isMail (url: string): boolean {
-    return url.startsWith('mailto')
+    return !!url && url.startsWith('mailto')
   }
 
   static isIdAnchor (url: string): boolean {
-    return url.startsWith('#')
+    return !!url && url.startsWith('#')
   }
 
   get hasLink (): boolean {
@@ -41,14 +41,14 @@ export default class AppLink extends Vue {
 
   get isAnchor (): boolean {
     const url = this.url
-    return AppLink.isExternal(url) ||
-      AppLink.isMail(url) ||
-      AppLink.isIdAnchor(url) ||
+    return BasicLink.isExternal(url) ||
+      BasicLink.isMail(url) ||
+      BasicLink.isIdAnchor(url) ||
       this.isStatic
   }
 
   get isExternal (): boolean {
-    return AppLink.isExternal(this.url)
+    return BasicLink.isExternal(this.url)
   }
 
   get isNuxtLink (): boolean {
