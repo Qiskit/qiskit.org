@@ -1,9 +1,7 @@
 <template>
   <article class="app-introductory-content">
     <div class="app-introductory-content__overview">
-      <h2 class="copy__title">
-        {{ title }}
-      </h2>
+      <slot name="title" />
       <p class="app-introductory-content__description">
         {{ description }}
       </p>
@@ -26,7 +24,6 @@ import { NavLink } from '~/constants/menuLinks'
 
 @Component
 export default class AppIntroductoryContent extends Vue {
-  @Prop(String) title!: string
   @Prop(String) description!: string
   @Prop(Object) link!: NavLink
 }
