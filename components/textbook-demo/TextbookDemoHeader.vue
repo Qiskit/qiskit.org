@@ -5,13 +5,13 @@
         <AppPageHeaderTitle>
           Qiskit Textbook (beta)
         </AppPageHeaderTitle>
-        <div class="textbook-demo-header__dropdown-container">
-          <AppMegaDropdownMenu />
-        </div>
+        <AppMegaDropdownMenu
+          class="textbook-demo-header__dropdown"
+          :placeholder="dropdownMenuPlaceholder"
+          :content="dropdownMenuContent"
+        />
       </div>
-      <div class="textbook-demo-header__cta-container">
-        <AppCta v-bind="cta" />
-      </div>
+      <AppCta v-bind="startLearningCTA" class="textbook-demo-header__cta" />
     </div>
   </header>
 </template>
@@ -19,7 +19,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import { TEXTBOOK_DEMO_START_LEARNING as CTA } from '~/constants/appLinks.ts'
+import { TEXTBOOK_DEMO_START_LEARNING } from '~/constants/appLinks.ts'
+import { TEXTBOOK_DEMO_MEGA_MENU } from '~/constants/megaMenuLinks'
 import AppMegaDropdownMenu from '~/components/ui/AppMegaDropdownMenu.vue'
 
 @Component({
@@ -28,7 +29,9 @@ import AppMegaDropdownMenu from '~/components/ui/AppMegaDropdownMenu.vue'
   }
 })
 export default class TextbookDemoHeader extends Vue {
-  cta = CTA
+  startLearningCTA = TEXTBOOK_DEMO_START_LEARNING
+  dropdownMenuPlaceholder = 'Browse content'
+  dropdownMenuContent = TEXTBOOK_DEMO_MEGA_MENU
 }
 </script>
 
@@ -54,8 +57,8 @@ export default class TextbookDemoHeader extends Vue {
     @include contained();
     display: flex;
     flex-direction: column;
-    height: 100%;
     justify-content: space-between;
+    height: 100%;
     padding-top: $spacing-09;
 
     @include mq($until: large) {
@@ -63,13 +66,12 @@ export default class TextbookDemoHeader extends Vue {
     }
   }
 
-  &__dropdown-container {
+  &__dropdown {
     margin-top: $layout-03;
   }
 
-  &__cta-container {
-    display: flex;
-    justify-content: flex-end;
+  &__cta {
+    align-self: flex-end;
   }
 }
 </style>

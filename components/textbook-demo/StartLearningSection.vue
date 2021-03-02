@@ -8,8 +8,12 @@
       :key="title"
       class="start-learning-section__learning-paths__section"
       :description="description"
-      :title="title"
     >
+      <template #title>
+        <h3 class="start-learning-section__subtitle">
+          {{ title }}
+        </h3>
+      </template>
       <AppCard
         v-for="{ description: pathDescription, image, title: pathTitle, to } in paths"
         :key="pathTitle"
@@ -107,11 +111,19 @@ export default class StartLearningSection extends Vue {
 </script>
 
 <style lang="scss" scoped>
+@import "~carbon-components/scss/globals/scss/typography";
 @import "~/assets/scss/blocks/copy.scss";
 
 .start-learning-section {
-  .copy__title {
-    max-width: initial;
+  &__subtitle {
+    @include type-style("expressive-heading-04");
+    margin-bottom: $layout-01;
+    color: $cool-gray-80;
+
+    @include mq($until: large) {
+      @include type-style("expressive-heading-03");
+      font-weight: 300;
+    }
   }
 
   &__learning-paths {

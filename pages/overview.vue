@@ -40,6 +40,11 @@
           :description="section.description"
           :link="section.link"
         >
+          <template #title>
+            <h2 class="copy__title">
+              {{ section.title }}
+            </h2>
+          </template>
           <ContentAccordion
             v-if="section.subSections"
             class="overview-page__content-section-details"
