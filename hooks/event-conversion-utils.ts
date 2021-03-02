@@ -81,7 +81,10 @@ async function fetchSeminarSeriesEvents (apiKey: string, { days }: { days: any }
   await getEventsQuery(apiKey, days, 'Seminar Series Website DO NOT MODIFY', [`{${showOnSeminarSeriesPage}}`]).eachPage((records, nextPage) => {
     for (const record of records) {
       const seminarSeriesEvent = convertToSeminarSeriesEvent(record)
-      seminarSeriesEvents.push(seminarSeriesEvent)
+
+      if (seminarSeriesEvent !== null) {
+        seminarSeriesEvents.push(seminarSeriesEvent)
+      }
     }
     nextPage()
   })
@@ -101,8 +104,8 @@ function convertToCommunityEvent (record: any): CommunityEvent {
   }
 }
 
-function convertToSeminarSeriesEvent (record: any): SeminarSeriesEvent {
-  return {
+function convertToSeminarSeriesEvent (record: any): SeminarSeriesEvent|null {
+  const seminarSeriesEvent = {
     date: formatDates(...getDates(record)),
     image: getImage(record),
     institution: getInstitution(record),
@@ -111,6 +114,14 @@ function convertToSeminarSeriesEvent (record: any): SeminarSeriesEvent {
     title: getName(record),
     to: getWebsite(record)
   }
+
+  for (const value of Object.values(seminarSeriesEvent)) {
+    if (typeof (value) === 'undefined') {
+      return null
+    }
+  }
+
+  return seminarSeriesEvent
 }
 
 function getInstitution (record: any): string {
