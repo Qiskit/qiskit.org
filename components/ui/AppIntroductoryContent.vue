@@ -24,7 +24,6 @@ import { NavLink } from '~/constants/menuLinks'
 
 @Component
 export default class AppIntroductoryContent extends Vue {
-  @Prop(String) title!: string
   @Prop(String) description!: string
   @Prop(Object) link!: NavLink
 }

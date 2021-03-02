@@ -21,7 +21,7 @@ import { DescriptionCard } from '~/components/ui/AppDescriptionCard.vue'
     }
   }
 })
-export default class TextbookPage extends QiskitPage {
+export default class TextbookDemoPage extends QiskitPage {
   routeName: string = 'textbook-demo'
 
   helpfulResources: DescriptionCard[] = [
