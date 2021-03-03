@@ -35,6 +35,7 @@ import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import { DescriptionCard } from '~/components/ui/AppDescriptionCard.vue'
 import { TableRowElement } from '~/components/ui/AppDataTable.vue'
+import { SEGMENT_ACTION_SEPARATOR, SEGMENT_ACTION_PAGE_SECTIONS } from '~/constants/trackingSegments'
 
 interface AgendaSlot {
   time: string,
@@ -125,7 +126,7 @@ export default class PhysicsOfComputationPage extends QiskitPage {
     label: 'Submit a talk',
     url: 'https://airtable.com/shr6UbEsEvinHfjct',
     segment: {
-      action: `${this.routeName} > header > submit-a-talk`
+      action: `${this.routeName}${SEGMENT_ACTION_SEPARATOR}${SEGMENT_ACTION_PAGE_SECTIONS.HEADER}${SEGMENT_ACTION_SEPARATOR}submit-a-talk`
     }
   }
 
@@ -140,7 +141,7 @@ export default class PhysicsOfComputationPage extends QiskitPage {
     to: 'https://airtable.com/shrvAA05xkYgSKajc',
     ctaLabel: 'Stay informed',
     segment: {
-      action: `${this.routeName} > header > stay-informed`
+      action: `${this.routeName}${SEGMENT_ACTION_SEPARATOR}${SEGMENT_ACTION_PAGE_SECTIONS.HEADER}${SEGMENT_ACTION_SEPARATOR}stay-informed`
     }
   }
 
@@ -250,7 +251,7 @@ export default class PhysicsOfComputationPage extends QiskitPage {
         url: 'https://airtable.com/shrvAA05xkYgSKajc',
         label: 'Stay informed',
         segment: {
-          action: `${this.routeName} > helpful-resources > stay-informed`
+          action: `${this.routeName}${SEGMENT_ACTION_SEPARATOR}${SEGMENT_ACTION_PAGE_SECTIONS.HELPFUL_RESOURCES}${SEGMENT_ACTION_SEPARATOR}stay-informed`
         }
       }
     },
@@ -262,7 +263,7 @@ export default class PhysicsOfComputationPage extends QiskitPage {
         url: 'https://airtable.com/shr6UbEsEvinHfjct',
         label: 'Submit a talk',
         segment: {
-          action: `${this.routeName} > helpful-resources > submit-a-talk`
+          action: `${this.routeName}${SEGMENT_ACTION_SEPARATOR}${SEGMENT_ACTION_PAGE_SECTIONS.HELPFUL_RESOURCES}${SEGMENT_ACTION_SEPARATOR}submit-a-talk`
         }
       }
     },
@@ -273,7 +274,7 @@ export default class PhysicsOfComputationPage extends QiskitPage {
         url: 'https://qiskit.org/learn',
         label: 'Learn Qiskit and more',
         segment: {
-          action: `${this.routeName} > helpful-resources > qiskit-org-learn`
+          action: `${this.routeName}${SEGMENT_ACTION_SEPARATOR}${SEGMENT_ACTION_PAGE_SECTIONS.HELPFUL_RESOURCES}${SEGMENT_ACTION_SEPARATOR}qiskit-org-learn`
         }
       }
     },
@@ -285,7 +286,7 @@ export default class PhysicsOfComputationPage extends QiskitPage {
         url: 'https://github.com/Qiskit/qiskit/blob/master/CODE_OF_CONDUCT.md',
         label: 'See code of conduct',
         segment: {
-          action: `${this.routeName} > helpful-resources > code-of-conduct`
+          action: `${this.routeName}${SEGMENT_ACTION_SEPARATOR}${SEGMENT_ACTION_PAGE_SECTIONS.HELPFUL_RESOURCES}${SEGMENT_ACTION_SEPARATOR}code-of-conduct`
         }
       }
     }

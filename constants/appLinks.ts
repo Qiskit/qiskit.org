@@ -1,3 +1,5 @@
+import { SEGMENT_ACTION_PAGES, SEGMENT_ACTION_PAGE_SECTIONS, SEGMENT_ACTION_SEPARATOR } from './trackingSegments'
+
 type SegmentData = {
   action: string
 }
@@ -47,7 +49,7 @@ const SEMINAR_SERIES_ALL_EPISODES_CTA: GeneralLink = {
   url: seminarSeriesPlaylistUrl,
   label: 'Go to YouTube playlist',
   segment: {
-    action: 'seminar-series > header > youtube-playlist'
+    action: `${SEGMENT_ACTION_PAGES.SEMINAR_SERIES}${SEGMENT_ACTION_SEPARATOR}${SEGMENT_ACTION_PAGE_SECTIONS.HEADER}${SEGMENT_ACTION_SEPARATOR}youtube-playlist`
   }
 }
 
@@ -55,7 +57,7 @@ const SEMINAR_SERIES_FULL_ARCHIVE_CTA: GeneralLink = {
   url: seminarSeriesPlaylistUrl,
   label: 'Explore Full Seminar Archive',
   segment: {
-    action: 'seminar-series > past-events-section > youtube-playlist'
+    action: `${SEGMENT_ACTION_PAGES.SEMINAR_SERIES}${SEGMENT_ACTION_SEPARATOR}${SEGMENT_ACTION_PAGE_SECTIONS.PAST_EVENTS}${SEGMENT_ACTION_SEPARATOR}youtube-playlist`
   }
 }
 

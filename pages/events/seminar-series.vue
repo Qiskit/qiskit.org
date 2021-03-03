@@ -52,7 +52,8 @@ import pastSeminarSeriesEvents from '~/content/events/past-seminar-series-events
 import {
   SEMINAR_SERIES_ALL_EPISODES_CTA,
   SEMINAR_SERIES_FULL_ARCHIVE_CTA
-} from '~/constants/appLinks.ts'
+} from '~/constants/appLinks'
+import { SEGMENT_ACTION_SEPARATOR, SEGMENT_ACTION_PAGE_SECTIONS, SEGMENT_ACTION_PAGES } from '~/constants/trackingSegments'
 
 @Component({
   head () {
@@ -78,7 +79,7 @@ export default class SeminarSeriesPage extends QiskitPage {
   headerCTA = {
     ...SEMINAR_SERIES_ALL_EPISODES_CTA,
     segment: {
-      action: `${this.routeName} > header > talk-on-youtube`
+      action: `${this.routeName}${SEGMENT_ACTION_SEPARATOR}${SEGMENT_ACTION_PAGE_SECTIONS.HEADER}${SEGMENT_ACTION_SEPARATOR}talk-on-youtube`
     }
   }
 
@@ -151,7 +152,7 @@ export default class SeminarSeriesPage extends QiskitPage {
         url: 'https://calendar.google.com/calendar/ical/c12g9fqo0mkvp9bo26dhm3u1rs%40group.calendar.google.com/public/basic.ics',
         label: 'Get calendar updates',
         segment: {
-          action: `${this.routeName} > helpful-resources > get-calendar`
+          action: `${this.routeName}${SEGMENT_ACTION_SEPARATOR}${SEGMENT_ACTION_PAGE_SECTIONS.HELPFUL_RESOURCES}${SEGMENT_ACTION_SEPARATOR}get-calendar`
         }
       }
     },
@@ -162,7 +163,7 @@ export default class SeminarSeriesPage extends QiskitPage {
         url: 'https://airtable.com/shrB5wy8SCaMMtKop',
         label: 'Contact us',
         segment: {
-          action: `${this.routeName} > helpful-resources > contact`
+          action: `${this.routeName}${SEGMENT_ACTION_SEPARATOR}${SEGMENT_ACTION_PAGE_SECTIONS.HELPFUL_RESOURCES}${SEGMENT_ACTION_SEPARATOR}contact`
         }
       }
     },
@@ -173,7 +174,7 @@ export default class SeminarSeriesPage extends QiskitPage {
         url: 'https://qiskit.org/learn',
         label: 'Start learning',
         segment: {
-          action: `${this.routeName} > helpful-resources > qiskit-org-learn`
+          action: `${this.routeName}${SEGMENT_ACTION_SEPARATOR}${SEGMENT_ACTION_PAGE_SECTIONS.HELPFUL_RESOURCES}${SEGMENT_ACTION_SEPARATOR}qiskit-org-learn`
         }
       }
     },
@@ -184,7 +185,7 @@ export default class SeminarSeriesPage extends QiskitPage {
         url: 'https://github.com/Qiskit/qiskit/blob/master/CODE_OF_CONDUCT.md',
         label: 'See code of conduct',
         segment: {
-          action: `${this.routeName} > helpful-resources > code-of-conduct`
+          action: `${this.routeName}${SEGMENT_ACTION_SEPARATOR}${SEGMENT_ACTION_PAGE_SECTIONS.HELPFUL_RESOURCES}${SEGMENT_ACTION_SEPARATOR}code-of-conduct`
         }
       }
     }
@@ -219,7 +220,7 @@ export default class SeminarSeriesPage extends QiskitPage {
           url: event.to,
           label: 'Join event',
           segment: {
-            action: `seminar-series > ${eventsSection} > talk-on-youtube`
+            action: `${SEGMENT_ACTION_PAGES.SEMINAR_SERIES}${SEGMENT_ACTION_SEPARATOR}${eventsSection}${SEGMENT_ACTION_SEPARATOR}talk-on-youtube`
           }
         }
       }
