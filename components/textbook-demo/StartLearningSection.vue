@@ -53,34 +53,34 @@ export default class StartLearningSection extends Vue {
     {
       title: 'Learning paths',
       description:
-        'Quantum computing is a big topic and working out where to start can be difficult. In this interactive textbook, the content is organised into “learning paths” with clear prerequisites and end goals. If you’re looking for something specific, you can browse all content, and if you can’t find what you’re looking for you can ask the community on Slack.',
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tempus et malesuada ipsum aenean imperdiet risus. Turpis morbi turpis fermentum tellus semper egestas amet, dictumst ipsum. Ut tincidunt amet quis donec tempus.',
       paths: [
         {
           image: '/images/textbook-demo/introduction-course.png',
           title: 'Introduction course',
           description:
-            'Not sure where to start? This path is for you. This introduction is aimed at audiences from all backgrounds. Whether you’re keen to start your journey into quantum computing, or just curious as to what it’s all about, this course will take you from zero to one, without the hand waving.',
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tempus et malesuada ipsum aenean imperdiet risus. Turpis morbi turpis fermentum tellus semper egestas amet, dictumst ipsum. Ut tincidunt amet quis donec tempus.',
           to: '#'
         },
         {
           image: '/images/textbook-demo/traditional-algorithms.png',
-          title: 'Traditional Algorithms & Protocols',
+          title: 'Traditional Algorithms',
           description:
-            'Know your bits from your qubits? Start learning about the algorithms that kick-started all this excitement. This course will take you from basic quantum computing concepts to understanding quantum counting, Shor’s algorithm and more.',
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tempus et malesuada ipsum aenean imperdiet risus. Turpis morbi turpis fermentum tellus semper egestas amet, dictumst ipsum. Ut tincidunt amet quis donec tempus.',
           to: '#'
         },
         {
           image: '/images/textbook-demo/quantum-hardware.png',
           title: 'Quantum hardware',
           description:
-            'This learning path is under construction... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tempus et malesuada ipsum aenean imperdiet risus. Turpis morbi turpis fermentum tellus semper egestas amet.',
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tempus et malesuada ipsum aenean imperdiet risus. Turpis morbi turpis fermentum tellus semper egestas amet, dictumst ipsum. Ut tincidunt amet quis donec tempus.',
           to: '#'
         },
         {
           image: '/images/textbook-demo/quantum-machine-learning.png',
           title: 'Quantum machine learning',
           description:
-            'This learning path is under construction... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tempus et malesuada ipsum aenean imperdiet risus. Turpis morbi turpis fermentum tellus semper egestas amet.',
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tempus et malesuada ipsum aenean imperdiet risus. Turpis morbi turpis fermentum tellus semper egestas amet, dictumst ipsum. Ut tincidunt amet quis donec tempus.',
           to: '#'
         }
       ]
@@ -94,7 +94,7 @@ export default class StartLearningSection extends Vue {
           image: '/images/textbook-demo/labs.png',
           title: 'Labs',
           description:
-            'This set of labs provides 7 different exercises you (or your students) can use to investigate the behaviour of current quantum computers and practice your Qiskit coding skills.',
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tempus et malesuada ipsum aenean imperdiet risus. Turpis morbi turpis fermentum tellus semper egestas amet, dictumst ipsum. Ut tincidunt amet quis donec tempus.',
           to: '#'
         },
         {
