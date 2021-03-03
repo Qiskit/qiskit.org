@@ -71,7 +71,10 @@ const REQUEST_AN_EVENT_CTA: GeneralLink = {
 
 const TEXTBOOK_DEMO_START_LEARNING: GeneralLink = {
   url: '#',
-  label: 'Start learning'
+  label: 'Start learning',
+  segment: {
+    action: 'textbook-demo > header > start-learning'
+  }
 }
 
 const IBM_Q_EXPERIENCE: GeneralLink = {
