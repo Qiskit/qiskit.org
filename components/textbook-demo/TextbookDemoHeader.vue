@@ -21,13 +21,8 @@ import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 import { TEXTBOOK_DEMO_START_LEARNING } from '~/constants/appLinks'
 import { TEXTBOOK_DEMO_MEGA_MENU } from '~/constants/megaMenuLinks'
-import AppMegaDropdownMenu from '~/components/ui/AppMegaDropdownMenu.vue'
 
-@Component({
-  components: {
-    AppMegaDropdownMenu
-  }
-})
+@Component
 export default class TextbookDemoHeader extends Vue {
   startLearningCTA = TEXTBOOK_DEMO_START_LEARNING
   dropdownMenuPlaceholder = 'Browse content'
