@@ -53,6 +53,10 @@ export default class AppPageHeader extends Vue {
     grid-template-areas:
       "top-link top-link"
       "main aside";
+
+    @include mq($until: large) {
+      grid-template-rows: 60px auto;
+    }
   }
 
   &__top-link {
@@ -71,6 +75,10 @@ export default class AppPageHeader extends Vue {
     @include mq($until: x-large) {
       gap: $spacing-06;
     }
+
+    @include mq($until: large) {
+      gap: $spacing-09;
+    }
   }
 
   &__description {
@@ -79,6 +87,10 @@ export default class AppPageHeader extends Vue {
 
     @include mq($until: x-large) {
       margin-top: $spacing-06;
+    }
+
+    @include mq($until: large) {
+      margin-top: $spacing-09;
     }
   }
 
