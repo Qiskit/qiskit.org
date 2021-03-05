@@ -1,12 +1,12 @@
 <template>
-  <section class="learning-path-external-recommended-readings">
-    <h2 class="learning-path-external-recommended-readings__headline">
+  <section class="external-recommended-readings">
+    <h2 class="external-recommended-readings__headline">
       External recommended readings
     </h2>
     <AppLink
       v-for="link in links"
       :key="link"
-      class="learning-path-external-recommended-readings__link"
+      class="external-recommended-readings__link"
       :url="link"
     >
       {{ link }}
@@ -19,7 +19,7 @@ import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 
 @Component
-export default class LearningPathExternalRecommendedReadings extends Vue {
+export default class ExternalRecommendedReadings extends Vue {
   @Prop({ type: Array, required: true }) links!: string[]
 }
 </script>
@@ -27,7 +27,7 @@ export default class LearningPathExternalRecommendedReadings extends Vue {
 <style lang="scss" scoped>
 @import "~carbon-components/scss/globals/scss/typography";
 
-.learning-path-external-recommended-readings {
+.external-recommended-readings {
   &__headline {
     @include type-style("productive-heading-01");
     color: $cool-gray-80;
