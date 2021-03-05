@@ -57,6 +57,14 @@ export default class AppPageHeader extends Vue {
     @include mq($until: large) {
       grid-template-rows: 60px auto;
     }
+
+    @include mq($until: medium) {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        'top-link'
+        'main'
+        'aside';
+    }
   }
 
   &__top-link {
@@ -96,6 +104,10 @@ export default class AppPageHeader extends Vue {
 
   &__aside {
     grid-area: aside;
+
+    @include mq($until: medium) {
+      margin-top: $spacing-09;
+    }
   }
 
   &_bg-grid {
