@@ -64,14 +64,22 @@ export default class AppPageHeader extends Vue {
   &__main {
     display: flex;
     flex-flow: column;
-    gap: $spacing-07;
+    gap: $spacing-05;
     grid-area: main;
     justify-content: space-between;
+
+    @include mq($until: x-large) {
+      gap: $spacing-06;
+    }
   }
 
   &__description {
     @include type-style("body-long-01");
     margin-top: $spacing-05;
+
+    @include mq($until: x-large) {
+      margin-top: $spacing-06;
+    }
   }
 
   &__aside {
