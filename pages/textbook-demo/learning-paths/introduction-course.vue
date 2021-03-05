@@ -1,5 +1,6 @@
 <template>
   <main class="learning-path-introduction-course-page">
+    <!-- TODO: Add page content -->
   </main>
 </template>
 
