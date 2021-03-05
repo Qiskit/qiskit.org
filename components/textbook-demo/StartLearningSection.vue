@@ -60,7 +60,7 @@ export default class StartLearningSection extends Vue {
           title: 'Introduction course',
           description:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tempus et malesuada ipsum aenean imperdiet risus. Turpis morbi turpis fermentum tellus semper egestas amet, dictumst ipsum. Ut tincidunt amet quis donec tempus.',
-          to: '#'
+          to: '/textbook-demo/learning-paths/introduction-course'
         },
         {
           image: '/images/textbook-demo/traditional-algorithms.png',
