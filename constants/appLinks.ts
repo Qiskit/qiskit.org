@@ -70,7 +70,7 @@ const REQUEST_AN_EVENT_CTA: GeneralLink = {
 }
 
 const TEXTBOOK_DEMO_START_LEARNING: GeneralLink = {
-  url: '#',
+  url: '/textbook-demo/learning-paths/introduction-course',
   label: 'Start learning'
 }
 
