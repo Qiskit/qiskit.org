@@ -1,6 +1,6 @@
 <template>
-  <main class="learning-path-introduction-course-page">
-    <ExternalRecommendedReadings class="learning-path-introduction-course-page__section" :links="links" />
+  <main class="introduction-course-page">
+    <ExternalRecommendedReadings class="introduction-course-page__section" :links="links" />
   </main>
 </template>
 
@@ -15,7 +15,7 @@ import QiskitPage from '~/components/logic/QiskitPage.vue'
     }
   }
 })
-export default class LearningPathIntroductionCoursePage extends QiskitPage {
+export default class IntroductionCoursePage extends QiskitPage {
   routeName: string = 'introduction-course'
   links = [
     'https://math.mit.edu/~gs/linearalgebra/',
@@ -25,7 +25,7 @@ export default class LearningPathIntroductionCoursePage extends QiskitPage {
 </script>
 
 <style lang="scss" scoped>
-.learning-path-introduction-course-page {
+.introduction-course-page {
   &__section {
     @include contained();
     margin-bottom: $layout-03;
