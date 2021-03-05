@@ -1,5 +1,5 @@
 <template>
-  <main class="learning-path-introduction-course-page">
+  <main class="introduction-course-page">
     <!-- TODO: Add page content -->
   </main>
 </template>
@@ -15,7 +15,7 @@ import QiskitPage from '~/components/logic/QiskitPage.vue'
     }
   }
 })
-export default class LearningPathIntroductionCoursePage extends QiskitPage {
+export default class IntroductionCoursePage extends QiskitPage {
   routeName: string = 'introduction-course'
 }
 </script>
