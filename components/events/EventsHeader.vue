@@ -1,35 +1,31 @@
 <template>
-  <header class="events-header">
-    <div class="events-header__container">
-      <div class="events-header__main">
-        <div>
-          <AppPageHeaderTitle>
-            <slot />
-          </AppPageHeaderTitle>
-          <div class="events-header__description">
-            <p
-              v-for="(paragraph, index) in description"
-              :key="index"
-              class="copy__paragraph"
-            >
-              {{ paragraph }}
-            </p>
-          </div>
-        </div>
-        <AppCta v-bind="cta" class="events-header__cta" />
-      </div>
+  <AppPageHeader bg-grid :cta="cta">
+
+    <template slot="headline">
+      Quantum Information Science Seminar Series
+    </template>
+
+    <template slot="description">
+      <p
+        v-for="(paragraph, index) in description"
+        :key="index"
+        class="events-header__description__item"
+        v-text="paragraph"
+      />
+    </template>
+
+    <template slot="aside">
       <div class="events-header__aside">
         <div class="events-header__card-up-title-wrapper">
-          <div class="events-header__card-up-title copy__subtitle">
-            {{ cardTitle }}
-          </div>
+          <div class="events-header__card-up-title copy__subtitle" v-text="cardTitle" />
         </div>
-        <EventCard v-bind="cardContent" vertical-layout>
+        <EventCard v-bind="cardContent" class="events-header__card" vertical-layout>
           {{ cardContent.description }}
         </EventCard>
       </div>
-    </div>
-  </header>
+    </template>
+
+  </AppPageHeader>
 </template>
 
 <script lang="ts">
@@ -47,56 +43,18 @@ export default class EventsHeader extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '~carbon-components/scss/globals/scss/typography';
-@import '~/assets/scss/blocks/copy.scss';
-
 .events-header {
-  @include responsive-grid-bg-strip('/images/grid/grid-hero-learn.svg', auto, 28rem);
-
-  &__container {
-    @include contained();
-    display: grid;
-    column-gap: $spacing-07;
-    grid-template-columns: 3fr 4fr 3fr;
-    grid-template-areas: 'main main aside';
-    row-gap: $spacing-07;
-
-    @include mq($until: large) {
-      grid-template-columns: 1fr 1fr;
-      grid-template-areas: 'main aside';
-    }
-
-    @include mq($until: medium) {
-      grid-template-columns: 1fr;
-      grid-template-areas:
-        'main'
-        'aside';
-    }
+  &__description__item:not(:last-child) {
+    margin-bottom: $spacing-03;
   }
 
   &__aside {
-    grid-area: aside;
-  }
+    max-width: 288px;
+    width: 100%;
 
-  &__cta {
-    margin: 0 0 $layout-02;
-
-    @include mq($until: medium) {
-      margin-top: $layout-03;
+    @include mq($until: large) {
+      max-width: initial;
     }
-  }
-
-  &__description {
-    margin-top: $layout-03;
-    margin-bottom: $layout-03;
-  }
-
-  &__main {
-    display: flex;
-    flex-flow: column;
-    grid-area: main;
-    justify-content: space-between;
-    margin-top: $spacing-07;
   }
 
   &__card-up-title {
@@ -108,6 +66,10 @@ export default class EventsHeader extends Vue {
     &-wrapper {
       margin-bottom: $spacing-06;
     }
+  }
+
+  &__card {
+    margin-bottom: 0 !important;
   }
 }
 </style>

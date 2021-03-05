@@ -1,7 +1,6 @@
 <template>
   <main class="event-page seminar-series-page">
     <EventsHeader
-      class="seminar-series-page__header"
       :description="headerDescription"
       :cta="headerCTA"
       :card-title="headerCardTitle"
@@ -231,14 +230,6 @@ export default class SeminarSeriesPage extends QiskitPage {
 <style lang="scss" scoped>
 .seminar-series-page {
   color: $white-text-01;
-
-  &__header {
-    padding-top: $layout-06;
-
-    @include mq($until: medium) {
-      padding-top: $layout-04;
-    }
-  }
 
   &__section {
     @include contained();

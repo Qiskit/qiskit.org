@@ -103,7 +103,9 @@ export default class AppPageHeader extends Vue {
   }
 
   &__aside {
+    display: flex;
     grid-area: aside;
+    justify-content: flex-end;
 
     @include mq($until: medium) {
       margin-top: $spacing-09;
