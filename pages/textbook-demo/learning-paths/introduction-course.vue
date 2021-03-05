@@ -1,6 +1,6 @@
 <template>
   <main class="learning-path-introduction-course-page">
-    <LearningPathExternalRecommendedReadings class="learning-path-introduction-course-page__section" />
+    <LearningPathExternalRecommendedReadings class="learning-path-introduction-course-page__section" :links="links" />
   </main>
 </template>
 
@@ -17,6 +17,10 @@ import QiskitPage from '~/components/logic/QiskitPage.vue'
 })
 export default class LearningPathIntroductionCoursePage extends QiskitPage {
   routeName: string = 'introduction-course'
+  links = [
+    'https://math.mit.edu/~gs/linearalgebra/',
+    'https://machinelearningmastery.com/gentle-introduction-linear-algebra/'
+  ]
 }
 </script>
 

@@ -16,14 +16,11 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
+import { Component, Prop } from 'vue-property-decorator'
 
 @Component
 export default class LearningPathExternalRecommendedReadings extends Vue {
-  links = [
-    'https://math.mit.edu/~gs/linearalgebra/',
-    'https://machinelearningmastery.com/gentle-introduction-linear-algebra/'
-  ]
+  @Prop({ type: Array, required: true }) links!: string[]
 }
 </script>
 
