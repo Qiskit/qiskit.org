@@ -5,7 +5,10 @@
   >
     <div
       class="app-page-header__container"
-      :class="{ 'app-page-header__container_fixed-height': fixedHeight }"
+      :class="{
+        'app-page-header__container_has-aside': hasAside,
+        'app-page-header__container_fixed-height': fixedHeight,
+      }"
     >
       <div class="app-page-header__top-link">
         <!-- TODO: Implement "top link" -->
@@ -23,7 +26,7 @@
         <AppCta v-if="cta" v-bind="cta" />
       </div>
 
-      <div class="app-page-header__aside">
+      <div v-if="hasAside" class="app-page-header__aside">
         <slot name="aside" />
       </div>
     </div>
@@ -40,6 +43,10 @@ export default class AppPageHeader extends Vue {
   @Prop({ default: false, required: false, type: Boolean }) bgGrid!: Boolean
   @Prop({ default: null, required: false, type: Object }) cta!: GeneralLink
   @Prop({ default: false, required: false, type: Boolean }) fixedHeight!: Boolean
+
+  get hasAside() {
+    return !!this.$slots.aside
+  }
 }
 </script>
 
@@ -52,11 +59,11 @@ export default class AppPageHeader extends Vue {
     @include contained();
     display: grid;
     column-gap: $spacing-07;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
     grid-template-rows: 70px auto;
     grid-template-areas:
-      "top-link top-link"
-      "main aside";
+      "top-link"
+      "main";
 
     @include mq($until: large) {
       grid-template-rows: 60px auto;
@@ -66,8 +73,22 @@ export default class AppPageHeader extends Vue {
       grid-template-columns: 1fr;
       grid-template-areas:
         'top-link'
-        'main'
-        'aside';
+        'main';
+    }
+
+    &_has-aside {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-areas:
+        "top-link top-link"
+        "main aside";
+
+      @include mq($until: medium) {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          'top-link'
+          'main'
+          'aside';
+      }
     }
 
     &_fixed-height {
