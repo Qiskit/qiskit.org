@@ -29,14 +29,9 @@ export default class ExternalRecommendedReadings extends Vue {
 
 .external-recommended-readings {
   &__headline {
-    @include type-style("productive-heading-01");
+    @include type-style("expressive-heading-04");
     color: $cool-gray-80;
-    margin-bottom: $spacing-05;
-
-    @include mq($until: x-large) {
-      @include type-style("expressive-heading-04");
-      margin-bottom: $spacing-06;
-    }
+    margin-bottom: $spacing-06;
   }
 
   &__link {
