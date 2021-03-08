@@ -1,6 +1,5 @@
 <template>
   <AppPageHeader bg-grid :cta="cta">
-
     <template slot="headline">
       Quantum Information Science Seminar Series
     </template>
@@ -24,7 +23,6 @@
         </EventCard>
       </div>
     </template>
-
   </AppPageHeader>
 </template>
 
