@@ -1,6 +1,6 @@
 <template>
   <main class="introduction-course-page">
-    <!-- TODO: Add page content -->
+    <ExternalRecommendedReadings class="introduction-course-page__section" :links="links" />
   </main>
 </template>
 
@@ -17,5 +17,19 @@ import QiskitPage from '~/components/logic/QiskitPage.vue'
 })
 export default class IntroductionCoursePage extends QiskitPage {
   routeName: string = 'introduction-course'
+  links = [
+    'https://math.mit.edu/~gs/linearalgebra/',
+    'https://machinelearningmastery.com/gentle-introduction-linear-algebra/'
+  ]
 }
 </script>
+
+<style lang="scss" scoped>
+.introduction-course-page {
+  &__section {
+    @include contained();
+    margin-bottom: $layout-03;
+    margin-top: $layout-05;
+  }
+}
+</style>
