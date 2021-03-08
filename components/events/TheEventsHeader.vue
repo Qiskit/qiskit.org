@@ -1,5 +1,5 @@
 <template>
-  <ThePageHeader class="the-learn-header">
+  <AppPageHeader bg-grid fixed-height>
     Join <TypewriterEffect
       :values="[
         'events',
@@ -10,7 +10,7 @@
       ]"
     /> from the world&rsquo;s largest
     quantum computing community
-  </ThePageHeader>
+  </AppPageHeader>
 </template>
 
 <script lang="ts">

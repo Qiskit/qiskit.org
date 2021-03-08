@@ -14,10 +14,13 @@
         <!-- TODO: Implement "top link" -->
       </div>
 
-      <div class="app-page-header__main">
+      <div
+        class="app-page-header__main"
+        :class="{ 'app-page-header__main_fixed-height': fixedHeight }"
+      >
         <div>
           <AppPageHeaderTitle>
-            <slot name="headline" />
+            <slot />
           </AppPageHeaderTitle>
           <div class="app-page-header__description">
             <slot name="description" />
@@ -44,7 +47,7 @@ export default class AppPageHeader extends Vue {
   @Prop({ default: null, required: false, type: Object }) cta!: GeneralLink
   @Prop({ default: false, required: false, type: Boolean }) fixedHeight!: Boolean
 
-  get hasAside() {
+  get hasAside () {
     return !!this.$slots.aside
   }
 }
@@ -54,23 +57,25 @@ export default class AppPageHeader extends Vue {
 @import "~carbon-components/scss/globals/scss/typography";
 @import "~/assets/scss/blocks/copy.scss";
 
+$top-link-height: 70px;
+$top-link-height-large: 60px;
+
 .app-page-header {
   &__container {
     @include contained();
     display: grid;
     column-gap: $spacing-07;
     grid-template-columns: 1fr;
-    grid-template-rows: 70px auto;
+    grid-template-rows: $top-link-height auto;
     grid-template-areas:
       "top-link"
       "main";
 
     @include mq($until: large) {
-      grid-template-rows: 60px auto;
+      grid-template-rows: $top-link-height-large auto;
     }
 
     @include mq($until: medium) {
-      grid-template-columns: 1fr;
       grid-template-areas:
         'top-link'
         'main';
@@ -120,6 +125,18 @@ export default class AppPageHeader extends Vue {
 
     @include mq($until: large) {
       gap: $spacing-09;
+    }
+
+    &_fixed-height {
+      margin-bottom: $top-link-height;
+
+      @include mq($until: large) {
+        margin-bottom: $top-link-height-large;
+      }
+
+      @include mq($until: medium) {
+        margin-bottom: initial;
+      }
     }
   }
 

@@ -1,5 +1,5 @@
 <template>
-  <ThePageHeader class="the-learn-header">
+  <AppPageHeader bg-grid fixed-height>
     Start your path towards learning
     <TypewriterEffect
       :values="[
@@ -12,7 +12,7 @@
         'Quantum Applications'
       ]"
     />
-  </ThePageHeader>
+  </AppPageHeader>
 </template>
 
 <script lang="ts">

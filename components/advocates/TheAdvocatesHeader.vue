@@ -1,5 +1,5 @@
 <template>
-  <ThePageHeader>
+  <AppPageHeader bg-grid fixed-height>
     Connect with the<br>
     <TypewriterEffect
       :values="[
@@ -11,7 +11,7 @@
     />
     from within<br>
     the Qiskit community
-  </ThePageHeader>
+  </AppPageHeader>
 </template>
 
 <script lang="ts">

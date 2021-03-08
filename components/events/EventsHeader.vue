@@ -1,8 +1,6 @@
 <template>
   <AppPageHeader bg-grid :cta="cta">
-    <template slot="headline">
-      <slot />
-    </template>
+    <slot />
 
     <template slot="description">
       <p
