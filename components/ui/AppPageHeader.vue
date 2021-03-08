@@ -3,7 +3,10 @@
     class="app-page-header"
     :class="{ 'app-page-header_bg-grid': bgGrid }"
   >
-    <div class="app-page-header__container">
+    <div
+      class="app-page-header__container"
+      :class="{ 'app-page-header__container_fixed-height': fixedHeight }"
+    >
       <div class="app-page-header__top-link">
         <!-- TODO: Implement "top link" -->
       </div>
@@ -17,7 +20,7 @@
             <slot name="description" />
           </div>
         </div>
-        <AppCta v-bind="cta" />
+        <AppCta v-if="cta" v-bind="cta" />
       </div>
 
       <div class="app-page-header__aside">
@@ -35,7 +38,8 @@ import { GeneralLink } from '~/constants/appLinks'
 @Component
 export default class AppPageHeader extends Vue {
   @Prop({ default: false, required: false, type: Boolean }) bgGrid!: Boolean
-  @Prop({ required: true, type: Object }) cta!: GeneralLink
+  @Prop({ default: null, required: false, type: Object }) cta!: GeneralLink
+  @Prop({ default: false, required: false, type: Boolean }) fixedHeight!: Boolean
 }
 </script>
 
@@ -64,6 +68,15 @@ export default class AppPageHeader extends Vue {
         'top-link'
         'main'
         'aside';
+    }
+
+    &_fixed-height {
+      align-items: center;
+      height: 28rem;
+
+      @include mq($until: large) {
+        height: 28rem * 40 / 64;
+      }
     }
   }
 
