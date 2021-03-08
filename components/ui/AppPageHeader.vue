@@ -19,9 +19,9 @@
         :class="{ 'app-page-header__main_fixed-height': fixedHeight }"
       >
         <div>
-          <AppPageHeaderTitle>
+          <h1 class="app-page-header__headline">
             <slot />
-          </AppPageHeaderTitle>
+          </h1>
           <div class="app-page-header__description">
             <slot name="description" />
           </div>
@@ -137,6 +137,20 @@ $top-link-height-large: 60px;
       @include mq($until: medium) {
         margin-bottom: initial;
       }
+    }
+  }
+
+  &__headline {
+    @include type-style('expressive-heading-05', true);
+    color: $white-text-01;
+    max-width: 10 * $column-size-large;
+
+    @include mq($from: medium, $until: large) {
+      max-width: 6 * $column-size-medium;
+    }
+
+    @include mq($until: medium) {
+      max-width: 5 * $column-size-medium;
     }
   }
 
