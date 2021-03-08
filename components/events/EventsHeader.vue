@@ -1,7 +1,7 @@
 <template>
   <AppPageHeader bg-grid :cta="cta">
     <template slot="headline">
-      Quantum Information Science Seminar Series
+      <slot />
     </template>
 
     <template slot="description">
