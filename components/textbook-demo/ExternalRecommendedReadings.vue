@@ -1,6 +1,6 @@
 <template>
   <section class="external-recommended-readings">
-    <h2 class="external-recommended-readings__headline">
+    <h2 class="copy__title">
       External recommended readings
     </h2>
     <AppLink
@@ -25,15 +25,9 @@ export default class ExternalRecommendedReadings extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import "~carbon-components/scss/globals/scss/typography";
+@import '~/assets/scss/blocks/copy.scss';
 
 .external-recommended-readings {
-  &__headline {
-    @include type-style("expressive-heading-04");
-    color: $cool-gray-80;
-    margin-bottom: $spacing-06;
-  }
-
   &__link {
     display: block;
     margin-bottom: $spacing-01;
