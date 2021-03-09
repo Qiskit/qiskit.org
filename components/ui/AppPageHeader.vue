@@ -82,10 +82,14 @@ $top-link-height-large: 60px;
     }
 
     &_has-aside {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: 1fr auto;
       grid-template-areas:
         "top-link top-link"
         "main aside";
+
+      @include mq($until: large) {
+        grid-template-columns: repeat(2, 1fr);
+      }
 
       @include mq($until: medium) {
         grid-template-columns: 1fr;

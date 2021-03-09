@@ -6,7 +6,7 @@
       <p
         v-for="(paragraph, index) in description"
         :key="index"
-        class="events-header__description__item"
+        class="copy__paragraph"
         v-text="paragraph"
       />
     </template>
@@ -40,10 +40,6 @@ export default class EventsHeader extends Vue {
 
 <style lang="scss" scoped>
 .events-header {
-  &__description__item:not(:last-child) {
-    margin-bottom: $spacing-03;
-  }
-
   &__aside {
     max-width: 288px;
     width: 100%;
