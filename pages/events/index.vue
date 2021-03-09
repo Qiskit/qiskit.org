@@ -1,6 +1,17 @@
 <template>
   <div class="event-page">
-    <TheEventsHeader />
+    <AppPageHeader bg-grid fixed-height>
+      Join <TypewriterEffect
+        :values="[
+          'events',
+          'hackathons',
+          'camps',
+          'unconferences',
+          'talks'
+        ]"
+      /> from the world&rsquo;s largest
+      quantum computing community
+    </AppPageHeader>
     <div class="event-page__container">
       <div class="event-page__time-filters">
         <client-only>
