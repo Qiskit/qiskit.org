@@ -20,7 +20,13 @@
         </ul>
       </nav>
     </div>
-    <main class="learning-path-pages-section__main">Right side</main>
+    <main class="learning-path-pages-section__main">
+      <div class="learning-path-pages-section__main__title-wrapper">
+        <div class="learning-path-pages-section__main__title copy__subtitle">
+          Page preview
+        </div>
+      </div>
+    </main>
   </section>
 </template>
 
@@ -45,6 +51,17 @@ export default class LearningPathPagesSection extends Vue {
 
   &__main {
     grid-area: main;
+
+    &__title {
+      border-bottom: 4px solid $purple-60;
+      display: inline;
+      padding-bottom: $spacing-02;
+      padding-right: $spacing-03;
+
+      &-wrapper {
+        margin: $spacing-06 0;
+      }
+    }
   }
 
   &__nav {
