@@ -26,7 +26,12 @@
           Page preview
         </div>
       </div>
-      <div class="learning-path-pages-section__main__preview">Preview</div>
+      <div class="learning-path-pages-section__main__preview">
+        <img
+          class="learning-path-pages-section__main__preview__image"
+          src="/images/textbook-demo/learning-paths/introduction-course/page-preview.png"
+        />
+      </div>
     </main>
   </section>
 </template>
@@ -66,6 +71,11 @@ export default class LearningPathPagesSection extends Vue {
 
     &__preview {
       background: $cool-gray-10;
+      padding: $spacing-05;
+
+      &__image {
+        width: 100%;
+      }
     }
   }
 
