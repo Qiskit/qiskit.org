@@ -31,6 +31,10 @@
           class="learning-path-pages-section__main__preview__image"
           src="/images/textbook-demo/learning-paths/introduction-course/page-preview.png"
         />
+        <AppCta
+          v-bind="cta"
+          class="learning-path-pages-section__main__preview__cta"
+        />
       </div>
     </main>
   </section>
@@ -43,6 +47,7 @@ import { Component } from "vue-property-decorator";
 @Component
 export default class LearningPathPagesSection extends Vue {
   learningPaths = ["One", "Two", "Three"];
+  cta = { label: "Go to page", url: "#" };
 }
 </script>
 
@@ -72,9 +77,16 @@ export default class LearningPathPagesSection extends Vue {
     &__preview {
       background: $cool-gray-10;
       padding: $spacing-05;
+      position: relative;
 
       &__image {
         width: 100%;
+      }
+
+      &__cta {
+        bottom: $spacing-05;
+        position: absolute;
+        right: $spacing-05;
       }
     }
   }
