@@ -67,10 +67,19 @@ export default class LearningPathPagesSection extends Vue {
     }
 
     .entry {
+      @include type-style("body-long-01");
+      color: $cool-gray-80;
       display: inline-block;
       margin-left: 25px;
       max-width: calc(100% - 35px);
-      padding: 3px;
+      padding: $spacing-02 $spacing-03;
+      text-decoration: none;
+      width: 100%;
+
+      &.active {
+        background: $cool-gray-10;
+        font-weight: 600;
+      }
     }
 
     .progress {
