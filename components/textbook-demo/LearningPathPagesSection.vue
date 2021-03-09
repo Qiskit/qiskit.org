@@ -26,6 +26,7 @@
           Page preview
         </div>
       </div>
+      <div class="learning-path-pages-section__main__preview">Preview</div>
     </main>
   </section>
 </template>
@@ -46,7 +47,7 @@ export default class LearningPathPagesSection extends Vue {
 .learning-path-pages-section {
   display: grid;
   column-gap: $spacing-07;
-  grid-template-areas: ". main main main";
+  grid-template-areas: ". main main .";
   grid-template-columns: repeat(4, 1fr);
 
   &__main {
@@ -61,6 +62,10 @@ export default class LearningPathPagesSection extends Vue {
       &-wrapper {
         margin: $spacing-06 0;
       }
+    }
+
+    &__preview {
+      background: $cool-gray-10;
     }
   }
 
