@@ -46,7 +46,19 @@ import { Component } from "vue-property-decorator";
 
 @Component
 export default class LearningPathPagesSection extends Vue {
-  learningPaths = ["One", "Two", "Three"];
+  learningPaths = [
+    "Why quantum computing?",
+    "How it works",
+    "Introduction to quantum effects",
+    "Formalising the fundamentals",
+    "Multiple qubits & entanglement",
+    "Kickback",
+    "Building with gates",
+    "Creating quantum oracle problems",
+    "Introduction to Grover",
+    "Applied Grover project",
+    "What’s next",
+  ];
   cta = { label: "Go to page", url: "#" };
 }
 </script>
