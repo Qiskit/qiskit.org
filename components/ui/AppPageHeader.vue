@@ -43,9 +43,9 @@ import { GeneralLink } from '~/constants/appLinks'
 
 @Component
 export default class AppPageHeader extends Vue {
-  @Prop({ default: false, required: false, type: Boolean }) bgGrid!: Boolean
-  @Prop({ default: null, required: false, type: Object }) cta!: GeneralLink
-  @Prop({ default: false, required: false, type: Boolean }) fixedHeight!: Boolean
+  @Prop({ type: Boolean, required: false, default: false }) bgGrid!: Boolean
+  @Prop({ type: Object, required: false, default: null }) cta!: GeneralLink
+  @Prop({ type: Boolean, required: false, default: false }) fixedHeight!: Boolean
 
   get hasAside () {
     return !!this.$slots.aside
