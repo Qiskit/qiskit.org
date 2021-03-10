@@ -153,7 +153,6 @@ $top-link-height-large: 3.75rem;
   }
 
   &__description {
-    @include type-style("body-long-01");
     margin-top: $spacing-05;
 
     @include mq($until: x-large) {
