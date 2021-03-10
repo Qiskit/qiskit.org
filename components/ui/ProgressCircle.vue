@@ -36,7 +36,7 @@ import { Component, Prop } from 'vue-property-decorator'
 
 @Component
 export default class ProgressCircle extends Vue {
-  @Prop({ type: Number, required: true }) progress!: Number
+  @Prop({ required: true, type: Number }) progress!: Number
 }
 </script>
 
