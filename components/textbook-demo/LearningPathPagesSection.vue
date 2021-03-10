@@ -5,14 +5,44 @@
       <nav class="learning-path-pages-section__nav">
         <ul class="learning-paths">
           <li
-            v-for="{ label, url } in learningPaths"
+            v-for="{ label, progress, url } in learningPaths"
             :key="label"
             class="learning-path"
           >
             <div class="connection" />
             <div class="progress-wrapper">
               <div class="progress" r="10" p="0">
-                <svg width="44" height="44" />
+                <svg
+                  v-if="progress === 1"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                >
+                  <path
+                    d="M8 0.125C3.66875 0.125 0.125 3.66875 0.125 8C0.125 12.3313 3.66875 15.875 8 15.875C12.3313 15.875 15.875 12.3313 15.875 8C15.875 3.66875 12.3313 0.125 8 0.125ZM6.875 11.0938L4.0625 8.28125L4.96249 7.4375L6.875 9.29374L11.0375 5.1875L11.9375 6.08749L6.875 11.0938Z"
+                    fill="#8A3FFC"
+                  />
+                </svg>
+                <svg
+                  v-else-if="progress > 0"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                >
+                  <path
+                    d="M8 2V8L2 10.5L5.5 15L12.5 13.5L15.5 7L12 2H8Z"
+                    fill="#8A3FFC"
+                  />
+                  <circle
+                    cx="8"
+                    cy="8"
+                    r="7"
+                    stroke="#8A3FFC"
+                    stroke-width="2"
+                  />
+                </svg>
               </div>
             </div>
             <a
@@ -55,23 +85,39 @@ import { Component } from "vue-property-decorator";
 @Component
 export default class LearningPathPagesSection extends Vue {
   learningPaths = [
-    { label: "Why quantum computing?", url: "#" },
-    { label: "How it works", url: "#" },
-    { label: "Introduction to quantum effects", url: "#" },
-    { label: "Formalising the fundamentals", url: "#" },
-    { label: "Multiple qubits & entanglement", url: "#" },
-    { label: "Kickback", url: "#" },
-    { label: "Building with gates", url: "#" },
-    { label: "Creating quantum oracle problems", url: "#" },
-    { label: "Introduction to Grover", url: "#" },
-    { label: "Applied Grover project", url: "#" },
-    { label: "What’s next", url: "#" },
+    { label: "Why quantum computing?", progress: 1, url: "#" },
+    { label: "How it works", progress: 1, url: "#" },
+    { label: "Introduction to quantum effects", progress: 1, url: "#" },
+    { label: "Formalising the fundamentals", progress: 0.5, url: "#" },
+    { label: "Multiple qubits & entanglement", progress: 0, url: "#" },
+    { label: "Kickback", progress: 0, url: "#" },
+    { label: "Building with gates", progress: 0, url: "#" },
+    { label: "Creating quantum oracle problems", progress: 0, url: "#" },
+    { label: "Introduction to Grover", progress: 0, url: "#" },
+    { label: "Applied Grover project", progress: 0, url: "#" },
+    { label: "What’s next", progress: 0, url: "#" },
   ];
-  activeLearningPath = this.learningPaths[0].label;
+  activeLearningPath = "";
   cta = { label: "Go to page", url: "#" };
 
   selectLearningPath(learningPathLabel: string) {
     this.activeLearningPath = learningPathLabel;
+  }
+
+  selectFirstUnfinishedLearningPath() {
+    const firstUnfinishedLearningPath = this.learningPaths.find(
+      ({ progress }) => progress < 1
+    );
+
+    if (firstUnfinishedLearningPath) {
+      this.selectLearningPath(firstUnfinishedLearningPath.label);
+    } else {
+      this.selectLearningPath(this.learningPaths[0].label);
+    }
+  }
+
+  mounted() {
+    this.selectFirstUnfinishedLearningPath();
   }
 }
 </script>
@@ -179,12 +225,6 @@ export default class LearningPathPagesSection extends Vue {
       display: inline-block;
       height: 20px;
       width: 20px;
-
-      svg {
-        margin: -14px;
-        position: relative;
-        z-index: -1;
-      }
     }
 
     .progress-wrapper {
