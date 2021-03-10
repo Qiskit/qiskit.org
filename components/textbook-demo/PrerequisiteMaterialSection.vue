@@ -26,7 +26,7 @@
             label="Go to page"
             :url="url"
           />
-          <div>{{ progress }}</div>
+          <ProgressCircle :progress="progress" />
         </footer>
       </article>
     </div>

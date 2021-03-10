@@ -12,7 +12,7 @@
             class="learning-path"
           >
             <div class="learning-path__connection" />
-            <ProgressCircle :progress="progress" />
+            <ProgressCircle absolute :progress="progress" />
             <a
               class="learning-path__entry"
               :class="{ active: label === activeLearningPathLabel }"
