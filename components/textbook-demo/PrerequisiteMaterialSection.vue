@@ -88,6 +88,7 @@ export default class PrerequisiteMaterialSection extends Vue {
     }
 
     &__description {
+      @include type-style('body-long-01');
       margin-top: $spacing-05;
     }
 
@@ -95,7 +96,7 @@ export default class PrerequisiteMaterialSection extends Vue {
       align-items: center;
       display: flex;
       justify-content: space-between;
-      margin-top: $spacing-08 * 2;
+      margin-top: $spacing-09;
     }
 
     &__cta {
