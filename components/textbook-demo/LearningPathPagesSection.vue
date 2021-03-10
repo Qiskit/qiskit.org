@@ -11,10 +11,10 @@
             :key="label"
             class="learning-path"
           >
-            <div class="connection" />
+            <div class="learning-path__connection" />
             <ProgressCircle :progress="progress" />
             <a
-              class="entry"
+              class="learning-path__entry"
               :class="{ active: label === activeLearningPathLabel }"
               :href="url"
               @mouseover="selectLearningPath(label)"
@@ -225,7 +225,7 @@ export default class LearningPathPagesSection extends Vue {
     margin: 0 0 0.5em;
     position: relative;
 
-    .connection {
+    &__connection {
       border: 1px black solid;
       height: calc(100% - 12px);
       left: 9px;
@@ -234,7 +234,7 @@ export default class LearningPathPagesSection extends Vue {
       top: 24px;
     }
 
-    .entry {
+    &__entry {
       @include type-style("body-long-01");
       color: $cool-gray-80;
       display: inline-block;
@@ -255,7 +255,7 @@ export default class LearningPathPagesSection extends Vue {
     }
 
     &:last-of-type {
-      .connection {
+      &__connection {
         display: none;
       }
     }
