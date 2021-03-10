@@ -75,12 +75,6 @@ $top-link-height-large: 3.75rem;
       grid-template-rows: $top-link-height-large auto;
     }
 
-    @include mq($until: medium) {
-      grid-template-areas:
-        'top-link'
-        'main';
-    }
-
     &_has-aside {
       grid-template-columns: 1fr auto;
       grid-template-areas:
