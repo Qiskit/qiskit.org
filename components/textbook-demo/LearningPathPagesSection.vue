@@ -33,10 +33,12 @@
         </div>
       </div>
       <div class="learning-path-pages-section__main__preview">
-        <img
-          class="learning-path-pages-section__main__preview__image"
-          src="/images/textbook-demo/learning-paths/introduction-course/page-preview.png"
-        />
+        <a href="#">
+          <img
+            class="learning-path-pages-section__main__preview__image"
+            src="/images/textbook-demo/learning-paths/introduction-course/page-preview.png"
+          />
+        </a>
         <AppCta
           v-bind="cta"
           class="learning-path-pages-section__main__preview__cta"
