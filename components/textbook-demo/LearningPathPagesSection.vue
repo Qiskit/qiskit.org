@@ -85,8 +85,21 @@ export default class LearningPathPagesSection extends Vue {
   grid-template-areas: ". main main .";
   grid-template-columns: repeat(4, 1fr);
 
+  @include mq($until: large) {
+    grid-template-areas: ". main main main";
+  }
+
+  @include mq($until: medium) {
+    grid-template-areas: ".";
+    grid-template-columns: 1fr;
+  }
+
   &__main {
     grid-area: main;
+
+    @include mq($until: medium) {
+      display: none;
+    }
 
     &__title {
       border-bottom: 4px solid $purple-60;
@@ -118,6 +131,10 @@ export default class LearningPathPagesSection extends Vue {
 
   &__nav {
     margin-right: -$spacing-07;
+
+    @include mq($until: medium) {
+      margin-right: initial;
+    }
   }
 }
 
@@ -148,6 +165,10 @@ export default class LearningPathPagesSection extends Vue {
       &.active {
         background: $cool-gray-10;
         font-weight: 600;
+
+        @include mq($until: medium) {
+          background: initial;
+        }
       }
     }
 
