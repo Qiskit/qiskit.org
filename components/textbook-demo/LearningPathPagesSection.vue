@@ -5,8 +5,8 @@
       <nav class="learning-path-pages-section__nav">
         <ul class="learning-paths">
           <li
-            v-for="learningPath in learningPaths"
-            :key="learningPath"
+            v-for="{ label, url } in learningPaths"
+            :key="label"
             class="learning-path"
           >
             <div class="connection" />
@@ -15,7 +15,13 @@
                 <svg width="44" height="44" />
               </div>
             </div>
-            <a class="entry" href="#" v-text="learningPath" />
+            <a
+              class="entry"
+              :class="{ active: label === activeLearningPath }"
+              :href="url"
+              v-text="label"
+              @mouseover="selectLearningPath(label)"
+            />
           </li>
         </ul>
       </nav>
@@ -47,19 +53,24 @@ import { Component } from "vue-property-decorator";
 @Component
 export default class LearningPathPagesSection extends Vue {
   learningPaths = [
-    "Why quantum computing?",
-    "How it works",
-    "Introduction to quantum effects",
-    "Formalising the fundamentals",
-    "Multiple qubits & entanglement",
-    "Kickback",
-    "Building with gates",
-    "Creating quantum oracle problems",
-    "Introduction to Grover",
-    "Applied Grover project",
-    "What’s next",
+    { label: "Why quantum computing?", url: "#" },
+    { label: "How it works", url: "#" },
+    { label: "Introduction to quantum effects", url: "#" },
+    { label: "Formalising the fundamentals", url: "#" },
+    { label: "Multiple qubits & entanglement", url: "#" },
+    { label: "Kickback", url: "#" },
+    { label: "Building with gates", url: "#" },
+    { label: "Creating quantum oracle problems", url: "#" },
+    { label: "Introduction to Grover", url: "#" },
+    { label: "Applied Grover project", url: "#" },
+    { label: "What’s next", url: "#" },
   ];
+  activeLearningPath = this.learningPaths[0].label;
   cta = { label: "Go to page", url: "#" };
+
+  selectLearningPath(learningPathLabel: string) {
+    this.activeLearningPath = learningPathLabel;
+  }
 }
 </script>
 
@@ -127,7 +138,7 @@ export default class LearningPathPagesSection extends Vue {
       color: $cool-gray-80;
       display: inline-block;
       margin-left: 25px;
-      max-width: calc(100% - 35px);
+      max-width: calc(100% - 25px);
       padding: $spacing-02 $spacing-03;
       text-decoration: none;
       width: 100%;
