@@ -255,7 +255,7 @@ export default class LearningPathPagesSection extends Vue {
     }
 
     &:last-of-type {
-      &__connection {
+      .learning-path__connection {
         display: none;
       }
     }
