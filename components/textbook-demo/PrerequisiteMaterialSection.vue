@@ -20,9 +20,12 @@
           />
         </div>
         <footer class="prerequisite-material-section__card__footer">
-          <div class="prerequisite-material-section__card__cta">
-            {{ url }}
-          </div>
+          <AppCta
+            class="prerequisite-material-section__card__cta"
+            kind="ghost"
+            label="Go to page"
+            :url="url"
+          />
           <div>{{ progress }}</div>
         </footer>
       </article>
@@ -78,7 +81,7 @@ export default class PrerequisiteMaterialSection extends Vue {
     background: $cool-gray-10;
     color: $cool-gray-80;
     display: grid;
-    padding: $spacing-05;
+    padding: $spacing-05 $spacing-05 0;
 
     &__headline {
       @include type-style("productive-heading-02");
@@ -89,12 +92,14 @@ export default class PrerequisiteMaterialSection extends Vue {
     }
 
     &__footer {
+      align-items: center;
       display: flex;
+      justify-content: space-between;
       margin-top: $spacing-08 * 2;
     }
 
     &__cta {
-      flex-grow: 1;
+      width: max-content !important;
     }
   }
 
