@@ -174,7 +174,7 @@ export default class LearningPathPagesSection extends Vue {
     }
   }
 
-  mounted() {
+  created() {
     this.selectFirstUnfinishedLearningPath();
   }
 }
