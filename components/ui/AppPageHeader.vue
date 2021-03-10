@@ -57,8 +57,8 @@ export default class AppPageHeader extends Vue {
 @import "~carbon-components/scss/globals/scss/typography";
 @import "~/assets/scss/blocks/copy.scss";
 
-$top-link-height: 70px;
-$top-link-height-large: 60px;
+$top-link-height: 4.375rem;
+$top-link-height-large: 3.75rem;
 
 .app-page-header {
   &__container {
