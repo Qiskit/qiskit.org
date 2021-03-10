@@ -49,10 +49,20 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
+import { GeneralLink } from '~/constants/appLinks'
+
+interface LearningPath {
+  image: string;
+  label: string;
+  progress: Number;
+  url: string;
+}
 
 @Component
 export default class LearningPathPagesSection extends Vue {
-  learningPaths = [
+  activeLearningPathLabel = '';
+
+  learningPaths: LearningPath[] = [
     {
       image: 'why-quantum-computing.png',
       label: 'Why quantum computing?',
@@ -106,8 +116,7 @@ export default class LearningPathPagesSection extends Vue {
     { image: 'whats-next.png', label: 'What’s next', progress: 0, url: '#' }
   ];
 
-  activeLearningPathLabel = '';
-  cta = { label: 'Go to page', url: '#' };
+  cta: GeneralLink = { label: 'Go to page', url: '#' };
 
   get activeLearningPath () {
     const activeLearningPath = this.learningPaths.find(
