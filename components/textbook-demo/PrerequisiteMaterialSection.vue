@@ -4,16 +4,28 @@
       Prerequisite material
     </h2>
     <div class="prerequisite-material-section__cards">
-      <div
+      <article
         v-for="{ title, description, progress, url } in prerequisites"
         :key="title"
         class="prerequisite-material-section__card"
       >
-        {{ title }}
-        {{ description }}
-        {{ progress }}
-        {{ url }}
-      </div>
+        <div>
+          <header
+            class="prerequisite-material-section__card__headline"
+            v-text="title"
+          />
+          <main
+            class="prerequisite-material-section__card__description"
+            v-text="description"
+          />
+        </div>
+        <footer class="prerequisite-material-section__card__footer">
+          <div class="prerequisite-material-section__card__cta">
+            {{ url }}
+          </div>
+          <div>{{ progress }}</div>
+        </footer>
+      </article>
     </div>
   </section>
 </template>
@@ -62,7 +74,28 @@ export default class PrerequisiteMaterialSection extends Vue {
 
 .prerequisite-material-section {
   &__card {
+    align-content: space-between;
     background: $cool-gray-10;
+    color: $cool-gray-80;
+    display: grid;
+    padding: $spacing-05;
+
+    &__headline {
+      @include type-style("productive-heading-02");
+    }
+
+    &__description {
+      margin-top: $spacing-05;
+    }
+
+    &__footer {
+      display: flex;
+      margin-top: $spacing-08 * 2;
+    }
+
+    &__cta {
+      flex-grow: 1;
+    }
   }
 
   &__cards {
