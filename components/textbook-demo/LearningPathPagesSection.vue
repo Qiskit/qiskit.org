@@ -31,12 +31,12 @@
         </div>
       </div>
       <div class="learning-path-pages-section__main__preview">
-        <a href="#">
+        <BasicLink url="#">
           <img
             class="learning-path-pages-section__main__preview__image"
             :src="activeLearningPathPreviewImage"
           >
-        </a>
+        </BasicLink>
         <AppCta
           v-bind="cta"
           class="learning-path-pages-section__main__preview__cta"
