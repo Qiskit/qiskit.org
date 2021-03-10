@@ -31,7 +31,7 @@
         </div>
       </div>
       <div class="learning-path-pages-section__main__preview">
-        <BasicLink url="#">
+        <BasicLink url="/">
           <img
             class="learning-path-pages-section__main__preview__image"
             :src="activeLearningPathPreviewImage"
@@ -67,56 +67,56 @@ export default class LearningPathPagesSection extends Vue {
       image: 'why-quantum-computing.png',
       label: 'Why quantum computing?',
       progress: 1,
-      url: '#'
+      url: '/'
     },
-    { image: 'how-it-works.png', label: 'How it works', progress: 1, url: '#' },
+    { image: 'how-it-works.png', label: 'How it works', progress: 1, url: '/' },
     {
       image: 'introduction-to-quantum-effects.png',
       label: 'Introduction to quantum effects',
       progress: 1,
-      url: '#'
+      url: '/'
     },
     {
       image: 'formalising-the-fundamentals.png',
       label: 'Formalising the fundamentals',
       progress: 0.5,
-      url: '#'
+      url: '/'
     },
     {
       image: 'multiple-qubits-entanglement.png',
       label: 'Multiple qubits & entanglement',
       progress: 0,
-      url: '#'
+      url: '/'
     },
-    { image: 'kickback.png', label: 'Kickback', progress: 0, url: '#' },
+    { image: 'kickback.png', label: 'Kickback', progress: 0, url: '/' },
     {
       image: 'building-with-gates.png',
       label: 'Building with gates',
       progress: 0,
-      url: '#'
+      url: '/'
     },
     {
       image: 'creating-quantum-oracle-problems.png',
       label: 'Creating quantum oracle problems',
       progress: 0,
-      url: '#'
+      url: '/'
     },
     {
       image: 'introduction-to-grover.png',
       label: 'Introduction to Grover',
       progress: 0,
-      url: '#'
+      url: '/'
     },
     {
       image: 'applied-grover-project.png',
       label: 'Applied Grover project',
       progress: 0,
-      url: '#'
+      url: '/'
     },
-    { image: 'whats-next.png', label: 'What’s next', progress: 0, url: '#' }
+    { image: 'whats-next.png', label: 'What’s next', progress: 0, url: '/' }
   ];
 
-  cta: GeneralLink = { label: 'Go to page', url: '#' };
+  cta: GeneralLink = { label: 'Go to page', url: '/' };
 
   get activeLearningPath () {
     const activeLearningPath = this.learningPaths.find(
