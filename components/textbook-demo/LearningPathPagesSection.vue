@@ -47,7 +47,7 @@
             </div>
             <a
               class="entry"
-              :class="{ active: label === activeLearningPath }"
+              :class="{ active: label === activeLearningPathLabel }"
               :href="url"
               v-text="label"
               @mouseover="selectLearningPath(label)"
@@ -66,7 +66,7 @@
         <a href="#">
           <img
             class="learning-path-pages-section__main__preview__image"
-            src="/images/textbook-demo/learning-paths/introduction-course/page-preview.png"
+            :src="activeLearningPathPreviewImage"
           />
         </a>
         <AppCta
@@ -85,23 +85,81 @@ import { Component } from "vue-property-decorator";
 @Component
 export default class LearningPathPagesSection extends Vue {
   learningPaths = [
-    { label: "Why quantum computing?", progress: 1, url: "#" },
-    { label: "How it works", progress: 1, url: "#" },
-    { label: "Introduction to quantum effects", progress: 1, url: "#" },
-    { label: "Formalising the fundamentals", progress: 0.5, url: "#" },
-    { label: "Multiple qubits & entanglement", progress: 0, url: "#" },
-    { label: "Kickback", progress: 0, url: "#" },
-    { label: "Building with gates", progress: 0, url: "#" },
-    { label: "Creating quantum oracle problems", progress: 0, url: "#" },
-    { label: "Introduction to Grover", progress: 0, url: "#" },
-    { label: "Applied Grover project", progress: 0, url: "#" },
-    { label: "What’s next", progress: 0, url: "#" },
+    {
+      image: "why-quantum-computing.png",
+      label: "Why quantum computing?",
+      progress: 1,
+      url: "#",
+    },
+    { image: "how-it-works.png", label: "How it works", progress: 1, url: "#" },
+    {
+      image: "introduction-to-quantum-effects.png",
+      label: "Introduction to quantum effects",
+      progress: 1,
+      url: "#",
+    },
+    {
+      image: "formalising-the-fundamentals.png",
+      label: "Formalising the fundamentals",
+      progress: 0.5,
+      url: "#",
+    },
+    {
+      image: "multiple-qubits-entanglement.png",
+      label: "Multiple qubits & entanglement",
+      progress: 0,
+      url: "#",
+    },
+    { image: "kickback.png", label: "Kickback", progress: 0, url: "#" },
+    {
+      image: "building-with-gates.png",
+      label: "Building with gates",
+      progress: 0,
+      url: "#",
+    },
+    {
+      image: "creating-quantum-oracle-problems.png",
+      label: "Creating quantum oracle problems",
+      progress: 0,
+      url: "#",
+    },
+    {
+      image: "introduction-to-grover.png",
+      label: "Introduction to Grover",
+      progress: 0,
+      url: "#",
+    },
+    {
+      image: "applied-grover-project.png",
+      label: "Applied Grover project",
+      progress: 0,
+      url: "#",
+    },
+    { image: "whats-next.png", label: "What’s next", progress: 0, url: "#" },
   ];
-  activeLearningPath = "";
+  activeLearningPathLabel = "";
   cta = { label: "Go to page", url: "#" };
 
+  get activeLearningPath() {
+    const activeLearningPath = this.learningPaths.find(
+      ({ label }) => label === this.activeLearningPathLabel
+    );
+    return activeLearningPath || null;
+  }
+
+  get activeLearningPathPreviewImage() {
+    if (!this.activeLearningPath) {
+      return "";
+    }
+
+    const imageUrlBase =
+      "/images/textbook-demo/learning-paths/introduction-course";
+
+    return `${imageUrlBase}/${this.activeLearningPath.image}`;
+  }
+
   selectLearningPath(learningPathLabel: string) {
-    this.activeLearningPath = learningPathLabel;
+    this.activeLearningPathLabel = learningPathLabel;
   }
 
   selectFirstUnfinishedLearningPath() {
