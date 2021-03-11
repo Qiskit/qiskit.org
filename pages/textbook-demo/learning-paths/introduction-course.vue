@@ -1,5 +1,6 @@
 <template>
   <main class="introduction-course-page">
+    <PrerequisiteMaterialSection class="introduction-course-page__section" />
     <ExternalRecommendedReadings class="introduction-course-page__section" :links="links" />
     <LearningPathPagesSection class="introduction-course-page__section" />
   </main>
