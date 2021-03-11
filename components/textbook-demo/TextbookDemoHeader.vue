@@ -7,6 +7,7 @@
         </AppPageHeaderTitle>
         <AppMegaDropdownMenu
           class="textbook-demo-header__dropdown"
+          kind="secondary"
           :placeholder="dropdownMenuPlaceholder"
           :content="dropdownMenuContent"
         />
