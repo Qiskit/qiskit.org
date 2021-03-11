@@ -31,7 +31,7 @@ export default class AppPageHeaderTitle extends Vue {
       max-width: 5 * $column-size-medium;
     }
   }
-  
+
   &_primary {
     color: $white-text-01;
   }

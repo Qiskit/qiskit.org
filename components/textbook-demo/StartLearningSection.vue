@@ -62,7 +62,7 @@ export default class StartLearningSection extends Vue {
         {
           image: '/images/textbook-demo/introduction-course.png',
           title: 'Introduction course',
-          description:`Not sure where to start? This path is for you.
+          description: `Not sure where to start? This path is for you.
           This introduction is aimed at audiences from all backgrounds.
           Whether you’re keen to start your journey into quantum computing,
           or just curious as to what it’s all about, this course will take
@@ -72,7 +72,7 @@ export default class StartLearningSection extends Vue {
         {
           image: '/images/textbook-demo/traditional-algorithms.png',
           title: 'Traditional Algorithms & Protocols',
-          description:`Know your bits from your qubits? Start learning about
+          description: `Know your bits from your qubits? Start learning about
           the algorithms that kick-started all this excitement. This course
           will take you from basic quantum computing concepts to understanding
           quantum counting, Shor’s algorithm and more.`,
