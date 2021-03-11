@@ -33,7 +33,7 @@ export default class TextbookDemoHeader extends Vue {
 
 <style lang="scss" scoped>
 .textbook-demo-header {
-  background: linear-gradient(311deg, rgba(242,244,248,1) 0%, rgba(120,169,255,1) 25%, rgba(105,41,196,1) 100%);
+  background: linear-gradient(315deg, $cool-gray-10 0%, $blue-40 25%, $purple-70 100%);
   height: 34rem;
 
   &__container {
