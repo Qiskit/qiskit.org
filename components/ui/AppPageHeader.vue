@@ -99,7 +99,7 @@ $top-link-height-large: 3.75rem;
       height: 28rem;
 
       @include mq($until: large) {
-        height: 28rem * 40 / 64;
+        height: 17.5rem;
       }
     }
   }
