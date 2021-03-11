@@ -8,6 +8,10 @@
           <AppPageHeaderTitle>
             Introduction to Quantum Computing
           </AppPageHeaderTitle>
+          <img
+            class="introduction-course-header__main-image"
+            src="/images/textbook-demo/learning-paths/introduction-course/header.jpg"
+          />
           <div class="introduction-course-header__description">
             <p>
               This short learning path contains around X hours of content and is
@@ -31,7 +35,7 @@
 
       <div class="introduction-course-header__aside">
         <img
-          class="introduction-course-header__image"
+          class="introduction-course-header__aside-image"
           src="/images/textbook-demo/learning-paths/introduction-course/header.jpg"
         />
       </div>
@@ -70,6 +74,13 @@ $top-link-height-large: 3.75rem;
     }
 
     @include mq($until: medium) {
+      grid-template-columns: repeat(8, 1fr);
+      grid-template-areas:
+        "top-link top-link top-link top-link top-link top-link top-link top-link"
+        "main main main main main aside aside aside";
+    }
+
+    @include mq($until: small) {
       grid-template-columns: 1fr;
       grid-template-areas:
         "top-link"
@@ -100,6 +111,16 @@ $top-link-height-large: 3.75rem;
     }
   }
 
+  &__main-image {
+    display: none;
+
+    @include mq($until: small) {
+      display: block;
+      margin-top: $spacing-05;
+      width: 100%;
+    }
+  }
+
   &__description {
     color: $cool-gray-80;
     margin-top: $spacing-05;
@@ -125,9 +146,13 @@ $top-link-height-large: 3.75rem;
     @include mq($until: medium) {
       margin-top: $spacing-09;
     }
+
+    @include mq($until: small) {
+      display: none;
+    }
   }
 
-  &__image {
+  &__aside-image {
     height: max-content;
     max-width: 100%;
   }
