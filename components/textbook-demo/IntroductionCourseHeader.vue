@@ -1,7 +1,15 @@
 <template>
   <header class="introduction-course-header">
     <div class="introduction-course-header__container">
-      <div class="introduction-course-header__top-link">Home</div>
+      <div class="introduction-course-header__top-link">
+        <BasicLink
+          class="introduction-course-header__top-link__link"
+          url="/textbook-demo"
+        >
+          <ArrowLeft16 />
+          <span>Home</span>
+        </BasicLink>
+      </div>
 
       <div class="introduction-course-header__main">
         <div>
@@ -93,6 +101,14 @@ $top-link-height-large: 3.75rem;
     align-items: center;
     display: flex;
     grid-area: top-link;
+
+    &__link {
+      @include type-style("body-short-01");
+      align-items: center;
+      color: $purple-70;
+      display: flex;
+      gap: $spacing-04;
+    }
   }
 
   &__main {
