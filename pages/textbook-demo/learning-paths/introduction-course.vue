@@ -1,6 +1,7 @@
 <template>
   <main class="introduction-course-page">
     <ExternalRecommendedReadings class="introduction-course-page__section" :links="links" />
+    <LearningPathPagesSection class="introduction-course-page__section" />
   </main>
 </template>
 
