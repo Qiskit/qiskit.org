@@ -39,6 +39,7 @@
         </BasicLink>
         <AppCta
           v-bind="activeLearningPath"
+          label="Go to page"
           class="learning-path-pages-section__main__preview__cta"
         />
       </div>
@@ -94,8 +95,6 @@ export default class LearningPathPagesSection extends Vue {
       url: 'https://project-platypus-default.apis-dev-5dd5718798d097eccc65fac4e78a33ce-0000.us-south.containers.appdomain.cloud/course/learning-states-and-qubits/the-case-for-quantum-computers'
     }
   ]
-
-  cta: GeneralLink = { label: 'Go to page', url: '/' };
 
   get activeLearningPath () {
     const activeLearningPath = this.learningPaths.find(
