@@ -29,7 +29,12 @@
         />
       </div>
 
-      <div class="introduction-course-header__aside">Aside</div>
+      <div class="introduction-course-header__aside">
+        <img
+          class="introduction-course-header__image"
+          src="/images/textbook-demo/learning-paths/introduction-course/header.jpg"
+        />
+      </div>
     </div>
   </header>
 </template>
@@ -54,11 +59,11 @@ $top-link-height-large: 3.75rem;
     @include contained();
     display: grid;
     column-gap: $spacing-07;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     grid-template-rows: $top-link-height auto;
     grid-template-areas:
-      "top-link top-link"
-      "main aside";
+      "top-link top-link top-link top-link"
+      "main main . aside";
 
     @include mq($until: large) {
       grid-template-rows: $top-link-height-large auto;
@@ -120,6 +125,11 @@ $top-link-height-large: 3.75rem;
     @include mq($until: medium) {
       margin-top: $spacing-09;
     }
+  }
+
+  &__image {
+    height: max-content;
+    max-width: 100%;
   }
 }
 </style>
