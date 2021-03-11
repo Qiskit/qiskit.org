@@ -1,5 +1,5 @@
 <template>
-  <div class="progress-circle">
+  <div class="progress-circle" :class="{'progress-circle_absolute': absolute}">
     <div class="progress-circle__circle" r="10" p="0">
       <svg
         v-if="progress === 1"
@@ -36,6 +36,7 @@ import { Component, Prop } from 'vue-property-decorator'
 
 @Component
 export default class ProgressCircle extends Vue {
+  @Prop({ type: Boolean, required: false, default: false }) absolute!: Boolean
   @Prop({ type: Number, required: true }) progress!: Number
 }
 </script>
@@ -44,7 +45,7 @@ export default class ProgressCircle extends Vue {
 .progress-circle {
   display: inline-block;
   height: 20px;
-  position: absolute;
+  position: static;
   top: 5px;
   width: 20px;
 
@@ -55,6 +56,10 @@ export default class ProgressCircle extends Vue {
     display: inline-block;
     height: 20px;
     width: 20px;
+  }
+
+  &_absolute {
+    position: absolute;
   }
 }
 </style>
