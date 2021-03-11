@@ -50,7 +50,6 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import { GeneralLink } from '~/constants/appLinks'
 
 interface LearningPath {
   image: string;
