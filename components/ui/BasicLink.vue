@@ -7,6 +7,7 @@
     :rel="isExternal && 'noopener'"
     :target="isExternal && '_blank'"
     @click="segment && $trackClickEvent(segment)"
+    @mouseenter="$emit('mouseenter')"
   >
     <slot />
   </component>
