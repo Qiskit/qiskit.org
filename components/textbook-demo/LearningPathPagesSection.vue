@@ -64,57 +64,36 @@ export default class LearningPathPagesSection extends Vue {
 
   learningPaths: LearningPath[] = [
     {
-      image: 'why-quantum-computing.png',
-      label: 'Why quantum computing?',
+      image: 'introduction-page-preview.png',
+      label: 'Introduction',
       progress: 1,
-      url: '/'
+      url: 'https://project-platypus-default.apis-dev-5dd5718798d097eccc65fac4e78a33ce-0000.us-south.containers.appdomain.cloud/course/learning-states-and-qubits/introduction'
     },
-    { image: 'how-it-works.png', label: 'How it works', progress: 1, url: '/' },
     {
-      image: 'introduction-to-quantum-effects.png',
-      label: 'Introduction to quantum effects',
+      image: 'the-atoms-of-computation-page-preview.png',
+      label: 'The Atoms of Computation',
       progress: 1,
-      url: '/'
+      url: 'https://project-platypus-default.apis-dev-5dd5718798d097eccc65fac4e78a33ce-0000.us-south.containers.appdomain.cloud/course/learning-states-and-qubits/the-atoms-of-computation'
     },
     {
-      image: 'formalising-the-fundamentals.png',
-      label: 'Formalising the fundamentals',
-      progress: 0.5,
-      url: '/'
+      image: 'representing-qubits-states-page-preview.png',
+      label: 'Representing Qubit States',
+      progress: 0.6,
+      url: 'https://project-platypus-default.apis-dev-5dd5718798d097eccc65fac4e78a33ce-0000.us-south.containers.appdomain.cloud/course/learning-states-and-qubits/representing-qubit-states'
     },
     {
-      image: 'multiple-qubits-entanglement.png',
-      label: 'Multiple qubits & entanglement',
+      image: 'single-qubits-gates-page-preview.png',
+      label: 'Single Qubits Gates',
       progress: 0,
-      url: '/'
-    },
-    { image: 'kickback.png', label: 'Kickback', progress: 0, url: '/' },
-    {
-      image: 'building-with-gates.png',
-      label: 'Building with gates',
-      progress: 0,
-      url: '/'
+      url: 'https://project-platypus-default.apis-dev-5dd5718798d097eccc65fac4e78a33ce-0000.us-south.containers.appdomain.cloud/course/learning-states-and-qubits/single-qubit-gates'
     },
     {
-      image: 'creating-quantum-oracle-problems.png',
-      label: 'Creating quantum oracle problems',
+      image: 'the-case-for-quantum-page-preview.png',
+      label: 'The Case for Quantum',
       progress: 0,
-      url: '/'
-    },
-    {
-      image: 'introduction-to-grover.png',
-      label: 'Introduction to Grover',
-      progress: 0,
-      url: '/'
-    },
-    {
-      image: 'applied-grover-project.png',
-      label: 'Applied Grover project',
-      progress: 0,
-      url: '/'
-    },
-    { image: 'whats-next.png', label: 'What’s next', progress: 0, url: '/' }
-  ];
+      url: 'https://project-platypus-default.apis-dev-5dd5718798d097eccc65fac4e78a33ce-0000.us-south.containers.appdomain.cloud/course/learning-states-and-qubits/the-case-for-quantum-computers'
+    }
+  ]
 
   cta: GeneralLink = { label: 'Go to page', url: '/' };
 
