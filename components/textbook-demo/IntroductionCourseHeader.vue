@@ -19,7 +19,7 @@
           <img
             class="introduction-course-header__main-image"
             src="/images/textbook-demo/learning-paths/introduction-course/header.jpg"
-          />
+          >
           <div class="introduction-course-header__description">
             <p>
               This short learning path contains around X hours of content and is
@@ -45,15 +45,15 @@
         <img
           class="introduction-course-header__aside-image"
           src="/images/textbook-demo/learning-paths/introduction-course/header.jpg"
-        />
+        >
       </div>
     </div>
   </header>
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import { Component } from "vue-property-decorator";
+import Vue from 'vue'
+import { Component } from 'vue-property-decorator'
 
 @Component
 export default class AppPageHeader extends Vue {}
