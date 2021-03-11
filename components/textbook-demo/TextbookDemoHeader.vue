@@ -2,7 +2,7 @@
   <header class="textbook-demo-header">
     <div class="textbook-demo-header__container">
       <div>
-        <AppPageHeaderTitle>
+        <AppPageHeaderTitle kind="secondary">
           Qiskit Textbook (beta)
         </AppPageHeaderTitle>
         <AppMegaDropdownMenu
