@@ -2,11 +2,12 @@
   <header class="textbook-demo-header">
     <div class="textbook-demo-header__container">
       <div>
-        <AppPageHeaderTitle>
+        <AppPageHeaderTitle kind="secondary">
           Qiskit Textbook (beta)
         </AppPageHeaderTitle>
         <AppMegaDropdownMenu
           class="textbook-demo-header__dropdown"
+          kind="secondary"
           :placeholder="dropdownMenuPlaceholder"
           :content="dropdownMenuContent"
         />
@@ -32,32 +33,30 @@ export default class TextbookDemoHeader extends Vue {
 
 <style lang="scss" scoped>
 .textbook-demo-header {
-  background-color: $cool-gray-10;
-  background-image: url("/images/textbook-demo/header.png");
-  background-position: right top;
-  background-repeat: no-repeat;
-  background-size: 60% auto;
+  background: linear-gradient(315deg, $cool-gray-10 0%, $blue-40 25%, $purple-70 100%);
   height: 34rem;
-
-  @include mq($until: large) {
-    background-position: right bottom;
-    background-size: 70% auto;
-  }
-
-  @include mq($until: medium) {
-    background-size: contain;
-  }
 
   &__container {
     @include contained();
+    background-image: url("/images/textbook-demo/qiskit-logo-header.png");
+    background-position: right center;
+    background-repeat: no-repeat;
+    background-size: 50% auto;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
     padding-top: $spacing-09;
 
-    @include mq($until: large) {
+    @include mq($from:medium, $until: large) {
       padding-top: $layout-06;
+      background-position: calc(100% + 5rem) calc(100% + 5rem);
+      background-size: 60%;
+    }
+
+    @include mq($until: medium) {
+      background-position: calc(100% + 5rem) calc(100% + 2rem);
+      background-size: 90%;
     }
   }
 
