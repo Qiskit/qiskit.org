@@ -1,6 +1,10 @@
 <template>
   <article class="app-mega-dropdown">
-    <button class="app-mega-dropdown__button" @click="toggleOpen">
+    <button
+      class="app-mega-dropdown__button"
+      :class="`app-mega-dropdown__button_${kind}`"
+      @click="toggleOpen"
+    >
       <span>{{ placeholder }}</span>
       <svg class="app-mega-dropdown__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M16 22L6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z" /></svg>
     </button>
@@ -39,6 +43,7 @@ import { MegaDropdownMenu } from '~/constants/megaMenuLinks'
 
 @Component
 export default class TheMegaDropdownMenu extends Vue {
+  @Prop({ type: String, default: 'primary' }) kind!: 'primary'|'secondary'
   @Prop({ type: String, default: 'Browse content' }) placeholder!: string
   @Prop(Array) content!: MegaDropdownMenu
 
@@ -59,28 +64,42 @@ export default class TheMegaDropdownMenu extends Vue {
   position: relative;
 
   &__button {
-    background-color: transparent;
-    outline: none;
-    border: none;
-    border-bottom: 1px solid $cool-gray-80;
-    width: 18rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: $spacing-03;
-
-    .app-mega-dropdown__icon > path {
-      transform: translate(0, 0);
-      transition: transform 0.2s ease-in-out;
-    }
-
-    &:hover {
-      cursor: pointer;
+    &_primary,
+    &_secondary {
+      background-color: transparent;
+      outline: none;
+      border: none;
+      width: 18rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: $spacing-03;
 
       .app-mega-dropdown__icon > path {
-        transform: translate(0, 4px);
+        transform: translate(0, 0);
         transition: transform 0.2s ease-in-out;
       }
+
+      &:hover {
+        cursor: pointer;
+
+        .app-mega-dropdown__icon > path {
+          transform: translate(0, 4px);
+          transition: transform 0.2s ease-in-out;
+        }
+      }
+    }
+
+    &_primary {
+      color: $cool-gray-80;
+      fill: $cool-gray-80;
+      border-bottom: 1px solid $cool-gray-80;
+    }
+
+    &_secondary {
+      color: $white;
+      fill: $white;
+      border-bottom: 1px solid $white;
     }
   }
 
