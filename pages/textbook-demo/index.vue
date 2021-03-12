@@ -13,6 +13,7 @@
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import { DescriptionCard } from '~/components/ui/AppDescriptionCard.vue'
+import { SOCIAL_MEDIA } from '~/constants/menuLinks'
 
 @Component({
   head () {
@@ -27,38 +28,43 @@ export default class TextbookDemoPage extends QiskitPage {
   helpfulResources: DescriptionCard[] = [
     {
       title: 'Documentation',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Molestie ipsum eget id id hendrerit quis euismod eleifend urna.',
+      description: `The Qiskit Documentation is the right place for you If
+      you are looking for the installation guide, release notes, or API
+      References.`,
       cta: {
         url: '#',
-        label: 'CTA here'
+        label: 'Go to documentation',
+        segment: { action: `${this.routeName} > helpful-resources > documentation` }
       }
     },
     {
       title: 'Tutorials',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Risus morbi sodales euismod faucibus ut turpis sem.',
+      description: `The Tutorials include a range of Jupyter notebooks that
+      cover a range of features and applications including circuits,
+      algorithms, and applications.`,
       cta: {
         url: '#',
-        label: 'CTA here'
+        label: 'Go to tutorials',
+        segment: { action: `${this.routeName} > helpful-resources > tutorials` }
       }
     },
     {
-      title: 'Slack',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mollis turpis pulvinar morbi consequat pulvinar sit.',
+      title: SOCIAL_MEDIA.stack.label,
+      description: `Have a question? Ask it on stack exchange! Qiskit advocates and core contributors monitor this forum and will happily answer your questions.`,
       cta: {
-        url: '#',
-        label: 'CTA here'
+        url: SOCIAL_MEDIA.stack.url,
+        label: 'Visit stack exchange',
+        segment: { action: `${this.routeName} > helpful-resources > stack-exchange` }
       }
     },
     {
-      title: 'Other learning material',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Justo vestibulum urna sit est pellentesque tincidunt nisi, enim tincidunt.',
+      title: SOCIAL_MEDIA.slack.label,
+      description: `The Slack community is a great place to engage in
+      discussion on research and quantum development.`,
       cta: {
-        url: '#',
-        label: 'CTA here'
+        url: SOCIAL_MEDIA.slack.url,
+        label: 'Visit slack',
+        segment: { action: `${this.routeName} > helpful-resources > slack` }
       }
     }
   ]
