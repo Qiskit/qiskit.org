@@ -22,7 +22,7 @@
           >
           <div class="introduction-course-header__description">
             <p>
-              This short learning path contains around X hours of content and is
+              This short learning path contains around 3 hours of content and is
               aimed at self-learners from all backgrounds (technical and
               non-technical). The aim of this course is to give a solid
               understanding of the principles behind quantum computing,
