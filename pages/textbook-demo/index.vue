@@ -50,7 +50,7 @@ export default class TextbookDemoPage extends QiskitPage {
     },
     {
       title: SOCIAL_MEDIA.stack.label,
-      description: `Have a question? Ask it on stack exchange! Qiskit advocates and core contributors monitor this forum and will happily answer your questions.`,
+      description: 'Have a question? Ask it on stack exchange! Qiskit advocates and core contributors monitor this forum and will happily answer your questions.',
       cta: {
         url: SOCIAL_MEDIA.stack.url,
         label: 'Visit stack exchange',
