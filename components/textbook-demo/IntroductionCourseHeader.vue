@@ -22,7 +22,7 @@
           >
           <div class="introduction-course-header__description">
             <p>
-              This short learning path contains around X hours of content and is
+              This short learning path contains around 3 hours of content and is
               aimed at self-learners from all backgrounds (technical and
               non-technical). The aim of this course is to give a solid
               understanding of the principles behind quantum computing,
@@ -30,8 +30,9 @@
               have a fair understanding of quantum computing and Qiskit, as well
               as a short project demonstrating it. You should then be able to
               jump straight into many of the other learning paths in this
-              textbook, including traditional algorithms and protocols, near
-              term quantum algorithms, and quantum machine learning.
+              textbook when they are ready, including traditional algorithms and
+              protocols, near term quantum algorithms, and quantum machine
+              learning.
             </p>
           </div>
         </div>
@@ -69,6 +70,7 @@ $top-link-height-large: 3.75rem;
 .introduction-course-header {
   &__container {
     @include contained();
+    max-width: $max-size;
     display: grid;
     column-gap: $spacing-07;
     grid-template-columns: repeat(4, 1fr);

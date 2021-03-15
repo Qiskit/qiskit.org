@@ -280,6 +280,7 @@ export {
   LEARN_LINK,
   OVERVIEW_LINK,
   TEXTBOOK_DEMO_LINK,
+  SOCIAL_MEDIA,
   NavLink,
   InnerNavLink
 }

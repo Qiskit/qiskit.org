@@ -1,7 +1,10 @@
 <template>
   <div class="menu">
     <section class="menu__mobile" tabindex="-1">
-      <div class="menu__mobile-inner-container">
+      <div
+        class="menu__mobile-inner-container"
+        :class="{ 'menu__mobile-inner-container_wider': wider }"
+      >
         <BasicLink
           class="
             menu__entry
@@ -177,6 +180,10 @@ export default class TheMenu extends Mixins(MenuMixin) {
     display: flex;
     justify-content: flex-end;
     align-items: center;
+
+    &_wider {
+      max-width: $max-size;
+    }
   }
 
   &__mobile-inner-container {
