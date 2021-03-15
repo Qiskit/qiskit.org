@@ -32,7 +32,7 @@ export default class TextbookDemoPage extends QiskitPage {
       you are looking for the installation guide, release notes, or API
       References.`,
       cta: {
-        url: '#',
+        url: 'https://qiskit.org/documentation/',
         label: 'Go to documentation',
         segment: { action: `${this.routeName} > helpful-resources > documentation` }
       }
@@ -43,7 +43,7 @@ export default class TextbookDemoPage extends QiskitPage {
       cover a range of features and applications including circuits,
       algorithms, and applications.`,
       cta: {
-        url: '#',
+        url: 'https://qiskit.org/documentation/tutorials/circuits/index.html',
         label: 'Go to tutorials',
         segment: { action: `${this.routeName} > helpful-resources > tutorials` }
       }
