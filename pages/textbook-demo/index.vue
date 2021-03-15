@@ -29,9 +29,9 @@ export default class TextbookDemoPage extends QiskitPage {
   helpfulResources: DescriptionCard[] = [
     {
       title: 'Documentation',
-      description: `The Qiskit Documentation is the right place for you If
+      description: `The Qiskit Documentation is the right place for you if
       you are looking for the installation guide, release notes, or API
-      References.`,
+      references.`,
       cta: {
         url: 'https://qiskit.org/documentation/',
         label: 'Go to documentation',
