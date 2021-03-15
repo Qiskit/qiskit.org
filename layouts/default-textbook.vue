@@ -2,10 +2,10 @@
   <!-- tabindex is needed to allow hiding the menu in iOS Safari -->
   <div class="default-layout content-root_theme_light" tabindex="-1">
     <header id="navigation">
-      <TheMenu @change-visibility="isMenuShown = $event === 'shown'" wider/>
+      <TheMenu wider @change-visibility="isMenuShown = $event === 'shown'" />
     </header>
     <nuxt />
-    <PageFooter theme="light" wider/>
+    <PageFooter theme="light" wider />
   </div>
 </template>
 
