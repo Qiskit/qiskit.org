@@ -12,6 +12,7 @@ import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 
 @Component({
+  layout: 'default-textbook',
   head () {
     return {
       title: 'Introduction course'
@@ -31,6 +32,7 @@ export default class IntroductionCoursePage extends QiskitPage {
 .introduction-course-page {
   &__section {
     @include contained();
+    max-width: $max-size;
     margin-bottom: $layout-03;
     margin-top: $layout-05;
   }

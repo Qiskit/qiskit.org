@@ -1,7 +1,10 @@
 <template>
   <div class="menu">
     <section class="menu__mobile" tabindex="-1">
-      <div class="menu__mobile-inner-container">
+      <div
+        class="menu__mobile-inner-container"
+        :class="{ 'menu__mobile-inner-container_wider': wider }"
+      >
         <BasicLink
           class="
             menu__entry
@@ -38,7 +41,10 @@
       />
     </section>
     <section class="menu__main-level">
-      <nav class="menu__navigation-level">
+      <nav
+        class="menu__navigation-level"
+        :class="{ 'menu__navigation-level_wider': wider }"
+      >
         <BasicLink
           class="
             menu__entry
@@ -93,11 +99,13 @@
 </template>
 
 <script lang="ts">
-import { Watch, Component, Mixins } from 'vue-property-decorator'
+import { Watch, Component, Mixins, Prop } from 'vue-property-decorator'
 import MenuMixin from '~/mixins/menu'
 
 @Component
 export default class TheMenu extends Mixins(MenuMixin) {
+  @Prop({ type: Boolean, default: false }) wider!: boolean
+
   isMobileMenuVisible: boolean = false
 
   @Watch('isMobileMenuVisible')
@@ -179,6 +187,10 @@ export default class TheMenu extends Mixins(MenuMixin) {
     display: flex;
     justify-content: flex-end;
     align-items: center;
+
+    &_wider {
+      max-width: $max-size;
+    }
   }
 
   &__navigation-level {
