@@ -35,13 +35,11 @@ export default class AppCta extends Vue {
 
   get iconPerLinkType (): string {
     const url = this.$attrs.url
-    if (BasicLink.isExternal(url)) {
-      return 'launch-16'
-    } else if (BasicLink.isIdAnchor(url)) {
-      return 'arrow-down-16'
-    } else {
-      return 'arrow-right-16'
-    }
+
+    if (this.label === 'Under construction') { return 'error-outline-16' }
+    if (BasicLink.isExternal(url)) { return 'launch-16' }
+    if (BasicLink.isIdAnchor(url)) { return 'arrow-down-16' }
+    return 'arrow-right-16'
   }
 
   get isIdAnchor () {

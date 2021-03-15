@@ -17,6 +17,7 @@ import LogoYouTube20 from '@carbon/icons-vue/lib/logo--youtube/20'
 import LogoMedium20 from '@carbon/icons-vue/lib/logo--medium/20'
 import LogoGitHub32 from '@carbon/icons-vue/lib/logo--github/32'
 import Launch16 from '@carbon/icons-vue/lib/launch/16'
+import ErrorOutline16 from '@carbon/icons-vue/lib/error--outline/16'
 
 Vue.use(CarbonComponentsVue)
 Vue.use(CarbonIconsVue, {
@@ -36,6 +37,7 @@ Vue.use(CarbonIconsVue, {
     LogoYouTube20,
     LogoMedium20,
     LogoGitHub32,
-    Launch16
+    Launch16,
+    ErrorOutline16
   }
 })
