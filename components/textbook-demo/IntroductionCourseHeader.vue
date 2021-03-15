@@ -30,8 +30,9 @@
               have a fair understanding of quantum computing and Qiskit, as well
               as a short project demonstrating it. You should then be able to
               jump straight into many of the other learning paths in this
-              textbook, including traditional algorithms and protocols, near
-              term quantum algorithms, and quantum machine learning.
+              textbook when they are ready, including traditional algorithms and
+              protocols, near term quantum algorithms, and quantum machine
+              learning.
             </p>
           </div>
         </div>
