@@ -18,7 +18,3 @@ export default class DefaultTextbookLayout extends Vue {
   isMenuShown: boolean = false
 }
 </script>
-
-<style lang="scss">
-@import '~/assets/scss/layout.scss';
-</style>
