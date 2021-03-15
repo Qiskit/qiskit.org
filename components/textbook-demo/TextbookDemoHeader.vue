@@ -34,10 +34,11 @@ export default class TextbookDemoHeader extends Vue {
 <style lang="scss" scoped>
 .textbook-demo-header {
   background: linear-gradient(315deg, $cool-gray-10 0%, $blue-40 25%, $purple-70 100%);
-  height: 34rem;
+  height: 37.5rem;
 
   &__container {
     @include contained();
+    max-width: $max-size;
     background-image: url("/images/textbook-demo/qiskit-logo-header.png");
     background-position: right center;
     background-repeat: no-repeat;

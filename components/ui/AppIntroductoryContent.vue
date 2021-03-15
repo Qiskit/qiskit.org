@@ -11,7 +11,7 @@
         kind="ghost"
       />
     </div>
-    <div>
+    <div class="app-introductory-content__layout">
       <slot />
     </div>
   </article>
@@ -58,6 +58,10 @@ export default class AppIntroductoryContent extends Vue {
     @include mq($until: large) {
       margin-bottom: $layout-03;
     }
+  }
+
+  &__layout {
+    width: 100%;
   }
 }
 </style>
