@@ -70,6 +70,7 @@ $top-link-height-large: 3.75rem;
 .introduction-course-header {
   &__container {
     @include contained();
+    max-width: $max-size;
     display: grid;
     column-gap: $spacing-07;
     grid-template-columns: repeat(4, 1fr);

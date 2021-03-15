@@ -6,7 +6,7 @@
     <AppIntroductoryContent
       v-for="{ title, description, paths } in learningPaths"
       :key="title"
-      class="start-learning-section__learning-paths__section"
+      class="start-learning-section__section"
       :description="description"
     >
       <template #title>
@@ -14,19 +14,20 @@
           {{ title }}
         </h3>
       </template>
-      <AppCard
-        v-for="{ description: pathDescription, image, title: pathTitle, cta } in paths"
-        :key="pathTitle"
-        class="start-learning-section__learning-paths__path-card"
-        :cta-label="cta.label"
-        :to="cta.url"
-        :segment="cta.segment"
-        :image="image"
-        image-contain
-        :title="pathTitle"
-      >
-        {{ pathDescription }}
-      </AppCard>
+      <div class="start-learning-section__cards">
+        <AppCard
+          v-for="{ description: pathDescription, image, title: pathTitle, cta } in paths"
+          :key="pathTitle"
+          :cta-label="cta.label"
+          :to="cta.url"
+          :segment="cta.segment"
+          :image="image"
+          image-contain
+          :title="pathTitle"
+        >
+          {{ pathDescription }}
+        </AppCard>
+      </div>
     </AppIntroductoryContent>
   </section>
 </template>
@@ -148,13 +149,17 @@ export default class StartLearningSection extends Vue {
     color: $cool-gray-80;
   }
 
-  &__learning-paths {
-    &__section {
-      margin-bottom: $layout-03;
-    }
+  &__section {
+    margin-bottom: $layout-03;
+  }
 
-    &__path-card {
-      margin-bottom: $layout-03;
+  &__cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $layout-03;
+
+    @include mq($until: x-large) {
+      grid-template-columns: 1fr;
     }
   }
 }

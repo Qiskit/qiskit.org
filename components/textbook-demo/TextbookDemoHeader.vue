@@ -38,6 +38,7 @@ export default class TextbookDemoHeader extends Vue {
 
   &__container {
     @include contained();
+    max-width: $max-size;
     background-image: url("/images/textbook-demo/qiskit-logo-header.png");
     background-position: right center;
     background-repeat: no-repeat;

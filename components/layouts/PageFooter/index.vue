@@ -4,7 +4,10 @@
       class="page-footer__primary"
       :class="`page-footer__primary_theme_${theme}`"
     >
-      <div class="page-footer__primary-container">
+      <div
+        class="page-footer__primary-container"
+        :class="{ 'page-footer__primary-container_wider': wider }"
+      >
         <AppLogo
           class="page-footer__logo"
           :class="`page-footer__logo_theme_${theme}`"
@@ -24,7 +27,10 @@
       class="page-footer__secondary"
       :class="`page-footer__secondary_theme_${theme}`"
     >
-      <div class="page-footer__secondary-container">
+      <div
+        class="page-footer__secondary-container"
+        :class="{ 'page-footer__secondary-container_wider': wider }"
+      >
         <div
           class="page-footer__copyright"
           :class="`page-footer__copyright_theme_${theme}`"
@@ -60,6 +66,7 @@ import {
 @Component
 export default class PageFooter extends Vue {
   @Prop({ type: String, default: 'light' }) theme!: string
+  @Prop({ type: Boolean, default: false }) wider!: boolean
 
   footerElements = FOOTER_ELEMENTS
   stayConnectedElements = STAY_CONNECTED_LINKS
@@ -105,6 +112,10 @@ export default class PageFooter extends Vue {
 
     @include mq($until: medium) {
       display: block;
+    }
+
+    &_wider {
+      max-width: $max-size;
     }
   }
 
@@ -159,6 +170,10 @@ export default class PageFooter extends Vue {
     @include contained();
     display: flex;
     justify-content: space-between;
+
+    &_wider {
+      max-width: $max-size;
+    }
   }
 
   &__secondary-links {
