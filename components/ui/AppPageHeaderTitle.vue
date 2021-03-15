@@ -20,7 +20,7 @@ export default class AppPageHeaderTitle extends Vue {
 .app-page-header-title {
   &_primary,
   &_secondary {
-    @include type-style('display-01', true);
+    @include type-style('expressive-heading-05', true);
     max-width: 10 * $column-size-large;
 
     @include mq($from: medium, $until: large) {

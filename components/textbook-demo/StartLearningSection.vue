@@ -144,7 +144,7 @@ export default class StartLearningSection extends Vue {
 
 .start-learning-section {
   &__subtitle {
-    @include type-style("expressive-heading-04", true);
+    @include type-style("expressive-heading-03", true);
     margin-bottom: $layout-01;
     color: $cool-gray-80;
   }
