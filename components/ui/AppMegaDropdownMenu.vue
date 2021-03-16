@@ -1,6 +1,7 @@
 <template>
   <article class="app-mega-dropdown">
     <button
+      ref="button"
       class="app-mega-dropdown__button"
       :class="`app-mega-dropdown__button_${kind}`"
       @click="toggleOpen"
@@ -10,6 +11,7 @@
     </button>
     <div
       v-if="showContent"
+      ref="dropdown"
       class="app-mega-dropdown__content-container"
     >
       <nav class="app-mega-dropdown__content">
@@ -48,6 +50,29 @@ export default class TheMegaDropdownMenu extends Vue {
   @Prop(Array) content!: MegaDropdownMenu
 
   showContent = false;
+
+  mounted () {
+    document.addEventListener('click', this.handleClick)
+  }
+
+  beforeDestroy () {
+    document.removeEventListener('click', this.handleClick)
+  }
+
+  handleClick (e: MouseEvent) {
+    const buttonElement = this.$refs.button as Element
+    const dropdownElement = this.$refs.dropdown as Element|undefined
+
+    if (dropdownElement) {
+      const clickedOnDropdown = dropdownElement.contains(e.target as Node)
+      const clickedOnButton = buttonElement.contains(e.target as Node)
+      const shouldCloseDropdown = !clickedOnDropdown && !clickedOnButton
+
+      if (shouldCloseDropdown) {
+        this.showContent = false
+      }
+    }
+  }
 
   toggleOpen () : void {
     this.showContent = !this.showContent
