@@ -13,13 +13,14 @@
           >
             <div class="learning-path__connection" />
             <ProgressCircle absolute :progress="progress" />
-            <a
+            <BasicLink
               class="learning-path__entry"
               :class="{ active: label === activeLearningPathLabel }"
-              :href="url"
-              @mouseover="selectLearningPath(label)"
-              v-text="label"
-            />
+              :url="url"
+              @mouseenter="selectLearningPath(label)"
+            >
+              {{ label }}
+            </BasicLink>
           </li>
         </ul>
       </nav>
