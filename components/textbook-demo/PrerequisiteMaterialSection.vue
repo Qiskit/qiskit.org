@@ -5,7 +5,7 @@
     </h2>
     <div class="prerequisite-material-section__cards">
       <article
-        v-for="{ title, description, progress, url } in prerequisites"
+        v-for="{ title, description, progress, segment, url } in prerequisites"
         :key="title"
         class="prerequisite-material-section__card"
       >
@@ -24,6 +24,7 @@
             class="prerequisite-material-section__card__cta"
             kind="ghost"
             label="Go to page"
+            :segment="segment"
             :url="url"
           />
           <ProgressCircle :progress="progress" />
@@ -36,22 +37,27 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
+import { SegmentData } from '~/constants/appLinks'
 
 interface Prerequisite {
   title: string;
   description: string;
   progress: Number;
+  segment: SegmentData;
   url: string;
 }
 
 @Component
 export default class PrerequisiteMaterialSection extends Vue {
+  segmentActionBase = 'introduction-course > prerequisite-material >'
+
   prerequisites: Prerequisite[] = [
     {
       title: 'Setting Up Your Environment',
       description:
         'This is a comprehensive guide for setting up your environment on your personal computer for working with Qiskit Textbook.',
       progress: 1,
+      segment: { action: `${this.segmentActionBase} setting-up-your-environment` },
       url: '#'
     },
     {
@@ -59,6 +65,7 @@ export default class PrerequisiteMaterialSection extends Vue {
       description:
         "Python is a programming language where you don't need to compile. You can just run it line by line...",
       progress: 0.5,
+      segment: { action: `${this.segmentActionBase} python-and-jupyter-notebooks` },
       url: '#'
     },
     {
@@ -66,6 +73,7 @@ export default class PrerequisiteMaterialSection extends Vue {
       description:
         '‘Quantum physics’ is a term widely used but much less understood. It is a mathematical model first used to describe the...',
       progress: 0,
+      segment: { action: `${this.segmentActionBase} what-is-quantum` },
       url: '#'
     }
   ];
