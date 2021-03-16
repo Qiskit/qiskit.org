@@ -57,16 +57,22 @@ export default class PrerequisiteMaterialSection extends Vue {
       description:
         'This is a comprehensive guide for setting up your environment on your personal computer for working with Qiskit Textbook.',
       progress: 1,
-      segment: { action: `${this.segmentActionBase} setting-up-your-environment` },
-      url: '#'
+      segment: {
+        action: `${this.segmentActionBase} setting-up-your-environment`
+      },
+      url:
+        'https://project-platypus-default.apis-dev-5dd5718798d097eccc65fac4e78a33ce-0000.us-south.containers.appdomain.cloud/course/prerequisites/environment-setup-guide-to-work-with-qiskit-textbook'
     },
     {
       title: 'Python and Jupyter Notebooks',
       description:
         "Python is a programming language where you don't need to compile. You can just run it line by line...",
       progress: 0.5,
-      segment: { action: `${this.segmentActionBase} python-and-jupyter-notebooks` },
-      url: '#'
+      segment: {
+        action: `${this.segmentActionBase} python-and-jupyter-notebooks`
+      },
+      url:
+        'https://project-platypus-default.apis-dev-5dd5718798d097eccc65fac4e78a33ce-0000.us-south.containers.appdomain.cloud/course/prerequisites/introduction-to-python-and-jupyter-notebooks'
     },
     {
       title: 'What is quantum?',
@@ -74,7 +80,8 @@ export default class PrerequisiteMaterialSection extends Vue {
         '‘Quantum physics’ is a term widely used but much less understood. It is a mathematical model first used to describe the...',
       progress: 0,
       segment: { action: `${this.segmentActionBase} what-is-quantum` },
-      url: '#'
+      url:
+        'https://project-platypus-default.apis-dev-5dd5718798d097eccc65fac4e78a33ce-0000.us-south.containers.appdomain.cloud/course/getting-started/what-is-quantum'
     }
   ];
 }
