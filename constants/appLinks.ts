@@ -77,23 +77,6 @@ const TEXTBOOK_DEMO_START_LEARNING: GeneralLink = {
   }
 }
 
-const TEXTBOOK_DEMO_INTRODUCTION_COURSE_EXTERNAL_RECOMMENDED_READINGS: GeneralLink[] = [
-  {
-    url: 'https://math.mit.edu/~gs/linearalgebra/',
-    label: 'https://math.mit.edu/~gs/linearalgebra/',
-    segment: {
-      action: 'introduction-course > external-recommended-readings > mit-linear-algebra'
-    }
-  },
-  {
-    url: 'https://machinelearningmastery.com/gentle-introduction-linear-algebra/',
-    label: 'https://machinelearningmastery.com/gentle-introduction-linear-algebra/',
-    segment: {
-      action: 'introduction-course > external-recommended-readings > mlmastery-linear-algebra'
-    }
-  }
-]
-
 const IBM_Q_EXPERIENCE: GeneralLink = {
   url: 'https://quantum-computing.ibm.com/lab',
   label: 'IBM Quantum Lab'
@@ -110,6 +93,5 @@ export {
   SEMINAR_SERIES_ALL_EPISODES_CTA,
   SEMINAR_SERIES_FULL_ARCHIVE_CTA,
   TEXTBOOK_DEMO_START_LEARNING,
-  TEXTBOOK_DEMO_INTRODUCTION_COURSE_EXTERNAL_RECOMMENDED_READINGS,
   IBM_Q_EXPERIENCE
 }
