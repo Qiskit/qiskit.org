@@ -5,11 +5,12 @@
     </h2>
     <AppLink
       v-for="link in links"
-      :key="link"
+      :key="link.label"
       class="external-recommended-readings__link"
-      :url="link"
+      :segment="link.segment"
+      :url="link.url"
     >
-      {{ link }}
+      {{ link.label }}
     </AppLink>
   </section>
 </template>
@@ -17,10 +18,11 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
+import { SegmentData } from '~/constants/appLinks'
 
 @Component
 export default class ExternalRecommendedReadings extends Vue {
-  @Prop({ type: Array, required: true }) links!: string[]
+  @Prop({ type: Array, required: true }) links!: SegmentData[]
 }
 </script>
 
