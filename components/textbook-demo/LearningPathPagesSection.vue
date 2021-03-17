@@ -7,19 +7,21 @@
       <nav class="learning-path-pages-section__nav">
         <ul class="learning-paths">
           <li
-            v-for="{ label, progress, url } in learningPaths"
+            v-for="{ label, progress, segment, url } in learningPaths"
             :key="label"
             class="learning-path"
           >
             <div class="learning-path__connection" />
             <ProgressCircle absolute :progress="progress" />
-            <a
+            <BasicLink
               class="learning-path__entry"
               :class="{ active: label === activeLearningPathLabel }"
-              :href="url"
-              @mouseover="selectLearningPath(label)"
-              v-text="label"
-            />
+              :segment="segment"
+              :url="url"
+              @mouseenter="selectLearningPath(label)"
+            >
+              {{ label }}
+            </BasicLink>
           </li>
         </ul>
       </nav>
@@ -50,47 +52,55 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
+import { SegmentData } from '~/constants/appLinks'
 
 interface LearningPath {
   image: string;
   label: string;
   progress: Number;
+  segment: SegmentData;
   url: string;
 }
 
 @Component
 export default class LearningPathPagesSection extends Vue {
   activeLearningPathLabel = '';
+  segmentActionBase = 'introduction-course > learning-paths >'
 
   learningPaths: LearningPath[] = [
     {
       image: 'introduction-page-preview.png',
       label: 'Introduction',
       progress: 1,
+      segment: { action: `${this.segmentActionBase} introduction` },
       url: 'https://project-platypus-default.apis-dev-5dd5718798d097eccc65fac4e78a33ce-0000.us-south.containers.appdomain.cloud/course/learning-states-and-qubits/introduction'
     },
     {
       image: 'the-atoms-of-computation-page-preview.png',
       label: 'The Atoms of Computation',
       progress: 1,
+      segment: { action: `${this.segmentActionBase} the-atoms-of-computation` },
       url: 'https://project-platypus-default.apis-dev-5dd5718798d097eccc65fac4e78a33ce-0000.us-south.containers.appdomain.cloud/course/learning-states-and-qubits/the-atoms-of-computation'
     },
     {
       image: 'representing-qubits-states-page-preview.png',
       label: 'Representing Qubit States',
       progress: 0.6,
+      segment: { action: `${this.segmentActionBase} representing-qubits-states` },
       url: 'https://project-platypus-default.apis-dev-5dd5718798d097eccc65fac4e78a33ce-0000.us-south.containers.appdomain.cloud/course/learning-states-and-qubits/representing-qubit-states'
     },
     {
       image: 'single-qubits-gates-page-preview.png',
       label: 'Single Qubits Gates',
       progress: 0,
+      segment: { action: `${this.segmentActionBase} single-qubits-gates` },
       url: 'https://project-platypus-default.apis-dev-5dd5718798d097eccc65fac4e78a33ce-0000.us-south.containers.appdomain.cloud/course/learning-states-and-qubits/single-qubit-gates'
     },
     {
       image: 'the-case-for-quantum-page-preview.png',
       label: 'The Case for Quantum',
       progress: 0,
+      segment: { action: `${this.segmentActionBase} the-case-for-quantum` },
       url: 'https://project-platypus-default.apis-dev-5dd5718798d097eccc65fac4e78a33ce-0000.us-south.containers.appdomain.cloud/course/learning-states-and-qubits/the-case-for-quantum-computers'
     }
   ]
