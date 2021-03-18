@@ -7,7 +7,6 @@
       <p class="early-access-section__description">
         We are thrilled to ask you to join this journey to revolutionize quantum devices. We will work closely to develop Metal and design quantum devices with it.
       </p>
-      <AppCta class="early-access-section__cta" v-bind="stayInTouchLink" theme="dark" />
       <AppCta class="early-access-section__cta" v-bind="joinSlackLink" theme="dark" />
     </div>
   </section>
@@ -19,11 +18,6 @@ import { Component } from 'vue-property-decorator'
 
 @Component
 export default class JoinUsSection extends Vue {
-  stayInTouchLink = {
-    url: 'http://qisk.it/metal',
-    label: 'Join tutorials'
-  }
-
   joinSlackLink = {
     url: 'http://qisk.it/metal',
     label: 'Stay in touch through Slack'
