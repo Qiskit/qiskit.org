@@ -36,8 +36,8 @@ import { Component } from 'vue-property-decorator'
 @Component
 export default class IntroSection extends Vue {
   joinWaitingListLink = {
-    url: 'https://github.com/Qiskit',
-    label: 'Get started'
+    url: 'https://github.com/Qiskit/qiskit-metal',
+    label: 'Get started now'
   }
 }
 </script>
