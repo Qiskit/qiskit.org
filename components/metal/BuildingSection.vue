@@ -37,7 +37,7 @@
             >Qiskit textbook</AppLink>
             chapters on quantum devices and their control.
           </p>
-          <AppCta class="early-access-section__cta" v-bind="stayInTouchLink" theme="dark" />
+          <AppCta v-bind="stayInTouchLink" theme="dark" />
           <!-- eslint-enable -->
         </div>
         <div class="building-section__media">

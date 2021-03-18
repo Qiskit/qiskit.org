@@ -7,7 +7,7 @@
       <p class="early-access-section__description">
         We are thrilled to ask you to join this journey to revolutionize quantum devices. We will work closely to develop Metal and design quantum devices with it.
       </p>
-      <AppCta class="early-access-section__cta" v-bind="joinSlackLink" theme="dark" />
+      <AppCta v-bind="joinSlackLink" theme="dark" />
     </div>
   </section>
 </template>
@@ -68,12 +68,6 @@ export default class JoinUsSection extends Vue {
     @include mq($until: medium) {
       width: 100%;
       max-width: initial;
-    }
-  }
-
-  &__cta {
-    &:first-of-type {
-      margin-bottom: $spacing-05;
     }
   }
 }
