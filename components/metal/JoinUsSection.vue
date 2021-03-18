@@ -19,7 +19,7 @@ import { Component } from 'vue-property-decorator'
 @Component
 export default class JoinUsSection extends Vue {
   joinSlackLink = {
-    url: 'http://qisk.it/metal',
+    url: 'https://ibm.co/joinqiskitslack',
     label: 'Stay in touch through Slack'
   }
 }
