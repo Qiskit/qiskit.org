@@ -2,7 +2,7 @@
   <section class="intro-section">
     <div class="intro-section__container">
       <h2 class="intro-section__title">
-        Early access for quantum device design project now open
+        Qiskit Metal | quantum device design is now open
       </h2>
       <div class="intro-section__content">
         <p class="intro-section__description">
@@ -36,8 +36,8 @@ import { Component } from 'vue-property-decorator'
 @Component
 export default class IntroSection extends Vue {
   joinWaitingListLink = {
-    url: 'http://qisk.it/metal',
-    label: 'Join waiting list'
+    url: 'https://github.com/Qiskit',
+    label: 'Get started'
   }
 }
 </script>
