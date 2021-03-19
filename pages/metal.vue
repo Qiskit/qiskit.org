@@ -5,7 +5,7 @@
     <CapabilitiesSection />
     <FeaturesSection />
     <BuildingSection />
-    <EarlyAccessSection />
+    <JoinUsSection />
   </div>
 </template>
 

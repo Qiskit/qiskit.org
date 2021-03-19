@@ -2,14 +2,12 @@
   <section class="early-access-section">
     <div class="early-access-section__container">
       <h2 class="early-access-section__title">
-        Early Access
+        Join Us
       </h2>
       <p class="early-access-section__description">
-        Through an early-access program, we are thrilled to ask you to join this journey to revolutionize quantum devices.
-        <br><br>
-        The early-access program will start in November and proceed through March, 2021, during which time we will work closely to develop Metal and design quantum devices with it.
+        We are thrilled to ask you to join this journey to revolutionize quantum devices. We will work closely to develop Metal and design quantum devices with it.
       </p>
-      <AppCta v-bind="stayInTouchLink" theme="dark" />
+      <AppCta v-bind="joinSlackLink" theme="dark" />
     </div>
   </section>
 </template>
@@ -19,10 +17,10 @@ import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 
 @Component
-export default class EarlyAccessSection extends Vue {
-  stayInTouchLink = {
-    url: 'http://qisk.it/metal',
-    label: 'Sign up to stay in touch'
+export default class JoinUsSection extends Vue {
+  joinSlackLink = {
+    url: 'https://ibm.co/joinqiskitslack',
+    label: 'Stay in touch through Slack'
   }
 }
 </script>

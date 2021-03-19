@@ -37,6 +37,7 @@
             >Qiskit textbook</AppLink>
             chapters on quantum devices and their control.
           </p>
+          <AppCta v-bind="stayInTouchLink" theme="dark" />
           <!-- eslint-enable -->
         </div>
         <div class="building-section__media">
@@ -56,7 +57,12 @@ import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 
 @Component
-export default class BuildingSection extends Vue {}
+export default class BuildingSection extends Vue {
+  stayInTouchLink = {
+    url: 'http://qisk.it/metal',
+    label: 'Join tutorials'
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -102,7 +108,7 @@ export default class BuildingSection extends Vue {}
   &__text {
     @include type-style("body-long-01");
     max-width: 7.5 * $column-size-large;
-    margin-bottom: $layout-05;
+    margin-bottom: $layout-04;
 
     @include mq($until: large) {
       margin-bottom: $layout-04;
