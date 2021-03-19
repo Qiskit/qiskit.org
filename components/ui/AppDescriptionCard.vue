@@ -8,12 +8,15 @@
         {{ description }}
       </p>
     </div>
-    <AppCta
-      v-if="cta && cta.url"
-      v-bind="cta"
-      kind="ghost"
-      class="app-description-card__cta"
-    />
+    <div class="app-description-card__footer">
+      <AppCta
+        v-if="cta && cta.url"
+        v-bind="cta"
+        kind="ghost"
+        class="app-description-card__cta"
+      />
+      <slot name="footer-append" />
+    </div>
   </article>
 </template>
 
@@ -46,6 +49,11 @@ export default class AppDescriptionCard extends Vue {
 
   &__cta {
     width: 100%;
+  }
+
+  &__footer {
+    display: flex;
+    place-items: center;
   }
 }
 </style>
