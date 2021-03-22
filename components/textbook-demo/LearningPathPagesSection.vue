@@ -164,7 +164,9 @@ export default class LearningPathPagesSection extends Vue {
   }
 
   &__main {
+    display: grid;
     grid-area: main;
+    grid-template-rows: auto 1fr;
 
     @include mq($until: medium) {
       display: none;
