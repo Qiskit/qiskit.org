@@ -89,7 +89,7 @@ import {
   CommunityEvent,
   WORLD_REGION_OPTIONS,
   COMMUNITY_EVENT_TYPE_OPTIONS
-} from '~/store/events.ts'
+} from '~/store/events'
 import { EVENT_REQUEST_LINK } from '~/constants/appLinks'
 
 @Component({

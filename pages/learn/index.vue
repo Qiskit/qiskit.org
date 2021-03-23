@@ -46,7 +46,7 @@ import {
   TIME_SCALES,
   LEARN_LEVEL_OPTIONS,
   TIME_SCALE_OPTIONS
-} from '~/store/learning-resources.ts'
+} from '~/store/learning-resources'
 
 @Component({
   head () {
