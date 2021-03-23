@@ -4,21 +4,18 @@
       Prerequisite material
     </h2>
     <div class="prerequisite-material-section__cards">
-      <div
+      <AppDescriptionCard
         v-for="{ title, description, progress, segment, url } in prerequisites"
         :key="title"
+        :description="description"
         class="prerequisite-material-section__card"
+        :cta="{ label: 'Go to page', segment, url}"
+        :title="title"
       >
-        <AppDescriptionCard
-          :description="description"
-          :cta="{ label: 'Go to page', segment, url}"
-          :title="title"
-        >
-          <template slot="footer-append">
-            <ProgressCircle :progress="progress" />
-          </template>
-        </AppDescriptionCard>
-      </div>
+        <template slot="footer-append">
+          <ProgressCircle :progress="progress" />
+        </template>
+      </AppDescriptionCard>
     </div>
   </section>
 </template>
