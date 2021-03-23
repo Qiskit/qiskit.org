@@ -109,6 +109,7 @@ export default class AppCard extends Vue {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    overflow: hidden;
   }
 
   &__header {
