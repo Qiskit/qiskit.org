@@ -52,7 +52,7 @@ import pastSeminarSeriesEvents from '~/content/events/past-seminar-series-events
 import {
   SEMINAR_SERIES_ALL_EPISODES_CTA,
   SEMINAR_SERIES_FULL_ARCHIVE_CTA
-} from '~/constants/appLinks.ts'
+} from '~/constants/appLinks'
 
 @Component({
   head () {
