@@ -68,7 +68,7 @@ export default class AppIntroductoryContent extends Vue {
   }
 
   &_narrow {
-    grid-template-areas: 'overview main main main';
+    grid-template-areas: 'overview main';
     grid-template-columns: (4.5 * $column-size-large) 1fr;
 
     @include mq($until: large) {
