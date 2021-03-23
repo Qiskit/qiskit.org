@@ -39,6 +39,11 @@ export default class AppIntroductoryContent extends Vue {
   grid-template-areas: 'overview main main main';
   grid-template-columns: repeat(4, 1fr);
 
+  &_narrow {
+    grid-template-areas: 'overview main';
+    grid-template-columns: (4.5 * $column-size-large) 1fr;
+  }
+
   @include mq($until: large) {
     display: block;
   }
@@ -65,15 +70,6 @@ export default class AppIntroductoryContent extends Vue {
   &__layout {
     grid-area: main;
     width: 100%;
-  }
-
-  &_narrow {
-    grid-template-areas: 'overview main';
-    grid-template-columns: (4.5 * $column-size-large) 1fr;
-
-    @include mq($until: large) {
-      display: block;
-    }
   }
 }
 </style>
