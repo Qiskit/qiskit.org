@@ -18,11 +18,11 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-import { SegmentData } from '~/constants/appLinks'
+import { GeneralLink } from '~/constants/appLinks'
 
 @Component
 export default class ExternalRecommendedReadings extends Vue {
-  @Prop({ type: Array, required: true }) links!: SegmentData[]
+  @Prop({ type: Array, required: true }) links!: GeneralLink[]
 }
 </script>
 
