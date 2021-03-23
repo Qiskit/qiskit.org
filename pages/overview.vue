@@ -39,6 +39,7 @@
           :title="section.title"
           :description="section.description"
           :link="section.link"
+          narrow
         >
           <template #title>
             <h2 class="copy__title">
