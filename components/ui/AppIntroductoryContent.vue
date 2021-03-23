@@ -11,7 +11,7 @@
         kind="ghost"
       />
     </div>
-    <div class="app-introductory-content__main">
+    <div class="app-introductory-content__layout">
       <slot />
     </div>
   </article>
@@ -62,22 +62,17 @@ export default class AppIntroductoryContent extends Vue {
     }
   }
 
-  &__main {
+  &__layout {
     grid-area: main;
     width: 100%;
   }
 
   &_narrow {
-    display: flex;
+    grid-template-areas: 'overview main main main';
+    grid-template-columns: (4.5 * $column-size-large) 1fr;
 
     @include mq($until: large) {
       display: block;
-    }
-
-    .app-introductory-content {
-      &__overview {
-        flex: 0 0 (4.5 * $column-size-large);
-      }
     }
   }
 }
