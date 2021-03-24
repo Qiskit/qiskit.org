@@ -1,4 +1,4 @@
-import { NavLink } from '~/constants/menuLinks.ts'
+import { NavLink } from '~/constants/menuLinks'
 
 const actionPrefix = 'textbook-demo > header > mega-dropdown'
 const sectionPrerequisites = 'prerequisites'
