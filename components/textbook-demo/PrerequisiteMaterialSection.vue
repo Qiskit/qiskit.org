@@ -4,32 +4,18 @@
       Prerequisite material
     </h2>
     <div class="prerequisite-material-section__cards">
-      <article
+      <AppDescriptionCard
         v-for="{ title, description, progress, segment, url } in prerequisites"
         :key="title"
+        :description="description"
         class="prerequisite-material-section__card"
+        :cta="{ label: 'Go to page', segment, url}"
+        :title="title"
       >
-        <div>
-          <header
-            class="prerequisite-material-section__card__headline"
-            v-text="title"
-          />
-          <main
-            class="prerequisite-material-section__card__description"
-            v-text="description"
-          />
-        </div>
-        <footer class="prerequisite-material-section__card__footer">
-          <AppCta
-            class="prerequisite-material-section__card__cta"
-            kind="ghost"
-            label="Go to page"
-            :segment="segment"
-            :url="url"
-          />
+        <template slot="footer-append">
           <ProgressCircle :progress="progress" />
-        </footer>
-      </article>
+        </template>
+      </AppDescriptionCard>
     </div>
   </section>
 </template>
@@ -92,31 +78,11 @@ export default class PrerequisiteMaterialSection extends Vue {
 
 .prerequisite-material-section {
   &__card {
-    align-content: space-between;
+    align-items: strech;
     background: $cool-gray-10;
     color: $cool-gray-80;
-    display: grid;
+    display: flex;
     padding: $spacing-05 $spacing-05 0;
-
-    &__headline {
-      @include type-style("productive-heading-02");
-    }
-
-    &__description {
-      @include type-style('body-long-01');
-      margin-top: $spacing-05;
-    }
-
-    &__footer {
-      align-items: center;
-      display: flex;
-      justify-content: space-between;
-      margin-top: $spacing-09;
-    }
-
-    &__cta {
-      width: max-content !important;
-    }
   }
 
   &__cards {
