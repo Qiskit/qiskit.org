@@ -1,5 +1,5 @@
 <template>
-  <article class="app-introductory-content">
+  <article class="app-introductory-content" :class="{ 'app-introductory-content_narrow': narrow }">
     <div class="app-introductory-content__overview">
       <slot name="title" />
       <p class="app-introductory-content__description">
@@ -26,6 +26,7 @@ import { NavLink } from '~/constants/menuLinks'
 export default class AppIntroductoryContent extends Vue {
   @Prop(String) description!: string
   @Prop(Object) link!: NavLink
+  @Prop({ type: Boolean, default: false }) narrow!: boolean
 }
 </script>
 
@@ -33,19 +34,25 @@ export default class AppIntroductoryContent extends Vue {
 @import '~/assets/scss/blocks/copy.scss';
 
 .app-introductory-content {
-  display: flex;
+  display: grid;
+  column-gap: 2rem;
+  grid-template-areas: 'overview main main main';
+  grid-template-columns: repeat(4, 1fr);
+
+  &_narrow {
+    grid-template-areas: 'overview main';
+    grid-template-columns: (4.5 * $column-size-large) 1fr;
+  }
 
   @include mq($until: large) {
     display: block;
   }
 
   &__overview {
-    flex: 0 0 (4.5 * $column-size-large);
-    padding-right: $spacing-07;
+    grid-area: overview;
     margin-bottom: $layout-03;
 
     @include mq($until: large) {
-      padding-right: 0;
       display: block;
     }
   }
@@ -61,6 +68,7 @@ export default class AppIntroductoryContent extends Vue {
   }
 
   &__layout {
+    grid-area: main;
     width: 100%;
   }
 }
