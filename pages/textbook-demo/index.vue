@@ -2,7 +2,7 @@
   <main class="textbook-demo-page">
     <TextbookDemoHeader />
     <StartLearningSection class="textbook-demo-page__section" />
-    <HelpfulResourcesSection
+    <AppHelpfulResourcesSection
       class="textbook-demo-page__section"
       :resources="helpfulResources"
     />
