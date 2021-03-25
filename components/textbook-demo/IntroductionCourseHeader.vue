@@ -52,11 +52,17 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import { TEXTBOOK_DEMO_INTRODUCTION_COURSE_START_LEARNING } from '~/constants/appLinks'
+import { GeneralLink, textbookDemoIntroductionCourseStartLearningUrl } from '~/constants/appLinks'
 
 @Component
 export default class IntroductionCourseHeader extends Vue {
-  startLearningCTA = TEXTBOOK_DEMO_INTRODUCTION_COURSE_START_LEARNING
+  startLearningCTA: GeneralLink = {
+    url: textbookDemoIntroductionCourseStartLearningUrl,
+    label: 'Start learning',
+    segment: {
+      action: 'introduction-course > header > introduction'
+    }
+  }
 }
 </script>
 
