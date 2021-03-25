@@ -55,7 +55,7 @@ import { Component } from 'vue-property-decorator'
 import { TEXTBOOK_DEMO_INTRODUCTION_COURSE_START_LEARNING } from '~/constants/appLinks'
 
 @Component
-export default class AppPageHeader extends Vue {
+export default class IntroductionCourseHeader extends Vue {
   startLearningCTA = TEXTBOOK_DEMO_INTRODUCTION_COURSE_START_LEARNING
 }
 </script>
