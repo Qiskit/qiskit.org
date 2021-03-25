@@ -79,8 +79,6 @@ const TEXTBOOK_DEMO_START_LEARNING: GeneralLink = {
   }
 }
 
-const textbookDemoIntroductionCourseStartLearningUrl = 'https://project-platypus-default.apis-dev-5dd5718798d097eccc65fac4e78a33ce-0000.us-south.containers.appdomain.cloud/course/learning-states-and-qubits/introduction'
-
 const IBM_Q_EXPERIENCE: GeneralLink = {
   url: 'https://quantum-computing.ibm.com/lab',
   label: 'IBM Quantum Lab'
@@ -96,7 +94,6 @@ export {
   REQUEST_AN_EVENT_CTA,
   SEMINAR_SERIES_ALL_EPISODES_CTA,
   SEMINAR_SERIES_FULL_ARCHIVE_CTA,
-  textbookDemoIntroductionCourseStartLearningUrl,
   TEXTBOOK_DEMO_START_LEARNING,
   IBM_Q_EXPERIENCE
 }

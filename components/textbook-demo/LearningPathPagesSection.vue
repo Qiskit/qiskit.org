@@ -51,8 +51,8 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
-import { SegmentData, textbookDemoIntroductionCourseStartLearningUrl } from '~/constants/appLinks'
+import { Component, Prop } from 'vue-property-decorator'
+import { SegmentData } from '~/constants/appLinks'
 
 interface LearningPath {
   image: string;
@@ -64,6 +64,8 @@ interface LearningPath {
 
 @Component
 export default class LearningPathPagesSection extends Vue {
+  @Prop({ type: String, required: true }) courseStartUrl!: string
+
   activeLearningPathLabel = '';
   segmentActionBase = 'introduction-course > learning-paths >'
 
@@ -73,7 +75,7 @@ export default class LearningPathPagesSection extends Vue {
       label: 'Introduction',
       progress: 1,
       segment: { action: `${this.segmentActionBase} introduction` },
-      url: textbookDemoIntroductionCourseStartLearningUrl
+      url: this.courseStartUrl
     },
     {
       image: 'the-atoms-of-computation-page-preview.png',
