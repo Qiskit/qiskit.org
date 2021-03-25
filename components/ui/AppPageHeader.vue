@@ -3,6 +3,10 @@
     class="app-page-header"
     :class="{ 'app-page-header_bg-grid': bgGrid }"
   >
+    <div class="app-page-header__top">
+      <slot name="top" />
+    </div>
+
     <div
       class="app-page-header__container"
       :class="{
@@ -10,14 +14,7 @@
         'app-page-header__container_fixed-height': fixedHeight,
       }"
     >
-      <div class="app-page-header__top-link">
-        <!-- TODO: Implement "top link" -->
-      </div>
-
-      <div
-        class="app-page-header__main"
-        :class="{ 'app-page-header__main_fixed-height': fixedHeight }"
-      >
+      <div class="app-page-header__main">
         <div>
           <h1 class="app-page-header__headline">
             <slot />
@@ -57,29 +54,17 @@ export default class AppPageHeader extends Vue {
 @import "~carbon-components/scss/globals/scss/typography";
 @import "~/assets/scss/blocks/copy.scss";
 
-$top-link-height: 4.375rem;
-$top-link-height-large: 3.75rem;
-
 .app-page-header {
   &__container {
     @include contained();
     display: grid;
     column-gap: $spacing-07;
     grid-template-columns: 1fr;
-    grid-template-rows: $top-link-height auto;
-    grid-template-areas:
-      "top-link"
-      "main";
-
-    @include mq($until: large) {
-      grid-template-rows: $top-link-height-large auto;
-    }
+    grid-template-areas: "main";
 
     &_has-aside {
       grid-template-columns: 1fr auto;
-      grid-template-areas:
-        "top-link top-link"
-        "main aside";
+      grid-template-areas: "main aside";
 
       @include mq($until: large) {
         grid-template-columns: repeat(2, 1fr);
@@ -88,9 +73,8 @@ $top-link-height-large: 3.75rem;
       @include mq($until: medium) {
         grid-template-columns: 1fr;
         grid-template-areas:
-          'top-link'
-          'main'
-          'aside';
+          "main"
+          "aside";
       }
     }
 
@@ -104,10 +88,8 @@ $top-link-height-large: 3.75rem;
     }
   }
 
-  &__top-link {
-    align-items: center;
-    display: flex;
-    grid-area: top-link;
+  &__top {
+    @include contained();
   }
 
   &__main {
@@ -123,18 +105,6 @@ $top-link-height-large: 3.75rem;
 
     @include mq($until: large) {
       gap: $spacing-09;
-    }
-
-    &_fixed-height {
-      margin-bottom: $top-link-height;
-
-      @include mq($until: large) {
-        margin-bottom: $top-link-height-large;
-      }
-
-      @include mq($until: medium) {
-        margin-bottom: initial;
-      }
     }
   }
 

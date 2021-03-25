@@ -11,26 +11,30 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import { Component, Prop } from "vue-property-decorator";
+import Vue from 'vue'
+import { Component, Prop } from 'vue-property-decorator'
 
 @Component
 export default class AppNavBackLink extends Vue {
   @Prop({ type: String, required: true }) label!: string;
-  @Prop({ type: String, required: false, default: "light" }) theme!: string;
+  @Prop({ type: String, required: false, default: 'light' }) theme!: string;
   @Prop({ type: String, required: true }) url!: string;
 }
 </script>
 
 <style lang="scss" scoped>
+@import "~/assets/scss/blocks/copy.scss";
+
 .app-nav-back-link {
   @include contained();
-  padding-bottom: $spacing-06;
-  padding-top: $spacing-06;
+  padding: $spacing-06 0;
 
   &__link {
+    @include type-style("body-short-01");
     align-items: center;
+    color: $purple-70;
     display: flex;
+    width: fit-content;
 
     &_dark {
       color: $white;
