@@ -1,5 +1,5 @@
 <template>
-  <AppPageHeader bg-grid :cta="cta">
+  <AppPageHeader bg-grid class="events-header" :cta="cta">
     <slot />
 
     <template slot="description">
@@ -40,6 +40,12 @@ export default class EventsHeader extends Vue {
 
 <style lang="scss" scoped>
 .events-header {
+  padding-top: $layout-06;
+
+  @include mq($until: medium) {
+    padding-top: $layout-04;
+  }
+
   &__aside {
     max-width: 288px;
     width: 100%;

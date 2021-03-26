@@ -1,7 +1,6 @@
 <template>
   <main class="physics-of-computation-page">
     <EventsHeader
-      class="physics-of-computation-page__header"
       :description="headerDescription"
       :cta="headerCTA"
       :card-title="headerCardTitle"
@@ -296,14 +295,6 @@ export default class PhysicsOfComputationPage extends QiskitPage {
 <style lang="scss" scoped>
 .physics-of-computation-page {
   color: $white-text-01;
-
-  &__header {
-    padding-top: $layout-06;
-
-    @include mq($until: medium) {
-      padding-top: $layout-04;
-    }
-  }
 
   &__section {
     @include contained();
