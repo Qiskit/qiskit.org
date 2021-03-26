@@ -30,7 +30,7 @@ export default class IntroductionCoursePage extends QiskitPage {
       url: 'https://math.mit.edu/~gs/linearalgebra/',
       label: 'https://math.mit.edu/~gs/linearalgebra/',
       segment: {
-        action: `${this.segmentActionBase}  mit-linear-algebra`
+        action: `${this.segmentActionBase} mit-linear-algebra`
       }
     },
     {
