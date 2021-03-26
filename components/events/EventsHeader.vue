@@ -16,7 +16,7 @@
         <div class="events-header__card-up-title-wrapper">
           <div class="events-header__card-up-title copy__subtitle" v-text="cardTitle" />
         </div>
-        <EventCard v-bind="cardContent" class="events-header__card" vertical-layout>
+        <EventCard v-bind="cardContent" vertical-layout>
           {{ cardContent.description }}
         </EventCard>
       </div>
@@ -64,10 +64,6 @@ export default class EventsHeader extends Vue {
     &-wrapper {
       margin-bottom: $spacing-06;
     }
-  }
-
-  &__card {
-    margin-bottom: 0 !important;
   }
 }
 </style>
