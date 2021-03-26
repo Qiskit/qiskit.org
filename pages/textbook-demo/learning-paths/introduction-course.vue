@@ -1,9 +1,9 @@
 <template>
   <main class="introduction-course-page">
-    <IntroductionCourseHeader :course-start-url="courseStartUrl" />
+    <IntroductionCourseHeader />
     <PrerequisiteMaterialSection class="introduction-course-page__section" />
     <ExternalRecommendedReadings class="introduction-course-page__section" :links="links" />
-    <LearningPathPagesSection class="introduction-course-page__section" :course-start-url="courseStartUrl" />
+    <LearningPathPagesSection class="introduction-course-page__section" />
   </main>
 </template>
 
@@ -25,8 +25,6 @@ export default class IntroductionCoursePage extends QiskitPage {
     'https://math.mit.edu/~gs/linearalgebra/',
     'https://machinelearningmastery.com/gentle-introduction-linear-algebra/'
   ]
-
-  courseStartUrl = 'https://project-platypus-default.apis-dev-5dd5718798d097eccc65fac4e78a33ce-0000.us-south.containers.appdomain.cloud/course/learning-states-and-qubits/introduction'
 }
 </script>
 
