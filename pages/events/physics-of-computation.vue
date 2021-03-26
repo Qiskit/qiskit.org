@@ -6,9 +6,11 @@
       :card-title="headerCardTitle"
       :card-content="headerCardContent"
     >
-      {{ headerPrimaryTitle }}
-      <br>
-      {{ headerSecondaryTitle }}
+      <div class="physics-of-computation-page__header-title">
+        {{ headerPrimaryTitle }}
+        <br>
+        {{ headerSecondaryTitle }}
+      </div>
     </EventsHeader>
     <AppMosaicSection
       class="physics-of-computation-page__section"
@@ -295,6 +297,10 @@ export default class PhysicsOfComputationPage extends QiskitPage {
 <style lang="scss" scoped>
 .physics-of-computation-page {
   color: $white-text-01;
+
+  &__header-title {
+    margin-top: $spacing-07;
+  }
 
   &__section {
     @include contained();

@@ -6,7 +6,7 @@
       :card-title="headerCardTitle"
       :card-content="headerCardContent"
     >
-      {{ headerTitle }}
+      <div class="seminar-series-page__header-title">{{ headerTitle }}</div>
     </EventsHeader>
     <AppMosaicSection
       class="seminar-series-page__section"
@@ -230,6 +230,10 @@ export default class SeminarSeriesPage extends QiskitPage {
 <style lang="scss" scoped>
 .seminar-series-page {
   color: $white-text-01;
+
+  &__header-title {
+    margin-top: $spacing-07;
+  }
 
   &__section {
     @include contained();
