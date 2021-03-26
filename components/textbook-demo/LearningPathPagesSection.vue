@@ -52,7 +52,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import { SegmentData } from '~/constants/appLinks'
+import { SegmentData, textbookDemoIntroductionCourseStartLearningUrl } from '~/constants/appLinks'
 
 interface LearningPath {
   image: string;
@@ -73,7 +73,7 @@ export default class LearningPathPagesSection extends Vue {
       label: 'Introduction',
       progress: 1,
       segment: { action: `${this.segmentActionBase} introduction` },
-      url: 'https://project-platypus-default.apis-dev-5dd5718798d097eccc65fac4e78a33ce-0000.us-south.containers.appdomain.cloud/course/learning-states-and-qubits/introduction'
+      url: textbookDemoIntroductionCourseStartLearningUrl
     },
     {
       image: 'the-atoms-of-computation-page-preview.png',
