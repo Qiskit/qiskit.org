@@ -27,7 +27,8 @@ export default class AppNavBackLink extends Vue {
 
 .app-nav-back-link {
   @include contained();
-  padding: $spacing-06 0;
+  padding-bottom: $spacing-06;
+  padding-top: $spacing-06;
 
   &__link {
     @include type-style("body-short-01");
