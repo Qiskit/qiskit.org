@@ -6,7 +6,9 @@
       :card-title="headerCardTitle"
       :card-content="headerCardContent"
     >
-      <div class="seminar-series-page__header-title">{{ headerTitle }}</div>
+      <div class="seminar-series-page__header-title">
+        {{ headerTitle }}
+      </div>
     </EventsHeader>
     <AppMosaicSection
       class="seminar-series-page__section"
