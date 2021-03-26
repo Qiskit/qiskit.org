@@ -2,7 +2,7 @@
   <nav class="app-nav-back-link">
     <BasicLink
       class="app-nav-back-link__link"
-      :class="{ 'app-nav-back-link__link_dark': theme === 'dark' }"
+      :class="`app-nav-back-link__link_${theme}`"
       :url="url"
     >
       <ArrowLeft16 class="app-nav-back-link__icon" /><span v-text="label" />
@@ -32,12 +32,15 @@ export default class AppNavBackLink extends Vue {
   &__link {
     @include type-style("body-short-01");
     align-items: center;
-    color: $purple-70;
     display: flex;
     width: fit-content;
 
     &_dark {
       color: $white;
+    }
+
+    &_light {
+      color: $purple-70;
     }
   }
 
