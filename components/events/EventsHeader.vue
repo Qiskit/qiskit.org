@@ -47,7 +47,7 @@ export default class EventsHeader extends Vue {
   }
 
   &__aside {
-    max-width: 288px;
+    max-width: 18rem;
     width: 100%;
 
     @include mq($until: large) {
