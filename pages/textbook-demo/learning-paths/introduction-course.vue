@@ -10,6 +10,7 @@
 <script lang="ts">
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
+import { GeneralLink } from '~/constants/appLinks'
 
 @Component({
   layout: 'default-textbook',
@@ -21,9 +22,24 @@ import QiskitPage from '~/components/logic/QiskitPage.vue'
 })
 export default class IntroductionCoursePage extends QiskitPage {
   routeName: string = 'introduction-course'
-  links = [
-    'https://math.mit.edu/~gs/linearalgebra/',
-    'https://machinelearningmastery.com/gentle-introduction-linear-algebra/'
+
+  segmentActionBase = `${this.routeName} > external-recommended-readings >`
+
+  links: GeneralLink[] = [
+    {
+      url: 'https://math.mit.edu/~gs/linearalgebra/',
+      label: 'https://math.mit.edu/~gs/linearalgebra/',
+      segment: {
+        action: `${this.segmentActionBase} mit-linear-algebra`
+      }
+    },
+    {
+      url: 'https://machinelearningmastery.com/gentle-introduction-linear-algebra/',
+      label: 'https://machinelearningmastery.com/gentle-introduction-linear-algebra/',
+      segment: {
+        action: `${this.segmentActionBase} mlmastery-linear-algebra`
+      }
+    }
   ]
 }
 </script>
