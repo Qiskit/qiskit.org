@@ -36,10 +36,7 @@
             </p>
           </div>
         </div>
-        <AppCta
-          label="Start learning"
-          url="https://project-platypus-default.apis-dev-5dd5718798d097eccc65fac4e78a33ce-0000.us-south.containers.appdomain.cloud/course/learning-states-and-qubits/introduction"
-        />
+        <AppCta v-bind="startLearningCTA" />
       </div>
 
       <div class="introduction-course-header__aside">
@@ -55,9 +52,18 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
+import { GeneralLink, textbookDemoIntroductionCourseStartLearningUrl } from '~/constants/appLinks'
 
 @Component
-export default class AppPageHeader extends Vue {}
+export default class IntroductionCourseHeader extends Vue {
+  startLearningCTA: GeneralLink = {
+    url: textbookDemoIntroductionCourseStartLearningUrl,
+    label: 'Start learning',
+    segment: {
+      action: 'introduction-course > header > introduction'
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
