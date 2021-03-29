@@ -8,7 +8,7 @@
         </h2>
         <div class="bx--row">
           <div class="bx--col-lg-6">
-            <img src="http://via.placeholder.com/480x270">
+            <img class="photon__img-responsive" src="http://via.placeholder.com/480x270">
           </div>
           <div class="bx--col-lg-6">
             <p class="copy__paragraph">
@@ -25,7 +25,7 @@
             <AppCta
               class="photon__cta photon__cta_dark"
               label="Get movie"
-              url="/"
+              url="#get-movie"
             />
             <AppLink class="photon__request-recommendation-link" url="/">
               Request new recommendation
@@ -34,7 +34,7 @@
         </div>
       </div>
     </section>
-    <section class="photon__section photon__section_dark">
+    <section class="photon__section photon__section_dark" id="get-movie">
       <div class="photon__container">
         <h2 class="copy__title">
           Lorem ipsum
@@ -59,7 +59,7 @@
             />
           </div>
           <div class="bx--col-lg-6">
-            <img src="http://via.placeholder.com/480x270">
+            <img class="photon__img-responsive" src="http://via.placeholder.com/480x270">
           </div>
         </div>
       </div>
@@ -183,6 +183,10 @@ export default class PhotonPage extends QiskitPage {
       background-image: none !important;
       color: $carbon--blue-80 !important;
     }
+  }
+
+  &__img-responsive {
+    max-width: 100%;
   }
 
   &__request-recommendation-link {
