@@ -54,7 +54,7 @@
             </p>
             <AppCta
               class="photon__cta photon__cta_light"
-              label="Get a recommendation"
+              label="Print directions to Photon"
               url="/"
             />
           </div>
