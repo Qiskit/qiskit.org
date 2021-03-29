@@ -1,19 +1,6 @@
 <template>
-  <header
-    class="app-page-header"
-    :class="{ 'app-page-header_bg-grid': bgGrid }"
-  >
-    <div class="app-page-header__top">
-      <slot name="top" />
-    </div>
-
-    <div
-      class="app-page-header__container"
-      :class="{
-        'app-page-header__container_has-aside': hasAside,
-        'app-page-header__container_fixed-height': fixedHeight,
-      }"
-    >
+  <header class="app-page-header">
+    <div class="app-page-header__container">
       <div class="app-page-header__main">
         <div>
           <h1 class="app-page-header__headline">
@@ -25,8 +12,7 @@
         </div>
         <AppCta v-if="cta" v-bind="cta" />
       </div>
-
-      <div v-if="hasAside" class="app-page-header__aside">
+      <div class="app-page-header__aside">
         <slot name="aside" />
       </div>
     </div>
@@ -39,64 +25,36 @@ import { Component, Prop } from 'vue-property-decorator'
 import { GeneralLink } from '~/constants/appLinks'
 
 @Component
-export default class AppPageHeader extends Vue {
-  @Prop({ type: Boolean, required: false, default: false }) bgGrid!: Boolean
+export default class AppPageHeaderWithCard extends Vue {
   @Prop({ type: Object, required: false, default: null }) cta!: GeneralLink
-  @Prop({ type: Boolean, required: false, default: false }) fixedHeight!: Boolean
-
-  get hasAside () {
-    return !!this.$slots.aside
-  }
 }
 </script>
 
 <style lang="scss" scoped>
-@import "~carbon-components/scss/globals/scss/typography";
 @import "~/assets/scss/blocks/copy.scss";
 
 .app-page-header {
+  @include responsive-grid-bg-strip("/images/grid/grid-hero-learn.svg", auto, 28rem);
+
   &__container {
     @include contained();
     display: grid;
     column-gap: $spacing-07;
-    grid-template-columns: 1fr;
-    grid-template-areas: "main";
+    grid-template-columns: 1fr auto;
 
-    &_has-aside {
-      grid-template-columns: 1fr auto;
-      grid-template-areas: "main aside";
-
-      @include mq($until: large) {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      @include mq($until: medium) {
-        grid-template-columns: 1fr;
-        grid-template-areas:
-          "main"
-          "aside";
-      }
+    @include mq($until: large) {
+      grid-template-columns: 1fr 1fr;
     }
 
-    &_fixed-height {
-      align-items: center;
-      height: 28rem;
-
-      @include mq($until: large) {
-        height: 17.5rem;
-      }
+    @include mq($until: medium) {
+      grid-template-columns: 1fr;
     }
-  }
-
-  &__top {
-    @include contained();
   }
 
   &__main {
     display: flex;
     flex-flow: column;
     gap: $spacing-05;
-    grid-area: main;
     justify-content: space-between;
 
     @include mq($until: x-large) {
@@ -136,16 +94,11 @@ export default class AppPageHeader extends Vue {
 
   &__aside {
     display: flex;
-    grid-area: aside;
     justify-content: flex-end;
 
     @include mq($until: medium) {
       margin-top: $spacing-09;
     }
-  }
-
-  &_bg-grid {
-    @include responsive-grid-bg-strip("/images/grid/grid-hero-learn.svg", auto, 28rem);
   }
 }
 </style>

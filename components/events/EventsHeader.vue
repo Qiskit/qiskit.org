@@ -1,5 +1,5 @@
 <template>
-  <AppPageHeader bg-grid class="events-header" :cta="cta">
+  <AppPageHeaderWithCard class="events-header" :cta="cta">
     <slot />
 
     <template slot="description">
@@ -21,7 +21,7 @@
         </EventCard>
       </div>
     </template>
-  </AppPageHeader>
+  </AppPageHeaderWithCard>
 </template>
 
 <script lang="ts">
