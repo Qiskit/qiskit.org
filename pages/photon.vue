@@ -34,7 +34,7 @@
         </div>
       </div>
     </section>
-    <section class="photon__section photon__section_dark" id="get-movie">
+    <section id="get-movie" class="photon__section photon__section_dark">
       <div class="photon__container">
         <h2 class="copy__title">
           Lorem ipsum
