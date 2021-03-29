@@ -20,7 +20,7 @@
               ut felis, erat in lacus eleifend non faucibus enim. Vestibulum
               libero elementum amet, faucibus lorem convallis pellentesque diam.
             </p>
-            <AppCta class="photon__cta" label="Get movie" url="/" />
+            <AppCta class="photon__cta photon__cta_blue" label="Get movie" url="/" />
           </div>
         </div>
       </div>
@@ -80,6 +80,11 @@ export default class PhotonPage extends QiskitPage {
 
   &__cta {
     margin-top: $spacing-07;
+
+    &_blue {
+      background: $carbon--blue-70;
+      background-image: none !important;
+    }
 
     &_white {
       background: $carbon--cool-gray-10;
