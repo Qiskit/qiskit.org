@@ -1,6 +1,20 @@
 @import '~carbon-components/scss/globals/scss/typography';
 
 .copy {
+  &__page-title {
+    @include type-style('expressive-heading-05', true);
+    color: $white-text-01;
+    max-width: 10 * $column-size-large;
+
+    @include mq($from: medium, $until: large) {
+      max-width: 6 * $column-size-medium;
+    }
+
+    @include mq($until: medium) {
+      max-width: 100%;
+    }
+  }
+
   &__title {
     @include type-style('expressive-heading-05');
     margin-bottom: $layout-03;

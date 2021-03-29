@@ -1,7 +1,7 @@
 <template>
   <header class="app-page-header-fixed">
     <div class="app-page-header-fixed__container">
-      <h1 class="app-page-header-fixed__headline">
+      <h1 class="copy__page-title">
         <slot />
       </h1>
     </div>
@@ -30,20 +30,6 @@ export default class AppPageHeaderFixed extends Vue {}
 
     @include mq($until: large) {
       height: 17.5rem;
-    }
-  }
-
-  &__headline {
-    @include type-style('expressive-heading-05', true);
-    color: $white-text-01;
-    max-width: 10 * $column-size-large;
-
-    @include mq($from: medium, $until: large) {
-      max-width: 6 * $column-size-medium;
-    }
-
-    @include mq($until: medium) {
-      max-width: 100%;
     }
   }
 }

@@ -3,7 +3,7 @@
     <div class="app-page-header__container">
       <main class="app-page-header__main">
         <div>
-          <h1 class="app-page-header__headline">
+          <h1 class="app-page-header__headline copy__page-title">
             <slot name="title" />
           </h1>
           <div class="app-page-header__description">
@@ -84,18 +84,7 @@ export default class AppPageHeaderWithCard extends Vue {
   }
 
   &__headline {
-    @include type-style('expressive-heading-05', true);
-    color: $white-text-01;
     margin-top: $spacing-07;
-    max-width: 10 * $column-size-large;
-
-    @include mq($from: medium, $until: large) {
-      max-width: 6 * $column-size-medium;
-    }
-
-    @include mq($until: medium) {
-      max-width: 5 * $column-size-medium;
-    }
   }
 
   &__description {
