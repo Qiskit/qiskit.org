@@ -10,13 +10,13 @@
       <div
         class="page-section__main-content"
         :class="{
-          'page-section__main-content_alone': !this.$slots.aside
+          'page-section__main-content_alone': !$slots.aside
         }"
       >
         <slot />
       </div>
       <aside
-        v-if="this.$slots.aside"
+        v-if="$slots.aside"
         class="page-section__aside"
       >
         <slot name="aside" />

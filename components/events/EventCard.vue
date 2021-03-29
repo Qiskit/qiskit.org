@@ -10,7 +10,7 @@
     :vertical-layout="verticalLayout"
   >
     <div class="event-card__description">
-      <slot v-if="this.$slots.default" />
+      <slot v-if="$slots.default" />
     </div>
     <div>
       <p class="event-card__detail">
