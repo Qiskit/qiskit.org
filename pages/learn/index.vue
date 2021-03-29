@@ -1,6 +1,6 @@
 <template>
   <div class="learn-page">
-    <AppPageHeader bg-grid fixed-height>
+    <AppPageHeaderFixed>
       Start your path towards learning
       <TypewriterEffect
         :values="[
@@ -13,7 +13,7 @@
           'Quantum Applications'
         ]"
       />
-    </AppPageHeader>
+    </AppPageHeaderFixed>
     <TheLearningResourceList
       :top-filters="learnLevelOptions"
       :active-top-filter="learnLevel"

@@ -1,6 +1,6 @@
 <template>
   <main class="community-page advocates-page">
-    <AppPageHeader bg-grid fixed-height>
+    <AppPageHeaderFixed>
       Connect with the<br>
       <TypewriterEffect
         :values="[
@@ -12,7 +12,7 @@
       />
       from within<br>
       the Qiskit community
-    </AppPageHeader>
+    </AppPageHeaderFixed>
     <AdvocatesJoinSection />
     <MeetTheAdvocates :advocates="filteredAdvocates" />
   </main>
