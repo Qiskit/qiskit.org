@@ -20,7 +20,14 @@
               ut felis, erat in lacus eleifend non faucibus enim. Vestibulum
               libero elementum amet, faucibus lorem convallis pellentesque diam.
             </p>
-            <AppCta class="photon__cta photon__cta_blue" label="Get movie" url="/" />
+            <AppCta
+              class="photon__cta photon__cta_blue"
+              label="Get movie"
+              url="/"
+            />
+            <AppLink class="photon__request-recommendation-link" url="/">
+              Request new recommendation
+            </AppLink>
           </div>
         </div>
       </div>
@@ -73,6 +80,8 @@ export default class PhotonPage extends QiskitPage {
 </script>
 
 <style lang="scss" scoped>
+@import "~/assets/scss/blocks/copy.scss";
+
 .photon {
   &__container {
     @include contained();
@@ -91,6 +100,12 @@ export default class PhotonPage extends QiskitPage {
       background-image: none !important;
       color: $carbon--blue-80 !important;
     }
+  }
+
+  &__request-recommendation-link {
+    color: $carbon--blue-70 !important;
+    display: inline-block;
+    margin-top: $spacing-06;
   }
 
   &__section {
