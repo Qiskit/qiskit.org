@@ -43,7 +43,7 @@ export default class AppPageHeaderFixed extends Vue {}
     }
 
     @include mq($until: medium) {
-      max-width: 5 * $column-size-medium;
+      max-width: 100%;
     }
   }
 }
