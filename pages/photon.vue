@@ -78,7 +78,7 @@
               This project is a joke. Hopefully that was obvious, but just in
               case I’ll say it again. This project is a joke. However, it does
               use a real quantum computer to give you real movie recommendations
-              for the real last remaining Blockbuster. But that doesn’t mean
+              for the real last remaining Photon. But that doesn’t mean
               it’s a “good” or useful use of a quantum computer. The goal of
               this project is to shed light on the hype and misunderstandings
               associated with quantum computer.
