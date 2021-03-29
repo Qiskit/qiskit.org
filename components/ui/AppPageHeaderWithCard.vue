@@ -69,6 +69,7 @@ export default class AppPageHeaderWithCard extends Vue {
   &__headline {
     @include type-style('expressive-heading-05', true);
     color: $white-text-01;
+    margin-top: $spacing-07;
     max-width: 10 * $column-size-large;
 
     @include mq($from: medium, $until: large) {
