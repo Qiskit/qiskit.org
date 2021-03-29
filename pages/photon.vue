@@ -1,7 +1,7 @@
 <template>
   <div>
     <header>Header</header>
-    <section class="photon__section">
+    <section class="photon__section photon__section_light">
       <div class="photon__container">
         <h2 class="copy__title">
           Lorem ipsum
@@ -23,7 +23,7 @@
               libero elementum amet, faucibus lorem convallis pellentesque diam.
             </p>
             <AppCta
-              class="photon__cta photon__cta_blue"
+              class="photon__cta photon__cta_dark"
               label="Get movie"
               url="/"
             />
@@ -34,7 +34,7 @@
         </div>
       </div>
     </section>
-    <section class="photon__section photon__section_blue">
+    <section class="photon__section photon__section_dark">
       <div class="photon__container">
         <h2 class="copy__title">
           Lorem ipsum
@@ -53,7 +53,7 @@
               libero elementum amet, faucibus lorem convallis pellentesque diam.
             </p>
             <AppCta
-              class="photon__cta photon__cta_white"
+              class="photon__cta photon__cta_light"
               label="Get a recommendation"
               url="/"
             />
@@ -64,7 +64,7 @@
         </div>
       </div>
     </section>
-    <section class="photon__section">
+    <section class="photon__section photon__section_light">
       <div class="photon__container">
         <div class="bx--row">
           <div class="bx--col-lg-6">
@@ -173,12 +173,12 @@ export default class PhotonPage extends QiskitPage {
   &__cta {
     margin-top: $spacing-07;
 
-    &_blue {
+    &_dark {
       background: $carbon--blue-70;
       background-image: none !important;
     }
 
-    &_white {
+    &_light {
       background: $carbon--cool-gray-10;
       background-image: none !important;
       color: $carbon--blue-80 !important;
@@ -195,13 +195,17 @@ export default class PhotonPage extends QiskitPage {
     padding-bottom: $spacing-09;
     padding-top: $spacing-09;
 
-    &_blue {
+    &_dark {
       background: $carbon--blue-70;
 
       .copy__paragraph,
       .copy__title {
         color: $text-04;
       }
+    }
+
+    &_light {
+      background: $carbon--cool-gray-10;
     }
   }
 }
