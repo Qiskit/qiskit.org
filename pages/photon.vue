@@ -1,10 +1,14 @@
 <template>
   <div>
     <header>Header</header>
-    <section class="photon__section">
+    <section class="photon__white-section">
       <h2 class="copy__title">Lorem ipsum</h2>
+      <div class="bx--row">
+        <div class="bx--col-lg-6">left</div>
+        <div class="bx--col-lg-6">right</div>
+      </div>
     </section>
-    <section class="photon__get-it-section">
+    <section class="photon__blue-section">
       <div class="photon__container">
         <h2 class="copy__title">Lorem ipsum</h2>
         <div class="bx--row">
@@ -21,7 +25,7 @@
               libero elementum amet, faucibus lorem convallis pellentesque diam.
             </p>
             <AppCta
-              class="photon__get-it-section__cta"
+              class="photon__blue-section__cta"
               label="Get a recommendation"
               url="/"
             />
@@ -57,7 +61,7 @@ export default class PhotonPage extends QiskitPage {
     @include contained();
   }
 
-  &__get-it-section {
+  &__blue-section {
     background: $carbon--blue-70;
     padding-bottom: $spacing-09;
     padding-top: $spacing-09;
