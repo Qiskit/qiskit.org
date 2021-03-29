@@ -7,7 +7,7 @@
           Lorem ipsum
         </h2>
         <div class="bx--row">
-          <div class="bx--col-lg-6">
+          <div class="bx--col-lg-6 section-mobile-spacing">
             <img class="photon__img-responsive" src="http://via.placeholder.com/480x270">
           </div>
           <div class="bx--col-lg-6">
@@ -40,7 +40,7 @@
           Lorem ipsum
         </h2>
         <div class="bx--row">
-          <div class="bx--col-lg-6">
+          <div class="bx--col-lg-6 section-mobile-spacing">
             <p class="copy__paragraph">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fermentum
               ut aliquet aliquam quis. Pellentesque pulvinar consectetur cras
@@ -211,6 +211,12 @@ export default class PhotonPage extends QiskitPage {
     &_light {
       background: $carbon--cool-gray-10;
     }
+  }
+}
+
+.section-mobile-spacing {
+  @include mq($until: large) {
+    margin-bottom: $spacing-09;
   }
 }
 </style>
