@@ -64,7 +64,7 @@
         </div>
       </div>
     </section>
-    <section class="photon__section photon__section_light">
+    <section class="photon__section">
       <div class="photon__container">
         <div class="bx--row">
           <div class="bx--col-lg-6">
