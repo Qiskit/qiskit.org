@@ -7,10 +7,10 @@
           Lorem ipsum
         </h2>
         <div class="bx--row">
-          <div class="bx--col-lg-6 section-mobile-spacing">
+          <div class="bx--col-lg-6 bx--col-md-4 section-mobile-spacing">
             <img class="photon__img-responsive" src="http://via.placeholder.com/480x270">
           </div>
-          <div class="bx--col-lg-6">
+          <div class="bx--col-lg-6 bx--col-md-4">
             <p class="copy__paragraph">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fermentum
               ut aliquet aliquam quis. Pellentesque pulvinar consectetur cras
@@ -40,7 +40,7 @@
           Lorem ipsum
         </h2>
         <div class="bx--row">
-          <div class="bx--col-lg-6 section-mobile-spacing">
+          <div class="bx--col-lg-6 bx--col-md-4 section-mobile-spacing">
             <p class="copy__paragraph">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fermentum
               ut aliquet aliquam quis. Pellentesque pulvinar consectetur cras
@@ -58,7 +58,7 @@
               url="/"
             />
           </div>
-          <div class="bx--col-lg-6">
+          <div class="bx--col-lg-6 bx--col-md-4">
             <img class="photon__img-responsive" src="http://via.placeholder.com/480x270">
           </div>
         </div>
@@ -215,7 +215,7 @@ export default class PhotonPage extends QiskitPage {
 }
 
 .section-mobile-spacing {
-  @include mq($until: large) {
+  @include mq($until: medium) {
     margin-bottom: $spacing-09;
   }
 }
