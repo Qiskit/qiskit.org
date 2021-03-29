@@ -9,7 +9,7 @@
             <img src="http://via.placeholder.com/480x270" />
           </div>
           <div class="bx--col-lg-6">
-            <p>
+            <p class="copy__paragraph">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fermentum
               ut aliquet aliquam quis. Pellentesque pulvinar consectetur cras
               proin nulla. Sollicitudin ut felis, erat in lacus eleifend non
@@ -30,7 +30,7 @@
         <h2 class="copy__title">Lorem ipsum</h2>
         <div class="bx--row">
           <div class="bx--col-lg-6">
-            <p>
+            <p class="copy__paragraph">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fermentum
               ut aliquet aliquam quis. Pellentesque pulvinar consectetur cras
               proin nulla. Sollicitudin ut felis, erat in lacus eleifend non
@@ -95,6 +95,7 @@ export default class PhotonPage extends QiskitPage {
     &_blue {
       background: $carbon--blue-70;
 
+      .copy__paragraph,
       .copy__title {
         color: $text-04;
       }
