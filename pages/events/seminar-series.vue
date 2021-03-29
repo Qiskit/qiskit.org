@@ -1,13 +1,19 @@
 <template>
   <main class="event-page seminar-series-page">
-    <EventsHeader
+    <AppPageHeaderWithCard
       :description="headerDescription"
       :cta="headerCTA"
       :card-title="headerCardTitle"
-      :card-content="headerCardContent"
     >
-      {{ headerTitle }}
-    </EventsHeader>
+      <template slot="title">
+        {{ headerTitle }}
+      </template>
+      <template slot="card">
+        <EventCard v-bind="cardContent" vertical-layout>
+          {{ cardContent.description }}
+        </EventCard>
+      </template>
+    </AppPageHeaderWithCard>
     <AppMosaicSection
       class="seminar-series-page__section"
       :title="mosaicSectionTitle"

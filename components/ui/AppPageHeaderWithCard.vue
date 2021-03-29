@@ -1,20 +1,30 @@
 <template>
   <header class="app-page-header">
     <div class="app-page-header__container">
-      <div class="app-page-header__main">
+      <main class="app-page-header__main">
         <div>
           <h1 class="app-page-header__headline">
-            <slot />
+            <slot name="title" />
           </h1>
           <div class="app-page-header__description">
-            <slot name="description" />
+            <p
+              v-for="(paragraph, index) in description"
+              :key="index"
+              class="copy__paragraph"
+              v-text="paragraph"
+            />
           </div>
         </div>
         <AppCta v-if="cta" v-bind="cta" />
-      </div>
-      <div class="app-page-header__aside">
-        <slot name="aside" />
-      </div>
+      </main>
+      <aside class="app-page-header__aside">
+        <div>
+          <div class="app-page-header__card-title-wrapper">
+            <div class="app-page-header__card-title copy__subtitle" v-text="cardTitle" />
+          </div>
+          <slot name="card" />
+        </div>
+      </aside>
     </div>
   </header>
 </template>
@@ -26,7 +36,9 @@ import { GeneralLink } from '~/constants/appLinks'
 
 @Component
 export default class AppPageHeaderWithCard extends Vue {
-  @Prop({ type: Object, required: false, default: null }) cta!: GeneralLink
+  @Prop({ type: String, required: true }) cardTitle!: string
+  @Prop({ type: Object, required: true }) cta!: GeneralLink
+  @Prop({ type: Array, required: true }) description!: string[]
 }
 </script>
 
@@ -35,6 +47,11 @@ export default class AppPageHeaderWithCard extends Vue {
 
 .app-page-header {
   @include responsive-grid-bg-strip("/images/grid/grid-hero-learn.svg", auto, 28rem);
+  padding-top: $layout-06;
+
+  @include mq($until: medium) {
+    padding-top: $layout-04;
+  }
 
   &__container {
     @include contained();
@@ -94,11 +111,26 @@ export default class AppPageHeaderWithCard extends Vue {
   }
 
   &__aside {
-    display: flex;
-    justify-content: flex-end;
+    max-width: 18rem;
+    width: 100%;
+
+    @include mq($until: large) {
+      max-width: initial;
+    }
 
     @include mq($until: medium) {
       margin-top: $spacing-09;
+    }
+  }
+
+  &__card-title {
+    border-bottom: 4px solid $purple-60;
+    display: inline;
+    padding-bottom: $spacing-02;
+    padding-right: $spacing-03;
+
+    &-wrapper {
+      margin-bottom: $spacing-06;
     }
   }
 }

@@ -1,15 +1,21 @@
 <template>
   <main class="physics-of-computation-page">
-    <EventsHeader
+    <AppPageHeaderWithCard
       :description="headerDescription"
       :cta="headerCTA"
       :card-title="headerCardTitle"
-      :card-content="headerCardContent"
     >
-      {{ headerPrimaryTitle }}
-      <br>
-      {{ headerSecondaryTitle }}
-    </EventsHeader>
+      <template slot="title">
+        {{ headerPrimaryTitle }}
+        <br>
+        {{ headerSecondaryTitle }}
+      </template>
+      <template slot="card">
+        <EventCard v-bind="headerCardContent" vertical-layout>
+          {{ headerCardContent.description }}
+        </EventCard>
+      </template>
+    </AppPageHeaderWithCard>
     <AppMosaicSection
       class="physics-of-computation-page__section"
       :title="mosaicSectionTitle"
