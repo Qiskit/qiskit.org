@@ -3,10 +3,12 @@
     <header>Header</header>
     <section class="photon__section">
       <div class="photon__container">
-        <h2 class="copy__title">Lorem ipsum</h2>
+        <h2 class="copy__title">
+          Lorem ipsum
+        </h2>
         <div class="bx--row">
           <div class="bx--col-lg-6">
-            <img src="http://via.placeholder.com/480x270" />
+            <img src="http://via.placeholder.com/480x270">
           </div>
           <div class="bx--col-lg-6">
             <p class="copy__paragraph">
@@ -34,7 +36,9 @@
     </section>
     <section class="photon__section photon__section_blue">
       <div class="photon__container">
-        <h2 class="copy__title">Lorem ipsum</h2>
+        <h2 class="copy__title">
+          Lorem ipsum
+        </h2>
         <div class="bx--row">
           <div class="bx--col-lg-6">
             <p class="copy__paragraph">
@@ -55,7 +59,7 @@
             />
           </div>
           <div class="bx--col-lg-6">
-            <img src="http://via.placeholder.com/480x270" />
+            <img src="http://via.placeholder.com/480x270">
           </div>
         </div>
       </div>
@@ -64,18 +68,18 @@
 </template>
 
 <script lang="ts">
-import { Component } from "vue-property-decorator";
-import QiskitPage from "~/components/logic/QiskitPage.vue";
+import { Component } from 'vue-property-decorator'
+import QiskitPage from '~/components/logic/QiskitPage.vue'
 
 @Component({
-  head() {
+  head () {
     return {
-      title: "Photon",
-    };
-  },
+      title: 'Photon'
+    }
+  }
 })
 export default class PhotonPage extends QiskitPage {
-  routeName = "photon";
+  routeName = 'photon';
 }
 </script>
 
