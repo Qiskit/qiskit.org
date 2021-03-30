@@ -1,14 +1,11 @@
 <template>
   <header class="the-dark-header">
-    <nav class="the-dark-header__nav">
-      <BasicLink
-        class="the-dark-header__nav-link"
-        :url="`/`"
-      >
-        <ArrowLeft16 class="the-dark-header__nav-icon" />
-        <span>Back to Qiskit.org</span>
-      </BasicLink>
-    </nav>
+    <AppNavBackLink
+      label="Back to Qiskit.org"
+      theme="dark"
+      url="/"
+    />
+
     <div class="the-dark-header__container">
       <svg
         class="the-dark-header__title"
@@ -94,25 +91,6 @@ export default class TheDarkHeader extends Vue {}
   @include mq($until: small) {
     background-position: top -12rem center;
     height: calc(#{36rem * 40 / 64} + 2px);
-  }
-
-  &__nav {
-    @include contained();
-  }
-
-  &__nav-link {
-    @include type-style('body-short-01');
-    color: $white;
-    display: flex;
-    position: absolute;
-    top: $layout-01;
-    z-index: 2;
-    align-items: center;
-  }
-
-  &__nav-icon {
-    fill: currentColor;
-    margin-right: $spacing-05;
   }
 
   &__container {

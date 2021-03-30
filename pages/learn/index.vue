@@ -1,6 +1,19 @@
 <template>
   <div class="learn-page">
-    <TheLearnHeader />
+    <AppPageHeaderFixed>
+      Start your path towards learning
+      <TypewriterEffect
+        :values="[
+          'Qiskit',
+          'Python',
+          'Quantum Computing',
+          'Error Mitigation',
+          'Quantum Hardware',
+          'Quantum Algorithms',
+          'Quantum Applications'
+        ]"
+      />
+    </AppPageHeaderFixed>
     <TheLearningResourceList
       :top-filters="learnLevelOptions"
       :active-top-filter="learnLevel"

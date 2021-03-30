@@ -1,14 +1,19 @@
 <template>
   <main class="event-page seminar-series-page">
-    <EventsHeader
-      class="seminar-series-page__header"
+    <AppPageHeaderWithCard
       :description="headerDescription"
       :cta="headerCTA"
       :card-title="headerCardTitle"
-      :card-content="headerCardContent"
     >
-      {{ headerTitle }}
-    </EventsHeader>
+      <template slot="title">
+        {{ headerTitle }}
+      </template>
+      <template slot="card">
+        <EventCard v-bind="cardContent" vertical-layout>
+          {{ cardContent.description }}
+        </EventCard>
+      </template>
+    </AppPageHeaderWithCard>
     <AppMosaicSection
       class="seminar-series-page__section"
       :title="mosaicSectionTitle"
@@ -231,14 +236,6 @@ export default class SeminarSeriesPage extends QiskitPage {
 <style lang="scss" scoped>
 .seminar-series-page {
   color: $white-text-01;
-
-  &__header {
-    padding-top: $layout-06;
-
-    @include mq($until: medium) {
-      padding-top: $layout-04;
-    }
-  }
 
   &__section {
     @include contained();

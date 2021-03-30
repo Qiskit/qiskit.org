@@ -1,16 +1,21 @@
 <template>
   <main class="physics-of-computation-page">
-    <EventsHeader
-      class="physics-of-computation-page__header"
+    <AppPageHeaderWithCard
       :description="headerDescription"
       :cta="headerCTA"
       :card-title="headerCardTitle"
-      :card-content="headerCardContent"
     >
-      {{ headerPrimaryTitle }}
-      <br>
-      {{ headerSecondaryTitle }}
-    </EventsHeader>
+      <template slot="title">
+        {{ headerPrimaryTitle }}
+        <br>
+        {{ headerSecondaryTitle }}
+      </template>
+      <template slot="card">
+        <EventCard v-bind="headerCardContent" vertical-layout>
+          {{ headerCardContent.description }}
+        </EventCard>
+      </template>
+    </AppPageHeaderWithCard>
     <AppMosaicSection
       class="physics-of-computation-page__section"
       :title="mosaicSectionTitle"
@@ -296,14 +301,6 @@ export default class PhysicsOfComputationPage extends QiskitPage {
 <style lang="scss" scoped>
 .physics-of-computation-page {
   color: $white-text-01;
-
-  &__header {
-    padding-top: $layout-06;
-
-    @include mq($until: medium) {
-      padding-top: $layout-04;
-    }
-  }
 
   &__section {
     @include contained();
