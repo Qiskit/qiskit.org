@@ -30,12 +30,13 @@
             label="Get movie"
             url="#get-movie"
           />
-          <AppLink
+          <a
             class="photon-recommendation-section__request-recommendation-link"
-            url="/"
+            href="#"
+            @click.prevent="updateRecommendation"
           >
             Request new recommendation
-          </AppLink>
+          </a>
         </div>
       </div>
     </div>
@@ -48,9 +49,10 @@ import { Component, Prop } from 'vue-property-decorator'
 
 @Component
 export default class PhotonRecommendationSection extends Vue {
-  @Prop({ type: Array, required: true }) description!: string[];
-  @Prop({ type: String, required: true }) title!: string;
-  @Prop({ type: String, required: true }) trailer!: string;
+  @Prop({ type: Array, required: true }) description!: String[];
+  @Prop({ type: String, required: true }) title!: String;
+  @Prop({ type: String, required: true }) trailer!: String;
+  @Prop({ type: Function, required: true }) updateRecommendation!: Function;
 }
 </script>
 
@@ -62,6 +64,7 @@ export default class PhotonRecommendationSection extends Vue {
     color: $carbon--blue-70 !important;
     display: inline-block;
     margin-top: $spacing-06;
+    text-decoration: none;
   }
 
   &__video {

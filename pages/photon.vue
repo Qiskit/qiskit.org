@@ -6,6 +6,7 @@
       :description="recommendation.description"
       :title="recommendation.title"
       :trailer="recommendation.trailer"
+      :update-recommendation="updateRecommendation"
     />
     <section id="get-movie" class="photon__section photon__section_dark">
       <div class="photon__container">
