@@ -2,7 +2,7 @@
   <section>
     <div class="photon__container">
       <h2 class="copy__title">
-        Lorem ipsum
+        Get it at Photon
       </h2>
       <div class="bx--row">
         <div class="bx--col-lg-6 bx--col-md-4 photon__section-mobile-spacing">
