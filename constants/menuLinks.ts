@@ -132,14 +132,6 @@ const LEARN_LINK: NavLink = {
   }
 }
 
-const TEXTBOOK_DEMO_LINK: NavLink = {
-  label: 'Textbook-Demo',
-  url: '/textbook-demo',
-  segment: {
-    action: 'Textbook demo'
-  }
-}
-
 const DOCUMENTATION_LINK: NavLink = {
   label: 'Documentation',
   url: 'https://qiskit.org/documentation/'
@@ -279,7 +271,6 @@ export {
   STAY_CONNECTED_LINKS,
   LEARN_LINK,
   OVERVIEW_LINK,
-  TEXTBOOK_DEMO_LINK,
   SOCIAL_MEDIA,
   NavLink,
   InnerNavLink

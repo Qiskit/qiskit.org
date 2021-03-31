@@ -79,7 +79,7 @@ const TEXTBOOK_DEMO_START_LEARNING: GeneralLink = {
   }
 }
 
-const textbookDemoIntroductionCourseStartLearningUrl = 'https://project-platypus-default.apis-dev-5dd5718798d097eccc65fac4e78a33ce-0000.us-south.containers.appdomain.cloud/course/learning-states-and-qubits/introduction'
+const textbookDemoIntroductionCourseStartLearningUrl = 'https://platypus.qiskit.org/course/learning-states-and-qubits/introduction'
 
 const IBM_Q_EXPERIENCE: GeneralLink = {
   url: 'https://quantum-computing.ibm.com/lab',
