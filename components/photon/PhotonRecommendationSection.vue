@@ -1,7 +1,7 @@
 <template>
   <section>
     <div class="photon__container">
-      <h2 class="copy__title" v-text="title" />
+      <h2 class="copy__title" v-text="recommendation.title" />
       <div class="bx--row">
         <div class="bx--col-lg-6 bx--col-md-4 photon__section-mobile-spacing">
           <div class="photon-recommendation-section__video-wrapper">
@@ -12,7 +12,7 @@
               marginheight="0"
               marginwidth="0"
               scrolling="no"
-              :src="`https://www.youtube.com/embed/${trailer}?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=1&start=0&end=0`"
+              :src="`https://www.youtube.com/embed/${recommendation.trailer}?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=1&start=0&end=0`"
               type="text/html"
               width="788.54"
             />
@@ -20,7 +20,7 @@
         </div>
         <div class="bx--col-lg-6 bx--col-md-4">
           <p
-            v-for="descriptionParagraph in description"
+            v-for="descriptionParagraph in recommendation.description"
             :key="descriptionParagraph"
             class="copy__paragraph"
             v-text="descriptionParagraph"
@@ -46,13 +46,40 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
+import movies from '~/content/photon/movies.json'
+import quantumBinaryNumbers from '~/content/photon/quantum-binary-numbers.json'
+
+interface Recommendation {
+  description: String[];
+  title: String;
+  trailer: String;
+}
 
 @Component
 export default class PhotonRecommendationSection extends Vue {
-  @Prop({ type: Array, required: true }) description!: String[];
-  @Prop({ type: String, required: true }) title!: String;
-  @Prop({ type: String, required: true }) trailer!: String;
-  @Prop({ type: Function, required: true }) updateRecommendation!: Function;
+  recommendation: Recommendation = {
+    description: [''],
+    title: '',
+    trailer: ''
+  };
+
+  mounted () {
+    this.updateRecommendation()
+  }
+
+  updateRecommendation (): void {
+    const randomQuantumBinaryNumber =
+      quantumBinaryNumbers[
+        Math.floor(Math.random() * quantumBinaryNumbers.length)
+      ]
+    const randomQuantumInteger = parseInt(randomQuantumBinaryNumber, 2)
+
+    if (typeof movies[randomQuantumInteger] === 'undefined') {
+      return this.updateRecommendation()
+    }
+
+    this.recommendation = movies[randomQuantumInteger]
+  }
 }
 </script>
 

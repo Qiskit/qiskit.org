@@ -3,10 +3,6 @@
     <header>Header</header>
     <PhotonRecommendationSection
       class="photon__section photon__section_light"
-      :description="recommendation.description"
-      :title="recommendation.title"
-      :trailer="recommendation.trailer"
-      :update-recommendation="updateRecommendation"
     />
     <section id="get-movie" class="photon__section photon__section_dark">
       <div class="photon__container">
@@ -123,14 +119,6 @@
 <script lang="ts">
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
-import movies from '~/content/photon/movies.json'
-import quantumBinaryNumbers from '~/content/photon/quantum-binary-numbers.json'
-
-interface Recommendation {
-  description: String[];
-  title: String;
-  trailer: String;
-}
 
 @Component({
   head () {
@@ -141,27 +129,6 @@ interface Recommendation {
 })
 export default class PhotonPage extends QiskitPage {
   routeName = 'photon';
-
-  recommendation: Recommendation = {
-    description: [''],
-    title: '',
-    trailer: ''
-  };
-
-  mounted () {
-    this.updateRecommendation()
-  }
-
-  updateRecommendation (): void {
-    const randomQuantumBinaryNumber = quantumBinaryNumbers[Math.floor(Math.random() * quantumBinaryNumbers.length)]
-    const randomQuantumInteger = parseInt(randomQuantumBinaryNumber, 2)
-
-    if (typeof movies[randomQuantumInteger] === 'undefined') {
-      return this.updateRecommendation()
-    }
-
-    this.recommendation = movies[randomQuantumInteger]
-  }
 }
 </script>
 
