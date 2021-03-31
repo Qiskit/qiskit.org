@@ -61,7 +61,7 @@ export default class PrerequisiteMaterialSection extends Vue {
         'https://platypus.qiskit.org/course/prerequisites/introduction-to-python-and-jupyter-notebooks'
     },
     {
-      title: 'What is quantum?',
+      title: 'What is Quantum?',
       description:
         '‘Quantum physics’ is a term widely used but much less understood. It is a mathematical model first used to describe the...',
       progress: 0,
