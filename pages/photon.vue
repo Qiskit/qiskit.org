@@ -3,6 +3,9 @@
     <header>Header</header>
     <PhotonRecommendationSection
       class="photon__section photon__section_light"
+      :description="['Lorem ipsum.', 'Dolor sit amet.']"
+      title="Consectetur adipiscing elit"
+      trailer="H0p2LFGlWTA"
     />
     <section id="get-movie" class="photon__section photon__section_dark">
       <div class="photon__container">
