@@ -1,5 +1,5 @@
 <template>
-  <section id="get-movie">
+  <section>
     <div class="photon__container">
       <h2 class="copy__title">
         Lorem ipsum

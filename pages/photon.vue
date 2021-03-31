@@ -3,8 +3,12 @@
     <header>Header</header>
     <PhotonRecommendationSection
       class="photon__section photon__section_light"
+      :directions-section-id="directionsSectionId"
     />
-    <PhotonDirectionsSection class="photon__section photon__section_dark" />
+    <PhotonDirectionsSection
+      :id="directionsSectionId"
+      class="photon__section photon__section_dark"
+    />
     <section class="photon__section">
       <div class="photon__container">
         <div class="bx--row">
@@ -100,6 +104,8 @@ import QiskitPage from '~/components/logic/QiskitPage.vue'
 })
 export default class PhotonPage extends QiskitPage {
   routeName = 'photon';
+
+  directionsSectionId = 'directions'
 }
 </script>
 
