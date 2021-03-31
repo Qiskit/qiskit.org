@@ -63,16 +63,20 @@ interface Recommendation {
 }
 
 const emptyRecommendation: Recommendation = {
-  description: [''],
+  description: [],
   title: '',
   trailer: ''
 }
 
 @Component
 export default class PhotonRecommendationSection extends Vue {
-  recommendation: Recommendation = emptyRecommendation;
+  quantumBinaryNumbersIndex = 0
+  recommendation: Recommendation = emptyRecommendation
 
   mounted () {
+    this.quantumBinaryNumbersIndex = Math.floor(
+      Math.random() * quantumBinaryNumbers.length
+    )
     this.updateRecommendation()
   }
 
@@ -80,17 +84,13 @@ export default class PhotonRecommendationSection extends Vue {
     this.recommendation = emptyRecommendation
 
     setTimeout(() => {
-      const randomQuantumBinaryNumber =
+      const quantumBinaryNumber =
         quantumBinaryNumbers[
-          Math.floor(Math.random() * quantumBinaryNumbers.length)
+          this.quantumBinaryNumbersIndex % quantumBinaryNumbers.length
         ]
-      const randomQuantumInteger = parseInt(randomQuantumBinaryNumber, 2)
-
-      if (typeof movies[randomQuantumInteger] === 'undefined') {
-        return this.updateRecommendation()
-      }
-
-      this.recommendation = movies[randomQuantumInteger]
+      const quantumInteger = parseInt(quantumBinaryNumber, 2)
+      this.recommendation = movies[quantumInteger % movies.length]
+      this.quantumBinaryNumbersIndex++
     }, 500)
   }
 
