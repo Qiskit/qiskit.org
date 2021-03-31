@@ -440,7 +440,7 @@ const INVESTIGATING_Q_HW_USING_Q_CIRCUITS : MegaDropdownMenuGroup = {
     },
     {
       label: 'Measuring Quantum Volume',
-      url: 'https://qiskit.org/textbook/ch-quantum-hardware/measuring-quantum-volume.html',
+      url: 'https://platypus.qiskit.org/course/quantum-hardware/measuring-quantum-volume',
       segment: {
         action: `${actionPrefix} > ${sectionCircuits} > measuring-quantum-volume`
       }
