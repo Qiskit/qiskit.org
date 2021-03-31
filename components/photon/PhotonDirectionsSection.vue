@@ -2,20 +2,15 @@
   <section>
     <div class="photon__container">
       <h2 class="copy__title">
-        Get it at Photon
+        Get it at Blockbuster
       </h2>
       <div class="bx--row">
         <div class="bx--col-lg-6 bx--col-md-4 photon__section-mobile-spacing">
           <p class="copy__paragraph">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fermentum
-            ut aliquet aliquam quis. Pellentesque pulvinar consectetur cras
-            proin nulla. Sollicitudin ut felis, erat in lacus eleifend non
-            faucibus enim. Vestibulum libero elementum amet, faucibus lorem
-            convallis pellentesque diam. Lorem ipsum dolor sit amet, consectetur
-            adipiscing elit. Fermentum ut aliquet aliquam quis. Pellentesque
-            pulvinar consectetur cras proin nulla. Sollicitudin ut felis, erat
-            in lacus eleifend non faucibus enim. Vestibulum libero elementum
-            amet, faucibus lorem convallis pellentesque diam.
+            You're only a short drive away from watching a movie, grabbing some
+            candy, popcorn, and enjoying a relaxing night with your perfectly
+            selected movie. If you need directions, click below for step-by-step
+            instructions for how to get to the Last Blockbuster in Bend, Oregon.
           </p>
           <cv-loading v-if="userLocationLoading" />
           <AppCta
@@ -63,7 +58,7 @@ export default class PhotonDirectionsSection extends Vue {
 
   get origin () {
     if (this.userLocationLoaded) {
-      return origin = encodeURIComponent(`${this.userLatitude},${this.userLongitude}`)
+      return encodeURIComponent(`${this.userLatitude},${this.userLongitude}`)
     }
     return encodeURIComponent('My location')
   }
