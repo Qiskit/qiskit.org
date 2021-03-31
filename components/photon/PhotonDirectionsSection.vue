@@ -30,7 +30,7 @@
             marginheight="0"
             marginwidth="0"
             scrolling="no"
-            src="https://maps.google.com/maps?q=Blockbuster,%20211%20NE%20Revere%20Ave,%20Bend,%20OR%2097701,%20United%20States&t=&z=13&ie=UTF8&iwloc=&output=embed"
+            :src="mapSrc"
           />
         </div>
       </div>
@@ -43,7 +43,14 @@ import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 
 @Component
-export default class PhotonDirectionsSection extends Vue {}
+export default class PhotonDirectionsSection extends Vue {
+  get mapSrc () {
+    const key = 'AIzaSyCj9UtZpf6p5PVrvdq-iAs-np4lIC74x3A'
+    const destination = encodeURIComponent('Blockbuster Bend Oregon')
+    const origin = encodeURIComponent('My location')
+    return `https://www.google.com/maps/embed/v1/directions?key=${key}&origin=${origin}&destination=${destination}`
+  }
+}
 </script>
 
 <style lang="scss">
