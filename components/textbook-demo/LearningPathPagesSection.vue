@@ -80,28 +80,28 @@ export default class LearningPathPagesSection extends Vue {
       label: 'The Atoms of Computation',
       progress: 1,
       segment: { action: `${this.segmentActionBase} the-atoms-of-computation` },
-      url: 'https://project-platypus-default.apis-dev-5dd5718798d097eccc65fac4e78a33ce-0000.us-south.containers.appdomain.cloud/course/learning-states-and-qubits/the-atoms-of-computation'
+      url: 'https://platypus.qiskit.org/course/learning-states-and-qubits/the-atoms-of-computation'
     },
     {
       image: 'representing-qubits-states-page-preview.png',
       label: 'Representing Qubit States',
       progress: 0.6,
       segment: { action: `${this.segmentActionBase} representing-qubits-states` },
-      url: 'https://project-platypus-default.apis-dev-5dd5718798d097eccc65fac4e78a33ce-0000.us-south.containers.appdomain.cloud/course/learning-states-and-qubits/representing-qubit-states'
+      url: 'https://platypus.qiskit.org/course/learning-states-and-qubits/representing-qubit-states'
     },
     {
       image: 'single-qubits-gates-page-preview.png',
       label: 'Single Qubits Gates',
       progress: 0,
       segment: { action: `${this.segmentActionBase} single-qubits-gates` },
-      url: 'https://project-platypus-default.apis-dev-5dd5718798d097eccc65fac4e78a33ce-0000.us-south.containers.appdomain.cloud/course/learning-states-and-qubits/single-qubit-gates'
+      url: 'https://platypus.qiskit.org/course/learning-states-and-qubits/single-qubit-gates'
     },
     {
       image: 'the-case-for-quantum-page-preview.png',
       label: 'The Case for Quantum Computers',
       progress: 0,
       segment: { action: `${this.segmentActionBase} the-case-for-quantum` },
-      url: 'https://project-platypus-default.apis-dev-5dd5718798d097eccc65fac4e78a33ce-0000.us-south.containers.appdomain.cloud/course/learning-states-and-qubits/the-case-for-quantum-computers'
+      url: 'https://platypus.qiskit.org/course/learning-states-and-qubits/the-case-for-quantum-computers'
     }
   ]
 

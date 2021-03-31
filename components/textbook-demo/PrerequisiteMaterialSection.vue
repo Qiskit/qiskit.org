@@ -47,7 +47,7 @@ export default class PrerequisiteMaterialSection extends Vue {
         action: `${this.segmentActionBase} setting-up-your-environment`
       },
       url:
-        'https://project-platypus-default.apis-dev-5dd5718798d097eccc65fac4e78a33ce-0000.us-south.containers.appdomain.cloud/course/prerequisites/environment-setup-guide-to-work-with-qiskit-textbook'
+        'https://platypus.qiskit.org/course/prerequisites/environment-setup-guide-to-work-with-qiskit-textbook'
     },
     {
       title: 'Python and Jupyter Notebooks',
@@ -58,7 +58,7 @@ export default class PrerequisiteMaterialSection extends Vue {
         action: `${this.segmentActionBase} python-and-jupyter-notebooks`
       },
       url:
-        'https://project-platypus-default.apis-dev-5dd5718798d097eccc65fac4e78a33ce-0000.us-south.containers.appdomain.cloud/course/prerequisites/introduction-to-python-and-jupyter-notebooks'
+        'https://platypus.qiskit.org/course/prerequisites/introduction-to-python-and-jupyter-notebooks'
     },
     {
       title: 'What is quantum?',
@@ -67,7 +67,7 @@ export default class PrerequisiteMaterialSection extends Vue {
       progress: 0,
       segment: { action: `${this.segmentActionBase} what-is-quantum` },
       url:
-        'https://project-platypus-default.apis-dev-5dd5718798d097eccc65fac4e78a33ce-0000.us-south.containers.appdomain.cloud/course/getting-started/what-is-quantum'
+        'https://platypus.qiskit.org/course/getting-started/what-is-quantum'
     }
   ];
 }
