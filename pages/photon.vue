@@ -124,6 +124,7 @@
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import movies from '~/content/photon/movies.json'
+import quantumBinaryNumbers from '~/content/photon/quantum-binary-numbers.json'
 
 interface Recommendation {
   description: String[];
@@ -151,9 +152,15 @@ export default class PhotonPage extends QiskitPage {
     this.updateRecommendation()
   }
 
-  updateRecommendation () {
-    // TODO: Get element via quantum calculation
-    this.recommendation = movies[Math.floor(Math.random() * movies.length)]
+  updateRecommendation (): void {
+    const randomQuantumBinaryNumber = quantumBinaryNumbers[Math.floor(Math.random() * quantumBinaryNumbers.length)]
+    const randomQuantumInteger = parseInt(randomQuantumBinaryNumber, 2)
+
+    if (typeof movies[randomQuantumInteger] === 'undefined') {
+      return this.updateRecommendation()
+    }
+
+    this.recommendation = movies[randomQuantumInteger]
   }
 }
 </script>
