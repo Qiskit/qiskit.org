@@ -98,7 +98,7 @@ export default class LearningPathPagesSection extends Vue {
     },
     {
       image: 'the-case-for-quantum-page-preview.png',
-      label: 'The Case for Quantum',
+      label: 'The Case for Quantum Computers',
       progress: 0,
       segment: { action: `${this.segmentActionBase} the-case-for-quantum` },
       url: 'https://project-platypus-default.apis-dev-5dd5718798d097eccc65fac4e78a33ce-0000.us-south.containers.appdomain.cloud/course/learning-states-and-qubits/the-case-for-quantum-computers'
