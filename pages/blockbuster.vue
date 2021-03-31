@@ -1,21 +1,21 @@
 <template>
   <div>
     <header>Header</header>
-    <PhotonRecommendationSection
-      class="photon__section photon__section_light"
+    <BlockbusterRecommendationSection
+      class="blockbuster__section blockbuster__section_light"
       :directions-section-id="directionsSectionId"
       :get-user-location="getUserLocation"
     />
-    <PhotonDirectionsSection
+    <BlockbusterDirectionsSection
       :id="directionsSectionId"
-      class="photon__section photon__section_dark"
+      class="blockbuster__section blockbuster__section_dark"
       :user-latitude="userLatitude"
       :user-longitude="userLongitude"
       :user-location-loaded="userLocationLoaded"
       :user-location-loading="userLocationLoading"
     />
-    <section class="photon__section">
-      <div class="photon__container">
+    <section class="blockbuster__section">
+      <div class="blockbuster__container">
         <div class="bx--row">
           <div class="bx--col-lg-6">
             <h2 class="copy__title">
@@ -103,12 +103,12 @@ import QiskitPage from '~/components/logic/QiskitPage.vue'
 @Component({
   head () {
     return {
-      title: 'Photon'
+      title: 'Blockbuster'
     }
   }
 })
-export default class PhotonPage extends QiskitPage {
-  routeName = 'photon'
+export default class BlockbusterPage extends QiskitPage {
+  routeName = 'blockbuster'
 
   directionsSectionId = 'directions'
   userLatitude = 0
@@ -140,7 +140,7 @@ export default class PhotonPage extends QiskitPage {
 <style lang="scss">
 @import "~/assets/scss/blocks/copy.scss";
 
-.photon {
+.blockbuster {
   &__container {
     @include contained();
   }

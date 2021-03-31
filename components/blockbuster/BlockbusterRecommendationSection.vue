@@ -2,18 +2,18 @@
   <section>
     <div
       v-if="recommendationIsLoading"
-      class="photon__container photon-recommendation-section__loading-container"
+      class="blockbuster__container blockbuster-recommendation-section__loading-container"
     >
       <cv-loading />
       <div>Asking the quantum computer...</div>
     </div>
-    <div v-else class="photon__container">
+    <div v-else class="blockbuster__container">
       <h2 class="copy__title" v-text="recommendation.title" />
       <div class="bx--row">
-        <div class="bx--col-lg-6 bx--col-md-4 photon__section-mobile-spacing">
-          <div class="photon-recommendation-section__video-wrapper">
+        <div class="bx--col-lg-6 bx--col-md-4 blockbuster__section-mobile-spacing">
+          <div class="blockbuster-recommendation-section__video-wrapper">
             <iframe
-              class="photon-recommendation-section__video"
+              class="blockbuster-recommendation-section__video"
               frameborder="0"
               height="443"
               marginheight="0"
@@ -33,13 +33,13 @@
             v-text="descriptionParagraph"
           />
           <AppCta
-            class="photon__cta photon__cta_dark"
+            class="blockbuster__cta blockbuster__cta_dark"
             label="Get movie"
             :url="`#${directionsSectionId}`"
             @click="getUserLocation"
           />
           <a
-            class="photon-recommendation-section__request-recommendation-link"
+            class="blockbuster-recommendation-section__request-recommendation-link"
             href="#"
             @click.prevent="updateRecommendation"
           >
@@ -54,8 +54,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-import movies from '~/content/photon/movies.json'
-import quantumBinaryNumbers from '~/content/photon/quantum-binary-numbers.json'
+import movies from '~/content/blockbuster/movies.json'
+import quantumBinaryNumbers from '~/content/blockbuster/quantum-binary-numbers.json'
 
 interface Recommendation {
   description: String[];
@@ -70,7 +70,7 @@ const emptyRecommendation: Recommendation = {
 }
 
 @Component
-export default class PhotonRecommendationSection extends Vue {
+export default class BlockbusterRecommendationSection extends Vue {
   @Prop({ type: String, required: true }) directionsSectionId!: String
   @Prop({ type: Function, required: true }) getUserLocation!: Function
 
@@ -107,7 +107,7 @@ export default class PhotonRecommendationSection extends Vue {
 <style lang="scss" scoped>
 @import "~/assets/scss/blocks/copy.scss";
 
-.photon-recommendation-section {
+.blockbuster-recommendation-section {
   &__loading-container {
     align-items: center;
     color: $text-03;
