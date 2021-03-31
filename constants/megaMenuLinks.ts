@@ -2,7 +2,7 @@ import { NavLink } from '~/constants/menuLinks'
 
 const actionPrefix = 'textbook-demo > header > mega-dropdown'
 const sectionPrerequisites = 'prerequisites'
-const sectionQuantumStatesAndQubits = 'quantum-states-and-qubits'
+const sectionIntroToQuantumComputing = 'introduction-to-quantum-computing'
 const sectionMultipleQubitsAndEntanglement = 'multiple-qubits-and-entanglement'
 const sectionGamesAndDemos = 'games-and-demos'
 const sectionProtocolsAndAlgorithms = 'protocols-and-algorithms'
@@ -42,48 +42,48 @@ const PREREQUISITES: MegaDropdownMenuGroup = {
   ]
 }
 
-const QUANTUM_STATES_AND_QUBITS: MegaDropdownMenuGroup = {
+const INTRO_TO_QUANTUM_COMPUTING: MegaDropdownMenuGroup = {
   title: {
-    label: 'Quantum States and Qubits',
-    url: 'https://qiskit.org/textbook/ch-states/introduction.html',
+    label: 'Introduction to Quantum Computing',
+    url: 'https://platypus.qiskit.org/course/learning-states-and-qubits/introduction',
     segment: {
-      action: `${actionPrefix} > ${sectionQuantumStatesAndQubits}`
+      action: `${actionPrefix} > ${sectionIntroToQuantumComputing}`
     }
   },
   content: [
     {
       label: 'Introduction',
-      url: 'https://qiskit.org/textbook/ch-states/introduction.html',
+      url: 'https://platypus.qiskit.org/course/learning-states-and-qubits/introduction',
       segment: {
-        action: `${actionPrefix} > ${sectionQuantumStatesAndQubits} > introduction`
+        action: `${actionPrefix} > ${sectionIntroToQuantumComputing} > introduction`
       }
     },
     {
       label: 'The Atoms of Computation',
-      url: 'https://qiskit.org/textbook/ch-prerequisites/the-atoms-of-computation.html',
+      url: 'https://platypus.qiskit.org/course/learning-states-and-qubits/the-atoms-of-computation',
       segment: {
-        action: `${actionPrefix} > ${sectionQuantumStatesAndQubits} > the-atoms-of-computation`
+        action: `${actionPrefix} > ${sectionIntroToQuantumComputing} > the-atoms-of-computation`
       }
     },
     {
       label: 'Representing Qubit States',
-      url: 'https://qiskit.org/textbook/ch-prerequisites/representing-qubit-states.html',
+      url: 'https://platypus.qiskit.org/course/learning-states-and-qubits/representing-qubit-states',
       segment: {
-        action: `${actionPrefix} > ${sectionQuantumStatesAndQubits} > representing-qubit-states`
+        action: `${actionPrefix} > ${sectionIntroToQuantumComputing} > representing-qubit-states`
       }
     },
     {
       label: 'Single Qubit Gates',
-      url: 'https://qiskit.org/textbook/ch-prerequisites/single-qubit-gates.html',
+      url: 'https://platypus.qiskit.org/course/learning-states-and-qubits/single-qubit-gates',
       segment: {
-        action: `${actionPrefix} > ${sectionQuantumStatesAndQubits} > single-qubit-gates`
+        action: `${actionPrefix} > ${sectionIntroToQuantumComputing} > single-qubit-gates`
       }
     },
     {
-      label: 'The Case for Quantum',
-      url: 'https://qiskit.org/textbook/ch-prerequisites/the-case-for-quantum.html',
+      label: 'The Case for Quantum Computers',
+      url: 'https://platypus.qiskit.org/course/learning-states-and-qubits/the-case-for-quantum-computers',
       segment: {
-        action: `${actionPrefix} > ${sectionQuantumStatesAndQubits} > the-case-for-quantum`
+        action: `${actionPrefix} > ${sectionIntroToQuantumComputing} > the-case-for-quantum`
       }
     }
   ]
@@ -107,7 +107,7 @@ const MULTIPLE_QUBITS_AND_ENTANGLEMENT: MegaDropdownMenuGroup = {
     },
     {
       label: 'Multiple Qubits and Entangled States',
-      url: 'https://qiskit.org/textbook/ch-gates/multiple-quibits-and-entangled-states.html',
+      url: 'https://qiskit.org/textbook/ch-gates/multiple-qubits-entangled-states.html',
       segment: {
         action: `${actionPrefix} > ${sectionMultipleQubitsAndEntanglement} > states`
       }
@@ -440,7 +440,7 @@ const INVESTIGATING_Q_HW_USING_Q_CIRCUITS : MegaDropdownMenuGroup = {
     },
     {
       label: 'Measuring Quantum Volume',
-      url: 'https://qiskit.org/textbook/ch-quantum-hardware/measuring-quantum-volume.html',
+      url: 'https://platypus.qiskit.org/course/quantum-hardware/measuring-quantum-volume',
       segment: {
         action: `${actionPrefix} > ${sectionCircuits} > measuring-quantum-volume`
       }
@@ -512,7 +512,7 @@ const QUANTUM_COMPUTING_LABS : MegaDropdownMenuGroup = {
 type MegaDropdownMenuColumn = MegaDropdownMenuGroup[]
 const COLUMN_1: MegaDropdownMenuColumn = [
   PREREQUISITES,
-  QUANTUM_STATES_AND_QUBITS,
+  INTRO_TO_QUANTUM_COMPUTING,
   MULTIPLE_QUBITS_AND_ENTANGLEMENT,
   GAMES_AND_DEMOS
 ]
