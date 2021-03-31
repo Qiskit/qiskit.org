@@ -45,7 +45,7 @@ const PREREQUISITES: MegaDropdownMenuGroup = {
 const QUANTUM_STATES_AND_QUBITS: MegaDropdownMenuGroup = {
   title: {
     label: 'Quantum States and Qubits',
-    url: 'https://qiskit.org/textbook/ch-states/introduction.html',
+    url: 'https://platypus.qiskit.org/course/learning-states-and-qubits/introduction',
     segment: {
       action: `${actionPrefix} > ${sectionQuantumStatesAndQubits}`
     }
@@ -53,35 +53,35 @@ const QUANTUM_STATES_AND_QUBITS: MegaDropdownMenuGroup = {
   content: [
     {
       label: 'Introduction',
-      url: 'https://qiskit.org/textbook/ch-states/introduction.html',
+      url: 'https://platypus.qiskit.org/course/learning-states-and-qubits/introduction',
       segment: {
         action: `${actionPrefix} > ${sectionQuantumStatesAndQubits} > introduction`
       }
     },
     {
       label: 'The Atoms of Computation',
-      url: 'https://qiskit.org/textbook/ch-prerequisites/the-atoms-of-computation.html',
+      url: 'https://platypus.qiskit.org/course/learning-states-and-qubits/the-atoms-of-computation',
       segment: {
         action: `${actionPrefix} > ${sectionQuantumStatesAndQubits} > the-atoms-of-computation`
       }
     },
     {
       label: 'Representing Qubit States',
-      url: 'https://qiskit.org/textbook/ch-prerequisites/representing-qubit-states.html',
+      url: 'https://platypus.qiskit.org/course/learning-states-and-qubits/representing-qubit-states',
       segment: {
         action: `${actionPrefix} > ${sectionQuantumStatesAndQubits} > representing-qubit-states`
       }
     },
     {
       label: 'Single Qubit Gates',
-      url: 'https://qiskit.org/textbook/ch-prerequisites/single-qubit-gates.html',
+      url: 'https://platypus.qiskit.org/course/learning-states-and-qubits/single-qubit-gates',
       segment: {
         action: `${actionPrefix} > ${sectionQuantumStatesAndQubits} > single-qubit-gates`
       }
     },
     {
       label: 'The Case for Quantum',
-      url: 'https://qiskit.org/textbook/ch-prerequisites/the-case-for-quantum.html',
+      url: 'https://platypus.qiskit.org/course/learning-states-and-qubits/the-case-for-quantum-computers',
       segment: {
         action: `${actionPrefix} > ${sectionQuantumStatesAndQubits} > the-case-for-quantum`
       }
@@ -107,7 +107,7 @@ const MULTIPLE_QUBITS_AND_ENTANGLEMENT: MegaDropdownMenuGroup = {
     },
     {
       label: 'Multiple Qubits and Entangled States',
-      url: 'https://qiskit.org/textbook/ch-gates/multiple-quibits-and-entangled-states.html',
+      url: 'https://qiskit.org/textbook/ch-gates/multiple-qubits-entangled-states.html',
       segment: {
         action: `${actionPrefix} > ${sectionMultipleQubitsAndEntanglement} > states`
       }
