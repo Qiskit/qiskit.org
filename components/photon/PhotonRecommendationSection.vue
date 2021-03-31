@@ -7,7 +7,7 @@
           <img
             class="photon__img-responsive"
             src="http://via.placeholder.com/480x270"
-          />
+          >
         </div>
         <div class="bx--col-lg-6 bx--col-md-4">
           <p
@@ -34,8 +34,8 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import { Component, Prop } from "vue-property-decorator";
+import Vue from 'vue'
+import { Component, Prop } from 'vue-property-decorator'
 
 @Component
 export default class PhotonRecommendationSection extends Vue {

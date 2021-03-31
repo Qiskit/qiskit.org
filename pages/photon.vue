@@ -3,9 +3,9 @@
     <header>Header</header>
     <PhotonRecommendationSection
       class="photon__section photon__section_light"
-      :description="['Lorem ipsum.', 'Dolor sit amet.']"
-      title="Consectetur adipiscing elit"
-      trailer="H0p2LFGlWTA"
+      :description="recommendation.description"
+      :title="recommendation.title"
+      :trailer="recommendation.trailer"
     />
     <section id="get-movie" class="photon__section photon__section_dark">
       <div class="photon__container">
@@ -123,6 +123,12 @@
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 
+interface Recommendation {
+  description: String[];
+  title: String;
+  trailer: String;
+}
+
 @Component({
   head () {
     return {
@@ -132,6 +138,15 @@ import QiskitPage from '~/components/logic/QiskitPage.vue'
 })
 export default class PhotonPage extends QiskitPage {
   routeName = 'photon';
+
+  recommendation: Recommendation = {
+    description: [
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fermentum ut aliquet aliquam quis.',
+      'Fermentum ut aliquet aliquam quis.'
+    ],
+    title: 'Consectetur adipiscing elit',
+    trailer: 'H0p2LFGlWTA'
+  };
 }
 </script>
 
