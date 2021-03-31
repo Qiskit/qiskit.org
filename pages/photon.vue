@@ -132,10 +132,6 @@ export default class PhotonPage extends QiskitPage {
     }
   }
 
-  &__img-responsive {
-    max-width: 100%;
-  }
-
   &__section {
     padding-bottom: $spacing-09;
     padding-top: $spacing-09;
