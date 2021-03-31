@@ -1,6 +1,12 @@
 <template>
   <section>
-    <div class="photon__container">
+    <div
+      v-if="recommendationIsLoading"
+      class="photon__container photon-recommendation-section__loading-container"
+    >
+      <cv-loading />
+    </div>
+    <div v-else class="photon__container">
       <h2 class="copy__title" v-text="recommendation.title" />
       <div class="bx--row">
         <div class="bx--col-lg-6 bx--col-md-4 photon__section-mobile-spacing">
@@ -45,7 +51,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
+import { Component } from 'vue-property-decorator'
 import movies from '~/content/photon/movies.json'
 import quantumBinaryNumbers from '~/content/photon/quantum-binary-numbers.json'
 
@@ -55,19 +61,23 @@ interface Recommendation {
   trailer: String;
 }
 
+const emptyRecommendation: Recommendation = {
+  description: [''],
+  title: '',
+  trailer: ''
+}
+
 @Component
 export default class PhotonRecommendationSection extends Vue {
-  recommendation: Recommendation = {
-    description: [''],
-    title: '',
-    trailer: ''
-  };
+  recommendation: Recommendation = emptyRecommendation;
 
   mounted () {
     this.updateRecommendation()
   }
 
   updateRecommendation (): void {
+    this.recommendation = emptyRecommendation
+
     const randomQuantumBinaryNumber =
       quantumBinaryNumbers[
         Math.floor(Math.random() * quantumBinaryNumbers.length)
@@ -80,6 +90,10 @@ export default class PhotonRecommendationSection extends Vue {
 
     this.recommendation = movies[randomQuantumInteger]
   }
+
+  get recommendationIsLoading () {
+    return !this.recommendation.title
+  }
 }
 </script>
 
@@ -87,6 +101,12 @@ export default class PhotonRecommendationSection extends Vue {
 @import "~/assets/scss/blocks/copy.scss";
 
 .photon-recommendation-section {
+  &__loading-container {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
+
   &__request-recommendation-link {
     color: $carbon--blue-70 !important;
     display: inline-block;
