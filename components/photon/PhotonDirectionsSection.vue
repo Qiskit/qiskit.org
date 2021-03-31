@@ -45,7 +45,7 @@ import { Component } from 'vue-property-decorator'
 @Component
 export default class PhotonDirectionsSection extends Vue {
   get mapSrc () {
-    const key = 'AIzaSyCj9UtZpf6p5PVrvdq-iAs-np4lIC74x3A'
+    const key = 'AIzaSyCECZXkg_kMH3Odkh9mWAvKaQ7gexzP3UU'
     const destination = encodeURIComponent('Blockbuster Bend Oregon')
     const origin = encodeURIComponent('My location')
     return `https://www.google.com/maps/embed/v1/directions?key=${key}&origin=${origin}&destination=${destination}`
