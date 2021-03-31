@@ -122,6 +122,7 @@
 <script lang="ts">
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
+import movies from '~/content/photon/movies.json'
 
 interface Recommendation {
   description: String[];
@@ -140,13 +141,19 @@ export default class PhotonPage extends QiskitPage {
   routeName = 'photon';
 
   recommendation: Recommendation = {
-    description: [
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fermentum ut aliquet aliquam quis.',
-      'Fermentum ut aliquet aliquam quis.'
-    ],
-    title: 'Consectetur adipiscing elit',
-    trailer: 'H0p2LFGlWTA'
+    description: [''],
+    title: '',
+    trailer: ''
   };
+
+  mounted () {
+    this.updateRecommendation()
+  }
+
+  updateRecommendation () {
+    // TODO: Get element via quantum calculation
+    this.recommendation = movies[Math.floor(Math.random() * movies.length)]
+  }
 }
 </script>
 
