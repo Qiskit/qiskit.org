@@ -17,10 +17,12 @@
             in lacus eleifend non faucibus enim. Vestibulum libero elementum
             amet, faucibus lorem convallis pellentesque diam.
           </p>
+          <cv-loading v-if="userLocationLoading" />
           <AppCta
+            v-else
             class="photon__cta photon__cta_light"
-            label="Print directions to Photon"
-            url="/"
+            label="Get directions to Blockbuster"
+            :url="directionsUrl"
           />
         </div>
         <div class="bx--col-lg-6 bx--col-md-4">
@@ -28,7 +30,7 @@
             v-if="userLocationLoading"
             class="photon-directions-section__loading-container"
           >
-            <cv-loading v-if="userLocationLoading" />
+            <cv-loading />
             <div>Calculating directions...</div>
           </div>
           <iframe
@@ -57,16 +59,22 @@ export default class PhotonDirectionsSection extends Vue {
   @Prop({ type: Boolean, required: true }) userLocationLoaded!: boolean
   @Prop({ type: Boolean, required: true }) userLocationLoading!: boolean
 
+  destination = encodeURIComponent('Blockbuster Bend Oregon')
+
+  get origin () {
+    if (this.userLocationLoaded) {
+      return origin = encodeURIComponent(`${this.userLatitude},${this.userLongitude}`)
+    }
+    return encodeURIComponent('My location')
+  }
+
   get mapSrc () {
     const key = 'AIzaSyCECZXkg_kMH3Odkh9mWAvKaQ7gexzP3UU'
-    const destination = encodeURIComponent('Blockbuster Bend Oregon')
-    let origin = encodeURIComponent('My location')
+    return `https://www.google.com/maps/embed/v1/directions?key=${key}&origin=${this.origin}&destination=${this.destination}`
+  }
 
-    if (this.userLocationLoaded) {
-      origin = encodeURIComponent(`${this.userLatitude},${this.userLongitude}`)
-    }
-
-    return `https://www.google.com/maps/embed/v1/directions?key=${key}&origin=${origin}&destination=${destination}`
+  get directionsUrl () {
+    return `https://www.google.com/maps/dir/${this.origin}/${this.destination}`
   }
 }
 </script>
