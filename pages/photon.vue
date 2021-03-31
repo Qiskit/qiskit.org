@@ -4,10 +4,15 @@
     <PhotonRecommendationSection
       class="photon__section photon__section_light"
       :directions-section-id="directionsSectionId"
+      :get-user-location="getUserLocation"
     />
     <PhotonDirectionsSection
       :id="directionsSectionId"
       class="photon__section photon__section_dark"
+      :user-latitude="userLatitude"
+      :user-longitude="userLongitude"
+      :user-location-loaded="userLocationLoaded"
+      :user-location-loading="userLocationLoading"
     />
     <section class="photon__section">
       <div class="photon__container">
@@ -103,9 +108,32 @@ import QiskitPage from '~/components/logic/QiskitPage.vue'
   }
 })
 export default class PhotonPage extends QiskitPage {
-  routeName = 'photon';
+  routeName = 'photon'
 
   directionsSectionId = 'directions'
+  userLatitude = 0
+  userLongitude = 0
+  userLocationLoaded = false
+  userLocationLoading = false
+
+  getUserLocation () {
+    this.userLocationLoaded = false
+    this.userLocationLoading = true
+    navigator.geolocation.getCurrentPosition(this.setUserLocation, this.getCurrentPositionError)
+  }
+
+  setUserLocation (position: { coords: GeolocationCoordinates }) {
+    const { latitude, longitude } = position.coords
+    this.userLatitude = latitude
+    this.userLongitude = longitude
+    this.userLocationLoaded = true
+    this.userLocationLoading = false
+  }
+
+  getCurrentPositionError () {
+    this.userLocationLoaded = false
+    this.userLocationLoading = false
+  }
 }
 </script>
 

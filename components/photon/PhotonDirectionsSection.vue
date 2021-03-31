@@ -24,7 +24,15 @@
           />
         </div>
         <div class="bx--col-lg-6 bx--col-md-4">
+          <div
+            v-if="userLocationLoading"
+            class="photon-directions-section__loading-container"
+          >
+            <cv-loading v-if="userLocationLoading" />
+            <div>Calculating directions...</div>
+          </div>
           <iframe
+            v-else
             class="photon-directions-section__map"
             frameborder="0"
             marginheight="0"
@@ -40,14 +48,24 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
+import { Component, Prop } from 'vue-property-decorator'
 
 @Component
 export default class PhotonDirectionsSection extends Vue {
+  @Prop({ type: Number, required: true }) userLatitude!: number
+  @Prop({ type: Number, required: true }) userLongitude!: number
+  @Prop({ type: Boolean, required: true }) userLocationLoaded!: boolean
+  @Prop({ type: Boolean, required: true }) userLocationLoading!: boolean
+
   get mapSrc () {
     const key = 'AIzaSyCECZXkg_kMH3Odkh9mWAvKaQ7gexzP3UU'
     const destination = encodeURIComponent('Blockbuster Bend Oregon')
-    const origin = encodeURIComponent('My location')
+    let origin = encodeURIComponent('My location')
+
+    if (this.userLocationLoaded) {
+      origin = encodeURIComponent(`${this.userLatitude},${this.userLongitude}`)
+    }
+
     return `https://www.google.com/maps/embed/v1/directions?key=${key}&origin=${origin}&destination=${destination}`
   }
 }
@@ -57,6 +75,14 @@ export default class PhotonDirectionsSection extends Vue {
 @import "~/assets/scss/blocks/copy.scss";
 
 .photon-directions-section {
+  &__loading-container {
+    align-items: center;
+    color: $text-01;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+  }
+
   &__map {
     height: 18rem;
     width: 100%;

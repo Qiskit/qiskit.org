@@ -36,6 +36,7 @@
             class="photon__cta photon__cta_dark"
             label="Get movie"
             :url="`#${directionsSectionId}`"
+            @click="getUserLocation"
           />
           <a
             class="photon-recommendation-section__request-recommendation-link"
@@ -71,6 +72,7 @@ const emptyRecommendation: Recommendation = {
 @Component
 export default class PhotonRecommendationSection extends Vue {
   @Prop({ type: String, required: true }) directionsSectionId!: String
+  @Prop({ type: Function, required: true }) getUserLocation!: Function
 
   quantumBinaryNumbersIndex = 0
   recommendation: Recommendation = emptyRecommendation
