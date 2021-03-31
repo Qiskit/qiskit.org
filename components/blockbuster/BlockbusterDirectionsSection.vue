@@ -1,11 +1,11 @@
 <template>
   <section>
-    <div class="photon__container">
+    <div class="blockbuster__container">
       <h2 class="copy__title">
         Get it at Blockbuster
       </h2>
       <div class="bx--row">
-        <div class="bx--col-lg-6 bx--col-md-4 photon__section-mobile-spacing">
+        <div class="bx--col-lg-6 bx--col-md-4 blockbuster__section-mobile-spacing">
           <p class="copy__paragraph">
             You're only a short drive away from watching a movie, grabbing some
             candy, popcorn, and enjoying a relaxing night with your perfectly
@@ -15,7 +15,7 @@
           <cv-loading v-if="userLocationLoading" />
           <AppCta
             v-else
-            class="photon__cta photon__cta_light"
+            class="blockbuster__cta blockbuster__cta_light"
             label="Get directions to Blockbuster"
             :url="directionsUrl"
           />
@@ -23,14 +23,14 @@
         <div class="bx--col-lg-6 bx--col-md-4">
           <div
             v-if="userLocationLoading"
-            class="photon-directions-section__loading-container"
+            class="blockbuster-directions-section__loading-container"
           >
             <cv-loading />
             <div>Calculating directions...</div>
           </div>
           <iframe
             v-else
-            class="photon-directions-section__map"
+            class="blockbuster-directions-section__map"
             frameborder="0"
             marginheight="0"
             marginwidth="0"
@@ -48,7 +48,7 @@ import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 
 @Component
-export default class PhotonDirectionsSection extends Vue {
+export default class BlockbusterDirectionsSection extends Vue {
   @Prop({ type: Number, required: true }) userLatitude!: number
   @Prop({ type: Number, required: true }) userLongitude!: number
   @Prop({ type: Boolean, required: true }) userLocationLoaded!: boolean
@@ -77,7 +77,7 @@ export default class PhotonDirectionsSection extends Vue {
 <style lang="scss">
 @import "~/assets/scss/blocks/copy.scss";
 
-.photon-directions-section {
+.blockbuster-directions-section {
   &__loading-container {
     align-items: center;
     color: $text-01;
