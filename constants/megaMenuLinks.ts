@@ -2,7 +2,7 @@ import { NavLink } from '~/constants/menuLinks'
 
 const actionPrefix = 'textbook-demo > header > mega-dropdown'
 const sectionPrerequisites = 'prerequisites'
-const sectionIntroToQuantumComputing = 'introduction-to-quantum-computing'
+const sectionQuantumStatesAndQubits = 'quantum-states-and-qubits'
 const sectionMultipleQubitsAndEntanglement = 'multiple-qubits-and-entanglement'
 const sectionGamesAndDemos = 'games-and-demos'
 const sectionProtocolsAndAlgorithms = 'protocols-and-algorithms'
@@ -42,48 +42,48 @@ const PREREQUISITES: MegaDropdownMenuGroup = {
   ]
 }
 
-const INTRO_TO_QUANTUM_COMPUTING: MegaDropdownMenuGroup = {
+const QUANTUM_STATES_AND_QUBITS: MegaDropdownMenuGroup = {
   title: {
-    label: 'Introduction to Quantum Computing',
-    url: 'https://platypus.qiskit.org/course/learning-states-and-qubits/introduction',
+    label: 'Quantum States and Qubits',
+    url: 'https://qiskit.org/textbook/ch-states/introduction.html',
     segment: {
-      action: `${actionPrefix} > ${sectionIntroToQuantumComputing}`
+      action: `${actionPrefix} > ${sectionQuantumStatesAndQubits}`
     }
   },
   content: [
     {
       label: 'Introduction',
-      url: 'https://platypus.qiskit.org/course/learning-states-and-qubits/introduction',
+      url: 'https://qiskit.org/textbook/ch-states/introduction.html',
       segment: {
-        action: `${actionPrefix} > ${sectionIntroToQuantumComputing} > introduction`
+        action: `${actionPrefix} > ${sectionQuantumStatesAndQubits} > introduction`
       }
     },
     {
       label: 'The Atoms of Computation',
-      url: 'https://platypus.qiskit.org/course/learning-states-and-qubits/the-atoms-of-computation',
+      url: 'https://qiskit.org/textbook/ch-states/atoms-computation.html',
       segment: {
-        action: `${actionPrefix} > ${sectionIntroToQuantumComputing} > the-atoms-of-computation`
+        action: `${actionPrefix} > ${sectionQuantumStatesAndQubits} > the-atoms-of-computation`
       }
     },
     {
       label: 'Representing Qubit States',
-      url: 'https://platypus.qiskit.org/course/learning-states-and-qubits/representing-qubit-states',
+      url: 'https://qiskit.org/textbook/ch-states/representing-qubit-states.html',
       segment: {
-        action: `${actionPrefix} > ${sectionIntroToQuantumComputing} > representing-qubit-states`
+        action: `${actionPrefix} > ${sectionQuantumStatesAndQubits} > representing-qubit-states`
       }
     },
     {
       label: 'Single Qubit Gates',
-      url: 'https://platypus.qiskit.org/course/learning-states-and-qubits/single-qubit-gates',
+      url: 'https://qiskit.org/textbook/ch-states/single-qubit-gates.html',
       segment: {
-        action: `${actionPrefix} > ${sectionIntroToQuantumComputing} > single-qubit-gates`
+        action: `${actionPrefix} > ${sectionQuantumStatesAndQubits} > single-qubit-gates`
       }
     },
     {
-      label: 'The Case for Quantum Computers',
-      url: 'https://platypus.qiskit.org/course/learning-states-and-qubits/the-case-for-quantum-computers',
+      label: 'The Case for Quantum',
+      url: 'https://qiskit.org/textbook/ch-states/case-for-quantum.html',
       segment: {
-        action: `${actionPrefix} > ${sectionIntroToQuantumComputing} > the-case-for-quantum`
+        action: `${actionPrefix} > ${sectionQuantumStatesAndQubits} > the-case-for-quantum`
       }
     }
   ]
@@ -512,7 +512,7 @@ const QUANTUM_COMPUTING_LABS : MegaDropdownMenuGroup = {
 type MegaDropdownMenuColumn = MegaDropdownMenuGroup[]
 const COLUMN_1: MegaDropdownMenuColumn = [
   PREREQUISITES,
-  INTRO_TO_QUANTUM_COMPUTING,
+  QUANTUM_STATES_AND_QUBITS,
   MULTIPLE_QUBITS_AND_ENTANGLEMENT,
   GAMES_AND_DEMOS
 ]
