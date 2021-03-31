@@ -5,6 +5,7 @@
       class="photon__container photon-recommendation-section__loading-container"
     >
       <cv-loading />
+      <div>Asking the quantum computer...</div>
     </div>
     <div v-else class="photon__container">
       <h2 class="copy__title" v-text="recommendation.title" />
@@ -78,17 +79,19 @@ export default class PhotonRecommendationSection extends Vue {
   updateRecommendation (): void {
     this.recommendation = emptyRecommendation
 
-    const randomQuantumBinaryNumber =
-      quantumBinaryNumbers[
-        Math.floor(Math.random() * quantumBinaryNumbers.length)
-      ]
-    const randomQuantumInteger = parseInt(randomQuantumBinaryNumber, 2)
+    setTimeout(() => {
+      const randomQuantumBinaryNumber =
+        quantumBinaryNumbers[
+          Math.floor(Math.random() * quantumBinaryNumbers.length)
+        ]
+      const randomQuantumInteger = parseInt(randomQuantumBinaryNumber, 2)
 
-    if (typeof movies[randomQuantumInteger] === 'undefined') {
-      return this.updateRecommendation()
-    }
+      if (typeof movies[randomQuantumInteger] === 'undefined') {
+        return this.updateRecommendation()
+      }
 
-    this.recommendation = movies[randomQuantumInteger]
+      this.recommendation = movies[randomQuantumInteger]
+    }, 500)
   }
 
   get recommendationIsLoading () {
@@ -103,7 +106,9 @@ export default class PhotonRecommendationSection extends Vue {
 .photon-recommendation-section {
   &__loading-container {
     align-items: center;
+    color: $text-03;
     display: flex;
+    flex-flow: column;
     justify-content: center;
   }
 
