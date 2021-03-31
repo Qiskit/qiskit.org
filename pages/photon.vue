@@ -1,46 +1,16 @@
 <template>
   <div>
     <header>Header</header>
-    <section class="photon__section photon__section_light">
-      <div class="photon__container">
-        <h2 class="copy__title">
-          Lorem ipsum
-        </h2>
-        <div class="bx--row">
-          <div class="bx--col-lg-6 bx--col-md-4 section-mobile-spacing">
-            <img class="photon__img-responsive" src="http://via.placeholder.com/480x270">
-          </div>
-          <div class="bx--col-lg-6 bx--col-md-4">
-            <p class="copy__paragraph">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fermentum
-              ut aliquet aliquam quis. Pellentesque pulvinar consectetur cras
-              proin nulla. Sollicitudin ut felis, erat in lacus eleifend non
-              faucibus enim. Vestibulum libero elementum amet, faucibus lorem
-              convallis pellentesque diam. Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit. Fermentum ut aliquet aliquam quis.
-              Pellentesque pulvinar consectetur cras proin nulla. Sollicitudin
-              ut felis, erat in lacus eleifend non faucibus enim. Vestibulum
-              libero elementum amet, faucibus lorem convallis pellentesque diam.
-            </p>
-            <AppCta
-              class="photon__cta photon__cta_dark"
-              label="Get movie"
-              url="#get-movie"
-            />
-            <AppLink class="photon__request-recommendation-link" url="/">
-              Request new recommendation
-            </AppLink>
-          </div>
-        </div>
-      </div>
-    </section>
+    <PhotonRecommendationSection
+      class="photon__section photon__section_light"
+    />
     <section id="get-movie" class="photon__section photon__section_dark">
       <div class="photon__container">
         <h2 class="copy__title">
           Lorem ipsum
         </h2>
         <div class="bx--row">
-          <div class="bx--col-lg-6 bx--col-md-4 section-mobile-spacing">
+          <div class="bx--col-lg-6 bx--col-md-4 photon__section-mobile-spacing">
             <p class="copy__paragraph">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fermentum
               ut aliquet aliquam quis. Pellentesque pulvinar consectetur cras
@@ -162,9 +132,7 @@ export default class PhotonPage extends QiskitPage {
 }
 </script>
 
-<style lang="scss" scoped>
-@import "~/assets/scss/blocks/copy.scss";
-
+<style lang="scss">
 .photon {
   &__container {
     @include contained();
@@ -189,12 +157,18 @@ export default class PhotonPage extends QiskitPage {
     max-width: 100%;
   }
 
-  &__request-recommendation-link {
-    color: $carbon--blue-70 !important;
-    display: inline-block;
-    margin-top: $spacing-06;
+  &__section-mobile-spacing {
+    @include mq($until: medium) {
+      margin-bottom: $spacing-09;
+    }
   }
+}
+</style>
 
+<style lang="scss" scoped>
+@import "~/assets/scss/blocks/copy.scss";
+
+.photon {
   &__section {
     padding-bottom: $spacing-09;
     padding-top: $spacing-09;
@@ -211,12 +185,6 @@ export default class PhotonPage extends QiskitPage {
     &_light {
       background: $carbon--cool-gray-10;
     }
-  }
-}
-
-.section-mobile-spacing {
-  @include mq($until: medium) {
-    margin-bottom: $spacing-09;
   }
 }
 </style>
