@@ -10,7 +10,7 @@
             You're only a short drive away from watching a movie, grabbing some
             candy, popcorn, and enjoying a relaxing night with your perfectly
             selected movie. If you need directions, click below for step-by-step
-            instructions for how to get to the Last Blockbuster in Bend, Oregon.
+            instructions for how to get to the last Blockbuster in Bend, Oregon.
           </p>
           <cv-loading v-if="userLocationLoading" />
           <AppCta

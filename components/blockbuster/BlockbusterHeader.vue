@@ -12,8 +12,7 @@
               </h1>
               <div class="blockbuster-header__description">
                 <p class="copy__paragraph">
-                  Qiskit has partnered up with Blockbuster to give you movie
-                  recommendations.
+                  Qiskit and Blockbuster can give you movie recommendations.
                 </p>
               </div>
             </div>
