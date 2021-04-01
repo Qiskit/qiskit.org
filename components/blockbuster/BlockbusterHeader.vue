@@ -51,7 +51,7 @@ export default class BlockbusterHeader extends Vue {
 
 .blockbuster-header {
   @include responsive-grid-bg-strip(
-    "/images/grid/grid-hero-learn.svg",
+    "/images/grid/grid-hero-light.svg",
     auto,
     28rem
   );
