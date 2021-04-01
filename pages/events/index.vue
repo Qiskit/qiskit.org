@@ -1,6 +1,17 @@
 <template>
   <div class="event-page">
-    <TheEventsHeader />
+    <AppPageHeaderFixed>
+      Join <TypewriterEffect
+        :values="[
+          'events',
+          'hackathons',
+          'camps',
+          'unconferences',
+          'talks'
+        ]"
+      /> from the world&rsquo;s largest
+      quantum computing community
+    </AppPageHeaderFixed>
     <div class="event-page__container">
       <div class="event-page__time-filters">
         <client-only>
@@ -57,6 +68,7 @@
               v-for="event in filteredEvents"
               v-else
               :key="`${event.title}-${event.place}-${event.date}`"
+              class="event-page__event-card"
               :types="event.types"
               :title="event.title"
               :image="event.image"
@@ -188,6 +200,14 @@ export default class EventsPage extends QiskitPage {
 
   &__container {
     @include contained();
+  }
+
+  &__event-card {
+    margin-bottom: $layout-02;
+
+    @include mq($until: large) {
+      margin-bottom: $layout-01;
+    }
   }
 
   &__event-index {

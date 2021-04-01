@@ -340,8 +340,12 @@ export default class TheMenu extends Mixins(MenuMixin) {
     box-shadow: initial;
   }
 
-  .bx--list-box__menu-icon > svg {
-    fill: var(--link-color);
+  .bx--list-box__menu-icon {
+    top: initial;
+    & > svg {
+      fill: var(--link-color);
+    }
   }
+
 }
 </style>

@@ -10,7 +10,7 @@
     :vertical-layout="verticalLayout"
   >
     <div class="event-card__description">
-      <slot v-if="this.$slots.default" />
+      <slot v-if="$slots.default" />
     </div>
     <div>
       <p class="event-card__detail">
@@ -58,12 +58,6 @@ export default class EventCard extends Vue {
 @import '~carbon-components/scss/globals/scss/typography';
 
 .event-card {
-  margin-bottom: $layout-02;
-
-  @include mq($until: large) {
-    margin-bottom: $layout-01;
-  }
-
   &__description {
     margin-bottom: $spacing-06;
   }

@@ -1,6 +1,6 @@
 <template>
   <div class="overview-page">
-    <ThePageHeader>
+    <AppPageHeaderFixed>
       The most
       <TypewriterEffect
         :values="[
@@ -11,7 +11,7 @@
         ]"
       />
       quantum computing SDK
-    </ThePageHeader>
+    </AppPageHeaderFixed>
     <section
       id="contentContainer"
       class="
