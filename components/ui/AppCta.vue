@@ -7,6 +7,7 @@
       `app-cta_${kind}_theme_${theme}`
     ]"
     v-bind="$attrs"
+    @click="$emit('click')"
   >
     <span class="app-cta__content">
       {{ label }}

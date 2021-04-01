@@ -6,7 +6,7 @@
     :style="hasLink && 'cursor:pointer'"
     :rel="isExternal && 'noopener'"
     :target="isExternal && '_blank'"
-    @click="segment && $trackClickEvent(segment)"
+    @click="handleClick"
     @mouseenter="$emit('mouseenter')"
   >
     <slot />
@@ -23,6 +23,11 @@ export default class BasicLink extends Vue {
   @Prop({ type: String, default: '' }) url!: string
   @Prop({ type: Object, required: false }) segment: SegmentData | undefined
   @Prop({ type: Boolean, default: false }) isStatic!: boolean
+
+  handleClick () {
+    this.$emit('click')
+    this.segment && this.$trackClickEvent(this.segment)
+  }
 
   static isExternal (url: string): boolean {
     return !!url && url.startsWith('http')
