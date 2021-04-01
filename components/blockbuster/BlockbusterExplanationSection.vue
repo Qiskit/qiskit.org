@@ -3,8 +3,12 @@
     <div class="blockbuster__container">
       <div class="bx--row">
         <div class="bx--col-lg-6">
-          <h2 class="copy__title">Pulling back the curtain</h2>
-          <h3 class="copy__subtitle">Project summary</h3>
+          <h2 class="copy__title">
+            Pulling back the curtain
+          </h2>
+          <h3 class="copy__subtitle">
+            Project summary
+          </h3>
           <p class="copy__paragraph">
             This project is an April Fools’ joke. It doesn't really use a real
             quantum computer to give you real movie recommendations for the real
@@ -15,16 +19,23 @@
             <BasicLink
               class="blockbuster-explanation-section__text-link"
               url="https://youtube.com/qiskit"
-              >here</BasicLink
-            >.
+            >
+              here
+            </BasicLink>.
           </p>
-          <h3 class="copy__subtitle">FAQs</h3>
-          <h4 class="copy__subtitle">Are quantum computers real?</h4>
+          <h3 class="copy__subtitle">
+            FAQs
+          </h3>
+          <h4 class="copy__subtitle">
+            Are quantum computers real?
+          </h4>
           <p class="copy__paragraph">
             Yes. Quantum computers are very much real and they are already
             available today but not at Blockbuster.
           </p>
-          <h4 class="copy__subtitle">Is Blockbuster real?</h4>
+          <h4 class="copy__subtitle">
+            Is Blockbuster real?
+          </h4>
           <p class="copy__paragraph">
             Yes. Blockbuster is very much real but do not use quantum computers.
             In fact much of their systems still rely on floppy disks. If you can
@@ -51,8 +62,9 @@
             <BasicLink
               class="blockbuster-explanation-section__text-link"
               url="https://qiskit.org/textbook/preface.html"
-              >Qiskit Textbook</BasicLink
-            >.
+            >
+              Qiskit Textbook
+            </BasicLink>.
           </p>
         </div>
       </div>
