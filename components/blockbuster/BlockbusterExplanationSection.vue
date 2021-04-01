@@ -47,7 +47,7 @@
           </h4>
           <p class="copy__paragraph">
             There are a number of studies suggesting that a quantum computer
-            with perfect qubits could outperform classical computers in some
+            with very high fidelity quibits could outperform classical computers in some
             application areas. Quantum computing is still in the research phase
             of its lifecycle with scientists, researchers, engineers and many
             others working hard to study the limitations and applications of the
