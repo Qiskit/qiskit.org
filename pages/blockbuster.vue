@@ -1,7 +1,8 @@
 <template>
   <div>
-    <header>Header</header>
+    <BlockbusterHeader :recommendation-section-id="recommendationSectionId" />
     <BlockbusterRecommendationSection
+      :id="recommendationSectionId"
       class="blockbuster__section blockbuster__section_light"
       :directions-section-id="directionsSectionId"
       :get-user-location="getUserLocation"
@@ -33,6 +34,8 @@ export default class BlockbusterPage extends QiskitPage {
   routeName = 'blockbuster'
 
   directionsSectionId = 'directions'
+  recommendationSectionId = 'recommendation'
+
   userLatitude = 0
   userLongitude = 0
   userLocationLoaded = false
