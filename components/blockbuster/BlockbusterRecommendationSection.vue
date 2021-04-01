@@ -95,7 +95,7 @@ export default class BlockbusterRecommendationSection extends Vue {
       const quantumInteger = parseInt(quantumBinaryNumber, 2)
       this.recommendation = movies[quantumInteger % movies.length]
       this.quantumBinaryNumbersIndex++
-    }, 500)
+    }, 1500)
   }
 
   get recommendationIsLoading () {
