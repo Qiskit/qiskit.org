@@ -44,10 +44,13 @@ export default class BlockbusterPage extends QiskitPage {
   getUserLocation () {
     this.userLocationLoaded = false
     this.userLocationLoading = true
-    navigator.geolocation.getCurrentPosition(this.setUserLocation, this.getCurrentPositionError)
+    navigator.geolocation.getCurrentPosition(
+      this.setUserLocation,
+      this.getCurrentPositionError,
+      { timeout: 7500 })
   }
 
-  setUserLocation (position: { coords: GeolocationCoordinates }) {
+  setUserLocation (position: GeolocationPosition) {
     const { latitude, longitude } = position.coords
     this.userLatitude = latitude
     this.userLongitude = longitude
