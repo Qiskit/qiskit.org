@@ -5,7 +5,7 @@
       class="blockbuster__container blockbuster-recommendation-section__loading-container"
     >
       <cv-loading />
-      <div>Asking the quantum computer...</div>
+      <div>Fetching recommendation...</div>
     </div>
     <div v-else class="blockbuster__container">
       <h2 class="copy__title" v-text="recommendation.title" />
