@@ -5,31 +5,31 @@
         <div
           class="bx--col-lg-6 bx--col-md-4 blockbuster__section-mobile-spacing"
         >
-          <div>
-            <h1 class="blockbuster-header__headline copy__page-title">
-              <span class="highlight">Blockbuster</span> + Qiskit
-            </h1>
-            <div class="blockbuster-header__description">
-              <p class="copy__paragraph">
-                Qiskit has partnered up with Blockbuster to give you movie
-                recommendations.
-              </p>
+          <div class="blockbuster-header__main">
+            <div>
+              <h1 class="blockbuster-header__headline copy__page-title">
+                <span class="highlight">Blockbuster</span> + Qiskit
+              </h1>
+              <div class="blockbuster-header__description">
+                <p class="copy__paragraph">
+                  Qiskit has partnered up with Blockbuster to give you movie
+                  recommendations.
+                </p>
+              </div>
             </div>
+            <AppCta
+              class="blockbuster__cta blockbuster__cta_light"
+              label="Get a recommendation"
+              :url="`#${recommendationSectionId}`"
+            />
           </div>
-          <AppCta
-            class="blockbuster__cta blockbuster__cta_light"
-            label="Get a recommendation"
-            :url="`#${recommendationSectionId}`"
-          />
         </div>
         <div class="bx--col-lg-6 bx--col-md-4">
-          <aside class="blockbuster-header__aside">
-            <img
-              alt="Blockbuster"
-              class="blockbuster-header__logo"
-              src="/images/blockbuster/blockbuster-logo.png"
-            >
-          </aside>
+          <img
+            alt="Blockbuster"
+            class="blockbuster-header__logo"
+            src="/images/blockbuster/blockbuster-logo.png"
+          >
         </div>
       </div>
     </div>
@@ -42,7 +42,7 @@ import { Component, Prop } from 'vue-property-decorator'
 
 @Component
 export default class BlockbusterHeader extends Vue {
-  @Prop({ type: String, required: true }) recommendationSectionId!: string
+  @Prop({ type: String, required: true }) recommendationSectionId!: string;
 }
 </script>
 
@@ -58,6 +58,13 @@ export default class BlockbusterHeader extends Vue {
   background-color: $carbon--blue-70;
   padding-bottom: $spacing-07;
   padding-top: $spacing-07;
+
+  &__main {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+    justify-content: space-between;
+  }
 
   &__headline {
     color: $text-01;
