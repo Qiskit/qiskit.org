@@ -53,6 +53,10 @@ export default class AppDataTable extends Vue {
 .bx--data-table th {
   color: $black-100;
   background-color: $cool-gray-20;
+
+  &[aria-sort] {
+    padding: $spacing-05;
+  }
 }
 
 .bx--data-table tbody tr td, .bx--data-table tbody tr:hover td {
