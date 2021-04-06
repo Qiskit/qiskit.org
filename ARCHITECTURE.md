@@ -35,7 +35,7 @@ import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 
 @Component
-export default class GreetingMessage extends Vue {
+export default class AppCard extends Vue {
   @Prop({ type: String, required: true }) title!: string
   @Prop({ type: String, required: true }) description!: string
 }
