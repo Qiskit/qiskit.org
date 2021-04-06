@@ -98,6 +98,8 @@ The old approach takes the Markdown files inside the `content` directory and gen
 
 For each route, the content gets extracted from the corresponding Markdown file and the page is generated using `pages/<path>/_slug.vue` as a template.
 
+To load the Front Matter attributes, we use [frontmatter-markdown-loader](https://github.com/hmsk/frontmatter-markdown-loader).
+
 ### new-content (new)
 
 The new approach leverages the [**@nuxt/content** module](https://content.nuxtjs.org/), parsing the Markdown files inside the `new-content` directory and making their content fetchable via the `$content` instance.
