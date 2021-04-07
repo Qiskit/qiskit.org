@@ -113,7 +113,7 @@ export default class TheHeroMoment extends Vue {
   }
 
   &__title {
-    @include type-style('productive-heading-07');
+    @include type-style('display-01', true);
     color: $white-text-01;
     margin: 0 0 $layout-05;
     max-width: 6 * $column-size-large;
@@ -122,7 +122,6 @@ export default class TheHeroMoment extends Vue {
     pointer-events: auto;
 
     @include mq($from: medium, $until: large) {
-      @include type-style('productive-heading-06');
       // Notice the difference with the small version. This space is much more
       // small since it is in the spacing scale.
       margin: 0 0 $spacing-03;
@@ -130,7 +129,6 @@ export default class TheHeroMoment extends Vue {
     }
 
     @include mq($until: medium) {
-      @include type-style('productive-heading-04');
       margin: 0 0 $layout-03;
       max-width: 4 * $column-size-medium;
     }
