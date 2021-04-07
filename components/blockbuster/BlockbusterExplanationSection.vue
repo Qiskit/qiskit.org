@@ -26,14 +26,14 @@
           <h3 class="copy__subtitle">
             FAQs
           </h3>
-          <h4 class="copy__subtitle">
+          <h4 class="copy__h4">
             Are quantum computers real?
           </h4>
           <p class="copy__paragraph">
             Yes. Quantum computers are very much real and they are already
             available today but not at Blockbuster.
           </p>
-          <h4 class="copy__subtitle">
+          <h4 class="copy__h4">
             Is Blockbuster real?
           </h4>
           <p class="copy__paragraph">
@@ -42,7 +42,7 @@
             travel (safely) to Bend, Oregon - we highly recommend stopping by
             for some real nostalgia.
           </p>
-          <h4 class="copy__subtitle">
+          <h4 class="copy__h4">
             Do quantum computers provide speedups over classical computers?
           </h4>
           <p class="copy__paragraph">
@@ -53,7 +53,7 @@
             others working hard to study the limitations and applications of the
             quantum systems that exist today.
           </p>
-          <h4 class="copy__subtitle">
+          <h4 class="copy__h4">
             What’s a qubit? What’s quantum advantage?
           </h4>
           <p class="copy__paragraph">
