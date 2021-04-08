@@ -46,11 +46,8 @@ export default class TheHeroMoment extends Vue {
 @import '~carbon-components/scss/globals/scss/typography';
 
 .the-hero-moment {
-  //@include responsive-grid-bg-strip('/images/grid/grid-hero.svg', auto, 56rem);
-
   position: relative;
   overflow: hidden;
-  //padding-top: $layout-05;
   margin-bottom: $layout-05;
   // In Figma, the height is not enforced but the background is always
   // visible completely so we do it in the CSS. A small correction is needed
