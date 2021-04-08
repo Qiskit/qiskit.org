@@ -17,21 +17,6 @@
       </template>
     </AppPageHeaderWithCard>
 
-
-    <cv-tabs
-      class="the-learning-resources-list__filter-level"
-      aria-label="navigation tab label"
-      no-default-to-first
-      @tab-selected="selectTopFilter"
-    >
-      <cv-tab
-        v-for="filter in topFilters"
-        :key="filter"
-        :label="filter"
-        :selected="filter === activeTopFilter"
-      />
-    </cv-tabs>
-
     <AppMosaicSection
       class="summer-school-page__section"
       :title="mosaicSectionTitle"
@@ -77,6 +62,22 @@
       :title="helpfulResourcesSectionTitle"
       :resources="helpfulResources"
     />
+
+    <section class="summer-school-page__section">
+      <h2 class="copy__title">
+        Frequently asked questions
+      </h2>
+      <cv-accordion :align="`end`">
+        <cv-accordion-item v-for="item in faqData" :key="item.index">
+          <template slot="title">{{ item.question }}</template>
+          <template slot="content">
+            <p>
+              {{ item.answer }}
+            </p>
+          </template>
+        </cv-accordion-item>
+      </cv-accordion>
+    </section>
   </main>
 </template>
 
@@ -450,7 +451,6 @@ export default class SummerSchoolPage extends QiskitPage {
     }
   ]))
 
-
   agendaColumnsDataTable: string[] = ['Day', 'Topic', 'Speaker', 'Format']
 
   // Data for the helpful resources section
@@ -503,6 +503,60 @@ export default class SummerSchoolPage extends QiskitPage {
       }
     }
   ]
+
+  faqData = [
+    {
+      question: 'What are the pre-requisites for enrolling in the Summer School?',
+      answer: 'Minimal prerequisites are required for the Qiskit Global Summer School. If you know how to multiply two matrices, and have some programming experience in Python, you are ready for the Summer School. You can brush up on Python programming before attending the lectures by using the Qiskit Textbook. To make the most out of these lectures, you may also consider looking through the linear algebra prerequisites section of the Qiskit Textbook.'
+    },
+    {
+      question: 'What are the application requirements for the Summer School?',
+      answer: 'There is no application or pre-registration for the Qiskit Global Summer School 2021. Registration will be on a first come, first serve basis, with scheduled global availability. Once the Summer School registration reaches capacity, unfortunately we will not be able to register any additional students. Please submit an enquiry below if you have any additional questions!'
+    },
+    {
+      question: 'What is the time requirement for the Summer School? Is the scheduled fixed or flexible? ',
+      answer: 'The summer school is made up of a total of 20 lectures, 5 lab sessions & application exercises, in addition to the daily Live Q&A Sessions and final Commencement Celebration. Participation and completion of all labs and lectures are required in order to receive a certificate of completion from the Summer School, with the optional Q&A Sessions and Commencement activities to enhance your Summer School experience. The schedule is not fixed, aside from final lab submission deadlines, and all students can participate on the schedule that works best for them. Students should anticipate a minimum time commitment of 30 hours for the full Summer School, but we recommend planning on 41 hours of participation, with additional time for discussion and collaboration with other students.'
+    },
+    {
+      question: 'I was a student at the Qiskit Global Summer School 2020 - should I enroll in the 2021 Summer School as well?',
+      answer: 'The 2021 Summer School will cover briefly introduce quantum computing before diving into classical and quantum machine learning, which was not covered in the 2020 Summer School, so you should enroll if you are interested!'},
+    {
+      question: 'Will the lectures and labs be recorded? Or will they only be accessible live? ',
+      answer: 'Lectures and labs sessions will all be recorded and available for live participation and post viewing, as well as the daily Q&A sessions. '
+    },
+    {
+      question: 'Do I need to download anything in order to participate?',
+      answer: 'Nope! Everything can be done in-browser.'
+    },
+    {
+      question: 'What is the cost to enroll in the Summer School?',
+      answer: 'There is no cost to participate in the summer school!'
+    },
+    {
+      question: 'Will I need any supplies or equipment in order to participate?',
+      answer: 'You will need an operating computer with a reliable internet connection and either a mobile device or webcam/microphone on your computer to communicate with mentors and other students. You will need to be able to view seminars and connect virtually. Other than that, you just need to bring yourself'
+    },
+    {
+      question: 'Is there an age limit to participate in the Summer School?',
+      answer: 'The age limit for Qiskit Global Summer School 2021 is 14. If you are under the age limit, but still want to be part of the community, please check out other ways you can get connected, and other events that may be available in your area!'
+    },
+    {
+      question: 'I\'m interested in hosting my own summer school or implementing Qiskit into my coursework - Where can I learn more?',
+      answer: 'TBD'
+    },
+    {
+      question: 'How do I connect more with the Quantum Community?',
+      answer: 'There are several different ways you can connect with the IBM Quantum Community - depending on your preference. You can follow Qiskit and IBM Research on Twitter for the latest updates on new events, activities, and features on what is going on with the community. There is also a community Github that you can explore and contribute to, and you can read regular blog posts from our team and community members on Medium. You can also subscribe to the Qiskit Youtube for the latest video content and our weekly live Seminar Series. If you want to collaborate and connect with other members of the community, and participate in some of the ongoing conversations about quantum computing, you will want to check out our ever-growing Slack Community. From there you can connect with current and past interns, IBM researchers, Qiskit advocates, and fellow community members directly.'
+    },
+    {
+      question: 'Are there any upcoming events in my area that I can participate in?',
+      answer: 'All of our announced upcoming events are listed on qiskit.org, which is continually updated as we roll out more events throughout the year. You can also follow Qiskit on Twitter for the latest announcements on new and upcoming events!'
+    },
+    {
+      question: 'Still have more questions?',
+      answer: 'For any questions about the summer school, please submit your questions using the form below. For all other enquiries, feel free to email us directly at qiskit.events@us.ibm.com.'
+    }
+  ]
 }
 </script>
 
@@ -520,4 +574,19 @@ export default class SummerSchoolPage extends QiskitPage {
     }
   }
 }
+</style>
+
+<style lang="scss">
+// overrides
+.summer-school-page {
+  .bx--accordion__title {
+    color: $white-text-01;
+  }
+
+  .bx--accordion__heading:hover,
+  .bx--accordion__heading:hover::before {
+    background-color: $cool-gray-10;
+  }
+}
+
 </style>
