@@ -23,7 +23,7 @@
     />
     <AppDataTableSection
       class="summer-school-page__section"
-      :section-title="agendaSectionTitle"
+      :section-title="agendaSectionTitleOne"
       :data-table-columns="agendaColumnsDataTable"
       :data-table-elements="agendaElementsDataTable"
     />
@@ -42,8 +42,10 @@ import { DescriptionCard } from '~/components/ui/AppDescriptionCard.vue'
 import { TableRowElement } from '~/components/ui/AppDataTable.vue'
 
 interface AgendaSlot {
-  time: string,
-  event: string
+  day: string,
+  topic: string,
+  speaker: string,
+  format: string
 }
 
 @Component({
@@ -157,69 +159,55 @@ export default class PhysicsOfComputationPage extends QiskitPage {
     },
     {
       position: 'third',
-      title: 'Coding with Qiskit',
-      description: 'This video series starts at learning how to install Qiskit locally, understanding what gates to do quantum states and explores quantum algorithms and the latest research topics.<br/><br/><a href="https://www.youtube.com/playlist?list=PLOFEBzvs-Vvp2xg9-POLJhQwtVktlYGbY" target="_blank" style="cursor:pointer; text-decoration: none; color: #0f62fe;">Watch the series</a>',
+      title: 'Introduction to Quantum Computing and Quantum Hardware',
+      description: 'The Qiskit Global Summer School 2020 coursework, lab, and lecture materials are now available online.<br/><br/><a href="https://qiskit.org/learn/intro-qc-qh" target="_blank" style="cursor:pointer; text-decoration: none; color: #0f62fe;">Start the course</a>',
       image: '/images/events/seminar-series/mosaic-team.png'
     },
     {
       position: 'fourth',
-      title: 'Introduction to Quantum Computing and Quantum Hardware',
-      description: 'The Qiskit Global Summer School 2020 coursework, lab, and lecture materials are now available online.<br/><br/><a href="https://qiskit.org/learn/intro-qc-qh" target="_blank" style="cursor:pointer; text-decoration: none; color: #0f62fe;">Start the course</a>',
+      title: 'Qiskit Textbook',
+      description: 'The Qiskit Textbook is a free digital open source textbook that will teach you the concepts of quantum computing while you learn to use Qiskit.<br/><br/><a href="https://qiskit.org/textbook/preface.html" target="_blank" style="cursor:pointer; text-decoration: none; color: #0f62fe;">Watch the series</a>',
       image: '/images/events/seminar-series/mosaic-interactivity.png'
     }
-    // ,{
-    //   position: 'fifth',
-    //   title: 'Qiskit Textbook',
-    //   description: 'The Qiskit Textbook is a free digital open source textbook that will teach you the concepts of quantum computing while you learn to use Qiskit.'
-    // }
   ]
 
   // Data for the agenda section
-  agendaSectionTitle: string = 'Event schedule'
+  agendaSectionTitleOne: string = 'Week 1'
+  agendaSectionTitleTwo: string = 'Week 2'
 
   agenda: AgendaSlot[] = [
     {
-      time: '08:30 AM',
-      event: `An introduction from Olivia Lanes PhD, experimental researcher and
-      education developer at IBM and Charlie Bennett, physicist, information theorist
-      and IBM Fellow at IBM Research.`
-    },
-    {
-      time: '09:00 AM',
-      event: 'A series of keynote addresses about quantum information science in the 1980s'
-    },
-    {
-      time: '10:30 AM',
-      event: 'A live panel that will bridge Then and Now'
-    },
-    {
-      time: '11:30 AM',
-      event: 'The future of quantum hardware'
-    },
-    {
-      time: '01:00 PM',
-      event: 'Conference Track 1: Series of contributed talks focusing on Hardware and Experiment'
-    },
-    {
-      time: '01:00 PM',
-      event: 'Conference Track 2: Series of contributed talks focusing on Theory and Applications'
+      day: 'Monday, July 12',
+      topic: `Vector Spaces, Tensor Products and Qubits`,
+      speaker: 'Elisa Bäumer',
+      format: 'Lecture'
     }
   ]
 
   agendaElementsDataTable: TableRowElement[][] = this.agenda.map(slot => ([
     {
       component: 'span',
-      styles: 'min-width: 5rem; display: inline-block; font-weight: bold;',
-      data: slot.time
+      styles: 'min-width: 10rem; display: inline-block; font-weight: bold;',
+      data: slot.day
     },
     {
       component: 'span',
-      styles: 'min-width: 20rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
-      data: slot.event
-    }
+      styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
+      data: slot.topic
+    },
+    {
+      component: 'span',
+      styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
+      data: slot.speaker
+    },
+    {
+      component: 'span',
+      styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
+      data: slot.format
+    },
   ]))
 
-  agendaColumnsDataTable: string[] = ['Time (EDT)', 'Event']
+  agendaColumnsDataTable: string[] = ['Day', 'Topic', 'Speaker', 'Format']
 
   // Data for the helpful resources section
   helpfulResourcesSectionTitle = 'Take action now'
