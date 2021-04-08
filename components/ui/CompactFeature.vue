@@ -33,6 +33,7 @@ $feature-icon-size: 2.25rem;
 
 .compact-feature {
   background-color: $purple-70;
+  height: 100%;
   padding: $spacing-05;
 
   @include mq($until: large) {
