@@ -48,7 +48,7 @@ interface AgendaSlot {
 
 @Component({
   head () {
-    const title = 'Summer School Event Title'
+    const title = 'Qiskit Global Summer School 2021:'
     const description = `One-day virtual event to celebrate the 40th anniversary of a
     defining moment in the history of quantum computation, the Physics of Computation
     Conference (1981)`
@@ -110,11 +110,11 @@ export default class PhysicsOfComputationPage extends QiskitPage {
   routeName = 'physics-of-computation'
 
   // Data for the header section
-  headerPrimaryTitle = 'Summer School Event Title'
-  headerSecondaryTitle = ''
+  headerPrimaryTitle = 'Qiskit Global Summer School 2021:'
+  headerSecondaryTitle = 'Quantum Machine Learning'
   headerDescription = [
-    'Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, totam neque? Deserunt magni laborum dolores non explicabo dicta molestias necessitatibus fuga ad at provident aliquam, natus alias nostrum asperiores nulla!',
-    'Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, totam neque? Deserunt magni laborum dolores non explicabo dicta molestias necessitatibus fuga ad at provident aliquam, natus alias nostrum asperiores nulla!'
+    'The Qiskit Global Summer School 2021 is a two-week intensive summer school designed to empower the next generation of quantum researchers and developers with the skills and know-how to explore quantum applications on their own. This second-annual course, made up of twenty lectures, five applied lab exercises, hands-on mentorship, and live Q&A sessions, focuses on developing hands-on experience and understanding of quantum machine learning.',
+    'Registrations will open soon, and be available on a first-come, first-serve basis with global distribution. For any questions, please check out our FAQ or submit an enquiry using the form below!'
   ]
 
   headerCTA = {
@@ -130,63 +130,48 @@ export default class PhysicsOfComputationPage extends QiskitPage {
     image: '/images/events/physics-of-computation/card-image-endicott-house-1981.png',
     title: 'Card title',
     description: 'Keynotes, contributed talks, and more bridging the 1981 Physics of Computation conference with current research.',
-    location: 'Virtual event open to the public',
-    date: 'May 6, 2021',
-    time: '8:30am - 5:00pm EDT',
+    location: 'Online',
+    date: 'July 12 - 23, 2021',
+    time: 'N/A',
     to: 'https://airtable.com/shrvAA05xkYgSKajc',
-    ctaLabel: 'Stay informed',
+    ctaLabel: 'Learn more',
     segment: {
-      action: `${this.routeName} > header > stay-informed`
+      action: `${this.routeName} > header > learn-more`
     }
   }
 
   // Data for the mosaic section
-  mosaicSectionTitle = 'What is Summer School Event Title?'
+  mosaicSectionTitle = 'Learn more!'
   mosaicElements = [
     {
       position: 'first',
-      title: 'Title',
-      description: `Listen to what some of the 1981 key attendees have to say about
-      the original conference and what the state of the field was like 40 years ago.`,
-      image: '/images/events/physics-of-computation/mosaic-charles-bennet.png'
+      title: 'Let us know if you have any questions!',
+      description: 'If your questions aren\'t answered by the FAQ below or our blog post, please use this form to submit your enquiries direct to the team.<br/><br/><a href="" target="_blank" style="cursor:pointer; text-decoration: none; color: #0f62fe;">Inquire now!</a>',
+      image: '/images/events/seminar-series/mosaic-experts.png'
     },
     {
       position: 'second',
-      title: 'Title',
-      description: `Watch a lively discussion between recognized scientists who will
-      bridge the gap between the past and the future of quantum information science and
-      computation.`,
-      image: '/images/events/physics-of-computation/mosaic-people-on-discussion.png'
+      title: 'IBM Quantum Tools on the Cloud',
+      description: 'Learn quantum programming and how to use our tools with step-by-step tutorials and guides.<br/><br/><a href="https://quantum-computing.ibm.com/docs/" target="_blank" style="cursor:pointer; text-decoration: none; color: #0f62fe;">Explore the docs</a>',
+      image: '/images/events/summer-school/summer-school.png'
     },
     {
       position: 'third',
-      title: 'Title',
-      description: `The afternoon will be packed with a wide range of talks illustrating
-      current research and new developments across the field of quantum information
-      science.<br/><br/>
-      <ul>
-        <li style="list-style-type: disc; margin-left: 1.2rem">Aram Harrow from MIT will chair the track dedicated to Theory and Applications.</li>
-        <li style="list-style-type: disc; margin-left: 1.2rem">Sarah Sheldon from IBM will chair the track dedicated to Hardware and Experiment.</li>
-      </ul>`,
-      image: '/images/events/physics-of-computation/mosaic-ibm-quantum-chip.png'
+      title: 'Coding with Qiskit',
+      description: 'This video series starts at learning how to install Qiskit locally, understanding what gates to do quantum states and explores quantum algorithms and the latest research topics.<br/><br/><a href="https://www.youtube.com/playlist?list=PLOFEBzvs-Vvp2xg9-POLJhQwtVktlYGbY" target="_blank" style="cursor:pointer; text-decoration: none; color: #0f62fe;">Watch the series</a>',
+      image: '/images/events/seminar-series/mosaic-team.png'
     },
     {
       position: 'fourth',
-      title: 'Title',
-      description: `<strong>Format:</strong> Submit a clear abstract
-        <a href="https://airtable.com/shr6UbEsEvinHfjct" target="_blank"
-        style="cursor:pointer; text-decoration: none; color: #0f62fe;">here</a>
-        (talks will be 15 minutes plus a 5-minute Q&A)<br/>
-        <strong>Review criteria:</strong> <em>(scored with equal weight)</em><br/>
-        <ul>
-          <li style="list-style-type: disc; margin-left: 1.2rem">Problem and potential influence on quantum information science</li>
-          <li style="list-style-type: disc; margin-left: 1.2rem">Technical approach and novelty</li>
-          <li style="list-style-type: disc; margin-left: 1.2rem">Clarity of abstract</li>
-        </ul>
-        <strong>Reviewers:</strong> Quantum researchers from IBM and MIT<br/>
-        <strong>Deadline for submission:</strong> March 31, 2021<br/>
-        <strong>Decision date:</strong> April 20, 2021`
+      title: 'Introduction to Quantum Computing and Quantum Hardware',
+      description: 'The Qiskit Global Summer School 2020 coursework, lab, and lecture materials are now available online.<br/><br/><a href="https://qiskit.org/learn/intro-qc-qh" target="_blank" style="cursor:pointer; text-decoration: none; color: #0f62fe;">Start the course</a>',
+      image: '/images/events/seminar-series/mosaic-interactivity.png'
     }
+    // ,{
+    //   position: 'fifth',
+    //   title: 'Qiskit Textbook',
+    //   description: 'The Qiskit Textbook is a free digital open source textbook that will teach you the concepts of quantum computing while you learn to use Qiskit.'
+    // }
   ]
 
   // Data for the agenda section
