@@ -16,6 +16,22 @@
         </EventCard>
       </template>
     </AppPageHeaderWithCard>
+
+
+    <cv-tabs
+      class="the-learning-resources-list__filter-level"
+      aria-label="navigation tab label"
+      no-default-to-first
+      @tab-selected="selectTopFilter"
+    >
+      <cv-tab
+        v-for="filter in topFilters"
+        :key="filter"
+        :label="filter"
+        :selected="filter === activeTopFilter"
+      />
+    </cv-tabs>
+
     <AppMosaicSection
       class="summer-school-page__section"
       :title="mosaicSectionTitle"
@@ -25,15 +41,36 @@
       class="summer-school-page__section"
       :section-title="agendaSectionTitleOne"
       :data-table-columns="agendaColumnsDataTable"
-      :data-table-elements="agendaElementsDataTable"
+      :data-table-elements="weekOneMondayAgendaData"
     />
 
-    <!-- <section class="summer-school-page__section">
+    <section class="summer-school-page__section">
       <AppDataTable
         :columns="agendaColumnsDataTable"
-        :elements="agendaElementsDataTable"
+        :elements="weekOneTuesdayAgendaData"
       />
-    </section> -->
+    </section>
+
+    <section class="summer-school-page__section">
+      <AppDataTable
+        :columns="agendaColumnsDataTable"
+        :elements="weekOneWednesdayAgendaData"
+      />
+    </section>
+
+    <section class="summer-school-page__section">
+      <AppDataTable
+        :columns="agendaColumnsDataTable"
+        :elements="weekOneThursdayAgendaData"
+      />
+    </section>
+
+    <section class="summer-school-page__section">
+      <AppDataTable
+        :columns="agendaColumnsDataTable"
+        :elements="weekOneFridayAgendaData"
+      />
+    </section>
 
     <AppHelpfulResourcesSection
       class="summer-school-page__section"
@@ -59,9 +96,7 @@ interface AgendaSlot {
 @Component({
   head () {
     const title = 'Qiskit Global Summer School 2021:'
-    const description = `One-day virtual event to celebrate the 40th anniversary of a
-    defining moment in the history of quantum computation, the Physics of Computation
-    Conference (1981)`
+    const description = 'The Qiskit Global Summer School 2021 is a two-week intensive summer school designed to empower the next generation of quantum researchers and developers with the skills and know-how to explore quantum applications on their own'
     const image = '/images/events/physics-of-computation/card-image-endicott-house-1981.png'
 
     return {
@@ -116,8 +151,8 @@ interface AgendaSlot {
     }
   }
 })
-export default class PhysicsOfComputationPage extends QiskitPage {
-  routeName = 'physics-of-computation'
+export default class SummerSchoolPage extends QiskitPage {
+  routeName = 'summer-school'
 
   // Data for the header section
   headerPrimaryTitle = 'Qiskit Global Summer School 2021:'
@@ -183,7 +218,7 @@ export default class PhysicsOfComputationPage extends QiskitPage {
   agendaSectionTitleOne: string = 'Week 1'
   agendaSectionTitleTwo: string = 'Week 2'
 
-  agenda: AgendaSlot[] = [
+  weekOneMonday: AgendaSlot[] = [
     {
       day: 'Monday, July 12',
       topic: 'Vector Spaces, Tensor Products and Qubits',
@@ -200,11 +235,107 @@ export default class PhysicsOfComputationPage extends QiskitPage {
       day: 'Monday, July 12',
       topic: 'Day 1 Q&A Session',
       speaker: 'N/A',
-      format: 'Lecture'
+      format: 'Live Q&A'
     }
   ]
 
-  agendaElementsDataTable: TableRowElement[][] = this.agenda.map(slot => ([
+  weekOneTuesday: AgendaSlot[] = [
+    {
+      day: 'Tuesday, July 13',
+      topic: 'Simple Quantum Algorithms I',
+      speaker: 'Elisa Bäumer',
+      format: 'Lecture'
+    },
+    {
+      day: 'Tuesday, July 13',
+      topic: 'Simple Quantum Algorithms II',
+      speaker: 'Elisa Bäumer',
+      format: 'Lecture'
+    },
+    {
+      day: 'Tuesday, July 13',
+      topic: '(Lab 1) Intro to Quantum Computing Algorithms and Operations',
+      speaker: 'Elisa Bäumer',
+      format: 'Lab'
+    },
+    {
+      day: 'Tuesday, July 13',
+      topic: 'Day 2 Q&A Session',
+      speaker: 'N/A',
+      format: 'Live Q&A'
+    }
+  ]
+
+  weekOneWednesday: AgendaSlot[] = [
+    {
+      day: 'Wednesday, July 14',
+      topic: 'The Foundations of Classical Machine Learning: Cost Functions, Data Splitting, Overfitting',
+      speaker: 'Amira Abbas',
+      format: 'Lecture'
+    },
+    {
+      day: 'Wednesday, July 14',
+      topic: 'Advanced Classical Machine Learning: Neural Networks and Support Vector Machines',
+      speaker: 'Amira Abbas',
+      format: 'Lecture'
+    },
+    {
+      day: 'Wednesday, July 14',
+      topic: 'Day 3 Q&A Session',
+      speaker: 'N/A',
+      format: 'Live Q&A'
+    }
+  ]
+
+  weekOneThursday: AgendaSlot[] = [
+    {
+      day: 'Thursday, July 15',
+      topic: 'Introduction to Parameterized Quantum Circuits',
+      speaker: 'Amira Abbas',
+      format: 'Lecture'
+    },
+    {
+      day: 'Thursday, July 15',
+      topic: 'Data Encoding Schemes for Quantum Machine Learning',
+      speaker: 'Amira Abbas',
+      format: 'Lecture'
+    },
+    {
+      day: 'Thursday, July 15',
+      topic: 'Day 4 Q&A Session',
+      speaker: 'N/A',
+      format: 'Live Q&A'
+    }
+  ]
+
+  weekOneFriday: AgendaSlot[] = [
+    {
+      day: 'Friday, July 16',
+      topic: 'Building a Variational Quantum Classifier',
+      speaker: 'Amira Abbas',
+      format: 'Lecture'
+    },
+    {
+      day: 'Friday, July 16',
+      topic: 'An Introduction to the Quantum Approximate Optimization Algorithm and its Applications',
+      speaker: 'Johannes Weidenfeller',
+      format: 'Lecture'
+    },
+    {
+      day: 'Friday, July 16',
+      topic: '(Lab 2) Variational Algorithms',
+      speaker: 'Johannes Weidenfeller',
+      format: 'Lab'
+    },
+    {
+      day: 'Friday, July 16',
+      topic: 'Day 4 Q&A Session',
+      speaker: 'N/A',
+      format: 'Live Q&A'
+    }
+  ]
+
+  weekOneMondayAgendaData: TableRowElement[][] = this.weekOneMonday.map(slot => ([
     {
       component: 'span',
       styles: 'min-width: 10rem; display: inline-block; font-weight: bold;',
@@ -226,6 +357,99 @@ export default class PhysicsOfComputationPage extends QiskitPage {
       data: slot.format
     }
   ]))
+
+  weekOneTuesdayAgendaData: TableRowElement[][] = this.weekOneTuesday.map(slot => ([
+    {
+      component: 'span',
+      styles: 'min-width: 10rem; display: inline-block; font-weight: bold;',
+      data: slot.day
+    },
+    {
+      component: 'span',
+      styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
+      data: slot.topic
+    },
+    {
+      component: 'span',
+      styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
+      data: slot.speaker
+    },
+    {
+      component: 'span',
+      styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
+      data: slot.format
+    }
+  ]))
+
+  weekOneWednesdayAgendaData: TableRowElement[][] = this.weekOneWednesday.map(slot => ([
+    {
+      component: 'span',
+      styles: 'min-width: 10rem; display: inline-block; font-weight: bold;',
+      data: slot.day
+    },
+    {
+      component: 'span',
+      styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
+      data: slot.topic
+    },
+    {
+      component: 'span',
+      styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
+      data: slot.speaker
+    },
+    {
+      component: 'span',
+      styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
+      data: slot.format
+    }
+  ]))
+
+  weekOneThursdayAgendaData: TableRowElement[][] = this.weekOneThursday.map(slot => ([
+    {
+      component: 'span',
+      styles: 'min-width: 10rem; display: inline-block; font-weight: bold;',
+      data: slot.day
+    },
+    {
+      component: 'span',
+      styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
+      data: slot.topic
+    },
+    {
+      component: 'span',
+      styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
+      data: slot.speaker
+    },
+    {
+      component: 'span',
+      styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
+      data: slot.format
+    }
+  ]))
+
+  weekOneFridayAgendaData: TableRowElement[][] = this.weekOneFriday.map(slot => ([
+    {
+      component: 'span',
+      styles: 'min-width: 10rem; display: inline-block; font-weight: bold;',
+      data: slot.day
+    },
+    {
+      component: 'span',
+      styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
+      data: slot.topic
+    },
+    {
+      component: 'span',
+      styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
+      data: slot.speaker
+    },
+    {
+      component: 'span',
+      styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
+      data: slot.format
+    }
+  ]))
+
 
   agendaColumnsDataTable: string[] = ['Day', 'Topic', 'Speaker', 'Format']
 
