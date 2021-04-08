@@ -24,7 +24,7 @@
       <div
         v-for="filter in extraFilters"
         :key="filter.label"
-        class="event-page__extra-filters event-page__extra-filters_on-small-screen"
+        class="event-page__extra-filters_on-small-screen"
       >
         <AppMultiSelect
           :label="filter.label"
@@ -33,8 +33,10 @@
           @change-selection="updateWholeFilter(filter.filterType, $event)"
         />
       </div>
-      <div class="event-page__event-index">
-        <div class="event-page__extra-filters event-page__extra-filters_on-large-screen">
+      <div class="bx--row">
+        <div
+          class="bx--col-lg-4 bx--col-md-2 event-page__extra-filters_on-large-screen"
+        >
           <AppFieldset
             v-for="filter in extraFilters"
             :key="filter.label"
@@ -53,7 +55,7 @@
             </client-only>
           </AppFieldset>
         </div>
-        <div class="event-page__main-content">
+        <div class="bx--col-lg-12 bx--col-md-6 event-page__main-content">
           <div>
             <AppCard
               v-if="noEvents"
@@ -210,15 +212,6 @@ export default class EventsPage extends QiskitPage {
     }
   }
 
-  &__event-index {
-    display: flex;
-    justify-content: space-between;
-
-    @include mq($until: medium) {
-      flex-direction: column;
-    }
-  }
-
   &__time-filters {
     margin-top: $layout-03;
     margin-bottom: $layout-04;
@@ -289,10 +282,7 @@ export default class EventsPage extends QiskitPage {
   }
 
   &__main-content {
-    width: 75%;
-
     @include mq($until: medium) {
-      width: 100%;
       margin-top: $layout-04;
     }
   }
