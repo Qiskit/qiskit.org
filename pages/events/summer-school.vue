@@ -69,7 +69,9 @@
       </h2>
       <cv-accordion :align="`end`">
         <cv-accordion-item v-for="item in faqData" :key="item.index">
-          <template slot="title">{{ item.question }}</template>
+          <template slot="title">
+            {{ item.question }}
+          </template>
           <template slot="content">
             <p>
               {{ item.answer }}
@@ -519,7 +521,8 @@ export default class SummerSchoolPage extends QiskitPage {
     },
     {
       question: 'I was a student at the Qiskit Global Summer School 2020 - should I enroll in the 2021 Summer School as well?',
-      answer: 'The 2021 Summer School will cover briefly introduce quantum computing before diving into classical and quantum machine learning, which was not covered in the 2020 Summer School, so you should enroll if you are interested!'},
+      answer: 'The 2021 Summer School will cover briefly introduce quantum computing before diving into classical and quantum machine learning, which was not covered in the 2020 Summer School, so you should enroll if you are interested!'
+    },
     {
       question: 'Will the lectures and labs be recorded? Or will they only be accessible live? ',
       answer: 'Lectures and labs sessions will all be recorded and available for live participation and post viewing, as well as the daily Q&A sessions. '
