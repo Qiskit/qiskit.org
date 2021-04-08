@@ -27,6 +27,14 @@
       :data-table-columns="agendaColumnsDataTable"
       :data-table-elements="agendaElementsDataTable"
     />
+
+    <!-- <section class="summer-school-page__section">
+      <AppDataTable
+        :columns="agendaColumnsDataTable"
+        :elements="agendaElementsDataTable"
+      />
+    </section> -->
+
     <AppHelpfulResourcesSection
       class="summer-school-page__section"
       :title="helpfulResourcesSectionTitle"
@@ -178,8 +186,20 @@ export default class PhysicsOfComputationPage extends QiskitPage {
   agenda: AgendaSlot[] = [
     {
       day: 'Monday, July 12',
-      topic: `Vector Spaces, Tensor Products and Qubits`,
+      topic: 'Vector Spaces, Tensor Products and Qubits',
       speaker: 'Elisa Bäumer',
+      format: 'Lecture'
+    },
+    {
+      day: 'Monday, July 12',
+      topic: 'Quantum Operators and Measurements',
+      speaker: 'Elisa Bäumer',
+      format: 'Lecture'
+    },
+    {
+      day: 'Monday, July 12',
+      topic: 'Day 1 Q&A Session',
+      speaker: 'N/A',
       format: 'Lecture'
     }
   ]
@@ -204,7 +224,7 @@ export default class PhysicsOfComputationPage extends QiskitPage {
       component: 'span',
       styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
       data: slot.format
-    },
+    }
   ]))
 
   agendaColumnsDataTable: string[] = ['Day', 'Topic', 'Speaker', 'Format']
