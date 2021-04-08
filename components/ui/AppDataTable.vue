@@ -57,7 +57,7 @@ export default class AppDataTable extends Vue {
 
   // TODO: remove this override once issue is fixed
   // https://github.com/carbon-design-system/carbon-components-vue/issues/1161#issuecomment-815689534
-  [aria-sort] {
+  &[aria-sort] {
     padding: $spacing-05;
   }
 }
