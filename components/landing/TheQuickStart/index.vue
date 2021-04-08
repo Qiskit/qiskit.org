@@ -8,9 +8,13 @@
       start Qiskit locally, which is much more secure and private, or you
       get started with hosted Jupyter Notebooks in IBM Quantum Lab.
     </p>
-    <div class="quick-start__sections">
-      <StartLocally />
-      <StartOnTheCloud />
+    <div class="bx--row">
+      <div class="bx--col-lg-10 bx--col-md-5">
+        <StartLocally />
+      </div>
+      <div class="bx--col-lg-6 bx--col-md-3">
+        <StartOnTheCloud />
+      </div>
     </div>
   </article>
 </template>
@@ -35,15 +39,6 @@ export default class TheQuickStart extends Vue {}
     @include type-style('expressive-heading-05');
     color: $cool-gray-80;
     margin-bottom: $layout-03;
-  }
-
-  &__sections {
-    display: flex;
-    flex-direction: row;
-
-    @include mq($until: medium) {
-      flex-direction: column;
-    }
   }
 }
 </style>

@@ -180,12 +180,7 @@ export default class StartLocally extends Vue {
 }
 
 .start-locally {
-  width: 63%;
-  padding-right: $spacing-07;
-
   @include mq($until: medium) {
-    width: auto;
-    padding-right: 0;
     margin-bottom: $layout-01;
   }
 
