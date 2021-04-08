@@ -590,6 +590,10 @@ export default class SummerSchoolPage extends QiskitPage {
   .bx--accordion__heading:hover::before {
     background-color: $cool-gray-10;
   }
+
+  .bx--accordion__arrow {
+    fill: $white-text-01;
+  }
 }
 
 </style>
