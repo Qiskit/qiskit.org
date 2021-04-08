@@ -2,6 +2,7 @@
   <cv-data-table
     class="app-data-table"
     :columns="columns"
+    :sortable="false"
   >
     <template slot="data">
       <cv-data-table-row v-for="(row, rowIndex) in elements" :key="`${rowIndex}`">
@@ -53,6 +54,12 @@ export default class AppDataTable extends Vue {
 .bx--data-table th {
   color: $black-100;
   background-color: $cool-gray-20;
+
+  // TODO: remove this override once issue is fixed
+  // https://github.com/carbon-design-system/carbon-components-vue/issues/1161#issuecomment-815689534
+  &[aria-sort] {
+    padding: $spacing-05;
+  }
 }
 
 .bx--data-table tbody tr td, .bx--data-table tbody tr:hover td {
