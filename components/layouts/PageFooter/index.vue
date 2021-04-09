@@ -5,18 +5,26 @@
       :class="`page-footer__primary_theme_${theme}`"
     >
       <div class="page-footer__primary-container">
-        <AppLogo
-          class="page-footer__logo"
-          :class="`page-footer__logo_theme_${theme}`"
-        />
-        <div class="page-footer__primary-sections">
-          <FooterSection
-            v-for="sectionElements in footerElements"
-            :key="sectionElements.title"
-            v-bind="sectionElements"
-            :theme="theme"
-          />
-          <FooterSection v-bind="stayConnectedElements" icons-only :theme="theme" />
+        <div class="bx--row">
+          <div class="bx--col-lg-4 bx--col-md-2">
+            <AppLogo
+              class="page-footer__logo"
+              :class="`page-footer__logo_theme_${theme}`"
+            />
+          </div>
+          <div class="bx--col-lg-12 bx--col-md-6 page-footer__primary-sections">
+            <FooterSection
+              v-for="sectionElements in footerElements"
+              :key="sectionElements.title"
+              v-bind="sectionElements"
+              :theme="theme"
+            />
+            <FooterSection
+              v-bind="stayConnectedElements"
+              icons-only
+              :theme="theme"
+            />
+          </div>
         </div>
       </div>
     </section>
@@ -100,26 +108,12 @@ export default class PageFooter extends Vue {
 
   &__primary-container {
     @include contained();
-    display: flex;
-    justify-content: space-between;
-
-    @include mq($until: medium) {
-      display: block;
-    }
   }
 
   &__logo {
     height: 32px;
-    flex: 0 0 112px;
-    margin-right: $layout-06;
-
-    @include mq($from: medium, $until: large) {
-      margin-right: $layout-05;
-    }
 
     @include mq($until: medium) {
-      height: auto;
-      width: 96px;
       margin-bottom: $spacing-07;
     }
 
