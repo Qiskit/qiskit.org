@@ -1,30 +1,35 @@
 <template>
   <header class="app-page-header">
     <div class="app-page-header__container">
-      <main class="app-page-header__main">
-        <div>
-          <h1 class="app-page-header__headline copy__page-title">
-            <slot name="title" />
-          </h1>
-          <div class="app-page-header__description">
-            <p
-              v-for="(paragraph, index) in description"
-              :key="index"
-              class="copy__paragraph"
-              v-text="paragraph"
-            />
+      <div class="bx--row">
+        <main class="bx--col-lg-11 bx--col-md-4 app-page-header__main">
+          <div>
+            <h1 class="app-page-header__headline copy__page-title">
+              <slot name="title" />
+            </h1>
+            <div class="app-page-header__description">
+              <p
+                v-for="(paragraph, index) in description"
+                :key="index"
+                class="copy__paragraph"
+                v-text="paragraph"
+              />
+            </div>
           </div>
-        </div>
-        <AppCta v-if="cta" v-bind="cta" />
-      </main>
-      <aside class="app-page-header__aside">
-        <div>
-          <div class="app-page-header__card-title-wrapper">
-            <div class="app-page-header__card-title copy__subtitle" v-text="cardTitle" />
+          <AppCta v-if="cta" v-bind="cta" />
+        </main>
+        <aside class="bx--col-lg-5 bx--col-md-4 app-page-header__aside">
+          <div>
+            <div class="app-page-header__card-title-wrapper">
+              <div
+                class="app-page-header__card-title copy__subtitle"
+                v-text="cardTitle"
+              />
+            </div>
+            <slot name="card" />
           </div>
-          <slot name="card" />
-        </div>
-      </aside>
+        </aside>
+      </div>
     </div>
   </header>
 </template>
@@ -55,17 +60,6 @@ export default class AppPageHeaderWithCard extends Vue {
 
   &__container {
     @include contained();
-    display: grid;
-    column-gap: $spacing-07;
-    grid-template-columns: 1fr auto;
-
-    @include mq($until: large) {
-      grid-template-columns: 1fr 1fr;
-    }
-
-    @include mq($until: medium) {
-      grid-template-columns: 1fr;
-    }
   }
 
   &__main {
@@ -100,13 +94,6 @@ export default class AppPageHeaderWithCard extends Vue {
   }
 
   &__aside {
-    max-width: 18rem;
-    width: 100%;
-
-    @include mq($until: large) {
-      max-width: initial;
-    }
-
     @include mq($until: medium) {
       margin-top: $spacing-09;
     }
