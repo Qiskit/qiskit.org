@@ -30,40 +30,6 @@
     />
 
     <section class="summer-school-page__section">
-      <AppDataTable
-        :columns="agendaColumnsDataTable"
-        :elements="weekOneTuesdayAgendaData"
-      />
-    </section>
-
-    <section class="summer-school-page__section">
-      <AppDataTable
-        :columns="agendaColumnsDataTable"
-        :elements="weekOneWednesdayAgendaData"
-      />
-    </section>
-
-    <section class="summer-school-page__section">
-      <AppDataTable
-        :columns="agendaColumnsDataTable"
-        :elements="weekOneThursdayAgendaData"
-      />
-    </section>
-
-    <section class="summer-school-page__section">
-      <AppDataTable
-        :columns="agendaColumnsDataTable"
-        :elements="weekOneFridayAgendaData"
-      />
-    </section>
-
-    <AppHelpfulResourcesSection
-      class="summer-school-page__section"
-      :title="helpfulResourcesSectionTitle"
-      :resources="helpfulResources"
-    />
-
-    <section class="summer-school-page__section">
       <h2 class="copy__title">
         Frequently asked questions
       </h2>
@@ -80,6 +46,12 @@
         </cv-accordion-item>
       </cv-accordion>
     </section>
+
+    <AppHelpfulResourcesSection
+      class="summer-school-page__section"
+      :title="helpfulResourcesSectionTitle"
+      :resources="helpfulResources"
+    />
   </main>
 </template>
 
@@ -239,10 +211,7 @@ export default class SummerSchoolPage extends QiskitPage {
       topic: 'Day 1 Q&A Session',
       speaker: 'N/A',
       format: 'Live Q&A'
-    }
-  ]
-
-  weekOneTuesday: AgendaSlot[] = [
+    },
     {
       day: 'Tuesday, July 13',
       topic: 'Simple Quantum Algorithms I',
@@ -266,10 +235,7 @@ export default class SummerSchoolPage extends QiskitPage {
       topic: 'Day 2 Q&A Session',
       speaker: 'N/A',
       format: 'Live Q&A'
-    }
-  ]
-
-  weekOneWednesday: AgendaSlot[] = [
+    },
     {
       day: 'Wednesday, July 14',
       topic: 'The Foundations of Classical Machine Learning: Cost Functions, Data Splitting, Overfitting',
@@ -287,10 +253,7 @@ export default class SummerSchoolPage extends QiskitPage {
       topic: 'Day 3 Q&A Session',
       speaker: 'N/A',
       format: 'Live Q&A'
-    }
-  ]
-
-  weekOneThursday: AgendaSlot[] = [
+    },
     {
       day: 'Thursday, July 15',
       topic: 'Introduction to Parameterized Quantum Circuits',
@@ -308,10 +271,7 @@ export default class SummerSchoolPage extends QiskitPage {
       topic: 'Day 4 Q&A Session',
       speaker: 'N/A',
       format: 'Live Q&A'
-    }
-  ]
-
-  weekOneFriday: AgendaSlot[] = [
+    },
     {
       day: 'Friday, July 16',
       topic: 'Building a Variational Quantum Classifier',
@@ -361,102 +321,10 @@ export default class SummerSchoolPage extends QiskitPage {
     }
   ]))
 
-  weekOneTuesdayAgendaData: TableRowElement[][] = this.weekOneTuesday.map(slot => ([
-    {
-      component: 'span',
-      styles: 'min-width: 10rem; display: inline-block; font-weight: bold;',
-      data: slot.day
-    },
-    {
-      component: 'span',
-      styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
-      data: slot.topic
-    },
-    {
-      component: 'span',
-      styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
-      data: slot.speaker
-    },
-    {
-      component: 'span',
-      styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
-      data: slot.format
-    }
-  ]))
-
-  weekOneWednesdayAgendaData: TableRowElement[][] = this.weekOneWednesday.map(slot => ([
-    {
-      component: 'span',
-      styles: 'min-width: 10rem; display: inline-block; font-weight: bold;',
-      data: slot.day
-    },
-    {
-      component: 'span',
-      styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
-      data: slot.topic
-    },
-    {
-      component: 'span',
-      styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
-      data: slot.speaker
-    },
-    {
-      component: 'span',
-      styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
-      data: slot.format
-    }
-  ]))
-
-  weekOneThursdayAgendaData: TableRowElement[][] = this.weekOneThursday.map(slot => ([
-    {
-      component: 'span',
-      styles: 'min-width: 10rem; display: inline-block; font-weight: bold;',
-      data: slot.day
-    },
-    {
-      component: 'span',
-      styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
-      data: slot.topic
-    },
-    {
-      component: 'span',
-      styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
-      data: slot.speaker
-    },
-    {
-      component: 'span',
-      styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
-      data: slot.format
-    }
-  ]))
-
-  weekOneFridayAgendaData: TableRowElement[][] = this.weekOneFriday.map(slot => ([
-    {
-      component: 'span',
-      styles: 'min-width: 10rem; display: inline-block; font-weight: bold;',
-      data: slot.day
-    },
-    {
-      component: 'span',
-      styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
-      data: slot.topic
-    },
-    {
-      component: 'span',
-      styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
-      data: slot.speaker
-    },
-    {
-      component: 'span',
-      styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
-      data: slot.format
-    }
-  ]))
-
   agendaColumnsDataTable: string[] = ['Day', 'Topic', 'Speaker', 'Format']
 
   // Data for the helpful resources section
-  helpfulResourcesSectionTitle = 'Take action now'
+  helpfulResourcesSectionTitle = 'Helpful resources'
   helpfulResources: DescriptionCard[] = [
     {
       title: 'Stay informed',
