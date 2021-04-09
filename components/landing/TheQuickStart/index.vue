@@ -34,11 +34,5 @@ export default class TheQuickStart extends Vue {}
 .quick-start {
   @include contained();
   color: $cool-gray-80;
-
-  &__header {
-    @include type-style('expressive-heading-05');
-    color: $cool-gray-80;
-    margin-bottom: $layout-03;
-  }
 }
 </style>
