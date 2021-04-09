@@ -17,11 +17,6 @@
       </template>
     </AppPageHeaderWithCard>
 
-    <AppMosaicSection
-      class="summer-school-page__section"
-      :title="mosaicSectionTitle"
-      :elements="mosaicElements"
-    />
     <AppDataTableSection
       class="summer-school-page__section"
       :section-title="agendaSectionTitleOne"
@@ -46,6 +41,12 @@
         </cv-accordion-item>
       </cv-accordion>
     </section>
+
+    <AppMosaicSection
+      class="summer-school-page__section"
+      :title="mosaicSectionTitle"
+      :elements="mosaicElements"
+    />
 
     <AppHelpfulResourcesSection
       class="summer-school-page__section"
