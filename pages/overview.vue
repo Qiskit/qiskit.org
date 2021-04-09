@@ -22,14 +22,16 @@
     >
       <div class="bx--row">
         <div class="overview-page__table-of-contents bx--col-lg-3 bx--col-md-2">
-          <TheTableOfContents
-            :entries="tocEntries"
-            :active-section="activeSection"
-          />
-          <AppCta
-            v-bind="quickStartLink"
-            kind="ghost"
-          />
+          <div class="overview-page__table-of-contents__sticky-wrapper">
+            <TheTableOfContents
+              :entries="tocEntries"
+              :active-section="activeSection"
+            />
+            <AppCta
+              v-bind="quickStartLink"
+              kind="ghost"
+            />
+          </div>
         </div>
         <div class="bx--col-lg-13 bx--col-md-6">
           <AppIntroductoryContent
@@ -113,11 +115,13 @@ export default class OverviewPage extends QiskitPage {
   }
 
   &__table-of-contents {
-    position: sticky;
-    top: $layout-02;
-
     @include mq($until: medium) {
       display: none;
+    }
+
+    &__sticky-wrapper {
+      position: sticky;
+      top: $layout-02;
     }
   }
 
