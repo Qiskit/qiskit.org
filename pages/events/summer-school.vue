@@ -59,9 +59,11 @@
             {{ item.question }}
           </template>
           <template slot="content">
-            <p>
-              {{ item.answer }}
-            </p>
+            <!-- TODO: HTML content should not be in strings but in components
+            but lacking of a better solution given time constraints. -->
+            <!-- eslint-disable vue/no-v-html -->
+            <p v-html="item.answer" />
+            <!-- eslint-enable -->
           </template>
         </cv-accordion-item>
       </cv-accordion>
@@ -161,9 +163,9 @@ export default class SummerSchoolPage extends QiskitPage {
 
   headerCTA = {
     label: 'Register now',
-    url: 'https://airtable.com/shr6UbEsEvinHfjct',
+    url: 'http://qisk.it/QGSS2021EnquiryForm',
     segment: {
-      action: `${this.routeName} > header > register-now`
+      action: `${this.routeName} > header > qgss2021-enquiry-form`
     }
   }
 
@@ -183,12 +185,12 @@ export default class SummerSchoolPage extends QiskitPage {
   }
 
   // Data for the mosaic section
-  mosaicSectionTitle = 'Learn more!'
+  mosaicSectionTitle = 'Quantum Learning & More'
   mosaicElements = [
     {
       position: 'first',
-      title: 'Let us know if you have any questions!',
-      description: 'If your questions aren\'t answered by the FAQ below or our blog post, please use this form to submit your enquiries direct to the team.<br/><br/><a href="" target="_blank" style="cursor:pointer; text-decoration: none; color: #0f62fe;">Inquire now!</a>',
+      title: 'IBM Quantum',
+      description: 'IBM offers cloud access to the most advanced quantum computers available. Learn, develop, and run programs with our quantum applications and systems.<br/><br/><a href="https://quantum-computing.ibm.com/login" target="_blank" style="cursor:pointer; text-decoration: none; color: #0f62fe;">Explore IBM Quantum</a>',
       image: '/images/events/seminar-series/mosaic-experts.png'
     },
     {
@@ -538,7 +540,7 @@ export default class SummerSchoolPage extends QiskitPage {
   faqData = [
     {
       question: 'What are the pre-requisites for enrolling in the Summer School?',
-      answer: 'Minimal prerequisites are required for the Qiskit Global Summer School. If you know how to multiply two matrices, and have some programming experience in Python, you are ready for the Summer School. You can brush up on Python programming before attending the lectures by using the Qiskit Textbook. To make the most out of these lectures, you may also consider looking through the linear algebra prerequisites section of the Qiskit Textbook.'
+      answer: 'Minimal prerequisites are required for the Qiskit Global Summer School. If you know <a href="https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:matrices/x9e81a4f98389efdf:multiplying-matrices-by-matrices/v/matrix-multiplication-intro" target="_blank" style="cursor:pointer; text-decoration: none; color: #0f62fe;">how to multiply two matrices</a>, and have some programming experience in Python, you are ready for the Summer School.<br/><br/>You can <a href="https://qiskit.org/textbook/ch-prerequisites/python-and-jupyter-notebooks.html" target="_blank" style="cursor:pointer; text-decoration: none; color: #0f62fe;">brush up on Python programming</a> before attending the lectures by using the Qiskit Textbook. To make the most out of these lectures, you may also consider looking through the <a href="https://qiskit.org/textbook/ch-prerequisites/linear_algebra.html" target="_blank" style="cursor:pointer; text-decoration: none; color: #0f62fe;">linear algebra prerequisites</a> section of the Qiskit Textbook.'
     },
     {
       question: 'What are the application requirements for the Summer School?',
@@ -578,20 +580,19 @@ export default class SummerSchoolPage extends QiskitPage {
     },
     {
       question: 'How do I connect more with the Quantum Community?',
-      answer: 'There are several different ways you can connect with the IBM Quantum Community - depending on your preference. You can follow Qiskit and IBM Research on Twitter for the latest updates on new events, activities, and features on what is going on with the community. There is also a community Github that you can explore and contribute to, and you can read regular blog posts from our team and community members on Medium. You can also subscribe to the Qiskit Youtube for the latest video content and our weekly live Seminar Series. If you want to collaborate and connect with other members of the community, and participate in some of the ongoing conversations about quantum computing, you will want to check out our ever-growing Slack Community. From there you can connect with current and past interns, IBM researchers, Qiskit advocates, and fellow community members directly.'
+      answer: 'There are several different ways you can connect with the IBM Quantum Community - depending on your preference. You can <a href="https://twitter.com/qiskit" target="_blank" style="cursor:pointer; text-decoration: none; color: #0f62fe;">follow Qiskit</a> and <a href="https://twitter.com/IBMResearch" target="_blank" style="cursor:pointer; text-decoration: none; color: #0f62fe;">IBM Research</a> on Twitter for the latest updates on new events, activities, and features on what is going on with the community. There is also a <a href="https://github.com/Qiskit" target="_blank" style="cursor:pointer; text-decoration: none; color: #0f62fe;">community Github</a> that you can explore and contribute to, and you can read regular <a href="" target="_blank" style="cursor:pointer; text-decoration: none; color: #0f62fe;">blog posts from our team and community members on Medium</a>. You can also <a href="" target="_blank" style="cursor:pointer; text-decoration: none; color: #0f62fe;">subscribe to the Qiskit YouTube</a> for the latest video content and our weekly live Seminar Series.<br/><br/>If you want to collaborate and connect with other members of the community, and participate in some of the ongoing conversations about quantum computing, you will want to <a href="https://ibm.co/joinqiskitslack" target="_blank" style="cursor:pointer; text-decoration: none; color: #0f62fe;">check out our ever-growing Slack Community</a>. From there you can connect with current and past interns, IBM researchers, Qiskit advocates, and fellow community members directly.'
     },
     {
       question: 'Are there any upcoming events in my area that I can participate in?',
-      answer: 'All of our announced upcoming events are listed on qiskit.org, which is continually updated as we roll out more events throughout the year. You can also follow Qiskit on Twitter for the latest announcements on new and upcoming events!'
+      answer: 'All of our announced <a href="" target="_blank" style="cursor:pointer; text-decoration: none; color: #0f62fe;">upcoming events are listed on qiskit.org</a>, which is continually updated as we roll out more events throughout the year. You can also <a href="" target="_blank" style="cursor:pointer; text-decoration: none; color: #0f62fe;">follow Qiskit on Twitter</a> for the latest announcements on new and upcoming events!'
     },
     {
       question: 'Still have more questions?',
-      answer: 'For any questions about the summer school, please submit your questions using the form below. For all other enquiries, feel free to email us directly at qiskit.events@us.ibm.com.'
+      answer: 'For any questions about the summer school, please submit your questions using the form below. For all other enquiries, feel free to email us directly at <a href="mailto:qiskit.events@us.ibm.com" target="_blank" style="cursor:pointer; text-decoration: none; color: #0f62fe;">qiskit.events@us.ibm.com</a>.'
     }
   ]
 
   toggleAgenda (val: any) {
-    // console.log(val, 'val')
     this.currentTab = val
   }
 }
