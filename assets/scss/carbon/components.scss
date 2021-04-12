@@ -7,8 +7,31 @@ $feature-flags: (
 
 $carbon--theme: map-merge($carbon--theme--white, (
   'interactive-01': $interactive-01,
+  'icon-01': $purple-60,
+  'focus': $purple-60,
 ));
 
 @include carbon--theme();
 
 @import '~carbon-components/scss/globals/scss/styles.scss';
+
+//== Checkbox
+
+.bx--checkbox:focus + .bx--checkbox-label::before {
+  box-shadow: 0 0 0 2px $white, 0 0 0 4px $purple-60;
+}
+
+.bx--checkbox-label::before {
+  border: 1px solid $black-100;
+}
+
+.bx--checkbox:checked + .bx--checkbox-label::after {
+  border-left: 2px solid $white;
+  border-bottom: 2px solid $white;
+}
+
+.bx--checkbox:checked + .bx--checkbox-label::before {
+  background-color: $black-100;
+  border-color: $black-100;
+  border-width: 1px;
+}
