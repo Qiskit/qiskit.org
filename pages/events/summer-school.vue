@@ -17,6 +17,12 @@
       </template>
     </AppPageHeaderWithCard>
 
+    <AppMosaicSection
+      class="summer-school-page__section"
+      :title="mosaicSectionTitle"
+      :elements="mosaicElements"
+    />
+
     <section class="summer-school-page__section">
       <h2 class="copy__title">
         {{ eventSectionTitle }}
@@ -60,12 +66,6 @@
         </cv-accordion-item>
       </cv-accordion>
     </section>
-
-    <AppMosaicSection
-      class="summer-school-page__section"
-      :title="mosaicSectionTitle"
-      :elements="mosaicElements"
-    />
 
     <AppHelpfulResourcesSection
       class="summer-school-page__section"
