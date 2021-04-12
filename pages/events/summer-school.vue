@@ -174,7 +174,7 @@ export default class SummerSchoolPage extends QiskitPage {
     description: 'Card description goes here',
     location: 'Online',
     date: 'July 12 - 23, 2021',
-    time: 'N/A',
+    time: '',
     to: 'https://airtable.com/shrvAA05xkYgSKajc',
     ctaLabel: 'Learn more',
     segment: {
