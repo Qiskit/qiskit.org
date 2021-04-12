@@ -17,16 +17,28 @@
       </template>
     </AppPageHeaderWithCard>
 
+    <section class="summer-school-page__section">
+      <h2 class="copy__title">
+        {{ eventSectionTitle }}
+      </h2>
+      <client-only>
+        <cv-tabs @tab-selected="toggleAgenda">
+          <cv-tab :label="agendaSectionTitleOne" />
+          <cv-tab :label="agendaSectionTitleTwo" />
+        </cv-tabs>
+      </client-only>
+    </section>
     <AppDataTableSection
+      v-if="currentTab === 0"
       class="summer-school-page__section"
-      :section-title="agendaSectionTitleOne"
+      :section-title="''"
       :data-table-columns="agendaColumnsDataTable"
       :data-table-elements="weekOneAgendaAgendaData"
     />
-
     <AppDataTableSection
+      v-if="currentTab === 1"
       class="summer-school-page__section"
-      :section-title="agendaSectionTitleTwo"
+      :section-title="''"
       :data-table-columns="agendaColumnsDataTable"
       :data-table-elements="weekTwoAgendaAgendaData"
     />
@@ -136,6 +148,8 @@ interface AgendaSlot {
 })
 export default class SummerSchoolPage extends QiskitPage {
   routeName = 'summer-school'
+  currentTab: number = 0
+  eventSectionTitle = 'Event schedule'
 
   // Data for the header section
   headerPrimaryTitle = 'Qiskit Global Summer School 2021:'
@@ -157,7 +171,7 @@ export default class SummerSchoolPage extends QiskitPage {
   headerCardContent = {
     image: '/images/events/physics-of-computation/card-image-endicott-house-1981.png',
     title: 'Card title',
-    description: 'Keynotes, contributed talks, and more bridging the 1981 Physics of Computation conference with current research.',
+    description: 'Card description goes here',
     location: 'Online',
     date: 'July 12 - 23, 2021',
     time: 'N/A',
@@ -576,6 +590,11 @@ export default class SummerSchoolPage extends QiskitPage {
       answer: 'For any questions about the summer school, please submit your questions using the form below. For all other enquiries, feel free to email us directly at qiskit.events@us.ibm.com.'
     }
   ]
+
+  toggleAgenda (val: any) {
+    // console.log(val, 'val')
+    this.currentTab = val
+  }
 }
 </script>
 
@@ -609,6 +628,56 @@ export default class SummerSchoolPage extends QiskitPage {
 
   .bx--accordion__arrow {
     fill: $white-text-01;
+  }
+
+  & a.bx--tabs__nav-link {
+    color: $cool-gray-80;
+    border-bottom-color: $cool-gray-20;
+
+    &:focus,
+    &:active {
+      outline: none;
+    }
+
+    &:not(.bx--tabs__nav-item--disabled) {
+      color: $cool-gray-80;
+    }
+  }
+
+  & .bx--tabs__nav-item {
+    &:hover:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link,
+    &:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled):not(.bx--tabs__nav-item--selected) .bx--tabs__nav-link:focus,
+    &:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled):not(.bx--tabs__nav-item--selected) a.bx--tabs__nav-link:active,
+    &:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link, .bx--tabs__nav-item--selected:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link:focus {
+      color: $cool-gray-80;
+    }
+
+    &--selected:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link {
+      border-bottom-color: $purple-70;
+    }
+  }
+
+  & .bx--tabs__nav-item:hover:not(.bx--tabs__nav-item--disabled) {
+      box-shadow: none;
+    }
+
+    & .bx--tabs__nav-item:hover:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled),
+    & .bx--tabs__nav-item,
+    & .bx--tabs-trigger {
+      background-color: white;
+
+      svg {
+        fill: $gray-100;
+      }
+    }
+
+    & .bx--tabs__nav-link,
+    & .bx--tabs-trigger-text {
+      color: $gray-100;
+  }
+
+  .app-data-table-section {
+    margin-top: 0;
   }
 }
 
