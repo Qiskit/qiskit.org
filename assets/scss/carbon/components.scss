@@ -2,5 +2,13 @@ $feature-flags: (
   grid-columns-16: true,
 );
 
-@import './community-theme';
+@import '~@carbon/themes/scss/themes';
+@import '_variables.scss';
+
+$carbon--theme: map-merge($carbon--theme--white, (
+  'interactive-01': $interactive-01,
+));
+
+@include carbon--theme();
+
 @import '~carbon-components/scss/globals/scss/styles.scss';

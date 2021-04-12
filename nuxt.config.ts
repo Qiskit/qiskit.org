@@ -76,7 +76,8 @@ const config: NuxtConfig = {
   ** Global CSS
   */
   css: [
-    '~/static/css/fonts.css'
+    '~/static/css/fonts.css',
+    '~/assets/scss/carbon/components.scss',
   ],
 
   /*
@@ -119,7 +120,7 @@ const config: NuxtConfig = {
     scss: [
       './assets/scss/mq.scss',
       './assets/scss/mixins.scss',
-      './assets/scss/carbon/community-theme.scss'
+      './assets/scss/carbon/_variables.scss',
     ]
   },
 
