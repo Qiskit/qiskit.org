@@ -491,24 +491,24 @@ export default class SummerSchoolPage extends QiskitPage {
   helpfulResourcesSectionTitle = 'Helpful resources'
   helpfulResources: DescriptionCard[] = [
     {
-      title: 'Learn About & Install Qiskit',
-      description: 'TBD',
+      title: 'Let us know if you have any questions!',
+      description: 'If your questions aren\'t answered by the FAQ below or our blog post, please use this form to submit your enquiries direct to the team.',
       cta: {
-        url: 'https://qiskit.org/documentation/install.html',
-        label: 'Install Here',
+        url: 'http://qisk.it/QGSS2021EnquiryForm',
+        label: 'Enquire Now!',
         segment: {
-          action: `${this.routeName} > helpful-resources > install-qiskit`
+          action: `${this.routeName} > helpful-resources > qgss2021-enquiry-form`
         }
       }
     },
     {
-      title: 'IBM Quantum',
-      description: 'IBM offers cloud access to the most advanced quantum computers available. Learn, develop, and run programs with our quantum applications and systems.',
+      title: 'Learn About & Install Qiskit',
+      description: 'TBD',
       cta: {
-        url: 'https://quantum-computing.ibm.com/login',
-        label: 'Explore IBM Quantum',
+        url: 'https://qiskit.org/documentation/install.html',
+        label: 'Install here',
         segment: {
-          action: `${this.routeName} > helpful-resources > explore-ibm-quantum`
+          action: `${this.routeName} > helpful-resources > install-here`
         }
       }
     },
