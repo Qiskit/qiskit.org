@@ -489,36 +489,35 @@ export default class SummerSchoolPage extends QiskitPage {
   helpfulResourcesSectionTitle = 'Helpful resources'
   helpfulResources: DescriptionCard[] = [
     {
-      title: 'Stay informed',
-      description: 'Click on the link below to stay informed about and attend QC40.',
+      title: 'Learn About & Install Qiskit',
+      description: 'TBD',
       cta: {
-        url: 'https://airtable.com/shrvAA05xkYgSKajc',
-        label: 'Stay informed',
+        url: 'https://qiskit.org/documentation/install.html',
+        label: 'Install Here',
         segment: {
-          action: `${this.routeName} > helpful-resources > stay-informed`
+          action: `${this.routeName} > helpful-resources > install-qiskit`
         }
       }
     },
     {
-      title: 'Submit a talk',
-      description: `Abstract submissions for contributed talks will be accepted through
-      March 31. Click below for an opportunity to share your research project at QC40.`,
+      title: 'IBM Quantum',
+      description: 'IBM offers cloud access to the most advanced quantum computers available. Learn, develop, and run programs with our quantum applications and systems.',
       cta: {
-        url: 'https://airtable.com/shr6UbEsEvinHfjct',
-        label: 'Submit a talk',
+        url: 'https://quantum-computing.ibm.com/login',
+        label: 'Explore IBM Quantum',
         segment: {
-          action: `${this.routeName} > helpful-resources > submit-a-talk`
+          action: `${this.routeName} > helpful-resources > explore-ibm-quantum`
         }
       }
     },
     {
-      title: 'Learning resources',
-      description: 'Start your path towards learning Quantum Information Science',
+      title: 'Qiskit Medium',
+      description: 'This blog provides a nice overview of Qiskit and its direction as we explore what applications can be done on today\'s quantum devices.',
       cta: {
-        url: 'https://qiskit.org/learn',
-        label: 'Learn Qiskit and more',
+        url: 'https://medium.com/qiskit/qiskit-and-its-fundamental-elements-bcd7ead80492',
+        label: 'Read the blog',
         segment: {
-          action: `${this.routeName} > helpful-resources > qiskit-org-learn`
+          action: `${this.routeName} > helpful-resources > qiskit-medium`
         }
       }
     },
