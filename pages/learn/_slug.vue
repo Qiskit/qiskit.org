@@ -65,7 +65,6 @@ export default class LearnEntry extends QiskitPage {
 
     &__title {
       @include type-style('expressive-heading-05', true);
-      color: $white-text-01;
     }
   }
 

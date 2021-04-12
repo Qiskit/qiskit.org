@@ -78,7 +78,6 @@ export default class VersionInfo extends Vue {
 
   &__version-string {
     @include type-style('code-01');
-    color: $white-text-01;
     text-decoration: none;
     margin-bottom: $spacing-01;
   }
