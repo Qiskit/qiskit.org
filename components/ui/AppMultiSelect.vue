@@ -44,7 +44,7 @@ export default class AppMultiSelect extends Vue {
 
     & .bx--list-box--light,
     & .bx--list-box__menu {
-      background-color: $white;
+      background-color: $ui-02;
       border-bottom-color: $gray-20;
     }
 
@@ -70,7 +70,7 @@ export default class AppMultiSelect extends Vue {
 
     .bx--tag--filter {
       background-color: $purple-70;
-      color: $white;
+      color: $text-04;
       margin-left: 0;
       margin-right: $spacing-05;
     }

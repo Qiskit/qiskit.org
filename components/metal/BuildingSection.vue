@@ -138,7 +138,7 @@ export default class BuildingSection extends Vue {
   }
 
   .copy__subtitle {
-    color: $white;
+    color: $text-04;
   }
 
   &__media-img {
