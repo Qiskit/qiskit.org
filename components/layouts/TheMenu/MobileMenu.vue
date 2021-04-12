@@ -139,7 +139,7 @@ export default class MobileMenu extends Mixins(MenuMixin) {
     @include type-style('caption-01');
     background-color: $cool-gray-10;
     padding: $spacing-05 $spacing-07;
-    color: $mobile-footer-text-color;
+    color: $cool-gray-60;
   }
 }
 </style>
@@ -234,12 +234,12 @@ export default class MobileMenu extends Mixins(MenuMixin) {
     & .footer-section__title.footer-section__title_theme_light {
       @include type-style('caption-01');
       font-weight: 600;
-      color: $mobile-footer-text-color;
+      color: $cool-gray-60;
       padding-bottom: $spacing-05;
     }
 
     svg {
-      fill: $mobile-footer-text-color;
+      fill: $cool-gray-60;
     }
   }
 }
