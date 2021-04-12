@@ -21,7 +21,14 @@
       class="summer-school-page__section"
       :section-title="agendaSectionTitleOne"
       :data-table-columns="agendaColumnsDataTable"
-      :data-table-elements="weekOneMondayAgendaData"
+      :data-table-elements="weekOneAgendaAgendaData"
+    />
+
+    <AppDataTableSection
+      class="summer-school-page__section"
+      :section-title="agendaSectionTitleTwo"
+      :data-table-columns="agendaColumnsDataTable"
+      :data-table-elements="weekTwoAgendaAgendaData"
     />
 
     <section class="summer-school-page__section">
@@ -194,7 +201,7 @@ export default class SummerSchoolPage extends QiskitPage {
   agendaSectionTitleOne: string = 'Week 1'
   agendaSectionTitleTwo: string = 'Week 2'
 
-  weekOneMonday: AgendaSlot[] = [
+  weekOneAgenda: AgendaSlot[] = [
     {
       day: 'Monday, July 12',
       topic: 'Vector Spaces, Tensor Products and Qubits',
@@ -299,7 +306,147 @@ export default class SummerSchoolPage extends QiskitPage {
     }
   ]
 
-  weekOneMondayAgendaData: TableRowElement[][] = this.weekOneMonday.map(slot => ([
+  weekTwoAgenda: AgendaSlot[] = [
+    {
+      day: 'Monday, July 19',
+      topic: 'Quantum Kernels',
+      speaker: 'Bryce Fuller',
+      format: 'Lecture'
+    },
+    {
+      day: 'Monday, July 19',
+      topic: 'Support Vector Machines, Quantum Support Vector Machines',
+      speaker: 'Bryce Fuller',
+      format: 'Lecture'
+    },
+    {
+      day: 'Monday, July 19',
+      topic: '(Lab 3) Quantum Kernels and Support Vector Machines',
+      speaker: 'Anna Phan',
+      format: 'Lab'
+    },
+    {
+      day: 'Monday, July 19',
+      topic: 'Day 6 Q&A Session',
+      speaker: 'N/A',
+      format: 'Live Q&A'
+    },
+    {
+      day: 'Tuesday, July 20',
+      topic: 'Introduction to Quantum Neural Networks',
+      speaker: 'Julien Gacon',
+      format: 'Lecture'
+    },
+    {
+      day: 'Tuesday, July 20',
+      topic: 'Training Quantum Machine Learning Models',
+      speaker: 'Christa Zoufal',
+      format: 'Lecture'
+    },
+    {
+      day: 'Tuesday, July 20',
+      topic: '(Lab 4) Optimizing Quantum Neural Networks',
+      speaker: 'Julien Gacon',
+      format: 'Lab'
+    },
+    {
+      day: 'Tuesday, July 20',
+      topic: 'Day 7 Q&A Session',
+      speaker: 'N/A',
+      format: 'Live Q&A'
+    },
+    {
+      day: 'Wednesday, July 21',
+      topic: 'Barren Plateaus, Trainability Issues and How to Avoid Them',
+      speaker: 'Francesco Tacchino',
+      format: 'Lecture'
+    },
+    {
+      day: 'Wednesday, July 21',
+      topic: 'Applications of Quantum Neural Networks',
+      speaker: 'Francesco Tacchino',
+      format: 'Lecture'
+    },
+    {
+      day: 'Wednesday, July 21',
+      topic: 'Day 8 Q&A Session',
+      speaker: 'N/A',
+      format: 'Live Q&A'
+    },
+    {
+      day: 'Thursday, July 22',
+      topic: 'Introduction to Quantum Hardware',
+      speaker: 'Nathan Earnest-Noble',
+      format: 'Lecture'
+    },
+    {
+      day: 'Thursday, July 22',
+      topic: 'Hardware Efficient Ansatze for Quantum Machine Learning',
+      speaker: 'Nathan Earnest-Noble',
+      format: 'Lecture'
+    },
+    {
+      day: 'Thursday, July 22',
+      topic: '(Lab 5) Hardware Efficient Ansatze for Quantum Machine Learning',
+      speaker: 'Nathan Earnest-Noble',
+      format: 'Lab'
+    },
+    {
+      day: 'Thursday, July 22',
+      topic: 'Day 8 Q&A Session',
+      speaker: 'N/A',
+      format: 'Live Q&A'
+    },
+    {
+      day: 'Friday, July 23',
+      topic: 'Advanced Quantum Machine Learning Algorithms: Quantum Boltzmann Machines and Quantum Generative Adversarial Networks',
+      speaker: 'Stefan Woerner',
+      format: 'Lecture'
+    },
+    {
+      day: 'Friday, July 23',
+      topic: 'The Capacity and Power of Quantum Machine Learning Models & the Future of Quantum Machine Learning',
+      speaker: 'Amira  Abbas',
+      format: 'Lecture'
+    },
+    {
+      day: 'Friday, July 23',
+      topic: 'Day 9 Q&A Session',
+      speaker: 'N/A',
+      format: 'Live Q&A'
+    },
+    {
+      day: 'Friday, July 23',
+      topic: 'Qiskit Global Summer School 2021 Commencement & Wrap Celebration',
+      speaker: 'N/A',
+      format: 'Commencement'
+    }
+  ]
+
+  weekOneAgendaAgendaData: TableRowElement[][] = this.weekOneAgenda.map(slot => ([
+    {
+      component: 'span',
+      styles: 'min-width: 10rem; display: inline-block; font-weight: bold;',
+      data: slot.day
+    },
+    {
+      component: 'span',
+      styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
+      data: slot.topic
+    },
+    {
+      component: 'span',
+      styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
+      data: slot.speaker
+    },
+    {
+      component: 'span',
+      styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
+      data: slot.format
+    }
+  ]))
+
+  weekTwoAgendaAgendaData: TableRowElement[][] = this.weekTwoAgenda.map(slot => ([
     {
       component: 'span',
       styles: 'min-width: 10rem; display: inline-block; font-weight: bold;',
