@@ -9,12 +9,8 @@
       get started with hosted Jupyter Notebooks in IBM Quantum Lab.
     </p>
     <div class="bx--row">
-      <div class="bx--col-lg-10 bx--col-md-5">
-        <StartLocally />
-      </div>
-      <div class="bx--col-lg-6 bx--col-md-3">
-        <StartOnTheCloud />
-      </div>
+      <StartLocally class="bx--col-lg-10 bx--col-md-5" />
+      <StartOnTheCloud class="bx--col-lg-6 bx--col-md-3" />
     </div>
   </article>
 </template>
