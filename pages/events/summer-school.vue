@@ -151,7 +151,7 @@ interface AgendaSlot {
 export default class SummerSchoolPage extends QiskitPage {
   routeName = 'summer-school'
   currentTab: number = 0
-  eventSectionTitle = 'Event schedule'
+  eventSectionTitle = 'Curriculum'
 
   // Data for the header section
   headerPrimaryTitle = 'Qiskit Global Summer School 2021:'
@@ -488,7 +488,7 @@ export default class SummerSchoolPage extends QiskitPage {
   agendaColumnsDataTable: string[] = ['Day', 'Topic', 'Speaker', 'Format']
 
   // Data for the helpful resources section
-  helpfulResourcesSectionTitle = 'Helpful resources'
+  helpfulResourcesSectionTitle = 'Resources'
   helpfulResources: DescriptionCard[] = [
     {
       title: 'Let us know if you have any questions!',
