@@ -130,9 +130,7 @@ export default class TheLearningResourceList extends Vue {
   }
 
   &__filter-time {
-    margin-right: $layout-03;
     color: $text-02;
-    flex: 0 0 25%;
 
     @include mq($until: medium) {
       margin-bottom: $layout-03;
