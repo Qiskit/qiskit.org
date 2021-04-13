@@ -29,7 +29,7 @@ export default class JoinUsSection extends Vue {
 @import "~carbon-components/scss/globals/scss/typography";
 
 .early-access-section {
-  background-color: $cool-gray-80;
+  background-color: $ui-02_dark;
 
   &__container {
     @include contained();

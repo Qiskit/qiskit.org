@@ -88,7 +88,7 @@ export default class PageFooter extends Vue {
     }
 
     &_theme_dark {
-      background-color: $cool-gray-90;
+      background-color: $ui-01_dark;
     }
   }
 
@@ -102,7 +102,7 @@ export default class PageFooter extends Vue {
     }
 
     &_theme_dark {
-      background-color: $cool-gray-100;
+      background-color: $ui-background_dark;
     }
   }
 

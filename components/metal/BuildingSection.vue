@@ -73,7 +73,6 @@ export default class BuildingSection extends Vue {
   @include responsive-grid-bg('/images/grid/grid-right-dark.svg', 36rem);
   background-position: right -1rem bottom -2px;
   background-repeat: no-repeat;
-  background-color: $cool-gray-100;
   padding-bottom: $layout-05;
 
   @include mq($until: large) {
