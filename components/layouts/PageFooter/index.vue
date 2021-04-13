@@ -6,25 +6,25 @@
     >
       <div class="page-footer__primary-container">
         <div class="bx--row">
-          <div class="bx--col-lg-4 bx--col-md-2">
+          <div class="bx--col-lg-4 bx--col-md">
             <AppLogo
               class="page-footer__logo"
               :class="`page-footer__logo_theme_${theme}`"
             />
           </div>
-          <div class="bx--col-lg-12 bx--col-md-6 page-footer__primary-sections">
-            <FooterSection
-              v-for="sectionElements in footerElements"
-              :key="sectionElements.title"
-              v-bind="sectionElements"
-              :theme="theme"
-            />
-            <FooterSection
-              v-bind="stayConnectedElements"
-              icons-only
-              :theme="theme"
-            />
-          </div>
+          <FooterSection
+            v-for="sectionElements in footerElements"
+            :key="sectionElements.title"
+            class="bx--col-lg-3 bx--col-sm"
+            v-bind="sectionElements"
+            :theme="theme"
+          />
+          <FooterSection
+            class="bx--col-lg-3 bx--col-md page-footer__stay-connected"
+            v-bind="stayConnectedElements"
+            icons-only
+            :theme="theme"
+          />
         </div>
       </div>
     </section>
@@ -126,16 +126,6 @@ export default class PageFooter extends Vue {
     }
   }
 
-  &__primary-sections {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    row-gap: $spacing-07;
-
-    @include mq($until: medium) {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-
   &__copyright,
   &__secondary-link {
     @include type-style('caption-01');
@@ -174,6 +164,12 @@ export default class PageFooter extends Vue {
 
     &:hover {
       text-decoration: underline;
+    }
+  }
+
+  &__stay-connected {
+    @include mq($until: medium) {
+      margin-top: $spacing-07;
     }
   }
 }
