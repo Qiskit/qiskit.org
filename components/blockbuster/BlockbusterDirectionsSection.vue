@@ -5,7 +5,7 @@
         Get it at Blockbuster
       </h2>
       <div class="bx--row">
-        <div class="bx--col-lg-6 bx--col-md-4 blockbuster__section-mobile-spacing">
+        <div class="bx--col-lg-8 bx--col-md-4 blockbuster__section-mobile-spacing">
           <p class="copy__paragraph">
             You're only a short drive away from watching a movie, grabbing some
             candy, popcorn, and enjoying a relaxing night with your perfectly
@@ -20,7 +20,7 @@
             :url="directionsUrl"
           />
         </div>
-        <div class="bx--col-lg-6 bx--col-md-4">
+        <div class="bx--col-lg-8 bx--col-md-4">
           <div
             v-if="userLocationLoading"
             class="blockbuster-directions-section__loading-container"
@@ -75,12 +75,10 @@ export default class BlockbusterDirectionsSection extends Vue {
 </script>
 
 <style lang="scss">
-@import "~/assets/scss/blocks/copy.scss";
-
 .blockbuster-directions-section {
   &__loading-container {
     align-items: center;
-    color: $text-01;
+    color: $text-color;
     display: flex;
     flex-flow: column;
     justify-content: center;

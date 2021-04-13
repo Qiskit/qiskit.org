@@ -1,16 +1,18 @@
 <template>
   <section class="start-on-the-cloud">
-    <div class="start-on-the-cloud__content">
-      <h3 class="copy__subtitle">
-        Start Online
-      </h3>
-      <p class="copy__paragraph copy__paragraph_importance_support">
-        Get started in the cloud without installing anything with IBM Quantum Lab.
-      </p>
-      <AppCta
-        kind="ghost"
-        v-bind="ibmQExperienceLink"
-      />
+    <div class="start-on-the-cloud__wrapper">
+      <div class="start-on-the-cloud__content">
+        <h3 class="copy__subtitle">
+          Start Online
+        </h3>
+        <p class="copy__paragraph copy__paragraph_importance_support">
+          Get started in the cloud without installing anything with IBM Quantum Lab.
+        </p>
+        <AppCta
+          kind="ghost"
+          v-bind="ibmQExperienceLink"
+        />
+      </div>
     </div>
   </section>
 </template>
@@ -27,21 +29,19 @@ export default class StartOnTheCloud extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '~/assets/scss/blocks/copy.scss';
-@import '~carbon-components/scss/globals/scss/typography';
-
 .start-on-the-cloud {
-  @include responsive-grid-bg('/images/grid/grid-white.svg', 36rem);
+  &__wrapper {
+    @include responsive-grid-bg('/images/grid/grid-white.svg', 36rem);
 
-  width: 37%;
-  background-color: $cool-gray-10;
-  background-position: bottom left;
-  background-repeat: no-repeat;
+    background-color: $background-color-lighter;
+    background-position: bottom left;
+    background-repeat: no-repeat;
+    height: 100%;
 
-  @include mq($until: medium) {
-    width: auto;
-    height: 17rem;
-    background-position: bottom right;
+    @include mq($until: medium) {
+      background-position: bottom right;
+      height: 17rem;
+    }
   }
 
   &__content {

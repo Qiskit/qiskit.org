@@ -1,10 +1,11 @@
 <template>
   <section class="app-helpful-resources-section">
     <h2 class="copy__title" v-text="title" />
-    <div class="app-helpful-resources-section__resources">
+    <div class="bx--row">
       <AppDescriptionCard
         v-for="resource in resources"
         :key="resource.title"
+        class="bx--col-lg-4 bx--col-md-4 app-helpful-resources-section__card"
         v-bind="resource"
       />
     </div>
@@ -24,21 +25,10 @@ export default class AppHelpfulResourcesSection extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import "~/assets/scss/blocks/copy.scss";
-
 .app-helpful-resources-section {
-  &__resources {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    column-gap: 2rem;
-    row-gap: 2rem;
-
-    @include mq($from: medium, $until: large) {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    @include mq($until: medium) {
-      grid-template-columns: repeat(1, 1fr);
+  &__card {
+    @include mq($until: large) {
+      margin-bottom: $spacing-07;
     }
   }
 }

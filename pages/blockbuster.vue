@@ -66,8 +66,6 @@ export default class BlockbusterPage extends QiskitPage {
 </script>
 
 <style lang="scss">
-@import "~/assets/scss/blocks/copy.scss";
-
 .blockbuster {
   &__container {
     @include contained();
@@ -97,7 +95,7 @@ export default class BlockbusterPage extends QiskitPage {
 
       .copy__paragraph,
       .copy__title {
-        color: $text-04;
+        color: $text-color-white;
       }
     }
 

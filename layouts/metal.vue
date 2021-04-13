@@ -1,6 +1,6 @@
 <template>
   <!-- tabindex is needed to allow hiding the menu in iOS Safari -->
-  <div class="content-root content-root_theme_dark" tabindex="-1">
+  <div class="layout" tabindex="-1">
     <nuxt />
     <PageFooter theme="dark" />
   </div>
@@ -16,6 +16,9 @@ export default class MetalLayout extends Vue {
 }
 </script>
 
-<style lang="scss">
-@import '~/assets/scss/layout.scss';
+<style lang="scss" scoped>
+.layout {
+  background-color: $background-color-black;
+  color: $text-color-lighter-2;
+}
 </style>

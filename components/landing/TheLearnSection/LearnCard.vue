@@ -32,13 +32,10 @@ export default class LearnCard extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '~/assets/scss/blocks/copy.scss';
-@import '~carbon-components/scss/globals/scss/typography';
-
 .learn-card {
   height: 16rem;
   width: 100%;
-  background-color: $cool-gray-10;
+  background-color: $background-color-lighter;
   display: flex;
 
   @include mq($until: large) {
@@ -51,7 +48,7 @@ export default class LearnCard extends Vue {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    color: $cool-gray-60;
+    color: $text-color-lighter;
 
     @include mq($until: large) {
       padding: $spacing-05;

@@ -46,11 +46,8 @@ export default class TheHeroMoment extends Vue {
 @import '~carbon-components/scss/globals/scss/typography';
 
 .the-hero-moment {
-  //@include responsive-grid-bg-strip('/images/grid/grid-hero.svg', auto, 56rem);
-
   position: relative;
   overflow: hidden;
-  //padding-top: $layout-05;
   margin-bottom: $layout-05;
   // In Figma, the height is not enforced but the background is always
   // visible completely so we do it in the CSS. A small correction is needed
@@ -72,7 +69,7 @@ export default class TheHeroMoment extends Vue {
   &__square-link {
     width: 4rem;
     height: 4rem;
-    background-color: $cool-gray-100;
+    background-color: $background-color-black;
     position: absolute;
     top: 21%;
     left: 43%;
@@ -114,7 +111,6 @@ export default class TheHeroMoment extends Vue {
 
   &__title {
     @include type-style('productive-heading-07');
-    color: $white-text-01;
     margin: 0 0 $layout-05;
     max-width: 6 * $column-size-large;
     // TODO: Force pointer events to allow the user to select text. Remove
@@ -138,7 +134,7 @@ export default class TheHeroMoment extends Vue {
 
   &__description {
     @include type-style('body-long-01');
-    color: $cool-gray-80;
+    color: $text-color-light;
     max-width: 5 * $column-size-large;
     margin: 0 0 $layout-06;
     // TODO: Force pointer events to allow the user to select text. Remove

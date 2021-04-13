@@ -21,20 +21,20 @@
           </cv-tabs>
         </client-only>
       </div>
-      <div
-        v-for="filter in extraFilters"
-        :key="filter.label"
-        class="event-page__extra-filters event-page__extra-filters_on-small-screen"
-      >
-        <AppMultiSelect
-          :label="filter.label"
-          :options="filter.options"
-          :value="getCheckedFilters(filter.filterType)"
-          @change-selection="updateWholeFilter(filter.filterType, $event)"
-        />
-      </div>
-      <div class="event-page__event-index">
-        <div class="event-page__extra-filters event-page__extra-filters_on-large-screen">
+      <div class="bx--row">
+        <div
+          v-for="filter in extraFilters"
+          :key="filter.label"
+          class="bx--col-md-0"
+        >
+          <AppMultiSelect
+            :label="filter.label"
+            :options="filter.options"
+            :value="getCheckedFilters(filter.filterType)"
+            @change-selection="updateWholeFilter(filter.filterType, $event)"
+          />
+        </div>
+        <div class="bx--col-lg-4 bx--col-md-2 bx--col-sm-0">
           <AppFieldset
             v-for="filter in extraFilters"
             :key="filter.label"
@@ -53,7 +53,7 @@
             </client-only>
           </AppFieldset>
         </div>
-        <div class="event-page__main-content">
+        <div class="bx--col-lg-12 bx--col-md-6 event-page__main-content">
           <div>
             <AppCard
               v-if="noEvents"
@@ -196,8 +196,6 @@ export default class EventsPage extends QiskitPage {
 @import '~carbon-components/scss/globals/scss/typography';
 
 .event-page {
-  color: $white-text-01;
-
   &__container {
     @include contained();
   }
@@ -210,40 +208,31 @@ export default class EventsPage extends QiskitPage {
     }
   }
 
-  &__event-index {
-    display: flex;
-    justify-content: space-between;
-
-    @include mq($until: medium) {
-      flex-direction: column;
-    }
-  }
-
   &__time-filters {
     margin-top: $layout-03;
     margin-bottom: $layout-04;
     .bx--tabs__nav-link {
-      color: $black-100;
-      border-bottom-color: $gray-20;
+      color: black;
+      border-bottom-color: $border-color;
     }
 
     .bx--tabs__nav-item:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link,
     .bx--tabs__nav-item:hover:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link {
-      color: $gray-100;
+      color: $text-color;
     }
 
     .bx--tabs__nav-item--selected:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link {
-        border-bottom-color: $purple-70;
+        border-bottom-color: $border-color-secondary;
     }
 
     @include mq($until: medium) {
       margin-bottom: 0;
       .bx--tabs-trigger {
-        background-color: $white;
-        border-bottom: 1px solid $gray-20;
+        background-color: $background-color-white;
+        border-bottom: 1px solid $border-color;
 
         &[class*="--open"] {
-          background-color: $cool-gray-10;
+          background-color: $background-color-lighter;
         }
       }
 
@@ -252,16 +241,16 @@ export default class EventsPage extends QiskitPage {
       }
 
       .bx--tabs-trigger-text {
-        color: $gray-100;
+        color: $text-color;
       }
 
       .bx--tabs-trigger--open {
-        border-bottom: 1px solid $gray-60;
+        border-bottom: 1px solid $border-color-quaternary;
       }
 
       .bx--tabs-trigger--open,
       .bx--tabs__nav-item {
-        background-color: $cool-gray-10;
+        background-color: $background-color-lighter;
       }
 
       .bx--tabs__nav-item:last-child .bx--tabs__nav-link {
@@ -269,30 +258,13 @@ export default class EventsPage extends QiskitPage {
       }
 
       .bx--tabs__nav-item:hover:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled) {
-        background-color: $cool-gray-20;
-      }
-    }
-  }
-
-  &__extra-filters {
-    &_on-large-screen {
-      @include mq($until: medium) {
-        display: none;
-      }
-    }
-
-    &_on-small-screen {
-      @include mq($from: medium) {
-        display: none;
+        background-color: $background-color-light;
       }
     }
   }
 
   &__main-content {
-    width: 75%;
-
     @include mq($until: medium) {
-      width: 100%;
       margin-top: $layout-04;
     }
   }

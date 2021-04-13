@@ -300,8 +300,6 @@ export default class PhysicsOfComputationPage extends QiskitPage {
 
 <style lang="scss" scoped>
 .physics-of-computation-page {
-  color: $white-text-01;
-
   &__section {
     @include contained();
     margin-top: $layout-05;

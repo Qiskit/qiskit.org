@@ -72,11 +72,9 @@ const config: NuxtConfig = {
   */
   loading: { color: '#fff' },
 
-  /*
-  ** Global CSS
-  */
+  // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    '~/static/css/fonts.css'
+    '~/assets/scss/main.scss'
   ],
 
   /*
@@ -105,21 +103,16 @@ const config: NuxtConfig = {
   */
   modules: [
     '@nuxt/content',
-    '@nuxtjs/style-resources',
     '@nuxtjs/axios',
     'nuxt-lazy-load'
   ],
 
   components: true,
 
+  // Nuxt Style Resources: @nuxtjs/style-resources
   styleResources: {
-    /*
-    ** Do not include styles! Only variables, mixins and functions.
-    */
     scss: [
-      './assets/scss/mq.scss',
-      './assets/scss/mixins.scss',
-      './assets/scss/carbon/community-theme.scss'
+      '~/assets/scss/helpers/index.scss'
     ]
   },
 
@@ -131,7 +124,8 @@ const config: NuxtConfig = {
     ['@nuxt/typescript-build', {
       typeCheck: true,
       ignoreNotFoundWarnings: true
-    }]
+    }],
+    '@nuxtjs/style-resources'
   ],
 
   /*

@@ -18,13 +18,13 @@ export default class EventFooter extends Vue {
 
 <style lang="scss" scoped>
 footer {
-  color: $text-01;
+  color: $text-color;
   display: flex;
   flex-direction: column;
   justify-content: center;
   min-height: 10rem;
   text-align: center;
   margin-top: 4rem;
-  background-color: $ui-background;
+  background-color: $background-color-white;
 }
 </style>

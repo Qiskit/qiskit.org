@@ -79,8 +79,6 @@ export default class LandingPage extends QiskitPage {
 </script>
 
 <style lang="scss">
-@import '~/assets/scss/blocks/copy.scss';
-
 .landing-page {
   &__grid {
     @include responsive-grid-bg-strip('/images/grid/grid-mosaic.svg', 112rem, auto, 16rem);

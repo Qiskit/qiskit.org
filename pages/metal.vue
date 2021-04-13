@@ -25,6 +25,3 @@ export default class MetalPage extends QiskitPage {
   routeName = 'metal'
 }
 </script>
-
-<style lang="scss" scoped>
-</style>

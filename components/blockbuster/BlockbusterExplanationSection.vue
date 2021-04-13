@@ -2,7 +2,7 @@
   <section>
     <div class="blockbuster__container">
       <div class="bx--row">
-        <div class="bx--col-lg-6">
+        <div class="bx--col-lg-8">
           <h2 class="copy__title">
             Pulling back the curtain
           </h2>
@@ -81,8 +81,6 @@ export default class BlockbusterExplanationSection extends Vue {}
 </script>
 
 <style lang="scss" scoped>
-@import "~/assets/scss/blocks/copy.scss";
-
 .blockbuster-explanation-section {
   &__text-link {
     color: $carbon--blue-70 !important;

@@ -25,7 +25,7 @@ export default class AppFieldset extends Vue {
 
   &__label {
     @include type-style('body-short-01');
-    color: $cool-gray-80;
+    color: $text-color-light;
     margin-bottom: $layout-01;
   }
 }

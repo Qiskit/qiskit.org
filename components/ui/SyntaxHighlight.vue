@@ -38,7 +38,7 @@ export default class SyntaxHighlight extends Vue {
 
 .syntax-highlight {
   position: relative;
-  background-color: $cool-gray-10;
+  background-color: $background-color-lighter;
   padding: $spacing-05 $spacing-07;
 
   @include mq($until: large) {
@@ -55,7 +55,7 @@ export default class SyntaxHighlight extends Vue {
     text-transform: lowercase;
     background-size: 200% 100%;
     background-position-x: 100%;
-    background-image: linear-gradient(90deg, $interactive-01 0%, $interactive-01 50%, $purple-70 50%, $purple-70 100%);
+    background-image: linear-gradient(90deg, $button-background-color-light 0%, $button-background-color-light 50%, $background-color-secondary 50%, $background-color-secondary 100%);
     transition: background-position-x 0.3s ease-out;
 
     &:hover,
@@ -66,7 +66,7 @@ export default class SyntaxHighlight extends Vue {
 
   &__code {
     @include type-style('code-02');
-    color: $cool-gray-80;
+    color: $text-color-light;
     min-height: 8rem;
 
     @include mq($until: large) {

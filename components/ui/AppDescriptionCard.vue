@@ -37,8 +37,6 @@ export default class AppDescriptionCard extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '~/assets/scss/blocks/copy.scss';
-
 .app-description-card {
   display: flex;
   flex-direction: column;

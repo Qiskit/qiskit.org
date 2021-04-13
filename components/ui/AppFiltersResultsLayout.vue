@@ -1,22 +1,14 @@
 <template>
-  <div class="app-filters-results-layout">
+  <div class="bx--row app-filters-results-layout">
     <div
-      class="
-        app-filters-results-layout__filters
-        app-filters-results-layout__filters_on-large-screen
-      "
+      class="bx--col-lg-4 bx--col-md-2 bx--col-sm-0 app-filters-results-layout__filters"
     >
       <slot name="filters-on-m-l-screen" />
     </div>
-    <div
-      class="
-        app-filters-results-layout__filters
-        app-filters-results-layout__filters_on-small-screen
-      "
-    >
+    <div class="bx--col-sm-4 bx--col-md-0 app-filters-results-layout__filters">
       <slot name="filters-on-s-screen" />
     </div>
-    <div class="app-filters-results-layout__results">
+    <div class="bx--col-lg-12 bx--col-md-6 app-filters-results-layout__results">
       <slot name="results" />
     </div>
   </div>
@@ -32,35 +24,14 @@ export default class AppFiltersResultsLayouts extends Vue {}
 
 <style lang="scss">
 .app-filters-results-layout {
-  display: flex;
-  justify-content: space-between;
   margin-top: $layout-05;
 
-  @include mq($until: medium) {
-    flex-direction: column;
-  }
-
   &__filters {
-    color: $gray-100;
-
-    &_on-large-screen {
-      @include mq($until: medium) {
-        display: none;
-      }
-    }
-
-    &_on-small-screen {
-      @include mq($from: medium) {
-        display: none;
-      }
-    }
+    color: $text-color;
   }
 
   &__results {
-    width: 75%;
-
     @include mq($until: medium) {
-      width: 100%;
       margin-top: $layout-04;
     }
   }

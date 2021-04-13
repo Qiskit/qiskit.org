@@ -10,7 +10,7 @@
     <div v-else class="blockbuster__container">
       <h2 class="copy__title" v-text="recommendation.title" />
       <div class="bx--row">
-        <div class="bx--col-lg-6 bx--col-md-4 blockbuster__section-mobile-spacing">
+        <div class="bx--col-lg-8 bx--col-md-4 blockbuster__section-mobile-spacing">
           <div class="blockbuster-recommendation-section__video-wrapper">
             <iframe
               class="blockbuster-recommendation-section__video"
@@ -25,7 +25,7 @@
             />
           </div>
         </div>
-        <div class="bx--col-lg-6 bx--col-md-4">
+        <div class="bx--col-lg-8 bx--col-md-4">
           <p
             v-for="descriptionParagraph in recommendation.description"
             :key="descriptionParagraph"
@@ -105,12 +105,10 @@ export default class BlockbusterRecommendationSection extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import "~/assets/scss/blocks/copy.scss";
-
 .blockbuster-recommendation-section {
   &__loading-container {
     align-items: center;
-    color: $text-03;
+    color: $text-color-lighter;
     display: flex;
     flex-flow: column;
     justify-content: center;

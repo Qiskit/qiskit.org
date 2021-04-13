@@ -22,7 +22,3 @@ export default class TheCarefulExplanationForBeginners extends Vue {
   preliminaryDescription = 'Physics is an attempt to describe the behaviour of the world around us. Around the early 20th century, through delicate experiments in laboratories, physicists saw strange behaviours which could not be explained by their current understanding of physics. These discoveries led to the development of the more complete ‘quantum’ physics, which was able to describe this behaviour very successfully.'
 }
 </script>
-
-<style lang="scss" scoped>
-@import '~/assets/scss/blocks/copy.scss';
-</style>

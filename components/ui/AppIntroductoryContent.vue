@@ -33,7 +33,7 @@ export default class AppIntroductoryContent extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '~/assets/scss/blocks/copy.scss';
+@import '~carbon-components/scss/globals/scss/typography';
 
 .app-introductory-content {
   display: flex;
@@ -55,7 +55,7 @@ export default class AppIntroductoryContent extends Vue {
 
   &__description {
     @include type-style('body-long-01');
-    color: $cool-gray-80;
+    color: $text-color-light;
     margin-bottom: $layout-05;
 
     @include mq($until: large) {
