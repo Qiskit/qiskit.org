@@ -22,8 +22,6 @@ export default class AppDataTableSection extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import "~/assets/scss/blocks/copy.scss";
-
 .app-data-table-section {
   .copy__title {
     max-width: initial;

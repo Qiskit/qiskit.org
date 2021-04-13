@@ -75,8 +75,6 @@ export default class BlockbusterDirectionsSection extends Vue {
 </script>
 
 <style lang="scss">
-@import "~/assets/scss/blocks/copy.scss";
-
 .blockbuster-directions-section {
   &__loading-container {
     align-items: center;

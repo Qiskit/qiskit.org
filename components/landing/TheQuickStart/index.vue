@@ -24,9 +24,6 @@ export default class TheQuickStart extends Vue {}
 </script>
 
 <style lang="scss" scoped>
-@import '~/assets/scss/blocks/copy.scss';
-@import '~carbon-components/scss/globals/scss/typography';
-
 .quick-start {
   @include contained();
 

@@ -36,6 +36,5 @@ export default class PrerequisitesForLinux extends Vue { }
 </script>
 
 <style lang="scss" scoped>
-@import '~/assets/scss/blocks/copy.scss';
 @import '~/assets/scss/blocks/prerequisites.scss';
 </style>

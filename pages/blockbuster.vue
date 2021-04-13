@@ -66,8 +66,6 @@ export default class BlockbusterPage extends QiskitPage {
 </script>
 
 <style lang="scss">
-@import "~/assets/scss/blocks/copy.scss";
-
 .blockbuster {
   &__container {
     @include contained();

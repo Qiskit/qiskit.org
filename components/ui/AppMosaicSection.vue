@@ -28,8 +28,6 @@ export default class AppMosaicSection extends Vue {
 </script>
 
 <style lang="scss">
-@import "~/assets/scss/blocks/copy.scss";
-
 .app-mosaic-section {
   &__mosaic {
     margin-top: $layout-01;

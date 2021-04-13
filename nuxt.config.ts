@@ -77,6 +77,7 @@ const config: NuxtConfig = {
   */
   css: [
     '~/static/css/fonts.css',
+    '~/assets/scss/blocks/copy.scss',
     '~/assets/scss/carbon/components.scss',
   ],
 

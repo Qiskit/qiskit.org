@@ -67,7 +67,6 @@ export default class BuildingSection extends Vue {
 
 <style lang="scss" scoped>
 @import "~carbon-components/scss/globals/scss/typography";
-@import '~/assets/scss/blocks/copy.scss';
 
 .building-section {
   @include responsive-grid-bg('/images/grid/grid-right-dark.svg', 36rem);

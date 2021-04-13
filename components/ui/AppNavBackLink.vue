@@ -23,7 +23,7 @@ export default class AppNavBackLink extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import "~/assets/scss/blocks/copy.scss";
+@import '~carbon-components/scss/globals/scss/typography';
 
 .app-nav-back-link {
   @include contained();

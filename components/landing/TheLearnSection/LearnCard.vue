@@ -32,9 +32,6 @@ export default class LearnCard extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '~/assets/scss/blocks/copy.scss';
-@import '~carbon-components/scss/globals/scss/typography';
-
 .learn-card {
   height: 16rem;
   width: 100%;

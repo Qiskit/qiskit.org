@@ -99,8 +99,6 @@ export default class OverviewPage extends QiskitPage {
 </script>
 
 <style lang="scss" scoped>
-@import '~/assets/scss/blocks/copy.scss';
-
 .overview-page {
   &__content-container {
     @include contained();

@@ -112,9 +112,6 @@ export default class TheLearningResourceList extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '~/assets/scss/blocks/copy.scss';
-@import '~carbon-components/scss/globals/scss/typography';
-
 .the-learning-resources-list {
   @include responsive-grid-bg('/images/grid/grid-left-inverted.svg', 36rem);
   background-repeat: no-repeat;
@@ -172,7 +169,6 @@ export default class TheLearningResourceList extends Vue {
 </style>
 
 <style lang="scss">
-@import '~/assets/scss/blocks/copy.scss';
 /**
  * TODO: Review if there is some mechanism, inside the Carbon Themes
  * framework, for applying a different theme to an specific component (#703).
