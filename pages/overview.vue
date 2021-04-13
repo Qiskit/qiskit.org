@@ -21,7 +21,7 @@
       "
     >
       <div class="bx--row">
-        <div class="overview-page__table-of-contents bx--col-lg-3 bx--col-md-2 bx--col-sm-0">
+        <div class="bx--col-lg-3 bx--col-md-2 bx--col-sm-0 overview-page__table-of-contents">
           <div class="overview-page__table-of-contents__sticky-wrapper">
             <TheTableOfContents
               :entries="tocEntries"
