@@ -102,7 +102,6 @@ export default class ContentAccordion extends Vue {
   }
 
   & .bx--accordion__content {
-    min-height: 30.5rem;
     padding: $spacing-06 $spacing-07;
     background-color: $cool-gray-10;
     color: $gray-80;
