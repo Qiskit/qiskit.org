@@ -38,7 +38,7 @@ export default class SyntaxHighlight extends Vue {
 
 .syntax-highlight {
   position: relative;
-  background-color: $cool-gray-10;
+  background-color: $ui-01;
   padding: $spacing-05 $spacing-07;
 
   @include mq($until: large) {

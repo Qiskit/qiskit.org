@@ -88,7 +88,7 @@ export default class AppMosaic extends Vue {
   }
 
   &__element {
-    background-color: $cool-gray-10;
+    background-color: $ui-01;
     display: flex;
 
     &_first {

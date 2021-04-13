@@ -181,7 +181,7 @@ export default class TheLearningResourceList extends Vue {
   &__filter-level {
     & a.bx--tabs__nav-link {
       color: $text-02;
-      border-bottom-color: $cool-gray-20;
+      border-bottom-color: $ui-03;
 
       &:focus,
       &:active {
@@ -202,7 +202,7 @@ export default class TheLearningResourceList extends Vue {
       }
 
       &--selected:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link {
-        border-bottom-color: $purple-70;
+        border-bottom-color: $active-primary;
       }
     }
 
@@ -213,26 +213,26 @@ export default class TheLearningResourceList extends Vue {
     & .bx--tabs__nav-item:hover:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled),
     & .bx--tabs__nav-item,
     & .bx--tabs-trigger {
-      background-color: white;
+      background-color: $ui-background;
 
       svg {
-        fill: $gray-100;
+        fill: $text-01;
       }
     }
 
     & .bx--tabs__nav-link,
     & .bx--tabs-trigger-text {
-      color: $gray-100;
+      color: $text-01;
     }
   }
 
   &__filter-time {
     & .bx--dropdown,
     & .bx--dropdown-item {
-      background-color: white;
+      background-color: $ui-background;
 
         svg {
-          fill: $gray-100;
+          fill: $text-01;
         }
     }
 
@@ -245,7 +245,7 @@ export default class TheLearningResourceList extends Vue {
 
     & .bx--dropdown-link,
     & .bx--dropdown-text {
-      color: $gray-100;
+      color: $text-01;
       border-top-color: #dde1e6;
     }
 

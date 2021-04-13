@@ -218,7 +218,7 @@ export default class EventsPage extends QiskitPage {
 
     .bx--tabs__nav-item:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link,
     .bx--tabs__nav-item:hover:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link {
-      color: $gray-100;
+      color: $text-01;
     }
 
     .bx--tabs__nav-item--selected:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link {
@@ -232,7 +232,7 @@ export default class EventsPage extends QiskitPage {
         border-bottom: 1px solid $gray-20;
 
         &[class*="--open"] {
-          background-color: $cool-gray-10;
+          background-color: $ui-01;
         }
       }
 
@@ -241,7 +241,7 @@ export default class EventsPage extends QiskitPage {
       }
 
       .bx--tabs-trigger-text {
-        color: $gray-100;
+        color: $text-01;
       }
 
       .bx--tabs-trigger--open {
@@ -250,7 +250,7 @@ export default class EventsPage extends QiskitPage {
 
       .bx--tabs-trigger--open,
       .bx--tabs__nav-item {
-        background-color: $cool-gray-10;
+        background-color: $ui-01;
       }
 
       .bx--tabs__nav-item:last-child .bx--tabs__nav-link {
@@ -258,7 +258,7 @@ export default class EventsPage extends QiskitPage {
       }
 
       .bx--tabs__nav-item:hover:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled) {
-        background-color: $cool-gray-20;
+        background-color: $ui-03;
       }
     }
   }

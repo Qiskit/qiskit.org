@@ -206,7 +206,7 @@ export default class StartLocally extends Vue {
 
   &__option {
     @include type-style('body-long-01');
-    background-color: $cool-gray-10;
+    background-color: $ui-01;
     max-width: 100%;
     color: $text-02;
     padding-left: $spacing-07;
@@ -218,9 +218,9 @@ export default class StartLocally extends Vue {
     }
 
     &_active {
-      border-color: $purple-70;
+      border-color: $active-primary;
       border-width: 2px;
-      color: $purple-70;
+      color: $active-primary;
     }
   }
 }
@@ -247,8 +247,6 @@ export default class StartLocally extends Vue {
     }
 
     & .bx--accordion__heading {
-      color: $gray-100;
-
       &:hover::before {
         // To match default light theme UI hover, which is not among the Carbon
         // palette. 🤦

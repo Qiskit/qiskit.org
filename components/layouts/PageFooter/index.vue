@@ -84,7 +84,7 @@ export default class PageFooter extends Vue {
     padding: $spacing-07 0;
 
     &_theme_light {
-      background-color: $cool-gray-10;
+      background-color: $ui-01;
     }
 
     &_theme_dark {
@@ -118,7 +118,7 @@ export default class PageFooter extends Vue {
     }
 
     &_theme_light {
-      color: $cool-gray-60;
+      color: $text-03;
     }
 
     &_theme_dark {
@@ -131,7 +131,7 @@ export default class PageFooter extends Vue {
     @include type-style('caption-01');
 
     &_theme_light {
-      color: $cool-gray-60;
+      color: $text-03;
     }
 
     &_theme_dark {

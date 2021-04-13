@@ -125,7 +125,7 @@ export default class OverviewPage extends QiskitPage {
   }
 
   &__content-section-details {
-    background-color: $cool-gray-10;
+    background-color: $ui-01;
     height: 100%;
   }
 

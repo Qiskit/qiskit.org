@@ -27,7 +27,7 @@ export default class AppFiltersResultsLayouts extends Vue {}
   margin-top: $layout-05;
 
   &__filters {
-    color: $gray-100;
+    color: $text-01;
   }
 
   &__results {

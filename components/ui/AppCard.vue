@@ -69,7 +69,7 @@ export default class AppCard extends Vue {
 .app-card {
   min-height: 13rem;
   width: 100%;
-  background-color: $cool-gray-10;
+  background-color: $ui-01;
   color: $text-02;
   display: flex;
 
@@ -80,7 +80,7 @@ export default class AppCard extends Vue {
 
   &__image {
     flex: 0 0 14rem;
-    background-color: $cool-gray-20;
+    background-color: $ui-03;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;

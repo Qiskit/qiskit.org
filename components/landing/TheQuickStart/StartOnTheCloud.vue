@@ -33,7 +33,7 @@ export default class StartOnTheCloud extends Vue {
   &__wrapper {
     @include responsive-grid-bg('/images/grid/grid-white.svg', 36rem);
 
-    background-color: $cool-gray-10;
+    background-color: $ui-01;
     background-position: bottom left;
     background-repeat: no-repeat;
     height: 100%;

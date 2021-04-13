@@ -35,7 +35,7 @@ export default class LearnCard extends Vue {
 .learn-card {
   height: 16rem;
   width: 100%;
-  background-color: $cool-gray-10;
+  background-color: $ui-01;
   display: flex;
 
   @include mq($until: large) {
@@ -48,7 +48,7 @@ export default class LearnCard extends Vue {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    color: $cool-gray-60;
+    color: $text-03;
 
     @include mq($until: large) {
       padding: $spacing-05;

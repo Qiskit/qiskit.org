@@ -117,7 +117,7 @@ export default class MobileMenu extends Mixins(MenuMixin) {
 
     &_active:not(&_is-parent),
     &_active .bx--list-box__label {
-      color: $purple-70;
+      color: $active-primary;
     }
 
     &_second-level {
@@ -137,9 +137,9 @@ export default class MobileMenu extends Mixins(MenuMixin) {
 
   &__footer-text {
     @include type-style('caption-01');
-    background-color: $cool-gray-10;
+    background-color: $ui-01;
     padding: $spacing-05 $spacing-07;
-    color: $cool-gray-60;
+    color: $text-03;
   }
 }
 </style>
@@ -201,19 +201,19 @@ export default class MobileMenu extends Mixins(MenuMixin) {
   .bx--list-box--expanded {
     min-height: 4rem;
     height: 100%;
-    background-color: $cool-gray-10;
+    background-color: $ui-01;
 
     .bx--list-box__menu {
       position: relative;
       max-height: unset;
-      background-color: $cool-gray-10;
+      background-color: $ui-01;
       box-shadow: initial;
       z-index: initial;
       top: 0;
      }
 
     & .bx--list-box__menu li:not(:last-child) {
-      border-bottom: 1px solid $cool-gray-20;
+      border-bottom: 1px solid $ui-03;
     }
   }
 
@@ -221,7 +221,7 @@ export default class MobileMenu extends Mixins(MenuMixin) {
     &_active {
       & .bx--list-box__label,
       & .bx--dropdown {
-        color: $purple-70;
+        color: $active-primary;
       }
 
       &.bx--form-item {
@@ -234,7 +234,7 @@ export default class MobileMenu extends Mixins(MenuMixin) {
     & .footer-section__title.footer-section__title_theme_light {
       @include type-style('caption-01');
       font-weight: 600;
-      color: $cool-gray-60;
+      color: $text-03;
       padding-bottom: $spacing-05;
     }
 

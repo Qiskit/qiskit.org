@@ -122,17 +122,11 @@ export default class TheMenu extends Mixins(MenuMixin) {
 
 .menu {
   &__main-level {
-    --link-color: #{$gray-80};
-  }
-
-  &__second-level {
-    --link-color: #{$inverse-01};
-    background-color: $purple-40;
+    --link-color: #{$text-02};
   }
 
   &__mobile {
     position: relative;
-    color: $purple-70;
 
     @include mq($from: large) {
       display: none;
@@ -193,10 +187,10 @@ export default class TheMenu extends Mixins(MenuMixin) {
   &__logo {
     height: 1.5rem;
     width: auto;
-    color: $cool-gray-60;
+    color: $text-03;
 
     &_active {
-      color: $purple-70;
+      color: $active-primary;
     }
   }
 
@@ -244,7 +238,7 @@ export default class TheMenu extends Mixins(MenuMixin) {
     &_active#{&} {
       &_second-level,
       &_second-level:hover {
-        color: $purple-70;
+        color: $active-primary;
       }
     }
   }
@@ -326,7 +320,7 @@ export default class TheMenu extends Mixins(MenuMixin) {
     }
 
     &:hover {
-      background-color: $cool-gray-20;
+      background-color: $ui-03;
     }
   }
 
