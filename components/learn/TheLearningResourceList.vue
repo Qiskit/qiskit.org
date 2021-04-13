@@ -33,8 +33,8 @@
           />
         </cv-tabs>
       </client-only>
-      <div class="the-learning-resources-list__layout">
-        <fieldset class="the-learning-resources-list__filter-time">
+      <div class="bx--row">
+        <fieldset class="bx--col-lg-4 bx--col-md-2 the-learning-resources-list__filter-time">
           <legend
             class="
                 the-learning-resources-list__filter-time-label
@@ -74,7 +74,7 @@
             </cv-radio-group>
           </client-only>
         </fieldset>
-        <section class="the-learning-resources-list__results">
+        <section class="bx--col-lg-12 bx--col-md-6 the-learning-resources-list__results">
           <slot />
         </section>
       </div>
@@ -124,15 +124,6 @@ export default class TheLearningResourceList extends Vue {
     @include contained();
   }
 
-  &__layout {
-    display: flex;
-    justify-content: space-between;
-
-    @include mq($until: medium) {
-      display: block;
-    }
-  }
-
   &__filter-level {
     margin-bottom: $layout-04;
 
@@ -142,13 +133,9 @@ export default class TheLearningResourceList extends Vue {
   }
 
   &__filter-time {
-    margin-right: $layout-03;
     color: $cool-gray-80;
-    flex: 0 0 25%;
 
     @include mq($until: medium) {
-      width: auto;
-      margin-right: 0;
       margin-bottom: $layout-03;
     }
   }
@@ -171,13 +158,6 @@ export default class TheLearningResourceList extends Vue {
   }
 
   &__results {
-    display: inline-block;
-    flex: auto;
-
-    @include mq($until: medium) {
-      width: 100%;
-    }
-
     & > * {
       margin-bottom: $layout-02;
 

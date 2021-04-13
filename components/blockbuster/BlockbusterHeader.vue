@@ -3,7 +3,7 @@
     <div class="blockbuster__container">
       <div class="bx--row">
         <div
-          class="bx--col-lg-6 bx--col-md-4 blockbuster__section-mobile-spacing"
+          class="bx--col-lg-8 bx--col-md-4 blockbuster__section-mobile-spacing"
         >
           <div class="blockbuster-header__main">
             <div>
@@ -23,7 +23,7 @@
             />
           </div>
         </div>
-        <div class="bx--col-lg-6 bx--col-md-4">
+        <div class="bx--col-lg-8 bx--col-md-4">
           <img
             alt="Blockbuster"
             class="blockbuster-header__logo"

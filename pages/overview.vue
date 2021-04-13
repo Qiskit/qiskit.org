@@ -20,38 +20,42 @@
         overview-page__content-container
       "
     >
-      <div class="overview-page__table-of-contents">
-        <TheTableOfContents
-          :entries="tocEntries"
-          :active-section="activeSection"
-        />
-        <AppCta
-          v-bind="quickStartLink"
-          kind="ghost"
-        />
-      </div>
-      <div class="overview-page__list-of-contents">
-        <AppIntroductoryContent
-          v-for="section in contentSections"
-          :id="section.id"
-          :key="section.id"
-          class="overview-page__content-section scrollable"
-          :title="section.title"
-          :description="section.description"
-          :link="section.link"
-        >
-          <ContentAccordion
-            v-if="section.subSections"
-            class="overview-page__content-section-details"
-            :tabs="asTabs(section.subSections)"
-          />
-          <div v-else class="overview-page__content-section-details">
-            <img
-              class="overview-page__content-section-image"
-              :src="section.image"
-            >
+      <div class="bx--row">
+        <div class="bx--col-lg-3 bx--col-md-2 bx--col-sm-0 overview-page__table-of-contents">
+          <div class="overview-page__table-of-contents__sticky-wrapper">
+            <TheTableOfContents
+              :entries="tocEntries"
+              :active-section="activeSection"
+            />
+            <AppCta
+              v-bind="quickStartLink"
+              kind="ghost"
+            />
           </div>
-        </AppIntroductoryContent>
+        </div>
+        <div class="bx--col-lg-13 bx--col-md-6">
+          <AppIntroductoryContent
+            v-for="section in contentSections"
+            :id="section.id"
+            :key="section.id"
+            class="overview-page__content-section scrollable"
+            :title="section.title"
+            :description="section.description"
+            :link="section.link"
+          >
+            <ContentAccordion
+              v-if="section.subSections"
+              class="overview-page__content-section-details"
+              :tabs="asTabs(section.subSections)"
+            />
+            <div v-else class="overview-page__content-section-details">
+              <img
+                class="overview-page__content-section-image"
+                :src="section.image"
+              >
+            </div>
+          </AppIntroductoryContent>
+        </div>
       </div>
     </section>
     <TheQuickStart id="quick-start" />
@@ -111,21 +115,10 @@ export default class OverviewPage extends QiskitPage {
   }
 
   &__table-of-contents {
-    position: sticky;
-    top: $layout-02;
-    flex: 0 0 (3 * $column-size-large);
-
-    @include mq($from: medium, $until: large) {
-      flex: 0 0 (2 * $column-size-medium);
+    &__sticky-wrapper {
+      position: sticky;
+      top: $layout-02;
     }
-
-    @include mq($until: medium) {
-      display: none;
-    }
-  }
-
-  &__list-of-contents {
-    flex: 1;
   }
 
   &__content-section {

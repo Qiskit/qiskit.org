@@ -1,28 +1,23 @@
 <template>
   <section class="join-section">
-    <article
-      class="
-        join-section__feature
-        join-section__intro
-      "
-    >
-      <p
-        class="
-          copy__paragraph
-          join-section__intro-copy
-        "
+    <div class="bx--row">
+      <article
+        class="bx--col-lg-4 bx--col-md-4 join-section__feature join-section__intro"
       >
-        The Qiskit advocate program is a global program that provides support to
-        the individuals who actively contribute to the Qiskit Community.
-      </p>
-      <AppCta v-bind="joinAction" />
-    </article>
-    <CompactFeature
-      v-for="benefit in advocateBenefits"
-      :key="`benefit-${benefit.icon}`"
-      class="join-section__feature"
-      v-bind="benefit"
-    />
+        <p class="copy__paragraph">
+          The Qiskit advocate program is a global program that provides support
+          to the individuals who actively contribute to the Qiskit Community.
+        </p>
+        <AppCta v-bind="joinAction" />
+      </article>
+      <div
+        v-for="benefit in advocateBenefits"
+        :key="`benefit-${benefit.icon}`"
+        class="bx--col-lg-4 bx--col-md-4 join-section__feature"
+      >
+        <CompactFeature v-bind="benefit" />
+      </div>
+    </div>
   </section>
 </template>
 
@@ -65,35 +60,10 @@ export default class JoinSection extends Vue {
 
 .join-section {
   @include contained();
-  padding: 0 $spacing-05;
-  display: flex;
-  justify-content: space-between;
-
-  @include mq($until: medium) {
-    flex-wrap: initial;
-    flex-direction: column;
-  }
-
-  @include mq($until: large) {
-    flex-wrap: wrap;
-    justify-content: initial;
-    padding-left: $spacing-05;
-  }
 
   &__feature {
-    flex: 1 1 4 * $column-size-large;
-    margin: 0 $spacing-05;
-    padding-bottom: $spacing-09;
-
     @include mq($until: large) {
-      flex: 1 1 45%;
-      margin: $spacing-05;
-    }
-
-    @include mq($until: medium) {
-      flex: 1 1 auto;
-      margin-left: initial;
-      margin-bottom: $spacing-05;
+      margin-bottom: $spacing-07;
     }
   }
 
@@ -101,15 +71,6 @@ export default class JoinSection extends Vue {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding-bottom: 0;
-  }
-
-  &__copy {
-    @include type-style('body-long-01');
-
-    @include mq($until: medium) {
-      margin-bottom: $spacing-07;
-    }
   }
 }
 </style>

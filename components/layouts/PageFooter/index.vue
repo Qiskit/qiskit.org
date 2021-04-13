@@ -5,18 +5,26 @@
       :class="`page-footer__primary_theme_${theme}`"
     >
       <div class="page-footer__primary-container">
-        <AppLogo
-          class="page-footer__logo"
-          :class="`page-footer__logo_theme_${theme}`"
-        />
-        <div class="page-footer__primary-sections">
+        <div class="bx--row">
+          <div class="bx--col-lg-4 bx--col-md">
+            <AppLogo
+              class="page-footer__logo"
+              :class="`page-footer__logo_theme_${theme}`"
+            />
+          </div>
           <FooterSection
             v-for="sectionElements in footerElements"
             :key="sectionElements.title"
+            class="bx--col-lg-3 bx--col-sm"
             v-bind="sectionElements"
             :theme="theme"
           />
-          <FooterSection v-bind="stayConnectedElements" icons-only :theme="theme" />
+          <FooterSection
+            class="bx--col-lg-3 bx--col-md page-footer__stay-connected"
+            v-bind="stayConnectedElements"
+            icons-only
+            :theme="theme"
+          />
         </div>
       </div>
     </section>
@@ -100,26 +108,12 @@ export default class PageFooter extends Vue {
 
   &__primary-container {
     @include contained();
-    display: flex;
-    justify-content: space-between;
-
-    @include mq($until: medium) {
-      display: block;
-    }
   }
 
   &__logo {
     height: 32px;
-    flex: 0 0 112px;
-    margin-right: $layout-06;
-
-    @include mq($from: medium, $until: large) {
-      margin-right: $layout-05;
-    }
 
     @include mq($until: medium) {
-      height: auto;
-      width: 96px;
       margin-bottom: $spacing-07;
     }
 
@@ -129,16 +123,6 @@ export default class PageFooter extends Vue {
 
     &_theme_dark {
       color: $white;
-    }
-  }
-
-  &__primary-sections {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    row-gap: $spacing-07;
-
-    @include mq($until: medium) {
-      grid-template-columns: repeat(3, 1fr);
     }
   }
 
@@ -180,6 +164,12 @@ export default class PageFooter extends Vue {
 
     &:hover {
       text-decoration: underline;
+    }
+  }
+
+  &__stay-connected {
+    @include mq($until: medium) {
+      margin-top: $spacing-07;
     }
   }
 }
