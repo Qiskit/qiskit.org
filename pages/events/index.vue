@@ -21,22 +21,20 @@
           </cv-tabs>
         </client-only>
       </div>
-      <div
-        v-for="filter in extraFilters"
-        :key="filter.label"
-        class="event-page__extra-filters_on-small-screen"
-      >
-        <AppMultiSelect
-          :label="filter.label"
-          :options="filter.options"
-          :value="getCheckedFilters(filter.filterType)"
-          @change-selection="updateWholeFilter(filter.filterType, $event)"
-        />
-      </div>
       <div class="bx--row">
         <div
-          class="bx--col-lg-4 bx--col-md-2 event-page__extra-filters_on-large-screen"
+          v-for="filter in extraFilters"
+          :key="filter.label"
+          class="bx--col-md-0"
         >
+          <AppMultiSelect
+            :label="filter.label"
+            :options="filter.options"
+            :value="getCheckedFilters(filter.filterType)"
+            @change-selection="updateWholeFilter(filter.filterType, $event)"
+          />
+        </div>
+        <div class="bx--col-lg-4 bx--col-md-2 bx--col-sm-0">
           <AppFieldset
             v-for="filter in extraFilters"
             :key="filter.label"
@@ -263,20 +261,6 @@ export default class EventsPage extends QiskitPage {
 
       .bx--tabs__nav-item:hover:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled) {
         background-color: $cool-gray-20;
-      }
-    }
-  }
-
-  &__extra-filters {
-    &_on-large-screen {
-      @include mq($until: medium) {
-        display: none;
-      }
-    }
-
-    &_on-small-screen {
-      @include mq($from: medium) {
-        display: none;
       }
     }
   }

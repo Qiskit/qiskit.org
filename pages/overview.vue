@@ -21,7 +21,7 @@
       "
     >
       <div class="bx--row">
-        <div class="overview-page__table-of-contents bx--col-lg-3 bx--col-md-2">
+        <div class="overview-page__table-of-contents bx--col-lg-3 bx--col-md-2 bx--col-sm-0">
           <div class="overview-page__table-of-contents__sticky-wrapper">
             <TheTableOfContents
               :entries="tocEntries"
@@ -115,10 +115,6 @@ export default class OverviewPage extends QiskitPage {
   }
 
   &__table-of-contents {
-    @include mq($until: medium) {
-      display: none;
-    }
-
     &__sticky-wrapper {
       position: sticky;
       top: $layout-02;
