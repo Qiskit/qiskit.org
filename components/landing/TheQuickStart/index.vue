@@ -29,6 +29,14 @@ export default class TheQuickStart extends Vue {}
 
 .quick-start {
   @include contained();
-  color: $cool-gray-80;
+
+  &__sections {
+    display: flex;
+    flex-direction: row;
+
+    @include mq($until: medium) {
+      flex-direction: column;
+    }
+  }
 }
 </style>

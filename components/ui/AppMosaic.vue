@@ -177,7 +177,7 @@ export default class AppMosaic extends Vue {
 
       &-description {
         @include type-style('body-long-01');
-        color: $cool-gray-80;
+        color: $text-02;
       }
     }
   }

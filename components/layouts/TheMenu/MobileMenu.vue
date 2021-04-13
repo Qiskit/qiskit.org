@@ -111,7 +111,7 @@ export default class MobileMenu extends Mixins(MenuMixin) {
     flex-direction: column;
     justify-content: center;
     text-decoration: none;
-    color: $cool-gray-80;
+    color: $text-02;
     height: 4rem;
     border-bottom: 1px solid $cool-gray-10;
 
@@ -157,7 +157,7 @@ export default class MobileMenu extends Mixins(MenuMixin) {
 
   .bx--list-box__label {
     @include type-style('body-long-02');
-    color: $cool-gray-80;
+    color: $text-02;
   }
 
   .bx--dropdown {
@@ -184,7 +184,7 @@ export default class MobileMenu extends Mixins(MenuMixin) {
     }
 
     svg {
-      fill: $cool-gray-80;
+      fill: $text-02;
     }
 
     @include mq($until: medium) {

@@ -134,7 +134,7 @@ export default class TheHeroMoment extends Vue {
 
   &__description {
     @include type-style('body-long-01');
-    color: $cool-gray-80;
+    color: $text-02;
     max-width: 5 * $column-size-large;
     margin: 0 0 $layout-06;
     // TODO: Force pointer events to allow the user to select text. Remove

@@ -133,7 +133,9 @@ export default class TheLearningResourceList extends Vue {
   }
 
   &__filter-time {
-    color: $cool-gray-80;
+    margin-right: $layout-03;
+    color: $text-02;
+    flex: 0 0 25%;
 
     @include mq($until: medium) {
       margin-bottom: $layout-03;
@@ -182,7 +184,7 @@ export default class TheLearningResourceList extends Vue {
 .the-learning-resources-list {
   &__filter-level {
     & a.bx--tabs__nav-link {
-      color: $cool-gray-80;
+      color: $text-02;
       border-bottom-color: $cool-gray-20;
 
       &:focus,
@@ -191,7 +193,7 @@ export default class TheLearningResourceList extends Vue {
       }
 
       &:not(.bx--tabs__nav-item--disabled) {
-        color: $cool-gray-80;
+        color: $text-02;
       }
     }
 
@@ -200,7 +202,7 @@ export default class TheLearningResourceList extends Vue {
       &:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled):not(.bx--tabs__nav-item--selected) .bx--tabs__nav-link:focus,
       &:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled):not(.bx--tabs__nav-item--selected) a.bx--tabs__nav-link:active,
       &:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link, .bx--tabs__nav-item--selected:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link:focus {
-        color: $cool-gray-80;
+        color: $text-02;
       }
 
       &--selected:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link {

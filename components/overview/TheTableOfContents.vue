@@ -41,7 +41,7 @@ export default class TheTableOfContents extends Vue {
 
   &__entry {
     @include type-style('body-long-01');
-    color: $cool-gray-80;
+    color: $text-02;
     text-decoration: none;
     margin-bottom: $layout-02;
 

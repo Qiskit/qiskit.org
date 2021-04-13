@@ -66,7 +66,7 @@ export default class SyntaxHighlight extends Vue {
 
   &__code {
     @include type-style('code-02');
-    color: $cool-gray-80;
+    color: $text-02;
     min-height: 8rem;
 
     @include mq($until: large) {
