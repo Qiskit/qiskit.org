@@ -28,27 +28,26 @@
         {{ eventData.agenda.title }}
       </h2>
       <client-only>
-        <cv-tabs @tab-selected="toggleAgenda">
-          <cv-tab :label="eventData.agenda.week1.tabName" />
-          <cv-tab :label="eventData.agenda.week2.tabName" />
+        <cv-tabs>
+          <cv-tab :label="eventData.agenda.week1.tabName">
+            <AppDataTableSection
+              class="summer-school-page__section"
+              :section-title="''"
+              :data-table-columns="agendaColumnsDataTable"
+              :data-table-elements="eventData.agenda.week1.tableData"
+            />
+          </cv-tab>
+          <cv-tab :label="eventData.agenda.week2.tabName">
+            <AppDataTableSection
+              class="summer-school-page__section"
+              :section-title="''"
+              :data-table-columns="agendaColumnsDataTable"
+              :data-table-elements="eventData.agenda.week2.tableData"
+            />
+          </cv-tab>
         </cv-tabs>
       </client-only>
     </section>
-    <AppDataTableSection
-      v-if="currentTab === 0"
-      class="summer-school-page__section"
-      :section-title="''"
-      :data-table-columns="agendaColumnsDataTable"
-      :data-table-elements="eventData.agenda.week1.tableData"
-    />
-    <AppDataTableSection
-      v-if="currentTab === 1"
-      class="summer-school-page__section"
-      :section-title="''"
-      :data-table-columns="agendaColumnsDataTable"
-      :data-table-elements="eventData.agenda.week2.tableData"
-    />
-
     <section class="summer-school-page__section">
       <h2 class="copy__title">
         Frequently asked questions
@@ -198,13 +197,7 @@ interface AgendaSlot {
 })
 export default class SummerSchoolPage extends QiskitPage {
   routeName = 'summer-school'
-  currentTab: number = 0
-
   agendaColumnsDataTable: string[] = ['Day', 'Topic', 'Speaker', 'Format']
-
-  toggleAgenda (val: any) {
-    this.currentTab = val
-  }
 }
 </script>
 
