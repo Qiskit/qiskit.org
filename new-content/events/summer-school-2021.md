@@ -210,7 +210,7 @@ helpfulResources:
   title: 'Resources'
   resources:
     - title: 'Learn About & Install Qiskit'
-      description: 'TBD'
+      description: 'TBD ASAP'
       cta:
         url: 'https://qiskit.org/documentation/install.html'
         label: 'Install here'
