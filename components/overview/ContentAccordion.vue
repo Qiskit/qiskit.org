@@ -86,10 +86,10 @@ export default class ContentAccordion extends Vue {
 
   & button[aria-expanded="true"]{
     color: $text-color-white;
-    background-color: $background-color-primary;
+    background-color: $button-background-color;
 
     &:hover::before {
-      background-color: $background-color-primary;
+      background-color: $button-background-color;
     }
   }
 
