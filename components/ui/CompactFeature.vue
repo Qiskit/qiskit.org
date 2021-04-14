@@ -47,7 +47,7 @@ $feature-icon-size: 2.25rem;
 
   &__title {
     @include type-style('productive-heading-02');
-    color: $text-color-lightest;
+    color: $text-color-white;
     margin-bottom: $spacing-04;
     height: 2.5rem; // for consistent alignment
 
@@ -58,7 +58,7 @@ $feature-icon-size: 2.25rem;
 
   &__description {
     @include type-style('body-long-01');
-    color: $text-color-lightest;
+    color: $text-color-white;
   }
 }
 </style>

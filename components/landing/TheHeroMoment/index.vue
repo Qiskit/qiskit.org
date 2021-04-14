@@ -69,7 +69,7 @@ export default class TheHeroMoment extends Vue {
   &__square-link {
     width: 4rem;
     height: 4rem;
-    background-color: $background-color-darkest;
+    background-color: $background-color-black;
     position: absolute;
     top: 21%;
     left: 43%;

@@ -64,7 +64,7 @@ export default class BlockbusterHeader extends Vue {
   }
 
   &__headline {
-    color: $text-color-lightest;
+    color: $text-color-white;
 
     .highlight {
       color: $carbon--yellow-20;
@@ -83,7 +83,7 @@ export default class BlockbusterHeader extends Vue {
     }
 
     .copy__paragraph {
-      color: $text-color-lightest;
+      color: $text-color-white;
     }
   }
 

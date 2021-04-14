@@ -64,7 +64,7 @@ export default class AppDataTable extends Vue {
 
 .bx--data-table tbody tr td, .bx--data-table tbody tr:hover td {
   color: $text-color-light;
-  background-color: $background-color-lightest;
+  background-color: $background-color-white;
   border-top: none;
   border-bottom: 1px solid $border-color;
 }

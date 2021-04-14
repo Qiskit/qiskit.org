@@ -98,11 +98,11 @@ export default class PageFooter extends Vue {
     padding-bottom: $spacing-07 + 2.5rem; // make room for the "cookies preferences" button
 
     &_theme_light {
-      background-color: $background-color-lightest;
+      background-color: $background-color-white;
     }
 
     &_theme_dark {
-      background-color: $background-color-darkest;
+      background-color: $background-color-black;
     }
   }
 
@@ -122,7 +122,7 @@ export default class PageFooter extends Vue {
     }
 
     &_theme_dark {
-      color: $text-color-lightest;
+      color: $text-color-white;
     }
   }
 
@@ -135,7 +135,7 @@ export default class PageFooter extends Vue {
     }
 
     &_theme_dark {
-      color: $text-color-lightest;
+      color: $text-color-white;
     }
   }
 

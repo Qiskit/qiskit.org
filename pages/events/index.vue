@@ -228,7 +228,7 @@ export default class EventsPage extends QiskitPage {
     @include mq($until: medium) {
       margin-bottom: 0;
       .bx--tabs-trigger {
-        background-color: $background-color-lightest;
+        background-color: $background-color-white;
         border-bottom: 1px solid $gray-20;
 
         &[class*="--open"] {
