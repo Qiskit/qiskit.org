@@ -200,15 +200,15 @@ export default class StartLocally extends Vue {
 
   &__option-title {
     @include type-style('body-long-01');
-    color: $text-02;
+    color: $text-color-light;
     margin-bottom: $spacing-03;
   }
 
   &__option {
     @include type-style('body-long-01');
-    background-color: $ui-01;
+    background-color: $background-color-lighter;
     max-width: 100%;
-    color: $text-02;
+    color: $text-color-light;
     padding-left: $spacing-07;
     margin-bottom: $spacing-07;
 
@@ -218,9 +218,9 @@ export default class StartLocally extends Vue {
     }
 
     &_active {
-      border-color: $active-primary;
+      border-color: $border-active-color;
       border-width: 2px;
-      color: $active-primary;
+      color: $text-active-color;
     }
   }
 }

@@ -55,7 +55,7 @@ export default class AppIntroductoryContent extends Vue {
 
   &__description {
     @include type-style('body-long-01');
-    color: $text-02;
+    color: $text-color-light;
     margin-bottom: $layout-05;
 
     @include mq($until: large) {

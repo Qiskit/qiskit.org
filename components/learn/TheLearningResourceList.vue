@@ -130,7 +130,7 @@ export default class TheLearningResourceList extends Vue {
   }
 
   &__filter-time {
-    color: $text-02;
+    color: $text-color-light;
 
     @include mq($until: medium) {
       margin-bottom: $layout-03;
@@ -178,8 +178,8 @@ export default class TheLearningResourceList extends Vue {
 .the-learning-resources-list {
   &__filter-level {
     & a.bx--tabs__nav-link {
-      color: $text-02;
-      border-bottom-color: $ui-03;
+      color: $text-color-light;
+      border-bottom-color: $border-color;
 
       &:focus,
       &:active {
@@ -187,7 +187,7 @@ export default class TheLearningResourceList extends Vue {
       }
 
       &:not(.bx--tabs__nav-item--disabled) {
-        color: $text-02;
+        color: $text-color-light;
       }
     }
 
@@ -196,11 +196,11 @@ export default class TheLearningResourceList extends Vue {
       &:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled):not(.bx--tabs__nav-item--selected) .bx--tabs__nav-link:focus,
       &:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled):not(.bx--tabs__nav-item--selected) a.bx--tabs__nav-link:active,
       &:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link, .bx--tabs__nav-item--selected:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link:focus {
-        color: $text-02;
+        color: $text-color-light;
       }
 
       &--selected:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link {
-        border-bottom-color: $active-primary;
+        border-bottom-color: $border-active-color;
       }
     }
 
@@ -214,13 +214,13 @@ export default class TheLearningResourceList extends Vue {
       background-color: $ui-background;
 
       svg {
-        fill: $text-01;
+        fill: $text-color;
       }
     }
 
     & .bx--tabs__nav-link,
     & .bx--tabs-trigger-text {
-      color: $text-01;
+      color: $text-color;
     }
   }
 
@@ -230,7 +230,7 @@ export default class TheLearningResourceList extends Vue {
       background-color: $ui-background;
 
         svg {
-          fill: $text-01;
+          fill: $text-color;
         }
     }
 
@@ -243,7 +243,7 @@ export default class TheLearningResourceList extends Vue {
 
     & .bx--dropdown-link,
     & .bx--dropdown-text {
-      color: $text-01;
+      color: $text-color;
       border-top-color: #dde1e6;
     }
 

@@ -61,13 +61,13 @@ export default class ContentAccordion extends Vue {
   & .bx--accordion__item {
     @include type-style('body-long-01');
     border-bottom: none;
-    border-top-color: $ui-03;
+    border-top-color: $border-color;
     overflow-anchor: none;
   }
 
   & .bx--accordion__heading {
     height: 2.5rem;
-    background-color: $ui-03;
+    background-color: $background-color-light;
 
     &:hover::before {
       background-color: $cool-gray-30;
@@ -75,21 +75,21 @@ export default class ContentAccordion extends Vue {
   }
 
   & .bx--accordion__title {
-    color: $text-02;
+    color: $text-color-light;
     padding-left: $spacing-07;
     margin: 0;
   }
 
   & .bx--accordion__arrow {
-    fill: $text-02;
+    fill: $text-color-light;
   }
 
   & button[aria-expanded="true"]{
     color: $text-04;
-    background-color: $active-primary;
+    background-color: $background-color-primary;
 
     &:hover::before {
-      background-color: $active-primary;
+      background-color: $background-color-primary;
     }
   }
 
@@ -103,7 +103,7 @@ export default class ContentAccordion extends Vue {
 
   & .bx--accordion__content {
     padding: $spacing-06 $spacing-07;
-    background-color: $ui-01;
+    background-color: $background-color-lighter;
     color: $gray-80;
 
     @include mq($from: medium, $until: large) {

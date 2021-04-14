@@ -88,7 +88,7 @@ export default class AppMosaic extends Vue {
   }
 
   &__element {
-    background-color: $ui-01;
+    background-color: $background-color-lighter;
     display: flex;
 
     &_first {
@@ -176,7 +176,7 @@ export default class AppMosaic extends Vue {
 
       &-description {
         @include type-style('body-long-01');
-        color: $text-02;
+        color: $text-color-light;
       }
     }
   }

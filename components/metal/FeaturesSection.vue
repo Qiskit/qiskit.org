@@ -36,7 +36,7 @@ export default class FeaturesSection extends Vue {
 @import '~carbon-components/scss/globals/scss/typography';
 
 .features-section {
-  background-color: $ui-02_dark;
+  background-color: $background-color-dark;
 
   &__container {
     @include contained();

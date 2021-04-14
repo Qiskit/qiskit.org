@@ -111,13 +111,13 @@ export default class MobileMenu extends Mixins(MenuMixin) {
     flex-direction: column;
     justify-content: center;
     text-decoration: none;
-    color: $text-02;
+    color: $text-color-light;
     height: 4rem;
     border-bottom: 1px solid $cool-gray-10;
 
     &_active:not(&_is-parent),
     &_active .bx--list-box__label {
-      color: $active-primary;
+      color: $text-active-color;
     }
 
     &_second-level {
@@ -137,9 +137,9 @@ export default class MobileMenu extends Mixins(MenuMixin) {
 
   &__footer-text {
     @include type-style('caption-01');
-    background-color: $ui-01;
+    background-color: $background-color-lighter;
     padding: $spacing-05 $spacing-07;
-    color: $text-03;
+    color: $text-color-lighter;
   }
 }
 </style>
@@ -157,7 +157,7 @@ export default class MobileMenu extends Mixins(MenuMixin) {
 
   .bx--list-box__label {
     @include type-style('body-long-02');
-    color: $text-02;
+    color: $text-color-light;
   }
 
   .bx--dropdown {
@@ -184,7 +184,7 @@ export default class MobileMenu extends Mixins(MenuMixin) {
     }
 
     svg {
-      fill: $text-02;
+      fill: $text-color-light;
     }
 
     @include mq($until: medium) {
@@ -201,19 +201,19 @@ export default class MobileMenu extends Mixins(MenuMixin) {
   .bx--list-box--expanded {
     min-height: 4rem;
     height: 100%;
-    background-color: $ui-01;
+    background-color: $background-color-lighter;
 
     .bx--list-box__menu {
       position: relative;
       max-height: unset;
-      background-color: $ui-01;
+      background-color: $background-color-lighter;
       box-shadow: initial;
       z-index: initial;
       top: 0;
      }
 
     & .bx--list-box__menu li:not(:last-child) {
-      border-bottom: 1px solid $ui-03;
+      border-bottom: 1px solid $border-color;
     }
   }
 
@@ -221,7 +221,7 @@ export default class MobileMenu extends Mixins(MenuMixin) {
     &_active {
       & .bx--list-box__label,
       & .bx--dropdown {
-        color: $active-primary;
+        color: $text-active-color;
       }
 
       &.bx--form-item {
@@ -234,7 +234,7 @@ export default class MobileMenu extends Mixins(MenuMixin) {
     & .footer-section__title.footer-section__title_theme_light {
       @include type-style('caption-01');
       font-weight: 600;
-      color: $text-03;
+      color: $text-color-lighter;
       padding-bottom: $spacing-05;
     }
 

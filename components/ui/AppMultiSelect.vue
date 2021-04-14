@@ -49,7 +49,7 @@ export default class AppMultiSelect extends Vue {
     }
 
     .bx--list-box__menu-item {
-      background-color: $ui-01;
+      background-color: $background-color-lighter;
     }
 
     .bx--list-box__menu-icon {
@@ -61,11 +61,11 @@ export default class AppMultiSelect extends Vue {
     }
 
     .bx--list-box--expanded:hover.bx--list-box--light:hover {
-      background-color: $ui-01;
+      background-color: $background-color-lighter;
     }
 
     .bx--list-box__menu-item--highlighted {
-      background-color: $ui-03;
+      background-color: $background-color-light;
     }
 
     .bx--tag--filter {

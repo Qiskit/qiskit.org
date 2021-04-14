@@ -84,11 +84,11 @@ export default class PageFooter extends Vue {
     padding: $spacing-07 0;
 
     &_theme_light {
-      background-color: $ui-01;
+      background-color: $background-color-lighter;
     }
 
     &_theme_dark {
-      background-color: $ui-01_dark;
+      background-color: $background-color-darker;
     }
   }
 
@@ -102,7 +102,7 @@ export default class PageFooter extends Vue {
     }
 
     &_theme_dark {
-      background-color: $ui-background_dark;
+      background-color: $background-color-darkest;
     }
   }
 
@@ -118,7 +118,7 @@ export default class PageFooter extends Vue {
     }
 
     &_theme_light {
-      color: $text-03;
+      color: $text-color-lighter;
     }
 
     &_theme_dark {
@@ -131,7 +131,7 @@ export default class PageFooter extends Vue {
     @include type-style('caption-01');
 
     &_theme_light {
-      color: $text-03;
+      color: $text-color-lighter;
     }
 
     &_theme_dark {

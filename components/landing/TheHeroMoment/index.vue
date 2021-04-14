@@ -69,7 +69,7 @@ export default class TheHeroMoment extends Vue {
   &__square-link {
     width: 4rem;
     height: 4rem;
-    background-color: $ui-background_dark;
+    background-color: $background-color-darkest;
     position: absolute;
     top: 21%;
     left: 43%;
@@ -134,7 +134,7 @@ export default class TheHeroMoment extends Vue {
 
   &__description {
     @include type-style('body-long-01');
-    color: $text-02;
+    color: $text-color-light;
     max-width: 5 * $column-size-large;
     margin: 0 0 $layout-06;
     // TODO: Force pointer events to allow the user to select text. Remove
