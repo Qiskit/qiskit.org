@@ -11,7 +11,7 @@ header:
     - 'The Qiskit Global Summer School 2021 is a two-week intensive summer school designed to empower the next generation of quantum researchers and developers with the skills and know-how to explore quantum applications on their own. This second-annual course, made up of twenty lectures, five applied lab exercises, hands-on mentorship, and live Q&A sessions, focuses on developing hands-on experience and understanding of quantum machine learning.'
     - 'Registrations will open soon, and be available on a first-come, first-serve basis with global distribution. For any questions, please check out our FAQ or submit an enquiry using the form below!'
   cta:
-    label: 'Register now'
+    label: 'Learn more'
     url: 'http://qisk.it/QGSS2021EnquiryForm'
   cardSectionHeading: 'About the event:'
   card:
@@ -25,7 +25,7 @@ header:
     ctaLabel: 'Learn more'
 
 mosaic:
-  title: 'Learn more!'
+  title: 'Quantum Learning & More'
   first:
     title: 'Let us know if you have any questions!'
     description: 'If your questions aren''t answered by the FAQ below or our blog post, please use this form to submit your enquiries direct to the team.<br/><br/><a href="https://quantum-computing.ibm.com/login" target="_blank" style="cursor:pointer; text-decoration: none; color: #0f62fe;">Enquire Now!</a>'
