@@ -28,27 +28,26 @@
         {{ eventSectionTitle }}
       </h2>
       <client-only>
-        <cv-tabs @tab-selected="toggleAgenda">
-          <cv-tab :label="agendaSectionTitleOne" />
-          <cv-tab :label="agendaSectionTitleTwo" />
+        <cv-tabs>
+          <cv-tab :label="agendaSectionTitleOne">
+            <AppDataTableSection
+              class="summer-school-page__section"
+              :section-title="''"
+              :data-table-columns="agendaColumnsDataTable"
+              :data-table-elements="weekOneAgendaAgendaData"
+            />
+          </cv-tab>
+          <cv-tab :label="agendaSectionTitleTwo">
+            <AppDataTableSection
+              class="summer-school-page__section"
+              :section-title="''"
+              :data-table-columns="agendaColumnsDataTable"
+              :data-table-elements="weekTwoAgendaAgendaData"
+            />
+          </cv-tab>
         </cv-tabs>
       </client-only>
     </section>
-    <AppDataTableSection
-      v-if="currentTab === 0"
-      class="summer-school-page__section"
-      :section-title="''"
-      :data-table-columns="agendaColumnsDataTable"
-      :data-table-elements="weekOneAgendaAgendaData"
-    />
-    <AppDataTableSection
-      v-if="currentTab === 1"
-      class="summer-school-page__section"
-      :section-title="''"
-      :data-table-columns="agendaColumnsDataTable"
-      :data-table-elements="weekTwoAgendaAgendaData"
-    />
-
     <section class="summer-school-page__section">
       <h2 class="copy__title">
         Frequently asked questions
@@ -150,7 +149,6 @@ interface AgendaSlot {
 })
 export default class SummerSchoolPage extends QiskitPage {
   routeName = 'summer-school'
-  currentTab: number = 0
   eventSectionTitle = 'Curriculum'
 
   // Data for the header section
@@ -591,10 +589,6 @@ export default class SummerSchoolPage extends QiskitPage {
       answer: 'For any questions about the summer school, please submit your questions using the form below. For all other enquiries, feel free to email us directly at <a href="mailto:qiskit.events@us.ibm.com" target="_blank" style="cursor:pointer; text-decoration: none; color: #0f62fe;">qiskit.events@us.ibm.com</a>.'
     }
   ]
-
-  toggleAgenda (val: any) {
-    this.currentTab = val
-  }
 }
 </script>
 
