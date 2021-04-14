@@ -27,8 +27,8 @@ header:
 mosaic:
   title: 'Quantum Learning & More'
   first:
-    title: 'Let us know if you have any questions!'
-    description: 'If your questions aren''t answered by the FAQ below or our blog post, please use this form to submit your enquiries direct to the team.<br/><br/><a href="https://quantum-computing.ibm.com/login" target="_blank" style="cursor:pointer; text-decoration: none; color: #0f62fe;">Enquire Now!</a>'
+    title: 'IBM Quantum'
+    description: 'IBM offers cloud access to the most advanced quantum computers available. Learn, develop, and run programs with our quantum applications and systems.'<br/><br/><a href="https://quantum-computing.ibm.com/login" target="_blank" style="cursor:pointer; text-decoration: none; color: #0f62fe;">Explore IBM Quantum</a>'
     image: '/images/events/seminar-series/mosaic-experts.png'
   second:
     title: 'IBM Quantum Tools on the Cloud'
@@ -209,16 +209,16 @@ agenda:
 helpfulResources:
   title: 'Resources'
   resources:
-    - title: 'Learn About & Install Qiskit'
+    - title: 'Let us know if you have any questions!'
+      description: 'If your questions aren''t answered by the FAQ below or our blog post, please use this form to submit your enquiries direct to the team.'
+      cta:
+        url: 'hhttp://qisk.it/QGSS2021EnquiryForm'
+        label: 'Enquire Now!'
+    - title: 'Learn about and install Qiskit'
       description: 'TBD'
       cta:
         url: 'https://qiskit.org/documentation/install.html'
         label: 'Install here'
-    - title: 'IBM Quantum'
-      description: 'IBM offers cloud access to the most advanced quantum computers available. Learn, develop, and run programs with our quantum applications and systems.'
-      cta:
-        url: 'https://quantum-computing.ibm.com/login'
-        label: 'Explore IBM Quantum'
     - title: 'Qiskit Medium'
       description: 'This blog provides a nice overview of Qiskit and its direction as we explore what applications can be done on today''s quantum devices.'
       cta:
