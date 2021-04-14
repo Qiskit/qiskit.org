@@ -16,8 +16,8 @@ header:
   cardSectionHeading: 'About the event:'
   card:
     image: '/images/events/physics-of-computation/card-image-endicott-house-1981.png'
-    title: 'Card title'
-    description: 'Card description goes here'
+    title: 'Qiskit Global Summer School 2021: Quantum Machine Learning'
+    description: 'The Qiskit Global Summer School returns as a two-week intensive course focused on Quantum Machine Learning and more!'
     location: 'Online'
     date: 'July 12 - 23, 2021'
     time:
@@ -25,10 +25,10 @@ header:
     ctaLabel: 'Learn more'
 
 mosaic:
-  title: 'Quantum Learning & More'
+  title: 'Learn more!'
   first:
-    title: 'IBM Quantum'
-    description: 'IBM offers cloud access to the most advanced quantum computers available. Learn, develop, and run programs with our quantum applications and systems.<br/><br/><a href="https://quantum-computing.ibm.com/login" target="_blank" style="cursor:pointer; text-decoration: none; color: #0f62fe;">Explore IBM Quantum</a>'
+    title: 'Let us know if you have any questions!'
+    description: 'If your questions aren''t answered by the FAQ below or our blog post, please use this form to submit your enquiries direct to the team.<br/><br/><a href="https://quantum-computing.ibm.com/login" target="_blank" style="cursor:pointer; text-decoration: none; color: #0f62fe;">Enquire Now!</a>'
     image: '/images/events/seminar-series/mosaic-experts.png'
   second:
     title: 'IBM Quantum Tools on the Cloud'
@@ -40,7 +40,7 @@ mosaic:
     image: '/images/events/seminar-series/mosaic-team.png'
   fourth:
     title: 'Qiskit Textbook'
-    description: 'The Qiskit Textbook is a free digital open source textbook that will teach you the concepts of quantum computing while you learn to use Qiskit.<br/><br/><a href="https://qiskit.org/textbook/preface.html" target="_blank" style="cursor:pointer; text-decoration: none; color: #0f62fe;">Watch the series</a>'
+    description: 'The Qiskit Textbook is a free digital open source textbook that will teach you the concepts of quantum computing while you learn to use Qiskit.<br/><br/><a href="https://qiskit.org/textbook/preface.html" target="_blank" style="cursor:pointer; text-decoration: none; color: #0f62fe;">Read the textbook</a>'
     image: '/images/events/seminar-series/mosaic-interactivity.png'
 
 agenda:
@@ -60,6 +60,7 @@ agenda:
         topic: 'Day 1 Q&A Session'
         speaker: 'N/A'
         format: 'Live Q&A'
+
       - day: 'Tuesday, July 13'
         topic: 'Simple Quantum Algorithms I'
         speaker: 'Elisa Bäumer'
@@ -76,6 +77,7 @@ agenda:
         topic: 'Day 2 Q&A Session'
         speaker: 'N/A'
         format: 'Live Q&A'
+
       - day: 'Wednesday, July 14'
         topic: 'The Foundations of Classical Machine Learning: Cost Functions, Data Splitting, Overfitting'
         speaker: 'Amira Abbas'
@@ -88,6 +90,7 @@ agenda:
         topic: 'Day 3 Q&A Session'
         speaker: 'N/A'
         format: 'Live Q&A'
+
       - day: 'Thursday, July 15'
         topic: 'Introduction to Parameterized Quantum Circuits'
         speaker: 'Amira Abbas'
@@ -100,10 +103,12 @@ agenda:
         topic: 'Day 4 Q&A Session'
         speaker: 'N/A'
         format: 'Live Q&A'
+
       - day: 'Friday, July 16'
         topic: 'Building a Variational Quantum Classifier'
         speaker: 'Amira Abbas'
         format: 'Lecture'
+
       - day: 'Friday, July 16'
         topic: 'An Introduction to the Quantum Approximate Optimization Algorithm and its Applications'
         speaker: 'Johannes Weidenfeller'
@@ -113,9 +118,10 @@ agenda:
         speaker: 'Johannes Weidenfeller'
         format: 'Lab'
       - day: 'Friday, July 16'
-        topic: 'Day 4 Q&A Session'
+        topic: 'Day 5 Q&A Session'
         speaker: 'N/A'
         format: 'Live Q&A'
+  
   week2:
     tabName: 'Week 2'
     schedule:
@@ -135,6 +141,7 @@ agenda:
         topic: 'Day 6 Q&A Session'
         speaker: 'N/A'
         format: 'Live Q&A'
+
       - day: 'Tuesday, July 20'
         topic: 'Introduction to Quantum Neural Networks'
         speaker: 'Julien Gacon'
@@ -151,6 +158,7 @@ agenda:
         topic: 'Day 7 Q&A Session'
         speaker: 'N/A'
         format: 'Live Q&A'
+
       - day: 'Wednesday, July 21'
         topic: 'Barren Plateaus, Trainability Issues and How to Avoid Them'
         speaker: 'Francesco Tacchino'
@@ -163,6 +171,7 @@ agenda:
         topic: 'Day 8 Q&A Session'
         speaker: 'N/A'
         format: 'Live Q&A'
+
       - day: 'Thursday, July 22'
         topic: 'Introduction to Quantum Hardware'
         speaker: 'Nathan Earnest-Noble'
@@ -179,6 +188,7 @@ agenda:
         topic: 'Day 8 Q&A Session'
         speaker: 'N/A'
         format: 'Live Q&A'
+
       - day: 'Friday, July 23'
         topic: 'Advanced Quantum Machine Learning Algorithms: Quantum Boltzmann Machines and Quantum Generative Adversarial Networks'
         speaker: 'Stefan Woerner'
@@ -199,23 +209,23 @@ agenda:
 helpfulResources:
   title: 'Resources'
   resources:
-    - title: 'Let us know if you have any questions!'
-      description: 'If your questions aren''t answered by the FAQ below or our blog post, please use this form to submit your enquiries direct to the team.'
-      cta:
-        url: 'http://qisk.it/QGSS2021EnquiryForm'
-        label: 'Enquire Now!'
     - title: 'Learn About & Install Qiskit'
       description: 'TBD'
       cta:
         url: 'https://qiskit.org/documentation/install.html'
         label: 'Install here'
+    - title: 'IBM Quantum'
+      description: 'IBM offers cloud access to the most advanced quantum computers available. Learn, develop, and run programs with our quantum applications and systems.'
+      cta:
+        url: 'https://quantum-computing.ibm.com/login'
+        label: 'Explore IBM Quantum'
     - title: 'Qiskit Medium'
       description: 'This blog provides a nice overview of Qiskit and its direction as we explore what applications can be done on today''s quantum devices.'
       cta:
         url: 'https://medium.com/qiskit/qiskit-and-its-fundamental-elements-bcd7ead80492'
         label: 'Read the blog'
     - title: 'Code of conduct'
-      description: 'We are dedicated to providing an enjoyable and safe experience for all participants. We have a code of conduct that all events adhere to.'
+      description: 'Qiskit is dedicated to providing an enjoyable and safe experience for all participants. We have a code of conduct that all events adhere to.'
       cta:
         url: 'https://github.com/Qiskit/qiskit/blob/master/CODE_OF_CONDUCT.md'
         label: 'See code of conduct'
