@@ -85,7 +85,7 @@ export default class ContentAccordion extends Vue {
   }
 
   & button[aria-expanded="true"]{
-    color: $text-04;
+    color: $text-color-lightest;
     background-color: $background-color-primary;
 
     &:hover::before {
@@ -94,11 +94,11 @@ export default class ContentAccordion extends Vue {
   }
 
   & button[aria-expanded="true"] > .bx--accordion__title{
-    color: $text-04;
+    color: $text-color-lightest;
   }
 
   & button[aria-expanded="true"] > .bx--accordion__arrow{
-    fill: $text-04;
+    fill: $text-color-lightest;
   }
 
   & .bx--accordion__content {

@@ -70,7 +70,7 @@ export default class AppMultiSelect extends Vue {
 
     .bx--tag--filter {
       background-color: $purple-70;
-      color: $text-04;
+      color: $text-color-lightest;
       margin-left: 0;
       margin-right: $spacing-05;
     }

@@ -37,7 +37,7 @@ export default class AppNavBackLink extends Vue {
     width: fit-content;
 
     &_dark {
-      color: $text-04;
+      color: $text-color-lightest;
     }
 
     &_light {

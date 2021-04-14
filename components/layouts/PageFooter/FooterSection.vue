@@ -52,7 +52,7 @@ export default class FooterSection extends Vue {
     }
 
     &_theme_dark {
-      color: $text-04;
+      color: $text-color-lightest;
     }
   }
 
@@ -74,12 +74,12 @@ export default class FooterSection extends Vue {
     }
 
     &_theme_dark {
-      color: $text-04;
+      color: $text-color-lightest;
 
       &:active,
       &:visited,
       &:hover {
-        color: $text-04;
+        color: $text-color-lightest;
       }
     }
   }
@@ -98,7 +98,7 @@ export default class FooterSection extends Vue {
     }
 
     &_theme_dark {
-      color: $text-04;
+      color: $text-color-lightest;
     }
   }
 

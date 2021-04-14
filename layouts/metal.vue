@@ -19,6 +19,6 @@ export default class MetalLayout extends Vue {
 <style lang="scss" scoped>
 .layout {
   background-color: $background-color-darkest;
-  color: $text-color-dark;
+  color: $text-color-lighter-2;
 }
 </style>
