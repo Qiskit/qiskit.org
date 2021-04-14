@@ -1,6 +1,6 @@
 <template>
   <!-- tabindex is needed to allow hiding the menu in iOS Safari -->
-  <div class="default-layout" tabindex="-1">
+  <div tabindex="-1">
     <header id="navigation">
       <TheMenu @change-visibility="isMenuShown = $event === 'shown'" />
     </header>
@@ -18,7 +18,3 @@ export default class DefaultLayout extends Vue {
   isMenuShown: boolean = false
 }
 </script>
-
-<style lang="scss">
-@import '~/assets/scss/layout.scss';
-</style>
