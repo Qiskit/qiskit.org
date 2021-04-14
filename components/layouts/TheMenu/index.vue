@@ -269,7 +269,7 @@ export default class TheMenu extends Mixins(MenuMixin) {
   }
 
   .bx--dropdown {
-    background: $ui-02;
+    background: $background-color-lightest;
     height: initial;
     max-height: initial;
     border-bottom: 1px solid transparent;
@@ -285,7 +285,7 @@ export default class TheMenu extends Mixins(MenuMixin) {
   }
 
   .bx--list-box__menu {
-    background-color: $ui-02;
+    background-color: $background-color-lightest;
 
     &:focus {
       outline: none;

@@ -84,7 +84,7 @@ export default class MobileMenu extends Mixins(MenuMixin) {
 .mobile-menu {
   display: flex;
   flex-direction: column;
-  background-color: $ui-02;
+  background-color: $background-color-lightest;
   overflow-y: auto;
   justify-content: space-between;
 
@@ -132,7 +132,7 @@ export default class MobileMenu extends Mixins(MenuMixin) {
 
     padding-top: $spacing-05;
     padding-bottom: $spacing-05 + 2.5rem; // make room for the "cookies preferences" button
-    background-color: $ui-02;
+    background-color: $background-color-lightest;
   }
 
   &__footer-text {
@@ -161,7 +161,7 @@ export default class MobileMenu extends Mixins(MenuMixin) {
   }
 
   .bx--dropdown {
-    background-color: $ui-02;
+    background-color: $background-color-lightest;
     height: 4rem;
     max-height: initial;
     border-bottom: 1px solid $cool-gray-10;
