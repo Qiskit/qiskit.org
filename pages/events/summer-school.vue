@@ -281,6 +281,7 @@ export default class SummerSchoolPage extends QiskitPage {
 
   .app-data-table-section {
     margin-top: 0;
+    padding: 0;
   }
 }
 
