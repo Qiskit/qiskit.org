@@ -1,10 +1,11 @@
 ---
-name: 🔗 Page request
-about: For when you want to request an additional page inside qiskit.org
+name: "🔗 Page request"
+about: "Ask for an additional page inside qiskit.org"
 title: 'New page "[PAGE NAME]" requested by "[DUE DATE]"'
-labels: type: page request
+labels: 'type: page request'
 assignees: ''
 ---
+
 <!-- Any text between these marks is a comment for you. Do not ignore it, please. ;) -->
 
 **Person of contact**:
