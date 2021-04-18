@@ -4,18 +4,17 @@ metadata:
   description: 'The Qiskit Global Summer School 2021 is a two-week intensive summer school designed to empower the next generation of quantum researchers and developers with the skills and know-how to explore quantum applications on their own'
   image: '/images/events/physics-of-computation/card-image-endicott-house-1981.png'
 
-header:
-  card:
-    image: '/images/events/physics-of-computation/card-image-endicott-house-1981.png'
-    title: 'Qiskit Global Summer School 2021: Quantum Machine Learning'
-    description: 'The Qiskit Global Summer School returns as a two-week intensive course focused on Quantum Machine Learning and more!'
-    location: 'Online'
-    date: 'July 12 - 23, 2021'
-    time:
-    to: 'https://airtable.com/shrvAA05xkYgSKajc'
-    ctaLabel: 'Learn more'
-    segment:
-      action: 'qgss2021 > learn-more'
+about:
+  image: '/images/events/physics-of-computation/card-image-endicott-house-1981.png'
+  title: 'Qiskit Global Summer School 2021: Quantum Machine Learning'
+  description: 'The Qiskit Global Summer School returns as a two-week intensive course focused on Quantum Machine Learning and more!'
+  location: 'Online'
+  date: 'July 12 - 23, 2021'
+  time:
+  to: 'https://airtable.com/shrvAA05xkYgSKajc'
+  ctaLabel: 'Learn more'
+  segment:
+    action: 'qgss2021 > learn-more'
 
 mosaic:
   title: 'Quantum Learning & More'
@@ -252,7 +251,7 @@ faq:
     answer: 'For any questions about the summer school, please submit your questions using the form below. For all other enquiries, feel free to email us directly at <a href="mailto:qiskit.events@us.ibm.com" target="_blank" style="cursor:pointer; text-decoration: none; color: #0f62fe;">qiskit.events@us.ibm.com</a>.'
 ---
 
-<event-template>
+<event-template :about="about">
   <template #title>
   Qiskit Global Summer School 2021:<br/>
   Quantum Machine Learning

@@ -7,8 +7,8 @@
         <slot name="title"></slot>
       </template>
       <template slot="card">
-        <EventCard v-bind="{}" vertical-layout>
-          { eventData.header.card.description }
+        <EventCard v-bind="about" vertical-layout>
+          {{ about.description }}
         </EventCard>
       </template>
       <template slot="description">
@@ -80,7 +80,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
+import { Component, Prop } from 'vue-property-decorator'
 
 interface AgendaSlot {
   day: string,
@@ -91,6 +91,8 @@ interface AgendaSlot {
 
 @Component
 export default class EventTemplate extends Vue {
+  @Prop({ type: Object, required: true }) about: any
+
   agendaColumnsDataTable: string[] = ['Day', 'Topic', 'Speaker', 'Format']
 }
 </script>
