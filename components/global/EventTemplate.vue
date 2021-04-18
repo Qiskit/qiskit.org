@@ -27,24 +27,20 @@
 
     <section class="summer-school-page__section">
       <h2 class="copy__title">
-        { eventData.agenda.title }
+        {{ agenda.title }}
       </h2>
       <client-only>
         <cv-tabs>
-          <cv-tab :label="'eventData.agenda.week1.tabName'">
+          <cv-tab
+            v-for="(view, index) in agenda.views"
+            :key="`view-${index}`"
+            :label="view.label"
+          >
             <AppDataTableSection
+              :key="`table-${index}`"
               class="summer-school-page__section"
-              section-title=""
-              :data-table-columns="['agendaColumnsDataTable']"
-              :data-table-elements="['eventData.agenda.week1.tableData']"
-            />
-          </cv-tab>
-          <cv-tab :label="'eventData.agenda.week2.tabName'">
-            <AppDataTableSection
-              class="summer-school-page__section"
-              section-title=""
-              :data-table-columns="['agendaColumnsDataTable']"
-              :data-table-elements="['eventData.agenda.week2.tableData']"
+              :data-table-columns="agendaColumnLabels"
+              :data-table-elements="scheduleToTableData(view.schedule)"
             />
           </cv-tab>
         </cv-tabs>
@@ -92,8 +88,34 @@ interface AgendaSlot {
 @Component
 export default class EventTemplate extends Vue {
   @Prop({ type: Object, required: true }) about: any
+  @Prop({ type: Object, required: true }) agenda: any
 
-  agendaColumnsDataTable: string[] = ['Day', 'Topic', 'Speaker', 'Format']
+  agendaColumnLabels: string[] = ['Day', 'Topic', 'Speaker', 'Format']
+
+  scheduleToTableData (schedule: AgendaSlot[]) {
+    return schedule.map((slot) => [
+      {
+        component: 'span',
+        styles: 'min-width: 10rem; display: inline-block; font-weight: bold;',
+        data: slot.day
+      },
+      {
+        component: 'span',
+        styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
+        data: slot.topic
+      },
+      {
+        component: 'span',
+        styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
+        data: slot.speaker
+      },
+      {
+        component: 'span',
+        styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
+        data: slot.format
+      }
+    ])
+  }
 }
 </script>
 

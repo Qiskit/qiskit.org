@@ -87,32 +87,6 @@ interface AgendaSlot {
     eventData.mosaic.fourth.position = 'fourth'
     eventData.mosaic.elements = [eventData.mosaic.first, eventData.mosaic.second, eventData.mosaic.third, eventData.mosaic.fourth]
 
-    const scheduleToTableData = (slot: AgendaSlot) => ([
-      {
-        component: 'span',
-        styles: 'min-width: 10rem; display: inline-block; font-weight: bold;',
-        data: slot.day
-      },
-      {
-        component: 'span',
-        styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
-        data: slot.topic
-      },
-      {
-        component: 'span',
-        styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
-        data: slot.speaker
-      },
-      {
-        component: 'span',
-        styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
-        data: slot.format
-      }
-    ])
-
-    eventData.agenda.week1.tableData = eventData.agenda.week1.schedule.map(scheduleToTableData)
-    eventData.agenda.week2.tableData = eventData.agenda.week2.schedule.map(scheduleToTableData)
-
     return {
       eventData
     }

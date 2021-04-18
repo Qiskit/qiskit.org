@@ -1,6 +1,6 @@
 <template>
   <section class="app-data-table-section">
-    <h2 class="copy__title">
+    <h2 v-if="sectionTitle" class="copy__title">
       {{ sectionTitle }}
     </h2>
     <AppDataTable :columns="dataTableColumns" :elements="dataTableElements" />
@@ -15,7 +15,7 @@ import { TableRowElement } from '~/components/ui/AppDataTable.vue'
 
 @Component
 export default class AppDataTableSection extends Vue {
-  @Prop({ type: String, required: true }) sectionTitle!: string
+  @Prop({ type: String, required: false }) sectionTitle?: string
   @Prop({ type: Array, default: () => [] }) dataTableColumns!: string[]
   @Prop({ type: Array, default: () => [] }) dataTableElements!: TableRowElement[]
 }
