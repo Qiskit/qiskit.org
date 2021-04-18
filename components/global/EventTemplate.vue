@@ -1,0 +1,182 @@
+<template>
+  <main class="summer-school-page">
+    <AppPageHeaderWithCardContentDriven
+      card-title="About the event"
+    >
+      <template slot="title">
+        <slot name="title"></slot>
+      </template>
+      <template slot="card">
+        <EventCard v-bind="{}" vertical-layout>
+          { eventData.header.card.description }
+        </EventCard>
+      </template>
+      <template slot="description">
+        <slot name="description"></slot>
+      </template>
+      <template slot="call-to-actions">
+        <slot name="call-to-actions"></slot>
+      </template>
+    </AppPageHeaderWithCardContentDriven>
+
+    <AppMosaicSection
+      class="summer-school-page__section"
+      :title="'eventData.mosaic.title'"
+      :elements="['eventData.mosaic.elements']"
+    />
+
+    <section class="summer-school-page__section">
+      <h2 class="copy__title">
+        { eventData.agenda.title }
+      </h2>
+      <client-only>
+        <cv-tabs>
+          <cv-tab :label="'eventData.agenda.week1.tabName'">
+            <AppDataTableSection
+              class="summer-school-page__section"
+              section-title=""
+              :data-table-columns="['agendaColumnsDataTable']"
+              :data-table-elements="['eventData.agenda.week1.tableData']"
+            />
+          </cv-tab>
+          <cv-tab :label="'eventData.agenda.week2.tabName'">
+            <AppDataTableSection
+              class="summer-school-page__section"
+              section-title=""
+              :data-table-columns="['agendaColumnsDataTable']"
+              :data-table-elements="['eventData.agenda.week2.tableData']"
+            />
+          </cv-tab>
+        </cv-tabs>
+      </client-only>
+    </section>
+    <section class="summer-school-page__section">
+      <h2 class="copy__title">
+        Frequently asked questions
+      </h2>
+      <cv-accordion align="end">
+        <cv-accordion-item v-for="(item, index) in []" :key="index">
+          <template slot="title">
+            {{ item.question }}
+          </template>
+          <template slot="content">
+            <!-- TODO: HTML content should not be in strings but in components
+            but lacking of a better solution given time constraints. -->
+            <!-- eslint-disable vue/no-v-html -->
+            <p v-html="item.answer" />
+            <!-- eslint-enable -->
+          </template>
+        </cv-accordion-item>
+      </cv-accordion>
+    </section>
+
+    <AppHelpfulResourcesSection
+      class="summer-school-page__section"
+      :title="'eventData.helpfulResources.title'"
+      :resources="[{ xxx: 'eventData.helpfulResources.resources' }]"
+    />
+  </main>
+</template>
+
+<script lang="ts">
+import Vue from 'vue'
+import { Component } from 'vue-property-decorator'
+
+interface AgendaSlot {
+  day: string,
+  topic: string,
+  speaker: string,
+  format: string
+}
+
+@Component
+export default class EventTemplate extends Vue {
+  agendaColumnsDataTable: string[] = ['Day', 'Topic', 'Speaker', 'Format']
+}
+</script>
+
+<style lang="scss" scoped>
+.summer-school-page {
+  color: $white-text-01;
+
+  &__section {
+    @include contained();
+    margin-top: $layout-05;
+    margin-bottom: $layout-03;
+
+    @include mq($until: large) {
+      margin-bottom: $layout-01;
+    }
+  }
+}
+</style>
+
+<style lang="scss">
+// overrides
+.summer-school-page {
+  .bx--accordion__title {
+    color: $white-text-01;
+  }
+
+  .bx--accordion__heading:hover,
+  .bx--accordion__heading:hover::before {
+    background-color: $cool-gray-10;
+  }
+
+  .bx--accordion__arrow {
+    fill: $white-text-01;
+  }
+
+  & a.bx--tabs__nav-link {
+    color: $cool-gray-80;
+    border-bottom-color: $cool-gray-20;
+
+    &:focus,
+    &:active {
+      outline: none;
+    }
+
+    &:not(.bx--tabs__nav-item--disabled) {
+      color: $cool-gray-80;
+    }
+  }
+
+  & .bx--tabs__nav-item {
+    &:hover:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link,
+    &:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled):not(.bx--tabs__nav-item--selected) .bx--tabs__nav-link:focus,
+    &:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled):not(.bx--tabs__nav-item--selected) a.bx--tabs__nav-link:active,
+    &:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link, .bx--tabs__nav-item--selected:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link:focus {
+      color: $cool-gray-80;
+    }
+
+    &--selected:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link {
+      border-bottom-color: $purple-70;
+    }
+  }
+
+  & .bx--tabs__nav-item:hover:not(.bx--tabs__nav-item--disabled) {
+      box-shadow: none;
+    }
+
+    & .bx--tabs__nav-item:hover:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled),
+    & .bx--tabs__nav-item,
+    & .bx--tabs-trigger {
+      background-color: white;
+
+      svg {
+        fill: $gray-100;
+      }
+    }
+
+    & .bx--tabs__nav-link,
+    & .bx--tabs-trigger-text {
+      color: $gray-100;
+  }
+
+  .app-data-table-section {
+    margin-top: 0;
+    padding: 0;
+  }
+}
+
+</style>

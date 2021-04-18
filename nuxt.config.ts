@@ -83,7 +83,8 @@ const config: NuxtConfig = {
   ** Content
   */
   content: {
-    dir: 'new-content'
+    dir: 'new-content',
+    liveEdit: false
   },
 
   /*

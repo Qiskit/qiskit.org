@@ -5,15 +5,6 @@ metadata:
   image: '/images/events/physics-of-computation/card-image-endicott-house-1981.png'
 
 header:
-  primaryTitle: 'Qiskit Global Summer School 2021:'
-  secondaryTitle: 'Quantum Machine Learning'
-  description:
-    - 'The Qiskit Global Summer School 2021 is a two-week intensive summer school designed to empower the next generation of quantum researchers and developers with the skills and know-how to explore quantum applications on their own. This second-annual course, made up of twenty lectures, five applied lab exercises, hands-on mentorship, and live Q&A sessions, focuses on developing hands-on experience and understanding of quantum machine learning.'
-    - 'Registrations will open soon, and be available on a first-come, first-serve basis with global distribution. For any questions, please check out our FAQ or submit an enquiry using the form below!'
-  cta:
-    label: 'Learn more'
-    url: 'http://qisk.it/QGSS2021EnquiryForm'
-  cardSectionHeading: 'About the event:'
   card:
     image: '/images/events/physics-of-computation/card-image-endicott-house-1981.png'
     title: 'Qiskit Global Summer School 2021: Quantum Machine Learning'
@@ -23,6 +14,8 @@ header:
     time:
     to: 'https://airtable.com/shrvAA05xkYgSKajc'
     ctaLabel: 'Learn more'
+    segment:
+      action: 'qgss2021 > learn-more'
 
 mosaic:
   title: 'Quantum Learning & More'
@@ -121,7 +114,7 @@ agenda:
         topic: 'Day 5 Q&A Session'
         speaker: 'N/A'
         format: 'Live Q&A'
-  
+
   week2:
     tabName: 'Week 2'
     schedule:
@@ -258,3 +251,23 @@ faq:
   - question: 'Still have more questions?'
     answer: 'For any questions about the summer school, please submit your questions using the form below. For all other enquiries, feel free to email us directly at <a href="mailto:qiskit.events@us.ibm.com" target="_blank" style="cursor:pointer; text-decoration: none; color: #0f62fe;">qiskit.events@us.ibm.com</a>.'
 ---
+
+<event-template>
+  <template #title>
+  Qiskit Global Summer School 2021:<br/>
+  Quantum Machine Learning
+  </template>
+  <template #description>
+
+  The Qiskit Global Summer School 2021 is a two-week intensive summer school designed to empower the next generation of quantum researchers and developers with the skills and know-how to explore quantum applications on their own. This second-annual course, made up of twenty lectures, five applied lab exercises, hands-on mentorship, and live Q&A sessions, focuses on developing hands-on experience and understanding of quantum machine learning.
+
+  Registrations will open soon, and be available on a first-come, first-serve basis with global distribution. For any questions, please check out our FAQ or submit an enquiry using the form below!
+
+  </template>
+  <template #call-to-actions>
+  <app-cta
+    label="Learn More"
+    url="http://qisk.it/QGSS2021EnquiryForm"
+    :segment="{ action: 'qgss2021-enquiry-form' }"></app-cta>
+  </template>
+</event-template>
