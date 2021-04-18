@@ -60,7 +60,6 @@ import AppMultiSelect from '~/components/ui/AppMultiSelect.vue'
 import AppFieldset from '~/components/ui/AppFieldset.vue'
 import AppFiltersResultsLayout from '~/components/ui/AppFiltersResultsLayout.vue'
 import InfiniteScroll from '~/components/ui/InfiniteScroll.vue'
-import AppLink from '~/components/ui/AppLink.vue'
 import { Advocate, ADVOCATES_WORLD_REGION_OPTIONS, State } from '~/store/advocates'
 
 @Component({
@@ -69,8 +68,7 @@ import { Advocate, ADVOCATES_WORLD_REGION_OPTIONS, State } from '~/store/advocat
     AppMultiSelect,
     AppFieldset,
     AppFiltersResultsLayout,
-    InfiniteScroll,
-    AppLink
+    InfiniteScroll
   },
 
   computed: {

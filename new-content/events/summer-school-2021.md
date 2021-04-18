@@ -222,10 +222,6 @@ helpfulResources:
         label: 'See code of conduct'
 
 faq:
-  - question: 'What are the pre-requisites for enrolling in the Summer School?'
-    answer: 'Minimal prerequisites are required for the Qiskit Global Summer School. If you know <a href="https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:matrices/x9e81a4f98389efdf:multiplying-matrices-by-matrices/v/matrix-multiplication-intro" target="_blank" style="cursor:pointer; text-decoration: none; color: #0f62fe;">how to multiply two matrices</a>, and have some programming experience in Python, you are ready for the Summer School.<br/><br/>You can <a href="https://qiskit.org/textbook/ch-prerequisites/python-and-jupyter-notebooks.html" target="_blank" style="cursor:pointer; text-decoration: none; color: #0f62fe;">brush up on Python programming</a> before attending the lectures by using the Qiskit Textbook. To make the most out of these lectures, you may also consider looking through the <a href="https://qiskit.org/textbook/ch-prerequisites/linear_algebra.html" target="_blank" style="cursor:pointer; text-decoration: none; color: #0f62fe;">linear algebra prerequisites</a> section of the Qiskit Textbook.'
-  - question: 'What are the application requirements for the Summer School?'
-    answer: 'There is no application or pre-registration for the Qiskit Global Summer School 2021. Registration will be on a first come, first serve basis, with scheduled global availability. Once the Summer School registration reaches capacity, unfortunately we will not be able to register any additional students. Please submit an enquiry below if you have any additional questions!'
   - question: 'What is the time requirement for the Summer School? Is the scheduled fixed or flexible?'
     answer: 'The summer school is made up of a total of 20 lectures, 5 lab sessions & application exercises, in addition to the daily Live Q&A Sessions and final Commencement Celebration. Participation and completion of all labs and lectures are required in order to receive a certificate of completion from the Summer School, with the optional Q&A Sessions and Commencement activities to enhance your Summer School experience. The schedule is not fixed, aside from final lab submission deadlines, and all students can participate on the schedule that works best for them. Students should anticipate a minimum time commitment of 30 hours for the full Summer School, but we recommend planning on 41 hours of participation, with additional time for discussion and collaboration with other students.'
   - question: 'I was a student at the Qiskit Global Summer School 2020 - should I enroll in the 2021 Summer School as well?'
@@ -267,5 +263,29 @@ faq:
       label="Learn More"
       url="http://qisk.it/QGSS2021EnquiryForm"
       :segment="{ action: 'qgss2021-enquiry-form' }"></app-cta>
+  </template>
+  <template #faq-topics>
+  <cv-accordion-item>
+  <template #title>
+    What are the pre-requisites for enrolling in the Summer School?
+  </template>
+  <template #content>
+
+  Minimal prerequisites are required for the Qiskit Global Summer School. If you know <app-link url="https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:matrices/x9e81a4f98389efdf:multiplying-matrices-by-matrices/v/matrix-multiplication-intro">how to multiply two matrices</app-link>, and have some programming experience in Python, you are ready for the Summer School.
+
+  You can <app-link url="https://qiskit.org/textbook/ch-prerequisites/python-and-jupyter-notebooks.html">brush up on Python programming</app-link> before attending the lectures by using the Qiskit Textbook. To make the most out of these lectures, you may also consider looking through the <app-link url="https://qiskit.org/textbook/ch-prerequisites/linear_algebra.html">linear algebra prerequisites</app-link> section of the Qiskit Textbook.
+
+  </template>
+  </cv-accordion-item>
+  <cv-accordion-item>
+  <template #title>
+    What are the application requirements for the Summer School?
+  </template>
+  <template #content>
+
+  There is no application or pre-registration for the Qiskit Global Summer School 2021. Registration will be on a first come, first serve basis, with scheduled global availability. Once the Summer School registration reaches capacity, unfortunately we will not be able to register any additional students. Please submit an enquiry below if you have any additional questions!
+
+  </template>
+  </cv-accordion-item>
   </template>
 </event-template>

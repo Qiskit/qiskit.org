@@ -51,18 +51,7 @@
         Frequently asked questions
       </h2>
       <cv-accordion align="end">
-        <cv-accordion-item v-for="(item, index) in []" :key="index">
-          <template slot="title">
-            {{ item.question }}
-          </template>
-          <template slot="content">
-            <!-- TODO: HTML content should not be in strings but in components
-            but lacking of a better solution given time constraints. -->
-            <!-- eslint-disable vue/no-v-html -->
-            <p v-html="item.answer" />
-            <!-- eslint-enable -->
-          </template>
-        </cv-accordion-item>
+        <slot name="faq-topics" />
       </cv-accordion>
     </section>
 
@@ -136,10 +125,15 @@ export default class EventTemplate extends Vue {
 </style>
 
 <style lang="scss">
+@import "~/assets/scss/blocks/copy.scss";
 // overrides
 .summer-school-page {
   .bx--accordion__title {
     color: $white-text-01;
+  }
+
+  .bx--accordion__content p {
+    @extend .copy__paragraph;
   }
 
   .bx--accordion__heading:hover,
