@@ -14,7 +14,7 @@ import { IContentDocument } from '@nuxt/content/types/content'
 
 @Component
 export default class AccordionSection extends Vue {
-  @Prop({ type: String }) route: string | undefined
+  @Prop({ type: String, required: true, default: '' }) route!: string
   @Prop({ type: Object }) document!: IContentDocument
 
   @Watch('document', { immediate: true })
@@ -29,7 +29,7 @@ export default class AccordionSection extends Vue {
       .filter((item:any) => item.segment && typeof item.segment === 'string')
       .forEach((item:any) => {
         item.segment = {
-          action: `${this.route} > ${val.module} > ${item.segment}`
+          action: `${this.route === '' ? this.$route.name : this.route} > ${val.module} > ${item.segment}`
         }
       })
   }
