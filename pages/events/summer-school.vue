@@ -227,71 +227,73 @@ export default class SummerSchoolPage extends QiskitPage {
 }
 </style>
 
-<style lang="scss">
+<style lang="scss" scoped>
 // overrides
 .summer-school-page {
-  .bx--accordion__title {
-    color: $white-text-01;
-  }
-
-  .bx--accordion__heading:hover,
-  .bx--accordion__heading:hover::before {
-    background-color: $cool-gray-10;
-  }
-
-  .bx--accordion__arrow {
-    fill: $white-text-01;
-  }
-
-  & a.bx--tabs__nav-link {
-    color: $cool-gray-80;
-    border-bottom-color: $cool-gray-20;
-
-    &:focus,
-    &:active {
-      outline: none;
+  ::v-deep {
+    .bx--accordion__title {
+      color: $white-text-01;
     }
 
-    &:not(.bx--tabs__nav-item--disabled) {
+    .bx--accordion__heading:hover,
+    .bx--accordion__heading:hover::before {
+      background-color: $cool-gray-10;
+    }
+
+    .bx--accordion__arrow {
+      fill: $white-text-01;
+    }
+
+    & a.bx--tabs__nav-link {
       color: $cool-gray-80;
-    }
-  }
+      border-bottom-color: $cool-gray-20;
 
-  & .bx--tabs__nav-item {
-    &:hover:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link,
-    &:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled):not(.bx--tabs__nav-item--selected) .bx--tabs__nav-link:focus,
-    &:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled):not(.bx--tabs__nav-item--selected) a.bx--tabs__nav-link:active,
-    &:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link, .bx--tabs__nav-item--selected:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link:focus {
-      color: $cool-gray-80;
-    }
+      &:focus,
+      &:active {
+        outline: none;
+      }
 
-    &--selected:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link {
-      border-bottom-color: $purple-70;
-    }
-  }
-
-  & .bx--tabs__nav-item:hover:not(.bx--tabs__nav-item--disabled) {
-      box-shadow: none;
-    }
-
-    & .bx--tabs__nav-item:hover:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled),
-    & .bx--tabs__nav-item,
-    & .bx--tabs-trigger {
-      background-color: white;
-
-      svg {
-        fill: $gray-100;
+      &:not(.bx--tabs__nav-item--disabled) {
+        color: $cool-gray-80;
       }
     }
 
-    & .bx--tabs__nav-link,
-    & .bx--tabs-trigger-text {
-      color: $gray-100;
-  }
+    & .bx--tabs__nav-item {
+      &:hover:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link,
+      &:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled):not(.bx--tabs__nav-item--selected) .bx--tabs__nav-link:focus,
+      &:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled):not(.bx--tabs__nav-item--selected) a.bx--tabs__nav-link:active,
+      &:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link, .bx--tabs__nav-item--selected:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link:focus {
+        color: $cool-gray-80;
+      }
 
-  .app-data-table {
-    margin-top: $spacing-07;
-    padding: 0;
+      &--selected:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link {
+        border-bottom-color: $purple-70;
+      }
+    }
+
+    & .bx--tabs__nav-item:hover:not(.bx--tabs__nav-item--disabled) {
+        box-shadow: none;
+      }
+
+      & .bx--tabs__nav-item:hover:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled),
+      & .bx--tabs__nav-item,
+      & .bx--tabs-trigger {
+        background-color: white;
+
+        svg {
+          fill: $gray-100;
+        }
+      }
+
+      & .bx--tabs__nav-link,
+      & .bx--tabs-trigger-text {
+        color: $gray-100;
+    }
+
+    .app-data-table {
+      margin-top: $spacing-07;
+      padding: 0;
+    }
   }
 }
 
