@@ -66,11 +66,7 @@
             {{ item.question }}
           </template>
           <template slot="content">
-            <!-- TODO: HTML content should not be in strings but in components
-            but lacking of a better solution given time constraints. -->
-            <!-- eslint-disable vue/no-v-html -->
             <p v-html="item.answer" />
-            <!-- eslint-enable -->
           </template>
         </cv-accordion-item>
       </cv-accordion>
@@ -157,6 +153,17 @@ interface AgendaSlot {
   },
   async asyncData (context: Context) {
     const eventData = await context.$content('events/summer-school-2021').fetch() as IContentDocument
+    const faqData = await context.$content('events/summer-school-2021-page/faq').fetch() as IContentDocument
+
+    // console.log(faqData.body.children)
+    // console.log(faqData.body.children[0].children)
+    // console.log(faqData.body.children[0].children[1].children)
+    /*
+      .filter((element:any) => element.tag === 'ul')
+      .forEach((element:any) => {
+        element.tag = 'cv-accordion'
+      })
+    */
 
     let idx = 0
     for (const elem in eventData) {
@@ -208,7 +215,8 @@ interface AgendaSlot {
     eventData.agenda.week2.tableData = eventData.agenda.week2.schedule.map(scheduleToTableData)
 
     return {
-      eventData
+      eventData,
+      faqData
     }
   }
 })
