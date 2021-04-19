@@ -31,29 +31,29 @@ export default class AppLink extends Vue {
   }
 
   &_primary {
-    color: $blue-50;
+    color: $link-color;
 
     &:hover,
     &:focus,
     &:active {
-      color: $blue-60;
+      color: $link-hover-color;
     }
     &:visited {
-      color: $purple-70;
+      color: $link-visited-color;
     }
   }
 
   &_secondary {
-    color: $gray-80;
+    color: $link-color-secondary;
 
     &:hover,
     &:focus,
     &:active {
-      color: $gray-80;
+      color: $link-hover-color-secondary;
       text-decoration: underline;
     }
     &:visited {
-      color: $gray-80;
+      color: $link-visited-color-secondary;
     }
   }
 

@@ -243,7 +243,7 @@ export default class StartLocally extends Vue {
 
     & .bx--accordion__item {
       border-bottom: none;
-      border-top-color: $gray-20;
+      border-top-color: $border-color;
     }
 
     & .bx--accordion__heading {

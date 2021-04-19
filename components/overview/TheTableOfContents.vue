@@ -52,7 +52,7 @@ export default class TheTableOfContents extends Vue {
 
       &::before {
         content: "-";
-        color: $purple-70;
+        color: $text-active-color;
         font-weight: bold;
         display: inline-block;
         padding-right: $layout-02;

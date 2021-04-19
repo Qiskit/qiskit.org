@@ -25,6 +25,6 @@ footer {
   min-height: 10rem;
   text-align: center;
   margin-top: 4rem;
-  background-color: $ui-background;
+  background-color: $background-color-white;
 }
 </style>

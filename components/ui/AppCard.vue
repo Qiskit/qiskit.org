@@ -133,8 +133,8 @@ export default class AppCard extends Vue {
     }
 
     .bx--tag--purple {
-      background-color: $purple-70;
-      color: $text-color-white;
+      background-color: $tag-background-color;
+      color: $tag-text-color;
     }
 
     .bx--tag:first-child {

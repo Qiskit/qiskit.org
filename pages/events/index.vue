@@ -212,8 +212,8 @@ export default class EventsPage extends QiskitPage {
     margin-top: $layout-03;
     margin-bottom: $layout-04;
     .bx--tabs__nav-link {
-      color: $black-100;
-      border-bottom-color: $gray-20;
+      color: black;
+      border-bottom-color: $border-color;
     }
 
     .bx--tabs__nav-item:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link,
@@ -222,7 +222,7 @@ export default class EventsPage extends QiskitPage {
     }
 
     .bx--tabs__nav-item--selected:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link {
-        border-bottom-color: $purple-70;
+        border-bottom-color: $border-color-secondary;
     }
 
     @include mq($until: medium) {

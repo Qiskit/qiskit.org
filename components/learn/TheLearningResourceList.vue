@@ -211,7 +211,7 @@ export default class TheLearningResourceList extends Vue {
     & .bx--tabs__nav-item:hover:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled),
     & .bx--tabs__nav-item,
     & .bx--tabs-trigger {
-      background-color: $ui-background;
+      background-color: $background-color-white;
 
       svg {
         fill: $text-color;
@@ -227,7 +227,7 @@ export default class TheLearningResourceList extends Vue {
   &__filter-time {
     & .bx--dropdown,
     & .bx--dropdown-item {
-      background-color: $ui-background;
+      background-color: $background-color-white;
 
         svg {
           fill: $text-color;

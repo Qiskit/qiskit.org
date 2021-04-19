@@ -94,7 +94,7 @@ export default class LearnEntry extends QiskitPage {
     // Same as copy__link
     a {
       @include type-style('body-long-01');
-      color: $purple-70;
+      color: $link-color-tertiary;
       text-decoration: none;
 
       @include mq($from: medium, $until: large) {

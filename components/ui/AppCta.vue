@@ -88,23 +88,23 @@ export default class AppCta extends Vue {
   */
   &,
   &_primary {
-    @include bicolor-background($purple-80, $purple-70);
-    color: white;
+    @include bicolor-background($button-background-color-dark, $button-background-color);
+    color: $button-text-color;
   }
 
   &_secondary {
-    @include bicolor-background($purple-70, $cool-gray-10);
-    color: $purple-70;
+    @include bicolor-background($button-background-color-secondary-dark, $button-background-color-secondary);
+    color: $button-text-color-secondary;
 
     &:hover,
     &:focus,
     &:active {
-      color: white;
+      color: $button-active-text-color-secondary;
     }
 
     &_theme_dark {
-      @include bicolor-background($purple-70, $cool-gray-90);
-      color: $purple-40;
+      @include bicolor-background($button-background-color-tertiary-dark, $button-background-color-tertiary);
+      color: $button-text-color-tertiary;
     }
   }
 
@@ -115,20 +115,20 @@ export default class AppCta extends Vue {
     align-items: flex-start;
 
     background-image: none;
-    color: $purple-70;
+    color: $link-color-tertiary;
 
     &:hover,
     &:focus,
     &:active {
-      color: $purple-80;
+      color: $link-hover-color-tertiary;
     }
 
     &_theme_dark {
-      color: $purple-50;
+      color: $link-color-quaternary;
       &:hover,
       &:focus,
       &:active {
-        color: $purple-40;
+        color: $link-hover-color-quaternary;
       }
     }
   }

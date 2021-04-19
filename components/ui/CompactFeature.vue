@@ -32,7 +32,7 @@ export default class CompactFeature extends Vue {
 $feature-icon-size: 2.25rem;
 
 .compact-feature {
-  background-color: $purple-70;
+  background-color: $background-color-secondary;
   height: 100%;
   padding: $spacing-05;
 

@@ -1,5 +1,5 @@
 <template>
-  <main class="community-page advocates-page">
+  <main>
     <AppPageHeaderFixed>
       Connect with the<br>
       <TypewriterEffect

@@ -41,7 +41,7 @@ export default class AppNavBackLink extends Vue {
     }
 
     &_light {
-      color: $purple-70;
+      color: $link-color-tertiary;
     }
   }
 
