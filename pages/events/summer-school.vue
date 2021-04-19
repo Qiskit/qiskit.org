@@ -60,24 +60,6 @@
       class="summer-school-page__section"
       :style="`order: ${eventData.faq.pageOrder}`"
     />
-    <!--section
-      class="summer-school-page__section"
-      :style="`order: ${eventData.faq.pageOrder}`"
-    >
-      <h2 class="copy__title">
-        Frequently asked questions
-      </h2>
-      <cv-accordion :align="`end`">
-        <cv-accordion-item v-for="item in eventData.faq" :key="item.index">
-          <template slot="title">
-            {{ item.question }}
-          </template>
-          <template slot="content">
-            <p v-html="item.answer" />
-          </template>
-        </cv-accordion-item>
-      </cv-accordion>
-    </section-->
 
     <AppHelpfulResourcesSection
       class="summer-school-page__section"
