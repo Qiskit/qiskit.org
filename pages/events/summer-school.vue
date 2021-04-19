@@ -53,7 +53,13 @@
         </cv-tabs>
       </client-only>
     </section>
-    <section
+
+    <AccordionSection
+      :document="faqData"
+      class="summer-school-page__section"
+      :style="`order: ${eventData.faq.pageOrder}`"
+    />
+    <!--section
       class="summer-school-page__section"
       :style="`order: ${eventData.faq.pageOrder}`"
     >
@@ -70,7 +76,7 @@
           </template>
         </cv-accordion-item>
       </cv-accordion>
-    </section>
+    </section-->
 
     <AppHelpfulResourcesSection
       class="summer-school-page__section"
@@ -154,16 +160,6 @@ interface AgendaSlot {
   async asyncData (context: Context) {
     const eventData = await context.$content('events/summer-school-2021').fetch() as IContentDocument
     const faqData = await context.$content('events/summer-school-2021-page/faq').fetch() as IContentDocument
-
-    // console.log(faqData.body.children)
-    // console.log(faqData.body.children[0].children)
-    // console.log(faqData.body.children[0].children[1].children)
-    /*
-      .filter((element:any) => element.tag === 'ul')
-      .forEach((element:any) => {
-        element.tag = 'cv-accordion'
-      })
-    */
 
     let idx = 0
     for (const elem in eventData) {
