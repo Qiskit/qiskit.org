@@ -125,7 +125,7 @@ const config: NuxtConfig = {
       typeCheck: true,
       ignoreNotFoundWarnings: true
     }],
-    '@nuxtjs/style-resources',
+    '@nuxtjs/style-resources'
   ],
 
   /*
