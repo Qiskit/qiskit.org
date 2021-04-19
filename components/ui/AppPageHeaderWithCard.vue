@@ -1,7 +1,7 @@
 <template>
   <header class="app-page-header">
     <div class="app-page-header__container">
-      <main class="app-page-header__main">
+      <div class="app-page-header__main">
         <div>
           <h1 class="app-page-header__headline copy__page-title">
             <slot name="title" />
@@ -20,7 +20,7 @@
         </div>
         <AppCta v-if="cta" v-bind="cta" />
         <slot v-else name="call-to-actions" />
-      </main>
+      </div>
       <aside class="app-page-header__aside">
         <div>
           <div class="app-page-header__card-title-wrapper">
