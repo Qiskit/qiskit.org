@@ -103,7 +103,6 @@ const config: NuxtConfig = {
   */
   modules: [
     '@nuxt/content',
-    '@nuxtjs/style-resources',
     '@nuxtjs/axios',
     'nuxt-lazy-load'
   ],
@@ -125,7 +124,8 @@ const config: NuxtConfig = {
     ['@nuxt/typescript-build', {
       typeCheck: true,
       ignoreNotFoundWarnings: true
-    }]
+    }],
+    '@nuxtjs/style-resources',
   ],
 
   /*
