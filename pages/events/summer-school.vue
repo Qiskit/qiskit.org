@@ -141,8 +141,16 @@ interface AgendaSlot {
     }
   },
   async asyncData (context: Context) {
-    const eventData = await context.$content('events/summer-school-2021').fetch() as IContentDocument
-    const faqData = await context.$content('events/summer-school-2021-page/faq').fetch() as IContentDocument
+    const eventData = await context.$content('events/summer-school-2021')
+      .fetch()
+      .catch((_) => {
+        context.error({ statusCode: 404, message: 'Event not found' })
+      }) as IContentDocument
+    const faqData = await context.$content('events/summer-school-2021-page/faq')
+      .fetch()
+      .catch((_) => {
+        context.error({ statusCode: 404, message: 'Event section not found' })
+      }) as IContentDocument
 
     let idx = 0
     for (const elem in eventData) {
