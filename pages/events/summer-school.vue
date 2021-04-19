@@ -7,9 +7,9 @@
       :style="`order: ${eventData.header.pageOrder}`"
     >
       <template slot="title">
-        {{ eventData.header.primaryTitle }}
+        {{ eventData.header.titleLine1 }}
         <br>
-        {{ eventData.header.secondaryTitle }}
+        {{ eventData.header.titleLine1 }}
       </template>
       <template slot="card">
         <EventCard v-bind="eventData.header.card" vertical-layout>
@@ -29,29 +29,23 @@
       class="summer-school-page__section"
       :style="`order: ${eventData.agenda.pageOrder}`"
     >
-      <h2 class="copy__title">
-        {{ eventData.agenda.title }}
-      </h2>
-      <client-only>
-        <cv-tabs>
-          <cv-tab :label="eventData.agenda.week1.tabName">
-            <AppDataTableSection
-              class="summer-school-page__section"
-              :section-title="''"
-              :data-table-columns="agendaColumnsDataTable"
-              :data-table-elements="eventData.agenda.week1.tableData"
-            />
-          </cv-tab>
-          <cv-tab :label="eventData.agenda.week2.tabName">
-            <AppDataTableSection
-              class="summer-school-page__section"
-              :section-title="''"
-              :data-table-columns="agendaColumnsDataTable"
-              :data-table-elements="eventData.agenda.week2.tableData"
-            />
-          </cv-tab>
-        </cv-tabs>
-      </client-only>
+      <h2 class="copy__title" v-text="eventData.agenda.title" />
+      <cv-tabs>
+        <cv-tab :label="eventData.agenda.week1.tabName">
+          <AppDataTable
+            class="summer-school-page__section"
+            :columns="agendaColumnsDataTable"
+            :elements="eventData.agenda.week1.tableData"
+          />
+        </cv-tab>
+        <cv-tab :label="eventData.agenda.week2.tabName">
+          <AppDataTable
+            class="summer-school-page__section"
+            :columns="agendaColumnsDataTable"
+            :elements="eventData.agenda.week2.tableData"
+          />
+        </cv-tab>
+      </cv-tabs>
     </section>
 
     <AccordionSection
@@ -295,8 +289,8 @@ export default class SummerSchoolPage extends QiskitPage {
       color: $gray-100;
   }
 
-  .app-data-table-section {
-    margin-top: 0;
+  .app-data-table {
+    margin-top: $spacing-07;
     padding: 0;
   }
 }
