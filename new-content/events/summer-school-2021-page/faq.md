@@ -7,52 +7,40 @@ module: faq
 title: Frequently asked questions
 khanacademy:
   url: https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:matrices/x9e81a4f98389efdf:multiplying-matrices-by-matrices/v/matrix-multiplication-intro
-  segment: 
-    action: khanacademy-matrix-multiplication-intro
+  segment: khanacademy-matrix-multiplication-intro
 pythonandjupyter:
   url: https://qiskit.org/textbook/ch-prerequisites/python-and-jupyter-notebooks.html
-  segment: 
-    action: qiskit-python-and-jupyter-notebooks
+  segment: qiskit-python-and-jupyter-notebooks
 linearalgebra:
   url: https://qiskit.org/textbook/ch-prerequisites/python-and-jupyter-notebooks.html
-  segment: 
-    action: qiskit-linear-algebra
+  segment: qiskit-linear-algebra
 qceducators:
   url: https://quantum-computing.ibm.com/programs/educators
-  segment: 
-    action: quantum-computing-educators
+  segment: quantum-computing-educators
 twitterQiskit:
   url: https://twitter.com/qiskit
-  segment: 
-    action: twitter-qiskit
+  segment: twitter-qiskit
 twitterIBMResearch:
   url: https://twitter.com/IBMResearch
-  segment: 
-    action: twitter-ibmresearch
+  segment: twitter-ibmresearch
 githubQiskit:
   url: https://github.com/Qiskit
-  segment: 
-    action: github-qiskit
+  segment: github-qiskit
 mediumQiskit:
   url: https://medium.com/qiskit
-  segment: 
-    action: medium-qiskit
+  segment: medium-qiskit
 qiskitSubscribe:
   url: https://qisk.it/sub
-  segment: 
-    action: qiskit-subscribe
+  segment: qiskit-subscribe
 joinqiskitslack:
   url: https://ibm.co/joinqiskitslack
-  segment: 
-    action: join-qiskit-slack
+  segment: join-qiskit-slack
 qiskitEvents:
   url: https://qiskit.org/events
-  segment: 
-    action: qiskit-events
+  segment: qiskit-events
 mailtoQiskit:
   url: mailto:qiskit.events@us.ibm.com
-  segment: 
-    action: mailto-qiskit-events
+  segment: mailto-qiskit-events
     
 ---
 
