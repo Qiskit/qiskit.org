@@ -53,28 +53,13 @@
         </cv-tabs>
       </client-only>
     </section>
-    <section
+
+    <AccordionSection
+      :route="contextRoute"
+      :document="faqData"
       class="summer-school-page__section"
       :style="`order: ${eventData.faq.pageOrder}`"
-    >
-      <h2 class="copy__title">
-        Frequently asked questions
-      </h2>
-      <cv-accordion :align="`end`">
-        <cv-accordion-item v-for="item in eventData.faq" :key="item.index">
-          <template slot="title">
-            {{ item.question }}
-          </template>
-          <template slot="content">
-            <!-- TODO: HTML content should not be in strings but in components
-            but lacking of a better solution given time constraints. -->
-            <!-- eslint-disable vue/no-v-html -->
-            <p v-html="item.answer" />
-            <!-- eslint-enable -->
-          </template>
-        </cv-accordion-item>
-      </cv-accordion>
-    </section>
+    />
 
     <AppHelpfulResourcesSection
       class="summer-school-page__section"
@@ -156,7 +141,16 @@ interface AgendaSlot {
     }
   },
   async asyncData (context: Context) {
-    const eventData = await context.$content('events/summer-school-2021').fetch() as IContentDocument
+    const eventData = await context.$content('events/summer-school-2021')
+      .fetch()
+      .catch((_) => {
+        context.error({ statusCode: 404, message: 'Event not found' })
+      }) as IContentDocument
+    const faqData = await context.$content('events/summer-school-2021-page/faq')
+      .fetch()
+      .catch((_) => {
+        context.error({ statusCode: 404, message: 'Event section not found' })
+      }) as IContentDocument
 
     let idx = 0
     for (const elem in eventData) {
@@ -208,7 +202,9 @@ interface AgendaSlot {
     eventData.agenda.week2.tableData = eventData.agenda.week2.schedule.map(scheduleToTableData)
 
     return {
-      eventData
+      eventData,
+      faqData,
+      contextRoute: context.route.name
     }
   }
 })
