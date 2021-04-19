@@ -4,6 +4,7 @@
       :description="eventData.header.description"
       :cta="eventData.header.cta"
       :card-title="eventData.header.cardSectionHeading"
+      :style="`order: ${eventData.header.pageOrder}`"
     >
       <template slot="title">
         {{ eventData.header.primaryTitle }}
@@ -21,9 +22,13 @@
       class="summer-school-page__section"
       :title="eventData.mosaic.title"
       :elements="eventData.mosaic.elements"
+      :style="`order: ${eventData.mosaic.pageOrder}`"
     />
 
-    <section class="summer-school-page__section">
+    <section
+      class="summer-school-page__section"
+      :style="`order: ${eventData.agenda.pageOrder}`"
+    >
       <h2 class="copy__title">
         {{ eventData.agenda.title }}
       </h2>
@@ -48,7 +53,10 @@
         </cv-tabs>
       </client-only>
     </section>
-    <section class="summer-school-page__section">
+    <section
+      class="summer-school-page__section"
+      :style="`order: ${eventData.faq.pageOrder}`"
+    >
       <h2 class="copy__title">
         Frequently asked questions
       </h2>
@@ -72,6 +80,7 @@
       class="summer-school-page__section"
       :title="eventData.helpfulResources.title"
       :resources="eventData.helpfulResources.resources"
+      :style="`order: ${eventData.helpfulResources.pageOrder}`"
     />
   </main>
 </template>
@@ -149,6 +158,14 @@ interface AgendaSlot {
   async asyncData (context: Context) {
     const eventData = await context.$content('events/summer-school-2021').fetch() as IContentDocument
 
+    let idx = 0
+    for (const elem in eventData) {
+      if (typeof eventData[elem] === 'object') {
+        eventData[elem].pageOrder = idx
+        idx++
+      }
+    }
+
     const headerRouteText = `${context.route.name} > header >`
     const helpfulResourcesRouteText = `${context.route.name} > helpful-resources >`
     eventData.header.card.segment = { action: `${headerRouteText} learn-more` }
@@ -204,9 +221,12 @@ export default class SummerSchoolPage extends QiskitPage {
 <style lang="scss" scoped>
 .summer-school-page {
   color: $white-text-01;
+  display: flex;
+  flex-direction: column;
 
   &__section {
     @include contained();
+    width: 100%;
     margin-top: $layout-05;
     margin-bottom: $layout-03;
 
