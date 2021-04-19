@@ -107,20 +107,20 @@ export default class LearnEntry extends QiskitPage {
     }
 
     code {
-      background-color: $purple-10;
+      background-color: $code-text-color;
       padding: $spacing-01;
     }
 
     blockquote {
       position: relative;
-      background-color: $purple-20;
+      background-color: $blockquote-background-color;
       padding: $spacing-07;
       margin-bottom: $layout-03;
 
       &::before {
         @include type-style('display-02');
         content: '”';
-        color: $purple-70;
+        color: $blockquote-text-color;
         position: absolute;
         top: 0;
         left: 0;
@@ -212,7 +212,7 @@ export default class LearnEntry extends QiskitPage {
 
       th {
         text-align: center;
-        background-color: $purple-60;
+        background-color: $background-color-tertiary;
         color: white;
         font-weight: bold;
       }

@@ -58,7 +58,7 @@ export default class VersionInfo extends Vue {
   }
 
   &__github-icon {
-    fill: $purple-70;
+    fill: $link-color-tertiary;
     margin-right: $spacing-07;
 
     @include mq($from: medium, $until: large) {

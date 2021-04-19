@@ -98,7 +98,7 @@ export default class AppPageHeaderWithCard extends Vue {
   }
 
   &__card-title {
-    border-bottom: 4px solid $purple-60;
+    border-bottom: 4px solid $border-color-tertiary;
     display: inline;
     padding-bottom: $spacing-02;
     padding-right: $spacing-03;

@@ -55,7 +55,7 @@ export default class SyntaxHighlight extends Vue {
     text-transform: lowercase;
     background-size: 200% 100%;
     background-position-x: 100%;
-    background-image: linear-gradient(90deg, $purple-70 0%, $purple-70 50%, $purple-70 50%, $purple-70 100%);
+    background-image: linear-gradient(90deg, $background-color-secondary 0%, $background-color-secondary 50%, $background-color-secondary 50%, $background-color-secondary 100%);
     transition: background-position-x 0.3s ease-out;
 
     &:hover,

@@ -229,7 +229,7 @@ export default class EventsPage extends QiskitPage {
       margin-bottom: 0;
       .bx--tabs-trigger {
         background-color: $background-color-white;
-        border-bottom: 1px solid $gray-20;
+        border-bottom: 1px solid $border-color;
 
         &[class*="--open"] {
           background-color: $background-color-lighter;
@@ -245,7 +245,7 @@ export default class EventsPage extends QiskitPage {
       }
 
       .bx--tabs-trigger--open {
-        border-bottom: 1px solid $gray-60;
+        border-bottom: 1px solid $border-color-quaternary;
       }
 
       .bx--tabs-trigger--open,
