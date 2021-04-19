@@ -1,7 +1,7 @@
 <template>
   <section class="accordion__section">
     <h2 class="copy__title" v-text="document.title" />
-    <cv-accordion :align="`end`">
+    <cv-accordion align="end">
       <nuxt-content :document="document" />
     </cv-accordion>
   </section>
