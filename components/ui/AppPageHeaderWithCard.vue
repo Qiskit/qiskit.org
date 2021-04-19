@@ -7,15 +7,19 @@
             <slot name="title" />
           </h1>
           <div class="app-page-header__description">
-            <p
-              v-for="(paragraph, index) in description"
-              :key="index"
-              class="copy__paragraph"
-              v-text="paragraph"
-            />
+            <template v-if="description">
+              <p
+                v-for="(paragraph, index) in description"
+                :key="index"
+                class="copy__paragraph"
+                v-text="paragraph"
+              />
+            </template>
+            <slot v-else name="description" />
           </div>
         </div>
         <AppCta v-if="cta" v-bind="cta" />
+        <slot v-else name="call-to-actions" />
       </main>
       <aside class="app-page-header__aside">
         <div>
@@ -37,8 +41,8 @@ import { GeneralLink } from '~/constants/appLinks'
 @Component
 export default class AppPageHeaderWithCard extends Vue {
   @Prop({ type: String, required: true }) cardTitle!: string
-  @Prop({ type: Object, required: true }) cta!: GeneralLink
-  @Prop({ type: Array, required: true }) description!: string[]
+  @Prop({ type: Object, required: false }) cta?: GeneralLink
+  @Prop({ type: Array, required: false }) description?: string[]
 }
 </script>
 
@@ -89,6 +93,10 @@ export default class AppPageHeaderWithCard extends Vue {
 
   &__description {
     margin-top: $spacing-05;
+
+    p {
+      @extend .copy__paragraph;
+    }
 
     @include mq($until: x-large) {
       margin-top: $spacing-06;

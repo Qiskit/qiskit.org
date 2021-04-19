@@ -1,6 +1,6 @@
 <template>
   <main class="summer-school-page">
-    <AppPageHeaderWithCardContentDriven
+    <AppPageHeaderWithCard
       card-title="About the event"
     >
       <template slot="title">
@@ -17,7 +17,7 @@
       <template slot="call-to-actions">
         <slot name="call-to-actions"></slot>
       </template>
-    </AppPageHeaderWithCardContentDriven>
+    </AppPageHeaderWithCard>
 
     <AppMosaicSection
       class="summer-school-page__section"
