@@ -1,7 +1,5 @@
 <template>
-  <section
-    class="accordion__section"
-  >
+  <section class="accordion__section">
     <h2 class="copy__title">
       {{ document.title }}
     </h2>
