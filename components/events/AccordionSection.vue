@@ -51,90 +51,17 @@ export default class AccordionSection extends Vue {
 </script>
 
 <style lang="scss" scoped>
-.summer-school-page {
-  color: $white-text-01;
-  display: flex;
-  flex-direction: column;
+@import "~/assets/scss/blocks/copy.scss";
 
-  &__section {
-    @include contained();
-    width: 100%;
-    margin-top: $layout-05;
-    margin-bottom: $layout-03;
-
-    @include mq($until: large) {
-      margin-bottom: $layout-01;
-    }
-  }
-}
-</style>
-
-<style lang="scss">
-// overrides
-.summer-school-page {
-  .bx--accordion__title {
-    color: $white-text-01;
-  }
-
-  .bx--accordion__heading:hover,
-  .bx--accordion__heading:hover::before {
-    background-color: $cool-gray-10;
-  }
-
-  .bx--accordion__arrow {
-    fill: $white-text-01;
-  }
-
-  & a.bx--tabs__nav-link {
-    color: $cool-gray-80;
-    border-bottom-color: $cool-gray-20;
-
-    &:focus,
-    &:active {
-      outline: none;
-    }
-
-    &:not(.bx--tabs__nav-item--disabled) {
-      color: $cool-gray-80;
-    }
-  }
-
-  & .bx--tabs__nav-item {
-    &:hover:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link,
-    &:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled):not(.bx--tabs__nav-item--selected) .bx--tabs__nav-link:focus,
-    &:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled):not(.bx--tabs__nav-item--selected) a.bx--tabs__nav-link:active,
-    &:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link, .bx--tabs__nav-item--selected:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link:focus {
-      color: $cool-gray-80;
-    }
-
-    &--selected:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link {
-      border-bottom-color: $purple-70;
-    }
-  }
-
-  & .bx--tabs__nav-item:hover:not(.bx--tabs__nav-item--disabled) {
-      box-shadow: none;
-    }
-
-    & .bx--tabs__nav-item:hover:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled),
-    & .bx--tabs__nav-item,
-    & .bx--tabs-trigger {
-      background-color: white;
-
-      svg {
-        fill: $gray-100;
+.accordion__section {
+  ::v-deep {
+    .bx--accordion__content {
+      @extend .copy__paragraph;
+      max-width: none;
+      > p {
+        margin-top: 1.43em;
       }
     }
-
-    & .bx--tabs__nav-link,
-    & .bx--tabs-trigger-text {
-      color: $gray-100;
-  }
-
-  .app-data-table-section {
-    margin-top: 0;
-    padding: 0;
   }
 }
-
 </style>
