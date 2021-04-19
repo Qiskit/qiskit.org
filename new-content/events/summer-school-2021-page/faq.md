@@ -1,5 +1,5 @@
 ---
-## do not touch
+## do not modify
 template: AccordionSection
 module: faq
 
