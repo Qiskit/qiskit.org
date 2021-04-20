@@ -43,19 +43,14 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-
-type LinkData = {
-  url: string,
-  label: string,
-  segment: { action: string }
-}
+import { GeneralLink } from '~/constants/appLinks'
 
 export type MosaicElement = {
   position: string,
   title: string,
   description: string,
   image: string,
-  cta?: LinkData
+  cta?: GeneralLink
 }
 
 @Component
