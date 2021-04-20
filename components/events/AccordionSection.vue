@@ -37,7 +37,7 @@ export default class AccordionSection extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import "~/assets/scss/blocks/copy.scss";
+@import "~/assets/scss/layout/_copy.scss";
 
 .accordion__section {
   ::v-deep {
