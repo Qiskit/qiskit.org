@@ -21,7 +21,7 @@
     <AppMosaicSection
       class="summer-school-page__section"
       :title="eventData.mosaic.title"
-      :elements="eventData.mosaic.elements"
+      :elements="eventData.mosaic.tiles"
       :style="`order: ${eventData.mosaic.pageOrder}`"
     />
 
@@ -162,12 +162,6 @@ interface AgendaSlot {
     eventData.helpfulResources.resources[1].cta.segment = { action: `${helpfulResourcesRouteText} install-here` }
     eventData.helpfulResources.resources[2].cta.segment = { action: `${helpfulResourcesRouteText} qiskit-medium` }
     eventData.helpfulResources.resources[3].cta.segment = { action: `${helpfulResourcesRouteText} code-of-conduct` }
-
-    eventData.mosaic.first.position = 'first'
-    eventData.mosaic.second.position = 'second'
-    eventData.mosaic.third.position = 'third'
-    eventData.mosaic.fourth.position = 'fourth'
-    eventData.mosaic.elements = [eventData.mosaic.first, eventData.mosaic.second, eventData.mosaic.third, eventData.mosaic.fourth]
 
     const scheduleToTableData = (slot: AgendaSlot) => ([
       {
