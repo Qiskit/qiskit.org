@@ -69,8 +69,8 @@ export default class AppCard extends Vue {
 .app-card {
   min-height: 13rem;
   width: 100%;
-  background-color: $cool-gray-10;
-  color: $cool-gray-80;
+  background-color: $background-color-lighter;
+  color: $text-color-light;
   display: flex;
 
   @include mq($until: medium) {
@@ -80,7 +80,7 @@ export default class AppCard extends Vue {
 
   &__image {
     flex: 0 0 14rem;
-    background-color: $cool-gray-20;
+    background-color: $background-color-light;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -133,8 +133,8 @@ export default class AppCard extends Vue {
     }
 
     .bx--tag--purple {
-      background-color: $purple-70;
-      color: $white;
+      background-color: $tag-background-color;
+      color: $tag-text-color;
     }
 
     .bx--tag:first-child {

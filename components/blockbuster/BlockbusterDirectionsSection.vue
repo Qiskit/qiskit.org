@@ -75,12 +75,10 @@ export default class BlockbusterDirectionsSection extends Vue {
 </script>
 
 <style lang="scss">
-@import "~/assets/scss/blocks/copy.scss";
-
 .blockbuster-directions-section {
   &__loading-container {
     align-items: center;
-    color: $text-01;
+    color: $text-color;
     display: flex;
     flex-flow: column;
     justify-content: center;

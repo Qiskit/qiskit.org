@@ -48,8 +48,6 @@ export default class AppPageHeaderWithCard extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import "~/assets/scss/blocks/copy.scss";
-
 .app-page-header {
   @include responsive-grid-bg-strip("/images/grid/grid-hero-learn.svg", auto, 28rem);
   padding-top: $layout-06;
@@ -100,7 +98,7 @@ export default class AppPageHeaderWithCard extends Vue {
   }
 
   &__card-title {
-    border-bottom: 4px solid $purple-60;
+    border-bottom: 4px solid $border-color-tertiary;
     display: inline;
     padding-bottom: $spacing-02;
     padding-right: $spacing-03;

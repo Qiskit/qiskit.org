@@ -51,7 +51,6 @@ export default class AppMosaic extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '~/assets/scss/blocks/copy.scss';
 @import '~carbon-components/scss/globals/scss/typography';
 
 .app-mosaic {
@@ -89,7 +88,7 @@ export default class AppMosaic extends Vue {
   }
 
   &__element {
-    background-color: $cool-gray-10;
+    background-color: $background-color-lighter;
     display: flex;
 
     &_first {
@@ -177,7 +176,7 @@ export default class AppMosaic extends Vue {
 
       &-description {
         @include type-style('body-long-01');
-        color: $cool-gray-80;
+        color: $text-color-light;
       }
     }
   }

@@ -46,8 +46,6 @@ export default class BlockbusterHeader extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import "~/assets/scss/blocks/copy.scss";
-
 .blockbuster-header {
   @include responsive-grid-bg-strip(
     "/images/grid/grid-hero-light.svg",
@@ -66,7 +64,7 @@ export default class BlockbusterHeader extends Vue {
   }
 
   &__headline {
-    color: $text-01;
+    color: $text-color-white;
 
     .highlight {
       color: $carbon--yellow-20;
@@ -85,7 +83,7 @@ export default class BlockbusterHeader extends Vue {
     }
 
     .copy__paragraph {
-      color: $text-01;
+      color: $text-color-white;
     }
   }
 

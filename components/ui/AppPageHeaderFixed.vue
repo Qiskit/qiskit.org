@@ -17,8 +17,6 @@ export default class AppPageHeaderFixed extends Vue {}
 </script>
 
 <style lang="scss" scoped>
-@import "~/assets/scss/blocks/copy.scss";
-
 .app-page-header-fixed {
   @include responsive-grid-bg-strip("/images/grid/grid-hero-learn.svg", auto, 28rem);
 

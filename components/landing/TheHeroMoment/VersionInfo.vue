@@ -39,7 +39,6 @@ export default class VersionInfo extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '~/assets/scss/blocks/copy.scss';
 @import '~carbon-components/scss/globals/scss/typography';
 
 .qiskit-version-info {
@@ -59,7 +58,7 @@ export default class VersionInfo extends Vue {
   }
 
   &__github-icon {
-    fill: $purple-70;
+    fill: $link-color-tertiary;
     margin-right: $spacing-07;
 
     @include mq($from: medium, $until: large) {
@@ -78,7 +77,6 @@ export default class VersionInfo extends Vue {
 
   &__version-string {
     @include type-style('code-01');
-    color: $white-text-01;
     text-decoration: none;
     margin-bottom: $spacing-01;
   }

@@ -87,7 +87,7 @@ export default class TypewriterEffect extends Vue {
 
 <style lang="scss" scoped>
 .typewriter-effect {
-  background-color: $purple-70;
+  background-color: $background-color-secondary;
   display: inline-block;
 
   &__content {
@@ -111,7 +111,7 @@ export default class TypewriterEffect extends Vue {
       background-color: transparent;
     }
     50% {
-      background-color: $purple-70;
+      background-color: $background-color-secondary;
     }
   }
 }

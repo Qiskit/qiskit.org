@@ -29,14 +29,11 @@ export default class StartOnTheCloud extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '~/assets/scss/blocks/copy.scss';
-@import '~carbon-components/scss/globals/scss/typography';
-
 .start-on-the-cloud {
   &__wrapper {
     @include responsive-grid-bg('/images/grid/grid-white.svg', 36rem);
 
-    background-color: $cool-gray-10;
+    background-color: $background-color-lighter;
     background-position: bottom left;
     background-repeat: no-repeat;
     height: 100%;

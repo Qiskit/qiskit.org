@@ -65,7 +65,6 @@ export default class LearnEntry extends QiskitPage {
 
     &__title {
       @include type-style('expressive-heading-05', true);
-      color: $white-text-01;
     }
   }
 
@@ -77,7 +76,7 @@ export default class LearnEntry extends QiskitPage {
     // Same as copy__paragraph
     p {
       @include type-style('body-long-01');
-      color: $cool-gray-80;
+      color: $text-color-light;
       margin-bottom: $layout-03;
       max-width: 9 * $column-size-large;
 
@@ -95,7 +94,7 @@ export default class LearnEntry extends QiskitPage {
     // Same as copy__link
     a {
       @include type-style('body-long-01');
-      color: $purple-70;
+      color: $link-color-tertiary;
       text-decoration: none;
 
       @include mq($from: medium, $until: large) {
@@ -108,20 +107,20 @@ export default class LearnEntry extends QiskitPage {
     }
 
     code {
-      background-color: $purple-10;
+      background-color: $code-text-color;
       padding: $spacing-01;
     }
 
     blockquote {
       position: relative;
-      background-color: $purple-20;
+      background-color: $blockquote-background-color;
       padding: $spacing-07;
       margin-bottom: $layout-03;
 
       &::before {
         @include type-style('display-02');
         content: '”';
-        color: $purple-70;
+        color: $blockquote-text-color;
         position: absolute;
         top: 0;
         left: 0;
@@ -145,7 +144,7 @@ export default class LearnEntry extends QiskitPage {
     h2 {
       @include type-style('expressive-heading-05');
       margin-bottom: $layout-03;
-      color: $cool-gray-80;
+      color: $text-color-light;
 
       @include mq($from: medium, $until: large) {
         @include type-style('expressive-heading-03');
@@ -163,7 +162,7 @@ export default class LearnEntry extends QiskitPage {
     ul {
       @include type-style('body-long-01');
       list-style-type: '-';
-      color: $cool-gray-80;
+      color: $text-color-light;
       margin-bottom: $layout-03;
       max-width: 9 * $column-size-large;
 
@@ -194,7 +193,7 @@ export default class LearnEntry extends QiskitPage {
       td, th {
         @include type-style('body-long-01');
         border: 1px solid $cool-gray-20;
-        color: $cool-gray-80;
+        color: $text-color-light;
         vertical-align: middle;
         padding: $spacing-05;
         max-width: 9 * $column-size-large;
@@ -213,7 +212,7 @@ export default class LearnEntry extends QiskitPage {
 
       th {
         text-align: center;
-        background-color: $purple-60;
+        background-color: $background-color-tertiary;
         color: white;
         font-weight: bold;
       }

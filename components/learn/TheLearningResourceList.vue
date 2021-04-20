@@ -112,9 +112,6 @@ export default class TheLearningResourceList extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '~/assets/scss/blocks/copy.scss';
-@import '~carbon-components/scss/globals/scss/typography';
-
 .the-learning-resources-list {
   @include responsive-grid-bg('/images/grid/grid-left-inverted.svg', 36rem);
   background-repeat: no-repeat;
@@ -133,7 +130,7 @@ export default class TheLearningResourceList extends Vue {
   }
 
   &__filter-time {
-    color: $cool-gray-80;
+    color: $text-color-light;
 
     @include mq($until: medium) {
       margin-bottom: $layout-03;
@@ -170,7 +167,6 @@ export default class TheLearningResourceList extends Vue {
 </style>
 
 <style lang="scss">
-@import '~/assets/scss/blocks/copy.scss';
 /**
  * TODO: Review if there is some mechanism, inside the Carbon Themes
  * framework, for applying a different theme to an specific component (#703).
@@ -182,8 +178,8 @@ export default class TheLearningResourceList extends Vue {
 .the-learning-resources-list {
   &__filter-level {
     & a.bx--tabs__nav-link {
-      color: $cool-gray-80;
-      border-bottom-color: $cool-gray-20;
+      color: $text-color-light;
+      border-bottom-color: $border-color;
 
       &:focus,
       &:active {
@@ -191,7 +187,7 @@ export default class TheLearningResourceList extends Vue {
       }
 
       &:not(.bx--tabs__nav-item--disabled) {
-        color: $cool-gray-80;
+        color: $text-color-light;
       }
     }
 
@@ -200,11 +196,11 @@ export default class TheLearningResourceList extends Vue {
       &:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled):not(.bx--tabs__nav-item--selected) .bx--tabs__nav-link:focus,
       &:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled):not(.bx--tabs__nav-item--selected) a.bx--tabs__nav-link:active,
       &:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link, .bx--tabs__nav-item--selected:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link:focus {
-        color: $cool-gray-80;
+        color: $text-color-light;
       }
 
       &--selected:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link {
-        border-bottom-color: $purple-70;
+        border-bottom-color: $border-active-color;
       }
     }
 
@@ -215,26 +211,26 @@ export default class TheLearningResourceList extends Vue {
     & .bx--tabs__nav-item:hover:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled),
     & .bx--tabs__nav-item,
     & .bx--tabs-trigger {
-      background-color: white;
+      background-color: $background-color-white;
 
       svg {
-        fill: $gray-100;
+        fill: $text-color;
       }
     }
 
     & .bx--tabs__nav-link,
     & .bx--tabs-trigger-text {
-      color: $gray-100;
+      color: $text-color;
     }
   }
 
   &__filter-time {
     & .bx--dropdown,
     & .bx--dropdown-item {
-      background-color: white;
+      background-color: $background-color-white;
 
         svg {
-          fill: $gray-100;
+          fill: $text-color;
         }
     }
 
@@ -247,7 +243,7 @@ export default class TheLearningResourceList extends Vue {
 
     & .bx--dropdown-link,
     & .bx--dropdown-text {
-      color: $gray-100;
+      color: $text-color;
       border-top-color: #dde1e6;
     }
 
@@ -258,11 +254,6 @@ export default class TheLearningResourceList extends Vue {
 
     & .bx--dropdown-link:hover {
       border-bottom-color: #dde1e6;
-    }
-
-    // update color
-    & .bx--list-box__label {
-      color: $white-text-01;
     }
   }
 

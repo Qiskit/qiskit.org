@@ -122,17 +122,11 @@ export default class TheMenu extends Mixins(MenuMixin) {
 
 .menu {
   &__main-level {
-    --link-color: #{$gray-80};
-  }
-
-  &__second-level {
-    --link-color: #{$inverse-01};
-    background-color: $purple-40;
+    --link-color: #{$text-color-light};
   }
 
   &__mobile {
     position: relative;
-    color: $purple-70;
 
     @include mq($from: large) {
       display: none;
@@ -193,10 +187,10 @@ export default class TheMenu extends Mixins(MenuMixin) {
   &__logo {
     height: 1.5rem;
     width: auto;
-    color: $cool-gray-60;
+    color: $text-color-lighter;
 
     &_active {
-      color: $purple-70;
+      color: $text-active-color;
     }
   }
 
@@ -220,7 +214,6 @@ export default class TheMenu extends Mixins(MenuMixin) {
     }
 
     &:hover {
-      color: var(--link-color);
       text-decoration: underline;
     }
 
@@ -236,16 +229,8 @@ export default class TheMenu extends Mixins(MenuMixin) {
       margin-right: 0;
     }
 
-    // Like in TheTableOfContents component for combining modifiers.
-    // TODO: make a function of this kind of constructions, something like
-    // mod-combinator(&_active) {
-    //  ...
-    // }
-    &_active#{&} {
-      &_second-level,
-      &_second-level:hover {
-        color: $purple-70;
-      }
+    &_active {
+      color: $text-active-color;
     }
   }
 
@@ -275,7 +260,7 @@ export default class TheMenu extends Mixins(MenuMixin) {
   }
 
   .bx--dropdown {
-    background: $white;
+    background: $background-color-white;
     height: initial;
     max-height: initial;
     border-bottom: 1px solid transparent;
@@ -291,7 +276,7 @@ export default class TheMenu extends Mixins(MenuMixin) {
   }
 
   .bx--list-box__menu {
-    background-color: $white;
+    background-color: $background-color-white;
 
     &:focus {
       outline: none;
@@ -326,7 +311,7 @@ export default class TheMenu extends Mixins(MenuMixin) {
     }
 
     &:hover {
-      background-color: $cool-gray-20;
+      background-color: $background-color-light;
     }
   }
 

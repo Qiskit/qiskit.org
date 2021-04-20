@@ -48,11 +48,11 @@ export default class FooterSection extends Vue {
     padding-bottom: $spacing-07;
 
     &_theme_light {
-      color: $cool-gray-60;
+      color: $text-color-lighter;
     }
 
     &_theme_dark {
-      color: $white;
+      color: $text-color-white;
     }
   }
 
@@ -64,22 +64,22 @@ export default class FooterSection extends Vue {
     padding-bottom: $spacing-03;
 
     &_theme_light {
-      color: $cool-gray-60;
+      color: $text-color-lighter;
 
       &:active,
       &:visited,
       &:hover {
-        color: $cool-gray-60;
+        color: $text-color-lighter;
       }
     }
 
     &_theme_dark {
-      color: $white;
+      color: $text-color-white;
 
       &:active,
       &:visited,
       &:hover {
-        color: $white;
+        color: $text-color-white;
       }
     }
   }
@@ -94,11 +94,11 @@ export default class FooterSection extends Vue {
 
   &__icon-link {
     &_theme_light {
-      color: $cool-gray-60;
+      color: $text-color-lighter;
     }
 
     &_theme_dark {
-      color: $white;
+      color: $text-color-white;
     }
   }
 

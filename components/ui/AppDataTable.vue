@@ -53,7 +53,7 @@ export default class AppDataTable extends Vue {
 <style lang="scss">
 .bx--data-table th {
   color: $black-100;
-  background-color: $cool-gray-20;
+  background-color: $background-color-light;
 
   // TODO: remove this override once issue is fixed
   // https://github.com/carbon-design-system/carbon-components-vue/issues/1161#issuecomment-815689534
@@ -63,9 +63,9 @@ export default class AppDataTable extends Vue {
 }
 
 .bx--data-table tbody tr td, .bx--data-table tbody tr:hover td {
-  color: $cool-gray-80;
-  background-color: $white;
+  color: $text-color-light;
+  background-color: $background-color-white;
   border-top: none;
-  border-bottom: 1px solid $cool-gray-20;
+  border-bottom: 1px solid $border-color;
 }
 </style>

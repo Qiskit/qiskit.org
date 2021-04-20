@@ -24,11 +24,16 @@ export default class TheQuickStart extends Vue {}
 </script>
 
 <style lang="scss" scoped>
-@import '~/assets/scss/blocks/copy.scss';
-@import '~carbon-components/scss/globals/scss/typography';
-
 .quick-start {
   @include contained();
-  color: $cool-gray-80;
+
+  &__sections {
+    display: flex;
+    flex-direction: row;
+
+    @include mq($until: medium) {
+      flex-direction: column;
+    }
+  }
 }
 </style>

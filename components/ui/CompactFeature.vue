@@ -32,7 +32,7 @@ export default class CompactFeature extends Vue {
 $feature-icon-size: 2.25rem;
 
 .compact-feature {
-  background-color: $purple-70;
+  background-color: $background-color-secondary;
   height: 100%;
   padding: $spacing-05;
 
@@ -47,7 +47,7 @@ $feature-icon-size: 2.25rem;
 
   &__title {
     @include type-style('productive-heading-02');
-    color: $white;
+    color: $text-color-white;
     margin-bottom: $spacing-04;
     height: 2.5rem; // for consistent alignment
 
@@ -58,7 +58,7 @@ $feature-icon-size: 2.25rem;
 
   &__description {
     @include type-style('body-long-01');
-    color: $white;
+    color: $text-color-white;
   }
 }
 </style>

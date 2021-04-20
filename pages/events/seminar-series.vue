@@ -235,8 +235,6 @@ export default class SeminarSeriesPage extends QiskitPage {
 
 <style lang="scss" scoped>
 .seminar-series-page {
-  color: $white-text-01;
-
   &__section {
     @include contained();
     margin-top: $layout-05;

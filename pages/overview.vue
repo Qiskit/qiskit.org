@@ -99,8 +99,6 @@ export default class OverviewPage extends QiskitPage {
 </script>
 
 <style lang="scss" scoped>
-@import '~/assets/scss/blocks/copy.scss';
-
 .overview-page {
   &__content-container {
     @include contained();
@@ -127,7 +125,7 @@ export default class OverviewPage extends QiskitPage {
   }
 
   &__content-section-details {
-    background-color: $cool-gray-10;
+    background-color: $background-color-lighter;
     height: 100%;
   }
 

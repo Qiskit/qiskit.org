@@ -105,12 +105,10 @@ export default class BlockbusterRecommendationSection extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import "~/assets/scss/blocks/copy.scss";
-
 .blockbuster-recommendation-section {
   &__loading-container {
     align-items: center;
-    color: $text-03;
+    color: $text-color-lighter;
     display: flex;
     flex-flow: column;
     justify-content: center;

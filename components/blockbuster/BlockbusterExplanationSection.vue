@@ -81,8 +81,6 @@ export default class BlockbusterExplanationSection extends Vue {}
 </script>
 
 <style lang="scss" scoped>
-@import "~/assets/scss/blocks/copy.scss";
-
 .blockbuster-explanation-section {
   &__text-link {
     color: $carbon--blue-70 !important;

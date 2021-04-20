@@ -264,7 +264,7 @@ export default class MetalGrid extends Vue {
 
     &::before {
       content: "";
-      border: 1px solid #E1E1E2;
+      border: 1px solid $cool-gray-20;
       position: absolute;
       width: $large-cell - 1px;
       height: $large-cell - 1px;

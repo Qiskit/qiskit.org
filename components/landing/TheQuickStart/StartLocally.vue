@@ -172,7 +172,6 @@ export default class StartLocally extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '~/assets/scss/blocks/copy.scss';
 @import '~carbon-components/scss/globals/scss/typography';
 
 .bx--btn-set .bx--btn:not(:focus) {
@@ -201,15 +200,15 @@ export default class StartLocally extends Vue {
 
   &__option-title {
     @include type-style('body-long-01');
-    color: $cool-gray-80;
+    color: $text-color-light;
     margin-bottom: $spacing-03;
   }
 
   &__option {
     @include type-style('body-long-01');
-    background-color: $cool-gray-10;
+    background-color: $background-color-lighter;
     max-width: 100%;
-    color: $cool-gray-80;
+    color: $text-color-light;
     padding-left: $spacing-07;
     margin-bottom: $spacing-07;
 
@@ -219,9 +218,9 @@ export default class StartLocally extends Vue {
     }
 
     &_active {
-      border-color: $purple-70;
+      border-color: $border-active-color;
       border-width: 2px;
-      color: $purple-70;
+      color: $text-active-color;
     }
   }
 }
@@ -244,12 +243,10 @@ export default class StartLocally extends Vue {
 
     & .bx--accordion__item {
       border-bottom: none;
-      border-top-color: $gray-20;
+      border-top-color: $border-color;
     }
 
     & .bx--accordion__heading {
-      color: $gray-100;
-
       &:hover::before {
         // To match default light theme UI hover, which is not among the Carbon
         // palette. 🤦

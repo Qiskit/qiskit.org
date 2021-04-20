@@ -25,8 +25,6 @@ export default class AppHelpfulResourcesSection extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import "~/assets/scss/blocks/copy.scss";
-
 .app-helpful-resources-section {
   &__card {
     @include mq($until: large) {

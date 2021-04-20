@@ -23,7 +23,7 @@ export default class AppNavBackLink extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import "~/assets/scss/blocks/copy.scss";
+@import '~carbon-components/scss/globals/scss/typography';
 
 .app-nav-back-link {
   @include contained();
@@ -37,11 +37,11 @@ export default class AppNavBackLink extends Vue {
     width: fit-content;
 
     &_dark {
-      color: $white;
+      color: $text-color-white;
     }
 
     &_light {
-      color: $purple-70;
+      color: $link-color-tertiary;
     }
   }
 

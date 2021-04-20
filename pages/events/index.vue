@@ -196,8 +196,6 @@ export default class EventsPage extends QiskitPage {
 @import '~carbon-components/scss/globals/scss/typography';
 
 .event-page {
-  color: $white-text-01;
-
   &__container {
     @include contained();
   }
@@ -214,27 +212,27 @@ export default class EventsPage extends QiskitPage {
     margin-top: $layout-03;
     margin-bottom: $layout-04;
     .bx--tabs__nav-link {
-      color: $black-100;
-      border-bottom-color: $gray-20;
+      color: black;
+      border-bottom-color: $border-color;
     }
 
     .bx--tabs__nav-item:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link,
     .bx--tabs__nav-item:hover:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link {
-      color: $gray-100;
+      color: $text-color;
     }
 
     .bx--tabs__nav-item--selected:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link {
-        border-bottom-color: $purple-70;
+        border-bottom-color: $border-color-secondary;
     }
 
     @include mq($until: medium) {
       margin-bottom: 0;
       .bx--tabs-trigger {
-        background-color: $white;
-        border-bottom: 1px solid $gray-20;
+        background-color: $background-color-white;
+        border-bottom: 1px solid $border-color;
 
         &[class*="--open"] {
-          background-color: $cool-gray-10;
+          background-color: $background-color-lighter;
         }
       }
 
@@ -243,16 +241,16 @@ export default class EventsPage extends QiskitPage {
       }
 
       .bx--tabs-trigger-text {
-        color: $gray-100;
+        color: $text-color;
       }
 
       .bx--tabs-trigger--open {
-        border-bottom: 1px solid $gray-60;
+        border-bottom: 1px solid $border-color-quaternary;
       }
 
       .bx--tabs-trigger--open,
       .bx--tabs__nav-item {
-        background-color: $cool-gray-10;
+        background-color: $background-color-lighter;
       }
 
       .bx--tabs__nav-item:last-child .bx--tabs__nav-link {
@@ -260,7 +258,7 @@ export default class EventsPage extends QiskitPage {
       }
 
       .bx--tabs__nav-item:hover:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled) {
-        background-color: $cool-gray-20;
+        background-color: $background-color-light;
       }
     }
   }
