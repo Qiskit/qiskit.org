@@ -214,7 +214,6 @@ export default class TheMenu extends Mixins(MenuMixin) {
     }
 
     &:hover {
-      color: var(--link-color);
       text-decoration: underline;
     }
 
@@ -230,16 +229,8 @@ export default class TheMenu extends Mixins(MenuMixin) {
       margin-right: 0;
     }
 
-    // Like in TheTableOfContents component for combining modifiers.
-    // TODO: make a function of this kind of constructions, something like
-    // mod-combinator(&_active) {
-    //  ...
-    // }
-    &_active#{&} {
-      &_second-level,
-      &_second-level:hover {
-        color: $text-active-color;
-      }
+    &_active {
+      color: $text-active-color;
     }
   }
 
