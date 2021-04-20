@@ -17,6 +17,9 @@ linearalgebra:
 qceducators:
   url: https://quantum-computing.ibm.com/programs/educators
   segment: quantum-computing-educators
+mailtoQcEducators:
+  url: mailto:quantum.education@us.ibm.com
+  segment: mailto-quantum-educators
 twitterQiskit:
   url: https://twitter.com/qiskit
   segment: twitter-qiskit
@@ -141,7 +144,7 @@ mailtoQiskit:
   I'm interested in hosting my own summer school or implementing Qiskit into my coursework - Where can I learn more?
   </template>
   <template #content>
-  Explore IBM Quantums Educators Program <md-link v-bind="qceducators">online here</md-link>, or email <md-link v-bind="qceducators">quantum.education@us.ibm.com</md-link> to connect with the latest coursework and classroom resources for educators and students alike.
+  Explore IBM Quantums Educators Program <md-link v-bind="qceducators">online here</md-link>, or email <md-link v-bind="mailtoQcEducators">quantum.education@us.ibm.com</md-link> to connect with the latest coursework and classroom resources for educators and students alike.
   </template>
 </item>
 

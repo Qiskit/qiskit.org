@@ -9,7 +9,7 @@
       <template slot="title">
         {{ eventData.header.titleLine1 }}
         <br>
-        {{ eventData.header.titleLine1 }}
+        {{ eventData.header.titleLine2 }}
       </template>
       <template slot="card">
         <EventCard v-bind="eventData.header.card" vertical-layout>
