@@ -163,6 +163,11 @@ interface AgendaSlot {
     eventData.helpfulResources.resources[2].cta.segment = { action: `${helpfulResourcesRouteText} qiskit-medium` }
     eventData.helpfulResources.resources[3].cta.segment = { action: `${helpfulResourcesRouteText} code-of-conduct` }
 
+    const mosaicRouteText = `${context.route.name} > mosaic >`
+    eventData.mosaic.first.cta.segment = { action: `${mosaicRouteText} explore-ibm-quantum` }
+    eventData.mosaic.second.cta.segment = { action: `${mosaicRouteText} explore-the-docs` }
+    eventData.mosaic.third.cta.segment = { action: `${mosaicRouteText} start-the-course` }
+    eventData.mosaic.fourth.cta.segment = { action: `${mosaicRouteText} read-the-textbook` }
     eventData.mosaic.first.position = 'first'
     eventData.mosaic.second.position = 'second'
     eventData.mosaic.third.position = 'third'
