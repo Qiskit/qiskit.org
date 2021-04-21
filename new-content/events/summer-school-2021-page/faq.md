@@ -24,7 +24,7 @@ qCEducators:
 mailtoQCEducators:
   url: mailto:quantum.education@us.ibm.com
   segment:
-      action: 'events-summer-school > faq > mailto-quantum-educators'
+      action: 'events-summer-school > faq > mailto-quantum-educators-program'
 twitterQiskit:
   url: https://twitter.com/qiskit
   segment:
