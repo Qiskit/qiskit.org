@@ -3,7 +3,7 @@
     <h2 v-text="title" />
     <p
       v-if="description"
-      class="copy__paragraph_importance_outstanding"
+      class="compact-section"
     >
       {{ description }}
     </p>

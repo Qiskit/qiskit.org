@@ -3,7 +3,7 @@
     <h2>
       Quick Start
     </h2>
-    <p class="copy__paragraph_importance_outstanding">
+    <p class="compact-section">
       When you are looking to start Qiskit, you have two options. You can
       start Qiskit locally, which is much more secure and private, or you
       get started with hosted Jupyter Notebooks in IBM Quantum Lab.

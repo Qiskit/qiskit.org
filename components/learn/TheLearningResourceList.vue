@@ -4,7 +4,7 @@
       <h2>
         Learning resources
       </h2>
-      <p class="copy__paragraph_importance_outstanding">
+      <p class="compact-section">
         The below are designed and created by the Qiskit team. However, we
         recommend a familiarity with <AppLink url="https://www.khanacademy.org/math/linear-algebra">
           linear algebra

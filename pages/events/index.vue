@@ -81,7 +81,7 @@
             <h3>
               Start an event
             </h3>
-            <p class="copy__paragraph_importance_outstanding event-page__start-an-event__description">
+            <p class="compact-section event-page__start-an-event__description">
               We can help you bring Qiskit experts to your campus for guest lectures, hackathons, and other events.
             </p>
             <AppCta v-bind="eventRequestLink" />
