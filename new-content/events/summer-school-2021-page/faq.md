@@ -36,7 +36,7 @@ twitterIBMResearch:
 githubQiskit:
   url: https://github.com/Qiskit
   segment:
-      action: 'events-summer-school > faq > github-qiskit'
+      action: 'events-summer-school > faq > qiskit-github'
 mediumQiskit:
   url: https://medium.com/qiskit
   segment:
