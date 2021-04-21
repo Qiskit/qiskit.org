@@ -22,7 +22,7 @@
         v-for="choicesGroup in installChoices"
         :key="choicesGroup.id"
       >
-        <h4 class="start-locally__option-title">
+        <h4>
           {{ choicesGroup.title }}
         </h4>
         <cv-button-set class="start-locally__options-group">
@@ -54,7 +54,7 @@
             </template>
           </cv-accordion-item>
         </cv-accordion>
-        <h4 class="start-locally__option-title">
+        <h4>
           Terminal
         </h4>
         <SyntaxHighlight
@@ -196,13 +196,6 @@ export default class StartLocally extends Vue {
     @include mq($until: large) {
       column-gap: $spacing-05;
     }
-  }
-
-  &__option-title {
-    @include type-style('body-long-01');
-
-    color: $text-color-light;
-    margin-bottom: $spacing-03;
   }
 
   &__option {
