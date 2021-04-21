@@ -32,7 +32,7 @@ twitterQiskit:
 twitterIBMResearch:
   url: https://twitter.com/IBMResearch
   segment:
-      action: 'events-summer-school > faq > twitter-ibmresearch'
+      action: 'events-summer-school > faq > ibmresearch-twitter'
 githubQiskit:
   url: https://github.com/Qiskit
   segment:
