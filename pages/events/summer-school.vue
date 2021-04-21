@@ -49,7 +49,6 @@
     </section>
 
     <AccordionSection
-      :route="contextRoute"
       :document="faqData"
       class="summer-school-page__section"
       :style="`order: ${eventData.faq.pageOrder}`"
@@ -182,8 +181,7 @@ interface AgendaSlot {
 
     return {
       eventData,
-      faqData,
-      contextRoute: context.route.name
+      faqData
     }
   }
 })

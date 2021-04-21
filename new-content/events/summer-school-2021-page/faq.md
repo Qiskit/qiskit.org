@@ -7,43 +7,56 @@ module: faq
 title: Frequently asked questions
 khanacademy:
   url: https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:matrices/x9e81a4f98389efdf:multiplying-matrices-by-matrices/v/matrix-multiplication-intro
-  segment: khanacademy-matrix-multiplication-intro
+  segment:
+      action: 'events-summer-school > faq > khanacademy-matrix-multiplication-intro'
 pythonandjupyter:
   url: https://qiskit.org/textbook/ch-prerequisites/python-and-jupyter-notebooks.html
-  segment: qiskit-python-and-jupyter-notebooks
+  segment:
+      action: 'events-summer-school > faq > qiskit-python-and-jupyter-notebooks'
 linearalgebra:
   url: https://qiskit.org/textbook/ch-prerequisites/python-and-jupyter-notebooks.html
-  segment: qiskit-linear-algebra
+  segment:
+      action: 'events-summer-school > faq > qiskit-linear-algebra'
 qceducators:
   url: https://quantum-computing.ibm.com/programs/educators
-  segment: quantum-computing-educators
+  segment:
+      action: 'events-summer-school > faq > quantum-computing-educators'
 mailtoQcEducators:
   url: mailto:quantum.education@us.ibm.com
-  segment: mailto-quantum-educators
+  segment:
+      action: 'events-summer-school > faq > mailto-quantum-educators'
 twitterQiskit:
   url: https://twitter.com/qiskit
-  segment: twitter-qiskit
+  segment:
+      action: 'events-summer-school > faq > twitter-qiskit'
 twitterIBMResearch:
   url: https://twitter.com/IBMResearch
-  segment: twitter-ibmresearch
+  segment:
+      action: 'events-summer-school > faq > twitter-ibmresearch'
 githubQiskit:
   url: https://github.com/Qiskit
-  segment: github-qiskit
+  segment:
+      action: 'events-summer-school > faq > github-qiskit'
 mediumQiskit:
   url: https://medium.com/qiskit
-  segment: medium-qiskit
+  segment:
+      action: 'events-summer-school > faq > medium-qiskit'
 qiskitSubscribe:
   url: https://qisk.it/sub
-  segment: qiskit-subscribe
+  segment:
+      action: 'events-summer-school > faq > qiskit-subscribe'
 joinqiskitslack:
   url: https://ibm.co/joinqiskitslack
-  segment: join-qiskit-slack
+  segment:
+      action: 'events-summer-school > faq > join-qiskit-slack'
 qiskitEvents:
   url: https://qiskit.org/events
-  segment: qiskit-events
+  segment:
+      action: 'events-summer-school > faq > qiskit-events'
 mailtoQiskit:
   url: mailto:qiskit.events@us.ibm.com
-  segment: mailto-qiskit-events
+  segment:
+      action: 'events-summer-school > faq > mailto-qiskit-events'
     
 ---
 
