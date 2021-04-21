@@ -9,7 +9,7 @@
       <template slot="title">
         {{ eventData.header.titleLine1 }}
         <br>
-        {{ eventData.header.titleLine1 }}
+        {{ eventData.header.titleLine2 }}
       </template>
       <template slot="card">
         <EventCard v-bind="eventData.header.card" vertical-layout>
@@ -50,7 +50,6 @@
     </section>
 
     <AccordionSection
-      :route="contextRoute"
       :document="faqData"
       class="summer-school-page__section"
       :style="`order: ${eventData.faq.pageOrder}`"
@@ -155,15 +154,6 @@ interface AgendaSlot {
       }
     }
 
-    const headerRouteText = `${context.route.name} > header >`
-    const helpfulResourcesRouteText = `${context.route.name} > helpful-resources >`
-    eventData.header.card.segment = { action: `${headerRouteText} learn-more` }
-    eventData.header.cta.segment = { action: `${headerRouteText} qgss2021-enquiry-form` }
-    eventData.helpfulResources.resources[0].cta.segment = { action: `${helpfulResourcesRouteText} qgss2021-enquiry-form` }
-    eventData.helpfulResources.resources[1].cta.segment = { action: `${helpfulResourcesRouteText} install-here` }
-    eventData.helpfulResources.resources[2].cta.segment = { action: `${helpfulResourcesRouteText} qiskit-medium` }
-    eventData.helpfulResources.resources[3].cta.segment = { action: `${helpfulResourcesRouteText} code-of-conduct` }
-
     const scheduleToTableData = (slot: AgendaSlot) => ([
       {
         component: 'span',
@@ -192,8 +182,7 @@ interface AgendaSlot {
 
     return {
       eventData,
-      faqData,
-      contextRoute: context.route.name
+      faqData
     }
   }
 })

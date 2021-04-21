@@ -7,40 +7,56 @@ module: faq
 title: Frequently asked questions
 khanacademy:
   url: https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:matrices/x9e81a4f98389efdf:multiplying-matrices-by-matrices/v/matrix-multiplication-intro
-  segment: khanacademy-matrix-multiplication-intro
-pythonandjupyter:
+  segment:
+      action: 'events-summer-school > faq > khanacademy-matrix-multiplication-intro'
+pythonAndJupyter:
   url: https://qiskit.org/textbook/ch-prerequisites/python-and-jupyter-notebooks.html
-  segment: qiskit-python-and-jupyter-notebooks
-linearalgebra:
-  url: https://qiskit.org/textbook/ch-prerequisites/python-and-jupyter-notebooks.html
-  segment: qiskit-linear-algebra
-qceducators:
+  segment:
+      action: 'events-summer-school > faq > textbook-python-and-jupyter-notebooks'
+linearAlgebra:
+  url: https://qiskit.org/textbook/ch-prerequisites/linear_algebra.html
+  segment:
+      action: 'events-summer-school > faq > qiskit-linear-algebra'
+qCEducators:
   url: https://quantum-computing.ibm.com/programs/educators
-  segment: quantum-computing-educators
+  segment:
+      action: 'events-summer-school > faq > ibm-quantum-educators-program'
+mailtoQCEducators:
+  url: mailto:quantum.education@us.ibm.com
+  segment:
+      action: 'events-summer-school > faq > mailto-quantum-educators-program'
 twitterQiskit:
   url: https://twitter.com/qiskit
-  segment: twitter-qiskit
+  segment:
+      action: 'events-summer-school > faq > qiskit-twitter'
 twitterIBMResearch:
   url: https://twitter.com/IBMResearch
-  segment: twitter-ibmresearch
+  segment:
+      action: 'events-summer-school > faq > ibmresearch-twitter'
 githubQiskit:
   url: https://github.com/Qiskit
-  segment: github-qiskit
+  segment:
+      action: 'events-summer-school > faq > qiskit-github'
 mediumQiskit:
   url: https://medium.com/qiskit
-  segment: medium-qiskit
+  segment:
+      action: 'events-summer-school > faq > qiskit-medium'
 qiskitSubscribe:
   url: https://qisk.it/sub
-  segment: qiskit-subscribe
+  segment:
+      action: 'events-summer-school > faq > qiskit-youtube-subscribe'
 joinqiskitslack:
   url: https://ibm.co/joinqiskitslack
-  segment: join-qiskit-slack
+  segment:
+      action: 'events-summer-school > faq > qiskit-slack-join'
 qiskitEvents:
   url: https://qiskit.org/events
-  segment: qiskit-events
+  segment:
+      action: 'events-summer-school > faq > qiskit-org-events'
 mailtoQiskit:
   url: mailto:qiskit.events@us.ibm.com
-  segment: mailto-qiskit-events
+  segment:
+      action: 'events-summer-school > faq > mailto-qiskit-events'
     
 ---
 
@@ -51,16 +67,7 @@ mailtoQiskit:
   <template #content>
   Minimal prerequisites are required for the Qiskit Global Summer School. If you know <md-link v-bind="khanacademy">how to multiply two matrices</md-link>, and have some programming experience in Python, you are ready for the Summer School.
   
-  You can <md-link v-bind="pythonandjupyter">brush up on Python programming</md-link> before attending the lectures by using the Qiskit Textbook. To make the most out of these lectures, you may also consider looking through the <md-link v-bind="linearalgebra">linear algebra prerequisites</md-link> section of the Qiskit Textbook.
-  </template>
-</item>
-
-<item>
-  <template #title>
-  What are the application requirements for the Summer School?
-  </template>
-  <template #content>
-  There is no application or pre-registration for the Qiskit Global Summer School 2021. Registration will be on a first come, first serve basis, with scheduled global availability. Once the Summer School registration reaches capacity, unfortunately we will not be able to register any additional students. Please submit an enquiry below if you have any additional questions!
+  You can <md-link v-bind="pythonAndJupyter">brush up on Python programming</md-link> before attending the lectures by using the Qiskit Textbook. To make the most out of these lectures, you may also consider looking through the <md-link v-bind="linearAlgebra">linear algebra prerequisites</md-link> section of the Qiskit Textbook.
   </template>
 </item>
 
@@ -141,7 +148,7 @@ mailtoQiskit:
   I'm interested in hosting my own summer school or implementing Qiskit into my coursework - Where can I learn more?
   </template>
   <template #content>
-  Explore IBM Quantums Educators Program <md-link v-bind="qceducators">online here</md-link>, or email <md-link v-bind="qceducators">quantum.education@us.ibm.com</md-link> to connect with the latest coursework and classroom resources for educators and students alike.
+  Explore IBM Quantums Educators Program <md-link v-bind="qCEducators">online here</md-link>, or email <md-link v-bind="mailtoQCEducators">quantum.education@us.ibm.com</md-link> to connect with the latest coursework and classroom resources for educators and students alike.
   </template>
 </item>
 
