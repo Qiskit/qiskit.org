@@ -52,7 +52,7 @@ joinqiskitslack:
 qiskitEvents:
   url: https://qiskit.org/events
   segment:
-      action: 'events-summer-school > faq > qiskit-events'
+      action: 'events-summer-school > faq > qiskit-org-events'
 mailtoQiskit:
   url: mailto:qiskit.events@us.ibm.com
   segment:
