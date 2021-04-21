@@ -44,7 +44,7 @@ mediumQiskit:
 qiskitSubscribe:
   url: https://qisk.it/sub
   segment:
-      action: 'events-summer-school > faq > qiskit-subscribe'
+      action: 'events-summer-school > faq > qiskit-youtube-subscribe'
 joinqiskitslack:
   url: https://ibm.co/joinqiskitslack
   segment:
