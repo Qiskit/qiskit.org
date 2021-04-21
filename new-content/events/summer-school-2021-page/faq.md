@@ -9,12 +9,12 @@ khanacademy:
   url: https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:matrices/x9e81a4f98389efdf:multiplying-matrices-by-matrices/v/matrix-multiplication-intro
   segment:
       action: 'events-summer-school > faq > khanacademy-matrix-multiplication-intro'
-pythonandjupyter:
+pythonAndJupyter:
   url: https://qiskit.org/textbook/ch-prerequisites/python-and-jupyter-notebooks.html
   segment:
       action: 'events-summer-school > faq > textbook-python-and-jupyter-notebooks'
-linearalgebra:
-  url: https://qiskit.org/textbook/ch-prerequisites/python-and-jupyter-notebooks.html
+linearAlgebra:
+  url: https://qiskit.org/textbook/ch-prerequisites/linear_algebra.html
   segment:
       action: 'events-summer-school > faq > qiskit-linear-algebra'
 qCEducators:
@@ -67,16 +67,7 @@ mailtoQiskit:
   <template #content>
   Minimal prerequisites are required for the Qiskit Global Summer School. If you know <md-link v-bind="khanacademy">how to multiply two matrices</md-link>, and have some programming experience in Python, you are ready for the Summer School.
   
-  You can <md-link v-bind="pythonandjupyter">brush up on Python programming</md-link> before attending the lectures by using the Qiskit Textbook. To make the most out of these lectures, you may also consider looking through the <md-link v-bind="linearalgebra">linear algebra prerequisites</md-link> section of the Qiskit Textbook.
-  </template>
-</item>
-
-<item>
-  <template #title>
-  What are the application requirements for the Summer School?
-  </template>
-  <template #content>
-  There is no application or pre-registration for the Qiskit Global Summer School 2021. Registration will be on a first come, first serve basis, with scheduled global availability. Once the Summer School registration reaches capacity, unfortunately we will not be able to register any additional students. Please submit an enquiry below if you have any additional questions!
+  You can <md-link v-bind="pythonAndJupyter">brush up on Python programming</md-link> before attending the lectures by using the Qiskit Textbook. To make the most out of these lectures, you may also consider looking through the <md-link v-bind="linearAlgebra">linear algebra prerequisites</md-link> section of the Qiskit Textbook.
   </template>
 </item>
 
@@ -157,7 +148,7 @@ mailtoQiskit:
   I'm interested in hosting my own summer school or implementing Qiskit into my coursework - Where can I learn more?
   </template>
   <template #content>
-  Explore IBM Quantums Educators Program <md-link v-bind="qceducators">online here</md-link>, or email <md-link v-bind="mailtoQcEducators">quantum.education@us.ibm.com</md-link> to connect with the latest coursework and classroom resources for educators and students alike.
+  Explore IBM Quantums Educators Program <md-link v-bind="qCEducators">online here</md-link>, or email <md-link v-bind="mailtoQCEducators">quantum.education@us.ibm.com</md-link> to connect with the latest coursework and classroom resources for educators and students alike.
   </template>
 </item>
 
