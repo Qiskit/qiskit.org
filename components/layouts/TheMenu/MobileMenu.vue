@@ -15,9 +15,9 @@
           v-bind="appLinkFromNavLink(link)"
           kind="secondary"
         >
-          <p class="mobile-menu__entry-label">
+          <div class="mobile-menu__entry-label">
             {{ link.label }}
-          </p>
+          </div>
         </AppLink>
         <cv-dropdown
           v-else
@@ -34,9 +34,9 @@
               v-bind="appLinkFromNavLink(sublink)"
               kind="secondary"
             >
-              <p class="mobile-menu__entry-label">
+              <div class="mobile-menu__entry-label">
                 {{ sublink.label }}
-              </p>
+              </div>
             </AppLink>
           </li>
         </cv-dropdown>
@@ -87,6 +87,10 @@ export default class MobileMenu extends Mixins(MenuMixin) {
   background-color: $background-color-white;
   overflow-y: auto;
   justify-content: space-between;
+
+  &__entry-label {
+    @include type-style('body-long-02');
+  }
 
   &__entry-label,
   &__footer-inner-container {
@@ -169,12 +173,6 @@ export default class MobileMenu extends Mixins(MenuMixin) {
         height: auto;
       }
     }
-  }
-
-  .bx--list-box__label {
-    @include type-style('body-long-02');
-
-    color: $text-color-light;
   }
 
   .bx--dropdown {

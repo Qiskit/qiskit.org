@@ -29,7 +29,6 @@
           <p
             v-for="descriptionParagraph in recommendation.description"
             :key="descriptionParagraph"
-            class="copy__paragraph"
             v-text="descriptionParagraph"
           />
           <AppCta

@@ -8,9 +8,9 @@
     <h3 class="compact-feature__title">
       {{ title }}
     </h3>
-    <p class="compact-feature__description">
+    <div class="compact-feature__description">
       {{ description }}
-    </p>
+    </div>
   </article>
 </template>
 

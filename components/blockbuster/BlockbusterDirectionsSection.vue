@@ -6,7 +6,7 @@
       </h2>
       <div class="bx--row">
         <div class="bx--col-lg-8 bx--col-md-4 blockbuster__section-mobile-spacing">
-          <p class="copy__paragraph">
+          <p>
             You're only a short drive away from watching a movie, grabbing some
             candy, popcorn, and enjoying a relaxing night with your perfectly
             selected movie. If you need directions, click below for step-by-step

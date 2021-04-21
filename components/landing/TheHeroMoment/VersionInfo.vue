@@ -4,15 +4,15 @@
       <LogoGitHub32 class="qiskit-version-info__github-icon" />
     </AppLink>
     <div class="qiskit-version-info__content">
-      <p class="qiskit-version-info__version-string">
+      <div class="qiskit-version-info__version-string">
         <AppLink
           kind="secondary"
           v-bind="githubRepoLink"
         >
           qiskit {{ version }}
         </AppLink>
-      </p>
-      <p class="qiskit-version-info__release-notes">
+      </div>
+      <div class="qiskit-version-info__release-notes">
         <AppLink
           v-bind="githubRepoLink"
           url="https://qiskit.org/documentation/release_notes.html#notable-changes"
@@ -20,7 +20,7 @@
         >
           see release notes
         </AppLink>
-      </p>
+      </div>
     </div>
   </div>
 </template>

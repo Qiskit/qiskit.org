@@ -5,7 +5,7 @@
         <h3>
           Start Online
         </h3>
-        <p class="copy__paragraph copy__paragraph_importance_support">
+        <p class="copy__paragraph_importance_support">
           Get started in the cloud without installing anything with IBM Quantum Lab.
         </p>
         <AppCta

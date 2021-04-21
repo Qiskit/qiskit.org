@@ -4,7 +4,7 @@
       <article
         class="bx--col-lg-4 bx--col-md-4 join-section__feature join-section__intro"
       >
-        <p class="copy__paragraph">
+        <p>
           The Qiskit advocate program is a global program that provides support
           to the individuals who actively contribute to the Qiskit Community.
         </p>

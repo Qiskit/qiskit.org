@@ -70,27 +70,6 @@ export default class LearnEntry extends QiskitPage {
     background-color: transparent;
     background-image: none;
 
-    // Same as copy__paragraph
-    p {
-      @include type-style('body-long-01');
-
-      color: $text-color-light;
-      margin-bottom: $layout-03;
-      max-width: 9 * $column-size-large;
-
-      @include mq($from: medium, $until: large) {
-        @include type-style('label-01');
-
-        margin-bottom: $layout-01;
-      }
-
-      @include mq($until: medium) {
-        @include type-style('label-01');
-
-        margin-bottom: $layout-01;
-      }
-    }
-
     // Same as copy__link
     a {
       @include type-style('body-long-01');

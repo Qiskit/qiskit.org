@@ -2,9 +2,7 @@
   <article class="app-description-card">
     <div>
       <h3 class="app-description-card__heading" v-text="title" />
-      <p class="copy__paragraph">
-        {{ description }}
-      </p>
+      <p v-text="description" />
     </div>
     <AppCta
       v-if="cta && cta.url"

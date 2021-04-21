@@ -3,12 +3,12 @@
     <h2>
       Meet the Advocates
     </h2>
-    <p class="copy__paragraph copy__paragraph_importance_support">
+    <p class="copy__paragraph_importance_support">
       Qiskit advocates are some of the finest minds in quantum computing,
       all over the world. If you are interested in getting involved with the
       quantum computing community, reach out to an advocate local to your area.
     </p>
-    <p class="copy__paragraph copy__paragraph_importance_support">
+    <p class="copy__paragraph_importance_support">
       <AppLink class="copy__link" :url="joinSlackLink">
         Sign-up for the Qiskit Slack workspace
       </AppLink>

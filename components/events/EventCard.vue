@@ -13,22 +13,22 @@
       <slot v-if="$slots.default" />
     </div>
     <div>
-      <p class="event-card__detail">
+      <div class="event-card__detail">
         <Map20 class="event-card__icon" />
         {{ location }}
-      </p>
-      <p class="event-card__detail">
+      </div>
+      <div class="event-card__detail">
         <Calendar20 class="event-card__icon" />
         <time>{{ date }}</time>
-      </p>
-      <p v-if="time" class="event-card__detail">
+      </div>
+      <div v-if="time" class="event-card__detail">
         <Time20 class="event-card__icon" />
         <time>{{ time }}</time>
-      </p>
-      <p v-if="institution" class="event-card__detail">
+      </div>
+      <div v-if="institution" class="event-card__detail">
         <Education20 class="event-card__icon" />
         {{ institution }}
-      </p>
+      </div>
     </div>
   </AppCard>
 </template>

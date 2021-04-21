@@ -55,23 +55,26 @@ h3,
 h4,
 .h4 {
   @include type-style("expressive-heading-03");
+
   color: $text-color-light;
   margin-bottom: $spacing-03;
 }
 
+p,
+.p {
+  @include type-style("body-long-01");
+
+  color: $text-color-light;
+  max-width: 9 * $column-size-large;
+  margin-bottom: $layout-03;
+
+  @include mq($until: large) {
+    margin-bottom: $layout-01;
+  }
+}
+
 .copy {
-  &.nuxt-content p,
   &__paragraph {
-    @include type-style('body-long-01');
-
-    color: $text-color-light;
-    max-width: 9 * $column-size-large;
-    margin-bottom: $layout-03;
-
-    @include mq($until: large) {
-      margin-bottom: $layout-01;
-    }
-
     &_importance {
       &_support {
         max-width: 6 * $column-size-large;
