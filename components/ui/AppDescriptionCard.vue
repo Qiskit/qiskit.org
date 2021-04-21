@@ -1,9 +1,7 @@
 <template>
   <article class="app-description-card">
     <div>
-      <h3 class="copy__subtitle">
-        {{ title }}
-      </h3>
+      <h3 class="app-description-card__heading" v-text="title" />
       <p class="copy__paragraph">
         {{ description }}
       </p>
@@ -37,6 +35,8 @@ export default class AppDescriptionCard extends Vue {
 </script>
 
 <style lang="scss" scoped>
+@import "~carbon-components/scss/globals/scss/typography";
+
 .app-description-card {
   display: flex;
   flex-direction: column;
@@ -44,6 +44,10 @@ export default class AppDescriptionCard extends Vue {
 
   &__cta {
     width: 100%;
+  }
+
+  &__heading {
+    @include type-style("productive-heading-02");
   }
 }
 </style>

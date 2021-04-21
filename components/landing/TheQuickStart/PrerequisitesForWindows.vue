@@ -3,13 +3,13 @@
     <p class="copy__paragraph copy__paragraph_importance_support">
       On Windows you need to use Anaconda3 or Miniconda3 to install all the dependencies.
     </p>
-    <p class="copy__subtitle">
+    <h3>
       Install the compiler
-    </p>
+    </h3>
     <pre class="prerequisites__code">conda install --update-deps vs2017_win-64 vs2017_win-32 msvc_runtime</pre>
-    <p class="copy__subtitle">
+    <h3>
       Install OpenBLAS development headers
-    </p>
+    </h3>
     <pre class="prerequisites__code">conda install --update-deps -c conda-forge -y openblas cmake</pre>
   </div>
 </template>

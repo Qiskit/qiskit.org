@@ -2,7 +2,7 @@
   <section class="start-on-the-cloud">
     <div class="start-on-the-cloud__wrapper">
       <div class="start-on-the-cloud__content">
-        <h3 class="copy__subtitle">
+        <h3>
           Start Online
         </h3>
         <p class="copy__paragraph copy__paragraph_importance_support">

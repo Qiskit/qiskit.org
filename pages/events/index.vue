@@ -78,7 +78,7 @@
             />
           </div>
           <div class="event-page__start-an-event">
-            <h3 class="event-page__start-an-event__title">
+            <h3>
               Start an event
             </h3>
             <p class="copy__paragraph copy__paragraph_importance_outstanding event-page__start-an-event__description">
@@ -280,10 +280,6 @@ export default class EventsPage extends QiskitPage {
   &__start-an-event {
     margin-top: $layout-05;
     margin-bottom: $layout-05;
-
-    &__title {
-      @include type-style('productive-heading-02');
-    }
 
     &__description {
       margin-top: $layout-02;

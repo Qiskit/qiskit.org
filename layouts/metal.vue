@@ -26,5 +26,9 @@ export default class MetalLayout extends Vue {
   h2 {
     color: $text-color-lighter-2;
   }
+
+  h3 {
+    color: $text-color-white;
+  }
 }
 </style>

@@ -8,17 +8,17 @@
       </AppLink>
       to install this and other dependencies.
     </p>
-    <p class="copy__subtitle">
+    <h3>
       Install the compiler
-    </p>
+    </h3>
     <pre class="prerequisites__code">brew install libomp</pre>
-    <p class="copy__subtitle">
+    <h3>
       Install OpenBLAS development headers
-    </p>
+    </h3>
     <pre class="prerequisites__code">brew install openblas</pre>
-    <p class="copy__subtitle">
+    <h3>
       Install Xcode Command Line Tools.
-    </p>
+    </h3>
     <pre class="prerequisites__code">xcode-select --install</pre>
   </div>
 </template>

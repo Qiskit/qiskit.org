@@ -11,7 +11,7 @@
           class="app-mosaic__element-copy"
           :class="`app-mosaic__element-copy_${position}`"
         >
-          <dt class="copy__subtitle">
+          <dt class="app-mosaic__element-heading">
             {{ title }}
           </dt>
           <!-- eslint-disable vue/no-v-html -->
@@ -165,6 +165,10 @@ export default class AppMosaic extends Vue {
         background-size: contain;
         background-repeat: no-repeat;
       }
+    }
+
+    &-heading {
+      @include type-style("productive-heading-02");
     }
 
     &-copy {

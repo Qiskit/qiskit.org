@@ -1,8 +1,8 @@
 <template>
   <div class="prerequisites">
-    <p class="copy__subtitle">
+    <h3>
       Install the compiler
-    </p>
+    </h3>
     <p class="copy__paragraph copy__paragraph_importance_support">
       If you’re using Fedora or an equivalent Linux distribution,
       install using:
@@ -12,9 +12,9 @@
       For Ubuntu/Debian install it using:
     </p>
     <pre class="prerequisites__code">apt-get install build-essential</pre>
-    <p class="copy__subtitle">
+    <h3>
       Install OpenBLAS development headers
-    </p>
+    </h3>
     <p class="copy__paragraph copy__paragraph_importance_support">
       If you’re using Fedora or an equivalent Linux distribution,
       install using:

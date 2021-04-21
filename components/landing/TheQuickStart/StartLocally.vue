@@ -1,6 +1,6 @@
 <template>
   <section class="start-locally">
-    <h3 class="copy__subtitle">
+    <h3>
       Start locally
     </h3>
     <p class="copy__paragraph copy__paragraph_importance_support">

@@ -17,7 +17,7 @@
           <div>
             <div class="app-page-header__card-title-wrapper">
               <div
-                class="app-page-header__card-title copy__subtitle"
+                class="app-page-header__card-title"
                 v-text="cardTitle"
               />
             </div>
