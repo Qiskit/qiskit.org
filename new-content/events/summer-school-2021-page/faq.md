@@ -21,7 +21,7 @@ qCEducators:
   url: https://quantum-computing.ibm.com/programs/educators
   segment:
       action: 'events-summer-school > faq > ibm-quantum-educators-program'
-mailtoQcEducators:
+mailtoQCEducators:
   url: mailto:quantum.education@us.ibm.com
   segment:
       action: 'events-summer-school > faq > mailto-quantum-educators'
