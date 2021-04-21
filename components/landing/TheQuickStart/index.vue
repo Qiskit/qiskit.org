@@ -1,5 +1,5 @@
 <template>
-  <article class="quick-start copy__util_vertical-spacer">
+  <article class="page-section quick-start">
     <h2>
       Quick Start
     </h2>

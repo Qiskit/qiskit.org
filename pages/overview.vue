@@ -15,8 +15,8 @@
     <section
       id="contentContainer"
       class="
+        page-section
         copy__util
-        copy__util_vertical-spacer
         overview-page__content-container
       "
     >
@@ -106,11 +106,6 @@ export default class OverviewPage extends QiskitPage {
     display: flex;
     align-items: flex-start;
     overflow: visible;
-    margin-bottom: $layout-05;
-
-    @include mq($until: medium) {
-      margin-bottom: 0;
-    }
   }
 
   &__table-of-contents {

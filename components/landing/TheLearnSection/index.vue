@@ -1,15 +1,7 @@
 <template>
-  <article class="the-learn-section">
-    <div
-      class="
-        the-learn-section__container
-        copy__util
-        copy__util_vertical-spacer
-      "
-    >
-      <h2>
-        Learn with Qiskit
-      </h2>
+  <article class="page-section the-learn-section">
+    <div class="the-learn-section__container copy__util">
+      <h2>Learn with Qiskit</h2>
       <LearnCard />
     </div>
   </article>
