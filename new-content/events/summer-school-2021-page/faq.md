@@ -28,7 +28,7 @@ mailtoQCEducators:
 twitterQiskit:
   url: https://twitter.com/qiskit
   segment:
-      action: 'events-summer-school > faq > twitter-qiskit'
+      action: 'events-summer-school > faq > qiskit-twitter'
 twitterIBMResearch:
   url: https://twitter.com/IBMResearch
   segment:
