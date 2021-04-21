@@ -1,6 +1,6 @@
 <template>
   <div class="prerequisites">
-    <p class="copy__paragraph_importance_support">
+    <p class="compact">
       On Windows you need to use Anaconda3 or Miniconda3 to install all the dependencies.
     </p>
     <h3>

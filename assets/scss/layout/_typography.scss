@@ -71,22 +71,23 @@ p,
   @include mq($until: large) {
     margin-bottom: $layout-01;
   }
+
+  &.compact {
+    max-width: 6 * $column-size-large;
+
+    @include mq($from: medium, $until: large) {
+      max-width: 5 * $column-size-medium;
+    }
+
+    @include mq($until: medium) {
+      max-width: 5 * $column-size-small;
+    }
+  }
 }
 
 .copy {
   &__paragraph {
     &_importance {
-      &_support {
-        max-width: 6 * $column-size-large;
-
-        @include mq($from: medium, $until: large) {
-          max-width: 5 * $column-size-medium;
-        }
-
-        @include mq($until: medium) {
-          max-width: 5 * $column-size-small;
-        }
-      }
 
       &_outstanding {
         max-width: 6 * $column-size-large;

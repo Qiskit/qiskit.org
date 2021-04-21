@@ -1,6 +1,6 @@
 <template>
   <div class="prerequisites">
-    <p class="copy__paragraph_importance_support">
+    <p class="compact">
       To use the Clang compiler on macOS, you need to install
       an extra library for supporting OpenMP. You can use
       <AppLink url="https://brew.sh/">
