@@ -210,11 +210,16 @@ export default class PhysicsOfComputationPage extends QiskitPage {
     },
     {
       time: '09:00 AM',
-      event: 'A series of keynote addresses about quantum information science in the 1980s'
+      event: `A series of keynote addresses about quantum information science in the 1980s:
+      1981 and The Beginnings of Quantum Information (Charlie Bennett, IBM), The Development of
+      Quantum Algorithms and Error Correction (Peter Shor, MIT), A Brief History of Superconducting
+      Qubits (Steve Girvin, Yale University) and The Future of Quantum Hardware (Jerry Chow, IBM)`
     },
     {
       time: '10:30 AM',
-      event: 'A live panel that will bridge Then and Now'
+      event: `A live panel that will bridge Then and Now, featuring: Dorit Aharonov (Hebrew
+      University of Jerusalem), Isaac Chung (MIT), Umesh Vazirani (University of California,
+      Berkeley) and Will Oliver (MIT)`
     },
     {
       time: '11:30 AM',
