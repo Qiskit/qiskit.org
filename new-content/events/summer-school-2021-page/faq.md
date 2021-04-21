@@ -12,7 +12,7 @@ khanacademy:
 pythonandjupyter:
   url: https://qiskit.org/textbook/ch-prerequisites/python-and-jupyter-notebooks.html
   segment:
-      action: 'events-summer-school > faq > qiskit-python-and-jupyter-notebooks'
+      action: 'events-summer-school > faq > textbook-python-and-jupyter-notebooks'
 linearalgebra:
   url: https://qiskit.org/textbook/ch-prerequisites/python-and-jupyter-notebooks.html
   segment:
