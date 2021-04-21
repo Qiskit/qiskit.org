@@ -2,9 +2,7 @@
   <div class="learn-entry">
     <header class="learn-entry__header">
       <div class="learn-entry__header__container">
-        <h1 class="learn-entry__header__title">
-          {{ pageContent.attributes.title }}
-        </h1>
+        <h1 v-text="pageContent.attributes.title" />
       </div>
     </header>
     <!-- TODO: We should migrate to nuxt-content and get rid of this. -->
@@ -63,10 +61,6 @@ export default class LearnEntry extends QiskitPage {
       @include mq($until: large) {
         height: 28rem * 40 / 64;
       }
-    }
-
-    &__title {
-      @include type-style('expressive-heading-05', true);
     }
   }
 

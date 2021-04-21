@@ -1,7 +1,7 @@
 <template>
   <header class="app-page-header-fixed">
     <div class="app-page-header-fixed__container">
-      <h1 class="copy__page-title">
+      <h1>
         <slot />
       </h1>
     </div>
