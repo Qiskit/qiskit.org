@@ -17,7 +17,7 @@ linearalgebra:
   url: https://qiskit.org/textbook/ch-prerequisites/python-and-jupyter-notebooks.html
   segment:
       action: 'events-summer-school > faq > qiskit-linear-algebra'
-qceducators:
+qCEducators:
   url: https://quantum-computing.ibm.com/programs/educators
   segment:
       action: 'events-summer-school > faq > ibm-quantum-educators-program'
