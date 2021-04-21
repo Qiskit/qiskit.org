@@ -8,11 +8,13 @@
               <slot name="title" />
             </h1>
             <div class="app-page-header__description">
+              <!-- NOTE: This is for the ability to render html anchor links -->
+              <!-- eslint-disable vue/no-v-html -->
               <p
                 v-for="(paragraph, index) in description"
                 :key="index"
                 class="copy__paragraph"
-                v-text="paragraph"
+                v-html="paragraph"
               />
             </div>
           </div>
