@@ -48,7 +48,7 @@ qiskitSubscribe:
 joinqiskitslack:
   url: https://ibm.co/joinqiskitslack
   segment:
-      action: 'events-summer-school > faq > join-qiskit-slack'
+      action: 'events-summer-school > faq > qiskit-slack-join'
 qiskitEvents:
   url: https://qiskit.org/events
   segment:
