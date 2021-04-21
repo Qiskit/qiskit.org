@@ -40,7 +40,7 @@ githubQiskit:
 mediumQiskit:
   url: https://medium.com/qiskit
   segment:
-      action: 'events-summer-school > faq > medium-qiskit'
+      action: 'events-summer-school > faq > qiskit-medium'
 qiskitSubscribe:
   url: https://qisk.it/sub
   segment:
