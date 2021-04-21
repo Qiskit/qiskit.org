@@ -30,6 +30,7 @@
       :style="`order: ${eventData.agenda.pageOrder}`"
     >
       <h2 class="copy__title" v-text="eventData.agenda.title" />
+      <p class="copy__paragraph" v-text="eventData.agenda.subtitle" />
       <cv-tabs>
         <cv-tab :label="eventData.agenda.week1.tabName">
           <AppDataTable
