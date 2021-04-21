@@ -1,6 +1,6 @@
 <template>
   <article class="quick-start copy__util_vertical-spacer">
-    <h2 class="copy__title">
+    <h2>
       Quick Start
     </h2>
     <p class="copy__paragraph copy__paragraph_importance_outstanding">

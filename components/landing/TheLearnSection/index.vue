@@ -7,7 +7,7 @@
         copy__util_vertical-spacer
       "
     >
-      <h2 class="copy__title">
+      <h2>
         Learn with Qiskit
       </h2>
       <LearnCard />

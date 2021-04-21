@@ -21,4 +21,10 @@ export default class MetalLayout extends Vue {
   background-color: $background-color-black;
   color: $text-color-lighter-2;
 }
+
+::v-deep {
+  h2 {
+    color: $text-color-lighter-2;
+  }
+}
 </style>

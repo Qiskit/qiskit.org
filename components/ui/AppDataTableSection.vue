@@ -1,8 +1,6 @@
 <template>
-  <section class="app-data-table-section">
-    <h2 class="copy__title">
-      {{ sectionTitle }}
-    </h2>
+  <section>
+    <h2 class="max-w-full" v-text="sectionTitle" />
     <AppDataTable :columns="dataTableColumns" :elements="dataTableElements" />
     <slot />
   </section>
@@ -20,11 +18,3 @@ export default class AppDataTableSection extends Vue {
   @Prop({ type: Array, default: () => [] }) dataTableElements!: TableRowElement[]
 }
 </script>
-
-<style lang="scss" scoped>
-.app-data-table-section {
-  .copy__title {
-    max-width: initial;
-  }
-}
-</style>

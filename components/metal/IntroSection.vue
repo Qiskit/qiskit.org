@@ -1,7 +1,7 @@
 <template>
   <section class="intro-section">
     <div class="intro-section__container">
-      <h2 class="intro-section__title">
+      <h2>
         Qiskit Metal | quantum device design is now open
       </h2>
       <div class="intro-section__content">
@@ -61,18 +61,6 @@ export default class IntroSection extends Vue {
 
     padding-top: $layout-05;
     padding-bottom: 0;
-  }
-
-  &__title {
-    @include type-style('expressive-heading-05');
-
-    max-width: 8 * $column-size-large;
-    margin-bottom: $layout-03;
-    font-weight: 300;
-
-    @include mq($until: large) {
-      @include type-style('expressive-heading-04');
-    }
   }
 
   &__content {

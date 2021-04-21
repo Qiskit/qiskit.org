@@ -3,7 +3,7 @@
     <div class="blockbuster__container">
       <div class="bx--row">
         <div class="bx--col-lg-8">
-          <h2 class="copy__title">
+          <h2>
             Pulling back the curtain
           </h2>
           <h3 class="copy__subtitle">

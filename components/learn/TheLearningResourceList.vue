@@ -1,7 +1,7 @@
 <template>
   <section class="the-learning-resources-list">
     <div class="the-learning-resources-list__container">
-      <h2 class="copy__title">
+      <h2>
         Learning resources
       </h2>
       <p

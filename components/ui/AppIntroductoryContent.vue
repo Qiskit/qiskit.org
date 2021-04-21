@@ -1,9 +1,7 @@
 <template>
   <article class="app-introductory-content">
     <div class="app-introductory-content__overview">
-      <h2 class="copy__title">
-        {{ title }}
-      </h2>
+      <h2 v-text="title" />
       <p class="app-introductory-content__description">
         {{ description }}
       </p>

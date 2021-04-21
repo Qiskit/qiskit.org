@@ -1,7 +1,7 @@
 <template>
   <section class="features-section">
     <div class="features-section__container">
-      <h2 class="features-section__title">
+      <h2>
         Why Qiskit Metal
       </h2>
       <p class="features-section__description">
@@ -47,17 +47,6 @@ export default class FeaturesSection extends Vue {
     @include mq($until: medium) {
       padding-top: $layout-02;
       padding-bottom: $layout-02;
-    }
-  }
-
-  &__title {
-    @include type-style('expressive-heading-05');
-
-    margin-bottom: $layout-03;
-    font-weight: 300;
-
-    @include mq($until: large) {
-      @include type-style('expressive-heading-04');
     }
   }
 

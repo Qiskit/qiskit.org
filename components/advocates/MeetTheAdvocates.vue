@@ -1,6 +1,6 @@
 <template>
   <section id="meet-the-advocates" class="meet-the-advocates">
-    <h2 class="copy__title">
+    <h2>
       Meet the Advocates
     </h2>
     <p class="copy__paragraph copy__paragraph_importance_support">

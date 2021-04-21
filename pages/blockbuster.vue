@@ -94,7 +94,7 @@ export default class BlockbusterPage extends QiskitPage {
       background: $carbon--blue-70;
 
       .copy__paragraph,
-      .copy__title {
+      h2 {
         color: $text-color-white;
       }
     }

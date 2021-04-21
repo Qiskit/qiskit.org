@@ -1,7 +1,7 @@
 <template>
   <section class="capabilities-section">
     <div class="capabilities-section__container">
-      <h2 class="capabilities-section__title">
+      <h2>
         Our vision
       </h2>
       <div class="capabilities-section__capabilities">
@@ -101,17 +101,6 @@ export default class CapabilitiesSection extends Mixins(ScrollSectionsMixin) {
     display: flex;
     align-items: flex-start;
     width: 100%;
-  }
-
-  &__title {
-    @include type-style("expressive-heading-05");
-
-    margin-bottom: $layout-03;
-    font-weight: 300;
-
-    @include mq($until: large) {
-      @include type-style("expressive-heading-04");
-    }
   }
 
   &__content {

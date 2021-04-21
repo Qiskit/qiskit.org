@@ -1,7 +1,7 @@
 <template>
   <section class="building-section">
     <div class="building-section__container">
-      <h2 class="building-section__title">
+      <h2>
         Building together
       </h2>
       <p class="building-section__text">
@@ -87,17 +87,6 @@ export default class BuildingSection extends Vue {
     @include contained();
 
     padding-top: $layout-05;
-  }
-
-  &__title {
-    @include type-style("expressive-heading-05");
-
-    margin-bottom: $layout-03;
-    font-weight: 300;
-
-    @include mq($until: large) {
-      @include type-style("expressive-heading-04");
-    }
   }
 
   &__subtitle {

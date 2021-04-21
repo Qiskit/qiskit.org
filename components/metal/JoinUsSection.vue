@@ -1,7 +1,7 @@
 <template>
   <section class="early-access-section">
     <div class="early-access-section__container">
-      <h2 class="early-access-section__title">
+      <h2>
         Join Us
       </h2>
       <p class="early-access-section__description">
@@ -40,17 +40,6 @@ export default class JoinUsSection extends Vue {
     @include mq($until: medium) {
       padding-top: $layout-03;
       padding-bottom: $layout-05;
-    }
-  }
-
-  &__title {
-    @include type-style("expressive-heading-05");
-
-    margin-bottom: $layout-03;
-    font-weight: 300;
-
-    @include mq($until: large) {
-      @include type-style("expressive-heading-04");
     }
   }
 

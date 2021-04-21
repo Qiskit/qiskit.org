@@ -1,9 +1,9 @@
 <template>
   <article class="app-description-card">
     <div>
-      <h2 class="copy__subtitle">
+      <h3 class="copy__subtitle">
         {{ title }}
-      </h2>
+      </h3>
       <p class="copy__paragraph">
         {{ description }}
       </p>

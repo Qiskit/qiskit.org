@@ -1,8 +1,6 @@
 <template>
   <section class="app-mosaic-section">
-    <h2 class="copy__title">
-      {{ title }}
-    </h2>
+    <h2 v-text="title" />
     <p
       v-if="description"
       class="copy__paragraph copy__paragraph_importance_outstanding"

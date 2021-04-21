@@ -142,28 +142,6 @@ export default class LearnEntry extends QiskitPage {
       }
     }
 
-    // Same as copy__title
-    h2 {
-      @include type-style('expressive-heading-05');
-
-      margin-bottom: $layout-03;
-      color: $text-color-light;
-
-      @include mq($from: medium, $until: large) {
-        @include type-style('expressive-heading-03');
-
-        font-weight: 300;
-        margin-bottom: $layout-01;
-      }
-
-      @include mq($until: medium) {
-        @include type-style('expressive-heading-03');
-
-        font-weight: 300;
-        margin-bottom: $layout-01;
-      }
-    }
-
     ul {
       @include type-style('body-long-01');
 

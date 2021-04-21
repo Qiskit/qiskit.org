@@ -8,7 +8,7 @@
       <div>Fetching recommendation...</div>
     </div>
     <div v-else class="blockbuster__container">
-      <h2 class="copy__title" v-text="recommendation.title" />
+      <h2 v-text="recommendation.title" />
       <div class="bx--row">
         <div class="bx--col-lg-8 bx--col-md-4 blockbuster__section-mobile-spacing">
           <div class="blockbuster-recommendation-section__video-wrapper">

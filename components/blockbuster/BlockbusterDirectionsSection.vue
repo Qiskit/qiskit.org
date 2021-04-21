@@ -1,7 +1,7 @@
 <template>
   <section>
     <div class="blockbuster__container">
-      <h2 class="copy__title">
+      <h2>
         Get it at Blockbuster
       </h2>
       <div class="bx--row">
