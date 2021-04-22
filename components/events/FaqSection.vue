@@ -278,7 +278,7 @@ export default class FaqSection extends Vue {
     segment: { action: 'events-summer-school > faq > qiskit-org-events' }
   }
 
-  mailtoQiskit = {
+  mailtoQiskit: GeneralLink = {
     url: 'mailto:qiskit.events@us.ibm.com',
     segment: { action: 'events-summer-school > faq > mailto-qiskit-events' }
   }
