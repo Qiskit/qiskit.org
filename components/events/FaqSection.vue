@@ -238,7 +238,7 @@ export default class FaqSection extends Vue {
     segment: { action: 'events-summer-school > faq > ibm-quantum-educators-program' }
   }
 
-  mailtoQCEducators = {
+  mailtoQCEducators: GeneralLink = {
     url: 'mailto:quantum.education@us.ibm.com',
     segment: { action: 'events-summer-school > faq > mailto-quantum-educators-program' }
   }
