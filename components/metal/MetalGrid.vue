@@ -203,6 +203,7 @@ export default class MetalGrid extends Vue {
 
   &__underlayer {
     @include contained();
+
     overflow: hidden;
     background-color: $cool-gray-100;
     height: 42rem;
@@ -317,27 +318,27 @@ export default class MetalGrid extends Vue {
       $magnification: 1.1;
 
       @keyframes anxious-tile {
-        0%    { box-shadow: 0px 0px 0px 0px $cool-gray-70; transform: rotate( 0deg); }
-        10%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate( 0deg); }
-        18%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate(-3deg * $rotation-multiplier); }
-        26%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate( 4deg * $rotation-multiplier); }
-        34%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate(-3deg * $rotation-multiplier); background-color: white;}
-        45%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate( 1deg * $rotation-multiplier); }
-        55%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate( 0deg); }
-        65%   { box-shadow: 0px 0px 0px 0px $cool-gray-60; transform: rotate( 0deg); }
-        100%  { box-shadow: 0px 0px 0px 0px $cool-gray-70; transform: rotate( 0deg); }
+        0%    { box-shadow: 0 0 0 0 $cool-gray-70; transform: rotate( 0deg); }
+        10%   { box-shadow: 0 1px 5px 0 $cool-gray-20; transform: rotate( 0deg); }
+        18%   { box-shadow: 0 1px 5px 0 $cool-gray-20; transform: rotate(-3deg * $rotation-multiplier); }
+        26%   { box-shadow: 0 1px 5px 0 $cool-gray-20; transform: rotate( 4deg * $rotation-multiplier); }
+        34%   { box-shadow: 0 1px 5px 0 $cool-gray-20; transform: rotate(-3deg * $rotation-multiplier); background-color: white;}
+        45%   { box-shadow: 0 1px 5px 0 $cool-gray-20; transform: rotate( 1deg * $rotation-multiplier); }
+        55%   { box-shadow: 0 1px 5px 0 $cool-gray-20; transform: rotate( 0deg); }
+        65%   { box-shadow: 0 0 0 0 $cool-gray-60; transform: rotate( 0deg); }
+        100%  { box-shadow: 0 0 0 0 $cool-gray-70; transform: rotate( 0deg); }
       }
 
       @keyframes very-anxious-tile {
-        0%    { box-shadow: 0px 0px 0px 0px $cool-gray-70; transform: rotate( 0deg) scale(1); background-color: white; }
-        10%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate( 0deg) scale($magnification); background-color: white; }
-        18%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate(-5deg * $rotation-multiplier) scale($magnification); }
-        26%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate( 7deg * $rotation-multiplier) scale($magnification); }
-        34%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate(-5deg * $rotation-multiplier) scale($magnification); }
-        45%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate( 3deg * $rotation-multiplier) scale($magnification); }
-        55%   { box-shadow: 0px 1px 5px 0px $cool-gray-20; transform: rotate( 0deg) scale($magnification); }
-        65%   { box-shadow: 0px 0px 0px 0px $cool-gray-60; transform: rotate( 0deg) scale($magnification); background-color: white; }
-        100%  { box-shadow: 0px 0px 0px 0px $cool-gray-70; transform: rotate( 0deg) scale(1); background-color: white; }
+        0%    { box-shadow: 0 0 0 0 $cool-gray-70; transform: rotate( 0deg) scale(1); background-color: white; }
+        10%   { box-shadow: 0 1px 5px 0 $cool-gray-20; transform: rotate( 0deg) scale($magnification); background-color: white; }
+        18%   { box-shadow: 0 1px 5px 0 $cool-gray-20; transform: rotate(-5deg * $rotation-multiplier) scale($magnification); }
+        26%   { box-shadow: 0 1px 5px 0 $cool-gray-20; transform: rotate( 7deg * $rotation-multiplier) scale($magnification); }
+        34%   { box-shadow: 0 1px 5px 0 $cool-gray-20; transform: rotate(-5deg * $rotation-multiplier) scale($magnification); }
+        45%   { box-shadow: 0 1px 5px 0 $cool-gray-20; transform: rotate( 3deg * $rotation-multiplier) scale($magnification); }
+        55%   { box-shadow: 0 1px 5px 0 $cool-gray-20; transform: rotate( 0deg) scale($magnification); }
+        65%   { box-shadow: 0 0 0 0 $cool-gray-60; transform: rotate( 0deg) scale($magnification); background-color: white; }
+        100%  { box-shadow: 0 0 0 0 $cool-gray-70; transform: rotate( 0deg) scale(1); background-color: white; }
       }
     }
   }

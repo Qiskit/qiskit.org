@@ -33,6 +33,7 @@ export default class JoinUsSection extends Vue {
 
   &__container {
     @include contained();
+
     padding-top: $layout-05;
     padding-bottom: $layout-06;
 
@@ -44,6 +45,7 @@ export default class JoinUsSection extends Vue {
 
   &__title {
     @include type-style("expressive-heading-05");
+
     margin-bottom: $layout-03;
     font-weight: 300;
 
@@ -54,6 +56,7 @@ export default class JoinUsSection extends Vue {
 
   &__description {
     @include type-style("body-long-01");
+
     max-width: 7 * $column-size-large;
     margin-bottom: 3.25rem;
 

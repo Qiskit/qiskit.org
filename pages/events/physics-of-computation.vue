@@ -302,6 +302,7 @@ export default class PhysicsOfComputationPage extends QiskitPage {
 .physics-of-computation-page {
   &__section {
     @include contained();
+
     margin-top: $layout-05;
     margin-bottom: $layout-03;
 

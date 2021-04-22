@@ -57,11 +57,11 @@ export default class AppCta extends Vue {
 
 .app-cta {
   @include type-style('body-long-01');
+
   display: flex;
   justify-content: space-between;
   text-decoration: none;
   align-items: center;
-
   padding: $spacing-05;
   width: 4 * $column-size-large;
   max-width: 100%;
@@ -89,11 +89,13 @@ export default class AppCta extends Vue {
   &,
   &_primary {
     @include bicolor-background($button-background-color-dark, $button-background-color);
+
     color: $button-text-color;
   }
 
   &_secondary {
     @include bicolor-background($button-background-color-secondary-dark, $button-background-color-secondary);
+
     color: $button-text-color-secondary;
 
     &:hover,
@@ -104,6 +106,7 @@ export default class AppCta extends Vue {
 
     &_theme_dark {
       @include bicolor-background($button-background-color-tertiary-dark, $button-background-color-tertiary);
+
       color: $button-text-color-tertiary;
     }
   }
@@ -113,7 +116,6 @@ export default class AppCta extends Vue {
     padding-left: 0;
     justify-content: flex-start;
     align-items: flex-start;
-
     background-image: none;
     color: $link-color-tertiary;
 
@@ -165,10 +167,10 @@ export default class AppCta extends Vue {
   &:focus &__icon,
   &:active &__icon {
     &#{$arrow-right_path} {
-      transform: translate(4px, 0px);
+      transform: translate(4px, 0);
     }
     &#{$arrow-down_path} {
-      transform: translate(0px, 4px);
+      transform: translate(0, 4px);
     }
     &#{$launch_path} {
       transform: translate(2px, -2px);

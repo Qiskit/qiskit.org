@@ -114,6 +114,7 @@ export default class TheLearningResourceList extends Vue {
 <style lang="scss" scoped>
 .the-learning-resources-list {
   @include responsive-grid-bg('/images/grid/grid-left-inverted.svg', 36rem);
+
   background-repeat: no-repeat;
   background-position: left bottom;
 

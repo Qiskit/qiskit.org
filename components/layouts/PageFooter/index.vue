@@ -141,6 +141,7 @@ export default class PageFooter extends Vue {
 
   &__secondary-container {
     @include contained();
+
     display: flex;
     justify-content: space-between;
   }

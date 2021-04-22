@@ -58,12 +58,14 @@ export default class IntroSection extends Vue {
 
   &__container {
     @include contained();
+
     padding-top: $layout-05;
     padding-bottom: 0;
   }
 
   &__title {
     @include type-style('expressive-heading-05');
+
     max-width: 8 * $column-size-large;
     margin-bottom: $layout-03;
     font-weight: 300;
@@ -84,6 +86,7 @@ export default class IntroSection extends Vue {
 
   &__description {
     @include type-style('body-long-01');
+
     max-width: 6 * $column-size-large;
     margin-bottom: $layout-06;
     padding-right: $spacing-07;

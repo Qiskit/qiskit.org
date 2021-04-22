@@ -55,6 +55,7 @@ export default class AdvocateCard extends Vue {
 
   &__location, &__contact {
     @include type-style('body-long-01');
+
     display: flex;
     align-items: center;
   }

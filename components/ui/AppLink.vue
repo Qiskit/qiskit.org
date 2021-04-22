@@ -27,6 +27,7 @@ export default class AppLink extends Vue {
   &_primary,
   &_secondary {
     @include type-style('body-long-01');
+
     text-decoration: none;
   }
 

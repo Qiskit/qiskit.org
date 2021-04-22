@@ -60,6 +60,7 @@ export default class ContentAccordion extends Vue {
 .content-accordion {
   & .bx--accordion__item {
     @include type-style('body-long-01');
+
     border-bottom: none;
     border-top-color: $border-color;
     overflow-anchor: none;

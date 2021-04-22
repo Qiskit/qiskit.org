@@ -22,6 +22,7 @@ export default class AppPageHeaderFixed extends Vue {}
 
   &__container {
     @include contained();
+
     align-items: center;
     display: flex;
     height: 28rem;

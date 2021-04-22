@@ -200,12 +200,14 @@ export default class StartLocally extends Vue {
 
   &__option-title {
     @include type-style('body-long-01');
+
     color: $text-color-light;
     margin-bottom: $spacing-03;
   }
 
   &__option {
     @include type-style('body-long-01');
+
     background-color: $background-color-lighter;
     max-width: 100%;
     color: $text-color-light;

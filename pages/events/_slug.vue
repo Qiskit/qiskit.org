@@ -97,7 +97,7 @@ header {
 
 /* Hack to target Safari only and disable the fixed effect which seems broken
 in the latest version of the browser. */
-@media not all and (min-resolution:.001dpcm) {
+@media not all and (min-resolution: .001dpcm) {
   @media {
     header {
       background-attachment: scroll;
@@ -143,11 +143,11 @@ header .headlines {
   border-radius: 25px;
 }
 
-.icon-scroll:before {
+.icon-scroll::before {
   position: absolute;
 }
 
-.icon-scroll:before {
+.icon-scroll::before {
   content: '';
   width: 8px;
   height: 8px;

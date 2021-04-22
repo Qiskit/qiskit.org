@@ -52,6 +52,7 @@ export default class BlockbusterHeader extends Vue {
     auto,
     28rem
   );
+
   background-color: $carbon--blue-70;
   padding-bottom: $spacing-07;
   padding-top: $spacing-07;

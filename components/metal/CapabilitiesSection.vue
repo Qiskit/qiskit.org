@@ -92,6 +92,7 @@ export default class CapabilitiesSection extends Mixins(ScrollSectionsMixin) {
 
   &__container {
     @include contained();
+
     padding-top: $layout-05;
     padding-bottom: $layout-04;
   }
@@ -104,6 +105,7 @@ export default class CapabilitiesSection extends Mixins(ScrollSectionsMixin) {
 
   &__title {
     @include type-style("expressive-heading-05");
+
     margin-bottom: $layout-03;
     font-weight: 300;
 
