@@ -1,7 +1,6 @@
 <template>
   <main class="physics-of-computation-page">
     <AppPageHeaderWithCard
-      :description="headerDescription"
       :cta="headerCTA"
       :card-title="headerCardTitle"
     >
@@ -9,6 +8,14 @@
         {{ headerPrimaryTitle }}
         <br>
         {{ headerSecondaryTitle }}
+      </template>
+      <template slot="description">
+        <p
+          v-for="(paragraph, index) in headerDescription"
+          :key="index"
+          class="copy__paragraph"
+          v-text="paragraph"
+        />
       </template>
       <template slot="card">
         <EventCard v-bind="headerCardContent" vertical-layout>

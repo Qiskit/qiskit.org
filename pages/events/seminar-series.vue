@@ -3,10 +3,17 @@
     <AppPageHeaderWithCard
       :description="headerDescription"
       :cta="headerCTA"
-      :card-title="headerCardTitle"
     >
       <template slot="title">
         {{ headerTitle }}
+      </template>
+      <template slot="description">
+        <p
+          v-for="(paragraph, index) in headerDescription"
+          :key="index"
+          class="copy__paragraph"
+          v-text="paragraph"
+        />
       </template>
       <template slot="card">
         <EventCard v-bind="cardContent" vertical-layout>
