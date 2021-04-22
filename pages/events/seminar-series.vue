@@ -1,8 +1,8 @@
 <template>
   <main class="event-page seminar-series-page">
     <AppPageHeaderWithCard
-      :description="headerDescription"
       :cta="headerCTA"
+      :card-title="headerCardTitle"
     >
       <template slot="title">
         {{ headerTitle }}
