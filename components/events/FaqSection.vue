@@ -218,7 +218,7 @@ import { Component } from 'vue-property-decorator'
 
 @Component
 export default class FaqSection extends Vue {
-  khanacademy = {
+  khanacademy: GeneralLink = {
     url: 'https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:matrices/x9e81a4f98389efdf:multiplying-matrices-by-matrices/v/matrix-multiplication-intro',
     segment: { action: 'events-summer-school > faq > khanacademy-matrix-multiplication-intro' }
   }
