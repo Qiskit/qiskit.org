@@ -12,9 +12,10 @@
     "test": "jest",
     "build": "npm run generate",
     "start": "NODE_ENV=production nuxt-ts start",
-    "lint": "eslint --max-warnings 0 --ext .ts,.js,.vue .",
+    "lint:style": "stylelint \"**/*.{vue,css}\" --ignore-path .gitignore",
+    "lint": "eslint --max-warnings 0 --ext .ts,.js,.vue . && npm run lint:style",
     "generate": "NODE_ENV=production nuxt-ts generate --fail-on-error",
-    "fix-lint": "eslint --fix --ext .ts,.js,.vue ."
+    "fix-lint": "eslint --fix --ext .ts,.js,.vue . && npm run lint:style -- --fix"
   },
   "engines": {
     "node": ">=12.x"
