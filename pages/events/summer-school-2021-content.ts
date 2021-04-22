@@ -1,8 +1,10 @@
+
 const metadata = {
   title: 'Qiskit Global Summer School 2021',
   description: 'The Qiskit Global Summer School 2021 is a two-week intensive summer school designed to empower the next generation of quantum researchers and developers with the skills and know-how to explore quantum applications on their own',
   image: '/images/events/summer-school/summer-school-logo.png'
 }
+
 const header = {
   titleLine1: 'Qiskit Global Summer School 2021:',
   titleLine2: 'Quantum Machine Learning',
@@ -33,6 +35,7 @@ const header = {
     }
   }
 }
+
 const mosaic = {
   title: 'Quantum Learning & More',
   tiles: [

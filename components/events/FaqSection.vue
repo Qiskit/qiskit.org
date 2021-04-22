@@ -11,20 +11,20 @@
         <template #content>
           <p>
             Minimal prerequisites are required for the Qiskit Global Summer School. If you know
-            <Applink v-bind="khanacademy">
+            <AppLink v-bind="khanacademy">
               how to multiply two matrices
-            </Applink>
+            </AppLink>
             , and have some programming experience in Python, you are ready for the Summer School.
           </p>
           <p>
             You can
-            <Applink v-bind="pythonAndJupyter">
+            <AppLink v-bind="pythonAndJupyter">
               brush up on Python programming
-            </Applink>
+            </AppLink>
             before attending the lectures by using the Qiskit Textbook. To make the most out of these lectures, you may also consider looking through the
-            <Applink v-bind="linearAlgebra">
+            <AppLink v-bind="linearAlgebra">
               linear algebra prerequisites
-            </Applink>
+            </AppLink>
             section of the Qiskit Textbook.
           </p>
         </template>
@@ -125,13 +125,13 @@
         <template #content>
           <p>
             Explore IBM Quantums Educators Program
-            <Applink v-bind="qCEducators">
+            <AppLink v-bind="qCEducators">
               online here
-            </Applink>
+            </AppLink>
             , or email
-            <Applink v-bind="mailtoQCEducators">
+            <AppLink v-bind="mailtoQCEducators">
               quantum.education@us.ibm.com
-            </Applink>
+            </AppLink>
             to connect with the latest coursework and classroom resources for educators and students alike.
           </p>
         </template>
@@ -144,33 +144,33 @@
         <template #content>
           <p>
             There are several different ways you can connect with the IBM Quantum Community - depending on your preference. You can
-            <Applink v-bind="twitterQiskit">
+            <AppLink v-bind="twitterQiskit">
               follow Qiskit
-            </Applink>
+            </AppLink>
             and
-            <Applink v-bind="twitterIBMResearch">
+            <AppLink v-bind="twitterIBMResearch">
               IBM Research
-            </Applink>
+            </AppLink>
             on Twitter for the latest updates on new events, activities, and features on what is going on with the community. There is also a
-            <Applink v-bind="githubQiskit">
+            <AppLink v-bind="githubQiskit">
               community Github
-            </Applink>
+            </AppLink>
             that you can explore and contribute to, and you can read regular
-            <Applink v-bind="mediumQiskit">
+            <AppLink v-bind="mediumQiskit">
               blog posts from our team and community members on Medium
-            </Applink>
+            </AppLink>
             . You can also
-            <Applink v-bind="qiskitSubscribe">
+            <AppLink v-bind="qiskitSubscribe">
               subscribe to the Qiskit YouTube
-            </Applink>
+            </AppLink>
             for the latest video content and our weekly live Seminar Series.
           </p>
 
           <p>
             If you want to collaborate and connect with other members of the community, and participate in some of the ongoing conversations about quantum computing, you will want to
-            <Applink v-bind="joinqiskitslack">
+            <AppLink v-bind="joinqiskitslack">
               check out our ever-growing Slack Community
-            </Applink>
+            </AppLink>
             . From there you can connect with current and past interns, IBM researchers, Qiskit advocates, and fellow community members directly.
           </p>
         </template>
@@ -183,13 +183,13 @@
         <template #content>
           <p>
             All of our announced
-            <Applink v-bind="qiskitEvents">
+            <AppLink v-bind="qiskitEvents">
               upcoming events are listed on qiskit.org
-            </Applink>
+            </AppLink>
             , which is continually updated as we roll out more events throughout the year. You can also
-            <Applink v-bind="twitterQiskit">
+            <AppLink v-bind="twitterQiskit">
               follow Qiskit on Twitter
-            </Applink>
+            </AppLink>
             for the latest announcements on new and upcoming events!
           </p>
         </template>
@@ -202,9 +202,9 @@
         <template #content>
           <p>
             For any questions about the summer school, please submit your questions using the form below. For all other enquiries, feel free to email us directly at
-            <Applink v-bind="mailtoQiskit">
+            <AppLink v-bind="mailtoQiskit">
               qiskit.events@us.ibm.com
-            </Applink>.
+            </AppLink>.
           </p>
         </template>
       </cv-accordion-item>
@@ -215,70 +215,77 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
+import { SegmentData } from '~/constants/appLinks'
+
+// GeneralLink does not fit. 'label' is not necessary
+interface TrackedLink {
+  url: string,
+  segment: SegmentData
+}
 
 @Component
 export default class FaqSection extends Vue {
-  khanacademy: GeneralLink = {
+  khanacademy: TrackedLink = {
     url: 'https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:matrices/x9e81a4f98389efdf:multiplying-matrices-by-matrices/v/matrix-multiplication-intro',
     segment: { action: 'events-summer-school > faq > khanacademy-matrix-multiplication-intro' }
   }
 
-  pythonAndJupyter: GeneralLink = {
+  pythonAndJupyter: TrackedLink = {
     url: 'https://qiskit.org/textbook/ch-prerequisites/python-and-jupyter-notebooks.html',
     segment: { action: 'events-summer-school > faq > textbook-python-and-jupyter-notebooks' }
   }
 
-  linearAlgebra: GeneralLink = {
+  linearAlgebra: TrackedLink = {
     url: 'https://qiskit.org/textbook/ch-prerequisites/linear_algebra.html',
     segment: { action: 'events-summer-school > faq > qiskit-linear-algebra' }
   }
 
-  qCEducators: GeneralLink = {
+  qCEducators: TrackedLink = {
     url: 'https://quantum-computing.ibm.com/programs/educators',
     segment: { action: 'events-summer-school > faq > ibm-quantum-educators-program' }
   }
 
-  mailtoQCEducators: GeneralLink = {
+  mailtoQCEducators: TrackedLink = {
     url: 'mailto:quantum.education@us.ibm.com',
     segment: { action: 'events-summer-school > faq > mailto-quantum-educators-program' }
   }
 
-  twitterQiskit: GeneralLink = {
+  twitterQiskit: TrackedLink = {
     url: 'https://twitter.com/qiskit',
     segment: { action: 'events-summer-school > faq > qiskit-twitter' }
   }
 
-  twitterIBMResearch: GeneralLink = {
+  twitterIBMResearch: TrackedLink = {
     url: 'https://twitter.com/IBMResearch',
     segment: { action: 'events-summer-school > faq > ibmresearch-twitter' }
   }
 
-  githubQiskit: GeneralLink = {
+  githubQiskit: TrackedLink = {
     url: 'https://github.com/Qiskit',
     segment: { action: 'events-summer-school > faq > qiskit-github' }
   }
 
-  mediumQiskit: GeneralLink = {
+  mediumQiskit: TrackedLink = {
     url: 'https://medium.com/qiskit',
     segment: { action: 'events-summer-school > faq > qiskit-medium' }
   }
 
-  qiskitSubscribe: GeneralLink = {
+  qiskitSubscribe: TrackedLink = {
     url: 'https://qisk.it/sub',
     segment: { action: 'events-summer-school > faq > qiskit-youtube-subscribe' }
   }
 
-  joinqiskitslack: GeneralLink = {
+  joinqiskitslack: TrackedLink = {
     url: 'https://ibm.co/joinqiskitslack',
     segment: { action: 'events-summer-school > faq > qiskit-slack-join' }
   }
 
-  qiskitEvents: GeneralLink = {
+  qiskitEvents: TrackedLink = {
     url: 'https://qiskit.org/events',
     segment: { action: 'events-summer-school > faq > qiskit-org-events' }
   }
 
-  mailtoQiskit: GeneralLink = {
+  mailtoQiskit: TrackedLink = {
     url: 'mailto:qiskit.events@us.ibm.com',
     segment: { action: 'events-summer-school > faq > mailto-qiskit-events' }
   }
