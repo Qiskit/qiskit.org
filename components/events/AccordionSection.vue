@@ -34,6 +34,7 @@ export default class AccordionSection extends Vue {
   ::v-deep {
     .bx--accordion__content {
       @extend .copy__paragraph;
+
       max-width: none;
       > p {
         margin-top: 1.43em;

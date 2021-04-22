@@ -200,6 +200,7 @@ export default class SummerSchoolPage extends QiskitPage {
 
   &__section {
     @include contained();
+
     width: 100%;
     margin-top: $layout-05;
     margin-bottom: $layout-03;
@@ -242,6 +243,10 @@ export default class SummerSchoolPage extends QiskitPage {
       }
     }
 
+    // TODO: Not sure if the order is important in these selectors.
+    // So, disabling. Review the reule 'no-descending-specificity' here:
+    // https://stylelint.io/user-guide/ignore-code
+    // stylelint-disable no-descending-specificity
     & .bx--tabs__nav-item {
       &:hover:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link,
       &:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled):not(.bx--tabs__nav-item--selected) .bx--tabs__nav-link:focus,
@@ -273,6 +278,7 @@ export default class SummerSchoolPage extends QiskitPage {
       & .bx--tabs-trigger-text {
         color: $text-color;
     }
+    // stylelint-enable no-descending-specificity
 
     .app-data-table {
       margin-top: $spacing-07;
