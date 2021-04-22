@@ -223,7 +223,7 @@ export default class FaqSection extends Vue {
     segment: { action: 'events-summer-school > faq > khanacademy-matrix-multiplication-intro' }
   }
 
-  pythonAndJupyter = {
+  pythonAndJupyter: GeneralLink = {
     url: 'https://qiskit.org/textbook/ch-prerequisites/python-and-jupyter-notebooks.html',
     segment: { action: 'events-summer-school > faq > textbook-python-and-jupyter-notebooks' }
   }
