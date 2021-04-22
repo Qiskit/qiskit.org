@@ -253,7 +253,7 @@ export default class FaqSection extends Vue {
     segment: { action: 'events-summer-school > faq > ibmresearch-twitter' }
   }
 
-  githubQiskit = {
+  githubQiskit: GeneralLink = {
     url: 'https://github.com/Qiskit',
     segment: { action: 'events-summer-school > faq > qiskit-github' }
   }
