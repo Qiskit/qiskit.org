@@ -145,9 +145,6 @@ header .headlines {
 
 .icon-scroll::before {
   position: absolute;
-}
-
-.icon-scroll::before {
   content: '';
   width: 8px;
   height: 8px;
@@ -220,8 +217,9 @@ header .headlines {
 }
 
 #event-body h2 {
-  margin: 2rem 0 2.5rem;
   color: #0A1D8F;
+  margin: 0 0 2rem;
+  padding-top: 4rem;
 }
 
 #event-body main {
@@ -254,21 +252,6 @@ header .headlines {
 #event-body main .clarification {
   font-size: 0.7rem;
   line-height: 1rem;
-}
-
-#event-body h2 {
-  padding-top: 4rem;
-  margin: 0 0 2rem;
-  color: #0A1D8F;
-}
-
-#event-body h2::before {
-  content: "";
-  float: left;
-  width: 5%;
-  margin-top: 0.5rem;
-  margin-right: 5%;
-  border-top: 1px solid #0A1D8F;
 }
 
 #event-body .agenda h2 {

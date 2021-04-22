@@ -273,17 +273,25 @@ export default class TheMenu extends Mixins(MenuMixin) {
     border-bottom: 1px solid $cool-gray-30;
   }
 
+  .bx--list-box__menu {
+    background-color: $background-color-white;
+    top: calc(3.25rem + 1px);
+    box-shadow: initial;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
   .bx--dropdown--open,
   .bx--dropdown--open .bx--list-box__menu {
     background: $cool-gray-10;
   }
 
-  .bx--list-box__menu {
-    background-color: $background-color-white;
+  .bx--list-box__label {
+    @include type-style('body-long-02');
 
-    &:focus {
-      outline: none;
-    }
+    color: var(--link-color);
   }
 
   // Dropdown button
@@ -316,17 +324,6 @@ export default class TheMenu extends Mixins(MenuMixin) {
     &:hover {
       background-color: $background-color-light;
     }
-  }
-
-  .bx--list-box__label {
-    @include type-style('body-long-02');
-
-    color: var(--link-color);
-  }
-
-  .bx--list-box__menu {
-    top: calc(3.25rem + 1px);
-    box-shadow: initial;
   }
 
   .bx--list-box__menu-icon {

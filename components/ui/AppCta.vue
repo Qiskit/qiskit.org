@@ -77,12 +77,6 @@ export default class AppCta extends Vue {
   background-position-x: 100%;
   transition: background-position-x 0.3s ease-out, color 0.3s ease-out;
 
-  &:hover,
-  &:focus,
-  &:active {
-    background-position-x: 0;
-  }
-
   /*
     Per kind and theming styles
   */
@@ -91,6 +85,12 @@ export default class AppCta extends Vue {
     @include bicolor-background($button-background-color-dark, $button-background-color);
 
     color: $button-text-color;
+  }
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-position-x: 0;
   }
 
   &_secondary {
@@ -142,10 +142,6 @@ export default class AppCta extends Vue {
   $arrow-down_path: "_arrow-down-16 path:nth-child(1)";
   $launch_path: "_launch-16 path:nth-child(2)";
 
-  &_ghost &__icon {
-    margin-top: $spacing-01;
-  }
-
   &__icon {
     fill: currentColor;
     margin-left: $spacing-05;
@@ -161,6 +157,10 @@ export default class AppCta extends Vue {
       transform: translate(0, 0);
       transition: transform 0.2s ease-in-out;
     }
+  }
+
+  &_ghost &__icon {
+    margin-top: $spacing-01;
   }
 
   &:hover &__icon,

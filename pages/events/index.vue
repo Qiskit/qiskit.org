@@ -216,13 +216,13 @@ export default class EventsPage extends QiskitPage {
       border-bottom-color: $border-color;
     }
 
+    .bx--tabs__nav-item--selected:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link {
+        border-bottom-color: $border-color-secondary;
+    }
+
     .bx--tabs__nav-item:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link,
     .bx--tabs__nav-item:hover:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link {
       color: $text-color;
-    }
-
-    .bx--tabs__nav-item--selected:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link {
-        border-bottom-color: $border-color-secondary;
     }
 
     @include mq($until: medium) {

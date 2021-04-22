@@ -93,7 +93,6 @@ export default class PageFooter extends Vue {
   }
 
   .page-footer__secondary {
-    padding-bottom: $spacing-08;
     padding: $spacing-07 0;
     padding-bottom: $spacing-07 + 2.5rem; // make room for the "cookies preferences" button
 
