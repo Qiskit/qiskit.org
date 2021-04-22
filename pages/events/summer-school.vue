@@ -60,7 +60,7 @@
 <script lang="ts">
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
-import * as EventContent from '~/pages/events/summer-school-2021-content'
+import * as EventContent from '~/constants/summerSchool2021Content'
 
 @Component({
   head () {
