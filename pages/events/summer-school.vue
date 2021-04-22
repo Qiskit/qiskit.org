@@ -4,7 +4,6 @@
       :description="eventData.header.description"
       :cta="eventData.header.cta"
       :card-title="eventData.header.cardSectionHeading"
-      :style="`order: ${eventData.header.pageOrder}`"
     >
       <template slot="title">
         {{ eventData.header.titleLine1 }}
@@ -22,7 +21,6 @@
       class="summer-school-page__section"
       :title="eventData.mosaic.title"
       :elements="eventData.mosaic.tiles"
-      :style="`order: ${eventData.mosaic.pageOrder}`"
     />
 
     <section
@@ -49,39 +47,26 @@
       </cv-tabs>
     </section>
 
-    <AccordionSection
-      :document="faqData"
-      class="summer-school-page__section"
-      :style="`order: ${eventData.faq.pageOrder}`"
-    />
+    <FaqSection class="summer-school-page__section" />
 
     <AppHelpfulResourcesSection
       class="summer-school-page__section"
       :title="eventData.helpfulResources.title"
       :resources="eventData.helpfulResources.resources"
-      :style="`order: ${eventData.helpfulResources.pageOrder}`"
     />
   </main>
 </template>
 
 <script lang="ts">
 import { Component } from 'vue-property-decorator'
-import { Context } from '@nuxt/types'
-import { IContentDocument } from '@nuxt/content/types/content'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
-
-interface AgendaSlot {
-  day: string,
-  topic: string,
-  speaker: string,
-  format: string
-}
+import * as EventContent from '~/constants/summer-school-2021-content'
 
 @Component({
   head () {
-    const title = this.$data?.eventData.metadata.title
-    const description = this.$data?.eventData.metadata.description
-    const image = this.$data?.eventData.metadata.image
+    const title = EventContent.metadata.title
+    const description = EventContent.metadata.description
+    const image = EventContent.metadata.image
 
     return {
       title,
@@ -133,62 +118,12 @@ interface AgendaSlot {
         }
       ]
     }
-  },
-  async asyncData (context: Context) {
-    const eventData = await context.$content('events/summer-school-2021')
-      .fetch()
-      .catch((_) => {
-        context.error({ statusCode: 404, message: 'Event not found' })
-      }) as IContentDocument
-    const faqData = await context.$content('events/summer-school-2021-page/faq')
-      .fetch()
-      .catch((_) => {
-        context.error({ statusCode: 404, message: 'Event section not found' })
-      }) as IContentDocument
-
-    let idx = 0
-    for (const elem in eventData) {
-      if (typeof eventData[elem] === 'object') {
-        eventData[elem].pageOrder = idx
-        idx++
-      }
-    }
-
-    const scheduleToTableData = (slot: AgendaSlot) => ([
-      {
-        component: 'span',
-        styles: 'min-width: 10rem; display: inline-block; font-weight: bold;',
-        data: slot.day
-      },
-      {
-        component: 'span',
-        styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
-        data: slot.topic
-      },
-      {
-        component: 'span',
-        styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
-        data: slot.speaker
-      },
-      {
-        component: 'span',
-        styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
-        data: slot.format
-      }
-    ])
-
-    eventData.agenda.week1.tableData = eventData.agenda.week1.schedule.map(scheduleToTableData)
-    eventData.agenda.week2.tableData = eventData.agenda.week2.schedule.map(scheduleToTableData)
-
-    return {
-      eventData,
-      faqData
-    }
   }
 })
 export default class SummerSchoolPage extends QiskitPage {
   routeName = 'summer-school'
   agendaColumnsDataTable: string[] = ['Day', 'Topic', 'Speaker', 'Format']
+  eventData = EventContent
 }
 </script>
 
@@ -215,19 +150,6 @@ export default class SummerSchoolPage extends QiskitPage {
 // overrides
 .summer-school-page {
   ::v-deep {
-    .bx--accordion__title {
-      color: $text-color;
-    }
-
-    .bx--accordion__heading:hover,
-    .bx--accordion__heading:hover::before {
-      background-color: $background-color-lighter;
-    }
-
-    .bx--accordion__arrow {
-      fill: $text-color;
-    }
-
     & a.bx--tabs__nav-link {
       color: $text-color-light;
       border-bottom-color: $border-color;
