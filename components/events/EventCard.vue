@@ -64,6 +64,7 @@ export default class EventCard extends Vue {
 
   &__detail {
     @include type-style('body-long-01');
+
     display: flex;
     align-items: center;
     margin-bottom: $spacing-03;

@@ -58,6 +58,7 @@ export default class AccordionLayout extends Vue implements AccordionLayoutProps
 
   &__description {
     @include type-style('body-long-01');
+
     margin-bottom: $spacing-06;
   }
 }

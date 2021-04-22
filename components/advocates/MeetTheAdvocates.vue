@@ -119,6 +119,7 @@ export default class MeetTheAdvocates extends Vue {
 <style lang="scss" scoped>
 .meet-the-advocates {
   @include contained();
+
   margin-top: $layout-06;
 }
 </style>

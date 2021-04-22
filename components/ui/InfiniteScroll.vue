@@ -43,6 +43,3 @@ export default class InfiniteScroll extends Mixins(ScrollSectionsMixin) {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-</style>

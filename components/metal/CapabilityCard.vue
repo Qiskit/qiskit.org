@@ -72,6 +72,7 @@ export default class CapabilityCard extends Vue {
 
   &__title {
     @include type-style('productive-heading-02');
+
     flex: 0 0 12rem;
     padding-right: $spacing-07;
 
@@ -89,6 +90,7 @@ export default class CapabilityCard extends Vue {
 
   &__description {
     @include type-style('body-long-01');
+
     flex: 1;
 
     @include mq($until: large) {

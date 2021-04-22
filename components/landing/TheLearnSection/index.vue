@@ -26,6 +26,7 @@ export default class TheLearnSection extends Vue {}
 <style lang="scss" scoped>
 .the-learn-section {
   @include responsive-grid-bg('/images/grid/grid-left.svg', 36rem);
+
   background-repeat: no-repeat;
   background-position: left bottom -2px;
 

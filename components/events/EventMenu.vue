@@ -42,6 +42,10 @@ export default class EventMenu extends Vue {}
   z-index: 101;
 }
 
+nav li a {
+  color: $inverse-01;
+}
+
 .ibm-research a {
   margin: 0;
   padding-top: 0.2rem;
@@ -58,14 +62,10 @@ nav {
   position: fixed;
   top: 0;
   z-index: 100;
-  box-shadow: 0px 0px 16px rgba($shadow-color, 0.3);
+  box-shadow: 0 0 16px rgba($shadow-color, 0.3);
   background-color: $inverse-02;
   flex-wrap: wrap;
   min-height: 63px;
-}
-
-nav ul:empty {
-  display: none;
 }
 
 nav ul {
@@ -76,6 +76,10 @@ nav ul {
   height: 100%;
   list-style: none;
   flex-wrap: wrap;
+}
+
+nav ul:empty {
+  display: none;
 }
 
 nav li {
@@ -97,10 +101,6 @@ nav li.active a,
 nav li.active:hover a {
   opacity: 0.6;
   border: none;
-}
-
-nav li a {
-  color: $inverse-01;
 }
 
 .convertible-menu {

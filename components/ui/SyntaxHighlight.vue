@@ -51,7 +51,6 @@ export default class SyntaxHighlight extends Vue {
     bottom: 0;
     border: none;
     padding: $spacing-03 $spacing-05;
-
     text-transform: lowercase;
     background-size: 200% 100%;
     background-position-x: 100%;
@@ -66,6 +65,7 @@ export default class SyntaxHighlight extends Vue {
 
   &__code {
     @include type-style('code-02');
+
     color: $text-color-light;
     min-height: 8rem;
 

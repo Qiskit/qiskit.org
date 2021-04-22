@@ -70,6 +70,7 @@ export default class BuildingSection extends Vue {
 
 .building-section {
   @include responsive-grid-bg('/images/grid/grid-right-dark.svg', 36rem);
+
   background-position: right -1rem bottom -2px;
   background-repeat: no-repeat;
   padding-bottom: $layout-05;
@@ -84,11 +85,13 @@ export default class BuildingSection extends Vue {
 
   &__container {
     @include contained();
+
     padding-top: $layout-05;
   }
 
   &__title {
     @include type-style("expressive-heading-05");
+
     margin-bottom: $layout-03;
     font-weight: 300;
 
@@ -105,6 +108,7 @@ export default class BuildingSection extends Vue {
 
   &__text {
     @include type-style("body-long-01");
+
     max-width: 7.5 * $column-size-large;
     margin-bottom: $layout-04;
 

@@ -102,6 +102,7 @@ export default class OverviewPage extends QiskitPage {
 .overview-page {
   &__content-container {
     @include contained();
+
     display: flex;
     align-items: flex-start;
     overflow: visible;

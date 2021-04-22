@@ -168,6 +168,7 @@ export default class TheMenu extends Mixins(MenuMixin) {
   &__mobile-inner-container,
   &__navigation-level {
     @include contained();
+
     padding-top: $spacing-05;
     padding-bottom: $spacing-05;
     display: flex;
@@ -196,6 +197,7 @@ export default class TheMenu extends Mixins(MenuMixin) {
 
   &__entry {
     @include type-style('body-long-02');
+
     flex: 0 0 auto;
     display: inline-flex;
     flex-direction: column;
@@ -224,6 +226,7 @@ export default class TheMenu extends Mixins(MenuMixin) {
     &_second-level {
       color: var(--link-color);
       @include type-style('body-long-02');
+
       display: block;
       padding: $spacing-03 $spacing-05;
       margin-right: 0;
@@ -270,17 +273,25 @@ export default class TheMenu extends Mixins(MenuMixin) {
     border-bottom: 1px solid $cool-gray-30;
   }
 
+  .bx--list-box__menu {
+    background-color: $background-color-white;
+    top: calc(3.25rem + 1px);
+    box-shadow: initial;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
   .bx--dropdown--open,
   .bx--dropdown--open .bx--list-box__menu {
     background: $cool-gray-10;
   }
 
-  .bx--list-box__menu {
-    background-color: $background-color-white;
+  .bx--list-box__label {
+    @include type-style('body-long-02');
 
-    &:focus {
-      outline: none;
-    }
+    color: var(--link-color);
   }
 
   // Dropdown button
@@ -301,7 +312,7 @@ export default class TheMenu extends Mixins(MenuMixin) {
     position: relative;
 
     // using pseudo element to achieve partial underline
-    &:first-child:after {
+    &:first-child::after {
       content: '';
       border-bottom: 1px solid $cool-gray-30;
       position: absolute;
@@ -313,16 +324,6 @@ export default class TheMenu extends Mixins(MenuMixin) {
     &:hover {
       background-color: $background-color-light;
     }
-  }
-
-  .bx--list-box__label {
-    @include type-style('body-long-02');
-    color: var(--link-color);
-  }
-
-  .bx--list-box__menu {
-    top: calc(3.25rem + 1px);
-    box-shadow: initial;
   }
 
   .bx--list-box__menu-icon {

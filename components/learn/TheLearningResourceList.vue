@@ -114,6 +114,7 @@ export default class TheLearningResourceList extends Vue {
 <style lang="scss" scoped>
 .the-learning-resources-list {
   @include responsive-grid-bg('/images/grid/grid-left-inverted.svg', 36rem);
+
   background-repeat: no-repeat;
   background-position: left bottom;
 
@@ -176,54 +177,6 @@ export default class TheLearningResourceList extends Vue {
  * and CSS specificity to override the internal CSS.
  */
 .the-learning-resources-list {
-  &__filter-level {
-    & a.bx--tabs__nav-link {
-      color: $text-color-light;
-      border-bottom-color: $border-color;
-
-      &:focus,
-      &:active {
-        outline: none;
-      }
-
-      &:not(.bx--tabs__nav-item--disabled) {
-        color: $text-color-light;
-      }
-    }
-
-    & .bx--tabs__nav-item {
-      &:hover:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link,
-      &:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled):not(.bx--tabs__nav-item--selected) .bx--tabs__nav-link:focus,
-      &:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled):not(.bx--tabs__nav-item--selected) a.bx--tabs__nav-link:active,
-      &:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link, .bx--tabs__nav-item--selected:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link:focus {
-        color: $text-color-light;
-      }
-
-      &--selected:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link {
-        border-bottom-color: $border-active-color;
-      }
-    }
-
-    & .bx--tabs__nav-item:hover:not(.bx--tabs__nav-item--disabled) {
-      box-shadow: none;
-    }
-
-    & .bx--tabs__nav-item:hover:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled),
-    & .bx--tabs__nav-item,
-    & .bx--tabs-trigger {
-      background-color: $background-color-white;
-
-      svg {
-        fill: $text-color;
-      }
-    }
-
-    & .bx--tabs__nav-link,
-    & .bx--tabs-trigger-text {
-      color: $text-color;
-    }
-  }
-
   &__filter-time {
     & .bx--dropdown,
     & .bx--dropdown-item {
@@ -247,13 +200,67 @@ export default class TheLearningResourceList extends Vue {
       border-top-color: #dde1e6;
     }
 
+    & .bx--dropdown-link:hover {
+      border-bottom-color: #dde1e6;
+    }
+
     & .bx--dropdown--show-selected .bx--dropdown--selected .bx--dropdown-link {
       border-top-color: #dde1e6;
       border-bottom-color: #dde1e6;
     }
+  }
 
-    & .bx--dropdown-link:hover {
-      border-bottom-color: #dde1e6;
+  &__filter-level {
+    & a.bx--tabs__nav-link {
+      color: $text-color-light;
+      border-bottom-color: $border-color;
+
+      &:focus,
+      &:active {
+        outline: none;
+      }
+
+      &:not(.bx--tabs__nav-item--disabled) {
+        color: $text-color-light;
+      }
+    }
+
+    & .bx--tabs__nav-link,
+    & .bx--tabs-trigger-text {
+      color: $text-color;
+    }
+
+    & .bx--tabs__nav-item {
+      background-color: $background-color-white;
+
+      &--selected:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link {
+        border-bottom-color: $border-active-color;
+      }
+
+      svg {
+        fill: $text-color;
+      }
+
+      &:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link,
+      &:hover:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link,
+      .bx--tabs__nav-item--selected:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link:focus,
+      &:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled):not(.bx--tabs__nav-item--selected) .bx--tabs__nav-link:focus,
+      &:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled):not(.bx--tabs__nav-item--selected) a.bx--tabs__nav-link:active {
+        color: $text-color-light;
+      }
+    }
+
+    & .bx--tabs__nav-item:hover:not(.bx--tabs__nav-item--disabled) {
+      box-shadow: none;
+    }
+
+    & .bx--tabs-trigger,
+    & .bx--tabs__nav-item:hover:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled) {
+      background-color: $background-color-white;
+
+      svg {
+        fill: $text-color;
+      }
     }
   }
 

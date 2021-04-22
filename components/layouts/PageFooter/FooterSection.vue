@@ -45,6 +45,7 @@ export default class FooterSection extends Vue {
 .footer-section {
   &__title {
     @include type-style('expressive-heading-01');
+
     padding-bottom: $spacing-07;
 
     &_theme_light {
@@ -58,6 +59,7 @@ export default class FooterSection extends Vue {
 
   &__link {
     @include type-style('caption-01');
+
     text-decoration: none;
     display: inline-block;
     width: 100%;

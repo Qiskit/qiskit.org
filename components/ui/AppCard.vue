@@ -144,6 +144,7 @@ export default class AppCard extends Vue {
 
   &__description {
     @include type-style('body-long-01');
+
     margin-top: $layout-02;
   }
 }

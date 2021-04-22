@@ -50,6 +50,7 @@ export default class AppPageHeaderWithCard extends Vue {
 <style lang="scss" scoped>
 .app-page-header {
   @include responsive-grid-bg-strip("/images/grid/grid-hero-learn.svg", auto, 28rem);
+
   padding-top: $layout-06;
 
   @include mq($until: medium) {

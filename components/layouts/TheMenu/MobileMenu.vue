@@ -91,6 +91,7 @@ export default class MobileMenu extends Mixins(MenuMixin) {
   &__entry-label,
   &__footer-inner-container {
     @include contained();
+
     width: 100%;
   }
 
@@ -107,6 +108,7 @@ export default class MobileMenu extends Mixins(MenuMixin) {
 
   &__entry {
     @include type-style('expressive-paragraph-01');
+
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -137,6 +139,7 @@ export default class MobileMenu extends Mixins(MenuMixin) {
 
   &__footer-text {
     @include type-style('caption-01');
+
     background-color: $background-color-lighter;
     padding: $spacing-05 $spacing-07;
     color: $text-color-lighter;
@@ -155,8 +158,22 @@ export default class MobileMenu extends Mixins(MenuMixin) {
     height: auto;
   }
 
+  &__entry {
+    &_active {
+      & .bx--list-box__label,
+      & .bx--dropdown {
+        color: $text-active-color;
+      }
+
+      &.bx--form-item {
+        height: auto;
+      }
+    }
+  }
+
   .bx--list-box__label {
     @include type-style('body-long-02');
+
     color: $text-color-light;
   }
 
@@ -165,6 +182,20 @@ export default class MobileMenu extends Mixins(MenuMixin) {
     height: 4rem;
     max-height: initial;
     border-bottom: 1px solid $cool-gray-10;
+  }
+
+  &__footer-contact {
+    & .footer-section__title.footer-section__title_theme_light {
+      @include type-style('caption-01');
+
+      font-weight: 600;
+      color: $text-color-lighter;
+      padding-bottom: $spacing-05;
+    }
+
+    svg {
+      fill: $cool-gray-60;
+    }
   }
 
   .bx--list-box__field {
@@ -214,32 +245,6 @@ export default class MobileMenu extends Mixins(MenuMixin) {
 
     & .bx--list-box__menu li:not(:last-child) {
       border-bottom: 1px solid $border-color;
-    }
-  }
-
-  &__entry {
-    &_active {
-      & .bx--list-box__label,
-      & .bx--dropdown {
-        color: $text-active-color;
-      }
-
-      &.bx--form-item {
-        height: auto;
-      }
-    }
-  }
-
-  &__footer-contact {
-    & .footer-section__title.footer-section__title_theme_light {
-      @include type-style('caption-01');
-      font-weight: 600;
-      color: $text-color-lighter;
-      padding-bottom: $spacing-05;
-    }
-
-    svg {
-      fill: $cool-gray-60;
     }
   }
 }

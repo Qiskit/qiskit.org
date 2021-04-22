@@ -12,9 +12,10 @@
     "test": "jest",
     "build": "npm run generate",
     "start": "NODE_ENV=production nuxt-ts start",
-    "lint": "eslint --max-warnings 0 --ext .ts,.js,.vue .",
+    "lint:style": "stylelint \"**/*.{vue,css}\" --ignore-path .gitignore",
+    "lint": "eslint --max-warnings 0 --ext .ts,.js,.vue . && npm run lint:style",
     "generate": "NODE_ENV=production nuxt-ts generate --fail-on-error",
-    "fix-lint": "eslint --fix --ext .ts,.js,.vue ."
+    "fix-lint": "eslint --fix --ext .ts,.js,.vue . && npm run lint:style -- --fix"
   },
   "engines": {
     "node": ">=12.x"
@@ -42,6 +43,7 @@
     "@nuxtjs/eslint-config": "^6.0.0",
     "@nuxtjs/eslint-config-typescript": "^6.0.0",
     "@nuxtjs/style-resources": "^1.0.0",
+    "@nuxtjs/stylelint-module": "^4.0.0",
     "@types/airtable": "^0.8.1",
     "@types/jest": "^26.0.22",
     "@types/lodash": "^4.14.168",
@@ -71,6 +73,10 @@
     "nodemon": "^2.0.7",
     "sass-loader": "^10.1.1",
     "sass-mq": "^5.0.1",
+    "stylelint": "^13.12.0",
+    "stylelint-config-prettier": "^8.0.2",
+    "stylelint-config-standard": "^21.0.0",
+    "stylelint-scss": "^3.19.0",
     "ts-jest": "^26.5.4",
     "uslug": "^1.0.4",
     "vue-jest": "^3.0.7"

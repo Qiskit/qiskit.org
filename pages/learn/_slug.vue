@@ -45,6 +45,7 @@ export default class LearnEntry extends QiskitPage {
 .learn-entry {
   &__header {
     @include responsive-grid-bg-strip('/images/grid/grid-hero-learn.svg', auto, 28rem);
+
     min-height: 28rem;
 
     @include mq($until: large) {
@@ -53,6 +54,7 @@ export default class LearnEntry extends QiskitPage {
 
     &__container {
       @include contained();
+
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -70,23 +72,27 @@ export default class LearnEntry extends QiskitPage {
 
   &__content {
     @include contained();
+
     background-color: transparent;
     background-image: none;
 
     // Same as copy__paragraph
     p {
       @include type-style('body-long-01');
+
       color: $text-color-light;
       margin-bottom: $layout-03;
       max-width: 9 * $column-size-large;
 
       @include mq($from: medium, $until: large) {
         @include type-style('label-01');
+
         margin-bottom: $layout-01;
       }
 
       @include mq($until: medium) {
         @include type-style('label-01');
+
         margin-bottom: $layout-01;
       }
     }
@@ -94,6 +100,7 @@ export default class LearnEntry extends QiskitPage {
     // Same as copy__link
     a {
       @include type-style('body-long-01');
+
       color: $link-color-tertiary;
       text-decoration: none;
 
@@ -119,6 +126,7 @@ export default class LearnEntry extends QiskitPage {
 
       &::before {
         @include type-style('display-02');
+
         content: '”';
         color: $blockquote-text-color;
         position: absolute;
@@ -143,17 +151,20 @@ export default class LearnEntry extends QiskitPage {
     // Same as copy__title
     h2 {
       @include type-style('expressive-heading-05');
+
       margin-bottom: $layout-03;
       color: $text-color-light;
 
       @include mq($from: medium, $until: large) {
         @include type-style('expressive-heading-03');
+
         font-weight: 300;
         margin-bottom: $layout-01;
       }
 
       @include mq($until: medium) {
         @include type-style('expressive-heading-03');
+
         font-weight: 300;
         margin-bottom: $layout-01;
       }
@@ -161,6 +172,7 @@ export default class LearnEntry extends QiskitPage {
 
     ul {
       @include type-style('body-long-01');
+
       list-style-type: '-';
       color: $text-color-light;
       margin-bottom: $layout-03;
@@ -168,11 +180,13 @@ export default class LearnEntry extends QiskitPage {
 
       @include mq($from: medium, $until: large) {
         @include type-style('label-01');
+
         margin-bottom: $layout-01;
       }
 
       @include mq($until: medium) {
         @include type-style('label-01');
+
         margin-bottom: $layout-01;
       }
 
@@ -192,6 +206,7 @@ export default class LearnEntry extends QiskitPage {
 
       td, th {
         @include type-style('body-long-01');
+
         border: 1px solid $cool-gray-20;
         color: $text-color-light;
         vertical-align: middle;
@@ -200,11 +215,13 @@ export default class LearnEntry extends QiskitPage {
 
         @include mq($from: medium, $until: large) {
           @include type-style('label-01');
+
           margin-bottom: $layout-01;
         }
 
         @include mq($until: medium) {
           @include type-style('label-01');
+
           padding: $spacing-03;
           margin-bottom: $layout-01;
         }
