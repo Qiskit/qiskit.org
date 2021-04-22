@@ -248,7 +248,7 @@ export default class FaqSection extends Vue {
     segment: { action: 'events-summer-school > faq > qiskit-twitter' }
   }
 
-  twitterIBMResearch = {
+  twitterIBMResearch: GeneralLink = {
     url: 'https://twitter.com/IBMResearch',
     segment: { action: 'events-summer-school > faq > ibmresearch-twitter' }
   }
