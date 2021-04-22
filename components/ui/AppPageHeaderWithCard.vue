@@ -8,12 +8,7 @@
               <slot name="title" />
             </h1>
             <div class="app-page-header__description">
-              <p
-                v-for="(paragraph, index) in description"
-                :key="index"
-                class="copy__paragraph"
-                v-text="paragraph"
-              />
+              <slot name="description" />
             </div>
           </div>
           <AppCta v-if="cta" v-bind="cta" />
@@ -43,7 +38,6 @@ import { GeneralLink } from '~/constants/appLinks'
 export default class AppPageHeaderWithCard extends Vue {
   @Prop({ type: String, required: true }) cardTitle!: string
   @Prop({ type: Object, required: true }) cta!: GeneralLink
-  @Prop({ type: Array, required: true }) description!: string[]
 }
 </script>
 
