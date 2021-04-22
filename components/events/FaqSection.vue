@@ -268,7 +268,7 @@ export default class FaqSection extends Vue {
     segment: { action: 'events-summer-school > faq > qiskit-youtube-subscribe' }
   }
 
-  joinqiskitslack = {
+  joinqiskitslack: GeneralLink = {
     url: 'https://ibm.co/joinqiskitslack',
     segment: { action: 'events-summer-school > faq > qiskit-slack-join' }
   }
