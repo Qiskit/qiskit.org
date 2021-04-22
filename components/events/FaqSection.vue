@@ -228,7 +228,7 @@ export default class FaqSection extends Vue {
     segment: { action: 'events-summer-school > faq > textbook-python-and-jupyter-notebooks' }
   }
 
-  linearAlgebra = {
+  linearAlgebra: GeneralLink = {
     url: 'https://qiskit.org/textbook/ch-prerequisites/linear_algebra.html',
     segment: { action: 'events-summer-school > faq > qiskit-linear-algebra' }
   }
