@@ -1,3 +1,6 @@
+import { MosaicElement } from '@/components/ui/AppMosaic.vue'
+import { DescriptionCard } from '@/components/ui/AppDescriptionCard.vue'
+
 const header = {
   titleLine1: 'Qiskit Global Summer School 2021:',
   titleLine2: 'Quantum Machine Learning',
@@ -30,7 +33,12 @@ const header = {
   }
 }
 
-const mosaic = {
+interface MosaicSection {
+  title: string,
+  tiles: MosaicElement[]
+}
+
+const mosaic: MosaicSection = {
   title: 'Quantum Learning & More',
   tiles: [
     {
@@ -88,7 +96,14 @@ const mosaic = {
   ]
 }
 
-const week1Schedule = [
+interface dailyAgenda {
+  day: string,
+  topic: string,
+  speaker: string,
+  format: string
+}
+
+const week1Schedule: dailyAgenda[] = [
   {
     day: 'Monday, July 12',
     topic: 'Vector Spaces, Tensor Products and Qubits',
@@ -193,7 +208,7 @@ const week1Schedule = [
   }
 ]
 
-const week2Schedule = [
+const week2Schedule: dailyAgenda[] = [
   {
     day: 'Monday, July 19',
     topic: 'Quantum Kernels',
@@ -310,14 +325,7 @@ const week2Schedule = [
   }
 ]
 
-interface AgendaSlot {
-  day: string,
-  topic: string,
-  speaker: string,
-  format: string
-}
-
-const scheduleToTableData = (slot: AgendaSlot) => ([
+const scheduleToTableData = (slot: dailyAgenda) => ([
   {
     component: 'span',
     styles: 'min-width: 10rem; display: inline-block; font-weight: bold;',
@@ -355,7 +363,12 @@ const agenda = {
   ]
 }
 
-const helpfulResources = {
+interface HelpfulResourcesSection {
+  title: string,
+  resources: DescriptionCard[]
+}
+
+const helpfulResources: HelpfulResourcesSection = {
   title: 'Resources',
   resources: [
     {
@@ -409,6 +422,5 @@ export {
   header,
   mosaic,
   agenda,
-  AgendaSlot,
   helpfulResources
 }
