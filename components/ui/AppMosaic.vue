@@ -191,7 +191,7 @@ export default class AppMosaic extends Vue {
 
       &-link {
         display: flex;
-        margin-top: 1em;
+        margin-top: $spacing-05;
       }
     }
   }
