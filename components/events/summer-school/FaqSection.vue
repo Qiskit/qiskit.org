@@ -7,14 +7,14 @@
           What are the pre-requisites for enrolling in the Summer School?
         </template>
         <template #content>
-          <p>
+          <p class="copy__paragraph">
             Minimal prerequisites are required for the Qiskit Global Summer School. If you know
             <AppLink v-bind="khanacademy">
               how to multiply two matrices
             </AppLink>
             , and have some programming experience in Python, you are ready for the Summer School.
           </p>
-          <p>
+          <p class="copy__paragraph">
             You can
             <AppLink v-bind="pythonAndJupyter">
               brush up on Python programming
@@ -33,7 +33,7 @@
           What are the application requirements for the Summer School?
         </template>
         <template #content>
-          <p>
+          <p class="copy__paragraph">
             There is no application or pre-registration for the Qiskit Global Summer School 2021. Registration will be on a first come, first serve basis, with scheduled global availability. Once the Summer School registration reaches capacity, unfortunately we will not be able to register any additional students. Please submit an enquiry below if you have any additional questions!
           </p>
         </template>
@@ -44,7 +44,7 @@
           What is the time requirement for the Summer School? Is the scheduled fixed or flexible?
         </template>
         <template #content>
-          <p>
+          <p class="copy__paragraph">
             The summer school is made up of a total of 20 lectures, 5 lab sessions &amp; application exercises, in addition to the daily Live Q&amp;A Sessions and final Commencement Celebration. Participation and completion of all labs and lectures are required in order to receive a certificate of completion from the Summer School, with the optional Q&A Sessions and Commencement activities to enhance your Summer School experience. The schedule is not fixed, aside from final lab submission deadlines, and all students can participate on the schedule that works best for them. Students should anticipate a minimum time commitment of 30 hours for the full Summer School, but we recommend planning on 41 hours of participation, with additional time for discussion and collaboration with other students.
           </p>
         </template>
@@ -55,7 +55,7 @@
           I was a student at the Qiskit Global Summer School 2020 - should I enroll in the 2021 Summer School as well?
         </template>
         <template #content>
-          <p>
+          <p class="copy__paragraph">
             The 2021 Summer School will cover briefly introduce quantum computing before diving into classical and quantum machine learning, which was not covered in the 2020 Summer School, so you should enroll if you are interested!
           </p>
         </template>
@@ -66,7 +66,7 @@
           Will the lectures and labs be recorded? Or will they only be accessible live?
         </template>
         <template #content>
-          <p>
+          <p class="copy__paragraph">
             Lectures and labs sessions will all be recorded and available for live participation and post viewing, as well as the daily Q&A sessions.
           </p>
         </template>
@@ -77,7 +77,7 @@
           Do I need to download anything in order to participate?
         </template>
         <template #content>
-          <p>
+          <p class="copy__paragraph">
             Nope! Everything can be done in-browser.
           </p>
         </template>
@@ -88,7 +88,7 @@
           What is the cost to enroll in the Summer School?
         </template>
         <template #content>
-          <p>
+          <p class="copy__paragraph">
             There is no cost to participate in the summer school!
           </p>
         </template>
@@ -99,7 +99,7 @@
           Will I need any supplies or equipment in order to participate?
         </template>
         <template #content>
-          <p>
+          <p class="copy__paragraph">
             You will need an operating computer with a reliable internet connection and either a mobile device or webcam/microphone on your computer to communicate with mentors and other students. You will need to be able to view seminars and connect virtually. Other than that, you just need to bring yourself
           </p>
         </template>
@@ -110,7 +110,7 @@
           Is there an age limit to participate in the Summer School?
         </template>
         <template #content>
-          <p>
+          <p class="copy__paragraph">
             The age limit for Qiskit Global Summer School 2021 is 14. If you are under the age limit, but still want to be part of the community, please check out other ways you can get connected, and other events that may be available in your area!
           </p>
         </template>
@@ -121,7 +121,7 @@
           I'm interested in hosting my own summer school or implementing Qiskit into my coursework - Where can I learn more?
         </template>
         <template #content>
-          <p>
+          <p class="copy__paragraph">
             Explore IBM Quantums Educators Program
             <AppLink v-bind="qCEducators">
               online here
@@ -140,7 +140,7 @@
           How do I connect more with the Quantum Community?
         </template>
         <template #content>
-          <p>
+          <p class="copy__paragraph">
             There are several different ways you can connect with the IBM Quantum Community - depending on your preference. You can
             <AppLink v-bind="twitterQiskit">
               follow Qiskit
@@ -164,7 +164,7 @@
             for the latest video content and our weekly live Seminar Series.
           </p>
 
-          <p>
+          <p class="copy__paragraph">
             If you want to collaborate and connect with other members of the community, and participate in some of the ongoing conversations about quantum computing, you will want to
             <AppLink v-bind="joinqiskitslack">
               check out our ever-growing Slack Community
@@ -179,7 +179,7 @@
           Are there any upcoming events in my area that I can participate in?
         </template>
         <template #content>
-          <p>
+          <p class="copy__paragraph">
             All of our announced
             <AppLink v-bind="qiskitEvents">
               upcoming events are listed on qiskit.org
@@ -198,7 +198,7 @@
           Still have more questions?
         </template>
         <template #content>
-          <p>
+          <p class="copy__paragraph">
             For any questions about the summer school, please submit your questions using the form below. For all other enquiries, feel free to email us directly at
             <AppLink v-bind="mailtoQiskit">
               qiskit.events@us.ibm.com
@@ -308,15 +308,6 @@ export default class FaqSection extends Vue {
 
     .bx--accordion__arrow {
       fill: $text-color;
-    }
-
-    .bx--accordion__content {
-      @extend .copy__paragraph;
-
-      max-width: none;
-      > p + p {
-        margin-top: 1.43em;
-      }
     }
   }
 }
