@@ -170,19 +170,6 @@ export default class SummerSchoolPage extends QiskitPage {
   // stylelint-disable selector-pseudo-element-no-unknown
   ::v-deep {
   // stylelint-enable selector-pseudo-element-no-unknown
-    .bx--accordion__title {
-      color: $text-color;
-    }
-
-    .bx--accordion__heading:hover,
-    .bx--accordion__heading:hover::before {
-      background-color: $background-color-lighter;
-    }
-
-    .bx--accordion__arrow {
-      fill: $text-color;
-    }
-
     & a.bx--tabs__nav-link {
       color: $text-color-light;
       border-bottom-color: $border-color;
