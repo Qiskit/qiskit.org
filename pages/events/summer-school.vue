@@ -44,7 +44,8 @@
         <cv-tab
           v-for="week in agendaData.weeks"
           :key="week.tabName"
-          :label="week.tabName">
+          :label="week.tabName"
+        >
           <AppDataTable
             class="summer-school-page__section"
             :columns="agendaColumnsDataTable"
@@ -166,7 +167,9 @@ export default class SummerSchoolPage extends QiskitPage {
 <style lang="scss" scoped>
 // overrides
 .summer-school-page {
+  // stylelint-disable selector-pseudo-element-no-unknown
   ::v-deep {
+  // stylelint-enable selector-pseudo-element-no-unknown
     .bx--accordion__title {
       color: $text-color;
     }

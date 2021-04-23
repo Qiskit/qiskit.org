@@ -294,7 +294,9 @@ export default class FaqSection extends Vue {
 @import "~/assets/scss/layout/_copy.scss";
 
 .faq__section {
+  // stylelint-disable selector-pseudo-element-no-unknown
   ::v-deep {
+  // stylelint-enable selector-pseudo-element-no-unknown
     .bx--accordion__title {
       color: $text-color;
     }
