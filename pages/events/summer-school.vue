@@ -1,87 +1,87 @@
 <template>
   <main class="summer-school-page">
     <AppPageHeaderWithCard
-      :description="eventData.header.description"
-      :cta="eventData.header.cta"
-      :card-title="eventData.header.cardSectionHeading"
-      :style="`order: ${eventData.header.pageOrder}`"
+      :cta="headerData.cta"
+      :card-title="headerData.cardSectionHeading"
     >
       <template slot="title">
-        {{ eventData.header.titleLine1 }}
+        {{ headerData.titleLine1 }}
         <br>
-        {{ eventData.header.titleLine2 }}
+        {{ headerData.titleLine2 }}
+      </template>
+      <template slot="description">
+        <p class="copy__paragraph">
+          The Qiskit Global Summer School 2021 is a two-week intensive summer school designed to empower the next generation of quantum researchers and developers with the skills and know-how to explore quantum applications on their own. This second-annual course, made up of twenty lectures, five applied lab exercises, hands-on mentorship, and live Q&A sessions, focuses on developing hands-on experience and understanding of quantum machine learning.
+        </p>
+        <p class="copy__paragraph">
+          Registration will open on May 26, 2021 at 12:00 PM EST. Please follow
+          <AppLink v-bind="headerData.qiskitTwitterLink">
+            Qiskit Twitter
+          </AppLink>
+          for more details and updates. For any questions, please check out our FAQ or submit an enquiry using the form below!
+        </p>
+        <p class="copy__paragraph">
+          Speakers will be announced soon!
+        </p>
       </template>
       <template slot="card">
-        <EventCard v-bind="eventData.header.card" vertical-layout>
-          {{ eventData.header.card.description }}
+        <EventCard v-bind="headerData.card" vertical-layout>
+          {{ headerData.card.description }}
         </EventCard>
       </template>
     </AppPageHeaderWithCard>
 
     <AppMosaicSection
       class="summer-school-page__section"
-      :title="eventData.mosaic.title"
-      :elements="eventData.mosaic.tiles"
-      :style="`order: ${eventData.mosaic.pageOrder}`"
+      :title="mosaicData.title"
+      :elements="mosaicData.tiles"
     />
 
-    <section
-      class="summer-school-page__section"
-      :style="`order: ${eventData.agenda.pageOrder}`"
-    >
-      <h2 class="copy__title" v-text="eventData.agenda.title" />
-      <p class="copy__paragraph" v-text="eventData.agenda.subtitle" />
+    <section class="summer-school-page__section">
+      <h2 class="copy__title" v-text="agendaData.title" />
+      <p class="copy__paragraph" v-text="agendaData.subtitle" />
       <cv-tabs>
-        <cv-tab :label="eventData.agenda.week1.tabName">
+        <cv-tab
+          v-for="week in agendaData.weeks"
+          :key="week.tabName"
+          :label="week.tabName"
+        >
           <AppDataTable
             class="summer-school-page__section"
             :columns="agendaColumnsDataTable"
-            :elements="eventData.agenda.week1.tableData"
-          />
-        </cv-tab>
-        <cv-tab :label="eventData.agenda.week2.tabName">
-          <AppDataTable
-            class="summer-school-page__section"
-            :columns="agendaColumnsDataTable"
-            :elements="eventData.agenda.week2.tableData"
+            :elements="week.tableData"
           />
         </cv-tab>
       </cv-tabs>
     </section>
 
-    <AccordionSection
-      :document="faqData"
-      class="summer-school-page__section"
-      :style="`order: ${eventData.faq.pageOrder}`"
-    />
+    <FaqSection class="summer-school-page__section" />
 
     <AppHelpfulResourcesSection
       class="summer-school-page__section"
-      :title="eventData.helpfulResources.title"
-      :resources="eventData.helpfulResources.resources"
-      :style="`order: ${eventData.helpfulResources.pageOrder}`"
+      :title="helpfulResourcesData.title"
+      :resources="helpfulResourcesData.resources"
     />
   </main>
 </template>
 
 <script lang="ts">
 import { Component } from 'vue-property-decorator'
-import { Context } from '@nuxt/types'
-import { IContentDocument } from '@nuxt/content/types/content'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
-
-interface AgendaSlot {
-  day: string,
-  topic: string,
-  speaker: string,
-  format: string
-}
+import {
+  header,
+  mosaic,
+  agenda,
+  helpfulResources
+} from '~/constants/summerSchool2021Content'
 
 @Component({
   head () {
-    const title = this.$data?.eventData.metadata.title
-    const description = this.$data?.eventData.metadata.description
-    const image = this.$data?.eventData.metadata.image
+    const title = 'Qiskit Global Summer School 2021'
+    const description = `The Qiskit Global Summer School 2021 is a two-week intensive summer school
+    designed to empower the next generation of quantum researchers and developers with the skills
+    and know-how to explore quantum applications on their own`
+    const image = '/images/events/summer-school/summer-school-logo.png'
 
     return {
       title,
@@ -133,68 +133,20 @@ interface AgendaSlot {
         }
       ]
     }
-  },
-  async asyncData (context: Context) {
-    const eventData = await context.$content('events/summer-school-2021')
-      .fetch()
-      .catch((_) => {
-        context.error({ statusCode: 404, message: 'Event not found' })
-      }) as IContentDocument
-    const faqData = await context.$content('events/summer-school-2021-page/faq')
-      .fetch()
-      .catch((_) => {
-        context.error({ statusCode: 404, message: 'Event section not found' })
-      }) as IContentDocument
-
-    let idx = 0
-    for (const elem in eventData) {
-      if (typeof eventData[elem] === 'object') {
-        eventData[elem].pageOrder = idx
-        idx++
-      }
-    }
-
-    const scheduleToTableData = (slot: AgendaSlot) => ([
-      {
-        component: 'span',
-        styles: 'min-width: 10rem; display: inline-block; font-weight: bold;',
-        data: slot.day
-      },
-      {
-        component: 'span',
-        styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
-        data: slot.topic
-      },
-      {
-        component: 'span',
-        styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
-        data: slot.speaker
-      },
-      {
-        component: 'span',
-        styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
-        data: slot.format
-      }
-    ])
-
-    eventData.agenda.week1.tableData = eventData.agenda.week1.schedule.map(scheduleToTableData)
-    eventData.agenda.week2.tableData = eventData.agenda.week2.schedule.map(scheduleToTableData)
-
-    return {
-      eventData,
-      faqData
-    }
   }
 })
 export default class SummerSchoolPage extends QiskitPage {
   routeName = 'summer-school'
   agendaColumnsDataTable: string[] = ['Day', 'Topic', 'Speaker', 'Format']
+  headerData = header
+  mosaicData = mosaic
+  agendaData = agenda
+  helpfulResourcesData = helpfulResources
 }
 </script>
 
 <style lang="scss" scoped>
 .summer-school-page {
-  color: $text-color;
   display: flex;
   flex-direction: column;
 
@@ -215,20 +167,9 @@ export default class SummerSchoolPage extends QiskitPage {
 <style lang="scss" scoped>
 // overrides
 .summer-school-page {
+  // stylelint-disable selector-pseudo-element-no-unknown
   ::v-deep {
-    .bx--accordion__title {
-      color: $text-color;
-    }
-
-    .bx--accordion__heading:hover,
-    .bx--accordion__heading:hover::before {
-      background-color: $background-color-lighter;
-    }
-
-    .bx--accordion__arrow {
-      fill: $text-color;
-    }
-
+  // stylelint-enable selector-pseudo-element-no-unknown
     & a.bx--tabs__nav-link {
       color: $text-color-light;
       border-bottom-color: $border-color;
