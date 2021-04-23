@@ -1,8 +1,6 @@
 <template>
   <section class="faq__section">
-    <h2 class="copy__title">
-      Frequently asked questions
-    </h2>
+    <h2 class="copy__title" v-text="'Frequently asked questions'" />
     <cv-accordion align="end">
       <cv-accordion-item>
         <template #title>

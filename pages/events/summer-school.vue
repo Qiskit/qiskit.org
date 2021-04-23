@@ -37,10 +37,7 @@
       :elements="mosaicData.tiles"
     />
 
-    <section
-      class="summer-school-page__section"
-      :style="`order: ${agendaData.pageOrder}`"
-    >
+    <section class="summer-school-page__section">
       <h2 class="copy__title" v-text="agendaData.title" />
       <p class="copy__paragraph" v-text="agendaData.subtitle" />
       <cv-tabs>
@@ -149,7 +146,6 @@ export default class SummerSchoolPage extends QiskitPage {
 
 <style lang="scss" scoped>
 .summer-school-page {
-  color: $text-color;
   display: flex;
   flex-direction: column;
 
