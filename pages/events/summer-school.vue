@@ -1,14 +1,13 @@
 <template>
   <main class="summer-school-page">
     <AppPageHeaderWithCard
-      :description="eventData.header.description"
-      :cta="eventData.header.cta"
-      :card-title="eventData.header.cardSectionHeading"
+      :cta="headerData.cta"
+      :card-title="headerData.cardSectionHeading"
     >
       <template slot="title">
-        {{ eventData.header.titleLine1 }}
+        {{ headerData.titleLine1 }}
         <br>
-        {{ eventData.header.titleLine2 }}
+        {{ headerData.titleLine2 }}
       </template>
       <template slot="description">
         <p class="copy__paragraph">
@@ -16,7 +15,7 @@
         </p>
         <p class="copy__paragraph">
           Registration will open on May 26, 2021 at 12:00 PM EST. Please follow
-          <AppLink v-bind="eventData.header.qiskitTwitterLink">
+          <AppLink v-bind="headerData.qiskitTwitterLink">
             Qiskit Twitter
           </AppLink>
           for more details and updates. For any questions, please check out our FAQ or submit an enquiry using the form below!
@@ -26,37 +25,33 @@
         </p>
       </template>
       <template slot="card">
-        <EventCard v-bind="eventData.header.card" vertical-layout>
-          {{ eventData.header.card.description }}
+        <EventCard v-bind="headerData.card" vertical-layout>
+          {{ headerData.card.description }}
         </EventCard>
       </template>
     </AppPageHeaderWithCard>
 
     <AppMosaicSection
       class="summer-school-page__section"
-      :title="eventData.mosaic.title"
-      :elements="eventData.mosaic.tiles"
+      :title="mosaicData.title"
+      :elements="mosaicData.tiles"
     />
 
     <section
       class="summer-school-page__section"
-      :style="`order: ${eventData.agenda.pageOrder}`"
+      :style="`order: ${agendaData.pageOrder}`"
     >
-      <h2 class="copy__title" v-text="eventData.agenda.title" />
-      <p class="copy__paragraph" v-text="eventData.agenda.subtitle" />
+      <h2 class="copy__title" v-text="agendaData.title" />
+      <p class="copy__paragraph" v-text="agendaData.subtitle" />
       <cv-tabs>
-        <cv-tab :label="eventData.agenda.week1.tabName">
+        <cv-tab
+          v-for="week in agendaData.weeks"
+          :key="week.tabName"
+          :label="week.tabName">
           <AppDataTable
             class="summer-school-page__section"
             :columns="agendaColumnsDataTable"
-            :elements="eventData.agenda.week1.tableData"
-          />
-        </cv-tab>
-        <cv-tab :label="eventData.agenda.week2.tabName">
-          <AppDataTable
-            class="summer-school-page__section"
-            :columns="agendaColumnsDataTable"
-            :elements="eventData.agenda.week2.tableData"
+            :elements="week.tableData"
           />
         </cv-tab>
       </cv-tabs>
@@ -66,8 +61,8 @@
 
     <AppHelpfulResourcesSection
       class="summer-school-page__section"
-      :title="eventData.helpfulResources.title"
-      :resources="eventData.helpfulResources.resources"
+      :title="helpfulResourcesData.title"
+      :resources="helpfulResourcesData.resources"
     />
   </main>
 </template>
@@ -75,13 +70,19 @@
 <script lang="ts">
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
-import * as EventContent from '~/constants/summerSchool2021Content'
+import {
+  metadata,
+  header,
+  mosaic,
+  agenda,
+  helpfulResources
+} from '~/constants/summerSchool2021Content'
 
 @Component({
   head () {
-    const title = EventContent.metadata.title
-    const description = EventContent.metadata.description
-    const image = EventContent.metadata.image
+    const title = metadata.title
+    const description = metadata.description
+    const image = metadata.image
 
     return {
       title,
@@ -138,7 +139,10 @@ import * as EventContent from '~/constants/summerSchool2021Content'
 export default class SummerSchoolPage extends QiskitPage {
   routeName = 'summer-school'
   agendaColumnsDataTable: string[] = ['Day', 'Topic', 'Speaker', 'Format']
-  eventData = EventContent
+  headerData = header
+  mosaicData = mosaic
+  agendaData = agenda
+  helpfulResourcesData = helpfulResources
 }
 </script>
 

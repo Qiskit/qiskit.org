@@ -350,14 +350,16 @@ const scheduleToTableData = (slot: AgendaSlot) => ([
 const agenda = {
   title: 'Curriculum',
   subtitle: '*Final agenda and syllabus subject to change',
-  week1: {
-    tabName: 'Week 1',
-    tableData: week1Schedule.map(scheduleToTableData)
-  },
-  week2: {
-    tabName: 'Week 2',
-    tableData: week2Schedule.map(scheduleToTableData)
-  }
+  weeks: [
+    {
+      tabName: 'Week 1',
+      tableData: week1Schedule.map(scheduleToTableData)
+    },
+    {
+      tabName: 'Week 2',
+      tableData: week2Schedule.map(scheduleToTableData)
+    }
+  ]
 }
 
 const helpfulResources = {
