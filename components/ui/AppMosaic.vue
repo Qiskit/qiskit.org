@@ -2,7 +2,7 @@
   <section class="app-mosaic">
     <dl class="app-mosaic__layout">
       <div
-        v-for="{ position, title, description, image} in mosaicElements"
+        v-for="{ position, title, description, image, cta } in mosaicElements"
         :key="title"
         class="app-mosaic__element"
         :class="`app-mosaic__element_${position}`"
@@ -21,6 +21,13 @@
             v-html="description"
           />
           <!-- estlint-enable -->
+          <AppLink
+            v-if="cta"
+            v-bind="cta"
+            class="app-mosaic__element-copy-link copy__link"
+          >
+            {{ cta.label }}
+          </AppLink>
         </div>
         <div
           v-if="image"
@@ -36,12 +43,14 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
+import { GeneralLink } from '~/constants/appLinks'
 
 export type MosaicElement = {
   position: string,
   title: string,
   description: string,
-  image: string
+  image: string,
+  cta?: GeneralLink
 }
 
 @Component
@@ -178,6 +187,11 @@ export default class AppMosaic extends Vue {
         @include type-style('body-long-01');
 
         color: $text-color-light;
+      }
+
+      &-link {
+        display: flex;
+        margin-top: 1em;
       }
     }
   }
