@@ -7,8 +7,6 @@ module.exports = {
   rules: {
     'at-rule-no-unknown': null,
     'scss/at-rule-no-unknown': true,
-    // To ignore valid ::v-deep selector:
-    // https://github.com/bencodezen/vue-enterprise-boilerplate/issues/190
     'selector-pseudo-element-no-unknown': [
       true,
       {

@@ -167,9 +167,8 @@ export default class SummerSchoolPage extends QiskitPage {
 <style lang="scss" scoped>
 // overrides
 .summer-school-page {
-  // stylelint-disable selector-pseudo-element-no-unknown
   ::v-deep {
-  // stylelint-enable selector-pseudo-element-no-unknown
+    // TODO: Extract styles like "_checkbox" to be defined globally
     & a.bx--tabs__nav-link {
       color: $text-color-light;
       border-bottom-color: $border-color;

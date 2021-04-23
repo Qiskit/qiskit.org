@@ -1,6 +1,8 @@
 <template>
   <section class="faq-section">
-    <h2 class="copy__title" v-text="'Frequently asked questions'" />
+    <h2 class="copy__title">
+      Frequently asked questions
+    </h2>
     <cv-accordion align="end">
       <cv-accordion-item>
         <template #title>
@@ -215,7 +217,6 @@ import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 import { SegmentData } from '~/constants/appLinks'
 
-// GeneralLink does not fit. 'label' is not necessary
 interface TrackedLink {
   url: string,
   segment: SegmentData
@@ -294,9 +295,7 @@ export default class FaqSection extends Vue {
 @import "~/assets/scss/layout/_copy.scss";
 
 .faq-section {
-  // stylelint-disable selector-pseudo-element-no-unknown
   ::v-deep {
-  // stylelint-enable selector-pseudo-element-no-unknown
     .bx--accordion__title {
       color: $text-color;
     }
