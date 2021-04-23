@@ -1,5 +1,5 @@
 <template>
-  <section class="faq__section">
+  <section class="faq-section">
     <h2 class="copy__title" v-text="'Frequently asked questions'" />
     <cv-accordion align="end">
       <cv-accordion-item>
@@ -293,7 +293,7 @@ export default class FaqSection extends Vue {
 <style lang="scss" scoped>
 @import "~/assets/scss/layout/_copy.scss";
 
-.faq__section {
+.faq-section {
   // stylelint-disable selector-pseudo-element-no-unknown
   ::v-deep {
   // stylelint-enable selector-pseudo-element-no-unknown
