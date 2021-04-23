@@ -71,7 +71,6 @@
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import {
-  metadata,
   header,
   mosaic,
   agenda,
@@ -80,9 +79,11 @@ import {
 
 @Component({
   head () {
-    const title = metadata.title
-    const description = metadata.description
-    const image = metadata.image
+    const title = 'Qiskit Global Summer School 2021'
+    const description = `The Qiskit Global Summer School 2021 is a two-week intensive summer school
+    designed to empower the next generation of quantum researchers and developers with the skills
+    and know-how to explore quantum applications on their own`
+    const image = '/images/events/summer-school/summer-school-logo.png'
 
     return {
       title,
