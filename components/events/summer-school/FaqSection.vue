@@ -217,7 +217,6 @@ import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 import { SegmentData } from '~/constants/appLinks'
 
-// GeneralLink does not fit. 'label' is not necessary
 interface TrackedLink {
   url: string,
   segment: SegmentData
