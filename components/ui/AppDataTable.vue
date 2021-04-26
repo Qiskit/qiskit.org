@@ -72,6 +72,6 @@ export default class AppDataTable extends Vue {
 
 .bx--data-table li {
   list-style-type: disc;
-  margin-left: 1.2rem;
+  margin-left: $spacing-06;
 }
 </style>
