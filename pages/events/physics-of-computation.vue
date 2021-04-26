@@ -223,7 +223,7 @@ export default class PhysicsOfComputationPage extends QiskitPage {
         <li ${this.bulletPointStyle}>1981 and The Beginnings of Quantum Information (Charlie Bennett - IBM)</li>
         <li ${this.bulletPointStyle}>The Development of Quantum Algorithms and Error Correction (Peter Shor - MIT)</li>
         <li ${this.bulletPointStyle}>A Brief History of Superconducting Qubits (Steve Girvin - Yale University)</li>
-        <li ${this.bulletPointStyle}>The Future of Quantum Hardware (Jerry Chow, IBM)</li>
+        <li ${this.bulletPointStyle}>The Future of Quantum Hardware (Jerry Chow - IBM)</li>
       </ul>`
     },
     {
