@@ -8,13 +8,14 @@
       <cv-data-table-row v-for="(row, rowIndex) in elements" :key="`${rowIndex}`">
         <cv-data-table-cell v-for="({ component, styles, data}, elementIndex) in row" :key="`${elementIndex}`">
           <AppCta v-if="isAppCtaComponent(component)" kind="ghost" v-bind="data" :style="styles" />
+          <!-- eslint-disable vue/no-v-html -->
           <component
             :is="component"
             v-else
             :style="styles"
-          >
-            {{ data }}
-          </component>
+            v-html="data"
+          />
+          <!-- eslint-enable -->
         </cv-data-table-cell>
       </cv-data-table-row>
     </template>
