@@ -134,8 +134,8 @@ export default class PhysicsOfComputationPage extends QiskitPage {
   ]
 
   headerCTA = {
-    label: 'Submit a talk',
-    url: 'https://airtable.com/shr6UbEsEvinHfjct',
+    label: 'Stay informed',
+    url: 'https://airtable.com/shrvAA05xkYgSKajc',
     segment: {
       action: `${this.routeName} > header > submit-a-talk`
     }
