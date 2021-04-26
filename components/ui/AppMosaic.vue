@@ -186,12 +186,18 @@ export default class AppMosaic extends Vue {
         @include type-style('body-long-01');
 
         color: $text-color-light;
+
+        ::v-deep li {
+          list-style-type: disc;
+          margin-left: $spacing-06;
+        }
       }
 
       &-link {
         display: flex;
         margin-top: $spacing-05;
       }
+
     }
   }
 }

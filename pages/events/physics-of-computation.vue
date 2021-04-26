@@ -168,10 +168,11 @@ export default class PhysicsOfComputationPage extends QiskitPage {
     },
     {
       position: 'second',
-      title: 'A panel of experts: Then and Now',
-      description: `Watch a lively discussion between recognized scientists who will
-      bridge the gap between the past and the future of quantum information science and
-      computation.`,
+      title: 'The Future of Quantum Hardware',
+      description: `Jerry Chow, Director of Quantum Hardware System Development at IBM Quantum,
+      will discuss the engineering challenges that the quantum computing field must tackle across
+      the stack, what it takes to make quantum computing a practical reality, and IBM’s roadmap to
+      accomplish these goals in the next decade.`,
       image: '/images/events/physics-of-computation/mosaic-people-on-discussion.png'
     },
     {
@@ -181,27 +182,24 @@ export default class PhysicsOfComputationPage extends QiskitPage {
       current research and new developments across the field of quantum information
       science.<br/><br/>
       <ul>
-        <li style="list-style-type: disc; margin-left: 1.2rem">Aram Harrow from MIT will chair the track dedicated to Theory and Applications.</li>
-        <li style="list-style-type: disc; margin-left: 1.2rem">Sarah Sheldon from IBM will chair the track dedicated to Hardware and Experiment.</li>
+        <li>Aram Harrow from MIT will chair the track dedicated to Theory and Applications.</li>
+        <li>Sarah Sheldon from IBM will chair the track dedicated to Hardware and Experiment.</li>
       </ul>`,
       image: '/images/events/physics-of-computation/mosaic-ibm-quantum-chip.png'
     },
     {
       position: 'fourth',
-      title: 'Call for Submissions',
-      description: `<strong>Format:</strong> Submit a clear abstract
-        <a href="https://airtable.com/shr6UbEsEvinHfjct" target="_blank"
-        style="cursor:pointer; text-decoration: none; color: #0f62fe;">here</a>
-        (talks will be 15 minutes plus a 5-minute Q&A)<br/>
-        <strong>Review criteria:</strong> <em>(scored with equal weight)</em><br/>
-        <ul>
-          <li style="list-style-type: disc; margin-left: 1.2rem">Problem and potential influence on quantum information science</li>
-          <li style="list-style-type: disc; margin-left: 1.2rem">Technical approach and novelty</li>
-          <li style="list-style-type: disc; margin-left: 1.2rem">Clarity of abstract</li>
-        </ul>
-        <strong>Reviewers:</strong> Quantum researchers from IBM and MIT<br/>
-        <strong>Deadline for submission:</strong> March 31, 2021<br/>
-        <strong>Decision date:</strong> April 20, 2021`
+      title: 'A panel of experts: Then and Now',
+      description: `Watch a lively discussion between recognized scientists who will bridge the gap
+      between the past and the future of quantum information science and computation.<br>
+      <strong>Panelists include:</strong><br>
+      <ul>
+        <li>Dorit Aharonov (Hebrew University of Jerusalem)</li>
+        <li>Isaac Chuang (MIT)</li>
+        <li>Umesh Vazirani (University of California, Berkeley)</li>
+        <li>Will Oliver (MIT)</li>
+      </ul>
+      `
     }
   ]
 
@@ -226,13 +224,7 @@ export default class PhysicsOfComputationPage extends QiskitPage {
     },
     {
       time: '10:30 AM',
-      event: `A live panel that will bridge Then and Now. Featuring:<br>
-      <ul>
-        <li>Dorit Aharonov (Hebrew University of Jerusalem)</li>
-        <li>Isaac Chuang (MIT)</li>
-        <li>Umesh Vazirani (University of California, Berkeley)</li>
-        <li>Will Oliver (MIT)</li>
-      </ul>`
+      event: 'A live panel that will bridge Then and Now'
     },
     {
       time: '11:30 AM',
