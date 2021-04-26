@@ -191,7 +191,7 @@ export default class PhysicsOfComputationPage extends QiskitPage {
       position: 'fourth',
       title: 'A panel of experts: Then and Now',
       description: `Watch a lively discussion between recognized scientists who will bridge the gap
-      between the past and the future of quantum information science and computation.<br>
+      between the past and the future of quantum information science and computation.<br><br>
       <strong>Panelists include:</strong><br>
       <ul>
         <li>Dorit Aharonov (Hebrew University of Jerusalem)</li>
@@ -228,7 +228,7 @@ export default class PhysicsOfComputationPage extends QiskitPage {
     },
     {
       time: '11:30 AM',
-      event: 'The future of quantum hardware (Jerry Chow - IBM)'
+      event: 'The Future of Quantum Hardware (Jerry Chow - IBM)'
     },
     {
       time: '01:00 PM',
