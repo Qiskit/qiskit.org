@@ -217,13 +217,12 @@ export default class PhysicsOfComputationPage extends QiskitPage {
       and IBM Fellow at IBM Research.`
     },
     {
-      time: '09:00 AM',
+      time: '08:45 AM',
       event: `A series of keynote addresses about quantum information science in the 1980s<br>
       <ul>
         <li ${this.bulletPointStyle}>1981 and The Beginnings of Quantum Information (Charlie Bennett - IBM)</li>
         <li ${this.bulletPointStyle}>The Development of Quantum Algorithms and Error Correction (Peter Shor - MIT)</li>
         <li ${this.bulletPointStyle}>A Brief History of Superconducting Qubits (Steve Girvin - Yale University)</li>
-        <li ${this.bulletPointStyle}>The Future of Quantum Hardware (Jerry Chow - IBM)</li>
       </ul>`
     },
     {
@@ -238,7 +237,7 @@ export default class PhysicsOfComputationPage extends QiskitPage {
     },
     {
       time: '11:30 AM',
-      event: 'The future of quantum hardware'
+      event: 'The future of quantum hardware (Jerry Chow - IBM)'
     },
     {
       time: '01:00 PM',
