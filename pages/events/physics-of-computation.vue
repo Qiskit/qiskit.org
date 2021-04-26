@@ -122,7 +122,7 @@ export default class PhysicsOfComputationPage extends QiskitPage {
   headerDescription = [
     `QC40 is a one-day virtual event that will celebrate the 40th anniversary of the
     Physics of Computation Conference which was jointly organized by MIT and IBM, and
-    held at the MIT campus (Endicott House) in 1981.`,
+    held at the MIT Endicott House in 1981.`,
     `The conference was a defining moment in the history of quantum computation. At
     QC40, we will take a close look at the changes in quantum computing over the past
     40 years, with a panel discussion and keynote addresses by attendees from the original
