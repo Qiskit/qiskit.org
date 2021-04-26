@@ -208,6 +208,7 @@ export default class PhysicsOfComputationPage extends QiskitPage {
   // Data for the agenda section
   agendaSectionTitle: string = 'Event schedule'
 
+  bulletPointStyle: string = 'style="list-style-type: disc; margin-left: 1.2rem"'
   agenda: AgendaSlot[] = [
     {
       time: '08:30 AM',
@@ -219,20 +220,20 @@ export default class PhysicsOfComputationPage extends QiskitPage {
       time: '09:00 AM',
       event: `A series of keynote addresses about quantum information science in the 1980s<br>
       <ul>
-        <li style="list-style-type: disc; margin-left: 1.2rem">1981 and The Beginnings of Quantum Information (Charlie Bennett - IBM)</li>
-        <li style="list-style-type: disc; margin-left: 1.2rem">The Development of Quantum Algorithms and Error Correction (Peter Shor - MIT)</li>
-        <li style="list-style-type: disc; margin-left: 1.2rem">A Brief History of Superconducting Qubits (Steve Girvin - Yale University)</li>
-        <li style="list-style-type: disc; margin-left: 1.2rem">The Future of Quantum Hardware (Jerry Chow, IBM)</li>
+        <li ${this.bulletPointStyle}>1981 and The Beginnings of Quantum Information (Charlie Bennett - IBM)</li>
+        <li ${this.bulletPointStyle}>The Development of Quantum Algorithms and Error Correction (Peter Shor - MIT)</li>
+        <li ${this.bulletPointStyle}>A Brief History of Superconducting Qubits (Steve Girvin - Yale University)</li>
+        <li ${this.bulletPointStyle}>The Future of Quantum Hardware (Jerry Chow, IBM)</li>
       </ul>`
     },
     {
       time: '10:30 AM',
       event: `A live panel that will bridge Then and Now. Featuring:<br>
       <ul>
-        <li style="list-style-type: disc; margin-left: 1.2rem">Dorit Aharonov (Hebrew University of Jerusalem)</li>
-        <li style="list-style-type: disc; margin-left: 1.2rem">Isaac Chuang (MIT)</li>
-        <li style="list-style-type: disc; margin-left: 1.2rem">Umesh Vazirani (University of California, Berkeley)</li>
-        <li style="list-style-type: disc; margin-left: 1.2rem">Will Oliver (MIT)</li>
+        <li ${this.bulletPointStyle}>Dorit Aharonov (Hebrew University of Jerusalem)</li>
+        <li ${this.bulletPointStyle}>Isaac Chuang (MIT)</li>
+        <li ${this.bulletPointStyle}>Umesh Vazirani (University of California, Berkeley)</li>
+        <li ${this.bulletPointStyle}>Will Oliver (MIT)</li>
       </ul>`
     },
     {
