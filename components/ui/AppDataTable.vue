@@ -69,4 +69,9 @@ export default class AppDataTable extends Vue {
   border-top: none;
   border-bottom: 1px solid $border-color;
 }
+
+.bx--data-table li {
+  list-style-type: disc;
+  margin-left: 1.2rem;
+}
 </style>
