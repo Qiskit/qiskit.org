@@ -257,7 +257,7 @@ export default class PhysicsOfComputationPage extends QiskitPage {
       time: '12:10 PM',
       event: `Announcement – <a href="https://www.ibmquantumawards.com/#/event" target="_blank"
       style="cursor:pointer; text-decoration: none; color: #0f62fe;">IBM Quantum Awards: Open
-      Science Prize</a>`
+      Science Prize</a> winners`
     },
     {
       time: '12:20 PM',
