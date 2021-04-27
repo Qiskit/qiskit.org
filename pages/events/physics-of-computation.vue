@@ -134,10 +134,10 @@ export default class PhysicsOfComputationPage extends QiskitPage {
   ]
 
   headerCTA = {
-    label: 'Stay informed',
-    url: 'https://airtable.com/shrvAA05xkYgSKajc',
+    label: 'Register',
+    url: 'https://event.on24.com/wcc/r/3146756/28786C95E25E106FD4C81587B8286CC4',
     segment: {
-      action: `${this.routeName} > header > submit-a-talk`
+      action: `${this.routeName} > header > register`
     }
   }
 
