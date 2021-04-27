@@ -329,7 +329,9 @@ export default class PhysicsOfComputationPage extends QiskitPage {
   helpfulResources: DescriptionCard[] = [
     {
       title: 'Morning session',
-      description: 'Click on the link below to join us on the Qiskit YouTube channel at 8:30 AM.',
+      description: `Click on the link below to listen to keynotes, historical commentaries, and
+      live panel discussion on the Qiskit YouTube channel, starting at 8:30 AM EDT (no
+      registration needed).`,
       cta: {
         url: this.morningSessionYouTubeURL,
         label: 'Morning Session',
@@ -340,7 +342,9 @@ export default class PhysicsOfComputationPage extends QiskitPage {
     },
     {
       title: 'Afternoon session',
-      description: 'Click on the link below to join us on the ON24 platform at 01:30 PM.',
+      description: `Click on the link below to join us on the ON24 platform at 01:30 PM EDT and
+      listen to 2 tracks of contributed talks about hardware, experiment, theory and applications
+      (registration required).`,
       cta: {
         url: this.afternoonSessionRegisterURL,
         label: 'Afternoon Session',
