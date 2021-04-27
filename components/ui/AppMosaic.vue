@@ -75,7 +75,7 @@ export default class AppMosaic extends Vue {
 
     @include mq($from: medium, $until: large) {
       grid-template-columns: 1fr 1fr;
-      grid-template-rows: 26rem minmax(13rem, auto) minmax(12rem, auto);
+      grid-template-rows: minmax(26rem, auto) minmax(13rem, auto) minmax(12rem, auto);
       grid-template-areas:
         "a b"
         "c c"
@@ -186,6 +186,11 @@ export default class AppMosaic extends Vue {
         @include type-style('body-long-01');
 
         color: $text-color-light;
+
+        ::v-deep li {
+          list-style-type: disc;
+          margin-left: $spacing-06;
+        }
       }
 
       &-link {

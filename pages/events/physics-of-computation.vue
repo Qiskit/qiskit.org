@@ -30,10 +30,20 @@
     />
     <AppDataTableSection
       class="physics-of-computation-page__section"
-      :section-title="agendaSectionTitle"
+      :section-title="morningAgendaSectionTitle"
       :data-table-columns="agendaColumnsDataTable"
-      :data-table-elements="agendaElementsDataTable"
-    />
+      :data-table-elements="morningSessionElementsDataTable"
+    >
+      <AppCta kind="ghost" v-bind="morningSessionAgendaCTA" is-wider />
+    </AppDataTableSection>
+    <AppDataTableSection
+      class="physics-of-computation-page__section"
+      :section-title="afternoonAgendaSectionTitle"
+      :data-table-columns="agendaColumnsDataTable"
+      :data-table-elements="afternoonSessionElementsDataTable"
+    >
+      <AppCta kind="ghost" v-bind="afternoonSessionAgendaCTA" is-wider />
+    </AppDataTableSection>
     <AppHelpfulResourcesSection
       class="physics-of-computation-page__section"
       :title="helpfulResourcesSectionTitle"
@@ -47,6 +57,7 @@ import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import { DescriptionCard } from '~/components/ui/AppDescriptionCard.vue'
 import { TableRowElement } from '~/components/ui/AppDataTable.vue'
+import { GeneralLink } from '~/constants/appLinks'
 
 interface AgendaSlot {
   time: string,
@@ -116,13 +127,16 @@ interface AgendaSlot {
 export default class PhysicsOfComputationPage extends QiskitPage {
   routeName = 'physics-of-computation'
 
+  morningSessionYouTubeURL = 'https://youtu.be/GR6ANm6Z0yk'
+  afternoonSessionRegisterURL = 'https://event.on24.com/wcc/r/3146756/28786C95E25E106FD4C81587B8286CC4'
+
   // Data for the header section
   headerPrimaryTitle = 'QC40: Physics of Computation Conference'
   headerSecondaryTitle = '40th Anniversary'
   headerDescription = [
     `QC40 is a one-day virtual event that will celebrate the 40th anniversary of the
     Physics of Computation Conference which was jointly organized by MIT and IBM, and
-    held at the MIT campus (Endicott House) in 1981.`,
+    held at the MIT Endicott House in 1981.`,
     `The conference was a defining moment in the history of quantum computation. At
     QC40, we will take a close look at the changes in quantum computing over the past
     40 years, with a panel discussion and keynote addresses by attendees from the original
@@ -134,10 +148,10 @@ export default class PhysicsOfComputationPage extends QiskitPage {
   ]
 
   headerCTA = {
-    label: 'Submit a talk',
-    url: 'https://airtable.com/shr6UbEsEvinHfjct',
+    label: 'Register',
+    url: this.afternoonSessionRegisterURL,
     segment: {
-      action: `${this.routeName} > header > submit-a-talk`
+      action: `${this.routeName} > header > register`
     }
   }
 
@@ -149,15 +163,15 @@ export default class PhysicsOfComputationPage extends QiskitPage {
     location: 'Virtual event open to the public',
     date: 'May 6, 2021',
     time: '8:30am - 5:00pm EDT',
-    to: 'https://airtable.com/shrvAA05xkYgSKajc',
-    ctaLabel: 'Stay informed',
+    to: 'https://youtu.be/YGqBVnAPvSw',
+    ctaLabel: 'Official trailer',
     segment: {
-      action: `${this.routeName} > header > stay-informed`
+      action: `${this.routeName} > header > official-trailer`
     }
   }
 
   // Data for the mosaic section
-  mosaicSectionTitle = 'What is QC40?'
+  mosaicSectionTitle = 'What you will find at QC40'
   mosaicElements = [
     {
       position: 'first',
@@ -168,47 +182,47 @@ export default class PhysicsOfComputationPage extends QiskitPage {
     },
     {
       position: 'second',
-      title: 'A panel of experts: Then and Now',
-      description: `Watch a lively discussion between recognized scientists who will
-      bridge the gap between the past and the future of quantum information science and
-      computation.`,
-      image: '/images/events/physics-of-computation/mosaic-people-on-discussion.png'
-    },
-    {
-      position: 'third',
       title: 'Contributed talks: The latest in quantum information science ',
       description: `The afternoon will be packed with a wide range of talks illustrating
       current research and new developments across the field of quantum information
       science.<br/><br/>
       <ul>
-        <li style="list-style-type: disc; margin-left: 1.2rem">Aram Harrow from MIT will chair the track dedicated to Theory and Applications.</li>
-        <li style="list-style-type: disc; margin-left: 1.2rem">Sarah Sheldon from IBM will chair the track dedicated to Hardware and Experiment.</li>
+        <li>Aram Harrow from MIT will chair the track dedicated to Theory and Applications.</li>
+        <li>Sarah Sheldon from IBM will chair the track dedicated to Hardware and Experiment.</li>
       </ul>`,
+      image: '/images/events/physics-of-computation/mosaic-people-on-discussion.png'
+    },
+    {
+      position: 'third',
+      title: 'The Future of Quantum Hardware',
+      description: `Jerry Chow, Director of Quantum Hardware System Development at IBM Quantum,
+      will discuss the engineering challenges that the quantum computing field must tackle across
+      the stack, what it takes to make quantum computing a practical reality, and IBM’s roadmap to
+      accomplish these goals in the next decade.`,
       image: '/images/events/physics-of-computation/mosaic-ibm-quantum-chip.png'
     },
     {
       position: 'fourth',
-      title: 'Call for Submissions',
-      description: `<strong>Format:</strong> Submit a clear abstract
-        <a href="https://airtable.com/shr6UbEsEvinHfjct" target="_blank"
-        style="cursor:pointer; text-decoration: none; color: #0f62fe;">here</a>
-        (talks will be 15 minutes plus a 5-minute Q&A)<br/>
-        <strong>Review criteria:</strong> <em>(scored with equal weight)</em><br/>
-        <ul>
-          <li style="list-style-type: disc; margin-left: 1.2rem">Problem and potential influence on quantum information science</li>
-          <li style="list-style-type: disc; margin-left: 1.2rem">Technical approach and novelty</li>
-          <li style="list-style-type: disc; margin-left: 1.2rem">Clarity of abstract</li>
-        </ul>
-        <strong>Reviewers:</strong> Quantum researchers from IBM and MIT<br/>
-        <strong>Deadline for submission:</strong> March 31, 2021<br/>
-        <strong>Decision date:</strong> April 20, 2021`
+      title: 'A panel of experts: Then and Now',
+      description: `Watch a lively discussion between recognized scientists who will bridge the gap
+      between the past and the future of quantum information science and computation.<br><br>
+      <strong>Panelists include:</strong><br>
+      <ul>
+        <li>Dorit Aharonov (Hebrew University of Jerusalem)</li>
+        <li>Isaac Chuang (MIT)</li>
+        <li>Umesh Vazirani (University of California, Berkeley)</li>
+        <li>Will Oliver (MIT)</li>
+        <li>Zaira Nazario (IBM)</li>
+      </ul>
+      `
     }
   ]
 
   // Data for the agenda section
-  agendaSectionTitle: string = 'Event schedule'
+  morningAgendaSectionTitle = 'Morning Session'
+  afternoonAgendaSectionTitle = 'Afternoon Session'
 
-  agenda: AgendaSlot[] = [
+  morningAgenda: AgendaSlot[] = [
     {
       time: '08:30 AM',
       event: `An introduction from Olivia Lanes PhD, experimental researcher and
@@ -216,65 +230,126 @@ export default class PhysicsOfComputationPage extends QiskitPage {
       and IBM Fellow at IBM Research.`
     },
     {
-      time: '09:00 AM',
-      event: 'A series of keynote addresses about quantum information science in the 1980s'
+      time: '08:45 AM',
+      event: `A series of keynote addresses about quantum information science in the 1980s<br>
+      <ul>
+        <li>1981 and The Beginnings of Quantum Information (Charlie Bennett - IBM)</li>
+        <li>The Development of Quantum Algorithms and Error Correction (Peter Shor - MIT)</li>
+        <li>A Brief History of Superconducting Qubits (Steve Girvin - Yale University)</li>
+      </ul>`
     },
     {
       time: '10:30 AM',
-      event: 'A live panel that will bridge Then and Now'
+      event: `A live panel that will bridge Then and Now. Featuring:<br>
+      <ul>
+        <li>Dorit Aharonov (Hebrew University of Jerusalem)</li>
+        <li>Isaac Chuang (MIT)</li>
+        <li>Umesh Vazirani (University of California, Berkeley)</li>
+        <li>Will Oliver (MIT)</li>
+        <li>Zaira Nazario (IBM)</li>
+      </ul>`
     },
     {
       time: '11:30 AM',
-      event: 'The future of quantum hardware'
+      event: 'The Future of Quantum Hardware (Jerry Chow - IBM)'
     },
     {
-      time: '01:00 PM',
-      event: 'Conference Track 1: Series of contributed talks focusing on Hardware and Experiment'
+      time: '12:10 PM',
+      event: `Announcement – <a href="https://www.ibmquantumawards.com/#/event" target="_blank"
+      style="cursor:pointer; text-decoration: none; color: #0f62fe;">IBM Quantum Awards: Open
+      Science Prize</a> winners`
     },
     {
-      time: '01:00 PM',
-      event: 'Conference Track 2: Series of contributed talks focusing on Theory and Applications'
+      time: '12:20 PM',
+      event: 'IBM Research Leadership remarks'
+    },
+    {
+      time: '12:30 PM',
+      event: 'Lunch break'
     }
   ]
 
-  agendaElementsDataTable: TableRowElement[][] = this.agenda.map(slot => ([
+  afternoonAgenda: AgendaSlot[] = [
     {
-      component: 'span',
-      styles: 'min-width: 5rem; display: inline-block; font-weight: bold;',
-      data: slot.time
+      time: '01:30 PM',
+      event: 'Introduction to Track 1 – Contributed Talks on Hardware and Experiment (Sarah Sheldon - IBM)'
     },
     {
-      component: 'span',
-      styles: 'min-width: 20rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
-      data: slot.event
+      time: '01:55 PM',
+      event: 'Introduction to Track 2 – Contributed Talks on Theory and Applications (Aram Harrow - MIT)'
+    },
+    {
+      time: '02:20 PM',
+      event: 'Two parallel tracks (8 to 10 contributed talks each)'
+    },
+    {
+      time: '05:30 PM',
+      event: 'Closing Remarks'
     }
-  ]))
+  ]
+
+  morningSessionElementsDataTable = this.getDataTableElements(this.morningAgenda)
+  afternoonSessionElementsDataTable = this.getDataTableElements(this.afternoonAgenda)
+
+  getDataTableElements (agenda: AgendaSlot[]) : TableRowElement[][] {
+    return agenda.map(slot => ([
+      {
+        component: 'span',
+        styles: 'min-width: 5rem; display: inline-block; font-weight: bold;',
+        data: slot.time
+      },
+      {
+        component: 'span',
+        styles: 'min-width: 20rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
+        data: slot.event
+      }
+    ]))
+  }
 
   agendaColumnsDataTable: string[] = ['Time (EDT)', 'Event']
+
+  morningSessionAgendaCTA: GeneralLink = {
+    url: this.morningSessionYouTubeURL,
+    label: 'Follow this session on YouTube (no registration needed)',
+    segment: {
+      action: `${this.routeName} > morning-session-section > youtube-morning-session`
+    }
+  }
+
+  afternoonSessionAgendaCTA: GeneralLink = {
+    url: this.afternoonSessionRegisterURL,
+    label: 'Register here to attend the afternoon session',
+    segment: {
+      action: `${this.routeName} > afternoon-session-section > register-afternoon-session`
+    }
+  }
 
   // Data for the helpful resources section
   helpfulResourcesSectionTitle = 'Take action now'
   helpfulResources: DescriptionCard[] = [
     {
-      title: 'Stay informed',
-      description: 'Click on the link below to stay informed about and attend QC40.',
+      title: 'Morning session',
+      description: `Click on the link below to listen to keynotes, historical commentaries, and
+      live panel discussion on the Qiskit YouTube channel, starting at 8:30 AM EDT (no
+      registration needed).`,
       cta: {
-        url: 'https://airtable.com/shrvAA05xkYgSKajc',
-        label: 'Stay informed',
+        url: this.morningSessionYouTubeURL,
+        label: 'Morning Session',
         segment: {
-          action: `${this.routeName} > helpful-resources > stay-informed`
+          action: `${this.routeName} > helpful-resources > youtube-morning-session`
         }
       }
     },
     {
-      title: 'Submit a talk',
-      description: `Abstract submissions for contributed talks will be accepted through
-      March 31. Click below for an opportunity to share your research project at QC40.`,
+      title: 'Afternoon session',
+      description: `Click on the link below to join us on the ON24 platform at 01:30 PM EDT and
+      listen to 2 tracks of contributed talks about hardware, experiment, theory and applications
+      (registration required).`,
       cta: {
-        url: 'https://airtable.com/shr6UbEsEvinHfjct',
-        label: 'Submit a talk',
+        url: this.afternoonSessionRegisterURL,
+        label: 'Afternoon Session',
         segment: {
-          action: `${this.routeName} > helpful-resources > submit-a-talk`
+          action: `${this.routeName} > helpful-resources > register-afternoon-session`
         }
       }
     },
