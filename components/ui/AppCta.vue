@@ -4,7 +4,8 @@
     class="app-cta"
     :class="[
       `app-cta_${kind}`,
-      `app-cta_${kind}_theme_${theme}`
+      `app-cta_${kind}_theme_${theme}`,
+      { 'app-cta_wider': isWider }
     ]"
     v-bind="$attrs"
     @click="$emit('click')"
@@ -30,6 +31,7 @@ export default class AppCta extends Vue {
   @Prop({ type: String, default: 'primary' }) kind!: 'primary'|'secondary'|'ghost'
   @Prop({ type: String, default: 'light' }) theme!: 'light'|'dark'
   @Prop({ type: String, default: '' }) label!: string
+  @Prop({ type: Boolean, default: false }) isWider!: boolean
 
   get iconPerLinkType (): string {
     const url = this.$attrs.url
@@ -76,6 +78,10 @@ export default class AppCta extends Vue {
   background-size: 200% 100%;
   background-position-x: 100%;
   transition: background-position-x 0.3s ease-out, color 0.3s ease-out;
+
+  &_wider {
+    width: 100%
+  }
 
   /*
     Per kind and theming styles

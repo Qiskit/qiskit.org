@@ -34,14 +34,13 @@
       :data-table-columns="agendaColumnsDataTable"
       :data-table-elements="morningSessionElementsDataTable"
     >
-      <AppCta
-        kind="ghost"
-        v-bind="morningSessionAgendaCTA"
-      />
+      <AppCta kind="ghost" v-bind="morningSessionAgendaCTA" is-wider />
     </AppDataTableSection>
     <section class="physics-of-computation-page__section">
       <h2 class="copy__title" v-text="afternoonAgendaSectionTitle" />
-      <AppLink v-bind="afternoonSessionAgendaCTA" v-text="afternoonSessionAgendaCTA.label" />
+      <p class="copy__paragraph">
+        <AppCta kind="ghost" v-bind="afternoonSessionAgendaCTA" is-wider />
+      </p>
       <AppDataTable :columns="agendaColumnsDataTable" :elements="afternoonSessionElementsDataTable" />
     </section>
     <AppHelpfulResourcesSection
