@@ -276,7 +276,7 @@ export default class PhysicsOfComputationPage extends QiskitPage {
     },
     {
       time: '01:55 PM',
-      event: 'Introduction to Track 2 – Contributed Talks on Theory/Applications (Aram Harrow - MIT)'
+      event: 'Introduction to Track 2 – Contributed Talks on Theory and Applications (Aram Harrow - MIT)'
     },
     {
       time: '02:20 PM',
@@ -318,7 +318,7 @@ export default class PhysicsOfComputationPage extends QiskitPage {
 
   afternoonSessionAgendaCTA: GeneralLink = {
     url: this.afternoonSessionRegisterURL,
-    label: 'Register to follow the afternoon session!',
+    label: 'Register here to attend the afternoon session',
     segment: {
       action: `${this.routeName} > afternoon-session-section > register-afternoon-session`
     }
