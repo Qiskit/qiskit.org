@@ -39,17 +39,11 @@
         v-bind="morningSessionAgendaCTA"
       />
     </AppDataTableSection>
-    <AppDataTableSection
-      class="physics-of-computation-page__section"
-      :section-title="afternoonAgendaSectionTitle"
-      :data-table-columns="agendaColumnsDataTable"
-      :data-table-elements="afternoonSessionElementsDataTable"
-    >
-      <AppCta
-        kind="ghost"
-        v-bind="afternoonSessionAgendaCTA"
-      />
-    </AppDataTableSection>
+    <section class="physics-of-computation-page__section">
+      <h2 class="copy__title" v-text="afternoonAgendaSectionTitle" />
+      <AppLink v-bind="afternoonSessionAgendaCTA" v-text="afternoonSessionAgendaCTA.label" />
+      <AppDataTable :columns="agendaColumnsDataTable" :elements="afternoonSessionElementsDataTable" />
+    </section>
     <AppHelpfulResourcesSection
       class="physics-of-computation-page__section"
       :title="helpfulResourcesSectionTitle"
@@ -177,7 +171,7 @@ export default class PhysicsOfComputationPage extends QiskitPage {
   }
 
   // Data for the mosaic section
-  mosaicSectionTitle = 'What is QC40?'
+  mosaicSectionTitle = 'What you will find at QC40'
   mosaicElements = [
     {
       position: 'first',
@@ -188,15 +182,6 @@ export default class PhysicsOfComputationPage extends QiskitPage {
     },
     {
       position: 'second',
-      title: 'The Future of Quantum Hardware',
-      description: `Jerry Chow, Director of Quantum Hardware System Development at IBM Quantum,
-      will discuss the engineering challenges that the quantum computing field must tackle across
-      the stack, what it takes to make quantum computing a practical reality, and IBM’s roadmap to
-      accomplish these goals in the next decade.`,
-      image: '/images/events/physics-of-computation/mosaic-people-on-discussion.png'
-    },
-    {
-      position: 'third',
       title: 'Contributed talks: The latest in quantum information science ',
       description: `The afternoon will be packed with a wide range of talks illustrating
       current research and new developments across the field of quantum information
@@ -205,6 +190,15 @@ export default class PhysicsOfComputationPage extends QiskitPage {
         <li>Aram Harrow from MIT will chair the track dedicated to Theory and Applications.</li>
         <li>Sarah Sheldon from IBM will chair the track dedicated to Hardware and Experiment.</li>
       </ul>`,
+      image: '/images/events/physics-of-computation/mosaic-people-on-discussion.png'
+    },
+    {
+      position: 'third',
+      title: 'The Future of Quantum Hardware',
+      description: `Jerry Chow, Director of Quantum Hardware System Development at IBM Quantum,
+      will discuss the engineering challenges that the quantum computing field must tackle across
+      the stack, what it takes to make quantum computing a practical reality, and IBM’s roadmap to
+      accomplish these goals in the next decade.`,
       image: '/images/events/physics-of-computation/mosaic-ibm-quantum-chip.png'
     },
     {
@@ -276,7 +270,7 @@ export default class PhysicsOfComputationPage extends QiskitPage {
   afternoonAgenda: AgendaSlot[] = [
     {
       time: '01:30 PM',
-      event: 'Introduction to Track 1 – Contributed Talks on Hardware and Experiments (Sarah Sheldon - IBM)'
+      event: 'Introduction to Track 1 – Contributed Talks on Hardware and Experiment (Sarah Sheldon - IBM)'
     },
     {
       time: '01:55 PM',
@@ -314,14 +308,14 @@ export default class PhysicsOfComputationPage extends QiskitPage {
 
   morningSessionAgendaCTA: GeneralLink = {
     url: this.morningSessionYouTubeURL,
-    label: 'Follow live the morning session!',
+    label: 'Follow this session on YouTube (no registration needed)',
     segment: {
       action: `${this.routeName} > morning-session-section > youtube-morning-session`
     }
   }
 
   afternoonSessionAgendaCTA: GeneralLink = {
-    url: this.morningSessionYouTubeURL,
+    url: this.afternoonSessionRegisterURL,
     label: 'Register to follow the afternoon session!',
     segment: {
       action: `${this.routeName} > afternoon-session-section > register-afternoon-session`
@@ -344,8 +338,7 @@ export default class PhysicsOfComputationPage extends QiskitPage {
     },
     {
       title: 'Afternoon session',
-      description: `Click on the link below to join us on the ON24 platform at 01:30 PM and listen
-      to our contributed talks.`,
+      description: 'Click on the link below to join us on the ON24 platform at 01:30 PM.',
       cta: {
         url: this.afternoonSessionRegisterURL,
         label: 'Afternoon Session',
