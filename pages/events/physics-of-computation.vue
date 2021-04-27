@@ -30,10 +30,26 @@
     />
     <AppDataTableSection
       class="physics-of-computation-page__section"
-      :section-title="agendaSectionTitle"
+      :section-title="morningAgendaSectionTitle"
       :data-table-columns="agendaColumnsDataTable"
-      :data-table-elements="agendaElementsDataTable"
-    />
+      :data-table-elements="morningSessionElementsDataTable"
+    >
+      <AppCta
+        kind="ghost"
+        v-bind="morningSessionAgendaCTA"
+      />
+    </AppDataTableSection>
+    <AppDataTableSection
+      class="physics-of-computation-page__section"
+      :section-title="afternoonAgendaSectionTitle"
+      :data-table-columns="agendaColumnsDataTable"
+      :data-table-elements="afternoonSessionElementsDataTable"
+    >
+      <AppCta
+        kind="ghost"
+        v-bind="afternoonSessionAgendaCTA"
+      />
+    </AppDataTableSection>
     <AppHelpfulResourcesSection
       class="physics-of-computation-page__section"
       :title="helpfulResourcesSectionTitle"
@@ -47,6 +63,7 @@ import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import { DescriptionCard } from '~/components/ui/AppDescriptionCard.vue'
 import { TableRowElement } from '~/components/ui/AppDataTable.vue'
+import { GeneralLink } from '~/constants/appLinks'
 
 interface AgendaSlot {
   time: string,
@@ -116,6 +133,9 @@ interface AgendaSlot {
 export default class PhysicsOfComputationPage extends QiskitPage {
   routeName = 'physics-of-computation'
 
+  morningSessionYouTubeURL = 'https://youtu.be/GR6ANm6Z0yk'
+  afternoonSessionRegisterURL = 'https://event.on24.com/wcc/r/3146756/28786C95E25E106FD4C81587B8286CC4'
+
   // Data for the header section
   headerPrimaryTitle = 'QC40: Physics of Computation Conference'
   headerSecondaryTitle = '40th Anniversary'
@@ -135,7 +155,7 @@ export default class PhysicsOfComputationPage extends QiskitPage {
 
   headerCTA = {
     label: 'Register',
-    url: 'https://event.on24.com/wcc/r/3146756/28786C95E25E106FD4C81587B8286CC4',
+    url: this.afternoonSessionRegisterURL,
     segment: {
       action: `${this.routeName} > header > register`
     }
@@ -205,9 +225,10 @@ export default class PhysicsOfComputationPage extends QiskitPage {
   ]
 
   // Data for the agenda section
-  agendaSectionTitle: string = 'Event schedule'
+  morningAgendaSectionTitle: string = 'Morning Session'
+  afternoonAgendaSectionTitle: string = 'Afternoon Session'
 
-  agenda: AgendaSlot[] = [
+  morningAgenda: AgendaSlot[] = [
     {
       time: '08:30 AM',
       event: `An introduction from Olivia Lanes PhD, experimental researcher and
@@ -249,7 +270,10 @@ export default class PhysicsOfComputationPage extends QiskitPage {
     {
       time: '12:30 PM',
       event: 'Lunch break'
-    },
+    }
+  ]
+
+  afternoonAgenda: AgendaSlot[] = [
     {
       time: '01:30 PM',
       event: 'Introduction to Track 1 – Contributed Talks on Hardware and Experiments (Sarah Sheldon - IBM)'
@@ -268,20 +292,41 @@ export default class PhysicsOfComputationPage extends QiskitPage {
     }
   ]
 
-  agendaElementsDataTable: TableRowElement[][] = this.agenda.map(slot => ([
-    {
-      component: 'span',
-      styles: 'min-width: 5rem; display: inline-block; font-weight: bold;',
-      data: slot.time
-    },
-    {
-      component: 'span',
-      styles: 'min-width: 20rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
-      data: slot.event
-    }
-  ]))
+  morningSessionElementsDataTable = this.getDataTableElements(this.morningAgenda)
+  afternoonSessionElementsDataTable = this.getDataTableElements(this.afternoonAgenda)
+
+  getDataTableElements (agenda: AgendaSlot[]) : TableRowElement[][] {
+    return agenda.map(slot => ([
+      {
+        component: 'span',
+        styles: 'min-width: 5rem; display: inline-block; font-weight: bold;',
+        data: slot.time
+      },
+      {
+        component: 'span',
+        styles: 'min-width: 20rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
+        data: slot.event
+      }
+    ]))
+  }
 
   agendaColumnsDataTable: string[] = ['Time (EDT)', 'Event']
+
+  morningSessionAgendaCTA: GeneralLink = {
+    url: this.morningSessionYouTubeURL,
+    label: 'Follow live the morning session!',
+    segment: {
+      action: `${this.routeName} > morning-session-section > youtube-morning-session`
+    }
+  }
+
+  afternoonSessionAgendaCTA: GeneralLink = {
+    url: this.morningSessionYouTubeURL,
+    label: 'Register to follow the afternoon session!',
+    segment: {
+      action: `${this.routeName} > afternoon-session-section > register-afternoon-session`
+    }
+  }
 
   // Data for the helpful resources section
   helpfulResourcesSectionTitle = 'Take action now'
@@ -290,7 +335,7 @@ export default class PhysicsOfComputationPage extends QiskitPage {
       title: 'Morning session',
       description: 'Click on the link below to join us on the Qiskit YouTube channel at 8:30 AM.',
       cta: {
-        url: 'https://youtu.be/GR6ANm6Z0yk',
+        url: this.morningSessionYouTubeURL,
         label: 'Morning Session',
         segment: {
           action: `${this.routeName} > helpful-resources > youtube-morning-session`
@@ -302,7 +347,7 @@ export default class PhysicsOfComputationPage extends QiskitPage {
       description: `Click on the link below to join us on the ON24 platform at 01:30 PM and listen
       to our contributed talks.`,
       cta: {
-        url: 'https://event.on24.com/wcc/r/3146756/28786C95E25E106FD4C81587B8286CC4',
+        url: this.afternoonSessionRegisterURL,
         label: 'Afternoon Session',
         segment: {
           action: `${this.routeName} > helpful-resources > register-afternoon-session`
