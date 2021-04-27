@@ -198,6 +198,7 @@ export default class PhysicsOfComputationPage extends QiskitPage {
         <li>Isaac Chuang (MIT)</li>
         <li>Umesh Vazirani (University of California, Berkeley)</li>
         <li>Will Oliver (MIT)</li>
+        <li>Zaira Nazario (IBM)</li>
       </ul>
       `
     }
