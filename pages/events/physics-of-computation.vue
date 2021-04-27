@@ -287,25 +287,25 @@ export default class PhysicsOfComputationPage extends QiskitPage {
   helpfulResourcesSectionTitle = 'Take action now'
   helpfulResources: DescriptionCard[] = [
     {
-      title: 'Stay informed',
-      description: 'Click on the link below to stay informed about and attend QC40.',
+      title: 'Morning session',
+      description: 'Click on the link below to join us on the Qiskit YouTube channel at 8:30 AM.',
       cta: {
-        url: 'https://airtable.com/shrvAA05xkYgSKajc',
-        label: 'Stay informed',
+        url: 'https://youtu.be/GR6ANm6Z0yk',
+        label: 'Morning Session',
         segment: {
-          action: `${this.routeName} > helpful-resources > stay-informed`
+          action: `${this.routeName} > helpful-resources > youtube-morning-session`
         }
       }
     },
     {
-      title: 'Submit a talk',
-      description: `Abstract submissions for contributed talks will be accepted through
-      March 31. Click below for an opportunity to share your research project at QC40.`,
+      title: 'Afternoon session',
+      description: `Click on the link below to join us on the ON24 platform at 01:30 PM and listen
+      to our contributed talks.`,
       cta: {
-        url: 'https://airtable.com/shr6UbEsEvinHfjct',
-        label: 'Submit a talk',
+        url: 'https://event.on24.com/wcc/r/3146756/28786C95E25E106FD4C81587B8286CC4',
+        label: 'Afternoon Session',
         segment: {
-          action: `${this.routeName} > helpful-resources > submit-a-talk`
+          action: `${this.routeName} > helpful-resources > register-afternoon-session`
         }
       }
     },
