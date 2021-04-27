@@ -219,8 +219,8 @@ export default class PhysicsOfComputationPage extends QiskitPage {
   ]
 
   // Data for the agenda section
-  morningAgendaSectionTitle: string = 'Morning Session'
-  afternoonAgendaSectionTitle: string = 'Afternoon Session'
+  morningAgendaSectionTitle = 'Morning Session'
+  afternoonAgendaSectionTitle = 'Afternoon Session'
 
   morningAgenda: AgendaSlot[] = [
     {
