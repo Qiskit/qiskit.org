@@ -75,7 +75,7 @@ export default class AppMosaic extends Vue {
 
     @include mq($from: medium, $until: large) {
       grid-template-columns: 1fr 1fr;
-      grid-template-rows: 26rem minmax(13rem, auto) minmax(12rem, auto);
+      grid-template-rows: minmax(26rem, auto) minmax(13rem, auto) minmax(12rem, auto);
       grid-template-areas:
         "a b"
         "c c"
