@@ -149,10 +149,10 @@ export default class PhysicsOfComputationPage extends QiskitPage {
     location: 'Virtual event open to the public',
     date: 'May 6, 2021',
     time: '8:30am - 5:00pm EDT',
-    to: 'https://airtable.com/shrvAA05xkYgSKajc',
-    ctaLabel: 'Stay informed',
+    to: 'https://youtu.be/YGqBVnAPvSw',
+    ctaLabel: 'Official trailer',
     segment: {
-      action: `${this.routeName} > header > stay-informed`
+      action: `${this.routeName} > header > official-trailer`
     }
   }
 
