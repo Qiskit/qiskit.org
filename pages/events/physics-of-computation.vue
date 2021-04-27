@@ -36,13 +36,14 @@
     >
       <AppCta kind="ghost" v-bind="morningSessionAgendaCTA" is-wider />
     </AppDataTableSection>
-    <section class="physics-of-computation-page__section">
-      <h2 class="copy__title" v-text="afternoonAgendaSectionTitle" />
-      <p class="copy__paragraph">
-        <AppCta kind="ghost" v-bind="afternoonSessionAgendaCTA" is-wider />
-      </p>
-      <AppDataTable :columns="agendaColumnsDataTable" :elements="afternoonSessionElementsDataTable" />
-    </section>
+    <AppDataTableSection
+      class="physics-of-computation-page__section"
+      :section-title="afternoonAgendaSectionTitle"
+      :data-table-columns="agendaColumnsDataTable"
+      :data-table-elements="afternoonSessionElementsDataTable"
+    >
+      <AppCta kind="ghost" v-bind="afternoonSessionAgendaCTA" is-wider />
+    </AppDataTableSection>
     <AppHelpfulResourcesSection
       class="physics-of-computation-page__section"
       :title="helpfulResourcesSectionTitle"
