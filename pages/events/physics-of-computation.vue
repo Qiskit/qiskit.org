@@ -225,19 +225,46 @@ export default class PhysicsOfComputationPage extends QiskitPage {
     },
     {
       time: '10:30 AM',
-      event: 'A live panel that will bridge Then and Now'
+      event: `A live panel that will bridge Then and Now. Featuring:<br>
+      <ul>
+        <li>Dorit Aharonov (Hebrew University of Jerusalem)</li>
+        <li>Isaac Chuang (MIT)</li>
+        <li>Umesh Vazirani (University of California, Berkeley)</li>
+        <li>Will Oliver (MIT)</li>
+        <li>Zaira Nazario (IBM)</li>
+      </ul>`
     },
     {
       time: '11:30 AM',
       event: 'The Future of Quantum Hardware (Jerry Chow - IBM)'
     },
     {
-      time: '01:00 PM',
-      event: 'Conference Track 1: Series of contributed talks focusing on Hardware and Experiment'
+      time: '12:10 PM',
+      event: 'Announcement – IBM Quantum Awards: Open Science Prize winners'
     },
     {
-      time: '01:00 PM',
-      event: 'Conference Track 2: Series of contributed talks focusing on Theory and Applications'
+      time: '12:20 PM',
+      event: 'IBM Research Leadership remarks'
+    },
+    {
+      time: '12:30 PM',
+      event: 'Lunch break'
+    },
+    {
+      time: '01:30 PM',
+      event: 'Introduction to Track 1 – Contributed Talks on Hardware and Experiments (Sarah Sheldon - IBM)'
+    },
+    {
+      time: '01:55 PM',
+      event: 'Introduction to Track 2 – Contributed Talks on Theory/Applications (Aram Harrow - MIT)'
+    },
+    {
+      time: '02:20 PM',
+      event: 'Two parallel tracks (8 to 10 contributed talks each)'
+    },
+    {
+      time: '05:30 PM',
+      event: 'Closing Remarks'
     }
   ]
 
