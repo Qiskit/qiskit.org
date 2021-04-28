@@ -11,15 +11,15 @@
     <h3 class="h4">
       Install the compiler
     </h3>
-    <pre class="prerequisites__code">brew install libomp</pre>
+    <pre class="code prerequisites__code">brew install libomp</pre>
     <h3 class="h4">
       Install OpenBLAS development headers
     </h3>
-    <pre class="prerequisites__code">brew install openblas</pre>
+    <pre class="code prerequisites__code">brew install openblas</pre>
     <h3 class="h4">
       Install Xcode Command Line Tools.
     </h3>
-    <pre class="prerequisites__code">xcode-select --install</pre>
+    <pre class="code prerequisites__code">xcode-select --install</pre>
   </div>
 </template>
 

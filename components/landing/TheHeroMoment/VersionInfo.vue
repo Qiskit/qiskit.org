@@ -6,6 +6,7 @@
     <div class="qiskit-version-info__content">
       <div class="qiskit-version-info__version-string">
         <AppLink
+          class="code"
           kind="secondary"
           v-bind="githubRepoLink"
         >
@@ -14,6 +15,7 @@
       </div>
       <div class="qiskit-version-info__release-notes">
         <AppLink
+          class="code"
           v-bind="githubRepoLink"
           url="https://qiskit.org/documentation/release_notes.html#notable-changes"
           :segment="{ action: 'Release notes' }"
@@ -39,8 +41,6 @@ export default class VersionInfo extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '~carbon-components/scss/globals/scss/typography';
-
 .qiskit-version-info {
   display: flex;
   flex-direction: row;
@@ -76,14 +76,8 @@ export default class VersionInfo extends Vue {
   }
 
   &__version-string {
-    @include type-style('code-01');
-
     text-decoration: none;
     margin-bottom: $spacing-01;
-  }
-
-  &__release-notes {
-    @include type-style('code-01');
   }
 }
 </style>
