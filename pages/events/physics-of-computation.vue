@@ -261,7 +261,7 @@ export default class PhysicsOfComputationPage extends QiskitPage {
     },
     {
       time: '12:20 PM',
-      event: 'IBM Research Leadership remarks'
+      event: 'IBM Quantum Leadership remarks'
     },
     {
       time: '12:30 PM',
