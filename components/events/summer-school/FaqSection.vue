@@ -292,7 +292,7 @@ export default class FaqSection extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import "~/assets/scss/layout/_copy.scss";
+@import "~/assets/scss/layout/_typography.scss";
 
 .faq-section {
   ::v-deep {
