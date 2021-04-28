@@ -1,6 +1,6 @@
 <template>
   <section class="faq-section">
-    <h2 class="copy__title">
+    <h2>
       Frequently asked questions
     </h2>
     <cv-accordion align="end">

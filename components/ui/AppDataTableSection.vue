@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h2 class="max-w-full" v-text="sectionTitle" />
+    <h2 v-text="sectionTitle" />
     <AppDataTable :columns="dataTableColumns" :elements="dataTableElements" />
     <slot />
   </section>

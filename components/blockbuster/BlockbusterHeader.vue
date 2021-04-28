@@ -26,7 +26,7 @@
         <div class="bx--col-lg-8 bx--col-md-4">
           <img
             alt="Blockbuster"
-            class="max-w-full"
+            class="blockbuster-header__logo"
             src="/images/blockbuster/blockbuster-logo.png"
           >
         </div>
@@ -86,6 +86,10 @@ export default class BlockbusterHeader extends Vue {
     p {
       color: $text-color-white;
     }
+  }
+
+  &__logo {
+    max-width: 100%;
   }
 }
 </style>

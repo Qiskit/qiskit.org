@@ -1,9 +1,11 @@
 <template>
   <section class="intro-section">
     <div class="intro-section__container">
-      <h2>
-        Qiskit Metal | quantum device design is now open
-      </h2>
+      <div class="bx--row">
+        <h2 class="bx--col-md-6 bx--col-lg-8">
+          Qiskit Metal | quantum device design is now open
+        </h2>
+      </div>
       <div class="intro-section__content">
         <p class="intro-section__description">
           Our vision is to develop a community-driven universal toolkit capable of orchestrating quantum chip development from concept to fabrication in a simple, scalable, and open framework.

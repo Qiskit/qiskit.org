@@ -1,6 +1,8 @@
 <template>
   <section class="app-mosaic-section">
-    <h2 v-text="title" />
+    <div class="bx--row">
+      <h2 class="bx--col-md-4 bx--col-lg-8" v-text="title" />
+    </div>
     <p
       v-if="description"
       class="compact-section"

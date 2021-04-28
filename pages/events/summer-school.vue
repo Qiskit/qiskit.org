@@ -38,7 +38,7 @@
     />
 
     <section class="summer-school-page__section">
-      <h2 class="copy__title" v-text="agendaData.title" />
+      <h2 v-text="agendaData.title" />
       <p class="copy__paragraph" v-text="agendaData.subtitle" />
       <cv-tabs>
         <cv-tab
