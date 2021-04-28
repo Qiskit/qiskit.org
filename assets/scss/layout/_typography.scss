@@ -1,17 +1,35 @@
 @import "~carbon-components/scss/globals/scss/typography";
+@import "~@carbon/type/scss/font-family";
+@import "~@carbon/type/scss/scale";
 
+// Based on Carbon's "expressive-heading-05" but not fluid
+// https://www.carbondesignsystem.com/guidelines/typography/expressive/
 h1,
 .h1 {
-  @include type-style("expressive-heading-05");
+  color: $text-color-light;
+  font-size: carbon--type-scale(8);
+  font-weight: carbon--font-weight("regular");
+  letter-spacing: 0;
+  line-height: 1.25;
 
-  max-width: 10 * $column-size-large;
-
-  @include mq($from: medium, $until: large) {
-    max-width: 6 * $column-size-medium;
+  @include mq($from: medium) {
+    font-size: carbon--type-scale(9);
+    font-weight: carbon--font-weight("light");
+    line-height: 1.22;
   }
 
-  @include mq($until: medium) {
-    max-width: 100%;
+  @include mq($from: large) {
+    font-size: carbon--type-scale(10);
+    line-height: 1.19;
+  }
+
+  @include mq($from: x-large) {
+    font-size: carbon--type-scale(11);
+    line-height: 1.17;
+  }
+
+  @include mq($from: max-size) {
+    font-size: carbon--type-scale(13);
   }
 }
 

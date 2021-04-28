@@ -2,7 +2,12 @@
   <div class="learn-entry">
     <header class="learn-entry__header">
       <div class="learn-entry__header__container">
-        <h1 v-text="pageContent.attributes.title" />
+        <div class="bx--row">
+          <h1
+            class="bx--col-md-6 bx--col-lg-10"
+            v-text="pageContent.attributes.title"
+          />
+        </div>
       </div>
     </header>
     <!-- TODO: We should migrate to nuxt-content and get rid of this. -->
