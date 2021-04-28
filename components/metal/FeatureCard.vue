@@ -42,8 +42,6 @@ export default class FeatureCard extends Vue {
 
   &__title {
     flex: 0 0 12rem;
-    @include type-style('productive-heading-02');
-
     padding-right: $spacing-07;
     padding-bottom: $spacing-07;
 

@@ -116,7 +116,6 @@ export default class AppCard extends Vue {
 
   &__title {
     flex: 1;
-    @include type-style('productive-heading-02');
   }
 
   &__tags {

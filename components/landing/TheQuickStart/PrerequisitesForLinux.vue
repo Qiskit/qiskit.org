@@ -1,6 +1,6 @@
 <template>
   <div class="prerequisites">
-    <h3>
+    <h3 class="h4">
       Install the compiler
     </h3>
     <p class="compact">
@@ -12,7 +12,7 @@
       For Ubuntu/Debian install it using:
     </p>
     <pre class="prerequisites__code">apt-get install build-essential</pre>
-    <h3>
+    <h3 class="h4">
       Install OpenBLAS development headers
     </h3>
     <p class="compact">

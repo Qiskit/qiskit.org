@@ -5,7 +5,7 @@
       :src="`/images/icons/${icon}`"
       alt=""
     >
-    <h3 class="compact-feature__title">
+    <h3 class="h4 compact-feature__title">
       {{ title }}
     </h3>
     <div class="compact-feature__description">
@@ -46,8 +46,6 @@ $feature-icon-size: 2.25rem;
   }
 
   &__title {
-    @include type-style('productive-heading-02');
-
     color: $text-color-white;
     margin-bottom: $spacing-04;
     height: 2.5rem; // for consistent alignment
