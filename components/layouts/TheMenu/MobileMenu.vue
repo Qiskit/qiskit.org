@@ -46,7 +46,7 @@
       <div class="mobile-menu__footer-inner-container">
         <FooterSection class="mobile-menu__footer-contact" v-bind="stayConnectedElements" icons-only :theme="theme" />
       </div>
-      <p class="mobile-menu__footer-text">
+      <p class="caption mobile-menu__footer-text">
         ©Qiskit | All Rights Reserved
       </p>
     </footer>
@@ -142,8 +142,6 @@ export default class MobileMenu extends Mixins(MenuMixin) {
   }
 
   &__footer-text {
-    @include type-style('caption-01');
-
     background-color: $background-color-lighter;
     padding: $spacing-05 $spacing-07;
     color: $text-color-lighter;
@@ -183,14 +181,6 @@ export default class MobileMenu extends Mixins(MenuMixin) {
   }
 
   &__footer-contact {
-    & .footer-section__title.footer-section__title_theme_light {
-      @include type-style('caption-01');
-
-      font-weight: 600;
-      color: $text-color-lighter;
-      padding-bottom: $spacing-05;
-    }
-
     svg {
       fill: $cool-gray-60;
     }

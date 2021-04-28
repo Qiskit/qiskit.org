@@ -34,7 +34,7 @@
     >
       <div class="page-footer__secondary-container">
         <div
-          class="page-footer__copyright"
+          class="caption"
           :class="`page-footer__copyright_theme_${theme}`"
         >
           ©Qiskit | All Rights Reserved
@@ -43,7 +43,7 @@
           <BasicLink
             v-for="link in secondaryFooterLinks"
             :key="link.label"
-            class="page-footer__secondary-link"
+            class="caption page-footer__secondary-link"
             :class="`page-footer__secondary-link_theme_${theme}`"
             v-bind="link"
           >
@@ -76,8 +76,6 @@ export default class PageFooter extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '~carbon-components/scss/globals/scss/typography';
-
 .page-footer {
 
   .page-footer__primary {
@@ -125,9 +123,17 @@ export default class PageFooter extends Vue {
     }
   }
 
-  &__copyright,
   &__secondary-link {
-    @include type-style('caption-01');
+    margin-left: $spacing-07;
+    text-decoration: none;
+
+    @include mq($until: medium) {
+      margin-bottom: $spacing-05;
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
 
     &_theme_light {
       color: $text-color-lighter;
@@ -151,19 +157,6 @@ export default class PageFooter extends Vue {
 
     @include mq($until: medium) {
       flex-direction: column;
-    }
-  }
-
-  &__secondary-link {
-    margin-left: $spacing-07;
-    text-decoration: none;
-
-    @include mq($until: medium) {
-      margin-bottom: $spacing-05;
-    }
-
-    &:hover {
-      text-decoration: underline;
     }
   }
 
