@@ -1,6 +1,6 @@
 <template>
   <article class="page-section the-learn-section">
-    <div class="the-learn-section__container">
+    <div class="bx--grid">
       <h2>Learn with Qiskit</h2>
       <LearnCard />
     </div>
@@ -21,9 +21,5 @@ export default class TheLearnSection extends Vue {}
 
   background-repeat: no-repeat;
   background-position: left bottom -2px;
-
-  &__container {
-    @include contained();
-  }
 }
 </style>
