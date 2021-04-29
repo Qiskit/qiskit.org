@@ -135,8 +135,6 @@ export default class TheLearningResourceList extends Vue {
   }
 
   &__filter-time {
-    color: $text-color-light;
-
     @include mq($until: medium) {
       margin-bottom: $layout-03;
     }

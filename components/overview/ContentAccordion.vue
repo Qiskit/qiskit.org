@@ -72,7 +72,6 @@ export default class ContentAccordion extends Vue {
   }
 
   & .bx--accordion__title {
-    color: $text-color-light;
     padding-left: $spacing-07;
     margin: 0;
   }
@@ -101,7 +100,6 @@ export default class ContentAccordion extends Vue {
   & .bx--accordion__content {
     padding: $spacing-06 $spacing-07;
     background-color: $background-color-lighter;
-    color: $text-color-light;
 
     @include mq($from: medium, $until: large) {
       padding-left: $spacing-06;

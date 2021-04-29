@@ -60,7 +60,6 @@ export default class SyntaxHighlight extends Vue {
   }
 
   &__code {
-    color: $text-color-light;
     min-height: 8rem;
   }
 }

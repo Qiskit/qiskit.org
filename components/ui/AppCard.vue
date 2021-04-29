@@ -68,7 +68,6 @@ export default class AppCard extends Vue {
   min-height: 13rem;
   width: 100%;
   background-color: $background-color-lighter;
-  color: $text-color-light;
   display: flex;
 
   @include mq($until: medium) {

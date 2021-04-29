@@ -107,7 +107,6 @@ export default class BlockbusterRecommendationSection extends Vue {
 .blockbuster-recommendation-section {
   &__loading-container {
     align-items: center;
-    color: $text-color-lighter;
     display: flex;
     flex-flow: column;
     justify-content: center;

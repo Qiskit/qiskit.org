@@ -121,7 +121,6 @@ export default class LearnEntry extends QiskitPage {
 
     ul {
       list-style-type: '-';
-      color: $text-color-light;
       margin-bottom: $layout-03;
       max-width: 9 * $column-size-large;
 
@@ -141,7 +140,6 @@ export default class LearnEntry extends QiskitPage {
 
       td, th {
         border: 1px solid $cool-gray-20;
-        color: $text-color-light;
         vertical-align: middle;
         padding: $spacing-05;
         max-width: 9 * $column-size-large;
