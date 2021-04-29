@@ -1,5 +1,8 @@
 <template>
-  <article class="page-section quick-start">
+  <article
+    class="page-section quick-start"
+    :class="oldContainer ? 'quick-start_old-container' : 'bx--grid'"
+  >
     <h2>Quick Start</h2>
     <div class="bx--row quick-start__introduction">
       <div class="bx--col-md-6 bx--col-lg-8">
@@ -19,22 +22,22 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
+import { Component, Prop } from 'vue-property-decorator'
 
 @Component
-export default class TheQuickStart extends Vue {}
+export default class TheQuickStart extends Vue {
+  @Prop({ type: Boolean, default: false, required: false }) oldContainer!: boolean;
+}
 </script>
 
 <style lang="scss" scoped>
 .quick-start {
-  @include contained();
-
-  &__description {
-    margin-bottom: 0;
-  }
-
   &__introduction {
     margin-bottom: $spacing-06;
+  }
+
+  &_old-container {
+    @include contained();
   }
 }
 </style>
