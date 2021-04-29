@@ -2,11 +2,10 @@
   <section class="start-on-the-cloud">
     <div class="start-on-the-cloud__wrapper">
       <div class="start-on-the-cloud__content">
-        <h3>
-          Start Online
-        </h3>
-        <p class="compact">
-          Get started in the cloud without installing anything with IBM Quantum Lab.
+        <h3>Start Online</h3>
+        <p>
+          Get started in the cloud without installing anything with IBM Quantum
+          Lab.
         </p>
         <AppCta
           kind="ghost"

@@ -1,9 +1,7 @@
 <template>
   <section class="start-locally">
-    <h3>
-      Start locally
-    </h3>
-    <p class="compact">
+    <h3>Start locally</h3>
+    <p class="start-locally__introduction">
       To install Qiskit locally, you will need
       <AppLink
         url="https://www.python.org/downloads/"
@@ -181,6 +179,15 @@ export default class StartLocally extends Vue {
 .start-locally {
   @include mq($until: medium) {
     margin-bottom: $layout-01;
+  }
+
+  &__introduction {
+    max-width: 20rem;
+    margin-bottom: $spacing-08;
+
+    @include mq($from: large) {
+      max-width: 24rem;
+    }
   }
 
   &__options {

@@ -1,7 +1,7 @@
 <template>
   <article class="learn-card">
     <div class="learn-card__content">
-      <p class="compact">
+      <p>
         Gain access to a free, digital textbook to study the concepts of quantum
         computing using Qiskit.
       </p>

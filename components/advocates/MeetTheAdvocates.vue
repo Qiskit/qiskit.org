@@ -3,17 +3,22 @@
     <h2>
       Meet the Advocates
     </h2>
-    <p class="compact">
-      Qiskit advocates are some of the finest minds in quantum computing,
-      all over the world. If you are interested in getting involved with the
-      quantum computing community, reach out to an advocate local to your area.
-    </p>
-    <p class="compact">
-      <AppLink class="copy__link" :url="joinSlackLink">
-        Sign-up for the Qiskit Slack workspace
-      </AppLink>
-      to reach the advocates and join the conversation.
-    </p>
+    <div class="bx--row">
+      <div class="bx--col-md-6 bx--col-lg-8">
+        <p>
+          Qiskit advocates are some of the finest minds in quantum computing,
+          all over the world. If you are interested in getting involved with the
+          quantum computing community, reach out to an advocate local to your
+          area.
+        </p>
+        <p>
+          <AppLink class="copy__link" :url="joinSlackLink">
+            Sign-up for the Qiskit Slack workspace
+          </AppLink>
+          to reach the advocates and join the conversation.
+        </p>
+      </div>
+    </div>
     <AppFiltersResultsLayout>
       <template slot="filters-on-m-l-screen">
         <AppFieldset :label="filter.label">
