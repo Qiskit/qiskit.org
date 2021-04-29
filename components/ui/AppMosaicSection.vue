@@ -3,12 +3,11 @@
     <div class="bx--row">
       <h2 class="bx--col-md-4 bx--col-lg-8" v-text="title" />
     </div>
-    <p
-      v-if="description"
-      class="compact-section"
-    >
-      {{ description }}
-    </p>
+    <div v-if="description" class="bx--row app-mosaic-section__introduction">
+      <div class="bx--col-md-6 bx--col-lg-8">
+        <div v-text="description" />
+      </div>
+    </div>
     <AppMosaic class="app-mosaic-section__mosaic" :mosaic-elements="elements" />
     <slot />
   </section>
@@ -30,7 +29,6 @@ export default class AppMosaicSection extends Vue {
 <style lang="scss">
 .app-mosaic-section {
   &__mosaic {
-    margin-top: $layout-01;
     margin-bottom: $layout-03;
 
     @include mq($from: medium, $until: large) {
@@ -40,6 +38,10 @@ export default class AppMosaicSection extends Vue {
     @include mq($until: medium) {
       margin-bottom: $layout-01;
     }
+  }
+
+  &__introduction {
+    margin-bottom: $spacing-07;
   }
 }
 </style>

@@ -1,18 +1,23 @@
 <template>
   <section class="the-learning-resources-list">
     <div class="the-learning-resources-list__container">
-      <h2>
-        Learning resources
-      </h2>
-      <p class="compact-section">
-        The below are designed and created by the Qiskit team. However, we
-        recommend a familiarity with <AppLink url="https://www.khanacademy.org/math/linear-algebra">
-          linear algebra
-        </AppLink> and <AppLink url="https://www.coursera.org/specializations/python">
-          Python
-        </AppLink> from these
-        trusted resources.
-      </p>
+      <h2>Learning resources</h2>
+      <div class="bx--row the-learning-resources-list__introduction">
+        <div class="bx--col-md-6 bx--col-lg-8">
+          <div>
+            The below are designed and created by the Qiskit team. However, we
+            recommend a familiarity with
+            <AppLink url="https://www.khanacademy.org/math/linear-algebra">
+              linear algebra
+            </AppLink>
+            and
+            <AppLink url="https://www.coursera.org/specializations/python">
+              Python
+            </AppLink>
+            from these trusted resources.
+          </div>
+        </div>
+      </div>
       <client-only>
         <cv-tabs
           class="the-learning-resources-list__filter-level"
@@ -115,6 +120,10 @@ export default class TheLearningResourceList extends Vue {
 
   &__container {
     @include contained();
+  }
+
+  &__introduction {
+    margin-bottom: $spacing-07;
   }
 
   &__filter-level {
