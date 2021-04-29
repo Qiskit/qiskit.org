@@ -3,7 +3,7 @@
     <TheHeroMoment :version="qiskitVersion" />
     <div class="landing-page__grid">
       <AppMosaicSection
-        class="landing-page__section"
+        class="bx--grid landing-page__section"
         :title="mosaicSectionTitle"
         :description="mosaicSectionDescription"
         :elements="mosaicSectionElements"
@@ -85,8 +85,6 @@ export default class LandingPage extends QiskitPage {
   }
 
   &__section {
-    @include contained();
-
     margin-top: $layout-05;
     margin-bottom: $layout-03;
     padding-bottom: $layout-07;
