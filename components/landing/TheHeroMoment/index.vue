@@ -1,7 +1,7 @@
 <template>
   <article class="the-hero-moment">
     <MetalGrid>
-      <div class="the-hero-moment__container">
+      <div class="bx--grid the-hero-moment__container">
         <VersionInfo
           class="the-hero-moment__version-info"
           :version="version"
@@ -74,8 +74,6 @@ export default class TheHeroMoment extends Vue {
   }
 
   &__container {
-    @include contained();
-
     position: relative;
     background-image: url("/images/landing-page/hero-illustration.png");
     background-position: right center;
@@ -84,7 +82,7 @@ export default class TheHeroMoment extends Vue {
     padding-top: $layout-05;
     pointer-events: none;
 
-    @include mq($from: medium, $until: large) {
+    @include mq($from: medium) {
       background-size: contain;
     }
 
