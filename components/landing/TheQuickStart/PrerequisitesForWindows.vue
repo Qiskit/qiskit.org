@@ -7,11 +7,15 @@
       </p>
     </div>
     <div class="prerequisites__section">
-      <h3 class="h4">Install the compiler</h3>
+      <h3 class="h4">
+        Install the compiler
+      </h3>
       <pre class="code prerequisites__code">conda install --update-deps vs2017_win-64 vs2017_win-32 msvc_runtime</pre>
     </div>
     <div class="prerequisites__section">
-      <h3 class="h4">Install OpenBLAS development headers</h3>
+      <h3 class="h4">
+        Install OpenBLAS development headers
+      </h3>
       <pre class="code prerequisites__code">conda install --update-deps -c conda-forge -y openblas cmake</pre>
     </div>
   </div>

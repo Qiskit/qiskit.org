@@ -11,15 +11,21 @@
       </p>
     </div>
     <div class="prerequisites__section">
-      <h3 class="h4">Install the compiler</h3>
+      <h3 class="h4">
+        Install the compiler
+      </h3>
       <pre class="code prerequisites__code">brew install libomp</pre>
     </div>
     <div class="prerequisites__section">
-      <h3 class="h4">Install OpenBLAS development headers</h3>
+      <h3 class="h4">
+        Install OpenBLAS development headers
+      </h3>
       <pre class="code prerequisites__code">brew install openblas</pre>
     </div>
     <div class="prerequisites__section">
-      <h3 class="h4">Install Xcode Command Line Tools.</h3>
+      <h3 class="h4">
+        Install Xcode Command Line Tools.
+      </h3>
       <pre class="code prerequisites__code">xcode-select --install</pre>
     </div>
   </div>
