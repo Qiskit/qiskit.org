@@ -50,8 +50,6 @@ export default class CapabilityCard extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '~carbon-components/scss/globals/scss/typography';
-
 .capability-card {
   display: flex;
   min-height: 20rem;
@@ -87,8 +85,6 @@ export default class CapabilityCard extends Vue {
   }
 
   &__description {
-    @include type-style('body-long-01');
-
     flex: 1;
 
     @include mq($until: large) {

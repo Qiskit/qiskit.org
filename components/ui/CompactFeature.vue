@@ -27,8 +27,6 @@ export default class CompactFeature extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '~carbon-components/scss/globals/scss/typography';
-
 $feature-icon-size: 2.25rem;
 
 .compact-feature {
@@ -56,8 +54,6 @@ $feature-icon-size: 2.25rem;
   }
 
   &__description {
-    @include type-style('body-long-01');
-
     color: $text-color-white;
   }
 }

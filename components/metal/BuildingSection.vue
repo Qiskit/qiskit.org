@@ -66,8 +66,6 @@ export default class BuildingSection extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import "~carbon-components/scss/globals/scss/typography";
-
 .building-section {
   @include responsive-grid-bg('/images/grid/grid-right-dark.svg', 36rem);
 
@@ -96,8 +94,6 @@ export default class BuildingSection extends Vue {
   }
 
   &__text {
-    @include type-style("body-long-01");
-
     max-width: 7.5 * $column-size-large;
     margin-bottom: $layout-04;
 

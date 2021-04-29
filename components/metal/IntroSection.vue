@@ -45,8 +45,6 @@ export default class IntroSection extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '~carbon-components/scss/globals/scss/typography';
-
 .intro-section {
   position: relative;
   margin-top: -18.5rem;
@@ -75,8 +73,6 @@ export default class IntroSection extends Vue {
   }
 
   &__description {
-    @include type-style('body-long-01');
-
     max-width: 6 * $column-size-large;
     margin-bottom: $layout-06;
     padding-right: $spacing-07;

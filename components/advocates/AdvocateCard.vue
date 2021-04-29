@@ -44,8 +44,6 @@ export default class AdvocateCard extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '~carbon-components/scss/globals/scss/typography';
-
 .advocate-card {
   margin-bottom: $layout-02;
 
@@ -54,8 +52,6 @@ export default class AdvocateCard extends Vue {
   }
 
   &__location, &__contact {
-    @include type-style('body-long-01');
-
     display: flex;
     align-items: center;
   }

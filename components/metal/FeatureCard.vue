@@ -30,8 +30,6 @@ export default class FeatureCard extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '~carbon-components/scss/globals/scss/typography';
-
 .feature-card {
   width: 100%;
   display: flex;
@@ -74,8 +72,6 @@ export default class FeatureCard extends Vue {
   }
 
   &__description {
-    @include type-style('body-long-01');
-
     padding: $spacing-05 $spacing-05 $spacing-05 $spacing-07;
 
     @include mq($until: medium) {

@@ -55,12 +55,8 @@ export default class ContentAccordion extends Vue {
 </script>
 
 <style lang="scss">
-@import '~carbon-components/scss/globals/scss/typography';
-
 .content-accordion {
   & .bx--accordion__item {
-    @include type-style('body-long-01');
-
     border-bottom: none;
     border-top-color: $border-color;
     overflow-anchor: none;

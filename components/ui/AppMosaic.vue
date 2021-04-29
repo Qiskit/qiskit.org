@@ -11,9 +11,7 @@
           class="app-mosaic__element-copy"
           :class="`app-mosaic__element-copy_${position}`"
         >
-          <dt class="app-mosaic__element-heading">
-            {{ title }}
-          </dt>
+          <dt class="h3" v-text="title" />
           <!-- eslint-disable vue/no-v-html -->
           <dd
             class="app-mosaic__element-copy-description"
@@ -59,8 +57,6 @@ export default class AppMosaic extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '~carbon-components/scss/globals/scss/typography';
-
 .app-mosaic {
   &__layout {
     display: grid;
@@ -167,10 +163,6 @@ export default class AppMosaic extends Vue {
       }
     }
 
-    &-heading {
-      @include type-style("productive-heading-02");
-    }
-
     &-copy {
       padding: $spacing-07;
 
@@ -187,10 +179,6 @@ export default class AppMosaic extends Vue {
       }
 
       &-description {
-        @include type-style('body-long-01');
-
-        color: $text-color-light;
-
         ::v-deep li {
           list-style-type: disc;
           margin-left: $spacing-06;

@@ -55,16 +55,12 @@ export default class EventCard extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '~carbon-components/scss/globals/scss/typography';
-
 .event-card {
   &__description {
     margin-bottom: $spacing-06;
   }
 
   &__detail {
-    @include type-style('body-long-01');
-
     display: flex;
     align-items: center;
     margin-bottom: $spacing-03;

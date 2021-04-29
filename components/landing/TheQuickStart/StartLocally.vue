@@ -170,8 +170,6 @@ export default class StartLocally extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '~carbon-components/scss/globals/scss/typography';
-
 .bx--btn-set .bx--btn:not(:focus) {
   box-shadow: none;
 }
@@ -206,8 +204,6 @@ export default class StartLocally extends Vue {
   }
 
   &__option {
-    @include type-style('body-long-01');
-
     background-color: $background-color-lighter;
     max-width: 100%;
     color: $text-color-light;

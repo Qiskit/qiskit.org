@@ -33,8 +33,6 @@ export default class FeaturesSection extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '~carbon-components/scss/globals/scss/typography';
-
 .features-section {
   background-color: $background-color-dark;
 
@@ -51,8 +49,6 @@ export default class FeaturesSection extends Vue {
   }
 
   &__description {
-    @include type-style('body-long-01');
-
     max-width: 9 * $column-size-large;
     margin-bottom: $layout-06;
 

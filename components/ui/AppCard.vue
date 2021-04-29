@@ -64,8 +64,6 @@ export default class AppCard extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '~carbon-components/scss/globals/scss/typography';
-
 .app-card {
   min-height: 13rem;
   width: 100%;
@@ -142,8 +140,6 @@ export default class AppCard extends Vue {
   }
 
   &__description {
-    @include type-style('body-long-01');
-
     margin-top: $layout-02;
   }
 }

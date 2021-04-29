@@ -23,8 +23,6 @@ export default class AppNavBackLink extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '~carbon-components/scss/globals/scss/typography';
-
 .app-nav-back-link {
   @include contained();
 
@@ -32,8 +30,6 @@ export default class AppNavBackLink extends Vue {
   padding-top: $spacing-06;
 
   &__link {
-    @include type-style("body-short-01");
-
     align-items: center;
     display: flex;
     width: fit-content;

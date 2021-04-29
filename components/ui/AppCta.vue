@@ -51,15 +51,11 @@ export default class AppCta extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '~carbon-components/scss/globals/scss/typography';
-
 @mixin bicolor-background($colorLeft, $colorRight) {
     background-image: linear-gradient(90deg, $colorLeft 0%, $colorLeft 50%, $colorRight 50%, $colorRight 100%);
 }
 
 .app-cta {
-  @include type-style('body-long-01');
-
   display: flex;
   justify-content: space-between;
   text-decoration: none;

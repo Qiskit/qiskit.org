@@ -26,8 +26,6 @@ export default class JoinUsSection extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import "~carbon-components/scss/globals/scss/typography";
-
 .early-access-section {
   background-color: $background-color-dark;
 
@@ -44,8 +42,6 @@ export default class JoinUsSection extends Vue {
   }
 
   &__description {
-    @include type-style("body-long-01");
-
     max-width: 7 * $column-size-large;
     margin-bottom: 3.25rem;
 

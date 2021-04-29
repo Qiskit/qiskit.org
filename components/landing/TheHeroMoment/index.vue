@@ -43,8 +43,6 @@ export default class TheHeroMoment extends Vue {
 </script>
 
 <style lang="scss">
-@import '~carbon-components/scss/globals/scss/typography';
-
 .the-hero-moment {
   position: relative;
   overflow: hidden;
@@ -129,9 +127,6 @@ export default class TheHeroMoment extends Vue {
   }
 
   &__description {
-    @include type-style('body-long-01');
-
-    color: $text-color-light;
     max-width: 5 * $column-size-large;
     margin: 0 0 $layout-06;
     // TODO: Force pointer events to allow the user to select text. Remove
