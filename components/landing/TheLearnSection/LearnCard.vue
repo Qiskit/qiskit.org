@@ -1,6 +1,6 @@
 <template>
   <article class="learn-card">
-    <div class="learn-card__content">
+    <div class="bx--col-max-3 bx--col-lg-4 bx--col-md-4 learn-card__content">
       <p>
         Gain access to a free, digital textbook to study the concepts of quantum
         computing using Qiskit.
@@ -11,8 +11,8 @@
       />
     </div>
     <div
+      class="bx--col-md learn-card__media"
       lazy-background="/images/landing-page/learn-image.jpg"
-      class="learn-card__media"
     />
   </article>
 </template>
@@ -33,39 +33,51 @@ export default class LearnCard extends Vue {
 
 <style lang="scss" scoped>
 .learn-card {
-  height: 16rem;
-  width: 100%;
-  background-color: $background-color-lighter;
   display: flex;
+  flex-wrap: wrap;
 
-  @include mq($until: large) {
-    height: auto;
+  @include mq($from: medium) {
+    height: $spacing-10 * 3;
+  }
+
+  @include mq($from: large) {
+    height: $spacing-11 * 3;
+  }
+
+  @include mq($from: x-large) {
+    height: $spacing-12 * 3;
+  }
+
+  @include mq($from: max-size) {
+    height: $spacing-13 * 3;
   }
 
   &__content {
-    padding: $spacing-07;
-    width: 16rem;
+    background-color: $background-color-lighter;
     display: flex;
     flex-direction: column;
+    height: 100%;
     justify-content: space-between;
-    color: $text-color-lighter;
+    padding: $spacing-05;
 
-    @include mq($until: large) {
-      padding: $spacing-05;
-      width: 10rem;
+    @include mq($until: medium) {
+      order: 1;
+    }
+
+    @include mq($from: medium) {
+      padding-right: $spacing-07;
+    }
+
+    @include mq($from: large) {
+      padding: $spacing-07;
     }
   }
 
   &__media {
-    flex: 1;
-    background-repeat: no-repeat;
+    background-position: center 25%;
     background-size: cover;
-    background-position: right center;
-    overflow: hidden;
-
-    @include mq($until: large) {
-      background-position: right -75px center;
-    }
+    flex: 1;
+    min-height: $spacing-10 * 3;
   }
 }
 </style>
