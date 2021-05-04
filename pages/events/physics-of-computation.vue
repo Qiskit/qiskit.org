@@ -254,18 +254,12 @@ export default class PhysicsOfComputationPage extends QiskitPage {
       event: 'The Future of Quantum Hardware (Jerry Chow - IBM)'
     },
     {
-      time: '12:10 PM',
-      event: `Announcement – <a href="https://www.ibmquantumawards.com/#/event" target="_blank"
-      style="cursor:pointer; text-decoration: none; color: #0f62fe;">IBM Quantum Awards: Open
-      Science Prize</a> winners`
-    },
-    {
-      time: '12:20 PM',
+      time: '12:00 PM',
       event: 'IBM Quantum Leadership remarks'
     },
     {
-      time: '12:30 PM',
-      event: 'Lunch break'
+      time: '12:15 PM',
+      event: 'Closing remarks and lunch break'
     }
   ]
 
