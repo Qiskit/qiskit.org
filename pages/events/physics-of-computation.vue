@@ -46,7 +46,7 @@
     </AppDataTableSection>
     <section class="physics-of-computation-page__section">
       <h3 class="copy__subtitle">
-        * Parallel tracks (times listed are approximate - subject to change)
+        * Parallel tracks (times listed are approximate and subject to change)
       </h3>
       <AppDataTable :columns="agendaTracksColumnsDataTable" :elements="afternoonSessionByTrackElementsDataTable" />
     </section>
