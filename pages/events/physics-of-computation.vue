@@ -301,28 +301,28 @@ export default class PhysicsOfComputationPage extends QiskitPage {
   afternoonAgendaByTracks: AgendaSlotByTrack[] = [
     {
       time: '02:20 PM',
-      track1: 'Demonstration of natural iSWAP gate on fixed-frequency transmon qubits (Kentaro Heya - University of Tokyo / Intern at IBM Japan)',
-      track2: 'The impossibility of Landauer\'s bound for almost every quantum state (Paul Riechers - Nanyang Technological University)'
+      track1: 'Demonstration of natural iSWAP gate on fixed-frequency transmon qubits <br> (Kentaro Heya - University of Tokyo / Intern at IBM Japan)',
+      track2: 'The impossibility of Landauer\'s bound for almost every quantum state <br> (Paul Riechers - Nanyang Technological University)'
     },
     {
       time: '02:40 PM',
-      track1: 'Exploring multi-programming for quantum algorithms (Siyuan Niu - University of Montpellier)',
-      track2: 'How to learn a quantum state - a.k.a. Private learning implies quantum stability (Yihui Quek - Stanford University)'
+      track1: 'Exploring multi-programming for quantum algorithms <br> (Siyuan Niu - University of Montpellier)',
+      track2: 'How to learn a quantum state - a.k.a. Private learning implies quantum stability <br> (Yihui Quek - Stanford University)'
     },
     {
       time: '03:00 PM',
-      track1: 'Towards a non-local Bell test with superconducting circuits (Paul Magnard - ETH Zurich/QuDev lab)',
-      track2: 'Compiler design for distributed quantum computing (Davide Ferrari - University of Parma)'
+      track1: 'Towards a non-local Bell test with superconducting circuits <br> (Paul Magnard - ETH Zurich/QuDev lab)',
+      track2: 'Compiler design for distributed quantum computing <br> (Davide Ferrari - University of Parma)'
     },
     {
       time: '03:20 PM',
-      track1: 'Deterministic generation and manipulation of entangled microwave photonic qubits (Jean-Claude Besse - ETH Zurich/QuDev lab)',
-      track2: 'Hardware efficient search on IBM Q. Non-Abelian quantum search reduces noise. (Vladimir Korepin and Kun Zhang - Stony Brook University)'
+      track1: 'Deterministic generation and manipulation of entangled microwave photonic qubits <br> (Jean-Claude Besse - ETH Zurich/QuDev lab)',
+      track2: 'Hardware efficient search on IBM Q. Non-Abelian quantum search reduces noise <br> (Vladimir Korepin and Kun Zhang - Stony Brook University)'
     },
     {
       time: '03:40 PM',
-      track1: 'Bifluxon: Fluxon-parity-protected superconducting qubit (Konstantin Kalashnikov - Rutgers University)',
-      track2: 'An optimal quantum sampling regression algorithm for variational eigensolving in the low qubit number regime (Pedro Rivero - Argonne National Laboratory / Illinois Institute of Technology)'
+      track1: 'Bifluxon: Fluxon-parity-protected superconducting qubit <br> (Konstantin Kalashnikov - Rutgers University)',
+      track2: 'An optimal quantum sampling regression algorithm for variational eigensolving in the low qubit number regime <br> (Pedro Rivero - Argonne National Laboratory / Illinois Institute of Technology)'
     },
     {
       time: '04:00 PM',
@@ -331,23 +331,23 @@ export default class PhysicsOfComputationPage extends QiskitPage {
     },
     {
       time: '04:05 PM',
-      track1: 'Millimeter-wave photons in cavity-QED systems with Rydberg atoms (Aziza Suleymanzade - University of Chicago)',
-      track2: 'Strongly universal Hamiltonian simulators (Leo Zhou - Harvard University)'
+      track1: 'Millimeter-wave photons in cavity-QED systems with Rydberg atoms <br> (Aziza Suleymanzade - University of Chicago)',
+      track2: 'Strongly universal Hamiltonian simulators <br> (Leo Zhou - Harvard University)'
     },
     {
       time: '04:25 PM',
-      track1: 'A modular quantum computer based on 3-wave mixing  (Pinlei Lu - University of Pittsburgh)',
-      track2: 'New properties of interacting quantum systems with algorithmic applications  (Mehdi Soleimanifar - MIT)'
+      track1: 'A modular quantum computer based on 3-wave mixing <br> (Pinlei Lu - University of Pittsburgh)',
+      track2: 'New properties of interacting quantum systems with algorithmic applications  <br> (Mehdi Soleimanifar - MIT)'
     },
     {
       time: '04:45 PM',
-      track1: 'Efficient and low-backaction quantum measurement using a chip-scale detector (Eric Rosenthal - JILA and the University of Colorado - Boulder)',
-      track2: 'A unified framework for machine learning using physical systems across classical-to-quantum transition (Saeed Khan - Princeton University)'
+      track1: 'Efficient and low-backaction quantum measurement using a chip-scale detector <br> (Eric Rosenthal - JILA and the University of Colorado - Boulder)',
+      track2: 'A unified framework for machine learning using physical systems across classical-to-quantum transition <br> (Saeed Khan - Princeton University)'
     },
     {
       time: '05:05 PM',
-      track1: 'Quantum Simulation using Superconducting Quantum Processors (Amir Karamlou - MIT)',
-      track2: 'Fundamental physical capabilities and limitations in communication and computing (Lev B. Levitin - Boston University)'
+      track1: 'Quantum Simulation using Superconducting Quantum Processors <br> (Amir Karamlou - MIT)',
+      track2: 'Fundamental physical capabilities and limitations in communication and computing <br> (Lev B. Levitin - Boston University)'
     },
     {
       time: '05:25 PM',
