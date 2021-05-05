@@ -262,11 +262,15 @@ export default class PhysicsOfComputationPage extends QiskitPage {
       </ul>`
     },
     {
-      time: '11:30 AM',
+      time: '10:40 AM',
+      event: 'Break'
+    },
+    {
+      time: '11:40 AM',
       event: 'The Future of Quantum Hardware (Jerry Chow - IBM)'
     },
     {
-      time: '12:00 PM',
+      time: '12:10 PM',
       event: 'IBM Quantum Leadership remarks'
     },
     {
