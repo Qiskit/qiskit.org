@@ -46,7 +46,7 @@
     </AppDataTableSection>
     <section class="physics-of-computation-page__section">
       <h3 class="copy__subtitle">
-        * Parallel tracks
+        * Parallel tracks (times listed are approximate - subject to change)
       </h3>
       <AppDataTable :columns="agendaTracksColumnsDataTable" :elements="afternoonSessionByTrackElementsDataTable" />
     </section>
@@ -301,7 +301,7 @@ export default class PhysicsOfComputationPage extends QiskitPage {
   afternoonAgendaByTracks: AgendaSlotByTrack[] = [
     {
       time: '02:20 PM',
-      track1: 'Demonstration of natural iSWAP gate on fixed-frequency transmon qubits <br> (Kentaro Heya - University of Tokyo / Intern at IBM Japan)',
+      track1: 'Demonstration of natural iSWAP gate on fixed-frequency transmon qubits <br> (Kentaro Heya - University of Tokyo / IBM Japan)',
       track2: 'The impossibility of Landauer\'s bound for almost every quantum state <br> (Paul Riechers - Nanyang Technological University)'
     },
     {
@@ -317,7 +317,7 @@ export default class PhysicsOfComputationPage extends QiskitPage {
     {
       time: '03:20 PM',
       track1: 'Deterministic generation and manipulation of entangled microwave photonic qubits <br> (Jean-Claude Besse - ETH Zurich/QuDev lab)',
-      track2: 'Hardware efficient search on IBM Q. Non-Abelian quantum search reduces noise <br> (Vladimir Korepin and Kun Zhang - Stony Brook University)'
+      track2: 'Hardware efficient search on IBM Q. Non-Abelian quantum search reduces noise. <br> (Vladimir Korepin and Kun Zhang - Stony Brook University)'
     },
     {
       time: '03:40 PM',
@@ -341,7 +341,7 @@ export default class PhysicsOfComputationPage extends QiskitPage {
     },
     {
       time: '04:45 PM',
-      track1: 'Efficient and low-backaction quantum measurement using a chip-scale detector <br> (Eric Rosenthal - JILA and the University of Colorado - Boulder)',
+      track1: 'Efficient and low-backaction quantum measurement using a chip-scale detector <br> (Eric Rosenthal - JILA and the University of Colorado, Boulder)',
       track2: 'A unified framework for machine learning using physical systems across classical-to-quantum transition <br> (Saeed Khan - Princeton University)'
     },
     {
