@@ -290,7 +290,7 @@ export default class PhysicsOfComputationPage extends QiskitPage {
     },
     {
       time: '02:20 PM',
-      event: 'Two parallel tracks (9 to 10 contributed talks each). See details below *'
+      event: 'Two parallel tracks (9 contributed talks each). See details below *'
     },
     {
       time: '05:30 PM',
