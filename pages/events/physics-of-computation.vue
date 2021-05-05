@@ -44,6 +44,12 @@
     >
       <AppCta kind="ghost" v-bind="afternoonSessionAgendaCTA" is-wider />
     </AppDataTableSection>
+    <section class="physics-of-computation-page__section">
+      <h3 class="copy__subtitle">
+        * Parallel tracks (times listed are approximate and subject to change)
+      </h3>
+      <AppDataTable :columns="agendaTracksColumnsDataTable" :elements="afternoonSessionByTrackElementsDataTable" />
+    </section>
     <AppHelpfulResourcesSection
       class="physics-of-computation-page__section"
       :title="helpfulResourcesSectionTitle"
@@ -62,6 +68,12 @@ import { GeneralLink } from '~/constants/appLinks'
 interface AgendaSlot {
   time: string,
   event: string
+}
+
+interface AgendaSlotByTrack {
+  time: string,
+  track1: string,
+  track2: string
 }
 
 @Component({
@@ -162,7 +174,7 @@ export default class PhysicsOfComputationPage extends QiskitPage {
     description: 'Keynotes, contributed talks, and more bridging the 1981 Physics of Computation conference with current research.',
     location: 'Virtual event open to the public',
     date: 'May 6, 2021',
-    time: '8:30am - 5:00pm EDT',
+    time: '8:30 AM - 5:30 PM EDT',
     to: 'https://youtu.be/YGqBVnAPvSw',
     ctaLabel: 'Official trailer',
     segment: {
@@ -240,6 +252,10 @@ export default class PhysicsOfComputationPage extends QiskitPage {
     },
     {
       time: '10:30 AM',
+      event: 'Break'
+    },
+    {
+      time: '10:40 AM',
       event: `A live panel that will bridge Then and Now. Featuring:<br>
       <ul>
         <li>Dorit Aharonov (Hebrew University of Jerusalem)</li>
@@ -250,11 +266,11 @@ export default class PhysicsOfComputationPage extends QiskitPage {
       </ul>`
     },
     {
-      time: '11:30 AM',
+      time: '11:40 AM',
       event: 'The Future of Quantum Hardware (Jerry Chow - IBM)'
     },
     {
-      time: '12:00 PM',
+      time: '12:10 PM',
       event: 'IBM Quantum Leadership remarks'
     },
     {
@@ -274,16 +290,75 @@ export default class PhysicsOfComputationPage extends QiskitPage {
     },
     {
       time: '02:20 PM',
-      event: 'Two parallel tracks (8 to 10 contributed talks each)'
+      event: 'Two parallel tracks (9 contributed talks each). See details below *'
     },
     {
       time: '05:30 PM',
-      event: 'Closing Remarks'
+      event: 'Networking lounges'
+    }
+  ]
+
+  afternoonAgendaByTracks: AgendaSlotByTrack[] = [
+    {
+      time: '02:20 PM',
+      track1: 'Demonstration of natural iSWAP gate on fixed-frequency transmon qubits <br> (Kentaro Heya - University of Tokyo / IBM Japan)',
+      track2: 'The impossibility of Landauer\'s bound for almost every quantum state <br> (Paul Riechers - Nanyang Technological University)'
+    },
+    {
+      time: '02:40 PM',
+      track1: 'Exploring multi-programming for quantum algorithms <br> (Siyuan Niu - University of Montpellier)',
+      track2: 'How to learn a quantum state - a.k.a. Private learning implies quantum stability <br> (Yihui Quek - Stanford University)'
+    },
+    {
+      time: '03:00 PM',
+      track1: 'Towards a non-local Bell test with superconducting circuits <br> (Paul Magnard - ETH Zurich/QuDev lab)',
+      track2: 'Compiler design for distributed quantum computing <br> (Davide Ferrari - University of Parma)'
+    },
+    {
+      time: '03:20 PM',
+      track1: 'Deterministic generation and manipulation of entangled microwave photonic qubits <br> (Jean-Claude Besse - ETH Zurich/QuDev lab)',
+      track2: 'Hardware efficient search on IBM Q. Non-Abelian quantum search reduces noise. <br> (Vladimir Korepin and Kun Zhang - Stony Brook University)'
+    },
+    {
+      time: '03:40 PM',
+      track1: 'Bifluxon: Fluxon-parity-protected superconducting qubit <br> (Konstantin Kalashnikov - Rutgers University)',
+      track2: 'An optimal quantum sampling regression algorithm for variational eigensolving in the low qubit number regime <br> (Pedro Rivero - Argonne National Laboratory / Illinois Institute of Technology)'
+    },
+    {
+      time: '04:00 PM',
+      track1: '5-minute break',
+      track2: '5-minute break'
+    },
+    {
+      time: '04:05 PM',
+      track1: 'Millimeter-wave photons in cavity-QED systems with Rydberg atoms <br> (Aziza Suleymanzade - University of Chicago)',
+      track2: 'Strongly universal Hamiltonian simulators <br> (Leo Zhou - Harvard University)'
+    },
+    {
+      time: '04:25 PM',
+      track1: 'A modular quantum computer based on 3-wave mixing <br> (Pinlei Lu - University of Pittsburgh)',
+      track2: 'New properties of interacting quantum systems with algorithmic applications  <br> (Mehdi Soleimanifar - MIT)'
+    },
+    {
+      time: '04:45 PM',
+      track1: 'Efficient and low-backaction quantum measurement using a chip-scale detector <br> (Eric Rosenthal - JILA and the University of Colorado, Boulder)',
+      track2: 'A unified framework for machine learning using physical systems across classical-to-quantum transition <br> (Saeed Khan - Princeton University)'
+    },
+    {
+      time: '05:05 PM',
+      track1: 'Quantum Simulation using Superconducting Quantum Processors <br> (Amir Karamlou - MIT)',
+      track2: 'Fundamental physical capabilities and limitations in communication and computing <br> (Lev B. Levitin - Boston University)'
+    },
+    {
+      time: '05:25 PM',
+      track1: 'Closing remarks',
+      track2: 'Closing remarks'
     }
   ]
 
   morningSessionElementsDataTable = this.getDataTableElements(this.morningAgenda)
   afternoonSessionElementsDataTable = this.getDataTableElements(this.afternoonAgenda)
+  afternoonSessionByTrackElementsDataTable = this.getDataTableElementsByTrack(this.afternoonAgendaByTracks)
 
   getDataTableElements (agenda: AgendaSlot[]) : TableRowElement[][] {
     return agenda.map(slot => ([
@@ -300,7 +375,28 @@ export default class PhysicsOfComputationPage extends QiskitPage {
     ]))
   }
 
+  getDataTableElementsByTrack (agenda: AgendaSlotByTrack[]) : TableRowElement[][] {
+    return agenda.map(slot => ([
+      {
+        component: 'span',
+        styles: 'min-width: 5rem; display: inline-block; font-weight: bold;',
+        data: slot.time
+      },
+      {
+        component: 'span',
+        styles: 'width: 25rem; min-width: 20rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
+        data: slot.track1
+      },
+      {
+        component: 'span',
+        styles: 'width: 25rem; min-width: 20rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
+        data: slot.track2
+      }
+    ]))
+  }
+
   agendaColumnsDataTable: string[] = ['Time (EDT)', 'Event']
+  agendaTracksColumnsDataTable: string[] = ['Time (EDT)', 'Track 1 - Quantum Hardware / Experiment', 'Track 2 - Quantum Software / Theory / Applications']
 
   morningSessionAgendaCTA: GeneralLink = {
     url: this.morningSessionYouTubeURL,
