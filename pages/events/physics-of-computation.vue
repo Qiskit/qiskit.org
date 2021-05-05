@@ -252,6 +252,10 @@ export default class PhysicsOfComputationPage extends QiskitPage {
     },
     {
       time: '10:30 AM',
+      event: 'Break'
+    },
+    {
+      time: '10:40 AM',
       event: `A live panel that will bridge Then and Now. Featuring:<br>
       <ul>
         <li>Dorit Aharonov (Hebrew University of Jerusalem)</li>
@@ -260,10 +264,6 @@ export default class PhysicsOfComputationPage extends QiskitPage {
         <li>Will Oliver (MIT)</li>
         <li>Zaira Nazario (IBM)</li>
       </ul>`
-    },
-    {
-      time: '10:40 AM',
-      event: 'Break'
     },
     {
       time: '11:40 AM',
