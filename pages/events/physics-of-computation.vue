@@ -294,7 +294,7 @@ export default class PhysicsOfComputationPage extends QiskitPage {
     },
     {
       time: '05:30 PM',
-      event: 'Closing Remarks'
+      event: 'Networking lounges'
     }
   ]
 
@@ -348,6 +348,11 @@ export default class PhysicsOfComputationPage extends QiskitPage {
       time: '05:05 PM',
       track1: 'Quantum Simulation using Superconducting Quantum Processors (Amir Karamlou - MIT)',
       track2: 'Fundamental physical capabilities and limitations in communication and computing (Lev B. Levitin - Boston University)'
+    },
+    {
+      time: '05:25 PM',
+      track1: 'Closing remarks',
+      track2: 'Closing remarks'
     }
   ]
 
