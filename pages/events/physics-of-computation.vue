@@ -174,7 +174,7 @@ export default class PhysicsOfComputationPage extends QiskitPage {
     description: 'Keynotes, contributed talks, and more bridging the 1981 Physics of Computation conference with current research.',
     location: 'Virtual event open to the public',
     date: 'May 6, 2021',
-    time: '8:30am - 5:00pm EDT',
+    time: '8:30 AM - 5:30 PM EDT',
     to: 'https://youtu.be/YGqBVnAPvSw',
     ctaLabel: 'Official trailer',
     segment: {
