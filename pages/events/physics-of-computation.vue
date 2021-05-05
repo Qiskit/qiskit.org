@@ -46,7 +46,7 @@
     </AppDataTableSection>
     <section class="physics-of-computation-page__section">
       <h3 class="copy__subtitle">
-        * Parallel tracks detail
+        * Parallel tracks
       </h3>
       <AppDataTable :columns="agendaTracksColumnsDataTable" :elements="afternoonSessionByTrackElementsDataTable" />
     </section>
