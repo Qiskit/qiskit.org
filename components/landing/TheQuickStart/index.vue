@@ -5,7 +5,7 @@
   >
     <h2>Quick Start</h2>
     <div class="bx--row quick-start__introduction">
-      <div class="bx--col-md-6 bx--col-lg-8">
+      <div class="bx--col-md-7 bx--col-lg-9 bx--col-xlg-7 bx--col-max-6">
         <p class="quick-start__description">
           When you are looking to start Qiskit, you have two options. You can
           start Qiskit locally, which is much more secure and private, or you
@@ -14,8 +14,8 @@
       </div>
     </div>
     <div class="bx--row">
-      <StartLocally class="bx--col-lg-10 bx--col-md-5" />
-      <StartOnTheCloud class="bx--col-lg-6 bx--col-md-3" />
+      <StartLocally class="bx--col-md-5 bx--col-lg-10 bx--col-xlg-11 bx--col-max-12" />
+      <StartOnTheCloud class="bx--col-md-3 bx--col-lg-6 bx--col-xlg-5 bx--col-max-4" />
     </div>
   </article>
 </template>
@@ -32,6 +32,10 @@ export default class TheQuickStart extends Vue {
 
 <style lang="scss" scoped>
 .quick-start {
+  &__description {
+    margin-bottom: 0;
+  }
+
   &__introduction {
     margin-bottom: $spacing-06;
   }
