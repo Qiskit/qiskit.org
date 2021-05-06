@@ -5,7 +5,7 @@
       <TheMenu @change-visibility="isMenuShown = $event === 'shown'" />
     </header>
     <nuxt />
-    <PageFooter old-container theme="light" />
+    <PageFooter theme="light" />
   </div>
 </template>
 
@@ -14,7 +14,7 @@ import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 
 @Component
-export default class DefaultLayout extends Vue {
+export default class MaxLayout extends Vue {
   isMenuShown: boolean = false
 }
 </script>

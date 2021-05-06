@@ -29,6 +29,7 @@ import QiskitPage from '~/components/logic/QiskitPage.vue'
   head () {
     return { title: 'Qiskit' }
   },
+  layout: 'default-max',
   async asyncData () {
     const qiskitPackageInfoUrl = 'https://pypi.org/pypi/qiskit/json'
     const packageInfo = (await axios.get(qiskitPackageInfoUrl)).data
