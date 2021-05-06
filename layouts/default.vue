@@ -2,7 +2,10 @@
   <!-- tabindex is needed to allow hiding the menu in iOS Safari -->
   <div tabindex="-1">
     <header id="navigation">
-      <TheMenu @change-visibility="isMenuShown = $event === 'shown'" />
+      <TheMenu
+        old-container
+        @change-visibility="isMenuShown = $event === 'shown'"
+      />
     </header>
     <nuxt />
     <PageFooter old-container theme="light" />

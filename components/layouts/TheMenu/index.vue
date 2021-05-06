@@ -38,7 +38,10 @@
       />
     </section>
     <section class="menu__main-level">
-      <nav class="menu__navigation-level">
+      <nav
+        class="menu__navigation-level"
+        :class="{ 'bx--grid': !oldContainer }"
+      >
         <BasicLink
           class="
             menu__entry
@@ -93,11 +96,13 @@
 </template>
 
 <script lang="ts">
-import { Watch, Component, Mixins } from 'vue-property-decorator'
+import { Watch, Component, Mixins, Prop } from 'vue-property-decorator'
 import MenuMixin from '~/mixins/menu'
 
 @Component
 export default class TheMenu extends Mixins(MenuMixin) {
+  @Prop({ type: Boolean, default: false, required: false }) oldContainer!: boolean;
+
   isMobileMenuVisible: boolean = false
 
   @Watch('isMobileMenuVisible')
@@ -167,13 +172,15 @@ export default class TheMenu extends Mixins(MenuMixin) {
 
   &__mobile-inner-container,
   &__navigation-level {
-    @include contained();
-
     padding-top: $spacing-05;
     padding-bottom: $spacing-05;
     display: flex;
     justify-content: flex-end;
     align-items: center;
+  }
+
+  &__mobile-inner-container {
+    @include contained();
   }
 
   &__navigation-level {
@@ -182,6 +189,10 @@ export default class TheMenu extends Mixins(MenuMixin) {
 
     @include mq($until: large) {
       display: none;
+    }
+
+    &:not(.bx--grid) {
+      @include contained();
     }
   }
 
