@@ -3,11 +3,11 @@
     <h2>Quick Start</h2>
     <div class="bx--row quick-start__introduction">
       <div class="bx--col-md-6 bx--col-lg-8">
-        <div>
+        <p class="quick-start__description">
           When you are looking to start Qiskit, you have two options. You can
           start Qiskit locally, which is much more secure and private, or you
           get started with hosted Jupyter Notebooks in IBM Quantum Lab.
-        </div>
+        </p>
       </div>
     </div>
     <div class="bx--row">
@@ -28,6 +28,10 @@ export default class TheQuickStart extends Vue {}
 <style lang="scss" scoped>
 .quick-start {
   @include contained();
+
+  &__description {
+    margin-bottom: 0;
+  }
 
   &__introduction {
     margin-bottom: $spacing-06;

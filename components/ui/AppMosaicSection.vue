@@ -5,7 +5,7 @@
     </div>
     <div v-if="description" class="bx--row app-mosaic-section__introduction">
       <div class="bx--col-md-6 bx--col-lg-8">
-        <div v-text="description" />
+        <p class="app-mosaic-section__description" v-text="description" />
       </div>
     </div>
     <AppMosaic class="app-mosaic-section__mosaic" :mosaic-elements="elements" />
@@ -28,6 +28,10 @@ export default class AppMosaicSection extends Vue {
 
 <style lang="scss">
 .app-mosaic-section {
+  &__description {
+    margin-bottom: 0;
+  }
+
   &__mosaic {
     margin-bottom: $layout-03;
 
