@@ -10,17 +10,17 @@
         {{ headerData.titleLine2 }}
       </template>
       <template slot="description">
-        <p class="copy__paragraph">
+        <p>
           The Qiskit Global Summer School 2021 is a two-week intensive summer school designed to empower the next generation of quantum researchers and developers with the skills and know-how to explore quantum applications on their own. This second-annual course, made up of twenty lectures, five applied lab exercises, hands-on mentorship, and live Q&A sessions, focuses on developing hands-on experience and understanding of quantum machine learning.
         </p>
-        <p class="copy__paragraph">
+        <p>
           Registration will open on May 26, 2021 at 12:00 PM EST. Please follow
           <AppLink v-bind="headerData.qiskitTwitterLink">
             Qiskit Twitter
           </AppLink>
           for more details and updates. For any questions, please check out our FAQ or submit an enquiry using the form below!
         </p>
-        <p class="copy__paragraph">
+        <p>
           Speakers will be announced soon!
         </p>
       </template>
@@ -39,7 +39,7 @@
 
     <section class="summer-school-page__section">
       <h2 v-text="agendaData.title" />
-      <p class="copy__paragraph" v-text="agendaData.subtitle" />
+      <p v-text="agendaData.subtitle" />
       <cv-tabs>
         <cv-tab
           v-for="week in agendaData.weeks"

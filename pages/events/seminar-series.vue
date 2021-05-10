@@ -11,7 +11,6 @@
         <p
           v-for="(paragraph, index) in headerDescription"
           :key="index"
-          class="copy__paragraph"
           v-text="paragraph"
         />
       </template>

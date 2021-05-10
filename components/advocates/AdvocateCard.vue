@@ -11,7 +11,7 @@
     </div>
     <div class="advocate-card__contact">
       <LogoSlack20 class="advocate-card__icon" />
-      <AppLink class="copy__link" :url="`https://qiskit.slack.com/team/${slackId}`">
+      <AppLink :url="`https://qiskit.slack.com/team/${slackId}`">
         @{{ slackUsername }}
       </AppLink>
     </div>

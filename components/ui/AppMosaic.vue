@@ -22,7 +22,7 @@
           <AppLink
             v-if="cta"
             v-bind="cta"
-            class="app-mosaic__element-copy-link copy__link"
+            class="app-mosaic__element-copy-link"
             v-text="cta.label"
           />
         </div>

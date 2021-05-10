@@ -16,7 +16,6 @@
       id="contentContainer"
       class="
         page-section
-        copy__util
         overview-page__content-container
       "
     >

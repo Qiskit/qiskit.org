@@ -1,6 +1,6 @@
 <template>
   <article class="page-section the-learn-section">
-    <div class="the-learn-section__container copy__util">
+    <div class="the-learn-section__container">
       <h2>Learn with Qiskit</h2>
       <LearnCard />
     </div>
