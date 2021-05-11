@@ -21,20 +21,9 @@
           </cv-tabs>
         </client-only>
       </div>
-      <div class="bx--row">
-        <div
-          v-for="filter in extraFilters"
-          :key="filter.label"
-          class="bx--col-md-0"
-        >
-          <AppMultiSelect
-            :label="filter.label"
-            :options="filter.options"
-            :value="getCheckedFilters(filter.filterType)"
-            @change-selection="updateWholeFilter(filter.filterType, $event)"
-          />
-        </div>
-        <div class="bx--col-lg-4 bx--col-md-2 bx--col-sm-0">
+
+      <AppFiltersResultsLayout>
+        <template slot="filters-on-m-l-screen">
           <AppFieldset
             v-for="filter in extraFilters"
             :key="filter.label"
@@ -52,8 +41,21 @@
               />
             </client-only>
           </AppFieldset>
-        </div>
-        <div class="bx--col-lg-12 bx--col-md-6 event-page__main-content">
+        </template>
+        <template slot="filters-on-s-screen">
+          <div
+            v-for="filter in extraFilters"
+            :key="filter.label"
+          >
+            <AppMultiSelect
+              :label="filter.label"
+              :options="filter.options"
+              :value="getCheckedFilters(filter.filterType)"
+              @change-selection="updateWholeFilter(filter.filterType, $event)"
+            />
+          </div>
+        </template>
+        <template slot="results">
           <div>
             <AppCard
               v-if="noEvents"
@@ -85,8 +87,8 @@
             </p>
             <AppCta v-bind="eventRequestLink" />
           </div>
-        </div>
-      </div>
+        </template>
+      </AppFiltersResultsLayout>
     </div>
   </div>
 </template>
