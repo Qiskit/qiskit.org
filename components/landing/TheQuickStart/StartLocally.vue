@@ -183,16 +183,22 @@ export default class StartLocally extends Vue {
     margin-bottom: $spacing-08;
 
     @include mq($from: large) {
-      max-width: 100% * (9/10);
+      $grid-columns: 9/10;
+
+      max-width: 100% * $grid-columns;
       padding-right: $spacing-05;
     }
 
     @include mq($from: x-large) {
-      max-width: 100% * (7/11);
+      $grid-columns: 7/11;
+
+      max-width: 100% * $grid-columns;
     }
 
     @include mq($from: max-size) {
-      max-width: 50%;
+      $grid-columns: 6/12;
+
+      max-width: 100% * $grid-columns;
     }
   }
 
