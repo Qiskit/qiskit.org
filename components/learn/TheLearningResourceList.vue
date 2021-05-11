@@ -4,7 +4,7 @@
       <h2>Learning resources</h2>
       <div class="bx--row the-learning-resources-list__introduction">
         <div class="bx--col-md-6 bx--col-lg-8">
-          <div>
+          <p>
             The below are designed and created by the Qiskit team. However, we
             recommend a familiarity with
             <AppLink url="https://www.khanacademy.org/math/linear-algebra">
@@ -15,7 +15,7 @@
               Python
             </AppLink>
             from these trusted resources.
-          </div>
+          </p>
         </div>
       </div>
       <client-only>
