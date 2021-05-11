@@ -37,19 +37,19 @@ export default class LearnCard extends Vue {
   flex-wrap: wrap;
 
   @include mq($from: medium) {
-    height: $spacing-10 * 3;
+    height: 12rem;
   }
 
   @include mq($from: large) {
-    height: $spacing-11 * 3;
+    height: 15rem;
   }
 
   @include mq($from: x-large) {
-    height: $spacing-12 * 3;
+    height: 18rem;
   }
 
   @include mq($from: max-size) {
-    height: $spacing-13 * 3;
+    height: 30rem;
   }
 
   &__content {
@@ -77,7 +77,7 @@ export default class LearnCard extends Vue {
     background-position: center 25%;
     background-size: cover;
     flex: 1;
-    min-height: $spacing-10 * 3;
+    min-height: 12rem;
   }
 }
 </style>
