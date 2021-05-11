@@ -1,5 +1,5 @@
 <template>
-  <section class="join-section">
+  <section class="bx--grid">
     <div class="bx--row">
       <article
         class="bx--col-lg-4 bx--col-md-4 join-section__feature join-section__intro"
@@ -8,7 +8,7 @@
           The Qiskit advocate program is a global program that provides support
           to the individuals who actively contribute to the Qiskit Community.
         </p>
-        <AppCta v-bind="joinAction" />
+        <AppCta v-bind="joinAction" is-wider />
       </article>
       <div
         v-for="benefit in advocateBenefits"
@@ -59,11 +59,21 @@ export default class JoinSection extends Vue {
 @import '~carbon-components/scss/globals/scss/typography';
 
 .join-section {
-  @include contained();
-
   &__feature {
     @include mq($until: large) {
       margin-bottom: $spacing-07;
+    }
+
+    @include mq($from: medium) {
+      height: 14rem;
+    }
+
+    @include mq($from: large) {
+      height: 16.5rem;
+    }
+
+    @include mq($from: x-large) {
+      height: 14rem;
     }
   }
 
