@@ -21,7 +21,6 @@
           </cv-tabs>
         </client-only>
       </div>
-
       <AppFiltersResultsLayout>
         <template slot="filters-on-m-l-screen">
           <AppFieldset
@@ -56,29 +55,29 @@
           </div>
         </template>
         <template slot="results">
-          <div>
-            <AppCard
-              v-if="noEvents"
-              :image="emptyCard.img"
-              :title="emptyCard.title"
-            >
-              <div class="event-page__empty-card-description">
-                {{ emptyCard.description }}
-              </div>
-            </AppCard>
-            <EventCard
-              v-for="event in filteredEvents"
-              v-else
-              :key="`${event.title}-${event.place}-${event.date}`"
-              class="event-page__event-card"
-              :types="event.types"
-              :title="event.title"
-              :image="event.image"
-              :location="event.location"
-              :date="event.date"
-              :to="event.to"
-            />
-          </div>
+          <AppCard
+            v-if="noEvents"
+            :image="emptyCard.img"
+            :title="emptyCard.title"
+          >
+            <div class="event-page__empty-card-description">
+              {{ emptyCard.description }}
+            </div>
+          </AppCard>
+          <EventCard
+            v-for="event in filteredEvents"
+            v-else
+            :key="`${event.title}-${event.place}-${event.date}`"
+            class="event-page__event-card"
+            :types="event.types"
+            :title="event.title"
+            :image="event.image"
+            :location="event.location"
+            :date="event.date"
+            :to="event.to"
+          />
+        </template>
+        <template slot="extra-info">
           <div class="event-page__start-an-event">
             <h3>Start an event</h3>
             <p class="event-page__start-an-event__description">

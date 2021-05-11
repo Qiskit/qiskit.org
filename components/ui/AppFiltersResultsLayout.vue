@@ -6,8 +6,9 @@
     <div class="bx--col-sm-4 bx--col-md-0">
       <slot name="filters-on-s-screen" />
     </div>
-    <div class="bx--col-lg-12 bx--col-md-6 app-filters-results-layout__results">
+    <div class="bx--col-lg-12 bx--col-md-6 app-filters-results-layout__results-section">
       <slot name="results" />
+      <slot name="extra-info" />
     </div>
   </div>
 </template>
@@ -22,7 +23,7 @@ export default class AppFiltersResultsLayouts extends Vue {}
 
 <style lang="scss">
 .app-filters-results-layout {
-  &__results {
+  &__results-section {
     @include mq($until: medium) {
       margin-top: $layout-04;
     }
