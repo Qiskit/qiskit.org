@@ -1,12 +1,8 @@
 <template>
   <article class="app-description-card">
     <div>
-      <h2 class="copy__subtitle">
-        {{ title }}
-      </h2>
-      <p class="copy__paragraph">
-        {{ description }}
-      </p>
+      <h3 v-text="title" />
+      <p v-text="description" />
     </div>
     <AppCta
       v-if="cta && cta.url"

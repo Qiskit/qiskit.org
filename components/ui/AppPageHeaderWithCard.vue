@@ -4,7 +4,7 @@
       <div class="bx--row">
         <main class="bx--col-lg-11 bx--col-md-4 app-page-header__main">
           <div>
-            <h1 class="app-page-header__headline copy__page-title">
+            <h1 class="app-page-header__headline">
               <slot name="title" />
             </h1>
             <div class="app-page-header__description">
@@ -17,7 +17,7 @@
           <div>
             <div class="app-page-header__card-title-wrapper">
               <div
-                class="app-page-header__card-title copy__subtitle"
+                class="app-page-header__card-title"
                 v-text="cardTitle"
               />
             </div>

@@ -78,11 +78,10 @@
             />
           </div>
           <div class="event-page__start-an-event">
-            <h3 class="event-page__start-an-event__title">
-              Start an event
-            </h3>
-            <p class="copy__paragraph copy__paragraph_importance_outstanding event-page__start-an-event__description">
-              We can help you bring Qiskit experts to your campus for guest lectures, hackathons, and other events.
+            <h3>Start an event</h3>
+            <p class="event-page__start-an-event__description">
+              We can help you bring Qiskit experts to your campus for guest
+              lectures, hackathons, and other events.
             </p>
             <AppCta v-bind="eventRequestLink" />
           </div>
@@ -281,13 +280,14 @@ export default class EventsPage extends QiskitPage {
     margin-top: $layout-05;
     margin-bottom: $layout-05;
 
-    &__title {
-      @include type-style('productive-heading-02');
-    }
-
     &__description {
       margin-top: $layout-02;
       margin-bottom: $layout-03;
+      max-width: 20rem;
+
+      @include mq($from: large) {
+        max-width: 24rem;
+      }
     }
   }
 }

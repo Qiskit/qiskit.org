@@ -1,23 +1,23 @@
 <template>
   <section class="the-learning-resources-list">
     <div class="the-learning-resources-list__container">
-      <h2 class="copy__title">
-        Learning resources
-      </h2>
-      <p
-        class="
-          copy__paragraph
-          copy__paragraph_importance_outstanding
-        "
-      >
-        The below are designed and created by the Qiskit team. However, we
-        recommend a familiarity with <AppLink url="https://www.khanacademy.org/math/linear-algebra">
-          linear algebra
-        </AppLink> and <AppLink url="https://www.coursera.org/specializations/python">
-          Python
-        </AppLink> from these
-        trusted resources.
-      </p>
+      <h2>Learning resources</h2>
+      <div class="bx--row the-learning-resources-list__introduction">
+        <div class="bx--col-md-6 bx--col-lg-8">
+          <p>
+            The below are designed and created by the Qiskit team. However, we
+            recommend a familiarity with
+            <AppLink url="https://www.khanacademy.org/math/linear-algebra">
+              linear algebra
+            </AppLink>
+            and
+            <AppLink url="https://www.coursera.org/specializations/python">
+              Python
+            </AppLink>
+            from these trusted resources.
+          </p>
+        </div>
+      </div>
       <client-only>
         <cv-tabs
           class="the-learning-resources-list__filter-level"
@@ -122,6 +122,10 @@ export default class TheLearningResourceList extends Vue {
     @include contained();
   }
 
+  &__introduction {
+    margin-bottom: $spacing-07;
+  }
+
   &__filter-level {
     margin-bottom: $layout-04;
 
@@ -131,8 +135,6 @@ export default class TheLearningResourceList extends Vue {
   }
 
   &__filter-time {
-    color: $text-color-light;
-
     @include mq($until: medium) {
       margin-bottom: $layout-03;
     }

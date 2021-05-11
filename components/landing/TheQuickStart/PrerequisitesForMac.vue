@@ -1,25 +1,33 @@
 <template>
   <div class="prerequisites">
-    <p class="copy__paragraph copy__paragraph_importance_support">
-      To use the Clang compiler on macOS, you need to install
-      an extra library for supporting OpenMP. You can use
-      <AppLink url="https://brew.sh/">
-        brew
-      </AppLink>
-      to install this and other dependencies.
-    </p>
-    <p class="copy__subtitle">
-      Install the compiler
-    </p>
-    <pre class="prerequisites__code">brew install libomp</pre>
-    <p class="copy__subtitle">
-      Install OpenBLAS development headers
-    </p>
-    <pre class="prerequisites__code">brew install openblas</pre>
-    <p class="copy__subtitle">
-      Install Xcode Command Line Tools.
-    </p>
-    <pre class="prerequisites__code">xcode-select --install</pre>
+    <div class="prerequisites__section">
+      <p>
+        To use the Clang compiler on macOS, you need to install an extra library
+        for supporting OpenMP. You can use
+        <AppLink url="https://brew.sh/">
+          brew
+        </AppLink>
+        to install this and other dependencies.
+      </p>
+    </div>
+    <div class="prerequisites__section">
+      <h3 class="h4">
+        Install the compiler
+      </h3>
+      <pre class="code prerequisites__code">brew install libomp</pre>
+    </div>
+    <div class="prerequisites__section">
+      <h3 class="h4">
+        Install OpenBLAS development headers
+      </h3>
+      <pre class="code prerequisites__code">brew install openblas</pre>
+    </div>
+    <div class="prerequisites__section">
+      <h3 class="h4">
+        Install Xcode Command Line Tools.
+      </h3>
+      <pre class="code prerequisites__code">xcode-select --install</pre>
+    </div>
   </div>
 </template>
 

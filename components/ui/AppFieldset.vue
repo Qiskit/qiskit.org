@@ -18,15 +18,10 @@ export default class AppFieldset extends Vue {
 </script>
 
 <style lang="scss">
-@import '~carbon-components/scss/globals/scss/typography';
-
 .app-fieldset {
   margin-bottom: $layout-03;
 
   &__label {
-    @include type-style('body-short-01');
-
-    color: $text-color-light;
     margin-bottom: $layout-01;
   }
 }

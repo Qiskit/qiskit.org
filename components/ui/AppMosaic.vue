@@ -11,9 +11,7 @@
           class="app-mosaic__element-copy"
           :class="`app-mosaic__element-copy_${position}`"
         >
-          <dt class="copy__subtitle">
-            {{ title }}
-          </dt>
+          <dt class="h3" v-text="title" />
           <!-- eslint-disable vue/no-v-html -->
           <dd
             class="app-mosaic__element-copy-description"
@@ -24,7 +22,7 @@
           <AppLink
             v-if="cta"
             v-bind="cta"
-            class="app-mosaic__element-copy-link copy__link"
+            class="app-mosaic__element-copy-link"
             v-text="cta.label"
           />
         </div>
@@ -59,8 +57,6 @@ export default class AppMosaic extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '~carbon-components/scss/globals/scss/typography';
-
 .app-mosaic {
   &__layout {
     display: grid;
@@ -183,10 +179,6 @@ export default class AppMosaic extends Vue {
       }
 
       &-description {
-        @include type-style('body-long-01');
-
-        color: $text-color-light;
-
         ::v-deep li {
           list-style-type: disc;
           margin-left: $spacing-06;

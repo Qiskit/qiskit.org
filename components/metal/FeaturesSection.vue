@@ -1,7 +1,7 @@
 <template>
   <section class="features-section">
     <div class="features-section__container">
-      <h2 class="features-section__title">
+      <h2>
         Why Qiskit Metal
       </h2>
       <p class="features-section__description">
@@ -33,8 +33,6 @@ export default class FeaturesSection extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '~carbon-components/scss/globals/scss/typography';
-
 .features-section {
   background-color: $background-color-dark;
 
@@ -50,20 +48,7 @@ export default class FeaturesSection extends Vue {
     }
   }
 
-  &__title {
-    @include type-style('expressive-heading-05');
-
-    margin-bottom: $layout-03;
-    font-weight: 300;
-
-    @include mq($until: large) {
-      @include type-style('expressive-heading-04');
-    }
-  }
-
   &__description {
-    @include type-style('body-long-01');
-
     max-width: 9 * $column-size-large;
     margin-bottom: $layout-06;
 

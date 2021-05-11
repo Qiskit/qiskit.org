@@ -42,7 +42,7 @@
         :to="resource.to"
         :cta-label="resource.ctaLabel"
       >
-        <nuxt-content class="copy" :document="resource" />
+        <nuxt-content :document="resource" />
       </AppCard>
     </TheLearningResourceList>
   </div>

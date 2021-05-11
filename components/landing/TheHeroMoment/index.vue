@@ -43,8 +43,6 @@ export default class TheHeroMoment extends Vue {
 </script>
 
 <style lang="scss">
-@import '~carbon-components/scss/globals/scss/typography';
-
 .the-hero-moment {
   position: relative;
   overflow: hidden;
@@ -109,8 +107,6 @@ export default class TheHeroMoment extends Vue {
   }
 
   &__title {
-    @include type-style('productive-heading-07');
-
     margin: 0 0 $layout-05;
     max-width: 6 * $column-size-large;
     // TODO: Force pointer events to allow the user to select text. Remove
@@ -118,7 +114,6 @@ export default class TheHeroMoment extends Vue {
     pointer-events: auto;
 
     @include mq($from: medium, $until: large) {
-      @include type-style('productive-heading-06');
       // Notice the difference with the small version. This space is much more
       // small since it is in the spacing scale.
       margin: 0 0 $spacing-03;
@@ -126,17 +121,12 @@ export default class TheHeroMoment extends Vue {
     }
 
     @include mq($until: medium) {
-      @include type-style('productive-heading-04');
-
       margin: 0 0 $layout-03;
       max-width: 4 * $column-size-medium;
     }
   }
 
   &__description {
-    @include type-style('body-long-01');
-
-    color: $text-color-light;
     max-width: 5 * $column-size-large;
     margin: 0 0 $layout-06;
     // TODO: Force pointer events to allow the user to select text. Remove

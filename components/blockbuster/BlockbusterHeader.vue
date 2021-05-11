@@ -7,11 +7,11 @@
         >
           <div class="blockbuster-header__main">
             <div>
-              <h1 class="blockbuster-header__headline copy__page-title">
+              <h1 class="blockbuster-header__headline">
                 <span class="highlight">Blockbuster</span> + Qiskit
               </h1>
               <div class="blockbuster-header__description">
-                <p class="copy__paragraph">
+                <p>
                   Qiskit and Blockbuster can give you movie recommendations.
                 </p>
               </div>
@@ -83,7 +83,7 @@ export default class BlockbusterHeader extends Vue {
       margin-top: $spacing-09;
     }
 
-    .copy__paragraph {
+    p {
       color: $text-color-white;
     }
   }

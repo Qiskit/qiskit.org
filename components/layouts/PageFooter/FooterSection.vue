@@ -1,7 +1,7 @@
 <template>
   <section class="footer-section">
     <h2
-      class="footer-section__title"
+      class="h4 footer-section__title"
       :class="`footer-section__title_theme_${theme}`"
     >
       {{ title }}
@@ -10,7 +10,8 @@
       <AppLink
         v-for="element in elements"
         :key="element.url"
-        :class="`footer-section__link footer-section__link_theme_${theme}`"
+        class="caption footer-section__link"
+        :class="`footer-section__link_theme_${theme}`"
         v-bind="element"
         kind="secondary"
       >
@@ -40,13 +41,9 @@ export default class FooterSection extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '~carbon-components/scss/globals/scss/typography';
-
 .footer-section {
   &__title {
-    @include type-style('expressive-heading-01');
-
-    padding-bottom: $spacing-07;
+    margin-bottom: $spacing-06;
 
     &_theme_light {
       color: $text-color-lighter;
@@ -58,8 +55,6 @@ export default class FooterSection extends Vue {
   }
 
   &__link {
-    @include type-style('caption-01');
-
     text-decoration: none;
     display: inline-block;
     width: 100%;

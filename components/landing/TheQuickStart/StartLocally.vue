@@ -1,9 +1,7 @@
 <template>
   <section class="start-locally">
-    <h3 class="copy__subtitle">
-      Start locally
-    </h3>
-    <p class="copy__paragraph copy__paragraph_importance_support">
+    <h3>Start locally</h3>
+    <p class="start-locally__introduction">
       To install Qiskit locally, you will need
       <AppLink
         url="https://www.python.org/downloads/"
@@ -22,7 +20,7 @@
         v-for="choicesGroup in installChoices"
         :key="choicesGroup.id"
       >
-        <h4 class="start-locally__option-title">
+        <h4>
           {{ choicesGroup.title }}
         </h4>
         <cv-button-set class="start-locally__options-group">
@@ -54,7 +52,7 @@
             </template>
           </cv-accordion-item>
         </cv-accordion>
-        <h4 class="start-locally__option-title">
+        <h4>
           Terminal
         </h4>
         <SyntaxHighlight
@@ -172,8 +170,6 @@ export default class StartLocally extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '~carbon-components/scss/globals/scss/typography';
-
 .bx--btn-set .bx--btn:not(:focus) {
   box-shadow: none;
 }
@@ -181,6 +177,15 @@ export default class StartLocally extends Vue {
 .start-locally {
   @include mq($until: medium) {
     margin-bottom: $layout-01;
+  }
+
+  &__introduction {
+    max-width: 20rem;
+    margin-bottom: $spacing-08;
+
+    @include mq($from: large) {
+      max-width: 24rem;
+    }
   }
 
   &__options {
@@ -198,16 +203,7 @@ export default class StartLocally extends Vue {
     }
   }
 
-  &__option-title {
-    @include type-style('body-long-01');
-
-    color: $text-color-light;
-    margin-bottom: $spacing-03;
-  }
-
   &__option {
-    @include type-style('body-long-01');
-
     background-color: $background-color-lighter;
     max-width: 100%;
     color: $text-color-light;

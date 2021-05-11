@@ -15,9 +15,9 @@
           v-bind="appLinkFromNavLink(link)"
           kind="secondary"
         >
-          <p class="mobile-menu__entry-label">
+          <div class="mobile-menu__entry-label">
             {{ link.label }}
-          </p>
+          </div>
         </AppLink>
         <cv-dropdown
           v-else
@@ -34,9 +34,9 @@
               v-bind="appLinkFromNavLink(sublink)"
               kind="secondary"
             >
-              <p class="mobile-menu__entry-label">
+              <div class="mobile-menu__entry-label">
                 {{ sublink.label }}
-              </p>
+              </div>
             </AppLink>
           </li>
         </cv-dropdown>
@@ -46,7 +46,7 @@
       <div class="mobile-menu__footer-inner-container">
         <FooterSection class="mobile-menu__footer-contact" v-bind="stayConnectedElements" icons-only :theme="theme" />
       </div>
-      <p class="mobile-menu__footer-text">
+      <p class="caption mobile-menu__footer-text">
         ©Qiskit | All Rights Reserved
       </p>
     </footer>
@@ -87,6 +87,10 @@ export default class MobileMenu extends Mixins(MenuMixin) {
   background-color: $background-color-white;
   overflow-y: auto;
   justify-content: space-between;
+
+  &__entry-label {
+    @include type-style('body-long-02');
+  }
 
   &__entry-label,
   &__footer-inner-container {
@@ -138,8 +142,6 @@ export default class MobileMenu extends Mixins(MenuMixin) {
   }
 
   &__footer-text {
-    @include type-style('caption-01');
-
     background-color: $background-color-lighter;
     padding: $spacing-05 $spacing-07;
     color: $text-color-lighter;
@@ -171,12 +173,6 @@ export default class MobileMenu extends Mixins(MenuMixin) {
     }
   }
 
-  .bx--list-box__label {
-    @include type-style('body-long-02');
-
-    color: $text-color-light;
-  }
-
   .bx--dropdown {
     background-color: $background-color-white;
     height: 4rem;
@@ -185,14 +181,6 @@ export default class MobileMenu extends Mixins(MenuMixin) {
   }
 
   &__footer-contact {
-    & .footer-section__title.footer-section__title_theme_light {
-      @include type-style('caption-01');
-
-      font-weight: 600;
-      color: $text-color-lighter;
-      padding-bottom: $spacing-05;
-    }
-
     svg {
       fill: $cool-gray-60;
     }

@@ -1,9 +1,7 @@
 <template>
   <article class="app-introductory-content">
     <div class="app-introductory-content__overview">
-      <h2 class="copy__title">
-        {{ title }}
-      </h2>
+      <h2 v-text="title" />
       <p class="app-introductory-content__description">
         {{ description }}
       </p>
@@ -33,8 +31,6 @@ export default class AppIntroductoryContent extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '~carbon-components/scss/globals/scss/typography';
-
 .app-introductory-content {
   display: flex;
 
@@ -54,9 +50,6 @@ export default class AppIntroductoryContent extends Vue {
   }
 
   &__description {
-    @include type-style('body-long-01');
-
-    color: $text-color-light;
     margin-bottom: $layout-05;
 
     @include mq($until: large) {

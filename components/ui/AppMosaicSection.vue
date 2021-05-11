@@ -1,14 +1,13 @@
 <template>
   <section class="app-mosaic-section">
-    <h2 class="copy__title">
-      {{ title }}
-    </h2>
-    <p
-      v-if="description"
-      class="copy__paragraph copy__paragraph_importance_outstanding"
-    >
-      {{ description }}
-    </p>
+    <div class="bx--row">
+      <h2 class="bx--col-md-4 bx--col-lg-8" v-text="title" />
+    </div>
+    <div v-if="description" class="bx--row app-mosaic-section__introduction">
+      <div class="bx--col-md-6 bx--col-lg-8">
+        <p class="app-mosaic-section__description" v-text="description" />
+      </div>
+    </div>
     <AppMosaic class="app-mosaic-section__mosaic" :mosaic-elements="elements" />
     <slot />
   </section>
@@ -29,8 +28,11 @@ export default class AppMosaicSection extends Vue {
 
 <style lang="scss">
 .app-mosaic-section {
+  &__description {
+    margin-bottom: 0;
+  }
+
   &__mosaic {
-    margin-top: $layout-01;
     margin-bottom: $layout-03;
 
     @include mq($from: medium, $until: large) {
@@ -40,6 +42,10 @@ export default class AppMosaicSection extends Vue {
     @include mq($until: medium) {
       margin-bottom: $layout-01;
     }
+  }
+
+  &__introduction {
+    margin-bottom: $spacing-07;
   }
 }
 </style>

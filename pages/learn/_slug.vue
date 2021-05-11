@@ -2,9 +2,12 @@
   <div class="learn-entry">
     <header class="learn-entry__header">
       <div class="learn-entry__header__container">
-        <h1 class="learn-entry__header__title">
-          {{ pageContent.attributes.title }}
-        </h1>
+        <div class="bx--row">
+          <h1
+            class="bx--col-md-6 bx--col-lg-10"
+            v-text="pageContent.attributes.title"
+          />
+        </div>
       </div>
     </header>
     <!-- TODO: We should migrate to nuxt-content and get rid of this. -->
@@ -64,10 +67,6 @@ export default class LearnEntry extends QiskitPage {
         height: 28rem * 40 / 64;
       }
     }
-
-    &__title {
-      @include type-style('expressive-heading-05', true);
-    }
   }
 
   &__content {
@@ -76,41 +75,13 @@ export default class LearnEntry extends QiskitPage {
     background-color: transparent;
     background-image: none;
 
-    // Same as copy__paragraph
-    p {
-      @include type-style('body-long-01');
-
-      color: $text-color-light;
-      margin-bottom: $layout-03;
-      max-width: 9 * $column-size-large;
-
-      @include mq($from: medium, $until: large) {
-        @include type-style('label-01');
-
-        margin-bottom: $layout-01;
-      }
-
-      @include mq($until: medium) {
-        @include type-style('label-01');
-
-        margin-bottom: $layout-01;
-      }
-    }
-
-    // Same as copy__link
     a {
-      @include type-style('body-long-01');
-
       color: $link-color-tertiary;
       text-decoration: none;
+    }
 
-      @include mq($from: medium, $until: large) {
-        @include type-style('label-01');
-      }
-
-      @include mq($until: medium) {
-        @include type-style('label-01');
-      }
+    p {
+      max-width: 36rem;
     }
 
     code {
@@ -148,47 +119,10 @@ export default class LearnEntry extends QiskitPage {
       }
     }
 
-    // Same as copy__title
-    h2 {
-      @include type-style('expressive-heading-05');
-
-      margin-bottom: $layout-03;
-      color: $text-color-light;
-
-      @include mq($from: medium, $until: large) {
-        @include type-style('expressive-heading-03');
-
-        font-weight: 300;
-        margin-bottom: $layout-01;
-      }
-
-      @include mq($until: medium) {
-        @include type-style('expressive-heading-03');
-
-        font-weight: 300;
-        margin-bottom: $layout-01;
-      }
-    }
-
     ul {
-      @include type-style('body-long-01');
-
       list-style-type: '-';
-      color: $text-color-light;
       margin-bottom: $layout-03;
       max-width: 9 * $column-size-large;
-
-      @include mq($from: medium, $until: large) {
-        @include type-style('label-01');
-
-        margin-bottom: $layout-01;
-      }
-
-      @include mq($until: medium) {
-        @include type-style('label-01');
-
-        margin-bottom: $layout-01;
-      }
 
       li {
         padding-left: $spacing-03;
@@ -205,23 +139,16 @@ export default class LearnEntry extends QiskitPage {
       margin-bottom: $layout-03;
 
       td, th {
-        @include type-style('body-long-01');
-
         border: 1px solid $cool-gray-20;
-        color: $text-color-light;
         vertical-align: middle;
         padding: $spacing-05;
         max-width: 9 * $column-size-large;
 
         @include mq($from: medium, $until: large) {
-          @include type-style('label-01');
-
           margin-bottom: $layout-01;
         }
 
         @include mq($until: medium) {
-          @include type-style('label-01');
-
           padding: $spacing-03;
           margin-bottom: $layout-01;
         }

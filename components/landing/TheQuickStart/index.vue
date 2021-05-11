@@ -1,13 +1,15 @@
 <template>
-  <article class="quick-start copy__util_vertical-spacer">
-    <h2 class="copy__title">
-      Quick Start
-    </h2>
-    <p class="copy__paragraph copy__paragraph_importance_outstanding">
-      When you are looking to start Qiskit, you have two options. You can
-      start Qiskit locally, which is much more secure and private, or you
-      get started with hosted Jupyter Notebooks in IBM Quantum Lab.
-    </p>
+  <article class="page-section quick-start">
+    <h2>Quick Start</h2>
+    <div class="bx--row quick-start__introduction">
+      <div class="bx--col-md-6 bx--col-lg-8">
+        <p class="quick-start__description">
+          When you are looking to start Qiskit, you have two options. You can
+          start Qiskit locally, which is much more secure and private, or you
+          get started with hosted Jupyter Notebooks in IBM Quantum Lab.
+        </p>
+      </div>
+    </div>
     <div class="bx--row">
       <StartLocally class="bx--col-lg-10 bx--col-md-5" />
       <StartOnTheCloud class="bx--col-lg-6 bx--col-md-3" />
@@ -27,13 +29,12 @@ export default class TheQuickStart extends Vue {}
 .quick-start {
   @include contained();
 
-  &__sections {
-    display: flex;
-    flex-direction: row;
+  &__description {
+    margin-bottom: 0;
+  }
 
-    @include mq($until: medium) {
-      flex-direction: column;
-    }
+  &__introduction {
+    margin-bottom: $spacing-06;
   }
 }
 </style>

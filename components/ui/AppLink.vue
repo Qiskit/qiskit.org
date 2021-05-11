@@ -19,15 +19,11 @@ export default class AppLink extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '~carbon-components/scss/globals/scss/typography';
-
 .app-link {
   // &_none is intentionally not resolved
 
   &_primary,
   &_secondary {
-    @include type-style('body-long-01');
-
     text-decoration: none;
   }
 

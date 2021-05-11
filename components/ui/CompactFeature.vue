@@ -5,12 +5,12 @@
       :src="`/images/icons/${icon}`"
       alt=""
     >
-    <h3 class="compact-feature__title">
+    <h3 class="h4 compact-feature__title">
       {{ title }}
     </h3>
-    <p class="compact-feature__description">
+    <div class="compact-feature__description">
       {{ description }}
-    </p>
+    </div>
   </article>
 </template>
 
@@ -27,8 +27,6 @@ export default class CompactFeature extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '~carbon-components/scss/globals/scss/typography';
-
 $feature-icon-size: 2.25rem;
 
 .compact-feature {
@@ -46,8 +44,6 @@ $feature-icon-size: 2.25rem;
   }
 
   &__title {
-    @include type-style('productive-heading-02');
-
     color: $text-color-white;
     margin-bottom: $spacing-04;
     height: 2.5rem; // for consistent alignment
@@ -58,8 +54,6 @@ $feature-icon-size: 2.25rem;
   }
 
   &__description {
-    @include type-style('body-long-01');
-
     color: $text-color-white;
   }
 }

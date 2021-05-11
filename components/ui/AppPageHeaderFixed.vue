@@ -1,7 +1,7 @@
 <template>
   <header class="app-page-header-fixed">
-    <div class="app-page-header-fixed__container">
-      <h1 class="copy__page-title">
+    <div class="app-page-header-fixed__container bx--row">
+      <h1 class="bx--col-md-6 bx--col-lg-10 app-page-header-fixed__headline">
         <slot />
       </h1>
     </div>
@@ -30,6 +30,10 @@ export default class AppPageHeaderFixed extends Vue {}
     @include mq($until: large) {
       height: 17.5rem;
     }
+  }
+
+  &__headline {
+    padding-left: 0; // TODO: Clean up with introduction of `bx--grid` in #1707
   }
 }
 </style>

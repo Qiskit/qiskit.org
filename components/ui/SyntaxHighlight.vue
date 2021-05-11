@@ -8,9 +8,7 @@
     >
       Copy
     </cv-button>
-    <code class="syntax-highlight__code">
-      {{ code }}
-    </code>
+    <code class="syntax-highlight__code" v-text="code" />
   </div>
 </template>
 
@@ -34,8 +32,6 @@ export default class SyntaxHighlight extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '~carbon-components/scss/globals/scss/typography';
-
 .syntax-highlight {
   position: relative;
   background-color: $background-color-lighter;
@@ -64,14 +60,7 @@ export default class SyntaxHighlight extends Vue {
   }
 
   &__code {
-    @include type-style('code-02');
-
-    color: $text-color-light;
     min-height: 8rem;
-
-    @include mq($until: large) {
-      @include type-style('code-01');
-    }
   }
 }
 </style>

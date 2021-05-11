@@ -1,7 +1,7 @@
 <template>
   <section class="early-access-section">
     <div class="early-access-section__container">
-      <h2 class="early-access-section__title">
+      <h2>
         Join Us
       </h2>
       <p class="early-access-section__description">
@@ -26,8 +26,6 @@ export default class JoinUsSection extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import "~carbon-components/scss/globals/scss/typography";
-
 .early-access-section {
   background-color: $background-color-dark;
 
@@ -43,20 +41,7 @@ export default class JoinUsSection extends Vue {
     }
   }
 
-  &__title {
-    @include type-style("expressive-heading-05");
-
-    margin-bottom: $layout-03;
-    font-weight: 300;
-
-    @include mq($until: large) {
-      @include type-style("expressive-heading-04");
-    }
-  }
-
   &__description {
-    @include type-style("body-long-01");
-
     max-width: 7 * $column-size-large;
     margin-bottom: 3.25rem;
 

@@ -42,8 +42,6 @@ export default class AccordionLayout extends Vue implements AccordionLayoutProps
 </script>
 
 <style lang="scss" scoped>
-@import '~carbon-components/scss/globals/scss/typography';
-
 .accordion-layout {
   display: flex;
   flex-direction: column;
@@ -57,8 +55,6 @@ export default class AccordionLayout extends Vue implements AccordionLayoutProps
   }
 
   &__description {
-    @include type-style('body-long-01');
-
     margin-bottom: $spacing-06;
   }
 }

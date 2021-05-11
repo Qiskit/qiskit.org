@@ -8,7 +8,7 @@
       <div>Fetching recommendation...</div>
     </div>
     <div v-else class="blockbuster__container">
-      <h2 class="copy__title" v-text="recommendation.title" />
+      <h2 v-text="recommendation.title" />
       <div class="bx--row">
         <div class="bx--col-lg-8 bx--col-md-4 blockbuster__section-mobile-spacing">
           <div class="blockbuster-recommendation-section__video-wrapper">
@@ -29,7 +29,6 @@
           <p
             v-for="descriptionParagraph in recommendation.description"
             :key="descriptionParagraph"
-            class="copy__paragraph"
             v-text="descriptionParagraph"
           />
           <AppCta
@@ -108,7 +107,6 @@ export default class BlockbusterRecommendationSection extends Vue {
 .blockbuster-recommendation-section {
   &__loading-container {
     align-items: center;
-    color: $text-color-lighter;
     display: flex;
     flex-flow: column;
     justify-content: center;

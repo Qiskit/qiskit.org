@@ -1,6 +1,6 @@
 <template>
   <section class="app-helpful-resources-section">
-    <h2 class="copy__title" v-text="title" />
+    <h2 v-text="title" />
     <div class="bx--row">
       <AppDescriptionCard
         v-for="resource in resources"

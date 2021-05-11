@@ -5,16 +5,16 @@
     :title="name"
     :tags="formattedRegion"
   >
-    <p v-if="location" class="advocate-card__location">
+    <div v-if="location" class="advocate-card__location">
       <Map20 class="advocate-card__icon" />
       {{ location }}
-    </p>
-    <p class="advocate-card__contact">
+    </div>
+    <div class="advocate-card__contact">
       <LogoSlack20 class="advocate-card__icon" />
-      <AppLink class="copy__link" :url="`https://qiskit.slack.com/team/${slackId}`">
+      <AppLink :url="`https://qiskit.slack.com/team/${slackId}`">
         @{{ slackUsername }}
       </AppLink>
-    </p>
+    </div>
   </AppCard>
 </template>
 
@@ -44,8 +44,6 @@ export default class AdvocateCard extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '~carbon-components/scss/globals/scss/typography';
-
 .advocate-card {
   margin-bottom: $layout-02;
 
@@ -54,8 +52,6 @@ export default class AdvocateCard extends Vue {
   }
 
   &__location, &__contact {
-    @include type-style('body-long-01');
-
     display: flex;
     align-items: center;
   }

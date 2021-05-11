@@ -33,15 +33,11 @@ export default class TheTableOfContents extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '~carbon-components/scss/globals/scss/typography';
-
 .the-table-of-contents {
   display: flex;
   flex-direction: column;
 
   &__entry {
-    @include type-style('body-long-01');
-
     color: $text-color-light;
     text-decoration: none;
     margin-bottom: $layout-02;

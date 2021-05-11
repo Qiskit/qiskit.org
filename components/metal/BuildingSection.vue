@@ -1,7 +1,7 @@
 <template>
   <section class="building-section">
     <div class="building-section__container">
-      <h2 class="building-section__title">
+      <h2>
         Building together
       </h2>
       <p class="building-section__text">
@@ -9,19 +9,19 @@
       </p>
       <div class="building-section__content">
         <div class="building-section__copy">
-          <h3 class="building-section__subtitle copy__subtitle">
+          <h3 class="building-section__subtitle">
             Call for community participation
           </h3>
           <p class="building-section__text">
             This may just be the beginning, but we think Qiskit Metal has immense potential. We hope to form this software into something that is usable by superconducting quantum hardware designers across industry and academia, and perhaps even for other qubit architectures. Over time, we hope this project will become the gateway for conventional microchip designers to get their feet wet designing quantum processors. And we hope that soon, quantum hardware experts will be able to write their own quantum analysis plugins and run them as their own Qiskit Metal backends.
           </p>
-          <h3 class="building-section__subtitle copy__subtitle">
+          <h3 class="building-section__subtitle">
             Open source
           </h3>
           <p class="building-section__text">
             Qiskit Metal is a visionary work in progress in its early development stages. We're working toward a vision—a quantum design and analysis platform built from the ground up specifically for quantum hardware. It is crucial that we keep this project open source in order to grow Qiskit Metal into the software that will be most useful for quantum hardware engineers around the world and for the innovation in and growth of the field as a whole. If Qiskit Metal doesn't have what you want, then you extend Metal to build it!
           </p>
-          <h3 class="building-section__subtitle copy__subtitle">
+          <h3 class="building-section__subtitle">
             Education
           </h3>
           <!-- Disabling linter to keep the quotations and phrasing content together. -->
@@ -66,8 +66,6 @@ export default class BuildingSection extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import "~carbon-components/scss/globals/scss/typography";
-
 .building-section {
   @include responsive-grid-bg('/images/grid/grid-right-dark.svg', 36rem);
 
@@ -89,17 +87,6 @@ export default class BuildingSection extends Vue {
     padding-top: $layout-05;
   }
 
-  &__title {
-    @include type-style("expressive-heading-05");
-
-    margin-bottom: $layout-03;
-    font-weight: 300;
-
-    @include mq($until: large) {
-      @include type-style("expressive-heading-04");
-    }
-  }
-
   &__subtitle {
     @include mq($until: large) {
       margin-bottom: $layout-02;
@@ -107,8 +94,6 @@ export default class BuildingSection extends Vue {
   }
 
   &__text {
-    @include type-style("body-long-01");
-
     max-width: 7.5 * $column-size-large;
     margin-bottom: $layout-04;
 
@@ -137,10 +122,6 @@ export default class BuildingSection extends Vue {
     @include mq($until: medium) {
       flex: 1;
     }
-  }
-
-  .copy__subtitle {
-    color: $text-color-white;
   }
 
   &__media-img {
