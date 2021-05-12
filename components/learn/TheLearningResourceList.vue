@@ -33,19 +33,29 @@
           />
         </cv-tabs>
       </client-only>
-      <div class="bx--row">
-        <fieldset class="bx--col-lg-4 bx--col-md-2 the-learning-resources-list__filter-time">
-          <legend
-            class="
-                the-learning-resources-list__filter-time-label
-                the-learning-resources-list__medium-large-only
-              "
-          >
-            Time to spend learning
-          </legend>
+
+      <AppFiltersResultsLayout>
+        <template slot="filters-on-m-l-screen">
+          <AppFieldset label="Time to spend learning">
+            <client-only>
+              <cv-radio-group vertical>
+                <cv-radio-button
+                  v-for="filter in asideFilters"
+                  :key="filter"
+                  name="aside-filter"
+                  :value="filter"
+                  :label="filter"
+                  :checked="filter === activeAsideFilter"
+                  :aria-checked="filter === activeAsideFilter"
+                  @change="selectAsideFilter(filter)"
+                />
+              </cv-radio-group>
+            </client-only>
+          </AppFieldset>
+        </template>
+        <template slot="filters-on-s-screen">
           <client-only>
             <cv-dropdown
-              class="the-learning-resources-list__small-only"
               :value="activeAsideFilter"
               @change="selectAsideFilter($event)"
             >
@@ -57,27 +67,12 @@
                 {{ filter }}
               </cv-dropdown-item>
             </cv-dropdown>
-            <cv-radio-group
-              class="the-learning-resources-list__medium-large-only"
-              vertical
-            >
-              <cv-radio-button
-                v-for="filter in asideFilters"
-                :key="filter"
-                name="aside-filter"
-                :value="filter"
-                :label="filter"
-                :checked="filter === activeAsideFilter"
-                :aria-checked="filter === activeAsideFilter"
-                @change="selectAsideFilter(filter)"
-              />
-            </cv-radio-group>
           </client-only>
-        </fieldset>
-        <section class="bx--col-lg-12 bx--col-md-6 the-learning-resources-list__results">
+        </template>
+        <template slot="results">
           <slot />
-        </section>
-      </div>
+        </template>
+      </AppFiltersResultsLayout>
     </div>
   </section>
 </template>
@@ -134,29 +129,6 @@ export default class TheLearningResourceList extends Vue {
     }
   }
 
-  &__filter-time {
-    @include mq($until: medium) {
-      margin-bottom: $layout-03;
-    }
-  }
-
-  &__filter-time-label {
-    margin-bottom: $layout-01;
-    white-space: nowrap;
-  }
-
-  &__small-only {
-    @include mq($from: medium) {
-      display: none;
-    }
-  }
-
-  &__medium-large-only {
-    @include mq($until: medium) {
-      display: none;
-    }
-  }
-
   &__results {
     & > * {
       margin-bottom: $layout-02;
@@ -179,37 +151,35 @@ export default class TheLearningResourceList extends Vue {
  * and CSS specificity to override the internal CSS.
  */
 .the-learning-resources-list {
-  &__filter-time {
-    & .bx--dropdown,
-    & .bx--dropdown-item {
-      background-color: $background-color-white;
+  & .bx--dropdown,
+  & .bx--dropdown-item {
+    background-color: $background-color-white;
 
-        svg {
-          fill: $text-color;
-        }
-    }
+      svg {
+        fill: $text-color;
+      }
+  }
 
-    & .bx--dropdown-item:hover,
-    & .bx--dropdown--show-selected .bx--dropdown--selected:hover {
-      // To match default light theme UI hover, which is not among the Carbon
-      // palette. 🤦
-      background-color: #e5e5e5;
-    }
+  & .bx--dropdown-item:hover,
+  & .bx--dropdown--show-selected .bx--dropdown--selected:hover {
+    // To match default light theme UI hover, which is not among the Carbon
+    // palette. 🤦
+    background-color: #e5e5e5;
+  }
 
-    & .bx--dropdown-link,
-    & .bx--dropdown-text {
-      color: $text-color;
-      border-top-color: #dde1e6;
-    }
+  & .bx--dropdown-link,
+  & .bx--dropdown-text {
+    color: $text-color;
+    border-top-color: #dde1e6;
+  }
 
-    & .bx--dropdown-link:hover {
-      border-bottom-color: #dde1e6;
-    }
+  & .bx--dropdown-link:hover {
+    border-bottom-color: #dde1e6;
+  }
 
-    & .bx--dropdown--show-selected .bx--dropdown--selected .bx--dropdown-link {
-      border-top-color: #dde1e6;
-      border-bottom-color: #dde1e6;
-    }
+  & .bx--dropdown--show-selected .bx--dropdown--selected .bx--dropdown-link {
+    border-top-color: #dde1e6;
+    border-bottom-color: #dde1e6;
   }
 
   &__filter-level {
