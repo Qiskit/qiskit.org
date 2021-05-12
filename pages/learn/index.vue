@@ -41,6 +41,7 @@
         :title="resource.title"
         :to="resource.to"
         :cta-label="resource.ctaLabel"
+        class="learn-page__card"
       >
         <nuxt-content :document="resource" />
       </AppCard>
@@ -152,3 +153,15 @@ export default class LearnPage extends QiskitPage {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.learn-page {
+  &__card {
+    margin-bottom: $layout-02;
+
+    @include mq($until: large) {
+      margin-bottom: $layout-01;
+    }
+  }
+}
+</style>
