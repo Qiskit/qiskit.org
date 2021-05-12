@@ -128,16 +128,6 @@ export default class TheLearningResourceList extends Vue {
       margin-bottom: $layout-01;
     }
   }
-
-  &__results {
-    & > * {
-      margin-bottom: $layout-02;
-
-      @include mq($until: large) {
-        margin-bottom: $layout-01;
-      }
-    }
-  }
 }
 </style>
 
