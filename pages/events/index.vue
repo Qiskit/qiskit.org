@@ -68,7 +68,7 @@
             v-for="event in filteredEvents"
             v-else
             :key="`${event.title}-${event.place}-${event.date}`"
-            class="results-item"
+            class="app-filters-results-layout__results-item"
             :types="event.types"
             :title="event.title"
             :image="event.image"
