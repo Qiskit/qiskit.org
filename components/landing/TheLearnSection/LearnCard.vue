@@ -1,6 +1,6 @@
 <template>
   <article class="learn-card">
-    <div class="bx--col-max-3 bx--col-lg-4 bx--col-md-4 learn-card__content">
+    <div class="bx--col-max-3 bx--col-lg-4 bx--col-md-3 learn-card__content">
       <p>
         Gain access to a free, digital textbook to study the concepts of quantum
         computing using Qiskit.
