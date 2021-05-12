@@ -33,7 +33,6 @@
           />
         </cv-tabs>
       </client-only>
-
       <AppFiltersResultsLayout>
         <template slot="filters-on-m-l-screen">
           <AppFieldset label="Time to spend learning">
