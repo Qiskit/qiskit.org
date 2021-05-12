@@ -68,7 +68,7 @@
             v-for="event in filteredEvents"
             v-else
             :key="`${event.title}-${event.place}-${event.date}`"
-            class="event-page__event-card"
+            class="results-item"
             :types="event.types"
             :title="event.title"
             :image="event.image"
@@ -198,14 +198,6 @@ export default class EventsPage extends QiskitPage {
 .event-page {
   &__container {
     @include contained();
-  }
-
-  &__event-card {
-    margin-bottom: $layout-02;
-
-    @include mq($until: large) {
-      margin-bottom: $layout-01;
-    }
   }
 
   &__time-filters {

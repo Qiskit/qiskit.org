@@ -29,4 +29,12 @@ export default class AppFiltersResultsLayouts extends Vue {}
     }
   }
 }
+
+.results-item {
+  margin-bottom: $layout-02;
+
+  @include mq($until: large) {
+    margin-bottom: $layout-01;
+  }
+}
 </style>
