@@ -19,7 +19,7 @@
         </p>
       </div>
     </div>
-    <AppFiltersResultsLayout>
+    <AppFiltersResultsLayout class="meet-the-advocates__filters-result-section">
       <template slot="filters-on-m-l-screen">
         <AppFieldset :label="filter.label">
           <client-only>
@@ -126,5 +126,9 @@ export default class MeetTheAdvocates extends Vue {
   @include contained();
 
   margin-top: $layout-06;
+
+  &__filters-result-section {
+    margin-top: $layout-05;
+  }
 }
 </style>

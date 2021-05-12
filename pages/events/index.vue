@@ -21,20 +21,8 @@
           </cv-tabs>
         </client-only>
       </div>
-      <div class="bx--row">
-        <div
-          v-for="filter in extraFilters"
-          :key="filter.label"
-          class="bx--col-md-0"
-        >
-          <AppMultiSelect
-            :label="filter.label"
-            :options="filter.options"
-            :value="getCheckedFilters(filter.filterType)"
-            @change-selection="updateWholeFilter(filter.filterType, $event)"
-          />
-        </div>
-        <div class="bx--col-lg-4 bx--col-md-2 bx--col-sm-0">
+      <AppFiltersResultsLayout>
+        <template slot="filters-on-m-l-screen">
           <AppFieldset
             v-for="filter in extraFilters"
             :key="filter.label"
@@ -52,31 +40,44 @@
               />
             </client-only>
           </AppFieldset>
-        </div>
-        <div class="bx--col-lg-12 bx--col-md-6 event-page__main-content">
-          <div>
-            <AppCard
-              v-if="noEvents"
-              :image="emptyCard.img"
-              :title="emptyCard.title"
-            >
-              <div class="event-page__empty-card-description">
-                {{ emptyCard.description }}
-              </div>
-            </AppCard>
-            <EventCard
-              v-for="event in filteredEvents"
-              v-else
-              :key="`${event.title}-${event.place}-${event.date}`"
-              class="event-page__event-card"
-              :types="event.types"
-              :title="event.title"
-              :image="event.image"
-              :location="event.location"
-              :date="event.date"
-              :to="event.to"
+        </template>
+        <template slot="filters-on-s-screen">
+          <div
+            v-for="filter in extraFilters"
+            :key="filter.label"
+          >
+            <AppMultiSelect
+              :label="filter.label"
+              :options="filter.options"
+              :value="getCheckedFilters(filter.filterType)"
+              @change-selection="updateWholeFilter(filter.filterType, $event)"
             />
           </div>
+        </template>
+        <template slot="results">
+          <AppCard
+            v-if="noEvents"
+            :image="emptyCard.img"
+            :title="emptyCard.title"
+          >
+            <div class="event-page__empty-card-description">
+              {{ emptyCard.description }}
+            </div>
+          </AppCard>
+          <EventCard
+            v-for="event in filteredEvents"
+            v-else
+            :key="`${event.title}-${event.place}-${event.date}`"
+            class="app-filters-results-layout__results-item"
+            :types="event.types"
+            :title="event.title"
+            :image="event.image"
+            :location="event.location"
+            :date="event.date"
+            :to="event.to"
+          />
+        </template>
+        <template slot="extra-info">
           <div class="event-page__start-an-event">
             <h3>Start an event</h3>
             <p class="event-page__start-an-event__description">
@@ -85,8 +86,8 @@
             </p>
             <AppCta v-bind="eventRequestLink" />
           </div>
-        </div>
-      </div>
+        </template>
+      </AppFiltersResultsLayout>
     </div>
   </div>
 </template>
@@ -197,14 +198,6 @@ export default class EventsPage extends QiskitPage {
 .event-page {
   &__container {
     @include contained();
-  }
-
-  &__event-card {
-    margin-bottom: $layout-02;
-
-    @include mq($until: large) {
-      margin-bottom: $layout-01;
-    }
   }
 
   &__time-filters {

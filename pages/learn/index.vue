@@ -41,6 +41,7 @@
         :title="resource.title"
         :to="resource.to"
         :cta-label="resource.ctaLabel"
+        class="app-filters-results-layout__results-item"
       >
         <nuxt-content :document="resource" />
       </AppCard>
