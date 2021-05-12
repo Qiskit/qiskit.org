@@ -5,7 +5,10 @@
   >
     <h2>Quick Start</h2>
     <div class="bx--row quick-start__introduction">
-      <div class="bx--col-md-7 bx--col-lg-9 bx--col-xlg-7 bx--col-max-6">
+      <div
+        class="bx--col-md-5 bx--col-lg-8 bx--col-xl-7"
+        :class="{ 'bx--col-max-6': !oldContainer }"
+      >
         <p class="quick-start__description">
           When you are looking to start Qiskit, you have two options. You can
           start Qiskit locally, which is much more secure and private, or you
@@ -14,8 +17,14 @@
       </div>
     </div>
     <div class="bx--row">
-      <StartLocally class="bx--col-md-5 bx--col-lg-10 bx--col-xlg-11 bx--col-max-12" />
-      <StartOnTheCloud class="bx--col-md-3 bx--col-lg-6 bx--col-xlg-5 bx--col-max-4" />
+      <StartLocally
+        class="bx--col-md-5 bx--col-lg-10 bx--col-xlg-11"
+        :class="{ 'bx--col-max-12': !oldContainer }"
+      />
+      <StartOnTheCloud
+        class="bx--col-md-3 bx--col-lg-6 bx--col-xlg-5"
+        :class="{ 'bx--col-max-4': !oldContainer }"
+      />
     </div>
   </article>
 </template>
