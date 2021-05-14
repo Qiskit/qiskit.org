@@ -4,7 +4,7 @@
       Meet the Advocates
     </h2>
     <div class="bx--row">
-      <div class="bx--col-md-6 bx--col-lg-8">
+      <div class="bx--col-md-5 bx--col-lg-8 bx--col-xl-7">
         <p>
           Qiskit advocates are some of the finest minds in quantum computing,
           all over the world. If you are interested in getting involved with the

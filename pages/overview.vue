@@ -57,7 +57,7 @@
         </div>
       </div>
     </section>
-    <TheQuickStart id="quick-start" />
+    <TheQuickStart id="quick-start" old-container />
   </div>
 </template>
 

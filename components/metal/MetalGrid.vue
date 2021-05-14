@@ -194,6 +194,7 @@ export default class MetalGrid extends Vue {
 
 .metal-grid {
   position: relative;
+  height: 100%;
   width: 100%;
   min-height: 42rem;
 

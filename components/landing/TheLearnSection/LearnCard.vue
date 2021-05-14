@@ -1,18 +1,23 @@
 <template>
   <article class="learn-card">
-    <div class="learn-card__content">
-      <p>
-        Gain access to a free, digital textbook to study the concepts of quantum
-        computing using Qiskit.
-      </p>
-      <AppCta
-        kind="ghost"
-        v-bind="learnLink"
-      />
+    <div class="bx--col-max-3 bx--col-lg-4 bx--col-md-3 learn-card__content">
+      <div class="bx--aspect-ratio bx--aspect-ratio--4x3 learn-card__content__aspect-ratio">
+        <div class="bx--aspect-ratio--object learn-card__content__aspect-ratio__object">
+          <p class="learn-card__description">
+            Gain access to a free, digital textbook to study the concepts of quantum
+            computing using Qiskit.
+          </p>
+          <AppCta
+            class="learn-card__cta"
+            kind="ghost"
+            v-bind="learnLink"
+          />
+        </div>
+      </div>
     </div>
     <div
+      class="bx--col-md learn-card__media"
       lazy-background="/images/landing-page/learn-image.jpg"
-      class="learn-card__media"
     />
   </article>
 </template>
@@ -33,39 +38,73 @@ export default class LearnCard extends Vue {
 
 <style lang="scss" scoped>
 .learn-card {
-  height: 16rem;
-  width: 100%;
-  background-color: $background-color-lighter;
   display: flex;
-
-  @include mq($until: large) {
-    height: auto;
-  }
+  flex-wrap: wrap;
 
   &__content {
-    padding: $spacing-07;
-    width: 16rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    color: $text-color-lighter;
+    background-color: $background-color-lighter;
+    padding: $spacing-05;
 
-    @include mq($until: large) {
-      padding: $spacing-05;
-      width: 10rem;
+    @include mq($until: medium) {
+      order: 1;
+    }
+
+    @include mq($from: medium) {
+      min-height: 12rem;
+      padding-right: $spacing-07;
+    }
+
+    @include mq($from: large) {
+      min-height: 16.25rem;
+      padding: $spacing-07;
+    }
+
+    @include mq($from: x-large) {
+      min-height: 18.75rem;
+    }
+
+    @include mq($from: max-size) {
+      height: 30rem;
+    }
+
+    &__aspect-ratio {
+      height: 100%;
+
+      &__object {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        justify-content: space-between;
+      }
+    }
+
+    // Removes aspect ratio for sm breakpoint
+    @include mq($until: medium) {
+      &__aspect-ratio {
+        &::before {
+          padding-top: 0;
+        }
+
+        &__object {
+          position: initial;
+        }
+      }
     }
   }
 
   &__media {
-    flex: 1;
-    background-repeat: no-repeat;
+    background-position: center 25%;
     background-size: cover;
-    background-position: right center;
-    overflow: hidden;
+    flex: 1;
+    min-height: 12rem;
+  }
 
-    @include mq($until: large) {
-      background-position: right -75px center;
-    }
+  &__cta {
+    padding: 0;
+  }
+
+  &__description {
+    margin-bottom: $spacing-06;
   }
 }
 </style>

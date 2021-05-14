@@ -3,7 +3,7 @@
     <TheHeroMoment :version="qiskitVersion" />
     <div class="landing-page__grid">
       <AppMosaicSection
-        class="landing-page__section"
+        class="bx--grid landing-page__section"
         :title="mosaicSectionTitle"
         :description="mosaicSectionDescription"
         :elements="mosaicSectionElements"
@@ -29,6 +29,7 @@ import QiskitPage from '~/components/logic/QiskitPage.vue'
   head () {
     return { title: 'Qiskit' }
   },
+  layout: 'default-max',
   async asyncData () {
     const qiskitPackageInfoUrl = 'https://pypi.org/pypi/qiskit/json'
     const packageInfo = (await axios.get(qiskitPackageInfoUrl)).data
@@ -48,7 +49,7 @@ export default class LandingPage extends QiskitPage {
       position: 'first',
       title: 'Access to circuits',
       description: 'Access a rich set of well-studied circuits, which can be used as benchmarks, building blocks in more complex circuits, or as a tool to explore quantum computational advantage.',
-      image: '/images/library/circuit-01.png'
+      image: '/images/landing-page/feature-circuit.png'
     },
     {
       position: 'second',
@@ -85,8 +86,6 @@ export default class LandingPage extends QiskitPage {
   }
 
   &__section {
-    @include contained();
-
     margin-top: $layout-05;
     margin-bottom: $layout-03;
     padding-bottom: $layout-07;

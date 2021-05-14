@@ -176,15 +176,29 @@ export default class StartLocally extends Vue {
 
 .start-locally {
   @include mq($until: medium) {
-    margin-bottom: $layout-01;
+    margin-bottom: $spacing-09;
   }
 
   &__introduction {
-    max-width: 20rem;
     margin-bottom: $spacing-08;
 
     @include mq($from: large) {
-      max-width: 24rem;
+      $grid-columns: 9/10; // Number of columns that the element will use at this breakpoint.
+
+      max-width: 100% * $grid-columns;
+      padding-right: $spacing-05;
+    }
+
+    @include mq($from: x-large) {
+      $grid-columns: 7/11; // Number of columns that the element will use at this breakpoint.
+
+      max-width: 100% * $grid-columns;
+    }
+
+    @include mq($from: max-size) {
+      $grid-columns: 6/12; // Number of columns that the element will use at this breakpoint.
+
+      max-width: 100% * $grid-columns;
     }
   }
 

@@ -4,7 +4,9 @@
       class="page-footer__primary"
       :class="`page-footer__primary_theme_${theme}`"
     >
-      <div class="page-footer__primary-container">
+      <div
+        :class="oldContainer ? 'page-footer__primary-container' : 'bx--grid'"
+      >
         <div class="bx--row">
           <div class="bx--col-lg-4 bx--col-md">
             <AppLogo
@@ -32,7 +34,10 @@
       class="page-footer__secondary"
       :class="`page-footer__secondary_theme_${theme}`"
     >
-      <div class="page-footer__secondary-container">
+      <div
+        class="page-footer__secondary-container"
+        :class="{ 'bx--grid': !oldContainer }"
+      >
         <div
           class="caption"
           :class="`page-footer__copyright_theme_${theme}`"
@@ -67,6 +72,7 @@ import {
 
 @Component
 export default class PageFooter extends Vue {
+  @Prop({ type: Boolean, default: false, required: false }) oldContainer!: boolean;
   @Prop({ type: String, default: 'light' }) theme!: string
 
   footerElements = FOOTER_ELEMENTS
@@ -145,10 +151,12 @@ export default class PageFooter extends Vue {
   }
 
   &__secondary-container {
-    @include contained();
-
     display: flex;
     justify-content: space-between;
+
+    &:not(.bx--grid) {
+      @include contained();
+    }
   }
 
   &__secondary-links {
