@@ -33,7 +33,7 @@ type CommunityEvent = {
   // See also:
   // https://github.com/Qiskit/qiskit.org/issues/527
   location: string,
-  region: WorldRegion,
+  region: WorldRegion[],
   date: string,
   to: string
 }
