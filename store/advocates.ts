@@ -81,7 +81,7 @@ const actions = <ActionTree<State, any>> {
 
 export default {
   namespaced: true,
-  state: () => new State(),
+  state: new State(),
   actions,
   mutations,
   getters
