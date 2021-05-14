@@ -124,12 +124,12 @@ describe('getRegion', () => {
   })
 
   it('gets the region from the record', () => {
-    const { americas } = WORLD_REGIONS
+    const { northAmerica } = WORLD_REGIONS
     const fakeEvent = new FakeRecord({
       name: 'Fake Conference',
-      region: americas
+      region: northAmerica
     })
-    expect(getRegion(fakeEvent)).toBe(americas)
+    expect(getRegion(fakeEvent)).toBe(northAmerica)
   })
 
   it('gets the region from the record even if it is not recognized by qiskit', () => {
@@ -150,12 +150,12 @@ describe('getLocation', () => {
   })
 
   it('defaults in region if there is no location', () => {
-    const { americas } = WORLD_REGIONS
+    const { northAmerica } = WORLD_REGIONS
     const noLocationEvent = new FakeRecord({
       name: 'Fake Conference',
-      region: americas
+      region: northAmerica
     })
-    expect(getLocation(noLocationEvent)).toBe(americas)
+    expect(getLocation(noLocationEvent)).toBe(northAmerica)
   })
 
   it('gets the location from the record', () => {
