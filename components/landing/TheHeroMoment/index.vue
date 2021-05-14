@@ -49,21 +49,15 @@ export default class TheHeroMoment extends Vue {
 
 <style lang="scss">
 .the-hero-moment {
+  height: calc(#{56rem * 40 / 64} + 2px);
   position: relative;
   overflow: hidden;
-  margin-bottom: $spacing-07;
 
-  @include mq($from: medium) {
+  @include mq($from: large) {
     // In Figma, the height is not enforced but the background is always
     // visible completely so we do it in the CSS. A small correction is needed
     // to be able of displaying the bottom lines of the grid.
     height: calc(56rem + 2px);
-  }
-
-  @include mq($from: medium, $until: large) {
-    margin-bottom: $layout-06;
-    // To adjust to the size of the smaller grid.
-    height: calc(#{56rem * 40 / 64} + 2px);
   }
 
   &__square-link {
@@ -80,9 +74,6 @@ export default class TheHeroMoment extends Vue {
     background-position: right center;
     background-repeat: no-repeat;
     background-size: contain;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
     padding-top: $spacing-10;
     pointer-events: none;
 
@@ -92,9 +83,7 @@ export default class TheHeroMoment extends Vue {
   }
 
   &__version-info {
-    @include mq($until: medium) {
-      order: 1;
-    }
+    margin-bottom: $spacing-06;
 
     @include mq($from: medium) {
       margin-bottom: $spacing-07;
@@ -106,7 +95,7 @@ export default class TheHeroMoment extends Vue {
   }
 
   &__title {
-    margin-bottom: $spacing-05;
+    margin-bottom: $spacing-06;
     // TODO: Force pointer events to allow the user to select text. Remove
     // when decomissioning the Metal page.
     pointer-events: auto;
@@ -121,7 +110,7 @@ export default class TheHeroMoment extends Vue {
   }
 
   &__description {
-    margin-bottom: $spacing-05;
+    margin-bottom: $spacing-06;
     // TODO: Force pointer events to allow the user to select text. Remove
     // when decomissioning the Metal page.
     pointer-events: auto;
@@ -139,10 +128,6 @@ export default class TheHeroMoment extends Vue {
     // TODO: Force pointer events to allow the user to select text. Remove
     // when decomissioning the Metal page.
     pointer-events: auto;
-
-    @include mq($until: medium) {
-      margin-bottom: $spacing-05;
-    }
   }
 }
 </style>
