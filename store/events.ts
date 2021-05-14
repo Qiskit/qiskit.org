@@ -1,11 +1,11 @@
 const COMMUNITY_EVENT_TYPES = Object.freeze({
   hackathon: 'Hackathon',
   camp: 'Camp',
-  unconference: 'Unconference',
   industryEvent: 'Industry Event',
   workshop: 'Workshop',
-  talks: 'Talks',
-  online: 'Online'
+  challenge: 'Challenge',
+  networking: 'Networking',
+  talks: 'Talks'
 } as const)
 
 const WORLD_REGIONS = Object.freeze({
@@ -67,11 +67,11 @@ const WORLD_REGION_OPTIONS = Object.freeze([
 const COMMUNITY_EVENT_TYPE_OPTIONS = Object.freeze([
   COMMUNITY_EVENT_TYPES.hackathon,
   COMMUNITY_EVENT_TYPES.camp,
-  COMMUNITY_EVENT_TYPES.unconference,
   COMMUNITY_EVENT_TYPES.industryEvent,
   COMMUNITY_EVENT_TYPES.workshop,
-  COMMUNITY_EVENT_TYPES.talks,
-  COMMUNITY_EVENT_TYPES.online
+  COMMUNITY_EVENT_TYPES.challenge,
+  COMMUNITY_EVENT_TYPES.networking,
+  COMMUNITY_EVENT_TYPES.talks
 ])
 
 export {
