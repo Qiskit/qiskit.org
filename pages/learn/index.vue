@@ -1,6 +1,6 @@
 <template>
-  <div class="learn-page">
-    <AppPageHeaderFixed old-container>
+  <div>
+    <AppPageHeaderFixed>
       Start your path towards learning
       <TypewriterEffect
         :values="[
@@ -68,7 +68,7 @@ import {
       title: 'Qiskit Learn'
     }
   },
-
+  layout: 'default-max',
   computed: {
     ...mapGetters('learning-resources', [
       'filteredLearningResources',
@@ -76,7 +76,6 @@ import {
       'timeScale'
     ])
   },
-
   async middleware ({ $content, store }) {
     const learningResources = await $content('learning-resources')
       .sortBy('order', 'asc')
