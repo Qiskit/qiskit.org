@@ -49,7 +49,7 @@ export default class LandingPage extends QiskitPage {
       position: 'first',
       title: 'Access to circuits',
       description: 'Access a rich set of well-studied circuits, which can be used as benchmarks, building blocks in more complex circuits, or as a tool to explore quantum computational advantage.',
-      image: '/images/library/circuit-01.png'
+      image: '/images/landing-page/feature-circuit.png'
     },
     {
       position: 'second',
