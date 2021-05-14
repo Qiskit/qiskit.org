@@ -7,7 +7,7 @@
           :version="version"
         />
         <div class="bx--row">
-          <h1 class="bx--col-md-4 bx--col-lg-9 bx--col-xlg-7 bx--col-max-6 the-hero-moment__title">
+          <h1 class="bx--col-md-4 bx--col-lg-9 bx--col-xlg-7 bx--col-max-7 the-hero-moment__title">
             Open-Source Quantum Development
           </h1>
         </div>
@@ -74,6 +74,7 @@ export default class TheHeroMoment extends Vue {
     background-position: right center;
     background-repeat: no-repeat;
     background-size: contain;
+    height: 100%;
     padding-top: $spacing-10;
     pointer-events: none;
 
