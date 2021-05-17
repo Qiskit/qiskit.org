@@ -28,6 +28,7 @@
         v-if="to"
         class="app-card__cta"
         v-bind="ctaLink"
+        is-wider
         kind="ghost"
       />
     </div>
@@ -94,11 +95,18 @@ export default class AppCard extends Vue {
   }
 
   &__content {
-    padding: $spacing-05 $spacing-05 $spacing-05 $spacing-07;
+    padding: $spacing-05 $spacing-06;
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+
+    @include mq($from: medium) {
+      padding: $spacing-05 $spacing-05 $spacing-05 $spacing-07;
+    }
+
+    @include mq($from: large) {
+      padding: $spacing-05 $spacing-10 $spacing-05 $spacing-07;
+    }
   }
 
   &__header {
@@ -136,10 +144,6 @@ export default class AppCard extends Vue {
     .bx--tag:first-child {
       margin-left: 0;
     }
-  }
-
-  &__description {
-    margin-top: $layout-02;
   }
 }
 

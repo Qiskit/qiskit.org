@@ -1,9 +1,9 @@
 <template>
   <section class="the-learning-resources-list">
-    <div class="the-learning-resources-list__container">
+    <div class="bx--grid">
       <h2>Learning resources</h2>
       <div class="bx--row the-learning-resources-list__introduction">
-        <div class="bx--col-md-5 bx--col-lg-8 bx--col-xl-7">
+        <div class="bx--col-md-5 bx--col-lg-8 bx--col-xlg-7 bx--col-max-6">
           <p>
             The below are designed and created by the Qiskit team. However, we
             recommend a familiarity with
@@ -111,14 +111,6 @@ export default class TheLearningResourceList extends Vue {
 
   background-repeat: no-repeat;
   background-position: left bottom;
-
-  &__container {
-    @include contained();
-  }
-
-  &__introduction {
-    margin-bottom: $spacing-07;
-  }
 
   &__filter-level {
     margin-bottom: $layout-04;

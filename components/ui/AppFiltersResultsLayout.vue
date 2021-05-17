@@ -2,7 +2,7 @@
   <div class="bx--row app-filters-results-layout">
     <div
       class="bx--col-lg-4 bx--col-md-2 bx--col-sm-0"
-      :class="{ 'bx--col-max-2': !oldContainer }"
+      :class="{ 'bx--col-xlg-2': !oldContainer }"
     >
       <slot name="filters-on-m-l-screen" />
     </div>
@@ -11,7 +11,7 @@
     </div>
     <div
       class="bx--col-lg-12 bx--col-md-6 app-filters-results-layout__main-section"
-      :class="{ 'bx--col-max-14': !oldContainer }"
+      :class="{ 'bx--col-xlg-14': !oldContainer }"
     >
       <slot name="results" />
       <slot name="extra-info" />
@@ -29,21 +29,33 @@ export default class AppFiltersResultsLayouts extends Vue {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .app-filters-results-layout {
-  &__main-section {
+  ::v-deep &__main-section {
     @include mq($until: medium) {
       margin-top: $layout-04;
     }
   }
 
-  &__results-item {
+  ::v-deep &__results-item {
     margin-bottom: $layout-02;
 
     @include mq($until: large) {
       margin-bottom: $layout-01;
     }
+
+    @include mq($from: medium) {
+      min-height: 17.125rem;
+    }
+
+    @include mq($from: large) {
+      min-height: 12.5rem;
+    }
+
+    @include mq($from: x-large) {
+      height: calc(100% - #{$layout-02});
+      min-height: 12.5rem;
+    }
   }
 }
-
 </style>

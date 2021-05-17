@@ -1,6 +1,6 @@
 <template>
   <fieldset class="app-fieldset">
-    <legend class="app-fieldset__label">
+    <legend class="app-fieldset__label caption">
       {{ label }}
     </legend>
     <slot />
