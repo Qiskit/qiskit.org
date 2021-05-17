@@ -6,7 +6,7 @@
     <h2>Quick Start</h2>
     <div class="bx--row quick-start__introduction">
       <div
-        class="bx--col-md-5 bx--col-lg-8 bx--col-xl-7"
+        class="bx--col-md-5 bx--col-lg-8 bx--col-xlg-7"
         :class="{ 'bx--col-max-6': !oldContainer }"
       >
         <p class="quick-start__description">

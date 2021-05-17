@@ -4,7 +4,7 @@
       <h2 class="bx--col-md-4 bx--col-lg-8" v-text="title" />
     </div>
     <div v-if="description" class="bx--row app-mosaic-section__introduction">
-      <div class="bx--col-md-5 bx--col-lg-8 bx--col-xl-7 bx--col-max-6">
+      <div class="bx--col-md-5 bx--col-lg-8 bx--col-xlg-7 bx--col-max-6">
         <p class="app-mosaic-section__description" v-text="description" />
       </div>
     </div>
