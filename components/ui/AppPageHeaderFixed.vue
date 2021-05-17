@@ -1,16 +1,20 @@
 <template>
   <header class="app-page-header-fixed">
     <div
-      v-if="oldContainer"
-      class="app-page-header-fixed__old-container bx--row"
+      class="app-page-header-fixed__container"
+      :class="
+        oldContainer ? 'app-page-header-fixed__old-container' : 'bx--grid'
+      "
     >
-      <h1 class="bx--col-md-6 bx--col-lg-10 app-page-header-fixed__headline">
-        <slot />
-      </h1>
-    </div>
-    <div v-else class="bx--grid app-page-header-fixed__container">
       <div class="bx--row">
-        <h1 class="bx--col-sm bx--col-md-6 bx--col-lg-10 bx--col-max-8">
+        <h1
+          class="bx--col-md-6 bx--col-lg-10"
+          :class="
+            oldContainer
+              ? 'app-page-header-fixed__headline'
+              : 'bx--col-sm bx--col-max-8'
+          "
+        >
           <slot />
         </h1>
       </div>
@@ -42,8 +46,6 @@ export default class AppPageHeaderFixed extends Vue {
 
   &__old-container {
     @include contained();
-
-    width: 100%;
   }
 
   &__container {
