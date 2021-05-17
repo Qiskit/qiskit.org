@@ -98,7 +98,7 @@ function convertToCommunityEvent (record: any): CommunityEvent {
     types: getTypes(record),
     image: getImage(record),
     location: getLocation(record),
-    region: getRegion(record),
+    region: getRegions(record),
     date: formatDates(...getDates(record)),
     to: getWebsite(record)
   }
@@ -149,10 +149,10 @@ function getImage (record: any): string {
 }
 
 function getLocation (record: any): string {
-  return record.get(RECORD_FIELDS.location) || getRegion(record)
+  return record.get(RECORD_FIELDS.location) || getRegions(record)
 }
 
-function getRegion (record: any): WorldRegion[] {
+function getRegions (record: any): WorldRegion[] {
   const recordRegion = record.get(RECORD_FIELDS.region)
   return recordRegion ? [recordRegion] : [WORLD_REGIONS.tbd]
 }
@@ -207,7 +207,7 @@ export {
   getTypes,
   getImage,
   getLocation,
-  getRegion,
+  getRegions,
   getWebsite,
   getDates,
   formatDates,

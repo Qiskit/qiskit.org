@@ -5,7 +5,7 @@ import {
   convertToCommunityEvent,
   getTypes,
   getLocation,
-  getRegion,
+  getRegions,
   getDates,
   getImage
 } from '~/hooks/event-conversion-utils'
@@ -115,13 +115,13 @@ describe('filterByWhitelist', () => {
   })
 })
 
-describe('getRegion', () => {
+describe('getRegions', () => {
   it('defaults in TBD if there is no region', () => {
     const { tbd } = WORLD_REGIONS
     const noRegionEvent = new FakeRecord({
       name: 'Fake Conference'
     })
-    expect(getRegion(noRegionEvent)).toEqual([tbd])
+    expect(getRegions(noRegionEvent)).toEqual([tbd])
   })
 
   it('gets the region from the record', () => {
@@ -130,7 +130,7 @@ describe('getRegion', () => {
       name: 'Fake Conference',
       region: northAmerica
     })
-    expect(getRegion(fakeEvent)).toEqual([northAmerica])
+    expect(getRegions(fakeEvent)).toEqual([northAmerica])
   })
 
   it('gets the region from the record even if it is not recognized by qiskit', () => {
@@ -138,7 +138,7 @@ describe('getRegion', () => {
       name: 'Fake Conference',
       region: 'Lemuria'
     })
-    expect(getRegion(unknownRegionEvent)).toEqual(['Lemuria'])
+    expect(getRegions(unknownRegionEvent)).toEqual(['Lemuria'])
   })
 })
 
