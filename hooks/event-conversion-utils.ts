@@ -63,7 +63,7 @@ async function fetchCommunityEvents (apiKey: string, { days }: { days: any }): P
   const { showOnEventsPage } = RECORD_FIELDS
   const communityEvents: CommunityEvent[] = []
 
-  await getEventsQuery(apiKey, days, 'Events Only  - No Seminar Series or Speakers', [`{${showOnEventsPage}}`]).eachPage((records, nextPage) => {
+  await getEventsQuery(apiKey, days, 'Add to Event Site', [`{${showOnEventsPage}}`]).eachPage((records, nextPage) => {
     for (const record of records) {
       const communityEvent = convertToCommunityEvent(record)
       communityEvents.push(communityEvent)
