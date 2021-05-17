@@ -153,7 +153,8 @@ function getLocation (record: any): string {
 }
 
 function getRegion (record: any): WorldRegion[] {
-  return record.get(RECORD_FIELDS.region) || [WORLD_REGIONS.tbd]
+  const recordRegion = record.get(RECORD_FIELDS.region)
+  return recordRegion ? [recordRegion] : [WORLD_REGIONS.tbd]
 }
 
 function getDates (record: any): [Date, Date|undefined] {
