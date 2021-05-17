@@ -1,6 +1,6 @@
 <template>
   <div class="event-page">
-    <AppPageHeaderFixed>
+    <AppPageHeaderFixed old-container>
       Join <TypewriterEffect
         :values="[
           'events',

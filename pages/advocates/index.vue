@@ -29,7 +29,7 @@ import QiskitPage from '~/components/logic/QiskitPage.vue'
       title: 'Qiskit Advocates'
     }
   },
-
+  layout: 'default-max',
   computed: {
     ...mapGetters('advocates', [
       'filteredAdvocates'

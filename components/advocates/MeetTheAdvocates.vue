@@ -1,10 +1,10 @@
 <template>
-  <section id="meet-the-advocates" class="meet-the-advocates">
+  <section id="meet-the-advocates" class="bx--grid meet-the-advocates">
     <h2>
       Meet the Advocates
     </h2>
     <div class="bx--row">
-      <div class="bx--col-md-5 bx--col-lg-8 bx--col-xl-7">
+      <div class="bx--col-md-5 bx--col-lg-8 bx--col-xl-7 bx--col-max-6">
         <p>
           Qiskit advocates are some of the finest minds in quantum computing,
           all over the world. If you are interested in getting involved with the
@@ -43,14 +43,15 @@
         />
       </template>
       <template slot="results">
-        <InfiniteScroll
-          v-slot="advocate"
-          :items="advocates"
-          :min-items="5"
-          :key-generator="(advocate) => advocate.name"
-        >
-          <AdvocateCard v-bind="advocate" />
-        </InfiniteScroll>
+        <div class="bx--row">
+          <div
+            v-for="(advocate, index) in advocates"
+            :key="index"
+            class="bx--col-max-8"
+          >
+            <AdvocateCard v-bind="advocate" />
+          </div>
+        </div>
       </template>
     </AppFiltersResultsLayout>
   </section>
@@ -60,24 +61,9 @@
 import Vue from 'vue'
 import { mapState, MapperForStateWithNamespace } from 'vuex'
 import { Component, Prop } from 'vue-property-decorator'
-import AdvocateCard from '~/components/advocates/AdvocateCard.vue'
-import AppMultiSelect from '~/components/ui/AppMultiSelect.vue'
-import AppFieldset from '~/components/ui/AppFieldset.vue'
-import AppFiltersResultsLayout from '~/components/ui/AppFiltersResultsLayout.vue'
-import InfiniteScroll from '~/components/ui/InfiniteScroll.vue'
-import AppLink from '~/components/ui/AppLink.vue'
 import { Advocate, ADVOCATES_WORLD_REGION_OPTIONS, State } from '~/store/advocates'
 
 @Component({
-  components: {
-    AdvocateCard,
-    AppMultiSelect,
-    AppFieldset,
-    AppFiltersResultsLayout,
-    InfiniteScroll,
-    AppLink
-  },
-
   computed: {
     ...mapState<MapperForStateWithNamespace>('advocates', {
       regionFilters: (state: State) => state.regionFilters
@@ -123,8 +109,6 @@ export default class MeetTheAdvocates extends Vue {
 
 <style lang="scss" scoped>
 .meet-the-advocates {
-  @include contained();
-
   margin-top: $layout-06;
 
   &__filters-result-section {

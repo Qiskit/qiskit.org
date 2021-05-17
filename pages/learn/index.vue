@@ -1,6 +1,6 @@
 <template>
   <div class="learn-page">
-    <AppPageHeaderFixed>
+    <AppPageHeaderFixed old-container>
       Start your path towards learning
       <TypewriterEffect
         :values="[
