@@ -121,15 +121,15 @@ export default {
 
       if (noTypeFilters && noRegionFilters) { return events }
 
+      if (noRegionFilters) { return filterBy(events, typeFilters, 'types') }
+
+      if (noTypeFilters) { return filterBy(events, regionFilters, 'regions') }
+
       const eventsAfterApplyTypeFilter = filterBy(events, typeFilters, 'types')
 
       return filterBy(eventsAfterApplyTypeFilter, regionFilters, 'regions')
 
       function filterBy (allEvents: CommunityEvent[], selectedFilters: string[], propToFilter: keyof CommunityEvent) {
-        const noFilters = selectedFilters.length === 0
-
-        if (noFilters) { return allEvents }
-
         return allEvents.filter((event) => {
           const propValue = event[propToFilter] || []
           const valueArray = Array.isArray(propValue) ? propValue : [propValue]
