@@ -46,11 +46,13 @@ class FakeRecord {
 
 describe('convertToCommunityEvent', () => {
   const { hackathon } = COMMUNITY_EVENT_TYPES
+  const { europe } = WORLD_REGIONS
+
   const fakeRecord = new FakeRecord({
     name: 'Fake conference',
     types: [hackathon],
     location: 'Someplace',
-    regions: 'Europe',
+    regions: [europe],
     startDate: '2020-01-01',
     endDate: '2020-01-02',
     website: 'https://qiskit.org/events'
@@ -128,7 +130,7 @@ describe('getRegions', () => {
     const { northAmerica } = WORLD_REGIONS
     const fakeEvent = new FakeRecord({
       name: 'Fake Conference',
-      regions: northAmerica
+      regions: [northAmerica]
     })
     expect(getRegions(fakeEvent)).toEqual([northAmerica])
   })
@@ -136,7 +138,7 @@ describe('getRegions', () => {
   it('gets the region from the record even if it is not recognized by qiskit', () => {
     const unknownRegionEvent = new FakeRecord({
       name: 'Fake Conference',
-      regions: 'Lemuria'
+      regions: ['Lemuria']
     })
     expect(getRegions(unknownRegionEvent)).toEqual(['Lemuria'])
   })
@@ -156,7 +158,7 @@ describe('getLocation', () => {
     const { northAmerica } = WORLD_REGIONS
     const noLocationEvent = new FakeRecord({
       name: 'Fake Conference',
-      regions: northAmerica
+      regions: [northAmerica]
     })
     expect(getLocation(noLocationEvent)).toEqual([northAmerica])
   })
