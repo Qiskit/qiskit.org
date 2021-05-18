@@ -17,7 +17,7 @@ type RecordFields = {
   picture?: object[],
   types?: string[]|string,
   location?: string,
-  region?: string[]|string,
+  regions?: string[]|string,
   startDate?: string,
   endDate?: string,
   website?: string
@@ -26,13 +26,13 @@ type RecordFields = {
 class FakeRecord {
   _fields: object = {}
 
-  constructor ({ name, picture, types, location, region, startDate, endDate, website }: RecordFields) {
+  constructor ({ name, picture, types, location, regions, startDate, endDate, website }: RecordFields) {
     this._fields = {
       [RECORD_FIELDS.name]: name,
       [RECORD_FIELDS.image]: picture,
       [RECORD_FIELDS.typeOfEvent]: types,
       [RECORD_FIELDS.location]: location,
-      [RECORD_FIELDS.region]: region,
+      [RECORD_FIELDS.region]: regions,
       [RECORD_FIELDS.startDate]: startDate,
       [RECORD_FIELDS.endDate]: endDate,
       [RECORD_FIELDS.eventWebsite]: website
@@ -50,7 +50,7 @@ describe('convertToCommunityEvent', () => {
     name: 'Fake conference',
     types: [hackathon],
     location: 'Someplace',
-    region: 'Europe',
+    regions: 'Europe',
     startDate: '2020-01-01',
     endDate: '2020-01-02',
     website: 'https://qiskit.org/events'
@@ -59,12 +59,12 @@ describe('convertToCommunityEvent', () => {
   it('extracts and format information from the record', () => {
     const { hackathon } = COMMUNITY_EVENT_TYPES
     const { europe } = WORLD_REGIONS
-    const { title, types, location, region, date, to } = convertToCommunityEvent(fakeRecord)
-    expect({ title, types, location, region, date, to }).toEqual({
+    const { title, types, location, regions, date, to } = convertToCommunityEvent(fakeRecord)
+    expect({ title, types, location, regions, date, to }).toEqual({
       title: 'Fake conference',
       types: [hackathon],
       location: 'Someplace',
-      region: [europe],
+      regions: [europe],
       date: 'January 1-2, 2020',
       to: 'https://qiskit.org/events'
     })
@@ -128,7 +128,7 @@ describe('getRegions', () => {
     const { northAmerica } = WORLD_REGIONS
     const fakeEvent = new FakeRecord({
       name: 'Fake Conference',
-      region: northAmerica
+      regions: northAmerica
     })
     expect(getRegions(fakeEvent)).toEqual([northAmerica])
   })
@@ -136,7 +136,7 @@ describe('getRegions', () => {
   it('gets the region from the record even if it is not recognized by qiskit', () => {
     const unknownRegionEvent = new FakeRecord({
       name: 'Fake Conference',
-      region: 'Lemuria'
+      regions: 'Lemuria'
     })
     expect(getRegions(unknownRegionEvent)).toEqual(['Lemuria'])
   })
@@ -156,7 +156,7 @@ describe('getLocation', () => {
     const { northAmerica } = WORLD_REGIONS
     const noLocationEvent = new FakeRecord({
       name: 'Fake Conference',
-      region: northAmerica
+      regions: northAmerica
     })
     expect(getLocation(noLocationEvent)).toEqual([northAmerica])
   })

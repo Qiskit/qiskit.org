@@ -98,7 +98,7 @@ function convertToCommunityEvent (record: any): CommunityEvent {
     types: getTypes(record),
     image: getImage(record),
     location: getLocation(record),
-    region: getRegions(record),
+    regions: getRegions(record),
     date: formatDates(...getDates(record)),
     to: getWebsite(record)
   }

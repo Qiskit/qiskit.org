@@ -33,7 +33,7 @@ type CommunityEvent = {
   // See also:
   // https://github.com/Qiskit/qiskit.org/issues/527
   location: string,
-  region: WorldRegion[],
+  regions: WorldRegion[],
   date: string,
   to: string
 }
@@ -123,7 +123,7 @@ export default {
 
       const eventsAfterApplyTypeFilter = filterBy(events, typeFilters, 'types')
 
-      return filterBy(eventsAfterApplyTypeFilter, regionFilters, 'region')
+      return filterBy(eventsAfterApplyTypeFilter, regionFilters, 'regions')
 
       function filterBy (allEvents: CommunityEvent[], selectedFilters: string[], propToFilter: keyof CommunityEvent) {
         const noFilters = selectedFilters.length === 0
