@@ -44,18 +44,6 @@ export default class AppFiltersResultsLayouts extends Vue {
       margin-bottom: $layout-01;
     }
 
-    @include mq($from: medium) {
-      min-height: 17.125rem;
-    }
-
-    @include mq($from: large) {
-      min-height: 12.5rem;
-    }
-
-    @include mq($from: x-large) {
-      min-height: 12.5rem;
-    }
-
     &_2-cols-xlg {
       @include mq($from: x-large) {
         height: calc(100% - #{$layout-02});
