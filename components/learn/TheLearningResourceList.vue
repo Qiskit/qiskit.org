@@ -2,7 +2,7 @@
   <section class="the-learning-resources-list">
     <div class="bx--grid">
       <h2>Learning resources</h2>
-      <div class="bx--row the-learning-resources-list__introduction">
+      <div class="bx--row">
         <div class="bx--col-md-5 bx--col-lg-8 bx--col-xlg-7 bx--col-max-6">
           <p>
             The below are designed and created by the Qiskit team. However, we
