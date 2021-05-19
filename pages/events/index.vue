@@ -1,6 +1,6 @@
 <template>
-  <div class="event-page">
-    <AppPageHeaderFixed old-container>
+  <div>
+    <AppPageHeaderFixed>
       Join <TypewriterEffect
         :values="[
           'events',
@@ -110,7 +110,7 @@ import { EVENT_REQUEST_LINK } from '~/constants/appLinks'
       title: 'Qiskit Events'
     }
   },
-
+  layout: 'default-max',
   computed: {
     ...mapGetters('events', [
       'filteredEvents',
@@ -196,10 +196,6 @@ export default class EventsPage extends QiskitPage {
 @import '~carbon-components/scss/globals/scss/typography';
 
 .event-page {
-  &__container {
-    @include contained();
-  }
-
   &__time-filters {
     margin-top: $layout-03;
     margin-bottom: $layout-04;
