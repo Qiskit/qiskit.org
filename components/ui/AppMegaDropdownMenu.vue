@@ -1,27 +1,36 @@
 <template>
   <article class="app-mega-dropdown">
-    <button
-      ref="button"
-      class="app-mega-dropdown__button"
-      :class="`app-mega-dropdown__button_${kind}`"
-      @click="toggleOpen"
+    <label
+      ref="searchFieldWrapper"
+      class="app-mega-dropdown__search-field-wrapper"
+      :class="`app-mega-dropdown__search-field-wrapper_${kind}`"
     >
-      <span>{{ placeholder }}</span>
-      <svg class="app-mega-dropdown__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M16 22L6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z" /></svg>
-    </button>
+      <input
+        v-model="filterText"
+        type="text"
+        class="app-mega-dropdown__search-field-wrapper__input"
+        :placeholder="`${placeholder}`"
+        @focus="onSearchFieldFocus"
+      >
+      <svg class="app-mega-dropdown__search-field-wrapper__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M16 22L6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z" /></svg>
+    </label>
     <div
       v-if="showContent"
       ref="dropdown"
       class="app-mega-dropdown__content-container"
     >
       <nav class="app-mega-dropdown__content">
-        <div v-for="(column, columnIndex) in content" :key="`${columnIndex}`" class="app-mega-dropdown__content-column">
+        <div v-for="(column, columnIndex) in filteredContent" :key="`${columnIndex}`" class="app-mega-dropdown__content-column">
           <div v-for="(group, groupIndex) in column" :key="`${groupIndex}`">
             <BasicLink
               class="app-mega-dropdown__content-link app-mega-dropdown__content-link_title"
               :url="group.title.url"
             >
-              {{ group.title.label }}
+              <span
+                v-for="(part) in filterColoring(group.title.label)"
+                :key="`${part.index}-${part.text.length}`"
+                :class="{'app-mega-dropdown__content-link__text-highlight': part.highlight}"
+              >{{ part.text }}</span>
             </BasicLink>
             <BasicLink
               v-for="chapter in group.content"
@@ -29,7 +38,11 @@
               class="app-mega-dropdown__content-link"
               :url="chapter.url"
             >
-              {{ chapter.label }}
+              <span
+                v-for="(part) in filterColoring(chapter.label)"
+                :key="`${part.index}-${part.text.length}`"
+                :class="{'app-mega-dropdown__content-link__text-highlight': part.highlight}"
+              >{{ part.text }}</span>
             </BasicLink>
           </div>
         </div>
@@ -41,7 +54,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-import { MegaDropdownMenu } from '~/constants/megaMenuLinks'
+import { MegaDropdownMenu, MegaDropdownMenuColumn, MegaDropdownMenuGroup } from '~/constants/megaMenuLinks'
+import { NavLink } from '~/constants/menuLinks'
 
 @Component
 export default class TheMegaDropdownMenu extends Vue {
@@ -51,16 +65,85 @@ export default class TheMegaDropdownMenu extends Vue {
 
   showContent = false;
 
+  onSearchFieldFocus () {
+    this.showContent = true
+  }
+
+  filterText = ''
+  get filterWords (): string[] {
+    return this.filterText.trim().toLowerCase().split(' ')
+  }
+
+  filterColoring (text: string) {
+    if (this.filterText.trim() === '' || text.trim() === '') {
+      return [{ text, hightlight: false }]
+    }
+
+    const highlightedChars = Array.from(text).map((letter:string) => { return { letter, highlight: false } })
+
+    const lowerCaseText = text.toLowerCase()
+    this.filterWords.forEach((word: string) => {
+      let from = lowerCaseText.indexOf(word)
+      while (from >= 0) {
+        const to = from + word.length
+        for (let i = from; i < to; i++) {
+          highlightedChars[i].highlight = true
+        }
+        from = lowerCaseText.indexOf(word, to)
+      }
+    })
+
+    const output = [{ text: highlightedChars[0].letter, highlight: highlightedChars[0].highlight, index: 0 }]
+    for (let i = 1; i < highlightedChars.length; i++) {
+      const lastElem = output[output.length - 1]
+      const currChar = highlightedChars[i]
+      if (lastElem.highlight === currChar.highlight) {
+        lastElem.text = `${lastElem.text}${currChar.letter}`
+      } else {
+        output.push({ text: currChar.letter, highlight: currChar.highlight, index: i })
+      }
+    }
+
+    return output
+  }
+
+  get filteredContent () {
+    if (this.filterText === '') {
+      return this.content
+    }
+    const filterWords: string[] = this.filterWords
+
+    return this.content.map<MegaDropdownMenuColumn>((column: MegaDropdownMenuColumn) => {
+      return column.map<MegaDropdownMenuGroup>((group: MegaDropdownMenuGroup) => {
+        const titleSelected = filterWords.every(word => group.title.label.toLowerCase().includes(word))
+        if (titleSelected) {
+          return group
+        }
+
+        return {
+          title: group.title,
+          content: group.content.filter((link: NavLink) => {
+            return filterWords.every(word => link.label.toLowerCase().includes(word))
+          })
+        }
+      }).filter((group: MegaDropdownMenuGroup) => {
+        return group.content.length > 0
+      })
+    }).filter((column: MegaDropdownMenuColumn) => {
+      return column.length > 0
+    })
+  }
+
   mounted () {
-    document.addEventListener('click', this.handleClick)
+    document.addEventListener('mousedown', this.handleClick)
   }
 
   beforeDestroy () {
-    document.removeEventListener('click', this.handleClick)
+    document.removeEventListener('mousedown', this.handleClick)
   }
 
   handleClick (e: MouseEvent) {
-    const buttonElement = this.$refs.button as Element
+    const buttonElement = this.$refs.searchFieldWrapper as Element
     const dropdownElement = this.$refs.dropdown as Element|undefined
 
     if (dropdownElement) {
@@ -70,12 +153,9 @@ export default class TheMegaDropdownMenu extends Vue {
 
       if (shouldCloseDropdown) {
         this.showContent = false
+        this.filterText = ''
       }
     }
-  }
-
-  toggleOpen () : void {
-    this.showContent = !this.showContent
   }
 }
 </script>
@@ -88,31 +168,36 @@ export default class TheMegaDropdownMenu extends Vue {
   color: $cool-gray-80;
   position: relative;
 
-  &__button {
-    &_primary,
-    &_secondary {
+  &__search-field-wrapper {
+    display: flex;
+    width: 18rem;
+    justify-content: space-between;
+    align-items: center;
+    padding: $spacing-03;
+
+    &__input {
+      flex: 1;
       background-color: transparent;
       outline: none;
       border: none;
-      width: 18rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: $spacing-03;
+      color: inherit;
+    }
+    &__input:focus::placeholder {
+      opacity: 0.25;
+    }
 
-      .app-mega-dropdown__icon > path {
-        transform: translate(0, 0);
-        transition: transform 0.2s ease-in-out;
-      }
+    &__icon {
+      flex: 0 0 1rem;
+    }
 
-      &:hover {
-        cursor: pointer;
+    &__icon > path {
+      transform: translate(0, 0);
+      transition: transform 0.2s ease-in-out;
+    }
 
-        .app-mega-dropdown__icon > path {
-          transform: translate(0, 4px);
-          transition: transform 0.2s ease-in-out;
-        }
-      }
+    &:hover &__icon > path {
+      transform: translate(0, 4px);
+      transition: transform 0.2s ease-in-out;
     }
 
     &_primary {
@@ -120,16 +205,18 @@ export default class TheMegaDropdownMenu extends Vue {
       fill: $cool-gray-80;
       border-bottom: 1px solid $cool-gray-80;
     }
+    &_primary &__input::placeholder {
+      color: $cool-gray-80;
+    }
 
     &_secondary {
       color: $white;
       fill: $white;
       border-bottom: 1px solid $white;
     }
-  }
-
-  &__icon {
-    width: 1rem;
+    &_secondary &__input::placeholder {
+      color: $white;
+    }
   }
 
   &__content-container {
@@ -177,6 +264,9 @@ export default class TheMegaDropdownMenu extends Vue {
 
       &_title {
         font-weight: 600;
+      }
+      &__text-highlight {
+        background-color: yellow;
       }
     }
   }
