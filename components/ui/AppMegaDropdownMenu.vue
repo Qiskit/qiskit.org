@@ -227,7 +227,8 @@ export default class TheMegaDropdownMenu extends Vue {
     background-color: $white;
     box-shadow: -4px 4px 12px rgba(0, 0, 0, .1);
     height: 32rem;
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: auto;
 
     @include mq($until: large) {
       width: 100%;
