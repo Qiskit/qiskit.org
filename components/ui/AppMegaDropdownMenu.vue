@@ -27,7 +27,7 @@
               :url="group.title.url"
             >
               <span
-                v-for="(part) in filterColoring(group.title.label)"
+                v-for="(part) in highlightParts(group.title.label)"
                 :key="`${part.index}-${part.text.length}`"
                 :class="{'app-mega-dropdown__content-link__text-highlight': part.highlight}"
               >{{ part.text }}</span>
@@ -39,7 +39,7 @@
               :url="chapter.url"
             >
               <span
-                v-for="(part) in filterColoring(chapter.label)"
+                v-for="(part) in highlightParts(chapter.label)"
                 :key="`${part.index}-${part.text.length}`"
                 :class="{'app-mega-dropdown__content-link__text-highlight': part.highlight}"
               >{{ part.text }}</span>
@@ -74,7 +74,7 @@ export default class TheMegaDropdownMenu extends Vue {
     return this.filterText.trim().toLowerCase().split(' ')
   }
 
-  filterColoring (text: string) {
+  highlightParts (text: string) {
     if (this.filterText.trim() === '' || text.trim() === '') {
       return [{ text, hightlight: false }]
     }
