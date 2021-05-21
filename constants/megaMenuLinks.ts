@@ -537,5 +537,7 @@ const TEXTBOOK_DEMO_MEGA_MENU: MegaDropdownMenu = [
 
 export {
   MegaDropdownMenu,
+  MegaDropdownMenuColumn,
+  MegaDropdownMenuGroup,
   TEXTBOOK_DEMO_MEGA_MENU
 }
