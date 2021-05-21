@@ -27,7 +27,7 @@
               :url="group.title.url"
             >
               <span
-                v-for="(part) in highlightParts(group.title.label)"
+                v-for="(part) in splitTextInHighlightParts(group.title.label)"
                 :key="`${part.index}-${part.text.length}`"
                 :class="{'app-mega-dropdown__content-link__text-highlight': part.highlight}"
               >{{ part.text }}</span>
@@ -39,7 +39,7 @@
               :url="chapter.url"
             >
               <span
-                v-for="(part) in highlightParts(chapter.label)"
+                v-for="(part) in splitTextInHighlightParts(chapter.label)"
                 :key="`${part.index}-${part.text.length}`"
                 :class="{'app-mega-dropdown__content-link__text-highlight': part.highlight}"
               >{{ part.text }}</span>
@@ -55,7 +55,6 @@
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 import { MegaDropdownMenu, MegaDropdownMenuColumn, MegaDropdownMenuGroup } from '~/constants/megaMenuLinks'
-import { NavLink } from '~/constants/menuLinks'
 
 interface HighlightTextState {
   text: string,
@@ -63,7 +62,7 @@ interface HighlightTextState {
 }
 
 @Component
-export default class TheMegaDropdownMenu extends Vue {
+export default class AppMegaDropdownMenu extends Vue {
   @Prop({ type: String, default: 'primary' }) kind!: 'primary'|'secondary'
   @Prop({ type: String, default: 'Browse content' }) placeholder!: string
   @Prop(Array) content!: MegaDropdownMenu
@@ -75,88 +74,119 @@ export default class TheMegaDropdownMenu extends Vue {
   }
 
   filterText = ''
-  get filterWords (): string[] {
+
+  filterWords (): string[] {
     return this.filterText.trim().toLowerCase().split(' ')
   }
 
-  highlightParts (text: string) {
-    if (this.filterText.trim() === '' || text.trim() === '') {
-      return [{ text, hightlight: false }]
-    }
-
-    const highlightStateByChar = this._highlightStateByChar(text)
-
-    const output = this._concatByHighlightState(highlightStateByChar)
-
-    return output
+  filterTextIsEmpty (): boolean {
+    return this.filterText.trim() === ''
   }
 
-  _highlightStateByChar (text: string) : HighlightTextState[] {
-    const highlightState = Array.from(text).map<HighlightTextState>((letter:string) => { return { text: letter, highlight: false } })
+  splitTextInHighlightParts (text: string) : HighlightTextState[] {
+    const textIsEmpty = text.trim() === ''
+    if (this.filterTextIsEmpty() || textIsEmpty) {
+      return [{ text, highlight: false }]
+    }
 
+    const charIsHighlightArray = this._splitTextInHighlightChars(text, this.filterWords())
+
+    const textHighlightParts = this._joinCharsByHighlightState(charIsHighlightArray)
+
+    return textHighlightParts
+  }
+
+  // Splits the text in characters and sets a "highlight" property indicating if the character should be highlighted or not
+  _splitTextInHighlightChars (text: string, filterWords: string[]) : HighlightTextState[] {
+    const charArray = Array.from(text)
+    // Assign a highlight flag to each character
+    const highlightStates = charArray.map<HighlightTextState>(letter => ({ text: letter, highlight: false }))
     const lowerCaseText = text.toLowerCase()
-    this.filterWords.forEach((word: string) => {
+
+    filterWords.forEach((word: string) => {
+      // start highlighting index
       let from = lowerCaseText.indexOf(word)
 
       while (from >= 0) {
+        // end highlighting index
         const to = from + word.length
 
         for (let i = from; i < to; i++) {
-          highlightState[i].highlight = true
+          highlightStates[i].highlight = true
         }
+        // the text could have the same word multiple times.
         from = lowerCaseText.indexOf(word, to)
       }
     })
 
-    return highlightState
+    return highlightStates
   }
 
-  _concatByHighlightState (highlightStateByChar: HighlightTextState[]) {
-    const output = [{ text: highlightStateByChar[0].text, highlight: highlightStateByChar[0].highlight, index: 0 }]
+  // Join consecutive characters with the same highlight property
+  // The result is an array of texts flaged by a highlight property
+  // The n+1 text has always the opposit highlight state of n.
+  _joinCharsByHighlightState (highlightStateByChar: HighlightTextState[]): HighlightTextState[] {
+    const output = [{
+      text: highlightStateByChar[0].text,
+      highlight: highlightStateByChar[0].highlight,
+      index: 0
+    }]
 
     for (let i = 1; i < highlightStateByChar.length; i++) {
-      const lastElem = output[output.length - 1]
-      const currChar = highlightStateByChar[i]
+      const lastCharState = output[output.length - 1]
+      const currentChar = highlightStateByChar[i]
+      const highlightTextContinues = lastCharState.highlight === currentChar.highlight
 
-      if (lastElem.highlight === currChar.highlight) {
-        lastElem.text = `${lastElem.text}${currChar.text}`
+      if (highlightTextContinues) {
+        lastCharState.text = lastCharState.text.concat(currentChar.text)
       } else {
-        output.push({ text: currChar.text, highlight: currChar.highlight, index: i })
+        output.push({
+          text: currentChar.text,
+          highlight: currentChar.highlight,
+          index: i
+        })
       }
     }
 
     return output
   }
 
-  get filteredContent () {
-    if (this.filterText === '') {
+  get filteredContent (): MegaDropdownMenu {
+    if (this.filterTextIsEmpty()) {
       return this.content
     }
-    const filterWords: string[] = this.filterWords
 
-    return this.content.map<MegaDropdownMenuColumn>((column: MegaDropdownMenuColumn) => {
-      return column.map<MegaDropdownMenuGroup>((group: MegaDropdownMenuGroup) => {
-        return this._filterMegaDropdownGroupLinks(group, filterWords)
-      }).filter((group: MegaDropdownMenuGroup) => {
-        return group.content.length > 0
-      })
-    }).filter((column: MegaDropdownMenuColumn) => {
-      return column.length > 0
-    })
+    const filterWords: string[] = this.filterWords()
+
+    const filteredContent = this.content.map((column: MegaDropdownMenuColumn) => this._filterMegaDropdownColumn(column, filterWords))
+    const nonEmptyColumnsFilteredContent = filteredContent.filter((column: MegaDropdownMenuColumn) => column.length > 0)
+
+    return nonEmptyColumnsFilteredContent
   }
 
-  _filterMegaDropdownGroupLinks (group: MegaDropdownMenuGroup, filterWords: string[]) {
+  _filterMegaDropdownColumn (column: MegaDropdownMenuColumn, filterWords: string[]): MegaDropdownMenuColumn {
+    const filteredColumn = column.map((group: MegaDropdownMenuGroup) => this._filterMegaDropdownGroupLinks(group, filterWords))
+    const nonEmptyGroupsFilteredColumn = filteredColumn.filter((group: MegaDropdownMenuGroup) => group.content.length > 0)
+
+    return nonEmptyGroupsFilteredColumn
+  }
+
+  _filterMegaDropdownGroupLinks (group: MegaDropdownMenuGroup, filterWords: string[]): MegaDropdownMenuGroup {
     const titleSelected = filterWords.every(word => group.title.label.toLowerCase().includes(word))
     if (titleSelected) {
       return group
     }
 
+    const filteredLinks = group.content.filter(link => this._applyFilter(link.label, filterWords))
+
     return {
       title: group.title,
-      content: group.content.filter((link: NavLink) => {
-        return filterWords.every(word => link.label.toLowerCase().includes(word))
-      })
+      content: filteredLinks
     }
+  }
+
+  _applyFilter (text: string, filterWords: string[]) {
+    return filterWords.every(word => text.toLowerCase().includes(word))
   }
 
   mounted () {
@@ -200,6 +230,10 @@ export default class TheMegaDropdownMenu extends Vue {
     align-items: center;
     padding: $spacing-03;
 
+    color: $cool-gray-80;
+    fill: $cool-gray-80;
+    border-bottom: 1px solid $purple-70;
+
     &__input {
       flex: 1;
       background-color: transparent;
@@ -226,21 +260,17 @@ export default class TheMegaDropdownMenu extends Vue {
     }
 
     &_primary {
-      color: $cool-gray-80;
-      fill: $cool-gray-80;
-      border-bottom: 1px solid $cool-gray-80;
+      background-color: transparent;
     }
     &_primary &__input::placeholder {
       color: $cool-gray-80;
     }
 
     &_secondary {
-      color: $white;
-      fill: $white;
-      border-bottom: 1px solid $white;
+      background-color: $white;
     }
     &_secondary &__input::placeholder {
-      color: $white;
+      color: $cool-gray-80;
     }
   }
 
@@ -250,7 +280,7 @@ export default class TheMegaDropdownMenu extends Vue {
     padding: $spacing-07 $spacing-05;
     width: 12 * $column-size-large;
     background-color: $white;
-    box-shadow: -4px 4px 12px rgba(0, 0, 0, .1);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     height: 32rem;
     overflow-y: scroll;
     overflow-x: auto;
@@ -292,7 +322,7 @@ export default class TheMegaDropdownMenu extends Vue {
         font-weight: 600;
       }
       &__text-highlight {
-        background-color: $purple-30;
+        background-color: $purple-20;
       }
     }
   }
