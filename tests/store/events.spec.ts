@@ -10,27 +10,27 @@ describe('module events', () => {
   const unconferenceCampInAsia = {
     title: 'Fake event A',
     types: ['Unconference', 'Camp'],
-    regions: 'Asia Pacific'
+    regions: ['Asia Pacific']
   }
   const hackathonInEurope = {
     title: 'Fake event B',
     types: ['Unconference', 'Hackathon'],
-    regions: 'Europe'
+    regions: ['Europe']
   }
   const campInAfrica = {
     title: 'Fake event C',
     types: ['Camp'],
-    regions: 'Africa'
+    regions: ['Africa']
   }
   const hackathonInAmericas = {
     title: 'Fake event D',
     types: ['Camp', 'Hackathon'],
-    regions: 'Americas'
+    regions: ['Americas']
   }
   const unconferenceOnline = {
     title: 'Fake event E',
     types: ['Unconference'],
-    regions: 'Online'
+    regions: ['Online']
   }
 
   const futureEvents = [unconferenceCampInAsia, hackathonInEurope, campInAfrica]

@@ -15,9 +15,9 @@ import { COMMUNITY_EVENT_TYPES, WORLD_REGIONS } from '~/store/events'
 type RecordFields = {
   name: string,
   picture?: object[],
-  types?: string[]|string,
+  types?: string[],
   location?: string,
-  regions?: string[]|string,
+  regions?: string[],
   startDate?: string,
   endDate?: string,
   website?: string
@@ -104,7 +104,7 @@ describe('getType', () => {
     const { hackathon } = COMMUNITY_EVENT_TYPES
     const camp = new FakeRecord({
       name: 'Fake Conference',
-      types: hackathon
+      types: [hackathon]
     })
     expect(getTypes(camp)).toEqual([hackathon])
   })
