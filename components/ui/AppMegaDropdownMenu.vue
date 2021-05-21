@@ -268,7 +268,7 @@ export default class TheMegaDropdownMenu extends Vue {
         font-weight: 600;
       }
       &__text-highlight {
-        background-color: yellow;
+        background-color: $purple-30;
       }
     }
   }
