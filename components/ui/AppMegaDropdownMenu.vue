@@ -57,6 +57,11 @@ import { Component, Prop } from 'vue-property-decorator'
 import { MegaDropdownMenu, MegaDropdownMenuColumn, MegaDropdownMenuGroup } from '~/constants/megaMenuLinks'
 import { NavLink } from '~/constants/menuLinks'
 
+interface HighlightTextState {
+  text: string,
+  highlight: boolean
+}
+
 @Component
 export default class TheMegaDropdownMenu extends Vue {
   @Prop({ type: String, default: 'primary' }) kind!: 'primary'|'secondary'
@@ -79,28 +84,44 @@ export default class TheMegaDropdownMenu extends Vue {
       return [{ text, hightlight: false }]
     }
 
-    const highlightedChars = Array.from(text).map((letter:string) => { return { letter, highlight: false } })
+    const highlightStateByChar = this._highlightStateByChar(text)
+
+    const output = this._concatByHighlightState(highlightStateByChar)
+
+    return output
+  }
+
+  _highlightStateByChar (text: string) : HighlightTextState[] {
+    const highlightState = Array.from(text).map<HighlightTextState>((letter:string) => { return { text: letter, highlight: false } })
 
     const lowerCaseText = text.toLowerCase()
     this.filterWords.forEach((word: string) => {
       let from = lowerCaseText.indexOf(word)
+
       while (from >= 0) {
         const to = from + word.length
+
         for (let i = from; i < to; i++) {
-          highlightedChars[i].highlight = true
+          highlightState[i].highlight = true
         }
         from = lowerCaseText.indexOf(word, to)
       }
     })
 
-    const output = [{ text: highlightedChars[0].letter, highlight: highlightedChars[0].highlight, index: 0 }]
-    for (let i = 1; i < highlightedChars.length; i++) {
+    return highlightState
+  }
+
+  _concatByHighlightState (highlightStateByChar: HighlightTextState[]) {
+    const output = [{ text: highlightStateByChar[0].text, highlight: highlightStateByChar[0].highlight, index: 0 }]
+
+    for (let i = 1; i < highlightStateByChar.length; i++) {
       const lastElem = output[output.length - 1]
-      const currChar = highlightedChars[i]
+      const currChar = highlightStateByChar[i]
+
       if (lastElem.highlight === currChar.highlight) {
-        lastElem.text = `${lastElem.text}${currChar.letter}`
+        lastElem.text = `${lastElem.text}${currChar.text}`
       } else {
-        output.push({ text: currChar.letter, highlight: currChar.highlight, index: i })
+        output.push({ text: currChar.text, highlight: currChar.highlight, index: i })
       }
     }
 
@@ -115,23 +136,27 @@ export default class TheMegaDropdownMenu extends Vue {
 
     return this.content.map<MegaDropdownMenuColumn>((column: MegaDropdownMenuColumn) => {
       return column.map<MegaDropdownMenuGroup>((group: MegaDropdownMenuGroup) => {
-        const titleSelected = filterWords.every(word => group.title.label.toLowerCase().includes(word))
-        if (titleSelected) {
-          return group
-        }
-
-        return {
-          title: group.title,
-          content: group.content.filter((link: NavLink) => {
-            return filterWords.every(word => link.label.toLowerCase().includes(word))
-          })
-        }
+        return this._filterMegaDropdownGroupLinks(group, filterWords)
       }).filter((group: MegaDropdownMenuGroup) => {
         return group.content.length > 0
       })
     }).filter((column: MegaDropdownMenuColumn) => {
       return column.length > 0
     })
+  }
+
+  _filterMegaDropdownGroupLinks (group: MegaDropdownMenuGroup, filterWords: string[]) {
+    const titleSelected = filterWords.every(word => group.title.label.toLowerCase().includes(word))
+    if (titleSelected) {
+      return group
+    }
+
+    return {
+      title: group.title,
+      content: group.content.filter((link: NavLink) => {
+        return filterWords.every(word => link.label.toLowerCase().includes(word))
+      })
+    }
   }
 
   mounted () {
