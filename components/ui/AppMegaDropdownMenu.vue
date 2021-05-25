@@ -97,13 +97,13 @@ export default class AppMegaDropdownMenu extends Vue {
   }
 
   // Splits the text in characters and sets a "highlight" property indicating if the character should be highlighted or not
-  _splitTextInHighlightedChars (menuLabel: string, filterWords: string[]) : HighlightTextState[] {
+  _splitTextInHighlightedChars (menuLabel: string, wordsOnTheFilter: string[]) : HighlightTextState[] {
     const charArray = Array.from(menuLabel)
     // Assign a highlight flag to each character
     const highlightStates = charArray.map<HighlightTextState>(letter => ({ text: letter, isHighlighted: false }))
     const lowerCaseText = menuLabel.toLowerCase()
 
-    filterWords.forEach((word: string) => {
+    wordsOnTheFilter.forEach((word: string) => {
       // start highlighting index
       let from = lowerCaseText.indexOf(word)
 
@@ -156,28 +156,28 @@ export default class AppMegaDropdownMenu extends Vue {
       return this.content
     }
 
-    const filterWords: string[] = this.wordsOnTheFilter
+    const wordsOnTheFilter: string[] = this.wordsOnTheFilter
 
-    const filteredContent = this.content.map((column: MegaDropdownMenuColumn) => this._filterMegaDropdownColumn(column, filterWords))
+    const filteredContent = this.content.map((column: MegaDropdownMenuColumn) => this._filterMegaDropdownColumn(column, wordsOnTheFilter))
     const nonEmptyColumnsFilteredContent = filteredContent.filter((column: MegaDropdownMenuColumn) => column.length > 0)
 
     return nonEmptyColumnsFilteredContent
   }
 
-  _filterMegaDropdownColumn (column: MegaDropdownMenuColumn, filterWords: string[]): MegaDropdownMenuColumn {
-    const filteredColumn = column.map((group: MegaDropdownMenuGroup) => this._filterMegaDropdownGroupLinks(group, filterWords))
+  _filterMegaDropdownColumn (column: MegaDropdownMenuColumn, wordsOnTheFilter: string[]): MegaDropdownMenuColumn {
+    const filteredColumn = column.map((group: MegaDropdownMenuGroup) => this._filterMegaDropdownGroupLinks(group, wordsOnTheFilter))
     const nonEmptyGroupsFilteredColumn = filteredColumn.filter((group: MegaDropdownMenuGroup) => group.content.length > 0)
 
     return nonEmptyGroupsFilteredColumn
   }
 
-  _filterMegaDropdownGroupLinks (group: MegaDropdownMenuGroup, filterWords: string[]): MegaDropdownMenuGroup {
-    const titleSelected = filterWords.every(word => group.title.label.toLowerCase().includes(word))
+  _filterMegaDropdownGroupLinks (group: MegaDropdownMenuGroup, wordsOnTheFilter: string[]): MegaDropdownMenuGroup {
+    const titleSelected = wordsOnTheFilter.every(word => group.title.label.toLowerCase().includes(word))
     if (titleSelected) {
       return group
     }
 
-    const filteredLinks = group.content.filter(link => this._applyFilter(link.label, filterWords))
+    const filteredLinks = group.content.filter(link => this._containsWordsOnTheFilter(link.label, wordsOnTheFilter))
 
     return {
       title: group.title,
@@ -185,8 +185,8 @@ export default class AppMegaDropdownMenu extends Vue {
     }
   }
 
-  _applyFilter (text: string, filterWords: string[]) {
-    return filterWords.every(word => text.toLowerCase().includes(word))
+  _containsWordsOnTheFilter (label: string, filterWords: string[]) {
+    return filterWords.every(word => label.toLowerCase().includes(word))
   }
 
   mounted () {
