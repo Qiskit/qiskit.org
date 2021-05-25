@@ -173,7 +173,7 @@ export default class AppMegaDropdownMenu extends Vue {
   }
 
   _filterMegaDropdownGroupLinks (group: MegaDropdownMenuGroup, wordsOnTheFilter: string[]): MegaDropdownMenuGroup {
-    const titleSelected = wordsOnTheFilter.every((word: string) => group.title.label.toLowerCase().includes(word))
+    const titleSelected = wordsOnTheFilter.some((word: string) => group.title.label.toLowerCase().includes(word))
     if (titleSelected) {
       return group
     }
@@ -187,7 +187,7 @@ export default class AppMegaDropdownMenu extends Vue {
   }
 
   _containsWordsOnTheFilter (label: string, filterWords: string[]) {
-    return filterWords.every(word => label.toLowerCase().includes(word))
+    return filterWords.some(word => label.toLowerCase().includes(word))
   }
 
   mounted () {
@@ -228,6 +228,7 @@ export default class AppMegaDropdownMenu extends Vue {
   &__search-field-wrapper {
     display: flex;
     width: 18rem;
+    height: 2.5rem;
     justify-content: space-between;
     align-items: center;
     padding: $spacing-03;
@@ -278,7 +279,7 @@ export default class AppMegaDropdownMenu extends Vue {
 
   &__content-container {
     position: absolute;
-    top: 2.2rem;
+    top: 2.5rem;
     padding: $spacing-07 $spacing-05;
     width: 12 * $column-size-large;
     background-color: $white;
