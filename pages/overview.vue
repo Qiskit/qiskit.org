@@ -1,6 +1,6 @@
 <template>
   <div class="overview-page">
-    <AppPageHeaderFixed old-container>
+    <AppPageHeaderFixed>
       The most
       <TypewriterEffect
         :values="[
