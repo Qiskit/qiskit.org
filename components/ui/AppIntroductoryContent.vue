@@ -11,7 +11,7 @@
         kind="ghost"
       />
     </div>
-    <div>
+    <div class="app-introductory-content__details">
       <slot />
     </div>
   </article>
@@ -39,13 +39,19 @@ export default class AppIntroductoryContent extends Vue {
   }
 
   &__overview {
-    flex: 0 0 (4.5 * $column-size-large);
-    padding-right: $spacing-07;
     margin-bottom: $layout-03;
 
-    @include mq($until: large) {
-      padding-right: 0;
-      display: block;
+    @include mq($from: large) {
+      $grid-columns: 5/13; // Number of columns that the element will use at this breakpoint.
+
+      max-width: 100% * $grid-columns;
+      padding-right: $spacing-07;
+    }
+
+    @include mq($from: max-size) {
+      $grid-columns: 4/13; // Number of columns that the element will use at this breakpoint.
+
+      max-width: 100% * $grid-columns;
     }
   }
 
@@ -55,6 +61,10 @@ export default class AppIntroductoryContent extends Vue {
     @include mq($until: large) {
       margin-bottom: $layout-03;
     }
+  }
+
+  &__details {
+    width: 100%;
   }
 }
 </style>
