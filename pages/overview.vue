@@ -45,10 +45,12 @@
               :tabs="asTabs(section.subSections)"
             />
             <div v-else class="overview-page__content-section-details">
-              <img
-                class="overview-page__content-section-image"
-                :src="section.image"
-              >
+              <div class="overview-page__content-section-image__wrapper">
+                <img
+                  class="overview-page__content-section-image"
+                  :src="section.image"
+                >
+              </div>
             </div>
           </AppIntroductoryContent>
         </div>
@@ -113,10 +115,14 @@ export default class OverviewPage extends QiskitPage {
   }
 
   &__content-section-image {
-    position: relative;
-    right: -20%;
+    transform: translateX(20%);
     max-width: 100%;
     max-height: 30.5rem;
+
+    &__wrapper {
+      display: flex;
+      justify-content: flex-end;
+    }
   }
 }
 </style>
