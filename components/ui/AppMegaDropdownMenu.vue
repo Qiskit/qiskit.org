@@ -55,6 +55,7 @@
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 import { MegaDropdownMenu, MegaDropdownMenuColumn, MegaDropdownMenuGroup } from '~/constants/megaMenuLinks'
+import { NavLink } from '~/constants/menuLinks'
 
 interface HighlightTextState {
   text: string,
@@ -100,7 +101,7 @@ export default class AppMegaDropdownMenu extends Vue {
   _splitTextInHighlightedChars (menuLabel: string, wordsOnTheFilter: string[]) : HighlightTextState[] {
     const charArray = Array.from(menuLabel)
     // Assign a highlight flag to each character
-    const highlightStates = charArray.map<HighlightTextState>(letter => ({ text: letter, isHighlighted: false }))
+    const highlightStates = charArray.map<HighlightTextState>((letter: string) => ({ text: letter, isHighlighted: false }))
     const lowerCaseText = menuLabel.toLowerCase()
 
     wordsOnTheFilter.forEach((word: string) => {
@@ -172,12 +173,12 @@ export default class AppMegaDropdownMenu extends Vue {
   }
 
   _filterMegaDropdownGroupLinks (group: MegaDropdownMenuGroup, wordsOnTheFilter: string[]): MegaDropdownMenuGroup {
-    const titleSelected = wordsOnTheFilter.every(word => group.title.label.toLowerCase().includes(word))
+    const titleSelected = wordsOnTheFilter.every((word: string) => group.title.label.toLowerCase().includes(word))
     if (titleSelected) {
       return group
     }
 
-    const filteredLinks = group.content.filter(link => this._containsWordsOnTheFilter(link.label, wordsOnTheFilter))
+    const filteredLinks = group.content.filter((link: NavLink) => this._containsWordsOnTheFilter(link.label, wordsOnTheFilter))
 
     return {
       title: group.title,
