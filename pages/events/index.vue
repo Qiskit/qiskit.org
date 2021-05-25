@@ -12,7 +12,7 @@
       /> from the world&rsquo;s largest
       quantum computing community
     </AppPageHeaderFixed>
-    <div class="event-page__container">
+    <div class="bx--grid">
       <div class="event-page__time-filters">
         <client-only>
           <cv-tabs aria-label="navigation tab label" @tab-selected="selectTab">
@@ -64,18 +64,23 @@
               {{ emptyCard.description }}
             </div>
           </AppCard>
-          <EventCard
-            v-for="event in filteredEvents"
-            v-else
-            :key="`${event.title}-${event.place}-${event.date}`"
-            class="app-filters-results-layout__results-item"
-            :types="event.types"
-            :title="event.title"
-            :image="event.image"
-            :location="event.location"
-            :date="event.date"
-            :to="event.to"
-          />
+          <div class="bx--row" v-else>
+            <div
+              v-for="event in filteredEvents"
+              :key="`${event.title}-${event.place}-${event.date}`"
+              class="bx--col-sm-4 bx--col-xlg-8"
+            >
+              <EventCard   
+                class="app-filters-results-layout__results-item"
+                :types="event.types"
+                :title="event.title"
+                :image="event.image"
+                :location="event.location"
+                :date="event.date"
+                :to="event.to"
+              />
+            </div>
+          </div>
         </template>
         <template slot="extra-info">
           <div class="event-page__start-an-event">
