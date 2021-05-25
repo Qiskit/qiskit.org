@@ -78,7 +78,7 @@ import ScrollSectionsMixin from '~/mixins/scrollBetweenSections'
       title: 'Qiskit Overview'
     }
   },
-  layout: 'default-max',
+  layout: 'default-max'
 })
 export default class OverviewPage extends QiskitPage {
   routeName = 'overview'
