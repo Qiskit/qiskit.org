@@ -1,6 +1,6 @@
 <template>
   <div class="learn-page">
-    <AppPageHeaderFixed old-container>
+    <AppPageHeaderFixed>
       Start your path towards learning
       <TypewriterEffect
         :values="[
@@ -24,27 +24,35 @@
       @top-filter-changed="setLearnLevel"
       @aside-filter-changed="setTimeScale"
     >
-      <TheCarefulExplanationForBeginners
-        v-if="isShowingOneMinuteFor(learnLevels.beginner) && !isShowingEverything"
-        :compact="isShowingMoreResources"
-        url="/learn/?learnLevel=Beginner&amp;timeScale=1%20minute"
-      />
-      <TheCarefulExplanationForExperts
-        v-if="isShowingOneMinuteFor(learnLevels.advanced) && !isShowingEverything"
-        :compact="isShowingMoreResources"
-        url="/learn/?learnLevel=Advanced&amp;timeScale=1%20minute"
-      />
-      <AppCard
-        v-for="resource in filteredLearningResources"
-        :key="resource.path"
-        :image="resource.image"
-        :title="resource.title"
-        :to="resource.to"
-        :cta-label="resource.ctaLabel"
-        class="app-filters-results-layout__results-item"
-      >
-        <nuxt-content :document="resource" />
-      </AppCard>
+      <div class="learn-page__careful-explanation">
+        <TheCarefulExplanationForBeginners
+          v-if="isShowingOneMinuteFor(learnLevels.beginner) && !isShowingEverything"
+          :compact="isShowingMoreResources"
+          url="/learn/?learnLevel=Beginner&amp;timeScale=1%20minute"
+        />
+        <TheCarefulExplanationForExperts
+          v-if="isShowingOneMinuteFor(learnLevels.advanced) && !isShowingEverything"
+          :compact="isShowingMoreResources"
+          url="/learn/?learnLevel=Advanced&amp;timeScale=1%20minute"
+        />
+      </div>
+      <div class="bx--row">
+        <div
+          v-for="resource in filteredLearningResources"
+          :key="resource.path"
+          class="bx--col-sm-4 bx--col-xlg-8"
+        >
+          <AppCard
+            :image="resource.image"
+            :title="resource.title"
+            :to="resource.to"
+            :cta-label="resource.ctaLabel"
+            class="app-filters-results-layout__results-item app-filters-results-layout__results-item_2-cols-xlg"
+          >
+            <nuxt-content :document="resource" />
+          </AppCard>
+        </div>
+      </div>
     </TheLearningResourceList>
   </div>
 </template>
@@ -68,7 +76,7 @@ import {
       title: 'Qiskit Learn'
     }
   },
-
+  layout: 'default-max',
   computed: {
     ...mapGetters('learning-resources', [
       'filteredLearningResources',
@@ -76,7 +84,6 @@ import {
       'timeScale'
     ])
   },
-
   async middleware ({ $content, store }) {
     const learningResources = await $content('learning-resources')
       .sortBy('order', 'asc')
@@ -153,3 +160,15 @@ export default class LearnPage extends QiskitPage {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.learn-page {
+  &__careful-explanation {
+    @include mq($from: x-large) {
+      $grid-columns: 8/12; // Number of columns that the element will use at this breakpoint.
+
+      max-width: 100% * $grid-columns;
+    }
+  }
+}
+</style>

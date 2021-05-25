@@ -28,6 +28,7 @@
         v-if="to"
         class="app-card__cta"
         v-bind="ctaLink"
+        is-wider
         kind="ghost"
       />
     </div>
@@ -136,10 +137,6 @@ export default class AppCard extends Vue {
     .bx--tag:first-child {
       margin-left: 0;
     }
-  }
-
-  &__description {
-    margin-top: $layout-02;
   }
 }
 
