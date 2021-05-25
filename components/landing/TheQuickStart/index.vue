@@ -1,14 +1,8 @@
 <template>
-  <article
-    class="page-section quick-start"
-    :class="oldContainer ? 'quick-start_old-container' : 'bx--grid'"
-  >
+  <article class="bx--grid page-section quick-start">
     <h2>Quick Start</h2>
     <div class="bx--row quick-start__introduction">
-      <div
-        class="bx--col-md-5 bx--col-lg-8 bx--col-xlg-7"
-        :class="{ 'bx--col-max-6': !oldContainer }"
-      >
+      <div class="bx--col-md-5 bx--col-lg-8 bx--col-xlg-7 bx--col-max-6">
         <p class="quick-start__description">
           When you are looking to start Qiskit, you have two options. You can
           start Qiskit locally, which is much more secure and private, or you
@@ -18,12 +12,10 @@
     </div>
     <div class="bx--row">
       <StartLocally
-        class="bx--col-md-5 bx--col-lg-10 bx--col-xlg-11"
-        :class="{ 'bx--col-max-12': !oldContainer }"
+        class="bx--col-md-5 bx--col-lg-10 bx--col-xlg-11 bx--col-max-12"
       />
       <StartOnTheCloud
-        class="bx--col-md-3 bx--col-lg-6 bx--col-xlg-5"
-        :class="{ 'bx--col-max-4': !oldContainer }"
+        class="bx--col-md-3 bx--col-lg-6 bx--col-xlg-5 bx--col-max-4"
       />
     </div>
   </article>
@@ -31,12 +23,10 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
+import { Component } from 'vue-property-decorator'
 
 @Component
-export default class TheQuickStart extends Vue {
-  @Prop({ type: Boolean, default: false, required: false }) oldContainer!: boolean;
-}
+export default class TheQuickStart extends Vue {}
 </script>
 
 <style lang="scss" scoped>
@@ -47,10 +37,6 @@ export default class TheQuickStart extends Vue {
 
   &__introduction {
     margin-bottom: $spacing-06;
-  }
-
-  &_old-container {
-    @include contained();
   }
 }
 </style>

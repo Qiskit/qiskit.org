@@ -1,6 +1,6 @@
 <template>
   <div class="overview-page">
-    <AppPageHeaderFixed old-container>
+    <AppPageHeaderFixed>
       The most
       <TypewriterEffect
         :values="[
@@ -14,14 +14,11 @@
     </AppPageHeaderFixed>
     <section
       id="contentContainer"
-      class="
-        page-section
-        overview-page__content-container
-      "
+      class="bx--grid page-section"
     >
       <div class="bx--row">
-        <div class="bx--col-lg-3 bx--col-md-2 bx--col-sm-0 overview-page__table-of-contents">
-          <div class="overview-page__table-of-contents__sticky-wrapper">
+        <div class="bx--col-sm-0 bx--col-md-2 bx--col-lg-3">
+          <div class="overview-page__table-of-contents">
             <TheTableOfContents
               :entries="tocEntries"
               :active-section="activeSection"
@@ -48,16 +45,18 @@
               :tabs="asTabs(section.subSections)"
             />
             <div v-else class="overview-page__content-section-details">
-              <img
-                class="overview-page__content-section-image"
-                :src="section.image"
-              >
+              <div class="overview-page__content-section-image__wrapper">
+                <img
+                  class="overview-page__content-section-image"
+                  :src="section.image"
+                >
+              </div>
             </div>
           </AppIntroductoryContent>
         </div>
       </div>
     </section>
-    <TheQuickStart id="quick-start" old-container />
+    <TheQuickStart id="quick-start" />
   </div>
 </template>
 
@@ -78,7 +77,8 @@ import ScrollSectionsMixin from '~/mixins/scrollBetweenSections'
     return {
       title: 'Qiskit Overview'
     }
-  }
+  },
+  layout: 'default-max'
 })
 export default class OverviewPage extends QiskitPage {
   routeName = 'overview'
@@ -99,19 +99,9 @@ export default class OverviewPage extends QiskitPage {
 
 <style lang="scss" scoped>
 .overview-page {
-  &__content-container {
-    @include contained();
-
-    display: flex;
-    align-items: flex-start;
-    overflow: visible;
-  }
-
   &__table-of-contents {
-    &__sticky-wrapper {
-      position: sticky;
-      top: $layout-02;
-    }
+    position: sticky;
+    top: $layout-02;
   }
 
   &__content-section {
@@ -125,10 +115,14 @@ export default class OverviewPage extends QiskitPage {
   }
 
   &__content-section-image {
-    position: relative;
-    right: -20%;
+    transform: translateX(20%);
     max-width: 100%;
     max-height: 30.5rem;
+
+    &__wrapper {
+      display: flex;
+      justify-content: flex-end;
+    }
   }
 }
 </style>

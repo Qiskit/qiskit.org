@@ -1,20 +1,8 @@
 <template>
   <header class="app-page-header-fixed">
-    <div
-      class="app-page-header-fixed__container"
-      :class="
-        oldContainer ? 'app-page-header-fixed__old-container' : 'bx--grid'
-      "
-    >
+    <div class="bx--grid app-page-header-fixed__container">
       <div class="bx--row">
-        <h1
-          class="bx--col-md-6 bx--col-lg-10"
-          :class="
-            oldContainer
-              ? 'app-page-header-fixed__headline'
-              : 'bx--col-sm bx--col-max-8'
-          "
-        >
+        <h1 class="bx--col-sm bx--col-md-6 bx--col-lg-10 bx--col-max-8">
           <slot />
         </h1>
       </div>
@@ -24,12 +12,10 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
+import { Component } from 'vue-property-decorator'
 
 @Component
-export default class AppPageHeaderFixed extends Vue {
-  @Prop({ type: Boolean, default: false, required: false }) oldContainer!: boolean;
-}
+export default class AppPageHeaderFixed extends Vue {}
 </script>
 
 <style lang="scss" scoped>
@@ -44,16 +30,8 @@ export default class AppPageHeaderFixed extends Vue {
     height: 17.5rem;
   }
 
-  &__old-container {
-    @include contained();
-  }
-
   &__container {
     width: 100%;
-  }
-
-  &__headline {
-    padding-left: 0;
   }
 }
 </style>
