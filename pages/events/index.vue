@@ -1,6 +1,6 @@
 <template>
-  <div class="event-page">
-    <AppPageHeaderFixed old-container>
+  <div>
+    <AppPageHeaderFixed>
       Join <TypewriterEffect
         :values="[
           'events',
@@ -12,7 +12,7 @@
       /> from the world&rsquo;s largest
       quantum computing community
     </AppPageHeaderFixed>
-    <div class="event-page__container">
+    <div class="bx--grid">
       <div class="event-page__time-filters">
         <client-only>
           <cv-tabs aria-label="navigation tab label" @tab-selected="selectTab">
@@ -64,18 +64,23 @@
               {{ emptyCard.description }}
             </div>
           </AppCard>
-          <EventCard
-            v-for="event in filteredEvents"
-            v-else
-            :key="`${event.title}-${event.place}-${event.date}`"
-            class="app-filters-results-layout__results-item"
-            :types="event.types"
-            :title="event.title"
-            :image="event.image"
-            :location="event.location"
-            :date="event.date"
-            :to="event.to"
-          />
+          <div v-else class="bx--row">
+            <div
+              v-for="event in filteredEvents"
+              :key="`${event.title}-${event.place}-${event.date}`"
+              class="bx--col-sm-4 bx--col-xlg-8"
+            >
+              <EventCard
+                class="app-filters-results-layout__results-item"
+                :types="event.types"
+                :title="event.title"
+                :image="event.image"
+                :location="event.location"
+                :date="event.date"
+                :to="event.to"
+              />
+            </div>
+          </div>
         </template>
         <template slot="extra-info">
           <div class="event-page__start-an-event">
@@ -110,7 +115,7 @@ import { EVENT_REQUEST_LINK } from '~/constants/appLinks'
       title: 'Qiskit Events'
     }
   },
-
+  layout: 'default-max',
   computed: {
     ...mapGetters('events', [
       'filteredEvents',
@@ -196,10 +201,6 @@ export default class EventsPage extends QiskitPage {
 @import '~carbon-components/scss/globals/scss/typography';
 
 .event-page {
-  &__container {
-    @include contained();
-  }
-
   &__time-filters {
     margin-top: $layout-03;
     margin-bottom: $layout-04;

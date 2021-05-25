@@ -21,16 +21,18 @@
           />
         </div>
       </header>
-      <div class="app-card__description">
-        <slot />
+      <div>
+        <div class="app-card__description">
+          <slot />
+        </div>
+        <AppCta
+          v-if="to"
+          class="app-card__cta"
+          v-bind="ctaLink"
+          is-wider
+          kind="ghost"
+        />
       </div>
-      <AppCta
-        v-if="to"
-        class="app-card__cta"
-        v-bind="ctaLink"
-        is-wider
-        kind="ghost"
-      />
     </div>
   </article>
 </template>
