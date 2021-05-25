@@ -109,10 +109,10 @@ export default class AppMegaDropdownMenu extends Vue {
     return textHighlightParts
   }
 
-  // Splits the text in characters and sets a "highlight" property indicating if the character should be highlighted or not
+  // Splits the menuLabel in characters and sets "isHighlighted" property indicating if the character should be highlighted or not
   _splitTextInHighlightedChars (menuLabel: string, wordsOnTheFilter: string[]) : HighlightTextState[] {
     const charArray = Array.from(menuLabel)
-    // Assign a highlight flag to each character
+    // Assign the isHighlighted flag to each character
     const highlightStates = charArray.map<HighlightTextState>((letter: string) => ({ text: letter, isHighlighted: false }))
     const lowerCaseText = menuLabel.toLowerCase()
 
@@ -136,7 +136,7 @@ export default class AppMegaDropdownMenu extends Vue {
   }
 
   // Join consecutive characters with the same highlight property
-  // The result is an array of texts flaged by a highlight property
+  // The result is an array of texts flaged with the isHighlighted property
   // The n+1 text has always the opposit highlight state of n.
   _joinCharsByHighlightedState (highlightStateByChar: HighlightTextState[]): HighlightTextState[] {
     const output = [{
