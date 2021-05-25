@@ -29,7 +29,7 @@
               <span
                 v-for="(part) in splitTextInHighlightParts(group.title.label)"
                 :key="`${part.index}-${part.text.length}`"
-                :class="{'app-mega-dropdown__content-link__text-highlight': part.highlight}"
+                :class="{'app-mega-dropdown__content-link__text-highlight': part.isHighlighted}"
               >{{ part.text }}</span>
             </BasicLink>
             <BasicLink
