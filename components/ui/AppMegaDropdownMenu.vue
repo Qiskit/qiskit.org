@@ -46,6 +46,18 @@
             </BasicLink>
           </div>
         </div>
+        <div v-if="isFilteredContentEmpty" class="app-mega-dropdown__content-empty">
+          <h2 class="app-mega-dropdown__content-empty__title">
+            Nothing here
+          </h2>
+          <p class="app-mega-dropdown__content-empty__text">
+            Try broadening your search terms
+          </p>
+          <div
+            lazy-background="/images/textbook-demo/empty-search.png"
+            class="app-mega-dropdown__content-empty__image"
+          />
+        </div>
       </nav>
     </div>
   </article>
@@ -150,6 +162,10 @@ export default class AppMegaDropdownMenu extends Vue {
     }
 
     return output
+  }
+
+  get isFilteredContentEmpty (): boolean {
+    return this.filteredContent.length === 0
   }
 
   get filteredContent (): MegaDropdownMenu {
@@ -326,6 +342,25 @@ export default class AppMegaDropdownMenu extends Vue {
       }
       &__text-highlight {
         background-color: $purple-20;
+      }
+    }
+    &-empty {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      flex: 1;
+      align-items: center;
+
+      &__text {
+        @include type-style('body-short-01')
+      }
+      &__image {
+        width: 16rem;
+        max-width: 100%;
+        height: 18rem;
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
       }
     }
   }
