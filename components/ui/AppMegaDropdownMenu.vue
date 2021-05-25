@@ -58,7 +58,7 @@ import { MegaDropdownMenu, MegaDropdownMenuColumn, MegaDropdownMenuGroup } from 
 
 interface HighlightTextState {
   text: string,
-  highlight: boolean
+  isHighligthed: boolean
 }
 
 @Component
@@ -75,21 +75,21 @@ export default class AppMegaDropdownMenu extends Vue {
 
   filterText = ''
 
-  filterWords (): string[] {
+  get wordsOnTheFilter (): string[] {
     return this.filterText.trim().toLowerCase().split(' ')
   }
 
-  filterTextIsEmpty (): boolean {
+  isFilterTextEmpty (): boolean {
     return this.filterText.trim() === ''
   }
 
-  splitTextInHighlightParts (text: string) : HighlightTextState[] {
-    const textIsEmpty = text.trim() === ''
-    if (this.filterTextIsEmpty() || textIsEmpty) {
-      return [{ text, highlight: false }]
+  splitTextInHighlightParts (menuLabel: string) : HighlightTextState[] {
+    const isTextEmpty = menuLabel.trim() === ''
+    if (this.isFilterTextEmpty() || isTextEmpty) {
+      return [{ text: menuLabel, isHighligthed: false }]
     }
 
-    const charIsHighlightArray = this._splitTextInHighlightChars(text, this.filterWords())
+    const charIsHighlightArray = this._splitTextInHighlightChars(menuLabel, this.wordsOnTheFilter)
 
     const textHighlightParts = this._joinCharsByHighlightState(charIsHighlightArray)
 
@@ -100,7 +100,7 @@ export default class AppMegaDropdownMenu extends Vue {
   _splitTextInHighlightChars (text: string, filterWords: string[]) : HighlightTextState[] {
     const charArray = Array.from(text)
     // Assign a highlight flag to each character
-    const highlightStates = charArray.map<HighlightTextState>(letter => ({ text: letter, highlight: false }))
+    const highlightStates = charArray.map<HighlightTextState>(letter => ({ text: letter, isHighligthed: false }))
     const lowerCaseText = text.toLowerCase()
 
     filterWords.forEach((word: string) => {
@@ -112,7 +112,7 @@ export default class AppMegaDropdownMenu extends Vue {
         const to = from + word.length
 
         for (let i = from; i < to; i++) {
-          highlightStates[i].highlight = true
+          highlightStates[i].isHighligthed = true
         }
         // the text could have the same word multiple times.
         from = lowerCaseText.indexOf(word, to)
@@ -128,21 +128,21 @@ export default class AppMegaDropdownMenu extends Vue {
   _joinCharsByHighlightState (highlightStateByChar: HighlightTextState[]): HighlightTextState[] {
     const output = [{
       text: highlightStateByChar[0].text,
-      highlight: highlightStateByChar[0].highlight,
+      isHighligthed: highlightStateByChar[0].isHighligthed,
       index: 0
     }]
 
     for (let i = 1; i < highlightStateByChar.length; i++) {
       const lastCharState = output[output.length - 1]
       const currentChar = highlightStateByChar[i]
-      const highlightTextContinues = lastCharState.highlight === currentChar.highlight
+      const highlightTextContinues = lastCharState.isHighligthed === currentChar.isHighligthed
 
       if (highlightTextContinues) {
         lastCharState.text = lastCharState.text.concat(currentChar.text)
       } else {
         output.push({
           text: currentChar.text,
-          highlight: currentChar.highlight,
+          isHighligthed: currentChar.isHighligthed,
           index: i
         })
       }
@@ -152,11 +152,11 @@ export default class AppMegaDropdownMenu extends Vue {
   }
 
   get filteredContent (): MegaDropdownMenu {
-    if (this.filterTextIsEmpty()) {
+    if (this.isFilterTextEmpty()) {
       return this.content
     }
 
-    const filterWords: string[] = this.filterWords()
+    const filterWords: string[] = this.wordsOnTheFilter
 
     const filteredContent = this.content.map((column: MegaDropdownMenuColumn) => this._filterMegaDropdownColumn(column, filterWords))
     const nonEmptyColumnsFilteredContent = filteredContent.filter((column: MegaDropdownMenuColumn) => column.length > 0)
