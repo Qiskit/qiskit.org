@@ -106,6 +106,12 @@ interface dailyAgenda {
 const week1Schedule: dailyAgenda[] = [
   {
     day: 'Monday, July 12',
+    topic: 'Qiskit Global Summer School Kick Off',
+    speaker: '-',
+    format: 'Lecture'
+  },
+  {
+    day: 'Monday, July 12',
     topic: 'Vector Spaces, Tensor Products and Qubits',
     speaker: '-',
     format: 'Lecture'
