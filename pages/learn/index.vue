@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="learn-page">
     <AppPageHeaderFixed>
       Start your path towards learning
       <TypewriterEffect
@@ -24,7 +24,7 @@
       @top-filter-changed="setLearnLevel"
       @aside-filter-changed="setTimeScale"
     >
-      <div class="app-filters-results-layout__careful-explanation">
+      <div class="learn-page__careful-explanation">
         <TheCarefulExplanationForBeginners
           v-if="isShowingOneMinuteFor(learnLevels.beginner) && !isShowingEverything"
           :compact="isShowingMoreResources"
@@ -162,7 +162,7 @@ export default class LearnPage extends QiskitPage {
 </script>
 
 <style lang="scss" scoped>
-.app-filters-results-layout {
+.learn-page {
   &__careful-explanation {
     @include mq($from: x-large) {
       $grid-columns: 8/12; // Number of columns that the element will use at this breakpoint.
