@@ -64,13 +64,13 @@
               {{ emptyCard.description }}
             </div>
           </AppCard>
-          <div class="bx--row" v-else>
+          <div v-else class="bx--row">
             <div
               v-for="event in filteredEvents"
               :key="`${event.title}-${event.place}-${event.date}`"
               class="bx--col-sm-4 bx--col-xlg-8"
             >
-              <EventCard   
+              <EventCard
                 class="app-filters-results-layout__results-item"
                 :types="event.types"
                 :title="event.title"
