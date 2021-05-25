@@ -89,7 +89,7 @@ export default class AppMegaDropdownMenu extends Vue {
   textOnTheFilter = ''
 
   get wordsOnTheFilter (): string[] {
-    return this.textOnTheFilter.trim().toLowerCase().split(' ')
+    return this.textOnTheFilter.trim().toLowerCase().split(' ').filter((word: string) => word !== '')
   }
 
   isFilterTextEmpty (): boolean {
@@ -128,7 +128,7 @@ export default class AppMegaDropdownMenu extends Vue {
           highlightStates[i].isHighlighted = true
         }
         // the text could have the same word multiple times.
-        from = lowerCaseText.indexOf(word, to)
+        from = lowerCaseText.indexOf(word, Math.max(to, 1))
       }
     })
 
@@ -189,7 +189,7 @@ export default class AppMegaDropdownMenu extends Vue {
   }
 
   _filterMegaDropdownGroupLinks (group: MegaDropdownMenuGroup, wordsOnTheFilter: string[]): MegaDropdownMenuGroup {
-    const titleSelected = wordsOnTheFilter.some((word: string) => group.title.label.toLowerCase().includes(word))
+    const titleSelected = this._containsWordsOnTheFilter(group.title.label, wordsOnTheFilter)
     if (titleSelected) {
       return group
     }
@@ -202,8 +202,8 @@ export default class AppMegaDropdownMenu extends Vue {
     }
   }
 
-  _containsWordsOnTheFilter (label: string, filterWords: string[]) {
-    return filterWords.some(word => label.toLowerCase().includes(word))
+  _containsWordsOnTheFilter (label: string, wordsOnTheFilter: string[]) {
+    return wordsOnTheFilter.some(word => label.toLowerCase().includes(word))
   }
 
   mounted () {
