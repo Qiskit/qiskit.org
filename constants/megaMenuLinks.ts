@@ -10,19 +10,21 @@ const sectionPulses = 'pulses'
 const sectionApps = 'apps'
 const sectionCircuits = 'circuits'
 const sectionLabs = 'labs'
+const sectionAppendix = 'appendix'
+const sectionLearningQml = 'learning-qml'
 
-const baseUrl = 'https://qiskit.org'
-const pathPrerequisites = '/textbook/ch-prerequisites'
-const pathQuantumStatesAndQubits = '/textbook/ch-states'
-const pathMultipleQubitsAndEntanglement = '/textbook/ch-gates'
-const pathGamesAndDemos = '/textbook/ch-demos'
-const pathGamesAndDemosHelloQiskit = '/textbook/ch-ex'
-const pathProtocolsAndAlgorithms = '/textbook/ch-algorithms'
-const pathPulses = '/textbook/ch-quantum-hardware'
-const pathApps = '/textbook/ch-applications'
-const pathAppsMachineLearning = '/textbook/ch-machine-learning'
-const pathAppsPaperImplementation = '/textbook/ch-paper-implementation'
-const pathLabs = '/textbook/ch-labs'
+const baseUrl = 'https://platypus.qiskit.org'
+const pathPrerequisites = '/course/ch-prerequisites'
+const pathQuantumStatesAndQubits = '/course/ch-states'
+const pathMultipleQubitsAndEntanglement = '/course/ch-gates'
+const pathGamesAndDemos = '/course/ch-demos'
+const pathProtocolsAndAlgorithms = '/course/ch-algorithms'
+const pathPulses = '/course/quantum-hardware-pulses'
+const pathHardwareUsingCircuits = '/course/quantum-hardware'
+const pathApps = '/course/ch-applications'
+const pathLabs = '/course/ch-labs'
+const pathAppendix = '/course/ch-appendix'
+const pathLearningQml = '/course/learning-qml'
 
 type MegaDropdownMenuGroup = {
   title: NavLink,
@@ -32,22 +34,22 @@ type MegaDropdownMenuGroup = {
 const PREREQUISITES: MegaDropdownMenuGroup = {
   title: {
     label: 'Prerequisites',
-    url: `${baseUrl}${pathPrerequisites}/setting-the-environment.html`,
+    url: `${baseUrl}${pathPrerequisites}`,
     segment: {
       action: `${actionPrefix} > ${sectionPrerequisites}`
     }
   },
   content: [
     {
-      label: 'Setting the Environment',
-      url: `${baseUrl}${pathPrerequisites}/setting-the-environment.html`,
+      label: 'Setting Up Your Environment',
+      url: `${baseUrl}${pathPrerequisites}/environment-setup-guide-to-work-with-qiskit-textbook`,
       segment: {
         action: `${actionPrefix} > ${sectionPrerequisites} > setting-the-environment`
       }
     },
     {
       label: 'Python and Jupyter Notebooks',
-      url: `${baseUrl}${pathPrerequisites}/python-and-jupyter-notebooks.html`,
+      url: `${baseUrl}${pathPrerequisites}/introduction-to-python-and-jupyter-notebooks`,
       segment: {
         action: `${actionPrefix} > ${sectionPrerequisites} > python-and-jupyter-notebooks`
       }
@@ -58,7 +60,7 @@ const PREREQUISITES: MegaDropdownMenuGroup = {
 const QUANTUM_STATES_AND_QUBITS: MegaDropdownMenuGroup = {
   title: {
     label: 'Quantum States and Qubits',
-    url: `${baseUrl}${pathQuantumStatesAndQubits}/introduction.html`,
+    url: `${baseUrl}${pathQuantumStatesAndQubits}`,
     segment: {
       action: `${actionPrefix} > ${sectionQuantumStatesAndQubits}`
     }
@@ -66,35 +68,35 @@ const QUANTUM_STATES_AND_QUBITS: MegaDropdownMenuGroup = {
   content: [
     {
       label: 'Introduction',
-      url: `${baseUrl}${pathQuantumStatesAndQubits}/introduction.html`,
+      url: `${baseUrl}${pathQuantumStatesAndQubits}/introduction`,
       segment: {
         action: `${actionPrefix} > ${sectionQuantumStatesAndQubits} > introduction`
       }
     },
     {
       label: 'The Atoms of Computation',
-      url: `${baseUrl}${pathQuantumStatesAndQubits}/atoms-computation.html`,
+      url: `${baseUrl}${pathQuantumStatesAndQubits}/the-atoms-of-computation`,
       segment: {
         action: `${actionPrefix} > ${sectionQuantumStatesAndQubits} > the-atoms-of-computation`
       }
     },
     {
       label: 'Representing Qubit States',
-      url: `${baseUrl}${pathQuantumStatesAndQubits}/representing-qubit-states.html`,
+      url: `${baseUrl}${pathQuantumStatesAndQubits}/representing-qubit-states`,
       segment: {
         action: `${actionPrefix} > ${sectionQuantumStatesAndQubits} > representing-qubit-states`
       }
     },
     {
       label: 'Single Qubit Gates',
-      url: `${baseUrl}${pathQuantumStatesAndQubits}/single-qubit-gates.html`,
+      url: `${baseUrl}${pathQuantumStatesAndQubits}/single-qubit-gates`,
       segment: {
         action: `${actionPrefix} > ${sectionQuantumStatesAndQubits} > single-qubit-gates`
       }
     },
     {
       label: 'The Case for Quantum',
-      url: `${baseUrl}${pathQuantumStatesAndQubits}/case-for-quantum.html`,
+      url: `${baseUrl}${pathQuantumStatesAndQubits}/the-case-for-quantum-computers`,
       segment: {
         action: `${actionPrefix} > ${sectionQuantumStatesAndQubits} > the-case-for-quantum`
       }
@@ -105,7 +107,7 @@ const QUANTUM_STATES_AND_QUBITS: MegaDropdownMenuGroup = {
 const MULTIPLE_QUBITS_AND_ENTANGLEMENT: MegaDropdownMenuGroup = {
   title: {
     label: 'Multiple Qubits and Entanglement',
-    url: `${baseUrl}${pathMultipleQubitsAndEntanglement}/introduction.html`,
+    url: `${baseUrl}${pathMultipleQubitsAndEntanglement}`,
     segment: {
       action: `${actionPrefix} > ${sectionMultipleQubitsAndEntanglement}`
     }
@@ -113,42 +115,42 @@ const MULTIPLE_QUBITS_AND_ENTANGLEMENT: MegaDropdownMenuGroup = {
   content: [
     {
       label: 'Introduction',
-      url: `${baseUrl}${pathMultipleQubitsAndEntanglement}/introduction.html`,
+      url: `${baseUrl}${pathMultipleQubitsAndEntanglement}/introduction`,
       segment: {
         action: `${actionPrefix} > ${sectionMultipleQubitsAndEntanglement} > introduction`
       }
     },
     {
       label: 'Multiple Qubits and Entangled States',
-      url: `${baseUrl}${pathMultipleQubitsAndEntanglement}/multiple-qubits-entangled-states.html`,
+      url: `${baseUrl}${pathMultipleQubitsAndEntanglement}/multiple-qubits-and-entangled-states`,
       segment: {
         action: `${actionPrefix} > ${sectionMultipleQubitsAndEntanglement} > states`
       }
     },
     {
       label: 'Phase Kickback',
-      url: `${baseUrl}${pathMultipleQubitsAndEntanglement}/phase-kickback.html`,
+      url: `${baseUrl}${pathMultipleQubitsAndEntanglement}/phase-kickback`,
       segment: {
         action: `${actionPrefix} > ${sectionMultipleQubitsAndEntanglement} > phase-kickback`
       }
     },
     {
-      label: 'More Circuit Identities',
-      url: `${baseUrl}${pathMultipleQubitsAndEntanglement}/more-circuit-identities.html`,
+      label: 'Basic Circuit Identities',
+      url: `${baseUrl}${pathMultipleQubitsAndEntanglement}/basic-circuit-identities`,
       segment: {
-        action: `${actionPrefix} > ${sectionMultipleQubitsAndEntanglement} > more-circuit-identities`
+        action: `${actionPrefix} > ${sectionMultipleQubitsAndEntanglement} > basic-circuit-identities`
       }
     },
     {
       label: 'Proving Universality',
-      url: `${baseUrl}${pathMultipleQubitsAndEntanglement}/proving-universality.html`,
+      url: `${baseUrl}${pathMultipleQubitsAndEntanglement}/proving-universality`,
       segment: {
         action: `${actionPrefix} > ${sectionMultipleQubitsAndEntanglement} > proving-universality`
       }
     },
     {
       label: 'Classical Computation on a Quantum Computer',
-      url: `${baseUrl}${pathMultipleQubitsAndEntanglement}/oracles.html`,
+      url: `${baseUrl}${pathMultipleQubitsAndEntanglement}/classical-computation-on-a-quantum-computer`,
       segment: {
         action: `${actionPrefix} > ${sectionMultipleQubitsAndEntanglement} > classical-computation`
       }
@@ -159,31 +161,52 @@ const MULTIPLE_QUBITS_AND_ENTANGLEMENT: MegaDropdownMenuGroup = {
 const GAMES_AND_DEMOS: MegaDropdownMenuGroup = {
   title: {
     label: 'Games & Demos',
-    url: `${baseUrl}${pathGamesAndDemos}/index.html`,
+    url: `${baseUrl}${pathGamesAndDemos}`,
     segment: {
       action: `${actionPrefix} > ${sectionGamesAndDemos}`
     }
   },
   content: [
     {
-      label: 'Hello Qiskit Game',
-      url: `${baseUrl}${pathGamesAndDemosHelloQiskit}/hello-qiskit.html`,
+      label: 'Bonus Level: Sandbox',
+      url: `${baseUrl}${pathGamesAndDemos}/bonus-level-sandbox`,
       segment: {
-        action: `${actionPrefix} > ${sectionGamesAndDemos} > hello-qiskit`
+        action: `${actionPrefix} > ${sectionGamesAndDemos} > interactivity-index`
+      }
+    },
+    {
+      label: 'Bonus Level: Make your own puzzles',
+      url: `${baseUrl}${pathGamesAndDemos}/bonus-level-make-your-own-puzzles`,
+      segment: {
+        action: `${actionPrefix} > ${sectionGamesAndDemos} > interactivity-index`
+      }
+    },
+    {
+      label: 'Level 5: Proving the Uniqueness of Quantum Variables',
+      url: `${baseUrl}${pathGamesAndDemos}/level-5-proving-the-uniqueness-of-quantum-variables`,
+      segment: {
+        action: `${actionPrefix} > ${sectionGamesAndDemos} > interactivity-index`
       }
     },
     {
       label: 'Estimating Pi Using Quantum Phase Estimation Algorithm',
-      url: `${baseUrl}${pathGamesAndDemos}/piday-code.html`,
+      url: `${baseUrl}${pathGamesAndDemos}/estimating-pi-pi-using-quantum-phase-estimation-algorithm`,
       segment: {
         action: `${actionPrefix} > ${sectionGamesAndDemos} > piday-code`
       }
     },
     {
-      label: 'Interactivity Index',
-      url: `${baseUrl}/textbook/widgets-index.html`,
+      label: 'Local Reality and the CHSH inequality',
+      url: `${baseUrl}${pathGamesAndDemos}/local-reality-and-the-chsh-inequality`,
       segment: {
-        action: `${actionPrefix} > ${sectionGamesAndDemos} > interactivity-index`
+        action: `${actionPrefix} > ${sectionGamesAndDemos} > piday-code`
+      }
+    },
+    {
+      label: 'Widgets Demonstration',
+      url: `${baseUrl}${pathGamesAndDemos}/widgets-demonstration`,
+      segment: {
+        action: `${actionPrefix} > ${sectionGamesAndDemos} > widgets-demonstration`
       }
     }
   ]
@@ -192,7 +215,7 @@ const GAMES_AND_DEMOS: MegaDropdownMenuGroup = {
 const QUANTUM_PROTOCOLS_AND_ALGORITHMS: MegaDropdownMenuGroup = {
   title: {
     label: 'Quantum Protocols and Quantum Algorithms',
-    url: `${baseUrl}${pathProtocolsAndAlgorithms}/index.html`,
+    url: `${baseUrl}${pathProtocolsAndAlgorithms}`,
     segment: {
       action: `${actionPrefix} > ${sectionProtocolsAndAlgorithms}`
     }
@@ -200,84 +223,84 @@ const QUANTUM_PROTOCOLS_AND_ALGORITHMS: MegaDropdownMenuGroup = {
   content: [
     {
       label: 'Defining Quantum Circuits',
-      url: `${baseUrl}${pathProtocolsAndAlgorithms}/defining-quantum-circuits.html`,
+      url: `${baseUrl}${pathProtocolsAndAlgorithms}/quantum-circuits`,
       segment: {
         action: `${actionPrefix} > ${sectionProtocolsAndAlgorithms} > defining-quantum-circuits`
       }
     },
     {
       label: 'Deutsch-Jozsa Algorithm',
-      url: `${baseUrl}${pathProtocolsAndAlgorithms}/deutsch-jozsa.html`,
+      url: `${baseUrl}${pathProtocolsAndAlgorithms}/deutsch-jozsa-algorithm`,
       segment: {
         action: `${actionPrefix} > ${sectionProtocolsAndAlgorithms} > deutsch-jozsa`
       }
     },
     {
       label: 'Bernstein-Vazirani Algorithm',
-      url: `${baseUrl}${pathProtocolsAndAlgorithms}/bernstein-vazirani.html`,
+      url: `${baseUrl}${pathProtocolsAndAlgorithms}/bernstein-vazirani-algorithm`,
       segment: {
         action: `${actionPrefix} > ${sectionProtocolsAndAlgorithms} > bernstein-vazirani`
       }
     },
     {
       label: 'Simon’s Algorithm',
-      url: `${baseUrl}${pathProtocolsAndAlgorithms}/simon.html`,
+      url: `${baseUrl}${pathProtocolsAndAlgorithms}/simons-algorithm`,
       segment: {
         action: `${actionPrefix} > ${sectionProtocolsAndAlgorithms} > simon`
       }
     },
     {
       label: 'Quantum Fourier Transform',
-      url: `${baseUrl}${pathProtocolsAndAlgorithms}/quantum-fourier-transform.html`,
+      url: `${baseUrl}${pathProtocolsAndAlgorithms}/quantum-fourier-transform`,
       segment: {
         action: `${actionPrefix} > ${sectionProtocolsAndAlgorithms} > quantum-fourier-transform`
       }
     },
     {
       label: 'Quantum Phase Estimation',
-      url: `${baseUrl}${pathProtocolsAndAlgorithms}/quantum-phase-estimation.html`,
+      url: `${baseUrl}${pathProtocolsAndAlgorithms}/quantum-phase-estimation`,
       segment: {
         action: `${actionPrefix} > ${sectionProtocolsAndAlgorithms} > quantum-phase-estimation`
       }
     },
     {
       label: 'Shor’s Algorithm',
-      url: `${baseUrl}${pathProtocolsAndAlgorithms}/shor.html`,
+      url: `${baseUrl}${pathProtocolsAndAlgorithms}/shors-algorithm`,
       segment: {
         action: `${actionPrefix} > ${sectionProtocolsAndAlgorithms} > shor`
       }
     },
     {
       label: 'Grover’s Algorithm',
-      url: `${baseUrl}${pathProtocolsAndAlgorithms}/grover.html`,
+      url: `${baseUrl}${pathProtocolsAndAlgorithms}/grovers-algorithm`,
       segment: {
         action: `${actionPrefix} > ${sectionProtocolsAndAlgorithms} > grover`
       }
     },
     {
       label: 'Quantum Counting',
-      url: `${baseUrl}${pathProtocolsAndAlgorithms}/quantum-counting.html`,
+      url: `${baseUrl}${pathProtocolsAndAlgorithms}/quantum-counting`,
       segment: {
         action: `${actionPrefix} > ${sectionProtocolsAndAlgorithms} > quantum-counting`
       }
     },
     {
       label: 'Quantum Teleportation',
-      url: `${baseUrl}${pathProtocolsAndAlgorithms}/teleportation.html`,
+      url: `${baseUrl}${pathProtocolsAndAlgorithms}/quantum-teleportation`,
       segment: {
         action: `${actionPrefix} > ${sectionProtocolsAndAlgorithms} > teleportation`
       }
     },
     {
       label: 'Superdense Coding',
-      url: `${baseUrl}${pathProtocolsAndAlgorithms}/superdense-coding.html`,
+      url: `${baseUrl}${pathProtocolsAndAlgorithms}/superdense-coding`,
       segment: {
         action: `${actionPrefix} > ${sectionProtocolsAndAlgorithms} > superdense-coding`
       }
     },
     {
       label: 'Quantum Key Distribution',
-      url: `${baseUrl}${pathProtocolsAndAlgorithms}/quantum-key-distribution.html`,
+      url: `${baseUrl}${pathProtocolsAndAlgorithms}/quantum-key-distribution`,
       segment: {
         action: `${actionPrefix} > ${sectionProtocolsAndAlgorithms} > quantum-key-distribution`
       }
@@ -288,7 +311,7 @@ const QUANTUM_PROTOCOLS_AND_ALGORITHMS: MegaDropdownMenuGroup = {
 const INVESTIGATING_Q_HW_USING_MICROWAVE_PULSES : MegaDropdownMenuGroup = {
   title: {
     label: 'Investigating Quantum Hardware Using Microwave Pulses',
-    url: `${baseUrl}${pathPulses}/index-pulses.html`,
+    url: `${baseUrl}${pathPulses}`,
     segment: {
       action: `${actionPrefix} > ${sectionPulses}`
     }
@@ -296,49 +319,49 @@ const INVESTIGATING_Q_HW_USING_MICROWAVE_PULSES : MegaDropdownMenuGroup = {
   content: [
     {
       label: 'Calibrating Qubits with Qiskit Pulse',
-      url: `${baseUrl}${pathPulses}/calibrating-qubits-pulse.html`,
+      url: `${baseUrl}${pathPulses}/calibrating-qubits-using-qiskit-pulse`,
       segment: {
         action: `${actionPrefix} > ${sectionPulses} > calibrating-qubits-pulse`
       }
     },
     {
       label: 'Accessing Higher Energy States',
-      url: `${baseUrl}${pathPulses}/accessing_higher_energy_states.html`,
+      url: `${baseUrl}${pathPulses}/accessing-higher-energy-states-with-qiskit-pulse`,
       segment: {
         action: `${actionPrefix} > ${sectionPulses} > accessing_higher_energy_states`
       }
     },
     {
       label: 'Introduction to Transmon Physics',
-      url: `${baseUrl}${pathPulses}/transmon-physics.html`,
+      url: `${baseUrl}${pathPulses}/introduction-to-transmon-physics`,
       segment: {
         action: `${actionPrefix} > ${sectionPulses} > transmon-physics`
       }
     },
     {
       label: 'Circuit Quantum Electrodynamics',
-      url: `${baseUrl}${pathPulses}/cQED-JC-SW.html`,
+      url: `${baseUrl}${pathPulses}/circuit-quantum-electrodynamics`,
       segment: {
         action: `${actionPrefix} > ${sectionPulses} > electrodynamics`
       }
     },
     {
       label: 'Exploring the Jaynes-Cummings Hamiltonian with Qiskit Pulse',
-      url: `${baseUrl}${pathPulses}/Jaynes-Cummings-model.html`,
+      url: `${baseUrl}${pathPulses}/exploring-the-jaynes-cummings-hamiltonian-with-qiskit-pulse`,
       segment: {
         action: `${actionPrefix} > ${sectionPulses} > jaynes-cummings-model`
       }
     },
     {
       label: 'Measuring the Qubit ac-Stark Shift',
-      url: `${baseUrl}${pathPulses}/ac-Stark-shift.html`,
+      url: `${baseUrl}${pathPulses}/measuring-the-qubit-ac-stark-shift`,
       segment: {
         action: `${actionPrefix} > ${sectionPulses} > ac-stark-shift`
       }
     },
     {
       label: 'Hamiltonian Tomography',
-      url: `${baseUrl}${pathPulses}/hamiltonian-tomography.html`,
+      url: `${baseUrl}${pathPulses}/hamiltonian-tomography`,
       segment: {
         action: `${actionPrefix} > ${sectionPulses} > hamiltonian-tomography`
       }
@@ -349,71 +372,57 @@ const INVESTIGATING_Q_HW_USING_MICROWAVE_PULSES : MegaDropdownMenuGroup = {
 const QUANTUM_ALGORITHMS_FOR_APPS : MegaDropdownMenuGroup = {
   title: {
     label: 'Quantum Algorithms for Applications',
-    url: `${baseUrl}${pathApps}/algs_for_apps_index.html`,
+    url: `${baseUrl}${pathApps}`,
     segment: {
       action: `${actionPrefix} > ${sectionApps}`
     }
   },
   content: [
     {
-      label: 'Applied Quantum Algorithms',
-      url: `${baseUrl}${pathApps}/apps_index.html`,
-      segment: {
-        action: `${actionPrefix} > ${sectionApps} > applied-quantum-algorithms`
-      }
-    },
-    {
       label: 'Solving Linear Systems of Equations using HHL',
-      url: `${baseUrl}${pathApps}/hhl_tutorial.html`,
+      url: `${baseUrl}${pathApps}/solving-linear-systems-of-equations-using-hhl-and-its-qiskit-implementation`,
       segment: {
         action: `${actionPrefix} > ${sectionApps} > hhl_tutorial`
       }
     },
     {
       label: 'Simulating Molecules using VQE',
-      url: `${baseUrl}${pathApps}/vqe-molecules.html`,
+      url: `${baseUrl}${pathApps}/simulating-molecules-using-vqe`,
       segment: {
         action: `${actionPrefix} > ${sectionApps} > vqe-molecules`
       }
     },
     {
       label: 'Solving combinatorial optimization problems using QAOA',
-      url: `${baseUrl}${pathApps}/qaoa.html`,
+      url: `${baseUrl}${pathApps}/solving-combinatorial-optimization-problems-using-qaoa`,
       segment: {
         action: `${actionPrefix} > ${sectionApps} > qaoa`
       }
     },
     {
       label: 'Solving Satisfiability Problems using Grover’s Algorithm',
-      url: `${baseUrl}${pathApps}/satisfiability-grover.html`,
+      url: `${baseUrl}${pathApps}/solving-satisfiability-problems-using-grovers-algorithm`,
       segment: {
         action: `${actionPrefix} > ${sectionApps} > satisfiability-grover`
       }
     },
     {
       label: 'Hybrid quantum-classical Neural Networks with PyTorch and Qiskit',
-      url: `${baseUrl}${pathAppsMachineLearning}/machine-learning-qiskit-pytorch.html`,
+      url: `${baseUrl}${pathApps}/hybrid-quantum-classical-neural-networks-with-pytorch-and-qiskit`,
       segment: {
         action: `${actionPrefix} > ${sectionApps} > machine-learning-qiskit-pytorch`
       }
     },
     {
-      label: 'Implementations of Recent Quantum Algorithms',
-      url: `${baseUrl}${pathApps}/imp_index.html`,
-      segment: {
-        action: `${actionPrefix} > ${sectionApps} > implementations`
-      }
-    },
-    {
       label: 'Variational Quantum Linear Solver',
-      url: `${baseUrl}${pathAppsPaperImplementation}/vqls.html`,
+      url: `${baseUrl}${pathApps}/the-variational-quantum-linear-solver`,
       segment: {
         action: `${actionPrefix} > ${sectionApps} > vqls`
       }
     },
     {
       label: 'Quantum Image Processing - FRQI and NEQR Image Representations',
-      url: `${baseUrl}${pathApps}/image-processing-frqi-neqr.html`,
+      url: `${baseUrl}${pathApps}/flexible-representation-of-quantum-images-frqi`,
       segment: {
         action: `${actionPrefix} > ${sectionApps} > image-processing-frqi-neqr`
       }
@@ -424,7 +433,7 @@ const QUANTUM_ALGORITHMS_FOR_APPS : MegaDropdownMenuGroup = {
 const INVESTIGATING_Q_HW_USING_Q_CIRCUITS : MegaDropdownMenuGroup = {
   title: {
     label: 'Investigating Quantum Hardware Using Quantum Circuits',
-    url: `${baseUrl}${pathPulses}/index-circuits.html`,
+    url: `${baseUrl}${pathHardwareUsingCircuits}`,
     segment: {
       action: `${actionPrefix} > ${sectionCircuits}`
     }
@@ -432,28 +441,28 @@ const INVESTIGATING_Q_HW_USING_Q_CIRCUITS : MegaDropdownMenuGroup = {
   content: [
     {
       label: 'Introduction to Quantum Error Correction using Repetition Codes',
-      url: `${baseUrl}${pathPulses}/error-correction-repetition-code.html`,
+      url: `${baseUrl}${pathHardwareUsingCircuits}/introduction-to-quantum-error-correction-via-the-repetition-code`,
       segment: {
         action: `${actionPrefix} > ${sectionCircuits} > error-correction-repetition-code`
       }
     },
     {
       label: 'Measurement Error Mitigation',
-      url: `${baseUrl}${pathPulses}/measurement-error-mitigation.html`,
+      url: `${baseUrl}${pathHardwareUsingCircuits}/measurement-error-mitigation`,
       segment: {
         action: `${actionPrefix} > ${sectionCircuits} > measurement-error-mitigation`
       }
     },
     {
       label: 'Randomized Benchmarking',
-      url: `${baseUrl}${pathPulses}/randomized-benchmarking.html`,
+      url: `${baseUrl}${pathHardwareUsingCircuits}/randomized-benchmarking`,
       segment: {
         action: `${actionPrefix} > ${sectionCircuits} > randomized-benchmarking`
       }
     },
     {
       label: 'Measuring Quantum Volume',
-      url: 'https://platypus.qiskit.org/course/quantum-hardware/measuring-quantum-volume',
+      url: `${baseUrl}${pathHardwareUsingCircuits}/measuring-quantum-volume`,
       segment: {
         action: `${actionPrefix} > ${sectionCircuits} > measuring-quantum-volume`
       }
@@ -464,7 +473,7 @@ const INVESTIGATING_Q_HW_USING_Q_CIRCUITS : MegaDropdownMenuGroup = {
 const QUANTUM_COMPUTING_LABS : MegaDropdownMenuGroup = {
   title: {
     label: 'Quantum Computing Labs',
-    url: `${baseUrl}${pathLabs}/index.html`,
+    url: `${baseUrl}${pathLabs}`,
     segment: {
       action: `${actionPrefix} > ${sectionLabs}`
     }
@@ -472,51 +481,124 @@ const QUANTUM_COMPUTING_LABS : MegaDropdownMenuGroup = {
   content: [
     {
       label: 'Lab 1. Quantum Circuits',
-      url: `${baseUrl}${pathLabs}/Lab01_QuantumCircuits.html`,
+      url: `${baseUrl}${pathLabs}/lab-1-quantum-circuits`,
       segment: {
         action: `${actionPrefix} > ${sectionLabs} > quantum-circuits`
       }
     },
     {
       label: 'Lab 2. Quantum Measurement',
-      url: `${baseUrl}${pathLabs}/Lab02_QuantumMeasurement.html`,
+      url: `${baseUrl}${pathLabs}/lab-2-quantum-measurements`,
       segment: {
         action: `${actionPrefix} > ${sectionLabs} > quantum-measurement`
       }
     },
     {
       label: 'Lab 3. Accuracy of Quantum Phase Estimation',
-      url: `${baseUrl}${pathLabs}/Lab03_AccuracyQPE.html`,
+      url: `${baseUrl}${pathLabs}/lab-3-accuracy-of-quantum-phase-estimation`,
       segment: {
         action: `${actionPrefix} > ${sectionLabs} > accuracy-qpe`
       }
     },
     {
       label: 'Lab 4. Iterative Quantum Phase Estimation',
-      url: `${baseUrl}${pathLabs}/Lab04_IterativePhaseEstimation.html`,
+      url: `${baseUrl}${pathLabs}/lab-4-iterative-phase-estimation-algorithm`,
       segment: {
         action: `${actionPrefix} > ${sectionLabs} > iterative-phase-estimation`
       }
     },
     {
       label: 'Lab 5. Scalable Shor’s Algorithm',
-      url: `${baseUrl}${pathLabs}/Lab05_Scalable_Shor_Algorithm.html`,
+      url: `${baseUrl}${pathLabs}/lab-5-scalable-shors-algorithm`,
       segment: {
         action: `${actionPrefix} > ${sectionLabs} > scalable-shor`
       }
     },
     {
       label: 'Lab 6. Grover’s search with an unknown number of solutions',
-      url: `${baseUrl}${pathLabs}/Lab06_Grover_search_with_an_unknown_number_of_solutions.html`,
+      url: `${baseUrl}${pathLabs}/lab-6-grovers-search-with-an-unknown-number-of-solutions`,
       segment: {
         action: `${actionPrefix} > ${sectionLabs} > grover-search`
       }
     },
     {
       label: 'Lab 7. Quantum Simulation as a Search Algorithm',
-      url: `${baseUrl}${pathLabs}/Lab07_QuantumSimulationSearchAlgorithm.html`,
+      url: `${baseUrl}${pathLabs}/lab-7-quantum-simulation-as-a-search-algorithm`,
       segment: {
         action: `${actionPrefix} > ${sectionLabs} > quantum-simulation-search-algorithm`
+      }
+    }
+  ]
+}
+
+const APPENDIX : MegaDropdownMenuGroup = {
+  title: {
+    label: 'Appendix',
+    url: `${baseUrl}${pathAppendix}`,
+    segment: {
+      action: `${actionPrefix} > ${sectionAppendix}`
+    }
+  },
+  content: [
+    {
+      label: 'An Introduction to Linear Algebra for Quantum Computing',
+      url: `${baseUrl}${pathAppendix}/an-introduction-to-linear-algebra-for-quantum-computing`,
+      segment: {
+        action: `${actionPrefix} > ${sectionAppendix} > quantum-circuits`
+      }
+    },
+    {
+      label: 'Basic Qiskit Syntax',
+      url: `${baseUrl}${pathAppendix}/basic-qiskit-syntax`,
+      segment: {
+        action: `${actionPrefix} > ${sectionAppendix} > quantum-measurement`
+      }
+    }
+  ]
+}
+
+const LEARNING_QML : MegaDropdownMenuGroup = {
+  title: {
+    label: 'Quantum Machine Learning',
+    url: `${baseUrl}${pathLearningQml}`,
+    segment: {
+      action: `${actionPrefix} > ${sectionLearningQml}`
+    }
+  },
+  content: [
+    {
+      label: 'Introduction',
+      url: `${baseUrl}${pathLearningQml}/introduction`,
+      segment: {
+        action: `${actionPrefix} > ${sectionLearningQml} > introduction`
+      }
+    },
+    {
+      label: 'Basic Qiskit Syntax',
+      url: `${baseUrl}${pathLearningQml}/parametrized-quantum-circuits`,
+      segment: {
+        action: `${actionPrefix} > ${sectionLearningQml} > parametrized-quantum-circuits`
+      }
+    },
+    {
+      label: 'Data Encoding',
+      url: `${baseUrl}${pathLearningQml}/data-encoding`,
+      segment: {
+        action: `${actionPrefix} > ${sectionLearningQml} > data-encoding`
+      }
+    },
+    {
+      label: 'Quantum Feature Maps and Kernels',
+      url: `${baseUrl}${pathLearningQml}/quantum-feature-maps-and-kernels`,
+      segment: {
+        action: `${actionPrefix} > ${sectionLearningQml} > quantum-feature-maps-and-kernels`
+      }
+    },
+    {
+      label: 'Variational Classification',
+      url: `${baseUrl}${pathLearningQml}/variational-classification`,
+      segment: {
+        action: `${actionPrefix} > ${sectionLearningQml} > variational-classification`
       }
     }
   ]
@@ -525,12 +607,13 @@ const QUANTUM_COMPUTING_LABS : MegaDropdownMenuGroup = {
 type MegaDropdownMenuColumn = MegaDropdownMenuGroup[]
 const COLUMN_1: MegaDropdownMenuColumn = [
   PREREQUISITES,
+  LEARNING_QML,
   QUANTUM_STATES_AND_QUBITS,
-  MULTIPLE_QUBITS_AND_ENTANGLEMENT,
-  GAMES_AND_DEMOS
+  MULTIPLE_QUBITS_AND_ENTANGLEMENT
 ]
 
 const COLUMN_2: MegaDropdownMenuColumn = [
+  GAMES_AND_DEMOS,
   QUANTUM_PROTOCOLS_AND_ALGORITHMS,
   INVESTIGATING_Q_HW_USING_MICROWAVE_PULSES
 ]
@@ -538,7 +621,8 @@ const COLUMN_2: MegaDropdownMenuColumn = [
 const COLUMN_3: MegaDropdownMenuColumn = [
   QUANTUM_ALGORITHMS_FOR_APPS,
   INVESTIGATING_Q_HW_USING_Q_CIRCUITS,
-  QUANTUM_COMPUTING_LABS
+  QUANTUM_COMPUTING_LABS,
+  APPENDIX
 ]
 
 type MegaDropdownMenu = MegaDropdownMenuColumn[]
