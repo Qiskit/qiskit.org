@@ -106,19 +106,25 @@ interface dailyAgenda {
 const week1Schedule: dailyAgenda[] = [
   {
     day: 'Monday, July 12',
-    topic: 'Vector Spaces, Tensor Products and Qubits',
+    topic: 'Qiskit Global Summer School Kick Off',
     speaker: '-',
     format: 'Lecture'
   },
   {
     day: 'Monday, July 12',
-    topic: 'Quantum Operators and Measurements',
+    topic: 'Vector Spaces, Tensor Products, and Qubits',
     speaker: '-',
     format: 'Lecture'
   },
   {
     day: 'Monday, July 12',
-    topic: 'Day 1 Q&A Session',
+    topic: 'Introduction to Quantum Circuits',
+    speaker: '-',
+    format: 'Lecture'
+  },
+  {
+    day: 'Monday, July 12',
+    topic: 'Q&A Sessions',
     speaker: '-',
     format: 'Live Q&A'
   },
@@ -136,73 +142,67 @@ const week1Schedule: dailyAgenda[] = [
   },
   {
     day: 'Tuesday, July 13',
-    topic: '(Lab 1) Intro to Quantum Computing Algorithms and Operations',
+    topic: 'Q&A Sessions',
+    speaker: '-',
+    format: 'Live Q&A'
+  },
+  {
+    day: 'Wednesday, July 14',
+    topic: 'Noise in Quantum Computers',
+    speaker: '-',
+    format: 'Lecture'
+  },
+  {
+    day: 'Wednesday, July 14',
+    topic: '(Lab 1) Introduction to Quantum Computing Algorithms and Operations',
     speaker: '-',
     format: 'Lab'
   },
   {
-    day: 'Tuesday, July 13',
-    topic: 'Day 2 Q&A Session',
-    speaker: '-',
-    format: 'Live Q&A'
-  },
-  {
     day: 'Wednesday, July 14',
-    topic: 'The Foundations of Classical Machine Learning: Cost Functions, Data Splitting, Overfitting',
-    speaker: '-',
-    format: 'Lecture'
-  },
-  {
-    day: 'Wednesday, July 14',
-    topic: 'Advanced Classical Machine Learning: Neural Networks and Support Vector Machines',
-    speaker: '-',
-    format: 'Lecture'
-  },
-  {
-    day: 'Wednesday, July 14',
-    topic: 'Day 3 Q&A Session',
+    topic: 'Q&A Sessions',
     speaker: '-',
     format: 'Live Q&A'
   },
   {
     day: 'Thursday, July 15',
-    topic: 'Introduction to Parameterized Quantum Circuits',
+    topic: 'Introduction to Classical Machine Learning (ML)',
     speaker: '-',
     format: 'Lecture'
   },
   {
     day: 'Thursday, July 15',
-    topic: 'Data Encoding Schemes for Quantum Machine Learning',
+    topic: 'Advanced Classical Machine Learning (ML)',
     speaker: '-',
     format: 'Lecture'
   },
   {
     day: 'Thursday, July 15',
-    topic: 'Day 4 Q&A Session',
+    topic: 'Q&A Sessions',
     speaker: '-',
     format: 'Live Q&A'
   },
   {
     day: 'Friday, July 16',
-    topic: 'Building a Variational Quantum Classifier',
+    topic: 'Introduction to the Quantum Approximate Optimization Algorithm (QAOA) and its Applications',
     speaker: '-',
     format: 'Lecture'
   },
   {
     day: 'Friday, July 16',
-    topic: 'An Introduction to the Quantum Approximate Optimization Algorithm and its Applications',
+    topic: 'Building a Quantum Classifier',
     speaker: '-',
     format: 'Lecture'
   },
   {
     day: 'Friday, July 16',
-    topic: '(Lab 2) Variational Algorithms',
+    topic: '(Lab 2) Introduction to Variational Algorithms',
     speaker: '-',
     format: 'Lab'
   },
   {
     day: 'Friday, July 16',
-    topic: 'Day 5 Q&A Session',
+    topic: 'Q&A Sessions',
     speaker: '-',
     format: 'Live Q&A'
   }
@@ -211,49 +211,43 @@ const week1Schedule: dailyAgenda[] = [
 const week2Schedule: dailyAgenda[] = [
   {
     day: 'Monday, July 19',
-    topic: 'Quantum Kernels',
+    topic: 'From Variational Classifiers to Linear Classifiers',
     speaker: '-',
     format: 'Lecture'
   },
   {
     day: 'Monday, July 19',
-    topic: 'Support Vector Machines, Quantum Support Vector Machines',
+    topic: 'Quantum Feature Spaces and Kernels',
     speaker: '-',
     format: 'Lecture'
   },
   {
     day: 'Monday, July 19',
-    topic: '(Lab 3) Quantum Kernels and Support Vector Machines',
-    speaker: '-',
-    format: 'Lab'
-  },
-  {
-    day: 'Monday, July 19',
-    topic: 'Day 6 Q&A Session',
+    topic: 'Q&A Sessions',
     speaker: '-',
     format: 'Live Q&A'
   },
   {
     day: 'Tuesday, July 20',
-    topic: 'Introduction and Applications of Quantum Neural Networks',
+    topic: 'Quantum Kernels in Practice',
     speaker: '-',
     format: 'Lecture'
   },
   {
     day: 'Tuesday, July 20',
-    topic: 'Introduction to Training Quantum Neural Networks',
+    topic: '(Lab 3) Introduction to Quantum Kernels and Support Vector Machines (SVMs)',
     speaker: '-',
-    format: 'Lecture'
+    format: 'Lab'
   },
   {
     day: 'Tuesday, July 20',
-    topic: 'Day 7 Q&A Session',
+    topic: 'Q&A Sessions',
     speaker: '-',
     format: 'Live Q&A'
   },
   {
     day: 'Wednesday, July 21',
-    topic: 'Advanced Training of Quantum Neural Networks',
+    topic: 'Introduction and Applications of Quantum Models',
     speaker: '-',
     format: 'Lecture'
   },
@@ -265,13 +259,13 @@ const week2Schedule: dailyAgenda[] = [
   },
   {
     day: 'Wednesday, July 21',
-    topic: '(Lab 4) Training Quantum Neural Networks',
+    topic: '(Lab 4) Introduction to Training Quantum Circuits',
     speaker: '-',
     format: 'Lab'
   },
   {
     day: 'Wednesday, July 21',
-    topic: 'Day 8 Q&A Session',
+    topic: 'Q&A Sessions',
     speaker: '-',
     format: 'Live Q&A'
   },
@@ -289,19 +283,19 @@ const week2Schedule: dailyAgenda[] = [
   },
   {
     day: 'Thursday, July 22',
-    topic: '(Lab 5) Hardware Efficient Ansatze for Quantum Machine Learning',
+    topic: '(Lab 5) Introduction to Hardware Efficient Ansatze for Quantum Machine Learning',
     speaker: '-',
     format: 'Lab'
   },
   {
     day: 'Thursday, July 22',
-    topic: 'Day 8 Q&A Session',
+    topic: 'Q&A Sessions',
     speaker: '-',
     format: 'Live Q&A'
   },
   {
     day: 'Friday, July 23',
-    topic: 'Advanced Quantum Machine Learning Algorithms: Quantum Boltzmann Machines and Quantum Generative Adversarial Networks',
+    topic: 'Advanced Quantum Machine Learning Algorithms: Quantum Boltzmann Machines and Quantum Generative Adversarial Networks (QGANs)',
     speaker: '-',
     format: 'Lecture'
   },
@@ -313,7 +307,7 @@ const week2Schedule: dailyAgenda[] = [
   },
   {
     day: 'Friday, July 23',
-    topic: 'Day 9 Q&A Session',
+    topic: 'Q&A Sessions',
     speaker: '-',
     format: 'Live Q&A'
   },
