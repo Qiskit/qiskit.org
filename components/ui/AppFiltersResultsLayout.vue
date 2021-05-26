@@ -1,17 +1,13 @@
 <template>
   <div class="bx--row app-filters-results-layout">
-    <div
-      class="bx--col-lg-4 bx--col-md-2 bx--col-sm-0"
-      :class="{ 'bx--col-xlg-2': !oldContainer }"
-    >
+    <div class="bx--col-xlg-2 bx--col-lg-4 bx--col-md-2 bx--col-sm-0">
       <slot name="filters-on-m-l-screen" />
     </div>
     <div class="bx--col-sm-4 bx--col-md-0">
       <slot name="filters-on-s-screen" />
     </div>
     <div
-      class="bx--col-lg-12 bx--col-md-6 app-filters-results-layout__main-section"
-      :class="{ 'bx--col-xlg-14': !oldContainer }"
+      class="bx--col-xlg-14 bx--col-lg-12 bx--col-md-6 app-filters-results-layout__main-section"
     >
       <slot name="results" />
       <slot name="extra-info" />
@@ -21,12 +17,10 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
+import { Component } from 'vue-property-decorator'
 
 @Component
-export default class AppFiltersResultsLayouts extends Vue {
-  @Prop({ type: Boolean, default: false, required: false }) oldContainer!: boolean;
-}
+export default class AppFiltersResultsLayout extends Vue {}
 </script>
 
 <style lang="scss" scoped>
