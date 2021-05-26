@@ -11,10 +11,10 @@ const header = {
     }
   },
   cta: {
-    label: 'Learn more',
-    url: 'http://qisk.it/qgss2021blog_website_source',
+    label: 'Register Now',
+    url: 'https://qisk.it/2021summerschoolregistration',
     segment: {
-      action: 'events-summer-school > header > ibm-research-blog'
+      action: 'events-summer-school > header > register'
     }
   },
   cardSectionHeading: 'About the event:',
