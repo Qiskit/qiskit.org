@@ -1,18 +1,18 @@
 <template>
   <article class="app-mega-dropdown">
     <label
-      ref="searchFieldWrapper"
-      class="app-mega-dropdown__search-field-wrapper"
-      :class="`app-mega-dropdown__search-field-wrapper_${kind}`"
+      ref="filterWrapper"
+      class="app-mega-dropdown__filter-wrapper"
+      :class="`app-mega-dropdown__filter-wrapper_${kind}`"
     >
       <input
         v-model="textOnTheFilter"
         type="text"
-        class="app-mega-dropdown__search-field-wrapper__input"
+        class="app-mega-dropdown__filter-wrapper__input"
         :placeholder="placeholder"
         @focus="onShowContent"
       >
-      <svg class="app-mega-dropdown__search-field-wrapper__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M16 22L6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z" /></svg>
+      <svg class="app-mega-dropdown__filter-wrapper__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M16 22L6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z" /></svg>
     </label>
     <div
       v-if="showContent"
@@ -215,7 +215,7 @@ export default class AppMegaDropdownMenu extends Vue {
   }
 
   handleClick (e: MouseEvent) {
-    const buttonElement = this.$refs.searchFieldWrapper as Element
+    const buttonElement = this.$refs.filterWrapper as Element
     const dropdownElement = this.$refs.dropdown as Element|undefined
 
     if (dropdownElement) {
@@ -241,7 +241,7 @@ export default class AppMegaDropdownMenu extends Vue {
   color: $text-color-light;
   position: relative;
 
-  &__search-field-wrapper {
+  &__filter-wrapper {
     display: flex;
     width: 18rem;
     height: 2.5rem;
