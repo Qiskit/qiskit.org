@@ -259,18 +259,20 @@ export default class AppMegaDropdownMenu extends Vue {
       outline: none;
       border: none;
       color: inherit;
-    }
-    &__input:focus::placeholder {
-      opacity: 0.25;
+
+      &:focus::placeholder {
+        opacity: 0.25;
+      }
     }
 
     &__icon {
       flex: 0 0 1rem;
-    }
+      cursor: pointer;
 
-    &__icon > path {
-      transform: translate(0, 0);
-      transition: transform 0.2s ease-in-out;
+      & > path {
+        transform: translate(0, 0);
+        transition: transform 0.2s ease-in-out;
+      }
     }
 
     &:hover &__icon > path {
