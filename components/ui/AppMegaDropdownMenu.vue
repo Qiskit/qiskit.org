@@ -85,10 +85,23 @@ export default class TheMegaDropdownMenu extends Vue {
 
 .app-mega-dropdown {
   @include type-style('body-short-01');
+
   color: $cool-gray-80;
   position: relative;
 
   &__button {
+    &_primary {
+      color: $cool-gray-80;
+      fill: $cool-gray-80;
+      border-bottom: 1px solid $cool-gray-80;
+    }
+
+    &_secondary {
+      color: $white;
+      fill: $white;
+      border-bottom: 1px solid $white;
+    }
+
     &_primary,
     &_secondary {
       background-color: transparent;
@@ -113,18 +126,6 @@ export default class TheMegaDropdownMenu extends Vue {
           transition: transform 0.2s ease-in-out;
         }
       }
-    }
-
-    &_primary {
-      color: $cool-gray-80;
-      fill: $cool-gray-80;
-      border-bottom: 1px solid $cool-gray-80;
-    }
-
-    &_secondary {
-      color: $white;
-      fill: $white;
-      border-bottom: 1px solid $white;
     }
   }
 
