@@ -146,8 +146,6 @@ export default class LearningPathPagesSection extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import "~/assets/scss/blocks/copy.scss";
-
 .learning-path-pages-section {
   display: grid;
   column-gap: $spacing-07;
@@ -225,6 +223,7 @@ export default class LearningPathPagesSection extends Vue {
 
     &__entry {
       @include type-style("body-long-01");
+
       color: $cool-gray-80;
       display: inline-block;
       margin-left: 25px;
