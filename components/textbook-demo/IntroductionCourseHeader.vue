@@ -68,7 +68,6 @@ export default class IntroductionCourseHeader extends Vue {
 
 <style lang="scss" scoped>
 @import "~carbon-components/scss/globals/scss/typography";
-@import "~/assets/scss/blocks/copy.scss";
 
 $top-link-height: 4.375rem;
 $top-link-height-large: 3.75rem;
@@ -76,6 +75,7 @@ $top-link-height-large: 3.75rem;
 .introduction-course-header {
   &__container {
     @include contained();
+
     max-width: $max-size;
     display: grid;
     column-gap: $spacing-07;
@@ -112,6 +112,7 @@ $top-link-height-large: 3.75rem;
 
     &__link {
       @include type-style("body-short-01");
+
       align-items: center;
       color: $purple-70;
       display: flex;
