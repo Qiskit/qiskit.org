@@ -140,11 +140,11 @@ export default class StartLearningSection extends Vue {
 
 <style lang="scss" scoped>
 @import "~carbon-components/scss/globals/scss/typography";
-@import "~/assets/scss/blocks/copy.scss";
 
 .start-learning-section {
   &__subtitle {
     @include type-style("expressive-heading-03", true);
+
     margin-bottom: $layout-01;
     color: $cool-gray-80;
   }

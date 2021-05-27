@@ -74,8 +74,6 @@ export default class PrerequisiteMaterialSection extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import "~/assets/scss/blocks/copy.scss";
-
 .prerequisite-material-section {
   &__card {
     align-items: strech;

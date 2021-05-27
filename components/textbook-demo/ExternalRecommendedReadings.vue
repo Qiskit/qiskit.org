@@ -27,8 +27,6 @@ export default class ExternalRecommendedReadings extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '~/assets/scss/blocks/copy.scss';
-
 .external-recommended-readings {
   &__link {
     display: block;
