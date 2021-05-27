@@ -243,7 +243,7 @@ const QUANTUM_PROTOCOLS_AND_ALGORITHMS: MegaDropdownMenuGroup = {
       }
     },
     {
-      label: 'Simon’s Algorithm',
+      label: 'Simon\'s Algorithm',
       url: `${baseUrl}${pathProtocolsAndAlgorithms}/simons-algorithm`,
       segment: {
         action: `${actionPrefix} > ${sectionProtocolsAndAlgorithms} > simon`
@@ -264,14 +264,14 @@ const QUANTUM_PROTOCOLS_AND_ALGORITHMS: MegaDropdownMenuGroup = {
       }
     },
     {
-      label: 'Shor’s Algorithm',
+      label: 'Shor\'s Algorithm',
       url: `${baseUrl}${pathProtocolsAndAlgorithms}/shors-algorithm`,
       segment: {
         action: `${actionPrefix} > ${sectionProtocolsAndAlgorithms} > shor`
       }
     },
     {
-      label: 'Grover’s Algorithm',
+      label: 'Grover\'s Algorithm',
       url: `${baseUrl}${pathProtocolsAndAlgorithms}/grovers-algorithm`,
       segment: {
         action: `${actionPrefix} > ${sectionProtocolsAndAlgorithms} > grover`
@@ -400,7 +400,7 @@ const QUANTUM_ALGORITHMS_FOR_APPS : MegaDropdownMenuGroup = {
       }
     },
     {
-      label: 'Solving Satisfiability Problems using Grover’s Algorithm',
+      label: 'Solving Satisfiability Problems using Grover\'s Algorithm',
       url: `${baseUrl}${pathApps}/solving-satisfiability-problems-using-grovers-algorithm`,
       segment: {
         action: `${actionPrefix} > ${sectionApps} > satisfiability-grover`
@@ -508,14 +508,14 @@ const QUANTUM_COMPUTING_LABS : MegaDropdownMenuGroup = {
       }
     },
     {
-      label: 'Lab 5. Scalable Shor’s Algorithm',
+      label: 'Lab 5. Scalable Shor\'s Algorithm',
       url: `${baseUrl}${pathLabs}/lab-5-scalable-shors-algorithm`,
       segment: {
         action: `${actionPrefix} > ${sectionLabs} > scalable-shor`
       }
     },
     {
-      label: 'Lab 6. Grover’s search with an unknown number of solutions',
+      label: 'Lab 6. Grover\'s search with an unknown number of solutions',
       url: `${baseUrl}${pathLabs}/lab-6-grovers-search-with-an-unknown-number-of-solutions`,
       segment: {
         action: `${actionPrefix} > ${sectionLabs} > grover-search`
