@@ -20,7 +20,7 @@
       class="app-mega-dropdown__content-container"
     >
       <nav class="app-mega-dropdown__content">
-        <div v-for="(column, columnIndex) in filteredContent" :key="`${columnIndex}`" class="app-mega-dropdown__content-column">
+        <div v-for="(column, columnIndex) in filteredContent" :key="columnIndex" class="app-mega-dropdown__content-column">
           <div v-for="(group, groupIndex) in column" :key="`${groupIndex}`">
             <BasicLink
               class="app-mega-dropdown__content-link app-mega-dropdown__content-link_title"
