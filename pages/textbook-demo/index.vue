@@ -78,6 +78,7 @@ export default class TextbookDemoPage extends QiskitPage {
 .textbook-demo-page {
   &__section {
     @include contained();
+
     max-width: $max-size;
     margin-bottom: $layout-03;
     margin-top: $layout-05;

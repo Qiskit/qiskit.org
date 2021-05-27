@@ -48,6 +48,7 @@ export default class IntroductionCoursePage extends QiskitPage {
 .introduction-course-page {
   &__section {
     @include contained();
+
     max-width: $max-size;
     margin-bottom: $layout-03;
     margin-top: $layout-05;
