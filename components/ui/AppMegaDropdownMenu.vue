@@ -248,10 +248,9 @@ export default class AppMegaDropdownMenu extends Vue {
     justify-content: space-between;
     align-items: center;
     padding: $spacing-03;
-
-    color: $cool-gray-80;
-    fill: $cool-gray-80;
-    border-bottom: 1px solid $purple-70;
+    color: $text-color-light;
+    fill: $text-color-light;
+    border-bottom: 1px solid $border-color-secondary;
 
     &__input {
       flex: 1;
@@ -260,6 +259,9 @@ export default class AppMegaDropdownMenu extends Vue {
       border: none;
       color: inherit;
 
+      &::placeholder {
+        color: inherit;
+      }
       &:focus::placeholder {
         opacity: 0.25;
       }
@@ -283,15 +285,9 @@ export default class AppMegaDropdownMenu extends Vue {
     &_primary {
       background-color: transparent;
     }
-    &_primary &__input::placeholder {
-      color: $cool-gray-80;
-    }
 
     &_secondary {
-      background-color: $white;
-    }
-    &_secondary &__input::placeholder {
-      color: $cool-gray-80;
+      background-color: $background-color-white;
     }
   }
 
@@ -300,8 +296,8 @@ export default class AppMegaDropdownMenu extends Vue {
     top: 2.5rem;
     padding: $spacing-07 $spacing-05;
     width: 12 * $column-size-large;
-    background-color: $white;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    background-color: $background-color-white;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
     height: 32rem;
     overflow-y: scroll;
     overflow-x: auto;
@@ -336,14 +332,14 @@ export default class AppMegaDropdownMenu extends Vue {
     &-link {
       display:block;
       padding-bottom: $spacing-05;
-      color: $cool-gray-80;
+      color: $text-color-light;
       text-decoration: none;
 
       &_title {
         font-weight: 600;
       }
       &__text-highlight {
-        background-color: $purple-20;
+        background-color: $blockquote-background-color;
       }
     }
     &-empty {
@@ -354,7 +350,7 @@ export default class AppMegaDropdownMenu extends Vue {
       align-items: center;
 
       &__text {
-        @include type-style('body-short-01')
+        @include type-style('body-short-01');
       }
       &__image {
         width: 16rem;
