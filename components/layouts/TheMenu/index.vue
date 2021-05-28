@@ -1,10 +1,7 @@
 <template>
   <div class="menu">
     <section class="menu__mobile" tabindex="-1">
-      <div
-        class="menu__mobile-inner-container"
-        :class="{ 'menu__mobile-inner-container_wider': wider }"
-      >
+      <div class="menu__mobile-inner-container">
         <BasicLink
           class="
             menu__entry

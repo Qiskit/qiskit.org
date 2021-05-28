@@ -16,7 +16,7 @@ import { DescriptionCard } from '~/components/ui/AppDescriptionCard.vue'
 import { SOCIAL_MEDIA } from '~/constants/menuLinks'
 
 @Component({
-  layout: 'default-textbook',
+  layout: 'default-max',
   head () {
     return {
       title: 'Qiskit Textbook'
