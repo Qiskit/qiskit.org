@@ -74,7 +74,6 @@ import {
 export default class PageFooter extends Vue {
   @Prop({ type: Boolean, default: false, required: false }) oldContainer!: boolean;
   @Prop({ type: String, default: 'light' }) theme!: string
-  @Prop({ type: Boolean, default: false }) wider!: boolean
 
   footerElements = FOOTER_ELEMENTS
   stayConnectedElements = STAY_CONNECTED_LINKS

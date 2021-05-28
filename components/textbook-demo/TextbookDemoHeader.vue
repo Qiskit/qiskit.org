@@ -2,9 +2,9 @@
   <header class="textbook-demo-header">
     <div class="textbook-demo-header__container">
       <div>
-        <AppPageHeaderTitle kind="secondary">
+        <h1 class="textbook-demo-header__headline">
           Qiskit Textbook (beta)
-        </AppPageHeaderTitle>
+        </h1>
         <AppMegaDropdownMenu
           class="textbook-demo-header__dropdown"
           kind="secondary"
@@ -35,6 +35,10 @@ export default class TextbookDemoHeader extends Vue {
 .textbook-demo-header {
   background: linear-gradient(315deg, $cool-gray-10 0%, $blue-40 25%, $purple-70 100%);
   height: 37.5rem;
+
+   &__headline {
+    color: $text-color-white;
+  }
 
   &__container {
     @include contained();

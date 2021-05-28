@@ -1,34 +1,41 @@
 <template>
   <section class="start-learning-section">
-    <h2 class="copy__title">
+    <h2>
       Start learning in the way best for you
     </h2>
-    <AppIntroductoryContent
+    <article
       v-for="{ title, description, paths } in learningPaths"
       :key="title"
-      class="start-learning-section__section"
-      :description="description"
+      class="bx--row"
     >
-      <template #title>
-        <h3 class="start-learning-section__subtitle">
-          {{ title }}
-        </h3>
-      </template>
-      <div class="start-learning-section__cards">
-        <AppCard
-          v-for="{ description: pathDescription, image, title: pathTitle, cta } in paths"
-          :key="pathTitle"
-          :cta-label="cta.label"
-          :to="cta.url"
-          :segment="cta.segment"
-          :image="image"
-          image-contain
-          :title="pathTitle"
-        >
-          {{ pathDescription }}
-        </AppCard>
+      <div class="bx--col-xlg-4 bx--col-lg-4">
+        <h3 v-text="title" />
+        <p>
+          {{ description }}
+        </p>
       </div>
-    </AppIntroductoryContent>
+      <div class="bx--col-xlg-12 bx--col-lg-12">
+        <div class="bx--row">
+          <div
+            v-for="{ description: pathDescription, image, title: pathTitle, cta } in paths"
+            :key="pathTitle"
+            class="bx--col-xlg-8"
+          >
+            <AppCard
+              :cta-label="cta.label"
+              :to="cta.url"
+              :segment="cta.segment"
+              :image="image"
+              image-contain
+              :title="pathTitle"
+              class="start-learning-section__card"
+            >
+              {{ pathDescription }}
+            </AppCard>
+          </div>
+        </div>
+      </div>
+    </article>
   </section>
 </template>
 
@@ -139,27 +146,24 @@ export default class StartLearningSection extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import "~carbon-components/scss/globals/scss/typography";
-
 .start-learning-section {
   &__subtitle {
-    @include type-style("expressive-heading-03", true);
-
     margin-bottom: $layout-01;
-    color: $cool-gray-80;
   }
 
   &__section {
     margin-bottom: $layout-03;
   }
 
-  &__cards {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: $layout-03;
+  &__card {
+    margin-bottom: $layout-02;
 
-    @include mq($until: x-large) {
-      grid-template-columns: 1fr;
+    @include mq($until: large) {
+      margin-bottom: $layout-01;
+    }
+
+    @include mq($from: x-large) {
+      height: calc(100% - #{$layout-02});
     }
   }
 }

@@ -13,7 +13,7 @@ import QiskitPage from '~/components/logic/QiskitPage.vue'
 import { GeneralLink } from '~/constants/appLinks'
 
 @Component({
-  layout: 'default-textbook',
+  layout: 'default-max',
   head () {
     return {
       title: 'Introduction course'
