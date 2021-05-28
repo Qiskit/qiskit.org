@@ -339,7 +339,7 @@ export default class AppMegaDropdownMenu extends Vue {
         font-weight: 600;
       }
       &__text-highlight {
-        background-color: $blockquote-background-color;
+        background-color: $background-color-highlight;
       }
     }
     &-empty {
