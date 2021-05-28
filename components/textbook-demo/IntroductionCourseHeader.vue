@@ -157,10 +157,6 @@ $top-link-height-large: 3.75rem;
     @include mq($until: large) {
       margin-top: $spacing-09;
     }
-
-    > p {
-      @include type-style("body-long-01");
-    }
   }
 
   &__aside {
