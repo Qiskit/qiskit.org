@@ -1,40 +1,41 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import storeOptions from './_store-options'
+import { COMMUNITY_EVENT_TYPES, WORLD_REGIONS } from '~/store/events'
 
 Vue.use(Vuex)
 
 describe('module events', () => {
   let store: any
 
-  const unconferenceCampInAsia = {
+  const workshopCampInAsia = {
     title: 'Fake event A',
-    types: ['Unconference', 'Camp'],
-    regions: ['Asia Pacific']
+    types: [COMMUNITY_EVENT_TYPES.workshop, COMMUNITY_EVENT_TYPES.camp],
+    regions: [WORLD_REGIONS.asiaPacific]
   }
   const hackathonInEurope = {
     title: 'Fake event B',
-    types: ['Unconference', 'Hackathon'],
-    regions: ['Europe']
+    types: [COMMUNITY_EVENT_TYPES.talks, COMMUNITY_EVENT_TYPES.hackathon],
+    regions: [WORLD_REGIONS.europe, WORLD_REGIONS.online]
   }
   const campInAfrica = {
     title: 'Fake event C',
-    types: ['Camp'],
-    regions: ['Africa']
+    types: [COMMUNITY_EVENT_TYPES.camp],
+    regions: [WORLD_REGIONS.africa]
   }
-  const hackathonInAmericas = {
+  const hackathonInSouthAmerica = {
     title: 'Fake event D',
-    types: ['Camp', 'Hackathon'],
-    regions: ['Americas']
+    types: [COMMUNITY_EVENT_TYPES.camp, COMMUNITY_EVENT_TYPES.hackathon],
+    regions: [WORLD_REGIONS.southAmerica]
   }
-  const unconferenceOnline = {
+  const talskOnline = {
     title: 'Fake event E',
-    types: ['Unconference'],
-    regions: ['Online']
+    types: [COMMUNITY_EVENT_TYPES.talks],
+    regions: [WORLD_REGIONS.online]
   }
 
-  const futureEvents = [unconferenceCampInAsia, hackathonInEurope, campInAfrica]
-  const pastEvents = [hackathonInAmericas, unconferenceOnline]
+  const futureEvents = [workshopCampInAsia, hackathonInEurope, campInAfrica, talskOnline]
+  const pastEvents = [hackathonInSouthAmerica]
 
   beforeEach(() => {
     store = new Vuex.Store(storeOptions())
@@ -61,15 +62,23 @@ describe('module events', () => {
     it('gets active-set filtered by region', () => {
       store.commit('addFilter', {
         filter: 'regionFilters',
-        filterValue: 'Asia Pacific'
+        filterValue: WORLD_REGIONS.asiaPacific
       })
-      expect(store.getters.filteredEvents).toEqual([unconferenceCampInAsia])
+      expect(store.getters.filteredEvents).toEqual([workshopCampInAsia])
+    })
+
+    it('gets active-set filtered by region, considering events with several regions', () => {
+      store.commit('addFilter', {
+        filter: 'regionFilters',
+        filterValue: WORLD_REGIONS.online
+      })
+      expect(store.getters.filteredEvents).toEqual([hackathonInEurope, talskOnline])
     })
 
     it('gets active-set filtered by type', () => {
       store.commit('addFilter', {
         filter: 'typeFilters',
-        filterValue: 'Hackathon'
+        filterValue: COMMUNITY_EVENT_TYPES.hackathon
       })
       expect(store.getters.filteredEvents).toEqual([hackathonInEurope])
     })
@@ -77,31 +86,31 @@ describe('module events', () => {
     it('gets active-set filtered by type, considering events with several types', () => {
       store.commit('addFilter', {
         filter: 'typeFilters',
-        filterValue: 'Camp'
+        filterValue: COMMUNITY_EVENT_TYPES.camp
       })
-      expect(store.getters.filteredEvents).toEqual([unconferenceCampInAsia, campInAfrica])
+      expect(store.getters.filteredEvents).toEqual([workshopCampInAsia, campInAfrica])
     })
 
     it('gets active-set filtered by type and region', () => {
       store.commit('addFilter', {
         filter: 'typeFilters',
-        filterValue: 'Camp'
+        filterValue: COMMUNITY_EVENT_TYPES.camp
       })
       store.commit('addFilter', {
         filter: 'regionFilters',
-        filterValue: 'Africa'
+        filterValue: WORLD_REGIONS.africa
       })
       expect(store.getters.filteredEvents).toEqual([campInAfrica])
     })
 
     it('can update entire active-set, given a list of filters', () => {
-      const regionsList = ['Americas', 'Africa', 'Europe']
+      const regionsList = [WORLD_REGIONS.northAmerica, WORLD_REGIONS.africa, WORLD_REGIONS.europe]
       // add initial region filter
       store.commit('addFilter', {
         filter: 'regionFilters',
-        filterValue: 'Africa'
+        filterValue: WORLD_REGIONS.africa
       })
-      expect(store.getters.regionFilters).toEqual(['Africa'])
+      expect(store.getters.regionFilters).toEqual([WORLD_REGIONS.africa])
 
       // update entire active-set
       store.commit('updateFilterSet', {
