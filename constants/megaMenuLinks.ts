@@ -207,7 +207,7 @@ const QUANTUM_PROTOCOLS_AND_ALGORITHMS: MegaDropdownMenuGroup = {
       }
     },
     {
-      label: 'Simon’s Algorithm',
+      label: 'Simon\'s Algorithm',
       url: 'https://qiskit.org/textbook/ch-algorithms/simon.html',
       segment: {
         action: `${actionPrefix} > ${sectionProtocolsAndAlgorithms} > simon`
@@ -228,14 +228,14 @@ const QUANTUM_PROTOCOLS_AND_ALGORITHMS: MegaDropdownMenuGroup = {
       }
     },
     {
-      label: 'Shor’s Algorithm',
+      label: 'Shor\'s Algorithm',
       url: 'https://qiskit.org/textbook/ch-algorithms/shor.html',
       segment: {
         action: `${actionPrefix} > ${sectionProtocolsAndAlgorithms} > shor`
       }
     },
     {
-      label: 'Grover’s Algorithm',
+      label: 'Grover\'s Algorithm',
       url: 'https://qiskit.org/textbook/ch-algorithms/grover.html',
       segment: {
         action: `${actionPrefix} > ${sectionProtocolsAndAlgorithms} > grover`
@@ -371,7 +371,7 @@ const QUANTUM_ALGORITHMS_FOR_APPS : MegaDropdownMenuGroup = {
       }
     },
     {
-      label: 'Solving Satisfiability Problems using Grover’s Algorithm',
+      label: 'Solving Satisfiability Problems using Grover\'s Algorithm',
       url: 'https://qiskit.org/textbook/ch-applications/satisfiability-grover.html',
       segment: {
         action: `${actionPrefix} > ${sectionApps} > satisfiability-grover`
@@ -486,14 +486,14 @@ const QUANTUM_COMPUTING_LABS : MegaDropdownMenuGroup = {
       }
     },
     {
-      label: 'Lab 5. Scalable Shor’s Algorithm',
+      label: 'Lab 5. Scalable Shor\'s Algorithm',
       url: 'https://qiskit.org/textbook/ch-labs/Lab05_Scalable_Shor_Algorithm.html',
       segment: {
         action: `${actionPrefix} > ${sectionLabs} > scalable-shor`
       }
     },
     {
-      label: 'Lab 6. Grover’s search with an unknown number of solutions',
+      label: 'Lab 6. Grover\'s search with an unknown number of solutions',
       url: 'https://qiskit.org/textbook/ch-labs/Lab06_Grover_search_with_an_unknown_number_of_solutions.html',
       segment: {
         action: `${actionPrefix} > ${sectionLabs} > grover-search`
@@ -537,5 +537,7 @@ const TEXTBOOK_DEMO_MEGA_MENU: MegaDropdownMenu = [
 
 export {
   MegaDropdownMenu,
+  MegaDropdownMenuColumn,
+  MegaDropdownMenuGroup,
   TEXTBOOK_DEMO_MEGA_MENU
 }
