@@ -37,7 +37,7 @@ const RECORD_FIELDS = Object.freeze({
   institution: 'Institution',
   showOnEventsPage: 'Add to Event Site',
   showOnSeminarSeriesPage: 'Add to Seminar Series Site',
-  speaker: 'Speaker'
+  speaker: 'Speaker (S.S.)'
 } as const)
 
 function getEventsQuery (apiKey: string, days: number, view: string, filters: string[] = []): Airtable.Query<{}> {
@@ -149,7 +149,7 @@ function getImage (record: any): string {
 }
 
 function getLocation (record: any): string {
-  return record.get(RECORD_FIELDS.location) || getRegions(record)
+  return record.get(RECORD_FIELDS.location) || WORLD_REGIONS.tbd
 }
 
 function getRegions (record: any): WorldRegion[] {

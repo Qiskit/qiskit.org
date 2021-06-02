@@ -145,22 +145,13 @@ describe('getRegions', () => {
 })
 
 describe('getLocation', () => {
-  it('defaults in region TBD if there is no location, no region', () => {
+  it('defaults in region TBD if there is no location', () => {
     const { tbd } = WORLD_REGIONS
 
     const nowhereEvent = new FakeRecord({
       name: 'Nowhere Conference'
     })
-    expect(getLocation(nowhereEvent)).toEqual([tbd])
-  })
-
-  it('defaults in region if there is no location', () => {
-    const { northAmerica } = WORLD_REGIONS
-    const noLocationEvent = new FakeRecord({
-      name: 'Fake Conference',
-      regions: [northAmerica]
-    })
-    expect(getLocation(noLocationEvent)).toEqual([northAmerica])
+    expect(getLocation(nowhereEvent)).toEqual(tbd)
   })
 
   it('gets the location from the record', () => {
