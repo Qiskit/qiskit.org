@@ -28,13 +28,13 @@ describe('module events', () => {
     types: [COMMUNITY_EVENT_TYPES.camp, COMMUNITY_EVENT_TYPES.hackathon],
     regions: [WORLD_REGIONS.southAmerica]
   }
-  const talskOnline = {
+  const talksOnline = {
     title: 'Fake event E',
     types: [COMMUNITY_EVENT_TYPES.talks],
     regions: [WORLD_REGIONS.online]
   }
 
-  const futureEvents = [workshopCampInAsia, hackathonInEurope, campInAfrica, talskOnline]
+  const futureEvents = [workshopCampInAsia, hackathonInEurope, campInAfrica, talksOnline]
   const pastEvents = [hackathonInSouthAmerica]
 
   beforeEach(() => {
@@ -72,7 +72,7 @@ describe('module events', () => {
         filter: 'regionFilters',
         filterValue: WORLD_REGIONS.online
       })
-      expect(store.getters.filteredEvents).toEqual([hackathonInEurope, talskOnline])
+      expect(store.getters.filteredEvents).toEqual([hackathonInEurope, talksOnline])
     })
 
     it('gets active-set filtered by type', () => {
