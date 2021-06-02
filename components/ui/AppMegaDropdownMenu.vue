@@ -77,7 +77,7 @@ interface HighlightTextState {
 @Component
 export default class AppMegaDropdownMenu extends Vue {
   @Prop({ type: String, default: 'primary' }) kind!: 'primary'|'secondary'
-  @Prop({ type: String, default: 'Browse content' }) placeholder!: string
+  @Prop({ type: String, required: false, default: 'Browse all content' }) placeholder!: string
   @Prop(Array) content!: MegaDropdownMenu
 
   showContent = false;
