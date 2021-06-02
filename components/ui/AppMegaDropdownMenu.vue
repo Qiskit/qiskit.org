@@ -1,27 +1,36 @@
 <template>
   <article class="app-mega-dropdown">
-    <button
-      ref="button"
-      class="app-mega-dropdown__button"
-      :class="`app-mega-dropdown__button_${kind}`"
-      @click="toggleOpen"
+    <label
+      ref="filterWrapper"
+      class="app-mega-dropdown__filter-wrapper"
+      :class="`app-mega-dropdown__filter-wrapper_${kind}`"
     >
-      <span>{{ placeholder }}</span>
-      <svg class="app-mega-dropdown__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M16 22L6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z" /></svg>
-    </button>
+      <input
+        v-model="textOnTheFilter"
+        type="text"
+        class="app-mega-dropdown__filter-wrapper__input"
+        :placeholder="placeholder"
+        @focus="onShowContent"
+      >
+      <svg class="app-mega-dropdown__filter-wrapper__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M16 22L6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z" /></svg>
+    </label>
     <div
       v-if="showContent"
       ref="dropdown"
       class="app-mega-dropdown__content-container"
     >
       <nav class="app-mega-dropdown__content">
-        <div v-for="(column, columnIndex) in content" :key="`${columnIndex}`" class="app-mega-dropdown__content-column">
+        <div v-for="(column, columnIndex) in filteredContent" :key="columnIndex" class="app-mega-dropdown__content-column">
           <div v-for="(group, groupIndex) in column" :key="`${groupIndex}`">
             <BasicLink
               class="app-mega-dropdown__content-link app-mega-dropdown__content-link_title"
               :url="group.title.url"
             >
-              {{ group.title.label }}
+              <span
+                v-for="(part) in splitTextInHighlightParts(group.title.label)"
+                :key="`${part.index}-${part.text.length}`"
+                :class="{'app-mega-dropdown__content-link__text-highlight': part.isHighlighted}"
+              >{{ part.text }}</span>
             </BasicLink>
             <BasicLink
               v-for="chapter in group.content"
@@ -29,9 +38,25 @@
               class="app-mega-dropdown__content-link"
               :url="chapter.url"
             >
-              {{ chapter.label }}
+              <span
+                v-for="(part) in splitTextInHighlightParts(chapter.label)"
+                :key="`${part.index}-${part.text.length}`"
+                :class="{'app-mega-dropdown__content-link__text-highlight': part.isHighlighted}"
+              >{{ part.text }}</span>
             </BasicLink>
           </div>
+        </div>
+        <div v-if="isFilteredContentEmpty" class="app-mega-dropdown__content-empty">
+          <h2 class="app-mega-dropdown__content-empty__title">
+            Nothing here
+          </h2>
+          <p class="app-mega-dropdown__content-empty__text">
+            Try broadening your search terms
+          </p>
+          <div
+            lazy-background="/images/textbook-demo/empty-search.png"
+            class="app-mega-dropdown__content-empty__image"
+          />
         </div>
       </nav>
     </div>
@@ -41,26 +66,156 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-import { MegaDropdownMenu } from '~/constants/megaMenuLinks'
+import { MegaDropdownMenu, MegaDropdownMenuColumn, MegaDropdownMenuGroup } from '~/constants/megaMenuLinks'
+import { NavLink } from '~/constants/menuLinks'
+
+interface HighlightTextState {
+  text: string,
+  isHighlighted: boolean
+}
 
 @Component
-export default class TheMegaDropdownMenu extends Vue {
+export default class AppMegaDropdownMenu extends Vue {
   @Prop({ type: String, default: 'primary' }) kind!: 'primary'|'secondary'
   @Prop({ type: String, default: 'Browse content' }) placeholder!: string
   @Prop(Array) content!: MegaDropdownMenu
 
   showContent = false;
 
+  onShowContent () {
+    this.showContent = true
+  }
+
+  textOnTheFilter = ''
+
+  get wordsOnTheFilter (): string[] {
+    return this.textOnTheFilter.trim().toLowerCase().split(' ').filter((word: string) => word !== '')
+  }
+
+  isFilterTextEmpty (): boolean {
+    return this.textOnTheFilter.trim() === ''
+  }
+
+  splitTextInHighlightParts (menuLabel: string) : HighlightTextState[] {
+    const isTextEmpty = menuLabel.trim() === ''
+    if (this.isFilterTextEmpty() || isTextEmpty) {
+      return [{ text: menuLabel, isHighlighted: false }]
+    }
+
+    const charIsHighlightArray = this._splitTextInHighlightedChars(menuLabel, this.wordsOnTheFilter)
+
+    const textHighlightParts = this._joinCharsByHighlightedState(charIsHighlightArray)
+
+    return textHighlightParts
+  }
+
+  // Splits the menuLabel in characters and sets "isHighlighted" property indicating if the character should be highlighted or not
+  _splitTextInHighlightedChars (menuLabel: string, wordsOnTheFilter: string[]) : HighlightTextState[] {
+    const charArray = Array.from(menuLabel)
+    // Assign the isHighlighted flag to each character
+    const highlightStates = charArray.map<HighlightTextState>((letter: string) => ({ text: letter, isHighlighted: false }))
+    const lowerCaseText = menuLabel.toLowerCase()
+
+    wordsOnTheFilter.forEach((word: string) => {
+      // start highlighting index
+      let from = lowerCaseText.indexOf(word)
+
+      while (from >= 0) {
+        // end highlighting index
+        const to = from + word.length
+
+        for (let i = from; i < to; i++) {
+          highlightStates[i].isHighlighted = true
+        }
+        // the text could have the same word multiple times.
+        from = lowerCaseText.indexOf(word, Math.max(to, 1))
+      }
+    })
+
+    return highlightStates
+  }
+
+  // Join consecutive characters with the same highlight property
+  // The result is an array of texts flaged with the isHighlighted property
+  // The n+1 text has always the opposit highlight state of n.
+  _joinCharsByHighlightedState (highlightStateByChar: HighlightTextState[]): HighlightTextState[] {
+    const output = [{
+      text: highlightStateByChar[0].text,
+      isHighlighted: highlightStateByChar[0].isHighlighted,
+      index: 0
+    }]
+
+    for (let i = 1; i < highlightStateByChar.length; i++) {
+      const lastCharState = output[output.length - 1]
+      const currentChar = highlightStateByChar[i]
+      const highlightTextContinues = lastCharState.isHighlighted === currentChar.isHighlighted
+
+      if (highlightTextContinues) {
+        lastCharState.text = lastCharState.text.concat(currentChar.text)
+      } else {
+        output.push({
+          text: currentChar.text,
+          isHighlighted: currentChar.isHighlighted,
+          index: i
+        })
+      }
+    }
+
+    return output
+  }
+
+  get isFilteredContentEmpty (): boolean {
+    return this.filteredContent.length === 0
+  }
+
+  get filteredContent (): MegaDropdownMenu {
+    if (this.isFilterTextEmpty()) {
+      return this.content
+    }
+
+    const wordsOnTheFilter: string[] = this.wordsOnTheFilter
+
+    const filteredContent = this.content.map((column: MegaDropdownMenuColumn) => this._filterMegaDropdownColumn(column, wordsOnTheFilter))
+    const nonEmptyColumnsFilteredContent = filteredContent.filter((column: MegaDropdownMenuColumn) => column.length > 0)
+
+    return nonEmptyColumnsFilteredContent
+  }
+
+  _filterMegaDropdownColumn (column: MegaDropdownMenuColumn, wordsOnTheFilter: string[]): MegaDropdownMenuColumn {
+    const filteredColumn = column.map((group: MegaDropdownMenuGroup) => this._filterMegaDropdownGroupLinks(group, wordsOnTheFilter))
+    const nonEmptyGroupsFilteredColumn = filteredColumn.filter((group: MegaDropdownMenuGroup) => group.content.length > 0)
+
+    return nonEmptyGroupsFilteredColumn
+  }
+
+  _filterMegaDropdownGroupLinks (group: MegaDropdownMenuGroup, wordsOnTheFilter: string[]): MegaDropdownMenuGroup {
+    const titleSelected = this._containsWordsOnTheFilter(group.title.label, wordsOnTheFilter)
+    if (titleSelected) {
+      return group
+    }
+
+    const filteredLinks = group.content.filter((link: NavLink) => this._containsWordsOnTheFilter(link.label, wordsOnTheFilter))
+
+    return {
+      title: group.title,
+      content: filteredLinks
+    }
+  }
+
+  _containsWordsOnTheFilter (label: string, wordsOnTheFilter: string[]) {
+    return wordsOnTheFilter.some(word => label.toLowerCase().includes(word))
+  }
+
   mounted () {
-    document.addEventListener('click', this.handleClick)
+    document.addEventListener('mousedown', this.handleClick)
   }
 
   beforeDestroy () {
-    document.removeEventListener('click', this.handleClick)
+    document.removeEventListener('mousedown', this.handleClick)
   }
 
   handleClick (e: MouseEvent) {
-    const buttonElement = this.$refs.button as Element
+    const buttonElement = this.$refs.filterWrapper as Element
     const dropdownElement = this.$refs.dropdown as Element|undefined
 
     if (dropdownElement) {
@@ -70,12 +225,9 @@ export default class TheMegaDropdownMenu extends Vue {
 
       if (shouldCloseDropdown) {
         this.showContent = false
+        this.textOnTheFilter = ''
       }
     }
-  }
-
-  toggleOpen () : void {
-    this.showContent = !this.showContent
   }
 }
 </script>
@@ -89,59 +241,66 @@ export default class TheMegaDropdownMenu extends Vue {
   color: $text-color-light;
   position: relative;
 
-  &__button {
-    &_primary {
-      color: $text-color-light;
-      fill: $text-color-light;
-      border-bottom: 1px solid $cool-gray-80;
-    }
+  &__filter-wrapper {
+    display: flex;
+    width: 18rem;
+    height: 2.5rem;
+    justify-content: space-between;
+    align-items: center;
+    padding: $spacing-03;
+    color: $text-color-light;
+    fill: $text-color-light;
+    border-bottom: 1px solid $border-color-secondary;
 
-    &_secondary {
-      color: $button-text-color;
-      fill: $button-text-color;
-      border-bottom: 1px solid white;
-    }
-
-    &_primary,
-    &_secondary {
+    &__input {
+      flex: 1;
       background-color: transparent;
       outline: none;
       border: none;
-      width: 18rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: $spacing-03;
+      color: inherit;
 
-      .app-mega-dropdown__icon > path {
+      &::placeholder {
+        color: inherit;
+      }
+      &:focus::placeholder {
+        opacity: 0.25;
+      }
+    }
+
+    &__icon {
+      flex: 0 0 1rem;
+      cursor: pointer;
+
+      & > path {
         transform: translate(0, 0);
         transition: transform 0.2s ease-in-out;
       }
-
-      &:hover {
-        cursor: pointer;
-
-        .app-mega-dropdown__icon > path {
-          transform: translate(0, 4px);
-          transition: transform 0.2s ease-in-out;
-        }
-      }
     }
-  }
 
-  &__icon {
-    width: 1rem;
+    &:hover &__icon > path {
+      transform: translate(0, 4px);
+      transition: transform 0.2s ease-in-out;
+    }
+
+    &_primary {
+      background-color: transparent;
+    }
+
+    &_secondary {
+      background-color: $background-color-white;
+    }
   }
 
   &__content-container {
     position: absolute;
-    top: 2.2rem;
+    top: 2.5rem;
     padding: $spacing-07 $spacing-05;
     width: 12 * $column-size-large;
     background-color: $background-color-white;
-    box-shadow: -4px 4px 12px rgba(0, 0, 0, .1);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
     height: 32rem;
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: auto;
 
     @include mq($until: large) {
       width: 100%;
@@ -173,11 +332,33 @@ export default class TheMegaDropdownMenu extends Vue {
     &-link {
       display:block;
       padding-bottom: $spacing-05;
-      color: $cool-gray-80;
+      color: $text-color-light;
       text-decoration: none;
 
       &_title {
         font-weight: 600;
+      }
+      &__text-highlight {
+        background-color: $background-color-highlight;
+      }
+    }
+    &-empty {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      flex: 1;
+      align-items: center;
+
+      &__text {
+        @include type-style('body-short-01');
+      }
+      &__image {
+        width: 16rem;
+        max-width: 100%;
+        height: 18rem;
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
       }
     }
   }
