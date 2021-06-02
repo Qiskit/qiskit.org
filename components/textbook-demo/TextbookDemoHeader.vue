@@ -66,7 +66,7 @@ export default class TextbookDemoHeader extends Vue {
       background-size: 90%;
     }
     &-wrapper {
-      @include responsive-grid-bg-strip("/images/grid/grid-hero-textbook.svg", auto, 90%);
+      @include responsive-grid-bg-strip("/images/grid/grid-hero-textbook.svg", auto, 95%);
 
       display: flex;
       height: 100%;
