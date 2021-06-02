@@ -91,7 +91,7 @@ export default class LearnEntry extends QiskitPage {
 
     blockquote {
       position: relative;
-      background-color: $blockquote-background-color;
+      background-color: $background-color-highlight;
       padding: $spacing-07;
       margin-bottom: $layout-03;
 
