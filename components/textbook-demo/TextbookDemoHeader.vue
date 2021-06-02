@@ -8,7 +8,6 @@
         <AppMegaDropdownMenu
           class="textbook-demo-header__dropdown"
           kind="secondary"
-          :placeholder="dropdownMenuPlaceholder"
           :content="dropdownMenuContent"
         />
       </div>
@@ -26,7 +25,6 @@ import { TEXTBOOK_DEMO_MEGA_MENU } from '~/constants/megaMenuLinks'
 @Component
 export default class TextbookDemoHeader extends Vue {
   startLearningCTA = TEXTBOOK_DEMO_START_LEARNING
-  dropdownMenuPlaceholder = 'Browse content'
   dropdownMenuContent = TEXTBOOK_DEMO_MEGA_MENU
 }
 </script>
