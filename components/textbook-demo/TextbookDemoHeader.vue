@@ -1,17 +1,19 @@
 <template>
   <header class="textbook-demo-header">
-    <div class="textbook-demo-header__container">
-      <div>
-        <h1 class="textbook-demo-header__headline">
-          Qiskit Textbook (beta)
-        </h1>
-        <AppMegaDropdownMenu
-          class="textbook-demo-header__dropdown"
-          kind="secondary"
-          :content="dropdownMenuContent"
-        />
+    <div class="textbook-demo-header__container-wrapper">
+      <div class="textbook-demo-header__container">
+        <div>
+          <h1 class="textbook-demo-header__headline">
+            Qiskit Textbook (beta)
+          </h1>
+          <AppMegaDropdownMenu
+            class="textbook-demo-header__dropdown"
+            kind="secondary"
+            :content="dropdownMenuContent"
+          />
+        </div>
+        <AppCta v-bind="startLearningCTA" class="textbook-demo-header__cta" />
       </div>
-      <AppCta v-bind="startLearningCTA" class="textbook-demo-header__cta" />
     </div>
   </header>
 </template>
@@ -34,7 +36,7 @@ export default class TextbookDemoHeader extends Vue {
   background: linear-gradient(315deg, $cool-gray-10 0%, $blue-40 25%, $purple-70 100%);
   height: 37.5rem;
 
-   &__headline {
+  &__headline {
     color: $text-color-white;
   }
 
@@ -46,6 +48,7 @@ export default class TextbookDemoHeader extends Vue {
     background-position: right center;
     background-repeat: no-repeat;
     background-size: 50% auto;
+    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -61,6 +64,12 @@ export default class TextbookDemoHeader extends Vue {
     @include mq($until: medium) {
       background-position: calc(100% + 5rem) calc(100% + 2rem);
       background-size: 90%;
+    }
+    &-wrapper {
+      @include responsive-grid-bg-strip("/images/grid/grid-hero-textbook.svg", auto, 95%);
+
+      display: flex;
+      height: 100%;
     }
   }
 
