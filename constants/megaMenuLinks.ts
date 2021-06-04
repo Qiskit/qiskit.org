@@ -10,8 +10,6 @@ const sectionPulses = 'pulses'
 const sectionApps = 'apps'
 const sectionCircuits = 'circuits'
 const sectionLabs = 'labs'
-const sectionAppendix = 'appendix'
-const sectionLearningQml = 'learning-qml'
 
 const baseUrl = 'https://platypus.qiskit.org'
 const pathPrerequisites = '/course/ch-prerequisites'
@@ -23,8 +21,6 @@ const pathPulses = '/course/quantum-hardware-pulses'
 const pathHardwareUsingCircuits = '/course/quantum-hardware'
 const pathApps = '/course/ch-applications'
 const pathLabs = '/course/ch-labs'
-const pathAppendix = '/course/ch-appendix'
-const pathLearningQml = '/course/learning-qml'
 
 type MegaDropdownMenuGroup = {
   title: NavLink,
@@ -531,89 +527,15 @@ const QUANTUM_COMPUTING_LABS : MegaDropdownMenuGroup = {
   ]
 }
 
-const APPENDIX : MegaDropdownMenuGroup = {
-  title: {
-    label: 'Appendix',
-    url: `${baseUrl}${pathAppendix}`,
-    segment: {
-      action: `${actionPrefix} > ${sectionAppendix}`
-    }
-  },
-  content: [
-    {
-      label: 'An Introduction to Linear Algebra for Quantum Computing',
-      url: `${baseUrl}${pathAppendix}/an-introduction-to-linear-algebra-for-quantum-computing`,
-      segment: {
-        action: `${actionPrefix} > ${sectionAppendix} > quantum-circuits`
-      }
-    },
-    {
-      label: 'Basic Qiskit Syntax',
-      url: `${baseUrl}${pathAppendix}/basic-qiskit-syntax`,
-      segment: {
-        action: `${actionPrefix} > ${sectionAppendix} > quantum-measurement`
-      }
-    }
-  ]
-}
-
-const LEARNING_QML : MegaDropdownMenuGroup = {
-  title: {
-    label: 'Quantum Machine Learning',
-    url: `${baseUrl}${pathLearningQml}`,
-    segment: {
-      action: `${actionPrefix} > ${sectionLearningQml}`
-    }
-  },
-  content: [
-    {
-      label: 'Introduction',
-      url: `${baseUrl}${pathLearningQml}/introduction`,
-      segment: {
-        action: `${actionPrefix} > ${sectionLearningQml} > introduction`
-      }
-    },
-    {
-      label: 'Basic Qiskit Syntax',
-      url: `${baseUrl}${pathLearningQml}/parametrized-quantum-circuits`,
-      segment: {
-        action: `${actionPrefix} > ${sectionLearningQml} > parametrized-quantum-circuits`
-      }
-    },
-    {
-      label: 'Data Encoding',
-      url: `${baseUrl}${pathLearningQml}/data-encoding`,
-      segment: {
-        action: `${actionPrefix} > ${sectionLearningQml} > data-encoding`
-      }
-    },
-    {
-      label: 'Quantum Feature Maps and Kernels',
-      url: `${baseUrl}${pathLearningQml}/quantum-feature-maps-and-kernels`,
-      segment: {
-        action: `${actionPrefix} > ${sectionLearningQml} > quantum-feature-maps-and-kernels`
-      }
-    },
-    {
-      label: 'Variational Classification',
-      url: `${baseUrl}${pathLearningQml}/variational-classification`,
-      segment: {
-        action: `${actionPrefix} > ${sectionLearningQml} > variational-classification`
-      }
-    }
-  ]
-}
-
 type MegaDropdownMenuColumn = MegaDropdownMenuGroup[]
 const COLUMN_1: MegaDropdownMenuColumn = [
   PREREQUISITES,
-  LEARNING_QML,
   QUANTUM_STATES_AND_QUBITS,
-  MULTIPLE_QUBITS_AND_ENTANGLEMENT
+  MULTIPLE_QUBITS_AND_ENTANGLEMENT,
+  GAMES_AND_DEMOS
 ]
 
 const COLUMN_2: MegaDropdownMenuColumn = [
-  GAMES_AND_DEMOS,
   QUANTUM_PROTOCOLS_AND_ALGORITHMS,
   INVESTIGATING_Q_HW_USING_MICROWAVE_PULSES
 ]
@@ -621,8 +543,7 @@ const COLUMN_2: MegaDropdownMenuColumn = [
 const COLUMN_3: MegaDropdownMenuColumn = [
   QUANTUM_ALGORITHMS_FOR_APPS,
   INVESTIGATING_Q_HW_USING_Q_CIRCUITS,
-  QUANTUM_COMPUTING_LABS,
-  APPENDIX
+  QUANTUM_COMPUTING_LABS
 ]
 
 type MegaDropdownMenu = MegaDropdownMenuColumn[]
