@@ -133,7 +133,8 @@ interface AgendaSlotByTrack {
         }
       ]
     }
-  }
+  },
+  layout: 'default-max'
 })
 export default class PhysicsOfComputationPage extends QiskitPage {
   routeName = 'physics-of-computation'

@@ -133,7 +133,8 @@ import {
         }
       ]
     }
-  }
+  },
+  layout: 'default-max'
 })
 export default class SummerSchoolPage extends QiskitPage {
   routeName = 'summer-school'

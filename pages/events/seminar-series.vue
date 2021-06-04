@@ -70,7 +70,8 @@ import {
     return {
       title: 'Qiskit Seminar Series'
     }
-  }
+  },
+  layout: 'default-max'
 })
 export default class SeminarSeriesPage extends QiskitPage {
   routeName = 'seminar-series'
