@@ -106,6 +106,16 @@ const QISKIT_ADVOCATES: LabeledLinks = {
   }
 }
 
+const CODE_OF_CONDUCT: LabeledLinks = {
+  codeOfConduct: {
+    label: 'Code of conduct',
+    url: 'https://github.com/Qiskit/qiskit/blob/master/CODE_OF_CONDUCT.md',
+    segment: {
+      action: 'footer > code-of-conduct'
+    }
+  }
+}
+
 const OVERVIEW_LINK: NavLink = {
   label: 'Overview',
   url: '/overview',
@@ -167,7 +177,8 @@ const FOOTER_ELEMENTS: FooterStructure = [
     title: 'Community',
     elements: [
       COMMUNITY_SUB_LINKS.events,
-      QISKIT_ADVOCATES.advocates
+      QISKIT_ADVOCATES.advocates,
+      CODE_OF_CONDUCT.codeOfConduct
       // TODO: enable when #663 is done
       // QISKIT_CAREERS
     ]
