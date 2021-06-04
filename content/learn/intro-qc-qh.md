@@ -262,7 +262,7 @@ In order to make the best out of these lectures, we strongly recommend reviewing
         (Lecturer: Zlatko Minev)
       </td>
       <td>
-        <a href="https://youtu.be/f1GpzZYIVIE?list=PLOFEBzvs-VvrXTMy5Y2IqmSaUjfnhvBHR">Lecture Video</a>
+        <a href="https://youtu.be/dmYnfGo-8eM?list=PLOFEBzvs-VvrXTMy5Y2IqmSaUjfnhvBHR">Lecture Video</a>
       </td>
       <td rowspan="3">
         <a href="https://github.com/qiskit-community/intro-to-quantum-computing-and-quantum-hardware/blob/master/lectures/introqcqh-lecture-notes-7.pdf?raw=true">Lecture Notes 7</a>
