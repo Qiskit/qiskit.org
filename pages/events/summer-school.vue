@@ -30,38 +30,39 @@
         </EventCard>
       </template>
     </AppPageHeaderWithCard>
+    <div class="bx--grid">
+      <AppMosaicSection
+        class="summer-school-page__section"
+        :title="mosaicData.title"
+        :elements="mosaicData.tiles"
+      />
 
-    <AppMosaicSection
-      class="summer-school-page__section"
-      :title="mosaicData.title"
-      :elements="mosaicData.tiles"
-    />
+      <section class="summer-school-page__section">
+        <h2 v-text="agendaData.title" />
+        <p v-text="agendaData.subtitle" />
+        <cv-tabs>
+          <cv-tab
+            v-for="week in agendaData.weeks"
+            :key="week.tabName"
+            :label="week.tabName"
+          >
+            <AppDataTable
+              class="summer-school-page__section"
+              :columns="agendaColumnsDataTable"
+              :elements="week.tableData"
+            />
+          </cv-tab>
+        </cv-tabs>
+      </section>
 
-    <section class="summer-school-page__section">
-      <h2 v-text="agendaData.title" />
-      <p v-text="agendaData.subtitle" />
-      <cv-tabs>
-        <cv-tab
-          v-for="week in agendaData.weeks"
-          :key="week.tabName"
-          :label="week.tabName"
-        >
-          <AppDataTable
-            class="summer-school-page__section"
-            :columns="agendaColumnsDataTable"
-            :elements="week.tableData"
-          />
-        </cv-tab>
-      </cv-tabs>
-    </section>
+      <FaqSection class="summer-school-page__section" />
 
-    <FaqSection class="summer-school-page__section" />
-
-    <AppHelpfulResourcesSection
-      class="summer-school-page__section"
-      :title="helpfulResourcesData.title"
-      :resources="helpfulResourcesData.resources"
-    />
+      <AppHelpfulResourcesSection
+        class="summer-school-page__section"
+        :title="helpfulResourcesData.title"
+        :resources="helpfulResourcesData.resources"
+      />
+    </div>
   </main>
 </template>
 
@@ -152,9 +153,6 @@ export default class SummerSchoolPage extends QiskitPage {
   flex-direction: column;
 
   &__section {
-    @include contained();
-
-    width: 100%;
     margin-top: $layout-05;
     margin-bottom: $layout-03;
 

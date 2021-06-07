@@ -22,38 +22,40 @@
         </EventCard>
       </template>
     </AppPageHeaderWithCard>
-    <AppMosaicSection
-      class="physics-of-computation-page__section"
-      :title="mosaicSectionTitle"
-      :elements="mosaicElements"
-    />
-    <AppDataTableSection
-      class="physics-of-computation-page__section"
-      :section-title="morningAgendaSectionTitle"
-      :data-table-columns="agendaColumnsDataTable"
-      :data-table-elements="morningSessionElementsDataTable"
-    >
-      <AppCta kind="ghost" v-bind="morningSessionAgendaCTA" is-wider />
-    </AppDataTableSection>
-    <AppDataTableSection
-      class="physics-of-computation-page__section"
-      :section-title="afternoonAgendaSectionTitle"
-      :data-table-columns="agendaColumnsDataTable"
-      :data-table-elements="afternoonSessionElementsDataTable"
-    >
-      <AppCta kind="ghost" v-bind="afternoonSessionAgendaCTA" is-wider />
-    </AppDataTableSection>
-    <section class="physics-of-computation-page__section">
-      <h3 class="copy__subtitle">
-        * Parallel tracks (times listed are approximate and subject to change)
-      </h3>
-      <AppDataTable :columns="agendaTracksColumnsDataTable" :elements="afternoonSessionByTrackElementsDataTable" />
-    </section>
-    <AppHelpfulResourcesSection
-      class="physics-of-computation-page__section"
-      :title="helpfulResourcesSectionTitle"
-      :resources="helpfulResources"
-    />
+    <div class="bx--grid">
+      <AppMosaicSection
+        class="physics-of-computation-page__section"
+        :title="mosaicSectionTitle"
+        :elements="mosaicElements"
+      />
+      <AppDataTableSection
+        class="physics-of-computation-page__section"
+        :section-title="morningAgendaSectionTitle"
+        :data-table-columns="agendaColumnsDataTable"
+        :data-table-elements="morningSessionElementsDataTable"
+      >
+        <AppCta kind="ghost" v-bind="morningSessionAgendaCTA" is-wider />
+      </AppDataTableSection>
+      <AppDataTableSection
+        class="physics-of-computation-page__section"
+        :section-title="afternoonAgendaSectionTitle"
+        :data-table-columns="agendaColumnsDataTable"
+        :data-table-elements="afternoonSessionElementsDataTable"
+      >
+        <AppCta kind="ghost" v-bind="afternoonSessionAgendaCTA" is-wider />
+      </AppDataTableSection>
+      <section class="physics-of-computation-page__section">
+        <h3 class="copy__subtitle">
+          * Parallel tracks (times listed are approximate and subject to change)
+        </h3>
+        <AppDataTable :columns="agendaTracksColumnsDataTable" :elements="afternoonSessionByTrackElementsDataTable" />
+      </section>
+      <AppHelpfulResourcesSection
+        class="physics-of-computation-page__section"
+        :title="helpfulResourcesSectionTitle"
+        :resources="helpfulResources"
+      />
+    </div>
   </main>
 </template>
 
@@ -473,8 +475,6 @@ export default class PhysicsOfComputationPage extends QiskitPage {
 <style lang="scss" scoped>
 .physics-of-computation-page {
   &__section {
-    @include contained();
-
     margin-top: $layout-05;
     margin-bottom: $layout-03;
 
