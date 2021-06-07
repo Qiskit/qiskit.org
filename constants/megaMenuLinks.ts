@@ -1,6 +1,7 @@
 import { NavLink } from '~/constants/menuLinks'
 
 const actionPrefix = 'mega-menu'
+const wholeSection = 'whole-section'
 const sectionPrerequisites = 'prerequisites'
 const sectionQuantumStatesAndQubits = 'quantum-states-and-qubits'
 const sectionMultipleQubitsAndEntanglement = 'multiple-qubits-and-entanglement'
@@ -32,7 +33,7 @@ const PREREQUISITES: MegaDropdownMenuGroup = {
     label: 'Prerequisites',
     url: `${baseUrl}${pathPrerequisites}`,
     segment: {
-      action: `${actionPrefix} > ${sectionPrerequisites} > whole-section`
+      action: `${actionPrefix} > ${sectionPrerequisites} > ${wholeSection}`
     }
   },
   content: [
@@ -58,7 +59,7 @@ const QUANTUM_STATES_AND_QUBITS: MegaDropdownMenuGroup = {
     label: 'Quantum States and Qubits',
     url: `${baseUrl}${pathQuantumStatesAndQubits}`,
     segment: {
-      action: `${actionPrefix} > ${sectionQuantumStatesAndQubits} > whole-section`
+      action: `${actionPrefix} > ${sectionQuantumStatesAndQubits} > ${wholeSection}`
     }
   },
   content: [
@@ -105,7 +106,7 @@ const MULTIPLE_QUBITS_AND_ENTANGLEMENT: MegaDropdownMenuGroup = {
     label: 'Multiple Qubits and Entanglement',
     url: `${baseUrl}${pathMultipleQubitsAndEntanglement}`,
     segment: {
-      action: `${actionPrefix} > ${sectionMultipleQubitsAndEntanglement} > whole-section`
+      action: `${actionPrefix} > ${sectionMultipleQubitsAndEntanglement} > ${wholeSection}`
     }
   },
   content: [
@@ -159,7 +160,7 @@ const GAMES_AND_DEMOS: MegaDropdownMenuGroup = {
     label: 'Games & Demos',
     url: `${baseUrl}${pathGamesAndDemos}`,
     segment: {
-      action: `${actionPrefix} > ${sectionGamesAndDemos} > whole-section`
+      action: `${actionPrefix} > ${sectionGamesAndDemos} > ${wholeSection}`
     }
   },
   content: [
@@ -213,7 +214,7 @@ const QUANTUM_PROTOCOLS_AND_ALGORITHMS: MegaDropdownMenuGroup = {
     label: 'Quantum Protocols and Quantum Algorithms',
     url: `${baseUrl}${pathProtocolsAndAlgorithms}`,
     segment: {
-      action: `${actionPrefix} > ${sectionProtocolsAndAlgorithms} > whole-section`
+      action: `${actionPrefix} > ${sectionProtocolsAndAlgorithms} > ${wholeSection}`
     }
   },
   content: [
@@ -309,7 +310,7 @@ const INVESTIGATING_Q_HW_USING_MICROWAVE_PULSES : MegaDropdownMenuGroup = {
     label: 'Investigating Quantum Hardware Using Microwave Pulses',
     url: `${baseUrl}${pathPulses}`,
     segment: {
-      action: `${actionPrefix} > ${sectionPulses} > whole-section`
+      action: `${actionPrefix} > ${sectionPulses} > ${wholeSection}`
     }
   },
   content: [
@@ -370,7 +371,7 @@ const QUANTUM_ALGORITHMS_FOR_APPS : MegaDropdownMenuGroup = {
     label: 'Quantum Algorithms for Applications',
     url: `${baseUrl}${pathApps}`,
     segment: {
-      action: `${actionPrefix} > ${sectionApps} > whole-section`
+      action: `${actionPrefix} > ${sectionApps} > ${wholeSection}`
     }
   },
   content: [
@@ -431,7 +432,7 @@ const INVESTIGATING_Q_HW_USING_Q_CIRCUITS : MegaDropdownMenuGroup = {
     label: 'Investigating Quantum Hardware Using Quantum Circuits',
     url: `${baseUrl}${pathHardwareUsingCircuits}`,
     segment: {
-      action: `${actionPrefix} > ${sectionCircuits} > whole-section`
+      action: `${actionPrefix} > ${sectionCircuits} > ${wholeSection}`
     }
   },
   content: [
@@ -471,7 +472,7 @@ const QUANTUM_COMPUTING_LABS : MegaDropdownMenuGroup = {
     label: 'Quantum Computing Labs',
     url: `${baseUrl}${pathLabs}`,
     segment: {
-      action: `${actionPrefix} > ${sectionLabs} > whole-section`
+      action: `${actionPrefix} > ${sectionLabs} > ${wholeSection}`
     }
   },
   content: [
