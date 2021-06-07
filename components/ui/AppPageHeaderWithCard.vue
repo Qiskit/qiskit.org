@@ -1,8 +1,8 @@
 <template>
   <header class="app-page-header">
-    <div class="app-page-header__container">
+    <div class="bx--grid">
       <div class="bx--row">
-        <main class="bx--col-lg-11 bx--col-md-4 app-page-header__main">
+        <main class="bx--col app-page-header__main">
           <div>
             <h1 class="app-page-header__headline">
               <slot name="title" />
@@ -51,10 +51,6 @@ export default class AppPageHeaderWithCard extends Vue {
     padding-top: $layout-04;
   }
 
-  &__container {
-    @include contained();
-  }
-
   &__main {
     display: flex;
     flex-flow: column;
@@ -83,6 +79,12 @@ export default class AppPageHeaderWithCard extends Vue {
 
     @include mq($until: large) {
       margin-top: $spacing-09;
+    }
+
+    @include mq($from: large) {
+      $grid-columns: 6/11; // Number of columns that the element will use at this breakpoint.
+
+      max-width: 100% * $grid-columns;
     }
   }
 
