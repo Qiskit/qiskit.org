@@ -1,9 +1,9 @@
 <template>
   <header class="introduction-course-header">
     <div class="bx--grid introduction-course-header__container">
-      <div class="introduction-course-header__top-link">
+      <div class="bx--row introduction-course-header__top-link">
         <BasicLink
-          class="introduction-course-header__top-link__link"
+          class="bx--col introduction-course-header__top-link__link"
           url="/textbook-demo"
         >
           <ArrowLeft16 />
@@ -24,6 +24,9 @@
           :key="index"
           v-text="paragraph"
         />
+      </template>
+      <template slot="image">
+        <img class="app-page-header-with-img__image" :src="headerImg">
       </template>
     </AppPageHeaderWithImage>
   </header>

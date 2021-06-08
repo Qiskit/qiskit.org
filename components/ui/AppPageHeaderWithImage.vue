@@ -7,17 +7,17 @@
             <h1 class="app-page-header-with-img__headline">
               <slot name="title" />
             </h1>
+            <div class="bx--col-lg-0 bx--col-md-0 bx--col-sm app-page-header-with-img__image">
+              <slot name="image" />
+            </div>
             <div class="app-page-header-with-img__description">
               <slot name="description" />
             </div>
           </div>
           <AppCta v-if="cta" v-bind="cta" />
         </main>
-        <aside class="bx--col-lg-5 bx--col-md-4 app-page-header-with-img__aside">
-          <img
-            class="app-page-header-with-img__aside-image"
-            :src="imgLink"
-          >
+        <aside class="bx--col-lg-5 bx--col-md-4 bx--col-sm-0 app-page-header-with-img__aside">
+          <slot name="image" />
         </aside>
       </div>
     </div>
@@ -31,9 +31,8 @@ import { GeneralLink } from '~/constants/appLinks'
 
 @Component
 export default class AppPageHeaderWithImage extends Vue {
-  @Prop({ type: String, required: true }) cardTitle!: string
   @Prop({ type: Object, required: true }) cta!: GeneralLink
-  @Prop({ type: Object, required: true }) imgLink!: string
+  @Prop({ type: String, required: true }) imgLink!: string
 }
 </script>
 
@@ -60,12 +59,6 @@ export default class AppPageHeaderWithImage extends Vue {
     @include mq($until: large) {
       gap: $spacing-09;
     }
-
-    @include mq($from: large) {
-      $grid-columns: 6/11; // Number of columns that the element will use at this breakpoint.
-
-      max-width: 100% * $grid-columns;
-    }
   }
 
   &__headline {
@@ -82,16 +75,22 @@ export default class AppPageHeaderWithImage extends Vue {
     @include mq($until: large) {
       margin-top: $spacing-09;
     }
+
+    @include mq($from: large) {
+      $grid-columns: 8/11; // Number of columns that the element will use at this breakpoint.
+
+      max-width: 100% * $grid-columns;
+    }
   }
 
   &__aside {
     @include mq($until: medium) {
       margin-top: $spacing-09;
     }
+  }
 
-    &-image {
-      width: 100%;
-    }
+  &__image {
+    width: 100%;
   }
 }
 </style>
