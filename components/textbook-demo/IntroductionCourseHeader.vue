@@ -1,6 +1,6 @@
 <template>
   <header class="introduction-course-header">
-    <div class="introduction-course-header__container">
+    <div class="bx--grid introduction-course-header__container">
       <div class="introduction-course-header__top-link">
         <BasicLink
           class="introduction-course-header__top-link__link"
@@ -10,23 +10,22 @@
           <span>Home</span>
         </BasicLink>
       </div>
-
-      <AppPageHeaderWithImage
-        :cta="startLearningCTA"
-        :img-link="headerImg"
-      >
-        <template slot="title">
-          {{ headerTitle }}
-        </template>
-        <template slot="description">
-          <p
-            v-for="(paragraph, index) in headerDescription"
-            :key="index"
-            v-text="paragraph"
-          />
-        </template>
-      </AppPageHeaderWithImage>
     </div>
+    <AppPageHeaderWithImage
+      :cta="startLearningCTA"
+      :img-link="headerImg"
+    >
+      <template slot="title">
+        {{ headerTitle }}
+      </template>
+      <template slot="description">
+        <p
+          v-for="(paragraph, index) in headerDescription"
+          :key="index"
+          v-text="paragraph"
+        />
+      </template>
+    </AppPageHeaderWithImage>
   </header>
 </template>
 
@@ -65,42 +64,7 @@ export default class IntroductionCourseHeader extends Vue {
 <style lang="scss" scoped>
 @import "~carbon-components/scss/globals/scss/typography";
 
-$top-link-height: 4.375rem;
-$top-link-height-large: 3.75rem;
-
 .introduction-course-header {
-  &__container {
-    @include contained();
-
-    max-width: $max-size;
-    display: grid;
-    column-gap: $spacing-07;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: $top-link-height auto;
-    grid-template-areas:
-      "top-link top-link top-link top-link"
-      "main main . aside";
-
-    @include mq($until: large) {
-      grid-template-rows: $top-link-height-large auto;
-    }
-
-    @include mq($until: medium) {
-      grid-template-columns: repeat(8, 1fr);
-      grid-template-areas:
-        "top-link top-link top-link top-link top-link top-link top-link top-link"
-        "main main main main main aside aside aside";
-    }
-
-    @include mq($until: small) {
-      grid-template-columns: 1fr;
-      grid-template-areas:
-        "top-link"
-        "main"
-        "aside";
-    }
-  }
-
   &__top-link {
     align-items: center;
     display: flex;
@@ -114,64 +78,6 @@ $top-link-height-large: 3.75rem;
       display: flex;
       gap: $spacing-04;
     }
-  }
-
-  &__main {
-    display: flex;
-    flex-flow: column;
-    gap: $spacing-05;
-    grid-area: main;
-    justify-content: space-between;
-
-    @include mq($until: x-large) {
-      gap: $spacing-06;
-    }
-
-    @include mq($until: large) {
-      gap: $spacing-09;
-    }
-  }
-
-  &__main-image {
-    display: none;
-
-    @include mq($until: small) {
-      display: block;
-      margin-top: $spacing-05;
-      width: 100%;
-    }
-  }
-
-  &__description {
-    color: $cool-gray-80;
-    margin-top: $spacing-05;
-
-    @include mq($until: x-large) {
-      margin-top: $spacing-06;
-    }
-
-    @include mq($until: large) {
-      margin-top: $spacing-09;
-    }
-  }
-
-  &__aside {
-    display: flex;
-    grid-area: aside;
-    justify-content: flex-end;
-
-    @include mq($until: medium) {
-      margin-top: $spacing-09;
-    }
-
-    @include mq($until: small) {
-      display: none;
-    }
-  }
-
-  &__aside-image {
-    height: max-content;
-    max-width: 100%;
   }
 }
 </style>
