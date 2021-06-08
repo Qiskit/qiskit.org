@@ -32,7 +32,6 @@ import { GeneralLink } from '~/constants/appLinks'
 @Component
 export default class AppPageHeaderWithImage extends Vue {
   @Prop({ type: Object, required: true }) cta!: GeneralLink
-  @Prop({ type: String, required: true }) imgLink!: string
 }
 </script>
 

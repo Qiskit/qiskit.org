@@ -1,20 +1,10 @@
 <template>
   <header class="introduction-course-header">
-    <div class="bx--grid introduction-course-header__container">
-      <div class="bx--row introduction-course-header__top-link">
-        <BasicLink
-          class="bx--col introduction-course-header__top-link__link"
-          url="/textbook-demo"
-        >
-          <ArrowLeft16 />
-          <span>Home</span>
-        </BasicLink>
-      </div>
-    </div>
-    <AppPageHeaderWithImage
-      :cta="startLearningCTA"
-      :img-link="headerImg"
-    >
+    <AppNavBackLink
+      label="Home"
+      url="/textbook-demo"
+    />
+    <AppPageHeaderWithImage :cta="startLearningCTA">
       <template slot="title">
         {{ headerTitle }}
       </template>
@@ -63,24 +53,3 @@ export default class IntroductionCourseHeader extends Vue {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-@import "~carbon-components/scss/globals/scss/typography";
-
-.introduction-course-header {
-  &__top-link {
-    align-items: center;
-    display: flex;
-    grid-area: top-link;
-
-    &__link {
-      @include type-style("body-short-01");
-
-      align-items: center;
-      color: $purple-70;
-      display: flex;
-      gap: $spacing-04;
-    }
-  }
-}
-</style>
