@@ -60,20 +60,12 @@ export default class IntroductionCourseHeader extends Vue {
 </script>
 
 <style lang="scss" scoped>
-  $top-link-height: 4.375rem;
-  $top-link-height-large: 3.75rem;
-
   .introduction-course-header {
     &__back-link {
       position: absolute;
-      height: $top-link-height;
 
       // TODO: Remove !important when updating AppNavBackLink with carbon grid
       padding-left: 1rem !important;
-
-      @include mq($until: large) {
-        height: $top-link-height-large;
-      }
     }
   }
 </style>
