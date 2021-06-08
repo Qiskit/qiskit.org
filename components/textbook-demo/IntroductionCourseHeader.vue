@@ -11,40 +11,21 @@
         </BasicLink>
       </div>
 
-      <div class="introduction-course-header__main">
-        <div>
-          <AppPageHeaderTitle>
-            Introduction to Quantum Computing
-          </AppPageHeaderTitle>
-          <img
-            class="introduction-course-header__main-image"
-            src="/images/textbook-demo/learning-paths/introduction-course/header.jpg"
-          >
-          <div class="introduction-course-header__description">
-            <p>
-              This short learning path contains around 3 hours of content and is
-              aimed at self-learners from all backgrounds (technical and
-              non-technical). The aim of this course is to give a solid
-              understanding of the principles behind quantum computing,
-              focussing on developing intuition. After this course, you will
-              have a fair understanding of quantum computing and Qiskit, as well
-              as a short project demonstrating it. You should then be able to
-              jump straight into many of the other learning paths in this
-              textbook when they are ready, including traditional algorithms and
-              protocols, near term quantum algorithms, and quantum machine
-              learning.
-            </p>
-          </div>
-        </div>
-        <AppCta v-bind="startLearningCTA" />
-      </div>
-
-      <div class="introduction-course-header__aside">
-        <img
-          class="introduction-course-header__aside-image"
-          src="/images/textbook-demo/learning-paths/introduction-course/header.jpg"
-        >
-      </div>
+      <AppPageHeaderWithImage
+        :cta="startLearningCTA"
+        :img-link="headerImg"
+      >
+        <template slot="title">
+          {{ headerTitle }}
+        </template>
+        <template slot="description">
+          <p
+            v-for="(paragraph, index) in headerDescription"
+            :key="index"
+            v-text="paragraph"
+          />
+        </template>
+      </AppPageHeaderWithImage>
     </div>
   </header>
 </template>
@@ -56,6 +37,21 @@ import { GeneralLink, textbookDemoIntroductionCourseStartLearningUrl } from '~/c
 
 @Component
 export default class IntroductionCourseHeader extends Vue {
+  headerTitle = 'Introduction to Quantum Computing'
+  headerDescription = [`This short learning path contains around 3 hours of content and is
+    aimed at self-learners from all backgrounds (technical and
+    non-technical). The aim of this course is to give a solid
+    understanding of the principles behind quantum computing,
+    focussing on developing intuition. After this course, you will
+    have a fair understanding of quantum computing and Qiskit, as well
+    as a short project demonstrating it. You should then be able to
+    jump straight into many of the other learning paths in this
+    textbook when they are ready, including traditional algorithms and
+    protocols, near term quantum algorithms, and quantum machine
+    learning.`]
+
+  headerImg = '/images/textbook-demo/learning-paths/introduction-course/header.jpg'
+
   startLearningCTA: GeneralLink = {
     url: textbookDemoIntroductionCourseStartLearningUrl,
     label: 'Start learning',
