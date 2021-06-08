@@ -30,19 +30,19 @@ const RECORD_FIELDS = Object.freeze({
   startDate: 'Start Date',
   endDate: 'End Date',
   typeOfEvent: 'Type of Event',
-  eventWebsite: 'Event Website',
+  eventWebsite: 'Website',
   location: 'Event Location',
   region: 'Region',
-  image: 'Picture?',
+  image: 'Image / Icon',
   institution: 'Institution',
-  showOnEventsPage: 'SUZIE - for website?',
-  showOnSeminarSeriesPage: 'PAUL - Seminar Site',
-  speaker: 'Speaker'
+  showOnEventsPage: 'Add to Event Site',
+  showOnSeminarSeriesPage: 'Add to Seminar Series Site',
+  speaker: 'Speaker (S.S.)'
 } as const)
 
 function getEventsQuery (apiKey: string, days: number, view: string, filters: string[] = []): Airtable.Query<{}> {
   const { startDate } = RECORD_FIELDS
-  const base = new Airtable({ apiKey }).base('appkaaRF2QdwfusP1')
+  const base = new Airtable({ apiKey }).base('appYREKB18uC7y8ul')
 
   const formulaFilters = [
     `DATETIME_DIFF({${startDate}}, TODAY(), 'days') ${days > 0 ? '<=' : '>='} ${days}`,
@@ -52,7 +52,7 @@ function getEventsQuery (apiKey: string, days: number, view: string, filters: st
 
   const filterByFormula = `AND(${formulaFilters.join(',')})`
 
-  return base('Events Main View').select({
+  return base('Event Calendar').select({
     filterByFormula,
     sort: [{ field: startDate, direction: days > 0 ? 'asc' : 'desc' }],
     view
@@ -63,7 +63,7 @@ async function fetchCommunityEvents (apiKey: string, { days }: { days: any }): P
   const { showOnEventsPage } = RECORD_FIELDS
   const communityEvents: CommunityEvent[] = []
 
-  await getEventsQuery(apiKey, days, 'Main List', [`{${showOnEventsPage}}`]).eachPage((records, nextPage) => {
+  await getEventsQuery(apiKey, days, 'Add to Event Site', [`{${showOnEventsPage}}`]).eachPage((records, nextPage) => {
     for (const record of records) {
       const communityEvent = convertToCommunityEvent(record)
       communityEvents.push(communityEvent)
@@ -78,7 +78,7 @@ async function fetchSeminarSeriesEvents (apiKey: string, { days }: { days: any }
   const { showOnSeminarSeriesPage } = RECORD_FIELDS
   const seminarSeriesEvents: SeminarSeriesEvent[] = []
 
-  await getEventsQuery(apiKey, days, 'Seminar Series Website DO NOT MODIFY', [`{${showOnSeminarSeriesPage}}`]).eachPage((records, nextPage) => {
+  await getEventsQuery(apiKey, days, 'Seminar Series ONLY', [`{${showOnSeminarSeriesPage}}`]).eachPage((records, nextPage) => {
     for (const record of records) {
       const seminarSeriesEvent = convertToSeminarSeriesEvent(record)
 
@@ -98,7 +98,7 @@ function convertToCommunityEvent (record: any): CommunityEvent {
     types: getTypes(record),
     image: getImage(record),
     location: getLocation(record),
-    region: getRegion(record),
+    regions: getRegions(record),
     date: formatDates(...getDates(record)),
     to: getWebsite(record)
   }
@@ -149,11 +149,12 @@ function getImage (record: any): string {
 }
 
 function getLocation (record: any): string {
-  return record.get(RECORD_FIELDS.location) || getRegion(record)
+  return record.get(RECORD_FIELDS.location) || WORLD_REGIONS.tbd
 }
 
-function getRegion (record: any): WorldRegion {
-  return record.get(RECORD_FIELDS.region) || WORLD_REGIONS.tbd
+function getRegions (record: any): WorldRegion[] {
+  const recordRegion = record.get(RECORD_FIELDS.region)
+  return recordRegion || [WORLD_REGIONS.tbd]
 }
 
 function getDates (record: any): [Date, Date|undefined] {
@@ -194,7 +195,7 @@ function dateParts (date: Date): [string, string, string] {
 }
 
 function getWebsite (record: any): string {
-  return record.get('Event Website')
+  return record.get('Website')
 }
 
 export {
@@ -206,7 +207,7 @@ export {
   getTypes,
   getImage,
   getLocation,
-  getRegion,
+  getRegions,
   getWebsite,
   getDates,
   formatDates,

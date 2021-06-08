@@ -1,24 +1,19 @@
 const COMMUNITY_EVENT_TYPES = Object.freeze({
   hackathon: 'Hackathon',
   camp: 'Camp',
-  unconference: 'Unconference',
   industryEvent: 'Industry Event',
   workshop: 'Workshop',
-  talks: 'Talks',
-  online: 'Online'
+  challenge: 'Challenge',
+  networking: 'Networking',
+  talks: 'Talks'
 } as const)
 
 const WORLD_REGIONS = Object.freeze({
-  americas: 'Americas',
+  northAmerica: 'North America',
+  southAmerica: 'South America',
   asiaPacific: 'Asia Pacific',
   europe: 'Europe',
   africa: 'Africa',
-  // TODO: Remove when "Online" is under "Type of Event" in Airtable. Right now
-  // it is a region but the event squad expressed its will of "Online" being an
-  // event type.
-  //
-  // See also:
-  // https://github.com/Qiskit/qiskit.org/issues/526
   online: 'Online',
   tbd: 'TBD'
 } as const)
@@ -38,7 +33,7 @@ type CommunityEvent = {
   // See also:
   // https://github.com/Qiskit/qiskit.org/issues/527
   location: string,
-  region: WorldRegion,
+  regions: WorldRegion[],
   date: string,
   to: string
 }
@@ -59,19 +54,21 @@ type FilterSetPayload = {
 }
 
 const WORLD_REGION_OPTIONS = Object.freeze([
-  WORLD_REGIONS.americas,
+  WORLD_REGIONS.northAmerica,
+  WORLD_REGIONS.southAmerica,
   WORLD_REGIONS.asiaPacific,
   WORLD_REGIONS.europe,
-  WORLD_REGIONS.africa
+  WORLD_REGIONS.africa,
+  WORLD_REGIONS.online
 ])
 const COMMUNITY_EVENT_TYPE_OPTIONS = Object.freeze([
   COMMUNITY_EVENT_TYPES.hackathon,
   COMMUNITY_EVENT_TYPES.camp,
-  COMMUNITY_EVENT_TYPES.unconference,
   COMMUNITY_EVENT_TYPES.industryEvent,
   COMMUNITY_EVENT_TYPES.workshop,
-  COMMUNITY_EVENT_TYPES.talks,
-  COMMUNITY_EVENT_TYPES.online
+  COMMUNITY_EVENT_TYPES.challenge,
+  COMMUNITY_EVENT_TYPES.networking,
+  COMMUNITY_EVENT_TYPES.talks
 ])
 
 export {
@@ -124,15 +121,15 @@ export default {
 
       if (noTypeFilters && noRegionFilters) { return events }
 
+      if (noRegionFilters) { return filterBy(events, typeFilters, 'types') }
+
+      if (noTypeFilters) { return filterBy(events, regionFilters, 'regions') }
+
       const eventsAfterApplyTypeFilter = filterBy(events, typeFilters, 'types')
 
-      return filterBy(eventsAfterApplyTypeFilter, regionFilters, 'region')
+      return filterBy(eventsAfterApplyTypeFilter, regionFilters, 'regions')
 
       function filterBy (allEvents: CommunityEvent[], selectedFilters: string[], propToFilter: keyof CommunityEvent) {
-        const noFilters = selectedFilters.length === 0
-
-        if (noFilters) { return allEvents }
-
         return allEvents.filter((event) => {
           const propValue = event[propToFilter] || []
           const valueArray = Array.isArray(propValue) ? propValue : [propValue]
