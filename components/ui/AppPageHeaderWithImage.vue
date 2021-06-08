@@ -1,13 +1,16 @@
 <template>
   <header class="app-page-header-with-img">
     <div class="bx--grid">
-      <div class="bx--row">
+      <div v-if="backLink" class="bx--row app-page-header-with-img__back-link">
+        <AppNavBackLink v-bind="backLink" />
+      </div>
+      <div class="bx--row app-page-header-with-img__content">
         <main class="bx--col app-page-header-with-img__main">
           <div>
             <h1 class="app-page-header-with-img__headline">
               <slot name="title" />
             </h1>
-            <div class="bx--col-lg-0 bx--col-md-0 bx--col-sm app-page-header-with-img__image">
+            <div class="bx--col-lg-0 bx--col-md-0 app-page-header-with-img__image">
               <slot name="image" />
             </div>
             <div class="app-page-header-with-img__description">
@@ -32,6 +35,7 @@ import { GeneralLink } from '~/constants/appLinks'
 @Component
 export default class AppPageHeaderWithImage extends Vue {
   @Prop({ type: Object, required: true }) cta!: GeneralLink
+  @Prop({ type: Object, required: false }) backLink!: GeneralLink
 }
 </script>
 
@@ -39,10 +43,21 @@ export default class AppPageHeaderWithImage extends Vue {
 .app-page-header-with-img {
   @include responsive-grid-bg-strip("/images/grid/grid-hero-learn.svg", auto, 28rem);
 
-  padding-top: $layout-06;
+  &__back-link {
+    height: 0;
 
-  @include mq($until: medium) {
-    padding-top: $layout-04;
+    ::v-deep .app-nav-back-link{
+      padding-left: $spacing-05;
+      margin: 0;
+    }
+  }
+
+  &__content {
+    padding-top: $layout-06;
+
+    @include mq($until: medium) {
+      padding-top: $layout-04;
+    }
   }
 
   &__main {

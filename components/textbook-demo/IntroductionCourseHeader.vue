@@ -1,15 +1,6 @@
 <template>
   <header class="introduction-course-header">
-    <div class="bx--grid">
-      <div class="bx--row">
-        <AppNavBackLink
-          label="Home"
-          url="/textbook-demo"
-          class="introduction-course-header__back-link"
-        />
-      </div>
-    </div>
-    <AppPageHeaderWithImage :cta="startLearningCTA">
+    <AppPageHeaderWithImage :cta="startLearningCTA" :back-link="backToTextbookHomeLink">
       <template slot="title">
         {{ headerTitle }}
       </template>
@@ -49,6 +40,14 @@ export default class IntroductionCourseHeader extends Vue {
 
   headerImg = '/images/textbook-demo/learning-paths/introduction-course/header.jpg'
 
+  backToTextbookHomeLink = {
+    url: '/textbook-demo',
+    label: 'Home',
+    segment: {
+      action: 'introduction-course > header > back-to-textbook-home'
+    }
+  }
+
   startLearningCTA: GeneralLink = {
     url: textbookDemoIntroductionCourseStartLearningUrl,
     label: 'Start learning',
@@ -58,14 +57,3 @@ export default class IntroductionCourseHeader extends Vue {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-  .introduction-course-header {
-    &__back-link {
-      position: absolute;
-
-      // TODO: Remove !important when updating AppNavBackLink with carbon grid
-      padding-left: 1rem !important;
-    }
-  }
-</style>
