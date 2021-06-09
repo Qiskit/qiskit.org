@@ -1,6 +1,20 @@
 <template>
   <main class="introduction-course-page">
-    <IntroductionCourseHeader />
+    <AppPageHeaderWithImage :cta="startLearningCTA" :back-link="backToTextbookHomeLink">
+      <template slot="title">
+        {{ headerTitle }}
+      </template>
+      <template slot="description">
+        <p
+          v-for="(paragraph, index) in headerDescription"
+          :key="index"
+          v-text="paragraph"
+        />
+      </template>
+      <template slot="image">
+        <img class="app-page-header-with-img__image" :src="headerImg">
+      </template>
+    </AppPageHeaderWithImage>
     <PrerequisiteMaterialSection class="introduction-course-page__section" />
     <ExternalRecommendedReadings class="introduction-course-page__section" :links="links" />
     <LearningPathPagesSection class="introduction-course-page__section" />
@@ -10,7 +24,7 @@
 <script lang="ts">
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
-import { GeneralLink } from '~/constants/appLinks'
+import { GeneralLink, textbookDemoIntroductionCourseStartLearningUrl } from '~/constants/appLinks'
 
 @Component({
   layout: 'default-max',
@@ -22,6 +36,37 @@ import { GeneralLink } from '~/constants/appLinks'
 })
 export default class IntroductionCoursePage extends QiskitPage {
   routeName: string = 'introduction-course'
+
+  headerTitle = 'Introduction to Quantum Computing'
+  headerDescription = [`This short learning path contains around 3 hours of content and is
+    aimed at self-learners from all backgrounds (technical and
+    non-technical). The aim of this course is to give a solid
+    understanding of the principles behind quantum computing,
+    focussing on developing intuition. After this course, you will
+    have a fair understanding of quantum computing and Qiskit, as well
+    as a short project demonstrating it. You should then be able to
+    jump straight into many of the other learning paths in this
+    textbook when they are ready, including traditional algorithms and
+    protocols, near term quantum algorithms, and quantum machine
+    learning.`]
+
+  headerImg = '/images/textbook-demo/learning-paths/introduction-course/header.jpg'
+
+  backToTextbookHomeLink = {
+    url: '/textbook-demo',
+    label: 'Home',
+    segment: {
+      action: `${this.routeName} > header > back-to-textbook-home`
+    }
+  }
+
+  startLearningCTA: GeneralLink = {
+    url: textbookDemoIntroductionCourseStartLearningUrl,
+    label: 'Start learning',
+    segment: {
+      action: `${this.routeName} > header > introduction`
+    }
+  }
 
   segmentActionBase = `${this.routeName} > external-recommended-readings >`
 
