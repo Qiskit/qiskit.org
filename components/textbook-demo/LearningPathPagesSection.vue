@@ -7,12 +7,10 @@
       <nav class="learning-path-pages-section__nav">
         <ul class="learning-paths">
           <li
-            v-for="{ label, progress, segment, url } in learningPaths"
+            v-for="{ label, segment, url } in learningPaths"
             :key="label"
             class="learning-path"
           >
-            <div class="learning-path__connection" />
-            <ProgressCircle absolute :progress="progress" />
             <BasicLink
               class="learning-path__entry"
               :class="{ active: label === activeLearningPathLabel }"
@@ -57,7 +55,6 @@ import { SegmentData, textbookDemoIntroductionCourseStartLearningUrl } from '~/c
 interface LearningPath {
   image: string;
   label: string;
-  progress: Number;
   segment: SegmentData;
   url: string;
 }
@@ -71,35 +68,30 @@ export default class LearningPathPagesSection extends Vue {
     {
       image: 'introduction-page-preview.png',
       label: 'Introduction',
-      progress: 1,
       segment: { action: `${this.segmentActionBase} introduction` },
       url: textbookDemoIntroductionCourseStartLearningUrl
     },
     {
       image: 'the-atoms-of-computation-page-preview.png',
       label: 'The Atoms of Computation',
-      progress: 1,
       segment: { action: `${this.segmentActionBase} the-atoms-of-computation` },
       url: 'https://platypus.qiskit.org/course/learning-states-and-qubits/the-atoms-of-computation'
     },
     {
       image: 'representing-qubits-states-page-preview.png',
       label: 'Representing Qubit States',
-      progress: 0.6,
       segment: { action: `${this.segmentActionBase} representing-qubits-states` },
       url: 'https://platypus.qiskit.org/course/learning-states-and-qubits/representing-qubit-states'
     },
     {
       image: 'single-qubits-gates-page-preview.png',
       label: 'Single Qubits Gates',
-      progress: 0,
       segment: { action: `${this.segmentActionBase} single-qubits-gates` },
       url: 'https://platypus.qiskit.org/course/learning-states-and-qubits/single-qubit-gates'
     },
     {
       image: 'the-case-for-quantum-page-preview.png',
       label: 'The Case for Quantum Computers',
-      progress: 0,
       segment: { action: `${this.segmentActionBase} the-case-for-quantum` },
       url: 'https://platypus.qiskit.org/course/learning-states-and-qubits/the-case-for-quantum-computers'
     }
@@ -127,20 +119,8 @@ export default class LearningPathPagesSection extends Vue {
     this.activeLearningPathLabel = learningPathLabel
   }
 
-  selectFirstUnfinishedLearningPath () {
-    const firstUnfinishedLearningPath = this.learningPaths.find(
-      ({ progress }) => progress < 1
-    )
-
-    if (firstUnfinishedLearningPath) {
-      this.selectLearningPath(firstUnfinishedLearningPath.label)
-    } else {
-      this.selectLearningPath(this.learningPaths[0].label)
-    }
-  }
-
   created () {
-    this.selectFirstUnfinishedLearningPath()
+    this.selectLearningPath(this.learningPaths[0].label)
   }
 }
 </script>
@@ -199,7 +179,7 @@ export default class LearningPathPagesSection extends Vue {
   }
 
   &__nav {
-    margin-right: -$spacing-07;
+    margin-right: -$spacing-10;
 
     @include mq($until: medium) {
       margin-right: initial;
@@ -212,19 +192,9 @@ export default class LearningPathPagesSection extends Vue {
     margin: 0 0 0.5em;
     position: relative;
 
-    &__connection {
-      border: 1px black solid;
-      height: calc(100% - 12px);
-      left: 9px;
-      pointer-events: none;
-      position: absolute;
-      top: 24px;
-    }
-
     &__entry {
       color: $cool-gray-80;
       display: inline-block;
-      margin-left: 25px;
       max-width: calc(100% - 25px);
       padding: $spacing-02 $spacing-03;
       text-decoration: none;
