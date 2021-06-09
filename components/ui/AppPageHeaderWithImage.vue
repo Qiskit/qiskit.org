@@ -5,23 +5,16 @@
         <AppNavBackLink v-bind="backLink" />
       </div>
       <div class="bx--row app-page-header-with-img__content">
-        <main class="bx--col app-page-header-with-img__main">
-          <div>
-            <h1 class="app-page-header-with-img__headline">
-              <slot name="title" />
-            </h1>
-            <div class="bx--col-lg-0 bx--col-md-0 app-page-header-with-img__image">
-              <slot name="image" />
-            </div>
-            <div class="app-page-header-with-img__description">
-              <slot name="description" />
-            </div>
-          </div>
-          <AppCta v-if="cta" v-bind="cta" />
-        </main>
-        <aside class="bx--col-lg-5 bx--col-md-4 bx--col-sm-0 app-page-header-with-img__aside">
+        <h1 class="app-page-header-with-img__headline">
+          <slot name="title" />
+        </h1>
+        <div class="app-page-header-with-img__image">
           <slot name="image" />
-        </aside>
+        </div>
+        <div class="app-page-header-with-img__description">
+          <slot name="description" />
+        </div>
+        <AppCta v-if="cta" v-bind="cta" class="app-page-header-with-img__cta" />
       </div>
     </div>
   </header>
@@ -53,58 +46,55 @@ export default class AppPageHeaderWithImage extends Vue {
   }
 
   &__content {
-    padding-top: $layout-06;
+    display: grid;
+    padding: $spacing-12 $spacing-05 0;
+    gap: $spacing-05;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-areas:
+      "headline headline . img"
+      "description description . img"
+      ". . . img"
+      "cta . . img"
+    ;
+
+    @include mq($from: medium, $until: large) {
+      grid-template-areas:
+        "headline headline img img"
+        "description description img img"
+        ". . img img"
+        "cta . img img"
+    ;
+    }
 
     @include mq($until: medium) {
       padding-top: $layout-04;
-    }
-  }
-
-  &__main {
-    display: flex;
-    flex-flow: column;
-    gap: $spacing-05;
-    justify-content: space-between;
-
-    @include mq($until: x-large) {
-      gap: $spacing-06;
-    }
-
-    @include mq($until: large) {
-      gap: $spacing-09;
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "headline"
+        "img"
+        "description"
+        "cta"
+      ;
     }
   }
 
   &__headline {
+    grid-area: headline;
     margin-top: $spacing-07;
   }
 
-  &__description {
-    margin-top: $spacing-05;
-
-    @include mq($until: x-large) {
-      margin-top: $spacing-06;
-    }
-
-    @include mq($until: large) {
-      margin-top: $spacing-09;
-    }
-
-    @include mq($from: large) {
-      $grid-columns: 8/11; // Number of columns that the element will use at this breakpoint.
-
-      max-width: 100% * $grid-columns;
-    }
-  }
-
-  &__aside {
-    @include mq($until: medium) {
-      margin-top: $spacing-09;
-    }
-  }
-
   &__image {
+    grid-area: img;
     width: 100%;
+  }
+
+  &__description {
+    grid-area: description;
+    margin-top: $spacing-05;
+  }
+
+  &__cta {
+    grid-area: cta;
   }
 }
 </style>
