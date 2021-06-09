@@ -8,7 +8,7 @@
         <h1 class="app-page-header-with-img__headline">
           <slot name="title" />
         </h1>
-        <div class="app-page-header-with-img__image">
+        <div class="app-page-header-with-img__image-wrapper">
           <slot name="image" />
         </div>
         <div class="app-page-header-with-img__description">
@@ -50,21 +50,14 @@ export default class AppPageHeaderWithImage extends Vue {
     padding: $spacing-12 $spacing-05 0;
     gap: $spacing-05;
     grid-template-columns: repeat(4, 1fr);
+    // Set last row to 52px to not modify the height of the cta
+    grid-template-rows: repeat(3, auto) 52px;
     grid-template-areas:
-      "headline headline . img"
-      "description description . img"
-      ". . . img"
-      "cta . . img"
+      "headline headline img img"
+      "description description img img"
+      ". . img img"
+      "cta . img img"
     ;
-
-    @include mq($from: medium, $until: large) {
-      grid-template-areas:
-        "headline headline img img"
-        "description description img img"
-        ". . img img"
-        "cta . img img"
-    ;
-    }
 
     @include mq($until: medium) {
       padding-top: $layout-04;
@@ -83,9 +76,22 @@ export default class AppPageHeaderWithImage extends Vue {
     margin-top: $spacing-07;
   }
 
-  &__image {
+  &__image-wrapper {
     grid-area: img;
+    text-align: right;
+
+    @include mq($until: medium) {
+      text-align: center;
+    }
+  }
+
+  &__image {
     width: 100%;
+    max-width: 30rem;
+
+    @include mq($until: x-large) {
+      max-width: 22rem;
+    }
   }
 
   &__description {
