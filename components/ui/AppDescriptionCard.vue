@@ -11,7 +11,6 @@
         kind="ghost"
         class="app-description-card__cta"
       />
-      <slot name="footer-append" />
     </div>
   </article>
 </template>
