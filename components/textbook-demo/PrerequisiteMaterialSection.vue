@@ -5,17 +5,13 @@
     </h2>
     <div class="prerequisite-material-section__cards">
       <AppDescriptionCard
-        v-for="{ title, description, progress, segment, url } in prerequisites"
+        v-for="{ title, description, segment, url } in prerequisites"
         :key="title"
         :description="description"
         class="prerequisite-material-section__card"
         :cta="{ label: 'Go to page', segment, url}"
         :title="title"
-      >
-        <template slot="footer-append">
-          <ProgressCircle :progress="progress" />
-        </template>
-      </AppDescriptionCard>
+      />
     </div>
   </section>
 </template>
@@ -28,7 +24,6 @@ import { SegmentData } from '~/constants/appLinks'
 interface Prerequisite {
   title: string;
   description: string;
-  progress: Number;
   segment: SegmentData;
   url: string;
 }
@@ -42,7 +37,6 @@ export default class PrerequisiteMaterialSection extends Vue {
       title: 'Setting Up Your Environment',
       description:
         'This is a comprehensive guide for setting up your environment on your personal computer for working with Qiskit Textbook.',
-      progress: 1,
       segment: {
         action: `${this.segmentActionBase} setting-up-your-environment`
       },
@@ -53,7 +47,6 @@ export default class PrerequisiteMaterialSection extends Vue {
       title: 'Python and Jupyter Notebooks',
       description:
         "Python is a programming language where you don't need to compile. You can just run it line by line...",
-      progress: 0.5,
       segment: {
         action: `${this.segmentActionBase} python-and-jupyter-notebooks`
       },
@@ -64,7 +57,6 @@ export default class PrerequisiteMaterialSection extends Vue {
       title: 'What is Quantum?',
       description:
         '‘Quantum physics’ is a term widely used but much less understood. It is a mathematical model first used to describe the...',
-      progress: 0,
       segment: { action: `${this.segmentActionBase} what-is-quantum` },
       url:
         'https://platypus.qiskit.org/course/getting-started/what-is-quantum'
