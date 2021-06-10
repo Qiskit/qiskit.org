@@ -4,7 +4,7 @@
       Start learning in the way best for you
     </h2>
     <article
-      v-for="{ title, description, paths } in learningPaths"
+      v-for="{ title, description, courses } in learningSections"
       :key="title"
       class="bx--row"
     >
@@ -17,8 +17,8 @@
       <div class="bx--col-xlg-12 bx--col-lg-12">
         <div class="bx--row">
           <div
-            v-for="{ description: pathDescription, image, title: pathTitle, cta } in paths"
-            :key="pathTitle"
+            v-for="{ description: courseDescription, image, title: courseTitle, cta } in courses"
+            :key="courseTitle"
             class="bx--col-xlg-8"
           >
             <AppCard
@@ -27,10 +27,10 @@
               :segment="cta.segment"
               :image="image"
               image-contain
-              :title="pathTitle"
+              :title="courseTitle"
               class="start-learning-section__card"
             >
-              {{ pathDescription }}
+              {{ courseDescription }}
             </AppCard>
           </div>
         </div>
@@ -44,22 +44,22 @@ import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 import { GeneralLink } from '~/constants/appLinks'
 
-type Path = {
+type Course = {
   image: string,
   title: string,
   description: string,
   cta: GeneralLink
 }
 
-type LearningPath = {
+type LearningSection = {
   title: string,
   description: string,
-  paths: Path[],
+  courses: Course[],
 }
 
 @Component
 export default class StartLearningSection extends Vue {
-  learningPaths: LearningPath[] = [
+  learningSections: LearningSection[] = [
     {
       title: 'Courses',
       description: `Quantum computing is a big topic and working out where 
@@ -68,7 +68,7 @@ export default class StartLearningSection extends Vue {
       goals. If you’re looking for something specific, you can browse all
       content, and if you can’t find what you’re looking for you can ask the
       community on Slack.`,
-      paths: [
+      courses: [
         {
           image: '/images/textbook-demo/introduction-course.png',
           title: 'Introduction course',
@@ -126,7 +126,7 @@ export default class StartLearningSection extends Vue {
       title: 'University supplements',
       description: `Are you teaching a course on quantum computing? Qiskit
       provides freely available materials to enhance your course.`,
-      paths: [
+      courses: [
         {
           image: '/images/textbook-demo/quantum-lab.png',
           title: 'Labs',

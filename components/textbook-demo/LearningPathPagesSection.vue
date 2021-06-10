@@ -7,16 +7,16 @@
       <nav class="course-pages-section__nav">
         <ul class="courses">
           <li
-            v-for="{ label, segment, url } in learningPaths"
+            v-for="{ label, segment, url } in courses"
             :key="label"
             class="course"
           >
             <BasicLink
               class="course__entry"
-              :class="{ active: label === activeLearningPathLabel }"
+              :class="{ active: label === activeCourseLabel }"
               :segment="segment"
               :url="url"
-              @mouseenter="selectLearningPath(label)"
+              @mouseenter="selectCourse(label)"
             >
               {{ label }}
             </BasicLink>
@@ -31,14 +31,14 @@
         </div>
       </div>
       <div class="course-pages-section__main__preview">
-        <BasicLink :url="activeLearningPath.url">
+        <BasicLink :url="activeCourse.url">
           <img
             class="course-pages-section__main__preview__image"
-            :src="activeLearningPathPreviewImage"
+            :src="activeCoursePreviewImage"
           >
         </BasicLink>
         <AppCta
-          v-bind="activeLearningPath"
+          v-bind="activeCourse"
           label="Go to page"
           class="course-pages-section__main__preview__cta"
         />
@@ -52,7 +52,7 @@ import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 import { SegmentData, textbookDemoIntroductionCourseStartLearningUrl } from '~/constants/appLinks'
 
-interface LearningPath {
+interface Course {
   image: string;
   label: string;
   segment: SegmentData;
@@ -60,11 +60,11 @@ interface LearningPath {
 }
 
 @Component
-export default class LearningPathPagesSection extends Vue {
-  activeLearningPathLabel = '';
+export default class CoursePagesSection extends Vue {
+  activeCourseLabel = '';
   segmentActionBase = 'introduction-course > course >'
 
-  learningPaths: LearningPath[] = [
+  courses: Course[] = [
     {
       image: 'introduction-page-preview.png',
       label: 'Introduction',
@@ -97,30 +97,30 @@ export default class LearningPathPagesSection extends Vue {
     }
   ]
 
-  get activeLearningPath () {
-    const activeLearningPath = this.learningPaths.find(
-      ({ label }) => label === this.activeLearningPathLabel
+  get activeCourse () {
+    const activeCourse = this.courses.find(
+      ({ label }) => label === this.activeCourseLabel
     )
-    return activeLearningPath || null
+    return activeCourse || null
   }
 
-  get activeLearningPathPreviewImage () {
-    if (!this.activeLearningPath) {
+  get activeCoursePreviewImage () {
+    if (!this.activeCourse) {
       return ''
     }
 
     const imageUrlBase =
       '/images/textbook-demo/course/introduction-course'
 
-    return `${imageUrlBase}/${this.activeLearningPath.image}`
+    return `${imageUrlBase}/${this.activeCourse.image}`
   }
 
-  selectLearningPath (learningPathLabel: string) {
-    this.activeLearningPathLabel = learningPathLabel
+  selectCourse (courseLabel: string) {
+    this.activeCourseLabel = courseLabel
   }
 
   created () {
-    this.selectLearningPath(this.learningPaths[0].label)
+    this.selectCourse(this.courses[0].label)
   }
 }
 </script>
