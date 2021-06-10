@@ -61,10 +61,10 @@ type LearningPath = {
 export default class StartLearningSection extends Vue {
   learningPaths: LearningPath[] = [
     {
-      title: 'Learning paths',
+      title: 'Courses',
       description: `Quantum computing is a big topic and working out where 
       to start can be difficult. In this interactive textbook, the content
-      is organised into “learning paths” with clear prerequisites and end
+      is organised into courses with clear prerequisites and end
       goals. If you’re looking for something specific, you can browse all
       content, and if you can’t find what you’re looking for you can ask the
       community on Slack.`,
@@ -78,7 +78,7 @@ export default class StartLearningSection extends Vue {
           or just curious as to what it's all about, this course will take
           you from zero to one, without the hand waving.`,
           cta: {
-            label: 'Go to this learning path',
+            label: 'Go to this course',
             url: '/textbook-demo/course/introduction-course',
             segment: { action: 'textbook-demo > course > introduction-course' }
           }
@@ -99,9 +99,9 @@ export default class StartLearningSection extends Vue {
         {
           image: '/images/textbook-demo/quantum-hardware.png',
           title: 'Quantum hardware',
-          description: `This learning path is currently under construction
+          description: `This course is currently under construction
           and is an ongoing effort. Please check back after the beta phase
-          for an update on the progress of this learning path.`,
+          for an update on the progress of this course.`,
           cta: {
             label: 'Under construction',
             url: '/textbook-demo',
@@ -111,9 +111,9 @@ export default class StartLearningSection extends Vue {
         {
           image: '/images/textbook-demo/quantum-machine-learning.png',
           title: 'Quantum machine learning',
-          description: `This learning path is currently under construction
+          description: `This course is currently under construction
           and is an ongoing effort. Please check back after the beta phase
-          for an update on the progress of this learning path.`,
+          for an update on the progress of this course.`,
           cta: {
             label: 'Under construction',
             url: '/textbook-demo',

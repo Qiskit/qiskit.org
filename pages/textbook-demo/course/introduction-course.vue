@@ -39,14 +39,14 @@ export default class IntroductionCoursePage extends QiskitPage {
   routeName: string = 'introduction-course'
 
   headerTitle = 'Introduction to Quantum Computing'
-  headerDescription = [`This short learning path contains around 3 hours of content and is
+  headerDescription = [`This short course contains around 3 hours of content and is
     aimed at self-learners from all backgrounds (technical and
     non-technical). The aim of this course is to give a solid
     understanding of the principles behind quantum computing,
     focussing on developing intuition. After this course, you will
     have a fair understanding of quantum computing and Qiskit, as well
     as a short project demonstrating it. You should then be able to
-    jump straight into many of the other learning paths in this
+    jump straight into many of the other courses in this
     textbook when they are ready, including traditional algorithms and
     protocols, near term quantum algorithms, and quantum machine
     learning.`]

@@ -2,7 +2,7 @@
   <section class="learning-path-pages-section">
     <div>
       <h2 class="copy__title">
-        Learning path pages
+        Course pages
       </h2>
       <nav class="learning-path-pages-section__nav">
         <ul class="learning-paths">
