@@ -20,34 +20,36 @@
         </EventCard>
       </template>
     </AppPageHeaderWithCard>
-    <AppMosaicSection
-      class="seminar-series-page__section"
-      :title="mosaicSectionTitle"
-      :elements="mosaicElements"
-    />
-    <AppDataTableSection
-      v-if="hasUpcomingEvents"
-      class="seminar-series-page__section"
-      :section-title="upcomingEventsSectionTitle"
-      :data-table-columns="seminarSeriesDataTableColumns"
-      :data-table-elements="upcomingEventsDataTable"
-    />
-    <AppDataTableSection
-      class="seminar-series-page__section"
-      :section-title="pastEventsSectionTitle"
-      :data-table-columns="seminarSeriesDataTableColumns"
-      :data-table-elements="pastEventsDataTable"
-    >
-      <AppCta
-        class="seminar-series-page__past-events-cta"
-        kind="ghost"
-        v-bind="showMorePastEventsCta"
+    <div class="bx--grid">
+      <AppMosaicSection
+        class="seminar-series-page__section"
+        :title="mosaicSectionTitle"
+        :elements="mosaicElements"
       />
-    </AppDataTableSection>
-    <AppHelpfulResourcesSection
-      class="seminar-series-page__section"
-      :resources="helpfulResources"
-    />
+      <AppDataTableSection
+        v-if="hasUpcomingEvents"
+        class="seminar-series-page__section"
+        :section-title="upcomingEventsSectionTitle"
+        :data-table-columns="seminarSeriesDataTableColumns"
+        :data-table-elements="upcomingEventsDataTable"
+      />
+      <AppDataTableSection
+        class="seminar-series-page__section"
+        :section-title="pastEventsSectionTitle"
+        :data-table-columns="seminarSeriesDataTableColumns"
+        :data-table-elements="pastEventsDataTable"
+      >
+        <AppCta
+          class="seminar-series-page__past-events-cta"
+          kind="ghost"
+          v-bind="showMorePastEventsCta"
+        />
+      </AppDataTableSection>
+      <AppHelpfulResourcesSection
+        class="seminar-series-page__section"
+        :resources="helpfulResources"
+      />
+    </div>
   </main>
 </template>
 
@@ -70,7 +72,8 @@ import {
     return {
       title: 'Qiskit Seminar Series'
     }
-  }
+  },
+  layout: 'default-max'
 })
 export default class SeminarSeriesPage extends QiskitPage {
   routeName = 'seminar-series'
@@ -242,8 +245,6 @@ export default class SeminarSeriesPage extends QiskitPage {
 <style lang="scss" scoped>
 .seminar-series-page {
   &__section {
-    @include contained();
-
     margin-top: $layout-05;
     margin-bottom: $layout-03;
 
