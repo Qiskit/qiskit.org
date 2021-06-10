@@ -2,7 +2,7 @@
   <article class="app-mega-dropdown">
     <label
       ref="filterWrapper"
-      class="app-mega-dropdown__filter-wrapper"
+      class="app-mega-dropdown__filter-wrapper bx--col-md-4 bx--col-lg-4"
       :class="`app-mega-dropdown__filter-wrapper_${kind}`"
     >
       <input
@@ -243,7 +243,6 @@ export default class AppMegaDropdownMenu extends Vue {
 
   &__filter-wrapper {
     display: flex;
-    width: 18rem;
     height: 2.5rem;
     justify-content: space-between;
     align-items: center;

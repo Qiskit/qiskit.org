@@ -1,5 +1,6 @@
 <template>
   <main class="introduction-course-page">
+    <TextbookDemoContentMenuSection />
     <AppPageHeaderWithImage :cta="startLearningCTA" :back-link="backToTextbookHomeLink">
       <template slot="title">
         {{ headerTitle }}
