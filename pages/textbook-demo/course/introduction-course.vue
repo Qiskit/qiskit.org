@@ -51,7 +51,7 @@ export default class IntroductionCoursePage extends QiskitPage {
     protocols, near term quantum algorithms, and quantum machine
     learning.`]
 
-  headerImg = '/images/textbook-demo/learning-paths/introduction-course/header.jpg'
+  headerImg = '/images/textbook-demo/course/introduction-course/header.jpg'
 
   backToTextbookHomeLink = {
     url: '/textbook-demo',

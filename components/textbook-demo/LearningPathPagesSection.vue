@@ -110,7 +110,7 @@ export default class LearningPathPagesSection extends Vue {
     }
 
     const imageUrlBase =
-      '/images/textbook-demo/learning-paths/introduction-course'
+      '/images/textbook-demo/course/introduction-course'
 
     return `${imageUrlBase}/${this.activeLearningPath.image}`
   }
