@@ -1,18 +1,18 @@
 <template>
-  <section class="learning-path-pages-section">
+  <section class="course-pages-section">
     <div>
       <h2 class="copy__title">
         Course pages
       </h2>
-      <nav class="learning-path-pages-section__nav">
-        <ul class="learning-paths">
+      <nav class="course-pages-section__nav">
+        <ul class="courses">
           <li
             v-for="{ label, segment, url } in learningPaths"
             :key="label"
-            class="learning-path"
+            class="course"
           >
             <BasicLink
-              class="learning-path__entry"
+              class="course__entry"
               :class="{ active: label === activeLearningPathLabel }"
               :segment="segment"
               :url="url"
@@ -24,23 +24,23 @@
         </ul>
       </nav>
     </div>
-    <main class="learning-path-pages-section__main">
-      <div class="learning-path-pages-section__main__title-wrapper">
-        <div class="learning-path-pages-section__main__title copy__subtitle">
+    <main class="course-pages-section__main">
+      <div class="course-pages-section__main__title-wrapper">
+        <div class="course-pages-section__main__title copy__subtitle">
           Page preview
         </div>
       </div>
-      <div class="learning-path-pages-section__main__preview">
+      <div class="course-pages-section__main__preview">
         <BasicLink :url="activeLearningPath.url">
           <img
-            class="learning-path-pages-section__main__preview__image"
+            class="course-pages-section__main__preview__image"
             :src="activeLearningPathPreviewImage"
           >
         </BasicLink>
         <AppCta
           v-bind="activeLearningPath"
           label="Go to page"
-          class="learning-path-pages-section__main__preview__cta"
+          class="course-pages-section__main__preview__cta"
         />
       </div>
     </main>
@@ -126,7 +126,7 @@ export default class LearningPathPagesSection extends Vue {
 </script>
 
 <style lang="scss" scoped>
-.learning-path-pages-section {
+.course-pages-section {
   display: grid;
   column-gap: $spacing-07;
   grid-template-areas: ". main main .";
@@ -187,8 +187,8 @@ export default class LearningPathPagesSection extends Vue {
   }
 }
 
-.learning-paths {
-  .learning-path {
+.courses {
+  .course {
     margin: 0 0 0.5em;
     position: relative;
 
@@ -211,7 +211,7 @@ export default class LearningPathPagesSection extends Vue {
     }
 
     &:last-of-type {
-      .learning-path__connection {
+      .course__connection {
         display: none;
       }
     }
