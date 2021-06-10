@@ -79,7 +79,7 @@ export default class StartLearningSection extends Vue {
           you from zero to one, without the hand waving.`,
           cta: {
             label: 'Go to this learning path',
-            url: '/textbook-demo/learning-paths/introduction-course',
+            url: '/textbook-demo/course/introduction-course',
             segment: { action: 'textbook-demo > learning-paths > introduction-course' }
           }
         },
