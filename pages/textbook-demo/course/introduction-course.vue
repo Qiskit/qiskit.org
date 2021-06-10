@@ -18,7 +18,7 @@
     </AppPageHeaderWithImage>
     <PrerequisiteMaterialSection class="introduction-course-page__section" />
     <ExternalRecommendedReadings class="introduction-course-page__section" :links="links" />
-    <LearningPathPagesSection class="introduction-course-page__section" />
+    <CoursePagesSection class="introduction-course-page__section" />
   </main>
 </template>
 
