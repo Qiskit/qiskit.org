@@ -80,7 +80,7 @@ export default class StartLearningSection extends Vue {
           cta: {
             label: 'Go to this learning path',
             url: '/textbook-demo/course/introduction-course',
-            segment: { action: 'textbook-demo > learning-paths > introduction-course' }
+            segment: { action: 'textbook-demo > course > introduction-course' }
           }
         },
         {
@@ -93,7 +93,7 @@ export default class StartLearningSection extends Vue {
           cta: {
             label: 'Under construction',
             url: '/textbook-demo',
-            segment: { action: 'textbook-demo > learning-paths > traditional-algorithms-and-protocols' }
+            segment: { action: 'textbook-demo > course > traditional-algorithms-and-protocols' }
           }
         },
         {
@@ -105,7 +105,7 @@ export default class StartLearningSection extends Vue {
           cta: {
             label: 'Under construction',
             url: '/textbook-demo',
-            segment: { action: 'textbook-demo > learning-paths > quantum-hardware' }
+            segment: { action: 'textbook-demo > course > quantum-hardware' }
           }
         },
         {
@@ -117,7 +117,7 @@ export default class StartLearningSection extends Vue {
           cta: {
             label: 'Under construction',
             url: '/textbook-demo',
-            segment: { action: 'textbook-demo > learning-paths > quantum-machine-learning' }
+            segment: { action: 'textbook-demo > course > quantum-machine-learning' }
           }
         }
       ]

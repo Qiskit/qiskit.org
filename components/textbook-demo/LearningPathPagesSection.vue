@@ -62,7 +62,7 @@ interface LearningPath {
 @Component
 export default class LearningPathPagesSection extends Vue {
   activeLearningPathLabel = '';
-  segmentActionBase = 'introduction-course > learning-paths >'
+  segmentActionBase = 'introduction-course > course >'
 
   learningPaths: LearningPath[] = [
     {
