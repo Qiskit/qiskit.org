@@ -67,33 +67,33 @@ export default class CoursePagesSection extends Vue {
   courses: Course[] = [
     {
       image: 'introduction-page-preview.png',
-      label: 'Introduction',
-      segment: { action: `${this.segmentActionBase} introduction` },
+      label: 'Why quantum computing?',
+      segment: { action: `${this.segmentActionBase} why-quantum-computing` },
       url: textbookDemoIntroductionCourseStartLearningUrl
     },
     {
       image: 'the-atoms-of-computation-page-preview.png',
       label: 'The Atoms of Computation',
       segment: { action: `${this.segmentActionBase} the-atoms-of-computation` },
-      url: 'https://platypus.qiskit.org/course/learning-states-and-qubits/the-atoms-of-computation'
+      url: 'https://platypus.qiskit.org/course/introduction/the-atoms-of-computation'
     },
     {
       image: 'representing-qubits-states-page-preview.png',
       label: 'Representing Qubit States',
       segment: { action: `${this.segmentActionBase} representing-qubits-states` },
-      url: 'https://platypus.qiskit.org/course/learning-states-and-qubits/representing-qubit-states'
+      url: 'https://platypus.qiskit.org/course/introduction/representing-qubit-states'
     },
     {
       image: 'single-qubits-gates-page-preview.png',
       label: 'Single Qubits Gates',
       segment: { action: `${this.segmentActionBase} single-qubits-gates` },
-      url: 'https://platypus.qiskit.org/course/learning-states-and-qubits/single-qubit-gates'
+      url: 'https://platypus.qiskit.org/course/introduction/single-qubit-gates'
     },
     {
       image: 'the-case-for-quantum-page-preview.png',
       label: 'The Case for Quantum Computers',
-      segment: { action: `${this.segmentActionBase} the-case-for-quantum` },
-      url: 'https://platypus.qiskit.org/course/learning-states-and-qubits/the-case-for-quantum-computers'
+      segment: { action: `${this.segmentActionBase} the-case-for-quantum-computers` },
+      url: 'https://platypus.qiskit.org/course/introduction/the-case-for-quantum-computers'
     }
   ]
 
