@@ -49,7 +49,7 @@ export default class TextbookDemoHeader extends (Vue as VueConstructor<VueCompon
     this.disconnectAppMegaDropdownMenuObserver()
   }
 
-  private connectAppMegaDropdownMenuObserver () {
+  connectAppMegaDropdownMenuObserver () {
     const appMegaDropdownMenuElement = this.$el.querySelector(`#${this.appMegaDropdownMenuId}`)
 
     if (appMegaDropdownMenuElement) {
@@ -58,7 +58,7 @@ export default class TextbookDemoHeader extends (Vue as VueConstructor<VueCompon
     }
   }
 
-  private disconnectAppMegaDropdownMenuObserver () {
+  disconnectAppMegaDropdownMenuObserver () {
     if (this.appMegaDropdownMenuObserver) {
       this.appMegaDropdownMenuObserver.disconnect()
     }
