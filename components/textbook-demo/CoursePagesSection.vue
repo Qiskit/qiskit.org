@@ -1,7 +1,7 @@
 <template>
   <section class="course-pages-section">
     <div>
-      <h2 class="copy__title">
+      <h2>
         Course pages
       </h2>
       <nav class="course-pages-section__nav">

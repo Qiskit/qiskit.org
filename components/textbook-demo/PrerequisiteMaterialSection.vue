@@ -1,6 +1,6 @@
 <template>
   <section class="prerequisite-material-section">
-    <h2 class="copy__title">
+    <h2>
       Prerequisite material
     </h2>
     <div class="prerequisite-material-section__cards">
