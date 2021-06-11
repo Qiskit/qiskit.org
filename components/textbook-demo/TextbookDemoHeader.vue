@@ -16,6 +16,12 @@
         <AppCta v-bind="startLearningCTA" class="textbook-demo-header__cta" />
       </div>
     </div>
+    <transition name="scroll-in">
+      <TextbookDemoContentMenuSection
+        v-if="!appMegaDropdownMenuIsVisible"
+        class="textbook-demo-header__dropdown_fixed"
+      />
+    </transition>
   </header>
 </template>
 
@@ -116,10 +122,22 @@ export default class TextbookDemoHeader extends (Vue as VueConstructor<VueCompon
 
   &__dropdown {
     margin-top: $layout-03;
+
+    &_fixed {
+      position: fixed;
+      transition: .3s ease-in-out;
+      top: 0;
+      width: 100%;
+    }
   }
 
   &__cta {
     align-self: flex-end;
   }
+}
+
+.scroll-in-enter,
+.scroll-in-leave-to {
+  margin-top: -40px;
 }
 </style>
