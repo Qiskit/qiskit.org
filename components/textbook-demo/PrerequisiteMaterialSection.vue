@@ -1,6 +1,6 @@
 <template>
   <section class="prerequisite-material-section">
-    <h2 class="copy__title">
+    <h2>
       Prerequisite material
     </h2>
     <div class="prerequisite-material-section__cards">
@@ -41,7 +41,7 @@ export default class PrerequisiteMaterialSection extends Vue {
         action: `${this.segmentActionBase} setting-up-your-environment`
       },
       url:
-        'https://platypus.qiskit.org/course/prerequisites/environment-setup-guide-to-work-with-qiskit-textbook'
+        'https://platypus.qiskit.org/course/ch-prerequisites/environment-setup-guide-to-work-with-qiskit-textbook'
     },
     {
       title: 'Python and Jupyter Notebooks',
@@ -51,7 +51,7 @@ export default class PrerequisiteMaterialSection extends Vue {
         action: `${this.segmentActionBase} python-and-jupyter-notebooks`
       },
       url:
-        'https://platypus.qiskit.org/course/prerequisites/introduction-to-python-and-jupyter-notebooks'
+        'https://platypus.qiskit.org/course/ch-prerequisites/introduction-to-python-and-jupyter-notebooks'
     },
     {
       title: 'What is Quantum?',

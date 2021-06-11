@@ -1,22 +1,22 @@
 <template>
-  <section class="learning-path-pages-section">
+  <section class="course-pages-section">
     <div>
-      <h2 class="copy__title">
-        Learning path pages
+      <h2>
+        Course pages
       </h2>
-      <nav class="learning-path-pages-section__nav">
-        <ul class="learning-paths">
+      <nav class="course-pages-section__nav">
+        <ul class="courses">
           <li
-            v-for="{ label, segment, url } in learningPaths"
+            v-for="{ label, segment, url } in courses"
             :key="label"
-            class="learning-path"
+            class="course"
           >
             <BasicLink
-              class="learning-path__entry"
-              :class="{ active: label === activeLearningPathLabel }"
+              class="course__entry"
+              :class="{ active: label === activeCourseLabel }"
               :segment="segment"
               :url="url"
-              @mouseenter="selectLearningPath(label)"
+              @mouseenter="selectCourse(label)"
             >
               {{ label }}
             </BasicLink>
@@ -24,23 +24,23 @@
         </ul>
       </nav>
     </div>
-    <main class="learning-path-pages-section__main">
-      <div class="learning-path-pages-section__main__title-wrapper">
-        <div class="learning-path-pages-section__main__title copy__subtitle">
+    <main class="course-pages-section__main">
+      <div class="course-pages-section__main__title-wrapper">
+        <div class="course-pages-section__main__title copy__subtitle">
           Page preview
         </div>
       </div>
-      <div class="learning-path-pages-section__main__preview">
-        <BasicLink :url="activeLearningPath.url">
+      <div class="course-pages-section__main__preview">
+        <BasicLink :url="activeCourse.url">
           <img
-            class="learning-path-pages-section__main__preview__image"
-            :src="activeLearningPathPreviewImage"
+            class="course-pages-section__main__preview__image"
+            :src="activeCoursePreviewImage"
           >
         </BasicLink>
         <AppCta
-          v-bind="activeLearningPath"
+          v-bind="activeCourse"
           label="Go to page"
-          class="learning-path-pages-section__main__preview__cta"
+          class="course-pages-section__main__preview__cta"
         />
       </div>
     </main>
@@ -52,7 +52,7 @@ import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 import { SegmentData, textbookDemoIntroductionCourseStartLearningUrl } from '~/constants/appLinks'
 
-interface LearningPath {
+interface Course {
   image: string;
   label: string;
   segment: SegmentData;
@@ -60,73 +60,73 @@ interface LearningPath {
 }
 
 @Component
-export default class LearningPathPagesSection extends Vue {
-  activeLearningPathLabel = '';
-  segmentActionBase = 'introduction-course > learning-paths >'
+export default class CoursePagesSection extends Vue {
+  activeCourseLabel = '';
+  segmentActionBase = 'introduction-course > course >'
 
-  learningPaths: LearningPath[] = [
+  courses: Course[] = [
     {
       image: 'introduction-page-preview.png',
-      label: 'Introduction',
-      segment: { action: `${this.segmentActionBase} introduction` },
+      label: 'Why quantum computing?',
+      segment: { action: `${this.segmentActionBase} why-quantum-computing` },
       url: textbookDemoIntroductionCourseStartLearningUrl
     },
     {
       image: 'the-atoms-of-computation-page-preview.png',
       label: 'The Atoms of Computation',
       segment: { action: `${this.segmentActionBase} the-atoms-of-computation` },
-      url: 'https://platypus.qiskit.org/course/learning-states-and-qubits/the-atoms-of-computation'
+      url: 'https://platypus.qiskit.org/course/introduction/the-atoms-of-computation'
     },
     {
       image: 'representing-qubits-states-page-preview.png',
       label: 'Representing Qubit States',
       segment: { action: `${this.segmentActionBase} representing-qubits-states` },
-      url: 'https://platypus.qiskit.org/course/learning-states-and-qubits/representing-qubit-states'
+      url: 'https://platypus.qiskit.org/course/introduction/representing-qubit-states'
     },
     {
       image: 'single-qubits-gates-page-preview.png',
       label: 'Single Qubits Gates',
       segment: { action: `${this.segmentActionBase} single-qubits-gates` },
-      url: 'https://platypus.qiskit.org/course/learning-states-and-qubits/single-qubit-gates'
+      url: 'https://platypus.qiskit.org/course/introduction/single-qubit-gates'
     },
     {
       image: 'the-case-for-quantum-page-preview.png',
       label: 'The Case for Quantum Computers',
-      segment: { action: `${this.segmentActionBase} the-case-for-quantum` },
-      url: 'https://platypus.qiskit.org/course/learning-states-and-qubits/the-case-for-quantum-computers'
+      segment: { action: `${this.segmentActionBase} the-case-for-quantum-computers` },
+      url: 'https://platypus.qiskit.org/course/introduction/the-case-for-quantum-computers'
     }
   ]
 
-  get activeLearningPath () {
-    const activeLearningPath = this.learningPaths.find(
-      ({ label }) => label === this.activeLearningPathLabel
+  get activeCourse () {
+    const activeCourse = this.courses.find(
+      ({ label }) => label === this.activeCourseLabel
     )
-    return activeLearningPath || null
+    return activeCourse || null
   }
 
-  get activeLearningPathPreviewImage () {
-    if (!this.activeLearningPath) {
+  get activeCoursePreviewImage () {
+    if (!this.activeCourse) {
       return ''
     }
 
     const imageUrlBase =
-      '/images/textbook-demo/learning-paths/introduction-course'
+      '/images/textbook-demo/course/introduction-course'
 
-    return `${imageUrlBase}/${this.activeLearningPath.image}`
+    return `${imageUrlBase}/${this.activeCourse.image}`
   }
 
-  selectLearningPath (learningPathLabel: string) {
-    this.activeLearningPathLabel = learningPathLabel
+  selectCourse (courseLabel: string) {
+    this.activeCourseLabel = courseLabel
   }
 
   created () {
-    this.selectLearningPath(this.learningPaths[0].label)
+    this.selectCourse(this.courses[0].label)
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.learning-path-pages-section {
+.course-pages-section {
   display: grid;
   column-gap: $spacing-07;
   grid-template-areas: ". main main .";
@@ -187,8 +187,8 @@ export default class LearningPathPagesSection extends Vue {
   }
 }
 
-.learning-paths {
-  .learning-path {
+.courses {
+  .course {
     margin: 0 0 0.5em;
     position: relative;
 
@@ -211,7 +211,7 @@ export default class LearningPathPagesSection extends Vue {
     }
 
     &:last-of-type {
-      .learning-path__connection {
+      .course__connection {
         display: none;
       }
     }
