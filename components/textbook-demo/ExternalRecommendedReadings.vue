@@ -1,6 +1,6 @@
 <template>
   <section class="external-recommended-readings">
-    <h2 class="copy__title">
+    <h2>
       External recommended readings
     </h2>
     <AppLink

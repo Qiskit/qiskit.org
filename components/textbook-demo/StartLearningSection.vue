@@ -4,7 +4,7 @@
       Start learning in the way best for you
     </h2>
     <article
-      v-for="{ title, description, paths } in learningPaths"
+      v-for="{ title, description, courses } in learningSections"
       :key="title"
       class="bx--row"
     >
@@ -17,8 +17,8 @@
       <div class="bx--col-xlg-12 bx--col-lg-12">
         <div class="bx--row">
           <div
-            v-for="{ description: pathDescription, image, title: pathTitle, cta } in paths"
-            :key="pathTitle"
+            v-for="{ description: courseDescription, image, title: courseTitle, cta } in courses"
+            :key="courseTitle"
             class="bx--col-xlg-8"
           >
             <AppCard
@@ -27,10 +27,10 @@
               :segment="cta.segment"
               :image="image"
               image-contain
-              :title="pathTitle"
+              :title="courseTitle"
               class="start-learning-section__card"
             >
-              {{ pathDescription }}
+              {{ courseDescription }}
             </AppCard>
           </div>
         </div>
@@ -44,31 +44,31 @@ import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 import { GeneralLink } from '~/constants/appLinks'
 
-type Path = {
+type Course = {
   image: string,
   title: string,
   description: string,
   cta: GeneralLink
 }
 
-type LearningPath = {
+type LearningSection = {
   title: string,
   description: string,
-  paths: Path[],
+  courses: Course[],
 }
 
 @Component
 export default class StartLearningSection extends Vue {
-  learningPaths: LearningPath[] = [
+  learningSections: LearningSection[] = [
     {
-      title: 'Learning paths',
+      title: 'Courses',
       description: `Quantum computing is a big topic and working out where 
       to start can be difficult. In this interactive textbook, the content
-      is organised into “learning paths” with clear prerequisites and end
+      is organised into courses with clear prerequisites and end
       goals. If you’re looking for something specific, you can browse all
       content, and if you can’t find what you’re looking for you can ask the
       community on Slack.`,
-      paths: [
+      courses: [
         {
           image: '/images/textbook-demo/introduction-course.png',
           title: 'Introduction course',
@@ -78,9 +78,9 @@ export default class StartLearningSection extends Vue {
           or just curious as to what it's all about, this course will take
           you from zero to one, without the hand waving.`,
           cta: {
-            label: 'Go to this learning path',
-            url: '/textbook-demo/learning-paths/introduction-course',
-            segment: { action: 'textbook-demo > learning-paths > introduction-course' }
+            label: 'Go to this course',
+            url: '/textbook-demo/course/introduction-course',
+            segment: { action: 'textbook-demo > course > introduction-course' }
           }
         },
         {
@@ -93,31 +93,31 @@ export default class StartLearningSection extends Vue {
           cta: {
             label: 'Under construction',
             url: '/textbook-demo',
-            segment: { action: 'textbook-demo > learning-paths > traditional-algorithms-and-protocols' }
+            segment: { action: 'textbook-demo > course > traditional-algorithms-and-protocols' }
           }
         },
         {
           image: '/images/textbook-demo/quantum-hardware.png',
           title: 'Quantum hardware',
-          description: `This learning path is currently under construction
+          description: `This course is currently under construction
           and is an ongoing effort. Please check back after the beta phase
-          for an update on the progress of this learning path.`,
+          for an update on the progress of this course.`,
           cta: {
             label: 'Under construction',
             url: '/textbook-demo',
-            segment: { action: 'textbook-demo > learning-paths > quantum-hardware' }
+            segment: { action: 'textbook-demo > course > quantum-hardware' }
           }
         },
         {
           image: '/images/textbook-demo/quantum-machine-learning.png',
           title: 'Quantum machine learning',
-          description: `This learning path is currently under construction
+          description: `This course is currently under construction
           and is an ongoing effort. Please check back after the beta phase
-          for an update on the progress of this learning path.`,
+          for an update on the progress of this course.`,
           cta: {
             label: 'Under construction',
             url: '/textbook-demo',
-            segment: { action: 'textbook-demo > learning-paths > quantum-machine-learning' }
+            segment: { action: 'textbook-demo > course > quantum-machine-learning' }
           }
         }
       ]
@@ -126,7 +126,7 @@ export default class StartLearningSection extends Vue {
       title: 'University supplements',
       description: `Are you teaching a course on quantum computing? Qiskit
       provides freely available materials to enhance your course.`,
-      paths: [
+      courses: [
         {
           image: '/images/textbook-demo/quantum-lab.png',
           title: 'Labs',
