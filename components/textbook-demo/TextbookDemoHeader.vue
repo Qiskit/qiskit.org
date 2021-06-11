@@ -139,6 +139,9 @@ export default class TextbookDemoHeader extends (Vue as VueConstructor<VueCompon
 .scroll-in-enter,
 .scroll-in-leave-to {
   margin-top: -40px;
+}
+
+.scroll-in-leave-to {
   opacity: 0;
 }
 </style>
