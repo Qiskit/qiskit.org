@@ -11,7 +11,7 @@
         class="app-mega-dropdown__filter-wrapper__input"
         :placeholder="placeholder"
         @focus="onShowContent"
-        @keyup="onTextOnTheFilterChange"
+        @keyup="onTextOnTheFilterChanged"
       >
       <svg class="app-mega-dropdown__filter-wrapper__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M16 22L6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z" /></svg>
     </label>
@@ -99,7 +99,7 @@ export default class AppMegaDropdownMenu extends Vue {
     }
   }
 
-  onTextOnTheFilterChange () {
+  onTextOnTheFilterChanged () {
     this.removeSearchTermTrackingTimeout()
 
     this.searchTermTrackingTimeout = setTimeout(() => {
