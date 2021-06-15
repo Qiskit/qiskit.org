@@ -79,6 +79,7 @@ interface HighlightTextState {
 export default class AppMegaDropdownMenu extends Vue {
   @Prop({ type: String, default: 'primary' }) kind!: 'primary'|'secondary'
   @Prop({ type: String, required: false, default: 'Browse all content' }) placeholder!: string
+  @Prop({ type: String, required: false, default: '' }) segmentComponentName!: string
   @Prop(Array) content!: MegaDropdownMenu
 
   showContent = false;
@@ -93,7 +94,9 @@ export default class AppMegaDropdownMenu extends Vue {
   }
 
   trackSearchTerm () {
-    // TODO: Call tracking event with the value of `this.textOnTheFilter`
+    if (this.segmentComponentName) {
+      this.$trackSearchTerm(this.segmentComponentName, this.textOnTheFilter)
+    }
   }
 
   onTextOnTheFilterChange () {

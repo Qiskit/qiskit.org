@@ -11,6 +11,7 @@
             class="textbook-demo-header__dropdown"
             kind="secondary"
             :content="dropdownMenuContent"
+            segment-component-name="Textbook mega menu"
           />
         </div>
         <AppCta v-bind="startLearningCTA" class="textbook-demo-header__cta" />
