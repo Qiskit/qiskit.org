@@ -1,9 +1,15 @@
-import { trackClickEvent, trackPage, AnalyticsContext } from '~/plugins/segment-analytics'
+import {
+  trackClickEvent,
+  trackPage,
+  trackSearchTerm,
+  AnalyticsContext
+} from '~/plugins/segment-analytics'
 
 const window: AnalyticsContext = {
   bluemixAnalytics: {
     trackEvent: jest.fn(),
-    pageEvent: jest.fn()
+    pageEvent: jest.fn(),
+    trackSearchTermEvent: jest.fn()
   },
   digitalData: {
     page: {
@@ -22,12 +28,14 @@ const eventParams = {
 }
 
 const routeName = 'sample route'
-
 const title = 'sample title'
+const searchComponent = 'sample search component'
+const searchTerm = 'sample seach term'
 
 const commonSuite: [Function, any[], string][] = [
   [trackPage, [routeName, title], 'pageEvent'],
-  [trackClickEvent, [eventParams], 'trackEvent']
+  [trackClickEvent, [eventParams], 'trackEvent'],
+  [trackSearchTerm, [searchComponent, searchTerm], 'trackEvent']
 ]
 
 commonSuite.forEach(([fn, args, delegate]) => {
@@ -142,6 +150,25 @@ describe('trackPage', () => {
         navigationType: 'pushState',
         productTitle: window.digitalData.page.pageInfo.productTitle,
         title
+      }
+    )
+  })
+})
+
+describe('trackSearchTerm', () => {
+  beforeEach(() => {
+    window.bluemixAnalytics.trackEvent.mockClear()
+  })
+
+  it('translates the event into a Bluemix Analytics "Searched Term" event', () => {
+    trackSearchTerm(window, searchComponent, searchTerm)
+    expect(window.bluemixAnalytics.trackEvent).toHaveBeenCalledWith(
+      'Searched Term',
+      {
+        productTitle: window.digitalData.page.pageInfo.productTitle,
+        category: window.digitalData.page.pageInfo.analytics.category,
+        location: searchComponent,
+        text: searchTerm
       }
     )
   })
