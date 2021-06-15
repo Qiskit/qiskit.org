@@ -1,7 +1,10 @@
 <template>
   <section class="content-menu-section">
     <div class="bx--grid">
-      <AppMegaDropdownMenu :content="dropdownMenuContent" />
+      <AppMegaDropdownMenu
+        :content="dropdownMenuContent"
+        segment-component-name="Textbook mega menu"
+      />
     </div>
   </section>
 </template>
