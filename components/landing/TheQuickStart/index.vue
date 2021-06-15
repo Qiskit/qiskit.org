@@ -6,7 +6,7 @@
         <p class="quick-start__description">
           When you are looking to start Qiskit, you have two options. You can
           start Qiskit locally, which is much more secure and private, or you
-          get started with hosted Jupyter Notebooks in IBM Quantum Lab.
+          get started with Jupyter Notebooks hosted in IBM Quantum Lab.
         </p>
       </div>
     </div>

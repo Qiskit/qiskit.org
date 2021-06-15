@@ -8,7 +8,7 @@
       >
         Python 3.6+.
       </AppLink>
-      Although it isn't required, we recommend using a
+      Although it is not required, we recommend using a
       <AppLink
         url="https://www.anaconda.com/products/individual"
       >

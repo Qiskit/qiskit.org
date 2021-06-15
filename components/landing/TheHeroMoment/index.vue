@@ -13,8 +13,8 @@
         </div>
         <div class="bx--row">
           <p class="bx--col-sm bx--col-md-4 bx--col-lg-6 bx--col-xlg-4 the-hero-moment__description">
-            Qiskit {{ qiskitPronuntiation }} is an open source SDK for working
-            with quantum computers at the level of pulses, circuits and
+            Qiskit {{ qiskitPronuntiation }} is an open-source SDK for working
+            with quantum computers at the level of pulses, circuits, and
             application modules.
           </p>
         </div>

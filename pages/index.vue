@@ -60,7 +60,7 @@ export default class LandingPage extends QiskitPage {
     {
       position: 'third',
       title: 'Quantum Algorithms',
-      description: 'Research and prototype machine learning, optimization and chemistry applications by building upon a library of quantum algorithms.',
+      description: 'Research and prototype machine learning, optimization, and chemistry applications by building upon a library of quantum algorithms.',
       image: '/images/landing-page/feature-quantum-algorithms.png'
     },
     {
