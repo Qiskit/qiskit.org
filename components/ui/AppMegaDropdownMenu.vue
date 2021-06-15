@@ -11,6 +11,7 @@
         class="app-mega-dropdown__filter-wrapper__input"
         :placeholder="placeholder"
         @focus="onShowContent"
+        @keyup="onTextOnTheFilterChange"
       >
       <svg class="app-mega-dropdown__filter-wrapper__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M16 22L6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z" /></svg>
     </label>
@@ -81,6 +82,27 @@ export default class AppMegaDropdownMenu extends Vue {
   @Prop(Array) content!: MegaDropdownMenu
 
   showContent = false;
+
+  searchTermTrackingTimeout: NodeJS.Timeout | null = null
+
+  removeSearchTermTrackingTimeout () {
+    if (this.searchTermTrackingTimeout) {
+      clearTimeout(this.searchTermTrackingTimeout)
+      this.searchTermTrackingTimeout = null
+    }
+  }
+
+  trackSearchTerm () {
+    // TODO: Call tracking event with the value of `this.textOnTheFilter`
+  }
+
+  onTextOnTheFilterChange () {
+    this.removeSearchTermTrackingTimeout()
+
+    this.searchTermTrackingTimeout = setTimeout(() => {
+      this.trackSearchTerm()
+    }, 750)
+  }
 
   onShowContent () {
     this.showContent = true
@@ -212,6 +234,8 @@ export default class AppMegaDropdownMenu extends Vue {
 
   beforeDestroy () {
     document.removeEventListener('mousedown', this.handleClick)
+
+    this.removeSearchTermTrackingTimeout()
   }
 
   handleClick (e: MouseEvent) {
