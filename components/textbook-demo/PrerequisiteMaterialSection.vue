@@ -41,7 +41,7 @@ export default class PrerequisiteMaterialSection extends Vue {
         action: `${this.segmentActionBase} setting-up-your-environment`
       },
       url:
-        'https://platypus.qiskit.org/course/ch-prerequisites/environment-setup-guide-to-work-with-qiskit-textbook'
+        'https://learn.qiskit.org/course/ch-prerequisites/environment-setup-guide-to-work-with-qiskit-textbook'
     },
     {
       title: 'Python and Jupyter Notebooks',
@@ -51,7 +51,7 @@ export default class PrerequisiteMaterialSection extends Vue {
         action: `${this.segmentActionBase} python-and-jupyter-notebooks`
       },
       url:
-        'https://platypus.qiskit.org/course/ch-prerequisites/introduction-to-python-and-jupyter-notebooks'
+        'https://learn.qiskit.org/course/ch-prerequisites/introduction-to-python-and-jupyter-notebooks'
     },
     {
       title: 'What is Quantum?',
@@ -59,7 +59,7 @@ export default class PrerequisiteMaterialSection extends Vue {
         '‘Quantum physics’ is a term widely used but much less understood. It is a mathematical model first used to describe the...',
       segment: { action: `${this.segmentActionBase} what-is-quantum` },
       url:
-        'https://platypus.qiskit.org/course/getting-started/what-is-quantum'
+        'https://learn.qiskit.org/course/getting-started/what-is-quantum'
     }
   ];
 }
