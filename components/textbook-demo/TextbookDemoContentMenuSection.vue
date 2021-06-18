@@ -25,5 +25,7 @@ export default class TextbookDemoContentMenuSection extends Vue {
   background: $background-color-lighter;
   border-top: 1px solid $border-color;
   border-bottom: 1px solid $border-color;
+  position: sticky;
+  top: 0;
 }
 </style>
