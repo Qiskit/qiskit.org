@@ -50,7 +50,8 @@ export default class JoinSection extends Vue {
 
   joinAction = {
     url: 'https://qisk.it/advocateapplication',
-    label: 'Join the program'
+    label: 'Join the program',
+    segment: { action: 'advocates > join-section > join-the-program' }
   }
 }
 </script>
