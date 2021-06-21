@@ -51,17 +51,9 @@ export default class PrerequisiteMaterialSection extends Vue {
         action: `${this.segmentActionBase} python-and-jupyter-notebooks`
       },
       url:
-        'https://learn.qiskit.org/course/ch-prerequisites/introduction-to-python-and-jupyter-notebooks'
-    },
-    {
-      title: 'What is Quantum?',
-      description:
-        '‘Quantum physics’ is a term widely used but much less understood. It is a mathematical model first used to describe the...',
-      segment: { action: `${this.segmentActionBase} what-is-quantum` },
-      url:
-        'https://learn.qiskit.org/course/getting-started/what-is-quantum'
+        'https://platypus.qiskit.org/course/ch-prerequisites/introduction-to-python-and-jupyter-notebooks'
     }
-  ];
+  ]
 }
 </script>
 
