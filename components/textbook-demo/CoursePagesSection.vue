@@ -78,6 +78,12 @@ export default class CoursePagesSection extends Vue {
       url: 'https://learn.qiskit.org/course/introduction/the-atoms-of-computation'
     },
     {
+      image: 'the-atoms-of-computation-page-preview.png',
+      label: 'What is quantum?',
+      segment: { action: `${this.segmentActionBase} what-is-quantum` },
+      url: 'https://learn.qiskit.org/course/introduction/what-is-quantum'
+    },
+    {
       image: 'representing-qubits-states-page-preview.png',
       label: 'Representing Qubit States',
       segment: { action: `${this.segmentActionBase} representing-qubits-states` },
