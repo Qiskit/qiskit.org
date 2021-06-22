@@ -125,9 +125,8 @@ export default class TextbookDemoHeader extends (Vue as VueConstructor<VueCompon
     margin-top: $layout-03;
 
     &_fixed {
-      position: fixed;
+      position: fixed !important;
       transition: .3s ease-in-out;
-      top: 0;
       width: 100%;
     }
   }
