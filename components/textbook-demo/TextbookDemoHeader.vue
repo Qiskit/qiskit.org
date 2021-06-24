@@ -20,7 +20,7 @@
     <transition name="scroll-in">
       <TextbookDemoContentMenuSection
         v-if="!appMegaDropdownMenuIsVisible"
-        class="textbook-demo-header__dropdown_fixed"
+        class="textbook-demo-header__dropdown-fixed"
       />
     </transition>
   </header>
@@ -123,13 +123,14 @@ export default class TextbookDemoHeader extends (Vue as VueConstructor<VueCompon
 
   &__dropdown {
     margin-top: $layout-03;
+  }
 
-    &_fixed {
-      position: fixed;
-      transition: .3s ease-in-out;
-      top: 0;
-      width: 100%;
-    }
+  &__dropdown-fixed {
+    position: fixed;
+    top: 0;
+    transition: .3s ease-in-out;
+    width: 100%;
+    z-index: 100;
   }
 
   &__cta {

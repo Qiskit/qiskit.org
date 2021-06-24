@@ -335,7 +335,7 @@ export default class AppMegaDropdownMenu extends Vue {
     @include mq($until: medium) {
       left: 0;
       right: 0;
-      height: initial;
+      height: 80vh;
     }
   }
 
