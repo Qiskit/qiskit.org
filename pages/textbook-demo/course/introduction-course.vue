@@ -1,6 +1,8 @@
 <template>
   <main class="introduction-course-page">
-    <TextbookDemoContentMenuSection />
+    <TextbookDemoContentMenuSection
+      class="introduction-course-page__content-menu"
+    />
     <AppPageHeaderWithImage :cta="startLearningCTA" :back-link="backToTextbookHomeLink">
       <template slot="title">
         {{ headerTitle }}
@@ -98,6 +100,12 @@ export default class IntroductionCoursePage extends QiskitPage {
     max-width: $max-size;
     margin-bottom: $layout-03;
     margin-top: $layout-05;
+  }
+
+  &__content-menu {
+    position: sticky;
+    top: 0;
+    z-index: 100;
   }
 }
 </style>
