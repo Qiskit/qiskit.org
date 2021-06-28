@@ -17,8 +17,9 @@ contributors and maintainers of this site and so, thank you!
 - [Before you start](#before-you-start)
 - [Opening issues](#opening-issues)
 - [Contributing code](#contributing-code)
-  - [Where to find issues](#where-to-find-issues)
+  - [Deciding what to work on](#deciding-what-to-work-on)
   - [Setup](#setup)
+  - [Assigning yourself](#assigning-yourself)
   - [Working on an issue](#working-on-an-issue)
   - [Pull requests](#pull-requests)
   - [Live previews](#live-previews)
@@ -73,11 +74,11 @@ if needed.
 
 ## Contributing code
 
-### Where to find issues
+### Deciding what to work on
 
 While the Qiskit community owns several projects in GitHub, we are asking for external contributors to please focus on the [qiskit.org repository](https://github.com/Qiskit/qiskit.org), for now. 
 
-To give our collaborators an idea of where the team needs help, we use the [contributions welcome](https://github.com/Qiskit/qiskit.org/issues?q=is%3Aopen+is%3Aissue+label%3A%22contributions+welcome%22) label – this is appropriate for all contributors. In addition, for those who are relatively newer to the open-source workflow or our codebase, feel free to view issues tagged with the [good first issue](https://github.com/Qiskit/qiskit.org/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) label.
+To give our collaborators an idea of where the team needs help, we use the [contributions welcome](https://github.com/Qiskit/qiskit.org/issues?q=is%3Aopen+is%3Aissue+label%3A%22contributions+welcome%22) label – this is appropriate for all contributors. In addition, for those who are relatively new to the open-source workflow or our codebase, feel free to view issues tagged with the [good first issue](https://github.com/Qiskit/qiskit.org/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) label.
 
 
 ### Setup
@@ -102,6 +103,11 @@ git checkout main
 git branch -u upstream/main
 git pull
 ```
+
+
+### Assigning yourself
+
+The very first step to working on an issue is [assigning yourself](https://docs.github.com/en/issues/tracking-your-work-with-issues/assigning-issues-and-pull-requests-to-other-github-users#assigning-an-individual-issue-or-pull-request) the issue. This gives all contributors the visibility into who is working on what.
 
 
 ### Working on an issue
