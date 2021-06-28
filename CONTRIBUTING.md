@@ -74,6 +74,7 @@ if needed.
 ## Contributing code
 
 ### Where to find issues
+
 While the Qiskit community owns several projects in GitHub, we are asking for external contributors to please focus on the [qiskit.org repository](https://github.com/Qiskit/qiskit.org), for now. 
 
 To give our collaborators an idea of where the team needs help, we use the [contributions welcome](https://github.com/Qiskit/qiskit.org/issues?q=is%3Aopen+is%3Aissue+label%3A%22contributions+welcome%22) label – this is appropriate for all contributors. In addition, for those who are relatively newer to the open-source workflow or our codebase, feel free to view issues tagged with the [good first issue](https://github.com/Qiskit/qiskit.org/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) label.
