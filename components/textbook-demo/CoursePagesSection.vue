@@ -66,40 +66,34 @@ export default class CoursePagesSection extends Vue {
 
   courses: Course[] = [
     {
-      image: 'introduction-page-preview.png',
+      image: 'why-quantum-computing-preview.png',
       label: 'Why quantum computing?',
       segment: { action: `${this.segmentActionBase} why-quantum-computing` },
       url: textbookDemoIntroductionCourseStartLearningUrl
     },
     {
-      image: 'the-atoms-of-computation-page-preview.png',
+      image: 'the-atoms-of-computation-preview.png',
       label: 'The Atoms of Computation',
       segment: { action: `${this.segmentActionBase} the-atoms-of-computation` },
       url: 'https://learn.qiskit.org/course/introduction/the-atoms-of-computation'
     },
     {
-      image: 'the-atoms-of-computation-page-preview.png',
+      image: 'what-is-quantum-preview.png',
       label: 'What is quantum?',
       segment: { action: `${this.segmentActionBase} what-is-quantum` },
       url: 'https://learn.qiskit.org/course/introduction/what-is-quantum'
     },
     {
-      image: 'representing-qubits-states-page-preview.png',
-      label: 'Representing Qubit States',
-      segment: { action: `${this.segmentActionBase} representing-qubits-states` },
-      url: 'https://learn.qiskit.org/course/introduction/representing-qubit-states'
+      image: 'multiple-qubits-and-entangled-states-preview.png',
+      label: 'Multiple qubits and entangled states',
+      segment: { action: `${this.segmentActionBase} multiple-qubits-and-entangled-states` },
+      url: 'https://learn.qiskit.org/course/introduction/multiple-qubits-and-entangled-states'
     },
     {
-      image: 'single-qubits-gates-page-preview.png',
-      label: 'Single Qubits Gates',
-      segment: { action: `${this.segmentActionBase} single-qubits-gates` },
-      url: 'https://learn.qiskit.org/course/introduction/single-qubit-gates'
-    },
-    {
-      image: 'the-case-for-quantum-page-preview.png',
-      label: 'The Case for Quantum Computers',
-      segment: { action: `${this.segmentActionBase} the-case-for-quantum-computers` },
-      url: 'https://learn.qiskit.org/course/introduction/the-case-for-quantum-computers'
+      image: 'visualizing-entanglement-preview.png',
+      label: 'Visualizing Entanglement',
+      segment: { action: `${this.segmentActionBase} visualizing-entanglement-preview` },
+      url: 'https://learn.qiskit.org/course/introduction/visualizing-entanglement'
     }
   ]
 
