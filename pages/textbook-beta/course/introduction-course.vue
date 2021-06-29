@@ -1,8 +1,6 @@
 <template>
   <main class="introduction-course-page">
-    <TextbookDemoContentMenuSection
-      class="introduction-course-page__content-menu"
-    />
+    <TextbookDemoContentMenuSection />
     <AppPageHeaderWithImage :cta="startLearningCTA" :back-link="backToTextbookHomeLink">
       <template slot="title">
         {{ headerTitle }}
@@ -56,7 +54,7 @@ export default class IntroductionCoursePage extends QiskitPage {
   headerImg = '/images/textbook-demo/course/introduction-course/header.jpg'
 
   backToTextbookHomeLink = {
-    url: '/textbook-demo',
+    url: '/textbook-beta',
     label: 'Home',
     segment: {
       action: `${this.routeName} > header > back-to-textbook-home`
@@ -100,12 +98,6 @@ export default class IntroductionCoursePage extends QiskitPage {
     max-width: $max-size;
     margin-bottom: $layout-03;
     margin-top: $layout-05;
-  }
-
-  &__content-menu {
-    position: sticky;
-    top: 0;
-    z-index: 100;
   }
 }
 </style>

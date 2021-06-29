@@ -72,14 +72,14 @@ const REQUEST_AN_EVENT_CTA: GeneralLink = {
 }
 
 const TEXTBOOK_DEMO_START_LEARNING: GeneralLink = {
-  url: '/textbook-demo/course/introduction-course',
+  url: '/textbook-beta/course/introduction-course',
   label: 'Start learning',
   segment: {
-    action: 'textbook-demo > header > start-learning'
+    action: 'textbook-beta > header > start-learning'
   }
 }
 
-const textbookDemoIntroductionCourseStartLearningUrl = 'https://learn.qiskit.org/course/introduction'
+const textbookDemoIntroductionCourseStartLearningUrl = 'https://platypus.qiskit.org/course/introduction'
 
 const IBM_Q_EXPERIENCE: GeneralLink = {
   url: 'https://quantum-computing.ibm.com/lab',

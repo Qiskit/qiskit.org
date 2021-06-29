@@ -62,7 +62,7 @@ export default class StartLearningSection extends Vue {
   learningSections: LearningSection[] = [
     {
       title: 'Courses',
-      description: `Quantum computing is a big topic and working out where 
+      description: `Quantum computing is a big topic and working out where
       to start can be difficult. In this interactive textbook, the content
       is organised into courses with clear prerequisites and end
       goals. If you’re looking for something specific, you can browse all
@@ -79,8 +79,8 @@ export default class StartLearningSection extends Vue {
           you from zero to one, without the hand waving.`,
           cta: {
             label: 'Go to this course',
-            url: '/textbook-demo/course/introduction-course',
-            segment: { action: 'textbook-demo > course > introduction-course' }
+            url: '/textbook-beta/course/introduction-course',
+            segment: { action: 'textbook-beta > course > introduction-course' }
           }
         },
         {
@@ -92,8 +92,8 @@ export default class StartLearningSection extends Vue {
           understanding quantum counting, Shor’s algorithm and more.`,
           cta: {
             label: 'Under construction',
-            url: '/textbook-demo',
-            segment: { action: 'textbook-demo > course > traditional-algorithms-and-protocols' }
+            url: '/textbook-beta',
+            segment: { action: 'textbook-beta > course > traditional-algorithms-and-protocols' }
           }
         },
         {
@@ -104,8 +104,8 @@ export default class StartLearningSection extends Vue {
           for an update on the progress of this course.`,
           cta: {
             label: 'Under construction',
-            url: '/textbook-demo',
-            segment: { action: 'textbook-demo > course > quantum-hardware' }
+            url: '/textbook-beta',
+            segment: { action: 'textbook-beta > course > quantum-hardware' }
           }
         },
         {
@@ -116,8 +116,8 @@ export default class StartLearningSection extends Vue {
           for an update on the progress of this course.`,
           cta: {
             label: 'Under construction',
-            url: '/textbook-demo',
-            segment: { action: 'textbook-demo > course > quantum-machine-learning' }
+            url: '/textbook-beta',
+            segment: { action: 'textbook-beta > course > quantum-machine-learning' }
           }
         }
       ]
@@ -136,7 +136,7 @@ export default class StartLearningSection extends Vue {
           cta: {
             label: 'View resource',
             url: 'https://qiskit.org/textbook/ch-labs/index.html',
-            segment: { action: 'textbook-demo > university-supplements > labs' }
+            segment: { action: 'textbook-beta > university-supplements > labs' }
           }
         }
       ]
