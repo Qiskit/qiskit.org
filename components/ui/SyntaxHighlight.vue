@@ -15,14 +15,15 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
+import { ClickEventCustomProperties } from '~/constants/segment'
 
 @Component
 export default class SyntaxHighlight extends Vue {
   @Prop(String) label!: string
   @Prop({ type: String, default: '' }) code!: string
 
-  segmentAction = {
-    action: `${this.label}: Copy Code Sample`
+  segmentAction: ClickEventCustomProperties = {
+    cta: `${this.label}: Copy Code Sample`, location: 'syntax-highlight'
   }
 
   copyToClipboard (code: string) {

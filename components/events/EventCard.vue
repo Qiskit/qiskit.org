@@ -36,7 +36,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-import { SegmentData } from '~/constants/appLinks'
+import { ClickEventCustomProperties } from '~/constants/segment'
 
 @Component
 export default class EventCard extends Vue {
@@ -49,7 +49,7 @@ export default class EventCard extends Vue {
   @Prop(String) time!: string
   @Prop(String) to!: string
   @Prop({ type: String, default: 'Join the event' }) ctaLabel!: string
-  @Prop({ type: Object, required: false }) segment: SegmentData | undefined
+  @Prop({ type: Object, required: false }) segment: ClickEventCustomProperties | undefined
   @Prop({ type: Boolean, default: false }) verticalLayout!: Boolean
 }
 </script>

@@ -80,7 +80,7 @@ export default class StartLearningSection extends Vue {
           cta: {
             label: 'Go to this course',
             url: '/textbook-beta/course/introduction-course',
-            segment: { action: 'textbook-beta > course > introduction-course' }
+            segment: { cta: 'introduction-course', location: 'course' }
           }
         },
         {
@@ -93,7 +93,7 @@ export default class StartLearningSection extends Vue {
           cta: {
             label: 'Under construction',
             url: '/textbook-beta',
-            segment: { action: 'textbook-beta > course > traditional-algorithms-and-protocols' }
+            segment: { cta: 'traditional-algorithms-and-protocols', location: 'course' }
           }
         },
         {
@@ -105,7 +105,7 @@ export default class StartLearningSection extends Vue {
           cta: {
             label: 'Under construction',
             url: '/textbook-beta',
-            segment: { action: 'textbook-beta > course > quantum-hardware' }
+            segment: { cta: 'quantum-hardware', location: 'course' }
           }
         },
         {
@@ -117,7 +117,7 @@ export default class StartLearningSection extends Vue {
           cta: {
             label: 'Under construction',
             url: '/textbook-beta',
-            segment: { action: 'textbook-beta > course > quantum-machine-learning' }
+            segment: { cta: 'quantum-machine-learning', location: 'course' }
           }
         }
       ]
@@ -136,7 +136,7 @@ export default class StartLearningSection extends Vue {
           cta: {
             label: 'View resource',
             url: 'https://qiskit.org/textbook/ch-labs/index.html',
-            segment: { action: 'textbook-beta > university-supplements > labs' }
+            segment: { cta: 'labs', location: 'university-supplements' }
           }
         }
       ]

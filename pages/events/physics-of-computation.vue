@@ -161,12 +161,10 @@ export default class PhysicsOfComputationPage extends QiskitPage {
     future research.`
   ]
 
-  headerCTA = {
+  headerCTA: GeneralLink = {
     label: 'Register',
     url: this.afternoonSessionRegisterURL,
-    segment: {
-      action: `${this.routeName} > header > register`
-    }
+    segment: { cta: 'register', location: 'header' }
   }
 
   headerCardTitle = 'About the event:'
@@ -179,9 +177,7 @@ export default class PhysicsOfComputationPage extends QiskitPage {
     time: '8:30 AM - 5:30 PM EDT',
     to: 'https://youtu.be/YGqBVnAPvSw',
     ctaLabel: 'Official trailer',
-    segment: {
-      action: `${this.routeName} > header > official-trailer`
-    }
+    segment: { cta: 'official-trailer', location: 'header' }
   }
 
   // Data for the mosaic section
@@ -404,7 +400,8 @@ export default class PhysicsOfComputationPage extends QiskitPage {
     url: this.morningSessionYouTubeURL,
     label: 'Follow this session on YouTube (no registration needed)',
     segment: {
-      action: `${this.routeName} > morning-session-section > youtube-morning-session`
+      cta: 'youtube-morning-session',
+      location: 'morning-session-section'
     }
   }
 
@@ -412,7 +409,8 @@ export default class PhysicsOfComputationPage extends QiskitPage {
     url: this.afternoonSessionRegisterURL,
     label: 'Register here to attend the afternoon session',
     segment: {
-      action: `${this.routeName} > afternoon-session-section > register-afternoon-session`
+      cta: 'register-afternoon-session',
+      location: 'afternoon-session-section'
     }
   }
 
@@ -428,7 +426,8 @@ export default class PhysicsOfComputationPage extends QiskitPage {
         url: this.morningSessionYouTubeURL,
         label: 'Morning Session',
         segment: {
-          action: `${this.routeName} > helpful-resources > youtube-morning-session`
+          cta: 'youtube-morning-session',
+          location: 'helpful-resources'
         }
       }
     },
@@ -441,7 +440,8 @@ export default class PhysicsOfComputationPage extends QiskitPage {
         url: this.afternoonSessionRegisterURL,
         label: 'Afternoon Session',
         segment: {
-          action: `${this.routeName} > helpful-resources > register-afternoon-session`
+          cta: 'register-afternoon-session',
+          location: 'helpful-resources'
         }
       }
     },
@@ -452,7 +452,8 @@ export default class PhysicsOfComputationPage extends QiskitPage {
         url: 'https://qiskit.org/learn',
         label: 'Learn Qiskit and more',
         segment: {
-          action: `${this.routeName} > helpful-resources > qiskit-org-learn`
+          cta: 'qiskit-org-learn',
+          location: 'helpful-resources'
         }
       }
     },
@@ -464,7 +465,8 @@ export default class PhysicsOfComputationPage extends QiskitPage {
         url: 'https://github.com/Qiskit/qiskit/blob/master/CODE_OF_CONDUCT.md',
         label: 'See code of conduct',
         segment: {
-          action: `${this.routeName} > helpful-resources > code-of-conduct`
+          cta: 'code-of-conduct',
+          location: 'helpful-resources'
         }
       }
     }

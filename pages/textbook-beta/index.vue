@@ -35,7 +35,7 @@ export default class TextbookDemoPage extends QiskitPage {
       cta: {
         url: 'https://qiskit.org/documentation/',
         label: 'Go to documentation',
-        segment: { action: `${this.routeName} > helpful-resources > documentation` }
+        segment: { cta: 'documentation', location: 'helpful-resources' }
       }
     },
     {
@@ -46,7 +46,7 @@ export default class TextbookDemoPage extends QiskitPage {
       cta: {
         url: 'https://qiskit.org/documentation/tutorials/circuits/index.html',
         label: 'Go to tutorials',
-        segment: { action: `${this.routeName} > helpful-resources > tutorials` }
+        segment: { cta: 'tutorials', location: 'helpful-resources' }
       }
     },
     {
@@ -57,7 +57,7 @@ export default class TextbookDemoPage extends QiskitPage {
       cta: {
         url: SOCIAL_MEDIA.stack.url,
         label: 'Visit stack exchange',
-        segment: { action: `${this.routeName} > helpful-resources > stack-exchange` }
+        segment: { cta: 'stack-exchange', location: 'helpful-resources' }
       }
     },
     {
@@ -67,7 +67,7 @@ export default class TextbookDemoPage extends QiskitPage {
       cta: {
         url: SOCIAL_MEDIA.slack.url,
         label: 'Visit slack',
-        segment: { action: `${this.routeName} > helpful-resources > slack` }
+        segment: { cta: 'slack', location: 'helpful-resources' }
       }
     }
   ]

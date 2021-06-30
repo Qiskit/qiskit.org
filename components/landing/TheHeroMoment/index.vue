@@ -29,16 +29,17 @@
 
 <script lang="ts">
 import Vue from 'vue'
-
 import { Prop, Component } from 'vue-property-decorator'
+import { GeneralLink } from '~/constants/appLinks'
 
 @Component
 export default class TheHeroMoment extends Vue {
   @Prop({ type: String, required: true }) version!: string
-  getStartedLink = {
+
+  getStartedLink: GeneralLink = {
     url: 'https://qiskit.org/documentation/getting_started.html',
     label: 'Get started',
-    segment: { action: 'Get started' }
+    segment: { cta: 'get-started', location: 'hero-moment' }
   }
 
   data () {

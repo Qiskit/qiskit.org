@@ -21,9 +21,9 @@
 
 <script lang="ts">
 import axios from 'axios'
-
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
+import { GeneralLink } from '~/constants/appLinks'
 
 @Component({
   head () {
@@ -71,10 +71,10 @@ export default class LandingPage extends QiskitPage {
     }
   ]
 
-  fullOverviewLink = {
+  fullOverviewLink: GeneralLink = {
     url: '/overview',
     label: 'Full overview',
-    segment: { action: 'Overview' }
+    segment: { cta: 'overview', location: 'mosaic' }
   }
 }
 </script>

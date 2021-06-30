@@ -1,6 +1,4 @@
-type SegmentData = {
-  action: string
-}
+import { ClickEventCustomProperties } from '~/constants/segment'
 
 /**
  * Represent a navigation link for the menus of the site
@@ -10,14 +8,7 @@ interface NavLink {
   label: string
   /** Where we want to go */
   url: string
-  /** Includes an object with the information of the action. Example:
-   * ```ts
-   * {
-      action: 'Qiskit Community: GitHub'
-     }
-    ```
-   */
-  segment?: SegmentData
+  segment?: ClickEventCustomProperties
   /** Only for <a> links. Use `_blank` to open the link in a new tab */
   target?: string
   /** Only for <a> links. Specifies the relationship between the current document
@@ -75,14 +66,14 @@ const COMMUNITY_SUB_LINKS: LabeledLinks = {
     label: 'Events',
     url: '/events',
     segment: {
-      action: 'Events'
+      cta: 'events', location: 'menu'
     }
   },
   advocates: {
     label: 'Advocates',
     url: '/advocates',
     segment: {
-      action: 'Advocates'
+      cta: 'advocates', location: 'menu'
     }
   }
 }
@@ -111,7 +102,8 @@ const CODE_OF_CONDUCT: LabeledLinks = {
     label: 'Code of conduct',
     url: 'https://github.com/Qiskit/qiskit/blob/master/CODE_OF_CONDUCT.md',
     segment: {
-      action: 'footer > code-of-conduct'
+      cta: 'code-of-conduct',
+      location: 'footer'
     }
   }
 }
@@ -120,7 +112,8 @@ const OVERVIEW_LINK: NavLink = {
   label: 'Overview',
   url: '/overview',
   segment: {
-    action: 'Overview'
+    cta: 'overview',
+    location: 'menu'
   }
 }
 
@@ -128,7 +121,8 @@ const LEARN_LINK: NavLink = {
   label: 'Learn',
   url: '/learn',
   segment: {
-    action: 'Learn'
+    cta: 'learn',
+    location: 'menu'
   }
 }
 
@@ -146,7 +140,8 @@ const TUTORIALS_LINK: NavLink = {
   label: 'Tutorials',
   url: 'https://github.com/Qiskit/qiskit-tutorials',
   segment: {
-    action: 'Tutorials'
+    cta: 'tutorials',
+    location: 'menu'
   }
 }
 
@@ -246,7 +241,7 @@ const HOME_LINK: NavLink = {
 const GITHUB_REPOSITORY: NavLink = {
   label: 'GitHub',
   url: 'https://github.com/Qiskit/qiskit',
-  segment: { action: 'GitHub repository' }
+  segment: { cta: 'gitHub-repository', location: 'version-info' }
 }
 
 const COMMUNITY_LINK: NavLink = {
