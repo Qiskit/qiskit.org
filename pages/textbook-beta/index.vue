@@ -24,7 +24,7 @@ import { SOCIAL_MEDIA } from '~/constants/menuLinks'
   }
 })
 export default class TextbookDemoPage extends QiskitPage {
-  routeName: string = 'textbook-demo'
+  routeName: string = 'textbook-beta'
 
   helpfulResources: DescriptionCard[] = [
     {
