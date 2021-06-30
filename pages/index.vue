@@ -23,7 +23,7 @@
 import axios from 'axios'
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
-import { GeneralLink } from '~/constants/appLinks'
+import { GeneralLink } from '~/constants/appLinks'
 
 @Component({
   head () {
