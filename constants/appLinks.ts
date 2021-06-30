@@ -79,7 +79,7 @@ const TEXTBOOK_DEMO_START_LEARNING: GeneralLink = {
   }
 }
 
-const textbookDemoIntroductionCourseStartLearningUrl = 'https://platypus.qiskit.org/course/introduction'
+const textbookDemoIntroductionCourseStartLearningUrl = 'https://learn.qiskit.org/course/introduction'
 
 const IBM_Q_EXPERIENCE: GeneralLink = {
   url: 'https://quantum-computing.ibm.com/lab',
