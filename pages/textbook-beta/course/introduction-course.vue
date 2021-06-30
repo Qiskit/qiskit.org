@@ -56,7 +56,7 @@ export default class IntroductionCoursePage extends QiskitPage {
   headerImg = '/images/textbook-demo/course/introduction-course/header.jpg'
 
   backToTextbookHomeLink = {
-    url: '/textbook-demo',
+    url: '/textbook-beta',
     label: 'Home',
     segment: {
       action: `${this.routeName} > header > back-to-textbook-home`
