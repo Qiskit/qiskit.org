@@ -16,12 +16,12 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-import { ClickEventCustomProperties } from '~/constants/segment'
+import { CtaClickedEventProperties } from '~/constants/segment'
 
 @Component
 export default class BasicLink extends Vue {
   @Prop({ type: String, default: '' }) url!: string
-  @Prop({ type: Object, required: false }) segment: ClickEventCustomProperties | undefined
+  @Prop({ type: Object, required: false }) segment: CtaClickedEventProperties | undefined
   @Prop({ type: Boolean, default: false }) isStatic!: boolean
 
   handleClick () {

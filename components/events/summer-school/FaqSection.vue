@@ -215,11 +215,11 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import { ClickEventCustomProperties } from '~/constants/segment'
+import { CtaClickedEventProperties } from '~/constants/segment'
 
 interface TrackedLink {
   url: string,
-  segment: ClickEventCustomProperties
+  segment: CtaClickedEventProperties
 }
 
 @Component

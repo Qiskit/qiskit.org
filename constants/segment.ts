@@ -1,17 +1,38 @@
 /**
- * Event properties unique to the element being tracked.
+ * Custom properties for the event "CTA Clicked".
  */
-export interface ClickEventCustomProperties {
+export interface CtaClickedEventProperties {
   cta: string
   location: string
 }
 
 /**
- * Event properties sent to Segment.
+ * Properties sent to Segment via the `track` API.
  */
-export interface ClickEventProperties {
+interface SegmentTrackProperties {
   category: string
-  CTA: string
   location: string
   productTitle: string
+}
+
+/**
+ * Properties sent to Segment via the `track` API for the event "CTA Clicked".
+ */
+export interface CtaClickedSegmentTrackProperties
+  extends SegmentTrackProperties {
+  /**
+   * Description of the CTA link.
+   */
+  CTA: string
+}
+
+/**
+ * Properties sent to Segment via the `track` API for the event "Searched Term".
+ */
+export interface SearchedTermSegmentTrackProperties
+  extends SegmentTrackProperties {
+  /**
+   * Search term.
+   */
+  text: string
 }

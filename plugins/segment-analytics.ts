@@ -1,6 +1,7 @@
 import {
-  ClickEventCustomProperties,
-  ClickEventProperties
+  CtaClickedEventProperties,
+  CtaClickedSegmentTrackProperties,
+  SearchedTermSegmentTrackProperties
 } from '~/constants/segment'
 
 /**
@@ -90,7 +91,7 @@ function trackPage (context: AnalyticsContext, routeName: string, title: string)
  */
 function trackClickEvent (
   context: AnalyticsContext,
-  customProperties: ClickEventCustomProperties
+  customProperties: CtaClickedEventProperties
 ) {
   const { bluemixAnalytics, digitalData } = context
   const { cta, location } = customProperties
@@ -100,7 +101,7 @@ function trackClickEvent (
   const productTitle = getOrFailProductTitle(digitalData)
   const category = getOrFailCategory(digitalData)
 
-  const segmentOptions: ClickEventProperties = {
+  const segmentOptions: CtaClickedSegmentTrackProperties = {
     category,
     CTA: cta,
     location,
@@ -128,7 +129,7 @@ function trackSearchTerm (
   const productTitle = getOrFailProductTitle(digitalData)
   const category = getOrFailCategory(digitalData)
 
-  const eventOptions = {
+  const eventOptions: SearchedTermSegmentTrackProperties = {
     category,
     location: searchComponent,
     productTitle,
@@ -177,7 +178,7 @@ function afterAnalyticsReady<S extends any[]> (callback: (...S: any[]) => void) 
 declare module 'vue/types/vue' {
   interface Vue {
     $metaInfo: { title: string }
-    $trackClickEvent(customProperties: ClickEventCustomProperties): void
+    $trackClickEvent(customProperties: CtaClickedEventProperties): void
     $trackPage(routeName: string, title: string): void
     $trackSearchTerm(searchComponent: string, searchTerm: string): void
   }
