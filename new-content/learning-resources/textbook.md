@@ -1,7 +1,7 @@
 ---
 order: 10
 title: Qiskit Textbook
-to: https://qiskit.org/textbook-beta
+to: /textbook-beta
 image: /images/learning-resources/textbook.jpg
 ctaLabel: Read the textbook
 classifications:
