@@ -1,5 +1,13 @@
 <template>
   <main class="textbook-demo-page">
+    <QiskitBanner padding-x-none>
+      <div class="bx--grid">
+        Miss the old version of the textbook? Access it
+        <AppLink url="https://qiskit.org/textbook">
+          here
+        </AppLink>
+      </div>
+    </QiskitBanner>
     <TextbookDemoHeader />
     <StartLearningSection class="textbook-demo-page__section" />
     <AppHelpfulResourcesSection
@@ -11,6 +19,7 @@
 
 <script lang="ts">
 import { Component } from 'vue-property-decorator'
+import QiskitBanner from '@qiskit-community/qiskit-vue/src/components/QiskitBanner/index.vue'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import { DescriptionCard } from '~/components/ui/AppDescriptionCard.vue'
 import { SOCIAL_MEDIA } from '~/constants/menuLinks'
@@ -21,7 +30,8 @@ import { SOCIAL_MEDIA } from '~/constants/menuLinks'
     return {
       title: 'Qiskit Textbook'
     }
-  }
+  },
+  components: { QiskitBanner }
 })
 export default class TextbookDemoPage extends QiskitPage {
   routeName: string = 'textbook-beta'
