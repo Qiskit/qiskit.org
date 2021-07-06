@@ -3,7 +3,10 @@
     <QiskitBanner padding-x-none>
       <div class="bx--grid">
         Miss the old version of the textbook? Access it
-        <AppLink url="https://qiskit.org/textbook">
+        <AppLink
+          :segment="{ action: `${routeName} > banner > old-version` }"
+          url="https://qiskit.org/textbook"
+        >
           here
         </AppLink>
       </div>
