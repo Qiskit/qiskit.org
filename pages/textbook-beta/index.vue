@@ -4,7 +4,7 @@
       <div class="bx--grid">
         Miss the old version of the textbook? Access it
         <AppLink
-          :segment="{ action: `${routeName} > banner > old-texbook-version` }"
+          :segment="{ action: `${routeName} > banner > old-textbook-version` }"
           url="https://qiskit.org/textbook"
         >
           here
