@@ -50,49 +50,49 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import { SegmentData, textbookDemoIntroductionCourseStartLearningUrl } from '~/constants/appLinks'
+import { textbookDemoIntroductionCourseStartLearningUrl } from '~/constants/appLinks'
+import { CtaClickedEventProperties } from '~/constants/segment'
 
 interface Course {
   image: string;
   label: string;
-  segment: SegmentData;
+  segment: CtaClickedEventProperties;
   url: string;
 }
 
 @Component
 export default class CoursePagesSection extends Vue {
   activeCourseLabel = '';
-  segmentActionBase = 'introduction-course > course >'
 
   courses: Course[] = [
     {
       image: 'why-quantum-computing-preview.png',
       label: 'Why quantum computing?',
-      segment: { action: `${this.segmentActionBase} why-quantum-computing` },
+      segment: { cta: 'why-quantum-computing', location: 'course' },
       url: textbookDemoIntroductionCourseStartLearningUrl
     },
     {
       image: 'the-atoms-of-computation-preview.png',
       label: 'The Atoms of Computation',
-      segment: { action: `${this.segmentActionBase} the-atoms-of-computation` },
+      segment: { cta: 'the-atoms-of-computation', location: 'course' },
       url: 'https://learn.qiskit.org/course/introduction/the-atoms-of-computation'
     },
     {
       image: 'what-is-quantum-preview.png',
       label: 'What is quantum?',
-      segment: { action: `${this.segmentActionBase} what-is-quantum` },
+      segment: { cta: 'what-is-quantum', location: 'course' },
       url: 'https://learn.qiskit.org/course/introduction/what-is-quantum'
     },
     {
       image: 'multiple-qubits-and-entangled-states-preview.png',
       label: 'Multiple qubits and entangled states',
-      segment: { action: `${this.segmentActionBase} multiple-qubits-and-entangled-states` },
+      segment: { cta: 'multiple-qubits-and-entangled-states', location: 'course' },
       url: 'https://learn.qiskit.org/course/introduction/multiple-qubits-and-entangled-states'
     },
     {
       image: 'visualizing-entanglement-preview.png',
       label: 'Visualizing Entanglement',
-      segment: { action: `${this.segmentActionBase} visualizing-entanglement-preview` },
+      segment: { cta: 'visualizing-entanglement-preview', location: 'course' },
       url: 'https://learn.qiskit.org/course/introduction/visualizing-entanglement'
     }
   ]

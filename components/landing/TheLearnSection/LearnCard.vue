@@ -25,13 +25,14 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
+import { GeneralLink } from '~/constants/appLinks'
 
 @Component
 export default class LearnCard extends Vue {
-  learnLink = {
+  learnLink: GeneralLink = {
     url: 'learn',
     label: 'Get learning',
-    segment: { action: 'Get Learning' }
+    segment: { cta: 'get-learning', location: 'learn-card' }
   }
 }
 </script>

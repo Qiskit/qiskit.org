@@ -7,14 +7,16 @@ const header = {
   qiskitTwitterLink: {
     url: 'https://twitter.com/Qiskit',
     segment: {
-      action: 'events-summer-school > header > qiskit-twitter'
+      cta: 'qiskit-twitter',
+      location: 'header'
     }
   },
   cta: {
     label: 'Register Now',
     url: 'https://qisk.it/2021summerschoolregistration',
     segment: {
-      action: 'events-summer-school > header > register'
+      cta: 'register',
+      location: 'header'
     }
   },
   cardSectionHeading: 'About the event:',
@@ -28,7 +30,8 @@ const header = {
     to: 'http://qisk.it/qgss2021blog_website_source',
     ctaLabel: 'Learn more',
     segment: {
-      action: 'events-summer-school > header > ibm-research-blog'
+      cta: 'ibm-research-blog',
+      location: 'header'
     }
   }
 }
@@ -50,7 +53,8 @@ const mosaic: MosaicSection = {
         url: 'https://qiskit.org/textbook/preface.html',
         label: 'Read the textbook',
         segment: {
-          action: 'events-summer-school > mosaic > read-the-textbook'
+          cta: 'read-the-textbook',
+          location: 'mosaic'
         }
       }
     },
@@ -63,7 +67,8 @@ const mosaic: MosaicSection = {
         url: 'https://quantum-computing.ibm.com/login',
         label: 'Explore IBM Quantum',
         segment: {
-          action: 'events-summer-school > mosaic > explore-ibm-quantum'
+          cta: 'explore-ibm-quantum',
+          location: 'mosaic'
         }
       }
     },
@@ -76,7 +81,8 @@ const mosaic: MosaicSection = {
         url: 'https://qiskit.org/learn/intro-qc-qh',
         label: 'Start the course',
         segment: {
-          action: 'events-summer-school > mosaic > start-the-course'
+          cta: 'start-the-course',
+          location: 'mosaic'
         }
       }
     },
@@ -89,7 +95,8 @@ const mosaic: MosaicSection = {
         url: 'https://quantum-computing.ibm.com/docs/',
         label: 'Explore the docs',
         segment: {
-          action: 'events-summer-school > mosaic > explore-the-docs'
+          cta: 'explore-the-docs',
+          location: 'mosaic'
         }
       }
     }
@@ -372,7 +379,8 @@ const helpfulResources: HelpfulResourcesSection = {
         url: 'http://qisk.it/QGSS2021EnquiryForm',
         label: 'Enquire now',
         segment: {
-          action: 'events-summer-school > helpful-resources > qgss2021-enquiry-form'
+          cta: 'qgss2021-enquiry-form',
+          location: 'helpful-resources'
         }
       }
     },
@@ -383,7 +391,8 @@ const helpfulResources: HelpfulResourcesSection = {
         url: 'https://qiskit.org/documentation/install.html',
         label: 'Install here',
         segment: {
-          action: 'events-summer-school > helpful-resources > qiskit-install'
+          cta: 'qiskit-install',
+          location: 'helpful-resources'
         }
       }
     },
@@ -394,7 +403,8 @@ const helpfulResources: HelpfulResourcesSection = {
         url: 'https://medium.com/qiskit/qiskit-and-its-fundamental-elements-bcd7ead80492',
         label: 'Read the blog',
         segment: {
-          action: 'events-summer-school > helpful-resources > qiskit-medium'
+          cta: 'qiskit-medium',
+          location: 'helpful-resources'
         }
       }
     },
@@ -405,7 +415,8 @@ const helpfulResources: HelpfulResourcesSection = {
         url: 'https://github.com/Qiskit/qiskit/blob/master/CODE_OF_CONDUCT.md',
         label: 'See code of conduct',
         segment: {
-          action: 'events-summer-school > helpful-resources > code-of-conduct'
+          cta: 'code-of-conduct',
+          location: 'helpful-resources'
         }
       }
     }

@@ -19,26 +19,24 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import { SegmentData } from '~/constants/appLinks'
+import { CtaClickedEventProperties } from '~/constants/segment'
 
 interface Prerequisite {
   title: string;
   description: string;
-  segment: SegmentData;
+  segment: CtaClickedEventProperties;
   url: string;
 }
 
 @Component
 export default class PrerequisiteMaterialSection extends Vue {
-  segmentActionBase = 'introduction-course > prerequisite-material >'
-
   prerequisites: Prerequisite[] = [
     {
       title: 'Setting Up Your Environment',
       description:
         'This is a comprehensive guide for setting up your environment on your personal computer for working with Qiskit Textbook.',
       segment: {
-        action: `${this.segmentActionBase} setting-up-your-environment`
+        cta: 'setting-up-your-environment', location: 'prerequisite-material'
       },
       url:
         'https://learn.qiskit.org/course/ch-prerequisites/environment-setup-guide-to-work-with-qiskit-textbook'
@@ -48,7 +46,7 @@ export default class PrerequisiteMaterialSection extends Vue {
       description:
         "Python is a programming language where you don't need to compile. You can just run it line by line...",
       segment: {
-        action: `${this.segmentActionBase} python-and-jupyter-notebooks`
+        cta: 'python-and-jupyter-notebooks', location: 'prerequisite-material'
       },
       url:
         'https://platypus.qiskit.org/course/ch-prerequisites/introduction-to-python-and-jupyter-notebooks'
