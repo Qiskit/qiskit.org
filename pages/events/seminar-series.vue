@@ -92,7 +92,7 @@ export default class SeminarSeriesPage extends QiskitPage {
   headerCTA = {
     ...SEMINAR_SERIES_ALL_EPISODES_CTA,
     segment: {
-      action: `${this.routeName} > header > talk-on-youtube`
+      cta: 'talk-on-youtube', location: 'header'
     }
   }
 
@@ -165,7 +165,7 @@ export default class SeminarSeriesPage extends QiskitPage {
         url: 'https://calendar.google.com/calendar/ical/c12g9fqo0mkvp9bo26dhm3u1rs%40group.calendar.google.com/public/basic.ics',
         label: 'Get calendar updates',
         segment: {
-          action: `${this.routeName} > helpful-resources > get-calendar`
+          cta: 'get-calendar', location: 'helpful-resources'
         }
       }
     },
@@ -176,7 +176,7 @@ export default class SeminarSeriesPage extends QiskitPage {
         url: 'https://airtable.com/shrB5wy8SCaMMtKop',
         label: 'Contact us',
         segment: {
-          action: `${this.routeName} > helpful-resources > contact`
+          cta: 'contact', location: 'helpful-resources'
         }
       }
     },
@@ -187,7 +187,7 @@ export default class SeminarSeriesPage extends QiskitPage {
         url: 'https://qiskit.org/learn',
         label: 'Start learning',
         segment: {
-          action: `${this.routeName} > helpful-resources > qiskit-org-learn`
+          cta: 'qiskit-org-learn', location: 'helpful-resources'
         }
       }
     },
@@ -198,7 +198,7 @@ export default class SeminarSeriesPage extends QiskitPage {
         url: 'https://github.com/Qiskit/qiskit/blob/master/CODE_OF_CONDUCT.md',
         label: 'See code of conduct',
         segment: {
-          action: `${this.routeName} > helpful-resources > code-of-conduct`
+          cta: 'code-of-conduct', location: 'helpful-resources'
         }
       }
     }
@@ -233,7 +233,7 @@ export default class SeminarSeriesPage extends QiskitPage {
           url: event.to,
           label: 'Join event',
           segment: {
-            action: `seminar-series > ${eventsSection} > talk-on-youtube`
+            cta: 'talk-on-youtube', location: eventsSection
           }
         }
       }

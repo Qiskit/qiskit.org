@@ -1,3 +1,4 @@
+import { CtaClickedEventProperties } from '~/constants/segment'
 import {
   trackClickEvent,
   trackPage,
@@ -23,8 +24,9 @@ const window: AnalyticsContext = {
   }
 }
 
-const eventParams = {
-  action: 'Test Action'
+const ctaClickedEventProperties: CtaClickedEventProperties = {
+  cta: 'Join now!',
+  location: 'header'
 }
 
 const routeName = 'sample route'
@@ -34,7 +36,7 @@ const searchTerm = 'sample seach term'
 
 const commonSuite: [Function, any[], string][] = [
   [trackPage, [routeName, title], 'pageEvent'],
-  [trackClickEvent, [eventParams], 'trackEvent'],
+  [trackClickEvent, [ctaClickedEventProperties], 'trackEvent'],
   [trackSearchTerm, [searchComponent, searchTerm], 'trackEvent']
 ]
 
@@ -124,13 +126,16 @@ describe('trackClickEvent', () => {
   })
 
   it('translates the event into a Bluemix Analytics "CTA Clicked" event', () => {
-    trackClickEvent(window, eventParams)
+    const { cta, location } = ctaClickedEventProperties
+
+    trackClickEvent(window, ctaClickedEventProperties)
     expect(window.bluemixAnalytics.trackEvent).toHaveBeenCalledWith(
       'CTA Clicked',
       {
-        productTitle: window.digitalData.page.pageInfo.productTitle,
         category: window.digitalData.page.pageInfo.analytics.category,
-        CTA: eventParams.action
+        CTA: cta,
+        location,
+        productTitle: window.digitalData.page.pageInfo.productTitle
       }
     )
   })

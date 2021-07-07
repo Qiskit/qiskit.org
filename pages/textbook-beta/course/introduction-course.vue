@@ -59,7 +59,7 @@ export default class IntroductionCoursePage extends QiskitPage {
     url: '/textbook-beta',
     label: 'Home',
     segment: {
-      action: `${this.routeName} > header > back-to-textbook-home`
+      cta: 'back-to-textbook-home', location: 'header'
     }
   }
 
@@ -67,25 +67,25 @@ export default class IntroductionCoursePage extends QiskitPage {
     url: textbookDemoIntroductionCourseStartLearningUrl,
     label: 'Start learning',
     segment: {
-      action: `${this.routeName} > header > introduction`
+      cta: 'introduction', location: 'header'
     }
   }
-
-  segmentActionBase = `${this.routeName} > external-recommended-readings >`
 
   links: GeneralLink[] = [
     {
       url: 'https://math.mit.edu/~gs/linearalgebra/',
       label: 'https://math.mit.edu/~gs/linearalgebra/',
       segment: {
-        action: `${this.segmentActionBase} mit-linear-algebra`
+        cta: 'mit-linear-algebra',
+        location: 'external-recommended-readings'
       }
     },
     {
       url: 'https://machinelearningmastery.com/gentle-introduction-linear-algebra/',
       label: 'https://machinelearningmastery.com/gentle-introduction-linear-algebra/',
       segment: {
-        action: `${this.segmentActionBase} mlmastery-linear-algebra`
+        cta: 'mlmastery-linear-algebra',
+        location: 'external-recommended-readings'
       }
     }
   ]
