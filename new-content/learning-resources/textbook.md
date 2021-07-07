@@ -2,7 +2,7 @@
 order: 10
 title: Qiskit Textbook
 to: /textbook-beta
-image: /images/learning-resources/textbook.jpg
+image: /images/learning-resources/textbook.png
 ctaLabel: Read the textbook
 classifications:
   - level: Advanced
