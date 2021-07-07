@@ -2,7 +2,7 @@
 order: 15
 title: Introduction Course
 to: /textbook-beta/course/introduction-course
-image: /images/learning-resources/textbook-1-3.jpg
+image: /images/learning-resources/introduction-course.png
 ctaLabel: Read the textbook
 classifications:
   - level: Beginner
