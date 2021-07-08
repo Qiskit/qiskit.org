@@ -55,7 +55,7 @@
             Try broadening your search terms
           </p>
           <div
-            lazy-background="/images/textbook-demo/empty-search.png"
+            lazy-background="/images/textbook-beta/empty-search.png"
             class="app-mega-dropdown__content-empty__image"
           />
         </div>
