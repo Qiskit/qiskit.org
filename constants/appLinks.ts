@@ -40,7 +40,7 @@ const SEMINAR_SERIES_FULL_ARCHIVE_CTA: GeneralLink = {
   }
 }
 
-const TEXTBOOK_DEMO_START_LEARNING: GeneralLink = {
+const TEXTBOOK_BETA_START_LEARNING: GeneralLink = {
   url: '/textbook-beta/course/introduction-course',
   label: 'Start learning',
   segment: {
@@ -49,7 +49,7 @@ const TEXTBOOK_DEMO_START_LEARNING: GeneralLink = {
   }
 }
 
-const textbookDemoIntroductionCourseStartLearningUrl = 'https://learn.qiskit.org/course/introduction'
+const textbookBetaIntroductionCourseStartLearningUrl = 'https://learn.qiskit.org/course/introduction'
 
 const IBM_Q_EXPERIENCE: GeneralLink = {
   url: 'https://quantum-computing.ibm.com/lab',
@@ -61,7 +61,7 @@ export {
   EVENT_REQUEST_LINK,
   SEMINAR_SERIES_ALL_EPISODES_CTA,
   SEMINAR_SERIES_FULL_ARCHIVE_CTA,
-  textbookDemoIntroductionCourseStartLearningUrl,
-  TEXTBOOK_DEMO_START_LEARNING,
+  textbookBetaIntroductionCourseStartLearningUrl,
+  TEXTBOOK_BETA_START_LEARNING,
   IBM_Q_EXPERIENCE
 }

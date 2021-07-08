@@ -1,5 +1,5 @@
 <template>
-  <main class="textbook-demo-page">
+  <main class="textbook-beta-page">
     <QiskitBanner padding-x-none>
       <div class="bx--grid">
         Miss the old version of the textbook? Access it
@@ -11,10 +11,10 @@
         </AppLink>
       </div>
     </QiskitBanner>
-    <TextbookDemoHeader />
-    <StartLearningSection class="textbook-demo-page__section" />
+    <TextbookBetaHeader />
+    <StartLearningSection class="textbook-beta-page__section" />
     <AppHelpfulResourcesSection
-      class="textbook-demo-page__section"
+      class="textbook-beta-page__section"
       :resources="helpfulResources"
     />
   </main>
@@ -36,7 +36,7 @@ import { SOCIAL_MEDIA } from '~/constants/menuLinks'
   },
   components: { QiskitBanner }
 })
-export default class TextbookDemoPage extends QiskitPage {
+export default class TextbookBetaPage extends QiskitPage {
   routeName: string = 'textbook-beta'
 
   helpfulResources: DescriptionCard[] = [
@@ -88,7 +88,7 @@ export default class TextbookDemoPage extends QiskitPage {
 </script>
 
 <style lang="scss" scoped>
-.textbook-demo-page {
+.textbook-beta-page {
   &__section {
     @include contained();
 

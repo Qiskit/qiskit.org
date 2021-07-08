@@ -1,26 +1,26 @@
 <template>
-  <header class="textbook-demo-header">
-    <div class="textbook-demo-header__container-wrapper">
-      <div class="textbook-demo-header__container">
+  <header class="textbook-beta-header">
+    <div class="textbook-beta-header__container-wrapper">
+      <div class="textbook-beta-header__container">
         <div>
-          <h1 class="textbook-demo-header__headline">
+          <h1 class="textbook-beta-header__headline">
             Qiskit Textbook (beta)
           </h1>
           <AppMegaDropdownMenu
             :id="appMegaDropdownMenuId"
-            class="textbook-demo-header__dropdown"
+            class="textbook-beta-header__dropdown"
             kind="secondary"
             :content="dropdownMenuContent"
             segment-component-name="Textbook mega menu"
           />
         </div>
-        <AppCta v-bind="startLearningCTA" class="textbook-demo-header__cta" />
+        <AppCta v-bind="startLearningCTA" class="textbook-beta-header__cta" />
       </div>
     </div>
     <transition name="scroll-in">
-      <TextbookDemoContentMenuSection
+      <TextbookBetaContentMenuSection
         v-if="!appMegaDropdownMenuIsVisible"
-        class="textbook-demo-header__dropdown-fixed"
+        class="textbook-beta-header__dropdown-fixed"
       />
     </transition>
   </header>
@@ -29,8 +29,8 @@
 <script lang="ts">
 import Vue, { VueConstructor } from 'vue'
 import { Component } from 'vue-property-decorator'
-import { TEXTBOOK_DEMO_START_LEARNING } from '~/constants/appLinks'
-import { TEXTBOOK_DEMO_MEGA_MENU } from '~/constants/megaMenuLinks'
+import { TEXTBOOK_BETA_START_LEARNING } from '~/constants/appLinks'
+import { TEXTBOOK_BETA_MEGA_MENU } from '~/constants/megaMenuLinks'
 
 interface VueComponent extends Vue {
   $el: HTMLElement
@@ -38,9 +38,9 @@ interface VueComponent extends Vue {
 }
 
 @Component
-export default class TextbookDemoHeader extends (Vue as VueConstructor<VueComponent>) {
-  startLearningCTA = TEXTBOOK_DEMO_START_LEARNING
-  dropdownMenuContent = TEXTBOOK_DEMO_MEGA_MENU
+export default class TextbookBetaHeader extends (Vue as VueConstructor<VueComponent>) {
+  startLearningCTA = TEXTBOOK_BETA_START_LEARNING
+  dropdownMenuContent = TEXTBOOK_BETA_MEGA_MENU
   appMegaDropdownMenuIsVisible = true
   appMegaDropdownMenuObserver: IntersectionObserver | undefined
 
@@ -80,7 +80,7 @@ export default class TextbookDemoHeader extends (Vue as VueConstructor<VueCompon
 </script>
 
 <style lang="scss" scoped>
-.textbook-demo-header {
+.textbook-beta-header {
   background: linear-gradient(315deg, $cool-gray-10 0%, $blue-40 25%, $purple-70 100%);
   height: 37.5rem;
 
@@ -92,7 +92,7 @@ export default class TextbookDemoHeader extends (Vue as VueConstructor<VueCompon
     @include contained();
 
     max-width: $max-size;
-    background-image: url("/images/textbook-demo/qiskit-logo-header.png");
+    background-image: url("/images/textbook-beta/qiskit-logo-header.png");
     background-position: right center;
     background-repeat: no-repeat;
     background-size: 50% auto;

@@ -1,6 +1,6 @@
 <template>
   <main class="introduction-course-page">
-    <TextbookDemoContentMenuSection
+    <TextbookBetaContentMenuSection
       class="introduction-course-page__content-menu"
     />
     <AppPageHeaderWithImage :cta="startLearningCTA" :back-link="backToTextbookHomeLink">
@@ -27,7 +27,7 @@
 <script lang="ts">
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
-import { GeneralLink, textbookDemoIntroductionCourseStartLearningUrl } from '~/constants/appLinks'
+import { GeneralLink, textbookBetaIntroductionCourseStartLearningUrl } from '~/constants/appLinks'
 
 @Component({
   layout: 'default-max',
@@ -53,7 +53,7 @@ export default class IntroductionCoursePage extends QiskitPage {
     protocols, near term quantum algorithms, and quantum machine
     learning.`]
 
-  headerImg = '/images/textbook-demo/course/introduction-course/header.jpg'
+  headerImg = '/images/textbook-beta/course/introduction-course/header.jpg'
 
   backToTextbookHomeLink = {
     url: '/textbook-beta',
@@ -64,7 +64,7 @@ export default class IntroductionCoursePage extends QiskitPage {
   }
 
   startLearningCTA: GeneralLink = {
-    url: textbookDemoIntroductionCourseStartLearningUrl,
+    url: textbookBetaIntroductionCourseStartLearningUrl,
     label: 'Start learning',
     segment: {
       cta: 'introduction', location: 'header'
