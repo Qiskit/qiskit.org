@@ -50,7 +50,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import { textbookDemoIntroductionCourseStartLearningUrl } from '~/constants/appLinks'
+import { textbookBetaIntroductionCourseStartLearningUrl } from '~/constants/appLinks'
 import { CtaClickedEventProperties } from '~/constants/segment'
 
 interface Course {
@@ -69,7 +69,7 @@ export default class CoursePagesSection extends Vue {
       image: 'why-quantum-computing-preview.png',
       label: 'Why quantum computing?',
       segment: { cta: 'why-quantum-computing', location: 'course' },
-      url: textbookDemoIntroductionCourseStartLearningUrl
+      url: textbookBetaIntroductionCourseStartLearningUrl
     },
     {
       image: 'the-atoms-of-computation-preview.png',
@@ -110,7 +110,7 @@ export default class CoursePagesSection extends Vue {
     }
 
     const imageUrlBase =
-      '/images/textbook-demo/course/introduction-course'
+      '/images/textbook-beta/course/introduction-course'
 
     return `${imageUrlBase}/${this.activeCourse.image}`
   }
