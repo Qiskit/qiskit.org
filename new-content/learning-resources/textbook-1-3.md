@@ -1,7 +1,7 @@
 ---
 order: 100
 title: Qiskit Textbook Chapters 1 - 3
-to: https://qiskit.org/textbook/ch-states/introduction.html
+to: https://learn.qiskit.org/course/ch-states
 image: /images/learning-resources/textbook-1-3.jpg
 ctaLabel: Read the textbook
 classifications:

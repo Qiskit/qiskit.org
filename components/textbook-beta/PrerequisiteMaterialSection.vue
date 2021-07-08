@@ -49,7 +49,7 @@ export default class PrerequisiteMaterialSection extends Vue {
         cta: 'python-and-jupyter-notebooks', location: 'prerequisite-material'
       },
       url:
-        'https://platypus.qiskit.org/course/ch-prerequisites/introduction-to-python-and-jupyter-notebooks'
+        'https://learn.qiskit.org/course/ch-prerequisites/introduction-to-python-and-jupyter-notebooks'
     }
   ]
 }
