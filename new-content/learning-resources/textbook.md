@@ -8,4 +8,4 @@ classifications:
   - level: Advanced
     time: 1 year
 ---
-The Qiskit Textbook is a free digital open source textbook that will teach you the concepts of quantum computing while you learn to use Qiskit.
+The Qiskit Textbook is a free digital open source textbook that will teach the concepts of quantum computing while you learn to use Qiskit.

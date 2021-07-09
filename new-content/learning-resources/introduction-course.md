@@ -3,11 +3,11 @@ order: 15
 title: Introduction Course
 to: /textbook-beta/course/introduction-course
 image: /images/learning-resources/introduction-course.png
-ctaLabel: Read the textbook
+ctaLabel: Take the course
 classifications:
   - level: Beginner
     time: 1 year
   - level: Advanced
     time: 1 month
 ---
-The Qiskit Textbook is a free digital open source textbook that will teach you the concepts of quantum computing while you learn to use Qiskit. Given the amount of time you selected, try completing chapters 1 - 3.
+This introduction course is around 3 hours long and will take individuals from all backgrounds through a linear path of content that begins at the atoms of computation and ends at Grover's algorithm.
