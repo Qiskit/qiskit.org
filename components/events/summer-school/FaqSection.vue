@@ -230,12 +230,12 @@ export default class FaqSection extends Vue {
   }
 
   pythonAndJupyter: TrackedLink = {
-    url: 'https://qiskit.org/textbook/ch-prerequisites/python-and-jupyter-notebooks.html',
+    url: 'https://learn.qiskit.org/course/ch-prerequisites/introduction-to-python-and-jupyter-notebooks',
     segment: { cta: 'textbook-python-and-jupyter-notebooks', location: 'faq' }
   }
 
   linearAlgebra: TrackedLink = {
-    url: 'https://qiskit.org/textbook/ch-prerequisites/linear_algebra.html',
+    url: 'https://learn.qiskit.org/course/ch-appendix/an-introduction-to-linear-algebra-for-quantum-computing',
     segment: { cta: 'qiskit-linear-algebra', location: 'faq' }
   }
 
