@@ -17,16 +17,16 @@ routeName: learn
 ## About the Course
 This course is an introduction to the world of quantum computing, with an exploration of some of the key quantum algorithms and their implementations using quantum circuits, as well as the quantum hardware that is designed to run these algorithms. The course was first offered during the Qiskit Global Summer School in July 2020 as a two-week intensive summer school.
 
-There are 27 lectures in this course, which cover the material in 9 lecture notes and 9 associated labs. The textbook for the course is available online: [Learn Quantum Computation using Qiskit](http://qiskit.org/textbook).
+There are 27 lectures in this course, which cover the material in 9 lecture notes and 9 associated labs. The textbook for the course is available online: [Learn Quantum Computation using Qiskit](http://qiskit.org/textbook-beta).
 
 ## Prerequisites
 In order to make the best out of these lectures, we strongly recommend reviewing linear algebra and brushing up on Python. Here are some recommended materials:
 
 * Multiplying two matrices, introductory linear algebra:
   * [Khan Academy](https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:matrices/x9e81a4f98389efdf:multiplying-matrices-by-matrices/v/matrix-multiplication-intro)
-  * [Linear algebra prerequisites in the Qiskit Textbook](https://qiskit.org/textbook/ch-prerequisites/linear_algebra.html)
+  * [Linear algebra prerequisites in the Qiskit Textbook](https://learn.qiskit.org/course/ch-appendix/an-introduction-to-linear-algebra-for-quantum-computing)
 * Basic familiarity with Python:
-  * [Python prerequisites in the Qiskit Textbook](https://qiskit.org/textbook/ch-prerequisites/python-and-jupyter-notebooks.html)
+  * [Python prerequisites in the Qiskit Textbook](https://learn.qiskit.org/course/ch-prerequisites/introduction-to-python-and-jupyter-notebooks)
 
 ## Curriculum
 <table id="resources">

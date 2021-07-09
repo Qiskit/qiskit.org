@@ -135,7 +135,7 @@ export default class StartLearningSection extends Vue {
           current quantum computers and practice your Qiskit coding skills.`,
           cta: {
             label: 'View resource',
-            url: 'https://qiskit.org/textbook/ch-labs/index.html',
+            url: 'https://learn.qiskit.org/course/ch-labs',
             segment: { cta: 'labs', location: 'university-supplements' }
           }
         }
