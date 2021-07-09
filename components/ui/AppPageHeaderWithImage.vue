@@ -86,11 +86,13 @@ export default class AppPageHeaderWithImage extends Vue {
   }
 
   &__image {
-    width: 100%;
-    max-width: 30rem;
+    max-height: 25rem;
+    width: auto;
 
     @include mq($until: x-large) {
+      height: auto;
       max-width: 22rem;
+      width: 100%;
     }
   }
 
