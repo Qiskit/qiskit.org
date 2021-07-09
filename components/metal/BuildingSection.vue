@@ -33,7 +33,7 @@
             >Introduction to Quantum Computing and Quantum Hardware</AppLink>
             summer school lectures series by Zlatko Minev on superconducting qubits. Also, check out the open source
             <AppLink
-              url="https://qiskit.org/textbook/ch-quantum-hardware/transmon-physics.html"
+              url="https://learn.qiskit.org/course/quantum-hardware-pulses/introduction-to-transmon-physics"
             >Qiskit textbook</AppLink>
             chapters on quantum devices and their control.
           </p>

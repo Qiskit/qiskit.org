@@ -18,7 +18,7 @@
           class="code"
           v-bind="githubRepoLink"
           url="https://qiskit.org/documentation/release_notes.html#notable-changes"
-          :segment="{ action: 'Release notes' }"
+          :segment="{ cta: 'release-notes', location: 'version-info' }"
         >
           see release notes
         </AppLink>

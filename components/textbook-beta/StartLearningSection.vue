@@ -70,7 +70,7 @@ export default class StartLearningSection extends Vue {
       community on Slack.`,
       courses: [
         {
-          image: '/images/textbook-demo/introduction-course.png',
+          image: '/images/textbook-beta/introduction-course.png',
           title: 'Introduction course',
           description: `Not sure where to start? This path is for you.
           This introduction is aimed at audiences from all backgrounds.
@@ -80,11 +80,11 @@ export default class StartLearningSection extends Vue {
           cta: {
             label: 'Go to this course',
             url: '/textbook-beta/course/introduction-course',
-            segment: { action: 'textbook-beta > course > introduction-course' }
+            segment: { cta: 'introduction-course', location: 'course' }
           }
         },
         {
-          image: '/images/textbook-demo/traditional-algorithms.png',
+          image: '/images/textbook-beta/traditional-algorithms.png',
           title: 'Traditional Algorithms & Protocols',
           description: `Know your bits from your qubits? Start learning
           about the algorithms that first caused all this excitement. This
@@ -93,11 +93,11 @@ export default class StartLearningSection extends Vue {
           cta: {
             label: 'Under construction',
             url: '/textbook-beta',
-            segment: { action: 'textbook-beta > course > traditional-algorithms-and-protocols' }
+            segment: { cta: 'traditional-algorithms-and-protocols', location: 'course' }
           }
         },
         {
-          image: '/images/textbook-demo/quantum-hardware.png',
+          image: '/images/textbook-beta/quantum-hardware.png',
           title: 'Quantum hardware',
           description: `This course is currently under construction
           and is an ongoing effort. Please check back after the beta phase
@@ -105,11 +105,11 @@ export default class StartLearningSection extends Vue {
           cta: {
             label: 'Under construction',
             url: '/textbook-beta',
-            segment: { action: 'textbook-beta > course > quantum-hardware' }
+            segment: { cta: 'quantum-hardware', location: 'course' }
           }
         },
         {
-          image: '/images/textbook-demo/quantum-machine-learning.png',
+          image: '/images/textbook-beta/quantum-machine-learning.png',
           title: 'Quantum machine learning',
           description: `This course is currently under construction
           and is an ongoing effort. Please check back after the beta phase
@@ -117,7 +117,7 @@ export default class StartLearningSection extends Vue {
           cta: {
             label: 'Under construction',
             url: '/textbook-beta',
-            segment: { action: 'textbook-beta > course > quantum-machine-learning' }
+            segment: { cta: 'quantum-machine-learning', location: 'course' }
           }
         }
       ]
@@ -128,15 +128,15 @@ export default class StartLearningSection extends Vue {
       provides freely available materials to enhance your course.`,
       courses: [
         {
-          image: '/images/textbook-demo/quantum-lab.png',
+          image: '/images/textbook-beta/quantum-lab.png',
           title: 'Labs',
           description: `This set of labs provides 7 different exercises
           you (or your students) can use to investigate the behaviour of
           current quantum computers and practice your Qiskit coding skills.`,
           cta: {
             label: 'View resource',
-            url: 'https://qiskit.org/textbook/ch-labs/index.html',
-            segment: { action: 'textbook-beta > university-supplements > labs' }
+            url: 'https://learn.qiskit.org/course/ch-labs',
+            segment: { cta: 'labs', location: 'university-supplements' }
           }
         }
       ]

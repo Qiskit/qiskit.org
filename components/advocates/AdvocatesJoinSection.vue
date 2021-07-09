@@ -25,6 +25,7 @@
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 import CompactFeature from '~/components/ui/CompactFeature.vue'
+import { GeneralLink } from '~/constants/appLinks'
 
 type Benefit = Pick<CompactFeature, 'icon'|'title'|'description'>
 
@@ -48,10 +49,10 @@ export default class JoinSection extends Vue {
     }
   ]
 
-  joinAction = {
+  joinAction: GeneralLink = {
     url: 'https://qisk.it/advocateapplication',
     label: 'Join the program',
-    segment: { action: 'advocates > join-section > join-the-program' }
+    segment: { cta: 'join-the-program', location: 'join-section' }
   }
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <main class="textbook-demo-page">
+  <main class="textbook-beta-page">
     <QiskitBanner padding-x-none>
       <div class="bx--grid">
         Miss the old version of the textbook? Access it
@@ -11,10 +11,10 @@
         </AppLink>
       </div>
     </QiskitBanner>
-    <TextbookDemoHeader />
-    <StartLearningSection class="textbook-demo-page__section" />
+    <TextbookBetaHeader />
+    <StartLearningSection class="textbook-beta-page__section" />
     <AppHelpfulResourcesSection
-      class="textbook-demo-page__section"
+      class="textbook-beta-page__section"
       :resources="helpfulResources"
     />
   </main>
@@ -36,7 +36,7 @@ import { SOCIAL_MEDIA } from '~/constants/menuLinks'
   },
   components: { QiskitBanner }
 })
-export default class TextbookDemoPage extends QiskitPage {
+export default class TextbookBetaPage extends QiskitPage {
   routeName: string = 'textbook-beta'
 
   helpfulResources: DescriptionCard[] = [
@@ -48,7 +48,7 @@ export default class TextbookDemoPage extends QiskitPage {
       cta: {
         url: 'https://qiskit.org/documentation/',
         label: 'Go to documentation',
-        segment: { action: `${this.routeName} > helpful-resources > documentation` }
+        segment: { cta: 'documentation', location: 'helpful-resources' }
       }
     },
     {
@@ -59,7 +59,7 @@ export default class TextbookDemoPage extends QiskitPage {
       cta: {
         url: 'https://qiskit.org/documentation/tutorials/circuits/index.html',
         label: 'Go to tutorials',
-        segment: { action: `${this.routeName} > helpful-resources > tutorials` }
+        segment: { cta: 'tutorials', location: 'helpful-resources' }
       }
     },
     {
@@ -70,7 +70,7 @@ export default class TextbookDemoPage extends QiskitPage {
       cta: {
         url: SOCIAL_MEDIA.stack.url,
         label: 'Visit stack exchange',
-        segment: { action: `${this.routeName} > helpful-resources > stack-exchange` }
+        segment: { cta: 'stack-exchange', location: 'helpful-resources' }
       }
     },
     {
@@ -80,7 +80,7 @@ export default class TextbookDemoPage extends QiskitPage {
       cta: {
         url: SOCIAL_MEDIA.slack.url,
         label: 'Visit slack',
-        segment: { action: `${this.routeName} > helpful-resources > slack` }
+        segment: { cta: 'slack', location: 'helpful-resources' }
       }
     }
   ]
@@ -88,7 +88,7 @@ export default class TextbookDemoPage extends QiskitPage {
 </script>
 
 <style lang="scss" scoped>
-.textbook-demo-page {
+.textbook-beta-page {
   &__section {
     @include contained();
 

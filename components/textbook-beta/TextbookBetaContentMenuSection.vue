@@ -12,11 +12,11 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import { TEXTBOOK_DEMO_MEGA_MENU } from '~/constants/megaMenuLinks'
+import { TEXTBOOK_BETA_MEGA_MENU } from '~/constants/megaMenuLinks'
 
 @Component
-export default class TextbookDemoContentMenuSection extends Vue {
-  dropdownMenuContent = TEXTBOOK_DEMO_MEGA_MENU
+export default class TextbookBetaContentMenuSection extends Vue {
+  dropdownMenuContent = TEXTBOOK_BETA_MEGA_MENU
 }
 </script>
 
