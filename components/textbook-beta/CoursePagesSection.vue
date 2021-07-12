@@ -73,7 +73,7 @@ export default class CoursePagesSection extends Vue {
     },
     {
       image: 'the-atoms-of-computation-preview.png',
-      label: 'The Atoms of Computation',
+      label: 'The atoms of computation',
       segment: { cta: 'the-atoms-of-computation', location: 'course' },
       url: 'https://learn.qiskit.org/course/introduction/the-atoms-of-computation'
     },
@@ -94,12 +94,6 @@ export default class CoursePagesSection extends Vue {
       label: 'Entangled states',
       segment: { cta: 'entangled-states', location: 'course' },
       url: 'https://learn.qiskit.org/course/introduction/entangled-states'
-    },
-    {
-      image: 'multiple-qubits-and-entangled-states-preview.png',
-      label: 'Multiple qubits and entangled states',
-      segment: { cta: 'multiple-qubits-and-entangled-states', location: 'course' },
-      url: 'https://learn.qiskit.org/course/introduction/multiple-qubits-and-entangled-states'
     },
     {
       image: 'visualizing-entanglement-preview.png',
