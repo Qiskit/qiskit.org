@@ -94,6 +94,18 @@ export default class CoursePagesSection extends Vue {
       label: 'Visualizing Entanglement',
       segment: { cta: 'visualizing-entanglement-preview', location: 'course' },
       url: 'https://learn.qiskit.org/course/introduction/visualizing-entanglement'
+    },
+    {
+      image: 'grovers-search-algorithm.png',
+      label: 'Grover’s search algorithm',
+      segment: { cta: 'grovers-search-algorithm', location: 'course' },
+      url: 'https://learn.qiskit.org/course/introduction/grovers-search-algorithm'
+    },
+    {
+      image: 'project.png',
+      label: 'Project',
+      segment: { cta: 'project', location: 'course' },
+      url: 'https://learn.qiskit.org/course/introduction/project'
     }
   ]
 
