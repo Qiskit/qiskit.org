@@ -1,5 +1,5 @@
 ---
-order: 20
+order: 30
 title: Qiskit Medium
 to: https://medium.com/qiskit/qiskit-and-its-fundamental-elements-bcd7ead80492
 image: /images/learning-resources/blog.jpg
