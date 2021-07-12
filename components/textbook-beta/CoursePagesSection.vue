@@ -73,7 +73,7 @@ export default class CoursePagesSection extends Vue {
     },
     {
       image: 'the-atoms-of-computation-preview.png',
-      label: 'The Atoms of Computation',
+      label: 'The atoms of computation',
       segment: { cta: 'the-atoms-of-computation', location: 'course' },
       url: 'https://learn.qiskit.org/course/introduction/the-atoms-of-computation'
     },
@@ -84,16 +84,34 @@ export default class CoursePagesSection extends Vue {
       url: 'https://learn.qiskit.org/course/introduction/what-is-quantum'
     },
     {
-      image: 'multiple-qubits-and-entangled-states-preview.png',
-      label: 'Multiple qubits and entangled states',
-      segment: { cta: 'multiple-qubits-and-entangled-states', location: 'course' },
-      url: 'https://learn.qiskit.org/course/introduction/multiple-qubits-and-entangled-states'
+      image: 'describing-quantum-computers-preview.png',
+      label: 'Describing quantum computers',
+      segment: { cta: 'describing-quantum-computers', location: 'course' },
+      url: 'https://learn.qiskit.org/course/introduction/describing-quantum-computers'
+    },
+    {
+      image: 'entangled-states-preview.png',
+      label: 'Entangled states',
+      segment: { cta: 'entangled-states', location: 'course' },
+      url: 'https://learn.qiskit.org/course/introduction/entangled-states'
     },
     {
       image: 'visualizing-entanglement-preview.png',
       label: 'Visualizing Entanglement',
       segment: { cta: 'visualizing-entanglement-preview', location: 'course' },
       url: 'https://learn.qiskit.org/course/introduction/visualizing-entanglement'
+    },
+    {
+      image: 'grovers-search-algorithm-preview.png',
+      label: 'Grover’s search algorithm',
+      segment: { cta: 'grovers-search-algorithm', location: 'course' },
+      url: 'https://learn.qiskit.org/course/introduction/grovers-search-algorithm'
+    },
+    {
+      image: 'project-preview.png',
+      label: 'Project',
+      segment: { cta: 'project', location: 'course' },
+      url: 'https://learn.qiskit.org/course/introduction/project'
     }
   ]
 
