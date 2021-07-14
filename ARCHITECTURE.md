@@ -134,6 +134,6 @@ This content is then stored in JSON files and those files are later fetched via 
 
 We use Hotjar for analytics and integrate it by loading the plugin in `/plugins/hotjar.ts`.
 
-### IBM Cloud Analytics
+### Segment
 
-We use IBM Cloud Analytics for analytics and integrate it by loading the plugin in `/plugins/segment-analytics` when on production or when we enable analytics via an environment flag, as configured in the **plugins** property in `nuxt.config.ts`.
+We use [Segment](https://segment.com/) for analytics and integrate it by loading the plugin in `/plugins/segment-analytics` when on production or when we enable analytics via an environment flag, as configured in the **plugins** property in `nuxt.config.ts`.
