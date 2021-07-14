@@ -14,7 +14,11 @@ Technical overview of how the code is structured and how it all comes together.
 
 ## Vue.js components
 
-We write our components as [single file components](https://vuejs.org/v2/guide/single-file-components.html).
+We use components from the [@qiskit-community/qiskit-vue](https://github.com/qiskit-community/qiskit-vue) component library.
+
+**Note:** We're currently still extracting and migrating reusable components from this project to the component library project.
+
+Additionally, we write components specific to this project in the `components` directory as [single file components](https://vuejs.org/v2/guide/single-file-components.html).
 
 The **script section** is written in [class-style syntax](https://class-component.vuejs.org/) with TypeScript and uses decorators provided by [**vue-property-decorator**](https://github.com/kaorun343/vue-property-decorator).
 
