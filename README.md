@@ -82,7 +82,7 @@ A **pre-rendering SPA** is a single page application that generates a static mar
 
 **[Nuxt.js](https://nuxtjs.org/)** is the biggest framework on top of **[Vue.js](https://vuejs.org/)** to generate *universal* SPAs. Universal or "isomorphic" apps can be pre-rendering or SSR. Since so far we don't need server functions, our website is just pre-rendering.
 
-We create and run unit tests using [Jest](https://jestjs.io/), ensure avoiding syntax errors using [ESLint](https://eslint.org/) and automate all these previous tools and deployment using [Travis](https://travis-ci.org/).
+We create and run unit tests using [Jest](https://jestjs.io/), ensure avoiding syntax errors using [ESLint](https://eslint.org/) and automate all these previous tools and deployment using [GitHub Actions](https://github.com/features/actions).
 
 With this technology we want to **achieve**:
 - Separation between content edition and development concerns.
@@ -155,7 +155,7 @@ by default. To enable, set the `ENABLE_ANALYTICS` environment variable.
     ├─ tests/
     ├─ types/
     ├─ nuxt.config.js
-    ├─ ... other third-parties configuration files like ESLint, Jest or Travis
+    ├─ ... other third-parties configuration files like ESLint, Jest or GitHub Actions
 
 -  **`app/`**: Global scripts.
 
