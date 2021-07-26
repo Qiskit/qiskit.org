@@ -6,12 +6,14 @@
           <h1 class="textbook-beta-header__headline">
             Qiskit Textbook (beta)
           </h1>
-          <AppMegaDropdownMenu
+          <QiskitMegaMenuDropdown
             :id="appMegaDropdownMenuId"
             class="textbook-beta-header__dropdown"
+            input-field-classes="bx--col-md-4 bx--col-lg-4"
             kind="secondary"
             :content="dropdownMenuContent"
             segment-component-name="Textbook mega menu"
+            :track-performed-search="trackPerformedSearch"
           />
         </div>
         <AppCta v-bind="startLearningCTA" class="textbook-beta-header__cta" />
@@ -29,6 +31,7 @@
 <script lang="ts">
 import Vue, { VueConstructor } from 'vue'
 import { Component } from 'vue-property-decorator'
+import QiskitMegaMenuDropdown from '@qiskit-community/qiskit-vue/src/components/MegaMenuDropdown/index.vue'
 import { TEXTBOOK_BETA_START_LEARNING } from '~/constants/appLinks'
 import { TEXTBOOK_BETA_MEGA_MENU } from '~/constants/megaMenuLinks'
 
@@ -37,7 +40,9 @@ interface VueComponent extends Vue {
   _uid: number
 }
 
-@Component
+@Component({
+  components: { QiskitMegaMenuDropdown }
+})
 export default class TextbookBetaHeader extends (Vue as VueConstructor<VueComponent>) {
   startLearningCTA = TEXTBOOK_BETA_START_LEARNING
   dropdownMenuContent = TEXTBOOK_BETA_MEGA_MENU
@@ -75,6 +80,10 @@ export default class TextbookBetaHeader extends (Vue as VueConstructor<VueCompon
     entries.forEach(({ isIntersecting }) => {
       this.appMegaDropdownMenuIsVisible = isIntersecting
     })
+  }
+
+  trackPerformedSearch (uiElement: string, field: string) {
+    this.$trackPerformedSearch(uiElement, field)
   }
 }
 </script>

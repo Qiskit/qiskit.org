@@ -554,8 +554,5 @@ const TEXTBOOK_BETA_MEGA_MENU: MegaDropdownMenu = [
 ]
 
 export {
-  MegaDropdownMenu,
-  MegaDropdownMenuColumn,
-  MegaDropdownMenuGroup,
   TEXTBOOK_BETA_MEGA_MENU
 }
