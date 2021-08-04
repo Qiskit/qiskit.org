@@ -170,7 +170,7 @@ export default class IndiaWeekOfWomenInQuantumPage extends QiskitPage {
         position: 'third',
         title: 'Network and Interact',
         description: 'Meet and network with people already in quantum and learn quantum computing together.',
-        image: '/images/events/summer-school/chip.png',
+        image: '/images/events/summer-school/chip.png'
       },
       {
         position: 'fourth',
