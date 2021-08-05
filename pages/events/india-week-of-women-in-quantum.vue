@@ -182,7 +182,7 @@ export default class IndiaWeekOfWomenInQuantumPage extends QiskitPage {
             <li>Dr. Aditi Sen De</li>
             <li>Dr. Kasturi Saha</li>
             <li>Dr. Kavita Dorai</li>
-            <li>Dr. Sonali Mohaparta</li>
+            <li>Dr. Sonali Mohapatra</li>
           </ul>`,
         image: '/images/events/summer-school/quantum-composer-screen.png'
       }
