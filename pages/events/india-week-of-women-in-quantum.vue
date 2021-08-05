@@ -158,7 +158,7 @@ export default class IndiaWeekOfWomenInQuantumPage extends QiskitPage {
       {
         position: 'first',
         title: 'Listen to the stories of Experts',
-        description: 'Listen & interact directly with world-leading experts in quantum, who are making an impact with their work from across India',
+        description: 'Listen & interact directly with world-leading experts in quantum, who are making an impact with their work.',
         image: '/images/events/seminar-series/mosaic-experts.png'
       },
       {
@@ -175,17 +175,14 @@ export default class IndiaWeekOfWomenInQuantumPage extends QiskitPage {
       },
       {
         position: 'fourth',
-        title: 'A panel of experts: From Academia to Industry',
-        description: `Watch a lively discussion between our panelists on how to bridge the gender gap in quantum computing and how we can make quantum a safe space for everyone.<br><br>
+        title: 'A panel of experts: From Academia to Industry ',
+        description: `Watch a lively discussion between our panelists on how to bridge the gender gap in quantum computing and how we can create stronger and sustainable careers for women in quantum.<br><br>
           <strong>Our panelists include:</strong><br>
           <ul>
             <li>Dr. Aditi Sen De</li>
             <li>Dr. Kasturi Saha</li>
             <li>Dr. Kavita Dorai</li>
             <li>Dr. Sonali Mohaparta</li>
-            <li>Dr. Anupama Ray</li>
-            <li>Dr. Manjula Gandhi</li>
-            <li>Kavitha Yogaraj</li>
           </ul>`,
         image: '/images/events/summer-school/quantum-composer-screen.png'
       }
