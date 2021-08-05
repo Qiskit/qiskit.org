@@ -65,7 +65,8 @@ import QiskitPage from '~/components/logic/QiskitPage.vue'
 interface dailyAgenda {
   time: string,
   event: string,
-  speaker: string
+  speaker: string,
+  affiliation: string
 }
 
 @Component({
@@ -191,7 +192,7 @@ export default class IndiaWeekOfWomenInQuantumPage extends QiskitPage {
     ]
   }
 
-  agendaColumnsDataTable: string[] = ['Time', 'Event', 'Speaker']
+  agendaColumnsDataTable: string[] = ['Time', 'Event', 'Speaker', 'Affiliation']
 
   scheduleToTableData = (slot: dailyAgenda) => ([
     {
@@ -201,47 +202,61 @@ export default class IndiaWeekOfWomenInQuantumPage extends QiskitPage {
     },
     {
       component: 'span',
-      styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
+      styles: 'min-width: 15rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
       data: slot.event
     },
     {
       component: 'span',
-      styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
+      styles: 'min-width: 15rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
       data: slot.speaker
+    },
+    {
+      component: 'span',
+      styles: 'min-width: 15rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
+      data: slot.affiliation
     }
   ])
 
   day1Schedule: dailyAgenda[] = [
     {
       time: '5:00 pm - 5:15 pm IST',
-      event: 'Opening',
-      speaker: 'Yuri Kobayashi'
+      event: 'Kick-off event',
+      speaker: 'Yuri Kobayashi',
+      affiliation: 'IBM Quantum'
     },
     {
       time: '5:15 pm - 6:00 pm IST',
-      event: 'Talk 1 + Q&A',
-      speaker: 'Dr. Aditi Sen De'
+      event: 'Journey in Quantum- an academic perspective',
+      speaker: 'Dr. Aditi Sen De',
+      affiliation: 'Harish-Chandra Research Institute'
     },
     {
       time: '6:00 pm - 6:45 pm IST',
-      event: 'Talk 2 + Q&A',
-      speaker: 'Dr. Sonali Mohapatra'
+      event: 'Journey in Quantum- an industrial perspective',
+      speaker: 'Dr. Sonali Mohapatra',
+      affiliation: 'Craft Prospect Limited'
     }
   ]
 
   day2Schedule: dailyAgenda[] = [
     {
       time: '5:00 pm - 6:00 pm IST',
-      event: 'QC 101',
-      speaker: 'Dr. Anupama Ray'
+      event: 'Quantum Computing workshop',
+      speaker: 'Dr. Anupama Ray',
+      affiliation: 'IBM Research, India'
     },
     {
       time: '6:00pm - 6:45 pm IST',
-      event: 'Community Talks + Q&A',
+      event: 'Qiskit Community talks',
       speaker: `<ul>
         <li>Dr. Manjula Gandhi</li>
         <li>Kavitha Yogaraj</li>
         <li>Sabhyata Gupta</li>
+      </ul>`,
+      affiliation: `<ul>
+        <li>Coimbatore Institute of Technology</li>
+        <li>IBM Research, India</li>
+        <li>University of Barcelona</li>
       </ul>`
     }
   ]
@@ -249,18 +264,25 @@ export default class IndiaWeekOfWomenInQuantumPage extends QiskitPage {
   day3Schedule: dailyAgenda[] = [
     {
       time: '5:00 pm - 6:15 pm IST',
-      event: 'Panel Discussion',
+      event: 'Panel Discussion - equal representation of women in quantum',
       speaker: `<ul>
         <li>Dr. Aditi Sen De</li>
         <li>Dr. Kavita Dorai</li>
         <li>Dr. Kasturi Saha</li>
         <li>Sabhyata Gupta (Moderator)</li>
+      </ul>`,
+      affiliation: `<ul>
+        <li>Harish-Chandra Research Institute</li>
+        <li>IISER Mohali</li>
+        <li>IIT Bombay</li>
+        <li>University of Barcelona</li>
       </ul>`
     },
     {
       time: '6:15 pm - 6:45 pm IST',
       event: 'Networking + Career Booth',
-      speaker: '-'
+      speaker: '',
+      affiliation: ''
     }
   ]
 
