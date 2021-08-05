@@ -359,9 +359,6 @@ export default class IndiaWeekOfWomenInQuantumPage extends QiskitPage {
 
 <style lang="scss" scoped>
 .india-week-of-women-in-quantum-page {
-  display: flex;
-  flex-direction: column;
-
   &__section {
     margin-top: $layout-05;
     margin-bottom: $layout-03;
