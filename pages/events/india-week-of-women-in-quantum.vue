@@ -72,7 +72,7 @@ interface dailyAgenda {
 @Component({
   head () {
     const title = 'India Week Of Women In Quantum 2021'
-    const description = `The Qiskit Global Summer School 2021 is a three-days event
+    const description = `The India Week Of Women In Quantum 2021 is a three-days event
     designed to celebrate women in quantum and their remarkable journeys. Learn how you
     can kickstart your quantum journey and discover opportunities for you to develop in quantum.`
     const image = '/images/events/india-week-of-women-in-quantum/india-week-of-women-in-quantum-logo.png'
