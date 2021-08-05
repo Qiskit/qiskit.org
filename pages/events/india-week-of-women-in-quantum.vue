@@ -159,7 +159,7 @@ export default class IndiaWeekOfWomenInQuantumPage extends QiskitPage {
         position: 'first',
         title: 'Listen to the stories of Experts',
         description: 'Listen & interact directly with world-leading experts in quantum, who are making an impact with their work.',
-        image: '/images/events/seminar-series/mosaic-experts.png'
+        image: '/images/events/india-week-of-women-in-quantum/women-experts-in-quantum.png'
       },
       {
         position: 'second',
@@ -171,7 +171,7 @@ export default class IndiaWeekOfWomenInQuantumPage extends QiskitPage {
         position: 'third',
         title: 'Network and Interact',
         description: 'Meet and network with people already in quantum and learn quantum computing together.',
-        image: '/images/events/summer-school/chip.png'
+        image: '/images/common/people-on-discussion.png'
       },
       {
         position: 'fourth',
@@ -184,7 +184,7 @@ export default class IndiaWeekOfWomenInQuantumPage extends QiskitPage {
             <li>Dr. Kavita Dorai</li>
             <li>Dr. Sonali Mohapatra</li>
           </ul>`,
-        image: '/images/events/summer-school/quantum-composer-screen.png'
+        image: '/images/common/people-on-discussion-in-front-of-a-computer.png'
       }
     ]
   }
