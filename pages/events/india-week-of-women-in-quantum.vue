@@ -72,9 +72,9 @@ interface dailyAgenda {
 @Component({
   head () {
     const title = 'India Week Of Women In Quantum 2021'
-    const description = `The India Week Of Women In Quantum 2021 is a three-days event
-    designed to celebrate women in quantum and their remarkable journeys. Learn how you
-    can kickstart your quantum journey and discover opportunities for you to develop in quantum.`
+    const description = `The Qiskit India Week of Quantum is a three-day event designed to celebrate
+    women in quantum and their remarkable journeys. Listen to the life stories of how these amazing
+    women launched their careers in quantum and learn how they overcame the challenges they faced.`
     const image = '/images/events/india-week-of-women-in-quantum/india-week-of-women-in-quantum-logo.png'
 
     return {
