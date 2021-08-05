@@ -266,12 +266,14 @@ export default class IndiaWeekOfWomenInQuantumPage extends QiskitPage {
         <li>Dr. Aditi Sen De</li>
         <li>Dr. Kavita Dorai</li>
         <li>Dr. Kasturi Saha</li>
+        <li>Tina Sebastian</li>
         <li>Sabhyata Gupta (Moderator)</li>
       </ul>`,
       affiliation: `<ul>
         <li>Harish-Chandra Research Institute</li>
         <li>IISER Mohali</li>
         <li>IIT Bombay</li>
+        <li>Quacoon</li>
         <li>University of Barcelona</li>
       </ul>`
     },
