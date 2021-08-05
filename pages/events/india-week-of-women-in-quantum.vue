@@ -330,7 +330,7 @@ export default class IndiaWeekOfWomenInQuantumPage extends QiskitPage {
       },
       {
         title: 'Qiskit Medium',
-        description: "TThis blog provides a nice overview of Qiskit and its direction as we explore what applications can be done on today's quantum devices",
+        description: "This blog provides a nice overview of Qiskit and its direction as we explore what applications can be done on today's quantum devices",
         cta: {
           url: 'https://medium.com/qiskit/qiskit-and-its-fundamental-elements-bcd7ead80492',
           label: 'Read the blog',
