@@ -177,12 +177,12 @@ export default class IndiaWeekOfWomenInQuantumPage extends QiskitPage {
         position: 'fourth',
         title: 'A panel of experts: From Academia to Industry ',
         description: `Watch a lively discussion between our panelists on how to bridge the gender gap in quantum computing and how we can create stronger and sustainable careers for women in quantum.<br><br>
-          <strong>Our panelists include:</strong><br>
+          <strong>Our panellists include:</strong><br>
           <ul>
             <li>Dr. Aditi Sen De</li>
-            <li>Dr. Kasturi Saha</li>
             <li>Dr. Kavita Dorai</li>
-            <li>Dr. Sonali Mohapatra</li>
+            <li>Dr. Kasturi Saha</li>
+            <li>Tina Sebastian</li>
           </ul>`,
         image: '/images/common/people-on-discussion-in-front-of-a-computer.png'
       }
