@@ -144,7 +144,7 @@ export default class IndiaWeekOfWomenInQuantumPage extends QiskitPage {
     },
     cardSectionHeading: 'About the event:',
     card: {
-      image: '/images/events/summer-school/summer-school-logo.png',
+      image: '/images/common/photos/two-women-with-the-quantum-computer.png',
       title: 'Qiskit India Week of Quantum',
       description: 'This August, join the Qiskit community to celebrate women in quantum and their remarkable journeys.',
       location: 'Online',
