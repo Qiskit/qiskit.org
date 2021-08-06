@@ -51,6 +51,12 @@ const config: NuxtConfig = {
       : 'zbHWEXPUfXm0K6C7HbegwB5ewDEC8o1H'
   },
 
+  publicRuntimeConfig: {
+    baseURL: IS_PRODUCTION
+      ? 'https://qiskit.org'
+      : 'localhost:3000'
+  },
+
   /*
   ** Headers of the page
   */
