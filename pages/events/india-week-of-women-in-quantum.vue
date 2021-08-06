@@ -75,7 +75,8 @@ interface dailyAgenda {
     const description = `The Qiskit India Week of Quantum is a three-day event designed to celebrate
     women in quantum and their remarkable journeys. Listen to the life stories of how these amazing
     women launched their careers in quantum and learn how they overcame the challenges they faced.`
-    const image = '/images/events/india-week-of-women-in-quantum/india-week-of-women-in-quantum-logo.png'
+    const ogImage = '/images/events/india-week-of-women-in-quantum/india-week-of-women-in-quantum-logo.png'
+    const image = `${(this as any).baseURL}${ogImage}`
 
     return {
       title,
@@ -131,6 +132,7 @@ interface dailyAgenda {
   layout: 'default-max'
 })
 export default class IndiaWeekOfWomenInQuantumPage extends QiskitPage {
+  baseURL = window.location.host
   routeName = 'india-week-of-women-in-quantum'
   headerData = {
     title: 'Qiskit India Week of Quantum',
