@@ -82,6 +82,11 @@ interface dailyAgenda {
       title,
       meta: [
         {
+          hid: 'twitter:card',
+          name: 'twitter:card',
+          content: 'summary'
+        },
+        {
           hid: 'twitter:title',
           name: 'twitter:title',
           content: title
