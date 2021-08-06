@@ -159,19 +159,19 @@ export default class IndiaWeekOfWomenInQuantumPage extends QiskitPage {
         position: 'first',
         title: 'Listen to the stories of Experts',
         description: 'Listen & interact directly with world-leading experts in quantum, who are making an impact with their work.',
-        image: '/images/events/india-week-of-women-in-quantum/women-experts-in-quantum.png'
+        image: '/images/common/illustrations/two-women-with-the-quantum-computer.png'
       },
       {
         position: 'second',
         title: 'Kickstart your Quantum Journey',
         description: 'Learn how you can program quantum computers using Qiskit and discover new and exciting opportunities.',
-        image: '/images/events/summer-school/ibm-system-one-display.jpg'
+        image: '/images/events/india-week-of-women-in-quantum/team-working-on-a-project.png'
       },
       {
         position: 'third',
         title: 'Network and Interact',
         description: 'Meet and network with people already in quantum and learn quantum computing together.',
-        image: '/images/common/people-on-discussion.png'
+        image: '/images/common/photos/people-on-discussion-in-front-of-a-computer.jpg'
       },
       {
         position: 'fourth',
@@ -184,7 +184,7 @@ export default class IndiaWeekOfWomenInQuantumPage extends QiskitPage {
             <li>Dr. Kasturi Saha</li>
             <li>Tina Sebastian</li>
           </ul>`,
-        image: '/images/common/people-on-discussion-in-front-of-a-computer.png'
+        image: '/images/common/illustrations/people-on-discussion.png'
       }
     ]
   }
