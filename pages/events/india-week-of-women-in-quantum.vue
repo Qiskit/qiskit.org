@@ -136,7 +136,7 @@ export default class IndiaWeekOfWomenInQuantumPage extends QiskitPage {
     title: 'Qiskit India Week of Quantum',
     cta: {
       label: 'Register Now',
-      url: '#',
+      url: 'http://qisk.it/IndiaWeekReg',
       segment: {
         cta: 'register',
         location: 'header'
