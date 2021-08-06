@@ -76,7 +76,7 @@ interface dailyAgenda {
     women in quantum and their remarkable journeys. Listen to the life stories of how these amazing
     women launched their careers in quantum and learn how they overcame the challenges they faced.`
     const ogImage = '/images/events/india-week-of-women-in-quantum/india-week-of-women-in-quantum-logo.png'
-    const image = `${(this as any).baseURL}${ogImage}`
+    const image = `${this.$config.baseURL}${ogImage}`
 
     return {
       title,
@@ -132,7 +132,6 @@ interface dailyAgenda {
   layout: 'default-max'
 })
 export default class IndiaWeekOfWomenInQuantumPage extends QiskitPage {
-  baseURL = window.location.host
   routeName = 'india-week-of-women-in-quantum'
   headerData = {
     title: 'Qiskit India Week of Quantum',
