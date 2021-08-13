@@ -15,5 +15,8 @@ module.exports = {
   testMatch: ['**/tests/**/*.spec.ts'],
   collectCoverageFrom: [
     'hooks/**/*.ts'
+  ],
+  setupFiles: [
+    './jest.setup.js'
   ]
 }
