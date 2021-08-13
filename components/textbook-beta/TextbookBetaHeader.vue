@@ -27,7 +27,8 @@
 </template>
 
 <script lang="ts">
-import Vue, { VueConstructor } from 'vue'
+import Vue from 'vue'
+import type { VueConstructor } from 'vue'
 import { Component } from 'vue-property-decorator'
 import { TEXTBOOK_BETA_START_LEARNING } from '~/constants/appLinks'
 import { TEXTBOOK_BETA_MEGA_MENU } from '~/constants/megaMenuLinks'
