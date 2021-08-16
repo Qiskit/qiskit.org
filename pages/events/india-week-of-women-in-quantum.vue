@@ -258,7 +258,7 @@ export default class IndiaWeekOfWomenInQuantumPage extends QiskitPage {
       </ul>`,
       affiliation: `<ul>
         <li>Coimbatore Institute of Technology</li>
-        <li>IBM Research, India</li>
+        <li>IBM GBS India</li>
         <li>University of Barcelona</li>
       </ul>`
     }
