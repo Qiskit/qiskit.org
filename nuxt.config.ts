@@ -112,7 +112,20 @@ const config: NuxtConfig = {
     'nuxt-lazy-load'
   ],
 
-  components: true,
+  components: [
+    '~/components/advocates',
+    '~/components/blockbuster',
+    '~/components/events',
+    '~/components/global',
+    '~/components/landing',
+    '~/components/layouts',
+    '~/components/learn',
+    '~/components/logic',
+    '~/components/metal',
+    '~/components/overview',
+    '~/components/textbook-beta',
+    '~/components/ui'
+  ],
 
   // Nuxt Style Resources: @nuxtjs/style-resources
   styleResources: {
