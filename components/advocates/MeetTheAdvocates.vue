@@ -59,7 +59,8 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { mapState, MapperForStateWithNamespace } from 'vuex'
+import { mapState } from 'vuex'
+import type { MapperForStateWithNamespace } from 'vuex'
 import { Component, Prop } from 'vue-property-decorator'
 import { Advocate, ADVOCATES_WORLD_REGION_OPTIONS, State } from '~/store/advocates'
 

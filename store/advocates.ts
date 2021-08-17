@@ -1,4 +1,4 @@
-import { ActionTree, GetterTree, MutationTree } from 'vuex'
+import type { ActionTree, GetterTree, MutationTree } from 'vuex'
 
 const ADVOCATES_WORLD_REGIONS = Object.freeze({
   northAmerica: 'North America',

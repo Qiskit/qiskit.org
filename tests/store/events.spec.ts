@@ -38,6 +38,7 @@ describe('module events', () => {
   const pastEvents = [hackathonInSouthAmerica]
 
   beforeEach(() => {
+    // eslint-disable-next-line import/no-named-as-default-member
     store = new Vuex.Store(storeOptions())
     store.commit('setEvents', {
       events: 'upcomingCommunityEvents',

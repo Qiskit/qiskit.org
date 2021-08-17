@@ -1,5 +1,6 @@
 import Vue from 'vue'
-import Vuex, { Store } from 'vuex'
+import Vuex from 'vuex'
+import type { Store } from 'vuex'
 import storeOptions from './_store-options'
 
 Vue.use(Vuex)
@@ -33,6 +34,7 @@ describe('filteredAdvocates', () => {
   const mockNonMatchingRegionFilter = () => 'Moon'
 
   beforeEach(() => {
+    // eslint-disable-next-line import/no-named-as-default-member
     store = new Vuex.Store(storeOptions())
     store.commit('advocates/setAdvocates', [mockAdvocate1(), mockAdvocate2()])
   })
@@ -67,6 +69,7 @@ describe('setAdvocates', () => {
   const mutationType = 'advocates/setAdvocates'
 
   beforeEach(() => {
+    // eslint-disable-next-line import/no-named-as-default-member
     store = new Vuex.Store(storeOptions())
   })
 
@@ -98,6 +101,7 @@ describe('setRegionFilters', () => {
   const mockRegionFilter2 = 'Europe'
 
   beforeEach(() => {
+    // eslint-disable-next-line import/no-named-as-default-member
     store = new Vuex.Store(storeOptions())
   })
 

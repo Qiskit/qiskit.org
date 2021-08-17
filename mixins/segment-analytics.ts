@@ -1,6 +1,7 @@
-import Vue, { ComponentOptions } from 'vue'
+import Vue from 'vue'
+import type { ComponentOptions } from 'vue'
 import { Component } from 'vue-property-decorator'
-import { Route } from 'vue-router'
+import type { Route } from 'vue-router'
 
 // Patch the Component decorator to work with abstract classes.
 // @ts-ignore is needed for avoiding the error:
