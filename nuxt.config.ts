@@ -113,18 +113,10 @@ const config: NuxtConfig = {
   ],
 
   components: [
-    '~/components/advocates',
-    '~/components/blockbuster',
-    '~/components/events',
-    '~/components/global',
-    '~/components/landing',
-    '~/components/layouts',
-    '~/components/learn',
-    '~/components/logic',
-    '~/components/metal',
-    '~/components/overview',
-    '~/components/textbook-beta',
-    '~/components/ui'
+    {
+      path: '~/components',
+      pathPrefix: false
+    }
   ],
 
   // Nuxt Style Resources: @nuxtjs/style-resources
