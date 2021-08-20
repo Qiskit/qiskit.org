@@ -68,16 +68,17 @@ jobs:
           APP_NAME: ${{ env.DOCKER_IMAGE_NAME }}-${{ env.PR_TAG }}
           DOCKER_IMAGE_TAG: icr.io/community-digital/${{ env.DOCKER_IMAGE_NAME }}:${{ env.PR_TAG }}
         run: |
-          PREVIEW_URL=$(ibmcloud ce app ${{ steps.ce_command_choice.outputs.command }} \
+          ibmcloud ce app ${{ steps.ce_command_choice.outputs.command }} \
             --name "$APP_NAME" \
             --image "$DOCKER_IMAGE_TAG" \
             --registry-secret "$CODE_ENGINE_REGISTRY_SECRET" \
             --port $DOCKER_IMAGE_PORT \
             --cpu 0.25 \
             --memory 0.5G \
-            --min 1 \
-          | tail -n1)
-          echo "::set-output name=preview_url::$PREVIEW_URL"
+            --min 1
+          echo "::set-output name=preview_url::$(\
+            ibmcloud ce app get --name "$APP_NAME" --output url
+          )"
 
       - uses: chrnorm/deployment-action@releases/v1
         name: Create GitHub deployment
