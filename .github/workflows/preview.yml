@@ -11,6 +11,7 @@ jobs:
       DOCKER_IMAGE_NAME: qiskit-org
       DOCKER_IMAGE_PORT: 3000
 
+      IBMCLOUD_ACCOUNT: ${{ secrets.IBMCLOUD_ACCOUNT }}
       IBMCLOUD_API_KEY: ${{ secrets.IBMCLOUD_API_KEY }}
       IBMCLOUD_REGION: us-south
       IBMCLOUD_RESOURCE_GROUP: Quantum Community
@@ -48,7 +49,7 @@ jobs:
 
       - name: Authenticate with IBM Cloud CLI
         run: |
-          ibmcloud login -g "$IBMCLOUD_RESOURCE_GROUP" -r "$IBMCLOUD_REGION" --apikey $IBMCLOUD_API_KEY
+          ibmcloud login -g "$IBMCLOUD_RESOURCE_GROUP" -r "$IBMCLOUD_REGION" -c "$IBMCLOUD_ACCOUNT" --apikey $IBMCLOUD_API_KEY
 
       - name: Determine Code Engine project and app status
         id: ce_command_choice
