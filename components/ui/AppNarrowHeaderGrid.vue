@@ -64,5 +64,5 @@ import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 
 @Component
-export default class AppHeaderGrid extends Vue {}
+export default class AppNarrowHeaderGrid extends Vue {}
 </script>
