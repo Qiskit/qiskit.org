@@ -2,6 +2,9 @@
   <header class="textbook-beta-header">
     <div class="textbook-beta-header__container-wrapper">
       <div class="textbook-beta-header__container">
+        <div class="textbook-beta-header__logo-container">
+          <DynamicBackgroundLogo class="textbook-beta-header__logo" />
+        </div>
         <div>
           <h1 class="textbook-beta-header__headline">
             Qiskit Textbook (beta)
@@ -102,16 +105,18 @@ export default class TextbookBetaHeader extends (Vue as VueConstructor<VueCompon
     @include contained();
 
     max-width: $max-size;
-    background-image: url("/images/textbook-beta/qiskit-logo-header.png");
+    //background-image: url("/images/textbook-beta/qiskit-logo-header.png");
     background-position: right center;
     background-repeat: no-repeat;
     background-size: 50% auto;
+    position: relative;
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
     padding-top: $spacing-09;
+    overflow: hidden;
 
     @include mq($from:medium, $until: large) {
       padding-top: $layout-06;
@@ -131,6 +136,36 @@ export default class TextbookBetaHeader extends (Vue as VueConstructor<VueCompon
     }
   }
 
+  &__logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    padding-top: 100%;
+    transform: translate(-50%, -50%);
+
+    @include mq($until: large) {
+      width: calc(100% + 5rem);
+      padding-top: calc(100% + 5rem);
+    }
+
+    &-container {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 40%;
+      height: 100%;
+
+      @include mq($from:medium, $until: large) {
+        width: 50%;
+      }
+      @include mq($until: medium) {
+        width: 80%;
+        height: 80%;
+      }
+    }
+  }
+
   &__dropdown {
     margin-top: $layout-03;
   }
@@ -145,6 +180,8 @@ export default class TextbookBetaHeader extends (Vue as VueConstructor<VueCompon
 
   &__cta {
     align-self: flex-end;
+    // this is necessary to respect z ordering with the absolute elements.
+    position: relative;
   }
 }
 
