@@ -115,12 +115,15 @@ export default defineComponent({
 
       // this disparity of html-width/height and css-width/height
       // creates a high resolution canvas with better lines
-      canvas.width = parentWidth * pixelDensity
-      canvas.height = parentHeight * pixelDensity
+      const dpr = (window.devicePixelRatio || 1) * pixelDensity
+
+      canvas.width = parentWidth * dpr
+      canvas.height = parentHeight * dpr
       canvas.style.width = `${parentWidth}px`
       canvas.style.height = `${parentHeight}px`
-      const dpr = window.devicePixelRatio || 1
-      ctx.scale(dpr * pixelDensity, dpr * pixelDensity)
+      // console.log(dpr)
+      ctx.scale(dpr, dpr)
+      animationProgress = 0.9
     }
 
     // randomize mask with the quantum probabilities
@@ -150,8 +153,12 @@ export default defineComponent({
     let animationProgress = 0
     // setTimeout(() => sketch.noLoop(), 5000)
     const draw = (deltaTime: number) => {
+      const newAnimationProgress = Math.min(animationProgress + deltaTime * 0.0001 * drawSpeed, 1)
+      if (newAnimationProgress === animationProgress) {
+        return
+      }
+      animationProgress = newAnimationProgress
       ctx.clearRect(0, 0, canvas.width, canvas.height)
-      animationProgress = Math.min(animationProgress + deltaTime * 0.0001 * drawSpeed, 1)
 
       for (let i = 0; i < maskWidth; i++) {
         for (let j = 0; j < maskHeight; j++) {
@@ -178,11 +185,10 @@ export default defineComponent({
       window.requestAnimationFrame(loop)
     }
     window.requestAnimationFrame(loop)
-  }
-  /*
+  }/*,
   methods: {
-  }
-  */
+
+  }*/
 })
 </script>
 
