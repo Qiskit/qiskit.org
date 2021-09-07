@@ -125,6 +125,11 @@ export default defineComponent({
         this.drawSpeed = this.initialDrawSpeed * 3 * 0.1
         this.randomizeMask()
       })
+      window.addEventListener('touchstart', () => {
+        this.animationProgress = 0.5
+        this.drawSpeed = this.initialDrawSpeed * 3 * 0.1
+        this.randomizeMask()
+      })
       this.resize()
 
       this.randomizeMask()
