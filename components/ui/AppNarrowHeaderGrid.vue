@@ -1,61 +1,66 @@
 <template>
-  <svg width="1584" height="898" viewBox="0 0 1584 898" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <!-- Vertical lines -->
-    <line x1="-40" y1="1" x2="1592" y2="1" stroke="#DDE1E6" />
-    <line x1="-40" y1="65" x2="1592" y2="65" stroke="#DDE1E6" />
-    <line x1="-40" y1="129" x2="1592" y2="129" stroke="#DDE1E6" />
-    <line x1="-40" y1="193" x2="1592" y2="193" stroke="#DDE1E6" />
-    <line x1="-40" y1="257" x2="1592" y2="257" stroke="#DDE1E6" />
-    <line x1="-40" y1="321" x2="1592" y2="321" stroke="#DDE1E6" />
-    <line x1="-40" y1="385" x2="1592" y2="385" stroke="#DDE1E6" />
-    <line x1="-40" y1="449" x2="1592" y2="449" stroke="#DDE1E6" />
-    <line x1="-40" y1="513" x2="1592" y2="513" stroke="#DDE1E6" />
-    <line x1="-40" y1="577" x2="1592" y2="577" stroke="#DDE1E6" />
-    <line x1="-40" y1="641" x2="1592" y2="641" stroke="#DDE1E6" />
-    <line x1="-40" y1="705" x2="728" y2="705" stroke="#DDE1E6" />
-    <line x1="856" y1="705" x2="984" y2="705" stroke="#DDE1E6" />
-    <line x1="1048" y1="705" x2="1176" y2="705" stroke="#DDE1E6" />
-    <line x1="1240" y1="705" x2="1592" y2="705" stroke="#DDE1E6" />
-    <line x1="-40" y1="769" x2="536" y2="769" stroke="#DDE1E6" />
-    <line x1="600" y1="769" x2="664" y2="769" stroke="#DDE1E6" />
-    <line x1="728" y1="769" x2="792" y2="769" stroke="#DDE1E6" />
-    <line x1="856" y1="769" x2="920" y2="769" stroke="#DDE1E6" />
-    <line x1="1112" y1="769" x2="1176" y2="769" stroke="#DDE1E6" />
-    <line x1="1304" y1="769" x2="1592" y2="769" stroke="#DDE1E6" />
-    <line x1="408" y1="833" x2="536" y2="833" stroke="#DDE1E6" />
-    <line x1="728" y1="833" x2="792" y2="833" stroke="#DDE1E6" />
-    <line x1="472" y1="897" x2="536" y2="897" stroke="#DDE1E6" />
+  <svg
+    class="app-narrow-header-grid"
+    width="1860"
+    height="898"
+    viewBox="0 0 1860 898"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg">
 
     <!-- Horizontal lines -->
-    <line x1="24" y1="1" x2="24" y2="769" stroke="#DDE1E6" />
-    <line x1="88" y1="1" x2="88" y2="769" stroke="#DDE1E6" />
-    <line x1="152" y1="1" x2="152" y2="769" stroke="#DDE1E6" />
-    <line x1="216" y1="1" x2="216" y2="769" stroke="#DDE1E6" />
-    <line x1="280" y1="1" x2="280" y2="769" stroke="#DDE1E6" />
-    <line x1="344" y1="1" x2="344" y2="641" stroke="#DDE1E6" />
-    <line x1="344" y1="705" x2="344" y2="769" stroke="#DDE1E6" />
-    <line x1="408" y1="1" x2="408" y2="833" stroke="#DDE1E6" />
-    <line x1="472" y1="1" x2="472" y2="897" stroke="#DDE1E6" />
-    <line x1="536" y1="1" x2="536" y2="769" stroke="#DDE1E6" />
-    <line x1="536" y1="833" x2="536" y2="897" stroke="#DDE1E6" />
-    <line x1="600" y1="1" x2="600" y2="769" stroke="#DDE1E6" />
-    <line x1="664" y1="1" x2="664" y2="769" stroke="#DDE1E6" />
-    <line x1="728" y1="1" x2="728" y2="705" stroke="#DDE1E6" />
-    <line x1="728" y1="769" x2="728" y2="833" stroke="#DDE1E6" />
-    <line x1="792" y1="1" x2="792" y2="641" stroke="#DDE1E6" />
-    <line x1="792" y1="769" x2="792" y2="833" stroke="#DDE1E6" />
-    <line x1="856" y1="1" x2="856" y2="769" stroke="#DDE1E6" />
-    <line x1="920" y1="1" x2="920" y2="769" stroke="#DDE1E6" />
-    <line x1="984" y1="1" x2="984" y2="705" stroke="#DDE1E6" />
-    <line x1="1048" y1="1" x2="1048" y2="705" stroke="#DDE1E6" />
-    <line x1="1112" y1="1" x2="1112" y2="769" stroke="#DDE1E6" />
-    <line x1="1176" y1="1" x2="1176" y2="769" stroke="#DDE1E6" />
-    <line x1="1240" y1="1" x2="1240" y2="705" stroke="#DDE1E6" />
-    <line x1="1304" y1="1" x2="1304" y2="769" stroke="#DDE1E6" />
-    <line x1="1368" y1="1" x2="1368" y2="769" stroke="#DDE1E6" />
-    <line x1="1432" y1="1" x2="1432" y2="769" stroke="#DDE1E6" />
-    <line x1="1496" y1="1" x2="1496" y2="769" stroke="#DDE1E6" />
-    <line x1="1560" y1="1" x2="1560" y2="769" stroke="#DDE1E6" />
+    <line x1="0" y1="0" x2="1860" y2="0" stroke="#DDE1E6" />
+    <line x1="0" y1="64" x2="1860" y2="64" stroke="#DDE1E6" />
+    <line x1="0" y1="128" x2="1860" y2="128" stroke="#DDE1E6" />
+    <line x1="0" y1="192" x2="1860" y2="192" stroke="#DDE1E6" />
+    <line x1="0" y1="256" x2="772" y2="256" stroke="#DDE1E6" />
+    <line x1="900" y1="256" x2="1028" y2="256" stroke="#DDE1E6" />
+    <line x1="1092" y1="256" x2="1220" y2="256" stroke="#DDE1E6" />
+    <line x1="1284" y1="256" x2="1860" y2="256" stroke="#DDE1E6" />
+    <line x1="0" y1="320" x2="580" y2="320" stroke="#DDE1E6" />
+    <line x1="644" y1="320" x2="708" y2="320" stroke="#DDE1E6" />
+    <line x1="772" y1="320" x2="836" y2="320" stroke="#DDE1E6" />
+    <line x1="900" y1="320" x2="964" y2="320" stroke="#DDE1E6" />
+    <line x1="1156" y1="320" x2="1220" y2="320" stroke="#DDE1E6" />
+    <line x1="1348" y1="320" x2="1860" y2="320" stroke="#DDE1E6" />
+    <line x1="452" y1="384" x2="580" y2="384" stroke="#DDE1E6" />
+    <line x1="772" y1="384" x2="836" y2="384" stroke="#DDE1E6" />
+    <line x1="516" y1="448" x2="580" y2="448" stroke="#DDE1E6" />
+
+    <!-- Vertical lines -->
+    <line x1="4" y1="0" x2="4" y2="320" stroke="#DDE1E6" />
+    <line x1="68" y1="0" x2="68" y2="320" stroke="#DDE1E6" />
+    <line x1="132" y1="0" x2="132" y2="320" stroke="#DDE1E6" />
+    <line x1="196" y1="0" x2="196" y2="320" stroke="#DDE1E6" />
+    <line x1="260" y1="0" x2="260" y2="320" stroke="#DDE1E6" />
+    <line x1="324" y1="0" x2="324" y2="320" stroke="#DDE1E6" />
+    <line x1="388" y1="0" x2="388" y2="192" stroke="#DDE1E6" />
+    <line x1="388" y1="256" x2="388" y2="320" stroke="#DDE1E6" />
+    <line x1="452" y1="0" x2="452" y2="384" stroke="#DDE1E6" />
+    <line x1="516" y1="0" x2="516" y2="448" stroke="#DDE1E6" />
+    <line x1="580" y1="0" x2="580" y2="320" stroke="#DDE1E6" />
+    <line x1="580" y1="384" x2="580" y2="448" stroke="#DDE1E6" />
+    <line x1="644" y1="0" x2="644" y2="320" stroke="#DDE1E6" />
+    <line x1="708" y1="0" x2="708" y2="320" stroke="#DDE1E6" />
+    <line x1="772" y1="0" x2="772" y2="256" stroke="#DDE1E6" />
+    <line x1="772" y1="320" x2="772" y2="384" stroke="#DDE1E6" />
+    <line x1="836" y1="0" x2="836" y2="192" stroke="#DDE1E6" />
+    <line x1="836" y1="320" x2="836" y2="384" stroke="#DDE1E6" />
+    <line x1="900" y1="0" x2="900" y2="320" stroke="#DDE1E6" />
+    <line x1="964" y1="0" x2="964" y2="320" stroke="#DDE1E6" />
+    <line x1="1028" y1="0" x2="1028" y2="256" stroke="#DDE1E6" />
+    <line x1="1092" y1="0" x2="1092" y2="256" stroke="#DDE1E6" />
+    <line x1="1156" y1="0" x2="1156" y2="320" stroke="#DDE1E6" />
+    <line x1="1220" y1="0" x2="1220" y2="320" stroke="#DDE1E6" />
+    <line x1="1284" y1="0" x2="1284" y2="256" stroke="#DDE1E6" />
+    <line x1="1348" y1="0" x2="1348" y2="320" stroke="#DDE1E6" />
+    <line x1="1412" y1="0" x2="1412" y2="320" stroke="#DDE1E6" />
+    <line x1="1476" y1="0" x2="1476" y2="320" stroke="#DDE1E6" />
+    <line x1="1540" y1="0" x2="1540" y2="320" stroke="#DDE1E6" />
+    <line x1="1604" y1="0" x2="1604" y2="320" stroke="#DDE1E6" />
+    <line x1="1668" y1="0" x2="1668" y2="320" stroke="#DDE1E6" />
+    <line x1="1732" y1="0" x2="1732" y2="320" stroke="#DDE1E6" />
+    <line x1="1796" y1="0" x2="1796" y2="320" stroke="#DDE1E6" />
+    <line x1="1860" y1="0" x2="1860" y2="320" stroke="#DDE1E6" />
   </svg>
 </template>
 
@@ -66,3 +71,13 @@ import { Component } from 'vue-property-decorator'
 @Component
 export default class AppNarrowHeaderGrid extends Vue {}
 </script>
+
+<style lang="scss" scoped>
+.app-narrow-header-grid {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translate(-50%, 0);
+  z-index:-1;
+}
+</style>

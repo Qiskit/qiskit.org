@@ -1,5 +1,6 @@
 <template>
   <header class="app-page-header-fixed">
+    <AppNarrowHeaderGrid />
     <div class="bx--grid app-page-header-fixed__container">
       <div class="bx--row">
         <h1 class="bx--col-sm bx--col-md-6 bx--col-lg-10 bx--col-max-8">
@@ -20,8 +21,8 @@ export default class AppPageHeaderFixed extends Vue {}
 
 <style lang="scss" scoped>
 .app-page-header-fixed {
-  @include responsive-grid-bg-strip("/images/grid/grid-hero-learn.svg", auto, 28rem);
-
+  // @include responsive-grid-bg-strip("/images/grid/grid-hero-learn.svg", auto, 28rem);
+  position: relative;
   align-items: center;
   display: flex;
   height: 28rem;
