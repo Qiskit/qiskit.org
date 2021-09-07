@@ -7,6 +7,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue-demi'
 
+const spacing = 4
 const successRatio1 = 6970 / 16384 // 11001
 const successRatio2 = 6124 / 16384 // 00110
 const accumulatedSuccessRatio = successRatio1 + successRatio2 // 11001 || 00110
@@ -79,116 +80,131 @@ const imgMask = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 ]
 
+interface GridCell {
+  value: number;
+  delay: number;
+}
+
 export default defineComponent({
   name: 'DynamicBackgroundLogo',
+  props: {
+    pixelDensity: { type: Number, required: false, default: 2 },
+    initialDrawSpeed: { type: Number, required: false, default: 5 }
+  },
+  data () {
+    return {
+      parentWidth: 0,
+      parentHeight: 0,
+      squareSizeWithSpacing: 0,
+      squareSize: 0,
+      drawSpeed: 0,
+      animationProgress: 0,
+      gridData: [[]] as GridCell[][],
+      lastRender: 0
+    }
+  },
+  computed: {
+    maskHeight: () => imgMask.length,
+    maskWidth: () => imgMask[0].length,
+    parent () : HTMLElement { return this.$refs.canvasWrapper as HTMLElement },
+    canvas () : HTMLCanvasElement { return this.$refs.canvas as HTMLCanvasElement },
+    renderingContext () : CanvasRenderingContext2D { return this.canvas.getContext('2d')! }
+  },
   mounted () {
-    const parent = this.$refs.canvasWrapper as HTMLElement
-    const canvas = this.$refs.canvas as HTMLCanvasElement
-    const ctx = canvas.getContext('2d')!
-    ctx.globalCompositeOperation = 'destination-atop'
-    const pixelDensity = 2
+    this.initRenderLoop()
+  },
+  methods: {
+    initRenderLoop () {
+      this.renderingContext.globalCompositeOperation = 'destination-atop'
 
-    const maskHeight = imgMask.length
-    const maskWidth = imgMask[0].length
+      this.drawSpeed = this.initialDrawSpeed * 0.1
 
-    const spacing = 4
-    let drawSpeed = 5
+      window.addEventListener('resize', this.resize)
+      window.addEventListener('keydown', () => {
+        this.animationProgress = 0.5
+        this.drawSpeed = this.initialDrawSpeed * 3 * 0.1
+        this.randomizeMask()
+      })
+      this.resize()
 
-    let parentWidth = 0
-    let parentHeight = 0
-    let squareSizeWithSpacing = 0
-    let squareSize = 0
+      this.randomizeMask()
+      window.requestAnimationFrame(this.loop)
+    },
+    loop (timestamp : DOMHighResTimeStamp) {
+      if (this.lastRender === 0) {
+        this.lastRender = timestamp
+      }
+      const deltaTime = Math.min(timestamp - this.lastRender, 20)
 
-    window.addEventListener('resize', resize)
-    window.addEventListener('keydown', () => {
-      animationProgress = 0.5
-      drawSpeed = 5
-      randomizeMask()
-    })
-    resize()
+      this.draw(deltaTime)
 
-    function resize () {
-      parentWidth = parent.clientWidth
-      parentHeight = parent.clientHeight
-      squareSizeWithSpacing = (parentWidth - 2 * spacing) / Math.max(maskHeight, maskWidth)
-      squareSize = squareSizeWithSpacing - spacing
-
-      // this disparity of html-width/height and css-width/height
-      // creates a high resolution canvas with better lines
-      const dpr = (window.devicePixelRatio || 1) * pixelDensity
-
-      canvas.width = parentWidth * dpr
-      canvas.height = parentHeight * dpr
-      canvas.style.width = `${parentWidth}px`
-      canvas.style.height = `${parentHeight}px`
-      // console.log(dpr)
-      ctx.scale(dpr, dpr)
-      animationProgress = 0.9
-    }
-
-    // randomize mask with the quantum probabilities
-    let gridData: { value: number; delay: number; }[][]
-    function randomizeMask () {
-      gridData = imgMask.map(row => row.map((maskValue: number) => {
-        const randomSuccess = Math.random()
-        const randomDelay = Math.random()
-        const success1 = randomSuccess <= successRatio1
-        const success2 = randomSuccess > successRatio1 && randomSuccess < accumulatedSuccessRatio
-
-        if (maskValue === 1) { // 1 accept both states
-          return { value: success1 ? 1 : success2 ? 2 : 0, delay: randomDelay }
-        } else if (maskValue === 2) { // 2 accept only second state
-          return { value: success2 ? 2 : 0, delay: randomDelay }
-        } else {
-          return { value: 0, delay: 0 }
-        }
-      }))
-    }
-    randomizeMask()
-
-    function clamp (value: number) : number {
-      return Math.min(Math.max(value, 0), 1)
-    }
-
-    let animationProgress = 0
-    // setTimeout(() => sketch.noLoop(), 5000)
-    const draw = (deltaTime: number) => {
-      const newAnimationProgress = Math.min(animationProgress + deltaTime * 0.0001 * drawSpeed, 1)
-      if (newAnimationProgress === animationProgress) {
+      this.lastRender = timestamp
+      window.requestAnimationFrame(this.loop)
+    },
+    draw (deltaTime: number) {
+      const deltaTimeSeconds = deltaTime * 0.001
+      const frameProgress = deltaTimeSeconds * this.drawSpeed
+      const newAnimationProgress = Math.min(this.animationProgress + frameProgress, 1)
+      // prevent redrawing on finished animation
+      if (newAnimationProgress === this.animationProgress) {
         return
       }
-      animationProgress = newAnimationProgress
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      this.animationProgress = newAnimationProgress
+      this.renderingContext!.clearRect(0, 0, this.canvas!.width, this.canvas!.height)
 
-      for (let i = 0; i < maskWidth; i++) {
-        for (let j = 0; j < maskHeight; j++) {
-          const gridElement = gridData[j][i]
-          if (gridElement.value !== 0) {
-            ctx.strokeStyle = `rgba(255, 255, 255, ${Math.pow(clamp(animationProgress * 2 - gridElement.delay), 2) * 2})`
-            const finalSize = squareSize / gridElement.value
-            ctx.strokeRect(spacing + i * squareSizeWithSpacing, spacing + j * squareSizeWithSpacing, finalSize, finalSize)
+      for (let i = 0; i < this.maskWidth; i++) {
+        for (let j = 0; j < this.maskHeight; j++) {
+          const gridElement = this.gridData[j][i]
+          if (gridElement.value) {
+            const alpha = Math.pow(this.clamp(this.animationProgress * 2 - gridElement.delay), 2) * 2
+            this.renderingContext!.strokeStyle = `rgba(255, 255, 255, ${alpha})`
+            const finalSize = this.squareSize / gridElement.value
+            this.renderingContext!.strokeRect(spacing + i * this.squareSizeWithSpacing, spacing + j * this.squareSizeWithSpacing, finalSize, finalSize)
           }
         }
       }
+    },
+    resize () {
+      this.parentWidth = this.parent!.clientWidth
+      this.parentHeight = this.parent!.clientHeight
+      this.squareSizeWithSpacing = (this.parentWidth - 2 * spacing) / Math.max(this.maskHeight, this.maskWidth)
+      this.squareSize = this.squareSizeWithSpacing - spacing
+
+      const dpr = (window.devicePixelRatio || 1) * this.pixelDensity
+
+      // this disparity of html-width/height and css-width/height
+      // creates a high resolution canvas with better lines
+      this.canvas!.width = this.parentWidth * dpr
+      this.canvas!.height = this.parentHeight * dpr
+      this.canvas!.style.width = `${this.parentWidth}px`
+      this.canvas!.style.height = `${this.parentHeight}px`
+
+      this.renderingContext!.scale(dpr, dpr)
+      this.animationProgress = Math.min(0.9, this.animationProgress)
+    },
+    // randomize mask with the quantum probabilities
+    randomizeMask () {
+      this.gridData = imgMask.map(row => row.map((maskValue: number) => {
+        const randomSuccess = Math.random()
+        const randomDelay = Math.random()
+        const success1 = randomSuccess <= successRatio1
+        const success2 = randomSuccess > successRatio1 && randomSuccess <= accumulatedSuccessRatio
+
+        if (maskValue === 1) { // 1 accept both states
+          return { value: success1 ? 1 : success2 ? 2 : 0, delay: randomDelay }
+        }
+
+        if (maskValue === 2) { // 2 accept only second state
+          return { value: success2 ? 2 : 0, delay: randomDelay }
+        }
+
+        return { value: 0, delay: 0 }
+      }))
+    },
+    clamp (value: number) : number {
+      return Math.min(Math.max(value, 0), 1)
     }
-
-    let lastRender = 0
-    const loop = (timestamp : DOMHighResTimeStamp) => {
-      if (lastRender === 0) {
-        lastRender = timestamp
-      }
-      const deltaTime = Math.min(timestamp - lastRender, 20)
-
-      draw(deltaTime)
-
-      lastRender = timestamp
-      window.requestAnimationFrame(loop)
-    }
-    window.requestAnimationFrame(loop)
-  }/*,
-  methods: {
-
-  }*/
+  }
 })
 </script>
 
