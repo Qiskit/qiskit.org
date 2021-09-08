@@ -5,8 +5,8 @@
     height="898"
     viewBox="0 0 1860 898"
     fill="none"
-    xmlns="http://www.w3.org/2000/svg">
-
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <path
       class="app-narrow-header-grid__lines"
       stroke="#DDE1E6"
