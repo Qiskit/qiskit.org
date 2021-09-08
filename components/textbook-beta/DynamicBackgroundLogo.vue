@@ -1,6 +1,7 @@
 <template>
   <div ref="canvasWrapper" class="canvas-wrapper">
     <canvas ref="canvas" class="background-canvas" />
+    <SketchLogo class="overlay-logo" />
   </div>
 </template>
 
@@ -220,6 +221,13 @@ export default defineComponent({
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+  }
+  .overlay-logo {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 87%;
   }
 }
 
