@@ -105,10 +105,6 @@ export default class TextbookBetaHeader extends (Vue as VueConstructor<VueCompon
     @include contained();
 
     max-width: $max-size;
-    //background-image: url("/images/textbook-beta/qiskit-logo-header.png");
-    background-position: right center;
-    background-repeat: no-repeat;
-    background-size: 50% auto;
     position: relative;
     flex: 1;
     display: flex;
@@ -116,18 +112,11 @@ export default class TextbookBetaHeader extends (Vue as VueConstructor<VueCompon
     justify-content: space-between;
     height: 100%;
     padding-top: $spacing-09;
-    overflow: hidden;
 
     @include mq($from:medium, $until: large) {
       padding-top: $layout-06;
-      background-position: calc(100% + 5rem) calc(100% + 5rem);
-      background-size: 60%;
     }
 
-    @include mq($until: medium) {
-      background-position: calc(100% + 5rem) calc(100% + 2rem);
-      background-size: 90%;
-    }
     &-wrapper {
       @include responsive-grid-bg-strip("/images/grid/grid-hero-textbook.svg", auto, 95%);
 
@@ -155,6 +144,7 @@ export default class TextbookBetaHeader extends (Vue as VueConstructor<VueCompon
       bottom: 0;
       width: 40%;
       height: 100%;
+      overflow: hidden;
 
       @include mq($from:medium, $until: large) {
         width: 50%;
