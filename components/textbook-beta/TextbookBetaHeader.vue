@@ -134,8 +134,8 @@ export default class TextbookBetaHeader extends (Vue as VueConstructor<VueCompon
     transform: translate(-50%, -50%);
 
     @include mq($until: large) {
-      width: calc(100% + 5rem);
-      padding-top: calc(100% + 5rem);
+      width: calc(100% + $spacing-11);
+      padding-top: calc(100% + $spacing-11);
     }
 
     &-container {
