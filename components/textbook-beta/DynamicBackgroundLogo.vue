@@ -8,7 +8,24 @@
 <script lang="ts">
 import { defineComponent } from 'vue-demi'
 
-const spacing = 4
+// These numbers are the count of the results of executing a quantum circuit:
+//
+// qreg q[5];
+// creg c[5];
+//
+// h q[0];
+// cx q[0],q[1];
+// cx q[0],q[2];
+// x q[0];
+// cx q[0],q[3];
+// cx q[0],q[4];
+//
+// There are only two possible results: 11001 and 00110.
+// The quantum noise and decoherence create some errors.
+// That is the reason accumulatedSuccessRatio is different than 1.
+// The successRatio1 is used as probability to draw a big square
+// The successRatio2 is used as probability to draw a small square
+// An unsuccessful result is used to draw a blank space.
 const successRatio1 = 6970 / 16384 // 11001
 const successRatio2 = 6124 / 16384 // 00110
 const accumulatedSuccessRatio = successRatio1 + successRatio2 // 11001 || 00110
@@ -80,6 +97,9 @@ const imgMask = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 ]
+
+// spacing between cells
+const spacing = 4
 
 interface GridCell {
   value: number;
