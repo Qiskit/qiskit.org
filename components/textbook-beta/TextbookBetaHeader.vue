@@ -135,6 +135,7 @@ export default class TextbookBetaHeader extends (Vue as VueConstructor<VueCompon
 
     @include mq($until: large) {
       --spacing: $spacing-11;
+
       width: calc(100% + var(--spacing));
       padding-top: calc(100% + var(--spacing));
     }
