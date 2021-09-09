@@ -141,16 +141,8 @@ export default defineComponent({
       this.drawSpeed = this.initialDrawSpeed * 0.1
 
       window.addEventListener('resize', this.resize)
-      window.addEventListener('keydown', () => {
-        this.animationProgress = 0.5
-        this.drawSpeed = this.initialDrawSpeed * 3 * 0.1
-        this.randomizeMask()
-      })
-      window.addEventListener('touchstart', () => {
-        this.animationProgress = 0.5
-        this.drawSpeed = this.initialDrawSpeed * 3 * 0.1
-        this.randomizeMask()
-      })
+      window.addEventListener('keydown', this.interactionRedraw)
+      window.addEventListener('touchstart', this.interactionRedraw)
       this.resize()
 
       this.randomizeMask()
@@ -229,6 +221,11 @@ export default defineComponent({
     },
     clamp (value: number) : number {
       return Math.min(Math.max(value, 0), 1)
+    },
+    interactionRedraw () {
+      this.animationProgress = 0.5
+      this.drawSpeed = this.initialDrawSpeed * 0.1 * 3
+      this.randomizeMask()
     }
   }
 })
