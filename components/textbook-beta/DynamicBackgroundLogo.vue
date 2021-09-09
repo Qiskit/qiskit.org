@@ -23,9 +23,9 @@ import { defineComponent } from 'vue-demi'
 // There are only two possible results: 11001 and 00110.
 // The quantum noise and decoherence create some errors.
 // That is the reason accumulatedSuccessRatio is different than 1.
-// The successRatio1 is used as probability to draw a big square
-// The successRatio2 is used as probability to draw a small square
-// An unsuccessful result is used to draw a blank space.
+// The successRatio1 is used as the probability to draw a big square
+// The successRatio2 is used as the probability to draw a small square
+// An unsuccessful result draws a blank space.
 const successRatio1 = 6970 / 16384 // 11001
 const successRatio2 = 6124 / 16384 // 00110
 const accumulatedSuccessRatio = successRatio1 + successRatio2 // 11001 || 00110
