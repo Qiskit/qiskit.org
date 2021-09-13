@@ -106,7 +106,7 @@ export default class AppCard extends Vue {
   }
 
   &__content {
-    padding: $spacing-05 $spacing-05 $spacing-05 $spacing-07;
+    padding: $spacing-05 $spacing-07;
     flex: 1;
     display: flex;
     flex-direction: column;
