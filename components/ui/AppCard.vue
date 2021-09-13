@@ -69,6 +69,8 @@ export default class AppCard extends Vue {
 </script>
 
 <style lang="scss" scoped>
+@import "~@carbon/type/scss/styles";
+
 .app-card {
   min-height: 13rem;
   width: 100%;
@@ -123,6 +125,8 @@ export default class AppCard extends Vue {
   }
 
   &__title {
+    @include carbon--type-style("expressive-heading-02");
+
     flex: 1;
   }
 
