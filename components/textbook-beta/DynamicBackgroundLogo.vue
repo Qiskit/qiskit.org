@@ -1,7 +1,7 @@
 <template>
-  <div ref="canvasWrapper" class="canvas-wrapper">
-    <canvas ref="canvas" class="background-canvas" />
-    <SketchLogo class="overlay-logo" />
+  <div ref="canvasWrapper" class="dynamic-background-logo">
+    <canvas ref="canvas" class="dynamic-background-logo-background-canvas" />
+    <SketchedLogo class="dynamic-background-logo-overlay" />
   </div>
 </template>
 
@@ -22,13 +22,13 @@ import { defineComponent } from 'vue-demi'
 //
 // There are only two possible results: 11001 and 00110.
 // The quantum noise and decoherence create some errors.
-// That is the reason accumulatedSuccessRatio is different than 1.
-// The successRatio1 is used as the probability to draw a big square
-// The successRatio2 is used as the probability to draw a small square
+// That is the reason ACCUMULATED_SUCCESS_RATIO is different than 1.
+// The SUCCESS_RATIO_1 is used as the probability to draw a big square
+// The SUCCESS_RATIO_2 is used as the probability to draw a small square
 // An unsuccessful result draws a blank space.
-const successRatio1 = 6970 / 16384 // 11001
-const successRatio2 = 6124 / 16384 // 00110
-const accumulatedSuccessRatio = successRatio1 + successRatio2 // 11001 || 00110
+const SUCCESS_RATIO_1 = 6970 / 16384 // 11001
+const SUCCESS_RATIO_2 = 6124 / 16384 // 00110
+const ACCUMULATED_SUCCESS_RATIO = SUCCESS_RATIO_1 + SUCCESS_RATIO_2 // 11001 || 00110
 // const unsuccessRatio = 3290 / 16384 // !11001 && !00110
 
 // 0 means no drawing, 2 means small squares only, 1 means both squares
@@ -98,8 +98,8 @@ const imgMask = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 ]
 
-// spacing between cells
-const spacing = 4
+const SPACING_BETWEEN_CELLS = 4
+const DRAWSPEED_CORRECTION = 0.1
 
 interface GridCell {
   value: number;
@@ -125,8 +125,8 @@ export default defineComponent({
     }
   },
   computed: {
-    maskHeight: () => imgMask.length,
-    maskWidth: () => imgMask[0].length,
+    maskHeight: () : number => imgMask.length,
+    maskWidth: () : number => imgMask[0].length,
     parent () : HTMLElement { return this.$refs.canvasWrapper as HTMLElement },
     canvas () : HTMLCanvasElement { return this.$refs.canvas as HTMLCanvasElement },
     renderingContext () : CanvasRenderingContext2D { return this.canvas.getContext('2d')! }
@@ -138,7 +138,7 @@ export default defineComponent({
     initRenderLoop () {
       this.renderingContext.globalCompositeOperation = 'destination-atop'
 
-      this.drawSpeed = this.initialDrawSpeed * 0.1
+      this.drawSpeed = this.initialDrawSpeed * DRAWSPEED_CORRECTION
 
       window.addEventListener('resize', this.resize)
       window.addEventListener('keydown', this.interactionRedraw)
@@ -177,7 +177,7 @@ export default defineComponent({
             const alpha = Math.pow(this.clamp(this.animationProgress * 2 - gridElement.delay), 2) * 2
             this.renderingContext!.strokeStyle = `rgba(255, 255, 255, ${alpha})`
             const finalSize = this.squareSize / gridElement.value
-            this.renderingContext!.strokeRect(spacing + i * this.squareSizeWithSpacing, spacing + j * this.squareSizeWithSpacing, finalSize, finalSize)
+            this.renderingContext!.strokeRect(SPACING_BETWEEN_CELLS + i * this.squareSizeWithSpacing, SPACING_BETWEEN_CELLS + j * this.squareSizeWithSpacing, finalSize, finalSize)
           }
         }
       }
@@ -185,28 +185,28 @@ export default defineComponent({
     resize () {
       this.parentWidth = this.parent!.clientWidth
       this.parentHeight = this.parent!.clientHeight
-      this.squareSizeWithSpacing = (this.parentWidth - 2 * spacing) / Math.max(this.maskHeight, this.maskWidth)
-      this.squareSize = this.squareSizeWithSpacing - spacing
+      this.squareSizeWithSpacing = (this.parentWidth - 2 * SPACING_BETWEEN_CELLS) / Math.max(this.maskHeight, this.maskWidth)
+      this.squareSize = this.squareSizeWithSpacing - SPACING_BETWEEN_CELLS
 
-      const dpr = (window.devicePixelRatio || 1) * this.pixelDensity
+      const pixelDensityConsideringDevicePixelRatio = (window.devicePixelRatio || 1) * this.pixelDensity
 
       // this disparity of html-width/height and css-width/height
       // creates a high resolution canvas with better lines
-      this.canvas!.width = this.parentWidth * dpr
-      this.canvas!.height = this.parentHeight * dpr
+      this.canvas!.width = this.parentWidth * pixelDensityConsideringDevicePixelRatio
+      this.canvas!.height = this.parentHeight * pixelDensityConsideringDevicePixelRatio
       this.canvas!.style.width = `${this.parentWidth}px`
       this.canvas!.style.height = `${this.parentHeight}px`
 
-      this.renderingContext!.scale(dpr, dpr)
+      this.renderingContext!.scale(pixelDensityConsideringDevicePixelRatio, pixelDensityConsideringDevicePixelRatio)
       this.animationProgress = Math.min(0.9, this.animationProgress)
     },
     // randomize mask with the quantum probabilities
     randomizeMask () {
-      this.gridData = imgMask.map(row => row.map((maskValue: number) => {
+      this.gridData = imgMask.map(row => row.map((maskValue: number) : GridCell => {
         const randomSuccess = Math.random()
         const randomDelay = Math.random()
-        const success1 = randomSuccess <= successRatio1
-        const success2 = randomSuccess > successRatio1 && randomSuccess <= accumulatedSuccessRatio
+        const success1 = randomSuccess <= SUCCESS_RATIO_1
+        const success2 = randomSuccess > SUCCESS_RATIO_1 && randomSuccess <= ACCUMULATED_SUCCESS_RATIO
 
         if (maskValue === 1) { // 1 accept both states
           return { value: success1 ? 1 : success2 ? 2 : 0, delay: randomDelay }
@@ -224,7 +224,7 @@ export default defineComponent({
     },
     interactionRedraw () {
       this.animationProgress = 0.5
-      this.drawSpeed = this.initialDrawSpeed * 0.1 * 3
+      this.drawSpeed = this.initialDrawSpeed * DRAWSPEED_CORRECTION * 3
       this.randomizeMask()
     }
   }
@@ -232,14 +232,14 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.canvas-wrapper {
-  .background-canvas {
+.dynamic-background-logo {
+  &-background-canvas {
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
   }
-  .overlay-logo {
+  &-overlay {
     position: absolute;
     left: 50%;
     top: 50%;
