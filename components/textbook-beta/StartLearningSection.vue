@@ -124,16 +124,16 @@ export default class StartLearningSection extends Vue {
     },
     {
       title: 'Summer Schools',
-      description: 'Are you teaching a course on quantum computing? Qiskit provides freely available materials to enhance your course.',
+      description: 'The Qiskit Global Summer Schools are one-of-a-kind sequences that takes students from beginner level to solving advanced quantum problems on a quantum computer. These two-week courses are designed to empower the next generation of quantum developers with the knowledge to explore quantum applications on their own. The content and recordings from the past summer schools are available here. Learn more about Qiskit Global Summer Schools <a href="https://qiskit.org/events/summer-school/" target="_blank">here</a>.',
       courses: [
         {
-          image: '/images/textbook-beta/blocks.png',
-          title: 'Introduction to Quantum Computing and Quantum Hardware',
-          description: 'This set of labs provides 7 different exercises you (or your students) can use to investigate the behaviour of current quantum computers and practice your Qiskit coding skills.',
+          image: '/images/textbook-beta/course/summer-school-2021/header.png',
+          title: 'Quantum Computing & Quantum Machine Learning (2021)',
+          description: 'Designed to empower the next generation of quantum researchers and developers with the skills and know-how to explore quantum applications on their own. Starting with an introductory "crash course" on quantum computing, the materials continue to dive into and explore one key area: quantum machine learning.',
           cta: {
-            label: 'Under construction',
-            url: '/textbook-beta/course/summer-school',
-            segment: { cta: 'intro-to-qc-qh', location: 'summer-schools' }
+            label: 'Go to this resource',
+            url: '/textbook-beta/course/summer-school-2021',
+            segment: { cta: 'intro-to-qc-qh-2021', location: 'summer-schools' }
           }
         }
       ]
