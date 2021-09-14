@@ -19,6 +19,9 @@ jobs:
       CODE_ENGINE_REGISTRY_SECRET: ibm-container-registry
 
     steps:
+      - name: Fetch content of the PR
+        uses: actions/checkout@v2
+
       - name: Create GitHub deployment
         uses: chrnorm/deployment-action@releases/v1
         id: gh_deployment
@@ -27,9 +30,6 @@ jobs:
         with:
           token: "${{ github.token }}"
           environment: ${{ env.APP_NAME }}
-
-      - name: Fetch content of the PR
-        uses: actions/checkout@v2
 
       - name: Log-in into IBM Container Registry
         uses: docker/login-action@v1
@@ -100,7 +100,7 @@ jobs:
           deployment_id: ${{ steps.gh_deployment.outputs.deployment_id }}
           state: "success"
 
-      - name: Update deployment status (failure)
+      - name: Update GitHub deployment status (failure)
         uses: chrnorm/deployment-status@releases/v1
         if: failure()
         with:
