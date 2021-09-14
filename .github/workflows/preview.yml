@@ -22,14 +22,13 @@ jobs:
       - name: Fetch content of the PR
         uses: actions/checkout@v2
 
-      - name: Create GitHub deployment
-        uses: chrnorm/deployment-action@releases/v1
-        id: gh_deployment
-        env:
-          APP_NAME: ${{ env.DOCKER_IMAGE_NAME }}-${{ env.PR_TAG }}
+      - name: Add comment to PR (preview)
+        uses: marocchino/sticky-pull-request-comment@v2
         with:
-          token: "${{ github.token }}"
-          environment: ${{ env.APP_NAME }}
+          recreate: true
+          GITHUB_TOKEN: "${{ github.token }}"
+          message: |
+            Attempting to deploy PR for preview
 
       - name: Log-in into IBM Container Registry
         uses: docker/login-action@v1
@@ -89,21 +88,32 @@ jobs:
             ibmcloud ce app get --name "$APP_NAME" --output url
           )"
 
-      - name: Update GitHub deployment status (success)
-        uses: chrnorm/deployment-status@releases/v1
-        if: success()
+      - name: Create GitHub deployment
+        uses: chrnorm/deployment-action@releases/v1
+        if: always()
         env:
           APP_NAME: ${{ env.DOCKER_IMAGE_NAME }}-${{ env.PR_TAG }}
         with:
           token: "${{ github.token }}"
-          environment_url: ${{ steps.ce_app_creation.outputs.preview_url }}
-          deployment_id: ${{ steps.gh_deployment.outputs.deployment_id }}
-          state: "success"
+          target_url: ${{ steps.ce_app_creation.outputs.preview_url }}
+          environment: ${{ env.APP_NAME }}
+          initial_status: ${{ job.status }}
 
-      - name: Update GitHub deployment status (failure)
-        uses: chrnorm/deployment-status@releases/v1
+      - name: Add comment to PR (success)
+        uses: marocchino/sticky-pull-request-comment@v2
+        if: success()
+        with:
+          recreate: true
+          GITHUB_TOKEN: "${{ github.token }}"
+          message: |
+            Deployment successful!
+            Preview available at ${{ steps.ce_app_creation.outputs.preview_url }}
+
+      - name: Add comment to PR (failure)
+        uses: marocchino/sticky-pull-request-comment@v2
         if: failure()
         with:
-          token: "${{ github.token }}"
-          deployment_id: ${{ steps.gh_deployment.outputs.deployment_id }}
-          state: "failure"
+          recreate: true
+          GITHUB_TOKEN: "${{ github.token }}"
+          message: |
+            Failed to deploy PR for preview
