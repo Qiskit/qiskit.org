@@ -10,9 +10,9 @@
     >
       <div class="bx--col-xlg-4 bx--col-lg-4">
         <h3 v-text="title" />
-        <p>
-          {{ description }}
-        </p>
+        <!-- eslint-disable vue/no-v-html -->
+        <p v-html="description" />
+        <!-- eslint-enable -->
       </div>
       <div class="bx--col-xlg-12 bx--col-lg-12">
         <div class="bx--row">
@@ -124,7 +124,7 @@ export default class StartLearningSection extends Vue {
     },
     {
       title: 'Summer Schools',
-      description: 'The Qiskit Global Summer Schools are one-of-a-kind sequences that takes students from beginner level to solving advanced quantum problems on a quantum computer. These two-week courses are designed to empower the next generation of quantum developers with the knowledge to explore quantum applications on their own. The content and recordings from the past summer schools are available here. Learn more about Qiskit Global Summer Schools <a href="https://qiskit.org/events/summer-school/" target="_blank">here</a>.',
+      description: 'The Qiskit Global Summer Schools are one-of-a-kind sequences that takes students from beginner level to solving advanced quantum problems on a quantum computer. These two-week courses are designed to empower the next generation of quantum developers with the knowledge to explore quantum applications on their own. The content and recordings from the past summer schools are available here. Learn more about Qiskit Global Summer Schools <a class="app-link app-link_primary" href="https://qiskit.org/events/summer-school/" target="_blank">here</a>.',
       courses: [
         {
           image: '/images/textbook-beta/course/summer-school-2021/header.png',
@@ -180,6 +180,22 @@ export default class StartLearningSection extends Vue {
 
     @include mq($from: x-large) {
       height: calc(100% - #{$layout-02});
+    }
+  }
+}
+</style>
+
+<style lang="scss">
+// override
+.start-learning-section {
+  .app-link {
+    text-decoration: none;
+    color: $link-color;
+    &:hover {
+      color: $link-hover-color;
+    }
+    &:visited {
+      color: $link-visited-color;
     }
   }
 }
