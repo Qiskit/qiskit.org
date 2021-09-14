@@ -132,7 +132,7 @@ export default class StartLearningSection extends Vue {
           description: 'This set of labs provides 7 different exercises you (or your students) can use to investigate the behaviour of current quantum computers and practice your Qiskit coding skills.',
           cta: {
             label: 'Under construction',
-            url: '/textbook-beta',
+            url: '/textbook-beta/course/summer-school',
             segment: { cta: 'introduction-to-quantum-computing', location: 'summer-schools' }
           }
         }
