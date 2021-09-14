@@ -1,23 +1,29 @@
 name: PR Preview
 
-# run when a pull request is made
-on: [pull_request]
+# runs when a pull request is opened, updated, closed
+# creates/updates preview application when opened or updated
+# deletes preview application when closed
+on:
+  pull_request:
+    types: [ opened, synchronize, closed, reopened ]
+
+env:
+  PR_TAG: pr-${{ github.event.pull_request.number }}
+  DOCKER_IMAGE_NAME: qiskit-org
+  DOCKER_IMAGE_PORT: "3000"
+
+  IBMCLOUD_ACCOUNT: ${{ secrets.IBMCLOUD_ACCOUNT }}
+  IBMCLOUD_API_KEY: ${{ secrets.IBMCLOUD_API_KEY }}
+  IBMCLOUD_REGION: us-south
+  IBMCLOUD_RESOURCE_GROUP: Quantum Community
+  CODE_ENGINE_PROJECT: qiskit.org-preview
+  CODE_ENGINE_REGISTRY_SECRET: ibm-container-registry
 
 jobs:
+  # run when PR is opened or updated
   preview:
+    if: github.event_name == 'pull_request' && github.event.action != 'closed'
     runs-on: ubuntu-latest
-    env:
-      PR_TAG: pr-${{ github.event.pull_request.number }}
-      DOCKER_IMAGE_NAME: qiskit-org
-      DOCKER_IMAGE_PORT: "3000"
-
-      IBMCLOUD_ACCOUNT: ${{ secrets.IBMCLOUD_ACCOUNT }}
-      IBMCLOUD_API_KEY: ${{ secrets.IBMCLOUD_API_KEY }}
-      IBMCLOUD_REGION: us-south
-      IBMCLOUD_RESOURCE_GROUP: Quantum Community
-      CODE_ENGINE_PROJECT: qiskit.org-preview
-      CODE_ENGINE_REGISTRY_SECRET: ibm-container-registry
-
     steps:
       - name: Fetch content of the PR
         uses: actions/checkout@v2
@@ -53,6 +59,7 @@ jobs:
           ibmcloud --version
           ibmcloud config --check-version=false
           ibmcloud plugin install -f code-engine
+          ibmcloud plugin install -f container-registry
 
       - name: Authenticate with IBM Cloud CLI
         run: |
@@ -117,3 +124,40 @@ jobs:
           GITHUB_TOKEN: "${{ github.token }}"
           message: |
             Failed to deploy PR for preview
+
+  cleanup:
+    # run when PR is closed
+    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch content of the PR
+        uses: actions/checkout@v2
+
+      - name: Setup IBM Cloud CLI
+        run: |
+          curl -fsSL https://clis.cloud.ibm.com/install/linux | sh
+          ibmcloud --version
+          ibmcloud config --check-version=false
+          ibmcloud plugin install -f code-engine
+          ibmcloud plugin install -f container-registry
+
+      - name: Authenticate with IBM Cloud CLI
+        run: |
+          ibmcloud login -g "$IBMCLOUD_RESOURCE_GROUP" -r "$IBMCLOUD_REGION" -c "$IBMCLOUD_ACCOUNT" --apikey $IBMCLOUD_API_KEY
+
+      - name: Remove Docker image
+        env:
+          DOCKER_IMAGE_TAG: ${{ env.DOCKER_IMAGE_NAME }}:${{ env.PR_TAG }}
+        run: |
+          ibmcloud cr image-rm "$DOCKER_IMAGE_TAG"
+
+      - name: Remove Code Engine preview application
+        env:
+          APP_NAME: ${{ env.DOCKER_IMAGE_NAME }}-${{ env.PR_TAG }}
+        run: |
+          ibmcloud ce project select -n "$CODE_ENGINE_PROJECT"
+          ibmcloud ce application delete \
+            --name "$APP_NAME" \
+            --wait \
+            --ignore-not-found \
+            --force
