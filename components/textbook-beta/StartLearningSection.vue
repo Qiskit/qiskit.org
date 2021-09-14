@@ -123,7 +123,7 @@ export default class StartLearningSection extends Vue {
       ]
     },
     {
-      title: 'Summer Schoools',
+      title: 'Summer Schools',
       description: 'Are you teaching a course on quantum computing? Qiskit provides freely available materials to enhance your course.',
       courses: [
         {
@@ -133,7 +133,7 @@ export default class StartLearningSection extends Vue {
           cta: {
             label: 'Under construction',
             url: '/textbook-beta/course/summer-school',
-            segment: { cta: 'introduction-to-quantum-computing', location: 'summer-schools' }
+            segment: { cta: 'intro-to-qc-qh', location: 'summer-schools' }
           }
         }
       ]
