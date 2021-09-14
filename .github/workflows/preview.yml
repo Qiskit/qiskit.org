@@ -9,7 +9,7 @@ jobs:
     env:
       PR_TAG: pr-${{ github.event.pull_request.number }}
       DOCKER_IMAGE_NAME: qiskit-org
-      DOCKER_IMAGE_PORT: 3000
+      DOCKER_IMAGE_PORT: "3000"
 
       IBMCLOUD_ACCOUNT: ${{ secrets.IBMCLOUD_ACCOUNT }}
       IBMCLOUD_API_KEY: ${{ secrets.IBMCLOUD_API_KEY }}
@@ -19,6 +19,15 @@ jobs:
       CODE_ENGINE_REGISTRY_SECRET: ibm-container-registry
 
     steps:
+      - name: Create GitHub deployment
+        uses: chrnorm/deployment-action@releases/v1
+        id: gh_deployment
+        env:
+          APP_NAME: ${{ env.DOCKER_IMAGE_NAME }}-${{ env.PR_TAG }}
+        with:
+          token: "${{ github.token }}"
+          environment: ${{ env.APP_NAME }}
+
       - name: Fetch content of the PR
         uses: actions/checkout@v2
 
@@ -38,7 +47,6 @@ jobs:
           cache-to: type=inline
         env:
           DOCKER_IMAGE_TAG: icr.io/community-digital/${{ env.DOCKER_IMAGE_NAME }}:${{ env.PR_TAG }}
-
 
       - name: Setup IBM Cloud CLI
         run: |
@@ -81,11 +89,21 @@ jobs:
             ibmcloud ce app get --name "$APP_NAME" --output url
           )"
 
-      - uses: chrnorm/deployment-action@releases/v1
-        name: Create GitHub deployment
+      - name: Update GitHub deployment status (success)
+        uses: chrnorm/deployment-status@releases/v1
+        if: success()
         env:
           APP_NAME: ${{ env.DOCKER_IMAGE_NAME }}-${{ env.PR_TAG }}
         with:
           token: "${{ github.token }}"
-          target_url: ${{ steps.ce_app_creation.outputs.preview_url }}
-          environment: ${{ env.APP_NAME }}
+          environment_url: ${{ steps.ce_app_creation.outputs.preview_url }}
+          deployment_id: ${{ steps.gh_deployment.outputs.deployment_id }}
+          state: "success"
+
+      - name: Update deployment status (failure)
+        uses: chrnorm/deployment-status@releases/v1
+        if: failure()
+        with:
+          token: "${{ github.token }}"
+          deployment_id: ${{ steps.gh_deployment.outputs.deployment_id }}
+          state: "failure"
