@@ -43,7 +43,7 @@ export default class SummerSchoolCoursePage extends QiskitPage {
   headerTitle = '2021 Qiskit Global Summer School on Quantum Machine Learning'
   headerDescription = ['Quantum computing experts and mentors share valuable insights through twenty lectures and five applied lab exercises that provide deep-dives exploring concepts in quantum computing, focused on the implementations of quantum machine learning algorithms in Qiskit.']
 
-      headerImg = '/images/textbook-beta/course/summer-school-course/header.png'
+      headerImg = '/images/textbook-beta/summer-school/2021/header.png'
 
   backToTextbookHomeLink = {
     url: '/textbook-beta',
