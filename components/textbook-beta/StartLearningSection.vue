@@ -184,19 +184,3 @@ export default class StartLearningSection extends Vue {
   }
 }
 </style>
-
-<style lang="scss">
-// override
-.start-learning-section {
-  .app-link {
-    text-decoration: none;
-    color: $link-color;
-    &:hover {
-      color: $link-hover-color;
-    }
-    &:visited {
-      color: $link-visited-color;
-    }
-  }
-}
-</style>
