@@ -124,7 +124,7 @@ export default class StartLearningSection extends Vue {
     },
     {
       title: 'Summer Schools',
-      description: 'The Qiskit Global Summer Schools are one-of-a-kind sequences that takes students from beginner level to solving advanced quantum problems on a quantum computer. These two-week courses are designed to empower the next generation of quantum developers with the knowledge to explore quantum applications on their own. Learn more about Qiskit Global Summer Schools <a class="app-link app-link_primary" href="https://qiskit.org/events/summer-school/" target="_blank">here</a>.',
+      description: 'The Qiskit Global Summer Schools are one-of-a-kind sequences that takes students from beginner level to solving advanced quantum problems on a quantum computer. These two-week courses are designed to empower the next generation of quantum developers with the knowledge to explore quantum applications on their own. Learn more about Qiskit Global Summer Schools <a class="app-link app-link_primary" href="/events/summer-school/">here</a>.',
       courses: [
         {
           image: '/images/textbook-beta/summer-school/quantum-computing-and-quantum-learning-2021/header.png',
