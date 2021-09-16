@@ -133,14 +133,10 @@ export default class TextbookBetaHeader extends (Vue as VueConstructor<VueCompon
     padding-top: 100%;
     transform: translate(-50%, -50%);
 
-    @include mq($until: large) {
-      --spacing: $spacing-11;
-
-      width: calc(100% + var(--spacing));
-      padding-top: calc(100% + var(--spacing));
-    }
-
     &-container {
+      // the #{_______} is added to force scss to compile $spacing-11 value.
+      --additional-width: #{$spacing-11};
+
       position: absolute;
       right: 0;
       bottom: 0;
@@ -149,10 +145,10 @@ export default class TextbookBetaHeader extends (Vue as VueConstructor<VueCompon
       overflow: hidden;
 
       @include mq($from:medium, $until: large) {
-        width: 50%;
+        width: calc(50% + var(--additional-width));
       }
       @include mq($until: medium) {
-        width: 80%;
+        width: calc(80% + var(--additional-width));
         height: 80%;
       }
     }
