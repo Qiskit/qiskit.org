@@ -22,13 +22,17 @@ jobs:
       - name: Fetch content of the PR
         uses: actions/checkout@v2
 
-      - name: Add comment to PR (preview)
-        uses: marocchino/sticky-pull-request-comment@v2
+      - name: GH deployment status (start)
+        uses: bobheadxi/deployments@v0.4.3
+        id: gh_deployment
+        env:
+          APP_NAME: ${{ env.DOCKER_IMAGE_NAME }}-${{ env.PR_TAG }}
         with:
-          recreate: true
-          GITHUB_TOKEN: "${{ github.token }}"
-          message: |
-            Attempting to deploy PR for preview
+          step: start
+          token: ${{ github.token }}
+          env: ${{ env.APP_NAME }}
+          auto_inactive: true
+          ref: ${{ github.event.pull_request.head.ref }}
 
       - name: Log-in into IBM Container Registry
         uses: docker/login-action@v1
@@ -89,32 +93,12 @@ jobs:
             ibmcloud ce app get --name "$APP_NAME" --output url
           )"
 
-      - name: Create GitHub deployment
-        uses: chrnorm/deployment-action@releases/v1
+      - name: GH deployment status (finish)
+        uses: bobheadxi/deployments@v0.4.3
         if: always()
-        env:
-          APP_NAME: ${{ env.DOCKER_IMAGE_NAME }}-${{ env.PR_TAG }}
         with:
-          token: "${{ github.token }}"
-          target_url: ${{ steps.ce_app_creation.outputs.preview_url }}
-          environment: ${{ env.APP_NAME }}
-          initial_status: ${{ job.status }}
-
-      - name: Add comment to PR (success)
-        uses: marocchino/sticky-pull-request-comment@v2
-        if: success()
-        with:
-          recreate: true
-          GITHUB_TOKEN: "${{ github.token }}"
-          message: |
-            Deployment successful!
-            Preview available at ${{ steps.ce_app_creation.outputs.preview_url }}
-
-      - name: Add comment to PR (failure)
-        uses: marocchino/sticky-pull-request-comment@v2
-        if: failure()
-        with:
-          recreate: true
-          GITHUB_TOKEN: "${{ github.token }}"
-          message: |
-            Failed to deploy PR for preview
+          step: finish
+          token: ${{ github.token }}
+          status: ${{ job.status }}
+          deployment_id: ${{ steps.gh_deployment.outputs.deployment_id }}
+          env_url: "${{ steps.ce_app_creation.outputs.preview_url }}/course/introduction"
