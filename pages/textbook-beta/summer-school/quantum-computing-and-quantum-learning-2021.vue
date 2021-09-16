@@ -19,7 +19,7 @@
       </template>
     </AppPageHeaderWithImage>
     <RelatedMaterialSection class="summer-school-page__section" />
-    <ExternalRecommendedReadings class="summer-school-page__section" :links="links" />
+    <ExternalRecommendedReadings class="summer-school-page__section" :links="links" :title="supplementaryResourcesSectionTitle" />
     <SummerSchoolCoursePages class="summer-school-page__section" />
   </main>
 </template>
@@ -38,7 +38,7 @@ import { GeneralLink, summerSchoolCourseStartLearningUrl } from '~/constants/app
   }
 })
 export default class SummerSchoolCoursePage extends QiskitPage {
-  routeName: string = 'summer-school'
+  routeName: string = 'summer-school/quantum-computing-and-quantum-learning-2021'
 
   headerTitle = '2021 Qiskit Global Summer School on Quantum Machine Learning'
   headerDescription = ['Quantum computing experts and mentors share valuable insights through twenty lectures and five applied lab exercises that provide deep-dives exploring concepts in quantum computing, focused on the implementations of quantum machine learning algorithms in Qiskit.']
@@ -79,6 +79,8 @@ export default class SummerSchoolCoursePage extends QiskitPage {
       }
     }
   ]
+
+  supplementaryResourcesSectionTitle = 'Supplementary Resources'
 }
 </script>
 
