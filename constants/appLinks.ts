@@ -50,6 +50,7 @@ const TEXTBOOK_BETA_START_LEARNING: GeneralLink = {
 }
 
 const textbookBetaIntroductionCourseStartLearningUrl = 'https://learn.qiskit.org/course/introduction'
+const summerSchoolCourseStartLearningUrl = 'https://learn.qiskit.org/course/qgss2021/lec1-1'
 
 const IBM_Q_EXPERIENCE: GeneralLink = {
   url: 'https://quantum-computing.ibm.com/lab',
@@ -62,6 +63,7 @@ export {
   SEMINAR_SERIES_ALL_EPISODES_CTA,
   SEMINAR_SERIES_FULL_ARCHIVE_CTA,
   textbookBetaIntroductionCourseStartLearningUrl,
+  summerSchoolCourseStartLearningUrl,
   TEXTBOOK_BETA_START_LEARNING,
   IBM_Q_EXPERIENCE
 }

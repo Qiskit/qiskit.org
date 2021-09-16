@@ -27,7 +27,7 @@
 <script lang="ts">
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
-import { GeneralLink, textbookBetaIntroductionCourseStartLearningUrl } from '~/constants/appLinks'
+import { GeneralLink, summerSchoolCourseStartLearningUrl } from '~/constants/appLinks'
 
 @Component({
   layout: 'default-max',
@@ -54,7 +54,7 @@ export default class SummerSchoolCoursePage extends QiskitPage {
   }
 
   startLearningCTA: GeneralLink = {
-    url: textbookBetaIntroductionCourseStartLearningUrl,
+    url: summerSchoolCourseStartLearningUrl,
     label: 'Start learning',
     segment: {
       cta: 'introduction', location: 'header'
