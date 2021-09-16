@@ -10,9 +10,9 @@
     />
     <div class="app-card__content">
       <header class="app-card__header">
-        <h3 class="app-card__title">
+        <h4 class="app-card__title">
           {{ title }}
-        </h3>
+        </h4>
         <div v-if="hasTags" class="app-card__tags">
           <cv-tag
             v-for="tag in tags"
@@ -106,7 +106,7 @@ export default class AppCard extends Vue {
   }
 
   &__content {
-    padding: $spacing-05 $spacing-05 $spacing-05 $spacing-07;
+    padding: $spacing-05 $spacing-07;
     flex: 1;
     display: flex;
     flex-direction: column;
