@@ -50,7 +50,6 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import { textbookBetaIntroductionCourseStartLearningUrl } from '~/constants/appLinks'
 import { CtaClickedEventProp } from '~/constants/segment'
 
 interface Course {
@@ -79,143 +78,142 @@ export default class SummerSchoolCoursePagesSection extends Vue {
     },
     {
       image: 'what-is-quantum-preview.png',
-      label: 'Label 3',
+      label: 'Simple Quantum Algorithms I',
       segment: { cta: 'what-is-quantum', location: 'summer-school' },
-      url: 'https://learn.qiskit.org/course/qgss2021/lec1-3'
+      url: 'https://learn.qiskit.org/course/qgss2021/lec2-1'
     },
     {
       image: 'describing-quantum-computers-preview.png',
-      label: 'Label 4',
+      label: 'Simple Quantum Algorithms II',
       segment: { cta: 'describing-quantum-computers', location: 'summer-school' },
-      url: 'https://learn.qiskit.org/course/qgss2021/lec1-4'
+      url: 'https://learn.qiskit.org/course/qgss2021/lec2-2'
     },
     {
       image: 'entangled-states-preview.png',
-      label: 'Label 5',
+      label: 'Noise in Quantum Computers pt 1',
       segment: { cta: 'entangled-states', location: 'summer-school' },
-      url: 'https://learn.qiskit.org/course/qgss2021/lec1-5'
+      url: 'https://learn.qiskit.org/course/qgss2021/lec3-1'
     },
     {
       image: 'entangled-states-preview.png',
-      label: 'Label 6',
+      label: 'Noise in Quantum Computers pt. 2',
       segment: { cta: 'entangled-states', location: 'summer-school' },
-      url: 'https://learn.qiskit.org/course/qgss2021/lec1-6'
+      url: 'https://learn.qiskit.org/course/qgss2021/lec3-2'
     },
     {
       image: 'entangled-states-preview.png',
-      label: 'Label 7',
+      label: 'Introduction to Quantum Computing Algorithms and Operations',
       segment: { cta: 'entangled-states', location: 'summer-school' },
-      url: 'https://learn.qiskit.org/course/qgss2021/lec1-7'
+      url: 'https://learn.qiskit.org/course/qgss2021/lab1'
     },
     {
       image: 'entangled-states-preview.png',
-      label: 'Label 8',
+      label: 'Bonus Content: Noise in Quantum Computers',
       segment: { cta: 'entangled-states', location: 'summer-school' },
-      url: 'https://learn.qiskit.org/course/qgss2021/lec1-8'
+      url: 'https://learn.qiskit.org/course/qgss2021/lec4-1'
     },
     {
       image: 'entangled-states-preview.png',
-      label: 'Label 9',
+      label: 'Introduction to Classical Machine Learning',
       segment: { cta: 'entangled-states', location: 'summer-school' },
-      url: 'https://learn.qiskit.org/course/qgss2021/lec1-9'
+      url: 'https://learn.qiskit.org/course/qgss2021/lec4-2'
     },
     {
       image: 'entangled-states-preview.png',
-      label: 'Label 10',
+      label: 'Advanced Classical Machine Learning',
       segment: { cta: 'entangled-states', location: 'summer-school' },
-      url: 'https://learn.qiskit.org/course/qgss2021/lec1-10'
+      url: 'https://learn.qiskit.org/course/qgss2021/lec5-1'
     },
     {
       image: 'entangled-states-preview.png',
-      label: 'Label 11',
+      label: 'Building a Quantum Classifier',
       segment: { cta: 'entangled-states', location: 'summer-school' },
-      url: 'https://learn.qiskit.org/course/qgss2021/lec1-11'
+      url: 'https://learn.qiskit.org/course/qgss2021/lec5-2'
     },
     {
       image: 'entangled-states-preview.png',
-      label: 'Label 12',
+      label: 'Introduction to the Quantum Approximate Optimization Algorithm and Applications',
       segment: { cta: 'entangled-states', location: 'summer-school' },
-      url: 'https://learn.qiskit.org/course/qgss2021/lec1-12'
+      url: 'https://learn.qiskit.org/course/qgss2021/lab2'
     },
     {
       image: 'entangled-states-preview.png',
-      label: 'Label 13',
+      label: 'Introduction to Variational Algorithms',
       segment: { cta: 'entangled-states', location: 'summer-school' },
-      url: 'https://learn.qiskit.org/course/qgss2021/lec1-13'
+      url: 'https://learn.qiskit.org/course/qgss2021/lec6-1'
     },
     {
       image: 'entangled-states-preview.png',
-      label: 'Label 14',
+      label: 'From Variational Classifiers to Linear Classifiers',
       segment: { cta: 'entangled-states', location: 'summer-school' },
-      url: 'https://learn.qiskit.org/course/qgss2021/lec1-14'
+      url: 'https://learn.qiskit.org/course/qgss2021/lec6-2'
     },
     {
       image: 'entangled-states-preview.png',
-      label: 'Label 15',
+      label: 'Quantum Feature Spaces and Kernels',
       segment: { cta: 'entangled-states', location: 'summer-school' },
-      url: 'https://learn.qiskit.org/course/qgss2021/lec1-15'
+      url: 'https://learn.qiskit.org/course/qgss2021/lec7-1'
     },
     {
       image: 'entangled-states-preview.png',
-      label: 'Label 16',
+      label: 'Quantum Kernels in Practice',
       segment: { cta: 'entangled-states', location: 'summer-school' },
-      url: 'https://learn.qiskit.org/course/qgss2021/lec1-16'
+      url: 'https://learn.qiskit.org/course/qgss2021/lab3'
     },
     {
       image: 'entangled-states-preview.png',
-      label: 'Label 17',
+      label: 'Introduction to Quantum Kernels and Support Vector Machines',
       segment: { cta: 'entangled-states', location: 'summer-school' },
-      url: 'https://learn.qiskit.org/course/qgss2021/lec1-17'
+      url: 'https://learn.qiskit.org/course/qgss2021/lec8-1'
     },
     {
       image: 'entangled-states-preview.png',
-      label: 'Label 18',
+      label: 'Introduction and Applications of Quantum Models',
+      segment: { cta: 'entangled-states', location: 'summer-school' },
+      url: 'https://learn.qiskit.org/course/qgss2021/lec8-2'
+    },
+    {
+      image: 'entangled-states-preview.png',
+      label: 'Barren Plateaus, Trainability Issues, and How to Avoid Them',
       segment: { cta: 'entangled-states', location: 'summer-school' },
       url: 'https://learn.qiskit.org/course/qgss2021/lec1-18'
     },
     {
       image: 'entangled-states-preview.png',
-      label: 'Label 19',
+      label: 'Introduction to Training Quantum Circuits',
       segment: { cta: 'entangled-states', location: 'summer-school' },
-      url: 'https://learn.qiskit.org/course/qgss2021/lec1-19'
+      url: 'https://learn.qiskit.org/course/qgss2021/lab4'
     },
     {
       image: 'entangled-states-preview.png',
-      label: 'Label 20',
+      label: 'Introduction to Quantum Hardware',
       segment: { cta: 'entangled-states', location: 'summer-school' },
-      url: 'https://learn.qiskit.org/course/qgss2021/lec1-20'
+      url: 'https://learn.qiskit.org/course/qgss2021/lec9-1'
     },
     {
       image: 'entangled-states-preview.png',
-      label: 'Label 21',
+      label: 'Hardware Efficient Ansatze for Quantum Machine Learning',
       segment: { cta: 'entangled-states', location: 'summer-school' },
-      url: 'https://learn.qiskit.org/course/qgss2021/lec1-21'
+      url: 'https://learn.qiskit.org/course/qgss2021/lec9-2'
     },
     {
       image: 'entangled-states-preview.png',
-      label: 'Label 22',
+      label: 'Introduction to Hardware Efficient Ansatze for Quantum Machine Learning',
       segment: { cta: 'entangled-states', location: 'summer-school' },
-      url: 'https://learn.qiskit.org/course/qgss2021/lec1-22'
+      url: 'https://learn.qiskit.org/course/qgss2021/lab5'
     },
     {
       image: 'entangled-states-preview.png',
-      label: 'Label 23',
+      label: 'Advanced QML Algorithms: Quantum Boltzmann Machines and Quantum Generative Adversarial Networks',
       segment: { cta: 'entangled-states', location: 'summer-school' },
-      url: 'https://learn.qiskit.org/course/qgss2021/lec1-23'
+      url: 'https://learn.qiskit.org/course/qgss2021/lec10-1'
     },
     {
       image: 'entangled-states-preview.png',
-      label: 'Label 24',
+      label: 'The Capacity and Power of Quantum Machine Learning Models & the Future of Quantum Machine Learning',
       segment: { cta: 'entangled-states', location: 'summer-school' },
-      url: 'https://learn.qiskit.org/course/qgss2021/lec1-24'
-    },
-    {
-      image: 'entangled-states-preview.png',
-      label: 'Label 25',
-      segment: { cta: 'entangled-states', location: 'summer-school' },
-      url: 'https://learn.qiskit.org/course/qgss2021/lec1-25'
+      url: 'https://learn.qiskit.org/course/qgss2021/lec10-2'
     }
-
   ]
 
   get activeCourse () {
