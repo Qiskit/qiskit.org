@@ -6,7 +6,7 @@
     <article
       v-for="{ title, description, courses } in learningSections"
       :key="title"
-      class="bx--row start-learning-section__row"
+      class="bx--row"
     >
       <div class="bx--col-xlg-4 bx--col-lg-4">
         <h3 v-text="title" />
@@ -169,10 +169,6 @@ export default class StartLearningSection extends Vue {
 
   &__section {
     margin-bottom: $layout-03;
-  }
-
-  &__row {
-    margin-bottom: $spacing-03;
   }
 
   &__card {
