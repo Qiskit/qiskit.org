@@ -18,7 +18,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
+import { Component } from 'vue-property-decorator'
 import { CtaClickedEventProp } from '~/constants/segment'
 
 interface Prerequisite {
@@ -30,8 +30,6 @@ interface Prerequisite {
 
 @Component
 export default class PrerequisiteMaterialSection extends Vue {
-  @Prop({ type: String, required: true }) title!: string
-
   prerequisites: Prerequisite[] = [
     {
       title: 'Introduction to Quantum Computing and Quantum Hardware',
