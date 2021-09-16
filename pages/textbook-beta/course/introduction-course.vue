@@ -18,7 +18,7 @@
         <img class="app-page-header-with-img__image" :src="headerImg">
       </template>
     </AppPageHeaderWithImage>
-    <PrerequisiteMaterialSection class="introduction-course-page__section"/>
+    <PrerequisiteMaterialSection class="introduction-course-page__section" />
     <ExternalRecommendedReadings class="introduction-course-page__section" :links="links" :title="recommendedReadingsSectionTitle" />
     <CoursePagesSection class="introduction-course-page__section" />
   </main>
