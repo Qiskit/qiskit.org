@@ -174,11 +174,12 @@ branch. In these occassions, remember to manually close the related pull request
 
 ### Live previews
 
-As part of our continuous integration infrastructure, every pull request receives a
-dedicated URL by [Vercel](https://vercel.com/) to preview the changes in it.
+As part of our continuous integration infrastructure, every pull request that passes 
+the build process, receives a dedicated deployment running on [IBM Code Engine](https://cloud.ibm.com/codeengine/overview). 
 
-When the contribution comes from an external contributor, previews require authorization
-from one of the core members of the team.
+This allows the team to have live, branch previews, making it easier for the team to 
+share links and review changes as necessary. You can preview your working branch at 
+`https://qiskit-org-pr-<pull-request-number>.<unique_id>.us-south.codeengine.appdomain.cloud/`.
 
 ### Code review
 
