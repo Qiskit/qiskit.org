@@ -1,7 +1,7 @@
 <template>
   <section class="prerequisite-material-section">
     <h2>
-      Prerequisite material
+      {{ title }}
     </h2>
     <div class="prerequisite-material-section__cards">
       <AppDescriptionCard
@@ -18,7 +18,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
+import { Component, Prop } from 'vue-property-decorator'
 import { CtaClickedEventProp } from '~/constants/segment'
 
 interface Prerequisite {
@@ -30,6 +30,8 @@ interface Prerequisite {
 
 @Component
 export default class PrerequisiteMaterialSection extends Vue {
+  @Prop({ type: String, required: true }) title!: string
+
   prerequisites: Prerequisite[] = [
     {
       title: 'Setting Up Your Environment',

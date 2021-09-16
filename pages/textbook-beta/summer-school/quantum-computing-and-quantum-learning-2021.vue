@@ -18,8 +18,8 @@
         <img class="app-page-header-with-img__image" :src="headerImg">
       </template>
     </AppPageHeaderWithImage>
-    <PrerequisiteMaterialSection class="summer-school-page__section" />
-    <ExternalRecommendedReadings class="summer-school-page__section" :links="links" />
+    <PrerequisiteMaterialSection class="summer-school-page__section" :title="prerequisiteSectionTitle" />
+    <ExternalRecommendedReadings class="summer-school-page__section" :links="links" :title="recommendedReadingsSectionTitle" />
     <CoursePagesSection class="summer-school-page__section" />
   </main>
 </template>
@@ -63,22 +63,25 @@ export default class SummerSchoolCoursePage extends QiskitPage {
 
   links: GeneralLink[] = [
     {
-      url: 'https://math.mit.edu/~gs/linearalgebra/',
-      label: 'https://math.mit.edu/~gs/linearalgebra/',
+      url: 'http://mmrc.amss.cas.cn/tlb/201702/W020170224608149940643.pdf',
+      label: 'Quantum Computation and Quantum Information by Nielsen & Chuang',
       segment: {
-        cta: 'mit-linear-algebra',
+        cta: 'qc-qi-pdf',
         location: 'external-recommended-readings'
       }
     },
     {
-      url: 'https://machinelearningmastery.com/gentle-introduction-linear-algebra/',
-      label: 'https://machinelearningmastery.com/gentle-introduction-linear-algebra/',
+      url: 'https://www.deeplearningbook.org/',
+      label: 'Deep Learning by Ian Goodfellow et al',
       segment: {
-        cta: 'mlmastery-linear-algebra',
+        cta: 'deep-learning',
         location: 'external-recommended-readings'
       }
     }
   ]
+
+  prerequisiteSectionTitle = 'Related Materials'
+  recommendedReadingsSectionTitle = 'Supplementary Resources'
 }
 </script>
 

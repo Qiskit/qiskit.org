@@ -1,7 +1,7 @@
 <template>
   <article class="app-description-card">
     <div>
-      <h3 v-text="title" />
+      <h4 v-text="title" />
       <p v-text="description" />
     </div>
     <div class="app-description-card__footer">
