@@ -18,9 +18,9 @@
         <img class="app-page-header-with-img__image" :src="headerImg">
       </template>
     </AppPageHeaderWithImage>
-    <PrerequisiteMaterialSection class="summer-school-page__section" :title="prerequisiteSectionTitle" />
+    <RelatedMaterialSection class="summer-school-page__section" />
     <ExternalRecommendedReadings class="summer-school-page__section" :links="links" :title="recommendedReadingsSectionTitle" />
-    <CoursePagesSection class="summer-school-page__section" />
+    <SummerSchoolCoursePages class="summer-school-page__section" />
   </main>
 </template>
 
@@ -80,7 +80,6 @@ export default class SummerSchoolCoursePage extends QiskitPage {
     }
   ]
 
-  prerequisiteSectionTitle = 'Related Materials'
   recommendedReadingsSectionTitle = 'Supplementary Resources'
 }
 </script>

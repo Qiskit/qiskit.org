@@ -18,7 +18,7 @@
         <img class="app-page-header-with-img__image" :src="headerImg">
       </template>
     </AppPageHeaderWithImage>
-    <PrerequisiteMaterialSection class="introduction-course-page__section" :title="prerequisiteSectionTitle" />
+    <PrerequisiteMaterialSection class="introduction-course-page__section"/>
     <ExternalRecommendedReadings class="introduction-course-page__section" :links="links" :title="recommendedReadingsSectionTitle" />
     <CoursePagesSection class="introduction-course-page__section" />
   </main>
@@ -90,7 +90,6 @@ export default class IntroductionCoursePage extends QiskitPage {
     }
   ]
 
-  prerequisiteSectionTitle = 'Prerequisite material'
   recommendedReadingsSectionTitle = 'External recommended readings'
 }
 </script>
