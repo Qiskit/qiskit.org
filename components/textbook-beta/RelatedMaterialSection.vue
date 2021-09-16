@@ -29,7 +29,7 @@ interface Prerequisite {
 }
 
 @Component
-export default class PrerequisiteMaterialSection extends Vue {
+export default class RelatedMaterialSection extends Vue {
   prerequisites: Prerequisite[] = [
     {
       title: 'Introduction to Quantum Computing and Quantum Hardware',
