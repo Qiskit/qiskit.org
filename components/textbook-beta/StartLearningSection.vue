@@ -6,7 +6,7 @@
     <article
       v-for="{ title, description, courses } in learningSections"
       :key="title"
-      class="bx--row"
+      class="bx--row start-learning-section__row"
     >
       <div class="bx--col-xlg-4 bx--col-lg-4">
         <h3 v-text="title" />
@@ -123,6 +123,22 @@ export default class StartLearningSection extends Vue {
       ]
     },
     {
+      title: 'Summer Schoools',
+      description: 'Are you teaching a course on quantum computing? Qiskit provides freely available materials to enhance your course.',
+      courses: [
+        {
+          image: '/images/textbook-beta/blocks.png',
+          title: 'Introduction to Quantum Computing and Quantum Hardware',
+          description: 'This set of labs provides 7 different exercises you (or your students) can use to investigate the behaviour of current quantum computers and practice your Qiskit coding skills.',
+          cta: {
+            label: 'Under construction',
+            url: '/textbook-beta',
+            segment: { cta: 'introduction-to-quantum-computing', location: 'summer-schools' }
+          }
+        }
+      ]
+    },
+    {
       title: 'University supplements',
       description: `Are you teaching a course on quantum computing? Qiskit
       provides freely available materials to enhance your course.`,
@@ -153,6 +169,10 @@ export default class StartLearningSection extends Vue {
 
   &__section {
     margin-bottom: $layout-03;
+  }
+
+  &__row {
+    margin-bottom: $spacing-03;
   }
 
   &__card {
