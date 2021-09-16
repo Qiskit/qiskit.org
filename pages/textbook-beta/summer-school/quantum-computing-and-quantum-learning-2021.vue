@@ -19,7 +19,7 @@
       </template>
     </AppPageHeaderWithImage>
     <RelatedMaterialSection class="summer-school-page__section" />
-    <ExternalRecommendedReadings class="summer-school-page__section" :links="links" :title="recommendedReadingsSectionTitle" />
+    <ExternalRecommendedReadings class="summer-school-page__section" :links="links" />
     <SummerSchoolCoursePages class="summer-school-page__section" />
   </main>
 </template>
@@ -79,8 +79,6 @@ export default class SummerSchoolCoursePage extends QiskitPage {
       }
     }
   ]
-
-  recommendedReadingsSectionTitle = 'Supplementary Resources'
 }
 </script>
 
