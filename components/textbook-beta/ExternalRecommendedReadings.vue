@@ -1,7 +1,7 @@
 <template>
   <section class="external-recommended-readings">
     <h2>
-      {{ title }}
+      External recommended readings
     </h2>
     <AppLink
       v-for="link in links"
@@ -23,7 +23,6 @@ import { GeneralLink } from '~/constants/appLinks'
 @Component
 export default class ExternalRecommendedReadings extends Vue {
   @Prop({ type: Array, required: true }) links!: GeneralLink[]
-  @Prop({ type: String, required: true }) title!: string
 }
 </script>
 
