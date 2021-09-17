@@ -1,35 +1,35 @@
 <template>
   <div ref="canvasWrapper" class="dynamic-background-logo">
-    <canvas ref="canvas" class="dynamic-background-logo-background-canvas" />
-    <SketchedLogo class="dynamic-background-logo-overlay" />
+    <canvas ref="canvas" class="dynamic-background-logo__background-canvas" />
+    <SketchedLogo class="dynamic-background-logo__overlay" />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue-demi'
+/*
+These numbers are the count of the results of executing a quantum circuit:
 
-// These numbers are the count of the results of executing a quantum circuit:
-//
-// qreg q[5];
-// creg c[5];
-//
-// h q[0];
-// cx q[0],q[1];
-// cx q[0],q[2];
-// x q[0];
-// cx q[0],q[3];
-// cx q[0],q[4];
-//
-// There are only two possible results: 11001 and 00110.
-// The quantum noise and decoherence create some errors.
-// That is the reason ACCUMULATED_SUCCESS_RATIO is different than 1.
-// The SUCCESS_RATIO_1 is used as the probability to draw a big square
-// The SUCCESS_RATIO_2 is used as the probability to draw a small square
-// An unsuccessful result draws a blank space.
+  qreg q[5];
+  creg c[5];
+
+  h q[0];
+  cx q[0],q[1];
+  cx q[0],q[2];
+  x q[0];
+  cx q[0],q[3];
+  cx q[0],q[4];
+
+There are only two possible results: 11001 and 00110.
+The quantum noise and decoherence create some errors.
+That is the reason ACCUMULATED_SUCCESS_RATIO is different than 1.
+The SUCCESS_RATIO_1 is used as the probability to draw a big square
+The SUCCESS_RATIO_2 is used as the probability to draw a small square
+An unsuccessful result draws a blank space.
+*/
 const SUCCESS_RATIO_1 = 6970 / 16384 // 11001
 const SUCCESS_RATIO_2 = 6124 / 16384 // 00110
 const ACCUMULATED_SUCCESS_RATIO = SUCCESS_RATIO_1 + SUCCESS_RATIO_2 // 11001 || 00110
-// const unsuccessRatio = 3290 / 16384 // !11001 && !00110
 
 // 0 means no drawing, 2 means small squares only, 1 means both squares
 const imgMask = [
@@ -190,8 +190,10 @@ export default defineComponent({
 
       const pixelDensityConsideringDevicePixelRatio = (window.devicePixelRatio || 1) * this.pixelDensity
 
-      // this disparity of html-width/height and css-width/height
-      // creates a high resolution canvas with better lines
+      /*
+      this disparity of html-width/height and css-width/height
+      creates a high resolution canvas with better lines
+      */
       this.canvas!.width = this.parentWidth * pixelDensityConsideringDevicePixelRatio
       this.canvas!.height = this.parentHeight * pixelDensityConsideringDevicePixelRatio
       this.canvas!.style.width = `${this.parentWidth}px`
@@ -233,13 +235,13 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .dynamic-background-logo {
-  &-background-canvas {
+  &__background-canvas {
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
   }
-  &-overlay {
+  &__overlay {
     position: absolute;
     left: 50%;
     top: 50%;

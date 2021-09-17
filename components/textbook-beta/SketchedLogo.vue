@@ -1,7 +1,7 @@
 <template>
   <div>
     <svg
-      class="logo-fill"
+      class="logo__fill"
       xmlns="http://www.w3.org/2000/svg"
       x="0"
       y="0"
@@ -61,28 +61,22 @@
       <path fill="url(#SVGID_4_)" d="M72 16.9c-30.4 0-61.8 7.7-61.8 20.6s30.4 20.3 59 20.6c30.4 0 61.8-7.7 61.8-20.6s-30.3-20.3-59-20.6zm-2.7 36.4C37.3 53 15 44.7 15 37.5c0-7.5 24.4-15.9 57-15.9 32 .4 54.3 8.6 54.3 15.9 0 7.5-24.4 15.8-57 15.8z" /><path d="M70.4.4c-5.1 0-16.9.8-16.9 7.9s11.8 7.9 16.9 7.9 16.9-.8 16.9-7.9S75.5.4 70.4.4zm0 4.8c7.2 0 12.1 1.6 12.1 3.1s-5 3.1-12.1 3.1-12.1-1.7-12.1-3.1 5-3.1 12.1-3.1zM100 112.8l-.9.1-26.3-45.5-24-41.4c2.1-2.6 1.7-6.4-.9-8.4s-6.4-1.7-8.4.9-1.7 6.4.9 8.4c1.1.9 2.5 1.3 3.9 1.3l.8-.1 24 41.4 10.8 18.7L95.3 115c-2.1 2.6-1.7 6.3.8 8.4s6.3 1.7 8.4-.8a6 6 0 00-.8-8.4c-1-.9-2.3-1.4-3.7-1.4z" class="st1" />
     </svg>
     <img
-      class="logo-sketch"
+      class="logo__sketch"
       src="/images/textbook-beta/logo-sketch-lines.png"
     >
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue-demi'
-
-export default defineComponent({})
-</script>
-
 <style lang="scss" scoped>
 .logo {
-  &-fill {
+  &__fill {
     position: absolute;
     left: 50%;
     top: 50%;
     width: 90%;
     transform: translate(-49%, -50.8%);
   }
-  &-sketch {
+  &__sketch {
     position: absolute;
     left: 50%;
     top: 50%;
