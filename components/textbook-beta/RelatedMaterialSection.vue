@@ -42,16 +42,6 @@ export default class RelatedMaterialSection extends Vue {
         'https://qiskit.org/learn/intro-qc-qh'
     },
     {
-      title: 'Matrix Multiplication',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Egestas aenean arcu, vitae nunc aenean amet felis.',
-      segment: {
-        cta: 'matrix-multiplication', location: 'related-material'
-      },
-      url:
-        'https://replace-this-url'
-    },
-    {
       title: 'Python Programming',
       description:
         'Python is a programming language where you don\'t need to compile. You can just run it line by line...',
@@ -59,22 +49,22 @@ export default class RelatedMaterialSection extends Vue {
         cta: 'python-programming', location: 'related-material'
       },
       url:
-        'https://replace-this-url'
+        'https://learn.qiskit.org/course/ch-prerequisites/introduction-to-python-and-jupyter-notebooks'
     },
     {
       title: 'Linear Algebra',
       description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Egestas aenean arcu, vitae nunc aenean amet felis.',
+        'Linear algebra is the language of quantum computing. Develop a good understanding of the basic mathematical concepts that linear algebra is built upon.',
       segment: {
         cta: 'linear-algebra', location: 'related-material'
       },
       url:
-        'https://replace-this-url'
+        'https://qiskit.org/textbook/ch-appendix/linear_algebra.html'
     },
     {
       title: 'Probability Theory — Random Variables and Distributions',
       description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Egestas aenean arcu, vitae nunc aenean amet felis.',
+        'Probabilities help us deal with unknowns. Quantum mechanics is an extension of probability theory, so being comfortable with probabilities will make your quantum computing journey easier.',
       segment: {
         cta: 'probability-theory', location: 'related-material'
       },
