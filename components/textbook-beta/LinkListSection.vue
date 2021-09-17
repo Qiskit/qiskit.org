@@ -1,12 +1,12 @@
 <template>
-  <section class="external-recommended-readings">
+  <section class="link-list-section">
     <h2>
       {{ title }}
     </h2>
     <AppLink
       v-for="link in links"
       :key="link.label"
-      class="external-recommended-readings__link"
+      class="link-list-section__link"
       :segment="link.segment"
       :url="link.url"
     >
@@ -21,14 +21,14 @@ import { Component, Prop } from 'vue-property-decorator'
 import { GeneralLink } from '~/constants/appLinks'
 
 @Component
-export default class ExternalRecommendedReadings extends Vue {
+export default class LinkListSection extends Vue {
   @Prop({ type: Array, required: true }) links!: GeneralLink[]
   @Prop({ type: String, required: true }) title!: string
 }
 </script>
 
 <style lang="scss" scoped>
-.external-recommended-readings {
+.link-list-section {
   &__link {
     display: block;
     margin-bottom: $spacing-01;

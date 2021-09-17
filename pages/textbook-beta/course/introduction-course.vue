@@ -19,7 +19,7 @@
       </template>
     </AppPageHeaderWithImage>
     <PrerequisiteMaterialSection class="introduction-course-page__section" />
-    <ExternalRecommendedReadings class="introduction-course-page__section" :links="links" :title="recommendedReadingsSectionTitle" />
+    <LinkListSection class="introduction-course-page__section" :links="links" :title="recommendedReadingsSectionTitle" />
     <CoursePagesSection class="introduction-course-page__section" />
   </main>
 </template>

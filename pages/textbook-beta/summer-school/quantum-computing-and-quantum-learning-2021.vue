@@ -19,7 +19,7 @@
       </template>
     </AppPageHeaderWithImage>
     <RelatedMaterialSection class="summer-school-page__section" />
-    <ExternalRecommendedReadings class="summer-school-page__section" :links="links" :title="supplementaryResourcesSectionTitle" />
+    <LinkListSection class="summer-school-page__section" :links="links" :title="supplementaryResourcesSectionTitle" />
     <SummerSchoolCoursePages class="summer-school-page__section" />
   </main>
 </template>
