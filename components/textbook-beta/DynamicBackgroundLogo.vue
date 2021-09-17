@@ -249,5 +249,4 @@ export default defineComponent({
     width: 87%;
   }
 }
-
 </style>
