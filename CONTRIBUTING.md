@@ -177,8 +177,8 @@ branch. In these occassions, remember to manually close the related pull request
 As part of our continuous integration infrastructure, every pull request that passes 
 the build process, receives a dedicated deployment running on [IBM Code Engine](https://cloud.ibm.com/codeengine/overview). 
 
-This allows the team to have live, branch previews, making it easier for the team to 
-share links and review changes as necessary. You can preview your working branch at 
+This allows the team to have live branch previews, making it easier to share
+links and review changes as necessary. You can preview your working branch at 
 `https://qiskit-org-pr-<pull-request-number>.<unique_id>.us-south.codeengine.appdomain.cloud/`.
 
 ### Code review
