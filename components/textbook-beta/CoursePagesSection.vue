@@ -207,7 +207,7 @@ export default class CoursePagesSection extends Vue {
 
 .courses {
   .course {
-    margin: 0 0 0.5em;
+    margin: 0 0 0.5rem;
     position: relative;
 
     &__entry {
