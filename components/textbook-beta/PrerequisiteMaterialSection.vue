@@ -67,16 +67,15 @@ export default class PrerequisiteMaterialSection extends Vue {
 
   &__cards {
     display: grid;
-    column-gap: $spacing-07;
+    gap: $spacing-07;
     grid-template-columns: repeat(4, 1fr);
-    row-gap: $spacing-07;
 
-    @include mq($until: medium) {
+    @include mq($until: large) {
       grid-template-columns: repeat(2, 1fr);
     }
 
-    @include mq($until: small) {
-      grid-template-columns: 1fr;
+    @include mq($until: medium) {
+      grid-template-columns: repeat(1, 1fr);
       row-gap: $spacing-05;
     }
   }
