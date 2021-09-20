@@ -106,12 +106,12 @@ export default class SummerSchoolCoursePagesSection extends Vue {
       segment: { cta: 'lab-1', location: 'summer-school-2021' },
       url: 'https://learn.qiskit.org/course/qgss2021/lab1'
     },
-    {
-      image: 'QGSS2021_Lecture3.2BonusContent_CoverImage.png',
-      label: 'Bonus Content: Noise in Quantum Computers',
-      segment: { cta: 'lecture-3', location: 'summer-school-2021' },
-      url: 'https://learn.qiskit.org/course/qgss2021/lec3'
-    },
+    // {
+    //   image: 'QGSS2021_Lecture3.2BonusContent_CoverImage.png',
+    //   label: 'Bonus Content: Noise in Quantum Computers',
+    //   segment: { cta: 'lecture-3', location: 'summer-school-2021' },
+    //   url: 'https://learn.qiskit.org/course/qgss2021/lec3'
+    // },
     {
       image: 'QGSS2021_Lecture4.1_CoverImage.png',
       label: 'Introduction to Classical Machine Learning',
@@ -288,7 +288,7 @@ export default class SummerSchoolCoursePagesSection extends Vue {
       background: $cool-gray-10;
       padding: $spacing-05;
       position: relative;
-      max-height: 27rem;
+      max-height: 32.5rem;
 
       &__image {
         width: 100%;
