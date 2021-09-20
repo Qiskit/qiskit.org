@@ -95,7 +95,7 @@ export default class RelatedMaterialSection extends Vue {
     }
 
     @include mq($until: medium) {
-      grid-template-columns: repeat(1, 1fr);
+      grid-template-columns: 1fr;
       row-gap: $spacing-05;
     }
   }
