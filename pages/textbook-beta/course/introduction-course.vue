@@ -18,7 +18,7 @@
         <img class="app-page-header-with-img__image" :src="headerImg">
       </template>
     </AppPageHeaderWithImage>
-    <PrerequisiteMaterialSection class="introduction-course-page__section" />
+    <PrerequisiteMaterialSection class="introduction-course-page__section" :data="introductionCoursePrerequisiteData" />
     <LinkListSection class="introduction-course-page__section" :links="links" :title="recommendedReadingsSectionTitle" />
     <CoursePagesSection class="introduction-course-page__section" />
   </main>
@@ -27,7 +27,7 @@
 <script lang="ts">
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
-import { GeneralLink, textbookBetaIntroductionCourseStartLearningUrl } from '~/constants/appLinks'
+import { GeneralLink, textbookBetaIntroductionCourseStartLearningUrl, introductionCoursePrerequisites } from '~/constants/appLinks'
 
 @Component({
   layout: 'default-max',
@@ -39,6 +39,7 @@ import { GeneralLink, textbookBetaIntroductionCourseStartLearningUrl } from '~/c
 })
 export default class IntroductionCoursePage extends QiskitPage {
   routeName: string = 'introduction-course'
+  introductionCoursePrerequisiteData = introductionCoursePrerequisites
 
   headerTitle = 'Introduction to Quantum Computing'
   headerDescription = [`This short course contains around 3 hours of content and is

@@ -18,7 +18,7 @@
         <img class="app-page-header-with-img__image" :src="headerImg">
       </template>
     </AppPageHeaderWithImage>
-    <RelatedMaterialSection class="summer-school-page__section" />
+    <PrerequisiteMaterialSection class="summer-school-page__section" :data="summerSchool2021PrerequisiteData" />
     <LinkListSection class="summer-school-page__section" :links="links" :title="supplementaryResourcesSectionTitle" />
     <SummerSchoolCoursePages class="summer-school-page__section" />
   </main>
@@ -27,7 +27,7 @@
 <script lang="ts">
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
-import { GeneralLink, summerSchoolCourseStartLearningUrl } from '~/constants/appLinks'
+import { GeneralLink, summerSchoolCourseStartLearningUrl, summerSchool2021Prerequisites } from '~/constants/appLinks'
 
 @Component({
   layout: 'default-max',
@@ -38,6 +38,7 @@ import { GeneralLink, summerSchoolCourseStartLearningUrl } from '~/constants/app
   }
 })
 export default class SummerSchoolCoursePage extends QiskitPage {
+  summerSchool2021PrerequisiteData = summerSchool2021Prerequisites
   routeName: string = 'summer-school/quantum-computing-and-quantum-learning-2021'
 
   headerTitle = '2021 Qiskit Global Summer School on Quantum Machine Learning'

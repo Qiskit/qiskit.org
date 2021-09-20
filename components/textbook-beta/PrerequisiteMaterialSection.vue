@@ -5,7 +5,7 @@
     </h2>
     <div class="prerequisite-material-section__cards">
       <AppDescriptionCard
-        v-for="{ title, description, segment, url } in prerequisites"
+        v-for="{ title, description, segment, url } in data"
         :key="title"
         :description="description"
         class="prerequisite-material-section__card"
@@ -18,7 +18,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
+import { Component, Prop } from 'vue-property-decorator'
 import { CtaClickedEventProp } from '~/constants/segment'
 
 interface Prerequisite {
@@ -30,28 +30,7 @@ interface Prerequisite {
 
 @Component
 export default class PrerequisiteMaterialSection extends Vue {
-  prerequisites: Prerequisite[] = [
-    {
-      title: 'Setting Up Your Environment',
-      description:
-        'This is a comprehensive guide for setting up your environment on your personal computer for working with Qiskit Textbook.',
-      segment: {
-        cta: 'setting-up-your-environment', location: 'prerequisite-material'
-      },
-      url:
-        'https://learn.qiskit.org/course/ch-prerequisites/environment-setup-guide-to-work-with-qiskit-textbook'
-    },
-    {
-      title: 'Python and Jupyter Notebooks',
-      description:
-        "Python is a programming language where you don't need to compile. You can just run it line by line...",
-      segment: {
-        cta: 'python-and-jupyter-notebooks', location: 'prerequisite-material'
-      },
-      url:
-        'https://learn.qiskit.org/course/ch-prerequisites/introduction-to-python-and-jupyter-notebooks'
-    }
-  ]
+  @Prop({ type: Array, required: true }) data!: Prerequisite[]
 }
 </script>
 
