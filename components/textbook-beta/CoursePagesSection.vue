@@ -175,7 +175,11 @@ export default class CoursePagesSection extends Vue {
       padding-right: $spacing-03;
 
       &-wrapper {
-        margin: $spacing-06 0;
+        margin: 1.25rem 0 $spacing-06 0;
+
+        @include mq($until: x-large) {
+          margin: $spacing-03 0 $spacing-06 0;
+        }
       }
     }
 
