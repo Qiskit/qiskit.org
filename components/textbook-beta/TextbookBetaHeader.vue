@@ -2,6 +2,9 @@
   <header class="textbook-beta-header">
     <div class="textbook-beta-header__container-wrapper">
       <div class="textbook-beta-header__container">
+        <div class="textbook-beta-header__logo-container">
+          <DynamicBackgroundLogo class="textbook-beta-header__logo" />
+        </div>
         <div>
           <h1 class="textbook-beta-header__headline">
             Qiskit Textbook (beta)
@@ -102,10 +105,7 @@ export default class TextbookBetaHeader extends (Vue as VueConstructor<VueCompon
     @include contained();
 
     max-width: $max-size;
-    background-image: url("/images/textbook-beta/qiskit-logo-header.png");
-    background-position: right center;
-    background-repeat: no-repeat;
-    background-size: 50% auto;
+    position: relative;
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -115,19 +115,42 @@ export default class TextbookBetaHeader extends (Vue as VueConstructor<VueCompon
 
     @include mq($from:medium, $until: large) {
       padding-top: $layout-06;
-      background-position: calc(100% + 5rem) calc(100% + 5rem);
-      background-size: 60%;
     }
 
-    @include mq($until: medium) {
-      background-position: calc(100% + 5rem) calc(100% + 2rem);
-      background-size: 90%;
-    }
     &-wrapper {
       @include responsive-grid-bg-strip("/images/grid/grid-hero-textbook.svg", auto, 95%);
 
       display: flex;
       height: 100%;
+    }
+  }
+
+  &__logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    padding-top: 100%;
+    transform: translate(-50%, -50%);
+
+    &-container {
+      // the #{_______} is added to force scss to compile $spacing-11 value.
+      --additional-width: #{$spacing-11};
+
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 40%;
+      height: 100%;
+      overflow: hidden;
+
+      @include mq($from:medium, $until: large) {
+        width: calc(50% + var(--additional-width));
+      }
+      @include mq($until: medium) {
+        width: calc(80% + var(--additional-width));
+        height: 80%;
+      }
     }
   }
 
@@ -145,6 +168,8 @@ export default class TextbookBetaHeader extends (Vue as VueConstructor<VueCompon
 
   &__cta {
     align-self: flex-end;
+    // this is necessary to respect z ordering with the absolute elements.
+    position: relative;
   }
 }
 
