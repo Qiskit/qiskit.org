@@ -19,7 +19,7 @@
       </template>
     </AppPageHeaderWithImage>
     <PrerequisiteMaterialSection class="summer-school-page__section" :data="summerSchool2021Prerequisites" />
-    <LinkListSection class="summer-school-page__section" :links="links" />
+    <ExternalRecommendedReadings class="summer-school-page__section" :links="links" />
     <CoursePagesSection class="summer-school-page__section" :courses="courses" :img-base="imageUrlBase" />
   </main>
 </template>
