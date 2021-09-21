@@ -18,7 +18,7 @@
         <img class="app-page-header-with-img__image" :src="headerImg">
       </template>
     </AppPageHeaderWithImage>
-    <PrerequisiteMaterialSection class="introduction-course-page__section" :data="introductionCoursePrerequisiteData" />
+    <PrerequisiteMaterialSection class="introduction-course-page__section" :data="introductionCoursePrerequisites" />
     <LinkListSection class="introduction-course-page__section" :links="links" />
     <CoursePagesSection class="introduction-course-page__section" :courses="courses" :img-base="imageUrlBase" />
   </main>
@@ -27,7 +27,7 @@
 <script lang="ts">
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
-import { GeneralLink, textbookBetaIntroductionCourseStartLearningUrl, introductionCoursePrerequisites } from '~/constants/appLinks'
+import { GeneralLink, textbookBetaIntroductionCourseStartLearningUrl } from '~/constants/appLinks'
 import { CtaClickedEventProp } from '~/constants/segment'
 
 interface Course {
@@ -47,7 +47,6 @@ interface Course {
 })
 export default class IntroductionCoursePage extends QiskitPage {
   routeName: string = 'introduction-course'
-  introductionCoursePrerequisiteData = introductionCoursePrerequisites
 
   headerTitle = 'Introduction to Quantum Computing'
   headerDescription = [`This short course contains around 3 hours of content and is
@@ -147,6 +146,29 @@ export default class IntroductionCoursePage extends QiskitPage {
       label: 'Project',
       segment: { cta: 'project', location: 'course' },
       url: 'https://learn.qiskit.org/course/introduction/project'
+    }
+  ]
+
+  introductionCoursePrerequisites = [
+    {
+      title: 'Setting Up Your Environment',
+      description:
+        'This is a comprehensive guide for setting up your environment on your personal computer for working with Qiskit Textbook.',
+      segment: {
+        cta: 'setting-up-your-environment', location: 'prerequisite-material'
+      },
+      url:
+        'https://learn.qiskit.org/course/ch-prerequisites/environment-setup-guide-to-work-with-qiskit-textbook'
+    },
+    {
+      title: 'Python and Jupyter Notebooks',
+      description:
+        "Python is a programming language where you don't need to compile. You can just run it line by line...",
+      segment: {
+        cta: 'python-and-jupyter-notebooks', location: 'prerequisite-material'
+      },
+      url:
+        'https://learn.qiskit.org/course/ch-prerequisites/introduction-to-python-and-jupyter-notebooks'
     }
   ]
 

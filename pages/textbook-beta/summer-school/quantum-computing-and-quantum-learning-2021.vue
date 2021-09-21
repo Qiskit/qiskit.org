@@ -18,7 +18,7 @@
         <img class="app-page-header-with-img__image" :src="headerImg">
       </template>
     </AppPageHeaderWithImage>
-    <PrerequisiteMaterialSection class="summer-school-page__section" :data="summerSchool2021PrerequisiteData" />
+    <PrerequisiteMaterialSection class="summer-school-page__section" :data="summerSchool2021Prerequisites" />
     <LinkListSection class="summer-school-page__section" :links="links" />
     <CoursePagesSection class="summer-school-page__section" :courses="courses" :img-base="imageUrlBase" />
   </main>
@@ -28,7 +28,7 @@
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import { CtaClickedEventProp } from '~/constants/segment'
-import { GeneralLink, summerSchoolCourseStartLearningUrl, summerSchool2021Prerequisites } from '~/constants/appLinks'
+import { GeneralLink, summerSchoolCourseStartLearningUrl } from '~/constants/appLinks'
 
 interface Course {
   image: string;
@@ -46,7 +46,6 @@ interface Course {
   }
 })
 export default class SummerSchoolCoursePage extends QiskitPage {
-  summerSchool2021PrerequisiteData = summerSchool2021Prerequisites
   routeName: string = 'summer-school/quantum-computing-and-quantum-learning-2021'
 
   headerTitle = '2021 Qiskit Global Summer School on Quantum Machine Learning'
@@ -239,6 +238,49 @@ export default class SummerSchoolCoursePage extends QiskitPage {
       label: 'The Capacity and Power of Quantum Machine Learning Models & the Future of Quantum Machine Learning',
       segment: { cta: 'lecture-10-2', location: 'summer-school-2021' },
       url: 'https://learn.qiskit.org/course/qgss2021/lec10-2'
+    }
+  ]
+
+  summerSchool2021Prerequisites = [
+    {
+      title: 'Introduction to Quantum Computing and Quantum Hardware',
+      description:
+        'The Qiskit Global Summer School 2020 coursework, lab, and lecture materials are available online.',
+      segment: {
+        cta: 'intro-qc-qh-21', location: 'related-material'
+      },
+      url:
+        'https://qiskit.org/learn/intro-qc-qh'
+    },
+    {
+      title: 'Python Programming',
+      description:
+        'Python is a programming language where you don\'t need to compile. You can just run it line by line...',
+      segment: {
+        cta: 'python-programming', location: 'related-material'
+      },
+      url:
+        'https://learn.qiskit.org/course/ch-prerequisites/introduction-to-python-and-jupyter-notebooks'
+    },
+    {
+      title: 'Linear Algebra',
+      description:
+        'Linear algebra is the language of quantum computing. Develop a good understanding of the basic mathematical concepts that linear algebra is built upon.',
+      segment: {
+        cta: 'linear-algebra', location: 'related-material'
+      },
+      url:
+        'https://qiskit.org/textbook/ch-appendix/linear_algebra.html'
+    },
+    {
+      title: 'Probability Theory — Random Variables and Distributions',
+      description:
+        'Probabilities help us deal with unknowns. Quantum mechanics is an extension of probability theory, so being comfortable with probabilities will make your quantum computing journey easier.',
+      segment: {
+        cta: 'probability-theory', location: 'related-material'
+      },
+      url:
+        'https://www.khanacademy.org/math/statistics-probability/random-variables-stats-library'
     }
   ]
 
