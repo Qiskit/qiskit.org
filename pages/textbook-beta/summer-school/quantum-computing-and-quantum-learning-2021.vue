@@ -127,7 +127,7 @@ export default class SummerSchoolCoursePage extends QiskitPage {
     },
     {
       image: 'QGSS2021_Lab1_CoverImage.png',
-      label: 'Introduction to Quantum Computing Algorithms and Operations',
+      label: 'Lab 1: Quantum Computing Algorithms and Operations',
       segment: { cta: 'lab-1', location: 'summer-school-2021' },
       url: 'https://learn.qiskit.org/course/qgss2021/lab1'
     },
@@ -163,7 +163,7 @@ export default class SummerSchoolCoursePage extends QiskitPage {
     },
     {
       image: 'QGSS2021_Lab2_CoverImage.png',
-      label: 'Introduction to Variational Algorithms',
+      label: 'Lab 2: Variational Algorithms',
       segment: { cta: 'lab2', location: 'summer-school-2021' },
       url: 'https://learn.qiskit.org/course/qgss2021/lab2'
     },
@@ -187,7 +187,7 @@ export default class SummerSchoolCoursePage extends QiskitPage {
     },
     {
       image: 'QGSS2021_Lab3_CoverImage.png',
-      label: 'Introduction to Quantum Kernels and Support Vector Machines',
+      label: 'Lab 3: Introduction to Quantum Kernels and Support Vector Machines',
       segment: { cta: 'lab3', location: 'summer-school-2021' },
       url: 'https://learn.qiskit.org/course/qgss2021/lab3'
     },
@@ -205,7 +205,7 @@ export default class SummerSchoolCoursePage extends QiskitPage {
     },
     {
       image: 'QGSS2021_Lab4_CoverImage.png',
-      label: 'Introduction to Training Quantum Circuits',
+      label: 'Lab 4: Introduction to Training Quantum Circuits',
       segment: { cta: 'lab4', location: 'summer-school-2021' },
       url: 'https://learn.qiskit.org/course/qgss2021/lab4'
     },
@@ -223,7 +223,7 @@ export default class SummerSchoolCoursePage extends QiskitPage {
     },
     {
       image: 'QGSS2021_Lab5_CoverImage.png',
-      label: 'Introduction to Hardware Efficient Ansatze for Quantum Machine Learning',
+      label: 'Lab 5: Introduction to Hardware Efficient Ansatze for Quantum Machine Learning',
       segment: { cta: 'lab5', location: 'summer-school-2021' },
       url: 'https://learn.qiskit.org/course/qgss2021/lab5'
     },
