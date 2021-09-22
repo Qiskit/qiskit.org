@@ -48,72 +48,16 @@
 </template>
 
 <script lang="ts">
+import { Course } from 'constants/textbookBetaContent'
 import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
-import { textbookBetaIntroductionCourseStartLearningUrl } from '~/constants/appLinks'
-import { CtaClickedEventProp } from '~/constants/segment'
-
-interface Course {
-  image: string;
-  label: string;
-  segment: CtaClickedEventProp;
-  url: string;
-}
+import { Component, Prop } from 'vue-property-decorator'
 
 @Component
 export default class CoursePagesSection extends Vue {
-  activeCourseLabel = '';
+  @Prop({ type: Array, required: true }) courses!: Course[]
+  @Prop({ type: String, required: true }) imgBase!: string
 
-  courses: Course[] = [
-    {
-      image: 'why-quantum-computing-preview.png',
-      label: 'Why quantum computing?',
-      segment: { cta: 'why-quantum-computing', location: 'course' },
-      url: textbookBetaIntroductionCourseStartLearningUrl
-    },
-    {
-      image: 'the-atoms-of-computation-preview.png',
-      label: 'The atoms of computation',
-      segment: { cta: 'the-atoms-of-computation', location: 'course' },
-      url: 'https://learn.qiskit.org/course/introduction/the-atoms-of-computation'
-    },
-    {
-      image: 'what-is-quantum-preview.png',
-      label: 'What is quantum?',
-      segment: { cta: 'what-is-quantum', location: 'course' },
-      url: 'https://learn.qiskit.org/course/introduction/what-is-quantum'
-    },
-    {
-      image: 'describing-quantum-computers-preview.png',
-      label: 'Describing quantum computers',
-      segment: { cta: 'describing-quantum-computers', location: 'course' },
-      url: 'https://learn.qiskit.org/course/introduction/describing-quantum-computers'
-    },
-    {
-      image: 'entangled-states-preview.png',
-      label: 'Entangled states',
-      segment: { cta: 'entangled-states', location: 'course' },
-      url: 'https://learn.qiskit.org/course/introduction/entangled-states'
-    },
-    {
-      image: 'visualizing-entanglement-preview.png',
-      label: 'Visualizing Entanglement',
-      segment: { cta: 'visualizing-entanglement-preview', location: 'course' },
-      url: 'https://learn.qiskit.org/course/introduction/visualizing-entanglement'
-    },
-    {
-      image: 'grovers-search-algorithm-preview.png',
-      label: 'Grover’s search algorithm',
-      segment: { cta: 'grovers-search-algorithm', location: 'course' },
-      url: 'https://learn.qiskit.org/course/introduction/grovers-search-algorithm'
-    },
-    {
-      image: 'project-preview.png',
-      label: 'Project',
-      segment: { cta: 'project', location: 'course' },
-      url: 'https://learn.qiskit.org/course/introduction/project'
-    }
-  ]
+  activeCourseLabel = '';
 
   get activeCourse () {
     const activeCourse = this.courses.find(
@@ -127,8 +71,7 @@ export default class CoursePagesSection extends Vue {
       return ''
     }
 
-    const imageUrlBase =
-      '/images/textbook-beta/course/introduction-course'
+    const imageUrlBase = this.imgBase
 
     return `${imageUrlBase}/${this.activeCourse.image}`
   }
@@ -175,7 +118,11 @@ export default class CoursePagesSection extends Vue {
       padding-right: $spacing-03;
 
       &-wrapper {
-        margin: $spacing-06 0;
+        margin: 1.25rem 0 $spacing-06 0;
+
+        @include mq($until: x-large) {
+          margin: $spacing-03 0 $spacing-06 0;
+        }
       }
     }
 
@@ -207,7 +154,7 @@ export default class CoursePagesSection extends Vue {
 
 .courses {
   .course {
-    margin: 0 0 0.5em;
+    margin: 0 0 0.5rem;
     position: relative;
 
     &__entry {
