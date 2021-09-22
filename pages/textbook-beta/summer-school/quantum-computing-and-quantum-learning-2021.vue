@@ -47,7 +47,7 @@ export default class SummerSchoolCoursePage extends QiskitPage {
 
   headerImg = '/images/textbook-beta/summer-school/quantum-computing-and-quantum-learning-2021/header.png'
 
-  backToTextbookHomeLink = {
+  backToTextbookHomeLink: GeneralLink = {
     url: '/textbook-beta',
     label: 'Home',
     segment: {
