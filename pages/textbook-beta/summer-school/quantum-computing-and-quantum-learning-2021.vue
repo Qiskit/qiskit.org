@@ -30,7 +30,6 @@ import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import { GeneralLink, summerSchoolCourseStartLearningUrl } from '~/constants/appLinks'
 
-
 @Component({
   layout: 'default-max',
   head () {
