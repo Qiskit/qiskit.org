@@ -25,17 +25,10 @@
 </template>
 
 <script lang="ts">
+import { Course, Prerequisite } from 'constants/textbookBetaContent'
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import { GeneralLink, textbookBetaIntroductionCourseStartLearningUrl } from '~/constants/appLinks'
-import { CtaClickedEventProp } from '~/constants/segment'
-
-interface Course {
-  image: string;
-  label: string;
-  segment: CtaClickedEventProp;
-  url: string;
-}
 
 @Component({
   layout: 'default-max',
@@ -149,7 +142,7 @@ export default class IntroductionCoursePage extends QiskitPage {
     }
   ]
 
-  introductionCoursePrerequisites = [
+  introductionCoursePrerequisites: Prerequisite[] = [
     {
       title: 'Setting Up Your Environment',
       description:

@@ -48,16 +48,9 @@
 </template>
 
 <script lang="ts">
+import { Course } from 'constants/textbookBetaContent'
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-import { CtaClickedEventProp } from '~/constants/segment'
-
-interface Course {
-  image: string;
-  label: string;
-  segment: CtaClickedEventProp;
-  url: string;
-}
 
 @Component
 export default class CoursePagesSection extends Vue {

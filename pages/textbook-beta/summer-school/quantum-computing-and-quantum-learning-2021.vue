@@ -25,17 +25,11 @@
 </template>
 
 <script lang="ts">
+import { Course, Prerequisite } from 'constants/textbookBetaContent'
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
-import { CtaClickedEventProp } from '~/constants/segment'
 import { GeneralLink, summerSchoolCourseStartLearningUrl } from '~/constants/appLinks'
 
-interface Course {
-  image: string;
-  label: string;
-  segment: CtaClickedEventProp;
-  url: string;
-}
 
 @Component({
   layout: 'default-max',
@@ -51,7 +45,7 @@ export default class SummerSchoolCoursePage extends QiskitPage {
   headerTitle = '2021 Qiskit Global Summer School on Quantum Machine Learning'
   headerDescription = ['Quantum computing experts and mentors share valuable insights through twenty lectures and five applied lab exercises that provide deep-dives exploring concepts in quantum computing, focused on the implementations of quantum machine learning algorithms in Qiskit.']
 
-      headerImg = '/images/textbook-beta/summer-school/quantum-computing-and-quantum-learning-2021/header.png'
+  headerImg = '/images/textbook-beta/summer-school/quantum-computing-and-quantum-learning-2021/header.png'
 
   backToTextbookHomeLink = {
     url: '/textbook-beta',
@@ -131,12 +125,6 @@ export default class SummerSchoolCoursePage extends QiskitPage {
       segment: { cta: 'lab-1', location: 'summer-school-2021' },
       url: 'https://learn.qiskit.org/course/qgss2021/lab1'
     },
-    // {
-    //   image: 'QGSS2021_Lecture3.2BonusContent_CoverImage.png',
-    //   label: 'Bonus Content: Noise in Quantum Computers',
-    //   segment: { cta: 'lecture-3', location: 'summer-school-2021' },
-    //   url: 'https://learn.qiskit.org/course/qgss2021/lec3'
-    // },
     {
       image: 'QGSS2021_Lecture4.1_CoverImage.png',
       label: 'Introduction to Classical Machine Learning',
@@ -241,7 +229,7 @@ export default class SummerSchoolCoursePage extends QiskitPage {
     }
   ]
 
-  summerSchool2021Prerequisites = [
+  summerSchool2021Prerequisites: Prerequisite[] = [
     {
       title: 'Introduction to Quantum Computing and Quantum Hardware',
       description:

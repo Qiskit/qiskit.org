@@ -17,16 +17,9 @@
 </template>
 
 <script lang="ts">
+import { Prerequisite } from 'constants/textbookBetaContent'
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-import { CtaClickedEventProp } from '~/constants/segment'
-
-interface Prerequisite {
-  title: string;
-  description: string;
-  segment: CtaClickedEventProp;
-  url: string;
-}
 
 @Component
 export default class PrerequisiteMaterialSection extends Vue {
