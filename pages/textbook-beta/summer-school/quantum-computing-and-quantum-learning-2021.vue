@@ -122,7 +122,7 @@ export default class SummerSchoolCoursePage extends QiskitPage {
       image: 'QGSS2021_Lab1_CoverImage.png',
       label: 'Lab 1: Quantum Computing Algorithms and Operations',
       segment: { cta: 'lab-1', location: 'summer-school-2021' },
-      url: 'https://learn.qiskit.org/summer-school/2021/lab1'
+      url: 'https://learn.qiskit.org/summer-school/2021/lab1-quantum-computing-algorithm-operations'
     },
     {
       image: 'QGSS2021_Lecture4.1_CoverImage.png',
@@ -152,7 +152,7 @@ export default class SummerSchoolCoursePage extends QiskitPage {
       image: 'QGSS2021_Lab2_CoverImage.png',
       label: 'Lab 2: Variational Algorithms',
       segment: { cta: 'lab2', location: 'summer-school-2021' },
-      url: 'https://learn.qiskit.org/summer-school/2021/lab2'
+      url: 'https://learn.qiskit.org/summer-school/2021/lab2-variational-algorithms'
     },
     {
       image: 'QGSS2021_Lecture6.1_CoverImage.png',
@@ -176,7 +176,7 @@ export default class SummerSchoolCoursePage extends QiskitPage {
       image: 'QGSS2021_Lab3_CoverImage.png',
       label: 'Lab 3: Introduction to Quantum Kernels and Support Vector Machines',
       segment: { cta: 'lab3', location: 'summer-school-2021' },
-      url: 'https://learn.qiskit.org/summer-school/2021/lab3'
+      url: 'https://learn.qiskit.org/summer-school/2021/lab3-introduction-quantum-kernels-support-vector-machines'
     },
     {
       image: 'QGSS2021_Lecture8.1_CoverImage.png',
@@ -194,7 +194,7 @@ export default class SummerSchoolCoursePage extends QiskitPage {
       image: 'QGSS2021_Lab4_CoverImage.png',
       label: 'Lab 4: Introduction to Training Quantum Circuits',
       segment: { cta: 'lab4', location: 'summer-school-2021' },
-      url: 'https://learn.qiskit.org/summer-school/2021/lab4'
+      url: 'https://learn.qiskit.org/summer-school/2021/lab4-introduction-training-quantum-circuits'
     },
     {
       image: 'QGSS2021_Lecture9.1_CoverImage.png',
@@ -212,7 +212,7 @@ export default class SummerSchoolCoursePage extends QiskitPage {
       image: 'QGSS2021_Lab5_CoverImage.png',
       label: 'Lab 5: Introduction to Hardware Efficient Ansatze for Quantum Machine Learning',
       segment: { cta: 'lab5', location: 'summer-school-2021' },
-      url: 'https://learn.qiskit.org/summer-school/2021/lab5'
+      url: 'https://learn.qiskit.org/summer-school/2021/lab5-introduction-hardware-efficient-ansatze-quantum-machine-learning'
     },
     {
       image: 'QGSS2021_Lecture10.1_CoverImage.png',
