@@ -86,37 +86,37 @@ export default class SummerSchoolCoursePage extends QiskitPage {
       image: 'QGSS2021_Lecture1.1_CoverImage.png',
       label: 'Vector Spaces, Tensor Products, and Qubits',
       segment: { cta: 'lecture-1-1', location: 'summer-school-2021' },
-      url: 'https://learn.qiskit.org/summer-school/2021/lec1-1'
+      url: 'https://learn.qiskit.org/summer-school/2021/lec1-1-vector-spaces-tensor-products-qubits'
     },
     {
       image: 'QGSS2021_Lecture1.2_CoverImage.png',
       label: 'Introduction to Quantum Circuits',
       segment: { cta: 'lecture-1-2', location: 'summer-school-2021' },
-      url: 'https://learn.qiskit.org/summer-school/2021/lec1-2'
+      url: 'https://learn.qiskit.org/summer-school/2021/lec1-2-introduction-quantum-circuits'
     },
     {
       image: 'QGSS2021_Lecture2.1_CoverImage.png',
       label: 'Simple Quantum Algorithms I',
       segment: { cta: 'lecture-2-1', location: 'summer-school-2021' },
-      url: 'https://learn.qiskit.org/summer-school/2021/lec2-1'
+      url: 'https://learn.qiskit.org/summer-school/2021/lec2-1-simple-quantum-algorithms-i'
     },
     {
       image: 'QGSS2021_Lecture2.2_CoverImage.png',
       label: 'Simple Quantum Algorithms II',
       segment: { cta: 'lecture-2-2', location: 'summer-school-2021' },
-      url: 'https://learn.qiskit.org/summer-school/2021/lec2-2'
+      url: 'https://learn.qiskit.org/summer-school/2021/lec2-2-simple-quantum-algorithms-ii'
     },
     {
       image: 'QGSS2021_Lecture3.1_CoverImage.png',
       label: 'Noise in Quantum Computers pt 1',
       segment: { cta: 'lecture-3-1', location: 'summer-school-2021' },
-      url: 'https://learn.qiskit.org/summer-school/2021/lec3-1'
+      url: 'https://learn.qiskit.org/summer-school/2021/lec3-1-noise-quantum-computers-1'
     },
     {
       image: 'QGSS2021_Lecture3.2_CoverImage.png',
       label: 'Noise in Quantum Computers pt. 2',
       segment: { cta: 'lecture-3-2', location: 'summer-school-2021' },
-      url: 'https://learn.qiskit.org/summer-school/2021/lec3-2'
+      url: 'https://learn.qiskit.org/summer-school/2021/lec3-2-noise-quantum-computers-pt-2'
     },
     {
       image: 'QGSS2021_Lab1_CoverImage.png',
@@ -128,25 +128,25 @@ export default class SummerSchoolCoursePage extends QiskitPage {
       image: 'QGSS2021_Lecture4.1_CoverImage.png',
       label: 'Introduction to Classical Machine Learning',
       segment: { cta: 'lecture-4-1', location: 'summer-school-2021' },
-      url: 'https://learn.qiskit.org/summer-school/2021/lec4-1'
+      url: 'https://learn.qiskit.org/summer-school/2021/lec4-1-introduction-classical-machine-learning'
     },
     {
       image: 'QGSS2021_Lecture4.2_CoverImage.png',
       label: 'Advanced Classical Machine Learning',
       segment: { cta: 'lecture-4-2', location: 'summer-school-2021' },
-      url: 'https://learn.qiskit.org/summer-school/2021/lec4-2'
+      url: 'https://learn.qiskit.org/summer-school/2021/lec4-2-advanced-classical-machine-learning'
     },
     {
       image: 'QGSS2021_Lecture5.1_CoverImage.png',
       label: 'Building a Quantum Classifier',
       segment: { cta: 'lecture-5-1', location: 'summer-school-2021' },
-      url: 'https://learn.qiskit.org/summer-school/2021/lec5-1'
+      url: 'https://learn.qiskit.org/summer-school/2021/lec5-1-building-quantum-classifier'
     },
     {
       image: 'QGSS2021_Lecture5.2_CoverImage.png',
       label: 'Introduction to the Quantum Approximate Optimization Algorithm and Applications',
       segment: { cta: 'lecture-5-2', location: 'summer-school-2021' },
-      url: 'https://learn.qiskit.org/summer-school/2021/lec5-2'
+      url: 'https://learn.qiskit.org/summer-school/2021/lec5-2-introduction-quantum-approximate-optimization-algorithm-applications'
     },
     {
       image: 'QGSS2021_Lab2_CoverImage.png',
@@ -158,19 +158,19 @@ export default class SummerSchoolCoursePage extends QiskitPage {
       image: 'QGSS2021_Lecture6.1_CoverImage.png',
       label: 'From Variational Classifiers to Linear Classifiers',
       segment: { cta: 'lecture-6-1', location: 'summer-school-2021' },
-      url: 'https://learn.qiskit.org/summer-school/2021/lec6-1'
+      url: 'https://learn.qiskit.org/summer-school/2021/lec6-1-from-variational-classifiers-linear-classifiers'
     },
     {
       image: 'QGSS2021_Lecture6.2_CoverImage.png',
       label: 'Quantum Feature Spaces and Kernels',
       segment: { cta: 'lecture-6-2', location: 'summer-school-2021' },
-      url: 'https://learn.qiskit.org/summer-school/2021/lec6-2'
+      url: 'https://learn.qiskit.org/summer-school/2021/lec6-2-quantum-feature-spaces-kernels'
     },
     {
       image: 'QGSS2021_Lecture7.1_CoverImage.png',
       label: 'Quantum Kernels in Practice',
       segment: { cta: 'lecture-7-1', location: 'summer-school-2021' },
-      url: 'https://learn.qiskit.org/summer-school/2021/lec7-1'
+      url: 'https://learn.qiskit.org/summer-school/2021/lec7-1-quantum-kernels-practice'
     },
     {
       image: 'QGSS2021_Lab3_CoverImage.png',
@@ -182,13 +182,13 @@ export default class SummerSchoolCoursePage extends QiskitPage {
       image: 'QGSS2021_Lecture8.1_CoverImage.png',
       label: 'Introduction and Applications of Quantum Models',
       segment: { cta: 'lecture-8-1', location: 'summer-school-2021' },
-      url: 'https://learn.qiskit.org/summer-school/2021/lec8-1'
+      url: 'https://learn.qiskit.org/summer-school/2021/lec8-1-introduction-applications-quantum-models'
     },
     {
       image: 'QGSS2021_Lecture8.2_CoverImage.png',
       label: 'Barren Plateaus, Trainability Issues, and How to Avoid Them',
       segment: { cta: 'lecture-8-2', location: 'summer-school-2021' },
-      url: 'https://learn.qiskit.org/summer-school/2021/lec8-2'
+      url: 'https://learn.qiskit.org/summer-school/2021/lec8-2-barren-plateaus-trainability-issues-how-avoid-them'
     },
     {
       image: 'QGSS2021_Lab4_CoverImage.png',
@@ -200,13 +200,13 @@ export default class SummerSchoolCoursePage extends QiskitPage {
       image: 'QGSS2021_Lecture9.1_CoverImage.png',
       label: 'Introduction to Quantum Hardware',
       segment: { cta: 'lecture-9-1', location: 'summer-school-2021' },
-      url: 'https://learn.qiskit.org/summer-school/2021/lec9-1'
+      url: 'https://learn.qiskit.org/summer-school/2021/lec9-1-introduction-quantum-hardware'
     },
     {
       image: 'QGSS2021_Lecture9.2_CoverImage.png',
       label: 'Hardware Efficient Ansatze for Quantum Machine Learning',
       segment: { cta: 'lecture-9-2', location: 'summer-school-2021' },
-      url: 'https://learn.qiskit.org/summer-school/2021/lec9-2'
+      url: 'https://learn.qiskit.org/summer-school/2021/lec9-2-hardware-efficient-ansatze-quantum-machine-learning'
     },
     {
       image: 'QGSS2021_Lab5_CoverImage.png',
@@ -218,13 +218,13 @@ export default class SummerSchoolCoursePage extends QiskitPage {
       image: 'QGSS2021_Lecture10.1_CoverImage.png',
       label: 'Advanced QML Algorithms: Quantum Boltzmann Machines and Quantum Generative Adversarial Networks',
       segment: { cta: 'lecture-10-1', location: 'summer-school-2021' },
-      url: 'https://learn.qiskit.org/summer-school/2021/lec10-1'
+      url: 'https://learn.qiskit.org/summer-school/2021/lec10-1-advanced-qml-algorithms'
     },
     {
       image: 'QGSS2021_Lecture10.2_CoverImage.png',
       label: 'The Capacity and Power of Quantum Machine Learning Models & the Future of Quantum Machine Learning',
       segment: { cta: 'lecture-10-2', location: 'summer-school-2021' },
-      url: 'https://learn.qiskit.org/summer-school/2021/lec10-2'
+      url: 'https://learn.qiskit.org/summer-school/2021/lec10-2-the-capacity-power-quantum-machine-learning-models-future-quantum-machine-learning'
     }
   ]
 
