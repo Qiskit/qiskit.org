@@ -50,7 +50,7 @@ const TEXTBOOK_BETA_START_LEARNING: GeneralLink = {
 }
 
 const textbookBetaIntroductionCourseStartLearningUrl = 'https://learn.qiskit.org/course/introduction'
-const summerSchoolCourseStartLearningUrl = 'https://learn.qiskit.org/course/qgss2021/lec1-1'
+const summerSchoolCourseStartLearningUrl = 'https://learn.qiskit.org/summer-school/2021/'
 
 const IBM_Q_EXPERIENCE: GeneralLink = {
   url: 'https://quantum-computing.ibm.com/lab',
