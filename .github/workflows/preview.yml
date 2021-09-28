@@ -6,6 +6,8 @@ on: [pull_request]
 jobs:
   preview:
     runs-on: ubuntu-latest
+    permissions: 
+      deployments: write
     env:
       PR_TAG: pr-${{ github.event.pull_request.number }}
       DOCKER_IMAGE_NAME: qiskit-org
@@ -29,7 +31,7 @@ jobs:
           APP_NAME: ${{ env.DOCKER_IMAGE_NAME }}-${{ env.PR_TAG }}
         with:
           step: start
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ github.token }}
           env: ${{ env.APP_NAME }}
           auto_inactive: true
           ref: ${{ github.event.pull_request.head.ref }}
