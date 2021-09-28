@@ -406,6 +406,3 @@ Special thanks to the 2020 class of IBM Quantum interns and the entire community
 If you use the lectures and labs in your course, you can gain access to the [IBM Quantum Educators Program](https://quantum-computing.ibm.com/programs/educators). Please cite the material as:
 
 > IBM Quantum team, Introduction to Quantum Computing and Quantum Hardware (2020). http://qiskit.org/learn/intro-qc-qh
-
-## Contact
-Please contact Abraham Asfaw at abraham.asfaw@ibm.com with any questions or suggestions to improve this course.
