@@ -6,8 +6,6 @@ on: [pull_request]
 jobs:
   preview:
     runs-on: ubuntu-latest
-    permissions: 
-      deployments: write
     env:
       PR_TAG: pr-${{ github.event.pull_request.number }}
       DOCKER_IMAGE_NAME: qiskit-org
