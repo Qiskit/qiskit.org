@@ -107,7 +107,7 @@ export default class CoursePagesSection extends Vue {
     grid-area: main;
     grid-template-rows: auto 1fr;
     position: sticky;
-    top: -.5rem;
+    top: -$spacing-03;
 
     @include mq($until: medium) {
       display: none;
