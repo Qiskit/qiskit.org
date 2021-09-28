@@ -29,7 +29,7 @@ jobs:
           APP_NAME: ${{ env.DOCKER_IMAGE_NAME }}-${{ env.PR_TAG }}
         with:
           step: start
-          token: ${{ github.token }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           env: ${{ env.APP_NAME }}
           auto_inactive: true
           ref: ${{ github.event.pull_request.head.ref }}
