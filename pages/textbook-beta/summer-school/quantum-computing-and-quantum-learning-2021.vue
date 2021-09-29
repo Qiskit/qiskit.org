@@ -257,7 +257,7 @@ export default class SummerSchoolCoursePage extends QiskitPage {
         cta: 'linear-algebra', location: 'related-material'
       },
       url:
-        'https://qiskit.org/textbook/ch-appendix/linear_algebra.html'
+        'https://learn.qiskit.org/course/ch-appendix/an-introduction-to-linear-algebra-for-quantum-computing'
     },
     {
       title: 'Probability Theory — Random Variables and Distributions',
