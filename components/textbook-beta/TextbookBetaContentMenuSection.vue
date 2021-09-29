@@ -14,7 +14,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import QiskitMegaMenuDropdown from '@qiskit-community/qiskit-vue/src/components/MegaMenuDropdown/index.vue'
+import QiskitMegaMenuDropdown from '@qiskit-community/qiskit-vue/src/components/mega-menu-dropdown/MegaMenuDropdown.vue'
 import { TEXTBOOK_BETA_MEGA_MENU } from '~/constants/megaMenuLinks'
 
 @Component({
