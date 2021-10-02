@@ -155,7 +155,7 @@ export default class TextbookBetaHeader extends (Vue as VueConstructor<VueCompon
   }
 
   &__dropdown {
-    margin-top: $layout-03;
+    margin-top: $spacing-07;
   }
 
   &__dropdown-fixed {

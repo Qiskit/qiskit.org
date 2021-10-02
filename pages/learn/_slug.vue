@@ -93,7 +93,7 @@ export default class LearnEntry extends QiskitPage {
       position: relative;
       background-color: $background-color-highlight;
       padding: $spacing-07;
-      margin-bottom: $layout-03;
+      margin-bottom: $spacing-07;
 
       &::before {
         @include type-style('display-02');
@@ -121,7 +121,7 @@ export default class LearnEntry extends QiskitPage {
 
     ul {
       list-style-type: '-';
-      margin-bottom: $layout-03;
+      margin-bottom: $spacing-07;
       max-width: 9 * $column-size-large;
 
       li {
@@ -136,7 +136,7 @@ export default class LearnEntry extends QiskitPage {
     }
 
     table {
-      margin-bottom: $layout-03;
+      margin-bottom: $spacing-07;
 
       td, th {
         border: 1px solid $cool-gray-20;

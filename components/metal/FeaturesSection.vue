@@ -53,7 +53,7 @@ export default class FeaturesSection extends Vue {
     margin-bottom: $layout-06;
 
     @include mq($until: large) {
-      margin-bottom: $layout-03;
+      margin-bottom: $spacing-07;
     }
 
     @include mq($from: medium, $until: large) {

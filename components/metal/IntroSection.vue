@@ -78,7 +78,7 @@ export default class IntroSection extends Vue {
     padding-right: $spacing-07;
 
     @include mq($until: large) {
-      margin-bottom: $layout-03;
+      margin-bottom: $spacing-07;
     }
 
     @include mq($from: medium, $until: large) {
@@ -94,7 +94,7 @@ export default class IntroSection extends Vue {
     width: 100%;
 
     @include mq($until: medium) {
-      margin-bottom: $layout-03;
+      margin-bottom: $spacing-07;
     }
   }
 
@@ -104,7 +104,7 @@ export default class IntroSection extends Vue {
 
     @include mq($until: large) {
       top: 0;
-      margin-top: $layout-03;
+      margin-top: $spacing-07;
     }
   }
 }

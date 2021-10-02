@@ -111,7 +111,7 @@ export default class CapabilitiesSection extends Mixins(ScrollSectionsMixin) {
     margin-bottom: $layout-06;
 
     @include mq($until: medium) {
-      margin-bottom: $layout-03;
+      margin-bottom: $spacing-07;
     }
   }
 

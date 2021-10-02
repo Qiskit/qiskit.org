@@ -152,7 +152,7 @@ export default class StartLearningSection extends Vue {
   }
 
   &__section {
-    margin-bottom: $layout-03;
+    margin-bottom: $spacing-07;
   }
 
   &__card {

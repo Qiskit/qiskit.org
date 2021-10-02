@@ -78,7 +78,7 @@ export default class BuildingSection extends Vue {
   }
 
   @include mq($until: medium) {
-    padding-bottom: $layout-03;
+    padding-bottom: $spacing-07;
   }
 
   &__container {

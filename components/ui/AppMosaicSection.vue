@@ -33,7 +33,7 @@ export default class AppMosaicSection extends Vue {
   }
 
   &__mosaic {
-    margin-bottom: $layout-03;
+    margin-bottom: $spacing-07;
 
     @include mq($from: medium, $until: large) {
       margin-bottom: $spacing-05;
