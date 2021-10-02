@@ -101,7 +101,7 @@ export default class OverviewPage extends QiskitPage {
 .overview-page {
   &__table-of-contents {
     position: sticky;
-    top: $layout-02;
+    top: $spacing-06;
   }
 
   &__content-section {

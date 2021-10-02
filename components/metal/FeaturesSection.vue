@@ -43,8 +43,8 @@ export default class FeaturesSection extends Vue {
     padding-bottom: $layout-06;
 
     @include mq($until: medium) {
-      padding-top: $layout-02;
-      padding-bottom: $layout-02;
+      padding-top: $spacing-06;
+      padding-bottom: $spacing-06;
     }
   }
 

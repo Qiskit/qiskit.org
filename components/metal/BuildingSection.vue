@@ -89,7 +89,7 @@ export default class BuildingSection extends Vue {
 
   &__subtitle {
     @include mq($until: large) {
-      margin-bottom: $layout-02;
+      margin-bottom: $spacing-06;
     }
   }
 
@@ -108,7 +108,7 @@ export default class BuildingSection extends Vue {
     @include mq($until: medium) {
       width: 100%;
       max-width: initial;
-      margin-bottom: $layout-02;
+      margin-bottom: $spacing-06;
     }
   }
 

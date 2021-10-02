@@ -117,7 +117,7 @@ export default class CapabilitiesSection extends Mixins(ScrollSectionsMixin) {
 
   &__scrolling-ui {
     position: sticky;
-    top: $layout-02;
+    top: $spacing-06;
     flex: 0 0 32rem;
     min-height: 20rem;
     margin-bottom: $layout-06;
