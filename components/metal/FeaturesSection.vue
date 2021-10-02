@@ -40,7 +40,7 @@ export default class FeaturesSection extends Vue {
     @include contained();
 
     padding-top: $spacing-10;
-    padding-bottom: $layout-06;
+    padding-bottom: $spacing-12;
 
     @include mq($until: medium) {
       padding-top: $spacing-06;
@@ -50,7 +50,7 @@ export default class FeaturesSection extends Vue {
 
   &__description {
     max-width: 9 * $column-size-large;
-    margin-bottom: $layout-06;
+    margin-bottom: $spacing-12;
 
     @include mq($until: large) {
       margin-bottom: $spacing-07;

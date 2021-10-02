@@ -110,7 +110,7 @@ export default class MeetTheAdvocates extends Vue {
 
 <style lang="scss" scoped>
 .meet-the-advocates {
-  margin-top: $layout-06;
+  margin-top: $spacing-12;
 
   &__filters-result-section {
     margin-top: $spacing-10;

@@ -108,7 +108,7 @@ export default class CapabilitiesSection extends Mixins(ScrollSectionsMixin) {
   }
 
   &__card {
-    margin-bottom: $layout-06;
+    margin-bottom: $spacing-12;
 
     @include mq($until: medium) {
       margin-bottom: $spacing-07;
@@ -120,7 +120,7 @@ export default class CapabilitiesSection extends Mixins(ScrollSectionsMixin) {
     top: $spacing-06;
     flex: 0 0 32rem;
     min-height: 20rem;
-    margin-bottom: $layout-06;
+    margin-bottom: $spacing-12;
 
     @include mq($from: medium, $until: large) {
       flex: 1.5;

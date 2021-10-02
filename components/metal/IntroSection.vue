@@ -74,7 +74,7 @@ export default class IntroSection extends Vue {
 
   &__description {
     max-width: 6 * $column-size-large;
-    margin-bottom: $layout-06;
+    margin-bottom: $spacing-12;
     padding-right: $spacing-07;
 
     @include mq($until: large) {

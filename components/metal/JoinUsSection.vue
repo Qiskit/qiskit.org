@@ -33,7 +33,7 @@ export default class JoinUsSection extends Vue {
     @include contained();
 
     padding-top: $spacing-10;
-    padding-bottom: $layout-06;
+    padding-bottom: $spacing-12;
 
     @include mq($until: medium) {
       padding-top: $spacing-07;
