@@ -27,7 +27,7 @@ export default class AppFiltersResultsLayout extends Vue {}
 .app-filters-results-layout {
   ::v-deep &__main-section {
     @include mq($until: medium) {
-      margin-top: $layout-04;
+      margin-top: $spacing-09;
     }
   }
 

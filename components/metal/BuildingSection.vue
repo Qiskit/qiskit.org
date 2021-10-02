@@ -95,10 +95,10 @@ export default class BuildingSection extends Vue {
 
   &__text {
     max-width: 7.5 * $column-size-large;
-    margin-bottom: $layout-04;
+    margin-bottom: $spacing-09;
 
     @include mq($until: large) {
-      margin-bottom: $layout-04;
+      margin-bottom: $spacing-09;
     }
 
     @include mq($from: medium, $until: large) {

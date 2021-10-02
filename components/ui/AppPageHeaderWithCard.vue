@@ -48,7 +48,7 @@ export default class AppPageHeaderWithCard extends Vue {
   padding-top: $layout-06;
 
   @include mq($until: medium) {
-    padding-top: $layout-04;
+    padding-top: $spacing-09;
   }
 
   &__main {

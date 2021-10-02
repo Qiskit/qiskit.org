@@ -203,7 +203,7 @@ export default class EventsPage extends QiskitPage {
 .event-page {
   &__time-filters {
     margin-top: $spacing-07;
-    margin-bottom: $layout-04;
+    margin-bottom: $spacing-09;
     .bx--tabs__nav-link {
       color: black;
       border-bottom-color: $border-color;
@@ -258,7 +258,7 @@ export default class EventsPage extends QiskitPage {
 
   &__main-content {
     @include mq($until: medium) {
-      margin-top: $layout-04;
+      margin-top: $spacing-09;
     }
   }
 

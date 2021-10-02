@@ -94,7 +94,7 @@ export default class CapabilitiesSection extends Mixins(ScrollSectionsMixin) {
     @include contained();
 
     padding-top: $layout-05;
-    padding-bottom: $layout-04;
+    padding-bottom: $spacing-09;
   }
 
   &__capabilities {

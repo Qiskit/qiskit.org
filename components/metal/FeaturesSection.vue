@@ -66,7 +66,7 @@ export default class FeaturesSection extends Vue {
   }
 
   &__card {
-    margin-top: $layout-04;
+    margin-top: $spacing-09;
   }
 }
 </style>
