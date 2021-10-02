@@ -105,7 +105,7 @@ export default class OverviewPage extends QiskitPage {
   }
 
   &__content-section {
-    margin-bottom: $layout-05;
+    margin-bottom: $spacing-10;
     overflow: hidden;
   }
 

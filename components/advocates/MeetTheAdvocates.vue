@@ -113,7 +113,7 @@ export default class MeetTheAdvocates extends Vue {
   margin-top: $layout-06;
 
   &__filters-result-section {
-    margin-top: $layout-05;
+    margin-top: $spacing-10;
   }
 }
 </style>

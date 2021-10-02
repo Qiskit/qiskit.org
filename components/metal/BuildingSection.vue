@@ -71,7 +71,7 @@ export default class BuildingSection extends Vue {
 
   background-position: right -1rem bottom -2px;
   background-repeat: no-repeat;
-  padding-bottom: $layout-05;
+  padding-bottom: $spacing-10;
 
   @include mq($until: large) {
     background-position: right -.5rem bottom -2px;
@@ -84,7 +84,7 @@ export default class BuildingSection extends Vue {
   &__container {
     @include contained();
 
-    padding-top: $layout-05;
+    padding-top: $spacing-10;
   }
 
   &__subtitle {

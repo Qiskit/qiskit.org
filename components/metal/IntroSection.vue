@@ -59,7 +59,7 @@ export default class IntroSection extends Vue {
   &__container {
     @include contained();
 
-    padding-top: $layout-05;
+    padding-top: $spacing-10;
     padding-bottom: 0;
   }
 

@@ -94,7 +94,7 @@ export default class TextbookBetaPage extends QiskitPage {
 
     max-width: $max-size;
     margin-bottom: $spacing-07;
-    margin-top: $layout-05;
+    margin-top: $spacing-10;
   }
 }
 </style>

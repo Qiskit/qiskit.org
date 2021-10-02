@@ -153,7 +153,7 @@ export default class SummerSchoolPage extends QiskitPage {
   flex-direction: column;
 
   &__section {
-    margin-top: $layout-05;
+    margin-top: $spacing-10;
     margin-bottom: $spacing-07;
 
     @include mq($until: large) {

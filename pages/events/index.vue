@@ -271,8 +271,8 @@ export default class EventsPage extends QiskitPage {
   }
 
   &__start-an-event {
-    margin-top: $layout-05;
-    margin-bottom: $layout-05;
+    margin-top: $spacing-10;
+    margin-bottom: $spacing-10;
 
     &__description {
       margin-top: $spacing-06;

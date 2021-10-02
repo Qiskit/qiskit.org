@@ -99,7 +99,7 @@ export default class IntroductionCoursePage extends QiskitPage {
 
     max-width: $max-size;
     margin-bottom: $spacing-07;
-    margin-top: $layout-05;
+    margin-top: $spacing-10;
   }
 
   &__content-menu {

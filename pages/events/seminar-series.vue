@@ -245,7 +245,7 @@ export default class SeminarSeriesPage extends QiskitPage {
 <style lang="scss" scoped>
 .seminar-series-page {
   &__section {
-    margin-top: $layout-05;
+    margin-top: $spacing-10;
     margin-bottom: $spacing-07;
 
     @include mq($until: large) {

@@ -56,7 +56,7 @@ export default class AppIntroductoryContent extends Vue {
   }
 
   &__description {
-    margin-bottom: $layout-05;
+    margin-bottom: $spacing-10;
 
     @include mq($until: large) {
       margin-bottom: $spacing-07;

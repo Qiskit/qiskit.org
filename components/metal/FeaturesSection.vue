@@ -39,7 +39,7 @@ export default class FeaturesSection extends Vue {
   &__container {
     @include contained();
 
-    padding-top: $layout-05;
+    padding-top: $spacing-10;
     padding-bottom: $layout-06;
 
     @include mq($until: medium) {
