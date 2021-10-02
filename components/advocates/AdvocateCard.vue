@@ -48,7 +48,7 @@ export default class AdvocateCard extends Vue {
   margin-bottom: $layout-02;
 
   @include mq($until: large) {
-    margin-bottom: $layout-01;
+    margin-bottom: $spacing-05;
   }
 
   &__location, &__contact {

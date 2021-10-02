@@ -22,7 +22,7 @@ export default class AppFieldset extends Vue {
   margin-bottom: $layout-03;
 
   &__label {
-    margin-bottom: $layout-01;
+    margin-bottom: $spacing-05;
   }
 }
 </style>

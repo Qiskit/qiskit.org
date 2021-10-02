@@ -35,7 +35,7 @@ export default class AppFiltersResultsLayout extends Vue {}
     margin-bottom: $layout-02;
 
     @include mq($until: large) {
-      margin-bottom: $layout-01;
+      margin-bottom: $spacing-05;
     }
 
     @include mq($from: x-large) {

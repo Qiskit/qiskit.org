@@ -111,11 +111,11 @@ export default class LearnEntry extends QiskitPage {
       }
 
       @include mq($from: medium, $until: large) {
-        margin-bottom: $layout-01;
+        margin-bottom: $spacing-05;
       }
 
       @include mq($until: medium) {
-        margin-bottom: $layout-01;
+        margin-bottom: $spacing-05;
       }
     }
 
@@ -127,7 +127,7 @@ export default class LearnEntry extends QiskitPage {
       li {
         padding-left: $spacing-03;
         margin-left: $spacing-03;
-        margin-top: $layout-01;
+        margin-top: $spacing-05;
 
         li {
           margin-left: $spacing-03;
@@ -145,12 +145,12 @@ export default class LearnEntry extends QiskitPage {
         max-width: 9 * $column-size-large;
 
         @include mq($from: medium, $until: large) {
-          margin-bottom: $layout-01;
+          margin-bottom: $spacing-05;
         }
 
         @include mq($until: medium) {
           padding: $spacing-03;
-          margin-bottom: $layout-01;
+          margin-bottom: $spacing-05;
         }
       }
 

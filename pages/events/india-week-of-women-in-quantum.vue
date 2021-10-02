@@ -372,7 +372,7 @@ export default class IndiaWeekOfWomenInQuantumPage extends QiskitPage {
     margin-bottom: $layout-03;
 
     @include mq($until: large) {
-      margin-bottom: $layout-01;
+      margin-bottom: $spacing-05;
     }
   }
 }
