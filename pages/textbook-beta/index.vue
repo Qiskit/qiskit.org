@@ -69,7 +69,7 @@ export default class TextbookBetaPage extends QiskitPage {
       answer your questions.`,
       cta: {
         url: SOCIAL_MEDIA.stack.url,
-        label: 'Visit stack exchange',
+        label: 'Visit Stack Exchange',
         segment: { cta: 'stack-exchange', location: 'helpful-resources' }
       }
     },
@@ -79,7 +79,7 @@ export default class TextbookBetaPage extends QiskitPage {
       discussion on research and quantum development.`,
       cta: {
         url: SOCIAL_MEDIA.slack.url,
-        label: 'Visit slack',
+        label: 'Visit Slack',
         segment: { cta: 'slack', location: 'helpful-resources' }
       }
     }
