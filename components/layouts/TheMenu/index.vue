@@ -273,8 +273,16 @@ export default class TheMenu extends Mixins(MenuMixin) {
 @import '~carbon-components/scss/globals/scss/typography';
 // Override component styling to match qiskit design
 .menu {
+  &__entry_active {
+    .bx--list-box__label {
+      color: $link-visited-color;
+    }
+  }
+
   .bx--form-item {
-    margin-right: $spacing-07;
+    @include mq($from: large) {
+      margin-right: $spacing-07;
+    }
   }
 
   .bx--dropdown {
@@ -305,8 +313,6 @@ export default class TheMenu extends Mixins(MenuMixin) {
 
   .bx--list-box__label {
     @include type-style('body-long-02');
-
-    color: var(--link-color);
   }
 
   // Dropdown button
@@ -347,6 +353,5 @@ export default class TheMenu extends Mixins(MenuMixin) {
       fill: var(--link-color);
     }
   }
-
 }
 </style>
