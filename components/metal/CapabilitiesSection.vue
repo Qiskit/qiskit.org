@@ -93,8 +93,8 @@ export default class CapabilitiesSection extends Mixins(ScrollSectionsMixin) {
   &__container {
     @include contained();
 
-    padding-top: $layout-05;
-    padding-bottom: $layout-04;
+    padding-top: $spacing-10;
+    padding-bottom: $spacing-09;
   }
 
   &__capabilities {
@@ -108,19 +108,19 @@ export default class CapabilitiesSection extends Mixins(ScrollSectionsMixin) {
   }
 
   &__card {
-    margin-bottom: $layout-06;
+    margin-bottom: $spacing-12;
 
     @include mq($until: medium) {
-      margin-bottom: $layout-03;
+      margin-bottom: $spacing-07;
     }
   }
 
   &__scrolling-ui {
     position: sticky;
-    top: $layout-02;
+    top: $spacing-06;
     flex: 0 0 32rem;
     min-height: 20rem;
-    margin-bottom: $layout-06;
+    margin-bottom: $spacing-12;
 
     @include mq($from: medium, $until: large) {
       flex: 1.5;

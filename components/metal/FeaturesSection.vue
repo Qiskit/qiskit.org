@@ -39,21 +39,21 @@ export default class FeaturesSection extends Vue {
   &__container {
     @include contained();
 
-    padding-top: $layout-05;
-    padding-bottom: $layout-06;
+    padding-top: $spacing-10;
+    padding-bottom: $spacing-12;
 
     @include mq($until: medium) {
-      padding-top: $layout-02;
-      padding-bottom: $layout-02;
+      padding-top: $spacing-06;
+      padding-bottom: $spacing-06;
     }
   }
 
   &__description {
     max-width: 9 * $column-size-large;
-    margin-bottom: $layout-06;
+    margin-bottom: $spacing-12;
 
     @include mq($until: large) {
-      margin-bottom: $layout-03;
+      margin-bottom: $spacing-07;
     }
 
     @include mq($from: medium, $until: large) {
@@ -66,7 +66,7 @@ export default class FeaturesSection extends Vue {
   }
 
   &__card {
-    margin-top: $layout-04;
+    margin-top: $spacing-09;
   }
 }
 </style>

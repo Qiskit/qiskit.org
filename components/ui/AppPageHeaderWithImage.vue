@@ -60,7 +60,7 @@ export default class AppPageHeaderWithImage extends Vue {
     ;
 
     @include mq($until: medium) {
-      padding-top: $layout-04;
+      padding-top: $spacing-09;
       grid-template-columns: 1fr;
       grid-template-areas:
         "headline"

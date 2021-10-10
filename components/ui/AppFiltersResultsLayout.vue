@@ -27,19 +27,19 @@ export default class AppFiltersResultsLayout extends Vue {}
 .app-filters-results-layout {
   ::v-deep &__main-section {
     @include mq($until: medium) {
-      margin-top: $layout-04;
+      margin-top: $spacing-09;
     }
   }
 
   ::v-deep &__results-item {
-    margin-bottom: $layout-02;
+    margin-bottom: $spacing-06;
 
     @include mq($until: large) {
-      margin-bottom: $layout-01;
+      margin-bottom: $spacing-05;
     }
 
     @include mq($from: x-large) {
-      height: calc(100% - #{$layout-02});
+      height: calc(100% - #{$spacing-06});
     }
   }
 }

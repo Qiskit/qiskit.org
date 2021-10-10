@@ -40,7 +40,7 @@ export default class TheTableOfContents extends Vue {
   &__entry {
     color: $text-color-light;
     text-decoration: none;
-    margin-bottom: $layout-02;
+    margin-bottom: $spacing-06;
 
     &_second-level {
       &:hover {
@@ -52,7 +52,7 @@ export default class TheTableOfContents extends Vue {
         color: $text-active-color;
         font-weight: bold;
         display: inline-block;
-        padding-right: $layout-02;
+        padding-right: $spacing-06;
       }
     }
 

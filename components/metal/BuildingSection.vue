@@ -71,34 +71,34 @@ export default class BuildingSection extends Vue {
 
   background-position: right -1rem bottom -2px;
   background-repeat: no-repeat;
-  padding-bottom: $layout-05;
+  padding-bottom: $spacing-10;
 
   @include mq($until: large) {
     background-position: right -.5rem bottom -2px;
   }
 
   @include mq($until: medium) {
-    padding-bottom: $layout-03;
+    padding-bottom: $spacing-07;
   }
 
   &__container {
     @include contained();
 
-    padding-top: $layout-05;
+    padding-top: $spacing-10;
   }
 
   &__subtitle {
     @include mq($until: large) {
-      margin-bottom: $layout-02;
+      margin-bottom: $spacing-06;
     }
   }
 
   &__text {
     max-width: 7.5 * $column-size-large;
-    margin-bottom: $layout-04;
+    margin-bottom: $spacing-09;
 
     @include mq($until: large) {
-      margin-bottom: $layout-04;
+      margin-bottom: $spacing-09;
     }
 
     @include mq($from: medium, $until: large) {
@@ -108,7 +108,7 @@ export default class BuildingSection extends Vue {
     @include mq($until: medium) {
       width: 100%;
       max-width: initial;
-      margin-bottom: $layout-02;
+      margin-bottom: $spacing-06;
     }
   }
 

@@ -113,10 +113,10 @@ export default class TheLearningResourceList extends Vue {
   background-position: left bottom;
 
   &__filter-level {
-    margin-bottom: $layout-04;
+    margin-bottom: $spacing-09;
 
     @include mq($until: medium) {
-      margin-bottom: $layout-01;
+      margin-bottom: $spacing-05;
     }
   }
 }
