@@ -39,7 +39,7 @@ export default class AppIntroductoryContent extends Vue {
   }
 
   &__overview {
-    margin-bottom: $layout-03;
+    margin-bottom: $spacing-07;
 
     @include mq($from: large) {
       $grid-columns: 5/13; // Number of columns that the element will use at this breakpoint.
@@ -56,10 +56,10 @@ export default class AppIntroductoryContent extends Vue {
   }
 
   &__description {
-    margin-bottom: $layout-05;
+    margin-bottom: $spacing-10;
 
     @include mq($until: large) {
-      margin-bottom: $layout-03;
+      margin-bottom: $spacing-07;
     }
   }
 

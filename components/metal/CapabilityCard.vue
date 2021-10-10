@@ -80,7 +80,7 @@ export default class CapabilityCard extends Vue {
 
     @include mq($until: medium) {
       padding-bottom: 0;
-      margin-bottom: $layout-01;
+      margin-bottom: $spacing-05;
     }
   }
 
@@ -93,7 +93,7 @@ export default class CapabilityCard extends Vue {
 
     @include mq($until: medium) {
       padding-bottom: 0;
-      margin-bottom: $layout-01;
+      margin-bottom: $spacing-05;
     }
   }
 

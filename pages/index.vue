@@ -86,16 +86,16 @@ export default class LandingPage extends QiskitPage {
   }
 
   &__section {
-    margin-top: $layout-05;
-    margin-bottom: $layout-03;
-    padding-bottom: $layout-07;
+    margin-top: $spacing-10;
+    margin-bottom: $spacing-07;
+    padding-bottom: $spacing-13;
 
     @include mq($until: large) {
-      margin-bottom: $layout-01;
+      margin-bottom: $spacing-05;
     }
 
     @include mq($until: medium) {
-      padding-bottom: $layout-05;
+      padding-bottom: $spacing-10;
     }
   }
 }

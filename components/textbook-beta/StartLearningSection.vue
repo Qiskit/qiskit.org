@@ -164,22 +164,22 @@ export default class StartLearningSection extends Vue {
 <style lang="scss" scoped>
 .start-learning-section {
   &__subtitle {
-    margin-bottom: $layout-01;
+    margin-bottom: $spacing-05;
   }
 
   &__section {
-    margin-bottom: $layout-03;
+    margin-bottom: $spacing-07;
   }
 
   &__card {
-    margin-bottom: $layout-02;
+    margin-bottom: $spacing-06;
 
     @include mq($until: large) {
-      margin-bottom: $layout-01;
+      margin-bottom: $spacing-05;
     }
 
     @include mq($from: x-large) {
-      height: calc(100% - #{$layout-02});
+      height: calc(100% - #{$spacing-06});
     }
   }
 }

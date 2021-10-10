@@ -114,7 +114,7 @@ export default class TextbookBetaHeader extends (Vue as VueConstructor<VueCompon
     padding-top: $spacing-09;
 
     @include mq($from:medium, $until: large) {
-      padding-top: $layout-06;
+      padding-top: $spacing-12;
     }
 
     &-wrapper {
@@ -155,7 +155,7 @@ export default class TextbookBetaHeader extends (Vue as VueConstructor<VueCompon
   }
 
   &__dropdown {
-    margin-top: $layout-03;
+    margin-top: $spacing-07;
   }
 
   &__dropdown-fixed {

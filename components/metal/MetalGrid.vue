@@ -406,7 +406,7 @@ export default class MetalGrid extends Vue {
   &__slot-container {
     pointer-events: none;
     position: absolute;
-    padding-top: $layout-05;
+    padding-top: $spacing-10;
     top: 0;
     left: 0;
     right: 0;
