@@ -120,13 +120,13 @@ const week1Schedule: dailyAgenda[] = [
   {
     day: 'Monday, July 12',
     topic: 'Vector Spaces, Tensor Products, and Qubits',
-    speaker: '-',
+    speaker: 'Elisa Bäumer',
     format: 'Lecture'
   },
   {
     day: 'Monday, July 12',
     topic: 'Introduction to Quantum Circuits',
-    speaker: '-',
+    speaker: 'Elisa Bäumer',
     format: 'Lecture'
   },
   {
@@ -138,13 +138,13 @@ const week1Schedule: dailyAgenda[] = [
   {
     day: 'Tuesday, July 13',
     topic: 'Simple Quantum Algorithms I',
-    speaker: '-',
+    speaker: 'Elisa Bäumer',
     format: 'Lecture'
   },
   {
     day: 'Tuesday, July 13',
     topic: 'Simple Quantum Algorithms II',
-    speaker: '-',
+    speaker: 'Elisa Bäumer',
     format: 'Lecture'
   },
   {
@@ -156,13 +156,13 @@ const week1Schedule: dailyAgenda[] = [
   {
     day: 'Wednesday, July 14',
     topic: 'Noise in Quantum Computers',
-    speaker: '-',
+    speaker: 'Zlatko Minev',
     format: 'Lecture'
   },
   {
     day: 'Wednesday, July 14',
     topic: '(Lab 1) Introduction to Quantum Computing Algorithms and Operations',
-    speaker: '-',
+    speaker: 'Elisa Bäumer',
     format: 'Lab'
   },
   {
@@ -174,13 +174,13 @@ const week1Schedule: dailyAgenda[] = [
   {
     day: 'Thursday, July 15',
     topic: 'Introduction to Classical Machine Learning (ML)',
-    speaker: '-',
+    speaker: 'Amira Abbas',
     format: 'Lecture'
   },
   {
     day: 'Thursday, July 15',
     topic: 'Advanced Classical Machine Learning (ML)',
-    speaker: '-',
+    speaker: 'Amira Abbas',
     format: 'Lecture'
   },
   {
@@ -192,19 +192,19 @@ const week1Schedule: dailyAgenda[] = [
   {
     day: 'Friday, July 16',
     topic: 'Introduction to the Quantum Approximate Optimization Algorithm (QAOA) and its Applications',
-    speaker: '-',
+    speaker: 'Johannes Weidenfeller',
     format: 'Lecture'
   },
   {
     day: 'Friday, July 16',
     topic: 'Building a Quantum Classifier',
-    speaker: '-',
+    speaker: 'Amira Abbas',
     format: 'Lecture'
   },
   {
     day: 'Friday, July 16',
     topic: '(Lab 2) Introduction to Variational Algorithms',
-    speaker: '-',
+    speaker: 'Johannes Weidenfeller',
     format: 'Lab'
   },
   {
@@ -219,13 +219,13 @@ const week2Schedule: dailyAgenda[] = [
   {
     day: 'Monday, July 19',
     topic: 'From Variational Classifiers to Linear Classifiers',
-    speaker: '-',
+    speaker: 'Bryce Fuller',
     format: 'Lecture'
   },
   {
     day: 'Monday, July 19',
     topic: 'Quantum Feature Spaces and Kernels',
-    speaker: '-',
+    speaker: 'Kristan Temme',
     format: 'Lecture'
   },
   {
@@ -237,13 +237,13 @@ const week2Schedule: dailyAgenda[] = [
   {
     day: 'Tuesday, July 20',
     topic: 'Quantum Kernels in Practice',
-    speaker: '-',
+    speaker: 'Jen Glick',
     format: 'Lecture'
   },
   {
     day: 'Tuesday, July 20',
     topic: '(Lab 3) Introduction to Quantum Kernels and Support Vector Machines (SVMs)',
-    speaker: '-',
+    speaker: 'Anna Phan',
     format: 'Lab'
   },
   {
@@ -255,19 +255,19 @@ const week2Schedule: dailyAgenda[] = [
   {
     day: 'Wednesday, July 21',
     topic: 'Introduction and Applications of Quantum Models',
-    speaker: '-',
+    speaker: 'Francesco Tacchino',
     format: 'Lecture'
   },
   {
     day: 'Wednesday, July 21',
     topic: 'Barren Plateaus, Trainability Issues, and How to Avoid Them',
-    speaker: '-',
+    speaker: 'Francesco Tacchino',
     format: 'Lecture'
   },
   {
     day: 'Wednesday, July 21',
     topic: '(Lab 4) Introduction to Training Quantum Circuits',
-    speaker: '-',
+    speaker: 'Julien Gacon',
     format: 'Lab'
   },
   {
@@ -279,19 +279,19 @@ const week2Schedule: dailyAgenda[] = [
   {
     day: 'Thursday, July 22',
     topic: 'Introduction to Quantum Hardware',
-    speaker: '-',
+    speaker: 'Nate Earnest-Noble',
     format: 'Lecture'
   },
   {
     day: 'Thursday, July 22',
     topic: 'Hardware Efficient Ansatze for Quantum Machine Learning',
-    speaker: '-',
+    speaker: 'Nate Earnest-Noble',
     format: 'Lecture'
   },
   {
     day: 'Thursday, July 22',
     topic: '(Lab 5) Introduction to Hardware Efficient Ansatze for Quantum Machine Learning',
-    speaker: '-',
+    speaker: 'Nate Earnest-Noble',
     format: 'Lab'
   },
   {
@@ -303,13 +303,13 @@ const week2Schedule: dailyAgenda[] = [
   {
     day: 'Friday, July 23',
     topic: 'Advanced Quantum Machine Learning Algorithms: Quantum Boltzmann Machines and Quantum Generative Adversarial Networks (QGANs)',
-    speaker: '-',
+    speaker: 'Christa Zoufal',
     format: 'Lecture'
   },
   {
     day: 'Friday, July 23',
     topic: 'The Capacity and Power of Quantum Machine Learning Models & the Future of Quantum Machine Learning',
-    speaker: '-',
+    speaker: 'Amira Abbas',
     format: 'Lecture'
   },
   {
