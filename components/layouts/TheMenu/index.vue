@@ -283,6 +283,9 @@ export default class TheMenu extends Mixins(MenuMixin) {
     @include mq($from: large) {
       margin-right: $spacing-07;
     }
+    &:hover {
+      text-decoration: none;
+    }
   }
 
   .bx--dropdown {
@@ -313,6 +316,10 @@ export default class TheMenu extends Mixins(MenuMixin) {
 
   .bx--list-box__label {
     @include type-style('body-long-02');
+  }
+
+  .bx--dropdown--open .bx--list-box__label {
+    color: $text-color;
   }
 
   // Dropdown button
