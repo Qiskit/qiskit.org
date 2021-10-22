@@ -10,16 +10,18 @@
           'community projects'
         ]"
       />
-      from Qiskit<br>
-      and the Qiskit community
+      <br>
+      from Qiskit and the Qiskit community
     </AppPageHeaderFixed>
-    <AppCard
-      v-for="member in members"
-      :key="member.id"
-      class="app-filters-results-layout__results-item"
-    >
-      {{ member }}
-    </AppCard>
+    <div class="bx--row">
+      <div
+        v-for="(member, index) in members"
+        :key="index"
+        class="bx--col-sm-4 bx--col-xlg-8"
+      >
+        <MemberCard :member="member" />
+      </div>
+    </div>
   </main>
 </template>
 
@@ -35,7 +37,7 @@ import QiskitPage from '~/components/logic/QiskitPage.vue'
     }
   },
   data () {
-    return { members: ['example', 'example2'] }
+    return { members: [] }
   },
   layout: 'default-max',
   async beforeCreate () {
@@ -61,3 +63,9 @@ export default class EcosystemPage extends QiskitPage {
   routeName: string = 'ecosystem'
 }
 </script>
+
+<style lang="scss" scoped>
+.bx--row {
+  margin: 10px
+}
+</style>
