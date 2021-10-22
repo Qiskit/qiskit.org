@@ -22,7 +22,7 @@
 
 <script lang="ts">
 import { Component } from 'vue-property-decorator'
-import QiskitBanner from '@qiskit-community/qiskit-vue/src/components/QiskitBanner/index.vue'
+import QiskitBanner from '@qiskit-community/qiskit-vue/src/components/banner/Banner.vue'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import { DescriptionCard } from '~/components/ui/AppDescriptionCard.vue'
 import { SOCIAL_MEDIA } from '~/constants/menuLinks'
