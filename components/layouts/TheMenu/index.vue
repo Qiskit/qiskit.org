@@ -249,6 +249,11 @@ export default class TheMenu extends Mixins(MenuMixin) {
 
     &_active {
       color: $text-active-color;
+       ::v-deep {
+          .bx--list-box__label {
+            color: $link-visited-color;
+        }
+      }
     }
   }
 
@@ -273,12 +278,6 @@ export default class TheMenu extends Mixins(MenuMixin) {
 @import '~carbon-components/scss/globals/scss/typography';
 // Override component styling to match qiskit design
 .menu {
-  &__entry_active {
-    .bx--list-box__label {
-      color: $link-visited-color;
-    }
-  }
-
   .bx--form-item {
     @include mq($from: large) {
       margin-right: $spacing-07;
