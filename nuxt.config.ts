@@ -42,6 +42,8 @@ md.use(miAnchor, {
 })
 
 const config: NuxtConfig = {
+  target: 'static',
+
   env: {
     analyticsScriptUrl: IS_PRODUCTION
       ? 'https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js'
