@@ -283,6 +283,7 @@ export default class TheMenu extends Mixins(MenuMixin) {
     @include mq($from: large) {
       margin-right: $spacing-07;
     }
+
     &:hover {
       text-decoration: none;
     }
