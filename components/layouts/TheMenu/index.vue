@@ -249,6 +249,11 @@ export default class TheMenu extends Mixins(MenuMixin) {
 
     &_active {
       color: $text-active-color;
+       ::v-deep {
+          .bx--list-box__label {
+            color: $link-visited-color;
+        }
+      }
     }
   }
 
@@ -274,7 +279,13 @@ export default class TheMenu extends Mixins(MenuMixin) {
 // Override component styling to match qiskit design
 .menu {
   .bx--form-item {
-    margin-right: $spacing-07;
+    @include mq($from: large) {
+      margin-right: $spacing-07;
+    }
+
+    &:hover {
+      text-decoration: none;
+    }
   }
 
   .bx--dropdown {
@@ -305,8 +316,10 @@ export default class TheMenu extends Mixins(MenuMixin) {
 
   .bx--list-box__label {
     @include type-style('body-long-02');
+  }
 
-    color: var(--link-color);
+  .bx--dropdown--open .bx--list-box__label {
+    color: $text-color;
   }
 
   // Dropdown button
@@ -347,6 +360,5 @@ export default class TheMenu extends Mixins(MenuMixin) {
       fill: var(--link-color);
     }
   }
-
 }
 </style>
