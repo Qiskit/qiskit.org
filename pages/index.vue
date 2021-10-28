@@ -43,7 +43,7 @@ export default class LandingPage extends QiskitPage {
 
   mosaicSectionTitle = 'What can Qiskit do'
   mosaicSectionDescription = `Qiskit accelerates the development of quantum applications by
-    providing the complete set of tools needed for interacting withquantum systems and simulators.`
+    providing the complete set of tools needed for interacting with quantum systems and simulators.`
   mosaicSectionElements = [
     {
       position: 'first',
