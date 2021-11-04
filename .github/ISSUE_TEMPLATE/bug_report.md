@@ -28,7 +28,7 @@ If applicable, please add screenshots or video captures to help explain the prob
 ### Environment (optional but very helpful)
  - Device: [e.g. Laptop, iPhone 11, Smart Fridge]
  - OS: [e.g. Windows, iOS]
- - Browser [e.g. Chrome, Safari]
+ - Browser: [e.g. Chrome, Safari]
 
 ### Additional context (optional)
 
