@@ -28,9 +28,13 @@
     <p>
       {{ member.description }}
     </p>
-    <div class="bx--row">
-      <TestTable :columns="['', 'dev', 'stable']" :filtered-data="[['terra 0.16', 'pass', 'pass'], ['terra 0.17', 'fail', 'pass'], ['terra 0.18', 'fail', 'pass']]" class="bx--col-sm-4 bx--col-xlg-8" />
-      <TestTable :columns="['', '']" :filtered-data="[['styles', 'pass'], ['coverage', 'fail']]" class="bx--col-sm-4 bx--col-xlg-8" />
+    <div>
+      <TestTable
+        v-if="member.tests_results.length != 0"
+        class="test-table"
+        :columns="['terra version', 'test date (UTC)', 'test type', 'result']"
+        :filtered-data="rows"
+      />
     </div>
   </cv-tile>
 </template>
@@ -39,7 +43,23 @@
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 
-@Component
+@Component({
+  computed: {
+    rows: {
+      get () {
+        const rows = []
+        if (this.member.tests_results) {
+          this.member.tests_results.forEach((result: any) => {
+            const date = new Date(result.timestamp * 1000).toLocaleString('en-UK', { timeZone: 'UTC' })
+            const r = [result.terra_version, date, result.test_type, result.passed]
+            rows.push(r)
+          })
+        }
+        return rows
+      }
+    }
+  }
+})
 export default class MemberCard extends Vue {
   @Prop({ type: Object, default: '' }) member!: object
 }
@@ -48,7 +68,7 @@ export default class MemberCard extends Vue {
 <style lang="scss">
 .member-card {
   margin-bottom: $spacing-08;
-  height: 100%;
+  height: 90%;
 }
 .title-row {
   display: flex;
@@ -58,4 +78,9 @@ export default class MemberCard extends Vue {
   margin-left: 0.5rem;
   margin-top: 0.5rem;
 }
+
+.test-table {
+  padding-bottom: 0.5rem;
+}
+
 </style>

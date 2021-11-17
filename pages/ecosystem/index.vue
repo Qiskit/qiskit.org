@@ -13,15 +13,33 @@
       <br>
       from Qiskit and the Qiskit community
     </AppPageHeaderFixed>
-    <div class="bx--row">
-      <div
-        v-for="(member, index) in members"
-        :key="index"
-        class="bx--col-sm-4 bx--col-xlg-8"
+    <cv-tabs class="the-learning-resources-list__filter-level">
+      <cv-tab id="tab-1" label="Main">
+        <div class="bx--row">
+          <div
+            v-for="(member, index) in mainMembers"
+            :key="index"
+            class="bx--col-sm-4 bx--col-xlg-8"
+          >
+            <MemberCard :member="member" />
+          </div>
+        </div>
+      </cv-tab>
+      <cv-tab
+        id="tab-2"
+        label="Community"
       >
-        <MemberCard :member="member" />
-      </div>
-    </div>
+        <div class="bx--row">
+          <div
+            v-for="(member, index) in communityMembers"
+            :key="index"
+            class="bx--col-sm-4 bx--col-xlg-8"
+          >
+            <MemberCard :member="member" />
+          </div>
+        </div>
+      </cv-tab>
+    </cv-tabs>
   </main>
 </template>
 
@@ -37,7 +55,10 @@ import QiskitPage from '~/components/logic/QiskitPage.vue'
     }
   },
   data () {
-    return { members: [] }
+    return {
+      mainMembers: [],
+      communityMembers: []
+    }
   },
   layout: 'default-max',
   async beforeCreate () {
@@ -47,12 +68,9 @@ import QiskitPage from '~/components/logic/QiskitPage.vue'
       res = await axios.get(
         'https://raw.githubusercontent.com/qiskit-community/ecosystem/master/ecosystem/resources/members.json'
       )
-      // from Iskandars fork
-      // res = await axios.get(
-      //   'https://raw.githubusercontent.com/IceKhan13/ecosystem/master/ecosystem/resources/members.json'
-      // )
       console.error(res)
-      this.members = res.data.MAIN
+      this.mainMembers = res.data.MAIN
+      this.communityMembers = res.data.COMMUNITY
     } catch (err) {
       console.error(err)
     }
@@ -66,6 +84,10 @@ export default class EcosystemPage extends QiskitPage {
 
 <style lang="scss" scoped>
 .bx--row {
-  margin: 10px
+  margin-top: 10px
+}
+.the-learning-resources-list__filter-level {
+  margin-left: $spacing-08;
+  width: 90%;
 }
 </style>
