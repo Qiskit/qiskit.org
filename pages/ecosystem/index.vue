@@ -13,33 +13,15 @@
       <br>
       from Qiskit and the Qiskit community
     </AppPageHeaderFixed>
-    <cv-tabs class="the-learning-resources-list__filter-level">
-      <cv-tab id="tab-1" label="Main">
-        <div class="bx--row">
-          <div
-            v-for="(member, index) in mainMembers"
-            :key="index"
-            class="bx--col-sm-4 bx--col-xlg-8"
-          >
-            <MemberCard :member="member" />
-          </div>
-        </div>
-      </cv-tab>
-      <cv-tab
-        id="tab-2"
-        label="Community"
+    <div class="bx--row">
+      <div
+        v-for="(member, index) in members"
+        :key="index"
+        class="bx--col-sm-4 bx--col-xlg-8"
       >
-        <div class="bx--row">
-          <div
-            v-for="(member, index) in communityMembers"
-            :key="index"
-            class="bx--col-sm-4 bx--col-xlg-8"
-          >
-            <MemberCard :member="member" />
-          </div>
-        </div>
-      </cv-tab>
-    </cv-tabs>
+        <MemberCard :member="member" />
+      </div>
+    </div>
   </main>
 </template>
 
@@ -56,8 +38,7 @@ import QiskitPage from '~/components/logic/QiskitPage.vue'
   },
   data () {
     return {
-      mainMembers: [],
-      communityMembers: []
+      members: []
     }
   },
   layout: 'default-max',
@@ -68,15 +49,27 @@ import QiskitPage from '~/components/logic/QiskitPage.vue'
       res = await axios.get(
         'https://raw.githubusercontent.com/qiskit-community/ecosystem/master/ecosystem/resources/members.json'
       )
-      console.error(res)
-      this.mainMembers = res.data.MAIN
-      this.communityMembers = res.data.COMMUNITY
+      const membersArray = Object.values(res.data.MAIN).concat(Object.values(res.data.COMMUNITY))
+      const shuffled = this.fyShuffle(membersArray)
+      this.members = shuffled
     } catch (err) {
       console.error(err)
+    }
+  },
+  methods: {
+    fyShuffle (array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1))
+        const temp = array[i]
+        array[i] = array[j]
+        array[j] = temp
+      }
+      return array
     }
   }
 
 })
+
 export default class EcosystemPage extends QiskitPage {
   routeName: string = 'ecosystem'
 }
@@ -84,9 +77,7 @@ export default class EcosystemPage extends QiskitPage {
 
 <style lang="scss" scoped>
 .bx--row {
-  margin-top: 10px
-}
-.the-learning-resources-list__filter-level {
+  margin-top: $spacing-08;
   margin-left: $spacing-08;
   width: 90%;
 }

@@ -32,7 +32,6 @@
       <TestTable
         v-if="member.tests_results.length != 0"
         class="test-table"
-        :columns="['terra version', 'test date (UTC)', 'test type', 'result']"
         :filtered-data="rows"
       />
     </div>
@@ -49,11 +48,35 @@ import { Component, Prop } from 'vue-property-decorator'
       get () {
         const rows = []
         if (this.member.tests_results) {
-          this.member.tests_results.forEach((result: any) => {
-            const date = new Date(result.timestamp * 1000).toLocaleString('en-UK', { timeZone: 'UTC' })
-            const r = [result.terra_version, date, result.test_type, result.passed]
+          // group data by terra version number
+          const versionGroups = this.member.tests_results.reduce((groups: any, item: any) => {
+            const group = (groups[item.terra_version] || [])
+            group.push(item)
+            groups[item.terra_version] = group
+            return groups
+          }, {})
+
+          // for each version number, group data by test type (dev, stable, standard)
+          for (const [version, testArray] of Object.entries(versionGroups)) {
+            const groupsByTestType = testArray.reduce((groups: any, item: any) => {
+              const group = (groups[item.test_type] || [])
+              group.push(item)
+              groups[item.test_type] = group
+              return groups
+            }, {})
+
+            // get date of last test (assumes all tests for the same version have same timestamp)
+            const date = new Date(testArray[0].timestamp * 1000).toLocaleString('en-UK', { timeZone: 'UTC' })
+
+            // construct row for data table
+            const r = [
+              version,
+              groupsByTestType.STABLE_COMPATIBLE ? groupsByTestType.STABLE_COMPATIBLE[0].passed : null,
+              groupsByTestType.DEV_COMPATIBLE ? groupsByTestType.DEV_COMPATIBLE[0].passed : null,
+              groupsByTestType.STANDARD ? groupsByTestType.STANDARD[0].passed : null,
+              date]
             rows.push(r)
-          })
+          }
         }
         return rows
       }
