@@ -13,9 +13,21 @@
       <br>
       from Qiskit and the Qiskit community
     </AppPageHeaderFixed>
+    <AppFieldset label="Tier">
+      <client-only>
+        <cv-checkbox
+          v-for="option in tiers"
+          :key="option"
+          :label="option"
+          :value="option"
+          :checked="isTierFilterChecked(option)"
+          @change="updateTierFilter(option)"
+        />
+      </client-only>
+    </AppFieldset>
     <div class="bx--row">
       <div
-        v-for="(member, index) in members"
+        v-for="(member, index) in filteredMembers"
         :key="index"
         class="bx--col-sm-4 bx--col-xlg-8"
       >
@@ -38,7 +50,12 @@ import QiskitPage from '~/components/logic/QiskitPage.vue'
   },
   data () {
     return {
-      members: []
+      members: [],
+      tiers: ['MAIN', 'COMMUNITY'],
+      filters: {
+        MAIN: true,
+        COMMUNITY: true
+      }
     }
   },
   layout: 'default-max',
@@ -56,6 +73,16 @@ import QiskitPage from '~/components/logic/QiskitPage.vue'
       console.error(err)
     }
   },
+  computed: {
+    filteredMembers: {
+      get () {
+        const filteredMembers = this.members.filter((member) => {
+          return this.filters[member.tier]
+        })
+        return filteredMembers
+      }
+    }
+  },
   methods: {
     fyShuffle (array) {
       for (let i = array.length - 1; i > 0; i--) {
@@ -65,6 +92,12 @@ import QiskitPage from '~/components/logic/QiskitPage.vue'
         array[j] = temp
       }
       return array
+    },
+    updateTierFilter (tier: string) {
+      this.filters[tier] = !this.filters[tier]
+    },
+    isTierFilterChecked (filterValue: string): boolean {
+      return this.filters[filterValue]
     }
   }
 
@@ -80,5 +113,10 @@ export default class EcosystemPage extends QiskitPage {
   margin-top: $spacing-08;
   margin-left: $spacing-08;
   width: 90%;
+}
+.app-fieldset {
+  margin-bottom: 0;
+  margin-top: 0;
+  margin-left: $spacing-08;
 }
 </style>
