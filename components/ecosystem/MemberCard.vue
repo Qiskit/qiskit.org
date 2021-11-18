@@ -35,6 +35,14 @@
         :filtered-data="rows"
       />
     </div>
+    <div>
+      <cv-data-table
+        ref="table"
+        class="test-table"
+        :columns="exampleCols"
+        :data="exampleRows"
+      />
+    </div>
   </cv-tile>
 </template>
 
@@ -43,6 +51,12 @@ import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 
 @Component({
+  data () {
+    return {
+      exampleCols: [' ', 'Type', 'Result'],
+      exampleRows: [['style', 'pylint', 'pass'], ['coverage', 'coverage3', 'fail']]
+    }
+  },
   computed: {
     rows: {
       get () {
