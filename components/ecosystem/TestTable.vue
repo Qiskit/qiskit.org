@@ -21,7 +21,7 @@
         <cv-data-table-cell align="center">
           {{ row[0] }}
         </cv-data-table-cell>
-        <cv-data-table-cell v-if="row[1]" align="center">
+        <cv-data-table-cell v-if="row[1] == true" align="center">
           <cv-tag kind="green" label="passed" />
         </cv-data-table-cell>
         <cv-data-table-cell v-else-if="row[1] == false" align="center">
@@ -30,7 +30,7 @@
         <cv-data-table-cell v-else align="center">
           <cv-tag kind="gray" label="no data" />
         </cv-data-table-cell>
-        <cv-data-table-cell v-if="row[2]" align="center">
+        <cv-data-table-cell v-if="row[2] == true" align="center">
           <cv-tag kind="green" label="passed" />
         </cv-data-table-cell>
         <cv-data-table-cell v-else-if="row[2] == false" align="center">
@@ -39,7 +39,7 @@
         <cv-data-table-cell v-else align="center">
           <cv-tag kind="gray" label="no data" />
         </cv-data-table-cell>
-        <cv-data-table-cell v-if="row[3]" align="center">
+        <cv-data-table-cell v-if="row[3] == true" align="center">
           <cv-tag kind="green" label="passed" />
         </cv-data-table-cell>
         <cv-data-table-cell v-else-if="row[3] == false" align="center">

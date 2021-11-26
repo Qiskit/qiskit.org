@@ -32,15 +32,14 @@
       <TestTable
         v-if="member.tests_results.length != 0"
         class="test-table"
-        :filtered-data="rows"
+        :filtered-data="testRows"
       />
     </div>
     <div>
-      <cv-data-table
-        ref="table"
+      <StylesTable
+        v-if="(member.styles_results && member.styles_results.length !=0) | (member.coverages_results && member.coverages_results.length !=0)"
         class="test-table"
-        :columns="exampleCols"
-        :data="exampleRows"
+        :filtered-data="otherRows"
       />
     </div>
   </cv-tile>
@@ -53,47 +52,53 @@ import { Component, Prop } from 'vue-property-decorator'
 @Component({
   data () {
     return {
-      exampleCols: [' ', 'Type', 'Result'],
-      exampleRows: [['style', 'pylint', 'pass'], ['coverage', 'coverage3', 'fail']]
+      exampleCols: [' ', 'Type', 'Result']
     }
   },
   computed: {
-    rows: {
+    testRows: {
       get () {
         const rows = []
-        if (this.member.tests_results) {
-          // group data by terra version number
-          const versionGroups = this.member.tests_results.reduce((groups: any, item: any) => {
-            const group = (groups[item.terra_version] || [])
-            group.push(item)
-            groups[item.terra_version] = group
-            return groups
-          }, {})
+        const matrix = {}
 
-          // for each version number, group data by test type (dev, stable, standard)
-          for (const [version, testArray] of Object.entries(versionGroups)) {
-            const groupsByTestType = testArray.reduce((groups: any, item: any) => {
-              const group = (groups[item.test_type] || [])
-              group.push(item)
-              groups[item.test_type] = group
-              return groups
-            }, {})
-
-            // get date of last test (assumes all tests for the same version have same timestamp)
-            const date = new Date(testArray[0].timestamp * 1000).toLocaleString('en-UK', { timeZone: 'UTC' })
-
-            // construct row for data table
-            const r = [
-              version,
-              groupsByTestType.STABLE_COMPATIBLE ? groupsByTestType.STABLE_COMPATIBLE[0].passed : null,
-              groupsByTestType.DEV_COMPATIBLE ? groupsByTestType.DEV_COMPATIBLE[0].passed : null,
-              groupsByTestType.STANDARD ? groupsByTestType.STANDARD[0].passed : null,
-              date]
+        const self = this as any
+        if (self.member.tests_results) {
+          self.member.tests_results.forEach(({ terra_version, test_type, passed, timestamp }) => {
+            if (!matrix[terra_version]) { matrix[terra_version] = {} }
+            const dateVal = new Date(timestamp * 1000).toLocaleString('en-UK', { timeZone: 'UTC' })
+            matrix[terra_version].date = dateVal
+            matrix[terra_version][test_type] = passed
+          })
+          for (const [key, val] of Object.entries(matrix)) {
+            if (val.STABLE_COMPATIBLE === undefined) { val.STABLE_COMPATIBLE = 'no data' }
+            if (val.DEV_COMPATIBLE === undefined) { val.DEV_COMPATIBLE = 'no data' }
+            if (val.STANDARD === undefined) { val.STANDARD = 'no data' }
+            const r = [key, val.STABLE_COMPATIBLE, val.DEV_COMPATIBLE, val.STANDARD, val.date]
             rows.push(r)
           }
         }
         return rows
       }
+    },
+    otherRows: {
+      get () {
+        const rows = []
+        const self = this as any
+        if (self.member.styles_results) {
+          self.member.styles_results.forEach(({ style_type, passed }) => {
+            const r = ['style', style_type, passed]
+            rows.push(r)
+          })
+        }
+        if (self.member.coverages_results) {
+          self.member.coverages_results.forEach(({ coverage_type, passed }) => {
+            const r = ['coverage', coverage_type, passed]
+            rows.push(r)
+          })
+        }
+        return rows
+      }
+
     }
   }
 })
