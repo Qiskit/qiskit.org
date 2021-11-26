@@ -6,7 +6,7 @@
         :values="[
           'core packages',
           'tools',
-          'research assets',
+          'prototypes',
           'community projects'
         ]"
       />
@@ -21,7 +21,7 @@
           :label="option"
           :value="option"
           :checked="isTierFilterChecked(option)"
-          @change="updateTierFilter(option)"
+          @change="updateTierFilter(option, $event)"
         />
       </client-only>
     </AppFieldset>
@@ -38,7 +38,7 @@
 </template>
 
 <script lang="ts">
-import axios from 'axios'
+import { mapGetters } from 'vuex'
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 
@@ -50,54 +50,30 @@ import QiskitPage from '~/components/logic/QiskitPage.vue'
   },
   data () {
     return {
-      members: [],
-      tiers: ['MAIN', 'COMMUNITY'],
-      filters: {
-        MAIN: true,
-        COMMUNITY: true
-      }
+      tiers: ['MAIN', 'COMMUNITY']
     }
   },
   layout: 'default-max',
-  async beforeCreate () {
-    let res
-    try {
-      // from ecosystem main
-      res = await axios.get(
-        'https://raw.githubusercontent.com/qiskit-community/ecosystem/master/ecosystem/resources/members.json'
-      )
-      const membersArray = Object.values(res.data.MAIN).concat(Object.values(res.data.COMMUNITY))
-      const shuffled = this.fyShuffle(membersArray)
-      this.members = shuffled
-    } catch (err) {
-      console.error(err)
-    }
-  },
   computed: {
-    filteredMembers: {
-      get () {
-        const filteredMembers = this.members.filter((member) => {
-          return this.filters[member.tier]
-        })
-        return filteredMembers
-      }
-    }
+    ...mapGetters('ecosystem', [
+      'filteredMembers',
+      'tierFilters'
+    ])
+  },
+  async fetch ({ store }) {
+    await store.dispatch('ecosystem/fetchMembers')
   },
   methods: {
-    fyShuffle (array) {
-      for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1))
-        const temp = array[i]
-        array[i] = array[j]
-        array[j] = temp
+    updateTierFilter (tier: string, isChecked: boolean): void {
+      const tierFilters = (this as any).tierFilters.filter((oldOption: any) => oldOption !== tier)
+
+      if (isChecked) {
+        tierFilters.push(tier)
       }
-      return array
-    },
-    updateTierFilter (tier: string) {
-      this.filters[tier] = !this.filters[tier]
+      this.$store.commit('ecosystem/setTierFilters', tierFilters)
     },
     isTierFilterChecked (filterValue: string): boolean {
-      return this.filters[filterValue]
+      return (this as any).tierFilters.includes(filterValue)
     }
   }
 

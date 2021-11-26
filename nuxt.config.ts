@@ -14,6 +14,7 @@ import { NuxtConfig } from '@nuxt/types'
 import pkg from './package.json'
 import fetchEvents from './hooks/update-events'
 import fetchAdvocates from './hooks/update-advocates'
+import fetchEcosystemMembers from './hooks/update-ecosystem'
 
 const {
   NODE_ENV,
@@ -229,6 +230,8 @@ async function generateContent () {
   } else {
     consola.warn('Cannot generate events: missing AIRTABLE_API_KEY environment variable')
   }
+
+  await fetchEcosystemMembers('./content/ecosystem')
 }
 
 export default config
