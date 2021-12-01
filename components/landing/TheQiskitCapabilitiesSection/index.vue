@@ -14,9 +14,3 @@ export default class TheQiskitCapabilitiesSection extends Vue {
   @Prop(String) description!: string
 }
 </script>
-
-<style lang="scss" scoped>
-.qiskit-capabilities-section {
-  // todo: add styles
-}
-</style>
