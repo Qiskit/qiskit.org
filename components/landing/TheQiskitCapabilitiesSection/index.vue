@@ -10,7 +10,6 @@ import { Component, Prop } from 'vue-property-decorator'
 
 @Component
 export default class TheQiskitCapabilitiesSection extends Vue {
-  @Prop(String) title!: string
   @Prop(String) description!: string
 }
 </script>
