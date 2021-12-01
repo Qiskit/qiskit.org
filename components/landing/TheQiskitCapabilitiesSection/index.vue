@@ -1,6 +1,6 @@
 <template>
   <article class="bx--grid page-section">
-    <h2 v-text="title" />
+    <h2>What can Qiskit Do</h2>
   </article>
 </template>
 
