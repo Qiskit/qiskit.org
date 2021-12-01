@@ -1,5 +1,5 @@
 <template>
-  <article class="bx--grid page-section qiskit-capabilities-section">
+  <article class="bx--grid page-section">
     <h2 v-text="title" />
   </article>
 </template>
