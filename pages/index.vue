@@ -27,7 +27,5 @@ import QiskitPage from '~/components/logic/QiskitPage.vue'
 })
 export default class LandingPage extends QiskitPage {
   routeName = 'qiskit-landing-page'
-
-    providing the complete set of tools needed for interacting with quantum systems and simulators.`
 }
 </script>
