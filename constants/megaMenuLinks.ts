@@ -484,7 +484,7 @@ const QUANTUM_COMPUTING_LABS : MegaDropdownMenuGroup = {
     },
     {
       label: 'Lab 2. Single Qubit Gates',
-      url: `${baseUrl}${pathLabs}/lab-2-single-quibit-gates`,
+      url: `${baseUrl}${pathLabs}/lab-2-single-qubit-gates`,
       segment: {
         cta: 'lab-2-single-quibit-gates', location: sectionLabs
       }
