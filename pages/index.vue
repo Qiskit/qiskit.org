@@ -2,7 +2,7 @@
   <main class="landing-page">
     <TheHeroMoment :version="qiskitVersion" />
     <TheQuickStart />
-    <TheQiskitCapabilitiesSection :title="qiskitCapabilitiesSectionTitle" :description="qiskitCapabilitiesSectionDescription" />
+    <TheQiskitCapabilitiesSection />
     <TheLearnSection />
   </main>
 </template>
