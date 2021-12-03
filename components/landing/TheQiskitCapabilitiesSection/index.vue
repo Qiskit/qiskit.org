@@ -36,6 +36,16 @@
         </div>
       </div>
     </div>
+    <h2>Try it Yourself</h2>
+    <QiskitCapabilityCard
+      :id="actionCopy.title"
+      :key="actionCopy.title"
+      class="qiskit-capabilities-section__card scrollable"
+      :title="actionCopy.title"
+      :description="actionCopy.description"
+      :visual-resource="actionCopy.visualResource"
+      :thumbnail-resource="actionCopy.thumbnailResource"
+    />
   </article>
 </template>
 
@@ -91,6 +101,13 @@ export default class TheQiskitCapabilitiesSection extends Mixins(ScrollSectionsM
       }
     }
   ]
+
+  actionCopy = {
+    title: 'Title here',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ullamcorper morbi libero tincidunt nisl eleifend. Diam netus cum ac in. Dolor praesent orci cras posuere consectetur purus ullamcorper.',
+    visualResource: '',
+    thumbnailResource: '/images/library/chip-01.png'
+  }
 
   isActiveImage (item: MetalCapability, index: number): boolean {
     return item.title === this.activeSection || (this.activeSection === '' && index === 0)
