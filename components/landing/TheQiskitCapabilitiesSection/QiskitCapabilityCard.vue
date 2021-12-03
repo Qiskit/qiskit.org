@@ -9,28 +9,12 @@
           {{ title }}
         </h3>
         <div class="qiskit-capability-card__description">
-          <!-- TODO: HTML content should not be in strings but in components
-          but lacking of a better solution given time constraints. -->
-          <!-- eslint-disable vue/no-v-html -->
-          <span v-html="description" />
-          <!-- estlint-enable -->
+          <p v-text="description" />
+          <AppCta v-bind="link" kind="ghost" />
         </div>
       </div>
     </div>
-    <video
-      v-if="isVideo()"
-      class="qiskit-capability-card__visual-resource"
-      loop
-      autoplay
-      muted
-      playsinline
-    >
-      <source :src="visualResource" type="video/mp4">
-      <source :src="visualResource" type="video/ogg">
-      Your browser does not support video.
-    </video>
     <div
-      v-else
       class="qiskit-capability-card__visual-resource"
       :lazy-background="visualResource"
     />
@@ -47,11 +31,7 @@ export default class QiskitCapabilityCard extends Vue {
   @Prop(String) thumbnailResource!: string
   @Prop(String) title!: string
   @Prop(String) description!: string
-
-  isVideo (): boolean {
-    const extension = this.visualResource.substring(this.visualResource.length - 4)
-    return extension === '.mp4'
-  }
+  @Prop(String) link!: string
 }
 </script>
 

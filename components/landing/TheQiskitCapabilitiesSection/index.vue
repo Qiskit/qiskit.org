@@ -13,6 +13,7 @@
             :description="item.description"
             :visual-resource="item.visualResource"
             :thumbnail-resource="item.thumbnailResource"
+            :link="item.link"
           />
         </div>
         <div class="qiskit-capabilities-section__scrolling-ui">
@@ -73,13 +74,23 @@ export default class TheQiskitCapabilitiesSection extends Mixins(ScrollSectionsM
       title: 'Circuit Library',
       description: 'Qiskit includes a comprehensive set of quantum gates and a variety of pre-built circuits so users at all levels can use Qiskit for research and application development.',
       visualResource: 'https://place-hold.it/734x480/e8daff',
-      thumbnailResource: '/images/landing-page/feature-circuit.png'
+      thumbnailResource: '/images/landing-page/feature-circuit.png',
+      link: {
+        url: 'https://learn.qiskit.org/learn-more',
+        label: 'Learn more',
+        segment: { cta: 'learn-more', location: 'qiskit-capabilities-section' }
+      }
     },
     {
       title: 'Transpiler',
       description: 'Metal helps automate the quantum electrodynamics modeling of quantum devices to predict their performance  and parameters, such as qubit frequencies, anharmonicities, couplings, and dissipation. Metal’s vision is to provide the abstraction layer needed to seamlessly interconnect with your favorite electromagnetic analysis tool (HFSS, Sonnet, CST, AWR, Comsol, …), dynamically rendering and co-simulating your design, at the whim of a click.',
       visualResource: 'https://place-hold.it/734x480/d4bbff',
-      thumbnailResource: '/images/landing-page/transpiler.png'
+      thumbnailResource: '/images/landing-page/transpiler.png',
+      link: {
+        url: 'https://learn.qiskit.org/learn-more',
+        label: 'Learn more',
+        segment: { cta: 'learn-more', location: 'qiskit-capabilities-section' }
+      }
     },
     {
       title: 'Run on real hardware',
@@ -87,7 +98,12 @@ export default class TheQiskitCapabilitiesSection extends Mixins(ScrollSectionsM
                     <br><br>
                     We plan to include the Energy Participation Ratio (EPR), impedance analysis, and the lumped-oscillator model. We hope to further build up the quantum analysis library in collaboration with the community.`,
       visualResource: 'https://place-hold.it/734x480/be95ff',
-      thumbnailResource: '/images/library/chip-01.png'
+      thumbnailResource: '/images/library/chip-01.png',
+      link: {
+        url: 'https://learn.qiskit.org/learn-more',
+        label: 'Learn more',
+        segment: { cta: 'learn-more', location: 'qiskit-capabilities-section' }
+      }
     }
   ]
 
