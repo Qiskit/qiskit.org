@@ -17,8 +17,8 @@
     </div>
     <div class="code-cell__block" :class="{'code-cell__block_active' : activeCells[2]}">
       <pre class="code-cell__line"><span class="code-cell__comment"># run in real hardware</span></pre>
-      <pre class="code-cell__code">job = backend.run(optimized_circuit)</pre>
-      <pre class="code-cell__code">retrieved_job = backend.retrieve_job(job.job_id())</pre>
+      <pre class="code-cell__line">job = backend.run(optimized_circuit)</pre>
+      <pre class="code-cell__line">retrieved_job = backend.retrieve_job(job.job_id())</pre>
       <pre class="code-cell__line">result = retrieved_job.result() <span class="code-cell__comment">#6</span></pre>
     </div>
   </code>
@@ -37,7 +37,7 @@ export default class CodeCell extends Vue {
 <style lang="scss" scoped>
 .code-cell {
   display: block;
-  background-color: $background-color-light;
+  background-color: $background-color-lighter;
   color: $text-color;
   padding: $spacing-05 0;
 
