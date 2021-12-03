@@ -36,16 +36,6 @@
         </div>
       </div>
     </div>
-    <h2>Try it Yourself</h2>
-    <QiskitCapabilityCard
-      :id="actionCopy.title"
-      :key="actionCopy.title"
-      class="qiskit-capabilities-section__card scrollable"
-      :title="actionCopy.title"
-      :description="actionCopy.description"
-      :visual-resource="actionCopy.visualResource"
-      :thumbnail-resource="actionCopy.thumbnailResource"
-    />
   </article>
 </template>
 
@@ -78,7 +68,7 @@ export default class TheQiskitCapabilitiesSection extends Mixins(ScrollSectionsM
     },
     {
       title: 'Transpiler',
-      description: 'Metal helps automate the quantum electrodynamics modeling of quantum devices to predict their performance  and parameters, such as qubit frequencies, anharmonicities, couplings, and dissipation. Metal’s vision is to provide the abstraction layer needed to seamlessly interconnect with your favorite electromagnetic analysis tool (HFSS, Sonnet, CST, AWR, Comsol, …), dynamically rendering and co-simulating your design, at the whim of a click.',
+      description: 'The transpiler translates Qiskit code into an optimized circuit using a backend’s native gate set, allowing users to program for any quantum processor or processor architecture with minimal inputs.',
       visualResource: 'https://place-hold.it/734x480/d4bbff',
       thumbnailResource: '/images/landing-page/transpiler.png',
       link: {
@@ -89,9 +79,7 @@ export default class TheQiskitCapabilitiesSection extends Mixins(ScrollSectionsM
     },
     {
       title: 'Run on real hardware',
-      description: `Metal aims to give access to advanced quantum analysis techniques to calculate qubit frequencies, anharmonicities, and extract non-linear couplings, dissipation, and the full Hamiltonian of the quantum device, with percent-level accuracy.
-                    <br><br>
-                    We plan to include the Energy Participation Ratio (EPR), impedance analysis, and the lumped-oscillator model. We hope to further build up the quantum analysis library in collaboration with the community.`,
+      description: 'Users can run and schedule jobs on real quantum processors, and employ Qiskit Runtime to orchestrate quantum programs on cloud-based CPUs, QPUs, and GPUs.',
       visualResource: 'https://place-hold.it/734x480/be95ff',
       thumbnailResource: '/images/library/chip-01.png',
       link: {
@@ -99,15 +87,14 @@ export default class TheQiskitCapabilitiesSection extends Mixins(ScrollSectionsM
         label: 'Learn more',
         segment: { cta: 'learn-more', location: 'qiskit-capabilities-section' }
       }
+    },
+    {
+      title: 'Try it yourself',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ullamcorper morbi libero tincidunt nisl eleifend. Diam netus cum ac in. Dolor praesent orci cras posuere consectetur purus ullamcorper.',
+      visualResource: '',
+      thumbnailResource: '/images/landing-page/med_02_1.png'
     }
   ]
-
-  actionCopy = {
-    title: 'Title here',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ullamcorper morbi libero tincidunt nisl eleifend. Diam netus cum ac in. Dolor praesent orci cras posuere consectetur purus ullamcorper.',
-    visualResource: '',
-    thumbnailResource: '/images/library/chip-01.png'
-  }
 
   isActiveImage (item: MetalCapability, index: number): boolean {
     return item.title === this.activeSection || (this.activeSection === '' && index === 0)
@@ -132,11 +119,7 @@ export default class TheQiskitCapabilitiesSection extends Mixins(ScrollSectionsM
   }
 
   &__card {
-    margin-bottom: $spacing-12;
-
-    @include mq($until: medium) {
-      margin-bottom: $spacing-07;
-    }
+    margin-bottom: $spacing-07;
   }
 
   &__scrolling-ui {

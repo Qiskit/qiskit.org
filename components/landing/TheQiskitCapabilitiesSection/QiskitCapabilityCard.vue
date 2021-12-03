@@ -31,14 +31,14 @@ export default class QiskitCapabilityCard extends Vue {
   @Prop(String) thumbnailResource!: string
   @Prop(String) title!: string
   @Prop(String) description!: string
-  @Prop(String) link!: string
+  @Prop({ type: Object, required: false }) link!: any
 }
 </script>
 
 <style lang="scss" scoped>
 .qiskit-capability-card {
   display: flex;
-  min-height: 16rem;
+  // min-height: 16rem;
 
   @include mq($until: medium) {
     flex-direction: column;
