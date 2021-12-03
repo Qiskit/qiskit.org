@@ -25,22 +25,7 @@
               'qiskit-capabilities-section__visual-resource-container_active' : isActiveImage(item, index)
             }"
           >
-            <video
-              v-if="isVideo(item.visualResource)"
-              class="
-                qiskit-capabilities-section__visual-resource
-                qiskit-capabilities-section__visual-resource_type_video"
-              loop
-              autoplay
-              muted
-              playsinline
-            >
-              <source :src="item.visualResource" type="video/mp4">
-              <source :src="item.visualResource" type="video/ogg">
-              Your browser does not support video.
-            </video>
             <div
-              v-else
               class="
                 qiskit-capabilities-section__visual-resource
                 qiskit-capabilities-section__visual-resource_type_image
@@ -109,11 +94,6 @@ export default class TheQiskitCapabilitiesSection extends Mixins(ScrollSectionsM
 
   isActiveImage (item: MetalCapability, index: number): boolean {
     return item.title === this.activeSection || (this.activeSection === '' && index === 0)
-  }
-
-  isVideo (url: string): boolean {
-    const extension = url.substring(url.length - 4)
-    return extension === '.mp4'
   }
 }
 </script>
