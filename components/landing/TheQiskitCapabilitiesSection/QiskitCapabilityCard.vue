@@ -18,10 +18,6 @@
         </div>
       </div>
     </div>
-    <div
-      class="qiskit-capability-card__visual-resource"
-      :lazy-background="visualResource"
-    />
   </article>
 </template>
 
@@ -36,6 +32,7 @@ export default class QiskitCapabilityCard extends Vue {
   @Prop(String) title!: string
   @Prop(String) description!: string
   @Prop({ type: Object, required: false }) link!: any
+  @Prop(Boolean) isActive!: boolean
 }
 </script>
 

@@ -14,24 +14,18 @@
             :visual-resource="item.visualResource"
             :thumbnail-resource="item.thumbnailResource"
             :link="item.link"
+            :is-active="item.isActive"
           />
         </div>
         <div class="qiskit-capabilities-section__scrolling-ui">
           <div
             v-for="(item, index) in capabilities"
-            :key="item.visualResource"
-            class="qiskit-capabilities-section__visual-resource-container"
+            :key="item.index"
             :class="{
-              'qiskit-capabilities-section__visual-resource-container_active' : isActiveImage(item, index)
+              'qiskit-capabilities-section__visual-resource-container_active' : isActiveSection(item, index)
             }"
           >
-            <div
-              class="
-                qiskit-capabilities-section__visual-resource
-                qiskit-capabilities-section__visual-resource_type_image
-              "
-              :lazy-background="item.visualResource"
-            />
+            {{ isActiveSection(item, index) }}
           </div>
         </div>
       </div>
@@ -43,7 +37,7 @@
 import { Component, Mixins } from 'vue-property-decorator'
 import ScrollSectionsMixin from '~/mixins/scrollBetweenSections'
 
-interface MetalCapability {
+interface QiskitCapability {
   /** The visible title of the feature */
   title: string
   /** The visible description of the feature */
@@ -96,7 +90,7 @@ export default class TheQiskitCapabilitiesSection extends Mixins(ScrollSectionsM
     }
   ]
 
-  isActiveImage (item: MetalCapability, index: number): boolean {
+  isActiveSection (item: QiskitCapability, index: number): boolean {
     return item.title === this.activeSection || (this.activeSection === '' && index === 0)
   }
 }
