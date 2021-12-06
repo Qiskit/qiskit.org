@@ -25,7 +25,7 @@
               'qiskit-capabilities-section__visual-resource-container_active' : isActiveSection(item, index)
             }"
           >
-            {{ isActiveSection(item, index) }}
+            <CodeCell :active-cells="[ isActiveSection(item, index) ]" />
           </div>
         </div>
       </div>
