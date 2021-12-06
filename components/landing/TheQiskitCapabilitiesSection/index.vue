@@ -14,19 +14,10 @@
             :visual-resource="item.visualResource"
             :thumbnail-resource="item.thumbnailResource"
             :link="item.link"
-            :is-active="item.isActive"
           />
         </div>
         <div class="qiskit-capabilities-section__scrolling-ui">
-          <div
-            v-for="(item, index) in capabilities"
-            :key="item.index"
-            :class="{
-              'qiskit-capabilities-section__visual-resource-container_active' : isActiveSection(item, index)
-            }"
-          >
-            <CodeCell :active-cells="[ isActiveSection(item, index) ]" />
-          </div>
+          <CodeCell :active-cells="capabilities.map(item => isActiveSection(item))" />
         </div>
       </div>
     </div>
@@ -52,7 +43,6 @@ export default class TheQiskitCapabilitiesSection extends Mixins(ScrollSectionsM
     {
       title: 'Circuit Library',
       description: 'Qiskit includes a comprehensive set of quantum gates and a variety of pre-built circuits so users at all levels can use Qiskit for research and application development.',
-      visualResource: 'https://place-hold.it/734x480/e8daff',
       thumbnailResource: '/images/landing-page/feature-circuit.png',
       link: {
         url: 'https://qiskit.org/documentation/apidoc/circuit_library.html',
@@ -63,7 +53,6 @@ export default class TheQiskitCapabilitiesSection extends Mixins(ScrollSectionsM
     {
       title: 'Transpiler',
       description: 'The transpiler translates Qiskit code into an optimized circuit using a backend’s native gate set, allowing users to program for any quantum processor or processor architecture with minimal inputs.',
-      visualResource: 'https://place-hold.it/734x480/d4bbff',
       thumbnailResource: '/images/landing-page/transpiler.png',
       link: {
         url: 'https://qiskit.org/documentation/stubs/qiskit.compiler.transpile.html',
@@ -74,7 +63,6 @@ export default class TheQiskitCapabilitiesSection extends Mixins(ScrollSectionsM
     {
       title: 'Run on real hardware',
       description: 'Users can run and schedule jobs on real quantum processors, and employ Qiskit Runtime to orchestrate quantum programs on cloud-based CPUs, QPUs, and GPUs.',
-      visualResource: 'https://place-hold.it/734x480/be95ff',
       thumbnailResource: '/images/library/chip-01.png',
       link: {
         url: 'https://qiskit.org/documentation/partners/qiskit_runtime/',
@@ -85,7 +73,6 @@ export default class TheQiskitCapabilitiesSection extends Mixins(ScrollSectionsM
     {
       title: 'Try it yourself',
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ullamcorper morbi libero tincidunt nisl eleifend. Diam netus cum ac in. Dolor praesent orci cras posuere consectetur purus ullamcorper.',
-      visualResource: '',
       thumbnailResource: '/images/landing-page/med_02_1.png'
     }
   ]
@@ -114,6 +101,7 @@ export default class TheQiskitCapabilitiesSection extends Mixins(ScrollSectionsM
 
   &__card {
     margin-bottom: $spacing-07;
+    min-height: 16rem;
   }
 
   &__scrolling-ui {
