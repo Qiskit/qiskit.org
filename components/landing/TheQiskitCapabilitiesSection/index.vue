@@ -61,9 +61,9 @@ export default class TheQiskitCapabilitiesSection extends Mixins(ScrollSectionsM
       visualResource: 'https://place-hold.it/734x480/e8daff',
       thumbnailResource: '/images/landing-page/feature-circuit.png',
       link: {
-        url: 'https://learn.qiskit.org/learn-more',
+        url: 'https://qiskit.org/documentation/apidoc/circuit_library.html',
         label: 'Learn more',
-        segment: { cta: 'learn-more', location: 'qiskit-capabilities-section' }
+        segment: { cta: 'feature-circuit', location: 'homepage-capabilities-section' }
       }
     },
     {
@@ -72,9 +72,9 @@ export default class TheQiskitCapabilitiesSection extends Mixins(ScrollSectionsM
       visualResource: 'https://place-hold.it/734x480/d4bbff',
       thumbnailResource: '/images/landing-page/transpiler.png',
       link: {
-        url: 'https://learn.qiskit.org/learn-more',
+        url: 'https://qiskit.org/documentation/stubs/qiskit.compiler.transpile.html',
         label: 'Learn more',
-        segment: { cta: 'learn-more', location: 'qiskit-capabilities-section' }
+        segment: { cta: 'transpiler', location: 'homepage-capabilities-section' }
       }
     },
     {
@@ -83,9 +83,9 @@ export default class TheQiskitCapabilitiesSection extends Mixins(ScrollSectionsM
       visualResource: 'https://place-hold.it/734x480/be95ff',
       thumbnailResource: '/images/library/chip-01.png',
       link: {
-        url: 'https://learn.qiskit.org/learn-more',
+        url: 'https://qiskit.org/documentation/partners/qiskit_runtime/',
         label: 'Learn more',
-        segment: { cta: 'learn-more', location: 'qiskit-capabilities-section' }
+        segment: { cta: 'run-on-hardware', location: 'homepage-capabilities-section' }
       }
     },
     {

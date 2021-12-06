@@ -10,7 +10,11 @@
         </h3>
         <div class="qiskit-capability-card__description">
           <p v-text="description" />
-          <AppCta v-if="link" v-bind="link" kind="ghost" />
+          <AppCta
+            v-if="link"
+            v-bind="link"
+            kind="ghost"
+          />
         </div>
       </div>
     </div>
