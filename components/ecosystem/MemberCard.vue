@@ -30,14 +30,14 @@
     </p>
     <div>
       <TestTable
-        v-if="member.tests_results.length != 0"
+        v-if="member.testsResults.length != 0"
         class="test-table"
         :filtered-data="testRows"
       />
     </div>
     <div>
       <StylesTable
-        v-if="(member.styles_results && member.styles_results.length !=0) | (member.coverages_results && member.coverages_results.length !=0)"
+        v-if="(member.stylesResults && member.stylesResults.length !=0) | (member.coveragesResults && member.coveragesResults.length !=0)"
         class="test-table"
         :filtered-data="otherRows"
       />
@@ -58,22 +58,23 @@ import { Component, Prop } from 'vue-property-decorator'
   computed: {
     testRows: {
       get () {
-        const rows = []
-        const matrix = {}
+        const rows: any[][] = []
+        const matrix: any = {}
 
         const self = this as any
-        if (self.member.tests_results) {
-          self.member.tests_results.forEach(({ terra_version, test_type, passed, timestamp }) => {
-            if (!matrix[terra_version]) { matrix[terra_version] = {} }
+        if (self.member.testsResults) {
+          self.member.testsResults.forEach(({ terraVersion, testType, passed, timestamp }: any) => {
+            if (!matrix[terraVersion]) { matrix[terraVersion] = {} }
             const dateVal = new Date(timestamp * 1000).toLocaleString('en-UK', { timeZone: 'UTC' })
-            matrix[terra_version].date = dateVal
-            matrix[terra_version][test_type] = passed
+            matrix[terraVersion].date = dateVal
+            matrix[terraVersion][testType] = passed
           })
           for (const [key, val] of Object.entries(matrix)) {
-            if (val.STABLE_COMPATIBLE === undefined) { val.STABLE_COMPATIBLE = 'no data' }
-            if (val.DEV_COMPATIBLE === undefined) { val.DEV_COMPATIBLE = 'no data' }
-            if (val.STANDARD === undefined) { val.STANDARD = 'no data' }
-            const r = [key, val.STABLE_COMPATIBLE, val.DEV_COMPATIBLE, val.STANDARD, val.date]
+            const testType = val as any
+            if (testType.STABLE_COMPATIBLE === undefined) { testType.STABLE_COMPATIBLE = 'no data' }
+            if (testType.DEV_COMPATIBLE === undefined) { testType.DEV_COMPATIBLE = 'no data' }
+            if (testType.STANDARD === undefined) { testType.STANDARD = 'no data' }
+            const r = [key, testType.STABLE_COMPATIBLE, testType.DEV_COMPATIBLE, testType.STANDARD, testType.date]
             rows.push(r)
           }
         }
@@ -82,17 +83,17 @@ import { Component, Prop } from 'vue-property-decorator'
     },
     otherRows: {
       get () {
-        const rows = []
+        const rows: any[][] = []
         const self = this as any
-        if (self.member.styles_results) {
-          self.member.styles_results.forEach(({ style_type, passed }) => {
-            const r = ['style', style_type, passed]
+        if (self.member.stylesResults) {
+          self.member.stylesResults.forEach(({ styleType, passed }: any) => {
+            const r = ['style', styleType, passed]
             rows.push(r)
           })
         }
-        if (self.member.coverages_results) {
-          self.member.coverages_results.forEach(({ coverage_type, passed }) => {
-            const r = ['coverage', coverage_type, passed]
+        if (self.member.coveragesResults) {
+          self.member.coveragesResults.forEach(({ coverageType, passed }: any) => {
+            const r = ['coverage', coverageType, passed]
             rows.push(r)
           })
         }
