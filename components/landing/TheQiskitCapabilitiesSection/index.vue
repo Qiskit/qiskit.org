@@ -11,13 +11,12 @@
             class="qiskit-capabilities-section__card scrollable"
             :title="item.title"
             :description="item.description"
-            :visual-resource="item.visualResource"
             :thumbnail-resource="item.thumbnailResource"
             :link="item.link"
           />
         </div>
         <div class="qiskit-capabilities-section__scrolling-ui">
-          <CodeCell :active-cells="capabilities.map(item => isActiveSection(item))" />
+          <CodeCell :active-cells="capabilities.map((item, index) => isActiveSection(item, index))" />
         </div>
       </div>
     </div>
@@ -34,7 +33,7 @@ interface QiskitCapability {
   /** The visible description of the feature */
   description: string
   /** The image of the feature */
-  visualResource: string
+  thumbnailResource: string
 }
 
 @Component
@@ -89,7 +88,7 @@ export default class TheQiskitCapabilitiesSection extends Mixins(ScrollSectionsM
 .qiskit-capabilities-section {
   &__container {
     display: flex;
-    padding-top: $spacing-10;
+    padding-top: $spacing-05;
     padding-bottom: $spacing-09;
   }
 
@@ -97,6 +96,9 @@ export default class TheQiskitCapabilitiesSection extends Mixins(ScrollSectionsM
     display: flex;
     align-items: flex-start;
     width: 100%;
+    @include mq($until: medium) {
+      flex-direction: column;
+    }
   }
 
   &__card {
@@ -111,41 +113,9 @@ export default class TheQiskitCapabilitiesSection extends Mixins(ScrollSectionsM
     min-height: 20rem;
     margin-bottom: $spacing-12;
 
-    @include mq($from: medium, $until: large) {
-      flex: 1.5;
-    }
-
     @include mq($until: medium) {
-      display: none;
-    }
-  }
-
-  &__visual-resource-container {
-    position: absolute;
-    top: 0;
-    opacity: 0;
-    transition: opacity 0.3s linear;
-    width: 100%;
-    height: 100%;
-
-    &_active {
-      opacity: 1;
-    }
-  }
-
-  &__visual-resource {
-    &_type {
-      &_image {
-        width: 100%;
-        height: 100%;
-        background-size: cover;
-        background-position: center top;
-        background-repeat: no-repeat;
-      }
-
-      &_video {
-        width: 100%;
-      }
+      flex: initial;
+      overflow: hidden;
     }
   }
 }

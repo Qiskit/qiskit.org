@@ -8,6 +8,7 @@
         <h3 class="qiskit-capability-card__title">
           {{ title }}
         </h3>
+        <img class="qiskit-capability-card__thumbnail__mobile" :src="thumbnailResource">
         <div class="qiskit-capability-card__description">
           <p v-text="description" />
           <AppCta
@@ -37,7 +38,6 @@ export default class QiskitCapabilityCard extends Vue {
 <style lang="scss" scoped>
 .qiskit-capability-card {
   display: flex;
-  // min-height: 16rem;
 
   @include mq($until: medium) {
     flex-direction: column;
@@ -60,9 +60,29 @@ export default class QiskitCapabilityCard extends Vue {
     max-width: 10rem;
     margin-right: $spacing-07;
 
+    @include mq($until: large) {
+      margin-right: initial;
+      margin-bottom: $spacing-05;
+    }
+
     &__media {
       display: block;
       width: 100%;
+      min-width: 10rem;
+
+      @include mq($until: large) {
+        display: none;
+      }
+    }
+
+    &__mobile {
+      display: none;
+      @include mq($until: large) {
+        display: block;
+        width: 100%;
+        max-width: 10rem;
+        margin-bottom: $spacing-05;
+      }
     }
   }
 
@@ -72,7 +92,6 @@ export default class QiskitCapabilityCard extends Vue {
     @include mq($until: large) {
       flex: 0 0 auto;
       padding-right: 0;
-      padding-bottom: $spacing-07;
     }
 
     @include mq($until: medium) {
@@ -91,28 +110,6 @@ export default class QiskitCapabilityCard extends Vue {
     @include mq($until: medium) {
       padding-bottom: 0;
       margin-bottom: $spacing-05;
-    }
-  }
-
-  &__visual-resource {
-    flex: 0 0 46rem;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center top;
-    background-repeat: no-repeat;
-
-    @include mq($from: medium, $until: large) {
-      flex: 1.5;
-    }
-
-    @include mq($from: medium) {
-      display: none;
-    }
-
-    @include mq($until: medium) {
-      flex: 0 0 16rem;
-      margin: 0;
     }
   }
 }
