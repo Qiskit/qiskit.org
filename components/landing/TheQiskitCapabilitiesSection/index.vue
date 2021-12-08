@@ -20,6 +20,15 @@
         </div>
       </div>
     </div>
+    <div class="qiskit-capabilities-section__ctas">
+      <AppCta
+        v-bind="quantumLabLink"
+        kind="ghost"
+      />
+      <AppCta
+        v-bind="quantumLabLink"
+      />
+    </div>
   </article>
 </template>
 
@@ -76,6 +85,12 @@ export default class TheQiskitCapabilitiesSection extends Mixins(ScrollSectionsM
     }
   ]
 
+  quantumLabLink = {
+    url: 'https://quantum-computing.ibm.com/lab/files/qiskit-textbook/getting-started/example.ipynb',
+    label: 'Open in Quantum Lab',
+    segment: { cta: 'quantum-lab', location: 'homepage-capabilities-section' }
+  }
+
   isActiveSection (item: QiskitCapability, index: number): boolean {
     return item.title === this.activeSection || (this.activeSection === '' && index === 0)
   }
@@ -129,6 +144,11 @@ export default class TheQiskitCapabilitiesSection extends Mixins(ScrollSectionsM
       flex: initial;
       width: 100%;
     }
+  }
+
+  &__ctas {
+    display: flex;
+    justify-content: flex-end;
   }
 }
 </style>
