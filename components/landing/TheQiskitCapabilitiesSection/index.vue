@@ -22,11 +22,12 @@
     </div>
     <div class="qiskit-capabilities-section__ctas">
       <AppCta
-        v-bind="quantumLabLink"
+        v-bind="quantumLabCTA"
         kind="ghost"
       />
+      <!-- TODO: Update button for Copy Code -->
       <AppCta
-        v-bind="quantumLabLink"
+        v-bind="copyCodeCTA"
       />
     </div>
   </article>
@@ -85,10 +86,16 @@ export default class TheQiskitCapabilitiesSection extends Mixins(ScrollSectionsM
     }
   ]
 
-  quantumLabLink = {
+  quantumLabCTA = {
     url: 'https://quantum-computing.ibm.com/lab/files/qiskit-textbook/getting-started/example.ipynb',
     label: 'Open in Quantum Lab',
     segment: { cta: 'quantum-lab', location: 'homepage-capabilities-section' }
+  }
+
+  copyCodeCTA = {
+    url: '',
+    label: 'Copy Code',
+    segment: { cta: 'copy-code', location: 'homepage-capabilities-section' }
   }
 
   isActiveSection (item: QiskitCapability, index: number): boolean {
