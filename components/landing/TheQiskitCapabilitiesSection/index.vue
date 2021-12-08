@@ -109,13 +109,26 @@ export default class TheQiskitCapabilitiesSection extends Mixins(ScrollSectionsM
   &__scrolling-ui {
     position: sticky;
     top: $spacing-06;
-    flex: 0 0 46rem;
+    flex: 0 0 1;
+    max-width: 100%;
     min-height: 20rem;
     margin-bottom: $spacing-12;
 
+    @include mq($from: x-large) {
+      flex: 0 0 38rem;
+    }
+
+    @include mq($from: large, $until: x-large) {
+      flex: 0 0 34rem;
+    }
+
+    @include mq($until: large) {
+      flex: 0 0 22rem;
+    }
+
     @include mq($until: medium) {
       flex: initial;
-      overflow: hidden;
+      width: 100%;
     }
   }
 }
