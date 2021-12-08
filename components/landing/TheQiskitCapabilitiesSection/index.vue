@@ -54,7 +54,7 @@ export default class TheQiskitCapabilitiesSection extends Mixins(ScrollSectionsM
       description: 'The transpiler translates Qiskit code into an optimized circuit using a backend’s native gate set, allowing users to program for any quantum processor or processor architecture with minimal inputs.',
       thumbnailResource: '/images/landing-page/transpiler.png',
       link: {
-        url: 'https://qiskit.org/documentation/stubs/qiskit.compiler.transpile.html',
+        url: 'https://qiskit.org/documentation/apidoc/transpiler.html',
         label: 'Learn more',
         segment: { cta: 'transpiler', location: 'homepage-capabilities-section' }
       }
@@ -64,7 +64,7 @@ export default class TheQiskitCapabilitiesSection extends Mixins(ScrollSectionsM
       description: 'Users can run and schedule jobs on real quantum processors, and employ Qiskit Runtime to orchestrate quantum programs on cloud-based CPUs, QPUs, and GPUs.',
       thumbnailResource: '/images/library/chip-01.png',
       link: {
-        url: 'https://qiskit.org/documentation/partners/qiskit_runtime/',
+        url: 'https://qiskit.org/documentation/apidoc/ibmq_provider.html',
         label: 'Learn more',
         segment: { cta: 'run-on-hardware', location: 'homepage-capabilities-section' }
       }
