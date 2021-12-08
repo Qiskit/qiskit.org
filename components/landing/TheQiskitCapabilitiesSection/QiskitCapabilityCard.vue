@@ -65,14 +65,15 @@ export default class QiskitCapabilityCard extends Vue {
       margin-bottom: $spacing-05;
     }
 
+    @include mq($until: large) {
+      display: none;
+    }
+
     &__media {
       display: block;
       width: 100%;
       min-width: 10rem;
 
-      @include mq($until: large) {
-        display: none;
-      }
     }
 
     &__mobile {

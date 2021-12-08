@@ -103,7 +103,6 @@ export default class TheQiskitCapabilitiesSection extends Mixins(ScrollSectionsM
 
   &__card {
     margin-bottom: $spacing-07;
-    min-height: 16rem;
   }
 
   &__scrolling-ui {
