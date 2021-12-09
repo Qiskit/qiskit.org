@@ -99,6 +99,10 @@ export default class TheQiskitCapabilitiesSection extends Mixins(ScrollSectionsM
   }
 
   isActiveSection (item: QiskitCapability, index: number): boolean {
+    if (this.capabilities[this.capabilities.length - 1].title === this.activeSection) {
+      return true
+    }
+
     return item.title === this.activeSection || (this.activeSection === '' && index === 0)
   }
 }
@@ -124,7 +128,12 @@ export default class TheQiskitCapabilitiesSection extends Mixins(ScrollSectionsM
   }
 
   &__card {
+    min-height: 12rem;
     margin-bottom: $spacing-07;
+
+    &:last-child {
+      margin-bottom: 14rem;
+    }
   }
 
   &__scrolling-ui {
