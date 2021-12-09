@@ -8,7 +8,7 @@ export default class ScrollBetweenSections extends Vue {
 
   mounted () {
     const threshold = [...Array(25).keys()].map(x => 4 * x / 100)
-    const windowTriggerMargins = '-16px 0px -66% 0px'
+    const windowTriggerMargins = '-16px 0px -80% 0px'
     this._observer = new IntersectionObserver(
       this._onSectionAppearing,
       {
