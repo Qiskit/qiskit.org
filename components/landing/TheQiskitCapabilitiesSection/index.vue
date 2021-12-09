@@ -94,7 +94,7 @@ export default class TheQiskitCapabilitiesSection extends Mixins(ScrollSectionsM
 
   copyCodeCTA = {
     url: '',
-    label: 'Copy Code',
+    label: 'Copy code',
     segment: { cta: 'copy-code', location: 'homepage-capabilities-section' }
   }
 

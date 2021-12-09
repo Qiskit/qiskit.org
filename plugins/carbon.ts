@@ -18,11 +18,13 @@ import LogoMedium20 from '@carbon/icons-vue/lib/logo--medium/20'
 import LogoGitHub32 from '@carbon/icons-vue/lib/logo--github/32'
 import Launch16 from '@carbon/icons-vue/lib/launch/16'
 import ErrorOutline16 from '@carbon/icons-vue/lib/error--outline/16'
+import Copy16 from '@carbon/icons-vue/lib/copy/16'
 
 Vue.use(CarbonComponentsVue)
 Vue.use(CarbonIconsVue, {
   components: {
     Calendar20,
+    Copy16,
     Time20,
     Education20,
     Map20,
