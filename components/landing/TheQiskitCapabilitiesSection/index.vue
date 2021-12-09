@@ -22,13 +22,19 @@
     </div>
     <div class="qiskit-capabilities-section__ctas">
       <AppCta
+        class="qiskit-capabilities-section__ctas__link"
         v-bind="quantumLabCTA"
         kind="ghost"
       />
       <!-- TODO: Update button for Copy Code -->
-      <AppCta
-        v-bind="copyCodeCTA"
-      />
+      <cv-button
+        :title="copyCodeCTA.label"
+        class="qiskit-capabilities-section__copy-button"
+        @click="[copyToClipboard(), $trackClickEvent(copyCodeCTA.segment)]"
+      >
+        <span class="qiskit-capabilities-section__copy-button__label">Copy</span>
+        <Copy16 class="qiskit-capabilities-section__copy-button__icon" />
+      </cv-button>
     </div>
   </article>
 </template>
@@ -105,11 +111,18 @@ export default class TheQiskitCapabilitiesSection extends Mixins(ScrollSectionsM
 
     return item.title === this.activeSection || (this.activeSection === '' && index === 0)
   }
+
+  copyToClipboard (): void {
+    const codeSnippet = document.querySelector('.code-cell')?.textContent!
+    navigator.clipboard.writeText(codeSnippet)
+  }
 }
 </script>
 
 <style lang="scss" scoped>
 @import '~carbon-components/scss/globals/scss/typography';
+
+$cta-max-width: 14rem;
 
 .qiskit-capabilities-section {
   &__container {
@@ -165,6 +178,35 @@ export default class TheQiskitCapabilitiesSection extends Mixins(ScrollSectionsM
   &__ctas {
     display: flex;
     justify-content: flex-end;
+
+    &__link {
+      width: 100%;
+      max-width: $cta-max-width;
+      padding: $spacing-05;
+      justify-content: space-between;
+    }
+  }
+
+  &__copy-button {
+    display: flex;
+    width: 100%;
+    max-width: $cta-max-width;
+    padding-right: $spacing-07;
+    justify-content: space-between;
+    background-size: 200% 100%;
+    background-position-x: 100%;
+    background-image: linear-gradient(90deg, $button-background-color-light 0%, $button-background-color-light 50%, $background-color-secondary 50%, $background-color-secondary 100%);
+    transition: background-position-x 0.3s ease-out;
+
+    &:hover,
+    &:active {
+      background-position-x: 0;
+    }
+
+    &__label {
+      display: block;
+      width: 100%;
+    }
   }
 }
 </style>
