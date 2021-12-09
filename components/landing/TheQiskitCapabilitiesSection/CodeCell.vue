@@ -54,9 +54,7 @@ export default class CodeCell extends Vue {
     }
   }
 
-  &__comment {
-    color: $text-active-color;
-  }
+  &__comment,
   &__string {
     color: $text-active-color;
   }
