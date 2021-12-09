@@ -1,6 +1,8 @@
 <template>
   <code class="code-cell">
     <div class="code-cell__block" :class="{'code-cell__block_active' : activeCells[0]}">
+      <pre class="code-cell__line">import qiskit</pre>
+      <pre> &nbsp; </pre>
       <pre class="code-cell__line"><span class="code-cell__comment"># Qiskit quantum circuits libraries</span></pre>
       <pre class="code-cell__line">quantum_circuit = qiskit.circuit.library.QuantumVolume(5) <span class="code-cell__comment">#1</span> <span class="code-cell__comment">#3</span></pre>
       <pre class="code-cell__line">quantum_circuit.draw()</pre>

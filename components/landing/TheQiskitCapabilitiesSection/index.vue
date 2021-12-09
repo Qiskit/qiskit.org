@@ -132,7 +132,7 @@ export default class TheQiskitCapabilitiesSection extends Mixins(ScrollSectionsM
     margin-bottom: $spacing-07;
 
     &:last-child {
-      margin-bottom: 14rem;
+      margin-bottom: 16rem;
     }
   }
 
