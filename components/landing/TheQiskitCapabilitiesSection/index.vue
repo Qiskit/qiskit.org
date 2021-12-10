@@ -32,7 +32,7 @@
         class="qiskit-capabilities-section__copy-button"
         @click="[copyToClipboard(), $trackClickEvent(copyCodeCTA.segment)]"
       >
-        <span class="qiskit-capabilities-section__copy-button__label">Copy</span>
+        <span class="qiskit-capabilities-section__copy-button__label">{{ copyCodeCTA.label }}</span>
         <Copy16 class="qiskit-capabilities-section__copy-button__icon" />
       </cv-button>
     </div>
@@ -129,6 +129,9 @@ $cta-max-width: 14rem;
     display: flex;
     padding-top: $spacing-05;
     padding-bottom: $spacing-09;
+   @include mq($until: medium) {
+      padding-bottom: $spacing-05;
+    }
   }
 
   &__capabilities {
@@ -146,6 +149,10 @@ $cta-max-width: 14rem;
 
     &:last-child {
       margin-bottom: 16rem;
+
+      @include mq($until: medium) {
+        margin-bottom: $spacing-07;
+      }
     }
   }
 
@@ -172,6 +179,7 @@ $cta-max-width: 14rem;
     @include mq($until: medium) {
       flex: initial;
       width: 100%;
+      margin-bottom: $spacing-07;
     }
   }
 
@@ -179,11 +187,20 @@ $cta-max-width: 14rem;
     display: flex;
     justify-content: flex-end;
 
+    @include mq($until: medium) {
+      flex-direction: column-reverse;
+    }
+
     &__link {
       width: 100%;
       max-width: $cta-max-width;
       padding: $spacing-05;
+      margin-right: $spacing-05;
       justify-content: space-between;
+
+      @include mq($until: medium) {
+        max-width: initial;
+      }
     }
   }
 
@@ -191,12 +208,16 @@ $cta-max-width: 14rem;
     display: flex;
     width: 100%;
     max-width: $cta-max-width;
-    padding-right: $spacing-07;
+    padding-right: $spacing-05;
     justify-content: space-between;
     background-size: 200% 100%;
     background-position-x: 100%;
     background-image: linear-gradient(90deg, $button-background-color-light 0%, $button-background-color-light 50%, $background-color-secondary 50%, $background-color-secondary 100%);
     transition: background-position-x 0.3s ease-out;
+
+    @include mq($until: medium) {
+      max-width: initial;
+    }
 
     &:hover,
     &:active {
