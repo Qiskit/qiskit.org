@@ -30,7 +30,7 @@ import { Component, Prop } from 'vue-property-decorator'
 
 @Component
 export default class CodeCell extends Vue {
-  @Prop({ type: Array, default: 1 }) activeBlocks!: boolean[]
+  @Prop({ type: Array, default: [true, false, false] }) activeBlocks!: boolean[]
 }
 </script>
 
