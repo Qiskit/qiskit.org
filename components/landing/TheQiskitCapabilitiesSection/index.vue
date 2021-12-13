@@ -1,6 +1,7 @@
 <template>
   <article class="bx--grid page-section">
     <h2>What Can Qiskit Do</h2>
+    <CodeCell :active-blocks="activeBlocks" />
   </article>
 </template>
 
@@ -10,5 +11,6 @@ import { Component } from 'vue-property-decorator'
 
 @Component
 export default class TheQiskitCapabilitiesSection extends Vue {
+  activeBlocks = [true, false, false]
 }
 </script>
