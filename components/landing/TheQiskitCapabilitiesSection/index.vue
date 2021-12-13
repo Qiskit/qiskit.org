@@ -16,7 +16,7 @@
           />
         </div>
         <div class="qiskit-capabilities-section__scrolling-ui">
-          <CodeCell :active-cells="capabilities.map((item, index) => isActiveSection(item, index))" />
+          <CodeCell :active-blocks="capabilities.map((item, index) => isActiveSection(item, index))" />
         </div>
       </div>
     </div>
