@@ -67,8 +67,8 @@ export default class CodeCell extends Vue {
   }
 
   &__line {
-    word-break:break-word;
-    white-space:normal;
+    word-break: break-word;
+    white-space: normal;
   }
 }
 

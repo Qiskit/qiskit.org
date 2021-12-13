@@ -26,7 +26,6 @@
         v-bind="quantumLabCTA"
         kind="ghost"
       />
-      <!-- TODO: Update button for Copy Code -->
       <cv-button
         :title="copyCodeCTA.label"
         class="qiskit-capabilities-section__copy-button"
@@ -125,6 +124,8 @@ export default class TheQiskitCapabilitiesSection extends Mixins(ScrollSectionsM
 $cta-max-width: 14rem;
 
 .qiskit-capabilities-section {
+  padding-bottom: $spacing-09;
+
   &__container {
     display: flex;
     padding-top: $spacing-05;
@@ -148,7 +149,7 @@ $cta-max-width: 14rem;
     margin-bottom: $spacing-07;
 
     &:last-child {
-      margin-bottom: 16rem;
+      margin-bottom: 10rem;
 
       @include mq($until: medium) {
         margin-bottom: $spacing-07;
@@ -162,7 +163,6 @@ $cta-max-width: 14rem;
     flex: 0 0 1;
     max-width: 100%;
     min-height: 20rem;
-    margin-bottom: $spacing-12;
 
     @include mq($from: x-large) {
       flex: 0 0 38rem;
