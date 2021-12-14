@@ -84,6 +84,19 @@ export default class StartLearningSection extends Vue {
           }
         },
         {
+          image: '/images/textbook-beta/quantum-machine-learning.png',
+          title: 'Quantum machine learning',
+          description: `Want to learn about this exciting, developing field? If
+	  you have the quantum computing basics down, this course will give you
+	  the machine learning background, walk you through key concepts, and
+	  bring you up to speed with recent developments.`,
+          cta: {
+            label: 'Go to this course',
+            url: '/textbook-beta/course/quantum-machine-learning-course',
+            segment: { cta: 'quantum-machine-learning', location: 'course' }
+          }
+        },
+       {
           image: '/images/textbook-beta/traditional-algorithms.png',
           title: 'Traditional Algorithms & Protocols',
           description: `Know your bits from your qubits? Start learning
@@ -106,18 +119,6 @@ export default class StartLearningSection extends Vue {
             label: 'Under construction',
             url: '/textbook-beta',
             segment: { cta: 'quantum-hardware', location: 'course' }
-          }
-        },
-        {
-          image: '/images/textbook-beta/quantum-machine-learning.png',
-          title: 'Quantum machine learning',
-          description: `This course is currently under construction
-          and is an ongoing effort. Please check back after the beta phase
-          for an update on the progress of this course.`,
-          cta: {
-            label: 'Under construction',
-            url: '/textbook-beta',
-            segment: { cta: 'quantum-machine-learning', location: 'course' }
           }
         }
       ]
