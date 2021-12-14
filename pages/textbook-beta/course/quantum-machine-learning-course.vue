@@ -81,49 +81,49 @@ export default class QuantumMachineLearningCoursePage extends QiskitPage {
       image: 'parameterized-quantum-circuits.png',
       label: 'Parameterized quantum circuits',
       segment: { cta: 'parameterized-quantum-circuits', location: 'course' },
-      url: 'https://learn.qiskit.org/course/quantum-machine-learning/parameterized-quantum-circuits'
+      url: 'https://learn.qiskit.org/course/machine-learning/parameterized-quantum-circuits'
     },
     {
       image: 'data-encoding.png',
       label: 'Data encoding',
       segment: { cta: 'data-encdoing', location: 'course' },
-      url: 'https://learn.qiskit.org/course/quantum-machine-learning/data-encoding'
+      url: 'https://learn.qiskit.org/course/machine-learning/data-encoding'
     },
     {
       image: 'training-parameterized-quantum-circuits.png',
       label: 'Training parameterized quantum circuits',
       segment: { cta: 'Describing quantum computers', location: 'course' },
-      url: 'https://learn.qiskit.org/course/quantum-machine-learning/describing-quantum-computers'
+      url: 'https://learn.qiskit.org/course/machine-learning/describing-quantum-computers'
     },
     {
       image: 'supervised-learning.png',
       label: 'Supervised learning',
       segment: { cta: 'supervised-learning', location: 'course' },
-      url: 'https://learn.qiskit.org/course/quantum-machine-learning/supervised-learning'
+      url: 'https://learn.qiskit.org/course/machine-learning/supervised-learning'
     },
     {
       image: 'variational-classification.png',
       label: 'Variational classification',
       segment: { cta: 'variational-classification', location: 'course' },
-      url: 'https://learn.qiskit.org/course/quantum-machine-learning/variational-classification'
+      url: 'https://learn.qiskit.org/course/machine-learning/variational-classification'
     },
     {
       image: 'quantum-feature-maps-kernels.png',
       label: 'Quantum feature maps and kernels',
       segment: { cta: 'quantum-feature-maps-kernels', location: 'course' },
-      url: 'https://learn.qiskit.org/course/quantum-machine-learning/quantum-feature-maps-kernels'
+      url: 'https://learn.qiskit.org/course/machine-learning/quantum-feature-maps-kernels'
     },
     {
       image: 'quantum-generative-adversarial-networks.png',
       label: 'Quantum generative adversarial networks',
       segment: { cta: 'quantum-generative-adversarial-networks', location: 'course' },
-      url: 'https://learn.qiskit.org/course/quantum-machine-learning/quantum-generative-adversarial-networks'
+      url: 'https://learn.qiskit.org/course/machine-learning/quantum-generative-adversarial-networks'
     },
     {
       image: 'project.png',
       label: 'Project',
       segment: { cta: 'project', location: 'course' },
-      url: 'https://learn.qiskit.org/course/quantum-machine-learning/project'
+      url: 'https://learn.qiskit.org/course/machine-learning/project'
     }
   ]
 
