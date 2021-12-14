@@ -128,7 +128,7 @@ export default class QuantumMachineLearningCoursePage extends QiskitPage {
   ]
 
   quantumMachineLearningCoursePrerequisites: Prerequisite[] = [
-     {
+    {
       title: 'Introduction course',
       description:
         'Not sure where to start? Whether you\'re keen to start your journey into quantum computing, or just curious as to what it\'s all about, this path is for you.',
