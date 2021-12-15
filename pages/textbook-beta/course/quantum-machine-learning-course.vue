@@ -8,17 +8,13 @@
         {{ headerTitle }}
       </template>
       <template slot="description">
-        <p
-          v-for="(paragraph, index) in headerDescription"
-          :key="index"
-          v-text="paragraph"
-        />
+        <p v-text="headerDescription" />
       </template>
       <template slot="image">
         <img class="app-page-header-with-img__image" :src="headerImg">
       </template>
     </AppPageHeaderWithImage>
-    <PrerequisiteMaterialSection class="quantum-machine-learning-course-page__section" :data="quantumMachineLearningCoursePrerequisites" />
+    <PrerequisiteMaterialSection class="quantum-machine-learning-course-page__section" :data="qmlCoursePrerequisites" />
     <CoursePagesSection class="quantum-machine-learning-course-page__section" :courses="courses" :img-base="imageUrlBase" />
   </main>
 </template>
@@ -27,7 +23,7 @@
 import { Course, Prerequisite } from 'constants/textbookBetaContent'
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
-import { GeneralLink, textbookBetaQuantumMachineLearningCourseStartLearningUrl } from '~/constants/appLinks'
+import { GeneralLink, textbookBetaQMLStartLearningUrl } from '~/constants/appLinks'
 
 @Component({
   layout: 'default-max',
@@ -41,7 +37,7 @@ export default class QuantumMachineLearningCoursePage extends QiskitPage {
   routeName: string = 'quantum-machine-learning-course'
 
   headerTitle = 'Quantum machine learning'
-  headerDescription = [`This course contains around eight hours of content, and
+  headerDescription = `This course contains around eight hours of content, and
   is aimed at self-learners who are comfortable with undergraduate-level
   mathematics and quantum computing fundamentals. This course will take you
   through key concepts in quantum machine learning, such as parameterized
@@ -50,7 +46,7 @@ export default class QuantumMachineLearningCoursePage extends QiskitPage {
   and you'll be familiar with recent developments in both supervised and
   unsupervised learning such as quantum kernels and general adversarial networks.
   This course finishes with a project that you can use to showcase what you've
-  learnt.`]
+  learnt.`
 
   headerImg = '/images/textbook-beta/course/quantum-machine-learning-course/header.png'
 
@@ -63,7 +59,7 @@ export default class QuantumMachineLearningCoursePage extends QiskitPage {
   }
 
   startLearningCTA: GeneralLink = {
-    url: textbookBetaQuantumMachineLearningCourseStartLearningUrl,
+    url: textbookBetaQMLStartLearningUrl,
     label: 'Start learning',
     segment: {
       cta: 'quantum-machine-learning', location: 'course'
@@ -75,7 +71,7 @@ export default class QuantumMachineLearningCoursePage extends QiskitPage {
       image: 'introduction.png',
       label: 'Introduction',
       segment: { cta: 'qml-introduction', location: 'course' },
-      url: textbookBetaQuantumMachineLearningCourseStartLearningUrl
+      url: textbookBetaQMLStartLearningUrl
     },
     {
       image: 'parameterized-quantum-circuits.png',
@@ -127,7 +123,7 @@ export default class QuantumMachineLearningCoursePage extends QiskitPage {
     }
   ]
 
-  quantumMachineLearningCoursePrerequisites: Prerequisite[] = [
+  qmlCoursePrerequisites: Prerequisite[] = [
     {
       title: 'Introduction course',
       description:
