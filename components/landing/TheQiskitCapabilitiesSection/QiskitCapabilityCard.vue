@@ -39,10 +39,6 @@ export default class QiskitCapabilityCard extends Vue {
 .qiskit-capability-card {
   display: flex;
 
-  @include mq($until: medium) {
-    flex-direction: column;
-  }
-
   &__container {
     display: flex;
 
