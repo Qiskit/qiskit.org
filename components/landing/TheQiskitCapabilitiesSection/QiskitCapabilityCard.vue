@@ -28,9 +28,9 @@ import { Component, Prop } from 'vue-property-decorator'
 
 @Component
 export default class QiskitCapabilityCard extends Vue {
-  @Prop(String) thumbnailResource!: string
-  @Prop(String) title!: string
-  @Prop(String) description!: string
+  @Prop({ type: String, required: true }) thumbnailResource!: string
+  @Prop({ type: String, required: true }) title!: string
+  @Prop({ type: String, required: true }) description!: string
   @Prop({ type: Object, required: false }) link!: any
 }
 </script>
