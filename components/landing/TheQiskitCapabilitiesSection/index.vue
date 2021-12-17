@@ -140,11 +140,10 @@ $cta-max-width: 14rem;
   }
 
   &__card {
-    min-height: 12rem;
     margin-bottom: $spacing-07;
 
     &:last-child {
-      margin-bottom: 10rem;
+      margin-bottom: $spacing-13;
 
       @include mq($until: medium) {
         margin-bottom: $spacing-07;

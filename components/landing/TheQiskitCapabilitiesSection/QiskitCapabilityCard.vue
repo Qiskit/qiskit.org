@@ -98,14 +98,7 @@ $card-img-width: 10rem;
   }
 
   &__description {
-    @include mq($until: large) {
-      padding-bottom: $spacing-05;
-    }
-
-    @include mq($until: medium) {
-      padding-bottom: 0;
-      margin-bottom: $spacing-05;
-    }
+    padding-bottom: $spacing-05;
   }
 }
 </style>
