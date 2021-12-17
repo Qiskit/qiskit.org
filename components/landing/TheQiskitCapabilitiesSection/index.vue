@@ -41,11 +41,13 @@
 <script lang="ts">
 import { Component, Mixins } from 'vue-property-decorator'
 import ScrollSectionsMixin from '~/mixins/scrollBetweenSections'
+import { CtaClickedEventProp } from '~/constants/segment'
 
 interface QiskitCapability {
   title: string
   description: string
   thumbnailResource: string
+  segment: CtaClickedEventProp
 }
 
 @Component
@@ -84,7 +86,8 @@ export default class TheQiskitCapabilitiesSection extends Mixins(ScrollSectionsM
     {
       title: 'Try it yourself',
       description: 'Ready to explore Qiskit’s capabilities for yourself? Copy the code to the right of this paragraph and try running it in your local Python environment. You can also click the link to the IBM Quantum Lab and test it there.',
-      thumbnailResource: '/images/landing-page/med_02_1.png'
+      thumbnailResource: '/images/landing-page/med_02_1.png',
+      segment: { cta: 'try-it-yourself', location: 'homepage-capabilities-section' }
     }
   ]
 

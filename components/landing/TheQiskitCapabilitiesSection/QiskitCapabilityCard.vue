@@ -25,13 +25,14 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
+import { GeneralLink } from '~/constants/appLinks'
 
 @Component
 export default class QiskitCapabilityCard extends Vue {
   @Prop({ type: String, required: true }) thumbnailResource!: string
   @Prop({ type: String, required: true }) title!: string
   @Prop({ type: String, required: true }) description!: string
-  @Prop({ type: Object, required: false }) link!: any
+  @Prop({ type: Object, required: false }) link: GeneralLink | undefined
 }
 </script>
 
@@ -69,16 +70,14 @@ $card-img-width: 10rem;
     &__media {
       display: block;
       width: 100%;
-      min-width: $card-img-width;
-
+      width: $card-img-width;
     }
 
     &__mobile {
       display: none;
       @include mq($until: large) {
         display: block;
-        width: 100%;
-        max-width: $card-img-width;
+        width: $card-img-width;
         margin-bottom: $spacing-05;
       }
     }
