@@ -86,7 +86,7 @@ export default class TheQiskitCapabilitiesSection extends Mixins(ScrollSectionsM
     },
     {
       title: 'Try it yourself',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ullamcorper morbi libero tincidunt nisl eleifend. Diam netus cum ac in. Dolor praesent orci cras posuere consectetur purus ullamcorper.',
+      description: 'Ready to explore Qiskit’s capabilities for yourself? Copy the code to the right of this paragraph and try running it in your local Python environment. You can also click the link to the IBM Quantum Lab and test it there.',
       thumbnailResource: '/images/landing-page/med_02_1.png'
     }
   ]
