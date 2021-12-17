@@ -52,12 +52,12 @@ export default class CodeCell extends Vue {
 
     &_active {
       opacity: 1;
-      border-left: 0.125rem solid $border-active-color;
+      border-color: $border-active-color;
     }
 
     @include mq($until: medium) {
       opacity: 1;
-      border-left: 0.125rem solid $border-active-color;
+      border-color: $border-active-color;
     }
   }
 
