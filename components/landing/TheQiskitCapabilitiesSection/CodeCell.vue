@@ -56,19 +56,13 @@ export default class CodeCell extends Vue {
     }
 
     @include mq($until: medium) {
-      opacity: 1;
-      border-color: $border-active-color;
+      border-color: transparent;
     }
   }
 
   &__comment,
   &__string {
     color: $text-active-color;
-  }
-
-  &__line {
-    word-break: break-word;
-    white-space: normal;
   }
 }
 

@@ -43,11 +43,8 @@ import { Component, Mixins } from 'vue-property-decorator'
 import ScrollSectionsMixin from '~/mixins/scrollBetweenSections'
 
 interface QiskitCapability {
-  /** The visible title of the feature */
   title: string
-  /** The visible description of the feature */
   description: string
-  /** The image of the feature */
   thumbnailResource: string
 }
 
@@ -119,15 +116,12 @@ export default class TheQiskitCapabilitiesSection extends Mixins(ScrollSectionsM
 </script>
 
 <style lang="scss" scoped>
-@import '~carbon-components/scss/globals/scss/typography';
-
 $cta-max-width: 14rem;
 
 .qiskit-capabilities-section {
   padding-bottom: $spacing-09;
 
   &__container {
-    display: flex;
     padding-top: $spacing-05;
     padding-bottom: $spacing-09;
 
@@ -139,7 +133,6 @@ $cta-max-width: 14rem;
   &__capabilities {
     display: flex;
     align-items: flex-start;
-    width: 100%;
 
     @include mq($until: medium) {
       flex-direction: column;
@@ -207,11 +200,9 @@ $cta-max-width: 14rem;
   }
 
   &__copy-button {
-    display: flex;
     width: 100%;
     max-width: $cta-max-width;
     padding-right: $spacing-05;
-    justify-content: space-between;
     background-size: 200% 100%;
     background-position-x: 100%;
     background-image: linear-gradient(90deg, $button-background-color-light 0%, $button-background-color-light 50%, $background-color-secondary 50%, $background-color-secondary 100%);

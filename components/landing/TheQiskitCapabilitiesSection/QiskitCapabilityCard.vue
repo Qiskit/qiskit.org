@@ -56,7 +56,6 @@ export default class QiskitCapabilityCard extends Vue {
   }
 
   &__thumbnail {
-    width: 100%;
     max-width: 10rem;
     margin-right: $spacing-07;
 
@@ -91,7 +90,6 @@ export default class QiskitCapabilityCard extends Vue {
     padding-right: $spacing-07;
 
     @include mq($until: large) {
-      flex: 0 0 auto;
       padding-right: 0;
     }
 
@@ -102,8 +100,6 @@ export default class QiskitCapabilityCard extends Vue {
   }
 
   &__description {
-    flex: 1;
-
     @include mq($until: large) {
       padding-bottom: $spacing-05;
     }
