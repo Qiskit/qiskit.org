@@ -36,6 +36,8 @@ export default class QiskitCapabilityCard extends Vue {
 </script>
 
 <style lang="scss" scoped>
+$card-img-width: 10rem;
+
 .qiskit-capability-card {
   display: flex;
 
@@ -52,7 +54,7 @@ export default class QiskitCapabilityCard extends Vue {
   }
 
   &__thumbnail {
-    max-width: 10rem;
+    width: $card-img-width;
     margin-right: $spacing-07;
 
     @include mq($until: large) {
@@ -67,7 +69,7 @@ export default class QiskitCapabilityCard extends Vue {
     &__media {
       display: block;
       width: 100%;
-      min-width: 10rem;
+      min-width: $card-img-width;
 
     }
 
@@ -76,7 +78,7 @@ export default class QiskitCapabilityCard extends Vue {
       @include mq($until: large) {
         display: block;
         width: 100%;
-        max-width: 10rem;
+        max-width: $card-img-width;
         margin-bottom: $spacing-05;
       }
     }
