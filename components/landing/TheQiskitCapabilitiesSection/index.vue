@@ -130,7 +130,8 @@ $cta-max-width: 14rem;
     display: flex;
     padding-top: $spacing-05;
     padding-bottom: $spacing-09;
-   @include mq($until: medium) {
+
+    @include mq($until: medium) {
       padding-bottom: $spacing-05;
     }
   }
@@ -139,6 +140,7 @@ $cta-max-width: 14rem;
     display: flex;
     align-items: flex-start;
     width: 100%;
+
     @include mq($until: medium) {
       flex-direction: column;
     }

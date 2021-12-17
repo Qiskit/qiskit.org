@@ -1,5 +1,5 @@
 <template>
-  <article class="qiskit-capability-card">
+  <article>
     <div class="qiskit-capability-card__container">
       <div class="qiskit-capability-card__thumbnail">
         <img class="qiskit-capability-card__thumbnail__media" :src="thumbnailResource">
