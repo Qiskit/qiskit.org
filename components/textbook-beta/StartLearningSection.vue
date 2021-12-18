@@ -84,7 +84,7 @@ export default class StartLearningSection extends Vue {
           }
         },
         {
-          image: '/images/textbook-beta/quantum-machine-learning.png',
+          image: '/images/textbook-beta/machine-learning.png',
           title: 'Quantum machine learning',
           description: `Want to learn about this exciting, developing field? If
           you have the quantum computing basics down, this course will give you
@@ -92,8 +92,8 @@ export default class StartLearningSection extends Vue {
           bring you up to speed with recent developments.`,
           cta: {
             label: 'Go to this course',
-            url: '/textbook-beta/course/quantum-machine-learning-course',
-            segment: { cta: 'quantum-machine-learning', location: 'course' }
+            url: '/textbook-beta/course/machine-learning-course',
+            segment: { cta: 'machine-learning', location: 'course' }
           }
         },
         {

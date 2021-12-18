@@ -110,6 +110,12 @@ export default class QuantumMachineLearningCoursePage extends QiskitPage {
       url: 'https://learn.qiskit.org/course/machine-learning/quantum-feature-maps-kernels'
     },
     {
+      image: 'unsupervised-learning.png',
+      label: 'Unsupervised learning',
+      segment: { cta: 'unsupervised-learning', location: 'course' },
+      url: 'https://learn.qiskit.org/course/machine-learning/unsupervised-learning'
+    },
+    {
       image: 'quantum-generative-adversarial-networks.png',
       label: 'Quantum generative adversarial networks',
       segment: { cta: 'quantum-generative-adversarial-networks', location: 'course' },
