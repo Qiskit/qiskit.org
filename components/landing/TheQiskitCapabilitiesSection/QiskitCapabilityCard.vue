@@ -53,7 +53,6 @@ $card-img-width: 10rem;
   }
 
   &__thumbnail {
-    width: $card-img-width;
     margin-right: $spacing-07;
 
     @include mq($until: large) {
