@@ -65,10 +65,9 @@ export default class CodeCell extends Vue {
     color: $text-active-color;
   }
 
-    &__line {
+  &__line {
     word-break: break-word;
     white-space: normal;
   }
 }
-
 </style>
