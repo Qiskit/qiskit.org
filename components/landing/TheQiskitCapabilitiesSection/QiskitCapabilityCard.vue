@@ -40,8 +40,6 @@ export default class QiskitCapabilityCard extends Vue {
 $card-img-width: 10rem;
 
 .qiskit-capability-card {
-  display: flex;
-
   &__container {
     display: flex;
 
