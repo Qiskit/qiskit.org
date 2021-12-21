@@ -32,7 +32,7 @@ export default class QiskitCapabilityCard extends Vue {
   @Prop({ type: String, required: true }) thumbnailResource!: string
   @Prop({ type: String, required: true }) title!: string
   @Prop({ type: String, required: true }) description!: string
-  @Prop({ type: Object, required: false }) link: GeneralLink | undefined
+  @Prop({ type: Object, required: false, default: undefined }) link: GeneralLink | undefined
 }
 </script>
 
