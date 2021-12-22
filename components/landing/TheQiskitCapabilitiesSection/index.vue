@@ -60,7 +60,7 @@ export default class TheQiskitCapabilitiesSection extends Mixins(ScrollSectionsM
       link: {
         url: 'https://qiskit.org/documentation/apidoc/circuit_library.html',
         label: 'Learn more',
-        segment: { cta: 'feature-circuit', location: 'homepage-capabilities-section' }
+        segment: { cta: 'circuit-library', location: 'homepage-capabilities' }
       }
     },
     {
@@ -70,7 +70,7 @@ export default class TheQiskitCapabilitiesSection extends Mixins(ScrollSectionsM
       link: {
         url: 'https://qiskit.org/documentation/apidoc/transpiler.html',
         label: 'Learn more',
-        segment: { cta: 'transpiler', location: 'homepage-capabilities-section' }
+        segment: { cta: 'transpiler', location: 'homepage-capabilities' }
       }
     },
     {
@@ -80,27 +80,27 @@ export default class TheQiskitCapabilitiesSection extends Mixins(ScrollSectionsM
       link: {
         url: 'https://qiskit.org/documentation/apidoc/ibmq_provider.html',
         label: 'Learn more',
-        segment: { cta: 'run-on-hardware', location: 'homepage-capabilities-section' }
+        segment: { cta: 'run-on-hardware', location: 'homepage-capabilities' }
       }
     },
     {
       title: 'Try it yourself',
       description: 'Ready to explore Qiskit’s capabilities for yourself? Copy the code to the right of this paragraph and try running it in your local Python environment. You can also click the link to the IBM Quantum Lab and test it there.',
       thumbnailResource: '/images/landing-page/med_02_1.png',
-      segment: { cta: 'try-it-yourself', location: 'homepage-capabilities-section' }
+      segment: { cta: 'try-it-yourself', location: 'homepage-capabilities' }
     }
   ]
 
   quantumLabCTA = {
     url: 'https://quantum-computing.ibm.com/lab/files/qiskit-textbook/getting-started/example.ipynb',
     label: 'Open in Quantum Lab',
-    segment: { cta: 'quantum-lab', location: 'homepage-capabilities-section' }
+    segment: { cta: 'open-in-quantum-lab', location: 'homepage-capabilities' }
   }
 
   copyCodeCTA = {
     url: '',
     label: 'Copy code',
-    segment: { cta: 'copy-code', location: 'homepage-capabilities-section' }
+    segment: { cta: 'copy-code', location: 'homepage-capabilities' }
   }
 
   isActiveSection (item: QiskitCapability, index: number): boolean {
