@@ -1,7 +1,7 @@
 <template>
-  <main class="quantum-machine-learning-course-page">
+  <main class="machine-learning-course-page">
     <TextbookBetaContentMenuSection
-      class="quantum-machine-learning-course-page__content-menu"
+      class="machine-learning-course-page__content-menu"
     />
     <AppPageHeaderWithImage :cta="startLearningCTA" :back-link="backToTextbookHomeLink">
       <template slot="title">
@@ -14,8 +14,8 @@
         <img class="app-page-header-with-img__image" :src="headerImg">
       </template>
     </AppPageHeaderWithImage>
-    <PrerequisiteMaterialSection class="quantum-machine-learning-course-page__section" :data="qmlCoursePrerequisites" />
-    <CoursePagesSection class="quantum-machine-learning-course-page__section" :courses="courses" :img-base="imageUrlBase" />
+    <PrerequisiteMaterialSection class="machine-learning-course-page__section" :data="qmlCoursePrerequisites" />
+    <CoursePagesSection class="machine-learning-course-page__section" :courses="courses" :img-base="imageUrlBase" />
   </main>
 </template>
 
@@ -34,7 +34,7 @@ import { GeneralLink, textbookBetaQMLStartLearningUrl } from '~/constants/appLin
   }
 })
 export default class QuantumMachineLearningCoursePage extends QiskitPage {
-  routeName: string = 'quantum-machine-learning-course'
+  routeName: string = 'machine-learning-course'
 
   headerTitle = 'Quantum machine learning'
   headerDescription = `This course contains around eight hours of content, and
@@ -48,7 +48,7 @@ export default class QuantumMachineLearningCoursePage extends QiskitPage {
   This course finishes with a project that you can use to showcase what you've
   learnt.`
 
-  headerImg = '/images/textbook-beta/course/quantum-machine-learning-course/header.png'
+  headerImg = '/images/textbook-beta/course/machine-learning-course/header.png'
 
   backToTextbookHomeLink: GeneralLink = {
     url: '/textbook-beta',
@@ -62,7 +62,7 @@ export default class QuantumMachineLearningCoursePage extends QiskitPage {
     url: textbookBetaQMLStartLearningUrl,
     label: 'Start learning',
     segment: {
-      cta: 'quantum-machine-learning', location: 'course'
+      cta: 'machine-learning', location: 'course'
     }
   }
 
@@ -162,12 +162,12 @@ export default class QuantumMachineLearningCoursePage extends QiskitPage {
     }
   ]
 
-  imageUrlBase = '/images/textbook-beta/course/quantum-machine-learning-course'
+  imageUrlBase = '/images/textbook-beta/course/machine-learning-course'
 }
 </script>
 
 <style lang="scss" scoped>
-.quantum-machine-learning-course-page {
+.machine-learning-course-page {
   &__section {
     @include contained();
 
