@@ -2,7 +2,13 @@
   <section class="start-locally">
     <h3>Start locally</h3>
     <p class="start-locally__introduction">
-      To install Qiskit locally, you will need
+      To
+      <AppLink
+        url="https://qiskit.org/documentation/getting_started.html#installation"
+      >
+        install Qiskit locally,
+      </AppLink>
+      you will need
       <AppLink
         url="https://www.python.org/downloads/"
       >
