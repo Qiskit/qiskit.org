@@ -4,21 +4,19 @@ name: PR Preview
 on: [pull_request]
 
 jobs:
-  preview:
+  docker-image-preview:
     # Prevents action to be executed by forks and drafts
     if: github.event.pull_request.draft == false && github.event.pull_request.head.repo.full_name == github.repository
-    runs-on: ubuntu-latest
-    docker-image-preview:
-      uses: Qiskit/gh-actions/.github/workflows/code-engine-preview.yml@main
-      with:
-        container_registry_namespace: community-digital
-        code_engine_project: qiskit.org-preview
-        code_engine_registry_secret: ibm-container-registry
-        docker_image_name: qiskit-org
-        docker_image_port: "3000"
-        ibmcloud_region: us-south
-        ibmcloud_resource_group: Quantum Community
-        pr_tag: pr-${{ github.event.pull_request.number }}
-      secrets:
-        ibmcloud_account: ${{ secrets.IBMCLOUD_ACCOUNT }}
-        ibmcloud_api_key: ${{ secrets.IBMCLOUD_API_KEY }}
+    uses: Qiskit/gh-actions/.github/workflows/code-engine-preview.yml@main
+    with:
+      container_registry_namespace: community-digital
+      code_engine_project: qiskit.org-preview
+      code_engine_registry_secret: ibm-container-registry
+      docker_image_name: qiskit-org
+      docker_image_port: "3000"
+      ibmcloud_region: us-south
+      ibmcloud_resource_group: Quantum Community
+      pr_tag: pr-${{ github.event.pull_request.number }}
+    secrets:
+      ibmcloud_account: ${{ secrets.IBMCLOUD_ACCOUNT }}
+      ibmcloud_api_key: ${{ secrets.IBMCLOUD_API_KEY }}    
