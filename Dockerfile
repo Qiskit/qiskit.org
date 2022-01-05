@@ -1,8 +1,8 @@
 FROM node:14-alpine
 WORKDIR /qiskit.org
 
-COPY package.json .
-RUN npm install
+COPY package*.json .
+RUN npm ci
 
 COPY app app/
 COPY assets assets/
@@ -23,9 +23,11 @@ COPY .eslintrc.js jest.config.js jest.setup.js \
      ./
 COPY tests tests/
 COPY components components/
-RUN npm run build
+RUN npm run generate
 
 EXPOSE 3000
-ENV HOST=0.0.0.0
-ENV NODE_ENV=development
-CMD [ "npx", "nuxt", "start" ]
+
+ENV NUXT_HOST=0.0.0.0
+ENV NUXT_PORT=3000
+
+CMD [ "npm", "start" ]

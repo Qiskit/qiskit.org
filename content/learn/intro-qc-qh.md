@@ -288,7 +288,7 @@ In order to make the best out of these lectures, we strongly recommend reviewing
         (Lecturer: Zlatko Minev)
       </td>
       <td>
-        <a href="https://youtu.be/ruFzh1NpNF4?list=PLOFEBzvs-VvrXTMy5Y2IqmSaUjfnhvBHR">Lecture Video</a>
+        <a href="https://youtu.be/_IpCwMvc0dA?list=PLOFEBzvs-VvrXTMy5Y2IqmSaUjfnhvBHR">Lecture Video</a>
       </td>
     </tr>
     <tr>
