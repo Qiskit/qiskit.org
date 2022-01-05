@@ -1,7 +1,7 @@
 FROM node:14-alpine
 WORKDIR /qiskit.org
 
-COPY package*.json .
+COPY package*.json ./
 RUN npm ci
 
 COPY app app/
