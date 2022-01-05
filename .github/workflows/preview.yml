@@ -9,9 +9,10 @@ jobs:
     if: github.event.pull_request.draft == false && github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     env:
-      PR_TAG: pr-${{ github.event.pull_request.number }}
+      CONTAINER_REGISTRY_NAMESPACE: community-digital
       DOCKER_IMAGE_NAME: qiskit-org
       DOCKER_IMAGE_PORT: "3000"
+      PR_TAG: pr-${{ github.event.pull_request.number }}
 
       IBMCLOUD_ACCOUNT: ${{ secrets.IBMCLOUD_ACCOUNT }}
       IBMCLOUD_API_KEY: ${{ secrets.IBMCLOUD_API_KEY }}
@@ -36,22 +37,17 @@ jobs:
           auto_inactive: true
           ref: ${{ github.event.pull_request.head.ref }}
 
-      - name: Log-in into IBM Container Registry
-        uses: docker/login-action@v1
+      - name: Build and push Docker image to IBM container registry
+        uses: Qiskit/gh-actions/.github/workflows/build-publish-docker-image.yml@main
         with:
-          registry: icr.io
-          username: iamapikey
-          password: ${{ env.IBMCLOUD_API_KEY }}
-
-      - name: Build and push to IBM registry
-        uses: docker/build-push-action@v2.6.1
-        with:
-          push: true
-          tags: ${{ env.DOCKER_IMAGE_TAG }}
-          cache-from: type=registry,ref=${{ env.DOCKER_IMAGE_TAG }}
-          cache-to: type=inline
-        env:
-          DOCKER_IMAGE_TAG: icr.io/community-digital/${{ env.DOCKER_IMAGE_NAME }}:${{ env.PR_TAG }}
+          CONTAINER_REGISTRY_NAMESPACE: ${{ env.CONTAINER_REGISTRY_NAMESPACE }}
+          DOCKER_IMAGE_NAME: ${{ env.DOCKER_IMAGE_NAME }}
+          IBMCLOUD_REGION: ${{ env.IBMCLOUD_REGION }}
+          IBMCLOUD_RESOURCE_GROUP: ${{ env.IBMCLOUD_RESOURCE_GROUP }}
+          PR_TAG: ${{ env.PR_TAG }}
+        secrets:
+          IBMCLOUD_ACCOUNT: ${{ env.IBMCLOUD_ACCOUNT }}
+          IBMCLOUD_API_KEY: ${{ env.IBMCLOUD_API_KEY }}
 
       - name: Setup IBM Cloud CLI
         run: |
