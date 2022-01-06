@@ -87,8 +87,8 @@ export default class StartLearningSection extends Vue {
           image: '/images/textbook-beta/machine-learning.png',
           title: 'Quantum machine learning',
           description: `Want to learn about this exciting, developing field? If
-          you have the quantum computing basics down, this course will give you
-          the machine learning background, walk you through key concepts, and
+          you're familiar with quantum computing basics, this course will give
+          you a primer on machine learning, walk you through key concepts, and
           bring you up to speed with recent developments.`,
           cta: {
             label: 'Go to this course',
