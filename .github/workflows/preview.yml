@@ -1,10 +1,10 @@
-name: PR Preview
+name: Preview
 
 # run when a pull request is made
 on: [pull_request]
 
 jobs:
-  preview:
+  code-engine:
     # Prevents action to be executed by forks and drafts
     if: github.event.pull_request.draft == false && github.event.pull_request.head.repo.full_name == github.repository
     uses: Qiskit/gh-actions/.github/workflows/code-engine-preview.yml@main
