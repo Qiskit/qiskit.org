@@ -4,18 +4,37 @@ name: PR Preview
 on: [pull_request]
 
 jobs:
-  preview:
+  setup:
     # Prevents action to be executed by forks and drafts
     if: github.event.pull_request.draft == false && github.event.pull_request.head.repo.full_name == github.repository
-    uses: Qiskit/gh-actions/.github/workflows/code-engine-preview.yml@main
+    uses: Qiskit/gh-actions/.github/workflows/preview-setup.yml@split-workflow
     with:
-      container_registry_namespace: community-digital
-      code_engine_project: qiskit.org-preview
-      code_engine_registry_secret: ibm-container-registry
       docker_image_name: qiskit-org
-      docker_image_port: "3000"
       ibmcloud_region: us-south
       ibmcloud_resource_group: Quantum Community
     secrets:
       ibmcloud_account: ${{ secrets.IBMCLOUD_ACCOUNT }}
-      ibmcloud_api_key: ${{ secrets.IBMCLOUD_API_KEY }}    
+      ibmcloud_api_key: ${{ secrets.IBMCLOUD_API_KEY }}  
+  build-push:
+    # Prevents action to be executed by forks and drafts
+    if: github.event.pull_request.draft == false && github.event.pull_request.head.repo.full_name == github.repository
+    uses: Qiskit/gh-actions/.github/workflows/qiskit-org-build-push.yml@split-workflow
+    with:
+      container_registry_namespace: community-digital
+      docker_image_name: qiskit-org
+    secrets:
+      ibmcloud_api_key: ${{ secrets.IBMCLOUD_API_KEY }}
+  deploy:
+    # Prevents action to be executed by forks and drafts
+    if: github.event.pull_request.draft == false && github.event.pull_request.head.repo.full_name == github.repository
+    uses: Qiskit/gh-actions/.github/workflows/preview-deploy.yml@split-workflow
+    with:
+      container_registry_namespace: community-digital
+      code_engine_project: qiskit.org-preview
+      code_engine_registry_secret: ibm-container-registry
+      depoyment_id: ${{ needs.setup.outputs.depoyment_id }}
+      docker_image_name: qiskit-org
+      docker_image_port: "3000"
+    secrets:
+      ibmcloud_account: ${{ secrets.IBMCLOUD_ACCOUNT }}
+      ibmcloud_api_key: ${{ secrets.IBMCLOUD_API_KEY }}
