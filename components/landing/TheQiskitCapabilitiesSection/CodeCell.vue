@@ -44,20 +44,8 @@ export default class CodeCell extends Vue {
   padding: $spacing-05 0;
 
   &__block {
-    opacity: 0.4;
-    border-left: 0.125rem solid transparent;
     padding: $spacing-04 $spacing-05;
     margin: -$spacing-03 0;
-    transition: all 0.2s ease-in;
-
-    &_active {
-      opacity: 1;
-      border-color: $border-active-color;
-    }
-
-    @include mq($until: medium) {
-      border-color: transparent;
-    }
   }
 
   &__comment,
