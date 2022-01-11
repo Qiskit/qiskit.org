@@ -28,12 +28,10 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
+import { Component} from 'vue-property-decorator'
 
 @Component
-export default class CodeCell extends Vue {
-  @Prop({ type: Array, default: [true, false, false] }) activeBlocks!: boolean[]
-}
+export default class CodeCell extends Vue {}
 </script>
 
 <style lang="scss" scoped>
