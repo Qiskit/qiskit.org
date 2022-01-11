@@ -16,7 +16,7 @@
           />
         </div>
         <div class="qiskit-capabilities-section__scrolling-ui">
-          <CodeCell :active-blocks="capabilities.map((item, index) => isActiveSection(item, index))" />
+          <CodeCell />
         </div>
       </div>
     </div>
@@ -41,14 +41,6 @@
 <script lang="ts">
 import { Component, Mixins } from 'vue-property-decorator'
 import ScrollSectionsMixin from '~/mixins/scrollBetweenSections'
-import { CtaClickedEventProp } from '~/constants/segment'
-
-interface QiskitCapability {
-  title: string
-  description: string
-  thumbnailResource: string
-  segment: CtaClickedEventProp
-}
 
 @Component
 export default class TheQiskitCapabilitiesSection extends Mixins(ScrollSectionsMixin) {
@@ -101,14 +93,6 @@ export default class TheQiskitCapabilitiesSection extends Mixins(ScrollSectionsM
     url: '',
     label: 'Copy code',
     segment: { cta: 'copy-code', location: 'homepage-capabilities' }
-  }
-
-  isActiveSection (item: QiskitCapability, index: number): boolean {
-    if (this.capabilities[this.capabilities.length - 1].title === this.activeSection) {
-      return true
-    }
-
-    return item.title === this.activeSection || (this.activeSection === '' && index === 0)
   }
 
   copyToClipboard (): void {
