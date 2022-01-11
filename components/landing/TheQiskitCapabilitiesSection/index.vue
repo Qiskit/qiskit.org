@@ -41,14 +41,6 @@
 <script lang="ts">
 import { Component, Mixins } from 'vue-property-decorator'
 import ScrollSectionsMixin from '~/mixins/scrollBetweenSections'
-import { CtaClickedEventProp } from '~/constants/segment'
-
-interface QiskitCapability {
-  title: string
-  description: string
-  thumbnailResource: string
-  segment: CtaClickedEventProp
-}
 
 @Component
 export default class TheQiskitCapabilitiesSection extends Mixins(ScrollSectionsMixin) {
