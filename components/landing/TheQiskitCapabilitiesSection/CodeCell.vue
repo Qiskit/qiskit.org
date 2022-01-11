@@ -1,13 +1,13 @@
 <template>
   <code class="code-cell">
-    <div class="code-cell__block" :class="{'code-cell__block_active' : activeBlocks[0]}">
+    <div class="code-cell__block">
       <pre>import qiskit</pre>
       <pre>&nbsp;</pre>
       <pre><span class="code-cell__comment"># Qiskit quantum circuits libraries</span></pre>
       <pre class="code-cell__line">quantum_circuit = qiskit.circuit.library.QuantumVolume(5) <span class="code-cell__comment">#1</span> <span class="code-cell__comment">#3</span></pre>
       <pre class="code-cell__line">quantum_circuit.draw()</pre>
     </div>
-    <div class="code-cell__block" :class="{'code-cell__block_active' : activeBlocks[1]}">
+    <div class="code-cell__block">
       <pre><span class="code-cell__comment"># prepare your circuit to run</span></pre>
       <pre>from qiskit import IBMQ <span class="code-cell__comment">#2</span></pre>
       <pre>&nbsp;</pre>
@@ -17,7 +17,7 @@
       <pre class="code-cell__line">optimized_circuit = qiskit.transpile(quantum_circuit, backend) <span class="code-cell__comment">#5</span></pre>
       <pre class="code-cell__line">optimized_circuit.draw()</pre>
     </div>
-    <div class="code-cell__block" :class="{'code-cell__block_active' : activeBlocks[2]}">
+    <div class="code-cell__block">
       <pre><span class="code-cell__comment"># run in real hardware</span></pre>
       <pre class="code-cell__line">job = backend.run(optimized_circuit)</pre>
       <pre class="code-cell__line">retrieved_job = backend.retrieve_job(job.job_id())</pre>
