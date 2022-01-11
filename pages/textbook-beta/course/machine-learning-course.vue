@@ -89,7 +89,7 @@ export default class QuantumMachineLearningCoursePage extends QiskitPage {
       image: 'training-parameterized-quantum-circuits.png',
       label: 'Training parameterized quantum circuits',
       segment: { cta: 'Describing quantum computers', location: 'course' },
-      url: 'https://learn.qiskit.org/course/machine-learning/describing-quantum-computers'
+      url: 'https://learn.qiskit.org/course/machine-learning/training-quantum-circuits'
     },
     {
       image: 'supervised-learning.png',
