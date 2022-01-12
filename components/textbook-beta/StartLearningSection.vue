@@ -84,40 +84,16 @@ export default class StartLearningSection extends Vue {
           }
         },
         {
-          image: '/images/textbook-beta/traditional-algorithms.png',
-          title: 'Traditional Algorithms & Protocols',
-          description: `Know your bits from your qubits? Start learning
-          about the algorithms that first caused all this excitement. This
-          course will take you from basic quantum computing concepts to
-          understanding quantum counting, Shor’s algorithm and more.`,
-          cta: {
-            label: 'Under construction',
-            url: '/textbook-beta',
-            segment: { cta: 'traditional-algorithms-and-protocols', location: 'course' }
-          }
-        },
-        {
-          image: '/images/textbook-beta/quantum-hardware.png',
-          title: 'Quantum hardware',
-          description: `This course is currently under construction
-          and is an ongoing effort. Please check back after the beta phase
-          for an update on the progress of this course.`,
-          cta: {
-            label: 'Under construction',
-            url: '/textbook-beta',
-            segment: { cta: 'quantum-hardware', location: 'course' }
-          }
-        },
-        {
-          image: '/images/textbook-beta/quantum-machine-learning.png',
+          image: '/images/textbook-beta/machine-learning.png',
           title: 'Quantum machine learning',
-          description: `This course is currently under construction
-          and is an ongoing effort. Please check back after the beta phase
-          for an update on the progress of this course.`,
+          description: `Want to learn about this exciting, developing field? If
+          you're familiar with quantum computing basics, this course will give
+          you a primer on machine learning, walk you through key concepts, and
+          bring you up to speed with recent developments.`,
           cta: {
-            label: 'Under construction',
-            url: '/textbook-beta',
-            segment: { cta: 'quantum-machine-learning', location: 'course' }
+            label: 'Go to this course',
+            url: '/textbook-beta/course/machine-learning-course',
+            segment: { cta: 'machine-learning', location: 'course' }
           }
         }
       ]
