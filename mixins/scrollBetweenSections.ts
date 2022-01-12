@@ -17,11 +17,14 @@ export default class ScrollBetweenSections extends Vue {
         threshold
       }
     );
-    (this.$el as HTMLElement)
-      .querySelectorAll('.scrollable')
-      .forEach((section) => {
-        (this._observer as IntersectionObserver).observe(section)
-      })
+    const this_el = this.$el
+    setTimeout(() => {
+      (this_el as HTMLElement)
+        .querySelectorAll('.scrollable')
+        .forEach((section) => {
+          (this._observer as IntersectionObserver).observe(section)
+        })
+    }, 500)
   }
 
   updateObserved () {
