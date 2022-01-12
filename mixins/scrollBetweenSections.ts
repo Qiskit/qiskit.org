@@ -16,10 +16,10 @@ export default class ScrollBetweenSections extends Vue {
         rootMargin: windowTriggerMargins,
         threshold
       }
-    );
-    const this_el = this.$el
+    )
+    const thisEl = this.$el
     setTimeout(() => {
-      (this_el as HTMLElement)
+      (thisEl as HTMLElement)
         .querySelectorAll('.scrollable')
         .forEach((section) => {
           (this._observer as IntersectionObserver).observe(section)
