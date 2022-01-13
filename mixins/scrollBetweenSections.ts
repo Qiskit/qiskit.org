@@ -17,9 +17,11 @@ export default class ScrollBetweenSections extends Vue {
         threshold
       }
     )
-    setTimeout(() => {
-      this.updateObserved()
-    }, 500)
+    this.updateObserved()
+  }
+
+  updated () {
+    this.$nextTick(() => this.updateObserved())
   }
 
   updateObserved () {
