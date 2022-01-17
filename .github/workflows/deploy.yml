@@ -1,9 +1,7 @@
-name: build and deploy
+name: Build and deploy
 
 on:
-  # run when action is manually triggered
   workflow_dispatch:
-  # run on pushes to main branch
   push:
     branches: [main]
   # run daily at 08:00am UTC (on the default or base branch)
@@ -13,6 +11,10 @@ on:
 
 jobs:
   build-and-deploy:
+    # Run only from the original repository
+    # Because this job requires secrets, which cannot be shared with forks
+    if: github.repository == "Qiskit/qiskit.org"
+
     name: Build and Deploy
 
     runs-on: ubuntu-latest
