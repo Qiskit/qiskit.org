@@ -13,6 +13,10 @@ on:
 
 jobs:
   build-and-deploy:
+    # Run the job if the PR is from the same repository
+    # This is because this job requires a secret, and secrets cannot be shared with forks
+    if: github.repository == "Qiskit/qiskit.org"
+
     name: Build and Deploy
 
     runs-on: ubuntu-latest
