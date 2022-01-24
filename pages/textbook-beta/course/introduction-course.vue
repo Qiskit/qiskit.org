@@ -28,7 +28,7 @@
 import { Course, Prerequisite } from 'constants/textbookBetaContent'
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
-import { GeneralLink, textbookBetaIntroductionCourseStartLearningUrl } from '~/constants/appLinks'
+import { GeneralLink, START_LEARNING_URL } from '~/constants/appLinks'
 
 @Component({
   layout: 'default-max',
@@ -65,7 +65,7 @@ export default class IntroductionCoursePage extends QiskitPage {
   }
 
   startLearningCTA: GeneralLink = {
-    url: textbookBetaIntroductionCourseStartLearningUrl,
+    url: START_LEARNING_URL.Introduction,
     label: 'Start learning',
     segment: {
       cta: 'introduction', location: 'header'
@@ -96,7 +96,7 @@ export default class IntroductionCoursePage extends QiskitPage {
       image: 'why-quantum-computing-preview.png',
       label: 'Why quantum computing?',
       segment: { cta: 'why-quantum-computing', location: 'course' },
-      url: textbookBetaIntroductionCourseStartLearningUrl
+      url: START_LEARNING_URL.Introduction
     },
     {
       image: 'the-atoms-of-computation-preview.png',

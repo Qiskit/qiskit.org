@@ -49,9 +49,13 @@ const TEXTBOOK_BETA_START_LEARNING: GeneralLink = {
   }
 }
 
-const textbookBetaIntroductionCourseStartLearningUrl = 'https://learn.qiskit.org/course/introduction'
-const textbookBetaQMLStartLearningUrl = 'https://learn.qiskit.org/course/machine-learning'
-const summerSchoolCourseStartLearningUrl = 'https://learn.qiskit.org/summer-school/2021/'
+const START_LEARNING_URL = {
+	Introduction: 'https://learn.qiskit.org/course/introduction',
+	QML: 'https://learn.qiskit.org/course/machine-learning',
+	SummerSchool2020: 'https://learn.qiskit.org/summer-school/2020/',
+	SummerSchool2021: 'https://learn.qiskit.org/summer-school/2021/'
+}
+
 
 const IBM_Q_EXPERIENCE: GeneralLink = {
   url: 'https://quantum-computing.ibm.com/lab',
@@ -63,9 +67,7 @@ export {
   EVENT_REQUEST_LINK,
   SEMINAR_SERIES_ALL_EPISODES_CTA,
   SEMINAR_SERIES_FULL_ARCHIVE_CTA,
-  textbookBetaIntroductionCourseStartLearningUrl,
-  textbookBetaQMLStartLearningUrl,
-  summerSchoolCourseStartLearningUrl,
   TEXTBOOK_BETA_START_LEARNING,
+  START_LEARNING_URL,
   IBM_Q_EXPERIENCE
 }

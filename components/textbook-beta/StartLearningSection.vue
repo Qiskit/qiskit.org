@@ -99,7 +99,7 @@ export default class StartLearningSection extends Vue {
       ]
     },
     {
-      title: 'Summer Schools',
+      title: 'Summer schools',
       description: 'The Qiskit Global Summer Schools are one-of-a-kind sequences that takes students from beginner level to solving advanced quantum problems on a quantum computer. These two-week courses are designed to empower the next generation of quantum developers with the knowledge to explore quantum applications on their own.',
       courses: [
         {
@@ -111,7 +111,18 @@ export default class StartLearningSection extends Vue {
             url: '/textbook-beta/summer-school/quantum-computing-and-quantum-learning-2021',
             segment: { cta: 'quantum-computing-and-quantum-learning-2021', location: 'summer-schools' }
           }
+        },
+        {
+          image: '/images/textbook-beta/summer-school/intro-quantum-computing-quantum-hardware-2020/header.png',
+          title: 'Introduction to Quantum Computing and Quantum Hardware (2020)',
+          description: 'This introduction to the world of quantum computing explores key quantum algorithms, as well as the quantum hardware designed to run these algorithms. These lectures were first released as part of a two-week intensive summer school in July 2020.',
+          cta: {
+            label: 'Go to this resource',
+            url: '/textbook-beta/summer-school/introduction-to-quantum-computing-and-quantum-hardware-2020',
+            segment: { cta: 'introduction-to-quantum-computing-and-quantum-hardware-2020', location: 'summer-schools' }
+          }
         }
+
       ]
     },
     {
