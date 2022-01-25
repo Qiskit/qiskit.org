@@ -8,14 +8,13 @@
         {{ headerTitle }}
       </template>
       <template slot="description">
-        <p v-text="headerDescription"/>
+        <p v-text="headerDescription" />
       </template>
       <template slot="image">
         <img class="app-page-header-with-img__image" :src="headerImg">
       </template>
     </AppPageHeaderWithImage>
     <PrerequisiteMaterialSection class="summer-school-page__section" :data="summerSchool2020Prerequisites" />
-    <ExternalRecommendedReadings class="summer-school-page__section" :links="links" />
     <CoursePagesSection class="summer-school-page__section" :courses="courses" :img-base="imageUrlBase" />
   </main>
 </template>
@@ -122,7 +121,7 @@ export default class SummerSchoolCoursePage extends QiskitPage {
   ]
 
   summerSchool2020Prerequisites: Prerequisite[] = [
-     {
+    {
       title: 'Probability Theory: Random Variables and Distributions',
       description:
         'Probabilities help us deal with unknowns. As quantum mechanics is an extension of probability theory, being comfortable with probabilities will make your quantum computing journey easier.',
@@ -152,7 +151,7 @@ export default class SummerSchoolCoursePage extends QiskitPage {
       url:
         'https://learn.qiskit.org/course/ch-appendix/an-introduction-to-linear-algebra-for-quantum-computing'
     }
-      ]
+  ]
 
   imageUrlBase = '/images/textbook-beta/summer-school/intro-quantum-computing-quantum-hardware-2020'
 }

@@ -50,10 +50,10 @@ const TEXTBOOK_BETA_START_LEARNING: GeneralLink = {
 }
 
 const START_LEARNING_URL = {
-	Introduction: 'https://learn.qiskit.org/course/introduction',
-	QML: 'https://learn.qiskit.org/course/machine-learning',
-	SummerSchool2020: 'https://learn.qiskit.org/summer-school/2020/',
-	SummerSchool2021: 'https://learn.qiskit.org/summer-school/2021/'
+  Introduction: 'https://learn.qiskit.org/course/introduction',
+  QML: 'https://learn.qiskit.org/course/machine-learning',
+  SummerSchool2020: 'https://learn.qiskit.org/summer-school/2020/',
+  SummerSchool2021: 'https://learn.qiskit.org/summer-school/2021/'
 }
 
 
