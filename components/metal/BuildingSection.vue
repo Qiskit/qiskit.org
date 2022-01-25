@@ -29,7 +29,7 @@
           <p class="building-section__text">
             Learn more about the physics behind Qiskit Metal and qubit design from the
             <AppLink
-              url="/learn/intro-qc-qh/"
+              url="/textbook-beta/summer-school/introduction-to-quantum-computing-and-quantum-hardware-2020"
             >Introduction to Quantum Computing and Quantum Hardware</AppLink>
             summer school lectures series by Zlatko Minev on superconducting qubits. Also, check out the open source
             <AppLink

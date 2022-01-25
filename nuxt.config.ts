@@ -111,7 +111,15 @@ const config: NuxtConfig = {
   modules: [
     '@nuxt/content',
     '@nuxtjs/axios',
-    'nuxt-lazy-load'
+    'nuxt-lazy-load',
+    '@nuxtjs/redirect-module'
+  ],
+  redirect: [
+    {
+      from: '/learn/intro-qc-qh',
+      to: '/textbook-beta/summer-school/introduction-to-quantum-computing-and-quantum-hardware-2020',
+      statusCode: 302
+    }
   ],
 
   components: [
