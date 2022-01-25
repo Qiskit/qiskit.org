@@ -56,7 +56,6 @@ const START_LEARNING_URL = {
   SummerSchool2021: 'https://learn.qiskit.org/summer-school/2021/'
 }
 
-
 const IBM_Q_EXPERIENCE: GeneralLink = {
   url: 'https://quantum-computing.ibm.com/lab',
   label: 'IBM Quantum Lab'
