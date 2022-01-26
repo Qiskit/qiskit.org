@@ -32,7 +32,7 @@
   Optional.
 
   If useful for the code review, add some guidance for how to read this PR,
-  including links preview builds.
+  including links to preview builds.
 
   Example:
   Please start reviewing the changes to the controller files. Then check the
