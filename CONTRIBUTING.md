@@ -187,6 +187,9 @@ This means that for forked repositories the pull request will not generate a liv
 
 ### Code review
 
+When you open a PR you will see a template in the pull request body. Please read it carefully and fill in the necessary
+information to help the code review process go smoothly.
+
 Once you have sent a PR, the code contributors get notified, and there may be a code
 review. The code review helps solving implementation, semantic and maintainability issues.
 
