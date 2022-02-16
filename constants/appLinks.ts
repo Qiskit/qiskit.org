@@ -49,11 +49,11 @@ const TEXTBOOK_BETA_START_LEARNING: GeneralLink = {
   }
 }
 
-const START_LEARNING_URL = {
-  Introduction: 'https://learn.qiskit.org/course/introduction',
-  QML: 'https://learn.qiskit.org/course/machine-learning',
-  SummerSchool2020: 'https://learn.qiskit.org/summer-school/2020/',
-  SummerSchool2021: 'https://learn.qiskit.org/summer-school/2021/'
+enum StartLearningUrl {
+  Introduction = 'https://learn.qiskit.org/course/introduction',
+  QML = 'https://learn.qiskit.org/course/machine-learning',
+  SummerSchool2020 = 'https://learn.qiskit.org/summer-school/2020/',
+  SummerSchool2021 = 'https://learn.qiskit.org/summer-school/2021/'
 }
 
 const IBM_Q_EXPERIENCE: GeneralLink = {
@@ -67,6 +67,6 @@ export {
   SEMINAR_SERIES_ALL_EPISODES_CTA,
   SEMINAR_SERIES_FULL_ARCHIVE_CTA,
   TEXTBOOK_BETA_START_LEARNING,
-  START_LEARNING_URL,
+  StartLearningUrl,
   IBM_Q_EXPERIENCE
 }

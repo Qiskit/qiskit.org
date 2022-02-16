@@ -23,7 +23,7 @@
 import { Course, Prerequisite } from 'constants/textbookBetaContent'
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
-import { GeneralLink, START_LEARNING_URL } from '~/constants/appLinks'
+import { GeneralLink, StartLearningUrl } from '~/constants/appLinks'
 
 @Component({
   layout: 'default-max',
@@ -50,7 +50,7 @@ export default class SummerSchoolCoursePage extends QiskitPage {
   }
 
   startLearningCTA: GeneralLink = {
-    url: START_LEARNING_URL.SummerSchool2020,
+    url: StartLearningUrl.SummerSchool2020,
     label: 'Start learning',
     segment: {
       cta: 'introduction', location: 'header'

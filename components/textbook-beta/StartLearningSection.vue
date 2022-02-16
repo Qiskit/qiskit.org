@@ -122,7 +122,6 @@ export default class StartLearningSection extends Vue {
             segment: { cta: 'introduction-to-quantum-computing-and-quantum-hardware-2020', location: 'summer-schools' }
           }
         }
-
       ]
     },
     {
