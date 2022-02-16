@@ -78,7 +78,7 @@ const mosaic: MosaicSection = {
       description: 'The Qiskit Global Summer School 2020 coursework, lab, and lecture materials are now available online.',
       image: '/images/events/summer-school/chip.png',
       cta: {
-        url: 'https://qiskit.org/textbook-beta/summer-school/introduction-to-quantum-computing-and-quantum-hardware-2020',
+        url: 'https://qiskit.org/learn/intro-qc-qh',
         label: 'Start the course',
         segment: {
           cta: 'start-the-course',

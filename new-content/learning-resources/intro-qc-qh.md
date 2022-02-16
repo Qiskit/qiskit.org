@@ -1,7 +1,7 @@
 ---
 order: 100
 title: Introduction to Quantum Computing and Quantum Hardware
-to: /textbook-beta/summer-school/introduction-to-quantum-computing-and-quantum-hardware-2020
+to: /learn/intro-qc-qh
 image: /images/learning-resources/globalsummerschool.jpg
 ctaLabel: Join the lecture
 classifications:
