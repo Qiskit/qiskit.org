@@ -30,6 +30,8 @@ interface OverviewSection {
   description: string
   /** Where we want to go to get more info of the section */
   link?: NavLink
+  /** A set of links to get more information on the section */
+  linkset?: NavLink[]
   /** The sub sections inside the section */
   subSections?: OverviewSubSection[]
   /** The image to show if the section doesn't have subsections */
@@ -48,10 +50,24 @@ const RESEARCH_APPS: OverviewSection = {
   id: researchAppId,
   title: 'Research Applications',
   description: 'Qiskit allows for easy research and development for specific industry use cases that have the highest potential for quantum advantage.',
-  link: {
-    label: 'See docs',
-    url: 'https://qiskit.org/documentation/apidoc/aqua.html'
-  },
+  linkset: [
+    {
+      label: 'See machine learning docs',
+      url: 'https://qiskit.org/documentation/machine-learning/'
+    },
+    {
+      label: 'See nature docs',
+      url: 'https://qiskit.org/documentation/nature/'
+    },
+    {
+      label: 'See finance docs',
+      url: 'https://qiskit.org/documentation/finance/'
+    },
+    {
+      label: 'See optimization docs',
+      url: 'https://qiskit.org/documentation/optimization/'
+    }
+  ],
   subSections: [
     {
       title: 'Optimization',
@@ -60,7 +76,7 @@ const RESEARCH_APPS: OverviewSection = {
         description: 'The Qiskit Optimization package covers the whole range from high-level modeling of optimization problems, with automatic conversion of problems to different required representations, to a suite of easy-to-use quantum optimization algorithms that are ready to run on classical simulators, as well as on real quantum systems.',
         cta: {
           label: 'Solve the Max Cut Problem',
-          url: 'https://github.com/Qiskit/qiskit-aqua#creating-your-first-optimization-programming-experiment-in-qiskit'
+          url: 'https://qiskit.org/documentation/optimization/tutorials/01_quadratic_program.html'
         }
       }
     },
@@ -71,7 +87,7 @@ const RESEARCH_APPS: OverviewSection = {
         description: 'The Qiskit Finance package contains components to load uncertainty models, e.g., for pricing securities/derivatives or analyzing the risk involved. It also contains data providers to source real or random data to finance experiments and together with the Qiskit Optimization package allows easy modeling of optimization problems as arising e.g. in portfolio management.',
         cta: {
           label: 'Perform Option Pricing with qGans',
-          url: 'https://qiskit.org/documentation/tutorials/finance/10_qgan_option_pricing.html'
+          url: 'https://qiskit.org/documentation/finance/tutorials/10_qgan_option_pricing.html'
         }
       }
     },
@@ -82,7 +98,7 @@ const RESEARCH_APPS: OverviewSection = {
         description: 'The Qiskit Machine Learning package simply contains sample datasets at present. Qiskit has some classification algorithms such as QSVM (Quantum Support Vector Machine) and VQC (Variational Quantum Classifier), where this data can be used for experiments, and there is also QGAN (Quantum Generative Adversarial Network) algorithm.',
         cta: {
           label: 'Classify data with a VQC',
-          url: 'https://github.com/Qiskit/qiskit-aqua#creating-your-first-machine-learning-programming-experiment-in-qiskit'
+          url: 'https://qiskit.org/documentation/machine-learning/tutorials/01_neural_networks.html'
         }
       }
     },
@@ -93,7 +109,7 @@ const RESEARCH_APPS: OverviewSection = {
         description: 'The Qiskit Chemistry package supports problems including ground state energy computations, excited states and dipole moments of molecule, both open and closed-shell.',
         cta: {
           label: 'Find the Energy Ground State of a Molecule',
-          url: 'https://github.com/Qiskit/qiskit-aqua#creating-your-first-chemistry-programming-experiment-in-qiskit'
+          url: 'https://qiskit.org/documentation/nature/tutorials/01_electronic_structure.html'
         }
       }
     }
@@ -114,7 +130,7 @@ const ALGORITHMS_COLLECTION: OverviewSection = {
   description: 'Qiskit contains a generic framework of cross-domain quantum algorithms upon which applications for near-term quantum computing can be built.',
   link: {
     label: 'See docs',
-    url: 'https://qiskit.org/documentation/apidoc/qiskit.aqua.algorithms.html#algorithms-qiskit-aqua-algorithms'
+    url: 'https://qiskit.org/documentation/apidoc/algorithms.html'
   },
   subSections: [
     {
@@ -124,7 +140,7 @@ const ALGORITHMS_COLLECTION: OverviewSection = {
         description: 'Grover\'s algorithm is a well know quantum algorithm part of the amplitude amplifier category that provides quadratic speedup for searching through unstructured collections of records in search of particular targets.',
         cta: {
           label: 'Try out Grover’s',
-          url: 'https://qiskit.org/documentation/stubs/qiskit.aqua.algorithms.Grover.html#qiskit.aqua.algorithms.Grover'
+          url: 'https://qiskit.org/documentation/stubs/qiskit.algorithms.Grover.html#qiskit.algorithms.Grover'
         }
       }
     },
@@ -135,7 +151,7 @@ const ALGORITHMS_COLLECTION: OverviewSection = {
         description: 'VQE (Variational Quantum Eigensolver) is another well known quantum algorithm part of the minimum eigensolvers category. This algorithm uses variational techniques and interleaves quantum and classical computations in order to find the minimum eigenvalue of the Hamiltonian of a given system.',
         cta: {
           label: 'Try out VQE',
-          url: 'https://qiskit.org/documentation/stubs/qiskit.aqua.algorithms.VQE.html#qiskit.aqua.algorithms.VQE'
+          url: 'https://qiskit.org/documentation/stubs/qiskit.algorithms.VQE.html#qiskit.algorithms.VQE'
         }
       }
     },
@@ -146,7 +162,7 @@ const ALGORITHMS_COLLECTION: OverviewSection = {
         description: 'QAOA (Quantum Approximate Optimization Algorithm) is also part of the minimum eigensolvers category. This algorithm extends VQE (Variational Quantum Eigensolver) and inherits VQE\'s general optimization structure but uses its own fine-tuned variational form.',
         cta: {
           label: 'Try out QAOA',
-          url: 'https://qiskit.org/documentation/stubs/qiskit.aqua.algorithms.QAOA.html#qiskit.aqua.algorithms.QAOA'
+          url: 'https://qiskit.org/documentation/stubs/qiskit.algorithms.QAOA.html#qiskit.algorithms.QAOA'
         }
       }
     },
@@ -157,7 +173,7 @@ const ALGORITHMS_COLLECTION: OverviewSection = {
         description: 'QSVM is part of the classifiers category and applies to problems that require a feature map for which computing the collection of inner products is not efficient classically. ',
         cta: {
           label: 'Try out QSVM',
-          url: 'https://qiskit.org/documentation/apidoc/qiskit.aqua.algorithms.html#classifiers'
+          url: 'https://qiskit.org/documentation/machine-learning/apidocs/qiskit_machine_learning.algorithms.html#classifiers'
         }
       }
     }
