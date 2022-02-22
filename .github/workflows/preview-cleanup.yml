@@ -7,7 +7,7 @@ on:
 jobs:
   teardown:
     # This job requires secrets, which cannot be accessed by forks or dependabot
-    if: ${{ github.event.pull_request.head.repo.full_name == github.repository && github.actor != 'dependabot' }}
+    if: ${{ github.event.pull_request.head.repo.full_name == github.repository && github.actor != 'dependabot[bot]' }}
 
     uses: Qiskit/gh-actions/.github/workflows/code-engine-cleanup.yml@main
     with:
