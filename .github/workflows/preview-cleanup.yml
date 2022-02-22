@@ -6,9 +6,8 @@ on:
 
 jobs:
   teardown:
-    # Run only from the original repository
-    # Because this job requires secrets, which cannot be shared with forks
-    if: github.event.pull_request.head.repo.full_name == github.repository
+    # This job requires secrets, which cannot be accessed by forks or dependabot
+    if: ${{ github.event.pull_request.head.repo.full_name == github.repository && github.actor != 'dependabot' }}
 
     uses: Qiskit/gh-actions/.github/workflows/code-engine-cleanup.yml@main
     with:
