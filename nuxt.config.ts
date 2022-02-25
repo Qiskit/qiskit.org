@@ -180,9 +180,8 @@ const config: NuxtConfig = {
   generate: {
     routes: (function () {
       const events = getContentUrls('events')
-      const learnPages = getContentUrls('learn')
 
-      return [...events, ...learnPages]
+      return [...events]
 
       function getContentUrls (contentRoot: string): string[] {
         return fs.readdirSync(path.resolve(__dirname, 'content', contentRoot))

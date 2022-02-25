@@ -23,7 +23,7 @@
 import { Course, Prerequisite } from 'constants/textbookBetaContent'
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
-import { GeneralLink, textbookBetaQMLStartLearningUrl } from '~/constants/appLinks'
+import { GeneralLink, StartLearningUrl } from '~/constants/appLinks'
 
 @Component({
   layout: 'default-max',
@@ -61,7 +61,7 @@ export default class QuantumMachineLearningCoursePage extends QiskitPage {
   }
 
   startLearningCTA: GeneralLink = {
-    url: textbookBetaQMLStartLearningUrl,
+    url: StartLearningUrl.QML,
     label: 'Start learning',
     segment: {
       cta: 'machine-learning', location: 'course'
@@ -73,7 +73,7 @@ export default class QuantumMachineLearningCoursePage extends QiskitPage {
       image: 'introduction.png',
       label: 'Introduction',
       segment: { cta: 'qml-introduction', location: 'course' },
-      url: textbookBetaQMLStartLearningUrl
+      url: StartLearningUrl.QML
     },
     {
       image: 'parameterized-quantum-circuits.png',
