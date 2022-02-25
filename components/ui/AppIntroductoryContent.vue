@@ -10,6 +10,14 @@
         v-bind="link"
         kind="ghost"
       />
+      <template v-if="linkset">
+        <AppCta
+          v-for="link in linkset"
+          v-bind="link"
+          :key="link.index"
+          kind="ghost"
+        />
+      </template>
     </div>
     <div class="app-introductory-content__details">
       <slot />
@@ -27,6 +35,7 @@ export default class AppIntroductoryContent extends Vue {
   @Prop(String) title!: string
   @Prop(String) description!: string
   @Prop(Object) link!: NavLink
+  @Prop(Array) linkset!: NavLink[]
 }
 </script>
 

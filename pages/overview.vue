@@ -38,6 +38,7 @@
             :title="section.title"
             :description="section.description"
             :link="section.link"
+            :linkset="section.linkset"
           >
             <ContentAccordion
               v-if="section.subSections"
