@@ -82,7 +82,7 @@ export default class AppPageHeaderWithCard extends Vue {
     }
 
     @include mq($from: large) {
-      $grid-columns: 6/11; // Number of columns that the element will use at this breakpoint.
+      $grid-columns: math.div(6, 11); // Number of columns that the element will use at this breakpoint.
 
       max-width: 100% * $grid-columns;
     }

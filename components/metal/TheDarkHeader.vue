@@ -80,17 +80,17 @@ export default class TheDarkHeader extends Vue {}
 
   @include mq($from: medium, $until: large) {
     // To adjust to the size of the smaller grid.
-    height: calc(#{56rem * 40 / 64} + 2px);
+    height: calc(#{math.div(56rem * 40, 64)} + 2px);
   }
 
   @include mq($until: medium) {
     background-position: top -5rem center;
-    height: calc(#{48rem * 40 / 64} + 2px);
+    height: calc(#{math.div(48rem * 40, 64)} + 2px);
   }
 
   @include mq($until: small) {
     background-position: top -12rem center;
-    height: calc(#{36rem * 40 / 64} + 2px);
+    height: calc(#{math.div(36rem * 40, 64)} + 2px);
   }
 
   &__container {

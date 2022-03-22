@@ -50,7 +50,7 @@ export default class TheHeroMoment extends Vue {
 
 <style lang="scss">
 .the-hero-moment {
-  height: calc(#{56rem * 40 / 64} + 2px);
+  height: calc(#{math.div(56rem * 40, 64)} + 2px);
   position: relative;
   overflow: hidden;
 
