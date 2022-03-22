@@ -199,7 +199,7 @@ export default class MetalGrid extends Vue {
   min-height: 42rem;
 
   @include mq($until: large) {
-    min-height: 28rem * 40 / 64;
+    min-height: math.div(28rem * 40, 64);
   }
 
   &__underlayer {

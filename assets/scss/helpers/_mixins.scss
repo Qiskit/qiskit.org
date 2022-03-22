@@ -2,6 +2,8 @@
  * Based on Carbon Grid breakpoints and grid margins and column paddings:
  * https://www.carbondesignsystem.com/guidelines/2x-grid/basics/#breakpoints
  */
+@use "sass:math";
+
 @mixin contained() {
   box-sizing: border-box;
   max-width: $large;
@@ -45,7 +47,7 @@
   background-size: $background-width $background-height;
 
   @include mq($until: large) {
-    $grid-small-scale: 40 / 64;
+    $grid-small-scale: math.div(40, 64);
 
     $background-width-scaled: auto;
     @if $background-width != auto {

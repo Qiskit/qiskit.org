@@ -165,7 +165,7 @@ export default class LearnPage extends QiskitPage {
 .learn-page {
   &__careful-explanation {
     @include mq($from: x-large) {
-      $grid-columns: 8/12; // Number of columns that the element will use at this breakpoint.
+      $grid-columns: math.div(8, 12); // Number of columns that the element will use at this breakpoint.
 
       max-width: 100% * $grid-columns;
     }
