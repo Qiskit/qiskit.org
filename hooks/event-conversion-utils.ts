@@ -270,5 +270,6 @@ export {
   getDates,
   formatDates,
   filterWithWhitelist,
+  isEventInDateRange,
   SeminarSeriesEvent
 }

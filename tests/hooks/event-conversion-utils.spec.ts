@@ -7,10 +7,12 @@ import {
   getLocation,
   getRegions,
   getDates,
-  getImage
+  getImage,
+  isEventInDateRange
 } from '~/hooks/event-conversion-utils'
 
 import { COMMUNITY_EVENT_TYPES, WORLD_REGIONS } from '~/store/events'
+import type { CommunityEvent } from '~/store/events'
 
 type RecordFields = {
   name: string,
@@ -43,6 +45,97 @@ class FakeRecord {
     return (this._fields as any)[key]
   }
 }
+
+describe('isEventInDateRange', () => {
+  const mockEventBase = {
+    types: [],
+    title: '',
+    image: '',
+    location: '',
+    regions: [],
+    date: '',
+    to: ''
+  }
+
+  const getFormattedDate = (daysOffset: number): string => {
+    let date = new Date()
+
+    // Correct for timezone offset
+    date = new Date(date.getTime() - (date.getTimezoneOffset() * 60 * 1000))
+
+    // Add days offset
+    date.setDate(date.getDate() + daysOffset)
+
+    // Return date in YYYY-MM-DD format
+    return date.toISOString().split('T')[0]
+  }
+
+  let mockEvent: CommunityEvent
+
+  it('returns true if the event happens within the next 15 days', () => {
+    const days = 15
+
+    // Event happened in the past
+    mockEvent = {
+      ...mockEventBase,
+      startDate: getFormattedDate(-7),
+      endDate: getFormattedDate(-1)
+    }
+    expect(isEventInDateRange(mockEvent, days)).toBe(false)
+
+    // Event starts within the next 15 days
+    mockEvent = {
+      ...mockEventBase,
+      startDate: getFormattedDate(7),
+      endDate: ''
+    }
+    expect(isEventInDateRange(mockEvent, days)).toBe(true)
+
+    // Event starts within the next 15 days and ends after 15 days
+    mockEvent = {
+      ...mockEventBase,
+      startDate: getFormattedDate(7),
+      endDate: getFormattedDate(20)
+    }
+    expect(isEventInDateRange(mockEvent, days)).toBe(true)
+
+    // Event starts in exactly 15 days
+    mockEvent = {
+      ...mockEventBase,
+      startDate: getFormattedDate(15),
+      endDate: ''
+    }
+    expect(isEventInDateRange(mockEvent, days)).toBe(true)
+  })
+
+  it('returns true if the event happened within the last 15 days', () => {
+    const days = -15
+
+    // Event happened before the last 15 days
+    mockEvent = {
+      ...mockEventBase,
+      startDate: getFormattedDate(-100),
+      endDate: getFormattedDate(-20)
+    }
+    expect(isEventInDateRange(mockEvent, days)).toBe(false)
+
+    // Event started before the last 15 days and ended within the last 15 days
+    mockEvent = {
+      ...mockEventBase,
+      startDate: getFormattedDate(-100),
+      endDate: getFormattedDate(-7)
+    }
+    expect(isEventInDateRange(mockEvent, days)).toBe(true)
+
+    // Event starts in the future
+    mockEvent = {
+      ...mockEventBase,
+      startDate: getFormattedDate(7),
+      endDate: ''
+    }
+    expect(isEventInDateRange(mockEvent, days)).toBe(false)
+  })
+})
 
 describe('convertToCommunityEvent', () => {
   const { hackathon } = COMMUNITY_EVENT_TYPES
