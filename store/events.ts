@@ -35,6 +35,8 @@ type CommunityEvent = {
   location: string,
   regions: WorldRegion[],
   date: string,
+  startDate: string,
+  endDate: string,
   to: string
 }
 

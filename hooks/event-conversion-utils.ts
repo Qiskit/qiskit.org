@@ -17,6 +17,8 @@ import {
 
 type SeminarSeriesEvent = {
   date: string,
+  startDate: string,
+  endDate: string,
   image: string,
   institution: string,
   location: string,
@@ -43,20 +45,60 @@ const RECORD_FIELDS = Object.freeze({
 function getEventsQuery (apiKey: string, days: number, view: string, filters: string[] = []): Airtable.Query<{}> {
   const { startDate } = RECORD_FIELDS
   const base = new Airtable({ apiKey }).base('appYREKB18uC7y8ul')
-
-  const formulaFilters = [
-    `DATETIME_DIFF({${startDate}}, TODAY(), 'days') ${days > 0 ? '<=' : '>='} ${days}`,
-    `DATETIME_DIFF({${startDate}}, TODAY(), 'days') ${days > 0 ? '>=' : '<'} 0`,
-    ...filters
-  ]
-
-  const filterByFormula = `AND(${formulaFilters.join(',')})`
+  const filterByFormula = `AND(${filters})`
 
   return base('Event Calendar').select({
     filterByFormula,
     sort: [{ field: startDate, direction: days > 0 ? 'asc' : 'desc' }],
     view
   })
+}
+
+/**
+ * Check whether an event happens within a predetermined number of days before
+ * or after today.
+ * If the "days" parameter is positive, the event must happen in the future,
+ * between today and the given number of days after today.
+ * If the "days" parameter is negative, the event must happen in the past,
+ * between today and the given number of days before today.
+ * @param event The event to check.
+ * @param days The number of days before and after today.
+ * @returns Whether the event happens within the specified range.
+ */
+function isEventInDateRange (
+  event: CommunityEvent | SeminarSeriesEvent,
+  days: number
+): boolean {
+  const { startDate, endDate } = event
+  const today: Date = new Date()
+  const eventStartDate: Date = new Date(startDate)
+  const eventEndDate: Date = new Date(endDate)
+  const isFutureRange: boolean = days > 0
+  let eventDateToCheck: Date
+
+  // Determine which date to check based on the days parameter and checking if
+  // the event's dates are valid.
+  if (!isFutureRange && !isNaN(eventEndDate.getTime())) {
+    eventDateToCheck = eventEndDate
+  } else if (!isNaN(eventStartDate.getTime())) {
+    eventDateToCheck = eventStartDate
+  } else {
+    return false
+  }
+
+  let rangeStart: Date
+  let rangeEnd: Date
+
+  // Determine the range of dates to check.
+  if (isFutureRange) {
+    rangeStart = new Date(today)
+    rangeEnd = new Date(today.getTime() + days * 24 * 60 * 60 * 1000)
+  } else {
+    rangeStart = new Date(today.getTime() + days * 24 * 60 * 60 * 1000)
+    rangeEnd = new Date(today)
+  }
+
+  return eventDateToCheck >= rangeStart && eventDateToCheck <= rangeEnd
 }
 
 async function fetchCommunityEvents (apiKey: string, { days }: { days: any }): Promise<CommunityEvent[]> {
@@ -66,7 +108,9 @@ async function fetchCommunityEvents (apiKey: string, { days }: { days: any }): P
   await getEventsQuery(apiKey, days, 'Add to Event Site', [`{${showOnEventsPage}}`]).eachPage((records, nextPage) => {
     for (const record of records) {
       const communityEvent = convertToCommunityEvent(record)
-      communityEvents.push(communityEvent)
+      if (isEventInDateRange(communityEvent, days)) {
+        communityEvents.push(communityEvent)
+      }
     }
     nextPage()
   })
@@ -83,7 +127,9 @@ async function fetchSeminarSeriesEvents (apiKey: string, { days }: { days: any }
       const seminarSeriesEvent = convertToSeminarSeriesEvent(record)
 
       if (typeof (seminarSeriesEvent.to) !== 'undefined') {
-        seminarSeriesEvents.push(seminarSeriesEvent)
+        if (isEventInDateRange(seminarSeriesEvent, days)) {
+          seminarSeriesEvents.push(seminarSeriesEvent)
+        }
       }
     }
     nextPage()
@@ -100,6 +146,8 @@ function convertToCommunityEvent (record: any): CommunityEvent {
     location: getLocation(record),
     regions: getRegions(record),
     date: formatDates(...getDates(record)),
+    startDate: getStartDate(record),
+    endDate: getEndDate(record),
     to: getWebsite(record)
   }
 }
@@ -107,6 +155,8 @@ function convertToCommunityEvent (record: any): CommunityEvent {
 function convertToSeminarSeriesEvent (record: any): SeminarSeriesEvent {
   return {
     date: formatDates(...getDates(record)),
+    startDate: getStartDate(record),
+    endDate: getEndDate(record),
     image: getImage(record),
     institution: getInstitution(record),
     location: getLocation(record),
@@ -155,6 +205,14 @@ function getLocation (record: any): string {
 function getRegions (record: any): WorldRegion[] {
   const recordRegion = record.get(RECORD_FIELDS.region)
   return recordRegion || [WORLD_REGIONS.tbd]
+}
+
+function getStartDate (record: any): string {
+  return record.get(RECORD_FIELDS.startDate) || ''
+}
+
+function getEndDate (record: any): string {
+  return record.get(RECORD_FIELDS.endDate) || ''
 }
 
 function getDates (record: any): [Date, Date|undefined] {
@@ -212,5 +270,6 @@ export {
   getDates,
   formatDates,
   filterWithWhitelist,
+  isEventInDateRange,
   SeminarSeriesEvent
 }
