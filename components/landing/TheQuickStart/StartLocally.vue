@@ -6,7 +6,7 @@
       <AppLink
         url="https://www.python.org/downloads/"
       >
-        Python 3.6+.
+        Python 3.7+.
       </AppLink>
       Although it is not required, we recommend using a
       <AppLink
