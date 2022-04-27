@@ -43,8 +43,18 @@
             <AppDataTable
               class="india-week-of-women-in-quantum-page__section"
               :columns="agendaColumnsDataTable"
-              :elements="day.tableData"
-            />
+            >
+              <cv-data-table-row v-for="(row, rowIndex) in day.tableData" :key="`${rowIndex}`">
+                <cv-data-table-cell v-for="({styles, data}, elementIndex) in row" :key="`${elementIndex}`">
+                  <!-- eslint-disable vue/no-v-html -->
+                  <span
+                    :style="styles"
+                    v-html="data"
+                  />
+                  <!-- eslint-enable -->
+                </cv-data-table-cell>
+              </cv-data-table-row>
+            </AppDataTable>
           </cv-tab>
         </cv-tabs>
       </section>
@@ -199,22 +209,18 @@ export default class IndiaWeekOfWomenInQuantumPage extends QiskitPage {
 
   scheduleToTableData = (slot: dailyAgenda) => ([
     {
-      component: 'span',
       styles: 'min-width: 10rem; display: inline-block; font-weight: bold;',
       data: slot.time
     },
     {
-      component: 'span',
       styles: 'min-width: 15rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
       data: slot.event
     },
     {
-      component: 'span',
       styles: 'min-width: 15rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
       data: slot.speaker
     },
     {
-      component: 'span',
       styles: 'min-width: 15rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
       data: slot.affiliation
     }
