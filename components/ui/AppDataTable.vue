@@ -5,17 +5,6 @@
     :sortable="false"
   >
     <template slot="data">
-      <cv-data-table-row v-for="(row, rowIndex) in elements" :key="`${rowIndex}`">
-        <cv-data-table-cell v-for="({ component, styles, data}, elementIndex) in row" :key="`${elementIndex}`">
-          <AppCta v-if="isAppCtaComponent(component)" kind="ghost" v-bind="data" :style="styles" />
-          <component
-            :is="component"
-            v-else
-            :style="styles"
-            v-html="data"
-          />
-        </cv-data-table-cell>
-      </cv-data-table-row>
       <slot />
     </template>
   </cv-data-table>
@@ -34,12 +23,7 @@ export interface TableRowElement {
 
 @Component
 export default class AppDataTable extends Vue {
-  @Prop({ type: Array, default: () => [] }) elements!: TableRowElement[]
   @Prop({ type: Array, default: () => [] }) columns!: string[]
-
-  isAppCtaComponent (component: string) : boolean {
-    return component === 'AppCta'
-  }
 }
 </script>
 
