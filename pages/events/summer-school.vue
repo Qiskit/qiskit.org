@@ -30,7 +30,8 @@
         </EventCard>
       </template>
     </AppPageHeaderWithCard>
-    <div class="bx--grid">
+
+    <div class="bx--grid summer-school-page__container">
       <AppMosaicSection
         class="summer-school-page__section"
         :title="mosaicData.title"
@@ -49,8 +50,13 @@
             <AppDataTable
               class="summer-school-page__section"
               :columns="agendaColumnsDataTable"
-              :elements="week.tableData"
-            />
+            >
+              <cv-data-table-row v-for="(row, rowIndex) in week.tableData" :key="`${rowIndex}`">
+                <cv-data-table-cell v-for="({styles, data}, elementIndex) in row" :key="`${elementIndex}`">
+                  <span :style="styles">{{ data }}</span>
+                </cv-data-table-cell>
+              </cv-data-table-row>
+            </AppDataTable>
           </cv-tab>
         </cv-tabs>
       </section>
@@ -151,6 +157,10 @@ export default class SummerSchoolPage extends QiskitPage {
 .summer-school-page {
   display: flex;
   flex-direction: column;
+
+  &__container {
+    max-width: 100%;
+  }
 
   &__section {
     margin-top: $spacing-10;

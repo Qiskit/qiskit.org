@@ -8,16 +8,15 @@
       <cv-data-table-row v-for="(row, rowIndex) in elements" :key="`${rowIndex}`">
         <cv-data-table-cell v-for="({ component, styles, data}, elementIndex) in row" :key="`${elementIndex}`">
           <AppCta v-if="isAppCtaComponent(component)" kind="ghost" v-bind="data" :style="styles" />
-          <!-- eslint-disable vue/no-v-html -->
           <component
             :is="component"
             v-else
             :style="styles"
             v-html="data"
           />
-          <!-- eslint-enable -->
         </cv-data-table-cell>
       </cv-data-table-row>
+      <slot />
     </template>
   </cv-data-table>
 </template>
@@ -47,6 +46,7 @@ export default class AppDataTable extends Vue {
 <style lang="scss" scoped>
 .app-data-table {
   overflow-x: scroll;
+  max-width: 100%;
 }
 
 </style>
