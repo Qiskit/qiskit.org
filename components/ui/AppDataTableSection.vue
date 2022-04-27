@@ -1,7 +1,9 @@
 <template>
   <section>
     <h2 v-text="sectionTitle" />
-    <AppDataTable :columns="dataTableColumns" :elements="dataTableElements" />
+    <AppDataTable :columns="dataTableColumns">
+      <slot name="data-table-elements" />
+    </AppDataTable>
     <slot />
   </section>
 </template>
