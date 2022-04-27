@@ -27,7 +27,7 @@ import { Component, Prop } from 'vue-property-decorator'
 import { GeneralLink } from '~/constants/appLinks'
 
 export interface TableRowElement {
-  component: string,
+  component?: string,
   styles: string,
   data: string | GeneralLink,
 }
