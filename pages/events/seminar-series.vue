@@ -31,14 +31,29 @@
         class="seminar-series-page__section"
         :section-title="upcomingEventsSectionTitle"
         :data-table-columns="seminarSeriesDataTableColumns"
-        :data-table-elements="upcomingEventsDataTable"
-      />
+      >
+        <template #data-table-elements>
+          <cv-data-table-row v-for="(row, rowIndex) in upcomingEventsDataTable" :key="`${rowIndex}`">
+            <cv-data-table-cell v-for="({component, styles, data}, elementIndex) in row" :key="`${elementIndex}`">
+              <AppCta v-if="isAppCtaComponent(component)" kind="ghost" v-bind="data" :style="styles" />
+              <span v-else :style="styles">{{ data }}</span>
+            </cv-data-table-cell>
+          </cv-data-table-row>
+        </template>
+      </AppDataTableSection>
       <AppDataTableSection
         class="seminar-series-page__section"
         :section-title="pastEventsSectionTitle"
         :data-table-columns="seminarSeriesDataTableColumns"
-        :data-table-elements="pastEventsDataTable"
       >
+        <template #data-table-elements>
+          <cv-data-table-row v-for="(row, rowIndex) in pastEventsDataTable" :key="`${rowIndex}`">
+            <cv-data-table-cell v-for="({component, styles, data}, elementIndex) in row" :key="`${elementIndex}`">
+              <AppCta v-if="isAppCtaComponent(component)" kind="ghost" v-bind="data" :style="styles" />
+              <span v-else :style="styles">{{ data }}</span>
+            </cv-data-table-cell>
+          </cv-data-table-row>
+        </template>
         <AppCta
           class="seminar-series-page__past-events-cta"
           kind="ghost"
@@ -204,25 +219,25 @@ export default class SeminarSeriesPage extends QiskitPage {
     }
   ]
 
+  isAppCtaComponent (component: string) : boolean {
+    return component === 'AppCta'
+  }
+
   dataPerRow (events: SeminarSeriesEvent[], eventsSection: string) : TableRowElement[][] {
     return events.map(event => ([
       {
-        component: 'span',
         styles: 'min-width: 9rem; display: inline-block;',
         data: event.speaker
       },
       {
-        component: 'span',
         styles: 'min-width: 9rem; display: inline-block;',
         data: event.institution
       },
       {
-        component: 'span',
         styles: 'min-width: 19rem; display: inline-block;',
         data: event.title
       },
       {
-        component: 'span',
         styles: 'min-width: 8rem; display: inline-block;',
         data: event.date
       },

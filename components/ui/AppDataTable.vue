@@ -5,19 +5,7 @@
     :sortable="false"
   >
     <template slot="data">
-      <cv-data-table-row v-for="(row, rowIndex) in elements" :key="`${rowIndex}`">
-        <cv-data-table-cell v-for="({ component, styles, data}, elementIndex) in row" :key="`${elementIndex}`">
-          <AppCta v-if="isAppCtaComponent(component)" kind="ghost" v-bind="data" :style="styles" />
-          <!-- eslint-disable vue/no-v-html -->
-          <component
-            :is="component"
-            v-else
-            :style="styles"
-            v-html="data"
-          />
-          <!-- eslint-enable -->
-        </cv-data-table-cell>
-      </cv-data-table-row>
+      <slot />
     </template>
   </cv-data-table>
 </template>
@@ -28,25 +16,21 @@ import { Component, Prop } from 'vue-property-decorator'
 import { GeneralLink } from '~/constants/appLinks'
 
 export interface TableRowElement {
-  component: string,
+  component?: string,
   styles: string,
   data: string | GeneralLink,
 }
 
 @Component
 export default class AppDataTable extends Vue {
-  @Prop({ type: Array, default: () => [] }) elements!: TableRowElement[]
   @Prop({ type: Array, default: () => [] }) columns!: string[]
-
-  isAppCtaComponent (component: string) : boolean {
-    return component === 'AppCta'
-  }
 }
 </script>
 
 <style lang="scss" scoped>
 .app-data-table {
   overflow-x: scroll;
+  max-width: 100%;
 }
 
 </style>

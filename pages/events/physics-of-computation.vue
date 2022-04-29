@@ -32,23 +32,51 @@
         class="physics-of-computation-page__section"
         :section-title="morningAgendaSectionTitle"
         :data-table-columns="agendaColumnsDataTable"
-        :data-table-elements="morningSessionElementsDataTable"
       >
+        <template #data-table-elements>
+          <cv-data-table-row v-for="(row, rowIndex) in morningSessionElementsDataTable" :key="`${rowIndex}`">
+            <cv-data-table-cell v-for="({styles, data}, elementIndex) in row" :key="`${elementIndex}`">
+              <!-- eslint-disable vue/no-v-html -->
+              <span
+                :style="styles"
+                v-html="data"
+              />
+              <!-- eslint-enable -->
+            </cv-data-table-cell>
+          </cv-data-table-row>
+        </template>
         <AppCta kind="ghost" v-bind="morningSessionAgendaCTA" is-wider />
       </AppDataTableSection>
       <AppDataTableSection
         class="physics-of-computation-page__section"
         :section-title="afternoonAgendaSectionTitle"
         :data-table-columns="agendaColumnsDataTable"
-        :data-table-elements="afternoonSessionElementsDataTable"
       >
+        <template #data-table-elements>
+          <cv-data-table-row v-for="(row, rowIndex) in afternoonSessionElementsDataTable" :key="`${rowIndex}`">
+            <cv-data-table-cell v-for="({styles, data}, elementIndex) in row" :key="`${elementIndex}`">
+              <span :style="styles">{{ data }}</span>
+            </cv-data-table-cell>
+          </cv-data-table-row>
+        </template>
         <AppCta kind="ghost" v-bind="afternoonSessionAgendaCTA" is-wider />
       </AppDataTableSection>
       <section class="physics-of-computation-page__section">
         <h3 class="copy__subtitle">
           * Parallel tracks (times listed are approximate and subject to change)
         </h3>
-        <AppDataTable :columns="agendaTracksColumnsDataTable" :elements="afternoonSessionByTrackElementsDataTable" />
+        <AppDataTable :columns="agendaTracksColumnsDataTable">
+          <cv-data-table-row v-for="(row, rowIndex) in afternoonSessionByTrackElementsDataTable" :key="`${rowIndex}`">
+            <cv-data-table-cell v-for="({styles, data}, elementIndex) in row" :key="`${elementIndex}`">
+              <!-- eslint-disable vue/no-v-html -->
+              <span
+                :style="styles"
+                v-html="data"
+              />
+              <!-- eslint-enable -->
+            </cv-data-table-cell>
+          </cv-data-table-row>
+        </AppDataTable>
       </section>
       <AppHelpfulResourcesSection
         class="physics-of-computation-page__section"
@@ -361,12 +389,10 @@ export default class PhysicsOfComputationPage extends QiskitPage {
   getDataTableElements (agenda: AgendaSlot[]) : TableRowElement[][] {
     return agenda.map(slot => ([
       {
-        component: 'span',
         styles: 'min-width: 5rem; display: inline-block; font-weight: bold;',
         data: slot.time
       },
       {
-        component: 'span',
         styles: 'min-width: 20rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
         data: slot.event
       }
@@ -376,17 +402,14 @@ export default class PhysicsOfComputationPage extends QiskitPage {
   getDataTableElementsByTrack (agenda: AgendaSlotByTrack[]) : TableRowElement[][] {
     return agenda.map(slot => ([
       {
-        component: 'span',
         styles: 'min-width: 5rem; display: inline-block; font-weight: bold;',
         data: slot.time
       },
       {
-        component: 'span',
         styles: 'width: 25rem; min-width: 20rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
         data: slot.track1
       },
       {
-        component: 'span',
         styles: 'width: 25rem; min-width: 20rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
         data: slot.track2
       }
