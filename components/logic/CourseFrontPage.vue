@@ -1,7 +1,7 @@
 <template>
-  <main class="introduction-course-page">
+  <main class="course-front-page">
     <TextbookBetaContentMenuSection
-      class="introduction-course-page__content-menu"
+      class="course-front-page__content-menu"
     />
     <AppPageHeaderWithImage :cta="startLearningCTA" :back-link="backToTextbookHomeLink">
       <template slot="title">
@@ -20,15 +20,15 @@
     </AppPageHeaderWithImage>
     <PrerequisiteMaterialSection
       v-if="prerequisites.length > 0"
-      class="introduction-course-page__section"
+      class="course-front-page__section"
       :data="prerequisites"
     />
     <ExternalRecommendedReadings
       v-if="links.length > 0"
-      class="introduction-course-page__section"
+      class="course-front-page__section"
       :links="links"
     />
-    <CoursePagesSection class="introduction-course-page__section" :courses="courses" :img-base="imageUrlBase" />
+    <CoursePagesSection class="course-front-page__section" :courses="courses" :img-base="imageUrlBase" />
   </main>
 </template>
 
@@ -69,7 +69,7 @@ export default abstract class CourseFrontPage extends QiskitPage {
 </script>
 
 <style lang="scss" scoped>
-.introduction-course-page {
+.course-front-page {
   &__section {
     @include contained();
 
