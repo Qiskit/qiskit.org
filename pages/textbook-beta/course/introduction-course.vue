@@ -1,44 +1,15 @@
-<template>
-  <main class="introduction-course-page">
-    <TextbookBetaContentMenuSection
-      class="introduction-course-page__content-menu"
-    />
-    <AppPageHeaderWithImage :cta="startLearningCTA" :back-link="backToTextbookHomeLink">
-      <template slot="title">
-        {{ headerTitle }}
-      </template>
-      <template slot="description">
-        <p
-          v-for="(paragraph, index) in headerDescription"
-          :key="index"
-          v-text="paragraph"
-        />
-      </template>
-      <template slot="image">
-        <img class="app-page-header-with-img__image" :src="headerImg">
-      </template>
-    </AppPageHeaderWithImage>
-    <PrerequisiteMaterialSection class="introduction-course-page__section" :data="introductionCoursePrerequisites" />
-    <ExternalRecommendedReadings class="introduction-course-page__section" :links="links" />
-    <CoursePagesSection class="introduction-course-page__section" :courses="courses" :img-base="imageUrlBase" />
-  </main>
-</template>
-
 <script lang="ts">
 import { Course, Prerequisite } from 'constants/textbookBetaContent'
 import { Component } from 'vue-property-decorator'
-import QiskitPage from '~/components/logic/QiskitPage.vue'
+import CourseFrontPage from '~/components/logic/CourseFrontPage.vue'
 import { GeneralLink, StartLearningUrl } from '~/constants/appLinks'
 
 @Component({
-  layout: 'default-max',
-  head () {
-    return {
-      title: 'Introduction course'
-    }
-  }
+  head: () => ({
+    title: 'Introduction course'
+  })
 })
-export default class IntroductionCoursePage extends QiskitPage {
+export default class IntroductionCoursePage extends CourseFrontPage {
   routeName: string = 'introduction-course'
 
   headerTitle = 'Introduction to Quantum Computing'
@@ -142,7 +113,7 @@ export default class IntroductionCoursePage extends QiskitPage {
     }
   ]
 
-  introductionCoursePrerequisites: Prerequisite[] = [
+  prerequisites: Prerequisite[] = [
     {
       title: 'Setting Up Your Environment',
       description:
@@ -168,21 +139,3 @@ export default class IntroductionCoursePage extends QiskitPage {
   imageUrlBase = '/images/textbook-beta/course/introduction-course'
 }
 </script>
-
-<style lang="scss" scoped>
-.introduction-course-page {
-  &__section {
-    @include contained();
-
-    max-width: $max-size;
-    margin-bottom: $spacing-07;
-    margin-top: $spacing-10;
-  }
-
-  &__content-menu {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-}
-</style>
