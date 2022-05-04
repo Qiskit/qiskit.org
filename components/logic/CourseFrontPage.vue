@@ -19,12 +19,12 @@
       </template>
     </AppPageHeaderWithImage>
     <PrerequisiteMaterialSection
-      v-if="prerequisite && prerequisite.lenght > 0"
+      v-if="prerequisites.length > 0"
       class="introduction-course-page__section"
       :data="prerequisites"
     />
     <ExternalRecommendedReadings
-      v-if="links && links.lenght > 0"
+      v-if="links.length > 0"
       class="introduction-course-page__section"
       :links="links"
     />
