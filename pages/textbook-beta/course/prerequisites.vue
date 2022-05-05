@@ -1,7 +1,7 @@
 <script lang="ts">
 import { Course, Prerequisite } from 'constants/textbookBetaContent'
 import { Component } from 'vue-property-decorator'
-import CourseFrontPage from '~/components/logic/CourseFrontPage.vue'
+import CourseOverviewPage from '~/components/logic/CourseOverviewPage.vue'
 import { GeneralLink, PrerequisitesUrl } from '~/constants/appLinks'
 
 @Component({
@@ -9,11 +9,11 @@ import { GeneralLink, PrerequisitesUrl } from '~/constants/appLinks'
     title: 'Prerequisites'
   })
 })
-export default class PrerequisitesPage extends CourseFrontPage {
+export default class PrerequisitesPage extends CourseOverviewPage {
   routeName: string = 'prerequisites'
 
   headerTitle = 'Prerequisites'
-  headerDescription = ['This is a comprehensive guide for setting up your environment on your personal computer for working with Qiskit Textbook. This will help you reproduce the results as you see them on the textbook website. The Qiskit Textbook is written in Jupyter notebooks.']
+  headerDescription = ['This is a comprehensive guide for setting up your environment on your personal computer for working with Qiskit Textbook. This will help you reproduce the results as you see them on the textbook website. The Qiskit Textbook is written in Jupyter Notebooks.']
 
   headerImg = '/images/textbook-beta/course/prerequisites/prerequisites.png'
 
@@ -54,9 +54,15 @@ export default class PrerequisitesPage extends CourseFrontPage {
 
   courses: Course[] = [
     {
-      image: 'why-quantum-computing-preview.png',
+      image: 'introduction.png',
       label: 'Python and Jupyter Notebooks',
       segment: { cta: 'python-and-jupyter-notebooks', location: 'course' },
+      url: PrerequisitesUrl.Introduction
+    },
+    {
+      image: 'environment-setup.png',
+      label: 'Setting Up Your Environment',
+      segment: { cta: 'setting-up-your-environment', location: 'course' },
       url: PrerequisitesUrl.Introduction
     }
   ]
