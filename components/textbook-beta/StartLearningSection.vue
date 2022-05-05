@@ -99,7 +99,7 @@ export default class StartLearningSection extends Vue {
         {
           image: '/images/textbook-beta/course/prerequisites/prerequisites.png',
           title: 'Prerequisites',
-          description: 'Learn about the software used to write the Qiskit textbook (Python and Jupyter notebooks), and set up your environment to reproduce the experiments.',
+          description: 'Learn about the software used to write the Qiskit textbook (Python and Jupyter Notebooks), and set up your environment to reproduce the experiments.',
           cta: {
             label: 'View resource',
             url: '/textbook-beta/course/prerequisites',
