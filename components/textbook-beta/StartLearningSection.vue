@@ -95,6 +95,16 @@ export default class StartLearningSection extends Vue {
             url: '/textbook-beta/course/machine-learning-course',
             segment: { cta: 'machine-learning', location: 'course' }
           }
+        },
+        {
+          image: '/images/textbook-beta/course/prerequisites/prerequisites.png',
+          title: 'Prerequisites',
+          description: 'Learn about the software used to write the Qiskit textbook (Python and Jupyter Notebooks), and set up your environment to reproduce the experiments.',
+          cta: {
+            label: 'View resource',
+            url: '/textbook-beta/course/prerequisites',
+            segment: { cta: 'prerequisites', location: 'course' }
+          }
         }
       ]
     },
