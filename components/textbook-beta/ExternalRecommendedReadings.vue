@@ -19,6 +19,7 @@
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 import { GeneralLink } from '~/constants/appLinks'
+
 @Component
 export default class ExternalRecommendedReadings extends Vue {
   @Prop({ type: Array, required: true }) links!: GeneralLink[]
