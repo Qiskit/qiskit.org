@@ -78,7 +78,8 @@ export default abstract class CourseOverviewPage extends QiskitPage {
     margin-top: $spacing-10;
 
     ::v-deep .course-pages-section__main {
-      max-height: 32.5rem;
+      min-height: 20rem;
+      height: max-content;
     }
   }
 
