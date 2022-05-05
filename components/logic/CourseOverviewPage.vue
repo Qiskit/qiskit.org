@@ -41,7 +41,7 @@ import { Course, Prerequisite } from '~/constants/textbookBetaContent'
 @Component({
   layout: 'default-max'
 })
-export default abstract class CourseFrontPage extends QiskitPage {
+export default abstract class CourseOverviewPage extends QiskitPage {
   abstract routeName: string
 
   abstract headerTitle: string

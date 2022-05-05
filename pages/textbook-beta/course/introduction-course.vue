@@ -1,7 +1,7 @@
 <script lang="ts">
 import { Course, Prerequisite } from 'constants/textbookBetaContent'
 import { Component } from 'vue-property-decorator'
-import CourseFrontPage from '~/components/logic/CourseFrontPage.vue'
+import CourseOverviewPage from '~/components/logic/CourseOverviewPage.vue'
 import { GeneralLink, StartLearningUrl } from '~/constants/appLinks'
 
 @Component({
@@ -9,7 +9,7 @@ import { GeneralLink, StartLearningUrl } from '~/constants/appLinks'
     title: 'Introduction course'
   })
 })
-export default class IntroductionCoursePage extends CourseFrontPage {
+export default class IntroductionCoursePage extends CourseOverviewPage {
   routeName: string = 'introduction-course'
 
   headerTitle = 'Introduction to Quantum Computing'

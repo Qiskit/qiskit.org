@@ -1,7 +1,7 @@
 <script lang="ts">
 import { Course, Prerequisite } from 'constants/textbookBetaContent'
 import { Component } from 'vue-property-decorator'
-import CourseFrontPage from '~/components/logic/CourseFrontPage.vue'
+import CourseOverviewPage from '~/components/logic/CourseOverviewPage.vue'
 import { GeneralLink, StartLearningUrl } from '~/constants/appLinks'
 
 @Component({
@@ -9,7 +9,7 @@ import { GeneralLink, StartLearningUrl } from '~/constants/appLinks'
     title: '2021 Qiskit Global Summer School on Quantum Machine Learning'
   })
 })
-export default class SummerSchoolCoursePage extends CourseFrontPage {
+export default class SummerSchoolCoursePage extends CourseOverviewPage {
   routeName: string = 'summer-school/quantum-computing-and-quantum-learning-2021'
 
   headerTitle = '2021 Qiskit Global Summer School on Quantum Machine Learning'
