@@ -57,7 +57,8 @@ enum StartLearningUrl {
 }
 
 enum PrerequisitesUrl {
-  Introduction = 'https://learn.qiskit.org/course/ch-prerequisites',
+  SettingUp = 'https://learn.qiskit.org/course/ch-prerequisites/environment-setup-guide-to-work-with-qiskit-textbook',
+  Introduction = 'https://learn.qiskit.org/course/ch-prerequisites/introduction-to-python-and-jupyter-notebooks'
 }
 
 const IBM_Q_EXPERIENCE: GeneralLink = {

@@ -54,15 +54,15 @@ export default class PrerequisitesPage extends CourseOverviewPage {
 
   courses: Course[] = [
     {
-      image: 'introduction.png',
-      label: 'Python and Jupyter Notebooks',
-      segment: { cta: 'python-and-jupyter-notebooks', location: 'course' },
-      url: PrerequisitesUrl.Introduction
-    },
-    {
       image: 'environment-setup.png',
       label: 'Setting Up Your Environment',
       segment: { cta: 'setting-up-your-environment', location: 'course' },
+      url: PrerequisitesUrl.SettingUp
+    },
+    {
+      image: 'introduction.png',
+      label: 'Python and Jupyter Notebooks',
+      segment: { cta: 'python-and-jupyter-notebooks', location: 'course' },
       url: PrerequisitesUrl.Introduction
     }
   ]
