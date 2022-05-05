@@ -56,6 +56,10 @@ enum StartLearningUrl {
   SummerSchool2021 = 'https://learn.qiskit.org/summer-school/2021/'
 }
 
+enum PrerequisitesUrl {
+  Introduction = 'https://learn.qiskit.org/course/ch-prerequisites',
+}
+
 const IBM_Q_EXPERIENCE: GeneralLink = {
   url: 'https://quantum-computing.ibm.com/lab',
   label: 'IBM Quantum Lab'
@@ -68,5 +72,6 @@ export {
   SEMINAR_SERIES_FULL_ARCHIVE_CTA,
   TEXTBOOK_BETA_START_LEARNING,
   StartLearningUrl,
+  PrerequisitesUrl,
   IBM_Q_EXPERIENCE
 }
