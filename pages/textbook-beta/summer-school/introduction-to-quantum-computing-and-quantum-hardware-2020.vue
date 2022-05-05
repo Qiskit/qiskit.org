@@ -1,43 +1,27 @@
-<template>
-  <main class="summer-school-page">
-    <TextbookBetaContentMenuSection
-      class="summer-school-page__content-menu"
-    />
-    <AppPageHeaderWithImage :cta="startLearningCTA" :back-link="backToTextbookHomeLink">
-      <template slot="title">
-        {{ headerTitle }}
-      </template>
-      <template slot="description">
-        <p v-text="headerDescription" />
-      </template>
-      <template slot="image">
-        <img class="app-page-header-with-img__image" :src="headerImg">
-      </template>
-    </AppPageHeaderWithImage>
-    <PrerequisiteMaterialSection class="summer-school-page__section" :data="summerSchool2020Prerequisites" />
-    <CoursePagesSection class="summer-school-page__section" :courses="courses" :img-base="imageUrlBase" />
-  </main>
-</template>
-
 <script lang="ts">
 import { Course, Prerequisite } from 'constants/textbookBetaContent'
 import { Component } from 'vue-property-decorator'
-import QiskitPage from '~/components/logic/QiskitPage.vue'
+import CourseOverviewPage from '~/components/logic/CourseOverviewPage.vue'
 import { GeneralLink, StartLearningUrl } from '~/constants/appLinks'
 
 @Component({
-  layout: 'default-max',
-  head () {
-    return {
-      title: '2020 Qiskit global summer school on quantum computing and quantum hardware'
-    }
-  }
+  head: () => ({
+    title: '2020 Qiskit global summer school on quantum computing and quantum hardware'
+  })
 })
-export default class SummerSchoolCoursePage extends QiskitPage {
+export default class SummerSchoolCoursePage extends CourseOverviewPage {
   routeName: string = 'summer-school/intro-quantum-computing-quantum-hardware-2020'
 
   headerTitle = '2020 Qiskit Global Summer School on Quantum Computing and Quantum Hardware'
-  headerDescription = 'This course is an introduction to the world of quantum computing, with an exploration of some of the key quantum algorithms and their implementations using quantum circuits, as well as the quantum hardware that is designed to run these algorithms. The course was first offered during the Qiskit Global Summer School in July 2020 as a two-week intensive summer school. There are 27 lectures in this course, which cover the material in 9 lecture notes and 9 associated labs.'
+  headerDescription = [
+    `This course is an introduction to the world of quantum computing, with 
+    an exploration of some of the key quantum algorithms and their 
+    implementations using quantum circuits, as well as the quantum hardware 
+    that is designed to run these algorithms. The course was first offered 
+    during the Qiskit Global Summer School in July 2020 as a two-week intensive 
+    summer school. There are 27 lectures in this course, which cover the 
+    material in 9 lecture notes and 9 associated labs.`
+  ]
 
   headerImg = '/images/textbook-beta/summer-school/intro-quantum-computing-quantum-hardware-2020/header.png'
 
@@ -120,7 +104,9 @@ export default class SummerSchoolCoursePage extends QiskitPage {
     }
   ]
 
-  summerSchool2020Prerequisites: Prerequisite[] = [
+  links: GeneralLink[] = []
+
+  prerequisites: Prerequisite[] = [
     {
       title: 'Probability Theory: Random Variables and Distributions',
       description:
@@ -156,29 +142,3 @@ export default class SummerSchoolCoursePage extends QiskitPage {
   imageUrlBase = '/images/textbook-beta/summer-school/intro-quantum-computing-quantum-hardware-2020'
 }
 </script>
-
-<style lang="scss" scoped>
-.summer-school-page {
-  &__section {
-    @include contained();
-
-    max-width: $max-size;
-    margin-bottom: $layout-03;
-    margin-top: $layout-05;
-  }
-
-  &__content-menu {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-}
-</style>
-
-<style lang="scss">
-.summer-school-page {
-  .course-pages-section__main {
-    max-height: 32.5rem;
-  }
-}
-</style>

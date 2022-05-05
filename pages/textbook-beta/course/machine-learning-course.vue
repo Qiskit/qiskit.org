@@ -1,43 +1,19 @@
-<template>
-  <main class="machine-learning-course-page">
-    <TextbookBetaContentMenuSection
-      class="machine-learning-course-page__content-menu"
-    />
-    <AppPageHeaderWithImage :cta="startLearningCTA" :back-link="backToTextbookHomeLink">
-      <template slot="title">
-        {{ headerTitle }}
-      </template>
-      <template slot="description">
-        <p v-text="headerDescription" />
-      </template>
-      <template slot="image">
-        <img class="app-page-header-with-img__image" :src="headerImg">
-      </template>
-    </AppPageHeaderWithImage>
-    <PrerequisiteMaterialSection class="machine-learning-course-page__section" :data="qmlCoursePrerequisites" />
-    <CoursePagesSection class="machine-learning-course-page__section" :courses="courses" :img-base="imageUrlBase" />
-  </main>
-</template>
-
 <script lang="ts">
 import { Course, Prerequisite } from 'constants/textbookBetaContent'
 import { Component } from 'vue-property-decorator'
-import QiskitPage from '~/components/logic/QiskitPage.vue'
+import CourseOverviewPage from '~/components/logic/CourseOverviewPage.vue'
 import { GeneralLink, StartLearningUrl } from '~/constants/appLinks'
 
 @Component({
-  layout: 'default-max',
-  head () {
-    return {
-      title: 'Quantum machine learning course'
-    }
-  }
+  head: () => ({
+    title: 'Quantum machine learning course'
+  })
 })
-export default class QuantumMachineLearningCoursePage extends QiskitPage {
+export default class QuantumMachineLearningCoursePage extends CourseOverviewPage {
   routeName: string = 'machine-learning-course'
 
   headerTitle = 'Quantum machine learning'
-  headerDescription = `This course contains around eight hours of content, and
+  headerDescription = [`This course contains around eight hours of content, and
   is aimed at self-learners who are comfortable with undergraduate-level
   mathematics and quantum computing fundamentals. This course will take you
   through key concepts in quantum machine learning, such as parameterized
@@ -46,19 +22,11 @@ export default class QuantumMachineLearningCoursePage extends QiskitPage {
   and you'll be familiar with recent developments in both supervised and
   unsupervised learning such as quantum kernels and general adversarial networks.
   This course finishes with a project that you can use to showcase what you've
-  learnt.
-  
-  This course was created by IBM Quantum with the help of Qiskit Advocates through the Qiskit Advocate Mentoring Program.`
+  learnt.`,
+  `This course was created by IBM Quantum with the help of Qiskit Advocates 
+  through the Qiskit Advocate Mentoring Program.`]
 
   headerImg = '/images/textbook-beta/course/machine-learning-course/header.png'
-
-  backToTextbookHomeLink: GeneralLink = {
-    url: '/textbook-beta',
-    label: 'Home',
-    segment: {
-      cta: 'back-to-textbook-home', location: 'header'
-    }
-  }
 
   startLearningCTA: GeneralLink = {
     url: StartLearningUrl.QML,
@@ -67,6 +35,10 @@ export default class QuantumMachineLearningCoursePage extends QiskitPage {
       cta: 'machine-learning', location: 'course'
     }
   }
+
+  links: GeneralLink[] = []
+
+  prerequisites: Prerequisite[] = []
 
   courses: Course[] = [
     {
@@ -167,21 +139,3 @@ export default class QuantumMachineLearningCoursePage extends QiskitPage {
   imageUrlBase = '/images/textbook-beta/course/machine-learning-course'
 }
 </script>
-
-<style lang="scss" scoped>
-.machine-learning-course-page {
-  &__section {
-    @include contained();
-
-    max-width: $max-size;
-    margin-bottom: $spacing-07;
-    margin-top: $spacing-10;
-  }
-
-  &__content-menu {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-}
-</style>
