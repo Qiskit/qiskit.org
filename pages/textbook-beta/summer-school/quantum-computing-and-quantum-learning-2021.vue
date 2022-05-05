@@ -1,48 +1,24 @@
-<template>
-  <main class="summer-school-page">
-    <TextbookBetaContentMenuSection
-      class="summer-school-page__content-menu"
-    />
-    <AppPageHeaderWithImage :cta="startLearningCTA" :back-link="backToTextbookHomeLink">
-      <template slot="title">
-        {{ headerTitle }}
-      </template>
-      <template slot="description">
-        <p
-          v-for="(paragraph, index) in headerDescription"
-          :key="index"
-          v-text="paragraph"
-        />
-      </template>
-      <template slot="image">
-        <img class="app-page-header-with-img__image" :src="headerImg">
-      </template>
-    </AppPageHeaderWithImage>
-    <PrerequisiteMaterialSection class="summer-school-page__section" :data="summerSchool2021Prerequisites" />
-    <ExternalRecommendedReadings class="summer-school-page__section" :links="links" />
-    <CoursePagesSection class="summer-school-page__section" :courses="courses" :img-base="imageUrlBase" />
-  </main>
-</template>
-
 <script lang="ts">
 import { Course, Prerequisite } from 'constants/textbookBetaContent'
 import { Component } from 'vue-property-decorator'
-import QiskitPage from '~/components/logic/QiskitPage.vue'
+import CourseFrontPage from '~/components/logic/CourseFrontPage.vue'
 import { GeneralLink, StartLearningUrl } from '~/constants/appLinks'
 
 @Component({
-  layout: 'default-max',
-  head () {
-    return {
-      title: '2021 Qiskit Global Summer School on Quantum Machine Learning'
-    }
-  }
+  head: () => ({
+    title: '2021 Qiskit Global Summer School on Quantum Machine Learning'
+  })
 })
-export default class SummerSchoolCoursePage extends QiskitPage {
+export default class SummerSchoolCoursePage extends CourseFrontPage {
   routeName: string = 'summer-school/quantum-computing-and-quantum-learning-2021'
 
   headerTitle = '2021 Qiskit Global Summer School on Quantum Machine Learning'
-  headerDescription = ['Quantum computing experts and mentors share valuable insights through twenty lectures and five applied lab exercises that provide deep-dives exploring concepts in quantum computing, focused on the implementations of quantum machine learning algorithms in Qiskit.']
+  headerDescription = [
+    `Quantum computing experts and mentors share valuable insights through 
+    twenty lectures and five applied lab exercises that provide deep-dives 
+    exploring concepts in quantum computing, focused on the implementations 
+    of quantum machine learning algorithms in Qiskit.`
+  ]
 
   headerImg = '/images/textbook-beta/summer-school/quantum-computing-and-quantum-learning-2021/header.png'
 
@@ -228,7 +204,7 @@ export default class SummerSchoolCoursePage extends QiskitPage {
     }
   ]
 
-  summerSchool2021Prerequisites: Prerequisite[] = [
+  prerequisites: Prerequisite[] = [
     {
       title: 'Introduction to Quantum Computing and Quantum Hardware',
       description:
@@ -274,29 +250,3 @@ export default class SummerSchoolCoursePage extends QiskitPage {
   imageUrlBase = '/images/textbook-beta/summer-school/quantum-computing-and-quantum-learning-2021'
 }
 </script>
-
-<style lang="scss" scoped>
-.summer-school-page {
-  &__section {
-    @include contained();
-
-    max-width: $max-size;
-    margin-bottom: $layout-03;
-    margin-top: $layout-05;
-  }
-
-  &__content-menu {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-}
-</style>
-
-<style lang="scss">
-.summer-school-page {
-  .course-pages-section__main {
-    max-height: 32.5rem;
-  }
-}
-</style>
