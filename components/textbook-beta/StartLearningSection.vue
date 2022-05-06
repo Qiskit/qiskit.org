@@ -113,7 +113,7 @@ export default class StartLearningSection extends Vue {
           cta: {
             label: 'View resource',
             url: '/textbook-beta/course/quantum-states-and-qubits',
-            segment: { cta: 'prerequisites', location: 'course' }
+            segment: { cta: 'quantum-states-and-qubits', location: 'course' }
           }
         }
       ]
