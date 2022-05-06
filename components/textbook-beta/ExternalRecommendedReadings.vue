@@ -46,6 +46,7 @@ export default class ExternalRecommendedReadings extends Vue {
 .external-recommended-readings {
   &__list {
     list-style: decimal;
+    margin-left: $spacing-05;
   }
 
   &__link {
