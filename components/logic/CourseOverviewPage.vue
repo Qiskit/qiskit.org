@@ -24,9 +24,10 @@
       :data="prerequisites"
     />
     <ExternalRecommendedReadings
-      v-if="links.length > 0"
+      v-if="links.length > 0 || references.length > 0"
       class="course-overview-page__section"
       :links="links"
+      :references="references"
     />
     <CoursePagesSection class="course-overview-page__section" :courses="courses" :img-base="imageUrlBase" />
   </main>
@@ -51,6 +52,8 @@ export default abstract class CourseOverviewPage extends QiskitPage {
   abstract startLearningCTA: GeneralLink
 
   abstract links: GeneralLink[]
+
+  abstract references: string[]
 
   abstract courses: Course[]
 

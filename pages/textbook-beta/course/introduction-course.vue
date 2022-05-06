@@ -43,6 +43,7 @@ export default class IntroductionCoursePage extends CourseOverviewPage {
     }
   }
 
+  references: string[] = []
   links: GeneralLink[] = [
     {
       url: 'https://math.mit.edu/~gs/linearalgebra/',

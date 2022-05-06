@@ -14,9 +14,9 @@ export default class SummerSchoolCoursePage extends CourseOverviewPage {
 
   headerTitle = '2021 Qiskit Global Summer School on Quantum Machine Learning'
   headerDescription = [
-    `Quantum computing experts and mentors share valuable insights through 
-    twenty lectures and five applied lab exercises that provide deep-dives 
-    exploring concepts in quantum computing, focused on the implementations 
+    `Quantum computing experts and mentors share valuable insights through
+    twenty lectures and five applied lab exercises that provide deep-dives
+    exploring concepts in quantum computing, focused on the implementations
     of quantum machine learning algorithms in Qiskit.`
   ]
 
@@ -38,6 +38,7 @@ export default class SummerSchoolCoursePage extends CourseOverviewPage {
     }
   }
 
+  references: string[] = []
   links: GeneralLink[] = [
     {
       url: 'http://mmrc.amss.cas.cn/tlb/201702/W020170224608149940643.pdf',
