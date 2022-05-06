@@ -23,7 +23,7 @@ export default class QuantumMachineLearningCoursePage extends CourseOverviewPage
   unsupervised learning such as quantum kernels and general adversarial networks.
   This course finishes with a project that you can use to showcase what you've
   learnt.`,
-  `This course was created by IBM Quantum with the help of Qiskit Advocates 
+  `This course was created by IBM Quantum with the help of Qiskit Advocates
   through the Qiskit Advocate Mentoring Program.`]
 
   headerImg = '/images/textbook-beta/course/machine-learning-course/header.png'
@@ -36,6 +36,7 @@ export default class QuantumMachineLearningCoursePage extends CourseOverviewPage
     }
   }
 
+  references: string[] = []
   links: GeneralLink[] = []
 
   prerequisites: Prerequisite[] = []

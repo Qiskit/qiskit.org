@@ -14,12 +14,12 @@ export default class SummerSchoolCoursePage extends CourseOverviewPage {
 
   headerTitle = '2020 Qiskit Global Summer School on Quantum Computing and Quantum Hardware'
   headerDescription = [
-    `This course is an introduction to the world of quantum computing, with 
-    an exploration of some of the key quantum algorithms and their 
-    implementations using quantum circuits, as well as the quantum hardware 
-    that is designed to run these algorithms. The course was first offered 
-    during the Qiskit Global Summer School in July 2020 as a two-week intensive 
-    summer school. There are 27 lectures in this course, which cover the 
+    `This course is an introduction to the world of quantum computing, with
+    an exploration of some of the key quantum algorithms and their
+    implementations using quantum circuits, as well as the quantum hardware
+    that is designed to run these algorithms. The course was first offered
+    during the Qiskit Global Summer School in July 2020 as a two-week intensive
+    summer school. There are 27 lectures in this course, which cover the
     material in 9 lecture notes and 9 associated labs.`
   ]
 
@@ -104,6 +104,7 @@ export default class SummerSchoolCoursePage extends CourseOverviewPage {
     }
   ]
 
+  references: string[] = []
   links: GeneralLink[] = []
 
   prerequisites: Prerequisite[] = [
