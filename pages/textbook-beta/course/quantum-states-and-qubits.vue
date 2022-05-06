@@ -1,0 +1,108 @@
+<script lang="ts">
+import { Course, Prerequisite } from 'constants/textbookBetaContent'
+import { Component } from 'vue-property-decorator'
+import CourseOverviewPage from '~/components/logic/CourseOverviewPage.vue'
+import { GeneralLink, QuantumStatesAndQubitsUrl } from '~/constants/appLinks'
+
+@Component({
+  head: () => ({
+    title: 'Quantum States and Qubits'
+  })
+})
+export default class QuantumStatesAndQubitsPage extends CourseOverviewPage {
+  routeName: string = 'quantum-states-and-qubits'
+
+  headerTitle = 'Quantum States and Qubits'
+  headerDescription = ['If you think quantum mechanics sounds challenging, you’re not alone. Our intuitions come from day-to-day experiences, and so are better at understanding the behavior of balls and bananas than atoms or electrons. Though quantum objects can seem random and chaotic at first, they just follow a different set of rules. Once we know what those rules are, we can use them to create new and powerful technology. Quantum computing will be the most revolutionary example of this.']
+
+  headerImg = '/images/textbook-beta/course/quantum-states-and-qubits/bloch-sphere.png'
+
+  backToTextbookHomeLink: GeneralLink = {
+    url: '/textbook-beta',
+    label: 'Home',
+    segment: {
+      cta: 'back-to-textbook-home', location: 'header'
+    }
+  }
+
+  startLearningCTA: GeneralLink = {
+    url: QuantumStatesAndQubitsUrl.Introduction,
+    label: 'Start learning',
+    segment: {
+      cta: 'introduction', location: 'header'
+    }
+  }
+
+  references: string[] = [
+    'Michael Nielsen and Isaac Chuang. Quantum Computation and Quantum Information (Chapter 1). Cambridge University Press, 2000.',
+    'Phillip Kaye, Raymond Laflamme, and Michele Mosca. An Introduction to Quantum Computing (Chapters 1-3). Oxford University Press, 2007.'
+  ]
+
+  links: GeneralLink[] = [
+    {
+      url: 'https://arxiv.org/abs/1907.09415',
+      label: 'Ronald de Wolf. Quantum Computing: Lecture Notes (Chapters 1 and 2).',
+      segment: {
+        cta: 'mlmastery-linear-algebra',
+        location: 'external-recommended-readings'
+      }
+    },
+    {
+      url: 'http://cleve.iqc.uwaterloo.ca/resources/QIC-710-F21/Qic710Primer.pdf',
+      label: 'Richard Cleve. Quantum Information Processing — A Primer for Beginners.',
+      segment: {
+        cta: 'mlmastery-linear-algebra',
+        location: 'external-recommended-readings'
+      }
+    }
+  ]
+
+  courses: Course[] = [
+    {
+      image: 'introduction.png',
+      label: 'Introduction',
+      segment: { cta: 'introduction', location: 'course' },
+      url: QuantumStatesAndQubitsUrl.Introduction
+    },
+    {
+      image: 'atoms-of-computation.png',
+      label: 'The Atoms of Computation',
+      segment: { cta: 'atoms-of-computation', location: 'course' },
+      url: QuantumStatesAndQubitsUrl.AtomsOfComputation
+    },
+    {
+      image: 'representing-qubit-states.png',
+      label: 'Representing Qubit States',
+      segment: { cta: 'representing-qubit-states', location: 'course' },
+      url: QuantumStatesAndQubitsUrl.RepresentingQubitStates
+    },
+    {
+      image: 'single-qubit-gates.png',
+      label: 'Single Qubit Gates',
+      segment: { cta: 'single-qubit-gates', location: 'course' },
+      url: QuantumStatesAndQubitsUrl.SingleQubitGates
+    },
+    {
+      image: 'case-for-quantum-computers.png',
+      label: 'The Case for Quantum',
+      segment: { cta: 'case-for-quantum-computers', location: 'course' },
+      url: QuantumStatesAndQubitsUrl.CaseForQuantum
+    }
+  ]
+
+  prerequisites: Prerequisite[] = [
+    {
+      title: 'Python and Jupyter Notebooks',
+      description:
+        "Python is a programming language where you don't need to compile. You can just run it line by line...",
+      segment: {
+        cta: 'python-and-jupyter-notebooks', location: 'prerequisite-material'
+      },
+      url:
+        'https://learn.qiskit.org/course/ch-prerequisites/introduction-to-python-and-jupyter-notebooks'
+    }
+  ]
+
+  imageUrlBase = '/images/textbook-beta/course/quantum-states-and-qubits'
+}
+</script>

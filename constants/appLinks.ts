@@ -61,6 +61,14 @@ enum PrerequisitesUrl {
   Introduction = 'https://learn.qiskit.org/course/ch-prerequisites/introduction-to-python-and-jupyter-notebooks'
 }
 
+enum QuantumStatesAndQubitsUrl {
+  Introduction = 'https://learn.qiskit.org/course/ch-states/introduction',
+  AtomsOfComputation = 'https://learn.qiskit.org/course/ch-states/the-atoms-of-computation',
+  RepresentingQubitStates = 'https://learn.qiskit.org/course/ch-states/representing-qubit-states',
+  SingleQubitGates = 'https://learn.qiskit.org/course/ch-states/single-qubit-gates',
+  CaseForQuantum = 'https://learn.qiskit.org/course/ch-states/the-case-for-quantum-computers'
+}
+
 const IBM_Q_EXPERIENCE: GeneralLink = {
   url: 'https://quantum-computing.ibm.com/lab',
   label: 'IBM Quantum Lab'
@@ -74,5 +82,6 @@ export {
   TEXTBOOK_BETA_START_LEARNING,
   StartLearningUrl,
   PrerequisitesUrl,
+  QuantumStatesAndQubitsUrl,
   IBM_Q_EXPERIENCE
 }
