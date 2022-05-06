@@ -105,6 +105,16 @@ export default class StartLearningSection extends Vue {
             url: '/textbook-beta/course/prerequisites',
             segment: { cta: 'prerequisites', location: 'course' }
           }
+        },
+        {
+          image: '/images/textbook-beta/course/quantum-states-and-qubits/bloch-sphere.png',
+          title: 'Quantum States and Qubits',
+          description: 'This chapter introduces the computing concepts that we\'ll explore in later chapters, then introduces basic quantum concepts.',
+          cta: {
+            label: 'View resource',
+            url: '/textbook-beta/course/quantum-states-and-qubits',
+            segment: { cta: 'prerequisites', location: 'course' }
+          }
         }
       ]
     },
