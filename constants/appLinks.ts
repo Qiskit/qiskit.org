@@ -69,6 +69,15 @@ enum QuantumStatesAndQubitsUrl {
   CaseForQuantum = 'https://learn.qiskit.org/course/ch-states/the-case-for-quantum-computers'
 }
 
+enum MultipleQubitsAndEntanglementUrl {
+  Introduction = 'https://learn.qiskit.org/course/ch-gates/introduction',
+  MultipleQubitsAndEntangledStates = 'https://learn.qiskit.org/course/ch-gates/multiple-qubits-and-entangled-states',
+  PhaseKickback = 'https://learn.qiskit.org/course/ch-gates/phase-kickback',
+  BasicCircuitIdentities = 'https://learn.qiskit.org/course/ch-gates/basic-circuit-identities',
+  ProvingUniversality = 'https://learn.qiskit.org/course/ch-gates/proving-universality',
+  ClassicalComputationOnAQuantumComputer = 'https://learn.qiskit.org/course/ch-gates/classical-computation-on-a-quantum-computer'
+}
+
 const IBM_Q_EXPERIENCE: GeneralLink = {
   url: 'https://quantum-computing.ibm.com/lab',
   label: 'IBM Quantum Lab'
@@ -82,6 +91,7 @@ export {
   TEXTBOOK_BETA_START_LEARNING,
   StartLearningUrl,
   PrerequisitesUrl,
+  MultipleQubitsAndEntanglementUrl,
   QuantumStatesAndQubitsUrl,
   IBM_Q_EXPERIENCE
 }

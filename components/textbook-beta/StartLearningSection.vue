@@ -115,6 +115,16 @@ export default class StartLearningSection extends Vue {
             url: '/textbook-beta/course/quantum-states-and-qubits',
             segment: { cta: 'quantum-states-and-qubits', location: 'course' }
           }
+        },
+        {
+          image: '/images/textbook-beta/course/multiple-qubits-and-entanglement/multiple-qubits-and-entanglement.png',
+          title: 'Multiple Qubits and Entanglement',
+          description: 'With the basics down, this chapter explores the consequences of these new quantum effects, and sets us up with tools to understand quantum algorithms.',
+          cta: {
+            label: 'View resource',
+            url: '/textbook-beta/course/multiple-qubits-and-entanglement',
+            segment: { cta: 'multiple-qubits-and-entanglement', location: 'course' }
+          }
         }
       ]
     },
