@@ -115,6 +115,16 @@ export default class StartLearningSection extends Vue {
             url: '/textbook-beta/course/quantum-states-and-qubits',
             segment: { cta: 'quantum-states-and-qubits', location: 'course' }
           }
+        },
+        {
+          image: '/images/textbook-beta/course/quantum-protocols-and-quantum-algorithms/quantum-protocols-and-quantum-algorithms.png',
+          title: 'Quantum Protocols and Quantum Algorithms',
+          description: 'In this chapter, we use quantum effects to build powerful algorithms, starting from simple proof-of-concept algorithms, through to Shor\'s famous factoring algorithm (and beyond).',
+          cta: {
+            label: 'View resource',
+            url: '/textbook-beta/course/quantum-protocols-and-quantum-algorithms',
+            segment: { cta: 'quantum-protocols-and-quantum-algorithms', location: 'course' }
+          }
         }
       ]
     },
