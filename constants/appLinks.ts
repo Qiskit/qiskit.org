@@ -69,6 +69,15 @@ enum QuantumStatesAndQubitsUrl {
   CaseForQuantum = 'https://learn.qiskit.org/course/ch-states/the-case-for-quantum-computers'
 }
 
+enum MultipleQubitsAndEntanglementUrl {
+  Introduction = 'https://learn.qiskit.org/course/ch-gates/introduction',
+  MultipleQubitsAndEntangledStates = 'https://learn.qiskit.org/course/ch-gates/multiple-qubits-and-entangled-states',
+  PhaseKickback = 'https://learn.qiskit.org/course/ch-gates/phase-kickback',
+  BasicCircuitIdentities = 'https://learn.qiskit.org/course/ch-gates/basic-circuit-identities',
+  ProvingUniversality = 'https://learn.qiskit.org/course/ch-gates/proving-universality',
+  ClassicalComputationOnAQuantumComputer = 'https://learn.qiskit.org/course/ch-gates/classical-computation-on-a-quantum-computer'
+}
+
 enum QuantumProtocolsAndQuantumAlgorithmsUrl {
   DefiningQuantumCircuits = 'https://learn.qiskit.org/course/ch-algorithms/quantum-circuits',
   DeutschJozsaAlgorithm = 'https://learn.qiskit.org/course/ch-algorithms/deutsch-jozsa-algorithm',
@@ -97,6 +106,7 @@ export {
   TEXTBOOK_BETA_START_LEARNING,
   StartLearningUrl,
   PrerequisitesUrl,
+  MultipleQubitsAndEntanglementUrl,
   QuantumStatesAndQubitsUrl,
   QuantumProtocolsAndQuantumAlgorithmsUrl,
   IBM_Q_EXPERIENCE
