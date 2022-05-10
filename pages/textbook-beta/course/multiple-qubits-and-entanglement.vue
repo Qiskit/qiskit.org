@@ -45,7 +45,7 @@ export default class MultipleQubitsAndEntanglementPage extends CourseOverviewPag
       }
     },
     {
-      url: 'https://en.wikipedia.org/wiki/Quantum_Computation_and_Quantum_Information',
+      url: 'http://mmrc.amss.cas.cn/tlb/201702/W020170224608149125645.pdf',
       label: '(Chapters 1-4)',
       segment: {
         cta: 'an-introduction-to-quantum-computing',
@@ -53,7 +53,7 @@ export default class MultipleQubitsAndEntanglementPage extends CourseOverviewPag
       }
     },
     {
-      url: 'https://en.wikipedia.org/wiki/Quantum_Computation_and_Quantum_Information',
+      url: 'https://homepages.cwi.nl/~rdewolf/qcnotes.pdf',
       label: '(Chapters 1 and 2)',
       segment: {
         cta: 'quantum-computing-lecture-notes',
