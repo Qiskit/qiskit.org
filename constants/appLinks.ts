@@ -78,6 +78,21 @@ enum MultipleQubitsAndEntanglementUrl {
   ClassicalComputationOnAQuantumComputer = 'https://learn.qiskit.org/course/ch-gates/classical-computation-on-a-quantum-computer'
 }
 
+enum QuantumProtocolsAndQuantumAlgorithmsUrl {
+  DefiningQuantumCircuits = 'https://learn.qiskit.org/course/ch-algorithms/quantum-circuits',
+  DeutschJozsaAlgorithm = 'https://learn.qiskit.org/course/ch-algorithms/deutsch-jozsa-algorithm',
+  BernsteinVaziraniAlgorithm = 'https://learn.qiskit.org/course/ch-algorithms/bernstein-vazirani-algorithm',
+  SimonsAlgorithm = 'https://learn.qiskit.org/course/ch-algorithms/simons-algorithm',
+  QuantumFourierTransformation = 'https://learn.qiskit.org/course/ch-algorithms/quantum-fourier-transform',
+  QuantumPhaseEstimation = 'https://learn.qiskit.org/course/ch-algorithms/quantum-phase-estimation',
+  ShorsAlgorithm = 'https://learn.qiskit.org/course/ch-algorithms/shors-algorithm',
+  GroversAlgorithm = 'https://learn.qiskit.org/course/ch-algorithms/grovers-algorithm',
+  QuantumCounting = 'https://learn.qiskit.org/course/ch-algorithms/quantum-counting',
+  QuantumTeleportation = 'https://learn.qiskit.org/course/ch-algorithms/quantum-teleportation',
+  SuperdenseCoding = 'https://learn.qiskit.org/course/ch-algorithms/superdense-coding',
+  QuantumKeyDistribution = 'https://learn.qiskit.org/course/ch-algorithms/quantum-key-distribution'
+}
+
 const IBM_Q_EXPERIENCE: GeneralLink = {
   url: 'https://quantum-computing.ibm.com/lab',
   label: 'IBM Quantum Lab'
@@ -93,5 +108,6 @@ export {
   PrerequisitesUrl,
   MultipleQubitsAndEntanglementUrl,
   QuantumStatesAndQubitsUrl,
+  QuantumProtocolsAndQuantumAlgorithmsUrl,
   IBM_Q_EXPERIENCE
 }
