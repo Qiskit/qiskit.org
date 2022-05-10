@@ -35,7 +35,7 @@ export default class QuantumProtocolsAndQuantumAlgorithmsPage extends CourseOver
 
   references: string[] = [
     'Michael Nielsen and Isaac Chuang. Quantum Computation and Quantum Information (Chapters 4-6). Cambridge University Press, 2000.',
-    'Phillip Kaye, Raymond Laflamme, and Michele Mosca. An Introduction to Quantum Computing (Chapters 5-8). Oxford University Press, 2007.',
+    'Phillip Kaye, Raymond Laflamme, and Michele Mosca. An Introduction to Quantum Computing (Chapters 5-8). Oxford University Press, 2007.'
   ]
 
   links: GeneralLink[] = [
