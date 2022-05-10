@@ -33,15 +33,36 @@ export default class MultipleQubitsAndEntanglementPage extends CourseOverviewPag
     }
   }
 
-  references: string[] = [
-    'Michael Nielsen and Isaac Chuang. Quantum Computation and Quantum Information (Chapter 1). Cambridge University Press, 2000.',
-    'Phillip Kaye, Raymond Laflamme, and Michele Mosca. An Introduction to Quantum Computing (Chapters 1-3). Oxford University Press, 2007.'
-  ]
+  references: string[] = []
 
   links: GeneralLink[] = [
     {
+      url: 'https://en.wikipedia.org/wiki/Quantum_Computation_and_Quantum_Information',
+      label: '(Chapter 1)',
+      segment: {
+        cta: 'quantum-computation-and-quantum-information',
+        location: 'external-recommended-readings'
+      }
+    },
+    {
+      url: 'https://en.wikipedia.org/wiki/Quantum_Computation_and_Quantum_Information',
+      label: '(Chapters 1-4)',
+      segment: {
+        cta: 'an-introduction-to-quantum-computing',
+        location: 'external-recommended-readings'
+      }
+    },
+    {
+      url: 'https://en.wikipedia.org/wiki/Quantum_Computation_and_Quantum_Information',
+      label: '(Chapters 1 and 2)',
+      segment: {
+        cta: 'quantum-computing-lecture-notes',
+        location: 'external-recommended-readings'
+      }
+    },
+    {
       url: 'http://cleve.iqc.uwaterloo.ca/resources/QIC-710-F21/Qic710Primer.pdf',
-      label: 'Richard Cleve. Quantum Information Processing — A Primer for Beginners.',
+      label: 'Richard Cleve. Quantum Information Processing — A Primer for Beginners',
       segment: {
         cta: 'quantum-information-processing',
         location: 'external-recommended-readings'
