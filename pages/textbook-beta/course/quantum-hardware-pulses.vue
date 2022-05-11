@@ -2,20 +2,20 @@
 import { Course, Prerequisite } from 'constants/textbookBetaContent'
 import { Component } from 'vue-property-decorator'
 import CourseOverviewPage from '~/components/logic/CourseOverviewPage.vue'
-import { GeneralLink, InvestigatingQuantumHardwareUrl } from '~/constants/appLinks'
+import { GeneralLink, QuantumHardwarePulsesUrl } from '~/constants/appLinks'
 
 @Component({
   head: () => ({
     title: 'Investigating Quantum Hardware Using Microwave Pulses'
   })
 })
-export default class InvestigatingQuantumHardwarePage extends CourseOverviewPage {
-  routeName: string = 'investigating-quantum-hardware'
+export default class QuantumHardwarePulsesPage extends CourseOverviewPage {
+  routeName: string = 'quantum-hardware-pulses'
 
   headerTitle = 'Investigating Quantum Hardware Using Microwave Pulses'
   headerDescription = ['The Qiskit Textbook mostly assumes we have a quantum computer that can carry out quantum operations, and doesn\'t worry about how the devices actually work. These pages go a step deeper, exploring the physics of superconducting qubits, and using Qiskit to program operations on these devices at the level of microwave pulses.']
 
-  headerImg = '/images/textbook-beta/course/investigating-quantum-hardware/investigating-quantum-hardware.png'
+  headerImg = '/images/textbook-beta/course/quantum-hardware-pulses/quantum-hardware-pulses.png'
 
   backToTextbookHomeLink: GeneralLink = {
     url: '/textbook-beta',
@@ -26,7 +26,7 @@ export default class InvestigatingQuantumHardwarePage extends CourseOverviewPage
   }
 
   startLearningCTA: GeneralLink = {
-    url: InvestigatingQuantumHardwareUrl.CalibratingQubitsWithQiskitPulse,
+    url: QuantumHardwarePulsesUrl.CalibratingQubitsWithQiskitPulse,
     label: 'Start learning',
     segment: {
       cta: 'introduction', location: 'header'
@@ -41,43 +41,43 @@ export default class InvestigatingQuantumHardwarePage extends CourseOverviewPage
       image: 'calibrating-qubits-with-qiskit-pulse.png',
       label: 'Calibrating Qubits with Qiskit Pulse',
       segment: { cta: 'calibrating-qubits-with-qiskit-pulse', location: 'course' },
-      url: InvestigatingQuantumHardwareUrl.CalibratingQubitsWithQiskitPulse
+      url: QuantumHardwarePulsesUrl.CalibratingQubitsWithQiskitPulse
     },
     {
       image: 'accessing-higher-energy-states.png',
       label: 'Accessing Higher Energy States',
       segment: { cta: 'accessing-higher-energy-states', location: 'course' },
-      url: InvestigatingQuantumHardwareUrl.AccessingHigherEnergyStates
+      url: QuantumHardwarePulsesUrl.AccessingHigherEnergyStates
     },
     {
       image: 'introduction-to-transmon-physics.png',
       label: 'Introduction to Transmon Physics',
       segment: { cta: 'introduction-to-transmon-physics', location: 'course' },
-      url: InvestigatingQuantumHardwareUrl.IntroductionToTransmonPhysics
+      url: QuantumHardwarePulsesUrl.IntroductionToTransmonPhysics
     },
     {
       image: 'circuit-quantum-electrodynamics.png',
       label: 'Circuit Quantum Electrodynamics',
       segment: { cta: 'circuit-quantum-electrodynamics', location: 'course' },
-      url: InvestigatingQuantumHardwareUrl.CircuitQuantumElectrodynamics
+      url: QuantumHardwarePulsesUrl.CircuitQuantumElectrodynamics
     },
     {
       image: 'exploring-the-jaynes-cummings-hamiltonian-with-qiskit-pulse.png',
       label: 'Exploring the Jaynes-Cummings Hamiltonian with Qiskit Pulse',
       segment: { cta: 'exploring-the-jaynes-cummings-hamiltonian-with-qiskit-pulse', location: 'course' },
-      url: InvestigatingQuantumHardwareUrl.ExploringTheJaynesCummingsHamiltonianWithQiskitPulse
+      url: QuantumHardwarePulsesUrl.ExploringTheJaynesCummingsHamiltonianWithQiskitPulse
     },
     {
       image: 'measuring-the-qubit-ac-stak-shift.png',
       label: 'Measuring the Qubit ac-Stak Shift',
       segment: { cta: 'measuring-the-qubit-ac-stak-shift', location: 'course' },
-      url: InvestigatingQuantumHardwareUrl.MeasuringTheQubitacStakShift
+      url: QuantumHardwarePulsesUrl.MeasuringTheQubitacStakShift
     },
     {
       image: 'hamiltonian-tomography.png',
       label: 'Hamiltonian Tomography',
       segment: { cta: 'hamiltonian-tomography', location: 'course' },
-      url: InvestigatingQuantumHardwareUrl.HamiltonianTomography
+      url: QuantumHardwarePulsesUrl.HamiltonianTomography
     }
   ]
 
@@ -104,6 +104,6 @@ export default class InvestigatingQuantumHardwarePage extends CourseOverviewPage
     }
   ]
 
-  imageUrlBase = '/images/textbook-beta/course/investigating-quantum-hardware'
+  imageUrlBase = '/images/textbook-beta/course/quantum-hardware-pulses'
 }
 </script>

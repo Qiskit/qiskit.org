@@ -93,7 +93,7 @@ enum QuantumProtocolsAndQuantumAlgorithmsUrl {
   QuantumKeyDistribution = 'https://learn.qiskit.org/course/ch-algorithms/quantum-key-distribution'
 }
 
-enum InvestigatingQuantumHardwareUrl {
+enum QuantumHardwarePulsesUrl {
   CalibratingQubitsWithQiskitPulse = 'https://learn.qiskit.org/course/quantum-hardware-pulses/calibrating-qubits-using-qiskit-pulse',
   AccessingHigherEnergyStates = 'https://learn.qiskit.org/course/quantum-hardware-pulses/accessing-higher-energy-states-with-qiskit-pulse',
   IntroductionToTransmonPhysics = 'https://learn.qiskit.org/course/quantum-hardware-pulses/introduction-to-transmon-physics',
@@ -119,6 +119,6 @@ export {
   MultipleQubitsAndEntanglementUrl,
   QuantumStatesAndQubitsUrl,
   QuantumProtocolsAndQuantumAlgorithmsUrl,
-  InvestigatingQuantumHardwareUrl,
+  QuantumHardwarePulsesUrl,
   IBM_Q_EXPERIENCE
 }
