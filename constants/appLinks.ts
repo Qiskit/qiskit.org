@@ -93,6 +93,16 @@ enum QuantumProtocolsAndQuantumAlgorithmsUrl {
   QuantumKeyDistribution = 'https://learn.qiskit.org/course/ch-algorithms/quantum-key-distribution'
 }
 
+enum QuantumHardwarePulsesUrl {
+  CalibratingQubitsWithQiskitPulse = 'https://learn.qiskit.org/course/quantum-hardware-pulses/calibrating-qubits-using-qiskit-pulse',
+  AccessingHigherEnergyStates = 'https://learn.qiskit.org/course/quantum-hardware-pulses/accessing-higher-energy-states-with-qiskit-pulse',
+  IntroductionToTransmonPhysics = 'https://learn.qiskit.org/course/quantum-hardware-pulses/introduction-to-transmon-physics',
+  CircuitQuantumElectrodynamics = 'https://learn.qiskit.org/course/quantum-hardware-pulses/circuit-quantum-electrodynamics',
+  ExploringTheJaynesCummingsHamiltonianWithQiskitPulse = 'https://learn.qiskit.org/course/quantum-hardware-pulses/exploring-the-jaynes-cummings-hamiltonian-with-qiskit-pulse',
+  MeasuringTheQubitacStakShift = 'https://learn.qiskit.org/course/quantum-hardware-pulses/measuring-the-qubit-ac-stark-shift',
+  HamiltonianTomography = 'https://learn.qiskit.org/course/quantum-hardware-pulses/hamiltonian-tomography'
+}
+
 const IBM_Q_EXPERIENCE: GeneralLink = {
   url: 'https://quantum-computing.ibm.com/lab',
   label: 'IBM Quantum Lab'
@@ -109,5 +119,6 @@ export {
   MultipleQubitsAndEntanglementUrl,
   QuantumStatesAndQubitsUrl,
   QuantumProtocolsAndQuantumAlgorithmsUrl,
+  QuantumHardwarePulsesUrl,
   IBM_Q_EXPERIENCE
 }
