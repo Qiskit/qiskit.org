@@ -103,6 +103,13 @@ enum QuantumHardwarePulsesUrl {
   HamiltonianTomography = 'https://learn.qiskit.org/course/quantum-hardware-pulses/hamiltonian-tomography'
 }
 
+enum QuantumHardwareCircuitsUrl {
+  Introduction = 'https://learn.qiskit.org/course/quantum-hardware/introduction-to-quantum-error-correction-via-the-repetition-code',
+  MeasurementErrorMitigation = 'https://learn.qiskit.org/course/quantum-hardware/measurement-error-mitigation',
+  RandomizedBenchmarking = 'https://learn.qiskit.org/course/quantum-hardware/randomized-benchmarking',
+  MeasuringQuantumVolume = 'https://learn.qiskit.org/course/quantum-hardware/measuring-quantum-volume'
+}
+
 const IBM_Q_EXPERIENCE: GeneralLink = {
   url: 'https://quantum-computing.ibm.com/lab',
   label: 'IBM Quantum Lab'
@@ -120,5 +127,6 @@ export {
   QuantumStatesAndQubitsUrl,
   QuantumProtocolsAndQuantumAlgorithmsUrl,
   QuantumHardwarePulsesUrl,
+  QuantumHardwareCircuitsUrl,
   IBM_Q_EXPERIENCE
 }
