@@ -135,6 +135,16 @@ export default class StartLearningSection extends Vue {
             url: '/textbook-beta/course/quantum-protocols-and-quantum-algorithms',
             segment: { cta: 'quantum-protocols-and-quantum-algorithms', location: 'course' }
           }
+        },
+        {
+          image: '/images/textbook-beta/course/investigating-quantum-hardware/investigating-quantum-hardware.png',
+          title: 'Investigating Quantum Hardware Using Microwave Pulses',
+          description: 'In this chapter, we get a level closer to the real quantum machines. Learn about the physics of these devices, and how to program them at the level of microwave pulses.',
+          cta: {
+            label: 'View resource',
+            url: '/textbook-beta/course/investigating-quantum-hardware',
+            segment: { cta: 'investigating-quantum-hardware', location: 'course' }
+          }
         }
       ]
     },
