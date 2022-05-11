@@ -145,6 +145,16 @@ export default class StartLearningSection extends Vue {
             url: '/textbook-beta/course/quantum-hardware-pulses',
             segment: { cta: 'quantum-hardware-pulses', location: 'course' }
           }
+        },
+        {
+          image: '/images/textbook-beta/course/quantum-hardware-circuits/quantum-hardware-circuits.png',
+          title: 'Investigating Quantum Hardware Using Quantum Circuits',
+          description: 'All circuit-based quantum devices share some similar characteristics and challenges. In this chapter, we explore how quantum circuits perform on modern quantum computers, and ways to improve performance.',
+          cta: {
+            label: 'View resource',
+            url: '/textbook-beta/course/quantum-hardware-circuits',
+            segment: { cta: 'quantum-hardware-circuits', location: 'course' }
+          }
         }
       ]
     },
