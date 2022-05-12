@@ -187,8 +187,8 @@ export default class AppCard extends Vue {
 
 .app-card_description-whole-size {
   .app-card {
-    &__content {
-      gap: $spacing-03;
+    &__header {
+      min-height: $spacing-09;
     }
     &__body {
       display: flex;
