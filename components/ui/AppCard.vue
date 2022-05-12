@@ -1,7 +1,10 @@
 <template>
   <article
     class="app-card"
-    :class="{'app-card_vertical': verticalLayout}"
+    :class="{
+      'app-card_vertical': verticalLayout,
+      'app-card_description-whole-size': descriptionWholeSize
+    }"
   >
     <div
       class="app-card__image"
@@ -22,7 +25,7 @@
           />
         </div>
       </header>
-      <div>
+      <div class="app-card__body">
         <div class="app-card__description">
           <slot />
         </div>
@@ -53,6 +56,7 @@ export default class AppCard extends Vue {
   @Prop({ type: String, default: '' }) ctaLabel!: string
   @Prop({ type: Object, required: false }) segment: CtaClickedEventProp | undefined
   @Prop({ type: Boolean, default: false }) verticalLayout!: Boolean
+  @Prop({ type: Boolean, default: false }) descriptionWholeSize!: Boolean
 
   get ctaLink () {
     return {
@@ -177,6 +181,20 @@ export default class AppCard extends Vue {
       @include mq($from: small, $until: medium) {
         min-height: 6 * $column-size-large;
       }
+    }
+  }
+}
+
+.app-card_description-whole-size {
+  .app-card {
+    &__header {
+      min-height: $spacing-09;
+    }
+    &__body {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex: 1;
     }
   }
 }
