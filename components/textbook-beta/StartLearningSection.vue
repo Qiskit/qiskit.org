@@ -193,16 +193,6 @@ export default class StartLearningSection extends Vue {
           }
         },
         {
-          image: '/images/textbook-beta/tutorials/quantum-system-error-analysis.png',
-          title: 'Quantum System Error Analysis',
-          description: 'Quantum computers are error-prone, and Qiskit includes tools to analyse these errors, and mitigate them. These tutorials include characterizing gates, measuring quantum volume, and correcting basic errors.',
-          cta: {
-            label: 'View resource',
-            url: 'https://qiskit.org/documentation/tutorials.html#quantum-system-error-analysis',
-            segment: { cta: 'quantum-system-error-analysis', location: 'tutorials' }
-          }
-        },
-        {
           image: '/images/textbook-beta/tutorials/algorithms.png',
           title: 'Algorithms',
           description: 'These tutorials show you how to use Qiskit\'s built-in algorithms. Qiskit supports classic algorithms such as Shor\'s and Grover\'s, as well as more recent developments such as VQE and QAOA.',
