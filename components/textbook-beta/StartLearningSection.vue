@@ -168,6 +168,18 @@ export default class StartLearningSection extends Vue {
           }
         },
         {
+          image: '/images/textbook-beta/quantum-lab.png',
+          title: 'Quantum Computing Labs',
+          description: `This set of labs provides 7 different exercises
+          you (or your students) can use to investigate the behaviour of
+          current quantum computers and practice your Qiskit coding skills.`,
+          cta: {
+            label: 'View resource',
+            url: 'https://learn.qiskit.org/course/ch-labs',
+            segment: { cta: 'labs', location: 'university-supplements' }
+          }
+        },
+        {
           image: '/images/textbook-beta/course/games-and-demos/games-and-demos.png',
           title: 'Games and Demos',
           description: "Check out games and demonstrations created in this textbook's environment; great for teaching, or just for fun!",
@@ -267,25 +279,6 @@ export default class StartLearningSection extends Vue {
             label: 'Go to this resource',
             url: '/textbook-beta/summer-school/introduction-to-quantum-computing-and-quantum-hardware-2020',
             segment: { cta: 'introduction-to-quantum-computing-and-quantum-hardware-2020', location: 'summer-schools' }
-          }
-        }
-      ]
-    },
-    {
-      title: 'University supplements',
-      description: `Are you teaching a course on quantum computing? Qiskit
-      provides freely available materials to enhance your course.`,
-      courses: [
-        {
-          image: '/images/textbook-beta/quantum-lab.png',
-          title: 'Labs',
-          description: `This set of labs provides 7 different exercises
-          you (or your students) can use to investigate the behaviour of
-          current quantum computers and practice your Qiskit coding skills.`,
-          cta: {
-            label: 'View resource',
-            url: 'https://learn.qiskit.org/course/ch-labs',
-            segment: { cta: 'labs', location: 'university-supplements' }
           }
         }
       ]
