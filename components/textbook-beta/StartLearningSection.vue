@@ -202,6 +202,32 @@ export default class StartLearningSection extends Vue {
           }
         }
       ]
+    },
+    {
+      title: 'On other platforms',
+      description: 'Check out Qiskit on other platforms.',
+      courses: [
+        {
+          image: '/images/textbook-beta/other-platforms/youtube.png',
+          title: 'Qiskit Youtube',
+          description: 'This set of labs provides 7 different exercises you (or your students) can use to investigate the behaviour of current quantum computers and practice your Qiskit coding skills.',
+          cta: {
+            label: 'View resource',
+            url: 'https://www.youtube.com/qiskit',
+            segment: { cta: 'youtube', location: 'other-platformss' }
+          }
+        },
+        {
+          image: '/images/textbook-beta/other-platforms/medium.png',
+          title: 'Qiskit Medium Blog',
+          description: 'This set of labs provides 7 different exercises you (or your students) can use to investigate the behaviour of current quantum computers and practice your Qiskit coding skills.',
+          cta: {
+            label: 'View resource',
+            url: 'https://www.youtube.com/qiskit',
+            segment: { cta: 'youtube', location: 'other-platformss' }
+          }
+        }
+      ]
     }
   ]
 }
