@@ -103,6 +103,16 @@ enum QuantumHardwarePulsesUrl {
   HamiltonianTomography = 'https://learn.qiskit.org/course/quantum-hardware-pulses/hamiltonian-tomography'
 }
 
+enum QuantumAlgorithmsForApplications {
+  SolvingLinearSystemsOfEquationsUsingHHL = 'https://learn.qiskit.org/course/ch-applications/solving-linear-systems-of-equations-using-hhl-and-its-qiskit-implementation',
+  SimulatingMoleculesUsingVQE = 'https://learn.qiskit.org/course/ch-applications/simulating-molecules-using-vqe',
+  SolvingCombinatorialOptimizationProblemsUsingQaoa = 'https://learn.qiskit.org/course/ch-applications/solving-combinatorial-optimization-problems-using-qaoa',
+  SolvingSatisfiabilityProblemsUsingGroversAlgorithm = 'https://learn.qiskit.org/course/ch-applications/solving-satisfiability-problems-using-grovers-algorithm',
+  HybridQuantumClassicalNeuralNetworksWithPytorchAndQiskit = 'https://learn.qiskit.org/course/ch-applications/hybrid-quantum-classical-neural-networks-with-pytorch-and-qiskit',
+  VariationalQuantumLinearSolver = 'https://learn.qiskit.org/course/ch-applications/the-variational-quantum-linear-solver',
+  FlexibleRepresentationOfQuantumImages = 'https://learn.qiskit.org/course/ch-applications/flexible-representation-of-quantum-images-frqi'
+}
+
 enum QuantumHardwareCircuitsUrl {
   Introduction = 'https://learn.qiskit.org/course/quantum-hardware/introduction-to-quantum-error-correction-via-the-repetition-code',
   MeasurementErrorMitigation = 'https://learn.qiskit.org/course/quantum-hardware/measurement-error-mitigation',
@@ -127,6 +137,7 @@ export {
   QuantumStatesAndQubitsUrl,
   QuantumProtocolsAndQuantumAlgorithmsUrl,
   QuantumHardwarePulsesUrl,
+  QuantumAlgorithmsForApplications,
   QuantumHardwareCircuitsUrl,
   IBM_Q_EXPERIENCE
 }
