@@ -157,16 +157,6 @@ export default class StartLearningSection extends Vue {
           }
         },
         {
-          image: '/images/textbook-beta/course/games-and-demos/games-and-demos.png',
-          title: 'Games and Demos',
-          description: "Check out games and demonstrations created in this textbook's environment; great for teaching, or just for fun!",
-          cta: {
-            label: 'View resource',
-            url: '/textbook-beta/course/games-and-demos',
-            segment: { cta: 'games-and-demos', location: 'course' }
-          }
-        },
-        {
           image: '/images/textbook-beta/course/quantum-hardware-circuits/quantum-hardware-circuits.png',
           title: 'Investigating Quantum Hardware Using Quantum Circuits',
           description: 'All circuit-based quantum devices share some similar characteristics and challenges. In this chapter, we explore how quantum circuits perform on modern quantum computers, and ways to improve performance.',
@@ -174,6 +164,16 @@ export default class StartLearningSection extends Vue {
             label: 'View resource',
             url: '/textbook-beta/course/quantum-hardware-circuits',
             segment: { cta: 'quantum-hardware-circuits', location: 'course' }
+          }
+        },
+        {
+          image: '/images/textbook-beta/course/games-and-demos/games-and-demos.png',
+          title: 'Games and Demos',
+          description: "Check out games and demonstrations created in this textbook's environment; great for teaching, or just for fun!",
+          cta: {
+            label: 'View resource',
+            url: '/textbook-beta/course/games-and-demos',
+            segment: { cta: 'games-and-demos', location: 'course' }
           }
         }
       ]
