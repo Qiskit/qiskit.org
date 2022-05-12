@@ -168,7 +168,7 @@ export default class StartLearningSection extends Vue {
           description: 'Comfortable with quantum computing, but new to Qiskit? Learn how to create simple quantum circuits, and visualize quantum states.',
           cta: {
             label: 'View resource',
-            url: '/',
+            url: 'https://qiskit.org/documentation/tutorials.html#quantum-circuits',
             segment: { cta: 'quantum-circuits', location: 'tutorials' }
           }
         },
@@ -178,7 +178,7 @@ export default class StartLearningSection extends Vue {
           description: 'Learn about the more advanced features of Qiskit\'s QuantumCircuit class, including how to create custom gates and how to use the transpiler to optimize your circuits and target different devices.',
           cta: {
             label: 'View resource',
-            url: '/',
+            url: 'https://qiskit.org/documentation/tutorials.html#advanced-circuits',
             segment: { cta: 'advanced-circuits', location: 'tutorials' }
           }
         },
@@ -188,7 +188,7 @@ export default class StartLearningSection extends Vue {
           description: 'Qiskit includes powerful quantum simulators to investigate how quantum circuits will behave on both ideal, and noisy hardware. These tutorials show you how to use advanced features of these simulators.',
           cta: {
             label: 'View resource',
-            url: '/',
+            url: 'https://qiskit.org/documentation/tutorials.html#classical-simulators',
             segment: { cta: 'classical-simulators', location: 'tutorials' }
           }
         },
@@ -198,7 +198,7 @@ export default class StartLearningSection extends Vue {
           description: 'Quantum computers are error-prone, and Qiskit includes tools to analyse these errors, and mitigate them. These tutorials include characterizing gates, measuring quantum volume, and correcting basic errors.',
           cta: {
             label: 'View resource',
-            url: '/',
+            url: 'https://qiskit.org/documentation/tutorials.html#quantum-system-error-analysis',
             segment: { cta: 'quantum-system-error-analysis', location: 'tutorials' }
           }
         },
@@ -208,7 +208,7 @@ export default class StartLearningSection extends Vue {
           description: 'These tutorials show you how to use Qiskit\'s built-in algorithms. Qiskit supports classic algorithms such as Shor\'s and Grover\'s, as well as more recent developments such as VQE and QAOA.',
           cta: {
             label: 'View resource',
-            url: '/',
+            url: 'https://qiskit.org/documentation/tutorials.html#algorithms',
             segment: { cta: 'algorithms', location: 'tutorials' }
           }
         },
@@ -218,7 +218,7 @@ export default class StartLearningSection extends Vue {
           description: 'Learn how Qiskit represents quantum operators, and how we can use these to build sophisticated quantum programs.',
           cta: {
             label: 'View resource',
-            url: '/',
+            url: 'https://qiskit.org/documentation/tutorials.html#operators',
             segment: { cta: 'operators', location: 'tutorials' }
           }
         },
@@ -228,7 +228,7 @@ export default class StartLearningSection extends Vue {
           description: 'Learn about the Iterative Quantum Phase Estimation Algorithm and how you can program it in Qiskit.',
           cta: {
             label: 'View resource',
-            url: '/',
+            url: 'https://qiskit.org/documentation/tutorials.html#sample-algorithms-in-qiskit',
             segment: { cta: 'simple-algorithms-in-qiskit', location: 'tutorials' }
           }
         }
