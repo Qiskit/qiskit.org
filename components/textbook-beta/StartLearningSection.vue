@@ -159,6 +159,82 @@ export default class StartLearningSection extends Vue {
       ]
     },
     {
+      title: 'Tutorials',
+      description: 'Already understand quantum computing? These tutorials will show you how to use qiskit to do the thing you want to do.',
+      courses: [
+        {
+          image: '/images/textbook-beta/tutorials/quantum-circuits.png',
+          title: 'Quantum Circuits',
+          description: 'Comfortable with quantum computing, but new to Qiskit? Learn how to create simple quantum circuits, and visualize quantum states.',
+          cta: {
+            label: 'View resource',
+            url: '/',
+            segment: { cta: 'quantum-circuits', location: 'tutorials' }
+          }
+        },
+        {
+          image: '/images/textbook-beta/tutorials/advanced-circuits.png',
+          title: 'Advanced Circuits',
+          description: 'Learn about the more advanced features of Qiskit\'s QuantumCircuit class, including how to create custom gates and how to use the transpiler to optimize your circuits and target different devices.',
+          cta: {
+            label: 'View resource',
+            url: '/',
+            segment: { cta: 'advanced-circuits', location: 'tutorials' }
+          }
+        },
+        {
+          image: '/images/textbook-beta/tutorials/classical-simulators.png',
+          title: 'Classical Simulators',
+          description: 'Qiskit includes powerful quantum simulators to investigate how quantum circuits will behave on both ideal, and noisy hardware. These tutorials show you how to use advanced features of these simulators.',
+          cta: {
+            label: 'View resource',
+            url: '/',
+            segment: { cta: 'classical-simulators', location: 'tutorials' }
+          }
+        },
+        {
+          image: '/images/textbook-beta/tutorials/quantum-system-error-analysis.png',
+          title: 'Quantum System Error Analysis',
+          description: 'Quantum computers are error-prone, and Qiskit includes tools to analyse these errors, and mitigate them. These tutorials include characterizing gates, measuring quantum volume, and correcting basic errors.',
+          cta: {
+            label: 'View resource',
+            url: '/',
+            segment: { cta: 'quantum-system-error-analysis', location: 'tutorials' }
+          }
+        },
+        {
+          image: '/images/textbook-beta/tutorials/algorithms.png',
+          title: 'Algorithms',
+          description: 'These tutorials show you how to use Qiskit\'s built-in algorithms. Qiskit supports classic algorithms such as Shor\'s and Grover\'s, as well as more recent developments such as VQE and QAOA.',
+          cta: {
+            label: 'View resource',
+            url: '/',
+            segment: { cta: 'algorithms', location: 'tutorials' }
+          }
+        },
+        {
+          image: '/images/textbook-beta/tutorials/operators.png',
+          title: 'Operators',
+          description: 'Learn how Qiskit represents quantum operators, and how we can use these to build sophisticated quantum programs.',
+          cta: {
+            label: 'View resource',
+            url: '/',
+            segment: { cta: 'operators', location: 'tutorials' }
+          }
+        },
+        {
+          image: '/images/textbook-beta/tutorials/simple-algorithms-in-qiskit.png',
+          title: 'Sample algorithms in Qiskit',
+          description: 'Learn about the Iterative Quantum Phase Estimation Algorithm and how you can program it in Qiskit.',
+          cta: {
+            label: 'View resource',
+            url: '/',
+            segment: { cta: 'simple-algorithms-in-qiskit', location: 'tutorials' }
+          }
+        }
+      ]
+    },
+    {
       title: 'Summer schools',
       description: 'The Qiskit Global Summer Schools are one-of-a-kind sequences that takes students from beginner level to solving advanced quantum problems on a quantum computer. These two-week courses are designed to empower the next generation of quantum developers with the knowledge to explore quantum applications on their own.',
       courses: [
