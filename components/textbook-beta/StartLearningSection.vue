@@ -147,6 +147,16 @@ export default class StartLearningSection extends Vue {
           }
         },
         {
+          image: '/images/textbook-beta/course/quantum-algorithms-for-applications/quantum-algorithms-for-applications.png',
+          title: 'Quantum Algorithms for Applications',
+          description: 'If algorithms are the solution, then what is the problem? In this chapter, we look at how we can take general algorithms and apply them to more specific situations.',
+          cta: {
+            label: 'View resource',
+            url: '/textbook-beta/course/quantum-algorithms-for-applications',
+            segment: { cta: 'quantum-algorithms-for-applications', location: 'course' }
+          }
+        },
+        {
           image: '/images/textbook-beta/course/quantum-hardware-circuits/quantum-hardware-circuits.png',
           title: 'Investigating Quantum Hardware Using Quantum Circuits',
           description: 'All circuit-based quantum devices share some similar characteristics and challenges. In this chapter, we explore how quantum circuits perform on modern quantum computers, and ways to improve performance.',
