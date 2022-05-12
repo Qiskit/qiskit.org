@@ -38,7 +38,7 @@ export default class MaxLayout extends Vue {
 @import "@carbon/colors/scss/colors";
 
 .qiskit-banner.qiskit-runtime {
-  background: $background-color-lighter !important;
+  background-color: $background-color-lighter !important;
 
   .banner-title {
     color: $cool-gray-100;
