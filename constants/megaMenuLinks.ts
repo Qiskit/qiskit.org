@@ -172,14 +172,14 @@ const GAMES_AND_DEMOS: MegaDropdownMenuGroup = {
     },
     {
       label: 'Bonus Level: Make your own puzzles',
-      url: `${baseUrl}${pathGamesAndDemos}/bonus-level-make-your-own-puzzles`,
+      url: `${baseUrl}${pathGamesAndDemos}/bonus-level-sandbox#bonus-148-0`,
       segment: {
         cta: 'bonus-level-make-your-own-puzzles', location: sectionGamesAndDemos
       }
     },
     {
       label: 'Level 5: Proving the Uniqueness of Quantum Variables',
-      url: `${baseUrl}${pathGamesAndDemos}/level-5-proving-the-uniqueness-of-quantum-variables`,
+      url: `${baseUrl}${pathGamesAndDemos}/bonus-level-sandbox#bonus-153-0`,
       segment: {
         cta: 'level-5-proving-the-uniqueness-of-quantum-variables', location: sectionGamesAndDemos
       }
