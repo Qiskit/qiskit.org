@@ -210,7 +210,7 @@ export default class StartLearningSection extends Vue {
         {
           image: '/images/textbook-beta/other-platforms/youtube.png',
           title: 'Qiskit Youtube',
-          description: 'This set of labs provides 7 different exercises you (or your students) can use to investigate the behaviour of current quantum computers and practice your Qiskit coding skills.',
+          description: 'Check out our YouTube channel for engaging lectures, tips & tricks, tutorials, community updates and access to exclusive Qiskit content!',
           cta: {
             label: 'View resource',
             url: 'https://www.youtube.com/qiskit',
@@ -220,7 +220,7 @@ export default class StartLearningSection extends Vue {
         {
           image: '/images/textbook-beta/other-platforms/medium.png',
           title: 'Qiskit Medium Blog',
-          description: 'This set of labs provides 7 different exercises you (or your students) can use to investigate the behaviour of current quantum computers and practice your Qiskit coding skills.',
+          description: 'Visit the Medium blog to read about Qiskit, programming quantum computers, and anything else related to quantum computing.',
           cta: {
             label: 'View resource',
             url: 'https://www.youtube.com/qiskit',
