@@ -120,6 +120,15 @@ enum QuantumHardwareCircuitsUrl {
   MeasuringQuantumVolume = 'https://learn.qiskit.org/course/quantum-hardware/measuring-quantum-volume'
 }
 
+enum GamesAndDemos {
+  BonusLevelSandbox = 'https://learn.qiskit.org/course/ch-demos/bonus-level-sandbox',
+  BonusLevelMakeYourOwnPuzzle = 'https://learn.qiskit.org/course/ch-demos/bonus-level-sandbox#bonus-148-0',
+  Level5ProvingTheUniquenessOfQuantumVariables = 'https://learn.qiskit.org/course/ch-demos/bonus-level-sandbox#bonus-153-0',
+  EstimatingPiUsingQPEA = 'https://learn.qiskit.org/course/ch-demos/estimating-pi-pi-using-quantum-phase-estimation-algorithm',
+  LocalRealityAndTheChshInequality = 'https://learn.qiskit.org/course/ch-demos/local-reality-and-the-chsh-inequality',
+  WidgetsDemonstration = 'https://learn.qiskit.org/course/ch-demos/widgets-demonstration'
+}
+
 const IBM_Q_EXPERIENCE: GeneralLink = {
   url: 'https://quantum-computing.ibm.com/lab',
   label: 'IBM Quantum Lab'
@@ -139,5 +148,6 @@ export {
   QuantumHardwarePulsesUrl,
   QuantumAlgorithmsForApplications,
   QuantumHardwareCircuitsUrl,
+  GamesAndDemos,
   IBM_Q_EXPERIENCE
 }

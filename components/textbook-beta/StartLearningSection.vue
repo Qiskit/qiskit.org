@@ -165,6 +165,16 @@ export default class StartLearningSection extends Vue {
             url: '/textbook-beta/course/quantum-hardware-circuits',
             segment: { cta: 'quantum-hardware-circuits', location: 'course' }
           }
+        },
+        {
+          image: '/images/textbook-beta/course/games-and-demos/games-and-demos.png',
+          title: 'Games and Demos',
+          description: "Check out games and demonstrations created in this textbook's environment; great for teaching, or just for fun!",
+          cta: {
+            label: 'View resource',
+            url: '/textbook-beta/course/games-and-demos',
+            segment: { cta: 'games-and-demos', location: 'course' }
+          }
         }
       ]
     },
