@@ -497,38 +497,45 @@ const QUANTUM_COMPUTING_LABS : MegaDropdownMenuGroup = {
       }
     },
     {
-      label: 'Lab 4. Accuracy of Quantum Phase Estimation',
-      url: `${baseUrl}${pathLabs}/lab-4-accuracy-of-quantum-phase-estimation`,
+      label: 'Lab 4. Bell Circuit & GHZ Circuit',
+      url: `${baseUrl}${pathLabs}/lab-4-bell-ghz-circuit`,
       segment: {
-        cta: 'lab-4-accuracy-of-quantum-phase-estimation', location: sectionLabs
+        cta: 'lab-4-bell-ghz-circuit', location: sectionLabs
       }
     },
     {
-      label: 'Lab 5. Iterative Quantum Phase Estimation',
-      url: `${baseUrl}${pathLabs}/lab-5-iterative-phase-estimation-algorithm`,
+      label: 'Lab 5. Accuracy of Quantum Phase Estimation',
+      url: `${baseUrl}${pathLabs}/lab-5-accuracy-of-quantum-phase-estimation`,
       segment: {
-        cta: 'lab-5-iterative-phase-estimation-algorithm', location: sectionLabs
+        cta: 'lab-5-accuracy-of-quantum-phase-estimation', location: sectionLabs
       }
     },
     {
-      label: 'Lab 6. Scalable Shor\'s Algorithm',
-      url: `${baseUrl}${pathLabs}/lab-6-scalable-shors-algorithm`,
+      label: 'Lab 6. Iterative Phase Estimation Algorithm',
+      url: `${baseUrl}${pathLabs}/lab-6-iterative-phase-estimation-algorithm`,
       segment: {
-        cta: 'lab-6-scalable-shors-algorithm', location: sectionLabs
+        cta: 'lab-6-iterative-phase-estimation-algorithm', location: sectionLabs
       }
     },
     {
-      label: 'Lab 7. Grover\'s search with an unknown number of solutions',
-      url: `${baseUrl}${pathLabs}/lab-7-grovers-search-with-an-unknown-number-of-solutions`,
+      label: 'Lab 7. Scalable Shor’s Algorithm',
+      url: `${baseUrl}${pathLabs}/lab-7-scalable-shors-algorithm`,
       segment: {
-        cta: 'lab-7-grovers-search-with-an-unknown-number-of-solutions', location: sectionLabs
+        cta: 'lab-7-scalable-shors-algorithm', location: sectionLabs
       }
     },
     {
-      label: 'Lab 8. Quantum Simulation as a Search Algorithm',
-      url: `${baseUrl}${pathLabs}/lab-8-quantum-simulation-as-a-search-algorithm`,
+      label: 'Lab 8. Grover’s search with an unknown number of solutions',
+      url: `${baseUrl}${pathLabs}/lab-8-grovers-search-with-an-unknown-number-of-solutions`,
       segment: {
-        cta: 'lab-8-quantum-simulation-as-a-search-algorithm', location: sectionLabs
+        cta: 'lab-8-grovers-search-with-an-unknown-number-of-solutions', location: sectionLabs
+      }
+    },
+    {
+      label: 'Lab 9. Quantum Simulation as a Search Algorithm',
+      url: `${baseUrl}${pathLabs}/lab-9-quantum-simulation-as-a-search-algorithm`,
+      segment: {
+        cta: 'lab-9-quantum-simulation-as-a-search-algorithm', location: sectionLabs
       }
     }
   ]
