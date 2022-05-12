@@ -209,7 +209,7 @@ export default class StartLearningSection extends Vue {
       courses: [
         {
           image: '/images/textbook-beta/other-platforms/youtube.png',
-          title: 'Qiskit Youtube',
+          title: 'Qiskit YouTube',
           description: 'Check out our YouTube channel for engaging lectures, tips & tricks, tutorials, community updates and access to exclusive Qiskit content!',
           cta: {
             label: 'View resource',
@@ -223,8 +223,8 @@ export default class StartLearningSection extends Vue {
           description: 'Visit the Medium blog to read about Qiskit, programming quantum computers, and anything else related to quantum computing.',
           cta: {
             label: 'View resource',
-            url: 'https://www.youtube.com/qiskit',
-            segment: { cta: 'youtube', location: 'other-platformss' }
+            url: 'https://medium.com/Qiskit',
+            segment: { cta: 'medium', location: 'other-platformss' }
           }
         }
       ]
