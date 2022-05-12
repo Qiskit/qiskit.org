@@ -223,13 +223,13 @@ export default class StartLearningSection extends Vue {
           }
         },
         {
-          image: '/images/textbook-beta/tutorials/simple-algorithms-in-qiskit.png',
+          image: '/images/textbook-beta/tutorials/sample-algorithms-in-qiskit.png',
           title: 'Sample algorithms in Qiskit',
           description: 'Learn about the Iterative Quantum Phase Estimation Algorithm and how you can program it in Qiskit.',
           cta: {
             label: 'View resource',
             url: 'https://qiskit.org/documentation/tutorials.html#sample-algorithms-in-qiskit',
-            segment: { cta: 'simple-algorithms-in-qiskit', location: 'tutorials' }
+            segment: { cta: 'sample-algorithms-in-qiskit', location: 'tutorials' }
           }
         }
       ]
