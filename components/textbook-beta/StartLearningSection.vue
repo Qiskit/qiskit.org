@@ -29,6 +29,7 @@
               image-contain
               :title="courseTitle"
               class="start-learning-section__card"
+              :description-whole-size="true"
             >
               {{ courseDescription }}
             </AppCard>
