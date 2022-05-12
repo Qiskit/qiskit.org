@@ -129,6 +129,18 @@ enum GamesAndDemos {
   WidgetsDemonstration = 'https://learn.qiskit.org/course/ch-demos/widgets-demonstration'
 }
 
+enum QuantumComputingLabs {
+  Lab1 = 'https://learn.qiskit.org/course/ch-labs/lab-1-quantum-circuits',
+  Lab2 = 'https://learn.qiskit.org/course/ch-labs/lab-2-single-qubit-gates',
+  Lab3 = 'https://learn.qiskit.org/course/ch-labs/lab-3-quantum-measurements',
+  Lab4 = 'https://learn.qiskit.org/course/ch-labs/lab-4-bell-ghz-circuit',
+  Lab5 = 'https://learn.qiskit.org/course/ch-labs/lab-5-accuracy-of-quantum-phase-estimation',
+  Lab6 = 'https://learn.qiskit.org/course/ch-labs/lab-6-iterative-phase-estimation-algorithm',
+  Lab7 = 'https://learn.qiskit.org/course/ch-labs/lab-7-scalable-shors-algorithm',
+  Lab8 = 'https://learn.qiskit.org/course/ch-labs/lab-8-grovers-search-with-an-unknown-number-of-solutions',
+  Lab9 = 'https://learn.qiskit.org/course/ch-labs/lab-9-quantum-simulation-as-a-search-algorithm',
+}
+
 const IBM_Q_EXPERIENCE: GeneralLink = {
   url: 'https://quantum-computing.ibm.com/lab',
   label: 'IBM Quantum Lab'
@@ -148,6 +160,7 @@ export {
   QuantumHardwarePulsesUrl,
   QuantumAlgorithmsForApplications,
   QuantumHardwareCircuitsUrl,
+  QuantumComputingLabs,
   GamesAndDemos,
   IBM_Q_EXPERIENCE
 }
