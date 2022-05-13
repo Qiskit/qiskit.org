@@ -168,15 +168,15 @@ export default class StartLearningSection extends Vue {
           }
         },
         {
-          image: '/images/textbook-beta/quantum-lab.png',
+          image: '/images/textbook-beta/course/quantum-computing-labs/quantum-lab.png',
           title: 'Quantum Computing Labs',
           description: `This set of labs provides 7 different exercises
           you (or your students) can use to investigate the behaviour of
           current quantum computers and practice your Qiskit coding skills.`,
           cta: {
             label: 'View resource',
-            url: 'https://learn.qiskit.org/course/ch-labs',
-            segment: { cta: 'labs', location: 'university-supplements' }
+            url: '/textbook-beta/course/quantum-computing-labs',
+            segment: { cta: 'labs', location: 'course' }
           }
         },
         {
