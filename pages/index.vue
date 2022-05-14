@@ -22,8 +22,8 @@
 <script lang="ts">
 import axios from 'axios'
 import { Component } from 'vue-property-decorator'
-import QiskitPage from '~/components/logic/QiskitPage.vue'
 import QiskitBanner from '@qiskit-community/qiskit-vue/src/components/banner/Banner.vue'
+import QiskitPage from '~/components/logic/QiskitPage.vue'
 
 @Component({
   head () {
