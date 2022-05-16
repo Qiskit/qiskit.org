@@ -1,20 +1,20 @@
 <template>
-  <header class="app-overview-page-header">
+  <header class="app-page-header-with-img">
     <div class="bx--grid">
-      <div v-if="backLink" class="bx--row app-overview-page-header__back-link">
+      <div v-if="backLink" class="bx--row app-page-header-with-img__back-link">
         <AppNavBackLink v-bind="backLink" />
       </div>
-      <div class="bx--row app-overview-page-header__content">
-        <h1 class="app-overview-page-header__headline">
+      <div class="bx--row app-page-header-with-img__content">
+        <h1 class="app-page-header-with-img__headline">
           <slot name="title" />
         </h1>
-        <div class="app-overview-page-header__image-wrapper">
+        <div class="app-page-header-with-img__image-wrapper">
           <slot name="image" />
         </div>
-        <div class="app-overview-page-header__description">
+        <div class="app-page-header-with-img__description">
           <slot name="description" />
         </div>
-        <AppCta v-if="cta" v-bind="cta" class="app-overview-page-header__cta" />
+        <AppCta v-if="cta" v-bind="cta" class="app-page-header-with-img__cta" />
       </div>
     </div>
   </header>
@@ -26,14 +26,14 @@ import { Component, Prop } from 'vue-property-decorator'
 import { GeneralLink } from '~/constants/appLinks'
 
 @Component
-export default class AppOverviewPageHeader extends Vue {
+export default class AppPageHeaderWithImage extends Vue {
   @Prop({ type: Object, required: true }) cta!: GeneralLink
   @Prop({ type: Object, required: false }) backLink!: GeneralLink
 }
 </script>
 
 <style lang="scss" scoped>
-.app-overview-page-header {
+.app-page-header-with-img {
   &__back-link {
     height: 0;
 

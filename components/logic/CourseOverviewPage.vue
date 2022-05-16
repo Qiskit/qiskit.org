@@ -3,7 +3,7 @@
     <TextbookBetaContentMenuSection
       class="course-overview-page__content-menu"
     />
-    <AppOverviewPageHeader :cta="startLearningCTA" :back-link="backToTextbookHomeLink">
+    <AppPageHeaderWithImage :cta="startLearningCTA" :back-link="backToTextbookHomeLink">
       <template slot="title">
         {{ headerTitle }}
       </template>
@@ -15,9 +15,9 @@
         />
       </template>
       <template slot="image">
-        <img class="app-overview-page-header__image" :src="headerImg">
+        <img class="app-page-header-with-img__image" :src="headerImg">
       </template>
-    </AppOverviewPageHeader>
+    </AppPageHeaderWithImage>
     <PrerequisiteMaterialSection
       v-if="prerequisites.length > 0"
       class="course-overview-page__section"
@@ -38,7 +38,6 @@ import { Component } from 'vue-property-decorator'
 import QiskitPage from './QiskitPage.vue'
 import { GeneralLink } from '~/constants/appLinks'
 import { Course, Prerequisite } from '~/constants/textbookBetaContent'
-import AppOverviewPageHeader from '../ui/AppOverviewPageHeader.vue'
 
 @Component({
   layout: 'default-max'
