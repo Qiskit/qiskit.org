@@ -2,8 +2,8 @@
   <main class="landing-page">
     <QiskitBanner padding-x-none class="qiskit-runtime">
       <div class="bx--grid">
-        <span class="banner-title">Start building with Qiskit runtime.</span>
-        <span class="banner-message">Leverage the new programming model and execution framework to efficiently execute circuits.</span>
+        <span class="banner__title">Start building with Qiskit runtime.</span>
+        <span class="banner__message">Leverage the new programming model and execution framework to efficiently execute circuits.</span>
         <AppLink
           :segment="{ action: `banner > qiskit-runtime` }"
           url="https://qiskit.org/documentation/partners/qiskit_ibm_runtime/"
@@ -50,12 +50,12 @@ export default class LandingPage extends QiskitPage {
 .qiskit-banner.qiskit-runtime {
   background-color: $background-color-lighter !important;
 
-  .banner-title {
+  .banner__title {
     color: $cool-gray-100;
     font-weight: 600;
   }
 
-  .banner-message {
+  .banner__message {
     color: $cool-gray-100;
   }
 
