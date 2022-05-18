@@ -25,7 +25,7 @@ const header = {
     title: 'Qiskit Global Summer School 2022: Quantum Simulations',
     description: 'The Qiskit Global Summer School returns as a two-week intensive course focused on Quantum Simulations and more!',
     location: 'Online',
-    date: 'July 18 - 29, 2021',
+    date: 'July 18 - 29, 2022',
     time: '',
     to: '',
     ctaLabel: 'Learn more',
