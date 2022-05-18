@@ -2,8 +2,8 @@ import { MosaicElement } from '@/components/ui/AppMosaic.vue'
 import { DescriptionCard } from '@/components/ui/AppDescriptionCard.vue'
 
 const header = {
-  titleLine1: 'Qiskit Global Summer School 2021:',
-  titleLine2: 'Quantum Machine Learning',
+  titleLine1: 'Qiskit Global Summer School 2022:',
+  titleLine2: 'Quantum Simulations',
   qiskitTwitterLink: {
     url: 'https://twitter.com/Qiskit',
     segment: {
@@ -12,8 +12,8 @@ const header = {
     }
   },
   cta: {
-    label: 'Register Now',
-    url: 'https://qisk.it/2021summerschoolregistration',
+    label: 'Register (Coming Soon!)',
+    url: 'https://qiskit.org/events/summer-school/',
     segment: {
       cta: 'register',
       location: 'header'
@@ -22,12 +22,12 @@ const header = {
   cardSectionHeading: 'About the event:',
   card: {
     image: '/images/events/summer-school/summer-school-logo.png',
-    title: 'Qiskit Global Summer School 2021: Quantum Machine Learning',
-    description: 'The Qiskit Global Summer School returns as a two-week intensive course focused on Quantum Machine Learning and more!',
+    title: 'Qiskit Global Summer School 2022: Quantum Simulations',
+    description: 'The Qiskit Global Summer School returns as a two-week intensive course focused on Quantum Simulations and more!',
     location: 'Online',
-    date: 'July 12 - 23, 2021',
+    date: 'July 18 - 29, 2022',
     time: '',
-    to: 'http://qisk.it/qgss2021blog_website_source',
+    to: '',
     ctaLabel: 'Learn more',
     segment: {
       cta: 'ibm-research-blog',
@@ -88,14 +88,14 @@ const mosaic: MosaicSection = {
     },
     {
       position: 'fourth',
-      title: 'IBM Quantum Tools on the Cloud',
-      description: 'Learn quantum programming and how to use our tools with step-by-step tutorials and guides.',
+      title: 'Quantum Computing & Quantum Machine Learning (2021)',
+      description: 'The Qiskit Global Summer School 2021 coursework, lab, and lecture materials are now available online.',
       image: '/images/events/summer-school/quantum-composer-screen.png',
       cta: {
-        url: 'https://quantum-computing.ibm.com/docs/',
-        label: 'Explore the docs',
+        url: 'https://qiskit.org/textbook-beta/summer-school/quantum-computing-and-quantum-learning-2021',
+        label: 'Start the course',
         segment: {
-          cta: 'explore-the-docs',
+          cta: 'start-the-course',
           location: 'mosaic'
         }
       }
@@ -112,103 +112,67 @@ interface dailyAgenda {
 
 const week1Schedule: dailyAgenda[] = [
   {
-    day: 'Monday, July 12',
+    day: 'Monday, July 18',
     topic: 'Qiskit Global Summer School Kick Off',
     speaker: '-',
     format: 'Lecture'
   },
   {
-    day: 'Monday, July 12',
-    topic: 'Vector Spaces, Tensor Products, and Qubits',
-    speaker: 'Elisa Bäumer',
+    day: 'Monday, July 18',
+    topic: 'History of Quantum Computing and Motivation for Quantum Simulation',
+    speaker: 'Olivia Lanes',
     format: 'Lecture'
   },
   {
-    day: 'Monday, July 12',
-    topic: 'Introduction to Quantum Circuits',
-    speaker: 'Elisa Bäumer',
-    format: 'Lecture'
-  },
-  {
-    day: 'Monday, July 12',
+    day: 'Monday, July 18',
     topic: 'Q&A Sessions',
     speaker: '-',
     format: 'Live Q&A'
   },
   {
-    day: 'Tuesday, July 13',
-    topic: 'Simple Quantum Algorithms I',
-    speaker: 'Elisa Bäumer',
+    day: 'Tuesday, July 19',
+    topic: 'Introduction to Linear Algebra, Prerequisite Mathematics, and Circuit Composition',
+    speaker: 'Maria Violaris',
     format: 'Lecture'
   },
   {
-    day: 'Tuesday, July 13',
-    topic: 'Simple Quantum Algorithms II',
-    speaker: 'Elisa Bäumer',
-    format: 'Lecture'
-  },
-  {
-    day: 'Tuesday, July 13',
+    day: 'Tuesday, July 19',
     topic: 'Q&A Sessions',
     speaker: '-',
     format: 'Live Q&A'
   },
   {
-    day: 'Wednesday, July 14',
-    topic: 'Noise in Quantum Computers',
+    day: 'Wednesday, July 20',
+    topic: 'Hamiltonian Time Evolution',
+    speaker: 'Maria Violaris',
+    format: 'Lecture'
+  },
+  {
+    day: 'Wednesday, July 20',
+    topic: 'Q&A Sessions',
+    speaker: '-',
+    format: 'Live Q&A'
+  },
+  {
+    day: 'Thursday, July 21',
+    topic: 'Simulation Problems',
+    speaker: 'Jeffrey Cohn',
+    format: 'Lecture'
+  },
+  {
+    day: 'Thursday, July 21',
+    topic: 'Q&A Sessions',
+    speaker: '-',
+    format: 'Live Q&A'
+  },
+  {
+    day: 'Friday, July 22',
+    topic: 'Noisy Real Hardware - Noise in Quantum Computers',
     speaker: 'Zlatko Minev',
     format: 'Lecture'
   },
   {
-    day: 'Wednesday, July 14',
-    topic: '(Lab 1) Introduction to Quantum Computing Algorithms and Operations',
-    speaker: 'Elisa Bäumer',
-    format: 'Lab'
-  },
-  {
-    day: 'Wednesday, July 14',
-    topic: 'Q&A Sessions',
-    speaker: '-',
-    format: 'Live Q&A'
-  },
-  {
-    day: 'Thursday, July 15',
-    topic: 'Introduction to Classical Machine Learning (ML)',
-    speaker: 'Amira Abbas',
-    format: 'Lecture'
-  },
-  {
-    day: 'Thursday, July 15',
-    topic: 'Advanced Classical Machine Learning (ML)',
-    speaker: 'Amira Abbas',
-    format: 'Lecture'
-  },
-  {
-    day: 'Thursday, July 15',
-    topic: 'Q&A Sessions',
-    speaker: '-',
-    format: 'Live Q&A'
-  },
-  {
-    day: 'Friday, July 16',
-    topic: 'Introduction to the Quantum Approximate Optimization Algorithm (QAOA) and its Applications',
-    speaker: 'Johannes Weidenfeller',
-    format: 'Lecture'
-  },
-  {
-    day: 'Friday, July 16',
-    topic: 'Building a Quantum Classifier',
-    speaker: 'Amira Abbas',
-    format: 'Lecture'
-  },
-  {
-    day: 'Friday, July 16',
-    topic: '(Lab 2) Introduction to Variational Algorithms',
-    speaker: 'Johannes Weidenfeller',
-    format: 'Lab'
-  },
-  {
-    day: 'Friday, July 16',
+    day: 'Friday, July 22',
     topic: 'Q&A Sessions',
     speaker: '-',
     format: 'Live Q&A'
@@ -217,110 +181,68 @@ const week1Schedule: dailyAgenda[] = [
 
 const week2Schedule: dailyAgenda[] = [
   {
-    day: 'Monday, July 19',
-    topic: 'From Variational Classifiers to Linear Classifiers',
-    speaker: 'Bryce Fuller',
+    day: 'Monday, July 25',
+    topic: 'Broad Overview of Quantum Chemistry Simulation and Why it is a Challenge',
+    speaker: 'Panos Barkoutsos',
     format: 'Lecture'
   },
   {
-    day: 'Monday, July 19',
-    topic: 'Quantum Feature Spaces and Kernels',
-    speaker: 'Kristan Temme',
-    format: 'Lecture'
-  },
-  {
-    day: 'Monday, July 19',
+    day: 'Monday, July 25',
     topic: 'Q&A Sessions',
     speaker: '-',
     format: 'Live Q&A'
   },
   {
-    day: 'Tuesday, July 20',
-    topic: 'Quantum Kernels in Practice',
-    speaker: 'Jen Glick',
+    day: 'Tuesday, July 26',
+    topic: 'Methods for Quantum Simulation',
+    speaker: 'Yukio Kawashima',
     format: 'Lecture'
   },
   {
-    day: 'Tuesday, July 20',
-    topic: '(Lab 3) Introduction to Quantum Kernels and Support Vector Machines (SVMs)',
-    speaker: 'Anna Phan',
-    format: 'Lab'
-  },
-  {
-    day: 'Tuesday, July 20',
+    day: 'Tuesday, July 26',
     topic: 'Q&A Sessions',
     speaker: '-',
     format: 'Live Q&A'
   },
   {
-    day: 'Wednesday, July 21',
-    topic: 'Introduction and Applications of Quantum Models',
-    speaker: 'Francesco Tacchino',
+    day: 'Wednesday, July 27',
+    topic: 'Quantum Static Simulation',
+    speaker: 'Ieva Liepuoniute',
     format: 'Lecture'
   },
   {
-    day: 'Wednesday, July 21',
-    topic: 'Barren Plateaus, Trainability Issues, and How to Avoid Them',
-    speaker: 'Francesco Tacchino',
-    format: 'Lecture'
-  },
-  {
-    day: 'Wednesday, July 21',
-    topic: '(Lab 4) Introduction to Training Quantum Circuits',
-    speaker: 'Julien Gacon',
-    format: 'Lab'
-  },
-  {
-    day: 'Wednesday, July 21',
+    day: 'Wednesday, July 27',
     topic: 'Q&A Sessions',
     speaker: '-',
     format: 'Live Q&A'
   },
   {
-    day: 'Thursday, July 22',
-    topic: 'Introduction to Quantum Hardware',
-    speaker: 'Nate Earnest-Noble',
+    day: 'Thursday, July 28',
+    topic: 'Quantum Dynamics',
+    speaker: 'Alexander Miessen',
     format: 'Lecture'
   },
   {
-    day: 'Thursday, July 22',
-    topic: 'Hardware Efficient Ansatze for Quantum Machine Learning',
-    speaker: 'Nate Earnest-Noble',
-    format: 'Lecture'
-  },
-  {
-    day: 'Thursday, July 22',
-    topic: '(Lab 5) Introduction to Hardware Efficient Ansatze for Quantum Machine Learning',
-    speaker: 'Nate Earnest-Noble',
-    format: 'Lab'
-  },
-  {
-    day: 'Thursday, July 22',
+    day: 'Thursday, July 28',
     topic: 'Q&A Sessions',
     speaker: '-',
     format: 'Live Q&A'
   },
   {
-    day: 'Friday, July 23',
-    topic: 'Advanced Quantum Machine Learning Algorithms: Quantum Boltzmann Machines and Quantum Generative Adversarial Networks (QGANs)',
-    speaker: 'Christa Zoufal',
+    day: 'Friday, July 29',
+    topic: 'What is Quantum Simulation and Where is the Field Going?',
+    speaker: '-',
     format: 'Lecture'
   },
   {
-    day: 'Friday, July 23',
-    topic: 'The Capacity and Power of Quantum Machine Learning Models & the Future of Quantum Machine Learning',
-    speaker: 'Amira Abbas',
-    format: 'Lecture'
-  },
-  {
-    day: 'Friday, July 23',
+    day: 'Friday, July 29',
     topic: 'Q&A Sessions',
     speaker: '-',
     format: 'Live Q&A'
   },
   {
-    day: 'Friday, July 23',
-    topic: 'Qiskit Global Summer School 2021 Commencement & Wrap Celebration',
+    day: 'Friday, July 29',
+    topic: 'Qiskit Global Summer School 2022 Commencement & Wrap Celebration',
     speaker: '-',
     format: 'Commencement'
   }
