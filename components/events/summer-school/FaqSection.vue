@@ -36,7 +36,7 @@
         </template>
         <template #content>
           <p>
-            There is no application or pre-registration for the Qiskit Global Summer School 2022. Registration will be on a first come, first served basis, with scheduled global availability. Once the Summer School registration reaches capacity, unfortunately we will not be able to register any additional students. 
+            There is no application or pre-registration for the Qiskit Global Summer School 2022. Registration will be on a first come, first served basis, with scheduled global availability. Once the Summer School registration reaches capacity, unfortunately we will not be able to register any additional students.
           </p>
         </template>
       </cv-accordion-item>
