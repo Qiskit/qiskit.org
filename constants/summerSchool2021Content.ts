@@ -27,7 +27,7 @@ const header = {
     location: 'Online',
     date: 'July 18 - 29, 2021',
     time: '',
-    to: 'http://qisk.it/qgss2021blog_website_source',
+    to: '',
     ctaLabel: 'Learn more',
     segment: {
       cta: 'ibm-research-blog',
