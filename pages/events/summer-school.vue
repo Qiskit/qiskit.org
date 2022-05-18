@@ -31,7 +31,7 @@
       </template>
     </AppPageHeaderWithCard>
 
-    <div class="bx--grid summer-school-page__container">
+    <div class="bx--grid">
       <AppMosaicSection
         class="summer-school-page__section"
         :title="mosaicData.title"
@@ -80,7 +80,7 @@ import {
   mosaic,
   agenda,
   helpfulResources
-} from '~/constants/summerSchool2021Content'
+} from '~/constants/summerSchool2022Content'
 
 @Component({
   head () {
@@ -157,10 +157,6 @@ export default class SummerSchoolPage extends QiskitPage {
 .summer-school-page {
   display: flex;
   flex-direction: column;
-
-  &__container {
-    max-width: 100%;
-  }
 
   &__section {
     margin-top: $spacing-10;
