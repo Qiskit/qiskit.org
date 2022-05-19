@@ -34,8 +34,6 @@ export default class AppPageHeaderWithImage extends Vue {
 
 <style lang="scss" scoped>
 .app-page-header-with-img {
-  @include responsive-grid-bg-strip("/images/grid/grid-hero-learn.svg", auto, 28rem);
-
   &__back-link {
     height: 0;
 
