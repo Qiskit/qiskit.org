@@ -2,7 +2,7 @@
   <section class="course-pages-section">
     <div>
       <h2>
-        Course pages
+        Pages
       </h2>
       <nav class="course-pages-section__nav">
         <ul class="courses">
