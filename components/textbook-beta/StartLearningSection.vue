@@ -96,7 +96,13 @@ export default class StartLearningSection extends Vue {
             url: '/textbook-beta/course/machine-learning-course',
             segment: { cta: 'machine-learning', location: 'course' }
           }
-        },
+        }
+      ]
+    },
+    {
+      title: 'Chapters',
+      description: 'These pages are not part of a course, but contain useful reference material.',
+      courses: [
         {
           image: '/images/textbook-beta/course/prerequisites/prerequisites.png',
           title: 'Prerequisites',
