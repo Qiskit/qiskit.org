@@ -104,7 +104,7 @@ export default class MeetTheAdvocates extends Vue {
     this.$store.commit('advocates/setRegionFilters', regionFilters)
   }
 
-  joinSlackLink: string = 'https://ibm.co/joinqiskitslack'
+  joinSlackLink: string = 'https://ibm.biz/qiskitslack'
 }
 </script>
 
