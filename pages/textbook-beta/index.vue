@@ -52,17 +52,6 @@ export default class TextbookBetaPage extends QiskitPage {
       }
     },
     {
-      title: 'Tutorials',
-      description: `The Tutorials include a range of Jupyter notebooks that
-      cover a range of features and applications including circuits,
-      algorithms, and applications.`,
-      cta: {
-        url: 'https://qiskit.org/documentation/tutorials/circuits/index.html',
-        label: 'Go to tutorials',
-        segment: { cta: 'tutorials', location: 'helpful-resources' }
-      }
-    },
-    {
       title: SOCIAL_MEDIA.stack.label,
       description: `Have a question? Ask it on stack exchange! Qiskit
       advocates and core contributors monitor this forum and will happily
@@ -81,6 +70,15 @@ export default class TextbookBetaPage extends QiskitPage {
         url: SOCIAL_MEDIA.slack.url,
         label: 'Visit Slack',
         segment: { cta: 'slack', location: 'helpful-resources' }
+      }
+    },
+    {
+      title: 'Educators Program',
+      description: 'This program helps teachers in the growing quantum field connect with one another, and provides the learning resources, tools, and systems access they need to provide quality educational experiences.',
+      cta: {
+        url: 'https://quantum-computing.ibm.com/programs/educators',
+        label: 'Visit the Educators Program',
+        segment: { cta: 'educators-program', location: 'helpful-resources' }
       }
     }
   ]
