@@ -554,12 +554,12 @@ const COLUMN_3: MegaDropdownMenuColumn = [
 ]
 
 type MegaDropdownMenu = MegaDropdownMenuColumn[]
-const TEXTBOOK_BETA_MEGA_MENU: MegaDropdownMenu = [
+const LEARN_MEGA_MENU: MegaDropdownMenu = [
   COLUMN_1,
   COLUMN_2,
   COLUMN_3
 ]
 
 export {
-  TEXTBOOK_BETA_MEGA_MENU
+  LEARN_MEGA_MENU
 }

@@ -15,13 +15,13 @@
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 import QiskitMegaMenuDropdown from '@qiskit-community/qiskit-vue/src/components/mega-menu-dropdown/MegaMenuDropdown.vue'
-import { TEXTBOOK_BETA_MEGA_MENU } from '~/constants/megaMenuLinks'
+import { LEARN_MEGA_MENU } from '~/constants/megaMenuLinks'
 
 @Component({
   components: { QiskitMegaMenuDropdown }
 })
-export default class TextbookBetaContentMenuSection extends Vue {
-  dropdownMenuContent = TEXTBOOK_BETA_MEGA_MENU
+export default class LearnContentMenuSection extends Vue {
+  dropdownMenuContent = LEARN_MEGA_MENU
 
   trackPerformedSearch (uiElement: string, field: string) {
     this.$trackPerformedSearch(uiElement, field)

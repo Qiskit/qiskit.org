@@ -1,5 +1,5 @@
 <script lang="ts">
-import { Course, Prerequisite } from 'constants/textbookBetaContent'
+import { Course, Prerequisite } from 'constants/learnContent'
 import { Component } from 'vue-property-decorator'
 import CourseOverviewPage from '~/components/logic/CourseOverviewPage.vue'
 import { GeneralLink, StartLearningUrl } from '~/constants/appLinks'
@@ -23,10 +23,10 @@ export default class SummerSchoolCoursePage extends CourseOverviewPage {
     material in 9 lecture notes and 9 associated labs.`
   ]
 
-  headerImg = '/images/textbook-beta/summer-school/intro-quantum-computing-quantum-hardware-2020/header.png'
+  headerImg = '/images/learn/summer-school/intro-quantum-computing-quantum-hardware-2020/header.png'
 
   backToTextbookHomeLink: GeneralLink = {
-    url: '/textbook-beta',
+    url: '/learn',
     label: 'Home',
     segment: {
       cta: 'back-to-textbook-home', location: 'header'
@@ -140,6 +140,6 @@ export default class SummerSchoolCoursePage extends CourseOverviewPage {
     }
   ]
 
-  imageUrlBase = '/images/textbook-beta/summer-school/intro-quantum-computing-quantum-hardware-2020'
+  imageUrlBase = '/images/learn/summer-school/intro-quantum-computing-quantum-hardware-2020'
 }
 </script>

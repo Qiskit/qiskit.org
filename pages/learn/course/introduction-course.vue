@@ -1,5 +1,5 @@
 <script lang="ts">
-import { Course, Prerequisite } from 'constants/textbookBetaContent'
+import { Course, Prerequisite } from 'constants/learnContent'
 import { Component } from 'vue-property-decorator'
 import CourseOverviewPage from '~/components/logic/CourseOverviewPage.vue'
 import { GeneralLink, StartLearningUrl } from '~/constants/appLinks'
@@ -25,10 +25,10 @@ export default class IntroductionCoursePage extends CourseOverviewPage {
     protocols, near term quantum algorithms, and quantum machine
     learning.`]
 
-  headerImg = '/images/textbook-beta/course/introduction-course/header.png'
+  headerImg = '/images/learn/course/introduction-course/header.png'
 
   backToTextbookHomeLink: GeneralLink = {
-    url: '/textbook-beta',
+    url: '/learn',
     label: 'Home',
     segment: {
       cta: 'back-to-textbook-home', location: 'header'
@@ -137,6 +137,6 @@ export default class IntroductionCoursePage extends CourseOverviewPage {
     }
   ]
 
-  imageUrlBase = '/images/textbook-beta/course/introduction-course'
+  imageUrlBase = '/images/learn/course/introduction-course'
 }
 </script>

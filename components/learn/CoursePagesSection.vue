@@ -48,7 +48,7 @@
 </template>
 
 <script lang="ts">
-import { Course } from 'constants/textbookBetaContent'
+import { Course } from 'constants/learnContent'
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 

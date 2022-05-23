@@ -62,7 +62,7 @@
     </svg>
     <img
       class="logo__sketch"
-      src="/images/textbook-beta/logo-sketch-lines.png"
+      src="/images/learn/logo-sketch-lines.png"
     >
   </div>
 </template>

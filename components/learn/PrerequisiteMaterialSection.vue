@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts">
-import { Prerequisite } from 'constants/textbookBetaContent'
+import { Prerequisite } from 'constants/learnContent'
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-import { Course, Prerequisite } from 'constants/textbookBetaContent'
+import { Course, Prerequisite } from 'constants/learnContent'
 import { Component } from 'vue-property-decorator'
 import CourseOverviewPage from '~/components/logic/CourseOverviewPage.vue'
 import { GeneralLink, QuantumHardwareCircuitsUrl } from '~/constants/appLinks'
@@ -15,10 +15,10 @@ export default class QuantumHardwareCircuitsPage extends CourseOverviewPage {
   headerTitle = 'Investigating Quantum Hardware Using Quantum Circuits'
   headerDescription = ['Most gate-based quantum computers share similar challenges with noise and errors. These pages explore how errors affect quantum circuits, and how we can mitigate them, without worrying about the physics of the device itself.']
 
-  headerImg = '/images/textbook-beta/course/quantum-hardware-circuits/quantum-hardware-circuits.png'
+  headerImg = '/images/learn/course/quantum-hardware-circuits/quantum-hardware-circuits.png'
 
   backToTextbookHomeLink: GeneralLink = {
-    url: '/textbook-beta',
+    url: '/learn',
     label: 'Home',
     segment: {
       cta: 'back-to-textbook-home', location: 'header'
@@ -76,6 +76,6 @@ export default class QuantumHardwareCircuitsPage extends CourseOverviewPage {
     }
   ]
 
-  imageUrlBase = '/images/textbook-beta/course/quantum-hardware-circuits'
+  imageUrlBase = '/images/learn/course/quantum-hardware-circuits'
 }
 </script>

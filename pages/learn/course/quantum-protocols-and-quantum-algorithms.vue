@@ -1,5 +1,5 @@
 <script lang="ts">
-import { Course, Prerequisite } from 'constants/textbookBetaContent'
+import { Course, Prerequisite } from 'constants/learnContent'
 import { Component } from 'vue-property-decorator'
 import CourseOverviewPage from '~/components/logic/CourseOverviewPage.vue'
 import { GeneralLink, QuantumProtocolsAndQuantumAlgorithmsUrl } from '~/constants/appLinks'
@@ -15,10 +15,10 @@ export default class QuantumProtocolsAndQuantumAlgorithmsPage extends CourseOver
   headerTitle = 'Quantum Protocols and Quantum Algorithms'
   headerDescription = ['So far, we\'ve seen various quantum gates and operations, and we\'ve explored some interesting properties of these gates. Each of these pages shows how we can combine quantum operations into a quantum algorithm that outperforms their classical counterpart. As a bonus, some of these algorithms are actually useful too!']
 
-  headerImg = '/images/textbook-beta/course/quantum-protocols-and-quantum-algorithms/quantum-protocols-and-quantum-algorithms.png'
+  headerImg = '/images/learn/course/quantum-protocols-and-quantum-algorithms/quantum-protocols-and-quantum-algorithms.png'
 
   backToTextbookHomeLink: GeneralLink = {
-    url: '/textbook-beta',
+    url: '/learn',
     label: 'Home',
     segment: {
       cta: 'back-to-textbook-home', location: 'header'
@@ -175,6 +175,6 @@ export default class QuantumProtocolsAndQuantumAlgorithmsPage extends CourseOver
     }
   ]
 
-  imageUrlBase = '/images/textbook-beta/course/quantum-protocols-and-quantum-algorithms'
+  imageUrlBase = '/images/learn/course/quantum-protocols-and-quantum-algorithms'
 }
 </script>

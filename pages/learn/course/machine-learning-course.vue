@@ -1,5 +1,5 @@
 <script lang="ts">
-import { Course, Prerequisite } from 'constants/textbookBetaContent'
+import { Course, Prerequisite } from 'constants/learnContent'
 import { Component } from 'vue-property-decorator'
 import CourseOverviewPage from '~/components/logic/CourseOverviewPage.vue'
 import { GeneralLink, StartLearningUrl } from '~/constants/appLinks'
@@ -26,7 +26,7 @@ export default class QuantumMachineLearningCoursePage extends CourseOverviewPage
   `This course was created by IBM Quantum with the help of Qiskit Advocates
   through the Qiskit Advocate Mentoring Program.`]
 
-  headerImg = '/images/textbook-beta/course/machine-learning-course/header.png'
+  headerImg = '/images/learn/course/machine-learning-course/header.png'
 
   startLearningCTA: GeneralLink = {
     url: StartLearningUrl.QML,
@@ -113,7 +113,7 @@ export default class QuantumMachineLearningCoursePage extends CourseOverviewPage
         cta: 'introduction-course', location: 'prerequisite-material'
       },
       url:
-        'https://qiskit.org/textbook-beta/course/introduction-course'
+        'https://qiskit.org/learn/course/introduction-course'
     },
     {
       title: 'Setting Up Your Environment',
@@ -137,6 +137,6 @@ export default class QuantumMachineLearningCoursePage extends CourseOverviewPage
     }
   ]
 
-  imageUrlBase = '/images/textbook-beta/course/machine-learning-course'
+  imageUrlBase = '/images/learn/course/machine-learning-course'
 }
 </script>

@@ -1,5 +1,5 @@
 <script lang="ts">
-import { Course, Prerequisite } from 'constants/textbookBetaContent'
+import { Course, Prerequisite } from 'constants/learnContent'
 import { Component } from 'vue-property-decorator'
 import CourseOverviewPage from '~/components/logic/CourseOverviewPage.vue'
 import { GeneralLink, GamesAndDemos } from '~/constants/appLinks'
@@ -13,9 +13,9 @@ export default class GamesAndDemosPage extends CourseOverviewPage {
   routeName: string = 'games-and-demos'
   headerTitle = 'Games and demos'
   headerDescription = ["Qiskit, and the Qiskit Textbook website, are interactive learning environments. Unlike with traditional, ink-and-paper textbooks, you can mess around with quantum effects to strengthen your knowledge. These pages contain cool experiments with Qiskit that don't belong in a course."]
-  headerImg = '/images/textbook-beta/course/games-and-demos/games-and-demos.png'
+  headerImg = '/images/learn/course/games-and-demos/games-and-demos.png'
   backToTextbookHomeLink: GeneralLink = {
-    url: '/textbook-beta',
+    url: '/learn',
     label: 'Home',
     segment: {
       cta: 'back-to-textbook-home', location: 'header'
@@ -94,6 +94,6 @@ export default class GamesAndDemosPage extends CourseOverviewPage {
     }
   ]
 
-  imageUrlBase = '/images/textbook-beta/course/games-and-demos'
+  imageUrlBase = '/images/learn/course/games-and-demos'
 }
 </script>

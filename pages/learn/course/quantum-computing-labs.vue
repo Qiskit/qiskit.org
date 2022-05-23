@@ -1,5 +1,5 @@
 <script lang="ts">
-import { Course, Prerequisite } from 'constants/textbookBetaContent'
+import { Course, Prerequisite } from 'constants/learnContent'
 import { Component } from 'vue-property-decorator'
 import CourseOverviewPage from '~/components/logic/CourseOverviewPage.vue'
 import { GeneralLink, QuantumComputingLabs } from '~/constants/appLinks'
@@ -15,10 +15,10 @@ export default class QuantumComputingLabsPage extends CourseOverviewPage {
   headerTitle = 'Quantum Computing Labs'
   headerDescription = ['These pages are hands-on exercises that interact with IBM Quantum\'s real quantum systems. Aimed at late-undergraduate / early-graduate courses, these lab modules start cover basic quantum circuits, to exploring core algorithms such as Grover search and Shor\'s algorithm. These pages tackle the limitations of today\'s quantum computers, and ways to account for them.']
 
-  headerImg = '/images/textbook-beta/course/quantum-computing-labs/quantum-lab.png'
+  headerImg = '/images/learn/course/quantum-computing-labs/quantum-lab.png'
 
   backToTextbookHomeLink: GeneralLink = {
-    url: '/textbook-beta',
+    url: '/learn',
     label: 'Home',
     segment: {
       cta: 'back-to-textbook-home', location: 'header'
@@ -116,6 +116,6 @@ export default class QuantumComputingLabsPage extends CourseOverviewPage {
     }
   ]
 
-  imageUrlBase = '/images/textbook-beta/course/quantum-computing-labs'
+  imageUrlBase = '/images/learn/course/quantum-computing-labs'
 }
 </script>

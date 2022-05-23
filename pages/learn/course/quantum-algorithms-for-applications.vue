@@ -1,5 +1,5 @@
 <script lang="ts">
-import { Course, Prerequisite } from 'constants/textbookBetaContent'
+import { Course, Prerequisite } from 'constants/learnContent'
 import { Component } from 'vue-property-decorator'
 import CourseOverviewPage from '~/components/logic/CourseOverviewPage.vue'
 import { GeneralLink, QuantumAlgorithmsForApplications } from '~/constants/appLinks'
@@ -15,10 +15,10 @@ export default class QuantumAlgorithmsForApplicationsPage extends CourseOverview
   headerTitle = 'Quantum Algorithms for Applications'
   headerDescription = ['The useful algorithms in the quantum algorithms pages solve very general problems. These pages apply quantum algorithms to specific, real-world cases.']
 
-  headerImg = '/images/textbook-beta/course/quantum-algorithms-for-applications/quantum-algorithms-for-applications.png'
+  headerImg = '/images/learn/course/quantum-algorithms-for-applications/quantum-algorithms-for-applications.png'
 
   backToTextbookHomeLink: GeneralLink = {
-    url: '/textbook-beta',
+    url: '/learn',
     label: 'Home',
     segment: {
       cta: 'back-to-textbook-home', location: 'header'
@@ -104,6 +104,6 @@ export default class QuantumAlgorithmsForApplicationsPage extends CourseOverview
     }
   ]
 
-  imageUrlBase = '/images/textbook-beta/course/quantum-algorithms-for-applications'
+  imageUrlBase = '/images/learn/course/quantum-algorithms-for-applications'
 }
 </script>
