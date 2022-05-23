@@ -39,21 +39,13 @@ export default class QuantumProtocolsAndQuantumAlgorithmsPage extends CourseOver
       url: 'http://mmrc.amss.cas.cn/tlb/201702/W020170224608149940643.pdf',
       label: 'Michael Nielsen, et al. Quantum Computation and Quantum Information (Chapters 4-6). Cambridge University Press, 2000.',
       segment: {
-        cta: 'quantum-computing-lecture-notes',
+        cta: 'quantum-computation-and-quantum-information-ch-4-6',
         location: 'external-recommended-readings'
       }
     },
     {
       url: 'http://mmrc.amss.cas.cn/tlb/201702/W020170224608149125645.pdf',
       label: 'Phillip Kaye, et al. An Introduction to Quantum Computing (Chapters 5-8). Oxford University Press, 2007.',
-      segment: {
-        cta: 'quantum-computing-lecture-notes',
-        location: 'external-recommended-readings'
-      }
-    },
-    {
-      url: 'https://arxiv.org/abs/1907.09415',
-      label: 'Richard Cleve. Quantum Information Processing — Quantum Algorithms III. 2021.',
       segment: {
         cta: 'quantum-computing-lecture-notes',
         location: 'external-recommended-readings'
