@@ -37,17 +37,17 @@ export default class PrerequisitesPage extends CourseOverviewPage {
   links: GeneralLink[] = [
     {
       url: 'https://math.mit.edu/~gs/linearalgebra/',
-      label: 'https://math.mit.edu/~gs/linearalgebra/',
+      label: 'Gilbert Strang, Introduction to Linear Algebra, 2016',
       segment: {
-        cta: 'mit-linear-algebra',
+        cta: 'introduction-to-linear-algebra',
         location: 'external-recommended-readings'
       }
     },
     {
       url: 'https://machinelearningmastery.com/gentle-introduction-linear-algebra/',
-      label: 'https://machinelearningmastery.com/gentle-introduction-linear-algebra/',
+      label: 'Jason Brownlee, A Gentle Introduction to Linear Algebra, 2018',
       segment: {
-        cta: 'mlmastery-linear-algebra',
+        cta: 'gentle-introduction-to-linear-algebra',
         location: 'external-recommended-readings'
       }
     }

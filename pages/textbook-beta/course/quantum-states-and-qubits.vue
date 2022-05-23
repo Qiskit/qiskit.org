@@ -33,12 +33,24 @@ export default class QuantumStatesAndQubitsPage extends CourseOverviewPage {
     }
   }
 
-  references: string[] = [
-    'Michael Nielsen and Isaac Chuang. Quantum Computation and Quantum Information (Chapter 1). Cambridge University Press, 2000.',
-    'Phillip Kaye, Raymond Laflamme, and Michele Mosca. An Introduction to Quantum Computing (Chapters 1-3). Oxford University Press, 2007.'
-  ]
-
+  references: string[] = []
   links: GeneralLink[] = [
+    {
+      url: 'http://mmrc.amss.cas.cn/tlb/201702/W020170224608149940643.pdf',
+      label: 'Michael Nielsen, et all. Quantum Computation and Quantum Information (Chapter 1). Cambridge University Press, 2000.',
+      segment: {
+        cta: 'quantum-computation-and-quantum-information-ch-1',
+        location: 'external-recommended-readings'
+      }
+    },
+    {
+      url: 'http://mmrc.amss.cas.cn/tlb/201702/W020170224608149125645.pdf',
+      label: 'Phillip Kaye, et all. An Introduction to Quantum Computing (Chapters 1-3). Oxford University Press, 2007.',
+      segment: {
+        cta: 'introduction-to-quantum-computing-ch-1-3',
+        location: 'external-recommended-readings'
+      }
+    },
     {
       url: 'https://arxiv.org/abs/1907.09415',
       label: 'Ronald de Wolf. Quantum Computing: Lecture Notes (Chapters 1 and 2).',

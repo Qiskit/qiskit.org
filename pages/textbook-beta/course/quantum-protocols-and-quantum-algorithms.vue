@@ -33,15 +33,19 @@ export default class QuantumProtocolsAndQuantumAlgorithmsPage extends CourseOver
     }
   }
 
-  references: string[] = [
-    'Michael Nielsen and Isaac Chuang. Quantum Computation and Quantum Information (Chapters 4-6). Cambridge University Press, 2000.',
-    'Phillip Kaye, Raymond Laflamme, and Michele Mosca. An Introduction to Quantum Computing (Chapters 5-8). Oxford University Press, 2007.'
-  ]
-
+  references: string[] = []
   links: GeneralLink[] = [
     {
-      url: 'https://arxiv.org/abs/1907.09415',
-      label: 'Ronald de Wolf. Quantum Computing: Lecture Notes (Chapters 2-5 and 7). 2022.',
+      url: 'http://mmrc.amss.cas.cn/tlb/201702/W020170224608149940643.pdf',
+      label: 'Michael Nielsen, et al. Quantum Computation and Quantum Information (Chapters 4-6). Cambridge University Press, 2000.',
+      segment: {
+        cta: 'quantum-computation-and-quantum-information-ch-4-6',
+        location: 'external-recommended-readings'
+      }
+    },
+    {
+      url: 'http://mmrc.amss.cas.cn/tlb/201702/W020170224608149125645.pdf',
+      label: 'Phillip Kaye, et al. An Introduction to Quantum Computing (Chapters 5-8). Oxford University Press, 2007.',
       segment: {
         cta: 'quantum-computing-lecture-notes',
         location: 'external-recommended-readings'
