@@ -34,8 +34,6 @@ export default class QuantumProtocolsAndQuantumAlgorithmsPage extends CourseOver
   }
 
   references: string[] = []
-
-
   links: GeneralLink[] = [
     {
       url: 'http://mmrc.amss.cas.cn/tlb/201702/W020170224608149940643.pdf',
