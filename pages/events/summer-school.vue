@@ -11,17 +11,17 @@
       </template>
       <template slot="description">
         <p>
-          The Qiskit Global Summer School 2021 is a two-week intensive summer school designed to empower the next generation of quantum researchers and developers with the skills and know-how to explore quantum applications on their own. This second-annual course, made up of twenty lectures, five applied lab exercises, hands-on mentorship, and live Q&A sessions, focuses on developing hands-on experience and understanding of quantum machine learning.
+          The Qiskit Global Summer School 2022 is a two-week intensive summer program designed to empower the quantum researchers and developers of tomorrow with the skills and know-how to explore the world of quantum computing and its applications. This third-annual summer school will provide a focused introduction to quantum computing and its applications to quantum simulation, with a specific focus on quantum chemistry.
         </p>
         <p>
-          Registration is now open! Please follow
+          Please follow
           <AppLink v-bind="headerData.qiskitTwitterLink">
             Qiskit Twitter
           </AppLink>
-          for more details and updates. For any questions, please check out our FAQ or submit an enquiry using the form below!
+          for more details and updates. For any questions, please check out our FAQ below!
         </p>
         <p>
-          Speakers will be announced soon!
+          Early Bird Registration will open at 12:00 PM EST on May 26, 2022.
         </p>
       </template>
       <template slot="card">
@@ -31,7 +31,7 @@
       </template>
     </AppPageHeaderWithCard>
 
-    <div class="bx--grid summer-school-page__container">
+    <div class="bx--grid">
       <AppMosaicSection
         class="summer-school-page__section"
         :title="mosaicData.title"
@@ -80,12 +80,12 @@ import {
   mosaic,
   agenda,
   helpfulResources
-} from '~/constants/summerSchool2021Content'
+} from '~/constants/summerSchool2022Content'
 
 @Component({
   head () {
-    const title = 'Qiskit Global Summer School 2021'
-    const description = `The Qiskit Global Summer School 2021 is a two-week intensive summer school
+    const title = 'Qiskit Global Summer School 2022'
+    const description = `The Qiskit Global Summer School 2022 is a two-week intensive summer school
     designed to empower the next generation of quantum researchers and developers with the skills
     and know-how to explore quantum applications on their own`
     const image = '/images/events/summer-school/summer-school-logo.png'
@@ -157,10 +157,6 @@ export default class SummerSchoolPage extends QiskitPage {
 .summer-school-page {
   display: flex;
   flex-direction: column;
-
-  &__container {
-    max-width: 100%;
-  }
 
   &__section {
     margin-top: $spacing-10;

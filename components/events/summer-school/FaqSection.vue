@@ -36,7 +36,7 @@
         </template>
         <template #content>
           <p>
-            There is no application or pre-registration for the Qiskit Global Summer School 2021. Registration will be on a first come, first serve basis, with scheduled global availability. Once the Summer School registration reaches capacity, unfortunately we will not be able to register any additional students. Please submit an enquiry below if you have any additional questions!
+            There is no application or pre-registration for the Qiskit Global Summer School 2022. Registration will be on a first come, first served basis, with scheduled global availability. Once the Summer School registration reaches capacity, unfortunately we will not be able to register any additional students.
           </p>
         </template>
       </cv-accordion-item>
@@ -47,18 +47,18 @@
         </template>
         <template #content>
           <p>
-            The summer school is made up of a total of 20 lectures, 5 lab sessions &amp; application exercises, in addition to the daily Live Q&amp;A Sessions and final Commencement Celebration. Participation and completion of all labs and lectures are required in order to receive a certificate of completion from the Summer School, with the optional Q&A Sessions and Commencement activities to enhance your Summer School experience. The schedule is not fixed, aside from final lab submission deadlines, and all students can participate on the schedule that works best for them. Students should anticipate a minimum time commitment of 30 hours for the full Summer School, but we recommend planning on 41 hours of participation, with additional time for discussion and collaboration with other students.
+            The summer school is made up of a total of 20 lectures, 3 lab sessions &amp; application exercises, in addition to the daily Live Q&amp;A Sessions and final Commencement Celebration. Participation and completion of all labs and lectures are required in order to receive a certificate of completion from the Summer School, with the optional Q&A Sessions and Commencement activities to enhance your Summer School experience. The schedule is not fixed, aside from final lab submission deadlines, and all students can participate on the schedule that works best for them. Students should anticipate a minimum time commitment of 30 hours for the full Summer School, but we recommend planning on 41 hours of participation, with additional time for discussion and collaboration with other students.
           </p>
         </template>
       </cv-accordion-item>
 
       <cv-accordion-item>
         <template #title>
-          I was a student at the Qiskit Global Summer School 2020 - should I enroll in the 2021 Summer School as well?
+          I was a student at the Qiskit Global Summer School 2020/2021 - should I enroll in the 2022 Summer School as well?
         </template>
         <template #content>
           <p>
-            The 2021 Summer School will cover briefly introduce quantum computing before diving into classical and quantum machine learning, which was not covered in the 2020 Summer School, so you should enroll if you are interested!
+            The 2022 Summer School will cover briefly introduce quantum computing before diving into quantum simulations and chemistry, which was not covered in the 2020 or 2021 Summer School, so you should enroll if you are interested!
           </p>
         </template>
       </cv-accordion-item>
@@ -102,7 +102,7 @@
         </template>
         <template #content>
           <p>
-            You will need an operating computer with a reliable internet connection and either a mobile device or webcam/microphone on your computer to communicate with mentors and other students. You will need to be able to view seminars and connect virtually. Other than that, you just need to bring yourself
+            You will need a computer with a reliable internet connection and either a mobile device or webcam/microphone on your computer to communicate with mentors and other students. You will need to be able to view seminars and connect virtually. Other than that, you just need to bring yourself
           </p>
         </template>
       </cv-accordion-item>
@@ -113,7 +113,7 @@
         </template>
         <template #content>
           <p>
-            The age limit for Qiskit Global Summer School 2021 is 14. If you are under the age limit, but still want to be part of the community, please check out other ways you can get connected, and other events that may be available in your area!
+            The age limit for Qiskit Global Summer School 2022 is 14. If you are under the age limit, but still want to be part of the community, please check out other ways you can get connected, and other events that may be available in your area!
           </p>
         </template>
       </cv-accordion-item>
