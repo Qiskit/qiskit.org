@@ -1,174 +1,98 @@
 <template>
-  <div class="learn-page">
-    <AppPageHeaderFixed>
-      Start your path towards learning
-      <TypewriterEffect
-        :values="[
-          'Qiskit',
-          'Python',
-          'Quantum Computing',
-          'Error Mitigation',
-          'Quantum Hardware',
-          'Quantum Algorithms',
-          'Quantum Applications'
-        ]"
-      />
-    </AppPageHeaderFixed>
-    <TheLearningResourceList
-      :top-filters="learnLevelOptions"
-      :active-top-filter="learnLevel"
-
-      :aside-filters="timeScaleOptions"
-      :active-aside-filter="timeScale"
-
-      @top-filter-changed="setLearnLevel"
-      @aside-filter-changed="setTimeScale"
-    >
-      <div class="learn-page__careful-explanation">
-        <TheCarefulExplanationForBeginners
-          v-if="isShowingOneMinuteFor(learnLevels.beginner) && !isShowingEverything"
-          :compact="isShowingMoreResources"
-          url="/learn/?learnLevel=Beginner&amp;timeScale=1%20minute"
-        />
-        <TheCarefulExplanationForExperts
-          v-if="isShowingOneMinuteFor(learnLevels.advanced) && !isShowingEverything"
-          :compact="isShowingMoreResources"
-          url="/learn/?learnLevel=Advanced&amp;timeScale=1%20minute"
-        />
-      </div>
-      <div class="bx--row">
-        <div
-          v-for="resource in filteredLearningResources"
-          :key="resource.path"
-          class="bx--col-sm-4 bx--col-xlg-8"
+  <main class="learn-page">
+    <QiskitBanner padding-x-none>
+      <div class="bx--grid">
+        Miss the old version of the textbook? Access it
+        <AppLink
+          :segment="{ action: `${routeName} > banner > old-textbook-version` }"
+          url="https://qiskit.org/textbook"
         >
-          <AppCard
-            :image="resource.image"
-            :title="resource.title"
-            :to="resource.to"
-            :cta-label="resource.ctaLabel"
-            class="app-filters-results-layout__results-item"
-          >
-            <nuxt-content :document="resource" />
-          </AppCard>
-        </div>
+          here
+        </AppLink>
       </div>
-    </TheLearningResourceList>
-  </div>
+    </QiskitBanner>
+    <LearnHeader />
+    <StartLearningSection class="learn-page__section" />
+    <AppHelpfulResourcesSection
+      class="learn-page__section"
+      :resources="helpfulResources"
+    />
+  </main>
 </template>
 
 <script lang="ts">
-import { mapGetters } from 'vuex'
 import { Component } from 'vue-property-decorator'
+import QiskitBanner from '@qiskit-community/qiskit-vue/src/components/banner/Banner.vue'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
-import {
-  TimeScale,
-  LearnLevel,
-  LEARN_LEVELS,
-  TIME_SCALES,
-  LEARN_LEVEL_OPTIONS,
-  TIME_SCALE_OPTIONS
-} from '~/store/learning-resources'
+import { DescriptionCard } from '~/components/ui/AppDescriptionCard.vue'
+import { SOCIAL_MEDIA } from '~/constants/menuLinks'
 
 @Component({
+  layout: 'default-max',
   head () {
     return {
-      title: 'Qiskit Learn'
+      title: 'Qiskit Textbook'
     }
   },
-  layout: 'default-max',
-  computed: {
-    ...mapGetters('learning-resources', [
-      'filteredLearningResources',
-      'learnLevel',
-      'timeScale'
-    ])
-  },
-  async middleware ({ $content, store }) {
-    const learningResources = await $content('learning-resources')
-      .sortBy('order', 'asc')
-      .fetch()
-    store.commit('learning-resources/setLearningResources', learningResources)
-  }
+  components: { QiskitBanner }
 })
-
 export default class LearnPage extends QiskitPage {
-  routeName = 'learn'
+  routeName: string = 'learn'
 
-  learnLevelOptions = LEARN_LEVEL_OPTIONS
-  timeScaleOptions = TIME_SCALE_OPTIONS
-
-  learnLevels = LEARN_LEVELS
-  timeScales = TIME_SCALES
-
-  beforeRouteEnter (route: any, _: any, next: any) {
-    next((learnPage: any) => learnPage._parseFilterFromUrl(route))
-  }
-
-  beforeRouteUpdate (route: any, _: any, next: any) {
-    this._parseFilterFromUrl(route)
-    next()
-  }
-
-  _parseFilterFromUrl (route: any) {
-    const timeScale = route.query.timeScale || this.timeScales.all
-    const learnLevel = route.query.learnLevel || this.learnLevels.all
-    this.$store.commit('learning-resources/setTimeScale', timeScale)
-    this.$store.commit('learning-resources/setLearnLevel', learnLevel)
-  }
-
-  setTimeScale (scale: TimeScale): void {
-    this._updateQueryParameter('timeScale', scale)
-  }
-
-  setLearnLevel (level: LearnLevel) {
-    this._updateQueryParameter('learnLevel', level)
-  }
-
-  _updateQueryParameter (paramName: string, value: string) {
-    this.$router.push({
-      query: {
-        ...this.$route.query,
-        [paramName]: value
+  helpfulResources: DescriptionCard[] = [
+    {
+      title: 'Documentation',
+      description: `The Qiskit Documentation is the right place for you if
+      you are looking for the installation guide, release notes, or API
+      references.`,
+      cta: {
+        url: 'https://qiskit.org/documentation/',
+        label: 'Go to documentation',
+        segment: { cta: 'documentation', location: 'helpful-resources' }
       }
-    })
-  }
-
-  get isShowingEverything (): boolean {
-    const { timeScale, learnLevel } = (this as any)
-    return timeScale === this.timeScales.all && learnLevel === this.learnLevels.all
-  }
-
-  isShowingOneMinuteFor (level: LearnLevel): boolean {
-    return this.isShowingOneMinute && this.isShowingLevel(level)
-  }
-
-  get isShowingOneMinute (): boolean {
-    const { timeScale } = (this as any)
-    return [this.timeScales.all, this.timeScales.minute].includes(timeScale)
-  }
-
-  isShowingLevel (level: LearnLevel): boolean {
-    const { learnLevel } = (this as any)
-    return [this.learnLevels.all, level].includes(learnLevel)
-  }
-
-  get isShowingMoreResources () {
-    const { advanced, beginner } = this.learnLevels
-    return (this as any).filteredLearningResources.length > 0 ||
-      (this.isShowingOneMinuteFor(advanced) && this.isShowingOneMinuteFor(beginner))
-  }
+    },
+    {
+      title: SOCIAL_MEDIA.stack.label,
+      description: `Have a question? Ask it on stack exchange! Qiskit
+      advocates and core contributors monitor this forum and will happily
+      answer your questions.`,
+      cta: {
+        url: SOCIAL_MEDIA.stack.url,
+        label: 'Visit Stack Exchange',
+        segment: { cta: 'stack-exchange', location: 'helpful-resources' }
+      }
+    },
+    {
+      title: SOCIAL_MEDIA.slack.label,
+      description: `The Slack community is a great place to engage in
+      discussion on research and quantum development.`,
+      cta: {
+        url: SOCIAL_MEDIA.slack.url,
+        label: 'Visit Slack',
+        segment: { cta: 'slack', location: 'helpful-resources' }
+      }
+    },
+    {
+      title: 'Educators Program',
+      description: 'This program helps teachers in the growing quantum field connect with one another, and provides the learning resources, tools, and systems access they need to provide quality educational experiences.',
+      cta: {
+        url: 'https://quantum-computing.ibm.com/programs/educators',
+        label: 'Visit the Educators Program',
+        segment: { cta: 'educators-program', location: 'helpful-resources' }
+      }
+    }
+  ]
 }
 </script>
 
 <style lang="scss" scoped>
 .learn-page {
-  &__careful-explanation {
-    @include mq($from: x-large) {
-      $grid-columns: math.div(8, 12); // Number of columns that the element will use at this breakpoint.
+  &__section {
+    @include contained();
 
-      max-width: 100% * $grid-columns;
-    }
+    max-width: $max-size;
+    margin-bottom: $spacing-07;
+    margin-top: $spacing-10;
   }
 }
 </style>

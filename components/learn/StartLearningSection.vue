@@ -71,7 +71,7 @@ export default class StartLearningSection extends Vue {
       community on Slack.`,
       courses: [
         {
-          image: '/images/textbook-beta/introduction-course.png',
+          image: '/images/learn/introduction-course.png',
           title: 'Introduction course',
           description: `Not sure where to start? This path is for you.
           This introduction is aimed at audiences from all backgrounds.
@@ -80,12 +80,12 @@ export default class StartLearningSection extends Vue {
           you from zero to one, without the hand waving.`,
           cta: {
             label: 'Go to this course',
-            url: '/textbook-beta/course/introduction-course',
+            url: '/learn/course/introduction-course',
             segment: { cta: 'introduction-course', location: 'course' }
           }
         },
         {
-          image: '/images/textbook-beta/machine-learning.png',
+          image: '/images/learn/machine-learning.png',
           title: 'Quantum machine learning',
           description: `Want to learn about this exciting, developing field? If
           you're familiar with quantum computing basics, this course will give
@@ -93,7 +93,7 @@ export default class StartLearningSection extends Vue {
           bring you up to speed with recent developments.`,
           cta: {
             label: 'Go to this course',
-            url: '/textbook-beta/course/machine-learning-course',
+            url: '/learn/course/machine-learning-course',
             segment: { cta: 'machine-learning', location: 'course' }
           }
         }
@@ -104,94 +104,94 @@ export default class StartLearningSection extends Vue {
       description: 'These pages are not part of a course, but contain useful reference material.',
       courses: [
         {
-          image: '/images/textbook-beta/course/prerequisites/prerequisites.png',
+          image: '/images/learn/course/prerequisites/prerequisites.png',
           title: 'Prerequisites',
           description: 'Learn about the software used to write the Qiskit textbook (Python and Jupyter Notebooks), and set up your environment to reproduce the experiments.',
           cta: {
             label: 'View resource',
-            url: '/textbook-beta/course/prerequisites',
+            url: '/learn/course/prerequisites',
             segment: { cta: 'prerequisites', location: 'course' }
           }
         },
         {
-          image: '/images/textbook-beta/course/quantum-states-and-qubits/bloch-sphere.png',
+          image: '/images/learn/course/quantum-states-and-qubits/bloch-sphere.png',
           title: 'Quantum States and Qubits',
           description: 'This chapter introduces the computing concepts that we\'ll explore in later chapters, then introduces basic quantum concepts.',
           cta: {
             label: 'View resource',
-            url: '/textbook-beta/course/quantum-states-and-qubits',
+            url: '/learn/course/quantum-states-and-qubits',
             segment: { cta: 'quantum-states-and-qubits', location: 'course' }
           }
         },
         {
-          image: '/images/textbook-beta/course/multiple-qubits-and-entanglement/multiple-qubits-and-entanglement.png',
+          image: '/images/learn/course/multiple-qubits-and-entanglement/multiple-qubits-and-entanglement.png',
           title: 'Multiple Qubits and Entanglement',
           description: 'With the basics down, this chapter explores the consequences of these new quantum effects, and sets us up with tools to understand quantum algorithms.',
           cta: {
             label: 'View resource',
-            url: '/textbook-beta/course/multiple-qubits-and-entanglement',
+            url: '/learn/course/multiple-qubits-and-entanglement',
             segment: { cta: 'multiple-qubits-and-entanglement', location: 'course' }
           }
         },
         {
-          image: '/images/textbook-beta/course/quantum-protocols-and-quantum-algorithms/quantum-protocols-and-quantum-algorithms.png',
+          image: '/images/learn/course/quantum-protocols-and-quantum-algorithms/quantum-protocols-and-quantum-algorithms.png',
           title: 'Quantum Protocols and Quantum Algorithms',
           description: 'In this chapter, we use quantum effects to build powerful algorithms, starting from simple proof-of-concept algorithms, through to Shor\'s famous factoring algorithm (and beyond).',
           cta: {
             label: 'View resource',
-            url: '/textbook-beta/course/quantum-protocols-and-quantum-algorithms',
+            url: '/learn/course/quantum-protocols-and-quantum-algorithms',
             segment: { cta: 'quantum-protocols-and-quantum-algorithms', location: 'course' }
           }
         },
         {
-          image: '/images/textbook-beta/course/quantum-hardware-pulses/quantum-hardware-pulses.png',
+          image: '/images/learn/course/quantum-hardware-pulses/quantum-hardware-pulses.png',
           title: 'Investigating Quantum Hardware Using Microwave Pulses',
           description: 'In this chapter, we get a level closer to the real quantum machines. Learn about the physics of these devices, and how to program them at the level of microwave pulses.',
           cta: {
             label: 'View resource',
-            url: '/textbook-beta/course/quantum-hardware-pulses',
+            url: '/learn/course/quantum-hardware-pulses',
             segment: { cta: 'quantum-hardware-pulses', location: 'course' }
           }
         },
         {
-          image: '/images/textbook-beta/course/quantum-algorithms-for-applications/quantum-algorithms-for-applications.png',
+          image: '/images/learn/course/quantum-algorithms-for-applications/quantum-algorithms-for-applications.png',
           title: 'Quantum Algorithms for Applications',
           description: 'If algorithms are the solution, then what is the problem? In this chapter, we look at how we can take general algorithms and apply them to more specific situations.',
           cta: {
             label: 'View resource',
-            url: '/textbook-beta/course/quantum-algorithms-for-applications',
+            url: '/learn/course/quantum-algorithms-for-applications',
             segment: { cta: 'quantum-algorithms-for-applications', location: 'course' }
           }
         },
         {
-          image: '/images/textbook-beta/course/quantum-hardware-circuits/quantum-hardware-circuits.png',
+          image: '/images/learn/course/quantum-hardware-circuits/quantum-hardware-circuits.png',
           title: 'Investigating Quantum Hardware Using Quantum Circuits',
           description: 'All circuit-based quantum devices share some similar characteristics and challenges. In this chapter, we explore how quantum circuits perform on modern quantum computers, and ways to improve performance.',
           cta: {
             label: 'View resource',
-            url: '/textbook-beta/course/quantum-hardware-circuits',
+            url: '/learn/course/quantum-hardware-circuits',
             segment: { cta: 'quantum-hardware-circuits', location: 'course' }
           }
         },
         {
-          image: '/images/textbook-beta/course/quantum-computing-labs/quantum-lab.png',
+          image: '/images/learn/course/quantum-computing-labs/quantum-lab.png',
           title: 'Quantum Computing Labs',
           description: `This set of labs provides 7 different exercises
           you (or your students) can use to investigate the behaviour of
           current quantum computers and practice your Qiskit coding skills.`,
           cta: {
             label: 'View resource',
-            url: '/textbook-beta/course/quantum-computing-labs',
+            url: '/learn/course/quantum-computing-labs',
             segment: { cta: 'labs', location: 'course' }
           }
         },
         {
-          image: '/images/textbook-beta/course/games-and-demos/games-and-demos.png',
+          image: '/images/learn/course/games-and-demos/games-and-demos.png',
           title: 'Games and Demos',
           description: "Check out games and demonstrations created in this textbook's environment; great for teaching, or just for fun!",
           cta: {
             label: 'View resource',
-            url: '/textbook-beta/course/games-and-demos',
+            url: '/learn/course/games-and-demos',
             segment: { cta: 'games-and-demos', location: 'course' }
           }
         }
@@ -202,7 +202,7 @@ export default class StartLearningSection extends Vue {
       description: 'Already understand quantum computing? These tutorials will show you how to use qiskit to do the thing you want to do.',
       courses: [
         {
-          image: '/images/textbook-beta/tutorials/quantum-circuits.png',
+          image: '/images/learn/tutorials/quantum-circuits.png',
           title: 'Quantum Circuits',
           description: 'Comfortable with quantum computing, but new to Qiskit? Learn how to create simple quantum circuits, and visualize quantum states.',
           cta: {
@@ -212,7 +212,7 @@ export default class StartLearningSection extends Vue {
           }
         },
         {
-          image: '/images/textbook-beta/tutorials/advanced-circuits.png',
+          image: '/images/learn/tutorials/advanced-circuits.png',
           title: 'Advanced Circuits',
           description: 'Learn about the more advanced features of Qiskit\'s QuantumCircuit class, including how to create custom gates and how to use the transpiler to optimize your circuits and target different devices.',
           cta: {
@@ -222,7 +222,7 @@ export default class StartLearningSection extends Vue {
           }
         },
         {
-          image: '/images/textbook-beta/tutorials/classical-simulators.png',
+          image: '/images/learn/tutorials/classical-simulators.png',
           title: 'Classical Simulators',
           description: 'Qiskit includes powerful quantum simulators to investigate how quantum circuits will behave on both ideal, and noisy hardware. These tutorials show you how to use advanced features of these simulators.',
           cta: {
@@ -232,7 +232,7 @@ export default class StartLearningSection extends Vue {
           }
         },
         {
-          image: '/images/textbook-beta/tutorials/algorithms.png',
+          image: '/images/learn/tutorials/algorithms.png',
           title: 'Algorithms',
           description: 'These tutorials show you how to use Qiskit\'s built-in algorithms. Qiskit supports classic algorithms such as Shor\'s and Grover\'s, as well as more recent developments such as VQE and QAOA.',
           cta: {
@@ -242,7 +242,7 @@ export default class StartLearningSection extends Vue {
           }
         },
         {
-          image: '/images/textbook-beta/tutorials/operators.png',
+          image: '/images/learn/tutorials/operators.png',
           title: 'Operators',
           description: 'Learn how Qiskit represents quantum operators, and how we can use these to build sophisticated quantum programs.',
           cta: {
@@ -252,7 +252,7 @@ export default class StartLearningSection extends Vue {
           }
         },
         {
-          image: '/images/textbook-beta/tutorials/sample-algorithms-in-qiskit.png',
+          image: '/images/learn/tutorials/sample-algorithms-in-qiskit.png',
           title: 'Sample algorithms in Qiskit',
           description: 'Learn about the Iterative Quantum Phase Estimation Algorithm and how you can program it in Qiskit.',
           cta: {
@@ -268,22 +268,22 @@ export default class StartLearningSection extends Vue {
       description: 'The Qiskit Global Summer Schools are one-of-a-kind sequences that takes students from beginner level to solving advanced quantum problems on a quantum computer. These two-week courses are designed to empower the next generation of quantum developers with the knowledge to explore quantum applications on their own.',
       courses: [
         {
-          image: '/images/textbook-beta/summer-school/quantum-computing-and-quantum-learning-2021/header.png',
+          image: '/images/learn/summer-school/quantum-computing-and-quantum-learning-2021/header.png',
           title: 'Quantum Computing & Quantum Machine Learning (2021)',
           description: 'Designed to empower the next generation of quantum researchers and developers with the skills and know-how to explore quantum applications on their own. Starting with an introductory "crash course" on quantum computing, the materials continue to dive into and explore one key area: quantum machine learning.',
           cta: {
             label: 'Go to this resource',
-            url: '/textbook-beta/summer-school/quantum-computing-and-quantum-learning-2021',
+            url: '/learn/summer-school/quantum-computing-and-quantum-learning-2021',
             segment: { cta: 'quantum-computing-and-quantum-learning-2021', location: 'summer-schools' }
           }
         },
         {
-          image: '/images/textbook-beta/summer-school/intro-quantum-computing-quantum-hardware-2020/header.png',
+          image: '/images/learn/summer-school/intro-quantum-computing-quantum-hardware-2020/header.png',
           title: 'Introduction to Quantum Computing and Quantum Hardware (2020)',
           description: 'This introduction to the world of quantum computing explores key quantum algorithms, as well as the quantum hardware designed to run these algorithms. These lectures were first released as part of a two-week intensive summer school in July 2020.',
           cta: {
             label: 'Go to this resource',
-            url: '/textbook-beta/summer-school/introduction-to-quantum-computing-and-quantum-hardware-2020',
+            url: '/learn/summer-school/introduction-to-quantum-computing-and-quantum-hardware-2020',
             segment: { cta: 'introduction-to-quantum-computing-and-quantum-hardware-2020', location: 'summer-schools' }
           }
         }
@@ -294,7 +294,7 @@ export default class StartLearningSection extends Vue {
       description: 'Check out Qiskit on other platforms.',
       courses: [
         {
-          image: '/images/textbook-beta/other-platforms/youtube.png',
+          image: '/images/learn/other-platforms/youtube.png',
           title: 'Qiskit YouTube',
           description: 'Check out our YouTube channel for engaging lectures, tips & tricks, tutorials, community updates and access to exclusive Qiskit content!',
           cta: {
@@ -304,7 +304,7 @@ export default class StartLearningSection extends Vue {
           }
         },
         {
-          image: '/images/textbook-beta/other-platforms/medium.png',
+          image: '/images/learn/other-platforms/medium.png',
           title: 'Qiskit Medium Blog',
           description: 'Visit the Medium blog to read about Qiskit, programming quantum computers, and anything else related to quantum computing.',
           cta: {

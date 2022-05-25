@@ -1,17 +1,17 @@
 <template>
-  <header class="textbook-beta-header">
-    <div class="textbook-beta-header__container-wrapper">
-      <div class="textbook-beta-header__container">
-        <div class="textbook-beta-header__logo-container">
-          <DynamicBackgroundLogo class="textbook-beta-header__logo" />
+  <header class="learn-header">
+    <div class="learn-header__container-wrapper">
+      <div class="learn-header__container">
+        <div class="learn-header__logo-container">
+          <DynamicBackgroundLogo class="learn-header__logo" />
         </div>
         <div>
-          <h1 class="textbook-beta-header__headline">
+          <h1 class="learn-header__headline">
             Qiskit Textbook (beta)
           </h1>
           <QiskitMegaMenuDropdown
             :id="appMegaDropdownMenuId"
-            class="textbook-beta-header__dropdown"
+            class="learn-header__dropdown"
             input-field-classes="bx--col-md-4 bx--col-lg-4"
             kind="secondary"
             :content="dropdownMenuContent"
@@ -19,13 +19,13 @@
             :track-performed-search="trackPerformedSearch"
           />
         </div>
-        <AppCta v-bind="startLearningCTA" class="textbook-beta-header__cta" />
+        <AppCta v-bind="startLearningCTA" class="learn-header__cta" />
       </div>
     </div>
     <transition name="scroll-in">
-      <TextbookBetaContentMenuSection
+      <LearnContentMenuSection
         v-if="!appMegaDropdownMenuIsVisible"
-        class="textbook-beta-header__dropdown-fixed"
+        class="learn-header__dropdown-fixed"
       />
     </transition>
   </header>
@@ -36,8 +36,8 @@ import Vue from 'vue'
 import type { VueConstructor } from 'vue'
 import { Component } from 'vue-property-decorator'
 import QiskitMegaMenuDropdown from '@qiskit-community/qiskit-vue/src/components/mega-menu-dropdown/MegaMenuDropdown.vue'
-import { TEXTBOOK_BETA_START_LEARNING } from '~/constants/appLinks'
-import { TEXTBOOK_BETA_MEGA_MENU } from '~/constants/megaMenuLinks'
+import { LEARN_START_LEARNING } from '~/constants/appLinks'
+import { LEARN_MEGA_MENU } from '~/constants/megaMenuLinks'
 
 interface VueComponent extends Vue {
   $el: HTMLElement
@@ -47,9 +47,9 @@ interface VueComponent extends Vue {
 @Component({
   components: { QiskitMegaMenuDropdown }
 })
-export default class TextbookBetaHeader extends (Vue as VueConstructor<VueComponent>) {
-  startLearningCTA = TEXTBOOK_BETA_START_LEARNING
-  dropdownMenuContent = TEXTBOOK_BETA_MEGA_MENU
+export default class LearnHeader extends (Vue as VueConstructor<VueComponent>) {
+  startLearningCTA = LEARN_START_LEARNING
+  dropdownMenuContent = LEARN_MEGA_MENU
   appMegaDropdownMenuIsVisible = true
   appMegaDropdownMenuObserver: IntersectionObserver | undefined
 
@@ -93,7 +93,7 @@ export default class TextbookBetaHeader extends (Vue as VueConstructor<VueCompon
 </script>
 
 <style lang="scss" scoped>
-.textbook-beta-header {
+.learn-header {
   background: linear-gradient(315deg, $cool-gray-10 0%, $blue-40 25%, $purple-70 100%);
   height: 37.5rem;
 

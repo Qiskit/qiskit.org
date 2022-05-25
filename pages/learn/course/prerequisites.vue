@@ -1,5 +1,5 @@
 <script lang="ts">
-import { Course, Prerequisite } from 'constants/textbookBetaContent'
+import { Course, Prerequisite } from 'constants/learnContent'
 import { Component } from 'vue-property-decorator'
 import CourseOverviewPage from '~/components/logic/CourseOverviewPage.vue'
 import { GeneralLink, PrerequisitesUrl } from '~/constants/appLinks'
@@ -15,10 +15,10 @@ export default class PrerequisitesPage extends CourseOverviewPage {
   headerTitle = 'Prerequisites'
   headerDescription = ['This is a comprehensive guide for setting up your environment on your personal computer for working with Qiskit Textbook. This will help you reproduce the results as you see them on the textbook website. The Qiskit Textbook is written in Jupyter Notebooks.']
 
-  headerImg = '/images/textbook-beta/course/prerequisites/prerequisites.png'
+  headerImg = '/images/learn/course/prerequisites/prerequisites.png'
 
   backToTextbookHomeLink: GeneralLink = {
-    url: '/textbook-beta',
+    url: '/learn',
     label: 'Home',
     segment: {
       cta: 'back-to-textbook-home', location: 'header'
@@ -70,6 +70,6 @@ export default class PrerequisitesPage extends CourseOverviewPage {
 
   prerequisites: Prerequisite[] = []
 
-  imageUrlBase = '/images/textbook-beta/course/prerequisites'
+  imageUrlBase = '/images/learn/course/prerequisites'
 }
 </script>

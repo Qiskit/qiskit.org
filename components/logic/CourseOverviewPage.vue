@@ -1,6 +1,6 @@
 <template>
   <main class="course-overview-page">
-    <TextbookBetaContentMenuSection
+    <LearnContentMenuSection
       class="course-overview-page__content-menu"
     />
     <AppPageHeaderWithImage :cta="startLearningCTA" :back-link="backToTextbookHomeLink">
@@ -37,7 +37,7 @@
 import { Component } from 'vue-property-decorator'
 import QiskitPage from './QiskitPage.vue'
 import { GeneralLink } from '~/constants/appLinks'
-import { Course, Prerequisite } from '~/constants/textbookBetaContent'
+import { Course, Prerequisite } from '~/constants/learnContent'
 
 @Component({
   layout: 'default-max'
@@ -62,7 +62,7 @@ export default abstract class CourseOverviewPage extends QiskitPage {
   abstract imageUrlBase: string
 
   backToTextbookHomeLink: GeneralLink = {
-    url: '/textbook-beta',
+    url: '/learn',
     label: 'Home',
     segment: {
       cta: 'back-to-textbook-home', location: 'header'

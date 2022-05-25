@@ -1,5 +1,5 @@
 <script lang="ts">
-import { Course, Prerequisite } from 'constants/textbookBetaContent'
+import { Course, Prerequisite } from 'constants/learnContent'
 import { Component } from 'vue-property-decorator'
 import CourseOverviewPage from '~/components/logic/CourseOverviewPage.vue'
 import { GeneralLink, MultipleQubitsAndEntanglementUrl } from '~/constants/appLinks'
@@ -15,10 +15,10 @@ export default class MultipleQubitsAndEntanglementPage extends CourseOverviewPag
   headerTitle = 'Multiple Qubits and Entanglement'
   headerDescription = ['We\'ve seen some interesting effects with isolated qubits and single qubit gates, but the true power of quantum computing comes from interactions between qubits. In this section we will introduce multiple qubit gates and explore the interesting behaviours of multi-qubit systems.']
 
-  headerImg = '/images/textbook-beta/course/multiple-qubits-and-entanglement/multiple-qubits-and-entanglement.png'
+  headerImg = '/images/learn/course/multiple-qubits-and-entanglement/multiple-qubits-and-entanglement.png'
 
   backToTextbookHomeLink: GeneralLink = {
-    url: '/textbook-beta',
+    url: '/learn',
     label: 'Home',
     segment: {
       cta: 'back-to-textbook-home', location: 'header'
@@ -131,6 +131,6 @@ export default class MultipleQubitsAndEntanglementPage extends CourseOverviewPag
     }
   ]
 
-  imageUrlBase = '/images/textbook-beta/course/multiple-qubits-and-entanglement'
+  imageUrlBase = '/images/learn/course/multiple-qubits-and-entanglement'
 }
 </script>

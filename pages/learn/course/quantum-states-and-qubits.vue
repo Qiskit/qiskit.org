@@ -1,5 +1,5 @@
 <script lang="ts">
-import { Course, Prerequisite } from 'constants/textbookBetaContent'
+import { Course, Prerequisite } from 'constants/learnContent'
 import { Component } from 'vue-property-decorator'
 import CourseOverviewPage from '~/components/logic/CourseOverviewPage.vue'
 import { GeneralLink, QuantumStatesAndQubitsUrl } from '~/constants/appLinks'
@@ -15,10 +15,10 @@ export default class QuantumStatesAndQubitsPage extends CourseOverviewPage {
   headerTitle = 'Quantum States and Qubits'
   headerDescription = ['If you think quantum mechanics sounds challenging, you’re not alone. Our intuitions come from day-to-day experiences, and so are better at understanding the behavior of balls and bananas than atoms or electrons. Though quantum objects can seem random and chaotic at first, they just follow a different set of rules. Once we know what those rules are, we can use them to create new and powerful technology. Quantum computing will be the most revolutionary example of this.']
 
-  headerImg = '/images/textbook-beta/course/quantum-states-and-qubits/bloch-sphere.png'
+  headerImg = '/images/learn/course/quantum-states-and-qubits/bloch-sphere.png'
 
   backToTextbookHomeLink: GeneralLink = {
-    url: '/textbook-beta',
+    url: '/learn',
     label: 'Home',
     segment: {
       cta: 'back-to-textbook-home', location: 'header'
@@ -115,6 +115,6 @@ export default class QuantumStatesAndQubitsPage extends CourseOverviewPage {
     }
   ]
 
-  imageUrlBase = '/images/textbook-beta/course/quantum-states-and-qubits'
+  imageUrlBase = '/images/learn/course/quantum-states-and-qubits'
 }
 </script>

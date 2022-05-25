@@ -1,5 +1,5 @@
 <script lang="ts">
-import { Course, Prerequisite } from 'constants/textbookBetaContent'
+import { Course, Prerequisite } from 'constants/learnContent'
 import { Component } from 'vue-property-decorator'
 import CourseOverviewPage from '~/components/logic/CourseOverviewPage.vue'
 import { GeneralLink, QuantumHardwarePulsesUrl } from '~/constants/appLinks'
@@ -15,10 +15,10 @@ export default class QuantumHardwarePulsesPage extends CourseOverviewPage {
   headerTitle = 'Investigating Quantum Hardware Using Microwave Pulses'
   headerDescription = ['The Qiskit Textbook mostly assumes we have a quantum computer that can carry out quantum operations, and doesn\'t worry about how the devices actually work. These pages go a step deeper, exploring the physics of superconducting qubits, and using Qiskit to program operations on these devices at the level of microwave pulses.']
 
-  headerImg = '/images/textbook-beta/course/quantum-hardware-pulses/quantum-hardware-pulses.png'
+  headerImg = '/images/learn/course/quantum-hardware-pulses/quantum-hardware-pulses.png'
 
   backToTextbookHomeLink: GeneralLink = {
-    url: '/textbook-beta',
+    url: '/learn',
     label: 'Home',
     segment: {
       cta: 'back-to-textbook-home', location: 'header'
@@ -104,6 +104,6 @@ export default class QuantumHardwarePulsesPage extends CourseOverviewPage {
     }
   ]
 
-  imageUrlBase = '/images/textbook-beta/course/quantum-hardware-pulses'
+  imageUrlBase = '/images/learn/course/quantum-hardware-pulses'
 }
 </script>

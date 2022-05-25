@@ -1,5 +1,5 @@
 <script lang="ts">
-import { Course, Prerequisite } from 'constants/textbookBetaContent'
+import { Course, Prerequisite } from 'constants/learnContent'
 import { Component } from 'vue-property-decorator'
 import CourseOverviewPage from '~/components/logic/CourseOverviewPage.vue'
 import { GeneralLink, StartLearningUrl } from '~/constants/appLinks'
@@ -20,10 +20,10 @@ export default class SummerSchoolCoursePage extends CourseOverviewPage {
     of quantum machine learning algorithms in Qiskit.`
   ]
 
-  headerImg = '/images/textbook-beta/summer-school/quantum-computing-and-quantum-learning-2021/header.png'
+  headerImg = '/images/learn/summer-school/quantum-computing-and-quantum-learning-2021/header.png'
 
   backToTextbookHomeLink: GeneralLink = {
-    url: '/textbook-beta',
+    url: '/learn',
     label: 'Home',
     segment: {
       cta: 'back-to-textbook-home', location: 'header'
@@ -214,7 +214,7 @@ export default class SummerSchoolCoursePage extends CourseOverviewPage {
         cta: 'intro-qc-qh-21', location: 'related-material'
       },
       url:
-        'https://qiskit.org/learn/intro-qc-qh'
+        '/learn/summer-school/introduction-to-quantum-computing-and-quantum-hardware-2020'
     },
     {
       title: 'Python Programming',
@@ -248,6 +248,6 @@ export default class SummerSchoolCoursePage extends CourseOverviewPage {
     }
   ]
 
-  imageUrlBase = '/images/textbook-beta/summer-school/quantum-computing-and-quantum-learning-2021'
+  imageUrlBase = '/images/learn/summer-school/quantum-computing-and-quantum-learning-2021'
 }
 </script>

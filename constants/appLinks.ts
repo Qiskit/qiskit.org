@@ -40,8 +40,8 @@ const SEMINAR_SERIES_FULL_ARCHIVE_CTA: GeneralLink = {
   }
 }
 
-const TEXTBOOK_BETA_START_LEARNING: GeneralLink = {
-  url: '/textbook-beta/course/introduction-course',
+const LEARN_START_LEARNING: GeneralLink = {
+  url: '/learn/course/introduction-course',
   label: 'Start learning',
   segment: {
     cta: 'start-learning',
@@ -151,7 +151,7 @@ export {
   EVENT_REQUEST_LINK,
   SEMINAR_SERIES_ALL_EPISODES_CTA,
   SEMINAR_SERIES_FULL_ARCHIVE_CTA,
-  TEXTBOOK_BETA_START_LEARNING,
+  LEARN_START_LEARNING,
   StartLearningUrl,
   PrerequisitesUrl,
   MultipleQubitsAndEntanglementUrl,
