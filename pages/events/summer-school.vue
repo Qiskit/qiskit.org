@@ -31,7 +31,7 @@
       </template>
     </AppPageHeaderWithCard>
 
-    <div class="bx--grid">
+    <div class="bx--grid summer-school-page__content">
       <AppMosaicSection
         class="summer-school-page__section"
         :title="mosaicData.title"
@@ -164,6 +164,12 @@ export default class SummerSchoolPage extends QiskitPage {
 
     @include mq($until: large) {
       margin-bottom: $spacing-05;
+    }
+  }
+
+  &__content {
+    @include mq($until: large) {
+      max-width: 100%;
     }
   }
 }
