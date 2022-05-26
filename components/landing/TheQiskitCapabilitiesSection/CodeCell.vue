@@ -11,7 +11,10 @@
     <div class="code-cell__block" :class="{'code-cell__block_active' : activeBlocks[1]}">
       <pre><span class="code-cell__comment"># prepare your circuit to run</span></pre>
       <pre>from qiskit import IBMQ <span class="code-cell__comment">#2</span></pre>
-      <pre>IBMQ.save_account("YOUR TOKEN")<span class="code-cell__comment">#Get the API token in https://quantum-computing.ibm.com/</span></pre>
+      <pre>&nbsp;</pre>
+      <pre><span class="code-cell__comment"># Get the API token in</span></pre>
+      <pre><span class="code-cell__comment"># https://quantum-computing.ibm.com/</span></pre>
+      <pre>IBMQ.save_account("YOUR TOKEN")</pre>
       <pre>&nbsp;</pre>
       <pre class="code-cell__line">provider = IBMQ.load_account() <span class="code-cell__comment">#3</span></pre>
       <pre class="code-cell__line">backend = provider.get_backend(<span class="code-cell__string">'ibmq_quito'</span>) <span class="code-cell__comment">#4</span></pre>
