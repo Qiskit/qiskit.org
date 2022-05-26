@@ -12,8 +12,8 @@ const header = {
     }
   },
   cta: {
-    label: 'Register (Coming Soon!)',
-    url: 'https://qiskit.org/events/summer-school/',
+    label: 'Register now!',
+    url: 'https://www.eventbrite.com/e/2022-qiskit-global-summer-school-quantum-simulations-tickets-348866728777',
     segment: {
       cta: 'register',
       location: 'header'
@@ -27,7 +27,7 @@ const header = {
     location: 'Online',
     date: 'July 18 - 29, 2022',
     time: '',
-    to: '',
+    to: 'https://www.eventbrite.com/e/2022-qiskit-global-summer-school-quantum-simulations-tickets-348866728777',
     ctaLabel: 'Learn more',
     segment: {
       cta: 'ibm-research-blog',
