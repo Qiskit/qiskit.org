@@ -75,12 +75,20 @@ const COMMUNITY_SUB_LINKS: LabeledLinks = {
     segment: {
       cta: 'advocates', location: 'menu'
     }
+  },
+  ecosystem: {
+    label: 'Ecosystem',
+    url: '/ecosystem',
+    segment: {
+      cta: 'ecosystem', location: 'menu'
+    }
   }
 }
 
 const ORDERED_COMMUNITY_SUB_LINKS: Array<NavLink> = [
   COMMUNITY_SUB_LINKS.events,
-  COMMUNITY_SUB_LINKS.advocates
+  COMMUNITY_SUB_LINKS.advocates,
+  COMMUNITY_SUB_LINKS.ecosystem
 ]
 
 const QISKIT_EDUCATION: LabeledLinks = {

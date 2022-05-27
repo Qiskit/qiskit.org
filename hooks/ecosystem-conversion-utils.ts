@@ -7,7 +7,12 @@ async function fetchMembers () {
     const res = await axios.get(
       'https://raw.githubusercontent.com/qiskit-community/ecosystem/master/ecosystem/resources/members.json'
     )
-    const membersArray = Object.values(res.data.MAIN).concat(Object.values(res.data.COMMUNITY))
+    const membersArray: Object[] = []
+    Object.values(res.data).forEach((tier: any) => {
+      Object.values(tier).forEach((member: any) => {
+        membersArray.push(member)
+      })
+    })
     const convertedArray = membersArray.map((obj: any) => {
       return toCamelCase(obj)
     })

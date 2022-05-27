@@ -4,6 +4,7 @@
     :class="{'app-card_vertical': verticalLayout}"
   >
     <div
+      v-if="image"
       class="app-card__image"
       :class="imageContain ? 'app-card__image_contain' : null"
       :lazy-background="image"
@@ -129,7 +130,7 @@ export default class AppCard extends Vue {
   &__tags {
     display: flex;
     flex-wrap: wrap;
-    flex: 0;
+    flex: 1;
     justify-content: flex-end;
     margin-left: $spacing-06;
 
@@ -142,6 +143,7 @@ export default class AppCard extends Vue {
     .bx--tag--purple {
       background-color: $tag-background-color;
       color: $tag-text-color;
+      margin-left: $spacing-03;
     }
 
     .bx--tag:first-child {
