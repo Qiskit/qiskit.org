@@ -44,6 +44,12 @@ md.use(miAnchor, {
 const config: NuxtConfig = {
   target: 'static',
 
+  // Disable Server Side rendering
+  ssr: false,
+
+  // Inline server bundle dependencies
+  standalone: true,
+
   env: {
     analyticsScriptUrl: IS_PRODUCTION
       ? 'https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js'
@@ -167,6 +173,10 @@ const config: NuxtConfig = {
             return md.render(body)
           }
         }
+      })
+      config.module.rules.push({
+        test: /\.js$/,
+        loader: require.resolve('@open-wc/webpack-import-meta-loader')
       })
     },
 
