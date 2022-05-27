@@ -66,10 +66,8 @@
               <cv-accordion v-if="member.testsResults.length != 0">
                 <cv-accordion-item>
                   <template slot="title">
-                    <p style="font-weight: bold">
-                      Test Results
-                    </p>
-                    <p>({{ new Date(member.updatedAt * 1000).toLocaleString('en-UK', { timeZone: 'UTC' }) }})</p>
+                    <span style="font-weight: bold">Test Results</span>
+                    <span>({{ new Date(member.updatedAt * 1000).toLocaleString('en-UK', { timeZone: 'UTC' }) }})</span>
                   </template>
                   <template slot="content">
                     <TestTable
