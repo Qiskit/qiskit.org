@@ -41,7 +41,14 @@
             </client-only>
           </AppFieldset>
         </template>
-        <template slot="filters-on-s-screen" />
+        <template slot="filters-on-s-screen">
+          <AppMultiSelect
+            label="Tier"
+            :options="tiers"
+            :value="tierFilters"
+            @change-selection="updateTierFilters($event)"
+          />
+        </template>
         <template slot="results">
           <div class="bx--row">
             <div
@@ -119,6 +126,7 @@ import { GeneralLink } from '~/constants/appLinks'
         })
       }
     },
+
     updateTierFilter (tier: string, isChecked: boolean): void {
       const tierFilters = (this as any).tierFilters.filter((oldOption: any) => oldOption !== tier)
 
@@ -127,6 +135,11 @@ import { GeneralLink } from '~/constants/appLinks'
       }
       this.$store.commit('ecosystem/setTierFilters', tierFilters)
     },
+
+    updateTierFilters (tierFilters: string[]): void {
+      this.$store.commit('ecosystem/setTierFilters', tierFilters)
+    },
+
     isTierFilterChecked (filterValue: string): boolean {
       return (this as any).tierFilters.includes(filterValue)
     }
