@@ -61,6 +61,7 @@
                 :title="member.name"
                 :tags="member.labels.concat([member.tier])"
                 cta-label="Go to repo"
+                :segment="{ cta: 'go-to-repo', location: 'ecosystem-card'}"
                 :to="member.url"
               >
                 <p class="project-card__license">
