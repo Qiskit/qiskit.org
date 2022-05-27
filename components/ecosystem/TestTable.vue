@@ -24,7 +24,7 @@ import { TableRowElement } from '~/components/ui/AppDataTable.vue'
 
 @Component
 export default class TestTable extends Vue {
-  @Prop({ type: Object, default: () => [['', '', '']] }) filteredData!: Object[]
+  @Prop({ type: Array, default: () => [['', '', '']] }) filteredData!: Object[]
 
   tableData = this.dataPerRow(this.filteredData)
 
@@ -37,12 +37,10 @@ export default class TestTable extends Vue {
       },
       {
         component: 'span',
-        styles: '',
         data: testType
       },
       {
         component: 'span',
-        styles: '',
         data: terraVersion
       }
     ]))

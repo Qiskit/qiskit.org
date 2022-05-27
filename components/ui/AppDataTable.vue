@@ -17,7 +17,7 @@ import { GeneralLink } from '~/constants/appLinks'
 
 export interface TableRowElement {
   component?: string,
-  styles: string,
+  styles?: string,
   data: string | GeneralLink,
 }
 
