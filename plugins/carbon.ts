@@ -2,6 +2,9 @@ import Vue from 'vue'
 import CarbonComponentsVue from '@carbon/vue'
 import { CarbonIconsVue } from '@carbon/icons-vue'
 import Calendar20 from '@carbon/icons-vue/lib/calendar/20'
+import CheckmarkFilled16 from '@carbon/icons-vue/lib/checkmark--filled/16'
+import PendingFilled16 from '@carbon/icons-vue/lib/pending--filled/16'
+import ErrorFilled16 from '@carbon/icons-vue/lib/error--filled/16'
 import Time20 from '@carbon/icons-vue/lib/time/20'
 import Education20 from '@carbon/icons-vue/lib/education/20'
 import Map20 from '@carbon/icons-vue/lib/map/20'
@@ -40,6 +43,9 @@ Vue.use(CarbonIconsVue, {
     LogoMedium20,
     LogoGitHub32,
     Launch16,
-    ErrorOutline16
+    ErrorOutline16,
+    CheckmarkFilled16,
+    ErrorFilled16,
+    PendingFilled16
   }
 })
