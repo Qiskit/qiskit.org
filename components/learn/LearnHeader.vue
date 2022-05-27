@@ -15,6 +15,7 @@
                 :id="appMegaDropdownMenuId"
                 class="learn-header__dropdown bx--col-md-4 bx--col-lg-4 bx--no-gutter"
                 :content.prop="dropdownMenuContent"
+                segment-component-name="Textbook mega menu"
                 :track-performed-search="trackPerformedSearch"
               />
             </div>

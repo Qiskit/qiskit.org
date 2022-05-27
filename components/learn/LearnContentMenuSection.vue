@@ -2,7 +2,12 @@
   <section class="content-menu-section">
     <div class="bx--grid">
       <div class="bx--row">
-        <qiskit-mega-menu-dropdown :content.prop="dropdownMenuContent" class="learn-header__dropdown bx--col-md-4 bx--col-lg-4 bx--no-gutter" />
+        <qiskit-mega-menu-dropdown
+          :content.prop="dropdownMenuContent"
+          class="learn-header__dropdown bx--col-md-4 bx--col-lg-4 bx--no-gutter"
+          segment-component-name="Textbook mega menu"
+          :track-performed-search="trackPerformedSearch"
+        />
       </div>
     </div>
   </section>
