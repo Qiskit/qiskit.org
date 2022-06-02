@@ -9,15 +9,17 @@
           <h1 class="learn-header__headline">
             Qiskit Textbook (beta)
           </h1>
-          <QiskitMegaMenuDropdown
-            :id="appMegaDropdownMenuId"
-            class="learn-header__dropdown"
-            input-field-classes="bx--col-md-4 bx--col-lg-4"
-            kind="secondary"
-            :content="dropdownMenuContent"
-            segment-component-name="Textbook mega menu"
-            :track-performed-search="trackPerformedSearch"
-          />
+          <div class="bx--grid">
+            <div class="bx--row">
+              <qiskit-mega-menu-dropdown
+                :id="appMegaDropdownMenuId"
+                class="learn-header__dropdown bx--col-md-4 bx--col-lg-4 bx--no-gutter"
+                :content.prop="dropdownMenuContent"
+                segment-component-name="Textbook mega menu"
+                :track-performed-search="trackPerformedSearch"
+              />
+            </div>
+          </div>
         </div>
         <AppCta v-bind="startLearningCTA" class="learn-header__cta" />
       </div>
@@ -35,7 +37,6 @@
 import Vue from 'vue'
 import type { VueConstructor } from 'vue'
 import { Component } from 'vue-property-decorator'
-import QiskitMegaMenuDropdown from '@qiskit-community/qiskit-vue/src/components/mega-menu-dropdown/MegaMenuDropdown.vue'
 import { LEARN_START_LEARNING } from '~/constants/appLinks'
 import { LEARN_MEGA_MENU } from '~/constants/megaMenuLinks'
 
@@ -44,12 +45,11 @@ interface VueComponent extends Vue {
   _uid: number
 }
 
-@Component({
-  components: { QiskitMegaMenuDropdown }
-})
+@Component({})
 export default class LearnHeader extends (Vue as VueConstructor<VueComponent>) {
   startLearningCTA = LEARN_START_LEARNING
   dropdownMenuContent = LEARN_MEGA_MENU
+
   appMegaDropdownMenuIsVisible = true
   appMegaDropdownMenuObserver: IntersectionObserver | undefined
 
@@ -94,6 +94,8 @@ export default class LearnHeader extends (Vue as VueConstructor<VueComponent>) {
 
 <style lang="scss" scoped>
 .learn-header {
+  --qiskit-color-background-primary: #{$background-color-white};
+
   background: linear-gradient(315deg, $cool-gray-10 0%, $blue-40 25%, $purple-70 100%);
   height: 37.5rem;
 
@@ -155,7 +157,11 @@ export default class LearnHeader extends (Vue as VueConstructor<VueComponent>) {
   }
 
   &__dropdown {
+    position: relative;
+    z-index: 1;
     margin-top: $spacing-07;
+    // overrides
+    background-color: var(--qiskit-color-background-primary);
   }
 
   &__dropdown-fixed {
