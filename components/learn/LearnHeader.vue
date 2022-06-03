@@ -9,17 +9,13 @@
           <h1 class="learn-header__headline">
             Qiskit Textbook (beta)
           </h1>
-          <div class="bx--grid">
-            <div class="bx--row">
-              <qiskit-mega-menu-dropdown
-                :id="appMegaDropdownMenuId"
-                class="learn-header__dropdown bx--col-md-4 bx--col-lg-4 bx--no-gutter"
-                :content.prop="dropdownMenuContent"
-                segment-component-name="Textbook mega menu"
-                :track-performed-search="trackPerformedSearch"
-              />
-            </div>
-          </div>
+          <qiskit-mega-menu-dropdown
+            :id="appMegaDropdownMenuId"
+            class="learn-header__dropdown bx--col-md-4 bx--col-lg-4 bx--no-gutter"
+            :content.prop="dropdownMenuContent"
+            segment-component-name="Textbook mega menu"
+            :track-performed-search="trackPerformedSearch"
+          />
         </div>
         <AppCta v-bind="startLearningCTA" class="learn-header__cta" />
       </div>

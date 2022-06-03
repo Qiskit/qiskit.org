@@ -4,7 +4,7 @@
       <div class="bx--row">
         <qiskit-mega-menu-dropdown
           :content.prop="dropdownMenuContent"
-          class="learn-header__dropdown bx--col-md-4 bx--col-lg-4 bx--no-gutter"
+          class="bx--col-md-4 bx--col-lg-4"
           segment-component-name="Textbook mega menu"
           :track-performed-search="trackPerformedSearch"
         />
