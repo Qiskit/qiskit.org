@@ -991,7 +991,7 @@ const OPERATORS: MegaDropdownMenuGroup = {
 
 const SAMPLE_ALGORITHMS_IN_QISKIT: MegaDropdownMenuGroup = {
   title: {
-    label: 'Operators',
+    label: 'Sample Algorithms in Qiskit',
     url: 'https://qiskit.org/documentation/tutorials.html#operators',
     segment: {
       cta: wholeSection, location: sectionTutorials
