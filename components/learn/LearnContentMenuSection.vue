@@ -1,14 +1,12 @@
 <template>
   <section class="content-menu-section">
-    <div class="bx--grid">
-      <div class="bx--row">
-        <qiskit-mega-menu-dropdown
-          :content.prop="dropdownMenuContent"
-          class="bx--col-md-4 bx--col-lg-4"
-          segment-component-name="Textbook mega menu"
-          :track-performed-search="trackPerformedSearch"
-        />
-      </div>
+    <div class="content-menu-section__container">
+      <qiskit-mega-menu-dropdown
+        :content.prop="dropdownMenuContent"
+        class="content-menu-section__dropdown bx--col-md-4 bx--col-lg-4 bx--no-gutter"
+        segment-component-name="Textbook mega menu"
+        :track-performed-search="trackPerformedSearch"
+      />
     </div>
   </section>
 </template>
@@ -31,8 +29,20 @@ export default class LearnContentMenuSection extends Vue {
 
 <style lang="scss" scoped>
 .content-menu-section {
+  --qiskit-color-input-background: transparent;
+
   background: $background-color-lighter;
   border-top: 1px solid $border-color;
   border-bottom: 1px solid $border-color;
+
+  &__container {
+    @include contained();
+
+    max-width: $max-size;
+  }
+
+  &__dropdown {
+    background-color: var(--qiskit-color-input-background);
+  }
 }
 </style>
