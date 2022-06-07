@@ -97,6 +97,7 @@ export default class LearnHeader extends (Vue as VueConstructor<VueComponent>) {
 
   &__headline {
     color: $text-color-white;
+    margin-bottom: $spacing-07;
   }
 
   &__container {
@@ -155,7 +156,6 @@ export default class LearnHeader extends (Vue as VueConstructor<VueComponent>) {
   &__dropdown {
     position: relative;
     z-index: 1;
-    margin-top: $spacing-07;
     // overrides
     background-color: var(--qiskit-color-background-primary);
   }
