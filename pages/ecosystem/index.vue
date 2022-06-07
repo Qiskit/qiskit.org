@@ -24,7 +24,9 @@
             The Ecosystem consists of projects, tools, utilities, libraries and tutorials from a broad community of developers and researchers. The goal of the Ecosystem is to celebrate, support and accelerate development of quantum technologies using Qiskit.
           </p>
         </div>
-        <AppCta class="ecosystem-header__cta" v-bind="joinAction" />
+        </div>
+      <div class="bx-row">
+         <AppCta class="ecosystem-header__cta" v-bind="joinAction" />
       </div>
       <AppFiltersResultsLayout class="meet-the-advocates__filters-result-section">
         <template slot="filters-on-m-l-screen">
@@ -175,8 +177,6 @@ export default class EcosystemPage extends QiskitPage {
   }
 
   &__cta {
-  margin-left: $spacing-03;
-  margin-right: $spacing-03;
   height: 50%;
 }
 }
