@@ -10,8 +10,8 @@
           'community projects'
         ]"
       />
-      from Qiskit 
-      <br/>
+      from Qiskit
+      <br>
       and the Qiskit community
     </AppPageHeaderFixed>
     <section id="meet-the-advocates" class="bx--grid meet-the-advocates">
@@ -24,9 +24,9 @@
             The Ecosystem consists of projects, tools, utilities, libraries and tutorials from a broad community of developers and researchers. The goal of the Ecosystem is to celebrate, support and accelerate development of quantum technologies using Qiskit.
           </p>
         </div>
-        </div>
+      </div>
       <div class="bx-row">
-         <AppCta class="ecosystem-header__cta" v-bind="joinAction" />
+        <AppCta class="ecosystem-header__cta" v-bind="joinAction" />
       </div>
       <AppFiltersResultsLayout class="meet-the-advocates__filters-result-section">
         <template slot="filters-on-m-l-screen">
