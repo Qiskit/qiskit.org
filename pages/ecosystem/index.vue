@@ -1,7 +1,7 @@
 <template>
   <main>
-    <AppPageHeaderFixed>
-      Explore <br>
+    <AppPageHeaderFixed class="ecosystem-header__hero">
+      <br> Explore
       <TypewriterEffect
         :values="[
           'core packages',
@@ -10,8 +10,9 @@
           'community projects'
         ]"
       />
-      <br>
-      from Qiskit and the Qiskit community
+      from Qiskit 
+      <br/>
+      and the Qiskit community
     </AppPageHeaderFixed>
     <section id="meet-the-advocates" class="bx--grid meet-the-advocates">
       <h2>
@@ -165,10 +166,19 @@ export default class EcosystemPage extends QiskitPage {
 </script>
 
 <style lang="scss">
-.ecosystem-header__cta {
+.ecosystem-header {
+  &__hero {
+    .bx--col-max-8 {
+    max-width: 100%;
+    flex: 0 0 100%;
+  }
+  }
+
+  &__cta {
   margin-left: $spacing-03;
   margin-right: $spacing-03;
   height: 50%;
+}
 }
 
 .meet-the-advocates__filters-result-section {
