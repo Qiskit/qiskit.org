@@ -6,13 +6,7 @@ import { GeneralLink, StartLearningUrl } from '~/constants/appLinks'
 
 @Component({
   head: () => ({
-    title: 'Introduction course',
-    meta: [
-      {
-        name: 'description',
-        content: 'The Ecosystem consists of projects, tools, utilities, libraries and tutorials from a broad community of developers and researchers. The goal of the Ecosystem is to celebrate, support and accelerate development of quantum technologies using Qiskit.'
-      }
-    ]
+    title: 'Introduction course'
   })
 })
 export default class IntroductionCoursePage extends CourseOverviewPage {
