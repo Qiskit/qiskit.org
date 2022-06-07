@@ -26,7 +26,13 @@ import QiskitPage from '~/components/logic/QiskitPage.vue'
 @Component({
   head () {
     return {
-      title: 'Qiskit Advocates'
+      title: 'Qiskit Advocates',
+      meta: [
+        {
+          name: 'description',
+          content: 'The Qiskit advocate program is a global program that provides support to the individuals who actively contribute to the Qiskit Community.'
+        }
+      ]
     }
   },
   layout: 'default-max',
