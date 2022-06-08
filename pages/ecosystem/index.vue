@@ -1,7 +1,7 @@
 <template>
   <main>
-    <AppPageHeaderFixed>
-      Explore <br>
+    <AppPageHeaderFixed class="ecosystem-header__hero">
+      <br> Explore
       <TypewriterEffect
         :values="[
           'core packages',
@@ -10,10 +10,11 @@
           'community projects'
         ]"
       />
+      from Qiskit
       <br>
-      from Qiskit and the Qiskit community
+      and the Qiskit community
     </AppPageHeaderFixed>
-    <section id="meet-the-advocates" class="bx--grid meet-the-advocates">
+    <section id="ecosystem" class="bx--grid ecosystem">
       <h2>
         Ecosystem Resources
       </h2>
@@ -23,16 +24,18 @@
             The Ecosystem consists of projects, tools, utilities, libraries and tutorials from a broad community of developers and researchers. The goal of the Ecosystem is to celebrate, support and accelerate development of quantum technologies using Qiskit.
           </p>
         </div>
+      </div>
+      <div class="bx-row">
         <AppCta class="ecosystem-header__cta" v-bind="joinAction" />
       </div>
-      <AppFiltersResultsLayout class="meet-the-advocates__filters-result-section">
+      <AppFiltersResultsLayout class="ecosystem__filters-result-section">
         <template slot="filters-on-m-l-screen">
           <AppFieldset label="Tier">
             <client-only>
               <cv-checkbox
                 v-for="option in tiers"
                 :key="option"
-                class="meet-the-advocates__filters-result-section__tiers"
+                class="ecosystem__filters-result-section__tiers"
                 :label="option"
                 :value="option"
                 :checked="isTierFilterChecked(option)"
@@ -61,7 +64,7 @@
                 :title="member.name"
                 :tags="member.labels.concat([member.tier])"
                 cta-label="Go to repo"
-                :segment="{ cta: 'go-to-repo', location: 'ecosystem-card'}"
+                :segment="{ cta: `go-to-repo-${member.name}`, location: 'ecosystem-card'}"
                 :to="member.url"
               >
                 <p class="project-card__license">
@@ -165,13 +168,20 @@ export default class EcosystemPage extends QiskitPage {
 </script>
 
 <style lang="scss">
-.ecosystem-header__cta {
-  margin-left: $spacing-03;
-  margin-right: $spacing-03;
-  height: 50%;
+.ecosystem-header {
+  &__hero {
+    .bx--col-max-8 {
+      max-width: 100%;
+      flex: 0 0 100%;
+    }
+  }
+
+  &__cta {
+    height: 50%;
+  }
 }
 
-.meet-the-advocates__filters-result-section {
+.ecosystem__filters-result-section {
   margin-top: 4rem;
 
   &__tiers {
