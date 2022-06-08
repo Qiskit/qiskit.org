@@ -14,7 +14,7 @@
       <br>
       and the Qiskit community
     </AppPageHeaderFixed>
-    <section id="meet-the-advocates" class="bx--grid meet-the-advocates">
+    <section id="ecosystem" class="bx--grid ecosystem">
       <h2>
         Ecosystem Resources
       </h2>
@@ -28,14 +28,14 @@
       <div class="bx-row">
         <AppCta class="ecosystem-header__cta" v-bind="joinAction" />
       </div>
-      <AppFiltersResultsLayout class="meet-the-advocates__filters-result-section">
+      <AppFiltersResultsLayout class="ecosystem__filters-result-section">
         <template slot="filters-on-m-l-screen">
           <AppFieldset label="Tier">
             <client-only>
               <cv-checkbox
                 v-for="option in tiers"
                 :key="option"
-                class="meet-the-advocates__filters-result-section__tiers"
+                class="ecosystem__filters-result-section__tiers"
                 :label="option"
                 :value="option"
                 :checked="isTierFilterChecked(option)"
@@ -171,17 +171,17 @@ export default class EcosystemPage extends QiskitPage {
 .ecosystem-header {
   &__hero {
     .bx--col-max-8 {
-    max-width: 100%;
-    flex: 0 0 100%;
-  }
+      max-width: 100%;
+      flex: 0 0 100%;
+    }
   }
 
   &__cta {
-  height: 50%;
-}
+    height: 50%;
+  }
 }
 
-.meet-the-advocates__filters-result-section {
+.ecosystem__filters-result-section {
   margin-top: 4rem;
 
   &__tiers {
