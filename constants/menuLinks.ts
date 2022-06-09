@@ -94,7 +94,7 @@ const ORDERED_COMMUNITY_SUB_LINKS: Array<NavLink> = [
 const QISKIT_EDUCATION: LabeledLinks = {
   textbook: {
     label: 'Textbook',
-    url: '/textbook-beta'
+    url: '/learn'
   }
 }
 

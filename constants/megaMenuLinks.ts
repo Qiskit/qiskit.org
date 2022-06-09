@@ -1,6 +1,8 @@
 import { NavLink } from '~/constants/menuLinks'
 
 const wholeSection = 'whole-section'
+const sectionIntroductionCourse = 'introduction-course'
+const sectionQMLCourse = 'quantum-machine-learning'
 const sectionPrerequisites = 'prerequisites'
 const sectionQuantumStatesAndQubits = 'quantum-states-and-qubits'
 const sectionMultipleQubitsAndEntanglement = 'multiple-qubits-and-entanglement'
@@ -10,8 +12,11 @@ const sectionPulses = 'pulses'
 const sectionApps = 'apps'
 const sectionCircuits = 'circuits'
 const sectionLabs = 'labs'
+const sectionTutorials = 'tutorials'
 
 const baseUrl = 'https://learn.qiskit.org'
+const pathIntroductionCourse = '/course/introduction'
+const pathQuantumMachineLearning = '/course/machine-learning'
 const pathPrerequisites = '/course/ch-prerequisites'
 const pathQuantumStatesAndQubits = '/course/ch-states'
 const pathMultipleQubitsAndEntanglement = '/course/ch-gates'
@@ -22,9 +27,161 @@ const pathHardwareUsingCircuits = '/course/quantum-hardware'
 const pathApps = '/course/ch-applications'
 const pathLabs = '/course/ch-labs'
 
+const tutorialsBaseUrl = 'https://qiskit.org/documentation/tutorials'
+
 type MegaDropdownMenuGroup = {
   title: NavLink,
   content: NavLink[]
+}
+
+const INTRODUCTION_COURSE: MegaDropdownMenuGroup = {
+  title: {
+    label: 'Introduction Course',
+    url: `${baseUrl}${pathIntroductionCourse}`,
+    segment: {
+      cta: wholeSection, location: sectionIntroductionCourse
+    }
+  },
+  content: [
+    {
+      label: 'Why Quantum Computing?',
+      url: `${baseUrl}${pathIntroductionCourse}/why-quantum-computing`,
+      segment: {
+        cta: 'why-quantum-computing', location: sectionIntroductionCourse
+      }
+    },
+    {
+      label: 'The Atoms of Computation',
+      url: `${baseUrl}${pathIntroductionCourse}/introduction/the-atoms-of-computation`,
+      segment: {
+        cta: 'the-atoms-of-computation', location: sectionIntroductionCourse
+      }
+    },
+    {
+      label: 'What is Quantum?',
+      url: `${baseUrl}${pathIntroductionCourse}/introduction/what-is-quantum`,
+      segment: {
+        cta: 'what-is-quantum', location: sectionIntroductionCourse
+      }
+    },
+    {
+      label: 'Describing Quantum Computers',
+      url: `${baseUrl}${pathIntroductionCourse}/introduction/describing-quantum-computers`,
+      segment: {
+        cta: 'describing-quantum-computers', location: sectionIntroductionCourse
+      }
+    },
+    {
+      label: 'Entangled States',
+      url: `${baseUrl}${pathIntroductionCourse}/introduction/entangled-states`,
+      segment: {
+        cta: 'entangled-states', location: sectionIntroductionCourse
+      }
+    },
+    {
+      label: 'Visualizing Entanglement',
+      url: `${baseUrl}${pathIntroductionCourse}/introduction/visualizing-entanglement`,
+      segment: {
+        cta: 'visualizing-entanglement', location: sectionIntroductionCourse
+      }
+    },
+    {
+      label: 'Grover\'s search algorithm',
+      url: `${baseUrl}${pathIntroductionCourse}/introduction/grovers-search-algorithm`,
+      segment: {
+        cta: 'grovers-search-algorithm', location: sectionIntroductionCourse
+      }
+    },
+    {
+      label: 'Project',
+      url: `${baseUrl}${pathIntroductionCourse}/introduction/project`,
+      segment: {
+        cta: 'project', location: sectionIntroductionCourse
+      }
+    }
+  ]
+}
+
+const QML_COURSE: MegaDropdownMenuGroup = {
+  title: {
+    label: 'Quantum Machine Learning',
+    url: `${baseUrl}${pathQuantumMachineLearning}`,
+    segment: {
+      cta: wholeSection, location: sectionQMLCourse
+    }
+  },
+  content: [
+    {
+      label: 'Introduction',
+      url: `${baseUrl}${pathQuantumMachineLearning}/machine-learning`,
+      segment: {
+        cta: 'machine-learning', location: sectionQMLCourse
+      }
+    },
+    {
+      label: 'Parameterized quantum circuits',
+      url: `${baseUrl}${pathQuantumMachineLearning}/parameterized-quantum-circuits`,
+      segment: {
+        cta: 'parameterized-quantum-circuits', location: sectionQMLCourse
+      }
+    },
+    {
+      label: 'Data encoding',
+      url: `${baseUrl}${pathQuantumMachineLearning}/data-encoding`,
+      segment: {
+        cta: 'data-encoding', location: sectionQMLCourse
+      }
+    },
+    {
+      label: 'Training parameterized quantum circuits',
+      url: `${baseUrl}${pathQuantumMachineLearning}/training-quantum-circuits`,
+      segment: {
+        cta: 'training-quantum-circuits', location: sectionQMLCourse
+      }
+    },
+    {
+      label: 'Supervised learning',
+      url: `${baseUrl}${pathQuantumMachineLearning}/supervised-learning`,
+      segment: {
+        cta: 'supervised-learning', location: sectionQMLCourse
+      }
+    },
+    {
+      label: 'Variational classification',
+      url: `${baseUrl}${pathQuantumMachineLearning}/variational-classification`,
+      segment: {
+        cta: 'variational-classification', location: sectionQMLCourse
+      }
+    },
+    {
+      label: 'Quantum feature maps and kernels',
+      url: `${baseUrl}${pathQuantumMachineLearning}/quantum-feature-maps-and-kernels`,
+      segment: {
+        cta: 'quantum-feature-maps-and-kernels', location: sectionQMLCourse
+      }
+    },
+    {
+      label: 'Unsupervised learning',
+      url: `${baseUrl}${pathQuantumMachineLearning}/unsupervised-learning`,
+      segment: {
+        cta: 'unsupervised-learning', location: sectionQMLCourse
+      }
+    },
+    {
+      label: 'Quantum generative adversarial networks',
+      url: `${baseUrl}${pathQuantumMachineLearning}/quantum-generative-adversarial-networks`,
+      segment: {
+        cta: 'quantum-generative-adversarial-networks', location: sectionQMLCourse
+      }
+    },
+    {
+      label: 'Project',
+      url: `${baseUrl}${pathQuantumMachineLearning}/project`,
+      segment: {
+        cta: 'project', location: sectionQMLCourse
+      }
+    }
+  ]
 }
 
 const PREREQUISITES: MegaDropdownMenuGroup = {
@@ -527,32 +684,385 @@ const QUANTUM_COMPUTING_LABS : MegaDropdownMenuGroup = {
   ]
 }
 
-type MegaDropdownMenuColumn = MegaDropdownMenuGroup[]
-const COLUMN_1: MegaDropdownMenuColumn = [
-  PREREQUISITES,
-  QUANTUM_STATES_AND_QUBITS,
-  MULTIPLE_QUBITS_AND_ENTANGLEMENT,
-  GAMES_AND_DEMOS
-]
+const QUANTUM_CIRCUITS: MegaDropdownMenuGroup = {
+  title: {
+    label: 'Quantum Computing Labs',
+    url: 'https://qiskit.org/documentation/tutorials.html#quantum-circuits',
+    segment: {
+      cta: wholeSection, location: sectionTutorials
+    }
+  },
+  content: [
+    {
+      label: 'Circuit Basics',
+      url: `${tutorialsBaseUrl}/circuits/01_circuit_basics.html`,
+      segment: {
+        cta: '01_circuit_basics', location: sectionTutorials
+      }
+    },
+    {
+      label: 'Getting Started with Qiskit',
+      url: `${tutorialsBaseUrl}/circuits/1_getting_started_with_qiskit.html`,
+      segment: {
+        cta: '1_getting_started_with_qiskit', location: sectionTutorials
+      }
+    },
+    {
+      label: 'Qiskit Visualizations',
+      url: `${tutorialsBaseUrl}/circuits/2_plotting_data_in_qiskit.html`,
+      segment: {
+        cta: '2_plotting_data_in_qiskit', location: sectionTutorials
+      }
+    },
+    {
+      label: 'Summary of Quantum Operations',
+      url: `${tutorialsBaseUrl}/circuits/3_summary_of_quantum_operations.html`,
+      segment: {
+        cta: '3_summary_of_quantum_operations', location: sectionTutorials
+      }
+    },
+    {
+      label: 'Circuit Tutorials',
+      url: `${tutorialsBaseUrl}/circuits/index.html`,
+      segment: {
+        cta: 'circuit_tutorials', location: sectionTutorials
+      }
+    }
+  ]
+}
 
-const COLUMN_2: MegaDropdownMenuColumn = [
-  QUANTUM_PROTOCOLS_AND_ALGORITHMS,
-  INVESTIGATING_Q_HW_USING_MICROWAVE_PULSES
-]
+const ADVANCED_CIRCUITS: MegaDropdownMenuGroup = {
+  title: {
+    label: 'Advanced Circuits',
+    url: 'https://qiskit.org/documentation/tutorials.html#advanced-circuits',
+    segment: {
+      cta: wholeSection, location: sectionTutorials
+    }
+  },
+  content: [
+    {
+      label: 'Advanced Circuits',
+      url: `${tutorialsBaseUrl}/circuits_advanced/01_advanced_circuits.html`,
+      segment: {
+        cta: '01_advanced_circuits', location: sectionTutorials
+      }
+    },
+    {
+      label: 'Operators',
+      url: `${tutorialsBaseUrl}/circuits_advanced/02_operators_overview.html`,
+      segment: {
+        cta: '02_operators_overview', location: sectionTutorials
+      }
+    },
+    {
+      label: 'Visualizing a Quantum Circuit',
+      url: `${tutorialsBaseUrl}/circuits_advanced/03_advanced_circuit_visualization.html`,
+      segment: {
+        cta: '03_advanced_circuit_visualization', location: sectionTutorials
+      }
+    },
+    {
+      label: 'Transpiler Passes and Pass Manager',
+      url: `${tutorialsBaseUrl}/circuits_advanced/04_transpiler_passes_and_passmanager.html`,
+      segment: {
+        cta: '04_transpiler_passes_and_passmanager', location: sectionTutorials
+      }
+    },
+    {
+      label: 'Pulse gates',
+      url: `${tutorialsBaseUrl}/circuits_advanced/05_pulse_gates.html`,
+      segment: {
+        cta: '05_pulse_gates', location: sectionTutorials
+      }
+    },
+    {
+      label: 'Building Pulse Schedules',
+      url: `${tutorialsBaseUrl}/circuits_advanced/06_building_pulse_schedules.html`,
+      segment: {
+        cta: '06_building_pulse_schedules', location: sectionTutorials
+      }
+    },
+    {
+      label: 'Using the Scheduler',
+      url: `${tutorialsBaseUrl}circuits_advanced/07_pulse_scheduler.html`,
+      segment: {
+        cta: '07_pulse_scheduler', location: sectionTutorials
+      }
+    },
+    {
+      label: 'Obtaining information about your backend',
+      url: `${tutorialsBaseUrl}/circuits_advanced/08_gathering_system_information.html`,
+      segment: {
+        cta: '08_gathering_system_information', location: sectionTutorials
+      }
+    },
+    {
+      label: 'Advanced Circuit Tutorials',
+      url: `${tutorialsBaseUrl}/circuits_advanced/index.html`,
+      segment: {
+        cta: 'advanced_circuit_tutorials', location: sectionTutorials
+      }
+    }
+  ]
+}
 
-const COLUMN_3: MegaDropdownMenuColumn = [
-  QUANTUM_ALGORITHMS_FOR_APPS,
-  INVESTIGATING_Q_HW_USING_Q_CIRCUITS,
-  QUANTUM_COMPUTING_LABS
-]
+const CLASSICAL_SIMULATORS: MegaDropdownMenuGroup = {
+  title: {
+    label: 'Classical Simulators',
+    url: 'https://qiskit.org/documentation/tutorials.html#advanced-circuits',
+    segment: {
+      cta: wholeSection, location: sectionTutorials
+    }
+  },
+  content: [
+    {
+      label: 'Simulators',
+      url: `${tutorialsBaseUrl}/simulators/1_aer_provider.html`,
+      segment: {
+        cta: '01_advanced_circuits', location: sectionTutorials
+      }
+    },
+    {
+      label: 'Device backend noise model simulations',
+      url: `${tutorialsBaseUrl}/simulators/2_device_noise_simulation.html`,
+      segment: {
+        cta: '2_device_noise_simulation', location: sectionTutorials
+      }
+    },
+    {
+      label: 'Building Noise Models',
+      url: `${tutorialsBaseUrl}/simulators/3_building_noise_models.html`,
+      segment: {
+        cta: '3_building_noise_models', location: sectionTutorials
+      }
+    },
+    {
+      label: 'Applying noise to custom unitary gates',
+      url: `${tutorialsBaseUrl}/simulators/4_custom_gate_noise.html`,
+      segment: {
+        cta: '4_custom_gate_noise', location: sectionTutorials
+      }
+    },
+    {
+      label: 'Noise Transformation',
+      url: `${tutorialsBaseUrl}/simulators/5_noise_transformation.html`,
+      segment: {
+        cta: '5_noise_transformation', location: sectionTutorials
+      }
+    },
+    {
+      label: 'The Extended Stabilizer Simulator',
+      url: `${tutorialsBaseUrl}/simulators/6_extended_stabilizer_tutorial.html`,
+      segment: {
+        cta: '6_extended_stabilizer_tutorial', location: sectionTutorials
+      }
+    },
+    {
+      label: 'Matrix product state simulation method',
+      url: `${tutorialsBaseUrl}/simulators/7_matrix_product_state_method.html`,
+      segment: {
+        cta: '7_matrix_product_state_method', location: sectionTutorials
+      }
+    },
+    {
+      label: 'High-Performance Simulator Tutorials',
+      url: `${tutorialsBaseUrl}/simulators/index.html`,
+      segment: {
+        cta: 'high_performance_simulator_tutorials', location: sectionTutorials
+      }
+    }
+  ]
+}
 
-type MegaDropdownMenu = MegaDropdownMenuColumn[]
-const TEXTBOOK_BETA_MEGA_MENU: MegaDropdownMenu = [
-  COLUMN_1,
-  COLUMN_2,
-  COLUMN_3
+const ALGORITHMS: MegaDropdownMenuGroup = {
+  title: {
+    label: 'Algorithms',
+    url: 'https://qiskit.org/documentation/tutorials.html#algorithms',
+    segment: {
+      cta: wholeSection, location: sectionTutorials
+    }
+  },
+  content: [
+    {
+      label: 'An Introduction to Algorithms in Qiskit',
+      url: `${tutorialsBaseUrl}/algorithms/01_algorithms_introduction.html`,
+      segment: {
+        cta: '01_algorithms_introduction', location: sectionTutorials
+      }
+    },
+    {
+      label: 'Monitoring VQE convergence',
+      url: `${tutorialsBaseUrl}/algorithms/02_vqe_convergence.html`,
+      segment: {
+        cta: '02_vqe_convergence', location: sectionTutorials
+      }
+    },
+    {
+      label: 'VQE on Aer simulator with noise',
+      url: `${tutorialsBaseUrl}/algorithms/03_vqe_simulation_with_noise.html`,
+      segment: {
+        cta: '03_vqe_simulation_with_noise', location: sectionTutorials
+      }
+    },
+    {
+      label: 'Advanced VQE usage',
+      url: `${tutorialsBaseUrl}/tutorials/algorithms/04_vqe_advanced.html`,
+      segment: {
+        cta: '04_vqe_advanced', location: sectionTutorials
+      }
+    },
+    {
+      label: 'Quantum Approximate Optimization Algorithm',
+      url: `${tutorialsBaseUrl}/algorithms/05_qaoa.html`,
+      segment: {
+        cta: '05_qaoa', location: sectionTutorials
+      }
+    },
+    {
+      label: 'Grover’s Algorithm and Amplitude Amplification',
+      url: `${tutorialsBaseUrl}/algorithms/06_grover.html`,
+      segment: {
+        cta: '06_grover', location: sectionTutorials
+      }
+    },
+    {
+      label: 'Grover’s algorithm examples',
+      url: `${tutorialsBaseUrl}/algorithms/07_grover_examples.html`,
+      segment: {
+        cta: '07_grover_examples', location: sectionTutorials
+      }
+    },
+    {
+      label: 'Shor’s algorithms',
+      url: `${tutorialsBaseUrl}/algorithms/08_factorizers.html`,
+      segment: {
+        cta: '08_factorizers', location: sectionTutorials
+      }
+    },
+    {
+      label: 'Iterative Quantum Phase Estimation Algorithm',
+      url: `${tutorialsBaseUrl}/algorithms/09_IQPE.html`,
+      segment: {
+        cta: '09_IQPE', location: sectionTutorials
+      }
+    },
+    {
+      label: 'Algorithms Tutorials',
+      url: `${tutorialsBaseUrl}/algorithms/index.html`,
+      segment: {
+        cta: 'algorithms_tutorials', location: sectionTutorials
+      }
+    }
+  ]
+}
+
+const OPERATORS: MegaDropdownMenuGroup = {
+  title: {
+    label: 'Operators',
+    url: 'https://qiskit.org/documentation/tutorials.html#operators',
+    segment: {
+      cta: wholeSection, location: sectionTutorials
+    }
+  },
+  content: [
+    {
+      label: 'Operator Flow',
+      url: `${tutorialsBaseUrl}/operators/01_operator_flow.html`,
+      segment: {
+        cta: '01_operator_flow', location: sectionTutorials
+      }
+    },
+    {
+      label: 'Qiskit Gradient Framework',
+      url: `${tutorialsBaseUrl}/operators/02_gradients_framework.html`,
+      segment: {
+        cta: '02_gradients_framework', location: sectionTutorials
+      }
+    },
+    {
+      label: 'Operators Tutorials',
+      url: `${tutorialsBaseUrl}/operators/index.html`,
+      segment: {
+        cta: 'operators_tutorials', location: sectionTutorials
+      }
+    }
+  ]
+}
+
+const SAMPLE_ALGORITHMS_IN_QISKIT: MegaDropdownMenuGroup = {
+  title: {
+    label: 'Sample Algorithms in Qiskit',
+    url: 'https://qiskit.org/documentation/tutorials.html#operators',
+    segment: {
+      cta: wholeSection, location: sectionTutorials
+    }
+  },
+  content: [
+    {
+      label: 'Iterative Quantum Phase Estimation Algorithm',
+      url: `${tutorialsBaseUrl}/textbook/01_IQPE.html`,
+      segment: {
+        cta: '01_IQPE', location: sectionTutorials
+      }
+    },
+    {
+      label: 'Textbook algorithms in Qiskit',
+      url: `${tutorialsBaseUrl}/textbook/index.html`,
+      segment: {
+        cta: 'textbook-algorithms-in-qiskit', location: sectionTutorials
+      }
+    }
+  ]
+}
+
+type MegaDropdownMenuSection = {
+  title: string,
+  content: MegaDropdownMenuGroup[]
+}
+
+type MegaDropdownMenuContent = MegaDropdownMenuSection[]
+
+const COURSES_SECTION: MegaDropdownMenuSection = {
+  title: 'Courses',
+  content: [
+    INTRODUCTION_COURSE,
+    QML_COURSE
+  ]
+}
+
+const CHAPTERS_SECTION: MegaDropdownMenuSection = {
+  title: 'Chapters',
+  content: [
+    PREREQUISITES,
+    QUANTUM_STATES_AND_QUBITS,
+    MULTIPLE_QUBITS_AND_ENTANGLEMENT,
+    QUANTUM_PROTOCOLS_AND_ALGORITHMS,
+    INVESTIGATING_Q_HW_USING_MICROWAVE_PULSES,
+    QUANTUM_ALGORITHMS_FOR_APPS,
+    INVESTIGATING_Q_HW_USING_Q_CIRCUITS,
+    QUANTUM_COMPUTING_LABS,
+    GAMES_AND_DEMOS
+  ]
+}
+
+const TUTORIALS_SECTION: MegaDropdownMenuSection = {
+  title: 'Tutorials',
+  content: [
+    QUANTUM_CIRCUITS,
+    ADVANCED_CIRCUITS,
+    CLASSICAL_SIMULATORS,
+    ALGORITHMS,
+    OPERATORS,
+    SAMPLE_ALGORITHMS_IN_QISKIT
+  ]
+}
+
+const LEARN_MEGA_MENU: MegaDropdownMenuContent = [
+  COURSES_SECTION,
+  CHAPTERS_SECTION,
+  TUTORIALS_SECTION
 ]
 
 export {
-  TEXTBOOK_BETA_MEGA_MENU
+  LEARN_MEGA_MENU
 }

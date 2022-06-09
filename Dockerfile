@@ -12,7 +12,6 @@ COPY deploy deploy/
 COPY hooks hooks/
 COPY layouts layouts/
 COPY mixins mixins/
-COPY new-content new-content/
 COPY pages pages/
 COPY plugins plugins/
 COPY static static/
