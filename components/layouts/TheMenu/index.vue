@@ -340,7 +340,7 @@ export default class TheMenu extends Mixins(MenuMixin) {
     position: relative;
 
     // using pseudo element to achieve partial underline
-    &:first-child::after {
+    &:nth-last-child(n+2)::after {
       content: '';
       border-bottom: 1px solid $cool-gray-30;
       position: absolute;
