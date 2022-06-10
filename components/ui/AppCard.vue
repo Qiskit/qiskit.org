@@ -27,7 +27,7 @@
         </div>
         <div v-else-if="tags" class="app-card__tags">
           <cv-tag
-            v-for="tag in Object.values(this.tags).flat()"
+            v-for="tag in Object.values(tags).flat()"
             :key="tag"
             :label="tag"
             :kind="tag === tags.tier ? 'purple' : 'dark-purple'"
@@ -74,7 +74,6 @@ export default class AppCard extends Vue {
       segment: this.segment
     }
   }
-
 }
 </script>
 
