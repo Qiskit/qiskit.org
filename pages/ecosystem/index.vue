@@ -62,7 +62,7 @@
               <AppCard
                 class="project-card"
                 :title="member.name"
-                :tags="member.labels.concat([member.tier])"
+                :tags="{labels: member.labels, tier: member.tier}"
                 cta-label="Go to repo"
                 :segment="{ cta: `go-to-repo-${member.name}`, location: 'ecosystem-card'}"
                 :to="member.url"

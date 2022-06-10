@@ -17,12 +17,20 @@
         <h4 class="app-card__title">
           {{ title }}
         </h4>
-        <div v-if="hasTags" class="app-card__tags">
+        <div v-if="tags && Array.isArray(tags)" class="app-card__tags">
           <cv-tag
             v-for="tag in tags"
             :key="tag"
             :label="tag"
-            kind="purple"
+            kind="dark-purple"
+          />
+        </div>
+        <div v-else-if="tags" class="app-card__tags">
+          <cv-tag
+            v-for="tag in Object.values(this.tags).flat()"
+            :key="tag"
+            :label="tag"
+            :kind="tag === tags.tier ? 'purple' : 'dark-purple'"
           />
         </div>
       </header>
@@ -67,9 +75,6 @@ export default class AppCard extends Vue {
     }
   }
 
-  get hasTags () {
-    return Array.isArray(this.tags) && this.tags.length > 0
-  }
 }
 </script>
 
@@ -144,9 +149,12 @@ export default class AppCard extends Vue {
       margin-left: 0;
     }
 
-    .bx--tag--purple {
+    .bx--tag--dark-purple {
       background-color: $tag-background-color;
       color: $tag-text-color;
+      margin-left: $spacing-03;
+    }
+    .bx--tag--purple {
       margin-left: $spacing-03;
     }
 
