@@ -52,49 +52,49 @@ const INTRODUCTION_COURSE: MegaDropdownMenuGroup = {
     },
     {
       label: 'The Atoms of Computation',
-      url: `${baseUrl}${pathIntroductionCourse}/introduction/the-atoms-of-computation`,
+      url: `${baseUrl}${pathIntroductionCourse}/the-atoms-of-computation`,
       segment: {
         cta: 'the-atoms-of-computation', location: sectionIntroductionCourse
       }
     },
     {
       label: 'What is Quantum?',
-      url: `${baseUrl}${pathIntroductionCourse}/introduction/what-is-quantum`,
+      url: `${baseUrl}${pathIntroductionCourse}/what-is-quantum`,
       segment: {
         cta: 'what-is-quantum', location: sectionIntroductionCourse
       }
     },
     {
       label: 'Describing Quantum Computers',
-      url: `${baseUrl}${pathIntroductionCourse}/introduction/describing-quantum-computers`,
+      url: `${baseUrl}${pathIntroductionCourse}/describing-quantum-computers`,
       segment: {
         cta: 'describing-quantum-computers', location: sectionIntroductionCourse
       }
     },
     {
       label: 'Entangled States',
-      url: `${baseUrl}${pathIntroductionCourse}/introduction/entangled-states`,
+      url: `${baseUrl}${pathIntroductionCourse}/entangled-states`,
       segment: {
         cta: 'entangled-states', location: sectionIntroductionCourse
       }
     },
     {
       label: 'Visualizing Entanglement',
-      url: `${baseUrl}${pathIntroductionCourse}/introduction/visualizing-entanglement`,
+      url: `${baseUrl}${pathIntroductionCourse}/visualizing-entanglement`,
       segment: {
         cta: 'visualizing-entanglement', location: sectionIntroductionCourse
       }
     },
     {
       label: 'Grover\'s search algorithm',
-      url: `${baseUrl}${pathIntroductionCourse}/introduction/grovers-search-algorithm`,
+      url: `${baseUrl}${pathIntroductionCourse}/grovers-search-algorithm`,
       segment: {
         cta: 'grovers-search-algorithm', location: sectionIntroductionCourse
       }
     },
     {
       label: 'Project',
-      url: `${baseUrl}${pathIntroductionCourse}/introduction/project`,
+      url: `${baseUrl}${pathIntroductionCourse}/project`,
       segment: {
         cta: 'project', location: sectionIntroductionCourse
       }
