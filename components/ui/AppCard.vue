@@ -30,7 +30,7 @@
             v-for="tag in Object.values(tags).flat()"
             :key="tag"
             :label="tag"
-            :kind="tag === tags.tier ? 'purple' : 'dark-purple'"
+            :kind="tag === tags.tier ? 'purple' : 'blue'"
           />
         </div>
       </header>
@@ -60,7 +60,7 @@ export default class AppCard extends Vue {
   @Prop({ type: String, default: '' }) image!: string
   @Prop({ type: Boolean, required: false, default: false }) imageContain!: boolean
   @Prop({ type: String, default: '' }) title!: string
-  @Prop({ type: Array, default: () => [] }) tags!: string[]
+  @Prop({ type: [Array, Object], default: () => [] }) tags!: string[]
   @Prop({ type: String, default: '' }) to!: string
   @Prop({ type: String, default: '' }) ctaLabel!: string
   @Prop({ type: Object, required: false }) segment: CtaClickedEventProp | undefined
@@ -148,7 +148,7 @@ export default class AppCard extends Vue {
       margin-left: 0;
     }
 
-    .bx--tag--dark-purple {
+    .bx--tag--blue {
       background-color: $tag-background-color;
       color: $tag-text-color;
       margin-left: $spacing-03;
