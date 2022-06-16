@@ -45,7 +45,7 @@ const actions = <ActionTree<State, any>> {
     commit('setMembers', members)
 
     const tiers = [...new Set(members.map(item => item.tier))]
-    const idx = tiers.findIndex(i => i == 'Main')
+    const idx = tiers.findIndex(i => i === 'Main')
     tiers.splice(idx, 1)
     tiers.unshift('Main')
     commit('setTiers', tiers)
