@@ -13,7 +13,7 @@ const mockMember1 = () => ({
   url: 'https://github.com/member1',
   description: 'This is member1',
   licence: 'Apache-2.0 License',
-  tier: 'MAIN'
+  tier: 'Main'
 })
 
 const mockMember2 = () => ({
@@ -21,7 +21,7 @@ const mockMember2 = () => ({
   url: 'https://github.com/member2',
   description: 'This is member2',
   licence: 'Apache-2.0 License',
-  tier: 'COMMUNITY'
+  tier: 'Community'
 })
 
 const mockMember3 = () => ({
@@ -29,12 +29,12 @@ const mockMember3 = () => ({
   url: 'https://github.com/member3',
   description: 'This is member3',
   licence: 'Apache-2.0 License',
-  tier: 'PROTOTYPES'
+  tier: 'Prototypes'
 })
 
-const mockTier1 = () => 'main'
-const mockTier2 = () => 'community'
-const mockTier3 = () => 'prototypes'
+const mockTier1 = () => 'Main'
+const mockTier2 = () => 'Community'
+const mockTier3 = () => 'Prototypes'
 
 /**
  * GETTERS
