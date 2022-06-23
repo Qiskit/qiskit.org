@@ -90,8 +90,6 @@ export default class LearnHeader extends (Vue as VueConstructor<VueComponent>) {
 
 <style lang="scss" scoped>
 .learn-header {
-  --qiskit-color-background-primary: #{$background-color-white};
-
   background: linear-gradient(315deg, $cool-gray-10 0%, $blue-40 25%, $purple-70 100%);
   height: 37.5rem;
 
@@ -156,8 +154,6 @@ export default class LearnHeader extends (Vue as VueConstructor<VueComponent>) {
   &__dropdown {
     position: relative;
     z-index: 1;
-    // overrides
-    background-color: var(--qiskit-color-background-primary);
   }
 
   &__dropdown-fixed {

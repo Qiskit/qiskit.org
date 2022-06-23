@@ -29,8 +29,6 @@ export default class LearnContentMenuSection extends Vue {
 
 <style lang="scss" scoped>
 .content-menu-section {
-  --qiskit-color-input-background: transparent;
-
   background: $background-color-lighter;
   border-top: 1px solid $border-color;
   border-bottom: 1px solid $border-color;
@@ -41,8 +39,8 @@ export default class LearnContentMenuSection extends Vue {
     max-width: $max-size;
   }
 
-  &__dropdown {
-    background-color: var(--qiskit-color-input-background);
+  qiskit-mega-menu-dropdown {
+    --qiskit-color-input-background: transparent;
   }
 }
 </style>
