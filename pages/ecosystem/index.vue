@@ -1,13 +1,13 @@
 <template>
   <main>
     <AppPageHeaderFixed class="ecosystem-header__hero">
-      <br>
+      <br />
       Explore
       <TypewriterEffect
         :values="['core packages', 'tools', 'prototypes', 'community projects']"
       />
       from Qiskit
-      <br>
+      <br />
       and the Qiskit community
     </AppPageHeaderFixed>
     <section id="ecosystem" class="bx--grid ecosystem">
@@ -78,12 +78,14 @@
                 <cv-accordion-item>
                   <template slot="title">
                     <span style="font-weight: bold">Test Results</span>
-                    <span>({{
-                      new Date(member.updatedAt * 1000).toLocaleString(
-                        "en-UK",
-                        { timeZone: "UTC" }
-                      )
-                    }})</span>
+                    <span
+                      >({{
+                        new Date(member.updatedAt * 1000).toLocaleString(
+                          "en-UK",
+                          { timeZone: "UTC" }
+                        )
+                      }})</span
+                    >
                   </template>
                   <template slot="content">
                     <TestTable
@@ -102,71 +104,86 @@
 </template>
 
 <script lang="ts">
-import { mapGetters } from 'vuex'
-import { Component } from 'vue-property-decorator'
-import QiskitPage from '~/components/logic/QiskitPage.vue'
-import { GeneralLink } from '~/constants/appLinks'
+import { mapGetters } from "vuex";
+import { Component } from "vue-property-decorator";
+import QiskitPage from "~/components/logic/QiskitPage.vue";
+import { GeneralLink } from "~/constants/appLinks";
 
 @Component({
-  head () {
+  head() {
     return {
-      title: 'Qiskit Ecosystem',
+      title: "Qiskit Ecosystem",
       meta: [
         {
-          name: 'description',
+          name: "description",
           content:
-            'The Ecosystem consists of projects, tools, utilities, libraries and tutorials from a broad community of developers and researchers. The goal of the Ecosystem is to celebrate, support and accelerate development of quantum technologies using Qiskit.'
-        }
-      ]
-    }
+            "The Ecosystem consists of projects, tools, utilities, libraries and tutorials from a broad community of developers and researchers. The goal of the Ecosystem is to celebrate, support and accelerate development of quantum technologies using Qiskit.",
+        },
+      ],
+    };
   },
-  layout: 'default-max',
+  layout: "default-max",
   computed: {
-    ...mapGetters('ecosystem', ['filteredMembers', 'tierFilters', 'tiers'])
+    ...mapGetters("ecosystem", ["filteredMembers", "tierFilters", "tiers"]),
   },
-  async fetch ({ store }) {
-    await store.dispatch('ecosystem/fetchMembers')
+  async fetch({ store }) {
+    await store.dispatch("ecosystem/fetchMembers");
   },
   methods: {
-    getTestRows (member: any): void {
+    getTestRows(member: any): void {
       if (member.testsResults) {
-        return member.testsResults.map(
-          ({ terraVersion, testType, passed, timestamp }: any) => {
-            timestamp = new Date(timestamp * 1000).toLocaleString('en-UK', {
-              timeZone: 'UTC'
-            })
-            return { terraVersion, testType, passed, timestamp }
-          }
-        )
+        return member.testsResults.map((res: any) => {
+          // make tiemstamp human readable
+          const timestamp = new Date(res.timestamp * 1000).toLocaleString(
+            "en-UK",
+            {
+              timeZone: "UTC",
+            }
+          );
+          // Convert package name to title case
+          const packageName = res.package
+            .replace(/-/g, " ")
+            .split(" ")
+            .map((s: string) => s.charAt(0).toUpperCase() + s.substring(1))
+            .join(" ");
+          return {
+            packageName,
+            packageVersion: res.packageVersion,
+            testType: res.testType,
+            passed: res.passed,
+            timestamp,
+            logsLink: res.logsLink,
+          };
+        });
       }
     },
 
-    updateTierFilter (tier: string, isChecked: boolean): void {
+    updateTierFilter(tier: string, isChecked: boolean): void {
       const tierFilters = (this as any).tierFilters.filter(
         (oldOption: any) => oldOption !== tier
-      )
+      );
 
       if (isChecked) {
-        tierFilters.push(tier)
+        tierFilters.push(tier);
       }
-      this.$store.commit('ecosystem/setTierFilters', tierFilters)
+      this.$store.commit("ecosystem/setTierFilters", tierFilters);
     },
 
-    updateTierFilters (tierFilters: string[]): void {
-      this.$store.commit('ecosystem/setTierFilters', tierFilters)
+    updateTierFilters(tierFilters: string[]): void {
+      this.$store.commit("ecosystem/setTierFilters", tierFilters);
     },
 
-    isTierFilterChecked (filterValue: string): boolean {
-      return (this as any).tierFilters.includes(filterValue)
-    }
-  }
+    isTierFilterChecked(filterValue: string): boolean {
+      return (this as any).tierFilters.includes(filterValue);
+    },
+  },
 })
 export default class EcosystemPage extends QiskitPage {
-  routeName: string = 'ecosystem';
+  routeName: string = "ecosystem";
 
   joinAction: GeneralLink = {
-    url: 'https://github.com/qiskit-community/ecosystem#ecosystem--',
-    label: 'Join the ecosystem'
+    url: "https://github.com/qiskit-community/ecosystem#ecosystem--",
+    label: "Join the ecosystem",
   };
 }
 </script>

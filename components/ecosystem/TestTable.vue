@@ -1,5 +1,12 @@
 <template>
-  <AppDataTable :columns="['Status', 'Test Type', 'Terra Version']">
+  <AppDataTable
+    :columns="[
+      'Status',
+      'Test Type',
+      `${tableData[0][2].packageName} Version`,
+      'Test Logs',
+    ]"
+  >
     <cv-data-table-row
       v-for="(row, rowIndex) in tableData"
       :key="`${rowIndex}`"
@@ -10,6 +17,14 @@
       >
         <!-- eslint-disable vue/no-v-html -->
         <span v-if="component == 'span'" :style="styles" v-html="data" />
+
+        <AppCta
+          v-else-if="component == 'link'"
+          class="app-card__cta"
+          v-bind="{ url: data, label: 'see test logs' }"
+          is-wider
+          kind="ghost"
+        />
         <CheckmarkFilled16
           v-else-if="component === true"
           :fill="styles"
@@ -32,32 +47,39 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
-import { TableRowElement } from '~/components/ui/AppDataTable.vue'
+import Vue from "vue";
+import { Component, Prop } from "vue-property-decorator";
+import { TableRowElement } from "~/components/ui/AppDataTable.vue";
 
 @Component
 export default class TestTable extends Vue {
-  @Prop({ type: Array, default: () => [['', '', '']] }) filteredData!: Object[];
+  @Prop({ type: Array, default: () => [["", "", ""]] }) filteredData!: Object[];
 
   tableData = this.dataPerRow(this.filteredData);
 
-  dataPerRow (filteredData: Object[]): TableRowElement[][] {
-    return filteredData.map(({ passed, testType, terraVersion }: any) => [
-      {
-        component: passed,
-        styles: passed ? '#42be65' : '#da1e28',
-        data: ''
-      },
-      {
-        component: 'span',
-        data: testType
-      },
-      {
-        component: 'span',
-        data: terraVersion
-      }
-    ])
+  dataPerRow(filteredData: Object[]): TableRowElement[][] {
+    return filteredData.map(
+      ({ passed, testType, packageVersion, logsLink, packageName }: any) => [
+        {
+          component: passed,
+          styles: passed ? "#42be65" : "#da1e28",
+          data: "",
+        },
+        {
+          component: "span",
+          data: testType,
+        },
+        {
+          component: "span",
+          data: packageVersion,
+          packageName: packageName,
+        },
+        {
+          component: "link",
+          data: logsLink,
+        },
+      ]
+    );
   }
 }
 </script>
