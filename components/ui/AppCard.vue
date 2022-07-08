@@ -3,7 +3,7 @@
     class="app-card"
     :class="{
       'app-card_vertical': verticalLayout,
-      'app-card_description-whole-size': descriptionWholeSize
+      'app-card_description-whole-size': descriptionWholeSize,
     }"
   >
     <div
@@ -17,21 +17,19 @@
         <h4 class="app-card__title">
           {{ title }}
         </h4>
-        <div v-if="tags && Array.isArray(tags)" class="app-card__tags">
-          <cv-tag
-            v-for="tag in tags"
-            :key="tag"
-            :label="tag"
-            kind="dark-purple"
-          />
-        </div>
-        <div v-else-if="tags" class="app-card__tags">
-          <cv-tag
+        <div v-if="tags" class="app-card__tags">
+          <div
             v-for="tag in Object.values(tags).flat()"
             :key="tag"
-            :label="tag"
-            :kind="tag === tags.tier ? 'purple' : 'blue'"
-          />
+            class="app-card__custom-pill"
+          >
+            {{ tag }}
+            <cv-tooltip
+              v-if="tag == tags.tier"
+              tip="some filler text"
+              direction="bottom"
+            />
+          </div>
         </div>
       </header>
       <div class="app-card__body">
@@ -57,15 +55,20 @@ import { CtaClickedEventProp } from '~/constants/segment'
 
 @Component
 export default class AppCard extends Vue {
-  @Prop({ type: String, default: '' }) image!: string
-  @Prop({ type: Boolean, required: false, default: false }) imageContain!: boolean
-  @Prop({ type: String, default: '' }) title!: string
-  @Prop({ type: [Array, Object], default: () => [] }) tags!: string[]
-  @Prop({ type: String, default: '' }) to!: string
-  @Prop({ type: String, default: '' }) ctaLabel!: string
-  @Prop({ type: Object, required: false }) segment: CtaClickedEventProp | undefined
-  @Prop({ type: Boolean, default: false }) verticalLayout!: Boolean
-  @Prop({ type: Boolean, default: false }) descriptionWholeSize!: Boolean
+  @Prop({ type: String, default: '' }) image!: string;
+  @Prop({ type: Boolean, required: false, default: false })
+  imageContain!: boolean;
+
+  @Prop({ type: String, default: '' }) title!: string;
+  @Prop({ type: [Array, Object], default: () => [] }) tags!: string[];
+  @Prop({ type: String, default: '' }) to!: string;
+  @Prop({ type: String, default: '' }) ctaLabel!: string;
+  @Prop({ type: Object, required: false }) segment:
+    | CtaClickedEventProp
+    | undefined;
+
+  @Prop({ type: Boolean, default: false }) verticalLayout!: Boolean;
+  @Prop({ type: Boolean, default: false }) descriptionWholeSize!: Boolean;
 
   get ctaLink () {
     return {
@@ -77,7 +80,7 @@ export default class AppCard extends Vue {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .app-card {
   min-height: 13rem;
   width: 100%;
@@ -118,7 +121,6 @@ export default class AppCard extends Vue {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    overflow: hidden;
   }
 
   &__header {
@@ -135,32 +137,38 @@ export default class AppCard extends Vue {
     flex: 1;
   }
 
-  &__tags {
-    display: flex;
-    flex-wrap: wrap;
-    flex: 1;
-    justify-content: flex-end;
-    margin-left: $spacing-06;
-
-    @include mq($until: large) {
-      justify-content: flex-start;
-      margin-top: $spacing-03;
-      margin-left: 0;
-    }
-
-    .bx--tag--blue {
-      background-color: $tag-background-color;
-      color: $tag-text-color;
-      margin-left: $spacing-03;
-    }
-    .bx--tag--purple {
-      margin-left: $spacing-03;
-    }
-
-    .bx--tag:first-child {
-      margin-left: 0;
-    }
+  &__custom-pill {
+    background-color: $tag-background-color;
+    color: $tag-text-color;
+    margin-left: $spacing-03;
+    appearance: none;
+    font-size: 0.75rem;
+    font-weight: 400;
+    line-height: 1.33333;
+    letter-spacing: 0.32px;
+    display: inline-flex;
+    min-width: 2rem;
+    max-width: 100%;
+    min-height: 1.5rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0.25rem 0.5rem;
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+    border-radius: 6.9375rem;
+    cursor: default;
+    vertical-align: middle;
+    word-break: break-word;
   }
+}
+
+.bx--tooltip__trigger svg {
+  fill: white;
+  margin-left: $spacing-02;
+}
+
+.bx--tooltip__trigger:hover svg {
+  fill: white;
 }
 
 .app-card_vertical {

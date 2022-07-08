@@ -1,27 +1,24 @@
 <template>
   <main>
     <AppPageHeaderFixed class="ecosystem-header__hero">
-      <br> Explore
+      <br>
+      Explore
       <TypewriterEffect
-        :values="[
-          'core packages',
-          'tools',
-          'prototypes',
-          'community projects'
-        ]"
+        :values="['core packages', 'tools', 'prototypes', 'community projects']"
       />
       from Qiskit
       <br>
       and the Qiskit community
     </AppPageHeaderFixed>
     <section id="ecosystem" class="bx--grid ecosystem">
-      <h2>
-        Ecosystem Resources
-      </h2>
+      <h2>Ecosystem Resources</h2>
       <div class="bx--row">
         <div class="bx--col-md-5 bx--col-lg-8 bx--col-xlg-7 bx--col-max-6">
           <p>
-            The Ecosystem consists of projects, tools, utilities, libraries and tutorials from a broad community of developers and researchers. The goal of the Ecosystem is to celebrate, support and accelerate development of quantum technologies using Qiskit.
+            The Ecosystem consists of projects, tools, utilities, libraries and
+            tutorials from a broad community of developers and researchers. The
+            goal of the Ecosystem is to celebrate, support and accelerate
+            development of quantum technologies using Qiskit.
           </p>
         </div>
       </div>
@@ -62,9 +59,12 @@
               <AppCard
                 class="project-card"
                 :title="member.name"
-                :tags="{labels: member.labels, tier: member.tier}"
+                :tags="{ labels: member.labels, tier: member.tier }"
                 cta-label="Go to repo"
-                :segment="{ cta: `go-to-repo-${member.name}`, location: 'ecosystem-card'}"
+                :segment="{
+                  cta: `go-to-repo-${member.name}`,
+                  location: 'ecosystem-card',
+                }"
                 :to="member.url"
               >
                 <p class="project-card__license">
@@ -78,7 +78,12 @@
                 <cv-accordion-item>
                   <template slot="title">
                     <span style="font-weight: bold">Test Results</span>
-                    <span>({{ new Date(member.updatedAt * 1000).toLocaleString('en-UK', { timeZone: 'UTC' }) }})</span>
+                    <span>({{
+                      new Date(member.updatedAt * 1000).toLocaleString(
+                        "en-UK",
+                        { timeZone: "UTC" }
+                      )
+                    }})</span>
                   </template>
                   <template slot="content">
                     <TestTable
@@ -109,18 +114,15 @@ import { GeneralLink } from '~/constants/appLinks'
       meta: [
         {
           name: 'description',
-          content: 'The Ecosystem consists of projects, tools, utilities, libraries and tutorials from a broad community of developers and researchers. The goal of the Ecosystem is to celebrate, support and accelerate development of quantum technologies using Qiskit.'
+          content:
+            'The Ecosystem consists of projects, tools, utilities, libraries and tutorials from a broad community of developers and researchers. The goal of the Ecosystem is to celebrate, support and accelerate development of quantum technologies using Qiskit.'
         }
       ]
     }
   },
   layout: 'default-max',
   computed: {
-    ...mapGetters('ecosystem', [
-      'filteredMembers',
-      'tierFilters',
-      'tiers'
-    ])
+    ...mapGetters('ecosystem', ['filteredMembers', 'tierFilters', 'tiers'])
   },
   async fetch ({ store }) {
     await store.dispatch('ecosystem/fetchMembers')
@@ -128,17 +130,34 @@ import { GeneralLink } from '~/constants/appLinks'
   methods: {
     getTestRows (member: any): void {
       if (member.testsResults) {
-        return member.testsResults.map(({ terraVersion, testType, passed, timestamp }: any) => {
-          timestamp = new Date(timestamp * 1000).toLocaleString('en-UK', { timeZone: 'UTC' })
-          let formattedTestType
-          if (testType === 'STABLE_COMPATIBLE') { formattedTestType = 'stable' } else if (testType === 'DEV_COMPATIBLE') { formattedTestType = 'dev' } else if (testType === 'STANDARD') { formattedTestType = 'standard' }
-          return { terraVersion, testType: formattedTestType, passed, timestamp }
-        })
+        return member.testsResults.map(
+          ({ terraVersion, testType, passed, timestamp }: any) => {
+            timestamp = new Date(timestamp * 1000).toLocaleString('en-UK', {
+              timeZone: 'UTC'
+            })
+            let formattedTestType
+            if (testType === 'STABLE_COMPATIBLE') {
+              formattedTestType = 'stable'
+            } else if (testType === 'DEV_COMPATIBLE') {
+              formattedTestType = 'dev'
+            } else if (testType === 'STANDARD') {
+              formattedTestType = 'standard'
+            }
+            return {
+              terraVersion,
+              testType: formattedTestType,
+              passed,
+              timestamp
+            }
+          }
+        )
       }
     },
 
     updateTierFilter (tier: string, isChecked: boolean): void {
-      const tierFilters = (this as any).tierFilters.filter((oldOption: any) => oldOption !== tier)
+      const tierFilters = (this as any).tierFilters.filter(
+        (oldOption: any) => oldOption !== tier
+      )
 
       if (isChecked) {
         tierFilters.push(tier)
@@ -154,16 +173,14 @@ import { GeneralLink } from '~/constants/appLinks'
       return (this as any).tierFilters.includes(filterValue)
     }
   }
-
 })
-
 export default class EcosystemPage extends QiskitPage {
-  routeName: string = 'ecosystem'
+  routeName: string = 'ecosystem';
 
   joinAction: GeneralLink = {
     url: 'https://github.com/qiskit-community/ecosystem#ecosystem--',
     label: 'Join the ecosystem'
-  }
+  };
 }
 </script>
 
@@ -190,11 +207,11 @@ export default class EcosystemPage extends QiskitPage {
 }
 
 .bx--col-sm-4 {
-  padding-bottom: $spacing-08
+  padding-bottom: $spacing-08;
 }
 
 .app-card__tags {
-    flex-direction: row;
+  flex-direction: row;
 }
 
 .bx--accordion__title {
@@ -202,7 +219,8 @@ export default class EcosystemPage extends QiskitPage {
   flex-direction: row;
   gap: 10px;
 
-  p, .p {
+  p,
+  .p {
     margin-bottom: 0;
   }
 }
