@@ -38,9 +38,9 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import { Component, Prop } from "vue-property-decorator";
-import { CtaClickedEventProp } from "~/constants/segment";
+import Vue from 'vue'
+import { Component, Prop } from 'vue-property-decorator'
+import { CtaClickedEventProp } from '~/constants/segment'
 
 @Component
 export default class AppCard extends Vue {
@@ -48,10 +48,10 @@ export default class AppCard extends Vue {
   @Prop({ type: Boolean, required: false, default: false })
   imageContain!: boolean;
 
-  @Prop({ type: String, default: "" }) title!: string;
+  @Prop({ type: String, default: '' }) title!: string;
   @Prop({ type: Array, default: () => [] }) tags!: string[];
-  @Prop({ type: String, default: "" }) to!: string;
-  @Prop({ type: String, default: "" }) ctaLabel!: string;
+  @Prop({ type: String, default: '' }) to!: string;
+  @Prop({ type: String, default: '' }) ctaLabel!: string;
   @Prop({ type: Object, required: false }) segment:
     | CtaClickedEventProp
     | undefined;
@@ -59,16 +59,16 @@ export default class AppCard extends Vue {
   @Prop({ type: Boolean, default: false }) verticalLayout!: Boolean;
   @Prop({ type: Boolean, default: false }) descriptionWholeSize!: Boolean;
 
-  get ctaLink() {
+  get ctaLink () {
     return {
       url: this.to,
       label: this.ctaLabel,
-      segment: this.segment,
-    };
+      segment: this.segment
+    }
   }
 
-  get hasTags() {
-    return Array.isArray(this.tags) && this.tags.length > 0;
+  get hasTags () {
+    return Array.isArray(this.tags) && this.tags.length > 0
   }
 }
 </script>
