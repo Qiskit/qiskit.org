@@ -23,8 +23,9 @@
             v-if="cta"
             v-bind="cta"
             class="app-mosaic__element-copy-link"
-            v-text="cta.label"
-          />
+          >
+            {{ cta.label }}
+          </AppLink>
         </div>
         <div
           v-if="image"
