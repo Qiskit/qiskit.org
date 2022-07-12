@@ -22,6 +22,7 @@ import LogoGitHub32 from '@carbon/icons-vue/lib/logo--github/32'
 import Launch16 from '@carbon/icons-vue/lib/launch/16'
 import ErrorOutline16 from '@carbon/icons-vue/lib/error--outline/16'
 import Copy16 from '@carbon/icons-vue/lib/copy/16'
+import StarFilled16 from '@carbon/icons-vue/lib/star--filled/16'
 
 Vue.use(CarbonComponentsVue)
 Vue.use(CarbonIconsVue, {
@@ -46,6 +47,7 @@ Vue.use(CarbonIconsVue, {
     ErrorOutline16,
     CheckmarkFilled16,
     ErrorFilled16,
-    PendingFilled16
+    PendingFilled16,
+    StarFilled16
   }
 })
