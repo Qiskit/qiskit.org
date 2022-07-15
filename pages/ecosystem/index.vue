@@ -67,9 +67,17 @@
                 }"
                 :to="member.url"
               >
-                <p class="project-card__license">
-                  {{ member.licence }}
-                </p>
+                <div class="bx--row">
+                  <p class="project-card__license">
+                    {{ member.licence }}
+                  </p>
+                  <div class="bx--row">
+                    <StarFilled16 />
+                    <p class="project-card__star-val">
+                      {{ member.stars }}
+                    </p>
+                  </div>
+                </div>
                 <p>
                   {{ member.description }}
                 </p>
@@ -135,20 +143,7 @@ import { GeneralLink } from '~/constants/appLinks'
             timestamp = new Date(timestamp * 1000).toLocaleString('en-UK', {
               timeZone: 'UTC'
             })
-            let formattedTestType
-            if (testType === 'STABLE_COMPATIBLE') {
-              formattedTestType = 'stable'
-            } else if (testType === 'DEV_COMPATIBLE') {
-              formattedTestType = 'dev'
-            } else if (testType === 'STANDARD') {
-              formattedTestType = 'standard'
-            }
-            return {
-              terraVersion,
-              testType: formattedTestType,
-              passed,
-              timestamp
-            }
+            return { terraVersion, testType, passed, timestamp }
           }
         )
       }
@@ -210,8 +205,16 @@ export default class EcosystemPage extends QiskitPage {
   padding-bottom: $spacing-08;
 }
 
-.app-card__tags {
-  flex-direction: row;
+.app-card {
+  &__description {
+    .bx--row {
+      margin-left: 0;
+    }
+  }
+
+  &__tags {
+    flex-direction: row;
+  }
 }
 
 .bx--accordion__title {
@@ -244,6 +247,14 @@ export default class EcosystemPage extends QiskitPage {
 .project-card {
   &__license {
     font-size: 12px;
+    margin-right: $spacing-05;
+    margin-top: $spacing-01 / 2;
+  }
+
+  svg {
+    margin-top: $spacing-01 / 2;
+    margin-right: $spacing-01;
+    fill: $cool-gray-60;
   }
 
   .app-card__title {

@@ -11,7 +11,6 @@ const getters = <GetterTree<State, any>> {
    * List of members filtered by selected tiers.
    */
   filteredMembers ({ members, tierFilters }): any[] {
-    tierFilters = tierFilters.map((t) => { return t.toUpperCase() })
     const noTierFilters = tierFilters.length === 0
 
     if (noTierFilters) {
@@ -46,8 +45,10 @@ const actions = <ActionTree<State, any>> {
     commit('setMembers', members)
 
     const tiers = [...new Set(members.map(item => item.tier))]
-    const formattedTiers = tiers.map((t) => { return t.toLowerCase() })
-    commit('setTiers', formattedTiers)
+    const idx = tiers.findIndex(i => i === 'Main')
+    tiers.splice(idx, 1)
+    tiers.unshift('Main')
+    commit('setTiers', tiers)
   }
 }
 
