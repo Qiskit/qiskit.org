@@ -139,11 +139,15 @@ import { GeneralLink } from '~/constants/appLinks'
             }
           )
           // Convert package name to title case
-          const packageName = res.package
-            .replace(/-/g, ' ')
+          let packageName
+          if (res.package) {
+            packageName = res.package
+            .replaceAll('-', ' ')
             .split(' ')
             .map((s: string) => s.charAt(0).toUpperCase() + s.substring(1))
             .join(' ')
+          }
+          
           return {
             packageName,
             packageVersion: res.packageVersion,

@@ -44,20 +44,20 @@ import { CtaClickedEventProp } from '~/constants/segment'
 
 @Component
 export default class AppCard extends Vue {
-  @Prop({ type: String, default: "" }) image!: string;
+  @Prop({ type: String, default: '' }) image!: string
   @Prop({ type: Boolean, required: false, default: false })
-  imageContain!: boolean;
+  imageContain!: boolean
 
-  @Prop({ type: String, default: '' }) title!: string;
-  @Prop({ type: Array, default: () => [] }) tags!: string[];
-  @Prop({ type: String, default: '' }) to!: string;
-  @Prop({ type: String, default: '' }) ctaLabel!: string;
+  @Prop({ type: String, default: '' }) title!: string
+  @Prop({ type: Array, default: () => [] }) tags!: string[]
+  @Prop({ type: String, default: '' }) to!: string
+  @Prop({ type: String, default: '' }) ctaLabel!: string
   @Prop({ type: Object, required: false }) segment:
     | CtaClickedEventProp
-    | undefined;
+    | undefined
 
-  @Prop({ type: Boolean, default: false }) verticalLayout!: Boolean;
-  @Prop({ type: Boolean, default: false }) descriptionWholeSize!: Boolean;
+  @Prop({ type: Boolean, default: false }) verticalLayout!: Boolean
+  @Prop({ type: Boolean, default: false }) descriptionWholeSize!: Boolean
 
   get ctaLink () {
     return {
