@@ -142,19 +142,19 @@ import { GeneralLink } from '~/constants/appLinks'
           let packageName
           if (res.package) {
             packageName = res.package
-            .replaceAll('-', ' ')
-            .split(' ')
-            .map((s: string) => s.charAt(0).toUpperCase() + s.substring(1))
-            .join(' ')
+              .replaceAll('-', ' ')
+              .split(' ')
+              .map((s: string) => s.charAt(0).toUpperCase() + s.substring(1))
+              .join(' ')
           }
-          
+
           return {
-              packageName,
-              packageVersion: res.packageVersion,
-              testType: res.testType,
-              passed: res.passed,
-              timestamp,
-              logsLink: res.logsLink
+            packageName,
+            packageVersion: res.packageVersion,
+            testType: res.testType,
+            passed: res.passed,
+            timestamp,
+            logsLink: res.logsLink
           }
         })
       }

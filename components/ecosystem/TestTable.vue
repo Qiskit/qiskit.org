@@ -19,7 +19,7 @@
           {{ data }}
           <cv-tooltip
             v-if="addTooltip"
-            :tip=testTypeTooltip[data]
+            :tip="testTypeTooltip[data]"
             direction="bottom"
           />
         </span>
