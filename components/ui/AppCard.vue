@@ -140,7 +140,7 @@ export default class AppCard extends Vue {
   &__custom-pill {
     background-color: $tag-background-color;
     color: $tag-text-color;
-    margin-left: $spacing-03;
+    margin-right: $spacing-03;
     appearance: none;
     font-size: 0.75rem;
     font-weight: 400;
