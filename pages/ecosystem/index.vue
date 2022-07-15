@@ -149,12 +149,12 @@ import { GeneralLink } from '~/constants/appLinks'
           }
           
           return {
-            packageName,
-            packageVersion: res.packageVersion,
-            testType: res.testType,
-            passed: res.passed,
-            timestamp,
-            logsLink: res.logsLink
+              packageName,
+              packageVersion: res.packageVersion,
+              testType: res.testType,
+              passed: res.passed,
+              timestamp,
+              logsLink: res.logsLink
           }
         })
       }

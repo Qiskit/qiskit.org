@@ -60,9 +60,9 @@ export default class TestTable extends Vue {
   @Prop({ type: Array, default: () => [['', '', '']] }) filteredData!: Object[]
 
   testTypeTooltip = {
-    'development': 'This test type indicates the ecosystem tests were run for this package using the latest development version of Qiskit',
-    'stable': 'This test type indicates the ecosystem tests were run for this package using the latest stable version of Qiskit',
-    'standard': 'This test type means the ecosystem tests were run for this package using the Qiskit version specified in the package requirements',
+    development: 'This test type indicates the ecosystem tests were run for this package using the latest development version of Qiskit',
+    stable: 'This test type indicates the ecosystem tests were run for this package using the latest stable version of Qiskit',
+    standard: 'This test type means the ecosystem tests were run for this package using the Qiskit version specified in the package requirements',
     'last passing version': 'This test type means the results in this row show the latest version of Qiskit for which the ecosystem tests pass for this package'
   }
 
