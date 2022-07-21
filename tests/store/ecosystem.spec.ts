@@ -160,30 +160,3 @@ describe('setTierFilters', () => {
   })
 })
 
-/**
- * ACTIONS
- * -----------------------------------------------------------------------------
- */
-describe('fetchMembers', () => {
-  beforeEach(() => {
-    jest.resetModules()
-    // eslint-disable-next-line import/no-named-as-default-member
-    store = new Vuex.Store(storeOptions())
-  })
-
-  it('Should populate the tiers list with 3 types', () => {
-    jest.mock('~/content/ecosystem/members.json', () => [mockMember1(), mockMember2(), mockMember3()])
-    store.dispatch('ecosystem/fetchMembers')
-      .then(() => expect(store.state.ecosystem.tiers)
-        .toEqual([mockTier1(), mockTier2(), mockTier3()])
-      )
-  })
-
-  it('Should populate the tiers list with 2 types', () => {
-    jest.mock('~/content/ecosystem/members.json', () => [mockMember1(), mockMember2()])
-    store.dispatch('ecosystem/fetchMembers')
-      .then(() => expect(store.state.ecosystem.tiers)
-        .toEqual([mockTier1(), mockTier2()])
-      )
-  })
-})
