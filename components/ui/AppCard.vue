@@ -69,7 +69,7 @@ export default class AppCard extends Vue {
 
   @Prop({ type: Boolean, default: false }) verticalLayout!: Boolean
   @Prop({ type: Boolean, default: false }) descriptionWholeSize!: Boolean
-  @Prop({ type: Array, default: () => [] }) tooltips!: []
+  @Prop({ type: Array, default: () => [] }) tooltips!: object[]
 
   get ctaLink () {
     return {
@@ -80,7 +80,7 @@ export default class AppCard extends Vue {
   }
 
   getTooltip (tagName: string) {
-    const tip = this.tooltips.find((tip: object) => tip.name === tagName)
+    const tip = (this as any).tooltips.find((tip: any) => tip.name === tagName)
     return tip.description
   }
 }
