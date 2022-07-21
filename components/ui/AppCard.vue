@@ -26,7 +26,7 @@
             {{ tag }}
             <cv-tooltip
               v-if="tag == tags.tier"
-              tip="some filler text"
+              :tip="getTooltip(tag)"
               direction="bottom"
             />
           </div>
@@ -69,6 +69,7 @@ export default class AppCard extends Vue {
 
   @Prop({ type: Boolean, default: false }) verticalLayout!: Boolean
   @Prop({ type: Boolean, default: false }) descriptionWholeSize!: Boolean
+  @Prop({ type: Array, default: () => [] }) tooltips!: []
 
   get ctaLink () {
     return {
@@ -76,6 +77,11 @@ export default class AppCard extends Vue {
       label: this.ctaLabel,
       segment: this.segment
     }
+  }
+
+  getTooltip (tagName: string) {
+    const tip = this.tooltips.find((tip: object) => tip.name === tagName)
+    return tip.description
   }
 }
 </script>

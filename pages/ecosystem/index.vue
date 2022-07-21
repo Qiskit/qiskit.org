@@ -31,12 +31,12 @@
             <client-only>
               <cv-checkbox
                 v-for="option in tiers"
-                :key="option"
+                :key="option.name"
                 class="ecosystem__filters-result-section__tiers"
-                :label="option"
-                :value="option"
-                :checked="isTierFilterChecked(option)"
-                @change="updateTierFilter(option, $event)"
+                :label="option.name"
+                :value="option.name"
+                :checked="isTierFilterChecked(option.name)"
+                @change="updateTierFilter(option.name, $event)"
               />
             </client-only>
           </AppFieldset>
@@ -44,7 +44,7 @@
         <template slot="filters-on-s-screen">
           <AppMultiSelect
             label="Tier"
-            :options="tiers"
+            :options="getTierNames(tiers)"
             :value="tierFilters"
             @change-selection="updateTierFilters($event)"
           />
@@ -60,6 +60,7 @@
                 class="project-card"
                 :title="member.name"
                 :tags="{ labels: member.labels, tier: member.tier }"
+                :tooltips="tiers"
                 cta-label="Go to repo"
                 :segment="{
                   cta: `go-to-repo-${member.name}`,
@@ -71,7 +72,7 @@
                   <p class="project-card__license">
                     {{ member.licence }}
                   </p>
-                  <div class="bx--row">
+                  <div class="project-card__star">
                     <StarFilled16 />
                     <p class="project-card__star-val">
                       {{ member.stars }}
@@ -134,6 +135,7 @@ import { GeneralLink } from '~/constants/appLinks'
   },
   async fetch ({ store }) {
     await store.dispatch('ecosystem/fetchMembers')
+    await store.dispatch('ecosystem/fetchTiers')
   },
   methods: {
     getTestRows (member: any): void {
@@ -147,6 +149,11 @@ import { GeneralLink } from '~/constants/appLinks'
           }
         )
       }
+    },
+
+    getTierNames (tiers: any) {
+      const tierNames = tiers.map((tier: any) => tier.name)
+      return tierNames
     },
 
     updateTierFilter (tier: string, isChecked: boolean): void {
@@ -251,10 +258,16 @@ export default class EcosystemPage extends QiskitPage {
     margin-top: $spacing-01 / 2;
   }
 
-  svg {
-    margin-top: $spacing-01 / 2;
-    margin-right: $spacing-01;
-    fill: $cool-gray-60;
+  &__star {
+    display: flex;
+    flex-direction: row;
+
+    svg {
+      margin-top: $spacing-01 / 2;
+      margin-right: $spacing-01;
+      fill: $cool-gray-60;
+    }
+
   }
 
   .app-card__title {

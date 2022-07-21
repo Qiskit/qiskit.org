@@ -23,6 +23,18 @@ async function fetchMembers () {
   }
 }
 
+async function fetchTiers () {
+  try {
+    // from ecosystem main
+    const res = await axios.get(
+      'https://raw.githubusercontent.com/qiskit-community/ecosystem/master/ecosystem/resources/tiers.json'
+    )
+    return res.data
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 function fyShuffle (array: any) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1))
@@ -49,5 +61,6 @@ function toCamelCase (obj: any): any {
 }
 
 export {
-  fetchMembers
+  fetchMembers,
+  fetchTiers
 }
