@@ -34,7 +34,6 @@ const mockMember3 = () => ({
 
 const mockTier1 = () => 'Main'
 const mockTier2 = () => 'Community'
-const mockTier3 = () => 'Prototypes'
 
 /**
  * GETTERS
@@ -159,4 +158,3 @@ describe('setTierFilters', () => {
     expect(store.state.ecosystem.tierFilters).toEqual([])
   })
 })
-
