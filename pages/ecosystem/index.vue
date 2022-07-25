@@ -138,14 +138,33 @@ import { GeneralLink } from '~/constants/appLinks'
   methods: {
     getTestRows (member: any): void {
       if (member.testsResults) {
-        return member.testsResults.map(
-          ({ terraVersion, testType, passed, timestamp }: any) => {
-            timestamp = new Date(timestamp * 1000).toLocaleString('en-UK', {
+        return member.testsResults.map((res: any) => {
+          // make tiemstamp human readable
+          const timestamp = new Date(res.timestamp * 1000).toLocaleString(
+            'en-UK',
+            {
               timeZone: 'UTC'
-            })
-            return { terraVersion, testType, passed, timestamp }
+            }
+          )
+          // Convert package name to title case
+          let packageName
+          if (res.package) {
+            packageName = res.package
+              .replaceAll('-', ' ')
+              .split(' ')
+              .map((s: string) => s.charAt(0).toUpperCase() + s.substring(1))
+              .join(' ')
           }
-        )
+
+          return {
+            packageName,
+            packageVersion: res.packageVersion,
+            testType: res.testType,
+            passed: res.passed,
+            timestamp,
+            logsLink: res.logsLink
+          }
+        })
       }
     },
 

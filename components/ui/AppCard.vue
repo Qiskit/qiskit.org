@@ -3,7 +3,7 @@
     class="app-card"
     :class="{
       'app-card_vertical': verticalLayout,
-      'app-card_description-whole-size': descriptionWholeSize
+      'app-card_description-whole-size': descriptionWholeSize,
     }"
   >
     <div
@@ -18,12 +18,7 @@
           {{ title }}
         </h4>
         <div v-if="hasTags" class="app-card__tags">
-          <cv-tag
-            v-for="tag in tags"
-            :key="tag"
-            :label="tag"
-            kind="purple"
-          />
+          <cv-tag v-for="tag in tags" :key="tag" :label="tag" kind="purple" />
         </div>
       </header>
       <div class="app-card__body">
@@ -50,12 +45,17 @@ import { CtaClickedEventProp } from '~/constants/segment'
 @Component
 export default class AppCard extends Vue {
   @Prop({ type: String, default: '' }) image!: string
-  @Prop({ type: Boolean, required: false, default: false }) imageContain!: boolean
+  @Prop({ type: Boolean, required: false, default: false })
+  imageContain!: boolean
+
   @Prop({ type: String, default: '' }) title!: string
   @Prop({ type: Array, default: () => [] }) tags!: string[]
   @Prop({ type: String, default: '' }) to!: string
   @Prop({ type: String, default: '' }) ctaLabel!: string
-  @Prop({ type: Object, required: false }) segment: CtaClickedEventProp | undefined
+  @Prop({ type: Object, required: false }) segment:
+    | CtaClickedEventProp
+    | undefined
+
   @Prop({ type: Boolean, default: false }) verticalLayout!: Boolean
   @Prop({ type: Boolean, default: false }) descriptionWholeSize!: Boolean
 
