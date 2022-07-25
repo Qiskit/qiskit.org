@@ -1,15 +1,35 @@
 <template>
-  <AppDataTable :columns="['Status', 'Test Type', 'Terra Version']">
+  <AppDataTable
+    :columns="[
+      'Status',
+      'Test Type',
+      `${tableData[0][2].packageName} Version`,
+      'Test Logs',
+    ]"
+  >
     <cv-data-table-row
       v-for="(row, rowIndex) in tableData"
       :key="`${rowIndex}`"
     >
       <cv-data-table-cell
-        v-for="({ component, styles, data }, elementIndex) in row"
+        v-for="({ component, styles, data, addTooltip }, elementIndex) in row"
         :key="`${elementIndex}`"
       >
-        <!-- eslint-disable vue/no-v-html -->
-        <span v-if="component == 'span'" :style="styles" v-html="data" />
+        <span v-if="component === 'span'" :style="styles">
+          {{ data }}
+          <cv-tooltip
+            v-if="addTooltip"
+            :tip="testTypeTooltip[data]"
+            direction="bottom"
+          />
+        </span>
+        <AppCta
+          v-else-if="component === 'link'"
+          class="app-card__cta"
+          v-bind="{ url: data, label: 'see test logs' }"
+          is-wider
+          kind="ghost"
+        />
         <CheckmarkFilled16
           v-else-if="component === true"
           :fill="styles"
@@ -25,7 +45,6 @@
           fill="#c6c6c6"
           aria-label="No test information"
         />
-        <!-- eslint-enable -->
       </cv-data-table-cell>
     </cv-data-table-row>
   </AppDataTable>
@@ -38,26 +57,41 @@ import { TableRowElement } from '~/components/ui/AppDataTable.vue'
 
 @Component
 export default class TestTable extends Vue {
-  @Prop({ type: Array, default: () => [['', '', '']] }) filteredData!: Object[];
+  @Prop({ type: Array, default: () => [['', '', '']] }) filteredData!: Object[]
+
+  testTypeTooltip = {
+    development: 'This test type indicates the ecosystem tests were run for this package using the latest development version of Qiskit',
+    stable: 'This test type indicates the ecosystem tests were run for this package using the latest stable version of Qiskit',
+    standard: 'This test type means the ecosystem tests were run for this package using the Qiskit version specified in the package requirements',
+    'last passing version': 'This test type means the results in this row show the latest version of Qiskit for which the ecosystem tests pass for this package'
+  }
 
   tableData = this.dataPerRow(this.filteredData);
 
   dataPerRow (filteredData: Object[]): TableRowElement[][] {
-    return filteredData.map(({ passed, testType, terraVersion }: any) => [
-      {
-        component: passed,
-        styles: passed ? '#42be65' : '#da1e28',
-        data: ''
-      },
-      {
-        component: 'span',
-        data: testType
-      },
-      {
-        component: 'span',
-        data: terraVersion
-      }
-    ])
+    return filteredData.map(
+      ({ passed, testType, packageVersion, logsLink, packageName }: any) => [
+        {
+          component: passed,
+          styles: passed ? '#42be65' : '#da1e28',
+          data: ''
+        },
+        {
+          component: 'span',
+          data: testType,
+          addTooltip: true
+        },
+        {
+          component: 'span',
+          data: packageVersion,
+          packageName
+        },
+        {
+          component: 'link',
+          data: logsLink
+        }
+      ]
+    )
   }
 }
 </script>
@@ -78,5 +112,9 @@ export default class TestTable extends Vue {
   background-color: $cool-gray-10 !important;
   border-bottom: 1px solid $cool-gray-30 !important;
   color: $black-100;
+}
+
+.app-data-table[data-v-6e79c51a] {
+  overflow-x: unset !important;
 }
 </style>

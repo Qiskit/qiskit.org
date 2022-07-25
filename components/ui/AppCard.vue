@@ -57,7 +57,7 @@ import { CtaClickedEventProp } from '~/constants/segment'
 export default class AppCard extends Vue {
   @Prop({ type: String, default: '' }) image!: string
   @Prop({ type: Boolean, required: false, default: false })
-  imageContain!: boolean;
+  imageContain!: boolean
 
   @Prop({ type: String, default: '' }) title!: string
   @Prop({ type: [Array, Object], default: () => [] }) tags!: string[]
