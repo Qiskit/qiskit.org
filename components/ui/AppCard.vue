@@ -169,12 +169,17 @@ export default class AppCard extends Vue {
     .bx--tooltip__trigger svg {
     fill: white;
     margin-left: $spacing-02;
-  }
 
-  .bx--tooltip__trigger:hover svg {
-    fill: white;
+    :hover svg {
+      fill: white;
+    }
+    }
   }
-  }
+}
+
+.bx--tooltip__trigger.bx--tooltip--bottom.bx--tooltip--align-center
+.bx--assistive-text {
+  width: 10rem;
 }
 
 .app-card_vertical {
