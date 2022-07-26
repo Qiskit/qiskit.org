@@ -1,5 +1,6 @@
 <template>
   <AppDataTable
+    class="test-table"
     :columns="[
       'Status',
       'Test Type',
@@ -100,6 +101,7 @@ export default class TestTable extends Vue {
 .test-table {
   padding: 0;
   background-color: $cool-gray-10;
+  overflow-x: unset !important;
 }
 
 .bx--data-table th[aria-sort] {
@@ -114,7 +116,7 @@ export default class TestTable extends Vue {
   color: $black-100;
 }
 
-.app-data-table[data-v-6e79c51a] {
+.cv-data-table .app-data-table .test-table {
   overflow-x: unset !important;
 }
 </style>
