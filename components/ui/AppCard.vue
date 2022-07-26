@@ -192,6 +192,7 @@ export default class AppCard extends Vue {
     &__header {
       min-height: $spacing-09;
     }
+
     &__body {
       display: flex;
       flex-direction: column;

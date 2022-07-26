@@ -76,6 +76,7 @@
     width: 90%;
     transform: translate(-49%, -50.8%);
   }
+
   &__sketch {
     position: absolute;
     left: 50%;

@@ -145,7 +145,6 @@ export default class CapabilitiesSection extends Mixins(ScrollSectionsMixin) {
   }
 
   &__visual-resource {
-
     &_type {
       &_image {
         width: 100%;

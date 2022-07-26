@@ -294,7 +294,6 @@ export default class MetalGrid extends Vue {
     }
 
     &_trigger {
-
       &::before {
         cursor: pointer;
         z-index: 200;
@@ -323,35 +322,43 @@ export default class MetalGrid extends Vue {
           box-shadow: 0 0 0 0 $cool-gray-70;
           transform: rotate(0deg);
         }
+
         10% {
           box-shadow: 0 1px 5px 0 $cool-gray-20;
           transform: rotate(0deg);
         }
+
         18% {
           box-shadow: 0 1px 5px 0 $cool-gray-20;
           transform: rotate(-3deg * $rotation-multiplier);
         }
+
         26% {
           box-shadow: 0 1px 5px 0 $cool-gray-20;
           transform: rotate(4deg * $rotation-multiplier);
         }
+
         34% {
           box-shadow: 0 1px 5px 0 $cool-gray-20;
           transform: rotate(-3deg * $rotation-multiplier);
           background-color: white;
         }
+
         45% {
           box-shadow: 0 1px 5px 0 $cool-gray-20;
           transform: rotate(1deg * $rotation-multiplier);
         }
+
         55% {
           box-shadow: 0 1px 5px 0 $cool-gray-20;
           transform: rotate(0deg);
         }
+
         65% {
           box-shadow: 0 0 0 0 $cool-gray-60;
           transform: rotate(0deg);
         }
+
         100% {
           box-shadow: 0 0 0 0 $cool-gray-70;
           transform: rotate(0deg);
@@ -364,36 +371,44 @@ export default class MetalGrid extends Vue {
           transform: rotate(0deg) scale(1);
           background-color: white;
         }
+
         10% {
           box-shadow: 0 1px 5px 0 $cool-gray-20;
           transform: rotate(0deg) scale($magnification);
           background-color: white;
         }
+
         18% {
           box-shadow: 0 1px 5px 0 $cool-gray-20;
           transform: rotate(-5deg * $rotation-multiplier) scale($magnification);
         }
+
         26% {
           box-shadow: 0 1px 5px 0 $cool-gray-20;
           transform: rotate(7deg * $rotation-multiplier) scale($magnification);
         }
+
         34% {
           box-shadow: 0 1px 5px 0 $cool-gray-20;
           transform: rotate(-5deg * $rotation-multiplier) scale($magnification);
         }
+
         45% {
           box-shadow: 0 1px 5px 0 $cool-gray-20;
           transform: rotate(3deg * $rotation-multiplier) scale($magnification);
         }
+
         55% {
           box-shadow: 0 1px 5px 0 $cool-gray-20;
           transform: rotate(0deg) scale($magnification);
         }
+
         65% {
           box-shadow: 0 0 0 0 $cool-gray-60;
           transform: rotate(0deg) scale($magnification);
           background-color: white;
         }
+
         100% {
           box-shadow: 0 0 0 0 $cool-gray-70;
           transform: rotate(0deg) scale(1);

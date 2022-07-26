@@ -110,6 +110,7 @@ export default class TypewriterEffect extends Vue {
     to {
       background-color: transparent;
     }
+
     50% {
       background-color: $background-color-secondary;
     }

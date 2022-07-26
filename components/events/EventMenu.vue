@@ -163,7 +163,6 @@ nav li.active:hover a {
 }
 
 @media (max-width: 800px) {
-
   .convertible-menu .hamburger {
     display: block;
   }

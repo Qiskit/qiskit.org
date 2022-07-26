@@ -127,6 +127,7 @@ export default class AppCta extends Vue {
 
     &_theme_dark {
       color: $link-color-quaternary;
+
       &:hover,
       &:focus,
       &:active {
