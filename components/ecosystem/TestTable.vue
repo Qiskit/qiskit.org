@@ -116,7 +116,4 @@ export default class TestTable extends Vue {
   color: $black-100;
 }
 
-.cv-data-table .app-data-table .test-table {
-  overflow-x: unset !important;
-}
 </style>
