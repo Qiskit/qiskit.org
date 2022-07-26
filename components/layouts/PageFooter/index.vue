@@ -83,7 +83,6 @@ export default class PageFooter extends Vue {
 
 <style lang="scss" scoped>
 .page-footer {
-
   .page-footer__primary {
     padding: $spacing-07 0;
 

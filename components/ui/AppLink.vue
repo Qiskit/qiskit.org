@@ -35,6 +35,7 @@ export default class AppLink extends Vue {
     &:active {
       color: $link-hover-color;
     }
+
     &:visited {
       color: $link-visited-color;
     }
@@ -49,6 +50,7 @@ export default class AppLink extends Vue {
       color: $link-hover-color-secondary;
       text-decoration: underline;
     }
+
     &:visited {
       color: $link-visited-color-secondary;
     }

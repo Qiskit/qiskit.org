@@ -41,7 +41,6 @@ export default class AppMultiSelect extends Vue {
 
 <style lang="scss">
   .app-multi-select {
-
     & .bx--list-box--light,
     & .bx--list-box__menu {
       background-color: $background-color-white;

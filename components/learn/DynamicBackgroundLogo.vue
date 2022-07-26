@@ -241,6 +241,7 @@ export default defineComponent({
     top: 50%;
     transform: translate(-50%, -50%);
   }
+
   &__overlay {
     position: absolute;
     left: 50%;

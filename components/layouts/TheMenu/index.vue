@@ -249,6 +249,7 @@ export default class TheMenu extends Mixins(MenuMixin) {
 
     &_active {
       color: $text-active-color;
+
        ::v-deep {
           .bx--list-box__label {
             color: $link-visited-color;
@@ -356,6 +357,7 @@ export default class TheMenu extends Mixins(MenuMixin) {
 
   .bx--list-box__menu-icon {
     top: initial;
+
     & > svg {
       fill: var(--link-color);
     }
