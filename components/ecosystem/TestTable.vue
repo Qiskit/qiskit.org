@@ -1,5 +1,6 @@
 <template>
   <AppDataTable
+    class="test-table"
     :columns="[
       'Status',
       'Test Type',
@@ -98,23 +99,18 @@ export default class TestTable extends Vue {
 
 <style lang="scss">
 .test-table {
-  padding: 0;
-  background-color: $cool-gray-10;
-}
-
-.bx--data-table th[aria-sort] {
-  background-color: $cool-gray-10;
-  border-bottom: 1px solid $cool-gray-30;
-}
-
-.bx--data-table tbody tr td,
-.bx--data-table tbody tr:hover td {
-  background-color: $cool-gray-10 !important;
-  border-bottom: 1px solid $cool-gray-30 !important;
-  color: $black-100;
-}
-
-.app-data-table[data-v-6e79c51a] {
   overflow-x: unset !important;
+
+  .bx--data-table th[aria-sort] {
+    background-color: $cool-gray-10;
+    border-bottom: 1px solid $cool-gray-30;
+  }
+
+  .bx--data-table tbody tr td,
+  .bx--data-table tbody tr:hover td {
+    background-color: $cool-gray-10;
+    border-bottom: 1px solid $cool-gray-30;
+    color: $black-100;
+  }
 }
 </style>

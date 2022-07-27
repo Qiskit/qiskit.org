@@ -95,7 +95,6 @@
                   </template>
                   <template slot="content">
                     <TestTable
-                      class="test-table"
                       :filtered-data="getTestRows(member)"
                     />
                   </template>
