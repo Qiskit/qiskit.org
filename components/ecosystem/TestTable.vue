@@ -99,8 +99,6 @@ export default class TestTable extends Vue {
 
 <style lang="scss">
 .test-table {
-  padding: 0;
-  background-color: $cool-gray-10;
   overflow-x: unset !important;
 }
 
