@@ -146,7 +146,6 @@ export default class AppCard extends Vue {
   &__custom-pill {
     background-color: $tag-background-color;
     color: $tag-text-color;
-    margin-right: $spacing-03;
     appearance: none;
     font-size: 0.75rem;
     font-weight: 400;
@@ -161,6 +160,7 @@ export default class AppCard extends Vue {
     padding: 0.25rem 0.5rem;
     margin-top: 0.25rem;
     margin-bottom: 0.25rem;
+    margin-right: $spacing-03;
     border-radius: 6.9375rem;
     cursor: default;
     vertical-align: middle;
@@ -174,6 +174,10 @@ export default class AppCard extends Vue {
       fill: white;
     }
     }
+  }
+
+  &__custom-pill:last-child {
+    margin-right: 0;
   }
 }
 
