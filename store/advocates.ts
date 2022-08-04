@@ -3,7 +3,7 @@ import type { ActionTree, GetterTree, MutationTree } from 'vuex'
 const ADVOCATES_WORLD_REGIONS = Object.freeze({
   northAmerica: 'North America',
   southAmerica: 'South America',
-  australia: 'Australia',
+  oceania: 'Oceania',
   africa: 'Africa',
   europe: 'Europe',
   asia: 'Asia'
@@ -28,7 +28,7 @@ interface Advocate {
 const ADVOCATES_WORLD_REGION_OPTIONS = Object.freeze([
   ADVOCATES_WORLD_REGIONS.northAmerica,
   ADVOCATES_WORLD_REGIONS.southAmerica,
-  ADVOCATES_WORLD_REGIONS.australia,
+  ADVOCATES_WORLD_REGIONS.oceania,
   ADVOCATES_WORLD_REGIONS.africa,
   ADVOCATES_WORLD_REGIONS.europe,
   ADVOCATES_WORLD_REGIONS.asia
