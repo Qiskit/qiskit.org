@@ -59,8 +59,8 @@
               <AppCard
                 class="project-card"
                 :title="member.name"
-                :tags="{ labels: member.labels, tier: member.tier }"
-                :tooltips="tiers"
+                :tags="member.labels"
+                :tooltip-tags="[{label: member.tier, message: getTierDescription(member.tier)}]"
                 cta-label="Go to repo"
                 :segment="{
                   cta: `go-to-repo-${member.name}`,
@@ -173,6 +173,11 @@ import { GeneralLink } from '~/constants/appLinks'
     getTierNames (tiers: any) {
       const tierNames = tiers.map((tier: any) => tier.name)
       return tierNames
+    },
+
+    getTierDescription (tier: string) {
+      const tip = (this as any).tiers.find((tip: any) => tip.name === tier)
+      return tip.description
     },
 
     updateTierFilter (tier: string, isChecked: boolean): void {
