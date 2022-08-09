@@ -57,6 +57,13 @@ import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 import { CtaClickedEventProp } from '~/constants/segment'
 
+export interface TagTooltip {
+  // the short string label for inside the tag
+  label: string,
+  // the description for the tooltip
+  description: string,
+}
+
 @Component
 export default class AppCard extends Vue {
   @Prop({ type: String, default: '' }) image!: string
@@ -65,7 +72,7 @@ export default class AppCard extends Vue {
 
   @Prop({ type: String, default: '' }) title!: string
   @Prop({ type: Array, default: () => [] }) tags!: string[]
-  @Prop({ type: Array, default: () => [] }) tooltipTags!: string[]
+  @Prop({ type: Array, default: () => [] }) tooltipTags!: TagTooltip[]
   @Prop({ type: String, default: '' }) to!: string
   @Prop({ type: String, default: '' }) ctaLabel!: string
   @Prop({ type: Object, required: false }) segment:
@@ -83,7 +90,7 @@ export default class AppCard extends Vue {
     }
   }
 
-  hasTags (tags: any) {
+  hasTags (tags: string[] | TagTooltip[]) {
     return Array.isArray(tags) && tags.length > 0
   }
 }
