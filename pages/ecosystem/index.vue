@@ -177,7 +177,7 @@ import { GeneralLink } from '~/constants/appLinks'
 
     getTierDescription (tier: string) {
       const tip = (this as any).tiers.find((tip: any) => tip.name === tier)
-      return tip.description
+      return tip.description || ''
     },
 
     updateTierFilter (tier: string, isChecked: boolean): void {

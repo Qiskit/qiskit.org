@@ -18,10 +18,10 @@
           {{ title }}
         </h4>
         <div class="bx--row">
-          <div v-if="hasTags" class="app-card__tags">
+          <div v-if="hasTags(tags)" class="app-card__tags">
             <cv-tag v-for="tag in tags" :key="tag" :label="tag" kind="purple" />
           </div>
-          <div v-if="hasTooltipTags" class="app-card__tags">
+          <div v-if="hasTags(tooltipTags)" class="app-card__tags">
             <div
               v-for="tag in tooltipTags"
               :key="tag.index"
@@ -83,12 +83,8 @@ export default class AppCard extends Vue {
     }
   }
 
-  get hasTags () {
-    return Array.isArray(this.tags) && this.tags.length > 0
-  }
-
-  get hasTooltipTags () {
-    return Array.isArray(this.tooltipTags) && this.tooltipTags.length > 0
+  hasTags (tags: any) {
+    return Array.isArray(tags) && tags.length > 0
   }
 }
 </script>
@@ -235,9 +231,9 @@ export default class AppCard extends Vue {
     min-height: 1.5rem;
     align-items: center;
     justify-content: center;
-    padding: 0.25rem 0.5rem;
-    margin-top: 0.25rem;
-    margin-bottom: 0.25rem;
+    padding: $spacing-02 $spacing-03;
+    margin-top: $spacing-02;
+    margin-bottom: $spacing-02;
     margin-right: $spacing-03;
     margin-left: $spacing-03;
     border-radius: 6.9375rem;
@@ -249,9 +245,9 @@ export default class AppCard extends Vue {
       fill: white;
       margin-left: $spacing-02;
 
-    :hover svg {
-      fill: white;
-    }
+      :hover svg {
+        fill: white;
+      }
     }
   }
 
