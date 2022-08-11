@@ -43,11 +43,10 @@ const actions = <ActionTree<State, any>> {
     const membersModule = await import('~/content/ecosystem/members.json')
     const members = membersModule.default || []
     commit('setMembers', members)
-
-    const tiers = [...new Set(members.map(item => item.tier))]
-    const idx = tiers.findIndex(i => i === 'Main')
-    tiers.splice(idx, 1)
-    tiers.unshift('Main')
+  },
+  async fetchTiers ({ commit }): Promise<void> {
+    const tiersModule = await import('~/content/ecosystem/tiers.json')
+    const tiers = tiersModule.default || []
     commit('setTiers', tiers)
   }
 }

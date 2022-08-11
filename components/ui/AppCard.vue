@@ -17,8 +17,23 @@
         <h4 class="app-card__title">
           {{ title }}
         </h4>
-        <div v-if="hasTags" class="app-card__tags">
-          <cv-tag v-for="tag in tags" :key="tag" :label="tag" kind="purple" />
+        <div class="bx--row">
+          <div v-if="hasTags(tags)" class="app-card__tags">
+            <cv-tag v-for="tag in tags" :key="tag" :label="tag" kind="purple" />
+          </div>
+          <div v-if="hasTags(tooltipTags)" class="app-card__tags">
+            <div
+              v-for="tag in tooltipTags"
+              :key="tag.index"
+              class="app-card__custom-pill"
+            >
+              {{ tag.label }}
+              <cv-tooltip
+                :tip="tag.message"
+                direction="bottom"
+              />
+            </div>
+          </div>
         </div>
       </header>
       <div class="app-card__body">
@@ -42,6 +57,13 @@ import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 import { CtaClickedEventProp } from '~/constants/segment'
 
+export interface TagTooltip {
+  // the short string label for inside the tag
+  label: string,
+  // the description for the tooltip
+  description: string,
+}
+
 @Component
 export default class AppCard extends Vue {
   @Prop({ type: String, default: '' }) image!: string
@@ -50,6 +72,7 @@ export default class AppCard extends Vue {
 
   @Prop({ type: String, default: '' }) title!: string
   @Prop({ type: Array, default: () => [] }) tags!: string[]
+  @Prop({ type: Array, default: () => [] }) tooltipTags!: TagTooltip[]
   @Prop({ type: String, default: '' }) to!: string
   @Prop({ type: String, default: '' }) ctaLabel!: string
   @Prop({ type: Object, required: false }) segment:
@@ -67,8 +90,8 @@ export default class AppCard extends Vue {
     }
   }
 
-  get hasTags () {
-    return Array.isArray(this.tags) && this.tags.length > 0
+  hasTags (tags: string[] | TagTooltip[]) {
+    return Array.isArray(tags) && tags.length > 0
   }
 }
 </script>
@@ -114,7 +137,6 @@ export default class AppCard extends Vue {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    overflow: hidden;
   }
 
   &__header {
@@ -125,35 +147,22 @@ export default class AppCard extends Vue {
     @include mq($until: large) {
       flex-direction: column;
     }
+
+    .bx--row {
+      margin-right: 0;
+      margin-left: 0;
+      margin-bottom: $spacing-03;
+    }
   }
 
   &__title {
     flex: 1;
   }
+}
 
-  &__tags {
-    display: flex;
-    flex-wrap: wrap;
-    flex: 1;
-    justify-content: flex-end;
-    margin-left: $spacing-06;
-
-    @include mq($until: large) {
-      justify-content: flex-start;
-      margin-top: $spacing-03;
-      margin-left: 0;
-    }
-
-    .bx--tag--purple {
-      background-color: $tag-background-color;
-      color: $tag-text-color;
-      margin-left: $spacing-03;
-    }
-
-    .bx--tag:first-child {
-      margin-left: 0;
-    }
-  }
+.bx--tooltip__trigger.bx--tooltip--bottom.bx--tooltip--align-center
+.bx--assistive-text {
+  width: 10rem;
 }
 
 .app-card_vertical {
@@ -199,6 +208,59 @@ export default class AppCard extends Vue {
       justify-content: space-between;
       flex: 1;
     }
+  }
+}
+</style>
+
+<style lang="scss">
+@import '~carbon-components/scss/globals/scss/typography';
+
+.app-card {
+  .bx--tag--purple {
+    background-color: $tag-background-color;
+    color: $tag-text-color;
+    margin-right: $spacing-03;
+    margin-left: 0;
+    min-width: 0;
+  }
+
+  .bx--tag--purple:last-child {
+    margin-right: 0;
+  }
+
+  &__custom-pill {
+    @include type-style('caption-01');
+
+    background-color: $tag-background-color;
+    color: $tag-text-color;
+    display: inline-flex;
+    min-width: 0;
+    max-width: 100%;
+    min-height: 1.5rem;
+    align-items: center;
+    justify-content: center;
+    padding: $spacing-02 $spacing-03;
+    margin-top: $spacing-02;
+    margin-bottom: $spacing-02;
+    margin-right: $spacing-03;
+    margin-left: $spacing-03;
+    border-radius: 6.9375rem;
+    cursor: default;
+    vertical-align: middle;
+    word-break: break-word;
+
+    .bx--tooltip__trigger svg {
+      fill: white;
+      margin-left: $spacing-02;
+
+      :hover svg {
+        fill: white;
+      }
+    }
+  }
+
+  &__custom-pill:last-child {
+    margin-right: 0;
   }
 }
 </style>
