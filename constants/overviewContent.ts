@@ -137,7 +137,7 @@ const ALGORITHMS_COLLECTION: OverviewSection = {
       title: 'Grover',
       content: {
         image: '/images/overview/algorithms/grover.png',
-        description: 'Grover\'s algorithm is a well know quantum algorithm part of the amplitude amplifier category that provides quadratic speedup for searching through unstructured collections of records in search of particular targets.',
+        description: 'Grover\'s algorithm is a well known quantum algorithm part of the amplitude amplifier category that provides quadratic speedup for searching through unstructured collections of records in search of particular targets.',
         cta: {
           label: 'Try out Grover’s',
           url: 'https://qiskit.org/documentation/stubs/qiskit.algorithms.Grover.html#qiskit.algorithms.Grover'
