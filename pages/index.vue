@@ -2,7 +2,7 @@
   <main class="landing-page">
     <QiskitBanner padding-x-none class="qiskit-runtime">
       <div class="bx--grid">
-        <span class="banner__title">Start building with Qiskit runtime.</span>
+        <span class="banner__title">Start building with Qiskit Runtime.</span>
         <span class="banner__message">Leverage the new programming model and execution framework to efficiently execute circuits.</span>
         <AppLink
           :segment="{ action: `banner > qiskit-runtime` }"
