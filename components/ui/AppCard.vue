@@ -160,11 +160,6 @@ export default class AppCard extends Vue {
   }
 }
 
-.bx--tooltip__trigger.bx--tooltip--bottom.bx--tooltip--align-center
-.bx--assistive-text {
-  width: 10rem;
-}
-
 .app-card_vertical {
   flex-direction: column;
 
@@ -214,6 +209,11 @@ export default class AppCard extends Vue {
 
 <style lang="scss">
 @import '~carbon-components/scss/globals/scss/typography';
+
+.bx--tooltip__trigger.bx--tooltip--bottom.bx--tooltip--align-center
+.bx--assistive-text {
+  width: 10rem;
+}
 
 .app-card {
   .bx--tag--purple {
