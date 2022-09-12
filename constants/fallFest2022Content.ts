@@ -16,8 +16,8 @@ const header = {
     title: 'Qiskit Fall Fest 2022',
     description: 'The Qiskit Fall Fest is a collection of quantum computing events each held by a University!',
     location: 'Online',
-    time: '',
-    to: 'https://www.eventbrite.com/e/2022-qiskit-global-summer-school-quantum-simulations-tickets-348866728777',
+    time: 'October 2023',
+    to: 'https://medium.com/qiskit/introducing-the-qiskit-fall-fest-feb8456b557',
     ctaLabel: 'Learn more',
     segment: {
       cta: 'ibm-research-blog',

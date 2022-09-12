@@ -26,7 +26,7 @@
           </div>
         </div>
       </div>
-  </article>
+    </article>
   </section>
 </template>
 
@@ -51,7 +51,7 @@ export default class UniversityDirectorySection extends Vue {
       description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, eligendi! Incidunt sequi vel asperiores quibusdam culpa debitis provident consequatur.',
       cta: {
         label: 'Go to this page',
-        url: '/events/fall-fest/fall-fest-logo.png',
+        url: 'https://coding-club.example-university.edu',
         segment: { cta: 'university-name', location: 'fall-fest-page' }
       }
     },
@@ -61,7 +61,7 @@ export default class UniversityDirectorySection extends Vue {
       description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, eligendi! Incidunt sequi vel asperiores quibusdam culpa debitis provident consequatur.',
       cta: {
         label: 'Go to this page',
-        url: '/events/fall-fest/fall-fest-logo.png',
+        url: 'https://coding-club.example-university.edu',
         segment: { cta: 'university-name', location: 'fall-fest-page' }
       }
     },
@@ -71,7 +71,7 @@ export default class UniversityDirectorySection extends Vue {
       description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, eligendi! Incidunt sequi vel asperiores quibusdam culpa debitis provident consequatur.',
       cta: {
         label: 'Go to this page',
-        url: '/events/fall-fest/fall-fest-logo.png',
+        url: 'https://coding-club.example-university.edu',
         segment: { cta: 'university-name', location: 'fall-fest-page' }
       }
     }

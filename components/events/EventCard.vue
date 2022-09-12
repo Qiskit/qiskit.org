@@ -17,7 +17,7 @@
         <Map20 class="event-card__icon" />
         {{ location }}
       </div>
-      <div class="event-card__detail">
+      <div v-if="date" class="event-card__detail">
         <Calendar20 class="event-card__icon" />
         <time>{{ date }}</time>
       </div>
