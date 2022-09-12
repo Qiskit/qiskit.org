@@ -23,6 +23,12 @@
 
     <div class="bx--grid fall-fest-page__content">
       <section class="fall-fest-page__section">
+        <UniversityDirectorySection />
+      </section>
+    </div>
+
+    <div class="bx--grid fall-fest-page__content">
+      <section class="fall-fest-page__section">
         <h2 v-text="agendaData.title" />
         <p v-text="agendaData.subtitle" />
         <cv-tabs>
@@ -59,6 +65,7 @@
 <script lang="ts">
 import { Component } from 'vue-property-decorator'
 import FallFestFaqSection from '../../components/events/fall-fest/FallFestFaqSection.vue'
+import UniversityDirectorySection from '../../components/events/fall-fest/UniversityDirectorySection.vue'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import {
   header,
@@ -70,7 +77,7 @@ import {
   head () {
     const title = 'Qiskit Fall Fest 2022'
     const description = 'The Qiskit Fall Fest is a collection of quantum computing events on college campuses around the world. Every Fall Fest event is organized and run by the students on each campus, with support from the entire IBM Quantum team. Student leaders work alongside IBM throughout the month of September to design and plan their event, which are then run in October. The events vary from technical hackathons to beginner-friendly challenges, all with the goal of helping to grow the local community’s skill set.'
-    const image = '/images/events/qiskit-fall-fest/qiskit-fall-fest.png'
+    const image = '/images/events/fall-fest/fall-fest.png'
 
     return {
       title,
@@ -123,7 +130,7 @@ import {
       ]
     }
   },
-  components: { FallFestFaqSection },
+  components: { FallFestFaqSection, UniversityDirectorySection },
   layout: 'default-max'
 })
 export default class SummerSchoolPage extends QiskitPage {
