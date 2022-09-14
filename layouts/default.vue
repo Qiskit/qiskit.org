@@ -1,7 +1,7 @@
 <template>
   <!-- tabindex is needed to allow hiding the menu in iOS Safari -->
   <div tabindex="-1">
-    <qiskit-ui-shell variant="hide-account" />
+    <qiskit-ui-shell variant="hide-account" @on-click="onClick" />
     <div class="main-container">
       <nuxt />
     </div>
@@ -15,7 +15,11 @@ import { Component } from 'vue-property-decorator'
 import '@qiskit/web-components/components/ui-shell'
 
 @Component
-export default class DefaultLayout extends Vue {}
+export default class DefaultLayout extends Vue {
+  onClick (e: CustomEvent) {
+    this.$trackClickEvent(`${e.detail?.label | e.detail?.url}`, 'navbar')
+  }
+}
 </script>
 
 <style lang="scss">
