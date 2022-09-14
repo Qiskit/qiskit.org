@@ -74,6 +74,76 @@ export default class UniversityDirectorySection extends Vue {
         url: 'https://coding-club.example-university.edu',
         segment: { cta: 'university-name', location: 'fall-fest-page' }
       }
+    },
+    {
+      image: '/images/events/fall-fest/fall-fest-logo-sq.png',
+      title: 'University 4',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, eligendi! Incidunt sequi vel asperiores quibusdam culpa debitis provident consequatur.',
+      cta: {
+        label: 'Go to this page',
+        url: 'https://coding-club.example-university.edu',
+        segment: { cta: 'university-name', location: 'fall-fest-page' }
+      }
+    },
+    {
+      image: '/images/events/fall-fest/fall-fest-logo-sq.png',
+      title: 'University 5',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, eligendi! Incidunt sequi vel asperiores quibusdam culpa debitis provident consequatur.',
+      cta: {
+        label: 'Go to this page',
+        url: 'https://coding-club.example-university.edu',
+        segment: { cta: 'university-name', location: 'fall-fest-page' }
+      }
+    },
+    {
+      image: '/images/events/fall-fest/fall-fest-logo-sq.png',
+      title: 'University 6',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, eligendi! Incidunt sequi vel asperiores quibusdam culpa debitis provident consequatur.',
+      cta: {
+        label: 'Go to this page',
+        url: 'https://coding-club.example-university.edu',
+        segment: { cta: 'university-name', location: 'fall-fest-page' }
+      }
+    },
+    {
+      image: '/images/events/fall-fest/fall-fest-logo-sq.png',
+      title: 'University 7',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, eligendi! Incidunt sequi vel asperiores quibusdam culpa debitis provident consequatur.',
+      cta: {
+        label: 'Go to this page',
+        url: 'https://coding-club.example-university.edu',
+        segment: { cta: 'university-name', location: 'fall-fest-page' }
+      }
+    },
+    {
+      image: '/images/events/fall-fest/fall-fest-logo-sq.png',
+      title: 'University 8',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, eligendi! Incidunt sequi vel asperiores quibusdam culpa debitis provident consequatur.',
+      cta: {
+        label: 'Go to this page',
+        url: 'https://coding-club.example-university.edu',
+        segment: { cta: 'university-name', location: 'fall-fest-page' }
+      }
+    },
+    {
+      image: '/images/events/fall-fest/fall-fest-logo-sq.png',
+      title: 'University 9',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, eligendi! Incidunt sequi vel asperiores quibusdam culpa debitis provident consequatur.',
+      cta: {
+        label: 'Go to this page',
+        url: 'https://coding-club.example-university.edu',
+        segment: { cta: 'university-name', location: 'fall-fest-page' }
+      }
+    },
+    {
+      image: '/images/events/fall-fest/fall-fest-logo-sq.png',
+      title: 'University 10',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, eligendi! Incidunt sequi vel asperiores quibusdam culpa debitis provident consequatur.',
+      cta: {
+        label: 'Go to this page',
+        url: 'https://coding-club.example-university.edu',
+        segment: { cta: 'university-name', location: 'fall-fest-page' }
+      }
     }
   ]
 }
