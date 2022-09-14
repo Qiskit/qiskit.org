@@ -51,8 +51,6 @@
         </cv-tabs>
       </section>
 
-      <FallFestFaqSection class="fall-fest-page__section" />
-
       <AppHelpfulResourcesSection
         class="fall-fest-page__section"
         :title="helpfulResourcesData.title"
@@ -64,7 +62,6 @@
 
 <script lang="ts">
 import { Component } from 'vue-property-decorator'
-import FallFestFaqSection from '../../components/events/fall-fest/FallFestFaqSection.vue'
 import UniversityDirectorySection from '../../components/events/fall-fest/UniversityDirectorySection.vue'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import {
@@ -130,10 +127,10 @@ import {
       ]
     }
   },
-  components: { FallFestFaqSection, UniversityDirectorySection },
+  components: { UniversityDirectorySection },
   layout: 'default-max'
 })
-export default class SummerSchoolPage extends QiskitPage {
+export default class FallFestPage extends QiskitPage {
   routeName = 'fall-fest'
   agendaColumnsDataTable: string[] = ['Day', 'University', 'Type', 'Link']
   headerData = header

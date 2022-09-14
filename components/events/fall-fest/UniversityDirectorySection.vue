@@ -46,7 +46,7 @@ type University = {
 export default class UniversityDirectorySection extends Vue {
   universities: University[] = [
     {
-      image: '/images/events/fall-fest/fall-fest-logo-sq.png',
+      image: '/images/events/fall-fest/cairo.png',
       title: 'University 1',
       description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, eligendi! Incidunt sequi vel asperiores quibusdam culpa debitis provident consequatur.',
       cta: {
