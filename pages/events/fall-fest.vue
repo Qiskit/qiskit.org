@@ -185,13 +185,6 @@ export default class FallFestPage extends QiskitPage {
     // https://stylelint.io/user-guide/ignore-code
     // stylelint-disable no-descending-specificity
     & .bx--tabs__nav-item {
-      &:hover:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link,
-      &:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled):not(.bx--tabs__nav-item--selected) .bx--tabs__nav-link:focus,
-      &:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled):not(.bx--tabs__nav-item--selected) a.bx--tabs__nav-link:active,
-      &:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link, .bx--tabs__nav-item--selected:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link:focus {
-        color: $text-color-light;
-      }
-
       &--selected:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link {
         border-bottom-color: $border-color-secondary;
       }
