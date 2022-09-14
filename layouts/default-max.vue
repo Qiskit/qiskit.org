@@ -1,7 +1,7 @@
 <template>
   <!-- tabindex is needed to allow hiding the menu in iOS Safari -->
   <div tabindex="-1">
-    <qiskit-ui-shell />
+    <qiskit-ui-shell variant="hide-account" />
     <div class="main-container">
       <nuxt />
     </div>
