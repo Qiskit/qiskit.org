@@ -106,6 +106,7 @@ describe('isEventInDateRange', () => {
       endDate: ''
     }
     expect(isEventInDateRange(mockEvent, days)).toBe(true)
+
     // Event started 100 days ago and end in 100 days (ongoing event)
     mockEvent = {
       ...mockEventBase,
