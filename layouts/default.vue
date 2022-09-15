@@ -16,7 +16,7 @@ import '@qiskit/web-components/components/ui-shell'
 @Component
 export default class DefaultLayout extends Vue {
   onClick (e: CustomEvent) {
-    this.$trackClickEvent(`${e.detail?.label | e.detail?.url}`, 'navbar')
+    this.$trackClickEvent(`${e.detail?.label?.toLowerCase()}`, 'menu')
   }
 }
 </script>
