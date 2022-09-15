@@ -1,6 +1,5 @@
 <template>
-  <!-- tabindex is needed to allow hiding the menu in iOS Safari -->
-  <div tabindex="-1">
+  <div>
     <qiskit-ui-shell variant="hide-account" @on-click="onClick" />
     <div class="main-container">
       <nuxt />
@@ -22,7 +21,7 @@ export default class MaxLayout extends Vue {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .main-container {
   margin-top: 3.5rem;
 }
