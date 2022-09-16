@@ -16,7 +16,7 @@ const header = {
     title: 'Qiskit Fall Fest 2022',
     description: 'The Qiskit Fall Fest is a collection of quantum computing events each held by a University!',
     location: 'Online',
-    time: 'October 2023',
+    time: '',
     to: 'https://medium.com/qiskit/introducing-the-qiskit-fall-fest-feb8456b557',
     ctaLabel: 'Learn more',
     segment: {
