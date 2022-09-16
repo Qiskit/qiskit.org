@@ -14,13 +14,13 @@ const header = {
   card: {
     image: '/images/events/fall-fest/fall-fest-logo.png',
     title: 'Qiskit Fall Fest 2022',
-    description: 'The Qiskit Fall Fest is a collection of quantum computing events each held by a University!',
-    location: 'Online',
+    description: 'The Qiskit Fall Fest is a collection of quantum computing events each held by a university!',
+    location: '',
     time: '',
     to: 'https://medium.com/qiskit/introducing-the-qiskit-fall-fest-feb8456b557',
     ctaLabel: 'Learn more',
     segment: {
-      cta: 'ibm-research-blog',
+      cta: 'qiskit-fall-fest-blog',
       location: 'header'
     }
   }
