@@ -46,103 +46,243 @@ type University = {
 export default class UniversityDirectorySection extends Vue {
   universities: University[] = [
     {
-      image: '/images/events/fall-fest/cairo.png',
-      title: 'University 1',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, eligendi! Incidunt sequi vel asperiores quibusdam culpa debitis provident consequatur.',
+      title: 'Uttar Pradesh',
+      image: '/images/events/fall-fest/image30.png',
+      description: 'October 22, 2022',
       cta: {
         label: 'Go to this page',
         url: 'https://coding-club.example-university.edu',
-        segment: { cta: 'university-name', location: 'fall-fest-page' }
+        segment: { cta: 'uttar-pradesh', location: 'fall-fest-page' }
       }
     },
     {
-      image: '/images/events/fall-fest/fall-fest-logo-sq.png',
-      title: 'University 2',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, eligendi! Incidunt sequi vel asperiores quibusdam culpa debitis provident consequatur.',
+      title: 'The Higher National School of Computer Science',
+      image: '/images/events/fall-fest/image27.png',
+      description: 'October 21, 2022',
       cta: {
         label: 'Go to this page',
         url: 'https://coding-club.example-university.edu',
-        segment: { cta: 'university-name', location: 'fall-fest-page' }
+        segment: { cta: 'the-higher-national-school-of-computer-science', location: 'fall-fest-page' }
       }
     },
     {
-      image: '/images/events/fall-fest/fall-fest-logo-sq.png',
-      title: 'University 3',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, eligendi! Incidunt sequi vel asperiores quibusdam culpa debitis provident consequatur.',
+      title: 'RV PU College',
+      image: '/images/events/fall-fest/image18.png',
+      description: 'October 30, 2022',
       cta: {
         label: 'Go to this page',
         url: 'https://coding-club.example-university.edu',
-        segment: { cta: 'university-name', location: 'fall-fest-page' }
+        segment: { cta: 'rv-pu-college', location: 'fall-fest-page' }
       }
     },
     {
-      image: '/images/events/fall-fest/fall-fest-logo-sq.png',
-      title: 'University 4',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, eligendi! Incidunt sequi vel asperiores quibusdam culpa debitis provident consequatur.',
+      title: 'University of Victoria',
+      image: '/images/events/fall-fest/image29.png',
+      description: 'October 22, 2022',
       cta: {
         label: 'Go to this page',
         url: 'https://coding-club.example-university.edu',
-        segment: { cta: 'university-name', location: 'fall-fest-page' }
+        segment: { cta: 'university-of-victoria', location: 'fall-fest-page' }
       }
     },
     {
-      image: '/images/events/fall-fest/fall-fest-logo-sq.png',
-      title: 'University 5',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, eligendi! Incidunt sequi vel asperiores quibusdam culpa debitis provident consequatur.',
+      title: 'Universidad Simón Bolívar',
+      image: '/images/events/fall-fest/image24.png',
+      description: 'October 21, 2022',
       cta: {
         label: 'Go to this page',
         url: 'https://coding-club.example-university.edu',
-        segment: { cta: 'university-name', location: 'fall-fest-page' }
+        segment: { cta: 'universidad-simón-bolívar', location: 'fall-fest-page' }
       }
     },
     {
-      image: '/images/events/fall-fest/fall-fest-logo-sq.png',
-      title: 'University 6',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, eligendi! Incidunt sequi vel asperiores quibusdam culpa debitis provident consequatur.',
+      title: 'Coimbatore Institute of Technology, India',
+      image: '/images/events/fall-fest/image41.png',
+      description: 'October 6, 2022',
       cta: {
         label: 'Go to this page',
         url: 'https://coding-club.example-university.edu',
-        segment: { cta: 'university-name', location: 'fall-fest-page' }
+        segment: { cta: 'coimbatore-institute-of-Technology-india', location: 'fall-fest-page' }
       }
     },
     {
-      image: '/images/events/fall-fest/fall-fest-logo-sq.png',
-      title: 'University 7',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, eligendi! Incidunt sequi vel asperiores quibusdam culpa debitis provident consequatur.',
+      title: 'Quantum Fall Fest QColombia',
+      image: '/images/events/fall-fest/image20.png',
+      description: 'October 10, 2022',
       cta: {
         label: 'Go to this page',
         url: 'https://coding-club.example-university.edu',
-        segment: { cta: 'university-name', location: 'fall-fest-page' }
+        segment: { cta: 'quantum-fall-fest-qcolombia', location: 'fall-fest-page' }
       }
     },
     {
-      image: '/images/events/fall-fest/fall-fest-logo-sq.png',
-      title: 'University 8',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, eligendi! Incidunt sequi vel asperiores quibusdam culpa debitis provident consequatur.',
+      title: 'Yale University',
+      image: '/images/events/fall-fest/image31.png',
+      description: 'October 3, 2022',
       cta: {
         label: 'Go to this page',
         url: 'https://coding-club.example-university.edu',
-        segment: { cta: 'university-name', location: 'fall-fest-page' }
+        segment: { cta: 'yale-university', location: 'fall-fest-page' }
       }
     },
     {
-      image: '/images/events/fall-fest/fall-fest-logo-sq.png',
-      title: 'University 9',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, eligendi! Incidunt sequi vel asperiores quibusdam culpa debitis provident consequatur.',
+      title: 'QickStart : A Qiskit Powered Intro to Quantum Computing',
+      image: '/images/events/fall-fest/image12.png',
+      description: 'October 3, 2022',
       cta: {
         label: 'Go to this page',
         url: 'https://coding-club.example-university.edu',
-        segment: { cta: 'university-name', location: 'fall-fest-page' }
+        segment: { cta: 'qickStart-a-qiskit-powered-intro-to-quantum-computing', location: 'fall-fest-page' }
       }
     },
     {
-      image: '/images/events/fall-fest/fall-fest-logo-sq.png',
-      title: 'University 10',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, eligendi! Incidunt sequi vel asperiores quibusdam culpa debitis provident consequatur.',
+      title: 'The University of Hong Kong',
+      image: '/images/events/fall-fest/image26.png',
+      description: 'October 25, 2022',
       cta: {
         label: 'Go to this page',
         url: 'https://coding-club.example-university.edu',
-        segment: { cta: 'university-name', location: 'fall-fest-page' }
+        segment: { cta: 'the-university-of-hong-kong', location: 'fall-fest-page' }
+      }
+    },
+    {
+      title: 'Purdue University',
+      image: '/images/events/fall-fest/image13.png',
+      description: 'September 23, 2022',
+      cta: {
+        label: 'Go to this page',
+        url: 'https://coding-club.example-university.edu',
+        segment: { cta: 'purdue-university', location: 'fall-fest-page' }
+      }
+    },
+    {
+      title: 'Qiskit Fall Fest Kolkata Chapter',
+      image: '/images/events/fall-fest/image11.png',
+      description: 'October 17, 2022',
+      cta: {
+        label: 'Go to this page',
+        url: 'https://coding-club.example-university.edu',
+        segment: { cta: 'qiskit-fall-fest-kolkata-chapter', location: 'fall-fest-page' }
+      }
+    },
+    {
+      title: 'Qiskit Fall Fest Mexico-IPN',
+      image: '/images/events/fall-fest/image22.png',
+      description: 'October 17, 2022',
+      cta: {
+        label: 'Go to this page',
+        url: 'https://coding-club.example-university.edu',
+        segment: { cta: '', location: 'fall-fest-page' }
+      }
+    },
+    {
+      title: 'Case Western Reserve University',
+      image: '/images/events/fall-fest/image40.png',
+      description: 'October 10, 2022',
+      cta: {
+        label: 'Go to this page',
+        url: 'https://coding-club.example-university.edu',
+        segment: { cta: 'qiskit-fall-fest-mexico-ipn', location: 'fall-fest-page' }
+      }
+    },
+    {
+      title: 'Fundamentals of Quantum Computing (Thapar University)',
+      image: '/images/events/fall-fest/image7.png',
+      description: 'October 15, 2022',
+      cta: {
+        label: 'Go to this page',
+        url: 'https://coding-club.example-university.edu',
+        segment: { cta: 'thapar-university', location: 'fall-fest-page' }
+      }
+    },
+    {
+      title: 'Penn State',
+      image: '/images/events/fall-fest/image14.png',
+      description: 'October 22, 2022',
+      cta: {
+        label: 'Go to this page',
+        url: 'https://coding-club.example-university.edu',
+        segment: { cta: 'penn-state', location: 'fall-fest-page' }
+      }
+    },
+    {
+      title: 'Quest - Qiskit Fall Fest, BITS Goa Chapter',
+      image: '/images/events/fall-fest/image21.png',
+      description: 'November 25, 2022',
+      cta: {
+        label: 'Go to this page',
+        url: 'https://coding-club.example-university.edu',
+        segment: { cta: 'quest-qiskit-fall-fest-bits-goa-chapter', location: 'fall-fest-page' }
+      }
+    },
+    {
+      title: 'Indian Institute of Technology Roorkee',
+      image: '/images/events/fall-fest/image16.png',
+      description: 'October 21, 2022',
+      cta: {
+        label: 'Go to this page',
+        url: 'https://coding-club.example-university.edu',
+        segment: { cta: 'indian-institute-of-technology-roorkee', location: 'fall-fest-page' }
+      }
+    },
+    {
+      title: 'Escuela de Computación Cuántica',
+      image: '/images/events/fall-fest/image8.png',
+      description: 'October 17, 2022',
+      cta: {
+        label: 'Go to this page',
+        url: 'https://coding-club.example-university.edu',
+        segment: { cta: 'escuela-de-computación-cuántica', location: 'fall-fest-page' }
+      }
+    },
+    {
+      title: 'University of Santiago de Compostela, Spain',
+      image: '/images/events/fall-fest/image23.png',
+      description: 'October 14, 2022',
+      cta: {
+        label: 'Go to this page',
+        url: 'https://coding-club.example-university.edu',
+        segment: { cta: 'university-of-santiago-de-compostela-spain', location: 'fall-fest-page' }
+      }
+    },
+    {
+      title: 'University of Texas at Austin',
+      image: '/images/events/fall-fest/image28.png',
+      description: 'October 10, 2022',
+      cta: {
+        label: 'Go to this page',
+        url: 'https://coding-club.example-university.edu',
+        segment: { cta: 'university-of-texas-at-austin', location: 'fall-fest-page' }
+      }
+    },
+    {
+      title: 'Izmir Institute of Technology',
+      image: '/images/events/fall-fest/image15.png',
+      description: 'October 28, 2022',
+      cta: {
+        label: 'Go to this page',
+        url: 'https://coding-club.example-university.edu',
+        segment: { cta: 'izmir-institute-of-technology', location: 'fall-fest-page' }
+      }
+    },
+    {
+      title: 'Start innovation hub',
+      image: '/images/events/fall-fest/image17.png',
+      description: 'October 8, 2022',
+      cta: {
+        label: 'Go to this page',
+        url: 'https://coding-club.example-university.edu',
+        segment: { cta: 'start-innovation-hub', location: 'fall-fest-page' }
+      }
+    },
+    {
+      title: 'Quantastica, Fantastica',
+      image: '/images/events/fall-fest/image19.png',
+      description: 'October 22, 2022',
+      cta: {
+        label: 'Go to this page',
+        url: 'https://coding-club.example-university.edu',
+        segment: { cta: 'quantastica-fantastica', location: 'fall-fest-page' }
       }
     }
   ]

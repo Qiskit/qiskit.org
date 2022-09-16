@@ -132,7 +132,7 @@ import {
 })
 export default class FallFestPage extends QiskitPage {
   routeName = 'fall-fest'
-  agendaColumnsDataTable: string[] = ['Day', 'University', 'Type', 'Link']
+  agendaColumnsDataTable: string[] = ['Day', 'University', 'Detail', 'Type of Event', 'Link']
   headerData = header
   agendaData = agenda
   helpfulResourcesData = helpfulResources

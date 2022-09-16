@@ -29,147 +29,189 @@ const header = {
 interface eventSchedule {
   day: string,
   university: string,
+  detail: string,
   type: string,
   url: string
 }
 
-// TODO: get full week 1 schedule from Events team
-const week1Schedule: eventSchedule[] = [
+// TODO: replace URL placeholder w/ event links
+const wave1Schedule: eventSchedule[] = [
   {
-    day: 'Monday, July 18',
-    university: 'Qiskit Global Summer School Kick Off',
-    type: '-',
-    url: 'Lecture'
+    university: 'Purdue University',
+    day: 'September 23, 2022',
+    detail: 'In Person',
+    type: 'Workshop Series, Hackathon',
+    url: '–'
   },
   {
-    day: 'Monday, July 18',
-    university: 'History of Quantum Computing and Motivation for Quantum Simulation',
-    type: 'Olivia Lanes',
-    url: 'Lecture'
+    university: 'Yale University',
+    day: 'October 3, 2022',
+    detail: 'In Person',
+    type: 'Workshop Series, Challenge',
+    url: '–'
   },
   {
-    day: 'Monday, July 18',
-    university: 'Q&A Sessions',
-    type: '-',
-    url: 'Live Q&A'
+    university: 'QickStart : A Qiskit Powered Intro to Quantum Computing',
+    day: 'October 3, 2022',
+    detail: 'In Person',
+    type: 'Challenge, Workshop Series',
+    url: '–'
   },
   {
-    day: 'Tuesday, July 19',
-    university: 'Introduction to Linear Algebra, Prerequisite Mathematics, and Circuit Composition',
-    type: 'Maria Violaris',
-    url: 'Lecture'
+    university: 'Coimbatore Institute of Technology, India',
+    day: 'October 6, 2022',
+    detail: 'Online',
+    type: 'Hackathon, Workshop Series',
+    url: '–'
   },
   {
-    day: 'Tuesday, July 19',
-    university: 'Q&A Sessions',
-    type: '-',
-    url: 'Live Q&A'
-  },
-  {
-    day: 'Wednesday, July 20',
-    university: 'Hamiltonian Time Evolution',
-    type: 'Maria Violaris',
-    url: 'Lecture'
-  },
-  {
-    day: 'Wednesday, July 20',
-    university: 'Q&A Sessions',
-    type: '-',
-    url: 'Live Q&A'
-  },
-  {
-    day: 'Thursday, July 21',
-    university: 'Simulation Problems',
-    type: 'Jeffrey Cohn',
-    url: 'Lecture'
-  },
-  {
-    day: 'Thursday, July 21',
-    university: 'Q&A Sessions',
-    type: '-',
-    url: 'Live Q&A'
-  },
-  {
-    day: 'Friday, July 22',
-    university: 'Noisy Real Hardware - Noise in Quantum Computers',
-    type: 'Zlatko Minev',
-    url: 'Lecture'
-  },
-  {
-    day: 'Friday, July 22',
-    university: 'Q&A Sessions',
-    type: '-',
-    url: 'Live Q&A'
+    university: 'Start innovation hub',
+    day: 'October 8, 2022',
+    detail: 'In Person',
+    type: 'Workshop Series, Hackathon',
+    url: '–'
   }
 ]
 
-// TODO: get full week 2 schedule from Events team
-const week2Schedule: eventSchedule[] = [
+const wave2Schedule: eventSchedule[] = [
   {
-    day: 'Monday, July 25',
-    university: 'Broad Overview of Quantum Chemistry Simulation and Why it is a Challenge',
-    type: 'Panos Barkoutsos',
-    url: 'Lecture'
+    university: 'Quantum Fall Fest QColombia',
+    day: 'October 10, 2022',
+    detail: 'Online',
+    type: 'Workshop Series, Hackathon',
+    url: '–'
   },
   {
-    day: 'Monday, July 25',
-    university: 'Q&A Sessions',
-    type: '-',
-    url: 'Live Q&A'
+    university: 'Case Western Reserve University',
+    day: 'October 10, 2022',
+    detail: 'In Person',
+    type: 'Workshop Series, Hackathon',
+    url: '–'
   },
   {
-    day: 'Tuesday, July 26',
-    university: 'Methods for Quantum Simulation',
-    type: 'Yukio Kawashima',
-    url: 'Lecture'
+    university: 'University of Texas at Austin',
+    day: 'October 10, 2022',
+    detail: 'In Person',
+    type: 'Hackathon, Workshop Series',
+    url: '–'
   },
   {
-    day: 'Tuesday, July 26',
-    university: 'Q&A Sessions',
-    type: '-',
-    url: 'Live Q&A'
+    university: 'Fundamentals of Quantum Computing (Thapar University)',
+    day: 'October 15, 2022',
+    detail: 'In Person',
+    type: 'Challenge',
+    url: '–'
   },
   {
-    day: 'Wednesday, July 27',
-    university: 'Quantum Static Simulation',
-    type: 'Ieva Liepuoniute',
-    url: 'Lecture'
+    university: 'Qiskit Fall Fest Kolkata Chapter',
+    day: 'October 17, 2022',
+    detail: 'Online',
+    type: 'Hackathon, Workshop Series',
+    url: '–'
   },
   {
-    day: 'Wednesday, July 27',
-    university: 'Q&A Sessions',
-    type: '-',
-    url: 'Live Q&A'
+    university: 'Qiskit Fall Fest Mexico-IPN',
+    day: 'October 17, 2022',
+    detail: 'Online',
+    type: 'Hackathon, Challenge, Workshop Series',
+    url: '–'
   },
   {
-    day: 'Thursday, July 28',
-    university: 'Quantum Dynamics',
-    type: 'Alexander Miessen',
-    url: 'Lecture'
+    university: 'Escuela de Computación Cuántica',
+    day: 'October 17, 2022',
+    detail: 'Online',
+    type: 'Hackathon, Challenge, Workshop Series',
+    url: '–'
+  }
+]
+
+const wave3Schedule: eventSchedule[] = [
+  {
+    university: 'University of Santiago de Compostela, Spain',
+    day: 'October 14, 2022',
+    detail: 'In Person',
+    type: 'Workshop Series, Challenge',
+    url: '–'
   },
   {
-    day: 'Thursday, July 28',
-    university: 'Q&A Sessions',
-    type: '-',
-    url: 'Live Q&A'
+    university: 'The Higher National School of Computer Science',
+    day: 'October 21, 2022',
+    detail: 'In Person',
+    type: 'Hackathon, Challenge, Workshop Series',
+    url: '–'
   },
   {
-    day: 'Friday, July 29',
-    university: 'What is Quantum Simulation and Where is the Field Going?',
-    type: '-',
-    url: 'Lecture'
+    university: 'Universidad Simón Bolívar',
+    day: 'October 21, 2022',
+    detail: 'Online',
+    type: 'Hackathon, Challenge',
+    url: '–'
   },
   {
-    day: 'Friday, July 29',
-    university: 'Q&A Sessions',
-    type: '-',
-    url: 'Live Q&A'
+    university: 'Indian Institute of Technology Roorkee',
+    day: 'October 21, 2022',
+    detail: 'In Person',
+    type: 'Hackathon, Challenge',
+    url: '–'
   },
   {
-    day: 'Friday, July 29',
-    university: 'Qiskit Global Summer School 2022 Commencement & Wrap Celebration',
-    type: '-',
-    url: 'Commencement'
+    university: 'Uttar Pradesh',
+    day: 'October 22, 2022',
+    detail: 'Online',
+    type: 'Hackathon, Challenge, Workshop Series',
+    url: '–'
+  },
+  {
+    university: 'University of Victoria',
+    day: 'October 22, 2022',
+    detail: 'Hybrid',
+    type: 'Workshop Series',
+    url: '–'
+  },
+  {
+    university: 'Penn State',
+    day: 'October 22, 2022',
+    detail: 'In Person',
+    type: 'Hackathon, Challenge, Workshop Series',
+    url: '–'
+  },
+  {
+    university: 'Quantastica, Fantastica',
+    day: 'October 22, 2022',
+    detail: 'In Person',
+    type: 'Workshop Series',
+    url: '–'
+  }
+]
+
+const wave4Schedule: eventSchedule[] = [
+  {
+    university: 'The University of Hong Kong',
+    day: 'October 25, 2022',
+    detail: 'In Person',
+    type: 'Challenge, Workshop Series',
+    url: '–'
+  },
+  {
+    university: 'Izmir Institute of Technology',
+    day: 'October 28, 2022',
+    detail: 'In Person',
+    type: 'Hackathon',
+    url: '–'
+  },
+  {
+    university: 'RV PU College',
+    day: 'October 30, 2022',
+    detail: 'In Person',
+    type: 'Workshop Series, Challenge',
+    url: '–'
+  },
+  {
+    university: 'Quest - Qiskit Fall Fest, BITS Goa Chapter',
+    day: 'November 25, 2022',
+    detail: 'In Person',
+    type: 'Workshop Series, Challenge, Hackathon',
+    url: '–'
   }
 ]
 
@@ -181,6 +223,10 @@ const scheduleToTableData = (slot: eventSchedule) => ([
   {
     styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
     data: slot.university
+  },
+  {
+    styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
+    data: slot.detail
   },
   {
     styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
@@ -197,12 +243,20 @@ const agenda = {
   subtitle: '*Schedule subject to change',
   weeks: [
     {
-      tabName: 'Week 1',
-      tableData: week1Schedule.map(scheduleToTableData)
+      tabName: 'Wave 1',
+      tableData: wave1Schedule.map(scheduleToTableData)
     },
     {
-      tabName: 'Week 2',
-      tableData: week2Schedule.map(scheduleToTableData)
+      tabName: 'Wave 2',
+      tableData: wave2Schedule.map(scheduleToTableData)
+    },
+    {
+      tabName: 'Wave 3',
+      tableData: wave3Schedule.map(scheduleToTableData)
+    },
+    {
+      tabName: 'Wave 4',
+      tableData: wave4Schedule.map(scheduleToTableData)
     }
   ]
 }
