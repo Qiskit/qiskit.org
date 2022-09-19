@@ -27,7 +27,8 @@ const header = {
 }
 
 interface eventSchedule {
-  day: string,
+  startDate: string,
+  endDate: string,
   university: string,
   detail: string,
   type: string,
@@ -37,36 +38,49 @@ interface eventSchedule {
 // TODO: replace URL placeholder w/ event links
 const wave1Schedule: eventSchedule[] = [
   {
-    university: 'Purdue University',
-    day: 'September 23, 2022',
-    detail: 'In Person',
-    type: 'Workshop Series, Hackathon',
-    url: '–'
-  },
-  {
-    university: 'Yale University',
-    day: 'October 3, 2022',
+    university: 'RV PU College',
+    startDate: 'September 30, 2022',
+    endDate: 'October 1, 2022',
     detail: 'In Person',
     type: 'Workshop Series, Challenge',
     url: '–'
   },
   {
+    university: 'Yale University',
+    startDate: 'October 3, 2022',
+    endDate: 'October 15, 2022',
+    detail: 'In Person',
+    type: 'Workshop Series, Challenge',
+    url: '–'
+  },
+  {
+    university: 'Purdue University',
+    startDate: 'October 3, 2022',
+    endDate: 'October 31, 2022',
+    detail: 'In Person',
+    type: 'Workshop Series, Hackathon',
+    url: '–'
+  },
+  {
     university: 'QickStart : A Qiskit Powered Intro to Quantum Computing',
-    day: 'October 3, 2022',
+    startDate: 'October 3, 2022',
+    endDate: 'October 13, 2022',
     detail: 'In Person',
     type: 'Challenge, Workshop Series',
     url: '–'
   },
   {
     university: 'Coimbatore Institute of Technology, India',
-    day: 'October 6, 2022',
+    startDate: 'October 6, 2022',
+    endDate: 'October 20, 2022',
     detail: 'Online',
     type: 'Hackathon, Workshop Series',
     url: '–'
   },
   {
-    university: 'Start innovation hub',
-    day: 'October 8, 2022',
+    university: 'Start Innovation hub',
+    startDate: 'October 8, 2022',
+    endDate: 'October 11, 2022',
     detail: 'In Person',
     type: 'Workshop Series, Hackathon',
     url: '–'
@@ -75,50 +89,65 @@ const wave1Schedule: eventSchedule[] = [
 
 const wave2Schedule: eventSchedule[] = [
   {
-    university: 'Quantum Fall Fest QColombia',
-    day: 'October 10, 2022',
-    detail: 'Online',
-    type: 'Workshop Series, Hackathon',
-    url: '–'
-  },
-  {
     university: 'Case Western Reserve University',
-    day: 'October 10, 2022',
+    startDate: 'October 10, 2022',
+    endDate: 'October 15, 2022',
     detail: 'In Person',
     type: 'Workshop Series, Hackathon',
     url: '–'
   },
   {
     university: 'University of Texas at Austin',
-    day: 'October 10, 2022',
+    startDate: 'October 10, 2022',
+    endDate: 'October 17, 2022',
     detail: 'In Person',
     type: 'Hackathon, Workshop Series',
     url: '–'
   },
   {
+    university: 'Quantum Fall Fest QColombia',
+    startDate: 'October 10, 2022',
+    endDate: 'October 18, 2022',
+    detail: 'Online',
+    type: 'Workshop Series, Hackathon',
+    url: '–'
+  },
+  {
+    university: 'University of Chicago',
+    startDate: 'October 10, 2022',
+    endDate: 'October 12, 2022',
+    detail: 'In Person',
+    type: 'Workshop Series',
+    url: '–'
+  },
+  {
     university: 'Fundamentals of Quantum Computing (Thapar University)',
-    day: 'October 15, 2022',
+    startDate: 'October 15, 2022',
+    endDate: 'October 17, 2022',
     detail: 'In Person',
     type: 'Challenge',
     url: '–'
   },
   {
-    university: 'Qiskit Fall Fest Kolkata Chapter',
-    day: 'October 17, 2022',
-    detail: 'Online',
-    type: 'Hackathon, Workshop Series',
-    url: '–'
-  },
-  {
     university: 'Qiskit Fall Fest Mexico-IPN',
-    day: 'October 17, 2022',
+    startDate: 'October 17, 2022',
+    endDate: 'October 27, 2022',
     detail: 'Online',
     type: 'Hackathon, Challenge, Workshop Series',
     url: '–'
   },
   {
+    university: 'Qiskit Fall Fest Kolkata Chapter',
+    startDate: 'October 17, 2022',
+    endDate: 'November 1, 2022',
+    detail: 'Online',
+    type: 'Hackathon, Workshop Series',
+    url: '–'
+  },
+  {
     university: 'Escuela de Computación Cuántica',
-    day: 'October 17, 2022',
+    startDate: 'October 17, 2022',
+    endDate: 'October 24, 2022',
     detail: 'Online',
     type: 'Hackathon, Challenge, Workshop Series',
     url: '–'
@@ -127,58 +156,66 @@ const wave2Schedule: eventSchedule[] = [
 
 const wave3Schedule: eventSchedule[] = [
   {
-    university: 'University of Santiago de Compostela, Spain',
-    day: 'October 14, 2022',
-    detail: 'In Person',
-    type: 'Workshop Series, Challenge',
-    url: '–'
-  },
-  {
     university: 'The Higher National School of Computer Science',
-    day: 'October 21, 2022',
+    startDate: 'October 21, 2022',
+    endDate: 'October 23, 2022',
     detail: 'In Person',
     type: 'Hackathon, Challenge, Workshop Series',
     url: '–'
   },
   {
-    university: 'Universidad Simón Bolívar',
-    day: 'October 21, 2022',
-    detail: 'Online',
-    type: 'Hackathon, Challenge',
-    url: '–'
-  },
-  {
     university: 'Indian Institute of Technology Roorkee',
-    day: 'October 21, 2022',
+    startDate: 'October 21, 2022',
+    endDate: 'October 26, 2022',
     detail: 'In Person',
     type: 'Hackathon, Challenge',
     url: '–'
   },
   {
+    university: 'University of Santiago de Compostela, Spain',
+    startDate: 'October 21, 2022',
+    endDate: 'October 22, 2022',
+    detail: 'In Person',
+    type: 'Workshop Series, Challenge',
+    url: '<a href="https://github.com/wyqian1027/Qiskit-Fall-Fest-USC-2022">Link to event</a>'
+  },
+  {
+    university: 'Universidad Simón Bolívar',
+    startDate: 'October 21, 2022',
+    endDate: 'October 30, 2022',
+    detail: 'Online',
+    type: 'Hackathon, Challenge',
+    url: '–'
+  },
+  {
+    university: 'Penn State',
+    startDate: 'October 22, 2022',
+    endDate: 'October 24, 2022',
+    detail: 'In Person',
+    type: 'Hackathon, Challenge, Workshop Series',
+    url: '–'
+  },
+  {
+    university: 'Quantum Fall Fest TU Wien',
+    startDate: 'October 22, 2022',
+    endDate: 'October 23, 2022',
+    detail: 'In Person',
+    type: 'Workshop Series',
+    url: '–'
+  },
+  {
     university: 'Uttar Pradesh',
-    day: 'October 22, 2022',
+    startDate: 'October 22, 2022',
+    endDate: 'October 25, 2022',
     detail: 'Online',
     type: 'Hackathon, Challenge, Workshop Series',
     url: '–'
   },
   {
     university: 'University of Victoria',
-    day: 'October 22, 2022',
+    startDate: 'October 22, 2022',
+    endDate: 'October 24, 2022',
     detail: 'Hybrid',
-    type: 'Workshop Series',
-    url: '–'
-  },
-  {
-    university: 'Penn State',
-    day: 'October 22, 2022',
-    detail: 'In Person',
-    type: 'Hackathon, Challenge, Workshop Series',
-    url: '–'
-  },
-  {
-    university: 'Quantastica, Fantastica',
-    day: 'October 22, 2022',
-    detail: 'In Person',
     type: 'Workshop Series',
     url: '–'
   }
@@ -187,45 +224,61 @@ const wave3Schedule: eventSchedule[] = [
 const wave4Schedule: eventSchedule[] = [
   {
     university: 'The University of Hong Kong',
-    day: 'October 25, 2022',
+    startDate: 'October 25, 2022',
+    endDate: 'October 26, 2022',
     detail: 'In Person',
     type: 'Challenge, Workshop Series',
     url: '–'
   },
   {
+    university: 'Princeton Univeristy',
+    startDate: 'October 28, 2022',
+    endDate: 'October 31, 2022',
+    detail: 'In Person',
+    type: 'Challenge',
+    url: '–'
+  },
+  {
     university: 'Izmir Institute of Technology',
-    day: 'October 28, 2022',
+    startDate: 'October 28, 2022',
+    endDate: 'October 31, 2022',
     detail: 'In Person',
     type: 'Hackathon',
     url: '–'
   },
   {
-    university: 'RV PU College',
-    day: 'October 30, 2022',
+    university: 'AUC (American University in Cairo)',
+    startDate: 'October 28, 2022',
+    endDate: 'October 31, 2022',
     detail: 'In Person',
-    type: 'Workshop Series, Challenge',
+    type: 'Workshop Series, Hackathon, Challenge',
     url: '–'
   },
   {
     university: 'Quest - Qiskit Fall Fest, BITS Goa Chapter',
-    day: 'November 25, 2022',
+    startDate: 'November 25, 2022',
+    endDate: 'November 28, 2022',
     detail: 'In Person',
-    type: 'Workshop Series, Challenge, Hackathon',
+    type: 'Workshop Series, Hackathon, Challenge',
     url: '–'
   }
 ]
 
 const scheduleToTableData = (slot: eventSchedule) => ([
   {
-    styles: 'min-width: 10rem; display: inline-block; font-weight: bold;',
-    data: slot.day
+    styles: 'min-width: 9rem; display: inline-block; font-weight: bold;',
+    data: slot.startDate
+  },
+  {
+    styles: 'min-width: 9rem; display: inline-block; font-weight: bold;',
+    data: slot.endDate
   },
   {
     styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
     data: slot.university
   },
   {
-    styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
+    styles: 'min-width: 8rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
     data: slot.detail
   },
   {

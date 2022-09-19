@@ -8,7 +8,7 @@
       <div class="bx--col-xlg-12 bx--col-lg-12">
         <div class="bx--row">
           <div
-            v-for="{ image, title, date, cta, detail } in universities"
+            v-for="{ image, title, startDate, cta, detail } in universities"
             :key="title"
             class="bx--col-xlg-8"
           >
@@ -22,7 +22,7 @@
               :description-whole-size="true"
             >
               <p>
-                {{ date }}
+                {{ startDate }}
                 <!-- eslint-disable-next-line vue/html-self-closing -->
                 <br />
                 {{ detail }}
@@ -44,7 +44,7 @@ type University = {
   image: string,
   title: string,
   detail: string,
-  date: string,
+  startDate: string,
   cta: GeneralLink
 }
 
@@ -54,7 +54,7 @@ export default class UniversityDirectorySection extends Vue {
     {
       title: 'Uttar Pradesh',
       image: '/images/events/fall-fest/image30.png',
-      date: 'October 22, 2022',
+      startDate: 'October 22, 2022',
       detail: 'Online',
       cta: {
         label: 'Learn more here',
@@ -65,7 +65,7 @@ export default class UniversityDirectorySection extends Vue {
     {
       title: 'The Higher National School of Computer Science',
       image: '/images/events/fall-fest/image27.png',
-      date: 'October 21, 2022',
+      startDate: 'October 21, 2022',
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
@@ -76,7 +76,7 @@ export default class UniversityDirectorySection extends Vue {
     {
       title: 'RV PU College',
       image: '/images/events/fall-fest/image18.png',
-      date: 'October 30, 2022',
+      startDate: 'October 30, 2022',
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
@@ -87,7 +87,7 @@ export default class UniversityDirectorySection extends Vue {
     {
       title: 'University of Victoria',
       image: '/images/events/fall-fest/image29.png',
-      date: 'October 22, 2022',
+      startDate: 'October 22, 2022',
       detail: 'Hybrid',
       cta: {
         label: 'Learn more here',
@@ -98,7 +98,7 @@ export default class UniversityDirectorySection extends Vue {
     {
       title: 'Universidad Simón Bolívar',
       image: '/images/events/fall-fest/image24.png',
-      date: 'October 21, 2022',
+      startDate: 'October 21, 2022',
       detail: 'Online',
       cta: {
         label: 'Learn more here',
@@ -109,7 +109,7 @@ export default class UniversityDirectorySection extends Vue {
     {
       title: 'Coimbatore Institute of Technology, India',
       image: '/images/events/fall-fest/image41.png',
-      date: 'October 6, 2022',
+      startDate: 'October 6, 2022',
       detail: 'Online',
       cta: {
         label: 'Learn more here',
@@ -120,7 +120,7 @@ export default class UniversityDirectorySection extends Vue {
     {
       title: 'Quantum Fall Fest QColombia',
       image: '/images/events/fall-fest/image20.png',
-      date: 'October 10, 2022',
+      startDate: 'October 10, 2022',
       detail: 'Online',
       cta: {
         label: 'Learn more here',
@@ -131,7 +131,7 @@ export default class UniversityDirectorySection extends Vue {
     {
       title: 'Yale University',
       image: '/images/events/fall-fest/image31.png',
-      date: 'October 3, 2022',
+      startDate: 'October 3, 2022',
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
@@ -142,7 +142,7 @@ export default class UniversityDirectorySection extends Vue {
     {
       title: 'QickStart : A Qiskit Powered Intro to Quantum Computing',
       image: '/images/events/fall-fest/image12.png',
-      date: 'October 3, 2022',
+      startDate: 'October 3, 2022',
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
@@ -153,7 +153,7 @@ export default class UniversityDirectorySection extends Vue {
     {
       title: 'The University of Hong Kong',
       image: '/images/events/fall-fest/image26.png',
-      date: 'October 25, 2022',
+      startDate: 'October 25, 2022',
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
@@ -164,7 +164,7 @@ export default class UniversityDirectorySection extends Vue {
     {
       title: 'Purdue University',
       image: '/images/events/fall-fest/image13.png',
-      date: 'September 23, 2022',
+      startDate: 'September 23, 2022',
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
@@ -175,7 +175,7 @@ export default class UniversityDirectorySection extends Vue {
     {
       title: 'Qiskit Fall Fest Kolkata Chapter',
       image: '/images/events/fall-fest/image11.png',
-      date: 'October 17, 2022',
+      startDate: 'October 17, 2022',
       detail: 'Online',
       cta: {
         label: 'Learn more here',
@@ -186,7 +186,7 @@ export default class UniversityDirectorySection extends Vue {
     {
       title: 'Qiskit Fall Fest Mexico-IPN',
       image: '/images/events/fall-fest/image22.png',
-      date: 'October 17, 2022',
+      startDate: 'October 17, 2022',
       detail: 'Online',
       cta: {
         label: 'Learn more here',
@@ -197,7 +197,7 @@ export default class UniversityDirectorySection extends Vue {
     {
       title: 'Case Western Reserve University',
       image: '/images/events/fall-fest/image40.png',
-      date: 'October 10, 2022',
+      startDate: 'October 10, 2022',
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
@@ -208,7 +208,7 @@ export default class UniversityDirectorySection extends Vue {
     {
       title: 'Fundamentals of Quantum Computing (Thapar University)',
       image: '/images/events/fall-fest/image7.png',
-      date: 'October 15, 2022',
+      startDate: 'October 15, 2022',
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
@@ -219,7 +219,7 @@ export default class UniversityDirectorySection extends Vue {
     {
       title: 'Penn State',
       image: '/images/events/fall-fest/image14.png',
-      date: 'October 22, 2022',
+      startDate: 'October 22, 2022',
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
@@ -230,7 +230,7 @@ export default class UniversityDirectorySection extends Vue {
     {
       title: 'Quest - Qiskit Fall Fest, BITS Goa Chapter',
       image: '/images/events/fall-fest/image21.png',
-      date: 'November 25, 2022',
+      startDate: 'November 25, 2022',
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
@@ -241,7 +241,7 @@ export default class UniversityDirectorySection extends Vue {
     {
       title: 'Indian Institute of Technology Roorkee',
       image: '/images/events/fall-fest/image16.png',
-      date: 'October 21, 2022',
+      startDate: 'October 21, 2022',
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
@@ -252,7 +252,7 @@ export default class UniversityDirectorySection extends Vue {
     {
       title: 'Escuela de Computación Cuántica',
       image: '/images/events/fall-fest/image8.png',
-      date: 'October 17, 2022',
+      startDate: 'October 17, 2022',
       detail: 'Online',
       cta: {
         label: 'Learn more here',
@@ -263,7 +263,7 @@ export default class UniversityDirectorySection extends Vue {
     {
       title: 'University of Santiago de Compostela, Spain',
       image: '/images/events/fall-fest/image23.png',
-      date: 'October 14, 2022',
+      startDate: 'October 14, 2022',
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
@@ -274,7 +274,7 @@ export default class UniversityDirectorySection extends Vue {
     {
       title: 'University of Texas at Austin',
       image: '/images/events/fall-fest/image28.png',
-      date: 'October 10, 2022',
+      startDate: 'October 10, 2022',
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
@@ -285,7 +285,7 @@ export default class UniversityDirectorySection extends Vue {
     {
       title: 'Izmir Institute of Technology',
       image: '/images/events/fall-fest/image15.png',
-      date: 'October 28, 2022',
+      startDate: 'October 28, 2022',
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
@@ -296,7 +296,7 @@ export default class UniversityDirectorySection extends Vue {
     {
       title: 'Start innovation hub',
       image: '/images/events/fall-fest/image17.png',
-      date: 'October 8, 2022',
+      startDate: 'October 8, 2022',
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
@@ -307,7 +307,7 @@ export default class UniversityDirectorySection extends Vue {
     {
       title: 'Quantastica, Fantastica',
       image: '/images/events/fall-fest/image19.png',
-      date: 'October 22, 2022',
+      startDate: 'October 22, 2022',
       detail: 'Online',
       cta: {
         label: 'Learn more here',

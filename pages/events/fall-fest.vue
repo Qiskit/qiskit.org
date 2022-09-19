@@ -43,7 +43,8 @@
             >
               <cv-data-table-row v-for="(row, rowIndex) in week.tableData" :key="`${rowIndex}`">
                 <cv-data-table-cell v-for="({styles, data}, elementIndex) in row" :key="`${elementIndex}`">
-                  <span :style="styles">{{ data }}</span>
+                  <!-- eslint-disable-next-line vue/no-v-html -->
+                  <span :style="styles" v-html="data" />
                 </cv-data-table-cell>
               </cv-data-table-row>
             </AppDataTable>
@@ -132,7 +133,7 @@ import {
 })
 export default class FallFestPage extends QiskitPage {
   routeName = 'fall-fest'
-  agendaColumnsDataTable: string[] = ['Day', 'University', 'Detail', 'Type of Event', 'Link']
+  agendaColumnsDataTable: string[] = ['Start Date', 'End Date', 'University', 'Detail', 'Type of Event', 'Link']
   headerData = header
   agendaData = agenda
   helpfulResourcesData = helpfulResources
