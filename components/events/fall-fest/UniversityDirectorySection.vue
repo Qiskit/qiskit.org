@@ -53,7 +53,7 @@ export default class UniversityDirectorySection extends Vue {
   universities: University[] = [
     {
       title: 'Uttar Pradesh',
-      image: '/images/events/fall-fest/image30.png',
+      image: '/images/events/fall-fest/agra.png',
       startDate: 'October 22, 2022',
       detail: 'Online',
       cta: {
@@ -64,7 +64,7 @@ export default class UniversityDirectorySection extends Vue {
     },
     {
       title: 'The Higher National School of Computer Science',
-      image: '/images/events/fall-fest/image27.png',
+      image: '/images/events/fall-fest/algiers.png',
       startDate: 'October 21, 2022',
       detail: 'In Person',
       cta: {
@@ -75,7 +75,7 @@ export default class UniversityDirectorySection extends Vue {
     },
     {
       title: 'RV PU College',
-      image: '/images/events/fall-fest/image18.png',
+      image: '/images/events/fall-fest/bengalaru.png',
       startDate: 'October 30, 2022',
       detail: 'In Person',
       cta: {
@@ -86,7 +86,7 @@ export default class UniversityDirectorySection extends Vue {
     },
     {
       title: 'University of Victoria',
-      image: '/images/events/fall-fest/image29.png',
+      image: '/images/events/fall-fest/british_columbia.png',
       startDate: 'October 22, 2022',
       detail: 'Hybrid',
       cta: {
@@ -97,7 +97,7 @@ export default class UniversityDirectorySection extends Vue {
     },
     {
       title: 'Universidad Simón Bolívar',
-      image: '/images/events/fall-fest/image24.png',
+      image: '/images/events/fall-fest/caracas.png',
       startDate: 'October 21, 2022',
       detail: 'Online',
       cta: {
@@ -108,7 +108,7 @@ export default class UniversityDirectorySection extends Vue {
     },
     {
       title: 'Coimbatore Institute of Technology, India',
-      image: '/images/events/fall-fest/image41.png',
+      image: '/images/events/fall-fest/coimbatore.png',
       startDate: 'October 6, 2022',
       detail: 'Online',
       cta: {
@@ -119,7 +119,7 @@ export default class UniversityDirectorySection extends Vue {
     },
     {
       title: 'Quantum Fall Fest QColombia',
-      image: '/images/events/fall-fest/image20.png',
+      image: '/images/events/fall-fest/colombia.png',
       startDate: 'October 10, 2022',
       detail: 'Online',
       cta: {
@@ -130,7 +130,7 @@ export default class UniversityDirectorySection extends Vue {
     },
     {
       title: 'Yale University',
-      image: '/images/events/fall-fest/image31.png',
+      image: '/images/events/fall-fest/connecticut.png',
       startDate: 'October 3, 2022',
       detail: 'In Person',
       cta: {
@@ -141,18 +141,18 @@ export default class UniversityDirectorySection extends Vue {
     },
     {
       title: 'QickStart : A Qiskit Powered Intro to Quantum Computing',
-      image: '/images/events/fall-fest/image12.png',
+      image: '/images/events/fall-fest/delhi.png',
       startDate: 'October 3, 2022',
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
         url: 'https://coding-club.example-university.edu',
-        segment: { cta: 'qickStart-a-qiskit-powered-intro-to-quantum-computing', location: 'fall-fest-page' }
+        segment: { cta: 'qickstart-a-qiskit-powered-intro-to-quantum-computing', location: 'fall-fest-page' }
       }
     },
     {
       title: 'The University of Hong Kong',
-      image: '/images/events/fall-fest/image26.png',
+      image: '/images/events/fall-fest/hong_kong.png',
       startDate: 'October 25, 2022',
       detail: 'In Person',
       cta: {
@@ -163,7 +163,7 @@ export default class UniversityDirectorySection extends Vue {
     },
     {
       title: 'Purdue University',
-      image: '/images/events/fall-fest/image13.png',
+      image: '/images/events/fall-fest/indiana.png',
       startDate: 'September 23, 2022',
       detail: 'In Person',
       cta: {
@@ -174,7 +174,7 @@ export default class UniversityDirectorySection extends Vue {
     },
     {
       title: 'Qiskit Fall Fest Kolkata Chapter',
-      image: '/images/events/fall-fest/image11.png',
+      image: '/images/events/fall-fest/kolkata.png',
       startDate: 'October 17, 2022',
       detail: 'Online',
       cta: {
@@ -185,18 +185,18 @@ export default class UniversityDirectorySection extends Vue {
     },
     {
       title: 'Qiskit Fall Fest Mexico-IPN',
-      image: '/images/events/fall-fest/image22.png',
+      image: '/images/events/fall-fest/mexico_city.png',
       startDate: 'October 17, 2022',
       detail: 'Online',
       cta: {
         label: 'Learn more here',
         url: 'https://coding-club.example-university.edu',
-        segment: { cta: '', location: 'fall-fest-page' }
+        segment: { cta: 'qiskit-fall-fest-mexico-ipn', location: 'fall-fest-page' }
       }
     },
     {
       title: 'Case Western Reserve University',
-      image: '/images/events/fall-fest/image40.png',
+      image: '/images/events/fall-fest/ohio.png',
       startDate: 'October 10, 2022',
       detail: 'In Person',
       cta: {
@@ -206,8 +206,19 @@ export default class UniversityDirectorySection extends Vue {
       }
     },
     {
+      title: 'University of Chicago',
+      image: '/images/events/fall-fest/illinois.png',
+      startDate: 'October 10, 2022',
+      detail: 'In Person',
+      cta: {
+        label: 'Learn more here',
+        url: 'https://coding-club.example-university.edu',
+        segment: { cta: 'university-of-chicago', location: 'fall-fest-page' }
+      }
+    },
+    {
       title: 'Fundamentals of Quantum Computing (Thapar University)',
-      image: '/images/events/fall-fest/image7.png',
+      image: '/images/events/fall-fest/patiala.png',
       startDate: 'October 15, 2022',
       detail: 'In Person',
       cta: {
@@ -218,7 +229,7 @@ export default class UniversityDirectorySection extends Vue {
     },
     {
       title: 'Penn State',
-      image: '/images/events/fall-fest/image14.png',
+      image: '/images/events/fall-fest/pennsylvania.png',
       startDate: 'October 22, 2022',
       detail: 'In Person',
       cta: {
@@ -229,7 +240,7 @@ export default class UniversityDirectorySection extends Vue {
     },
     {
       title: 'Quest - Qiskit Fall Fest, BITS Goa Chapter',
-      image: '/images/events/fall-fest/image21.png',
+      image: '/images/events/fall-fest/pilani.png',
       startDate: 'November 25, 2022',
       detail: 'In Person',
       cta: {
@@ -240,7 +251,7 @@ export default class UniversityDirectorySection extends Vue {
     },
     {
       title: 'Indian Institute of Technology Roorkee',
-      image: '/images/events/fall-fest/image16.png',
+      image: '/images/events/fall-fest/roorkee.png',
       startDate: 'October 21, 2022',
       detail: 'In Person',
       cta: {
@@ -251,7 +262,7 @@ export default class UniversityDirectorySection extends Vue {
     },
     {
       title: 'Escuela de Computación Cuántica',
-      image: '/images/events/fall-fest/image8.png',
+      image: '/images/events/fall-fest/lima.png',
       startDate: 'October 17, 2022',
       detail: 'Online',
       cta: {
@@ -261,8 +272,19 @@ export default class UniversityDirectorySection extends Vue {
       }
     },
     {
+      title: 'Princeton University',
+      image: '/images/events/fall-fest/new_jersey.png',
+      startDate: 'October 28, 2022',
+      detail: 'In Person',
+      cta: {
+        label: 'Learn more here',
+        url: 'https://coding-club.example-university.edu',
+        segment: { cta: 'princeton-university', location: 'fall-fest-page' }
+      }
+    },
+    {
       title: 'University of Santiago de Compostela, Spain',
-      image: '/images/events/fall-fest/image23.png',
+      image: '/images/events/fall-fest/santiago.png',
       startDate: 'October 14, 2022',
       detail: 'In Person',
       cta: {
@@ -273,7 +295,7 @@ export default class UniversityDirectorySection extends Vue {
     },
     {
       title: 'University of Texas at Austin',
-      image: '/images/events/fall-fest/image28.png',
+      image: '/images/events/fall-fest/texas.png',
       startDate: 'October 10, 2022',
       detail: 'In Person',
       cta: {
@@ -284,7 +306,7 @@ export default class UniversityDirectorySection extends Vue {
     },
     {
       title: 'Izmir Institute of Technology',
-      image: '/images/events/fall-fest/image15.png',
+      image: '/images/events/fall-fest/urla.png',
       startDate: 'October 28, 2022',
       detail: 'In Person',
       cta: {
@@ -294,8 +316,8 @@ export default class UniversityDirectorySection extends Vue {
       }
     },
     {
-      title: 'Start innovation hub',
-      image: '/images/events/fall-fest/image17.png',
+      title: 'Start Innovation hub',
+      image: '/images/events/fall-fest/uyo.png',
       startDate: 'October 8, 2022',
       detail: 'In Person',
       cta: {
@@ -305,14 +327,14 @@ export default class UniversityDirectorySection extends Vue {
       }
     },
     {
-      title: 'Quantastica, Fantastica',
-      image: '/images/events/fall-fest/image19.png',
+      title: 'Quantum Fall Fest TU Wien',
+      image: '/images/events/fall-fest/vienna.png',
       startDate: 'October 22, 2022',
       detail: 'Online',
       cta: {
         label: 'Learn more here',
         url: 'https://coding-club.example-university.edu',
-        segment: { cta: 'quantastica-fantastica', location: 'fall-fest-page' }
+        segment: { cta: 'quantum-fall-fest-tu-wien', location: 'fall-fest-page' }
       }
     }
   ]

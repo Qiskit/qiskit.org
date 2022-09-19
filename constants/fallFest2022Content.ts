@@ -177,7 +177,7 @@ const wave3Schedule: eventSchedule[] = [
     endDate: 'October 22, 2022',
     detail: 'In Person',
     type: 'Workshop Series, Challenge',
-    url: '<a href="https://github.com/wyqian1027/Qiskit-Fall-Fest-USC-2022">Link to event</a>'
+    url: '<a href="https://github.com/wyqian1027/Qiskit-Fall-Fest-USC-2022" target="_blank">Link to event</a>'
   },
   {
     university: 'Universidad Simón Bolívar',
