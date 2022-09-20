@@ -25,4 +25,8 @@ export default class DefaultLayout extends Vue {
 .main-container {
   margin-top: 3.5rem;
 }
+
+qiskit-ui-shell {
+  --header-content-max-width: 96rem;
+}
 </style>
