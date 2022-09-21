@@ -96,6 +96,39 @@ export default class UniversityDirectorySection extends Vue {
       }
     },
     {
+      title: 'AUC (American University in Cairo)',
+      image: '/images/events/fall-fest/cairo.png',
+      startDate: 'October 28, 2022',
+      detail: 'In Person',
+      cta: {
+        label: 'Learn more here',
+        url: 'https://coding-club.example-university.edu',
+        segment: { cta: 'american-university-in-cairo', location: 'fall-fest-page' }
+      }
+    },
+    {
+      title: 'UCLA',
+      image: '/images/events/fall-fest/california.png',
+      startDate: 'October 31, 2022',
+      detail: 'Online',
+      cta: {
+        label: 'Learn more here',
+        url: 'https://coding-club.example-university.edu',
+        segment: { cta: 'university-california-los-angeles', location: 'fall-fest-page' }
+      }
+    },
+    {
+      title: 'University of California, Irvine',
+      image: '/images/events/fall-fest/california.png',
+      startDate: 'October 28, 2022',
+      detail: 'In Person',
+      cta: {
+        label: 'Learn more here',
+        url: 'https://coding-club.example-university.edu',
+        segment: { cta: 'university-california-irvine', location: 'fall-fest-page' }
+      }
+    },
+    {
       title: 'Universidad Simón Bolívar',
       image: '/images/events/fall-fest/caracas.png',
       startDate: 'October 21, 2022',
@@ -135,7 +168,7 @@ export default class UniversityDirectorySection extends Vue {
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
-        url: 'https://coding-club.example-university.edu',
+        url: 'https://yaleqc.com/categories/events/',
         segment: { cta: 'yale-university', location: 'fall-fest-page' }
       }
     },
@@ -164,11 +197,11 @@ export default class UniversityDirectorySection extends Vue {
     {
       title: 'Purdue University',
       image: '/images/events/fall-fest/indiana.png',
-      startDate: 'September 23, 2022',
+      startDate: 'October 3, 2022',
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
-        url: 'https://coding-club.example-university.edu',
+        url: 'https://github.com/purduequaic/qiskit-fall-fest-22',
         segment: { cta: 'purdue-university', location: 'fall-fest-page' }
       }
     },
@@ -256,7 +289,7 @@ export default class UniversityDirectorySection extends Vue {
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
-        url: 'https://coding-club.example-university.edu',
+        url: 'https://github.com/qcgiitr/iitr-fall-fest-22',
         segment: { cta: 'indian-institute-of-technology-roorkee', location: 'fall-fest-page' }
       }
     },
@@ -285,11 +318,11 @@ export default class UniversityDirectorySection extends Vue {
     {
       title: 'University of Santiago de Compostela, Spain',
       image: '/images/events/fall-fest/santiago.png',
-      startDate: 'October 14, 2022',
+      startDate: 'October 21, 2022',
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
-        url: 'https://coding-club.example-university.edu',
+        url: 'https://github.com/wyqian1027/Qiskit-Fall-Fest-USC-2022',
         segment: { cta: 'university-of-santiago-de-compostela-spain', location: 'fall-fest-page' }
       }
     },
@@ -322,7 +355,7 @@ export default class UniversityDirectorySection extends Vue {
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
-        url: 'https://coding-club.example-university.edu',
+        url: 'https://twitter.com/Q_affinity',
         segment: { cta: 'start-innovation-hub', location: 'fall-fest-page' }
       }
     },

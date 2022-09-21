@@ -39,8 +39,8 @@ interface eventSchedule {
 const wave1Schedule: eventSchedule[] = [
   {
     university: 'RV PU College',
-    startDate: 'September 30, 2022',
-    endDate: 'October 1, 2022',
+    startDate: 'October 30, 2022',
+    endDate: 'October 31, 2022',
     detail: 'In Person',
     type: 'Workshop Series, Challenge',
     url: '–'
@@ -51,15 +51,15 @@ const wave1Schedule: eventSchedule[] = [
     endDate: 'October 15, 2022',
     detail: 'In Person',
     type: 'Workshop Series, Challenge',
-    url: '–'
+    url: '<a href="https://yaleqc.com/categories/events/" target="_blank">Link to event</a>'
   },
   {
     university: 'Purdue University',
     startDate: 'October 3, 2022',
-    endDate: 'October 31, 2022',
+    endDate: 'October 23, 2022',
     detail: 'In Person',
     type: 'Workshop Series, Hackathon',
-    url: '–'
+    url: '<a href="https://github.com/purduequaic/qiskit-fall-fest-22" target="_blank">Link to event</a>'
   },
   {
     university: 'QickStart : A Qiskit Powered Intro to Quantum Computing',
@@ -83,7 +83,7 @@ const wave1Schedule: eventSchedule[] = [
     endDate: 'October 11, 2022',
     detail: 'In Person',
     type: 'Workshop Series, Hackathon',
-    url: '–'
+    url: '<a href="https://twitter.com/Q_affinity" target="_blank">Link to event</a>'
   }
 ]
 
@@ -150,7 +150,7 @@ const wave2Schedule: eventSchedule[] = [
     endDate: 'October 24, 2022',
     detail: 'Online',
     type: 'Hackathon, Challenge, Workshop Series',
-    url: '–'
+    url: '<a href="https://pythonclubforphysicists.notion.site/pythonclubforphysicists/Primera-Escuela-de-Computaci-n-Cu-ntica-af219f239f90418b900cba004e27c789" target="_blank">Link to event</a>'
   }
 ]
 
@@ -169,7 +169,7 @@ const wave3Schedule: eventSchedule[] = [
     endDate: 'October 26, 2022',
     detail: 'In Person',
     type: 'Hackathon, Challenge',
-    url: '–'
+    url: '<a href="https://github.com/qcgiitr/iitr-fall-fest-22" target="_blank">Link to event</a>'
   },
   {
     university: 'University of Santiago de Compostela, Spain',
@@ -260,6 +260,22 @@ const wave4Schedule: eventSchedule[] = [
     endDate: 'November 28, 2022',
     detail: 'In Person',
     type: 'Workshop Series, Hackathon, Challenge',
+    url: '–'
+  },
+  {
+    university: 'UCLA',
+    startDate: 'October 31, 2022',
+    endDate: 'November 10, 2022',
+    detail: 'Online',
+    type: 'Hackathon',
+    url: '–'
+  },
+  {
+    university: 'Univeristy of California, Irvine',
+    startDate: 'October 28, 2022',
+    endDate: 'October 29, 2022',
+    detail: 'In Person',
+    type: 'Challenge, Workshop Series',
     url: '–'
   }
 ]
