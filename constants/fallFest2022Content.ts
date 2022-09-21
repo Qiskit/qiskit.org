@@ -43,7 +43,7 @@ const wave1Schedule: eventSchedule[] = [
     endDate: 'October 31, 2022',
     detail: 'In Person',
     type: 'Workshop Series, Challenge',
-    url: '–'
+    url: ''
   },
   {
     university: 'Yale University',
@@ -67,7 +67,7 @@ const wave1Schedule: eventSchedule[] = [
     endDate: 'October 13, 2022',
     detail: 'In Person',
     type: 'Challenge, Workshop Series',
-    url: '–'
+    url: ''
   },
   {
     university: 'Coimbatore Institute of Technology, India',
@@ -75,7 +75,7 @@ const wave1Schedule: eventSchedule[] = [
     endDate: 'October 20, 2022',
     detail: 'Online',
     type: 'Hackathon, Workshop Series',
-    url: '–'
+    url: ''
   },
   {
     university: 'Start Innovation hub',
@@ -94,7 +94,7 @@ const wave2Schedule: eventSchedule[] = [
     endDate: 'October 15, 2022',
     detail: 'In Person',
     type: 'Workshop Series, Hackathon',
-    url: '–'
+    url: ''
   },
   {
     university: 'University of Texas at Austin',
@@ -102,7 +102,7 @@ const wave2Schedule: eventSchedule[] = [
     endDate: 'October 17, 2022',
     detail: 'In Person',
     type: 'Hackathon, Workshop Series',
-    url: '–'
+    url: ''
   },
   {
     university: 'Quantum Fall Fest QColombia',
@@ -110,7 +110,7 @@ const wave2Schedule: eventSchedule[] = [
     endDate: 'October 18, 2022',
     detail: 'Online',
     type: 'Workshop Series, Hackathon',
-    url: '–'
+    url: ''
   },
   {
     university: 'University of Chicago',
@@ -118,7 +118,7 @@ const wave2Schedule: eventSchedule[] = [
     endDate: 'October 12, 2022',
     detail: 'In Person',
     type: 'Workshop Series',
-    url: '–'
+    url: ''
   },
   {
     university: 'Fundamentals of Quantum Computing (Thapar University)',
@@ -126,7 +126,7 @@ const wave2Schedule: eventSchedule[] = [
     endDate: 'October 17, 2022',
     detail: 'In Person',
     type: 'Challenge',
-    url: '–'
+    url: ''
   },
   {
     university: 'Qiskit Fall Fest Mexico-IPN',
@@ -134,7 +134,7 @@ const wave2Schedule: eventSchedule[] = [
     endDate: 'October 27, 2022',
     detail: 'Online',
     type: 'Hackathon, Challenge, Workshop Series',
-    url: '–'
+    url: ''
   },
   {
     university: 'Qiskit Fall Fest Kolkata Chapter',
@@ -142,7 +142,7 @@ const wave2Schedule: eventSchedule[] = [
     endDate: 'November 1, 2022',
     detail: 'Online',
     type: 'Hackathon, Workshop Series',
-    url: '–'
+    url: ''
   },
   {
     university: 'Escuela de Computación Cuántica',
@@ -161,7 +161,7 @@ const wave3Schedule: eventSchedule[] = [
     endDate: 'October 23, 2022',
     detail: 'In Person',
     type: 'Hackathon, Challenge, Workshop Series',
-    url: '–'
+    url: ''
   },
   {
     university: 'Indian Institute of Technology Roorkee',
@@ -185,7 +185,7 @@ const wave3Schedule: eventSchedule[] = [
     endDate: 'October 30, 2022',
     detail: 'Online',
     type: 'Hackathon, Challenge',
-    url: '–'
+    url: ''
   },
   {
     university: 'Penn State',
@@ -193,7 +193,7 @@ const wave3Schedule: eventSchedule[] = [
     endDate: 'October 24, 2022',
     detail: 'In Person',
     type: 'Hackathon, Challenge, Workshop Series',
-    url: '–'
+    url: ''
   },
   {
     university: 'Quantum Fall Fest TU Wien',
@@ -201,7 +201,7 @@ const wave3Schedule: eventSchedule[] = [
     endDate: 'October 23, 2022',
     detail: 'In Person',
     type: 'Workshop Series',
-    url: '–'
+    url: ''
   },
   {
     university: 'Uttar Pradesh',
@@ -209,7 +209,7 @@ const wave3Schedule: eventSchedule[] = [
     endDate: 'October 25, 2022',
     detail: 'Online',
     type: 'Hackathon, Challenge, Workshop Series',
-    url: '–'
+    url: ''
   },
   {
     university: 'University of Victoria',
@@ -217,7 +217,7 @@ const wave3Schedule: eventSchedule[] = [
     endDate: 'October 24, 2022',
     detail: 'Hybrid',
     type: 'Workshop Series',
-    url: '–'
+    url: ''
   }
 ]
 
@@ -228,7 +228,7 @@ const wave4Schedule: eventSchedule[] = [
     endDate: 'October 26, 2022',
     detail: 'In Person',
     type: 'Challenge, Workshop Series',
-    url: '–'
+    url: ''
   },
   {
     university: 'Princeton Univeristy',
@@ -236,7 +236,7 @@ const wave4Schedule: eventSchedule[] = [
     endDate: 'October 31, 2022',
     detail: 'In Person',
     type: 'Challenge',
-    url: '–'
+    url: ''
   },
   {
     university: 'Izmir Institute of Technology',
@@ -244,7 +244,7 @@ const wave4Schedule: eventSchedule[] = [
     endDate: 'October 31, 2022',
     detail: 'In Person',
     type: 'Hackathon',
-    url: '–'
+    url: ''
   },
   {
     university: 'AUC (American University in Cairo)',
@@ -252,7 +252,7 @@ const wave4Schedule: eventSchedule[] = [
     endDate: 'October 31, 2022',
     detail: 'In Person',
     type: 'Workshop Series, Hackathon, Challenge',
-    url: '–'
+    url: ''
   },
   {
     university: 'Quest - Qiskit Fall Fest, BITS Goa Chapter',
@@ -260,7 +260,7 @@ const wave4Schedule: eventSchedule[] = [
     endDate: 'November 28, 2022',
     detail: 'In Person',
     type: 'Workshop Series, Hackathon, Challenge',
-    url: '–'
+    url: ''
   },
   {
     university: 'UCLA',
@@ -268,7 +268,7 @@ const wave4Schedule: eventSchedule[] = [
     endDate: 'November 10, 2022',
     detail: 'Online',
     type: 'Hackathon',
-    url: '–'
+    url: ''
   },
   {
     university: 'Univeristy of California, Irvine',
@@ -276,7 +276,7 @@ const wave4Schedule: eventSchedule[] = [
     endDate: 'October 29, 2022',
     detail: 'In Person',
     type: 'Challenge, Workshop Series',
-    url: '–'
+    url: ''
   }
 ]
 

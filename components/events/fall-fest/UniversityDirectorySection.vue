@@ -58,7 +58,7 @@ export default class UniversityDirectorySection extends Vue {
       detail: 'Online',
       cta: {
         label: 'Learn more here',
-        url: 'https://coding-club.example-university.edu',
+        url: '',
         segment: { cta: 'uttar-pradesh', location: 'fall-fest-page' }
       }
     },
@@ -69,7 +69,7 @@ export default class UniversityDirectorySection extends Vue {
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
-        url: 'https://coding-club.example-university.edu',
+        url: '',
         segment: { cta: 'the-higher-national-school-of-computer-science', location: 'fall-fest-page' }
       }
     },
@@ -80,7 +80,7 @@ export default class UniversityDirectorySection extends Vue {
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
-        url: 'https://coding-club.example-university.edu',
+        url: '',
         segment: { cta: 'rv-pu-college', location: 'fall-fest-page' }
       }
     },
@@ -91,7 +91,7 @@ export default class UniversityDirectorySection extends Vue {
       detail: 'Hybrid',
       cta: {
         label: 'Learn more here',
-        url: 'https://coding-club.example-university.edu',
+        url: '',
         segment: { cta: 'university-of-victoria', location: 'fall-fest-page' }
       }
     },
@@ -102,7 +102,7 @@ export default class UniversityDirectorySection extends Vue {
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
-        url: 'https://coding-club.example-university.edu',
+        url: '',
         segment: { cta: 'american-university-in-cairo', location: 'fall-fest-page' }
       }
     },
@@ -113,7 +113,7 @@ export default class UniversityDirectorySection extends Vue {
       detail: 'Online',
       cta: {
         label: 'Learn more here',
-        url: 'https://coding-club.example-university.edu',
+        url: '',
         segment: { cta: 'university-california-los-angeles', location: 'fall-fest-page' }
       }
     },
@@ -124,7 +124,7 @@ export default class UniversityDirectorySection extends Vue {
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
-        url: 'https://coding-club.example-university.edu',
+        url: '',
         segment: { cta: 'university-california-irvine', location: 'fall-fest-page' }
       }
     },
@@ -135,7 +135,7 @@ export default class UniversityDirectorySection extends Vue {
       detail: 'Online',
       cta: {
         label: 'Learn more here',
-        url: 'https://coding-club.example-university.edu',
+        url: '',
         segment: { cta: 'universidad-simón-bolívar', location: 'fall-fest-page' }
       }
     },
@@ -146,7 +146,7 @@ export default class UniversityDirectorySection extends Vue {
       detail: 'Online',
       cta: {
         label: 'Learn more here',
-        url: 'https://coding-club.example-university.edu',
+        url: '',
         segment: { cta: 'coimbatore-institute-of-Technology-india', location: 'fall-fest-page' }
       }
     },
@@ -157,7 +157,7 @@ export default class UniversityDirectorySection extends Vue {
       detail: 'Online',
       cta: {
         label: 'Learn more here',
-        url: 'https://coding-club.example-university.edu',
+        url: '',
         segment: { cta: 'quantum-fall-fest-qcolombia', location: 'fall-fest-page' }
       }
     },
@@ -179,7 +179,7 @@ export default class UniversityDirectorySection extends Vue {
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
-        url: 'https://coding-club.example-university.edu',
+        url: '',
         segment: { cta: 'qickstart-a-qiskit-powered-intro-to-quantum-computing', location: 'fall-fest-page' }
       }
     },
@@ -190,7 +190,7 @@ export default class UniversityDirectorySection extends Vue {
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
-        url: 'https://coding-club.example-university.edu',
+        url: '',
         segment: { cta: 'the-university-of-hong-kong', location: 'fall-fest-page' }
       }
     },
@@ -212,7 +212,7 @@ export default class UniversityDirectorySection extends Vue {
       detail: 'Online',
       cta: {
         label: 'Learn more here',
-        url: 'https://coding-club.example-university.edu',
+        url: '',
         segment: { cta: 'qiskit-fall-fest-kolkata-chapter', location: 'fall-fest-page' }
       }
     },
@@ -223,7 +223,7 @@ export default class UniversityDirectorySection extends Vue {
       detail: 'Online',
       cta: {
         label: 'Learn more here',
-        url: 'https://coding-club.example-university.edu',
+        url: '',
         segment: { cta: 'qiskit-fall-fest-mexico-ipn', location: 'fall-fest-page' }
       }
     },
@@ -234,7 +234,7 @@ export default class UniversityDirectorySection extends Vue {
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
-        url: 'https://coding-club.example-university.edu',
+        url: '',
         segment: { cta: 'qiskit-fall-fest-mexico-ipn', location: 'fall-fest-page' }
       }
     },
@@ -245,7 +245,7 @@ export default class UniversityDirectorySection extends Vue {
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
-        url: 'https://coding-club.example-university.edu',
+        url: '',
         segment: { cta: 'university-of-chicago', location: 'fall-fest-page' }
       }
     },
@@ -256,7 +256,7 @@ export default class UniversityDirectorySection extends Vue {
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
-        url: 'https://coding-club.example-university.edu',
+        url: '',
         segment: { cta: 'thapar-university', location: 'fall-fest-page' }
       }
     },
@@ -267,7 +267,7 @@ export default class UniversityDirectorySection extends Vue {
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
-        url: 'https://coding-club.example-university.edu',
+        url: '',
         segment: { cta: 'penn-state', location: 'fall-fest-page' }
       }
     },
@@ -278,7 +278,7 @@ export default class UniversityDirectorySection extends Vue {
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
-        url: 'https://coding-club.example-university.edu',
+        url: '',
         segment: { cta: 'quest-qiskit-fall-fest-bits-goa-chapter', location: 'fall-fest-page' }
       }
     },
@@ -300,7 +300,7 @@ export default class UniversityDirectorySection extends Vue {
       detail: 'Online',
       cta: {
         label: 'Learn more here',
-        url: 'https://coding-club.example-university.edu',
+        url: '',
         segment: { cta: 'escuela-de-computación-cuántica', location: 'fall-fest-page' }
       }
     },
@@ -311,7 +311,7 @@ export default class UniversityDirectorySection extends Vue {
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
-        url: 'https://coding-club.example-university.edu',
+        url: '',
         segment: { cta: 'princeton-university', location: 'fall-fest-page' }
       }
     },
@@ -333,7 +333,7 @@ export default class UniversityDirectorySection extends Vue {
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
-        url: 'https://coding-club.example-university.edu',
+        url: '',
         segment: { cta: 'university-of-texas-at-austin', location: 'fall-fest-page' }
       }
     },
@@ -344,7 +344,7 @@ export default class UniversityDirectorySection extends Vue {
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
-        url: 'https://coding-club.example-university.edu',
+        url: '',
         segment: { cta: 'izmir-institute-of-technology', location: 'fall-fest-page' }
       }
     },
@@ -366,7 +366,7 @@ export default class UniversityDirectorySection extends Vue {
       detail: 'Online',
       cta: {
         label: 'Learn more here',
-        url: 'https://coding-club.example-university.edu',
+        url: '',
         segment: { cta: 'quantum-fall-fest-tu-wien', location: 'fall-fest-page' }
       }
     }
