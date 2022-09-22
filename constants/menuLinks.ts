@@ -233,7 +233,7 @@ const SECONDARY_FOOTER_LINKS: Array<NavLink> = [
   },
   {
     label: 'Contact',
-    url: 'mailto:hello@qiskit.camp'
+    url: 'mailto:hello@qiskit.org'
   },
   {
     label: 'Privacy',
