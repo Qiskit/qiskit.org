@@ -75,7 +75,7 @@ const wave1Schedule: eventSchedule[] = [
     endDate: 'October 20, 2022',
     detail: 'Online',
     type: 'Hackathon, Workshop Series',
-    url: ''
+    url: '<a href="https://github.com/CIT-QUANTUM-HACKATHON/CIT-QUANTUM-HACKATHON-2022" target="_blank">Link to event</a>'
   },
   {
     university: 'Start Innovation hub',
@@ -110,7 +110,7 @@ const wave2Schedule: eventSchedule[] = [
     endDate: 'October 18, 2022',
     detail: 'Online',
     type: 'Workshop Series, Hackathon',
-    url: ''
+    url: '<a href="https://qisk.it/fallfest" target="_blank">Link to event</a>'
   },
   {
     university: 'University of Chicago',
@@ -134,7 +134,7 @@ const wave2Schedule: eventSchedule[] = [
     endDate: 'October 27, 2022',
     detail: 'Online',
     type: 'Hackathon, Challenge, Workshop Series',
-    url: ''
+    url: '<a href="https://qisk.it/fallfest" target="_blank">Link to event</a>'
   },
   {
     university: 'Qiskit Fall Fest Kolkata Chapter',
@@ -142,7 +142,7 @@ const wave2Schedule: eventSchedule[] = [
     endDate: 'November 1, 2022',
     detail: 'Online',
     type: 'Hackathon, Workshop Series',
-    url: ''
+    url: '<a href="https://qisk.it/fallfest" target="_blank">Link to event</a>'
   },
   {
     university: 'Escuela de Computación Cuántica',
@@ -185,7 +185,7 @@ const wave3Schedule: eventSchedule[] = [
     endDate: 'October 30, 2022',
     detail: 'Online',
     type: 'Hackathon, Challenge',
-    url: ''
+    url: '<a href="https://qisk.it/fallfest" target="_blank">Link to event</a>'
   },
   {
     university: 'Penn State',
@@ -209,7 +209,7 @@ const wave3Schedule: eventSchedule[] = [
     endDate: 'October 25, 2022',
     detail: 'Online',
     type: 'Hackathon, Challenge, Workshop Series',
-    url: ''
+    url: '<a href="https://qisk.it/fallfest" target="_blank">Link to event</a>'
   },
   {
     university: 'University of Victoria',
@@ -268,7 +268,7 @@ const wave4Schedule: eventSchedule[] = [
     endDate: 'November 10, 2022',
     detail: 'Online',
     type: 'Hackathon',
-    url: ''
+    url: '<a href="https://github.com/amandajyounes/UCLA_fallfest_2022" target="_blank">Link to event</a>'
   },
   {
     university: 'Univeristy of California, Irvine',

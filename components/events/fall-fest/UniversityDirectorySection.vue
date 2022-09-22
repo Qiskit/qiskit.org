@@ -58,7 +58,7 @@ export default class UniversityDirectorySection extends Vue {
       detail: 'Online',
       cta: {
         label: 'Learn more here',
-        url: '',
+        url: 'https://qisk.it/fallfest',
         segment: { cta: 'uttar-pradesh', location: 'fall-fest-page' }
       }
     },
@@ -113,7 +113,7 @@ export default class UniversityDirectorySection extends Vue {
       detail: 'Online',
       cta: {
         label: 'Learn more here',
-        url: '',
+        url: 'https://github.com/amandajyounes/UCLA_fallfest_2022',
         segment: { cta: 'university-california-los-angeles', location: 'fall-fest-page' }
       }
     },
@@ -135,7 +135,7 @@ export default class UniversityDirectorySection extends Vue {
       detail: 'Online',
       cta: {
         label: 'Learn more here',
-        url: '',
+        url: 'https://qisk.it/fallfest',
         segment: { cta: 'universidad-simón-bolívar', location: 'fall-fest-page' }
       }
     },
@@ -146,7 +146,7 @@ export default class UniversityDirectorySection extends Vue {
       detail: 'Online',
       cta: {
         label: 'Learn more here',
-        url: '',
+        url: 'https://github.com/CIT-QUANTUM-HACKATHON/CIT-QUANTUM-HACKATHON-2022',
         segment: { cta: 'coimbatore-institute-of-Technology-india', location: 'fall-fest-page' }
       }
     },
@@ -157,7 +157,7 @@ export default class UniversityDirectorySection extends Vue {
       detail: 'Online',
       cta: {
         label: 'Learn more here',
-        url: '',
+        url: 'https://qisk.it/fallfest',
         segment: { cta: 'quantum-fall-fest-qcolombia', location: 'fall-fest-page' }
       }
     },
@@ -212,7 +212,7 @@ export default class UniversityDirectorySection extends Vue {
       detail: 'Online',
       cta: {
         label: 'Learn more here',
-        url: '',
+        url: 'https://qisk.it/fallfest',
         segment: { cta: 'qiskit-fall-fest-kolkata-chapter', location: 'fall-fest-page' }
       }
     },
@@ -223,7 +223,7 @@ export default class UniversityDirectorySection extends Vue {
       detail: 'Online',
       cta: {
         label: 'Learn more here',
-        url: '',
+        url: 'https://qisk.it/fallfest',
         segment: { cta: 'qiskit-fall-fest-mexico-ipn', location: 'fall-fest-page' }
       }
     },
@@ -300,7 +300,7 @@ export default class UniversityDirectorySection extends Vue {
       detail: 'Online',
       cta: {
         label: 'Learn more here',
-        url: '',
+        url: 'https://pythonclubforphysicists.notion.site/pythonclubforphysicists/Primera-Escuela-de-Computaci-n-Cu-ntica-af219f239f90418b900cba004e27c789',
         segment: { cta: 'escuela-de-computación-cuántica', location: 'fall-fest-page' }
       }
     },
@@ -363,7 +363,7 @@ export default class UniversityDirectorySection extends Vue {
       title: 'Quantum Fall Fest TU Wien',
       image: '/images/events/fall-fest/vienna.png',
       startDate: 'October 22, 2022',
-      detail: 'Online',
+      detail: 'In Person',
       cta: {
         label: 'Learn more here',
         url: '',
