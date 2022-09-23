@@ -263,7 +263,7 @@ export default class UniversityDirectorySection extends Vue {
     {
       title: 'Penn State',
       image: '/images/events/fall-fest/pennsylvania.png',
-      startDate: 'October 22, 2022',
+      startDate: 'November 5, 2022',
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
@@ -285,7 +285,7 @@ export default class UniversityDirectorySection extends Vue {
     {
       title: 'Indian Institute of Technology Roorkee',
       image: '/images/events/fall-fest/roorkee.png',
-      startDate: 'October 21, 2022',
+      startDate: 'October 28, 2022',
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
@@ -362,7 +362,7 @@ export default class UniversityDirectorySection extends Vue {
     {
       title: 'Quantum Fall Fest TU Wien',
       image: '/images/events/fall-fest/vienna.png',
-      startDate: 'October 22, 2022',
+      startDate: 'November 3, 2022',
       detail: 'In Person',
       cta: {
         label: 'Learn more here',

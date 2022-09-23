@@ -165,8 +165,8 @@ const wave3Schedule: eventSchedule[] = [
   },
   {
     university: 'Indian Institute of Technology Roorkee',
-    startDate: 'October 21, 2022',
-    endDate: 'October 26, 2022',
+    startDate: 'October 28, 2022',
+    endDate: 'October 30, 2022',
     detail: 'In Person',
     type: 'Hackathon, Challenge',
     url: '<a href="https://github.com/qcgiitr/iitr-fall-fest-22" target="_blank">Link to event</a>'
@@ -189,16 +189,16 @@ const wave3Schedule: eventSchedule[] = [
   },
   {
     university: 'Penn State',
-    startDate: 'October 22, 2022',
-    endDate: 'October 24, 2022',
+    startDate: 'November 5, 2022',
+    endDate: 'November 6, 2022',
     detail: 'In Person',
     type: 'Hackathon, Challenge, Workshop Series',
     url: ''
   },
   {
     university: 'Quantum Fall Fest TU Wien',
-    startDate: 'October 22, 2022',
-    endDate: 'October 23, 2022',
+    startDate: 'November 3, 2022',
+    endDate: 'November 4, 2022',
     detail: 'In Person',
     type: 'Workshop Series',
     url: ''
