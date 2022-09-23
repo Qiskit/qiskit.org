@@ -38,14 +38,6 @@ interface eventSchedule {
 // TODO: replace URL placeholder w/ event links
 const wave1Schedule: eventSchedule[] = [
   {
-    university: 'RV PU College',
-    startDate: 'October 30, 2022',
-    endDate: 'October 31, 2022',
-    detail: 'In Person',
-    type: 'Workshop Series, Challenge',
-    url: ''
-  },
-  {
     university: 'Yale University',
     startDate: 'October 3, 2022',
     endDate: 'October 15, 2022',
@@ -164,14 +156,6 @@ const wave3Schedule: eventSchedule[] = [
     url: ''
   },
   {
-    university: 'Indian Institute of Technology Roorkee',
-    startDate: 'October 28, 2022',
-    endDate: 'October 30, 2022',
-    detail: 'In Person',
-    type: 'Hackathon, Challenge',
-    url: '<a href="https://github.com/qcgiitr/iitr-fall-fest-22" target="_blank">Link to event</a>'
-  },
-  {
     university: 'University of Santiago de Compostela, Spain',
     startDate: 'October 21, 2022',
     endDate: 'October 22, 2022',
@@ -188,22 +172,6 @@ const wave3Schedule: eventSchedule[] = [
     url: '<a href="https://qisk.it/fallfest" target="_blank">Link to event</a>'
   },
   {
-    university: 'Penn State',
-    startDate: 'November 5, 2022',
-    endDate: 'November 6, 2022',
-    detail: 'In Person',
-    type: 'Hackathon, Challenge, Workshop Series',
-    url: ''
-  },
-  {
-    university: 'Quantum Fall Fest TU Wien',
-    startDate: 'November 3, 2022',
-    endDate: 'November 4, 2022',
-    detail: 'In Person',
-    type: 'Workshop Series',
-    url: ''
-  },
-  {
     university: 'Uttar Pradesh',
     startDate: 'October 22, 2022',
     endDate: 'October 25, 2022',
@@ -218,6 +186,14 @@ const wave3Schedule: eventSchedule[] = [
     detail: 'Hybrid',
     type: 'Workshop Series',
     url: ''
+  },
+  {
+    university: 'Quantum Fall Fest TU Wien',
+    startDate: 'November 3, 2022',
+    endDate: 'November 4, 2022',
+    detail: 'In Person',
+    type: 'Workshop Series',
+    url: ''
   }
 ]
 
@@ -229,6 +205,14 @@ const wave4Schedule: eventSchedule[] = [
     detail: 'In Person',
     type: 'Challenge, Workshop Series',
     url: ''
+  },
+  {
+    university: 'Indian Institute of Technology Roorkee',
+    startDate: 'October 28, 2022',
+    endDate: 'October 30, 2022',
+    detail: 'In Person',
+    type: 'Hackathon, Challenge',
+    url: '<a href="https://github.com/qcgiitr/iitr-fall-fest-22" target="_blank">Link to event</a>'
   },
   {
     university: 'Princeton Univeristy',
@@ -255,11 +239,19 @@ const wave4Schedule: eventSchedule[] = [
     url: ''
   },
   {
-    university: 'Quest - Qiskit Fall Fest, BITS Goa Chapter',
-    startDate: 'November 25, 2022',
-    endDate: 'November 28, 2022',
+    university: 'Univeristy of California, Irvine',
+    startDate: 'October 28, 2022',
+    endDate: 'October 29, 2022',
     detail: 'In Person',
-    type: 'Workshop Series, Hackathon, Challenge',
+    type: 'Challenge, Workshop Series',
+    url: ''
+  },
+  {
+    university: 'RV PU College',
+    startDate: 'October 30, 2022',
+    endDate: 'October 31, 2022',
+    detail: 'In Person',
+    type: 'Workshop Series, Challenge',
     url: ''
   },
   {
@@ -271,11 +263,19 @@ const wave4Schedule: eventSchedule[] = [
     url: '<a href="https://github.com/amandajyounes/UCLA_fallfest_2022" target="_blank">Link to event</a>'
   },
   {
-    university: 'Univeristy of California, Irvine',
-    startDate: 'October 28, 2022',
-    endDate: 'October 29, 2022',
+    university: 'Penn State',
+    startDate: 'November 5, 2022',
+    endDate: 'November 6, 2022',
     detail: 'In Person',
-    type: 'Challenge, Workshop Series',
+    type: 'Hackathon, Challenge, Workshop Series',
+    url: ''
+  },
+  {
+    university: 'Quest - Qiskit Fall Fest, BITS Goa Chapter',
+    startDate: 'November 25, 2022',
+    endDate: 'November 28, 2022',
+    detail: 'In Person',
+    type: 'Workshop Series, Hackathon, Challenge',
     url: ''
   }
 ]
