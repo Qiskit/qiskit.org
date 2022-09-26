@@ -43,7 +43,7 @@ const wave1Schedule: eventSchedule[] = [
     endDate: 'October 15, 2022',
     detail: 'In Person',
     type: 'Workshop Series, Challenge',
-    url: '<a href="https://yaleqc.com/categories/events/" target="_blank">Link to event</a>'
+    url: 'https://yaleqc.com/categories/events/'
   },
   {
     university: 'Purdue University',
@@ -51,7 +51,7 @@ const wave1Schedule: eventSchedule[] = [
     endDate: 'October 31, 2022',
     detail: 'In Person',
     type: 'Workshop Series, Hackathon',
-    url: '<a href="https://github.com/purduequaic/qiskit-fall-fest-22" target="_blank">Link to event</a>'
+    url: 'https://github.com/purduequaic/qiskit-fall-fest-22'
   },
   {
     university: 'QickStart : A Qiskit Powered Intro to Quantum Computing',
@@ -59,7 +59,7 @@ const wave1Schedule: eventSchedule[] = [
     endDate: 'October 13, 2022',
     detail: 'In Person',
     type: 'Challenge, Workshop Series',
-    url: '<a href="https://github.com/TheGupta2012/NSUT-Qiskit-Fall-Fest" target="_blank">Link to event</a>'
+    url: 'https://github.com/TheGupta2012/NSUT-Qiskit-Fall-Fest'
   },
   {
     university: 'Coimbatore Institute of Technology, India',
@@ -67,7 +67,7 @@ const wave1Schedule: eventSchedule[] = [
     endDate: 'October 20, 2022',
     detail: 'Online',
     type: 'Hackathon, Workshop Series',
-    url: '<a href="https://github.com/CIT-QUANTUM-HACKATHON/CIT-QUANTUM-HACKATHON-2022" target="_blank">Link to event</a>'
+    url: 'https://github.com/CIT-QUANTUM-HACKATHON/CIT-QUANTUM-HACKATHON-2022'
   },
   {
     university: 'Start Innovation hub',
@@ -75,7 +75,7 @@ const wave1Schedule: eventSchedule[] = [
     endDate: 'October 11, 2022',
     detail: 'In Person',
     type: 'Workshop Series, Hackathon',
-    url: '<a href="https://twitter.com/Q_affinity" target="_blank">Link to event</a>'
+    url: 'https://twitter.com/Q_affinity'
   },
   {
     university: 'Case Western Reserve University',
@@ -83,7 +83,7 @@ const wave1Schedule: eventSchedule[] = [
     endDate: 'October 15, 2022',
     detail: 'In Person',
     type: 'Workshop Series, Hackathon',
-    url: '<a href="https://github.com/Case-Quantum-Computing-Club/CQC-qiskit-fall-fest-22" target_blank">Link to event</a>'
+    url: 'https://github.com/Case-Quantum-Computing-Club/CQC-qiskit-fall-fest-22'
   },
   {
     university: 'University of Texas at Austin',
@@ -99,7 +99,7 @@ const wave1Schedule: eventSchedule[] = [
     endDate: 'October 18, 2022',
     detail: 'Online',
     type: 'Workshop Series, Hackathon',
-    url: '<a href="https://qisk.it/fallfest" target="_blank">Link to event</a>'
+    url: 'https://qisk.it/fallfest'
   },
   {
     university: 'University of Chicago',
@@ -126,7 +126,7 @@ const wave2Schedule: eventSchedule[] = [
     endDate: 'October 27, 2022',
     detail: 'Online',
     type: 'Hackathon, Challenge, Workshop Series',
-    url: '<a href="https://qisk.it/fallfest" target="_blank">Link to event</a>'
+    url: 'https://qisk.it/fallfest'
   },
   {
     university: 'Qiskit Fall Fest Kolkata Chapter',
@@ -134,7 +134,7 @@ const wave2Schedule: eventSchedule[] = [
     endDate: 'November 1, 2022',
     detail: 'Online',
     type: 'Hackathon, Workshop Series',
-    url: '<a href="https://qisk.it/fallfest" target="_blank">Link to event</a>'
+    url: 'https://qisk.it/fallfest'
   },
   {
     university: 'Escuela de Computación Cuántica',
@@ -142,7 +142,7 @@ const wave2Schedule: eventSchedule[] = [
     endDate: 'October 24, 2022',
     detail: 'Online',
     type: 'Hackathon, Challenge, Workshop Series',
-    url: '<a href="https://pythonclubforphysicists.notion.site/pythonclubforphysicists/Primera-Escuela-de-Computaci-n-Cu-ntica-af219f239f90418b900cba004e27c789" target="_blank">Link to event</a>'
+    url: 'https://pythonclubforphysicists.notion.site/pythonclubforphysicists/Primera-Escuela-de-Computaci-n-Cu-ntica-af219f239f90418b900cba004e27c789'
   },
   {
     university: 'The Higher National School of Computer Science',
@@ -158,7 +158,7 @@ const wave2Schedule: eventSchedule[] = [
     endDate: 'October 22, 2022',
     detail: 'In Person',
     type: 'Workshop Series, Challenge',
-    url: '<a href="https://github.com/wyqian1027/Qiskit-Fall-Fest-USC-2022" target="_blank">Link to event</a>'
+    url: 'https://github.com/wyqian1027/Qiskit-Fall-Fest-USC-2022'
   },
   {
     university: 'Universidad Simón Bolívar',
@@ -166,7 +166,7 @@ const wave2Schedule: eventSchedule[] = [
     endDate: 'October 30, 2022',
     detail: 'Online',
     type: 'Hackathon, Challenge',
-    url: '<a href="https://qisk.it/fallfest" target="_blank">Link to event</a>'
+    url: 'https://qisk.it/fallfest'
   }
 ]
 
@@ -177,7 +177,7 @@ const wave3Schedule: eventSchedule[] = [
     endDate: 'October 25, 2022',
     detail: 'Online',
     type: 'Hackathon, Challenge, Workshop Series',
-    url: '<a href="https://qisk.it/fallfest" target="_blank">Link to event</a>'
+    url: 'https://qisk.it/fallfest'
   },
   {
     university: 'University of Victoria',
@@ -201,7 +201,7 @@ const wave3Schedule: eventSchedule[] = [
     endDate: 'October 30, 2022',
     detail: 'In Person',
     type: 'Hackathon, Challenge',
-    url: '<a href="https://github.com/qcgiitr/iitr-fall-fest-22" target="_blank">Link to event</a>'
+    url: 'https://github.com/qcgiitr/iitr-fall-fest-22'
   },
   {
     university: 'Princeton Univeristy',
@@ -252,7 +252,7 @@ const wave4Schedule: eventSchedule[] = [
     endDate: 'November 10, 2022',
     detail: 'Online',
     type: 'Hackathon',
-    url: '<a href="https://github.com/amandajyounes/UCLA_fallfest_2022" target="_blank">Link to event</a>'
+    url: 'https://github.com/amandajyounes/UCLA_fallfest_2022'
   },
   {
     university: 'Quantum Fall Fest TU Wien',
@@ -303,7 +303,7 @@ const scheduleToTableData = (slot: eventSchedule) => ([
   },
   {
     styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
-    data: slot.url
+    link: slot.url
   }
 ])
 
