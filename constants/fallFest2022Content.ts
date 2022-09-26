@@ -48,7 +48,7 @@ const wave1Schedule: eventSchedule[] = [
   {
     university: 'Purdue University',
     startDate: 'October 3, 2022',
-    endDate: 'October 23, 2022',
+    endDate: 'October 31, 2022',
     detail: 'In Person',
     type: 'Workshop Series, Hackathon',
     url: '<a href="https://github.com/purduequaic/qiskit-fall-fest-22" target="_blank">Link to event</a>'
@@ -76,10 +76,7 @@ const wave1Schedule: eventSchedule[] = [
     detail: 'In Person',
     type: 'Workshop Series, Hackathon',
     url: '<a href="https://twitter.com/Q_affinity" target="_blank">Link to event</a>'
-  }
-]
-
-const wave2Schedule: eventSchedule[] = [
+  },
   {
     university: 'Case Western Reserve University',
     startDate: 'October 10, 2022',
@@ -111,7 +108,10 @@ const wave2Schedule: eventSchedule[] = [
     detail: 'In Person',
     type: 'Workshop Series',
     url: ''
-  },
+  }
+]
+
+const wave2Schedule: eventSchedule[] = [
   {
     university: 'Fundamentals of Quantum Computing (Thapar University)',
     startDate: 'October 15, 2022',
@@ -143,10 +143,7 @@ const wave2Schedule: eventSchedule[] = [
     detail: 'Online',
     type: 'Hackathon, Challenge, Workshop Series',
     url: '<a href="https://pythonclubforphysicists.notion.site/pythonclubforphysicists/Primera-Escuela-de-Computaci-n-Cu-ntica-af219f239f90418b900cba004e27c789" target="_blank">Link to event</a>'
-  }
-]
-
-const wave3Schedule: eventSchedule[] = [
+  },
   {
     university: 'The Higher National School of Computer Science',
     startDate: 'October 21, 2022',
@@ -170,7 +167,10 @@ const wave3Schedule: eventSchedule[] = [
     detail: 'Online',
     type: 'Hackathon, Challenge',
     url: '<a href="https://qisk.it/fallfest" target="_blank">Link to event</a>'
-  },
+  }
+]
+
+const wave3Schedule: eventSchedule[] = [
   {
     university: 'Uttar Pradesh',
     startDate: 'October 22, 2022',
@@ -187,17 +187,6 @@ const wave3Schedule: eventSchedule[] = [
     type: 'Workshop Series',
     url: ''
   },
-  {
-    university: 'Quantum Fall Fest TU Wien',
-    startDate: 'November 3, 2022',
-    endDate: 'November 4, 2022',
-    detail: 'In Person',
-    type: 'Workshop Series',
-    url: ''
-  }
-]
-
-const wave4Schedule: eventSchedule[] = [
   {
     university: 'The University of Hong Kong',
     startDate: 'October 25, 2022',
@@ -245,7 +234,10 @@ const wave4Schedule: eventSchedule[] = [
     detail: 'In Person',
     type: 'Challenge, Workshop Series',
     url: ''
-  },
+  }
+]
+
+const wave4Schedule: eventSchedule[] = [
   {
     university: 'RV PU College',
     startDate: 'October 30, 2022',
@@ -261,6 +253,14 @@ const wave4Schedule: eventSchedule[] = [
     detail: 'Online',
     type: 'Hackathon',
     url: '<a href="https://github.com/amandajyounes/UCLA_fallfest_2022" target="_blank">Link to event</a>'
+  },
+  {
+    university: 'Quantum Fall Fest TU Wien',
+    startDate: 'November 3, 2022',
+    endDate: 'November 4, 2022',
+    detail: 'In Person',
+    type: 'Workshop Series',
+    url: ''
   },
   {
     university: 'Penn State',
