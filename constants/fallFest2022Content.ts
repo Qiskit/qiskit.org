@@ -59,7 +59,7 @@ const wave1Schedule: eventSchedule[] = [
     endDate: 'October 13, 2022',
     detail: 'In Person',
     type: 'Challenge, Workshop Series',
-    url: ''
+    url: '<a href="https://github.com/TheGupta2012/NSUT-Qiskit-Fall-Fest" target="_blank">Link to event</a>'
   },
   {
     university: 'Coimbatore Institute of Technology, India',
@@ -86,7 +86,7 @@ const wave2Schedule: eventSchedule[] = [
     endDate: 'October 15, 2022',
     detail: 'In Person',
     type: 'Workshop Series, Hackathon',
-    url: ''
+    url: '<a href="https://github.com/Case-Quantum-Computing-Club/CQC-qiskit-fall-fest-22" target_blank">Link to event</a>'
   },
   {
     university: 'University of Texas at Austin',

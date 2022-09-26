@@ -3,7 +3,7 @@
     <article class="bx--row">
       <div class="bx--col-lg-4">
         <h2>University directory</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, eligendi! Incidunt sequi vel asperiores quibusdam culpa debitis provident consequatur quam porro eligendi, accusantium ad omnis quae repudiandae necessitatibus reprehenderit nisi.</p>
+        <p>See your local community listed here? Click through and join the Qiskit Fall Fest in your town! Don't see your area represented? Dive into the Qiskit Community and learn how you can host your own event next year. Check out the Qiskit Advocate program, or apply to an IBM Quantum internship!</p>
       </div>
       <div class="bx--col-xlg-12 bx--col-lg-12">
         <div class="bx--row">
@@ -179,7 +179,7 @@ export default class UniversityDirectorySection extends Vue {
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
-        url: '',
+        url: 'https://github.com/TheGupta2012/NSUT-Qiskit-Fall-Fest',
         segment: { cta: 'qickstart-a-qiskit-powered-intro-to-quantum-computing', location: 'fall-fest-page' }
       }
     },
@@ -234,7 +234,7 @@ export default class UniversityDirectorySection extends Vue {
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
-        url: '',
+        url: 'https://github.com/Case-Quantum-Computing-Club/CQC-qiskit-fall-fest-22',
         segment: { cta: 'qiskit-fall-fest-mexico-ipn', location: 'fall-fest-page' }
       }
     },
@@ -273,7 +273,7 @@ export default class UniversityDirectorySection extends Vue {
     },
     {
       title: 'Quest - Qiskit Fall Fest, BITS Goa Chapter',
-      image: '/images/events/fall-fest/pilani.png',
+      image: '/images/events/fall-fest/goa.png',
       startDate: 'November 25, 2022',
       detail: 'In Person',
       cta: {
