@@ -73,12 +73,20 @@ function isEventInDateRange (
   const today: Date = new Date()
   const eventStartDate: Date = new Date(startDate)
   const eventEndDate: Date = new Date(endDate)
-  const isFutureRange: boolean = days > 0
+  const isFutureRange: boolean = days >= 0
+  const isOngoingEvent: boolean = eventStartDate <= today && today <= eventEndDate
+  const isToday: boolean = eventStartDate.getDate() === today.getDate() && eventStartDate.getMonth() === today.getMonth() && eventStartDate.getFullYear() === today.getFullYear()
   let eventDateToCheck: Date
 
   // Determine which date to check based on the days parameter and checking if
   // the event's dates are valid.
-  if (!isFutureRange && !isNaN(eventEndDate.getTime())) {
+  if (isFutureRange && isOngoingEvent) {
+    return true
+  } else if (isFutureRange && isToday) {
+    return true
+  } else if (!isFutureRange && isToday) {
+    return false
+  } else if (!isFutureRange && !isNaN(eventEndDate.getTime())) {
     eventDateToCheck = eventEndDate
   } else if (!isNaN(eventStartDate.getTime())) {
     eventDateToCheck = eventStartDate

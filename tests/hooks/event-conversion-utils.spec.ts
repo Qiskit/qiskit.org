@@ -91,6 +91,14 @@ describe('isEventInDateRange', () => {
     }
     expect(isEventInDateRange(mockEvent, days)).toBe(true)
 
+    // Event starts today
+    mockEvent = {
+      ...mockEventBase,
+      startDate: getFormattedDate(0),
+      endDate: ''
+    }
+    expect(isEventInDateRange(mockEvent, days)).toBe(true)
+
     // Event starts within the next 15 days and ends after 15 days
     mockEvent = {
       ...mockEventBase,
@@ -104,6 +112,14 @@ describe('isEventInDateRange', () => {
       ...mockEventBase,
       startDate: getFormattedDate(15),
       endDate: ''
+    }
+    expect(isEventInDateRange(mockEvent, days)).toBe(true)
+
+    // Event started 100 days ago and end in 100 days (ongoing event)
+    mockEvent = {
+      ...mockEventBase,
+      startDate: getFormattedDate(-100),
+      endDate: getFormattedDate(100)
     }
     expect(isEventInDateRange(mockEvent, days)).toBe(true)
   })
@@ -132,6 +148,22 @@ describe('isEventInDateRange', () => {
       ...mockEventBase,
       startDate: getFormattedDate(7),
       endDate: ''
+    }
+    expect(isEventInDateRange(mockEvent, days)).toBe(false)
+
+    // Event starts today
+    mockEvent = {
+      ...mockEventBase,
+      startDate: getFormattedDate(0),
+      endDate: ''
+    }
+    expect(isEventInDateRange(mockEvent, days)).toBe(false)
+
+    // Event started 100 days ago and end in 100 days (ongoing event)
+    mockEvent = {
+      ...mockEventBase,
+      startDate: getFormattedDate(-100),
+      endDate: getFormattedDate(100)
     }
     expect(isEventInDateRange(mockEvent, days)).toBe(false)
   })
