@@ -80,7 +80,7 @@ export default class UniversityDirectorySection extends Vue {
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
-        url: '',
+        url: 'https://github.com/Bellstate05/QiskitFallFest_RVPU',
         segment: { cta: 'rv-pu-college', location: 'fall-fest-page' }
       }
     },
@@ -157,7 +157,7 @@ export default class UniversityDirectorySection extends Vue {
       detail: 'Online',
       cta: {
         label: 'Learn more here',
-        url: 'https://qisk.it/fallfest',
+        url: 'https://github.com/QColombia/Quantum-Fall-Fest-2022',
         segment: { cta: 'quantum-fall-fest-qcolombia', location: 'fall-fest-page' }
       }
     },
@@ -256,7 +256,7 @@ export default class UniversityDirectorySection extends Vue {
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
-        url: '',
+        url: 'https://github.com/developer-student-club-thapar/Qiskit-Fall-Fest-2022',
         segment: { cta: 'thapar-university', location: 'fall-fest-page' }
       }
     },
@@ -344,7 +344,7 @@ export default class UniversityDirectorySection extends Vue {
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
-        url: '',
+        url: 'https://qisk.it/fallfest',
         segment: { cta: 'izmir-institute-of-technology', location: 'fall-fest-page' }
       }
     },

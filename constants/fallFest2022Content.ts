@@ -99,7 +99,7 @@ const wave1Schedule: eventSchedule[] = [
     endDate: 'October 18, 2022',
     detail: 'Online',
     type: 'Workshop Series, Hackathon',
-    url: 'https://qisk.it/fallfest'
+    url: 'https://github.com/QColombia/Quantum-Fall-Fest-2022'
   },
   {
     university: 'University of Chicago',
@@ -118,7 +118,7 @@ const wave2Schedule: eventSchedule[] = [
     endDate: 'October 17, 2022',
     detail: 'In Person',
     type: 'Challenge',
-    url: ''
+    url: 'https://github.com/developer-student-club-thapar/Qiskit-Fall-Fest-2022'
   },
   {
     university: 'Qiskit Fall Fest Mexico-IPN',
@@ -217,7 +217,7 @@ const wave3Schedule: eventSchedule[] = [
     endDate: 'October 31, 2022',
     detail: 'In Person',
     type: 'Hackathon',
-    url: ''
+    url: 'https://qisk.it/fallfest'
   },
   {
     university: 'AUC (American University in Cairo)',
@@ -244,7 +244,7 @@ const wave4Schedule: eventSchedule[] = [
     endDate: 'October 31, 2022',
     detail: 'In Person',
     type: 'Workshop Series, Challenge',
-    url: ''
+    url: 'https://github.com/Bellstate05/QiskitFallFest_RVPU'
   },
   {
     university: 'UCLA',
@@ -282,15 +282,15 @@ const wave4Schedule: eventSchedule[] = [
 
 const scheduleToTableData = (slot: eventSchedule) => ([
   {
-    styles: 'min-width: 9rem; display: inline-block; font-weight: bold;',
+    styles: 'min-width: 9rem; display: inline-block;',
     data: slot.startDate
   },
   {
-    styles: 'min-width: 9rem; display: inline-block; font-weight: bold;',
+    styles: 'min-width: 9rem; display: inline-block;',
     data: slot.endDate
   },
   {
-    styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
+    styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px; font-weight: bold',
     data: slot.university
   },
   {
@@ -342,10 +342,10 @@ const helpfulResources: HelpfulResourcesSection = {
       title: 'Let us know if you have any questions!',
       description: "If your questions aren't answered by the FAQ above or our blog post, please use this form to submit your enquiries direct to the team.",
       cta: {
-        url: 'http://qisk.it/QGSS2021EnquiryForm',
+        url: 'mailto:qiskit.events@us.ibm.com',
         label: 'Enquire now',
         segment: {
-          cta: 'qgss2021-enquiry-form',
+          cta: 'qiskt-fall-fest-email',
           location: 'helpful-resources'
         }
       }
@@ -366,7 +366,7 @@ const helpfulResources: HelpfulResourcesSection = {
       title: 'Qiskit Medium',
       description: "This blog provides a nice overview of Qiskit and its direction as we explore what applications can be done on today's quantum devices.",
       cta: {
-        url: 'https://medium.com/qiskit/qiskit-and-its-fundamental-elements-bcd7ead80492',
+        url: 'https://medium.com/@qiskit',
         label: 'Read the blog',
         segment: {
           cta: 'qiskit-medium',
