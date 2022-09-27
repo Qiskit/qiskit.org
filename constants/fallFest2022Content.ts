@@ -91,7 +91,7 @@ const wave1Schedule: eventSchedule[] = [
     endDate: 'October 17, 2022',
     detail: 'In Person',
     type: 'Hackathon, Workshop Series',
-    url: ''
+    url: 'https://quantum-collective.webflow.io/'
   },
   {
     university: 'Quantum Fall Fest QColombia',
@@ -134,7 +134,7 @@ const wave2Schedule: eventSchedule[] = [
     endDate: 'November 1, 2022',
     detail: 'Online',
     type: 'Hackathon, Workshop Series',
-    url: 'https://qisk.it/fallfest'
+    url: 'https://ritajitmajumdar.github.io/'
   },
   {
     university: 'Escuela de Computación Cuántica',

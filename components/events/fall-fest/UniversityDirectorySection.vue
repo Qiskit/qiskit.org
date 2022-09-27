@@ -212,7 +212,7 @@ export default class UniversityDirectorySection extends Vue {
       detail: 'Online',
       cta: {
         label: 'Learn more here',
-        url: 'https://qisk.it/fallfest',
+        url: 'https://ritajitmajumdar.github.io/',
         segment: { cta: 'qiskit-fall-fest-kolkata-chapter', location: 'fall-fest-page' }
       }
     },
@@ -333,7 +333,7 @@ export default class UniversityDirectorySection extends Vue {
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
-        url: '',
+        url: 'https://quantum-collective.webflow.io/',
         segment: { cta: 'university-of-texas-at-austin', location: 'fall-fest-page' }
       }
     },
