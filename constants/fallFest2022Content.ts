@@ -282,16 +282,16 @@ const wave4Schedule: eventSchedule[] = [
 
 const scheduleToTableData = (slot: eventSchedule) => ([
   {
+    styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px; font-weight: bold',
+    data: slot.university
+  },
+  {
     styles: 'min-width: 9rem; display: inline-block;',
     data: slot.startDate
   },
   {
     styles: 'min-width: 9rem; display: inline-block;',
     data: slot.endDate
-  },
-  {
-    styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px; font-weight: bold',
-    data: slot.university
   },
   {
     styles: 'min-width: 8rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
