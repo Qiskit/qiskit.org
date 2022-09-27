@@ -14,173 +14,288 @@ const header = {
   card: {
     image: '/images/events/fall-fest/fall-fest-logo.png',
     title: 'Qiskit Fall Fest 2022',
-    description: 'The Qiskit Fall Fest is a collection of quantum computing events each held by a University!',
-    location: 'Online',
-    time: 'October 2023',
+    description: 'The Qiskit Fall Fest is a collection of quantum computing events each held by a university!',
+    location: '',
+    time: '',
     to: 'https://medium.com/qiskit/introducing-the-qiskit-fall-fest-feb8456b557',
     ctaLabel: 'Learn more',
     segment: {
-      cta: 'ibm-research-blog',
+      cta: 'qiskit-fall-fest-blog',
       location: 'header'
     }
   }
 }
 
 interface eventSchedule {
-  day: string,
+  startDate: string,
+  endDate: string,
   university: string,
+  detail: string,
   type: string,
   url: string
 }
 
-// TODO: get full week 1 schedule from Events team
-const week1Schedule: eventSchedule[] = [
+// TODO: replace URL placeholder w/ event links
+const wave1Schedule: eventSchedule[] = [
   {
-    day: 'Monday, July 18',
-    university: 'Qiskit Global Summer School Kick Off',
-    type: '-',
-    url: 'Lecture'
+    university: 'Yale University',
+    startDate: 'October 3, 2022',
+    endDate: 'October 15, 2022',
+    detail: 'In Person',
+    type: 'Challenge, Workshop Series',
+    url: 'https://yaleqc.com/categories/events/'
   },
   {
-    day: 'Monday, July 18',
-    university: 'History of Quantum Computing and Motivation for Quantum Simulation',
-    type: 'Olivia Lanes',
-    url: 'Lecture'
+    university: 'Purdue University',
+    startDate: 'October 3, 2022',
+    endDate: 'October 31, 2022',
+    detail: 'In Person',
+    type: 'Hackathon, Workshop Series',
+    url: 'https://github.com/purduequaic/qiskit-fall-fest-22'
   },
   {
-    day: 'Monday, July 18',
-    university: 'Q&A Sessions',
-    type: '-',
-    url: 'Live Q&A'
+    university: 'QickStart : A Qiskit Powered Intro to Quantum Computing',
+    startDate: 'October 3, 2022',
+    endDate: 'October 13, 2022',
+    detail: 'In Person',
+    type: 'Challenge, Workshop Series',
+    url: 'https://github.com/TheGupta2012/NSUT-Qiskit-Fall-Fest'
   },
   {
-    day: 'Tuesday, July 19',
-    university: 'Introduction to Linear Algebra, Prerequisite Mathematics, and Circuit Composition',
-    type: 'Maria Violaris',
-    url: 'Lecture'
+    university: 'Coimbatore Institute of Technology, India',
+    startDate: 'October 6, 2022',
+    endDate: 'October 20, 2022',
+    detail: 'Online',
+    type: 'Hackathon, Workshop Series',
+    url: 'https://github.com/CIT-QUANTUM-HACKATHON/CIT-QUANTUM-HACKATHON-2022'
   },
   {
-    day: 'Tuesday, July 19',
-    university: 'Q&A Sessions',
-    type: '-',
-    url: 'Live Q&A'
+    university: 'Start Innovation hub',
+    startDate: 'October 8, 2022',
+    endDate: 'October 11, 2022',
+    detail: 'In Person',
+    type: 'Hackathon, Workshop Series',
+    url: 'https://twitter.com/Q_affinity'
   },
   {
-    day: 'Wednesday, July 20',
-    university: 'Hamiltonian Time Evolution',
-    type: 'Maria Violaris',
-    url: 'Lecture'
+    university: 'Case Western Reserve University',
+    startDate: 'October 10, 2022',
+    endDate: 'October 15, 2022',
+    detail: 'In Person',
+    type: 'Hackathon, Workshop Series',
+    url: 'https://github.com/Case-Quantum-Computing-Club/CQC-qiskit-fall-fest-22'
   },
   {
-    day: 'Wednesday, July 20',
-    university: 'Q&A Sessions',
-    type: '-',
-    url: 'Live Q&A'
+    university: 'University of Texas at Austin',
+    startDate: 'October 10, 2022',
+    endDate: 'October 17, 2022',
+    detail: 'In Person',
+    type: 'Hackathon, Workshop Series',
+    url: 'https://quantum-collective.webflow.io/'
   },
   {
-    day: 'Thursday, July 21',
-    university: 'Simulation Problems',
-    type: 'Jeffrey Cohn',
-    url: 'Lecture'
+    university: 'Quantum Fall Fest QColombia',
+    startDate: 'October 10, 2022',
+    endDate: 'October 18, 2022',
+    detail: 'Online',
+    type: 'Hackathon, Workshop Series',
+    url: 'https://github.com/QColombia/Quantum-Fall-Fest-2022'
   },
   {
-    day: 'Thursday, July 21',
-    university: 'Q&A Sessions',
-    type: '-',
-    url: 'Live Q&A'
-  },
-  {
-    day: 'Friday, July 22',
-    university: 'Noisy Real Hardware - Noise in Quantum Computers',
-    type: 'Zlatko Minev',
-    url: 'Lecture'
-  },
-  {
-    day: 'Friday, July 22',
-    university: 'Q&A Sessions',
-    type: '-',
-    url: 'Live Q&A'
+    university: 'University of Chicago',
+    startDate: 'October 10, 2022',
+    endDate: 'October 12, 2022',
+    detail: 'In Person',
+    type: 'Workshop Series',
+    url: ''
   }
 ]
 
-// TODO: get full week 2 schedule from Events team
-const week2Schedule: eventSchedule[] = [
+const wave2Schedule: eventSchedule[] = [
   {
-    day: 'Monday, July 25',
-    university: 'Broad Overview of Quantum Chemistry Simulation and Why it is a Challenge',
-    type: 'Panos Barkoutsos',
-    url: 'Lecture'
+    university: 'Fundamentals of Quantum Computing (Thapar University)',
+    startDate: 'October 15, 2022',
+    endDate: 'October 17, 2022',
+    detail: 'In Person',
+    type: 'Challenge',
+    url: 'https://github.com/developer-student-club-thapar/Qiskit-Fall-Fest-2022'
   },
   {
-    day: 'Monday, July 25',
-    university: 'Q&A Sessions',
-    type: '-',
-    url: 'Live Q&A'
+    university: 'Qiskit Fall Fest Mexico-IPN',
+    startDate: 'October 17, 2022',
+    endDate: 'October 27, 2022',
+    detail: 'Online',
+    type: 'Challenge, Hackathon, Workshop Series',
+    url: 'https://qisk.it/fallfest'
   },
   {
-    day: 'Tuesday, July 26',
-    university: 'Methods for Quantum Simulation',
-    type: 'Yukio Kawashima',
-    url: 'Lecture'
+    university: 'Qiskit Fall Fest Kolkata Chapter',
+    startDate: 'October 17, 2022',
+    endDate: 'November 1, 2022',
+    detail: 'Online',
+    type: 'Hackathon, Workshop Series',
+    url: 'https://ritajitmajumdar.github.io/'
   },
   {
-    day: 'Tuesday, July 26',
-    university: 'Q&A Sessions',
-    type: '-',
-    url: 'Live Q&A'
+    university: 'Escuela de Computación Cuántica',
+    startDate: 'October 17, 2022',
+    endDate: 'October 24, 2022',
+    detail: 'Online',
+    type: 'Challenge, Hackathon, Workshop Series',
+    url: 'https://pythonclubforphysicists.notion.site/pythonclubforphysicists/Primera-Escuela-de-Computaci-n-Cu-ntica-af219f239f90418b900cba004e27c789'
   },
   {
-    day: 'Wednesday, July 27',
-    university: 'Quantum Static Simulation',
-    type: 'Ieva Liepuoniute',
-    url: 'Lecture'
+    university: 'The Higher National School of Computer Science',
+    startDate: 'October 21, 2022',
+    endDate: 'October 23, 2022',
+    detail: 'In Person',
+    type: 'Challenge, Hackathon, Workshop Series',
+    url: ''
   },
   {
-    day: 'Wednesday, July 27',
-    university: 'Q&A Sessions',
-    type: '-',
-    url: 'Live Q&A'
+    university: 'University of Santiago de Compostela, Spain',
+    startDate: 'October 21, 2022',
+    endDate: 'October 22, 2022',
+    detail: 'In Person',
+    type: 'Challenge, Workshop Series',
+    url: 'https://github.com/wyqian1027/Qiskit-Fall-Fest-USC-2022'
   },
   {
-    day: 'Thursday, July 28',
-    university: 'Quantum Dynamics',
-    type: 'Alexander Miessen',
-    url: 'Lecture'
+    university: 'Universidad Simón Bolívar',
+    startDate: 'October 21, 2022',
+    endDate: 'October 30, 2022',
+    detail: 'Online',
+    type: 'Challenge, Hackathon',
+    url: 'https://qisk.it/fallfest'
+  }
+]
+
+const wave3Schedule: eventSchedule[] = [
+  {
+    university: 'Uttar Pradesh',
+    startDate: 'October 22, 2022',
+    endDate: 'October 25, 2022',
+    detail: 'Online',
+    type: 'Challenge, Hackathon, Workshop Series',
+    url: 'https://qisk.it/fallfest'
   },
   {
-    day: 'Thursday, July 28',
-    university: 'Q&A Sessions',
-    type: '-',
-    url: 'Live Q&A'
+    university: 'University of Victoria',
+    startDate: 'October 22, 2022',
+    endDate: 'October 24, 2022',
+    detail: 'Hybrid',
+    type: 'Workshop Series',
+    url: ''
   },
   {
-    day: 'Friday, July 29',
-    university: 'What is Quantum Simulation and Where is the Field Going?',
-    type: '-',
-    url: 'Lecture'
+    university: 'The University of Hong Kong',
+    startDate: 'October 25, 2022',
+    endDate: 'October 26, 2022',
+    detail: 'In Person',
+    type: 'Challenge, Workshop Series',
+    url: ''
   },
   {
-    day: 'Friday, July 29',
-    university: 'Q&A Sessions',
-    type: '-',
-    url: 'Live Q&A'
+    university: 'Indian Institute of Technology Roorkee',
+    startDate: 'October 28, 2022',
+    endDate: 'October 30, 2022',
+    detail: 'In Person',
+    type: 'Challenge, Hackathon',
+    url: 'https://github.com/qcgiitr/iitr-fall-fest-22'
   },
   {
-    day: 'Friday, July 29',
-    university: 'Qiskit Global Summer School 2022 Commencement & Wrap Celebration',
-    type: '-',
-    url: 'Commencement'
+    university: 'Princeton Univeristy',
+    startDate: 'October 28, 2022',
+    endDate: 'October 31, 2022',
+    detail: 'In Person',
+    type: 'Challenge',
+    url: ''
+  },
+  {
+    university: 'Izmir Institute of Technology',
+    startDate: 'October 28, 2022',
+    endDate: 'October 31, 2022',
+    detail: 'In Person',
+    type: 'Hackathon',
+    url: 'https://qisk.it/fallfest'
+  },
+  {
+    university: 'AUC (American University in Cairo)',
+    startDate: 'October 28, 2022',
+    endDate: 'October 31, 2022',
+    detail: 'In Person',
+    type: 'Challenge, Hackathon, Workshop Series',
+    url: ''
+  },
+  {
+    university: 'Univeristy of California, Irvine',
+    startDate: 'October 28, 2022',
+    endDate: 'October 29, 2022',
+    detail: 'In Person',
+    type: 'Challenge, Workshop Series',
+    url: ''
+  }
+]
+
+const wave4Schedule: eventSchedule[] = [
+  {
+    university: 'RV PU College',
+    startDate: 'October 30, 2022',
+    endDate: 'October 31, 2022',
+    detail: 'In Person',
+    type: 'Challenge, Workshop Series',
+    url: 'https://github.com/Bellstate05/QiskitFallFest_RVPU'
+  },
+  {
+    university: 'UCLA',
+    startDate: 'October 31, 2022',
+    endDate: 'November 10, 2022',
+    detail: 'Online',
+    type: 'Hackathon',
+    url: 'https://github.com/amandajyounes/UCLA_fallfest_2022'
+  },
+  {
+    university: 'Quantum Fall Fest TU Wien',
+    startDate: 'November 3, 2022',
+    endDate: 'November 4, 2022',
+    detail: 'In Person',
+    type: 'Workshop Series',
+    url: ''
+  },
+  {
+    university: 'Penn State',
+    startDate: 'November 5, 2022',
+    endDate: 'November 6, 2022',
+    detail: 'In Person',
+    type: 'Challenge, Hackathon, Workshop Series',
+    url: ''
+  },
+  {
+    university: 'Quest - Qiskit Fall Fest, BITS Goa Chapter',
+    startDate: 'November 25, 2022',
+    endDate: 'November 28, 2022',
+    detail: 'In Person',
+    type: 'Challenge, Hackathon, Workshop Series',
+    url: ''
   }
 ]
 
 const scheduleToTableData = (slot: eventSchedule) => ([
   {
-    styles: 'min-width: 10rem; display: inline-block; font-weight: bold;',
-    data: slot.day
+    styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px; font-weight: bold',
+    data: slot.university
   },
   {
-    styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
-    data: slot.university
+    styles: 'min-width: 9rem; display: inline-block;',
+    data: slot.startDate
+  },
+  {
+    styles: 'min-width: 9rem; display: inline-block;',
+    data: slot.endDate
+  },
+  {
+    styles: 'min-width: 8rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
+    data: slot.detail
   },
   {
     styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
@@ -188,7 +303,7 @@ const scheduleToTableData = (slot: eventSchedule) => ([
   },
   {
     styles: 'min-width: 10rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
-    data: slot.url
+    link: slot.url
   }
 ])
 
@@ -197,12 +312,20 @@ const agenda = {
   subtitle: '*Schedule subject to change',
   weeks: [
     {
-      tabName: 'Week 1',
-      tableData: week1Schedule.map(scheduleToTableData)
+      tabName: 'Wave 1',
+      tableData: wave1Schedule.map(scheduleToTableData)
     },
     {
-      tabName: 'Week 2',
-      tableData: week2Schedule.map(scheduleToTableData)
+      tabName: 'Wave 2',
+      tableData: wave2Schedule.map(scheduleToTableData)
+    },
+    {
+      tabName: 'Wave 3',
+      tableData: wave3Schedule.map(scheduleToTableData)
+    },
+    {
+      tabName: 'Wave 4',
+      tableData: wave4Schedule.map(scheduleToTableData)
     }
   ]
 }
@@ -219,10 +342,10 @@ const helpfulResources: HelpfulResourcesSection = {
       title: 'Let us know if you have any questions!',
       description: "If your questions aren't answered by the FAQ above or our blog post, please use this form to submit your enquiries direct to the team.",
       cta: {
-        url: 'http://qisk.it/QGSS2021EnquiryForm',
+        url: 'mailto:qiskit.events@us.ibm.com',
         label: 'Enquire now',
         segment: {
-          cta: 'qgss2021-enquiry-form',
+          cta: 'qiskt-fall-fest-email',
           location: 'helpful-resources'
         }
       }
@@ -243,7 +366,7 @@ const helpfulResources: HelpfulResourcesSection = {
       title: 'Qiskit Medium',
       description: "This blog provides a nice overview of Qiskit and its direction as we explore what applications can be done on today's quantum devices.",
       cta: {
-        url: 'https://medium.com/qiskit/qiskit-and-its-fundamental-elements-bcd7ead80492',
+        url: 'https://medium.com/@qiskit',
         label: 'Read the blog',
         segment: {
           cta: 'qiskit-medium',

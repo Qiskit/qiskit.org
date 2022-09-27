@@ -42,8 +42,11 @@
               :columns="agendaColumnsDataTable"
             >
               <cv-data-table-row v-for="(row, rowIndex) in week.tableData" :key="`${rowIndex}`">
-                <cv-data-table-cell v-for="({styles, data}, elementIndex) in row" :key="`${elementIndex}`">
-                  <span :style="styles">{{ data }}</span>
+                <cv-data-table-cell v-for="({styles, data, link}, elementIndex) in row" :key="`${elementIndex}`">
+                  <AppLink v-if="link" class="fall-fest-page__table-link" :style="styles" :url="link">
+                    Link to event
+                  </AppLink>
+                  <span v-else :style="styles">{{ data }}</span>
                 </cv-data-table-cell>
               </cv-data-table-row>
             </AppDataTable>
@@ -132,7 +135,7 @@ import {
 })
 export default class FallFestPage extends QiskitPage {
   routeName = 'fall-fest'
-  agendaColumnsDataTable: string[] = ['Day', 'University', 'Type', 'Link']
+  agendaColumnsDataTable: string[] = ['University', 'Start Date', 'End Date', 'Detail', 'Type of Event', 'Link']
   headerData = header
   agendaData = agenda
   helpfulResourcesData = helpfulResources
@@ -164,6 +167,14 @@ export default class FallFestPage extends QiskitPage {
 <style lang="scss" scoped>
 // overrides
 .fall-fest-page {
+  &__table-link {
+    &:hover,
+    &:focus,
+    &:active {
+      text-decoration: underline;
+    }
+  }
+
   ::v-deep {
     // TODO: Extract styles like "_checkbox" to be defined globally
     & a.bx--tabs__nav-link {
