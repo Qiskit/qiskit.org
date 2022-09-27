@@ -42,7 +42,7 @@ const wave1Schedule: eventSchedule[] = [
     startDate: 'October 3, 2022',
     endDate: 'October 15, 2022',
     detail: 'In Person',
-    type: 'Workshop Series, Challenge',
+    type: 'Challenge, Workshop Series',
     url: 'https://yaleqc.com/categories/events/'
   },
   {
@@ -50,7 +50,7 @@ const wave1Schedule: eventSchedule[] = [
     startDate: 'October 3, 2022',
     endDate: 'October 31, 2022',
     detail: 'In Person',
-    type: 'Workshop Series, Hackathon',
+    type: 'Hackathon, Workshop Series',
     url: 'https://github.com/purduequaic/qiskit-fall-fest-22'
   },
   {
@@ -74,7 +74,7 @@ const wave1Schedule: eventSchedule[] = [
     startDate: 'October 8, 2022',
     endDate: 'October 11, 2022',
     detail: 'In Person',
-    type: 'Workshop Series, Hackathon',
+    type: 'Hackathon, Workshop Series',
     url: 'https://twitter.com/Q_affinity'
   },
   {
@@ -82,7 +82,7 @@ const wave1Schedule: eventSchedule[] = [
     startDate: 'October 10, 2022',
     endDate: 'October 15, 2022',
     detail: 'In Person',
-    type: 'Workshop Series, Hackathon',
+    type: 'Hackathon, Workshop Series',
     url: 'https://github.com/Case-Quantum-Computing-Club/CQC-qiskit-fall-fest-22'
   },
   {
@@ -98,7 +98,7 @@ const wave1Schedule: eventSchedule[] = [
     startDate: 'October 10, 2022',
     endDate: 'October 18, 2022',
     detail: 'Online',
-    type: 'Workshop Series, Hackathon',
+    type: 'Hackathon, Workshop Series',
     url: 'https://github.com/QColombia/Quantum-Fall-Fest-2022'
   },
   {
@@ -125,7 +125,7 @@ const wave2Schedule: eventSchedule[] = [
     startDate: 'October 17, 2022',
     endDate: 'October 27, 2022',
     detail: 'Online',
-    type: 'Hackathon, Challenge, Workshop Series',
+    type: 'Challenge, Hackathon, Workshop Series',
     url: 'https://qisk.it/fallfest'
   },
   {
@@ -141,7 +141,7 @@ const wave2Schedule: eventSchedule[] = [
     startDate: 'October 17, 2022',
     endDate: 'October 24, 2022',
     detail: 'Online',
-    type: 'Hackathon, Challenge, Workshop Series',
+    type: 'Challenge, Hackathon, Workshop Series',
     url: 'https://pythonclubforphysicists.notion.site/pythonclubforphysicists/Primera-Escuela-de-Computaci-n-Cu-ntica-af219f239f90418b900cba004e27c789'
   },
   {
@@ -149,7 +149,7 @@ const wave2Schedule: eventSchedule[] = [
     startDate: 'October 21, 2022',
     endDate: 'October 23, 2022',
     detail: 'In Person',
-    type: 'Hackathon, Challenge, Workshop Series',
+    type: 'Challenge, Hackathon, Workshop Series',
     url: ''
   },
   {
@@ -157,7 +157,7 @@ const wave2Schedule: eventSchedule[] = [
     startDate: 'October 21, 2022',
     endDate: 'October 22, 2022',
     detail: 'In Person',
-    type: 'Workshop Series, Challenge',
+    type: 'Challenge, Workshop Series',
     url: 'https://github.com/wyqian1027/Qiskit-Fall-Fest-USC-2022'
   },
   {
@@ -165,7 +165,7 @@ const wave2Schedule: eventSchedule[] = [
     startDate: 'October 21, 2022',
     endDate: 'October 30, 2022',
     detail: 'Online',
-    type: 'Hackathon, Challenge',
+    type: 'Challenge, Hackathon',
     url: 'https://qisk.it/fallfest'
   }
 ]
@@ -176,7 +176,7 @@ const wave3Schedule: eventSchedule[] = [
     startDate: 'October 22, 2022',
     endDate: 'October 25, 2022',
     detail: 'Online',
-    type: 'Hackathon, Challenge, Workshop Series',
+    type: 'Challenge, Hackathon, Workshop Series',
     url: 'https://qisk.it/fallfest'
   },
   {
@@ -200,7 +200,7 @@ const wave3Schedule: eventSchedule[] = [
     startDate: 'October 28, 2022',
     endDate: 'October 30, 2022',
     detail: 'In Person',
-    type: 'Hackathon, Challenge',
+    type: 'Challenge, Hackathon',
     url: 'https://github.com/qcgiitr/iitr-fall-fest-22'
   },
   {
@@ -224,7 +224,7 @@ const wave3Schedule: eventSchedule[] = [
     startDate: 'October 28, 2022',
     endDate: 'October 31, 2022',
     detail: 'In Person',
-    type: 'Workshop Series, Hackathon, Challenge',
+    type: 'Challenge, Hackathon, Workshop Series',
     url: ''
   },
   {
@@ -243,7 +243,7 @@ const wave4Schedule: eventSchedule[] = [
     startDate: 'October 30, 2022',
     endDate: 'October 31, 2022',
     detail: 'In Person',
-    type: 'Workshop Series, Challenge',
+    type: 'Challenge, Workshop Series',
     url: 'https://github.com/Bellstate05/QiskitFallFest_RVPU'
   },
   {
@@ -267,7 +267,7 @@ const wave4Schedule: eventSchedule[] = [
     startDate: 'November 5, 2022',
     endDate: 'November 6, 2022',
     detail: 'In Person',
-    type: 'Hackathon, Challenge, Workshop Series',
+    type: 'Challenge, Hackathon, Workshop Series',
     url: ''
   },
   {
@@ -275,7 +275,7 @@ const wave4Schedule: eventSchedule[] = [
     startDate: 'November 25, 2022',
     endDate: 'November 28, 2022',
     detail: 'In Person',
-    type: 'Workshop Series, Hackathon, Challenge',
+    type: 'Challenge, Hackathon, Workshop Series',
     url: ''
   }
 ]
