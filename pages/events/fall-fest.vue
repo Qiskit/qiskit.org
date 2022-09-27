@@ -46,8 +46,7 @@
                   <AppLink v-if="link" class="fall-fest-page__table-link" :style="styles" :url="link">
                     Link to event
                   </AppLink>
-                  <!-- eslint-disable-next-line vue/no-v-html -->
-                  <span v-else :style="styles" v-html="data" />
+                  <span v-else :style="styles">{{ data }}</span>
                 </cv-data-table-cell>
               </cv-data-table-row>
             </AppDataTable>
