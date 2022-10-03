@@ -52,17 +52,6 @@ type University = {
 export default class UniversityDirectorySection extends Vue {
   universities: University[] = [
     {
-      title: 'Uttar Pradesh',
-      image: '/images/events/fall-fest/agra.png',
-      startDate: 'October 22, 2022',
-      detail: 'Online',
-      cta: {
-        label: 'Learn more here',
-        url: 'https://qisk.it/fallfest',
-        segment: { cta: 'uttar-pradesh', location: 'fall-fest-page' }
-      }
-    },
-    {
       title: 'The Higher National School of Computer Science',
       image: '/images/events/fall-fest/algiers.png',
       startDate: 'October 21, 2022',
@@ -102,7 +91,7 @@ export default class UniversityDirectorySection extends Vue {
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
-        url: '',
+        url: 'https://github.com/hamzakamel1/Qiskit-FallFest-AUC-Egypt-2022',
         segment: { cta: 'american-university-in-cairo', location: 'fall-fest-page' }
       }
     },
@@ -118,24 +107,13 @@ export default class UniversityDirectorySection extends Vue {
       }
     },
     {
-      title: 'University of California, Irvine',
-      image: '/images/events/fall-fest/california.png',
-      startDate: 'October 28, 2022',
-      detail: 'In Person',
-      cta: {
-        label: 'Learn more here',
-        url: '',
-        segment: { cta: 'university-california-irvine', location: 'fall-fest-page' }
-      }
-    },
-    {
       title: 'Universidad Simón Bolívar',
       image: '/images/events/fall-fest/caracas.png',
       startDate: 'October 21, 2022',
       detail: 'Online',
       cta: {
         label: 'Learn more here',
-        url: 'https://qisk.it/fallfest',
+        url: 'https://www.cofalumniusb.org/qiskit-fall',
         segment: { cta: 'universidad-simón-bolívar', location: 'fall-fest-page' }
       }
     },
@@ -228,6 +206,17 @@ export default class UniversityDirectorySection extends Vue {
       }
     },
     {
+      title: 'University of Maryland',
+      image: '/images/events/fall-fest/maryland.png',
+      startDate: 'October 28, 2022',
+      detail: 'In Person',
+      cta: {
+        label: 'Learn more here',
+        url: 'https://umdphysics.umd.edu/academics/ugrad-student-opportunities/undergraduate-quantum-association.html',
+        segment: { cta: 'university-of-maryland', location: 'fall-fest-page' }
+      }
+    },
+    {
       title: 'Case Western Reserve University',
       image: '/images/events/fall-fest/ohio.png',
       startDate: 'October 10, 2022',
@@ -235,7 +224,7 @@ export default class UniversityDirectorySection extends Vue {
       cta: {
         label: 'Learn more here',
         url: 'https://github.com/Case-Quantum-Computing-Club/CQC-qiskit-fall-fest-22',
-        segment: { cta: 'qiskit-fall-fest-mexico-ipn', location: 'fall-fest-page' }
+        segment: { cta: 'case-western-reserve-university', location: 'fall-fest-page' }
       }
     },
     {
@@ -280,6 +269,17 @@ export default class UniversityDirectorySection extends Vue {
         label: 'Learn more here',
         url: '',
         segment: { cta: 'quest-qiskit-fall-fest-bits-goa-chapter', location: 'fall-fest-page' }
+      }
+    },
+    {
+      title: 'Qiskit Fall Fest Morocco',
+      image: '/images/events/fall-fest/morocco.png',
+      startDate: 'October 28, 2022',
+      detail: 'In Person',
+      cta: {
+        label: 'Learn more here',
+        url: 'https://sites.google.com/view/qiskit-fall-fest-morocco/home',
+        segment: { cta: 'qiskit-fall-fest-morocco', location: 'fall-fest-page' }
       }
     },
     {
@@ -333,7 +333,7 @@ export default class UniversityDirectorySection extends Vue {
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
-        url: 'https://quantum-collective.webflow.io/',
+        url: 'https://github.com/UT-Austin-Quantum-Collective',
         segment: { cta: 'university-of-texas-at-austin', location: 'fall-fest-page' }
       }
     },
@@ -351,7 +351,7 @@ export default class UniversityDirectorySection extends Vue {
     {
       title: 'Start Innovation hub',
       image: '/images/events/fall-fest/uyo.png',
-      startDate: 'October 8, 2022',
+      startDate: 'October 15, 2022',
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
