@@ -201,7 +201,7 @@ export default class UniversityDirectorySection extends Vue {
       detail: 'Online',
       cta: {
         label: 'Learn more here',
-        url: 'https://qisk.it/fallfest',
+        url: 'https://qisk.it/fallfesthype',
         segment: { cta: 'qiskit-fall-fest-mexico-ipn', location: 'fall-fest-page' }
       }
     },
@@ -234,7 +234,7 @@ export default class UniversityDirectorySection extends Vue {
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
-        url: '',
+        url: 'https://www.facebook.com/groups/ucquantum',
         segment: { cta: 'university-of-chicago', location: 'fall-fest-page' }
       }
     },
@@ -267,7 +267,7 @@ export default class UniversityDirectorySection extends Vue {
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
-        url: '',
+        url: 'https://github.com/qBITS-github/Quest-Qiskit-Fall-Fest',
         segment: { cta: 'quest-qiskit-fall-fest-bits-goa-chapter', location: 'fall-fest-page' }
       }
     },
@@ -333,7 +333,7 @@ export default class UniversityDirectorySection extends Vue {
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
-        url: 'https://github.com/UT-Austin-Quantum-Collective',
+        url: 'https://github.com/UT-Austin-Quantum-Collective/Qiskit-Fall-Fest-2022/blob/main/README.md',
         segment: { cta: 'university-of-texas-at-austin', location: 'fall-fest-page' }
       }
     },
@@ -344,7 +344,7 @@ export default class UniversityDirectorySection extends Vue {
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
-        url: 'https://qisk.it/fallfest',
+        url: 'https://qisk.it/fallfesthype',
         segment: { cta: 'izmir-institute-of-technology', location: 'fall-fest-page' }
       }
     },

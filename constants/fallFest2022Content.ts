@@ -83,7 +83,7 @@ const wave1Schedule: eventSchedule[] = [
     endDate: 'October 17, 2022',
     detail: 'In Person',
     type: 'Hackathon, Workshop Series',
-    url: 'https://github.com/UT-Austin-Quantum-Collective'
+    url: 'https://github.com/UT-Austin-Quantum-Collective/Qiskit-Fall-Fest-2022/blob/main/README.md'
   },
   {
     university: 'Quantum Fall Fest QColombia',
@@ -92,14 +92,6 @@ const wave1Schedule: eventSchedule[] = [
     detail: 'Online',
     type: 'Hackathon, Workshop Series',
     url: 'https://github.com/QColombia/Quantum-Fall-Fest-2022'
-  },
-  {
-    university: 'University of Chicago',
-    startDate: 'October 10, 2022',
-    endDate: 'October 12, 2022',
-    detail: 'In Person',
-    type: 'Workshop Series',
-    url: ''
   },
   {
     university: 'Start Innovation hub',
@@ -126,7 +118,7 @@ const wave2Schedule: eventSchedule[] = [
     endDate: 'October 27, 2022',
     detail: 'Online',
     type: 'Challenge, Hackathon, Workshop Series',
-    url: 'https://qisk.it/fallfest'
+    url: 'https://qisk.it/fallfesthype'
   },
   {
     university: 'Qiskit Fall Fest Kolkata Chapter',
@@ -180,6 +172,14 @@ const wave3Schedule: eventSchedule[] = [
     url: ''
   },
   {
+    university: 'University of Chicago',
+    startDate: 'October 22, 2022',
+    endDate: 'October 24, 2022',
+    detail: 'In Person',
+    type: 'Workshop Series',
+    url: 'https://www.facebook.com/groups/ucquantum'
+  },
+  {
     university: 'The University of Hong Kong',
     startDate: 'October 25, 2022',
     endDate: 'October 26, 2022',
@@ -201,7 +201,7 @@ const wave3Schedule: eventSchedule[] = [
     endDate: 'October 31, 2022',
     detail: 'In Person',
     type: 'Hackathon',
-    url: 'https://qisk.it/fallfest'
+    url: 'https://qisk.it/fallfesthype'
   },
   {
     university: 'AUC (American University in Cairo)',
@@ -276,7 +276,7 @@ const wave4Schedule: eventSchedule[] = [
     endDate: 'November 28, 2022',
     detail: 'In Person',
     type: 'Challenge, Hackathon, Workshop Series',
-    url: ''
+    url: 'https://github.com/qBITS-github/Quest-Qiskit-Fall-Fest'
   }
 ]
 
