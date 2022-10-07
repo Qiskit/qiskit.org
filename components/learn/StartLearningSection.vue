@@ -71,6 +71,19 @@ export default class StartLearningSection extends Vue {
       community on Slack.`,
       courses: [
         {
+          image: '/images/learn/course/basics-quantum-information/atom.png',
+          title: 'Understanding quantum information and computation, unit 1: Basics of quantum information',
+          description: `Lorem ipsum dolor sit amet, consectetur adipiscing
+          elit. Auctor neque elementum odio leo in ut risus. Id eu posuere id
+          turpis nunc diam nisl quisque habitasse. Proin ac mollis nunc quis
+          vestibulum.`,
+          cta: {
+            label: 'Go to this course',
+            url: '/learn/course/basics-quantum-information',
+            segment: { cta: 'basics-quatum-information', location: 'course' }
+          }
+        },
+        {
           image: '/images/learn/introduction-course.png',
           title: 'Introduction course',
           description: `Not sure where to start? This path is for you.
