@@ -73,10 +73,7 @@ export default class StartLearningSection extends Vue {
         {
           image: '/images/learn/course/basics-quantum-information/atom.png',
           title: 'Understanding quantum information and computation, unit 1: Basics of quantum information',
-          description: `Lorem ipsum dolor sit amet, consectetur adipiscing
-          elit. Auctor neque elementum odio leo in ut risus. Id eu posuere id
-          turpis nunc diam nisl quisque habitasse. Proin ac mollis nunc quis
-          vestibulum.`,
+          description: `This free course covers quantum information at a detailed mathematical level. Join John Watrous as you explore quantum information, quantum algorithms, and how to understand and mitigate noise.`,
           cta: {
             label: 'Go to this course',
             url: '/learn/course/basics-quantum-information',

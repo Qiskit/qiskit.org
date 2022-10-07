@@ -13,13 +13,11 @@ export default class BasicsQuantumInformationCoursePage extends CourseOverviewPa
   routeName: string = 'basics-quantum-information-course'
 
   headerTitle = 'Basics of quantum information'
-  headerDescription = [`Lorem ipsum dolor sit amet, consectetur adipiscing
-  elit. Auctor neque elementum odio leo in ut risus. Id eu posuere id turpis
-  nunc diam nisl quisque habitasse. Proin ac mollis nunc quis vestibulum. Nisl
-  mauris odio odio tincidunt non duis lorem adipiscing. Vel placerat egestas
-  sed ultrices augue nam magna quis id. Lorem ipsum dolor sit amet, consectetur
-  adipiscing elit. Auctor neque elementum odio leo in ut risus. Id eu posuere
-  id turpis nunc diam nisl quisque habitasse.`]
+  headerDescription = [`Quantum computing has become a global conversation, and
+  whether in media or movies, fact or fiction, the excitement for quantum is
+  growing every day. This free course covers quantum information at a detailed
+  mathematical level. Join John Watrous as you explore quantum information,
+  quantum algorithms, and how to understand and mitigate noise.`]
 
   headerImg = '/images/learn/course/basics-quantum-information/atom.png'
 
@@ -70,13 +68,13 @@ export default class BasicsQuantumInformationCoursePage extends CourseOverviewPa
       image: 'cat.png',
       label: 'Multiple systems',
       segment: { cta: 'single-systems', location: 'course' },
-      url: StartLearningUrl.BasicsQuantumInformation,
+      url: StartLearningUrl.BasicsQuantumInformation
     },
     {
       image: 'cat.png',
       label: 'Circuits, protocols, and games',
       segment: { cta: 'single-systems', location: 'course' },
-      url: StartLearningUrl.BasicsQuantumInformation,
+      url: StartLearningUrl.BasicsQuantumInformation
     }
   ]
 
