@@ -358,7 +358,7 @@ export default class StartLearningSection extends Vue {
     .cv-tab.bx--tabs {
       display: flex;
       justify-content: flex-end;
-      padding-bottom: 3rem;
+      padding-bottom: $spacing-09;
     }
 
     .cv-tabs {
