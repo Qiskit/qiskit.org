@@ -1,42 +1,52 @@
 <template>
   <section class="start-learning-section">
     <h2>
-      Start learning in the way best for you
+      Start learning in the best way for you
     </h2>
-    <article
-      v-for="{ title, description, courses } in learningSections"
-      :key="title"
-      class="bx--row"
-    >
-      <div class="bx--col-xlg-4 bx--col-lg-4">
-        <h3 v-text="title" />
-        <!-- eslint-disable vue/no-v-html -->
-        <p v-html="description" />
-        <!-- eslint-enable -->
-      </div>
-      <div class="bx--col-xlg-12 bx--col-lg-12">
-        <div class="bx--row">
-          <div
-            v-for="{ description: courseDescription, image, title: courseTitle, cta } in courses"
-            :key="courseTitle"
-            class="bx--col-xlg-8"
+    <section class="start-learning-section__tabs">
+      <cv-tabs aria-label="navigation tab label">
+        <cv-tab id="tab-1" label="Upcoming events">
+          <!-- inside Learn tab -->
+          <article
+            v-for="{ title, description, courses } in learningSections"
+            :key="title"
+            class="bx--row"
           >
-            <AppCard
-              :cta-label="cta.label"
-              :to="cta.url"
-              :segment="cta.segment"
-              :image="image"
-              image-contain
-              :title="courseTitle"
-              class="start-learning-section__card"
-              :description-whole-size="true"
-            >
-              {{ courseDescription }}
-            </AppCard>
-          </div>
-        </div>
-      </div>
-    </article>
+            <div class="bx--col-xlg-4 bx--col-lg-4">
+              <h3 v-text="title" />
+              <!-- eslint-disable vue/no-v-html -->
+              <p v-html="description" />
+              <!-- eslint-enable -->
+            </div>
+            <div class="bx--col-xlg-12 bx--col-lg-12">
+              <div class="bx--row">
+                <div
+                  v-for="{ description: courseDescription, image, title: courseTitle, cta } in courses"
+                  :key="courseTitle"
+                  class="bx--col-xlg-8"
+                >
+                  <AppCard
+                    :cta-label="cta.label"
+                    :to="cta.url"
+                    :segment="cta.segment"
+                    :image="image"
+                    image-contain
+                    :title="courseTitle"
+                    class="start-learning-section__card"
+                    :description-whole-size="true"
+                  >
+                    {{ courseDescription }}
+                  </AppCard>
+                </div>
+              </div>
+            </div>
+          </article>
+        </cv-tab>
+        <cv-tab id="tab-2" label="Past events">
+          <!-- inside Teach tab -->
+        </cv-tab>
+      </cv-tabs>
+    </section>
   </section>
 </template>
 
@@ -341,4 +351,24 @@ export default class StartLearningSection extends Vue {
     }
   }
 }
+</style>
+
+<style lang="scss">
+  .start-learning-section {
+    .cv-tab.bx--tabs {
+      display: flex;
+      justify-content: flex-end;
+      padding-bottom: $spacing-09;
+    }
+
+    .cv-tabs {
+      padding-bottom: $spacing-05;
+    }
+
+    & .bx--tabs__nav-item {
+      &--selected:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link {
+        border-bottom-color: $border-color-secondary;
+      }
+    }
+  }
 </style>
