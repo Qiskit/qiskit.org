@@ -355,7 +355,6 @@ export default class StartLearningSection extends Vue {
 
 <style lang="scss">
   .start-learning-section {
-      // override tab position
     .cv-tab.bx--tabs {
       display: flex;
       justify-content: flex-end;
