@@ -62,19 +62,19 @@ export default class BasicsQuantumInformationCoursePage extends CourseOverviewPa
       image: 'single-systems-preview.png',
       label: 'Single systems',
       segment: { cta: 'single-systems', location: 'course' },
-      url: StartLearningUrl.BasicsQuantumInformation
+      url: StartLearningUrl.BasicsQuantumInformation + '/single-systems'
     },
     {
-      image: 'cat.png',
+      image: 'multiple-systems-preview.png',
       label: 'Multiple systems',
-      segment: { cta: 'single-systems', location: 'course' },
-      url: StartLearningUrl.BasicsQuantumInformation
+      segment: { cta: 'multiple-systems', location: 'course' },
+      url: StartLearningUrl.BasicsQuantumInformation + '/multiple-systems'
     },
     {
-      image: 'cat.png',
+      image: 'circuits-protocols-games-preview.png',
       label: 'Circuits, protocols, and games',
-      segment: { cta: 'single-systems', location: 'course' },
-      url: StartLearningUrl.BasicsQuantumInformation
+      segment: { cta: 'circuits-protocols-games', location: 'course' },
+      url: StartLearningUrl.BasicsQuantumInformation + '/circuits-protocols-games'
     }
   ]
 
