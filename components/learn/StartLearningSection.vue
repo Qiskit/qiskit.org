@@ -453,7 +453,7 @@ export default class StartLearningSection extends Vue {
       padding-bottom: $spacing-09;
 
       @include mq($until: medium) {
-        display: initial;
+        display: block;
       }
     }
 
