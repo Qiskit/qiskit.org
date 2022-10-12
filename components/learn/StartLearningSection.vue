@@ -386,6 +386,16 @@ export default class StartLearningSection extends Vue {
       title: 'Community syllabi',
       syllabi: [
         {
+          title: 'Quantum Computing with Superconducting Qubits',
+          instructor: 'Jay Gambetta',
+          university: 'IBM Quantum',
+          cta: {
+            label: 'Go to this course',
+            url: 'https://learn.qiskit.org/syllabus/TRY-SW8',
+            segment: { cta: 'jay-gambetta-syllabus', location: 'teach-curated-syllabi' }
+          }
+        },
+        {
           title: 'Introduction to Quantum Algorithms',
           instructor: 'Peter Shor',
           university: 'Masachussetts Institute of Technology',
@@ -403,16 +413,6 @@ export default class StartLearningSection extends Vue {
             label: 'Go to this course',
             url: 'https://learn.qiskit.org/syllabus/S9P-7GP',
             segment: { cta: 'james-weaver-syllabus', location: 'teach-curated-syllabi' }
-          }
-        },
-        {
-          title: 'Quantum Computing with Superconducting Qubits',
-          instructor: 'Jay Gambetta',
-          university: 'IBM Quantum',
-          cta: {
-            label: 'Go to this course',
-            url: 'https://learn.qiskit.org/syllabus/TRY-SW8',
-            segment: { cta: 'jay-gambetta-syllabus', location: 'teach-curated-syllabi' }
           }
         }
       ]
