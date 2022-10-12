@@ -286,55 +286,6 @@ const CIRCUITS: OverviewSection = {
   ]
 }
 
-const extensionsId: string = 'extensions'
-
-const EXTENSIONS_IN_MENU: TableOfContentEntry = {
-  sectionId: extensionsId,
-  label: 'Extensions',
-  isSecondary: true
-}
-
-const EXTENSIONS: OverviewSection = {
-  id: extensionsId,
-  title: 'Extensions',
-  description: 'Qiskit\'s modular design allows for pluggable extension to be developed by startups, researchers and independent developers.',
-  subSections: [
-    {
-      title: 'Qiskit_rng',
-      content: {
-        image: '/images/overview/extensions/qiskit_rng.png',
-        description: 'Cloud accessible generation of quantum certified random numbers using Qiskit and IBM Quantum systems.',
-        cta: {
-          label: 'Learn more',
-          url: 'https://qiskit-rng.readthedocs.io/en/latest/'
-        }
-      }
-    },
-    {
-      title: 'Kaleidoscope',
-      content: {
-        image: '/images/overview/extensions/kaleidoscope.png',
-        description: 'A visualization package for Qiskit that focuses on interactive visualizations for quantum states, distributions, and device properties.',
-        cta: {
-          label: 'Learn more',
-          url: 'https://nonhermitian.org/kaleido'
-        }
-      }
-    },
-    {
-      title: 'Q-CTRL',
-      content: {
-        image: '/images/overview/extensions/q-ctrl.png',
-        description: 'Q-CTRL Open Controls is an open-source Python package that makes it easy to create and deploy established error-robust quantum control protocols from the open literature.',
-        cta: {
-          label: 'Learn more',
-          url: 'https://docs.q-ctrl.com/references/python/qctrl-open-controls/index.html'
-        }
-      }
-    }
-  ]
-}
-
 const simulatorsId: string = 'simulators'
 
 const SIMULATORS_IN_MENU: TableOfContentEntry = {
@@ -381,7 +332,6 @@ const TABLE_OF_CONTENTS: TableOfContentEntry[] = [
   ALGORITHMS_COLLECTION_IN_MENU,
   EXPERIMENTALIST_TOOLBOX_IN_MENU,
   CIRCUITS_IN_MENU,
-  EXTENSIONS_IN_MENU,
   {
     label: 'Run Quantum Code'
   },
@@ -394,7 +344,6 @@ const CONTENT_SECTIONS: OverviewSection[] = [
   ALGORITHMS_COLLECTION,
   EXPERIMENTALIST_TOOLBOX,
   CIRCUITS,
-  EXTENSIONS,
   SIMULATORS,
   HARDWARE
 ]

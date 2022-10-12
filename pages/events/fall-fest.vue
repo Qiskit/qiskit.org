@@ -83,6 +83,10 @@ import {
       title,
       meta: [
         {
+          name: 'description',
+          content: description
+        },
+        {
           hid: 'twitter:title',
           name: 'twitter:title',
           content: title
