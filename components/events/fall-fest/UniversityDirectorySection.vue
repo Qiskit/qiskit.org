@@ -58,14 +58,14 @@ export default class UniversityDirectorySection extends Vue {
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
-        url: '',
+        url: 'https://qiskit-fall-fest-algiers.wtmalgiers.org/',
         segment: { cta: 'the-higher-national-school-of-computer-science', location: 'fall-fest-page' }
       }
     },
     {
       title: 'RV PU College',
       image: '/images/events/fall-fest/bengalaru.png',
-      startDate: 'October 30, 2022',
+      startDate: 'November 6, 2022',
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
@@ -201,7 +201,7 @@ export default class UniversityDirectorySection extends Vue {
       detail: 'Online',
       cta: {
         label: 'Learn more here',
-        url: 'https://qisk.it/fallfesthype',
+        url: 'https://proyectosrym.cic.ipn.mx/qcoloquio/',
         segment: { cta: 'qiskit-fall-fest-mexico-ipn', location: 'fall-fest-page' }
       }
     },
@@ -242,7 +242,7 @@ export default class UniversityDirectorySection extends Vue {
       title: 'Fundamentals of Quantum Computing (Thapar University)',
       image: '/images/events/fall-fest/patiala.png',
       startDate: 'October 15, 2022',
-      detail: 'In Person',
+      detail: 'Hybrid',
       cta: {
         label: 'Learn more here',
         url: 'https://github.com/developer-student-club-thapar/Qiskit-Fall-Fest-2022',

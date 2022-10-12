@@ -107,8 +107,8 @@ const wave2Schedule: eventSchedule[] = [
   {
     university: 'Fundamentals of Quantum Computing (Thapar University)',
     startDate: 'October 15, 2022',
-    endDate: 'October 17, 2022',
-    detail: 'In Person',
+    endDate: 'October 22, 2022',
+    detail: 'Hybrid',
     type: 'Challenge',
     url: 'https://github.com/developer-student-club-thapar/Qiskit-Fall-Fest-2022'
   },
@@ -118,7 +118,7 @@ const wave2Schedule: eventSchedule[] = [
     endDate: 'October 27, 2022',
     detail: 'Online',
     type: 'Challenge, Hackathon, Workshop Series',
-    url: 'https://qisk.it/fallfesthype'
+    url: 'https://proyectosrym.cic.ipn.mx/qcoloquio/'
   },
   {
     university: 'Qiskit Fall Fest Kolkata Chapter',
@@ -142,7 +142,7 @@ const wave2Schedule: eventSchedule[] = [
     endDate: 'October 23, 2022',
     detail: 'In Person',
     type: 'Challenge, Hackathon, Workshop Series',
-    url: ''
+    url: 'https://qiskit-fall-fest-algiers.wtmalgiers.org/'
   },
   {
     university: 'University of Santiago de Compostela, Spain',
@@ -232,8 +232,8 @@ const wave3Schedule: eventSchedule[] = [
 const wave4Schedule: eventSchedule[] = [
   {
     university: 'RV PU College',
-    startDate: 'October 30, 2022',
-    endDate: 'October 31, 2022',
+    startDate: 'November 6, 2022',
+    endDate: 'November 7, 2022',
     detail: 'In Person',
     type: 'Challenge, Workshop Series',
     url: 'https://github.com/Bellstate05/QiskitFallFest_RVPU'
