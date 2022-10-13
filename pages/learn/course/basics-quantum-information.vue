@@ -40,18 +40,18 @@ export default class BasicsQuantumInformationCoursePage extends CourseOverviewPa
   references: string[] = []
   links: GeneralLink[] = [
     {
-      url: 'https://math.mit.edu/~gs/linearalgebra/',
-      label: 'Gilbert Strang, Introduction to Linear Algebra, 2016',
+      url: 'https://www.pearson.com/en-us/subject-catalog/p/linear-algebra/P200000006185/9780137515424',
+      label: 'Stephen Friedberg Arnold Insel, Lawrence Spence. Linear Algebra. Fifth edition. Pearson, 2019.',
       segment: {
-        cta: 'introduction-to-linear-algebra',
+        cta: 'friedberg-insel-spence-linear-algebra',
         location: 'external-recommended-readings'
       }
     },
     {
-      url: 'https://machinelearningmastery.com/gentle-introduction-linear-algebra/',
-      label: 'Jason Brownlee, A Gentle Introduction to Linear Algebra, 2018',
+      url: 'https://link.springer.com/book/10.1007/978-3-319-11080-6',
+      label: 'Sheldon Axler. Linear Algebra Done Right. Third edition. Undergraduate Texts in Mathematics. Springer, 2015.',
       segment: {
-        cta: 'gentle-introduction-to-linear-algebra',
+        cta: 'axler-linear-algebra-done-right',
         location: 'external-recommended-readings'
       }
     }
@@ -80,24 +80,28 @@ export default class BasicsQuantumInformationCoursePage extends CourseOverviewPa
 
   prerequisites: Prerequisite[] = [
     {
-      title: 'Setting Up Your Environment',
+      title: 'Linear algebra',
       description:
-        'This is a comprehensive guide for setting up your environment on your personal computer for working with Qiskit Textbook.',
+        `To make the most out of this course, we recommend you are comfortable
+        with basic linear algebra. In this video series, Sal Khan introduces
+        some key concepts we'll rely on in this course.`,
       segment: {
-        cta: 'setting-up-your-environment', location: 'prerequisite-material'
+        cta: 'khan-academy-linear-algebra', location: 'prerequisite-material'
       },
       url:
-        'https://learn.qiskit.org/course/ch-prerequisites/environment-setup-guide-to-work-with-qiskit-textbook'
+        'https://www.khanacademy.org/math/linear-algebra'
     },
     {
-      title: 'Python and Jupyter Notebooks',
+      title: 'Install Qiskit',
       description:
-        "Python is a programming language where you don't need to compile. You can just run it line by line...",
+        `You don't need to install anything to start this course, but you may
+        eventually want to write and run your own Qiskit programs. In this
+        video, Nick Brønn helps you get Qiskit running.`,
       segment: {
-        cta: 'python-and-jupyter-notebooks', location: 'prerequisite-material'
+        cta: 'install-qiskit-video', location: 'prerequisite-material'
       },
       url:
-        'https://learn.qiskit.org/course/ch-prerequisites/introduction-to-python-and-jupyter-notebooks'
+        'https://www.youtube.com/watch?v=1kRfHNUbkrg'
     }
   ]
 
