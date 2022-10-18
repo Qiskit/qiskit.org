@@ -10,7 +10,7 @@ import { GeneralLink, StartLearningUrl } from '~/constants/appLinks'
   })
 })
 export default class SummerSchoolCoursePage extends CourseOverviewPage {
-  routeName: string = 'summer-school/intro-quantum-computing-quantum-hardware-2020'
+  routeName: string = 'summer-school/quantum-simulation-summer-school-2022'
 
   headerTitle = '2022 Qiskit global summer school on quantum simulation'
   headerDescription = [
@@ -32,7 +32,7 @@ export default class SummerSchoolCoursePage extends CourseOverviewPage {
   }
 
   startLearningCTA: GeneralLink = {
-    url: StartLearningUrl.SummerSchool2020,
+    url: StartLearningUrl.SummerSchool2022,
     label: 'Start learning',
     segment: {
       cta: 'introduction', location: 'header'
