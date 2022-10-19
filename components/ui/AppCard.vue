@@ -14,9 +14,14 @@
     />
     <div class="app-card__content">
       <header class="app-card__header">
-        <h4 class="app-card__title">
-          {{ title }}
-        </h4>
+        <div>
+          <h4 class="app-card__title">
+            {{ title }}
+          </h4>
+          <h5 v-if="subtitle" class="app-card__subtitle">
+            {{ subtitle }}
+          </h5>
+        </div>
         <div class="bx--row">
           <div v-if="hasTags(tags)" class="app-card__tags">
             <cv-tag v-for="tag in tags" :key="tag" :label="tag" kind="purple" />
@@ -71,6 +76,7 @@ export default class AppCard extends Vue {
   imageContain!: boolean
 
   @Prop({ type: String, default: '' }) title!: string
+  @Prop({ type: String, default: '' }) subtitle!: string
   @Prop({ type: Array, default: () => [] }) tags!: string[]
   @Prop({ type: Array, default: () => [] }) tooltipTags!: TagTooltip[]
   @Prop({ type: String, default: '' }) to!: string
@@ -143,6 +149,7 @@ export default class AppCard extends Vue {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    margin-bottom: $spacing-03;
 
     @include mq($until: large) {
       flex-direction: column;
@@ -157,6 +164,13 @@ export default class AppCard extends Vue {
 
   &__title {
     flex: 1;
+    margin-bottom: $spacing-02;
+  }
+
+  &__subtitle {
+    font-size: 0.875rem;
+    font-style: italic;
+    font-weight: normal;
   }
 }
 
