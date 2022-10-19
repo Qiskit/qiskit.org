@@ -18,9 +18,9 @@
           <h4 class="app-card__title">
             {{ title }}
           </h4>
-          <h4 v-if="subtitle" class="app-card__subtitle">
+          <h5 v-if="subtitle" class="app-card__subtitle">
             {{ subtitle }}
-          </h4>
+          </h5>
         </div>
         <div class="bx--row">
           <div v-if="hasTags(tags)" class="app-card__tags">
@@ -168,6 +168,7 @@ export default class AppCard extends Vue {
   }
 
   &__subtitle {
+    font-size: 0.875rem;
     font-style: italic;
     font-weight: normal;
   }
