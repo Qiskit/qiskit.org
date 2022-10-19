@@ -278,7 +278,7 @@ export default class EcosystemPage extends QiskitPage {
   &__license {
     font-size: 12px;
     margin-right: $spacing-05;
-    margin-top: $spacing-01 / 2;
+    margin-top: calc($spacing-01 / 2);
   }
 
   &__star {
@@ -286,7 +286,7 @@ export default class EcosystemPage extends QiskitPage {
     flex-direction: row;
 
     svg {
-      margin-top: $spacing-01 / 2;
+      margin-top: calc($spacing-01 / 2);
       margin-right: $spacing-01;
       fill: $cool-gray-60;
     }
