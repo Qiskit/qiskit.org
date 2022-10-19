@@ -17,7 +17,7 @@
       <div class="bx--col-xlg-12 bx--col-lg-12">
         <div class="bx--row">
           <div
-            v-for="{ description: courseDescription, image, title: courseTitle, cta } in courses"
+            v-for="{ description: courseDescription, image, title: courseTitle, subtitle: courseSubTitle, cta } in courses"
             :key="courseTitle"
             class="bx--col-xlg-8"
           >
@@ -28,6 +28,7 @@
               :image="image"
               image-contain
               :title="courseTitle"
+              :subtitle="courseSubTitle"
               class="start-learning-section__card"
               :description-whole-size="true"
             >
@@ -48,6 +49,7 @@ import { GeneralLink } from '~/constants/appLinks'
 type Course = {
   image: string,
   title: string,
+  subtitle?: string,
   description: string,
   cta: GeneralLink
 }
