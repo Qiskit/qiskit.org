@@ -49,6 +49,7 @@ import { GeneralLink } from '~/constants/appLinks'
 type Course = {
   image: string,
   title: string,
+  subtitle?: string,
   description: string,
   cta: GeneralLink
 }
