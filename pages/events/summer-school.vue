@@ -1,7 +1,7 @@
 <template>
   <main class="summer-school-page">
     <AppPageHeaderWithCard
-      :cta="headerData.cta"
+      :cta="null"
       :card-title="headerData.cardSectionHeading"
     >
       <template slot="title">
@@ -21,7 +21,7 @@
           for more details and updates. For any questions, please check out our FAQ below!
         </p>
         <p>
-          Early Bird Registration will open at 12:00 PM EST on May 26, 2022.
+          See you next year!
         </p>
       </template>
       <template slot="card">
