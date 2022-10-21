@@ -3,6 +3,7 @@ import { Course, Prerequisite } from 'constants/learnContent'
 import { Component } from 'vue-property-decorator'
 import CourseOverviewPage from '~/components/logic/CourseOverviewPage.vue'
 import { GeneralLink, StartLearningUrl } from '~/constants/appLinks'
+import { RecommendedReading } from '~/components/learn/ExternalRecommendedReadings.vue'
 
 @Component({
   head: () => ({
@@ -44,7 +45,7 @@ export default class IntroductionCoursePage extends CourseOverviewPage {
   }
 
   references: string[] = []
-  links: GeneralLink[] = [
+  links: RecommendedReading[] = [
     {
       url: 'https://math.mit.edu/~gs/linearalgebra/',
       author: 'Gilbert Strang,',

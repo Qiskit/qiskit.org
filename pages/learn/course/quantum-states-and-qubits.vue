@@ -3,6 +3,7 @@ import { Course, Prerequisite } from 'constants/learnContent'
 import { Component } from 'vue-property-decorator'
 import CourseOverviewPage from '~/components/logic/CourseOverviewPage.vue'
 import { GeneralLink, QuantumStatesAndQubitsUrl } from '~/constants/appLinks'
+import { RecommendedReading } from '~/components/learn/ExternalRecommendedReadings.vue'
 
 @Component({
   head: () => ({
@@ -34,7 +35,7 @@ export default class QuantumStatesAndQubitsPage extends CourseOverviewPage {
   }
 
   references: string[] = []
-  links: GeneralLink[] = [
+  links: RecommendedReading[] = [
     {
       url: 'http://mmrc.amss.cas.cn/tlb/201702/W020170224608149940643.pdf',
       author: 'Michael Nielsen, et al.,',
