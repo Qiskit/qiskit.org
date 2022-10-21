@@ -37,7 +37,8 @@ export default class QuantumStatesAndQubitsPage extends CourseOverviewPage {
   links: GeneralLink[] = [
     {
       url: 'http://mmrc.amss.cas.cn/tlb/201702/W020170224608149940643.pdf',
-      label: 'Michael Nielsen, et all. Quantum Computation and Quantum Information (Chapter 1). Cambridge University Press, 2000.',
+      author: 'Michael Nielsen, et al.,',
+      label: 'Quantum Computation and Quantum Information (Chapter 1)',
       segment: {
         cta: 'quantum-computation-and-quantum-information-ch-1',
         location: 'external-recommended-readings'
@@ -45,7 +46,8 @@ export default class QuantumStatesAndQubitsPage extends CourseOverviewPage {
     },
     {
       url: 'http://mmrc.amss.cas.cn/tlb/201702/W020170224608149125645.pdf',
-      label: 'Phillip Kaye, et all. An Introduction to Quantum Computing (Chapters 1-3). Oxford University Press, 2007.',
+      author: 'Phillip Kaye, et al.,',
+      label: 'An Introduction to Quantum Computing (Chapters 1-3)',
       segment: {
         cta: 'introduction-to-quantum-computing-ch-1-3',
         location: 'external-recommended-readings'
@@ -53,7 +55,8 @@ export default class QuantumStatesAndQubitsPage extends CourseOverviewPage {
     },
     {
       url: 'https://arxiv.org/abs/1907.09415',
-      label: 'Ronald de Wolf. Quantum Computing: Lecture Notes (Chapters 1 and 2).',
+      author: 'Ronald de Wolf,',
+      label: 'Quantum Computing: Lecture Notes (Chapters 1 and 2)',
       segment: {
         cta: 'mlmastery-linear-algebra',
         location: 'external-recommended-readings'
@@ -61,7 +64,8 @@ export default class QuantumStatesAndQubitsPage extends CourseOverviewPage {
     },
     {
       url: 'http://cleve.iqc.uwaterloo.ca/resources/QIC-710-F21/Qic710Primer.pdf',
-      label: 'Richard Cleve. Quantum Information Processing — A Primer for Beginners.',
+      author: 'Richard Cleve,',
+      label: 'Quantum Information Processing — A Primer for Beginners',
       segment: {
         cta: 'mlmastery-linear-algebra',
         location: 'external-recommended-readings'

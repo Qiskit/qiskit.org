@@ -37,7 +37,8 @@ export default class QuantumProtocolsAndQuantumAlgorithmsPage extends CourseOver
   links: GeneralLink[] = [
     {
       url: 'http://mmrc.amss.cas.cn/tlb/201702/W020170224608149940643.pdf',
-      label: 'Michael Nielsen, et al. Quantum Computation and Quantum Information (Chapters 4-6). Cambridge University Press, 2000.',
+      author: 'Michael Nielsen, et al.,',
+      label: 'Quantum Computation and Quantum Information (Chapters 4-6)',
       segment: {
         cta: 'quantum-computation-and-quantum-information-ch-4-6',
         location: 'external-recommended-readings'
@@ -45,7 +46,8 @@ export default class QuantumProtocolsAndQuantumAlgorithmsPage extends CourseOver
     },
     {
       url: 'http://mmrc.amss.cas.cn/tlb/201702/W020170224608149125645.pdf',
-      label: 'Phillip Kaye, et al. An Introduction to Quantum Computing (Chapters 5-8). Oxford University Press, 2007.',
+      author: 'Phillip Kaye, et al.,',
+      label: 'An Introduction to Quantum Computing (Chapters 5-8)',
       segment: {
         cta: 'quantum-computing-lecture-notes',
         location: 'external-recommended-readings'
@@ -53,7 +55,8 @@ export default class QuantumProtocolsAndQuantumAlgorithmsPage extends CourseOver
     },
     {
       url: 'http://cleve.iqc.uwaterloo.ca/resources/QIC-710-F21/Qic710QuantumAlgorithmsPart1.pdf',
-      label: 'Richard Cleve. Quantum Information Processing — Quantum Algorithms I. 2021.',
+      author: 'Richard Cleve,',
+      label: 'Quantum Information Processing — Quantum Algorithms I',
       segment: {
         cta: 'quantum-information-processing',
         location: 'external-recommended-readings'
@@ -61,7 +64,8 @@ export default class QuantumProtocolsAndQuantumAlgorithmsPage extends CourseOver
     },
     {
       url: 'http://cleve.iqc.uwaterloo.ca/resources/QIC-710-F21/Qic710QuantumAlgorithmsPart2.pdf',
-      label: 'Richard Cleve. Quantum Information Processing — Quantum Algorithms II. 2021.',
+      author: 'Richard Cleve,',
+      label: 'Quantum Information Processing — Quantum Algorithms II',
       segment: {
         cta: 'quantum-information-processing',
         location: 'external-recommended-readings'
@@ -69,7 +73,8 @@ export default class QuantumProtocolsAndQuantumAlgorithmsPage extends CourseOver
     },
     {
       url: 'http://cleve.iqc.uwaterloo.ca/resources/QIC-710-F21/Qic710QuantumAlgorithmsPart3.pdf',
-      label: 'Richard Cleve. Quantum Information Processing — Quantum Algorithms III. 2021.',
+      author: 'Richard Cleve,',
+      label: 'Quantum Information Processing — Quantum Algorithms III',
       segment: {
         cta: 'quantum-information-processing',
         location: 'external-recommended-readings'

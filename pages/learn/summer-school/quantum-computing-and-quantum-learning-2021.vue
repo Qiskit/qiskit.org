@@ -42,7 +42,8 @@ export default class SummerSchoolCoursePage extends CourseOverviewPage {
   links: GeneralLink[] = [
     {
       url: 'http://mmrc.amss.cas.cn/tlb/201702/W020170224608149940643.pdf',
-      label: 'Quantum Computation and Quantum Information by Nielsen & Chuang',
+      author: 'Nielsen & Chuang,',
+      label: 'Quantum Computation and Quantum Information',
       segment: {
         cta: 'qc-qi-pdf',
         location: 'external-recommended-readings'
@@ -50,7 +51,8 @@ export default class SummerSchoolCoursePage extends CourseOverviewPage {
     },
     {
       url: 'https://www.deeplearningbook.org/',
-      label: 'Deep Learning by Ian Goodfellow et al',
+      author: 'Ian Goodfellow et al.,',
+      label: 'Deep Learning',
       segment: {
         cta: 'deep-learning',
         location: 'external-recommended-readings'
