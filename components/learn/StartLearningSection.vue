@@ -17,7 +17,7 @@
       <div class="bx--col-xlg-12 bx--col-lg-12">
         <div class="bx--row">
           <div
-            v-for="{ description: courseDescription, image, title: courseTitle, cta } in courses"
+            v-for="{ description: courseDescription, image, title: courseTitle, subtitle: courseSubTitle, cta } in courses"
             :key="courseTitle"
             class="bx--col-xlg-8"
           >
@@ -28,6 +28,7 @@
               :image="image"
               image-contain
               :title="courseTitle"
+              :subtitle="courseSubTitle"
               class="start-learning-section__card"
               :description-whole-size="true"
             >
@@ -48,6 +49,7 @@ import { GeneralLink } from '~/constants/appLinks'
 type Course = {
   image: string,
   title: string,
+  subtitle?: string,
   description: string,
   cta: GeneralLink
 }
@@ -278,6 +280,16 @@ export default class StartLearningSection extends Vue {
       title: 'Summer schools',
       description: 'The Qiskit Global Summer Schools are one-of-a-kind sequences that takes students from beginner level to solving advanced quantum problems on a quantum computer. These two-week courses are designed to empower the next generation of quantum developers with the knowledge to explore quantum applications on their own.',
       courses: [
+        {
+          image: '/images/learn/summer-school/quantum-simulation-summer-school-2022/header.png',
+          title: 'Quantum Simulations (2022)',
+          description: 'This summer school provides a focused introduction to quantum computing and its applications to quantum simulation, with a specific focus on quantum chemistry. These lectures were first released as part of a two-week intensive summer school in July 2022.',
+          cta: {
+            label: 'Go to this resource',
+            url: '/learn/summer-school/quantum-simulation-summer-school-2022',
+            segment: { cta: 'quantum-simulation-summer-school-2022', location: 'summer-schools' }
+          }
+        },
         {
           image: '/images/learn/summer-school/quantum-computing-and-quantum-learning-2021/header.png',
           title: 'Quantum Computing & Quantum Machine Learning (2021)',

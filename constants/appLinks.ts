@@ -54,7 +54,8 @@ enum StartLearningUrl {
   BasicsQuantumInformation = 'https://learn.qiskit.org/course/basics',
   QML = 'https://learn.qiskit.org/course/machine-learning',
   SummerSchool2020 = 'https://learn.qiskit.org/summer-school/2020/',
-  SummerSchool2021 = 'https://learn.qiskit.org/summer-school/2021/'
+  SummerSchool2021 = 'https://learn.qiskit.org/summer-school/2021/',
+  SummerSchool2022 = 'https://learn.qiskit.org/summer-school/2022/'
 }
 
 enum PrerequisitesUrl {
