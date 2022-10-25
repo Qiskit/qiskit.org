@@ -28,6 +28,7 @@
       class="course-overview-page__section"
       :links="links"
       :references="references"
+      :preamble="ExternalRecommendedReadingPreamble"
     />
     <CoursePagesSection class="course-overview-page__section" :courses="courses" :img-base="imageUrlBase" />
   </main>

@@ -3,6 +3,7 @@ import { Course, Prerequisite } from 'constants/learnContent'
 import { Component } from 'vue-property-decorator'
 import CourseOverviewPage from '~/components/logic/CourseOverviewPage.vue'
 import { GeneralLink, StartLearningUrl } from '~/constants/appLinks'
+import { RecommendedReading } from '~/components/learn/ExternalRecommendedReadings.vue'
 
 @Component({
   head: () => ({
@@ -39,10 +40,11 @@ export default class SummerSchoolCoursePage extends CourseOverviewPage {
   }
 
   references: string[] = []
-  links: GeneralLink[] = [
+  links: RecommendedReading[] = [
     {
       url: 'http://mmrc.amss.cas.cn/tlb/201702/W020170224608149940643.pdf',
-      label: 'Quantum Computation and Quantum Information by Nielsen & Chuang',
+      author: 'Nielsen & Chuang,',
+      label: 'Quantum Computation and Quantum Information',
       segment: {
         cta: 'qc-qi-pdf',
         location: 'external-recommended-readings'
@@ -50,7 +52,8 @@ export default class SummerSchoolCoursePage extends CourseOverviewPage {
     },
     {
       url: 'https://www.deeplearningbook.org/',
-      label: 'Deep Learning by Ian Goodfellow et al',
+      author: 'Ian Goodfellow et al.,',
+      label: 'Deep Learning',
       segment: {
         cta: 'deep-learning',
         location: 'external-recommended-readings'

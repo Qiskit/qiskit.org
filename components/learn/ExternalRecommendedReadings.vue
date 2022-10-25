@@ -3,6 +3,9 @@
     <h2>
       External recommended readings
     </h2>
+    <p v-if="preamble">
+      {{ preamble }}
+    </p>
     <ol class="external-recommended-readings__list">
       <li
         v-for="reference in references"
@@ -21,8 +24,15 @@
           :segment="link.segment"
           :url="link.url"
         >
-          {{ link.label }}
+          <span v-if="link.author">
+            {{ link.author }}
+          </span>
+          <span :class="link.author ? 'external-recommended-readings__title' : ''">
+            {{ link.label }}
+          </span>
         </AppLink>
+        <span v-if="link.description">-</span>
+        {{ link.description }}
       </li>
     </ol>
   </section>
@@ -33,10 +43,16 @@ import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 import { GeneralLink } from '~/constants/appLinks'
 
+export type RecommendedReading = GeneralLink & {
+    description?: string;
+    author?: string;
+    }
+
 @Component
 export default class ExternalRecommendedReadings extends Vue {
-  @Prop({ type: Array, required: true }) links!: GeneralLink[]
+  @Prop({ type: Array, required: true }) links!: RecommendedReading[]
   @Prop({ type: Array, required: false }) references!: GeneralLink[]
+  @Prop({ type: Array, required: false }) preamble!: string
 }
 </script>
 
@@ -49,10 +65,16 @@ export default class ExternalRecommendedReadings extends Vue {
     margin-left: $spacing-05;
   }
 
+  li {
+    margin-bottom: $spacing-02;
+  }
+
   &__link {
-    display: block;
-    margin-bottom: $spacing-01;
     width: fit-content;
+  }
+
+  &__title {
+    font-style: italic;
   }
 
   &__reference {
