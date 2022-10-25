@@ -3,6 +3,9 @@
     <h2>
       External recommended readings
     </h2>
+    <p v-if="preamble">
+      {{ preamble }}
+    </p>
     <ol class="external-recommended-readings__list">
       <li
         v-for="reference in references"
@@ -49,6 +52,7 @@ export type RecommendedReading = GeneralLink & {
 export default class ExternalRecommendedReadings extends Vue {
   @Prop({ type: Array, required: true }) links!: RecommendedReading[]
   @Prop({ type: Array, required: false }) references!: GeneralLink[]
+  @Prop({ type: Array, required: false }) preamble!: string
 }
 </script>
 
