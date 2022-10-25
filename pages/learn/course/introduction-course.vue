@@ -49,7 +49,7 @@ export default class IntroductionCoursePage extends CourseOverviewPage {
     {
       url: 'https://math.mit.edu/~gs/linearalgebra/',
       author: 'Gilbert Strang,',
-      label: 'Introduction to Linear Algebra.',
+      label: 'Introduction to Linear Algebra',
       segment: {
         cta: 'introduction-to-linear-algebra',
         location: 'external-recommended-readings'
@@ -58,7 +58,7 @@ export default class IntroductionCoursePage extends CourseOverviewPage {
     {
       url: 'https://machinelearningmastery.com/gentle-introduction-linear-algebra/',
       author: 'Jason Brownlee,',
-      label: 'A Gentle Introduction to Linear Algebra.',
+      label: 'A Gentle Introduction to Linear Algebra',
       segment: {
         cta: 'gentle-introduction-to-linear-algebra',
         location: 'external-recommended-readings'

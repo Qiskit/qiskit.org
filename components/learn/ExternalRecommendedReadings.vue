@@ -28,7 +28,7 @@
             {{ link.label }}
           </span>
         </AppLink>
-        {{ link.description ? '-' : '' }}
+        <span v-if="link.description">-</span>
         {{ link.description }}
       </li>
     </ol>
@@ -47,7 +47,7 @@ export type RecommendedReading = GeneralLink & {
 
 @Component
 export default class ExternalRecommendedReadings extends Vue {
-  @Prop({ type: Array, required: true }) links!: GeneralLink[]
+  @Prop({ type: Array, required: true }) links!: RecommendedReading[]
   @Prop({ type: Array, required: false }) references!: GeneralLink[]
 }
 </script>
@@ -66,7 +66,6 @@ export default class ExternalRecommendedReadings extends Vue {
   }
 
   &__link {
-    /* display: block; */
     width: fit-content;
   }
 
