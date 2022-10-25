@@ -39,12 +39,19 @@ export default class BasicsQuantumInformationCoursePage extends CourseOverviewPa
   }
 
   references: string[] = []
+  ExternalRecommendedReadingPreamble: string = `To make the most out of this
+  course, we recommend familiarity with basic linear algebra, complex numbers,
+  and elementary mathematical notions including sets and functions. You may
+  also want to install Qiskit to run your own code. The following sources are a
+  few among many that cover this material`
+
   links: RecommendedReading[] = [
     {
       url: 'https://www.khanacademy.org/math/linear-algebra',
       author: 'Khan Academy,',
       label: 'Linear algebra',
-      description: "To make the most out of this course, we recommend familiarity with basic linear algebra. In this video series, Sal Khan introduces some key concepts we'll rely on in this course.",
+      description: `In this video series, Sal Khan introduces key concepts in
+                    linear algebra that we will rely upon.`,
       segment: {
         cta: 'friedberg-insel-spence-linear-algebra',
         location: 'external-recommended-readings'
@@ -54,7 +61,8 @@ export default class BasicsQuantumInformationCoursePage extends CourseOverviewPa
       url: 'https://www.pearson.com/en-us/subject-catalog/p/linear-algebra/P200000006185/9780137515424',
       author: 'Stephen Friedberg, Arnold Insel, Lawrence Spence,',
       label: 'Linear Algebra',
-      description: 'This book also covers linear algebra for readers that prefer a traditional book format.',
+      description: `This book on linear algebra covers the material we require,
+                    and also includes appendices on sets, functions, and complex numbers.`,
       segment: {
         cta: 'stephen-friedberg-arnold-insel-lawrence-spence-linear-algebra',
         location: 'external-recommended-readings'
@@ -64,7 +72,8 @@ export default class BasicsQuantumInformationCoursePage extends CourseOverviewPa
       url: 'https://link.springer.com/book/10.1007/978-3-319-11080-6',
       author: 'Sheldon Axler,',
       label: 'Linear Algebra Done Right',
-      description: 'Another book on linear algebra.',
+      description: `A classic text on linear algebra suitable for those at or
+                    beyond an advanced undergraduate level.`,
       segment: {
         cta: 'sheldon-axler-linear-algebra-done-right',
         location: 'external-recommended-readings'
@@ -74,17 +83,19 @@ export default class BasicsQuantumInformationCoursePage extends CourseOverviewPa
       url: 'https://www.mathsisfun.com/sets/sets-introduction.html',
       author: 'Ricky Shadrach, Rod Pierce,',
       label: 'Introduction to Sets',
-      description: "This course will also use some language and concepts from set theory. If you're unfamiliar, this informal page will bring you up to speed.",
+      description: `A beginner-level web page on sets that may help to bring
+                    some readers up to speed.`,
       segment: {
         cta: 'ricky-shadrach-rod-pierce-introduction-to-sets',
         location: 'external-recommended-readings'
       }
     },
     {
-      url: 'https://www.mathsisfun.com/sets/sets-introduction.html',
+      url: 'https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/ch1.pdf',
       author: 'John K. Hunter,',
       label: 'An Introduction to Real Analysis: Chapter 1',
-      description: 'A more formal and detailed introduction to set theory.',
+      description: `The first chapter of these lecture notes includes a more
+                    formal and detailed introduction to sets and functions.`,
       segment: {
         cta: 'john-k-hunter-an-introduction-to-real-analysis-chapter',
         location: 'external-recommended-readings'
