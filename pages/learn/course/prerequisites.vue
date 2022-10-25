@@ -47,7 +47,7 @@ export default class PrerequisitesPage extends CourseOverviewPage {
     },
     {
       url: 'https://machinelearningmastery.com/gentle-introduction-linear-algebra/',
-      author: 'Jason Brownlee',
+      author: 'Jason Brownlee,',
       label: 'A Gentle Introduction to Linear Algebra',
       segment: {
         cta: 'gentle-introduction-to-linear-algebra',
