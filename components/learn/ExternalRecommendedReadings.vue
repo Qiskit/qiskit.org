@@ -1,42 +1,44 @@
 <template>
   <section class="external-recommended-readings">
-    <div class="bx--row">
-      <div class="bx--col-lg-12">
-        <h2>
-          External recommended readings
-        </h2>
-        <p v-if="preamble">
-          {{ preamble }}
-        </p>
-        <ol class="external-recommended-readings__list">
-          <li
-            v-for="reference in references"
-            :key="reference.label"
-          >
-            <span class="external-recommended-readings__reference">
-              {{ reference }}
-            </span>
-          </li>
-          <li
-            v-for="link in links"
-            :key="link.label"
-            class="external-recommended-readings__list__item"
-          >
-            <AppLink
-              class="external-recommended-readings__link"
-              :segment="link.segment"
-              :url="link.url"
+    <div class="bx--grid bx--no-gutter">
+      <div class="bx--row">
+        <div class="bx--col-lg-12">
+          <h2>
+            External recommended readings
+          </h2>
+          <p v-if="preamble">
+            {{ preamble }}
+          </p>
+          <ol class="external-recommended-readings__list">
+            <li
+              v-for="reference in references"
+              :key="reference.label"
             >
-              <span v-if="link.author">
-                {{ link.author }}
+              <span class="external-recommended-readings__reference">
+                {{ reference }}
               </span>
-              <span :class="link.author ? 'external-recommended-readings__title' : ''">
-                {{ link.label }}
-              </span>
-            </AppLink>
-            <span v-if="link.description">- {{ link.description }}</span>
-          </li>
-        </ol>
+            </li>
+            <li
+              v-for="link in links"
+              :key="link.label"
+              class="external-recommended-readings__list__item"
+            >
+              <AppLink
+                class="external-recommended-readings__link"
+                :segment="link.segment"
+                :url="link.url"
+              >
+                <span v-if="link.author">
+                  {{ link.author }}
+                </span>
+                <span :class="link.author ? 'external-recommended-readings__title' : ''">
+                  {{ link.label }}
+                </span>
+              </AppLink>
+              <span v-if="link.description">- {{ link.description }}</span>
+            </li>
+          </ol>
+        </div>
       </div>
     </div>
   </section>
