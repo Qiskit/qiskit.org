@@ -17,9 +17,10 @@
               {{ reference }}
             </span>
           </li>
-          <li class="external-recommended-readings__list__item"
+          <li
             v-for="link in links"
             :key="link.label"
+            class="external-recommended-readings__list__item"
           >
             <AppLink
               class="external-recommended-readings__link"
