@@ -35,6 +35,7 @@ export default class PrerequisitesPage extends CourseOverviewPage {
   }
 
   references: string[] = []
+  externalRecommendedReadingsPreamble: string = ''
   links: RecommendedReading[] = [
     {
       url: 'https://math.mit.edu/~gs/linearalgebra/',

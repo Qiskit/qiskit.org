@@ -1,40 +1,43 @@
 <template>
   <section class="external-recommended-readings">
-    <h2>
-      External recommended readings
-    </h2>
-    <p v-if="preamble">
-      {{ preamble }}
-    </p>
-    <ol class="external-recommended-readings__list">
-      <li
-        v-for="reference in references"
-        :key="reference.label"
-      >
-        <span class="external-recommended-readings__reference">
-          {{ reference }}
-        </span>
-      </li>
-      <li
-        v-for="link in links"
-        :key="link.label"
-      >
-        <AppLink
-          class="external-recommended-readings__link"
-          :segment="link.segment"
-          :url="link.url"
-        >
-          <span v-if="link.author">
-            {{ link.author }}
-          </span>
-          <span :class="link.author ? 'external-recommended-readings__title' : ''">
-            {{ link.label }}
-          </span>
-        </AppLink>
-        <span v-if="link.description">-</span>
-        {{ link.description }}
-      </li>
-    </ol>
+    <div class="bx--row">
+      <div class="bx--col-lg-12">
+        <h2>
+          External recommended readings
+        </h2>
+        <p v-if="preamble">
+          {{ preamble }}
+        </p>
+        <ol class="external-recommended-readings__list">
+          <li
+            v-for="reference in references"
+            :key="reference.label"
+          >
+            <span class="external-recommended-readings__reference">
+              {{ reference }}
+            </span>
+          </li>
+          <li class="external-recommended-readings__list__item"
+            v-for="link in links"
+            :key="link.label"
+          >
+            <AppLink
+              class="external-recommended-readings__link"
+              :segment="link.segment"
+              :url="link.url"
+            >
+              <span v-if="link.author">
+                {{ link.author }}
+              </span>
+              <span :class="link.author ? 'external-recommended-readings__title' : ''">
+                {{ link.label }}
+              </span>
+            </AppLink>
+            <span v-if="link.description">- {{ link.description }}</span>
+          </li>
+        </ol>
+      </div>
+    </div>
   </section>
 </template>
 
@@ -52,7 +55,7 @@ export type RecommendedReading = GeneralLink & {
 export default class ExternalRecommendedReadings extends Vue {
   @Prop({ type: Array, required: true }) links!: RecommendedReading[]
   @Prop({ type: Array, required: false }) references!: GeneralLink[]
-  @Prop({ type: Array, required: false }) preamble!: string
+  @Prop({ type: String, required: false }) preamble!: string
 }
 </script>
 
@@ -63,10 +66,10 @@ export default class ExternalRecommendedReadings extends Vue {
   &__list {
     list-style: decimal;
     margin-left: $spacing-05;
-  }
 
-  li {
-    margin-bottom: $spacing-02;
+    &__item {
+      margin-bottom: $spacing-02;
+    }
   }
 
   &__link {

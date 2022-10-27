@@ -39,7 +39,8 @@ export default class BasicsQuantumInformationCoursePage extends CourseOverviewPa
   }
 
   references: string[] = []
-  ExternalRecommendedReadingPreamble: string = `To make the most out of this
+
+  externalRecommendedReadingsPreamble: string = `To make the most out of this
   course, we recommend familiarity with basic linear algebra, complex numbers,
   and elementary mathematical notions including sets and functions. You may
   also want to install Qiskit to run your own code. The following sources are a

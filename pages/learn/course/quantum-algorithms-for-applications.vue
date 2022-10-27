@@ -34,6 +34,7 @@ export default class QuantumAlgorithmsForApplicationsPage extends CourseOverview
   }
 
   references: string[] = []
+  externalRecommendedReadingsPreamble: string = ''
   links: GeneralLink[] = []
 
   courses: Course[] = [

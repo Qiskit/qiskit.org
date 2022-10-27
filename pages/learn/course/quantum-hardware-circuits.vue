@@ -34,6 +34,7 @@ export default class QuantumHardwareCircuitsPage extends CourseOverviewPage {
   }
 
   references: string[] = []
+  externalRecommendedReadingsPreamble: string = ''
   links: GeneralLink[] = []
 
   courses: Course[] = [
