@@ -18,7 +18,7 @@
           <h4 class="app-card__title">
             {{ title }}
           </h4>
-          <h5 v-if="subtitle" class="app-card__subtitle">
+          <h5 v-if="subtitle">
             {{ subtitle }}
           </h5>
         </div>
@@ -165,12 +165,6 @@ export default class AppCard extends Vue {
   &__title {
     flex: 1;
     margin-bottom: $spacing-02;
-  }
-
-  &__subtitle {
-    font-size: 0.875rem;
-    font-style: italic;
-    font-weight: normal;
   }
 }
 

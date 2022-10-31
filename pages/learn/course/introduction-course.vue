@@ -3,6 +3,7 @@ import { Course, Prerequisite } from 'constants/learnContent'
 import { Component } from 'vue-property-decorator'
 import CourseOverviewPage from '~/components/logic/CourseOverviewPage.vue'
 import { GeneralLink, StartLearningUrl } from '~/constants/appLinks'
+import { RecommendedReading } from '~/components/learn/ExternalRecommendedReadings.vue'
 
 @Component({
   head: () => ({
@@ -44,10 +45,12 @@ export default class IntroductionCoursePage extends CourseOverviewPage {
   }
 
   references: string[] = []
-  links: GeneralLink[] = [
+  externalRecommendedReadingsPreamble: string = ''
+  links: RecommendedReading[] = [
     {
       url: 'https://math.mit.edu/~gs/linearalgebra/',
-      label: 'Gilbert Strang, Introduction to Linear Algebra, 2016',
+      author: 'Gilbert Strang,',
+      label: 'Introduction to Linear Algebra',
       segment: {
         cta: 'introduction-to-linear-algebra',
         location: 'external-recommended-readings'
@@ -55,7 +58,8 @@ export default class IntroductionCoursePage extends CourseOverviewPage {
     },
     {
       url: 'https://machinelearningmastery.com/gentle-introduction-linear-algebra/',
-      label: 'Jason Brownlee, A Gentle Introduction to Linear Algebra, 2018',
+      author: 'Jason Brownlee,',
+      label: 'A Gentle Introduction to Linear Algebra',
       segment: {
         cta: 'gentle-introduction-to-linear-algebra',
         location: 'external-recommended-readings'

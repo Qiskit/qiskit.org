@@ -137,6 +137,17 @@ export default class StartLearningSection extends Vue {
       community on Slack.`,
       courses: [
         {
+          image: '/images/learn/course/basics-quantum-information/atom.png',
+          title: 'Understanding quantum information and computation',
+          subtitle: 'Unit 1: Basics of quantum information',
+          description: 'This free course covers quantum information at a detailed mathematical level. Join John Watrous as you explore quantum information, quantum algorithms, and how to understand and mitigate noise.',
+          cta: {
+            label: 'Go to this course',
+            url: '/learn/course/basics-quantum-information',
+            segment: { cta: 'basics-quatum-information', location: 'course' }
+          }
+        },
+        {
           image: '/images/learn/introduction-course.png',
           title: 'Introduction course',
           description: `Not sure where to start? This path is for you.
@@ -333,6 +344,16 @@ export default class StartLearningSection extends Vue {
       title: 'Summer schools',
       description: 'The Qiskit Global Summer Schools are one-of-a-kind sequences that takes students from beginner level to solving advanced quantum problems on a quantum computer. These two-week courses are designed to empower the next generation of quantum developers with the knowledge to explore quantum applications on their own.',
       courses: [
+        {
+          image: '/images/learn/summer-school/quantum-simulation-summer-school-2022/header.png',
+          title: 'Quantum Simulations (2022)',
+          description: 'This summer school provides a focused introduction to quantum computing and its applications to quantum simulation, with a specific focus on quantum chemistry. These lectures were first released as part of a two-week intensive summer school in July 2022.',
+          cta: {
+            label: 'Go to this resource',
+            url: '/learn/summer-school/quantum-simulation-summer-school-2022',
+            segment: { cta: 'quantum-simulation-summer-school-2022', location: 'summer-schools' }
+          }
+        },
         {
           image: '/images/learn/summer-school/quantum-computing-and-quantum-learning-2021/header.png',
           title: 'Quantum Computing & Quantum Machine Learning (2021)',

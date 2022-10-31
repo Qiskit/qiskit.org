@@ -37,6 +37,7 @@ export default class QuantumMachineLearningCoursePage extends CourseOverviewPage
   }
 
   references: string[] = []
+  externalRecommendedReadingsPreamble: string = ''
   links: GeneralLink[] = []
 
   prerequisites: Prerequisite[] = []
