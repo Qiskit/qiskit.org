@@ -95,6 +95,8 @@ import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 import SyllabusCard from './SyllabusCard.vue'
 import { GeneralLink } from '~/constants/appLinks'
+import toc from '~/store/learn/textbook/2.0.0/toc.json'
+const currentVersion = '2.0.0'
 
 type Course = {
   image: string,
@@ -122,6 +124,28 @@ type TeachingSection = {
   syllabi: Syllabus[],
 }
 
+function getCourses (imagesRoot: string, version: string, sectionType: string): Course[] {
+  const courseList: Course[] = []
+  for (const section of toc) {
+    if (section.type !== sectionType) {
+      continue
+    }
+    const course: Course = {
+      title: section.title,
+      subtitle: section.subtitle,
+      image: `${imagesRoot}/${version}/content/${section.overviewInfo.thumbnailUrl}`,
+      description: section.overviewInfo.description.short,
+      cta: {
+        label: `Go to this ${sectionType}`,
+        url: `course/${section.id}`,
+        segment: { cta: section.id, location: sectionType }
+      }
+    }
+    courseList.push(course)
+  }
+  return courseList
+}
+
 @Component({
   components: { SyllabusCard }
 })
@@ -129,150 +153,18 @@ export default class StartLearningSection extends Vue {
   learningSections: LearningSection[] = [
     {
       title: 'Courses',
-      description: `Quantum computing is a big topic and working out where
-      to start can be difficult. In this interactive textbook, the content
-      is organised into courses with clear prerequisites and end
-      goals. If you’re looking for something specific, you can browse all
-      content, and if you can’t find what you’re looking for you can ask the
-      community on Slack.`,
-      courses: [
-        {
-          image: '/images/learn/course/basics-quantum-information/atom.png',
-          title: 'Understanding quantum information and computation',
-          subtitle: 'Unit 1: Basics of quantum information',
-          description: 'This free course covers quantum information at a detailed mathematical level. Join John Watrous as you explore quantum information, quantum algorithms, and how to understand and mitigate noise.',
-          cta: {
-            label: 'Go to this course',
-            url: '/learn/course/basics-quantum-information',
-            segment: { cta: 'basics-quatum-information', location: 'course' }
-          }
-        },
-        {
-          image: '/images/learn/introduction-course.png',
-          title: 'Introduction course',
-          description: `Not sure where to start? This path is for you.
-          This introduction is aimed at audiences from all backgrounds.
-          Whether you're keen to start your journey into quantum computing,
-          or just curious as to what it's all about, this course will take
-          you from zero to one, without the hand waving.`,
-          cta: {
-            label: 'Go to this course',
-            url: '/learn/course/introduction-course',
-            segment: { cta: 'introduction-course', location: 'course' }
-          }
-        },
-        {
-          image: '/images/learn/machine-learning.png',
-          title: 'Quantum machine learning',
-          description: `Want to learn about this exciting, developing field? If
-          you're familiar with quantum computing basics, this course will give
-          you a primer on machine learning, walk you through key concepts, and
-          bring you up to speed with recent developments.`,
-          cta: {
-            label: 'Go to this course',
-            url: '/learn/course/machine-learning-course',
-            segment: { cta: 'machine-learning', location: 'course' }
-          }
-        }
-      ]
+      description: `Quantum computing is a big topic and working out where to
+      start can be difficult. In this interactive textbook, the content is
+      organised into courses with clear prerequisites and end goals. If you’re
+      looking for something specific, you can browse all content, and if you
+      can’t find what you’re looking for you can ask the community on Slack.`,
+      courses: getCourses('/images/learn/textbook', currentVersion, 'course')
     },
     {
       title: 'Chapters',
-      description: 'These pages are not part of a course, but contain useful reference material.',
-      courses: [
-        {
-          image: '/images/learn/course/prerequisites/prerequisites.png',
-          title: 'Prerequisites',
-          description: 'Learn about the software used to write the Qiskit textbook (Python and Jupyter Notebooks), and set up your environment to reproduce the experiments.',
-          cta: {
-            label: 'View resource',
-            url: '/learn/course/prerequisites',
-            segment: { cta: 'prerequisites', location: 'course' }
-          }
-        },
-        {
-          image: '/images/learn/course/quantum-states-and-qubits/bloch-sphere.png',
-          title: 'Quantum States and Qubits',
-          description: 'This chapter introduces the computing concepts that we\'ll explore in later chapters, then introduces basic quantum concepts.',
-          cta: {
-            label: 'View resource',
-            url: '/learn/course/quantum-states-and-qubits',
-            segment: { cta: 'quantum-states-and-qubits', location: 'course' }
-          }
-        },
-        {
-          image: '/images/learn/course/multiple-qubits-and-entanglement/multiple-qubits-and-entanglement.png',
-          title: 'Multiple Qubits and Entanglement',
-          description: 'With the basics down, this chapter explores the consequences of these new quantum effects, and sets us up with tools to understand quantum algorithms.',
-          cta: {
-            label: 'View resource',
-            url: '/learn/course/multiple-qubits-and-entanglement',
-            segment: { cta: 'multiple-qubits-and-entanglement', location: 'course' }
-          }
-        },
-        {
-          image: '/images/learn/course/quantum-protocols-and-quantum-algorithms/quantum-protocols-and-quantum-algorithms.png',
-          title: 'Quantum Protocols and Quantum Algorithms',
-          description: 'In this chapter, we use quantum effects to build powerful algorithms, starting from simple proof-of-concept algorithms, through to Shor\'s famous factoring algorithm (and beyond).',
-          cta: {
-            label: 'View resource',
-            url: '/learn/course/quantum-protocols-and-quantum-algorithms',
-            segment: { cta: 'quantum-protocols-and-quantum-algorithms', location: 'course' }
-          }
-        },
-        {
-          image: '/images/learn/course/quantum-hardware-pulses/quantum-hardware-pulses.png',
-          title: 'Investigating Quantum Hardware Using Microwave Pulses',
-          description: 'In this chapter, we get a level closer to the real quantum machines. Learn about the physics of these devices, and how to program them at the level of microwave pulses.',
-          cta: {
-            label: 'View resource',
-            url: '/learn/course/quantum-hardware-pulses',
-            segment: { cta: 'quantum-hardware-pulses', location: 'course' }
-          }
-        },
-        {
-          image: '/images/learn/course/quantum-algorithms-for-applications/quantum-algorithms-for-applications.png',
-          title: 'Quantum Algorithms for Applications',
-          description: 'If algorithms are the solution, then what is the problem? In this chapter, we look at how we can take general algorithms and apply them to more specific situations.',
-          cta: {
-            label: 'View resource',
-            url: '/learn/course/quantum-algorithms-for-applications',
-            segment: { cta: 'quantum-algorithms-for-applications', location: 'course' }
-          }
-        },
-        {
-          image: '/images/learn/course/quantum-hardware-circuits/quantum-hardware-circuits.png',
-          title: 'Investigating Quantum Hardware Using Quantum Circuits',
-          description: 'All circuit-based quantum devices share some similar characteristics and challenges. In this chapter, we explore how quantum circuits perform on modern quantum computers, and ways to improve performance.',
-          cta: {
-            label: 'View resource',
-            url: '/learn/course/quantum-hardware-circuits',
-            segment: { cta: 'quantum-hardware-circuits', location: 'course' }
-          }
-        },
-        {
-          image: '/images/learn/course/quantum-computing-labs/quantum-lab.png',
-          title: 'Quantum Computing Labs',
-          description: `This set of labs provides 7 different exercises
-          you (or your students) can use to investigate the behaviour of
-          current quantum computers and practice your Qiskit coding skills.`,
-          cta: {
-            label: 'View resource',
-            url: '/learn/course/quantum-computing-labs',
-            segment: { cta: 'labs', location: 'course' }
-          }
-        },
-        {
-          image: '/images/learn/course/games-and-demos/games-and-demos.png',
-          title: 'Games and Demos',
-          description: "Check out games and demonstrations created in this textbook's environment; great for teaching, or just for fun!",
-          cta: {
-            label: 'View resource',
-            url: '/learn/course/games-and-demos',
-            segment: { cta: 'games-and-demos', location: 'course' }
-          }
-        }
-      ]
+      description: `These pages are not part of a course, but contain useful
+      reference material.`,
+      courses: getCourses('/images/learn/textbook', currentVersion, 'chapter')
     },
     {
       title: 'Tutorials',
