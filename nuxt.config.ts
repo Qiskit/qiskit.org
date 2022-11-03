@@ -15,7 +15,7 @@ import pkg from './package.json'
 import fetchEvents from './hooks/update-events'
 import fetchAdvocates from './hooks/update-advocates'
 import fetchEcosystemMembers from './hooks/update-ecosystem'
-import copyTextbookAssets from './hooks/start-learning-construction-utils'
+import extractTextbookPackage from './hooks/start-learning-construction-utils'
 
 const {
   NODE_ENV,
@@ -243,9 +243,10 @@ async function generateContent () {
   }
 
   await fetchEcosystemMembers('./content/ecosystem')
-  copyTextbookAssets(
+  extractTextbookPackage(
     path.resolve('./node_modules'),
-    path.resolve('./content/learn/textbook')
+    path.resolve('./static/images/learn/textbook'),
+    path.resolve('./store/learn/textbook')
   )
 }
 
