@@ -15,6 +15,7 @@ import pkg from './package.json'
 import fetchEvents from './hooks/update-events'
 import fetchAdvocates from './hooks/update-advocates'
 import fetchEcosystemMembers from './hooks/update-ecosystem'
+import copyTextbookAssets from './hooks/start-learning-construction-utils'
 
 const {
   NODE_ENV,
@@ -242,6 +243,10 @@ async function generateContent () {
   }
 
   await fetchEcosystemMembers('./content/ecosystem')
+  copyTextbookAssets(
+    path.resolve('./node_modules'),
+    path.resolve('./content/learn/textbook')
+  )
 }
 
 export default config
