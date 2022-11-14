@@ -137,7 +137,7 @@ const wave2Schedule: eventSchedule[] = [
     url: 'https://pythonclubforphysicists.notion.site/pythonclubforphysicists/Primera-Escuela-de-Computaci-n-Cu-ntica-af219f239f90418b900cba004e27c789'
   },
   {
-    university: 'The Higher National School of Computer Science',
+    university: 'Qiskit Fall Fest Algiers',
     startDate: 'October 21, 2022',
     endDate: 'October 23, 2022',
     detail: 'In Person',
@@ -163,14 +163,6 @@ const wave2Schedule: eventSchedule[] = [
 ]
 
 const wave3Schedule: eventSchedule[] = [
-  {
-    university: 'University of Victoria',
-    startDate: 'October 22, 2022',
-    endDate: 'October 24, 2022',
-    detail: 'Hybrid',
-    type: 'Workshop Series',
-    url: ''
-  },
   {
     university: 'University of Chicago',
     startDate: 'October 22, 2022',
@@ -213,7 +205,7 @@ const wave3Schedule: eventSchedule[] = [
   },
   {
     university: 'Qiskit Fall Fest Morocco',
-    startDate: 'October 28, 2022',
+    startDate: 'October 27, 2022',
     endDate: 'October 30, 2022',
     detail: 'In Person',
     type: 'Challenge, Workshop Series',
@@ -225,7 +217,15 @@ const wave3Schedule: eventSchedule[] = [
     endDate: 'October 30, 2022',
     detail: 'In Person',
     type: 'Workshop Series',
-    url: 'https://umdphysics.umd.edu/academics/ugrad-student-opportunities/undergraduate-quantum-association.html'
+    url: 'https://umduqa.github.io/FallFest.html'
+  },
+  {
+    university: 'University of Victoria',
+    startDate: 'November 26, 2022',
+    endDate: 'November 27, 2022',
+    detail: 'Hybrid',
+    type: 'Workshop Series',
+    url: ''
   }
 ]
 
@@ -248,8 +248,8 @@ const wave4Schedule: eventSchedule[] = [
   },
   {
     university: 'Quantum Fall Fest TU Wien',
-    startDate: 'November 3, 2022',
-    endDate: 'November 4, 2022',
+    startDate: 'November 19, 2022',
+    endDate: 'November 20, 2022',
     detail: 'In Person',
     type: 'Workshop Series',
     url: ''
