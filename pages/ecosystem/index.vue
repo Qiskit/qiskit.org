@@ -61,7 +61,7 @@
           />
           <div class="bx--row">
             <div
-              v-for="(member, index) in filteredMembers"
+              v-for="(member, index) in filteredMembers.slice(firstCardIndex, lastCardIndex)"
               :key="index"
               class="bx--col-sm-4 bx--col-xlg-8"
             >
@@ -216,6 +216,11 @@ export default class EcosystemPage extends QiskitPage {
     url: 'https://github.com/qiskit-community/ecosystem#ecosystem--',
     label: 'Join the ecosystem'
   };
+
+  onChange ({ start, length }: {start: number, length: number}) {
+    this.firstCardIndex = start - 1
+    this.lastCardIndex = start + length - 1
+  }
 }
 </script>
 
