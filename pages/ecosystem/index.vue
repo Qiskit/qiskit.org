@@ -210,7 +210,8 @@ import { GeneralLink } from '~/constants/appLinks'
 })
 export default class EcosystemPage extends QiskitPage {
   routeName: string = 'ecosystem';
-
+  firstCardIndex: number = 0;
+  lastCardIndex: number = 0;
   joinAction: GeneralLink = {
     url: 'https://github.com/qiskit-community/ecosystem#ecosystem--',
     label: 'Join the ecosystem'
