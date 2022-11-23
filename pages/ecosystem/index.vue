@@ -50,6 +50,15 @@
           />
         </template>
         <template slot="results">
+          <cv-pagination
+            backwards-text="Previous page"
+            forwards-text="Next page"
+            :page="page"
+            :number-of-items="filteredMembers.length"
+            :page-number-label="pageNumberLabel"
+            :page-sizes-label="pageSizesLabel"
+            @change="onChange"
+          />
           <div class="bx--row">
             <div
               v-for="(member, index) in filteredMembers"
