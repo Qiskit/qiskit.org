@@ -53,15 +53,12 @@
           <cv-pagination
             backwards-text="Previous page"
             forwards-text="Next page"
-            :page="page"
             :number-of-items="filteredMembers.length"
-            :page-number-label="pageNumberLabel"
-            :page-sizes-label="pageSizesLabel"
             @change="onChange"
           />
           <div class="bx--row">
             <div
-              v-for="(member, index) in filteredMembers.slice(firstCardIndex, lastCardIndex)"
+              v-for="(member, index) in paginatedItems"
               :key="index"
               class="bx--col-sm-4 bx--col-xlg-8"
             >
@@ -216,6 +213,10 @@ export default class EcosystemPage extends QiskitPage {
     url: 'https://github.com/qiskit-community/ecosystem#ecosystem--',
     label: 'Join the ecosystem'
   };
+
+  get paginatedItems () {
+    return (this as any).filteredMembers.slice(this.firstCardIndex, this.lastCardIndex)
+  }
 
   onChange ({ start, length }: {start: number, length: number}) {
     this.firstCardIndex = start - 1
