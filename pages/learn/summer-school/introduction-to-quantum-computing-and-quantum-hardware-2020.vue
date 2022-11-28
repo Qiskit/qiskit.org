@@ -105,6 +105,7 @@ export default class SummerSchoolCoursePage extends CourseOverviewPage {
   ]
 
   references: string[] = []
+  externalRecommendedReadingsPreamble: string = ''
   links: GeneralLink[] = []
 
   prerequisites: Prerequisite[] = [

@@ -13,11 +13,11 @@
       <slot v-if="$slots.default" />
     </div>
     <div>
-      <div class="event-card__detail">
+      <div v-if="location" class="event-card__detail">
         <Map20 class="event-card__icon" />
         {{ location }}
       </div>
-      <div class="event-card__detail">
+      <div v-if="date" class="event-card__detail">
         <Calendar20 class="event-card__icon" />
         <time>{{ date }}</time>
       </div>
