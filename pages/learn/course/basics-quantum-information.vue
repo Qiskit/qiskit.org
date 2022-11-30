@@ -129,10 +129,16 @@ export default class BasicsQuantumInformationCoursePage extends CourseOverviewPa
       url: StartLearningUrl.BasicsQuantumInformation + '/multiple-systems'
     },
     {
-      image: 'circuits-protocols-games-preview.png',
-      label: 'Circuits, protocols, and games',
-      segment: { cta: 'circuits-protocols-games', location: 'course' },
-      url: StartLearningUrl.BasicsQuantumInformation + '/circuits-protocols-games'
+      image: 'quantum-circuits-preview.png',
+      label: 'Quantum circuits',
+      segment: { cta: 'quantum-circuits', location: 'course' },
+      url: StartLearningUrl.BasicsQuantumInformation + '/quantum-circuits'
+    },
+    {
+      image: 'protocols-games-preview.png',
+      label: 'Quantum protocols and games',
+      segment: { cta: 'protocols-games', location: 'course' },
+      url: StartLearningUrl.BasicsQuantumInformation + '/protocols-games'
     }
   ]
 
