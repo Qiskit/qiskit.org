@@ -31,6 +31,7 @@ export default class GamesAndDemosPage extends CourseOverviewPage {
   }
 
   references: string[] = []
+  externalRecommendedReadingsPreamble: string = ''
   links: GeneralLink[] = []
   courses: Course[] = [
     {
