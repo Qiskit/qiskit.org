@@ -28,6 +28,7 @@
       class="course-overview-page__section"
       :links="links"
       :references="references"
+      :preamble="externalRecommendedReadingsPreamble"
     />
     <CoursePagesSection class="course-overview-page__section" :courses="courses" :img-base="imageUrlBase" />
   </main>
@@ -54,6 +55,8 @@ export default abstract class CourseOverviewPage extends QiskitPage {
   abstract links: GeneralLink[]
 
   abstract references: string[]
+
+  abstract externalRecommendedReadingsPreamble: string
 
   abstract courses: Course[]
 

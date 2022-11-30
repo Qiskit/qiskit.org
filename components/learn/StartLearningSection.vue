@@ -1,49 +1,99 @@
 <template>
   <section class="start-learning-section">
     <h2>
-      Start learning in the way best for you
+      Start learning in the best way for you
     </h2>
-    <article
-      v-for="{ title, description, courses } in learningSections"
-      :key="title"
-      class="bx--row"
-    >
-      <div class="bx--col-xlg-4 bx--col-lg-4">
-        <h3 v-text="title" />
-        <!-- eslint-disable vue/no-v-html -->
-        <p v-html="description" />
-        <!-- eslint-enable -->
-      </div>
-      <div class="bx--col-xlg-12 bx--col-lg-12">
-        <div class="bx--row">
-          <div
-            v-for="{ description: courseDescription, image, title: courseTitle, subtitle: courseSubTitle, cta } in courses"
-            :key="courseTitle"
-            class="bx--col-xlg-8"
+    <section class="start-learning-section__tabs">
+      <cv-tabs aria-label="navigation tab label">
+        <cv-tab id="tab-1" label="Learn">
+          <article
+            v-for="{ title, description, courses } in learningSections"
+            :key="title"
+            class="bx--row"
           >
-            <AppCard
-              :cta-label="cta.label"
-              :to="cta.url"
-              :segment="cta.segment"
-              :image="image"
-              image-contain
-              :title="courseTitle"
-              :subtitle="courseSubTitle"
-              class="start-learning-section__card"
-              :description-whole-size="true"
-            >
-              {{ courseDescription }}
-            </AppCard>
-          </div>
-        </div>
-      </div>
-    </article>
+            <div class="bx--col-xlg-4 bx--col-lg-4">
+              <h3 v-text="title" />
+              <!-- eslint-disable vue/no-v-html -->
+              <p v-html="description" />
+              <!-- eslint-enable -->
+            </div>
+            <div class="bx--col-xlg-12 bx--col-lg-12">
+              <div class="bx--row">
+                <div
+                  v-for="{ description: courseDescription, image, title: courseTitle, subtitle: courseSubtitle, cta } in courses"
+                  :key="courseTitle"
+                  class="bx--col-xlg-8"
+                >
+                  <AppCard
+                    :cta-label="cta.label"
+                    :to="cta.url"
+                    :segment="cta.segment"
+                    :image="image"
+                    image-contain
+                    :title="courseTitle"
+                    :subtitle="courseSubtitle"
+                    class="start-learning-section__card"
+                    :description-whole-size="true"
+                  >
+                    {{ courseDescription }}
+                  </AppCard>
+                </div>
+              </div>
+            </div>
+          </article>
+        </cv-tab>
+        <cv-tab id="tab-2" label="Teach">
+          <article
+            v-for="{ title, syllabi } in teachingSections"
+            :key="title"
+            class="bx--row"
+          >
+            <div class="bx--col-xlg-4 bx--col-lg-4">
+              <h3>Community Syllabi</h3>
+              <p>You can add any of these pre made curated syllabi to your classroom section to edit and share by clicking on the syllabus and choosing “Add to Profile”</p>
+              <div class="start-learning-section__teach-section-cta">
+                <h3>Want to create your own?</h3>
+                <AppCta
+                  kind="ghost"
+                  label="Go to the syllabus tool"
+                  url="https://learn.qiskit.org/syllabus/create"
+                />
+              </div>
+            </div>
+            <div class="bx--col-xlg-12 bx--col-lg-12">
+              <div class="bx--row">
+                <div
+                  v-for="{ title: syllabusTitle, cta, instructor, university } in syllabi"
+                  :key="syllabusTitle"
+                  class="bx--col-xlg-8"
+                >
+                  <SyllabusCard
+                    :url="cta.url"
+                    :segment="cta.segment"
+                    image-contain
+                    :title="syllabusTitle"
+                    class="start-learning-section__card"
+                    :description-whole-size="true"
+                  >
+                    <p>
+                      <strong>Instructor:</strong> {{ instructor }} <br>
+                      <strong>University:</strong> {{ university }} <br>
+                    </p>
+                  </SyllabusCard>
+                </div>
+              </div>
+            </div>
+          </article>
+        </cv-tab>
+      </cv-tabs>
+    </section>
   </section>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
+import SyllabusCard from './SyllabusCard.vue'
 import { GeneralLink } from '~/constants/appLinks'
 
 type Course = {
@@ -60,7 +110,21 @@ type LearningSection = {
   courses: Course[],
 }
 
-@Component
+type Syllabus = {
+  title: string,
+  instructor: string,
+  university: string,
+  cta: GeneralLink
+}
+
+type TeachingSection = {
+  title: string,
+  syllabi: Syllabus[],
+}
+
+@Component({
+  components: { SyllabusCard }
+})
 export default class StartLearningSection extends Vue {
   learningSections: LearningSection[] = [
     {
@@ -72,6 +136,17 @@ export default class StartLearningSection extends Vue {
       content, and if you can’t find what you’re looking for you can ask the
       community on Slack.`,
       courses: [
+        {
+          image: '/images/learn/course/basics-quantum-information/atom.png',
+          title: 'Understanding quantum information and computation',
+          subtitle: 'Unit 1: Basics of quantum information',
+          description: 'This free course covers quantum information at a detailed mathematical level. Join John Watrous as you explore quantum information, quantum algorithms, and how to understand and mitigate noise.',
+          cta: {
+            label: 'Go to this course',
+            url: '/learn/course/basics-quantum-information',
+            segment: { cta: 'basics-quatum-information', location: 'course' }
+          }
+        },
         {
           image: '/images/learn/introduction-course.png',
           title: 'Introduction course',
@@ -328,6 +403,44 @@ export default class StartLearningSection extends Vue {
       ]
     }
   ]
+
+  teachingSections: TeachingSection[] = [
+    {
+      title: 'Community syllabi',
+      syllabi: [
+        {
+          title: 'Quantum Computing with Superconducting Qubits',
+          instructor: 'Jay Gambetta',
+          university: 'IBM Quantum',
+          cta: {
+            label: 'Go to this course',
+            url: 'https://learn.qiskit.org/syllabus/TRY-SW8',
+            segment: { cta: 'jay-gambetta-syllabus', location: 'teach-curated-syllabi' }
+          }
+        },
+        {
+          title: 'Introduction to Quantum Algorithms',
+          instructor: 'Peter Shor',
+          university: 'Masachussetts Institute of Technology',
+          cta: {
+            label: 'Go to this course',
+            url: 'https://learn.qiskit.org/syllabus/CFH-KBT',
+            segment: { cta: 'peter-shors-syllabus', location: 'teach-curated-syllabi' }
+          }
+        },
+        {
+          title: 'Preparing for the Qiskit developer certification exam',
+          instructor: 'James L. Weaver',
+          university: 'IBM Quantum',
+          cta: {
+            label: 'Go to this course',
+            url: 'https://learn.qiskit.org/syllabus/S9P-7GP',
+            segment: { cta: 'james-weaver-syllabus', location: 'teach-curated-syllabi' }
+          }
+        }
+      ]
+    }
+  ]
 }
 </script>
 
@@ -335,10 +448,6 @@ export default class StartLearningSection extends Vue {
 .start-learning-section {
   &__subtitle {
     margin-bottom: $spacing-05;
-  }
-
-  &__section {
-    margin-bottom: $spacing-07;
   }
 
   &__card {
@@ -352,5 +461,39 @@ export default class StartLearningSection extends Vue {
       height: calc(100% - #{$spacing-06});
     }
   }
+
+  &__teach-section-cta {
+    margin-top: $spacing-09;
+  }
 }
+</style>
+
+<style lang="scss">
+  .start-learning-section {
+    .cv-tab.bx--tabs {
+      display: flex;
+      justify-content: flex-end;
+      padding-bottom: $spacing-09;
+
+      @include mq($until: medium) {
+        display: block;
+      }
+    }
+
+    .cv-tabs {
+      padding-bottom: $spacing-05;
+    }
+
+    .cv-tabs__panels {
+      @include mq($until: medium) {
+        padding-top: $spacing-09;
+      }
+    }
+
+    & .bx--tabs__nav-item {
+      &--selected:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link {
+        border-bottom-color: $border-color-secondary;
+      }
+    }
+  }
 </style>

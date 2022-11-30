@@ -52,7 +52,7 @@ type University = {
 export default class UniversityDirectorySection extends Vue {
   universities: University[] = [
     {
-      title: 'The Higher National School of Computer Science',
+      title: 'Qiskit Fall Fest Algiers',
       image: '/images/events/fall-fest/algiers.png',
       startDate: 'October 21, 2022',
       detail: 'In Person',
@@ -76,7 +76,7 @@ export default class UniversityDirectorySection extends Vue {
     {
       title: 'University of Victoria',
       image: '/images/events/fall-fest/british_columbia.png',
-      startDate: 'October 22, 2022',
+      startDate: 'November 26, 2022',
       detail: 'Hybrid',
       cta: {
         label: 'Learn more here',
@@ -212,7 +212,7 @@ export default class UniversityDirectorySection extends Vue {
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
-        url: 'https://umdphysics.umd.edu/academics/ugrad-student-opportunities/undergraduate-quantum-association.html',
+        url: 'https://umduqa.github.io/FallFest.html',
         segment: { cta: 'university-of-maryland', location: 'fall-fest-page' }
       }
     },
@@ -274,7 +274,7 @@ export default class UniversityDirectorySection extends Vue {
     {
       title: 'Qiskit Fall Fest Morocco',
       image: '/images/events/fall-fest/morocco.png',
-      startDate: 'October 28, 2022',
+      startDate: 'October 27, 2022',
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
@@ -362,7 +362,7 @@ export default class UniversityDirectorySection extends Vue {
     {
       title: 'Quantum Fall Fest TU Wien',
       image: '/images/events/fall-fest/vienna.png',
-      startDate: 'November 3, 2022',
+      startDate: 'November 19, 2022',
       detail: 'In Person',
       cta: {
         label: 'Learn more here',
