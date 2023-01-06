@@ -113,9 +113,9 @@ export default class StartLocally extends Vue {
   codeToInstallStableOnMac = 'pip install qiskit'
   codeToInstallStableOnWindows = 'pip install qiskit'
 
-  codeToInstallMasterOnLinux = 'pip install git+https://github.com/Qiskit/qiskit-terra git+https://github.com/Qiskit/qiskit-aer git+https://github.com/Qiskit/qiskit-ignis git+https://github.com/Qiskit/qiskit-aqua git+https://github.com/Qiskit/qiskit-ibmq-provider'
-  codeToInstallMasterOnMac = 'pip install git+https://github.com/Qiskit/qiskit-terra git+https://github.com/Qiskit/qiskit-aer git+https://github.com/Qiskit/qiskit-ignis git+https://github.com/Qiskit/qiskit-aqua git+https://github.com/Qiskit/qiskit-ibmq-provider'
-  codeToInstallMasterOnWindows = 'pip install git+https://github.com/Qiskit/qiskit-terra git+https://github.com/Qiskit/qiskit-aer git+https://github.com/Qiskit/qiskit-ignis git+https://github.com/Qiskit/qiskit-aqua git+https://github.com/Qiskit/qiskit-ibmq-provider'
+  codeToInstallMasterOnLinux = 'pip install git+https://github.com/Qiskit/qiskit-terra git+https://github.com/Qiskit/qiskit-ibmq-provider'
+  codeToInstallMasterOnMac = 'pip install git+https://github.com/Qiskit/qiskit-terra git+https://github.com/Qiskit/qiskit-ibmq-provider'
+  codeToInstallMasterOnWindows = 'pip install git+https://github.com/Qiskit/qiskit-terra git+https://github.com/Qiskit/qiskit-ibmq-provider'
 
   prerequisites = {
     [this.QISKIT_INSTALL.stable]: {
