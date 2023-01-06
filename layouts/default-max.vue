@@ -23,7 +23,7 @@ export default class MaxLayout extends Vue {
 
 <style lang="scss" scoped>
 .main-container {
-  margin-top: 3.5rem;
+  margin-top: 3.25rem;
 }
 
 qiskit-ui-shell {
