@@ -1,28 +1,15 @@
 <template>
   <div class="prerequisites">
     <div class="prerequisites__section">
-      <h3 class="h4">
-        Install the compiler
-      </h3>
+      <p>Run the following command and follow the onscreen instructions:</p>
+      <pre class="code prerequisites__code">curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh</pre>
+
       <p>
-        If you’re using Fedora or an equivalent Linux distribution, install
-        using:
+        See <AppLink url="https://rustup.rs/">
+          https://rustup.rs/
+        <!-- eslint-disable-next-line vue/singleline-html-element-content-newline -->
+        </AppLink> for more information and details on <AppLink url="https://forge.rust-lang.org/infra/other-installation-methods.html">other installation methods</AppLink>.
       </p>
-      <pre class="code prerequisites__code">dnf install @development-tools</pre>
-      <p>For Ubuntu/Debian install it using:</p>
-      <pre class="code prerequisites__code">apt-get install build-essential</pre>
-    </div>
-    <div class="prerequisites__section">
-      <h3 class="h4">
-        Install OpenBLAS development headers
-      </h3>
-      <p>
-        If you’re using Fedora or an equivalent Linux distribution, install
-        using:
-      </p>
-      <pre class="code prerequisites__code">dnf install openblas-devel</pre>
-      <p>For Ubuntu/Debian install it using:</p>
-      <pre class="code prerequisites__code">apt-get install libopenblas-dev</pre>
     </div>
   </div>
 </template>

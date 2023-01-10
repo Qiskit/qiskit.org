@@ -43,7 +43,7 @@
         >
           <cv-accordion-item>
             <template #title>
-              Building Qiskit requires a C++ compiler and development headers
+              Installing from source requires that you have the Rust compiler on your system
             </template>
             <template #content>
               <lazy-prerequisites-for-linux v-if="selectedOs === OPERATING_SYSTEMS.linux" />
@@ -113,9 +113,9 @@ export default class StartLocally extends Vue {
   codeToInstallStableOnMac = 'pip install qiskit'
   codeToInstallStableOnWindows = 'pip install qiskit'
 
-  codeToInstallMasterOnLinux = 'pip install git+https://github.com/Qiskit/qiskit-terra git+https://github.com/Qiskit/qiskit-ibmq-provider'
-  codeToInstallMasterOnMac = 'pip install git+https://github.com/Qiskit/qiskit-terra git+https://github.com/Qiskit/qiskit-ibmq-provider'
-  codeToInstallMasterOnWindows = 'pip install git+https://github.com/Qiskit/qiskit-terra git+https://github.com/Qiskit/qiskit-ibmq-provider'
+  codeToInstallMasterOnLinux = 'pip install git+https://github.com/Qiskit/qiskit-terra'
+  codeToInstallMasterOnMac = 'pip install git+https://github.com/Qiskit/qiskit-terra'
+  codeToInstallMasterOnWindows = 'pip install git+https://github.com/Qiskit/qiskit-terra'
 
   prerequisites = {
     [this.QISKIT_INSTALL.stable]: {
