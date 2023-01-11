@@ -112,8 +112,11 @@ export default class TheQiskitCapabilitiesSection extends Mixins(ScrollSectionsM
   }
 
   copyToClipboard (): void {
-    const codeSnippet = document.querySelector('.code-cell')?.textContent!
-    navigator.clipboard.writeText(codeSnippet)
+    const codeSnippet = document.querySelector('.code-cell') as HTMLElement | null
+
+    if (codeSnippet != null) {
+      navigator.clipboard.writeText(codeSnippet.innerText)
+    }
   }
 }
 </script>
