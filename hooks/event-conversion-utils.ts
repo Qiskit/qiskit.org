@@ -216,12 +216,13 @@ function isEventInDateRange (
 }
 
 async function fetchCommunityEvents (apiKey: string, { days }: { days: any }): Promise<CommunityEvent[]> {
-  await setAllFieldNames(apiKey, 'Event Calendar', 'Add to Event Site')
+  const view = 'Add to Event Site'
+  await setAllFieldNames(apiKey, 'Event Calendar', view)
 
   const { showOnEventsPage } = RECORD_FIELDS
   const communityEvents: CommunityEvent[] = []
 
-  await getEventsQuery(apiKey, days, 'Add to Event Site', [`{${showOnEventsPage}}`]).eachPage((records, nextPage) => {
+  await getEventsQuery(apiKey, days, view, [`{${showOnEventsPage}}`]).eachPage((records, nextPage) => {
     for (const record of records) {
       const communityEvent = convertToCommunityEvent(record)
       if (isEventInDateRange(communityEvent, days)) {
@@ -235,12 +236,13 @@ async function fetchCommunityEvents (apiKey: string, { days }: { days: any }): P
 }
 
 async function fetchSeminarSeriesEvents (apiKey: string, { days }: { days: any }): Promise<SeminarSeriesEvent[]> {
-  await setAllFieldNames(apiKey, 'Event Calendar', 'Seminar Series ONLY')
+  const view = 'Seminar Series ONLY'
+  await setAllFieldNames(apiKey, 'Event Calendar', view)
 
   const { showOnSeminarSeriesPage } = RECORD_FIELDS
   const seminarSeriesEvents: SeminarSeriesEvent[] = []
 
-  await getEventsQuery(apiKey, days, 'Seminar Series ONLY', [`{${showOnSeminarSeriesPage}}`]).eachPage((records, nextPage) => {
+  await getEventsQuery(apiKey, days, view, [`{${showOnSeminarSeriesPage}}`]).eachPage((records, nextPage) => {
     for (const record of records) {
       const seminarSeriesEvent = convertToSeminarSeriesEvent(record)
 
