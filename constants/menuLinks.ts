@@ -146,7 +146,7 @@ const QISKIT_VIDEOS: NavLink = {
 
 const TUTORIALS_LINK: NavLink = {
   label: 'Tutorials',
-  url: 'https://github.com/Qiskit/qiskit-tutorials',
+  url: 'https://qiskit.org/documentation/tutorials.html',
   segment: {
     cta: 'tutorials',
     location: 'menu'
