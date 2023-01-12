@@ -7,6 +7,7 @@ import {
 } from '../store/advocates'
 
 import {
+  getFieldName,
   getImageUrl,
   findImageAttachment
 } from './airtable-conversion-utils'
@@ -34,57 +35,6 @@ const RECORD_FIELDS: Record<string, string> = {
 const airtableBaseId = 'app8koO4BZifGFhCV'
 
 /**
- * Get the Airtable field name for a given field ID.
- *
- * @param apiKey Airtable API key
- * @param tableId Airtable table ID
- * @param view Airtable view
- * @param fieldId Field ID
- * @returns Promise<string | null> Field name
- */
-function getFieldName (
-  apiKey: string,
-  tableId: string,
-  view: string,
-  fieldId: string
-): Promise<string | null> {
-  const base = new Airtable({ apiKey }).base(airtableBaseId)
-  let fieldName: string | undefined
-
-  try {
-    return base(tableId)
-      .select({
-        fields: [fieldId],
-        view
-      })
-      .eachPage((records, nextPage) => {
-        for (const record of records) {
-          if (fieldName) {
-            break
-          }
-
-          const recordFields = Object.keys(record.fields)
-
-          if (recordFields.length > 0) {
-            fieldName = recordFields[0]
-          }
-        }
-
-        nextPage()
-      }).then(() => {
-        if (fieldName) {
-          return fieldName
-        } else {
-          return ''
-        }
-      })
-  } catch (error) {
-    console.error(`Error in getFieldName: ${error}`)
-    return Promise.resolve(null)
-  }
-}
-
-/**
  * Set the Airtable field names for all the fields defined in RECORD_FIELDS_IDS
  * and store them in RECORD_FIELDS.
  *
@@ -99,7 +49,7 @@ function setAllFieldNames (
   view: string
 ) : Promise<Record<string, string | null>> {
   const fieldNamesPromises = Object.entries(RECORD_FIELDS_IDS).map(([field, fieldId]) => {
-    return getFieldName(apiKey, tableId, view, fieldId)
+    return getFieldName(apiKey, airtableBaseId, tableId, view, fieldId)
       .then((fieldName) => {
         if (fieldName) {
           RECORD_FIELDS[field] = fieldName
