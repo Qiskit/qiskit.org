@@ -27,22 +27,37 @@ type SeminarSeriesEvent = {
   to: string
 }
 
-const RECORD_FIELDS = Object.freeze({
-  name: 'Name',
-  startDate: 'Start Date',
-  endDate: 'End Date',
-  typeOfEvent: 'Type of Event',
-  eventWebsite: 'Website',
-  location: 'Event Location',
-  region: 'Region',
-  image: 'Image / Icon',
-  institution: 'Institution',
-  showOnEventsPage: 'Add to Event Site',
-  showOnSeminarSeriesPage: 'Add to Seminar Series Site',
-  speaker: 'Speaker (S.S.)'
+const RECORD_FIELDS_IDS = Object.freeze({
+  name: 'fldTqTxKr3ZzUhzKT',
+  startDate: 'fldPGzoUf9wxsBDYJ',
+  endDate: 'fldeFv42sqOY7oMy0',
+  typeOfEvent: 'fldU6WcqeTXDMUFTL',
+  eventWebsite: 'fldBPq3LMa5aZDBZm',
+  location: 'fldSjeniJtud6M5j3',
+  region: 'fldBCXzoxvcoxsKIK',
+  image: 'fldco5xB6dy9MG7y8',
+  institution: 'fldLVMuuhZVGwh4qZ',
+  showOnEventsPage: 'fldi1ThdDnUQakxWo',
+  showOnSeminarSeriesPage: 'fldl6in6TPajnxPMs',
+  speaker: 'fldyeOkGwMbfMRvPu'
 } as const)
 
 function getEventsQuery (apiKey: string, days: number, view: string, filters: string[] = []): Airtable.Query<{}> {
+const RECORD_FIELDS = {
+  name: '',
+  startDate: '',
+  endDate: '',
+  typeOfEvent: '',
+  eventWebsite: '',
+  location: '',
+  region: '',
+  image: '',
+  institution: '',
+  showOnEventsPage: '',
+  showOnSeminarSeriesPage: '',
+  speaker: ''
+}
+
   const { startDate } = RECORD_FIELDS
   const base = new Airtable({ apiKey }).base('appYREKB18uC7y8ul')
   const filterByFormula = `AND(${filters})`
