@@ -11,20 +11,122 @@ import {
   findImageAttachment
 } from './airtable-conversion-utils'
 
-const RECORD_FIELDS = Object.freeze({
-  name: 'Name',
-  city: 'City',
-  country: 'Country',
-  region: 'Continents',
-  image: 'Please upload your photo for the Advocates Website',
-  slackId: 'Slack Member Id',
-  slackUsername: 'Slack Username'
+const RECORD_FIELDS_IDS = Object.freeze({
+  name: 'fldkG2SqdvCKDUhCH',
+  city: 'fldoCJjrveX4J9TV1',
+  country: 'fldZcHGtjEK7fPyAT',
+  region: 'fldG80tPB8heLWxBP',
+  image: 'fldawRemxDatqlfLo',
+  slackId: 'fld5aUddy1M4YRHTn',
+  slackUsername: 'fldY1nP63OKVsdvRC'
 } as const)
 
+const RECORD_FIELDS: Record<string, string> = {
+  name: '',
+  city: '',
+  country: '',
+  region: '',
+  image: '',
+  slackId: '',
+  slackUsername: ''
+} as const
+
+const airtableBaseId = 'app8koO4BZifGFhCV'
+
+/**
+ * Get the Airtable field name for a given field ID.
+ *
+ * @param apiKey Airtable API key
+ * @param tableId Airtable table ID
+ * @param view Airtable view
+ * @param fieldId Field ID
+ * @returns Promise<string | null> Field name
+ */
+function getFieldName (
+  apiKey: string,
+  tableId: string,
+  view: string,
+  fieldId: string
+): Promise<string | null> {
+  const base = new Airtable({ apiKey }).base(airtableBaseId)
+  let fieldName: string | undefined
+
+  try {
+    return base(tableId)
+      .select({
+        fields: [fieldId],
+        view
+      })
+      .eachPage((records, nextPage) => {
+        for (const record of records) {
+          if (fieldName) {
+            break
+          }
+
+          const recordFields = Object.keys(record.fields)
+
+          if (recordFields.length > 0) {
+            fieldName = recordFields[0]
+          }
+        }
+
+        nextPage()
+      }).then(() => {
+        if (fieldName) {
+          return fieldName
+        } else {
+          return ''
+        }
+      })
+  } catch (error) {
+    console.error(`Error in getFieldName: ${error}`)
+    return Promise.resolve(null)
+  }
+}
+
+/**
+ * Set the Airtable field names for all the fields defined in RECORD_FIELDS_IDS
+ * and store them in RECORD_FIELDS.
+ *
+ * @param apiKey Airtable API key
+ * @param tableId Airtable table ID
+ * @param view Airtable view
+ * @returns Promise<Record<string, string>> RECORD_FIELDS
+ */
+function setAllFieldNames (
+  apiKey: string,
+  tableId: string,
+  view: string
+) : Promise<Record<string, string | null>> {
+  const fieldNamesPromises = Object.entries(RECORD_FIELDS_IDS).map(([field, fieldId]) => {
+    return getFieldName(apiKey, tableId, view, fieldId)
+      .then((fieldName) => {
+        if (fieldName) {
+          RECORD_FIELDS[field] = fieldName
+          return { [field]: fieldName }
+        } else {
+          console.warn(`Field name not found for field ID ${fieldId}`)
+        }
+      })
+      .catch((error) => {
+        console.error(`Error in setAllFieldNames: ${error}`)
+        return { [field]: null }
+      })
+  })
+
+  return Promise.all(fieldNamesPromises)
+    .then((results) => {
+      return results.reduce((acc, result) => {
+        return { ...acc, ...result }
+      }, {} as Record<string, string | null>)
+    })
+}
+
 async function fetchAdvocates (apiKey: string): Promise<Advocate[]> {
+  await setAllFieldNames(apiKey, 'Advocates', 'For website')
   const { slackId } = RECORD_FIELDS
   const advocates: Advocate[] = []
-  const base = new Airtable({ apiKey }).base('app8koO4BZifGFhCV')
+  const base = new Airtable({ apiKey }).base(airtableBaseId)
   await base('Advocates').select({
     fields: Object.values(RECORD_FIELDS),
     filterByFormula: `AND({${slackId}})`,
