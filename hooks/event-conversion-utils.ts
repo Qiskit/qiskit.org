@@ -42,7 +42,6 @@ const RECORD_FIELDS_IDS = Object.freeze({
   speaker: 'fldyeOkGwMbfMRvPu'
 } as const)
 
-function getEventsQuery (apiKey: string, days: number, view: string, filters: string[] = []): Airtable.Query<{}> {
 const RECORD_FIELDS: Record<string, string> = {
   name: '',
   startDate: '',
@@ -149,6 +148,7 @@ function setAllFieldNames (
     })
 }
 
+function getEventsQuery (apiKey: string, days: number, view: string, filters: string[] = []): Airtable.Query<{}> {
   const { startDate } = RECORD_FIELDS
   const filterByFormula = `AND(${filters})`
   const base = new Airtable({ apiKey }).base(airtableBaseId)
