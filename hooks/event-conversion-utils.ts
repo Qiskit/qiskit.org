@@ -367,7 +367,7 @@ function dateParts (date: Date): [string, string, string] {
 }
 
 function getWebsite (record: any): string {
-  return record.get('Website')
+  return record.get(RECORD_FIELDS.eventWebsite)
 }
 
 export {
