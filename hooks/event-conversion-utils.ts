@@ -102,7 +102,7 @@ function getFieldName (
         if (fieldName) {
           return fieldName
         } else {
-          throw new Error(`Field name not found for field ID ${fieldId}`)
+          return ''
         }
       })
   } catch (error) {
@@ -132,7 +132,7 @@ function setAllFieldNames (
           RECORD_FIELDS[field] = fieldName
           return { [field]: fieldName }
         } else {
-          throw new Error(`Field name not found for field ID ${fieldId}`)
+          console.warn(`Field name not found for field ID ${fieldId}`)
         }
       })
       .catch((error) => {
