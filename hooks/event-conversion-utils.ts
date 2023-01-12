@@ -216,6 +216,8 @@ function isEventInDateRange (
 }
 
 async function fetchCommunityEvents (apiKey: string, { days }: { days: any }): Promise<CommunityEvent[]> {
+  await setAllFieldNames(apiKey, 'Event Calendar', 'Add to Event Site')
+
   const { showOnEventsPage } = RECORD_FIELDS
   const communityEvents: CommunityEvent[] = []
 
@@ -233,6 +235,8 @@ async function fetchCommunityEvents (apiKey: string, { days }: { days: any }): P
 }
 
 async function fetchSeminarSeriesEvents (apiKey: string, { days }: { days: any }): Promise<SeminarSeriesEvent[]> {
+  await setAllFieldNames(apiKey, 'Event Calendar', 'Seminar Series ONLY')
+
   const { showOnSeminarSeriesPage } = RECORD_FIELDS
   const seminarSeriesEvents: SeminarSeriesEvent[] = []
 
