@@ -58,6 +58,8 @@ const RECORD_FIELDS: Record<string, string> = {
   speaker: ''
 } as const
 
+const airtableBaseId = 'appYREKB18uC7y8ul'
+
 /**
  * Get the Airtable field name for a given field ID.
  *
@@ -148,8 +150,8 @@ function setAllFieldNames (
 }
 
   const { startDate } = RECORD_FIELDS
-  const base = new Airtable({ apiKey }).base('appYREKB18uC7y8ul')
   const filterByFormula = `AND(${filters})`
+  const base = new Airtable({ apiKey }).base(airtableBaseId)
 
   return base('Event Calendar').select({
     filterByFormula,
