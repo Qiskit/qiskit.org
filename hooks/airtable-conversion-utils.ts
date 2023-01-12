@@ -73,8 +73,50 @@ function getFieldName (
   }
 }
 
+/**
+ * Get the Airtable field names for all the fields IDs provided.
+ * The object provided must be a map of keys to field IDs.
+ * The returned object will be a map of keys to field names.
+ *
+ * @param apiKey Airtable API key
+ * @param baseId Airtable base ID
+ * @param tableId Airtable table ID
+ * @param view Airtable view
+ * @param fieldIds Field IDs
+ * @returns Promise<Record<string, string | null>> Field names mapped to keys
+ */
+function getAllFieldNames (
+  apiKey: string,
+  baseId: string,
+  tableId: string,
+  view: string,
+  fieldIds: Record<string, string>
+) : Promise<Record<string, string | null>> {
+  const fieldNamesPromises = Object.entries(fieldIds).map(([field, fieldId]) => {
+    return getFieldName(apiKey, baseId, tableId, view, fieldId)
+      .then((fieldName) => {
+        if (fieldName) {
+          return { [field]: fieldName }
+        } else {
+          console.warn(`Field name not found for field ID ${fieldId}`)
+        }
+      })
+      .catch((error) => {
+        console.error(`Error in setAllFieldNames: ${error}`)
+        return { [field]: null }
+      })
+  })
+
+  return Promise.all(fieldNamesPromises)
+    .then((results) => {
+      return results.reduce((acc, result) => {
+        return { ...acc, ...result }
+      }, {} as Record<string, string | null>)
+    })
+}
+
 export {
-  getFieldName,
+  getAllFieldNames,
   getImageUrl,
   findImageAttachment
 }

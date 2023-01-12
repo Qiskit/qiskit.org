@@ -7,7 +7,7 @@ import {
 } from '../store/advocates'
 
 import {
-  getFieldName,
+  getAllFieldNames,
   getImageUrl,
   findImageAttachment
 } from './airtable-conversion-utils'
@@ -22,58 +22,15 @@ const RECORD_FIELDS_IDS = Object.freeze({
   slackUsername: 'fldY1nP63OKVsdvRC'
 } as const)
 
-const RECORD_FIELDS: Record<string, string> = {
-  name: '',
-  city: '',
-  country: '',
-  region: '',
-  image: '',
-  slackId: '',
-  slackUsername: ''
-} as const
+let RECORD_FIELDS: Record<string, any>
 
 const airtableBaseId = 'app8koO4BZifGFhCV'
 
-/**
- * Set the Airtable field names for all the fields defined in RECORD_FIELDS_IDS
- * and store them in RECORD_FIELDS.
- *
- * @param apiKey Airtable API key
- * @param tableId Airtable table ID
- * @param view Airtable view
- * @returns Promise<Record<string, string>> RECORD_FIELDS
- */
-function setAllFieldNames (
-  apiKey: string,
-  tableId: string,
-  view: string
-) : Promise<Record<string, string | null>> {
-  const fieldNamesPromises = Object.entries(RECORD_FIELDS_IDS).map(([field, fieldId]) => {
-    return getFieldName(apiKey, airtableBaseId, tableId, view, fieldId)
-      .then((fieldName) => {
-        if (fieldName) {
-          RECORD_FIELDS[field] = fieldName
-          return { [field]: fieldName }
-        } else {
-          console.warn(`Field name not found for field ID ${fieldId}`)
-        }
-      })
-      .catch((error) => {
-        console.error(`Error in setAllFieldNames: ${error}`)
-        return { [field]: null }
-      })
-  })
-
-  return Promise.all(fieldNamesPromises)
-    .then((results) => {
-      return results.reduce((acc, result) => {
-        return { ...acc, ...result }
-      }, {} as Record<string, string | null>)
-    })
-}
-
 async function fetchAdvocates (apiKey: string): Promise<Advocate[]> {
-  await setAllFieldNames(apiKey, 'Advocates', 'For website')
+  if (!RECORD_FIELDS) {
+    RECORD_FIELDS = await getAllFieldNames(apiKey, airtableBaseId, 'Advocates', 'For website', RECORD_FIELDS_IDS)
+  }
+
   const { slackId } = RECORD_FIELDS
   const advocates: Advocate[] = []
   const base = new Airtable({ apiKey }).base(airtableBaseId)
@@ -136,7 +93,6 @@ function getSlackUsername (record: any): string {
 }
 
 export {
-  RECORD_FIELDS,
   fetchAdvocates,
   convertToAdvocate,
   getName,

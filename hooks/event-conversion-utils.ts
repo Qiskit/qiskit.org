@@ -11,7 +11,7 @@ import {
 } from '../store/events'
 
 import {
-  getFieldName,
+  getAllFieldNames,
   getImageUrl,
   findImageAttachment
 } from './airtable-conversion-utils'
@@ -43,60 +43,9 @@ const RECORD_FIELDS_IDS = Object.freeze({
   speaker: 'fldyeOkGwMbfMRvPu'
 } as const)
 
-const RECORD_FIELDS: Record<string, string> = {
-  name: '',
-  startDate: '',
-  endDate: '',
-  typeOfEvent: '',
-  eventWebsite: '',
-  location: '',
-  region: '',
-  image: '',
-  institution: '',
-  showOnEventsPage: '',
-  showOnSeminarSeriesPage: '',
-  speaker: ''
-} as const
+let RECORD_FIELDS: Record<string, any>
 
 const airtableBaseId = 'appYREKB18uC7y8ul'
-
-/**
- * Set the Airtable field names for all the fields defined in RECORD_FIELDS_IDS
- * and store them in RECORD_FIELDS.
- *
- * @param apiKey Airtable API key
- * @param tableId Airtable table ID
- * @param view Airtable view
- * @returns Promise<Record<string, string>> RECORD_FIELDS
- */
-function setAllFieldNames (
-  apiKey: string,
-  tableId: string,
-  view: string
-) : Promise<Record<string, string | null>> {
-  const fieldNamesPromises = Object.entries(RECORD_FIELDS_IDS).map(([field, fieldId]) => {
-    return getFieldName(apiKey, airtableBaseId, tableId, view, fieldId)
-      .then((fieldName) => {
-        if (fieldName) {
-          RECORD_FIELDS[field] = fieldName
-          return { [field]: fieldName }
-        } else {
-          console.warn(`Field name not found for field ID ${fieldId}`)
-        }
-      })
-      .catch((error) => {
-        console.error(`Error in setAllFieldNames: ${error}`)
-        return { [field]: null }
-      })
-  })
-
-  return Promise.all(fieldNamesPromises)
-    .then((results) => {
-      return results.reduce((acc, result) => {
-        return { ...acc, ...result }
-      }, {} as Record<string, string | null>)
-    })
-}
 
 function getEventsQuery (apiKey: string, days: number, view: string, filters: string[] = []): Airtable.Query<{}> {
   const { startDate } = RECORD_FIELDS
@@ -167,7 +116,10 @@ function isEventInDateRange (
 
 async function fetchCommunityEvents (apiKey: string, { days }: { days: any }): Promise<CommunityEvent[]> {
   const view = 'Add to Event Site'
-  await setAllFieldNames(apiKey, 'Event Calendar', view)
+
+  if (!RECORD_FIELDS) {
+    RECORD_FIELDS = await getAllFieldNames(apiKey, airtableBaseId, 'Event Calendar', view, RECORD_FIELDS_IDS)
+  }
 
   const { showOnEventsPage } = RECORD_FIELDS
   const communityEvents: CommunityEvent[] = []
@@ -187,7 +139,10 @@ async function fetchCommunityEvents (apiKey: string, { days }: { days: any }): P
 
 async function fetchSeminarSeriesEvents (apiKey: string, { days }: { days: any }): Promise<SeminarSeriesEvent[]> {
   const view = 'Seminar Series ONLY'
-  await setAllFieldNames(apiKey, 'Event Calendar', view)
+
+  if (!RECORD_FIELDS) {
+    RECORD_FIELDS = await getAllFieldNames(apiKey, airtableBaseId, 'Event Calendar', view, RECORD_FIELDS_IDS)
+  }
 
   const { showOnSeminarSeriesPage } = RECORD_FIELDS
   const seminarSeriesEvents: SeminarSeriesEvent[] = []
@@ -327,7 +282,6 @@ function getWebsite (record: any): string {
 }
 
 export {
-  RECORD_FIELDS,
   fetchCommunityEvents,
   fetchSeminarSeriesEvents,
   convertToCommunityEvent,
