@@ -33,6 +33,10 @@ export default class BasicLink extends Vue {
     return !!url && url.startsWith('http')
   }
 
+  static isInternal (url: string): boolean {
+    return !!url && url.startsWith('/')
+  }
+
   static isMail (url: string): boolean {
     return !!url && url.startsWith('mailto')
   }
@@ -50,6 +54,7 @@ export default class BasicLink extends Vue {
     return BasicLink.isExternal(url) ||
       BasicLink.isMail(url) ||
       BasicLink.isIdAnchor(url) ||
+      BasicLink.isInternal(url) ||
       this.isStatic
   }
 

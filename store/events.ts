@@ -2,6 +2,7 @@ const COMMUNITY_EVENT_TYPES = Object.freeze({
   hackathon: 'Hackathon',
   camp: 'Camp',
   industryEvent: 'Industry Event',
+  openSource: 'Open Source',
   workshop: 'Workshop',
   challenge: 'Challenge',
   networking: 'Networking',
@@ -63,15 +64,7 @@ const WORLD_REGION_OPTIONS = Object.freeze([
   WORLD_REGIONS.africa,
   WORLD_REGIONS.online
 ])
-const COMMUNITY_EVENT_TYPE_OPTIONS = Object.freeze([
-  COMMUNITY_EVENT_TYPES.hackathon,
-  COMMUNITY_EVENT_TYPES.camp,
-  COMMUNITY_EVENT_TYPES.industryEvent,
-  COMMUNITY_EVENT_TYPES.workshop,
-  COMMUNITY_EVENT_TYPES.challenge,
-  COMMUNITY_EVENT_TYPES.networking,
-  COMMUNITY_EVENT_TYPES.talks
-])
+const COMMUNITY_EVENT_TYPE_OPTIONS = Object.values(COMMUNITY_EVENT_TYPES).sort()
 
 export {
   CommunityEvent,

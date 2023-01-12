@@ -30,7 +30,7 @@ import { GeneralLink } from '~/constants/appLinks'
 @Component
 export default class LearnCard extends Vue {
   learnLink: GeneralLink = {
-    url: 'learn',
+    url: '/learn',
     label: 'Get learning',
     segment: { cta: 'get-learning', location: 'learn-card' }
   }
