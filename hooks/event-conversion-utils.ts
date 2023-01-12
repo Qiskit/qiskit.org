@@ -58,6 +58,57 @@ const RECORD_FIELDS = {
   speaker: ''
 }
 
+/**
+ * Get the Airtable field name for a given field ID.
+ *
+ * @param apiKey Airtable API key
+ * @param tableId Airtable table ID
+ * @param view Airtable view
+ * @param fieldId Field ID
+ * @returns Promise<string | null> Field name
+ */
+function getFieldName (
+  apiKey: string,
+  tableId: string,
+  view: string,
+  fieldId: string
+): Promise<string | null> {
+  const base = new Airtable({ apiKey }).base(airtableBaseId)
+  let fieldName: string | undefined
+
+  try {
+    return base(tableId)
+      .select({
+        fields: [fieldId],
+        view
+      })
+      .eachPage((records, nextPage) => {
+        for (const record of records) {
+          if (fieldName) {
+            break
+          }
+
+          const recordFields = Object.keys(record.fields)
+
+          if (recordFields.length > 0) {
+            fieldName = recordFields[0]
+          }
+        }
+
+        nextPage()
+      }).then(() => {
+        if (fieldName) {
+          return fieldName
+        } else {
+          throw new Error(`Field name not found for field ID ${fieldId}`)
+        }
+      })
+  } catch (error) {
+    console.error(`Error in getFieldName: ${error}`)
+    return Promise.resolve(null)
+  }
+}
+
   const { startDate } = RECORD_FIELDS
   const base = new Airtable({ apiKey }).base('appYREKB18uC7y8ul')
   const filterByFormula = `AND(${filters})`
