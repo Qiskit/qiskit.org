@@ -43,7 +43,7 @@ const RECORD_FIELDS_IDS = Object.freeze({
 } as const)
 
 function getEventsQuery (apiKey: string, days: number, view: string, filters: string[] = []): Airtable.Query<{}> {
-const RECORD_FIELDS = {
+const RECORD_FIELDS: Record<string, string> = {
   name: '',
   startDate: '',
   endDate: '',
@@ -56,7 +56,7 @@ const RECORD_FIELDS = {
   showOnEventsPage: '',
   showOnSeminarSeriesPage: '',
   speaker: ''
-}
+} as const
 
 /**
  * Get the Airtable field name for a given field ID.
@@ -107,6 +107,44 @@ function getFieldName (
     console.error(`Error in getFieldName: ${error}`)
     return Promise.resolve(null)
   }
+}
+
+/**
+ * Set the Airtable field names for all the fields defined in RECORD_FIELDS_IDS
+ * and store them in RECORD_FIELDS.
+ *
+ * @param apiKey Airtable API key
+ * @param tableId Airtable table ID
+ * @param view Airtable view
+ * @returns Promise<Record<string, string>> RECORD_FIELDS
+ */
+function setAllFieldNames (
+  apiKey: string,
+  tableId: string,
+  view: string
+) : Promise<Record<string, string | null>> {
+  const fieldNamesPromises = Object.entries(RECORD_FIELDS_IDS).map(([field, fieldId]) => {
+    return getFieldName(apiKey, tableId, view, fieldId)
+      .then((fieldName) => {
+        if (fieldName) {
+          RECORD_FIELDS[field] = fieldName
+          return { [field]: fieldName }
+        } else {
+          throw new Error(`Field name not found for field ID ${fieldId}`)
+        }
+      })
+      .catch((error) => {
+        console.error(`Error in setAllFieldNames: ${error}`)
+        return { [field]: null }
+      })
+  })
+
+  return Promise.all(fieldNamesPromises)
+    .then((results) => {
+      return results.reduce((acc, result) => {
+        return { ...acc, ...result }
+      }, {} as Record<string, string | null>)
+    })
 }
 
   const { startDate } = RECORD_FIELDS
