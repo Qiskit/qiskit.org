@@ -28,7 +28,7 @@ function getThumbnailUrl (imageAttachment: any): string|null {
  * @param tableId Airtable table ID
  * @param view Airtable view
  * @param fieldId Field ID
- * @returns Promise<string | null> Field name
+ * @returns {Promise<string | null>} Field name
  */
 function getFieldName (
   apiKey: string,
@@ -83,7 +83,7 @@ function getFieldName (
  * @param tableId Airtable table ID
  * @param view Airtable view
  * @param fieldIds Field IDs
- * @returns Promise<Record<string, string | null>> Field names mapped to keys
+ * @returns {Promise<Record<string, string | null>>} Field names mapped to keys
  */
 function getAllFieldNames (
   apiKey: string,
