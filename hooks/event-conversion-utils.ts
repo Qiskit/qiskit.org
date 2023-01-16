@@ -29,8 +29,8 @@ type SeminarSeriesEvent = {
 
 const RECORD_FIELDS = Object.freeze({
   name: 'Name',
-  startDate: 'Start Date',
-  endDate: 'End Date',
+  startDate: 'Event Start Date',
+  endDate: 'Event End Date',
   typeOfEvent: 'Type of Event',
   eventWebsite: 'Website',
   location: 'Event Location',
