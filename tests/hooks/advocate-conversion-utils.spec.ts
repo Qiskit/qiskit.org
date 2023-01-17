@@ -52,7 +52,7 @@ describe('convertToAdvocate', () => {
       }
     ],
     city: 'Someplace',
-    region: 'North America',
+    region: 'America (North)',
     slackId: 'FAKEID123',
     slackUsername: 'fakename'
   })
@@ -63,7 +63,7 @@ describe('convertToAdvocate', () => {
       name: 'Fake advocate',
       image: '/image.jpeg',
       city: 'Someplace',
-      region: 'North America'
+      region: 'America (North)'
     })
   })
 })
@@ -183,7 +183,7 @@ describe('getSlackId', () => {
     const fakeSlackId = 'FAKEID123'
     const fakeAdvocate = new FakeRecord({
       name: 'Fake Advocate',
-      region: 'North America',
+      region: 'America (North)',
       slackId: 'FAKEID123',
       slackUsername: 'fakename'
     })
@@ -196,7 +196,7 @@ describe('getSlackUsername', () => {
     const fakeSlackUsername = 'fakename'
     const fakeAdvocate = new FakeRecord({
       name: 'Fake Advocate',
-      region: 'North America',
+      region: 'America (North)',
       slackId: 'FAKEID123',
       slackUsername: 'fakename'
     })
