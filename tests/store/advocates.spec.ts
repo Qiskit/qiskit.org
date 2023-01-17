@@ -12,7 +12,7 @@ const mockAdvocate1 = () => ({
   country: 'Peru',
   image: 'https://example.com/img/1.jpg',
   name: 'John Doe',
-  region: 'South America'
+  region: 'America (South)'
 })
 const mockAdvocate2 = () => ({
   city: 'Munich',
@@ -29,7 +29,7 @@ const mockAdvocate2 = () => ({
 
 describe('filteredAdvocates', () => {
   const getter = 'advocates/filteredAdvocates'
-  const mockMatchingRegionFilter1 = () => 'South America'
+  const mockMatchingRegionFilter1 = () => 'America (South)'
   const mockMatchingRegionFilter2 = () => 'Europe'
   const mockNonMatchingRegionFilter = () => 'Moon'
 
@@ -97,7 +97,7 @@ describe('setAdvocates', () => {
 
 describe('setRegionFilters', () => {
   const mutationType = 'advocates/setRegionFilters'
-  const mockRegionFilter1 = 'South America'
+  const mockRegionFilter1 = 'America (South)'
   const mockRegionFilter2 = 'Europe'
 
   beforeEach(() => {
