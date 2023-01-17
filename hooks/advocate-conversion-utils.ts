@@ -7,7 +7,7 @@ import {
 } from '../store/advocates'
 
 import {
-  getAllFieldNames,
+  AirtableRecord,
   getImageUrl,
   findImageAttachment
 } from './airtable-conversion-utils'
@@ -22,24 +22,24 @@ const RECORD_FIELDS_IDS = Object.freeze({
   slackUsername: 'fldY1nP63OKVsdvRC'
 } as const)
 
-class AdvocateAirtableAPI {
-  private _airtableBaseId = 'app8koO4BZifGFhCV'
-  private _apiKey: string
+const AIRTABLE_BASE_ID = 'app8koO4BZifGFhCV'
+
+class AdvocateAirtableAPI extends AirtableRecord {
   private _recordFields?: Record<string, any>
 
   constructor (apiKey: string, recordFields?: Record<string, any>) {
-    this._apiKey = apiKey
+    super(apiKey, AIRTABLE_BASE_ID, 'Advocates', 'For website')
     this._recordFields = recordFields
   }
 
   async fetchAdvocates (): Promise<Advocate[]> {
     if (!this._recordFields) {
-      this._recordFields = await getAllFieldNames(this._apiKey, this._airtableBaseId, 'Advocates', 'For website', RECORD_FIELDS_IDS)
+      this._recordFields = await this.getAllFieldNames(RECORD_FIELDS_IDS)
     }
 
     const { slackId } = this._recordFields
     const advocates: Advocate[] = []
-    const base = new Airtable({ apiKey: this._apiKey }).base(this._airtableBaseId)
+    const base = new Airtable({ apiKey: this.apiKey }).base(AIRTABLE_BASE_ID)
 
     await base('Advocates').select({
       fields: Object.values(this._recordFields),

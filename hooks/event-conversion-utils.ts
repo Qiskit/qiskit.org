@@ -11,7 +11,7 @@ import {
 } from '../store/events'
 
 import {
-  getAllFieldNames,
+  AirtableRecord,
   getImageUrl,
   findImageAttachment
 } from './airtable-conversion-utils'
@@ -42,20 +42,20 @@ const RECORD_FIELDS_IDS = Object.freeze({
   showOnSeminarSeriesPage: 'fldl6in6TPajnxPMs',
   speaker: 'fldyeOkGwMbfMRvPu'
 } as const)
-class EventsAirtableAPI {
-  private _airtableBaseId = 'appYREKB18uC7y8ul'
-  private _apiKey: string
+
+const AIRTABLE_BASE_ID = 'appYREKB18uC7y8ul'
+class EventsAirtableAPI extends AirtableRecord {
   private _recordFields?: Record<string, any>
 
   constructor (apiKey: string, recordFields?: Record<string, any>) {
-    this._apiKey = apiKey
+    super(apiKey, AIRTABLE_BASE_ID, 'Event Calendar', 'For website')
     this._recordFields = recordFields
   }
 
   getEventsQuery (days: number, view: string, filters: string[] = []): Airtable.Query<{}> {
     const { startDate } = this._recordFields!
     const filterByFormula = `AND(${filters})`
-    const base = new Airtable({ apiKey: this._apiKey }).base(this._airtableBaseId)
+    const base = new Airtable({ apiKey: this.apiKey }).base(AIRTABLE_BASE_ID)
 
     return base('Event Calendar').select({
       filterByFormula,
@@ -123,7 +123,7 @@ class EventsAirtableAPI {
     const view = 'Add to Event Site'
 
     if (!this._recordFields) {
-      this._recordFields = await getAllFieldNames(this._apiKey, this._airtableBaseId, 'Event Calendar', view, RECORD_FIELDS_IDS)
+      this._recordFields = await this.getAllFieldNames(RECORD_FIELDS_IDS)
     }
 
     const { showOnEventsPage } = this._recordFields
@@ -146,7 +146,7 @@ class EventsAirtableAPI {
     const view = 'Seminar Series ONLY'
 
     if (!this._recordFields) {
-      this._recordFields = await getAllFieldNames(this._apiKey, this._airtableBaseId, 'Event Calendar', view, RECORD_FIELDS_IDS)
+      this._recordFields = await this.getAllFieldNames(RECORD_FIELDS_IDS)
     }
 
     const { showOnSeminarSeriesPage } = this._recordFields
