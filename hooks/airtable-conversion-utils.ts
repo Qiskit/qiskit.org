@@ -26,11 +26,11 @@ class AirtableRecord {
   private tableId: string;
   private view: string;
 
-  constructor(apiKey: string, baseId: string, tableId: string, view: string) {
-    this.apiKey = apiKey;
-    this.baseId = baseId;
-    this.tableId = tableId;
-    this.view = view;
+  constructor (apiKey: string, baseId: string, tableId: string, view: string) {
+    this.apiKey = apiKey
+    this.baseId = baseId
+    this.tableId = tableId
+    this.view = view
   }
 
   /**
@@ -39,9 +39,9 @@ class AirtableRecord {
    * @param fieldId Field ID
    * @returns {Promise<string | null>} Field name
    */
-  public async getFieldName(fieldId: string): Promise<string | null> {
-    const base = new Airtable({ apiKey: this.apiKey }).base(this.baseId);
-    let fieldName: string | undefined;
+  public getFieldName (fieldId: string): Promise<string | null> {
+    const base = new Airtable({ apiKey: this.apiKey }).base(this.baseId)
+    let fieldName: string | undefined
 
     try {
       return base(this.tableId)
@@ -52,28 +52,28 @@ class AirtableRecord {
         .eachPage((records, nextPage) => {
           for (const record of records) {
             if (fieldName) {
-              break;
+              break
             }
 
-            const recordFields = Object.keys(record.fields);
+            const recordFields = Object.keys(record.fields)
 
             if (recordFields.length > 0) {
-              fieldName = recordFields[0];
+              fieldName = recordFields[0]
             }
           }
 
-          nextPage();
+          nextPage()
         })
         .then(() => {
           if (fieldName) {
-            return fieldName;
+            return fieldName
           } else {
-            return "";
+            return ''
           }
-        });
+        })
     } catch (error) {
-      console.error(`Error in getFieldName: ${error}`);
-      return Promise.resolve(null);
+      console.error(`Error in getFieldName: ${error}`)
+      return Promise.resolve(null)
     }
   }
 
@@ -85,7 +85,7 @@ class AirtableRecord {
    * @param fieldIds Field IDs
    * @returns {Promise<Record<string, string | null>>} Field names mapped to keys
    */
-  public async getAllFieldNames(
+  public getAllFieldNames (
     fieldIds: Record<string, string>
   ): Promise<Record<string, string | null>> {
     const fieldNamesPromises = Object.entries(fieldIds).map(
@@ -93,26 +93,25 @@ class AirtableRecord {
         return this.getFieldName(fieldId)
           .then((fieldName) => {
             if (fieldName) {
-              return { [field]: fieldName };
+              return { [field]: fieldName }
             } else {
-              console.warn(`Field name not found for field ID ${fieldId}`);
+              console.warn(`Field name not found for field ID ${fieldId}`)
             }
           }).catch((error) => {
-            console.error(`Error in setAllFieldNames: ${error}`);
-            return { [field]: null };
-          });
+            console.error(`Error in setAllFieldNames: ${error}`)
+            return { [field]: null }
+          })
       }
-    );
+    )
 
     return Promise.all(fieldNamesPromises)
       .then((results) => {
         return results.reduce((acc, result) => {
-          return { ...acc, ...result };
-        }, {} as Record<string, string | null>);
-      });
+          return { ...acc, ...result }
+        }, {} as Record<string, string | null>)
+      })
   }
 }
-
 
 export {
   AirtableRecord,
