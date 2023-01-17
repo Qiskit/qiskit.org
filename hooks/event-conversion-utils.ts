@@ -29,11 +29,11 @@ type SeminarSeriesEvent = {
 
 const RECORD_FIELDS = Object.freeze({
   name: 'Name',
-  startDate: 'Start Date',
-  endDate: 'End Date',
+  startDate: 'Event Start Date',
+  endDate: 'Event End Date',
   typeOfEvent: 'Type of Event',
-  eventWebsite: 'Website',
-  location: 'Event Location',
+  eventWebsite: 'Event Website',
+  location: 'Event City/State',
   region: 'Region',
   image: 'Image / Icon',
   institution: 'Institution',
@@ -261,7 +261,7 @@ function dateParts (date: Date): [string, string, string] {
 }
 
 function getWebsite (record: any): string {
-  return record.get('Website')
+  return record.get('Event Website')
 }
 
 export {
