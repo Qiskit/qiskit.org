@@ -3,7 +3,7 @@
     <div class="code-cell__block" :class="{'code-cell__block_active' : activeBlocks[0]}">
       <pre>import qiskit</pre>
       <pre>&nbsp;</pre>
-      <pre><span class="code-cell__comment"># create circuit with Qiskit quantum circuits libraries</span></pre>
+      <pre><span class="code-cell__comment"># create circuit with Qiskit quantum circuit libraries</span></pre>
       <pre class="code-cell__line">quantum_circuit = qiskit.circuit.library.QuantumVolume(5)</pre>
       <pre class="code-cell__line">quantum_circuit.measure_all()</pre>
       <pre class="code-cell__line">quantum_circuit.draw()</pre>
