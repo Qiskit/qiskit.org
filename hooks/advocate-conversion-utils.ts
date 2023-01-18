@@ -1,4 +1,6 @@
+import fs from 'fs'
 import Airtable from 'airtable'
+import axios from 'axios'
 
 // TODO: Understand why this import works with '../' and not with '~/'
 import {
@@ -45,38 +47,73 @@ class AdvocatesAirtableRecords extends AirtableRecords {
       fields: Object.values(this._recordFields),
       filterByFormula: `AND({${slackId}})`,
       sort: [{ field: this._recordFields.name, direction: 'asc' }]
-    }).eachPage((records, nextPage) => {
+    }).eachPage(async (records, nextPage) => {
       for (const record of records) {
         const advocate = this.convertToAdvocate(record)
-        advocates.push(advocate)
+        advocates.push(await advocate)
       }
       nextPage()
     })
     return Promise.resolve(advocates)
   }
 
-  convertToAdvocate (record: any): Advocate {
-    return {
+  async convertToAdvocate (record: any): Promise<Advocate> {
+    const advocate = {
       name: this.getName(record),
-      image: this.getImage(record),
+      image: await this.getImage(record),
       region: this.getRegion(record),
       city: this.getCity(record),
       country: this.getCountry(record),
       slackId: this.getSlackId(record),
       slackUsername: this.getSlackUsername(record)
     }
+    return advocate
+  }
+
+  /**
+   * Store an image from a given URL and return the file path.
+   *
+   * @param {string} imageUrl - The URL of the image to be stored
+   * @param {string} uniqueId - A unique identifier for the image, used in the file name
+   * @return {string} - The file path of the stored image, in the format '/images/advocates/filename'
+   */
+  public async storeImage (imageUrl: string, uniqueId: string): Promise<string> {
+    const imageFileName = `${uniqueId}-${new Date().getTime()}.jpg`
+    const imageFilePath = `static/images/advocates/${imageFileName}`
+    try {
+      const fileStat = fs.statSync(imageFilePath)
+      // check if file is less than 1 week old
+      if (fileStat.mtimeMs > Date.now() - 7 * 24 * 60 * 60 * 1000) {
+        return imageFilePath
+      }
+    } catch (err) {
+      // continue to download if file not found
+    }
+    const response = await axios({
+      url: imageUrl,
+      method: 'GET',
+      responseType: 'arraybuffer'
+    })
+    const imageBuffer = Buffer.from(response.data, 'binary')
+    fs.writeFileSync(imageFilePath, imageBuffer)
+    return `/images/advocates/${imageFileName}`
   }
 
   public getName (record: any): string {
     return record.get(this._recordFields!.name)
   }
 
-  public getImage (record: any): string {
+  public async getImage (record: any): Promise<string> {
     const fallbackImage = '/images/advocates/no-advocate-photo.png'
     const attachments = record.get(this._recordFields!.image)
     const imageAttachment = attachments && findImageAttachment(attachments)
     const imageUrl = imageAttachment && getImageUrl(imageAttachment)
-    return imageUrl || fallbackImage
+
+    if (!imageUrl) {
+      return fallbackImage
+    }
+    const imageName = await this.storeImage(imageUrl, this.getSlackId(record))
+    return imageName
   }
 
   public getCity (record: any): string {
