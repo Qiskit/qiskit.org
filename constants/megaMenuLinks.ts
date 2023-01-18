@@ -71,10 +71,10 @@ const BASICS_COURSE: MegaDropdownMenuGroup = {
       }
     },
     {
-      label: 'Quantum protocols and games',
-      url: `${baseUrl}${pathBasicsCourse}/protocols-games`,
+      label: 'Entanglement in action',
+      url: `${baseUrl}${pathBasicsCourse}/entanglement-in-action`,
       segment: {
-        cta: 'protocols_and_games', location: sectionBasicsCourse
+        cta: 'entanglement_in_action', location: sectionBasicsCourse
       }
     }
   ]
