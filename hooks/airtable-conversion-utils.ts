@@ -23,6 +23,7 @@ function getThumbnailUrl (imageAttachment: any): string|null {
 }
 
 class AirtableRecords {
+  protected id = ''
   protected apiKey: string;
   private baseId: string;
   private tableId: string;
@@ -123,7 +124,7 @@ class AirtableRecords {
    * @return {Promise<string>} The path to the stored image
    */
   public async storeImage (imageUrl: string, uniqueId: string, targetDir: string): Promise<string> {
-    const imageFileName = `${uniqueId}-${new Date().getTime()}.jpg`
+    const imageFileName = `${uniqueId}.jpg`
     const imageFilePath = `static/${targetDir}/${imageFileName}`
 
     try {

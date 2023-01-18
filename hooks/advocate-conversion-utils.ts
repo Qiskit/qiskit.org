@@ -47,6 +47,7 @@ class AdvocatesAirtableRecords extends AirtableRecords {
       sort: [{ field: this._recordFields.name, direction: 'asc' }]
     }).eachPage(async (records, nextPage) => {
       for (const record of records) {
+        this.id = record.id
         const advocate = this.convertToAdvocate(record)
         advocates.push(await advocate)
       }
@@ -81,7 +82,8 @@ class AdvocatesAirtableRecords extends AirtableRecords {
     if (!imageUrl) {
       return fallbackImage
     }
-    const imageName = await this.storeImage(imageUrl, this.getSlackId(record), 'images/advocates')
+
+    const imageName = await this.storeImage(imageUrl, this.id, 'images/advocates/downloaded')
     return imageName
   }
 

@@ -131,6 +131,7 @@ class EventsAirtableRecords extends AirtableRecords {
 
     await this.getEventsQuery(days, view, [`{${showOnEventsPage}}`]).eachPage(async (records, nextPage) => {
       for (const record of records) {
+        this.id = record.id
         const communityEvent = await this.convertToCommunityEvent(record)
         if (this.isEventInDateRange(communityEvent, days)) {
           communityEvents.push(communityEvent)
@@ -154,6 +155,7 @@ class EventsAirtableRecords extends AirtableRecords {
 
     await this.getEventsQuery(days, view, [`{${showOnSeminarSeriesPage}}`]).eachPage(async (records, nextPage) => {
       for (const record of records) {
+        this.id = record.id
         const seminarSeriesEvent = await this.convertToSeminarSeriesEvent(record)
 
         if (typeof (seminarSeriesEvent.to) !== 'undefined') {
@@ -260,7 +262,7 @@ class EventsAirtableRecords extends AirtableRecords {
       return fallbackImage
     }
 
-    const imageName = await this.storeImage(imageUrl, this.getName(record), 'images/events')
+    const imageName = await this.storeImage(imageUrl, this.id, 'images/events/downloaded')
     return imageName
   }
 
