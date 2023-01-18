@@ -1,12 +1,12 @@
-import EventsAirtableAPI from '~/hooks/event-conversion-utils'
+import EventsAirtableRecords from '~/hooks/event-conversion-utils'
 import { COMMUNITY_EVENT_TYPES, WORLD_REGIONS } from '~/store/events'
 import type { CommunityEvent } from '~/store/events'
 
 describe('isEventInDateRange', () => {
-  let eventsApi: EventsAirtableAPI
+  let eventsAirtableRecords: EventsAirtableRecords
 
   beforeEach(() => {
-    eventsApi = new EventsAirtableAPI('testApiKey', 'testView')
+    eventsAirtableRecords = new EventsAirtableRecords('testApiKey', 'testView')
   })
 
   const mockEventBase = {
@@ -43,7 +43,7 @@ describe('isEventInDateRange', () => {
       startDate: getFormattedDate(-7),
       endDate: getFormattedDate(-1)
     }
-    expect(eventsApi.isEventInDateRange(mockEvent, days)).toBe(false)
+    expect(eventsAirtableRecords.isEventInDateRange(mockEvent, days)).toBe(false)
 
     // Event starts within the next 15 days
     mockEvent = {
@@ -51,7 +51,7 @@ describe('isEventInDateRange', () => {
       startDate: getFormattedDate(7),
       endDate: ''
     }
-    expect(eventsApi.isEventInDateRange(mockEvent, days)).toBe(true)
+    expect(eventsAirtableRecords.isEventInDateRange(mockEvent, days)).toBe(true)
 
     // Event starts today
     mockEvent = {
@@ -59,7 +59,7 @@ describe('isEventInDateRange', () => {
       startDate: getFormattedDate(0),
       endDate: ''
     }
-    expect(eventsApi.isEventInDateRange(mockEvent, days)).toBe(true)
+    expect(eventsAirtableRecords.isEventInDateRange(mockEvent, days)).toBe(true)
 
     // Event starts within the next 15 days and ends after 15 days
     mockEvent = {
@@ -67,7 +67,7 @@ describe('isEventInDateRange', () => {
       startDate: getFormattedDate(7),
       endDate: getFormattedDate(20)
     }
-    expect(eventsApi.isEventInDateRange(mockEvent, days)).toBe(true)
+    expect(eventsAirtableRecords.isEventInDateRange(mockEvent, days)).toBe(true)
 
     // Event starts in exactly 15 days
     mockEvent = {
@@ -75,7 +75,7 @@ describe('isEventInDateRange', () => {
       startDate: getFormattedDate(15),
       endDate: ''
     }
-    expect(eventsApi.isEventInDateRange(mockEvent, days)).toBe(true)
+    expect(eventsAirtableRecords.isEventInDateRange(mockEvent, days)).toBe(true)
 
     // Event started 100 days ago and end in 100 days (ongoing event)
     mockEvent = {
@@ -83,7 +83,7 @@ describe('isEventInDateRange', () => {
       startDate: getFormattedDate(-100),
       endDate: getFormattedDate(100)
     }
-    expect(eventsApi.isEventInDateRange(mockEvent, days)).toBe(true)
+    expect(eventsAirtableRecords.isEventInDateRange(mockEvent, days)).toBe(true)
   })
 
   it('returns true if the event happened within the last 15 days', () => {
@@ -95,7 +95,7 @@ describe('isEventInDateRange', () => {
       startDate: getFormattedDate(-100),
       endDate: getFormattedDate(-20)
     }
-    expect(eventsApi.isEventInDateRange(mockEvent, days)).toBe(false)
+    expect(eventsAirtableRecords.isEventInDateRange(mockEvent, days)).toBe(false)
 
     // Event started before the last 15 days and ended within the last 15 days
     mockEvent = {
@@ -103,7 +103,7 @@ describe('isEventInDateRange', () => {
       startDate: getFormattedDate(-100),
       endDate: getFormattedDate(-7)
     }
-    expect(eventsApi.isEventInDateRange(mockEvent, days)).toBe(true)
+    expect(eventsAirtableRecords.isEventInDateRange(mockEvent, days)).toBe(true)
 
     // Event starts in the future
     mockEvent = {
@@ -111,7 +111,7 @@ describe('isEventInDateRange', () => {
       startDate: getFormattedDate(7),
       endDate: ''
     }
-    expect(eventsApi.isEventInDateRange(mockEvent, days)).toBe(false)
+    expect(eventsAirtableRecords.isEventInDateRange(mockEvent, days)).toBe(false)
 
     // Event starts today
     mockEvent = {
@@ -119,7 +119,7 @@ describe('isEventInDateRange', () => {
       startDate: getFormattedDate(0),
       endDate: ''
     }
-    expect(eventsApi.isEventInDateRange(mockEvent, days)).toBe(false)
+    expect(eventsAirtableRecords.isEventInDateRange(mockEvent, days)).toBe(false)
 
     // Event started 100 days ago and end in 100 days (ongoing event)
     mockEvent = {
@@ -127,12 +127,12 @@ describe('isEventInDateRange', () => {
       startDate: getFormattedDate(-100),
       endDate: getFormattedDate(100)
     }
-    expect(eventsApi.isEventInDateRange(mockEvent, days)).toBe(false)
+    expect(eventsAirtableRecords.isEventInDateRange(mockEvent, days)).toBe(false)
   })
 })
 
 describe('convertToCommunityEvent', () => {
-  let eventsApi: EventsAirtableAPI
+  let eventsAirtableRecords: EventsAirtableRecords
 
   const { hackathon } = COMMUNITY_EVENT_TYPES
   const { europe } = WORLD_REGIONS
@@ -169,13 +169,13 @@ describe('convertToCommunityEvent', () => {
   }
 
   beforeEach(() => {
-    eventsApi = new EventsAirtableAPI('testApiKey', 'testView', mockRecordFields)
+    eventsAirtableRecords = new EventsAirtableRecords('testApiKey', 'testView', mockRecordFields)
   })
 
   it('extracts and format information from the record', () => {
     const { hackathon } = COMMUNITY_EVENT_TYPES
     const { europe } = WORLD_REGIONS
-    const { title, types, location, regions, date, to } = eventsApi.convertToCommunityEvent(fakeRecord)
+    const { title, types, location, regions, date, to } = eventsAirtableRecords.convertToCommunityEvent(fakeRecord)
 
     expect({ title, types, location, regions, date, to }).toEqual({
       title: 'Fake conference',
@@ -189,7 +189,7 @@ describe('convertToCommunityEvent', () => {
 })
 
 describe('getType', () => {
-  let eventsApi: EventsAirtableAPI
+  let eventsAirtableRecords: EventsAirtableRecords
 
   const mockRecordFields = {
     name: 'Name',
@@ -197,7 +197,7 @@ describe('getType', () => {
   }
 
   beforeEach(() => {
-    eventsApi = new EventsAirtableAPI('testApiKey', 'testView', mockRecordFields)
+    eventsAirtableRecords = new EventsAirtableRecords('testApiKey', 'testView', mockRecordFields)
   })
 
   it('filters the values so only those recognized by qiskit.org get into the event', () => {
@@ -214,7 +214,7 @@ describe('getType', () => {
       }
     }
 
-    expect(eventsApi.getTypes(fakeRecord)).toEqual([hackathon])
+    expect(eventsAirtableRecords.getTypes(fakeRecord)).toEqual([hackathon])
   })
 
   it('gets Talks type if there is no type', () => {
@@ -229,7 +229,7 @@ describe('getType', () => {
       }
     }
 
-    expect(eventsApi.getTypes(fakeRecord)).toEqual([talks])
+    expect(eventsAirtableRecords.getTypes(fakeRecord)).toEqual([talks])
   })
 
   it('gets Talks type if no type is recognized by qiskit.org', () => {
@@ -246,7 +246,7 @@ describe('getType', () => {
       }
     }
 
-    expect(eventsApi.getTypes(fakeRecord)).toEqual([talks])
+    expect(eventsAirtableRecords.getTypes(fakeRecord)).toEqual([talks])
   })
 
   it('gets an array of one value if types is not an array but a single value', () => {
@@ -263,20 +263,20 @@ describe('getType', () => {
       }
     }
 
-    expect(eventsApi.getTypes(fakeRecord)).toEqual([hackathon])
+    expect(eventsAirtableRecords.getTypes(fakeRecord)).toEqual([hackathon])
   })
 })
 
 describe('filterByWhitelist', () => {
-  const eventsApi = new EventsAirtableAPI('testApiKey', 'testView')
+  const eventsAirtableRecords = new EventsAirtableRecords('testApiKey', 'testView')
   it('creates a new list, from an input one, only with the values in a whitelist', () => {
     const list = ['a', 'x', 'b', 'y', 'c', 'z', 'a', 'x', 'b', 'y']
-    expect(eventsApi.filterWithWhitelist(list, ['a', 'b', 'c'])).toEqual(['a', 'b', 'c', 'a', 'b'])
+    expect(eventsAirtableRecords.filterWithWhitelist(list, ['a', 'b', 'c'])).toEqual(['a', 'b', 'c', 'a', 'b'])
   })
 })
 
 describe('getRegions', () => {
-  let eventsApi: EventsAirtableAPI
+  let eventsAirtableRecords: EventsAirtableRecords
 
   const mockRecordFields = {
     name: 'Name',
@@ -284,7 +284,7 @@ describe('getRegions', () => {
   }
 
   beforeEach(() => {
-    eventsApi = new EventsAirtableAPI('testApiKey', 'testView', mockRecordFields)
+    eventsAirtableRecords = new EventsAirtableRecords('testApiKey', 'testView', mockRecordFields)
   })
 
   it('defaults in TBD if there is no region', () => {
@@ -299,7 +299,7 @@ describe('getRegions', () => {
       }
     }
 
-    expect(eventsApi.getRegions(fakeRecord)).toEqual([tbd])
+    expect(eventsAirtableRecords.getRegions(fakeRecord)).toEqual([tbd])
   })
 
   it('gets the region from the record', () => {
@@ -316,7 +316,7 @@ describe('getRegions', () => {
       }
     }
 
-    expect(eventsApi.getRegions(fakeRecord)).toEqual([northAmerica])
+    expect(eventsAirtableRecords.getRegions(fakeRecord)).toEqual([northAmerica])
   })
 
   it('gets the region from the record even if it is not recognized by qiskit', () => {
@@ -331,12 +331,12 @@ describe('getRegions', () => {
       }
     }
 
-    expect(eventsApi.getRegions(fakeRecord)).toEqual(['Lemuria'])
+    expect(eventsAirtableRecords.getRegions(fakeRecord)).toEqual(['Lemuria'])
   })
 })
 
 describe('getLocation', () => {
-  let eventsApi: EventsAirtableAPI
+  let eventsAirtableRecords: EventsAirtableRecords
 
   const mockRecordFields = {
     name: 'Name',
@@ -344,7 +344,7 @@ describe('getLocation', () => {
   }
 
   beforeEach(() => {
-    eventsApi = new EventsAirtableAPI('testApiKey', 'testView', mockRecordFields)
+    eventsAirtableRecords = new EventsAirtableRecords('testApiKey', 'testView', mockRecordFields)
   })
 
   it('defaults in region TBD if there is no location', () => {
@@ -361,7 +361,7 @@ describe('getLocation', () => {
       }
     }
 
-    expect(eventsApi.getLocation(fakeRecord)).toEqual(tbd)
+    expect(eventsAirtableRecords.getLocation(fakeRecord)).toEqual(tbd)
   })
 
   it('gets the location from the record', () => {
@@ -376,12 +376,12 @@ describe('getLocation', () => {
       }
     }
 
-    expect(eventsApi.getLocation(fakeRecord)).toBe('Gotham')
+    expect(eventsAirtableRecords.getLocation(fakeRecord)).toBe('Gotham')
   })
 })
 
 describe('getImage', () => {
-  let eventsApi: EventsAirtableAPI
+  let eventsAirtableRecords: EventsAirtableRecords
 
   const mockRecordFields = {
     name: 'Name',
@@ -389,7 +389,7 @@ describe('getImage', () => {
   }
 
   beforeEach(() => {
-    eventsApi = new EventsAirtableAPI('testApiKey', 'testView', mockRecordFields)
+    eventsAirtableRecords = new EventsAirtableRecords('testApiKey', 'testView', mockRecordFields)
   })
 
   it('defaults in a no-picture.jpg value if there is no attachment', () => {
@@ -402,7 +402,7 @@ describe('getImage', () => {
       }
     }
 
-    expect(eventsApi.getImage(fakeRecord)).toBe('/images/events/no-picture.jpg')
+    expect(eventsAirtableRecords.getImage(fakeRecord)).toBe('/images/events/no-picture.jpg')
   })
 
   it('defaults in a no-picture.jpg value if the attachment is of no image type', () => {
@@ -419,7 +419,7 @@ describe('getImage', () => {
       }
     }
 
-    expect(eventsApi.getImage(fakeRecord)).toBe('/images/events/no-picture.jpg')
+    expect(eventsAirtableRecords.getImage(fakeRecord)).toBe('/images/events/no-picture.jpg')
   })
 
   it('uses the attachment URL if there are no thumbnails', () => {
@@ -439,7 +439,7 @@ describe('getImage', () => {
       }
     }
 
-    expect(eventsApi.getImage(fakeRecord)).toBe(expectedUrl)
+    expect(eventsAirtableRecords.getImage(fakeRecord)).toBe(expectedUrl)
   })
 
   it('uses the attachment URL if there is no large thumbnail', () => {
@@ -460,7 +460,7 @@ describe('getImage', () => {
       }
     }
 
-    expect(eventsApi.getImage(fakeRecord)).toBe(expectedUrl)
+    expect(eventsAirtableRecords.getImage(fakeRecord)).toBe(expectedUrl)
   })
 
   it('uses the thumbnail URL if there is a large thumbnail available', () => {
@@ -483,12 +483,12 @@ describe('getImage', () => {
       }
     }
 
-    expect(eventsApi.getImage(fakeRecord)).toBe(expectedUrl)
+    expect(eventsAirtableRecords.getImage(fakeRecord)).toBe(expectedUrl)
   })
 })
 
 describe('getDates', () => {
-  let eventsApi: EventsAirtableAPI
+  let eventsAirtableRecords: EventsAirtableRecords
 
   const mockRecordFields = {
     name: 'Name',
@@ -497,7 +497,7 @@ describe('getDates', () => {
   }
 
   beforeEach(() => {
-    eventsApi = new EventsAirtableAPI('testApiKey', 'testView', mockRecordFields)
+    eventsAirtableRecords = new EventsAirtableRecords('testApiKey', 'testView', mockRecordFields)
   })
 
   it('returns date objects if both dates exists', () => {
@@ -517,7 +517,7 @@ describe('getDates', () => {
       }
     }
 
-    const [startDate, endDate] = eventsApi.getDates(fakeRecord)
+    const [startDate, endDate] = eventsAirtableRecords.getDates(fakeRecord)
     expect(startDate).toEqual(expectedStartDate)
     expect(endDate).toEqual(expectedEndDate)
   })
@@ -534,7 +534,7 @@ describe('getDates', () => {
       }
     }
 
-    const [startDate, endDate] = eventsApi.getDates(fakeRecord)
+    const [startDate, endDate] = eventsAirtableRecords.getDates(fakeRecord)
     expect(endDate).toBeInstanceOf(Date)
     expect(startDate).toBeUndefined()
   })
@@ -551,17 +551,17 @@ describe('getDates', () => {
       }
     }
 
-    const [startDate, endDate] = eventsApi.getDates(fakeRecord)
+    const [startDate, endDate] = eventsAirtableRecords.getDates(fakeRecord)
     expect(startDate).toBeInstanceOf(Date)
     expect(endDate).toBeUndefined()
   })
 })
 
 describe('formatDates', () => {
-  let eventsApi: EventsAirtableAPI
+  let eventsAirtableRecords: EventsAirtableRecords
 
   beforeEach(() => {
-    eventsApi = new EventsAirtableAPI('testApiKey', 'testView')
+    eventsAirtableRecords = new EventsAirtableRecords('testApiKey', 'testView')
   })
 
   const start = new Date('2020-01-01')
@@ -572,27 +572,27 @@ describe('formatDates', () => {
   const noDate = undefined
 
   it('shows TBD if no start date is passed', () => {
-    expect(eventsApi.formatDates()).toBe('TBD')
-    expect(eventsApi.formatDates(noDate, endNextDay)).toBe('TBD')
+    expect(eventsAirtableRecords.formatDates()).toBe('TBD')
+    expect(eventsAirtableRecords.formatDates(noDate, endNextDay)).toBe('TBD')
   })
 
   it('shows start date when start and end dates are equal', () => {
-    expect(eventsApi.formatDates(start, endSameDate)).toBe('January 1, 2020')
+    expect(eventsAirtableRecords.formatDates(start, endSameDate)).toBe('January 1, 2020')
   })
 
   it('shows the start date when there is only start date', () => {
-    expect(eventsApi.formatDates(start)).toBe('January 1, 2020')
+    expect(eventsAirtableRecords.formatDates(start)).toBe('January 1, 2020')
   })
 
   it('shows complete dates when the years are different', () => {
-    expect(eventsApi.formatDates(start, endNextYear)).toBe('January 1, 2020 - January 1, 2021')
+    expect(eventsAirtableRecords.formatDates(start, endNextYear)).toBe('January 1, 2020 - January 1, 2021')
   })
 
   it('factors out the year when years are equal', () => {
-    expect(eventsApi.formatDates(start, endNextMonth)).toBe('January 1 - February 1, 2020')
+    expect(eventsAirtableRecords.formatDates(start, endNextMonth)).toBe('January 1 - February 1, 2020')
   })
 
   it('factors out year and month when the event falls into the same month', () => {
-    expect(eventsApi.formatDates(start, endNextDay)).toBe('January 1-2, 2020')
+    expect(eventsAirtableRecords.formatDates(start, endNextDay)).toBe('January 1-2, 2020')
   })
 })

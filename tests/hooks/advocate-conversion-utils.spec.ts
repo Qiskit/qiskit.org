@@ -1,7 +1,7 @@
-import AdvocateAirtableAPI from '~/hooks/advocate-conversion-utils'
+import AdvocatesAirtableRecords from '~/hooks/advocate-conversion-utils'
 
 describe('getters', () => {
-  let airtableApi: AdvocateAirtableAPI
+  let advocatesAirtableRecords: AdvocatesAirtableRecords
 
   const fakeRecord = {
     get: (field: string) => {
@@ -29,32 +29,32 @@ describe('getters', () => {
   }
 
   beforeEach(() => {
-    airtableApi = new AdvocateAirtableAPI('testApiKey', mockRecordFields)
+    advocatesAirtableRecords = new AdvocatesAirtableRecords('testApiKey', mockRecordFields)
   })
 
   it('gets the city from the record', () => {
-    expect(airtableApi.getCity(fakeRecord)).toBe('Gotham City')
+    expect(advocatesAirtableRecords.getCity(fakeRecord)).toBe('Gotham City')
   })
 
   it('gets the country from the record', () => {
-    expect(airtableApi.getCountry(fakeRecord)).toBe('Canada')
+    expect(advocatesAirtableRecords.getCountry(fakeRecord)).toBe('Canada')
   })
 
   it('gets the region from the record', () => {
-    expect(airtableApi.getRegion(fakeRecord)).toBe('South America')
+    expect(advocatesAirtableRecords.getRegion(fakeRecord)).toBe('South America')
   })
 
   it('gets the Slack ID from the record', () => {
-    expect(airtableApi.getSlackId(fakeRecord)).toBe('ID1234567890')
+    expect(advocatesAirtableRecords.getSlackId(fakeRecord)).toBe('ID1234567890')
   })
 
   it('gets the Slack username from the record', () => {
-    expect(airtableApi.getSlackUsername(fakeRecord)).toBe('U1234567890')
+    expect(advocatesAirtableRecords.getSlackUsername(fakeRecord)).toBe('U1234567890')
   })
 })
 
 describe('convertToAdvocate', () => {
-  let airtableApi: AdvocateAirtableAPI
+  let advocatesAirtableRecords: AdvocatesAirtableRecords
 
   const fakeRecord = {
     get: (field: string) => {
@@ -85,11 +85,11 @@ describe('convertToAdvocate', () => {
   }
 
   beforeEach(() => {
-    airtableApi = new AdvocateAirtableAPI('testApiKey', mockRecordFields)
+    advocatesAirtableRecords = new AdvocatesAirtableRecords('testApiKey', mockRecordFields)
   })
 
   it('converts the record to an advocate object', () => {
-    const advocate = airtableApi.convertToAdvocate(fakeRecord)
+    const advocate = advocatesAirtableRecords.convertToAdvocate(fakeRecord)
 
     expect(advocate).toEqual({
       name: 'Nova',
@@ -104,14 +104,14 @@ describe('convertToAdvocate', () => {
 })
 
 describe('getImage', () => {
-  let airtableApi: AdvocateAirtableAPI
+  let advocatesAirtableRecords: AdvocatesAirtableRecords
 
   const mockRecordFields = {
     image: 'Image'
   }
 
   beforeEach(() => {
-    airtableApi = new AdvocateAirtableAPI('testApiKey', mockRecordFields)
+    advocatesAirtableRecords = new AdvocatesAirtableRecords('testApiKey', mockRecordFields)
   })
 
   it('defaults in a no-advocate-photo.png value if there is no attachment', () => {
@@ -123,7 +123,7 @@ describe('getImage', () => {
       }
     }
 
-    expect(airtableApi.getImage(fakeRecord)).toBe('/images/advocates/no-advocate-photo.png')
+    expect(advocatesAirtableRecords.getImage(fakeRecord)).toBe('/images/advocates/no-advocate-photo.png')
   })
 
   it('defaults in a no-advocate-photo.png value if the attachment is of no image type', () => {
@@ -137,7 +137,7 @@ describe('getImage', () => {
       }
     }
 
-    expect(airtableApi.getImage(fakeRecord)).toBe('/images/advocates/no-advocate-photo.png')
+    expect(advocatesAirtableRecords.getImage(fakeRecord)).toBe('/images/advocates/no-advocate-photo.png')
   })
 
   it('uses the attachment URL if there are no thumbnails', () => {
@@ -153,7 +153,7 @@ describe('getImage', () => {
       }
     }
 
-    expect(airtableApi.getImage(fakeRecord)).toBe(expectedUrl)
+    expect(advocatesAirtableRecords.getImage(fakeRecord)).toBe(expectedUrl)
   })
 
   it('uses the thumbnail URL if there is a large thumbnail available', () => {
@@ -172,7 +172,7 @@ describe('getImage', () => {
       }
     }
 
-    expect(airtableApi.getImage(thumbnailPictureAdvocate)).toBe(expectedUrl)
+    expect(advocatesAirtableRecords.getImage(thumbnailPictureAdvocate)).toBe(expectedUrl)
   })
 
   it('uses the thumbnail URL if there is a large thumbnail available', () => {
@@ -191,6 +191,6 @@ describe('getImage', () => {
       }
     }
 
-    expect(airtableApi.getImage(thumbnailPictureAdvocate)).toBe(expectedUrl)
+    expect(advocatesAirtableRecords.getImage(thumbnailPictureAdvocate)).toBe(expectedUrl)
   })
 })

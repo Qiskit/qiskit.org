@@ -7,7 +7,7 @@ import {
 } from '../store/advocates'
 
 import {
-  AirtableRecord,
+  AirtableRecords,
   getImageUrl,
   findImageAttachment
 } from './airtable-conversion-utils'
@@ -24,7 +24,7 @@ const RECORD_FIELDS_IDS = Object.freeze({
 
 const AIRTABLE_BASE_ID = 'app8koO4BZifGFhCV'
 
-class AdvocateAirtableAPI extends AirtableRecord {
+class AdvocatesAirtableRecords extends AirtableRecords {
   private _recordFields?: Record<string, any>
 
   constructor (apiKey: string, recordFields?: Record<string, any>) {
@@ -100,4 +100,4 @@ class AdvocateAirtableAPI extends AirtableRecord {
   }
 }
 
-export default AdvocateAirtableAPI
+export default AdvocatesAirtableRecords

@@ -11,7 +11,7 @@ import {
 } from '../store/events'
 
 import {
-  AirtableRecord,
+  AirtableRecords,
   getImageUrl,
   findImageAttachment
 } from './airtable-conversion-utils'
@@ -44,7 +44,7 @@ const RECORD_FIELDS_IDS = Object.freeze({
 } as const)
 
 const AIRTABLE_BASE_ID = 'appYREKB18uC7y8ul'
-class EventsAirtableAPI extends AirtableRecord {
+class EventsAirtableRecords extends AirtableRecords {
   private _recordFields?: Record<string, any>
 
   constructor (apiKey: string, view: string, recordFields?: Record<string, any>) {
@@ -286,4 +286,4 @@ class EventsAirtableAPI extends AirtableRecord {
   }
 }
 
-export default EventsAirtableAPI
+export default EventsAirtableRecords

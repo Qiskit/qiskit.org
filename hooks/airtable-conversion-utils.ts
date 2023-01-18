@@ -20,7 +20,7 @@ function getThumbnailUrl (imageAttachment: any): string|null {
   return largeThumbnail ? largeThumbnail.url : null
 }
 
-class AirtableRecord {
+class AirtableRecords {
   protected apiKey: string;
   private baseId: string;
   private tableId: string;
@@ -114,7 +114,7 @@ class AirtableRecord {
 }
 
 export {
-  AirtableRecord,
+  AirtableRecords,
   getImageUrl,
   findImageAttachment
 }
