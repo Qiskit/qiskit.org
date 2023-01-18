@@ -129,9 +129,9 @@ class EventsAirtableRecords extends AirtableRecords {
     const { showOnEventsPage } = this._recordFields
     const communityEvents: CommunityEvent[] = []
 
-    await this.getEventsQuery(days, view, [`{${showOnEventsPage}}`]).eachPage((records, nextPage) => {
+    await this.getEventsQuery(days, view, [`{${showOnEventsPage}}`]).eachPage(async (records, nextPage) => {
       for (const record of records) {
-        const communityEvent = this.convertToCommunityEvent(record)
+        const communityEvent = await this.convertToCommunityEvent(record)
         if (this.isEventInDateRange(communityEvent, days)) {
           communityEvents.push(communityEvent)
         }
@@ -152,9 +152,9 @@ class EventsAirtableRecords extends AirtableRecords {
     const { showOnSeminarSeriesPage } = this._recordFields
     const seminarSeriesEvents: SeminarSeriesEvent[] = []
 
-    await this.getEventsQuery(days, view, [`{${showOnSeminarSeriesPage}}`]).eachPage((records, nextPage) => {
+    await this.getEventsQuery(days, view, [`{${showOnSeminarSeriesPage}}`]).eachPage(async (records, nextPage) => {
       for (const record of records) {
-        const seminarSeriesEvent = this.convertToSeminarSeriesEvent(record)
+        const seminarSeriesEvent = await this.convertToSeminarSeriesEvent(record)
 
         if (typeof (seminarSeriesEvent.to) !== 'undefined') {
           if (this.isEventInDateRange(seminarSeriesEvent, days)) {
@@ -168,11 +168,11 @@ class EventsAirtableRecords extends AirtableRecords {
     return Promise.resolve(seminarSeriesEvents)
   }
 
-  convertToCommunityEvent (record: any): CommunityEvent {
-    return {
+  async convertToCommunityEvent (record: any): Promise<CommunityEvent> {
+    const event = {
       title: this.getName(record),
       types: this.getTypes(record),
-      image: this.getImage(record),
+      image: await this.getImage(record),
       location: this.getLocation(record),
       regions: this.getRegions(record),
       date: this.formatDates(...this.getDates(record)),
@@ -180,20 +180,22 @@ class EventsAirtableRecords extends AirtableRecords {
       endDate: this.getEndDate(record),
       to: this.getWebsite(record)
     }
+    return event
   }
 
-  convertToSeminarSeriesEvent (record: any): SeminarSeriesEvent {
-    return {
+  async convertToSeminarSeriesEvent (record: any): Promise<SeminarSeriesEvent> {
+    const event = {
       date: this.formatDates(...this.getDates(record)),
       startDate: this.getStartDate(record),
       endDate: this.getEndDate(record),
-      image: this.getImage(record),
+      image: await this.getImage(record),
       institution: this.getInstitution(record),
       location: this.getLocation(record),
       speaker: this.getSpeaker(record),
       title: this.getName(record),
       to: this.getWebsite(record)
     }
+    return event
   }
 
   dateParts (date: Date): [string, string, string] {
@@ -248,12 +250,18 @@ class EventsAirtableRecords extends AirtableRecords {
     return noTypes ? [COMMUNITY_EVENT_TYPES.talks] : communityEventTypes
   }
 
-  public getImage (record: any): string {
+  public async getImage (record: any): Promise<string> {
     const fallbackImage = '/images/events/no-picture.jpg'
     const attachments = record.get(this._recordFields!.image)
     const imageAttachment = attachments && findImageAttachment(attachments)
     const imageUrl = imageAttachment && getImageUrl(imageAttachment)
-    return imageUrl || fallbackImage
+
+    if (!imageUrl) {
+      return fallbackImage
+    }
+
+    const imageName = await this.storeImage(imageUrl, this.getName(record), 'images/events')
+    return imageName
   }
 
   public getLocation (record: any): string {

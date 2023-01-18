@@ -88,8 +88,8 @@ describe('convertToAdvocate', () => {
     advocatesAirtableRecords = new AdvocatesAirtableRecords('testApiKey', mockRecordFields)
   })
 
-  it('converts the record to an advocate object', () => {
-    const advocate = advocatesAirtableRecords.convertToAdvocate(fakeRecord)
+  it('converts the record to an advocate object', async () => {
+    const advocate = await advocatesAirtableRecords.convertToAdvocate(fakeRecord)
 
     expect(advocate).toEqual({
       name: 'Nova',
@@ -114,7 +114,7 @@ describe('getImage', () => {
     advocatesAirtableRecords = new AdvocatesAirtableRecords('testApiKey', mockRecordFields)
   })
 
-  it('defaults in a no-advocate-photo.png value if there is no attachment', () => {
+  it('defaults in a no-advocate-photo.png value if there is no attachment', async () => {
     const fakeRecord = {
       get: (field: string) => {
         if (field === 'Image') {
@@ -123,10 +123,12 @@ describe('getImage', () => {
       }
     }
 
-    expect(advocatesAirtableRecords.getImage(fakeRecord)).toBe('/images/advocates/no-advocate-photo.png')
+    advocatesAirtableRecords.storeImage = jest.fn(() => Promise.resolve('/images/advocates/fake-advocate.jpg'))
+    const result = await advocatesAirtableRecords.getImage(fakeRecord)
+    expect(result).toBe('/images/advocates/no-advocate-photo.png')
   })
 
-  it('defaults in a no-advocate-photo.png value if the attachment is of no image type', () => {
+  it('defaults in a no-advocate-photo.png value if the attachment is of no image type', async () => {
     const fakeRecord = {
       get: (field: string) => {
         if (field === 'Image') {
@@ -137,10 +139,12 @@ describe('getImage', () => {
       }
     }
 
-    expect(advocatesAirtableRecords.getImage(fakeRecord)).toBe('/images/advocates/no-advocate-photo.png')
+    advocatesAirtableRecords.storeImage = jest.fn(() => Promise.resolve('/images/advocates/fake-advocate.jpg'))
+    const result = await advocatesAirtableRecords.getImage(fakeRecord)
+    expect(result).toBe('/images/advocates/no-advocate-photo.png')
   })
 
-  it('uses the attachment URL if there are no thumbnails', () => {
+  it('uses the attachment URL if there are no thumbnails', async () => {
     const expectedUrl = 'http://url.to/image.jpg'
     const fakeRecord = {
       get: (field: string) => {
@@ -153,10 +157,12 @@ describe('getImage', () => {
       }
     }
 
-    expect(advocatesAirtableRecords.getImage(fakeRecord)).toBe(expectedUrl)
+    advocatesAirtableRecords.storeImage = jest.fn(() => Promise.resolve(expectedUrl))
+    const result = await advocatesAirtableRecords.getImage(fakeRecord)
+    expect(result).toBe(expectedUrl)
   })
 
-  it('uses the thumbnail URL if there is a large thumbnail available', () => {
+  it('uses the thumbnail URL if there is a large thumbnail available', async () => {
     const expectedUrl = 'http://url.to/thumbnails/large.jpg'
     const thumbnailPictureAdvocate = {
       get: (field: string) => {
@@ -172,10 +178,12 @@ describe('getImage', () => {
       }
     }
 
-    expect(advocatesAirtableRecords.getImage(thumbnailPictureAdvocate)).toBe(expectedUrl)
+    advocatesAirtableRecords.storeImage = jest.fn(() => Promise.resolve(expectedUrl))
+    const result = await advocatesAirtableRecords.getImage(thumbnailPictureAdvocate)
+    expect(result).toBe(expectedUrl)
   })
 
-  it('uses the thumbnail URL if there is a large thumbnail available', () => {
+  it('uses the thumbnail URL if there is a large thumbnail available', async () => {
     const expectedUrl = 'http://url.to/thumbnails/large.jpg'
     const thumbnailPictureAdvocate = {
       get: (field: string) => {
@@ -191,6 +199,8 @@ describe('getImage', () => {
       }
     }
 
-    expect(advocatesAirtableRecords.getImage(thumbnailPictureAdvocate)).toBe(expectedUrl)
+    advocatesAirtableRecords.storeImage = jest.fn(() => Promise.resolve(expectedUrl))
+    const result = await advocatesAirtableRecords.getImage(thumbnailPictureAdvocate)
+    expect(result).toBe(expectedUrl)
   })
 })

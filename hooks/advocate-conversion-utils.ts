@@ -1,6 +1,4 @@
-import fs from 'fs'
 import Airtable from 'airtable'
-import axios from 'axios'
 
 // TODO: Understand why this import works with '../' and not with '~/'
 import {
@@ -70,35 +68,6 @@ class AdvocatesAirtableRecords extends AirtableRecords {
     return advocate
   }
 
-  /**
-   * Store an image from a given URL and return the file path.
-   *
-   * @param {string} imageUrl - The URL of the image to be stored
-   * @param {string} uniqueId - A unique identifier for the image, used in the file name
-   * @return {string} - The file path of the stored image, in the format '/images/advocates/filename'
-   */
-  public async storeImage (imageUrl: string, uniqueId: string): Promise<string> {
-    const imageFileName = `${uniqueId}-${new Date().getTime()}.jpg`
-    const imageFilePath = `static/images/advocates/${imageFileName}`
-    try {
-      const fileStat = fs.statSync(imageFilePath)
-      // check if file is less than 1 week old
-      if (fileStat.mtimeMs > Date.now() - 7 * 24 * 60 * 60 * 1000) {
-        return imageFilePath
-      }
-    } catch (err) {
-      // continue to download if file not found
-    }
-    const response = await axios({
-      url: imageUrl,
-      method: 'GET',
-      responseType: 'arraybuffer'
-    })
-    const imageBuffer = Buffer.from(response.data, 'binary')
-    fs.writeFileSync(imageFilePath, imageBuffer)
-    return `/images/advocates/${imageFileName}`
-  }
-
   public getName (record: any): string {
     return record.get(this._recordFields!.name)
   }
@@ -112,7 +81,7 @@ class AdvocatesAirtableRecords extends AirtableRecords {
     if (!imageUrl) {
       return fallbackImage
     }
-    const imageName = await this.storeImage(imageUrl, this.getSlackId(record))
+    const imageName = await this.storeImage(imageUrl, this.getSlackId(record), 'images/advocates')
     return imageName
   }
 
