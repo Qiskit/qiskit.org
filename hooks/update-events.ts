@@ -3,13 +3,14 @@ import util from 'util'
 
 import EventsAirtableAPI from './event-conversion-utils'
 
-export default async function (apiKey: any, outputFolder: string) {
-  const eventsAirtableAPI = new EventsAirtableAPI(apiKey)
-  const upcomingCommunityEvents = await eventsAirtableAPI.fetchCommunityEvents(31)
-  const pastCommunityEvents = await eventsAirtableAPI.fetchCommunityEvents(-31)
+export default async function (apiKey: string, outputFolder: string) {
+  const communityEventsAirtableAPI = new EventsAirtableAPI(apiKey, 'Add to Event Site')
+  const upcomingCommunityEvents = await communityEventsAirtableAPI.fetchCommunityEvents(31)
+  const pastCommunityEvents = await communityEventsAirtableAPI.fetchCommunityEvents(-31)
 
-  const upcomingSeminarSeriesEvents = await eventsAirtableAPI.fetchSeminarSeriesEvents(31)
-  const pastSeminarSeriesEvents = await eventsAirtableAPI.fetchSeminarSeriesEvents(-62)
+  const seminarSeriesEventsAirtableAPI = new EventsAirtableAPI(apiKey, 'Seminar Series ONLY')
+  const upcomingSeminarSeriesEvents = await seminarSeriesEventsAirtableAPI.fetchSeminarSeriesEvents(31)
+  const pastSeminarSeriesEvents = await seminarSeriesEventsAirtableAPI.fetchSeminarSeriesEvents(-62)
 
   const writeFile = util.promisify(fs.writeFile)
 

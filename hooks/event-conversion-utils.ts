@@ -47,8 +47,8 @@ const AIRTABLE_BASE_ID = 'appYREKB18uC7y8ul'
 class EventsAirtableAPI extends AirtableRecord {
   private _recordFields?: Record<string, any>
 
-  constructor (apiKey: string, recordFields?: Record<string, any>) {
-    super(apiKey, AIRTABLE_BASE_ID, 'Event Calendar', 'For website')
+  constructor (apiKey: string, view: string, recordFields?: Record<string, any>) {
+    super(apiKey, AIRTABLE_BASE_ID, 'Event Calendar', view)
     this._recordFields = recordFields
   }
 

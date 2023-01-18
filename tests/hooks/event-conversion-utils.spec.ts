@@ -6,7 +6,7 @@ describe('isEventInDateRange', () => {
   let eventsApi: EventsAirtableAPI
 
   beforeEach(() => {
-    eventsApi = new EventsAirtableAPI('testApiKey')
+    eventsApi = new EventsAirtableAPI('testApiKey', 'testView')
   })
 
   const mockEventBase = {
@@ -169,7 +169,7 @@ describe('convertToCommunityEvent', () => {
   }
 
   beforeEach(() => {
-    eventsApi = new EventsAirtableAPI('testApiKey', mockRecordFields)
+    eventsApi = new EventsAirtableAPI('testApiKey', 'testView', mockRecordFields)
   })
 
   it('extracts and format information from the record', () => {
@@ -197,7 +197,7 @@ describe('getType', () => {
   }
 
   beforeEach(() => {
-    eventsApi = new EventsAirtableAPI('testApiKey', mockRecordFields)
+    eventsApi = new EventsAirtableAPI('testApiKey', 'testView', mockRecordFields)
   })
 
   it('filters the values so only those recognized by qiskit.org get into the event', () => {
@@ -268,7 +268,7 @@ describe('getType', () => {
 })
 
 describe('filterByWhitelist', () => {
-  const eventsApi = new EventsAirtableAPI('testApiKey')
+  const eventsApi = new EventsAirtableAPI('testApiKey', 'testView')
   it('creates a new list, from an input one, only with the values in a whitelist', () => {
     const list = ['a', 'x', 'b', 'y', 'c', 'z', 'a', 'x', 'b', 'y']
     expect(eventsApi.filterWithWhitelist(list, ['a', 'b', 'c'])).toEqual(['a', 'b', 'c', 'a', 'b'])
@@ -284,7 +284,7 @@ describe('getRegions', () => {
   }
 
   beforeEach(() => {
-    eventsApi = new EventsAirtableAPI('testApiKey', mockRecordFields)
+    eventsApi = new EventsAirtableAPI('testApiKey', 'testView', mockRecordFields)
   })
 
   it('defaults in TBD if there is no region', () => {
@@ -344,7 +344,7 @@ describe('getLocation', () => {
   }
 
   beforeEach(() => {
-    eventsApi = new EventsAirtableAPI('testApiKey', mockRecordFields)
+    eventsApi = new EventsAirtableAPI('testApiKey', 'testView', mockRecordFields)
   })
 
   it('defaults in region TBD if there is no location', () => {
@@ -389,7 +389,7 @@ describe('getImage', () => {
   }
 
   beforeEach(() => {
-    eventsApi = new EventsAirtableAPI('testApiKey', mockRecordFields)
+    eventsApi = new EventsAirtableAPI('testApiKey', 'testView', mockRecordFields)
   })
 
   it('defaults in a no-picture.jpg value if there is no attachment', () => {
@@ -497,7 +497,7 @@ describe('getDates', () => {
   }
 
   beforeEach(() => {
-    eventsApi = new EventsAirtableAPI('testApiKey', mockRecordFields)
+    eventsApi = new EventsAirtableAPI('testApiKey', 'testView', mockRecordFields)
   })
 
   it('returns date objects if both dates exists', () => {
@@ -561,7 +561,7 @@ describe('formatDates', () => {
   let eventsApi: EventsAirtableAPI
 
   beforeEach(() => {
-    eventsApi = new EventsAirtableAPI('testApiKey')
+    eventsApi = new EventsAirtableAPI('testApiKey', 'testView')
   })
 
   const start = new Date('2020-01-01')
