@@ -46,8 +46,8 @@
               Installing from source requires that you have the Rust compiler on your system
             </template>
             <template #content>
-              <lazy-prerequisites-for-linux v-if="selectedOs === OPERATING_SYSTEMS.linux" />
-              <lazy-prerequisites-for-mac v-else-if="selectedOs === OPERATING_SYSTEMS.mac" />
+              <lazy-prerequisites-for-linux-mac v-if="selectedOs === OPERATING_SYSTEMS.linux" />
+              <lazy-prerequisites-for-linux-mac v-else-if="selectedOs === OPERATING_SYSTEMS.mac" />
               <lazy-prerequisites-for-windows v-else-if="selectedOs === OPERATING_SYSTEMS.windows" />
             </template>
           </cv-accordion-item>
@@ -113,9 +113,7 @@ export default class StartLocally extends Vue {
   codeToInstallStableOnMac = 'pip install qiskit'
   codeToInstallStableOnWindows = 'pip install qiskit'
 
-  codeToInstallMasterOnLinux = 'pip install git+https://github.com/Qiskit/qiskit-terra'
-  codeToInstallMasterOnMac = 'pip install git+https://github.com/Qiskit/qiskit-terra'
-  codeToInstallMasterOnWindows = 'pip install git+https://github.com/Qiskit/qiskit-terra'
+  codeToInstallAllSystems = 'pip install git+https://github.com/Qiskit/qiskit-terra'
 
   prerequisites = {
     [this.QISKIT_INSTALL.stable]: {
@@ -124,8 +122,8 @@ export default class StartLocally extends Vue {
       [this.OPERATING_SYSTEMS.windows]: null
     },
     [this.QISKIT_INSTALL.master]: {
-      [this.OPERATING_SYSTEMS.linux]: 'PrerequisitesForLinux',
-      [this.OPERATING_SYSTEMS.mac]: 'PrerequisitesForMac',
+      [this.OPERATING_SYSTEMS.linux]: 'PrerequisitesForLinuxMac',
+      [this.OPERATING_SYSTEMS.mac]: 'PrerequisitesForLinuxMac',
       [this.OPERATING_SYSTEMS.windows]: 'PrerequisitesForWindows'
     }
   }
@@ -137,9 +135,9 @@ export default class StartLocally extends Vue {
       [this.OPERATING_SYSTEMS.windows]: this.codeToInstallStableOnWindows
     },
     [this.QISKIT_INSTALL.master]: {
-      [this.OPERATING_SYSTEMS.linux]: this.codeToInstallMasterOnLinux,
-      [this.OPERATING_SYSTEMS.mac]: this.codeToInstallMasterOnMac,
-      [this.OPERATING_SYSTEMS.windows]: this.codeToInstallMasterOnWindows
+      [this.OPERATING_SYSTEMS.linux]: this.codeToInstallAllSystems,
+      [this.OPERATING_SYSTEMS.mac]: this.codeToInstallAllSystems,
+      [this.OPERATING_SYSTEMS.windows]: this.codeToInstallAllSystems
     }
   }
 
