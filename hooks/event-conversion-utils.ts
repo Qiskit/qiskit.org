@@ -32,7 +32,7 @@ const RECORD_FIELDS_IDS = Object.freeze({
   name: 'fldTqTxKr3ZzUhzKT',
   startDate: 'fldPGzoUf9wxsBDYJ',
   endDate: 'fldeFv42sqOY7oMy0',
-  types: 'fldU6WcqeTXDMUFTL',
+  types: 'fldarZoYRJvETevow',
   eventWebsite: 'fldBPq3LMa5aZDBZm',
   location: 'fldSjeniJtud6M5j3',
   regions: 'fldBCXzoxvcoxsKIK',
