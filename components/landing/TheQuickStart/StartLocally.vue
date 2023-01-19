@@ -46,9 +46,8 @@
               Installing from source requires that you have the Rust compiler on your system
             </template>
             <template #content>
-              <lazy-prerequisites-for-linux-mac v-if="selectedOs === OPERATING_SYSTEMS.linux" />
-              <lazy-prerequisites-for-linux-mac v-else-if="selectedOs === OPERATING_SYSTEMS.mac" />
-              <lazy-prerequisites-for-windows v-else-if="selectedOs === OPERATING_SYSTEMS.windows" />
+              <lazy-prerequisites-for-linux-mac v-if="selectedOs === OPERATING_SYSTEMS.linux || selectedOs === OPERATING_SYSTEMS.mac" />
+              <lazy-prerequisites-for-windows v-else />
             </template>
           </cv-accordion-item>
         </cv-accordion>

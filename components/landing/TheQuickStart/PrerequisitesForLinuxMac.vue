@@ -6,9 +6,10 @@
 
       <p>
         See <AppLink v-bind="rustupLink">
-          https://rustup.rs/
+          {{ rustupLink.label }}
+        </AppLink>
         <!-- eslint-disable-next-line vue/singleline-html-element-content-newline -->
-        </AppLink> for more information and details on <AppLink v-bind="rustLangInstallLink">other installation methods</AppLink>.
+        for more information and details on <AppLink v-bind="rustLangInstallLink">{{ rustLangInstallLink.label }}</AppLink>.
       </p>
     </div>
   </div>
@@ -17,23 +18,20 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import { CtaClickedEventProp } from '~/constants/segment'
-
-interface TrackedLink {
-  url: string,
-  segment: CtaClickedEventProp
-}
+import { GeneralLink } from '~/constants/appLinks'
 
 @Component
 export default class PrerequisitesForLinuxMac extends Vue {
-  rustupLink: TrackedLink = {
+  rustupLink: GeneralLink = {
     url: 'https://rustup.rs/',
-    segment: { cta: 'rustup-installer', location: 'start-locally' }
+    label: 'https://rustup.rs/',
+    segment: { cta: 'rustup-installer', location: 'quick-start' }
   }
 
-  rustLangInstallLink: TrackedLink = {
+  rustLangInstallLink: GeneralLink = {
+    label: 'other installation methods',
     url: 'https://forge.rust-lang.org/infra/other-installation-methods.html',
-    segment: { cta: 'rust-lang-install-methods', location: 'start-locally' }
+    segment: { cta: 'rust-lang-install-methods', location: 'quick-start' }
   }
 }
 </script>
