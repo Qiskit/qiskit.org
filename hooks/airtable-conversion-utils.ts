@@ -138,11 +138,7 @@ class AirtableRecords {
       // continue to download if file not found
     }
 
-    const response = await axios({
-      url: imageUrl,
-      method: 'GET',
-      responseType: 'arraybuffer'
-    })
+    const response = await axios.get(imageUrl, { responseType: 'arraybuffer' })
 
     const imageBuffer = Buffer.from(response.data, 'binary')
     fs.writeFileSync(imageFilePath, imageBuffer)
