@@ -24,12 +24,14 @@ class AirtableRecords {
   protected apiKey: string;
   private baseId: string;
   private tableId: string;
+  protected recordFields?: Record<string, any>;
   private view: string;
 
-  constructor (apiKey: string, baseId: string, tableId: string, view: string) {
+  constructor (apiKey: string, baseId: string, tableId: string, view: string, recordFields?: Record<string, any>) {
     this.apiKey = apiKey
     this.baseId = baseId
     this.tableId = tableId
+    this.recordFields = recordFields
     this.view = view
   }
 
