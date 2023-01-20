@@ -262,7 +262,7 @@ class EventsAirtableRecords extends AirtableRecords {
       return fallbackImage
     }
 
-    const imageName = await this.storeImage(imageUrl, this.id, 'images/events/downloaded')
+    const imageName = await this.storeImage(imageUrl, 'images/events/downloaded')
     return imageName
   }
 

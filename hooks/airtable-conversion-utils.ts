@@ -23,17 +23,18 @@ function getThumbnailUrl (imageAttachment: any): string|null {
 }
 
 class AirtableRecords {
-  protected id = ''
+  protected id: string;
   protected apiKey: string;
   private baseId: string;
   private tableId: string;
   private view: string;
 
-  constructor (apiKey: string, baseId: string, tableId: string, view: string) {
+  constructor (apiKey: string, baseId: string, tableId: string, view: string, id?: string) {
     this.apiKey = apiKey
     this.baseId = baseId
     this.tableId = tableId
     this.view = view
+    this.id = id || ''
   }
 
   /**
@@ -119,12 +120,11 @@ class AirtableRecords {
    * Store an image from a given URL and return the file path.
    *
    * @param {string} imageUrl - The URL of the image to be stored
-   * @param {string} uniqueId - A unique identifier for the image, used in the file name
    * @param {string} targetDir - The directory in which to store the image
    * @return {Promise<string>} The path to the stored image
    */
-  public async storeImage (imageUrl: string, uniqueId: string, targetDir: string): Promise<string> {
-    const imageFileName = `${uniqueId}.jpg`
+  public async storeImage (imageUrl: string, targetDir: string): Promise<string> {
+    const imageFileName = `${this.id}.jpg`
     const imageFilePath = `static/${targetDir}/${imageFileName}`
     const imagePublicPath = `/${targetDir}/${imageFileName}`
     const response = await axios.get(imageUrl, { responseType: 'arraybuffer' })

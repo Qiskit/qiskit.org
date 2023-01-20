@@ -83,7 +83,7 @@ class AdvocatesAirtableRecords extends AirtableRecords {
       return fallbackImage
     }
 
-    const imageName = await this.storeImage(imageUrl, this.id, 'images/advocates/downloaded')
+    const imageName = await this.storeImage(imageUrl, 'images/advocates/downloaded')
     return imageName
   }
 
