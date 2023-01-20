@@ -66,13 +66,7 @@ class AirtableRecords {
 
           nextPage()
         })
-        .then(() => {
-          if (fieldName) {
-            return fieldName
-          } else {
-            return ''
-          }
-        })
+        .then(() => fieldName || '')
     } catch (error) {
       console.error(`Error in getFieldName: ${error}`)
       return Promise.resolve(null)
