@@ -1,10 +1,10 @@
 <template>
   <main class="learn-page">
-    <qiskit-banner class="learn-page__banner">
-      <div class="learn-page__banner-content">
+    <qiskit-banner>
+      <div class="content">
         Miss the old version of the textbook? Access it
         <AppLink
-          class="learn-page__banner-link"
+          class="link"
           :segment="{ action: `${routeName} > banner > old-textbook-version` }"
           url="https://qiskit.org/textbook"
         >
@@ -95,8 +95,8 @@ export default class LearnPage extends QiskitPage {
     margin-top: $spacing-10;
   }
 
-  &__banner {
-    &-content {
+  qiskit-banner {
+    .content {
       @include contained();
 
       max-width: $max-size;
@@ -105,12 +105,13 @@ export default class LearnPage extends QiskitPage {
       flex: 1;
     }
 
-    &-link {
+    .link {
       color: $text-color-white;
       text-decoration: underline;
       margin-left: $spacing-02;
 
-      &:hover {
+      &:hover,
+      &:visited {
         color: currentColor;
       }
     }
