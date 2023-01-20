@@ -41,7 +41,7 @@ class AirtableRecords {
    * @param fieldId Field ID
    * @returns {Promise<string | null>} Field name
    */
-  public getFieldName (fieldId: string): Promise<string | null> {
+  private getFieldName (fieldId: string): Promise<string | null> {
     const base = new Airtable({ apiKey: this.apiKey }).base(this.baseId)
     let fieldName: string | undefined
 
