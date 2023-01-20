@@ -127,19 +127,7 @@ class AirtableRecords {
     const imageFileName = `${uniqueId}.jpg`
     const imageFilePath = `static/${targetDir}/${imageFileName}`
     const imagePublicPath = `/${targetDir}/${imageFileName}`
-
-    try {
-      const fileStat = fs.statSync(imageFilePath)
-      // check if file is less than 1 week old
-      if (fileStat.mtimeMs > Date.now() - 7 * 24 * 60 * 60 * 1000) {
-        return imagePublicPath
-      }
-    } catch (err) {
-      // continue to download if file not found
-    }
-
     const response = await axios.get(imageUrl, { responseType: 'arraybuffer' })
-
     const imageBuffer = Buffer.from(response.data, 'binary')
     fs.writeFileSync(imageFilePath, imageBuffer)
     return imagePublicPath
