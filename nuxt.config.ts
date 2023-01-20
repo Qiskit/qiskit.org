@@ -117,7 +117,6 @@ const config: NuxtConfig = {
   */
   modules: [
     '@nuxt/content',
-    '@nuxtjs/axios',
     'nuxt-lazy-load'
   ],
 
