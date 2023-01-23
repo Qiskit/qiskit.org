@@ -114,8 +114,6 @@ export default class StartLocally extends Vue {
 
   codeToInstallAllSystems = 'pip install git+https://github.com/Qiskit/qiskit-terra'
 
-  isLinuxOrMac = this.selectedOs === this.OPERATING_SYSTEMS.linux || this.selectedOs === this.OPERATING_SYSTEMS.mac
-
   prerequisites = {
     [this.QISKIT_INSTALL.stable]: {
       [this.OPERATING_SYSTEMS.linux]: null,
