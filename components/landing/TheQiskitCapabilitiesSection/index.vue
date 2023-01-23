@@ -38,6 +38,7 @@
   </article>
 </template>
 
+<!-- TODO: Refactor using Composition API once Mixins are refactored -->
 <script lang="ts">
 import { Component, Mixins } from 'vue-property-decorator'
 import ScrollSectionsMixin from '~/mixins/scrollBetweenSections'

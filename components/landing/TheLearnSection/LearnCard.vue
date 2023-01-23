@@ -22,18 +22,13 @@
   </article>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
+<script setup lang="ts">
 import { GeneralLink } from '~/constants/appLinks'
 
-@Component
-export default class LearnCard extends Vue {
-  learnLink: GeneralLink = {
-    url: '/learn',
-    label: 'Get learning',
-    segment: { cta: 'get-learning', location: 'learn-card' }
-  }
+const learnLink: GeneralLink = {
+  url: '/learn',
+  label: 'Get learning',
+  segment: { cta: 'get-learning', location: 'learn-card' }
 }
 </script>
 

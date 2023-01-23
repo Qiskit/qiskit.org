@@ -64,10 +64,7 @@
   </section>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
-
+<script setup lang="ts">
 type ChoicesGroup = {
   title: string,
   id: string,
@@ -76,96 +73,91 @@ type ChoicesGroup = {
 
 type InstallChoices = Array<ChoicesGroup>
 
-@Component
-export default class StartLocally extends Vue {
-  OPERATING_SYSTEMS = {
-    linux: 'Linux',
-    mac: 'Mac',
-    windows: 'Windows'
+const OPERATING_SYSTEMS = {
+  linux: 'Linux',
+  mac: 'Mac',
+  windows: 'Windows'
+}
+
+const QISKIT_INSTALL = {
+  stable: 'Stable (recommended)',
+  master: 'Unstable'
+}
+
+const installChoices: InstallChoices = [
+  {
+    title: 'Qiskit Install',
+    id: 'qiskit-install',
+    options: Object.values(QISKIT_INSTALL)
+  },
+  {
+    title: 'Operating System',
+    id: 'os',
+    options: Object.values(OPERATING_SYSTEMS)
   }
+]
 
-  QISKIT_INSTALL = {
-    stable: 'Stable (recommended)',
-    master: 'Unstable'
+const selectedOptions = reactive({
+  'qiskit-install': QISKIT_INSTALL.stable,
+  os: OPERATING_SYSTEMS.mac
+})
+
+const segmentLabel = 'Qiskit Install'
+
+const codeToInstallStableOnLinux = 'pip install -U pip && pip install qiskit'
+const codeToInstallStableOnMac = 'pip install qiskit'
+const codeToInstallStableOnWindows = 'pip install qiskit'
+
+const codeToInstallMasterOnLinux = 'pip install git+https://github.com/Qiskit/qiskit-terra git+https://github.com/Qiskit/qiskit-aer git+https://github.com/Qiskit/qiskit-ignis git+https://github.com/Qiskit/qiskit-aqua git+https://github.com/Qiskit/qiskit-ibmq-provider'
+const codeToInstallMasterOnMac = 'pip install git+https://github.com/Qiskit/qiskit-terra git+https://github.com/Qiskit/qiskit-aer git+https://github.com/Qiskit/qiskit-ignis git+https://github.com/Qiskit/qiskit-aqua git+https://github.com/Qiskit/qiskit-ibmq-provider'
+const codeToInstallMasterOnWindows = 'pip install git+https://github.com/Qiskit/qiskit-terra git+https://github.com/Qiskit/qiskit-aer git+https://github.com/Qiskit/qiskit-ignis git+https://github.com/Qiskit/qiskit-aqua git+https://github.com/Qiskit/qiskit-ibmq-provider'
+
+const prerequisites = {
+  [QISKIT_INSTALL.stable]: {
+    [OPERATING_SYSTEMS.linux]: null,
+    [OPERATING_SYSTEMS.mac]: null,
+    [OPERATING_SYSTEMS.windows]: null
+  },
+  [QISKIT_INSTALL.master]: {
+    [OPERATING_SYSTEMS.linux]: 'PrerequisitesForLinux',
+    [OPERATING_SYSTEMS.mac]: 'PrerequisitesForMac',
+    [OPERATING_SYSTEMS.windows]: 'PrerequisitesForWindows'
   }
+}
 
-  installChoices: InstallChoices = [
-    {
-      title: 'Qiskit Install',
-      id: 'qiskit-install',
-      options: Object.values(this.QISKIT_INSTALL)
-    },
-    {
-      title: 'Operating System',
-      id: 'os',
-      options: Object.values(this.OPERATING_SYSTEMS)
-    }
-  ]
-
-  selectedOptions = {
-    'qiskit-install': this.QISKIT_INSTALL.stable,
-    os: this.OPERATING_SYSTEMS.mac
+const codeToInstall = {
+  [QISKIT_INSTALL.stable]: {
+    [OPERATING_SYSTEMS.linux]: codeToInstallStableOnLinux,
+    [OPERATING_SYSTEMS.mac]: codeToInstallStableOnMac,
+    [OPERATING_SYSTEMS.windows]: codeToInstallStableOnWindows
+  },
+  [QISKIT_INSTALL.master]: {
+    [OPERATING_SYSTEMS.linux]: codeToInstallMasterOnLinux,
+    [OPERATING_SYSTEMS.mac]: codeToInstallMasterOnMac,
+    [OPERATING_SYSTEMS.windows]: codeToInstallMasterOnWindows
   }
+}
 
-  segmentLabel = 'Qiskit Install'
+const selectedOs = computed<string>(() => selectedOptions.os)
 
-  codeToInstallStableOnLinux = 'pip install -U pip && pip install qiskit'
-  codeToInstallStableOnMac = 'pip install qiskit'
-  codeToInstallStableOnWindows = 'pip install qiskit'
+const getPrerequisitesToInstallQiskit = computed<string | null>(() => {
+  const { 'qiskit-install': qiskitInstall, os } = selectedOptions
 
-  codeToInstallMasterOnLinux = 'pip install git+https://github.com/Qiskit/qiskit-terra git+https://github.com/Qiskit/qiskit-aer git+https://github.com/Qiskit/qiskit-ignis git+https://github.com/Qiskit/qiskit-aqua git+https://github.com/Qiskit/qiskit-ibmq-provider'
-  codeToInstallMasterOnMac = 'pip install git+https://github.com/Qiskit/qiskit-terra git+https://github.com/Qiskit/qiskit-aer git+https://github.com/Qiskit/qiskit-ignis git+https://github.com/Qiskit/qiskit-aqua git+https://github.com/Qiskit/qiskit-ibmq-provider'
-  codeToInstallMasterOnWindows = 'pip install git+https://github.com/Qiskit/qiskit-terra git+https://github.com/Qiskit/qiskit-aer git+https://github.com/Qiskit/qiskit-ignis git+https://github.com/Qiskit/qiskit-aqua git+https://github.com/Qiskit/qiskit-ibmq-provider'
+  return prerequisites[qiskitInstall][os]
+})
 
-  prerequisites = {
-    [this.QISKIT_INSTALL.stable]: {
-      [this.OPERATING_SYSTEMS.linux]: null,
-      [this.OPERATING_SYSTEMS.mac]: null,
-      [this.OPERATING_SYSTEMS.windows]: null
-    },
-    [this.QISKIT_INSTALL.master]: {
-      [this.OPERATING_SYSTEMS.linux]: 'PrerequisitesForLinux',
-      [this.OPERATING_SYSTEMS.mac]: 'PrerequisitesForMac',
-      [this.OPERATING_SYSTEMS.windows]: 'PrerequisitesForWindows'
-    }
-  }
+const getCodeToInstallQiskit = computed<string>(() => {
+  const { 'qiskit-install': qiskitInstall, os } = selectedOptions
 
-  codeToInstall = {
-    [this.QISKIT_INSTALL.stable]: {
-      [this.OPERATING_SYSTEMS.linux]: this.codeToInstallStableOnLinux,
-      [this.OPERATING_SYSTEMS.mac]: this.codeToInstallStableOnMac,
-      [this.OPERATING_SYSTEMS.windows]: this.codeToInstallStableOnWindows
-    },
-    [this.QISKIT_INSTALL.master]: {
-      [this.OPERATING_SYSTEMS.linux]: this.codeToInstallMasterOnLinux,
-      [this.OPERATING_SYSTEMS.mac]: this.codeToInstallMasterOnMac,
-      [this.OPERATING_SYSTEMS.windows]: this.codeToInstallMasterOnWindows
-    }
-  }
+  return codeToInstall[qiskitInstall][os]
+})
 
-  get selectedOs () : string {
-    return this.selectedOptions.os
-  }
+const isActive = computed<boolean>((choicesGroup: ChoicesGroup, option: string) => {
+  return (selectedOptions as any)[choicesGroup.id] === option
+})
 
-  getPrerequisitesToInstallQiskit () : string | null {
-    const { 'qiskit-install': qiskitInstall, os } = this.selectedOptions
-
-    return this.prerequisites[qiskitInstall][os]
-  }
-
-  getCodeToInstallQiskit () : string {
-    const { 'qiskit-install': qiskitInstall, os } = this.selectedOptions
-
-    return this.codeToInstall[qiskitInstall][os]
-  }
-
-  isActive (choicesGroup: ChoicesGroup, option: string) : boolean {
-    return (this.selectedOptions as any)[choicesGroup.id] === option
-  }
-
-  selectOption (choicesGroup: ChoicesGroup, selectedOption: string) {
-    (this.selectedOptions as any)[choicesGroup.id] = selectedOption
-  }
+function selectOption (choicesGroup: ChoicesGroup, selectedOption: string) {
+  (selectedOptions as any)[choicesGroup.id] = selectedOption
 }
 </script>
 
