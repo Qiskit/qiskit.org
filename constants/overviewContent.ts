@@ -194,7 +194,7 @@ const EXPERIMENTALIST_TOOLBOX: OverviewSection = {
   description: 'Qiskit\'s characterization framework offers circuits and analysis methods to understand and characterize the source of noise that impacts our devices. Such parameters include T1, T₂* , T2, Hamiltonian parameters such as the ZZ interaction rate and control errors in the gates.',
   link: {
     label: 'See docs',
-    url: 'https://qiskit.org/documentation/apidoc/ignis.html'
+    url: 'https://qiskit.org/documentation/experiments/index.html'
   },
   subSections: [
     {
@@ -204,7 +204,7 @@ const EXPERIMENTALIST_TOOLBOX: OverviewSection = {
         description: 'Qiskit\'s characterization framework brings the analysis parameters and circuits to users in order to understand and characterize the source of noise that impacts our devices. Such parameters include T1, T₂*, T2, Hamiltonian parameters such as the ZZ interaction rate and control errors in the gates.',
         cta: {
           label: 'See Characterization framework',
-          url: 'https://qiskit.org/documentation/apidoc/characterization.html'
+          url: 'https://qiskit.org/documentation/experiments/apidocs/library.html#characterization-experiments'
         }
       }
     },
@@ -215,7 +215,7 @@ const EXPERIMENTALIST_TOOLBOX: OverviewSection = {
         description: 'Qiskit\'s verification framework provides experiments that are designed to verify gates and small circuit performance through tomography, quantum volume and randomized benchmarking.',
         cta: {
           label: 'See Verification framework',
-          url: 'https://qiskit.org/documentation/apidoc/verification.html'
+          url: 'https://qiskit.org/documentation/experiments/apidocs/library.html#verification-experiments'
         }
       }
     },
@@ -226,7 +226,7 @@ const EXPERIMENTALIST_TOOLBOX: OverviewSection = {
         description: 'Qiskit\'s calibration module allows users to optimize pulse parameters to minimize errors. Perform simple parameter scans, with more sophisticated error amplification sequences coming soon.',
         cta: {
           label: 'See Calibration module',
-          url: 'https://qiskit.org/documentation/apidoc/characterization.html#calibrations'
+          url: 'https://qiskit.org/documentation/experiments/apidocs/library.html#calibration-experiments'
         }
       }
     }
