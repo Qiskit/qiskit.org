@@ -46,8 +46,8 @@
               Installing from source requires that you have the Rust compiler on your system
             </template>
             <template #content>
-              <lazy-prerequisites-for-linux-mac v-if="selectedOs === OPERATING_SYSTEMS.linux || selectedOs === OPERATING_SYSTEMS.mac" />
-              <lazy-prerequisites-for-windows v-else />
+              <lazy-prerequisites-for-windows v-if="selectedOs === OPERATING_SYSTEMS.windows" />
+              <lazy-prerequisites-for-linux-mac v-else />
             </template>
           </cv-accordion-item>
         </cv-accordion>
@@ -113,6 +113,8 @@ export default class StartLocally extends Vue {
   codeToInstallStableOnWindows = 'pip install qiskit'
 
   codeToInstallAllSystems = 'pip install git+https://github.com/Qiskit/qiskit-terra'
+
+  isLinuxOrMac = this.selectedOs === this.OPERATING_SYSTEMS.linux || this.selectedOs === this.OPERATING_SYSTEMS.mac
 
   prerequisites = {
     [this.QISKIT_INSTALL.stable]: {
