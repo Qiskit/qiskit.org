@@ -33,25 +33,30 @@
   </AppCard>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
+<script setup lang="ts">
 import { CtaClickedEventProp } from '~/constants/segment'
 
-@Component
-export default class EventCard extends Vue {
-  @Prop({ type: Array, default: () => [] }) types!: string[]
-  @Prop(String) title!: string
-  @Prop(String) image!: string
-  @Prop({ type: String, default: '' }) institution!: string
-  @Prop(String) location!: string
-  @Prop(String) date!: string
-  @Prop(String) time!: string
-  @Prop(String) to!: string
-  @Prop({ type: String, default: 'Join the event' }) ctaLabel!: string
-  @Prop({ type: Object, required: false }) segment: CtaClickedEventProp | undefined
-  @Prop({ type: Boolean, default: false }) verticalLayout!: Boolean
+interface Props {
+  types?: string[]
+  title: string
+  image: string
+  institution?: string
+  location: string
+  date: string
+  time: string
+  to: string
+  ctaLabel?: string
+  segment?: CtaClickedEventProp | undefined
+  verticalLayout?: boolean
 }
+
+withDefaults(defineProps<Props>(), {
+  types: () => [],
+  institution: '',
+  ctaLabel: 'Join the event',
+  segment: undefined,
+  verticalLayout: false
+})
 </script>
 
 <style lang="scss" scoped>
