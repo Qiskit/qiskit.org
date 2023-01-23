@@ -1,16 +1,17 @@
 <template>
   <main class="learn-page">
-    <QiskitBanner padding-x-none>
-      <div class="bx--grid">
+    <qiskit-banner>
+      <div class="content">
         Miss the old version of the textbook? Access it
         <AppLink
+          class="link"
           :segment="{ action: `${routeName} > banner > old-textbook-version` }"
           url="https://qiskit.org/textbook"
         >
           here
         </AppLink>
       </div>
-    </QiskitBanner>
+    </qiskit-banner>
     <LearnHeader />
     <StartLearningSection class="learn-page__section" />
     <AppHelpfulResourcesSection
@@ -22,7 +23,7 @@
 
 <script lang="ts">
 import { Component } from 'vue-property-decorator'
-import QiskitBanner from '@qiskit-community/qiskit-vue/src/components/banner/Banner.vue'
+import '@qiskit/web-components/components/banner'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import { DescriptionCard } from '~/components/ui/AppDescriptionCard.vue'
 import { SOCIAL_MEDIA } from '~/constants/menuLinks'
@@ -33,8 +34,7 @@ import { SOCIAL_MEDIA } from '~/constants/menuLinks'
     return {
       title: 'Qiskit Textbook'
     }
-  },
-  components: { QiskitBanner }
+  }
 })
 export default class LearnPage extends QiskitPage {
   routeName: string = 'learn'
@@ -93,6 +93,36 @@ export default class LearnPage extends QiskitPage {
     max-width: $max-size;
     margin-bottom: $spacing-07;
     margin-top: $spacing-10;
+  }
+
+  qiskit-banner {
+    .content {
+      @include contained();
+
+      max-width: $max-size;
+      padding: $spacing-04 $spacing-06;
+      display: flex;
+      flex: 1;
+
+      @include mq($until: medium) {
+        display: block;
+      }
+    }
+
+    .link {
+      color: $text-color-white;
+      text-decoration: underline;
+      margin-left: 4px;
+
+      &:hover,
+      &:visited {
+        color: currentColor;
+      }
+
+      @include mq($until: medium) {
+        margin-left: 2px;
+      }
+    }
   }
 }
 </style>

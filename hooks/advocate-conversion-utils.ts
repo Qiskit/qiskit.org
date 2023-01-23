@@ -7,91 +7,94 @@ import {
 } from '../store/advocates'
 
 import {
+  AirtableRecords,
   getImageUrl,
   findImageAttachment
 } from './airtable-conversion-utils'
 
-const RECORD_FIELDS = Object.freeze({
-  name: 'Name',
-  city: 'City',
-  country: 'Country',
-  region: 'Continents',
-  image: 'Please upload your photo for the Advocates Website',
-  slackId: 'Slack Member Id',
-  slackUsername: 'Slack Username'
+const RECORD_FIELDS_IDS = Object.freeze({
+  name: 'fldkG2SqdvCKDUhCH',
+  city: 'fldoCJjrveX4J9TV1',
+  country: 'fldZcHGtjEK7fPyAT',
+  region: 'fldG80tPB8heLWxBP',
+  image: 'fldawRemxDatqlfLo',
+  slackId: 'fld5aUddy1M4YRHTn',
+  slackUsername: 'fldY1nP63OKVsdvRC'
 } as const)
 
-async function fetchAdvocates (apiKey: string): Promise<Advocate[]> {
-  const { slackId } = RECORD_FIELDS
-  const advocates: Advocate[] = []
-  const base = new Airtable({ apiKey }).base('app8koO4BZifGFhCV')
-  await base('Advocates').select({
-    fields: Object.values(RECORD_FIELDS),
-    filterByFormula: `AND({${slackId}})`,
-    sort: [{ field: RECORD_FIELDS.name, direction: 'asc' }]
-  }).eachPage((records, nextPage) => {
-    for (const record of records) {
-      const advocate = convertToAdvocate(record)
-      advocates.push(advocate)
-    }
-    nextPage()
-  })
-  return Promise.resolve(advocates)
-}
+const AIRTABLE_BASE_ID = 'app8koO4BZifGFhCV'
 
-function convertToAdvocate (record: any): Advocate {
-  return {
-    name: getName(record),
-    image: getImage(record),
-    region: getRegion(record),
-    city: getCity(record),
-    country: getCountry(record),
-    slackId: getSlackId(record),
-    slackUsername: getSlackUsername(record)
+class AdvocatesAirtableRecords extends AirtableRecords {
+  constructor (apiKey: string, recordFields?: Record<string, any>) {
+    super(apiKey, AIRTABLE_BASE_ID, 'Advocates', 'For website', recordFields)
+  }
+
+  async fetchAdvocates (): Promise<Advocate[]> {
+    if (!this.recordFields) {
+      this.recordFields = await this.getAllFieldNames(RECORD_FIELDS_IDS)
+    }
+
+    const { slackId } = this.recordFields
+    const advocates: Advocate[] = []
+    const base = new Airtable({ apiKey: this.apiKey }).base(AIRTABLE_BASE_ID)
+
+    await base('Advocates').select({
+      fields: Object.values(this.recordFields),
+      filterByFormula: `AND({${slackId}})`,
+      sort: [{ field: this.recordFields.name, direction: 'asc' }]
+    }).eachPage((records, nextPage) => {
+      for (const record of records) {
+        const advocate = this.convertToAdvocate(record)
+        advocates.push(advocate)
+      }
+      nextPage()
+    })
+    return Promise.resolve(advocates)
+  }
+
+  convertToAdvocate (record: any): Advocate {
+    return {
+      name: this.getName(record),
+      image: this.getImage(record),
+      region: this.getRegion(record),
+      city: this.getCity(record),
+      country: this.getCountry(record),
+      slackId: this.getSlackId(record),
+      slackUsername: this.getSlackUsername(record)
+    }
+  }
+
+  public getName (record: any): string {
+    return record.get(this.recordFields!.name)
+  }
+
+  public getImage (record: any): string {
+    const fallbackImage = '/images/advocates/no-advocate-photo.png'
+    const attachments = record.get(this.recordFields!.image)
+    const imageAttachment = attachments && findImageAttachment(attachments)
+    const imageUrl = imageAttachment && getImageUrl(imageAttachment)
+    return imageUrl || fallbackImage
+  }
+
+  public getCity (record: any): string {
+    return record.get(this.recordFields!.city)
+  }
+
+  public getCountry (record: any): string {
+    return record.get(this.recordFields!.country)
+  }
+
+  public getRegion (record: any): AdvocatesWorldRegion {
+    return record.get(this.recordFields!.region)
+  }
+
+  public getSlackId (record: any): string {
+    return record.get(this.recordFields!.slackId)
+  }
+
+  public getSlackUsername (record: any): string {
+    return record.get(this.recordFields!.slackUsername)
   }
 }
 
-function getName (record: any): string {
-  return record.get(RECORD_FIELDS.name)
-}
-
-function getImage (record: any): string {
-  const fallbackImage = '/images/advocates/no-advocate-photo.png'
-  const attachments = record.get(RECORD_FIELDS.image)
-  const imageAttachment = attachments && findImageAttachment(attachments)
-  const imageUrl = imageAttachment && getImageUrl(imageAttachment)
-  return imageUrl || fallbackImage
-}
-
-function getCity (record: any): string {
-  return record.get(RECORD_FIELDS.city)
-}
-
-function getCountry (record: any): string {
-  return record.get(RECORD_FIELDS.country)
-}
-
-function getRegion (record: any): AdvocatesWorldRegion {
-  return record.get(RECORD_FIELDS.region)
-}
-
-function getSlackId (record: any): string {
-  return record.get(RECORD_FIELDS.slackId)
-}
-
-function getSlackUsername (record: any): string {
-  return record.get(RECORD_FIELDS.slackUsername)
-}
-
-export {
-  RECORD_FIELDS,
-  fetchAdvocates,
-  convertToAdvocate,
-  getName,
-  getImage,
-  getCity,
-  getCountry,
-  getRegion,
-  getSlackId,
-  getSlackUsername
-}
+export default AdvocatesAirtableRecords
