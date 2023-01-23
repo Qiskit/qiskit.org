@@ -34,158 +34,143 @@
   </section>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
-
+<script setup lang="ts">
 type CellCoordinates = { x: number, y: number }
 type CellSpecification = { c: number, r: number, isDecoherent?: boolean }
 type Decoherences = { [key: number]: number }
 
-@Component
-export default class MetalGrid extends Vue {
-  timeToRemoveNextCell: number = 5 // in ms
-  timeToLoadMetal: number = 50 // in ms
-  triggerPositionFromTopCenter: CellCoordinates = { x: -3, y: 2 }
+const timeToRemoveNextCell = 5 // in ms
+const timeToLoadMetal = 50 // in ms
+const triggerPositionFromTopCenter: CellCoordinates = { x: -3, y: 2 }
 
-  noDecoherenceColumnCount: number = 30
-  noDecoherenceRowCount: number = 11
+const noDecoherenceColumnCount = 30
+const noDecoherenceRowCount = 11
 
-  decoherenceExtraCount: number = 3
+const decoherenceExtraCount = 3
 
-  rowDecoherenceChance: Decoherences = {
-    0: 0.5,
-    1: 0.7,
-    2: 0.8
+const rowDecoherenceChance: Decoherences = {
+  0: 0.5,
+  1: 0.7,
+  2: 0.8
+}
+
+const columnDecoherenceChance: Decoherences = {
+  0: 0.5,
+  1: 0.7,
+  2: 0.8
+}
+
+// XXX: Column count must be even
+const pattern: number[][] = [
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0],
+  [0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0],
+  [0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0],
+  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+  [0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0]
+] // size 16x9
+
+const hiddenCells: string[] = []
+
+const slotContainerIsHidden = ref(false)
+
+const positions = computed<CellSpecification[][]>(() => Array.from((() => {
+  function* generateRows (): Iterable<CellSpecification[]> {
+    const totalRowCount = noDecoherenceRowCount + decoherenceExtraCount
+    for (let r = 0; r < totalRowCount; r++) {
+      yield Array.from(genColumns(r))
+    }
   }
 
-  columnDecoherenceChance: Decoherences = {
-    0: 0.5,
-    1: 0.7,
-    2: 0.8
+  function* genColumns (currentRow: number): Iterable<CellSpecification> {
+    const totalColumnCount = noDecoherenceColumnCount + decoherenceExtraCount
+    for (let c = -decoherenceExtraCount; c < totalColumnCount; c++) {
+      const isInDecoherenceRowZone = currentRow >= noDecoherenceRowCount
+      const rowIsDecoherent = Math.random() < rowDecoherenceChance[currentRow - noDecoherenceRowCount]
+      const isInDecoherenceLeftColumnZone = c < 0
+      const leftColumnIsDecoherent = Math.random() < columnDecoherenceChance[-c - 1]
+      const isInDecoherenceRightColumnZone = c >= noDecoherenceColumnCount
+      const rightColumnIsDecoherent = Math.random() < columnDecoherenceChance[c - noDecoherenceColumnCount]
+      const isDecoherent =
+        (isInDecoherenceRowZone && rowIsDecoherent) ||
+        (isInDecoherenceLeftColumnZone && leftColumnIsDecoherent) ||
+        (isInDecoherenceRightColumnZone && rightColumnIsDecoherent)
+
+      yield { c, r: currentRow, isDecoherent }
+    }
   }
 
-  // XXX: Column count must be even
-  pattern: number[][] = [
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0],
-    [0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0],
-    [0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
-    [0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0]
-  ] // size 16x9
+  return generateRows()
+})()))
 
-  hiddenCells: string[] = []
+const fallingCells = computed<string[]>(() => Array.from((() => {
+  const self = this
+  const centralColumn = Math.floor(noDecoherenceColumnCount / 2)
+  const [rowStart, rowEnd] = [1, pattern.length + 1]
+  const [columnStart, columnEnd] = [
+    centralColumn - pattern[0].length / 2,
+    centralColumn + pattern[0].length / 2
+  ]
 
-  slotContainerIsHidden: boolean = false
-
-  positions: CellSpecification[][] = Array.from((() => {
-    const {
-      rowDecoherenceChance,
-      columnDecoherenceChance,
-      decoherenceExtraCount,
-      noDecoherenceColumnCount,
-      noDecoherenceRowCount
-    } = this
-
-    function* generateRows (): Iterable<CellSpecification[]> {
-      const totalRowCount = noDecoherenceRowCount + decoherenceExtraCount
-      for (let r = 0; r < totalRowCount; r++) {
-        yield Array.from(genColumns(r))
-      }
-    }
-
-    function* genColumns (currentRow: number): Iterable<CellSpecification> {
-      const totalColumnCount = noDecoherenceColumnCount + decoherenceExtraCount
-      for (let c = -decoherenceExtraCount; c < totalColumnCount; c++) {
-        const isInDecoherenceRowZone = currentRow >= noDecoherenceRowCount
-        const rowIsDecoherent = Math.random() < rowDecoherenceChance[currentRow - noDecoherenceRowCount]
-        const isInDecoherenceLeftColumnZone = c < 0
-        const leftColumnIsDecoherent = Math.random() < columnDecoherenceChance[-c - 1]
-        const isInDecoherenceRightColumnZone = c >= noDecoherenceColumnCount
-        const rightColumnIsDecoherent = Math.random() < columnDecoherenceChance[c - noDecoherenceColumnCount]
-        const isDecoherent =
-          (isInDecoherenceRowZone && rowIsDecoherent) ||
-          (isInDecoherenceLeftColumnZone && leftColumnIsDecoherent) ||
-          (isInDecoherenceRightColumnZone && rightColumnIsDecoherent)
-
-        yield { c, r: currentRow, isDecoherent }
-      }
-    }
-
-    return generateRows()
-  })())
-
-  fallingCells: string[] = Array.from((() => {
-    const { noDecoherenceColumnCount, pattern } = this
-    const self = this
-    const centralColumn = Math.floor(noDecoherenceColumnCount / 2)
-    const [rowStart, rowEnd] = [1, pattern.length + 1]
-    const [columnStart, columnEnd] = [
-      centralColumn - pattern[0].length / 2,
-      centralColumn + pattern[0].length / 2
-    ]
-
-    function* gen (): Iterable<string> {
-      for (let r = rowStart; r < rowEnd; r++) {
-        for (let c = columnStart; c < columnEnd; c++) {
-          const cellIsAlwaysVisible = pattern[r - rowStart][c - columnStart] === 0
-          if (cellIsAlwaysVisible) {
-            continue
-          }
-          yield self.posId({ c, r })
+  function* gen (): Iterable<string> {
+    for (let r = rowStart; r < rowEnd; r++) {
+      for (let c = columnStart; c < columnEnd; c++) {
+        const cellIsAlwaysVisible = pattern[r - rowStart][c - columnStart] === 0
+        if (cellIsAlwaysVisible) {
+          continue
         }
+        yield self.posId({ c, r })
       }
     }
-
-    return gen()
-  })())
-
-  isHidden (pos: CellSpecification) {
-    return this.hiddenCells.includes(this.posId(pos))
   }
 
-  isTrigger (pos: CellSpecification) {
-    const centralColumn = Math.floor(this.noDecoherenceColumnCount / 2)
-    const { x: triggerX, y: triggerY } = this.triggerPositionFromTopCenter
-    const { c, r } = pos
-    return c === centralColumn + triggerX && r === triggerY
+  return gen()
+})()))
+
+const isHidden = computed((pos: CellSpecification) => {
+  return hiddenCells.includes(posId(pos))
+})
+
+const isTrigger = computed((pos: CellSpecification) => {
+  const centralColumn = Math.floor(noDecoherenceColumnCount / 2)
+  const { x: triggerX, y: triggerY } = triggerPositionFromTopCenter
+  const { c, r } = pos
+  return c === centralColumn + triggerX && r === triggerY
+})
+
+const triggerAnimation = (pos: CellSpecification) => {
+  if (!isTrigger.value(pos)) { return }
+  slotContainerIsHidden.value = true
+  removeCell()
+}
+
+function removeCell () {
+  const length = fallingCells.value.length
+  const noMoreCells = length === 0
+
+  if (noMoreCells) {
+    setTimeout(() => {
+      this.$router.push({ path: '/metal' })
+    }, timeToLoadMetal)
+    return
   }
 
-  triggerAnimation (pos: CellSpecification) {
-    if (!this.isTrigger(pos)) { return }
-    this.slotContainerIsHidden = true
-    this.removeCell()
-  }
+  const index = Math.floor(Math.random() * length)
+  const cellToHideId = fallingCells.value.splice(index, 1)[0]
+  hiddenCells.splice(0, 0, cellToHideId)
 
-  removeCell () {
-    const length = this.fallingCells.length
-    const noMoreCells = length === 0
+  setTimeout(removeCell, timeToRemoveNextCell)
+}
 
-    if (noMoreCells) {
-      setTimeout(() => {
-        this.$router.push({ path: '/metal' })
-      }, this.timeToLoadMetal)
-      return
-    }
+const posId = (pos: CellSpecification): string => {
+  return `cell-${pos.c}-${pos.r}`
+}
 
-    const index = Math.floor(Math.random() * length)
-    const cellToHideId = this.fallingCells.splice(index, 1)[0]
-    this.hiddenCells.splice(0, 0, cellToHideId)
-
-    setTimeout(this.removeCell, this.timeToRemoveNextCell)
-  }
-
-  posId (pos: CellSpecification): string {
-    return `cell-${pos.c}-${pos.r}`
-  }
-
-  rowId (index: number): string {
-    return `row-${index}`
-  }
+const rowId = (index: number): string => {
+  return `row-${index}`
 }
 </script>
 

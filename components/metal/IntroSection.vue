@@ -31,16 +31,10 @@
   </section>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
-
-@Component
-export default class IntroSection extends Vue {
-  joinWaitingListLink = {
-    url: 'https://qiskit.org/documentation/metal',
-    label: 'Get started now'
-  }
+<script setup lang="ts">
+const joinWaitingListLink = {
+  url: 'https://qiskit.org/documentation/metal',
+  label: 'Get started now'
 }
 </script>
 

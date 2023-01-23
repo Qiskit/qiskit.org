@@ -52,16 +52,10 @@
   </section>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
-
-@Component
-export default class BuildingSection extends Vue {
-  stayInTouchLink = {
-    url: 'http://qisk.it/metal',
-    label: 'Join tutorials'
-  }
+<script setup lang="ts">
+const stayInTouchLink = {
+  url: 'http://qisk.it/metal',
+  label: 'Join tutorials'
 }
 </script>
 

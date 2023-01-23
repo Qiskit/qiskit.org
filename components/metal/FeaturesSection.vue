@@ -21,15 +21,10 @@
   </section>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
+<script setup lang="ts">
 import { METAL_FEATURES } from '~/constants/metalContent'
 
-@Component
-export default class FeaturesSection extends Vue {
-  metalFeatures = METAL_FEATURES
-}
+const metalFeatures = METAL_FEATURES
 </script>
 
 <style lang="scss" scoped>
