@@ -35,14 +35,12 @@
   </header>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
-
-@Component
-export default class BlockbusterHeader extends Vue {
-  @Prop({ type: String, required: true }) recommendationSectionId!: string;
+<script setup lang="ts">
+interface Props {
+  recommendationSectionId: string;
 }
+
+defineProps<Props>()
 </script>
 
 <style lang="scss" scoped>

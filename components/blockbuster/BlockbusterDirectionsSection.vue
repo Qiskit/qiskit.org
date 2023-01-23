@@ -43,35 +43,33 @@
   </section>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
-
-@Component
-export default class BlockbusterDirectionsSection extends Vue {
-  @Prop({ type: Number, required: true }) userLatitude!: number
-  @Prop({ type: Number, required: true }) userLongitude!: number
-  @Prop({ type: Boolean, required: true }) userLocationLoaded!: boolean
-  @Prop({ type: Boolean, required: true }) userLocationLoading!: boolean
-
-  destination = encodeURIComponent('Blockbuster Bend Oregon')
-
-  get origin () {
-    if (this.userLocationLoaded) {
-      return encodeURIComponent(`${this.userLatitude},${this.userLongitude}`)
-    }
-    return encodeURIComponent('My location')
-  }
-
-  get mapSrc () {
-    const key = 'AIzaSyCECZXkg_kMH3Odkh9mWAvKaQ7gexzP3UU'
-    return `https://www.google.com/maps/embed/v1/directions?key=${key}&origin=${this.origin}&destination=${this.destination}`
-  }
-
-  get directionsUrl () {
-    return `https://www.google.com/maps/dir/${this.origin}/${this.destination}`
-  }
+<script setup lang="ts">
+interface Props {
+  userLatitude: number
+  userLongitude: number
+  userLocationLoaded: boolean
+  userLocationLoading: boolean
 }
+
+const props = defineProps<Props>()
+
+const destination = encodeURIComponent('Blockbuster Bend Oregon')
+
+const origin = computed(() => {
+  if (props.userLocationLoaded) {
+    return encodeURIComponent(`${props.userLatitude},${props.userLongitude}`)
+  }
+  return encodeURIComponent('My location')
+})
+
+const mapSrc = computed(() => {
+  const key = 'AIzaSyCECZXkg_kMH3Odkh9mWAvKaQ7gexzP3UU'
+  return `https://www.google.com/maps/embed/v1/directions?key=${key}&origin=${origin.value}&destination=${destination}`
+})
+
+const directionsUrl = computed(() => {
+  return `https://www.google.com/maps/dir/?api=1&origin=${origin.value}&destination=${destination}`
+})
 </script>
 
 <style lang="scss">

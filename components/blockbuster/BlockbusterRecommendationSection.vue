@@ -50,11 +50,16 @@
   </section>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
+<script setup lang="ts">
 import movies from '~/content/blockbuster/movies.json'
 import quantumBinaryNumbers from '~/content/blockbuster/quantum-binary-numbers.json'
+
+interface Props {
+  directionsSectionId: string;
+  getUserLocation: () => void;
+}
+
+defineProps<Props>()
 
 interface Recommendation {
   description: String[];
@@ -68,39 +73,29 @@ const emptyRecommendation: Recommendation = {
   trailer: ''
 }
 
-@Component
-export default class BlockbusterRecommendationSection extends Vue {
-  @Prop({ type: String, required: true }) directionsSectionId!: String
-  @Prop({ type: Function, required: true }) getUserLocation!: Function
+let quantumBinaryNumbersIndex = 0
+let recommendation: Recommendation = emptyRecommendation
 
-  quantumBinaryNumbersIndex = 0
-  recommendation: Recommendation = emptyRecommendation
+onMounted(() => {
+  quantumBinaryNumbersIndex = Math.floor(Math.random() * quantumBinaryNumbers.length)
+  updateRecommendation()
+})
 
-  mounted () {
-    this.quantumBinaryNumbersIndex = Math.floor(
-      Math.random() * quantumBinaryNumbers.length
-    )
-    this.updateRecommendation()
-  }
+function updateRecommendation (): void {
+  recommendation = emptyRecommendation
 
-  updateRecommendation (): void {
-    this.recommendation = emptyRecommendation
-
-    setTimeout(() => {
-      const quantumBinaryNumber =
-        quantumBinaryNumbers[
-          this.quantumBinaryNumbersIndex % quantumBinaryNumbers.length
-        ]
-      const quantumInteger = parseInt(quantumBinaryNumber, 2)
-      this.recommendation = movies[quantumInteger % movies.length]
-      this.quantumBinaryNumbersIndex++
-    }, 1500)
-  }
-
-  get recommendationIsLoading () {
-    return !this.recommendation.title
-  }
+  setTimeout(() => {
+    const quantumBinaryNumber =
+      quantumBinaryNumbers[
+        quantumBinaryNumbersIndex % quantumBinaryNumbers.length
+      ]
+    const quantumInteger = parseInt(quantumBinaryNumber, 2)
+    recommendation = movies[quantumInteger % movies.length]
+    quantumBinaryNumbersIndex++
+  }, 1500)
 }
+
+const recommendationIsLoading = computed(() => !recommendation.title)
 </script>
 
 <style lang="scss" scoped>
