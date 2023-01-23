@@ -9,7 +9,7 @@
           url="https://qiskit.org/textbook"
         >
           here
-        </AppLink>.
+        </AppLink>
       </div>
     </qiskit-banner>
     <LearnHeader />
@@ -103,16 +103,24 @@ export default class LearnPage extends QiskitPage {
       padding: $spacing-04 $spacing-06;
       display: flex;
       flex: 1;
+
+      @include mq($until: medium) {
+        display: block;
+      }
     }
 
     .link {
       color: $text-color-white;
       text-decoration: underline;
-      margin-left: $spacing-02;
+      margin-left: 4px;
 
       &:hover,
       &:visited {
         color: currentColor;
+      }
+
+      @include mq($until: medium) {
+        margin-left: 2px;
       }
     }
   }
