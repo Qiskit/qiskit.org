@@ -24,33 +24,30 @@
   </cv-accordion>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
+<script setup lang="ts">
 import { AccordionLayoutProps } from '~/components/overview/AccordionLayout.vue'
 
-type ContentAccordionTab = {
+export type ContentAccordionTab = {
   title: string,
   content: AccordionLayoutProps
 }
 
-export { ContentAccordionTab }
+interface Props {
+  tabs: Array<ContentAccordionTab>
+}
 
-@Component
-export default class ContentAccordion extends Vue {
-  @Prop(Array) tabs!: Array<ContentAccordionTab>
+defineProps<Props>()
 
-  expandedItem: number = 0
+const expandedItem = ref(0)
 
-  preventFromClosing (index: number, event: MouseEvent) {
-    if (index === this.expandedItem) {
-      event.stopPropagation()
-    }
+function preventFromClosing (index: number, event: MouseEvent) {
+  if (index === expandedItem.value) {
+    event.stopPropagation()
   }
+}
 
-  actionChange ({ changedIndex }: { changedIndex: number }) : void {
-    this.expandedItem = changedIndex
-  }
+function actionChange ({ changedIndex }: { changedIndex: number }) : void {
+  expandedItem.value = changedIndex
 }
 </script>
 
