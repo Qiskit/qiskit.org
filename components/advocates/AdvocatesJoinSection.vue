@@ -21,39 +21,34 @@
   </section>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
+<script setup lang="ts">
 import CompactFeature from '~/components/ui/CompactFeature.vue'
 import { GeneralLink } from '~/constants/appLinks'
 
 type Benefit = Pick<CompactFeature, 'icon'|'title'|'description'>
 
-@Component
-export default class JoinSection extends Vue {
-  advocateBenefits: Array<Benefit> = [
-    {
-      icon: 'high-five.svg',
-      title: 'Network with experts and enthusiasts',
-      description: 'Advocates will be added to a group of quantum experts and will be a part of regular information sharing sessions.'
-    },
-    {
-      icon: 'global-network.svg',
-      title: 'Access to Qiskit core members and projects',
-      description: 'Advocates will receive special access to core members of the Qiskit team for questions and brainstorming ideas.'
-    },
-    {
-      icon: 'location.svg',
-      title: 'Invitation to events',
-      description: 'Active Qiskit Advocates will be invited to attend global events created for the quantum computing community.'
-    }
-  ]
-
-  joinAction: GeneralLink = {
-    url: 'https://qisk.it/advocateapplication',
-    label: 'Join the program',
-    segment: { cta: 'join-the-program', location: 'join-section' }
+const advocateBenefits: Benefit[] = [
+  {
+    icon: 'high-five.svg',
+    title: 'Network with experts and enthusiasts',
+    description: 'Advocates will be added to a group of quantum experts and will be a part of regular information sharing sessions.'
+  },
+  {
+    icon: 'global-network.svg',
+    title: 'Access to Qiskit core members and projects',
+    description: 'Advocates will receive special access to core members of the Qiskit team for questions and brainstorming ideas.'
+  },
+  {
+    icon: 'location.svg',
+    title: 'Invitation to events',
+    description: 'Active Qiskit Advocates will be invited to attend global events created for the quantum computing community.'
   }
+]
+
+const joinAction: GeneralLink = {
+  url: 'https://qisk.it/advocateapplication',
+  label: 'Join the program',
+  segment: { cta: 'join-the-program', location: 'join-section' }
 }
 </script>
 

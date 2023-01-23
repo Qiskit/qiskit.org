@@ -57,55 +57,45 @@
   </section>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
+<script setup lang="ts">
 import { mapState } from 'vuex'
 import type { MapperForStateWithNamespace } from 'vuex'
-import { Component, Prop } from 'vue-property-decorator'
 import { Advocate, ADVOCATES_WORLD_REGION_OPTIONS, State } from '~/store/advocates'
 
-@Component({
-  computed: {
-    ...mapState<MapperForStateWithNamespace>('advocates', {
-      regionFilters: (state: State) => state.regionFilters
-    })
-  }
-})
-export default class MeetTheAdvocates extends Vue {
-  @Prop(Array) advocates!: Advocate[]
-
-  /**
-   * Region filters from Vuex store.
-   *
-   * Initialized with mapState.
-   */
-  public regionFilters!: string[]
-
-  private filter = {
-    label: 'Locations',
-    options: ADVOCATES_WORLD_REGION_OPTIONS
-  }
-
-  isRegionFilterChecked (filterValue: string): boolean {
-    return this.regionFilters.includes(filterValue)
-  }
-
-  updateRegionFilter (option: string, isChecked: boolean): void {
-    const regionFilters = this.regionFilters.filter(oldOption => oldOption !== option)
-
-    if (isChecked) {
-      regionFilters.push(option)
-    }
-
-    this.updateRegionFilters(regionFilters)
-  }
-
-  updateRegionFilters (regionFilters: string[]): void {
-    this.$store.commit('advocates/setRegionFilters', regionFilters)
-  }
-
-  joinSlackLink: string = 'https://ibm.co/joinqiskitslack'
+interface Props {
+  advocates: Advocate[]
 }
+
+defineProps<Props>()
+
+const filter = {
+  label: 'Locations',
+  options: ADVOCATES_WORLD_REGION_OPTIONS
+}
+
+const { regionFilters } = mapState<MapperForStateWithNamespace>('advocates', {
+  regionFilters: (state: State) => state.regionFilters
+})
+
+const isRegionFilterChecked = (filterValue: string): boolean => {
+  return regionFilters.includes(filterValue)
+}
+
+const updateRegionFilter = (option: string, isChecked: boolean): void => {
+  const filteredRegionFilters = regionFilters.filter(oldOption => oldOption !== option)
+
+  if (isChecked) {
+    filteredRegionFilters.push(option)
+  }
+
+  updateRegionFilters(filteredRegionFilters)
+}
+
+const updateRegionFilters = (regionFilters: string[]): void => {
+  this.$store.commit('advocates/setRegionFilters', regionFilters)
+}
+
+const joinSlackLink: string = 'https://ibm.co/joinqiskitslack'
 </script>
 
 <style lang="scss" scoped>
