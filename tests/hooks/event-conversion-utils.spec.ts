@@ -398,17 +398,16 @@ describe('getImage', () => {
         switch (field) {
           case 'Name':
             return 'Fake Conference'
-          }
         }
       }
+    }
 
     eventsAirtableRecords.storeImage = jest.fn(() => Promise.resolve('/images/events/fake-event.jpg'))
     const result = await eventsAirtableRecords.getImage(fakeRecord)
     expect(result).toBe('/images/events/no-picture.jpg')
   })
 
-    it('defaults in a no-picture.jpg value if the attachment is of no image type', async () => {
-   
+  it('defaults in a no-picture.jpg value if the attachment is of no image type', async () => {
     const fakeRecord = {
       get: (field: string) => {
         switch (field) {
