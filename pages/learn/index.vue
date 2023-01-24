@@ -29,7 +29,7 @@ import { DescriptionCard } from '~/components/ui/AppDescriptionCard.vue'
 import { SOCIAL_MEDIA } from '~/constants/menuLinks'
 
 @Component({
-  layout: 'account-default-max',
+  layout: 'default-max',
   head () {
     return {
       title: 'Qiskit Textbook'

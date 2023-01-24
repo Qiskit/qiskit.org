@@ -1,6 +1,7 @@
 <template>
   <div>
-    <qiskit-ui-shell variant="hide-account" @on-click="onClick" />
+    <qiskit-ui-shell v-if="isLearnPage" @on-click="onClick" />
+    <qiskit-ui-shell v-else variant="hide-account" @on-click="onClick" />
     <div class="main-container">
       <nuxt />
     </div>
@@ -18,6 +19,8 @@ export default class MaxLayout extends Vue {
   onClick (e: CustomEvent) {
     this.$trackClickEvent(`${e.detail?.label?.toLowerCase()}`, 'menu')
   }
+
+  isLearnPage: boolean = this.$route.path === '/learn'
 }
 </script>
 
