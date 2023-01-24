@@ -1,4 +1,4 @@
-import fs from 'fs'
+import { promises as fsPromises } from 'fs'
 import Airtable from 'airtable'
 import axios from 'axios'
 
@@ -123,10 +123,16 @@ class AirtableRecords {
     const imageFileName = `${this.id}.jpg`
     const imageFilePath = `static/${targetDir}/${imageFileName}`
     const imagePublicPath = `/${targetDir}/${imageFileName}`
-    const response = await axios.get(imageUrl, { responseType: 'arraybuffer' })
-    const imageBuffer = Buffer.from(response.data, 'binary')
-    fs.writeFileSync(imageFilePath, imageBuffer)
-    return imagePublicPath
+
+    try {
+      const response = await axios.get(imageUrl, { responseType: 'arraybuffer' })
+      const imageBuffer = Buffer.from(response.data, 'binary')
+      await fsPromises.writeFile(imageFilePath, imageBuffer)
+      return imagePublicPath
+    } catch (error) {
+      console.error(error)
+      return Promise.reject(error)
+    }
   }
 }
 

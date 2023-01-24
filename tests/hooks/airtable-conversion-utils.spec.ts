@@ -8,7 +8,9 @@ const targetDir = 'test/target-dir'
 
 jest.mock('fs', () => {
   return {
-    writeFileSync: jest.fn()
+    promises: {
+      writeFile: jest.fn()
+    }
   }
 })
 
@@ -37,7 +39,7 @@ describe('storeImage', () => {
   })
 
   it('should throw error when there is problem with file system', async () => {
-    jest.spyOn(fs, 'writeFileSync').mockImplementation(() => { throw new Error('File system error') })
+    jest.spyOn(fs.promises, 'writeFile').mockImplementation(() => { throw new Error('File system error') })
     jest.spyOn(axios, 'get').mockResolvedValue({ data: Buffer.from('imageData') })
     await expect(airtableRecords.storeImage(imageUrl, targetDir)).rejects.toThrowError('File system error')
   })
