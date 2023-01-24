@@ -205,17 +205,17 @@ export default class EventsPage extends QiskitPage {
     margin-top: $spacing-07;
     margin-bottom: $spacing-09;
 
-    .bx--tabs__nav-link {
+    .bx--tabs--scrollable__nav-link {
       color: black;
       border-bottom-color: $border-color;
     }
 
-    .bx--tabs__nav-item--selected:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link {
+    .bx--tabs--scrollable__nav-item--selected:not(.bx--tabs--scrollable__nav-item--disabled) .bx--tabs--scrollable__nav-link {
         border-bottom-color: $border-color-secondary;
     }
 
-    .bx--tabs__nav-item:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link,
-    .bx--tabs__nav-item:hover:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link {
+    .bx--tabs--scrollable__nav-item:not(.bx--tabs--scrollable__nav-item--disabled) .bx--tabs--scrollable__nav-link,
+    .bx--tabs--scrollable__nav-item:hover:not(.bx--tabs--scrollable__nav-item--selected):not(.bx--tabs--scrollable__nav-item--disabled) .bx--tabs--scrollable__nav-link {
       color: $text-color;
     }
 
@@ -244,15 +244,15 @@ export default class EventsPage extends QiskitPage {
       }
 
       .bx--tabs-trigger--open,
-      .bx--tabs__nav-item {
+      .bx--tabs--scrollable__nav-item {
         background-color: $background-color-lighter;
       }
 
-      .bx--tabs__nav-item:last-child .bx--tabs__nav-link {
+      .bx--tabs--scrollable__nav-item:last-child .bx--tabs--scrollable__nav-link {
         border-bottom: none;
       }
 
-      .bx--tabs__nav-item:hover:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled) {
+      .bx--tabs--scrollable__nav-item:hover:not(.bx--tabs--scrollable__nav-item--selected):not(.bx--tabs--scrollable__nav-item--disabled) {
         background-color: $background-color-light;
       }
     }

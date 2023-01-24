@@ -470,13 +470,13 @@ export default class StartLearningSection extends Vue {
 
 <style lang="scss">
   .start-learning-section {
-    .cv-tab.bx--tabs {
+    .cv-tab.bx--tabs--scrollable {
       display: flex;
       justify-content: flex-end;
       padding-bottom: $spacing-09;
 
       @include mq($until: medium) {
-        display: block;
+        justify-content: flex-start;
       }
     }
 
@@ -490,8 +490,8 @@ export default class StartLearningSection extends Vue {
       }
     }
 
-    & .bx--tabs__nav-item {
-      &--selected:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link {
+    & .bx--tabs--scrollable__nav-item {
+      &--selected:not(.bx--tabs--scrollable__nav-item--disabled) .bx--tabs--scrollable__nav-link {
         border-bottom-color: $border-color-secondary;
       }
     }
