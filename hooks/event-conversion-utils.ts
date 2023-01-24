@@ -45,15 +45,12 @@ const RECORD_FIELDS_IDS = Object.freeze({
 
 const AIRTABLE_BASE_ID = 'appYREKB18uC7y8ul'
 class EventsAirtableRecords extends AirtableRecords {
-  private _recordFields?: Record<string, any>
-
   constructor (apiKey: string, view: string, recordFields?: Record<string, any>) {
-    super(apiKey, AIRTABLE_BASE_ID, 'Event Calendar', view)
-    this._recordFields = recordFields
+    super(apiKey, AIRTABLE_BASE_ID, 'Event Calendar', view, undefined, recordFields)
   }
 
   getEventsQuery (days: number, view: string, filters: string[] = []): Airtable.Query<{}> {
-    const { startDate } = this._recordFields!
+    const { startDate } = this.recordFields!
     const filterByFormula = `AND(${filters})`
     const base = new Airtable({ apiKey: this.apiKey }).base(AIRTABLE_BASE_ID)
 
@@ -122,11 +119,11 @@ class EventsAirtableRecords extends AirtableRecords {
   async fetchCommunityEvents (days: number): Promise<CommunityEvent[]> {
     const view = 'Add to Event Site'
 
-    if (!this._recordFields) {
-      this._recordFields = await this.getAllFieldNames(RECORD_FIELDS_IDS)
+    if (!this.recordFields) {
+      this.recordFields = await this.getAllFieldNames(RECORD_FIELDS_IDS)
     }
 
-    const { showOnEventsPage } = this._recordFields
+    const { showOnEventsPage } = this.recordFields
     const communityEvents: CommunityEvent[] = []
 
     await this.getEventsQuery(days, view, [`{${showOnEventsPage}}`]).eachPage(async (records, nextPage) => {
@@ -146,11 +143,11 @@ class EventsAirtableRecords extends AirtableRecords {
   async fetchSeminarSeriesEvents (days: number): Promise<SeminarSeriesEvent[]> {
     const view = 'Seminar Series ONLY'
 
-    if (!this._recordFields) {
-      this._recordFields = await this.getAllFieldNames(RECORD_FIELDS_IDS)
+    if (!this.recordFields) {
+      this.recordFields = await this.getAllFieldNames(RECORD_FIELDS_IDS)
     }
 
-    const { showOnSeminarSeriesPage } = this._recordFields
+    const { showOnSeminarSeriesPage } = this.recordFields
     const seminarSeriesEvents: SeminarSeriesEvent[] = []
 
     await this.getEventsQuery(days, view, [`{${showOnSeminarSeriesPage}}`]).eachPage(async (records, nextPage) => {
@@ -233,19 +230,19 @@ class EventsAirtableRecords extends AirtableRecords {
   }
 
   public getInstitution (record: any): string {
-    return record.get(this._recordFields!.institution) || ''
+    return record.get(this.recordFields!.institution) || ''
   }
 
   public getName (record: any): string {
-    return record.get(this._recordFields!.name)
+    return record.get(this.recordFields!.name)
   }
 
   public getSpeaker (record: any): string {
-    return record.get(this._recordFields!.speaker)
+    return record.get(this.recordFields!.speaker)
   }
 
   public getTypes (record: any): CommunityEventType[] {
-    const value = record.get(this._recordFields!.types) || []
+    const value = record.get(this.recordFields!.types) || []
     const valueList = (Array.isArray(value) ? value : [value]) as string[]
     const communityEventTypes = this.filterWithWhitelist(valueList, COMMUNITY_EVENT_TYPE_OPTIONS)
     const noTypes = communityEventTypes.length === 0
@@ -254,7 +251,7 @@ class EventsAirtableRecords extends AirtableRecords {
 
   public async getImage (record: any): Promise<string> {
     const fallbackImage = '/images/events/no-picture.jpg'
-    const attachments = record.get(this._recordFields!.image)
+    const attachments = record.get(this.recordFields!.image)
     const imageAttachment = attachments && findImageAttachment(attachments)
     const imageUrl = imageAttachment && getImageUrl(imageAttachment)
 
@@ -267,32 +264,32 @@ class EventsAirtableRecords extends AirtableRecords {
   }
 
   public getLocation (record: any): string {
-    return record.get(this._recordFields!.location) || WORLD_REGIONS.tbd
+    return record.get(this.recordFields!.location) || WORLD_REGIONS.tbd
   }
 
   public getRegions (record: any): WorldRegion[] {
-    const recordRegion = record.get(this._recordFields!.regions)
+    const recordRegion = record.get(this.recordFields!.regions)
     return recordRegion || [WORLD_REGIONS.tbd]
   }
 
   public getStartDate (record: any): string {
-    return record.get(this._recordFields!.startDate) || ''
+    return record.get(this.recordFields!.startDate) || ''
   }
 
   public getEndDate (record: any): string {
-    return record.get(this._recordFields!.endDate) || ''
+    return record.get(this.recordFields!.endDate) || ''
   }
 
   public getDates (record: any): [Date, Date|undefined] {
-    const recordStartDate = record.get(this._recordFields!.startDate)
-    const recordEndDate = record.get(this._recordFields!.endDate)
+    const recordStartDate = record.get(this.recordFields!.startDate)
+    const recordEndDate = record.get(this.recordFields!.endDate)
     const startDate = recordStartDate && new Date(recordStartDate)
     const endDate = recordEndDate && new Date(recordEndDate)
     return [startDate, endDate]
   }
 
   public getWebsite (record: any): string {
-    return record.get(this._recordFields!.website) || ''
+    return record.get(this.recordFields!.website) || ''
   }
 }
 

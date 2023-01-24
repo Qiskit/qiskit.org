@@ -1,22 +1,9 @@
 <template>
   <div class="prerequisites">
     <div class="prerequisites__section">
-      <p>
-        On Windows you need to use Anaconda3 or Miniconda3 to install all the
-        dependencies.
-      </p>
-    </div>
-    <div class="prerequisites__section">
-      <h3 class="h4">
-        Install the compiler
-      </h3>
-      <pre class="code prerequisites__code">conda install --update-deps vs2017_win-64 vs2017_win-32 msvc_runtime</pre>
-    </div>
-    <div class="prerequisites__section">
-      <h3 class="h4">
-        Install OpenBLAS development headers
-      </h3>
-      <pre class="code prerequisites__code">conda install --update-deps -c conda-forge -y openblas cmake</pre>
+      <!-- eslint-disable vue/singleline-html-element-content-newline -->
+      <p><strong>Windows 64-bit:</strong> Download and run the <AppLink v-bind="rustup64Link">{{ rustup64Link.label }}</AppLink>, which will provider follow up instructions.</p>
+      <p><strong>Windows 32-bit:</strong> Download and run the <AppLink v-bind="rustup32Link">{{ rustup32Link.label }}</AppLink>, which will provider follow up instructions.</p>
     </div>
   </div>
 </template>
@@ -24,7 +11,20 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
+import { GeneralLink } from '~/constants/appLinks'
 
 @Component
-export default class PrerequisitesForWindows extends Vue { }
+export default class PrerequisitesForWindows extends Vue {
+  rustup64Link: GeneralLink = {
+    url: 'https://win.rustup.rs/x86_64',
+    label: '64-bit installer',
+    segment: { cta: 'rustup-windows-64-installer', location: 'quick-start' }
+  }
+
+  rustup32Link: GeneralLink = {
+    url: 'https://win.rustup.rs/i686',
+    label: '32-bit installer',
+    segment: { cta: 'rustup-windows-32-installer', location: 'quick-start' }
+  }
+}
 </script>

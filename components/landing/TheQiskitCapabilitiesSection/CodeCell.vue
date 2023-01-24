@@ -3,30 +3,27 @@
     <div class="code-cell__block" :class="{'code-cell__block_active' : activeBlocks[0]}">
       <pre>import qiskit</pre>
       <pre>&nbsp;</pre>
-      <pre><span class="code-cell__comment"># Qiskit quantum circuits libraries</span></pre>
+      <pre><span class="code-cell__comment"># create circuit with Qiskit quantum circuit libraries</span></pre>
       <pre class="code-cell__line">quantum_circuit = qiskit.circuit.library.QuantumVolume(5)</pre>
       <pre class="code-cell__line">quantum_circuit.measure_all()</pre>
       <pre class="code-cell__line">quantum_circuit.draw()</pre>
+      <pre>&nbsp;</pre>
     </div>
     <div class="code-cell__block" :class="{'code-cell__block_active' : activeBlocks[1]}">
-      <pre><span class="code-cell__comment"># prepare your circuit to run</span></pre>
-      <pre>from qiskit import IBMQ</pre>
+      <pre><span class="code-cell__comment"># select simulator backend</span></pre>
+      <pre>from qiskit import BasicAer</pre>
       <pre>&nbsp;</pre>
-      <pre><span class="code-cell__comment"># Get the API token in</span></pre>
-      <pre><span class="code-cell__comment"># https://quantum-computing.ibm.com/</span></pre>
-      <pre>IBMQ.save_account("YOUR TOKEN")</pre>
+      <pre>backend = BasicAer.get_backend('qasm_simulator')</pre>
       <pre>&nbsp;</pre>
-      <pre class="code-cell__line">provider = IBMQ.load_account()</pre>
-      <pre class="code-cell__line">backend = provider.get_backend(<span class="code-cell__string">'ibmq_quito'</span>)</pre>
+      <pre><span class="code-cell__comment"># prepare your circuit to run on the simulator</span></pre>
+      <pre>optimized_circuit = qiskit.transpile(quantum_circuit, backend)</pre>
+      <pre>optimized_circuit.draw()</pre>
       <pre>&nbsp;</pre>
-      <pre class="code-cell__line">optimized_circuit = qiskit.transpile(quantum_circuit, backend)</pre>
-      <pre class="code-cell__line">optimized_circuit.draw()</pre>
     </div>
     <div class="code-cell__block" :class="{'code-cell__block_active' : activeBlocks[2]}">
-      <pre><span class="code-cell__comment"># run in real hardware</span></pre>
+      <pre><span class="code-cell__comment"># run on simulator</span></pre>
       <pre class="code-cell__line">job = backend.run(optimized_circuit)</pre>
-      <pre class="code-cell__line">retrieved_job = backend.retrieve_job(job.job_id())</pre>
-      <pre class="code-cell__line">result = retrieved_job.result()</pre>
+      <pre class="code-cell__line">result = job.result()</pre>
       <pre class="code-cell__line">print(result.get_counts())</pre>
     </div>
   </code>

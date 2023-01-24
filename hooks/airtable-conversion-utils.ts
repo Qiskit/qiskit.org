@@ -27,12 +27,14 @@ class AirtableRecords {
   protected apiKey: string;
   private baseId: string;
   private tableId: string;
+  protected recordFields?: Record<string, any>;
   private view: string;
 
-  constructor (apiKey: string, baseId: string, tableId: string, view: string, id?: string) {
+  constructor (apiKey: string, baseId: string, tableId: string, view: string, id?: string, recordFields?: Record<string, any>) {
     this.apiKey = apiKey
     this.baseId = baseId
     this.tableId = tableId
+    this.recordFields = recordFields
     this.view = view
     this.id = id || ''
   }
@@ -43,7 +45,7 @@ class AirtableRecords {
    * @param fieldId Field ID
    * @returns {Promise<string | null>} Field name
    */
-  public getFieldName (fieldId: string): Promise<string | null> {
+  private getFieldName (fieldId: string): Promise<string | null> {
     const base = new Airtable({ apiKey: this.apiKey }).base(this.baseId)
     let fieldName: string | undefined
 
@@ -68,13 +70,7 @@ class AirtableRecords {
 
           nextPage()
         })
-        .then(() => {
-          if (fieldName) {
-            return fieldName
-          } else {
-            return ''
-          }
-        })
+        .then(() => fieldName || '')
     } catch (error) {
       console.error(`Error in getFieldName: ${error}`)
       return Promise.resolve(null)

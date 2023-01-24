@@ -182,25 +182,4 @@ describe('getImage', () => {
     const result = await advocatesAirtableRecords.getImage(thumbnailPictureAdvocate)
     expect(result).toBe(expectedUrl)
   })
-
-  it('uses the thumbnail URL if there is a large thumbnail available', async () => {
-    const expectedUrl = 'http://url.to/thumbnails/large.jpg'
-    const thumbnailPictureAdvocate = {
-      get: (field: string) => {
-        if (field === 'Image') {
-          return [{
-            url: 'http://url.to/image.jpg',
-            type: 'image/jpg',
-            thumbnails: {
-              large: { url: expectedUrl }
-            }
-          }]
-        }
-      }
-    }
-
-    advocatesAirtableRecords.storeImage = jest.fn(() => Promise.resolve(expectedUrl))
-    const result = await advocatesAirtableRecords.getImage(thumbnailPictureAdvocate)
-    expect(result).toBe(expectedUrl)
-  })
 })

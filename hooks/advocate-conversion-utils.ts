@@ -25,26 +25,23 @@ const RECORD_FIELDS_IDS = Object.freeze({
 const AIRTABLE_BASE_ID = 'app8koO4BZifGFhCV'
 
 class AdvocatesAirtableRecords extends AirtableRecords {
-  private _recordFields?: Record<string, any>
-
   constructor (apiKey: string, recordFields?: Record<string, any>) {
-    super(apiKey, AIRTABLE_BASE_ID, 'Advocates', 'For website')
-    this._recordFields = recordFields
+    super(apiKey, AIRTABLE_BASE_ID, 'Advocates', 'For website', undefined, recordFields)
   }
 
   async fetchAdvocates (): Promise<Advocate[]> {
-    if (!this._recordFields) {
-      this._recordFields = await this.getAllFieldNames(RECORD_FIELDS_IDS)
+    if (!this.recordFields) {
+      this.recordFields = await this.getAllFieldNames(RECORD_FIELDS_IDS)
     }
 
-    const { slackId } = this._recordFields
+    const { slackId } = this.recordFields
     const advocates: Advocate[] = []
     const base = new Airtable({ apiKey: this.apiKey }).base(AIRTABLE_BASE_ID)
 
     await base('Advocates').select({
-      fields: Object.values(this._recordFields),
+      fields: Object.values(this.recordFields),
       filterByFormula: `AND({${slackId}})`,
-      sort: [{ field: this._recordFields.name, direction: 'asc' }]
+      sort: [{ field: this.recordFields.name, direction: 'asc' }]
     }).eachPage(async (records, nextPage) => {
       for (const record of records) {
         this.id = record.id
@@ -70,12 +67,12 @@ class AdvocatesAirtableRecords extends AirtableRecords {
   }
 
   public getName (record: any): string {
-    return record.get(this._recordFields!.name)
+    return record.get(this.recordFields!.name)
   }
 
   public async getImage (record: any): Promise<string> {
     const fallbackImage = '/images/advocates/no-advocate-photo.png'
-    const attachments = record.get(this._recordFields!.image)
+    const attachments = record.get(this.recordFields!.image)
     const imageAttachment = attachments && findImageAttachment(attachments)
     const imageUrl = imageAttachment && getImageUrl(imageAttachment)
 
@@ -88,23 +85,23 @@ class AdvocatesAirtableRecords extends AirtableRecords {
   }
 
   public getCity (record: any): string {
-    return record.get(this._recordFields!.city)
+    return record.get(this.recordFields!.city)
   }
 
   public getCountry (record: any): string {
-    return record.get(this._recordFields!.country)
+    return record.get(this.recordFields!.country)
   }
 
   public getRegion (record: any): AdvocatesWorldRegion {
-    return record.get(this._recordFields!.region)
+    return record.get(this.recordFields!.region)
   }
 
   public getSlackId (record: any): string {
-    return record.get(this._recordFields!.slackId)
+    return record.get(this.recordFields!.slackId)
   }
 
   public getSlackUsername (record: any): string {
-    return record.get(this._recordFields!.slackUsername)
+    return record.get(this.recordFields!.slackUsername)
   }
 }
 
