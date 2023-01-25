@@ -21,31 +21,33 @@
   </BasicLink>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
+<script setup lang="ts">
 import BasicLink from '~/components/ui/BasicLink.vue'
 
-@Component
-export default class AppCta extends Vue {
-  @Prop({ type: String, default: 'primary' }) kind!: 'primary'|'secondary'|'ghost'
-  @Prop({ type: String, default: 'light' }) theme!: 'light'|'dark'
-  @Prop({ type: String, default: '' }) label!: string
-  @Prop({ type: Boolean, default: false }) isWider!: boolean
-
-  get iconPerLinkType (): string {
-    const url = this.$attrs.url
-
-    if (this.label === 'Under construction') { return 'error-outline-16' }
-    if (BasicLink.isExternal(url)) { return 'launch-16' }
-    if (BasicLink.isIdAnchor(url)) { return 'arrow-down-16' }
-    return 'arrow-right-16'
-  }
-
-  get isIdAnchor () {
-    return BasicLink.isIdAnchor(this.$attrs.url)
-  }
+interface Props {
+  isWider?: boolean
+  kind?: 'primary'|'secondary'|'ghost'
+  label?: string
+  theme?: 'light'|'dark'
 }
+
+const props = withDefaults(defineProps<Props>(), {
+  isWider: false,
+  kind: 'primary',
+  label: '',
+  theme: 'light'
+})
+
+const iconPerLinkType = computed(() => {
+  const url = this.$attrs.url
+
+  if (props.label === 'Under construction') { return 'error-outline-16' }
+  if (BasicLink.isExternal(url)) { return 'launch-16' }
+  if (BasicLink.isIdAnchor(url)) { return 'arrow-down-16' }
+  return 'arrow-right-16'
+})
+
+const isIdAnchor = computed(() => BasicLink.isIdAnchor(this.$attrs.url))
 </script>
 
 <style lang="scss" scoped>

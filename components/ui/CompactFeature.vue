@@ -14,16 +14,18 @@
   </article>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
-
-@Component
-export default class CompactFeature extends Vue {
-  @Prop({ type: String, default: '' }) icon!: string
-  @Prop({ type: String, default: '' }) title!: string
-  @Prop({ type: String, default: '' }) description!: string
+<script setup lang="ts">
+interface Props {
+  description?: string
+  icon?: string
+  title?: string
 }
+
+withDefaults(defineProps<Props>(), {
+  description: '',
+  icon: '',
+  title: ''
+})
 </script>
 
 <style lang="scss" scoped>

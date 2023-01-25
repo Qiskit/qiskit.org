@@ -10,14 +10,6 @@
   </header>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
-
-@Component
-export default class AppPageHeaderFixed extends Vue {}
-</script>
-
 <style lang="scss" scoped>
 .app-page-header-fixed {
   @include responsive-grid-bg-strip("/images/grid/grid-hero-learn.svg", auto, 28rem);

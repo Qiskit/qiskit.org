@@ -79,9 +79,14 @@
   </svg>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
+<script setup lang="ts">
+interface Props {
+  color?: string
+}
+
+withDefaults(defineProps<Props>(), {
+  color: 'black'
+})
 
 let _uidCounter = 0
 
@@ -90,15 +95,10 @@ function nextUniqueSuffix (): string {
   return `_${_uidCounter}`
 }
 
-@Component
-export default class AppLogo extends Vue {
-  @Prop({ type: String, default: 'black' }) color!: string
+const uniqueSuffix = nextUniqueSuffix()
 
-  uniqueSuffix: string = nextUniqueSuffix()
-
-  scopeId (str: string): string {
-    return `${str}${this.uniqueSuffix}`
-  }
+function scopeId (str: string): string {
+  return `${str}${uniqueSuffix}`
 }
 </script>
 

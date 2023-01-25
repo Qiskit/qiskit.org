@@ -12,30 +12,28 @@
   </client-only>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
-
+<script setup lang="ts">
 type multiSelectOption = {
   label: string,
   value: string,
   name: string
 }
 
-@Component
-export default class AppMultiSelect extends Vue {
-  @Prop(Array) options!: string[]
-  @Prop(String) label!: string
-  @Prop(Array) value!: string[]
+interface Props {
+  label: string,
+  options: string[],
+  value: string[]
+}
 
-  formatedOptions = this.formatOptions(this.options)
+const props = defineProps<Props>()
 
-  theme: string = 'light'
-  feedback: string = 'fixed'
+const formatedOptions = computed(() => formatOptions(props.options))
 
-  formatOptions (optionsList: any): Array<multiSelectOption> {
-    return optionsList.map((item: string) => ({ label: item, value: item, name: item }))
-  }
+const theme = ref('light')
+const feedback = ref('fixed')
+
+function formatOptions (optionsList: any): Array<multiSelectOption> {
+  return optionsList.map((item: string) => ({ label: item, value: item, name: item }))
 }
 </script>
 

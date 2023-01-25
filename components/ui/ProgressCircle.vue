@@ -30,15 +30,15 @@
   </div>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
-
-@Component
-export default class ProgressCircle extends Vue {
-  @Prop({ type: Boolean, required: false, default: false }) absolute!: Boolean
-  @Prop({ type: Number, required: true }) progress!: Number
+<script setup lang="ts">
+interface Props {
+  absolute?: boolean
+  progress: number
 }
+
+withDefaults(defineProps<Props>(), {
+  absolute: false
+})
 </script>
 
 <style lang="scss" scoped>

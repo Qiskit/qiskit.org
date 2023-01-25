@@ -20,16 +20,15 @@
   </header>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
+<script setup lang="ts">
 import { GeneralLink } from '~/constants/appLinks'
 
-@Component
-export default class AppPageHeaderWithImage extends Vue {
-  @Prop({ type: Object, required: true }) cta!: GeneralLink
-  @Prop({ type: Object, required: false }) backLink!: GeneralLink
+interface Props {
+  backLink?: GeneralLink
+  cta: GeneralLink
 }
+
+defineProps<Props>()
 </script>
 
 <style lang="scss" scoped>
