@@ -32,6 +32,7 @@ const RECORD_FIELDS_IDS = Object.freeze({
   name: 'fldTqTxKr3ZzUhzKT',
   startDate: 'fldPGzoUf9wxsBDYJ',
   endDate: 'fldeFv42sqOY7oMy0',
+  startTime: 'fldF2COMbzANgkOh8',
   types: 'fldarZoYRJvETevow',
   eventWebsite: 'fldBPq3LMa5aZDBZm',
   location: 'fldSjeniJtud6M5j3',
@@ -177,6 +178,7 @@ class EventsAirtableRecords extends AirtableRecords {
       date: this.formatDates(...this.getDates(record)),
       startDate: this.getStartDate(record),
       endDate: this.getEndDate(record),
+      startTime: this.formatTime(this.getTimes(record)),
       to: this.getWebsite(record)
     }
     return event
@@ -227,6 +229,19 @@ class EventsAirtableRecords extends AirtableRecords {
       return `${startMonth} ${startDay}-${endDay}, ${startYear}`
     }
     throw new Error('Unreachable: should have all the cases covered.')
+  }
+
+  formatTime (startTime?: Date | null): string | null {
+    if (!startTime) { return null }
+
+    const options = {
+      hour: 'numeric',
+      minute: 'numeric',
+      timeZone: 'UTC',
+      timeZoneName: 'short'
+    } as const
+
+    return new Intl.DateTimeFormat('en', options).format(startTime)
   }
 
   public getInstitution (record: any): string {
@@ -283,12 +298,22 @@ class EventsAirtableRecords extends AirtableRecords {
     return record.get(this.recordFields!.endDate) || ''
   }
 
+  public getStartDateAndTime (record: any): string {
+    return record.get(this.recordFields!.startTime) || ''
+  }
+
   public getDates (record: any): [Date, Date|undefined] {
     const recordStartDate = record.get(this.recordFields!.startDate)
     const recordEndDate = record.get(this.recordFields!.endDate)
     const startDate = recordStartDate && new Date(recordStartDate)
     const endDate = recordEndDate && new Date(recordEndDate)
     return [startDate, endDate]
+  }
+
+  public getTimes (record: any): Date|null {
+    const recordStartTime = record.get(this.recordFields!.startTime)
+
+    return recordStartTime ? new Date(recordStartTime) : null
   }
 
   public getWebsite (record: any): string {
