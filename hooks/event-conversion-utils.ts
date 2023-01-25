@@ -259,8 +259,11 @@ class EventsAirtableRecords extends AirtableRecords {
       return fallbackImage
     }
 
-    const imageName = await this.storeImage(imageUrl, 'images/events/downloaded')
-    return imageName
+    const imagePublicPath = `/images/events/downloaded/${this.id}.jpg`
+
+    return await this.storeImage(imageUrl, `static/${imagePublicPath}`)
+      .then(() => imagePublicPath)
+      .catch(() => fallbackImage)
   }
 
   public getLocation (record: any): string {

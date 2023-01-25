@@ -113,22 +113,18 @@ class AirtableRecords {
   }
 
   /**
-   * Store an image from a given URL and return the file path.
+   * Store an image from a given URL.
    *
-   * @param {string} imageUrl - The URL of the image to be stored
-   * @param {string} targetDir - The directory in which to store the image
-   * @return {Promise<string>} The path to the stored image
+   * @param {string} url - The URL of the image to be stored
+   * @param {string} filePath - The path to store the image
+   * @returns {Promise<void>} - A promise that resolves when the image is stored
    */
-  public async storeImage (imageUrl: string, targetDir: string): Promise<string> {
-    const imageFileName = `${this.id}.jpg`
-    const imageFilePath = `static/${targetDir}/${imageFileName}`
-    const imagePublicPath = `/${targetDir}/${imageFileName}`
-
+  public async storeImage (url: string, filePath: string): Promise<void> {
     try {
-      const response = await axios.get(imageUrl, { responseType: 'arraybuffer' })
+      const response = await axios.get(url, { responseType: 'arraybuffer' })
       const imageBuffer = Buffer.from(response.data, 'binary')
-      await fsPromises.writeFile(imageFilePath, imageBuffer)
-      return imagePublicPath
+      await fsPromises.writeFile(filePath, imageBuffer)
+      return Promise.resolve()
     } catch (error) {
       console.error(error)
       return Promise.reject(error)

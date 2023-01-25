@@ -122,8 +122,6 @@ describe('getImage', () => {
         }
       }
     }
-
-    advocatesAirtableRecords.storeImage = jest.fn(() => Promise.resolve('/images/advocates/fake-advocate.jpg'))
     const result = await advocatesAirtableRecords.getImage(fakeRecord)
     expect(result).toBe('/images/advocates/no-advocate-photo.png')
   })
@@ -138,48 +136,46 @@ describe('getImage', () => {
         }
       }
     }
-
-    advocatesAirtableRecords.storeImage = jest.fn(() => Promise.resolve('/images/advocates/fake-advocate.jpg'))
     const result = await advocatesAirtableRecords.getImage(fakeRecord)
     expect(result).toBe('/images/advocates/no-advocate-photo.png')
   })
 
-  it('uses the attachment URL if there are no thumbnails', async () => {
-    const expectedUrl = 'http://url.to/image.jpg'
+  it('stores the attachment URL if there are no thumbnails', async () => {
+    const attachmentUrl = 'http://url.to/image.jpg'
     const fakeRecord = {
       get: (field: string) => {
         if (field === 'Image') {
           return [{
-            url: expectedUrl,
+            url: attachmentUrl,
             type: 'image/jpg'
           }]
         }
       }
     }
 
-    advocatesAirtableRecords.storeImage = jest.fn(() => Promise.resolve(expectedUrl))
-    const result = await advocatesAirtableRecords.getImage(fakeRecord)
-    expect(result).toBe(expectedUrl)
+    const mockStoreImage = jest.spyOn(advocatesAirtableRecords, 'storeImage').mockImplementation(() => Promise.resolve())
+    await advocatesAirtableRecords.getImage(fakeRecord)
+    expect(mockStoreImage).toBeCalledWith(attachmentUrl, expect.any(String))
   })
 
-  it('uses the thumbnail URL if there is a large thumbnail available', async () => {
-    const expectedUrl = 'http://url.to/thumbnails/large.jpg'
-    const thumbnailPictureAdvocate = {
+  it('stores the thumbnail URL if there is a large thumbnail available', async () => {
+    const thumbnailUrl = 'http://url.to/thumbnails/large.jpg'
+    const fakeRecord = {
       get: (field: string) => {
         if (field === 'Image') {
           return [{
             url: 'http://url.to/image.jpg',
             type: 'image/jpg',
             thumbnails: {
-              large: { url: expectedUrl }
+              large: { url: thumbnailUrl }
             }
           }]
         }
       }
     }
 
-    advocatesAirtableRecords.storeImage = jest.fn(() => Promise.resolve(expectedUrl))
-    const result = await advocatesAirtableRecords.getImage(thumbnailPictureAdvocate)
-    expect(result).toBe(expectedUrl)
+    const mockStoreImage = jest.spyOn(advocatesAirtableRecords, 'storeImage').mockImplementation(() => Promise.resolve())
+    await advocatesAirtableRecords.getImage(fakeRecord)
+    expect(mockStoreImage).toBeCalledWith(thumbnailUrl, expect.any(String))
   })
 })

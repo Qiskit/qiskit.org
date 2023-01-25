@@ -80,7 +80,11 @@ class AdvocatesAirtableRecords extends AirtableRecords {
       return fallbackImage
     }
 
-    return await this.storeImage(imageUrl, 'images/advocates/downloaded')
+    const imagePublicPath = `/images/advocates/downloaded/${this.id}.jpg`
+
+    return await this.storeImage(imageUrl, `static/${imagePublicPath}`)
+      .then(() => imagePublicPath)
+      .catch(() => fallbackImage)
   }
 
   public getCity (record: any): string {
