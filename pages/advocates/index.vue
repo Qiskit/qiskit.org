@@ -18,35 +18,39 @@
   </main>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import { mapGetters } from 'vuex'
-import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 
-@Component({
-  head () {
-    return {
-      title: 'Qiskit Advocates',
-      meta: [
-        {
-          name: 'description',
-          content: 'The Qiskit advocate program is a global program that provides support to the individuals who actively contribute to the Qiskit Community.'
-        }
-      ]
-    }
-  },
-  layout: 'default-max',
-  computed: {
-    ...mapGetters('advocates', [
-      'filteredAdvocates'
-    ])
-  },
-
-  async fetch ({ store }) {
-    await store.dispatch('advocates/fetchAdvocates')
-  }
+definePageMeta({
+  layout: 'default-max'
 })
-export default class AdvocatesPage extends QiskitPage {
-  routeName: string = 'advocates'
-}
+
+useHead({
+  title: 'Qiskit Advocates',
+  meta: [
+    {
+      name: 'description',
+      content: 'The Qiskit advocate program is a global program that provides support to the individuals who actively contribute to the Qiskit Community.'
+    }
+  ]
+})
+
+// TODO: Replace Vuex with Pinia
+// @Component({
+//   computed: {
+//     ...mapGetters('advocates', [
+//       'filteredAdvocates'
+//     ])
+//   },
+
+//   async fetch ({ store }) {
+//     await store.dispatch('advocates/fetchAdvocates')
+//   }
+// })
+
+// TODO: Refactor "logic" pages
+// export default class AdvocatesPage extends QiskitPage {
+//   routeName: string = 'advocates'
+// }
 </script>

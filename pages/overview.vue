@@ -61,8 +61,7 @@
   </div>
 </template>
 
-<script lang="ts">
-import { Component } from 'vue-property-decorator'
+<script setup lang="ts">
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import { ContentAccordionTab } from '~/components/overview/ContentAccordion.vue'
 import {
@@ -72,30 +71,30 @@ import {
 } from '~/constants/overviewContent'
 import ScrollSectionsMixin from '~/mixins/scrollBetweenSections'
 
-@Component({
-  mixins: [ScrollSectionsMixin],
-  head () {
-    return {
-      title: 'Qiskit Overview'
-    }
-  },
+definePageMeta({
   layout: 'default-max'
 })
-export default class OverviewPage extends QiskitPage {
-  routeName = 'overview'
 
-  tocEntries = TABLE_OF_CONTENTS
-  contentSections = CONTENT_SECTIONS
+useHead({
+  title: 'Qiskit Overview'
+})
 
-  quickStartLink = {
-    url: '#quick-start',
-    label: 'Get Started'
-  }
+const tocEntries = TABLE_OF_CONTENTS
+const contentSections = CONTENT_SECTIONS
 
-  asTabs (subsections: Array<OverviewSubSection>): Array<ContentAccordionTab> {
-    return subsections.map(subsection => subsection as ContentAccordionTab)
-  }
+const quickStartLink = {
+  url: '#quick-start',
+  label: 'Get Started'
 }
+
+function asTabs (subsections: Array<OverviewSubSection>): Array<ContentAccordionTab> {
+  return subsections.map(subsection => subsection as ContentAccordionTab)
+}
+
+// TODO: Refactor "logic" pages
+// export default class OverviewPage extends QiskitPage {
+//   routeName = 'overview'
+// }
 </script>
 
 <style lang="scss" scoped>

@@ -7,25 +7,30 @@
   </main>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import axios from 'axios'
-import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 
-@Component({
-  head () {
-    return { title: 'Qiskit' }
-  },
-  layout: 'default-max',
-  async asyncData () {
-    const qiskitPackageInfoUrl = 'https://pypi.org/pypi/qiskit/json'
-    const packageInfo = (await axios.get(qiskitPackageInfoUrl)).data
-    return {
-      qiskitVersion: packageInfo.info.version
-    }
-  }
+definePageMeta({
+  layout: 'default-max'
 })
-export default class LandingPage extends QiskitPage {
-  routeName = 'qiskit-landing-page'
-}
+
+useHead({
+  title: 'Qiskit'
+})
+
+// TODO: Refactor async data fetching in pages
+// @Component({
+//   async asyncData () {
+//     const qiskitPackageInfoUrl = 'https://pypi.org/pypi/qiskit/json'
+//     const packageInfo = (await axios.get(qiskitPackageInfoUrl)).data
+//     return {
+//       qiskitVersion: packageInfo.info.version
+//     }
+//   }
+// })
+// TODO: Refactor "logic" pages
+// export default class LandingPage extends QiskitPage {
+//   routeName = 'qiskit-landing-page'
+// }
 </script>

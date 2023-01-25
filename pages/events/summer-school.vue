@@ -72,8 +72,7 @@
   </main>
 </template>
 
-<script lang="ts">
-import { Component } from 'vue-property-decorator'
+<script setup lang="ts">
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import {
   header,
@@ -82,75 +81,77 @@ import {
   helpfulResources
 } from '~/constants/summerSchool2022Content'
 
-@Component({
-  head () {
-    const title = 'Qiskit Global Summer School 2022'
-    const description = `The Qiskit Global Summer School 2022 is a two-week intensive summer school
-    designed to empower the next generation of quantum researchers and developers with the skills
-    and know-how to explore quantum applications on their own`
-    const image = '/images/events/summer-school/summer-school-logo.png'
-
-    return {
-      title,
-      meta: [
-        {
-          hid: 'twitter:title',
-          name: 'twitter:title',
-          content: title
-        },
-        {
-          hid: 'twitter:description',
-          name: 'twitter:description',
-          content: description
-        },
-        {
-          hid: 'twitter:image',
-          name: 'twitter:image',
-          content: image
-        },
-        {
-          hid: 'twitter:image:alt',
-          name: 'twitter:image:alt',
-          content: title
-        },
-        {
-          hid: 'og:title',
-          property: 'og:title',
-          content: title
-        },
-        {
-          hid: 'og:description',
-          property: 'og:description',
-          content: description
-        },
-        {
-          hid: 'og:image',
-          property: 'og:image',
-          content: image
-        },
-        {
-          hid: 'og:image:secure_url',
-          property: 'og:image:secure_url',
-          content: image
-        },
-        {
-          hid: 'og:image:alt',
-          property: 'og:image:alt',
-          content: title
-        }
-      ]
-    }
-  },
+definePageMeta({
   layout: 'default-max'
 })
-export default class SummerSchoolPage extends QiskitPage {
-  routeName = 'summer-school'
-  agendaColumnsDataTable: string[] = ['Day', 'Topic', 'Speaker', 'Format']
-  headerData = header
-  mosaicData = mosaic
-  agendaData = agenda
-  helpfulResourcesData = helpfulResources
-}
+
+const title = 'Qiskit Global Summer School 2022'
+const description = `The Qiskit Global Summer School 2022 is a two-week intensive summer school
+designed to empower the next generation of quantum researchers and developers with the skills
+and know-how to explore quantum applications on their own`
+const image = '/images/events/summer-school/summer-school-logo.png'
+
+useHead({
+  title,
+  meta: [
+    {
+      hid: 'twitter:title',
+      name: 'twitter:title',
+      content: title
+    },
+    {
+      hid: 'twitter:description',
+      name: 'twitter:description',
+      content: description
+    },
+    {
+      hid: 'twitter:image',
+      name: 'twitter:image',
+      content: image
+    },
+    {
+      hid: 'twitter:image:alt',
+      name: 'twitter:image:alt',
+      content: title
+    },
+    {
+      hid: 'og:title',
+      property: 'og:title',
+      content: title
+    },
+    {
+      hid: 'og:description',
+      property: 'og:description',
+      content: description
+    },
+    {
+      hid: 'og:image',
+      property: 'og:image',
+      content: image
+    },
+    {
+      hid: 'og:image:secure_url',
+      property: 'og:image:secure_url',
+      content: image
+    },
+    {
+      hid: 'og:image:alt',
+      property: 'og:image:alt',
+      content: title
+    }
+  ]
+})
+
+const agendaColumnsDataTable: string[] = ['Day', 'Topic', 'Speaker', 'Format']
+const headerData = header
+const mosaicData = mosaic
+const agendaData = agenda
+const helpfulResourcesData = helpfulResources
+
+// TODO: Refactor "logic" pages
+// export default class SummerSchoolPage extends QiskitPage {
+//   routeName = 'summer-school'
+// }
 </script>
 
 <style lang="scss" scoped>

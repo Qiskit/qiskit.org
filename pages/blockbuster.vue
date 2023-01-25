@@ -19,50 +19,47 @@
   </div>
 </template>
 
-<script lang="ts">
-import { Component } from 'vue-property-decorator'
+<script setup lang="ts">
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 
-@Component({
-  head () {
-    return {
-      title: 'Blockbuster'
-    }
-  }
+useHead({
+  title: 'Blockbuster'
 })
-export default class BlockbusterPage extends QiskitPage {
-  routeName = 'blockbuster'
 
-  directionsSectionId = 'directions'
-  recommendationSectionId = 'recommendation'
+const directionsSectionId = 'directions'
+const recommendationSectionId = 'recommendation'
 
-  userLatitude = 0
-  userLongitude = 0
-  userLocationLoaded = false
-  userLocationLoading = false
+const userLatitude = ref(0)
+const userLongitude = ref(0)
+const userLocationLoaded = ref(false)
+const userLocationLoading = ref(false)
 
-  getUserLocation () {
-    this.userLocationLoaded = false
-    this.userLocationLoading = true
-    navigator.geolocation.getCurrentPosition(
-      this.setUserLocation,
-      this.getCurrentPositionError,
-      { timeout: 7500 })
-  }
-
-  setUserLocation (position: GeolocationPosition) {
-    const { latitude, longitude } = position.coords
-    this.userLatitude = latitude
-    this.userLongitude = longitude
-    this.userLocationLoaded = true
-    this.userLocationLoading = false
-  }
-
-  getCurrentPositionError () {
-    this.userLocationLoaded = false
-    this.userLocationLoading = false
-  }
+function getUserLocation () {
+  userLocationLoaded.value = false
+  userLocationLoading.value = true
+  navigator.geolocation.getCurrentPosition(
+    setUserLocation,
+    getCurrentPositionError,
+    { timeout: 7500 })
 }
+
+function setUserLocation (position: GeolocationPosition) {
+  const { latitude, longitude } = position.coords
+  userLatitude.value = latitude
+  userLongitude.value = longitude
+  userLocationLoaded.value = true
+  userLocationLoading.value = false
+}
+
+function getCurrentPositionError () {
+  userLocationLoaded.value = false
+  userLocationLoading.value = false
+}
+
+// TODO: Refactor "logic" pages
+// export default class BlockbusterPage extends QiskitPage {
+//   routeName = 'blockbuster'
+// }
 </script>
 
 <style lang="scss">

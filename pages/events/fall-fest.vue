@@ -63,8 +63,7 @@
   </main>
 </template>
 
-<script lang="ts">
-import { Component } from 'vue-property-decorator'
+<script setup lang="ts">
 import UniversityDirectorySection from '../../components/events/fall-fest/UniversityDirectorySection.vue'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import {
@@ -73,77 +72,78 @@ import {
   helpfulResources
 } from '~/constants/fallFest2022Content'
 
-@Component({
-  head () {
-    const title = 'Qiskit Fall Fest 2022'
-    const description = 'The Qiskit Fall Fest is a collection of quantum computing events on college campuses around the world. Every Fall Fest event is organized and run by the students on each campus, with support from the entire IBM Quantum team. Student leaders work alongside IBM throughout the month of September to design and plan their event, which are then run in October. The events vary from technical hackathons to beginner-friendly challenges, all with the goal of helping to grow the local community’s skill set.'
-    const image = '/images/events/fall-fest/fall-fest.png'
+const title = 'Qiskit Fall Fest 2022'
+const description = 'The Qiskit Fall Fest is a collection of quantum computing events on college campuses around the world. Every Fall Fest event is organized and run by the students on each campus, with support from the entire IBM Quantum team. Student leaders work alongside IBM throughout the month of September to design and plan their event, which are then run in October. The events vary from technical hackathons to beginner-friendly challenges, all with the goal of helping to grow the local community’s skill set.'
+const image = '/images/events/fall-fest/fall-fest.png'
 
-    return {
-      title,
-      meta: [
-        {
-          name: 'description',
-          content: description
-        },
-        {
-          hid: 'twitter:title',
-          name: 'twitter:title',
-          content: title
-        },
-        {
-          hid: 'twitter:description',
-          name: 'twitter:description',
-          content: description
-        },
-        {
-          hid: 'twitter:image',
-          name: 'twitter:image',
-          content: image
-        },
-        {
-          hid: 'twitter:image:alt',
-          name: 'twitter:image:alt',
-          content: title
-        },
-        {
-          hid: 'og:title',
-          property: 'og:title',
-          content: title
-        },
-        {
-          hid: 'og:description',
-          property: 'og:description',
-          content: description
-        },
-        {
-          hid: 'og:image',
-          property: 'og:image',
-          content: image
-        },
-        {
-          hid: 'og:image:secure_url',
-          property: 'og:image:secure_url',
-          content: image
-        },
-        {
-          hid: 'og:image:alt',
-          property: 'og:image:alt',
-          content: title
-        }
-      ]
-    }
-  },
-  components: { UniversityDirectorySection },
+definePageMeta({
   layout: 'default-max'
 })
-export default class FallFestPage extends QiskitPage {
-  routeName = 'fall-fest'
-  agendaColumnsDataTable: string[] = ['University', 'Start Date', 'End Date', 'Detail', 'Type of Event', 'Link']
-  headerData = header
-  agendaData = agenda
-  helpfulResourcesData = helpfulResources
-}
+
+useHead({
+  title: title,
+  meta: [
+    {
+      name: 'description',
+      content: description
+    },
+    {
+      hid: 'twitter:title',
+      name: 'twitter:title',
+      content: title
+    },
+    {
+      hid: 'twitter:description',
+      name: 'twitter:description',
+      content: description
+    },
+    {
+      hid: 'twitter:image',
+      name: 'twitter:image',
+      content: image
+    },
+    {
+      hid: 'twitter:image:alt',
+      name: 'twitter:image:alt',
+      content: title
+    },
+    {
+      hid: 'og:title',
+      property: 'og:title',
+      content: title
+    },
+    {
+      hid: 'og:description',
+      property: 'og:description',
+      content: description
+    },
+    {
+      hid: 'og:image',
+      property: 'og:image',
+      content: image
+    },
+    {
+      hid: 'og:image:secure_url',
+      property: 'og:image:secure_url',
+      content: image
+    },
+    {
+      hid: 'og:image:alt',
+      property: 'og:image:alt',
+      content: title
+    }
+  ]
+})
+
+// TODO: Refactor "logic" pages
+// @Component({
+// export default class FallFestPage extends QiskitPage {
+//   routeName = 'fall-fest'
+//   agendaColumnsDataTable: string[] = ['University', 'Start Date', 'End Date', 'Detail', 'Type of Event', 'Link']
+//   headerData = header
+//   agendaData = agenda
+//   helpfulResourcesData = helpfulResources
+// }
 </script>
 
 <style lang="scss" scoped>
