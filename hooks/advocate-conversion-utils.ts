@@ -26,7 +26,7 @@ const AIRTABLE_BASE_ID = 'app8koO4BZifGFhCV'
 
 class AdvocatesAirtableRecords extends AirtableRecords {
   constructor (apiKey: string, recordFields?: Record<string, any>) {
-    super(apiKey, AIRTABLE_BASE_ID, 'Advocates', 'For website', recordFields)
+    super(apiKey, AIRTABLE_BASE_ID, 'Advocates', 'For website', undefined, recordFields)
   }
 
   async fetchAdvocates (): Promise<Advocate[]> {
@@ -42,38 +42,49 @@ class AdvocatesAirtableRecords extends AirtableRecords {
       fields: Object.values(this.recordFields),
       filterByFormula: `AND({${slackId}})`,
       sort: [{ field: this.recordFields.name, direction: 'asc' }]
-    }).eachPage((records, nextPage) => {
+    }).eachPage(async (records, nextPage) => {
       for (const record of records) {
+        this.id = record.id
         const advocate = this.convertToAdvocate(record)
-        advocates.push(advocate)
+        advocates.push(await advocate)
       }
       nextPage()
     })
     return Promise.resolve(advocates)
   }
 
-  convertToAdvocate (record: any): Advocate {
-    return {
+  async convertToAdvocate (record: any): Promise<Advocate> {
+    const advocate = {
       name: this.getName(record),
-      image: this.getImage(record),
+      image: await this.getImage(record),
       region: this.getRegion(record),
       city: this.getCity(record),
       country: this.getCountry(record),
       slackId: this.getSlackId(record),
       slackUsername: this.getSlackUsername(record)
     }
+    return advocate
   }
 
   public getName (record: any): string {
     return record.get(this.recordFields!.name)
   }
 
-  public getImage (record: any): string {
+  public async getImage (record: any): Promise<string> {
     const fallbackImage = '/images/advocates/no-advocate-photo.png'
     const attachments = record.get(this.recordFields!.image)
     const imageAttachment = attachments && findImageAttachment(attachments)
     const imageUrl = imageAttachment && getImageUrl(imageAttachment)
-    return imageUrl || fallbackImage
+
+    if (!imageUrl) {
+      return fallbackImage
+    }
+
+    const imagePublicPath = `/images/advocates/downloaded/${this.id}.jpg`
+
+    return await this.storeImage(imageUrl, `static/${imagePublicPath}`)
+      .then(() => imagePublicPath)
+      .catch(() => fallbackImage)
   }
 
   public getCity (record: any): string {

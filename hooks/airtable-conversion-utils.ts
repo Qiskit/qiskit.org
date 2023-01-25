@@ -1,4 +1,6 @@
+import { promises as fsPromises } from 'fs'
 import Airtable from 'airtable'
+import axios from 'axios'
 
 function getImageUrl (imageAttachment: any): string {
   return getThumbnailUrl(imageAttachment) || imageAttachment.url
@@ -21,18 +23,20 @@ function getThumbnailUrl (imageAttachment: any): string|null {
 }
 
 class AirtableRecords {
+  protected id: string;
   protected apiKey: string;
   private baseId: string;
   private tableId: string;
   protected recordFields?: Record<string, any>;
   private view: string;
 
-  constructor (apiKey: string, baseId: string, tableId: string, view: string, recordFields?: Record<string, any>) {
+  constructor (apiKey: string, baseId: string, tableId: string, view: string, id?: string, recordFields?: Record<string, any>) {
     this.apiKey = apiKey
     this.baseId = baseId
     this.tableId = tableId
     this.recordFields = recordFields
     this.view = view
+    this.id = id || ''
   }
 
   /**
@@ -106,6 +110,25 @@ class AirtableRecords {
           return { ...acc, ...result }
         }, {} as Record<string, string | null>)
       })
+  }
+
+  /**
+   * Store an image from a given URL.
+   *
+   * @param {string} url - The URL of the image to be stored
+   * @param {string} filePath - The path to store the image
+   * @returns {Promise<void>} - A promise that resolves when the image is stored
+   */
+  public async storeImage (url: string, filePath: string): Promise<void> {
+    try {
+      const response = await axios.get(url, { responseType: 'arraybuffer' })
+      const imageBuffer = Buffer.from(response.data, 'binary')
+      await fsPromises.writeFile(filePath, imageBuffer)
+      return Promise.resolve()
+    } catch (error) {
+      console.error(error)
+      return Promise.reject(error)
+    }
   }
 }
 

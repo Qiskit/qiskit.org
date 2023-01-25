@@ -172,10 +172,10 @@ describe('convertToCommunityEvent', () => {
     eventsAirtableRecords = new EventsAirtableRecords('testApiKey', 'testView', mockRecordFields)
   })
 
-  it('extracts and format information from the record', () => {
+  it('extracts and format information from the record', async () => {
     const { hackathon } = COMMUNITY_EVENT_TYPES
     const { europe } = WORLD_REGIONS
-    const { title, types, location, regions, date, to } = eventsAirtableRecords.convertToCommunityEvent(fakeRecord)
+    const { title, types, location, regions, date, to } = await eventsAirtableRecords.convertToCommunityEvent(fakeRecord)
 
     expect({ title, types, location, regions, date, to }).toEqual({
       title: 'Fake conference',
@@ -392,7 +392,7 @@ describe('getImage', () => {
     eventsAirtableRecords = new EventsAirtableRecords('testApiKey', 'testView', mockRecordFields)
   })
 
-  it('defaults in a no-picture.jpg value if there is no attachment', () => {
+  it('defaults in a no-picture.jpg value if there is no attachment', async () => {
     const fakeRecord = {
       get: (field: string) => {
         switch (field) {
@@ -402,10 +402,11 @@ describe('getImage', () => {
       }
     }
 
-    expect(eventsAirtableRecords.getImage(fakeRecord)).toBe('/images/events/no-picture.jpg')
+    const result = await eventsAirtableRecords.getImage(fakeRecord)
+    expect(result).toBe('/images/events/no-picture.jpg')
   })
 
-  it('defaults in a no-picture.jpg value if the attachment is of no image type', () => {
+  it('defaults in a no-picture.jpg value if the attachment is of no image type', async () => {
     const fakeRecord = {
       get: (field: string) => {
         switch (field) {
@@ -419,12 +420,12 @@ describe('getImage', () => {
       }
     }
 
-    expect(eventsAirtableRecords.getImage(fakeRecord)).toBe('/images/events/no-picture.jpg')
+    const result = await eventsAirtableRecords.getImage(fakeRecord)
+    expect(result).toBe('/images/events/no-picture.jpg')
   })
 
-  it('uses the attachment URL if there are no thumbnails', () => {
-    const expectedUrl = 'http://url.to/image.jpg'
-
+  it('stores the attachment URL if there are no thumbnails', async () => {
+    const attachmentUrl = 'http://url.to/image.jpg'
     const fakeRecord = {
       get: (field: string) => {
         switch (field) {
@@ -432,19 +433,20 @@ describe('getImage', () => {
             return 'Fake Conference'
           case 'Image':
             return [{
-              url: expectedUrl,
+              url: attachmentUrl,
               type: 'image/jpg'
             }]
         }
       }
     }
 
-    expect(eventsAirtableRecords.getImage(fakeRecord)).toBe(expectedUrl)
+    const mockStoreImage = jest.spyOn(eventsAirtableRecords, 'storeImage').mockImplementation(() => Promise.resolve())
+    await eventsAirtableRecords.getImage(fakeRecord)
+    expect(mockStoreImage).toBeCalledWith(attachmentUrl, expect.any(String))
   })
 
-  it('uses the attachment URL if there is no large thumbnail', () => {
-    const expectedUrl = 'http://url.to/image.jpg'
-
+  it('stores the attachment URL if there is no large thumbnail', async () => {
+    const attachmentUrl = 'http://url.to/image.jpg'
     const fakeRecord = {
       get: (field: string) => {
         switch (field) {
@@ -452,7 +454,7 @@ describe('getImage', () => {
             return 'Fake Conference'
           case 'Image':
             return [{
-              url: expectedUrl,
+              url: attachmentUrl,
               type: 'image/jpg',
               thumbnails: { }
             }]
@@ -460,12 +462,13 @@ describe('getImage', () => {
       }
     }
 
-    expect(eventsAirtableRecords.getImage(fakeRecord)).toBe(expectedUrl)
+    const mockStoreImage = jest.spyOn(eventsAirtableRecords, 'storeImage').mockImplementation(() => Promise.resolve())
+    await eventsAirtableRecords.getImage(fakeRecord)
+    expect(mockStoreImage).toBeCalledWith(attachmentUrl, expect.any(String))
   })
 
-  it('uses the thumbnail URL if there is a large thumbnail available', () => {
-    const expectedUrl = 'http://url.to/thumbnails/large.jpg'
-
+  it('stores the thumbnail URL if there is a large thumbnail available', async () => {
+    const thumbnailUrl = 'http://url.to/thumbnails/large.jpg'
     const fakeRecord = {
       get: (field: string) => {
         switch (field) {
@@ -476,14 +479,16 @@ describe('getImage', () => {
               url: 'http://url.to/image.jpg',
               type: 'image/jpg',
               thumbnails: {
-                large: { url: expectedUrl }
+                large: { url: thumbnailUrl }
               }
             }]
         }
       }
     }
 
-    expect(eventsAirtableRecords.getImage(fakeRecord)).toBe(expectedUrl)
+    const mockStoreImage = jest.spyOn(eventsAirtableRecords, 'storeImage').mockImplementation(() => Promise.resolve())
+    await eventsAirtableRecords.getImage(fakeRecord)
+    expect(mockStoreImage).toBeCalledWith(thumbnailUrl, expect.any(String))
   })
 })
 

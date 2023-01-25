@@ -46,7 +46,7 @@ const RECORD_FIELDS_IDS = Object.freeze({
 const AIRTABLE_BASE_ID = 'appYREKB18uC7y8ul'
 class EventsAirtableRecords extends AirtableRecords {
   constructor (apiKey: string, view: string, recordFields?: Record<string, any>) {
-    super(apiKey, AIRTABLE_BASE_ID, 'Event Calendar', view, recordFields)
+    super(apiKey, AIRTABLE_BASE_ID, 'Event Calendar', view, undefined, recordFields)
   }
 
   getEventsQuery (days: number, view: string, filters: string[] = []): Airtable.Query<{}> {
@@ -126,9 +126,10 @@ class EventsAirtableRecords extends AirtableRecords {
     const { showOnEventsPage } = this.recordFields
     const communityEvents: CommunityEvent[] = []
 
-    await this.getEventsQuery(days, view, [`{${showOnEventsPage}}`]).eachPage((records, nextPage) => {
+    await this.getEventsQuery(days, view, [`{${showOnEventsPage}}`]).eachPage(async (records, nextPage) => {
       for (const record of records) {
-        const communityEvent = this.convertToCommunityEvent(record)
+        this.id = record.id
+        const communityEvent = await this.convertToCommunityEvent(record)
         if (this.isEventInDateRange(communityEvent, days)) {
           communityEvents.push(communityEvent)
         }
@@ -149,9 +150,10 @@ class EventsAirtableRecords extends AirtableRecords {
     const { showOnSeminarSeriesPage } = this.recordFields
     const seminarSeriesEvents: SeminarSeriesEvent[] = []
 
-    await this.getEventsQuery(days, view, [`{${showOnSeminarSeriesPage}}`]).eachPage((records, nextPage) => {
+    await this.getEventsQuery(days, view, [`{${showOnSeminarSeriesPage}}`]).eachPage(async (records, nextPage) => {
       for (const record of records) {
-        const seminarSeriesEvent = this.convertToSeminarSeriesEvent(record)
+        this.id = record.id
+        const seminarSeriesEvent = await this.convertToSeminarSeriesEvent(record)
 
         if (typeof (seminarSeriesEvent.to) !== 'undefined') {
           if (this.isEventInDateRange(seminarSeriesEvent, days)) {
@@ -165,11 +167,11 @@ class EventsAirtableRecords extends AirtableRecords {
     return Promise.resolve(seminarSeriesEvents)
   }
 
-  convertToCommunityEvent (record: any): CommunityEvent {
-    return {
+  async convertToCommunityEvent (record: any): Promise<CommunityEvent> {
+    const event = {
       title: this.getName(record),
       types: this.getTypes(record),
-      image: this.getImage(record),
+      image: await this.getImage(record),
       location: this.getLocation(record),
       regions: this.getRegions(record),
       date: this.formatDates(...this.getDates(record)),
@@ -177,20 +179,22 @@ class EventsAirtableRecords extends AirtableRecords {
       endDate: this.getEndDate(record),
       to: this.getWebsite(record)
     }
+    return event
   }
 
-  convertToSeminarSeriesEvent (record: any): SeminarSeriesEvent {
-    return {
+  async convertToSeminarSeriesEvent (record: any): Promise<SeminarSeriesEvent> {
+    const event = {
       date: this.formatDates(...this.getDates(record)),
       startDate: this.getStartDate(record),
       endDate: this.getEndDate(record),
-      image: this.getImage(record),
+      image: await this.getImage(record),
       institution: this.getInstitution(record),
       location: this.getLocation(record),
       speaker: this.getSpeaker(record),
       title: this.getName(record),
       to: this.getWebsite(record)
     }
+    return event
   }
 
   dateParts (date: Date): [string, string, string] {
@@ -245,12 +249,21 @@ class EventsAirtableRecords extends AirtableRecords {
     return noTypes ? [COMMUNITY_EVENT_TYPES.talks] : communityEventTypes
   }
 
-  public getImage (record: any): string {
+  public async getImage (record: any): Promise<string> {
     const fallbackImage = '/images/events/no-picture.jpg'
     const attachments = record.get(this.recordFields!.image)
     const imageAttachment = attachments && findImageAttachment(attachments)
     const imageUrl = imageAttachment && getImageUrl(imageAttachment)
-    return imageUrl || fallbackImage
+
+    if (!imageUrl) {
+      return fallbackImage
+    }
+
+    const imagePublicPath = `/images/events/downloaded/${this.id}.jpg`
+
+    return await this.storeImage(imageUrl, `static/${imagePublicPath}`)
+      .then(() => imagePublicPath)
+      .catch(() => fallbackImage)
   }
 
   public getLocation (record: any): string {
