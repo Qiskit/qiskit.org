@@ -181,7 +181,7 @@ export default class FallFestPage extends QiskitPage {
 
   ::v-deep {
     // TODO: Extract styles like "_checkbox" to be defined globally
-    & a.bx--tabs__nav-link {
+    & a.bx--tabs--scrollable__nav-link {
       color: $text-color-light;
       border-bottom-color: $border-color;
 
@@ -190,7 +190,7 @@ export default class FallFestPage extends QiskitPage {
         outline: none;
       }
 
-      &:not(.bx--tabs__nav-item--disabled) {
+      &:not(.bx--tabs--scrollable__nav-item--disabled) {
         color: $text-color-light;
       }
     }
@@ -199,18 +199,18 @@ export default class FallFestPage extends QiskitPage {
     // So, disabling. Review the reule 'no-descending-specificity' here:
     // https://stylelint.io/user-guide/ignore-code
     // stylelint-disable no-descending-specificity
-    & .bx--tabs__nav-item {
-      &--selected:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link {
+    & .bx--tabs--scrollable__nav-item {
+      &--selected:not(.bx--tabs--scrollable__nav-item--disabled) .bx--tabs--scrollable__nav-link {
         border-bottom-color: $border-color-secondary;
       }
     }
 
-    & .bx--tabs__nav-item:hover:not(.bx--tabs__nav-item--disabled) {
+    & .bx--tabs--scrollable__nav-item:hover:not(.bx--tabs--scrollable__nav-item--disabled) {
         box-shadow: none;
       }
 
-      & .bx--tabs__nav-item:hover:not(.bx--tabs__nav-item--selected):not(.bx--tabs__nav-item--disabled),
-      & .bx--tabs__nav-item,
+      & .bx--tabs--scrollable__nav-item:hover:not(.bx--tabs--scrollable__nav-item--selected):not(.bx--tabs--scrollable__nav-item--disabled),
+      & .bx--tabs--scrollable__nav-item,
       & .bx--tabs-trigger {
         background-color: $background-color-white;
 
@@ -219,7 +219,7 @@ export default class FallFestPage extends QiskitPage {
         }
       }
 
-      & .bx--tabs__nav-link,
+      & .bx--tabs--scrollable__nav-link,
       & .bx--tabs-trigger-text {
         color: $text-color;
     }

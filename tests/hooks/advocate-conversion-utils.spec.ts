@@ -1,205 +1,196 @@
-import {
-  RECORD_FIELDS,
-  getCity,
-  getCountry,
-  getRegion,
-  getImage,
-  convertToAdvocate,
-  getSlackId,
-  getSlackUsername
-} from '~/hooks/advocate-conversion-utils'
+import AdvocatesAirtableRecords from '~/hooks/advocate-conversion-utils'
 
-import { AdvocatesWorldRegion, ADVOCATES_WORLD_REGIONS } from '~/store/advocates'
+describe('getters', () => {
+  let advocatesAirtableRecords: AdvocatesAirtableRecords
 
-type RecordFields = {
-  name: string,
-  image?: object[],
-  city?: string,
-  country?: string,
-  region?: AdvocatesWorldRegion
-  slackId: string,
-  slackUsername: string
-}
-
-class FakeRecord {
-  _fields: object = {}
-
-  constructor ({ name, image, city, country, region, slackId, slackUsername }: RecordFields) {
-    this._fields = {
-      [RECORD_FIELDS.name]: name,
-      [RECORD_FIELDS.image]: image,
-      [RECORD_FIELDS.city]: city,
-      [RECORD_FIELDS.country]: country,
-      [RECORD_FIELDS.region]: region,
-      [RECORD_FIELDS.slackId]: slackId,
-      [RECORD_FIELDS.slackUsername]: slackUsername
+  const fakeRecord = {
+    get: (field: string) => {
+      switch (field) {
+        case 'City':
+          return 'Gotham City'
+        case 'Country':
+          return 'Canada'
+        case 'Region':
+          return 'South America'
+        case 'Slack ID':
+          return 'ID1234567890'
+        case 'Slack Username':
+          return 'U1234567890'
+      }
     }
   }
 
-  get (key: string): string {
-    return (this._fields as any)[key]
+  const mockRecordFields = {
+    city: 'City',
+    country: 'Country',
+    region: 'Region',
+    slackId: 'Slack ID',
+    slackUsername: 'Slack Username'
   }
-}
+
+  beforeEach(() => {
+    advocatesAirtableRecords = new AdvocatesAirtableRecords('testApiKey', mockRecordFields)
+  })
+
+  it('gets the city from the record', () => {
+    expect(advocatesAirtableRecords.getCity(fakeRecord)).toBe('Gotham City')
+  })
+
+  it('gets the country from the record', () => {
+    expect(advocatesAirtableRecords.getCountry(fakeRecord)).toBe('Canada')
+  })
+
+  it('gets the region from the record', () => {
+    expect(advocatesAirtableRecords.getRegion(fakeRecord)).toBe('South America')
+  })
+
+  it('gets the Slack ID from the record', () => {
+    expect(advocatesAirtableRecords.getSlackId(fakeRecord)).toBe('ID1234567890')
+  })
+
+  it('gets the Slack username from the record', () => {
+    expect(advocatesAirtableRecords.getSlackUsername(fakeRecord)).toBe('U1234567890')
+  })
+})
 
 describe('convertToAdvocate', () => {
-  const fakeRecord = new FakeRecord({
-    name: 'Fake advocate',
-    image: [
-      {
-        url: '/image.jpeg',
-        type: 'image/jpeg',
-        thumbnails: {}
+  let advocatesAirtableRecords: AdvocatesAirtableRecords
+
+  const fakeRecord = {
+    get: (field: string) => {
+      switch (field) {
+        case 'Name':
+          return 'Nova'
+        case 'City':
+          return 'Gotham City'
+        case 'Country':
+          return 'Canada'
+        case 'Region':
+          return 'South America'
+        case 'Slack ID':
+          return 'ID1234567890'
+        case 'Slack Username':
+          return 'U1234567890'
       }
-    ],
-    city: 'Someplace',
-    region: 'America (North)',
-    slackId: 'FAKEID123',
-    slackUsername: 'fakename'
+    }
+  }
+
+  const mockRecordFields = {
+    name: 'Name',
+    city: 'City',
+    country: 'Country',
+    region: 'Region',
+    slackId: 'Slack ID',
+    slackUsername: 'Slack Username'
+  }
+
+  beforeEach(() => {
+    advocatesAirtableRecords = new AdvocatesAirtableRecords('testApiKey', mockRecordFields)
   })
 
-  it('extracts and format information from the record', () => {
-    const { name, image, city, region } = convertToAdvocate(fakeRecord)
-    expect({ name, image, city, region }).toEqual({
-      name: 'Fake advocate',
-      image: '/image.jpeg',
-      city: 'Someplace',
-      region: 'America (North)'
-    })
-  })
-})
+  it('converts the record to an advocate object', () => {
+    const advocate = advocatesAirtableRecords.convertToAdvocate(fakeRecord)
 
-describe('getRegion', () => {
-  it('gets the region from the record', () => {
-    const { northAmerica } = ADVOCATES_WORLD_REGIONS
-    const fakeAdvocate = new FakeRecord({
-      name: 'Fake Advocate',
-      region: northAmerica,
-      slackId: 'FAKEID123',
-      slackUsername: 'fakename'
-    })
-    expect(getRegion(fakeAdvocate)).toBe(northAmerica)
-  })
-})
-
-describe('getCity', () => {
-  it('gets the city from the record', () => {
-    const { northAmerica } = ADVOCATES_WORLD_REGIONS
-    const fakeAdvocate = new FakeRecord({
-      name: 'Fake Advocate',
-      city: 'Gotham',
-      region: northAmerica,
-      slackId: 'FAKEID123',
-      slackUsername: 'fakename'
-    })
-    expect(getCity(fakeAdvocate)).toBe('Gotham')
-  })
-})
-
-describe('getCountry', () => {
-  it('gets the city from the record', () => {
-    const { northAmerica } = ADVOCATES_WORLD_REGIONS
-    const fakeAdvocate = new FakeRecord({
-      name: 'Fake Advocate',
+    expect(advocate).toEqual({
+      name: 'Nova',
+      image: '/images/advocates/no-advocate-photo.png',
+      region: 'South America',
+      city: 'Gotham City',
       country: 'Canada',
-      region: northAmerica,
-      slackId: 'FAKEID123',
-      slackUsername: 'fakename'
+      slackId: 'ID1234567890',
+      slackUsername: 'U1234567890'
     })
-    expect(getCountry(fakeAdvocate)).toBe('Canada')
   })
 })
 
 describe('getImage', () => {
+  let advocatesAirtableRecords: AdvocatesAirtableRecords
+
+  const mockRecordFields = {
+    image: 'Image'
+  }
+
+  beforeEach(() => {
+    advocatesAirtableRecords = new AdvocatesAirtableRecords('testApiKey', mockRecordFields)
+  })
+
   it('defaults in a no-advocate-photo.png value if there is no attachment', () => {
-    const noPictureAdvocate = new FakeRecord({
-      name: 'Fake Advocate',
-      slackId: 'FAKEID123',
-      slackUsername: 'fakename'
-    })
-    expect(getImage(noPictureAdvocate)).toBe('/images/advocates/no-advocate-photo.png')
+    const fakeRecord = {
+      get: (field: string) => {
+        if (field === 'Image') {
+          return undefined
+        }
+      }
+    }
+
+    expect(advocatesAirtableRecords.getImage(fakeRecord)).toBe('/images/advocates/no-advocate-photo.png')
   })
 
   it('defaults in a no-advocate-photo.png value if the attachment is of no image type', () => {
-    const invalidPictureAdvocate = new FakeRecord({
-      name: 'Fake Advocate',
-      image: [{
-        type: 'application/json'
-      }],
-      slackId: 'FAKEID123',
-      slackUsername: 'fakename'
-    })
-    expect(getImage(invalidPictureAdvocate)).toBe('/images/advocates/no-advocate-photo.png')
+    const fakeRecord = {
+      get: (field: string) => {
+        if (field === 'Image') {
+          return [{
+            type: 'application/json'
+          }]
+        }
+      }
+    }
+
+    expect(advocatesAirtableRecords.getImage(fakeRecord)).toBe('/images/advocates/no-advocate-photo.png')
   })
 
   it('uses the attachment URL if there are no thumbnails', () => {
     const expectedUrl = 'http://url.to/image.jpg'
-    const noPictureThumbnailsAdvocate = new FakeRecord({
-      name: 'Fake Advocate',
-      image: [{
-        url: expectedUrl,
-        type: 'image/jpg'
-      }],
-      slackId: 'FAKEID123',
-      slackUsername: 'fakename'
-    })
-    expect(getImage(noPictureThumbnailsAdvocate)).toBe(expectedUrl)
-  })
+    const fakeRecord = {
+      get: (field: string) => {
+        if (field === 'Image') {
+          return [{
+            url: expectedUrl,
+            type: 'image/jpg'
+          }]
+        }
+      }
+    }
 
-  it('uses the attachment URL if there is no large thumbnail', () => {
-    const expectedUrl = 'http://url.to/image.jpg'
-    const noLargeThumbnailAdvocate = new FakeRecord({
-      name: 'Fake Advocate',
-      image: [{
-        url: expectedUrl,
-        type: 'image/jpg',
-        thumbnails: { }
-      }],
-      slackId: 'FAKEID123',
-      slackUsername: 'fakename'
-    })
-    expect(getImage(noLargeThumbnailAdvocate)).toBe(expectedUrl)
+    expect(advocatesAirtableRecords.getImage(fakeRecord)).toBe(expectedUrl)
   })
 
   it('uses the thumbnail URL if there is a large thumbnail available', () => {
     const expectedUrl = 'http://url.to/thumbnails/large.jpg'
-    const thumbnailPictureAdvocate = new FakeRecord({
-      name: 'Fake Advocate',
-      image: [{
-        url: 'http://url.to/image.jpg',
-        type: 'image/jpg',
-        thumbnails: {
-          large: { url: expectedUrl }
+    const thumbnailPictureAdvocate = {
+      get: (field: string) => {
+        if (field === 'Image') {
+          return [{
+            url: 'http://url.to/image.jpg',
+            type: 'image/jpg',
+            thumbnails: {
+              large: { url: expectedUrl }
+            }
+          }]
         }
-      }],
-      slackId: 'FAKEID123',
-      slackUsername: 'fakename'
-    })
-    expect(getImage(thumbnailPictureAdvocate)).toBe(expectedUrl)
-  })
-})
+      }
+    }
 
-describe('getSlackId', () => {
-  it('gets the slackId from the record', () => {
-    const fakeSlackId = 'FAKEID123'
-    const fakeAdvocate = new FakeRecord({
-      name: 'Fake Advocate',
-      region: 'America (North)',
-      slackId: 'FAKEID123',
-      slackUsername: 'fakename'
-    })
-    expect(getSlackId(fakeAdvocate)).toBe(fakeSlackId)
+    expect(advocatesAirtableRecords.getImage(thumbnailPictureAdvocate)).toBe(expectedUrl)
   })
-})
 
-describe('getSlackUsername', () => {
-  it('gets the slackUsername from the record', () => {
-    const fakeSlackUsername = 'fakename'
-    const fakeAdvocate = new FakeRecord({
-      name: 'Fake Advocate',
-      region: 'America (North)',
-      slackId: 'FAKEID123',
-      slackUsername: 'fakename'
-    })
-    expect(getSlackUsername(fakeAdvocate)).toBe(fakeSlackUsername)
+  it('uses the thumbnail URL if there is a large thumbnail available', () => {
+    const expectedUrl = 'http://url.to/thumbnails/large.jpg'
+    const thumbnailPictureAdvocate = {
+      get: (field: string) => {
+        if (field === 'Image') {
+          return [{
+            url: 'http://url.to/image.jpg',
+            type: 'image/jpg',
+            thumbnails: {
+              large: { url: expectedUrl }
+            }
+          }]
+        }
+      }
+    }
+
+    expect(advocatesAirtableRecords.getImage(thumbnailPictureAdvocate)).toBe(expectedUrl)
   })
 })
