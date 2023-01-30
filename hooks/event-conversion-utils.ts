@@ -20,6 +20,7 @@ export type SeminarSeriesEvent = {
   date: string,
   startDate: string,
   endDate: string,
+  startDateAndTime?: string | null,
   image: string,
   institution: string,
   location: string,
@@ -32,7 +33,7 @@ const RECORD_FIELDS_IDS = Object.freeze({
   name: 'fldTqTxKr3ZzUhzKT',
   startDate: 'fldPGzoUf9wxsBDYJ',
   endDate: 'fldeFv42sqOY7oMy0',
-  startTime: 'fldF2COMbzANgkOh8',
+  startDateAndTime: 'fldF2COMbzANgkOh8',
   types: 'fldarZoYRJvETevow',
   eventWebsite: 'fldBPq3LMa5aZDBZm',
   location: 'fldSjeniJtud6M5j3',
@@ -51,13 +52,13 @@ class EventsAirtableRecords extends AirtableRecords {
   }
 
   getEventsQuery (days: number, view: string, filters: string[] = []): Airtable.Query<{}> {
-    const { startDate } = this.recordFields!
+    // const startDate = this.recordFields!.startDate || this.recordFields!.startDateAndTime
     const filterByFormula = `AND(${filters})`
     const base = new Airtable({ apiKey: this.apiKey }).base(AIRTABLE_BASE_ID)
 
     return base('Event Calendar').select({
       filterByFormula,
-      sort: [{ field: startDate, direction: days > 0 ? 'asc' : 'desc' }],
+      // sort: [{ field: startDate, direction: days > 0 ? 'asc' : 'desc' }],
       view
     })
   }
@@ -77,13 +78,18 @@ class EventsAirtableRecords extends AirtableRecords {
     event: CommunityEvent | SeminarSeriesEvent,
     days: number
   ): boolean {
-    const { startDate, endDate } = event
+    const { startDate, endDate, startDateAndTime } = event
     const today: Date = new Date()
-    const eventStartDate: Date = new Date(startDate)
+    const eventStartDate = () : Date => {
+      if (startDate) { return new Date(startDate) }
+      if (startDateAndTime) { return new Date(startDateAndTime) }
+
+      throw new Error('An event start date is mandatory')
+    }
     const eventEndDate: Date = new Date(endDate)
     const isFutureRange: boolean = days >= 0
-    const isOngoingEvent: boolean = eventStartDate <= today && today <= eventEndDate
-    const isToday: boolean = eventStartDate.getDate() === today.getDate() && eventStartDate.getMonth() === today.getMonth() && eventStartDate.getFullYear() === today.getFullYear()
+    const isOngoingEvent: boolean = eventStartDate() <= today && today <= eventEndDate
+    const isToday: boolean = eventStartDate().getDate() === today.getDate() && eventStartDate().getMonth() === today.getMonth() && eventStartDate().getFullYear() === today.getFullYear()
     let eventDateToCheck: Date
 
     // Determine which date to check based on the days parameter and checking if
@@ -96,8 +102,8 @@ class EventsAirtableRecords extends AirtableRecords {
       return false
     } else if (!isFutureRange && !isNaN(eventEndDate.getTime())) {
       eventDateToCheck = eventEndDate
-    } else if (!isNaN(eventStartDate.getTime())) {
-      eventDateToCheck = eventStartDate
+    } else if (!isNaN(eventStartDate().getTime())) {
+      eventDateToCheck = eventStartDate()
     } else {
       return false
     }
@@ -178,7 +184,7 @@ class EventsAirtableRecords extends AirtableRecords {
       date: this.formatDates(...this.getDates(record)),
       startDate: this.getStartDate(record),
       endDate: this.getEndDate(record),
-      startTime: this.formatTime(this.getTimes(record)),
+      startDateAndTime: this.formatTime(this.getTimes(record)),
       to: this.getWebsite(record)
     }
     return event
@@ -231,8 +237,8 @@ class EventsAirtableRecords extends AirtableRecords {
     throw new Error('Unreachable: should have all the cases covered.')
   }
 
-  formatTime (startTime?: Date | null): string | null {
-    if (!startTime) { return null }
+  formatTime (startDateAndTime?: Date | null): string | null {
+    if (!startDateAndTime) { return null }
 
     const options = {
       hour: 'numeric',
@@ -241,7 +247,7 @@ class EventsAirtableRecords extends AirtableRecords {
       timeZoneName: 'short'
     } as const
 
-    return new Intl.DateTimeFormat('en', options).format(startTime)
+    return new Intl.DateTimeFormat('en', options).format(startDateAndTime)
   }
 
   public getInstitution (record: any): string {
@@ -299,11 +305,11 @@ class EventsAirtableRecords extends AirtableRecords {
   }
 
   public getStartDateAndTime (record: any): string {
-    return record.get(this.recordFields!.startTime) || ''
+    return record.get(this.recordFields!.startDateAndTime) || ''
   }
 
   public getDates (record: any): [Date, Date|undefined] {
-    const recordStartDate = record.get(this.recordFields!.startDate)
+    const recordStartDate = record.get(this.recordFields!.startDate) || record.get(this.recordFields!.startDateAndTime)
     const recordEndDate = record.get(this.recordFields!.endDate)
     const startDate = recordStartDate && new Date(recordStartDate)
     const endDate = recordEndDate && new Date(recordEndDate)
@@ -311,7 +317,7 @@ class EventsAirtableRecords extends AirtableRecords {
   }
 
   public getTimes (record: any): Date|null {
-    const recordStartTime = record.get(this.recordFields!.startTime)
+    const recordStartTime = record.get(this.recordFields!.startDateAndTime)
 
     return recordStartTime ? new Date(recordStartTime) : null
   }

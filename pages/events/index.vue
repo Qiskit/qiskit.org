@@ -77,7 +77,7 @@
                 :image="event.image"
                 :location="event.location"
                 :date="event.date"
-                :time="event.startTime"
+                :time="event.startDateAndTime"
                 :to="event.to"
               />
             </div>
