@@ -220,6 +220,7 @@ interface TrackedLink {
   segment: CtaClickedEventProp
 }
 
+const khanAcademy: TrackedLink = {
   url: 'https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:matrices/x9e81a4f98389efdf:multiplying-matrices-by-matrices/v/matrix-multiplication-intro',
   segment: { cta: 'khanacademy-matrix-multiplication-intro', location: 'faq' }
 }
