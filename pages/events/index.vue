@@ -83,9 +83,9 @@
           </div>
         </template>
         <template slot="extra-info">
-          <div class="event-page__start-an-event">
+          <div class="event-page__section">
             <h3>Follow our event calendar</h3>
-            <p class="event-page__start-an-event__description">
+            <p class="event-page__section__description">
               <!-- eslint-disable-next-line vue/singleline-html-element-content-newline -->
               Stay up to date with all of our scheduled events by following our calendar. You can view the calendar by visiting <AppLink v-bind="qiskitCalendarLink">{{ qiskitCalendarLink.label }}</AppLink>, or subscribe to it by adding to the calendar app of your choice.
             </p>
@@ -112,9 +112,9 @@
               </cv-tabs>
             </div>
           </div>
-          <div class="event-page__start-an-event">
+          <div class="event-page__section">
             <h3>Start an event</h3>
-            <p class="event-page__start-an-event__description">
+            <p class="event-page__section__description">
               We can help you bring Qiskit experts to your campus for guest
               lectures, hackathons, and other events.
             </p>
@@ -333,7 +333,7 @@ export default class EventsPage extends QiskitPage {
     }
   }
 
-  &__start-an-event {
+  &__section {
     margin-top: $spacing-10;
     margin-bottom: $spacing-10;
 
