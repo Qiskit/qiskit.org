@@ -255,10 +255,6 @@ export default class EventsPage extends QiskitPage {
 
       this.$store.commit('events/setActiveSet', activeSet)
     }
-
-    test () {
-      console.log('hello')
-    }
 }
 </script>
 
