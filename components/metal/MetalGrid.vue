@@ -6,12 +6,12 @@
     <div class="metal-grid__container">
       <div
         v-for="(row, index) in positions"
-        :key="rowId(index)"
+        :key="getRowId(index)"
         class="metal-grid__row"
       >
         <div
           v-for="pos in row"
-          :key="posId(pos)"
+          :key="getPosId(pos)"
           class="metal-grid__cell"
           :class="{
             'metal-grid__cell_trigger': isTrigger(pos),
@@ -122,7 +122,7 @@ const fallingCells = computed<string[]>(() => Array.from((() => {
         if (cellIsAlwaysVisible) {
           continue
         }
-        yield self.posId({ c, r })
+        yield self.getPosId({ c, r })
       }
     }
   }
@@ -131,7 +131,7 @@ const fallingCells = computed<string[]>(() => Array.from((() => {
 })()))
 
 const isHidden = computed((pos: CellSpecification) => {
-  return hiddenCells.includes(posId(pos))
+  return hiddenCells.includes(getPosId(pos))
 })
 
 const isTrigger = computed((pos: CellSpecification) => {
@@ -141,7 +141,7 @@ const isTrigger = computed((pos: CellSpecification) => {
   return c === centralColumn + triggerX && r === triggerY
 })
 
-const triggerAnimation = (pos: CellSpecification) => {
+function triggerAnimation (pos: CellSpecification) {
   if (!isTrigger.value(pos)) { return }
   slotContainerIsHidden.value = true
   removeCell()
@@ -165,11 +165,11 @@ function removeCell () {
   setTimeout(removeCell, timeToRemoveNextCell)
 }
 
-const posId = (pos: CellSpecification): string => {
+function getPosId (pos: CellSpecification): string {
   return `cell-${pos.c}-${pos.r}`
 }
 
-const rowId = (index: number): string => {
+function getRowId (index: number): string {
   return `row-${index}`
 }
 </script>
