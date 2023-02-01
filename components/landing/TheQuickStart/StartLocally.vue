@@ -38,7 +38,7 @@
       </div>
       <div>
         <cv-accordion
-          v-if="getPrerequisitesToInstallQiskit ()"
+          v-if="prerequisitesToInstallQiskit ()"
           class="start-locally__prerequisites-section"
         >
           <cv-accordion-item>
@@ -57,7 +57,7 @@
         </h4>
         <SyntaxHighlight
           :label="segmentLabel"
-          :code="getCodeToInstallQiskit()"
+          :code="codeToInstallQiskit()"
         />
       </div>
     </div>
@@ -140,13 +140,13 @@ const codeToInstall = {
 
 const selectedOs = computed<string>(() => selectedOptions.os)
 
-const getPrerequisitesToInstallQiskit = computed<string | null>(() => {
+const prerequisitesToInstallQiskit = computed<string | null>(() => {
   const { 'qiskit-install': qiskitInstall, os } = selectedOptions
 
   return prerequisites[qiskitInstall][os]
 })
 
-const getCodeToInstallQiskit = computed<string>(() => {
+const codeToInstallQiskit = computed<string>(() => {
   const { 'qiskit-install': qiskitInstall, os } = selectedOptions
 
   return codeToInstall[qiskitInstall][os]
