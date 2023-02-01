@@ -11,7 +11,7 @@
         <template #content>
           <p>
             Minimal prerequisites are required for the Qiskit Global Summer School. If you know
-            <AppLink v-bind="khanacademy">
+            <AppLink v-bind="khanAcademy">
               how to multiply two matrices
             </AppLink>
             , and have some programming experience in Python, you are ready for the Summer School.
@@ -220,7 +220,6 @@ interface TrackedLink {
   segment: CtaClickedEventProp
 }
 
-const khanacademy: TrackedLink = {
   url: 'https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:matrices/x9e81a4f98389efdf:multiplying-matrices-by-matrices/v/matrix-multiplication-intro',
   segment: { cta: 'khanacademy-matrix-multiplication-intro', location: 'faq' }
 }
