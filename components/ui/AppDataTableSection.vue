@@ -9,16 +9,12 @@
 </template>
 
 <script setup lang="ts">
-import { TableRowElement } from '~/components/ui/AppDataTable.vue'
-
 interface Props {
   dataTableColumns?: string[]
-  dataTableElements?: TableRowElement[]
   sectionTitle: string
 }
 
 withDefaults(defineProps<Props>(), {
-  dataTableColumns: () => [],
-  dataTableElements: () => []
+  dataTableColumns: () => []
 })
 </script>
