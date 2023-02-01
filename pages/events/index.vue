@@ -161,7 +161,7 @@ const noEvents = (this as any).filteredEvents.length === 0
 
 const getCheckedFilters = (filter: string) => (this as any)[filter]
 
-const updateWholeFilter = (filter: string, filterValues: string[]): void => {
+const updateWholeFilter = (filter: string, filterValues: string[]) => {
   const { commit } = this.$store
   const payload = { filter, filterValues }
 
@@ -177,7 +177,7 @@ const isFilterChecked = (filter: string, filterValue: string): Array<CommunityEv
     : typeFilters.includes(filterValue)
 }
 
-const updateFilter = (filter: string, filterValue: string, isSelected: boolean): void => {
+const updateFilter = (filter: string, filterValue: string, isSelected: boolean) => {
   const payload = { filter, filterValue, isSelected }
   const { commit } = this.$store
 
