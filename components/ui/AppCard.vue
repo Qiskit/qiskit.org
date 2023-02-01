@@ -57,9 +57,7 @@
   </article>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
+<script setup lang="ts">
 import { CtaClickedEventProp } from '~/constants/segment'
 
 export interface TagTooltip {
@@ -69,36 +67,42 @@ export interface TagTooltip {
   description: string,
 }
 
-@Component
-export default class AppCard extends Vue {
-  @Prop({ type: String, default: '' }) image!: string
-  @Prop({ type: Boolean, required: false, default: false })
-  imageContain!: boolean
+interface Props {
+  descriptionWholeSize?: boolean
+  ctaLabel?: string
+  image?: string
+  imageContain?: boolean
+  segment?: CtaClickedEventProp | undefined
+  subtitle?: string
+  tags?: string[]
+  title: string
+  to?: string
+  tooltipTags?: TagTooltip[]
+  verticalLayout?: boolean
+}
 
-  @Prop({ type: String, default: '' }) title!: string
-  @Prop({ type: String, default: '' }) subtitle!: string
-  @Prop({ type: Array, default: () => [] }) tags!: string[]
-  @Prop({ type: Array, default: () => [] }) tooltipTags!: TagTooltip[]
-  @Prop({ type: String, default: '' }) to!: string
-  @Prop({ type: String, default: '' }) ctaLabel!: string
-  @Prop({ type: Object, required: false }) segment:
-    | CtaClickedEventProp
-    | undefined
+const props = withDefaults(defineProps<Props>(), {
+  descriptionWholeSize: false,
+  ctaLabel: '',
+  image: '',
+  imageContain: false,
+  segment: undefined,
+  subtitle: '',
+  tags: () => [],
+  to: '',
+  tooltipTags: () => [],
+  verticalLayout: false,
+})
 
-  @Prop({ type: Boolean, default: false }) verticalLayout!: Boolean
-  @Prop({ type: Boolean, default: false }) descriptionWholeSize!: Boolean
+const ctaLink = computed(() => ({
+  url: props.to,
+  label: props.ctaLabel,
+  segment: props.segment,
+}))
 
-  get ctaLink () {
-    return {
-      url: this.to,
-      label: this.ctaLabel,
-      segment: this.segment
-    }
-  }
-
-  hasTags (tags: string[] | TagTooltip[]) {
-    return Array.isArray(tags) && tags.length > 0
-  }
+// TODO: Refactor to do a cleaner check for "tags" and "tooltip tags" (https://github.com/Qiskit/qiskit.org/pull/2935#discussion_r1088770246)
+function hasTags (tags: string[] | TagTooltip[]) {
+  return Array.isArray(tags) && tags.length > 0
 }
 </script>
 

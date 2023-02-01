@@ -10,9 +10,7 @@
   </cv-data-table>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
+<script setup lang="ts">
 import { GeneralLink } from '~/constants/appLinks'
 
 export interface TableRowElement {
@@ -21,10 +19,11 @@ export interface TableRowElement {
   data: string | GeneralLink,
 }
 
-@Component
-export default class AppDataTable extends Vue {
-  @Prop({ type: Array, default: () => [] }) columns!: string[]
+interface Props {
+  columns: string[]
 }
+
+defineProps<Props>()
 </script>
 
 <style lang="scss" scoped>

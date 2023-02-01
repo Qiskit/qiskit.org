@@ -7,14 +7,12 @@
   </fieldset>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
-
-@Component
-export default class AppFieldset extends Vue {
-  @Prop(String) label!: string
+<script setup lang="ts">
+interface Props {
+  label: string
 }
+
+defineProps<Props>()
 </script>
 
 <style lang="scss">

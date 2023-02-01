@@ -27,25 +27,22 @@
   </article>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Prop, Component } from 'vue-property-decorator'
+<script setup lang="ts">
 import { GeneralLink } from '~/constants/appLinks'
 
-@Component
-export default class TheHeroMoment extends Vue {
-  @Prop({ type: String, required: true }) version!: string
-
-  getStartedLink: GeneralLink = {
-    url: 'https://qiskit.org/documentation/getting_started.html',
-    label: 'Get started',
-    segment: { cta: 'get-started', location: 'hero-moment' }
-  }
-
-  data () {
-    return { qiskitPronunciation: Math.random() < 0.5 ? '[kiss-kit]' : '[quiss-kit]' }
-  }
+interface Props {
+  version: string
 }
+
+defineProps<Props>()
+
+const getStartedLink: GeneralLink = {
+  url: 'https://qiskit.org/documentation/getting_started.html',
+  label: 'Get started',
+  segment: { cta: 'get-started', location: 'hero-moment' }
+}
+
+const qiskitPronunciation = Math.random() < 0.5 ? '[kiss-kit]' : '[quiss-kit]'
 </script>
 
 <style lang="scss">

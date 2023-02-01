@@ -15,14 +15,6 @@
   </div>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
-
-@Component
-export default class AppFiltersResultsLayout extends Vue {}
-</script>
-
 <style lang="scss" scoped>
 .app-filters-results-layout {
   ::v-deep &__main-section {

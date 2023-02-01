@@ -8,14 +8,14 @@
   </BasicLink>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
-
-@Component
-export default class AppLink extends Vue {
-  @Prop({ type: String, default: 'primary' }) kind!: 'primary'|'secondary'
+<script setup lang="ts">
+interface Props {
+  kind?: 'primary'|'secondary'
 }
+
+withDefaults(defineProps<Props>(), {
+  kind: 'primary'
+})
 </script>
 
 <style lang="scss" scoped>

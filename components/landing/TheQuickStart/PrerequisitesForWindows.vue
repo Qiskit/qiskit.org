@@ -8,23 +8,18 @@
   </div>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
+<script setup lang="ts">
 import { GeneralLink } from '~/constants/appLinks'
 
-@Component
-export default class PrerequisitesForWindows extends Vue {
-  rustup64Link: GeneralLink = {
-    url: 'https://win.rustup.rs/x86_64',
-    label: '64-bit installer',
-    segment: { cta: 'rustup-windows-64-installer', location: 'quick-start' }
-  }
+const rustup64Link: GeneralLink = {
+  url: 'https://win.rustup.rs/x86_64',
+  label: '64-bit installer',
+  segment: { cta: 'rustup-windows-64-installer', location: 'quick-start' }
+}
 
-  rustup32Link: GeneralLink = {
-    url: 'https://win.rustup.rs/i686',
-    label: '32-bit installer',
-    segment: { cta: 'rustup-windows-32-installer', location: 'quick-start' }
-  }
+const rustup32Link: GeneralLink = {
+  url: 'https://win.rustup.rs/i686',
+  label: '32-bit installer',
+  segment: { cta: 'rustup-windows-32-installer', location: 'quick-start' }
 }
 </script>

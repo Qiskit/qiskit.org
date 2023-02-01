@@ -11,7 +11,7 @@
         <template #content>
           <p>
             Minimal prerequisites are required for the Qiskit Global Summer School. If you know
-            <AppLink v-bind="khanacademy">
+            <AppLink v-bind="khanAcademy">
               how to multiply two matrices
             </AppLink>
             , and have some programming experience in Python, you are ready for the Summer School.
@@ -212,9 +212,7 @@
   </section>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
+<script setup lang="ts">
 import { CtaClickedEventProp } from '~/constants/segment'
 
 interface TrackedLink {
@@ -222,72 +220,69 @@ interface TrackedLink {
   segment: CtaClickedEventProp
 }
 
-@Component
-export default class FaqSection extends Vue {
-  khanacademy: TrackedLink = {
-    url: 'https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:matrices/x9e81a4f98389efdf:multiplying-matrices-by-matrices/v/matrix-multiplication-intro',
-    segment: { cta: 'khanacademy-matrix-multiplication-intro', location: 'faq' }
-  }
+const khanAcademy: TrackedLink = {
+  url: 'https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:matrices/x9e81a4f98389efdf:multiplying-matrices-by-matrices/v/matrix-multiplication-intro',
+  segment: { cta: 'khanacademy-matrix-multiplication-intro', location: 'faq' }
+}
 
-  pythonAndJupyter: TrackedLink = {
-    url: 'https://learn.qiskit.org/course/ch-prerequisites/introduction-to-python-and-jupyter-notebooks',
-    segment: { cta: 'textbook-python-and-jupyter-notebooks', location: 'faq' }
-  }
+const pythonAndJupyter: TrackedLink = {
+  url: 'https://learn.qiskit.org/course/ch-prerequisites/introduction-to-python-and-jupyter-notebooks',
+  segment: { cta: 'textbook-python-and-jupyter-notebooks', location: 'faq' }
+}
 
-  linearAlgebra: TrackedLink = {
-    url: 'https://learn.qiskit.org/course/ch-appendix/an-introduction-to-linear-algebra-for-quantum-computing',
-    segment: { cta: 'qiskit-linear-algebra', location: 'faq' }
-  }
+const linearAlgebra: TrackedLink = {
+  url: 'https://learn.qiskit.org/course/ch-appendix/an-introduction-to-linear-algebra-for-quantum-computing',
+  segment: { cta: 'qiskit-linear-algebra', location: 'faq' }
+}
 
-  qCEducators: TrackedLink = {
-    url: 'https://quantum-computing.ibm.com/programs/educators',
-    segment: { cta: 'ibm-quantum-educators-program', location: 'faq' }
-  }
+const qCEducators: TrackedLink = {
+  url: 'https://quantum-computing.ibm.com/programs/educators',
+  segment: { cta: 'ibm-quantum-educators-program', location: 'faq' }
+}
 
-  mailtoQCEducators: TrackedLink = {
-    url: 'mailto:quantum.education@us.ibm.com',
-    segment: { cta: 'mailto-quantum-educators-program', location: 'faq' }
-  }
+const mailtoQCEducators: TrackedLink = {
+  url: 'mailto:quantum.education@us.ibm.com',
+  segment: { cta: 'mailto-quantum-educators-program', location: 'faq' }
+}
 
-  twitterQiskit: TrackedLink = {
-    url: 'https://twitter.com/qiskit',
-    segment: { cta: 'qiskit-twitter', location: 'faq' }
-  }
+const twitterQiskit: TrackedLink = {
+  url: 'https://twitter.com/qiskit',
+  segment: { cta: 'qiskit-twitter', location: 'faq' }
+}
 
-  twitterIBMResearch: TrackedLink = {
-    url: 'https://twitter.com/IBMResearch',
-    segment: { cta: 'ibmresearch-twitter', location: 'faq' }
-  }
+const twitterIBMResearch: TrackedLink = {
+  url: 'https://twitter.com/IBMResearch',
+  segment: { cta: 'ibmresearch-twitter', location: 'faq' }
+}
 
-  githubQiskit: TrackedLink = {
-    url: 'https://github.com/Qiskit',
-    segment: { cta: 'qiskit-github', location: 'faq' }
-  }
+const githubQiskit: TrackedLink = {
+  url: 'https://github.com/Qiskit',
+  segment: { cta: 'qiskit-github', location: 'faq' }
+}
 
-  mediumQiskit: TrackedLink = {
-    url: 'https://medium.com/qiskit',
-    segment: { cta: 'qiskit-medium', location: 'faq' }
-  }
+const mediumQiskit: TrackedLink = {
+  url: 'https://medium.com/qiskit',
+  segment: { cta: 'qiskit-medium', location: 'faq' }
+}
 
-  qiskitSubscribe: TrackedLink = {
-    url: 'https://qisk.it/sub',
-    segment: { cta: 'qiskit-youtube-subscribe', location: 'faq' }
-  }
+const qiskitSubscribe: TrackedLink = {
+  url: 'https://qisk.it/sub',
+  segment: { cta: 'qiskit-youtube-subscribe', location: 'faq' }
+}
 
-  joinqiskitslack: TrackedLink = {
-    url: 'https://ibm.co/joinqiskitslack',
-    segment: { cta: 'qiskit-slack-join', location: 'faq' }
-  }
+const joinqiskitslack: TrackedLink = {
+  url: 'https://ibm.co/joinqiskitslack',
+  segment: { cta: 'qiskit-slack-join', location: 'faq' }
+}
 
-  qiskitEvents: TrackedLink = {
-    url: 'https://qiskit.org/events',
-    segment: { cta: 'qiskit-org-events', location: 'faq' }
-  }
+const qiskitEvents: TrackedLink = {
+  url: 'https://qiskit.org/events',
+  segment: { cta: 'qiskit-org-events', location: 'faq' }
+}
 
-  mailtoQiskit: TrackedLink = {
-    url: 'mailto:qiskit.events@us.ibm.com',
-    segment: { cta: 'mailto-qiskit-events', location: 'faq' }
-  }
+const mailtoQiskit: TrackedLink = {
+  url: 'mailto:qiskit.events@us.ibm.com',
+  segment: { cta: 'mailto-qiskit-events', location: 'faq' }
 }
 </script>
 

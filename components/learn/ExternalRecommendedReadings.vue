@@ -44,22 +44,24 @@
   </section>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
+<script setup lang="ts">
 import { GeneralLink } from '~/constants/appLinks'
 
 export type RecommendedReading = GeneralLink & {
-    description?: string;
-    author?: string;
-    }
-
-@Component
-export default class ExternalRecommendedReadings extends Vue {
-  @Prop({ type: Array, required: true }) links!: RecommendedReading[]
-  @Prop({ type: Array, required: false }) references!: GeneralLink[]
-  @Prop({ type: String, required: false }) preamble!: string
+  description?: string;
+  author?: string;
 }
+
+interface Props {
+  links: RecommendedReading[];
+  references?: GeneralLink[];
+  preamble?: string;
+}
+
+withDefaults(defineProps<Props>(), {
+  references: () => [],
+  preamble: ''
+})
 </script>
 
 <style lang="scss" scoped>

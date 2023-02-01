@@ -12,16 +12,10 @@
   </section>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
-
-@Component
-export default class JoinUsSection extends Vue {
-  joinSlackLink = {
-    url: 'https://ibm.co/joinqiskitslack',
-    label: 'Stay in touch through Slack'
-  }
+<script setup lang="ts">
+const joinSlackLink = {
+  url: 'https://ibm.co/joinqiskitslack',
+  label: 'Stay in touch through Slack'
 }
 </script>
 

@@ -17,16 +17,14 @@
   </article>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
-
-@Component
-export default class FeatureCard extends Vue {
-  @Prop(String) image!: string
-  @Prop(String) title!: string
-  @Prop(String) description!: string
+<script setup lang="ts">
+interface Props {
+  image: string;
+  title: string;
+  description: string;
 }
+
+defineProps<Props>()
 </script>
 
 <style lang="scss" scoped>

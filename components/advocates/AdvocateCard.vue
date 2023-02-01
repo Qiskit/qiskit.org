@@ -18,29 +18,29 @@
   </AppCard>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
-
-@Component
-export default class AdvocateCard extends Vue {
-  @Prop({ type: String, default: '' }) name!: string
-  @Prop({ type: String, default: '' }) image!: string
-  @Prop({ type: String, default: '' }) city!: string
-  @Prop({ type: String, default: '' }) country!: string
-  @Prop({ type: String, default: '' }) region!: string
-  @Prop({ type: String, default: '' }) slackId!: string
-  @Prop({ type: String, default: '' }) slackUsername!: string
-
-  // Tags on AppCard is an Array
-  get formattedRegion () {
-    return this.region ? [this.region] : []
-  }
-
-  get location () {
-    return [this.city, this.country].filter(e => !!e).join(', ')
-  }
+<script setup lang="ts">
+interface Props {
+  name: string,
+  image: string,
+  city?: string,
+  country?: string,
+  region?: string,
+  slackId?: string,
+  slackUsername?: string
 }
+
+const props = withDefaults(defineProps<Props>(), {
+  city: '',
+  country: '',
+  region: '',
+  slackId: '',
+  slackUsername: ''
+})
+
+// Tags on AppCard is an Array
+const formattedRegion = computed(() => props.region ? [props.region] : [])
+
+const location = computed(() => [props.city, props.country].filter(e => !!e).join(', '))
 </script>
 
 <style lang="scss" scoped>

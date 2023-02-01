@@ -10,16 +10,16 @@
   </nav>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
-
-@Component
-export default class AppNavBackLink extends Vue {
-  @Prop({ type: String, required: true }) label!: string;
-  @Prop({ type: String, required: false, default: 'light' }) theme!: string;
-  @Prop({ type: String, required: true }) url!: string;
+<script setup lang="ts">
+interface Props {
+  label: string;
+  theme?: 'light'|'dark';
+  url: string;
 }
+
+withDefaults(defineProps<Props>(), {
+  theme: 'light'
+})
 </script>
 
 <style lang="scss" scoped>
