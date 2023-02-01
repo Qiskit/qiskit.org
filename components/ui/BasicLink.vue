@@ -52,11 +52,10 @@ function isIdAnchor (url: string): boolean {
 const hasLink = computed(() => !!props.url)
 
 const isAnchor = computed(() => {
-  const url = props.url
-  return isExternal(url) ||
-    isMail(url) ||
-    isIdAnchor(url) ||
-    isInternal(url) ||
+  return isExternal(props.url) ||
+    isMail(props.url) ||
+    isIdAnchor(props.url) ||
+    isInternal(props.url) ||
     props.isStatic
 })
 
