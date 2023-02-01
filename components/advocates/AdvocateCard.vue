@@ -22,11 +22,11 @@
 interface Props {
   name: string,
   image: string,
-  city: string,
-  country: string,
-  region: string,
-  slackId: string,
-  slackUsername: string
+  city?: string,
+  country?: string,
+  region?: string,
+  slackId?: string,
+  slackUsername?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
