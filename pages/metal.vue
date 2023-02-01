@@ -9,19 +9,19 @@
   </div>
 </template>
 
-<script lang="ts">
-import { Component } from 'vue-property-decorator'
+<script setup lang="ts">
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 
-@Component({
-  layout: 'metal',
-  head () {
-    return {
-      title: 'Metal'
-    }
-  }
+definePageMeta({
+  layout: 'metal'
 })
-export default class MetalPage extends QiskitPage {
-  routeName = 'metal'
-}
+
+useHead({
+  title: 'Metal'
+})
+
+// TODO: Refactor "logic" pages
+// export default class MetalPage extends QiskitPage {
+//   routeName = 'metal'
+// }
 </script>
