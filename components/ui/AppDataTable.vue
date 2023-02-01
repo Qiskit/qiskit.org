@@ -20,12 +20,10 @@ export interface TableRowElement {
 }
 
 interface Props {
-  columns?: string[]
+  columns: string[]
 }
 
-withDefaults(defineProps<Props>(), {
-  columns: () => []
-})
+defineProps<Props>()
 </script>
 
 <style lang="scss" scoped>
