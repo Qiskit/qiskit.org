@@ -46,7 +46,7 @@ function preventFromClosing (index: number, event: MouseEvent) {
   }
 }
 
-function actionChange ({ changedIndex }: { changedIndex: number }) : void {
+function actionChange ({ changedIndex }: { changedIndex: number }) {
   expandedItem.value = changedIndex
 }
 </script>
