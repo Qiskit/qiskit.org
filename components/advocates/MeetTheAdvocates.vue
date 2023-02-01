@@ -77,11 +77,11 @@ const { regionFilters } = mapState<MapperForStateWithNamespace>('advocates', {
   regionFilters: (state: State) => state.regionFilters
 })
 
-const isRegionFilterChecked = (filterValue: string): boolean => {
+function isRegionFilterChecked (filterValue: string): boolean {
   return regionFilters.includes(filterValue)
 }
 
-const updateRegionFilter = (option: string, isChecked: boolean): void => {
+function updateRegionFilter (option: string, isChecked: boolean) {
   const filteredRegionFilters = regionFilters.filter(oldOption => oldOption !== option)
 
   if (isChecked) {
@@ -91,7 +91,7 @@ const updateRegionFilter = (option: string, isChecked: boolean): void => {
   updateRegionFilters(filteredRegionFilters)
 }
 
-const updateRegionFilters = (regionFilters: string[]): void => {
+function updateRegionFilters (regionFilters: string[]) {
   this.$store.commit('advocates/setRegionFilters', regionFilters)
 }
 
