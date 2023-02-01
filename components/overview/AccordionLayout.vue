@@ -11,15 +11,12 @@
   </article>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
-
+<script setup lang="ts">
 // TODO: It is not possible to extract the interface of the component props
 // so we need this redundant interface to do it. Explore if it is worth
 // removing the @Prop decorator in favour of:
 // https://class-component.vuejs.org/guide/props-definition.html
-interface AccordionLayoutProps {
+export interface AccordionLayoutProps {
   image: string,
   description: string,
   cta: {
@@ -28,17 +25,7 @@ interface AccordionLayoutProps {
   }
 }
 
-export { AccordionLayoutProps }
-
-@Component
-export default class AccordionLayout extends Vue implements AccordionLayoutProps {
-  @Prop(String) image!: string
-  @Prop(String) description!: string
-  @Prop(Object) cta!: {
-    url: string,
-    label: string
-  }
-}
+defineProps<AccordionLayoutProps>()
 </script>
 
 <style lang="scss" scoped>

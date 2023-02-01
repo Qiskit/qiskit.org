@@ -26,18 +26,20 @@
   </section>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
+<script setup lang="ts">
 import { NavLink } from '~/constants/menuLinks'
 
-@Component
-export default class FooterSection extends Vue {
-  @Prop(String) title!: string
-  @Prop(Array) elements!: NavLink[]
-  @Prop({ type: Boolean, default: false }) iconsOnly!: boolean
-  @Prop({ type: String, default: 'light' }) theme!: string
+interface Props {
+  title: string
+  elements: NavLink[]
+  iconsOnly?: boolean
+  theme?: 'light' | 'dark'
 }
+
+withDefaults(defineProps<Props>(), {
+  iconsOnly: false,
+  theme: 'light'
+})
 </script>
 
 <style lang="scss" scoped>

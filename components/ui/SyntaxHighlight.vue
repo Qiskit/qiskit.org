@@ -12,23 +12,25 @@
   </div>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
+<script setup lang="ts">
 import { CtaClickedEventProp } from '~/constants/segment'
 
-@Component
-export default class SyntaxHighlight extends Vue {
-  @Prop(String) label!: string
-  @Prop({ type: String, default: '' }) code!: string
+interface Props {
+  code?: string
+  label: string
+}
 
-  segmentAction: CtaClickedEventProp = {
-    cta: `${this.label}: Copy Code Sample`, location: 'syntax-highlight'
-  }
+const props = withDefaults(defineProps<Props>(), {
+  code: ''
+})
 
-  copyToClipboard (code: string) {
-    navigator.clipboard.writeText(code)
-  }
+const segmentAction : CtaClickedEventProp = computed(() => ({
+  cta: `${props.label}: Copy Code Sample`,
+  location: 'syntax-highlight'
+}))
+
+function copyToClipboard (code: string) {
+  navigator.clipboard.writeText(code)
 }
 </script>
 

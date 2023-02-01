@@ -38,9 +38,7 @@
   </section>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
+<script setup lang="ts">
 import { GeneralLink } from '~/constants/appLinks'
 
 export type MosaicElement = {
@@ -51,10 +49,11 @@ export type MosaicElement = {
   cta?: GeneralLink
 }
 
-@Component
-export default class AppMosaic extends Vue {
-  @Prop(Array) mosaicElements!: MosaicElement[]
+interface Props {
+  mosaicElements: MosaicElement[]
 }
+
+defineProps<Props>()
 </script>
 
 <style lang="scss" scoped>

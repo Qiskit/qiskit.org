@@ -47,43 +47,42 @@
   </section>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import { Course } from 'constants/learnContent'
-import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
 
-@Component
-export default class CoursePagesSection extends Vue {
-  @Prop({ type: Array, required: true }) courses!: Course[]
-  @Prop({ type: String, required: true }) imgBase!: string
-
-  activeCourseLabel = '';
-
-  get activeCourse () {
-    const activeCourse = this.courses.find(
-      ({ label }) => label === this.activeCourseLabel
-    )
-    return activeCourse || null
-  }
-
-  get activeCoursePreviewImage () {
-    if (!this.activeCourse) {
-      return ''
-    }
-
-    const imageUrlBase = this.imgBase
-
-    return `${imageUrlBase}/${this.activeCourse.image}`
-  }
-
-  selectCourse (courseLabel: string) {
-    this.activeCourseLabel = courseLabel
-  }
-
-  created () {
-    this.selectCourse(this.courses[0].label)
-  }
+interface Props {
+  courses: Course[]
+  imgBase: string
 }
+
+const props = defineProps<Props>()
+
+const activeCourseLabel = ref('')
+
+const activeCourse = computed(() => {
+  const activeCourse = props.courses.find(
+    ({ label }) => label === activeCourseLabel.value
+  )
+  return activeCourse || null
+})
+
+const activeCoursePreviewImage = computed(() => {
+  if (!activeCourse.value) {
+    return ''
+  }
+
+  const imageUrlBase = props.imgBase
+
+  return `${imageUrlBase}/${activeCourse.value.image}`
+})
+
+const selectCourse = (courseLabel: string) => {
+  activeCourseLabel.value = courseLabel
+}
+
+onMounted(() => {
+  selectCourse(props.courses[0].label)
+})
 </script>
 
 <style lang="scss" scoped>

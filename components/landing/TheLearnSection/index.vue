@@ -7,14 +7,6 @@
   </article>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
-
-@Component
-export default class TheLearnSection extends Vue {}
-</script>
-
 <style lang="scss" scoped>
 .the-learn-section {
   @include responsive-grid-bg('/images/grid/grid-left.svg', 36rem);

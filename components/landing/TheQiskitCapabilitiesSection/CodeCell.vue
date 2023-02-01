@@ -29,14 +29,14 @@
   </code>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
-
-@Component
-export default class CodeCell extends Vue {
-  @Prop({ type: Array, default: [true, false, false] }) activeBlocks!: boolean[]
+<script setup lang="ts">
+interface Props {
+  activeBlocks?: boolean[]
 }
+
+withDefaults(defineProps<Props>(), {
+  activeBlocks: () => [true, false, false]
+})
 </script>
 
 <style lang="scss" scoped>

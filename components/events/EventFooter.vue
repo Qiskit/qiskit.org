@@ -4,16 +4,9 @@
   </footer>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
-
+<script setup lang="ts">
 const today = new Date()
-
-@Component
-export default class EventFooter extends Vue {
-  currentYear = today.getFullYear()
-}
+const currentYear = today.getFullYear()
 </script>
 
 <style lang="scss" scoped>

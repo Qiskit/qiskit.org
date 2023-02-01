@@ -11,19 +11,15 @@
   </section>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
+<script setup lang="ts">
 import '@qiskit/web-components/components/mega-menu-dropdown'
 import { LEARN_MEGA_MENU } from '~/constants/megaMenuLinks'
 
-@Component({})
-export default class LearnContentMenuSection extends Vue {
-  dropdownMenuContent = LEARN_MEGA_MENU
+const dropdownMenuContent = LEARN_MEGA_MENU
 
-  trackPerformedSearch (uiElement: string, field: string) {
-    this.$trackPerformedSearch(uiElement, field)
-  }
+function trackPerformedSearch (uiElement: string, field: string) {
+  // TODO: Refactor tracking
+  this.$trackPerformedSearch(uiElement, field)
 }
 </script>
 

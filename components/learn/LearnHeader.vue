@@ -29,62 +29,50 @@
   </header>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import type { VueConstructor } from 'vue'
-import { Component } from 'vue-property-decorator'
+<script setup lang="ts">
 import { LEARN_START_LEARNING } from '~/constants/appLinks'
 import { LEARN_MEGA_MENU } from '~/constants/megaMenuLinks'
 
-interface VueComponent extends Vue {
-  $el: HTMLElement
-  _uid: number
+const startLearningCTA = LEARN_START_LEARNING
+const dropdownMenuContent = LEARN_MEGA_MENU
+
+const appMegaDropdownMenuIsVisible = ref(true)
+let appMegaDropdownMenuObserver: IntersectionObserver | undefined
+
+const appMegaDropdownMenuId = computed(() => `app-mega-dropdown-menu-${this._uid}`)
+
+onMounted(() => {
+  connectAppMegaDropdownMenuObserver()
+})
+
+onBeforeUnmount(() => {
+  disconnectAppMegaDropdownMenuObserver()
+})
+
+function connectAppMegaDropdownMenuObserver () {
+  const appMegaDropdownMenuElement = this.$el.querySelector(`#${appMegaDropdownMenuId}`)
+
+  if (appMegaDropdownMenuElement) {
+    appMegaDropdownMenuObserver = new IntersectionObserver(updateAppMegaDropdownMenuLayout)
+    appMegaDropdownMenuObserver.observe(appMegaDropdownMenuElement)
+  }
 }
 
-@Component({})
-export default class LearnHeader extends (Vue as VueConstructor<VueComponent>) {
-  startLearningCTA = LEARN_START_LEARNING
-  dropdownMenuContent = LEARN_MEGA_MENU
-
-  appMegaDropdownMenuIsVisible = true
-  appMegaDropdownMenuObserver: IntersectionObserver | undefined
-
-  get appMegaDropdownMenuId () {
-    return `app-mega-dropdown-menu-${this._uid}`
+function disconnectAppMegaDropdownMenuObserver () {
+  if (appMegaDropdownMenuObserver) {
+    appMegaDropdownMenuObserver.disconnect()
   }
+}
 
-  mounted () {
-    this.connectAppMegaDropdownMenuObserver()
-  }
+function updateAppMegaDropdownMenuLayout (entries: Array<IntersectionObserverEntry>) {
+  entries.forEach(({ isIntersecting }) => {
+    appMegaDropdownMenuIsVisible.value = isIntersecting
+  })
+}
 
-  beforeDestroy () {
-    this.disconnectAppMegaDropdownMenuObserver()
-  }
-
-  connectAppMegaDropdownMenuObserver () {
-    const appMegaDropdownMenuElement = this.$el.querySelector(`#${this.appMegaDropdownMenuId}`)
-
-    if (appMegaDropdownMenuElement) {
-      this.appMegaDropdownMenuObserver = new IntersectionObserver(this.updateAppMegaDropdownMenuLayout)
-      this.appMegaDropdownMenuObserver.observe(appMegaDropdownMenuElement)
-    }
-  }
-
-  disconnectAppMegaDropdownMenuObserver () {
-    if (this.appMegaDropdownMenuObserver) {
-      this.appMegaDropdownMenuObserver.disconnect()
-    }
-  }
-
-  updateAppMegaDropdownMenuLayout (entries: Array<IntersectionObserverEntry>) {
-    entries.forEach(({ isIntersecting }) => {
-      this.appMegaDropdownMenuIsVisible = isIntersecting
-    })
-  }
-
-  trackPerformedSearch (uiElement: string, field: string) {
-    this.$trackPerformedSearch(uiElement, field)
-  }
+function trackPerformedSearch (uiElement: string, field: string) {
+  // TODO: Refactor tracking
+  this.$trackPerformedSearch(uiElement, field)
 }
 </script>
 

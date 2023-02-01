@@ -29,16 +29,15 @@
   </header>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
+<script setup lang="ts">
 import { GeneralLink } from '~/constants/appLinks'
 
-@Component
-export default class AppPageHeaderWithCard extends Vue {
-  @Prop({ type: String, required: true }) cardTitle!: string
-  @Prop({ type: Object, required: true }) cta!: GeneralLink
+interface Props {
+  cardTitle: string
+  cta: GeneralLink
 }
+
+defineProps<Props>()
 </script>
 
 <style lang="scss" scoped>

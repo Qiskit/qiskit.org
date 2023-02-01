@@ -16,20 +16,19 @@
   </nav>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
+<script setup lang="ts">
 import { TableOfContentEntry } from '~/constants/overviewContent'
 
-@Component
-export default class TheTableOfContents extends Vue {
-  @Prop({ type: Array, default: () => [] }) entries!: TableOfContentEntry[]
-  @Prop(String) activeSection!: string
-
-  isActive (entry: TableOfContentEntry): boolean {
-    return !!(entry.sectionId && (entry.sectionId === this.activeSection))
-  }
+interface Props {
+  entries: Array<TableOfContentEntry>
+  activeSection: string
 }
+
+const props = defineProps<Props>()
+
+const isActive = computed<boolean>((entry: TableOfContentEntry): boolean => {
+  return !!(entry.sectionId && (entry.sectionId === props.activeSection))
+})
 </script>
 
 <style lang="scss" scoped>

@@ -12,16 +12,17 @@
   </section>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
+<script setup lang="ts">
 import { DescriptionCard } from '~/components/ui/AppDescriptionCard.vue'
 
-@Component
-export default class AppHelpfulResourcesSection extends Vue {
-  @Prop(Array) resources!: DescriptionCard[]
-  @Prop({ type: String, default: 'Helpful Resources' }) title!: string
+interface Props {
+  resources: DescriptionCard[]
+  title?: string
 }
+
+withDefaults(defineProps<Props>(), {
+  title: 'Helpful Resources'
+})
 </script>
 
 <style lang="scss" scoped>

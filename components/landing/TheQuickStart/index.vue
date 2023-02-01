@@ -21,14 +21,6 @@
   </article>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
-
-@Component
-export default class TheQuickStart extends Vue {}
-</script>
-
 <style lang="scss" scoped>
 .quick-start {
   &__description {

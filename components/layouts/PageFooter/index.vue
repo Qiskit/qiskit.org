@@ -60,25 +60,26 @@
   </footer>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
-
+<script setup lang="ts">
 import {
   FOOTER_ELEMENTS,
   SECONDARY_FOOTER_LINKS,
   STAY_CONNECTED_LINKS
 } from '~/constants/menuLinks'
 
-@Component
-export default class PageFooter extends Vue {
-  @Prop({ type: Boolean, default: false, required: false }) oldContainer!: boolean;
-  @Prop({ type: String, default: 'light' }) theme!: string
-
-  footerElements = FOOTER_ELEMENTS
-  stayConnectedElements = STAY_CONNECTED_LINKS
-  secondaryFooterLinks = SECONDARY_FOOTER_LINKS
+interface Props {
+  oldContainer?: boolean
+  theme?: 'light' | 'dark'
 }
+
+withDefaults(defineProps<Props>(), {
+  oldContainer: false,
+  theme: 'light'
+})
+
+const footerElements = FOOTER_ELEMENTS
+const stayConnectedElements = STAY_CONNECTED_LINKS
+const secondaryFooterLinks = SECONDARY_FOOTER_LINKS
 </script>
 
 <style lang="scss" scoped>

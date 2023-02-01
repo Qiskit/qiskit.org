@@ -7,82 +7,83 @@
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 // Implementation based on https://github.com/webnoobcodes/vuejs-typeeffect
-import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
 
-@Component
-export default class TypewriterEffect extends Vue {
-  @Prop({ type: Number, default: 0 }) startingIndex!: number
-  @Prop({ type: Array, default: () => [] }) values!: string[]
-  @Prop({ type: Number, default: 100 }) typingDelay!: number
-  @Prop({ type: Number, default: 75 }) erasingDelay!: number
-  @Prop({ type: Number, default: 2000 }) persistence!: number
-  @Prop({ type: Number, default: 600 }) newValueDelay!: number
+interface Props {
+  erasingDelay?: number;
+  newValueDelay?: number;
+  persistence?: number;
+  startingIndex?: number;
+  typingDelay?: number;
+  values?: string[];
+}
 
-  content: string = ''
-  currentValueIdx: number = 0
-  showCursor: boolean = false
+const props = withDefaults(defineProps<Props>(), {
+  erasingDelay: 75,
+  newValueDelay: 600,
+  persistence: 2000,
+  startingIndex: 0,
+  typingDelay: 100,
+  values: () => []
+})
 
-  get targetValue (): string {
-    return this.values[this.currentValueIdx]
-  }
+const content = ref('')
+const currentValueIdx = ref(0)
+const showCursor = ref(false)
 
-  get contentLength (): number {
-    return this.content.length
-  }
+const targetValue = computed(() => props.values[currentValueIdx.value])
 
-  typeText () {
-    const targetCompleted = this.contentLength === this.targetValue.length
+const contentLength = computed(() => content.value.length)
 
-    if (targetCompleted) {
-      this.eraseCurrentValue()
-    } else {
-      this.content = this.targetValue.substring(0, this.contentLength + 1)
-      this.typeNextCharacter()
-    }
-  }
+function typeText () {
+  const targetCompleted = contentLength.value === targetValue.value.length
 
-  eraseText () {
-    const noContent = this.contentLength === 0
-
-    if (noContent) {
-      this.typeNextValue()
-    } else {
-      this.content = this.content.substring(0, this.contentLength - 1)
-      this.eraseNextCharacter()
-    }
-  }
-
-  typeNextValue () {
-    this.showCursor = true
-    this.currentValueIdx = (this.currentValueIdx + 1) % this.values.length
-    setTimeout(() => {
-      this.showCursor = false
-      this.typeText()
-    }, this.newValueDelay)
-  }
-
-  typeNextCharacter () {
-    setTimeout(this.typeText, this.typingDelay)
-  }
-
-  eraseCurrentValue () {
-    setTimeout(this.eraseText, this.persistence)
-  }
-
-  eraseNextCharacter () {
-    setTimeout(this.eraseText, this.erasingDelay)
-  }
-
-  created () {
-    this.content = this.values[this.startingIndex] || ''
-    this.currentValueIdx = this.startingIndex
-    this.eraseCurrentValue()
+  if (targetCompleted) {
+    eraseCurrentValue()
+  } else {
+    content.value = targetValue.value.substring(0, contentLength.value + 1)
+    typeNextCharacter()
   }
 }
 
+function eraseText () {
+  const noContent = contentLength.value === 0
+
+  if (noContent) {
+    typeNextValue()
+  } else {
+    content.value = content.value.substring(0, contentLength.value - 1)
+    eraseNextCharacter()
+  }
+}
+
+function typeNextValue () {
+  showCursor.value = true
+  currentValueIdx.value = (currentValueIdx.value + 1) % props.values.length
+  setTimeout(() => {
+    showCursor.value = false
+    typeText()
+  }, props.newValueDelay)
+}
+
+function typeNextCharacter () {
+  setTimeout(typeText, props.typingDelay)
+}
+
+function eraseCurrentValue () {
+  setTimeout(eraseText, props.persistence)
+}
+
+function eraseNextCharacter () {
+  setTimeout(eraseText, props.erasingDelay)
+}
+
+onMounted(() => {
+  content.value = props.values[props.startingIndex] || ''
+  currentValueIdx.value = props.startingIndex
+  eraseCurrentValue()
+})
 </script>
 
 <style lang="scss" scoped>
