@@ -109,104 +109,106 @@
   </main>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import { mapGetters } from 'vuex'
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import { GeneralLink } from '~/constants/appLinks'
 
-@Component({
-  head () {
-    return {
-      title: 'Qiskit Ecosystem',
-      meta: [
-        {
-          name: 'description',
-          content:
-            'The Ecosystem consists of projects, tools, utilities, libraries and tutorials from a broad community of developers and researchers. The goal of the Ecosystem is to celebrate, support and accelerate development of quantum technologies using Qiskit.'
-        }
-      ]
-    }
-  },
-  layout: 'default-max',
-  computed: {
-    ...mapGetters('ecosystem', ['filteredMembers', 'tierFilters', 'tiers'])
-  },
-  async fetch ({ store }) {
-    await store.dispatch('ecosystem/fetchMembers')
-    await store.dispatch('ecosystem/fetchTiers')
-  },
-  methods: {
-    getTestRows (member: any): void {
-      if (member.testsResults) {
-        return member.testsResults.map((res: any) => {
-          // make tiemstamp human readable
-          const timestamp = new Date(res.timestamp * 1000).toLocaleString(
-            'en-UK',
-            {
-              timeZone: 'UTC'
-            }
-          )
-          // Convert package name to title case
-          let packageName
-          if (res.package) {
-            packageName = res.package
-              .replaceAll('-', ' ')
-              .split(' ')
-              .map((s: string) => s.charAt(0).toUpperCase() + s.substring(1))
-              .join(' ')
-          }
-
-          return {
-            packageName,
-            packageVersion: res.packageVersion,
-            testType: res.testType,
-            passed: res.passed,
-            timestamp,
-            logsLink: res.logsLink
-          }
-        })
-      }
-    },
-
-    getTierNames (tiers: any) {
-      const tierNames = tiers.map((tier: any) => tier.name)
-      return tierNames
-    },
-
-    getTierDescription (tier: string) {
-      const tip = (this as any).tiers.find((tip: any) => tip.name === tier)
-      return tip.description || ''
-    },
-
-    updateTierFilter (tier: string, isChecked: boolean): void {
-      const tierFilters = (this as any).tierFilters.filter(
-        (oldOption: any) => oldOption !== tier
-      )
-
-      if (isChecked) {
-        tierFilters.push(tier)
-      }
-      this.$store.commit('ecosystem/setTierFilters', tierFilters)
-    },
-
-    updateTierFilters (tierFilters: string[]): void {
-      this.$store.commit('ecosystem/setTierFilters', tierFilters)
-    },
-
-    isTierFilterChecked (filterValue: string): boolean {
-      return (this as any).tierFilters.includes(filterValue)
-    }
-  }
+definePageMeta({
+  layout: 'default-max'
 })
-export default class EcosystemPage extends QiskitPage {
-  routeName: string = 'ecosystem';
 
-  joinAction: GeneralLink = {
-    url: 'https://github.com/qiskit-community/ecosystem#ecosystem--',
-    label: 'Join the ecosystem'
-  };
+useHead({
+  title: 'Qiskit Ecosystem',
+  meta: [
+    {
+      name: 'description',
+      content: 'The Ecosystem consists of projects, tools, utilities, libraries and tutorials from a broad community of developers and researchers. The goal of the Ecosystem is to celebrate, support and accelerate development of quantum technologies using Qiskit.'
+    }
+  ]
+})
+
+function getTestRows (member: any): void {
+  if (member.testsResults) {
+    return member.testsResults.map((res: any) => {
+      // make tiemstamp human readable
+      const timestamp = new Date(res.timestamp * 1000).toLocaleString(
+        'en-UK',
+        {
+          timeZone: 'UTC'
+        }
+      )
+      // Convert package name to title case
+      let packageName
+      if (res.package) {
+        packageName = res.package
+          .replaceAll('-', ' ')
+          .split(' ')
+          .map((s: string) => s.charAt(0).toUpperCase() + s.substring(1))
+          .join(' ')
+      }
+
+      return {
+        packageName,
+        packageVersion: res.packageVersion,
+        pythonVersion: res.pythonVersion,
+        qiskitVersion: res.qiskitVersion,
+        status: res.status,
+        timestamp
+      }
+    })
+  }
 }
+
+function getTierNames (tiers: any): void {
+  return tiers.map((tier: any) => tier.name)
+}
+
+function getTierDescription (tier: string): string {
+  const tip = (this as any).tiers.find((tip: any) => tip.name === tier)
+  return tip.description || ''
+}
+
+function updateTierFilter (tier: string, isChecked: boolean): void {
+  const tierFilters = (this as any).tierFilters.filter(
+    (oldOption: any) => oldOption !== tier
+  )
+
+  if (isChecked) {
+    tierFilters.push(tier)
+  }
+  this.$store.commit('ecosystem/setTierFilters', tierFilters)
+}
+
+function updateTierFilters (tierFilters: string[]): void {
+  this.$store.commit('ecosystem/setTierFilters', tierFilters)
+}
+
+function isTierFilterChecked (filterValue: string): boolean {
+  return (this as any).tierFilters.includes(filterValue)
+}
+
+// TODO: Replace Vuex with Pinia
+// @Component({
+//   computed: {
+//     ...mapGetters('ecosystem', ['filteredMembers', 'tierFilters', 'tiers'])
+//   },
+//   async fetch ({ store }) {
+//     await store.dispatch('ecosystem/fetchMembers')
+//     await store.dispatch('ecosystem/fetchTiers')
+//   },
+// })
+
+// TODO: Refactor "logic" pages
+// export default class EcosystemPage extends QiskitPage {
+//   routeName: string = 'ecosystem';
+
+//   joinAction: GeneralLink = {
+//     url: 'https://github.com/qiskit-community/ecosystem#ecosystem--',
+//     label: 'Join the ecosystem'
+//   };
+// }
 </script>
 
 <style lang="scss">

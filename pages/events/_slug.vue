@@ -33,10 +33,14 @@
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import { Component } from 'vue-property-decorator'
 import { Context } from '@nuxt/types'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
+
+definePageMeta({
+  layout: 'event'
+})
 
 function getBackgroundUris (background: string): [string, string] {
   const bgRoute = '/images/events/headers/'
@@ -45,38 +49,41 @@ function getBackgroundUris (background: string): [string, string] {
   return [lBackgroundUri, hBackgroundUri]
 }
 
-@Component({
-  layout: 'event',
-  head () {
-    const self = this as any
+// TODO: Refactor "logic" pages
+// TODO: Refactor async data fetching in pages
+// @Component({
+//   head () {
+//     const self = this as any
+//
+//     return {
+//       title: self.title,
+//       bodyAttrs: {
+//         id: 'event-body'
+//       }
+//     }
+//   },
+//   async asyncData (context: Context) {
+//     const sourceName = context.route.params.slug
+//     if (sourceName === 'undefined') {
+//       return
+//     }
+//     const definition = await import(`~/content/events/${sourceName}.md`)
+//     const [lBackgroundUri, hBackgroundUri] =
+//       getBackgroundUris(definition.attributes.background)
+//     return {
+//       event: definition,
+//       uri: {
+//         hBackground: hBackgroundUri,
+//         lBackground: lBackgroundUri
+//       }
+//     }
+//   }
+// })
 
-    return {
-      title: self.title,
-      bodyAttrs: {
-        id: 'event-body'
-      }
-    }
-  },
-  async asyncData (context: Context) {
-    const sourceName = context.route.params.slug
-    if (sourceName === 'undefined') {
-      return
-    }
-    const definition = await import(`~/content/events/${sourceName}.md`)
-    const [lBackgroundUri, hBackgroundUri] =
-      getBackgroundUris(definition.attributes.background)
-    return {
-      event: definition,
-      uri: {
-        hBackground: hBackgroundUri,
-        lBackground: lBackgroundUri
-      }
-    }
-  }
-})
-export default class EventEntry extends QiskitPage {
-  routeName = 'events-entry'
-}
+// TODO: Refactor "logic" pages
+// export default class EventEntry extends QiskitPage {
+//   routeName = 'events-entry'
+// }
 </script>
 
 <style scoped>

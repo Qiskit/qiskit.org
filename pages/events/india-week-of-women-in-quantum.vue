@@ -68,8 +68,7 @@
   </main>
 </template>
 
-<script lang="ts">
-import { Component } from 'vue-property-decorator'
+<script setup lang="ts">
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 
 interface dailyAgenda {
@@ -79,135 +78,134 @@ interface dailyAgenda {
   affiliation: string
 }
 
-@Component({
-  head () {
-    const title = 'India Week Of Women In Quantum 2021'
-    const description = `The Qiskit India Week of Quantum is a three-day event designed to celebrate
-    women in quantum and their remarkable journeys. Listen to the life stories of how these amazing
-    women launched their careers in quantum and learn how they overcame the challenges they faced.`
-    const ogImage = '/images/events/india-week-of-women-in-quantum/india-week-of-women-in-quantum-logo.png'
-    const image = `${this.$config.baseURL}${ogImage}`
-
-    return {
-      title,
-      meta: [
-        {
-          hid: 'twitter:card',
-          name: 'twitter:card',
-          content: 'summary'
-        },
-        {
-          hid: 'twitter:title',
-          name: 'twitter:title',
-          content: title
-        },
-        {
-          hid: 'twitter:description',
-          name: 'twitter:description',
-          content: description
-        },
-        {
-          hid: 'twitter:image',
-          name: 'twitter:image',
-          content: image
-        },
-        {
-          hid: 'twitter:image:alt',
-          name: 'twitter:image:alt',
-          content: title
-        },
-        {
-          hid: 'og:title',
-          property: 'og:title',
-          content: title
-        },
-        {
-          hid: 'og:description',
-          property: 'og:description',
-          content: description
-        },
-        {
-          hid: 'og:image',
-          property: 'og:image',
-          content: image
-        },
-        {
-          hid: 'og:image:secure_url',
-          property: 'og:image:secure_url',
-          content: image
-        },
-        {
-          hid: 'og:image:alt',
-          property: 'og:image:alt',
-          content: title
-        }
-      ]
-    }
-  },
+definePageMeta({
   layout: 'default-max'
 })
-export default class IndiaWeekOfWomenInQuantumPage extends QiskitPage {
-  routeName = 'india-week-of-women-in-quantum'
-  headerData = {
-    title: 'Qiskit India Week of Quantum',
-    cta: {
-      label: 'Register Now',
-      url: 'http://qisk.it/IndiaWeekReg',
-      segment: {
-        cta: 'register',
-        location: 'header'
-      }
+
+const title = 'India Week Of Women In Quantum 2021'
+const description = `The Qiskit India Week of Quantum is a three-day event designed to celebrate
+women in quantum and their remarkable journeys. Listen to the life stories of how these amazing
+women launched their careers in quantum and learn how they overcame the challenges they faced.`
+const ogImage = '/images/events/india-week-of-women-in-quantum/india-week-of-women-in-quantum-logo.png'
+const image = `${this.$config.baseURL}${ogImage}`
+
+useHead({
+  title: 'Qiskit Events',
+  meta: [
+    {
+      hid: 'twitter:card',
+      name: 'twitter:card',
+      content: 'summary'
     },
-    cardSectionHeading: 'About the event:',
-    card: {
-      image: '/images/common/photos/two-women-with-the-quantum-computer.png',
-      title: 'Qiskit India Week of Quantum',
-      description: 'This August, join the Qiskit community to celebrate women in quantum and their remarkable journeys.',
-      location: 'Online',
-      date: 'August 25 - 27, 2021'
+    {
+      hid: 'twitter:title',
+      name: 'twitter:title',
+      content: title
+    },
+    {
+      hid: 'twitter:description',
+      name: 'twitter:description',
+      content: description
+    },
+    {
+      hid: 'twitter:image',
+      name: 'twitter:image',
+      content: image
+    },
+    {
+      hid: 'twitter:image:alt',
+      name: 'twitter:image:alt',
+      content: title
+    },
+    {
+      hid: 'og:title',
+      property: 'og:title',
+      content: title
+    },
+    {
+      hid: 'og:description',
+      property: 'og:description',
+      content: description
+    },
+    {
+      hid: 'og:image',
+      property: 'og:image',
+      content: image
+    },
+    {
+      hid: 'og:image:secure_url',
+      property: 'og:image:secure_url',
+      content: image
+    },
+    {
+      hid: 'og:image:alt',
+      property: 'og:image:alt',
+      content: title
     }
+  ]
+})
+
+const headerData = {
+  title: 'Qiskit India Week of Quantum',
+  cta: {
+    label: 'Register Now',
+    url: 'http://qisk.it/IndiaWeekReg',
+    segment: {
+      cta: 'register',
+      location: 'header'
+    }
+  },
+  cardSectionHeading: 'About the event:',
+  card: {
+    image: '/images/common/photos/two-women-with-the-quantum-computer.png',
+    title: 'Qiskit India Week of Quantum',
+    description: 'This August, join the Qiskit community to celebrate women in quantum and their remarkable journeys.',
+    location: 'Online',
+    date: 'August 25 - 27, 2021'
   }
+}
 
-  mosaicData = {
-    title: 'What is Qiskit India Week of Quantum?',
-    tiles: [
-      {
-        position: 'first',
-        title: 'Listen to the stories of Experts',
-        description: 'Listen & interact directly with world-leading experts in quantum, who are making an impact with their work.',
-        image: '/images/common/illustrations/two-women-with-the-quantum-computer.png'
-      },
-      {
-        position: 'second',
-        title: 'Kickstart your Quantum Journey',
-        description: 'Learn how you can program quantum computers using Qiskit and discover new and exciting opportunities.',
-        image: '/images/events/india-week-of-women-in-quantum/team-working-on-a-project.png'
-      },
-      {
-        position: 'third',
-        title: 'Network and Interact',
-        description: 'Meet and network with people already in quantum and learn quantum computing together.',
-        image: '/images/common/photos/people-on-discussion-in-front-of-a-computer.jpg'
-      },
-      {
-        position: 'fourth',
-        title: 'A panel of experts: From Academia to Industry ',
-        description: `Watch a lively discussion between our panelists on how to bridge the gender gap in quantum computing and how we can create stronger and sustainable careers for women in quantum.<br><br>
-          <strong>Our panellists include:</strong><br>
-          <ul>
-            <li>Dr. Aditi Sen De</li>
-            <li>Dr. Kavita Dorai</li>
-            <li>Dr. Kasturi Saha</li>
-            <li>Tina Sebastian</li>
-          </ul>`,
-        image: '/images/common/illustrations/people-on-discussion.png'
-      }
-    ]
-  }
+const mosaicData = {
+  title: 'What is Qiskit India Week of Quantum?',
+  tiles: [
+    {
+      position: 'first',
+      title: 'Listen to the stories of Experts',
+      description: 'Listen & interact directly with world-leading experts in quantum, who are making an impact with their work.',
+      image: '/images/common/illustrations/two-women-with-the-quantum-computer.png'
+    },
+    {
+      position: 'second',
+      title: 'Kickstart your Quantum Journey',
+      description: 'Learn how you can program quantum computers using Qiskit and discover new and exciting opportunities.',
+      image: '/images/events/india-week-of-women-in-quantum/team-working-on-a-project.png'
+    },
+    {
+      position: 'third',
+      title: 'Network and Interact',
+      description: 'Meet and network with people already in quantum and learn quantum computing together.',
+      image: '/images/common/photos/people-on-discussion-in-front-of-a-computer.jpg'
+    },
+    {
+      position: 'fourth',
+      title: 'A panel of experts: From Academia to Industry ',
+      description: `Watch a lively discussion between our panelists on how to bridge the gender gap in quantum computing and how we can create stronger and sustainable careers for women in quantum.<br><br>
+        <strong>Our panellists include:</strong><br>
+        <ul>
+          <li>Dr. Aditi Sen De</li>
+          <li>Dr. Kavita Dorai</li>
+          <li>Dr. Kasturi Saha</li>
+          <li>Tina Sebastian</li>
+        </ul>`,
+      image: '/images/common/illustrations/people-on-discussion.png'
+    }
+  ]
+}
 
-  agendaColumnsDataTable: string[] = ['Time', 'Event', 'Speaker', 'Affiliation']
+const agendaColumnsDataTable: string[] = ['Time', 'Event', 'Speaker', 'Affiliation']
 
-  scheduleToTableData = (slot: dailyAgenda) => ([
+function scheduleToTableData (slot: dailyAgenda) {
+  return [
     {
       styles: 'min-width: 10rem; display: inline-block; font-weight: bold;',
       data: slot.time
@@ -224,151 +222,156 @@ export default class IndiaWeekOfWomenInQuantumPage extends QiskitPage {
       styles: 'min-width: 15rem; display: inline-block; padding-top: 8px; padding-bottom: 8px',
       data: slot.affiliation
     }
-  ])
-
-  day1Schedule: dailyAgenda[] = [
-    {
-      time: '5:00 pm - 5:15 pm IST',
-      event: 'Kick-off event',
-      speaker: 'Yuri Kobayashi',
-      affiliation: 'IBM Quantum'
-    },
-    {
-      time: '5:15 pm - 6:00 pm IST',
-      event: 'Journey in Quantum- an academic perspective',
-      speaker: 'Dr. Aditi Sen De',
-      affiliation: 'Harish-Chandra Research Institute'
-    },
-    {
-      time: '6:00 pm - 6:45 pm IST',
-      event: 'Journey in Quantum- an industrial perspective',
-      speaker: 'Dr. Sonali Mohapatra',
-      affiliation: 'Craft Prospect Limited'
-    }
   ]
-
-  day2Schedule: dailyAgenda[] = [
-    {
-      time: '5:00 pm - 6:00 pm IST',
-      event: 'Quantum Computing workshop',
-      speaker: 'Dr. Anupama Ray',
-      affiliation: 'IBM Research, India'
-    },
-    {
-      time: '6:00pm - 6:45 pm IST',
-      event: 'Qiskit Community talks',
-      speaker: `<ul>
-        <li>Dr. Manjula Gandhi</li>
-        <li>Kavitha Yogaraj</li>
-        <li>Sabhyata Gupta</li>
-      </ul>`,
-      affiliation: `<ul>
-        <li>Coimbatore Institute of Technology</li>
-        <li>IBM GBS India</li>
-        <li>University of Barcelona</li>
-      </ul>`
-    }
-  ]
-
-  day3Schedule: dailyAgenda[] = [
-    {
-      time: '5:00 pm - 6:15 pm IST',
-      event: 'Panel Discussion - equal representation of women in quantum',
-      speaker: `<ul>
-        <li>Dr. Aditi Sen De</li>
-        <li>Dr. Kavita Dorai</li>
-        <li>Dr. Kasturi Saha</li>
-        <li>Tina Sebastian</li>
-        <li>Sabhyata Gupta (Moderator)</li>
-      </ul>`,
-      affiliation: `<ul>
-        <li>Harish-Chandra Research Institute</li>
-        <li>IISER Mohali</li>
-        <li>IIT Bombay</li>
-        <li>Quacoon</li>
-        <li>University of Barcelona</li>
-      </ul>`
-    },
-    {
-      time: '6:15 pm - 6:45 pm IST',
-      event: 'Networking + Career Booth',
-      speaker: '',
-      affiliation: ''
-    }
-  ]
-
-  agendaData = {
-    title: 'Event Schedule',
-    days: [
-      {
-        tabName: 'Day 1',
-        tableData: this.day1Schedule.map(this.scheduleToTableData)
-      },
-      {
-        tabName: 'Day 2',
-        tableData: this.day2Schedule.map(this.scheduleToTableData)
-      },
-      {
-        tabName: 'Day 3',
-        tableData: this.day3Schedule.map(this.scheduleToTableData)
-      }
-    ]
-  }
-
-  helpfulResourcesData = {
-    title: 'Helpful Resources',
-    resources: [
-      {
-        title: 'Let us know if you have any questions!',
-        description: 'If your have any questions please use this form to submit your enquiries direct to the team.',
-        cta: {
-          url: 'https://qisk.it/3CbE1O4',
-          label: 'Enquire now',
-          segment: {
-            cta: 'india-week-women-in-quantum-enquiry-form',
-            location: 'helpful-resources'
-          }
-        }
-      },
-      {
-        title: 'Learning Resources',
-        description: 'Start your path towards learning Quantum Information Science.',
-        cta: {
-          url: 'https://qiskit.org/learn',
-          label: 'Learning resources',
-          segment: {
-            cta: 'learn-page',
-            location: 'helpful-resources'
-          }
-        }
-      },
-      {
-        title: 'Qiskit Medium',
-        description: "This blog provides a nice overview of Qiskit and its direction as we explore what applications can be done on today's quantum devices",
-        cta: {
-          url: 'https://medium.com/qiskit/qiskit-and-its-fundamental-elements-bcd7ead80492',
-          label: 'Read the blog',
-          segment: {
-            cta: 'qiskit-medium',
-            location: 'helpful-resources'
-          }
-        }
-      },
-      {
-        title: 'Code of conduct',
-        description: 'Qiskit is dedicated to providing an enjoyable and safe experience for all participants. We have a code of conduct that all events adhere to.',
-        cta: {
-          url: 'https://github.com/Qiskit/qiskit/blob/master/CODE_OF_CONDUCT.md',
-          label: 'See code of conduct',
-          segment: {
-            cta: 'code-of-conduct',
-            location: 'helpful-resources'
-          }
-        }
-      }
-    ]
-  }
 }
+
+const day1Schedule: dailyAgenda[] = [
+  {
+    time: '5:00 pm - 5:15 pm IST',
+    event: 'Kick-off event',
+    speaker: 'Yuri Kobayashi',
+    affiliation: 'IBM Quantum'
+  },
+  {
+    time: '5:15 pm - 6:00 pm IST',
+    event: 'Journey in Quantum- an academic perspective',
+    speaker: 'Dr. Aditi Sen De',
+    affiliation: 'Harish-Chandra Research Institute'
+  },
+  {
+    time: '6:00 pm - 6:45 pm IST',
+    event: 'Journey in Quantum- an industrial perspective',
+    speaker: 'Dr. Sonali Mohapatra',
+    affiliation: 'Craft Prospect Limited'
+  }
+]
+
+const day2Schedule: dailyAgenda[] = [
+  {
+    time: '5:00 pm - 6:00 pm IST',
+    event: 'Quantum Computing workshop',
+    speaker: 'Dr. Anupama Ray',
+    affiliation: 'IBM Research, India'
+  },
+  {
+    time: '6:00pm - 6:45 pm IST',
+    event: 'Qiskit Community talks',
+    speaker: `<ul>
+      <li>Dr. Manjula Gandhi</li>
+      <li>Kavitha Yogaraj</li>
+      <li>Sabhyata Gupta</li>
+    </ul>`,
+    affiliation: `<ul>
+      <li>Coimbatore Institute of Technology</li>
+      <li>IBM GBS India</li>
+      <li>University of Barcelona</li>
+    </ul>`
+  }
+]
+
+const day3Schedule: dailyAgenda[] = [
+  {
+    time: '5:00 pm - 6:15 pm IST',
+    event: 'Panel Discussion - equal representation of women in quantum',
+    speaker: `<ul>
+      <li>Dr. Aditi Sen De</li>
+      <li>Dr. Kavita Dorai</li>
+      <li>Dr. Kasturi Saha</li>
+      <li>Tina Sebastian</li>
+      <li>Sabhyata Gupta (Moderator)</li>
+    </ul>`,
+    affiliation: `<ul>
+      <li>Harish-Chandra Research Institute</li>
+      <li>IISER Mohali</li>
+      <li>IIT Bombay</li>
+      <li>Quacoon</li>
+      <li>University of Barcelona</li>
+    </ul>`
+  },
+  {
+    time: '6:15 pm - 6:45 pm IST',
+    event: 'Networking + Career Booth',
+    speaker: '',
+    affiliation: ''
+  }
+]
+
+const agendaData = computed(() => ({
+  title: 'Event Schedule',
+  days: [
+    {
+      tabName: 'Day 1',
+      tableData: day1Schedule.map(scheduleToTableData)
+    },
+    {
+      tabName: 'Day 2',
+      tableData: day2Schedule.map(scheduleToTableData)
+    },
+    {
+      tabName: 'Day 3',
+      tableData: day3Schedule.map(scheduleToTableData)
+    }
+  ]
+}))
+
+const helpfulResourcesData = {
+  title: 'Helpful Resources',
+  resources: [
+    {
+      title: 'Let us know if you have any questions!',
+      description: 'If your have any questions please use this form to submit your enquiries direct to the team.',
+      cta: {
+        url: 'https://qisk.it/3CbE1O4',
+        label: 'Enquire now',
+        segment: {
+          cta: 'india-week-women-in-quantum-enquiry-form',
+          location: 'helpful-resources'
+        }
+      }
+    },
+    {
+      title: 'Learning Resources',
+      description: 'Start your path towards learning Quantum Information Science.',
+      cta: {
+        url: 'https://qiskit.org/learn',
+        label: 'Learning resources',
+        segment: {
+          cta: 'learn-page',
+          location: 'helpful-resources'
+        }
+      }
+    },
+    {
+      title: 'Qiskit Medium',
+      description: "This blog provides a nice overview of Qiskit and its direction as we explore what applications can be done on today's quantum devices",
+      cta: {
+        url: 'https://medium.com/qiskit/qiskit-and-its-fundamental-elements-bcd7ead80492',
+        label: 'Read the blog',
+        segment: {
+          cta: 'qiskit-medium',
+          location: 'helpful-resources'
+        }
+      }
+    },
+    {
+      title: 'Code of conduct',
+      description: 'Qiskit is dedicated to providing an enjoyable and safe experience for all participants. We have a code of conduct that all events adhere to.',
+      cta: {
+        url: 'https://github.com/Qiskit/qiskit/blob/master/CODE_OF_CONDUCT.md',
+        label: 'See code of conduct',
+        segment: {
+          cta: 'code-of-conduct',
+          location: 'helpful-resources'
+        }
+      }
+    }
+  ]
+}
+
+// TODO: Refactor "logic" pages
+// export default class IndiaWeekOfWomenInQuantumPage extends QiskitPage {
+//   routeName = 'india-week-of-women-in-quantum'
+// }
 </script>
 
 <style lang="scss" scoped>
