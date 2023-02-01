@@ -41,7 +41,7 @@ interface Props {
 
 const props = defineProps<Props>()
 
-function isVideo = computed<boolean>(() => {
+const isVideo = computed<boolean>(() => {
   const extension = props.visualResource.substring(props.visualResource.length - 4)
   return extension === '.mp4'
 })
