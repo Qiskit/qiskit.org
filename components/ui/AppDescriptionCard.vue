@@ -15,9 +15,7 @@
   </article>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
+<script setup lang="ts">
 import { GeneralLink } from '~/constants/appLinks'
 
 export type DescriptionCard = {
@@ -26,12 +24,13 @@ export type DescriptionCard = {
   cta: GeneralLink
 }
 
-@Component
-export default class AppDescriptionCard extends Vue {
-  @Prop(String) title!: string
-  @Prop(String) description!: string
-  @Prop(Object) cta!: GeneralLink
+interface Props {
+  cta: GeneralLink
+  description: string
+  title: string
 }
+
+defineProps<Props>()
 </script>
 
 <style lang="scss" scoped>

@@ -51,49 +51,50 @@
   </AppDataTable>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
+<script setup lang="ts">
 import { TableRowElement } from '~/components/ui/AppDataTable.vue'
 
-@Component
-export default class TestTable extends Vue {
-  @Prop({ type: Array, default: () => [['', '', '']] }) filteredData!: Object[]
+interface Props {
+  filteredData?: Object[];
+}
 
-  testTypeTooltip = {
-    development: 'This test type indicates the ecosystem tests were run for this package using the latest development version of Qiskit',
-    stable: 'This test type indicates the ecosystem tests were run for this package using the latest stable version of Qiskit',
-    standard: 'This test type means the ecosystem tests were run for this package using the Qiskit version specified in the package requirements',
-    'last passing version': 'This test type means the results in this row show the latest version of Qiskit for which the ecosystem tests pass for this package'
-  }
+const props = withDefaults(defineProps<Props>(), {
+  filteredData: () => [['', '', '']]
+})
 
-  tableData = this.dataPerRow(this.filteredData);
+const testTypeTooltip = {
+  development: 'This test type indicates the ecosystem tests were run for this package using the latest development version of Qiskit',
+  stable: 'This test type indicates the ecosystem tests were run for this package using the latest stable version of Qiskit',
+  standard: 'This test type means the ecosystem tests were run for this package using the Qiskit version specified in the package requirements',
+  'last passing version': 'This test type means the results in this row show the latest version of Qiskit for which the ecosystem tests pass for this package'
+}
 
-  dataPerRow (filteredData: Object[]): TableRowElement[][] {
-    return filteredData.map(
-      ({ passed, testType, packageVersion, logsLink, packageName }: any) => [
-        {
-          component: passed,
-          styles: passed ? '#42be65' : '#da1e28',
-          data: ''
-        },
-        {
-          component: 'span',
-          data: testType,
-          addTooltip: true
-        },
-        {
-          component: 'span',
-          data: packageVersion,
-          packageName
-        },
-        {
-          component: 'link',
-          data: logsLink
-        }
-      ]
-    )
-  }
+const tableData = computed(() => dataPerRow(props.filteredData))
+
+function dataPerRow (filteredData: Object[]): TableRowElement[][] {
+  return filteredData.map(
+    ({ passed, testType, packageVersion, logsLink, packageName }: any) => [
+      {
+        component: passed,
+        styles: passed ? '#42be65' : '#da1e28',
+        data: ''
+      },
+      {
+        component: 'span',
+        data: testType,
+        addTooltip: true
+      },
+      {
+        component: 'span',
+        data: packageVersion,
+        packageName
+      },
+      {
+        component: 'link',
+        data: logsLink
+      }
+    ]
+  )
 }
 </script>
 

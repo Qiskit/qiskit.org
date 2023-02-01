@@ -5,8 +5,7 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue-demi'
+<script setup lang="ts">
 /*
 These numbers are the count of the results of executing a quantum circuit:
 
@@ -106,131 +105,138 @@ interface GridCell {
   delay: number;
 }
 
-export default defineComponent({
-  name: 'DynamicBackgroundLogo',
-  props: {
-    pixelDensity: { type: Number, required: false, default: 2 },
-    initialDrawSpeed: { type: Number, required: false, default: 5 }
-  },
-  data () {
-    return {
-      parentWidth: 0,
-      parentHeight: 0,
-      squareSizeWithSpacing: 0,
-      squareSize: 0,
-      drawSpeed: 0,
-      animationProgress: 0,
-      gridData: [[]] as GridCell[][],
-      lastRender: 0
-    }
-  },
-  computed: {
-    maskHeight: () : number => imgMask.length,
-    maskWidth: () : number => imgMask[0].length,
-    parent () : HTMLElement { return this.$refs.canvasWrapper as HTMLElement },
-    canvas () : HTMLCanvasElement { return this.$refs.canvas as HTMLCanvasElement },
-    renderingContext () : CanvasRenderingContext2D { return this.canvas.getContext('2d')! }
-  },
-  mounted () {
-    this.initRenderLoop()
-  },
-  methods: {
-    initRenderLoop () {
-      this.renderingContext.globalCompositeOperation = 'destination-atop'
+interface Props {
+  pixelDensity?: number;
+  initialDrawSpeed?: number;
+}
 
-      this.drawSpeed = this.initialDrawSpeed * DRAWSPEED_CORRECTION
+const props = withDefaults(defineProps<Props>(), {
+  pixelDensity: 2,
+  initialDrawSpeed: 5
+})
 
-      window.addEventListener('resize', this.resize)
-      window.addEventListener('keydown', this.interactionRedraw)
-      window.addEventListener('touchstart', this.interactionRedraw)
-      this.resize()
+const canvasWrapperRef = ref<HTMLElement>(null)
+const canvasRef = ref<HTMLCanvasElement>(null)
 
-      this.randomizeMask()
-      window.requestAnimationFrame(this.loop)
-    },
-    loop (timestamp : DOMHighResTimeStamp) {
-      if (this.lastRender === 0) {
-        this.lastRender = timestamp
+const parentWidth = ref(0)
+const parentHeight = ref(0)
+const squareSizeWithSpacing = ref(0)
+const squareSize = ref(0)
+const drawSpeed = ref(0)
+const animationProgress = ref(0)
+const gridData = reactive<GridCell[][]>([[]])
+const lastRender = ref(0)
+
+const maskHeight = computed(() => imgMask.length)
+const maskWidth = computed(() => imgMask[0].length)
+const parent = computed(() => canvasWrapperRef.value as HTMLElement)
+const canvas = computed(() => canvasRef.value as HTMLCanvasElement)
+const renderingContext = computed<CanvasRenderingContext2D>(() => canvas.value.getContext('2d')!)
+
+onMounted(() => {
+  initRenderLoop()
+})
+
+function initRenderLoop () {
+  renderingContext.value.globalCompositeOperation = 'destination-atop'
+
+  drawSpeed.value = props.initialDrawSpeed * DRAWSPEED_CORRECTION
+
+  window.addEventListener('resize', resize)
+  window.addEventListener('keydown', interactionRedraw)
+  window.addEventListener('touchstart', interactionRedraw)
+  resize()
+
+  randomizeMask()
+  window.requestAnimationFrame(loop)
+}
+
+function loop (timestamp : DOMHighResTimeStamp) {
+  if (lastRender.value === 0) {
+    lastRender.value = timestamp
+  }
+  const deltaTime = Math.min(timestamp - lastRender.value, 20)
+
+  draw(deltaTime)
+
+  lastRender.value = timestamp
+  window.requestAnimationFrame(loop)
+}
+
+function draw (deltaTime: number) {
+  const deltaTimeSeconds = deltaTime * 0.001
+  const frameProgress = deltaTimeSeconds * drawSpeed.value
+  const newAnimationProgress = Math.min(animationProgress.value + frameProgress, 1)
+  // prevent redrawing on finished animation
+  if (newAnimationProgress === animationProgress.value) {
+    return
+  }
+  animationProgress.value = newAnimationProgress
+  renderingContext!.value.clearRect(0, 0, canvas!.value.width, canvas!.value.height)
+
+  for (let i = 0; i < maskWidth.value; i++) {
+    for (let j = 0; j < maskHeight.value; j++) {
+      const gridElement = gridData[j][i]
+      if (gridElement.value) {
+        const alpha = Math.pow(clamp(animationProgress.value * 2 - gridElement.delay), 2) * 2
+        renderingContext.value.strokeStyle = `rgba(255, 255, 255, ${alpha})`
+        const finalSize = squareSize.value / gridElement.value
+        renderingContext.value.strokeRect(SPACING_BETWEEN_CELLS + i * squareSizeWithSpacing.value, SPACING_BETWEEN_CELLS + j * squareSizeWithSpacing.value, finalSize, finalSize)
       }
-      const deltaTime = Math.min(timestamp - this.lastRender, 20)
-
-      this.draw(deltaTime)
-
-      this.lastRender = timestamp
-      window.requestAnimationFrame(this.loop)
-    },
-    draw (deltaTime: number) {
-      const deltaTimeSeconds = deltaTime * 0.001
-      const frameProgress = deltaTimeSeconds * this.drawSpeed
-      const newAnimationProgress = Math.min(this.animationProgress + frameProgress, 1)
-      // prevent redrawing on finished animation
-      if (newAnimationProgress === this.animationProgress) {
-        return
-      }
-      this.animationProgress = newAnimationProgress
-      this.renderingContext!.clearRect(0, 0, this.canvas!.width, this.canvas!.height)
-
-      for (let i = 0; i < this.maskWidth; i++) {
-        for (let j = 0; j < this.maskHeight; j++) {
-          const gridElement = this.gridData[j][i]
-          if (gridElement.value) {
-            const alpha = Math.pow(this.clamp(this.animationProgress * 2 - gridElement.delay), 2) * 2
-            this.renderingContext!.strokeStyle = `rgba(255, 255, 255, ${alpha})`
-            const finalSize = this.squareSize / gridElement.value
-            this.renderingContext!.strokeRect(SPACING_BETWEEN_CELLS + i * this.squareSizeWithSpacing, SPACING_BETWEEN_CELLS + j * this.squareSizeWithSpacing, finalSize, finalSize)
-          }
-        }
-      }
-    },
-    resize () {
-      this.parentWidth = this.parent!.clientWidth
-      this.parentHeight = this.parent!.clientHeight
-      this.squareSizeWithSpacing = (this.parentWidth - 2 * SPACING_BETWEEN_CELLS) / Math.max(this.maskHeight, this.maskWidth)
-      this.squareSize = this.squareSizeWithSpacing - SPACING_BETWEEN_CELLS
-
-      const pixelDensityConsideringDevicePixelRatio = (window.devicePixelRatio || 1) * this.pixelDensity
-
-      /*
-      this disparity of html-width/height and css-width/height
-      creates a high resolution canvas with better lines
-      */
-      this.canvas!.width = this.parentWidth * pixelDensityConsideringDevicePixelRatio
-      this.canvas!.height = this.parentHeight * pixelDensityConsideringDevicePixelRatio
-      this.canvas!.style.width = `${this.parentWidth}px`
-      this.canvas!.style.height = `${this.parentHeight}px`
-
-      this.renderingContext!.scale(pixelDensityConsideringDevicePixelRatio, pixelDensityConsideringDevicePixelRatio)
-      this.animationProgress = Math.min(0.9, this.animationProgress)
-    },
-    // randomize mask with the quantum probabilities
-    randomizeMask () {
-      this.gridData = imgMask.map(row => row.map((maskValue: number) : GridCell => {
-        const randomSuccess = Math.random()
-        const randomDelay = Math.random()
-        const success1 = randomSuccess <= SUCCESS_RATIO_1
-        const success2 = randomSuccess > SUCCESS_RATIO_1 && randomSuccess <= ACCUMULATED_SUCCESS_RATIO
-
-        if (maskValue === 1) { // 1 accept both states
-          return { value: success1 ? 1 : success2 ? 2 : 0, delay: randomDelay }
-        }
-
-        if (maskValue === 2) { // 2 accept only second state
-          return { value: success2 ? 2 : 0, delay: randomDelay }
-        }
-
-        return { value: 0, delay: 0 }
-      }))
-    },
-    clamp (value: number) : number {
-      return Math.min(Math.max(value, 0), 1)
-    },
-    interactionRedraw () {
-      this.animationProgress = 0.5
-      this.drawSpeed = this.initialDrawSpeed * DRAWSPEED_CORRECTION * 3
-      this.randomizeMask()
     }
   }
-})
+}
+
+function resize () {
+  parentWidth.value = parent!.clientWidth
+  parentHeight.value = parent!.clientHeight
+  squareSizeWithSpacing.value = (parentWidth.value - 2 * SPACING_BETWEEN_CELLS) / Math.max(maskHeight.value, maskWidth.value)
+  squareSize.value = squareSizeWithSpacing.value - SPACING_BETWEEN_CELLS
+
+  const pixelDensityConsideringDevicePixelRatio = (window.devicePixelRatio || 1) * props.pixelDensity
+
+  /*
+  this disparity of html-width/height and css-width/height
+  creates a high resolution canvas with better lines
+  */
+  canvas!.width = parentWidth.value * pixelDensityConsideringDevicePixelRatio
+  canvas!.height = parentHeight.value * pixelDensityConsideringDevicePixelRatio
+  canvas!.style.width = `${parentWidth.value}px`
+  canvas!.style.height = `${parentHeight.value}px`
+
+  renderingContext!.scale(pixelDensityConsideringDevicePixelRatio, pixelDensityConsideringDevicePixelRatio)
+  animationProgress.value = Math.min(0.9, animationProgress)
+}
+
+// randomize mask with the quantum probabilities
+function randomizeMask () {
+  gridData.value = imgMask.map(row => row.map((maskValue: number) : GridCell => {
+    const randomSuccess = Math.random()
+    const randomDelay = Math.random()
+    const success1 = randomSuccess <= SUCCESS_RATIO_1
+    const success2 = randomSuccess > SUCCESS_RATIO_1 && randomSuccess <= ACCUMULATED_SUCCESS_RATIO
+
+    if (maskValue === 1) { // 1 accept both states
+      return { value: success1 ? 1 : success2 ? 2 : 0, delay: randomDelay }
+    }
+
+    if (maskValue === 2) { // 2 accept only second state
+      return { value: success2 ? 2 : 0, delay: randomDelay }
+    }
+
+    return { value: 0, delay: 0 }
+  }))
+}
+
+function clamp (value: number) : number {
+  return Math.min(Math.max(value, 0), 1)
+}
+
+function interactionRedraw () {
+  animationProgress.value = 0.5
+  drawSpeed.value = props.initialDrawSpeed * DRAWSPEED_CORRECTION * 3
+  randomizeMask()
+}
 </script>
 
 <style lang="scss" scoped>

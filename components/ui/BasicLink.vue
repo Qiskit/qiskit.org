@@ -13,57 +13,53 @@
   </component>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
+<script setup lang="ts">
 import { CtaClickedEventProp } from '~/constants/segment'
 
-@Component
-export default class BasicLink extends Vue {
-  @Prop({ type: String, default: '' }) url!: string
-  @Prop({ type: Object, required: false }) segment: CtaClickedEventProp | undefined
-  @Prop({ type: Boolean, default: false }) isStatic!: boolean
-
-  handleClick () {
-    this.$emit('click')
-    this.segment && this.$trackClickEvent(this.segment.cta, this.segment.location)
-  }
-
-  static isExternal (url: string): boolean {
-    return !!url && url.startsWith('http')
-  }
-
-  static isInternal (url: string): boolean {
-    return !!url && url.startsWith('/')
-  }
-
-  static isMail (url: string): boolean {
-    return !!url && url.startsWith('mailto')
-  }
-
-  static isIdAnchor (url: string): boolean {
-    return !!url && url.startsWith('#')
-  }
-
-  get hasLink (): boolean {
-    return !!this.url
-  }
-
-  get isAnchor (): boolean {
-    const url = this.url
-    return BasicLink.isExternal(url) ||
-      BasicLink.isMail(url) ||
-      BasicLink.isIdAnchor(url) ||
-      BasicLink.isInternal(url) ||
-      this.isStatic
-  }
-
-  get isExternal (): boolean {
-    return BasicLink.isExternal(this.url)
-  }
-
-  get isNuxtLink (): boolean {
-    return !this.isAnchor
-  }
+interface Props {
+  isStatic?: boolean
+  segment?: CtaClickedEventProp | undefined
+  url?: string
 }
+
+const props = withDefaults(defineProps<Props>(), {
+  isStatic: false,
+  segment: undefined,
+  url: ''
+})
+
+function handleClick () {
+  emit('click')
+  props.segment && $trackClickEvent(props.segment.cta, props.segment.location)
+}
+
+function isExternal (url: string): boolean {
+  return !!url && url.startsWith('http')
+}
+
+function isInternal (url: string): boolean {
+  return !!url && url.startsWith('/')
+}
+
+function isMail (url: string): boolean {
+  return !!url && url.startsWith('mailto')
+}
+
+function isIdAnchor (url: string): boolean {
+  return !!url && url.startsWith('#')
+}
+
+const hasLink = computed(() => !!props.url)
+
+const isAnchor = computed(() => {
+  return isExternal(props.url) ||
+    isMail(props.url) ||
+    isIdAnchor(props.url) ||
+    isInternal(props.url) ||
+    props.isStatic
+})
+
+const isExternal = computed(() => isExternal(props.url))
+
+const isNuxtLink = computed(() => !isAnchor.value)
 </script>

@@ -38,7 +38,7 @@
       </div>
       <div>
         <cv-accordion
-          v-if="getPrerequisitesToInstallQiskit ()"
+          v-if="prerequisitesToInstallQiskit ()"
           class="start-locally__prerequisites-section"
         >
           <cv-accordion-item>
@@ -56,17 +56,14 @@
         </h4>
         <SyntaxHighlight
           :label="segmentLabel"
-          :code="getCodeToInstallQiskit()"
+          :code="codeToInstallQiskit()"
         />
       </div>
     </div>
   </section>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
-
+<script setup lang="ts">
 type ChoicesGroup = {
   title: string,
   id: string,
@@ -75,94 +72,89 @@ type ChoicesGroup = {
 
 type InstallChoices = Array<ChoicesGroup>
 
-@Component
-export default class StartLocally extends Vue {
-  OPERATING_SYSTEMS = {
-    linux: 'Linux',
-    mac: 'Mac',
-    windows: 'Windows'
+const OPERATING_SYSTEMS = {
+  linux: 'Linux',
+  mac: 'Mac',
+  windows: 'Windows'
+}
+
+const QISKIT_INSTALL = {
+  stable: 'Stable (recommended)',
+  master: 'Unstable'
+}
+
+const installChoices: InstallChoices = [
+  {
+    title: 'Qiskit Install',
+    id: 'qiskit-install',
+    options: Object.values(QISKIT_INSTALL)
+  },
+  {
+    title: 'Operating System',
+    id: 'os',
+    options: Object.values(OPERATING_SYSTEMS)
   }
+]
 
-  QISKIT_INSTALL = {
-    stable: 'Stable (recommended)',
-    master: 'Unstable'
+const selectedOptions = reactive({
+  'qiskit-install': QISKIT_INSTALL.stable,
+  os: OPERATING_SYSTEMS.mac
+})
+
+const segmentLabel = 'Qiskit Install'
+
+const codeToInstallStableOnLinux = 'pip install -U pip && pip install qiskit'
+const codeToInstallStableOnMac = 'pip install qiskit'
+const codeToInstallStableOnWindows = 'pip install qiskit'
+
+const codeToInstallAllSystems = 'pip install git+https://github.com/Qiskit/qiskit-terra'
+
+const prerequisites = {
+  [QISKIT_INSTALL.stable]: {
+    [OPERATING_SYSTEMS.linux]: null,
+    [OPERATING_SYSTEMS.mac]: null,
+    [OPERATING_SYSTEMS.windows]: null
+  },
+  [QISKIT_INSTALL.master]: {
+    [OPERATING_SYSTEMS.linux]: 'PrerequisitesForLinuxMac',
+    [OPERATING_SYSTEMS.mac]: 'PrerequisitesForLinuxMac',
+    [OPERATING_SYSTEMS.windows]: 'PrerequisitesForWindows'
   }
+}
 
-  installChoices: InstallChoices = [
-    {
-      title: 'Qiskit Install',
-      id: 'qiskit-install',
-      options: Object.values(this.QISKIT_INSTALL)
-    },
-    {
-      title: 'Operating System',
-      id: 'os',
-      options: Object.values(this.OPERATING_SYSTEMS)
-    }
-  ]
-
-  selectedOptions = {
-    'qiskit-install': this.QISKIT_INSTALL.stable,
-    os: this.OPERATING_SYSTEMS.mac
+const codeToInstall = {
+  [QISKIT_INSTALL.stable]: {
+    [OPERATING_SYSTEMS.linux]: codeToInstallStableOnLinux,
+    [OPERATING_SYSTEMS.mac]: codeToInstallStableOnMac,
+    [OPERATING_SYSTEMS.windows]: codeToInstallStableOnWindows
+  },
+  [QISKIT_INSTALL.master]: {
+    [OPERATING_SYSTEMS.linux]: codeToInstallAllSystems,
+    [OPERATING_SYSTEMS.mac]: codeToInstallAllSystems,
+    [OPERATING_SYSTEMS.windows]: codeToInstallAllSystems
   }
+}
 
-  segmentLabel = 'Qiskit Install'
+const selectedOs = computed<string>(() => selectedOptions.os)
 
-  codeToInstallStableOnLinux = 'pip install -U pip && pip install qiskit'
-  codeToInstallStableOnMac = 'pip install qiskit'
-  codeToInstallStableOnWindows = 'pip install qiskit'
+const prerequisitesToInstallQiskit = computed<string | null>(() => {
+  const { 'qiskit-install': qiskitInstall, os } = selectedOptions
 
-  codeToInstallAllSystems = 'pip install git+https://github.com/Qiskit/qiskit-terra'
+  return prerequisites[qiskitInstall][os]
+})
 
-  prerequisites = {
-    [this.QISKIT_INSTALL.stable]: {
-      [this.OPERATING_SYSTEMS.linux]: null,
-      [this.OPERATING_SYSTEMS.mac]: null,
-      [this.OPERATING_SYSTEMS.windows]: null
-    },
-    [this.QISKIT_INSTALL.master]: {
-      [this.OPERATING_SYSTEMS.linux]: 'PrerequisitesForLinuxMac',
-      [this.OPERATING_SYSTEMS.mac]: 'PrerequisitesForLinuxMac',
-      [this.OPERATING_SYSTEMS.windows]: 'PrerequisitesForWindows'
-    }
-  }
+const codeToInstallQiskit = computed<string>(() => {
+  const { 'qiskit-install': qiskitInstall, os } = selectedOptions
 
-  codeToInstall = {
-    [this.QISKIT_INSTALL.stable]: {
-      [this.OPERATING_SYSTEMS.linux]: this.codeToInstallStableOnLinux,
-      [this.OPERATING_SYSTEMS.mac]: this.codeToInstallStableOnMac,
-      [this.OPERATING_SYSTEMS.windows]: this.codeToInstallStableOnWindows
-    },
-    [this.QISKIT_INSTALL.master]: {
-      [this.OPERATING_SYSTEMS.linux]: this.codeToInstallAllSystems,
-      [this.OPERATING_SYSTEMS.mac]: this.codeToInstallAllSystems,
-      [this.OPERATING_SYSTEMS.windows]: this.codeToInstallAllSystems
-    }
-  }
+  return codeToInstall[qiskitInstall][os]
+})
 
-  get selectedOs () : string {
-    return this.selectedOptions.os
-  }
+const isActive = computed<boolean>((choicesGroup: ChoicesGroup, option: string) => {
+  return (selectedOptions as any)[choicesGroup.id] === option
+})
 
-  getPrerequisitesToInstallQiskit () : string | null {
-    const { 'qiskit-install': qiskitInstall, os } = this.selectedOptions
-
-    return this.prerequisites[qiskitInstall][os]
-  }
-
-  getCodeToInstallQiskit () : string {
-    const { 'qiskit-install': qiskitInstall, os } = this.selectedOptions
-
-    return this.codeToInstall[qiskitInstall][os]
-  }
-
-  isActive (choicesGroup: ChoicesGroup, option: string) : boolean {
-    return (this.selectedOptions as any)[choicesGroup.id] === option
-  }
-
-  selectOption (choicesGroup: ChoicesGroup, selectedOption: string) {
-    (this.selectedOptions as any)[choicesGroup.id] = selectedOption
-  }
+function selectOption (choicesGroup: ChoicesGroup, selectedOption: string) {
+  (selectedOptions as any)[choicesGroup.id] = selectedOption
 }
 </script>
 

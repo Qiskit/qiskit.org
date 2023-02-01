@@ -16,15 +16,10 @@
   </section>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
+<script setup lang="ts">
 import { IBM_Q_EXPERIENCE } from '~/constants/appLinks'
 
-@Component
-export default class StartOnTheCloud extends Vue {
-  ibmQExperienceLink = IBM_Q_EXPERIENCE
-}
+const ibmQExperienceLink = IBM_Q_EXPERIENCE
 </script>
 
 <style lang="scss" scoped>

@@ -13,17 +13,18 @@
   </section>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
+<script setup lang="ts">
 import { MosaicElement } from '~/components/ui/AppMosaic.vue'
 
-@Component
-export default class AppMosaicSection extends Vue {
-  @Prop({ type: String, required: true }) title!: string
-  @Prop({ type: String, required: false }) description!: string
-  @Prop({ type: Array, required: true }) elements!: MosaicElement[]
+interface Props {
+  description?: string
+  elements: MosaicElement[]
+  title: string
 }
+
+withDefaults(defineProps<Props>(), {
+  description: ''
+})
 </script>
 
 <style lang="scss">

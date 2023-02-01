@@ -16,15 +16,14 @@
   </section>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import { Prerequisite } from 'constants/learnContent'
-import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
 
-@Component
-export default class PrerequisiteMaterialSection extends Vue {
-  @Prop({ type: Array, required: true }) data!: Prerequisite[]
+interface Props {
+  data: Prerequisite[]
 }
+
+defineProps<Props>()
 </script>
 
 <style lang="scss" scoped>

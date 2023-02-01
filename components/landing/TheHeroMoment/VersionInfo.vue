@@ -27,17 +27,16 @@
   </div>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
+<script setup lang="ts">
 import { GITHUB_REPOSITORY } from '~/constants/menuLinks'
 
-@Component
-export default class VersionInfo extends Vue {
-  githubRepoLink = GITHUB_REPOSITORY
-
-  @Prop({ type: String, required: true }) version!: string
+interface Props {
+  version: string
 }
+
+defineProps<Props>()
+
+const githubRepoLink = GITHUB_REPOSITORY
 </script>
 
 <style lang="scss" scoped>

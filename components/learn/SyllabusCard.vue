@@ -15,17 +15,18 @@
   </article>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
+<script setup lang="ts">
 import { CtaClickedEventProp } from '~/constants/segment'
 
-@Component
-export default class SyllabusCard extends Vue {
-  @Prop({ type: String, default: '' }) title!: string
-  @Prop({ type: String, default: '' }) url!: string
-  @Prop({ type: Object, required: false }) segment: CtaClickedEventProp | undefined
+interface Props {
+  title: string;
+  url: string;
+  segment?: CtaClickedEventProp;
 }
+
+withDefaults(defineProps<Props>(), {
+  segment: undefined
+})
 </script>
 
 <style lang="scss" scoped>

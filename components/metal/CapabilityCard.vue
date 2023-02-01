@@ -32,21 +32,19 @@
   </article>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
-
-@Component
-export default class CapabilityCard extends Vue {
-  @Prop(String) visualResource!: string
-  @Prop(String) title!: string
-  @Prop(String) description!: string
-
-  isVideo (): boolean {
-    const extension = this.visualResource.substring(this.visualResource.length - 4)
-    return extension === '.mp4'
-  }
+<script setup lang="ts">
+interface Props {
+  visualResource: string;
+  title: string;
+  description: string;
 }
+
+const props = defineProps<Props>()
+
+const isVideo = computed<boolean>(() => {
+  const extension = props.visualResource.substring(props.visualResource.length - 4)
+  return extension === '.mp4'
+})
 </script>
 
 <style lang="scss" scoped>

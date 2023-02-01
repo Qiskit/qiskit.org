@@ -25,18 +25,17 @@
   </article>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
+<script setup lang="ts">
 import { NavLink } from '~/constants/menuLinks'
 
-@Component
-export default class AppIntroductoryContent extends Vue {
-  @Prop(String) title!: string
-  @Prop(String) description!: string
-  @Prop(Object) link!: NavLink
-  @Prop(Array) linkset!: NavLink[]
+interface Props {
+  description: string
+  link: NavLink
+  linkset: NavLink[]
+  title: string
 }
+
+defineProps<Props>()
 </script>
 
 <style lang="scss" scoped>

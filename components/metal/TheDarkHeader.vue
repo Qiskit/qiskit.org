@@ -56,15 +56,6 @@
   </header>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-
-import { Component } from 'vue-property-decorator'
-
-@Component
-export default class TheDarkHeader extends Vue {}
-</script>
-
 <style lang="scss">
 @import '~carbon-components/scss/globals/scss/typography';
 
