@@ -88,6 +88,7 @@ withDefaults(defineProps<Props>(), {
   color: 'black'
 })
 
+// TODO: Check if this is still working as expected after https://github.com/Qiskit/qiskit.org/pull/2935.
 let _uidCounter = 0
 
 function nextUniqueSuffix (): string {
