@@ -127,7 +127,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import { mapGetters } from 'vuex'
 import { Component } from 'vue-property-decorator'
 import GoogleCalendarInstructions from '~/components/events/calendars/GoogleInstructions.vue'
@@ -142,121 +142,117 @@ import {
 } from '~/store/events'
 import { EVENT_REQUEST_LINK, GeneralLink } from '~/constants/appLinks'
 
-@Component({
-  head () {
-    return {
-      title: 'Qiskit Events'
-    }
-  },
-  layout: 'default-max',
-  computed: {
-    ...mapGetters('events', [
-      'filteredEvents',
-      'typeFilters',
-      'regionFilters'
-    ])
-  },
-  components: {
-    AppleCalendarInstructions,
-    GoogleCalendarInstructions,
-    OutlookCalendarInstructions
-  },
-
-  async fetch ({ store }) {
-    const upcomingEvents = await store.dispatch('events/fetchUpcomingEvents')
-    const pastEvents = await store.dispatch('events/fetchPastEvents')
-
-    const upcomingEventsPayload = { events: 'upcomingCommunityEvents', eventsSet: upcomingEvents }
-    const pastEventsPayload = { events: 'pastCommunityEvents', eventsSet: pastEvents }
-    store.commit('events/setEvents', upcomingEventsPayload)
-    store.commit('events/setEvents', pastEventsPayload)
-  }
+definePageMeta({
+  layout: 'default-max'
 })
-export default class EventsPage extends QiskitPage {
-  routeName: string = 'events'
-  eventRequestLink = EVENT_REQUEST_LINK
-  emptyCard = {
-    title: 'No events found',
-    description: 'Try using wider search criteria, or consider starting your own event.',
-    img: '/images/events/no-events.svg'
+
+useHead({
+  title: 'Qiskit Events'
+})
+
+const calendarsInstructions = [
+  {
+    name: 'Google',
+    instructions: GoogleCalendarInstructions
+  },
+  {
+    name: 'Outlook',
+    instructions: OutlookCalendarInstructions
+  },
+  {
+    name: 'Apple',
+    instructions: AppleCalendarInstructions
   }
+]
 
-  extraFilters = [
-    {
-      label: 'Locations',
-      options: WORLD_REGION_OPTIONS,
-      filterType: 'regionFilters'
-    },
-    {
-      label: 'Types',
-      options: COMMUNITY_EVENT_TYPE_OPTIONS,
-      filterType: 'typeFilters'
-    }
-  ]
-
-  calendarsInstructions = [
-    {
-      name: 'Google',
-      instructions: GoogleCalendarInstructions
-    },
-    {
-      name: 'Outlook',
-      instructions: OutlookCalendarInstructions
-    },
-    {
-      name: 'Apple',
-      instructions: AppleCalendarInstructions
-    }
-  ]
-
-    qiskitCalendarSyncLink = 'https://qisk.it/calendar-sync'
-    qiskitCalendarLink: GeneralLink = {
-      url: 'https://qisk.it/calendar',
-      label: 'https://qisk.it/calendar',
-      segment: {
-        cta: 'qiskit-calendar', location: 'events-page'
-      }
-    }
-
-    get noEvents (): boolean {
-      return (this as any).filteredEvents.length === 0
-    }
-
-    getCheckedFilters (filter: string) {
-      return (this as any)[filter]
-    }
-
-    updateWholeFilter (filter: string, filterValues: string[]): void {
-      const { commit } = this.$store
-      const payload = { filter, filterValues }
-
-      commit('events/updateFilterSet', payload)
-    }
-
-    isFilterChecked (filter: string, filterValue: string): Array<CommunityEvent> {
-      const typeFilters = (this as any).typeFilters
-      const regionFilters = (this as any).regionFilters
-
-      return filter === 'regionFilters'
-        ? regionFilters.includes(filterValue)
-        : typeFilters.includes(filterValue)
-    }
-
-    updateFilter (filter: string, filterValue: string, isSelected: boolean): void {
-      const payload = { filter, filterValue }
-      const { commit } = this.$store
-
-      isSelected
-        ? commit('events/addFilter', payload)
-        : commit('events/removeFilter', payload)
-    }
-
-    selectTab (selectedTab: number) {
-      const activeSet = selectedTab === 0 ? 'upcoming' : 'past'
-
-      this.$store.commit('events/setActiveSet', activeSet)
-    }
+const qiskitCalendarSyncLink = 'https://qisk.it/calendar-sync'
+const qiskitCalendarLink: GeneralLink = {
+  url: 'https://qisk.it/calendar',
+  label: 'https://qisk.it/calendar',
+  segment: {
+    cta: 'qiskit-calendar', location: 'events-page'
+  }
 }
+
+// // TODO: Replace Vuex with Pinia
+// @Component({
+//   computed: {
+//     ...mapGetters('events', [
+//       'filteredEvents',
+//       'typeFilters',
+//       'regionFilters'
+//     ])
+//   },
+
+//   async fetch ({ store }) {
+//     const upcomingEvents = await store.dispatch('events/fetchUpcomingEvents')
+//     const pastEvents = await store.dispatch('events/fetchPastEvents')
+
+//     const upcomingEventsPayload = { events: 'upcomingCommunityEvents', eventsSet: upcomingEvents }
+//     const pastEventsPayload = { events: 'pastCommunityEvents', eventsSet: pastEvents }
+//     store.commit('events/setEvents', upcomingEventsPayload)
+//     store.commit('events/setEvents', pastEventsPayload)
+//   }
+// })
+
+const eventRequestLink = EVENT_REQUEST_LINK
+const emptyCard = {
+  title: 'No events found',
+  description: 'Trying doing a wider search criteria, or consider starting your own event.',
+  img: '/images/events/no-events.svg'
+}
+const extraFilters = [
+  {
+    label: 'Locations',
+    options: WORLD_REGION_OPTIONS,
+    filterType: 'regionFilters'
+  },
+  {
+    label: 'Types',
+    options: COMMUNITY_EVENT_TYPE_OPTIONS,
+    filterType: 'typeFilters'
+  }
+]
+
+const noEvents = (this as any).filteredEvents.length === 0
+
+const getCheckedFilters = (filter: string) => (this as any)[filter]
+
+const updateWholeFilter = (filter: string, filterValues: string[]) => {
+  const { commit } = this.$store
+  const payload = { filter, filterValues }
+
+  commit('events/updateFilterSet', payload)
+}
+
+const isFilterChecked = (filter: string, filterValue: string): Array<CommunityEvent> => {
+  const typeFilters = (this as any).typeFilters
+  const regionFilters = (this as any).regionFilters
+
+  return filter === 'regionFilters'
+    ? regionFilters.includes(filterValue)
+    : typeFilters.includes(filterValue)
+}
+
+const updateFilter = (filter: string, filterValue: string, isSelected: boolean) => {
+  const payload = { filter, filterValue, isSelected }
+  const { commit } = this.$store
+
+  isSelected
+    ? commit('events/addFilter', payload)
+    : commit('events/removeFilter', payload)
+}
+
+const selectTab = (selectedTab: number) => {
+  const activeSet = selectedTab === 0 ? 'upcoming' : 'past'
+
+  this.$store.commit('events/setActiveSet', activeSet)
+}
+
+// TODO: Refactor "logic" pages
+// export default class EventsPage extends QiskitPage {
+//   const routeName = 'events'
+// }
 </script>
 
 <style lang="scss">
