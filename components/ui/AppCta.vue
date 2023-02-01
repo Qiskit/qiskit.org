@@ -46,8 +46,6 @@ const iconPerLinkType = computed(() => {
   if (BasicLink.isIdAnchor(url)) { return 'arrow-down-16' }
   return 'arrow-right-16'
 })
-
-const isIdAnchor = computed(() => BasicLink.isIdAnchor(this.$attrs.url))
 </script>
 
 <style lang="scss" scoped>
