@@ -92,10 +92,10 @@
             <div class="event-page__tabs">
               <cv-tabs aria-label="Calendar applications">
                 <cv-tab
-                  v-for="(calendar, calendarIndex) in calendars"
-                  :id="`tab-${calendar.name}`"
-                  :key="calendarIndex"
-                  :label="calendar.name"
+                  v-for="{ name, instructions } in calendarsInstructions"
+                  :id="`tab-${name}`"
+                  :key="name"
+                  :label="name"
                   class="event-page__tab"
                 >
                   <p class="event-page__sync">
@@ -107,7 +107,7 @@
                       <span>{{ qiskitCalendarSyncLink }}</span>
                     </cv-code-snippet>
                   </p>
-                  <component :is="calendar.component" class="event-page__instructions" />
+                  <component :is="instructions" class="event-page__instructions" />
                 </cv-tab>
               </cv-tabs>
             </div>
@@ -193,18 +193,18 @@ export default class EventsPage extends QiskitPage {
     }
   ]
 
-  calendars = [
+  calendarsInstructions = [
     {
       name: 'Google',
-      component: GoogleCalendarInstructions
+      instructions: GoogleCalendarInstructions
     },
     {
       name: 'Outlook',
-      component: OutlookCalendarInstructions
+      instructions: OutlookCalendarInstructions
     },
     {
       name: 'Apple',
-      component: AppleCalendarInstructions
+      instructions: AppleCalendarInstructions
     }
   ]
 
