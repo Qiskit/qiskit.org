@@ -15,7 +15,7 @@
     <div class="bx--grid">
       <div class="event-page__tabs">
         <client-only>
-          <cv-tabs aria-label="navigation tab label" @tab-selected="selectTab">
+          <cv-tabs aria-label="Event tabs" @tab-selected="selectTab">
             <cv-tab id="tab-1" label="Upcoming events" />
             <cv-tab id="tab-2" label="Past events" />
           </cv-tabs>
@@ -90,7 +90,7 @@
               Stay up to date with all of our scheduled events by following our calendar. You can view the calendar by visiting <AppLink v-bind="qiskitCalendarLink">{{ qiskitCalendarLink.label }}</AppLink>, or subscribe to it by adding to the calendar app of your choice.
             </p>
             <div class="event-page__tabs">
-              <cv-tabs aria-label="navigation tab label">
+              <cv-tabs aria-label="Calendar applications">
                 <cv-tab
                   v-for="(calendar, calendarIndex) in calendars"
                   :id="`tab-${calendar.name}`"
@@ -129,9 +129,9 @@
 <script lang="ts">
 import { mapGetters } from 'vuex'
 import { Component } from 'vue-property-decorator'
-import GoogleCalendar from './GoogleCalendar.vue'
-import OutlookCalendar from './OutlookCalendar.vue'
-import AppleCalendar from './AppleCalendar.vue'
+import GoogleCalendarInstructions from '~/components/events/calendars/GoogleInstructions.vue'
+import OutlookCalendarInstructions from '~/components/events/calendars/OutlookInstructions.vue'
+import AppleCalendarInstructions from '~/components/events/calendars/AppleInstructions.vue'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 
 import {
@@ -156,9 +156,9 @@ import { EVENT_REQUEST_LINK, GeneralLink } from '~/constants/appLinks'
     ])
   },
   components: {
-    AppleCalendar,
-    GoogleCalendar,
-    OutlookCalendar
+    AppleCalendarInstructions,
+    GoogleCalendarInstructions,
+    OutlookCalendarInstructions
   },
 
   async fetch ({ store }) {
@@ -196,15 +196,15 @@ export default class EventsPage extends QiskitPage {
   calendars = [
     {
       name: 'Google',
-      component: GoogleCalendar
+      component: GoogleCalendarInstructions
     },
     {
       name: 'Outlook',
-      component: OutlookCalendar
+      component: OutlookCalendarInstructions
     },
     {
       name: 'Apple',
-      component: AppleCalendar
+      component: AppleCalendarInstructions
     }
   ]
 
