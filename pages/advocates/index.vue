@@ -14,12 +14,11 @@
       the Qiskit community
     </AppPageHeaderFixed>
     <AdvocatesJoinSection />
-    <MeetTheAdvocates :advocates="filteredAdvocates" />
+    <MeetTheAdvocates />
   </main>
 </template>
 
 <script setup lang="ts">
-import { mapGetters } from 'vuex'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 
 definePageMeta({
@@ -35,19 +34,6 @@ useHead({
     }
   ]
 })
-
-// TODO: Replace Vuex with Pinia
-// @Component({
-//   computed: {
-//     ...mapGetters('advocates', [
-//       'filteredAdvocates'
-//     ])
-//   },
-
-//   async fetch ({ store }) {
-//     await store.dispatch('advocates/fetchAdvocates')
-//   }
-// })
 
 // TODO: Refactor "logic" pages
 // export default class AdvocatesPage extends QiskitPage {
