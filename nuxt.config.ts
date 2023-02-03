@@ -147,7 +147,8 @@ const config: NuxtConfig = {
     }],
     '@nuxtjs/style-resources',
     // https://go.nuxtjs.dev/stylelint
-    '@nuxtjs/stylelint-module'
+    '@nuxtjs/stylelint-module',
+    '@pinia/nuxt'
   ],
 
   /*
