@@ -13,9 +13,9 @@
       quantum computing community
     </AppPageHeaderFixed>
     <div class="bx--grid">
-      <div class="event-page__time-filters">
+      <div class="event-page__tabs">
         <client-only>
-          <cv-tabs aria-label="navigation tab label" @tab-selected="selectTab">
+          <cv-tabs aria-label="Event tabs" @tab-selected="selectTab">
             <cv-tab id="tab-1" label="Upcoming events" />
             <cv-tab id="tab-2" label="Past events" />
           </cv-tabs>
@@ -83,9 +83,38 @@
           </div>
         </template>
         <template slot="extra-info">
-          <div class="event-page__start-an-event">
+          <div class="event-page__section">
+            <h3>Follow our event calendar</h3>
+            <p class="event-page__section__description">
+              <!-- eslint-disable-next-line vue/singleline-html-element-content-newline -->
+              Stay up to date with all of our scheduled events by following our calendar. You can view the calendar by visiting <AppLink v-bind="qiskitCalendarLink">{{ qiskitCalendarLink.label }}</AppLink>, or subscribe to it by adding to the calendar app of your choice.
+            </p>
+            <div class="event-page__tabs">
+              <cv-tabs aria-label="Calendar applications">
+                <cv-tab
+                  v-for="{ name, instructions } in calendarsInstructions"
+                  :id="`tab-${name}`"
+                  :key="name"
+                  :label="name"
+                  class="event-page__tab"
+                >
+                  <p class="event-page__sync">
+                    Start by copying the calendar subscription link
+                    <cv-code-snippet
+                      kind="inline"
+                      feedback-aria-label="Copy calendar sync url"
+                    >
+                      <span>{{ qiskitCalendarSyncLink }}</span>
+                    </cv-code-snippet>
+                  </p>
+                  <component :is="instructions" class="event-page__instructions" />
+                </cv-tab>
+              </cv-tabs>
+            </div>
+          </div>
+          <div class="event-page__section">
             <h3>Start an event</h3>
-            <p class="event-page__start-an-event__description">
+            <p class="event-page__section__description">
               We can help you bring Qiskit experts to your campus for guest
               lectures, hackathons, and other events.
             </p>
@@ -100,6 +129,9 @@
 <script lang="ts">
 import { mapGetters } from 'vuex'
 import { Component } from 'vue-property-decorator'
+import GoogleCalendarInstructions from '~/components/events/calendars/GoogleInstructions.vue'
+import OutlookCalendarInstructions from '~/components/events/calendars/OutlookInstructions.vue'
+import AppleCalendarInstructions from '~/components/events/calendars/AppleInstructions.vue'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 
 import {
@@ -107,7 +139,7 @@ import {
   WORLD_REGION_OPTIONS,
   COMMUNITY_EVENT_TYPE_OPTIONS
 } from '~/store/events'
-import { EVENT_REQUEST_LINK } from '~/constants/appLinks'
+import { EVENT_REQUEST_LINK, GeneralLink } from '~/constants/appLinks'
 
 @Component({
   head () {
@@ -122,6 +154,11 @@ import { EVENT_REQUEST_LINK } from '~/constants/appLinks'
       'typeFilters',
       'regionFilters'
     ])
+  },
+  components: {
+    AppleCalendarInstructions,
+    GoogleCalendarInstructions,
+    OutlookCalendarInstructions
   },
 
   async fetch ({ store }) {
@@ -156,44 +193,68 @@ export default class EventsPage extends QiskitPage {
     }
   ]
 
-  get noEvents (): boolean {
-    return (this as any).filteredEvents.length === 0
-  }
+  calendarsInstructions = [
+    {
+      name: 'Google',
+      instructions: GoogleCalendarInstructions
+    },
+    {
+      name: 'Outlook',
+      instructions: OutlookCalendarInstructions
+    },
+    {
+      name: 'Apple',
+      instructions: AppleCalendarInstructions
+    }
+  ]
 
-  getCheckedFilters (filter: string) {
-    return (this as any)[filter]
-  }
+    qiskitCalendarSyncLink = 'https://qisk.it/calendar-sync'
+    qiskitCalendarLink: GeneralLink = {
+      url: 'https://qisk.it/calendar',
+      label: 'https://qisk.it/calendar',
+      segment: {
+        cta: 'qiskit-calendar', location: 'events-page'
+      }
+    }
 
-  updateWholeFilter (filter: string, filterValues: string[]): void {
-    const { commit } = this.$store
-    const payload = { filter, filterValues }
+    get noEvents (): boolean {
+      return (this as any).filteredEvents.length === 0
+    }
 
-    commit('events/updateFilterSet', payload)
-  }
+    getCheckedFilters (filter: string) {
+      return (this as any)[filter]
+    }
 
-  isFilterChecked (filter: string, filterValue: string): Array<CommunityEvent> {
-    const typeFilters = (this as any).typeFilters
-    const regionFilters = (this as any).regionFilters
+    updateWholeFilter (filter: string, filterValues: string[]): void {
+      const { commit } = this.$store
+      const payload = { filter, filterValues }
 
-    return filter === 'regionFilters'
-      ? regionFilters.includes(filterValue)
-      : typeFilters.includes(filterValue)
-  }
+      commit('events/updateFilterSet', payload)
+    }
 
-  updateFilter (filter: string, filterValue: string, isSelected: boolean): void {
-    const payload = { filter, filterValue }
-    const { commit } = this.$store
+    isFilterChecked (filter: string, filterValue: string): Array<CommunityEvent> {
+      const typeFilters = (this as any).typeFilters
+      const regionFilters = (this as any).regionFilters
 
-    isSelected
-      ? commit('events/addFilter', payload)
-      : commit('events/removeFilter', payload)
-  }
+      return filter === 'regionFilters'
+        ? regionFilters.includes(filterValue)
+        : typeFilters.includes(filterValue)
+    }
 
-  selectTab (selectedTab: number) {
-    const activeSet = selectedTab === 0 ? 'upcoming' : 'past'
+    updateFilter (filter: string, filterValue: string, isSelected: boolean): void {
+      const payload = { filter, filterValue }
+      const { commit } = this.$store
 
-    this.$store.commit('events/setActiveSet', activeSet)
-  }
+      isSelected
+        ? commit('events/addFilter', payload)
+        : commit('events/removeFilter', payload)
+    }
+
+    selectTab (selectedTab: number) {
+      const activeSet = selectedTab === 0 ? 'upcoming' : 'past'
+
+      this.$store.commit('events/setActiveSet', activeSet)
+    }
 }
 </script>
 
@@ -201,12 +262,12 @@ export default class EventsPage extends QiskitPage {
 @import '~carbon-components/scss/globals/scss/typography';
 
 .event-page {
-  &__time-filters {
+  &__tabs {
     margin-top: $spacing-07;
     margin-bottom: $spacing-09;
 
     .bx--tabs--scrollable__nav-link {
-      color: black;
+      color: $black-100;
       border-bottom-color: $border-color;
     }
 
@@ -272,7 +333,7 @@ export default class EventsPage extends QiskitPage {
     }
   }
 
-  &__start-an-event {
+  &__section {
     margin-top: $spacing-10;
     margin-bottom: $spacing-10;
 
@@ -285,6 +346,14 @@ export default class EventsPage extends QiskitPage {
         max-width: 24rem;
       }
     }
+  }
+
+  &__tab {
+    padding-top: $spacing-06;
+  }
+
+  &__instructions {
+    padding-left: $spacing-06;
   }
 }
 </style>
