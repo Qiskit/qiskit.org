@@ -150,7 +150,9 @@ const filteredMembers = computed(
   }
 )
 
-function getTestRows (member: any): void {
+const tiersNames = computed(() => tiers.value.map((tier: any) => tier.name))
+
+function getTestRows (member: any) {
   if (member.testsResults) {
     return member.testsResults.map((res: any) => {
       // make tiemstamp human readable
@@ -181,8 +183,6 @@ function getTestRows (member: any): void {
     })
   }
 }
-
-const tiersNames = computed(() => tiers.value.map((tier: any) => tier.name))
 
 function getTierDescription (tierName: string): string {
   const tier = tiers.value.find((tier: any) => tier.name === tierName)
