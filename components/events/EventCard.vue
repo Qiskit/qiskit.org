@@ -9,8 +9,8 @@
     :segment="segment"
     :vertical-layout="verticalLayout"
   >
-    <div class="event-card__description">
-      <slot v-if="$slots.default" />
+    <div v-if="description" class="event-card__description">
+      {{ description }}
     </div>
     <div>
       <div v-if="location" class="event-card__detail">
@@ -44,6 +44,7 @@ export default class EventCard extends Vue {
   @Prop(String) title!: string
   @Prop(String) image!: string
   @Prop({ type: String, default: '' }) institution!: string
+  @Prop({ type: String, default: '' }) description!: string
   @Prop(String) location!: string
   @Prop(String) date!: string
   @Prop(String) time!: string

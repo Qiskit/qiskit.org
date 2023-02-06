@@ -75,6 +75,7 @@
                 :types="event.types"
                 :title="event.title"
                 :image="event.image"
+                :description="event.abstract"
                 :location="event.location"
                 :date="event.date"
                 :to="event.to"

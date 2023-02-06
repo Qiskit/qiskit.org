@@ -40,7 +40,8 @@ const RECORD_FIELDS_IDS = Object.freeze({
   institution: 'fldLVMuuhZVGwh4qZ',
   showOnEventsPage: 'fldi1ThdDnUQakxWo',
   showOnSeminarSeriesPage: 'fldl6in6TPajnxPMs',
-  speaker: 'fldyeOkGwMbfMRvPu'
+  speaker: 'fldyeOkGwMbfMRvPu',
+  abstract: 'fldBqkIigePRu4oZd'
 } as const)
 
 const AIRTABLE_BASE_ID = 'appYREKB18uC7y8ul'
@@ -177,7 +178,8 @@ class EventsAirtableRecords extends AirtableRecords {
       date: this.formatDates(...this.getDates(record)),
       startDate: this.getStartDate(record),
       endDate: this.getEndDate(record),
-      to: this.getWebsite(record)
+      to: this.getWebsite(record),
+      abstract: this.getAbstract(record)
     }
     return event
   }
@@ -192,7 +194,8 @@ class EventsAirtableRecords extends AirtableRecords {
       location: this.getLocation(record),
       speaker: this.getSpeaker(record),
       title: this.getName(record),
-      to: this.getWebsite(record)
+      to: this.getWebsite(record),
+      abstract: this.getAbstract(record)
     }
     return event
   }
@@ -293,6 +296,10 @@ class EventsAirtableRecords extends AirtableRecords {
 
   public getWebsite (record: any): string {
     return record.get(this.recordFields!.website) || ''
+  }
+
+  public getAbstract (record: any): string {
+    return record.get(this.recordFields!.abstract) || ''
   }
 }
 
