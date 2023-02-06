@@ -100,12 +100,11 @@
 <script setup lang="ts">
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
-
 import {
   CommunityEvent,
   WORLD_REGION_OPTIONS,
   COMMUNITY_EVENT_TYPE_OPTIONS
-} from '~/store/events'
+} from '~/types/events'
 import { EVENT_REQUEST_LINK } from '~/constants/appLinks'
 
 definePageMeta({
