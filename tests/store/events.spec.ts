@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import storeOptions from './_store-options'
-import { COMMUNITY_EVENT_TYPES, WORLD_REGIONS } from '~/store/events'
+import { COMMUNITY_EVENT_TYPES, WORLD_REGIONS } from '~/types/events'
 
 Vue.use(Vuex)
 

@@ -1,3 +1,24 @@
+const WORLD_REGIONS = Object.freeze({
+  northAmerica: 'North America',
+  southAmerica: 'South America',
+  asiaPacific: 'Asia Pacific',
+  europe: 'Europe',
+  africa: 'Africa',
+  online: 'Online',
+  tbd: 'TBD'
+} as const)
+
+type WorldRegion = typeof WORLD_REGIONS[keyof typeof WORLD_REGIONS]
+
+const WORLD_REGION_OPTIONS = Object.freeze([
+  WORLD_REGIONS.northAmerica,
+  WORLD_REGIONS.southAmerica,
+  WORLD_REGIONS.asiaPacific,
+  WORLD_REGIONS.europe,
+  WORLD_REGIONS.africa,
+  WORLD_REGIONS.online
+])
+
 const COMMUNITY_EVENT_TYPES = Object.freeze({
   hackathon: 'Hackathon',
   camp: 'Camp',
@@ -9,18 +30,6 @@ const COMMUNITY_EVENT_TYPES = Object.freeze({
   talks: 'Talks'
 } as const)
 
-const WORLD_REGIONS = Object.freeze({
-  northAmerica: 'North America',
-  southAmerica: 'South America',
-  asiaPacific: 'Asia Pacific',
-  europe: 'Europe',
-  africa: 'Africa',
-  online: 'Online',
-  tbd: 'TBD'
-} as const)
-
-type CommunityEventSet = 'past'|'upcoming'
-type WorldRegion = typeof WORLD_REGIONS[keyof typeof WORLD_REGIONS]
 type CommunityEventType = typeof COMMUNITY_EVENT_TYPES[keyof typeof COMMUNITY_EVENT_TYPES]
 
 type CommunityEvent = {
@@ -41,22 +50,14 @@ type CommunityEvent = {
   to: string
 }
 
-const WORLD_REGION_OPTIONS = Object.freeze([
-  WORLD_REGIONS.northAmerica,
-  WORLD_REGIONS.southAmerica,
-  WORLD_REGIONS.asiaPacific,
-  WORLD_REGIONS.europe,
-  WORLD_REGIONS.africa,
-  WORLD_REGIONS.online
-])
 const COMMUNITY_EVENT_TYPE_OPTIONS = Object.values(COMMUNITY_EVENT_TYPES).sort()
 
 export {
-  CommunityEvent,
-  CommunityEventType,
   WorldRegion,
-  COMMUNITY_EVENT_TYPES,
   WORLD_REGIONS,
   WORLD_REGION_OPTIONS,
+  CommunityEvent,
+  CommunityEventType,
+  COMMUNITY_EVENT_TYPES,
   COMMUNITY_EVENT_TYPE_OPTIONS
 }
