@@ -19,7 +19,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-import { TableOfContentEntry } from '~/constants/overviewContent'
+import { TableOfContentEntry } from '~/constants/providersContent'
 
 @Component
 export default class TheTableOfContents extends Vue {

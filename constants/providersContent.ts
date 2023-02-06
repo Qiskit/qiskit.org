@@ -9,7 +9,7 @@ type TableOfContentEntry = {
   isSecondary?: boolean
 }
 
-type OverviewSubSection = {
+type ProvidersSubSection = {
   title: string
   content: {
     image: string
@@ -19,9 +19,9 @@ type OverviewSubSection = {
 }
 
 /**
- * Represent a content section for the overview page
+ * Represent a content section for the Providers page
  */
-interface OverviewSection {
+interface ProvidersSection {
   /** The identifier of the section */
   id: string
   /** The visible title of the section */
@@ -33,7 +33,7 @@ interface OverviewSection {
   /** A set of links to get more information on the section */
   linkset?: NavLink[]
   /** The sub sections inside the section */
-  subSections?: OverviewSubSection[]
+  subSections?: ProvidersSubSection[]
   /** The image to show if the section doesn't have subsections */
   image?: string
 }
@@ -46,7 +46,7 @@ const RESEARCH_APPS_IN_MENU: TableOfContentEntry = {
   isSecondary: true
 }
 
-const RESEARCH_APPS: OverviewSection = {
+const RESEARCH_APPS: ProvidersSection = {
   id: researchAppId,
   title: 'Research Applications',
   description: 'Qiskit allows for easy research and development for specific industry use cases that have the highest potential for quantum advantage.',
@@ -72,7 +72,7 @@ const RESEARCH_APPS: OverviewSection = {
     {
       title: 'Optimization',
       content: {
-        image: '/images/overview/applications/optimization.png',
+        image: '/images/providers/applications/optimization.png',
         description: 'The Qiskit Optimization package covers the whole range from high-level modeling of optimization problems, with automatic conversion of problems to different required representations, to a suite of easy-to-use quantum optimization algorithms that are ready to run on classical simulators, as well as on real quantum systems.',
         cta: {
           label: 'Solve the Max Cut Problem',
@@ -83,7 +83,7 @@ const RESEARCH_APPS: OverviewSection = {
     {
       title: 'Finance',
       content: {
-        image: '/images/overview/applications/finance.png',
+        image: '/images/providers/applications/finance.png',
         description: 'The Qiskit Finance package contains components to load uncertainty models, e.g., for pricing securities/derivatives or analyzing the risk involved. It also contains data providers to source real or random data to finance experiments and together with the Qiskit Optimization package allows easy modeling of optimization problems as arising e.g. in portfolio management.',
         cta: {
           label: 'Perform Option Pricing with qGans',
@@ -94,7 +94,7 @@ const RESEARCH_APPS: OverviewSection = {
     {
       title: 'Machine Learning',
       content: {
-        image: '/images/overview/applications/machine-learning.png',
+        image: '/images/providers/applications/machine-learning.png',
         description: 'The Qiskit Machine Learning package simply contains sample datasets at present. Qiskit has some classification algorithms such as QSVM (Quantum Support Vector Machine) and VQC (Variational Quantum Classifier), where this data can be used for experiments, and there is also QGAN (Quantum Generative Adversarial Network) algorithm.',
         cta: {
           label: 'Classify data with a VQC',
@@ -105,7 +105,7 @@ const RESEARCH_APPS: OverviewSection = {
     {
       title: 'Chemistry',
       content: {
-        image: '/images/overview/applications/chemestry.png',
+        image: '/images/providers/applications/chemestry.png',
         description: 'The Qiskit Chemistry package supports problems including ground state energy computations, excited states and dipole moments of molecule, both open and closed-shell.',
         cta: {
           label: 'Find the Energy Ground State of a Molecule',
@@ -124,7 +124,7 @@ const ALGORITHMS_COLLECTION_IN_MENU: TableOfContentEntry = {
   isSecondary: true
 }
 
-const ALGORITHMS_COLLECTION: OverviewSection = {
+const ALGORITHMS_COLLECTION: ProvidersSection = {
   id: algorithmsCollectionId,
   title: 'Collection of Algorithms',
   description: 'Qiskit contains a generic framework of cross-domain quantum algorithms upon which applications for near-term quantum computing can be built.',
@@ -136,7 +136,7 @@ const ALGORITHMS_COLLECTION: OverviewSection = {
     {
       title: 'Grover',
       content: {
-        image: '/images/overview/algorithms/grover.png',
+        image: '/images/providers/algorithms/grover.png',
         description: 'Grover\'s algorithm is a well known quantum algorithm part of the amplitude amplifier category that provides quadratic speedup for searching through unstructured collections of records in search of particular targets.',
         cta: {
           label: 'Try out Grover’s',
@@ -147,7 +147,7 @@ const ALGORITHMS_COLLECTION: OverviewSection = {
     {
       title: 'VQE',
       content: {
-        image: '/images/overview/algorithms/vqe.png',
+        image: '/images/providers/algorithms/vqe.png',
         description: 'VQE (Variational Quantum Eigensolver) is another well known quantum algorithm part of the minimum eigensolvers category. This algorithm uses variational techniques and interleaves quantum and classical computations in order to find the minimum eigenvalue of the Hamiltonian of a given system.',
         cta: {
           label: 'Try out VQE',
@@ -158,7 +158,7 @@ const ALGORITHMS_COLLECTION: OverviewSection = {
     {
       title: 'QAOA',
       content: {
-        image: '/images/overview/algorithms/qaoa.png',
+        image: '/images/providers/algorithms/qaoa.png',
         description: 'QAOA (Quantum Approximate Optimization Algorithm) is also part of the minimum eigensolvers category. This algorithm extends VQE (Variational Quantum Eigensolver) and inherits VQE\'s general optimization structure but uses its own fine-tuned variational form.',
         cta: {
           label: 'Try out QAOA',
@@ -169,7 +169,7 @@ const ALGORITHMS_COLLECTION: OverviewSection = {
     {
       title: 'QSVM',
       content: {
-        image: '/images/overview/algorithms/qsvm.png',
+        image: '/images/providers/algorithms/qsvm.png',
         description: 'QSVM is part of the classifiers category and applies to problems that require a feature map for which computing the collection of inner products is not efficient classically. ',
         cta: {
           label: 'Try out QSVM',
@@ -188,7 +188,7 @@ const EXPERIMENTALIST_TOOLBOX_IN_MENU: TableOfContentEntry = {
   isSecondary: true
 }
 
-const EXPERIMENTALIST_TOOLBOX: OverviewSection = {
+const EXPERIMENTALIST_TOOLBOX: ProvidersSection = {
   id: experimentalistToolboxId,
   title: 'Experimentalist Toolbox',
   description: 'Qiskit\'s characterization framework offers circuits and analysis methods to understand and characterize the source of noise that impacts our devices. Such parameters include T1, T₂* , T2, Hamiltonian parameters such as the ZZ interaction rate and control errors in the gates.',
@@ -200,7 +200,7 @@ const EXPERIMENTALIST_TOOLBOX: OverviewSection = {
     {
       title: 'Characterization',
       content: {
-        image: '/images/overview/characterization/characterization.png',
+        image: '/images/providers/characterization/characterization.png',
         description: 'Qiskit\'s characterization framework brings the analysis parameters and circuits to users in order to understand and characterize the source of noise that impacts our devices. Such parameters include T1, T₂*, T2, Hamiltonian parameters such as the ZZ interaction rate and control errors in the gates.',
         cta: {
           label: 'See Characterization framework',
@@ -211,7 +211,7 @@ const EXPERIMENTALIST_TOOLBOX: OverviewSection = {
     {
       title: 'Verification',
       content: {
-        image: '/images/overview/characterization/verification.png',
+        image: '/images/providers/characterization/verification.png',
         description: 'Qiskit\'s verification framework provides experiments that are designed to verify gates and small circuit performance through tomography, quantum volume and randomized benchmarking.',
         cta: {
           label: 'See Verification framework',
@@ -222,7 +222,7 @@ const EXPERIMENTALIST_TOOLBOX: OverviewSection = {
     {
       title: 'Calibration',
       content: {
-        image: '/images/overview/characterization/calibration.png',
+        image: '/images/providers/characterization/calibration.png',
         description: 'Qiskit\'s calibration module allows users to optimize pulse parameters to minimize errors. Perform simple parameter scans, with more sophisticated error amplification sequences coming soon.',
         cta: {
           label: 'See Calibration module',
@@ -241,7 +241,7 @@ const CIRCUITS_IN_MENU: TableOfContentEntry = {
   isSecondary: true
 }
 
-const CIRCUITS: OverviewSection = {
+const CIRCUITS: ProvidersSection = {
   id: circuitsId,
   title: 'Circuits',
   description: 'Qiskit provides a set of tools for composing quantum programs at the level of circuits and pulses, optimizing them for the constraints of a particular physical quantum processor, and managing the batched execution of experiments on remote-access backends.',
@@ -253,7 +253,7 @@ const CIRCUITS: OverviewSection = {
     {
       title: 'Compiler',
       content: {
-        image: '/images/overview/circuits/compiler.png',
+        image: '/images/providers/circuits/compiler.png',
         description: 'Qiskit robust compiler provides users with the ability to explore how quantum circuits run on real hardware and optimize such circuits using modules such as pass managers.',
         cta: {
           label: 'See Compiler',
@@ -264,7 +264,7 @@ const CIRCUITS: OverviewSection = {
     {
       title: 'Circuit Library',
       content: {
-        image: '/images/overview/circuits/circuit-library.png',
+        image: '/images/providers/circuits/circuit-library.png',
         description: 'Circuit Library is a collection of well studied circuits and gates that can be plugged into many experiments allowing users to program at higher levels of abstraction when developing and experimenting with circuits.',
         cta: {
           label: 'See Circuit Library',
@@ -275,7 +275,7 @@ const CIRCUITS: OverviewSection = {
     {
       title: 'Pulse',
       content: {
-        image: '/images/overview/circuits/pulses.png',
+        image: '/images/providers/circuits/pulses.png',
         description: 'Pulse is a lower level quantum programming tool. This tool allows users more control over using quantum circuits when interacting with real quantum hardware.',
         cta: {
           label: 'See OpenPulse',
@@ -294,7 +294,7 @@ const SIMULATORS_IN_MENU: TableOfContentEntry = {
   isSecondary: true
 }
 
-const SIMULATORS: OverviewSection = {
+const SIMULATORS: ProvidersSection = {
   id: 'simulators',
   title: 'Simulate Quantum Hardware',
   description: 'Qiskit provides a high performance simulator framework for the Qiskit software stack. It contains optimized C++ simulator backends for executing compiled circuits, and tools for constructing highly configurable noise models for performing realistic noisy simulations of the errors that occur during execution on real devices.',
@@ -302,7 +302,7 @@ const SIMULATORS: OverviewSection = {
     label: 'See docs',
     url: 'https://qiskit.org/documentation/apidoc/aer.html'
   },
-  image: '/images/overview/simulators/laptop.png'
+  image: '/images/providers/simulators/laptop.png'
 }
 
 const hardwareId: string = 'hardware'
@@ -313,7 +313,7 @@ const HARDWARE_IN_MENU: TableOfContentEntry = {
   isSecondary: true
 }
 
-const HARDWARE: OverviewSection = {
+const HARDWARE: ProvidersSection = {
   id: 'hardware',
   title: 'Run Circuits on Real Quantum Systems',
   description: 'Circuits are the foundational roots for our software stack. Qiskit provides a set of tools for composing quantum programs at the level of circuits and pulses, optimizing them for the constraints of a particular physical quantum processor, and managing the batched execution of experiments on remote-access backends. Qiskit is modularly constructed, simplifying the addition of extensions for circuit optimizations and backends.',
@@ -321,7 +321,7 @@ const HARDWARE: OverviewSection = {
     label: 'See docs',
     url: 'https://qiskit.org/documentation/apidoc/ibmq_provider.html'
   },
-  image: '/images/overview/hardware/quantum-computer.png'
+  image: '/images/providers/hardware/quantum-computer.png'
 }
 
 const TABLE_OF_CONTENTS: TableOfContentEntry[] = [
@@ -339,7 +339,7 @@ const TABLE_OF_CONTENTS: TableOfContentEntry[] = [
   HARDWARE_IN_MENU
 ]
 
-const CONTENT_SECTIONS: OverviewSection[] = [
+const CONTENT_SECTIONS: ProvidersSection[] = [
   RESEARCH_APPS,
   ALGORITHMS_COLLECTION,
   EXPERIMENTALIST_TOOLBOX,
@@ -350,8 +350,8 @@ const CONTENT_SECTIONS: OverviewSection[] = [
 
 export {
   TableOfContentEntry,
-  OverviewSection,
-  OverviewSubSection,
+  ProvidersSection,
+  ProvidersSubSection,
   TABLE_OF_CONTENTS,
   CONTENT_SECTIONS
 }
