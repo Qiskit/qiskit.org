@@ -44,7 +44,7 @@
         <template slot="filters-on-s-screen">
           <AppMultiSelect
             label="Tier"
-            :options="getTierNames(tiers)"
+            :options="tiersNames"
             :value="tierFilters"
             @change-selection="updateTierFilters($event)"
           />
@@ -110,7 +110,6 @@
 </template>
 
 <script setup lang="ts">
-import { mapGetters } from 'vuex'
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import { GeneralLink } from '~/constants/appLinks'
@@ -128,6 +127,28 @@ useHead({
     }
   ]
 })
+
+const { data: members } = useLazyAsyncData(
+  'fetch-members',
+  async () => await import('~/content/ecosystem/members.json')
+)
+
+const { data: tiers } = useLazyAsyncData(
+  'fetch-tiers',
+  async () => await import('~/content/ecosystem/tiers.json')
+)
+
+const tierFilters = ref([] as string[])
+
+const noTierFiltersSelected = computed(() => tierFilters.value.length === 0)
+
+const filteredMembers = computed(
+  () => {
+    return noTierFiltersSelected
+      ? members.value
+      : members.value.filter(member => tierFilters.value.includes(member.tier))
+  }
+)
 
 function getTestRows (member: any): void {
   if (member.testsResults) {
@@ -161,44 +182,26 @@ function getTestRows (member: any): void {
   }
 }
 
-function getTierNames (tiers: any): void {
-  return tiers.map((tier: any) => tier.name)
+const tiersNames = computed(() => tiers.value.map((tier: any) => tier.name))
+
+function getTierDescription (tierName: string): string {
+  const tier = tiers.value.find((tier: any) => tier.name === tierName)
+  return tier.description || ''
 }
 
-function getTierDescription (tier: string): string {
-  const tip = (this as any).tiers.find((tip: any) => tip.name === tier)
-  return tip.description || ''
+function updateTierFilter (filterValue: string, isChecked: boolean) {
+  isChecked
+    ? tierFilters.value.push(filterValue)
+    : tierFilters.value = tierFilters.value.filter((tier: any) => tier !== filterValue)
 }
 
-function updateTierFilter (tier: string, isChecked: boolean): void {
-  const tierFilters = (this as any).tierFilters.filter(
-    (oldOption: any) => oldOption !== tier
-  )
-
-  if (isChecked) {
-    tierFilters.push(tier)
-  }
-  this.$store.commit('ecosystem/setTierFilters', tierFilters)
-}
-
-function updateTierFilters (tierFilters: string[]): void {
-  this.$store.commit('ecosystem/setTierFilters', tierFilters)
+const updateTierFilters = (filterValues: string[]) => {
+  tierFilters.value = filterValues
 }
 
 function isTierFilterChecked (filterValue: string): boolean {
-  return (this as any).tierFilters.includes(filterValue)
+  return tierFilters.value.includes(filterValue)
 }
-
-// TODO: Replace Vuex with Pinia
-// @Component({
-//   computed: {
-//     ...mapGetters('ecosystem', ['filteredMembers', 'tierFilters', 'tiers'])
-//   },
-//   async fetch ({ store }) {
-//     await store.dispatch('ecosystem/fetchMembers')
-//     await store.dispatch('ecosystem/fetchTiers')
-//   },
-// })
 
 // TODO: Refactor "logic" pages
 // export default class EcosystemPage extends QiskitPage {
