@@ -98,7 +98,6 @@
 </template>
 
 <script setup lang="ts">
-import { mapGetters } from 'vuex'
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 
@@ -116,27 +115,6 @@ definePageMeta({
 useHead({
   title: 'Qiskit Events'
 })
-
-// // TODO: Replace Vuex with Pinia
-// @Component({
-//   computed: {
-//     ...mapGetters('events', [
-//       'filteredEvents',
-//       'typeFilters',
-//       'regionFilters'
-//     ])
-//   },
-
-//   async fetch ({ store }) {
-//     const upcomingEvents = await store.dispatch('events/fetchUpcomingEvents')
-//     const pastEvents = await store.dispatch('events/fetchPastEvents')
-
-//     const upcomingEventsPayload = { events: 'upcomingCommunityEvents', eventsSet: upcomingEvents }
-//     const pastEventsPayload = { events: 'pastCommunityEvents', eventsSet: pastEvents }
-//     store.commit('events/setEvents', upcomingEventsPayload)
-//     store.commit('events/setEvents', pastEventsPayload)
-//   }
-// })
 
 const eventRequestLink = EVENT_REQUEST_LINK
 const emptyCard = {
@@ -157,39 +135,91 @@ const extraFilters = [
   }
 ]
 
-const noEvents = (this as any).filteredEvents.length === 0
+const { data: upcomingEvents } = useLazyAsyncData(
+  'fetch-upcoming-events',
+  async () => await import('~/content/events/upcoming-community-events.json') as CommunityEvent[]
+)
+
+const { data: pastEvents } = useLazyAsyncData(
+  'fetch-past-events',
+  async () => await import('~/content/events/past-community-events.json') as CommunityEvent[]
+)
+
+const activeSet = ref('upcoming')
+const regionFilters = ref([] as string[])
+const typeFilters = ref([] as string[])
+
+const showUpcomingEvents = computed(() => activeSet.value === 'upcoming')
+const events = computed(() => showUpcomingEvents.value ? upcomingEvents.value : pastEvents.value)
+const noRegionFiltersSelected = computed(() => regionFilters.value.length === 0)
+const noTypeFiltersSelected = computed(() => typeFilters.value.length === 0)
+
+const filteredEvents = computed(
+  () => {
+    if (noTypeFiltersSelected.value && noRegionFiltersSelected.value) { return events.value }
+
+    if (noRegionFiltersSelected.value) { return filterBy(events.value, typeFilters.value, 'types') }
+
+    if (noTypeFiltersSelected.value) { return filterBy(events.value, regionFilters.value, 'regions') }
+
+    const eventsAfterApplyTypeFilter = filterBy(events.value, typeFilters, 'types')
+
+    return filterBy(eventsAfterApplyTypeFilter, regionFilters, 'regions')
+
+    function filterBy (allEvents: CommunityEvent[], selectedFilters: string[], propToFilter: keyof CommunityEvent) {
+      return allEvents.filter((event) => {
+        const propValue = event[propToFilter] || []
+        const valueArray = Array.isArray(propValue) ? propValue : [propValue]
+        return valueArray.some(value => selectedFilters.includes(value))
+      })
+    }
+  }
+)
+
+const noEvents = computed(() => filteredEvents.value.length === 0)
 
 const getCheckedFilters = (filter: string) => (this as any)[filter]
 
 const updateWholeFilter = (filter: string, filterValues: string[]) => {
-  const { commit } = this.$store
-  const payload = { filter, filterValues }
-
-  commit('events/updateFilterSet', payload)
+  filter === 'regionFilters'
+    ? regionFilters.value = filterValues
+    : typeFilters.value = filterValues
 }
 
-const isFilterChecked = (filter: string, filterValue: string): Array<CommunityEvent> => {
-  const typeFilters = (this as any).typeFilters
-  const regionFilters = (this as any).regionFilters
-
+const isFilterChecked = (filter: string, filterValue: string): boolean => {
   return filter === 'regionFilters'
-    ? regionFilters.includes(filterValue)
-    : typeFilters.includes(filterValue)
+    ? regionFilters.value.includes(filterValue)
+    : typeFilters.value.includes(filterValue)
 }
 
-const updateFilter = (filter: string, filterValue: string, isSelected: boolean) => {
-  const payload = { filter, filterValue, isSelected }
-  const { commit } = this.$store
+function updateFilter (filter: string, filterValue: string, isSelected: boolean) {
+  if (filter === 'regionFilters') {
+    isSelected
+      ? addFilter(regionFilters.value, filterValue)
+      : removeFilter(regionFilters.value, filterValue)
+  } else if (filter === 'typeFilters') {
+    isSelected
+      ? addFilter(typeFilters.value, filterValue)
+      : removeFilter(typeFilters.value, filterValue)
+  }
+}
 
-  isSelected
-    ? commit('events/addFilter', payload)
-    : commit('events/removeFilter', payload)
+function addFilter (filterContent: string[], filterValue: string) {
+  const filterIndex = filterContent.indexOf(filterValue)
+  const noFilterFound = filterIndex === -1
+
+  noFilterFound && filterContent.push(filterValue)
+}
+
+function removeFilter (filterContent: string[], filterValue: string) {
+  const filterIndex = filterContent.indexOf(filterValue)
+  const isFilterFound = filterIndex !== -1
+
+  isFilterFound && filterContent.splice(filterIndex, 1)
 }
 
 const selectTab = (selectedTab: number) => {
-  const activeSet = selectedTab === 0 ? 'upcoming' : 'past'
-
-  this.$store.commit('events/setActiveSet', activeSet)
+  activeSet.value = selectedTab === 0 ? 'upcoming' : 'past'
 }
 
 // TODO: Refactor "logic" pages
