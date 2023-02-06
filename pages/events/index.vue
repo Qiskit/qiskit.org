@@ -178,30 +178,34 @@ const filteredEvents = computed(
 
 const noEvents = computed(() => filteredEvents.value.length === 0)
 
-const getCheckedFilters = (filter: string) => (this as any)[filter]
+function isRegionFilter (filter: string) {
+  return filter === 'regionFilters'
+}
+
+function getCheckedFilters (filter: string) {
+  return isRegionFilter(filter)
+    ? regionFilters.value
+    : typeFilters.value
+}
 
 const updateWholeFilter = (filter: string, filterValues: string[]) => {
-  filter === 'regionFilters'
+  isRegionFilter(filter)
     ? regionFilters.value = filterValues
     : typeFilters.value = filterValues
 }
 
 const isFilterChecked = (filter: string, filterValue: string): boolean => {
-  return filter === 'regionFilters'
+  return isRegionFilter(filter)
     ? regionFilters.value.includes(filterValue)
     : typeFilters.value.includes(filterValue)
 }
 
 function updateFilter (filter: string, filterValue: string, isSelected: boolean) {
-  if (filter === 'regionFilters') {
-    isSelected
-      ? addFilter(regionFilters.value, filterValue)
-      : removeFilter(regionFilters.value, filterValue)
-  } else if (filter === 'typeFilters') {
-    isSelected
-      ? addFilter(typeFilters.value, filterValue)
-      : removeFilter(typeFilters.value, filterValue)
-  }
+  const filterContent = isRegionFilter(filter) ? regionFilters.value : typeFilters.value
+
+  isSelected
+    ? addFilter(filterContent, filterValue)
+    : removeFilter(filterContent, filterValue)
 }
 
 function addFilter (filterContent: string[], filterValue: string) {
