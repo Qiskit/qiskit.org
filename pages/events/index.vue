@@ -177,7 +177,7 @@ export default class EventsPage extends QiskitPage {
   eventRequestLink = EVENT_REQUEST_LINK
   emptyCard = {
     title: 'No events found',
-    description: 'Trying doing a wider search criteria, or consider starting your own event.',
+    description: 'Try doing a wider search criteria, or consider starting your own event.',
     img: '/images/events/no-events.svg'
   }
 
