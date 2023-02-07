@@ -77,6 +77,7 @@
                 :image="event.image"
                 :location="event.location"
                 :date="event.date"
+                :time="event.startDateAndTime"
                 :to="event.to"
               >
                 {{ event.abstract }}
@@ -178,7 +179,7 @@ export default class EventsPage extends QiskitPage {
   eventRequestLink = EVENT_REQUEST_LINK
   emptyCard = {
     title: 'No events found',
-    description: 'Trying doing a wider search criteria, or consider starting your own event.',
+    description: 'Try using wider search criteria, or consider starting your own event.',
     img: '/images/events/no-events.svg'
   }
 
