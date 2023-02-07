@@ -27,7 +27,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-import { AccordionLayoutProps } from './AccordionLayout.vue'
+import { AccordionLayoutProps } from '~/components/providers/AccordionLayout.vue'
 
 type ContentAccordionTab = {
   title: string,

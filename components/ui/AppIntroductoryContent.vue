@@ -54,6 +54,7 @@ export default class AppIntroductoryContent extends Vue {
       $grid-columns: math.div(5, 13); // Number of columns that the element will use at this breakpoint.
 
       max-width: 100% * $grid-columns;
+      width: 100%;
       padding-right: $spacing-07;
     }
 

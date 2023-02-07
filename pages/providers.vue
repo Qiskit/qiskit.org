@@ -1,16 +1,13 @@
 <template>
   <div class="providers-page">
     <AppPageHeaderFixed>
-      The most
+      Run Qiskit Compiled circuits on
       <TypewriterEffect
         :values="[
-          'feature-rich',
-          'modular',
-          'open',
-          'popular'
+          'real hardware',
+          'simulators',
         ]"
       />
-      quantum computing SDK
     </AppPageHeaderFixed>
     <section
       id="contentContainer"
@@ -81,11 +78,6 @@ export default class ProvidersPage extends QiskitPage {
 
   tocEntries = TABLE_OF_CONTENTS
   contentSections = CONTENT_SECTIONS
-
-  quickStartLink = {
-    url: '#quick-start',
-    label: 'Get Started'
-  }
 
   asTabs (subsections: Array<ProvidersSubSection>): Array<ContentAccordionTab> {
     return subsections.map(subsection => subsection as ContentAccordionTab)
