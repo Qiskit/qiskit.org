@@ -5,11 +5,10 @@ import {
   findImageAttachment
 } from './airtable-conversion-utils'
 // TODO: Understand why this import works with '../' and not with '~/'
-// Check again once we finish the migration to Nuxt3
 import {
   Advocate,
   AdvocatesWorldRegion
-} from '~/types/advocates'
+} from '../types/advocates'
 
 const RECORD_FIELDS_IDS = Object.freeze({
   name: 'fldkG2SqdvCKDUhCH',
