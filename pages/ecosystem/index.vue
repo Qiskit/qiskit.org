@@ -138,7 +138,7 @@ const { data: tiers } = useLazyAsyncData(
   async () => await import('~/content/ecosystem/tiers.json')
 )
 
-const tierFilters = ref([] as string[])
+const tierFilters = ref<string[]>([])
 
 const noTierFiltersSelected = computed(() => tierFilters.value.length === 0)
 
