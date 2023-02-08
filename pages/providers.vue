@@ -1,16 +1,13 @@
 <template>
-  <div class="overview-page">
+  <div class="providers-page">
     <AppPageHeaderFixed>
-      The most
+      Run Qiskit Compiled circuits on
       <TypewriterEffect
         :values="[
-          'feature-rich',
-          'modular',
-          'open',
-          'popular'
+          'real hardware',
+          'simulators',
         ]"
       />
-      quantum computing SDK
     </AppPageHeaderFixed>
     <section
       id="contentContainer"
@@ -18,14 +15,10 @@
     >
       <div class="bx--row">
         <div class="bx--col-sm-0 bx--col-md-2 bx--col-lg-3">
-          <div class="overview-page__table-of-contents">
+          <div class="providers-page__table-of-contents">
             <TheTableOfContents
               :entries="tocEntries"
               :active-section="activeSection"
-            />
-            <AppCta
-              v-bind="quickStartLink"
-              kind="ghost"
             />
           </div>
         </div>
@@ -34,7 +27,7 @@
             v-for="section in contentSections"
             :id="section.id"
             :key="section.id"
-            class="overview-page__content-section scrollable"
+            class="providers-page__content-section scrollable"
             :title="section.title"
             :description="section.description"
             :link="section.link"
@@ -42,13 +35,13 @@
           >
             <ContentAccordion
               v-if="section.subSections"
-              class="overview-page__content-section-details"
+              class="providers-page__content-section-details"
               :tabs="asTabs(section.subSections)"
             />
-            <div v-else class="overview-page__content-section-details">
-              <div class="overview-page__content-section-image__wrapper">
+            <div v-else class="providers-page__content-section-details">
+              <div class="providers-page__content-section-image__wrapper">
                 <img
-                  class="overview-page__content-section-image"
+                  class="providers-page__content-section-image"
                   :src="section.image"
                 >
               </div>
@@ -57,49 +50,43 @@
         </div>
       </div>
     </section>
-    <TheQuickStart id="quick-start" />
   </div>
 </template>
 
 <script lang="ts">
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
-import { ContentAccordionTab } from '~/components/overview/ContentAccordion.vue'
+import { ContentAccordionTab } from '~/components/providers/ContentAccordion.vue'
 import {
   TABLE_OF_CONTENTS,
   CONTENT_SECTIONS,
-  OverviewSubSection
-} from '~/constants/overviewContent'
+  ProvidersSubSection
+} from '~/constants/providersContent'
 import ScrollSectionsMixin from '~/mixins/scrollBetweenSections'
 
 @Component({
   mixins: [ScrollSectionsMixin],
   head () {
     return {
-      title: 'Qiskit Overview'
+      title: 'Qiskit Providers'
     }
   },
   layout: 'default-max'
 })
-export default class OverviewPage extends QiskitPage {
-  routeName = 'overview'
+export default class ProvidersPage extends QiskitPage {
+  routeName = 'providers'
 
   tocEntries = TABLE_OF_CONTENTS
   contentSections = CONTENT_SECTIONS
 
-  quickStartLink = {
-    url: '#quick-start',
-    label: 'Get Started'
-  }
-
-  asTabs (subsections: Array<OverviewSubSection>): Array<ContentAccordionTab> {
+  asTabs (subsections: Array<ProvidersSubSection>): Array<ContentAccordionTab> {
     return subsections.map(subsection => subsection as ContentAccordionTab)
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.overview-page {
+.providers-page {
   &__table-of-contents {
     position: sticky;
     top: $spacing-06;
