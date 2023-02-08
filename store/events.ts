@@ -38,6 +38,7 @@ type CommunityEvent = {
   date: string,
   startDate: string,
   endDate: string,
+  startDateAndTime?: string | null,
   to: string
 }
 

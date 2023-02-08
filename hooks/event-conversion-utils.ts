@@ -4,7 +4,6 @@ import Airtable from 'airtable'
 import {
   CommunityEvent,
   CommunityEventType,
-  WorldRegion,
   COMMUNITY_EVENT_TYPES,
   COMMUNITY_EVENT_TYPE_OPTIONS,
   WORLD_REGIONS
@@ -20,6 +19,7 @@ export type SeminarSeriesEvent = {
   date: string,
   startDate: string,
   endDate: string,
+  startDateAndTime?: string | null,
   image: string,
   institution: string,
   location: string,
@@ -32,8 +32,9 @@ const RECORD_FIELDS_IDS = Object.freeze({
   name: 'fldTqTxKr3ZzUhzKT',
   startDate: 'fldPGzoUf9wxsBDYJ',
   endDate: 'fldeFv42sqOY7oMy0',
+  startDateAndTime: 'fldF2COMbzANgkOh8',
   types: 'fldarZoYRJvETevow',
-  eventWebsite: 'fldBPq3LMa5aZDBZm',
+  website: 'fldBPq3LMa5aZDBZm',
   location: 'fldSjeniJtud6M5j3',
   regions: 'fldBCXzoxvcoxsKIK',
   image: 'fldco5xB6dy9MG7y8',
@@ -49,15 +50,35 @@ class EventsAirtableRecords extends AirtableRecords {
     super(apiKey, AIRTABLE_BASE_ID, 'Event Calendar', view, undefined, recordFields)
   }
 
-  getEventsQuery (days: number, view: string, filters: string[] = []): Airtable.Query<{}> {
-    const { startDate } = this.recordFields!
-    const filterByFormula = `AND(${filters})`
+  /**
+   * Sort the events by their start date.
+   * @param events The events to sort.
+   * @param direction The direction to sort the events in.
+   * @returns The sorted events.
+   */
+  private sortEventsByStartDate<T extends CommunityEvent | SeminarSeriesEvent> (events: T[], direction: 'asc' | 'desc'): T[] {
+    return events.sort((a, b) => {
+      const aDate = new Date(a.startDate)
+      const bDate = new Date(b.startDate)
+
+      if (direction === 'asc') {
+        return aDate.getTime() - bDate.getTime()
+      } else {
+        return bDate.getTime() - aDate.getTime()
+      }
+    })
+  }
+
+  /**
+   * Get the Airtable query for the events.
+   * @param filterFormula The Airtable filter formula to use.
+   * @returns The Airtable query.
+   */
+  getEventsQuery (filterFormula: string): Airtable.Query<{}> {
     const base = new Airtable({ apiKey: this.apiKey }).base(AIRTABLE_BASE_ID)
 
     return base('Event Calendar').select({
-      filterByFormula,
-      sort: [{ field: startDate, direction: days > 0 ? 'asc' : 'desc' }],
-      view
+      filterByFormula: filterFormula
     })
   }
 
@@ -116,20 +137,25 @@ class EventsAirtableRecords extends AirtableRecords {
     return eventDateToCheck >= rangeStart && eventDateToCheck <= rangeEnd
   }
 
+  /**
+   * Fetch the community events from Airtable, convert them to the
+   * CommunityEvent type, and return them sorted by their start date.
+   * @param days The number of days before and after today to fetch events for.
+   * @returns The community events.
+   */
   async fetchCommunityEvents (days: number): Promise<CommunityEvent[]> {
-    const view = 'Add to Event Site'
-
     if (!this.recordFields) {
       this.recordFields = await this.getAllFieldNames(RECORD_FIELDS_IDS)
     }
 
-    const { showOnEventsPage } = this.recordFields
     const communityEvents: CommunityEvent[] = []
+    const filterFormula = `{${this.recordFields.showOnEventsPage}}`
 
-    await this.getEventsQuery(days, view, [`{${showOnEventsPage}}`]).eachPage(async (records, nextPage) => {
+    await this.getEventsQuery(filterFormula).eachPage(async (records, nextPage) => {
       for (const record of records) {
         this.id = record.id
         const communityEvent = await this.convertToCommunityEvent(record)
+
         if (this.isEventInDateRange(communityEvent, days)) {
           communityEvents.push(communityEvent)
         }
@@ -137,20 +163,25 @@ class EventsAirtableRecords extends AirtableRecords {
       nextPage()
     })
 
-    return Promise.resolve(communityEvents)
+    const sortedCommunityEvents = this.sortEventsByStartDate(communityEvents, days > 0 ? 'asc' : 'desc')
+    return Promise.resolve(sortedCommunityEvents)
   }
 
+  /**
+   * Fetch the seminar series events from Airtable, convert them to the
+   * SeminarSeriesEvent type, and return them sorted by their start date.
+   * @param days The number of days before and after today to fetch events for.
+   * @returns The seminar series events.
+   */
   async fetchSeminarSeriesEvents (days: number): Promise<SeminarSeriesEvent[]> {
-    const view = 'Seminar Series ONLY'
-
     if (!this.recordFields) {
       this.recordFields = await this.getAllFieldNames(RECORD_FIELDS_IDS)
     }
 
-    const { showOnSeminarSeriesPage } = this.recordFields
     const seminarSeriesEvents: SeminarSeriesEvent[] = []
+    const filterFormula = `{${this.recordFields.showOnSeminarSeriesPage}}`
 
-    await this.getEventsQuery(days, view, [`{${showOnSeminarSeriesPage}}`]).eachPage(async (records, nextPage) => {
+    await this.getEventsQuery(filterFormula).eachPage(async (records, nextPage) => {
       for (const record of records) {
         this.id = record.id
         const seminarSeriesEvent = await this.convertToSeminarSeriesEvent(record)
@@ -164,35 +195,49 @@ class EventsAirtableRecords extends AirtableRecords {
       nextPage()
     })
 
-    return Promise.resolve(seminarSeriesEvents)
+    const sortedSeminarSeriesEvents = this.sortEventsByStartDate(seminarSeriesEvents, days > 0 ? 'asc' : 'desc')
+    return Promise.resolve(sortedSeminarSeriesEvents)
   }
 
-  async convertToCommunityEvent (record: any): Promise<CommunityEvent> {
+  /**
+   * Convert an Airtable record to a CommunityEvent.
+   * @param record The Airtable record to convert.
+   * @returns The converted CommunityEvent.
+   */
+  async convertToCommunityEvent (record: Record<string, any>): Promise<CommunityEvent> {
     const event = {
-      title: this.getName(record),
-      types: this.getTypes(record),
-      image: await this.getImage(record),
-      location: this.getLocation(record),
-      regions: this.getRegions(record),
+      endDate: record.get(this.recordFields!.endDate) || '',
+      location: record.get(this.recordFields!.location) || WORLD_REGIONS.tbd,
+      regions: record.get(this.recordFields!.regions) || [WORLD_REGIONS.tbd],
+      title: record.get(this.recordFields!.name) || '',
+      to: record.get(this.recordFields!.website) || '',
+
       date: this.formatDates(...this.getDates(record)),
+      image: await this.getImage(record),
       startDate: this.getStartDate(record),
-      endDate: this.getEndDate(record),
-      to: this.getWebsite(record)
+      startDateAndTime: this.formatTime(record.get(this.recordFields!.startDateAndTime) || null),
+      types: this.getEventTypes(record)
     }
     return event
   }
 
-  async convertToSeminarSeriesEvent (record: any): Promise<SeminarSeriesEvent> {
+  /**
+   * Convert an Airtable record to a SeminarSeriesEvent.
+   * @param record The Airtable record to convert.
+   * @returns The converted SeminarSeriesEvent.
+   */
+  async convertToSeminarSeriesEvent (record: Record<string, any>): Promise<SeminarSeriesEvent> {
     const event = {
+      endDate: record.get(this.recordFields!.endDate) || '',
+      institution: record.get(this.recordFields!.institution) || '',
+      location: record.get(this.recordFields!.location) || WORLD_REGIONS.tbd,
+      speaker: record.get(this.recordFields!.speaker) || '',
+      title: record.get(this.recordFields!.name) || '',
+      to: record.get(this.recordFields!.website) || '',
+
       date: this.formatDates(...this.getDates(record)),
-      startDate: this.getStartDate(record),
-      endDate: this.getEndDate(record),
       image: await this.getImage(record),
-      institution: this.getInstitution(record),
-      location: this.getLocation(record),
-      speaker: this.getSpeaker(record),
-      title: this.getName(record),
-      to: this.getWebsite(record)
+      startDate: this.getStartDate(record)
     }
     return event
   }
@@ -229,19 +274,32 @@ class EventsAirtableRecords extends AirtableRecords {
     throw new Error('Unreachable: should have all the cases covered.')
   }
 
-  public getInstitution (record: any): string {
-    return record.get(this.recordFields!.institution) || ''
+  /**
+   * Format a date and time to a string with only the time in UTC.
+   * @param startDateAndTime The date and time to format.
+   * @returns The formatted time.
+   */
+  formatTime (startDateAndTime: string | null): string | null {
+    if (!startDateAndTime) { return null }
+
+    const formattedStartDateAndTime = new Date(startDateAndTime)
+
+    const options = {
+      hour: 'numeric',
+      minute: 'numeric',
+      timeZone: 'UTC',
+      timeZoneName: 'short'
+    } as const
+
+    return new Intl.DateTimeFormat('en', options).format(formattedStartDateAndTime)
   }
 
-  public getName (record: any): string {
-    return record.get(this.recordFields!.name)
-  }
-
-  public getSpeaker (record: any): string {
-    return record.get(this.recordFields!.speaker)
-  }
-
-  public getTypes (record: any): CommunityEventType[] {
+  /**
+   * Get the event's types.
+   * @param record The event's record.
+   * @returns The event's types.
+   */
+  private getEventTypes (record: Record<string, any>): CommunityEventType[] {
     const value = record.get(this.recordFields!.types) || []
     const valueList = (Array.isArray(value) ? value : [value]) as string[]
     const communityEventTypes = this.filterWithWhitelist(valueList, COMMUNITY_EVENT_TYPE_OPTIONS)
@@ -249,7 +307,12 @@ class EventsAirtableRecords extends AirtableRecords {
     return noTypes ? [COMMUNITY_EVENT_TYPES.talks] : communityEventTypes
   }
 
-  public async getImage (record: any): Promise<string> {
+  /**
+   * Get the event's image.
+   * @param record The event's record.
+   * @returns Promise resolving to the event's image URL.
+   */
+  public async getImage (record: Record<string, any>): Promise<string> {
     const fallbackImage = '/images/events/no-picture.jpg'
     const attachments = record.get(this.recordFields!.image)
     const imageAttachment = attachments && findImageAttachment(attachments)
@@ -266,33 +329,42 @@ class EventsAirtableRecords extends AirtableRecords {
       .catch(() => fallbackImage)
   }
 
-  public getLocation (record: any): string {
-    return record.get(this.recordFields!.location) || WORLD_REGIONS.tbd
-  }
+  /**
+   * Get the event's start date.
+   * @param record The event's record.
+   * @returns The event's start date.
+   */
+  public getStartDate (record: Record<string, any>): string {
+    if (record.get(this.recordFields!.startDateAndTime)) {
+      const startDateAndTime = record.get(this.recordFields!.startDateAndTime)
+      const startDate = new Date(startDateAndTime)
+      return startDate.toISOString().split('T')[0]
+    }
 
-  public getRegions (record: any): WorldRegion[] {
-    const recordRegion = record.get(this.recordFields!.regions)
-    return recordRegion || [WORLD_REGIONS.tbd]
-  }
-
-  public getStartDate (record: any): string {
     return record.get(this.recordFields!.startDate) || ''
   }
 
-  public getEndDate (record: any): string {
-    return record.get(this.recordFields!.endDate) || ''
-  }
+  /**
+   * Get the event's start and end dates.
+   * @param record The event's record.
+   * @returns The event's start and end dates.
+   */
+  public getDates (record: Record<string, any>): [Date|undefined, Date|undefined] {
+    const recordStartDate = this.getStartDate(record)
+    const recordEndDate = record.get(this.recordFields!.endDate) as string | undefined
 
-  public getDates (record: any): [Date, Date|undefined] {
-    const recordStartDate = record.get(this.recordFields!.startDate)
-    const recordEndDate = record.get(this.recordFields!.endDate)
-    const startDate = recordStartDate && new Date(recordStartDate)
-    const endDate = recordEndDate && new Date(recordEndDate)
+    let startDate: Date | undefined
+    let endDate: Date | undefined
+
+    if (recordStartDate) {
+      startDate = new Date(recordStartDate)
+    }
+
+    if (recordEndDate) {
+      endDate = new Date(recordEndDate)
+    }
+
     return [startDate, endDate]
-  }
-
-  public getWebsite (record: any): string {
-    return record.get(this.recordFields!.website) || ''
   }
 }
 
