@@ -1,10 +1,28 @@
 <template>
   <article class="accordion-layout">
+    <cv-code-snippet
+      kind="oneline"
+      light
+      feedback-aria-label="Copy code snippet"
+    >
+      <!-- TODO: replace w/ dynamic code snippet -->
+      <span>pip install something</span>
+    </cv-code-snippet>
     <img :src="image" class="accordion-layout__image" />
     <p class="accordion-layout__description">
       {{ description }}
     </p>
     <UiCta kind="ghost" :label="cta.label" :url="cta.url" />
+    <!-- TODO: replace w/ dynamic code sample -->
+    <cv-code-snippet
+      kind="multiline"
+      light
+      feedback-aria-label="Copy code snippet"
+    >
+      import qiskit from qiskit_runtime import ... (very) short code example
+      Lorem ipsum dolor sit amet consectetur adipiscing elit Suspendisse id
+      laoreet urna nec egestas lorem Donec porta mauris sed facilisis pulvinar
+    </cv-code-snippet>
   </article>
 </template>
 

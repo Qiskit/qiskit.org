@@ -1,24 +1,16 @@
 <template>
-  <div class="overview-page">
+  <div class="providers-page">
     <UiPageHeaderFixed>
-      The most
-      <UiTypewriterEffect
-        :values="['feature-rich', 'modular', 'open', 'popular']"
-      />
-      quantum computing SDK
+      Run Qiskit Compiled circuits on
+      <UiTypewriterEffect :values="['real hardware', 'simulators']" />
     </UiPageHeaderFixed>
     <section id="contentContainer" class="cds--grid page-section">
       <div class="cds--row">
         <div class="cds--col-sm-0 cds--col-md-2 cds--col-lg-3">
-          <div class="overview-page__table-of-contents">
-            <OverviewTableOfContents
+          <div class="providers-page__table-of-contents">
+            <ProvidersTableOfContents
               :entries="tocEntries"
               :active-section="activeSection"
-            />
-            <UiCta
-              kind="ghost"
-              :label="quickStartLink.label"
-              :url="quickStartLink.url"
             />
           </div>
         </div>
@@ -27,21 +19,21 @@
             v-for="section in contentSections"
             :id="section.id"
             :key="section.id"
-            class="overview-page__content-section scrollable"
+            class="providers-page__content-section scrollable"
             :title="section.title"
             :description="section.description"
             :link="section.link"
             :linkset="section.linkset"
           >
-            <OverviewContentAccordion
+            <ProvidersContentAccordion
               v-if="section.subSections"
-              class="overview-page__content-section-details"
+              class="providers-page__content-section-details"
               :tabs="asTabs(section.subSections)"
             />
-            <div v-else class="overview-page__content-section-details">
-              <div class="overview-page__content-section-image__wrapper">
+            <div v-else class="providers-page__content-section-details">
+              <div class="providers-page__content-section-image__wrapper">
                 <img
-                  class="overview-page__content-section-image"
+                  class="providers-page__content-section-image"
                   :src="section.image"
                 />
               </div>
@@ -50,27 +42,26 @@
         </div>
       </div>
     </section>
-    <LandingQuickStartComponent id="quick-start" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ContentAccordionTab } from "~/components/Overview/OverviewContentAccordion.vue";
+import { ContentAccordionTab } from "~/components/Providers/ProvidersContentAccordion.vue";
 import {
   TABLE_OF_CONTENTS,
   CONTENT_SECTIONS,
-  OverviewSubSection,
-} from "~/constants/overviewContent";
+  ProvidersSubSection,
+} from "~/constants/providersContent";
 import { useScrollBetweenSections } from "~/composables/useScrollBetweenSections";
 
 definePageMeta({
   layout: "default-max",
-  pageTitle: "Qiskit Overview",
-  routeName: "overview",
+  pageTitle: "Qiskit Providers",
+  routeName: "providers",
 });
 
 useHead({
-  title: "Qiskit Overview",
+  title: "Qiskit Providers",
 });
 
 const tocEntries = TABLE_OF_CONTENTS;
@@ -78,13 +69,8 @@ const contentSections = CONTENT_SECTIONS;
 
 const { activeSection } = useScrollBetweenSections();
 
-const quickStartLink = {
-  url: "#quick-start",
-  label: "Get Started",
-};
-
 function asTabs(
-  subsections: Array<OverviewSubSection>
+  subsections: Array<ProvidersSubSection>
 ): Array<ContentAccordionTab> {
   return subsections.map((subsection) => subsection as ContentAccordionTab);
 }
@@ -94,7 +80,7 @@ function asTabs(
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
-.overview-page {
+.providers-page {
   &__table-of-contents {
     position: sticky;
     top: carbon.$spacing-06;

@@ -64,6 +64,7 @@ defineProps<Props>();
 
       max-width: 100% * $grid-columns;
       padding-right: carbon.$spacing-07;
+      width: 100%;
     }
 
     @include carbon.breakpoint-up(max) {

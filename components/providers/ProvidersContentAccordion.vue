@@ -14,7 +14,7 @@
           handleAccordionItemToggled({ changedIndex: index }, $event)
         "
       >
-        <OverviewAccordionLayout
+        <ProvidersAccordionLayout
           :image="tab.content.image"
           :description="tab.content.description"
           :cta="tab.content.cta"
@@ -26,7 +26,7 @@
 
 <script setup lang="ts">
 import "@carbon/web-components/es/components/accordion/index.js";
-import { AccordionLayoutProps } from "~/components/Overview/OverviewAccordionLayout.vue";
+import { AccordionLayoutProps } from "~/components/Providers/ProvidersAccordionLayout.vue";
 
 export type ContentAccordionTab = {
   title: string;
