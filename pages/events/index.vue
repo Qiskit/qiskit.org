@@ -144,7 +144,7 @@ const { data: pastEvents } = useLazyAsyncData(
   async () => await import('~/content/events/past-community-events.json') as CommunityEvent[]
 )
 
-const activeSet = ref('upcoming')
+const activeSet = ref<'past'|'upcoming'>('upcoming')
 const regionFilters = ref([] as string[])
 const typeFilters = ref([] as string[])
 
