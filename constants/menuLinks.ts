@@ -129,15 +129,6 @@ const CODE_OF_CONDUCT: LabeledLinks = {
   },
 };
 
-const OVERVIEW_LINK: NavLink = {
-  label: "Overview",
-  url: "/overview",
-  segment: {
-    cta: "overview",
-    location: "menu",
-  },
-};
-
 const LEARN_LINK: NavLink = {
   label: "Learn",
   url: "/learn",
@@ -278,7 +269,6 @@ export {
   DOCUMENTATION_LINK,
   STAY_CONNECTED_LINKS,
   LEARN_LINK,
-  OVERVIEW_LINK,
   SOCIAL_MEDIA,
   NavLink,
   InnerNavLink,
