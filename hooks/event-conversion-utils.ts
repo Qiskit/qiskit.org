@@ -15,7 +15,7 @@ import {
   COMMUNITY_EVENT_TYPES,
   COMMUNITY_EVENT_TYPE_OPTIONS,
   WORLD_REGIONS
-} from '~/types/events'
+} from '../types/events'
 
 export type SeminarSeriesEvent = {
   date: string,
