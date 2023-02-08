@@ -146,7 +146,7 @@ const { data: pastEvents } = useLazyAsyncData(
 
 const activeSet = ref<'past'|'upcoming'>('upcoming')
 const regionFilters = ref<string[]>([])
-const typeFilters = ref([] as string[])
+const typeFilters = ref<string[]>([])
 
 const showUpcomingEvents = computed(() => activeSet.value === 'upcoming')
 const events = computed(() => showUpcomingEvents.value ? upcomingEvents.value : pastEvents.value)
