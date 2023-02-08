@@ -45,8 +45,8 @@
       <template slot="results">
         <div class="bx--row">
           <div
-            v-for="(advocate, index) in advocates"
-            :key="index"
+            v-for="advocate in filteredAdvocates"
+            :key="advocate.name"
             class="bx--col-max-8"
           >
             <AdvocateCard v-bind="advocate" />
@@ -58,41 +58,40 @@
 </template>
 
 <script setup lang="ts">
-import { mapState } from 'vuex'
-import type { MapperForStateWithNamespace } from 'vuex'
-import { Advocate, ADVOCATES_WORLD_REGION_OPTIONS, State } from '~/store/advocates'
-
-interface Props {
-  advocates: Advocate[]
-}
-
-defineProps<Props>()
+import { ADVOCATES_WORLD_REGION_OPTIONS, Advocate } from '~/types/advocates'
 
 const filter = {
   label: 'Locations',
   options: ADVOCATES_WORLD_REGION_OPTIONS
 }
 
-const { regionFilters } = mapState<MapperForStateWithNamespace>('advocates', {
-  regionFilters: (state: State) => state.regionFilters
-})
+const { data: advocates } = useLazyAsyncData(
+  'fetch-advocates',
+  async () => await import('~/content/advocates/advocates.json') as Advocate[]
+)
 
-function isRegionFilterChecked (filterValue: string): boolean {
-  return regionFilters.includes(filterValue)
-}
+const regionFilters = ref([] as string[])
+
+const filteredAdvocates = computed(
+  () => {
+    const noRegionFilters = regionFilters.value.length === 0
+
+    return noRegionFilters
+      ? advocates
+      : advocates.value.filter(advocate => regionFilters.value.includes(advocate.region))
+  }
+)
+
+const isRegionFilterChecked = (filterValue: string): boolean => regionFilters.value.includes(filterValue)
 
 function updateRegionFilter (option: string, isChecked: boolean) {
-  const filteredRegionFilters = regionFilters.filter(oldOption => oldOption !== option)
+  const filteredRegionFilters = regionFilters.value.filter(oldOption => oldOption !== option)
 
   if (isChecked) {
     filteredRegionFilters.push(option)
   }
 
-  updateRegionFilters(filteredRegionFilters)
-}
-
-function updateRegionFilters (regionFilters: string[]) {
-  this.$store.commit('advocates/setRegionFilters', regionFilters)
+  regionFilters.value = filteredRegionFilters
 }
 
 const joinSlackLink: string = 'https://ibm.co/joinqiskitslack'

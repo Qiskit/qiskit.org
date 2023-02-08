@@ -1,19 +1,20 @@
 import Airtable from 'airtable'
 
-// TODO: Understand why this import works with '../' and not with '~/'
+import {
+  AirtableRecords,
+  getImageUrl,
+  findImageAttachment
+} from './airtable-conversion-utils'
+
+// TODO: Understand why this import worked with '../' and not with '~/'
+// The types has been moved outside the store, check if this works as expected
 import {
   CommunityEvent,
   CommunityEventType,
   COMMUNITY_EVENT_TYPES,
   COMMUNITY_EVENT_TYPE_OPTIONS,
   WORLD_REGIONS
-} from '../store/events'
-
-import {
-  AirtableRecords,
-  getImageUrl,
-  findImageAttachment
-} from './airtable-conversion-utils'
+} from '../types/events'
 
 export type SeminarSeriesEvent = {
   date: string,

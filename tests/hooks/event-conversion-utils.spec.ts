@@ -1,6 +1,6 @@
 import EventsAirtableRecords from '~/hooks/event-conversion-utils'
-import { COMMUNITY_EVENT_TYPES, WORLD_REGIONS } from '~/store/events'
-import type { CommunityEvent } from '~/store/events'
+import { COMMUNITY_EVENT_TYPES, WORLD_REGIONS } from '~/types/events'
+import type { CommunityEvent } from '~/types/events'
 
 describe('isEventInDateRange', () => {
   let eventsAirtableRecords: EventsAirtableRecords
