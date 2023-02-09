@@ -53,34 +53,30 @@ export default defineNuxtConfig({
   runtimeConfig: {
     // Keys within public are also exposed client-side
     public: {
-      baseURL: IS_PRODUCTION
-        ? 'https://qiskit.org'
-        : 'localhost:3000'
+      analyticsScriptUrl: IS_PRODUCTION
+        ? 'https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js'
+        : 'https://dev.console.test.cloud.ibm.com/analytics/build/bluemix-analytics.min.js',
+      analyticsKey: IS_PRODUCTION
+        ? 'ffdYLviQze3kzomaINXNk6NwpY9LlXcw'
+        : 'zbHWEXPUfXm0K6C7HbegwB5ewDEC8o1H',
     }
-  },
-
-  env: {
-    analyticsScriptUrl: IS_PRODUCTION
-      ? 'https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js'
-      : 'https://dev.console.test.cloud.ibm.com/analytics/build/bluemix-analytics.min.js',
-    analyticsKey: IS_PRODUCTION
-      ? 'ffdYLviQze3kzomaINXNk6NwpY9LlXcw'
-      : 'zbHWEXPUfXm0K6C7HbegwB5ewDEC8o1H'
   },
 
   /*
   ** Headers of the page
   */
-  head: {
-    title: pkg.name,
-    meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: pkg.description }
-    ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+  app: {
+    head: {
+      title: pkg.name,
+      meta: [
+        { charset: 'utf-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        { hid: 'description', name: 'description', content: pkg.description }
+      ],
+      link: [
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      ]
+    }
   },
 
   /*
@@ -92,13 +88,6 @@ export default defineNuxtConfig({
   css: [
     '~/assets/scss/main.scss'
   ],
-
-  /*
-  ** Content
-  */
-  content: {
-    dir: 'new-content'
-  },
 
   /*
   ** Plugins to load before mounting the App.
