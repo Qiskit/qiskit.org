@@ -115,14 +115,7 @@ export default defineNuxtConfig({
   ** Nuxt.js modules
   */
   modules: [
-    '@nuxt/content',
-    ['@nuxt/typescript-build', {
-      typeCheck: true,
-      ignoreNotFoundWarnings: true
-    }],
-    '@nuxtjs/style-resources',
-    // https://go.nuxtjs.dev/stylelint
-    '@nuxtjs/stylelint-module'
+    '@nuxt/content'
   ],
 
   components: [
@@ -134,13 +127,6 @@ export default defineNuxtConfig({
       pathPrefix: false
     }
   ],
-
-  // Nuxt Style Resources: @nuxtjs/style-resources
-  styleResources: {
-    scss: [
-      '~/assets/scss/helpers/index.scss'
-    ]
-  },
 
   /*
   ** Build configuration
@@ -233,4 +219,3 @@ async function generateContent () {
 
   await fetchEcosystemMembers('./content/ecosystem')
 }
-
