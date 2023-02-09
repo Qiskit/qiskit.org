@@ -114,31 +114,6 @@ export default defineNuxtConfig({
   ** Build configuration
   */
   build: {
-    /*
-    ** You can extend webpack config here
-    */
-    extend (config) {
-      config.module = config.module || { rules: [] }
-      config.module.rules.push({
-        test: /\.md$/,
-        loader: 'frontmatter-markdown-loader',
-        include: path.resolve(__dirname, 'content'),
-        options: {
-          mode: [Mode.VUE_RENDER_FUNCTIONS, Mode.VUE_COMPONENT, Mode.HTML],
-          vue: {
-            root: 'content'
-          },
-          markdown: (body: any) => {
-            return md.render(body)
-          }
-        }
-      })
-      config.module.rules.push({
-        test: /\.js$/,
-        loader: require.resolve('@open-wc/webpack-import-meta-loader')
-      })
-    },
-
     // TODO: Workaround for dealing with. Remove once its solved:
     // https://github.com/nuxt/nuxt.js/issues/3877
     splitChunks: {
