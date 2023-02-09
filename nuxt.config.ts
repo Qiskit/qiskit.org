@@ -122,6 +122,8 @@ export default defineNuxtConfig({
   },
 
   generate: {
+    // TODO It is preferred to use nitro.prerender.routes
+    // https://nuxt.com/docs/api/configuration/nuxt-config#routes
     routes: (function () {
       const events = getContentUrls('events')
 
