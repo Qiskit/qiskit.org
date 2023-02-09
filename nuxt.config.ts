@@ -110,16 +110,6 @@ export default defineNuxtConfig({
     '@nuxt/content'
   ],
 
-  components: [
-    {
-      /* According to https://stackoverflow.com/questions/66336557/nuxt-not-automatically-importing-components-from-nested-directory
-      ** we need to set `pathPrefix: false` to allow the registration of nested directories
-      */
-      path: '~/components',
-      pathPrefix: false
-    }
-  ],
-
   /*
   ** Build configuration
   */
