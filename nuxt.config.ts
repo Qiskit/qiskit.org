@@ -115,7 +115,14 @@ export default defineNuxtConfig({
   ** Nuxt.js modules
   */
   modules: [
-    '@nuxt/content'
+    '@nuxt/content',
+    ['@nuxt/typescript-build', {
+      typeCheck: true,
+      ignoreNotFoundWarnings: true
+    }],
+    '@nuxtjs/style-resources',
+    // https://go.nuxtjs.dev/stylelint
+    '@nuxtjs/stylelint-module'
   ],
 
   components: [
@@ -134,20 +141,6 @@ export default defineNuxtConfig({
       '~/assets/scss/helpers/index.scss'
     ]
   },
-
-  /*
-  ** Migrating from Nuxt 2.8.x to 2.9.y
-  ** https://typescript.nuxtjs.org/migration.html
-  */
-  buildModules: [
-    ['@nuxt/typescript-build', {
-      typeCheck: true,
-      ignoreNotFoundWarnings: true
-    }],
-    '@nuxtjs/style-resources',
-    // https://go.nuxtjs.dev/stylelint
-    '@nuxtjs/stylelint-module'
-  ],
 
   /*
   ** Build configuration
