@@ -50,6 +50,15 @@ export default defineNuxtConfig({
   // Inline server bundle dependencies
   standalone: true,
 
+  runtimeConfig: {
+    // Keys within public are also exposed client-side
+    public: {
+      baseURL: IS_PRODUCTION
+        ? 'https://qiskit.org'
+        : 'localhost:3000'
+    }
+  },
+
   env: {
     analyticsScriptUrl: IS_PRODUCTION
       ? 'https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js'
@@ -57,12 +66,6 @@ export default defineNuxtConfig({
     analyticsKey: IS_PRODUCTION
       ? 'ffdYLviQze3kzomaINXNk6NwpY9LlXcw'
       : 'zbHWEXPUfXm0K6C7HbegwB5ewDEC8o1H'
-  },
-
-  publicRuntimeConfig: {
-    baseURL: IS_PRODUCTION
-      ? 'https://qiskit.org'
-      : 'localhost:3000'
   },
 
   /*
