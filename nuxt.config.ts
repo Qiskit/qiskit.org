@@ -10,7 +10,6 @@ import miAnchor from 'markdown-it-anchor'
 import uslug from 'uslug'
 import Mode from 'frontmatter-markdown-loader/mode'
 
-import { NuxtConfig } from '@nuxt/types'
 import pkg from './package.json'
 import fetchEvents from './hooks/update-events'
 import fetchAdvocates from './hooks/update-advocates'
@@ -42,7 +41,7 @@ md.use(miAnchor, {
   slugify (id: any) { return uslug(id) }
 })
 
-const config: NuxtConfig = {
+export default defineNuxtConfig({
   target: 'static',
 
   // Disable Server Side rendering
@@ -222,7 +221,7 @@ const config: NuxtConfig = {
       }
     }
   }
-}
+})
 
 function optional<T> (test: any, ...plugins: T[]): T[] {
   return test ? plugins : []
@@ -242,4 +241,3 @@ async function generateContent () {
   await fetchEcosystemMembers('./content/ecosystem')
 }
 
-export default config
