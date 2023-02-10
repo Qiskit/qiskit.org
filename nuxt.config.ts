@@ -4,11 +4,12 @@ import path from 'path'
 import fs from 'fs'
 import consola from 'consola'
 
-import markdownIt from 'markdown-it'
-import miLinkAttributes from 'markdown-it-link-attributes'
-import miAnchor from 'markdown-it-anchor'
-import uslug from 'uslug'
-import Mode from 'frontmatter-markdown-loader/mode'
+// TODO: Deletes markdown references. We are not using md as content anymore
+// import markdownIt from 'markdown-it'
+// import miLinkAttributes from 'markdown-it-link-attributes'
+// import miAnchor from 'markdown-it-anchor'
+// import uslug from 'uslug'
+// import Mode from 'frontmatter-markdown-loader/mode'
 
 import pkg from './package.json'
 import fetchEvents from './hooks/update-events'
@@ -24,31 +25,31 @@ const {
 
 const IS_PRODUCTION = NODE_ENV === 'production'
 
-const md = markdownIt({
-  linkify: true,
-  html: true
-})
+// const md = markdownIt({
+//   linkify: true,
+//   html: true
+// })
 
-md.use(miLinkAttributes, {
-  pattern: /^https?:/,
-  attrs: {
-    target: '_blank',
-    rel: 'noopener'
-  }
-})
+// md.use(miLinkAttributes, {
+//   pattern: /^https?:/,
+//   attrs: {
+//     target: '_blank',
+//     rel: 'noopener'
+//   }
+// })
 
-md.use(miAnchor, {
-  slugify (id: any) { return uslug(id) }
-})
+// md.use(miAnchor, {
+//   slugify (id: any) { return uslug(id) }
+// })
 
 export default defineNuxtConfig({
-  target: 'static',
+  // target: 'static',
 
   // Disable Server Side rendering
   ssr: false,
 
   // Inline server bundle dependencies
-  standalone: true,
+  // standalone: true,
 
   runtimeConfig: {
     // Keys within public are also exposed client-side
@@ -82,7 +83,7 @@ export default defineNuxtConfig({
   /*
   ** Customize the progress-bar color
   */
-  loading: { color: '#fff' },
+  // loading: { color: '#fff' },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
@@ -93,14 +94,14 @@ export default defineNuxtConfig({
   ** Plugins to load before mounting the App.
   */
   plugins: [
-    '~/plugins/router-hooks.ts',
-    '~/plugins/carbon.ts',
-    '~/plugins/deep-load.ts',
-    { src: '~/plugins/hotjar.ts', mode: 'client' },
-    ...optional(
-      IS_PRODUCTION || ENABLE_ANALYTICS,
-      { src: '~/plugins/segment-analytics.ts', mode: 'client' } as const
-    )
+    // '~/plugins/router-hooks.ts',
+    // '~/plugins/carbon.ts',
+    // '~/plugins/deep-load.ts',
+    // { src: '~/plugins/hotjar.ts', mode: 'client' },
+    // ...optional(
+    //   IS_PRODUCTION || ENABLE_ANALYTICS,
+    //   { src: '~/plugins/segment-analytics.ts', mode: 'client' } as const
+    // )
   ],
 
   /*
@@ -116,65 +117,67 @@ export default defineNuxtConfig({
   build: {
     // TODO: Workaround for dealing with. Remove once its solved:
     // https://github.com/nuxt/nuxt.js/issues/3877
-    splitChunks: {
-      layouts: true
-    }
+    // splitChunks: {
+    //   layouts: true
+    // }
   },
 
   generate: {
     // TODO It is preferred to use nitro.prerender.routes
     // https://nuxt.com/docs/api/configuration/nuxt-config#routes
-    routes: (function () {
-      const events = getContentUrls('events')
 
-      return [...events]
+    //TODO: This is the code for the old events
+    // routes: (function () {
+    //   const events = getContentUrls('events')
 
-      function getContentUrls (contentRoot: string): string[] {
-        return fs.readdirSync(path.resolve(__dirname, 'content', contentRoot))
-          .filter(isContentAndNotReadme)
-          .map(toContentUrl(contentRoot))
-      }
+    //   return [...events]
 
-      function isContentAndNotReadme (filename: string): boolean {
-        return path.extname(filename) === '.md' &&
-               path.parse(filename).name.toUpperCase() !== 'README'
-      }
+    //   function getContentUrls (contentRoot: string): string[] {
+    //     return fs.readdirSync(path.resolve(__dirname, 'content', contentRoot))
+    //       .filter(isContentAndNotReadme)
+    //       .map(toContentUrl(contentRoot))
+    //   }
 
-      function toContentUrl (contentRoot: string): (s: string) => string {
-        return (filename: string): string => {
-          return `/${contentRoot}/${path.parse(filename).name}`
-        }
-      }
-    })()
+    //   function isContentAndNotReadme (filename: string): boolean {
+    //     return path.extname(filename) === '.md' &&
+    //            path.parse(filename).name.toUpperCase() !== 'README'
+    //   }
+
+    //   function toContentUrl (contentRoot: string): (s: string) => string {
+    //     return (filename: string): string => {
+    //       return `/${contentRoot}/${path.parse(filename).name}`
+    //     }
+    //   }
+    // })()
   },
 
   hooks: {
-    build: {
-      async before () {
-        if (!IS_PRODUCTION && !GENERATE_CONTENT) {
-          console.warn('Skipping content generation. Set GENERATE_CONTENT to enable it.')
-          return
-        }
-        await generateContent()
-      }
-    }
+    // build: {
+    //   async before () {
+    //     if (!IS_PRODUCTION && !GENERATE_CONTENT) {
+    //       console.warn('Skipping content generation. Set GENERATE_CONTENT to enable it.')
+    //       return
+    //     }
+    //     await generateContent()
+    //   }
+    // }
   }
 })
 
-function optional<T> (test: any, ...plugins: T[]): T[] {
-  return test ? plugins : []
-}
+// function optional<T> (test: any, ...plugins: T[]): T[] {
+//   return test ? plugins : []
+// }
 
-async function generateContent () {
-  if (AIRTABLE_API_KEY) {
-    consola.info('Generating community event previews')
-    await fetchEvents(AIRTABLE_API_KEY, './content/events')
+// async function generateContent () {
+//   if (AIRTABLE_API_KEY) {
+//     consola.info('Generating community event previews')
+//     await fetchEvents(AIRTABLE_API_KEY, './content/events')
 
-    consola.info('Generating advocate previews')
-    await fetchAdvocates(AIRTABLE_API_KEY, './content/advocates')
-  } else {
-    consola.warn('Cannot generate events: missing AIRTABLE_API_KEY environment variable')
-  }
+//     consola.info('Generating advocate previews')
+//     await fetchAdvocates(AIRTABLE_API_KEY, './content/advocates')
+//   } else {
+//     consola.warn('Cannot generate events: missing AIRTABLE_API_KEY environment variable')
+//   }
 
-  await fetchEcosystemMembers('./content/ecosystem')
-}
+//   await fetchEcosystemMembers('./content/ecosystem')
+// }
