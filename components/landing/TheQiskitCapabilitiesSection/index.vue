@@ -29,7 +29,7 @@
       <cv-button
         :title="copyCodeCTA.label"
         class="qiskit-capabilities-section__copy-button"
-        @click="[copyToClipboard(), $trackClickEvent(copyCodeCTA.segment)]"
+        @click="[copyToClipboard(), trackClickEvent(copyCodeCTA.segment)]"
       >
         <span class="qiskit-capabilities-section__copy-button__label">{{ copyCodeCTA.label }}</span>
         <Copy16 class="qiskit-capabilities-section__copy-button__icon" />
@@ -53,6 +53,8 @@ interface QiskitCapability {
 
 @Component
 export default class TheQiskitCapabilitiesSection extends Mixins(ScrollSectionsMixin) {
+  const { trackClickEvent } = useSegment()
+  
   capabilities = [
     {
       title: 'Circuit Library',

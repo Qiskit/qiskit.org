@@ -4,7 +4,7 @@
       size="small"
       title="Copy to clipboard"
       class="syntax-highlight__copy-button"
-      @click="[copyToClipboard(code), $trackClickEvent(segmentAction)]"
+      @click="[copyToClipboard(code), trackClickEvent(segmentAction)]"
     >
       Copy
     </cv-button>
@@ -23,6 +23,8 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   code: ''
 })
+
+const { trackClickEvent } = useSegment()
 
 const segmentAction : CtaClickedEventProp = computed(() => ({
   cta: `${props.label}: Copy Code Sample`,

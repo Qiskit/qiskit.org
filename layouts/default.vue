@@ -15,8 +15,10 @@ import '@qiskit/web-components/components/ui-shell'
 
 @Component
 export default class DefaultLayout extends Vue {
+  const { trackClickEvent } = useSegment()
+
   onClick (e: CustomEvent) {
-    this.$trackClickEvent(`${e.detail?.label?.toLowerCase()}`, 'menu')
+    this.trackClickEvent(`${e.detail?.label?.toLowerCase()}`, 'menu')
   }
 }
 </script>
