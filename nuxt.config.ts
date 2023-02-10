@@ -100,7 +100,6 @@ export default defineNuxtConfig({
     // { src: '~/plugins/hotjar.ts', mode: 'client' },
     // ...optional(
     //   IS_PRODUCTION || ENABLE_ANALYTICS,
-    //   { src: '~/plugins/segment-analytics.ts', mode: 'client' } as const
     // )
   ],
 
