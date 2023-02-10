@@ -11,7 +11,7 @@ import type { CtaClickedEventSegmentSchema } from '~/types/segment'
  * https://github.ibm.com/Bluemix/Bluemix.Analytics/blob/master/webpack.constants.js
  * for default values.
  */
-interface AnalyticsContext {
+export interface AnalyticsContext {
   _analytics?: any
   _analyticsReady?: Promise<Event>
   bluemixAnalytics?: any
