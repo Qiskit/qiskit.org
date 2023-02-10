@@ -1,6 +1,6 @@
 // TODO: Refactor central links definitions: https://github.com/Qiskit/qiskit.org/issues/1566
 
-import { CtaClickedEventProp } from '~/constants/segment'
+import { CtaClickedEventProp } from '~/types/segment'
 
 /**
  * Represent a general link use on the site

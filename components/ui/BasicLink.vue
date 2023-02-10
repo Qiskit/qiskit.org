@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import { CtaClickedEventProp } from '~/constants/segment'
+import { CtaClickedEventProp } from '~/types/segment'
 
 interface Props {
   isStatic?: boolean
