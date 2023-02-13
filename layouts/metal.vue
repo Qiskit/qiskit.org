@@ -7,7 +7,7 @@
   </div> -->
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 // TODO: Integrate old code
 // import Vue from "vue";
 // import { Component } from "vue-property-decorator";
