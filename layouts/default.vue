@@ -1,24 +1,24 @@
 <template>
   <div>
-    <qiskit-ui-shell variant="hide-account" @on-click="onClick" />
+    <!-- <qiskit-ui-shell variant="hide-account" @on-click="onClick" /> -->
     <div class="main-container">
-      <nuxt />
+      <!-- <nuxt /> -->
     </div>
-    <PageFooter old-container theme="light" />
+    <!-- <PageFooter old-container theme="light" /> -->
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
-import '@qiskit/web-components/components/ui-shell'
+// import Vue from 'vue'
+// import { Component } from 'vue-property-decorator'
+// import '@qiskit/web-components/components/ui-shell'
 
-@Component
-export default class DefaultLayout extends Vue {
-  onClick (e: CustomEvent) {
-    this.$trackClickEvent(`${e.detail?.label?.toLowerCase()}`, 'menu')
-  }
-}
+// @Component
+// export default class DefaultLayout extends Vue {
+//   onClick (e: CustomEvent) {
+//     this.$trackClickEvent(`${e.detail?.label?.toLowerCase()}`, 'menu')
+//   }
+// }
 </script>
 
 <style lang="scss" scoped>

@@ -1,24 +1,29 @@
 <template>
+  <!-- TODO: review if class is needed or can be deleted -->
   <div class="metal-page">
-    <TheDarkHeader />
-    <IntroSection />
-    <CapabilitiesSection />
-    <FeaturesSection />
-    <BuildingSection />
-    <JoinUsSection />
+    <!-- TODO: Integrate components -->
+    <!-- <TheDarkHeader /> -->
+    <!-- <IntroSection /> -->
+    <!-- <CapabilitiesSection /> -->
+    <!-- <FeaturesSection /> -->
+    <!-- <BuildingSection /> -->
+    <!-- <JoinUsSection /> -->
   </div>
 </template>
 
 <script setup lang="ts">
-import QiskitPage from '~/components/logic/QiskitPage.vue'
+// TODO: Integrate old code
+// import QiskitPage from "~/components/logic/QiskitPage.vue";
 
 definePageMeta({
-  layout: 'metal'
-})
+  // TODO: Integrate layout
+  // layout: "metal",
+});
 
 useHead({
-  title: 'Metal'
-})
+  // TODO: Review if this is the intended title
+  title: "Metal",
+});
 
 // TODO: Refactor "logic" pages
 // export default class MetalPage extends QiskitPage {

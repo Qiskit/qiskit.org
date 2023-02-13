@@ -1,23 +1,28 @@
 <template>
+  <!-- TODO: review if class is needed or can be deleted -->
   <main class="landing-page">
-    <TheHeroMoment :version="qiskitVersion" />
-    <TheQuickStart />
-    <TheQiskitCapabilitiesSection />
-    <TheLearnSection />
+    <!-- TODO: Integrate components -->
+    <!-- <TheHeroMoment :version="qiskitVersion" /> -->
+    <!-- <TheQuickStart /> -->
+    <!-- <TheQiskitCapabilitiesSection /> -->
+    <!-- <TheLearnSection /> -->
   </main>
 </template>
 
 <script setup lang="ts">
-import axios from 'axios'
-import QiskitPage from '~/components/logic/QiskitPage.vue'
+// TODO: Integrate old code
+// import axios from 'axios'
+// import QiskitPage from '~/components/logic/QiskitPage.vue'
 
 definePageMeta({
-  layout: 'default-max'
-})
+  // TODO: Integrate layout
+  // layout: "default-max",
+});
 
 useHead({
-  title: 'Qiskit'
-})
+  // TODO: Review if this is the intended title
+  title: "Qiskit",
+});
 
 // TODO: Refactor async data fetching in pages
 // @Component({
