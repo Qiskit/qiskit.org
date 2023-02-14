@@ -33,33 +33,31 @@ function handleClick () {
   props.segment && $trackClickEvent(props.segment.cta, props.segment.location)
 }
 
-function isExternal (url: string): boolean {
-  return !!url && url.startsWith('http')
-}
+const isExternal = computed(() => {
+  return !!props.url && props.url.startsWith('http')
+})
 
-function isInternal (url: string): boolean {
-  return !!url && url.startsWith('/')
-}
+const isInternal = computed(() => {
+  return !!props.url && props.url.startsWith('/')
+})
 
-function isMail (url: string): boolean {
-  return !!url && url.startsWith('mailto')
-}
+const isMail = computed(() => {
+  return !!props.url && props.url.startsWith('mailto')
+})
 
-function isIdAnchor (url: string): boolean {
-  return !!url && url.startsWith('#')
-}
+const isIdAnchor = computed(() => {
+  return !!props.url && props.url.startsWith('#')
+})
 
 const hasLink = computed(() => !!props.url)
 
 const isAnchor = computed(() => {
-  return isExternal(props.url) ||
-    isMail(props.url) ||
-    isIdAnchor(props.url) ||
-    isInternal(props.url) ||
+  return isExternal.value ||
+    isMail.value ||
+    isIdAnchor.value ||
+    isInternal.value ||
     props.isStatic
 })
-
-const isExternal = computed(() => isExternal(props.url))
 
 const isNuxtLink = computed(() => !isAnchor.value)
 </script>
