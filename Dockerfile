@@ -1,29 +1,15 @@
 FROM node:16-alpine
+
 WORKDIR /qiskit.org
 
-COPY package*.json ./
-RUN npm ci
+COPY . .
 
-COPY app app/
-COPY assets assets/
-COPY components components/
-COPY constants constants/
-COPY content content/
-COPY deploy deploy/
-COPY hooks hooks/
-COPY layouts layouts/
-COPY mixins mixins/
-COPY pages pages/
-COPY public public/
-COPY static static/
-COPY tests tests/
-COPY types types/
-COPY .npmrc nuxt.config.ts tsconfig.json ./
+RUN npm ci
 RUN npm run generate
 
-EXPOSE 3000
+RUN cp -R ./output/. /var/www/html/
 
-ENV NUXT_HOST=0.0.0.0
-ENV NUXT_PORT=3000
+EXPOSE 80
 
-CMD [ "npm", "start" ]
+CMD ["nginx", "-g", "daemon off;"]
+
