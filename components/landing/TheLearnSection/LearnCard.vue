@@ -33,13 +33,15 @@ const learnLink: GeneralLink = {
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
+
 .learn-card {
   display: flex;
   flex-wrap: wrap;
 
   &__content {
     background-color: $background-color-lighter;
-    padding: $spacing-05;
+    padding: carbon.$spacing-05;
 
     @include mq($until: medium) {
       order: 1;
@@ -47,12 +49,12 @@ const learnLink: GeneralLink = {
 
     @include mq($from: medium) {
       min-height: 12rem;
-      padding-right: $spacing-07;
+      padding-right: carbon.$spacing-07;
     }
 
     @include mq($from: large) {
       min-height: 16.25rem;
-      padding: $spacing-07;
+      padding: carbon.$spacing-07;
     }
 
     @include mq($from: x-large) {
@@ -100,7 +102,7 @@ const learnLink: GeneralLink = {
   }
 
   &__description {
-    margin-bottom: $spacing-06;
+    margin-bottom: carbon.$spacing-06;
   }
 }
 </style>

@@ -35,13 +35,15 @@ function copyToClipboard (code: string) {
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
+
 .syntax-highlight {
   position: relative;
   background-color: $background-color-lighter;
-  padding: $spacing-05 $spacing-07;
+  padding: carbon.$spacing-05 carbon.$spacing-07;
 
   @include mq($until: large) {
-    padding: $spacing-05 $spacing-05;
+    padding: carbon.$spacing-05 carbon.$spacing-05;
   }
 
   &__copy-button {
@@ -49,7 +51,7 @@ function copyToClipboard (code: string) {
     right: 0;
     bottom: 0;
     border: none;
-    padding: $spacing-03 $spacing-05;
+    padding: carbon.$spacing-03 carbon.$spacing-05;
     text-transform: lowercase;
     background-size: 200% 100%;
     background-position-x: 100%;

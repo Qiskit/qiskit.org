@@ -98,11 +98,13 @@ const joinSlackLink: string = 'https://ibm.co/joinqiskitslack'
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
+
 .meet-the-advocates {
-  margin-top: $spacing-12;
+  margin-top: carbon.$spacing-12;
 
   &__filters-result-section {
-    margin-top: $spacing-10;
+    margin-top: carbon.$spacing-10;
   }
 }
 </style>

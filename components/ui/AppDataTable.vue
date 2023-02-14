@@ -35,6 +35,8 @@ defineProps<Props>()
 </style>
 
 <style lang="scss">
+@use "~/assets/scss/carbon.scss";
+
 .bx--data-table th {
   color: $black-100;
   background-color: $background-color-light;
@@ -42,7 +44,7 @@ defineProps<Props>()
   // TODO: remove this override once issue is fixed
   // https://github.com/carbon-design-system/carbon-components-vue/issues/1161#issuecomment-815689534
   &[aria-sort] {
-    padding: $spacing-05;
+    padding: carbon.$spacing-05;
   }
 }
 
@@ -54,6 +56,6 @@ defineProps<Props>()
 
 .bx--data-table li {
   list-style-type: disc;
-  margin-left: $spacing-06;
+  margin-left: carbon.$spacing-06;
 }
 </style>

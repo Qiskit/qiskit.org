@@ -40,16 +40,18 @@ withDefaults(defineProps<Props>(), {
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
+
 .code-cell {
   display: block;
   background-color: $background-color-lighter;
   color: $text-color;
-  padding: $spacing-05 0;
+  padding: carbon.$spacing-05 0;
 
   &__block {
     opacity: 0.4;
     border-left: 0.125rem solid transparent;
-    padding: $spacing-04 $spacing-05;
+    padding: carbon.$spacing-04 carbon.$spacing-05;
     margin: -$spacing-03 0;
     transition: all 0.2s ease-in;
 

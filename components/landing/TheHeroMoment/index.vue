@@ -46,6 +46,8 @@ const qiskitPronunciation = Math.random() < 0.5 ? '[kiss-kit]' : '[quiss-kit]'
 </script>
 
 <style lang="scss">
+@use "~/assets/scss/carbon.scss";
+
 .the-hero-moment {
   height: calc(#{math.div(56rem * 40, 64)} + 2px);
   position: relative;
@@ -73,7 +75,7 @@ const qiskitPronunciation = Math.random() < 0.5 ? '[kiss-kit]' : '[quiss-kit]'
     background-repeat: no-repeat;
     background-size: contain;
     height: 100%;
-    padding-top: $spacing-10;
+    padding-top: carbon.$spacing-10;
     pointer-events: none;
 
     @include mq($until: medium) {
@@ -82,44 +84,44 @@ const qiskitPronunciation = Math.random() < 0.5 ? '[kiss-kit]' : '[quiss-kit]'
   }
 
   &__version-info {
-    margin-bottom: $spacing-06;
+    margin-bottom: carbon.$spacing-06;
 
     @include mq($from: medium) {
-      margin-bottom: $spacing-07;
+      margin-bottom: carbon.$spacing-07;
     }
 
     @include mq($from: large) {
-      margin-bottom: $spacing-11;
+      margin-bottom: carbon.$spacing-11;
     }
   }
 
   &__title {
-    margin-bottom: $spacing-06;
+    margin-bottom: carbon.$spacing-06;
     // TODO: Force pointer events to allow the user to select text. Remove
     // when decomissioning the Metal page.
     pointer-events: auto;
 
     @include mq($from: medium) {
-      margin-bottom: $spacing-07;
+      margin-bottom: carbon.$spacing-07;
     }
 
     @include mq($from: large) {
-      margin-bottom: $spacing-11;
+      margin-bottom: carbon.$spacing-11;
     }
   }
 
   &__description {
-    margin-bottom: $spacing-06;
+    margin-bottom: carbon.$spacing-06;
     // TODO: Force pointer events to allow the user to select text. Remove
     // when decomissioning the Metal page.
     pointer-events: auto;
 
     @include mq($from: medium) {
-      margin-bottom: $spacing-07;
+      margin-bottom: carbon.$spacing-07;
     }
 
     @include mq($from: large) {
-      margin-bottom: $spacing-11;
+      margin-bottom: carbon.$spacing-11;
     }
   }
 

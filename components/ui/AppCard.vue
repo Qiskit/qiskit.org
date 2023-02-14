@@ -107,6 +107,8 @@ function hasTags (tags: string[] | TagTooltip[]) {
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
+
 .app-card {
   min-height: 13rem;
   width: 100%;
@@ -142,7 +144,7 @@ function hasTags (tags: string[] | TagTooltip[]) {
   }
 
   &__content {
-    padding: $spacing-05 $spacing-07;
+    padding: carbon.$spacing-05 carbon.$spacing-07;
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -153,7 +155,7 @@ function hasTags (tags: string[] | TagTooltip[]) {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: $spacing-03;
+    margin-bottom: carbon.$spacing-03;
 
     @include mq($until: large) {
       flex-direction: column;
@@ -162,13 +164,13 @@ function hasTags (tags: string[] | TagTooltip[]) {
     .bx--row {
       margin-right: 0;
       margin-left: 0;
-      margin-bottom: $spacing-03;
+      margin-bottom: carbon.$spacing-03;
     }
   }
 
   &__title {
     flex: 1;
-    margin-bottom: $spacing-02;
+    margin-bottom: carbon.$spacing-02;
   }
 }
 
@@ -177,7 +179,7 @@ function hasTags (tags: string[] | TagTooltip[]) {
 
   .app-card {
     &__content {
-      padding: $spacing-05;
+      padding: carbon.$spacing-05;
     }
 
     &__cta {
@@ -185,8 +187,8 @@ function hasTags (tags: string[] | TagTooltip[]) {
     }
 
     &__description {
-      margin-bottom: $spacing-03;
-      margin-top: $spacing-03;
+      margin-bottom: carbon.$spacing-03;
+      margin-top: carbon.$spacing-03;
     }
 
     &__image {
@@ -206,7 +208,7 @@ function hasTags (tags: string[] | TagTooltip[]) {
 .app-card_description-whole-size {
   .app-card {
     &__header {
-      min-height: $spacing-09;
+      min-height: carbon.$spacing-09;
     }
 
     &__body {
@@ -231,7 +233,7 @@ function hasTags (tags: string[] | TagTooltip[]) {
   .bx--tag--purple {
     background-color: $tag-background-color;
     color: $tag-text-color;
-    margin-right: $spacing-03;
+    margin-right: carbon.$spacing-03;
     margin-left: 0;
     min-width: 0;
   }
@@ -251,11 +253,11 @@ function hasTags (tags: string[] | TagTooltip[]) {
     min-height: 1.5rem;
     align-items: center;
     justify-content: center;
-    padding: $spacing-02 $spacing-03;
-    margin-top: $spacing-02;
-    margin-bottom: $spacing-02;
-    margin-right: $spacing-03;
-    margin-left: $spacing-03;
+    padding: carbon.$spacing-02 carbon.$spacing-03;
+    margin-top: carbon.$spacing-02;
+    margin-bottom: carbon.$spacing-02;
+    margin-right: carbon.$spacing-03;
+    margin-left: carbon.$spacing-03;
     border-radius: 6.9375rem;
     cursor: default;
     vertical-align: middle;
@@ -263,7 +265,7 @@ function hasTags (tags: string[] | TagTooltip[]) {
 
     .bx--tooltip__trigger svg {
       fill: white;
-      margin-left: $spacing-02;
+      margin-left: carbon.$spacing-02;
 
       :hover svg {
         fill: white;

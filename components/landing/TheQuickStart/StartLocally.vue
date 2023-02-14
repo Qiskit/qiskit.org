@@ -159,23 +159,25 @@ function selectOption (choicesGroup: ChoicesGroup, selectedOption: string) {
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
+
 .bx--btn-set .bx--btn:not(:focus) {
   box-shadow: none;
 }
 
 .start-locally {
   @include mq($until: medium) {
-    margin-bottom: $spacing-09;
+    margin-bottom: carbon.$spacing-09;
   }
 
   &__introduction {
-    margin-bottom: $spacing-08;
+    margin-bottom: carbon.$spacing-08;
 
     @include mq($from: large) {
       $grid-columns: math.div(9, 10); // Number of columns that the element will use at this breakpoint.
 
       max-width: 100% * $grid-columns;
-      padding-right: $spacing-05;
+      padding-right: carbon.$spacing-05;
     }
 
     @include mq($from: x-large) {
@@ -198,11 +200,11 @@ function selectOption (choicesGroup: ChoicesGroup, selectedOption: string) {
 
   &__options-group {
     display: grid;
-    column-gap: $spacing-07;
+    column-gap: carbon.$spacing-07;
     grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
 
     @include mq($until: large) {
-      column-gap: $spacing-05;
+      column-gap: carbon.$spacing-05;
     }
   }
 
@@ -210,12 +212,12 @@ function selectOption (choicesGroup: ChoicesGroup, selectedOption: string) {
     background-color: $background-color-lighter;
     max-width: 100%;
     color: $text-color-light;
-    padding-left: $spacing-07;
-    margin-bottom: $spacing-07;
+    padding-left: carbon.$spacing-07;
+    margin-bottom: carbon.$spacing-07;
 
     @include mq($until: large) {
-      padding-left: $spacing-05;
-      margin-bottom: $spacing-05;
+      padding-left: carbon.$spacing-05;
+      margin-bottom: carbon.$spacing-05;
     }
 
     &_active {
@@ -240,7 +242,7 @@ function selectOption (choicesGroup: ChoicesGroup, selectedOption: string) {
    * and CSS specificity to override the internal CSS.
    */
   &__prerequisites-section {
-    margin-bottom: $spacing-05;
+    margin-bottom: carbon.$spacing-05;
 
     & .bx--accordion__item {
       border-bottom: none;

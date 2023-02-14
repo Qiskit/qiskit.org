@@ -23,6 +23,8 @@ const ibmQExperienceLink = IBM_Q_EXPERIENCE
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
+
 .start-on-the-cloud {
   &__wrapper {
     @include responsive-grid-bg('/images/grid/grid-white.svg', 36rem);
@@ -39,10 +41,10 @@ const ibmQExperienceLink = IBM_Q_EXPERIENCE
   }
 
   &__content {
-    padding: $spacing-07;
+    padding: carbon.$spacing-07;
 
     @include mq($until: large) {
-      padding: $spacing-05;
+      padding: carbon.$spacing-05;
     }
   }
 }

@@ -86,9 +86,11 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
+
 .course-pages-section {
   display: grid;
-  column-gap: $spacing-07;
+  column-gap: carbon.$spacing-07;
   grid-template-areas: ". main main .";
   grid-template-columns: repeat(4, 1fr);
 
@@ -115,21 +117,21 @@ onMounted(() => {
     &__title {
       border-bottom: 4px solid $purple-60;
       display: inline;
-      padding-bottom: $spacing-02;
-      padding-right: $spacing-03;
+      padding-bottom: carbon.$spacing-02;
+      padding-right: carbon.$spacing-03;
 
       &-wrapper {
-        margin: 1.25rem 0 $spacing-06 0;
+        margin: 1.25rem 0 carbon.$spacing-06 0;
 
         @include mq($until: x-large) {
-          margin: $spacing-03 0 $spacing-06 0;
+          margin: carbon.$spacing-03 0 carbon.$spacing-06 0;
         }
       }
     }
 
     &__preview {
       background: $cool-gray-10;
-      padding: $spacing-05;
+      padding: carbon.$spacing-05;
       position: relative;
 
       &__image {
@@ -137,9 +139,9 @@ onMounted(() => {
       }
 
       &__cta {
-        bottom: $spacing-05;
+        bottom: carbon.$spacing-05;
         position: absolute;
-        right: $spacing-05;
+        right: carbon.$spacing-05;
       }
     }
   }
@@ -162,7 +164,7 @@ onMounted(() => {
       color: $cool-gray-80;
       display: inline-block;
       max-width: calc(100% - 25px);
-      padding: $spacing-02 $spacing-03;
+      padding: carbon.$spacing-02 carbon.$spacing-03;
       text-decoration: none;
       width: 100%;
 

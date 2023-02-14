@@ -57,10 +57,12 @@ defineProps<Props>()
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
+
 .app-mosaic {
   &__layout {
     display: grid;
-    gap: $spacing-07;
+    gap: carbon.$spacing-07;
     grid-template-columns: 2.5fr 4fr 3fr;
     grid-template-rows: 29.5rem minmax(16rem, auto);
     grid-template-areas:
@@ -164,10 +166,10 @@ defineProps<Props>()
     }
 
     &-copy {
-      padding: $spacing-07;
+      padding: carbon.$spacing-07;
 
       @include mq($until: large) {
-        padding: $spacing-05;
+        padding: carbon.$spacing-05;
 
         &_third, &_fourth {
           flex: 1 0 0;
@@ -181,13 +183,13 @@ defineProps<Props>()
       &-description {
         ::v-deep li {
           list-style-type: disc;
-          margin-left: $spacing-06;
+          margin-left: carbon.$spacing-06;
         }
       }
 
       &-link {
         display: flex;
-        margin-top: $spacing-05;
+        margin-top: carbon.$spacing-05;
       }
     }
   }

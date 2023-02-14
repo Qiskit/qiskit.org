@@ -30,6 +30,8 @@ withDefaults(defineProps<Props>(), {
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
+
 .syllabus-card {
   width: 100%;
   background-color: $background-color-lighter;
@@ -37,7 +39,7 @@ withDefaults(defineProps<Props>(), {
   flex-direction: column;
 
   &__body {
-    padding: $spacing-05 $spacing-05 $spacing-07 $spacing-05;
+    padding: carbon.$spacing-05 carbon.$spacing-05 carbon.$spacing-07 carbon.$spacing-05;
   }
 
   &__footer {

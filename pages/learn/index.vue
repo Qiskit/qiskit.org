@@ -98,8 +98,8 @@ useHead({
 //     @include contained();
 
 //     max-width: $max-size;
-//     margin-bottom: $spacing-07;
-//     margin-top: $spacing-10;
+//     margin-bottom: carbon.$spacing-07;
+//     margin-top: carbon.$spacing-10;
 //   }
 
 //   qiskit-banner {
@@ -107,7 +107,7 @@ useHead({
 //       @include contained();
 
 //       max-width: $max-size;
-//       padding: $spacing-04 $spacing-06;
+//       padding: carbon.$spacing-04 carbon.$spacing-06;
 //       display: flex;
 //       flex: 1;
 

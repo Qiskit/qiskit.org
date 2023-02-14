@@ -176,11 +176,11 @@ useHead({
 //   flex-direction: column;
 
 //   &__section {
-//     margin-top: $spacing-10;
-//     margin-bottom: $spacing-07;
+//     margin-top: carbon.$spacing-10;
+//     margin-bottom: carbon.$spacing-07;
 
 //     @include mq($until: large) {
-//       margin-bottom: $spacing-05;
+//       margin-bottom: carbon.$spacing-05;
 //     }
 //   }
 
@@ -250,7 +250,7 @@ useHead({
 //     // stylelint-enable no-descending-specificity
 
 //     .app-data-table {
-//       margin-top: $spacing-07;
+//       margin-top: carbon.$spacing-07;
 //       padding: 0;
 //     }
 //   }

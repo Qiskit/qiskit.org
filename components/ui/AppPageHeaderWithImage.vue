@@ -32,20 +32,22 @@ defineProps<Props>()
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
+
 .app-page-header-with-img {
   &__back-link {
     height: 0;
 
     ::v-deep .app-nav-back-link{
-      padding-left: $spacing-05;
+      padding-left: carbon.$spacing-05;
       margin: 0;
     }
   }
 
   &__content {
     display: grid;
-    padding: $spacing-12 $spacing-05 0;
-    gap: $spacing-05;
+    padding: carbon.$spacing-12 carbon.$spacing-05 0;
+    gap: carbon.$spacing-05;
     grid-template-columns: repeat(4, 1fr);
     // Set last row to 52px to not modify the height of the cta
     grid-template-rows: repeat(3, auto) 52px;
@@ -57,7 +59,7 @@ defineProps<Props>()
     ;
 
     @include mq($until: medium) {
-      padding-top: $spacing-09;
+      padding-top: carbon.$spacing-09;
       grid-template-columns: 1fr;
       grid-template-areas:
         "headline"
@@ -70,7 +72,7 @@ defineProps<Props>()
 
   &__headline {
     grid-area: headline;
-    margin-top: $spacing-07;
+    margin-top: carbon.$spacing-07;
   }
 
   &__image-wrapper {
@@ -95,7 +97,7 @@ defineProps<Props>()
 
   &__description {
     grid-area: description;
-    margin-top: $spacing-05;
+    margin-top: carbon.$spacing-05;
   }
 
   &__cta {

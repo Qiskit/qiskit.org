@@ -23,11 +23,13 @@ withDefaults(defineProps<Props>(), {
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
+
 .app-nav-back-link {
   @include contained();
 
-  padding-bottom: $spacing-06;
-  padding-top: $spacing-06;
+  padding-bottom: carbon.$spacing-06;
+  padding-top: carbon.$spacing-06;
 
   &__link {
     align-items: center;
@@ -44,7 +46,7 @@ withDefaults(defineProps<Props>(), {
   }
 
   &__icon {
-    margin-right: $spacing-05;
+    margin-right: carbon.$spacing-05;
   }
 }
 </style>

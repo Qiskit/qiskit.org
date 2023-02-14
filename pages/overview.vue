@@ -98,11 +98,11 @@ useHead({
 // .overview-page {
 //   &__table-of-contents {
 //     position: sticky;
-//     top: $spacing-06;
+//     top: carbon.$spacing-06;
 //   }
 
 //   &__content-section {
-//     margin-bottom: $spacing-10;
+//     margin-bottom: carbon.$spacing-10;
 //     overflow: hidden;
 //   }
 

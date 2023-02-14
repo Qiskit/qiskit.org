@@ -77,13 +77,15 @@ function trackPerformedSearch (uiElement: string, field: string) {
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
+
 .learn-header {
   background: linear-gradient(315deg, $cool-gray-10 0%, $blue-40 25%, $purple-70 100%);
   height: 37.5rem;
 
   &__headline {
     color: $text-color-white;
-    margin-bottom: $spacing-07;
+    margin-bottom: carbon.$spacing-07;
   }
 
   &__container {
@@ -96,10 +98,10 @@ function trackPerformedSearch (uiElement: string, field: string) {
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
-    padding-top: $spacing-09;
+    padding-top: carbon.$spacing-09;
 
     @include mq($from:medium, $until: large) {
-      padding-top: $spacing-12;
+      padding-top: carbon.$spacing-12;
     }
 
     &-wrapper {
@@ -119,8 +121,8 @@ function trackPerformedSearch (uiElement: string, field: string) {
     transform: translate(-50%, -50%);
 
     &-container {
-      // the #{_______} is added to force scss to compile $spacing-11 value.
-      --additional-width: #{$spacing-11};
+      // the #{_______} is added to force scss to compile carbon.$spacing-11 value.
+      --additional-width: #{carbon.$spacing-11};
 
       position: absolute;
       right: 0;

@@ -40,6 +40,8 @@ const githubRepoLink = GITHUB_REPOSITORY
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
+
 .qiskit-version-info {
   display: flex;
   flex-direction: row;
@@ -58,14 +60,14 @@ const githubRepoLink = GITHUB_REPOSITORY
 
   &__github-icon {
     fill: $link-color-tertiary;
-    margin-right: $spacing-07;
+    margin-right: carbon.$spacing-07;
 
     @include mq($from: medium, $until: large) {
-      margin-right: $spacing-05;
+      margin-right: carbon.$spacing-05;
     }
 
     @include mq($until: medium) {
-      margin-right: $spacing-03;
+      margin-right: carbon.$spacing-03;
     }
   }
 
@@ -76,7 +78,7 @@ const githubRepoLink = GITHUB_REPOSITORY
 
   &__version-string {
     text-decoration: none;
-    margin-bottom: $spacing-01;
+    margin-bottom: carbon.$spacing-01;
   }
 }
 </style>

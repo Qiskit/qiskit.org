@@ -16,11 +16,13 @@ defineProps<Props>()
 </script>
 
 <style lang="scss">
+@use "~/assets/scss/carbon.scss";
+
 .app-fieldset {
-  margin-bottom: $spacing-07;
+  margin-bottom: carbon.$spacing-07;
 
   &__label {
-    margin-bottom: $spacing-05;
+    margin-bottom: carbon.$spacing-05;
   }
 }
 </style>

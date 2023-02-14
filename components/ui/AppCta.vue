@@ -49,6 +49,8 @@ const iconPerLinkType = computed(() => {
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
+
 @mixin bicolor-background($colorLeft, $colorRight) {
     background-image: linear-gradient(90deg, $colorLeft 0%, $colorLeft 50%, $colorRight 50%, $colorRight 100%);
 }
@@ -58,7 +60,7 @@ const iconPerLinkType = computed(() => {
   justify-content: space-between;
   text-decoration: none;
   align-items: center;
-  padding: $spacing-05;
+  padding: carbon.$spacing-05;
   width: 4 * $column-size-large;
   max-width: 100%;
 
@@ -145,11 +147,11 @@ const iconPerLinkType = computed(() => {
 
   &__icon {
     fill: currentColor;
-    margin-left: $spacing-05;
+    margin-left: carbon.$spacing-05;
     overflow: visible;
 
     &_arrow-right-16 {
-      margin-right: $spacing-02;
+      margin-right: carbon.$spacing-02;
     }
 
     &#{$arrow-right_path},
@@ -161,7 +163,7 @@ const iconPerLinkType = computed(() => {
   }
 
   &_ghost &__icon {
-    margin-top: $spacing-01;
+    margin-top: carbon.$spacing-01;
   }
 
   &:hover &__icon,

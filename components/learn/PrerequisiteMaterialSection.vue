@@ -27,18 +27,20 @@ defineProps<Props>()
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
+
 .prerequisite-material-section {
   &__card {
     align-items: strech;
     background: $cool-gray-10;
     color: $cool-gray-80;
     display: flex;
-    padding: $spacing-05 $spacing-05 0;
+    padding: carbon.$spacing-05 carbon.$spacing-05 0;
   }
 
   &__cards {
     display: grid;
-    gap: $spacing-07;
+    gap: carbon.$spacing-07;
     grid-template-columns: repeat(4, 1fr);
 
     @include mq($until: large) {
@@ -47,7 +49,7 @@ defineProps<Props>()
 
     @include mq($until: medium) {
       grid-template-columns: 1fr;
-      row-gap: $spacing-05;
+      row-gap: carbon.$spacing-05;
     }
   }
 }

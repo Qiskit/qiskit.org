@@ -39,6 +39,8 @@ defineProps<Props>()
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
+
 .app-introductory-content {
   display: flex;
 
@@ -47,13 +49,13 @@ defineProps<Props>()
   }
 
   &__overview {
-    margin-bottom: $spacing-07;
+    margin-bottom: carbon.$spacing-07;
 
     @include mq($from: large) {
       $grid-columns: math.div(5, 13); // Number of columns that the element will use at this breakpoint.
 
       max-width: 100% * $grid-columns;
-      padding-right: $spacing-07;
+      padding-right: carbon.$spacing-07;
     }
 
     @include mq($from: max-size) {
@@ -64,10 +66,10 @@ defineProps<Props>()
   }
 
   &__description {
-    margin-bottom: $spacing-10;
+    margin-bottom: carbon.$spacing-10;
 
     @include mq($until: large) {
-      margin-bottom: $spacing-07;
+      margin-bottom: carbon.$spacing-07;
     }
   }
 

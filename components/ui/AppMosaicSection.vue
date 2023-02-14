@@ -28,25 +28,27 @@ withDefaults(defineProps<Props>(), {
 </script>
 
 <style lang="scss">
+@use "~/assets/scss/carbon.scss";
+
 .app-mosaic-section {
   &__description {
     margin-bottom: 0;
   }
 
   &__mosaic {
-    margin-bottom: $spacing-07;
+    margin-bottom: carbon.$spacing-07;
 
     @include mq($from: medium, $until: large) {
-      margin-bottom: $spacing-05;
+      margin-bottom: carbon.$spacing-05;
     }
 
     @include mq($until: medium) {
-      margin-bottom: $spacing-05;
+      margin-bottom: carbon.$spacing-05;
     }
   }
 
   &__introduction {
-    margin-bottom: $spacing-07;
+    margin-bottom: carbon.$spacing-07;
   }
 }
 </style>

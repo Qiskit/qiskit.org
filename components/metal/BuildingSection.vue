@@ -60,39 +60,41 @@ const stayInTouchLink = {
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
+
 .building-section {
   @include responsive-grid-bg('/images/grid/grid-right-dark.svg', 36rem);
 
   background-position: right -1rem bottom -2px;
   background-repeat: no-repeat;
-  padding-bottom: $spacing-10;
+  padding-bottom: carbon.$spacing-10;
 
   @include mq($until: large) {
     background-position: right -.5rem bottom -2px;
   }
 
   @include mq($until: medium) {
-    padding-bottom: $spacing-07;
+    padding-bottom: carbon.$spacing-07;
   }
 
   &__container {
     @include contained();
 
-    padding-top: $spacing-10;
+    padding-top: carbon.$spacing-10;
   }
 
   &__subtitle {
     @include mq($until: large) {
-      margin-bottom: $spacing-06;
+      margin-bottom: carbon.$spacing-06;
     }
   }
 
   &__text {
     max-width: 7.5 * $column-size-large;
-    margin-bottom: $spacing-09;
+    margin-bottom: carbon.$spacing-09;
 
     @include mq($until: large) {
-      margin-bottom: $spacing-09;
+      margin-bottom: carbon.$spacing-09;
     }
 
     @include mq($from: medium, $until: large) {
@@ -102,7 +104,7 @@ const stayInTouchLink = {
     @include mq($until: medium) {
       width: 100%;
       max-width: initial;
-      margin-bottom: $spacing-06;
+      margin-bottom: carbon.$spacing-06;
     }
   }
 

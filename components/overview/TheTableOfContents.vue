@@ -32,6 +32,8 @@ const isActive = computed<boolean>((entry: TableOfContentEntry): boolean => {
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
+
 .the-table-of-contents {
   display: flex;
   flex-direction: column;
@@ -39,7 +41,7 @@ const isActive = computed<boolean>((entry: TableOfContentEntry): boolean => {
   &__entry {
     color: $text-color-light;
     text-decoration: none;
-    margin-bottom: $spacing-06;
+    margin-bottom: carbon.$spacing-06;
 
     &_second-level {
       &:hover {
@@ -51,7 +53,7 @@ const isActive = computed<boolean>((entry: TableOfContentEntry): boolean => {
         color: $text-active-color;
         font-weight: bold;
         display: inline-block;
-        padding-right: $spacing-06;
+        padding-right: carbon.$spacing-06;
       }
     }
 

@@ -44,11 +44,13 @@ const location = computed(() => [props.city, props.country].filter(e => !!e).joi
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
+
 .advocate-card {
-  margin-bottom: $spacing-06;
+  margin-bottom: carbon.$spacing-06;
 
   @include mq($until: large) {
-    margin-bottom: $spacing-05;
+    margin-bottom: carbon.$spacing-05;
   }
 
   &__location, &__contact {
@@ -57,11 +59,11 @@ const location = computed(() => [props.city, props.country].filter(e => !!e).joi
   }
 
   &__location {
-    margin-bottom: $spacing-03;
+    margin-bottom: carbon.$spacing-03;
   }
 
   &__icon {
-    margin-right: $spacing-03;
+    margin-right: carbon.$spacing-03;
     fill: currentColor;
   }
 }

@@ -52,6 +52,8 @@ function actionChange ({ changedIndex }: { changedIndex: number }) {
 </script>
 
 <style lang="scss">
+@use "~/assets/scss/carbon.scss";
+
 .content-accordion {
   & .bx--accordion__item {
     border-bottom: none;
@@ -69,7 +71,7 @@ function actionChange ({ changedIndex }: { changedIndex: number }) {
   }
 
   & .bx--accordion__title {
-    padding-left: $spacing-07;
+    padding-left: carbon.$spacing-07;
     margin: 0;
   }
 
@@ -95,17 +97,17 @@ function actionChange ({ changedIndex }: { changedIndex: number }) {
   }
 
   & .bx--accordion__content {
-    padding: $spacing-06 $spacing-07;
+    padding: carbon.$spacing-06 carbon.$spacing-07;
     background-color: $background-color-lighter;
 
     @include mq($from: medium, $until: large) {
-      padding-left: $spacing-06;
-      padding-right: $spacing-06;
+      padding-left: carbon.$spacing-06;
+      padding-right: carbon.$spacing-06;
     }
 
     @include mq($until: medium) {
-      padding-left: $spacing-05;
-      padding-right: $spacing-05;
+      padding-left: carbon.$spacing-05;
+      padding-right: carbon.$spacing-05;
     }
   }
 }

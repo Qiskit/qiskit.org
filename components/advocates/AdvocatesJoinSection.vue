@@ -53,12 +53,13 @@ const joinAction: GeneralLink = {
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
 @import '~carbon-components/scss/globals/scss/typography';
 
 .join-section {
   &__feature {
     @include mq($until: large) {
-      margin-bottom: $spacing-07;
+      margin-bottom: carbon.$spacing-07;
     }
 
     @include mq($from: medium) {

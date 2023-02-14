@@ -41,43 +41,45 @@ defineProps<Props>()
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
+
 .app-page-header {
   @include responsive-grid-bg-strip("/images/grid/grid-hero-learn.svg", auto, 28rem);
 
-  padding-top: $spacing-12;
+  padding-top: carbon.$spacing-12;
 
   @include mq($until: medium) {
-    padding-top: $spacing-09;
+    padding-top: carbon.$spacing-09;
   }
 
   &__main {
     display: flex;
     flex-flow: column;
-    gap: $spacing-05;
+    gap: carbon.$spacing-05;
     justify-content: space-between;
 
     @include mq($until: x-large) {
-      gap: $spacing-06;
+      gap: carbon.$spacing-06;
     }
 
     @include mq($until: large) {
-      gap: $spacing-09;
+      gap: carbon.$spacing-09;
     }
   }
 
   &__headline {
-    margin-top: $spacing-07;
+    margin-top: carbon.$spacing-07;
   }
 
   &__description {
-    margin-top: $spacing-05;
+    margin-top: carbon.$spacing-05;
 
     @include mq($until: x-large) {
-      margin-top: $spacing-06;
+      margin-top: carbon.$spacing-06;
     }
 
     @include mq($until: large) {
-      margin-top: $spacing-09;
+      margin-top: carbon.$spacing-09;
     }
 
     @include mq($from: large) {
@@ -89,18 +91,18 @@ defineProps<Props>()
 
   &__aside {
     @include mq($until: medium) {
-      margin-top: $spacing-09;
+      margin-top: carbon.$spacing-09;
     }
   }
 
   &__card-title {
     border-bottom: 4px solid $border-color-tertiary;
     display: inline;
-    padding-bottom: $spacing-02;
-    padding-right: $spacing-03;
+    padding-bottom: carbon.$spacing-02;
+    padding-right: carbon.$spacing-03;
 
     &-wrapper {
-      margin-bottom: $spacing-06;
+      margin-bottom: carbon.$spacing-06;
     }
   }
 }

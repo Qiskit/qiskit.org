@@ -175,6 +175,7 @@ function getRowId (index: number): string {
 </script>
 
 <style lang="scss">
+@use "~/assets/scss/carbon.scss";
 @import '~carbon-components/scss/globals/scss/typography';
 
 .metal-grid {
@@ -406,7 +407,7 @@ function getRowId (index: number): string {
   &__slot-container {
     pointer-events: none;
     position: absolute;
-    padding-top: $spacing-10;
+    padding-top: carbon.$spacing-10;
     top: 0;
     left: 0;
     right: 0;

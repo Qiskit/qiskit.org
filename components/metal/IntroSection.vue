@@ -39,6 +39,8 @@ const joinWaitingListLink = {
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
+
 .intro-section {
   position: relative;
   margin-top: -18.5rem;
@@ -53,7 +55,7 @@ const joinWaitingListLink = {
   &__container {
     @include contained();
 
-    padding-top: $spacing-10;
+    padding-top: carbon.$spacing-10;
     padding-bottom: 0;
   }
 
@@ -68,11 +70,11 @@ const joinWaitingListLink = {
 
   &__description {
     max-width: 6 * $column-size-large;
-    margin-bottom: $spacing-12;
-    padding-right: $spacing-07;
+    margin-bottom: carbon.$spacing-12;
+    padding-right: carbon.$spacing-07;
 
     @include mq($until: large) {
-      margin-bottom: $spacing-07;
+      margin-bottom: carbon.$spacing-07;
     }
 
     @include mq($from: medium, $until: large) {
@@ -88,7 +90,7 @@ const joinWaitingListLink = {
     width: 100%;
 
     @include mq($until: medium) {
-      margin-bottom: $spacing-07;
+      margin-bottom: carbon.$spacing-07;
     }
   }
 
@@ -98,7 +100,7 @@ const joinWaitingListLink = {
 
     @include mq($until: large) {
       top: 0;
-      margin-top: $spacing-07;
+      margin-top: carbon.$spacing-07;
     }
   }
 }

@@ -65,15 +65,16 @@ withDefaults(defineProps<Props>(), {
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
 @import '~carbon-components/scss/globals/scss/typography';
 
 .external-recommended-readings {
   &__list {
     list-style: decimal;
-    margin-left: $spacing-05;
+    margin-left: carbon.$spacing-05;
 
     &__item {
-      margin-bottom: $spacing-02;
+      margin-bottom: carbon.$spacing-02;
     }
   }
 
@@ -88,7 +89,7 @@ withDefaults(defineProps<Props>(), {
   &__reference {
     @include type-style('code-01');
 
-    margin-bottom: $spacing-01;
+    margin-bottom: carbon.$spacing-01;
   }
 }
 </style>

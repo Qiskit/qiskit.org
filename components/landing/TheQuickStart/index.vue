@@ -22,13 +22,15 @@
 </template>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
+
 .quick-start {
   &__description {
     margin-bottom: 0;
   }
 
   &__introduction {
-    margin-bottom: $spacing-06;
+    margin-bottom: carbon.$spacing-06;
   }
 }
 </style>

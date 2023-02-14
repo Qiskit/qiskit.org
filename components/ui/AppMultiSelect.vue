@@ -38,6 +38,8 @@ function formatOptions (optionsList: any): Array<multiSelectOption> {
 </script>
 
 <style lang="scss">
+@use "~/assets/scss/carbon.scss";
+
   .app-multi-select {
     & .bx--list-box--light,
     & .bx--list-box__menu {
@@ -69,7 +71,7 @@ function formatOptions (optionsList: any): Array<multiSelectOption> {
       background-color: $tag-background-color;
       color: $tag-text-color;
       margin-left: 0;
-      margin-right: $spacing-05;
+      margin-right: carbon.$spacing-05;
     }
 
     .bx--tag--high-contrast .bx--tag__close-icon:hover {

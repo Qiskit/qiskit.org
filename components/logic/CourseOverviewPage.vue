@@ -75,13 +75,15 @@ export default abstract class CourseOverviewPage extends QiskitPage {
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
+
 .course-overview-page {
   &__section {
     @include contained();
 
     max-width: $max-size;
-    margin-bottom: $spacing-07;
-    margin-top: $spacing-10;
+    margin-bottom: carbon.$spacing-07;
+    margin-top: carbon.$spacing-10;
 
     ::v-deep .course-pages-section__main {
       min-height: 20rem;

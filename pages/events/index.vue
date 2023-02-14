@@ -322,8 +322,8 @@ useHead({
 
 // .event-page {
 //   &__tabs {
-//     margin-top: $spacing-07;
-//     margin-bottom: $spacing-09;
+//     margin-top: carbon.$spacing-07;
+//     margin-bottom: carbon.$spacing-09;
 
 //     .bx--tabs--scrollable__nav-link {
 //       color: $black-100;
@@ -392,7 +392,7 @@ useHead({
 
 //   &__main-content {
 //     @include mq($until: medium) {
-//       margin-top: $spacing-09;
+//       margin-top: carbon.$spacing-09;
 //     }
 //   }
 
@@ -405,12 +405,12 @@ useHead({
 //   }
 
 //   &__section {
-//     margin-top: $spacing-10;
-//     margin-bottom: $spacing-10;
+//     margin-top: carbon.$spacing-10;
+//     margin-bottom: carbon.$spacing-10;
 
 //     &__description {
-//       margin-top: $spacing-06;
-//       margin-bottom: $spacing-07;
+//       margin-top: carbon.$spacing-06;
+//       margin-bottom: carbon.$spacing-07;
 //       max-width: 20rem;
 
 //       @include mq($from: large) {
@@ -420,11 +420,11 @@ useHead({
 //   }
 
 //   &__tab {
-//     padding-top: $spacing-06;
+//     padding-top: carbon.$spacing-06;
 //   }
 
 //   &__instructions {
-//     padding-left: $spacing-06;
+//     padding-left: carbon.$spacing-06;
 //   }
 // }
 </style>

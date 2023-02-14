@@ -314,11 +314,11 @@ useHead({
 // TODO: Review old CSS
 // .seminar-series-page {
 //   &__section {
-//     margin-top: $spacing-10;
-//     margin-bottom: $spacing-07;
+//     margin-top: carbon.$spacing-10;
+//     margin-bottom: carbon.$spacing-07;
 
 //     @include mq($until: large) {
-//       margin-bottom: $spacing-05;
+//       margin-bottom: carbon.$spacing-05;
 //     }
 //   }
 

@@ -29,6 +29,8 @@ defineProps<AccordionLayoutProps>()
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
+
 .accordion-layout {
   display: flex;
   flex-direction: column;
@@ -38,11 +40,11 @@ defineProps<AccordionLayoutProps>()
     height: auto;
     width: 100%;
     max-width: 26rem;
-    margin-bottom: $spacing-05;
+    margin-bottom: carbon.$spacing-05;
   }
 
   &__description {
-    margin-bottom: $spacing-06;
+    margin-bottom: carbon.$spacing-06;
   }
 }
 </style>

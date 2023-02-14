@@ -76,6 +76,7 @@ export default class CapabilitiesSection extends Mixins(ScrollSectionsMixin) {
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
 @import '~carbon-components/scss/globals/scss/typography';
 
 .capabilities-section {
@@ -94,8 +95,8 @@ export default class CapabilitiesSection extends Mixins(ScrollSectionsMixin) {
   &__container {
     @include contained();
 
-    padding-top: $spacing-10;
-    padding-bottom: $spacing-09;
+    padding-top: carbon.$spacing-10;
+    padding-bottom: carbon.$spacing-09;
   }
 
   &__capabilities {
@@ -109,19 +110,19 @@ export default class CapabilitiesSection extends Mixins(ScrollSectionsMixin) {
   }
 
   &__card {
-    margin-bottom: $spacing-12;
+    margin-bottom: carbon.$spacing-12;
 
     @include mq($until: medium) {
-      margin-bottom: $spacing-07;
+      margin-bottom: carbon.$spacing-07;
     }
   }
 
   &__scrolling-ui {
     position: sticky;
-    top: $spacing-06;
+    top: carbon.$spacing-06;
     flex: 0 0 32rem;
     min-height: 20rem;
-    margin-bottom: $spacing-12;
+    margin-bottom: carbon.$spacing-12;
 
     @include mq($from: medium, $until: large) {
       flex: 1.5;
