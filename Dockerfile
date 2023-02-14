@@ -15,6 +15,6 @@ FROM nginx:1.23.3-alpine
 
 COPY --from=build /qiskit.org/.output/public /usr/share/nginx/html
 
-EXPOSE 80
+EXPOSE 3000
 
 CMD ["nginx", "-g", "daemon off;"]
