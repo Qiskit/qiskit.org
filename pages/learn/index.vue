@@ -117,7 +117,7 @@ useHead({
 //     }
 
 //     .link {
-//       color: $text-color-white;
+//       color: qiskit.$text-color-white;
 //       text-decoration: underline;
 //       margin-left: 4px;
 

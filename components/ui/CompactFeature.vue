@@ -30,11 +30,12 @@ withDefaults(defineProps<Props>(), {
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/variables.scss" as qiskit;
 
 $feature-icon-size: 2.25rem;
 
 .compact-feature {
-  background-color: $background-color-secondary;
+  background-color: qiskit.$background-color-secondary;
   height: 100%;
   padding: carbon.$spacing-05;
 
@@ -48,7 +49,7 @@ $feature-icon-size: 2.25rem;
   }
 
   &__title {
-    color: $text-color-white;
+    color: qiskit.$text-color-white;
     margin-bottom: carbon.$spacing-04;
     height: 2.5rem; // for consistent alignment
 
@@ -58,7 +59,7 @@ $feature-icon-size: 2.25rem;
   }
 
   &__description {
-    color: $text-color-white;
+    color: qiskit.$text-color-white;
   }
 }
 </style>

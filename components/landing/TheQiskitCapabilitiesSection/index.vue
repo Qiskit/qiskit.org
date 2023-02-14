@@ -124,6 +124,7 @@ export default class TheQiskitCapabilitiesSection extends Mixins(ScrollSectionsM
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/variables.scss" as qiskit;
 
 $cta-max-width: 14rem;
 
@@ -213,7 +214,7 @@ $cta-max-width: 14rem;
     padding-right: carbon.$spacing-05;
     background-size: 200% 100%;
     background-position-x: 100%;
-    background-image: linear-gradient(90deg, $button-background-color-light 0%, $button-background-color-light 50%, $background-color-secondary 50%, $background-color-secondary 100%);
+    background-image: linear-gradient(90deg, qiskit.$button-background-color-light 0%, qiskit.$button-background-color-light 50%, qiskit.$background-color-secondary 50%, qiskit.$background-color-secondary 100%);
     transition: background-position-x 0.3s ease-out;
 
     @include mq($until: medium) {

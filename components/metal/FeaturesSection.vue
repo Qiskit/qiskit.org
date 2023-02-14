@@ -29,9 +29,10 @@ const metalFeatures = METAL_FEATURES
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/variables.scss" as qiskit;
 
 .features-section {
-  background-color: $background-color-dark;
+  background-color: qiskit.$background-color-dark;
 
   &__container {
     @include contained();

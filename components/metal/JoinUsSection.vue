@@ -21,9 +21,10 @@ const joinSlackLink = {
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/variables.scss" as qiskit;
 
 .early-access-section {
-  background-color: $background-color-dark;
+  background-color: qiskit.$background-color-dark;
 
   &__container {
     @include contained();

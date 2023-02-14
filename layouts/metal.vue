@@ -21,18 +21,18 @@
 <style lang="scss" scoped>
 // TODO: Integrate old code
 // .layout {
-//   background-color: $background-color-black;
-//   color: $text-color-lighter-2;
+//   background-color: qiskit.$background-color-black;
+//   color: qiskit.$text-color-lighter-2;
 // }
 
 // ::v-deep {
 //   h2,
 //   p {
-//     color: $text-color-lighter-2;
+//     color: qiskit.$text-color-lighter-2;
 //   }
 
 //   h3 {
-//     color: $text-color-white;
+//     color: qiskit.$text-color-white;
 //   }
 // }
 </style>

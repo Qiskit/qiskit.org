@@ -107,7 +107,7 @@ useHead({
 //   }
 
 //   &__content-section-details {
-//     background-color: $background-color-lighter;
+//     background-color: qiskit.$background-color-lighter;
 //     height: 100%;
 //   }
 

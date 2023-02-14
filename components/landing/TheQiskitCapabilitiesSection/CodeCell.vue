@@ -41,11 +41,12 @@ withDefaults(defineProps<Props>(), {
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/variables.scss" as qiskit;
 
 .code-cell {
   display: block;
-  background-color: $background-color-lighter;
-  color: $text-color;
+  background-color: qiskit.$background-color-lighter;
+  color: qiskit.$text-color;
   padding: carbon.$spacing-05 0;
 
   &__block {
@@ -57,7 +58,7 @@ withDefaults(defineProps<Props>(), {
 
     &_active {
       opacity: 1;
-      border-color: $border-active-color;
+      border-color: qiskit.$border-active-color;
     }
 
     @include mq($until: medium) {
@@ -67,7 +68,7 @@ withDefaults(defineProps<Props>(), {
 
   &__comment,
   &__string {
-    color: $text-active-color;
+    color: qiskit.$text-active-color;
   }
 
   &__line {

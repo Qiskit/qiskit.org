@@ -44,17 +44,18 @@ withDefaults(defineProps<Props>(), {
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/variables.scss" as qiskit;
 
 .footer-section {
   &__title {
     margin-bottom: carbon.$spacing-06;
 
     &_theme_light {
-      // color: $text-color-lighter;
+      color: qiskit.$text-color-lighter;
     }
 
     &_theme_dark {
-      // color: $text-color-white;
+      color: qiskit.$text-color-white;
     }
   }
 
@@ -65,22 +66,22 @@ withDefaults(defineProps<Props>(), {
     padding-bottom: carbon.$spacing-03;
 
     &_theme_light {
-      // color: $text-color-lighter;
+      color: qiskit.$text-color-lighter;
 
       &:active,
       &:visited,
       &:hover {
-        // color: $text-color-lighter;
+        color: qiskit.$text-color-lighter;
       }
     }
 
     &_theme_dark {
-      // color: $text-color-white;
+      color: qiskit.$text-color-white;
 
       &:active,
       &:visited,
       &:hover {
-        // color: $text-color-white;
+        color: qiskit.$text-color-white;
       }
     }
   }
@@ -95,11 +96,11 @@ withDefaults(defineProps<Props>(), {
 
   &__icon-link {
     &_theme_light {
-      // color: $text-color-lighter;
+      color: qiskit.$text-color-lighter;
     }
 
     &_theme_dark {
-      // color: $text-color-white;
+      color: qiskit.$text-color-white;
     }
   }
 }

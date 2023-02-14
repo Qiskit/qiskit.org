@@ -24,12 +24,13 @@ const ibmQExperienceLink = IBM_Q_EXPERIENCE
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/variables.scss" as qiskit;
 
 .start-on-the-cloud {
   &__wrapper {
     @include responsive-grid-bg('/images/grid/grid-white.svg', 36rem);
 
-    background-color: $background-color-lighter;
+    background-color: qiskit.$background-color-lighter;
     background-position: bottom left;
     background-repeat: no-repeat;
     height: 100%;

@@ -31,10 +31,11 @@ withDefaults(defineProps<Props>(), {
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/variables.scss" as qiskit;
 
 .syllabus-card {
   width: 100%;
-  background-color: $background-color-lighter;
+  background-color: qiskit.$background-color-lighter;
   display: flex;
   flex-direction: column;
 

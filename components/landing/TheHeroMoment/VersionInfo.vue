@@ -41,6 +41,7 @@ const githubRepoLink = GITHUB_REPOSITORY
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/variables.scss" as qiskit;
 
 .qiskit-version-info {
   display: flex;
@@ -59,7 +60,7 @@ const githubRepoLink = GITHUB_REPOSITORY
   }
 
   &__github-icon {
-    fill: $link-color-tertiary;
+    fill: qiskit.$link-color-tertiary;
     margin-right: carbon.$spacing-07;
 
     @include mq($from: medium, $until: large) {

@@ -47,6 +47,7 @@ const qiskitPronunciation = Math.random() < 0.5 ? '[kiss-kit]' : '[quiss-kit]'
 
 <style lang="scss">
 @use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/variables.scss" as qiskit;
 
 .the-hero-moment {
   height: calc(#{math.div(56rem * 40, 64)} + 2px);
@@ -63,7 +64,7 @@ const qiskitPronunciation = Math.random() < 0.5 ? '[kiss-kit]' : '[quiss-kit]'
   &__square-link {
     width: 4rem;
     height: 4rem;
-    background-color: $background-color-black;
+    background-color: qiskit.$background-color-black;
     position: absolute;
     top: 21%;
     left: 43%;

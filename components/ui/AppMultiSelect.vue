@@ -39,16 +39,17 @@ function formatOptions (optionsList: any): Array<multiSelectOption> {
 
 <style lang="scss">
 @use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/variables.scss" as qiskit;
 
   .app-multi-select {
     & .bx--list-box--light,
     & .bx--list-box__menu {
-      background-color: $background-color-white;
+      background-color: qiskit.$background-color-white;
       border-bottom-color: $cool-gray-20;
     }
 
     .bx--list-box__menu-item {
-      background-color: $background-color-lighter;
+      background-color: qiskit.$background-color-lighter;
     }
 
     .bx--list-box__menu-icon {
@@ -60,22 +61,22 @@ function formatOptions (optionsList: any): Array<multiSelectOption> {
     }
 
     .bx--list-box--expanded:hover.bx--list-box--light:hover {
-      background-color: $background-color-lighter;
+      background-color: qiskit.$background-color-lighter;
     }
 
     .bx--list-box__menu-item--highlighted {
-      background-color: $background-color-light;
+      background-color: qiskit.$background-color-light;
     }
 
     .bx--tag--filter {
-      background-color: $tag-background-color;
-      color: $tag-text-color;
+      background-color: qiskit.$tag-background-color;
+      color: qiskit.$tag-text-color;
       margin-left: 0;
       margin-right: carbon.$spacing-05;
     }
 
     .bx--tag--high-contrast .bx--tag__close-icon:hover {
-      background-color: $tag-background-color;
+      background-color: qiskit.$tag-background-color;
     }
 
     .bx--list-box__menu-item:hover .bx--list-box__menu-item__option {

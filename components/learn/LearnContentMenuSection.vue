@@ -24,10 +24,12 @@ function trackPerformedSearch (uiElement: string, field: string) {
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/helpers/variables.scss" as qiskit;
+
 .content-menu-section {
-  background: $background-color-lighter;
-  border-top: 1px solid $border-color;
-  border-bottom: 1px solid $border-color;
+  background: qiskit.$background-color-lighter;
+  border-top: 1px solid qiskit.$border-color;
+  border-bottom: 1px solid qiskit.$border-color;
 
   &__container {
     @include contained();

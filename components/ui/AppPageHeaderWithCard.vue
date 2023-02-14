@@ -42,6 +42,7 @@ defineProps<Props>()
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/variables.scss" as qiskit;
 
 .app-page-header {
   @include responsive-grid-bg-strip("/images/grid/grid-hero-learn.svg", auto, 28rem);
@@ -96,7 +97,7 @@ defineProps<Props>()
   }
 
   &__card-title {
-    border-bottom: 4px solid $border-color-tertiary;
+    border-bottom: 4px solid qiskit.$border-color-tertiary;
     display: inline;
     padding-bottom: carbon.$spacing-02;
     padding-right: carbon.$spacing-03;

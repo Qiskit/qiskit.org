@@ -21,6 +21,8 @@
 </template>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/helpers/variables.scss" as qiskit;
+
 .logo {
   width: 1.7rem;
   margin-top: -0.2rem;
@@ -54,7 +56,7 @@ nav {
   position: fixed;
   top: 0;
   z-index: 100;
-  box-shadow: 0 0 16px rgba($shadow-color, 0.3);
+  box-shadow: 0 0 16px rgba(qiskit.$shadow-color, 0.3);
   background-color: $inverse-02;
   flex-wrap: wrap;
   min-height: 63px;

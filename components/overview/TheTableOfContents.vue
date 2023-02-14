@@ -33,13 +33,14 @@ const isActive = computed<boolean>((entry: TableOfContentEntry): boolean => {
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/variables.scss" as qiskit;
 
 .the-table-of-contents {
   display: flex;
   flex-direction: column;
 
   &__entry {
-    color: $text-color-light;
+    color: qiskit.$text-color-light;
     text-decoration: none;
     margin-bottom: carbon.$spacing-06;
 
@@ -50,7 +51,7 @@ const isActive = computed<boolean>((entry: TableOfContentEntry): boolean => {
 
       &::before {
         content: "-";
-        color: $text-active-color;
+        color: qiskit.$text-active-color;
         font-weight: bold;
         display: inline-block;
         padding-right: carbon.$spacing-06;

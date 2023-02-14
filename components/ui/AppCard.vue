@@ -108,11 +108,12 @@ function hasTags (tags: string[] | TagTooltip[]) {
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/variables.scss" as qiskit;
 
 .app-card {
   min-height: 13rem;
   width: 100%;
-  background-color: $background-color-lighter;
+  background-color: qiskit.$background-color-lighter;
   display: flex;
 
   @include mq($until: medium) {
@@ -122,7 +123,7 @@ function hasTags (tags: string[] | TagTooltip[]) {
 
   &__image {
     flex: 0 0 14rem;
-    background-color: $background-color-light;
+    background-color: qiskit.$background-color-light;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -231,8 +232,8 @@ function hasTags (tags: string[] | TagTooltip[]) {
 
 .app-card {
   .bx--tag--purple {
-    background-color: $tag-background-color;
-    color: $tag-text-color;
+    background-color: qiskit.$tag-background-color;
+    color: qiskit.$tag-text-color;
     margin-right: carbon.$spacing-03;
     margin-left: 0;
     min-width: 0;
@@ -245,8 +246,8 @@ function hasTags (tags: string[] | TagTooltip[]) {
   &__custom-pill {
     @include type-style('caption-01');
 
-    background-color: $tag-background-color;
-    color: $tag-text-color;
+    background-color: qiskit.$tag-background-color;
+    color: qiskit.$tag-text-color;
     display: inline-flex;
     min-width: 0;
     max-width: 100%;

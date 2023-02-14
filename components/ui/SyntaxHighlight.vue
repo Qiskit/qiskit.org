@@ -36,10 +36,11 @@ function copyToClipboard (code: string) {
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/variables.scss" as qiskit;
 
 .syntax-highlight {
   position: relative;
-  background-color: $background-color-lighter;
+  background-color: qiskit.$background-color-lighter;
   padding: carbon.$spacing-05 carbon.$spacing-07;
 
   @include mq($until: large) {
@@ -55,7 +56,7 @@ function copyToClipboard (code: string) {
     text-transform: lowercase;
     background-size: 200% 100%;
     background-position-x: 100%;
-    background-image: linear-gradient(90deg, $button-background-color-light 0%, $button-background-color-light 50%, $background-color-secondary 50%, $background-color-secondary 100%);
+    background-image: linear-gradient(90deg, qiskit.$button-background-color-light 0%, qiskit.$button-background-color-light 50%, qiskit.$background-color-secondary 50%, qiskit.$background-color-secondary 100%);
     transition: background-position-x 0.3s ease-out;
 
     &:hover,

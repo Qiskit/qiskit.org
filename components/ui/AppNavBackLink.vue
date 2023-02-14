@@ -24,6 +24,7 @@ withDefaults(defineProps<Props>(), {
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/variables.scss" as qiskit;
 
 .app-nav-back-link {
   @include contained();
@@ -37,11 +38,11 @@ withDefaults(defineProps<Props>(), {
     width: fit-content;
 
     &_dark {
-      color: $text-color-white;
+      color: qiskit.$text-color-white;
     }
 
     &_light {
-      color: $link-color-tertiary;
+      color: qiskit.$link-color-tertiary;
     }
   }
 

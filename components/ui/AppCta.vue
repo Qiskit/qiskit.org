@@ -50,6 +50,7 @@ const iconPerLinkType = computed(() => {
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/variables.scss" as qiskit;
 
 @mixin bicolor-background($colorLeft, $colorRight) {
     background-image: linear-gradient(90deg, $colorLeft 0%, $colorLeft 50%, $colorRight 50%, $colorRight 100%);
@@ -84,9 +85,9 @@ const iconPerLinkType = computed(() => {
   */
   &,
   &_primary {
-    @include bicolor-background($button-background-color-dark, $button-background-color);
+    @include bicolor-background(qiskit.$button-background-color-dark, qiskit.$button-background-color);
 
-    color: $button-text-color;
+    color: qiskit.$button-text-color;
   }
 
   &:hover,
@@ -96,20 +97,20 @@ const iconPerLinkType = computed(() => {
   }
 
   &_secondary {
-    @include bicolor-background($button-background-color-secondary-dark, $button-background-color-secondary);
+    @include bicolor-background(qiskit.$button-background-color-secondary-dark, qiskit.$button-background-color-secondary);
 
-    color: $button-text-color-secondary;
+    color: qiskit.$button-text-color-secondary;
 
     &:hover,
     &:focus,
     &:active {
-      color: $button-active-text-color-secondary;
+      color: qiskit.$button-active-text-color-secondary;
     }
 
     &_theme_dark {
-      @include bicolor-background($button-background-color-tertiary-dark, $button-background-color-tertiary);
+      @include bicolor-background(qiskit.$button-background-color-tertiary-dark, qiskit.$button-background-color-tertiary);
 
-      color: $button-text-color-tertiary;
+      color: qiskit.$button-text-color-tertiary;
     }
   }
 
@@ -119,21 +120,21 @@ const iconPerLinkType = computed(() => {
     justify-content: flex-start;
     align-items: flex-start;
     background-image: none;
-    color: $link-color-tertiary;
+    color: qiskit.$link-color-tertiary;
 
     &:hover,
     &:focus,
     &:active {
-      color: $link-hover-color-tertiary;
+      color: qiskit.$link-hover-color-tertiary;
     }
 
     &_theme_dark {
-      color: $link-color-quaternary;
+      color: qiskit.$link-color-quaternary;
 
       &:hover,
       &:focus,
       &:active {
-        color: $link-hover-color-quaternary;
+        color: qiskit.$link-hover-color-quaternary;
       }
     }
   }

@@ -199,8 +199,8 @@ useHead({
 //   ::v-deep {
 //     // TODO: Extract styles like "_checkbox" to be defined globally
 //     & a.bx--tabs--scrollable__nav-link {
-//       color: $text-color-light;
-//       border-bottom-color: $border-color;
+//       color: qiskit.$text-color-light;
+//       border-bottom-color: qiskit.$border-color;
 
 //       &:focus,
 //       &:active {
@@ -208,7 +208,7 @@ useHead({
 //       }
 
 //       &:not(.bx--tabs--scrollable__nav-item--disabled) {
-//         color: $text-color-light;
+//         color: qiskit.$text-color-light;
 //       }
 //     }
 
@@ -221,11 +221,11 @@ useHead({
 //       &:not(.bx--tabs--scrollable__nav-item--selected):not(.bx--tabs--scrollable__nav-item--disabled):not(.bx--tabs--scrollable__nav-item--selected) .bx--tabs--scrollable__nav-link:focus,
 //       &:not(.bx--tabs--scrollable__nav-item--selected):not(.bx--tabs--scrollable__nav-item--disabled):not(.bx--tabs--scrollable__nav-item--selected) a.bx--tabs--scrollable__nav-link:active,
 //       &:not(.bx--tabs--scrollable__nav-item--disabled) .bx--tabs--scrollable__nav-link, .bx--tabs--scrollable__nav-item--selected:not(.bx--tabs--scrollable__nav-item--disabled) .bx--tabs--scrollable__nav-link:focus {
-//         color: $text-color-light;
+//         color: qiskit.$text-color-light;
 //       }
 
 //       &--selected:not(.bx--tabs--scrollable__nav-item--disabled) .bx--tabs--scrollable__nav-link {
-//         border-bottom-color: $border-color-secondary;
+//         border-bottom-color: qiskit.$border-color-secondary;
 //       }
 //     }
 
@@ -236,7 +236,7 @@ useHead({
 //       & .bx--tabs--scrollable__nav-item:hover:not(.bx--tabs--scrollable__nav-item--selected):not(.bx--tabs--scrollable__nav-item--disabled),
 //       & .bx--tabs--scrollable__nav-item,
 //       & .bx--tabs-trigger {
-//         background-color: $background-color-white;
+//         background-color: qiskit.$background-color-white;
 
 //         svg {
 //           fill: $gray-100;
@@ -245,7 +245,7 @@ useHead({
 
 //       & .bx--tabs--scrollable__nav-link,
 //       & .bx--tabs-trigger-text {
-//         color: $text-color;
+//         color: qiskit.$text-color;
 //     }
 //     // stylelint-enable no-descending-specificity
 

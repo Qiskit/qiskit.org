@@ -36,10 +36,11 @@ defineProps<Props>()
 
 <style lang="scss">
 @use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/variables.scss" as qiskit;
 
 .bx--data-table th {
   color: $black-100;
-  background-color: $background-color-light;
+  background-color: qiskit.$background-color-light;
 
   // TODO: remove this override once issue is fixed
   // https://github.com/carbon-design-system/carbon-components-vue/issues/1161#issuecomment-815689534
@@ -49,9 +50,9 @@ defineProps<Props>()
 }
 
 .bx--data-table tbody tr td, .bx--data-table tbody tr:hover td {
-  background-color: $background-color-white;
+  background-color: qiskit.$background-color-white;
   border-top: none;
-  border-bottom: 1px solid $border-color;
+  border-bottom: 1px solid qiskit.$border-color;
 }
 
 .bx--data-table li {

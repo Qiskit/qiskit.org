@@ -160,6 +160,7 @@ function selectOption (choicesGroup: ChoicesGroup, selectedOption: string) {
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/variables.scss" as qiskit;
 
 .bx--btn-set .bx--btn:not(:focus) {
   box-shadow: none;
@@ -209,9 +210,9 @@ function selectOption (choicesGroup: ChoicesGroup, selectedOption: string) {
   }
 
   &__option {
-    background-color: $background-color-lighter;
+    background-color: qiskit.$background-color-lighter;
     max-width: 100%;
-    color: $text-color-light;
+    color: qiskit.$text-color-light;
     padding-left: carbon.$spacing-07;
     margin-bottom: carbon.$spacing-07;
 
@@ -221,9 +222,9 @@ function selectOption (choicesGroup: ChoicesGroup, selectedOption: string) {
     }
 
     &_active {
-      border-color: $border-active-color;
+      border-color: qiskit.$border-active-color;
       border-width: 2px;
-      color: $text-active-color;
+      color: qiskit.$text-active-color;
     }
   }
 }
@@ -246,7 +247,7 @@ function selectOption (choicesGroup: ChoicesGroup, selectedOption: string) {
 
     & .bx--accordion__item {
       border-bottom: none;
-      border-top-color: $border-color;
+      border-top-color: qiskit.$border-color;
     }
 
     & .bx--accordion__heading {

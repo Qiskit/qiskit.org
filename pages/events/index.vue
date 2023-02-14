@@ -327,14 +327,14 @@ useHead({
 
 //     .bx--tabs--scrollable__nav-link {
 //       color: $black-100;
-//       border-bottom-color: $border-color;
+//       border-bottom-color: qiskit.$border-color;
 //     }
 
 //     .bx--tabs--scrollable__nav-item--selected:not(
 //         .bx--tabs--scrollable__nav-item--disabled
 //       )
 //       .bx--tabs--scrollable__nav-link {
-//       border-bottom-color: $border-color-secondary;
+//       border-bottom-color: qiskit.$border-color-secondary;
 //     }
 
 //     .bx--tabs--scrollable__nav-item:not(
@@ -345,18 +345,18 @@ useHead({
 //         .bx--tabs--scrollable__nav-item--selected
 //       ):not(.bx--tabs--scrollable__nav-item--disabled)
 //       .bx--tabs--scrollable__nav-link {
-//       color: $text-color;
+//       color: qiskit.$text-color;
 //     }
 
 //     @include mq($until: medium) {
 //       margin-bottom: 0;
 
 //       .bx--tabs-trigger {
-//         background-color: $background-color-white;
-//         border-bottom: 1px solid $border-color;
+//         background-color: qiskit.$background-color-white;
+//         border-bottom: 1px solid qiskit.$border-color;
 
 //         &[class*="--open"] {
-//           background-color: $background-color-lighter;
+//           background-color: qiskit.$background-color-lighter;
 //         }
 //       }
 
@@ -365,16 +365,16 @@ useHead({
 //       }
 
 //       .bx--tabs-trigger-text {
-//         color: $text-color;
+//         color: qiskit.$text-color;
 //       }
 
 //       .bx--tabs-trigger--open {
-//         border-bottom: 1px solid $border-color-quaternary;
+//         border-bottom: 1px solid qiskit.$border-color-quaternary;
 //       }
 
 //       .bx--tabs-trigger--open,
 //       .bx--tabs--scrollable__nav-item {
-//         background-color: $background-color-lighter;
+//         background-color: qiskit.$background-color-lighter;
 //       }
 
 //       .bx--tabs--scrollable__nav-item:last-child
@@ -385,7 +385,7 @@ useHead({
 //       .bx--tabs--scrollable__nav-item:hover:not(
 //           .bx--tabs--scrollable__nav-item--selected
 //         ):not(.bx--tabs--scrollable__nav-item--disabled) {
-//         background-color: $background-color-light;
+//         background-color: qiskit.$background-color-light;
 //       }
 //     }
 //   }

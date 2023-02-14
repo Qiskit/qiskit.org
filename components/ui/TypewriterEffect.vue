@@ -88,9 +88,10 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/variables.scss" as qiskit;
 
 .typewriter-effect {
-  background-color: $background-color-secondary;
+  background-color: qiskit.$background-color-secondary;
   display: inline-block;
 
   &__content {
@@ -115,7 +116,7 @@ onMounted(() => {
     }
 
     50% {
-      background-color: $background-color-secondary;
+      background-color: qiskit.$background-color-secondary;
     }
   }
 }

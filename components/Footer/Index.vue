@@ -81,17 +81,18 @@ const secondaryFooterLinks = SECONDARY_FOOTER_LINKS;
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/variables.scss" as qiskit;
 
 .page-footer {
   .page-footer__primary {
     padding: carbon.$spacing-07 0;
 
     &_theme_light {
-      // background-color: $background-color-lighter;
+      background-color: qiskit.$background-color-lighter;
     }
 
     &_theme_dark {
-      // background-color: $background-color-darker;
+      background-color: qiskit.$background-color-darker;
     }
   }
 
@@ -100,11 +101,11 @@ const secondaryFooterLinks = SECONDARY_FOOTER_LINKS;
     padding-bottom: carbon.$spacing-07 + 2.5rem; // make room for the "cookies preferences" button
 
     &_theme_light {
-      // background-color: $background-color-white;
+      background-color: qiskit.$background-color-white;
     }
 
     &_theme_dark {
-      // background-color: $background-color-black;
+      background-color: qiskit.$background-color-black;
     }
   }
 
@@ -120,11 +121,11 @@ const secondaryFooterLinks = SECONDARY_FOOTER_LINKS;
     // }
 
     &_theme_light {
-      // color: $text-color-lighter;
+      color: qiskit.$text-color-lighter;
     }
 
     &_theme_dark {
-      // color: $text-color-white;
+      color: qiskit.$text-color-white;
     }
   }
 
@@ -141,11 +142,11 @@ const secondaryFooterLinks = SECONDARY_FOOTER_LINKS;
     }
 
     &_theme_light {
-      // color: $text-color-lighter;
+      color: qiskit.$text-color-lighter;
     }
 
     &_theme_dark {
-      // color: $text-color-white;
+      color: qiskit.$text-color-white;
     }
   }
 

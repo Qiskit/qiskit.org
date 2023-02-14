@@ -287,19 +287,21 @@ const mailtoQiskit: TrackedLink = {
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/helpers/variables.scss" as qiskit;
+
 .faq-section {
   ::v-deep {
     .bx--accordion__title {
-      color: $text-color;
+      color: qiskit.$text-color;
     }
 
     .bx--accordion__heading:hover,
     .bx--accordion__heading:hover::before {
-      background-color: $background-color-lighter;
+      background-color: qiskit.$background-color-lighter;
     }
 
     .bx--accordion__arrow {
-      fill: $text-color;
+      fill: qiskit.$text-color;
     }
   }
 }

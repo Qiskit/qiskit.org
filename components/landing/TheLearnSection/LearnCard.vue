@@ -34,13 +34,14 @@ const learnLink: GeneralLink = {
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/variables.scss" as qiskit;
 
 .learn-card {
   display: flex;
   flex-wrap: wrap;
 
   &__content {
-    background-color: $background-color-lighter;
+    background-color: qiskit.$background-color-lighter;
     padding: carbon.$spacing-05;
 
     @include mq($until: medium) {

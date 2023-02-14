@@ -465,6 +465,7 @@ const teachingSections: TeachingSection[] = [
 
 <style lang="scss">
 @use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/variables.scss" as qiskit;
 
   .start-learning-section {
     .cv-tab.bx--tabs--scrollable {
@@ -489,7 +490,7 @@ const teachingSections: TeachingSection[] = [
 
     & .bx--tabs--scrollable__nav-item {
       &--selected:not(.bx--tabs--scrollable__nav-item--disabled) .bx--tabs--scrollable__nav-link {
-        border-bottom-color: $border-color-secondary;
+        border-bottom-color: qiskit.$border-color-secondary;
       }
     }
   }

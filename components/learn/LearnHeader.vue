@@ -78,13 +78,14 @@ function trackPerformedSearch (uiElement: string, field: string) {
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/variables.scss" as qiskit;
 
 .learn-header {
   background: linear-gradient(315deg, $cool-gray-10 0%, $blue-40 25%, $purple-70 100%);
   height: 37.5rem;
 
   &__headline {
-    color: $text-color-white;
+    color: qiskit.$text-color-white;
     margin-bottom: carbon.$spacing-07;
   }
 

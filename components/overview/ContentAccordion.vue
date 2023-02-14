@@ -53,20 +53,21 @@ function actionChange ({ changedIndex }: { changedIndex: number }) {
 
 <style lang="scss">
 @use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/variables.scss" as qiskit;
 
 .content-accordion {
   & .bx--accordion__item {
     border-bottom: none;
-    border-top-color: $border-color;
+    border-top-color: qiskit.$border-color;
     overflow-anchor: none;
   }
 
   & .bx--accordion__heading {
     height: 2.5rem;
-    background-color: $background-color-light;
+    background-color: qiskit.$background-color-light;
 
     &:hover::before {
-      background-color: $background-color-light-2;
+      background-color: qiskit.$background-color-light-2;
     }
   }
 
@@ -76,29 +77,29 @@ function actionChange ({ changedIndex }: { changedIndex: number }) {
   }
 
   & .bx--accordion__arrow {
-    fill: $text-color-light;
+    fill: qiskit.$text-color-light;
   }
 
   & button[aria-expanded="true"]{
-    color: $text-color-white;
-    background-color: $button-background-color;
+    color: qiskit.$text-color-white;
+    background-color: qiskit.$button-background-color;
 
     &:hover::before {
-      background-color: $button-background-color;
+      background-color: qiskit.$button-background-color;
     }
   }
 
   & button[aria-expanded="true"] > .bx--accordion__title{
-    color: $text-color-white;
+    color: qiskit.$text-color-white;
   }
 
   & button[aria-expanded="true"] > .bx--accordion__arrow{
-    fill: $text-color-white;
+    fill: qiskit.$text-color-white;
   }
 
   & .bx--accordion__content {
     padding: carbon.$spacing-06 carbon.$spacing-07;
-    background-color: $background-color-lighter;
+    background-color: qiskit.$background-color-lighter;
 
     @include mq($from: medium, $until: large) {
       padding-left: carbon.$spacing-06;

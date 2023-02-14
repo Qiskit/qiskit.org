@@ -58,6 +58,7 @@ defineProps<Props>()
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/variables.scss" as qiskit;
 
 .app-mosaic {
   &__layout {
@@ -94,7 +95,7 @@ defineProps<Props>()
   }
 
   &__element {
-    background-color: $background-color-lighter;
+    background-color: qiskit.$background-color-lighter;
     display: flex;
 
     &_first {
