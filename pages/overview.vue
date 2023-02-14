@@ -69,7 +69,7 @@ import {
   CONTENT_SECTIONS,
   OverviewSubSection
 } from '~/constants/overviewContent'
-import ScrollSectionsMixin from '~/mixins/scrollBetweenSections'
+import { useScrollBetweenSections } from '~/composables/useScrollBetweenSections';
 
 definePageMeta({
   layout: 'default-max'
@@ -81,6 +81,9 @@ useHead({
 
 const tocEntries = TABLE_OF_CONTENTS
 const contentSections = CONTENT_SECTIONS
+
+// TODO: Check if this is working correctly
+const { activeSection } = useScrollBetweenSections()
 
 const quickStartLink = {
   url: '#quick-start',

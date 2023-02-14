@@ -41,8 +41,8 @@
 <!-- TODO: Refactor using Composition API once Mixins are refactored -->
 <script lang="ts">
 import { Component, Mixins } from 'vue-property-decorator'
-import ScrollSectionsMixin from '~/mixins/scrollBetweenSections'
 import { CtaClickedEventProp } from '~/types/segment'
+import { useScrollBetweenSections } from '~/composables/useScrollBetweenSections'
 
 interface QiskitCapability {
   title: string
@@ -52,8 +52,11 @@ interface QiskitCapability {
 }
 
 @Component
-export default class TheQiskitCapabilitiesSection extends Mixins(ScrollSectionsMixin) {
+export default class TheQiskitCapabilitiesSection {
   const { trackClickEvent } = useSegment()
+
+  // TODO: Review how this work
+  const { activeSection } = useScrollBetweenSections()
   
   capabilities = [
     {
