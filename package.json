@@ -6,15 +6,27 @@
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
+    "format": "npm run format:eslint && npm run format:prettier",
+    "format:eslint": "npm run lint:eslint -- --fix",
+    "format:prettier": "prettier . --ignore-path .gitignore --write",
     "generate": "nuxt generate",
+    "lint": "npm run lint:eslint",
+    "lint:eslint": "eslint . --ext .ts,.js,.vue",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
     "@carbon/styles": "^1.22.0",
     "@ibm/plex": "^6.1.1",
+    "@nuxtjs/eslint-config-typescript": "^12.0.0",
     "@qiskit/web-components": "^0.11.2",
+    "@typescript-eslint/parser": "^5.52.0",
+    "eslint": "^8.34.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-vue": "^9.9.0",
     "nuxt": "^3.2.0",
+    "prettier": "^2.8.4",
     "sass": "^1.58.0"
   }
 }
