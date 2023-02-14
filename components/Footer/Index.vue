@@ -9,10 +9,10 @@
       >
         <div class="bx--row">
           <div class="bx--col-lg-4 bx--col-md">
-            <!-- <AppLogo
+            <UiAppLogo
               class="page-footer__logo"
               :class="`page-footer__logo_theme_${theme}`"
-            /> -->
+            />
           </div>
           <FooterSection
             v-for="sectionElements in footerElements"
