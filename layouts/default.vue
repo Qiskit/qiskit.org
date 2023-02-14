@@ -1,17 +1,18 @@
 <template>
   <div>
-    <qiskit-ui-shell variant="hide-account" @on-click="onClick" />
+    <!-- <qiskit-ui-shell variant="hide-account" @on-click="onClick" /> -->
     <div class="main-container">
-      <nuxt />
+      Qiskit.org
+      <!-- <nuxt /> -->
     </div>
-    <PageFooter old-container theme="light" />
+    <!-- <PageFooter old-container theme="light" /> -->
   </div>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
-import '@qiskit/web-components/components/ui-shell'
+<script setup lang="ts">
+// import Vue from 'vue'
+// import { Component } from 'vue-property-decorator'
+// import '@qiskit/web-components/components/ui-shell'
 
 @Component
 export default class DefaultLayout extends Vue {
