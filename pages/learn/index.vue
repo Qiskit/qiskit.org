@@ -30,8 +30,7 @@
 // import { SOCIAL_MEDIA } from "~/constants/menuLinks";
 
 definePageMeta({
-  // TODO: Integrate layout
-  // layout: "default-max",
+  layout: "default-max",
 });
 
 useHead({

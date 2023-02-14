@@ -122,8 +122,7 @@
 // import { GeneralLink } from "~/constants/appLinks";
 
 definePageMeta({
-  // TODO: Integrate layout
-  // layout: "default-max",
+  layout: "default-max",
 });
 
 useHead({

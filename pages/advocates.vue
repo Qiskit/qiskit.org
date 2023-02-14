@@ -24,8 +24,7 @@
 // import QiskitPage from "~/components/logic/QiskitPage.vue";
 
 definePageMeta({
-  // TODO: Integrate layout
-  // layout: "default-max",
+  layout: "default-max",
 });
 
 useHead({

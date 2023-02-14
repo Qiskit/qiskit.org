@@ -63,8 +63,7 @@
 // import ScrollSectionsMixin from "~/mixins/scrollBetweenSections";
 
 definePageMeta({
-  // TODO: Integrate layout
-  // layout: "default-max",
+  layout: "default-max",
 });
 
 useHead({

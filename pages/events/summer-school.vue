@@ -95,8 +95,7 @@
 // } from "~/constants/summerSchool2022Content";
 
 definePageMeta({
-  // TODO: Integrate layout
-  // layout: "default-max",
+  layout: "default-max",
 });
 
 const title = "Qiskit Global Summer School 2022";

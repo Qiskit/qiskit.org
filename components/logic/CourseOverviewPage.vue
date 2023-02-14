@@ -34,15 +34,15 @@
   </main>
 </template>
 
-<script lang="ts">
-import { Component } from 'vue-property-decorator'
+<script setup lang="ts">
 import QiskitPage from './QiskitPage.vue'
 import { GeneralLink } from '~/constants/appLinks'
 import { Course, Prerequisite } from '~/constants/learnContent'
 
-@Component({
-  layout: 'default-max'
-})
+definePageMeta({
+  layout: "default-max",
+});
+
 export default abstract class CourseOverviewPage extends QiskitPage {
   abstract routeName: string
 

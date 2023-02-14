@@ -98,8 +98,7 @@ const description =
 const image = "/images/events/fall-fest/fall-fest.png";
 
 definePageMeta({
-  // TODO: Integrate layout
-  // layout: 'default-max'
+  layout: 'default-max'
 });
 
 useHead({
