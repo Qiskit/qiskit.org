@@ -2,6 +2,7 @@
   <div>
     <!-- <qiskit-ui-shell variant="hide-account" @on-click="onClick" /> -->
     <div class="main-container">
+      Qiskit.org
       <!-- <nuxt /> -->
     </div>
     <!-- <PageFooter old-container theme="light" /> -->
