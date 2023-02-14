@@ -22,9 +22,9 @@
         </p>
         <p>
           Please follow
-          <AppLink v-bind="headerData.qiskitTwitterLink">
+          <UiAppLink v-bind="headerData.qiskitTwitterLink">
             Qiskit Twitter
-          </AppLink>
+          </UiAppLink>
           for more details and updates. For any questions, please check out our
           FAQ below!
         </p>

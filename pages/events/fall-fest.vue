@@ -57,14 +57,14 @@
                   v-for="({ styles, data, link }, elementIndex) in row"
                   :key="`${elementIndex}`"
                 >
-                  <AppLink
+                  <UiAppLink
                     v-if="link"
                     class="fall-fest-page__table-link"
                     :style="styles"
                     :url="link"
                   >
                     Link to event
-                  </AppLink>
+                  </UiAppLink>
                   <span v-else :style="styles">{{ data }}</span>
                 </cv-data-table-cell>
               </cv-data-table-row>

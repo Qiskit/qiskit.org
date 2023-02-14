@@ -11,7 +11,7 @@
             :key="label"
             class="course"
           >
-            <BasicLink
+            <UiBasicLink
               class="course__entry"
               :class="{ active: label === activeCourseLabel }"
               :segment="segment"
@@ -19,7 +19,7 @@
               @mouseenter="selectCourse(label)"
             >
               {{ label }}
-            </BasicLink>
+            </UiBasicLink>
           </li>
         </ul>
       </nav>
@@ -31,12 +31,12 @@
         </div>
       </div>
       <div class="course-pages-section__main__preview">
-        <BasicLink :url="activeCourse.url">
+        <UiBasicLink :url="activeCourse.url">
           <img
             class="course-pages-section__main__preview__image"
             :src="activeCoursePreviewImage"
           >
-        </BasicLink>
+        </UiBasicLink>
         <AppCta
           v-bind="activeCourse"
           label="Go to page"

@@ -1,5 +1,5 @@
 <template>
-  <BasicLink
+  <UiBasicLink
     ref="link"
     class="app-cta"
     :class="[
@@ -18,11 +18,11 @@
       class="app-cta__icon"
       :class="`app-cta__icon_${iconPerLinkType}`"
     />
-  </BasicLink>
+  </UiBasicLink>
 </template>
 
 <script setup lang="ts">
-import BasicLink from '~/components/ui/BasicLink.vue'
+import UiBasicLink from '~/components/ui/UiBasicLink.vue'
 
 interface Props {
   isWider?: boolean
@@ -42,8 +42,8 @@ const iconPerLinkType = computed(() => {
   const url = this.$attrs.url
 
   if (props.label === 'Under construction') { return 'error-outline-16' }
-  if (BasicLink.isExternal(url)) { return 'launch-16' }
-  if (BasicLink.isIdAnchor(url)) { return 'arrow-down-16' }
+  if (UiBasicLink.isExternal(url)) { return 'launch-16' }
+  if (UiBasicLink.isIdAnchor(url)) { return 'arrow-down-16' }
   return 'arrow-right-16'
 })
 </script>

@@ -19,13 +19,13 @@
             v-html="description"
           />
           <!-- estlint-enable -->
-          <AppLink
+          <UiAppLink
             v-if="cta"
             v-bind="cta"
             class="app-mosaic__element-copy-link"
           >
             {{ cta.label }}
-          </AppLink>
+          </UiAppLink>
         </div>
         <div
           v-if="image"

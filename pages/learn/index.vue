@@ -4,13 +4,13 @@
     <!-- <qiskit-banner>
       <div class="content">
         Miss the old version of the textbook? Access it
-        <AppLink
+        <UiAppLink
           class="link"
           :segment="{ action: `${routeName} > banner > old-textbook-version` }"
           url="https://qiskit.org/textbook"
         >
           here
-        </AppLink>
+        </UiAppLink>
       </div>
     </qiskit-banner> -->
     <!-- <LearnHeader /> -->

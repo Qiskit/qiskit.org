@@ -1,11 +1,11 @@
 <template>
-  <BasicLink
+  <UiBasicLink
     class="app-link"
     :class="`app-link_${kind}`"
     v-bind="$attrs"
   >
     <slot />
-  </BasicLink>
+  </UiBasicLink>
 </template>
 
 <script setup lang="ts">

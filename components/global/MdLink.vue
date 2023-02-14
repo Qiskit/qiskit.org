@@ -1,5 +1,5 @@
 <template>
-  <AppLink v-bind="$attrs">
+  <UiAppLink v-bind="$attrs">
     <slot />
-  </AppLink>
+  </UiAppLink>
 </template>

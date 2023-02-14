@@ -1,27 +1,27 @@
 <template>
   <div class="qiskit-version-info">
-    <AppLink v-bind="githubRepoLink">
+    <UiAppLink v-bind="githubRepoLink">
       <LogoGitHub32 class="qiskit-version-info__github-icon" />
-    </AppLink>
+    </UiAppLink>
     <div class="qiskit-version-info__content">
       <div class="qiskit-version-info__version-string">
-        <AppLink
+        <UiAppLink
           class="code"
           kind="secondary"
           v-bind="githubRepoLink"
         >
           qiskit {{ version }}
-        </AppLink>
+        </UiAppLink>
       </div>
       <div class="qiskit-version-info__release-notes">
-        <AppLink
+        <UiAppLink
           class="code"
           v-bind="githubRepoLink"
           url="https://qiskit.org/documentation/release_notes.html#notable-changes"
           :segment="{ cta: 'release-notes', location: 'version-info' }"
         >
           see release notes
-        </AppLink>
+        </UiAppLink>
       </div>
     </div>
   </div>

@@ -11,20 +11,20 @@
         <template #content>
           <p>
             Minimal prerequisites are required for the Qiskit Global Summer School. If you know
-            <AppLink v-bind="khanAcademy">
+            <UiAppLink v-bind="khanAcademy">
               how to multiply two matrices
-            </AppLink>
+            </UiAppLink>
             , and have some programming experience in Python, you are ready for the Summer School.
           </p>
           <p>
             You can
-            <AppLink v-bind="pythonAndJupyter">
+            <UiAppLink v-bind="pythonAndJupyter">
               brush up on Python programming
-            </AppLink>
+            </UiAppLink>
             before attending the lectures by using the Qiskit Textbook. To make the most out of these lectures, you may also consider looking through the
-            <AppLink v-bind="linearAlgebra">
+            <UiAppLink v-bind="linearAlgebra">
               linear algebra prerequisites
-            </AppLink>
+            </UiAppLink>
             section of the Qiskit Textbook.
           </p>
         </template>
@@ -125,13 +125,13 @@
         <template #content>
           <p>
             Explore IBM Quantums Educators Program
-            <AppLink v-bind="qCEducators">
+            <UiAppLink v-bind="qCEducators">
               online here
-            </AppLink>
+            </UiAppLink>
             , or email
-            <AppLink v-bind="mailtoQCEducators">
+            <UiAppLink v-bind="mailtoQCEducators">
               quantum.education@us.ibm.com
-            </AppLink>
+            </UiAppLink>
             to connect with the latest coursework and classroom resources for educators and students alike.
           </p>
         </template>
@@ -144,33 +144,33 @@
         <template #content>
           <p>
             There are several different ways you can connect with the IBM Quantum Community - depending on your preference. You can
-            <AppLink v-bind="twitterQiskit">
+            <UiAppLink v-bind="twitterQiskit">
               follow Qiskit
-            </AppLink>
+            </UiAppLink>
             and
-            <AppLink v-bind="twitterIBMResearch">
+            <UiAppLink v-bind="twitterIBMResearch">
               IBM Research
-            </AppLink>
+            </UiAppLink>
             on Twitter for the latest updates on new events, activities, and features on what is going on with the community. There is also a
-            <AppLink v-bind="githubQiskit">
+            <UiAppLink v-bind="githubQiskit">
               community Github
-            </AppLink>
+            </UiAppLink>
             that you can explore and contribute to, and you can read regular
-            <AppLink v-bind="mediumQiskit">
+            <UiAppLink v-bind="mediumQiskit">
               blog posts from our team and community members on Medium
-            </AppLink>
+            </UiAppLink>
             . You can also
-            <AppLink v-bind="qiskitSubscribe">
+            <UiAppLink v-bind="qiskitSubscribe">
               subscribe to the Qiskit YouTube
-            </AppLink>
+            </UiAppLink>
             for the latest video content and our weekly live Seminar Series.
           </p>
 
           <p>
             If you want to collaborate and connect with other members of the community, and participate in some of the ongoing conversations about quantum computing, you will want to
-            <AppLink v-bind="joinqiskitslack">
+            <UiAppLink v-bind="joinqiskitslack">
               check out our ever-growing Slack Community
-            </AppLink>
+            </UiAppLink>
             . From there you can connect with current and past interns, IBM researchers, Qiskit advocates, and fellow community members directly.
           </p>
         </template>
@@ -183,13 +183,13 @@
         <template #content>
           <p>
             All of our announced
-            <AppLink v-bind="qiskitEvents">
+            <UiAppLink v-bind="qiskitEvents">
               upcoming events are listed on qiskit.org
-            </AppLink>
+            </UiAppLink>
             , which is continually updated as we roll out more events throughout the year. You can also
-            <AppLink v-bind="twitterQiskit">
+            <UiAppLink v-bind="twitterQiskit">
               follow Qiskit on Twitter
-            </AppLink>
+            </UiAppLink>
             for the latest announcements on new and upcoming events!
           </p>
         </template>
@@ -202,9 +202,9 @@
         <template #content>
           <p>
             For any questions about the summer school, please submit your questions using the form below. For all other enquiries, feel free to email us directly at
-            <AppLink v-bind="mailtoQiskit">
+            <UiAppLink v-bind="mailtoQiskit">
               qiskit.events@us.ibm.com
-            </AppLink>.
+            </UiAppLink>.
           </p>
         </template>
       </cv-accordion-item>

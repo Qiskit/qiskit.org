@@ -23,7 +23,7 @@
               :key="link.label"
               class="external-recommended-readings__list__item"
             >
-              <AppLink
+              <UiAppLink
                 class="external-recommended-readings__link"
                 :segment="link.segment"
                 :url="link.url"
@@ -34,7 +34,7 @@
                 <span :class="link.author ? 'external-recommended-readings__title' : ''">
                   {{ link.label }}
                 </span>
-              </AppLink>
+              </UiAppLink>
               <span v-if="link.description">- {{ link.description }}</span>
             </li>
           </ol>

@@ -7,7 +7,7 @@
       {{ title }}
     </h2>
     <nav :class="{ 'footer-section__icons-group': iconsOnly }">
-      <!-- <AppLink
+      <UiAppLink
         v-for="element in elements"
         :key="element.url"
         class="caption footer-section__link"
@@ -21,7 +21,7 @@
           :class="`footer-section__icon-link footer-section__icon-link_theme_${theme}`"
         />
         <span v-else>{{ element.label }}</span>
-      </AppLink> -->
+      </UiAppLink>
     </nav>
   </section>
 </template>

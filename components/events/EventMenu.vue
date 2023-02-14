@@ -1,12 +1,12 @@
 <template>
   <nav>
     <section class="ibm-research">
-      <AppLink
+      <UiAppLink
         class="text-logo"
         url="/"
       >
         <img class="logo" alt="Qiskit logo" src="https://qiskit.camp/img/qiskit-logo.png">&nbsp;Qiskit
-      </AppLink>
+      </UiAppLink>
     </section>
     <div class="convertible-menu">
       <input class="hamburger" type="checkbox">

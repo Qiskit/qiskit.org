@@ -3,17 +3,17 @@
     <h3>Start locally</h3>
     <p class="start-locally__introduction">
       To install Qiskit locally, you will need
-      <AppLink
+      <UiAppLink
         url="https://www.python.org/downloads/"
       >
         Python 3.7+.
-      </AppLink>
+      </UiAppLink>
       Although it is not required, we recommend using a
-      <AppLink
+      <UiAppLink
         url="https://www.anaconda.com/products/individual"
       >
         virtual environment with Anaconda.
-      </AppLink>
+      </UiAppLink>
     </p>
     <div class="start-locally__options">
       <div

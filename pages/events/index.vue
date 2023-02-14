@@ -83,9 +83,9 @@
               !-- eslint-disable-next-line vue/singleline-html-element-content-newline --
               Stay up to date with all of our scheduled events by following our
               calendar. You can view the calendar by visiting
-              <AppLink v-bind="qiskitCalendarLink">{{
+              <UiAppLink v-bind="qiskitCalendarLink">{{
                 qiskitCalendarLink.label
-              }}</AppLink
+              }}</UiAppLink
               >, or subscribe to it by adding to the calendar app of your
               choice.
             </p>

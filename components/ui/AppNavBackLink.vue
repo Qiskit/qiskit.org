@@ -1,12 +1,12 @@
 <template>
   <nav class="app-nav-back-link">
-    <BasicLink
+    <UiBasicLink
       class="app-nav-back-link__link"
       :class="`app-nav-back-link__link_${theme}`"
       :url="url"
     >
       <ArrowLeft16 class="app-nav-back-link__icon" /><span v-text="label" />
-    </BasicLink>
+    </UiBasicLink>
   </nav>
 </template>
 

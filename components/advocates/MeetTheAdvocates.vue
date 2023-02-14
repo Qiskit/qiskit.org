@@ -12,9 +12,9 @@
           area.
         </p>
         <p>
-          <AppLink :url="joinSlackLink">
+          <UiAppLink :url="joinSlackLink">
             Sign-up for the Qiskit Slack workspace
-          </AppLink>
+          </UiAppLink>
           to reach the advocates and join the conversation.
         </p>
       </div>
