@@ -1,4 +1,4 @@
-# Build the Nuxt static files with Node.js
+# Build
 
 FROM node:16-alpine AS build
 
@@ -7,14 +7,17 @@ WORKDIR /qiskit.org
 COPY . .
 
 RUN npm ci
-RUN npm run generate
+RUN npm run build
 
-# Serve the static files with Nginx
+# Serve
 
-FROM nginx:1.23.3-alpine
+FROM node:16-alpine
 
-COPY --from=build /qiskit.org/.output/public /usr/share/nginx/html
+COPY --from=build /qiskit.org/.output ./.output/
+
+ENV NUXT_HOST=0.0.0.0
+ENV NUXT_PORT=3000
 
 EXPOSE 3000
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["node", ".output/server/index.mjs"]
