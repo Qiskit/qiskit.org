@@ -53,7 +53,7 @@ function actionChange ({ changedIndex }: { changedIndex: number }) {
 
 <style lang="scss">
 @use "~/assets/scss/carbon.scss";
-@use "~/assets/scss/helpers/variables.scss" as qiskit;
+@use "~/assets/scss/helpers/index.scss" as qiskit;
 
 .content-accordion {
   & .bx--accordion__item {
@@ -101,12 +101,12 @@ function actionChange ({ changedIndex }: { changedIndex: number }) {
     padding: carbon.$spacing-06 carbon.$spacing-07;
     background-color: qiskit.$background-color-lighter;
 
-    @include mq($from: medium, $until: large) {
+    @include carbon.breakpoint-between(md, lg) {
       padding-left: carbon.$spacing-06;
       padding-right: carbon.$spacing-06;
     }
 
-    @include mq($until: medium) {
+    @include carbon.breakpoint-down(md) {
       padding-left: carbon.$spacing-05;
       padding-right: carbon.$spacing-05;
     }

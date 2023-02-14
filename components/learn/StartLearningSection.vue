@@ -448,11 +448,11 @@ const teachingSections: TeachingSection[] = [
   &__card {
     margin-bottom: carbon.$spacing-06;
 
-    @include mq($until: large) {
+    @include carbon.breakpoint-down(lg) {
       margin-bottom: carbon.$spacing-05;
     }
 
-    @include mq($from: x-large) {
+    @include carbon.breakpoint-up(xlg) {
       height: calc(100% - #{$spacing-06});
     }
   }
@@ -465,7 +465,7 @@ const teachingSections: TeachingSection[] = [
 
 <style lang="scss">
 @use "~/assets/scss/carbon.scss";
-@use "~/assets/scss/helpers/variables.scss" as qiskit;
+@use "~/assets/scss/helpers/index.scss" as qiskit;
 
   .start-learning-section {
     .cv-tab.bx--tabs--scrollable {
@@ -473,7 +473,7 @@ const teachingSections: TeachingSection[] = [
       justify-content: flex-end;
       padding-bottom: carbon.$spacing-09;
 
-      @include mq($until: medium) {
+      @include carbon.breakpoint-down(md) {
         justify-content: flex-start;
       }
     }
@@ -483,7 +483,7 @@ const teachingSections: TeachingSection[] = [
     }
 
     .cv-tabs__panels {
-      @include mq($until: medium) {
+      @include carbon.breakpoint-down(md) {
         padding-top: carbon.$spacing-09;
       }
     }

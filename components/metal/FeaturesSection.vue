@@ -29,7 +29,7 @@ const metalFeatures = METAL_FEATURES
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
-@use "~/assets/scss/helpers/variables.scss" as qiskit;
+@use "~/assets/scss/helpers/index.scss" as qiskit;
 
 .features-section {
   background-color: qiskit.$background-color-dark;
@@ -40,7 +40,7 @@ const metalFeatures = METAL_FEATURES
     padding-top: carbon.$spacing-10;
     padding-bottom: carbon.$spacing-12;
 
-    @include mq($until: medium) {
+    @include carbon.breakpoint-down(md) {
       padding-top: carbon.$spacing-06;
       padding-bottom: carbon.$spacing-06;
     }
@@ -50,15 +50,15 @@ const metalFeatures = METAL_FEATURES
     max-width: 9 * $column-size-large;
     margin-bottom: carbon.$spacing-12;
 
-    @include mq($until: large) {
+    @include carbon.breakpoint-down(lg) {
       margin-bottom: carbon.$spacing-07;
     }
 
-    @include mq($from: medium, $until: large) {
+    @include carbon.breakpoint-between(md, lg) {
       max-width: 6 * $column-size-medium;
     }
 
-    @include mq($until: medium) {
+    @include carbon.breakpoint-down(md) {
       width: 100%;
     }
   }

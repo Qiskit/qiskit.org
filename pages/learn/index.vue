@@ -111,7 +111,7 @@ useHead({
 //       display: flex;
 //       flex: 1;
 
-//       @include mq($until: medium) {
+//       @include carbon.breakpoint-down(md) {
 //         display: block;
 //       }
 //     }
@@ -126,7 +126,7 @@ useHead({
 //         color: currentColor;
 //       }
 
-//       @include mq($until: medium) {
+//       @include carbon.breakpoint-down(md) {
 //         margin-left: 2px;
 //       }
 //     }

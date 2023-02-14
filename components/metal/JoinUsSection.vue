@@ -21,7 +21,7 @@ const joinSlackLink = {
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
-@use "~/assets/scss/helpers/variables.scss" as qiskit;
+@use "~/assets/scss/helpers/index.scss" as qiskit;
 
 .early-access-section {
   background-color: qiskit.$background-color-dark;
@@ -32,7 +32,7 @@ const joinSlackLink = {
     padding-top: carbon.$spacing-10;
     padding-bottom: carbon.$spacing-12;
 
-    @include mq($until: medium) {
+    @include carbon.breakpoint-down(md) {
       padding-top: carbon.$spacing-07;
       padding-bottom: carbon.$spacing-10;
     }
@@ -42,15 +42,15 @@ const joinSlackLink = {
     max-width: 7 * $column-size-large;
     margin-bottom: 3.25rem;
 
-    @include mq($until: large) {
+    @include carbon.breakpoint-down(lg) {
       margin-bottom: carbon.$spacing-07;
     }
 
-    @include mq($from: medium, $until: large) {
+    @include carbon.breakpoint-between(md, lg) {
       max-width: 5.5 * $column-size-medium;
     }
 
-    @include mq($until: medium) {
+    @include carbon.breakpoint-down(md) {
       width: 100%;
       max-width: initial;
     }

@@ -348,7 +348,7 @@ useHead({
 //       color: qiskit.$text-color;
 //     }
 
-//     @include mq($until: medium) {
+//     @include carbon.breakpoint-down(md) {
 //       margin-bottom: 0;
 
 //       .bx--tabs-trigger {
@@ -391,7 +391,7 @@ useHead({
 //   }
 
 //   &__main-content {
-//     @include mq($until: medium) {
+//     @include carbon.breakpoint-down(md) {
 //       margin-top: carbon.$spacing-09;
 //     }
 //   }
@@ -399,7 +399,7 @@ useHead({
 //   &__empty-card-description {
 //     height: 8rem;
 
-//     @include mq($until: medium) {
+//     @include carbon.breakpoint-down(md) {
 //       height: auto;
 //     }
 //   }
@@ -413,7 +413,7 @@ useHead({
 //       margin-bottom: carbon.$spacing-07;
 //       max-width: 20rem;
 
-//       @include mq($from: large) {
+//       @include carbon.breakpoint-up(lg) {
 //         max-width: 24rem;
 //       }
 //     }

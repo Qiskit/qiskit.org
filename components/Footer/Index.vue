@@ -81,7 +81,7 @@ const secondaryFooterLinks = SECONDARY_FOOTER_LINKS;
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
-@use "~/assets/scss/helpers/variables.scss" as qiskit;
+@use "~/assets/scss/helpers/index.scss" as qiskit;
 
 .page-footer {
   .page-footer__primary {
@@ -110,15 +110,15 @@ const secondaryFooterLinks = SECONDARY_FOOTER_LINKS;
   }
 
   &__primary-container {
-    // @include contained();
+    @include qiskit.contained();
   }
 
   &__logo {
     height: 32px;
 
-    // @include mq($until: medium) {
-    //   margin-bottom: carbon.$spacing-07;
-    // }
+    @include carbon.breakpoint-down(md) {
+      margin-bottom: carbon.$spacing-07;
+    }
 
     &_theme_light {
       color: qiskit.$text-color-lighter;
@@ -133,9 +133,9 @@ const secondaryFooterLinks = SECONDARY_FOOTER_LINKS;
     margin-left: carbon.$spacing-07;
     text-decoration: none;
 
-    // @include mq($until: medium) {
-    //   margin-bottom: carbon.$spacing-05;
-    // }
+    @include carbon.breakpoint-down(md) {
+      margin-bottom: carbon.$spacing-05;
+    }
 
     &:hover {
       text-decoration: underline;
@@ -155,7 +155,7 @@ const secondaryFooterLinks = SECONDARY_FOOTER_LINKS;
     justify-content: space-between;
 
     &:not(.bx--grid) {
-      // @include contained();
+      @include qiskit.contained();
     }
   }
 
@@ -163,15 +163,15 @@ const secondaryFooterLinks = SECONDARY_FOOTER_LINKS;
     display: flex;
     justify-content: space-between;
 
-    // @include mq($until: medium) {
-    //   flex-direction: column;
-    // }
+    @include carbon.breakpoint-down(md) {
+      flex-direction: column;
+    }
   }
 
   &__stay-connected {
-    // @include mq($until: medium) {
-    //   margin-top: carbon.$spacing-07;
-    // }
+    @include carbon.breakpoint-down(md) {
+      margin-top: carbon.$spacing-07;
+    }
   }
 }
 </style>

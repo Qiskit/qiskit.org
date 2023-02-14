@@ -94,11 +94,11 @@ onMounted(() => {
   grid-template-areas: ". main main .";
   grid-template-columns: repeat(4, 1fr);
 
-  @include mq($until: large) {
+  @include carbon.breakpoint-down(lg) {
     grid-template-areas: ". main main main";
   }
 
-  @include mq($until: medium) {
+  @include carbon.breakpoint-down(md) {
     grid-template-areas: ".";
     grid-template-columns: 1fr;
   }
@@ -110,7 +110,7 @@ onMounted(() => {
     position: sticky;
     top: -$spacing-03;
 
-    @include mq($until: medium) {
+    @include carbon.breakpoint-down(md) {
       display: none;
     }
 
@@ -123,7 +123,7 @@ onMounted(() => {
       &-wrapper {
         margin: 1.25rem 0 carbon.$spacing-06 0;
 
-        @include mq($until: x-large) {
+        @include carbon.breakpoint-down(xlg) {
           margin: carbon.$spacing-03 0 carbon.$spacing-06 0;
         }
       }
@@ -149,7 +149,7 @@ onMounted(() => {
   &__nav {
     margin-right: -$spacing-10;
 
-    @include mq($until: medium) {
+    @include carbon.breakpoint-down(md) {
       margin-right: initial;
     }
   }
@@ -172,7 +172,7 @@ onMounted(() => {
         background: $cool-gray-10;
         font-weight: 600;
 
-        @include mq($until: medium) {
+        @include carbon.breakpoint-down(md) {
           background: initial;
         }
       }

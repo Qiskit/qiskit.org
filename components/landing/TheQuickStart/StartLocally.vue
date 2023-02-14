@@ -160,34 +160,34 @@ function selectOption (choicesGroup: ChoicesGroup, selectedOption: string) {
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
-@use "~/assets/scss/helpers/variables.scss" as qiskit;
+@use "~/assets/scss/helpers/index.scss" as qiskit;
 
 .bx--btn-set .bx--btn:not(:focus) {
   box-shadow: none;
 }
 
 .start-locally {
-  @include mq($until: medium) {
+  @include carbon.breakpoint-down(md) {
     margin-bottom: carbon.$spacing-09;
   }
 
   &__introduction {
     margin-bottom: carbon.$spacing-08;
 
-    @include mq($from: large) {
+    @include carbon.breakpoint-up(lg) {
       $grid-columns: math.div(9, 10); // Number of columns that the element will use at this breakpoint.
 
       max-width: 100% * $grid-columns;
       padding-right: carbon.$spacing-05;
     }
 
-    @include mq($from: x-large) {
+    @include carbon.breakpoint-up(xlg) {
       $grid-columns: math.div(7, 11); // Number of columns that the element will use at this breakpoint.
 
       max-width: 100% * $grid-columns;
     }
 
-    @include mq($from: max-size) {
+    @include carbon.breakpoint-up(max) {
       $grid-columns: math.div(6, 12); // Number of columns that the element will use at this breakpoint.
 
       max-width: 100% * $grid-columns;
@@ -204,7 +204,7 @@ function selectOption (choicesGroup: ChoicesGroup, selectedOption: string) {
     column-gap: carbon.$spacing-07;
     grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
 
-    @include mq($until: large) {
+    @include carbon.breakpoint-down(lg) {
       column-gap: carbon.$spacing-05;
     }
   }
@@ -216,7 +216,7 @@ function selectOption (choicesGroup: ChoicesGroup, selectedOption: string) {
     padding-left: carbon.$spacing-07;
     margin-bottom: carbon.$spacing-07;
 
-    @include mq($until: large) {
+    @include carbon.breakpoint-down(lg) {
       padding-left: carbon.$spacing-05;
       margin-bottom: carbon.$spacing-05;
     }

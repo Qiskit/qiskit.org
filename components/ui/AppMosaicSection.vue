@@ -38,11 +38,11 @@ withDefaults(defineProps<Props>(), {
   &__mosaic {
     margin-bottom: carbon.$spacing-07;
 
-    @include mq($from: medium, $until: large) {
+    @include carbon.breakpoint-between(md, lg) {
       margin-bottom: carbon.$spacing-05;
     }
 
-    @include mq($until: medium) {
+    @include carbon.breakpoint-down(md) {
       margin-bottom: carbon.$spacing-05;
     }
   }

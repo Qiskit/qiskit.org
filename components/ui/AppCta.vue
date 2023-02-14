@@ -50,7 +50,7 @@ const iconPerLinkType = computed(() => {
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
-@use "~/assets/scss/helpers/variables.scss" as qiskit;
+@use "~/assets/scss/helpers/index.scss" as qiskit;
 
 @mixin bicolor-background($colorLeft, $colorRight) {
     background-image: linear-gradient(90deg, $colorLeft 0%, $colorLeft 50%, $colorRight 50%, $colorRight 100%);
@@ -65,10 +65,10 @@ const iconPerLinkType = computed(() => {
   width: 4 * $column-size-large;
   max-width: 100%;
 
-  @include mq($from: medium, $until: large) {
+  @include carbon.breakpoint-between(md, lg) {
     width: 3 * $column-size-medium;
   }
-  @include mq($until: medium) {
+  @include carbon.breakpoint-down(md) {
     width: 100%;
   }
 

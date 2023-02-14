@@ -69,11 +69,11 @@ const stayInTouchLink = {
   background-repeat: no-repeat;
   padding-bottom: carbon.$spacing-10;
 
-  @include mq($until: large) {
+  @include carbon.breakpoint-down(lg) {
     background-position: right -.5rem bottom -2px;
   }
 
-  @include mq($until: medium) {
+  @include carbon.breakpoint-down(md) {
     padding-bottom: carbon.$spacing-07;
   }
 
@@ -84,7 +84,7 @@ const stayInTouchLink = {
   }
 
   &__subtitle {
-    @include mq($until: large) {
+    @include carbon.breakpoint-down(lg) {
       margin-bottom: carbon.$spacing-06;
     }
   }
@@ -93,15 +93,15 @@ const stayInTouchLink = {
     max-width: 7.5 * $column-size-large;
     margin-bottom: carbon.$spacing-09;
 
-    @include mq($until: large) {
+    @include carbon.breakpoint-down(lg) {
       margin-bottom: carbon.$spacing-09;
     }
 
-    @include mq($from: medium, $until: large) {
+    @include carbon.breakpoint-between(md, lg) {
       max-width: 6 * $column-size-medium;
     }
 
-    @include mq($until: medium) {
+    @include carbon.breakpoint-down(md) {
       width: 100%;
       max-width: initial;
       margin-bottom: carbon.$spacing-06;
@@ -115,13 +115,13 @@ const stayInTouchLink = {
   &__copy {
     flex: 0 0 28rem;
 
-    @include mq($until: medium) {
+    @include carbon.breakpoint-down(md) {
       flex: 1;
     }
   }
 
   &__media-img {
-    @include mq($until: large) {
+    @include carbon.breakpoint-down(lg) {
       display: none;
     }
   }

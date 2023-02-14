@@ -36,14 +36,14 @@ function copyToClipboard (code: string) {
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
-@use "~/assets/scss/helpers/variables.scss" as qiskit;
+@use "~/assets/scss/helpers/index.scss" as qiskit;
 
 .syntax-highlight {
   position: relative;
   background-color: qiskit.$background-color-lighter;
   padding: carbon.$spacing-05 carbon.$spacing-07;
 
-  @include mq($until: large) {
+  @include carbon.breakpoint-down(lg) {
     padding: carbon.$spacing-05 carbon.$spacing-05;
   }
 

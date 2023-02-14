@@ -41,7 +41,7 @@ withDefaults(defineProps<Props>(), {
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
-@use "~/assets/scss/helpers/variables.scss" as qiskit;
+@use "~/assets/scss/helpers/index.scss" as qiskit;
 
 .code-cell {
   display: block;
@@ -61,7 +61,7 @@ withDefaults(defineProps<Props>(), {
       border-color: qiskit.$border-active-color;
     }
 
-    @include mq($until: medium) {
+    @include carbon.breakpoint-down(md) {
       border-color: transparent;
     }
   }

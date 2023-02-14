@@ -87,7 +87,7 @@ export default class CapabilitiesSection extends Mixins(ScrollSectionsMixin) {
   background-repeat: no-repeat, no-repeat;
   display: flex;
 
-  @include mq($until: large) {
+  @include carbon.breakpoint-down(lg) {
     background-size: 22.5rem auto;
     background-position: right -.5rem top, left 0 bottom 16rem;
   }
@@ -112,7 +112,7 @@ export default class CapabilitiesSection extends Mixins(ScrollSectionsMixin) {
   &__card {
     margin-bottom: carbon.$spacing-12;
 
-    @include mq($until: medium) {
+    @include carbon.breakpoint-down(md) {
       margin-bottom: carbon.$spacing-07;
     }
   }
@@ -124,11 +124,11 @@ export default class CapabilitiesSection extends Mixins(ScrollSectionsMixin) {
     min-height: 20rem;
     margin-bottom: carbon.$spacing-12;
 
-    @include mq($from: medium, $until: large) {
+    @include carbon.breakpoint-between(md, lg) {
       flex: 1.5;
     }
 
-    @include mq($until: medium) {
+    @include carbon.breakpoint-down(md) {
       display: none;
     }
   }

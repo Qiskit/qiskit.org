@@ -178,13 +178,13 @@ useHead({
 //     margin-top: carbon.$spacing-10;
 //     margin-bottom: carbon.$spacing-07;
 
-//     @include mq($until: large) {
+//     @include carbon.breakpoint-down(lg) {
 //       margin-bottom: carbon.$spacing-05;
 //     }
 //   }
 
 //   &__content {
-//     @include mq($until: large) {
+//     @include carbon.breakpoint-down(lg) {
 //       max-width: 100%;
 //     }
 //   }

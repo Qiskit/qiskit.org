@@ -69,17 +69,17 @@
   // to be able of displaying the bottom lines of the grid.
   height: calc(56rem + 2px);
 
-  @include mq($from: medium, $until: large) {
+  @include carbon.breakpoint-between(md, lg) {
     // To adjust to the size of the smaller grid.
     height: calc(#{math.div(56rem * 40, 64)} + 2px);
   }
 
-  @include mq($until: medium) {
+  @include carbon.breakpoint-down(md) {
     background-position: top -5rem center;
     height: calc(#{math.div(48rem * 40, 64)} + 2px);
   }
 
-  @include mq($until: small) {
+  @include carbon.breakpoint-down(sm) {
     background-position: top -12rem center;
     height: calc(#{math.div(36rem * 40, 64)} + 2px);
   }
@@ -92,15 +92,15 @@
     align-items: center;
     padding-top: 25rem;
 
-    @include mq($from: medium, $until: large) {
+    @include carbon.breakpoint-between(md, lg) {
       padding-top: 18.75rem;
     }
 
-    @include mq($until: medium) {
+    @include carbon.breakpoint-down(md) {
       padding-top: 12.5rem;
     }
 
-    @include mq($until: small) {
+    @include carbon.breakpoint-down(sm) {
       padding-top: 11rem;
     }
   }
@@ -109,15 +109,15 @@
     position: relative;
     z-index: 1;
 
-    @include mq($from: medium, $until: large) {
+    @include carbon.breakpoint-between(md, lg) {
       max-width: 28rem;
     }
 
-    @include mq($until: medium) {
+    @include carbon.breakpoint-down(md) {
       max-width: 14rem;
     }
 
-    @include mq($until: small) {
+    @include carbon.breakpoint-down(sm) {
       max-width: 12.5rem;
     }
   }
@@ -130,23 +130,23 @@
     bottom: 0;
     width: 44rem;
 
-    @include mq($from: x-large) {
+    @include carbon.breakpoint-up(xlg) {
       right: -8rem;
     }
 
-    @include mq($from: medium, $until: large) {
+    @include carbon.breakpoint-between(md, lg) {
       width: 32rem;
       right: auto;
       left: 15rem;
     }
 
-    @include mq($from: small, $until: medium) {
+    @include carbon.breakpoint-between(sm, md) {
       width: 22rem;
       right: auto;
       left: 6.5rem;
     }
 
-    @include mq($until: small) {
+    @include carbon.breakpoint-down(sm) {
       width: 18rem;
       right: auto;
       left: 6rem;
@@ -164,19 +164,19 @@
     width: 19rem;
     z-index: 1;
 
-    @include mq($from: medium, $until: large) {
+    @include carbon.breakpoint-between(md, lg) {
       top: 19.5rem;
       right: 7.5rem;
       width: 12rem;
     }
 
-    @include mq($until: medium) {
+    @include carbon.breakpoint-down(md) {
       top: 14rem;
       right: 5.5rem;
       width: 8rem;
     }
 
-    @include mq($until: small) {
+    @include carbon.breakpoint-down(sm) {
       top: 12.75rem;
       right: auto;
       width: 6rem;
@@ -191,20 +191,20 @@
     width: initial;
     z-index: 1;
 
-    @include mq($from: medium, $until: large) {
+    @include carbon.breakpoint-between(md, lg) {
       top: 20rem;
       right: 8rem;
       z-index: 1;
       max-width: 16rem;
     }
 
-    @include mq($until: medium) {
+    @include carbon.breakpoint-down(md) {
       top: 13.85rem;
       max-width: 12rem;
       right: 5.25rem;
     }
 
-    @include mq($until: small) {
+    @include carbon.breakpoint-down(sm) {
       top: 13rem;
       max-width: 8rem;
       right: auto;

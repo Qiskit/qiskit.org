@@ -34,7 +34,7 @@ defineProps<Props>()
   width: 100%;
   display: flex;
 
-  @include mq($until: large) {
+  @include carbon.breakpoint-down(lg) {
     flex-direction: column;
   }
 
@@ -43,7 +43,7 @@ defineProps<Props>()
     padding-right: carbon.$spacing-07;
     padding-bottom: carbon.$spacing-07;
 
-    @include mq($until: large) {
+    @include carbon.breakpoint-down(lg) {
       flex: 0 0 auto;
     }
   }
@@ -52,7 +52,7 @@ defineProps<Props>()
     min-height: 11rem;
     display: flex;
 
-    @include mq($until: medium) {
+    @include carbon.breakpoint-down(md) {
       flex-direction: column;
     }
   }
@@ -64,7 +64,7 @@ defineProps<Props>()
     background-position: center;
     overflow: hidden;
 
-    @include mq($until: medium) {
+    @include carbon.breakpoint-down(md) {
       background-size: contain;
       height: 11rem;
       width: auto;
@@ -74,7 +74,7 @@ defineProps<Props>()
   &__description {
     padding: carbon.$spacing-05 carbon.$spacing-05 carbon.$spacing-05 carbon.$spacing-07;
 
-    @include mq($until: medium) {
+    @include carbon.breakpoint-down(md) {
       padding: carbon.$spacing-06 0 0 0;
     }
   }

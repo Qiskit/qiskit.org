@@ -45,10 +45,10 @@ const joinWaitingListLink = {
   position: relative;
   margin-top: -18.5rem;
 
-  @include mq($until: large) {
+  @include carbon.breakpoint-down(lg) {
     margin-top: -8rem;
   }
-  @include mq($until: medium) {
+  @include carbon.breakpoint-down(md) {
     margin-top: -5rem;
   }
 
@@ -63,7 +63,7 @@ const joinWaitingListLink = {
     display: flex;
     flex-direction: row;
 
-    @include mq($until: medium) {
+    @include carbon.breakpoint-down(md) {
       flex-direction: column;
     }
   }
@@ -73,15 +73,15 @@ const joinWaitingListLink = {
     margin-bottom: carbon.$spacing-12;
     padding-right: carbon.$spacing-07;
 
-    @include mq($until: large) {
+    @include carbon.breakpoint-down(lg) {
       margin-bottom: carbon.$spacing-07;
     }
 
-    @include mq($from: medium, $until: large) {
+    @include carbon.breakpoint-between(md, lg) {
       max-width: 4 * $column-size-medium;
     }
 
-    @include mq($until: medium) {
+    @include carbon.breakpoint-down(md) {
       max-width: 100%;
     }
   }
@@ -89,7 +89,7 @@ const joinWaitingListLink = {
   &__video {
     width: 100%;
 
-    @include mq($until: medium) {
+    @include carbon.breakpoint-down(md) {
       margin-bottom: carbon.$spacing-07;
     }
   }
@@ -98,7 +98,7 @@ const joinWaitingListLink = {
     position: relative;
     top: -3.2rem;
 
-    @include mq($until: large) {
+    @include carbon.breakpoint-down(lg) {
       top: 0;
       margin-top: carbon.$spacing-07;
     }

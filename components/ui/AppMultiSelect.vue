@@ -39,7 +39,7 @@ function formatOptions (optionsList: any): Array<multiSelectOption> {
 
 <style lang="scss">
 @use "~/assets/scss/carbon.scss";
-@use "~/assets/scss/helpers/variables.scss" as qiskit;
+@use "~/assets/scss/helpers/index.scss" as qiskit;
 
   .app-multi-select {
     & .bx--list-box--light,

@@ -43,11 +43,11 @@ defineProps<Props>()
     gap: carbon.$spacing-07;
     grid-template-columns: repeat(4, 1fr);
 
-    @include mq($until: large) {
+    @include carbon.breakpoint-down(lg) {
       grid-template-columns: repeat(2, 1fr);
     }
 
-    @include mq($until: medium) {
+    @include carbon.breakpoint-down(md) {
       grid-template-columns: 1fr;
       row-gap: carbon.$spacing-05;
     }

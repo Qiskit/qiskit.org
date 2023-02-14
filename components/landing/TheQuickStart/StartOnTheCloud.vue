@@ -24,7 +24,7 @@ const ibmQExperienceLink = IBM_Q_EXPERIENCE
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
-@use "~/assets/scss/helpers/variables.scss" as qiskit;
+@use "~/assets/scss/helpers/index.scss" as qiskit;
 
 .start-on-the-cloud {
   &__wrapper {
@@ -35,7 +35,7 @@ const ibmQExperienceLink = IBM_Q_EXPERIENCE
     background-repeat: no-repeat;
     height: 100%;
 
-    @include mq($until: medium) {
+    @include carbon.breakpoint-down(md) {
       background-position: bottom right;
       height: 17rem;
     }
@@ -44,7 +44,7 @@ const ibmQExperienceLink = IBM_Q_EXPERIENCE
   &__content {
     padding: carbon.$spacing-07;
 
-    @include mq($until: large) {
+    @include carbon.breakpoint-down(lg) {
       padding: carbon.$spacing-05;
     }
   }

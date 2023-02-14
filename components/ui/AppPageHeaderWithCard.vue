@@ -42,14 +42,14 @@ defineProps<Props>()
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
-@use "~/assets/scss/helpers/variables.scss" as qiskit;
+@use "~/assets/scss/helpers/index.scss" as qiskit;
 
 .app-page-header {
   @include responsive-grid-bg-strip("/images/grid/grid-hero-learn.svg", auto, 28rem);
 
   padding-top: carbon.$spacing-12;
 
-  @include mq($until: medium) {
+  @include carbon.breakpoint-down(md) {
     padding-top: carbon.$spacing-09;
   }
 
@@ -59,11 +59,11 @@ defineProps<Props>()
     gap: carbon.$spacing-05;
     justify-content: space-between;
 
-    @include mq($until: x-large) {
+    @include carbon.breakpoint-down(xlg) {
       gap: carbon.$spacing-06;
     }
 
-    @include mq($until: large) {
+    @include carbon.breakpoint-down(lg) {
       gap: carbon.$spacing-09;
     }
   }
@@ -75,15 +75,15 @@ defineProps<Props>()
   &__description {
     margin-top: carbon.$spacing-05;
 
-    @include mq($until: x-large) {
+    @include carbon.breakpoint-down(xlg) {
       margin-top: carbon.$spacing-06;
     }
 
-    @include mq($until: large) {
+    @include carbon.breakpoint-down(lg) {
       margin-top: carbon.$spacing-09;
     }
 
-    @include mq($from: large) {
+    @include carbon.breakpoint-up(lg) {
       $grid-columns: math.div(6, 11); // Number of columns that the element will use at this breakpoint.
 
       max-width: 100% * $grid-columns;
@@ -91,7 +91,7 @@ defineProps<Props>()
   }
 
   &__aside {
-    @include mq($until: medium) {
+    @include carbon.breakpoint-down(md) {
       margin-top: carbon.$spacing-09;
     }
   }

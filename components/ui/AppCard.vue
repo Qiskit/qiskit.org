@@ -108,7 +108,7 @@ function hasTags (tags: string[] | TagTooltip[]) {
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
-@use "~/assets/scss/helpers/variables.scss" as qiskit;
+@use "~/assets/scss/helpers/index.scss" as qiskit;
 
 .app-card {
   min-height: 13rem;
@@ -116,7 +116,7 @@ function hasTags (tags: string[] | TagTooltip[]) {
   background-color: qiskit.$background-color-lighter;
   display: flex;
 
-  @include mq($until: medium) {
+  @include carbon.breakpoint-down(md) {
     height: auto;
     flex-direction: column;
   }
@@ -129,11 +129,11 @@ function hasTags (tags: string[] | TagTooltip[]) {
     background-position: center;
     overflow: hidden;
 
-    @include mq($from: medium, $until: large) {
+    @include carbon.breakpoint-between(md, lg) {
       flex: 0 0 13rem;
     }
 
-    @include mq($until: medium) {
+    @include carbon.breakpoint-down(md) {
       height: 13rem;
       width: auto;
     }
@@ -158,7 +158,7 @@ function hasTags (tags: string[] | TagTooltip[]) {
     align-items: flex-start;
     margin-bottom: carbon.$spacing-03;
 
-    @include mq($until: large) {
+    @include carbon.breakpoint-down(lg) {
       flex-direction: column;
     }
 
@@ -195,11 +195,11 @@ function hasTags (tags: string[] | TagTooltip[]) {
     &__image {
       min-height: 4 * $column-size-large;
 
-      @include mq($until: large) {
+      @include carbon.breakpoint-down(lg) {
         min-height: 5 * $column-size-large;
       }
 
-      @include mq($from: small, $until: medium) {
+      @include carbon.breakpoint-between(sm, md) {
         min-height: 6 * $column-size-large;
       }
     }

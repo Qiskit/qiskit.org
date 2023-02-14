@@ -49,7 +49,7 @@ const location = computed(() => [props.city, props.country].filter(e => !!e).joi
 .advocate-card {
   margin-bottom: carbon.$spacing-06;
 
-  @include mq($until: large) {
+  @include carbon.breakpoint-down(lg) {
     margin-bottom: carbon.$spacing-05;
   }
 
@@ -72,7 +72,7 @@ const location = computed(() => [props.city, props.country].filter(e => !!e).joi
 <style lang="scss">
 .advocate-card {
 
-  @include mq($until: medium) {
+  @include carbon.breakpoint-down(md) {
     .app-card__image {
       background-size: contain;
     }

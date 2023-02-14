@@ -287,7 +287,7 @@ const mailtoQiskit: TrackedLink = {
 </script>
 
 <style lang="scss" scoped>
-@use "~/assets/scss/helpers/variables.scss" as qiskit;
+@use "~/assets/scss/helpers/index.scss" as qiskit;
 
 .faq-section {
   ::v-deep {

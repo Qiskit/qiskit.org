@@ -30,7 +30,7 @@ withDefaults(defineProps<Props>(), {
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
-@use "~/assets/scss/helpers/variables.scss" as qiskit;
+@use "~/assets/scss/helpers/index.scss" as qiskit;
 
 $feature-icon-size: 2.25rem;
 
@@ -39,7 +39,7 @@ $feature-icon-size: 2.25rem;
   height: 100%;
   padding: carbon.$spacing-05;
 
-  @include mq($until: large) {
+  @include carbon.breakpoint-down(lg) {
     padding-bottom: carbon.$spacing-06;
   }
 
@@ -53,7 +53,7 @@ $feature-icon-size: 2.25rem;
     margin-bottom: carbon.$spacing-04;
     height: 2.5rem; // for consistent alignment
 
-    @include mq($until: medium) {
+    @include carbon.breakpoint-down(md) {
       height: initial;
     }
   }

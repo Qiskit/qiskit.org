@@ -46,7 +46,7 @@ $card-img-width: 10rem;
   &__container {
     display: flex;
 
-    @include mq($until: large) {
+    @include carbon.breakpoint-down(lg) {
       flex-direction: column;
     }
   }
@@ -58,12 +58,12 @@ $card-img-width: 10rem;
   &__thumbnail {
     margin-right: carbon.$spacing-07;
 
-    @include mq($until: large) {
+    @include carbon.breakpoint-down(lg) {
       margin-right: initial;
       margin-bottom: carbon.$spacing-05;
     }
 
-    @include mq($until: large) {
+    @include carbon.breakpoint-down(lg) {
       display: none;
     }
 
@@ -75,7 +75,7 @@ $card-img-width: 10rem;
 
     &__mobile {
       display: none;
-      @include mq($until: large) {
+      @include carbon.breakpoint-down(lg) {
         display: block;
         width: $card-img-width;
         margin-bottom: carbon.$spacing-05;
@@ -86,11 +86,11 @@ $card-img-width: 10rem;
   &__title {
     padding-right: carbon.$spacing-07;
 
-    @include mq($until: large) {
+    @include carbon.breakpoint-down(lg) {
       padding-right: 0;
     }
 
-    @include mq($until: medium) {
+    @include carbon.breakpoint-down(md) {
       padding-bottom: 0;
       margin-bottom: carbon.$spacing-05;
     }

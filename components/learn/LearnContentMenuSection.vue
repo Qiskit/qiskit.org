@@ -24,7 +24,7 @@ function trackPerformedSearch (uiElement: string, field: string) {
 </script>
 
 <style lang="scss" scoped>
-@use "~/assets/scss/helpers/variables.scss" as qiskit;
+@use "~/assets/scss/helpers/index.scss" as qiskit;
 
 .content-menu-section {
   background: qiskit.$background-color-lighter;

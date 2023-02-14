@@ -58,7 +58,7 @@ defineProps<Props>()
       "cta . img img"
     ;
 
-    @include mq($until: medium) {
+    @include carbon.breakpoint-down(md) {
       padding-top: carbon.$spacing-09;
       grid-template-columns: 1fr;
       grid-template-areas:
@@ -79,7 +79,7 @@ defineProps<Props>()
     grid-area: img;
     text-align: right;
 
-    @include mq($until: medium) {
+    @include carbon.breakpoint-down(md) {
       text-align: center;
     }
   }
@@ -88,7 +88,7 @@ defineProps<Props>()
     max-height: 25rem;
     width: auto;
 
-    @include mq($until: x-large) {
+    @include carbon.breakpoint-down(xlg) {
       height: auto;
       max-width: 22rem;
       width: 100%;

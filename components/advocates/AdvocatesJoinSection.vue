@@ -58,19 +58,19 @@ const joinAction: GeneralLink = {
 
 .join-section {
   &__feature {
-    @include mq($until: large) {
+    @include carbon.breakpoint-down(lg) {
       margin-bottom: carbon.$spacing-07;
     }
 
-    @include mq($from: medium) {
+    @include carbon.breakpoint-up(md) {
       height: 14rem;
     }
 
-    @include mq($from: large) {
+    @include carbon.breakpoint-up(lg) {
       height: 16.5rem;
     }
 
-    @include mq($from: x-large) {
+    @include carbon.breakpoint-up(xlg) {
       height: 14rem;
     }
   }

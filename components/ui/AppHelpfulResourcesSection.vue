@@ -30,7 +30,7 @@ withDefaults(defineProps<Props>(), {
 
 .app-helpful-resources-section {
   &__card {
-    @include mq($until: large) {
+    @include carbon.breakpoint-down(lg) {
       margin-bottom: carbon.$spacing-07;
     }
   }

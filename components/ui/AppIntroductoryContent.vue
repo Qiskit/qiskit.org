@@ -44,21 +44,21 @@ defineProps<Props>()
 .app-introductory-content {
   display: flex;
 
-  @include mq($until: large) {
+  @include carbon.breakpoint-down(lg) {
     display: block;
   }
 
   &__overview {
     margin-bottom: carbon.$spacing-07;
 
-    @include mq($from: large) {
+    @include carbon.breakpoint-up(lg) {
       $grid-columns: math.div(5, 13); // Number of columns that the element will use at this breakpoint.
 
       max-width: 100% * $grid-columns;
       padding-right: carbon.$spacing-07;
     }
 
-    @include mq($from: max-size) {
+    @include carbon.breakpoint-up(max) {
       $grid-columns: math.div(4, 13); // Number of columns that the element will use at this breakpoint.
 
       max-width: 100% * $grid-columns;
@@ -68,7 +68,7 @@ defineProps<Props>()
   &__description {
     margin-bottom: carbon.$spacing-10;
 
-    @include mq($until: large) {
+    @include carbon.breakpoint-down(lg) {
       margin-bottom: carbon.$spacing-07;
     }
   }

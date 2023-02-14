@@ -10,7 +10,7 @@ const currentYear = today.getFullYear()
 </script>
 
 <style lang="scss" scoped>
-@use "~/assets/scss/helpers/variables.scss" as qiskit;
+@use "~/assets/scss/helpers/index.scss" as qiskit;
 
 footer {
   color: qiskit.$text-color;

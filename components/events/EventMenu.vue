@@ -21,7 +21,7 @@
 </template>
 
 <style lang="scss" scoped>
-@use "~/assets/scss/helpers/variables.scss" as qiskit;
+@use "~/assets/scss/helpers/index.scss" as qiskit;
 
 .logo {
   width: 1.7rem;
