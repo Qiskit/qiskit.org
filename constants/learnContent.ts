@@ -1,4 +1,4 @@
-import { CtaClickedEventProp } from '~/constants/segment'
+import { CtaClickedEventProp } from '~/types/segment'
 
 /**
  * Represent a course on the site

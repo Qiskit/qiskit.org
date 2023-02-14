@@ -16,14 +16,16 @@
 // import { Component } from "vue-property-decorator";
 // import "@qiskit/web-components/components/ui-shell";
 
-// @Component
-// export default class MaxLayout extends Vue {
-//   onClick(e: CustomEvent) {
-//     this.$trackClickEvent(`${e.detail?.label?.toLowerCase()}`, "menu");
-//   }
+@Component
+export default class MaxLayout extends Vue {
+  const { trackClickEvent } = useSegment()
 
+  onClick (e: CustomEvent) {
+    this.trackClickEvent(`${e.detail?.label?.toLowerCase()}`, 'menu')
+  }
+  
 //   isALearningPage: boolean = this.$route.path.includes("/learn");
-// }
+}
 </script>
 
 <style lang="scss" scoped>

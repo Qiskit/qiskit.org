@@ -14,12 +14,14 @@
 // import { Component } from 'vue-property-decorator'
 // import '@qiskit/web-components/components/ui-shell'
 
-// @Component
-// export default class DefaultLayout extends Vue {
-//   onClick (e: CustomEvent) {
-//     this.$trackClickEvent(`${e.detail?.label?.toLowerCase()}`, 'menu')
-//   }
-// }
+@Component
+export default class DefaultLayout extends Vue {
+  const { trackClickEvent } = useSegment()
+
+  onClick (e: CustomEvent) {
+    this.trackClickEvent(`${e.detail?.label?.toLowerCase()}`, 'menu')
+  }
+}
 </script>
 
 <style lang="scss" scoped>

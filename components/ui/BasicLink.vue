@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import { CtaClickedEventProp } from '~/constants/segment'
+import { CtaClickedEventProp } from '~/types/segment'
 
 interface Props {
   isStatic?: boolean
@@ -28,9 +28,11 @@ const props = withDefaults(defineProps<Props>(), {
   url: ''
 })
 
+const { trackClickEvent } = useSegment()
+
 function handleClick () {
   emit('click')
-  props.segment && $trackClickEvent(props.segment.cta, props.segment.location)
+  props.segment && trackClickEvent(props.segment.cta, props.segment.location)
 }
 
 function isExternal (url: string): boolean {

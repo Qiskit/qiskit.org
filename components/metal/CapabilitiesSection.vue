@@ -56,12 +56,15 @@
 
 <!-- TODO: Refactor using Composition API once Mixins are refactored -->
 <script lang="ts">
-import { Component, Mixins } from 'vue-property-decorator'
+import { Component } from 'vue-property-decorator'
 import { MetalCapability, METAL_CAPABILITIES } from '~/constants/metalContent'
-import ScrollSectionsMixin from '~/mixins/scrollBetweenSections'
+import { useScrollBetweenSections } from '~/composables/useScrollBetweenSections'
+
+// TODO: Review how this work
+const { activeSection } = useScrollBetweenSections()
 
 @Component
-export default class CapabilitiesSection extends Mixins(ScrollSectionsMixin) {
+export default class CapabilitiesSection {
   capabilities = METAL_CAPABILITIES
 
   isActiveImage (item: MetalCapability, index: number): boolean {
