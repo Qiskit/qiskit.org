@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- <qiskit-ui-shell variant="hide-account" @on-click="onClick" /> -->
+    <qiskit-ui-shell variant="hide-account" @on-click="onClick" />
     <div class="main-container">
       <slot />
     </div>
@@ -9,16 +9,12 @@
 </template>
 
 <script setup lang="ts">
-// import Vue from 'vue'
-// import { Component } from 'vue-property-decorator'
-// import '@qiskit/web-components/components/ui-shell'
+import "@qiskit/web-components/ui-shell";
 
-// @Component
-// export default class DefaultLayout extends Vue {
-//   onClick (e: CustomEvent) {
-//     this.$trackClickEvent(`${e.detail?.label?.toLowerCase()}`, 'menu')
-//   }
-// }
+function onClick(e: CustomEvent) {
+  // TODO: Refactor tracking
+  // $trackClickEvent(`${e.detail?.label?.toLowerCase()}`, "menu");
+}
 </script>
 
 <style lang="scss" scoped>
