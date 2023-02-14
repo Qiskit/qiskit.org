@@ -1,6 +1,7 @@
 <template>
   <!-- TODO: review if class is needed or can be deleted -->
   <main class="landing-page">
+    Index page
     <!-- TODO: Integrate components -->
     <!-- <TheHeroMoment :version="qiskitVersion" /> -->
     <!-- <TheQuickStart /> -->
