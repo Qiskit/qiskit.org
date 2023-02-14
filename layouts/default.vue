@@ -2,13 +2,14 @@
   <div>
     <!-- <qiskit-ui-shell variant="hide-account" @on-click="onClick" /> -->
     <div class="main-container">
+      Qiskit.org
       <!-- <nuxt /> -->
     </div>
     <!-- <PageFooter old-container theme="light" /> -->
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 // import Vue from 'vue'
 // import { Component } from 'vue-property-decorator'
 // import '@qiskit/web-components/components/ui-shell'
