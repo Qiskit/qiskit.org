@@ -7,7 +7,7 @@ COPY . .
 RUN npm ci
 RUN npm run generate
 
-RUN cp -R ./output/. /var/www/html/
+RUN cp -R .output/public/. /var/www/html/
 
 EXPOSE 80
 
