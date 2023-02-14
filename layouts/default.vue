@@ -11,9 +11,10 @@
 <script setup lang="ts">
 import "@qiskit/web-components/ui-shell";
 
+const { trackClickEvent } = useSegment()
+
 function onClick(e: CustomEvent) {
-  // TODO: Refactor tracking
-  // $trackClickEvent(`${e.detail?.label?.toLowerCase()}`, "menu");
+  trackClickEvent(`${e.detail?.label?.toLowerCase()}`, "menu");
 }
 </script>
 

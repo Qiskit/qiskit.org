@@ -1,15 +1,10 @@
-import {
-  trackClickEvent,
-  trackPage,
-  trackPerformedSearch,
-  AnalyticsContext
-} from '~/plugins/segment-analytics'
+const { trackPage, trackClickEvent, AnalyticsContext } = useSegment()
 
 const window: AnalyticsContext = {
   bluemixAnalytics: {
     trackEvent: jest.fn(),
     pageEvent: jest.fn(),
-    trackPerformedSearch: jest.fn()
+    // trackPerformedSearch: jest.fn()
   },
   digitalData: {
     page: {
@@ -35,7 +30,9 @@ const field = 'sample seach term'
 const commonSuite: [Function, any[], string][] = [
   [trackPage, [routeName, title], 'pageEvent'],
   [trackClickEvent, [cta, location], 'trackEvent'],
-  [trackPerformedSearch, [uiElement, field], 'trackEvent']
+  // TODO: the search will be move to saiba so this won't be needed in the future.
+  // I commmented it just in case we have to update the test
+  // [trackPerformedSearch, [uiElement, field], 'trackEvent']
 ]
 
 commonSuite.forEach(([fn, args, delegate]) => {
@@ -156,21 +153,23 @@ describe('trackPage', () => {
   })
 })
 
-describe('trackPerformedSearch', () => {
-  beforeEach(() => {
-    window.bluemixAnalytics.trackEvent.mockClear()
-  })
+//TODO: Commented until decide if we want it
 
-  it('translates the event into a Bluemix Analytics "Performed Search" event', () => {
-    trackPerformedSearch(window, uiElement, field)
-    expect(window.bluemixAnalytics.trackEvent).toHaveBeenCalledWith(
-      'Performed Search',
-      {
-        productTitle: window.digitalData.page.pageInfo.productTitle,
-        category: window.digitalData.page.pageInfo.analytics.category,
-        uiElement,
-        field
-      }
-    )
-  })
+// describe('trackPerformedSearch', () => {
+//   beforeEach(() => {
+//     window.bluemixAnalytics.trackEvent.mockClear()
+//   })
+
+//   it('translates the event into a Bluemix Analytics "Performed Search" event', () => {
+//     trackPerformedSearch(window, uiElement, field)
+//     expect(window.bluemixAnalytics.trackEvent).toHaveBeenCalledWith(
+//       'Performed Search',
+//       {
+//         productTitle: window.digitalData.page.pageInfo.productTitle,
+//         category: window.digitalData.page.pageInfo.analytics.category,
+//         uiElement,
+//         field
+//       }
+//     )
+//   })
 })

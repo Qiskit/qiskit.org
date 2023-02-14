@@ -13,10 +13,10 @@
 import "@qiskit/web-components/ui-shell";
 
 const route = useRoute();
+const { trackClickEvent } = useSegment()
 
 function onClick(e: CustomEvent) {
-  // TODO: Refactor tracking
-  // $trackClickEvent(`${e.detail?.label?.toLowerCase()}`, "menu");
+  trackClickEvent(`${e.detail?.label?.toLowerCase()}`, "menu");
 }
 
 const isALearningPage = computed(() => route.path.includes("/learn"));

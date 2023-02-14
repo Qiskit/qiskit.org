@@ -1,12 +1,11 @@
-import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
+import { ref, onMounted, onUpdated, onBeforeUnmount } from 'vue'
+import { onBeforeRouteUpdate } from 'vue-router'
 
-@Component
-export default class ScrollBetweenSections extends Vue {
-  activeSection = ''
-  _observer: IntersectionObserver | null = null
+export function useScrollBetweenSections () {
+  const activeSection = ref('')
+  const _observer: IntersectionObserver | null = ref(null)
 
-  mounted () {
+  onMounted (() => {
     const threshold = [...Array(25).keys()].map(x => 4 * x / 100)
     const windowTriggerMargins = '-16px 0px -80% 0px'
     this._observer = new IntersectionObserver(
@@ -18,13 +17,33 @@ export default class ScrollBetweenSections extends Vue {
       }
     )
     this.updateObserved()
-  }
+  })
 
-  updated () {
+  onUpdated (() => {
     this.$nextTick(() => this.updateObserved())
+  })
+
+  onBeforeUnmount (() => {
+    this._observer && this._observer.disconnect()
+  })
+
+  // TODO: This is the original code. The onBeforeRouteEnter doesn't
+  // exists on Vue 3, so we need to check if the code below works as expected
+  // beforeRouteEnter (route: any, _: any, next: any) {
+  //   next((page: any) => page._parseSectionFromUrl(route))
+  // }
+
+  // beforeRouteUpdate (route: any, _: any, next: any) {
+  //   this._parseSectionFromUrl(route)
+  //   next()
+  // }
+
+  onBeforeRouteUpdate (route: any, _: any, next: any) {
+    this._parseSectionFromUrl(route)
+    next()
   }
 
-  updateObserved () {
+  function updateObserved () {
     (this.$el as HTMLElement)
       .querySelectorAll('.scrollable')
       .forEach((section) => {
@@ -32,20 +51,7 @@ export default class ScrollBetweenSections extends Vue {
       })
   }
 
-  beforeDestroy () {
-    this._observer && this._observer.disconnect()
-  }
-
-  beforeRouteEnter (route: any, _: any, next: any) {
-    next((overviewPage: any) => overviewPage._parseSectionFromUrl(route))
-  }
-
-  beforeRouteUpdate (route: any, _: any, next: any) {
-    this._parseSectionFromUrl(route)
-    next()
-  }
-
-  _onSectionAppearing (entries: Array<IntersectionObserverEntry>) {
+  function _onSectionAppearing (entries: Array<IntersectionObserverEntry>) {
     let highestTopValue = Infinity
     entries.forEach((entry) => {
       const {
@@ -70,9 +76,11 @@ export default class ScrollBetweenSections extends Vue {
   /**
    * This methods gets called when the active section changes.
    */
-  activeSectionChanged () {}
+  function activeSectionChanged () {}
 
-  _parseSectionFromUrl (route: any) {
+ function  _parseSectionFromUrl (route: any) {
     this.activeSection = route.hash.substr(1)
   }
+
+  return { activeSection }
 }

@@ -1,4 +1,4 @@
-import { CtaClickedEventProp } from '~/constants/segment'
+import { CtaClickedEventProp } from '~/types/segment'
 
 /**
  * Represent a navigation link for the menus of the site

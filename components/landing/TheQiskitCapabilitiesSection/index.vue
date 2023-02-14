@@ -29,7 +29,7 @@
       <cv-button
         :title="copyCodeCTA.label"
         class="qiskit-capabilities-section__copy-button"
-        @click="[copyToClipboard(), $trackClickEvent(copyCodeCTA.segment)]"
+        @click="[copyToClipboard(), trackClickEvent(copyCodeCTA.segment)]"
       >
         <span class="qiskit-capabilities-section__copy-button__label">{{ copyCodeCTA.label }}</span>
         <Copy16 class="qiskit-capabilities-section__copy-button__icon" />
@@ -41,8 +41,8 @@
 <!-- TODO: Refactor using Composition API once Mixins are refactored -->
 <script lang="ts">
 import { Component, Mixins } from 'vue-property-decorator'
-import ScrollSectionsMixin from '~/mixins/scrollBetweenSections'
-import { CtaClickedEventProp } from '~/constants/segment'
+import { CtaClickedEventProp } from '~/types/segment'
+import { useScrollBetweenSections } from '~/composables/useScrollBetweenSections'
 
 interface QiskitCapability {
   title: string
@@ -52,7 +52,12 @@ interface QiskitCapability {
 }
 
 @Component
-export default class TheQiskitCapabilitiesSection extends Mixins(ScrollSectionsMixin) {
+export default class TheQiskitCapabilitiesSection {
+  const { trackClickEvent } = useSegment()
+
+  // TODO: Review how this work
+  const { activeSection } = useScrollBetweenSections()
+  
   capabilities = [
     {
       title: 'Circuit Library',

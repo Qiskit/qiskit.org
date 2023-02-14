@@ -52,15 +52,14 @@
 </template>
 
 <script setup lang="ts">
-// TODO: Integrate old code
-// import QiskitPage from "~/components/logic/QiskitPage.vue";
-// import { ContentAccordionTab } from "~/components/overview/ContentAccordion.vue";
-// import {
-//   TABLE_OF_CONTENTS,
-//   CONTENT_SECTIONS,
-//   OverviewSubSection,
-// } from "~/constants/overviewContent";
-// import ScrollSectionsMixin from "~/mixins/scrollBetweenSections";
+import QiskitPage from '~/components/logic/QiskitPage.vue'
+import { ContentAccordionTab } from '~/components/overview/ContentAccordion.vue'
+import {
+  TABLE_OF_CONTENTS,
+  CONTENT_SECTIONS,
+  OverviewSubSection
+} from '~/constants/overviewContent'
+import { useScrollBetweenSections } from '~/composables/useScrollBetweenSections';
 
 definePageMeta({
   layout: "default-max",
@@ -75,10 +74,13 @@ useHead({
 // const tocEntries = TABLE_OF_CONTENTS;
 // const contentSections = CONTENT_SECTIONS;
 
-// const quickStartLink = {
-//   url: "#quick-start",
-//   label: "Get Started",
-// };
+// TODO: Check if this is working correctly
+const { activeSection } = useScrollBetweenSections()
+
+const quickStartLink = {
+  url: '#quick-start',
+  label: 'Get Started'
+}
 
 // function asTabs(
 //   subsections: Array<OverviewSubSection>

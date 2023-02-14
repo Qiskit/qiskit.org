@@ -58,7 +58,7 @@
 </template>
 
 <script setup lang="ts">
-import { CtaClickedEventProp } from '~/constants/segment'
+import { CtaClickedEventProp } from '~/types/segment'
 
 export interface TagTooltip {
   // the short string label for inside the tag
