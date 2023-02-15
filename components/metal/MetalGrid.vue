@@ -206,7 +206,7 @@ function getRowId(index: number): string {
   }
 
   &__underlayer {
-    @include contained();
+    @include contained;
 
     overflow: hidden;
     background-color: $cool-gray-100;

@@ -32,7 +32,7 @@ function trackPerformedSearch(uiElement: string, field: string) {
   border-bottom: 1px solid qiskit.$border-color;
 
   &__container {
-    @include contained();
+    @include contained;
 
     max-width: $max-size;
   }

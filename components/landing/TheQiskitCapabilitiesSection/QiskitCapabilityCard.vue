@@ -77,6 +77,7 @@ $card-img-width: 10rem;
 
     &__mobile {
       display: none;
+
       @include carbon.breakpoint-down(lg) {
         display: block;
         width: $card-img-width;

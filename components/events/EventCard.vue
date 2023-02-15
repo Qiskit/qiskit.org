@@ -79,7 +79,7 @@ withDefaults(defineProps<Props>(), {
 
   &__icon {
     margin-right: carbon.$spacing-03;
-    fill: currentColor;
+    fill: currentcolor;
   }
 }
 </style>

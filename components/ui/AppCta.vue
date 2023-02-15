@@ -80,6 +80,7 @@ const iconPerLinkType = computed(() => {
   @include carbon.breakpoint-between(md, lg) {
     width: 3 * $column-size-medium;
   }
+
   @include carbon.breakpoint-down(md) {
     width: 100%;
   }
@@ -168,7 +169,7 @@ const iconPerLinkType = computed(() => {
   $launch_path: "_launch-16 path:nth-child(2)";
 
   &__icon {
-    fill: currentColor;
+    fill: currentcolor;
     margin-left: carbon.$spacing-05;
     overflow: visible;
 

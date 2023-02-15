@@ -92,7 +92,7 @@ const stayInTouchLink = {
   }
 
   &__container {
-    @include contained();
+    @include contained;
 
     padding-top: carbon.$spacing-10;
   }

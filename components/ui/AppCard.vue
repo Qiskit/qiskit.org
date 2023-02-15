@@ -252,10 +252,7 @@ function hasTags(tags: string[] | TagTooltip[]) {
     align-items: center;
     justify-content: center;
     padding: carbon.$spacing-02 carbon.$spacing-03;
-    margin-top: carbon.$spacing-02;
-    margin-bottom: carbon.$spacing-02;
-    margin-right: carbon.$spacing-03;
-    margin-left: carbon.$spacing-03;
+    margin: carbon.$spacing-02 carbon.$spacing-03 carbon.$spacing-02 carbon.$spacing-03;
     border-radius: 6.9375rem;
     cursor: default;
     vertical-align: middle;

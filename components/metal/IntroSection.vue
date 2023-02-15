@@ -51,12 +51,13 @@ const joinWaitingListLink = {
   @include carbon.breakpoint-down(lg) {
     margin-top: -8rem;
   }
+
   @include carbon.breakpoint-down(md) {
     margin-top: -5rem;
   }
 
   &__container {
-    @include contained();
+    @include contained;
 
     padding-top: carbon.$spacing-10;
     padding-bottom: 0;

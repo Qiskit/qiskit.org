@@ -44,6 +44,7 @@ const githubRepoLink = GITHUB_REPOSITORY;
   flex-direction: row;
   align-items: center;
   text-decoration: none;
+
   // TODO: Force pointer events to pass through to avoid covering the trigger
   // tile to the Metal page. Remove when decomissioning the Metal page.
   pointer-events: none;

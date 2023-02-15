@@ -96,6 +96,7 @@ const qiskitPronunciation = Math.random() < 0.5 ? "[kiss-kit]" : "[quiss-kit]";
 
   &__title {
     margin-bottom: carbon.$spacing-06;
+
     // TODO: Force pointer events to allow the user to select text. Remove
     // when decomissioning the Metal page.
     pointer-events: auto;
@@ -111,6 +112,7 @@ const qiskitPronunciation = Math.random() < 0.5 ? "[kiss-kit]" : "[quiss-kit]";
 
   &__description {
     margin-bottom: carbon.$spacing-06;
+
     // TODO: Force pointer events to allow the user to select text. Remove
     // when decomissioning the Metal page.
     pointer-events: auto;

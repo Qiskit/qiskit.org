@@ -162,6 +162,7 @@
 
   position: relative;
   overflow: hidden;
+
   // In Figma, the height is not enforced but the background is always
   // visible completely so we do it in the CSS. A small correction is needed
   // to be able of displaying the bottom lines of the grid.
@@ -183,7 +184,7 @@
   }
 
   &__container {
-    @include contained();
+    @include contained;
 
     position: relative;
     display: flex;

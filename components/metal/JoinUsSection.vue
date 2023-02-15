@@ -27,7 +27,7 @@ const joinSlackLink = {
   background-color: qiskit.$background-color-dark;
 
   &__container {
-    @include contained();
+    @include contained;
 
     padding-top: carbon.$spacing-10;
     padding-bottom: carbon.$spacing-12;

@@ -110,8 +110,8 @@ onMounted(() => {
   }
 
   @keyframes flash {
-    from,
-    to {
+    0%,
+    100% {
       background-color: transparent;
     }
 

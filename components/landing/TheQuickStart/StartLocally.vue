@@ -264,7 +264,7 @@ function selectOption(choicesGroup: ChoicesGroup, selectedOption: string) {
     }
 
     & .bx--accordion__arrow {
-      fill: currentColor;
+      fill: currentcolor;
     }
   }
 }

@@ -101,7 +101,7 @@ function trackPerformedSearch(uiElement: string, field: string) {
   }
 
   &__container {
-    @include contained();
+    @include contained;
 
     max-width: $max-size;
     position: relative;
@@ -150,6 +150,7 @@ function trackPerformedSearch(uiElement: string, field: string) {
       @include carbon.breakpoint-between(md, lg) {
         width: calc(50% + var(--additional-width));
       }
+
       @include carbon.breakpoint-down(md) {
         width: calc(80% + var(--additional-width));
         height: 80%;
@@ -172,6 +173,7 @@ function trackPerformedSearch(uiElement: string, field: string) {
 
   &__cta {
     align-self: flex-end;
+
     // this is necessary to respect z ordering with the absolute elements.
     position: relative;
   }

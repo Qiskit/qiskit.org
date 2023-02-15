@@ -27,7 +27,7 @@ withDefaults(defineProps<Props>(), {
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
 .app-nav-back-link {
-  @include contained();
+  @include contained;
 
   padding-bottom: carbon.$spacing-06;
   padding-top: carbon.$spacing-06;

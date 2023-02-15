@@ -85,7 +85,7 @@ export default abstract class CourseOverviewPage extends QiskitPage {
 
 .course-overview-page {
   &__section {
-    @include contained();
+    @include contained;
 
     max-width: $max-size;
     margin-bottom: carbon.$spacing-07;

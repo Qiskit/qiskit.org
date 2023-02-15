@@ -127,11 +127,11 @@ function scopeId(str: string): string {
 <style lang="scss" scoped>
 .app-logo {
   &__solid {
-    fill: currentColor;
+    fill: currentcolor;
   }
 
   &__gradient {
-    stop-color: currentColor;
+    stop-color: currentcolor;
   }
 }
 </style>
