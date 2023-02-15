@@ -41,7 +41,8 @@ const RECORD_FIELDS_IDS = Object.freeze({
   institution: 'fldLVMuuhZVGwh4qZ',
   showOnEventsPage: 'fldi1ThdDnUQakxWo',
   showOnSeminarSeriesPage: 'fldl6in6TPajnxPMs',
-  speaker: 'fldyeOkGwMbfMRvPu'
+  speaker: 'fldyeOkGwMbfMRvPu',
+  abstract: 'fldBqkIigePRu4oZd'
 } as const)
 
 const AIRTABLE_BASE_ID = 'appYREKB18uC7y8ul'
@@ -211,6 +212,7 @@ class EventsAirtableRecords extends AirtableRecords {
       regions: record.get(this.recordFields!.regions) || [WORLD_REGIONS.tbd],
       title: record.get(this.recordFields!.name) || '',
       to: record.get(this.recordFields!.website) || '',
+      abstract: record.get(this.recordFields!.abstract) || '',
 
       date: this.formatDates(...this.getDates(record)),
       image: await this.getImage(record),
@@ -234,6 +236,7 @@ class EventsAirtableRecords extends AirtableRecords {
       speaker: record.get(this.recordFields!.speaker) || '',
       title: record.get(this.recordFields!.name) || '',
       to: record.get(this.recordFields!.website) || '',
+      abstract: record.get(this.recordFields!.abstract) || '',
 
       date: this.formatDates(...this.getDates(record)),
       image: await this.getImage(record),
