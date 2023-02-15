@@ -10,12 +10,14 @@ type TableOfContentEntry = {
 }
 
 type ProvidersSubSection = {
-  title: string
-  content: {
-    image: string
-    description: string
-    cta: NavLink
-  }
+  title: string,
+  image: string,
+  description: string,
+  installation: string,
+  websiteCta: NavLink,
+  docCta: NavLink,
+  sourceCta: NavLink,
+  helloWorldExample: string[]
 }
 
 /**
@@ -70,59 +72,39 @@ const REAL_HARDWARE: ProvidersSection = {
   // ],
   subSections: [
     {
-      title: 'IBM Quantum Qiskit Runtime',
-      content: {
-        image: '/images/providers/applications/optimization.png',
-        description: 'The Qiskit Optimization package covers the whole range from high-level modeling of optimization problems, with automatic conversion of problems to different required representations, to a suite of easy-to-use quantum optimization algorithms that are ready to run on classical simulators, as well as on real quantum systems.',
-        cta: {
-          label: 'Solve the Max Cut Problem',
-          url: 'https://qiskit.org/documentation/optimization/tutorials/01_quadratic_program.html'
-        }
-      }
-    },
-    {
-      title: 'IBM Quantum Systems',
-      content: {
-        image: '/images/providers/applications/finance.png',
-        description: 'The Qiskit Finance package contains components to load uncertainty models, e.g., for pricing securities/derivatives or analyzing the risk involved. It also contains data providers to source real or random data to finance experiments and together with the Qiskit Optimization package allows easy modeling of optimization problems as arising e.g. in portfolio management.',
-        cta: {
-          label: 'Perform Option Pricing with qGans',
-          url: 'https://qiskit.org/documentation/finance/tutorials/10_qgan_option_pricing.html'
-        }
-      }
-    },
-    {
-      title: 'IonQ',
-      content: {
-        image: '/images/providers/applications/machine-learning.png',
-        description: 'The Qiskit Machine Learning package simply contains sample datasets at present. Qiskit has some classification algorithms such as QSVM (Quantum Support Vector Machine) and VQC (Variational Quantum Classifier), where this data can be used for experiments, and there is also QGAN (Quantum Generative Adversarial Network) algorithm.',
-        cta: {
-          label: 'Classify data with a VQC',
-          url: 'https://qiskit.org/documentation/machine-learning/tutorials/01_neural_networks.html'
-        }
-      }
-    },
-    {
-      title: 'Azure Quantum',
-      content: {
-        image: '/images/providers/applications/chemestry.png',
-        description: 'The Qiskit Chemistry package supports problems including ground state energy computations, excited states and dipole moments of molecule, both open and closed-shell.',
-        cta: {
-          label: 'Find the Energy Ground State of a Molecule',
-          url: 'https://qiskit.org/documentation/nature/tutorials/01_electronic_structure.html'
-        }
-      }
-    },
-    {
-      title: 'Other community-supported providers',
-      content: {
-        image: '/images/providers/applications/chemestry.png',
-        description: 'The Qiskit Chemistry package supports problems including ground state energy computations, excited states and dipole moments of molecule, both open and closed-shell.',
-        cta: {
-          label: 'Find the Energy Ground State of a Molecule',
-          url: 'https://qiskit.org/documentation/nature/tutorials/01_electronic_structure.html'
-        }
-      }
+      title: 'Hardware subsection name 001',
+      image: '/images/providers/qiskit-ibm-runtime.png',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam urna tortor, vulputate a arcu quis, cursus ultricies leo. Quisque sit amet tristique enim. Etiam lobortis, purus eu dignissim aliquet, ante felis fringilla nisi, sed euismod orci orci pulvinar dui. Aliquam pharetra ac risus eget maximus. Morbi sapien elit, dignissim non justo nec, luctus sodales ipsum. Sed tempus, velit aliquam sagittis sollicitudin, elit felis facilisis nulla, id ultrices quam diam in mi. Maecenas commodo vitae ligula sed tincidunt. Ut vel nulla accumsan, facilisis quam et, maximus ligula. Cras at odio condimentum, fermentum mauris at, condimentum urna.',
+      installation: 'pip install lorem ipsum',
+      websiteCta: {
+        label: 'Website',
+        url: 'https://quantum-computing.ibm.com/lab/docs/iql/runtime/'
+      },
+      docCta: {
+        label: 'Docs',
+        url: 'https://qiskit.org/documentation/partners/qiskit_ibm_runtime/'
+      },
+      sourceCta: {
+        label: 'GitHub',
+        url: 'https://github.com/Qiskit/qiskit-ibm-runtime'
+      },
+      helloWorldExample: [
+        'from qiskit_ibm_runtime import QiskitRuntimeService\n',
+        '\n',
+        '# Save an IBM Quantum account.\n',
+        'QiskitRuntimeService.save_account(channel="ibm_quantum", token="MY_IBM_QUANTUM_TOKEN")\n',
+        '\n',
+        'service = QiskitRuntimeService()\n',
+        "program_inputs = {'iterations': 1}\n",
+        'options = {"backend_name": "ibmq_qasm_simulator"}\n',
+        'job = service.run(program_id="hello-world",\n',
+        'options=options,\n',
+        'inputs=program_inputs\n',
+        ')\n',
+        'print(f"job id: {job.job_id()}")\n',
+        'result = job.result()\n',
+        'print(result)'
+      ]
     }
   ]
 }
@@ -145,37 +127,74 @@ const SIMULATORS_COLLECTION: ProvidersSection = {
   },
   subSections: [
     {
-      title: 'Qiskit Aer',
-      content: {
-        image: '/images/providers/algorithms/grover.png',
-        description: 'Grover\'s algorithm is a well known quantum algorithm part of the amplitude amplifier category that provides quadratic speedup for searching through unstructured collections of records in search of particular targets.',
-        cta: {
-          label: 'Try out Grover’s',
-          url: 'https://qiskit.org/documentation/stubs/qiskit.algorithms.Grover.html#qiskit.algorithms.Grover'
-        }
-      }
+      title: 'Simulators subsection name 001',
+      image: '/images/providers/qiskit-ibm-runtime.png',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam urna tortor, vulputate a arcu quis, cursus ultricies leo. Quisque sit amet tristique enim. Etiam lobortis, purus eu dignissim aliquet, ante felis fringilla nisi, sed euismod orci orci pulvinar dui. Aliquam pharetra ac risus eget maximus. Morbi sapien elit, dignissim non justo nec, luctus sodales ipsum. Sed tempus, velit aliquam sagittis sollicitudin, elit felis facilisis nulla, id ultrices quam diam in mi. Maecenas commodo vitae ligula sed tincidunt. Ut vel nulla accumsan, facilisis quam et, maximus ligula. Cras at odio condimentum, fermentum mauris at, condimentum urna.',
+      installation: 'pip install lorem ipsum',
+      websiteCta: {
+        label: 'Website',
+        url: 'https://quantum-computing.ibm.com/lab/docs/iql/runtime/'
+      },
+      docCta: {
+        label: 'Docs',
+        url: 'https://qiskit.org/documentation/partners/qiskit_ibm_runtime/'
+      },
+      sourceCta: {
+        label: 'GitHub',
+        url: 'https://github.com/Qiskit/qiskit-ibm-runtime'
+      },
+      helloWorldExample: [
+        'from qiskit_ibm_runtime import QiskitRuntimeService\n',
+        '\n',
+        '# Save an IBM Quantum account.\n',
+        'QiskitRuntimeService.save_account(channel="ibm_quantum", token="MY_IBM_QUANTUM_TOKEN")\n',
+        '\n',
+        'service = QiskitRuntimeService()\n',
+        "program_inputs = {'iterations': 1}\n",
+        'options = {"backend_name": "ibmq_qasm_simulator"}\n',
+        'job = service.run(program_id="hello-world",\n',
+        'options=options,\n',
+        'inputs=program_inputs\n',
+        ')\n',
+        'print(f"job id: {job.job_id()}")\n',
+        'result = job.result()\n',
+        'print(result)'
+      ]
     },
     {
-      title: 'Other simulator',
-      content: {
-        image: '/images/providers/algorithms/vqe.png',
-        description: 'VQE (Variational Quantum Eigensolver) is another well known quantum algorithm part of the minimum eigensolvers category. This algorithm uses variational techniques and interleaves quantum and classical computations in order to find the minimum eigenvalue of the Hamiltonian of a given system.',
-        cta: {
-          label: 'Try out VQE',
-          url: 'https://qiskit.org/documentation/stubs/qiskit.algorithms.VQE.html#qiskit.algorithms.VQE'
-        }
-      }
-    },
-    {
-      title: 'Yet another one',
-      content: {
-        image: '/images/providers/algorithms/qaoa.png',
-        description: 'QAOA (Quantum Approximate Optimization Algorithm) is also part of the minimum eigensolvers category. This algorithm extends VQE (Variational Quantum Eigensolver) and inherits VQE\'s general optimization structure but uses its own fine-tuned variational form.',
-        cta: {
-          label: 'Try out QAOA',
-          url: 'https://qiskit.org/documentation/stubs/qiskit.algorithms.QAOA.html#qiskit.algorithms.QAOA'
-        }
-      }
+      title: 'Simulators subsection name 002',
+      image: '/images/providers/qiskit-ibm-runtime.png',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam urna tortor, vulputate a arcu quis, cursus ultricies leo. Quisque sit amet tristique enim. Etiam lobortis, purus eu dignissim aliquet, ante felis fringilla nisi, sed euismod orci orci pulvinar dui. Aliquam pharetra ac risus eget maximus. Morbi sapien elit, dignissim non justo nec, luctus sodales ipsum. Sed tempus, velit aliquam sagittis sollicitudin, elit felis facilisis nulla, id ultrices quam diam in mi. Maecenas commodo vitae ligula sed tincidunt. Ut vel nulla accumsan, facilisis quam et, maximus ligula. Cras at odio condimentum, fermentum mauris at, condimentum urna.',
+      installation: 'pip install lorem ipsum',
+      websiteCta: {
+        label: 'Website',
+        url: 'https://quantum-computing.ibm.com/lab/docs/iql/runtime/'
+      },
+      docCta: {
+        label: 'Docs',
+        url: 'https://qiskit.org/documentation/partners/qiskit_ibm_runtime/'
+      },
+      sourceCta: {
+        label: 'GitHub',
+        url: 'https://github.com/Qiskit/qiskit-ibm-runtime'
+      },
+      helloWorldExample: [
+        'from qiskit_ibm_runtime import QiskitRuntimeService\n',
+        '\n',
+        '# Save an IBM Quantum account.\n',
+        'QiskitRuntimeService.save_account(channel="ibm_quantum", token="MY_IBM_QUANTUM_TOKEN")\n',
+        '\n',
+        'service = QiskitRuntimeService()\n',
+        "program_inputs = {'iterations': 1}\n",
+        'options = {"backend_name": "ibmq_qasm_simulator"}\n',
+        'job = service.run(program_id="hello-world",\n',
+        'options=options,\n',
+        'inputs=program_inputs\n',
+        ')\n',
+        'print(f"job id: {job.job_id()}")\n',
+        'result = job.result()\n',
+        'print(result)'
+      ]
     }
   ]
 }

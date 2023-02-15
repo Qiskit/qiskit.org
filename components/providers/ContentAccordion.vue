@@ -14,9 +14,12 @@
         </template>
         <template slot="content">
           <AccordionLayout
-            :image="tab.content.image"
-            :description="tab.content.description"
-            :cta="tab.content.cta"
+            :image="tab.image"
+            :description="tab.description"
+            :website-cta="tab.websiteCta"
+            :doc-cta="tab.docCta"
+            :source-cta="tab.sourceCta"
+            :hello-world-example="tab.helloWorldExample"
           />
         </template>
       </cv-accordion-item>
@@ -27,11 +30,17 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-import { AccordionLayoutProps } from '~/components/providers/AccordionLayout.vue'
+import { NavLink } from '~/constants/menuLinks'
 
 type ContentAccordionTab = {
   title: string,
-  content: AccordionLayoutProps
+  image: string,
+  description: string,
+  installation: string,
+  websiteCta: NavLink,
+  docCta: NavLink,
+  sourceCta: NavLink,
+  helloWorldExample: string[]
 }
 
 export { ContentAccordionTab }

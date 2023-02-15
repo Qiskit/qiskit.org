@@ -12,26 +12,34 @@
     <p class="accordion-layout__description">
       {{ description }}
     </p>
-    <AppCta
-      kind="ghost"
-      v-bind="cta"
-    />
+    <div class="accordion-layout__cta-group">
+      <AppCta
+        class="accordion-layout__cta-group__item"
+        kind="ghost"
+        v-bind="websiteCta"
+      />
+      <AppCta
+        class="accordion-layout__cta-group__item"
+        kind="ghost"
+        v-bind="docCta"
+      />
+      <AppCta
+        class="accordion-layout__cta-group__item"
+        kind="ghost"
+        v-bind="sourceCta"
+      />
+    </div>
     <!-- TODO: replace w/ dynamic code sample -->
     <cv-code-snippet
       kind="multiline"
       light
       feedback-aria-label="Copy code snippet"
     >
-      import qiskit
-      from qiskit_runtime import ...
-
-      (very) short code example
-      Lorem ipsum dolor sit amet
-      consectetur adipiscing elit
-      Suspendisse id laoreet urna
-      nec egestas lorem
-      Donec porta
-      mauris sed facilisis pulvinar
+      <span
+        v-for="line in helloWorldExample"
+        :key="line"
+        v-text="line"
+      />
     </cv-code-snippet>
   </article>
 </template>
@@ -39,6 +47,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
+import { NavLink } from '~/constants/menuLinks'
 
 // TODO: It is not possible to extract the interface of the component props
 // so we need this redundant interface to do it. Explore if it is worth
@@ -47,10 +56,10 @@ import { Component, Prop } from 'vue-property-decorator'
 interface AccordionLayoutProps {
   image: string,
   description: string,
-  cta: {
-    url: string,
-    label: string
-  }
+  websiteCta:NavLink,
+  docCta:NavLink,
+  sourceCta:NavLink,
+  helloWorldExample: string[]
 }
 
 export { AccordionLayoutProps }
@@ -59,10 +68,10 @@ export { AccordionLayoutProps }
 export default class AccordionLayout extends Vue implements AccordionLayoutProps {
   @Prop(String) image!: string
   @Prop(String) description!: string
-  @Prop(Object) cta!: {
-    url: string,
-    label: string
-  }
+  @Prop(Object) websiteCta!: NavLink
+  @Prop(Object) docCta!: NavLink
+  @Prop(Object) sourceCta!: NavLink
+  @Prop(Array) helloWorldExample!: string[]
 }
 </script>
 
@@ -75,12 +84,22 @@ export default class AccordionLayout extends Vue implements AccordionLayoutProps
     align-self: center;
     height: auto;
     width: 100%;
-    max-width: 26rem;
-    margin-bottom: $spacing-05;
+    margin: $spacing-07;
   }
 
   &__description {
     margin-bottom: $spacing-06;
+  }
+
+  &__cta-group {
+    display: flex;
+    margin-bottom: $spacing-06;
+
+    .app-cta {
+      padding: 0;
+      width: 6rem;
+      margin-right: $spacing-08;
+    }
   }
 }
 </style>
