@@ -48,7 +48,8 @@ defineProps<Props>();
     display: grid;
     padding: carbon.$spacing-12 carbon.$spacing-05 0;
     gap: carbon.$spacing-05;
-    grid-template: repeat(4, 1fr) repeat(3, auto) 52px "headline headline img img"
+    grid-template:
+      repeat(4, 1fr) repeat(3, auto) 52px "headline headline img img"
       "description description img img"
       ". . img img"
       "cta . img img";
