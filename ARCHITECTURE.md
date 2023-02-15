@@ -35,28 +35,28 @@ Here is an example of a component called `AppCard.vue`:
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
+import Vue from "vue";
+import { Component, Prop } from "vue-property-decorator";
 
 @Component
 export default class AppCard extends Vue {
-  @Prop({ type: String, required: true }) title!: string
-  @Prop({ type: String, required: true }) description!: string
+  @Prop({ type: String, required: true }) title!: string;
+  @Prop({ type: String, required: true }) description!: string;
 }
 </script>
 
 <style lang="scss" scoped>
-@import '~carbon-components/scss/globals/scss/typography';
+@import "~carbon-components/scss/globals/scss/typography";
 
 .app-card {
   background-color: $cool-gray-10;
 
   &__title {
-    @include type-style('productive-heading-02');
+    @include type-style("productive-heading-02");
   }
 
   &__description {
-    @include type-style('body-long-01');
+    @include type-style("body-long-01");
   }
 }
 </style>

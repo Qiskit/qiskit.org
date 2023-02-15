@@ -58,16 +58,16 @@ There are tons of useful resources about Git [out there](https://try.github.io/)
 
 You can [open 4 types of issues](https://github.com/Qiskit/qiskit.org/issues/new/choose):
 
-* Bug reports: for reporting a misfunction. Provide steps to reproduce and expected behaviour.
-* Content issues: for noticing content-related problems such as typos or rewordings.
-* Tasks: a general "to do", in case none of the other templates suits you.
-* User stories: for identifying new value for the user.
+- Bug reports: for reporting a misfunction. Provide steps to reproduce and expected behaviour.
+- Content issues: for noticing content-related problems such as typos or rewordings.
+- Tasks: a general "to do", in case none of the other templates suits you.
+- User stories: for identifying new value for the user.
 
 In addition to these 4 templates, the most common types of tasks are:
 
-* Plain tasks: these are the things that a core contributor usually work on during the sprint.
-* [Refactors](https://github.com/Qiskit/qiskit.org/issues?q=label%3A%22type%3A+refactor%22+): these aim at improving our codebase and reducing technical debt.
-* [Discussions](https://github.com/Qiskit/qiskit.org/issues?q=label%3A%22type%3A+discussion%22): these provide a central hub for talking about something to [reach a consensus](https://github.com/Qiskit/qiskit.org/issues?q=label%3ADecided+).
+- Plain tasks: these are the things that a core contributor usually work on during the sprint.
+- [Refactors](https://github.com/Qiskit/qiskit.org/issues?q=label%3A%22type%3A+refactor%22+): these aim at improving our codebase and reducing technical debt.
+- [Discussions](https://github.com/Qiskit/qiskit.org/issues?q=label%3A%22type%3A+discussion%22): these provide a central hub for talking about something to [reach a consensus](https://github.com/Qiskit/qiskit.org/issues?q=label%3ADecided+).
 
 Core contributors classify the tasks according to its nature and prioritize them
 from sprint to sprint. Types are not mutually exclusive and can change over time
@@ -77,10 +77,9 @@ if needed.
 
 ### Deciding what to work on
 
-While the Qiskit community owns several projects in GitHub, we are asking for external contributors to please focus on the [qiskit.org repository](https://github.com/Qiskit/qiskit.org), for now. 
+While the Qiskit community owns several projects in GitHub, we are asking for external contributors to please focus on the [qiskit.org repository](https://github.com/Qiskit/qiskit.org), for now.
 
 To give our collaborators an idea of where the team needs help, we use the [contributions welcome](https://github.com/Qiskit/qiskit.org/issues?q=is%3Aopen+is%3Aissue+label%3A%22contributions+welcome%22) label – this is appropriate for all contributors. In addition, for those who are relatively new to the open-source workflow or our codebase, feel free to view issues tagged with the [good first issue](https://github.com/Qiskit/qiskit.org/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) label.
-
 
 ### Setup
 
@@ -89,7 +88,7 @@ need to know that qiskit.org follows the
 [Forking Workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/forking-workflow)
 with [Feature Branches](https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow).
 
-The above means we expect you to fork the project on your own GitHub account and make your `main` branch to 
+The above means we expect you to fork the project on your own GitHub account and make your `main` branch to
 track this repository. A typical Git setup after
 [forking the project](https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo) is:
 
@@ -104,14 +103,13 @@ git branch -u upstream/main
 git pull
 ```
 
-As a core contributor due to some access limitations between forks and the head branch we encourage you to 
-[clone](https://support.atlassian.com/bitbucket-cloud/docs/clone-a-repository/) the repository 
+As a core contributor due to some access limitations between forks and the head branch we encourage you to
+[clone](https://support.atlassian.com/bitbucket-cloud/docs/clone-a-repository/) the repository
 instead of forking it.
 
 ### Assigning yourself
 
 The very first step to working on an issue is [assigning yourself](https://docs.github.com/en/issues/tracking-your-work-with-issues/assigning-issues-and-pull-requests-to-other-github-users#assigning-an-individual-issue-or-pull-request) the issue. This gives all contributors the visibility into who is working on what.
-
 
 ### Working on an issue
 
@@ -153,7 +151,7 @@ git merge main
 
 ### Adding tests
 
-Our team upholds the philosphy that a healthy codebase will include the proper amount of testing — in this project, we use [Jest](https://jestjs.io/) as our UI testing tool of choice. 
+Our team upholds the philosphy that a healthy codebase will include the proper amount of testing — in this project, we use [Jest](https://jestjs.io/) as our UI testing tool of choice.
 
 As a part of the development backlog planning, we have internal discussions to determine which scenarios should be tested. For code that requires testing, please look for notes in the original issues, as we will do our best to provide ideal, meaningful cases to test.
 
@@ -162,6 +160,7 @@ If you feel that there's a test case that we have not considered, please comment
 ### Pull requests
 
 Pull requests serve a double purpose:
+
 1. Share the code with the team. So almost everybody is aware of how the code base is evolving.
 2. Provide an opportunity for improving code quality.
 
@@ -185,11 +184,11 @@ branch. In these occassions, remember to manually close the related pull request
 
 ### Live previews
 
-As part of our continuous integration infrastructure, every pull request opened from the head repository that passes 
+As part of our continuous integration infrastructure, every pull request opened from the head repository that passes
 the build process, receives a dedicated deployment running on [IBM Code Engine](https://cloud.ibm.com/codeengine/overview).
 
 This allows the team to have live branch previews, making it easier to share
-links and review changes as necessary. You can preview your working branch at 
+links and review changes as necessary. You can preview your working branch at
 `https://qiskit-org-pr-<pull-request-number>.<unique_id>.us-south.codeengine.appdomain.cloud/`.
 
 This means that for forked repositories the pull request will not generate a live preview and that step will be skipped.
@@ -261,7 +260,7 @@ Don't do:
 
 ```ts
 function max(a, b) {
-  return a > b ? a : b
+  return a > b ? a : b;
 }
 ```
 
@@ -269,7 +268,7 @@ But instead:
 
 ```ts
 function max(a: number, b: number): number {
-  return a > b ? a : b
+  return a > b ? a : b;
 }
 ```
 
@@ -281,30 +280,30 @@ Don't do:
 ```ts
 export default {
   scale: 2,
-  magnify (v) {
-    return v * this.scale
-  }
-}
+  magnify(v) {
+    return v * this.scale;
+  },
+};
 ```
 
 But instead:
 
 ```ts
 interface MyType {
-  scale: number
-  magnify (v: number): number
+  scale: number;
+  magnify(v: number): number;
 }
 
-function _factory () : MyType {
+function _factory(): MyType {
   return {
     scale: 2,
-    magnify (v) {
-      return v * this.scale
-    }
-  }
+    magnify(v) {
+      return v * this.scale;
+    },
+  };
 }
 
-export default _factory()
+export default _factory();
 ```
 
 ## Final words

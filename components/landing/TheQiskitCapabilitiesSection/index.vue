@@ -16,7 +16,11 @@
           />
         </div>
         <div class="qiskit-capabilities-section__scrolling-ui">
-          <CodeCell :active-blocks="capabilities.map((item, index) => isActiveSection(item, index))" />
+          <CodeCell
+            :active-blocks="
+              capabilities.map((item, index) => isActiveSection(item, index))
+            "
+          />
         </div>
       </div>
     </div>
@@ -31,7 +35,9 @@
         class="qiskit-capabilities-section__copy-button"
         @click="[copyToClipboard(), trackClickEvent(copyCodeCTA.segment)]"
       >
-        <span class="qiskit-capabilities-section__copy-button__label">{{ copyCodeCTA.label }}</span>
+        <span class="qiskit-capabilities-section__copy-button__label">{{
+          copyCodeCTA.label
+        }}</span>
         <Copy16 class="qiskit-capabilities-section__copy-button__icon" />
       </cv-button>
     </div>
@@ -57,7 +63,7 @@ export default class TheQiskitCapabilitiesSection {
 
   // TODO: Review how this work
   const { activeSection } = useScrollBetweenSections()
-  
+
   capabilities = [
     {
       title: 'Circuit Library',
@@ -219,7 +225,13 @@ $cta-max-width: 14rem;
     padding-right: carbon.$spacing-05;
     background-size: 200% 100%;
     background-position-x: 100%;
-    background-image: linear-gradient(90deg, qiskit.$button-background-color-light 0%, qiskit.$button-background-color-light 50%, qiskit.$background-color-secondary 50%, qiskit.$background-color-secondary 100%);
+    background-image: linear-gradient(
+      90deg,
+      qiskit.$button-background-color-light 0%,
+      qiskit.$button-background-color-light 50%,
+      qiskit.$background-color-secondary 50%,
+      qiskit.$background-color-secondary 100%
+    );
     transition: background-position-x 0.3s ease-out;
 
     @include carbon.breakpoint-down(md) {
