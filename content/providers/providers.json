@@ -1,0 +1,29 @@
+[
+  {
+    "name": "IBM Qiskit Runtime",
+    "image": "static/images/providers/qiskit-ibm-runtime.png",
+    "installation": "pip install qiskit-ibm-runtime",
+    "description": "Qiskit Runtime is a quantum computing service and programming model that allows users to optimize workloads and efficiently execute them on quantum systems at scale. The programming model extends the existing interface in Qiskit with a set of new primitive programs.",
+    "websiteUrl": "https://quantum-computing.ibm.com/lab/docs/iql/runtime/",
+    "docUrl": "https://qiskit.org/documentation/partners/qiskit_ibm_runtime/",
+    "sourceUrl": "https://github.com/Qiskit/qiskit-ibm-runtime",
+    "sourceLabel": "GitHub",
+    "helloWorldExample": [
+      "from qiskit_ibm_runtime import QiskitRuntimeService\n",
+      "\n",
+      "# Save an IBM Quantum account.\n",
+      "QiskitRuntimeService.save_account(channel=\"ibm_quantum\", token=\"MY_IBM_QUANTUM_TOKEN\")\n",
+      "\n",
+      "service = QiskitRuntimeService()\n",
+      "program_inputs = {'iterations': 1}\n",
+      "options = {\"backend_name\": \"ibmq_qasm_simulator\"}\n",
+      "job = service.run(program_id=\"hello-world\",\n",
+      "                options=options,\n",
+      "                inputs=program_inputs\n",
+      "                )\n",
+      "print(f\"job id: {job.job_id()}\")\n",
+      "result = job.result()\n",
+      "print(result)"
+    ]
+  }
+]
