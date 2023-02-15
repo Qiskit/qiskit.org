@@ -122,8 +122,7 @@
 // import { GeneralLink } from "~/constants/appLinks";
 
 definePageMeta({
-  // TODO: Integrate layout
-  // layout: "default-max",
+  layout: "default-max",
 });
 
 useHead({
@@ -246,7 +245,7 @@ useHead({
 // }
 
 // .bx--col-sm-4 {
-//   padding-bottom: $spacing-08;
+//   padding-bottom: carbon.$spacing-08;
 // }
 
 // .app-card {
@@ -291,7 +290,7 @@ useHead({
 // .project-card {
 //   &__license {
 //     font-size: 12px;
-//     margin-right: $spacing-05;
+//     margin-right: carbon.$spacing-05;
 //     margin-top: calc($spacing-01 / 2);
 //   }
 
@@ -301,7 +300,7 @@ useHead({
 
 //     svg {
 //       margin-top: calc($spacing-01 / 2);
-//       margin-right: $spacing-01;
+//       margin-right: carbon.$spacing-01;
 //       fill: $cool-gray-60;
 //     }
 

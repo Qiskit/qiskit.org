@@ -16,21 +16,23 @@
 </template>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
+
 .app-filters-results-layout {
   ::v-deep &__main-section {
-    @include mq($until: medium) {
-      margin-top: $spacing-09;
+    @include carbon.breakpoint-down(md) {
+      margin-top: carbon.$spacing-09;
     }
   }
 
   ::v-deep &__results-item {
-    margin-bottom: $spacing-06;
+    margin-bottom: carbon.$spacing-06;
 
-    @include mq($until: large) {
-      margin-bottom: $spacing-05;
+    @include carbon.breakpoint-down(lg) {
+      margin-bottom: carbon.$spacing-05;
     }
 
-    @include mq($from: x-large) {
+    @include carbon.breakpoint-up(xlg) {
       height: calc(100% - #{$spacing-06});
     }
   }

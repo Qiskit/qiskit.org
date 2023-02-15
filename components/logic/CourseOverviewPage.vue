@@ -34,15 +34,15 @@
   </main>
 </template>
 
-<script lang="ts">
-import { Component } from 'vue-property-decorator'
+<script setup lang="ts">
 import QiskitPage from './QiskitPage.vue'
 import { GeneralLink } from '~/constants/appLinks'
 import { Course, Prerequisite } from '~/constants/learnContent'
 
-@Component({
-  layout: 'default-max'
-})
+definePageMeta({
+  layout: "default-max",
+});
+
 export default abstract class CourseOverviewPage extends QiskitPage {
   abstract routeName: string
 
@@ -75,13 +75,15 @@ export default abstract class CourseOverviewPage extends QiskitPage {
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
+
 .course-overview-page {
   &__section {
     @include contained();
 
     max-width: $max-size;
-    margin-bottom: $spacing-07;
-    margin-top: $spacing-10;
+    margin-bottom: carbon.$spacing-07;
+    margin-top: carbon.$spacing-10;
 
     ::v-deep .course-pages-section__main {
       min-height: 20rem;

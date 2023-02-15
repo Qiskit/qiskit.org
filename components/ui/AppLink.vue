@@ -1,11 +1,11 @@
 <template>
-  <BasicLink
+  <UiBasicLink
     class="app-link"
     :class="`app-link_${kind}`"
     v-bind="$attrs"
   >
     <slot />
-  </BasicLink>
+  </UiBasicLink>
 </template>
 
 <script setup lang="ts">
@@ -19,6 +19,8 @@ withDefaults(defineProps<Props>(), {
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/helpers/index.scss" as qiskit;
+
 .app-link {
   // &_none is intentionally not resolved
 
@@ -28,31 +30,31 @@ withDefaults(defineProps<Props>(), {
   }
 
   &_primary {
-    color: $link-color;
+    color: qiskit.$link-color;
 
     &:hover,
     &:focus,
     &:active {
-      color: $link-hover-color;
+      color: qiskit.$link-hover-color;
     }
 
     &:visited {
-      color: $link-visited-color;
+      color: qiskit.$link-visited-color;
     }
   }
 
   &_secondary {
-    color: $link-color-secondary;
+    color: qiskit.$link-color-secondary;
 
     &:hover,
     &:focus,
     &:active {
-      color: $link-hover-color-secondary;
+      color: qiskit.$link-hover-color-secondary;
       text-decoration: underline;
     }
 
     &:visited {
-      color: $link-visited-color-secondary;
+      color: qiskit.$link-visited-color-secondary;
     }
   }
 

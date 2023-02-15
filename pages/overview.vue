@@ -62,8 +62,7 @@ import {
 import { useScrollBetweenSections } from '~/composables/useScrollBetweenSections';
 
 definePageMeta({
-  // TODO: Integrate layout
-  // layout: "default-max",
+  layout: "default-max",
 });
 
 useHead({
@@ -100,16 +99,16 @@ const quickStartLink = {
 // .overview-page {
 //   &__table-of-contents {
 //     position: sticky;
-//     top: $spacing-06;
+//     top: carbon.$spacing-06;
 //   }
 
 //   &__content-section {
-//     margin-bottom: $spacing-10;
+//     margin-bottom: carbon.$spacing-10;
 //     overflow: hidden;
 //   }
 
 //   &__content-section-details {
-//     background-color: $background-color-lighter;
+//     background-color: qiskit.$background-color-lighter;
 //     height: 100%;
 //   }
 

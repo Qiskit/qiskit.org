@@ -18,7 +18,7 @@
   display: flex;
   height: 28rem;
 
-  @include mq($until: large) {
+  @include carbon.breakpoint-down(lg) {
     height: 17.5rem;
   }
 

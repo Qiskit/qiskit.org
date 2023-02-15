@@ -46,12 +46,15 @@ const qiskitPronunciation = Math.random() < 0.5 ? '[kiss-kit]' : '[quiss-kit]'
 </script>
 
 <style lang="scss">
+@use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/index.scss" as qiskit;
+
 .the-hero-moment {
   height: calc(#{math.div(56rem * 40, 64)} + 2px);
   position: relative;
   overflow: hidden;
 
-  @include mq($from: large) {
+  @include carbon.breakpoint-up(lg) {
     // In Figma, the height is not enforced but the background is always
     // visible completely so we do it in the CSS. A small correction is needed
     // to be able of displaying the bottom lines of the grid.
@@ -61,7 +64,7 @@ const qiskitPronunciation = Math.random() < 0.5 ? '[kiss-kit]' : '[quiss-kit]'
   &__square-link {
     width: 4rem;
     height: 4rem;
-    background-color: $background-color-black;
+    background-color: qiskit.$background-color-black;
     position: absolute;
     top: 21%;
     left: 43%;
@@ -73,53 +76,53 @@ const qiskitPronunciation = Math.random() < 0.5 ? '[kiss-kit]' : '[quiss-kit]'
     background-repeat: no-repeat;
     background-size: contain;
     height: 100%;
-    padding-top: $spacing-10;
+    padding-top: carbon.$spacing-10;
     pointer-events: none;
 
-    @include mq($until: medium) {
+    @include carbon.breakpoint-down(md) {
       background-image: none;
     }
   }
 
   &__version-info {
-    margin-bottom: $spacing-06;
+    margin-bottom: carbon.$spacing-06;
 
-    @include mq($from: medium) {
-      margin-bottom: $spacing-07;
+    @include carbon.breakpoint-up(md) {
+      margin-bottom: carbon.$spacing-07;
     }
 
-    @include mq($from: large) {
-      margin-bottom: $spacing-11;
+    @include carbon.breakpoint-up(lg) {
+      margin-bottom: carbon.$spacing-11;
     }
   }
 
   &__title {
-    margin-bottom: $spacing-06;
+    margin-bottom: carbon.$spacing-06;
     // TODO: Force pointer events to allow the user to select text. Remove
     // when decomissioning the Metal page.
     pointer-events: auto;
 
-    @include mq($from: medium) {
-      margin-bottom: $spacing-07;
+    @include carbon.breakpoint-up(md) {
+      margin-bottom: carbon.$spacing-07;
     }
 
-    @include mq($from: large) {
-      margin-bottom: $spacing-11;
+    @include carbon.breakpoint-up(lg) {
+      margin-bottom: carbon.$spacing-11;
     }
   }
 
   &__description {
-    margin-bottom: $spacing-06;
+    margin-bottom: carbon.$spacing-06;
     // TODO: Force pointer events to allow the user to select text. Remove
     // when decomissioning the Metal page.
     pointer-events: auto;
 
-    @include mq($from: medium) {
-      margin-bottom: $spacing-07;
+    @include carbon.breakpoint-up(md) {
+      margin-bottom: carbon.$spacing-07;
     }
 
-    @include mq($from: large) {
-      margin-bottom: $spacing-11;
+    @include carbon.breakpoint-up(lg) {
+      margin-bottom: carbon.$spacing-11;
     }
   }
 

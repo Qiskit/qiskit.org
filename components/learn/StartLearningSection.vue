@@ -438,54 +438,59 @@ const teachingSections: TeachingSection[] = [
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
+
 .start-learning-section {
   &__subtitle {
-    margin-bottom: $spacing-05;
+    margin-bottom: carbon.$spacing-05;
   }
 
   &__card {
-    margin-bottom: $spacing-06;
+    margin-bottom: carbon.$spacing-06;
 
-    @include mq($until: large) {
-      margin-bottom: $spacing-05;
+    @include carbon.breakpoint-down(lg) {
+      margin-bottom: carbon.$spacing-05;
     }
 
-    @include mq($from: x-large) {
+    @include carbon.breakpoint-up(xlg) {
       height: calc(100% - #{$spacing-06});
     }
   }
 
   &__teach-section-cta {
-    margin-top: $spacing-09;
+    margin-top: carbon.$spacing-09;
   }
 }
 </style>
 
 <style lang="scss">
+@use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/index.scss" as qiskit;
+
   .start-learning-section {
     .cv-tab.bx--tabs--scrollable {
       display: flex;
       justify-content: flex-end;
-      padding-bottom: $spacing-09;
+      padding-bottom: carbon.$spacing-09;
 
-      @include mq($until: medium) {
+      @include carbon.breakpoint-down(md) {
         justify-content: flex-start;
       }
     }
 
     .cv-tabs {
-      padding-bottom: $spacing-05;
+      padding-bottom: carbon.$spacing-05;
     }
 
     .cv-tabs__panels {
-      @include mq($until: medium) {
-        padding-top: $spacing-09;
+      @include carbon.breakpoint-down(md) {
+        padding-top: carbon.$spacing-09;
       }
     }
 
     & .bx--tabs--scrollable__nav-item {
       &--selected:not(.bx--tabs--scrollable__nav-item--disabled) .bx--tabs--scrollable__nav-link {
-        border-bottom-color: $border-color-secondary;
+        border-bottom-color: qiskit.$border-color-secondary;
       }
     }
   }

@@ -4,13 +4,13 @@
     <!-- <qiskit-banner>
       <div class="content">
         Miss the old version of the textbook? Access it
-        <AppLink
+        <UiAppLink
           class="link"
           :segment="{ action: `${routeName} > banner > old-textbook-version` }"
           url="https://qiskit.org/textbook"
         >
           here
-        </AppLink>
+        </UiAppLink>
       </div>
     </qiskit-banner> -->
     <!-- <LearnHeader /> -->
@@ -30,8 +30,7 @@
 // import { SOCIAL_MEDIA } from "~/constants/menuLinks";
 
 definePageMeta({
-  // TODO: Integrate layout
-  // layout: "default-max",
+  layout: "default-max",
 });
 
 useHead({
@@ -98,8 +97,8 @@ useHead({
 //     @include contained();
 
 //     max-width: $max-size;
-//     margin-bottom: $spacing-07;
-//     margin-top: $spacing-10;
+//     margin-bottom: carbon.$spacing-07;
+//     margin-top: carbon.$spacing-10;
 //   }
 
 //   qiskit-banner {
@@ -107,17 +106,17 @@ useHead({
 //       @include contained();
 
 //       max-width: $max-size;
-//       padding: $spacing-04 $spacing-06;
+//       padding: carbon.$spacing-04 carbon.$spacing-06;
 //       display: flex;
 //       flex: 1;
 
-//       @include mq($until: medium) {
+//       @include carbon.breakpoint-down(md) {
 //         display: block;
 //       }
 //     }
 
 //     .link {
-//       color: $text-color-white;
+//       color: qiskit.$text-color-white;
 //       text-decoration: underline;
 //       margin-left: 4px;
 
@@ -126,7 +125,7 @@ useHead({
 //         color: currentColor;
 //       }
 
-//       @include mq($until: medium) {
+//       @include carbon.breakpoint-down(md) {
 //         margin-left: 2px;
 //       }
 //     }

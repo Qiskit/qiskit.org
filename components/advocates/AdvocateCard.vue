@@ -11,9 +11,9 @@
     </div>
     <div class="advocate-card__contact">
       <LogoSlack20 class="advocate-card__icon" />
-      <AppLink :url="`https://qiskit.slack.com/team/${slackId}`">
+      <UiAppLink :url="`https://qiskit.slack.com/team/${slackId}`">
         @{{ slackUsername }}
-      </AppLink>
+      </UiAppLink>
     </div>
   </AppCard>
 </template>
@@ -44,11 +44,13 @@ const location = computed(() => [props.city, props.country].filter(e => !!e).joi
 </script>
 
 <style lang="scss" scoped>
-.advocate-card {
-  margin-bottom: $spacing-06;
+@use "~/assets/scss/carbon.scss";
 
-  @include mq($until: large) {
-    margin-bottom: $spacing-05;
+.advocate-card {
+  margin-bottom: carbon.$spacing-06;
+
+  @include carbon.breakpoint-down(lg) {
+    margin-bottom: carbon.$spacing-05;
   }
 
   &__location, &__contact {
@@ -57,11 +59,11 @@ const location = computed(() => [props.city, props.country].filter(e => !!e).joi
   }
 
   &__location {
-    margin-bottom: $spacing-03;
+    margin-bottom: carbon.$spacing-03;
   }
 
   &__icon {
-    margin-right: $spacing-03;
+    margin-right: carbon.$spacing-03;
     fill: currentColor;
   }
 }
@@ -70,7 +72,7 @@ const location = computed(() => [props.city, props.country].filter(e => !!e).joi
 <style lang="scss">
 .advocate-card {
 
-  @include mq($until: medium) {
+  @include carbon.breakpoint-down(md) {
     .app-card__image {
       background-size: contain;
     }

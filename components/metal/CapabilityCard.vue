@@ -48,50 +48,52 @@ const isVideo = computed<boolean>(() => {
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
+
 .capability-card {
   display: flex;
   min-height: 20rem;
 
-  @include mq($until: medium) {
+  @include carbon.breakpoint-down(md) {
     flex-direction: column;
   }
 
   &__container {
     display: flex;
     flex: 1;
-    padding-right: $spacing-07;
+    padding-right: carbon.$spacing-07;
 
-    @include mq($until: large) {
+    @include carbon.breakpoint-down(lg) {
       flex-direction: column;
     }
   }
 
   &__title {
     flex: 0 0 12rem;
-    padding-right: $spacing-07;
+    padding-right: carbon.$spacing-07;
 
-    @include mq($until: large) {
+    @include carbon.breakpoint-down(lg) {
       flex: 0 0 auto;
       padding-right: 0;
-      padding-bottom: $spacing-07;
+      padding-bottom: carbon.$spacing-07;
     }
 
-    @include mq($until: medium) {
+    @include carbon.breakpoint-down(md) {
       padding-bottom: 0;
-      margin-bottom: $spacing-05;
+      margin-bottom: carbon.$spacing-05;
     }
   }
 
   &__description {
     flex: 1;
 
-    @include mq($until: large) {
-      padding-bottom: $spacing-05;
+    @include carbon.breakpoint-down(lg) {
+      padding-bottom: carbon.$spacing-05;
     }
 
-    @include mq($until: medium) {
+    @include carbon.breakpoint-down(md) {
       padding-bottom: 0;
-      margin-bottom: $spacing-05;
+      margin-bottom: carbon.$spacing-05;
     }
   }
 
@@ -103,15 +105,15 @@ const isVideo = computed<boolean>(() => {
     background-position: center top;
     background-repeat: no-repeat;
 
-    @include mq($from: medium, $until: large) {
+    @include carbon.breakpoint-between(md, lg) {
       flex: 1.5;
     }
 
-    @include mq($from: medium) {
+    @include carbon.breakpoint-up(md) {
       display: none;
     }
 
-    @include mq($until: medium) {
+    @include carbon.breakpoint-down(md) {
       flex: 0 0 16rem;
       margin: 0;
     }

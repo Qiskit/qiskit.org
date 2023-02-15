@@ -1,5 +1,5 @@
 <template>
-  <BasicLink
+  <UiBasicLink
     ref="link"
     class="app-cta"
     :class="[
@@ -18,11 +18,11 @@
       class="app-cta__icon"
       :class="`app-cta__icon_${iconPerLinkType}`"
     />
-  </BasicLink>
+  </UiBasicLink>
 </template>
 
 <script setup lang="ts">
-import BasicLink from '~/components/ui/BasicLink.vue'
+import UiBasicLink from '~/components/ui/UiBasicLink.vue'
 
 interface Props {
   isWider?: boolean
@@ -42,13 +42,16 @@ const iconPerLinkType = computed(() => {
   const url = this.$attrs.url
 
   if (props.label === 'Under construction') { return 'error-outline-16' }
-  if (BasicLink.isExternal(url)) { return 'launch-16' }
-  if (BasicLink.isIdAnchor(url)) { return 'arrow-down-16' }
+  if (UiBasicLink.isExternal(url)) { return 'launch-16' }
+  if (UiBasicLink.isIdAnchor(url)) { return 'arrow-down-16' }
   return 'arrow-right-16'
 })
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/index.scss" as qiskit;
+
 @mixin bicolor-background($colorLeft, $colorRight) {
     background-image: linear-gradient(90deg, $colorLeft 0%, $colorLeft 50%, $colorRight 50%, $colorRight 100%);
 }
@@ -58,14 +61,14 @@ const iconPerLinkType = computed(() => {
   justify-content: space-between;
   text-decoration: none;
   align-items: center;
-  padding: $spacing-05;
+  padding: carbon.$spacing-05;
   width: 4 * $column-size-large;
   max-width: 100%;
 
-  @include mq($from: medium, $until: large) {
+  @include carbon.breakpoint-between(md, lg) {
     width: 3 * $column-size-medium;
   }
-  @include mq($until: medium) {
+  @include carbon.breakpoint-down(md) {
     width: 100%;
   }
 
@@ -82,9 +85,9 @@ const iconPerLinkType = computed(() => {
   */
   &,
   &_primary {
-    @include bicolor-background($button-background-color-dark, $button-background-color);
+    @include bicolor-background(qiskit.$button-background-color-dark, qiskit.$button-background-color);
 
-    color: $button-text-color;
+    color: qiskit.$button-text-color;
   }
 
   &:hover,
@@ -94,20 +97,20 @@ const iconPerLinkType = computed(() => {
   }
 
   &_secondary {
-    @include bicolor-background($button-background-color-secondary-dark, $button-background-color-secondary);
+    @include bicolor-background(qiskit.$button-background-color-secondary-dark, qiskit.$button-background-color-secondary);
 
-    color: $button-text-color-secondary;
+    color: qiskit.$button-text-color-secondary;
 
     &:hover,
     &:focus,
     &:active {
-      color: $button-active-text-color-secondary;
+      color: qiskit.$button-active-text-color-secondary;
     }
 
     &_theme_dark {
-      @include bicolor-background($button-background-color-tertiary-dark, $button-background-color-tertiary);
+      @include bicolor-background(qiskit.$button-background-color-tertiary-dark, qiskit.$button-background-color-tertiary);
 
-      color: $button-text-color-tertiary;
+      color: qiskit.$button-text-color-tertiary;
     }
   }
 
@@ -117,21 +120,21 @@ const iconPerLinkType = computed(() => {
     justify-content: flex-start;
     align-items: flex-start;
     background-image: none;
-    color: $link-color-tertiary;
+    color: qiskit.$link-color-tertiary;
 
     &:hover,
     &:focus,
     &:active {
-      color: $link-hover-color-tertiary;
+      color: qiskit.$link-hover-color-tertiary;
     }
 
     &_theme_dark {
-      color: $link-color-quaternary;
+      color: qiskit.$link-color-quaternary;
 
       &:hover,
       &:focus,
       &:active {
-        color: $link-hover-color-quaternary;
+        color: qiskit.$link-hover-color-quaternary;
       }
     }
   }
@@ -145,11 +148,11 @@ const iconPerLinkType = computed(() => {
 
   &__icon {
     fill: currentColor;
-    margin-left: $spacing-05;
+    margin-left: carbon.$spacing-05;
     overflow: visible;
 
     &_arrow-right-16 {
-      margin-right: $spacing-02;
+      margin-right: carbon.$spacing-02;
     }
 
     &#{$arrow-right_path},
@@ -161,7 +164,7 @@ const iconPerLinkType = computed(() => {
   }
 
   &_ghost &__icon {
-    margin-top: $spacing-01;
+    margin-top: carbon.$spacing-01;
   }
 
   &:hover &__icon,

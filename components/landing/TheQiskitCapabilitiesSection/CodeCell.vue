@@ -40,32 +40,35 @@ withDefaults(defineProps<Props>(), {
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/index.scss" as qiskit;
+
 .code-cell {
   display: block;
-  background-color: $background-color-lighter;
-  color: $text-color;
-  padding: $spacing-05 0;
+  background-color: qiskit.$background-color-lighter;
+  color: qiskit.$text-color;
+  padding: carbon.$spacing-05 0;
 
   &__block {
     opacity: 0.4;
     border-left: 0.125rem solid transparent;
-    padding: $spacing-04 $spacing-05;
+    padding: carbon.$spacing-04 carbon.$spacing-05;
     margin: -$spacing-03 0;
     transition: all 0.2s ease-in;
 
     &_active {
       opacity: 1;
-      border-color: $border-active-color;
+      border-color: qiskit.$border-active-color;
     }
 
-    @include mq($until: medium) {
+    @include carbon.breakpoint-down(md) {
       border-color: transparent;
     }
   }
 
   &__comment,
   &__string {
-    color: $text-active-color;
+    color: qiskit.$text-active-color;
   }
 
   &__line {

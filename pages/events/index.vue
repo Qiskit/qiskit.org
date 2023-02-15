@@ -83,9 +83,9 @@
               !-- eslint-disable-next-line vue/singleline-html-element-content-newline --
               Stay up to date with all of our scheduled events by following our
               calendar. You can view the calendar by visiting
-              <AppLink v-bind="qiskitCalendarLink">{{
+              <UiAppLink v-bind="qiskitCalendarLink">{{
                 qiskitCalendarLink.label
-              }}</AppLink
+              }}</UiAppLink
               >, or subscribe to it by adding to the calendar app of your
               choice.
             </p>
@@ -144,8 +144,7 @@
 // import { EVENT_REQUEST_LINK, GeneralLink } from '~/constants/appLinks'
 
 definePageMeta({
-  // TODO: Integrate layout
-  // layout: "default-max",
+  layout: "default-max",
 });
 
 useHead({
@@ -322,19 +321,19 @@ useHead({
 
 // .event-page {
 //   &__tabs {
-//     margin-top: $spacing-07;
-//     margin-bottom: $spacing-09;
+//     margin-top: carbon.$spacing-07;
+//     margin-bottom: carbon.$spacing-09;
 
 //     .bx--tabs--scrollable__nav-link {
 //       color: $black-100;
-//       border-bottom-color: $border-color;
+//       border-bottom-color: qiskit.$border-color;
 //     }
 
 //     .bx--tabs--scrollable__nav-item--selected:not(
 //         .bx--tabs--scrollable__nav-item--disabled
 //       )
 //       .bx--tabs--scrollable__nav-link {
-//       border-bottom-color: $border-color-secondary;
+//       border-bottom-color: qiskit.$border-color-secondary;
 //     }
 
 //     .bx--tabs--scrollable__nav-item:not(
@@ -345,18 +344,18 @@ useHead({
 //         .bx--tabs--scrollable__nav-item--selected
 //       ):not(.bx--tabs--scrollable__nav-item--disabled)
 //       .bx--tabs--scrollable__nav-link {
-//       color: $text-color;
+//       color: qiskit.$text-color;
 //     }
 
-//     @include mq($until: medium) {
+//     @include carbon.breakpoint-down(md) {
 //       margin-bottom: 0;
 
 //       .bx--tabs-trigger {
-//         background-color: $background-color-white;
-//         border-bottom: 1px solid $border-color;
+//         background-color: qiskit.$background-color-white;
+//         border-bottom: 1px solid qiskit.$border-color;
 
 //         &[class*="--open"] {
-//           background-color: $background-color-lighter;
+//           background-color: qiskit.$background-color-lighter;
 //         }
 //       }
 
@@ -365,16 +364,16 @@ useHead({
 //       }
 
 //       .bx--tabs-trigger-text {
-//         color: $text-color;
+//         color: qiskit.$text-color;
 //       }
 
 //       .bx--tabs-trigger--open {
-//         border-bottom: 1px solid $border-color-quaternary;
+//         border-bottom: 1px solid qiskit.$border-color-quaternary;
 //       }
 
 //       .bx--tabs-trigger--open,
 //       .bx--tabs--scrollable__nav-item {
-//         background-color: $background-color-lighter;
+//         background-color: qiskit.$background-color-lighter;
 //       }
 
 //       .bx--tabs--scrollable__nav-item:last-child
@@ -385,46 +384,46 @@ useHead({
 //       .bx--tabs--scrollable__nav-item:hover:not(
 //           .bx--tabs--scrollable__nav-item--selected
 //         ):not(.bx--tabs--scrollable__nav-item--disabled) {
-//         background-color: $background-color-light;
+//         background-color: qiskit.$background-color-light;
 //       }
 //     }
 //   }
 
 //   &__main-content {
-//     @include mq($until: medium) {
-//       margin-top: $spacing-09;
+//     @include carbon.breakpoint-down(md) {
+//       margin-top: carbon.$spacing-09;
 //     }
 //   }
 
 //   &__empty-card-description {
 //     height: 8rem;
 
-//     @include mq($until: medium) {
+//     @include carbon.breakpoint-down(md) {
 //       height: auto;
 //     }
 //   }
 
 //   &__section {
-//     margin-top: $spacing-10;
-//     margin-bottom: $spacing-10;
+//     margin-top: carbon.$spacing-10;
+//     margin-bottom: carbon.$spacing-10;
 
 //     &__description {
-//       margin-top: $spacing-06;
-//       margin-bottom: $spacing-07;
+//       margin-top: carbon.$spacing-06;
+//       margin-bottom: carbon.$spacing-07;
 //       max-width: 20rem;
 
-//       @include mq($from: large) {
+//       @include carbon.breakpoint-up(lg) {
 //         max-width: 24rem;
 //       }
 //     }
 //   }
 
 //   &__tab {
-//     padding-top: $spacing-06;
+//     padding-top: carbon.$spacing-06;
 //   }
 
 //   &__instructions {
-//     padding-left: $spacing-06;
+//     padding-left: carbon.$spacing-06;
 //   }
 // }
 </style>

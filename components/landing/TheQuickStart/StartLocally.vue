@@ -3,17 +3,17 @@
     <h3>Start locally</h3>
     <p class="start-locally__introduction">
       To install Qiskit locally, you will need
-      <AppLink
+      <UiAppLink
         url="https://www.python.org/downloads/"
       >
         Python 3.7+.
-      </AppLink>
+      </UiAppLink>
       Although it is not required, we recommend using a
-      <AppLink
+      <UiAppLink
         url="https://www.anaconda.com/products/individual"
       >
         virtual environment with Anaconda.
-      </AppLink>
+      </UiAppLink>
     </p>
     <div class="start-locally__options">
       <div
@@ -159,32 +159,35 @@ function selectOption (choicesGroup: ChoicesGroup, selectedOption: string) {
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/index.scss" as qiskit;
+
 .bx--btn-set .bx--btn:not(:focus) {
   box-shadow: none;
 }
 
 .start-locally {
-  @include mq($until: medium) {
-    margin-bottom: $spacing-09;
+  @include carbon.breakpoint-down(md) {
+    margin-bottom: carbon.$spacing-09;
   }
 
   &__introduction {
-    margin-bottom: $spacing-08;
+    margin-bottom: carbon.$spacing-08;
 
-    @include mq($from: large) {
+    @include carbon.breakpoint-up(lg) {
       $grid-columns: math.div(9, 10); // Number of columns that the element will use at this breakpoint.
 
       max-width: 100% * $grid-columns;
-      padding-right: $spacing-05;
+      padding-right: carbon.$spacing-05;
     }
 
-    @include mq($from: x-large) {
+    @include carbon.breakpoint-up(xlg) {
       $grid-columns: math.div(7, 11); // Number of columns that the element will use at this breakpoint.
 
       max-width: 100% * $grid-columns;
     }
 
-    @include mq($from: max-size) {
+    @include carbon.breakpoint-up(max) {
       $grid-columns: math.div(6, 12); // Number of columns that the element will use at this breakpoint.
 
       max-width: 100% * $grid-columns;
@@ -198,30 +201,30 @@ function selectOption (choicesGroup: ChoicesGroup, selectedOption: string) {
 
   &__options-group {
     display: grid;
-    column-gap: $spacing-07;
+    column-gap: carbon.$spacing-07;
     grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
 
-    @include mq($until: large) {
-      column-gap: $spacing-05;
+    @include carbon.breakpoint-down(lg) {
+      column-gap: carbon.$spacing-05;
     }
   }
 
   &__option {
-    background-color: $background-color-lighter;
+    background-color: qiskit.$background-color-lighter;
     max-width: 100%;
-    color: $text-color-light;
-    padding-left: $spacing-07;
-    margin-bottom: $spacing-07;
+    color: qiskit.$text-color-light;
+    padding-left: carbon.$spacing-07;
+    margin-bottom: carbon.$spacing-07;
 
-    @include mq($until: large) {
-      padding-left: $spacing-05;
-      margin-bottom: $spacing-05;
+    @include carbon.breakpoint-down(lg) {
+      padding-left: carbon.$spacing-05;
+      margin-bottom: carbon.$spacing-05;
     }
 
     &_active {
-      border-color: $border-active-color;
+      border-color: qiskit.$border-active-color;
       border-width: 2px;
-      color: $text-active-color;
+      color: qiskit.$text-active-color;
     }
   }
 }
@@ -240,11 +243,11 @@ function selectOption (choicesGroup: ChoicesGroup, selectedOption: string) {
    * and CSS specificity to override the internal CSS.
    */
   &__prerequisites-section {
-    margin-bottom: $spacing-05;
+    margin-bottom: carbon.$spacing-05;
 
     & .bx--accordion__item {
       border-bottom: none;
-      border-top-color: $border-color;
+      border-top-color: qiskit.$border-color;
     }
 
     & .bx--accordion__heading {

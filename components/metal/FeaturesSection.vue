@@ -28,40 +28,43 @@ const metalFeatures = METAL_FEATURES
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/index.scss" as qiskit;
+
 .features-section {
-  background-color: $background-color-dark;
+  background-color: qiskit.$background-color-dark;
 
   &__container {
     @include contained();
 
-    padding-top: $spacing-10;
-    padding-bottom: $spacing-12;
+    padding-top: carbon.$spacing-10;
+    padding-bottom: carbon.$spacing-12;
 
-    @include mq($until: medium) {
-      padding-top: $spacing-06;
-      padding-bottom: $spacing-06;
+    @include carbon.breakpoint-down(md) {
+      padding-top: carbon.$spacing-06;
+      padding-bottom: carbon.$spacing-06;
     }
   }
 
   &__description {
     max-width: 9 * $column-size-large;
-    margin-bottom: $spacing-12;
+    margin-bottom: carbon.$spacing-12;
 
-    @include mq($until: large) {
-      margin-bottom: $spacing-07;
+    @include carbon.breakpoint-down(lg) {
+      margin-bottom: carbon.$spacing-07;
     }
 
-    @include mq($from: medium, $until: large) {
+    @include carbon.breakpoint-between(md, lg) {
       max-width: 6 * $column-size-medium;
     }
 
-    @include mq($until: medium) {
+    @include carbon.breakpoint-down(md) {
       width: 100%;
     }
   }
 
   &__card {
-    margin-top: $spacing-09;
+    margin-top: carbon.$spacing-09;
   }
 }
 </style>

@@ -1,27 +1,27 @@
 <template>
   <div class="qiskit-version-info">
-    <AppLink v-bind="githubRepoLink">
+    <UiAppLink v-bind="githubRepoLink">
       <LogoGitHub32 class="qiskit-version-info__github-icon" />
-    </AppLink>
+    </UiAppLink>
     <div class="qiskit-version-info__content">
       <div class="qiskit-version-info__version-string">
-        <AppLink
+        <UiAppLink
           class="code"
           kind="secondary"
           v-bind="githubRepoLink"
         >
           qiskit {{ version }}
-        </AppLink>
+        </UiAppLink>
       </div>
       <div class="qiskit-version-info__release-notes">
-        <AppLink
+        <UiAppLink
           class="code"
           v-bind="githubRepoLink"
           url="https://qiskit.org/documentation/release_notes.html#notable-changes"
           :segment="{ cta: 'release-notes', location: 'version-info' }"
         >
           see release notes
-        </AppLink>
+        </UiAppLink>
       </div>
     </div>
   </div>
@@ -40,6 +40,9 @@ const githubRepoLink = GITHUB_REPOSITORY
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/index.scss" as qiskit;
+
 .qiskit-version-info {
   display: flex;
   flex-direction: row;
@@ -57,15 +60,15 @@ const githubRepoLink = GITHUB_REPOSITORY
   }
 
   &__github-icon {
-    fill: $link-color-tertiary;
-    margin-right: $spacing-07;
+    fill: qiskit.$link-color-tertiary;
+    margin-right: carbon.$spacing-07;
 
-    @include mq($from: medium, $until: large) {
-      margin-right: $spacing-05;
+    @include carbon.breakpoint-between(md, lg) {
+      margin-right: carbon.$spacing-05;
     }
 
-    @include mq($until: medium) {
-      margin-right: $spacing-03;
+    @include carbon.breakpoint-down(md) {
+      margin-right: carbon.$spacing-03;
     }
   }
 
@@ -76,7 +79,7 @@ const githubRepoLink = GITHUB_REPOSITORY
 
   &__version-string {
     text-decoration: none;
-    margin-bottom: $spacing-01;
+    margin-bottom: carbon.$spacing-01;
   }
 }
 </style>

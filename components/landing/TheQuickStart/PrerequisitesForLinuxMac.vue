@@ -5,11 +5,11 @@
       <pre class="code prerequisites__code">curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh</pre>
 
       <p>
-        See <AppLink v-bind="rustupLink">
+        See <UiAppLink v-bind="rustupLink">
           {{ rustupLink.label }}
-        </AppLink>
+        </UiAppLink>
         <!-- eslint-disable-next-line vue/singleline-html-element-content-newline -->
-        for more information and details on <AppLink v-bind="rustLangInstallLink">{{ rustLangInstallLink.label }}</AppLink>.
+        for more information and details on <UiAppLink v-bind="rustLangInstallLink">{{ rustLangInstallLink.label }}</UiAppLink>.
       </p>
     </div>
   </div>

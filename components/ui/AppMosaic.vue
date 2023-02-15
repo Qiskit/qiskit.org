@@ -19,13 +19,13 @@
             v-html="description"
           />
           <!-- estlint-enable -->
-          <AppLink
+          <UiAppLink
             v-if="cta"
             v-bind="cta"
             class="app-mosaic__element-copy-link"
           >
             {{ cta.label }}
-          </AppLink>
+          </UiAppLink>
         </div>
         <div
           v-if="image"
@@ -57,10 +57,13 @@ defineProps<Props>()
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/index.scss" as qiskit;
+
 .app-mosaic {
   &__layout {
     display: grid;
-    gap: $spacing-07;
+    gap: carbon.$spacing-07;
     grid-template-columns: 2.5fr 4fr 3fr;
     grid-template-rows: 29.5rem minmax(16rem, auto);
     grid-template-areas:
@@ -69,7 +72,7 @@ defineProps<Props>()
     ;
     justify-items: stretch;
 
-    @include mq($from: medium, $until: large) {
+    @include carbon.breakpoint-between(md, lg) {
       grid-template-columns: 1fr 1fr;
       grid-template-rows: minmax(26rem, auto) minmax(12rem, auto) minmax(12rem, auto);
       grid-template-areas:
@@ -79,7 +82,7 @@ defineProps<Props>()
       ;
     }
 
-    @include mq($until: medium) {
+    @include carbon.breakpoint-down(md) {
       grid-template-columns: 1fr;
       grid-template-rows: repeat(4, minmax(18.75rem, auto));
       grid-template-areas:
@@ -92,7 +95,7 @@ defineProps<Props>()
   }
 
   &__element {
-    background-color: $background-color-lighter;
+    background-color: qiskit.$background-color-lighter;
     display: flex;
 
     &_first {
@@ -109,11 +112,11 @@ defineProps<Props>()
       grid-area: c;
       flex-direction: column;
 
-      @include mq($from: medium, $until: large) {
+      @include carbon.breakpoint-between(md, lg) {
         flex-direction: row-reverse;
       }
 
-      @include mq($until: medium) {
+      @include carbon.breakpoint-down(md) {
         flex-direction: column-reverse;
       }
     }
@@ -122,7 +125,7 @@ defineProps<Props>()
       grid-area: d;
       flex-direction: row;
 
-      @include mq($until: medium) {
+      @include carbon.breakpoint-down(md) {
         flex-direction: column;
       }
     }
@@ -141,7 +144,7 @@ defineProps<Props>()
         background-size: cover;
         background-repeat: no-repeat;
 
-        @include mq($until: large) {
+        @include carbon.breakpoint-down(lg) {
           min-height: 12rem;
         }
       }
@@ -151,7 +154,7 @@ defineProps<Props>()
         background-size: cover;
         background-repeat: no-repeat;
 
-        @include mq($until: medium) {
+        @include carbon.breakpoint-down(md) {
           min-height: 12rem;
         }
       }
@@ -164,10 +167,10 @@ defineProps<Props>()
     }
 
     &-copy {
-      padding: $spacing-07;
+      padding: carbon.$spacing-07;
 
-      @include mq($until: large) {
-        padding: $spacing-05;
+      @include carbon.breakpoint-down(lg) {
+        padding: carbon.$spacing-05;
 
         &_third, &_fourth {
           flex: 1 0 0;
@@ -181,13 +184,13 @@ defineProps<Props>()
       &-description {
         ::v-deep li {
           list-style-type: disc;
-          margin-left: $spacing-06;
+          margin-left: carbon.$spacing-06;
         }
       }
 
       &-link {
         display: flex;
-        margin-top: $spacing-05;
+        margin-top: carbon.$spacing-05;
       }
     }
   }

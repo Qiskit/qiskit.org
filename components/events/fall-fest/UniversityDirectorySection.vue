@@ -370,23 +370,25 @@ const universities: University[] = [
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
+
 .university-directory-section {
   &__subtitle {
-    margin-bottom: $spacing-05;
+    margin-bottom: carbon.$spacing-05;
   }
 
   &__section {
-    margin-bottom: $spacing-07;
+    margin-bottom: carbon.$spacing-07;
   }
 
   &__card {
-    margin-bottom: $spacing-06;
+    margin-bottom: carbon.$spacing-06;
 
-    @include mq($until: large) {
-      margin-bottom: $spacing-05;
+    @include carbon.breakpoint-down(lg) {
+      margin-bottom: carbon.$spacing-05;
     }
 
-    @include mq($from: x-large) {
+    @include carbon.breakpoint-up(xlg) {
       height: calc(100% - #{$spacing-06});
     }
   }

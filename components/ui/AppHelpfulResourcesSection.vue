@@ -26,10 +26,12 @@ withDefaults(defineProps<Props>(), {
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
+
 .app-helpful-resources-section {
   &__card {
-    @include mq($until: large) {
-      margin-bottom: $spacing-07;
+    @include carbon.breakpoint-down(lg) {
+      margin-bottom: carbon.$spacing-07;
     }
   }
 }

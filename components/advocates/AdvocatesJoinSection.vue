@@ -53,23 +53,24 @@ const joinAction: GeneralLink = {
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
 @import '~carbon-components/scss/globals/scss/typography';
 
 .join-section {
   &__feature {
-    @include mq($until: large) {
-      margin-bottom: $spacing-07;
+    @include carbon.breakpoint-down(lg) {
+      margin-bottom: carbon.$spacing-07;
     }
 
-    @include mq($from: medium) {
+    @include carbon.breakpoint-up(md) {
       height: 14rem;
     }
 
-    @include mq($from: large) {
+    @include carbon.breakpoint-up(lg) {
       height: 16.5rem;
     }
 
-    @include mq($from: x-large) {
+    @include carbon.breakpoint-up(xlg) {
       height: 14rem;
     }
   }

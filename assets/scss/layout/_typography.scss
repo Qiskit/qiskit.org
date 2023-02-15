@@ -1,3 +1,4 @@
+@use "~/assets/scss/carbon.scss";
 //TODO: Review imports
 @import "~/node_modules/@carbon/type/scss/font-family";
 @import "~/node_modules/@carbon/type/scss/scale";
@@ -19,7 +20,7 @@ p,
 .p {
   @include carbon--type-style("body-long-01");
   
-  margin-bottom: $spacing-05;
+  margin-bottom: carbon.$spacing-05;
 }
 
 // Based on Carbon's "expressive-heading-05" but not fluid
@@ -28,23 +29,23 @@ h1,
 .h1 {
   @include carbon--type-style("expressive-heading-05");
 
-  @include mq($from: medium) {
+  @include carbon.breakpoint-up(md) {
     font-size: carbon--type-scale(9);
     font-weight: carbon--font-weight("light");
     line-height: 1.22;
   }
 
-  @include mq($from: large) {
+  @include carbon.breakpoint-up(lg) {
     font-size: carbon--type-scale(10);
     line-height: 1.19;
   }
 
-  @include mq($from: x-large) {
+  @include carbon.breakpoint-up(xlg) {
     font-size: carbon--type-scale(11);
     line-height: 1.17;
   }
 
-  @include mq($from: max-size) {
+  @include carbon.breakpoint-up(max) {
     font-size: carbon--type-scale(13);
   }
 }
@@ -55,12 +56,12 @@ h2,
 .h2 {
   @include carbon--type-style("expressive-heading-04");
 
-  margin-bottom: $spacing-05;
+  margin-bottom: carbon.$spacing-05;
 
-  @include mq($from: x-large) {
+  @include carbon.breakpoint-up(xlg) {
     font-size: carbon--type-scale(8);
     line-height: 1.25;
-    margin-bottom: $spacing-06;
+    margin-bottom: carbon.$spacing-06;
   }
 }
 
@@ -70,9 +71,9 @@ h3,
 .h3 {
   @include carbon--type-style("expressive-heading-03");
 
-  margin-bottom: $spacing-05;
+  margin-bottom: carbon.$spacing-05;
 
-  @include mq($from: max-size) {
+  @include carbon.breakpoint-up(max) {
     font-size: carbon--type-scale(6);
     line-height: 1.17;
   }
@@ -84,7 +85,7 @@ h4,
 .h4 {
   @include carbon--type-style("expressive-heading-01");
 
-  margin-bottom: $spacing-05;
+  margin-bottom: carbon.$spacing-05;
 }
 
 // Based on Carbon's "expressive-heading-01"
@@ -95,7 +96,7 @@ h5,
 
   font-weight: normal;
   font-style: italic;
-  margin-bottom: $spacing-05;
+  margin-bottom: carbon.$spacing-05;
 }
 
 // Carbon's "caption-01"

@@ -33,33 +33,36 @@ const learnLink: GeneralLink = {
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/index.scss" as qiskit;
+
 .learn-card {
   display: flex;
   flex-wrap: wrap;
 
   &__content {
-    background-color: $background-color-lighter;
-    padding: $spacing-05;
+    background-color: qiskit.$background-color-lighter;
+    padding: carbon.$spacing-05;
 
-    @include mq($until: medium) {
+    @include carbon.breakpoint-down(md) {
       order: 1;
     }
 
-    @include mq($from: medium) {
+    @include carbon.breakpoint-up(md) {
       min-height: 12rem;
-      padding-right: $spacing-07;
+      padding-right: carbon.$spacing-07;
     }
 
-    @include mq($from: large) {
+    @include carbon.breakpoint-up(lg) {
       min-height: 16.25rem;
-      padding: $spacing-07;
+      padding: carbon.$spacing-07;
     }
 
-    @include mq($from: x-large) {
+    @include carbon.breakpoint-up(xlg) {
       min-height: 18.75rem;
     }
 
-    @include mq($from: max-size) {
+    @include carbon.breakpoint-up(max) {
       height: 30rem;
     }
 
@@ -75,7 +78,7 @@ const learnLink: GeneralLink = {
     }
 
     // Removes aspect ratio for sm breakpoint
-    @include mq($until: medium) {
+    @include carbon.breakpoint-down(md) {
       &__aspect-ratio {
         &::before {
           padding-top: 0;
@@ -100,7 +103,7 @@ const learnLink: GeneralLink = {
   }
 
   &__description {
-    margin-bottom: $spacing-06;
+    margin-bottom: carbon.$spacing-06;
   }
 }
 </style>

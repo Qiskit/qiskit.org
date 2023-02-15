@@ -57,14 +57,14 @@
                   v-for="({ styles, data, link }, elementIndex) in row"
                   :key="`${elementIndex}`"
                 >
-                  <AppLink
+                  <UiAppLink
                     v-if="link"
                     class="fall-fest-page__table-link"
                     :style="styles"
                     :url="link"
                   >
                     Link to event
-                  </AppLink>
+                  </UiAppLink>
                   <span v-else :style="styles">{{ data }}</span>
                 </cv-data-table-cell>
               </cv-data-table-row>
@@ -98,8 +98,7 @@ const description =
 const image = "/images/events/fall-fest/fall-fest.png";
 
 definePageMeta({
-  // TODO: Integrate layout
-  // layout: 'default-max'
+  layout: 'default-max'
 });
 
 useHead({
@@ -175,16 +174,16 @@ useHead({
 //   flex-direction: column;
 
 //   &__section {
-//     margin-top: $spacing-10;
-//     margin-bottom: $spacing-07;
+//     margin-top: carbon.$spacing-10;
+//     margin-bottom: carbon.$spacing-07;
 
-//     @include mq($until: large) {
-//       margin-bottom: $spacing-05;
+//     @include carbon.breakpoint-down(lg) {
+//       margin-bottom: carbon.$spacing-05;
 //     }
 //   }
 
 //   &__content {
-//     @include mq($until: large) {
+//     @include carbon.breakpoint-down(lg) {
 //       max-width: 100%;
 //     }
 //   }
@@ -206,8 +205,8 @@ useHead({
 //   ::v-deep {
 //     // TODO: Extract styles like "_checkbox" to be defined globally
 //     & a.bx--tabs--scrollable__nav-link {
-//       color: $text-color-light;
-//       border-bottom-color: $border-color;
+//       color: qiskit.$text-color-light;
+//       border-bottom-color: qiskit.$border-color;
 
 //       &:focus,
 //       &:active {
@@ -215,7 +214,7 @@ useHead({
 //       }
 
 //       &:not(.bx--tabs--scrollable__nav-item--disabled) {
-//         color: $text-color-light;
+//         color: qiskit.$text-color-light;
 //       }
 //     }
 
@@ -226,7 +225,7 @@ useHead({
 //     & .bx--tabs--scrollable__nav-item {
 //       &--selected:not(.bx--tabs--scrollable__nav-item--disabled)
 //         .bx--tabs--scrollable__nav-link {
-//         border-bottom-color: $border-color-secondary;
+//         border-bottom-color: qiskit.$border-color-secondary;
 //       }
 //     }
 
@@ -243,7 +242,7 @@ useHead({
 //       ):not(.bx--tabs--scrollable__nav-item--disabled),
 //     & .bx--tabs--scrollable__nav-item,
 //     & .bx--tabs-trigger {
-//       background-color: $background-color-white;
+//       background-color: qiskit.$background-color-white;
 
 //       svg {
 //         fill: $gray-100;
@@ -252,12 +251,12 @@ useHead({
 
 //     & .bx--tabs--scrollable__nav-link,
 //     & .bx--tabs-trigger-text {
-//       color: $text-color;
+//       color: qiskit.$text-color;
 //     }
 //     // stylelint-enable no-descending-specificity
 
 //     .app-data-table {
-//       margin-top: $spacing-07;
+//       margin-top: carbon.$spacing-07;
 //       padding: 0;
 //     }
 //   }

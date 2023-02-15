@@ -87,15 +87,18 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/index.scss" as qiskit;
+
 .typewriter-effect {
-  background-color: $background-color-secondary;
+  background-color: qiskit.$background-color-secondary;
   display: inline-block;
 
   &__content {
     font-style: italic;
     color: white;
-    padding: $spacing-01 $spacing-03 $spacing-01 0;
-    margin-left: $spacing-02;
+    padding: carbon.$spacing-01 carbon.$spacing-03 carbon.$spacing-01 0;
+    margin-left: carbon.$spacing-02;
   }
 
   &_cursor-visible {
@@ -113,7 +116,7 @@ onMounted(() => {
     }
 
     50% {
-      background-color: $background-color-secondary;
+      background-color: qiskit.$background-color-secondary;
     }
   }
 }

@@ -60,15 +60,17 @@ withDefaults(defineProps<Props>(), {
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
+
 .event-card {
   &__description {
-    margin-bottom: $spacing-06;
+    margin-bottom: carbon.$spacing-06;
   }
 
   &__detail {
     display: flex;
     align-items: center;
-    margin-bottom: $spacing-03;
+    margin-bottom: carbon.$spacing-03;
 
     &:last-child {
       margin-bottom: initial;
@@ -76,7 +78,7 @@ withDefaults(defineProps<Props>(), {
   }
 
   &__icon {
-    margin-right: $spacing-03;
+    margin-right: carbon.$spacing-03;
     fill: currentColor;
   }
 }

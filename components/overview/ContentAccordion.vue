@@ -52,60 +52,63 @@ function actionChange ({ changedIndex }: { changedIndex: number }) {
 </script>
 
 <style lang="scss">
+@use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/index.scss" as qiskit;
+
 .content-accordion {
   & .bx--accordion__item {
     border-bottom: none;
-    border-top-color: $border-color;
+    border-top-color: qiskit.$border-color;
     overflow-anchor: none;
   }
 
   & .bx--accordion__heading {
     height: 2.5rem;
-    background-color: $background-color-light;
+    background-color: qiskit.$background-color-light;
 
     &:hover::before {
-      background-color: $background-color-light-2;
+      background-color: qiskit.$background-color-light-2;
     }
   }
 
   & .bx--accordion__title {
-    padding-left: $spacing-07;
+    padding-left: carbon.$spacing-07;
     margin: 0;
   }
 
   & .bx--accordion__arrow {
-    fill: $text-color-light;
+    fill: qiskit.$text-color-light;
   }
 
   & button[aria-expanded="true"]{
-    color: $text-color-white;
-    background-color: $button-background-color;
+    color: qiskit.$text-color-white;
+    background-color: qiskit.$button-background-color;
 
     &:hover::before {
-      background-color: $button-background-color;
+      background-color: qiskit.$button-background-color;
     }
   }
 
   & button[aria-expanded="true"] > .bx--accordion__title{
-    color: $text-color-white;
+    color: qiskit.$text-color-white;
   }
 
   & button[aria-expanded="true"] > .bx--accordion__arrow{
-    fill: $text-color-white;
+    fill: qiskit.$text-color-white;
   }
 
   & .bx--accordion__content {
-    padding: $spacing-06 $spacing-07;
-    background-color: $background-color-lighter;
+    padding: carbon.$spacing-06 carbon.$spacing-07;
+    background-color: qiskit.$background-color-lighter;
 
-    @include mq($from: medium, $until: large) {
-      padding-left: $spacing-06;
-      padding-right: $spacing-06;
+    @include carbon.breakpoint-between(md, lg) {
+      padding-left: carbon.$spacing-06;
+      padding-right: carbon.$spacing-06;
     }
 
-    @include mq($until: medium) {
-      padding-left: $spacing-05;
-      padding-right: $spacing-05;
+    @include carbon.breakpoint-down(md) {
+      padding-left: carbon.$spacing-05;
+      padding-right: carbon.$spacing-05;
     }
   }
 }

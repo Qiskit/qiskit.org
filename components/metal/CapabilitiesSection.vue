@@ -79,6 +79,7 @@ export default class CapabilitiesSection {
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
 @import '~carbon-components/scss/globals/scss/typography';
 
 .capabilities-section {
@@ -89,7 +90,7 @@ export default class CapabilitiesSection {
   background-repeat: no-repeat, no-repeat;
   display: flex;
 
-  @include mq($until: large) {
+  @include carbon.breakpoint-down(lg) {
     background-size: 22.5rem auto;
     background-position: right -.5rem top, left 0 bottom 16rem;
   }
@@ -97,8 +98,8 @@ export default class CapabilitiesSection {
   &__container {
     @include contained();
 
-    padding-top: $spacing-10;
-    padding-bottom: $spacing-09;
+    padding-top: carbon.$spacing-10;
+    padding-bottom: carbon.$spacing-09;
   }
 
   &__capabilities {
@@ -112,25 +113,25 @@ export default class CapabilitiesSection {
   }
 
   &__card {
-    margin-bottom: $spacing-12;
+    margin-bottom: carbon.$spacing-12;
 
-    @include mq($until: medium) {
-      margin-bottom: $spacing-07;
+    @include carbon.breakpoint-down(md) {
+      margin-bottom: carbon.$spacing-07;
     }
   }
 
   &__scrolling-ui {
     position: sticky;
-    top: $spacing-06;
+    top: carbon.$spacing-06;
     flex: 0 0 32rem;
     min-height: 20rem;
-    margin-bottom: $spacing-12;
+    margin-bottom: carbon.$spacing-12;
 
-    @include mq($from: medium, $until: large) {
+    @include carbon.breakpoint-between(md, lg) {
       flex: 1.5;
     }
 
-    @include mq($until: medium) {
+    @include carbon.breakpoint-down(md) {
       display: none;
     }
   }

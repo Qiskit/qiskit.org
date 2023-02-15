@@ -38,30 +38,32 @@ withDefaults(defineProps<Props>(), {
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
+
 $card-img-width: 10rem;
 
 .qiskit-capability-card {
   &__container {
     display: flex;
 
-    @include mq($until: large) {
+    @include carbon.breakpoint-down(lg) {
       flex-direction: column;
     }
   }
 
   &__copy {
-    padding-right: $spacing-07;
+    padding-right: carbon.$spacing-07;
   }
 
   &__thumbnail {
-    margin-right: $spacing-07;
+    margin-right: carbon.$spacing-07;
 
-    @include mq($until: large) {
+    @include carbon.breakpoint-down(lg) {
       margin-right: initial;
-      margin-bottom: $spacing-05;
+      margin-bottom: carbon.$spacing-05;
     }
 
-    @include mq($until: large) {
+    @include carbon.breakpoint-down(lg) {
       display: none;
     }
 
@@ -73,29 +75,29 @@ $card-img-width: 10rem;
 
     &__mobile {
       display: none;
-      @include mq($until: large) {
+      @include carbon.breakpoint-down(lg) {
         display: block;
         width: $card-img-width;
-        margin-bottom: $spacing-05;
+        margin-bottom: carbon.$spacing-05;
       }
     }
   }
 
   &__title {
-    padding-right: $spacing-07;
+    padding-right: carbon.$spacing-07;
 
-    @include mq($until: large) {
+    @include carbon.breakpoint-down(lg) {
       padding-right: 0;
     }
 
-    @include mq($until: medium) {
+    @include carbon.breakpoint-down(md) {
       padding-bottom: 0;
-      margin-bottom: $spacing-05;
+      margin-bottom: carbon.$spacing-05;
     }
   }
 
   &__description {
-    padding-bottom: $spacing-05;
+    padding-bottom: carbon.$spacing-05;
   }
 }
 </style>

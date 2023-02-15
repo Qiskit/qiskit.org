@@ -2,7 +2,7 @@
   <nav class="the-table-of-contents">
     <!-- Needed to avoid multiline to remove blank space around the content. -->
     <!-- eslint-disable vue/multiline-html-element-content-newline -->
-    <BasicLink
+    <UiBasicLink
       v-for="entry in entries"
       :key="entry.sectionId || entry.label"
       class="the-table-of-contents__entry"
@@ -11,7 +11,7 @@
         'the-table-of-contents__entry_second-level': entry.isSecondary
       }"
       :url="entry.sectionId && `#${entry.sectionId}`"
-    >{{ entry.label }}</BasicLink>
+    >{{ entry.label }}</UiBasicLink>
     <!-- eslint-enable -->
   </nav>
 </template>
@@ -32,14 +32,17 @@ const isActive = computed<boolean>((entry: TableOfContentEntry): boolean => {
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/index.scss" as qiskit;
+
 .the-table-of-contents {
   display: flex;
   flex-direction: column;
 
   &__entry {
-    color: $text-color-light;
+    color: qiskit.$text-color-light;
     text-decoration: none;
-    margin-bottom: $spacing-06;
+    margin-bottom: carbon.$spacing-06;
 
     &_second-level {
       &:hover {
@@ -48,10 +51,10 @@ const isActive = computed<boolean>((entry: TableOfContentEntry): boolean => {
 
       &::before {
         content: "-";
-        color: $text-active-color;
+        color: qiskit.$text-active-color;
         font-weight: bold;
         display: inline-block;
-        padding-right: $spacing-06;
+        padding-right: carbon.$spacing-06;
       }
     }
 

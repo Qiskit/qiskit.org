@@ -29,34 +29,37 @@ withDefaults(defineProps<Props>(), {
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/index.scss" as qiskit;
+
 $feature-icon-size: 2.25rem;
 
 .compact-feature {
-  background-color: $background-color-secondary;
+  background-color: qiskit.$background-color-secondary;
   height: 100%;
-  padding: $spacing-05;
+  padding: carbon.$spacing-05;
 
-  @include mq($until: large) {
-    padding-bottom: $spacing-06;
+  @include carbon.breakpoint-down(lg) {
+    padding-bottom: carbon.$spacing-06;
   }
 
   &__icon {
     height: $feature-icon-size;
-    margin-bottom: $spacing-06;
+    margin-bottom: carbon.$spacing-06;
   }
 
   &__title {
-    color: $text-color-white;
-    margin-bottom: $spacing-04;
+    color: qiskit.$text-color-white;
+    margin-bottom: carbon.$spacing-04;
     height: 2.5rem; // for consistent alignment
 
-    @include mq($until: medium) {
+    @include carbon.breakpoint-down(md) {
       height: initial;
     }
   }
 
   &__description {
-    color: $text-color-white;
+    color: qiskit.$text-color-white;
   }
 }
 </style>

@@ -128,17 +128,20 @@ export default class TheQiskitCapabilitiesSection {
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/index.scss" as qiskit;
+
 $cta-max-width: 14rem;
 
 .qiskit-capabilities-section {
-  padding-bottom: $spacing-09;
+  padding-bottom: carbon.$spacing-09;
 
   &__container {
-    padding-top: $spacing-05;
-    padding-bottom: $spacing-09;
+    padding-top: carbon.$spacing-05;
+    padding-bottom: carbon.$spacing-09;
 
-    @include mq($until: medium) {
-      padding-bottom: $spacing-05;
+    @include carbon.breakpoint-down(md) {
+      padding-bottom: carbon.$spacing-05;
     }
   }
 
@@ -146,46 +149,46 @@ $cta-max-width: 14rem;
     display: flex;
     align-items: flex-start;
 
-    @include mq($until: medium) {
+    @include carbon.breakpoint-down(md) {
       flex-direction: column;
     }
   }
 
   &__card {
-    margin-bottom: $spacing-07;
+    margin-bottom: carbon.$spacing-07;
 
     &:last-child {
-      margin-bottom: $spacing-13;
+      margin-bottom: carbon.$spacing-13;
 
-      @include mq($until: medium) {
-        margin-bottom: $spacing-07;
+      @include carbon.breakpoint-down(md) {
+        margin-bottom: carbon.$spacing-07;
       }
     }
   }
 
   &__scrolling-ui {
     position: sticky;
-    top: $spacing-06;
+    top: carbon.$spacing-06;
     flex: 0 0 1;
     max-width: 100%;
     min-height: 20rem;
 
-    @include mq($from: x-large) {
+    @include carbon.breakpoint-up(xlg) {
       flex: 0 0 38rem;
     }
 
-    @include mq($from: large, $until: x-large) {
+    @include carbon.breakpoint-between(lg, xlg) {
       flex: 0 0 34rem;
     }
 
-    @include mq($until: large) {
+    @include carbon.breakpoint-down(lg) {
       flex: 0 0 22rem;
     }
 
-    @include mq($until: medium) {
+    @include carbon.breakpoint-down(md) {
       flex: initial;
       width: 100%;
-      margin-bottom: $spacing-07;
+      margin-bottom: carbon.$spacing-07;
     }
   }
 
@@ -193,18 +196,18 @@ $cta-max-width: 14rem;
     display: flex;
     justify-content: flex-end;
 
-    @include mq($until: medium) {
+    @include carbon.breakpoint-down(md) {
       flex-direction: column-reverse;
     }
 
     &__link {
       width: 100%;
       max-width: $cta-max-width;
-      padding: $spacing-05;
-      margin-right: $spacing-05;
+      padding: carbon.$spacing-05;
+      margin-right: carbon.$spacing-05;
       justify-content: space-between;
 
-      @include mq($until: medium) {
+      @include carbon.breakpoint-down(md) {
         max-width: initial;
       }
     }
@@ -213,13 +216,13 @@ $cta-max-width: 14rem;
   &__copy-button {
     width: 100%;
     max-width: $cta-max-width;
-    padding-right: $spacing-05;
+    padding-right: carbon.$spacing-05;
     background-size: 200% 100%;
     background-position-x: 100%;
-    background-image: linear-gradient(90deg, $button-background-color-light 0%, $button-background-color-light 50%, $background-color-secondary 50%, $background-color-secondary 100%);
+    background-image: linear-gradient(90deg, qiskit.$button-background-color-light 0%, qiskit.$button-background-color-light 50%, qiskit.$background-color-secondary 50%, qiskit.$background-color-secondary 100%);
     transition: background-position-x 0.3s ease-out;
 
-    @include mq($until: medium) {
+    @include carbon.breakpoint-down(md) {
       max-width: initial;
     }
 

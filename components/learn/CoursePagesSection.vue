@@ -11,7 +11,7 @@
             :key="label"
             class="course"
           >
-            <BasicLink
+            <UiBasicLink
               class="course__entry"
               :class="{ active: label === activeCourseLabel }"
               :segment="segment"
@@ -19,7 +19,7 @@
               @mouseenter="selectCourse(label)"
             >
               {{ label }}
-            </BasicLink>
+            </UiBasicLink>
           </li>
         </ul>
       </nav>
@@ -31,12 +31,12 @@
         </div>
       </div>
       <div class="course-pages-section__main__preview">
-        <BasicLink :url="activeCourse.url">
+        <UiBasicLink :url="activeCourse.url">
           <img
             class="course-pages-section__main__preview__image"
             :src="activeCoursePreviewImage"
           >
-        </BasicLink>
+        </UiBasicLink>
         <AppCta
           v-bind="activeCourse"
           label="Go to page"
@@ -86,17 +86,19 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
+
 .course-pages-section {
   display: grid;
-  column-gap: $spacing-07;
+  column-gap: carbon.$spacing-07;
   grid-template-areas: ". main main .";
   grid-template-columns: repeat(4, 1fr);
 
-  @include mq($until: large) {
+  @include carbon.breakpoint-down(lg) {
     grid-template-areas: ". main main main";
   }
 
-  @include mq($until: medium) {
+  @include carbon.breakpoint-down(md) {
     grid-template-areas: ".";
     grid-template-columns: 1fr;
   }
@@ -108,28 +110,28 @@ onMounted(() => {
     position: sticky;
     top: -$spacing-03;
 
-    @include mq($until: medium) {
+    @include carbon.breakpoint-down(md) {
       display: none;
     }
 
     &__title {
       border-bottom: 4px solid $purple-60;
       display: inline;
-      padding-bottom: $spacing-02;
-      padding-right: $spacing-03;
+      padding-bottom: carbon.$spacing-02;
+      padding-right: carbon.$spacing-03;
 
       &-wrapper {
-        margin: 1.25rem 0 $spacing-06 0;
+        margin: 1.25rem 0 carbon.$spacing-06 0;
 
-        @include mq($until: x-large) {
-          margin: $spacing-03 0 $spacing-06 0;
+        @include carbon.breakpoint-down(xlg) {
+          margin: carbon.$spacing-03 0 carbon.$spacing-06 0;
         }
       }
     }
 
     &__preview {
       background: $cool-gray-10;
-      padding: $spacing-05;
+      padding: carbon.$spacing-05;
       position: relative;
 
       &__image {
@@ -137,9 +139,9 @@ onMounted(() => {
       }
 
       &__cta {
-        bottom: $spacing-05;
+        bottom: carbon.$spacing-05;
         position: absolute;
-        right: $spacing-05;
+        right: carbon.$spacing-05;
       }
     }
   }
@@ -147,7 +149,7 @@ onMounted(() => {
   &__nav {
     margin-right: -$spacing-10;
 
-    @include mq($until: medium) {
+    @include carbon.breakpoint-down(md) {
       margin-right: initial;
     }
   }
@@ -162,7 +164,7 @@ onMounted(() => {
       color: $cool-gray-80;
       display: inline-block;
       max-width: calc(100% - 25px);
-      padding: $spacing-02 $spacing-03;
+      padding: carbon.$spacing-02 carbon.$spacing-03;
       text-decoration: none;
       width: 100%;
 
@@ -170,7 +172,7 @@ onMounted(() => {
         background: $cool-gray-10;
         font-weight: 600;
 
-        @include mq($until: medium) {
+        @include carbon.breakpoint-down(md) {
           background: initial;
         }
       }

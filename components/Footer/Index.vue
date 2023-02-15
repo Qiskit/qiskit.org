@@ -9,7 +9,7 @@
       >
         <div class="bx--row">
           <div class="bx--col-lg-4 bx--col-md">
-            <AppLogo
+            <UiAppLogo
               class="page-footer__logo"
               :class="`page-footer__logo_theme_${theme}`"
             />
@@ -38,14 +38,11 @@
         class="page-footer__secondary-container"
         :class="{ 'bx--grid': !oldContainer }"
       >
-        <div
-          class="caption"
-          :class="`page-footer__copyright_theme_${theme}`"
-        >
+        <div class="caption" :class="`page-footer__copyright_theme_${theme}`">
           ©Qiskit | All Rights Reserved
         </div>
         <div class="page-footer__secondary-links">
-          <BasicLink
+          <UiBasicLink
             v-for="link in secondaryFooterLinks"
             :key="link.label"
             class="caption page-footer__secondary-link"
@@ -53,7 +50,7 @@
             v-bind="link"
           >
             {{ link.label }}
-          </BasicLink>
+          </UiBasicLink>
         </div>
       </div>
     </section>
@@ -64,77 +61,80 @@
 import {
   FOOTER_ELEMENTS,
   SECONDARY_FOOTER_LINKS,
-  STAY_CONNECTED_LINKS
-} from '~/constants/menuLinks'
+  STAY_CONNECTED_LINKS,
+} from "~/constants/menuLinks";
 
 interface Props {
-  oldContainer?: boolean
-  theme?: 'light' | 'dark'
+  oldContainer?: boolean;
+  theme?: "light" | "dark";
 }
 
 withDefaults(defineProps<Props>(), {
   oldContainer: false,
-  theme: 'light'
-})
+  theme: "light",
+});
 
-const footerElements = FOOTER_ELEMENTS
-const stayConnectedElements = STAY_CONNECTED_LINKS
-const secondaryFooterLinks = SECONDARY_FOOTER_LINKS
+const footerElements = FOOTER_ELEMENTS;
+const stayConnectedElements = STAY_CONNECTED_LINKS;
+const secondaryFooterLinks = SECONDARY_FOOTER_LINKS;
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/index.scss" as qiskit;
+
 .page-footer {
   .page-footer__primary {
-    padding: $spacing-07 0;
+    padding: carbon.$spacing-07 0;
 
     &_theme_light {
-      background-color: $background-color-lighter;
+      background-color: qiskit.$background-color-lighter;
     }
 
     &_theme_dark {
-      background-color: $background-color-darker;
+      background-color: qiskit.$background-color-darker;
     }
   }
 
   .page-footer__secondary {
-    padding: $spacing-07 0;
-    padding-bottom: $spacing-07 + 2.5rem; // make room for the "cookies preferences" button
+    padding: carbon.$spacing-07 0;
+    padding-bottom: carbon.$spacing-07 + 2.5rem; // make room for the "cookies preferences" button
 
     &_theme_light {
-      background-color: $background-color-white;
+      background-color: qiskit.$background-color-white;
     }
 
     &_theme_dark {
-      background-color: $background-color-black;
+      background-color: qiskit.$background-color-black;
     }
   }
 
   &__primary-container {
-    @include contained();
+    @include qiskit.contained();
   }
 
   &__logo {
     height: 32px;
 
-    @include mq($until: medium) {
-      margin-bottom: $spacing-07;
+    @include carbon.breakpoint-down(md) {
+      margin-bottom: carbon.$spacing-07;
     }
 
     &_theme_light {
-      color: $text-color-lighter;
+      color: qiskit.$text-color-lighter;
     }
 
     &_theme_dark {
-      color: $text-color-white;
+      color: qiskit.$text-color-white;
     }
   }
 
   &__secondary-link {
-    margin-left: $spacing-07;
+    margin-left: carbon.$spacing-07;
     text-decoration: none;
 
-    @include mq($until: medium) {
-      margin-bottom: $spacing-05;
+    @include carbon.breakpoint-down(md) {
+      margin-bottom: carbon.$spacing-05;
     }
 
     &:hover {
@@ -142,11 +142,11 @@ const secondaryFooterLinks = SECONDARY_FOOTER_LINKS
     }
 
     &_theme_light {
-      color: $text-color-lighter;
+      color: qiskit.$text-color-lighter;
     }
 
     &_theme_dark {
-      color: $text-color-white;
+      color: qiskit.$text-color-white;
     }
   }
 
@@ -155,7 +155,7 @@ const secondaryFooterLinks = SECONDARY_FOOTER_LINKS
     justify-content: space-between;
 
     &:not(.bx--grid) {
-      @include contained();
+      @include qiskit.contained();
     }
   }
 
@@ -163,14 +163,14 @@ const secondaryFooterLinks = SECONDARY_FOOTER_LINKS
     display: flex;
     justify-content: space-between;
 
-    @include mq($until: medium) {
+    @include carbon.breakpoint-down(md) {
       flex-direction: column;
     }
   }
 
   &__stay-connected {
-    @include mq($until: medium) {
-      margin-top: $spacing-07;
+    @include carbon.breakpoint-down(md) {
+      margin-top: carbon.$spacing-07;
     }
   }
 }

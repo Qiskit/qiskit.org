@@ -1,12 +1,12 @@
 <template>
   <nav class="app-nav-back-link">
-    <BasicLink
+    <UiBasicLink
       class="app-nav-back-link__link"
       :class="`app-nav-back-link__link_${theme}`"
       :url="url"
     >
       <ArrowLeft16 class="app-nav-back-link__icon" /><span v-text="label" />
-    </BasicLink>
+    </UiBasicLink>
   </nav>
 </template>
 
@@ -23,11 +23,14 @@ withDefaults(defineProps<Props>(), {
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/index.scss" as qiskit;
+
 .app-nav-back-link {
   @include contained();
 
-  padding-bottom: $spacing-06;
-  padding-top: $spacing-06;
+  padding-bottom: carbon.$spacing-06;
+  padding-top: carbon.$spacing-06;
 
   &__link {
     align-items: center;
@@ -35,16 +38,16 @@ withDefaults(defineProps<Props>(), {
     width: fit-content;
 
     &_dark {
-      color: $text-color-white;
+      color: qiskit.$text-color-white;
     }
 
     &_light {
-      color: $link-color-tertiary;
+      color: qiskit.$link-color-tertiary;
     }
   }
 
   &__icon {
-    margin-right: $spacing-05;
+    margin-right: carbon.$spacing-05;
   }
 }
 </style>

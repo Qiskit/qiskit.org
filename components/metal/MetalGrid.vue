@@ -175,6 +175,7 @@ function getRowId (index: number): string {
 </script>
 
 <style lang="scss">
+@use "~/assets/scss/carbon.scss";
 @import '~carbon-components/scss/globals/scss/typography';
 
 .metal-grid {
@@ -183,7 +184,7 @@ function getRowId (index: number): string {
   width: 100%;
   min-height: 42rem;
 
-  @include mq($until: large) {
+  @include carbon.breakpoint-down(lg) {
     min-height: math.div(28rem * 40, 64);
   }
 
@@ -195,7 +196,7 @@ function getRowId (index: number): string {
     height: 42rem;
     margin-top: 1px;
 
-    @include mq($until: large) {
+    @include carbon.breakpoint-down(lg) {
       height: 26.5rem;
     }
   }
@@ -203,11 +204,11 @@ function getRowId (index: number): string {
   &__header {
     position: relative;
 
-    @include mq($from: small, $until: medium) {
+    @include carbon.breakpoint-between(sm, md) {
       top: 2rem;
     }
 
-    @include mq($from: medium, $until: large) {
+    @include carbon.breakpoint-between(md, lg) {
       top: -5rem;
     }
 
@@ -235,7 +236,7 @@ function getRowId (index: number): string {
     width: 100vw;
     height: $large-cell;
 
-    @include mq($until: large) {
+    @include carbon.breakpoint-down(lg) {
       flex: 0 0 $medium-cell;
       height: $medium-cell;
     }
@@ -245,7 +246,7 @@ function getRowId (index: number): string {
     position: relative;
     flex: 0 0 $large-cell;
 
-    @include mq($until: large) {
+    @include carbon.breakpoint-down(lg) {
       flex: 0 0 $medium-cell;
     }
 
@@ -262,7 +263,7 @@ function getRowId (index: number): string {
         opacity 300ms,
         border-radius 300ms;
 
-      @include mq($until: large) {
+      @include carbon.breakpoint-down(lg) {
         width: $medium-cell - 1px;
         height: $medium-cell - 1px;
       }
@@ -284,7 +285,7 @@ function getRowId (index: number): string {
         z-index: 200;
         animation: anxious-tile 2s linear 0s infinite normal;
 
-        @include mq($until: large) {
+        @include carbon.breakpoint-down(lg) {
           animation: very-anxious-tile 2s linear 0s infinite normal;
         }
       }
@@ -406,7 +407,7 @@ function getRowId (index: number): string {
   &__slot-container {
     pointer-events: none;
     position: absolute;
-    padding-top: $spacing-10;
+    padding-top: carbon.$spacing-10;
     top: 0;
     left: 0;
     right: 0;
